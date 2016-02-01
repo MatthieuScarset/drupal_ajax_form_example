@@ -1,0 +1,23 @@
+uuid: 4774f7bb-1605-47fa-ab00-bd987c34ceeb
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'use text format basic_html'
+  - 'access comments'
+  - 'post comments'
+  - 'skip comment approval'
+  - 'access site-wide contact form'
+  - 'access shortcuts'
+  - 'search content'
+  - 'create processus_1 workflow_transition'
+  - 'create publication_page_simple workflow_transition'
+  - 'create workflow_page_simple workflow_transition'
+  - 'use text format test'

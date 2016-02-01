@@ -1,0 +1,10 @@
+uuid: 2878fbb8-7e0a-43b2-871f-318ba2048110
+langcode: fr
+status: true
+dependencies: {  }
+id: workflow_page_simple_(creation)
+label: (creation)
+module: null
+wid: workflow_page_simple
+weight: -11
+sysid: 1

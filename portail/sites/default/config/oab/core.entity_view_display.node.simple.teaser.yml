@@ -1,0 +1,26 @@
+uuid: 10fbe4b9-8025-485f-9445-6976a2effdd5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.simple.field_end_date
+    - field.field.node.simple.field_image
+    - field.field.node.simple.field_start_date
+    - field.field.node.simple.field_type
+    - node.type.simple
+  module:
+    - user
+id: node.simple.teaser
+targetEntityType: node
+bundle: simple
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_end_date: true
+  field_image: true
+  field_start_date: true
+  field_type: true
+  langcode: true

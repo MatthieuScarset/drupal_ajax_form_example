@@ -1,0 +1,24 @@
+uuid: 95a70b90-1f15-47e5-8600-c5d4c04b8955
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.simple
+  module:
+    - datetime
+id: node.simple.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: simple
+label: 'Start date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

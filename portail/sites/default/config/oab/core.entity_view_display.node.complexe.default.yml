@@ -1,0 +1,62 @@
+uuid: f5fb9ab1-ec9d-4f86-9807-073be4e79f4d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.complexe.field_content
+    - field.field.node.complexe.field_end_date
+    - field.field.node.complexe.field_image
+    - field.field.node.complexe.field_start_date
+    - field.field.node.complexe.field_type
+    - node.type.complexe
+  module:
+    - datetime
+    - image
+    - text
+    - user
+id: node.complexe.default
+targetEntityType: node
+bundle: complexe
+mode: default
+content:
+  field_content:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_end_date:
+    weight: 104
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_image:
+    weight: 105
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_start_date:
+    weight: 103
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_type:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 100
+hidden:
+  langcode: true

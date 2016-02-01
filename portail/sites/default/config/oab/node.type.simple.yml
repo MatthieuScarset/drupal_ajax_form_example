@@ -1,0 +1,17 @@
+uuid: ecafde52-d0d3-49fb-9e00-fb84cebd4ca0
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Simple
+type: simple
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,11 @@
+uuid: 324055bb-b193-47b8-be00-b4e9880064ce
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.simple
+id: node.simple
+target_entity_type_id: node
+target_bundle: simple
+default_langcode: current_interface
+language_alterable: true

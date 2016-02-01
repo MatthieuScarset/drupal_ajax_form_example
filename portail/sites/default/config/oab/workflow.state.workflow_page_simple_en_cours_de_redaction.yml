@@ -1,0 +1,10 @@
+uuid: f25363b4-659a-4665-b604-4a54b1d4adb1
+langcode: fr
+status: '1'
+dependencies: {  }
+id: workflow_page_simple_en_cours_de_redaction
+label: 'en cours de redaction'
+module: null
+wid: workflow_page_simple
+weight: -8
+sysid: 0

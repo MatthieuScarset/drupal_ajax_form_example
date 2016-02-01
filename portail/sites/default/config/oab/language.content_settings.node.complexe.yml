@@ -1,0 +1,11 @@
+uuid: 6c209243-6d86-4628-8900-a923ccf5cd37
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.complexe
+id: node.complexe
+target_entity_type_id: node
+target_bundle: complexe
+default_langcode: current_interface
+language_alterable: true

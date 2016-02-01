@@ -1,0 +1,18 @@
+uuid: b0068de8-f738-4c39-bb1e-30c6c70ef85c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.simple
+id: node.simple.title
+field_name: title
+entity_type: node
+bundle: simple
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
