@@ -1,0 +1,1 @@
+server '192.168.129.92', user: 'deploy', roles: %w{app db web}, domain: 'recetteclientrefonte.620nm.com'
