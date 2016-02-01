@@ -1,0 +1,10 @@
+name: OAB ckeditor
+description: "OAB ckeditor : Module pour l'ajout de plugin dans CKeditor"
+type: module
+package: OAB
+# core: 8.x
+
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_ckeditor'
+datestamp: 1453308360

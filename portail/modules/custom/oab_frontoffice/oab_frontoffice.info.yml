@@ -1,0 +1,11 @@
+name: OAB frontoffice
+description: 'OAB frontoffice management'
+type: module
+package: OAB
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2016-01-20
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_frontoffice'
+datestamp: 1453308360
