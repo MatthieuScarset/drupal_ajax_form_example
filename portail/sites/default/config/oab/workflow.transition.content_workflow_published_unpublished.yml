@@ -1,0 +1,13 @@
+uuid: ea5ea395-de07-42aa-b159-89674e146608
+langcode: fr
+status: true
+dependencies: {  }
+id: content_workflow_published_unpublished
+label: null
+module: null
+from_sid: content_workflow_published
+to_sid: content_workflow_unpublished
+roles:
+  authenticated: authenticated
+  administrator: administrator
+  workflow_author: 0

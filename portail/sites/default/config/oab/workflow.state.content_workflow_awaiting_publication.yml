@@ -1,0 +1,10 @@
+uuid: a124ff14-0ca3-47e2-8600-bdbee14d473d
+langcode: fr
+status: '1'
+dependencies: {  }
+id: content_workflow_awaiting_publication
+label: 'Awaiting publication'
+module: null
+wid: content_workflow
+weight: '-8'
+sysid: 0

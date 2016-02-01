@@ -1,14 +1,14 @@
-uuid: 0fbb3ce7-7e99-4206-b300-0c9e4e69d61a
+uuid: efe59572-e8d7-4f67-b600-0c9429f00098
 langcode: fr
 status: true
 dependencies: {  }
-id: workflow_page_simple
-label: 'Workflow Page Simple'
+id: content_workflow
+label: 'Content workflow'
 module: null
 options:
   name_as_title: 0
   fieldset: '0'
-  options: radios
+  options: buttons
   schedule_timezone: 1
   comment_log_node: '1'
   comment_log_tab: '1'

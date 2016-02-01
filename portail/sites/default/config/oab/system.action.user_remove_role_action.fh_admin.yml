@@ -1,0 +1,14 @@
+uuid: 54961505-9856-41d9-9e46-70e6e5124433
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.fh_admin
+  module:
+    - user
+id: user_remove_role_action.fh_admin
+label: 'Retirer le rôle FH Admin aux utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: fh_admin

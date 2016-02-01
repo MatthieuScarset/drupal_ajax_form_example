@@ -1,0 +1,16 @@
+uuid: bd0bcf99-fcb6-44d1-a005-5b2bca35498d
+langcode: fr
+status: true
+dependencies: {  }
+id: fh_admin
+label: 'FH Admin'
+weight: 3
+is_admin: null
+permissions:
+  - 'edit own content_workflow workflow_transition'
+  - 'revert any content_workflow workflow_transition'
+  - 'revert own content_workflow workflow_transition'
+  - 'access any content_workflow workflow_transion overview'
+  - 'access own content_workflow workflow_transion overview'
+  - 'access content_workflow workflow_transition form'
+  - 'schedule content_workflow workflow_transition'

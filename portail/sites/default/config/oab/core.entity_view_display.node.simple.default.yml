@@ -7,11 +7,13 @@ dependencies:
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_image
     - field.field.node.simple.field_start_date
+    - field.field.node.simple.field_state
     - field.field.node.simple.field_type
     - node.type.simple
   module:
     - datetime
     - image
+    - options
     - text
     - user
 id: node.simple.default
@@ -49,6 +51,12 @@ content:
       timezone_override: ''
     third_party_settings: {  }
     type: datetime_default
+  field_state:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
   field_type:
     weight: 102
     label: above

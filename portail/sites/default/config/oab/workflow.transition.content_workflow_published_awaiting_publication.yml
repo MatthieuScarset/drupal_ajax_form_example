@@ -1,0 +1,13 @@
+uuid: 9d26f174-90f6-48ea-a804-4a5d56aa9e71
+langcode: fr
+status: true
+dependencies: {  }
+id: content_workflow_published_awaiting_publication
+label: null
+module: null
+from_sid: content_workflow_published
+to_sid: content_workflow_awaiting_publication
+roles:
+  workflow_author: 0
+  authenticated: 0
+  administrator: 0

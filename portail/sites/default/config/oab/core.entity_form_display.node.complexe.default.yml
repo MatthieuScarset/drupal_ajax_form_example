@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.complexe.field_end_date
     - field.field.node.complexe.field_image
     - field.field.node.complexe.field_start_date
+    - field.field.node.complexe.field_state
     - field.field.node.complexe.field_type
     - node.type.complexe
   module:
@@ -14,6 +15,7 @@ dependencies:
     - image
     - path
     - text
+    - workflowfield
 id: node.complexe.default
 targetEntityType: node
 bundle: complexe
@@ -48,6 +50,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
+  field_state:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: workflow_default
   field_type:
     weight: 0
     settings: {  }

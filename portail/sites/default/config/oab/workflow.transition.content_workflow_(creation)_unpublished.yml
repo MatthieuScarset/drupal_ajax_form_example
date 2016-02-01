@@ -1,0 +1,13 @@
+uuid: 53725c08-f1dd-4cf9-8700-b1998aba444c
+langcode: fr
+status: true
+dependencies: {  }
+id: content_workflow_(creation)_unpublished
+label: null
+module: null
+from_sid: content_workflow_(creation)
+to_sid: content_workflow_unpublished
+roles:
+  workflow_author: 0
+  authenticated: 0
+  administrator: 0

@@ -1,0 +1,10 @@
+uuid: 531b27ca-8707-478a-812f-4724aca08035
+langcode: fr
+status: '1'
+dependencies: {  }
+id: content_workflow_published
+label: Published
+module: null
+wid: content_workflow
+weight: '-7'
+sysid: 0
