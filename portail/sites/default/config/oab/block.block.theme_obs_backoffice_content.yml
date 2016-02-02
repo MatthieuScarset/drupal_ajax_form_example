@@ -1,0 +1,22 @@
+uuid: 416f78ca-8b6a-41a2-8005-5ce021acbfa8
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: 80N66GdzEvwqi1m-_GZ-ulkk8AJG9beoXcZ4-pMVKjI
+id: theme_obs_backoffice_content
+theme: theme_obs_backoffice
+region: content
+weight: -4
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

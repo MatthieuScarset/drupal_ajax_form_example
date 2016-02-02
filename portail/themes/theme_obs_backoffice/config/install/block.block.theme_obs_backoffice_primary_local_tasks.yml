@@ -1,0 +1,22 @@
+uuid: 0579f7ce-91cb-44b0-a300-0bf971bbbb23
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: CyX_aDKAka2_eihevNLscCHDYrzDgIqwWzFVEFRKIww
+id: theme_obs_backoffice_primary_local_tasks
+theme: theme_obs_backoffice
+region: header
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: false
+visibility: {  }
