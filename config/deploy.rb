@@ -40,7 +40,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default/files')
 set :keep_releases, 5
 
 # release id is just the commit hash used to create the tarball.
-#set :project_release_id, #{fetch(:release_name)}
+#set :project_release_id, #{release_name}
 # the same path is used local and remote... just to make things simple for who wrote this.
 # see http://hugopl.github.io/2014/07/29/Capistrano-3-copy-deploy.html
 set :project_tarball_path, "/tmp/#{fetch(:application)}.tar.gz"
@@ -105,15 +105,52 @@ namespace :deploy do
       upload! tarball_path, tarball_path
     end
    end
-  
-    after :restart, :clear_cache do
-	  #on roles(:web), in: :groups, limit: 3, wait: 10 do
-	  #invoke_command "sh -c 'touch #{latest_release}/index.php'"
-	  #invoke_command "sh -c 'ln -s /var/www/shared/sites/default/settings.php #{latest_release}/portail/sites/default/settings.php'"
-	  #invoke_command "sh -c 'ln -s /var/www/shared/sites/default/files #{latest_release}/portail/sites/default/files'"
-	  
-	  #invoke_command "sh -c 'chmod 755 #{latest_release}/portail/sites/default/'"
+   
+   desc 'Run dev deployment on each dev server'
+   task :deploy_dev do
+    #system("cap dev dev_bo deploy")
+    system("cap dev deploy")
+    #system("cap dev_bo deploy")
+    #run_locally "cap dev dev-bo deploy"
+   end
+	
+   desc 'Run recette deployment on each recette server'
+   task :deploy_recette do
+    system("cap recette recette-bo deploy")
+   end
+	
+   desc 'Delete unnecessary files'
+   task :delete_unnecessary_files do
+    on roles(:all) do
+     execute :rm, "-rf #{release_path}/config"
+     execute :rm, "-rf #{release_path}/.git"
+     execute :rm, "-rf #{release_path}/public"
+     execute :rm, "-rf #{release_path}/tmp"
+     execute :rm, "-rf #{release_path}/Capfile"
+     execute :rm, "-rf #{release_path}/log"
+     execute :rm, "-rf #{release_path}/REVISION"
+     execute :rm, "-rf #{release_path}/.gitignore"
+     execute :rm, "-rf #{release_path}/README.md"
     end
+   end
+   
+   desc 'Save the archive file'
+   task :save_archive_file do
+    on roles(:all) do
+     execute :mkdir, "-p #{deploy_to}/shared/saved_archives"
+     execute :tar, 'cfzp', "#{deploy_to}/shared/saved_archives/#{release_timestamp}.tar.gz", "-C #{releases_path} #{release_timestamp}"
+    end
+   end
+   
+   desc 'Run update commands on server'
+   task :drush_update do
+    on roles(:all) do
+     execute "drush updb --yes --root=#{deploy_to}/current/portail"
+    end
+   end
 end
 
 before 'deploy:updating', 'deploy:upload_tarball'
+after 'deploy:updating', 'deploy:delete_unnecessary_files'
+after 'deploy:updating', 'deploy:save_archive_file'
+after 'deploy:updating', 'deploy:drush_update'
