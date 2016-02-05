@@ -51,7 +51,9 @@ class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorP
    */
   public function getConfig(Editor $editor)
   {
-    return array();
+  	$config = array();
+  	//$config['templates_files'] = drupal_get_path('module', 'oab_ckeditor') .'/js/plugins/templates/templates/default.js';
+    return $config;
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getConfig().

@@ -1,1 +1,174 @@
 <?php
+
+use Drupal\Core\Theme\ThemeManager;
+
+/**
+ * Implements hook_editor_js_settings_alter(array &$settings) 
+ */
+function oab_ckeditor_editor_js_settings_alter(array &$settings) 
+{
+	$settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
+}
+
+/**
+ * 
+ * @param array $attachments
+ */
+function oab_ckeditor_page_attachments_alter(array &$attachments) {
+	// declaration des templates
+	$data = array();
+	$data[0] = array(
+							'title' => t('1 column'),
+							'description' => t('1 column template'),
+							'html' => \Drupal::theme()->render('template_1_column', array()),
+							'image' => '1_column.gif'
+					);
+	$data[1] = array(
+							'title' => t('2 columns'),
+							'description' => t('2 columns template'),
+							'html' => \Drupal::theme()->render('template_2_columns', array()),
+							'image' => '2_columns.gif'
+					);
+	$data[2] = array(
+							'title' => t('2 columns 66% / 33%'),
+							'description' => t('2 columns template with 66% / 33% width'),
+							'html' => \Drupal::theme()->render('template_2_columns_66_33', array()),
+							'image' => '2_columns_66_33.gif'
+					);
+	$data[3] = array(
+							'title' => t('2 columns 33% / 66%'),
+							'description' => t('2 columns template with 33% / 66% width'),
+							'html' => \Drupal::theme()->render('template_2_columns_33_66', array()),
+							'image' => '2_columns_33_66.gif'
+					);
+	$data[4] = array(
+							'title' => t('3 columns'),
+							'description' => t('3 columns template'),
+							'html' => \Drupal::theme()->render('template_3_columns', array()),
+							'image' => '3_columns.gif'
+					);
+	$data[5] = array(
+							'title' => t('Blue background'),
+							'description' => t('blue background template'),
+							'html' => \Drupal::theme()->render('template_background_blue', array()),
+							'image' => 'background_blue.gif'
+					);
+	$data[6] = array(
+							'title' => t('Green background'),
+							'description' => t('green background template'),
+							'html' => \Drupal::theme()->render('template_background_green', array()),
+							'image' => 'background_green.gif'
+					);
+	$data[7] = array(
+							'title' => t('Purple background'),
+							'description' => t('purple background template'),
+							'html' => \Drupal::theme()->render('template_background_purple', array()),
+							'image' => 'background_purple.gif'
+					);
+	$data[8] = array(
+							'title' => t('Pink background'),
+							'description' => t('pink background template'),
+							'html' => \Drupal::theme()->render('template_background_pink', array()),
+							'image' => 'background_pink.gif'
+					);
+	$data[9] = array(
+							'title' => t('Yellow background'),
+							'description' => t('yellow background template'),
+							'html' => \Drupal::theme()->render('template_background_yellow', array()),
+							'image' => 'background_yellow.gif'
+					);
+	$data[10] = array(
+							'title' => t('Black background'),
+							'description' => t('black background template'),
+							'html' => \Drupal::theme()->render('template_background_black', array()),
+							'image' => 'background_black.gif'
+					);
+	$data[11] = array(
+							'title' => t('Dark grey background'),
+							'description' => t('dark grey background template'),
+							'html' => \Drupal::theme()->render('template_background_dark_grey', array()),
+							'image' => 'background_dark_grey.gif'
+					);
+	$data[12] = array(
+							'title' => t('White background'),
+							'description' => t('white background template'),
+							'html' => \Drupal::theme()->render('template_background_white', array()),
+							'image' => 'background_white.gif'
+					);
+	$data[13] = array(
+							'title' => t('Moderate grey background'),
+							'description' => t('moderate grey background template'),
+							'html' => \Drupal::theme()->render('template_background_moderate_grey', array()),
+							'image' => 'background_moderate_grey.gif'
+					);
+	$data[14] = array(
+							'title' => t('Orange background'),
+							'description' => t('orange background template'),
+							'html' => \Drupal::theme()->render('template_background_orange', array()),
+							'image' => 'background_orange.gif'
+					);
+	$data[15] = array(
+							'title' => t('Light grey background'),
+							'description' => t('light grey background template'),
+							'html' => \Drupal::theme()->render('template_background_light_grey', array()),
+							'image' => 'background_light_grey.gif'
+					);
+	
+	$attachments['#attached']['drupalSettings']['oab_templates'] = $data;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oab_ckeditor_theme(){
+	return array(
+			'template_1_column' => array(
+					'template' => '1_column'
+			),
+			'template_2_columns' => array(
+					'template' => '2_columns'
+			),
+			'template_2_columns_66_33' => array(
+					'template' => '2_columns_66_33'
+			),
+			'template_2_columns_33_66' => array(
+					'template' => '2_columns_33_66'
+			),
+			'template_3_columns' => array(
+					'template' => '3_columns'
+			),
+			'template_background_blue' => array(
+					'template' => 'background_blue'
+			),
+			'template_background_green' => array(
+					'template' => 'background_green'
+			),
+			'template_background_purple' => array(
+					'template' => 'background_purple'
+			),
+			'template_background_pink' => array(
+					'template' => 'background_pink'
+			),
+			'template_background_yellow' => array(
+					'template' => 'background_yellow'
+			),
+			'template_background_black' => array(
+					'template' => 'background_black'
+			),
+			'template_background_dark_grey' => array(
+					'template' => 'background_dark_grey'
+			),
+			'template_background_white' => array(
+					'template' => 'background_white'
+			),
+			'template_background_moderate_grey' => array(
+					'template' => 'background_moderate_grey'
+			),
+			'template_background_orange' => array(
+					'template' => 'background_orange'
+			),
+			'template_background_light_grey' => array(
+					'template' => 'background_light_grey'
+			),
+	);
+}
