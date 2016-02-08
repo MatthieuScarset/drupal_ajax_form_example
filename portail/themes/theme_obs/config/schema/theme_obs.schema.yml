@@ -1,0 +1,5 @@
+# Schema for the configuration files of the theme_obs theme.
+
+theme_obs.settings:
+  type: theme_settings
+  label: 'Theme obs settings'
