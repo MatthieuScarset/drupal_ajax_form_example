@@ -12,7 +12,7 @@ dependencies:
     - node.type.complexe
   module:
     - datetime
-    - image
+    - entity_browser
     - path
     - text
     - workflowfield
@@ -23,7 +23,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     settings: {  }
     third_party_settings: {  }
   field_content:
@@ -39,19 +39,24 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_image:
+    type: entity_browser_entity_reference
     weight: 6
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      entity_browser: browse_files_modal
+      field_widget_display: thumbnail
+      field_widget_edit: '1'
+      field_widget_remove: '1'
+      open: '1'
+      field_widget_display_settings:
+        image_style: file_entity_browser_thumbnail
     third_party_settings: {  }
-    type: image_image
   field_start_date:
     weight: 3
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_state:
-    weight: 26
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
@@ -67,20 +72,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 12
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -91,7 +96,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60

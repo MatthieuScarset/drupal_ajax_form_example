@@ -1,0 +1,24 @@
+name: OAB media browser
+description: 'Provides a default Entity Browser for files'
+type: module
+package: OAB
+# core: 8.x
+dependencies:
+  - entity_browser
+  - entity_embed
+  - entity_reference
+  - dropzonejs
+  - dropzonejs_eb_widget
+  - field
+  - file
+  - menu_ui
+  - node
+  - path
+  - text
+  - views
+
+# Information added by Drupal.org packaging script on 2016-02-03
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_media_browser'
+datestamp: 1453318440

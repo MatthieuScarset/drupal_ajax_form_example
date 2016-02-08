@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - editor
+    - entity_embed
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'HTML simple'
@@ -13,10 +14,10 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: true
+    status: false
     weight: -10
     settings:
-      allowed_html: '<a hreflang href> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span> <img width height data-caption data-align data-entity-uuid data-entity-type alt src> <hr>'
+      allowed_html: '<a hreflang href> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span> <img width height data-caption data-align data-entity-uuid data-entity-type alt src> <hr> <h1> <pre>'
       filter_html_help: false
       filter_html_nofollow: false
   filter_align:
@@ -46,6 +47,12 @@ filters:
   filter_autop:
     id: filter_autop
     provider: filter
+    status: true
+    weight: 0
+    settings: {  }
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
     status: true
     weight: 0
     settings: {  }

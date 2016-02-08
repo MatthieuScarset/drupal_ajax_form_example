@@ -12,8 +12,14 @@ module:
   contextual: 0
   datetime: 0
   dblog: 0
+  dropzonejs: 0
+  dropzonejs_eb_widget: 0
   dynamic_page_cache: 0
   editor: 0
+  embed: 0
+  entity_browser: 0
+  entity_embed: 0
+  entity_reference: 0
   field: 0
   field_ui: 0
   file: 0
@@ -26,7 +32,9 @@ module:
   locale: 0
   menu_ui: 0
   node: 0
+  oab_backoffice: 0
   oab_ckeditor: 0
+  oab_media_browser: 0
   options: 0
   page_cache: 0
   path: 0

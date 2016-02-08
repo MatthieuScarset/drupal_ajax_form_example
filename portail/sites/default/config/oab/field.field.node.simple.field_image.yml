@@ -1,0 +1,29 @@
+uuid: 9b7b256b-75c5-4883-bc07-7f015168a219
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - node.type.simple
+  enforced:
+    module:
+      - oab_backoffice
+_core:
+  default_config_hash: zxArYBN9pWHT0MiQzef18NbqFGTJtx6nOn9xw015kcA
+id: node.simple.field_image
+field_name: field_image
+entity_type: node
+bundle: simple
+label: Images
+description: 'Attach images. Click on the link below and pick or upload them.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+field_type: entity_reference
