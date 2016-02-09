@@ -5,6 +5,7 @@ global-styling:
         css/bootstrap-orange2015.css: {}
         css/bootstrap-orange-theme2015.css: {}
         css/boosted.css: {}
+        css/templates.css: {}
  
   js:
     js/boosted.js: {}

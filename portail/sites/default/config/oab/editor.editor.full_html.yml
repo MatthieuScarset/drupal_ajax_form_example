@@ -21,11 +21,16 @@ settings:
             - Italic
             - Underline
             - Strike
-            - Superscript
-            - Subscript
             - '-'
             - RemoveFormat
             - Styles
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - Format
+            - Undo
+            - Redo
         -
           name: Linking
           items:
@@ -42,36 +47,22 @@ settings:
             - Blockquote
             - DrupalImage
             - file_browser
-            - Table
             - HorizontalRule
-        -
-          name: 'Block Formatting'
-          items:
-            - Format
         -
           name: Tools
           items:
             - Templates
             - ShowBlocks
             - Source
-            - JustifyLeft
-            - JustifyCenter
-            - JustifyRight
-            - JustifyBlock
             - SpecialChar
             - Outdent
             - Cut
             - Copy
             - Indent
             - Paste
-        -
-          name: test
-          items:
-            - Maximize
-            - PasteFromWord
-            - Redo
             - PasteText
-            - Undo
+            - PasteFromWord
+            - Maximize
   plugins:
     stylescombo:
       styles: ''
