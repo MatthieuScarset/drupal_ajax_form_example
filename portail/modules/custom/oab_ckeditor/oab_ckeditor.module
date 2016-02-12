@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Theme\ThemeManager;
+use Drupal\editor\Entity\Editor;
 
 /**
  * Implements hook_editor_js_settings_alter(array &$settings) 
@@ -16,6 +17,14 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings)
 function oab_ckeditor_page_attachments(array &$page) {
 	//inclure le fichier de style pour les templates
 	$page['#attached']['library'][] = 'oab_ckeditor/oab_ckeditor.templates';
+}
+
+/**
+ * Implements hook_ckeditor_css_alter(array &$css, Editor $editor)
+ */
+function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
+	$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/templates.css';
+	$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/bootstrap.css';
 }
 
 /**
