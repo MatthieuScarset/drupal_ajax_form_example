@@ -1,5 +1,5 @@
 admin: theme_obs_backoffice
-default: bartik
+default: theme_obs
 _core:
   default_config_hash: fOjer9hADYYnbCJVZMFZIIM1azTFWyg84ZkFDHfAbUg
 langcode: fr

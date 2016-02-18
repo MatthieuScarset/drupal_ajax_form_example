@@ -3,7 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.node.simple.field_content
+    - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_image
     - field.field.node.simple.field_start_date
@@ -23,13 +23,13 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 8
     settings: {  }
     third_party_settings: {  }
-  field_content:
+  field_body:
     weight: 5
     settings:
-      rows: 10
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
@@ -56,7 +56,7 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_state:
-    weight: 13
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
@@ -72,20 +72,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 11
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 9
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 10
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -96,7 +96,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

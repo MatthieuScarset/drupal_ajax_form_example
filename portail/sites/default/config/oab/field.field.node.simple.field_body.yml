@@ -1,17 +1,17 @@
-uuid: e09361ea-5b7b-44a4-b755-85ce343a1e2c
+uuid: 6ea75f80-776b-43f3-9000-a9cd434fc97e
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_content
+    - field.storage.node.field_body
     - node.type.simple
   module:
     - text
-id: node.simple.field_content
-field_name: field_content
+id: node.simple.field_body
+field_name: field_body
 entity_type: node
 bundle: simple
-label: Content
+label: Body
 description: ''
 required: false
 translatable: false

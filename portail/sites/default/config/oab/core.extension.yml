@@ -34,6 +34,7 @@ module:
   node: 0
   oab_backoffice: 0
   oab_ckeditor: 0
+  oab_develop: 0
   oab_media_browser: 0
   options: 0
   page_cache: 0
@@ -66,6 +67,7 @@ theme:
   seven: 0
   adminimal_theme: 0
   theme_obs_backoffice: 0
+  theme_obs: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 langcode: fr

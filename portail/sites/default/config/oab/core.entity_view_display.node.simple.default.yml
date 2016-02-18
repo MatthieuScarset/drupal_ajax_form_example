@@ -3,7 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.node.simple.field_content
+    - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_image
     - field.field.node.simple.field_start_date
@@ -21,8 +21,8 @@ targetEntityType: node
 bundle: simple
 mode: default
 content:
-  field_content:
-    weight: 4
+  field_body:
+    weight: 7
     label: above
     settings: {  }
     third_party_settings: {  }
