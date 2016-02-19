@@ -1,0 +1,22 @@
+uuid: f647712e-c341-4982-a604-04779be91363
+langcode: fr
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - theme_obs
+_core:
+  default_config_hash: 862sIulDdHmF0vBU1s2j2_a_CwkxursrL0pIrMDzzOg
+id: theme_obs_login
+theme: theme_obs
+region: content
+weight: -3
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

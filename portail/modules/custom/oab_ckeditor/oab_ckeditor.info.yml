@@ -2,6 +2,8 @@ name: OAB ckeditor
 description: "OAB ckeditor : Module pour l'ajout de plugin dans CKeditor"
 type: module
 package: OAB
+libraries:
+- oab_ckeditor/oab_ckeditor.templates
 # core: 8.x
 
 version: '8.x-1.0'

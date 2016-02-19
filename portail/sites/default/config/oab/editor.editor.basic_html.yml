@@ -42,6 +42,7 @@ settings:
           name: Tools
           items:
             - Source
+            - Templates
         -
           name: Custom-Ruby
           items:

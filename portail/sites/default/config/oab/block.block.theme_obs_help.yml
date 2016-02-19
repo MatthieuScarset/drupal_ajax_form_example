@@ -1,0 +1,22 @@
+uuid: 1cce40ef-0651-43f9-be00-a04f2819aa72
+langcode: fr
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - theme_obs
+_core:
+  default_config_hash: PfozGAnWQRNy00G6KEnZjIu9b2lGuWg-j-GT_-Ejglc
+id: theme_obs_help
+theme: theme_obs
+region: help
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

@@ -38,6 +38,7 @@ module:
   node: 0
   oab_backoffice: 0
   oab_ckeditor: 0
+  oab_develop: 0
   oab_media_browser: 0
   options: 0
   page_cache: 0

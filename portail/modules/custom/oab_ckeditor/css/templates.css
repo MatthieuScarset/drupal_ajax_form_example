@@ -1,0 +1,106 @@
+.obs_template.one_column p,
+.obs_template.two_columns_33_66 p,
+.obs_template.two_columns_66_33 p,
+.obs_template.three_columns p,
+.obs_template.two_columns p
+{	
+  padding: 10px;
+}
+
+.obs_template.obs_background_blue{
+  background-color: #4bb4e6;
+  padding: 10px;
+}
+.obs_template.obs_background_green{
+  background-color: #50be87;
+  padding: 10px;
+}
+.obs_template.obs_background_purple{
+  background-color: #A885D8;
+  padding: 10px;
+}
+.obs_template.obs_background_pink{
+  background-color: #ffb4e6;
+  padding: 10px;
+}
+.obs_template.obs_background_yellow{
+  background-color: #ffd200;
+  padding: 10px;
+}
+
+.obs_template.obs_background_black{
+  background-color: #000000;
+  padding: 10px;
+  color: #FFFFFF;
+}
+.obs_template.obs_background_dark_grey{
+  background-color: #595959;
+  padding: 10px;
+}
+.obs_template.obs_background_white{
+  background-color: #FFFFFF;
+  padding: 10px;
+}
+.obs_template.obs_background_moderate_grey{
+  background-color: #8F8F8F;
+  padding: 10px;
+}
+.obs_template.obs_background_orange{
+  background-color: #FF7900;
+  padding: 10px;
+}
+.obs_template.obs_background_light_grey{
+  background-color: #D6D6D6;
+  padding: 10px;
+}
+
+/* Liens de couleur noire sur fond de couleur primaire et secondaire */
+.obs_template.obs_background_pink a,
+.obs_template.obs_background_yellow a,
+.obs_template.obs_background_purple a,
+.obs_template.obs_background_green a,
+.obs_template.obs_background_blue a,
+.obs_template.obs_background_light_grey a,
+.obs_template.obs_background_moderate_grey a,
+.obs_template.obs_background_white a,
+.obs_template.obs_background_orange a,
+.obs_template.obs_background_dark_grey a{
+  color: #000000;
+  text-decoration: underline;
+}
+
+.obs_template.obs_background_pink a:hover,
+.obs_template.obs_background_yellow a:hover,
+.obs_template.obs_background_purple a:hover,
+.obs_template.obs_background_green a:hover,
+.obs_template.obs_background_blue a:hover,
+.obs_template.obs_background_orange a:hover,
+.obs_template.obs_background_pink a:focus,
+.obs_template.obs_background_yellow a:focus,
+.obs_template.obs_background_purple a:focus,
+.obs_template.obs_background_green a:focus,
+.obs_template.obs_background_blue a:focus,
+.obs_template.obs_background_orange a:focus{
+  color: #000000;
+  text-decoration: underline;
+}
+
+/* Liens de couleur blanche sur fond noir */
+.obs_template.obs_background_black a{
+	color:white;
+	text-decoration: underline;
+}
+
+.obs_template.obs_background_black a:hover,
+.obs_template.obs_background_black a:focus,
+.obs_template.obs_background_white a:hover,
+.obs_template.obs_background_white a:focus,
+.obs_template.obs_background_light_grey a:hover,
+.obs_template.obs_background_light_grey a:focus,
+.obs_template.obs_background_moderate_grey a:hover,
+.obs_template.obs_background_moderate_grey a:focus,
+.obs_template.obs_background_dark_grey a:hover,
+.obs_template.obs_background_dark_grey a:focus{
+  color:#FF7900;
+  text-decoration: underline;
+}

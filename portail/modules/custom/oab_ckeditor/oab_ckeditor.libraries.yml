@@ -1,0 +1,6 @@
+oab_ckeditor.templates:
+#global-styling:
+  version: VERSION
+  css:
+     theme:
+        css/templates.css: {}

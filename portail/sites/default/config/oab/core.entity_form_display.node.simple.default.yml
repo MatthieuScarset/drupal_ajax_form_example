@@ -3,7 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.node.simple.field_content
+    - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_image
     - field.field.node.simple.field_start_date
@@ -26,10 +26,10 @@ content:
     weight: 8
     settings: {  }
     third_party_settings: {  }
-  field_content:
+  field_body:
     weight: 5
     settings:
-      rows: 10
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea

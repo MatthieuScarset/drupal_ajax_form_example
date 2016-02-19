@@ -1,0 +1,22 @@
+uuid: b3fda02f-2911-404f-a919-253d95d5550c
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - theme_obs
+_core:
+  default_config_hash: CyX_aDKAka2_eihevNLscCHDYrzDgIqwWzFVEFRKIww
+id: theme_obs_primary_local_tasks
+theme: theme_obs
+region: header
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: false
+visibility: {  }
