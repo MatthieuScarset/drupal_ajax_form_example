@@ -1,0 +1,29 @@
+# core: 8.x
+type: theme
+base theme: false
+
+name: 'Theme Boosted'
+description: 'Built to use Boosted, a sleek, intuitive, and powerful front-end framework for faster and easier web development.'
+package: 'Theme Boosted'
+
+regions:
+  header: 'Header'
+  content: 'Content'
+  footer: 'Footer'
+
+libraries:
+  - 'theme_boosted/global-styling'
+
+# The following are dynamic library overrides based on certain critera,
+# usually a theme setting.
+#
+# @see \Drupal\boosted\Plugin\Alter\LibraryInfo::alter()
+#
+#  core/drupal.dialog: boosted/drupal.dialog
+#  core/drupal.dialog.ajax: boosted/drupal.dialog.ajax
+
+# Information added by Drupal.org packaging script on 2015-12-19
+version: '8.0.0'
+core: '8.x'
+project: 'theme_boosted'
+datestamp: 1450531741
