@@ -1,0 +1,12 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/bootstrap-orange2015.css: {}
+      css/bootstrap-orange-theme2015.css: {}
+      css/boosted2015.css: {}
+      css/font-awesome.css: {}
+  js:
+    js/jquery.min.js: []
+    js/jquery.validate.min.js: {}
+    js/boosted.js: {}
