@@ -5,7 +5,7 @@ dependencies:
   theme:
     - theme_obs_backoffice
 _core:
-  default_config_hash: CyX_aDKAka2_eihevNLscCHDYrzDgIqwWzFVEFRKIww
+  default_config_hash: ctJm8FXGf338zNVr1mT-X-eBjh4C-CtKNI1_iNS5XWc
 id: theme_obs_backoffice_primary_local_tasks
 theme: theme_obs_backoffice
 region: header

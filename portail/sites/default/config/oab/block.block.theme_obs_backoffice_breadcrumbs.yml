@@ -7,7 +7,7 @@ dependencies:
   theme:
     - theme_obs_backoffice
 _core:
-  default_config_hash: 8by5KRsb7ZpmjHj0ms1d7xAG_xH54AWsOX6spDLJ59U
+  default_config_hash: DnriBBgADQ7m8LybseHsI1Ug58aMiAExAlolzawoKMo
 id: theme_obs_backoffice_breadcrumbs
 theme: theme_obs_backoffice
 region: breadcrumb

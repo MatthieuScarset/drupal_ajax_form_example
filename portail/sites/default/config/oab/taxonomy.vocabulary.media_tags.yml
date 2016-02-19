@@ -1,0 +1,9 @@
+uuid: 3969b542-5b75-41be-8200-e76dc2790ccf
+langcode: zxx
+status: true
+dependencies: {  }
+name: 'Media tags'
+vid: media_tags
+description: ''
+hierarchy: 0
+weight: 0

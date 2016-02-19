@@ -18,6 +18,7 @@ module:
   editor: 0
   embed: 0
   entity_browser: 0
+  entity_browser_entity_form: 0
   entity_embed: 0
   entity_reference: 0
   field: 0
@@ -27,9 +28,12 @@ module:
   help: 0
   history: 0
   image: 0
+  inline_entity_form: 0
   language: 0
   link: 0
   locale: 0
+  media_entity: 0
+  media_entity_image: 0
   menu_ui: 0
   node: 0
   oab_backoffice: 0
@@ -64,8 +68,8 @@ theme:
   classy: 0
   bartik: 0
   seven: 0
-  adminimal_theme: 0
   theme_obs_backoffice: 0
+  theme_obs: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 langcode: fr

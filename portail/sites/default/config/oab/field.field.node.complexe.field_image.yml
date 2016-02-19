@@ -1,29 +1,26 @@
-uuid: 4e52eedd-7900-4287-9a09-9c177b9be947
+uuid: 66807238-6be5-4678-b127-3987219e62d2
 langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.node.field_image
+    - media_entity.bundle.image
     - node.type.complexe
-  enforced:
-    module:
-      - oab_backoffice
-_core:
-  default_config_hash: V_mudDAbGW2hMqQEjt12KWmD4ddKDlnRUy947UqQGmI
 id: node.complexe.field_image
 field_name: field_image
 entity_type: node
 bundle: complexe
-label: Images
-description: 'Attach images. Click on the link below and pick or upload them.'
+label: image
+description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:file'
+  handler: 'default:media'
   handler_settings:
-    target_bundles: null
+    target_bundles:
+      image: image
     sort:
       field: _none
 field_type: entity_reference

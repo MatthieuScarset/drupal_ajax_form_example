@@ -1,4 +1,4 @@
-uuid: 01f103f6-c300-4f92-9100-fc51708d5241
+uuid: be30ce22-474b-4637-af00-cfc8227e5ee2
 langcode: fr
 status: true
 dependencies:
@@ -8,7 +8,6 @@ dependencies:
   module:
     - entity_browser
     - file
-    - oab_media_browser
     - user
 _core:
   default_config_hash: zSThZ4sr3G0WFvCOcv99Uzmc3zq0ITiGmW8HA1ebPh8
@@ -137,10 +136,10 @@ display:
           hide_alter_empty: true
           entity_type: file
           plugin_id: entity_browser_select
-        oab_media_browser_preview:
-          id: oab_media_browser_preview
+        file_browser_preview:
+          id: file_browser_preview
           table: file_managed
-          field: oab_media_browser_preview
+          field: file_browser_preview
           relationship: none
           group_type: group
           admin_label: ''
@@ -186,7 +185,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           entity_type: file
-          plugin_id: oab_media_browser_preview
+          plugin_id: file_browser_preview
         filename:
           id: filename
           table: file_managed

@@ -1,0 +1,15 @@
+uuid: d03cfdab-83fb-4592-9200-fb46bac9bbb3
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media_entity_image
+id: image
+label: image
+description: ''
+type: image
+queue_thumbnail_downloads: false
+type_configuration:
+  source_field: ''
+  gather_exif: false
+field_map: {  }

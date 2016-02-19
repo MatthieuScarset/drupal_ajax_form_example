@@ -1,23 +1,25 @@
-uuid: f213c90b-07d7-4be5-af60-96ceb00607b0
+uuid: b63f8494-e724-4200-9a14-203f7bb9420b
 langcode: fr
 status: true
 dependencies:
+  config:
+    - media_entity.bundle.image
   module:
     - entity_embed
-    - file
-    - image
+    - media_entity
+    - oab_media_browser
 _core:
   default_config_hash: 2LD3MU__1jH7WAgvnKLeujY_JFBy5gUEGKkDy_FRSCk
-label: 'File Browser'
-id: file_browser
+label: 'Media Browser'
+id: media_browser
 type_id: entity
 type_settings:
-  entity_type: file
-  bundles: {  }
+  entity_type: media
+  bundles:
+    - image
   display_plugins:
-    - 'file:file_default'
-    - 'image:image'
-  entity_browser: browse_files_iframe
+    - 'entity_reference:entity_reference_image'
+  entity_browser: browse_medias_iframe
   entity_browser_settings:
     display_review: false
 icon_uuid: null
