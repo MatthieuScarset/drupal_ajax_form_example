@@ -1,0 +1,20 @@
+uuid: 9a8648db-a0fb-4f03-a317-2306295ff216
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media_entity
+    - taxonomy
+id: media.field_thematic
+field_name: field_thematic
+entity_type: media
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

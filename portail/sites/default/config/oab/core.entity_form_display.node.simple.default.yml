@@ -23,7 +23,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 8
     settings: {  }
     third_party_settings: {  }
   field_content:
@@ -39,24 +39,24 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_image:
-    type: entity_browser_entity_reference
     weight: 6
     settings:
-      entity_browser: browse_files_modal
-      field_widget_display: thumbnail
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
       field_widget_edit: '1'
       field_widget_remove: '1'
-      open: '1'
       field_widget_display_settings:
-        image_style: file_entity_browser_thumbnail
+        view_mode: teaser
+      open: 0
     third_party_settings: {  }
+    type: entity_browser_entity_reference
   field_start_date:
     weight: 3
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_state:
-    weight: 13
+    weight: 12
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
@@ -72,20 +72,20 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 11
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 9
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 10
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -96,7 +96,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

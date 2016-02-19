@@ -1,0 +1,11 @@
+uuid: ee31b5db-546c-482d-8b00-ed3f622c1cd0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematic
+id: taxonomy_term.media_thematic
+target_entity_type_id: taxonomy_term
+target_bundle: media_thematic
+default_langcode: current_interface
+language_alterable: false

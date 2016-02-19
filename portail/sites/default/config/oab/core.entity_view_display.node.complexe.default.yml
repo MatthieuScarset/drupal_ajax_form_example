@@ -12,7 +12,6 @@ dependencies:
     - node.type.complexe
   module:
     - datetime
-    - oab_media_browser
     - options
     - text
     - user
@@ -36,14 +35,13 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_image:
-    type: entity_reference_image
     weight: 5
     label: above
     settings:
-      image_style: thumbnail
       view_mode: default
       link: false
     third_party_settings: {  }
+    type: entity_reference_entity_view
   field_start_date:
     weight: 2
     label: above

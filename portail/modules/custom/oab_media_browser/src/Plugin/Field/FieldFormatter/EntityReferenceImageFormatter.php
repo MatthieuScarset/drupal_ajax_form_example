@@ -44,7 +44,7 @@ class EntityReferenceImageFormatter extends EntityReferenceEntityFormatter {
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $image_styles = image_style_options(FALSE);
 
-    \Drupal::configFactory()->getEditable('entity_browser.browser.browse_files_iframe')->getRawData();
+    \Drupal::configFactory()->getEditable('entity_browser.browser.browse_media_iframe')->getRawData();
 
     $link_generator = \Drupal::service('link_generator');
     $user = \Drupal::currentUser();

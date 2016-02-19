@@ -75,13 +75,13 @@
   float: right;
 }
 
-.entity-browser-browse-files-form {
+.entity-browser-browse-media-form {
   position: relative;
   padding-bottom: 50px;
 }
 
 /* Remove border above tabs. */
-.entity-browser-browse-files-form .is-collapse-enabled .tabs:before, .entity-browser-browse-files-form .is-horizontal .tabs:before {
+.entity-browser-browse-media-form .is-collapse-enabled .tabs:before, .entity-browser-browse-media-form .is-horizontal .tabs:before {
   background-color: transparent;
 }
 

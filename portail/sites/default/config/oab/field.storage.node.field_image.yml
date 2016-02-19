@@ -1,25 +1,20 @@
-uuid: d1a95c1e-bb18-4d48-a700-0ce7dcad82c1
+uuid: bc3960bc-5c70-4bee-8229-41c530fff109
 langcode: fr
 status: true
 dependencies:
-  enforced:
-    module:
-      - oab_backoffice
   module:
-    - file
+    - media_entity
     - node
-_core:
-  default_config_hash: u964BYYCCCh5ABOjeCh-iC7JOB9yDZnDmyGSnnTCT-0
 id: node.field_image
 field_name: field_image
 entity_type: node
 type: entity_reference
 settings:
-  target_type: file
+  target_type: media
 module: core
 locked: false
 cardinality: -1
-translatable: false
+translatable: true
 indexes: {  }
 persist_with_no_fields: false
 custom_storage: false

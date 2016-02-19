@@ -1,1 +1,2 @@
-server '192.168.129.92', user: 'deploy', roles: %w{app db web}, domain: 'recetteclientrefonte.620nm.com'
+set :stage, :recette
+server '192.168.129.93', domain: 'recetteclientrefonte.obs-ruby.proj.aql.fr', user: 'oab_web'

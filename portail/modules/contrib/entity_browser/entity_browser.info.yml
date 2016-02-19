@@ -5,8 +5,8 @@ package: Media
 # core: 8.x
 test_dependencies:
   - ctools
-# Information added by Drupal.org packaging script on 2016-02-04
-version: '8.x-1.0-alpha1+25-dev'
+# Information added by Drupal.org packaging script on 2016-02-16
+version: '8.x-1.0-alpha1+29-dev'
 core: '8.x'
 project: 'entity_browser'
-datestamp: 1454609041
+datestamp: 1455606841

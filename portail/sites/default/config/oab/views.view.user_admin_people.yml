@@ -53,10 +53,10 @@ display:
           id: 0
           total_pages: 0
           tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« Premier'
-            last: 'Dernier »'
+            previous: '‹ Previous'
+            next: 'Next ›'
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -251,7 +251,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Statut
+          label: Status
           exclude: false
           alter:
             alter_text: false
@@ -470,7 +470,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Actions
+          label: Operations
           exclude: false
           alter:
             alter_text: false
@@ -727,7 +727,7 @@ display:
               administrator: '0'
           is_grouped: true
           group_info:
-            label: Statut
+            label: Status
             description: ''
             identifier: status
             optional: true

@@ -7,7 +7,7 @@ dependencies:
   theme:
     - theme_obs_backoffice
 _core:
-  default_config_hash: YqKTtloWJ8FjLtfVNfrHaK6kVgxT67lC1cJ3j6i6WLo
+  default_config_hash: J1rajF_yt-gp06e1Txt3IyYRGUlyl9Hig4zp0r7QK5g
 id: theme_obs_backoffice_messages
 theme: theme_obs_backoffice
 region: highlighted

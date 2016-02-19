@@ -70,6 +70,67 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
         }
       }
     }
+    else if ($form['#form_id'] == 'media_image_form'
+    || $form['#form_id'] == 'media_image_edit_form'){
+      $entity = $form_state->getFormObject()->getEntity();
+      $entity_status = $entity->isPublished();
+
+      $form['status_information'] = array(
+          '#type' => 'details',
+          '#group' => 'advanced',
+          '#title' => t('publishing information'),
+      );
+      $form['status'] = [
+        '#type' => 'checkbox',
+        '#title' => t('published'),
+        '#value' => $entity_status,
+        '#default_value' => 1,
+        '#weight' => 80,
+        '#group' => 'status_information',
+      ];
+    }
+  }
+}
+
+function oab_media_browser_inline_entity_form_entity_form_alter(&$entity_form, &$form_state){
+  if ($entity_form['#type'] == 'inline_entity_form'
+  && $entity_form['#entity_type'] == 'media'){
+    $entity = $entity_form['#entity'];
+    $entity_status = $entity->isPublished();
+    
+    $entity_form['status_information'] = array(
+        '#type' => 'details',
+        '#group' => 'advanced',
+        '#title' => t('publishing information'),
+    );
+    $entity_form['status'] = [
+        '#type' => 'checkbox',
+        '#title' => t('published'),
+        '#default_value' => 1,
+        '#weight' => 80,
+        '#group' => 'status_information',
+    ];
+    
+    // amélioration : sauvegarder le media en ajax et passer sur l'onglet de liste
+    $entity_form['actions'] = [
+        '#weight' => 100
+    ];
+    $entity_form['actions']['save'] = [
+        '#type' => 'submit',
+        '#value' => t('save media'),
+        '#attributes' => ['class' => ['entity-browser-modal-submit']],
+        '#button_type' => 'primary',
+        '#weight' => 0
+    ];
+    
+    array_unshift($entity_form['#ief_element_submit'], 'oab_media_browser_entity_modal_submit');
+  }
+}
+
+function oab_media_browser_entity_modal_submit(array &$entity_form, FormStateInterface $form_state){
+  if ($entity_form['#type'] == 'inline_entity_form'
+  && $entity_form['#entity_type'] == 'media'){
+    $entity_form['#entity']->setPublished($form_state->getValue('status'));
   }
 }
 
