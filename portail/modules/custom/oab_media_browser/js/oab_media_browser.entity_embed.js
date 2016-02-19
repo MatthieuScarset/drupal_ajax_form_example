@@ -8,8 +8,9 @@
   /**
    * Registers behaviours related to Entity Embed integrations.
    */
-  Drupal.behaviors.FileBrowserEntityEmbed = {
+  Drupal.behaviors.OabMediaBrowserEntityEmbed = {
     attach: function (context) {
+    	console.log('TEST');
       // Add an event handler that triggers a click inside the iFrame when our
       // duped element is clicked.
       $('.entity-browser-modal-submit').once('entity-browser-modal').click(function (e) {

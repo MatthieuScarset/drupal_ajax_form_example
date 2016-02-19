@@ -8,7 +8,7 @@
   /**
    * Registers behaviours related to view widget.
    */
-  Drupal.behaviors.FileBrowserView = {
+  Drupal.behaviors.OabMediaBrowserView = {
     attach: function (context) {
       $('.view-content').imagesLoaded(function() {
         $('.view-content').masonry({
