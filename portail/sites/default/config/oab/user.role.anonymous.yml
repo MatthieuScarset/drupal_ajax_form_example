@@ -17,3 +17,4 @@ permissions:
   - 'create processus_1 workflow_transition'
   - 'create publication_page_simple workflow_transition'
   - 'create workflow_page_simple workflow_transition'
+  - 'view media'

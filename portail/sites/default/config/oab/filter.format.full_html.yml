@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - editor
+    - entity_embed
 _core:
   default_config_hash: hewPmBgni9jlDK_IjLxUx1HsTbinK-hdl0lOwjbteIY
 name: 'HTML complet'
@@ -56,3 +57,9 @@ filters:
     weight: 0
     settings:
       filter_url_length: 72
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: true
+    weight: 0
+    settings: {  }
