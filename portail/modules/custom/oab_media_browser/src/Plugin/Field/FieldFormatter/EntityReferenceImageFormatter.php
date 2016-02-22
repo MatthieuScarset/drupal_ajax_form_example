@@ -12,6 +12,8 @@ use Drupal\Core\Field\Plugin\Field\FieldFormatter\EntityReferenceEntityFormatter
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Renders any entity reference field as rendered images.
@@ -91,40 +93,38 @@ class EntityReferenceImageFormatter extends EntityReferenceEntityFormatter {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
+    $view_mode = $this->getSetting('view_mode');
+
     $elements = array();
-    $files = $this->getEntitiesToView($items, $langcode);
 
-    // Early opt-out if the field is empty.
-    if (empty($files)) {
-      return $elements;
-    }
+    foreach ($this->getEntitiesToView($items, $langcode) as $delta => $entity) {
+      if ($entity->getEntityType()->id() == 'media'){
+        // Protect ourselves from recursive rendering.
+        static $depth = 0;
+        $depth++;
+        if ($depth > 20) {
+          $this->loggerFactory->get('entity')->error('Recursive rendering detected when rendering entity @entity_type @entity_id. Aborting rendering.', array('@entity_type' => $entity->getEntityTypeId(), '@entity_id' => $entity->id()));
+          return $elements;
+        }
 
-    // Get the current image style
-    $image_style_setting = $this->getSetting('image_style');
 
-    foreach ($files as $delta => $file) {
-      // Confirm that this file is an image
-      $image_factory = \Drupal::service('image.factory');
-      $image = $image_factory->get($file->getFileUri());
+        $image_style = $this->getSetting('image_style');
+        $field_image = $entity->field_image->getValue();
 
-      if ($image->isValid()) {
-        // Fake an ImageItem object as we're not using that field type
-        $item = new \stdClass();
-        $item->width = $image->getWidth();
-        $item->height = $image->getHeight();
-        $item->alt = '';
-        $item->title = $file->getFilename();
-        $item->entity = $file;
+        if (isset($field_image[0]['target_id'])){
+          $file = File::load($field_image[0]['target_id']);
 
-        $elements[$delta] = array(
-          '#theme' => 'image_formatter',
-          '#item' => $item,
-          '#item_attributes' => [],
-          '#image_style' => $image_style_setting,
-        );
+          $elements[$delta] = [
+            '#theme' => 'image_style',
+            '#width' => '',
+            '#height' => '',
+            '#style_name' => $image_style,
+            '#uri' => $file->getFileUri(),
+          ];
+        }
+        $depth = 0;
       }
     }
-
     return $elements;
   }
 }
