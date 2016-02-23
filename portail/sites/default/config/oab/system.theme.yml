@@ -1,5 +1,5 @@
 admin: theme_obs_backoffice
-default: theme_obs
+default: theme_boosted
 _core:
   default_config_hash: fOjer9hADYYnbCJVZMFZIIM1azTFWyg84ZkFDHfAbUg
 langcode: fr
