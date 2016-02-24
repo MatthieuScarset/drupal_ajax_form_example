@@ -1,0 +1,24 @@
+uuid: d082e563-d4c7-47b6-a642-669d7f49702c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.bottom-footerbar
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: bottomfooterbar
+theme: theme_boosted
+region: footer
+weight: -7
+provider: null
+plugin: 'system_menu_block:bottom-footerbar'
+settings:
+  id: 'system_menu_block:bottom-footerbar'
+  label: 'Bottom Footerbar'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

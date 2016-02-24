@@ -1,0 +1,22 @@
+uuid: 2763ae1d-b04b-4107-a213-1904bedb6fb7
+langcode: fr
+status: false
+dependencies:
+  theme:
+    - theme_boosted
+_core:
+  default_config_hash: CyX_aDKAka2_eihevNLscCHDYrzDgIqwWzFVEFRKIww
+id: theme_boosted_primary_local_tasks
+theme: theme_boosted
+region: '-1'
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Onglets principaux'
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: false
+visibility: {  }

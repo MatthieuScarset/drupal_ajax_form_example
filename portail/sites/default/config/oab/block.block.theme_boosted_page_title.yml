@@ -1,0 +1,20 @@
+uuid: 7dad303d-7259-43c0-8208-8e475e6702ad
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - theme_boosted
+_core:
+  default_config_hash: Z3nlZUh2mSJP3apMrJWt-duS-aLyP79rcfu_0wpPmDs
+id: theme_boosted_page_title
+theme: theme_boosted
+region: content
+weight: -8
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Titre de page'
+  provider: core
+  label_display: '0'
+visibility: {  }

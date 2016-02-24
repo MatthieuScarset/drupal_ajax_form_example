@@ -1,0 +1,24 @@
+uuid: 548dbb1a-d899-4252-b54f-79eca1f90d0d
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: theme_boosted_mainnavigation
+theme: theme_boosted
+region: '-1'
+weight: -6
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

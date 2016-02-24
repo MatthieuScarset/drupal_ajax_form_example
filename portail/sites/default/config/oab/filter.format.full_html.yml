@@ -40,7 +40,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<a hreflang href> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <div> <div class> <drupal-entity data-align data-embed-button data-entity-embed-display data-entity-embed-settings data-entity-id data-entity-label data-entity-type data-entity-uuid>'
+      allowed_html: '<a hreflang href> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol type start> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p> <h1> <pre> <div> <div class> <drupal-entity data-align data-embed-button data-entity-embed-display data-entity-embed-settings data-entity-id data-entity-label data-entity-type data-entity-uuid> <span class style> <i class style>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_autop:

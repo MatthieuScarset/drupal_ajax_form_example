@@ -1,0 +1,25 @@
+uuid: 37003d71-37ac-4926-8400-bfd5f0049f6d
+langcode: fr
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:cfa0c98e-40a4-44eb-9101-01c57000d49a'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: theme_boosted_rightuppermenu
+theme: theme_boosted
+region: '-1'
+weight: -1
+provider: null
+plugin: 'block_content:cfa0c98e-40a4-44eb-9101-01c57000d49a'
+settings:
+  id: 'block_content:cfa0c98e-40a4-44eb-9101-01c57000d49a'
+  label: 'Right upper menu'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
