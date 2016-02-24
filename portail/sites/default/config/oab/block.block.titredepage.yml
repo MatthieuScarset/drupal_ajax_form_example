@@ -1,0 +1,18 @@
+uuid: 4c156ee9-b7e8-47d7-963a-58e8ca244591
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - theme_boosted
+id: titredepage
+theme: theme_boosted
+region: header
+weight: -1
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Titre de page'
+  provider: core
+  label_display: '0'
+visibility: {  }

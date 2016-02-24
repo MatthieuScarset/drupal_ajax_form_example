@@ -1,14 +1,12 @@
-uuid: 24f64fd7-23e8-473e-af00-ded5624951c2
-langcode: fr
+uuid: b44979a4-d702-4862-9203-3c7b7ecb8e20
+langcode: en
 status: true
 dependencies:
   theme:
-    - theme_obs
-_core:
-  default_config_hash: ik4PTMlBD0MWansnSMpSXq5SUlWRJ1IVVt6C7AIbQmc
-id: theme_obs_local_actions
-theme: theme_obs
-region: content
+    - theme_boosted
+id: primaryadminactions
+theme: theme_boosted
+region: header
 weight: -5
 provider: null
 plugin: local_actions_block

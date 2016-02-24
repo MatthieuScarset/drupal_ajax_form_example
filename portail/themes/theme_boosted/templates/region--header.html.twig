@@ -68,7 +68,9 @@
           <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header">
-                  <a class="navbar-brand" href="#"><img src="themes/theme_boosted/images/ORANGE_LOGO_rgb.jpg" alt="Link to the homepage"></a>
+	              {% if elements.sitebranding %}
+                  {{ elements.sitebranding }}
+	              {% endif %}
               </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
