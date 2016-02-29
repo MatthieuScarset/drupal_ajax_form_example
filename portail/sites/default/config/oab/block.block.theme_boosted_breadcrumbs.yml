@@ -1,6 +1,6 @@
 uuid: ab67ddb9-2963-4122-9a00-e037fb9c6865
 langcode: fr
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -10,8 +10,8 @@ _core:
   default_config_hash: 8by5KRsb7ZpmjHj0ms1d7xAG_xH54AWsOX6spDLJ59U
 id: theme_boosted_breadcrumbs
 theme: theme_boosted
-region: '-1'
-weight: -7
+region: content
+weight: -12
 provider: null
 plugin: system_breadcrumb_block
 settings:

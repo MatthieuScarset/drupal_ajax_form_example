@@ -11,7 +11,7 @@ dependencies:
 id: bottomfooterbar
 theme: theme_boosted
 region: footer
-weight: -7
+weight: -11
 provider: null
 plugin: 'system_menu_block:bottom-footerbar'
 settings:

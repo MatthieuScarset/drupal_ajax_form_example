@@ -1,6 +1,6 @@
 uuid: f3d052d3-be5e-4fd4-b900-d0d0cf4d1f7b
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -8,8 +8,8 @@ dependencies:
     - theme_boosted
 id: contenudelapageprincipale
 theme: theme_boosted
-region: content
-weight: -1
+region: '-1'
+weight: -11
 provider: null
 plugin: system_main_block
 settings:

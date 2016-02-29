@@ -1,12 +1,12 @@
 uuid: b44979a4-d702-4862-9203-3c7b7ecb8e20
 langcode: en
-status: true
+status: false
 dependencies:
   theme:
     - theme_boosted
 id: primaryadminactions
 theme: theme_boosted
-region: header
+region: '-1'
 weight: -5
 provider: null
 plugin: local_actions_block

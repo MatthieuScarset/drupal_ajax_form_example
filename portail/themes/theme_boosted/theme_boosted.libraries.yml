@@ -9,6 +9,6 @@ global-styling:
     components:
       css/components/header.css: {}
   js:
-    js/jquery.min.js: []
-    js/jquery.validate.min.js: {}
+    #js/jquery.min.js: []
+    #js/jquery.validate.min.js: {}
     js/boosted.js: {}

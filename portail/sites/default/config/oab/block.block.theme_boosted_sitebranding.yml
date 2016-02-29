@@ -1,6 +1,6 @@
 uuid: 2e8b003b-3f6a-4537-ab00-bea8106fc491
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -8,8 +8,8 @@ dependencies:
     - theme_boosted
 id: theme_boosted_sitebranding
 theme: theme_boosted
-region: '-1'
-weight: 0
+region: header
+weight: -11
 provider: null
 plugin: system_branding_block
 settings:

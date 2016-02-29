@@ -11,7 +11,7 @@ _core:
 id: theme_boosted_help
 theme: theme_boosted
 region: '-1'
-weight: -9
+weight: -14
 provider: null
 plugin: help_block
 settings:
