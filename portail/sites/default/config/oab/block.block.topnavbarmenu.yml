@@ -11,7 +11,7 @@ dependencies:
 id: topnavbarmenu
 theme: theme_boosted
 region: header
-weight: -9
+weight: -13
 provider: null
 plugin: 'system_menu_block:top-navbar-menu'
 settings:

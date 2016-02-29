@@ -1,6 +1,6 @@
 uuid: 6b64bf3e-ab42-45c5-9400-f28bc4dfd3f6
 langcode: fr
-status: true
+status: false
 dependencies:
   config:
     - system.menu.main
@@ -10,8 +10,8 @@ dependencies:
     - theme_boosted
 id: navigationprincipale
 theme: theme_boosted
-region: header
-weight: 0
+region: '-1'
+weight: -8
 provider: null
 plugin: 'system_menu_block:main'
 settings:

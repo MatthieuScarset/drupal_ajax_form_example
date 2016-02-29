@@ -11,7 +11,7 @@ dependencies:
 id: theme_boosted_footer
 theme: theme_boosted
 region: footer
-weight: -8
+weight: -12
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

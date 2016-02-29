@@ -12,7 +12,7 @@ dependencies:
 id: theme_boosted_navigationprincipale
 theme: theme_boosted
 region: header
-weight: -7
+weight: -10
 provider: null
 plugin: 'system_menu_block:main'
 settings:

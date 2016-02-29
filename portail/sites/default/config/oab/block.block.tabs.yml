@@ -7,7 +7,7 @@ dependencies:
 id: tabs
 theme: theme_boosted
 region: content
-weight: -2
+weight: -10
 provider: null
 plugin: local_tasks_block
 settings:

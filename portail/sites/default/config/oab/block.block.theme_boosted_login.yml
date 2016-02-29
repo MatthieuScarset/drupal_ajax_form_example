@@ -11,7 +11,7 @@ _core:
 id: theme_boosted_login
 theme: theme_boosted
 region: '-1'
-weight: -8
+weight: -12
 provider: null
 plugin: user_login_block
 settings:

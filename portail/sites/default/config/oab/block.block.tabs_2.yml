@@ -1,13 +1,13 @@
 uuid: 7845e581-dcc2-459e-8a00-d78b1e54b9cc
 langcode: en
-status: true
+status: false
 dependencies:
   theme:
     - theme_boosted
 id: tabs_2
 theme: theme_boosted
-region: header
-weight: 1
+region: '-1'
+weight: -1
 provider: null
 plugin: local_tasks_block
 settings:

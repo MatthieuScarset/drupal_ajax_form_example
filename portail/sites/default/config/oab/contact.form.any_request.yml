@@ -1,0 +1,10 @@
+uuid: f7ed10d2-0bbb-4a1b-af04-4c3371527c6f
+langcode: fr
+status: true
+dependencies: {  }
+id: any_request
+label: 'any request'
+recipients:
+  - christophe.madeja@orange.com
+reply: ''
+weight: 0

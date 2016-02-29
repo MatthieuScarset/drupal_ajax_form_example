@@ -1,6 +1,6 @@
 uuid: 6af6071b-5b06-498c-9b09-9f7a128fb3fd
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - system
@@ -8,8 +8,8 @@ dependencies:
     - theme_boosted
 id: filsdariane
 theme: theme_boosted
-region: content
-weight: -3
+region: '-1'
+weight: 0
 provider: null
 plugin: system_breadcrumb_block
 settings:
