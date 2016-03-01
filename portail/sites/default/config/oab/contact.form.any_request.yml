@@ -1,9 +1,14 @@
 uuid: f7ed10d2-0bbb-4a1b-af04-4c3371527c6f
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - contact_storage
+third_party_settings:
+  contact_storage:
+    redirect_uri: ''
 id: any_request
-label: 'any request'
+label: Contactez-nous
 recipients:
   - christophe.madeja@orange.com
 reply: ''

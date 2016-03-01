@@ -9,7 +9,7 @@ id: contact_message.any_request.field_postal_code
 field_name: field_postal_code
 entity_type: contact_message
 bundle: any_request
-label: 'postal code'
+label: 'Code postal'
 description: ''
 required: true
 translatable: false

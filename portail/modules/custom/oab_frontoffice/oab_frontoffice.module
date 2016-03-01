@@ -1,1 +1,17 @@
 <?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_state) {
+  if (isset($form['#form_id'])) {
+    if ($form['#form_id'] == 'contact_message_any_request_form') {
+      if (isset($form['name'])){
+        $form['name']['#title'] = t('Your last name');
+      }
+      if (isset($form['mail'])){
+        $form['mail']['#title'] = t('Your email address');
+      }
+    }
+  }
+}

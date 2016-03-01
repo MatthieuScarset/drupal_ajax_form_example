@@ -4,6 +4,11 @@ status: true
 dependencies:
   config:
     - taxonomy.vocabulary.media_thematic
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
 id: taxonomy_term.media_thematic
 target_entity_type_id: taxonomy_term
 target_bundle: media_thematic

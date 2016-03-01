@@ -9,7 +9,7 @@ id: contact_message.any_request.field_company
 field_name: field_company
 entity_type: contact_message
 bundle: any_request
-label: company
+label: 'Votre entreprise'
 description: ''
 required: true
 translatable: false

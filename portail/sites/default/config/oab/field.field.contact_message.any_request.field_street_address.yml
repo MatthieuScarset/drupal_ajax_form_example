@@ -9,7 +9,7 @@ id: contact_message.any_request.field_street_address
 field_name: field_street_address
 entity_type: contact_message
 bundle: any_request
-label: 'street address'
+label: Adresse
 description: ''
 required: false
 translatable: false

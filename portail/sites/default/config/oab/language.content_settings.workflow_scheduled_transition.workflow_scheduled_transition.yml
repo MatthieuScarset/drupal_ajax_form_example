@@ -1,0 +1,11 @@
+uuid: fb806623-ff61-4249-bd07-7b69d4404e17
+langcode: fr
+status: true
+dependencies:
+  module:
+    - workflow
+id: workflow_scheduled_transition.workflow_scheduled_transition
+target_entity_type_id: workflow_scheduled_transition
+target_bundle: workflow_scheduled_transition
+default_langcode: site_default
+language_alterable: false
