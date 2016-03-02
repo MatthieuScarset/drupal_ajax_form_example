@@ -8,6 +8,7 @@ global-styling:
       css/font-awesome.css: {}
     components:
       css/components/header.css: {}
+      css/components/maps/agence.css: {}
   js:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
