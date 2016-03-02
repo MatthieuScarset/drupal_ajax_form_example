@@ -8,7 +8,7 @@ _core:
   default_config_hash: Z3nlZUh2mSJP3apMrJWt-duS-aLyP79rcfu_0wpPmDs
 id: theme_boosted_page_title
 theme: theme_boosted
-region: content
+region: pre_content
 weight: -11
 provider: null
 plugin: page_title_block

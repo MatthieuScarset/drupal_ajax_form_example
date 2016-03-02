@@ -13,4 +13,4 @@ global-styling:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
     js/boosted.js: {}
-    js/header.js: {}
+    #js/header.js: {}
