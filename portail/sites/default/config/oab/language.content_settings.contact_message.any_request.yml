@@ -1,0 +1,11 @@
+uuid: e0325fe4-634e-4e1a-a905-5c476d3e631a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - contact.form.any_request
+id: contact_message.any_request
+target_entity_type_id: contact_message
+target_bundle: any_request
+default_langcode: current_interface
+language_alterable: false

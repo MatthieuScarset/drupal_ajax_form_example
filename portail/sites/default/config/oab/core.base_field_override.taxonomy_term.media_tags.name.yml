@@ -1,0 +1,18 @@
+uuid: 273c8231-1cd5-4d46-be5c-92cb2f827732
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_tags
+id: taxonomy_term.media_tags.name
+field_name: name
+entity_type: taxonomy_term
+bundle: media_tags
+label: Nom
+description: 'Nom du terme.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

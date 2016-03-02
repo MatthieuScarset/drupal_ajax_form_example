@@ -1,0 +1,22 @@
+uuid: 55a94293-e4d3-4dc3-b205-5ac88939e7cc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.complexe
+id: node.complexe.status
+field_name: status
+entity_type: node
+bundle: complexe
+label: 'Publishing status'
+description: 'Un booléen indiquant si le nœud est publié ou non.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

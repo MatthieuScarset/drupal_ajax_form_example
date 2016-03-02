@@ -1,0 +1,18 @@
+uuid: 9d226dbd-7433-4af5-9404-4fe3dfb90cb3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.image
+id: media.image.created
+field_name: created
+entity_type: media
+bundle: image
+label: Créé(e)
+description: 'The time that the media was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

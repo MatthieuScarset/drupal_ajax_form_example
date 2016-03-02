@@ -5,7 +5,7 @@ dependencies:
   config:
     - media_entity.bundle.image
   content:
-    - 'file:file:b18c7aac-eb47-4bca-aa04-4b7f78ee5a29'
+    - 'file:file:d6282434-0513-4c98-bc46-709db58e9813'
   module:
     - entity_embed
     - media_entity

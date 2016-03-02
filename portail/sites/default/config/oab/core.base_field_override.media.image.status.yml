@@ -1,0 +1,20 @@
+uuid: 0b95c4ca-d990-43f1-8f05-5f5c3bf9874a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.image
+id: media.image.status
+field_name: status
+entity_type: media
+bundle: image
+label: 'Publishing status'
+description: 'A boolean indicating whether the media is published.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

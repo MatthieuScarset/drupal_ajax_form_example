@@ -40,8 +40,10 @@ module:
   menu_ui: 0
   node: 0
   oab_backoffice: 0
+  oab_cartography: 0
   oab_ckeditor: 0
   oab_develop: 0
+  oab_frontoffice: 0
   oab_media_browser: 0
   options: 0
   page_cache: 0

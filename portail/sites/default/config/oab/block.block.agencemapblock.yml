@@ -1,0 +1,29 @@
+uuid: 287e9f2d-6d1a-4f14-8e00-a916258950e1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_cartography
+    - system
+  theme:
+    - theme_boosted
+id: agencemapblock
+theme: theme_boosted
+region: content
+weight: -9
+provider: null
+plugin: agence_map_block
+settings:
+  id: agence_map_block
+  label: 'Agence Map Block'
+  provider: oab_cartography
+  label_display: '0'
+  agence_map_custom_text:
+    value: ''
+    format: full_html
+visibility:
+  request_path:
+    id: request_path
+    pages: /contact/any_request
+    negate: false
+    context_mapping: {  }

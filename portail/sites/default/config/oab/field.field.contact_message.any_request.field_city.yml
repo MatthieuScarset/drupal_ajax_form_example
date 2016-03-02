@@ -9,7 +9,7 @@ id: contact_message.any_request.field_city
 field_name: field_city
 entity_type: contact_message
 bundle: any_request
-label: city
+label: Ville
 description: ''
 required: false
 translatable: false

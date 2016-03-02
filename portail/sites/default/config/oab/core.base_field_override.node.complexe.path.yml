@@ -1,0 +1,20 @@
+uuid: dbd3f0dc-39ed-4ada-ba02-2a9eb4e8c959
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.complexe
+  module:
+    - path
+id: node.complexe.path
+field_name: path
+entity_type: node
+bundle: complexe
+label: 'Alias d''URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

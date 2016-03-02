@@ -1,0 +1,20 @@
+uuid: 4a6a78ff-3dc6-475e-8e34-5286c9e261f5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematic
+  module:
+    - text
+id: taxonomy_term.media_thematic.description
+field_name: description
+entity_type: taxonomy_term
+bundle: media_thematic
+label: Description
+description: 'Description du terme.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
