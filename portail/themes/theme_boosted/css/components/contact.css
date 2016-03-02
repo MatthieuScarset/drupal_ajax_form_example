@@ -1,8 +1,9 @@
-input,
-select,
-textarea {
+#contact-message-any-request-form input,
+#contact-message-any-request-form select,
+#contact-message-any-request-form textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
   width: 80%;
 }
+

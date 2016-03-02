@@ -9,6 +9,7 @@ global-styling:
     components:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
+      css/components/contact.css: {}
   js:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
