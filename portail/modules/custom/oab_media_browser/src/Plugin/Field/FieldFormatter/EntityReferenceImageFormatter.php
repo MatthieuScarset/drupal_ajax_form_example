@@ -114,13 +114,24 @@ class EntityReferenceImageFormatter extends EntityReferenceEntityFormatter {
         if (isset($field_image[0]['target_id'])){
           $file = File::load($field_image[0]['target_id']);
 
-          $elements[$delta] = [
-            '#theme' => 'image_style',
-            '#width' => '',
-            '#height' => '',
-            '#style_name' => $image_style,
-            '#uri' => $file->getFileUri(),
-          ];
+          if (!$image_style) {
+            $elements[$delta] = [
+              '#theme' => 'image',
+              '#width' => $field_image[0]['width'],
+              '#height' => $field_image[0]['height'],
+              '#style_name' => 'original',
+              '#uri' => $file->getFileUri(),
+            ];
+          }
+          else{
+            $elements[$delta] = [
+              '#theme' => 'image_style',
+              '#width' => '',
+              '#height' => '',
+              '#style_name' => $image_style,
+              '#uri' => $file->getFileUri(),
+            ];
+          }
         }
         $depth = 0;
       }
