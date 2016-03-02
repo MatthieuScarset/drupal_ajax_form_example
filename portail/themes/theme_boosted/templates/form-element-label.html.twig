@@ -26,6 +26,7 @@
   ]
 -%}
 {%- if title is not empty or required -%}
+
   <label{{ attributes.addClass(classes) }}>{{ element }}{{ title }}
     {%- if description -%}
       <p class="help-block">{{ description }}</p>
@@ -34,4 +35,5 @@
   {%- if required -%}
     <span class="form-required">*</span>
   {%- endif -%}
+
 {%- endif -%}

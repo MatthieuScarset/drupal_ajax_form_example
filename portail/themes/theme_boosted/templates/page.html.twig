@@ -75,13 +75,35 @@
 {# Main #}
 {% block main %}
     <div role="main" class="test main-container {{ container }} js-quickedit-main-content">
+       <div class="row">
+            {# Content #}
+            {% block pre_content %}
+                <a id="pre-content"></a>
+                {{ page.pre_content }}
+            {% endblock %}
+        </div>
         <div class="row">
             {# Content #}
+            {% set content_classes = [
+                page.sidebar ? 'col-md-6',
+                page.sidebar is empty ? 'col-md-12' ] %}
+            <section{{ content_attributes.addClass(content_classes) }}>
             {% block content %}
                 <a id="main-content"></a>
+                <div class=
                 {{ page.content }}
             {% endblock %}
             </section>
+
+            {# Sidebar #}
+            {% if page.sidebar %}
+              {% block sidebar %}
+                <aside class="col-md-6 col-sm-12" role="complementary">
+                  {{ page.sidebar }}
+                </aside>
+              {% endblock %}
+            {% endif %}
+
         </div>
     </div>
 {% endblock %}

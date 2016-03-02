@@ -75,6 +75,7 @@ theme:
   seven: 0
   theme_obs_backoffice: 0
   theme_boosted: 0
+  theme_obs: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 langcode: fr
