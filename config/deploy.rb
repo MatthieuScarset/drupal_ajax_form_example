@@ -147,7 +147,7 @@ namespace :deploy do
     on roles(:all) do
      execute "drush updb --yes --root=#{release_path}/portail"
 	 execute "drush entity-updates --yes --root=#{release_path}/portail"
-	 execute "drush config-import oab --yes --root=#{release_path}/portail"
+	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
 	 execute "drush cr --root=#{release_path}/portail"
     end
    end
