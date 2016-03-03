@@ -6,7 +6,7 @@ dependencies:
     - theme_boosted
 id: stickyhome
 theme: theme_boosted
-region: content
+region: pre_content
 weight: -14
 provider: null
 plugin: 'block_content:54631fcd-3142-47ad-8908-8c2c69e3cbf2'

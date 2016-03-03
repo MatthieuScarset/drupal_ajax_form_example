@@ -1,0 +1,85 @@
+uuid: 0be193f1-7d3a-4605-ac00-dd09241100de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.office.field_address
+    - field.field.node.office.field_areas
+    - field.field.node.office.field_description
+    - field.field.node.office.field_gps_coordinates
+    - node.type.office
+  module:
+    - address
+    - geolocation
+    - path
+id: node.office.default
+targetEntityType: node
+bundle: office
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    weight: 3
+    settings:
+      default_country: null
+    third_party_settings: {  }
+    type: address_default
+  field_areas:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_description:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_gps_coordinates:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_googlegeocoder
+  langcode:
+    type: language_select
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 8
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,18 @@
+uuid: f4d06355-5acd-41b0-a305-5a69cfa101aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Office
+type: office
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,29 @@
+uuid: 3619d64e-0129-450f-8a00-dd0316ff1106
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_cartography
+    - system
+  theme:
+    - theme_boosted
+id: contactpushblock
+theme: theme_boosted
+region: sidebar
+weight: -15
+provider: null
+plugin: contact_push_block
+settings:
+  id: contact_push_block
+  label: 'Contact Push Block'
+  provider: oab_cartography
+  label_display: '0'
+  contact_push_custom_text:
+    value: "<p><span class=\"ms-rteStyle-Introduction\">Découvrez la nouvelle version d’e-facilities, le portail de services aux 10 000 connexions quotidiennes, utilisé par tous les salariés en France pour réserver une salle de réunion, signaler un incident, accueillir un visiteur… </span></p>\r\n\r\n<drupal-entity data-align=\"none\" data-embed-button=\"media_browser\" data-entity-embed-display=\"entity_reference:entity_reference_image\" data-entity-embed-settings=\"{&quot;image_style&quot;:&quot;medium&quot;}\" data-entity-id=\"3\" data-entity-label=\"Media Browser\" data-entity-type=\"media\" data-entity-uuid=\"c9f2a2b5-02cf-4897-a705-5b7fa1bfa2f4\"></drupal-entity>\r\n"
+    format: full_html
+visibility:
+  request_path:
+    id: request_path
+    pages: /contact/any_request
+    negate: false
+    context_mapping: {  }

@@ -1,4 +1,4 @@
-uuid: 287e9f2d-6d1a-4f14-8e00-a916258950e1
+uuid: 8c0cae86-45cb-4cf8-9403-3b1889a8fe70
 langcode: fr
 status: true
 dependencies:
@@ -9,8 +9,8 @@ dependencies:
     - theme_boosted
 id: agencemapblock
 theme: theme_boosted
-region: content
-weight: -9
+region: pre_content
+weight: -11
 provider: null
 plugin: agence_map_block
 settings:
