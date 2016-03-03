@@ -19,8 +19,6 @@ use Symfony\Component\DependencyInjection\Exception\InactiveScopeException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Config\Resource\ResourceInterface;
@@ -257,9 +255,7 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
         }
 
         do {
-            if (is_file($class->getFileName())) {
-                $this->addResource(new FileResource($class->getFileName()));
-            }
+            $this->addResource(new FileResource($class->getFileName()));
         } while ($class = $class->getParentClass());
 
         return $this;
@@ -421,9 +417,9 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
      *
      * @return object The associated service
      *
-     * @throws InvalidArgumentException          when no definitions are available
-     * @throws ServiceCircularReferenceException When a circular reference is detected
-     * @throws ServiceNotFoundException          When the service is not defined
+     * @throws InvalidArgumentException when no definitions are available
+     * @throws InactiveScopeException   when the current scope is not active
+     * @throws LogicException           when a circular dependency is detected
      * @throws \Exception
      *
      * @see Reference
@@ -442,7 +438,7 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
 
         try {
             $definition = $this->getDefinition($id);
-        } catch (ServiceNotFoundException $e) {
+        } catch (InvalidArgumentException $e) {
             if (ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalidBehavior) {
                 return;
             }
@@ -790,14 +786,14 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
      *
      * @return Definition A Definition instance
      *
-     * @throws ServiceNotFoundException if the service definition does not exist
+     * @throws InvalidArgumentException if the service definition does not exist
      */
     public function getDefinition($id)
     {
         $id = strtolower($id);
 
         if (!array_key_exists($id, $this->definitions)) {
-            throw new ServiceNotFoundException($id);
+            throw new InvalidArgumentException(sprintf('The service definition "%s" does not exist.', $id));
         }
 
         return $this->definitions[$id];
@@ -812,7 +808,7 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
      *
      * @return Definition A Definition instance
      *
-     * @throws ServiceNotFoundException if the service definition does not exist
+     * @throws InvalidArgumentException if the service definition does not exist
      */
     public function findDefinition($id)
     {
@@ -905,7 +901,7 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
             $this->callMethod($service, $call);
         }
 
-        $properties = $this->resolveServices($parameterBag->unescapeValue($parameterBag->resolveValue($definition->getProperties())));
+        $properties = $this->resolveServices($parameterBag->resolveValue($definition->getProperties()));
         foreach ($properties as $name => $value) {
             $service->$name = $value;
         }
@@ -1092,7 +1088,7 @@ class ContainerBuilder extends Container implements TaggedContainerInterface
             }
         }
 
-        call_user_func_array(array($service, $call[0]), $this->resolveServices($this->getParameterBag()->unescapeValue($this->getParameterBag()->resolveValue($call[1]))));
+        call_user_func_array(array($service, $call[0]), $this->resolveServices($this->getParameterBag()->resolveValue($call[1])));
     }
 
     /**

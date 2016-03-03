@@ -27,40 +27,30 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
  */
 abstract class AbstractNormalizer extends SerializerAwareNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    const CIRCULAR_REFERENCE_LIMIT = 'circular_reference_limit';
-    const OBJECT_TO_POPULATE = 'object_to_populate';
-    const GROUPS = 'groups';
-
     /**
      * @var int
      */
     protected $circularReferenceLimit = 1;
-
     /**
      * @var callable
      */
     protected $circularReferenceHandler;
-
     /**
      * @var ClassMetadataFactoryInterface|null
      */
     protected $classMetadataFactory;
-
     /**
      * @var NameConverterInterface|null
      */
     protected $nameConverter;
-
     /**
      * @var array
      */
     protected $callbacks = array();
-
     /**
      * @var array
      */
     protected $ignoredAttributes = array();
-
     /**
      * @var array
      */
@@ -195,16 +185,16 @@ abstract class AbstractNormalizer extends SerializerAwareNormalizer implements N
     {
         $objectHash = spl_object_hash($object);
 
-        if (isset($context[static::CIRCULAR_REFERENCE_LIMIT][$objectHash])) {
-            if ($context[static::CIRCULAR_REFERENCE_LIMIT][$objectHash] >= $this->circularReferenceLimit) {
-                unset($context[static::CIRCULAR_REFERENCE_LIMIT][$objectHash]);
+        if (isset($context['circular_reference_limit'][$objectHash])) {
+            if ($context['circular_reference_limit'][$objectHash] >= $this->circularReferenceLimit) {
+                unset($context['circular_reference_limit'][$objectHash]);
 
                 return true;
             }
 
-            ++$context[static::CIRCULAR_REFERENCE_LIMIT][$objectHash];
+            ++$context['circular_reference_limit'][$objectHash];
         } else {
-            $context[static::CIRCULAR_REFERENCE_LIMIT][$objectHash] = 1;
+            $context['circular_reference_limit'][$objectHash] = 1;
         }
 
         return false;
@@ -258,18 +248,18 @@ abstract class AbstractNormalizer extends SerializerAwareNormalizer implements N
      */
     protected function getAllowedAttributes($classOrObject, array $context, $attributesAsString = false)
     {
-        if (!$this->classMetadataFactory || !isset($context[static::GROUPS]) || !is_array($context[static::GROUPS])) {
+        if (!$this->classMetadataFactory || !isset($context['groups']) || !is_array($context['groups'])) {
             return false;
         }
 
         $allowedAttributes = array();
         foreach ($this->classMetadataFactory->getMetadataFor($classOrObject)->getAttributesMetadata() as $attributeMetadata) {
-            if (count(array_intersect($attributeMetadata->getGroups(), $context[static::GROUPS]))) {
+            if (count(array_intersect($attributeMetadata->getGroups(), $context['groups']))) {
                 $allowedAttributes[] = $attributesAsString ? $attributeMetadata->getName() : $attributeMetadata;
             }
         }
 
-        return $allowedAttributes;
+        return array_unique($allowedAttributes);
     }
 
     /**
@@ -289,9 +279,7 @@ abstract class AbstractNormalizer extends SerializerAwareNormalizer implements N
      * Instantiates an object using constructor parameters when needed.
      *
      * This method also allows to denormalize data into an existing object if
-     * it is present in the context with the object_to_populate. This object
-     * is removed from the context before being returned to avoid side effects
-     * when recursively normalizing an object graph.
+     * it is present in the context with the object_to_populate key.
      *
      * @param array            $data
      * @param string           $class
@@ -306,14 +294,11 @@ abstract class AbstractNormalizer extends SerializerAwareNormalizer implements N
     protected function instantiateObject(array &$data, $class, array &$context, \ReflectionClass $reflectionClass, $allowedAttributes)
     {
         if (
-            isset($context[static::OBJECT_TO_POPULATE]) &&
-            is_object($context[static::OBJECT_TO_POPULATE]) &&
-            $context[static::OBJECT_TO_POPULATE] instanceof $class
+            isset($context['object_to_populate']) &&
+            is_object($context['object_to_populate']) &&
+            $class === get_class($context['object_to_populate'])
         ) {
-            $object = $context[static::OBJECT_TO_POPULATE];
-            unset($context[static::OBJECT_TO_POPULATE]);
-
-            return $object;
+            return $context['object_to_populate'];
         }
 
         $constructor = $reflectionClass->getConstructor();

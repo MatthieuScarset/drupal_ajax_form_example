@@ -72,11 +72,6 @@ class ClassMapGenerator
 
             $classes = self::findClasses($path);
 
-            if (PHP_VERSION_ID >= 70000) {
-                // PHP 7 memory manager will not release after token_get_all(), see https://bugs.php.net/70098
-                gc_mem_caches();
-            }
-
             foreach ($classes as $class) {
                 $map[$class] = $path;
             }
@@ -100,10 +95,10 @@ class ClassMapGenerator
         $classes = array();
 
         $namespace = '';
-        for ($i = 0; isset($tokens[$i]); ++$i) {
+        for ($i = 0, $max = count($tokens); $i < $max; ++$i) {
             $token = $tokens[$i];
 
-            if (!isset($token[1])) {
+            if (is_string($token)) {
                 continue;
             }
 
@@ -113,9 +108,9 @@ class ClassMapGenerator
                 case T_NAMESPACE:
                     $namespace = '';
                     // If there is a namespace, extract it
-                    while (isset($tokens[++$i][1])) {
-                        if (in_array($tokens[$i][0], array(T_STRING, T_NS_SEPARATOR))) {
-                            $namespace .= $tokens[$i][1];
+                    while (($t = $tokens[++$i]) && is_array($t)) {
+                        if (in_array($t[0], array(T_STRING, T_NS_SEPARATOR))) {
+                            $namespace .= $t[1];
                         }
                     }
                     $namespace .= '\\';
@@ -126,7 +121,7 @@ class ClassMapGenerator
                     // Skip usage of ::class constant
                     $isClassConstant = false;
                     for ($j = $i - 1; $j > 0; --$j) {
-                        if (!isset($tokens[$j][1])) {
+                        if (is_string($tokens[$j])) {
                             break;
                         }
 
@@ -139,15 +134,14 @@ class ClassMapGenerator
                     }
 
                     if ($isClassConstant) {
-                        break;
+                        continue;
                     }
 
                     // Find the classname
-                    while (isset($tokens[++$i][1])) {
-                        $t = $tokens[$i];
+                    while (($t = $tokens[++$i]) && is_array($t)) {
                         if (T_STRING === $t[0]) {
                             $class .= $t[1];
-                        } elseif ('' !== $class && T_WHITESPACE === $t[0]) {
+                        } elseif ($class !== '' && T_WHITESPACE == $t[0]) {
                             break;
                         }
                     }

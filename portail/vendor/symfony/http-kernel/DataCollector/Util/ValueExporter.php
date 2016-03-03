@@ -35,10 +35,6 @@ class ValueExporter
             return sprintf('Object(%s)', get_class($value));
         }
 
-        if ($value instanceof \__PHP_Incomplete_Class) {
-            return sprintf('__PHP_Incomplete_Class(%s)', $this->getClassNameFromIncomplete($value));
-        }
-
         if (is_array($value)) {
             if (empty($value)) {
                 return '[]';
@@ -78,12 +74,5 @@ class ValueExporter
         }
 
         return (string) $value;
-    }
-
-    private function getClassNameFromIncomplete(\__PHP_Incomplete_Class $value)
-    {
-        $array = new \ArrayObject($value);
-
-        return $array['__PHP_Incomplete_Class_Name'];
     }
 }
