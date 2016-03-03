@@ -1,0 +1,18 @@
+uuid: c8bc1922-c1b1-4c3e-a433-51951615d14c
+langcode: en
+status: true
+dependencies: {  }
+countryCode: ZM
+format: "%recipient\n%organization\n%addressLine1\n%addressLine2\n%postalCode %locality"
+requiredFields:
+  - recipient
+  - addressLine1
+  - locality
+uppercaseFields:
+  - locality
+administrativeAreaType: null
+localityType: city
+dependentLocalityType: null
+postalCodeType: postal
+postalCodePattern: '\d{5}'
+postalCodePrefix: null

@@ -19,10 +19,6 @@ targetEntityType: contact_message
 bundle: any_request
 mode: default
 content:
-  copy:
-    weight: 13
-    settings: {  }
-    third_party_settings: {  }
   field_city:
     weight: 6
     settings:
@@ -103,4 +99,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  copy: true

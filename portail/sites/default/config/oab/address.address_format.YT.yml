@@ -1,0 +1,22 @@
+uuid: 354fe7ae-2e1a-4aab-9f00-f4b19477d13f
+langcode: en
+status: true
+dependencies: {  }
+countryCode: YT
+format: "%organization\n%recipient\n%addressLine1\n%addressLine2\n%postalCode %locality %sortingCode"
+requiredFields:
+  - recipient
+  - addressLine1
+  - locality
+  - postalCode
+uppercaseFields:
+  - addressLine1
+  - addressLine2
+  - locality
+  - sortingCode
+administrativeAreaType: null
+localityType: city
+dependentLocalityType: null
+postalCodeType: postal
+postalCodePattern: '976\d{2}'
+postalCodePrefix: null
