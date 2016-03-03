@@ -58,3 +58,7 @@
 #block-topnavbarmenu .navbar-nav > li > a {
   font-size: 1.4rem;
 }
+
+#main_nav .navbar-right a{
+  color: white;
+}
