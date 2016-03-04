@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - language
     - oab_cartography
     - system
   theme:
@@ -19,11 +20,19 @@ settings:
   provider: oab_cartography
   label_display: '0'
   contact_push_custom_text:
-    value: "<p><span class=\"ms-rteStyle-Introduction\">Découvrez la nouvelle version d’e-facilities, le portail de services aux 10 000 connexions quotidiennes, utilisé par tous les salariés en France pour réserver une salle de réunion, signaler un incident, accueillir un visiteur… </span></p>\r\n\r\n<drupal-entity data-align=\"none\" data-embed-button=\"media_browser\" data-entity-embed-display=\"entity_reference:entity_reference_image\" data-entity-embed-settings=\"{&quot;image_style&quot;:&quot;medium&quot;}\" data-entity-id=\"3\" data-entity-label=\"Media Browser\" data-entity-type=\"media\" data-entity-uuid=\"c9f2a2b5-02cf-4897-a705-5b7fa1bfa2f4\"></drupal-entity>\r\n"
+    value: "<h1><!-- THEME DEBUG --><!-- THEME HOOK: 'template_3_columns' --><!-- BEGIN OUTPUT from 'modules/custom/oab_ckeditor/templates/3_columns.html.twig' --><span class=\"obs_orange\"><strong>&nbsp; Flux vision</strong></span></h1>\r\n\r\n<div class=\"container-fluid\">\r\n<div class=\"row obs_template three_columns\">\r\n<div class=\"col-md-4 col-sm-12\">\r\n<p><!-- THEME DEBUG --><!-- THEME HOOK: 'template_background_blue' --><!-- BEGIN OUTPUT from 'modules/custom/oab_ckeditor/templates/background_blue.html.twig' --></p>\r\n\r\n<div class=\"container-fluid\">\r\n<div class=\"row obs_template obs_background_blue\">\r\n<div class=\"col-md-12\">\r\n<p><span class=\"obs_grey_light\"><span class=\"obs_black\"><span class=\"obs_black\"><strong>Je souhaite mieux connaître mes clients, décrypter leurs habitudes de consommation,</strong></span><strong> <span class=\"obs_black\">leurs comportements d'achat pour améliorer les services offerts.</span></strong></span></span></p>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n\r\n<p><!-- END OUTPUT from 'modules/custom/oab_ckeditor/templates/background_blue.html.twig' --></p>\r\n</div>\r\n\r\n<div class=\"col-md-4 col-sm-12\">\r\n<p><!-- THEME DEBUG --><!-- THEME HOOK: 'template_background_yellow' --><!-- BEGIN OUTPUT from 'modules/custom/oab_ckeditor/templates/background_yellow.html.twig' --></p>\r\n\r\n<div class=\"container-fluid\">\r\n<div class=\"row obs_template obs_background_yellow\">\r\n<div class=\"col-md-12\">\r\n<p>Flux vision convertit chaque minute <strong>4 millions</strong> de données mobiles en indicateurs statistiques pour mesurer la fréquentation d’une zone géographique et le déplacement des populations.</p>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div class=\"col-md-4 col-sm-12\">\r\n<p><!-- THEME DEBUG --><!-- THEME HOOK: 'template_background_pink' --><!-- BEGIN OUTPUT from 'modules/custom/oab_ckeditor/templates/background_pink.html.twig' --></p>\r\n\r\n<div class=\"container-fluid\">\r\n<div class=\"row obs_template obs_background_pink\">\r\n<div class=\"col-md-12\">\r\n<ul>\r\n\t<li>Renforcer l’attractivité de votre territoire</li>\r\n\t<li>Améliorer votre offre de services</li>\r\n\t<li>Doper votre efficacité marketing</li>\r\n\t<li>Augmenter l’impact de vos événements</li>\r\n</ul>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n\r\n<p><!-- END OUTPUT from 'modules/custom/oab_ckeditor/templates/background_pink.html.twig' --></p>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div>&nbsp;</div>\r\n\r\n<p><!-- END OUTPUT from 'modules/custom/oab_ckeditor/templates/3_columns.html.twig' -->&nbsp;</p>\r\n\r\n<p><strong>La compagnie du Mont Blanc a choisi Flux Vision pour proposer à ses visiteurs une offre touristique au plus près de leurs attentes.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><iframe width=\"550\" height=\"309\" frameborder=\"0\" src=\"//www.dailymotion.com/embed/video/x2srr2d\" allowfullscreen=\"\"></iframe></p>\r\n\r\n<p><strong>En conclusion Flux Vision vous permet d’améliorer votre efficacité opérationnelle.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Cette solution vous intéresse&nbsp;? <a href=\"http://www.orange-business.com/fr/contact-commercial-flux-vision\">Contactez-nous.</a> </strong></p>\r\n\r\n<p>&nbsp;</p>\r\n"
     format: full_html
 visibility:
   request_path:
     id: request_path
-    pages: /contact/any_request
+    pages: "/contact\r\n/contact/any_request"
     negate: false
     context_mapping: {  }
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
