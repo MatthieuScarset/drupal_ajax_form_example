@@ -46,7 +46,7 @@ content_workflow_published:
     grant_delete: true
   editor:
     grant_view: true
-    grant_update: true
+    grant_update: 0
     grant_delete: 0
   anonymous:
     grant_view: true
@@ -74,9 +74,38 @@ content_workflow_unpublished:
     grant_update: true
     grant_delete: true
   editor:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  anonymous:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+  authenticated:
+    grant_view: 0
+    grant_update: 0
+    grant_delete: 0
+content_workflow_draft:
+  workflow_author:
     grant_view: true
     grant_update: true
-    grant_delete: 0
+    grant_delete: true
+  administrator:
+    grant_view: true
+    grant_update: true
+    grant_delete: true
+  fh_admin:
+    grant_view: true
+    grant_update: true
+    grant_delete: true
+  fh_content:
+    grant_view: true
+    grant_update: true
+    grant_delete: true
+  editor:
+    grant_view: true
+    grant_update: true
+    grant_delete: true
   anonymous:
     grant_view: 0
     grant_update: 0

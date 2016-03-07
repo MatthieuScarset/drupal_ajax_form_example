@@ -6,5 +6,5 @@ id: content_workflow_unpublished
 label: Unpublished
 module: null
 wid: content_workflow
-weight: -6
+weight: '-6'
 sysid: 0

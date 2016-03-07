@@ -1,12 +1,12 @@
-uuid: f5a752bd-1b0f-40cd-914e-78e648a951ae
+uuid: b2f2e293-45f6-4005-bd00-d4ad5deb5bf2
 langcode: fr
 status: true
 dependencies: {  }
-id: content_workflow_(creation)_awaiting_publication
+id: content_workflow_(creation)_draft
 label: null
 module: null
 from_sid: content_workflow_(creation)
-to_sid: content_workflow_awaiting_publication
+to_sid: content_workflow_draft
 roles:
   workflow_author: workflow_author
   administrator: administrator
