@@ -1331,65 +1331,6 @@
         ]
     },
     {
-        "name": "jcalderonzumba/gastonjs",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jcalderonzumba/gastonjs.git",
-            "reference": "21bebb8ca03eb0f93ec2f3fad61192fb079e2622"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jcalderonzumba/gastonjs/zipball/21bebb8ca03eb0f93ec2f3fad61192fb079e2622",
-            "reference": "21bebb8ca03eb0f93ec2f3fad61192fb079e2622",
-            "shasum": ""
-        },
-        "require": {
-            "guzzlehttp/guzzle": "~5.0|~6.0",
-            "php": ">=5.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.6",
-            "silex/silex": "~1.2",
-            "symfony/phpunit-bridge": "~2.7",
-            "symfony/process": "~2.1"
-        },
-        "time": "2016-01-18 09:21:03",
-        "type": "phantomjs-api",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Zumba\\GastonJS\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Juan Francisco Calderón Zumba",
-                "email": "juanfcz@gmail.com",
-                "homepage": "http://github.com/jcalderonzumba"
-            }
-        ],
-        "description": "PhantomJS API based server for webpage automation",
-        "homepage": "https://github.com/jcalderonzumba/gastonjs",
-        "keywords": [
-            "api",
-            "automation",
-            "browser",
-            "headless",
-            "phantomjs"
-        ]
-    },
-    {
         "name": "wikimedia/composer-merge-plugin",
         "version": "v1.3.0",
         "version_normalized": "1.3.0.0",
@@ -1501,6 +1442,65 @@
             "javascript",
             "phantomjs",
             "testing"
+        ]
+    },
+    {
+        "name": "jcalderonzumba/gastonjs",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jcalderonzumba/gastonjs.git",
+            "reference": "21bebb8ca03eb0f93ec2f3fad61192fb079e2622"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jcalderonzumba/gastonjs/zipball/21bebb8ca03eb0f93ec2f3fad61192fb079e2622",
+            "reference": "21bebb8ca03eb0f93ec2f3fad61192fb079e2622",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "~5.0|~6.0",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.6",
+            "silex/silex": "~1.2",
+            "symfony/phpunit-bridge": "~2.7",
+            "symfony/process": "~2.1"
+        },
+        "time": "2016-01-18 09:21:03",
+        "type": "phantomjs-api",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zumba\\GastonJS\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Juan Francisco Calderón Zumba",
+                "email": "juanfcz@gmail.com",
+                "homepage": "http://github.com/jcalderonzumba"
+            }
+        ],
+        "description": "PhantomJS API based server for webpage automation",
+        "homepage": "https://github.com/jcalderonzumba/gastonjs",
+        "keywords": [
+            "api",
+            "automation",
+            "browser",
+            "headless",
+            "phantomjs"
         ]
     },
     {
@@ -2941,6 +2941,58 @@
         ]
     },
     {
+        "name": "zendframework/zend-diactoros",
+        "version": "1.3.3",
+        "version_normalized": "1.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "4d54fde709664562eb63356f0250d527824d05de"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/4d54fde709664562eb63356f0250d527824d05de",
+            "reference": "4d54fde709664562eb63356f0250d527824d05de",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4",
+            "psr/http-message": "~1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "~1.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.6",
+            "squizlabs/php_codesniffer": "^2.3.1"
+        },
+        "time": "2016-01-04 21:37:32",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3-dev",
+                "dev-develop": "1.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "homepage": "https://github.com/zendframework/zend-diactoros",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
+        ]
+    },
+    {
         "name": "composer/semver",
         "version": "1.3.0",
         "version_normalized": "1.3.0.0",
@@ -4162,247 +4214,5 @@
         ],
         "description": "Symfony Stopwatch Component",
         "homepage": "http://symfony.com"
-    },
-    {
-        "name": "igorw/get-in",
-        "version": "v1.0.3",
-        "version_normalized": "1.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/igorw/get-in.git",
-            "reference": "170ded831f49abc6a6061f655aba9bdbcf7b8111"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/igorw/get-in/zipball/170ded831f49abc6a6061f655aba9bdbcf7b8111",
-            "reference": "170ded831f49abc6a6061f655aba9bdbcf7b8111",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4"
-        },
-        "time": "2014-12-15 23:03:51",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/get_in.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Igor Wiedler",
-                "email": "igor@wiedler.ch"
-            }
-        ],
-        "description": "Functions for for hash map (assoc array) traversal.",
-        "keywords": [
-            "assoc-array",
-            "hash-map"
-        ]
-    },
-    {
-        "name": "zendframework/zend-diactoros",
-        "version": "1.3.3",
-        "version_normalized": "1.3.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-diactoros.git",
-            "reference": "4d54fde709664562eb63356f0250d527824d05de"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/4d54fde709664562eb63356f0250d527824d05de",
-            "reference": "4d54fde709664562eb63356f0250d527824d05de",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4",
-            "psr/http-message": "~1.0"
-        },
-        "provide": {
-            "psr/http-message-implementation": "~1.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.6",
-            "squizlabs/php_codesniffer": "^2.3.1"
-        },
-        "time": "2016-01-04 21:37:32",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3-dev",
-                "dev-develop": "1.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Diactoros\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "description": "PSR HTTP Message implementations",
-        "homepage": "https://github.com/zendframework/zend-diactoros",
-        "keywords": [
-            "http",
-            "psr",
-            "psr-7"
-        ]
-    },
-    {
-        "name": "egeloen/http-adapter",
-        "version": "0.8.0",
-        "version_normalized": "0.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/egeloen/ivory-http-adapter.git",
-            "reference": "9641f11487ec26b24c6bbcee4f267cf62f60b855"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/egeloen/ivory-http-adapter/zipball/9641f11487ec26b24c6bbcee4f267cf62f60b855",
-            "reference": "9641f11487ec26b24c6bbcee4f267cf62f60b855",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.8",
-            "zendframework/zend-diactoros": "^1.1"
-        },
-        "require-dev": {
-            "cakephp/cakephp": "^3.0.3",
-            "ext-curl": "*",
-            "guzzle/guzzle": "^3.9.4@dev",
-            "guzzlehttp/guzzle": "^4.1.4|^5.0|^6.0",
-            "kriswallsmith/buzz": "^0.13",
-            "nategood/httpful": "^0.2.17",
-            "phpunit/phpunit": "^4.0",
-            "phpunit/phpunit-mock-objects": "dev-matcher-verify as 2.3.x-dev",
-            "psr/log": "^1.0",
-            "react/dns": "^0.4.1",
-            "react/http-client": "^0.4",
-            "satooshi/php-coveralls": "^0.6",
-            "symfony/event-dispatcher": "^2.0",
-            "zendframework/zend-http": "^2.3.4",
-            "zendframework/zendframework1": ">=1.12.9,<=1.12.14|^1.12.16"
-        },
-        "suggest": {
-            "ext-curl": "Allows you to use the cURL adapter",
-            "ext-http": "Allows you to use the PECL adapter",
-            "guzzle/guzzle": "Allows you to use the Guzzle 3 adapter",
-            "guzzlehttp/guzzle": "Allows you to use the Guzzle 4 adapter",
-            "kriswallsmith/buzz": "Allows you to use the Buzz adapter",
-            "nategood/httpful": "Allows you to use the httpful adapter",
-            "psr/log": "Allows you to use the logger event subscriber",
-            "symfony/event-dispatcher": "Allows you to use the event lifecycle",
-            "symfony/stopwatch": "Allows you to use the stopwatch http adapter and event subscriber",
-            "zendframework/zend-http": "Allows you to use the Zend 2 adapter",
-            "zendframework/zendframework1": "Allows you to use the Zend 1 adapter"
-        },
-        "time": "2015-08-12 09:35:40",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Ivory\\HttpAdapter\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Eric GELOEN",
-                "email": "geloen.eric@gmail.com"
-            }
-        ],
-        "description": "Issue HTTP request for PHP 5.3+.",
-        "keywords": [
-            "http",
-            "http-adapter",
-            "http-client",
-            "psr-7"
-        ],
-        "abandoned": "php-http/httplug"
-    },
-    {
-        "name": "willdurand/geocoder",
-        "version": "v3.3.0",
-        "version_normalized": "3.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/geocoder-php/Geocoder.git",
-            "reference": "ccc178e2984c0af24881faa0ffe515f20e5e8c23"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/geocoder-php/Geocoder/zipball/ccc178e2984c0af24881faa0ffe515f20e5e8c23",
-            "reference": "ccc178e2984c0af24881faa0ffe515f20e5e8c23",
-            "shasum": ""
-        },
-        "require": {
-            "egeloen/http-adapter": "~0.8",
-            "igorw/get-in": "~1.0",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "geoip2/geoip2": "~2.0",
-            "symfony/stopwatch": "~2.5"
-        },
-        "suggest": {
-            "ext-geoip": "Enabling the geoip extension allows you to use the MaxMindProvider.",
-            "geoip/geoip": "If you are going to use the MaxMindBinaryProvider (conflict with geoip extension).",
-            "geoip2/geoip2": "If you are going to use the GeoIP2DatabaseProvider.",
-            "symfony/stopwatch": "If you want to use the TimedGeocoder"
-        },
-        "time": "2015-12-06 20:17:20",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.3-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Geocoder": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "William Durand",
-                "email": "william.durand1@gmail.com"
-            }
-        ],
-        "description": "The almost missing Geocoder PHP 5.4 library.",
-        "homepage": "http://geocoder-php.org",
-        "keywords": [
-            "abstraction",
-            "geocoder",
-            "geocoding",
-            "geoip"
-        ]
     }
 ]

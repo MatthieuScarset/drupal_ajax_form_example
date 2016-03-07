@@ -75,8 +75,14 @@
   font-size: 1.4rem;
 }
 
+
 /*#main_nav .navbar-header.logo,
 #main_nav .navbar-right {
   position: absolute;
   top: 0px;
 }*/
+
+#main_nav .navbar-right a{
+  color: white;
+}
+

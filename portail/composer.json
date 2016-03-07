@@ -10,8 +10,7 @@
     "replace": {
         "drupal/core": "~8.0",
         "drupal/address": "8.*",
-        "drupal/webprofiler": "8.*",
-        "drupal/geocoder": "8.*"
+        "drupal/webprofiler": "8.*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -28,8 +27,7 @@
             "include": [
                 "core/composer.json",
                 "modules/contrib/address/composer.json",
-                "modules/contrib/devel/webprofiler/composer.json",
-                "modules/contrib/geocoder/composer.json"
+                "modules/contrib/devel/webprofiler/composer.json"
             ],
             "recurse": false,
             "replace": false,

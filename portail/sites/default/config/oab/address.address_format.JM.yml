@@ -1,0 +1,19 @@
+uuid: 710c0c58-3926-4c79-ac00-e4823ca8a0b9
+langcode: en
+status: true
+dependencies: {  }
+countryCode: JM
+format: "%recipient\n%organization\n%addressLine1\n%addressLine2\n%locality\n%administrativeArea %sortingCode"
+requiredFields:
+  - recipient
+  - addressLine1
+  - locality
+  - administrativeArea
+uppercaseFields:
+  - locality
+administrativeAreaType: parish
+localityType: city
+dependentLocalityType: null
+postalCodeType: null
+postalCodePattern: null
+postalCodePrefix: null

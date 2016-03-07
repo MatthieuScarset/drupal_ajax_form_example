@@ -12,6 +12,8 @@ function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_st
       if (isset($form['mail'])){
         $form['mail']['#title'] = t('Your email address');
       }
+      
+      unset($form['actions']['preview']);
     }
   }
 }

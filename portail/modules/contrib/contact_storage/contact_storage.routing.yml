@@ -21,3 +21,11 @@ entity.contact_message.collection:
     _title: 'Contact messages'
   requirements:
     _permission: 'administer contact forms'
+
+entity.contact_message.canonical:
+  path: '/admin/structure/contact/messages/{contact_message}'
+  defaults:
+    _entity_form: 'contact_message.edit'
+    _title: 'Edit message'
+  requirements:
+    _permission: 'administer contact forms'
