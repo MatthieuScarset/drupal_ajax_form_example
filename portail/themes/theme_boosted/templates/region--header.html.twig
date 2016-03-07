@@ -65,7 +65,7 @@
 
       {#Begin Main Mega Menu#}
       {#<nav id="main_nav" class="navbar subnav navbar-inverse mega-menu navbar-fixed-top" role="navigation">#}
-      <nav id="main_nav" class="navbar subnav navbar-inverse mega-menu" role="navigation">
+      <nav id="main_nav" class="navbar subnav mega-menu" role="navigation">
           <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header logo">
@@ -75,13 +75,15 @@
               </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="navbar-collapse-mega">
+              <div class="collapse navbar-collapse navbar-inverse" id="navbar-collapse-mega">
               	{#Render the main mega menu items in the top navbar #}
-              	{{ elements.navigationprincipale }}
-                <div class="nav navbar-nav navbar-right">
-                       {{ elements.righticonsmenu }}
+                <div class="nav">
+              	{{ elements.theme_boosted_navigationprincipale }}
                 </div>
               </div><!-- /.navbar-collapse -->
+               <div class="nav navbar-nav navbar-right">
+                       {{ elements.righticonsmenu }}
+                </div>
 
           </div><!-- /.container-fluid -->
       </nav>

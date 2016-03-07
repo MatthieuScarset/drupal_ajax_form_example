@@ -383,23 +383,7 @@ MIT Licensed
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-control_centre
-{
-  font-family: 'icon-orange' !important;
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-size: 3rem;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  line-height: 1;
-  text-transform: none;
-  margin-top:30px;
-  margin-left:5px;
-  speak: none;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
 .icon-popout-care,
 .icon-popout-family,
 .icon-popout-fun,
