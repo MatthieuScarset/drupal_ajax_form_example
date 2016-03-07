@@ -6,7 +6,7 @@ global-styling:
       css/bootstrap-orange-theme2015.css: {}
       css/boosted2015.css: {}
       css/font-awesome.css: {}
-    components:
+    component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
       css/components/contact.css: {}
