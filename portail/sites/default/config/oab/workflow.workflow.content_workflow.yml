@@ -7,8 +7,8 @@ label: 'Content workflow'
 module: null
 options:
   name_as_title: 0
-  fieldset: '0'
-  options: buttons
+  fieldset: '1'
+  options: radios
   schedule_timezone: 1
   comment_log_node: '1'
   comment_log_tab: '1'
