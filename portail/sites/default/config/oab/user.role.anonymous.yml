@@ -18,3 +18,4 @@ permissions:
   - 'create publication_page_simple workflow_transition'
   - 'create workflow_page_simple workflow_transition'
   - 'view media'
+  - 'create content_workflow workflow_transition'

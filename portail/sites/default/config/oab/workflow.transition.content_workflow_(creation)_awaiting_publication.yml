@@ -9,5 +9,7 @@ from_sid: content_workflow_(creation)
 to_sid: content_workflow_awaiting_publication
 roles:
   workflow_author: workflow_author
-  authenticated: authenticated
   administrator: administrator
+  fh_admin: fh_admin
+  fh_content: fh_content
+  editor: editor
