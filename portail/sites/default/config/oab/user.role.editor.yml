@@ -6,4 +6,25 @@ id: editor
 label: Editor
 weight: 5
 is_admin: null
-permissions: {  }
+permissions:
+  0: 'use text format basic_html'
+  1: 'access shortcuts'
+  2: 'create content_workflow workflow_transition'
+  3: 'access browse_medias_iframe entity browser pages'
+  4: 'access browse_media_modal entity browser pages'
+  5: 'use text format full_html'
+  6: 'create media'
+  7: 'delete media'
+  8: 'update media'
+  9: 'access content overview'
+  10: 'administer nodes'
+  11: 'view own unpublished content'
+  12: 'create complexe content'
+  13: 'edit own complexe content'
+  14: 'create office content'
+  15: 'edit own office content'
+  16: 'create simple content'
+  17: 'edit own simple content'
+  18: 'create url aliases'
+  20: 'view the administration theme'
+  21: 'access toolbar'

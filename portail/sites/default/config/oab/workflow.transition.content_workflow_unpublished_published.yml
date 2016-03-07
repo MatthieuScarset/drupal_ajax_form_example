@@ -8,6 +8,8 @@ module: null
 from_sid: content_workflow_unpublished
 to_sid: content_workflow_published
 roles:
-  authenticated: authenticated
   administrator: administrator
+  fh_admin: fh_admin
+  fh_content: fh_content
   workflow_author: 0
+  editor: 0
