@@ -1,9 +1,9 @@
-uuid: fd4c6569-9c6d-43af-aa02-2b7384623b50
+uuid: 7398db8a-4920-490f-8b00-f207bd77535b
 langcode: fr
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: yCYYi8Iww39CgVZRDXQuMwdSPRgO5btdO-2F6mlQqs0
+  default_config_hash: jkZysKXgF00vvU10JgkGqie8vIoK3w1_ejcXcwDIoMA
 id: office
 label: 'Office Imports'
 description: null

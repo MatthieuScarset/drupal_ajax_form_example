@@ -35,6 +35,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-share:hover{
+  cursor: pointer;
+}
 
 #navbar-collapse-mega .glyphicon{
   position: relative;
@@ -86,3 +89,20 @@
   color: white;
 }
 
+#block-stickyhomeblock #social-share{
+  text-align: right;
+}
+#block-stickyhomeblock #social-share #sharebar{
+  padding-right: 10px;
+}
+#block-stickyhomeblock #social-share #counterlabel{
+  display: none;
+}
+
+#block-stickyhomeblock #social-share #sharebar a.visited{
+  background-color: white;
+  border-color: black;
+}
+#block-stickyhomeblock #social-share #sharebar a.visited *{
+  fill: black;
+}

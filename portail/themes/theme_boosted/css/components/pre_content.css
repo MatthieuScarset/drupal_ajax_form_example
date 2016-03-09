@@ -1,4 +1,6 @@
 #social-share {
-  border-top: 1px solid grey;
-  padding-top: 10px;
+  /*border-top: 1px solid grey;
+  padding-top: 10px;*/
+  background-color: white;
+  position: absolute;
 }

@@ -81,3 +81,4 @@ permissions:
   71: 'administer menu'
   73: 'view the administration theme'
   74: 'access toolbar'
+  75: 'administer blocks'

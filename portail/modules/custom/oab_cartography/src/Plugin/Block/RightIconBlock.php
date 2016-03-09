@@ -8,28 +8,23 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  *
- * @author FFLB8539
+ * @author WLCQ9089
  * @Block(
- *   id = "sticky_home_block",
- *   admin_label = @Translation("Sticky Home Block"),
+ *   id = "right_icon_block",
+ *   admin_label = @Translation("Right icon Block"),
  *   category = @Translation("Blocks")
  * )
  *
  */
 
-class StickyHomeBlock extends BlockBase {
+class RightIconBlock extends BlockBase {
 
   public function build(){
     $config = $this->getConfiguration();
-    $sticky_home_custom_text = isset($config['sticky_home_custom_text']) ? $config['sticky_home_custom_text'] : '';
+    $right_icon_custom_text = isset($config['right_icon_custom_text']) ? $config['right_icon_custom_text'] : '';
     return array(
       'type' => 'markup',
-      '#markup' => check_markup($sticky_home_custom_text['value'], $sticky_home_custom_text['format']),
-      '#attached' => array(
-        'library' =>  array(
-          'theme_boosted/socialbar',
-        ),
-      ),
+      '#markup' => check_markup($right_icon_custom_text['value'], $right_icon_custom_text['format']),
     );
   }
 
@@ -43,11 +38,11 @@ class StickyHomeBlock extends BlockBase {
     $config = $this->getConfiguration();
 
     // Add a form field to the existing block configuration form.
-    $form['sticky_home_custom_text'] = array(
+    $form['right_icon_custom_text'] = array(
         '#type' => 'text_format',
         '#title' => t('Custom text'),
-        '#default_value' => isset($config['sticky_home_custom_text']['value']) ? $config['sticky_home_custom_text']['value'] : '',
-        '#format' => isset($config['sticky_home_custom_text']['format']) ? $config['sticky_home_custom_text']['format'] : 'full_html',
+        '#default_value' => isset($config['right_icon_custom_text']['value']) ? $config['right_icon_custom_text']['value'] : '',
+        '#format' => isset($config['right_icon_custom_text']['format']) ? $config['right_icon_custom_text']['format'] : 'full_html',
     );
     return $form;
   }
@@ -64,6 +59,6 @@ class StickyHomeBlock extends BlockBase {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     // Save our custom settings when the form is submitted.
-    $this->setConfigurationValue('sticky_home_custom_text', $form_state->getValue('sticky_home_custom_text'));
+    $this->setConfigurationValue('right_icon_custom_text', $form_state->getValue('right_icon_custom_text'));
   }
 }

@@ -1,4 +1,4 @@
-uuid: 7e295fbd-459c-41ae-965e-943a8c17c65c
+uuid: cf558bdb-7291-42e2-ae00-eb0ab99d4cdf
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +10,7 @@ third_party_settings:
   migrate_plus:
     migration_group: office
 _core:
-  default_config_hash: ShGPYk_ma5NkVRZIPP_qjJV2b_GeRchro0uwRIlV2zE
+  default_config_hash: jKsZGdF-BgErabo1vpzhKE5IoFavK3m-CzDxKSbzycs
 id: office_node
 migration_tags: null
 label: Office

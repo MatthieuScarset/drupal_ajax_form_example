@@ -16,3 +16,11 @@ global-styling:
     #js/jquery.validate.min.js: {}
     js/boosted.js: {}
     #js/header.js: {}
+socialbar:
+  version: VERSION
+  css:
+    base:
+      css/orange_socialbar.css: {}
+  js:
+    js/orange_socialbar_settings.js: {}
+    js/orange_socialbar.js: {}
