@@ -1,0 +1,14 @@
+uuid: fd4c6569-9c6d-43af-aa02-2b7384623b50
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: yCYYi8Iww39CgVZRDXQuMwdSPRgO5btdO-2F6mlQqs0
+id: office
+label: 'Office Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

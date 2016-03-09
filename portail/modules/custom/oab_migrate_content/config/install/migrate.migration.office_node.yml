@@ -1,0 +1,17 @@
+id: office_node
+label: Office
+third_party_settings:
+  migrate_plus:
+    migration_group: office
+source:
+  plugin: office_node
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: office
+  title: title
+  uid:
+    plugin: default_value
+    default_value: 1
