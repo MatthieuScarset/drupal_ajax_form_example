@@ -1,0 +1,33 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+    - oab_migrate_content
+third_party_settings:
+  migrate_plus:
+    migration_group: blogpost
+id: blogpost_term
+migration_tags: null
+label: Blog posts terms
+source:
+  plugin: blogpost_term
+process:
+  vid:
+    plugin: default_value
+    default_value: blog
+  langcode: language
+  name: name
+  parent:
+    -
+      plugin: skip_process_on_empty
+      source: parent
+    -
+      plugin: migration
+      migration: blogpost_term
+  weight: weight
+destination:
+  plugin: entity:taxonomy_term
+template: null
+migration_dependencies: {  }
