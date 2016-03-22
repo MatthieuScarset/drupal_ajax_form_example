@@ -1,0 +1,14 @@
+<?php 
+
+
+
+function oab_amel_install() {  
+    drupal_set_installed_schema_version('oab_amel', 7000); 
+}
+
+/**
+ *  Création de l'utilisateur FH Admin avec le mail d'Anna */
+
+function oab_amel_update_7001() {
+  include_once("updates/update_7001.inc");
+}
