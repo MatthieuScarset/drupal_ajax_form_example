@@ -1,0 +1,32 @@
+uuid: 8815e851-9d78-4554-be07-7b4ad32bb180
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - oab_migrate_content
+    - taxonomy
+third_party_settings:
+  migrate_plus:
+    migration_group: blogpost
+_core:
+  default_config_hash: onbS1ljM_G4diaT1vcROfd5AblQuT7ZgP7wkR9blEEU
+id: blogpost_term
+migration_tags: null
+label: 'Blog posts terms'
+source:
+  plugin: blogpost_term
+process:
+  vid:
+    plugin: default_value
+    default_value: blog
+  langcode: language
+  name: name
+  parent:
+      plugin: migration
+      migration: blogpost_term
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+template: null
+migration_dependencies: {  }
