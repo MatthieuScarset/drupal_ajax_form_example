@@ -145,3 +145,25 @@ th.select-all {
     display: none;
   }
 }
+
+/**
+ * Dashboard manager Table (View)
+ */
+.expired {
+  background:red;
+  color:white;
+}
+
+.critical {
+  background:orange;
+  color:white;
+}
+
+.good {
+  background:green;
+  color:white;
+}
+
+.views-expirationDate {
+  background: pink;
+}
