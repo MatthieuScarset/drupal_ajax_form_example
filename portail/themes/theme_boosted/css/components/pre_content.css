@@ -4,3 +4,7 @@
   background-color: white;
   position: absolute;
 }
+
+.breadcrumb {
+  font-family: "Helvetica Neue";
+}
