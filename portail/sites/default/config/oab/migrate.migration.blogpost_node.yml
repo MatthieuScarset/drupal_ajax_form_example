@@ -32,9 +32,18 @@ process:
   field_body/format:
     plugin: default_value
     default_value: full_html
+  field_blog: 
+    plugin: migration
+    migration: blogpost_term
+    source: categories
+  field_image:
+    plugin: migration
+    migration: blogpost_media
+    source: images
 destination:
   plugin: 'entity:node'
 template: null
 migration_dependencies:
   required:
     - blogpost_term
+    - blogpost_media

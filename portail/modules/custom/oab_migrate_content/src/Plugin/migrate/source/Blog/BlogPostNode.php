@@ -1,17 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\migrate_example\Plugin\migrate\source\BeerNode.
- */
-
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
 /**
- * Source plugin for beer content.
  *
  * @MigrateSource(
  *   id = "blogpost_node"
@@ -37,7 +31,9 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language'])
     ->condition('n.type', 'blog_post', '=')
-    ->condition('n.changed', time() - (60 * 60 * 24 * 60), '>');
+    ->condition('n.status', 1, '=')
+    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
+    //->condition('n.nid', array(11430, 11429), 'IN');
     return $query;
   }
 
@@ -92,6 +88,59 @@ class BlogPostNode extends SqlBase {
           $row->setSourceProperty('body', $body_result['body_value']);
         }
       }
+    }
+
+    // récupération des tags
+    $categories_query = $this->select('field_data_field_taxo_blog', 'tb');
+    $field1_alias = $categories_query->addField('tb', 'field_taxo_blog_tid', 'tid');
+    $field2_alias = $categories_query->addField('tb', 'delta');
+    //->fields('tb', ['field_taxo_blog_tid'])
+    $categories_query->condition('tb.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('tb.bundle', 'blog_post', '=')
+    ->orderBy('tb.delta', 'ASC');
+
+
+    $categories_results = $categories_query->execute()->fetchAll();
+
+    if (is_array($categories_results)){
+      $categories = array();
+      foreach ($categories_results AS $categories_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($categories_result) && isset($categories_result->tid)){
+          $categories[] = $categories_result->tid;
+        }
+        elseif (is_array($categories_result) && isset($categories_result['tid'])){
+          $categories[] = $categories_result['tid'];
+        }
+      }
+      $row->setSourceProperty('categories', $categories);
+    }
+
+    // récupération des images
+    $images_query = $this->select('field_data_field_image', 'fi');
+    $field1_alias = $images_query->addField('fi', 'field_image_fid', 'mid');
+    $field2_alias = $images_query->addField('fi', 'delta');
+    $images_query->condition('fi.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('fi.bundle', 'blog_post', '=')
+    ->orderBy('fi.delta', 'ASC');
+
+
+    $images_results = $images_query->execute()->fetchAll();
+
+    if (is_array($images_results)){
+      $images = array();
+      foreach ($images_results AS $images_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($images_result) && isset($images_result->mid)){
+          $images[] = $images_result->mid;
+        }
+        elseif (is_array($images_result) && isset($images_result['mid'])){
+          $images[] = $images_result['mid'];
+        }
+      }
+      $row->setSourceProperty('images', $images);
     }
 
     return parent::prepareRow($row);

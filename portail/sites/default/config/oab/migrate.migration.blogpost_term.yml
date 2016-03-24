@@ -23,8 +23,9 @@ process:
   langcode: language
   name: name
   parent:
-      plugin: migration
-      migration: blogpost_term
+    plugin: migration
+    migration: blogpost_term
+    source: parent
   weight: weight
 destination:
   plugin: 'entity:taxonomy_term'
