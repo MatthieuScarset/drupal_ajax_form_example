@@ -33,7 +33,7 @@ class BlogPostMedia extends SqlBase {
     //$query->join('field_data_field_folder', 'ff', 'ff.entity_id = f.fid');
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //$query->condition('f.fid', 1757)
@@ -69,7 +69,7 @@ class BlogPostMedia extends SqlBase {
    */
   public function getIds() {
     return [
-      'mid' => [
+      'fid' => [
         'type' => 'integer',
         'alias' => 'm',
       ],
@@ -83,7 +83,7 @@ class BlogPostMedia extends SqlBase {
     // récupération de la balise alt et title
     $image_query = $this->select('field_data_field_image', 'fi');
     $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
-    ->condition('fi.field_image_fid', $row->getSourceProperty('mid'), '=')
+    ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
     ->condition('fi.bundle', 'blog_post', '=');
 
     $image_results = $image_query->execute()->fetchAll();
