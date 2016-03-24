@@ -20,14 +20,11 @@ process:
   langcode: language
   name: name
   parent:
-    -
-      plugin: skip_process_on_empty
-      source: parent
-    -
-      plugin: migration
-      migration: blogpost_term
+    plugin: migration
+    migration: blogpost_term
+    source: parent
   weight: weight
 destination:
-  plugin: entity:taxonomy_term
+  plugin: 'entity:taxonomy_term'
 template: null
 migration_dependencies: {  }

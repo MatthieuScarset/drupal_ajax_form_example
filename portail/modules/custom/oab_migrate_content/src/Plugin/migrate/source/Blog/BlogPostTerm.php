@@ -1,17 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\migrate_example\Plugin\migrate\source\BeerNode.
- */
-
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
 
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
 /**
- * Source plugin for beer content.
  *
  * @MigrateSource(
  *   id = "blogpost_term"
@@ -75,12 +69,12 @@ class BlogPostTerm extends SqlBase {
    */
   public function prepareRow(Row $row) {
     // Find parents for this row.
-    /*$parents = $this->select('taxonomy_term_hierarchy', 'th')
-    ->fields('th', array('parent', 'tid'))
-    ->condition('tid', $row->getSourceProperty('tid'))
+    $parents = $this->select('taxonomy_term_hierarchy', 'th')
+    ->fields('th', array('parent'))
+    ->condition('th.tid', $row->getSourceProperty('tid'))
     ->execute()
     ->fetchCol();
-    $row->setSourceProperty('parent', $parents);*/
+    $row->setSourceProperty('parent', $parents);
     return parent::prepareRow($row);
   }
 

@@ -1,0 +1,32 @@
+uuid: 20ed2035-d266-41c4-8f0d-13f5f52e29e5
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media_entity
+    - migrate_plus
+    - oab_migrate_content
+third_party_settings:
+  migrate_plus:
+    migration_group: blogpost
+_core:
+  default_config_hash: Q6L6WF6iTEkjSeKwiZRyxKU88nyibduRGtAPxzA1toY
+id: blogpost_image
+migration_tags: null
+label: 'Blog posts images'
+source:
+  plugin: blogpost_image
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:file'
+template: null
+migration_dependencies: {  }
