@@ -1,0 +1,46 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+    - oab_migrate_content
+third_party_settings:
+  migrate_plus:
+    migration_group: blogpost
+id: blogpost_node
+migration_tags: null
+label: Blog posts nodes
+source:
+  plugin: blogpost_node
+process:
+  type:
+    plugin: default_value
+    default_value: simple
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_type/target_id:
+    plugin: default_value
+    default_value: 7
+  field_body/value: body
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
+  field_blog: 
+    plugin: migration
+    migration: blogpost_term
+    source: categories
+  field_image:
+    plugin: migration
+    migration: blogpost_media
+    source: images
+destination:
+  plugin: 'entity:node'
+template: null
+migration_dependencies:
+  required:
+    - blogpost_term
+    - blogpost_media

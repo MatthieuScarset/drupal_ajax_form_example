@@ -2,43 +2,48 @@
 
 }
 
-.icon-control_centre
-{
-  font-family: 'icon-orange' !important;
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-size: 3rem;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  line-height: 1;
-  text-transform: none;
-  /*"margin-top:30px;*/
-  margin-left:20px;
-  speak: none;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .icon-share {
   font-family: 'icon-orange' !important;
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-size: 3rem;
+  font-size: 2em;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   line-height: 1;
   text-transform: none;
-  margin: 20px;
+  margin-left: 20px;
+  margin-top: 35px;
   speak: none;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-share:hover{
+
+.icon-control_centre
+{ 
+  font-family: 'icon-orange' !important; 
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-size: 2em !important; 
+  font-style: normal; 
+  font-weight: normal; 
+  font-variant: normal; 
+  line-height: 1; 
+  text-transform: none; 
+  margin-top:30px; 
+  margin-left:20px; 
+  speak: none; 
+/*   Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale; 
+} 
+
+.icon-control_centre:hover,
+#navbar-collapse-mega .glyphicon:hover,
+.icon-share:hover
+{
+  color: rgb(255,121,0);
   cursor: pointer;
 }
-
 #navbar-collapse-mega .glyphicon{
   position: relative;
   top: 20px;
@@ -47,9 +52,9 @@
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-  font-size: 25px;
+  font-size: 1.8em;
   margin-left: 20px;
-
+  margin-top: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -73,18 +78,40 @@
     width: 100%;
     z-index:10;
 }
-
+#block-topnavbarmenu {
+  margin-left:-1rem;
+}
 #block-topnavbarmenu .navbar-nav > li > a {
-  font-size: 1.4rem;
+    font-size: 1.125em;
+    font-family:"Helvetica Neue";
+    font-weight: bold;
 }
 
+#block-topnavbarmenu .navbar-nav > li > a:focus,
+#block-topnavbarmenu .navbar-nav > li > a:hover {
+    color: rgb(255,121,0);
+}
 
-/*#main_nav .navbar-header.logo,
-#main_nav .navbar-right {
-  position: absolute;
-  top: 0px;
-}*/
+.mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li > a:focus {
+    color: rgb(255,121, 0);
+}
 
+.mega-menu.navbar .nav > li > a {
+    font-size: 1.313em;
+    font-family:"Helvetica Neue";
+    font-weight: bold;
+}
+
+#block-menuducomptedelutilisateur .navbar-nav > li > a {
+    font-family: "Helvetica Neue";
+    font-size: 1.125em;
+    color: white;
+}
+
+.navbar-header .logo img {
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
 #main_nav .navbar-right a{
   color: white;
 }
@@ -106,3 +133,27 @@
 #block-stickyhomeblock #social-share #sharebar a.visited *{
   fill: black;
 }
+
+#block-theme-boosted-navigationprincipale {
+  position: static;
+}
+
+#items_megamenu h2 {
+  margin-top:0rem;
+  margin-bottom:2rem;
+  font-family:"Helvetica Neue";
+  font-weight: bold;
+}
+
+
+#items_megamenu a {
+  font-family:"Helvetica Neue";
+  font-weight: bold;
+  font-size:1.3em;
+}
+#main_nav .container,
+#top_navbar .container{
+  padding-right:0;
+  padding-left:0;
+}
+

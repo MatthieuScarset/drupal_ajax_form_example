@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.simple.field_blog
     - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_image
@@ -21,6 +22,7 @@ content:
   links:
     weight: 100
 hidden:
+  field_blog: true
   field_body: true
   field_end_date: true
   field_image: true
