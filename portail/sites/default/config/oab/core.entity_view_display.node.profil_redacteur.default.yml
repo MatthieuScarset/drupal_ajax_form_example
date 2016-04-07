@@ -1,0 +1,91 @@
+uuid: c0c4a0af-e9cb-4eba-9c1b-27a03af629a1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.profil_redacteur.body
+    - field.field.node.profil_redacteur.field_first_name
+    - field.field.node.profil_redacteur.field_image
+    - field.field.node.profil_redacteur.field_job
+    - field.field.node.profil_redacteur.field_last_name
+    - field.field.node.profil_redacteur.field_link
+    - field.field.node.profil_redacteur.field_location
+    - field.field.node.profil_redacteur.field_social_accounts
+    - node.type.profil_redacteur
+  module:
+    - link
+    - oab_media_browser
+    - text
+    - user
+id: node.profil_redacteur.default
+targetEntityType: node
+bundle: profil_redacteur
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+  field_first_name:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_image
+  field_job:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_last_name:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_link:
+    weight: 7
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+  field_location:
+    weight: 6
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_social_accounts:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  links:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

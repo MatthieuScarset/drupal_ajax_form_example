@@ -1,4 +1,4 @@
-uuid: 8815e851-9d78-4554-be07-7b4ad32bb180
+uuid: 9c1daa56-2d1b-4512-8612-18c96a88f370
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +10,7 @@ third_party_settings:
   migrate_plus:
     migration_group: blogpost
 _core:
-  default_config_hash: onbS1ljM_G4diaT1vcROfd5AblQuT7ZgP7wkR9blEEU
+  default_config_hash: pik2vT3yMBDpDdBcWBbbriGR20YOhZBK5ruRou-qZco
 id: blogpost_term
 migration_tags: null
 label: 'Blog posts terms'

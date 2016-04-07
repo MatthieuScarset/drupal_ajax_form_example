@@ -1,0 +1,16 @@
+uuid: f8dee2f7-74e6-45de-9100-a1c3a3cb5f00
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.profil_redacteur
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.profil_redacteur
+target_entity_type_id: node
+target_bundle: profil_redacteur
+default_langcode: site_default
+language_alterable: false

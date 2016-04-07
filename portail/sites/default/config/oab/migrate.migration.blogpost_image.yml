@@ -1,16 +1,16 @@
-uuid: 20ed2035-d266-41c4-8f0d-13f5f52e29e5
+uuid: 30141d52-3ad6-41cf-b200-e20815441137
 langcode: fr
 status: true
 dependencies:
   module:
-    - media_entity
+    - file
     - migrate_plus
     - oab_migrate_content
 third_party_settings:
   migrate_plus:
     migration_group: blogpost
 _core:
-  default_config_hash: Q6L6WF6iTEkjSeKwiZRyxKU88nyibduRGtAPxzA1toY
+  default_config_hash: wNO6vI3VJNbkddtWIFp1JbMOgGj6rtp2oDgwPYJIWuI
 id: blogpost_image
 migration_tags: null
 label: 'Blog posts images'

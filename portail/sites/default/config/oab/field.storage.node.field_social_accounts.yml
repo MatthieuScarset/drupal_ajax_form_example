@@ -1,0 +1,21 @@
+uuid: 1b96437c-ddd3-435b-a651-8104847eea7f
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_social_accounts
+field_name: field_social_accounts
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 4
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

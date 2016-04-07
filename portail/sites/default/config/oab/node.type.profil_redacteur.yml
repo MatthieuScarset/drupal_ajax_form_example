@@ -1,0 +1,17 @@
+uuid: e2d49e39-39e9-4534-9400-daac01ed0adb
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Profile
+type: profil_redacteur
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

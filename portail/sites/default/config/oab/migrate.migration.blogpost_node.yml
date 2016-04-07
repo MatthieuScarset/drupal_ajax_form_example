@@ -1,7 +1,10 @@
-uuid: 88649955-201c-4bee-835b-91496839a074
+uuid: 750c5375-963b-4deb-af04-4d099f8161a9
 langcode: fr
 status: true
 dependencies:
+  config:
+    - migrate.migration.blogpost_media
+    - migrate.migration.blogpost_term
   module:
     - migrate_plus
     - node
@@ -10,7 +13,7 @@ third_party_settings:
   migrate_plus:
     migration_group: blogpost
 _core:
-  default_config_hash: 0_MxucjMUjRuRZ0ITwtmSnDKB9f7fr8cTIf6j0QBdR8
+  default_config_hash: 0EkeFOaks-kvv9giJdDvJzttqJHBtQKuk_kY5dKE7R0
 id: blogpost_node
 migration_tags: null
 label: 'Blog posts nodes'
@@ -32,7 +35,7 @@ process:
   field_body/format:
     plugin: default_value
     default_value: full_html
-  field_blog: 
+  field_blog:
     plugin: migration
     migration: blogpost_term
     source: categories

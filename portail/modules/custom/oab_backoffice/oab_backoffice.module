@@ -1,1 +1,41 @@
 <?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'node_profil_redacteur_form'
+  || $form_id == 'node_profil_redacteur_edit_form'){
+    $form['field_social_accounts']['#cardinality_multiple'] = false;
+
+    if (isset($form['field_social_accounts']['widget'])
+    && is_array($form['field_social_accounts']['widget'])){
+      $form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
+
+      foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
+        if (isset($value['value']['#title'])) {
+          switch ($key){
+            case '0':
+              $value['value']['#title'] = t('Twitter account');
+              break;
+            case '1':
+              $value['value']['#title'] = t('LinkedIn account');
+              break;
+            case '2':
+              $value['value']['#title'] = t('Viadeo account');
+              break;
+            case '3':
+              $value['value']['#title'] = t('Google + account');
+              break;
+          }
+          $value['value']['#title_display'] = 'before';
+        }
+        if (isset($value['_weight'])){
+          $value['_weight']['#access'] = false;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-uuid: a3f7fa4f-ea89-481f-b304-4ed313980be4
+uuid: e351be12-5535-42fc-9c00-f9ef1e5e914c
 langcode: fr
 status: true
 dependencies:
@@ -12,7 +12,7 @@ third_party_settings:
   migrate_plus:
     migration_group: blogpost
 _core:
-  default_config_hash: VAaO2pWfX-N3mY2ySJ_agETRBt0zOiB2424S5KmKv8k
+  default_config_hash: hl4KoYSFFSAaj6cvsqERDJkoXutt1_BUKMfDou2gqrY
 id: blogpost_media
 migration_tags: null
 label: 'Blog posts medias'
@@ -25,7 +25,7 @@ process:
   langcode:
     plugin: default_value
     default_value: und
-  name : filename
+  name: filename
   uid:
     plugin: default_value
     default_value: 1
@@ -38,10 +38,6 @@ process:
     plugin: migration
     migration: blogpost_image
     source: image_info
-  #title: field_image_title
-  #alt: field_image_alt
-  #width: field_image_width
-  #height: field_image_height
 destination:
   plugin: 'entity:media'
 template: null
