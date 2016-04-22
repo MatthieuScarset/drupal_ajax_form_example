@@ -1,0 +1,10 @@
+oab_agence:
+  version: VERSION
+  js:
+    js/markers.js: {} 
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyBt9DyqcmbFirrJ1iicRr6NQqwr7XjgecQ&callback=initMap : { type: external }
+    http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js : { type: external }   
+  css:
+    theme:
+      css/map_offices.css: {}
+      css/form_search_offices.css: {}
