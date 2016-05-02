@@ -1,15 +1,9 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\address\Plugin\Validation\Constraint\CountryConstraintValidatorTest.
- */
-
 namespace Drupal\Tests\address\Unit\Plugin\Validation\Constraint;
 
 use Drupal\address\Plugin\Validation\Constraint\CountryConstraint;
 use Drupal\address\Plugin\Validation\Constraint\CountryConstraintValidator;
-use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
 /**
