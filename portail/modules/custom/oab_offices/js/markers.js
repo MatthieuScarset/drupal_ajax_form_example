@@ -15,7 +15,7 @@
 				  width: "215px"
 				 },
 				closeBoxMargin: "10px 10px 2px 2px",
-				closeBoxURL: "/modules/custom/oab_agence/images/map-close.png",
+				closeBoxURL: "/modules/custom/oab_offices/images/map-close.png",
 	        	infoBoxClearance: new google.maps.Size(1, 1),
 				isHidden: false,
 				pane: "floatPane",
@@ -25,7 +25,7 @@
 		
 		google.maps.event.addListener(infobox,'closeclick',function(){
 			for(var idx = 0; idx < markers.length; idx++){
-				markers[idx].setIcon("/modules/custom/oab_agence/images/marker-obs.png");
+				markers[idx].setIcon("/modules/custom/oab_offices/images/marker-obs.png");
 			}
 		});
 				
@@ -41,16 +41,16 @@
 		            map: map,
 				    title: office.title,
 				    text: office.textInfoBox,
-				    icon: "/modules/custom/oab_agence/images/marker-obs.png"
+				    icon: "/modules/custom/oab_offices/images/marker-obs.png"
 		        });
 				markers.push(marker);
 				
 				google.maps.event.addListener(marker, 'click', function() {
 					infobox.setContent(marker.text);
 					for(var idx = 0; idx < markers.length; idx++){
-						markers[idx].setIcon("/modules/custom/oab_agence/images/marker-obs.png");
+						markers[idx].setIcon("/modules/custom/oab_offices/images/marker-obs.png");
 					}
-					marker.setIcon("/modules/custom/oab_agence/images/marker-obs-hover.png");
+					marker.setIcon("/modules/custom/oab_offices/images/marker-obs-hover.png");
 			        infobox.open(map, marker);
 			    });
 				

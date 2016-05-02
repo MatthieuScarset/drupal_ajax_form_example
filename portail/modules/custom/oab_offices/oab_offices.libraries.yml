@@ -1,4 +1,4 @@
-oab_agence:
+oab_offices:
   version: VERSION
   js:
     js/markers.js: {} 

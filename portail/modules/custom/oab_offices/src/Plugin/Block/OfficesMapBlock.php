@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_agence\Plugin\Block;
+namespace Drupal\oab_offices\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormBuilderInterface;
@@ -46,10 +46,10 @@ class OfficesMapBlock extends BlockBase {
     	'#regions' => $regions,
     	'#regions_countries' => $regions_countries,
     	'#countries_name' => $countriesNames,
-    	'#theme' => 'oab_agence',
+    	'#theme' => 'oab_offices',
     	'#attached' => array(
     			'library' =>  array(
-						          'oab_agence/oab_agence'
+						          'oab_offices/oab_offices'
 						        ),
     			'drupalSettings' =>  array(
     					'contact_offices' => $offices,
