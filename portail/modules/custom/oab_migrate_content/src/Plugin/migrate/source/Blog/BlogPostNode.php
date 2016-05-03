@@ -147,6 +147,7 @@ class BlogPostNode extends SqlBase {
     // path
     $url_source = 'node/' . $row->getSourceProperty('nid');
     $path_query = $this->select('url_alias', 'ua')
+      ->fields('ua')
       ->condition('ua.source', $url_source, '=');
 
     $path_results = $path_query->execute()->fetchObject();
