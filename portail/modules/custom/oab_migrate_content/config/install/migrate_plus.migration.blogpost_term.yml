@@ -4,10 +4,7 @@ dependencies:
   module:
     - migrate_plus
     - node
-    - oab_migrate_content
-third_party_settings:
-  migrate_plus:
-    migration_group: blogpost
+migration_group: blogpost
 id: blogpost_term
 migration_tags: null
 label: Blog posts terms
@@ -25,6 +22,6 @@ process:
     source: parent
   weight: weight
 destination:
-  plugin: 'entity:taxonomy_term'
+  plugin: entity:taxonomy_term
 template: null
 migration_dependencies: {  }

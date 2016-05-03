@@ -35,10 +35,6 @@ class OfficeNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    /*$query->join('location_instance', 'li', 'li.nid = n.nid');
-    $query->join('location', 'l', 'l.lid = li.lid');
-    $query->fields('n', ['nid', 'title'])
-    ->fields('l', ['latitude', 'longitude', 'street', 'city', 'additional', 'postal_code', 'country'])*/
     ->fields('n', ['nid', 'title'])
     ->condition('n.type', 'content_presence_worldwide', '=');
     return $query;
