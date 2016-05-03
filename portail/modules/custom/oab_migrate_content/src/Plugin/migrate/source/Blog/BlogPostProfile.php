@@ -32,7 +32,8 @@ class BlogPostProfile extends SqlBase {
     $query = $this->select('users', 'u');
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
     $query->fields('u', ['uid'])
-    ->condition('ur.rid', 4, '=');
+    ->condition('ur.rid', 4, '=')
+    ->condition('u.uid', 1, '!=');
     return $query;
   }
 
@@ -197,7 +198,8 @@ class BlogPostProfile extends SqlBase {
     // path
     $url_source = 'user/' . $row->getSourceProperty('uid');
     $path_query = $this->select('url_alias', 'ua')
-      ->condition('ua.source', $url_source, '=');
+      ->fields('ua')
+      ->condition('ua.source', $url_source, 'LIKE');
 
     $path_results = $path_query->execute()->fetchObject();
 
