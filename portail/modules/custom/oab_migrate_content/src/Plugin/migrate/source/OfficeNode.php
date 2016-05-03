@@ -7,6 +7,7 @@
 
 namespace Drupal\oab_migrate_content\Plugin\migrate\source;
 
+use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
@@ -127,6 +128,8 @@ class OfficeNode extends SqlBase {
         }
       }
     }
+
+    $row->setSourceProperty('path', '/' . $row->getSourceProperty('title'));
 
     return parent::prepareRow($row);
   }

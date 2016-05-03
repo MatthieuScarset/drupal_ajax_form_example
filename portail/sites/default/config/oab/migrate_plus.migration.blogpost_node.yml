@@ -1,13 +1,13 @@
+uuid: e22a0213-c7c0-4f6e-a595-94a2f4f3dd6d
 langcode: fr
 status: true
-dependencies:
-  module:
-    - migrate_plus
-    - node
-migration_group: blogpost
+dependencies: {  }
+_core:
+  default_config_hash: RaegzafWKmkcYHzyhxqkCfXuPwjEsXAdLFQ1OlnjXBQ
 id: blogpost_node
 migration_tags: null
-label: Blog posts nodes
+migration_group: blogpost
+label: 'Blog posts nodes'
 source:
   plugin: blogpost_node
 process:
@@ -26,7 +26,7 @@ process:
   field_body/format:
     plugin: default_value
     default_value: full_html
-  field_blog: 
+  field_blog:
     plugin: migration
     migration: blogpost_term
     source: categories
@@ -36,8 +36,7 @@ process:
     source: images
   path: path
 destination:
-  plugin: entity:node
-template: null
+  plugin: 'entity:node'
 migration_dependencies:
   required:
     - blogpost_term

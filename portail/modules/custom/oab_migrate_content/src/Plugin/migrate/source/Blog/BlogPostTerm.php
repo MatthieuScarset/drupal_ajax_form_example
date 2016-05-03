@@ -2,6 +2,7 @@
 
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
 
+use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 

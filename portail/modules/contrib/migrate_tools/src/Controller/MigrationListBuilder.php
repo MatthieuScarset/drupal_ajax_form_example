@@ -136,7 +136,7 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
     //$migrate_last_imported_store = \Drupal::keyValue('migrate_last_imported');
     //$last_imported =  $migrate_last_imported_store->get($migration->id(), FALSE);
     //if ($last_imported) {
-    //  /** @var DateFormatter $date_formatter */
+      /** @var DateFormatter $date_formatter */
     //  $date_formatter = \Drupal::service('date.formatter');
     //  $row['last_imported'] = $date_formatter->format($last_imported / 1000,
     //    'custom', 'Y-m-d H:i:s');

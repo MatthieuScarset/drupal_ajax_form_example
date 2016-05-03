@@ -1,0 +1,43 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+    - oab_migrate_content
+migration_group: blogpost
+id: blogpost_profile_media
+migration_tags: null
+label: Blog posts profile medias
+source:
+  plugin: blogpost_profile_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: image
+  langcode:
+    plugin: default_value
+    default_value: und
+  name : filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_image:
+    plugin: migration
+    migration: blogpost_profile_image
+    source: image_info
+  #title: field_image_title
+  #alt: field_image_alt
+  #width: field_image_width
+  #height: field_image_height
+destination:
+  plugin: entity:media
+template: null
+migration_dependencies:
+  required:
+    - blogpost_profile_image

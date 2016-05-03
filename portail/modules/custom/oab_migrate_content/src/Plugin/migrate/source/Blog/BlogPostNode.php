@@ -2,6 +2,7 @@
 
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
 
+use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
 
@@ -141,6 +142,17 @@ class BlogPostNode extends SqlBase {
         }
       }
       $row->setSourceProperty('images', $images);
+    }
+
+    // path
+    $url_source = 'node/' . $row->getSourceProperty('nid');
+    $path_query = $this->select('url_alias', 'ua')
+      ->condition('ua.source', $url_source, '=');
+
+    $path_results = $path_query->execute()->fetchObject();
+
+    if (is_object($path_results)){
+      $row->setSourceProperty('path', '/' . $path_results->alias);
     }
 
     return parent::prepareRow($row);
