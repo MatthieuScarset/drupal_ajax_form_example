@@ -5,9 +5,12 @@
  * Command-line tools to aid performing and developing migrations.
  */
 
+use Drupal\Component\Plugin\Exception\PluginException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Utility\Unicode;
-use Drupal\migrate\Entity\Migration;
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\Core\Database\ConnectionNotDefinedException;
+use Drupal\migrate\Exception\RequirementsException;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate_tools\MigrateExecutable;
 use Drupal\migrate_tools\DrushLogMigrateMessage;
 use Drupal\Core\Datetime\DateFormatter;
@@ -177,8 +180,9 @@ function drush_migrate_tools_migrate_status($migration_names = '') {
         }
       }
       catch (Exception $e) {
-        drush_log(dt('Could not retrieve source count from @migration',
-                      ['@migration' => $migration_id]));
+        drush_print($e->getMessage());
+        drush_log(dt('Could not retrieve source count from @migration: @message',
+          ['@migration' => $migration_id, '@message' => $e->getMessage()]));
         $source_rows = dt('N/A');
         $unprocessed = dt('N/A');
       }
@@ -236,7 +240,7 @@ function drush_migrate_tools_migrate_import($migration_names = '') {
  * Executes a single migration. If the --execute-dependencies option was given,
  * the migration's dependencies will also be executed first.
  *
- * @param \Drupal\migrate\Entity\MigrationInterface $migration
+ * @param \Drupal\migrate\Plugin\MigrationInterface $migration
  *  The migration to execute.
  * @param string $migration_id
  *  The migration ID (not used, just an artifact of array_walk()).
@@ -247,9 +251,12 @@ function _drush_migrate_tools_execute_migration(MigrationInterface $migration, $
   $log = new DrushLogMigrateMessage();
 
   if (drush_get_option('execute-dependencies')) {
-    $required_migrations = \Drupal::entityTypeManager()->getStorage('migration')->loadMultiple($migration->get('requirements'));
-    $dependency_options = array_merge($options, ['is_dependency' => TRUE]);
-    array_walk($required_migrations, __FUNCTION__, $dependency_options);
+    if ($required_IDS = $migration->get('requirements')) {
+      $manager = \Drupal::service('plugin.manager.config_entity_migration');
+      $required_migrations = $manager->createInstances($required_IDS);
+      $dependency_options = array_merge($options, ['is_dependency' => TRUE]);
+      array_walk($required_migrations, __FUNCTION__, $dependency_options);
+    }
   }
   if ($options['force']) {
     $migration->set('requirements', []);
@@ -298,8 +305,8 @@ function drush_migrate_tools_migrate_rollback($migration_names = '') {
  * @param string $migration_id
  */
 function drush_migrate_tools_migrate_stop($migration_id = '') {
-  /** @var Migration $migration */
-  $migration = Migration::load($migration_id);
+  /** @var MigrationInterface $migration */
+  $migration = \Drupal::service('plugin.manager.migration')->createInstance($migration_id);
   if ($migration) {
     $status = $migration->getStatus();
     switch ($status) {
@@ -327,8 +334,8 @@ function drush_migrate_tools_migrate_stop($migration_id = '') {
  * @param string $migration_id
  */
 function drush_migrate_tools_migrate_reset_status($migration_id = '') {
-  /** @var Migration $migration */
-  $migration = Migration::load($migration_id);
+  /** @var MigrationInterface $migration */
+  $migration = \Drupal::service('plugin.manager.migration')->createInstance($migration_id);
   if ($migration) {
     $status = $migration->getStatus();
     if ($status == MigrationInterface::STATUS_IDLE) {
@@ -348,8 +355,8 @@ function drush_migrate_tools_migrate_reset_status($migration_id = '') {
  * @param string $migration_id
  */
 function drush_migrate_tools_migrate_messages($migration_id) {
-  /** @var Migration $migration */
-  $migration = Migration::load($migration_id);
+  /** @var MigrationInterface $migration */
+  $migration = \Drupal::service('plugin.manager.migration')->createInstance($migration_id);
   if ($migration) {
     $map = $migration->getIdMap();
     $first = TRUE;
@@ -393,8 +400,8 @@ function drush_migrate_tools_migrate_messages($migration_id) {
  * @param string $migration_id
  */
 function drush_migrate_tools_migrate_fields_source($migration_id) {
-  /** @var Migration $migration */
-  $migration = Migration::load($migration_id);
+  /** @var MigrationInterface $migration */
+  $migration = \Drupal::service('plugin.manager.migration')->createInstance($migration_id);
   if ($migration) {
     $source = $migration->getSourcePlugin();
     $table = [];
@@ -420,18 +427,6 @@ function drush_migrate_tools_migrate_fields_source($migration_id) {
  *   An array keyed by migration group, each value containing an array of migrations.
  */
 function drush_migrate_tools_migration_list($group_id = '', $migration_ids = '') {
-  $query = \Drupal::entityQuery('migration');
-  if ($group_id) {
-    $query->condition('third_party_settings.migrate_plus.migration_group', $group_id);
-  }
-  $names = $query->execute();
-
-  // Order the migrations according to their dependencies.
-  /** @var MigrationInterface[] $migrations */
-  $migrations = \Drupal::entityTypeManager()
-     ->getStorage('migration')
-     ->loadMultiple($names);
-
   if (!empty($migration_ids)) {
     $migration_ids = explode(',', Unicode::strtolower($migration_ids));
   }
@@ -439,17 +434,19 @@ function drush_migrate_tools_migration_list($group_id = '', $migration_ids = '')
     $migration_ids = [];
   }
 
-  $return = [];
-  foreach ($migrations as $migration_id => $migration) {
-    if (empty($migration_ids) || in_array(Unicode::strtolower($migration_id), $migration_ids)) {
-      $group_id = $migration->getThirdPartySetting('migrate_plus', 'migration_group');
-      if (!empty($group_id)) {
-        $return[$group_id][$migration_id] = $migration;
-      }
-      else {
-        $return['default'][$migration_id] = $migration;
+  $manager = \Drupal::service('plugin.manager.config_entity_migration');
+  $plugins = $manager->createInstances([]);
+  $migrations = [];
+  foreach ($plugins as $id => $migration) {
+    $configured_group_id = $migration->get('migration_group');
+    if (empty($configured_group_id)) {
+      $configured_group_id = 'default';
+    }
+    if (empty($group_id) || $group_id == $configured_group_id) {
+      if (empty($migration_ids) || in_array(Unicode::strtolower($id), $migration_ids)) {
+        $migrations[$configured_group_id][$id] = $migration;
       }
     }
   }
-  return $return;
+  return $migrations;
 }

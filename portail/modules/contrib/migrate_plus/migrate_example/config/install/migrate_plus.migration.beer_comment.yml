@@ -1,9 +1,7 @@
 # Migration configuration for beer comments. No new concepts here.
 id: beer_comment
 label: Comments on beers
-third_party_settings:
-  migrate_plus:
-    migration_group: beer
+migration_group: beer
 source:
   plugin: beer_comment
 destination:

@@ -8,7 +8,6 @@
 namespace Drupal\migrate_plus\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\migrate\Entity\MigrationInterface;
 
 /**
  * Defines the Migration Group entity.

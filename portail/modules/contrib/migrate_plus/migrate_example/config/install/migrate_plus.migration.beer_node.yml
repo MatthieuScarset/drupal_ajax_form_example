@@ -1,9 +1,7 @@
 # Migration configuration for beer content.
 id: beer_node
 label: Beers of the world
-third_party_settings:
-  migrate_plus:
-    migration_group: beer
+migration_group: beer
 source:
   plugin: beer_node
 destination:

@@ -12,7 +12,7 @@ use Drupal\migrate\Event\MigrateRollbackEvent;
 use Drupal\migrate\Event\MigrateRowDeleteEvent;
 use Drupal\migrate\MigrateExecutable as MigrateExecutableBase;
 use Drupal\migrate\MigrateMessageInterface;
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\Plugin\MigrateIdMapInterface;
 use Drupal\migrate\Event\MigrateEvents;
@@ -79,6 +79,11 @@ class MigrateExecutable extends MigrateExecutableBase {
    */
   protected $preExistingItem = FALSE;
 
+  /**
+   * List of event listeners we have registered.
+   *
+   * @var array
+   */
   protected $listeners = [];
 
   /**
@@ -115,14 +120,18 @@ class MigrateExecutable extends MigrateExecutableBase {
    *   The map event.
    */
   public function onMapSave(MigrateMapSaveEvent $event) {
-    $fields = $event->getFields();
-    // Distinguish between creation and update.
-    if ($fields['source_row_status'] == MigrateIdMapInterface::STATUS_IMPORTED &&
-        $this->preExistingItem) {
-      $this->saveCounters[MigrateIdMapInterface::STATUS_NEEDS_UPDATE]++;
-    }
-    else {
-      $this->saveCounters[$fields['source_row_status']]++;
+    // Only count saves for this migration.
+    if ($event->getMap()->getQualifiedMapTableName() == $this->migration->getIdMap()->getQualifiedMapTableName()) {
+      $fields = $event->getFields();
+      // Distinguish between creation and update.
+      if ($fields['source_row_status'] == MigrateIdMapInterface::STATUS_IMPORTED &&
+        $this->preExistingItem
+      ) {
+        $this->saveCounters[MigrateIdMapInterface::STATUS_NEEDS_UPDATE]++;
+      }
+      else {
+        $this->saveCounters[$fields['source_row_status']]++;
+      }
     }
   }
 

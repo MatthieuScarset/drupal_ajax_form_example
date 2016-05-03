@@ -5,7 +5,7 @@
  * Provides enhancements for implementing and managing migrations.
  */
 
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Row;
 use Drupal\migrate_plus\Entity\MigrationGroup;
@@ -13,17 +13,15 @@ use Drupal\migrate_plus\Event\MigrateEvents;
 use Drupal\migrate_plus\Event\MigratePrepareRowEvent;
 
 /**
- * Implements hook_ENTITY_TYPE_load().
+ * Implements hook_migration_plugins_alter().
  */
-function migrate_plus_migration_load($migrations) {
-  /** @var MigrationInterface $migration */
-  foreach ($migrations as $migration) {
-    // If we are pointing to a valid group, merge its properties into ours.
-    $migration_group = $migration->getThirdPartySetting('migrate_plus', 'migration_group');
-    if (empty($migration_group)) {
-      continue;
+function migrate_plus_migration_plugins_alter(array &$migrations) {
+  /** @var \Drupal\migrate\Plugin\MigrationInterface $migration */
+  foreach ($migrations as $id => $migration) {
+    if (empty($migration['migration_group'])) {
+      $migration['migration_group'] = 'default';
     }
-    $group = MigrationGroup::load($migration_group);
+    $group = MigrationGroup::load($migration['migration_group']);
     if (empty($group)) {
       continue;
     }
@@ -32,21 +30,20 @@ function migrate_plus_migration_load($migrations) {
       continue;
     }
     foreach ($shared_configuration as $key => $group_value) {
-      $migration_value = $migration->get($key);
-      // Where both the migration and the group provide arrays,
-      // replace recursively (so each key collision is resolved in favor
-      // of the migration).
+      $migration_value = $migration[$key];
+      // Where both the migration and the group provide arrays, replace
+      // recursively (so each key collision is resolved in favor of the
+      // migration).
       if (is_array($migration_value) && is_array($group_value)) {
         $merged_values = array_replace_recursive($group_value, $migration_value);
-        $migration->set($key, $merged_values);
+        $migrations[$id][$key] = $merged_values;
       }
-      // Where the group provides a value the migration doesn't, use
-      // the group value.
-      elseif (is_null($migration_value)) {
-        $migration->set($key, $group_value);
-      }
-      // Otherwise, the existing migration value overrides the group
+      // Where the group provides a value the migration doesn't, use the group
       // value.
+      elseif (is_null($migration_value)) {
+        $migrations[$id][$key] = $group_value;
+      }
+      // Otherwise, the existing migration value overrides the group value.
     }
   }
 }

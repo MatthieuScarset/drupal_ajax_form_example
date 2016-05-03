@@ -12,7 +12,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\migrate_plus\Entity\MigrationGroup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 
 /**
  * Class MigrationFormBase.

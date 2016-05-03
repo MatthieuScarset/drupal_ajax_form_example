@@ -7,7 +7,7 @@
 
 namespace Drupal\migrate_plus\Event;
 
-use Drupal\migrate\Entity\MigrationInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\migrate\Plugin\MigrateSourceInterface;
 use Drupal\migrate\Row;
 use Symfony\Component\EventDispatcher\Event;
@@ -25,16 +25,16 @@ class MigratePrepareRowEvent extends Event {
   protected $row;
 
   /**
-   * Migration entity.
+   * Migration source plugin.
    *
    * @var \Drupal\migrate\Plugin\MigrateSourceInterface
    */
   protected $source;
 
   /**
-   * Migration entity.
+   * Migration plugin.
    *
-   * @var \Drupal\migrate\Entity\MigrationInterface
+   * @var \Drupal\migrate\Plugin\MigrationInterface
    */
   protected $migration;
 
@@ -47,7 +47,7 @@ class MigratePrepareRowEvent extends Event {
    * @param \Drupal\migrate\Plugin\MigrateSourceInterface $source
    *   Source plugin that is the source of the event.
    *
-   * @param \Drupal\migrate\Entity\MigrationInterface $migration
+   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
    *   Migration entity.
    */
   public function __construct(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
@@ -77,9 +77,9 @@ class MigratePrepareRowEvent extends Event {
   }
 
   /**
-   * Gets the migration entity.
+   * Gets the migration plugin.
    *
-   * @return \Drupal\migrate\Entity\MigrationInterface
+   * @return \Drupal\migrate\Plugin\MigrationInterface
    *   The migration entity being imported.
    */
   public function getMigration() {
