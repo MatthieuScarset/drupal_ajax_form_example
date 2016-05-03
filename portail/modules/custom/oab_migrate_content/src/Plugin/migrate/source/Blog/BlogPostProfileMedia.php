@@ -10,10 +10,10 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_media"
+ *   id = "blogpost_profile_media"
  * )
  */
-class BlogPostMedia extends SqlBase {
+class BlogPostProfileMedia extends SqlBase {
 
   /**
    * {@inheritdoc}
@@ -31,19 +31,17 @@ class BlogPostMedia extends SqlBase {
      * below.
      */
     $query = $this->select('file_managed', 'm');
-    //$query->join('field_data_field_folder', 'ff', 'ff.entity_id = f.fid');
+    $query->distinct();
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = m.fid');
-    $query->join('node', 'n', 'n.nid = fi.entity_id');
+    $query->join('profile', 'p', 'p.pid = fi.entity_id');
+    $query->join('users', 'u', 'u.uid = p.uid');
+    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
     $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
     $field1_alias = $query->addField('m', 'fid', 'mid');
-    //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
-    //$query->condition('f.fid', 1757)
-    $query->condition('n.type', 'blog_post')
-    ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
-    //->condition('n.nid', array(11430, 11429), 'IN');
-    //->orderBy('m.fid', 'ASC');
-    //->range(0, 1);
+    $query->condition('fi.entity_type', 'profile2')
+    ->condition('fi.bundle', 'main')
+    ->condition('ur.rid', 4, '=')
+    ->orderBy('m.fid', 'DESC');
 
     return $query;
   }
@@ -81,11 +79,15 @@ class BlogPostMedia extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+    $row->setSourceProperty('image_info', [$row->getSourceProperty('mid')]);
+
+    /*
     // récupération de la balise alt et title
     $image_query = $this->select('field_data_field_image', 'fi');
     $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
     ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
-    ->condition('fi.bundle', 'blog_post', '=');
+    ->condition('fi.entity_type', 'profile2')
+    ->condition('fi.bundle', 'main');
 
     $image_results = $image_query->execute()->fetchAll();
 
@@ -96,22 +98,15 @@ class BlogPostMedia extends SqlBase {
         if (is_object($image_result)){
           $image_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
-          //$row->setSourceProperty('field_image_title', $image_result->field_image_title);
-          //$row->setSourceProperty('field_image_width', $image_result->field_image_width);
-          //$row->setSourceProperty('field_image_height', $image_result->field_image_height);
         }
         elseif (is_array($image_result)){
           $image_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
-          //$row->setSourceProperty('field_image_title', $image_result['field_image_title']);
-          //$row->setSourceProperty('field_image_width', $image_result['field_image_width']);
-          //$row->setSourceProperty('field_image_height', $image_result['field_image_height']);
         }
         
       }
     }
+    */
 
     return parent::prepareRow($row);
   }

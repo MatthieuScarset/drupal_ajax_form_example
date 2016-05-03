@@ -40,7 +40,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
 	{
 		// declaration des templates
 		$data = array();
-		$data[0] = array(
+		/*$data[0] = array(
 								'title' => t('1 column'),
 								'description' => t('1 column template'),
 								'html' => \Drupal::theme()->render('template_1_column', array()),
@@ -136,7 +136,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
 								'html' => \Drupal::theme()->render('template_background_light_grey', array()),
 								'image' => 'background_light_grey.gif'
 						);
-		
+		*/
 		$attachments['#attached']['drupalSettings']['oab_templates'] = $data;
 	}
 }

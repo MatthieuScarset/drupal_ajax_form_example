@@ -1,0 +1,43 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+    - oab_migrate_content
+migration_group: blogpost
+id: blogpost_profile
+migration_tags: null
+label: 'Blog posts profiles'
+source:
+  plugin: blogpost_profile
+process:
+  type:
+    plugin: default_value
+    default_value: profil_redacteur
+  uid:
+    plugin: default_value
+    default_value: 1
+  langcode: langcode
+  title: title
+  body/value: field_txt_catcher
+  field_first_name/value: field_first_name
+  field_last_name/value: field_last_name
+  field_job/value: field_profil
+  field_social_accounts: field_social_accounts
+  #field_job:
+    #langcode: en
+    #value: field_profil
+  #field_job/value: field_profil
+  field_location/value: field_location
+  field_image:
+    plugin: migration
+    migration: blogpost_profile_media
+    source: images
+  path: path
+destination:
+  plugin: entity:node
+template: null
+migration_dependencies:
+  required:
+    - blogpost_profile_media
