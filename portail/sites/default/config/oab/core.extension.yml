@@ -55,6 +55,7 @@ module:
   oab_media_browser: 0
   oab_migrate_content: 0
   oab_stephanie: 0
+  oab_text: 0
   options: 0
   page_cache: 0
   path: 0

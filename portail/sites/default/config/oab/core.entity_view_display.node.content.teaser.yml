@@ -1,0 +1,20 @@
+uuid: 59696f0d-f14b-4de5-b411-472a8dc66156
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.content.field_content_field
+    - node.type.content
+  module:
+    - user
+id: node.content.teaser
+targetEntityType: node
+bundle: content
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_content_field: true
+  langcode: true

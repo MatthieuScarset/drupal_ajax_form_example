@@ -1,0 +1,109 @@
+uuid: c0a4a2ab-6aa4-4666-bf13-1ade912cb338
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.content.field_blog
+    - field.field.node.content.field_content_field
+    - field.field.node.content.field_end_date
+    - field.field.node.content.field_image
+    - field.field.node.content.field_start_date
+    - field.field.node.content.field_state
+    - field.field.node.content.field_type
+    - node.type.content
+  module:
+    - datetime
+    - oab_text
+    - path
+    - workflowfield
+id: node.content.default
+targetEntityType: node
+bundle: content
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+  field_blog:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_content_field:
+    weight: 11
+    settings:
+      rows: '9'
+      placeholder: ''
+    third_party_settings: {  }
+    type: oab_text_textfield
+  field_end_date:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_image:
+    weight: 12
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+  field_start_date:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_state:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: workflow_default
+  field_type:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  langcode:
+    type: language_select
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 8
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 9
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
