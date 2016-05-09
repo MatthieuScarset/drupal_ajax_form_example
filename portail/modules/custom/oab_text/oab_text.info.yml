@@ -1,0 +1,11 @@
+name: OAB Text
+description: module de gestion du texte
+package: OAB
+core: 8.x
+version: 8.x-1.0-alpha1
+type: module
+hidden: false
+dependencies:
+  - text
+enforced:
+  - oab_text

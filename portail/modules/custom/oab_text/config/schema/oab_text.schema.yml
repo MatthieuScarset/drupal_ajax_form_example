@@ -1,0 +1,30 @@
+# Schema for the configuration files of the text module.
+oab_text.settings:
+  type: config_object
+  label: 'Text settings'
+  mapping:
+    default_summary_length:
+      type: integer
+      label: 'Default summary length'
+
+field.storage_settings.oab_text:
+  label: 'Text OAB (formatted, long) settings'
+  type: mapping
+
+field.field_settings.oab_text:
+  label: 'Text OAB (formatted, long) settings'
+  type: mapping
+
+field.value.oab_text:
+  type: mapping
+  label: 'Default value'
+  mapping:
+    value:
+      type: text
+      label: 'Value'
+    format:
+      type: string
+      label: 'Text format'
+    zone:
+      type: string
+      label: 'Displayed zone'
