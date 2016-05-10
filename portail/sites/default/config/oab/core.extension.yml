@@ -54,6 +54,7 @@ module:
   oab_frontoffice: 0
   oab_media_browser: 0
   oab_migrate_content: 0
+  oab_offices: 0
   oab_stephanie: 0
   oab_text: 0
   options: 0

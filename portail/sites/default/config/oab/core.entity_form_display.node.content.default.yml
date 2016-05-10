@@ -28,12 +28,9 @@ content:
     third_party_settings: {  }
   field_blog:
     weight: 3
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
   field_content_field:
     weight: 11
     settings:
@@ -64,11 +61,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
-  field_type:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
   langcode:
     type: language_select
     weight: 2
@@ -106,4 +98,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_type: true
