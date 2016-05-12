@@ -1,0 +1,29 @@
+uuid: e9a2406e-00f4-4bba-9e54-25bfcc22e718
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.content_type_taxonomy.field_nom_machine
+    - taxonomy.vocabulary.content_type_taxonomy
+  module:
+    - text
+id: taxonomy_term.content_type_taxonomy.default
+targetEntityType: taxonomy_term
+bundle: content_type_taxonomy
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  field_nom_machine:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  langcode: true

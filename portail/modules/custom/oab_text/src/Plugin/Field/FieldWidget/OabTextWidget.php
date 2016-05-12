@@ -45,11 +45,36 @@ class OabTextWidget extends TextareaWidget {
   function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
+    //RUBYPORTAILOBS-2431
+    //gestion de la liste des options selon le type de contenu choisi (taxo type)
+    $options = array();
+    if(isset($_GET['content_type_tid'])) // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
+    {
+      $tid = $_GET['content_type_tid'];
+      //on charge le terme concerné
+      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      //on vérifie que le machine_name a bien été renseigné
+      if(isset($term->field_nom_machine) && !empty($term->field_nom_machine->value))
+      {
+        //définition des zones selon la taxo "type de contenu"
+        switch ($term->field_nom_machine->value)
+        {
+          case 'magazine' :
+            $options = array('Entete', 'Haut 1', 'Haut 2', 'Haut 3', 'Milieu', 'Bas');
+            break;
+          case 'blog_post' :
+            $options = array('Entete', 'Haut gauche', 'Haut droit', 'Milieu', 'Bas 1', 'Bas 2', 'Bas 3');
+            break;
+        }
+      }
+    }
+
+
     $element['zone'] = array(
       '#type' => 'select',
       '#title' => t('Zone'),
       '#default_value' => $items[$delta]->zone,
-      '#options' => ['top', 'left', 'right', 'bottom'],
+      '#options' => $options,
       '#weight' => 10,
     );
 

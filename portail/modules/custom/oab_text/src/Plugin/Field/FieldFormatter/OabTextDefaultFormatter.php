@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\text\Plugin\Field\FieldFormatter;
+namespace Drupal\oab_text\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;

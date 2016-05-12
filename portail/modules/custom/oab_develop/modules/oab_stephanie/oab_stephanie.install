@@ -12,3 +12,10 @@ function oab_stephanie_install() {
 function oab_stephanie_update_8001() {
 	include_once("updates/update_8001.inc");
 }
+
+/**
+ *  Création termes de taxo type de contenu */
+
+function oab_stephanie_update_8002() {
+	include_once("updates/update_8002.inc");
+}

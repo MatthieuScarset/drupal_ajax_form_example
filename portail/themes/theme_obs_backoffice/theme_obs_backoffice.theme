@@ -68,11 +68,11 @@ function theme_obs_backoffice_preprocess_node_add_list(&$variables) {
     // RUBYPORTAILOBS-2430
     if(isset($variables['types']['content']))
     {
-      $content_types_terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadTree('content_type_taxonomy');
+      $content_types_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('content_type_taxonomy', 0, null, true);
       foreach($content_types_terms as $type_term)
       {
-          $variables['types'][$type_term->tid]['label'] = $type_term->name;
-          $variables['types'][$type_term->tid]['url'] = \Drupal::url('node.add', array('node_type' => 'content', 'content_type_tid' => $type_term->tid ));
+          $variables['types'][$type_term->tid->value]['label'] = $type_term->name->value;
+          $variables['types'][$type_term->tid->value]['url'] = \Drupal::url('node.add', array('node_type' => 'content', 'content_type_tid' => $type_term->tid->value ));
       }
       unset($variables['types']['content']);
     }

@@ -1,0 +1,19 @@
+uuid: 12c30360-108f-4278-8eec-1b489ede0444
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_nom_machine
+    - taxonomy.vocabulary.content_type_taxonomy
+id: taxonomy_term.content_type_taxonomy.field_nom_machine
+field_name: field_nom_machine
+entity_type: taxonomy_term
+bundle: content_type_taxonomy
+label: 'Nom machine'
+description: 'champ utilisé dans le code du site (identifiant)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
