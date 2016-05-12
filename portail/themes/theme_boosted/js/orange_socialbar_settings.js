@@ -19,9 +19,33 @@ var sharebar_parameters = {
     sms_text: 'Come take a look at this website : http://www.orange.fr !'
 };
 var visible_sharebar_buttons = [
+	{button: 'twitter'},
 	{button: 'linkedin'},
-    {button: 'facebook'},
+	{button: 'googleplus'}
+    {button: 'facebook'},    
+    {button: 'pinterest'},    
+];
+
+var followbar_parameters = {
+	background_color: 'black',
+  	layout: 'horizontal',
+  	auto_load: true,
+  	locale: 'fr_FR',
+  	page_facebook: 'https://www.facebook.com/orangebusiness',
+  	page_twitter: 'https://twitter.com/orangebusiness',
+  	page_googleplus: 'https://plus.google.com/+orange/posts',
+  	page_linkedin: 'http://www.linkedin.com/company/orange-business-services',
+  	page_pinterest: 'http://pinterest.com/orangebusiness/',
+  	page_youtube: 'http://www.youtube.com/user/orangebusiness',
+  	page_dailymotion: 'http://www.dailymotion.com/orangebusiness'
+  		
+};
+var visible_followbar_buttons = [
     {button: 'twitter'},
-    {button: 'pinterest'},
-    {button: 'googleplus'}
+    {button: 'linkedin'},
+    {button: 'googleplus'},
+    {button: 'facebook'},
+    {button: 'dailymotion'},
+    {button: 'youtube'},    
+    {button: 'pinterest'}
 ];

@@ -11,11 +11,19 @@ global-styling:
       css/components/maps/agence.css: {}
       css/components/contact.css: {}
       css/components/pre_content.css: {}
+      css/components/footer.css: {}
   js:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
     js/boosted.js: {}
     #js/header.js: {}
+    
+      
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once
+        
 socialbar:
   version: VERSION
   css:

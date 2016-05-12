@@ -1,0 +1,23 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_cartography
+    - system
+  theme:
+    - theme_boosted
+id: righticonblock
+theme: theme_boosted
+region: header
+weight: null
+provider: null
+plugin: null
+settings:
+  id: right_icon_block
+  label: 'Right Icons Block'
+  provider: oab_cartography
+  label_display: '0'
+  offices_map_custom_text:
+    value: ''
+    format: full_html
+
