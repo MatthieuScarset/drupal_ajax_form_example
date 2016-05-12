@@ -61,6 +61,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
+  field_type:
+    type: options_select
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -98,5 +103,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_type: true
+hidden: {  }
