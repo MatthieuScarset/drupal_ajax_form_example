@@ -45,7 +45,11 @@ function oab_backoffice_form_node_content_form_alter(&$form, FormStateInterface 
   // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
   if(isset($_GET['content_type_tid'])) {
     $tid = $_GET['content_type_tid'];
-    $form['field_type']['#access'] = FALSE;
     $form['field_type']['widget']['#default_value'] = $tid;
   }
+  $form['field_type']['#access'] = FALSE;
+}
+function oab_backoffice_form_node_content_edit_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  $form['field_type']['#access'] = FALSE;
 }

@@ -51,24 +51,26 @@ class OabTextWidget extends TextareaWidget {
     if(isset($_GET['content_type_tid'])) // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
     {
       $tid = $_GET['content_type_tid'];
-      //on charge le terme concerné
-      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
-      //on vérifie que le machine_name a bien été renseigné
-      if(isset($term->field_nom_machine) && !empty($term->field_nom_machine->value))
-      {
-        //définition des zones selon la taxo "type de contenu"
-        switch ($term->field_nom_machine->value)
+    }
+    else
+    {
+      if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $nid = $node->nid->value;
+        $type = $node->field_type->getValue();
+        if(isset($type[0]['target_id']) && !empty($type[0]['target_id']))
         {
-          case 'magazine' :
-            $options = array('Entete', 'Haut 1', 'Haut 2', 'Haut 3', 'Milieu', 'Bas');
-            break;
-          case 'blog_post' :
-            $options = array('Entete', 'Haut gauche', 'Haut droit', 'Milieu', 'Bas 1', 'Bas 2', 'Bas 3');
-            break;
+          $tid = $type[0]['target_id'];
         }
       }
     }
-
+    if(isset($tid) && !empty($tid)) {
+      //on charge le terme concerné
+      $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      //on vérifie que le machine_name a bien été renseigné
+      if (isset($term->field_nom_machine) && !empty($term->field_nom_machine->value)) {
+        $options = $this->getOptionsForContentTypeTerm($term->field_nom_machine->value);
+      }
+    }
 
     $element['zone'] = array(
       '#type' => 'select',
@@ -79,6 +81,22 @@ class OabTextWidget extends TextareaWidget {
     );
 
     return $element;
+  }
+
+  private function getOptionsForContentTypeTerm($machine_name)
+  {
+    //définition des zones selon la taxo "type de contenu"
+    $options = array();
+    switch ($machine_name)
+    {
+      case 'magazine' :
+        $options = array('entete' => 'Entete', "haut1"=> 'Haut 1', "haut2"=> 'Haut 2', "haut3"=> 'Haut 3', "milieu"=> 'Milieu', "bas"=> 'Bas');
+        break;
+      case 'blog_post' :
+        $options = array('entete' => 'Entete', "hautgauche"=>'Haut gauche', "hautdroit"=>'Haut droit', 'milieu' => 'Milieu', 'bas1' => 'Bas 1', 'bas2' => 'Bas 2', 'bas3' => 'Bas 3');
+        break;
+    }
+    return $options;
   }
 
   /**
