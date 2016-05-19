@@ -40,4 +40,62 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
   
   return $suggestions;
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $nid = $node->nid->value;
+    $content_type = $node->bundle();
+    if($content_type == 'content')
+    {
+      $field_type = $node->field_type->getValue();
+      if(isset($field_type[0]['target_id']) && !empty($field_type[0]['target_id'])) {
+        $tid = $field_type[0]['target_id'];
+        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+        //on vérifie que le machine_name a bien été renseigné
+        if (isset($term->field_nom_machine->value) && !empty($term->field_nom_machine->value)) {
+          $nom_machine = $term->field_nom_machine->value;
+          switch ($nom_machine) {
+            case 'magazine' :
+              $suggestions[] = 'node__content_magazine';
+              break;
+            case 'blog_post' :
+              $suggestions[] = 'node__content_blog_post';
+              break;
+          }
+        }
+      }
+    }
+  }
+}
+
+function theme_boosted_preprocess_node(&$variables) {
+
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $nid = $node->nid->value;
+    $content_type = $node->bundle();
+    if ($content_type == 'content') {
+      $zones = array();
+      $count = $node->field_content_field->count();
+      for( $i = 0; $i < $count; $i++)
+      {
+        $item_content = $node->field_content_field->get($i);
+
+        //kprint_r($item_content->get('zone')->getValue());
+        if(!isset($zones[$item_content->get('zone')->getValue()]))
+        {
+          $zones[$item_content->get('zone')->getValue()] = array();
+        }
+        $zones[$item_content->get('zone')->getValue()][] = $item_content->get('value')->getValue();
+      }
+      //kprint_r($zones);
+      $variables['zones'] = $zones;
+    }
+  }
+}
+
+
 ?>

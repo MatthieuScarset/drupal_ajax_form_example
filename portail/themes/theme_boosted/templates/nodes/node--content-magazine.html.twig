@@ -1,0 +1,35 @@
+<div id="content-blog-post">
+    {{ kint(zones) }}
+    <div class="col-lg-12 col-md-12 col-sm-1 entete">
+        {% for content in zones.entete %}
+            {{ content }}
+        {% endfor %}
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-1 bas">
+        <div class="col-lg-3 col-md-3 col-sm-1 haut1">
+            {% for content in zones.haut1 %}
+                {{ content }}
+            {% endfor %}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-1 haut2">
+            {% for content in zones.haut2 %}
+                {{ content }}
+            {% endfor %}
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-1 haut3">
+            {% for content in zones.haut3 %}
+                {{ content }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-1 milieu">
+        {% for content in zones.milieu %}
+            {{ content }}
+        {% endfor %}
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-1 bas">
+        {% for content in zones.bas %}
+            {{ content }}
+        {% endfor %}
+    </div>
+</div>
