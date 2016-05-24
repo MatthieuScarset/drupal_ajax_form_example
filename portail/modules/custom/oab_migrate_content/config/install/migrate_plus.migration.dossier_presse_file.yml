@@ -1,0 +1,26 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+migration_group: dossier_presse
+id: dossier_presse_file
+migration_tags: null
+label: Dossier presse file
+source:
+  plugin: dossier_presse_file
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: entity:file
+template: null
+migration_dependencies: {  }
