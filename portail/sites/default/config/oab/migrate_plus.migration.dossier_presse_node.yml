@@ -1,0 +1,33 @@
+uuid: a5024e5e-b35c-445c-ab2b-4a7e56690873
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: juRSClKY9ikT6HqlXczg7BH_ajqmhg3P1uf_efV6mSs
+id: dossier_presse_node
+migration_tags: null
+migration_group: dossier_presse
+label: 'Dossier presse'
+source:
+  plugin: dossier_presse_node
+process:
+  type:
+    plugin: default_value
+    default_value: simple
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_areas/target_id: field_taxo_area
+  body/value: field_txt_catcher
+  field_file:
+    plugin: migration
+    migration: dossier_presse_media
+    source: files
+  path: path
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - dossier_presse_media

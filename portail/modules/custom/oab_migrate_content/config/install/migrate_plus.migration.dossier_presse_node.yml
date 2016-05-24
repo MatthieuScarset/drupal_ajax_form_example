@@ -1,0 +1,34 @@
+id: dossier_presse_node
+label: Dossier presse
+migration_group: dossier_presse
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+source:
+  plugin: dossier_presse_node
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: simple
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_areas/target_id: field_taxo_area
+  body/value: field_txt_catcher
+  field_file:
+    plugin: migration
+    migration: dossier_presse_media
+    source: files
+  path: path
+  
+migration_dependencies:  
+  required:
+    - dossier_presse_media
+ 
