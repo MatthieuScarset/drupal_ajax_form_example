@@ -83,15 +83,12 @@ function theme_boosted_preprocess_node(&$variables) {
       for( $i = 0; $i < $count; $i++)
       {
         $item_content = $node->field_content_field->get($i);
-
-        //kprint_r($item_content->get('zone')->getValue());
         if(!isset($zones[$item_content->get('zone')->getValue()]))
         {
           $zones[$item_content->get('zone')->getValue()] = array();
         }
-        $zones[$item_content->get('zone')->getValue()][] = $item_content->get('value')->getValue();
+        $zones[$item_content->get('zone')->getValue()][] = check_markup($item_content->get('value')->getValue(), $item_content->get('format')->getValue());
       }
-      //kprint_r($zones);
       $variables['zones'] = $zones;
     }
   }
