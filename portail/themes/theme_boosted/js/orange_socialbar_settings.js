@@ -21,9 +21,9 @@ var sharebar_parameters = {
 var visible_sharebar_buttons = [
 	{button: 'twitter'},
 	{button: 'linkedin'},
-	{button: 'googleplus'}
+	{button: 'googleplus'},
     {button: 'facebook'},    
-    {button: 'pinterest'},    
+    {button: 'pinterest'}   
 ];
 
 var followbar_parameters = {
