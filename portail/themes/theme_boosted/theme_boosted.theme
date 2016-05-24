@@ -44,6 +44,7 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
+/*
 function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
 
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -93,6 +94,6 @@ function theme_boosted_preprocess_node(&$variables) {
     }
   }
 }
-
+*/
 
 ?>

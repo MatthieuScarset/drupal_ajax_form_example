@@ -919,8 +919,11 @@ window.onload = function(){
 		}
 	}
 	if(typeof followbar_parameters !== "undefined"){
+		
 		if(typeof followbar_parameters.auto_load !== "undefined" && followbar_parameters.auto_load !== null){
+			
 			if(document.getElementsByClassName('followbar')){
+				
 				if(followbar_parameters.auto_load === true){
 					showFollowBar();
 				};
