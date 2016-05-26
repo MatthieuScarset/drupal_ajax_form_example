@@ -1,6 +1,6 @@
-id: dossier_presse_node
-label: Dossier presse
-migration_group: dossier_presse
+id: press_release_node
+label: Communiqué de presse
+migration_group: press_release
 langcode: fr
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
     - migrate_plus
     - node
 source:
-  plugin: dossier_presse_node
+  plugin: press_release_node
 destination:
   plugin: entity:node
 process:
@@ -21,17 +21,17 @@ process:
     plugin: default_value
     default_value: 1
   field_areas/target_id: field_taxo_area
-  body/value: field_txt_catcher
+  body/value: body
   field_type/target_id:
     plugin: default_value
     default_value: 10
   field_file:
     plugin: migration
-    migration: dossier_presse_media
+    migration: press_release_media
     source: files
   path: path
   
 migration_dependencies:  
   required:
-    - dossier_presse_media
+    - press_release_media
  

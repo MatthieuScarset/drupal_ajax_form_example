@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
+namespace Drupal\oab_migrate_content\Plugin\migrate\source\PressRelease;
 
 use Drupal\Core\Database\Query\Condition;
 use Drupal\migrate\Annotation\MigrateSource;
@@ -10,10 +10,10 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_image"
+ *   id = "press_release_file"
  * )
  */
-class BlogPostImage extends SqlBase {
+class PressReleaseFile extends SqlBase {
 
   /**
    * The public file directory path.
@@ -54,34 +54,12 @@ class BlogPostImage extends SqlBase {
 
 
     $query = $this->select('file_managed', 'f');
-    //$query->join('field_data_field_folder', 'ff', 'ff.entity_id = f.fid');
-    $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
+    $query->join('field_data_field_file_upl', 'fi', 'fi.field_file_upl_fid = f.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
-    //->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
-    //->condition('f.fid', 1757)
-    ->condition('n.type', 'blog_post')
-    ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
-    //->condition('n.nid', array(11430, 11429), 'IN');
-    //->orderBy('f.fid', 'ASC');
-
-    // Filter by scheme(s), if configured.
-    /*if (isset($this->configuration['scheme'])) {
-      $schemes = array();
-      // Accept either a single scheme, or a list.
-      foreach ((array) $this->configuration['scheme'] as $scheme) {
-        $schemes[] = rtrim($scheme) . '://';
-      }
-      $schemes = array_map([$this->getDatabase(), 'escapeLike'], $schemes);
-
-      // uri LIKE 'public://%' OR uri LIKE 'private://%'
-      $conditions = new Condition('OR');
-      foreach ($schemes as $scheme) {
-        $conditions->condition('uri', $scheme . '%', 'LIKE');
-      }
-      $query->condition($conditions);
-    }*/
+    ->condition('n.type', 'content_press_release')
+    ->condition('n.status', 1, '=')//;
+    ->range(0, 10);
 
     return $query;
   }
@@ -129,10 +107,10 @@ class BlogPostImage extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    $imageFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
+    $fileFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
-    //$blogPath = 'public://Blog';
-    foreach ($imageFolders AS $folder){
+
+    foreach ($fileFolders AS $folder){
       $folderName = 'public://'.$folder;
       file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
     }
@@ -142,7 +120,6 @@ class BlogPostImage extends SqlBase {
     $path = str_replace(['public:/', 'private:/', 'temporary:/'], [$this->publicPath, $this->privatePath, $this->temporaryPath], $row->getSourceProperty('uri'));
 
     if (file_exists($saved_path)) {
-      //rename($saved_path, $path);
       copy($saved_path, $path);
     }
     // At this point, $path could be an absolute path or a relative path,
@@ -157,33 +134,6 @@ class BlogPostImage extends SqlBase {
     $row->setSourceProperty('uid', 1);
 
     $row->setSourceProperty('current_fid', array($row->getSourceProperty('fid')));
-    //$row->setSourceProperty('mid', array($row->getSourceProperty('fid')));
-
-    // récupération de la balise alt et title
-    /*$image_query = $this->select('field_data_field_image', 'fi');
-    $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
-    ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
-    ->condition('fi.bundle', 'blog_post', '=');
-
-    $image_results = $image_query->execute()->fetchAll();
-
-    if (is_array($image_results)){
-      foreach ($image_results AS $image_result){
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($image_result)){
-          $row->setSourceProperty('alt', $image_result->field_image_alt);
-          $row->setSourceProperty('title', $image_result->field_image_title);
-          $row->setSourceProperty('width', $image_result->field_image_width);
-          $row->setSourceProperty('height', $image_result->field_image_height);
-        }
-        elseif (is_array($image_result)){
-          $row->setSourceProperty('alt', $image_result['field_image_alt']);
-          $row->setSourceProperty('title', $image_result['field_image_title']);
-          $row->setSourceProperty('width', $image_result['field_image_width']);
-          $row->setSourceProperty('height', $image_result['field_image_height']);
-        }
-      }
-    }*/
 
     return parent::prepareRow($row);
   }

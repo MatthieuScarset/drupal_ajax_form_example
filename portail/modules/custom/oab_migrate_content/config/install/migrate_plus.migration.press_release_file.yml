@@ -1,0 +1,26 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+migration_group: press_release
+id: press_release_file
+migration_tags: null
+label: Communique presse file
+source:
+  plugin: press_release_file
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: entity:file
+template: null
+migration_dependencies: {  }
