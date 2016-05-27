@@ -1,0 +1,27 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+migration_group: document
+id: document_image
+migration_tags: null
+label: 'Document images'
+source:
+  plugin: document_image
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: entity:file
+template: null
+migration_dependencies: {  }
+

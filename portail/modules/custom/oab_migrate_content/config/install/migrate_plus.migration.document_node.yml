@@ -1,6 +1,6 @@
-id: press_release_node
-label: Communiqué de presse
-migration_group: press_release
+id: document_node
+label: Document
+migration_group: document
 langcode: fr
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
     - migrate_plus
     - node
 source:
-  plugin: press_release_node
+  plugin: document_node
 destination:
   plugin: entity:node
 process:
@@ -24,13 +24,18 @@ process:
   body/value: body
   field_type/target_id:
     plugin: default_value
-    default_value: 10
+    default_value: 9
   field_file:
     plugin: migration
-    migration: press_release_media
+    migration: document_media_file
     source: files
+  field_image:
+    plugin: migration
+    migration: document_media_image
+    source: images
   path: path  
 migration_dependencies:  
   required:
-    - press_release_media
+    - document_media_file
+    - document_media_image
  

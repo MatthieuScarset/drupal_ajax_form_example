@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
+namespace Drupal\oab_migrate_content\Plugin\migrate\source\Document;
 
 use Drupal\Core\Database\Query\Condition;
 use Drupal\migrate\Annotation\MigrateSource;
@@ -10,10 +10,10 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_profile_image"
+ *   id = "document_file"
  * )
  */
-class BlogPostProfileImage extends SqlBase {
+class DocumentFile extends SqlBase {
 
   /**
    * The public file directory path.
@@ -54,17 +54,12 @@ class BlogPostProfileImage extends SqlBase {
 
 
     $query = $this->select('file_managed', 'f');
-    $query->distinct();
-    $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
-    $query->join('profile', 'p', 'p.pid = fi.entity_id');
-    $query->join('users', 'u', 'u.uid = p.uid');
-    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $query->join('field_data_field_file_upl', 'fi', 'fi.field_file_upl_fid = f.fid');
+    $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
-    ->condition('fi.entity_type', 'profile2')
-    ->condition('fi.bundle', 'main')
-    ->condition('ur.rid', 4, '=')
-    ->orderBy('f.fid', 'DESC');
-
+    ->condition('n.type', 'content_document_type')
+    ->condition('n.status', 1, '=');
+    //->range(0, 10);
     return $query;
   }
 
@@ -111,10 +106,10 @@ class BlogPostProfileImage extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    $imageFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
+    $fileFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
-    //$blogPath = 'public://Blog';
-    foreach ($imageFolders AS $folder){
+
+    foreach ($fileFolders AS $folder){
       $folderName = 'public://'.$folder;
       file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
     }
@@ -124,7 +119,6 @@ class BlogPostProfileImage extends SqlBase {
     $path = str_replace(['public:/', 'private:/', 'temporary:/'], [$this->publicPath, $this->privatePath, $this->temporaryPath], $row->getSourceProperty('uri'));
 
     if (file_exists($saved_path)) {
-      //rename($saved_path, $path);
       copy($saved_path, $path);
     }
     // At this point, $path could be an absolute path or a relative path,

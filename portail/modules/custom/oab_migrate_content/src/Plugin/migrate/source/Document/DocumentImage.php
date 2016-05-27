@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
+namespace Drupal\oab_migrate_content\Plugin\migrate\source\Document;
 
 use Drupal\Core\Database\Query\Condition;
 use Drupal\migrate\Annotation\MigrateSource;
@@ -10,10 +10,10 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_profile_image"
+ *   id = "document_image"
  * )
  */
-class BlogPostProfileImage extends SqlBase {
+class DocumentImage extends SqlBase {
 
   /**
    * The public file directory path.
@@ -54,17 +54,12 @@ class BlogPostProfileImage extends SqlBase {
 
 
     $query = $this->select('file_managed', 'f');
-    $query->distinct();
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
-    $query->join('profile', 'p', 'p.pid = fi.entity_id');
-    $query->join('users', 'u', 'u.uid = p.uid');
-    $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+    $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
-    ->condition('fi.entity_type', 'profile2')
-    ->condition('fi.bundle', 'main')
-    ->condition('ur.rid', 4, '=')
-    ->orderBy('f.fid', 'DESC');
-
+    ->condition('n.type', 'content_document_type')
+    ->condition('n.status', 1, '=');
+    //->range(0, 10);
     return $query;
   }
 
@@ -113,7 +108,6 @@ class BlogPostProfileImage extends SqlBase {
   public function prepareRow(Row $row) {
     $imageFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
-    //$blogPath = 'public://Blog';
     foreach ($imageFolders AS $folder){
       $folderName = 'public://'.$folder;
       file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
@@ -139,6 +133,33 @@ class BlogPostProfileImage extends SqlBase {
     $row->setSourceProperty('uid', 1);
 
     $row->setSourceProperty('current_fid', array($row->getSourceProperty('fid')));
+    //$row->setSourceProperty('mid', array($row->getSourceProperty('fid')));
+
+    // récupération de la balise alt et title
+    /*$image_query = $this->select('field_data_field_image', 'fi');
+    $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
+    ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
+    ->condition('fi.bundle', 'blog_post', '=');
+
+    $image_results = $image_query->execute()->fetchAll();
+
+    if (is_array($image_results)){
+      foreach ($image_results AS $image_result){
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($image_result)){
+          $row->setSourceProperty('alt', $image_result->field_image_alt);
+          $row->setSourceProperty('title', $image_result->field_image_title);
+          $row->setSourceProperty('width', $image_result->field_image_width);
+          $row->setSourceProperty('height', $image_result->field_image_height);
+        }
+        elseif (is_array($image_result)){
+          $row->setSourceProperty('alt', $image_result['field_image_alt']);
+          $row->setSourceProperty('title', $image_result['field_image_title']);
+          $row->setSourceProperty('width', $image_result['field_image_width']);
+          $row->setSourceProperty('height', $image_result['field_image_height']);
+        }
+      }
+    }*/
 
     return parent::prepareRow($row);
   }
