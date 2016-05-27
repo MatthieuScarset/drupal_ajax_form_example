@@ -29,8 +29,7 @@ process:
     plugin: migration
     migration: press_release_media
     source: files
-  path: path
-  
+  path: path  
 migration_dependencies:  
   required:
     - press_release_media

@@ -22,6 +22,9 @@ process:
     default_value: 1
   field_areas/target_id: field_taxo_area
   body/value: body
+  field_type/target_id:
+    plugin: default_value
+    default_value: 9
   field_file:
     plugin: migration
     migration: document_media_file
