@@ -3,13 +3,18 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.node.simple.field_areas
     - field.field.node.simple.field_blog
     - field.field.node.simple.field_body
+    - field.field.node.simple.field_cas_client
     - field.field.node.simple.field_end_date
     - field.field.node.simple.field_file
     - field.field.node.simple.field_image
+    - field.field.node.simple.field_industries
     - field.field.node.simple.field_magazine
+    - field.field.node.simple.field_partenaires
     - field.field.node.simple.field_short_description
+    - field.field.node.simple.field_solutions
     - field.field.node.simple.field_start_date
     - field.field.node.simple.field_state
     - field.field.node.simple.field_subtitle
@@ -31,6 +36,11 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
+  field_areas:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   field_blog:
     weight: 1
     settings: {  }
@@ -43,6 +53,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+  field_cas_client:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   field_end_date:
     weight: 6
     settings: {  }
@@ -60,8 +75,18 @@ content:
       open: 0
     third_party_settings: {  }
     type: entity_browser_entity_reference
+  field_industries:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   field_magazine:
     weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_partenaires:
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -72,6 +97,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+  field_solutions:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
   field_start_date:
     weight: 5
     settings: {  }
