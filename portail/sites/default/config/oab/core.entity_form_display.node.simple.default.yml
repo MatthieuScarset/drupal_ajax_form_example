@@ -6,9 +6,13 @@ dependencies:
     - field.field.node.simple.field_blog
     - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
+    - field.field.node.simple.field_file
     - field.field.node.simple.field_image
+    - field.field.node.simple.field_magazine
+    - field.field.node.simple.field_short_description
     - field.field.node.simple.field_start_date
     - field.field.node.simple.field_state
+    - field.field.node.simple.field_subtitle
     - field.field.node.simple.field_type
     - node.type.simple
   module:
@@ -24,7 +28,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 9
+    weight: 10
     settings: {  }
     third_party_settings: {  }
   field_blog:
@@ -33,19 +37,19 @@ content:
     third_party_settings: {  }
     type: options_select
   field_body:
-    weight: 6
+    weight: 7
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
   field_end_date:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_image:
-    weight: 7
+    weight: 8
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -56,16 +60,35 @@ content:
       open: 0
     third_party_settings: {  }
     type: entity_browser_entity_reference
+  field_magazine:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_short_description:
+    weight: 27
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
   field_start_date:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_state:
-    weight: 13
+    weight: 14
     settings: {  }
     third_party_settings: {  }
     type: workflow_default
+  field_subtitle:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
   field_type:
     weight: 0
     settings: {  }
@@ -73,39 +96,40 @@ content:
     type: options_select
   langcode:
     type: language_select
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 12
+    weight: 13
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 12
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 8
+    weight: 9
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_file: true

@@ -1,0 +1,19 @@
+uuid: 9fc9e7f2-5d8d-4404-844c-be43b5d1d450
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_short_description
+    - node.type.simple
+id: node.simple.field_short_description
+field_name: field_short_description
+entity_type: node
+bundle: simple
+label: 'short description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

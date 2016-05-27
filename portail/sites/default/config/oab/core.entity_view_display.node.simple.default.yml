@@ -6,9 +6,13 @@ dependencies:
     - field.field.node.simple.field_blog
     - field.field.node.simple.field_body
     - field.field.node.simple.field_end_date
+    - field.field.node.simple.field_file
     - field.field.node.simple.field_image
+    - field.field.node.simple.field_magazine
+    - field.field.node.simple.field_short_description
     - field.field.node.simple.field_start_date
     - field.field.node.simple.field_state
+    - field.field.node.simple.field_subtitle
     - field.field.node.simple.field_type
     - node.type.simple
   module:
@@ -50,6 +54,19 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
+  field_magazine:
+    weight: 8
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_short_description:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
   field_start_date:
     weight: 3
     label: above
@@ -64,6 +81,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: list_default
+  field_subtitle:
+    weight: 9
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
   field_type:
     weight: 1
     label: above
@@ -76,4 +100,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_file: true
   langcode: true
