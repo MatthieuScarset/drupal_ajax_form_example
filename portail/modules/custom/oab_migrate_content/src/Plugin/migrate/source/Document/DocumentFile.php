@@ -58,8 +58,8 @@ class DocumentFile extends SqlBase {
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->condition('n.type', 'content_document_type')
-    ->condition('n.status', 1, '=')//;
-    ->range(0, 10);
+    ->condition('n.status', 1, '=');
+    //->range(0, 10);
     return $query;
   }
 

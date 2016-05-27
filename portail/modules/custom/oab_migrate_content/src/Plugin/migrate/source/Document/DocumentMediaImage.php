@@ -36,8 +36,8 @@ class DocumentMediaImage extends SqlBase {
     $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_document_type')
-    ->condition('n.status', 1, '=')//;
-    ->range(0, 10);
+    ->condition('n.status', 1, '=');
+    //->range(0, 10);
 
     return $query;
   }
