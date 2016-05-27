@@ -1,0 +1,9 @@
+uuid: e23f18a7-ad54-4a88-bcb2-006d9a1b00c5
+langcode: fr
+status: true
+dependencies: {  }
+name: Partenaires
+vid: partenaires
+description: ''
+hierarchy: 0
+weight: 0

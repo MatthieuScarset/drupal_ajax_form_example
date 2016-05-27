@@ -1,0 +1,11 @@
+uuid: c7938b4a-1469-4005-92ca-ec0411bc8de0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.industries
+id: taxonomy_term.industries
+target_entity_type_id: taxonomy_term
+target_bundle: industries
+default_langcode: site_default
+language_alterable: false

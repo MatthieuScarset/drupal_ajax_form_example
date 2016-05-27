@@ -1,0 +1,28 @@
+uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_partenaires
+    - node.type.simple
+    - taxonomy.vocabulary.partenaires
+id: node.simple.field_partenaires
+field_name: field_partenaires
+entity_type: node
+bundle: simple
+label: Partenaires
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      partenaires: partenaires
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

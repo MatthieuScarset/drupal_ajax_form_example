@@ -1,0 +1,28 @@
+uuid: 69f3fa7a-704d-4c17-a8d5-b3bd8751e48e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cas_client
+    - node.type.simple
+    - taxonomy.vocabulary.cas_clients
+id: node.simple.field_cas_client
+field_name: field_cas_client
+entity_type: node
+bundle: simple
+label: 'Cas client'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      cas_clients: cas_clients
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

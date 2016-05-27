@@ -1,0 +1,9 @@
+uuid: 20de5b84-94de-477d-8781-7d1e6ac674f7
+langcode: fr
+status: true
+dependencies: {  }
+name: Magazine
+vid: magazine
+description: 'Catégories de magazines'
+hierarchy: 0
+weight: 0
