@@ -1,15 +1,16 @@
-uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+uuid: ef93e1fa-634d-458d-b785-71aeeb7fcd06
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_partenaires
-    - node.type.simple
-id: node.simple.field_partenaires
-field_name: field_partenaires
+    - field.storage.node.field_customer_story
+    - node.type.container
+    - taxonomy.vocabulary.customer_stories
+id: node.container.field_customer_story
+field_name: field_customer_story
 entity_type: node
-bundle: simple
-label: Partenaires
+bundle: container
+label: 'Customer story'
 description: ''
 required: false
 translatable: false
@@ -18,7 +19,8 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      customer_stories: customer_stories
     sort:
       field: _none
     auto_create: false

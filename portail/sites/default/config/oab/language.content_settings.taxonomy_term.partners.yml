@@ -1,11 +1,11 @@
-uuid: e7f37daf-dcba-4e41-a62b-fff93ef58577
+uuid: a919a7cc-f82a-4e3b-a0e5-5ed7099ba813
 langcode: fr
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.solutions
-id: taxonomy_term.solutions
+    - taxonomy.vocabulary.partners
+id: taxonomy_term.partners
 target_entity_type_id: taxonomy_term
-target_bundle: solutions
+target_bundle: partners
 default_langcode: current_interface
 language_alterable: true

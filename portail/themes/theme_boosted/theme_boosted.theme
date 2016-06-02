@@ -50,15 +50,15 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $nid = $node->nid->value;
     $content_type = $node->bundle();
-    if($content_type == 'content')
+    if($content_type == 'container')
     {
-      $field_type = $node->field_type->getValue();
-      if(isset($field_type[0]['target_id']) && !empty($field_type[0]['target_id'])) {
-        $tid = $field_type[0]['target_id'];
+      $field_rendering_model = $node->field_rendering_model->getValue();
+      if(isset($field_rendering_model[0]['target_id']) && !empty($field_rendering_model[0]['target_id'])) {
+        $tid = $field_rendering_model[0]['target_id'];
         $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
         //on vérifie que le machine_name a bien été renseigné
-        if (isset($term->field_nom_machine->value) && !empty($term->field_nom_machine->value)) {
-          $nom_machine = $term->field_nom_machine->value;
+        if (isset($term->field_machine_name->value) && !empty($term->field_machine_name->value)) {
+          $nom_machine = $term->field_machine_name->value;
           switch ($nom_machine) {
             case 'magazine' :
               $suggestions[] = 'node__content_magazine';
@@ -78,7 +78,7 @@ function theme_boosted_preprocess_node(&$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $nid = $node->nid->value;
     $content_type = $node->bundle();
-    if ($content_type == 'content') {
+    if ($content_type == 'container') {
       $zones = array();
       $count = $node->field_content_field->count();
       for( $i = 0; $i < $count; $i++)

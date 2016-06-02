@@ -1,0 +1,29 @@
+uuid: f43f5097-05e1-4833-b846-5d26d7bcb01d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rendering_model.field_machine_name
+    - taxonomy.vocabulary.rendering_model
+  module:
+    - text
+id: taxonomy_term.rendering_model.default
+targetEntityType: taxonomy_term
+bundle: rendering_model
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  field_machine_name:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  langcode: true

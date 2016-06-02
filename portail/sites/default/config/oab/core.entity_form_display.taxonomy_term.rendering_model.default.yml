@@ -1,0 +1,51 @@
+uuid: aa3c8707-a20f-459e-b8ef-5a1a07e12ae6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rendering_model.field_machine_name
+    - taxonomy.vocabulary.rendering_model
+  module:
+    - path
+    - text
+id: taxonomy_term.rendering_model.default
+targetEntityType: taxonomy_term
+bundle: rendering_model
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 2
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_machine_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  langcode:
+    type: language_select
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

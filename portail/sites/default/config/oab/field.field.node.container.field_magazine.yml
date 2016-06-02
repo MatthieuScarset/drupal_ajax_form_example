@@ -1,24 +1,26 @@
-uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+uuid: ce7e6fac-8e4e-4932-b8a5-755661282620
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_partenaires
-    - node.type.simple
-id: node.simple.field_partenaires
-field_name: field_partenaires
+    - field.storage.node.field_magazine
+    - node.type.container
+    - taxonomy.vocabulary.magazine
+id: node.container.field_magazine
+field_name: field_magazine
 entity_type: node
-bundle: simple
-label: Partenaires
+bundle: container
+label: Magazine
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      magazine: magazine
     sort:
       field: _none
     auto_create: false

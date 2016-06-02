@@ -1,15 +1,16 @@
-uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+uuid: fd8c8098-5072-4dc1-a4a7-9b3e8062dc82
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_partenaires
-    - node.type.simple
-id: node.simple.field_partenaires
-field_name: field_partenaires
+    - field.storage.node.field_industry
+    - node.type.container
+    - taxonomy.vocabulary.industries
+id: node.container.field_industry
+field_name: field_industry
 entity_type: node
-bundle: simple
-label: Partenaires
+bundle: container
+label: Industry
 description: ''
 required: false
 translatable: false
@@ -18,7 +19,8 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      industries: industries
     sort:
       field: _none
     auto_create: false

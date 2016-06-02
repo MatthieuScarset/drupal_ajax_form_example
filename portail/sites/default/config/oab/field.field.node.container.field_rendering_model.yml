@@ -1,15 +1,16 @@
-uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+uuid: 9d0567c0-2c38-44e5-907b-7b96956b7ed2
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_partenaires
-    - node.type.simple
-id: node.simple.field_partenaires
-field_name: field_partenaires
+    - field.storage.node.field_rendering_model
+    - node.type.container
+    - taxonomy.vocabulary.rendering_model
+id: node.container.field_rendering_model
+field_name: field_rendering_model
 entity_type: node
-bundle: simple
-label: Partenaires
+bundle: container
+label: 'Rendering model'
 description: ''
 required: false
 translatable: false
@@ -18,7 +19,8 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      rendering_model: rendering_model
     sort:
       field: _none
     auto_create: false

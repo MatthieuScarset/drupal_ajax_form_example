@@ -1,0 +1,19 @@
+uuid: 69dc3988-17c1-418d-ae12-17979d2d21fb
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subtitle
+    - node.type.container
+id: node.container.field_subtitle
+field_name: field_subtitle
+entity_type: node
+bundle: container
+label: Subtitle
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

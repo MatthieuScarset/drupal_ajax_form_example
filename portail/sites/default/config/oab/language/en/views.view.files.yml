@@ -27,7 +27,7 @@ display:
           label: Name
           separator: ', '
         filemime:
-          label: 'Mime type'
+          label: 'MIME type'
         filesize:
           label: Size
         status:
@@ -45,7 +45,7 @@ display:
             label: Filename
         filemime:
           expose:
-            label: 'Mime type'
+            label: 'MIME type'
         status:
           expose:
             label: Status
