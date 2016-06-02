@@ -1,24 +1,26 @@
-uuid: 887ef39e-6d63-4aa1-975a-4e4ae538b7b7
+uuid: 89972bcf-7c4b-498b-b9e7-5458f05b6509
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_partenaires
-    - node.type.simple
-id: node.simple.field_partenaires
-field_name: field_partenaires
+    - field.storage.node.field_blog
+    - node.type.container
+    - taxonomy.vocabulary.blog
+id: node.container.field_blog
+field_name: field_blog
 entity_type: node
-bundle: simple
-label: Partenaires
+bundle: container
+label: Blog
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles: {  }
+    target_bundles:
+      blog: blog
     sort:
       field: _none
     auto_create: false

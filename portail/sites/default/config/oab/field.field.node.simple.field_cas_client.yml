@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_cas_client
     - node.type.simple
-    - taxonomy.vocabulary.cas_clients
 id: node.simple.field_cas_client
 field_name: field_cas_client
 entity_type: node
@@ -19,8 +18,7 @@ default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
   handler_settings:
-    target_bundles:
-      cas_clients: cas_clients
+    target_bundles: {  }
     sort:
       field: _none
     auto_create: false

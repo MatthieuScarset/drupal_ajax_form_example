@@ -1,16 +1,16 @@
-uuid: 6f0f4946-abc8-41b4-bf1c-2374ea98b986
+uuid: 15f53d8d-8ff7-4b56-b0e8-0275ff4a9f2f
 langcode: fr
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.magazine
+    - taxonomy.vocabulary.rendering_model
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
-id: taxonomy_term.magazine
+    enabled: true
+id: taxonomy_term.rendering_model
 target_entity_type_id: taxonomy_term
-target_bundle: magazine
+target_bundle: rendering_model
 default_langcode: current_interface
 language_alterable: true

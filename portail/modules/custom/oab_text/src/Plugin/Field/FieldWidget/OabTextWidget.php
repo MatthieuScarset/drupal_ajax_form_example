@@ -46,17 +46,17 @@ class OabTextWidget extends TextareaWidget {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
     //RUBYPORTAILOBS-2431
-    //gestion de la liste des options selon le type de contenu choisi (taxo type)
+    //gestion de la liste des options selon le type de contenu choisi
     $options = array();
-    if(isset($_GET['content_type_tid'])) // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
+    if(isset($_GET['rendering_model_tid'])) // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
     {
-      $tid = $_GET['content_type_tid'];
+      $tid = $_GET['rendering_model_tid'];
     }
     else
     {
       if ($node = \Drupal::routeMatch()->getParameter('node')) {
         $nid = $node->nid->value;
-        $type = $node->field_type->getValue();
+        $type = $node->field_rendering_model->getValue();
         if(isset($type[0]['target_id']) && !empty($type[0]['target_id']))
         {
           $tid = $type[0]['target_id'];
@@ -67,14 +67,17 @@ class OabTextWidget extends TextareaWidget {
       //on charge le terme concerné
       $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
       //on vérifie que le machine_name a bien été renseigné
-      if (isset($term->field_nom_machine) && !empty($term->field_nom_machine->value)) {
-        $options = $this->getOptionsForContentTypeTerm($term->field_nom_machine->value);
+      if (isset($term->field_machine_name) && !empty($term->field_machine_name->value)) {
+        $options = $this->getOptionsForContentTypeTerm($term->field_machine_name->value);
+      }
+      else{
+        $options = array('default' => 'Default');
       }
     }
 
     $element['zone'] = array(
       '#type' => 'select',
-      '#title' => t('Zone'),
+      '#title' => t('display area for content above'),
       '#default_value' => $items[$delta]->zone,
       '#options' => $options,
       '#weight' => 10,
@@ -95,6 +98,8 @@ class OabTextWidget extends TextareaWidget {
       case 'blog_post' :
         $options = array('entete' => 'Entete', "hautgauche"=>'Haut gauche', "hautdroit"=>'Haut droit', 'milieu' => 'Milieu', 'bas1' => 'Bas 1', 'bas2' => 'Bas 2', 'bas3' => 'Bas 3');
         break;
+      default:
+        $options = array('default' => 'Default');
     }
     return $options;
   }

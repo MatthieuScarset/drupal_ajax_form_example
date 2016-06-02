@@ -64,17 +64,18 @@ function theme_obs_backoffice_preprocess_node_add_list(&$variables) {
       $variables['types'][$type->id()]['url'] = \Drupal::url('node.add', array('node_type' => $type->id()));
     }
 
-    // Pour le type de contenu "Content", on crée des entrées spéciales pour chaque terme
+   // kprint_r($variables);
+    // Pour le type de contenu "Container", on crée des entrées spéciales pour chaque terme
     // RUBYPORTAILOBS-2430
-    if(isset($variables['types']['content']))
+    if(isset($variables['types']['container']))
     {
-      $content_types_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('content_type_taxonomy', 0, null, true);
+      $content_types_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('rendering_model', 0, null, true);
       foreach($content_types_terms as $type_term)
       {
           $variables['types'][$type_term->tid->value]['label'] = $type_term->name->value;
-          $variables['types'][$type_term->tid->value]['url'] = \Drupal::url('node.add', array('node_type' => 'content', 'content_type_tid' => $type_term->tid->value ));
+          $variables['types'][$type_term->tid->value]['url'] = \Drupal::url('node.add', array('node_type' => 'container', 'rendering_model_tid' => $type_term->tid->value ));
       }
-      unset($variables['types']['content']);
+      unset($variables['types']['container']);
     }
   }
 }
