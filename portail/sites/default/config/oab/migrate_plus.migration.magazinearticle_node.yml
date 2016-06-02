@@ -1,0 +1,66 @@
+uuid: 2f9a3102-cdf4-474c-ad1e-a4dd606f1e22
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: wseSNrr8TbyIsnVumMOM3SYeGcjzYqoqCnPbR_-pA44
+id: magazinearticle_node
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine articles nodes'
+source:
+  plugin: magazinearticle_node
+process:
+  type:
+    plugin: default_value
+    default_value: container
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_rendering_model/target_id: rendering_model_id
+  field_content_field/value: content_field
+  field_content_field/format:
+    plugin: default_value
+    default_value: full_html
+  field_content_field/zone:
+    plugin: default_value
+    default_value: default
+  field_magazine:
+    plugin: migration
+    migration: magazinearticle_term
+    source: categories
+  field_industry:
+    plugin: migration
+    migration: magazinearticle_term
+    source: industries
+  field_solution:
+    plugin: migration
+    migration: magazinearticle_term
+    source: solutions
+  field_partner:
+    plugin: migration
+    migration: magazinearticle_term
+    source: partners
+  field_area:
+    plugin: migration
+    migration: magazinearticle_term
+    source: areas
+  field_customer_story:
+    plugin: migration
+    migration: magazinearticle_term
+    source: customer_stories
+  field_image:
+    plugin: migration
+    migration: magazinearticle_media
+    source: images
+  path: path
+  field_subtitle: subtitle
+  field_short_description: short_description
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - magazinearticle_term
+    - magazinearticle_media

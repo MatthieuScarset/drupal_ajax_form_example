@@ -1,3 +1,4 @@
 <?php
 
 define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 100));
+define('MAGAZINE_ARTICLE_SELECT_DATE', (60 * 60 * 24 * 100)); // 10 derniers jours

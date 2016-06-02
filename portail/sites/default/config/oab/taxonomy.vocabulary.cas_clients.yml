@@ -1,9 +1,0 @@
-uuid: 0664bc73-b017-49a4-97cd-98a81e419533
-langcode: fr
-status: true
-dependencies: {  }
-name: 'Cas clients'
-vid: cas_clients
-description: ''
-hierarchy: 0
-weight: 0

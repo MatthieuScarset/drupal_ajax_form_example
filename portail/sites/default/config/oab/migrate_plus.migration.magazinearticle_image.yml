@@ -1,0 +1,25 @@
+uuid: 6b29f80b-2b52-4d4d-a60d-4df7d779cb75
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hEVybVtba2f3QIG9YaJfbQhBiyB-IrIzTbEGksduURs
+id: magazinearticle_image
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine articles images'
+source:
+  plugin: magazinearticle_image
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:file'
+migration_dependencies: {  }

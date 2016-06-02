@@ -1,9 +1,9 @@
 uuid: 20de5b84-94de-477d-8781-7d1e6ac674f7
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
-name: Magazine
+name: Magazines
 vid: magazine
-description: 'Catégories de magazines'
+description: 'Magazine categories'
 hierarchy: 0
 weight: 0

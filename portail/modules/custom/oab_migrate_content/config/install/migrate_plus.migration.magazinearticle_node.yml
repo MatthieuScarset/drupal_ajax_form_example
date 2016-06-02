@@ -1,0 +1,39 @@
+langcode: fr
+status: true
+id: magazinearticle_node
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine articles nodes'
+source:
+  plugin: magazinearticle_node
+process:
+  type:
+    plugin: default_value
+    default_value: simple
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_type/target_id:
+    plugin: default_value
+    default_value: 6
+  field_body/value: body
+  field_body/format:
+    plugin: default_value
+    default_value: full_html
+  field_magazine:
+    plugin: migration
+    migration: magazinearticle_term
+    source: categories
+  field_image:
+    plugin: migration
+    migration: magazinearticle_media
+    source: images
+  path: path
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - magazinearticle_term
+    - magazinearticle_media

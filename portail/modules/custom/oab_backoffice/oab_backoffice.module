@@ -40,16 +40,16 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   }
 }
 
-function oab_backoffice_form_node_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
+function oab_backoffice_form_node_container_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
   // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
-  if(isset($_GET['content_type_tid'])) {
-    $tid = $_GET['content_type_tid'];
-    $form['field_type']['widget']['#default_value'] = $tid;
+  if(isset($_GET['rendering_model_tid'])) {
+    $tid = $_GET['rendering_model_tid'];
+    $form['field_rendering_model']['widget']['#default_value'] = $tid;
   }
-  $form['field_type']['#disabled'] = TRUE;
+  $form['field_rendering_model']['#disabled'] = TRUE;
 }
-function oab_backoffice_form_node_content_edit_form_alter(&$form, FormStateInterface $form_state, $form_id)
+function oab_backoffice_form_node_container_edit_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
-  $form['field_type']['#disabled'] = TRUE;
+  $form['field_rendering_model']['#disabled'] = TRUE;
 }

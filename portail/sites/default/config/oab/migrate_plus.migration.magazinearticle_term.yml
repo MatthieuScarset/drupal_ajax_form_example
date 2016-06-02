@@ -1,0 +1,24 @@
+uuid: f04bd87e-4cea-4f66-adc8-001c713797ff
+langcode: fr
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: pWYgirTG2z3iJxBt02HusYM1fzNG4L7op4Y-dvIS2jQ
+id: magazinearticle_term
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine article terms'
+source:
+  plugin: magazinearticle_term
+process:
+  vid: vid
+  langcode: language
+  name: name
+  parent:
+    plugin: migration
+    migration: magazinearticle_term
+    source: parent
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: {  }

@@ -1,0 +1,9 @@
+uuid: 943181a8-c1f6-41c4-b165-c66e0a3daa30
+langcode: en
+status: true
+dependencies: {  }
+name: 'Rendering model'
+vid: rendering_model
+description: 'taxonomy for choosing the rendering model (blog post, magazine, ...)'
+hierarchy: 0
+weight: 0
