@@ -32,8 +32,8 @@ class DocumentNode extends SqlBase {
      */
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language'])
-    ->condition('n.type', 'content_document_type', '=')//;
-    ->range(0, 10);
+    ->condition('n.type', 'content_document_type', '=');
+    //->range(0, 10);
 
     return $query;
   }
@@ -50,6 +50,7 @@ class DocumentNode extends SqlBase {
       'body' => $this->t('body'),
       'image' => $this->t('image'),
       'file' => $this->t('file'),
+      'description' => $this->t('description'),
     ];
 
     return $fields;
@@ -92,6 +93,28 @@ class DocumentNode extends SqlBase {
         }
       }
     }
+
+    // récupération du descriptif court
+    $descriptif_query = $this->select('field_data_field_descriptif_court', 'd');
+    $descriptif_query->fields('d', ['field_descriptif_court_value'])
+    ->condition('d.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('d.bundle', 'content_document_type', '=');
+
+    $descriptif_results = $descriptif_query->execute()->fetchAll();
+
+    if (is_array($descriptif_results)){
+      foreach ($descriptif_results AS $descriptif_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($descriptif_result) && isset($descriptif_result->field_descriptif_court_value)){
+          $row->setSourceProperty('body', $descriptif_result->field_descriptif_court_value);
+        }
+        elseif (is_array($descriptif_result) && isset($descriptif_result['field_descriptif_court_value'])){
+          $row->setSourceProperty('body', $descriptif_result['field_descriptif_court_value']);
+        }
+      }
+    }
+
 
     // récupération du tag "area"
     $area_query = $this->select('field_data_field_taxo_area', 'a');
