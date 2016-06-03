@@ -32,8 +32,8 @@ class PressReleaseNode extends SqlBase {
      */
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language'])
-    ->condition('n.type', 'content_press_release', '=');
-    //->range(0, 10);
+    ->condition('n.type', 'content_press_release', '=')//;
+    ->range(0, 10);
 
     return $query;
   }
@@ -51,6 +51,7 @@ class PressReleaseNode extends SqlBase {
       'file' => $this->t('file'),
       'country' => $this->t('country'),
       'city' => $this->t('city'),
+      'catcher' => $this->t('catcher'),
     ];
 
     return $fields;
@@ -114,6 +115,27 @@ class PressReleaseNode extends SqlBase {
       }
     }
 
+    // récupération de la short description (txt_catcher)
+    $catcher_query = $this->select('field_data_field_txt_catcher', 'd');
+    $catcher_query->fields('d', ['field_txt_catcher_value'])
+    ->condition('d.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('d.bundle', 'content_press_release', '=');
+
+    $catcher_results = $catcher_query->execute()->fetchAll();
+
+    if (is_array($catcher_results)){
+      foreach ($catcher_results AS $catcher_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+          $row->setSourceProperty('field_txt_catcher', $catcher_result->field_txt_catcher_value);
+        }
+        elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+          $row->setSourceProperty('field_txt_catcher', $catcher_result['field_txt_catcher_value']);
+        }
+      }
+    }
+
     // récupération du tag "area"
     $area_query = $this->select('field_data_field_taxo_area', 'a');
     $area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
@@ -145,6 +167,39 @@ class PressReleaseNode extends SqlBase {
         }
       }
     }
+
+    // récupération du tag "solution"
+    $solution_query = $this->select('field_data_field_taxo_solution', 'a');
+    $solution_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_solution_tid');
+    $solution_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_press_release', '=');
+
+
+    $solution_results = $solution_query->execute()->fetchAll();
+
+    if (is_array($solution_results)){
+      foreach ($solution_results AS $solution_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($solution_result) && isset($solution_result->name)){
+          $solution_name = $solution_result->name;
+        }
+        elseif (is_array($solution_result) && isset($solution_result['name'])){
+          $solution_name = $solution_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($solution_name){
+          $terms = taxonomy_term_load_multiple_by_name($solution_name, 'solutions');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('solution', $key);
+          }
+        }
+      }
+    }
+
     // récupération des fichiers
     $files_query = $this->select('field_data_field_file_upl', 'fi');
     $field1_alias = $files_query->addField('fi', 'field_file_upl_fid', 'mid');

@@ -32,8 +32,8 @@ class DocumentNode extends SqlBase {
      */
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language'])
-    ->condition('n.type', 'content_document_type', '=')//;
-    ->range(0, 10);
+    ->condition('n.type', 'content_document_type', '=');
+    //->range(0, 10);
 
     return $query;
   }
@@ -50,6 +50,7 @@ class DocumentNode extends SqlBase {
       'body' => $this->t('body'),
       'image' => $this->t('image'),
       'file' => $this->t('file'),
+      'description' => $this->t('description'),
     ];
 
     return $fields;
@@ -93,6 +94,28 @@ class DocumentNode extends SqlBase {
       }
     }
 
+    // récupération du descriptif court
+    $descriptif_query = $this->select('field_data_field_descriptif_court', 'd');
+    $descriptif_query->fields('d', ['field_descriptif_court_value'])
+    ->condition('d.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('d.bundle', 'content_document_type', '=');
+
+    $descriptif_results = $descriptif_query->execute()->fetchAll();
+
+    if (is_array($descriptif_results)){
+      foreach ($descriptif_results AS $descriptif_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($descriptif_result) && isset($descriptif_result->field_descriptif_court_value)){
+          $row->setSourceProperty('body', $descriptif_result->field_descriptif_court_value);
+        }
+        elseif (is_array($descriptif_result) && isset($descriptif_result['field_descriptif_court_value'])){
+          $row->setSourceProperty('body', $descriptif_result['field_descriptif_court_value']);
+        }
+      }
+    }
+
+
     // récupération du tag "area"
     $area_query = $this->select('field_data_field_taxo_area', 'a');
     $area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
@@ -123,6 +146,162 @@ class DocumentNode extends SqlBase {
         }
       }
     }
+
+    // récupération du tag "topic"
+    $topic_query = $this->select('field_data_field_taxo_topic', 'a');
+    $topic_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_topic_tid');
+    $topic_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_document_type', '=');
+
+    $topic_results = $topic_query->execute()->fetchAll();
+
+    if (is_array($topic_results)){
+      foreach ($topic_results AS $topic_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($topic_result) && isset($topic_result->name)){
+          $area_name = $topic_result->name;
+        }
+        elseif (is_array($topic_result) && isset($topic_result['name'])){
+          $topic_name = $topic_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($topic_name){
+          $terms = taxonomy_term_load_multiple_by_name($topic_name, 'topics');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('topic', $key);
+          }
+        }
+      }
+    }
+
+    // récupération du tag "solution"
+    $solution_query = $this->select('field_data_field_taxo_solution', 'a');
+    $solution_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_solution_tid');
+    $solution_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_document_type', '=');
+
+    $solution_results = $solution_query->execute()->fetchAll();
+
+    if (is_array($solution_results)){
+      foreach ($solution_results AS $solution_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($solution_result) && isset($solution_result->name)){
+          $solution_name = $solution_result->name;
+        }
+        elseif (is_array($solution_result) && isset($solution_result['name'])){
+          $solution_name = $solution_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($solution_name){
+          $terms = taxonomy_term_load_multiple_by_name($solution_name, 'solutions');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('solution', $key);
+          }
+        }
+      }
+    }
+
+    // récupération du tag "industrie"
+    $industrie_query = $this->select('field_data_field_taxo_industrie', 'a');
+    $industrie_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_industrie_tid');
+    $industrie_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_document_type', '=');
+
+    $industrie_results = $industrie_query->execute()->fetchAll();
+
+    if (is_array($industrie_results)){
+      foreach ($industrie_results AS $industrie_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($industrie_result) && isset($industrie_result->name)){
+          $industrie_name = $industrie_result->name;
+        }
+        elseif (is_array($industrie_result) && isset($industrie_result['name'])){
+          $industrie_name = $industrie_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($industrie_name){
+          $terms = taxonomy_term_load_multiple_by_name($industrie_name, 'industries');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('industrie', $key);
+          }
+        }
+      }
+    }
+
+    // récupération du tag "partner"
+    $partner_query = $this->select('field_data_field_taxo_partner', 'a');
+    $partner_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_partner_tid');
+    $partner_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_document_type', '=');
+
+    $partner_results = $partner_query->execute()->fetchAll();
+
+    if (is_array($partner_results)){
+      foreach ($partner_results AS $partner_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($partner_result) && isset($partner_result->name)){
+          $partner_name = $partner_result->name;
+        }
+        elseif (is_array($partner_result) && isset($partner_result['name'])){
+          $partner_name = $partner_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($partner_name){
+          $terms = taxonomy_term_load_multiple_by_name($partner_name, 'partners');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('partner', $key);
+          }
+        }
+      }
+    }
+
+    // récupération du tag "case studies"
+    $customer_stories_query = $this->select('field_data_field_taxo_customer_stories', 'a');
+    $customer_stories_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_customer_stories_tid');
+    $customer_stories_query->fields('t', ['name'])
+    ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+    ->condition('a.bundle', 'content_document_type', '=');
+
+    $customer_stories_results = $customer_stories_query->execute()->fetchAll();
+
+    if (is_array($customer_stories_results)){
+      foreach ($customer_stories_results AS $customer_stories_result){
+
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($customer_stories_result) && isset($customer_stories_result->name)){
+          $customer_stories_name = $customer_stories_result->name;
+        }
+        elseif (is_array($customer_stories_result) && isset($customer_stories_result['name'])){
+          $customer_stories_name = $customer_stories_result['name'];
+        }
+
+        // on cherche le terme déjà existant dans la taxonomie
+        if ($customer_stories_name){
+          $terms = taxonomy_term_load_multiple_by_name($customer_stories_name, 'customer_stories');
+
+          foreach ($terms AS $key => $term){
+            $row->setSourceProperty('customer_story', $key);
+          }
+        }
+      }
+    }
+
     // récupération des fichiers PDF
     $files_query = $this->select('field_data_field_file_upl', 'fi');
     $field1_alias = $files_query->addField('fi', 'field_file_upl_fid', 'mid');

@@ -58,8 +58,8 @@ class PressReleaseFile extends SqlBase {
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->condition('n.type', 'content_press_release')
-    ->condition('n.status', 1, '=');
-    //->range(0, 10);
+    ->condition('n.status', 1, '=')//;
+    ->range(0, 10);
 
     return $query;
   }
@@ -116,7 +116,7 @@ class PressReleaseFile extends SqlBase {
     }
     // Compute the filepath property, which is a physical representation of
     // the URI relative to the Drupal root.
-    $saved_path = str_replace('public:/', $this->publicPath.'/OLD', $row->getSourceProperty('uri'));
+    $saved_path = str_replace('public:/', \Drupal\Core\Site\Settings::get('migration_files_source_path', $this->publicPath.'/OLD'), $row->getSourceProperty('uri'));
     $path = str_replace(['public:/', 'private:/', 'temporary:/'], [$this->publicPath, $this->privatePath, $this->temporaryPath], $row->getSourceProperty('uri'));
 
     if (file_exists($saved_path)) {
