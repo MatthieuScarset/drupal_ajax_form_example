@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - contact.form.any_request
+    - field.storage.contact_message.field_postal_code
+id: contact_message.any_request.field_postal_code
+field_name: field_postal_code
+entity_type: contact_message
+bundle: any_request
+label: 'Code postal'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

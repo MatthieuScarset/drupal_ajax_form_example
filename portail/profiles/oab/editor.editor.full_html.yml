@@ -1,0 +1,73 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor
+format: full_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Underline
+            - Strike
+            - '-'
+            - RemoveFormat
+            - Styles
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - Format
+            - Undo
+            - Redo
+        -
+          name: Linking
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+        -
+          name: Media
+          items:
+            - Blockquote
+            - media_browser
+            - Table
+            - HorizontalRule
+        -
+          name: Tools
+          items:
+            - Templates
+            - ShowBlocks
+            - Source
+            - SpecialChar
+            - Outdent
+            - Cut
+            - Copy
+            - Indent
+            - Paste
+            - PasteText
+            - PasteFromWord
+            - Maximize
+  plugins:
+    stylescombo:
+      styles: ''
+image_upload:
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -1,0 +1,20 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - contact.form.votre_avis_sur_notre_site_
+    - field.storage.contact_message.field_date
+  module:
+    - datetime
+id: contact_message.votre_avis_sur_notre_site_.field_date
+field_name: field_date
+entity_type: contact_message
+bundle: votre_avis_sur_notre_site_
+label: date
+description: 'saisir la date du jour'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,38 @@
+langcode: und
+status: true
+dependencies:
+  enforced:
+    module:
+      - oab_media_browser
+  module:
+    - dropzonejs_eb_widget
+name: browse_medias_iframe
+label: 'Browser iframe for medias'
+display: iframe
+display_configuration:
+  widget_ids:
+    735d146c-a4b2-4327-a057-d109e0905e06: 'Upload media'
+    a4ad947c-9669-497c-9988-24351955a02f: 'Medias listing'
+  width: 90%
+  height: '500'
+  link_text: 'Select medias'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  a4ad947c-9669-497c-9988-24351955a02f:
+    settings:
+      view: medias_entity_browser
+      view_display: entity_browser_1
+        weight: 1
+    label: 'medias listing'
+    id: view
+  735d146c-a4b2-4327-a057-d109e0905e06:
+    settings:
+      entity_type: media
+      bundle: image
+        weight: 0
+    label: 'Upload media'
+    id: entity_form

@@ -1,0 +1,17 @@
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice
+id: theme_obs_backoffice_local_actions
+theme: theme_obs_backoffice
+region: content
+weight: -5
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

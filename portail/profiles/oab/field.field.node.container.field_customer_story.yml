@@ -1,0 +1,27 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_customer_story
+    - node.type.container
+    - taxonomy.vocabulary.customer_stories
+id: node.container.field_customer_story
+field_name: field_customer_story
+entity_type: node
+bundle: container
+label: 'Customer story'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      customer_stories: customer_stories
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

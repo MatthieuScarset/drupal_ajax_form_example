@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_machine_name
+    - taxonomy.vocabulary.rendering_model
+id: taxonomy_term.rendering_model.field_machine_name
+field_name: field_machine_name
+entity_type: taxonomy_term
+bundle: rendering_model
+label: 'Machine name'
+description: 'field used in the site code ( ID)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

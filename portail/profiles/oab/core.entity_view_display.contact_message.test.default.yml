@@ -1,0 +1,26 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - contact.form.test
+    - field.field.contact_message.test.field_phonenumber
+id: contact_message.test.default
+targetEntityType: contact_message
+bundle: test
+mode: default
+content:
+  field_phonenumber:
+    weight: 2
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+  message:
+    type: basic_string
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

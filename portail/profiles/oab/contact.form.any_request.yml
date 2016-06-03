@@ -1,0 +1,14 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - contact_storage
+third_party_settings:
+  contact_storage:
+    redirect_uri: ''
+id: any_request
+label: Contactez-nous
+recipients:
+  - christophe.madeja@orange.com
+reply: ''
+weight: 0

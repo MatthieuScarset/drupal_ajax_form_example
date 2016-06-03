@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: document_file
+migration_tags: null
+migration_group: document
+label: 'Document files'
+source:
+  plugin: document_file
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:file'
+migration_dependencies: {  }

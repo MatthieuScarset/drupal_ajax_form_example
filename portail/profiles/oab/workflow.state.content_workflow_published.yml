@@ -1,0 +1,9 @@
+langcode: fr
+status: '1'
+dependencies: {  }
+id: content_workflow_published
+label: Published
+module: null
+wid: content_workflow
+weight: '-7'
+sysid: 0

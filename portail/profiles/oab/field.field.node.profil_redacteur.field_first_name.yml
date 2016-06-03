@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_first_name
+    - node.type.profil_redacteur
+id: node.profil_redacteur.field_first_name
+field_name: field_first_name
+entity_type: node
+bundle: profil_redacteur
+label: Nom
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

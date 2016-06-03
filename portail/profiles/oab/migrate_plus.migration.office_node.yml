@@ -1,0 +1,29 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: office_node
+migration_tags: null
+migration_group: office
+label: Office
+source:
+  plugin: office_node
+process:
+  type:
+    plugin: default_value
+    default_value: office
+  title: title
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_gps_coordinates/lat: latitude
+  field_gps_coordinates/lng: longitude
+  field_address/langcode: langcode
+  field_address/country_code: country
+  field_address/locality: city
+  field_address/postal_code: postal_code
+  field_address/address_line1: street
+  field_address/address_line2: additional
+  field_areas/target_id: area
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {  }

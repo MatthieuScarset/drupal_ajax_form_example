@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Magazines
+vid: magazine
+description: 'Magazine categories'
+hierarchy: 0
+weight: 0

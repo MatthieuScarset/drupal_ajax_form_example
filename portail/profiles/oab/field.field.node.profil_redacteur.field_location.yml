@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location
+    - node.type.profil_redacteur
+id: node.profil_redacteur.field_location
+field_name: field_location
+entity_type: node
+bundle: profil_redacteur
+label: Localisation
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

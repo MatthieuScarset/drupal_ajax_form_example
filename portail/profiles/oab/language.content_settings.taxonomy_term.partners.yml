@@ -1,0 +1,10 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.partners
+id: taxonomy_term.partners
+target_entity_type_id: taxonomy_term
+target_bundle: partners
+default_langcode: current_interface
+language_alterable: true

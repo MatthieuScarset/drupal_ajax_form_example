@@ -1,0 +1,24 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.image
+  content:
+    - 'file:file:d6282434-0513-4c98-bc46-709db58e9813'
+  module:
+    - entity_embed
+    - media_entity
+    - oab_media_browser
+label: 'Media Browser'
+id: media_browser
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles:
+    - image
+  display_plugins:
+    - 'entity_reference:entity_reference_image'
+  entity_browser: browse_medias_iframe
+  entity_browser_settings:
+    display_review: false
+icon_

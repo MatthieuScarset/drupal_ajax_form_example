@@ -1,0 +1,13 @@
+langcode: fr
+status: true
+dependencies: {  }
+name: file_entity_browser_thumbnail
+label: 'File Entity Browser thumbnail'
+effects:
+  2002cfd3-6b51-4668-b204-4b33425cf3f7:
+        id: image_scale
+    weight: 1
+    data:
+      width: 350
+      height: null
+      upscale: false

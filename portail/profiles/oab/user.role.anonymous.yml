@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'use text format restricted_html'
+  - 'access comments'
+  - 'access site-wide contact form'
+  - 'search content'
+  - 'create processus_1 workflow_transition'
+  - 'create publication_page_simple workflow_transition'
+  - 'create workflow_page_simple workflow_transition'
+  - 'view media'
+  - 'create content_workflow workflow_transition'

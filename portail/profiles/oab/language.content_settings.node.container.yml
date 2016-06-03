@@ -1,0 +1,10 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.container
+id: node.container
+target_entity_type_id: node
+target_bundle: container
+default_langcode: current_interface
+language_alterable: true

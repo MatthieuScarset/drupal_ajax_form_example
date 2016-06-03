@@ -1,0 +1,21 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_state
+    - node.type.container
+  module:
+    - workflowfield
+id: node.container.field_state
+field_name: field_state
+entity_type: node
+bundle: container
+label: State
+description: ''
+required: true
+translatable: true
+default_value:
+  - {  }
+default_value_callback: ''
+settings: {  }
+field_type: workflow
