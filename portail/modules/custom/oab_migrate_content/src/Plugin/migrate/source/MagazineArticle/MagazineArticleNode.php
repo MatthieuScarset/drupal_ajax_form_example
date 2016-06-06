@@ -32,9 +32,9 @@ class MagazineArticleNode extends SqlBase {
     $query = $this->select('node', 'n')
       ->fields('n', ['nid', 'title', 'language'])
       ->condition('n.type', 'content_magazine_article', '=')
-    //  ->condition('n.status', 1, '=')
-    //  ->condition('n.changed', time() - MAGAZINE_ARTICLE_SELECT_DATE, '>');
-      ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');
+      ->condition('n.status', 1, '=')
+      ->condition('n.changed', time() - MAGAZINE_ARTICLE_SELECT_DATE, '>');
+    //  ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');
     return $query;
   }
 
@@ -149,7 +149,7 @@ class MagazineArticleNode extends SqlBase {
     //MAGAZINE
     $categories_query = $this->select('field_data_field_taxo_magazine', 'tm');
     $categories_query->join('taxonomy_term_data', 't', 't.tid = tm.field_taxo_magazine_tid');
-    $categories_query->fields('t', ['name'])
+    $categories_query->fields('t', ['tid'])
       ->condition('tm.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('tm.bundle', 'content_magazine_article', '=');
     $categories_results = $categories_query->execute()->fetchAll();
@@ -171,7 +171,7 @@ class MagazineArticleNode extends SqlBase {
     //INDUSTRIES
     $industries_query = $this->select('field_data_field_taxo_industrie', 'ti');
     $industries_query->join('taxonomy_term_data', 't', 't.tid = ti.field_taxo_industrie_tid');
-    $industries_query->fields('t', ['name'])
+    $industries_query->fields('t', ['tid'])
       ->condition('ti.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('ti.bundle', 'content_magazine_article', '=');
     $industries_results = $industries_query->execute()->fetchAll();
@@ -193,7 +193,7 @@ class MagazineArticleNode extends SqlBase {
     //SOLUTIONS
     $solutions_query = $this->select('field_data_field_taxo_solution', 'ts');
     $solutions_query->join('taxonomy_term_data', 't', 't.tid = ts.field_taxo_solution_tid');
-    $solutions_query->fields('t', ['name'])
+    $solutions_query->fields('t', ['tid'])
       ->condition('ts.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('ts.bundle', 'content_magazine_article', '=');
     $solutions_results = $solutions_query->execute()->fetchAll();
@@ -215,7 +215,7 @@ class MagazineArticleNode extends SqlBase {
     //PARTNERS
     $partners_query = $this->select('field_data_field_taxo_partner', 'tp');
     $partners_query->join('taxonomy_term_data', 't', 't.tid = tp.field_taxo_partner_tid');
-    $partners_query->fields('t', ['name'])
+    $partners_query->fields('t', ['tid'])
       ->condition('tp.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('tp.bundle', 'content_magazine_article', '=');
     $partners_results = $partners_query->execute()->fetchAll();
@@ -237,7 +237,7 @@ class MagazineArticleNode extends SqlBase {
     //AREAS
     $areas_query = $this->select('field_data_field_taxo_area', 'ta');
     $areas_query->join('taxonomy_term_data', 't', 't.tid = ta.field_taxo_area_tid');
-    $areas_query->fields('t', ['name'])
+    $areas_query->fields('t', ['tid'])
       ->condition('ta.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('ta.bundle', 'content_magazine_article', '=');
     $areas_results = $areas_query->execute()->fetchAll();
@@ -259,7 +259,7 @@ class MagazineArticleNode extends SqlBase {
     //CUSTOMER STORIES
     $customer_query = $this->select('field_data_field_taxo_customer_stories', 'tcs');
     $customer_query->join('taxonomy_term_data', 't', 't.tid = tcs.field_taxo_customer_stories_tid');
-    $customer_query->fields('t', ['name'])
+    $customer_query->fields('t', ['tid'])
       ->condition('tcs.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('tcs.bundle', 'content_magazine_article', '=');
     $customer_results = $customer_query->execute()->fetchAll();

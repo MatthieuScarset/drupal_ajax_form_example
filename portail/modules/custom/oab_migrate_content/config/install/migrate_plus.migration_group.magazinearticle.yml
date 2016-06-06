@@ -1,8 +1,6 @@
 langcode: fr
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: jkZysKXgF00vvU10JgkGqie8vIoK3w1_ejcXcwDIoMA
 id: magazinearticle
 label: 'Magazine articles Imports'
 description: null
