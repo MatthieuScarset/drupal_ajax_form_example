@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: tools
-label: Outils
-description: 'Liens outils de l''utilisateur, souvent ajoutés par des modules'
-locked: true

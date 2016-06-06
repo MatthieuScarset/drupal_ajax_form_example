@@ -1,7 +1,0 @@
-langcode: zxx
-status: true
-dependencies: {  }
-id: top-navbar-menu
-label: 'Top navbar menu'
-description: 'Navigation principale'
-locked: false

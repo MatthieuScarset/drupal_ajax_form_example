@@ -1,9 +1,0 @@
-langcode: fr
-status: false
-dependencies:
-  module:
-    - comment
-id: comment.full
-label: 'Commentaire complet'
-targetEntityType: comment
-cache: true

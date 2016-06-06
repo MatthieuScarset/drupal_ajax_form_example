@@ -1,9 +1,0 @@
-langcode: fr
-status: '1'
-dependencies: {  }
-id: content_workflow_awaiting_publication
-label: 'Awaiting publication'
-module: null
-wid: content_workflow
-weight: '-8'
-sysid: 0

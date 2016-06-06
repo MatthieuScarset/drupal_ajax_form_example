@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: html_time
-label: 'Heure HTML'
-locked: true
-pattern: 'H:i:s'
