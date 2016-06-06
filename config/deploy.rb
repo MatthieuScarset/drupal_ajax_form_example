@@ -145,10 +145,10 @@ namespace :deploy do
    desc 'Run update commands on server'
    task :drush_update do
     on roles(:all) do
-     execute "drush updb --yes --root=#{release_path}/portail"
-	 execute "drush entity-updates --yes --root=#{release_path}/portail"
+     #execute "drush updb --yes --root=#{release_path}/portail"
+	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
 	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
-	 execute "drush cr --root=#{release_path}/portail"
+	 #execute "drush cr --root=#{release_path}/portail"
     end
    end
 end
