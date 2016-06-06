@@ -27,7 +27,7 @@ settings:
   title_field: true
   title_field_required: false
   default_image:
-        alt: ''
+    alt: ''
     title: ''
     width: null
     height: null
