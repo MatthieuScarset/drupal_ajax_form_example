@@ -1,0 +1,21 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: magazinearticle_term
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine article terms'
+source:
+  plugin: magazinearticle_term
+process:
+  vid: vid
+  langcode: language
+  name: name
+  parent:
+    plugin: migration
+    migration: magazinearticle_term
+    source: parent
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: {  }

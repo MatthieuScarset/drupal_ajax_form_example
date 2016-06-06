@@ -1,0 +1,51 @@
+langcode: fr
+status: false
+dependencies:
+  config:
+    - filter.format.test
+  module:
+    - ckeditor
+format: test
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formats
+          items:
+            - Bold
+            - Styles
+            - Underline
+            - Italic
+        -
+          name: Liens
+          items:
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Listes
+          items:
+            - BulletedList
+            - NumberedList
+        -
+          name: Média
+          items:
+            - Blockquote
+            - DrupalImage
+        -
+          name: Outils
+          items:
+            - SpecialChar
+            - Source
+  plugins:
+    stylescombo:
+      styles: ''
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

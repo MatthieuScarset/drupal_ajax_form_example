@@ -1,0 +1,23 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: blogpost_term
+migration_tags: null
+migration_group: blogpost
+label: 'Blog posts terms'
+source:
+  plugin: blogpost_term
+process:
+  vid:
+    plugin: default_value
+    default_value: blog
+  langcode: language
+  name: name
+  parent:
+    plugin: migration
+    migration: blogpost_term
+    source: parent
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: {  }

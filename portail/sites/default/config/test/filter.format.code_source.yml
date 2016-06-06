@@ -1,0 +1,14 @@
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Code Source'
+format: code_source
+weight: 0
+filters:
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72

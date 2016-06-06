@@ -1,0 +1,146 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.container.field_area
+    - field.field.node.container.field_blog
+    - field.field.node.container.field_content_field
+    - field.field.node.container.field_customer_story
+    - field.field.node.container.field_end_date
+    - field.field.node.container.field_file
+    - field.field.node.container.field_image
+    - field.field.node.container.field_industry
+    - field.field.node.container.field_magazine
+    - field.field.node.container.field_partner
+    - field.field.node.container.field_rendering_model
+    - field.field.node.container.field_short_description
+    - field.field.node.container.field_solution
+    - field.field.node.container.field_start_date
+    - field.field.node.container.field_state
+    - field.field.node.container.field_subtitle
+    - node.type.container
+  module:
+    - datetime
+    - options
+    - text
+    - user
+id: node.container.default
+targetEntityType: node
+bundle: container
+mode: default
+content:
+  field_area:
+    weight: 114
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_blog:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_content_field:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_customer_story:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_end_date:
+    weight: 105
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_file:
+    weight: 110
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_image:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_industry:
+    weight: 111
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_magazine:
+    weight: 112
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_partner:
+    weight: 113
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_rendering_model:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_short_description:
+    weight: 115
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_solution:
+    weight: 116
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_start_date:
+    weight: 104
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_state:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+  field_subtitle:
+    weight: 117
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  links:
+    weight: 100
+hidden:
+  langcode: true

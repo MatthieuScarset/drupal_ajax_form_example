@@ -1,0 +1,25 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - media_entity.bundle.image
+    - node.type.profil_redacteur
+id: node.profil_redacteur.field_image
+field_name: field_image
+entity_type: node
+bundle: profil_redacteur
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,9 @@
+langcode: fr
+status: '1'
+dependencies: {  }
+id: content_workflow_draft
+label: Draft
+module: null
+wid: content_workflow
+weight: '-9'
+sysid: 0

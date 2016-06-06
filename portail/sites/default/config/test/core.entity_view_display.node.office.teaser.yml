@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.office.field_address
+    - field.field.node.office.field_areas
+    - field.field.node.office.field_description
+    - field.field.node.office.field_gps_coordinates
+    - node.type.office
+  module:
+    - user
+id: node.office.teaser
+targetEntityType: node
+bundle: office
+mode: teaser
+content:
+  links:
+    weight: 100
+hidden:
+  field_address: true
+  field_areas: true
+  field_description: true
+  field_gps_coordinates: true
+  langcode: true

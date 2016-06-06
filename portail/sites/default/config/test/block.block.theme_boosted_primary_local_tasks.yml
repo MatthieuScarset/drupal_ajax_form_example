@@ -1,0 +1,19 @@
+langcode: fr
+status: false
+dependencies:
+  theme:
+    - theme_boosted
+id: theme_boosted_primary_local_tasks
+theme: theme_boosted
+region: '-1'
+weight: -7
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Onglets principaux'
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: false
+visibility: {  }

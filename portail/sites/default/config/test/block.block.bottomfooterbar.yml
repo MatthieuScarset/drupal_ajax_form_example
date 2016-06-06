@@ -1,0 +1,23 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.bottom-footerbar
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: bottomfooterbar
+theme: theme_boosted
+region: footer
+weight: -11
+provider: null
+plugin: 'system_menu_block:bottom-footerbar'
+settings:
+  id: 'system_menu_block:bottom-footerbar'
+  label: 'Bottom Footerbar'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

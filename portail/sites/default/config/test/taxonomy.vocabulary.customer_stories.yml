@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Customer Stories'
+vid: customer_stories
+description: ''
+hierarchy: 0
+weight: 0

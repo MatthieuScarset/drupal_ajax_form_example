@@ -1,0 +1,13 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.fh_content
+  module:
+    - user
+id: user_add_role_action.fh_content
+label: 'Ajouter le rôle FH Content aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: fh_content

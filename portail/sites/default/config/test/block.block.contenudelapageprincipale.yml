@@ -1,0 +1,19 @@
+langcode: fr
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: contenudelapageprincipale
+theme: theme_boosted
+region: '-1'
+weight: -11
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Contenu de la page principale'
+  provider: system
+  label_display: '0'
+visibility: {  }

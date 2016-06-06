@@ -1,0 +1,17 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.image
+id: media.image.revision_log
+field_name: revision_log
+entity_type: media
+bundle: image
+label: 'Revision Log'
+description: 'L''entrée de journal expliquant les changements dans cette révision.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

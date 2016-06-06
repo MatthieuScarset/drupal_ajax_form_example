@@ -1,0 +1,37 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - oab_cartography
+    - system
+  theme:
+    - theme_boosted
+id: contactpushblock
+theme: theme_boosted
+region: sidebar
+weight: -15
+provider: null
+plugin: contact_push_block
+settings:
+  id: contact_push_block
+  label: 'Contact Push Block'
+  provider: oab_cartography
+  label_display: '0'
+  contact_push_custom_text:
+    value: "<div class=\"container-fluid\">\r\n<div class=\"row obs_template one_column\">\r\n<div class=\"col-md-12\">\r\n<div class=\"container-fluid\">\r\n<div class=\"row obs_template obs_background_yellow\">\r\n<div class=\"col-md-12\">\r\n<p><br />\r\nmobile en panne<br />\r\n&nbsp;<br />\r\nVotre mobile ne s'allume plus ? Certaines fonctionnalités ne sont plus disponibles ? Vous n'arrivez plus à passer vos appels ? Votre mobile est peut être en panne.<br />\r\n&nbsp;<br />\r\nvous avez acheté votre mobile chez Orange Business Services</p>\r\n\r\n<p>Vous bénéficiez d’une garantie de 24 mois sur votre matériel. Le SAV échange express (*), permettant un échange en 24h en France métropolitaine, est alors gratuit en cas de panne pendant cette période. Au-delà, il est payant</p>\r\n\r\n<p>que faire en cas de panne du mobile ?</p>\r\n\r\n<p>Dans un premier temps, vérifiez que la panne provient bien de votre mobile en y insérant une autre carte SIM.</p>\r\n\r\n<p>votre mobile ne fonctionne toujours pas ?<br />\r\nVous devez alors contacter votre Service Client pour une demande SAV, accessible 24h/24 et 7j/7 :</p>\r\n\r\n<p>&nbsp;&nbsp;&nbsp; 706 suivi du choix 2 depuis votre mobile (appel décompté du forfait)<br />\r\n&nbsp;&nbsp;&nbsp; 0 825 000 706 suivi du choix 2 depuis un poste fixe (0,13€ HT/min)<br />\r\n&nbsp;&nbsp;&nbsp; + 33 675 052 000 suivi du choix 2 depuis l'étranger (coût d'un appel vers un mobile métropolitain)</p>\r\n\r\n<p>(*) : voir les Conditions Générales de Vente</p>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n"
+    format: full_html
+visibility:
+  request_path:
+    id: request_path
+    pages: "/contact\r\n/contact/any_request"
+    negate: false
+    context_mapping: {  }
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

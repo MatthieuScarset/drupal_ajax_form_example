@@ -1,0 +1,20 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - contact.form.any_request
+    - field.storage.contact_message.field_title
+  module:
+    - options
+id: contact_message.any_request.field_title
+field_name: field_title
+entity_type: contact_message
+bundle: any_request
+label: Civilité
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

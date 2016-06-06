@@ -1,0 +1,9 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: content_workflow_draft_draft
+label: null
+module: null
+from_sid: content_workflow_draft
+to_sid: content_workflow_draft
+roles: {  }

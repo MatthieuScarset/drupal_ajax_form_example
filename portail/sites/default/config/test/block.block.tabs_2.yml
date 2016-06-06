@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  theme:
+    - theme_boosted
+id: tabs_2
+theme: theme_boosted
+region: '-1'
+weight: -1
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: false
+  secondary: true
+visibility: {  }

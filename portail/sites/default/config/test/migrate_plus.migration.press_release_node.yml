@@ -1,0 +1,33 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: press_release_node
+migration_tags: null
+migration_group: press_release
+label: 'Communiqué de presse'
+source:
+  plugin: press_release_node
+process:
+  type:
+    plugin: default_value
+    default_value: simple
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_areas/target_id: field_taxo_area
+  body/value: body
+  field_type/target_id:
+    plugin: default_value
+    default_value: 10
+  field_file:
+    plugin: migration
+    migration: press_release_media
+    source: files
+  path: path
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - press_release_media

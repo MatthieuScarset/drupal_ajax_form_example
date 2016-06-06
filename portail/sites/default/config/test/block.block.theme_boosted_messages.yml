@@ -1,0 +1,19 @@
+langcode: fr
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: theme_boosted_messages
+theme: theme_boosted
+region: '-1'
+weight: -9
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Messages de statut'
+  provider: system
+  label_display: '0'
+visibility: {  }

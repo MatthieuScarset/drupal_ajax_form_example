@@ -1,0 +1,11 @@
+name: 'Orange Business Services'
+mail: stephanie.jourdan@orange.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/5
+admin_compact_mode: false
+weight_select_max: 100
+langcode: fr
+default_langcode: fr

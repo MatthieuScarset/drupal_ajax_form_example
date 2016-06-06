@@ -1,0 +1,7 @@
+langcode: zxx
+status: true
+dependencies: {  }
+id: footer
+label: 'Pied de page'
+description: 'Site information links'
+locked: true

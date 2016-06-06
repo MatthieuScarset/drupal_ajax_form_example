@@ -1,0 +1,10 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: file
+label: File
+description: 'Ajoutez un fichier PDF, WORD, ZIP..'
+type: generic
+queue_thumbnail_downloads: false
+type_configuration: {  }
+field_map: {  }
