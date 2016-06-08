@@ -4,21 +4,21 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: document
-id: document_term
+migration_group: press_release
+id: press_release_term
 migration_tags: null
-label: Documents terms
+label: Communiqués de presse terms
 source:
-  plugin: document_term
+  plugin: press_release_term
 process:
   vid:
     plugin: default_value
-    default_value: document
+    default_value: press_release
   langcode: language
   name: name
   parent:
     plugin: migration
-    migration: document_term
+    migration: press_release_term
     source: parent
   weight: weight
 destination:

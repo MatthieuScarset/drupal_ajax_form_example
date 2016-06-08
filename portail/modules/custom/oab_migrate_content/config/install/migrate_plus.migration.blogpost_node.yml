@@ -22,18 +22,42 @@ process:
   field_type/target_id:
     plugin: default_value
     default_value: 7
-  field_body/value: body
-  field_body/format:
+  field_rendering_model/target_id: rendering_model_id
+  field_content_field/value: content_field
+  field_content_field/format:
     plugin: default_value
     default_value: full_html
+  field_content_field/zone:
+    plugin: default_value
+    default_value: default
   field_blog: 
     plugin: migration
     migration: blogpost_term
     source: categories
+  field_solution:
+    plugin: migration
+    migration: document_term
+    source: solutions
+  field_industry:
+    plugin: migration
+    migration: document_term
+    source: industries
+  field_partner:
+    plugin: migration
+    migration: document_term
+    source: partners
+  field_area:
+    plugin: migration
+    migration: document_term
+    source: areas
+  field_customer_story:
+    plugin: migration
+    migration: document_term
+    source: customer_stories
   field_image:
     plugin: migration
     migration: blogpost_media
-    source: images
+    source: images  
   path: path
 destination:
   plugin: entity:node

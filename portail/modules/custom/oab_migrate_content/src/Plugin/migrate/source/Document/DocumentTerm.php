@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
+namespace Drupal\oab_migrate_content\Plugin\migrate\source\Document;
 
 use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
@@ -9,16 +9,19 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_term"
+ *   id = "document_term"
  * )
  */
-class BlogPostTerm extends SqlBase {
+class DocumentTerm extends SqlBase {
 
-  private $correspondanceTaxo = array(10 => "industries",
-                                      13 => "solutions",
-                                      16 => "partners",
-                                      7 => "areas",
-                                      17 => "customer_stories");
+  private $correspondanceTaxo = array(9 => "document_type",
+      22 => "topic",
+      10 => "industries",
+      13 => "solutions",
+      16 => "partners",
+      7 => "areas",
+      17 => "customer_stories");
+
 
   /**
    * {@inheritdoc}
@@ -39,7 +42,7 @@ class BlogPostTerm extends SqlBase {
     $query->join('taxonomy_term_hierarchy', 'th', 'th.tid = t.tid');
     $query->fields('t', ['tid', 'vid', 'name', 'language', 'weight'])
     ->fields('th', ['parent'])
-    ->condition('t.vid', array(21, 10, 13, 16, 7, 17), 'IN')
+    ->condition('t.vid', array(9, 22, 10, 13, 16, 7, 17), 'IN') // taxo document
     ->orderBy('th.parent', 'ASC');
     return $query;
   }

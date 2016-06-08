@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
+namespace Drupal\oab_migrate_content\Plugin\migrate\source\PressRelease;
 
 use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
@@ -9,10 +9,10 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "blogpost_term"
+ *   id = "pressrelease_term"
  * )
  */
-class BlogPostTerm extends SqlBase {
+class PressReleaseTerm extends SqlBase {
 
   private $correspondanceTaxo = array(10 => "industries",
                                       13 => "solutions",
@@ -39,7 +39,7 @@ class BlogPostTerm extends SqlBase {
     $query->join('taxonomy_term_hierarchy', 'th', 'th.tid = t.tid');
     $query->fields('t', ['tid', 'vid', 'name', 'language', 'weight'])
     ->fields('th', ['parent'])
-    ->condition('t.vid', array(21, 10, 13, 16, 7, 17), 'IN')
+    ->condition('t.vid', array(10, 13, 16, 7, 17), 'IN')
     ->orderBy('th.parent', 'ASC');
     return $query;
   }
@@ -82,6 +82,7 @@ class BlogPostTerm extends SqlBase {
     ->execute()
     ->fetchCol();
     $row->setSourceProperty('parent', $parents);
+
 
     $old_vid = $row->getSourceProperty('vid');
     $row->setSourceProperty('vid', $this->correspondanceTaxo[$old_vid]);

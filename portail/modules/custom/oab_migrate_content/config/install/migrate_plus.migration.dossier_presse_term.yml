@@ -4,21 +4,19 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: document
-id: document_term
+migration_group: dossier_presse
+id: dossier_presse_term
 migration_tags: null
-label: Documents terms
+label: Dossiers presse terms
 source:
-  plugin: document_term
+  plugin: dossier_presse_term
 process:
-  vid:
-    plugin: default_value
-    default_value: document
+  vid: vid
   langcode: language
   name: name
   parent:
     plugin: migration
-    migration: document_term
+    migration: dossier_presse_term
     source: parent
   weight: weight
 destination:

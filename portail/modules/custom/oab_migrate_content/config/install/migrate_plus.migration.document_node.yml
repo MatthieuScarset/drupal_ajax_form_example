@@ -14,13 +14,48 @@ destination:
 process:
   type:
     plugin: default_value
-    default_value: simple
+    default_value: container
   title: title
   langcode: language
   uid:
     plugin: default_value
     default_value: 1
-  field_areas/target_id: field_taxo_area
+  field_rendering_model/target_id: rendering_model_id
+  field_content_field/value: content_field
+  field_content_field/format:
+    plugin: default_value
+    default_value: full_html
+  field_content_field/zone:
+    plugin: default_value
+    default_value: default
+  field_document_type:
+    plugin: migration
+    migration: document_term
+    source: document_types
+  field_topic:
+    plugin: migration
+    migration: document_term
+    source: topics
+  field_solution:
+    plugin: migration
+    migration: document_term
+    source: solutions
+  field_industry:
+    plugin: migration
+    migration: document_term
+    source: industries
+  field_partner:
+    plugin: migration
+    migration: document_term
+    source: partners
+  field_area:
+    plugin: migration
+    migration: document_term
+    source: areas
+  field_customer_story:
+    plugin: migration
+    migration: document_term
+    source: customer_stories
   body/value: body
   field_type/target_id:
     plugin: default_value
@@ -34,8 +69,11 @@ process:
     migration: document_media_image
     source: images
   path: path  
+  field_subtitle: subtitle
+  field_short_description: short_description
 migration_dependencies:  
   required:
     - document_media_file
     - document_media_image
+    - document_term
  
