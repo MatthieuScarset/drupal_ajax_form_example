@@ -7,7 +7,7 @@ dependencies:
 migration_group: press_release
 id: press_release_term
 migration_tags: null
-label: Communiqués de presse terms
+label: 'Communiqués de presse terms'
 source:
   plugin: press_release_term
 process:

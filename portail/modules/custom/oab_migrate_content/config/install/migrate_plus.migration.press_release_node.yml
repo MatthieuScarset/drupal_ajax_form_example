@@ -30,23 +30,23 @@ process:
     default_value: 10
   field_industry:
     plugin: migration
-    migration: pressrelease_term
+    migration: press_release_term
     source: industries
   field_solution:
     plugin: migration
-    migration: pressrelease_term
+    migration: press_release_term
     source: solutions
   field_partner:
     plugin: migration
-    migration: pressrelease_term
+    migration: press_release_term
     source: partners
   field_area:
     plugin: migration
-    migration: pressrelease_term
+    migration: press_release_term
     source: areas
   field_customer_story:
     plugin: migration
-    migration: pressrelease_term
+    migration: press_release_term
     source: customer_stories
   field_file:
     plugin: migration

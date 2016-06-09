@@ -9,7 +9,7 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "pressrelease_term"
+ *   id = "press_release_term"
  * )
  */
 class PressReleaseTerm extends SqlBase {
