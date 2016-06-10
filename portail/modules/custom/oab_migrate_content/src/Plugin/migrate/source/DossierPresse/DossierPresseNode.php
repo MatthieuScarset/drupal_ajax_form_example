@@ -80,8 +80,8 @@ class DossierPresseNode extends SqlBase {
     }
 
     // récupération du body (short description)
-    $body_query = $this->select('field_data_body', 'b');
-    $body_query->fields('b', ['body_value'])
+    $body_query = $this->select('field_data_field_txt_catcher', 'b');
+    $body_query->fields('b', ['field_txt_catcher_value'])
       ->condition('b.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('b.bundle', 'press_kit', '=');
 
@@ -94,8 +94,8 @@ class DossierPresseNode extends SqlBase {
         if (is_object($body_result) && isset($body_result->body_value)){
           $row->setSourceProperty('content_field', $body_result->body_value);
         }
-        elseif (is_array($body_result) && isset($body_result['body_value'])){
-          $row->setSourceProperty('content_field', $body_result['body_value']);
+        elseif (is_array($body_result) && isset($body_result['field_txt_catcher_value'])){
+          $row->setSourceProperty('content_field', $body_result['field_txt_catcher_value']);
         }
       }
     }
@@ -119,7 +119,7 @@ class DossierPresseNode extends SqlBase {
         if (is_object($industrie_result) && isset($industrie_result->tid)){
           $industries[] = $industrie_result->tid;
         }
-        elseif (is_array($industries_result) && isset($industrie_result['tid'])){
+        elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
           $industries[] = $industrie_result['tid'];
         }
       }

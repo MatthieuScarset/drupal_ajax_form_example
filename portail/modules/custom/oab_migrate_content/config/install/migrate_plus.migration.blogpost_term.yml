@@ -4,21 +4,21 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: document
-id: document_term
+migration_group: blogpost
+id: blogpost_term
 migration_tags: null
-label: Documents terms
+label: Bloc post terms
 source:
-  plugin: document_term
+  plugin: blogpost_term
 process:
   vid:
     plugin: default_value
-    default_value: document
+    default_value: blogpost
   langcode: language
   name: name
   parent:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: parent
   weight: weight
 destination:

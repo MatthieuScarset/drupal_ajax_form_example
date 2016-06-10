@@ -36,23 +36,23 @@ process:
     source: categories
   field_solution:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: solutions
   field_industry:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: industries
   field_partner:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: partners
   field_area:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: areas
   field_customer_story:
     plugin: migration
-    migration: document_term
+    migration: blogpost_term
     source: customer_stories
   field_image:
     plugin: migration
