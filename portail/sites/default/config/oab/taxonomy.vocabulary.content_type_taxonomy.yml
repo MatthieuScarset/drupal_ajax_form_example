@@ -1,9 +1,0 @@
-uuid: 278bd789-bdff-462a-8784-d28a2b41f497
-langcode: und
-status: true
-dependencies: {  }
-name: 'Content type taxonomy'
-vid: content_type_taxonomy
-description: ''
-hierarchy: 0
-weight: 0
