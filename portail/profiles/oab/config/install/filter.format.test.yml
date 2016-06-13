@@ -1,7 +1,0 @@
-langcode: fr
-status: false
-dependencies: {  }
-name: test
-format: test
-weight: -7
-filters: {  }

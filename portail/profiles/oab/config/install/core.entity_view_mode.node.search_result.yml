@@ -1,9 +1,0 @@
-langcode: fr
-status: false
-dependencies:
-  module:
-    - node
-id: node.search_result
-label: 'Effectuer une recherche en mettant en évidence les données saisies'
-targetEntityType: node
-cache: true

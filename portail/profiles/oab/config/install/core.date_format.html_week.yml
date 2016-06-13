@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: html_week
-label: 'Semaine HTML'
-locked: true
-pattern: Y-\WW

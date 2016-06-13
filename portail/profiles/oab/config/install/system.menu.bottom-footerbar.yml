@@ -1,7 +1,0 @@
-langcode: zxx
-status: true
-dependencies: {  }
-id: bottom-footerbar
-label: 'Bottom Footerbar'
-description: ''
-locked: false

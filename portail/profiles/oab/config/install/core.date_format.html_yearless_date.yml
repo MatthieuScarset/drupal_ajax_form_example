@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: html_yearless_date
-label: 'Date sans année HTML'
-locked: true
-pattern: m-d

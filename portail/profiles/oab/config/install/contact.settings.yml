@@ -1,6 +1,0 @@
-default_form: any_request
-flood:
-  limit: 5
-  interval: 3600
-user_default_enabled: true
-langcode: fr

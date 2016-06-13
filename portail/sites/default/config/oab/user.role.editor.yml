@@ -28,3 +28,6 @@ permissions:
   18: 'create url aliases'
   20: 'view the administration theme'
   21: 'access toolbar'
+  22: 'create container content'
+  23: 'edit own container content'
+  24: 'view container revisions'

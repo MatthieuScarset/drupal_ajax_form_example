@@ -1,9 +1,0 @@
-uuid: 94564554-0282-4772-9300-c9cf4ac43a52
-langcode: zxx
-status: true
-dependencies: {  }
-name: Article
-vid: article
-description: ''
-hierarchy: 0
-weight: 0
