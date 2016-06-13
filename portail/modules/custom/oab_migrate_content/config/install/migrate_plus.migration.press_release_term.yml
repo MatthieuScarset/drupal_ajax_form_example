@@ -22,6 +22,5 @@ process:
     source: parent
   weight: weight
 destination:
-  plugin: entity:taxonomy_term
-template: null
+  plugin: 'entity:taxonomy_term'
 migration_dependencies: {  }

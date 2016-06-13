@@ -7,13 +7,13 @@ dependencies:
 migration_group: blogpost
 id: blogpost_node
 migration_tags: null
-label: Blog posts nodes
+label: 'Blog posts nodes'
 source:
   plugin: blogpost_node
 process:
   type:
     plugin: default_value
-    default_value: simple
+    default_value: container
   title: title
   langcode: language
   uid:

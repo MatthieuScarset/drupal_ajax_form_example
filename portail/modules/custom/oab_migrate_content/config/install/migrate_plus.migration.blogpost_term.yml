@@ -7,7 +7,7 @@ dependencies:
 migration_group: blogpost
 id: blogpost_term
 migration_tags: null
-label: Bloc post terms
+label: 'Blog post terms'
 source:
   plugin: blogpost_term
 process:
@@ -22,6 +22,6 @@ process:
     source: parent
   weight: weight
 destination:
-  plugin: entity:taxonomy_term
+  plugin: 'entity:taxonomy_term'
 template: null
 migration_dependencies: {  }

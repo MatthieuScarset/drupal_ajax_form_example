@@ -7,7 +7,7 @@ dependencies:
 migration_group: dossier_presse
 id: dossier_presse_term
 migration_tags: null
-label: Dossiers presse terms
+label: 'Dossiers presse terms'
 source:
   plugin: dossier_presse_term
 process:
@@ -20,6 +20,5 @@ process:
     source: parent
   weight: weight
 destination:
-  plugin: entity:taxonomy_term
-template: null
+  plugin: 'entity:taxonomy_term'
 migration_dependencies: {  }

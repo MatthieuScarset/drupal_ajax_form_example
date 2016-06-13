@@ -7,7 +7,7 @@ dependencies:
 migration_group: document
 id: document_media_image
 migration_tags: null
-label: Document image medias
+label: 'Document image medias'
 source:
   plugin: document_media_image
 process:

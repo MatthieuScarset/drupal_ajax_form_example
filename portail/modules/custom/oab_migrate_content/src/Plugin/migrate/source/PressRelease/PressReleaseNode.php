@@ -47,7 +47,7 @@ class PressReleaseNode extends SqlBase {
       'title' => $this->t('title'),
       'language' => $this->t('language'),
       'areas' => $this->t('areas'),
-      'body' => $this->t('body'),
+      'content_field' => $this->t('content_field'),
       'file' => $this->t('file'),
       'country' => $this->t('country'),
       'city' => $this->t('city'),
@@ -87,7 +87,7 @@ class PressReleaseNode extends SqlBase {
 
     // récupération de Country
     $country_query = $this->select('field_data_field_txt_country', 'c');
-    $country_query->fields('c', ['field_txt_country'])
+    $country_query->fields('c', ['field_txt_country_value'])
       ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('c.bundle', 'content_press_release', '=');
 
@@ -108,7 +108,7 @@ class PressReleaseNode extends SqlBase {
 
     // récupération de City
     $city_query = $this->select('field_data_field_location', 'l');
-    $city_query->fields('l', ['field_location'])
+    $city_query->fields('l', ['field_location_value'])
       ->condition('l.entity_id', $row->getSourceProperty('nid'), '=')
       ->condition('l.bundle', 'content_press_release', '=');
 
@@ -141,10 +141,10 @@ class PressReleaseNode extends SqlBase {
 
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->body_value)){
-          $row->setSourceProperty('body', $body_result->body_value);
+          $row->setSourceProperty('content_field', $body_result->body_value);
         }
         elseif (is_array($body_result) && isset($body_result['body_value'])){
-          $row->setSourceProperty('body', $body_result['body_value']);
+          $row->setSourceProperty('content_field', $body_result['body_value']);
         }
       }
     }

@@ -4,21 +4,21 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: blogpost
-id: blogpost_term
+migration_group: document
+id: document_term
 migration_tags: null
-label: Blog posts terms
+label: 'Document terms'
 source:
-  plugin: blogpost_term
+  plugin: document_term
 process:
   vid: vid
   langcode: language
   name: name
   parent:
     plugin: migration
-    migration: blogpost_term
+    migration: document_term
     source: parent
   weight: weight
 destination:
-  plugin: entity:taxonomy_term
+  plugin: 'entity:taxonomy_term'
 migration_dependencies: {  }

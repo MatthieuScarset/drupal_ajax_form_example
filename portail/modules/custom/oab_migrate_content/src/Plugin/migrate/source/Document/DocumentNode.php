@@ -99,10 +99,10 @@ class DocumentNode extends SqlBase {
 
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->body_value)){
-          $row->setSourceProperty('body', $body_result->body_value);
+          $row->setSourceProperty('content_field', $body_result->body_value);
         }
         elseif (is_array($body_result) && isset($body_result['body_value'])){
-          $row->setSourceProperty('body', $body_result['body_value']);
+          $row->setSourceProperty('content_field', $body_result['body_value']);
         }
       }
     }

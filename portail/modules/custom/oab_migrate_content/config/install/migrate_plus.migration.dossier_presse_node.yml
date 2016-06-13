@@ -1,16 +1,12 @@
-id: dossier_presse_node
-label: Dossier presse
-migration_group: dossier_presse
 langcode: fr
 status: true
-dependencies:
-  module:
-    - migrate_plus
-    - node
+pendencies: {  }
+id: dossier_presse_node
+migration_tags: null
+migration_group: dossier_presse
+label: 'Dossier presse nodes'
 source:
   plugin: dossier_presse_node
-destination:
-  plugin: entity:node
 process:
   type:
     plugin: default_value
@@ -28,9 +24,6 @@ process:
   field_content_field/zone:
     plugin: default_value
     default_value: default
-  field_type/target_id:
-    plugin: default_value
-    default_value: 10
   field_solution:
     plugin: migration
     migration: dossier_presse_term
@@ -55,9 +48,10 @@ process:
     plugin: migration
     migration: dossier_presse_media
     source: files
-  path: path  
+  path: path
+destination:
+  plugin: 'entity:node'
 migration_dependencies:  
   required:
-    - dossier_presse_media
     - dossier_presse_term
- 
+    - dossier_presse_media

@@ -21,13 +21,10 @@ process:
     plugin: default_value
     default_value: 1
   field_rendering_model/target_id: rendering_model_id
-  field_content_field/value: body
+  field_content_field/value: content_field
   field_content_field/format:
     plugin: default_value
     default_value: full_html
-  field_type/target_id:
-    plugin: default_value
-    default_value: 10
   field_industry:
     plugin: migration
     migration: press_release_term
@@ -54,8 +51,8 @@ process:
     source: files
   field_short_description: short_description
   path: path  
- # field_country: country
- # field_city: city
+  field_country: country
+  field_city: city
 migration_dependencies:  
   required:
     - press_release_media

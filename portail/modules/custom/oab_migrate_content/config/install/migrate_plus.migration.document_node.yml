@@ -10,7 +10,7 @@ dependencies:
 source:
   plugin: document_node
 destination:
-  plugin: entity:node
+  plugin: 'entity:node'
 process:
   type:
     plugin: default_value
@@ -56,10 +56,6 @@ process:
     plugin: migration
     migration: document_term
     source: customer_stories
-  body/value: body
-  field_type/target_id:
-    plugin: default_value
-    default_value: 9
   field_file:
     plugin: migration
     migration: document_media_file

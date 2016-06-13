@@ -46,7 +46,7 @@ class BlogPostNode extends SqlBase {
       'nid' => $this->t('Node ID'),
       'title' => $this->t('title'),
       'language' => $this->t('language'),
-      'body' => $this->t('body'),
+      'content_field' => $this->t('content_field'),
       'image' => $this->t('image'),
       'category' => $this->t('category'),
       'areas' => $this->t('areas'),

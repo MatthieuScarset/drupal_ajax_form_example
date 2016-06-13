@@ -45,7 +45,7 @@ class DossierPresseNode extends SqlBase {
       'title' => $this->t('title'),
       'language' => $this->t('language'),
       'areas' => $this->t('areas'),
-      'body' => $this->t('body'),
+      'content_field' => $this->t('content_field'),
       'solutions' => $this->t('solution'),
       'industries' => $this->t('industrie'),
       'partners' => $this->t('partner'),
@@ -78,12 +78,13 @@ class DossierPresseNode extends SqlBase {
     foreach ($terms AS $key => $term){
       $row->setSourceProperty('rendering_model_id', $key);
     }
+    $row->setSourceProperty('content_field', '');
 
     // récupération du body (short description)
-    $body_query = $this->select('field_data_field_txt_catcher', 'b');
-    $body_query->fields('b', ['field_txt_catcher_value'])
-      ->condition('b.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('b.bundle', 'press_kit', '=');
+    $body_query = $this->select('field_data_field_txt_catcher', 'c');
+    $body_query->fields('c', ['field_txt_catcher_value'])
+      ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+      ->condition('c.bundle', 'press_kit', '=');
 
     $body_results = $body_query->execute()->fetchAll();
 

@@ -7,7 +7,7 @@ dependencies:
 migration_group: document
 id: document_media_file
 migration_tags: null
-label: Document files medias
+label: 'Document files medias'
 source:
   plugin: document_media_file
 process:
