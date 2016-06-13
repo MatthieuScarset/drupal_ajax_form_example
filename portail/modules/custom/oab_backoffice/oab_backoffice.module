@@ -53,3 +53,11 @@ function oab_backoffice_form_node_container_edit_form_alter(&$form, FormStateInt
 {
   $form['field_rendering_model']['#disabled'] = TRUE;
 }
+
+function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match){
+  switch ($route_name){
+    case 'node.add_page':
+      return '<h3>' . t('Please choose a model rendering :') . '</h3>';
+      break;
+  }
+}
