@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: admin
-label: Administration
-description: 'Liens des tâches d''administration'
-locked: true

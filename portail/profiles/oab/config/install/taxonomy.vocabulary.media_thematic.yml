@@ -1,8 +1,0 @@
-langcode: und
-status: true
-dependencies: {  }
-name: 'Media thematic'
-vid: media_thematic
-description: ''
-hierarchy: 0
-weight: 0

@@ -1,9 +1,0 @@
-langcode: fr
-status: '1'
-dependencies: {  }
-id: content_workflow_unpublished
-label: Unpublished
-module: null
-wid: content_workflow
-weight: '-6'
-sysid: 0

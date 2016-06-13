@@ -1,9 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: content_workflow_unpublished_unpublished
-label: null
-module: null
-from_sid: content_workflow_unpublished
-to_sid: content_workflow_unpublished
-roles: {  }

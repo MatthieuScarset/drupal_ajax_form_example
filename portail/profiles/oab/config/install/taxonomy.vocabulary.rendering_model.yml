@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Rendering model'
-vid: rendering_model
-description: 'taxonomy for choosing the rendering model (blog post, magazine, ...)'
-hierarchy: 0
-weight: 0

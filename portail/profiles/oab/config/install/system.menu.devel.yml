@@ -1,7 +1,0 @@
-langcode: fr
-status: true
-dependencies: {  }
-id: devel
-label: Development
-description: 'Links related to Devel module.'
-locked: true
