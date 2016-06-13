@@ -1,0 +1,15 @@
+<?php
+
+
+
+function oab_christophe_install() {
+  drupal_set_installed_schema_version('oab_stephanie', 8000);
+}
+
+/**
+ *  RUBYPORTAILOBS-2436 - Description des types de contenu
+ */
+
+function oab_christophe_update_8001() {
+  include_once("updates/update_8001.inc");
+}
