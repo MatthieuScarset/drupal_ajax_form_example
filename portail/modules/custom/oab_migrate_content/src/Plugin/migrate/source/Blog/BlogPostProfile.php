@@ -153,17 +153,6 @@ class BlogPostProfile extends SqlBase {
     }
     $row->setSourceProperty('field_social_accounts', $social_accounts);
 
-    //$job_values = [];
-    //$job_values[] = [['langcode' => 'fr', 'value' => 'test FR'], ['langcode' => 'rn', 'value' => 'test EN']];
-    //$job_values[] = ['fr' => ['value' => 'test FR'], 'en' => ['value' => 'test EN']];
-    //$job_values[] = ['value' => 'test FR'];
-    //$job_values['fr'] = [0 => ['value' => 'test FR']];
-    //$job_values['en'] = [0 => ['value' => 'test EN']];
-    //$job_values[] = ['langcode' => 'en', 'value' => 'test FR'];
-
-    //$row->setSourceProperty('field_profil/langcode', 'en');
-    //$row->setSourceProperty('field_profil/value', 'test');
-
     if ($title == '') $title = 'test';
     $row->setSourceProperty('title', $title);
 
