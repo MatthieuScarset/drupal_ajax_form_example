@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * implements hook_uninstall()
+ */
+function oab_migrate_content_uninstall() {
+  $migrate_groups = \Drupal\migrate_plus\Entity\MigrationGroup::loadMultiple();
+  foreach ($migrate_groups AS $migrate_group){
+    $migrate_group->delete();
+  }
+}

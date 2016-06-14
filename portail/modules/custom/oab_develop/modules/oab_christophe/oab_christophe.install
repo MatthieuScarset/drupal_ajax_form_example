@@ -3,13 +3,19 @@
 
 
 function oab_christophe_install() {
-  drupal_set_installed_schema_version('oab_stephanie', 8000);
+  drupal_set_installed_schema_version('oab_christophe', 8000);
 }
 
 /**
  *  RUBYPORTAILOBS-2436 - Description des types de contenu
  */
-
 function oab_christophe_update_8001() {
   include_once("updates/update_8001.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2412 - MAJ de la config de migration des profils blogger
+ */
+function oab_christophe_update_8002() {
+  include_once("updates/update_8002.inc");
 }

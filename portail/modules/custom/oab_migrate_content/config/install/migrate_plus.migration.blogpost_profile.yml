@@ -20,16 +20,12 @@ process:
     default_value: 1
   langcode: langcode
   title: title
-  body/value: field_txt_catcher
+  body/value: field_txt_biography_fr
   field_first_name/value: field_first_name
   field_last_name/value: field_last_name
-  field_job/value: field_profil
+  field_job/value: field_profil_fr
   field_social_accounts: field_social_accounts
-  #field_job:
-    #langcode: en
-    #value: field_profil
-  #field_job/value: field_profil
-  field_location/value: field_location
+  field_location/value: field_location_fr
   field_image:
     plugin: migration
     migration: blogpost_profile_media

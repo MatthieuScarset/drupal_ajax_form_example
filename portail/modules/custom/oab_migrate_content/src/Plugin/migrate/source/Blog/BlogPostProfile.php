@@ -128,41 +128,30 @@ class BlogPostProfile extends SqlBase {
 
     $social_accounts = [];
     if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')){
-      $social_accounts[0] = $field_twitter_account;
+      $social_accounts[0] = substr($field_twitter_account, 0, 255);
     }
     else{
       $social_accounts[0] = ' ';
     }
     if ($field_linkin_account = $row->getSourceProperty('field_linkin_account')){
-      $social_accounts[1] = $field_linkin_account;
+      $social_accounts[1] = substr($field_linkin_account, 0, 255);
     }
     else{
       $social_accounts[1] = ' ';
     }
     if ($field_viadeo_account = $row->getSourceProperty('field_viadeo_account')){
-      $social_accounts[2] = $field_viadeo_account;
+      $social_accounts[2] = substr($field_viadeo_account, 0, 255);
     }
     else{
       $social_accounts[2] = ' ';
     }
     if ($field_googleplus_account = $row->getSourceProperty('field_googleplus_account')){
-      $social_accounts[3] = $field_googleplus_account;
+      $social_accounts[3] = substr($field_googleplus_account, 0, 255);
     }
     else{
       $social_accounts[3] = ' ';
     }
     $row->setSourceProperty('field_social_accounts', $social_accounts);
-
-    //$job_values = [];
-    //$job_values[] = [['langcode' => 'fr', 'value' => 'test FR'], ['langcode' => 'rn', 'value' => 'test EN']];
-    //$job_values[] = ['fr' => ['value' => 'test FR'], 'en' => ['value' => 'test EN']];
-    //$job_values[] = ['value' => 'test FR'];
-    //$job_values['fr'] = [0 => ['value' => 'test FR']];
-    //$job_values['en'] = [0 => ['value' => 'test EN']];
-    //$job_values[] = ['langcode' => 'en', 'value' => 'test FR'];
-
-    //$row->setSourceProperty('field_profil/langcode', 'en');
-    //$row->setSourceProperty('field_profil/value', 'test');
 
     if ($title == '') $title = 'test';
     $row->setSourceProperty('title', $title);

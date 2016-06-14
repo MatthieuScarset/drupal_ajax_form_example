@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains Drupal\migrate_tools\Controller\MigrationListBuilder.
- */
 
 namespace Drupal\migrate_tools\Controller;
 
@@ -12,7 +8,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate_plus\Plugin\MigrationConfigEntityPluginManager;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -38,7 +33,7 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
    * Plugin manager for migration plugins.
    *
    * @var \Drupal\migrate_plus\Plugin\MigrationConfigEntityPluginManager
-  */
+   */
   protected $migrationConfigEntityPluginManager;
 
   /**
@@ -49,7 +44,9 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
    *   The entity storage class.
    * @param \Drupal\Core\Routing\CurrentRouteMatch $current_route_match
-   *   The Current route match service.
+   *   The current route match service.
+   * @param \Drupal\migrate_plus\Plugin\MigrationConfigEntityPluginManager $migration_config_entity_plugin_manager
+   *   The plugin manager for config entity-based migrations.
    */
   public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, CurrentRouteMatch $current_route_match, MigrationConfigEntityPluginManager $migration_config_entity_plugin_manager) {
     parent::__construct($entity_type, $storage);
@@ -92,7 +89,7 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
   /**
    * Builds a row for a migration plugin.
    *
-   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
+   * @param \Drupal\Core\Entity\EntityInterface $migration
    *   The migration plugin for which to build the row.
    *
    * @return array
@@ -100,7 +97,8 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
    *
    * @see Drupal\Core\Entity\EntityListController::render()
    */
-  public function buildRow(Migration $migration) {
+  public function buildRow(EntityInterface $migration_entity) {
+    $migration = $this->migrationConfigEntityPluginManager->createInstance($migration_entity->id());
     $row['label'] = $migration->label();
     $row['machine_name'] = $migration->id();
     $row['status'] = $migration->getStatusLabel();
@@ -118,40 +116,33 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
     else {
       $row['unprocessed'] = $row['total'] - $map->processedCount();
     }
-    //$migration_group = $migration->getThirdPartySetting('migrate_plus', 'migration_group');
-    //if (!$migration_group) {
-    //  $migration_group = 'default';
-    //}
-    //$route_parameters = array(
-    //  'migration_group' => $migration_group,
-    //  'migration' => $migration->id()
-    //);
-    //$row['messages'] = array(
-    //  'data' => array(
-    //    '#type' => 'link',
-    //    '#title' => $map->messageCount(),
-    //    '#url' => Url::fromRoute("migrate_tools.messages", $route_parameters),
-    //  ),
-    //);
-    //$migrate_last_imported_store = \Drupal::keyValue('migrate_last_imported');
-    //$last_imported =  $migrate_last_imported_store->get($migration->id(), FALSE);
-    //if ($last_imported) {
+    $migration_group = $migration->get('migration_group');
+    if (!$migration_group) {
+      $migration_group = 'default';
+    }
+    $route_parameters = array(
+      'migration_group' => $migration_group,
+      'migration' => $migration->id()
+    );
+    $row['messages'] = array(
+      'data' => array(
+        '#type' => 'link',
+        '#title' => $map->messageCount(),
+        '#url' => Url::fromRoute("migrate_tools.messages", $route_parameters),
+      ),
+    );
+    $migrate_last_imported_store = \Drupal::keyValue('migrate_last_imported');
+    $last_imported =  $migrate_last_imported_store->get($migration->id(), FALSE);
+    if ($last_imported) {
       /** @var DateFormatter $date_formatter */
-    //  $date_formatter = \Drupal::service('date.formatter');
-    //  $row['last_imported'] = $date_formatter->format($last_imported / 1000,
-    //    'custom', 'Y-m-d H:i:s');
-    //}
-    //else {
-    //  $row['last_imported'] = '';
-    //}
-    return $row; // + parent::buildRow($migration);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function load() {
-    return $this->migrationConfigEntityPluginManager->createInstances([]);
+      $date_formatter = \Drupal::service('date.formatter');
+      $row['last_imported'] = $date_formatter->format($last_imported / 1000,
+        'custom', 'Y-m-d H:i:s');
+    }
+    else {
+      $row['last_imported'] = '';
+    }
+    return $row + parent::buildRow($migration_entity);
   }
 
   /**
@@ -159,12 +150,12 @@ class MigrationListBuilder extends ConfigEntityListBuilder implements EntityHand
    */
   public function getDefaultOperations(EntityInterface $entity) {
     $operations = parent::getDefaultOperations($entity);
-    $migration_group = $entity->getThirdPartySetting('migrate_plus', 'migration_group');
+    $migration_group = $entity->get('migration_group');
     if (!$migration_group) {
       $migration_group = 'default';
     }
 //    $this->addGroupParameter($operations['edit']['url'], $migration_group);
-    $this->addGroupParameter($operations['delete']['url'], $migration_group);
+//    $this->addGroupParameter($operations['delete']['url'], $migration_group);
     return $operations;
   }
 
