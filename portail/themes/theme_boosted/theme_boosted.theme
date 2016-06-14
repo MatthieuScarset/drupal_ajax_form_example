@@ -61,11 +61,13 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
           $nom_machine = $term->field_machine_name->value;
           switch ($nom_machine) {
             case 'magazine' :
-              $suggestions[] = 'node__content_magazine';
+              $suggestions[] = 'node__container_magazine';
               break;
             case 'blog_post' :
-              $suggestions[] = 'node__content_blog_post';
+              $suggestions[] = 'node__container_blog_post';
               break;
+            default:
+              $suggestions[] = 'node__container_default';
           }
         }
       }
