@@ -37,7 +37,7 @@ class MagazineArticleMedia extends SqlBase {
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_magazine_article')
     ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - MAGAZINE_ARTICLE_SELECT_DATE, '>');
+    ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
 
     return $query;
   }

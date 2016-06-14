@@ -59,7 +59,7 @@ class MagazineArticleImage extends SqlBase {
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->condition('n.type', 'content_magazine_article')
     ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - MAGAZINE_ARTICLE_SELECT_DATE, '>');
+    ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
 
 
     return $query;
