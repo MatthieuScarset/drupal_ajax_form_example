@@ -1,0 +1,5 @@
+services:
+  oab_migrate_content.oab_migrate_content_blog_post_save:
+    class: Drupal\oab_migrate_content\EventSubscriber\OabMigrateContentBlogPostSave
+    tags:
+      - { name: event_subscriber }
