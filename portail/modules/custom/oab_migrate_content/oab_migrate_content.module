@@ -1,4 +1,7 @@
 <?php
 
 define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 100));
-define('MAGAZINE_ARTICLE_SELECT_DATE', (60 * 60 * 24 * 100)); // 10 derniers jours
+
+// timestamp correspondant au 1er janvier 2014 00h00:00
+define('MAGAZINE_ARTICLE_SELECT_DATE', 1388530800);
+define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);

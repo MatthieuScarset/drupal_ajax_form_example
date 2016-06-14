@@ -59,7 +59,7 @@ class MagazineInterviewImage extends SqlBase {
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->condition('n.type', 'content_magazine_interview')
     ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - MAGAZINE_INTERVIEW_SELECT_DATE, '>');
+    ->condition('n.changed', MAGAZINE_INTERVIEW_SELECT_DATE, '>');
 
 
     return $query;
