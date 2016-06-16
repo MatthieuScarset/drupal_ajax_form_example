@@ -50,6 +50,7 @@ process:
     migration: press_release_media
     source: files
   field_short_description: short_description
+  field_state/value: workflow
   path: path  
   field_country: country
   field_city: city

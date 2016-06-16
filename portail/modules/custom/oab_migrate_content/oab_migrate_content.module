@@ -1,7 +1,34 @@
 <?php
 
-define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 100));
+define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 150));
 
 // timestamp correspondant au 1er janvier 2014 00h00:00
 define('MAGAZINE_ARTICLE_SELECT_DATE', 1388530800);
 define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);
+
+function oab_migrate_workflow_sid_correspondance($old_sid){
+  $workflow_state = NULL;
+  if (is_int($old_sid)){
+    // creation
+    if (in_array($old_sid, array(7, 21, 26, 32, 35, 38, 41, 51, 55))){
+      $workflow_state = 'content_workflow_(creation)';
+    }
+    // draft
+    if (in_array($old_sid, array(9, 27, 33, 36, 39, 42, 52, 56))){
+      $workflow_state = 'content_workflow_draft';
+    }
+    // request for approval
+    elseif (in_array($old_sid, array(8, 24))){
+      $workflow_state = 'content_workflow_awaiting_publication';
+    }
+    // unpublished
+    elseif (in_array($old_sid, array(10, 44, 45, 46, 47, 48, 49, 50, 54, 58))){
+      $workflow_state = 'content_workflow_unpublished';
+    }
+    // published
+    elseif (in_array($old_sid, array(11, 25, 28, 34, 37, 40, 43, 53, 57))){
+      $workflow_state = 'content_workflow_published';
+    }
+  }
+  return $workflow_state;
+}

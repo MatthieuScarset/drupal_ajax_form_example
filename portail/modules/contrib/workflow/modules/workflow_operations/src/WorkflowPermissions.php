@@ -1,11 +1,8 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workflow_operations\WorkflowPermissions.
- */
-
 namespace Drupal\workflow_operations;
+
+use Drupal\workflow\Entity\Workflow;
 
 /**
  * Provides dynamic permissions for workflows of different types.
@@ -32,7 +29,7 @@ class WorkflowPermissions extends \Drupal\workflow\WorkflowPermissions {
    * @return array
    *   An associative array of permission names and descriptions.
    */
-  protected function buildPermissions(\Drupal\workflow\Entity\Workflow $type) {
+  protected function buildPermissions(Workflow $type) {
     $type_id = $type->id();
     $type_params = array('%type_name' => $type->label());
 

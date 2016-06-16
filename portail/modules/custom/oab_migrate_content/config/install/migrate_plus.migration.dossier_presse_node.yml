@@ -48,6 +48,7 @@ process:
     plugin: migration
     migration: dossier_presse_media
     source: files
+  field_state/value: workflow
   path: path
 destination:
   plugin: 'entity:node'

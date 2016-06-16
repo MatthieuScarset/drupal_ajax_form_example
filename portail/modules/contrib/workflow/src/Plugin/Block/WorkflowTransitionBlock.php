@@ -1,21 +1,10 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workflow\Plugin\Block\WorkflowTransitionBlock.
- */
-
 namespace Drupal\workflow\Plugin\Block;
 
-use Drupal\block\BlockAccessControlHandler;
-use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Form\FormBuilder;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Url;
-use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\workflow\Entity\WorkflowTransition;
 
 /**

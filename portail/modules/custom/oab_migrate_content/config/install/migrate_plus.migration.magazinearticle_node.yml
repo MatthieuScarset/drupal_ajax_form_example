@@ -52,6 +52,7 @@ process:
     plugin: migration
     migration: magazinearticle_media
     source: images
+  field_state/value: workflow
   path: path
   field_subtitle: subtitle
   field_short_description: short_description

@@ -1,21 +1,13 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\workflow\Entity\WorkflowTransition.
- *
- * Implements (scheduled/executed) state transitions on entities.
- */
-
 namespace Drupal\workflow\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Language\Language;
+use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
-use Drupal\workflow\Entity\WorkflowState;
 
 /**
  * Implements an actual, executed, Transition.
@@ -26,6 +18,12 @@ use Drupal\workflow\Entity\WorkflowState;
  * @ContentEntityType(
  *   id = "workflow_transition",
  *   label = @Translation("Workflow executed transition"),
+ *   label_singular = @Translation("Workflow executed transition"),
+ *   label_plural = @Translation("Workflow executed transitions"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count Workflow executed transition",
+ *     plural = "@count Workflow executed transitions",
+ *   ),
  *   bundle_label = @Translation("Workflow type"),
  *   module = "workflow",
  *   handlers = {
@@ -837,7 +835,7 @@ class WorkflowTransition extends ContentEntityBase implements WorkflowTransition
   public function getOwner() {
     $user = $this->get('uid')->entity;
     if (!$user || $user->isAnonymous()) {
-      $user = \Drupal\user\Entity\User::getAnonymousUser();
+      $user = User::getAnonymousUser();
       $user->name = \Drupal::config('user.settings')->get('anonymous');
     }
     return $user;
