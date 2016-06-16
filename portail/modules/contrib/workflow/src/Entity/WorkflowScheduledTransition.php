@@ -1,18 +1,10 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\workflow\Entity\WorkflowScheduledTransition.
- *
- * Implements (scheduled/executed) state transitions on entities.
- */
-
 namespace Drupal\workflow\Entity;
 
-use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityConstraintViolationList;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\EntityConstraintViolationList;
 
 /**
  * Implements a scheduled transition, as shown on Workflow form.
@@ -20,6 +12,12 @@ use Drupal\Core\Entity\EntityConstraintViolationList;
  * @ContentEntityType(
  *   id = "workflow_scheduled_transition",
  *   label = @Translation("Workflow scheduled transition"),
+ *   label_singular = @Translation("Workflow scheduled transition"),
+ *   label_plural = @Translation("Workflow scheduled transitions"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count Workflow scheduled transition",
+ *     plural = "@count Workflow scheduled transitions",
+ *   ),
  *   bundle_label = @Translation("Workflow type"),
  *   module = "workflow",
  *   handlers = {

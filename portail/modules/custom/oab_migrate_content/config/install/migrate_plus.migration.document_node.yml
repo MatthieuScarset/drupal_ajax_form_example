@@ -64,6 +64,7 @@ process:
     plugin: migration
     migration: document_media_image
     source: images
+  field_state/value: workflow
   path: path  
   field_subtitle: subtitle
   field_short_description: short_description

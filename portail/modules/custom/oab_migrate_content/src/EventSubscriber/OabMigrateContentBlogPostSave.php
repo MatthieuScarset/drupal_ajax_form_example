@@ -9,6 +9,7 @@ namespace Drupal\oab_migrate_content\EventSubscriber;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use \Drupal\migrate\Event\MigrateEvents;
 use \Drupal\migrate\Event\MigratePostRowSaveEvent;
+use Drupal\migrate\Event\MigrateImportEvent;
 
 /**
  * Subscribe to MigrateEvents::POST_ROW_SAVE events.
@@ -64,5 +65,26 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
 
       $map->saveIdMapping($migrate_row->getRow(), array($nid));
     }
+
+    // gestion des workflow schedule
+    // ne fonctionne pas car une transition est déjà en cours d'enregistrement
+    // provoque l'erreur : Transition is executed twice in a call. The second call for XXXX is not executed.
+    
+    /*if (isset($migrate_src_values['workflow_transition_state'])
+    && isset($migrate_src_values['workflow_transition_time'])){
+      $workflow_comment = isset($migrate_src_values['workflow_transition_comment']) ? $migrate_src_values['workflow_transition_comment'] : '';
+      $entity = \Drupal\node\Entity\Node::load($nid);
+
+      $workflowTransition = \Drupal\workflow\Entity\WorkflowTransition::create([$migrate_src_values['workflow']]);
+      $workflowTransition->schedule(TRUE);
+      $workflowTransition->setValues($migrate_src_values['workflow_transition_state'], NULL, $migrate_src_values['workflow_transition_time'], $workflow_comment);
+      $workflowTransition->setTargetEntity($entity);
+      $workflowTransition->set('field_name', 'field_state');
+      $workflowTransition->execute();
+    }*/
+
+    // On remet l'utilisateur anonyme par défaut, au cas où
+    $anonymous_user = \Drupal\user\Entity\User::load(0);
+    \Drupal::getContainer()->set('current_user', $anonymous_user);
   }
 }

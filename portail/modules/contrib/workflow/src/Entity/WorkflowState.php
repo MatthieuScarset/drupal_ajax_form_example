@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\workflow\Entity\WorkflowState.
- */
-
 namespace Drupal\workflow\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
@@ -12,7 +7,6 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Workflow configuration entity to persistently store configuration.
@@ -20,6 +14,12 @@ use Drupal\user\UserInterface;
  * @ConfigEntityType(
  *   id = "workflow_state",
  *   label = @Translation("Workflow state"),
+ *   label_singular = @Translation("Workflow state"),
+ *   label_plural = @Translation("Workflow states"),
+ *   label_count = @PluralTranslation(
+ *     singular = "@count Workflow state",
+ *     plural = "@count Workflow states",
+ *   ),
  *   module = "workflow",
  *   handlers = {
  *     "list_builder" = "Drupal\workflow_ui\Controller\WorkflowStateListBuilder",
@@ -107,20 +107,20 @@ class WorkflowState extends ConfigEntityBase {
   public function __construct(array $values = array(), $entityType = 'workflow_state') {
     // Please be aware that $entity_type and $entityType are different things!
 
-    $id = isset($values['id']) ? $values['id'] : '';
+    $sid = isset($values['id']) ? $values['id'] : '';
 
     // Keep official name and external name equal. Both are required.
     // @todo: still needed? test import, manual creation, programmatic creation, etc.
-    if (!isset($values['label']) && $id) {
-      $values['label'] = $id;
+    if (!isset($values['label']) && $sid) {
+      $values['label'] = $sid;
     }
 
     // Set default values for '(creation)' state.
-    if ($id == WORKFLOW_CREATION_STATE_NAME) {
-      $values['id'] = ''; // Clear ID; will be set in save().
+    if ($sid == WORKFLOW_CREATION_STATE_NAME) {
       $values['sysid'] = WORKFLOW_CREATION_STATE;
       $values['weight'] = WORKFLOW_CREATION_DEFAULT_WEIGHT;
-      $values['label'] = '(creation)'; // machine_name;
+      // Do not translate the machine_name.
+      $values['label'] = '(' . t('Creation') . ')';
     }
     parent::__construct($values, $entityType);
 
@@ -136,17 +136,26 @@ class WorkflowState extends ConfigEntityBase {
     // N.B.: Keep machine_name in WorkflowState and ~ListBuilder aligned.
     $sid = $this->id();
     $wid = $this->wid;
+    $label = $this->label();
 
-    if (empty($sid) || $sid == WORKFLOW_CREATION_STATE_NAME) {
-      if ($label = $this->label()) {
-        // Format the machine_name. @todo Use a proper machine_name regex.
+    // Set the workflow-including machine_name.
+    if ($sid == WORKFLOW_CREATION_STATE_NAME) {
+      // Set the initial sid.
+      $sid = implode('_', [$wid, $sid]);
+      $this->set('id', $sid);
+    }
+    elseif(empty($sid)) {
+      if ($label) {
+        // @todo: Use a proper machine_name regex.
         $sid = str_replace(' ', '_', strtolower($label));
+        $sid = implode('_', [$wid, $sid]);
       }
       else {
         workflow_debug(__FILE__, __FUNCTION__, __LINE__);  // @todo D8-port: still test this snippet.
         $sid = 'state_' . $this->id();
+        $sid = implode('_', [$wid, $sid]);
       }
-      $this->set('id', implode('_', [$wid, $sid]));
+      $this->set('id', $sid);
     }
 
     return parent::save();

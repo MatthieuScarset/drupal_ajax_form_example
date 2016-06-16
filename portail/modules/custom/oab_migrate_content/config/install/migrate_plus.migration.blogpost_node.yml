@@ -57,7 +57,8 @@ process:
   field_image:
     plugin: migration
     migration: blogpost_media
-    source: images  
+    source: images
+  field_state/value: workflow
   path: path
 destination:
   plugin: entity:node

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workflow_access\Form\WorkflowAccessRoleForm.
- */
-
 namespace Drupal\workflow_access\Form;
 
 use Drupal\Core\Entity\EntityInterface;

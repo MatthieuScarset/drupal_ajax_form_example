@@ -70,6 +70,9 @@ class MagazineInterviewNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+    // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
+    $admin_user = \Drupal\user\Entity\User::load(1);
+    \Drupal::getContainer()->set('current_user', $admin_user);
 
     //Id du rendering_model
     $terms = taxonomy_term_load_multiple_by_name("magazine", 'rendering_model');
@@ -301,6 +304,58 @@ class MagazineInterviewNode extends SqlBase {
         }
       }
       $row->setSourceProperty('images', $images);
+    }
+
+    // récupération du workflow
+    $workflow_query = $this->select('workflow_node', 'w');
+    $workflow_query->fields('w', ['sid'])
+      ->condition('w.nid', $row->getSourceProperty('nid'), '=');
+
+    $workflow_results = $workflow_query->execute()->fetchAll();
+
+    if (is_array($workflow_results)){
+      foreach ($workflow_results AS $workflow_result){
+        $sid = '';
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($workflow_result) && isset($workflow_result->sid)){
+          $sid = $workflow_result->sid;
+        }
+        elseif (is_array($workflow_result) && isset($workflow_result['sid'])){
+          $sid = $workflow_result['sid'];
+        }
+
+        $row->setSourceProperty('workflow', oab_migrate_workflow_sid_correspondance($sid));
+      }
+    }
+
+    $workflow_scheduled_query = $this->select('workflow_scheduled_transition', 'wst');
+    $workflow_scheduled_query->fields('wst', ['sid', 'scheduled', 'comment'])
+      ->condition('wst.nid', $row->getSourceProperty('nid'))
+      ->condition('wst.entity_type', 'node');
+
+    $workflow_scheduled_results = $workflow_scheduled_query->execute()->fetchAll();
+
+    if (is_array($workflow_scheduled_results)) {
+      foreach ($workflow_scheduled_results AS $workflow_scheduled_result) {
+        $scheduled_sid = '';
+        $scheduled_timestamp = '';
+        $scheduled_comment = '';
+        // On vérifie si on a affaire à un objet ou à un tableau
+        if (is_object($workflow_scheduled_result) && isset($workflow_scheduled_result->sid) && isset($workflow_scheduled_result->scheduled)) {
+          $scheduled_sid = $workflow_scheduled_result->sid;
+          $scheduled_timestamp = $workflow_scheduled_result->scheduled;
+          $scheduled_comment = isset($workflow_scheduled_result->comment) ? isset($workflow_scheduled_result->comment) : '';
+        }
+        elseif (is_array($workflow_scheduled_result) && isset($workflow_scheduled_result['sid']) && isset($workflow_scheduled_result['scheduled'])) {
+          $scheduled_sid = $workflow_scheduled_result['sid'];
+          $scheduled_timestamp = $workflow_scheduled_result['scheduled'];
+          $scheduled_comment = isset($workflow_scheduled_result['comment']) ? isset($workflow_scheduled_result['comment']) : '';
+        }
+
+        $row->setSourceProperty('workflow_transition_state', oab_migrate_workflow_sid_correspondance($scheduled_sid));
+        $row->setSourceProperty('workflow_transition_time', $scheduled_timestamp);
+        $row->setSourceProperty('workflow_transition_comment', $scheduled_comment);
+      }
     }
 
     // path
