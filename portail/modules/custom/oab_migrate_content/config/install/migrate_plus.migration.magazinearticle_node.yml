@@ -8,6 +8,9 @@ label: 'Magazine articles nodes'
 source:
   plugin: magazinearticle_node
 process:
+  status:
+    plugin: default_value
+    default_value: 1
   type:
     plugin: default_value
     default_value: container

@@ -12,6 +12,9 @@ source:
 destination:
   plugin: entity:node
 process:
+  status:
+    plugin: default_value
+    default_value: 1
   type:
     plugin: default_value
     default_value: container

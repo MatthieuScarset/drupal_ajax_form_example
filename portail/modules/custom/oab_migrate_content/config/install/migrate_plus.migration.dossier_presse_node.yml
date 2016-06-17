@@ -8,6 +8,9 @@ label: 'Dossier presse nodes'
 source:
   plugin: dossier_presse_node
 process:
+  status:
+    plugin: default_value
+    default_value: 1
   type:
     plugin: default_value
     default_value: container
