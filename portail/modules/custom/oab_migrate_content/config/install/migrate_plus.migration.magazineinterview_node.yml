@@ -1,0 +1,64 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: magazineinterview_node
+migration_tags: null
+migration_group: magazineinterview
+label: 'Magazine interviews nodes'
+source:
+  plugin: magazineinterview_node
+process:
+  type:
+    plugin: default_value
+    default_value: container
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_rendering_model/target_id: rendering_model_id
+  field_content_field/value: content_field
+  field_content_field/format:
+    plugin: default_value
+    default_value: full_html
+  field_content_field/zone:
+    plugin: default_value
+    default_value: default
+  field_magazine:
+    plugin: migration
+    migration: magazineinterview_term
+    source: categories
+  field_industry:
+    plugin: migration
+    migration: magazineinterview_term
+    source: industries
+  field_solution:
+    plugin: migration
+    migration: magazineinterview_term
+    source: solutions
+  field_partner:
+    plugin: migration
+    migration: magazineinterview_term
+    source: partners
+  field_area:
+    plugin: migration
+    migration: magazineinterview_term
+    source: areas
+  field_customer_story:
+    plugin: migration
+    migration: magazineinterview_term
+    source: customer_stories
+  field_image:
+    plugin: migration
+    migration: magazineinterview_media
+    source: images
+  field_state/value: workflow
+  path: path
+  field_subtitle: subtitle
+  field_short_description: short_description
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - magazineinterview_term
+    - magazineinterview_media
