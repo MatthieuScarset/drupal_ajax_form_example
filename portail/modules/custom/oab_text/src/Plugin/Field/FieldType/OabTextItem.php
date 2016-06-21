@@ -71,7 +71,7 @@ class OabTextItem extends TextItemBase {
    * {@inheritdoc}
    */
   public function isEmpty() {
-    $value = $this->get('zone')->getValue();
+    $value = $this->get('value')->getValue();
     return parent::isEmpty() && ($value === NULL || $value === '');
   }
 
