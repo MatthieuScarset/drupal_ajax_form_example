@@ -57,7 +57,7 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
         $tid = $field_rendering_model[0]['target_id'];
         $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
         //on vérifie que le machine_name a bien été renseigné
-        if (isset($term->field_machine_name->value) && !empty($term->field_machine_name->value)) {
+        /*if (isset($term->field_machine_name->value) && !empty($term->field_machine_name->value)) {
           $nom_machine = $term->field_machine_name->value;
           switch ($nom_machine) {
             case 'magazine' :
@@ -69,7 +69,7 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
             default:
               $suggestions[] = 'node__container_default';
           }
-        }
+        }*/
       }
     }
   }
