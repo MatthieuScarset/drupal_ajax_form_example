@@ -123,6 +123,7 @@ $config->set('permissions', array(
   118 => 'delete terms in solutions',
   119 => 'edit terms in solutions',
   120 => 'access in-place editing',
+  121 => 'access contextual links',
 ));
 $config->save(TRUE);
 
@@ -239,6 +240,7 @@ $config->set('content', array(
   109 => 'delete terms in solutions',
   110 => 'edit terms in solutions',
   111 => 'access in-place editing',
+  112 => 'access contextual links',
 ));
 $config->save(TRUE);
 
