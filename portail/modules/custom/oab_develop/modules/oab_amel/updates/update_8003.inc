@@ -1,4 +1,9 @@
 <?php
+
+if (!\Drupal::moduleHandler()->moduleExists('field_group')){
+  \Drupal::service('module_installer')->install(array('field_group'));
+}
+
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.container.default');
 $config_group->setData(
@@ -413,3 +418,4 @@ $config_group->setData(
             ),
     )
 );
+$config_group->save(TRUE);
