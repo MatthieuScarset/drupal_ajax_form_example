@@ -1,0 +1,14 @@
+.icon_whitebg {
+     background-color: white;
+     color: black;
+ }
+
+.icon_orangebg {
+    background-color: #060;
+    color: white;
+}
+
+.icon_blackbg {
+    background-color: black;
+    color: white;
+}
