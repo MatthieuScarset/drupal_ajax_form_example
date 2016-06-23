@@ -6,13 +6,15 @@
 }
 
 /* Bouton avec un fond orange, sans bordures */
-.btn-primary {
+.btn-primary,
+.bg_white .btn-primary{
     color: #fff;
     background-color: #f16e00;
     border-color: #fff;
     margin-right: 2rem;
     padding-right: 3rem;
     padding-left: 3rem;
+    font-family: "HelvNeue55",Arial,sans-serif
 }
 
 .btn-primary i {
