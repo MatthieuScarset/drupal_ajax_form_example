@@ -1,0 +1,69 @@
+/*
+*  TEMPLATE CALL TO ACTION
+*/
+
+p.callToAction.highlight {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 3em !important;
+    /*font-weight: bold; /* A remplacer par le numéro correspondant dans la police (~600)*/
+    line-height: 4.5rem;
+    margin-bottom:3.5rem;
+}
+
+p.normal {
+    font-family: HelvNeue55, Arial, sans-serif;
+    font-size: 1.3em !important;
+    margin-bottom:3rem;
+}
+
+p.image p{
+    margin: 0 0 0rem;
+}
+
+
+blockquote {
+    font-size: 2em;
+}
+
+.number p {
+    font-size:10em;
+}
+/*
+*  TEMPLATE SPEAK TO AN EXPERT
+*/
+
+/*
+*  TEMPLATE SUBSCRIBE NEWSLETTER
+*/
+
+/*
+*  TEMPLATE BENEFITS
+*/
+
+/*
+*  TEMPLATE POPULAR SERVICES
+*/
+
+/*
+*  TEMPLATE NEED SOLUTION
+*/
+
+/*
+*  TEMPLATE MY CUSTOMER
+*/
+
+/*
+*  TEMPLATE LISTEN RESPOND
+*/
+
+/*
+*  TEMPLATE KEEP YOUR BUSINESS
+*/
+
+/*
+*  TEMPLATE CUSTOMER STORY
+*/
+
+/*
+*  TEMPLATE HEADER BANNER
+*/

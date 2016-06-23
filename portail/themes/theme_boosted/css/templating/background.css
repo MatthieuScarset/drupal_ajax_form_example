@@ -1,0 +1,59 @@
+/* To remove padding from bootstrap columns */
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: table-cell;
+    float: none;
+}
+
+.bg {
+    padding: 2rem 2.5rem;
+}
+/*
+*fond blanc : texte noir, lien orange
+*/
+.bg_white {
+    color: #000;
+    background-color: #fff;
+}
+
+.bg_white a {
+    color: #f60;
+    background-color: #fff;
+}
+
+/*
+*fond orange : texte blanc, lien noir
+*/
+.bg_orange {
+    color: #fff;
+    background-color: #f60;
+}
+
+.bg_orange a {
+    color: #000;
+    background-color: #f60;
+}
+
+.bg_orange .btn-primary {
+    color: #fff;
+}
+
+/*
+*fond noir ou gris: texte blanc, lien orange
+*/
+
+.bg_black {
+    color: #fff;
+    background-color: #000;
+}
+
+.bg.black a {
+    color: #f60;
+    background-color: #000;
+}
+
+.bg_green {
+    background-color: #55bc87;
+    color: #000;
+}

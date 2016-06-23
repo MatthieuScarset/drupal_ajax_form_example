@@ -1,0 +1,20 @@
+/* Bouton avec bordures noires, et fond blanc */
+.btn-default {
+    color: #000;
+    background-color: #fff;
+    border-color: #000;
+}
+
+/* Bouton avec un fond orange, sans bordures */
+.btn-primary {
+    color: #fff;
+    background-color: #f16e00;
+    border-color: #fff;
+    margin-right: 2rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+}
+
+.btn-primary i {
+    padding-right: 1rem;
+}
