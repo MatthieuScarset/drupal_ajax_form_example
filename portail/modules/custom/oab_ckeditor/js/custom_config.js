@@ -7,4 +7,7 @@ CKEDITOR.editorConfig = function( config )
 		];
 	
 	config.templates_replaceContent = false;
+
+  CKEDITOR.dtd.$removeEmpty['span'] = false;
+  CKEDITOR.dtd.$removeEmpty.i = false;
 };
