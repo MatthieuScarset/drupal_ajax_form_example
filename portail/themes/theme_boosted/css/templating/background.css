@@ -1,3 +1,9 @@
+/* border for ckeditor iframe */
+.cke_editable .col{
+    border: 2px dashed yellow !important;
+}
+
+
 /* To remove padding from bootstrap columns */
 .nopadding {
     padding: 0 !important;
@@ -11,6 +17,7 @@
 .nopaddingRight {
     padding-right: 0 !important;
 }
+.col.tabled,
 .tabled {
     display: table-cell;
     float: none;

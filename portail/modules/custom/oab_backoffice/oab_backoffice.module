@@ -61,3 +61,14 @@ function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterfa
       break;
   }
 }
+
+function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/bootstrap-orange2015.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/bootstrap-orange-theme2015.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/boosted2015.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
+  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
+}
