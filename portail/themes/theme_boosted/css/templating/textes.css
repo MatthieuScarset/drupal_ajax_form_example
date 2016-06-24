@@ -16,6 +16,17 @@ p.normal {
     margin-bottom:3rem;
 }
 
+p.auteur {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 1.7rem !important;
+
+}
+
+p.title {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 1.3rem !important;
+    color: #f60;
+}
 p.image p{
     margin: 0 0 0rem;
 }

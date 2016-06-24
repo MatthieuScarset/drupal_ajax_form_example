@@ -1,10 +1,13 @@
-/* Bouton avec bordures noires, et fond blanc */
-.btn-default {
-    color: #000;
-    background-color: #fff;
-    border-color: #000;
+/* Bouton avec bordures blanches, et fond noir */
+a.btn-white-border {
+    color: #fff;
+    background-color: #000 ;
+    border-color: #fff;
 }
-
+.btn-white-border a:hover {
+    color:#000;
+    background-color: #fff;
+}
 /* Bouton avec un fond orange, sans bordures */
 .btn-primary {
     color: #fff;
