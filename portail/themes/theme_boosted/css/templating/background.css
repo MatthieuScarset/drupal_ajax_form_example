@@ -1,13 +1,43 @@
+/* border for ckeditor iframe */
+.cke_editable .col{
+    border: 2px dashed yellow !important;
+}
+
+
 /* To remove padding from bootstrap columns */
 .nopadding {
     padding: 0 !important;
-    margin: 0 !important;
+}
+.halfpadding {
+    padding: 0 0.5rem !important;
+}
+.nopaddingLeft {
+    padding-left: 0 !important;
+}
+.nopaddingRight {
+    padding-right: 0 !important;
+}
+.col.tabled,
+.tabled {
     display: table-cell;
     float: none;
+    vertical-align: top;
+    padding: 1.5rem 2.5rem;
+}
+@media (max-width: 767px) {
+    .tabled {
+        display: block;
+        float: left;
+    }
+}
+
+.image img{
+    width: 100%;
 }
 
 .bg {
     padding: 2rem 2.5rem;
+    overflow: hidden;
 }
 /*
 *fond blanc : texte noir, lien orange

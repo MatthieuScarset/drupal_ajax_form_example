@@ -14,9 +14,9 @@ global-styling:
       css/components/footer.css: {}
     templating:
       css/templating/background.css: {}
-      css/templating/textes.css: {}
       css/templating/buttons.css: {}
       css/templating/shareIcons.css: {}
+      css/templating/textes.css: {}
   js:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
