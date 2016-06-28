@@ -92,8 +92,21 @@ p.title {
     font-size: 1.3rem !important;
     color: #f60;
 }
+
+p.header {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 6rem !important;
+    color: #fff;
+}
 p.image p{
     margin: 0 0 0rem;
+}
+
+p.source {
+    font-family: HelvNeue55, Arial, sans-serif;
+    font-size: 0.9em !important;
+    margin-bottom:3rem;
+    color: #fff;
 }
 
 
@@ -101,8 +114,22 @@ blockquote {
     font-size: 2em;
 }
 
-.number p {
-    font-size:10em;
+p.number  {
+    font-size:6em;
+}
+
+p.subtitle {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 1rem !important;
+    color: #000;
+}
+
+
+p.highlight {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 3em !important;
+    line-height: 4.5rem;
+    margin-bottom:3.5rem;
 }
 /*
 *  TEMPLATE SPEAK TO AN EXPERT

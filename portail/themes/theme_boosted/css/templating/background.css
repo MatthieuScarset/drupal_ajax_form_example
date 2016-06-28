@@ -92,3 +92,19 @@
     background-color: #a786d5;
     color: #000;
 }
+
+.bg_yellow {
+    background-color: #ffd200;
+}
+
+.bg_pink {
+    background-color: #ffb4e6;
+}
+
+.bg_grey {
+    background-color: #ddd;
+}
+
+.bg_blue {
+    background-color: #4bb4e6;
+}
