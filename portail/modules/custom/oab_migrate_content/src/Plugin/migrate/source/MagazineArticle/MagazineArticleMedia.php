@@ -33,10 +33,10 @@ class MagazineArticleMedia extends SqlBase {
     $query = $this->select('file_managed', 'm');
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_magazine_article')
-    ->condition('n.status', 1, '=')
     ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
 
     return $query;
@@ -75,29 +75,8 @@ class MagazineArticleMedia extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // récupération de la balise alt et title
-    $image_query = $this->select('field_data_field_image', 'fi');
-    $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
-    ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
-    ->condition('fi.bundle', 'content_magazine_article', '=');
 
-    $image_results = $image_query->execute()->fetchAll();
-
-    if (is_array($image_results)){
-      foreach ($image_results AS $image_result){
-        // On vérifie si on a affaire à un objet ou à un tableau
-        $image_info = [];
-        if (is_object($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-        }
-        elseif (is_array($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-        }
-        
-      }
-    }
+    $row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
 
     return parent::prepareRow($row);
   }

@@ -32,7 +32,6 @@ class MagazineArticleNode extends SqlBase {
     $query = $this->select('node', 'n')
       ->fields('n', ['nid', 'title', 'language'])
       ->condition('n.type', 'content_magazine_article', '=')
-      ->condition('n.status', 1, '=')
       ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
     //  ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');
     return $query;
@@ -325,7 +324,8 @@ class MagazineArticleNode extends SqlBase {
           $sid = $workflow_result['sid'];
         }
 
-        $row->setSourceProperty('workflow', oab_migrate_workflow_sid_correspondance($sid));
+        $workflow_new_state = oab_migrate_workflow_sid_correspondance((int)$sid);
+        $row->setSourceProperty('workflow', $workflow_new_state);
       }
     }
 

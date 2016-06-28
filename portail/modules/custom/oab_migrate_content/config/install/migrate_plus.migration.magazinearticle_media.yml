@@ -1,12 +1,10 @@
-langcode: fr
-status: true
-dependencies: {  }
 id: magazinearticle_media
-migration_tags: null
-migration_group: magazinearticle
 label: 'Magazine articles medias'
+migration_group: magazinearticle
 source:
   plugin: magazinearticle_media
+destination:
+  plugin: entity:media
 process:
   bundle:
     plugin: default_value
@@ -27,8 +25,6 @@ process:
     plugin: migration
     migration: magazinearticle_image
     source: image_info
-destination:
-  plugin: 'entity:media'
 migration_dependencies:
   required:
     - magazinearticle_image

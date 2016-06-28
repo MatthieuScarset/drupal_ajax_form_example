@@ -33,10 +33,10 @@ class DocumentMediaFile extends SqlBase {
     $query = $this->select('file_managed', 'm');
     $query->join('field_data_field_file_upl', 'fi', 'fi.field_file_upl_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
-    $query->condition('n.type', 'content_document_type')
-    ->condition('n.status', 1, '=');
+    $query->condition('n.type', 'content_document_type');
     //->range(0, 10);
     return $query;
   }

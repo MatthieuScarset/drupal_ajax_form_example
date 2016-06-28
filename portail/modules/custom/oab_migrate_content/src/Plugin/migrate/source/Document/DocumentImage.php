@@ -57,8 +57,8 @@ class DocumentImage extends SqlBase {
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
-    ->condition('n.type', 'content_document_type')
-    ->condition('n.status', 1, '=');
+    ->distinct(TRUE)
+    ->condition('n.type', 'content_document_type');
     //->range(0, 10);
     return $query;
   }

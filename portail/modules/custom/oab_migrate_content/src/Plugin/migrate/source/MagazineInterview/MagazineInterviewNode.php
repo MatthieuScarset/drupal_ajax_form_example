@@ -324,7 +324,8 @@ class MagazineInterviewNode extends SqlBase {
           $sid = $workflow_result['sid'];
         }
 
-        $row->setSourceProperty('workflow', oab_migrate_workflow_sid_correspondance($sid));
+        $workflow_new_state = oab_migrate_workflow_sid_correspondance((int)$sid);
+        $row->setSourceProperty('workflow', $workflow_new_state);
       }
     }
 
