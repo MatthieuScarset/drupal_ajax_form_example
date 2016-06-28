@@ -17,7 +17,7 @@ process:
   langcode:
     plugin: default_value
     default_value: und
-  name : filename
+  name: filename
   uid:
     plugin: default_value
     default_value: 1

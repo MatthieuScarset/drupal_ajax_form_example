@@ -69,5 +69,6 @@ template: null
 migration_dependencies:
   required:
     - blogpost_term
+    - blogpost_image
     - blogpost_media
     - blogpost_profile

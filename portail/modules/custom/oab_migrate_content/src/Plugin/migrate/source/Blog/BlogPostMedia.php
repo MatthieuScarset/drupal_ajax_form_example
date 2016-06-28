@@ -34,13 +34,13 @@ class BlogPostMedia extends SqlBase {
     //$query->join('field_data_field_folder', 'ff', 'ff.entity_id = f.fid');
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //$query->condition('f.fid', 1757)
     $query->condition('n.type', 'blog_post')
-    ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
+    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     //->orderBy('m.fid', 'ASC');
     //->range(0, 1);

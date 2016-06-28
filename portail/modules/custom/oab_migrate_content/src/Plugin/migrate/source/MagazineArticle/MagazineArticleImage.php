@@ -57,8 +57,8 @@ class MagazineArticleImage extends SqlBase {
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE)
     ->condition('n.type', 'content_magazine_article')
-    ->condition('n.status', 1, '=')
     ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
 
 

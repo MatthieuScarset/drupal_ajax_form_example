@@ -11,9 +11,7 @@ label: 'Blog post terms'
 source:
   plugin: blogpost_term
 process:
-  vid:
-    plugin: default_value
-    default_value: blogpost
+  vid: vid
   langcode: language
   name: name
   parent:

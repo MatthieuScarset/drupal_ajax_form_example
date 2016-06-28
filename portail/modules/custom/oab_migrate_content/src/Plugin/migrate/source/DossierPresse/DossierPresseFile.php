@@ -57,8 +57,8 @@ class DossierPresseFile extends SqlBase {
     $query->join('field_data_field_press_kit_pdf', 'fi', 'fi.field_press_kit_pdf_fid = f.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
-    ->condition('n.type', 'press_kit')
-    ->condition('n.status', 1, '=');
+    ->distinct(TRUE)
+    ->condition('n.type', 'press_kit');
 
     return $query;
   }

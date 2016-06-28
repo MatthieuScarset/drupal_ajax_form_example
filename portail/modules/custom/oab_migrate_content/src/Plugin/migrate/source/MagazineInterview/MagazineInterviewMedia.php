@@ -33,7 +33,8 @@ class MagazineInterviewMedia extends SqlBase {
     $query = $this->select('file_managed', 'm');
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_magazine_interview')
     ->condition('n.status', 1, '=')

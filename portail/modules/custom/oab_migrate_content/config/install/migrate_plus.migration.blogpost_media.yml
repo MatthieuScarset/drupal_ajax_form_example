@@ -37,6 +37,4 @@ process:
 destination:
   plugin: entity:media
 template: null
-migration_dependencies:
-  required:
-    - blogpost_image
+migration_dependencies: {}
