@@ -1,6 +1,8 @@
 <?php
 
-define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 150));
+//define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 150));
+// timestamp correspondant au 1er janvier 2015 00h00:00
+define('BLOGPOST_SELECT_DATE', 1420066800);
 
 // timestamp correspondant au 1er janvier 2014 00h00:00
 define('MAGAZINE_ARTICLE_SELECT_DATE', 1388530800);

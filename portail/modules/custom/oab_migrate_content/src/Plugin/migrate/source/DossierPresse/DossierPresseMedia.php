@@ -33,10 +33,10 @@ class DossierPresseMedia extends SqlBase {
     $query = $this->select('file_managed', 'm');
     $query->join('field_data_field_press_kit_pdf', 'fi', 'fi.field_press_kit_pdf_fid = m.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
-    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp']);
+    $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
-    $query->condition('n.type', 'press_kit')
-    ->condition('n.status', 1, '=');
+    $query->condition('n.type', 'press_kit');
 
     return $query;
   }

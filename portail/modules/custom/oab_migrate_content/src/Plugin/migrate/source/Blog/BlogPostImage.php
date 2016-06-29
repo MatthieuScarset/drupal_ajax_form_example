@@ -58,11 +58,11 @@ class BlogPostImage extends SqlBase {
     $query->join('field_data_field_image', 'fi', 'fi.field_image_fid = f.fid');
     $query->join('node', 'n', 'n.nid = fi.entity_id');
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
+    ->distinct(TRUE)
     //->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //->condition('f.fid', 1757)
     ->condition('n.type', 'blog_post')
-    ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
+    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     //->orderBy('f.fid', 'ASC');
 

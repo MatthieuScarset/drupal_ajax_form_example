@@ -289,11 +289,11 @@ class DocumentNode extends SqlBase {
     }
 
     // récupération du tag "topic"
-    $topic_query = $this->select('field_data_field_taxo_topic', 'to');
-    $topic_query->join('taxonomy_term_data', 't', 't.tid = to.field_taxo_topic_tid');
+    $topic_query = $this->select('field_data_field_taxo_topic', 'tao');
+    $topic_query->join('taxonomy_term_data', 't', 't.tid = tao.field_taxo_topic_tid');
     $topic_query->fields('t', ['tid'])
-      ->condition('to.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('to.bundle', 'content_document_type', '=');
+      ->condition('tao.entity_id', $row->getSourceProperty('nid'), '=')
+      ->condition('tao.bundle', 'content_document_type', '=');
     $topic_results = $topic_query->execute()->fetchAll();
     if (is_array($topic_results)){
       $topics = array();
@@ -380,7 +380,8 @@ class DocumentNode extends SqlBase {
           $sid = $workflow_result['sid'];
         }
 
-        $row->setSourceProperty('workflow', oab_migrate_workflow_sid_correspondance($sid));
+        $workflow_new_state = oab_migrate_workflow_sid_correspondance((int)$sid);
+        $row->setSourceProperty('workflow', $workflow_new_state);
       }
     }
 

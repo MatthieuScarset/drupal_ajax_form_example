@@ -2,6 +2,7 @@
 
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\DossierPresse;
 
+use Drupal\Core\Database\Database;
 use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
@@ -85,6 +86,26 @@ class DossierPresseTerm extends SqlBase {
 
     $old_vid = $row->getSourceProperty('vid');
     $row->setSourceProperty('vid', $this->correspondanceTaxo[$old_vid]);
+
+    // on vérifie si le terme n'existe pas déjà
+    $migrate_groups = \Drupal\migrate_plus\Entity\MigrationGroup::loadMultiple();
+    foreach ($migrate_groups AS $migrate_group){
+      $migration_term_name = 'migrate_map_' . $migrate_group->get('id') . '_term';
+      //\Drupal::logger('oab_migrate_content')->notice('migrate table : ' . $migration_term_name);
+
+      if (Database::getConnection()->schema()->tableExists($migration_term_name)){
+        //\Drupal::logger('oab_migrate_content')->notice('table found');
+        $query = Database::getConnection()->select($migration_term_name, 'mtn')
+        ->fields('mtn', ['destid1'])
+        ->condition('mtn.sourceid1', $row->getSourceProperty('tid'));
+
+        $result = $query->execute()->fetchObject();
+
+        if (is_object($result)) {
+          $row->setDestinationProperty('tid', $result->destid1);
+        }
+      }
+    }
 
     return parent::prepareRow($row);
   }

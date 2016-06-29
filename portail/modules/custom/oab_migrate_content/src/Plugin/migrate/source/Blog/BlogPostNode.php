@@ -2,9 +2,13 @@
 
 namespace Drupal\oab_migrate_content\Plugin\migrate\source\Blog;
 
+use Drupal\Core\Session\SessionHandler;
 use Drupal\migrate\Annotation\MigrateSource;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
+use Drupal\Core\Session\AccountProxy;
+use Drupal\Core\Session\AccountSwitcher;
+use Drupal\Core\Session\WriteSafeSessionHandler;
 
 /**
  *
@@ -32,8 +36,7 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language'])
     ->condition('n.type', 'blog_post', '=')
-    ->condition('n.status', 1, '=')
-    ->condition('n.changed', time() - BLOGPOST_SELECT_DATE, '>');
+    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     return $query;
   }
@@ -298,7 +301,8 @@ class BlogPostNode extends SqlBase {
           $sid = $workflow_result['sid'];
         }
 
-        $row->setSourceProperty('workflow', oab_migrate_workflow_sid_correspondance($sid));
+        $workflow_new_state = oab_migrate_workflow_sid_correspondance((int)$sid);
+        $row->setSourceProperty('workflow', $workflow_new_state);
       }
     }
 
