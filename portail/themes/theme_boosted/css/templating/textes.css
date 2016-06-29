@@ -101,6 +101,8 @@ p.title {
 p.header {
     font-family: HelvNeue75, Arial, sans-serif;
     font-size: 6rem !important;
+    line-height: 7rem;
+    margin: 0;
     color: #fff;
 }
 p.image p{
