@@ -4,6 +4,11 @@
 }
 
 
+.col-sm-4.tabled{
+
+}
+
+
 /* To remove padding from bootstrap columns */
 .nopadding {
     padding: 0 !important;
@@ -24,15 +29,23 @@
     vertical-align: top;
     padding: 1.5rem 2.5rem;
 }
-@media (max-width: 767px) {
+@media (max-width: 990px) {
     .tabled {
-        display: block;
-        float: left;
+        display: block !important;
+        float: left !important;
     }
 }
 
 .image img{
     width: 100%;
+}
+.bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .bg {

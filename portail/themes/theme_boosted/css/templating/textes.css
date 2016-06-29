@@ -41,6 +41,10 @@ p.callToAction.highlight {
 .related_content .articles{
     margin-bottom: 3rem;
 }
+.related_content article{
+    min-height: 430px;
+    margin-bottom: 2rem;
+}
 .related_content article,
 .related_content article.nopaddingLeft,
 .related_content article.nopaddingRight,
@@ -49,6 +53,7 @@ p.callToAction.highlight {
 }
 .related_content article.nopaddingLeft{
     border-right: 1rem solid black;
+    border-bottom: 2rem solid black;
 }
 .related_content article.nopaddingRight{
     border-left: 1rem solid black;
