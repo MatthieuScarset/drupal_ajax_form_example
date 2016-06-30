@@ -39,83 +39,86 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       }
     }
   }
-}
 
-function oab_backoffice_form_node_container_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-  // on vérifie que le paramètre a été passé dans l'url (id du terme permettant de différencier les types)
-  if(isset($_GET['rendering_model_tid'])) {
-    $tid = $_GET['rendering_model_tid'];
-    $form['field_rendering_model']['widget']['#default_value'] = $tid;
-  }
-
-  // gestion du champ rendering model
-  $form['field_rendering_model']['#disabled'] = TRUE;
-  $form['field_rendering_model']['#access'] = FALSE;
-  $form['field_rendering_model_markup'] = [
-    '#type' => 'item',
-    '#title' => $form['field_rendering_model']['widget']['#title'],
-    '#markup' => $form['field_rendering_model']['widget']['#options'][$form['field_rendering_model']['widget']['#default_value']],
-    '#weight' => $form['field_rendering_model']['#weight'],
-  ];
-  $form['#fieldgroups']['group_general']->children[] = 'field_rendering_model_markup';
-  $form['#group_children']['field_rendering_model_markup'] = 'group_general';
-
-  // positionnement des champs dates
-  if (isset($form['field_start_date'])
-  && isset($form['field_end_date'])){
-    $form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-    $form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-  }
-
-  // lien pour accéder à l'aide au template
-  //kprint_r($form['field_content_field']);
-  /*$form['field_templating_tooltips'] = [
-    '#type' => 'item',
-    '#title' => '',
-    '#markup' => '<a href=""><span class="ui-icon ui-icon-lightbulb"></span></a>',
-    '#weight' => -99,
-  ];
-  $form['#fieldgroups']['group_contenu']->children[] = 'field_templating_tooltips';
-  $form['#group_children']['field_templating_tooltips'] = 'group_contenu';*/
-
-  // disposition des taxonomies
-  foreach ($form['#fieldgroups']['group_taxonomie']->children AS $field){
-    if (isset($form[$field])){
-      //kprint_r($form[$field]['widget']);
-      $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
-      $form[$field]['widget']['#size'] = 15;
+  if ($form_id == 'node_container_form'
+  || $form_id == 'node_container_edit_form'){
+    $current_rendering_model = '';
+    if ($form_id == 'node_container_form'){
+      if(isset($_GET['rendering_model_tid'])) {
+        $tid = $_GET['rendering_model_tid'];
+        $form['field_rendering_model']['widget']['#default_value'] = $tid;
+      }
     }
-  }
+    if (is_array($form['field_rendering_model']['widget']['#default_value'])){
+      $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'][0];
+    }
+    else{
+      $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'];
+    }
+    // gestion du champ rendering model
+    $form['field_rendering_model']['#disabled'] = TRUE;
+    $form['field_rendering_model']['#access'] = FALSE;
+    $form['field_rendering_model_markup'] = [
+      '#type' => 'item',
+      '#title' => $form['field_rendering_model']['widget']['#title'],
+      '#markup' => $form['field_rendering_model']['widget']['#options'][$current_rendering_model],
+      '#weight' => $form['field_rendering_model']['#weight'],
+    ];
+    $form['#fieldgroups']['group_general']->children[] = 'field_rendering_model_markup';
+    $form['#group_children']['field_rendering_model_markup'] = 'group_general';
 
-  $last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
-  $form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
+    // positionnement des champs dates
+    if (isset($form['field_start_date'])
+      && isset($form['field_end_date'])){
+      $form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+      $form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+    }
 
-  //gestion des taxonomies à afficher par type de container
-  $hide_taxonomies_container = [
-    'blog_post' => ['field_magazine', 'field_area'],
-    'magazine' => ['field_blog', 'field_area'],
-    'press_release' => ['field_blog', 'field_magazine', 'field_area'],
-    'press_kit' => ['field_blog', 'field_magazine', 'field_area'],
-    'document' => ['field_blog', 'field_magazine', 'field_area'],
-    'simple_page' => ['field_blog', 'field_magazine', 'field_area'],
-  ];
-  $current_container_type = \Drupal\taxonomy\Entity\Term::load($form['field_rendering_model']['widget']['#default_value']);
-  if (is_object($current_container_type)){
-    $taxonomie_machine_name = $current_container_type->get('field_machine_name')->value;
+    // lien pour accéder à l'aide au template
+    //kprint_r($form['field_content_field']);
+    /*$form['field_templating_tooltips'] = [
+      '#type' => 'item',
+      '#title' => '',
+      '#markup' => '<a href=""><span class="ui-icon ui-icon-lightbulb"></span></a>',
+      '#weight' => -99,
+    ];
+    $form['#fieldgroups']['group_contenu']->children[] = 'field_templating_tooltips';
+    $form['#group_children']['field_templating_tooltips'] = 'group_contenu';*/
 
-    if (isset($hide_taxonomies_container[$taxonomie_machine_name])) {
-      foreach ($hide_taxonomies_container[$taxonomie_machine_name] AS $field) {
-        if (isset($form[$field])) {
-          $form[$field]['#access'] = FALSE;
+    // disposition des taxonomies
+    foreach ($form['#fieldgroups']['group_taxonomie']->children AS $field){
+      if (isset($form[$field])){
+        //kprint_r($form[$field]['widget']);
+        $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
+        $form[$field]['widget']['#size'] = 15;
+      }
+    }
+
+    $last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
+    $form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
+
+    //gestion des taxonomies à afficher par type de container
+    $hide_taxonomies_container = [
+      'blog_post' => ['field_magazine', 'field_area'],
+      'magazine' => ['field_blog', 'field_area'],
+      'press_release' => ['field_blog', 'field_magazine', 'field_area'],
+      'press_kit' => ['field_blog', 'field_magazine', 'field_area'],
+      'document' => ['field_blog', 'field_magazine', 'field_area'],
+      'simple_page' => ['field_blog', 'field_magazine', 'field_area'],
+    ];
+    $current_container_type = \Drupal\taxonomy\Entity\Term::load($current_rendering_model);
+    if (is_object($current_container_type)){
+      $taxonomie_machine_name = $current_container_type->get('field_machine_name')->value;
+
+      if (isset($hide_taxonomies_container[$taxonomie_machine_name])) {
+        foreach ($hide_taxonomies_container[$taxonomie_machine_name] AS $field) {
+          if (isset($form[$field])) {
+            $form[$field]['#access'] = FALSE;
+          }
         }
       }
     }
   }
-}
-function oab_backoffice_form_node_container_edit_form_alter(&$form, FormStateInterface $form_state, $form_id)
-{
-  $form['field_rendering_model']['#disabled'] = TRUE;
 }
 
 function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match){
