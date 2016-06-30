@@ -42,7 +42,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
   if ($form_id == 'node_container_form'
   || $form_id == 'node_container_edit_form'){
-    $current_rendering_model = '';
     if ($form_id == 'node_container_form'){
       if(isset($_GET['rendering_model_tid'])) {
         $tid = $_GET['rendering_model_tid'];

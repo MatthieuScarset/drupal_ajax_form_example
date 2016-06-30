@@ -32,7 +32,6 @@ class MagazineInterviewNode extends SqlBase {
     $query = $this->select('node', 'n')
       ->fields('n', ['nid', 'title', 'language'])
       ->condition('n.type', 'content_magazine_interview', '=')
-      ->condition('n.status', 1, '=')
       ->condition('n.changed', MAGAZINE_INTERVIEW_SELECT_DATE, '>');
     //->condition('n.nid', array(4836,4837,4838,4839,4840,4841,4842,4843,4844), 'IN');
     return $query;
@@ -75,13 +74,52 @@ class MagazineInterviewNode extends SqlBase {
     \Drupal::getContainer()->set('current_user', $admin_user);
 
     //Id du rendering_model
-    $terms = taxonomy_term_load_multiple_by_name("magazine", 'rendering_model');
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('rendering_model', 0, NULL, TRUE);
 
     foreach ($terms AS $key => $term){
-      $row->setSourceProperty('rendering_model_id', $key);
+      $machine_name = $term->get('field_machine_name')->value;
+      if ($machine_name == 'magazine_interview'){
+        $row->setSourceProperty('rendering_model_id', $term->get('tid')->value);
+      }
+    }
+
+    // création du verbatim
+    $field_txt_citation_1_value = '';
+    $field_txt_auteur_1_value = '';
+    $field_location_value = '';
+    $field_profil_value = '';
+
+    $verbatim_tables = [
+      'field_data_field_txt_citation_1' => 'field_txt_citation_1_value',
+      'field_data_field_txt_auteur_1' => 'field_txt_auteur_1_value',
+      'field_data_field_location' => 'field_location_value',
+      'field_data_field_profil' => 'field_profil_value',
+    ];
+
+    foreach ($verbatim_tables AS $table => $field){
+      $verbatim_query = $this->select($table, 'b');
+      $verbatim_query->fields('b', [$field])
+        ->condition('b.entity_id', $row->getSourceProperty('nid'), '=')
+        ->condition('b.bundle', 'content_magazine_interview', '=');
+
+      $verbatim_results = $verbatim_query->execute()->fetchAll();
+
+      if (is_array($verbatim_results)){
+        foreach ($verbatim_results AS $verbatim_result){
+
+          // On vérifie si on a affaire à un objet ou à un tableau
+          if (is_object($verbatim_result) && isset($verbatim_result->$field)){
+            $$field = $verbatim_result->$field;
+          }
+          elseif (is_array($verbatim_result) && isset($verbatim_result[$field])){
+            $$field = $verbatim_result[$field];
+          }
+        }
+      }
     }
 
     // récupération du BODY
+    $body_value = '';
     $body_query = $this->select('field_data_field_content', 'b');
     $body_query->fields('b', ['field_content_value'])
       ->condition('b.entity_id', $row->getSourceProperty('nid'), '=')
@@ -94,13 +132,24 @@ class MagazineInterviewNode extends SqlBase {
 
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->field_content_value)){
-          $row->setSourceProperty('content_field', $body_result->field_content_value);
+          $body_value = $body_result->field_content_value;
         }
         elseif (is_array($body_result) && isset($body_result['field_content_value'])){
-          $row->setSourceProperty('content_field', $body_result['field_content_value']);
+          $body_value = $body_result['field_content_value'];
         }
       }
     }
+    $verbatim_content = '<div class="bg bg_darkgrey">';
+    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<p class="highlight">"' . $field_txt_citation_1_value . '"</p>';
+    if ($field_txt_auteur_1_value !== '') $verbatim_content .= '<p>' . $field_txt_auteur_1_value . '</p>';
+    if ($field_location_value !== '') $verbatim_content .= '<p>' . $field_location_value . '</p>';
+    if ($field_profil_value !== '') $verbatim_content .= '<p>' . $field_profil_value . '</p>';
+    $verbatim_content .= '</div>';
+
+    $row->setSourceProperty('content_field', array(
+      array('value' => $verbatim_content, 'format' => 'full_html', 'zone' => 'default'),
+      array('value' => $body_value, 'format' => 'full_html', 'zone' => 'default'),
+    ));
 
     // récupération du SUBTITLE
     $subtitle_query = $this->select('field_data_field_descriptif_court', 'd');

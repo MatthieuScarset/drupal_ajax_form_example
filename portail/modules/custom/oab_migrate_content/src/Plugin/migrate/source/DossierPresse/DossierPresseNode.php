@@ -75,11 +75,14 @@ class DossierPresseNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
-    //Id du rendering_model TODO : changer taxo magazine
-    $terms = taxonomy_term_load_multiple_by_name("magazine", 'rendering_model');
+    //Id du rendering_model
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('rendering_model', 0, NULL, TRUE);
 
     foreach ($terms AS $key => $term){
-      $row->setSourceProperty('rendering_model_id', $key);
+      $machine_name = $term->get('field_machine_name')->value;
+      if ($machine_name == 'press_kit'){
+        $row->setSourceProperty('rendering_model_id', $term->get('tid')->value);
+      }
     }
     $row->setSourceProperty('content_field', '');
 
