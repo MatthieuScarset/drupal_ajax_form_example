@@ -114,8 +114,9 @@
     background-color: #ffb4e6;
 }
 
-.bg_grey {
-    background-color: #ddd;
+.bg_darkgrey {
+    background-color: #8F8C87;
+    color: #fff;
 }
 
 .bg_blue {

@@ -111,7 +111,7 @@ p.image p{
 
 p.source {
     font-family: HelvNeue55, Arial, sans-serif;
-    font-size: 0.9em !important;
+    font-size: 1.2em !important;
     margin-bottom:3rem;
     color: #fff;
 }
@@ -123,11 +123,12 @@ blockquote {
 
 p.number  {
     font-size:6em;
+    font-family: HelvNeue75, Arial, sans-serif;
 }
 
 p.subtitle {
     font-family: HelvNeue75, Arial, sans-serif;
-    font-size: 1rem !important;
+    font-size: 2em !important;
     color: #000;
 }
 
@@ -137,6 +138,10 @@ p.highlight {
     font-size: 3em !important;
     line-height: 4.5rem;
     margin-bottom:3.5rem;
+}
+
+p.center.highlight {
+   vertical-align: middle;
 }
 /*
 *  TEMPLATE SPEAK TO AN EXPERT
