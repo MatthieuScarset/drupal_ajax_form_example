@@ -3,10 +3,44 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
 
+define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'field_customer_story', 'field_industry', 'field_magazine', 'field_partner', 'field_solution')));
+
 /**
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $languages = \Drupal::languageManager()->getLanguages();
+
+  // gestion de la taxonomie
+  // affichage de la langue
+  // suppression de l'option s'elle appartient à une autre langue
+  $edit_form = false;
+  if (preg_match('@node_(.*)_edit_form@', $form_id)){
+    $edit_form = true;
+  }
+  if (defined('CONTENT_TAXO_FIELDS')) {
+    $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
+    foreach ($CONTENT_TAXO_FIELDS AS $field) {
+      if (isset($form[$field]['widget']['#options'])) {
+        foreach ($form[$field]['widget']['#options'] AS $key => &$value){
+          if (is_int($key)) {
+            $term = \Drupal\taxonomy\Entity\Term::load($key);
+            $term_language = $term->language()->getId();
+
+            $value .= ' (' . $term->language()->getName() . ')';
+
+            if ($term_language !== $current_language
+            && isset($languages[$term_language])
+            && $edit_form){
+              unset($form[$field]['widget']['#options'][$key]);
+            }
+          }
+        }
+      }
+    }
+  }
+
   // filtres exposés de views
   if ($form_id == 'views_exposed_form'){
     // $form['#id']
