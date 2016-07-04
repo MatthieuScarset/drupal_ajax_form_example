@@ -7,6 +7,11 @@ use Drupal\editor\Entity\Editor;
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // filtres exposés de views
+  if ($form_id == 'views_exposed_form'){
+    // $form['#id']
+  }
+
   if ($form_id == 'node_profil_redacteur_form'
   || $form_id == 'node_profil_redacteur_edit_form'){
     $form['field_social_accounts']['#cardinality_multiple'] = false;
