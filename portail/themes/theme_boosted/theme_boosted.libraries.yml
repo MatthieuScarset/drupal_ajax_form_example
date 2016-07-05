@@ -17,6 +17,7 @@ global-styling:
       css/templating/buttons.css: {}
       css/templating/shareIcons.css: {}
       css/templating/textes.css: {}
+      css/templating/layout.css: {}
   js:
     #js/jquery.min.js: []
     #js/jquery.validate.min.js: {}
