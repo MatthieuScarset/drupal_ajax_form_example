@@ -9,12 +9,11 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'fiel
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $languages = \Drupal::languageManager()->getLanguages();
+  //$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  //$languages = \Drupal::languageManager()->getLanguages();
 
   // gestion de la taxonomie
   // affichage de la langue
-  // suppression de l'option s'elle appartient à une autre langue
   $edit_form = false;
   if (preg_match('@node_(.*)_edit_form@', $form_id)){
     $edit_form = true;
@@ -26,15 +25,15 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         foreach ($form[$field]['widget']['#options'] AS $key => &$value){
           if (is_int($key)) {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
-            $term_language = $term->language()->getId();
 
             $value .= ' (' . t($term->language()->getName()) . ')';
 
+            /*$term_language = $term->language()->getId();
             if ($term_language !== $current_language
             && isset($languages[$term_language])
             && $edit_form){
               unset($form[$field]['widget']['#options'][$key]);
-            }
+            }*/
           }
         }
       }
