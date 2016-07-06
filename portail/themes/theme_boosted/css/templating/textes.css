@@ -92,6 +92,12 @@ p.auteur {
 
 }
 
+p.date {
+    font-family: HelvNeue55, Arial, sans-serif;
+    font-size: 1em !important;
+    font-weight: bold;
+}
+
 p.title {
     font-family: HelvNeue75, Arial, sans-serif;
     font-size: 1.3rem !important;
