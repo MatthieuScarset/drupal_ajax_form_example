@@ -1,4 +1,4 @@
-.icon_whitebg {
+.icon_whitebg span {
      background-color: white;
      color: black;
  }
@@ -8,7 +8,7 @@
    color: #fff!important ;
 }
 
-.icon_blackbg {
+.icon_blackbg span {
     background-color: black;
     color: white;
 }
