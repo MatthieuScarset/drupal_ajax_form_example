@@ -149,6 +149,16 @@ p.highlight {
 p.center.highlight {
    vertical-align: middle;
 }
+
+.text_white {
+    color: #fff!important ;
+}
+.text_black {
+    color: #000!important ;
+}
+.text_orange {
+    color: #f60!important ;
+}
 /*
 *  TEMPLATE SPEAK TO AN EXPERT
 */
