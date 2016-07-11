@@ -122,3 +122,35 @@
 .bg_blue {
     background-color: #4bb4e6;
 }
+
+
+/* Frames on image */
+
+.img-container {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+}
+
+.frame-icon {
+    position: absolute;
+    /*text-align: center;*/
+    font-size: 180pt;
+    font-size: 12vw;
+    top: 50px;
+    left: 50px;
+}
+
+.frame-text {
+    font-size: 32pt;
+    font-size: 1.8vw;
+    font-family: HelvNeue75, Arial, sans-serif;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: black;
+}
