@@ -40,7 +40,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   if ($form_id == 'taxonomy_overview_terms'){
     if (isset($form['terms'])){
       foreach ($form['terms'] AS $key => $value){
-        if (preg_match('@tid:@', $key)){
+        if (preg_match('@^tid:@', $key)){
           if (isset($form['terms'][$key]['term']['#title'])
           && isset($form['terms'][$key]['#term'])
           && is_object($form['terms'][$key]['#term'])){
