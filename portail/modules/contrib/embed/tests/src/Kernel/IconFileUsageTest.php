@@ -5,11 +5,11 @@
  * Contains \Drupal\embed\Tests\IconFileUsageTest.
  */
 
-namespace Drupal\embed\Tests;
+namespace Drupal\Tests\embed\Kernel;
 
 use Drupal\embed\Entity\EmbedButton;
 use Drupal\file\Entity\File;
-use Drupal\simpletest\KernelTestBase;
+use Drupal\KernelTests\KernelTestBase;
 
 /**
  * Tests embed button icon file usage.
@@ -56,9 +56,17 @@ class IconFileUsageTest extends KernelTestBase {
     $entity->save();
     $this->assertTrue(File::load($file1->id())->isPermanent());
 
+    // Delete the icon from the button.
+    $entity->icon_uuid = NULL;
+    $entity->save();
+    $this->assertTrue(File::load($file1->id())->isTemporary());
+
+    $entity->icon_uuid = $file1->uuid();
+    $entity->save();
+    $this->assertTrue(File::load($file1->id())->isPermanent());
+
     $entity->icon_uuid = $file2->uuid();
     $entity->save();
-
     $this->assertTrue(File::load($file1->id())->isTemporary());
     $this->assertTrue(File::load($file2->id())->isPermanent());
 
