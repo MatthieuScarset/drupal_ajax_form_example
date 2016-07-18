@@ -26,7 +26,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
           if (is_int($key)) {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
 
-            $value .= ' (' . t($term->language()->getName()) . ')';
+            $value .= ' (' . t(strToUpper($term->language()->getId())) . ')';
 
             /*$term_language = $term->language()->getId();
             if ($term_language !== $current_language
