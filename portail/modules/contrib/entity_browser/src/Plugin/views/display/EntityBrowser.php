@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\entity_browser\Plugin\views\display\EntityBrowser.
- */
-
 namespace Drupal\entity_browser\Plugin\views\display;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -13,6 +8,10 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
 /**
  * The plugin that handles entity browser display.
  *
+ * "entity_browser_display" is a custom property, used with
+ * \Drupal\views\Views::getApplicableViews() to retrieve all views with a
+ * 'Entity Browser' display.
+ *
  * @ingroup views_display_plugins
  *
  * @ViewsDisplay(
@@ -20,7 +19,8 @@ use Drupal\views\Plugin\views\display\DisplayPluginBase;
  *   title = @Translation("Entity browser"),
  *   help = @Translation("Displays a view as Entity browser widget."),
  *   theme = "views_view",
- *   admin = @Translation("Entity browser")
+ *   admin = @Translation("Entity browser"),
+ *   entity_browser_display = TRUE
  * )
  */
 class EntityBrowser extends DisplayPluginBase {
@@ -128,12 +128,14 @@ class EntityBrowser extends DisplayPluginBase {
    */
   protected function handleForm(&$render) {
     if (!empty($this->view->field['entity_browser_select'])) {
-      $this->view->field['entity_browser_select']->viewsForm($render);
+      /** @var \Drupal\entity_browser\Plugin\views\field\SelectForm $select */
+      $select = $this->view->field['entity_browser_select'];
+      $select->viewsForm($render);
 
       $render['#post_render'][] = [get_class($this), 'postRender'];
       $substitutions = [];
-      foreach ($this->view->result as $row_id => $row) {
-        $form_element_row_id = $row_id;
+      foreach ($this->view->result as $row) {
+        $form_element_row_id = $select->getRowId($row);
 
         $substitutions[] = [
           'placeholder' => '<!--form-item-entity_browser_select--' . $form_element_row_id . '-->',
@@ -186,4 +188,5 @@ class EntityBrowser extends DisplayPluginBase {
 
     return $content;
   }
+
 }

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_browser\Entity\EntityBrowser.
- */
-
 namespace Drupal\entity_browser\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
@@ -57,6 +52,7 @@ use Symfony\Component\Routing\Route;
  *     "widget_selector",
  *     "widget_selector_configuration",
  *     "widgets",
+ *     "submit_text",
  *   },
  * )
  */
@@ -96,6 +92,13 @@ class EntityBrowser extends ConfigEntityBase implements EntityBrowserInterface, 
    * @var \Drupal\Core\Plugin\DefaultSingleLazyPluginCollection
    */
   protected $displayCollection;
+
+  /**
+   * Text for the submit button.
+   *
+   * @var string
+   */
+  protected $submit_text = 'Select';
 
   /**
    * The array of widgets for this entity browser.
@@ -211,6 +214,21 @@ class EntityBrowser extends ConfigEntityBase implements EntityBrowserInterface, 
     $this->display = $display;
     $this->displayPluginCollection = NULL;
     $this->getDisplay();
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSubmitButtonText() {
+    return $this->submit_text;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setSubmitButtonText($submit_text) {
+    $this->submit_text = $submit_text;
     return $this;
   }
 
@@ -432,7 +450,7 @@ class EntityBrowser extends ConfigEntityBase implements EntityBrowserInterface, 
         'widgetSelectorCollection',
         'displayCollection',
         'selectionDisplayCollection',
-        'selectedEntities'
+        'selectedEntities',
       ]
     );
   }
@@ -463,12 +481,8 @@ class EntityBrowser extends ConfigEntityBase implements EntityBrowserInterface, 
   protected function urlRouteParameters($rel) {
     $uri_route_parameters = parent::urlRouteParameters($rel);
 
-    // Form wizard expects step argument and uses machine_name instead of
-    // entity_browser.
-    if ($rel == 'edit-form') {
+    if ($rel == 'config-translation-overview') {
       $uri_route_parameters['step'] = 'general';
-      $uri_route_parameters['machine_name'] = $uri_route_parameters['entity_browser'];
-      unset($uri_route_parameters['entity_browser']);
     }
 
     return $uri_route_parameters;

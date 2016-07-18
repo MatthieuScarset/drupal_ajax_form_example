@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\media_entity\MediaTypeInterface.
- */
-
 namespace Drupal\media_entity;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
@@ -74,5 +69,20 @@ interface MediaTypeInterface extends PluginInspectionInterface, ConfigurablePlug
    *   Uri of the default thumbnail image.
    */
   public function getDefaultThumbnail();
+
+  /**
+   * Provide a default name for the media.
+   *
+   * Plugins defining media bundles are suggested to override this method and
+   * provide a default name, to be used when there is no user-defined label
+   * available.
+   *
+   * @param \Drupal\media_entity\MediaInterface $media
+   *   The media object.
+   *
+   * @return string
+   *   The string that should be used as default media name.
+   */
+  public function getDefaultName(MediaInterface $media);
 
 }

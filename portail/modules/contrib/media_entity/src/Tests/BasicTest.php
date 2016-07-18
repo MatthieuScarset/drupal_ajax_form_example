@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\media_entity\Tests\BasicTest.
- */
-
 namespace Drupal\media_entity\Tests;
 
 use Drupal\media_entity\Entity\Media;
@@ -53,7 +48,7 @@ class BasicTest extends WebTestBase {
     $this->assertTrue($bundle_exists, 'The new media bundle has been created in the database.');
 
     // Test default bundle created from default configuration.
-    $this->container->get('module_installer')->install(['media_entity_test']);
+    $this->container->get('module_installer')->install(['media_entity_test_bundle']);
     $test_bundle = $bundle_storage->load('test');
     $this->assertTrue((bool) $test_bundle, 'The media bundle from default configuration has been created in the database.');
     $this->assertEqual($test_bundle->get('label'), 'Test bundle', 'Correct label detected.');
@@ -78,6 +73,19 @@ class BasicTest extends WebTestBase {
 
     $media_exists = (bool) Media::load($media->id());
     $this->assertTrue($media_exists, 'The new media entity has been created in the database.');
+    $this->assertEqual($media->bundle(), $this->testBundle->id(), 'The media was created with correct bundle.');
+    $this->assertEqual($media->label(), 'Unnamed', 'The media was corrected with correct name.');
+
+    // Test the creation of a media without user-defined label and check if a
+    // default name is provided.
+    $media = Media::create([
+      'bundle' => $this->testBundle->id(),
+    ]);
+    $media->save();
+    $expected_name = 'media' . ':' . $this->testBundle->id() . ':' . $media->uuid();
+    $this->assertEqual($media->bundle(), $this->testBundle->id(), 'The media was created with correct bundle.');
+    $this->assertEqual($media->label(), $expected_name, 'The media was correctly created with a default name.');
+
   }
 
   /**

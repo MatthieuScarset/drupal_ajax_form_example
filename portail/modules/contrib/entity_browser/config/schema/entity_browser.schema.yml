@@ -20,6 +20,9 @@ entity_browser.browser.*:
       label: 'Selection display plugin ID'
     selection_display_configuration:
       type: entity_browser.browser.selection_display.[%parent.selection_display]
+    submit_text:
+      type: string
+      label: 'Main submit button'
     widget_selector:
       type: string
       label: 'Widget selector plugin ID'
@@ -104,3 +107,51 @@ entity_browser.browser.widget.view:
       sequence:
         type: integer
         label: 'View display arguments'
+
+entity_browser.browser.selection_display.multi_step_display:
+  type: mapping
+  label: 'Multistep display configuration'
+  mapping:
+    entity_type:
+      type: string
+      label: 'Entity type'
+    display:
+      type: string
+      label: 'Display'
+    display_settings:
+      type: mapping
+      label: 'Display settings'
+    select_text:
+      type: string
+      label: 'Select text'
+
+field.widget.settings.entity_browser_entity_reference:
+  type: mapping
+  label: 'Entity browser entity reference widget'
+  mapping:
+    entity_browser:
+      type: string
+      label: 'Entity Browser'
+    field_widget_display:
+      type: string
+      label: 'Field widget display'
+    field_widget_edit:
+      type: boolean
+      label: 'Field widget edit'
+    field_widget_remove:
+      type: boolean
+      label: 'Field widget remove'
+    open:
+      type: boolean
+      label: 'Open'
+    field_widget_display_settings:
+      type: mapping
+      label: 'Field widget display settings'
+      mapping:
+        view_mode:
+          type: string
+          label: 'View mode'
+
+views.display.entity_browser:
+  type: views_display
+  label: 'Entity browser display options'

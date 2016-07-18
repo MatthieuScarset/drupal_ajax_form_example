@@ -5,9 +5,10 @@ description: 'Support module for the Embed module tests.'
 package: Testing
 dependencies:
   - embed
+  - node
 
-# Information added by Drupal.org packaging script on 2015-12-08
-version: '8.x-1.x-dev'
+# Information added by Drupal.org packaging script on 2016-07-10
+version: '8.x-1.0-rc3'
 core: '8.x'
 project: 'embed'
-datestamp: 1449605953
+datestamp: 1468176578

@@ -4,12 +4,16 @@ type: module
 package: Media
 # core: 8.x
 dependencies:
-  - image
-  - user
-  - views
+  - drupal:image
+  - drupal:user
+  - drupal:views
+  - entity:entity (>=8.x-1.0-alpha3)
+  - drupal:system (>=8.1.0)
+test_dependencies:
+  - entity:entity
 
-# Information added by Drupal.org packaging script on 2016-02-12
-version: '8.x-1.0-beta2+4-dev'
+# Information added by Drupal.org packaging script on 2016-07-12
+version: '8.x-1.2+2-dev'
 core: '8.x'
 project: 'media_entity'
-datestamp: 1455266043
+datestamp: 1468287863

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\entity_browser\Kernel\Extension\EntityBrowserTest.
- */
-
 namespace Drupal\Tests\entity_browser\Kernel\Extension;
 
 use Drupal\Component\FileCache\FileCacheFactory;
@@ -31,7 +26,7 @@ class EntityBrowserTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'user', 'entity_browser', 'entity_browser_test'];
+  public static $modules = ['system', 'user', 'views', 'entity_browser', 'entity_browser_test'];
 
   /**
    * The entity browser storage.
@@ -64,6 +59,8 @@ class EntityBrowserTest extends KernelTestBase {
     $this->controller = $this->container->get('entity.manager')->getStorage('entity_browser');
     $this->widgetUUID = $this->container->get('uuid')->generate();
     $this->routeProvider = $this->container->get('router.route_provider');
+
+    $this->installSchema('system', ['router', 'key_value_expire', 'sequences']);
   }
 
   /**
@@ -91,6 +88,7 @@ class EntityBrowserTest extends KernelTestBase {
       'selection_display_configuration' => [],
       'widget_selector' => 'single',
       'widget_selector_configuration' => [],
+      'submit_text' => 'Select entities',
       'widgets' => [
         $this->widgetUUID => [
           'id' => 'view',
@@ -148,7 +146,9 @@ class EntityBrowserTest extends KernelTestBase {
     $expected_properties = [
       'langcode' => $this->container->get('language_manager')->getDefaultLanguage()->getId(),
       'status' => TRUE,
-      'dependencies' => [],
+      'dependencies' => [
+        'module' => ['views'],
+      ],
       'name' => 'test_browser',
       'label' => 'Testing entity browser instance',
       'display' => 'standalone',
@@ -169,6 +169,7 @@ class EntityBrowserTest extends KernelTestBase {
           ],
         ],
       ],
+      'submit_text' => 'Select entities',
     ];
 
     $this->assertEquals($actual_properties, $expected_properties, 'Actual config properties are structured as expected.');
@@ -322,11 +323,54 @@ class EntityBrowserTest extends KernelTestBase {
     $entity->getWidgets()->get($entity->getFirstWidget())->entity = $entity;
 
     $this->container->get('form_builder')->buildForm($form_object, $form_state);
+    $this->assertEquals(0, count($form_state->get(['entity_browser', 'selected_entities'])), 'Correct number of entities was propagated.');
+
     $this->container->get('form_builder')->submitForm($form_object, $form_state);
 
     // Event should be dispatched from widget and added to list of selected entities.
     $selected_entities = $form_state->get(['entity_browser', 'selected_entities']);
     $this->assertEquals($selected_entities, [$entity], 'Expected selected entities detected.');
+  }
+
+  /**
+   * Tests propagation of existing selection.
+   */
+  public function testExistingSelection() {
+    $this->installConfig(['entity_browser_test']);
+    $this->installEntitySchema('user');
+
+    /** @var $entity \Drupal\entity_browser\EntityBrowserInterface */
+    $entity = $this->controller->load('test');
+
+    /** @var \Drupal\user\UserInterface $user */
+    $user = $this->container->get('entity_type.manager')
+      ->getStorage('user')
+      ->create([
+        'name' => $this->randomString(),
+        'mail' => 'info@example.com',
+      ]);
+    $user->save();
+
+    /** @var \Symfony\Component\HttpFoundation\Request $request */
+    $uuid = $this->container->get('uuid')->generate();
+    $this->container->get('request_stack')
+      ->getCurrentRequest()
+      ->query
+      ->set('uuid', $uuid);
+    $this->container->get('entity_browser.selection_storage')->setWithExpire($uuid, [$user], 21600);
+
+    /** @var \Drupal\entity_browser\EntityBrowserFormInterface $form_object */
+    $form_object = $entity->getFormObject();
+    $form_object->setEntityBrowser($entity);
+    $form_state = new FormState();
+
+    $form = [];
+    $form_object->buildForm($form, $form_state);
+    $propagated_entities = $form_state->get(['entity_browser', 'selected_entities']);
+    $this->assertEquals(1, count($propagated_entities), 'Correct number of entities was propagated.');
+    $this->assertEquals($user->id(), $propagated_entities[0]->id(), 'Propagated entity ID is correct.');
+    $this->assertEquals($user->getAccountName(), $propagated_entities[0]->getAccountName(), 'Propagated entity name is correct.');
+    $this->assertEquals($user->getEmail(), $propagated_entities[0]->getEmail(), 'Propagated entity name is correct.');
   }
 
 }

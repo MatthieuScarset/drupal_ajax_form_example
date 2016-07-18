@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_browser\SelectionDisplayInterface.
- */
-
 namespace Drupal\entity_browser;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
@@ -14,6 +9,10 @@ use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
  * Defines the interface for entity browser selection displays.
+ *
+ * This plugin type is responsible for displaying the currently selected
+ * entities in an entity browser and delivering them upstream. The selections
+ * are displayed in a form which delivers the selected entities on submit.
  */
 interface SelectionDisplayInterface extends PluginInspectionInterface, ConfigurablePluginInterface, PluginFormInterface {
 
