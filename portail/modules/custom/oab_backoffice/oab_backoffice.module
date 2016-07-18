@@ -14,19 +14,15 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
   // gestion de la taxonomie
   // affichage de la langue
-  $edit_form = false;
-  if (preg_match('@node_(.*)_edit_form@', $form_id)){
-    $edit_form = true;
-  }
   if (defined('CONTENT_TAXO_FIELDS')) {
     $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
     foreach ($CONTENT_TAXO_FIELDS AS $field) {
       if (isset($form[$field]['widget']['#options'])) {
-        foreach ($form[$field]['widget']['#options'] AS $key => &$value){
+        foreach ($form[$field]['widget']['#options'] AS $key => &$value) {
           if (is_int($key)) {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
 
-            $value .= ' (' . t(strToUpper($term->language()->getId())) . ')';
+            $value .= ' (' . strtoupper($term->language()->getId()) . ')';
 
             /*$term_language = $term->language()->getId();
             if ($term_language !== $current_language
@@ -34,6 +30,22 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             && $edit_form){
               unset($form[$field]['widget']['#options'][$key]);
             }*/
+          }
+        }
+      }
+    }
+  }
+
+  // page de liste des taxonomies
+  if ($form_id == 'taxonomy_overview_terms'){
+    if (isset($form['terms'])){
+      foreach ($form['terms'] AS $key => $value){
+        if (preg_match('@tid:@', $key)){
+          if (isset($form['terms'][$key]['term']['#title'])
+          && isset($form['terms'][$key]['#term'])
+          && is_object($form['terms'][$key]['#term'])){
+            $term_language = $form['terms'][$key]['#term']->language()->getId();
+            $form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
           }
         }
       }
@@ -138,10 +150,10 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $hide_taxonomies_container = [
       'blog_post' => ['field_magazine', 'field_area'],
       'magazine' => ['field_blog', 'field_area'],
-      'press_release' => ['field_blog', 'field_magazine', 'field_area'],
-      'press_kit' => ['field_blog', 'field_magazine', 'field_area'],
-      'document' => ['field_blog', 'field_magazine', 'field_area'],
-      'simple_page' => ['field_blog', 'field_magazine', 'field_area'],
+      'press_release' => ['field_blog', 'field_magazine'],
+      'press_kit' => ['field_blog', 'field_magazine'],
+      'document' => ['field_blog', 'field_magazine'],
+      'simple_page' => ['field_blog', 'field_magazine'],
     ];
     $current_container_type = \Drupal\taxonomy\Entity\Term::load($current_rendering_model);
     if (is_object($current_container_type)){
