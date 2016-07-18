@@ -1,18 +1,15 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\inline_entity_form\Tests\InlineEntityFormComplexWebTest.
- */
-
 namespace Drupal\inline_entity_form\Tests;
+
+use Drupal\node\Entity\Node;
 
 /**
  * IEF complex field widget tests.
  *
  * @group inline_entity_form
  */
-class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
+class ComplexWidgetWebTest extends InlineEntityFormTestBase {
 
   /**
    * Modules to enable.
@@ -24,13 +21,6 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
     'field',
     'field_ui',
   ];
-
-  /**
-   * User with permissions to create content.
-   *
-   * @var \Drupal\user\Entity\User
-   */
-  protected $user;
 
   /**
    * URL to add new content.
@@ -47,13 +37,6 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
   protected $entityFormDisplayStorage;
 
   /**
-   * Field config storage.
-   *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorageInterface
-   */
-  protected $fieldConfigStorage;
-
-  /**
    * Prepares environment for
    */
   protected function setUp() {
@@ -66,15 +49,16 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
       'create ief_test_complex content',
       'edit any ief_test_complex content',
       'delete any ief_test_complex content',
+      'edit any ief_test_nested1 content',
+      'edit any ief_test_nested2 content',
+      'edit any ief_test_nested3 content',
       'view own unpublished content',
       'administer content types',
-      'administer node fields',
     ]);
     $this->drupalLogin($this->user);
 
     $this->formContentAddUrl = 'node/add/ief_test_complex';
     $this->entityFormDisplayStorage = $this->container->get('entity_type.manager')->getStorage('entity_form_display');
-    $this->fieldConfigStorage = $this->container->get('entity_type.manager')->getStorage('field_config');
   }
 
   /**
@@ -194,8 +178,7 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
   public function testNestedEntityCreationWithDifferentBundlesAjaxSubmit() {
     $required_possibilities = [
       FALSE,
-      // Fails because of a known bug. See: https://www.drupal.org/node/2649710
-      // TRUE,
+      TRUE,
     ];
     foreach ($required_possibilities as $required) {
       $this->setupNestedComplexForm($required);
@@ -205,37 +188,61 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
       $nested2_title = 'nested2 title steps ' . ($required ? 'required' : 'not required');
       $nested1_title = 'nested1 title steps ' . ($required ? 'required' : 'not required');
       $edit = [
-        // First line shouldn't be needed. It needs to be here because of a bug. See: https://www.drupal.org/node/2649706
-        'test_ref_nested1[form][inline_entity_form][title][0][value]' => $nested2_title,
         'test_ref_nested1[form][inline_entity_form][test_ref_nested2][form][inline_entity_form][title][0][value]' => $nested3_title,
       ];
       $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @value="Create node 3"]'));
       $this->assertText($nested3_title, 'Title of second nested node found.');
-      $this->assertFalse($this->drupalGetNodeByTitle($nested3_title), 'Second nested entity is not saved yet.');
+      $this->assertNoNodeByTitle($nested3_title, 'Second nested entity is not saved yet.');
 
       $edit = [
         'test_ref_nested1[form][inline_entity_form][title][0][value]' => $nested2_title,
       ];
       $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @value="Create node 2"]'));
       $this->assertText($nested2_title, 'Title of first nested node found.');
-      $this->assertFalse($this->drupalGetNodeByTitle($nested2_title), 'First nested entity is not saved yet.');
+      $this->assertNoNodeByTitle($nested2_title, 'First nested entity is not saved yet.');
 
       $edit = [
         'title[0][value]' => $nested1_title,
       ];
       $this->drupalPostForm(NULL, $edit, t('Save'));
-      $nested1_node = $this->drupalGetNodeByTitle($nested1_title);
-      $this->assertEqual($nested1_title, $nested1_node->label(), "First node's title looks correct.");
-      $this->assertEqual('ief_test_nested1', $nested1_node->bundle(), "First node's type looks correct.");
-      if ($this->assertNotNull($nested1_node->test_ref_nested1->entity, 'Second node was created.')) {
-        $this->assertEqual($nested2_title, $nested1_node->test_ref_nested1->entity->label(), "Second node's title looks correct.");
-        $this->assertEqual('ief_test_nested2', $nested1_node->test_ref_nested1->entity->bundle(), "Second node's type looks correct.");
-        if ($this->assertNotNull($nested1_node->test_ref_nested1->entity->test_ref_nested2->entity, 'Third node was created')) {
-          $this->assertEqual($nested3_title, $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->label(), "Third node's title looks correct.");
-          $this->assertEqual('ief_test_nested3', $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->bundle(), "Third node's type looks correct.");
-        }
-      }
+      $this->checkNestedNodes($nested1_title, $nested2_title, $nested3_title);
     }
+  }
+
+  /**
+   * Checks that nested IEF entity references can be edit and saved.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *  Top level node of type ief_test_nested1 to check.
+   * @param bool $ajax_submit
+   *  Whether IEF form widgets should be submitted via AJax or left open.
+   *
+   */
+  protected function checkNestedEntityEditing(Node $node, $ajax_submit = TRUE) {
+    $this->drupalGet("node/{$node->id()}/edit");
+    /** @var \Drupal\node\Entity\Node $level_1_node */
+    $level_1_node = $node->test_ref_nested1->entity;
+    /** @var \Drupal\node\Entity\Node $level_2_node */
+    $level_2_node = $node->test_ref_nested1->entity->test_ref_nested2->entity;
+    $level_2_node_update_title = $level_2_node->getTitle() . ' - updated';
+    //edit-test-ref-nested1-entities-0-actions-ief-entity-edit
+    $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-test-ref-nested1-entities-0-actions-ief-entity-edit"]'));
+    //edit-test-ref-nested1-form-inline-entity-form-entities-0-form-test-ref-nested2-entities-0-actions-ief-entity-edit
+    $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-test-ref-nested1-form-inline-entity-form-entities-0-form-test-ref-nested2-entities-0-actions-ief-entity-edit"]'));
+    $edit['test_ref_nested1[form][inline_entity_form][entities][0][form][test_ref_nested2][form][inline_entity_form][entities][0][form][title][0][value]'] = $level_2_node_update_title;
+    if ($ajax_submit) {
+      // Close IEF Forms with AJAX posts
+      //edit-test-ref-nested1-form-inline-entity-form-entities-0-form-test-ref-nested2-form-inline-entity-form-entities-0-form-actions-ief-edit-save
+      $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-test-ref-nested1-form-inline-entity-form-entities-0-form-test-ref-nested2-form-inline-entity-form-entities-0-form-actions-ief-edit-save"]'));
+      $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-test-ref-nested1-form-inline-entity-form-entities-0-form-actions-ief-edit-save"]'));
+      $this->drupalPostForm(NULL, [], t('Save'));
+    }
+    else {
+      $this->drupalPostForm(NULL, $edit, t('Save'));
+    }
+    $this->nodeStorage->resetCache([$level_2_node->id()]);
+    $level_2_node = $this->nodeStorage->load($level_2_node->id());
+    $this->assertEqual($level_2_node_update_title, $level_2_node->getTitle());
   }
 
   /**
@@ -246,8 +253,7 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
   public function testNestedEntityCreationWithDifferentBundlesNoAjaxSubmit() {
     $required_possibilities = [
       FALSE,
-      // Fails because of a known bug. See: https://www.drupal.org/node/2649710
-      // TRUE,
+      TRUE,
     ];
 
     foreach ($required_possibilities as $required) {
@@ -263,13 +269,7 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
         'test_ref_nested1[form][inline_entity_form][test_ref_nested2][form][inline_entity_form][title][0][value]' => $nested3_title,
       ];
       $this->drupalPostForm(NULL, $edit, t('Save'));
-      $nested1_node = $this->drupalGetNodeByTitle($nested1_title);
-      $this->assertEqual($nested1_title, $nested1_node->label(), "First node's title looks correct.");
-      $this->assertEqual('ief_test_nested1', $nested1_node->bundle(), "First node's type looks correct.");
-      $this->assertEqual($nested2_title, $nested1_node->test_ref_nested1->entity->label(), "Second node's title looks correct.");
-      $this->assertEqual('ief_test_nested2', $nested1_node->test_ref_nested1->entity->bundle(), "Second node's type looks correct.");
-      $this->assertEqual($nested3_title, $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->label(), "Third node's title looks correct.");
-      $this->assertEqual('ief_test_nested3', $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->bundle(), "Third node's type looks correct.");
+      $this->checkNestedNodes($nested1_title, $nested2_title, $nested3_title);
     }
   }
 
@@ -330,6 +330,9 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
     // Save the ief_test_complex node.
     $this->drupalPostForm(NULL, [], t('Save'));
     $this->assertResponse(200, 'Saving parent node was successful.');
+
+    $deleted_node = $this->drupalGetNodeByTitle($title);
+    $this->assertTrue(empty($deleted_node), 'The inline entity was deleted from the site.');
 
     // Checks that entity does nor appear in IEF.
     $this->drupalGet('node/'. $parent_node->id() .'/edit');
@@ -425,6 +428,40 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
       $cell = $this->xpath('//table[@id="ief-entity-table-edit-all-bundles-entities"]/tbody/tr[' . $count . ']/td[@class="inline-entity-form-node-label"]');
       $this->assertTrue($cell[0] == $title, 'Found reference node title "' . $title . '" in the IEF table.');
       $count++;
+    }
+  }
+
+  /**
+   * Test if invalid values get correct validation messages in reference existing entity form.
+   *
+   * Also checks if existing entity reference form can be canceled.
+   */
+  public function testReferenceExistingValidation() {
+    $this->setAllowExisting(TRUE);
+
+    $this->drupalGet('node/add/ief_test_complex');
+    $this->checkExistingValidationExpectation('', 'Node field is required.');
+    $this->checkExistingValidationExpectation('Fake Title', "There are no entities matching \"Fake Title\"");
+    // Check adding nodes that cannot be referenced by this field.
+    $bundle_nodes = $this->createNodeForEveryBundle();
+    foreach ($bundle_nodes as $id => $title) {
+      $node = $this->nodeStorage->load($id);
+      if ($node->bundle() != 'ief_reference_type') {
+        $this->checkExistingValidationExpectation("$title ($id)", "The referenced entity (node: $id) does not exist.");
+      }
+    }
+
+    $nodes = $this->createReferenceContent(2);
+    foreach ($nodes as $title => $id) {
+      $this->openMultiExistingForm();
+      $edit = [
+        'multi[form][entity_id]' => "$title ($id)",
+      ];
+      // Add a node successfully.
+      $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-multi-form-actions-ief-reference-save"]'));
+      $this->assertNoFieldByName('multi[form][entity_id]', NULL, 'Existing entity reference autocomplete field removed.');
+      // Try to add the same node again.
+      $this->checkExistingValidationExpectation("$title ($id)", 'The selected node has already been added.');
     }
   }
 
@@ -553,9 +590,13 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
    * Opens the inline entity forms if they are not required.
    *
    * @param boolean $required
-   *  Whether the fields are required.
+   *   Whether the fields are required.
+   * @param array $permissions
+   *   (optional) Permissions to sign testing user in with. You may pass in an
+   *   empty array (default) to use the all the permissions necessary create and
+   *   edit nodes on the form.
    */
-  protected function setupNestedComplexForm($required) {
+  protected function setupNestedComplexForm($required, $permissions = []) {
     /** @var \Drupal\Core\Field\FieldConfigInterface $ief_test_nested1 */
     $ief_test_nested1 = $this->fieldConfigStorage->load('node.ief_test_nested1.test_ref_nested1');
     $ief_test_nested1->setRequired($required);
@@ -565,12 +606,136 @@ class InlineEntityFormComplexWebTest extends InlineEntityFormTestBase {
     $ief_test_nested2->setRequired($required);
     $ief_test_nested2->save();
 
+    if (!$permissions) {
+      $permissions = [
+        'create ief_test_nested1 content',
+        'create ief_test_nested2 content',
+        'create ief_test_nested3 content',
+        'edit any ief_test_nested1 content',
+        'edit any ief_test_nested2 content',
+        'edit any ief_test_nested3 content',
+      ];
+    }
+    $this->user = $this->createUser($permissions);
+    $this->drupalLogin($this->user);
+
     $this->drupalGet('node/add/ief_test_nested1');
 
     if (!$required) {
       // Open inline forms if not required.
-      $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @value="Add new node 2"]'));
-      $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @value="Add new node 3"]'));
+      if (in_array('create ief_test_nested2 content', $permissions)) {
+        $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @value="Add new node 2"]'));
+      }
+      if (in_array('create ief_test_nested3 content', $permissions)) {
+        $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @value="Add new node 3"]'));
+      }
+    }
+  }
+
+  /**
+   * Closes the existing node form on the "multi" field.
+   */
+  protected function cancelExistingMultiForm($edit) {
+    $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-multi-form-actions-ief-reference-cancel"]'));
+    $this->assertNoFieldByName('multi[form][entity_id]', NULL, 'Existing entity reference autocomplete field removed.');
+  }
+
+  /**
+   * Opens the existing node form on the "multi" field.
+   */
+  protected function openMultiExistingForm() {
+    $this->drupalPostAjaxForm(NULL, [], $this->getButtonName('//input[@type="submit" and @value="Add existing node" and @data-drupal-selector="edit-multi-actions-ief-add-existing"]'));
+    $this->assertResponse(200, 'Opening reference form was successful.');
+    $this->assertFieldByName('multi[form][entity_id]', NULL, 'Existing entity reference autocomplete field found.');
+  }
+
+  /**
+   * Checks that an invalid value for an existing node will be display the expected error.
+   *
+   * @param $existing_node_text
+   *  The text to enter into the existing node text field.
+   * @param $expected_error
+   *  The error message that is expected to be shown.
+   */
+  protected function checkExistingValidationExpectation($existing_node_text, $expected_error) {
+    $edit = [
+      'multi[form][entity_id]' => $existing_node_text,
+    ];
+    $this->openMultiExistingForm();
+
+    $this->drupalPostAjaxForm(NULL, $edit, $this->getButtonName('//input[@type="submit" and @data-drupal-selector="edit-multi-form-actions-ief-reference-save"]'));
+    $this->assertText($expected_error);
+    $this->cancelExistingMultiForm($edit);
+  }
+
+  /**
+   * Tests entity create access is correct on nested IEF forms.
+   */
+  public function testNestedEntityCreateAccess() {
+    $permissions = [
+      'create ief_test_nested1 content',
+      'create ief_test_nested2 content',
+    ];
+    $this->setupNestedComplexForm(TRUE, $permissions);
+    $this->assertFieldByName('title[0][value]');
+    $this->assertFieldByName('test_ref_nested1[form][inline_entity_form][title][0][value]');
+    $this->assertNoFieldByName('test_ref_nested1[form][inline_entity_form][test_ref_nested2][form][inline_entity_form][title][0][value]', NULL);
+
+    $this->setupNestedComplexForm(FALSE, $permissions);
+    $this->assertNoFieldByXPath('//input[@type="submit" and @value="Add new node 3"]');
+  }
+
+  /**
+   * Tests create access on IEF Complex content type.
+   */
+  public function testComplexEntityCreate() {
+    $user = $this->createUser([
+      'create ief_test_complex content',
+    ]);
+    $this->drupalLogin($user);
+
+    $this->drupalGet('node/add/ief_test_complex');
+    $this->assertNoFieldByName('all_bundles[actions][bundle]', NULL, 'Bundle select is not shown when only one bundle is available.');
+    $this->assertNoFieldByName('multi[form][inline_entity_form][title][0][value]', NULL);
+
+    $user = $this->createUser([
+      'create ief_test_complex content',
+      'create ief_reference_type content'
+    ]);
+    $this->drupalLogin($user);
+
+    $this->drupalGet('node/add/ief_test_complex');
+    $this->assertFieldByName('all_bundles[actions][bundle]', NULL, 'Bundle select is shown when more than one bundle is available.');
+    $this->assertOption('edit-all-bundles-actions-bundle', 'ief_reference_type');
+    $this->assertOption('edit-all-bundles-actions-bundle', 'ief_test_complex');
+    $this->assertFieldByName('multi[form][inline_entity_form][title][0][value]');
+  }
+
+  /**
+   * Checks if nested nodes for ief_test_nested1 content were created correctly.
+   *
+   * @param $nested1_title
+   *   Expected title of top level node of the type ief_test_nested1
+   * @param $nested2_title
+   *   Expected title of second level node
+   * @param $nested3_title
+   *   Expected title of third level node
+   */
+  protected function checkNestedNodes($nested1_title, $nested2_title, $nested3_title) {
+    $nested1_node = $this->drupalGetNodeByTitle($nested1_title);
+    $this->assertEqual($nested1_title, $nested1_node->label(), "First node's title looks correct.");
+    $this->assertEqual('ief_test_nested1', $nested1_node->bundle(), "First node's type looks correct.");
+    if ($this->assertNotNull($nested1_node->test_ref_nested1->entity, 'Second node was created.')) {
+      $this->assertEqual($nested1_node->test_ref_nested1->count(), 1, 'Only 1 node created at first level.');
+      $this->assertEqual($nested2_title, $nested1_node->test_ref_nested1->entity->label(), "Second node's title looks correct.");
+      $this->assertEqual('ief_test_nested2', $nested1_node->test_ref_nested1->entity->bundle(), "Second node's type looks correct.");
+      if ($this->assertNotNull($nested1_node->test_ref_nested1->entity->test_ref_nested2->entity, 'Third node was created')) {
+        $this->assertEqual($nested1_node->test_ref_nested1->entity->test_ref_nested2->count(), 1, 'Only 1 node created at second level.');
+        $this->assertEqual($nested3_title, $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->label(), "Third node's title looks correct.");
+        $this->assertEqual('ief_test_nested3', $nested1_node->test_ref_nested1->entity->test_ref_nested2->entity->bundle(), "Third node's type looks correct.");
+
+        $this->checkNestedEntityEditing($nested1_node, TRUE);
+      }
     }
   }
 

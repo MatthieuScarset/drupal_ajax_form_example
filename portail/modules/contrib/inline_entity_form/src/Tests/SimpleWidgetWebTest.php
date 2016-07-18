@@ -1,20 +1,16 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\inline_entity_form\Tests\InlineEntityFormWebTest.
- */
-
 namespace Drupal\inline_entity_form\Tests;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Tests the IEF simple widget.
  *
  * @group inline_entity_form
  */
-class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
+class SimpleWidgetWebTest extends InlineEntityFormTestBase {
 
   /**
    * Modules to enable.
@@ -24,20 +20,6 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
   public static $modules = ['inline_entity_form_test'];
 
   /**
-   * User with permissions to create content.
-   *
-   * @var \Drupal\user\Entity\User
-   */
-  protected $user;
-
-  /**
-   * Field config storage.
-   *
-   * @var \Drupal\Core\Config\Entity\ConfigEntityStorage
-   */
-  protected $fieldStorageConfigStorage;
-
-  /**
    * Prepares environment for
    */
   protected function setUp() {
@@ -45,32 +27,11 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
 
     $this->user = $this->createUser([
       'create ief_simple_single content',
+      'create ief_test_custom content',
       'edit any ief_simple_single content',
-      'edit any ief_test_custom content',
+      'edit own ief_test_custom content',
       'view own unpublished content',
     ]);
-
-    $this->fieldStorageConfigStorage = $this->container
-      ->get('entity_type.manager')
-      ->getStorage('field_storage_config');
-  }
-
-  /**
-   * Tests IEF on a custom form.
-   */
-  public function testCustomFormIEF() {
-    $this->drupalGet('ief-test');
-    $this->assertText(t('Title'), 'Title field found on the form.');
-
-    $edit = ['inline_entity_form[title][0][value]' => $this->randomString()];
-    $this->drupalPostForm('ief-test', $edit, t('Save'));
-    $message = t('Created @entity_type @label.', ['@entity_type' => t('Content'), '@label' => $edit['inline_entity_form[title][0][value]']]);
-    $this->assertText($message, 'Status message found on the page.');
-
-    /** @var \Drupal\node\NodeInterface $node */
-    $node = $this->container->get('entity.manager')->getStorage('node')->load(1);
-    $this->assertEqual($node->label(), $edit['inline_entity_form[title][0][value]'], 'Node title correctly saved to the database.');
-    $this->assertEqual($node->bundle(), 'ief_test_custom', 'Correct bundle used when creating the new node.');
   }
 
   /**
@@ -104,7 +65,8 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
         $this->assertNoFieldByXPath($add_more_xpath, NULL, 'Add more button does NOT exist');
       }
 
-      $edit = ['title[0][value]' => 'Host node'];
+      $host_title = 'Host node cardinality: ' . $cardinality;
+      $edit = ['title[0][value]' => $host_title];
       for ($item_number = 0; $item_number < $limit; $item_number++) {
         $edit["single[$item_number][inline_entity_form][title][0][value]"] = 'Child node nr.' . $item_number;
         if ($cardinality == FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED) {
@@ -112,15 +74,11 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
           $this->assertNoFieldByName("single[$next_item_number][inline_entity_form][title][0][value]", NULL, "Item $next_item_number does not appear before 'Add More' clicked");
           if ($item_number < $limit - 1) {
             $this->drupalPostAjaxForm(NULL, $edit, 'single_add_more');
-            // This needed because the first time "add another item" is clicked it does not work
-            // see https://www.drupal.org/node/2664626
-            if ($item_number == 0) {
-              $this->drupalPostAjaxForm(NULL, $edit, 'single_add_more');
-            }
-
             $this->assertFieldByName("single[$next_item_number][inline_entity_form][title][0][value]", NULL, "Item $next_item_number does  appear after 'Add More' clicked");
+            // Make sure only 1 item is added.
+            $unexpected_item_number = $next_item_number + 1;
+            $this->assertNoFieldByName("single[$unexpected_item_number][inline_entity_form][title][0][value]", NULL, "Extra Item $unexpected_item_number is not added after 'Add More' clicked");
           }
-
         }
       }
       $this->drupalPostForm(NULL, $edit, t('Save'));
@@ -128,6 +86,9 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
       for ($item_number = 0; $item_number < $limit; $item_number++) {
         $this->assertText('Child node nr.' . $item_number, 'Label of referenced entity found.');
       }
+
+      $host_node = $this->getNodeByTitle($host_title);
+      $this->checkEditAccess($host_node, $limit, $cardinality);
     }
   }
 
@@ -174,6 +135,95 @@ class InlineEntityFormSimpleWebTest extends InlineEntityFormTestBase {
         $this->assertEqual($child_node->positive_int[0]->value,1, 'Child node int field correct.');
         $this->assertEqual($child_node->bundle(),'ief_test_custom', 'Child node is correct bundle.');
       }
+    }
+  }
+
+  /**
+   * Tests if the entity create access works in simple widget.
+   */
+  public function testSimpleCreateAccess() {
+    // Create a user who does not have access to create ief_test_custom nodes.
+    $this->user = $this->createUser([
+      'create ief_simple_single content',
+    ]);
+    $this->drupalLogin($this->user);
+    $this->drupalGet('node/add/ief_simple_single');
+    $this->assertNoFieldByName('single[0][inline_entity_form][title][0][value]', NULL);
+  }
+
+  /**
+   * Tests that user only has access to the their own nodes.
+   *
+   * @param \Drupal\node\Entity\Node $host_node
+   *   The node of the type of ief_simple_single
+   * @param int $child_count
+   *   The number of entity reference values in the "single" field.
+   */
+  protected function checkEditAccess(NodeInterface $host_node, $child_count, $cardinality) {
+    $other_user = $this->createUser([
+      'edit own ief_test_custom content',
+      'edit any ief_simple_single content',
+    ]);
+    /** @var  \Drupal\node\Entity\Node $first_child_node */
+    $first_child_node = $host_node->single[0]->entity;
+    $first_child_node->setOwner($other_user);
+    $first_child_node->save();
+    $this->drupalGet("node/{$host_node->id()}/edit");
+    $this->assertText($first_child_node->label());
+    $this->assertNoFieldByName('single[0][inline_entity_form][title][0][value]', NULL, 'Form of child node with no edit access is not found.');
+    // Check that the forms for other child nodes(if any) appear on the form.
+    $delta = 1;
+    while ($delta < $child_count) {
+      /** @var \Drupal\node\Entity\Node $child_node */
+      $child_node = $host_node->single[$delta]->entity;
+      $this->assertFieldByName("single[$delta][inline_entity_form][title][0][value]", $child_node->label(), 'Form of child node with edit access is found.');
+      $delta++;
+    }
+    // Check that there is NOT an extra "add" form when editing.
+    $unexpected_item_number = $child_count;
+    $this->assertNoFieldByName("single[$unexpected_item_number][inline_entity_form][title][0][value]", NULL, 'No empty "add" entity form is found on edit.');
+    if ($cardinality == FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED) {
+      $next_item_number = $child_count;
+      $this->drupalPostAjaxForm(NULL, [], 'single_add_more');
+      $this->assertFieldByName("single[$next_item_number][inline_entity_form][title][0][value]", NULL, "Item $next_item_number does appear after 'Add More' clicked");
+      // Make sure only 1 item is added.
+      $unexpected_item_number = $next_item_number + 1;
+      $this->assertNoFieldByName("single[$unexpected_item_number][inline_entity_form][title][0][value]", NULL, "Extra Item $unexpected_item_number is not added after 'Add More' clicked");
+    }
+
+    // Now that we have confirmed the correct fields appear, lets update the
+    // values and save them. We do not have access to form for delta 0 because
+    // it is owned by another user.
+    $delta = 1;
+    $new_titles = [];
+    $edit = [];
+    // Loop through an update all child node titles.
+    while ($delta < $child_count) {
+      /** @var \Drupal\node\Entity\Node $child_node */
+      $child_node = $host_node->single[$delta]->entity;
+      $new_titles[$delta] = $child_node->label() . ' - updated';
+      $edit["single[$delta][inline_entity_form][title][0][value]"] = $new_titles[$delta];
+      $delta++;
+    }
+    // If CARDINALITY_UNLIMITED then we should have 1 extra form open.
+    if ($cardinality == FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED) {
+      $new_titles[$delta] = 'Title for new child';
+      $edit["single[$delta][inline_entity_form][title][0][value]"] = $new_titles[$delta];
+    }
+    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->assertText("IEF single simple {$host_node->label()} has been updated.");
+
+    // Reset cache for nodes.
+    $node_ids = [$host_node->id()];
+    foreach ($host_node->single as $item) {
+      $node_ids[] = $item->entity->id();
+    }
+    $this->nodeStorage->resetCache($node_ids);
+    $host_node = $this->nodeStorage->load($host_node->id());
+    // Check that titles were updated.
+    foreach ($new_titles as $delta => $new_title) {
+      $child_node = $host_node->single[$delta]->entity;
+      $this->assertEqual($child_node->label(), $new_title, "Child $delta node title updated");
     }
   }
 

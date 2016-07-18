@@ -1,96 +1,87 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\inline_entity_form\InlineFormInterface.
- */
-
 namespace Drupal\inline_entity_form;
 
 use Drupal\Core\Entity\EntityHandlerInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Defines the interface for entity browser widgets.
+ * Defines the interface for inline form handlers.
  */
 interface InlineFormInterface extends EntityHandlerInterface {
 
   /**
-   * Returns an array of libraries for the current entity type, keyed by theme
-   * name.
+   * Gets the entity type managed by this handler.
    *
-   * If provided, the "base" library is included for all themes. If a library
-   * matching the current theme exists, it will also be included.
-   *
-   * @code
-   * return [
-   *   'base' => 'test_module/inline_entity_form.base',
-   *   'seven' => 'test_module/inline_entity_form.seven',
-   * ];
-   * @endcode
-   *
-   * @return array
-   *   List of libraries for inclusion keyed by theme name.
+   * @return \Drupal\Core\Entity\EntityTypeInterface
+   *   The entity type.
    */
-  public function libraries();
+  public function getEntityType();
 
   /**
-   * Returns an array of entity type labels (singular, plural) fit to be
-   * included in the UI text.
+   * Gets the entity type labels (singular, plural).
+   *
+   * @todo Remove when #1850080 lands and IEF starts requiring Drupal 8.1.x
    *
    * @return array
-   *   Array containing two values:
-   *     - singular: label for singular form,
-   *     - plural: label for plural form.
+   *   An array with two values:
+   *     - singular: The lowercase singular label.
+   *     - plural: The lowercase plural label.
    */
-  public function labels();
+  public function getEntityTypeLabels();
 
   /**
-   * Returns an array of fields used to represent an entity in the IEF table.
+   * Gets the label of the given entity.
    *
-   * The fields can be either Field API fields or properties defined through
-   * hook_entity_property_info().
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The given entity.
+   *
+   * @return string
+   *   The entity label.
+   */
+  public function getEntityLabel(EntityInterface $entity);
+
+  /**
+   * Gets the fields used to represent an entity in the IEF table.
    *
    * Modules can alter the output of this method through
    * hook_inline_entity_form_table_fields_alter().
    *
-   * @param array $bundles
+   * @param string[] $bundles
    *   An array of allowed bundles for this widget.
    *
    * @return array
-   *   An array of field information, keyed by field name. Allowed keys:
-   *   - type: 'field' or 'property',
-   *   - label: Human readable name of the field, shown to the user.
-   *   - weight: The position of the field relative to other fields.
-   *   Special keys for type 'field', all optional:
-   *   - formatter: The formatter used to display the field, or "hidden".
-   *   - settings: An array passed to the formatter. If empty, defaults are used.
-   *   - delta: If provided, limits the field to just the specified delta.
+   *   An array of fields keyed by field name. Each field is represented by an
+   *   associative array containing the following keys:
+   *   - type: 'label', 'field' or 'callback'.
+   *   - label: the title of the table field's column in the IEF table.
+   *   - weight: the sort order of the column in the IEF table.
+   *   - display_options: (optional) used for 'field' type table fields, an
+   *     array of display settings. See EntityViewBuilderInterface::viewField().
+   *   - callback: for 'callback' type table fields, a callable that returns a
+   *     renderable array.
+   *   - callback_arguments: (optional) an array of additional arguments to pass
+   *     to the callback. The entity and the theme variables are always passed
+   *     as as the first two arguments.
    */
-  public function tableFields($bundles);
+  public function getTableFields($bundles);
 
   /**
-   * Returns the id of entity type managed by this handler.
-   *
-   * @return string
-   *   The entity type id..
-   */
-  public function entityTypeId();
-
-  /**
-   * Returns the entity form to be shown through the IEF widget.
-   *
-   * When adding data to $form_state it should be noted that there can be
-   * several IEF widgets on one master form, each with several form rows,
-   * leading to possible key collisions if the keys are not prefixed with
-   * $entity_form['#parents'].
+   * Builds the entity form.
    *
    * @param array $entity_form
-   *   The entity form.
+   *   The entity form, containing the following basic properties:
+   *   - #entity: The entity for the current entity form.
+   *   - #op: The form operation. 'add' or 'edit'.
+   *   - #form_mode: The form mode used to display the entity form.
+   *   - #parents: Identifies the position of the entity form in the overall
+   *     parent form, and identifies the location where the field values are
+   *     placed within $form_state->getValues().
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state of the parent form.
    */
-  public function entityForm($entity_form, FormStateInterface $form_state);
+  public function entityForm(array $entity_form, FormStateInterface $form_state);
 
   /**
    * Validates the entity form.
@@ -100,21 +91,28 @@ interface InlineFormInterface extends EntityHandlerInterface {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state of the parent form.
    */
-  public static function entityFormValidate($entity_form, FormStateInterface $form_state);
+  public function entityFormValidate(array &$entity_form, FormStateInterface $form_state);
 
   /**
    * Handles the submission of an entity form.
-   *
-   * Prepares the entity stored in $entity_form['#entity'] for saving by copying
-   * the values from the form to matching properties and, if the entity is
-   * fieldable, invoking Field API submit.
    *
    * @param array $entity_form
    *   The entity form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The form state of the parent form.
    */
-  public static function entityFormSubmit(&$entity_form, FormStateInterface $form_state);
+  public function entityFormSubmit(array &$entity_form, FormStateInterface $form_state);
+
+  /**
+   * Saves the given entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity.
+   *
+   * @return int
+   *   Either SAVED_NEW or SAVED_UPDATED, depending on the operation performed.
+   */
+  public function save(EntityInterface $entity);
 
   /**
    * Delete permanently saved entities.
