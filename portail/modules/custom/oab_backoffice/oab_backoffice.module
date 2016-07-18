@@ -79,18 +79,22 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   }
 
   if ($form_id == 'node_container_form'
-  || $form_id == 'node_container_edit_form'){
-    if ($form_id == 'node_container_form'){
-      if(isset($_GET['rendering_model_tid'])) {
+  || $form_id == 'node_container_edit_form') {
+    if ($form_id == 'node_container_form') {
+      if (isset($_GET['rendering_model_tid'])) {
         $tid = $_GET['rendering_model_tid'];
         $form['field_rendering_model']['widget']['#default_value'] = $tid;
       }
     }
-    if (is_array($form['field_rendering_model']['widget']['#default_value'])){
-      $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'][0];
+    if (isset($form['field_rendering_model']['widget']['#default_value'])) {
+      if (is_array($form['field_rendering_model']['widget']['#default_value'])) {
+        $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'][0];
+      } else {
+        $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'];
+      }
     }
     else{
-      $current_rendering_model = $form['field_rendering_model']['widget']['#default_value'];
+      $current_rendering_model = 'Container';
     }
     // gestion du champ rendering model
     $form['field_rendering_model']['#disabled'] = TRUE;

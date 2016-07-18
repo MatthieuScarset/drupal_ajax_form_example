@@ -8,8 +8,6 @@ dependencies:
   - entity_embed
   - entity_reference
   - media_entity
-  - dropzonejs
-  - dropzonejs_eb_widget
   - field
   - file
   - menu_ui
