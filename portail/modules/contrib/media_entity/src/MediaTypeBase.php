@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\media_entity\MediaTypeBase.
- */
-
 namespace Drupal\media_entity;
 
 use Drupal\Component\Plugin\PluginBase;
@@ -16,7 +11,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Component\Utility\NestedArray;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormStateInterface;
-
 
 /**
  * Base implementation of media type plugin.
@@ -156,4 +150,12 @@ abstract class MediaTypeBase extends PluginBase implements MediaTypeInterface, C
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) { }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultName(MediaInterface $media) {
+    return 'media' . ':' . $media->bundle() . ':' . $media->uuid();
+  }
+
 }

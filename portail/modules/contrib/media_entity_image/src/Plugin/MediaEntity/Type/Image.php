@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\media_entity_image\Plugin\MediaEntity\Type\Image.
- */
-
 namespace Drupal\media_entity_image\Plugin\MediaEntity\Type;
 
 use Drupal\Core\Config\Config;
@@ -12,7 +7,6 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Image\ImageFactory;
-use Drupal\media_entity\MediaBundleInterface;
 use Drupal\media_entity\MediaInterface;
 use Drupal\media_entity\MediaTypeBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -97,8 +91,8 @@ class Image extends MediaTypeBase {
         'created' => t('Image creation datetime'),
         'iso' => t('Iso'),
         'exposure' => t('Exposure time'),
-        'apperture' => t('Apperture value'),
-        'focal_lenght' => t('Focal lenght'),
+        'aperture' => t('Aperture value'),
+        'focal_length' => t('Focal length'),
       );
     }
     return $fields;
@@ -150,10 +144,10 @@ class Image extends MediaTypeBase {
         case 'exposure':
           return $this->getExifField($uri, 'ExposureTime');
 
-        case 'apperture':
+        case 'aperture':
           return $this->getExifField($uri, 'FNumber');
 
-        case 'focal_lenght':
+        case 'focal_length':
           return $this->getExifField($uri, 'FocalLength');
       }
     }
@@ -165,7 +159,7 @@ class Image extends MediaTypeBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    /** @var MediaBundleInterface $bundle */
+    /** @var \Drupal\media_entity\MediaBundleInterface $bundle */
     $bundle = $form_state->getFormObject()->getEntity();
     $options = [];
     $allowed_field_types = ['file', 'image'];
@@ -224,7 +218,6 @@ class Image extends MediaTypeBase {
    *
    * @param string $uri
    *   The uri for the file that we are getting the Exif.
-   *
    * @param string $field
    *   The name of the exif field.
    *
@@ -252,4 +245,22 @@ class Image extends MediaTypeBase {
   protected function getExif($uri) {
     return exif_read_data($uri, 'EXIF');
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDefaultName(MediaInterface $media) {
+    // The default name will be the filename of the source_field, if present,
+    // or the parent's defaultName implementation if it was not possible to
+    // retrieve the filename.
+    $source_field = $this->configuration['source_field'];
+
+    /** @var \Drupal\file\FileInterface $file */
+    if (!empty($source_field) && ($file = $this->entityTypeManager->getStorage('file')->load($media->{$source_field}->target_id))) {
+      return $file->getFilename();
+    }
+
+    return parent::getDefaultName($media);
+  }
+
 }
