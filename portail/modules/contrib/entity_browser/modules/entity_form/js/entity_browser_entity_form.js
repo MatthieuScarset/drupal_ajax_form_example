@@ -3,9 +3,10 @@
  *
  * Provides JS part of entity browser integration with IEF "use existing entity" feature.
  */
+
 (function ($, Drupal, drupalSettings) {
 
-  "use strict";
+  'use strict';
 
   /**
    * Registers behaviours related to IEF "use existing" feature.
@@ -16,16 +17,13 @@
     }
   };
 
-
   Drupal.entityBrowserEntityForm = {};
 
   /**
    * Reacts on entities being selected via entity form.
    */
-  Drupal.entityBrowserEntityForm.valuesUpdated = function() {
+  Drupal.entityBrowserEntityForm.valuesUpdated = function () {
     $(this).parent().find('.ief-entity-submit').trigger('entities-selected');
   };
 
 }(jQuery, Drupal, drupalSettings));
-
-

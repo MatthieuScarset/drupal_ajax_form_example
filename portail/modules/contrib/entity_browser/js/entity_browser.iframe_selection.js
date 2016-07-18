@@ -3,9 +3,10 @@
  *
  * Propagates selected entities from iFrame display.
  */
+
 (function (drupalSettings) {
 
-  "use strict";
+  'use strict';
 
   // We need to access parent window, get it's jquery and find correct iFrame
   // element to trigger event on.

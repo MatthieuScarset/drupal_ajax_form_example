@@ -1,18 +1,21 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_browser\DisplayInterface.
- */
-
 namespace Drupal\entity_browser;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Defines the interface for entity browser displays.
+ *
+ * Display plugins determine how a complete entity browser is delivered to the
+ * user. They wrap around and encapsulate the entity browser. Examples include:
+ *
+ * - Displaying the entity browser on its own standalone page.
+ * - Displaying the entity browser in an iframe.
+ * - Displaying the entity browser in a modal dialog box.
  */
 interface DisplayInterface extends PluginInspectionInterface, ConfigurablePluginInterface, PluginFormInterface {
 
@@ -31,10 +34,15 @@ interface DisplayInterface extends PluginInspectionInterface, ConfigurablePlugin
    * with it. It will take care about displaying entity browser in one way or
    * another.
    *
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state object.
+   * @param \Drupal\Core\Entity\EntityInterface[] $entities
+   *   (optional) Existing selection that should be passed to the entity browser.
+   *
    * @return array
    *   An array suitable for drupal_render().
    */
-  public function displayEntityBrowser();
+  public function displayEntityBrowser(FormStateInterface $form_state, array $entities = []);
 
   /**
    * Indicates completed selection.
@@ -44,7 +52,6 @@ interface DisplayInterface extends PluginInspectionInterface, ConfigurablePlugin
    * the initiating code.
    *
    * @param \Drupal\Core\Entity\EntityInterface[] $entities
-   *
    */
   public function selectionCompleted(array $entities);
 

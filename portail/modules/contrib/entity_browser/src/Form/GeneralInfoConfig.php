@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_browser\Form\GeneralInfoConfig.
- */
-
 namespace Drupal\entity_browser\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -13,7 +8,6 @@ use Drupal\entity_browser\DisplayManager;
 use Drupal\entity_browser\SelectionDisplayManager;
 use Drupal\entity_browser\WidgetManager;
 use Drupal\entity_browser\WidgetSelectorManager;
-use Drupal\user\SharedTempStoreFactory;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -131,6 +125,13 @@ class GeneralInfoConfig extends FormBase {
       '#required' => TRUE,
     ];
 
+    $form['submit_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Main submit button text.'),
+      '#default_value' => $entity_browser->get('submit_text') ? $entity_browser->getSubmitButtonText() : NULL,
+      '#description' => $this->t('Text to display on the entity browser submit button.'),
+    ];
+
     return $form;
   }
 
@@ -144,7 +145,8 @@ class GeneralInfoConfig extends FormBase {
       ->setLabel($form_state->getValue('label'))
       ->setDisplay($form_state->getValue('display'))
       ->setWidgetSelector($form_state->getValue('widget_selector'))
-      ->setSelectionDisplay($form_state->getValue('selection_display'));
+      ->setSelectionDisplay($form_state->getValue('selection_display'))
+      ->setSubmitButtonText($form_state->getValue('submit_text'));
   }
 
 }

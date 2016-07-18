@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\entity_browser\Form\WidgetsConfig.
- */
-
 namespace Drupal\entity_browser\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -73,7 +68,7 @@ class WidgetsConfig extends FormBase {
       '#ajax' => [
         'callback' => [get_class($this), 'tableUpdatedAjaxCallback'],
         'wrapper' => 'widgets',
-        'event' => 'change'
+        'event' => 'change',
       ],
       '#executes_submit_callback' => TRUE,
       '#submit' => [[get_class($this), 'submitAddWidget']],
@@ -99,7 +94,8 @@ class WidgetsConfig extends FormBase {
         'action' => 'order',
         'relationship' => 'sibling',
         'group' => 'variant-weight',
-      ]],
+      ],
+      ],
     ];
 
     /** @var \Drupal\entity_browser\WidgetInterface $widget */
@@ -123,11 +119,12 @@ class WidgetsConfig extends FormBase {
         '#ajax' => [
           'callback' => [get_class($this), 'tableUpdatedAjaxCallback'],
           'wrapper' => 'widgets',
-          'event' => 'click'
+          'event' => 'click',
         ],
         '#executes_submit_callback' => TRUE,
         '#submit' => [[get_class($this), 'submitDeleteWidget']],
         '#arguments' => $uuid,
+        '#limit_validation_errors' => [],
       ];
       $row['weight'] = [
         '#type' => 'weight',
@@ -209,13 +206,8 @@ class WidgetsConfig extends FormBase {
     /** @var \Drupal\entity_browser\WidgetInterface $widget */
     foreach ($entity_browser->getWidgets() as $uuid => $widget) {
       $widget->submitConfigurationForm($form, $form_state);
-      $widget->setConfiguration([
-        'settings' => !empty($table[$uuid]['form']) ? $table[$uuid]['form'] : [],
-        'weight' => $table[$uuid]['weight'],
-        'label' => $table[$uuid]['label'],
-        'uuid' => $uuid,
-        'id' => $widget->id(),
-      ]);
+      $widget->setWeight($table[$uuid]['weight']);
+      $widget->setLabel($table[$uuid]['label']);
     }
   }
 
