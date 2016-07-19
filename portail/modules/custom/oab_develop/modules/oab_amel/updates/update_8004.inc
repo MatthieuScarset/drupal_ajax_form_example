@@ -1,4 +1,13 @@
 <?php
+/*
+// Remember original language before this operation.
+$original_language = \Drupal::configFactory()->getLanguage();
+
+$language = language_load("en"); //définir l'enregistrement en langue anglaise
+\Drupal::configFactory()->setLanguage($language);
+*/
+\Drupal::languageManager()->setConfigOverrideLanguage(\Drupal::languageManager()->getLanguage('en'));
+
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('views.view.dashboard_du_manager_editorial');
