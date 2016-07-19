@@ -123,12 +123,7 @@ class EasyBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * {@inheritdoc}
    */
   public function applies(RouteMatchInterface $route_match) {
-      if ($route_match->getRouteName() == 'node_page') {
-      return $route_match->getParameter('node')->bundle() == 'news';
-    }
-    else {
-      return TRUE;
-    }
+    return TRUE;
   }
 
 
