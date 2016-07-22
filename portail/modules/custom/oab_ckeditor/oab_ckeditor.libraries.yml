@@ -4,3 +4,4 @@ oab_ckeditor.templates:
   css:
      theme:
         css/templates.css: {}
+        css/custom_styles.css: {}

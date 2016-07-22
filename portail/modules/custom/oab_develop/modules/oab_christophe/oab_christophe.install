@@ -69,3 +69,10 @@ function oab_christophe_update_8007() {
 function oab_christophe_update_8008() {
   include_once("updates/update_8008.inc");
 }
+
+/**
+ *  Modification des options de WYSIWYG
+ */
+function oab_christophe_update_8009() {
+  include_once("updates/update_8009.inc");
+}

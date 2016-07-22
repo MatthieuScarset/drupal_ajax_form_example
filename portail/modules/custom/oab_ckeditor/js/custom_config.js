@@ -1,9 +1,15 @@
 
+(function() {
+  CKEDITOR.plugins.addExternal('basewidget', '/modules/custom/oab_ckeditor/js/plugins/basewidget/', 'plugin.js');
+})();
+
 CKEDITOR.editorConfig = function( config )
 {
+  CKEDITOR.config.extraPlugins = 'layoutmanager,fontawesome,basewidget';
+
 	config.templates_files =
 		[
-		 drupalSettings.path.baseUrl + 'modules/custom/oab_ckeditor/js/custom_templates.js',
+		 drupalSettings.path.baseUrl + 'modules/custom/oab_ckeditor/js/custom_templates.js'
 		];
 	
 	config.templates_replaceContent = false;
