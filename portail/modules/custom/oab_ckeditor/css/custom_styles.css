@@ -1,0 +1,61 @@
+div.titre1{
+    font-size: 6rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre2{
+    font-size: 5rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre3{
+    font-size: 4rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre4{
+    font-size: 3.4rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre5{
+    font-size: 3rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre6{
+    font-size: 2.4rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+div.titre7{
+    font-size: 2rem;
+    font-family: HelvNeue75, Arial, sans-serif;
+}
+ul.orange,
+ul.black,
+ul.white,
+ul.grey{
+    list-style-type: square;
+}
+p.highlight1{
+    font-size: 1.8rem;
+    font-family: HelvNeue55, Arial, sans-serif;
+}
+p.highlight2{
+    font-size: 1.6rem;
+    font-family: HelvNeue55, Arial, sans-serif;
+}
+ul.orange,
+span.orange{
+    color: #FF7900;
+}
+ul.black,
+span.black{
+    color: #000;
+}
+ul.white,
+span.white{
+    color: #FFF;
+}
+ul.grey,
+span.grey{
+    color: #ccc;
+}
+span.blue{
+    color: #4bb4e6;
+}
