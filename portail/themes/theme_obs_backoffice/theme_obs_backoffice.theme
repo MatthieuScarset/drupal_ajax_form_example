@@ -199,4 +199,127 @@ function theme_obs_backoffice_form_node_form_alter(&$form, FormStateInterface $f
   );
   $form['revision_information']['#type'] = 'container';
   $form['revision_information']['#group'] = 'meta';
+
+
+
+  // Modification du message de confirmation de modification de contenu
+  if($form['#form_id'] == 'node_container_edit_form') {
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'theme_obs_backoffice_node_form_submit';
+      }
+    }
+  }
+
+}
+
+function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
+
+
+  $node = $form_state->getFormObject()->getEntity();
+  $title = $node->getTitle();
+
+  $field_rendering_model = $node->field_rendering_model->getValue();
+  if (isset($field_rendering_model[0]['target_id']) && !empty($field_rendering_model[0]['target_id'])) {
+    $tid = $field_rendering_model[0]['target_id'];
+    // Load the label of the model
+    $type = \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->load($tid)
+        ->label();
+  }
+  else { // recuperer le Tid dans les autres cas, en attendant, on met juste le type container
+    $type = \Drupal::entityTypeManager()
+        ->getStorage('node_type')
+        ->load($node->bundle())
+        ->label();
+  }
+
+  // Unset previous set messages.
+  drupal_get_messages('status');
+
+  switch ($form['#form_id']) {
+    case 'node_container_edit_form':
+      $t_args = array('@type' => $type, '%title' => $title);
+      drupal_set_message(t('@type %title has been updated.', $t_args));
+        break;
+    // autres cas à prévoir : create/delete
+
+    //drupal_set_message(t('@type %title has been created.', $t_args));
+  }
+
+}
+
+
+function theme_obs_backoffice_preprocess_page_title(&$variables) {
+
+  // recuperation du TID dans l'URL pour determiner le modele en cours de creation/edition/suppression
+
+  $urlParameters= \Drupal::request()->query->all();
+  if (isset($urlParameters['rendering_model_tid'])) {
+    $tid = $urlParameters['rendering_model_tid'];
+  }
+
+
+
+  $content_creation = \Drupal::routeMatch()->getParameter('node_type');
+
+  if (isset($content_creation)) {
+
+    //CREATION
+
+    if ($content_creation->get('type') == 'container') {
+      //This is a new node.CREATE CONTENT
+
+      $bundle_label = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
+      if (isset( $bundle_label)) {
+        $bundle_label->label();
+      }
+
+      // display new title : Create 'modele'
+      $variables['title'] = t('Create @name', array('@name' => $bundle_label));
+
+    }
+  } else {
+    // EDITION or SUPPRESSION
+
+    // Load the node entity from current route
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (isset($node)) {
+
+      $title = $node->getTitle();
+      $content_type = $node->bundle();
+
+      if ($content_type == 'container') {
+        $field_rendering_model = $node->field_rendering_model->getValue();
+
+        if (isset($field_rendering_model[0]['target_id']) && !empty($field_rendering_model[0]['target_id'])) {
+          $tid = $field_rendering_model[0]['target_id'];
+        }
+
+        // Load the label of the bundle
+        $bundle_label = \Drupal::entityTypeManager()
+            ->getStorage('taxonomy_term')
+            ->load($tid)
+            ->label();
+
+        /* solution utilisant les arguments dans le PATH*/
+        $path_args = explode('/', \Drupal::request()->getPathInfo());
+
+        end($path_args);
+        $content_mode = $path_args[key($path_args)];
+
+        if ($content_mode == 'edit') {
+          // This is a node in Edition
+          $variables['title'] = t('<em>Edit @type</em> @title', array('@type' => $bundle_label, '@title' => $title));
+
+        } else if ($content_mode == 'delete') {
+          // This is a node in delete mode
+
+
+        }
+      }
+    }
+  }
+
 }

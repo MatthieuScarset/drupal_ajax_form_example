@@ -3,8 +3,7 @@
      color: black;
  }
 
-.icon_orangebg span,
-.icon_orangebg a {
+i.icon_orangebg {
    color: #fff!important ;
 }
 
