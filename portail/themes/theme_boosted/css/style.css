@@ -1,0 +1,14 @@
+#navbar-collapse-mega .glyphicon{
+    position: relative;
+    top: 20px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    font-size: 25px;
+    margin-left: 20px;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
