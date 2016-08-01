@@ -215,7 +215,6 @@ function theme_obs_backoffice_form_node_form_alter(&$form, FormStateInterface $f
 
 function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
 
-
   $node = $form_state->getFormObject()->getEntity();
   $title = $node->getTitle();
 
@@ -247,7 +246,6 @@ function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
 
     //drupal_set_message(t('@type %title has been created.', $t_args));
   }
-
 }
 
 
@@ -273,7 +271,7 @@ function theme_obs_backoffice_preprocess_page_title(&$variables) {
 
       $bundle_label = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
       if (isset( $bundle_label)) {
-        $bundle_label->label();
+        $bundle_label = $bundle_label->label();
       }
 
       // display new title : Create 'modele'
