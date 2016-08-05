@@ -5,6 +5,7 @@ global-styling:
       css/base/elements.css: {}
       css/base/typography.css: {}
       css/base/print.css: {}
+      css/style.css: {}
     component:
       css/components/admin-list.css: {}
       css/components/content-header.css: {}

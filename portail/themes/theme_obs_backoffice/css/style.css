@@ -1,0 +1,9 @@
+#edit-save.entity-browser-modal-submit.button.form-submit
+{
+    display: none;
+}
+#entity-browser-browse-medias-iframe-form #edit-status-information,
+#entity-browser-browse-media-modal-form #edit-status-information
+{
+    display: none;
+}
