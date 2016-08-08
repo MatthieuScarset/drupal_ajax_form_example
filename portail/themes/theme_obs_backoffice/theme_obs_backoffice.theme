@@ -266,7 +266,8 @@ function theme_obs_backoffice_preprocess_page_title(&$variables) {
 
     //CREATION
 
-    if ($content_creation->get('type') == 'container') {
+    if ($content_creation->get('type') == 'container'
+    && isset($tid)) {
       //This is a new node.CREATE CONTENT
 
       $bundle_label = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid);
