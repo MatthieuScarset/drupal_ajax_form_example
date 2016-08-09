@@ -87,12 +87,46 @@ $config->set('process', array (
 ));
 $config->save(TRUE);
 
+// blogpost profile
+$config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('migrate_plus.migration.blogpost_profile');
+$config->set('process', array (
+  'created' => 'created',
+  'changed' => 'created',
+  'type' =>
+    array (
+      'plugin' => 'default_value',
+      'default_value' => 'profil_redacteur',
+    ),
+  'uid' =>
+    array (
+      'plugin' => 'default_value',
+      'default_value' => 1,
+    ),
+  'langcode' => 'langcode',
+  'title' => 'title',
+  'body/value' => 'field_txt_biography_fr',
+  'field_first_name/value' => 'field_first_name',
+  'field_last_name/value' => 'field_last_name',
+  'field_job/value' => 'field_profil_fr',
+  'field_social_accounts' => 'field_social_accounts',
+  'field_location/value' => 'field_location_fr',
+  'field_image' =>
+    array (
+      'plugin' => 'migration',
+      'migration' => 'blogpost_profile_media',
+      'source' => 'images',
+    ),
+  'path' => 'path',
+));
+$config->save(TRUE);
+
 // document
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('migrate_plus.migration.document_node');
 $config->set('process', array (
   'created' => 'created',
-  'changed' => 'changed',
+  'changed' => 'created',
   'status' =>
     array (
       'plugin' => 'default_value',
@@ -367,17 +401,7 @@ $config->set('process', array (
       'default_value' => 1,
     ),
   'field_rendering_model/target_id' => 'rendering_model_id',
-  'field_content_field/value' => 'content_field',
-  'field_content_field/format' =>
-    array (
-      'plugin' => 'default_value',
-      'default_value' => 'full_html',
-    ),
-  'field_content_field/zone' =>
-    array (
-      'plugin' => 'default_value',
-      'default_value' => 'default',
-    ),
+  'field_content_field' => 'content_field',
   'field_magazine' =>
     array (
       'plugin' => 'migration',

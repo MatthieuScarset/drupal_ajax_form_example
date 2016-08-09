@@ -89,12 +89,12 @@ class MagazineInterviewNode extends SqlBase {
     $field_location_value = '';
     $field_profil_value = '';
 
-    $verbatim_tables = [
+    $verbatim_tables = array(
       'field_data_field_txt_citation_1' => 'field_txt_citation_1_value',
       'field_data_field_txt_auteur_1' => 'field_txt_auteur_1_value',
       'field_data_field_location' => 'field_location_value',
       'field_data_field_profil' => 'field_profil_value',
-    ];
+    );
 
     foreach ($verbatim_tables AS $table => $field){
       $verbatim_query = $this->select($table, 'b');

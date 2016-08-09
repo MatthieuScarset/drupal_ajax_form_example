@@ -80,7 +80,8 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
 
       $values = array(
         // Non multilingual.
-        'created' => time(),
+        'created' => $migrate_src_values['created'],
+        'changed' => $migrate_src_values['created'],
         'uid' => 1,
         'sticky' => 0,
         'status' => 1,
@@ -92,6 +93,11 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
         'field_location' => $migrate_src_values['field_location'],
         'field_image' => $migrate_dest_values['field_image'],
       );
+
+      if ($entity->hasTranslation('en')){
+        $entity->removeTranslation('en');
+      }
+
       $translated_entity = $entity->addTranslation('en', $values);
       $translated_entity->save();
 
