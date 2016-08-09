@@ -71,6 +71,13 @@ function oab_christophe_update_8008() {
 }
 
 /**
+ *  Modification des options de WYSIWYG
+ */
+function oab_christophe_update_8009() {
+  include_once("updates/update_8009.inc");
+}
+
+/**
  *  Traduction des onglets de BO pour la création d'un container
  */
 function oab_christophe_update_8010() {
