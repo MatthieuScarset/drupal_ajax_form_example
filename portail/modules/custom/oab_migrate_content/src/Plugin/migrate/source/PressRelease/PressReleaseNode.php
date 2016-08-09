@@ -31,7 +31,7 @@ class PressReleaseNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    ->fields('n', ['nid', 'title', 'language'])
+    ->fields('n', ['nid', 'title', 'language', 'created', 'changed'])
     ->condition('n.type', 'content_press_release', '=');
     //->range(0, 10);
 

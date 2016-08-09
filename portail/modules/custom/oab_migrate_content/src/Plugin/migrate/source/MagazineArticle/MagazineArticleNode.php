@@ -30,7 +30,7 @@ class MagazineArticleNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-      ->fields('n', ['nid', 'title', 'language'])
+      ->fields('n', ['nid', 'title', 'language', 'created', 'changed'])
       ->condition('n.type', 'content_magazine_article', '=')
       ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
     //  ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');

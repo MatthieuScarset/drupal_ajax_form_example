@@ -31,7 +31,7 @@ class DossierPresseNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    ->fields('n', ['nid', 'title', 'language'])
+    ->fields('n', ['nid', 'title', 'language', 'created', 'changed'])
     ->condition('n.type', 'press_kit', '=');
     return $query;
   }

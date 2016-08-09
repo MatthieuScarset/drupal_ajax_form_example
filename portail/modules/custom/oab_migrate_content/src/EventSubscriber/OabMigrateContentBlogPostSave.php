@@ -22,9 +22,43 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
    * Publish the Event.
    */
   public static function getSubscribedEvents() {
+    //$events[MigrateEvents::POST_ROW_SAVE][] = array('updateDates');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     return $events;
   }
+
+  /**
+   * MigrateEvents::POST_ROW_SAVE event handler.
+   *
+   * @param MigratePostRowSaveEvent $migrate_row
+   *   Instance of Drupal\migrate\Event\MigratePostRowSaveEvent.
+   */
+  /*public function updateDates(MigratePostRowSaveEvent $migrate_row) {
+
+    $row = $migrate_row->getRow();
+    $destinationIdValues = $migrate_row->getDestinationIdValues();
+    $nid = $destinationIdValues[0];
+    $migrate_src_values = $row->getSource();
+
+    $entity = \Drupal\node\Entity\Node::load($nid);
+    $entityToSave = false;
+
+    \Drupal::logger('migration date')->notice(serialize($migrate_src_values));
+
+    if (isset($migrate_src_values['created'])){
+      $entity->setCreatedTime($migrate_src_values['created']);
+      $entityToSave = true;
+    }
+    if (isset($migrate_src_values['changed'])){
+      $entity->setChangedTime($migrate_src_values['created']);
+      $entityToSave = true;
+    }
+
+    if ($entityToSave){
+      $entity->save();
+      \Drupal::logger('migration date')->notice('date changed');
+    }
+  }*/
 
   /**
    * MigrateEvents::POST_ROW_SAVE event handler.

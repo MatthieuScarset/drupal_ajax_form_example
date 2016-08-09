@@ -36,7 +36,7 @@ class OfficeNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    ->fields('n', ['nid', 'title'])
+    ->fields('n', ['nid', 'title', 'created', 'changed'])
     ->condition('n.type', 'content_presence_worldwide', '=');
     return $query;
   }
