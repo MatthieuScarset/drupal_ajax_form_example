@@ -63,6 +63,7 @@ process:
     source: images
   field_state/value: workflow
   path: path
+  field_profile: profile_blogger_id
 destination:
   plugin: entity:node
 template: null

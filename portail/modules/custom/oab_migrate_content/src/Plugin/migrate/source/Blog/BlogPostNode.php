@@ -9,6 +9,7 @@ use Drupal\migrate\Row;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Session\AccountSwitcher;
 use Drupal\Core\Session\WriteSafeSessionHandler;
+use Drupal\Core\Database\Database;
 
 /**
  *
@@ -34,7 +35,7 @@ class BlogPostNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    ->fields('n', ['nid', 'title', 'language', 'created', 'changed'])
+    ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid'])
     ->condition('n.type', 'blog_post', '=')
     ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
@@ -350,8 +351,23 @@ class BlogPostNode extends SqlBase {
     if (is_object($path_results)){
       $row->setSourceProperty('path', '/' . $path_results->alias);
     }
-    
 
+    //auteur du blog - profile bloggeur
+    $profile_query = Database::getConnection()->select('migrate_map_blogpost_profile', 'p');
+    $profile_query->fields('p', ['sourceid1', 'destid1'])
+      ->condition('p.sourceid1', $row->getSourceProperty('uid'));
+    $profile_query_results = $profile_query->execute()->fetchAll();
+
+    if (is_array($profile_query_results)) {
+      foreach ($profile_query_results AS $profile) {
+        if (is_object($profile) && isset($profile->destid1) ) {
+          $row->setSourceProperty('profile_blogger_id', $profile->destid1);
+        }
+        elseif (is_array($profile) && isset($profile['destid1'])) {
+          $row->setSourceProperty('profile_blogger_id', $profile['destid1']);
+        }
+      }
+    }
     return parent::prepareRow($row);
   }
 
