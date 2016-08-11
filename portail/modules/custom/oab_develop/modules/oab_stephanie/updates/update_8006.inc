@@ -4,83 +4,87 @@ use \Drupal\Core\Utility\UpdateException;
 /**
 * Création du champ profile
 */
-$new_field_profile = array (
-  'langcode' => 'fr',
-  'status' => true,
-  'dependencies' =>
-    array (
-      'module' =>
-        array (
-          0 => 'node',
-        ),
-    ),
-  'id' => 'node.field_profile',
-  'field_name' => 'field_profile',
-  'entity_type' => 'node',
-  'type' => 'entity_reference',
-  'settings' =>
-    array (
-      'target_type' => 'node',
-    ),
-  'module' => 'core',
-  'locked' => false,
-  'cardinality' => 1,
-  'translatable' => true,
-  'indexes' =>
-    array (
-    ),
-  'persist_with_no_fields' => false,
-  'custom_storage' => false,
-);
-\Drupal::entityTypeManager()->getStorage('field_storage_config')->create($new_field_profile)->save();
+$new_field_profile = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_profile');
+if(empty($new_field_profile) || $new_field_profile == null) {
+  $new_field_profile = array(
+    'langcode' => 'fr',
+    'status' => true,
+    'dependencies' =>
+      array(
+        'module' =>
+          array(
+            0 => 'node',
+          ),
+      ),
+    'id' => 'node.field_profile',
+    'field_name' => 'field_profile',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+    'settings' =>
+      array(
+        'target_type' => 'node',
+      ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+      array(),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+  );
+  \Drupal::entityTypeManager()->getStorage('field_storage_config')->create($new_field_profile)->save();
+}
 
 /**
  * Création de l'instance du champ profil pour le type de contenu Container
  */
-$instance = array(
-  'langcode' => 'fr',
-  'status' => true,
-  'dependencies' =>
-    array (
-      'config' =>
-        array (
-          0 => 'field.storage.node.field_profile',
-          1 => 'node.type.container',
-          2 => 'node.type.profil_redacteur',
-        ),
-    ),
-  'id' => 'node.container.field_profile',
-  'field_name' => 'field_profile',
-  'entity_type' => 'node',
-  'bundle' => 'container',
-  'label' => 'Profile',
-  'description' => '',
-  'required' => false,
-  'translatable' => false,
-  'default_value' =>
-    array (
-    ),
-  'default_value_callback' => '',
-  'settings' =>
-    array (
-      'handler' => 'default:node',
-      'handler_settings' =>
-        array (
-          'target_bundles' =>
-            array (
-              'profil_redacteur' => 'profil_redacteur',
-            ),
-          'sort' =>
-            array (
-              'field' => '_none',
-            ),
-          'auto_create' => false,
-          'auto_create_bundle' => '',
-        ),
-    ),
-  'field_type' => 'entity_reference',
-);
-\Drupal::entityTypeManager()->getStorage('field_config')->create($instance)->save();
+$instance = \Drupal\field\Entity\FieldConfig::loadByName('node', 'container', 'field_profile');
+if(empty($instance) || $instance == null) {
+  $instance = array(
+    'langcode' => 'fr',
+    'status' => true,
+    'dependencies' =>
+      array(
+        'config' =>
+          array(
+            0 => 'field.storage.node.field_profile',
+            1 => 'node.type.container',
+            2 => 'node.type.profil_redacteur',
+          ),
+      ),
+    'id' => 'node.container.field_profile',
+    'field_name' => 'field_profile',
+    'entity_type' => 'node',
+    'bundle' => 'container',
+    'label' => 'Profile',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+      array(),
+    'default_value_callback' => '',
+    'settings' =>
+      array(
+        'handler' => 'default:node',
+        'handler_settings' =>
+          array(
+            'target_bundles' =>
+              array(
+                'profil_redacteur' => 'profil_redacteur',
+              ),
+            'sort' =>
+              array(
+                'field' => '_none',
+              ),
+            'auto_create' => false,
+            'auto_create_bundle' => '',
+          ),
+      ),
+    'field_type' => 'entity_reference',
+  );
+  \Drupal::entityTypeManager()->getStorage('field_config')->create($instance)->save();
+}
 
 /**
  * Edition de la configuration pour l'ajout du champ au formulaire de création de container
