@@ -51,6 +51,7 @@
 .bg {
     padding: 2rem 2.5rem;
     overflow: hidden;
+    position: relative;
 }
 /*
 *fond blanc : texte noir, lien orange
@@ -119,6 +120,11 @@
     color: #fff;
 }
 
+.bg_darkergrey {
+    background-color: #58595b;
+    color: #fff;
+}
+
 .bg_blue {
     background-color: #4bb4e6;
 }
@@ -140,6 +146,12 @@
     top: 50px;
     left: 50px;
 }
+.frame-icon-rel {
+    position: relative;
+    /*text-align: center;*/
+    font-size: 20em;
+    top: 20px;
+}
 
 .frame-text {
     font-size: 32pt;
@@ -153,4 +165,28 @@
     left: 50%;
     top: 50%;
     color: black;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .frame-icon-rel {
+        font-size: 8em;
+    }
+}
+@media (min-width: 480px) {
+    .frame-icon-rel {
+        font-size: 10em;
+    }
+}
+@media (min-width: 768px) {
+    .frame-icon-rel {
+        font-size: 10em;
+    }
+}
+@media (min-width: 980px) {
+    .frame-icon-rel {
+        font-size: 20em;
+    }
+}
+@media (min-width: 1220px) {
 }

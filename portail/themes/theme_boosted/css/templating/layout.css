@@ -10,6 +10,279 @@
   </div>
 </div>
 */
+.width-xxs-1,
+.width-xs-1,
+.width-sm-1,
+.width-md-1,
+.width-lg-1,
+.width-xl-1{
+    width: 10%;
+}
+.width-xxs-2
+.width-xs-2,
+.width-sm-2,
+.width-md-2,
+.width-lg-2,
+.width-xl-2{
+    width: 20%;
+}
+.width-xxs-3,
+.width-xs-3,
+.width-sm-3,
+.width-md-3,
+.width-lg-3,
+.width-xl-3{
+    width: 30%;
+}
+.width-xxs-4,
+.width-xs-4,
+.width-sm-4,
+.width-md-4,
+.width-lg-4,
+.width-xl-4{
+    width: 40%;
+}
+.width-xxs-5,
+.width-xs-5,
+.width-sm-5,
+.width-md-5,
+.width-lg-5,
+.width-xl-5{
+    width: 50%;
+}
+.width-xxs-6,
+.width-xs-6,
+.width-sm-6,
+.width-md-6,
+.width-lg-6,
+.width-xl-6{
+    width: 60%;
+}
+.width-xxs-7,
+.width-xs-7,
+.width-sm-7,
+.width-md-7,
+.width-lg-7,
+.width-xl-7{
+    width: 70%;
+}
+.width-xxs-8
+.width-xs-8,
+.width-sm-8,
+.width-md-8,
+.width-lg-8,
+.width-xl-8{
+    width: 80%;
+}
+.width-xxs-9,
+.width-xs-9,
+.width-sm-9,
+.width-md-9,
+.width-lg-9,
+.width-xl-9{
+    width: 90%;
+}
+.width-xxs-10,
+.width-xs-10,
+.width-sm-10,
+.width-md-10,
+.width-lg-10,
+.width-xl-10{
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .width-xxs-1{
+        width: 10%;
+    }
+    .width-xxs-2{
+        width: 20%;
+    }
+    .width-xxs-3{
+        width: 30%;
+    }
+    .width-xxs-4{
+        width: 40%;
+    }
+    .width-xxs-5{
+        width: 50%;
+    }
+    .width-xxs-6{
+        width: 60%;
+    }
+    .width-xxs-7{
+        width: 70%;
+    }
+    .width-xxs-8{
+        width: 80%;
+    }
+    .width-xxs-9{
+        width: 90%;
+    }
+    .width-xxs-10{
+        width: 100%;
+    }
+}
+@media (min-width: 480px) {
+    .width-xs-1{
+        width: 10%;
+    }
+    .width-xs-2{
+        width: 20%;
+    }
+    .width-xs-3{
+        width: 30%;
+    }
+    .width-xs-4{
+        width: 40%;
+    }
+    .width-xs-5{
+        width: 50%;
+    }
+    .width-xs-6{
+        width: 60%;
+    }
+    .width-xs-7{
+        width: 70%;
+    }
+    .width-xs-8{
+        width: 80%;
+    }
+    .width-xs-9{
+        width: 90%;
+    }
+    .width-xs-10{
+        width: 100%;
+    }
+}
+@media (min-width: 768px) {
+    .width-sm-1{
+        width: 10%;
+    }
+    .width-sm-2{
+        width: 20%;
+    }
+    .width-sm-3{
+        width: 30%;
+    }
+    .width-sm-4{
+        width: 40%;
+    }
+    .width-sm-5{
+        width: 50%;
+    }
+    .width-sm-6{
+        width: 60%;
+    }
+    .width-sm-7{
+        width: 70%;
+    }
+    .width-sm-8{
+        width: 80%;
+    }
+    .width-sm-9{
+        width: 90%;
+    }
+    .width-sm-10{
+        width: 100%;
+    }
+}
+@media (min-width: 980px) {
+    .width-md-1{
+        width: 10%;
+    }
+    .width-md-2{
+        width: 20%;
+    }
+    .width-md-3{
+        width: 30%;
+    }
+    .width-md-4{
+        width: 40%;
+    }
+    .width-md-5{
+        width: 50%;
+    }
+    .width-md-6{
+        width: 60%;
+    }
+    .width-md-7{
+        width: 70%;
+    }
+    .width-md-8{
+        width: 80%;
+    }
+    .width-md-9{
+        width: 90%;
+    }
+    .width-md-10{
+        width: 100%;
+    }
+}
+@media (min-width: 1220px) {
+    .width-lg-1{
+        width: 10%;
+    }
+    .width-lg-2{
+        width: 20%;
+    }
+    .width-lg-3{
+        width: 30%;
+    }
+    .width-lg-4{
+        width: 40%;
+    }
+    .width-lg-5{
+        width: 50%;
+    }
+    .width-lg-6{
+        width: 60%;
+    }
+    .width-lg-7{
+        width: 70%;
+    }
+    .width-lg-8{
+        width: 80%;
+    }
+    .width-lg-9{
+        width: 90%;
+    }
+    .width-lg-10{
+        width: 100%;
+    }
+}
+@media (min-width: 1380px) {
+    .width-xl-1{
+        width: 10%;
+    }
+    .width-xl-2{
+        width: 20%;
+    }
+    .width-xl-3{
+        width: 30%;
+    }
+    .width-xl-4{
+        width: 40%;
+    }
+    .width-xl-5{
+        width: 50%;
+    }
+    .width-xl-6{
+        width: 60%;
+    }
+    .width-xl-7{
+        width: 70%;
+    }
+    .width-xl-8{
+        width: 80%;
+    }
+    .width-xl-9{
+        width: 90%;
+    }
+    .width-xl-10{
+        width: 100%;
+    }
+}
 
 /* content styles */
 
@@ -168,4 +441,19 @@ body {
 .row.nomargin {
     margin-right: 0!important;
     margin-left: 0!important;
+}
+
+.img-popout{
+    bottom: 0;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    right: 80px;
+}
+.img-popout img{
+    width: 100%;
+}
+
+.inline{
+    display: inline;
 }

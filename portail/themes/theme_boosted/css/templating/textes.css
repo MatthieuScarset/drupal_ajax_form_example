@@ -198,3 +198,48 @@ p.center.highlight {
 /*
 *  TEMPLATE HEADER BANNER
 */
+.banner{
+    margin: 0;
+}
+.banner .frame-icon-rel{
+    z-index: 1;
+}
+.banner .title{
+    font-size: 0.15em;
+}
+.banner .description{
+    font-family: HelvNeue75,Arial,sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+    line-height: 1em;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+.banner .img-popout{
+    right: 2.5rem;
+    top: 2.5rem;
+}
+@media (max-width: 480px) {
+    .banner .description{
+        font-size: 1.5em;
+    }
+}
+@media (min-width: 480px) {
+    .banner .description{
+        font-size: 2em;
+    }
+}
+@media (min-width: 768px) {
+    .banner .description{
+        font-size: 2em;
+    }
+}
+@media (min-width: 980px) {
+    .banner .description{
+        font-size: 3em;
+    }
+}
+@media (min-width: 1220px) {
+
+}
