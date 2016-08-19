@@ -138,7 +138,8 @@ function oab_media_browser_entity_modal_submit(array &$entity_form, FormStateInt
  * Implements hook_preprocess_details().
  */
 function oab_media_browser_preprocess_details(&$variables) {
-  if ($variables['element']['#id'] == 'edit-field-file-browser-reference') {
+  if (isset($variables['element']['#id'])
+  && $variables['element']['#id'] == 'edit-field-file-browser-reference') {
     $variables['#attached']['library'][] = 'oab_media_browser/iframe';
   }
 }
