@@ -89,6 +89,11 @@
 .bg_black {
     color: #fff;
     background-color: #000;
+
+}
+
+.bg_black .btn:hover{
+    color: #f60;
 }
 
 .bg.black a {
