@@ -97,7 +97,7 @@
     color: #f60;
 }
 
-.bg.black a {
+.bg_black a {
     color: #f60;
     background-color: #000;
 }
@@ -132,6 +132,11 @@
 
 .bg_blue {
     background-color: #4bb4e6;
+}
+
+p[class^='bg_'],
+p[class*='bg_']{
+  margin: 0;
 }
 
 
