@@ -1,1 +1,17 @@
 div.followbar {padding: 0px;background: black;display: inline-block;height: auto;overflow: hidden;font-size: 10px;line-height: 10px;margin-top:-10px;}
+
+h2.footer_link_title {
+    font-family: HelvNeue75, Arial, sans-serif;
+    font-size: 2em;
+}
+
+#sharebar .content, .followbar .content {display: inline !important;}
+
+span.icon-footer {
+    font-size: 2em;
+}
+
+.footer-iconbar li {
+    margin-right: 20px;
+    margin-top: -30px;
+}

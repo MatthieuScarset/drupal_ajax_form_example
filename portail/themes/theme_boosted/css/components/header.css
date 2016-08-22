@@ -89,9 +89,21 @@
 }
 
 #block-topnavbarmenu .navbar-nav > li > a:focus,
-#block-topnavbarmenu .navbar-nav > li > a:hover {
+#block-topnavbarmenu .navbar-nav > li > a:hover,
+#block-topnavbaren .navbar-nav > li > a:focus,
+#block-topnavbaren .navbar-nav > li > a:hover {
     color: rgb(255,121,0);
 }
+
+#block-topnavbaren {
+    color: white;
+    margin-top: 20px;
+}
+
+.menu .nav {
+    color: white;
+}
+
 
 .mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li > a:focus {
     color: rgb(255,121, 0);
