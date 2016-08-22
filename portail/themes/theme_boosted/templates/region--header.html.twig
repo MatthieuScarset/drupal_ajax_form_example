@@ -49,7 +49,12 @@
 
                    <div id="login_block" class="nav navbar-nav">
                       {#Render the top navbar items#}
-                      {{ elements.topnavbarmenu }}
+                       {% if elements.topnavbarmenu %}
+                            {{ elements.topnavbarmenu }}
+                       {% endif %}
+                       {% if elements.topnavbaren %}
+                           {{ elements.topnavbaren }}
+                       {% endif %}
                   </div>
 
                   <div class="nav navbar-nav navbar-right">
