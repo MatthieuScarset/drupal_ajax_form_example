@@ -300,4 +300,4 @@ if (empty($results)){
   $shortcut->save();
 }
 
-throw new \Drupal\Core\Utility\UpdateException();
+//throw new \Drupal\Core\Utility\UpdateException();
