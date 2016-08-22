@@ -90,3 +90,10 @@ function oab_christophe_update_8010() {
 function oab_christophe_update_8011() {
   include_once("updates/update_8011.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2412 - import des profils bloggers
+ */
+function oab_christophe_update_8012() {
+  include_once("updates/update_8012.inc");
+}

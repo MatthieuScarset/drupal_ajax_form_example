@@ -88,7 +88,7 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
 
         // Multilingual.
         'title' => $migrate_src_values['title'],
-        'body' => $migrate_src_values['field_txt_catcher'],
+        'body' => array('value' => $migrate_src_values['field_txt_catcher'], 'format' => 'full_html'),
         'field_job' => $migrate_src_values['field_profil'],
         'field_location' => $migrate_src_values['field_location'],
         'field_image' => $migrate_dest_values['field_image'],
