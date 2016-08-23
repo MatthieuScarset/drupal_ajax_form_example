@@ -109,10 +109,10 @@ class MagazineInterviewNode extends SqlBase {
 
           // On vérifie si on a affaire à un objet ou à un tableau
           if (is_object($verbatim_result) && isset($verbatim_result->$field)){
-            $$field = $verbatim_result->$field;
+            $$field = check_markup($verbatim_result->$field, 'full_html');
           }
           elseif (is_array($verbatim_result) && isset($verbatim_result[$field])){
-            $$field = $verbatim_result[$field];
+            $$field = check_markup($verbatim_result[$field], 'full_html');
           }
         }
       }
@@ -133,9 +133,13 @@ class MagazineInterviewNode extends SqlBase {
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->field_content_value)){
           $body_value = $body_result->field_content_value;
+          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
+          $body_value = check_markup($body_value, 'full_html');
         }
         elseif (is_array($body_result) && isset($body_result['field_content_value'])){
           $body_value = $body_result['field_content_value'];
+          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
+          $body_value = check_markup($body_value, 'full_html');
         }
       }
     }
