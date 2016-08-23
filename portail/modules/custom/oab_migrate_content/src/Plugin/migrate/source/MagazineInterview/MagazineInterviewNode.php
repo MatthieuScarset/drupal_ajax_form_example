@@ -109,10 +109,10 @@ class MagazineInterviewNode extends SqlBase {
 
           // On vérifie si on a affaire à un objet ou à un tableau
           if (is_object($verbatim_result) && isset($verbatim_result->$field)){
-            $$field = check_markup($verbatim_result->$field, 'full_html');
+            $$field = $verbatim_result->$field;
           }
           elseif (is_array($verbatim_result) && isset($verbatim_result[$field])){
-            $$field = check_markup($verbatim_result[$field], 'full_html');
+            $$field = $verbatim_result[$field];
           }
         }
       }
