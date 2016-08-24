@@ -104,3 +104,10 @@ function oab_christophe_update_8012() {
 function oab_christophe_update_8013() {
   include_once("updates/update_8013.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2513 - mise à jour de la view "content"
+ */
+function oab_christophe_update_8014() {
+  include_once("updates/update_8014.inc");
+}
