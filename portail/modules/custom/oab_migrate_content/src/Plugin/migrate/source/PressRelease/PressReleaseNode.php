@@ -147,10 +147,16 @@ class PressReleaseNode extends SqlBase {
 
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->body_value)){
-          $row->setSourceProperty('content_field', $body_result->body_value);
+          $body_value = $body_result->body_value;
+          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
+          $body_value = check_markup($body_value, 'full_html');
+          $row->setSourceProperty('content_field', $body_value);
         }
         elseif (is_array($body_result) && isset($body_result['body_value'])){
-          $row->setSourceProperty('content_field', $body_result['body_value']);
+          $body_value = $body_result['body_value'];
+          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
+          $body_value = check_markup($body_value, 'full_html');
+          $row->setSourceProperty('content_field', $body_value);
         }
       }
     }
