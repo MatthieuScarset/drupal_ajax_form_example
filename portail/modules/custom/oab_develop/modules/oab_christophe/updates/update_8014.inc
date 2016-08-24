@@ -698,7 +698,7 @@ $config->setData(array (
                       'type' => 'timestamp',
                       'settings' =>
                         array (
-                          'date_format' => 'medium',
+                          'date_format' => 'short',
                           'custom_date_format' => '',
                           'timezone' => '',
                         ),
@@ -715,7 +715,7 @@ $config->setData(array (
                       'separator' => ', ',
                       'field_api_classes' => false,
                       'entity_type' => 'node',
-                      'entity_field' => 'created',
+                      'entity_field' => 'short',
                       'plugin_id' => 'field',
                     ),
                   'changed' =>
