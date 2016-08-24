@@ -192,3 +192,32 @@ function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
 }
+
+
+function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
+  if (isset($data['tabs'][0]) && is_array($data['tabs'][0])){
+    foreach ($data['tabs'][0] AS $key => $value){
+      if (isset($value['#link']['url'])){
+        $local_task_link_url = $value['#link']['url'];
+        $routeName = $local_task_link_url->getRouteName();
+        switch ($routeName){
+          case 'system.admin_content':
+            $data['tabs'][0][$key]['#weight'] = 0;
+            break;
+          case 'view.dashboard_du_manager_editorial.page_1':
+            $data['tabs'][0][$key]['#weight'] = 1;
+            break;
+          case 'view.media.media_page_list':
+            $data['tabs'][0][$key]['#weight'] = 2;
+            break;
+          case 'view.files.page_1':
+            $data['tabs'][0][$key]['#weight'] = 3;
+            break;
+          case 'comment.admin':
+            $data['tabs'][0][$key]['#weight'] = 4;
+            break;
+        }
+      }
+    }
+  }
+}

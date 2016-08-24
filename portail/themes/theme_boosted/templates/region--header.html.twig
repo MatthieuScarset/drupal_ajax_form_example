@@ -43,8 +43,13 @@
                       {#TODO : insert here a divider to separate sections#}
                       {#Render the main mega menu items in the top navbar #}
                       {#only to display them when collapsed #}
-                      {{ elements.theme_boosted_navigationprincipale }}
+                      {% if elements.theme_boosted_navigationprincipale %}
+                        {{ elements.theme_boosted_navigationprincipale }}
+                      {% endif %}
 
+                      {% if elements.navigationprincipaleen %}
+                          {{ elements.navigationprincipaleen }}
+                      {% endif %}
                   </div>
 
                    <div id="login_block" class="nav navbar-nav">
@@ -60,7 +65,13 @@
                   <div class="nav navbar-nav navbar-right">
                       {#TODO : insert here a divider to separate sections#}
                       {#Render the top account items on the right#}
-                      {{ elements.menuducomptedelutilisateur }}
+                      {% if elements.menuducomptedelutilisateur %}
+                        {{ elements.menuducomptedelutilisateur }}
+                      {% endif %}
+                       {% if elements.servicespace %}
+                           {{ elements.servicespace }}
+                       {% endif %}
+
                   </div>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -84,7 +95,13 @@
               	{#Render the main mega menu items in the top navbar #}
 
                 <div class="nav navbar-nav nav-menu">
-              	  {{ elements.theme_boosted_navigationprincipale }}
+                    {% if elements.theme_boosted_navigationprincipale %}
+                        {{ elements.theme_boosted_navigationprincipale }}
+                    {% endif %}
+
+                    {% if elements.navigationprincipaleen %}
+                        {{ elements.navigationprincipaleen }}
+                    {% endif %}
                 </div>
 
                <div class="nav navbar-nav navbar-right">

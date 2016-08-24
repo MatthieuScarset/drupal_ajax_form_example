@@ -179,3 +179,24 @@
     padding-left: 1rem!important;
     padding-right: 1rem!important;
 }
+
+/* barre de navigation en langue EN */
+.navbar-en {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    z-index: 9999;
+    position: absolute;
+    background-color: #000;
+    list-style-position: b;
+
+}
+
+.navbar-en > li > a {
+    margin: 0px;
+}
+
+.navbar-en > li {
+    float: none;
+    margin-left: 10px;
+}
