@@ -1,5 +1,7 @@
 <?php
 
+\Drupal::service('module_installer')->install(array('responsive_image'), true);
+
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('embed.button.media_browser');
 $config->set('type_settings', array (
@@ -32,12 +34,12 @@ $config->setData(array (
           0 => 'field.field.media.image.field_image',
           1 => 'field.field.media.image.field_tags',
           2 => 'field.field.media.image.field_thematic',
-          3 => 'image.style.large',
-          4 => 'media_entity.bundle.image',
+          3 => 'media_entity.bundle.image',
+          4 => 'responsive_image.styles.wide',
         ),
       'module' =>
         array (
-          0 => 'image',
+          0 => 'responsive_image',
         ),
     ),
   'id' => 'media.image.default',
@@ -49,7 +51,7 @@ $config->setData(array (
       'field_image' =>
         array (
           'weight' => 2,
-          'label' => 'visually_hidden',
+          'label' => 'above',
           'settings' =>
             array (
               'responsive_image_style' => 'wide',
@@ -87,12 +89,12 @@ $config->setData(array (
           1 => 'field.field.media.image.field_image',
           2 => 'field.field.media.image.field_tags',
           3 => 'field.field.media.image.field_thematic',
-          4 => 'image.style.thumbnail',
-          5 => 'media_entity.bundle.image',
+          4 => 'media_entity.bundle.image',
+          5 => 'responsive_image.styles.narrow',
         ),
       'module' =>
         array (
-          0 => 'image',
+          0 => 'responsive_image',
         ),
     ),
   'id' => 'media.image.teaser',
