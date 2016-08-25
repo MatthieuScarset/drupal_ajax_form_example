@@ -12,7 +12,6 @@ $config->set('type_settings', array (
     ),
   'display_plugins' =>
     array (
-      0 => 'entity_reference:entity_reference_entity_view',
     ),
   'entity_browser' => 'browse_medias_iframe',
   'entity_browser_settings' =>
@@ -50,8 +49,9 @@ $config->setData(array (
     array (
       'field_image' =>
         array (
-          'weight' => 2,
-          'label' => 'above',
+          'type' => 'responsive_image',
+          'weight' => 0,
+          'label' => 'hidden',
           'settings' =>
             array (
               'responsive_image_style' => 'wide',
@@ -60,7 +60,6 @@ $config->setData(array (
           'third_party_settings' =>
             array (
             ),
-          'type' => 'responsive_image',
         ),
     ),
   'hidden' =>
@@ -103,11 +102,11 @@ $config->setData(array (
   'mode' => 'teaser',
   'content' =>
     array (
-      'thumbnail' =>
+      'field_image' =>
         array (
           'type' => 'responsive_image',
-          'weight' => 1,
-          'label' => 'visually_hidden',
+          'weight' => 0,
+          'label' => 'hidden',
           'settings' =>
             array (
               'responsive_image_style' => 'narrow',
@@ -121,11 +120,11 @@ $config->setData(array (
   'hidden' =>
     array (
       'created' => true,
-      'field_image' => true,
       'field_tags' => true,
       'field_thematic' => true,
       'langcode' => true,
       'name' => true,
+      'thumbnail' => true,
       'uid' => true,
     ),
 ));
