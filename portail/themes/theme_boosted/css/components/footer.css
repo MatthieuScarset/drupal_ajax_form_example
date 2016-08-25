@@ -1,11 +1,12 @@
-div.followbar {padding: 0px;background: black;display: inline-block;height: auto;overflow: hidden;font-size: 10px;line-height: 10px;margin-top:-10px;}
+div.followbar {padding: 0px;background: black;display: inline-block;height: auto;overflow: hidden;font-size: 10px;line-height: 10px;margin-top:-10px; margin-left:15px;}
+
 
 h2.footer_link_title {
     font-family: HelvNeue75, Arial, sans-serif;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
-#sharebar .content, .followbar .content {display: inline !important;}
+#sharebar .content, .followbar .content {display: inline !important; margin-left: 10px;}
 
 span.icon-footer {
     font-size: 2em;
@@ -14,4 +15,13 @@ span.icon-footer {
 .footer-iconbar li {
     margin-right: 20px;
     margin-top: -30px;
+}
+
+.o-footer .o-footer-bottom ul {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.o-footer .o-footer-top ul {
+    padding: 20px 0;
 }
