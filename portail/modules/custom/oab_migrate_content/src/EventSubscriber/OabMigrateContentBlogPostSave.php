@@ -6,8 +6,11 @@
 namespace Drupal\oab_migrate_content\EventSubscriber;
 
 // This is the interface we are going to implement.
+use Drupal\Core\Database\Database;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use \Drupal\migrate\Event\MigrateEvents;
+use \Drupal\migrate\Event\MigrateRollbackEvent;
+use \Drupal\migrate\Event\MigrateRowDeleteEvent;
 use \Drupal\migrate\Event\MigratePostRowSaveEvent;
 use Drupal\migrate\Event\MigrateImportEvent;
 
@@ -24,6 +27,8 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     //$events[MigrateEvents::POST_ROW_SAVE][] = array('updateDates');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
+    $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
+
     return $events;
   }
 
@@ -126,5 +131,22 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
     // On remet l'utilisateur anonyme par défaut, au cas où
     $anonymous_user = \Drupal\user\Entity\User::load(0);
     \Drupal::getContainer()->set('current_user', $anonymous_user);
+  }
+
+  /** Suppression des Url alias
+   * @param MigrateRowDeleteEvent $migrate_row
+   */
+  public function deleteUrlAlias(MigrateRowDeleteEvent $migrate_row)
+  {
+    $migration = $migrate_row->getMigration();
+    $destinationIdValues = $migrate_row->getDestinationIdValues();
+    if (isset($destinationIdValues['nid']))
+    {
+      $nid = $destinationIdValues['nid'];
+      //\Drupal::logger('oab_migrate_content')->notice('deleteUrlAlias - id:' . $nid);
+      $query_aliases = Database::getConnection('default')->delete('url_alias')
+            ->condition('source', '/node/'.$nid.'%', 'LIKE')
+        ->execute();
+    }
   }
 }
