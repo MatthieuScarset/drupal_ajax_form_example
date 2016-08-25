@@ -115,7 +115,7 @@ if (empty($results)){
     ));
     $menu_topnavbaren_no_america->save();
 }
-throw new \Drupal\Core\Utility\UpdateException();
+//throw new \Drupal\Core\Utility\UpdateException();
 
 
 
