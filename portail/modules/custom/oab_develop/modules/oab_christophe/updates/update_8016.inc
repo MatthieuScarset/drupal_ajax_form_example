@@ -12,6 +12,7 @@ $config->set('type_settings', array (
     ),
   'display_plugins' =>
     array (
+      0 => 'entity_reference:entity_reference_entity_view',
     ),
   'entity_browser' => 'browse_medias_iframe',
   'entity_browser_settings' =>
