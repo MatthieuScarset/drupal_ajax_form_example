@@ -51,3 +51,11 @@ function oab_amel_update_8005() {
 function oab_amel_update_8006() {
     include_once("updates/update_8006.inc");
 }
+
+
+/**
+ *  Modification du dashboard manager editorial : améliorations (JIRA_2512)
+ */
+function oab_amel_update_8007() {
+    include_once("updates/update_8007.inc");
+}
