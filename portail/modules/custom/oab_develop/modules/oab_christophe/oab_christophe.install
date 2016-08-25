@@ -118,3 +118,10 @@ function oab_christophe_update_8014() {
 function oab_christophe_update_8015() {
   include_once("updates/update_8015.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2480 - configuration des medias
+ */
+function oab_christophe_update_8016() {
+  include_once("updates/update_8016.inc");
+}
