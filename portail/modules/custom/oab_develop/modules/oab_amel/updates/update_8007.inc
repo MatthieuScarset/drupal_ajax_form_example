@@ -1052,3 +1052,5 @@ $config_group->setData(
     ));
 
 $config_group->save(TRUE);
+
+//throw new \Drupal\Core\Utility\UpdateException();
