@@ -244,3 +244,25 @@ p.center.highlight {
 @media (min-width: 1220px) {
 
 }
+
+
+/* Limitation d'une div, avec un lien "more" pour dérouler, et un
+lien "less" pour réduire. Ces termes sont modifiables dans le JS */
+
+a {
+    color: #0254EB
+}
+a:visited {
+    color: #0254EB
+}
+a.morelink {
+    text-decoration:none;
+    outline: none;
+}
+.morecontent span {
+    display: none;
+}
+.comment {
+    width: 850px;
+    margin: 10px;
+}
