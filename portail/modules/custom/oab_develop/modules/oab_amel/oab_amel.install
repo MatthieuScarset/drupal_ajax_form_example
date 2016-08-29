@@ -46,7 +46,7 @@ function oab_amel_update_8005() {
 
 
 /**
- *  Création du sur-header EN
+ *  8006 - RUBYPORTAILOBS-2330 - Création du sur-header EN
  */
 function oab_amel_update_8006() {
     include_once("updates/update_8006.inc");
@@ -54,7 +54,7 @@ function oab_amel_update_8006() {
 
 
 /**
- *  Modification du dashboard manager editorial : améliorations (JIRA_2512)
+ *  8007 - RUBYPORTAILOBS-2512 - Modification du dashboard manager editorial : améliorations
  */
 function oab_amel_update_8007() {
     include_once("updates/update_8007.inc");
@@ -62,7 +62,7 @@ function oab_amel_update_8007() {
 
 
 /**
- *  blocs du sur-header/navigation principale avec les langues (JIRA_2330)
+ *  8008 - RUBYPORTAILOBS-2330 - blocs du sur-header et navigation principale en anglais et francais
  */
 function oab_amel_update_8008() {
     include_once("updates/update_8008.inc");
