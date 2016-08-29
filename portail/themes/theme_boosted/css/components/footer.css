@@ -1,4 +1,17 @@
-div.followbar {padding: 0px;background: black;display: inline-block;height: auto;overflow: hidden;font-size: 10px;line-height: 10px;margin-top:-10px; margin-left:15px;}
+footer > .container{
+    padding: 0;
+}
+div.followbar {
+    padding: 0px;
+    background: black;
+    display: inline-block;
+    height: auto;
+    overflow: hidden;
+    font-size: 10px;
+    line-height: 10px;
+    margin-top:-10px;
+    margin-left:15px;
+}
 
 
 h2.footer_link_title {
@@ -19,7 +32,7 @@ span.icon-footer {
 
 .o-footer .o-footer-bottom ul {
     text-align: left;
-    margin-left: 20px;
+    margin-left: 0;
 }
 
 .o-footer .o-footer-top ul {

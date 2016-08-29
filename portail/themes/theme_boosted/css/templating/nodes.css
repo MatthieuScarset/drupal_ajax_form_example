@@ -76,6 +76,7 @@ article.node.full > .content{
 
 article.node.full .field-comments{
     margin-top: 60px;
+    padding: 0;
 }
 article.node.full .field-comments h2{
     font-size: 1.8em;
