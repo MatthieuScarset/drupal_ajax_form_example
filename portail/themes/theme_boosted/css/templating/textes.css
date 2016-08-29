@@ -249,14 +249,8 @@ p.center.highlight {
 /* Limitation d'une div, avec un lien "more" pour dérouler, et un
 lien "less" pour réduire. Ces termes sont modifiables dans le JS */
 
-a {
-    color: #0254EB
-}
-a:visited {
-    color: #0254EB
-}
 a.morelink {
-    text-decoration:none;
+    text-decoration: underline;
     outline: none;
 }
 .morecontent span {
