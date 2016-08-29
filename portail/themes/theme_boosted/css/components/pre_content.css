@@ -7,4 +7,11 @@
 
 .breadcrumb {
   font-family: "Helvetica Neue";
+    padding-left: 0;
+}
+
+@media (max-width: 480px) {
+    .container .row{
+        margin: 0;
+    }
 }
