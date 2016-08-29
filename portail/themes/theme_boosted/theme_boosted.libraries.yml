@@ -20,6 +20,7 @@ global-styling:
       css/templating/shareIcons.css: {}
       css/templating/textes.css: {}
       css/templating/layout.css: {}
+      css/templating/nodes.css: {}
   js:
     js/jquery.min.js: []
     js/jquery.validate.min.js: {}
