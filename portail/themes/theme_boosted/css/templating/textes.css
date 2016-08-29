@@ -130,6 +130,8 @@ blockquote {
 p.number  {
     font-size:6em;
     font-family: HelvNeue75, Arial, sans-serif;
+    position: relative;
+    bottom: 5px;
 }
 
 p.subtitle {
