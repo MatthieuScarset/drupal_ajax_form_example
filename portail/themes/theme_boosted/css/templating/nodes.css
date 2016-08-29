@@ -1,0 +1,89 @@
+.path-node h1.page-header{
+    margin-bottom: 0;
+    max-width: 850px;
+    border: 0 none;
+}
+
+article.node.full{
+    padding: 0;
+}
+article.node.full > .content{
+    padding: 0;
+    max-width: 850px;
+}
+
+.obs_blog_title_h3{
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 5px;
+}
+
+.field--type-oab-text{
+    font-size: 1.6rem;
+}
+
+.content_info{
+    font-weight: bold;
+}
+.content_info .date{
+    border-right: 2px solid black;
+    margin-right: 2px;
+    padding-right: 5px;
+}
+.content_info .field--type-entity-reference{
+    display: inline-block;
+}
+.content_info a{
+    color: #f16e00;
+}
+.node-socialbar{
+    margin: 55px 0 55px 0;
+}
+.node-socialbar p{
+    margin: 0;
+}
+.node-socialbar .fa-stack{
+    width: 1.7em;
+}
+
+.node.profil-redacteur.teaser{
+    background-color: #f6f6f6;
+    margin-top: 100px;
+}
+.node.profil-redacteur.teaser img{
+    width: 100%;
+    height: 100%;
+}
+.node.profil-redacteur.teaser > .content{
+    padding: 0;
+}
+.node.profil-redacteur.teaser .col{
+    padding: 0;
+}
+.node.profil-redacteur.teaser .bloc_textuel{
+    padding: 40px;
+}
+.node.profil-redacteur.teaser .bloc_textuel .title{
+    font-size: 1.500em;
+    font-weight: bold;
+}
+.node.profil-redacteur.teaser .bloc_textuel .field--name-body{
+    font-size: 1.167em;
+    line-height: 1.167em;
+}
+
+article.node.full .field-comments{
+    margin-top: 60px;
+}
+article.node.full .field-comments h2{
+    font-size: 1.8em;
+    margin-bottom: 25px;
+}
+article.node.full .field-comments label{
+    font-size: 1.15em;
+}
+article.node.full .field-comments .comment-form > .container{
+    margin-bottom: 2rem;
+}
