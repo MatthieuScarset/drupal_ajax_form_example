@@ -66,51 +66,37 @@
  */
 #}
 {%
-set classes = [
-node.bundle|clean_class,
-node.isPromoted() ? 'is-promoted',
-node.isSticky() ? 'is-sticky',
-not node.isPublished() ? 'is-unpublished',
-view_mode ? view_mode|clean_class,
-'clearfix',
-]
+  set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
 %}
-{% if view_mode == 'full' %}
-    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
-    <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {{ content.profil_name }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
-    </div>
-{% endif %}
-
-<div class="node-socialbar">
-    <p>
-        <strong>{% trans %}Partager{% endtrans %}</strong>
-    </p>
-    <p>
-        <a href="http://www.twitter.com" class="twitter">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x"></i> </span>
-        </a>
-        <a href="http://www.facebook.com" class="facebook">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://www.instagram.com/" class="instagram">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-instagram fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://plus.google.com" class="gplus">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-google-plus fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://www.youtube.com" class="youtube">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-youtube-play fa-stack-1x"></i> </span>
-        </a>
-        <a href="http://www.linkedin.com" class="linkedin">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-linkedin fa-stack-1x"></i> </span>
-        </a>
-    </p>
-</div>
-
 <article{{ attributes.addClass(classes) }}>
-    <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name') }}
-    </div>
+
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('author') }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('content') }}>
+    {{ content }}
+  </div>
 
 </article>
