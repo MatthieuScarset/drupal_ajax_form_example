@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Database\Database;
+
 /**
  * @file
  * Functions to support theming in the boosted theme.
@@ -83,16 +85,47 @@ function theme_boosted_preprocess_node(&$variables) {
     if ($content_type == 'container') {
       $zones = array();
       $count = $node->field_content_field->count();
-      for( $i = 0; $i < $count; $i++)
-      {
+      for ($i = 0; $i < $count; $i++) {
         $item_content = $node->field_content_field->get($i);
-        if(!isset($zones[$item_content->get('zone')->getValue()]))
-        {
+        if (!isset($zones[$item_content->get('zone')->getValue()])) {
           $zones[$item_content->get('zone')->getValue()] = array();
         }
-        $zones[$item_content->get('zone')->getValue()][] = check_markup($item_content->get('value')->getValue(), $item_content->get('format')->getValue());
+        $zones[$item_content->get('zone')
+          ->getValue()][] = check_markup($item_content->get('value')
+          ->getValue(), $item_content->get('format')->getValue());
       }
       $variables['zones'] = $zones;
+
+      // gestion du champ image
+      // en mode "full"
+      if (isset($variables['content']['field_image'])
+      && isset($variables['view_mode'])
+      && $variables['view_mode'] == 'full') {
+
+        $rendering_model = $node->get('field_rendering_model')->getValue();
+        $rendering_model_tid = array();
+        $connection = Database::getConnection();
+        $query_rendering_model_terms = $connection->select('taxonomy_term_field_data', 't')
+          ->fields('t', array('tid'))
+          ->condition('t.vid', 'rendering_model')
+          ->condition('t.name', array(
+            'Blog post',
+            'Magazine',
+            'Magazine interview',
+            'Press kit',
+            'Press release'
+          ), 'IN');
+        $results_rendering_model_terms = $query_rendering_model_terms->execute()->fetchAll();
+
+        foreach ($results_rendering_model_terms AS $result) {
+          $rendering_model_tid[$result->tid] = $result->tid;
+        }
+
+        if (isset($rendering_model[0]['target_id'])
+        && in_array($rendering_model[0]['target_id'], $rendering_model_tid)) {
+          unset($variables['content']['field_image']);
+        }
+      }
     }
   }
 }
