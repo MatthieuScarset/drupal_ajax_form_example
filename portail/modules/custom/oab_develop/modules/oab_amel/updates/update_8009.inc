@@ -741,19 +741,165 @@ $config_group->setData(
                                     ),
                                 'filters' =>
                                     array(
+                                        'title' =>
+                                            array(
+                                                'id' => 'title',
+                                                'table' => 'node_field_data',
+                                                'field' => 'title',
+                                                'relationship' => 'none',
+                                                'group_type' => 'group',
+                                                'admin_label' => '',
+                                                'operator' => '=',
+                                                'value' => '',
+                                                'group' => 1,
+                                                'exposed' => true,
+                                                'expose' =>
+                                                    array(
+                                                        'operator_id' => 'title_op',
+                                                        'label' => 'Titre',
+                                                        'description' => '',
+                                                        'use_operator' => 0,
+                                                        'operator' => 'title_op',
+                                                        'identifier' => 'title',
+                                                        'required' => 0,
+                                                        'remember' => 0,
+                                                        'multiple' => false,
+                                                        'remember_roles' =>
+                                                            array(
+                                                                'authenticated' => 'authenticated',
+                                                                'anonymous' => 0,
+                                                                'administrator' => 0,
+                                                                'fh_admin' => 0,
+                                                                'fh_content' => 0,
+                                                                'editor' => 0,
+                                                            ),
+                                                    ),
+                                                'is_grouped' => false,
+                                                'group_info' =>
+                                                    array(
+                                                        'label' => '',
+                                                        'description' => '',
+                                                        'identifier' => '',
+                                                        'optional' => true,
+                                                        'widget' => 'select',
+                                                        'multiple' => false,
+                                                        'remember' => 0,
+                                                        'default_group' => 'All',
+                                                        'default_group_multiple' =>
+                                                            array(),
+                                                        'group_items' =>
+                                                            array(),
+                                                    ),
+                                                'entity_type' => 'node',
+                                                'entity_field' => 'title',
+                                                'plugin_id' => 'string',
+                                            ),
+                                        'uid' =>
+                                            array(
+                                                'id' => 'uid',
+                                                'table' => 'node_field_data',
+                                                'field' => 'uid',
+                                                'relationship' => 'none',
+                                                'group_type' => 'group',
+                                                'admin_label' => '',
+                                                'operator' => 'in',
+                                                'value' =>
+                                                    array(),
+                                                'group' => 1,
+                                                'exposed' => true,
+                                                'expose' =>
+                                                    array(
+                                                        'operator_id' => 'uid_op',
+                                                        'label' => 'Auteur',
+                                                        'description' => '',
+                                                        'use_operator' => 0,
+                                                        'operator' => 'uid_op',
+                                                        'identifier' => 'uid',
+                                                        'required' => 0,
+                                                        'remember' => 0,
+                                                        'multiple' => false,
+                                                        'remember_roles' =>
+                                                            array(
+                                                                'authenticated' => 'authenticated',
+                                                                'anonymous' => 0,
+                                                                'administrator' => 0,
+                                                                'fh_admin' => 0,
+                                                                'fh_content' => 0,
+                                                                'editor' => 0,
+                                                            ),
+                                                        'reduce' => 0,
+                                                    ),
+                                                'is_grouped' => false,
+                                                'group_info' =>
+                                                    array(
+                                                        'label' => '',
+                                                        'description' => '',
+                                                        'identifier' => '',
+                                                        'optional' => true,
+                                                        'widget' => 'select',
+                                                        'multiple' => false,
+                                                        'remember' => 0,
+                                                        'default_group' => 'All',
+                                                        'default_group_multiple' =>
+                                                            array(),
+                                                        'group_items' =>
+                                                            array(),
+                                                    ),
+                                                'entity_type' => 'node',
+                                                'entity_field' => 'uid',
+                                                'plugin_id' => 'user_name',
+                                            ),
                                         'type' =>
                                             array(
                                                 'id' => 'type',
                                                 'table' => 'node_field_data',
                                                 'field' => 'type',
+                                                'relationship' => 'none',
+                                                'group_type' => 'group',
+                                                'admin_label' => '',
+                                                'operator' => 'in',
                                                 'value' =>
                                                     array(
                                                         'container' => 'container',
                                                     ),
+                                                'group' => 1,
+                                                'exposed' => false,
+                                                'expose' =>
+                                                    array(
+                                                        'operator_id' => 'type_op',
+                                                        'label' => 'Type',
+                                                        'description' => NULL,
+                                                        'use_operator' => false,
+                                                        'operator' => 'type_op',
+                                                        'identifier' => 'type',
+                                                        'required' => false,
+                                                        'remember' => false,
+                                                        'multiple' => false,
+                                                        'remember_roles' =>
+                                                            array(
+                                                                'authenticated' => 'authenticated',
+                                                            ),
+                                                        'reduce' => false,
+                                                    ),
+                                                'is_grouped' => false,
+                                                'group_info' =>
+                                                    array(
+                                                        'label' => '',
+                                                        'description' => '',
+                                                        'identifier' => '',
+                                                        'optional' => true,
+                                                        'widget' => 'select',
+                                                        'multiple' => false,
+                                                        'remember' => 0,
+                                                        'default_group' => 'All',
+                                                        'default_group_multiple' =>
+                                                            array(),
+                                                        'group_items' =>
+                                                            array(),
+                                                    ),
                                                 'entity_type' => 'node',
                                                 'entity_field' => 'type',
                                                 'plugin_id' => 'bundle',
-                                                'group' => 1,
                                             ),
                                         'field_rendering_model_target_id' =>
                                             array(
@@ -814,39 +960,45 @@ $config_group->setData(
                                                 'error_message' => true,
                                                 'plugin_id' => 'taxonomy_index_tid',
                                             ),
-                                        'field_end_date_value' =>
+                                        'langcode' =>
                                             array(
-                                                'id' => 'field_end_date_value',
-                                                'table' => 'node__field_end_date',
-                                                'field' => 'field_end_date_value',
+                                                'id' => 'langcode',
+                                                'table' => 'node_field_data',
+                                                'field' => 'langcode',
                                                 'relationship' => 'none',
                                                 'group_type' => 'group',
                                                 'admin_label' => '',
-                                                'operator' => 'not empty',
+                                                'operator' => 'in',
                                                 'value' =>
                                                     array(
-                                                        'min' => '',
-                                                        'max' => '',
-                                                        'value' => '',
-                                                        'type' => 'date',
+                                                        'en' => 'en',
+                                                        'fr' => 'fr',
+                                                        'ru' => 'ru',
+                                                        'ru-en' => 'ru-en',
                                                     ),
                                                 'group' => 1,
-                                                'exposed' => false,
+                                                'exposed' => true,
                                                 'expose' =>
                                                     array(
-                                                        'operator_id' => '',
-                                                        'label' => '',
+                                                        'operator_id' => 'langcode_op',
+                                                        'label' => 'Langue',
                                                         'description' => '',
-                                                        'use_operator' => false,
-                                                        'operator' => '',
-                                                        'identifier' => '',
-                                                        'required' => false,
-                                                        'remember' => false,
-                                                        'multiple' => false,
+                                                        'use_operator' => 0,
+                                                        'operator' => 'langcode_op',
+                                                        'identifier' => 'langcode',
+                                                        'required' => 0,
+                                                        'remember' => 0,
+                                                        'multiple' => 0,
                                                         'remember_roles' =>
                                                             array(
                                                                 'authenticated' => 'authenticated',
+                                                                'anonymous' => 0,
+                                                                'administrator' => 0,
+                                                                'fh_admin' => 0,
+                                                                'fh_content' => 0,
+                                                                'editor' => 0,
                                                             ),
+                                                        'reduce' => 1,
                                                     ),
                                                 'is_grouped' => false,
                                                 'group_info' =>
@@ -857,14 +1009,16 @@ $config_group->setData(
                                                         'optional' => true,
                                                         'widget' => 'select',
                                                         'multiple' => false,
-                                                        'remember' => false,
+                                                        'remember' => 0,
                                                         'default_group' => 'All',
                                                         'default_group_multiple' =>
                                                             array(),
                                                         'group_items' =>
                                                             array(),
                                                     ),
-                                                'plugin_id' => 'datetime',
+                                                'entity_type' => 'node',
+                                                'entity_field' => 'langcode',
+                                                'plugin_id' => 'language',
                                             ),
                                         'field_state_value' =>
                                             array(
@@ -937,6 +1091,58 @@ $config_group->setData(
                                                     ),
                                                 'plugin_id' => 'string',
                                             ),
+                                        'field_end_date_value' =>
+                                            array(
+                                                'id' => 'field_end_date_value',
+                                                'table' => 'node__field_end_date',
+                                                'field' => 'field_end_date_value',
+                                                'relationship' => 'none',
+                                                'group_type' => 'group',
+                                                'admin_label' => '',
+                                                'operator' => 'not empty',
+                                                'value' =>
+                                                    array(
+                                                        'min' => '',
+                                                        'max' => '',
+                                                        'value' => '',
+                                                        'type' => 'date',
+                                                    ),
+                                                'group' => 1,
+                                                'exposed' => false,
+                                                'expose' =>
+                                                    array(
+                                                        'operator_id' => '',
+                                                        'label' => '',
+                                                        'description' => '',
+                                                        'use_operator' => false,
+                                                        'operator' => '',
+                                                        'identifier' => '',
+                                                        'required' => false,
+                                                        'remember' => false,
+                                                        'multiple' => false,
+                                                        'remember_roles' =>
+                                                            array(
+                                                                'authenticated' => 'authenticated',
+                                                            ),
+                                                    ),
+                                                'is_grouped' => false,
+                                                'group_info' =>
+                                                    array(
+                                                        'label' => '',
+                                                        'description' => '',
+                                                        'identifier' => '',
+                                                        'optional' => true,
+                                                        'widget' => 'select',
+                                                        'multiple' => false,
+                                                        'remember' => false,
+                                                        'default_group' => 'All',
+                                                        'default_group_multiple' =>
+                                                            array(),
+                                                        'group_items' =>
+                                                            array(),
+                                                    ),
+                                                'plugin_id' => 'datetime',
+                                            ),
                                     ),
                                 'sorts' =>
                                     array(
@@ -982,7 +1188,7 @@ $config_group->setData(
                             ),
                         'cache_metadata' =>
                             array(
-                                'max - age' => 0,
+                                'max-age' => 0,
                                 'contexts' =>
                                     array(
                                         0 => 'languages:language_content',
@@ -1028,7 +1234,7 @@ $config_group->setData(
                             ),
                         'cache_metadata' =>
                             array(
-                                'max - age' => 0,
+                                'max-age' => 0,
                                 'contexts' =>
                                     array(
                                         0 => 'languages:language_content',

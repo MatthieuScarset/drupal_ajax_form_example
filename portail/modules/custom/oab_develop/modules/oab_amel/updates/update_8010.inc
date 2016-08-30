@@ -54,7 +54,7 @@ $config->setData(
                             ),
                     ),
             ),
-    )
+
 ));
 $config->save(TRUE);
 
@@ -112,7 +112,7 @@ $config->setData(
                             ),
                     ),
             ),
-    )
+
 ));
 $config->save(TRUE);
 
@@ -170,7 +170,7 @@ $config->setData(
                             ),
                     ),
             ),
-    )
+
 ));
 $config->save(TRUE);
 
@@ -228,7 +228,7 @@ $config->setData(
                             ),
                     ),
             ),
-    )
+
 ));
 $config->save(TRUE);
 
@@ -287,7 +287,7 @@ $config->setData(
                             ),
                     ),
             ),
-    )
+    
 ));
 $config->save(TRUE);
 

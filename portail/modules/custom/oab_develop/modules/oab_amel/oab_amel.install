@@ -69,7 +69,7 @@ function oab_amel_update_8008() {
 }
 
 /**
- *  RUBYPORTAILOBS-2512 - Modification du dashboard manager editorial : améliorations
+ *  RUBYPORTAILOBS-2512 - Modification du dashboard manager editorial + vue content
  */
 function oab_amel_update_8009() {
     include_once("updates/update_8009.inc");
