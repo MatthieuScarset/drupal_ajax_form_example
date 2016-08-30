@@ -16,7 +16,7 @@
  */
 #}
 {% import _self as menus %}
-<div class="container-fluid o-footer-top">
+<div class="clearfix o-footer-top">
 
   {{ menus.menu_links(items, attributes, 0) }}
 
@@ -28,7 +28,7 @@
   {% if items %}
     {% for item in items %}
       {% if menu_level == 0 %}
-        <div{{ attributes.addClass('col-xs-12', 'col-sm-6', 'col-md-2') }}>
+        <div{{ attributes.addClass('col-xs-12', 'col-sm-6', 'col-md-2', 'nopadding') }}>
         <ul>
         <h2{{ item.attributes.addClass('footer_link_title') }}>
           <a class="bg_black" href="{{ item.url }}">{{ item.title }}</a>

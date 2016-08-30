@@ -128,8 +128,16 @@ blockquote {
 }
 
 p.number  {
-    font-size:6em;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeue75,Arial,sans-serif;
+    font-size: 6em;
+    line-height: 1em;
+    position: relative;
+    top: 15px;
+}
+@media (max-width: 768px) {
+    p.number.text-align-right  {
+        text-align: left;
+    }
 }
 
 p.subtitle {

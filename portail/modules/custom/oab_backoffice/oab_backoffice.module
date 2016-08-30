@@ -3,12 +3,14 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
 
+include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'field_customer_story', 'field_industry', 'field_magazine', 'field_partner', 'field_solution')));
 
 /**
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
   //$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   //$languages = \Drupal::languageManager()->getLanguages();
 
@@ -171,6 +173,12 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
       }
     }
+  }
+
+  //pour la médiathèque : sélection des images dans la liste
+  if($form_id == 'entity_browser_browse_medias_iframe_form' || $form_id =='entity_browser_browse_media_modal_form')
+  {
+    $form['#attached']['library'][] = 'oab_backoffice/mediatheque';
   }
 }
 

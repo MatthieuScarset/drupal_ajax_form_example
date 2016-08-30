@@ -1,0 +1,10 @@
+mediatheque:
+  version: VERSION
+  js:
+    js/mediatheque.js: {}
+  css:
+    theme:
+      css/mediatheque.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
