@@ -132,3 +132,10 @@ function oab_christophe_update_8016() {
 function oab_christophe_update_8017() {
   include_once("updates/update_8017.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2447 - traduction des onglets du type "container"
+ */
+function oab_christophe_update_8018() {
+  include_once("updates/update_8018.inc");
+}
