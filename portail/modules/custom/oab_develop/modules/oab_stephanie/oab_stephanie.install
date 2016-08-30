@@ -61,3 +61,9 @@ function oab_stephanie_update_8006() {
 function oab_stephanie_update_8007() {
   include_once("updates/update_8007.inc");
 }
+/**
+ * Ajout du champ Magazine dans l'affichage du node Container
+ */
+function oab_stephanie_update_8008() {
+  include_once("updates/update_8008.inc");
+}
