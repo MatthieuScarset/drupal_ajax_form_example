@@ -1,0 +1,38 @@
+.views-col{
+}
+
+.views-col{
+    background: transparent url("../images/checkmark.svg") no-repeat center center;
+    background-size: 0;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.views-col.checked {
+    background-size: 54px 54px;
+}
+
+.views-col.checked .views-field-field-image img{
+    opacity: 0.3;
+    border: 2px solid green;
+}
+
+.views-col .views-field-entity-browser-select,
+.views-col .views-field-name{
+    display: none;
+}
+
+#views-exposed-form-medias-entity-browser-entity-browser-1.form--inline .form-actions {
+    float: left !important;
+}
+#views-exposed-form-medias-entity-browser-entity-browser-1.form-item, .form-actions {
+    margin-bottom: 1em !important;
+    margin-left: 2em;
+    margin-top: 2em !important;
+    clear: none !important;
+    float: left !important;
+}
+.view-filters{
+    margin-bottom: 15px;
+}
