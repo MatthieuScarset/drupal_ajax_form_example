@@ -8,7 +8,7 @@ use \Drupal\Core\Utility\UpdateException;
 
 
 $config_factory = \Drupal::configFactory();
-$config = $config_factory->getEditable('core.entity_view_display.node.container.default');
+$config_group = $config_factory->getEditable('core.entity_view_display.node.container.default');
 $config_group->setData(
   array (
     'uuid' => NULL,
@@ -187,4 +187,4 @@ $config_group->setData(
         'links' => true,
       ),
   ));
-$config->save(TRUE);
+$config_group->save(TRUE);
