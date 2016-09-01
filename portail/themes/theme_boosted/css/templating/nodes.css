@@ -88,3 +88,7 @@ article.node.full .field-comments label{
 article.node.full .field-comments .comment-form > .container{
     margin-bottom: 2rem;
 }
+
+article.node.full .obs_introductory_text{
+    font-weight: bold;
+}
