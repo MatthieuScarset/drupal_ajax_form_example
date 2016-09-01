@@ -496,4 +496,4 @@ if (empty($results)) {
     $menu_footer_top->save();
 }
 
-throw new \Drupal\Core\Utility\UpdateException();
+//throw new \Drupal\Core\Utility\UpdateException();
