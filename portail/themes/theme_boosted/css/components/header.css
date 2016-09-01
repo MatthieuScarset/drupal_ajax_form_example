@@ -204,3 +204,13 @@
     float: none;
     margin-left: 10px;
 }
+
+/*guidelines p.63 pour la navigation principale */
+.mega-menu .nav, .mega-menu .collapse, .mega-menu .dropdown {
+    position: static;
+    margin-left: 30px;
+}
+
+.mega-menu .navbar .nav > li {
+    padding-right: 20px;
+}
