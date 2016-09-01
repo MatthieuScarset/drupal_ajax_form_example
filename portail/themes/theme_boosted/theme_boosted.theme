@@ -196,6 +196,13 @@ function theme_boosted_preprocess_node(&$variables) {
                 }
               }
               break;
+            case 'magazine' :
+              for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++){
+                if ($i > 0){
+                  unset($variables['content']['field_magazine'][$i]);
+                }
+              }
+              break;
           }
         }
     }

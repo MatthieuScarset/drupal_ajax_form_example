@@ -88,7 +88,6 @@
 }
 #block-topnavbarmenu .navbar-nav > li > a {
     font-size: 1.125em;
-    font-family:"Helvetica Neue";
     font-weight: bold;
 }
 
@@ -115,12 +114,10 @@
 
 .mega-menu.navbar .nav > li > a {
     font-size: 1.313em;
-    font-family:"Helvetica Neue";
     font-weight: bold;
 }
 
 #block-menuducomptedelutilisateur .navbar-nav > li > a {
-    font-family: "Helvetica Neue";
     font-size: 1.125em;
     color: white;
 }
@@ -158,13 +155,11 @@
 #items_megamenu h2 {
   margin-top:0rem;
   margin-bottom:2rem;
-  font-family:"Helvetica Neue";
   font-weight: bold;
 }
 
 
 #items_megamenu a {
-  font-family:"Helvetica Neue";
   font-weight: bold;
   font-size:1.3em;
 }

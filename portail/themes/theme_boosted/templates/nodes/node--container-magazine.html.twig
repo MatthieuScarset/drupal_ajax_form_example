@@ -78,13 +78,13 @@ view_mode ? view_mode|clean_class,
 {% if view_mode == 'full' %}
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {{ content.profil_name }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
+        <span class="date">{{ createdDate }}</span> {% trans %}dans{% endtrans %} {{ content.field_magazine }}
     </div>
 {% endif %}
 
 <div class="node-socialbar">
     <p>
-        <strong>{% trans %}Partager{% endtrans %}</strong>
+        <strong>{% trans %}Share{% endtrans %}</strong>
     </p>
     <p>
         <a href="http://www.twitter.com" class="twitter">
@@ -110,7 +110,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name') }}
+        {{ content|without('field_blog', 'profil_name', 'field_magazine', 'field_short_description') }}
     </div>
 
 </article>
