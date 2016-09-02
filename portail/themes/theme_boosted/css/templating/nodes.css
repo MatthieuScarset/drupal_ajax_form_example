@@ -1,3 +1,11 @@
+/* ********
+* Cette feuille de style s’applique aux contenus migrés :
+* Billets blogs.
+* Articles de magazine.
+* Communiqués de presse.
+* Documents (bibliothèque).
+************/
+
 .path-node h1.page-header{
     margin-bottom: 0;
     max-width: 850px;
@@ -40,6 +48,7 @@ article.node.full > .content{
 }
 .node-socialbar{
     margin: 55px 0 55px 0;
+    /*margin: 65px 0 130px 0; ref.guidelines*/
 }
 .node-socialbar p{
     margin: 0;
@@ -91,4 +100,9 @@ article.node.full .field-comments .comment-form > .container{
 
 article.node.full .obs_introductory_text{
     font-weight: bold;
+}
+
+article.node.full > .nowidthlimit {
+    width: 100%;
+    max-width: none !important;
 }

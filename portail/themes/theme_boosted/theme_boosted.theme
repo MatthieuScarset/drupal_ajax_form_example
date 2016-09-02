@@ -73,6 +73,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
             case 'press_release' :
               $suggestions[] = 'node__container_press_release';
               break;
+            case 'simple_page' :
+              $suggestions[] = 'node__container_simple_page';
+              break;
             default:
               $suggestions[] = 'node__container_default';
           }
