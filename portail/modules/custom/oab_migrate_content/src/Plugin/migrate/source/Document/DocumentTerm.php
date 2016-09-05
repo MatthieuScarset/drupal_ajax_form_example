@@ -15,7 +15,7 @@ use Drupal\migrate\Row;
  */
 class DocumentTerm extends SqlBase {
 
-  private $correspondanceTaxo = array(9 => "document_type",
+  private $correspondanceTaxo = array(9 => "document_types",
       22 => "topic",
       10 => "industries",
       13 => "solutions",
@@ -109,7 +109,6 @@ class DocumentTerm extends SqlBase {
         }
       }
     }
-    
     return parent::prepareRow($row);
   }
 

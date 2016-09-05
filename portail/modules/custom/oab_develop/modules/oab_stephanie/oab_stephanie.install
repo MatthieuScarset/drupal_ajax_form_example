@@ -75,3 +75,23 @@ function oab_stephanie_update_8008() {
 function oab_stephanie_update_8009() {
   include_once("updates/update_8009.inc");
 }
+/**
+ * Création de la nouvelle taxonomie pour les documents : Document_type
+ */
+function oab_stephanie_update_8010() {
+  include_once("updates/update_8010.inc");
+}
+
+/**
+ * Création du champ document type et ajout au type container
+ */
+function oab_stephanie_update_8011() {
+  include_once("updates/update_8011.inc");
+}
+
+/**
+ * Correction des imports de taxonomie sans VID valides pour Document types et topics
+ */
+function oab_stephanie_update_8012() {
+  include_once("updates/update_8012.inc");
+}

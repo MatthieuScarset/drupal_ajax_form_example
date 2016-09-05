@@ -184,7 +184,7 @@ class DocumentNode extends SqlBase {
           $document_types[] = $document_type_result['tid'];
         }
       }
-      $row->setSourceProperty('document_type', $document_types);
+      $row->setSourceProperty('document_types', $document_types);
     }
 
     // récupération du tag "industries"
