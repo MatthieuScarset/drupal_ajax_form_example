@@ -24,7 +24,7 @@ article.node.full > .content{
     font-size: 1.5em;
     font-weight: bold;
     line-height: 1.5em;
-    margin-top: 40px;
+    margin-top: 35px;
     margin-bottom: 5px;
 }
 
@@ -47,7 +47,7 @@ article.node.full > .content{
     color: #f16e00;
 }
 .node-socialbar{
-    margin: 55px 0 55px 0;
+    margin: 35px 0 35px 0;
     /*margin: 65px 0 130px 0; ref.guidelines*/
 }
 .node-socialbar p{
@@ -59,7 +59,7 @@ article.node.full > .content{
 
 .node.profil-redacteur.teaser{
     background-color: #f6f6f6;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 .node.profil-redacteur.teaser img{
     width: 100%;
@@ -106,3 +106,9 @@ article.node.full > .nowidthlimit {
     width: 100%;
     max-width: none !important;
 }
+
+/* Guidelines : Text should underline on rollover and change to orange #F16E00 */
+article.node.full a:hover{
+    text-decoration: underline;
+}
+
