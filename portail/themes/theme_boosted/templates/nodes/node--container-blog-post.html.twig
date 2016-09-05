@@ -82,31 +82,7 @@ view_mode ? view_mode|clean_class,
 </div>
 {% endif %}
 
-<div class="node-socialbar">
-    <p>
-        <strong>{% trans %}Partager{% endtrans %}</strong>
-    </p>
-    <p>
-        <a href="http://www.twitter.com" class="twitter">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x"></i> </span>
-        </a>
-        <a href="http://www.facebook.com" class="facebook">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://www.instagram.com/" class="instagram">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-instagram fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://plus.google.com" class="gplus">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-google-plus fa-stack-1x"></i> </span>
-        </a>
-        <a href="https://www.youtube.com" class="youtube">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-youtube-play fa-stack-1x"></i> </span>
-        </a>
-        <a href="http://www.linkedin.com" class="linkedin">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-linkedin fa-stack-1x"></i> </span>
-        </a>
-    </p>
-</div>
+{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>

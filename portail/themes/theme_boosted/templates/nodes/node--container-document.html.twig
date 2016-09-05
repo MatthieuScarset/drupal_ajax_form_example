@@ -75,19 +75,34 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+
 {% if view_mode == 'full' %}
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {% trans %}dans{% endtrans %} {{ content.field_magazine }}
+        <span class="date">Document</span> {% trans %}Download{% endtrans %}
     </div>
 {% endif %}
 
-
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
+<a href={{ content.field_file_uri }} class="field_file_uri">
+    <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-file-pdf-o fa-stack-1x"></i> </span>
+    {% trans %}Download{% endtrans %} PDF
+</a>
+
 <article{{ attributes.addClass(classes) }}>
+
+    <div class="document_field_image">
+        {{ content.field_image }}
+    </div>
+    <div class="document_field_content_field">
+        {{ content.field_content_field }}
+
+    </div>
+
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name', 'field_magazine', 'field_short_description') }}
+        {{ content|without('field_content_field','field_blog', 'profil_name', 'field_magazine',
+                            'field_short_description', 'field_image') }}
     </div>
 
 </article>
