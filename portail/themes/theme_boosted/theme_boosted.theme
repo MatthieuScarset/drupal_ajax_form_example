@@ -76,6 +76,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
             case 'simple_page' :
               $suggestions[] = 'node__container_simple_page';
               break;
+            case 'document' :
+              $suggestions[] = 'node__container_document';
+              break;
             default:
               $suggestions[] = 'node__container_default';
           }
@@ -203,6 +206,25 @@ function theme_boosted_preprocess_node(&$variables) {
               for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++){
                 if ($i > 0){
                   unset($variables['content']['field_magazine'][$i]);
+                }
+              }
+              break;
+			case 'document' :
+              if (isset($variables['content']['field_file'][0]['#media'])
+                && is_object($variables['content']['field_file'][0]['#media'])) {
+                $media = $variables['content']['field_file'][0]['#media'];
+
+                $field_file = $media->field_file->get(0)->getValue();
+                $field_file_id = $field_file['target_id'];
+                $file = \Drupal\file\Entity\File::load($field_file_id);
+                $file_uri = $file->get('uri')->getValue();
+
+                if (isset($file_uri[0]['value']))
+                {
+                  $file_realpath = file_create_url($file_uri[0]['value']);
+                  $variables['content']['field_file_uri'] = array(
+                    '#markup' => $file_realpath,
+                  );
                 }
               }
               break;
