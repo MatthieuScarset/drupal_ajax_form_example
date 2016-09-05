@@ -36,6 +36,8 @@ global-styling:
       css/layout/layout.css: {}
     font:
       css/font-awesome.min.css: {}
+  js:
+    js/script.js: {}
   dependencies:
     - system/admin
 
