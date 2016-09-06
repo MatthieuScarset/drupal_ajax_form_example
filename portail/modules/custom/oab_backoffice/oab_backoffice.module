@@ -154,12 +154,13 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
     //gestion des taxonomies à afficher par type de container
     $hide_taxonomies_container = [
-      'blog_post' => ['field_magazine', 'field_area'],
-      'magazine' => ['field_blog', 'field_area'],
-      'press_release' => ['field_blog', 'field_magazine'],
-      'press_kit' => ['field_blog', 'field_magazine'],
+      'blog_post' => ['field_magazine', 'field_area', 'field_document_type', 'field_topic'],
+      'magazine' => ['field_blog', 'field_area', 'field_document_type', 'field_topic'],
+      'magazine_interview' => ['field_blog', 'field_area', 'field_document_type', 'field_topic'],
+      'press_release' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic'],
+      'press_kit' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic'],
       'document' => ['field_blog', 'field_magazine'],
-      'simple_page' => ['field_blog', 'field_magazine'],
+      'simple_page' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic'],
     ];
     $current_container_type = \Drupal\taxonomy\Entity\Term::load($current_rendering_model);
     if (is_object($current_container_type)){
