@@ -86,7 +86,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name', 'field_magazine') }}
+        {{ content|without('field_blog', 'profil_name', 'field_magazine', 'field_document_type', 'field_topic') }}
     </div>
 
 </article>
