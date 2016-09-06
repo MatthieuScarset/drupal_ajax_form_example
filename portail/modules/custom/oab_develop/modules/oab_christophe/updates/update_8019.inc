@@ -46,7 +46,7 @@ $config->setData(array (
       'classes' =>
         array (
           'id' => 'classes',
-          'weight' => 0,
+          'weight' => -7,
           'settings' =>
             array (
             ),
@@ -54,7 +54,7 @@ $config->setData(array (
       'id' =>
         array (
           'id' => 'id',
-          'weight' => 0,
+          'weight' => -8,
           'settings' =>
             array (
             ),
@@ -62,7 +62,7 @@ $config->setData(array (
       'onmousedown' =>
         array (
           'id' => 'onmousedown',
-          'weight' => 0,
+          'weight' => -5,
           'settings' =>
             array (
             ),
@@ -70,7 +70,7 @@ $config->setData(array (
       'styles' =>
         array (
           'id' => 'styles',
-          'weight' => 0,
+          'weight' => -6,
           'settings' =>
             array (
             ),
