@@ -34,7 +34,7 @@ class OfficesMapBlock extends BlockBase {
     $offices = $this->getAllOffices();
     // construction des markers pour le JS google map
     $markers = $this->getMarkers($offices, $countriesNames);
-    
+
     // récupération des listes de régions et pays de la bdd
     $regions = array();
     $regions['all'] = t('All');
@@ -111,7 +111,7 @@ class OfficesMapBlock extends BlockBase {
   	//on parse chaque office pour récupérer les infos nécessaires
 	foreach($office_nid as $office)
 	{
-		$node_office = node_load($office->nid);
+		$node_office = \Drupal\node\Entity\Node::load($office->nid);
 		$new_office = array();
 		$new_office['nid'] = $node_office->id();
 		$new_office['type'] = $node_office->get('type')->getValue();
@@ -121,13 +121,15 @@ class OfficesMapBlock extends BlockBase {
 		{
 			$tids = $node_office->get('field_areas')->getValue();
 			//on récupère les infos de la région
-			if(count($tids)>0)
+			if(isset($tids[0]['target_id']))
 			{
-				$taxonomy_term = taxonomy_term_load($tids[0]['target_id']);
-				$new_office['field_areas'] = array();
-				$new_office['field_areas'][0] = array();
-				$new_office['field_areas'][0]['area_tid'] = $tids[0]['target_id'];
-				$new_office['field_areas'][0]['area_title'] = $taxonomy_term->getName();
+				$taxonomy_term = \Drupal\taxonomy\Entity\Term::load($tids[0]['target_id']);
+        if (is_object($taxonomy_term)) {
+          $new_office['field_areas'] = array();
+          $new_office['field_areas'][0] = array();
+          $new_office['field_areas'][0]['area_tid'] = $tids[0]['target_id'];
+          $new_office['field_areas'][0]['area_title'] = $taxonomy_term->getName();
+        }
 			}
 		}
 		$new_office['field_description'] = $node_office->get('field_description')->getValue();
@@ -223,8 +225,10 @@ class OfficesMapBlock extends BlockBase {
 	{
 		if(!in_array($country_node->field_areas_target_id, $regions))
 		{
-			$taxonomy_term = taxonomy_term_load($country_node->field_areas_target_id);
-			$regions[$country_node->field_areas_target_id] = $taxonomy_term->getName();
+			$taxonomy_term = \Drupal\taxonomy\Entity\Term::load($country_node->field_areas_target_id);
+      if (is_object($taxonomy_term)) {
+        $regions[$country_node->field_areas_target_id] = $taxonomy_term->getName();
+      }
 		}
 		if(!in_array($country_node->field_address_country_code, $all_countries))
 		{
