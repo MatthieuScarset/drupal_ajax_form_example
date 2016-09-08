@@ -1,0 +1,5 @@
+services:
+  event_subscriber:
+    class: Drupal\oab_frontoffice\EventSubscriber\NodeSourcePathEvent
+    tags:
+      - { name: event_subscriber }
