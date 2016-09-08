@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Drupal\Core\Url;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Language\LanguageInterface;
 
 class NodeSourcePathEvent implements EventSubscriberInterface {
@@ -31,10 +32,12 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
   public function onRequest(GetResponseEvent $event)
   {
     $attr = $event->getRequest()->attributes;
+    $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
 
     if (NULL !== $attr
     && NULL !== $attr->get('node')
-    && $attr->get('_controller') == '\Drupal\node\Controller\NodeViewController::view')
+    && $attr->get('_controller') == '\Drupal\node\Controller\NodeViewController::view'
+    && !$is_front_page)
     {
       $node = $attr->get('node');
 
@@ -54,9 +57,9 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
         $current_uri = $_SERVER['REQUEST_URI'];
 
         if ($new_url != ''
-        && $new_url != $current_uri)
+        && $new_url !== $current_uri)
         {
-          $response = new TrustedRedirectResponse($new_url, 301);
+          $response = new RedirectResponse($new_url, 301);
           $event->setResponse($response);
         }
       }
