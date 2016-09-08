@@ -209,7 +209,7 @@ function theme_boosted_preprocess_node(&$variables) {
                 }
               }
               break;
-			case 'document' :
+			      case 'document' :
               if (isset($variables['content']['field_file'][0]['#media'])
                 && is_object($variables['content']['field_file'][0]['#media'])) {
                 $media = $variables['content']['field_file'][0]['#media'];
@@ -227,14 +227,20 @@ function theme_boosted_preprocess_node(&$variables) {
                   );
                 }
               }
+              if (isset($variables['content']['field_document_type'][0]))
+              {
+                $variables['content']['field_document_type'] = array(
+                  '#markup' => $variables['content']['field_document_type'][0]['#title'],
+                );
+              }
               break;
           }
         }
     }
-
     $variables['attributes']['class'][] = 'node';
   }
 }
+
 
 function theme_boosted_preprocess_field(&$variables){
   $element = $variables['element'];

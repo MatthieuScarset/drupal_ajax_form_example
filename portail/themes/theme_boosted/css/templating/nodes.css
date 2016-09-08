@@ -12,12 +12,18 @@
     border: 0 none;
 }
 
-article.node.full{
+article.node.full,
+article.node.document{
     padding: 0;
 }
-article.node.full > .content{
+article.node.full > .content,
+article.node.document > .content{
     padding: 0;
     max-width: 850px;
+}
+
+article.node.document > .content{
+   margin-top: 20px;
 }
 
 .obs_blog_title_h3{
@@ -83,32 +89,54 @@ article.node.full > .content{
     line-height: 1.167em;
 }
 
-article.node.full .field-comments{
+article.node.full .field-comments,
+article.node.document .field-comments{
     margin-top: 60px;
     padding: 0;
 }
-article.node.full .field-comments h2{
+article.node.full .field-comments h2,
+article.node.document .field-comments h2{
     font-size: 1.8em;
     margin-bottom: 25px;
 }
-article.node.full .field-comments label{
+article.node.full .field-comments label,
+article.node.document .field-comments label{
     font-size: 1.15em;
 }
-article.node.full .field-comments .comment-form > .container{
+article.node.full .field-comments .comment-form > .container,
+article.node.document .field-comments .comment-form > .container{
     margin-bottom: 2rem;
 }
 
-article.node.full .obs_introductory_text{
+article.node.full .obs_introductory_text,
+article.node.document .obs_introductory_text{
     font-weight: bold;
 }
 
-article.node.full > .nowidthlimit {
+article.node.full > .nowidthlimit,
+article.node.document > .nowidthlimit {
     width: 100%;
     max-width: none !important;
 }
 
 /* Guidelines : Text should underline on rollover and change to orange #F16E00 */
-article.node.full a:hover{
+article.node.full a:hover,
+article.node.document a:hover{
     text-decoration: underline;
 }
 
+.content .document_content .subtitle
+{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.content_info .type {
+    border-right: 2px solid black;
+    margin-right: 5px;
+    padding-right: 5px;
+}
+
+article.node.document .document_field_image{
+    padding: 0 !important;
+}

@@ -230,3 +230,35 @@ function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
     }
   }
 }
+
+
+function oab_backoffice_entity_view_mode_alter(&$view_mode, Drupal\Core\Entity\EntityInterface $entity, $context)
+{
+  if($view_mode == 'full')
+  {
+    $nid = $entity->nid->value;
+    $content_type = $entity->bundle();
+    if ($content_type == 'container') {
+      $rendering_model = $entity->get('field_rendering_model')->getValue();
+      if(isset($rendering_model[0]['target_id']) && !empty($rendering_model[0]['target_id']))
+      {
+        $rendering_model_tid = $rendering_model[0]['target_id'];
+        $rendering_model_term = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_term')
+          ->load($rendering_model_tid);
+        //on vérifie que le machine_name a bien été renseigné
+        if (isset($rendering_model_term->field_machine_name->value) && !empty($rendering_model_term->field_machine_name->value)) {
+          $rendering_model_type = $rendering_model_term->field_machine_name->value;
+        }
+      }
+
+      if(isset($rendering_model_type)) {
+        switch ($rendering_model_type) {
+          case 'document' :
+            $view_mode = 'document';
+            break;
+        }
+      }
+    }
+  }
+}
