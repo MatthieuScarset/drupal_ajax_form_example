@@ -348,12 +348,11 @@ $config_group->setData(
             'settings' =>
               array (
                 'link' => true,
-                'view_mode' => 'default',
               ),
             'third_party_settings' =>
               array (
               ),
-            'type' => 'entity_reference_entity_view',
+            'type' => 'entity_reference_label',
           ),
         'field_file' =>
           array (
