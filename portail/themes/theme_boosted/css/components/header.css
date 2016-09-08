@@ -155,15 +155,41 @@
 
 #items_megamenu h2 {
   margin-top:0rem;
-  margin-bottom:2rem;
+  margin-bottom:1.3em;
   font-weight: bold;
+  color: white;
+  font-size: 3em;
+}
+
+#items_megamenu h3 {
+    margin-top:0rem;
+    margin-bottom:2rem;
+    font-weight: bold;
+    color: white;
+    margin-left: -10px !important;
 }
 
 
 #items_megamenu a {
   font-weight: bold;
   font-size:1.3em;
+    color: white;
+    line-height: 2.5em;
 }
+
+#items_megamenu {
+    margin: 20px 140px;
+    color: white;
+}
+
+#sous-items li {
+    margin-left: -50px !important;
+}
+.mega-menu .nav-item.dropdown .dropdown-menu {
+
+    background-color: black;
+}
+
 #main_nav .container,
 #top_navbar .container{
   padding-right:0;

@@ -23,3 +23,12 @@ a.btn-white-border {
 .btn-primary i {
     padding-right: 1rem;
 }
+
+.noborder {
+    border-color: transparent !important;
+    white-space: normal;
+
+}
+.noborder a:hover {
+    text-decoration: none !important;
+}

@@ -458,3 +458,11 @@ body {
 .inline{
     display: inline;
 }
+
+.contact_margin {
+    margin-left: 100px;
+
+}
+.contact_blockquote {
+    font-size:1.2em ;
+}
