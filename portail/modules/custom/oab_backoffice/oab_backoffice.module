@@ -92,8 +92,10 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     }
   }
 
+
   if ($form_id == 'node_container_form'
   || $form_id == 'node_container_edit_form') {
+
     if ($form_id == 'node_container_form') {
       if (isset($_GET['rendering_model_tid'])) {
         $tid = $_GET['rendering_model_tid'];
@@ -174,6 +176,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
       }
     }
+
+    if ($form_id == 'node_container_form') {
+      $form['#title'] = t('Create @name', array('@name' => $current_container_type->get('name')->value));
+    }
+    else{
+      $form['#title'] = t('<em>Edit @type</em> @title', array('@type' => $current_container_type->get('name')->value, '@title' => ""));
+    }
+
   }
 
   //pour la médiathèque : sélection des images dans la liste
