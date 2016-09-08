@@ -167,3 +167,10 @@ function oab_christophe_update_8021() {
 function oab_christophe_update_8022() {
   include_once("updates/update_8022.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2426 - Corrections pathauto
+ */
+function oab_christophe_update_8023() {
+  include_once("updates/update_8023.inc");
+}
