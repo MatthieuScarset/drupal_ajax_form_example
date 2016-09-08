@@ -200,6 +200,12 @@ function theme_boosted_preprocess_node(&$variables) {
                       '#markup' => $file_realpath,
                   );
                 }
+                if (isset($variables['content']['field_area'][0]))
+                {
+                  $variables['content']['field_area'] = array(
+                      '#markup' => $variables['content']['field_area'][0]['#title'],
+                  );
+                }
               }
               break;
             case 'magazine' :

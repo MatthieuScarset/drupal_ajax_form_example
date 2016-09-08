@@ -23,7 +23,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-control_centre
+.icon-control_centre, .icon-email
 { 
   font-family: 'icon-orange' !important; 
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -42,6 +42,7 @@
 } 
 
 .icon-control_centre:hover,
+.icon-email:hover,
 #navbar-collapse-mega .glyphicon:hover,
 .icon-share:hover
 {

@@ -268,3 +268,8 @@ a.morelink {
     width: 850px;
     margin: 10px;
 }
+
+a.contact_link {
+    font-size: 1.2em;
+    text-decoration: none !important;
+}
