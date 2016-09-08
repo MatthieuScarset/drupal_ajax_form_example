@@ -109,3 +109,10 @@ function oab_stephanie_update_8013() {
 function oab_stephanie_update_8014() {
   include_once("updates/update_8014.inc");
 }
+
+/**
+ * Creation du champ owner
+ */
+function oab_stephanie_update_8015() {
+  include_once("updates/update_8015.inc");
+}
