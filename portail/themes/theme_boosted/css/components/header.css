@@ -73,13 +73,13 @@
 .subnav {
   margin:0;
   top: 0px;
-  z-index: 1020;
+  /*z-index: 1020;*/
   border-bottom: 1px solid #E1E1E1;
   padding: 8px 0px 0px 0px;
 }
 
 
-.subnav.affix {
+.subnav.navbar-fixed {
     position: fixed;
     top: 0;
     width: 100%;
