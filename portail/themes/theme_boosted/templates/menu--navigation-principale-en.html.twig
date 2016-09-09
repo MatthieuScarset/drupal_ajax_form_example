@@ -37,7 +37,7 @@
 
         {% for item in items %}
           {% if item.below %}
-              <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
+          <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
             <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown">{{ item.title }} <span class="caret"></span></a>
           {% else %}
 
@@ -51,7 +51,7 @@
 
              </ul>
           {% endif %}
-             </li>
+         </li>
 
         {% endfor %}
        </ul>
