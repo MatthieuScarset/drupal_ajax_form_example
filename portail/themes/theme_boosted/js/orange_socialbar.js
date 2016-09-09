@@ -177,7 +177,7 @@ var staticText = {
     //  }
     // }
 };
- 
+
 //check language
 if(typeof sharebar_parameters !== "undefined"){
     if(typeof sharebar_parameters.og_locale !== "undefined" && sharebar_parameters.og_locale !== null){
@@ -224,7 +224,7 @@ if(typeof sharebar_parameters !== "undefined"){
 }else{
     var staticTextLocale = staticText.en_US;
 }
- 
+
 var checkIfRightToLeft = function(){
     if(typeof sharebar_parameters !== "undefined"){
         if(typeof sharebar_parameters.og_locale !== "undefined" && sharebar_parameters.og_locale !== null){
@@ -256,7 +256,7 @@ var checkIfRightToLeft = function(){
         }
     }
 };
- 
+
 var setTotalSharesCount = function(){
     var total = shares.facebook + shares.twitter + shares.pinterest + shares.linkedin + shares.google + shares.user;
     if(sharebar_parameters.show_counter){
@@ -269,7 +269,7 @@ var setTotalSharesCount = function(){
         }
     }
 };
- 
+
 //Get share count of each social network for given url
 var getFacebookShare = function(){
     $.ajax({
@@ -290,7 +290,7 @@ var getFacebookShare = function(){
         }
     });
 };
- 
+
 var getTwitterShare = function(){
     // twitter disabled this url
     // $.ajax({
@@ -314,7 +314,7 @@ var getTwitterShare = function(){
         shares.twitter = 0;
     }
 };
- 
+
 var getPinterestShare = function(){
     $.ajax({
         type : "GET",
@@ -323,7 +323,7 @@ var getPinterestShare = function(){
         success: function(data){}
     });
 };
- 
+
 //callback function
 var receiveCount = function(data){
     if(!data.count || data.count === ""){
@@ -332,7 +332,7 @@ var receiveCount = function(data){
     shares.pinterest = data.count;
     setTotalSharesCount();
 };
- 
+
 var getLinkedinShare = function(){
     $.ajax({
         type : "GET",
@@ -347,7 +347,7 @@ var getLinkedinShare = function(){
         }
     });
 };
- 
+
 //Get shortened URL
 var getShortUrl = function(url){
     if(sharebar_parameters.use_bitly === true){
@@ -361,7 +361,7 @@ var getShortUrl = function(url){
         return url;
     }
 };
- 
+
 //set share links
 if(typeof sharebar_parameters !== "undefined"){
     var via = sharebar_parameters.twitter_site.substring(1, sharebar_parameters.twitter_site.length);
@@ -374,12 +374,12 @@ if(typeof sharebar_parameters !== "undefined"){
         pinterest: "http://pinterest.com/pin/create/button/?url=" + sharebar_parameters.og_url + "&media=" + sharebar_parameters.og_image + "&description=" + sharebar_parameters.og_title
     };
 }
- 
+
 //open the share popup
 var shareClick = function(button){
- 
+
     var config = "toolbar = no, location = no, directories = no, menubar = no, width = 560, height = 500";
- 
+
     if(button === 'facebook'){
         if(sharebar_parameters.show_counter){
             getFacebookShare();
@@ -442,38 +442,38 @@ var shareClick = function(button){
         openSMS(sharebar_parameters.sms_text);
     }
 };
- 
+
 var setCounterText = function(sharebarHTML){
     var total = shares.facebook + shares.twitter + shares.pinterest + shares.linkedin + shares.google + shares.user;
     if(total <= 0){
-        sharebarHTML += '<p >' + staticTextLocale.toshare + '</p></div>'; 
+        sharebarHTML += '<p >' + staticTextLocale.toshare + '</p></div>';
     }else if(total == 1){
-        sharebarHTML += '<p >' + staticTextLocale.share + '</p></div>';   
+        sharebarHTML += '<p >' + staticTextLocale.share + '</p></div>';
     }else{
         sharebarHTML += '<p >' + staticTextLocale.shares + '</p></div>';
     }
 };
- 
- 
+
+
 var showShareBar = function(){
-    
+
     var sharebarHTML = '<div id="counterlabel">';
     sharebarHTML += sharebar_parameters.show_counter ? '<p id="counter">0</p>' : "";
- 
+
     var total = shares.facebook + shares.twitter + shares.pinterest + shares.linkedin + shares.google + shares.user;
     if(total <= 0){
-        sharebarHTML += '<p id="countertext">' + staticTextLocale.toshare + '</p></div>';   
+        sharebarHTML += '<p id="countertext">' + staticTextLocale.toshare + '</p></div>';
     }else if(total == 1){
-        sharebarHTML += '<p id="countertext">' + staticTextLocale.share + '</p></div>'; 
+        sharebarHTML += '<p id="countertext">' + staticTextLocale.share + '</p></div>';
     }else{
         sharebarHTML += '<p id="countertext">' + staticTextLocale.shares + '</p></div>';
     }
-    
+
     sharebarHTML += "<div class=\"content\">";
-    
+
     for(var i=0, len=visible_sharebar_buttons.length;i<len;i++){
         var currentButton = visible_sharebar_buttons[i].button;
- 
+
         if(visible_sharebar_buttons[i].button === 'email'){
             if(visible_sharebar_buttons[i].mailto === false){
                 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -486,7 +486,7 @@ var showShareBar = function(){
 	        		if(sharebar_parameters.og_locale == "ar_AR"){
                     sharebarHTML += "<a href=\"javascript:void(0)\" onclick=\"setCookie('share_" + currentButton + "', '" + window.location.pathname + "', 7300);shareClick('" + currentButton + "');\" class=\"share_" + currentButton + "\" id=\"share_" + currentButton + "\"><span class=\"sr-only\">email " + staticTextLocale.accessibility.sharewith + "</span><svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"32px\" height=\"32px\" viewBox=\"0 0 32 32\" enable-background=\"new 0 0 32 32\" xml:space=\"preserve\">" + svgIcons.email + "</svg></a>";
 	        		}else{
-                    sharebarHTML += "<a href=\"javascript:void(0)\" onclick=\"setCookie('share_" + currentButton + "', '" + window.location.pathname + "', 7300);shareClick('" + currentButton + "');\" class=\"share_" + currentButton + "\" id=\"share_" + currentButton + "\"><span class=\"sr-only\">" + staticTextLocale.accessibility.sharewith + " email</span><svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"32px\" height=\"32px\" viewBox=\"0 0 32 32\" enable-background=\"new 0 0 32 32\" xml:space=\"preserve\">" + svgIcons.email + "</svg></a>";	
+                    sharebarHTML += "<a href=\"javascript:void(0)\" onclick=\"setCookie('share_" + currentButton + "', '" + window.location.pathname + "', 7300);shareClick('" + currentButton + "');\" class=\"share_" + currentButton + "\" id=\"share_" + currentButton + "\"><span class=\"sr-only\">" + staticTextLocale.accessibility.sharewith + " email</span><svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"32px\" height=\"32px\" viewBox=\"0 0 32 32\" enable-background=\"new 0 0 32 32\" xml:space=\"preserve\">" + svgIcons.email + "</svg></a>";
 	        		}
                     sharebarHTML += "<span id=\"contentmail\"></span><span></span>";
                 }
@@ -506,9 +506,9 @@ var showShareBar = function(){
 	        	}
 	        }
         }else{
-            
+
             var currentSVGIcon;
-            
+
             if(currentButton === "facebook")
             {
                 currentSVGIcon = svgIcons.facebook;
@@ -548,15 +548,15 @@ var showShareBar = function(){
     }
     setVisitedLinks();
 };
- 
+
 var showFollowBar = function(){
     var followbarHTML = "<p id=\"follow\">" + staticTextLocale.follow + "</p>";
     followbarHTML += "<div class=\"content\">";
     for(var i=0, len=visible_followbar_buttons.length;i<len;i++){
         var currentButton = visible_followbar_buttons[i].button;
-            
+
         var currentSVGIcon;
-        
+
         if(currentButton === "facebook")
         {
             if(typeof followbar_parameters.page_facebook !== "undefined" && followbar_parameters.page_facebook != null && followbar_parameters.page_facebook != ""){
@@ -569,7 +569,7 @@ var showFollowBar = function(){
         }
         else if(currentButton === "twitter")
         {
- 
+
             if(typeof followbar_parameters.page_twitter !== "undefined" && followbar_parameters.page_twitter != null && followbar_parameters.page_twitter != ""){
                 currentSVGIcon = svgIcons.twitter;
                 currentFollowPage = followbar_parameters.page_twitter;
@@ -587,7 +587,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }else if(currentButton === "linkedin")
         {
             if(typeof followbar_parameters.page_linkedin !== "undefined" && followbar_parameters.page_linkedin != null && followbar_parameters.page_linkedin != ""){
@@ -597,7 +597,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
         else if(currentButton === "pinterest")
         {
@@ -608,7 +608,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
         else if(currentButton === "instagram")
         {
@@ -619,7 +619,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
         else if(currentButton === "newsletter")
         {
@@ -630,7 +630,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
         else if(currentButton === "youtube")
         {
@@ -641,7 +641,7 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
         else if(currentButton === "dailymotion")
         {
@@ -652,9 +652,9 @@ var showFollowBar = function(){
                 currentSVGIcon = "";
                 currentFollowPage = "";
             }
-            
+
         }
-        
+
         if(currentSVGIcon != null && currentFollowPage != null && currentSVGIcon != "" && currentFollowPage != ""){
         	if(currentButton == "newsletter"){
 				followbarHTML += "<a href=\"" + currentFollowPage + "\" target=\"_blank\" class=\"follow_" + currentButton + "\" onclick=\"setCookie('follow_" + currentButton + "', '" + window.location.pathname + "', 7300);\" id=\"follow_" + currentButton + "\"><span class=\"sr-only\">" + staticTextLocale.accessibility.newsletter + "</span><svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" width=\"32px\" height=\"32px\" viewBox=\"0 0 32 32\" enable-background=\"new 0 0 32 32\" xml:space=\"preserve\">" + currentSVGIcon + "</svg></a>";
@@ -681,8 +681,8 @@ var showFollowBar = function(){
     }
     setVisitedLinks();
 };
- 
- 
+
+
 function setCookie(name, value, daysUntilExpires) {
     var d = new Date();
     d.setTime(d.getTime() + (daysUntilExpires*24*60*60*1000));
@@ -703,7 +703,7 @@ function setCookie(name, value, daysUntilExpires) {
     }
     setVisitedLinks();
 }
- 
+
 function checkCookie(cname) {
     var splitedPath = window.location.pathname.split("/");
     var name = "";
@@ -731,7 +731,7 @@ function checkCookie(cname) {
     }
     return false;
 }
- 
+
 function checkFollowCookie(cname) {
     var splitedPath = window.location.pathname.split("/");
     var name = "";
@@ -754,11 +754,11 @@ function checkFollowCookie(cname) {
                 }
             }
         }
-        
+
     }
     return "";
 }
- 
+
 var setVisitedLinks = function(){
     if(typeof visible_sharebar_buttons !== "undefined"){
         for(var i=0, len=visible_sharebar_buttons.length;i<len;i++){
@@ -771,7 +771,7 @@ var setVisitedLinks = function(){
         }
     }
 };
- 
+
 var goToGmail = function(){
     var to = document.getElementById("to").value;
     var subject = document.getElementById("subject").value;
@@ -779,7 +779,7 @@ var goToGmail = function(){
     window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + subject + "&body=" + message + "&ui=2&tf=1");
     closeMail();
 };
- 
+
 var goToYahoo = function(){
     var to = document.getElementById("to").value;
     var subject = document.getElementById("subject").value;
@@ -787,15 +787,15 @@ var goToYahoo = function(){
     window.open("http://us-mg.mail.yahoo.com/neo/launch?action=compose&To=" + to + "&Subj=" + subject + "&Body=" + message + "#mail");
     closeMail();
 };
- 
+
 var openMail = function(){
     document.getElementById('contentmail').innerHTML = "<div id=\"email\"><div id=\"toplabel\"><span class=\"bold\">" + sharebar_parameters.email_popin_title + "</span><svg id=\"close\" onClick=\"closeMail()\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" id=\"Layer_1\" x=\"0px\" y=\"0px\" width=\"16px\" height=\"16px\" viewBox=\"0 0 512 512\" style=\"enable-background:new 0 0 512 512;\" xml:space=\"preserve\"><path d=\"M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z\" fill=\"#FFFFFF\"/></svg></div><form action=\"scripts/sendmail.php\" method=\"post\" id=\"sendmail\"><label for=\"to\"><span class=\"bold\">" + staticTextLocale.to + ":</span> (" + staticTextLocale.email + ")</label><textarea autofocus name=\"to\" id=\"to\"></textarea><label for=\"from\"><span class=\"bold\">" + staticTextLocale.from + ":</span> (" + staticTextLocale.email + ")</label><input type=\"text\" value=\"\" name=\"from\" id=\"from\" /><label for=\"subject\"><span class=\"bold\">" + staticTextLocale.subject + ":</span></label><input type=\"text\" value=\"" + sharebar_parameters.email_subject + "\" name=\"subject\" id=\"subject\" /><label for=\"message\"><span class=\"bold\">" + staticTextLocale.message + ":</span> (" + staticTextLocale.optional + ")</label><textarea name=\"message\" id=\"message\">" + sharebar_parameters.email_message + "</textarea><div class=\"buttons\"><input type=\"button\" value=\"" + staticTextLocale.cancel + "\" onClick=\"closeMail()\" /><input type=\"submit\" value=\"" + staticTextLocale.send + "\" /></div><p id=\"more\">" + staticTextLocale.more + " : <img src=\"img/gmail.png\" alt=\"open gmail\" onClick=\"goToGmail()\" /> <img src=\"img/yahoo.png\" alt=\"open yahoo\" onClick=\"goToYahoo()\" /></p></form></div>";
 };
- 
+
 var closeMail = function(){
     document.getElementById('contentmail').innerHTML = "";
 };
- 
+
 var getDeviceAndVersion = function(){
         var nAgt = navigator.userAgent;
         var nVer = navigator.appVersion;
@@ -844,11 +844,11 @@ var getDeviceAndVersion = function(){
             case 'Mac OS X':
                 osVersion = /Mac OS X (10[\.\_\d]+)/.exec(nAgt)[1];
                 break;
- 
+
             case 'Android':
                 osVersion = /Android ([\.\_\d]+)/.exec(nAgt)[1];
                 break;
- 
+
             case 'iOS':
                 osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
                 osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
@@ -863,7 +863,7 @@ var getDeviceAndVersion = function(){
             version: jscd.osVersion.substring(0,1)
         };
     };
- 
+
     var openSMS = function(message){
         var url;
         // alert('OS : ' + getDeviceAndVersion().os);
@@ -883,7 +883,7 @@ var getDeviceAndVersion = function(){
         }
         location.href = url;
     };
- 
+
 var getShares = function(){
     getFacebookShare();
     //getTwitterShare();
@@ -997,7 +997,7 @@ window.onload = function(){
 	  	}
 	}
 
-	
+
 };
 //used when window is resized
 	window.onresize = function(){

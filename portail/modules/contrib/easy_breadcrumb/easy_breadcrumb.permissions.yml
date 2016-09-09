@@ -1,0 +1,3 @@
+'administer easy_breadcrumb':
+  title: 'Administer Easy breadcrumb'
+  'restrict access': TRUE
