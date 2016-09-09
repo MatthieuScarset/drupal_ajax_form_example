@@ -213,7 +213,7 @@ function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
           case 'system.admin_content':
             $data['tabs'][0][$key]['#weight'] = 0;
             break;
-          case 'view.dashboard_du_manager_editorial.page_1':
+          case 'view.dashboard.page_1':
             $data['tabs'][0][$key]['#weight'] = 1;
             break;
           case 'view.media.media_page_list':
