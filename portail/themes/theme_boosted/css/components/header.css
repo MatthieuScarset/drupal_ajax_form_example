@@ -1,3 +1,30 @@
+#navtop{
+    background: black;
+}
+#top_navbar{
+    padding: 0;
+}
+#top-navbar-collapse{
+    padding: 0;
+}
+#top-navbar-collapse a{
+    color: white;
+    font-size: 1.125em;
+    font-weight: bold;
+}
+#top-navbar-collapse a:hover,
+#top-navbar-collapse a:focus{
+    color: rgb(255,121, 0);
+}
+#navtop .navbar-nav{
+    margin: 0;
+}
+
+#navtop .navbar-right .navbar-nav > li > a{
+    padding-left: 2rem;
+    padding-right: 0;
+}
+
 .navbar-header{
     padding-left: 0;
     margin: 0 !important;
@@ -85,9 +112,6 @@
     width: 100%;
     z-index:10;
 }
-#block-topnavbarmenu {
-  margin-left:-1rem;
-}
 #block-topnavbarmenu .navbar-nav > li > a {
     font-size: 1.125em;
     font-weight: bold;
@@ -132,6 +156,11 @@
   color: white;
 }
 
+#block-stickyhomeblock{
+    width: 100%;
+    padding: 0;
+    z-index: 1;
+}
 #block-stickyhomeblock #social-share{
   text-align: right;
 }
@@ -197,14 +226,10 @@
   padding-left:0;
 }
 
-
-.navbar-nav li:first-child a {
-    padding-left: 0!important;
-}
-
-.navbar-collapse {
-    padding-left: 1rem!important;
-    padding-right: 1rem!important;
+.navbar-nav > li > a,
+.navbar-nav > li:first-child > a{
+    padding-left: 0;
+    padding-right: 2rem;
 }
 
 /* barre de navigation en langue EN */
@@ -236,4 +261,10 @@
 
 .mega-menu .navbar .nav > li {
     padding-right: 20px;
+}
+
+#block-searchblock{
+    width: 100%;
+    padding: 0;
+    z-index: 1;
 }
