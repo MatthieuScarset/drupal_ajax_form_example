@@ -61,10 +61,10 @@
     background-color: #fff;
 }
 
-.bg_white a {
+/*.bg_white a {
     color: #f60;
     background-color: #fff;
-}
+}*/
 
 /*
 *fond orange : texte blanc, lien noir
@@ -74,10 +74,10 @@
     background-color: #f60;
 }
 
-.bg_orange a {
+/*.bg_orange a {
     color: #000;
     background-color: #f60;
-}
+}*/
 
 .bg_orange .btn-primary {
     color: #fff;
@@ -97,10 +97,10 @@
     color: #f60;
 }
 
-.bg_black a {
+/*.bg_black a {
     color: #f60;
     background-color: #000;
-}
+}*/
 
 .bg_green {
     background-color: #55bc87;

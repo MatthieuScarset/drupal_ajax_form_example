@@ -273,3 +273,39 @@ a.contact_link {
     font-size: 1.2em;
     text-decoration: none !important;
 }
+
+/* Guidelines for the links :
+- white background : black colour unselected, black or orange and underlined on rollover
+- black background : white colour unselected, white or orange and underlined on rollover
+- supporting colour background : black colour unselected, black or orange and underlined on rollover */
+.bg_black a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.bg_black a:hover {
+    color: #f60;
+    text-decoration: underline;
+}
+
+.black_link a:hover {
+    color: #000 !important;
+    text-decoration: underline;
+}
+
+.white_link a:hover {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+
+.bg_white a {
+    color: #000;
+    text-decoration: none;
+}
+
+.bg_white a:hover {
+    color: #f60;
+    text-decoration: underline;
+}
+
