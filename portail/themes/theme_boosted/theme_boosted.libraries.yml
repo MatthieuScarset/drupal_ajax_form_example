@@ -1,11 +1,11 @@
 global-styling:
   version: VERSION
   css:
+    boosted:
+      boosted/css/bootstrap-orange2015.min.css: {}
+      boosted/css/boosted2015.min.css: {}
     base:
-      css/bootstrap-orange2015.css: {}
-      css/bootstrap-orange-theme2015.css: {}
-      css/boosted2015.css: {}
-      css/font-awesome.css: {}
+      css/font-awesome.min.css: {}
       css/style.css: {}
       css/orange_socialbar.css: {}
     component:
@@ -22,10 +22,10 @@ global-styling:
       css/templating/layout.css: {}
       css/templating/nodes.css: {}
   js:
-    js/boosted.js: {}
+    boosted/js/boosted.min.js: {}
     js/readmorelink.js: {}
     js/header.js: {}
-    js/orange_socialbar.js: {}
+    js/social_bar/orange_socialbar.js: {}
 
   dependencies:
     - core/jquery
@@ -39,5 +39,5 @@ socialbar:
     base:
       css/orange_socialbar.css: {}
   js:
-    js/orange_socialbar_settings.js: {}
-    js/orange_socialbar.js: {}
+    js/social_bar/orange_socialbar_settings.js: {}
+    js/social_bar/orange_socialbar.js: {}
