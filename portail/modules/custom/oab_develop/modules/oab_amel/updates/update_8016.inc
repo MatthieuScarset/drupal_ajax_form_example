@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Database\Database;
+use \Drupal\Core\Utility\UpdateException;
+
 // Bloc sur-header "Service space" EN
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('system.menu.service-space');
