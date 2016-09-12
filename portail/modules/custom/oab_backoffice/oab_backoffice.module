@@ -183,6 +183,26 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     else{
       $form['#title'] = t('<em>Edit @type</em> @title', array('@type' => $current_container_type->get('name')->value, '@title' => ""));
     }
+
+    // valeur par défaut pour le champ "display_title"
+    // dans le cas d'une edition et que la valeur n'existe pas encore
+    if ($form_id == 'node_container_edit_form')
+    {
+      if ($node = \Drupal::routeMatch()->getParameter('node'))
+      {
+        $content_type = $node->bundle();
+        $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
+        if (isset($definitions)
+        && array_key_exists('field_display_title', $definitions))
+        {
+          $display_title = $node->get('field_display_title')->getValue();
+          if (!isset($display_title[0]['value']))
+          {
+            $form['field_display_title']['widget']['value']['#default_value'] = true;
+          }
+        }
+      }
+    }
   }
 
   //pour la médiathèque : sélection des images dans la liste
