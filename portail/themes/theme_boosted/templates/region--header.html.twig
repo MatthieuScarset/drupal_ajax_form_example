@@ -26,7 +26,7 @@
 
       {#Begin Top Navbar Menu#}
       <div id="navtop">
-        <nav id="top_navbar" class="navbar navbar-default">
+        <nav id="top_navbar" class="navbar navbar-default container">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar-collapse">
@@ -60,6 +60,12 @@
                        {% if elements.topnavbaren %}
                            {{ elements.topnavbaren }}
                        {% endif %}
+                       {% if elements.topnavbarru %}
+                           {{ elements.topnavbarru }}
+                       {% endif %}
+                       {% if elements.topnavbarruen %}
+                           {{ elements.topnavbarruen }}
+                       {% endif %}
                   </div>
 
                   <div class="nav navbar-nav navbar-right">
@@ -71,7 +77,12 @@
                        {% if elements.servicespace %}
                            {{ elements.servicespace }}
                        {% endif %}
-
+                      {% if elements.toprightnavbarru %}
+                          {{ elements.toprightnavbarru }}
+                      {% endif %}
+                      {% if elements.toprightnavbarruen %}
+                          {{ elements.toprightnavbarruen }}
+                      {% endif %}
                   </div>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -101,6 +112,14 @@
 
                     {% if elements.navigationprincipaleen %}
                         {{ elements.navigationprincipaleen }}
+                    {% endif %}
+
+                    {% if elements.navigationprincipaleru %}
+                        {{ elements.navigationprincipaleru }}
+                    {% endif %}
+
+                    {% if elements.navigationprincipaleruen %}
+                        {{ elements.navigationprincipaleruen }}
                     {% endif %}
                 </div>
 
