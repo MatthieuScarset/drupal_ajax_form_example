@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Database\Database;
 use \Drupal\Core\Utility\UpdateException;
 
 /***
