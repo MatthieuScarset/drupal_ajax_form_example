@@ -1,6 +1,9 @@
 global-styling:
   version: VERSION
   css:
+    boosted:
+      boosted/css/bootstrap-orange2015.min.css: {}
+      boosted/css/boosted2015.min.css: {}
     base:
       css/font-awesome.min.css: {}
       css/style.css: {}
@@ -18,9 +21,6 @@ global-styling:
       css/templating/textes.css: {}
       css/templating/layout.css: {}
       css/templating/nodes.css: {}
-    boosted:
-      boosted/css/bootstrap-orange2015.min.css: {}
-      boosted/css/boosted2015.min.css: {}
   js:
     boosted/js/boosted.min.js: {}
     js/readmorelink.js: {}
