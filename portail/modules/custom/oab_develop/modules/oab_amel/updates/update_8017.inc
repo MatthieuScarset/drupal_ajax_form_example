@@ -10,7 +10,10 @@ $query_delete = $connection->delete('config')
     ->execute();
 
 $query_create = $connection->insert('config')
-    ->fields(
+    ->fields(array(
+        'collection' => 'language.en',
+        'name' => 'views.view.dashboard',
+        'data' => serialize(
         array (
             'display' =>
                 array (
@@ -99,4 +102,5 @@ $query_create = $connection->insert('config')
                         ),
                 ),
         ))
+    ))
     ->execute();
