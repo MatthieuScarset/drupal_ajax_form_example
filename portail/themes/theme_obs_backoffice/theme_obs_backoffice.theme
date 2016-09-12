@@ -262,7 +262,8 @@ function theme_obs_backoffice_preprocess_page_title(&$variables) {
 
   $content_creation = \Drupal::routeMatch()->getParameter('node_type');
 
-  if (isset($content_creation)) {
+  if (isset($content_creation)
+  && is_object($content_creation)) {
 
     //CREATION
 

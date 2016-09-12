@@ -119,6 +119,7 @@ function theme_boosted_preprocess_node(&$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $nid = $node->nid->value;
     $content_type = $node->bundle();
+
     if ($content_type == 'container') {
       // récupération du rendering model
       $rendering_model = $node->get('field_rendering_model')->getValue();
@@ -244,6 +245,25 @@ function theme_boosted_preprocess_node(&$variables) {
         }
     }
     $variables['attributes']['class'][] = 'node';
+  }
+}
+
+function theme_boosted_preprocess_page(&$variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node'))
+  {
+    $content_type = $node->bundle();
+    $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
+    if (isset($definitions)
+    && array_key_exists('field_display_title', $definitions))
+    {
+      $display_title = $node->get('field_display_title')->getValue();
+      if (isset($display_title[0]['value'])
+      && $display_title[0]['value'] == 0
+      && isset($variables['page']['pre_content']['theme_boosted_page_title']))
+      {
+        $variables['page']['pre_content']['theme_boosted_page_title']['#access'] = false;
+      }
+    }
   }
 }
 

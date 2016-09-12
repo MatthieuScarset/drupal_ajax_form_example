@@ -183,7 +183,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     else{
       $form['#title'] = t('<em>Edit @type</em> @title', array('@type' => $current_container_type->get('name')->value, '@title' => ""));
     }
-
   }
 
   //pour la médiathèque : sélection des images dans la liste
