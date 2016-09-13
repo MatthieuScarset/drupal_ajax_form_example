@@ -118,15 +118,20 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
 }
 
 function theme_boosted_preprocess_node(&$variables) {
-
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
+  }
+  if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+    $node = node_revision_load($revision);
+  }
+  if (is_object($node)
+  && get_class($node) === 'Drupal\node\Entity\Node') {
     $nid = $node->nid->value;
     $content_type = $node->bundle();
 
     if ($content_type == 'container') {
       // récupération du rendering model
       $rendering_model = $node->get('field_rendering_model')->getValue();
-      if(isset($rendering_model[0]['target_id']) && !empty($rendering_model[0]['target_id'])) {
+      if (isset($rendering_model[0]['target_id']) && !empty($rendering_model[0]['target_id'])) {
 
         $rendering_model_tid = $rendering_model[0]['target_id'];
         $rendering_model_term = \Drupal::entityTypeManager()
@@ -156,115 +161,126 @@ function theme_boosted_preprocess_node(&$variables) {
       // gestion du champ image
       // en mode "full"
       if (isset($variables['content']['field_image'])
-      && isset($variables['view_mode'])
-      && $variables['view_mode'] == 'full'
-      && isset($rendering_model_type)){
-        if (in_array($rendering_model_type, array('blog_post', 'magazine', 'press_release', 'magazine_interview', 'press_kit'))) {
+        && isset($variables['view_mode'])
+        && $variables['view_mode'] == 'full'
+        && isset($rendering_model_type)
+      ) {
+        if (in_array($rendering_model_type, array(
+          'blog_post',
+          'magazine',
+          'press_release',
+          'magazine_interview',
+          'press_kit'
+        ))) {
           unset($variables['content']['field_image']);
         }
       }
 
       // Modification de l'object en fonction du type de modèle
-      if(isset($rendering_model_type)) {
-          switch ($rendering_model_type) {
-            case 'blog_post' :
-              for ($i = 0; $i <= count($variables['content']['field_blog']); $i++){
-                if ($i > 0){
-                  unset($variables['content']['field_blog'][$i]);
-                }
+      if (isset($rendering_model_type)) {
+        switch ($rendering_model_type) {
+          case 'blog_post' :
+            for ($i = 0; $i <= count($variables['content']['field_blog']); $i++) {
+              if ($i > 0) {
+                unset($variables['content']['field_blog'][$i]);
               }
+            }
 
-              if (isset($variables['content']['field_profile'][0]['#node'])
-              && is_object($variables['content']['field_profile'][0]['#node'])){
-                $node = $variables['content']['field_profile'][0]['#node'];
-                $profile_id = $node->id();
-                $profile_name = $node->getTitle();
-                $profile_link = Link::fromTextAndUrl($profile_name, Url::fromRoute('entity.node.canonical', array('node' => $profile_id)));
-                $profile_link = $profile_link->toString();
+            if (isset($variables['content']['field_profile'][0]['#node'])
+              && is_object($variables['content']['field_profile'][0]['#node'])
+            ) {
+              $node = $variables['content']['field_profile'][0]['#node'];
+              $profile_id = $node->id();
+              $profile_name = $node->getTitle();
+              $profile_link = Link::fromTextAndUrl($profile_name, Url::fromRoute('entity.node.canonical', array('node' => $profile_id)));
+              $profile_link = $profile_link->toString();
 
-                $variables['content']['profil_name'] = array(
-                  '#markup' => $profile_link,
+              $variables['content']['profil_name'] = array(
+                '#markup' => $profile_link,
+              );
+            }
+            break;
+          case 'press_release' :
+            if (isset($variables['content']['field_file'][0]['#media'])
+              && is_object($variables['content']['field_file'][0]['#media'])
+            ) {
+              $media = $variables['content']['field_file'][0]['#media'];
+
+              $field_file = $media->field_file->get(0)->getValue();
+              $field_file_id = $field_file['target_id'];
+              $file = \Drupal\file\Entity\File::load($field_file_id);
+              $file_uri = $file->get('uri')->getValue();
+
+              if (isset($file_uri[0]['value'])) {
+                $file_realpath = file_create_url($file_uri[0]['value']);
+                $variables['content']['field_file_uri'] = array(
+                  '#markup' => $file_realpath,
                 );
               }
-              break;
-            case 'press_release' :
-              if (isset($variables['content']['field_file'][0]['#media'])
-                  && is_object($variables['content']['field_file'][0]['#media'])) {
-                $media = $variables['content']['field_file'][0]['#media'];
-
-                $field_file = $media->field_file->get(0)->getValue();
-                $field_file_id = $field_file['target_id'];
-                $file = \Drupal\file\Entity\File::load($field_file_id);
-                $file_uri = $file->get('uri')->getValue();
-
-                if (isset($file_uri[0]['value']))
-                {
-                  $file_realpath = file_create_url($file_uri[0]['value']);
-                  $variables['content']['field_file_uri'] = array(
-                      '#markup' => $file_realpath,
-                  );
-                }
-                if (isset($variables['content']['field_area'][0]))
-                {
-                  $variables['content']['field_area'] = array(
-                      '#markup' => $variables['content']['field_area'][0]['#title'],
-                  );
-                }
-              }
-              break;
-            case 'magazine' :
-              for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++){
-                if ($i > 0){
-                  unset($variables['content']['field_magazine'][$i]);
-                }
-              }
-              break;
-            case 'document' :
-              if (isset($variables['content']['field_file'][0]['#media'])
-                && is_object($variables['content']['field_file'][0]['#media'])) {
-                $media = $variables['content']['field_file'][0]['#media'];
-
-                $field_file = $media->field_file->get(0)->getValue();
-                $field_file_id = $field_file['target_id'];
-                $file = \Drupal\file\Entity\File::load($field_file_id);
-                $file_uri = $file->get('uri')->getValue();
-
-                if (isset($file_uri[0]['value']))
-                {
-                  $file_realpath = file_create_url($file_uri[0]['value']);
-                  $variables['content']['field_file_uri'] = array(
-                    '#markup' => $file_realpath,
-                  );
-                }
-              }
-              if (isset($variables['content']['field_document_type'][0]))
-              {
-                $variables['content']['field_document_type'] = array(
-                  '#markup' => $variables['content']['field_document_type'][0]['#title'],
+              if (isset($variables['content']['field_area'][0])) {
+                $variables['content']['field_area'] = array(
+                  '#markup' => $variables['content']['field_area'][0]['#title'],
                 );
               }
-              break;
-          }
+            }
+            break;
+          case 'magazine' :
+            for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++) {
+              if ($i > 0) {
+                unset($variables['content']['field_magazine'][$i]);
+              }
+            }
+            break;
+          case 'document' :
+            if (isset($variables['content']['field_file'][0]['#media'])
+              && is_object($variables['content']['field_file'][0]['#media'])
+            ) {
+              $media = $variables['content']['field_file'][0]['#media'];
+
+              $field_file = $media->field_file->get(0)->getValue();
+              $field_file_id = $field_file['target_id'];
+              $file = \Drupal\file\Entity\File::load($field_file_id);
+              $file_uri = $file->get('uri')->getValue();
+
+              if (isset($file_uri[0]['value'])) {
+                $file_realpath = file_create_url($file_uri[0]['value']);
+                $variables['content']['field_file_uri'] = array(
+                  '#markup' => $file_realpath,
+                );
+              }
+            }
+            if (isset($variables['content']['field_document_type'][0])) {
+              $variables['content']['field_document_type'] = array(
+                '#markup' => $variables['content']['field_document_type'][0]['#title'],
+              );
+            }
+            break;
         }
+      }
     }
     $variables['attributes']['class'][] = 'node';
   }
 }
 
 function theme_boosted_preprocess_page(&$variables) {
-  if ($node = \Drupal::routeMatch()->getParameter('node'))
-  {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+
+  }
+  if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+    $node = node_revision_load($revision);
+  }
+  if (is_object($node)
+  && get_class($node) === 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
     $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
-    && array_key_exists('field_display_title', $definitions))
-    {
+    && array_key_exists('field_display_title', $definitions)) {
       $display_title = $node->get('field_display_title')->getValue();
       if (isset($display_title[0]['value'])
       && $display_title[0]['value'] == 0
-      && isset($variables['page']['pre_content']['theme_boosted_page_title']))
-      {
-        $variables['page']['pre_content']['theme_boosted_page_title']['#access'] = false;
+      && isset($variables['page']['pre_content']['theme_boosted_page_title'])
+      ) {
+        $variables['page']['pre_content']['theme_boosted_page_title']['#access'] = FALSE;
       }
     }
   }

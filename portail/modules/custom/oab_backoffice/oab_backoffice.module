@@ -195,10 +195,10 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         if (isset($definitions)
         && array_key_exists('field_display_title', $definitions))
         {
-          $display_title = $node->get('field_display_title')->getValue();
-          if (!isset($display_title[0]['value']))
-          {
-            $form['field_display_title']['widget']['value']['#default_value'] = true;
+          if ($display_title = $node->get('field_display_title')->getValue()) {
+            if (!isset($display_title[0]['value'])) {
+              $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
+            }
           }
         }
       }
@@ -210,6 +210,20 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   {
     $form['#attached']['library'][] = 'oab_backoffice/mediatheque';
   }
+
+  // enlever les bouton "sauvegarder et publier" et "sauvegarder et dépublier"
+  if (preg_match('@^node_@', $form_id)) {
+    if (isset($form['actions']['publish'])) {
+      $form['actions']['publish']['#access'] = FALSE;
+    }
+    if (isset($form['actions']['unpublish'])) {
+      $form['actions']['unpublish']['#access'] = FALSE;
+    }
+    if (isset($form['actions']['submit'])) {
+      $form['actions']['submit']['#access'] = TRUE;
+    }
+  }
+  //die;
 }
 
 function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match){

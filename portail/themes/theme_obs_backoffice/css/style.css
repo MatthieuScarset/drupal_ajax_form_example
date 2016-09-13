@@ -7,3 +7,6 @@
 {
     display: none;
 }
+.node-form .form-actions .dropbutton-widget{
+    display: none;
+}
