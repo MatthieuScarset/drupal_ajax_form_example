@@ -3,7 +3,7 @@
 use Drupal\Core\Database\Database;
 
 $shortcuts = array(
-  array('title' => 'Dashboard', 'weight' => '-6', 'link' => 'internal:/admin/content/dashboard'),
+  array('title' => 'Dashboard', 'weight' => '-9', 'link' => 'internal:/admin/content/dashboard'),
   array('title' => 'People', 'weight' => '-5', 'link' => 'internal:/admin/people'),
   array('title' => 'Translations', 'weight' => '-4', 'link' => 'internal:/admin/config/regional/translate'),
   //array('title' => 'variables', 'weight' => '-3', 'link' => 'internal:/admin/content/dashboard'),
