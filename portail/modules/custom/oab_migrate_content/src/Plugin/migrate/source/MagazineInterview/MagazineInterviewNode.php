@@ -143,11 +143,11 @@ class MagazineInterviewNode extends SqlBase {
         }
       }
     }
-    $verbatim_content = '<div class="bg bg_darkgrey">';
-    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<p class="highlight">"' . $field_txt_citation_1_value . '"</p>';
-    if ($field_txt_auteur_1_value !== '') $verbatim_content .= '<p>' . $field_txt_auteur_1_value . '</p>';
-    if ($field_location_value !== '') $verbatim_content .= '<p>' . $field_location_value . '</p>';
-    if ($field_profil_value !== '') $verbatim_content .= '<p>' . $field_profil_value . '</p>';
+    $verbatim_content = '<div class="bg verbatim">';
+    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<p class="content_verbatim">"' . $field_txt_citation_1_value . '"</p>';
+    if ($field_txt_auteur_1_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_txt_auteur_1_value . '</p>';
+    if ($field_location_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_location_value . '</p>';
+    if ($field_profil_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_profil_value . '</p>';
     $verbatim_content .= '</div>';
 
     $row->setSourceProperty('content_field', array(

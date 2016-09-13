@@ -79,6 +79,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
             case 'document' :
               $suggestions[] = 'node__container_document';
               break;
+            case 'magazine_interview' :
+              $suggestions[] = 'node__container_magazine_interview';
+              break;
             default:
               $suggestions[] = 'node__container_default';
           }
@@ -216,7 +219,7 @@ function theme_boosted_preprocess_node(&$variables) {
                 }
               }
               break;
-			      case 'document' :
+            case 'document' :
               if (isset($variables['content']['field_file'][0]['#media'])
                 && is_object($variables['content']['field_file'][0]['#media'])) {
                 $media = $variables['content']['field_file'][0]['#media'];

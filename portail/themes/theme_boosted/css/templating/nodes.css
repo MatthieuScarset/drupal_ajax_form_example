@@ -140,3 +140,20 @@ article.node.document a:hover{
 article.node.document .document_field_image{
     padding: 0 !important;
 }
+
+.verbatim {
+    min-height: 200px;
+    padding: 20px;
+    background-color: #595959;
+    line-height: 30px;
+    color: #fff;
+}
+.content_verbatim {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.source_verbatim {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 30px;
+}
