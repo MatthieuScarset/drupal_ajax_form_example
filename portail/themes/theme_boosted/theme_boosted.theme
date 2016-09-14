@@ -82,6 +82,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
             case 'magazine_interview' :
               $suggestions[] = 'node__container_magazine_interview';
               break;
+            case 'case_study' :
+              $suggestions[] = 'node__container_case_study';
+              break;
             default:
               $suggestions[] = 'node__container_default';
           }
@@ -264,7 +267,8 @@ function theme_boosted_preprocess_node(&$variables) {
 
 function theme_boosted_preprocess_page(&$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
-
+  }
+  if ($node = \Drupal::routeMatch()->getParameter('node_preview')) {
   }
   if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
     $node = node_revision_load($revision);
