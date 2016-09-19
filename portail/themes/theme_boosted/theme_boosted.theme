@@ -266,15 +266,17 @@ function theme_boosted_preprocess_node(&$variables) {
 }
 
 function theme_boosted_preprocess_page(&$variables) {
-  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+  if (\Drupal::routeMatch()->getParameter('node')) {
+    $node = \Drupal::routeMatch()->getParameter('node');
   }
-  if ($node = \Drupal::routeMatch()->getParameter('node_preview')) {
+  if (\Drupal::routeMatch()->getParameter('node_preview')) {
+    $node = \Drupal::routeMatch()->getParameter('node_preview');
   }
   if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
     $node = node_revision_load($revision);
   }
   if (is_object($node)
-  && get_class($node) === 'Drupal\node\Entity\Node') {
+  && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
     $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
