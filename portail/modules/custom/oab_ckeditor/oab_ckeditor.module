@@ -1,155 +1,170 @@
 <?php
 
-use Drupal\Core\Theme\ThemeManager;
 use Drupal\editor\Entity\Editor;
 
 /**
- * Implements hook_editor_js_settings_alter(array &$settings) 
+ * Implements hook_editor_js_settings_alter(array &$settings)
  */
-function oab_ckeditor_editor_js_settings_alter(array &$settings) 
+function oab_ckeditor_editor_js_settings_alter(array &$settings)
 {
-	$settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
-  $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+    $settings['editor']['formats']['full_html']['editorSettings']['customConfig']                        = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
+    $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
-  $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+    $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
 }
 
 /**
  * Implements hook_ckeditor_plugin_info_alter(array &$plugins)
  */
-function oab_ckeditor_ckeditor_plugin_info_alter(array &$plugins) {
-  //kpr($plugins);
-  //  die;
+function oab_ckeditor_ckeditor_plugin_info_alter(array &$plugins)
+{
+    //kpr($plugins);
+    //  die;
 }
 
 /**
  * Implements hook_page_attachments(array &$page)
  */
-function oab_ckeditor_page_attachments(array &$page) {
-	//inclure le fichier de style pour les templates
-	$page['#attached']['library'][] = 'oab_ckeditor/oab_ckeditor.templates';
+function oab_ckeditor_page_attachments(array &$page)
+{
+    //inclure le fichier de style pour les templates
+    $page['#attached']['library'][] = 'oab_ckeditor/oab_ckeditor.templates';
 }
 
 /**
  * Implements hook_ckeditor_css_alter(array &$css, Editor $editor)
  */
-function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
-	$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/templates.css';
-	$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/bootstrap.css';
+function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor)
+{
+    $css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/templates.css';
+    $css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/bootstrap.css';
 }
 
 /**
- * Implements hook_page_attachments_alter(array &$attachments) 
+ * Implements hook_page_attachments_alter(array &$attachments)
  */
-function oab_ckeditor_page_attachments_alter(array &$attachments) {
+function oab_ckeditor_page_attachments_alter(array &$attachments)
+{
 
-	$current_uri = \Drupal::request()->getRequestUri();
-	//si en ajout de node ou edit node
-	if ((strpos($current_uri, '/node/add') !== FALSE)
-	|| (strpos($current_uri, '/node/') !== FALSE && strpos($current_uri, '/edit') !== FALSE)
-	|| (strpos($current_uri, '/block') !== FALSE))
-	{
-		// declaration des templates
-		$data = array();
-		$data[0] = array(
-								'title' => t('1 column'),
-								'description' => t('1 column template'),
-								'html' => file_get_contents('templates/1_column.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => '1_column.gif'
-						);
-		$data[1] = array(
-								'title' => t('2 columns'),
-								'description' => t('2 columns template'),
-								'html' => file_get_contents('templates/2_columns.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => '2_columns.gif'
-						);
-		$data[2] = array(
-								'title' => t('2 columns 66% / 33%'),
-								'description' => t('2 columns template with 66% / 33% width'),
-								'html' => file_get_contents('templates/2_columns_66_33.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => '2_columns_66_33.gif'
-						);
-		$data[3] = array(
-								'title' => t('2 columns 33% / 66%'),
-								'description' => t('2 columns template with 33% / 66% width'),
-								'html' => file_get_contents('templates/2_columns_33_66.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => '2_columns_33_66.gif'
-						);
-		$data[4] = array(
-								'title' => t('3 columns'),
-								'description' => t('3 columns template'),
-								'html' => file_get_contents('templates/3_columns.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => '3_columns.gif'
-						);
-		$data[5] = array(
-								'title' => t('Blue background'),
-								'description' => t('blue background template'),
-								'html' => file_get_contents('templates/background_blue.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_blue.gif'
-						);
-		$data[6] = array(
-								'title' => t('Green background'),
-								'description' => t('green background template'),
-								'html' => file_get_contents('templates/background_green.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_green.gif'
-						);
-		$data[7] = array(
-								'title' => t('Purple background'),
-								'description' => t('purple background template'),
-								'html' => file_get_contents('templates/background_purple.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_purple.gif'
-						);
-		$data[8] = array(
-								'title' => t('Pink background'),
-								'description' => t('pink background template'),
-								'html' => file_get_contents('templates/background_pink.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_pink.gif'
-						);
-		$data[9] = array(
-								'title' => t('Yellow background'),
-								'description' => t('yellow background template'),
-								'html' => file_get_contents('templates/background_yellow.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_yellow.gif'
-						);
-		$data[10] = array(
-								'title' => t('Black background'),
-								'description' => t('black background template'),
-								'html' => file_get_contents('templates/background_black.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_black.gif'
-						);
-		$data[11] = array(
-								'title' => t('Dark grey background'),
-								'description' => t('dark grey background template'),
-								'html' => file_get_contents('templates/background_dark_grey.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_dark_grey.gif'
-						);
-		$data[12] = array(
-								'title' => t('White background'),
-								'description' => t('white background template'),
-								'html' => file_get_contents('templates/background_white.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_white.gif'
-						);
-		$data[13] = array(
-								'title' => t('Moderate grey background'),
-								'description' => t('moderate grey background template'),
-								'html' => file_get_contents('templates/background_moderate_grey.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_moderate_grey.gif'
-						);
-		$data[14] = array(
-								'title' => t('Orange background'),
-								'description' => t('orange background template'),
-								'html' => file_get_contents('templates/background_orange.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_orange.gif'
-						);
-		$data[15] = array(
-								'title' => t('Light grey background'),
-								'description' => t('light grey background template'),
-								'html' => file_get_contents('templates/background_light_grey.html.twig', FILE_USE_INCLUDE_PATH),
-								'image' => 'background_light_grey.gif'
-						);
+    $current_uri = \Drupal::request()->getRequestUri();
+    //si en ajout de node ou edit node
+    if ((strpos($current_uri, '/node/add') !== false)
+        || (strpos($current_uri, '/node/') !== false && strpos($current_uri, '/edit') !== false)
+        || (strpos($current_uri, '/block') !== false)) {
+        // declaration des templates
+        $data    = array();
+        $data[0] = array(
+            'title'       => t('1 column'),
+            'description' => t('1 column template'),
+            'html'        => file_get_contents('templates/1_column.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => '1_column.gif',
+        );
+        $data[1] = array(
+            'title'       => t('2 columns'),
+            'description' => t('2 columns template'),
+            'html'        => file_get_contents('templates/2_columns.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => '2_columns.gif',
+        );
+        $data[2] = array(
+            'title'       => t('2 columns 66% / 33%'),
+            'description' => t('2 columns template with 66% / 33% width'),
+            'html'        => file_get_contents('templates/2_columns_66_33.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => '2_columns_66_33.gif',
+        );
+        $data[3] = array(
+            'title'       => t('2 columns 33% / 66%'),
+            'description' => t('2 columns template with 33% / 66% width'),
+            'html'        => file_get_contents('templates/2_columns_33_66.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => '2_columns_33_66.gif',
+        );
+        $data[4] = array(
+            'title'       => t('3 columns'),
+            'description' => t('3 columns template'),
+            'html'        => file_get_contents('templates/3_columns.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => '3_columns.gif',
+        );
+        $data[5] = array(
+            'title'       => t('Blue background'),
+            'description' => t('blue background template'),
+            'html'        => file_get_contents('templates/background_blue.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_blue.gif',
+        );
+        $data[6] = array(
+            'title'       => t('Green background'),
+            'description' => t('green background template'),
+            'html'        => file_get_contents('templates/background_green.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_green.gif',
+        );
+        $data[7] = array(
+            'title'       => t('Purple background'),
+            'description' => t('purple background template'),
+            'html'        => file_get_contents('templates/background_purple.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_purple.gif',
+        );
+        $data[8] = array(
+            'title'       => t('Pink background'),
+            'description' => t('pink background template'),
+            'html'        => file_get_contents('templates/background_pink.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_pink.gif',
+        );
+        $data[9] = array(
+            'title'       => t('Yellow background'),
+            'description' => t('yellow background template'),
+            'html'        => file_get_contents('templates/background_yellow.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_yellow.gif',
+        );
+        $data[10] = array(
+            'title'       => t('Black background'),
+            'description' => t('black background template'),
+            'html'        => file_get_contents('templates/background_black.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_black.gif',
+        );
+        $data[11] = array(
+            'title'       => t('Dark grey background'),
+            'description' => t('dark grey background template'),
+            'html'        => file_get_contents('templates/background_dark_grey.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_dark_grey.gif',
+        );
+        $data[12] = array(
+            'title'       => t('White background'),
+            'description' => t('white background template'),
+            'html'        => file_get_contents('templates/background_white.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_white.gif',
+        );
+        $data[13] = array(
+            'title'       => t('Moderate grey background'),
+            'description' => t('moderate grey background template'),
+            'html'        => file_get_contents('templates/background_moderate_grey.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_moderate_grey.gif',
+        );
+        $data[14] = array(
+            'title'       => t('Orange background'),
+            'description' => t('orange background template'),
+            'html'        => file_get_contents('templates/background_orange.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_orange.gif',
+        );
+        $data[15] = array(
+            'title'       => t('Light grey background'),
+            'description' => t('light grey background template'),
+            'html'        => file_get_contents('templates/background_light_grey.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_light_grey.gif',
+        );
 
-		$attachments['#attached']['drupalSettings']['oab_templates'] = $data;
-	}
+        $attachments['#attached']['drupalSettings']['oab_templates'] = $data;
+        // Chargement des modules depuis le fichier templating/components.json
+        $jsonFile = file_get_contents('js/plugins/templating/components.json', FILE_USE_INCLUDE_PATH);
+        
+        $componentsList = json_decode($jsonFile);
+
+        foreach ($componentsList as $component) {
+            foreach ($component->items as $item) {
+                $html       = file_get_contents('js/plugins/templating/' . $item->file, FILE_USE_INCLUDE_PATH);
+                $item->file = $html;
+            }
+        }
+
+        $attachments['#attached']['drupalSettings']['oab_templating_components'] = $componentsList;
+    }
 }
 
 /**
@@ -157,56 +172,56 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
  */
 /*
 function oab_ckeditor_theme(){
-	//définition des templates utilisés
-	return array(
-			'template_1_column' => array(
-					'template' => '1_column'
-			),
-			'template_2_columns' => array(
-					'template' => '2_columns'
-			),
-			'template_2_columns_66_33' => array(
-					'template' => '2_columns_66_33'
-			),
-			'template_2_columns_33_66' => array(
-					'template' => '2_columns_33_66'
-			),
-			'template_3_columns' => array(
-					'template' => '3_columns'
-			),
-			'template_background_blue' => array(
-					'template' => 'background_blue'
-			),
-			'template_background_green' => array(
-					'template' => 'background_green'
-			),
-			'template_background_purple' => array(
-					'template' => 'background_purple'
-			),
-			'template_background_pink' => array(
-					'template' => 'background_pink'
-			),
-			'template_background_yellow' => array(
-					'template' => 'background_yellow'
-			),
-			'template_background_black' => array(
-					'template' => 'background_black'
-			),
-			'template_background_dark_grey' => array(
-					'template' => 'background_dark_grey'
-			),
-			'template_background_white' => array(
-					'template' => 'background_white'
-			),
-			'template_background_moderate_grey' => array(
-					'template' => 'background_moderate_grey'
-			),
-			'template_background_orange' => array(
-					'template' => 'background_orange'
-			),
-			'template_background_light_grey' => array(
-					'template' => 'background_light_grey'
-			),
-	);
+//définition des templates utilisés
+return array(
+'template_1_column' => array(
+'template' => '1_column'
+),
+'template_2_columns' => array(
+'template' => '2_columns'
+),
+'template_2_columns_66_33' => array(
+'template' => '2_columns_66_33'
+),
+'template_2_columns_33_66' => array(
+'template' => '2_columns_33_66'
+),
+'template_3_columns' => array(
+'template' => '3_columns'
+),
+'template_background_blue' => array(
+'template' => 'background_blue'
+),
+'template_background_green' => array(
+'template' => 'background_green'
+),
+'template_background_purple' => array(
+'template' => 'background_purple'
+),
+'template_background_pink' => array(
+'template' => 'background_pink'
+),
+'template_background_yellow' => array(
+'template' => 'background_yellow'
+),
+'template_background_black' => array(
+'template' => 'background_black'
+),
+'template_background_dark_grey' => array(
+'template' => 'background_dark_grey'
+),
+'template_background_white' => array(
+'template' => 'background_white'
+),
+'template_background_moderate_grey' => array(
+'template' => 'background_moderate_grey'
+),
+'template_background_orange' => array(
+'template' => 'background_orange'
+),
+'template_background_light_grey' => array(
+'template' => 'background_light_grey'
+),
+);
 }
-*/
+ */

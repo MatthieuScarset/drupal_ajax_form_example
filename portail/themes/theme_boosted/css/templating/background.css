@@ -163,6 +163,12 @@ p[class*='bg_']{
     top: 20px;
 }
 
+.frame-popout {
+    text-align: right;
+    top: 50% !important;
+    left: 50% !important;
+}
+
 .frame-text {
     font-size: 32pt;
     font-size: 1.8vw;

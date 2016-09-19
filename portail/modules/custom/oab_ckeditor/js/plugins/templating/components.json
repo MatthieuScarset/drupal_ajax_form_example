@@ -1,0 +1,42 @@
+[{
+        "id": "banner",
+        "label": "Banner",
+        "title": "Banner",
+        "items": [{
+            "label": "Bandeau",
+            "file": "files/banner/bandeau-solution.html.twig",
+            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-solution.png"
+        }]
+    }, {
+        "id": "customer_story",
+        "label": "Customer Story",
+        "title": "Customer Story",
+        "items": [{
+            "label": "Contenu lié",
+            "file": "files/customer_story/contenu-lie.html.twig",
+            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/contenu-lie.jpg"
+        }, {
+            "label": "Verbatim",
+            "file": "files/customer_story/verbatim.html.twig",
+            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim.jpg"
+        }, {
+          "label": "Benefits",
+          "file": "files/customer_story/benefits.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/benefits.png"
+        }]
+    }, {
+        "id": "contact",
+        "label": "Contact",
+        "title": "Contact",
+        "items": [{
+          "label": "Call to Action 1",
+          "file": "files/contact/call-to-action-1.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-1.png"
+        }, {
+          "label": "Call to Action 2",
+          "file": "files/contact/call-to-action-2.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-2.png"
+        }]
+      }
+
+]
