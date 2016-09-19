@@ -10,3 +10,7 @@
 .node-form .form-actions .dropbutton-widget{
     display: none;
 }
+.ui-dialog .ui-widget-content.ui-dialog-content{
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
