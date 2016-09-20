@@ -1,5 +1,6 @@
 .cke_show_borders a{
     color: black;
+    text-decoration: underline;
 }
 .cke_show_borders a:hover,
 .cke_show_borders a:focus{
