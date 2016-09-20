@@ -120,6 +120,10 @@ article.node.document > .nowidthlimit {
 }
 
 /* Guidelines : Text should underline on rollover and change to orange #F16E00 */
+article.node.full .field--type-oab-text a,
+article.node.document .field--type-oab-text a{
+    text-decoration: underline;
+}
 article.node.full a:hover,
 article.node.document a:hover{
     text-decoration: underline;
