@@ -165,8 +165,8 @@ p[class*='bg_']{
 
 .frame-popout {
     text-align: right;
-    top: 50% !important;
-    left: 50% !important;
+    top: 60% !important;
+    left: 75% !important;
 }
 
 .frame-text {
@@ -182,6 +182,12 @@ p[class*='bg_']{
     top: 50%;
     color: black;
     margin: 0;
+}
+
+.frame-longtext{
+    font-size: 1.3vw;
+    text-align: center;
+    font-weight: bold;
 }
 
 @media (max-width: 480px) {
