@@ -30,7 +30,7 @@
     margin: 0 !important;
 }
 #main_nav .logo img{
-
+    width: 140px;
 }
 
 .icon-share {
@@ -150,7 +150,7 @@
 
 .navbar-header .logo img {
   vertical-align: middle;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 #main_nav .navbar-right a{
   color: white;
@@ -257,10 +257,12 @@
 .mega-menu .nav, .mega-menu .collapse, .mega-menu .dropdown {
     position: static;
     margin-left: 30px;
+    margin-top: 5px
 }
 
 .mega-menu .navbar .nav > li {
     padding-right: 20px;
+    margin-top: 5px
 }
 
 #block-searchblock{
@@ -271,4 +273,8 @@
 
 .navbar-nav > li > .dropdown-menu {
     border-color: black;
+}
+
+#block-righticonblock {
+    margin-top: 15px;
 }
