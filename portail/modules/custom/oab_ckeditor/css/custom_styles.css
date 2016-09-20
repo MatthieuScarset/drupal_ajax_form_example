@@ -17,6 +17,7 @@
     background-color: transparent;
     border-color: #000;
     color: #000;
+    text-decoration: none;
 }
 .cke_show_borders .btn-default:hover,
 .cke_show_borders .btn-default.hover,
@@ -35,6 +36,7 @@
     margin-right: 2rem;
     padding-left: 3rem;
     padding-right: 3rem;
+    text-decoration: none;
 }
 .cke_show_borders .btn-primary:hover,
 .cke_show_borders .btn-primary.hover,
