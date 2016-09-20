@@ -1,9 +1,14 @@
+.field--type-oab-text ul{
+    list-style-type: square;
+}
+
 /*
 *  TEMPLATE CALL TO ACTION
 */
 
 p.callToAction.highlight {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 3em !important;
     /*font-weight: bold; /* A remplacer par le numéro correspondant dans la police (~600)*/
     line-height: 4.5rem;
@@ -14,20 +19,23 @@ p.callToAction.highlight {
 *  TEMPLATE RELATED CONTENT
 */
 .related_content h2{
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 2.5em !important;
     color: white;
     margin-bottom: 2.5rem;
     margin-top: 1rem;
 }
 .related_content h3{
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.7em !important;
     margin-top: 0;
     margin-bottom: 1.5rem;
 }
 .related_content p.highlight{
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 2.5em !important;
     line-height: 3.5rem;
     margin-bottom:3.5rem;
@@ -70,42 +78,49 @@ p.callToAction.highlight {
     }
 }
 .related_content p.short_description{
-    font-family: HelvNeue75,Arial,sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.1em;
     line-height: 1.5rem;
 }
 .related_content a{
-    font-family: HelvNeue75,Arial,sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.1em;
     text-decoration: none;
 }
 
 p.normal {
-    font-family: HelvNeue55, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 400;
     font-size: 1.3em !important;
     margin-bottom:3rem;
 }
 
 p.auteur {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.7rem !important;
 
 }
 
 p.date {
-    font-family: HelvNeue55, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 400;
     font-size: 1em !important;
     font-weight: bold;
 }
 
 p.title {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.3rem !important;
     color: #f60;
 }
 
 p.header {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 6rem !important;
     line-height: 7rem;
     margin: 0;
@@ -116,7 +131,8 @@ p.image p{
 }
 
 p.source {
-    font-family: HelvNeue55, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 400;
     font-size: 1.2em !important;
     margin-bottom:3rem;
     color: #fff;
@@ -128,7 +144,8 @@ blockquote {
 }
 
 p.number  {
-    font-family: HelvNeue75,Arial,sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 6em;
     line-height: 1em;
     position: relative;
@@ -141,14 +158,16 @@ p.number  {
 }
 
 p.subtitle {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 2em !important;
     color: #000;
 }
 
 
 p.highlight {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 3em !important;
     line-height: 4.5rem;
     margin-bottom:3.5rem;
@@ -223,7 +242,8 @@ p.center.highlight {
     font-size: 0.15em;
 }
 .banner .description{
-    font-family: HelvNeue75,Arial,sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 3em;
     font-weight: bold;
     line-height: 1em;
@@ -284,34 +304,50 @@ a.contact_link {
 - white background : black colour unselected, black or orange and underlined on rollover
 - black background : white colour unselected, white or orange and underlined on rollover
 - supporting colour background : black colour unselected, black or orange and underlined on rollover */
-.bg_black a {
+.bg_black a{
     color: #fff;
     text-decoration: none;
 }
 
-.bg_black a:hover {
+.bg_black a:hover,
+.cke_show_borders .bg_black a:hover{
     color: #f60;
     text-decoration: underline;
 }
 
-.black_link a:hover {
+.black_link a:hover,
+.cke_show_borders .black_link a:hover{
     color: #000 !important;
     text-decoration: underline;
 }
 
-.white_link a:hover {
+.white_link a:hover,
+.cke_show_borders .white_link a:hover {
     color: #fff !important;
     text-decoration: underline;
 }
 
 
-.bg_white a {
+.bg_white a{
     color: #000;
     text-decoration: none;
 }
 
-.bg_white a:hover {
+.bg_white a:hover,
+.cke_show_borders .bg_white a:hover{
     color: #f60;
+    text-decoration: underline;
+}
+
+
+.bg_orange a{
+    color: #000;
+    text-decoration: none;
+}
+
+.bg_orange a:hover,
+.cke_show_borders .bg_orange a:hover{
+    color: #000;
     text-decoration: underline;
 }
 

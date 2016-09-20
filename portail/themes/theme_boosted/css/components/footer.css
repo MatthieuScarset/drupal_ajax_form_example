@@ -15,7 +15,8 @@ div.followbar {
 
 
 h2.footer_link_title {
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
     font-size: 1.5em;
 }
 

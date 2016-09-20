@@ -1,5 +1,6 @@
 /* Bouton avec bordures blanches, et fond noir */
-a.btn-white-border {
+a.btn-white-border,
+.cke_show_borders a.btn-white-border{
     color: #fff;
     background-color: #000 ;
     border-color: #fff;
@@ -17,7 +18,16 @@ a.btn-white-border {
     margin-right: 2rem;
     padding-right: 3rem;
     padding-left: 3rem;
-    font-family: "HelvNeue55",Arial,sans-serif
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
+}
+.btn-primary:focus,
+.btn-primary:hover,
+.bg_white .btn-primary:focus,
+.bg_white .btn-primary:hover{
+    color: #fff;
+    background-color: #f16e00;
+    border-color: #fff;
 }
 
 .btn-primary i {

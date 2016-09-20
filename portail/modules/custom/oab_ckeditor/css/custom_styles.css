@@ -1,30 +1,82 @@
+.cke_show_borders a{
+    color: black;
+}
+.cke_show_borders a:hover,
+.cke_show_borders a:focus{
+    text-decoration: underline;
+}
+.cke_show_borders .btn {
+    border-width: 2px;
+    font-size: 1.6rem;
+    line-height: 1.25;
+    padding: 0.7rem 1.8rem 0.9rem;
+    border-radius: 0;
+}
+.cke_show_borders .btn-default {
+    background-color: transparent;
+    border-color: #000;
+    color: #000;
+}
+.cke_show_borders .btn-default:hover,
+.cke_show_borders .btn-default.hover,
+.cke_show_borders .btn-default:focus,
+.cke_show_borders .btn-default.focus {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+.cke_show_borders .btn-primary {
+    background-color: #f16e00;
+    border-color: #fff;
+    color: #fff;
+    font-family: HelvNeueOrange,Arial,sans-serif;
+    font-weight: 700;
+    margin-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+.cke_show_borders .btn-primary:hover,
+.cke_show_borders .btn-primary.hover,
+.cke_show_borders .btn-primary:focus,
+.cke_show_borders .btn-primary.focus {
+    color: #fff;
+    background-color: #f16e00;
+    border-color: #fff;
+}
 div.titre1{
     font-size: 6rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre2{
     font-size: 5rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre3{
     font-size: 4rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre4{
     font-size: 3.4rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre5{
     font-size: 3rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre6{
     font-size: 2.4rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 div.titre7{
     font-size: 2rem;
-    font-family: HelvNeue75, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
 }
 ul.orange,
 ul.black,
@@ -34,11 +86,13 @@ ul.grey{
 }
 p.highlight1{
     font-size: 1.8rem;
-    font-family: HelvNeue55, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 400;
 }
 p.highlight2{
     font-size: 1.6rem;
-    font-family: HelvNeue55, Arial, sans-serif;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 400;
 }
 ul.orange,
 span.orange{
