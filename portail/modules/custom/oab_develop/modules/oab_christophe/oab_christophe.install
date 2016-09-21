@@ -219,3 +219,10 @@ function oab_christophe_update_8028() {
 function oab_christophe_update_8029() {
   include_once("updates/update_8029.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2330 - menu top right FR
+ */
+function oab_christophe_update_8030() {
+  include_once("updates/update_8030.inc");
+}
