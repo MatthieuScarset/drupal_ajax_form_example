@@ -1,5 +1,6 @@
 <?php
 namespace Drupal\oab_ckeditor\Plugin\CKEditorPlugin;
+
 use Drupal\ckeditor\CKEditorPluginInterface;
 use Drupal\ckeditor\CKEditorPluginButtonsInterface;
 use Drupal\Component\Plugin\PluginBase;
@@ -22,7 +23,7 @@ class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEdi
    */
   function getDependencies(Editor $editor)
   {
-    return array();
+    return array('basewidget');
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getLibraries().

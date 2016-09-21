@@ -36,7 +36,6 @@ function createTemplateComponent(containerId, component) {
 function insertComponentTemplate(containerId, html) {
 
     var dialog = CKEDITOR.dialog.getCurrent();
-    console.log('dialog', dialog);
     var isReplace = dialog.getValueOf('tab-' + containerId, 'components-chkbox-' + containerId);
 
     if (isReplace) {
