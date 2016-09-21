@@ -224,7 +224,29 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       $form['actions']['submit']['#access'] = TRUE;
     }
   }
-  //die;
+
+  if ($form_id == 'user_register_form'
+  || $form_id == 'user_form'){
+    if (isset($form['account']['roles']['#options'])
+    && is_array($form['account']['roles']['#options'])){
+      $roles_option = $form['account']['roles']['#options'];
+      foreach($roles_option AS $key => $value){
+        if ($key != 'authenticated') {
+          if (!\Drupal::currentUser()->hasPermission('assign ' . $key . ' role')) {
+            if (in_array($key, $form['account']['roles']['#default_value'])) {
+              $form['account']['roles'][$key] = array(
+                '#default_value' => TRUE,
+                '#disabled' => TRUE
+              );
+            }
+            else {
+              unset($form['account']['roles']['#options'][$key]);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match){
