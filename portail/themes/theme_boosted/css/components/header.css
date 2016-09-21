@@ -92,6 +92,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (max-width: 1219px) {
+    #navbar-collapse-mega .glyphicon,
+    .icon-share{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+}
+
 .navbar {
     margin-bottom:0;
     min-height: 6.8rem !important;
@@ -139,8 +147,18 @@
 }
 
 .mega-menu.navbar .nav > li > a {
-    font-size: 1.313em;
+    font-size: 1.143em;
     font-weight: bold;
+    margin-top: 0;
+}
+
+@media (max-width: 1219px) {
+    .mega-menu .navbar .nav > li{
+        padding-right: 10px;
+    }
+    .mega-menu.navbar .nav > li > a {
+        padding-right: 1rem;
+    }
 }
 
 #block-menuducomptedelutilisateur .navbar-nav > li > a {
@@ -254,10 +272,10 @@
 }
 
 /*guidelines p.63 pour la navigation principale */
-.mega-menu .nav, .mega-menu .collapse, .mega-menu .dropdown {
+.mega-menu .nav, .mega-menu .collapse {
     position: static;
-    margin-left: 30px;
-    margin-top: 5px
+    margin-left: 15px;
+    margin-top: 22px
 }
 
 .mega-menu .navbar .nav > li {
@@ -276,5 +294,5 @@
 }
 
 #block-righticonblock {
-    margin-top: 15px;
+    margin-top: -10px;
 }
