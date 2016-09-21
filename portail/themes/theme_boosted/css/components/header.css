@@ -119,6 +119,7 @@
     top: 0;
     width: 100%;
     z-index:10;
+    border-color: black;
 }
 #block-topnavbarmenu .navbar-nav > li > a {
     font-size: 1.125em;
