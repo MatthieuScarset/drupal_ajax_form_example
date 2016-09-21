@@ -262,8 +262,10 @@
 
 }
 
-.navbar-en > li > a {
+.navbar-en > li > a,
+.navbar-en > li:first-child > a{
     margin: 0px;
+    padding-left: 2rem;
 }
 
 .navbar-en > li {
