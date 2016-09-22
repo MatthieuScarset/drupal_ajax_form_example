@@ -22,8 +22,8 @@ function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_st
 }
 
 function oab_frontoffice_preprocess_menu(&$variables) {
-  if (isset($variables['menu_name'])
-  && ($variables['menu_name'] == 'top-right-navbar-fr')) {
+  if (isset($variables['items'])
+  && is_array($variables['items'])) {
     foreach ($variables['items'] as &$item) {
       $menuLinkEntity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
       if (!empty($menuLinkEntity)) {
