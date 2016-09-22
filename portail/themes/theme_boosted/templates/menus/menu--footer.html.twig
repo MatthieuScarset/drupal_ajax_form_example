@@ -27,15 +27,16 @@
   {% import _self as menus %}
   {% if items %}
     {% for item in items %}
+      {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
       {% if menu_level == 0 %}
         <div{{ attributes.addClass('col-xs-12', 'col-sm-6', 'col-md-2', 'nopadding') }}>
         <ul>
         <h2{{ item.attributes.addClass('footer_link_title') }}>
-          <a class="bg_black" href="{{ item.url }}">{{ item.title }}</a>
+          <a class="bg_black" href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
         </h2>
       {% else %}
         <li{{ item.attributes }}>
-          {{ link(item.title, item.url) }}
+          {{ link(item.title, item.url, {'target': link_target}) }}
         </li>
 
       {% endif %}

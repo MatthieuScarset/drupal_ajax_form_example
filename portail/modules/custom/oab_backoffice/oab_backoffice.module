@@ -247,6 +247,53 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       }
     }
   }
+
+  // Ajout de champ dans les menus
+  if($form_id == 'menu_link_content_menu_link_content_form') {
+    $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+    $linkOptions = $menuLinkEntity->link->first()->options;
+    $linkTarget = !empty($linkOptions['target']) ? true : false;
+
+    $form['link_target'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Open in a new window'),
+      '#description' => t('check to open the link in a new window'),
+      '#default_value' => $linkTarget,
+      '#weight' => -2
+    );
+
+    $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
+  }
+}
+
+function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
+  $values = $form_state->getValues();
+  $link_target = array();
+
+  if (isset($values['link_target'])
+    && !empty($values['link_target'])) {
+    $link_target = trim($values['link_target']);
+  }
+
+  $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+  $options = $menuLinkEntity->link->first()->options;
+
+  $changed = FALSE;
+  if (empty($link_target)) {
+    if (!empty($options['target'])) {
+      unset($options['target']);
+      $changed = TRUE;
+    }
+  }
+  else {
+    $options['target'] = $link_target ? '_blank' : '_self' ;
+    $changed = TRUE;
+  }
+
+  if ($changed) {
+    $menuLinkEntity->link->first()->options = $options;
+    $menuLinkEntity->save();
+  }
 }
 
 function oab_backoffice_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match){
@@ -328,4 +375,10 @@ function oab_backoffice_entity_view_mode_alter(&$view_mode, Drupal\Core\Entity\E
       }
     }
   }
+}
+
+function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state){
+  $buildInfo = $form_state->getBuildInfo();
+  $menuLinkContentForm = $buildInfo['callback_object'];
+  return $menuLinkContentForm->getEntity();
 }
