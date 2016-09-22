@@ -38,6 +38,10 @@ article.node.document > .content{
     font-size: 1.6rem;
 }
 
+.field--type-oab-text p{
+    text-align: left !important;
+}
+
 .content_info{
     font-weight: bold;
 }
@@ -70,6 +74,7 @@ article.node.document > .content{
 .node.profil-redacteur.teaser img{
     width: 100%;
     height: 100%;
+    max-width: 160px;
 }
 .node.profil-redacteur.teaser > .content{
     padding: 0;
@@ -81,12 +86,12 @@ article.node.document > .content{
     padding: 40px;
 }
 .node.profil-redacteur.teaser .bloc_textuel .title{
-    font-size: 1.500em;
+    font-size: 1.125em;
     font-weight: bold;
 }
 .node.profil-redacteur.teaser .bloc_textuel .field--name-body{
-    font-size: 1.167em;
-    line-height: 1.167em;
+    font-size: 0.875em;
+    line-height: 1em;
 }
 
 article.node.full .field-comments,
