@@ -170,6 +170,12 @@ p[class*='bg_']{
     left: 75% !important;
 }
 
+.frame-icon-popout {
+    left: 70% !important;
+    position: absolute;
+    top: 40%;
+}
+
 .frame-text {
     font-size: 32pt;
     font-size: 1.8vw;
