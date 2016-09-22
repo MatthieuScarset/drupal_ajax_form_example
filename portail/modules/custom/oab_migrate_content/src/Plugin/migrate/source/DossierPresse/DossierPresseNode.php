@@ -101,13 +101,13 @@ class DossierPresseNode extends SqlBase {
         if (is_object($body_result) && isset($body_result->field_txt_catcher_value)){
           $body_value = $body_result->field_txt_catcher_value;
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = check_markup($body_value, 'full_html');
+          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
         elseif (is_array($body_result) && isset($body_result['field_txt_catcher_value'])){
           $body_value = $body_result['field_txt_catcher_value'];
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = check_markup($body_value, 'full_html');
+          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
       }
