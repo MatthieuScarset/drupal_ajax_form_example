@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Database\Database;
+use Drupal\media_entity\Entity\Media;
+
 //define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 150));
 // timestamp correspondant au 1er janvier 2015 00h00:00
 define('BLOGPOST_SELECT_DATE', 1420066800);
@@ -33,4 +36,82 @@ function oab_migrate_workflow_sid_correspondance($old_sid){
     }
   }
   return $workflow_state;
+}
+
+/** Permet de migrer les images contenues dans un body de wysiwyg
+ * @param $content
+ */
+function oab_migrate_wysiwyg_images($content, $nidD7)
+{
+  //$content = $content_field->value;
+  //Pattern de recherche pour une image dans un WYSIWYG
+  $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
+  $searchResults = array();
+  $error = false;
+  //Recherche du pattern
+  while(preg_match($pattern, $content, $searchResults) && !$error)
+  {
+    //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
+    $fidD7 = $searchResults[1];
+
+    //Récupération des informations du file D7
+    \Drupal\Core\Database\Database::setActiveConnection('drupal7');
+    $dbD7 = \Drupal\Core\Database\Database::getConnection();
+
+    //requete sur le fichier D7
+    $file_query = $dbD7->select('file_managed', 'f');
+    $file_query->fields('f')
+      ->condition('f.fid', $fidD7, '=');
+    $file_results = $file_query->execute()->fetchObject();
+
+    //on remet la connexion D8
+    \Drupal\Core\Database\Database::setActiveConnection();
+    $dbD8 = \Drupal\Core\Database\Database::getConnection();
+
+    if (is_object($file_results)){
+      if (isset($file_results->uri)){
+        \Drupal::logger('oab_migrate_content')->notice("URI  ::".file_create_url($file_results->uri));
+        if (file_exists($file_results->uri)) {
+          $data = file_get_contents(file_create_url($file_results->uri));
+          $file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
+
+          //on recherche si le media existe déjà
+          $media_query = $dbD8->select('media', 'm');
+          $media_query->join('media__field_image', 'mfi', 'mfi.entity_id = m.mid');
+          $media_query->fields('m')
+            ->condition('mfi.field_image_target_id', $file->id(), '=');
+          $media_results = $media_query->execute()->fetchObject();
+
+          if (!empty($media_results) && is_object($media_results)) {
+            $newUUID = $media_results->uuid;
+          }
+          else
+          {
+            //création du média lié au file
+            $media = Media::create(array(
+              'bundle' => 'image',
+              'title' => $file_results->filename,
+              'status' => $file_results->status,
+              'uid' => 1
+            ));
+            $media->set('field_image', $file->id());
+            $media->save();
+            $newUUID = $media->uuid();
+          }
+
+          //creation de la nouvelle syntaxe pour l'image avec l'uuid
+          $syntaxD8 = '<drupal-entity data-embed-button="media_browser" data-entity-embed-display="entity_reference:entity_reference_entity_view" data-entity-embed-settings="{&quot;view_mode&quot;:&quot;default&quot;}" data-entity-type="media" data-entity-uuid="' . $newUUID . '"></drupal-entity>';
+
+          //on remplace l'ancienne syntaxe par la nouvelle
+          $content = str_replace($searchResults[0], $syntaxD8, $content);
+        }
+        else{
+          $error = true; //en cas d'erreur on s'arret sinon boucle infinie
+          //l'image n'existe pas
+          \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : ".$file_results->uri);
+        }
+      }
+    }
+  }
+  return $content;
 }
