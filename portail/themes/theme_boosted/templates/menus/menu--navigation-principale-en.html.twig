@@ -36,12 +36,13 @@
     {% endif %}
 
         {% for item in items %}
+          {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
           {% if item.below %}
           <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
-            <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown">{{ item.title }} <span class="caret"></span></a>
+            <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}">{{ item.title }} <span class="caret"></span></a>
           {% else %}
 
-         <li><a href="{{ item.url }}">{{ item.title }}</a>
+         <li><a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
           {% endif %}
 
           {% if item.below %}
@@ -63,10 +64,11 @@
         <div id="items_megamenu" class="row">
             <h2>Nos Solutions</h2>
             {% for item in items %}
+                {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
                 <div class="col-sm-6 col-md-2">
-                <a href="{{ item.url }}">{{ item.title }}</a>
+                <a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
                     <p class="text-muted">description</p>
-                <a class="btn btn-default" href="{{ item.url }}">Découvrir</a>
+                <a class="btn btn-default" href="{{ item.url }}" target="{{ link_target }}">Découvrir</a>
                 </div>
             {% endfor %}
         </div>
