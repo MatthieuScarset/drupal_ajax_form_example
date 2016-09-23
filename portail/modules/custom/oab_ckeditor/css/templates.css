@@ -105,10 +105,11 @@
   text-decoration: underline;
 }
 
-
+.obs_template.three_columns img,
 .obs_template.three_columns p > img {
   max-width: 400px;
 }
+
 
 .obs_template.one_column li > p,
 .obs_template.two_columns_33_66 li > p,
