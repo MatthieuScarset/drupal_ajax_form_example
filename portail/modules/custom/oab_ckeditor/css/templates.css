@@ -104,3 +104,17 @@
   color:#FF7900;
   text-decoration: underline;
 }
+
+
+.obs_template.three_columns p > img {
+  max-width: 400px;
+}
+
+.obs_template.one_column li > p,
+.obs_template.two_columns_33_66 li > p,
+.obs_template.two_columns_66_33 li > p,
+.obs_template.three_columns li > p,
+.obs_template.two_columns li > p
+{
+  padding: 0px;
+}
