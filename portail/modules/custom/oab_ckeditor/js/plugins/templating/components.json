@@ -6,6 +6,10 @@
             "label": "Bandeau",
             "file": "files/banner/bandeau-solution.html.twig",
             "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-solution.png"
+        }, {
+          "label": "Contenu lié",
+          "file": "files/banner/bandeau-contenu-lie.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-contenu-lie.jpg"
         }]
     }, {
         "id": "customer_story",
