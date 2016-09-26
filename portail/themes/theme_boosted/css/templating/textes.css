@@ -109,7 +109,14 @@ p.modulecontent {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
     font-size: 1.25em;
-    line-height: 1.5em;
+    line-height: 1.5em !important;
+}
+
+.module_telechargement p.titre {
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+    line-height: 1.2em !important;
 }
 
 p.intro {
@@ -118,6 +125,11 @@ p.intro {
     font-size: 0.875em;
     line-height: 1em !important;
     margin-top:4rem;
+}
+
+.module_telechargement p.intro {
+    margin-top: 0 !important;
+    line-height: 1.1428em !important;
 }
 
 p.date {
@@ -201,6 +213,10 @@ p.center.highlight {
 }
 .text_orange {
     color: #f60!important ;
+}
+
+.text_orange2 {
+    color: #F16E00!important ;
 }
 
 /*
