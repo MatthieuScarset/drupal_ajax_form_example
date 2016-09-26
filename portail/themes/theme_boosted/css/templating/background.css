@@ -29,6 +29,11 @@
     vertical-align: top;
     padding: 1.5rem 2.5rem;
 }
+
+.padding20{
+    padding: 20px;
+}
+
 @media (max-width: 990px) {
     .tabled {
         display: block !important;

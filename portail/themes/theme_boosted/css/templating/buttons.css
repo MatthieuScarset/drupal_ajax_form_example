@@ -42,3 +42,12 @@ a.btn-white-border,
 .noborder a:hover {
     text-decoration: none !important;
 }
+
+.btn{
+    text-decoration: none !important;
+}
+
+.module_telechargement .btn{
+    font-size: 0.875em !important;
+    line-height: 1em !important;
+}
