@@ -13,7 +13,11 @@
         }, {
             "label": "Téléchargement",
             "file": "files/banner/telechargement.html.twig",
-            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"        
+            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"
+        }, {
+          "label": "essentiel V2",
+          "file": "files/banner/bandeau-essentiel.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-essentiel.jpg"
         }]
     }, {
         "id": "customer_story",
