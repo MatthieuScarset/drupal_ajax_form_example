@@ -86,11 +86,11 @@ article.node.document > .content{
     padding: 40px;
 }
 .node.profil-redacteur.teaser .bloc_textuel .title{
-    font-size: 1.125em;
-    font-weight: bold;
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 .node.profil-redacteur.teaser .bloc_textuel .field--name-body{
-    font-size: 0.875em;
+    font-size: 1.4rem;
     line-height: 1em;
 }
 
