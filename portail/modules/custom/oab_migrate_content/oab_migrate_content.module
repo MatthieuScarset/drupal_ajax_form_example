@@ -70,10 +70,9 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 
     if (is_object($file_results)){
       if (isset($file_results->uri)){
-        \Drupal::logger('oab_migrate_content')->notice("URI  ::".file_create_url($file_results->uri));
-        if (file_exists($file_results->uri)) {
+        $saved_path = str_replace('public:/', \Drupal\Core\Site\Settings::get('migration_files_source_path', 'public:/'), $file_results->uri);
+        if (file_exists($saved_path)) {
 
-          $saved_path = str_replace('public:/', \Drupal\Core\Site\Settings::get('migration_files_source_path', 'public:/'), $file_results->uri);
           $data = file_get_contents(file_create_url($saved_path));
           $file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
 
@@ -110,7 +109,7 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
         else{
           $error = true; //en cas d'erreur on s'arret sinon boucle infinie
           //l'image n'existe pas
-          \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : ".$file_results->uri);
+          \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : ".$saved_path);
         }
       }
     }
