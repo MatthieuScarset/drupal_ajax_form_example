@@ -15,9 +15,13 @@
             "file": "files/banner/telechargement.html.twig",
             "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"
         }, {
-          "label": "essentiel V2",
+          "label": "Essentiel V2",
           "file": "files/banner/bandeau-essentiel.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-essentiel.jpg"
+        }, {
+          "label": "Bandeau solution",
+          "file": "files/banner/bandeau-header.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-header.jpg"
         }]
     }, {
         "id": "customer_story",
@@ -47,6 +51,10 @@
           "label": "Verbatim V2 avec image",
           "file": "files/customer_story/verbatim-v2-image.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-v2-image.png"
+        }, {
+          "label": "Customer Story 5",
+          "file": "files/customer_story/customer-story-5.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/customer-story-5.jpg"
         }]
     }, {
         "id": "contact",
