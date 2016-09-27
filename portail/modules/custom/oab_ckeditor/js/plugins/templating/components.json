@@ -55,6 +55,10 @@
           "label": "Customer Story 5",
           "file": "files/customer_story/customer-story-5.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/customer-story-5.jpg"
+        }, {
+          "label": "Cas client standard",
+          "file": "files/customer_story/cas-client-standard.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/cas-client-standard.jpg"
         }]
     }, {
         "id": "contact",
