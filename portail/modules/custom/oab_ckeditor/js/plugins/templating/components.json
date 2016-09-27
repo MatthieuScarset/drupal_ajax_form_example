@@ -10,6 +10,10 @@
           "label": "Contenu lié",
           "file": "files/banner/bandeau-contenu-lie.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-contenu-lie.jpg"
+        }, {
+            "label": "Téléchargement",
+            "file": "files/banner/telechargement.html.twig",
+            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"        
         }]
     }, {
         "id": "customer_story",
