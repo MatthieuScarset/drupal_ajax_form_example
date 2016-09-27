@@ -51,7 +51,7 @@ p.callToAction.highlight {
     margin-bottom: 3rem;
 }
 .related_content article{
-    min-height: 430px;
+    /*min-height: 430px;*/
     margin-bottom: 2rem;
 }
 .related_content article,
@@ -119,24 +119,30 @@ p.modulecontent {
     line-height: 1.2em !important;
 }
 
-.module_telechargement p.titre {
+.module_telechargement p.titre,
+.module_related_content p.titre
+{
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
-    font-size: 1.25em;
-    line-height: 1.2em !important;
+    font-size: 2rem;
+    line-height: 2.4rem !important;
+}
+
+.module_related_content p.titre{
+    margin-bottom: 2rem !important;
 }
 
 p.intro {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
     font-size: 1.4rem;
-    line-height: 1em !important;
+    line-height: 1.6rem !important;
     margin-top:4rem;
 }
 
-.module_telechargement p.intro {
+.module_telechargement p.intro,
+.module_related_content p.intro{
     margin-top: 0 !important;
-    line-height: 1.1428em !important;
 }
 
 p.date {

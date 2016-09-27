@@ -471,3 +471,10 @@ body {
 .contact_blockquote {
     font-size:1.2em ;
 }
+
+.module_related_content .image article{
+    min-height: 130px;
+}
+.module_related_content .image {
+    margin-bottom: 20px;
+}
