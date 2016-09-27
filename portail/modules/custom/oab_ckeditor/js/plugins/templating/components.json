@@ -10,6 +10,10 @@
           "label": "Contenu lié",
           "file": "files/banner/bandeau-contenu-lie.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-contenu-lie.jpg"
+        }, {
+          "label": "essentiel V2",
+          "file": "files/banner/bandeau-essentiel.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-essentiel.jpg"
         }]
     }, {
         "id": "customer_story",
