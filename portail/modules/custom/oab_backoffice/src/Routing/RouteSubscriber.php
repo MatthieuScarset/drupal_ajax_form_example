@@ -23,6 +23,8 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setDefault('_controller', '\Drupal\oab_backoffice\Controller\NodeRevisionController::revisionOverview');
     }
 
-
+    if ($route = $collection->get('entity_embed.dialog')) {
+      $route->setDefault('_form', '\Drupal\oab_backoffice\Form\EntityEmbedDialogOab');
+    }
   }
 }
