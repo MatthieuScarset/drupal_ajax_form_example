@@ -108,14 +108,14 @@ p.auteur {
 p.modulecontent {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
-    font-size: 1.25em;
-    line-height: 1.5em;
+    font-size: 2rem;
+    line-height: 2.4rem;
 }
 
 p.intro {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
-    font-size: 0.875em;
+    font-size: 1.4rem;
     line-height: 1em !important;
     margin-top:4rem;
 }
