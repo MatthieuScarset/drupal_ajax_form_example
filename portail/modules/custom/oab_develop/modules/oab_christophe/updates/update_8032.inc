@@ -761,20 +761,6 @@ $config->setData(array (
             ),
           'type' => 'oab_text_default',
         ),
-      'field_image' =>
-        array (
-          'type' => 'entity_reference_entity_view',
-          'weight' => 2,
-          'label' => 'hidden',
-          'settings' =>
-            array (
-              'link' => true,
-              'view_mode' => 'default',
-            ),
-          'third_party_settings' =>
-            array (
-            ),
-        ),
       'field_magazine' =>
         array (
           'type' => 'entity_reference_entity_view',
@@ -828,6 +814,7 @@ $config->setData(array (
       'field_document_type' => true,
       'field_end_date' => true,
       'field_file' => true,
+      'field_image' => true,
       'field_industry' => true,
       'field_owner' => true,
       'field_partner' => true,
@@ -916,20 +903,6 @@ $config->setData(array (
             ),
           'type' => 'oab_text_default',
         ),
-      'field_image' =>
-        array (
-          'type' => 'entity_reference_entity_view',
-          'weight' => 2,
-          'label' => 'hidden',
-          'settings' =>
-            array (
-              'link' => true,
-              'view_mode' => 'default',
-            ),
-          'third_party_settings' =>
-            array (
-            ),
-        ),
       'field_subtitle' =>
         array (
           'weight' => 1,
@@ -954,6 +927,7 @@ $config->setData(array (
       'field_document_type' => true,
       'field_end_date' => true,
       'field_file' => true,
+      'field_image' => true,
       'field_industry' => true,
       'field_magazine' => true,
       'field_owner' => true,
