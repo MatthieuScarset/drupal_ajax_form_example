@@ -233,3 +233,10 @@ function oab_christophe_update_8030() {
 function oab_christophe_update_8031() {
   include_once("updates/update_8031.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2594 - modèles de rendu container
+ */
+function oab_christophe_update_8032() {
+  include_once("updates/update_8032.inc");
+}
