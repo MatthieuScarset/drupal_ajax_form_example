@@ -59,6 +59,14 @@
           "label": "Cas client standard",
           "file": "files/customer_story/cas-client-standard.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/cas-client-standard.jpg"
+        }, {
+          "label": "Regards Croisés 2",
+          "file": "files/customer_story/regards-croises-2.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/regards-croises-2.png"
+        }, {
+          "label": "Essentiel",
+          "file": "files/customer_story/essentiel.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/essentiel.jpg"
         }]
     }, {
         "id": "contact",
