@@ -340,8 +340,10 @@ a.morelink {
 }
 
 a.contact_link {
-    font-size: 1.2em;
+    font-size: 2rem;
     text-decoration: none !important;
+    font-weight: bold;
+    margin-left: 1rem;
 }
 
 /* Guidelines for the links :
