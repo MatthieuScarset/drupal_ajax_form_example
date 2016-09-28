@@ -247,6 +247,13 @@ function theme_boosted_preprocess_node(&$variables) {
       }
     }
     $variables['attributes']['class'][] = 'node';
+
+    if (isset($variables['elements']['#view_mode'])){
+      $full_node_mode = ['blog_post', 'magazine', 'magazine_interview', 'press_release', 'press_kit', 'case_study', 'simple_page', 'document'];
+      if (in_array($variables['elements']['#view_mode'], $full_node_mode)){
+        $variables['attributes']['class'][] = 'full';
+      }
+    }
   }
 }
 
