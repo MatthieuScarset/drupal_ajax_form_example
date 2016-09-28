@@ -212,7 +212,6 @@ function theme_boosted_preprocess_node(&$variables) {
             break;
           case 'magazine' :
           case 'magazine_interview' :
-            kint($variables['content']['field_magazine']);
             for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++) {
               if ($i > 0) {
                 unset($variables['content']['field_magazine'][$i]);
