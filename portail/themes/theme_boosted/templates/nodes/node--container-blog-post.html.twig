@@ -75,7 +75,7 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
-{% if view_mode == 'full' %}
+{% if view_mode == 'blog_post' %}
 {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 <div class="content_info">
     <span class="date">{{ createdDate }}</span> {{ content.profil_name }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
@@ -86,7 +86,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name', 'field_magazine', 'field_document_type', 'field_topic') }}
+        {{ content|without('field_blog', 'profil_name') }}
     </div>
 
 </article>

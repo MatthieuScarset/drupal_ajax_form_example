@@ -161,24 +161,6 @@ function theme_boosted_preprocess_node(&$variables) {
       }
       $variables['zones'] = $zones;
 
-      // gestion du champ image
-      // en mode "full"
-      if (isset($variables['content']['field_image'])
-        && isset($variables['view_mode'])
-        && $variables['view_mode'] == 'full'
-        && isset($rendering_model_type)
-      ) {
-        if (in_array($rendering_model_type, array(
-          'blog_post',
-          'magazine',
-          'press_release',
-          'magazine_interview',
-          'press_kit'
-        ))) {
-          unset($variables['content']['field_image']);
-        }
-      }
-
       // Modification de l'object en fonction du type de modèle
       if (isset($rendering_model_type)) {
         switch ($rendering_model_type) {
@@ -204,6 +186,7 @@ function theme_boosted_preprocess_node(&$variables) {
             }
             break;
           case 'press_release' :
+          case 'press_kit' :
             if (isset($variables['content']['field_file'][0]['#media'])
               && is_object($variables['content']['field_file'][0]['#media'])
             ) {
@@ -228,6 +211,7 @@ function theme_boosted_preprocess_node(&$variables) {
             }
             break;
           case 'magazine' :
+          case 'magazine_interview' :
             for ($i = 0; $i <= count($variables['content']['field_magazine']); $i++) {
               if ($i > 0) {
                 unset($variables['content']['field_magazine'][$i]);
@@ -262,6 +246,13 @@ function theme_boosted_preprocess_node(&$variables) {
       }
     }
     $variables['attributes']['class'][] = 'node';
+
+    if (isset($variables['elements']['#view_mode'])){
+      $full_node_mode = ['blog_post', 'magazine', 'magazine_interview', 'press_release', 'press_kit', 'case_study', 'simple_page', 'document'];
+      if (in_array($variables['elements']['#view_mode'], $full_node_mode)){
+        $variables['attributes']['class'][] = 'full';
+      }
+    }
   }
 }
 

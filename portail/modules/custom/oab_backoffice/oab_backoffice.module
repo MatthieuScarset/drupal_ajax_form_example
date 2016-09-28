@@ -165,6 +165,16 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       'simple_page' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file'],
       'case_study' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file'],
     ];
+    $required_fields = [
+      'blog_post' => ['field_blog'],
+      'magazine' => ['field_magazine'],
+      'magazine_interview' => ['field_magazine'],
+      'press_release' => ['field_file'],
+      'press_kit' => ['field_file'],
+      'document' => ['field_document_type'],
+      'simple_page' => [],
+      'case_study' => [],
+    ];
     $current_container_type = \Drupal\taxonomy\Entity\Term::load($current_rendering_model);
     if (is_object($current_container_type)){
       $taxonomie_machine_name = $current_container_type->get('field_machine_name')->value;
@@ -173,6 +183,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         foreach ($hide_field_container[$taxonomie_machine_name] AS $field) {
           if (isset($form[$field])) {
             $form[$field]['#access'] = FALSE;
+          }
+        }
+      }
+
+      if (isset($required_fields[$taxonomie_machine_name])) {
+        foreach ($required_fields[$taxonomie_machine_name] AS $field) {
+          if (isset($form[$field])) {
+            $form[$field]['widget']['#required'] = TRUE;
           }
         }
       }
@@ -368,6 +386,23 @@ function oab_backoffice_entity_view_mode_alter(&$view_mode, Drupal\Core\Entity\E
 
       if(isset($rendering_model_type)) {
         switch ($rendering_model_type) {
+          case 'blog_post' :
+            $view_mode = 'blog_post';
+            break;
+          case 'magazine' :
+          case 'magazine_interview' :
+            $view_mode = 'magazine';
+            break;
+          case 'press_release' :
+          case 'press_kit' :
+            $view_mode = 'press_release';
+            break;
+          case 'case_study' :
+            $view_mode = 'case_study';
+            break;
+          case 'simple_page' :
+            $view_mode = 'simple_page';
+            break;
           case 'document' :
             $view_mode = 'document';
             break;
