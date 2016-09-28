@@ -80,6 +80,14 @@
           "label": "Call to Action 2",
           "file": "files/contact/call-to-action-2.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-2.png"
+        }, {
+          "label": "Contactez-nous",
+          "file": "files/contact/contactez-nous.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/contactez-nous.png"
+        }, {
+          "label": "Suivez-nous",
+          "file": "files/contact/suivez-nous.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/suivez-nous.png"
         }]
       }, {
         "id": "tools",
