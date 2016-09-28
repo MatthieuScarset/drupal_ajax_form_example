@@ -1,6 +1,108 @@
 <?php
 
 $config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('core.entity_view_mode.node.blog_post');
+$config->setData(array (
+  'uuid' => '6dc752b4-4035-4adc-82da-b013ffd0a945',
+  'langcode' => 'fr',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'module' =>
+        array (
+          0 => 'node',
+        ),
+    ),
+  'id' => 'node.blog_post',
+  'label' => 'Blog post',
+  'targetEntityType' => 'node',
+  'cache' => true,
+));
+$config->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('core.entity_view_mode.node.case_study');
+$config->setData(array (
+  'uuid' => '88a3d3a1-a9b4-4beb-8c49-a88530b00f05',
+  'langcode' => 'fr',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'module' =>
+        array (
+          0 => 'node',
+        ),
+    ),
+  'id' => 'node.case_study',
+  'label' => 'Case study',
+  'targetEntityType' => 'node',
+  'cache' => true,
+));
+$config->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('core.entity_view_mode.node.document');
+$config->setData(array (
+  'uuid' => 'f48bf3af-6301-4041-9d3f-af8fe988f90d',
+  'langcode' => 'fr',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'module' =>
+        array (
+          0 => 'node',
+        ),
+    ),
+  'id' => 'node.document',
+  'label' => 'Document',
+  'targetEntityType' => 'node',
+  'cache' => true,
+));
+$config->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('core.entity_view_mode.node.magazine');
+$config->setData(array (
+  'uuid' => '939868ef-2b76-4e8c-b7fa-09ee1da53799',
+  'langcode' => 'fr',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'module' =>
+        array (
+          0 => 'node',
+        ),
+    ),
+  'id' => 'node.magazine',
+  'label' => 'Magazine',
+  'targetEntityType' => 'node',
+  'cache' => true,
+));
+$config->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config = $config_factory->getEditable('core.entity_view_mode.node.press_release');
+$config->setData(array (
+  'uuid' => '64024482-e7fd-4e3d-8e37-ed64bb2c4c2c',
+  'langcode' => 'fr',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'module' =>
+        array (
+          0 => 'node',
+        ),
+    ),
+  'id' => 'node.press_release',
+  'label' => 'Press release',
+  'targetEntityType' => 'node',
+  'cache' => true,
+));
+$config->save(TRUE);
+
+
+
+$config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('core.entity_view_display.node.container.blog_post');
 $config->setData(array (
   'uuid' => 'b9e6652e-e021-43fe-bae3-a63136f4331c',
