@@ -161,24 +161,6 @@ function theme_boosted_preprocess_node(&$variables) {
       }
       $variables['zones'] = $zones;
 
-      // gestion du champ image
-      // en mode "full"
-      if (isset($variables['content']['field_image'])
-        && isset($variables['view_mode'])
-        && $variables['view_mode'] == 'full'
-        && isset($rendering_model_type)
-      ) {
-        if (in_array($rendering_model_type, array(
-          'blog_post',
-          'magazine',
-          'press_release',
-          'magazine_interview',
-          'press_kit'
-        ))) {
-          unset($variables['content']['field_image']);
-        }
-      }
-
       // Modification de l'object en fonction du type de modèle
       if (isset($rendering_model_type)) {
         switch ($rendering_model_type) {
