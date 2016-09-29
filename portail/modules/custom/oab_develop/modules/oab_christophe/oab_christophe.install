@@ -240,3 +240,10 @@ function oab_christophe_update_8031() {
 function oab_christophe_update_8032() {
   include_once("updates/update_8032.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2564 - variable traductible pour la page d'accueil
+ */
+function oab_christophe_update_8033() {
+  include_once("updates/update_8033.inc");
+}
