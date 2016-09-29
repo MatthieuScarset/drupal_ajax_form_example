@@ -468,6 +468,9 @@ body {
     margin-left: 5rem;
 
 }
+.contact_icons {
+   margin-top: 2.2rem;
+}
 .contact_margin i:first-child{
     margin-left: 0;
 }
@@ -492,6 +495,7 @@ body {
 @media(max-width: 480px) {
     .contact_blockquote {
         border-left: none;
+        padding-left: 0;
     }
 
     .pull-right{
@@ -501,7 +505,7 @@ body {
 
     .contact_chevron {
         font-size: 1.6rem;
-        margin-top: 1.2rem;
+        margin-top: 1rem;
     }
 
     .contact_margin {
@@ -510,7 +514,7 @@ body {
     }
 
     .contact_icons {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .contact_button{
