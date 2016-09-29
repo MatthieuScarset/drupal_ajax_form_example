@@ -295,28 +295,28 @@ function theme_obs_backoffice_preprocess_page_title(&$variables) {
 
         if (isset($field_rendering_model[0]['target_id']) && !empty($field_rendering_model[0]['target_id'])) {
           $tid = $field_rendering_model[0]['target_id'];
-        }
-
-        // Load the label of the bundle
-        $bundle_label = \Drupal::entityTypeManager()
-            ->getStorage('taxonomy_term')
-            ->load($tid)
-            ->label();
-
-        /* solution utilisant les arguments dans le PATH*/
-        $path_args = explode('/', \Drupal::request()->getPathInfo());
-
-        end($path_args);
-        $content_mode = $path_args[key($path_args)];
-
-        if ($content_mode == 'edit') {
-          // This is a node in Edition
-          $variables['title'] = t('<em>Edit @type</em> @title', array('@type' => $bundle_label, '@title' => $title));
-
-        } else if ($content_mode == 'delete') {
-          // This is a node in delete mode
 
 
+          // Load the label of the bundle
+          $bundle_label = \Drupal::entityTypeManager()
+              ->getStorage('taxonomy_term')
+              ->load($tid)
+              ->label();
+
+          /* solution utilisant les arguments dans le PATH*/
+          $path_args = explode('/', \Drupal::request()->getPathInfo());
+
+          end($path_args);
+          $content_mode = $path_args[key($path_args)];
+
+          if ($content_mode == 'edit') {
+            // This is a node in Edition
+            $variables['title'] = t('<em>Edit @type</em> @title', array('@type' => $bundle_label, '@title' => $title));
+
+          } else if ($content_mode == 'delete') {
+            // This is a node in delete mode
+
+          }
         }
       }
     }

@@ -417,3 +417,8 @@ function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface
   $menuLinkContentForm = $buildInfo['callback_object'];
   return $menuLinkContentForm->getEntity();
 }
+
+// ajout du type de rendu des champs "path" pour la traduction
+function oab_backoffice_config_schema_info_alter(&$definitions) {
+  $definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
+}
