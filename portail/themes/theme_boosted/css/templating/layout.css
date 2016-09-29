@@ -468,14 +468,26 @@ body {
     margin-left: 5rem;
 
 }
+.contact_margin i:first-child{
+    margin-left: 0;
+}
 .contact_blockquote {
-    font-size:1.2em ;
+    font-size: 1.6rem ;
+    line-height: 2rem;
+    border-left: 1px solid #fff;
 }
 .contact_blockquote a{
     text-decoration: none !important;
 }
 .contact_button {
     margin-top:20px;
+    width: 147px;
+    font-size: 1.6rem;
+    line-height: 1.4rem;
+    min-height: 40px;
+    text-align: center;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
 }
 @media(max-width: 480px) {
     .contact_blockquote {
@@ -484,6 +496,12 @@ body {
 
     .pull-right{
         margin-right: 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    .contact_chevron {
+        font-size: 1.6rem;
+        margin-top: 1.2rem;
     }
 
     .contact_margin {
@@ -498,6 +516,12 @@ body {
     .contact_button{
         margin-bottom: 20px;
         margin-top: 0px;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+    }
+
+    a.contact_link {
+        font-size: 1.6rem;
     }
 }
 
