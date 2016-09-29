@@ -67,6 +67,10 @@
           "label": "Essentiel",
           "file": "files/customer_story/essentiel.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/essentiel.jpg"
+        }, {
+          "label": "Keep your business",
+          "file": "files/customer_story/keep-your-business.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/keep-your-business.png"
         }]
     }, {
         "id": "contact",
