@@ -151,7 +151,6 @@ article.node.document .document_field_image{
 }
 
 .verbatim {
-    min-height: 200px;
     padding: 20px;
     background-color: #595959;
     line-height: 30px;
