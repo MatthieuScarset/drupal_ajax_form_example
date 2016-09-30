@@ -544,3 +544,7 @@ body.cke_editable.cke_editable_themed {
 .center {
     text-align: center;
 }
+
+.borderWhite {
+    border-right: solid 1px #fff;
+}
