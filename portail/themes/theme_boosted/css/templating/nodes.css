@@ -74,7 +74,6 @@ article.node.document > .content{
 .node.profil-redacteur.teaser img{
     width: 100%;
     height: 100%;
-    max-width: 160px;
 }
 .node.profil-redacteur.teaser > .content{
     padding: 0;
@@ -165,4 +164,8 @@ article.node.document .document_field_image{
     font-size: 0.875em;
     font-weight: bold;
     margin-top: 24px;
+}
+
+.image_blogger {
+    max-width:160px;
 }
