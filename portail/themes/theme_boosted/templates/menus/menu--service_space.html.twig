@@ -31,7 +31,7 @@
         <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
         <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}">{{ item.title }} <span class="caret"></span></a>
       {% else %}
-          <li><a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
+          <li>{{ link(item.title, item.url, {'target': link_target}) }}
       {% endif %}
       {% if item.below %}
         {{ menus.menu_links(item.below, attributes.removeClass('nav', 'navbar-nav', 'navbar-right'), menu_level + 1) }}
