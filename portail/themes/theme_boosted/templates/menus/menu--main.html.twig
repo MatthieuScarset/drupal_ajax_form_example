@@ -42,7 +42,7 @@
             <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}">{{ item.title }} <span class="caret"></span></a>
           {% else %}
 
-         <li><a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
+         <li>{{ link(item.title, item.url, {'target': link_target}) }}
           {% endif %}
 
           {% if item.below %}
@@ -84,7 +84,7 @@
                        <ul id="sous-items">
                            {% for sous_item in item.below %}
                                <li>
-                                   <a href="{{ sous_item.url }}" target="{{ link_target }}">{{ sous_item.title }}</a>
+                                   {{ link(sous_item.title, sous_item.url, {'target': link_target}) }}
                                </li>
                            {% endfor %}
 

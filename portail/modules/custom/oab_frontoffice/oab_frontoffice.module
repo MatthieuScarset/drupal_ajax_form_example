@@ -27,19 +27,6 @@ function oab_frontoffice_preprocess_menu(&$variables) {
     foreach ($variables['items'] as &$item) {
       $menuLinkEntity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
       if (!empty($menuLinkEntity)) {
-        $menu_uri = $menuLinkEntity->link->first()->uri;
-
-        // gestion des liens <front>
-        $languages = \Drupal::languageManager()->getLanguages();
-        foreach($languages AS $key => $value){
-          $langcode = $value->getId();
-          if ($menu_uri === 'internal:/<front_' . $langcode . '>'){
-            \Drupal::languageManager()->setConfigOverrideLanguage(\Drupal::languageManager()->getLanguage($langcode));
-            $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array('language' => $value));
-            $item['url'] = $new_url;
-          }
-        }
-
         if (!empty($menuLinkEntity->link->first()->options['target'])) {
           $item['url']->setOption('target', $menuLinkEntity->link->first()->options['target']);
         }
@@ -55,4 +42,27 @@ function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menuLinkCon
     $entity = \Drupal::entityManager()->loadEntityByUuid($entity_type, $uuid);
   }
   return $entity;
+}
+
+function oab_frontoffice_link_alter(&$variables){
+  $languages = \Drupal::languageManager()->getLanguages();
+
+  if (isset($variables['url'])){
+    try{
+      $uri = $variables['url']->getUri();
+
+      foreach($languages AS $key => $value) {
+        $langcode = $value->getId();
+
+        if ($uri === 'base:<front_' . $langcode . '>'){
+          $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
+          $variables['options']['language'] = $value;
+          $variables['url'] = $new_url;
+        }
+      }
+    }
+    catch(\UnexpectedValueException $e){
+
+    }
+  }
 }
