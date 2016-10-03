@@ -58,6 +58,13 @@
         float: left !important;
     }
 }
+@media (max-width: 479px) {
+    .padding10Right,
+    .padding10Left,
+    .padding10Horizontal{
+        padding: 0 !important;
+    }
+}
 
 .image img{
     width: 100%;
