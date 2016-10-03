@@ -132,6 +132,10 @@ p.modulecontent {
     margin-bottom: 2rem !important;
 }
 
+
+.module_related_content .field--name-field-image{
+    max-height: 185px;
+}
 p.intro {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;

@@ -38,11 +38,11 @@ article.node.document > .content{
     font-size: 1.6rem;
 }
 
-.field--type-oab-text > div > table{
+.field--type-oab-text table{
     border : 0 !important;
 }
 
-.field--type-oab-text > div > table > tbody > tr > td {
+.field--type-oab-text table td {
     border : none;
 }
 

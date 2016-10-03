@@ -46,6 +46,12 @@
 .padding10Vertical{
     padding: 10px 0 !important;
 }
+.padding10Right {
+    padding: 0px 10px 0px 0px !important;
+}
+.padding10Left{
+    padding: 0px 0px 0px 10px !important;
+}
 @media (max-width: 990px) {
     .tabled {
         display: block !important;
