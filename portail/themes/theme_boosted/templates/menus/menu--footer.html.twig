@@ -32,7 +32,7 @@
         <div{{ attributes.addClass('col-xs-12', 'col-sm-6', 'col-md-2', 'nopadding') }}>
         <ul>
         <h2{{ item.attributes.addClass('footer_link_title') }}>
-          <a class="bg_black" href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
+            {{ link(item.title, item.url, {'target': link_target, 'class': ('bg_black')}) }}
         </h2>
       {% else %}
         <li{{ item.attributes }}>

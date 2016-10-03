@@ -42,7 +42,7 @@
             <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}">{{ item.title }} <span class="caret"></span></a>
           {% else %}
 
-         <li><a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
+         <li>{{ link(item.title, item.url, {'target': link_target}) }}
           {% endif %}
 
           {% if item.below %}
@@ -66,9 +66,9 @@
             {% for item in items %}
                 {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
                 <div class="col-sm-6 col-md-2">
-                <a href="{{ item.url }}" target="{{ link_target }}">{{ item.title }}</a>
+                    {{ link(item.title, item.url, {'target': link_target}) }}
                     <p class="text-muted">description</p>
-                <a class="btn btn-default" href="{{ item.url }}" target="{{ link_target }}">Découvrir</a>
+                    {{ link('Découvrir', item.url, {'target': link_target, 'class': ('btn btn-default')}) }}
                 </div>
             {% endfor %}
         </div>
