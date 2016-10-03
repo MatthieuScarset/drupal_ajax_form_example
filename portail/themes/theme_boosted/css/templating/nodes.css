@@ -38,6 +38,14 @@ article.node.document > .content{
     font-size: 1.6rem;
 }
 
+.field--type-oab-text > div > table{
+    border : 0 !important;
+}
+
+.field--type-oab-text > div > table > tbody > tr > td {
+    border : none;
+}
+
 .field--type-oab-text p{
     text-align: left !important;
 }
@@ -116,6 +124,7 @@ article.node.full .obs_introductory_text,
 article.node.document .obs_introductory_text{
     font-weight: bold;
 }
+
 
 article.node.full > .nowidthlimit,
 article.node.document > .nowidthlimit {
