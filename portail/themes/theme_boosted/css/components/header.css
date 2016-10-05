@@ -323,6 +323,10 @@
     padding-top: 6rem;
 }
 
-.displayinline {
-    display: inline !important;
+.sticky-module {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    border-color: grey;
 }
