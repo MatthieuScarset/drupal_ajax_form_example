@@ -18,6 +18,7 @@
 }
 #navtop .navbar-nav{
     margin: 0;
+    margin-bottom: 0.5rem;
 }
 
 #navtop .navbar-right .navbar-nav > li > a{
@@ -50,7 +51,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-control_centre, .icon-email
+.icon-email
 { 
   font-family: 'icon-orange' !important; 
   /* use !important to prevent issues with browser extensions that change fonts */
@@ -112,7 +113,7 @@
   border-bottom: 1px solid #E1E1E1;
   padding: 8px 0px 0px 0px;
   border-color: black;
-  border-top: 1px solid #fff;
+  border-top: 1px solid grey;
 }
 
 
@@ -137,7 +138,8 @@
 
 #block-topnavbaren {
     color: white;
-    margin-top: 20px;
+    margin-top: 2rem !important;
+    display: inline;
 }
 
 .menu .nav {
@@ -300,4 +302,27 @@
 
 #block-righticonblock {
     margin-top: -10px;
+}
+.li_link{
+    font-family: HelvNeueOrange,Helvetica,Arial,sans-serif;
+}
+
+.link_icon {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.link_icon_items a {
+    display: inline !important;
+    padding-left: 1rem !important;
+}
+
+.link_icon_items {
+    padding-left: 3rem;
+    padding-top: 6rem;
+}
+
+.displayinline {
+    display: inline !important;
 }

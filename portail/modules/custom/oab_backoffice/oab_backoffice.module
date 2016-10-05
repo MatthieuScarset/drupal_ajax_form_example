@@ -271,6 +271,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
     $linkOptions = $menuLinkEntity->link->first()->options;
     $linkTarget = !empty($linkOptions['target']) ? true : false;
+    $linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
 
     $form['link_target'] = array(
       '#type' => 'checkbox',
@@ -280,6 +281,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       '#weight' => -2
     );
 
+    $form['link_icon'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Font Awesome Icon'),
+        '#description' => t('type your font awesome icon code "fa-xxx"'),
+        '#default_value' => $linkIcon,
+        '#weight' => -3
+    );
+
     $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
   }
 }
@@ -287,10 +296,16 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
   $values = $form_state->getValues();
   $link_target = array();
+  $link_icon = array();
 
   if (isset($values['link_target'])
     && !empty($values['link_target'])) {
     $link_target = trim($values['link_target']);
+  }
+
+  if (isset($values['link_icon'])
+      && !empty($values['link_icon'])) {
+    $link_icon = trim($values['link_icon']);
   }
 
   $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
@@ -305,6 +320,17 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
   }
   else {
     $options['target'] = $link_target ? '_blank' : '_self' ;
+    $changed = TRUE;
+  }
+
+  if (empty($link_icon)) {
+    if (!empty($options['icon'])) {
+      unset($options['icon']);
+      $changed = TRUE;
+    }
+  }
+  else {
+    $options['icon'] = $link_icon ;
     $changed = TRUE;
   }
 
