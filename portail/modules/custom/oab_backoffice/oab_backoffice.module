@@ -225,7 +225,9 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   }
 
   //pour la médiathèque : sélection des images dans la liste
-  if($form_id == 'entity_browser_browse_medias_iframe_form' || $form_id =='entity_browser_browse_media_modal_form')
+  if($form_id == 'entity_browser_browse_medias_iframe_form'
+    || $form_id =='entity_browser_browse_media_modal_form'
+    || $form_id =='entity_browser_browser_file_modal_form')
   {
     $form['#attached']['library'][] = 'oab_backoffice/mediatheque';
   }
