@@ -7,6 +7,16 @@
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
     text-align: center;
+    width: 14%;
+    padding:  10px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #ccc;
+}
+.view-display-id-entity_browser_media .views-col{
+    min-height: 150px;
+}
+.view-display-id-entity_browser_file .views-col{
+    min-height: 100px;
 }
 
 .views-col.checked {
@@ -18,9 +28,14 @@
     border: 2px solid green;
 }
 
-.views-col .views-field-entity-browser-select,
-.views-col .views-field-name{
+.views-col .views-field-entity-browser-select{
     display: none;
+}
+.views-col .views-field-name{
+    overflow: hidden;
+}
+.views-col i.fa{
+    display: block;
 }
 
 #views-exposed-form-medias-entity-browser-entity-browser-1.form--inline .form-actions {

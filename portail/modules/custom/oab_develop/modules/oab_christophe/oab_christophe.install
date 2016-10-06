@@ -247,3 +247,10 @@ function oab_christophe_update_8032() {
 function oab_christophe_update_8033() {
   include_once("updates/update_8033.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2504 - transformation du rendu du champ "field_file"
+ */
+function oab_christophe_update_8034() {
+  include_once("updates/update_8034.inc");
+}
