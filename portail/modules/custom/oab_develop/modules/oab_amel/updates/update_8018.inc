@@ -4,7 +4,7 @@ use Drupal\Core\Database\Database;
 
 // création du lien Contactez-nous du menu top-right-navbar-fr
 $menu_links = array(
-array('langcode' => 'fr', 'title' => 'Contactez-nous', 'menu_name' => 'top-right-navbar-fr', 'link' => '/fr/contact/any_request', 'weight' => 0),
+array('langcode' => 'fr', 'title' => 'Contactez-nous', 'menu_name' => 'top-right-navbar-fr', 'link' => 'internal:/contact/any_request', 'weight' => 0),
 );
 
 foreach ($menu_links AS $menu_link){
@@ -39,7 +39,7 @@ $config->delete();
 
 // création du lien Contactez-nous du menu service-space (top right navbar en)
 $menu_links = array(
-    array('langcode' => 'en', 'title' => 'Contact us', 'menu_name' => 'service-space', 'link' => '/en/contact/any_request', 'weight' => 0),
+    array('langcode' => 'en', 'title' => 'Contact us', 'menu_name' => 'service-space', 'link' => 'internal:/contact/any_request', 'weight' => 0),
 );
 
 foreach ($menu_links AS $menu_link){
