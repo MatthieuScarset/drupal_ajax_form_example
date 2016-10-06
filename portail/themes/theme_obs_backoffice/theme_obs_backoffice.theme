@@ -202,15 +202,19 @@ function theme_obs_backoffice_form_node_form_alter(&$form, FormStateInterface $f
 
 
 
-  // Modification du message de confirmation de modification de contenu
-  if($form['#form_id'] == 'node_container_edit_form') {
-    foreach (array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = 'theme_obs_backoffice_node_form_submit';
-      }
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'theme_obs_backoffice_node_form_submit';
     }
   }
+}
 
+function theme_obs_backoffice_form_node_container_delete_form_alter(&$form, FormStateInterface $form_state) {
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'theme_obs_backoffice_node_form_submit';
+    }
+  }
 }
 
 function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
@@ -223,28 +227,33 @@ function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
     $tid = $field_rendering_model[0]['target_id'];
     // Load the label of the model
     $type = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->load($tid)
-        ->label();
+      ->getStorage('taxonomy_term')
+      ->load($tid)
+      ->label();
   }
   else { // recuperer le Tid dans les autres cas, en attendant, on met juste le type container
     $type = \Drupal::entityTypeManager()
-        ->getStorage('node_type')
-        ->load($node->bundle())
-        ->label();
+      ->getStorage('node_type')
+      ->load($node->bundle())
+      ->label();
   }
 
   // Unset previous set messages.
   drupal_get_messages('status');
 
   switch ($form['#form_id']) {
+    case 'node_container_form':
+      $t_args = array('@type' => $type, '%title' => $title);
+      drupal_set_message(t('@type %title has been created.', $t_args));
+      break;
     case 'node_container_edit_form':
       $t_args = array('@type' => $type, '%title' => $title);
       drupal_set_message(t('@type %title has been updated.', $t_args));
-        break;
-    // autres cas à prévoir : create/delete
-
-    //drupal_set_message(t('@type %title has been created.', $t_args));
+      break;
+    case 'node_container_delete_form':
+      $t_args = array('@type' => $type, '%title' => $title);
+      drupal_set_message(t('The @type %title has been deleted.', $t_args));
+      break;
   }
 }
 
