@@ -26,14 +26,6 @@ article.node.document > .content{
    margin-top: 20px;
 }
 
-.obs_blog_title_h3{
-    font-size: 1.5em;
-    font-weight: bold;
-    line-height: 1.5em;
-    margin-top: 35px;
-    margin-bottom: 5px;
-}
-
 .field--type-oab-text{
     font-size: 1.6rem;
 }
@@ -118,11 +110,6 @@ article.node.document .field-comments label{
 article.node.full .field-comments .comment-form > .container,
 article.node.document .field-comments .comment-form > .container{
     margin-bottom: 2rem;
-}
-
-article.node.full .obs_introductory_text,
-article.node.document .obs_introductory_text{
-    font-weight: bold;
 }
 
 

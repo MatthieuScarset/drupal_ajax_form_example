@@ -439,6 +439,7 @@ body {
 }
 body.cke_editable.cke_editable_themed {
     vertical-align: top !important;
+    font-size: 1.6rem;
 }
 
 .row.nomargin {
