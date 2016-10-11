@@ -2,6 +2,8 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'field_customer_story', 'field_industry', 'field_magazine', 'field_partner', 'field_solution')));
@@ -11,8 +13,20 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'fiel
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
-  //$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  //$languages = \Drupal::languageManager()->getLanguages();
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $languages = \Drupal::languageManager()->getLanguages();
+
+  $edit_form = false;
+
+  if (preg_match('@node_(.*)_form@', $form_id)){
+    $current_user_language = Drupal::currentUser()->getPreferredLangcode();
+    $edit_form = true;
+  }
+
+  if (preg_match('@node_(.*)_edit_form@', $form_id)){
+    $current_user_language = $current_language;
+    $edit_form = true;
+  }
 
   // gestion de la taxonomie
   // affichage de la langue
@@ -26,12 +40,12 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
             $value .= ' (' . strtoupper($term->language()->getId()) . ')';
 
-            /*$term_language = $term->language()->getId();
-            if ($term_language !== $current_language
+            $term_language = $term->language()->getId();
+            if ($term_language !== $current_user_language
             && isset($languages[$term_language])
             && $edit_form){
               unset($form[$field]['widget']['#options'][$key]);
-            }*/
+            }
           }
         }
       }
