@@ -116,3 +116,18 @@ function oab_stephanie_update_8014() {
 function oab_stephanie_update_8015() {
   include_once("updates/update_8015.inc");
 }
+
+
+/**
+ * Creation de la taxo Section + les termes FR et EN
+ */
+function oab_stephanie_update_8016() {
+  include_once("updates/update_8016.inc");
+}
+
+/**
+ * Creation du champ Section sur le type Container
+ */
+function oab_stephanie_update_8017() {
+  include_once("updates/update_8017.inc");
+}
