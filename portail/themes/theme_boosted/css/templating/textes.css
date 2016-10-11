@@ -530,3 +530,14 @@ a.contact_link {
 .banner-essentiel a.btn-primary:focus{
     text-decoration: underline !important;
 }
+
+p.intertitre {
+    font-size: 2.4rem;
+    line-height: 2.6rem;
+    font-weight: 700;
+}
+p.contenu {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    font-weight: 400;
+}

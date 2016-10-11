@@ -8,7 +8,6 @@
 
 .path-node h1.page-header{
     margin-bottom: 0;
-    max-width: 850px;
     border: 0 none;
 }
 
@@ -19,7 +18,6 @@ article.node.document{
 article.node.full > .content,
 article.node.document > .content{
     padding: 0;
-    max-width: 850px;
 }
 
 article.node.document > .content{
@@ -164,4 +162,8 @@ article.node.document .document_field_image{
 
 .image_blogger {
     max-width:160px;
+}
+
+.text-max-witdh{
+    max-width: 850px;
 }

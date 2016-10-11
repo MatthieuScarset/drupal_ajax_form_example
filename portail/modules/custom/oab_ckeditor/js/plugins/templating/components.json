@@ -101,7 +101,12 @@
           "label": "Related content",
           "file": "files/tools/related-content.html.twig",
           "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/related-content.png"
-        }]
+        },{
+          "label": "Texte à largeur limitée à 850px",
+          "file": "files/tools/text-limited.html.twig",
+          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/text-limited.png"
+        }
+        ]
 }
 
 ]
