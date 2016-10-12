@@ -243,11 +243,11 @@ function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
 
   switch ($form['#form_id']) {
     case 'node_container_form':
-      $t_args = array('@type' => $type, '%title' => $title);
+      $t_args = array('@type' => $type, '%title' => $node->link($node->label()));
       drupal_set_message(t('@type %title has been created.', $t_args));
       break;
     case 'node_container_edit_form':
-      $t_args = array('@type' => $type, '%title' => $title);
+      $t_args = array('@type' => $type, '%title' => $node->link($node->label()));
       drupal_set_message(t('@type %title has been updated.', $t_args));
       break;
     case 'node_container_delete_form':
