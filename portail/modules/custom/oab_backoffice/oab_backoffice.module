@@ -471,3 +471,15 @@ function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface
 function oab_backoffice_config_schema_info_alter(&$definitions) {
   $definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function oab_backoffice_library_info_alter(&$libraries, $extension) {
+  if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
+    $jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
+    if (isset($jira_url['jira_report_code'])){
+      $libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
+    }
+  }
+}

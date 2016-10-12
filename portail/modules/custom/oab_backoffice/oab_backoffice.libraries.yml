@@ -8,3 +8,8 @@ mediatheque:
   dependencies:
     - core/jquery
     - core/drupal
+
+jira:
+  version: VERSION
+  js:
+    https://jira-build.orangeapplicationsforbusiness.com: { type: external }
