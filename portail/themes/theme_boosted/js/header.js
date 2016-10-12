@@ -9,7 +9,7 @@
     var offset = 0;
     var top_menu = $('#main_nav');
     var contact_module = $('#contact_module');
-    if(!top_menu.length || !contact_module.length) return;
+    if(!top_menu.length && !contact_module.length) return;
     var top_menu_offset = top_menu.offset();
     var contact_module_offset = contact_module.offset();
     var menu_offset = 0;
@@ -55,7 +55,7 @@
       top_menu.addClass('navbar-fixed');
       $('.main-container').css('margin-top', top_menu.height() + 20);
       top_menu.css('top', menu_offset);
-      $('.region-pre-content .affix').css('top', top_menu.height() + menu_offset);
+      $('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
     } else {
       top_menu.removeClass('navbar-fixed');
       $('.main-container').css('margin-top', 0);
