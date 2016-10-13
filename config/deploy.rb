@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'obs'
 set :repo_url, 'git@gitlab.aql.fr:obs-com/Sources.git'
-set :stages, fetch(:stages, []).push('dev', 'recette')
+set :stages, fetch(:stages, []).push('dev', 'recette', 'recettefinale')
 set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
