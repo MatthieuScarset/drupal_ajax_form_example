@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the YAML Form module.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Render\Element;
+use Drupal\yamlform\Entity\YamlForm;
+
+module_load_include('inc', 'yamlform', 'includes/yamlform.update');
+
+/**
+ * Implements hook_uninstall().
+ */
+function yamlform_uninstall() {
+  // Issue #2793597: uninstall error You have requested a non-existent service
+  // "yamlform.email_provider".
+  // Workaround: Don't use the yamlform.email_provider in hook_uninstall().
+  // @see \Drupal\yamlform\YamlFormEmailProvider::uninstall()
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  unset($mail_plugins['yamlform']);
+  $config->set('interface', $mail_plugins)->save();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function yamlform_requirements($phase) {
+  if ($phase != 'runtime') {
+    return [];
+  }
+
+  $requirements = [];
+
+  // Check HTML email handling.
+  /** @var \Drupal\yamlform\YamlFormEmailProviderInterface $email_provider */
+  $email_provider = \Drupal::service('yamlform.email_provider');
+  $email_provider->check();
+  if ($module = $email_provider->getModuleName()) {
+    $requirements['yamlform_email'] = [
+      'title' => t('Form email: HTML support'),
+      'value' => t('Provided by the @module module', ['@module' => $module]),
+      'severity' => REQUIREMENT_OK,
+    ];
+  }
+  elseif ($mail_plugin_id = $email_provider->getModuleName()) {
+    $requirements['yamlform_email'] = [
+      'title' => t('Form email: HTML support'),
+      'value' => t('Provided by @plugin_id mail plugin', ['@plugin_id' => $mail_plugin_id]),
+      'severity' => REQUIREMENT_OK,
+    ];
+  }
+  else {
+    $requirements['yamlform_email'] = [
+      'title' => t('Form email: HTML support'),
+      'value' => t('Unable to determine email module and/o provider'),
+      'severity' => REQUIREMENT_ERROR,
+    ];
+  }
+
+  // Check third party libraries status.
+  $requirements += _yamlform_libraries_requirements();
+
+  return $requirements;
+}
+
+/******************************************************************************/
+// Helper functions
+/******************************************************************************/
+
+/**
+ * Update form setting to reflect changes in the default settings.
+ *
+ * This function can be used to apply new form settings to all existing
+ * forms.
+ *
+ * @see \Drupal\yamlform\Entity\YamlForm::setSettings
+ */
+function _yamlform_update_settings() {
+  $default_settings = YamlForm::getDefaultSettings();
+  $config_factory = \Drupal::configFactory();
+  // Update 'yamlform.yamlform.*' configuration.
+  foreach ($config_factory->listAll('yamlform.yamlform.') as $yamlform_config_name) {
+    $yamlform_config = $config_factory->getEditable($yamlform_config_name);
+
+    // Get data.
+    $data = $yamlform_config->getRawData();
+
+    // Always apply the default settings.
+    $settings = $default_settings;
+    // Now apply custom settings.
+    foreach ($data['settings'] as $name => $value) {
+      $settings[$name] = $value;
+    }
+
+    // Set settings and save data.
+    $data['settings'] = $settings;
+    \Drupal::configFactory()->getEditable($yamlform_config_name)->setData($data)->save();
+  }
+}
+
+/******************************************************************************/
+// Update hooks: YAML Form 8.x-1.0-beta19+ - 8057+
+// All previous update hooks are archived in includes/yamlform.update.inc.
+/******************************************************************************/

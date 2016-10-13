@@ -221,7 +221,7 @@ function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
 
   $node = $form_state->getFormObject()->getEntity();
   $title = $node->getTitle();
-
+  if (isset($node->field_rendering_model)){
   $field_rendering_model = $node->field_rendering_model->getValue();
   if (isset($field_rendering_model[0]['target_id']) && !empty($field_rendering_model[0]['target_id'])) {
     $tid = $field_rendering_model[0]['target_id'];
@@ -254,6 +254,7 @@ function theme_obs_backoffice_node_form_submit(&$form, &$form_state) {
       $t_args = array('@type' => $type, '%title' => $title);
       drupal_set_message(t('The @type %title has been deleted.', $t_args));
       break;
+  }
   }
 }
 
