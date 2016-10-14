@@ -78,7 +78,7 @@ view_mode ? view_mode|clean_class,
 {% if view_mode == 'press_release' %}
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {{ content.field_area }}
+        <span class="date">{{ createdDate }}</span> <span>{{ content.field_country }}-{{ content.field_city }}</span>
     </div>
 {% endif %}
 
