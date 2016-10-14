@@ -139,6 +139,7 @@ namespace :deploy do
     on roles(:all) do
      execute :mkdir, "-p #{deploy_to}/shared/saved_archives"
      execute :tar, 'cfzp', "#{deploy_to}/shared/saved_archives/#{release_timestamp}.tar.gz", "-C #{releases_path} #{release_timestamp}"
+     execute "cd #{deploy_to}/shared/saved_archives | ls -tr | head -n -5 | xargs rm"
     end
    end
    
