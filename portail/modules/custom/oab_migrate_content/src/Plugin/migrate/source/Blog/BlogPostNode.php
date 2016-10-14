@@ -93,6 +93,18 @@ class BlogPostNode extends SqlBase {
       }
     }
 
+    //Taxonomie de la Section
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('sections', 0, NULL, TRUE);
+    $sections = array();
+    foreach ($terms AS $key => $term){
+      $machine_name = $term->get('field_machine_name')->value;
+      $langCode = $term->get('langcode')->value;
+      if ($machine_name == 'realtimes' && $langCode == $row->getSourceProperty('language')){
+        $sections[] = $term->get('tid')->value;
+      }
+    }
+    $row->setSourceProperty('sections', $sections);
+
     // récupération du body
     $body_query = $this->select('field_data_body', 'b');
     $body_query->fields('b', ['body_value'])

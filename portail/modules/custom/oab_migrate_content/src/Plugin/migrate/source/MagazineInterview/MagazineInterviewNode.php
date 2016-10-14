@@ -83,6 +83,18 @@ class MagazineInterviewNode extends SqlBase {
       }
     }
 
+    //Taxonomie de la Section
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('sections', 0, NULL, TRUE);
+    $sections = array();
+    foreach ($terms AS $key => $term){
+      $machine_name = $term->get('field_machine_name')->value;
+      $langCode = $term->get('langcode')->value;
+      if ($machine_name == 'realtimes' && $langCode == $row->getSourceProperty('language')){
+        $sections[] = $term->get('tid')->value;
+      }
+    }
+    $row->setSourceProperty('sections', $sections);
+
     // création du verbatim
     $field_txt_citation_1_value = '';
     $field_txt_auteur_1_value = '';

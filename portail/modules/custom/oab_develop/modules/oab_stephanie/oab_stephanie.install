@@ -131,3 +131,10 @@ function oab_stephanie_update_8016() {
 function oab_stephanie_update_8017() {
   include_once("updates/update_8017.inc");
 }
+
+/**
+ * Modification de la configuration des migrations pour la taxo Sections
+ */
+function oab_stephanie_update_8018() {
+  include_once("updates/update_8018.inc");
+}

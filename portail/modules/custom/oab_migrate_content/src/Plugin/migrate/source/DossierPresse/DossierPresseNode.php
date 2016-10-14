@@ -84,6 +84,21 @@ class DossierPresseNode extends SqlBase {
         $row->setSourceProperty('rendering_model_id', $term->get('tid')->value);
       }
     }
+
+
+    //Taxonomie de la Section
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('sections', 0, NULL, TRUE);
+    $sections = array();
+    foreach ($terms AS $key => $term){
+      $machine_name = $term->get('field_machine_name')->value;
+      $langCode = $term->get('langcode')->value;
+      if ($machine_name == 'corporate' && $langCode == $row->getSourceProperty('language')){
+        $sections[] = $term->get('tid')->value;
+      }
+    }
+    $row->setSourceProperty('sections', $sections);
+
+    
     $row->setSourceProperty('content_field', '');
 
     // récupération du body (short description)
