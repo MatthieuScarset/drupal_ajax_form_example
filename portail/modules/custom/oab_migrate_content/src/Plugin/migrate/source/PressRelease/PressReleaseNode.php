@@ -137,10 +137,10 @@ class PressReleaseNode extends SqlBase {
 
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($city_result) && isset($city_result->field_location_value)){
-          $row->setSourceProperty('city', $city_results->field_location_value);
+          $row->setSourceProperty('city', $city_result->field_location_value);
         }
-        elseif (is_array($city_results) && isset($city_results['field_location_value'])){
-          $row->setSourceProperty('city', $city_results['field_location_value']);
+        elseif (is_array($city_result) && isset($city_result['field_location_value'])){
+          $row->setSourceProperty('city', $city_result['field_location_value']);
         }
       }
     }
