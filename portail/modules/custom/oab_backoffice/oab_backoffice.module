@@ -177,14 +177,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
     //gestion des taxonomies à afficher par type de container
     $hide_field_container = [
-      'blog_post' => ['field_magazine', 'field_area', 'field_document_type', 'field_topic', 'field_file'],
-      'magazine' => ['field_blog', 'field_area', 'field_document_type', 'field_topic', 'field_file'],
-      'magazine_interview' => ['field_blog', 'field_area', 'field_document_type', 'field_topic', 'field_file'],
+      'blog_post' => ['field_magazine', 'field_area', 'field_document_type', 'field_topic', 'field_file', 'field_country', 'field_city'],
+      'magazine' => ['field_blog', 'field_area', 'field_document_type', 'field_topic', 'field_file', 'field_country', 'field_city'],
+      'magazine_interview' => ['field_blog', 'field_area', 'field_document_type', 'field_topic', 'field_file', 'field_country', 'field_city'],
       'press_release' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile'],
-      'press_kit' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile'],
-      'document' => ['field_blog', 'field_magazine', 'field_profile'],
-      'simple_page' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file'],
-      'case_study' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file'],
+      'press_kit' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_country', 'field_city'],
+      'document' => ['field_blog', 'field_magazine', 'field_profile', 'field_country', 'field_city'],
+      'simple_page' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file', 'field_country', 'field_city'],
+      'case_study' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file', 'field_country', 'field_city'],
     ];
     $required_fields = [
       'blog_post' => ['field_blog'],
@@ -483,3 +483,4 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
     }
   }
 }
+

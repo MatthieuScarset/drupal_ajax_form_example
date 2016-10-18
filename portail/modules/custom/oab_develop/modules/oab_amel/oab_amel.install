@@ -166,3 +166,10 @@ function oab_amel_update_8021() {
 function oab_amel_update_8022() {
     include_once("updates/update_8022.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2577 - Déplacement des champs City et Country dans l'onglet général du formulaire
+ */
+function oab_amel_update_8023() {
+    include_once("updates/update_8023.inc");
+}
