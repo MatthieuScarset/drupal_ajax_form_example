@@ -62,7 +62,7 @@ class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEdi
   {
     return array(
       'LayoutManager' => array(
-        'label' => t('LayoutManager'),
+        'label' => t('Add Layout'),
         'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/layoutmanager/icons/addlayout.png',
       ),
     );

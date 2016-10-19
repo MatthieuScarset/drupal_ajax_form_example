@@ -268,3 +268,10 @@ function oab_christophe_update_8035() {
 function oab_christophe_update_8036() {
   include_once("updates/update_8036.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2613 - bouton embed video pour ckeditor
+ */
+function oab_christophe_update_8037() {
+  include_once("updates/update_8037.inc");
+}

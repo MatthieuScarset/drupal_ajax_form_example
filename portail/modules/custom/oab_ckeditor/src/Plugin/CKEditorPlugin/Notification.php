@@ -1,21 +1,20 @@
 <?php
 namespace Drupal\oab_ckeditor\Plugin\CKEditorPlugin;
 use Drupal\ckeditor\CKEditorPluginInterface;
-use Drupal\ckeditor\CKEditorPluginButtonsInterface;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\ckeditor\Annotation\CKEditorPlugin;
 use Drupal\Core\Annotation\Translation;
 use Drupal\editor\Entity\Editor;
 /**
- * Defines the "templates" plugin.
+ * Defines the "notification" plugin.
  *
  * @CKEditorPlugin(
- *   id = "templates",
- *   label = @Translation("CKEditor Templates"),
+ *   id = "notification",
+ *   label = @Translation("CKEditor notification"),
  *   module = "ckeditor"
  * )
  */
-class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface
+class Notification extends PluginBase implements CKEditorPluginInterface
 {
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
@@ -43,7 +42,7 @@ class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorP
    */
   function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templates/plugin.js';
+    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/notification/plugin.js';
     return $plugin;
   }
   /**
@@ -51,20 +50,6 @@ class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorP
    */
   public function getConfig(Editor $editor)
   {
-  	$config = array();
-  	//$config['templates_files'] = drupal_get_path('module', 'oab_ckeditor') .'/js/plugins/templates/templates/default.js';
-    return $config;
-  }
-  /**
-   * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getConfig().
-   */
-  public function getButtons()
-  {
-    return array(
-      'Templates' => array(
-        'label' => t('Templates'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templates/icons/templates.png',
-      ),
-    );
+    return array();
   }
 }

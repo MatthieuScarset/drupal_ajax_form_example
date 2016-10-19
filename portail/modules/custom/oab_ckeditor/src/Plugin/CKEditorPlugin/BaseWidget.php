@@ -15,14 +15,14 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class BaseWidget extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface
+class BaseWidget extends PluginBase implements CKEditorPluginInterface
 {
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
   function getDependencies(Editor $editor)
   {
-    return array('widget');
+    return array();
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getLibraries().
@@ -53,12 +53,5 @@ class BaseWidget extends PluginBase implements CKEditorPluginInterface, CKEditor
   {
     $config = array();
     return $config;
-  }
-  /**
-   * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getConfig().
-   */
-  public function getButtons()
-  {
-    return array();
   }
 }

@@ -7,22 +7,22 @@ use Drupal\ckeditor\Annotation\CKEditorPlugin;
 use Drupal\Core\Annotation\Translation;
 use Drupal\editor\Entity\Editor;
 /**
- * Defines the "templates" plugin.
+ * Defines the "embed" plugin.
  *
  * @CKEditorPlugin(
- *   id = "templates",
- *   label = @Translation("CKEditor Templates"),
+ *   id = "embed",
+ *   label = @Translation("CKEditor Embed"),
  *   module = "ckeditor"
  * )
  */
-class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface
+class Embed extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface
 {
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
   function getDependencies(Editor $editor)
   {
-    return array();
+    return array('embedbase', 'notification', 'notificationaggregator', 'toolbar', 'button');
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getLibraries().
@@ -43,7 +43,7 @@ class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorP
    */
   function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templates/plugin.js';
+    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/embed/plugin.js';
     return $plugin;
   }
   /**
@@ -51,19 +51,18 @@ class Templates extends PluginBase implements CKEditorPluginInterface, CKEditorP
    */
   public function getConfig(Editor $editor)
   {
-  	$config = array();
-  	//$config['templates_files'] = drupal_get_path('module', 'oab_ckeditor') .'/js/plugins/templates/templates/default.js';
-    return $config;
+    return array();
   }
+
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getConfig().
    */
   public function getButtons()
   {
     return array(
-      'Templates' => array(
-        'label' => t('Templates'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templates/icons/templates.png',
+      'Embed' => array(
+        'label' => t('Embed video'),
+        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/embed/icons/embed.png',
       ),
     );
   }
