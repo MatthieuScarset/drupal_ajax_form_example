@@ -1,0 +1,31 @@
+#oab_backbones.main_page:
+#  path: 'admin/obs_backoffice/backbones'
+#  defaults:
+#    _controller: ''
+#    _title: 'Backbones performance management'
+#  requirements:
+#    _permission: 'obs_backbones_functional_access'
+
+#oab_backbones.default_page:
+#  path: 'admin/obs_backoffice/backbones/default'
+#  defaults:
+#    _controller: ''
+#    _title: 'Global settings'
+#  requirements:
+#    _permission: 'obs_backbones_functional_access'
+
+oab_backbones.shadow_sites:
+  path: 'admin/obs_backoffice/backbones/shadow_sites'
+  defaults:
+    _form: '\Drupal\oab_backbones\Form\ShadowSitesForm'
+    _title: 'Shadow sites'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+
+#oab_backbones.performance_data:
+#  path: 'admin/obs_backoffice/backbones/performance_data'
+#  defaults:
+#    _controller: ''
+#    _title: 'Performance data'
+#  requirements:
+#    _permission: 'obs_backbones_functional_access'

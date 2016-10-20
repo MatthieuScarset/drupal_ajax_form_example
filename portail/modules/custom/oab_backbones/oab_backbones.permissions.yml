@@ -1,0 +1,4 @@
+obs_backbones_functional_access:
+  title: Accès Backbones
+  descrption: Accès a l'administration de Backbones
+  restrict access: true

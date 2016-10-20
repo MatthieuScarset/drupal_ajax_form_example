@@ -1,0 +1,147 @@
+<?php 
+
+
+
+function oab_backbones_install() {
+    drupal_set_installed_schema_version('oab_backbones', 8000);
+}
+
+/**
+ * Implements hook_schema().
+ * Define the current version of the database schema.
+ *
+ */
+function oab_backbones_schema() {
+  /* Table où sont stockés les différents imports et leur status */
+  $schema['oab_backbones_import'] = array(
+    'description' => 'List of performance imports',
+    'fields' => array(
+      'date' => array(
+        'description' => 'Date (YYYYmm) of the import',
+        'type' => 'varchar',
+        'length' => 6,
+        'not null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'Validation status',
+        'type' => 'int',
+        'default' => 0,
+        'not null' => TRUE,
+      ),
+      'comment' => array(
+        'description' => 'Comments about data',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('date'),
+  );
+
+  /* Table des données importées */
+  $schema['oab_backbones_import_data'] = array(
+    'description' => 'Performance data',
+    'fields' => array(
+      'date' => array(
+        'description' => 'Date of the related import',
+        'type' => 'varchar',
+        'length' => 7,
+        'not null' => TRUE,
+      ),
+      'source_site' => array(
+        'description' => 'Source site name',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'source_label' => array(
+        'description' => 'Label for the source site',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'destination_site' => array(
+        'description' => 'Destination site name',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'destination_label' => array(
+        'description' => 'Label for the destination site',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'RTD' => array(
+        'description' => 'Round Trip Delay',
+        'type' => 'float',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'PLR' => array(
+        'description' => 'Packet Loss Ratio',
+        'type' => 'float',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+      'JITTER' => array(
+        'description' => 'Gigue',
+        'type' => 'float',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+    ),
+    'foreign keys' => array(
+      'obs_backbones_import' => array(
+        'table' => 'obs_backbones_import',
+        'columns' => array('date' => 'date'),
+      ),
+    ),
+    'primary key' => array('date', 'source_site', 'destination_site'),
+  );
+
+  /* Table des différents sites */
+  $schema['oab_backbones_shadowsites'] = array(
+    'description' => 'List of sites available for import',
+    'fields' => array(
+      'sid' => array(
+        'description' => 'ID of the site',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'probe_name' => array(
+        'description' => 'Name of the probe site',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'site_label' => array(
+        'description' => 'Site label displayed in front',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'used' => array(
+        'description' => 'True if chosen',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+      ),
+    ),
+    'primary key' => array('sid'),
+  );
+
+  return $schema;
+}
+
+
+function oab_backbones_update_dependencies() {
+
+}
