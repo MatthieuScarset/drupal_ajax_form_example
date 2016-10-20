@@ -541,3 +541,7 @@ p.contenu {
     line-height: 2rem;
     font-weight: 400;
 }
+
+.orangelink a{
+    color: #f60 !important;
+}

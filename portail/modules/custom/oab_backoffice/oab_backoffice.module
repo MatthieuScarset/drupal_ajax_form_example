@@ -295,6 +295,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $linkOptions = $menuLinkEntity->link->first()->options;
     $linkTarget = !empty($linkOptions['target']) ? true : false;
     $linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
+    $linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
 
     $form['link_target'] = array(
       '#type' => 'checkbox',
@@ -307,9 +308,17 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $form['link_icon'] = array(
         '#type' => 'textfield',
         '#title' => t('Font Awesome Icon'),
-        '#description' => t('type your font awesome icon code "fa-xxx"'),
+        '#description' => t('type your icon class code'),
         '#default_value' => $linkIcon,
         '#weight' => -3
+    );
+
+    $form['link_classtag'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Link Tag Class'),
+        '#description' => t('type your link tag class'),
+        '#default_value' => $linkClasstag,
+        '#weight' => -4
     );
 
     $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
@@ -320,6 +329,7 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
   $values = $form_state->getValues();
   $link_target = array();
   $link_icon = array();
+  $link_classtag = array();
 
   if (isset($values['link_target'])
     && !empty($values['link_target'])) {
@@ -329,6 +339,11 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
   if (isset($values['link_icon'])
       && !empty($values['link_icon'])) {
     $link_icon = trim($values['link_icon']);
+  }
+
+  if (isset($values['link_classtag'])
+      && !empty($values['link_classtag'])) {
+    $link_classtag = trim($values['link_classtag']);
   }
 
   $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
@@ -354,6 +369,17 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
   }
   else {
     $options['icon'] = $link_icon ;
+    $changed = TRUE;
+  }
+
+  if (empty($link_classtag)) {
+    if (!empty($options['classtag'])) {
+      unset($options['classtag']);
+      $changed = TRUE;
+    }
+  }
+  else {
+    $options['classtag'] = $link_classtag ;
     $changed = TRUE;
   }
 

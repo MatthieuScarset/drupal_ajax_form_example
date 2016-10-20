@@ -28,11 +28,12 @@
     {% for item in items %}
       {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
       {% set link_icon = item.url.options.icon %}
+      {% set link_classtag = item.url.options.classtag %}
       {% if menu_level == 0 and item.is_expanded %}
         <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
         <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}"><span class="{{ link_icon }}"></span>{{ item.title }} <span class="caret"></span></a>
       {% else %}
-       <li>{{ link(item.title, item.url, {'target': link_target}) }}
+       <li class="{{ link_classtag }}">{{ link(item.title, item.url, {'target': link_target}) }}
       {% endif %}
       {% if item.below %}
         {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
