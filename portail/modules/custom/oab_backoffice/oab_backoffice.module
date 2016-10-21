@@ -151,8 +151,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       $form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
       $form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
     }
-
-    // lien pour accéder à l'aide au template
+    
+  // lien pour accéder à l'aide au template
     //kprint_r($form['field_content_field']);
     /*$form['field_templating_tooltips'] = [
       '#type' => 'item',
