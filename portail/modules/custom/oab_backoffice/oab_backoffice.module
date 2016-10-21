@@ -20,7 +20,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
   if (preg_match('@node_(.*)_form@', $form_id)){
     $current_user_language = Drupal::currentUser()->getPreferredLangcode();
-    $edit_form = true;
+    //$edit_form = true;
   }
 
   if (preg_match('@node_(.*)_edit_form@', $form_id)){
