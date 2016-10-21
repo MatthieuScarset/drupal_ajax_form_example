@@ -41,20 +41,37 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
     foreach ($CONTENT_TAXO_FIELDS AS $field) {
       if (isset($form[$field]['widget']['#options'])) {
-        foreach ($form[$field]['widget']['#options'] AS $key => &$value) {
+        $new_select_options = array();
+        foreach($languages AS $language){
+          $new_select_options[strtoupper($language->getId())] = array();
+        }
+        foreach ($form[$field]['widget']['#options'] AS $key => $value) {
           if (is_int($key)) {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
+            $term_name = strtoupper($term->language()->getId());
 
-            $value .= ' (' . strtoupper($term->language()->getId()) . ')';
+            $value .= ' (' . $term_name . ')';
+
+            $new_select_options[$term_name][$key] = $value;
 
             $term_language = $term->language()->getId();
             if ($term_language !== $current_user_language
             && isset($languages[$term_language])
             && $edit_form){
+              unset($new_select_options[$term_name][$key]);
               unset($form[$field]['widget']['#options'][$key]);
             }
           }
         }
+        foreach($languages AS $language){
+          if (empty($new_select_options[strtoupper($language->getId())])){
+            unset($new_select_options[strtoupper($language->getId())]);
+          }
+        }
+        if (count($new_select_options) == 1){
+          $new_select_options = reset($new_select_options);
+        }
+        $form[$field]['widget']['#options'] = $new_select_options;
       }
     }
   }
