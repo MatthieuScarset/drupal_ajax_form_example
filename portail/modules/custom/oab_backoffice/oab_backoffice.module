@@ -6,7 +6,7 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 include_once 'includes/mediatheque.inc';
-define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'field_customer_story', 'field_industry', 'field_magazine', 'field_partner', 'field_solution', 'field_section')));
+define ('CONTENT_TAXO_FIELDS', serialize(array('field_area', 'field_blog', 'field_customer_story', 'field_industry', 'field_magazine', 'field_partner', 'field_solution', 'field_section', 'field_document_type', 'field_topic')));
 
 /**
  * Implements hook_form_alter().
