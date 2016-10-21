@@ -83,11 +83,12 @@ view_mode ? view_mode|clean_class,
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
+{% if content.field_file_uri %}
 <strong>{% trans %}Download{% endtrans %} PDF</strong><br/>
 <a href={{ content.field_file_uri }} class="field_file_uri">
     <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-file-pdf-o fa-stack-1x"></i> </span>
-
 </a>
+{% endif %}
 <article{{ attributes.addClass(classes) }}>
 
     <div{{ content_attributes.addClass('content') }}>
