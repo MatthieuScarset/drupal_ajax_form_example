@@ -73,7 +73,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $form[$field]['widget']['#options'] = $new_select_options;
       }
     }
-  }
+  
 
   // page de liste des taxonomies
   if ($form_id == 'taxonomy_overview_terms'){
@@ -214,7 +214,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
           }
         }
       }
-
 
     }
 
