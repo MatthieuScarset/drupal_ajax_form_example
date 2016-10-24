@@ -173,3 +173,11 @@ function oab_amel_update_8022() {
 function oab_amel_update_8023() {
     include_once("updates/update_8023.inc");
 }
+
+
+/**
+ *  RUBYPORTAILOBS-2646 - Champs obligatoires required
+ */
+function oab_amel_update_8024() {
+    include_once("updates/update_8024.inc");
+}

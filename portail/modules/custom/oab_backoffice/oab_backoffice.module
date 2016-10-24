@@ -46,7 +46,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
           $new_select_options[strtoupper($language->getId())] = array();
         }
         foreach ($form[$field]['widget']['#options'] AS $key => $value) {
-          if (is_int($key)) {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
             $term_name = strtoupper($term->language()->getId());
 
@@ -203,16 +202,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       'simple_page' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file', 'field_country', 'field_city'],
       'case_study' => ['field_blog', 'field_magazine', 'field_document_type', 'field_topic', 'field_profile', 'field_file', 'field_country', 'field_city'],
     ];
-    $required_fields = [
-      'blog_post' => ['field_blog'],
-      'magazine' => ['field_magazine'],
-      'magazine_interview' => ['field_magazine'],
-      'press_release' => ['field_file'],
-      'press_kit' => ['field_file'],
-      'document' => ['field_document_type'],
-      'simple_page' => [],
-      'case_study' => [],
-    ];
+  
     $current_container_type = \Drupal\taxonomy\Entity\Term::load($current_rendering_model);
     if (is_object($current_container_type)){
       $taxonomie_machine_name = $current_container_type->get('field_machine_name')->value;
@@ -225,13 +215,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
       }
 
-      if (isset($required_fields[$taxonomie_machine_name])) {
-        foreach ($required_fields[$taxonomie_machine_name] AS $field) {
-          if (isset($form[$field])) {
-            $form[$field]['widget']['#required'] = TRUE;
-          }
-        }
-      }
+
     }
 
     if ($form_id == 'node_container_form') {
