@@ -275,3 +275,10 @@ function oab_christophe_update_8036() {
 function oab_christophe_update_8037() {
   include_once("updates/update_8037.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2504 - permissions media browser file
+ */
+function oab_christophe_update_8038() {
+  include_once("updates/update_8038.inc");
+}
