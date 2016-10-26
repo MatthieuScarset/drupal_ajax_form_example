@@ -81,6 +81,7 @@ class OabTextWidget extends TextareaWidget {
       '#default_value' => $items[$delta]->zone,
       '#options' => $options,
       '#weight' => 10,
+      '#access' => false, // JIRA 2655 : suppression du menu display area for content above
     );
 
     return $element;
