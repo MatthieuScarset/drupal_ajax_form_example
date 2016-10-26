@@ -86,6 +86,7 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
     if (isset($field_settings['target_type'])
       && $field_settings['target_type'] == 'taxonomy_term'
     ) {
+      $edit_form = false;
 
       // récupération du user
       $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()
@@ -95,73 +96,73 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
           ->getValue();
 
         // liste des langues d'accès de l'utilisateur
+        $user_access_languages_array = array();
         if (!empty($user_access_languages)) {
-          $user_access_languages_array = array();
           foreach ($user_access_languages AS $access_language) {
             if (isset($access_language['target_id'])) {
               $user_access_languages_array[$access_language['target_id']] = $access_language['target_id'];
             }
           }
+        }
 
-          // listes des options
-          if (isset($element['#options'])
-            && !empty($element['#options'])
-          ) {
-            // création des tableaux de langue
-            $languages = \Drupal::languageManager()->getLanguages();
-            $new_select_options = array();
-            foreach ($languages AS $language) {
-              $new_select_options[strtoupper($language->getId())] = array();
-            }
+        // listes des options
+        if (isset($element['#options'])
+          && !empty($element['#options'])
+        ) {
+          // création des tableaux de langue
+          $languages = \Drupal::languageManager()->getLanguages();
+          $new_select_options = array();
+          foreach ($languages AS $language) {
+            $new_select_options[strtoupper($language->getId())] = array();
+          }
 
-            // aggrégation des options dans le tableau des langues
-            foreach ($element['#options'] AS $key => $value) {
-              if (is_int($key)) {
-                $term = \Drupal\taxonomy\Entity\Term::load($key);
-                if (method_exists($term, 'language')) {
-                  $term_language = $term->language()->getId();
-                  $term_name = strtoupper($term_language);
+          // aggrégation des options dans le tableau des langues
+          foreach ($element['#options'] AS $key => $value) {
+            if (is_int($key)) {
+              $term = \Drupal\taxonomy\Entity\Term::load($key);
+              if (method_exists($term, 'language')) {
+                $term_language = $term->language()->getId();
+                $term_name = strtoupper($term_language);
 
-                  if (in_array($term_language, $user_access_languages_array)) {
+                if (in_array($term_language, $user_access_languages_array)
+                || empty($user_access_languages_array)) {
+                  $value .= ' (' . $term_name . ')';
 
-                    $value .= ' (' . $term_name . ')';
+                  $new_select_options[$term_name][$key] = $value;
 
-                    $new_select_options[$term_name][$key] = $value;
+                  if (isset($context['form']['#attributes']['class'])
+                  && is_array($context['form']['#attributes']['class'])){
 
-                    if (isset($context['form']['#attributes']['class'])
-                    && is_array($context['form']['#attributes']['class'])){
-                      $edit_form = false;
-                      foreach($context['form']['#attributes']['class'] AS $value){
-                        if (preg_match('@node-(.*)-edit-form@', $value)){
-                          $edit_form = true;
-                        }
+                    foreach($context['form']['#attributes']['class'] AS $value){
+                      if (preg_match('@node-(.*)-edit-form@', $value)){
+                        $edit_form = true;
                       }
+                    }
+                  }
+                }
 
-                      if ($edit_form){
-                        $node = \Drupal::routeMatch()->getParameter('node');
-                        if (isset($node) && is_object($node)) {
-                          if ($term_language !== $node->language()->getId()){
-                            unset($new_select_options[$term_name][$key]);
-                          }
-                        }
-                      }
+                if ($edit_form){
+                  $node = \Drupal::routeMatch()->getParameter('node');
+                  if (isset($node) && is_object($node)) {
+                    if ($term_language !== $node->language()->getId()){
+                      unset($new_select_options[$term_name][$key]);
                     }
                   }
                 }
               }
             }
-
-            // nettoyage des éléments vides
-            foreach ($languages AS $language) {
-              if (empty($new_select_options[strtoupper($language->getId())])) {
-                unset($new_select_options[strtoupper($language->getId())]);
-              }
-            }
-            if (count($new_select_options) == 1) {
-              $new_select_options = reset($new_select_options);
-            }
-            $element['#options'] = $new_select_options;
           }
+
+          // nettoyage des éléments vides
+          foreach ($languages AS $language) {
+            if (empty($new_select_options[strtoupper($language->getId())])) {
+              unset($new_select_options[strtoupper($language->getId())]);
+            }
+          }
+          if (count($new_select_options) == 1) {
+            $new_select_options = reset($new_select_options);
+          }
+          $element['#options'] = $new_select_options;
         }
       }
     }
