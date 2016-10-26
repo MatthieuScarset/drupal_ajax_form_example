@@ -15,11 +15,11 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $languages = \Drupal::languageManager()->getLanguages();
+  $current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
   $edit_form = false;
 
   if (preg_match('@node_(.*)_form@', $form_id)){
-    $current_user_language = Drupal::currentUser()->getPreferredLangcode();
     //$edit_form = true;
   }
 
@@ -37,45 +37,47 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
   // gestion de la taxonomie
   // affichage de la langue
-    if (defined('CONTENT_TAXO_FIELDS')) {
-        $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
-        foreach ($CONTENT_TAXO_FIELDS AS $field) {
-            if (isset($form[$field]['widget']['#options'])) {
-                $new_select_options = array();
-                foreach($languages AS $language){
-                    $new_select_options[strtoupper($language->getId())] = array();
-                }
-                foreach ($form[$field]['widget']['#options'] AS $key => $value) {
-                    if (is_int($key)) {
-                        $term = \Drupal\taxonomy\Entity\Term::load($key);
-                        $term_name = strtoupper($term->language()->getId());
-
-                        $value .= ' (' . $term_name . ')';
-
-                        $new_select_options[$term_name][$key] = $value;
-
-                        $term_language = $term->language()->getId();
-                        if ($term_language !== $current_user_language
-                            && isset($languages[$term_language])
-                            && $edit_form){
-                            unset($new_select_options[$term_name][$key]);
-                            unset($form[$field]['widget']['#options'][$key]);
-                        }
-                    }
-                }
-                foreach($languages AS $language){
-                    if (empty($new_select_options[strtoupper($language->getId())])){
-                        unset($new_select_options[strtoupper($language->getId())]);
-                    }
-                }
-                if (count($new_select_options) == 1){
-                    $new_select_options = reset($new_select_options);
-                }
-                $form[$field]['widget']['#options'] = $new_select_options;
-            }
+  if (defined('CONTENT_TAXO_FIELDS')) {
+    $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
+    foreach ($CONTENT_TAXO_FIELDS AS $field) {
+      if (isset($form[$field]['widget']['#options'])) {
+        $new_select_options = array();
+        foreach($languages AS $language){
+          $new_select_options[strtoupper($language->getId())] = array();
         }
-    }
+        foreach ($form[$field]['widget']['#options'] AS $key => $value) {
+          if (is_int($key)) {
+            $term = \Drupal\taxonomy\Entity\Term::load($key);
+            if (method_exists($term, 'language')) {
+              $term_name = strtoupper($term->language()->getId());
 
+              $value .= ' (' . $term_name . ')';
+
+              $new_select_options[$term_name][$key] = $value;
+
+              $term_language = $term->language()->getId();
+              if ($term_language !== $current_user_language
+                && isset($languages[$term_language])
+                && $edit_form
+              ) {
+                unset($new_select_options[$term_name][$key]);
+                unset($form[$field]['widget']['#options'][$key]);
+              }
+            }
+          }
+        }
+        foreach($languages AS $language){
+          if (empty($new_select_options[strtoupper($language->getId())])){
+            unset($new_select_options[strtoupper($language->getId())]);
+          }
+        }
+        if (count($new_select_options) == 1){
+          $new_select_options = reset($new_select_options);
+        }
+        $form[$field]['widget']['#options'] = $new_select_options;
+      }
+    }
+  }
 
   // page de liste des taxonomies
   if ($form_id == 'taxonomy_overview_terms'){

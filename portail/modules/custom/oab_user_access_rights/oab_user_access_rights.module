@@ -1,0 +1,73 @@
+<?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_node_access().
+ */
+function oab_user_access_rights_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account){
+  if (in_array($op, array('delete', 'update'))){
+    $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    $node_language = $node->language()->getId();
+
+    if ($current_user->hasField('field_access_language')){
+      $user_access_languages = $current_user->get('field_access_language')->getValue();
+      if(!empty($user_access_languages)){
+        $user_access_languages_array = array();
+        foreach ($user_access_languages AS $access_language){
+          if (isset($access_language['target_id'])){
+            $user_access_languages_array[$access_language['target_id']] = $access_language['target_id'];
+          }
+        }
+        if (!in_array($node_language, $user_access_languages_array)){
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_user_access_rights_form_alter(&$form, FormStateInterface $form_state, $form_id){
+  if (preg_match('@node_(.*)_form@', $form_id)) {
+    if (isset($form['langcode']['widget'])) {
+      $form['langcode']['widget']['#after_build'][] = '_oab_language_selection_form_alter';
+    }
+  }
+
+  if (preg_match('@node_(.*)_edit_form@', $form_id)){
+    $form['langcode']['#disabled'] = true;
+  }
+}
+
+function _oab_language_selection_form_alter($form, FormStateInterface $form_state) {
+  if (isset($form[0]['value']['#options'])){
+    $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    if ($current_user->hasField('field_access_language')){
+      $user_access_languages = $current_user->get('field_access_language')->getValue();
+      if(!empty($user_access_languages)){
+        $new_options = array();
+        foreach ($user_access_languages AS $access_language){
+          if (isset($access_language['target_id'])
+          && isset($form[0]['value']['#options'][$access_language['target_id']])){
+            $new_options[$access_language['target_id']] = $form[0]['value']['#options'][$access_language['target_id']];
+          }
+        }
+        if (!empty($new_options)){
+          $old_options = $form[0]['value']['#options'];
+          $form[0]['value']['#options'] = $new_options;
+          if (isset($old_options['und'])){
+            $form[0]['value']['#options']['und'] = $old_options['und'];
+          }
+          if (isset($old_options['zxx'])){
+            $form[0]['value']['#options']['zxx'] = $old_options['zxx'];
+          }
+        }
+      }
+    }
+  }
+  return $form;
+}
