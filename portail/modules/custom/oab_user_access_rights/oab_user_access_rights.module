@@ -4,24 +4,27 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_node_access().
+ * Implements hook_entity_access().
  */
-function oab_user_access_rights_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account){
-  if (in_array($op, array('delete', 'update'))){
+function oab_user_access_rights_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account){
+  $entity_class = get_class($entity);
+  if (in_array($entity_class, array('Drupal\taxonomy\Entity\Term', 'Drupal\node\Entity\Node'))
+    && in_array($operation, array('delete', 'update'))) {
     $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-    $node_language = $node->language()->getId();
-
-    if ($current_user->hasField('field_access_language')){
-      $user_access_languages = $current_user->get('field_access_language')->getValue();
-      if(!empty($user_access_languages)){
-        $user_access_languages_array = array();
-        foreach ($user_access_languages AS $access_language){
-          if (isset($access_language['target_id'])){
-            $user_access_languages_array[$access_language['target_id']] = $access_language['target_id'];
+    if (method_exists($entity, 'language')) {
+      $entity_language = $entity->language()->getId();
+      if ($current_user->hasField('field_access_language')) {
+        $user_access_languages = $current_user->get('field_access_language')->getValue();
+        if (!empty($user_access_languages)) {
+          $user_access_languages_array = array();
+          foreach ($user_access_languages AS $access_language) {
+            if (isset($access_language['target_id'])) {
+              $user_access_languages_array[$access_language['target_id']] = $access_language['target_id'];
+            }
           }
-        }
-        if (!in_array($node_language, $user_access_languages_array)){
-          return AccessResult::forbidden();
+          if (!in_array($entity_language, $user_access_languages_array)) {
+            return AccessResult::forbidden();
+          }
         }
       }
     }
@@ -70,4 +73,97 @@ function _oab_language_selection_form_alter($form, FormStateInterface $form_stat
     }
   }
   return $form;
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function oab_user_access_rights_field_widget_options_select_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context){
+  if (isset($context['items'])
+  && method_exists($context['items'], 'getFieldDefinition')) {
+    $field_definition = $context['items']->getFieldDefinition();
+    $field_settings = $field_definition->getSettings();
+    if (isset($field_settings['target_type'])
+      && $field_settings['target_type'] == 'taxonomy_term'
+    ) {
+
+      // récupération du user
+      $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()
+        ->id());
+      if ($current_user->hasField('field_access_language')) {
+        $user_access_languages = $current_user->get('field_access_language')
+          ->getValue();
+
+        // liste des langues d'accès de l'utilisateur
+        if (!empty($user_access_languages)) {
+          $user_access_languages_array = array();
+          foreach ($user_access_languages AS $access_language) {
+            if (isset($access_language['target_id'])) {
+              $user_access_languages_array[$access_language['target_id']] = $access_language['target_id'];
+            }
+          }
+
+          // listes des options
+          if (isset($element['#options'])
+            && !empty($element['#options'])
+          ) {
+            // création des tableaux de langue
+            $languages = \Drupal::languageManager()->getLanguages();
+            $new_select_options = array();
+            foreach ($languages AS $language) {
+              $new_select_options[strtoupper($language->getId())] = array();
+            }
+
+            // aggrégation des options dans le tableau des langues
+            foreach ($element['#options'] AS $key => $value) {
+              if (is_int($key)) {
+                $term = \Drupal\taxonomy\Entity\Term::load($key);
+                if (method_exists($term, 'language')) {
+                  $term_language = $term->language()->getId();
+                  $term_name = strtoupper($term_language);
+
+                  if (in_array($term_language, $user_access_languages_array)) {
+
+                    $value .= ' (' . $term_name . ')';
+
+                    $new_select_options[$term_name][$key] = $value;
+
+                    if (isset($context['form']['#attributes']['class'])
+                    && is_array($context['form']['#attributes']['class'])){
+                      $edit_form = false;
+                      foreach($context['form']['#attributes']['class'] AS $value){
+                        if (preg_match('@node-(.*)-edit-form@', $value)){
+                          $edit_form = true;
+                        }
+                      }
+
+                      if ($edit_form){
+                        $node = \Drupal::routeMatch()->getParameter('node');
+                        if (isset($node) && is_object($node)) {
+                          if ($term_language !== $node->language()->getId()){
+                            unset($new_select_options[$term_name][$key]);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            // nettoyage des éléments vides
+            foreach ($languages AS $language) {
+              if (empty($new_select_options[strtoupper($language->getId())])) {
+                unset($new_select_options[strtoupper($language->getId())]);
+              }
+            }
+            if (count($new_select_options) == 1) {
+              $new_select_options = reset($new_select_options);
+            }
+            $element['#options'] = $new_select_options;
+          }
+        }
+      }
+    }
+  }
 }
