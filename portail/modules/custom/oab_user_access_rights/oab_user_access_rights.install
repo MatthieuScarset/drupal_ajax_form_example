@@ -66,7 +66,7 @@ function oab_user_access_rights_install() {
       'bundle' => 'user',
       'label' => 'accès aux langues',
       'description' => '',
-      'required' => true,
+      'required' => false,
       'translatable' => false,
       'default_value' =>
         array (
@@ -332,4 +332,11 @@ function oab_user_access_rights_install() {
       ))
     ))
     ->execute();
+}
+
+function oab_user_access_rights_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('field.field.user.user.field_access_language');
+  $config->set('required', false);
+  $config->save(TRUE);
 }
