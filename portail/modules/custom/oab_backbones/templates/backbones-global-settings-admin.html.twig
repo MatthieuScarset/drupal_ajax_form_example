@@ -1,0 +1,38 @@
+<p>
+    <a href='{{  path('oab_backbones.view_front_page', {}) }}'>Front office</a>
+</p>
+<fieldset name="summary">
+    <legend>
+        <span class="fieldset-legend">{% trans %}Summary{% endtrans %}</span>
+    </legend>
+    <br/>
+    <table>
+        <thead>
+            <tr>
+                <th>{% trans %}Date{% endtrans %}</th>
+                <th>{% trans %}Status{% endtrans %}</th>
+                <th>{% trans %}Comments{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for import in lastsImports %}
+            <tr>
+                <td>{{ import.date|raw }}</td>
+                <td>{{ import.status|raw }}</td>
+                <td>{{ import.comment|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset name="documentation">
+    <legend>
+        <span class="fieldset-legend">{% trans %}Documentation{% endtrans %}</span>
+    </legend>
+    <br/>
+</fieldset>
+
+<div class='menu_filter_shadowsite'>
+    {{ variablesForm }}
+</div>

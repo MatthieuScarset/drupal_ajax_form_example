@@ -1,0 +1,14 @@
+oab_backbones.admin_content.global_settings:
+  title: Global settings
+  route_name: oab_backbones.default_page
+  base_route: oab_backbones.main_page
+
+oab_backbones.admin_content.shadow_sites:
+  title: Shadow sites
+  route_name: oab_backbones.shadow_sites
+  base_route: oab_backbones.main_page
+
+oab_backbones.admin_content.performance_data:
+  title: Performance data
+  route_name: oab_backbones.performance_data
+  base_route: oab_backbones.main_page

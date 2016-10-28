@@ -11,8 +11,8 @@ namespace Drupal\oab_backbones\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\oab_backbones\Plugin\ImportShadowSites;
-use Drupal\oab_backbones\Plugin\ShadowSites;
+use Drupal\oab_backbones\Classes\ImportShadowSites;
+use Drupal\oab_backbones\Classes\ShadowSites;
 
 class ShadowSitesForm extends FormBase
 {
@@ -41,6 +41,16 @@ class ShadowSitesForm extends FormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
+
+    $form['link_fontoffice'] = array(
+      '#weight' => -50,
+      '#type' => 'link',
+      '#title' => "Front office",
+      '#url' => \Drupal\Core\Url::fromRoute('oab_backbones.view_front_page', array()),
+      '#prefix' => "<p>",
+      '#suffix' => "</p>",
+    );
+
     $form['import'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Import settings'),
@@ -78,7 +88,7 @@ class ShadowSitesForm extends FormBase
 
     $form['management'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Management settings'),
+      '#title' => $this->t('Management settings'),
       '#weight' => 2,
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
@@ -127,7 +137,7 @@ class ShadowSitesForm extends FormBase
       '#type' => 'tableselect',
       '#header' => $shadowSitesObject->getHeaderTable(),
       '#options' => $options,
-      '#empty' => t('No content available.'),
+      '#empty' => $this->t('No content available.'),
       '#value' => $used_values,
       '#multiple' => TRUE,
       '#weight' => 0,
@@ -170,7 +180,6 @@ class ShadowSitesForm extends FormBase
     if (!$file[0])
     {
       $form_state->setErrorByName('file', t('No file was uploaded.'));
-      print 'else';
     }
   }
 

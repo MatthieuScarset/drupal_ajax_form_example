@@ -3,8 +3,29 @@
 
 
 function oab_backbones_install() {
-    drupal_set_installed_schema_version('oab_backbones', 8000);
+  drupal_set_installed_schema_version('oab_backbones', 8000);;
 }
+
+/**
+ * Création des répertoires
+ */
+function oab_backbones_update_8001() {
+  include_once("updates/update_8001.inc");
+}
+/**
+ * Création de la config par défaut
+ */
+function oab_backbones_update_8002() {
+  include_once("updates/update_8002.inc");
+}
+
+/**
+ * Création du rôle
+ */
+function oab_backbones_update_8003() {
+  include_once("updates/update_8003.inc");
+}
+
 
 /**
  * Implements hook_schema().

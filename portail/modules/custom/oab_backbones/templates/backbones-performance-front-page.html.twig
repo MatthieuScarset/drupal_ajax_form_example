@@ -1,0 +1,60 @@
+<div class='filter_month'>{% trans %}Monthly data{% endtrans %}</div>
+<div class='menu_filter_month'>
+    <ul>
+        {% for key, month in monthsImport %}
+            <li class="">
+                <div class="">
+                    <span class="">
+                        {% if currentImportDate ==  key %}
+                            <a class="active" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}">
+                        {% else %}
+                            <a class="" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}">
+                        {% endif %}
+                            {{ month }}
+                            <span class="fleche"></span>
+                        </a>
+                    </span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class='filter_shadowsite'>
+    {{ intro }}
+</div>
+
+<div class='menu_filter_shadowsite'>
+    {{ filterForm }}
+</div>
+
+
+<div class='data_zone_bbp'>
+    {% for perfData in performanceDatas %}
+    <div class='data_zone_bbp_1'>
+        <table summary="">
+            <thead>
+            <tr class="header_col">
+                <th id="city"></th>
+                <th id="rtd">RTD<span>ms</span></th>
+                <th id="plr">PLR<span>%</span></th>
+                <th id="jitter">Jitter<span>ms</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in perfData %}
+            <tr>
+                <td headers="city" class="td_label">{{ data.label|raw }}</td>
+                <td headers="rtd" class="td_data">{{ data.RTD|raw }}</td>
+                <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
+                <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    <div class='clear'></div>
+</div>
+<br/>
+<div class='comment_zone_bbp'><p>{{ comment }}</p></div>

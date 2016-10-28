@@ -6,12 +6,12 @@
  * Time: 10:34
  */
 
-namespace Drupal\oab_backbones\Plugin;
+namespace Drupal\oab_backbones\Classes;
 
 
 class ImportShadowSites
 {
-  public static $IMPORT_DIRECTORY = 'public://backbones/';
+  public static $IMPORT_DIRECTORY = 'public://backbones/sites/';
   public static $IMPORT_FILENAME = 'SHADOW_SITE.txt.gz';
 
   public function executeImport(){
