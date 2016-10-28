@@ -18,6 +18,9 @@ function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_st
       
       unset($form['actions']['preview']);
     }
+    if ($form['#form_id'] == 'node_preview_form_select') {
+      $form['#attributes']['class'][] = 'container';
+    }
   }
 }
 

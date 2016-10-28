@@ -1,0 +1,9 @@
+name: OAB BackBones
+description: 'OAB Backbones'
+type: module
+package: OAB
+
+version: VERSION
+core: '8.x'
+project: 'oab_backbones'
+datestamp: 1476450042

@@ -1,0 +1,11 @@
+oab_backbones.admin:
+  version: VERSION
+  css:
+    theme:
+      css/styleBackbonesAdmin.css: {}
+
+oab_backbones.front_office:
+  version: VERSION
+  css:
+    theme:
+      css/styleBackbones.css: {}

@@ -1,0 +1,48 @@
+<?php
+/**
+ * Constants Columns for shadow sites file
+ */
+define('SID_A', 3);
+define('SID_B', 7);
+define('RTD', 10);
+define('JITTER_AB', 18);
+define('JITTER_BA', 20);
+define('PLR_AB', 22);
+define('PLR_BA', 24);
+
+
+function oab_backbones_theme($existing, $type, $theme, $path) {
+
+  return array(
+    'backbones_performance_data_admin' =>
+    array(
+      'variables' => array(
+        'performanceDatas' => array(),
+        'intro' => array(),
+        'filterForm' => array()
+      ),
+      'template' => 'backbones-performance-data-admin'
+    ),
+    'backbones_performance_front_office' =>
+      array(
+        'variables' => array(
+          'intro' => array(),
+          'monthsImport' => array(),
+          'performanceDatas' => array(),
+          'filterForm' => array(),
+          'currentImportDate' => array(),
+          'comment' => array(),
+        ),
+        'template' => 'backbones-performance-front-page'
+      ),
+    'backbones_global_settings' =>
+      array(
+        'variables' => array(
+          'lastsImports' => array(),
+          'documentation' => array(),
+          'variablesForm' => array()
+        ),
+        'template' => 'backbones-global-settings-admin'
+      )
+  );
+}
