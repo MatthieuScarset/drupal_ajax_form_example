@@ -70,6 +70,7 @@ class FilterPerformanceDataForm extends FormBase
         '#value' => $this->t('Apply'),
       );
     }
+    //var_dump($form);
     return $form;
   }
 

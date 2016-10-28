@@ -1,38 +1,32 @@
 <div class='filter_month'>{% trans %}Monthly data{% endtrans %}</div>
 <div class='menu_filter_month'>
-    <ul>
+    <!-- méthode des espaces html entre les li pour éviter les espaces entre les element html au rendu du navigateur des li (display inline-block)-->
+    <ul class="nav" role="tablist"><!--
         {% for key, month in monthsImport %}
-            <li class="">
-                <div class="">
-                    <span class="">
-                        {% if currentImportDate ==  key %}
-                            <a class="active" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}">
-                        {% else %}
-                            <a class="" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}">
-                        {% endif %}
-                            {{ month }}
-                            <span class="fleche"></span>
-                        </a>
-                    </span>
-                </div>
-            </li>
+            {% if currentImportDate ==  key %}
+            --><li class="onglet active">
+            {% else %}
+            --><li class="onglet">
+            {% endif %}
+                <a class="" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}"> {{ month }} </a>
+            </li><!--
         {% endfor %}
-    </ul>
+    --></ul>
 </div>
 
-<div class='filter_shadowsite'>
-    {{ intro }}
+<div class='filter_shadowsite col col-md-12 col-sm-12'>
+   {{ intro }}
 </div>
 
-<div class='menu_filter_shadowsite'>
+<div class='menu_filter_shadowsite col col-md-12 col-sm-12'>
     {{ filterForm }}
 </div>
 
 
-<div class='data_zone_bbp'>
+<div class='data_zone_bbp  col col-md-12 col-sm-12'>
     {% for perfData in performanceDatas %}
-    <div class='data_zone_bbp_1'>
-        <table summary="">
+    <div class=' col col-md-6 col-sm-12'>
+        <table class='table'>
             <thead>
             <tr class="header_col">
                 <th id="city"></th>

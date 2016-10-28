@@ -3,7 +3,7 @@
 
 
 function oab_backbones_install() {
-  drupal_set_installed_schema_version('oab_backbones', 8000);;
+  drupal_set_installed_schema_version('oab_backbones', 8000);
 }
 
 /**
@@ -20,12 +20,31 @@ function oab_backbones_update_8002() {
 }
 
 /**
- * Création du rôle
+ * Création du rôle + raccourci
  */
+
 function oab_backbones_update_8003() {
   include_once("updates/update_8003.inc");
 }
 
+function oab_backbones_uninstall(){
+  //1. suppression du rôle
+  $role = \Drupal\user\Entity\Role::load('fh_backbones');
+  if(!empty($role))
+  {
+    $role->delete();
+    drupal_set_message("Rôle supprimé", 'status');
+  }
+
+  //2. suppression du Raccourci
+  $connection = \Drupal\Core\Database\Database::getConnection();
+  $query = $connection->delete('shortcut_field_data')
+    ->condition('shortcut_set', 'default')
+    ->condition('link__uri', 'internal:/admin/obs_backoffice/backbones');
+  $results = $query->execute();
+  drupal_set_message("Raccourci supprimé", 'status');
+
+}
 
 /**
  * Implements hook_schema().
