@@ -1312,7 +1312,7 @@ $config_group->setData(
    {{ filename__value }}
 {% else %}
 {% for i in 0..nbLines %}
-{{ filename__value|slice(i*max_per_line + i, max_per_line+1 )</br> }}
+{{ filename__value|slice(i*max_per_line + i, max_per_line+1 ) }}</br>
 {% endfor %}
 {% endif %}',
               'make_link' => false,
