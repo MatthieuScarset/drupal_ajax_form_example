@@ -61,8 +61,8 @@ class BlogPostImage extends SqlBase {
     ->distinct(TRUE)
     //->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //->condition('f.fid', 1757)
-    ->condition('n.type', 'blog_post')
-    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+    ->condition('n.type', 'blog_post');
+   // ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     //->orderBy('f.fid', 'ASC');
 

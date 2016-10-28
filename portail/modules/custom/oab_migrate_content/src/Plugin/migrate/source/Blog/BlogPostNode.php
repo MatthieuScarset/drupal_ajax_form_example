@@ -36,8 +36,8 @@ class BlogPostNode extends SqlBase {
      */
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid'])
-    ->condition('n.type', 'blog_post', '=')
-    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+    ->condition('n.type', 'blog_post', '=');
+    //->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     return $query;
   }

@@ -39,8 +39,8 @@ class BlogPostMedia extends SqlBase {
     $field1_alias = $query->addField('m', 'fid', 'mid');
     //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //$query->condition('f.fid', 1757)
-    $query->condition('n.type', 'blog_post')
-    ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+    $query->condition('n.type', 'blog_post');
+    //->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->condition('n.nid', array(11430, 11429), 'IN');
     //->orderBy('m.fid', 'ASC');
     //->range(0, 1);
