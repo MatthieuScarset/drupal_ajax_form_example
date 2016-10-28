@@ -1,0 +1,57 @@
+.filter_month{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu_filter_month{
+    text-align: center !important;
+    margin-bottom: 40px;
+}
+.menu_filter_month li.onglet{
+    background-color: #ddd;
+    color: #000;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0rem 1rem 0rem 1rem;
+    position: relative;
+}
+
+.menu_filter_month .onglet:hover,
+.menu_filter_month .onglet:hover a,
+.menu_filter_month .onglet.active,
+.menu_filter_month .onglet.active a,
+.menu_filter_month li.onglet a:hover{
+    background-color: #f16e00;
+    color: #ffffff;
+}
+
+.filter_shadowsite {
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+}
+
+
+/** TABLEAU */
+.data_zone_bbp th{
+    color: #7f7f7f;
+    text-align: center;
+}
+.data_zone_bbp th span {
+    color: black;
+    display: block;
+}
+.data_zone_bbp .td_label{
+    background-color: #f8f8f8;
+    border: medium none;
+    font-weight: bold;
+    color: #414141;
+}
+.data_zone_bbp .td_data {
+    border: medium none;
+    text-align: center;
+}
+.data_zone_bbp{
+
+}
