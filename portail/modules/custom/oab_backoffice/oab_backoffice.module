@@ -98,6 +98,9 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   // filtres exposés de views
   if ($form_id == 'views_exposed_form'){
     // $form['#id']
+    if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media'){
+      $form['field_tags_target_id']['#size'] = 30;
+    }
   }
 
   if ($form_id == 'node_profil_redacteur_form'
@@ -326,6 +329,10 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     );
 
     $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
+  }
+
+  if ($form_id == 'entity_browser_browse_media_modal_form'){
+    $form['actions']['#weight'] = -10;
   }
 }
 

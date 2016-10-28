@@ -14,3 +14,7 @@
     overflow-x: hidden !important;
     overflow-y: scroll !important;
 }
+
+#entity-browser-browse-media-modal-form #edit-actions{
+    float: right !important;
+}
