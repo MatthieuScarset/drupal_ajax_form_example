@@ -1,0 +1,54 @@
+oab_backbones.main_page:
+  path: 'admin/obs_backoffice/backbones'
+  defaults:
+    _controller: '\Drupal\oab_backbones\Controller\OabBackbonesController::viewGlobalSettings'
+    _title: 'Backbones performance management'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+
+oab_backbones.default_page:
+  path: 'admin/obs_backoffice/backbones/default'
+  defaults:
+    _controller: '\Drupal\oab_backbones\Controller\OabBackbonesController::viewGlobalSettings'
+    _title: 'Backbones performance management'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+
+oab_backbones.shadow_sites:
+  path: 'admin/obs_backoffice/backbones/shadow_sites'
+  defaults:
+    _form: '\Drupal\oab_backbones\Form\ShadowSitesForm'
+    _title: 'Shadow sites'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+
+oab_backbones.performance_data:
+  path: 'admin/obs_backoffice/backbones/performance_data'
+  defaults:
+    _form: '\Drupal\oab_backbones\Form\PerformanceDataForm'
+    _title: 'Performance data'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+
+oab_backbones.view_import:
+  path: 'admin/obs_backbones/data/view/{date_import}/{site_sid}'
+  defaults:
+    _controller: '\Drupal\oab_backbones\Controller\OabBackbonesController::viewDataImportAdmin'
+    site_sid: ''
+    _title: 'Performance data'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+    date_import: '^[0-9]{6}$'
+    site_sid: '^[0-9]*'
+
+oab_backbones.view_front_page:
+  path: 'network-performance/{date_import}/{site_sid}'
+  defaults:
+    _controller: '\Drupal\oab_backbones\Controller\OabBackbonesController::viewFrontPage'
+    date_import: ''
+    site_sid: ''
+    _title: 'Network Performance'
+  requirements:
+    _permission: 'access content'
+    date_import: '^[0-9]{6}$'
+    site_sid: '^[0-9]*'
