@@ -23,9 +23,11 @@
     background-size: 54px 54px;
 }
 
+.views-col.checked{
+    border: 1px solid green;
+}
 .views-col.checked .views-field-field-image img{
     opacity: 0.3;
-    border: 2px solid green;
 }
 
 .views-col .views-field-entity-browser-select{

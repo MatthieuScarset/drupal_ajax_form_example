@@ -331,7 +331,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
   }
 
-  if ($form_id == 'entity_browser_browse_media_modal_form'){
+  if ($form_id == 'entity_browser_browse_media_modal_form'
+  || $form_id == 'entity_browser_browse_medias_iframe_form'){
     $form['actions']['#weight'] = -10;
   }
 }

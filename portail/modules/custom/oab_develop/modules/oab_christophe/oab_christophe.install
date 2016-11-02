@@ -289,3 +289,10 @@ function oab_christophe_update_8038() {
 function oab_christophe_update_8039() {
   include_once("updates/update_8039.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2628 - ajout de la taille des images dans le media browser
+ */
+function oab_christophe_update_8040() {
+  include_once("updates/update_8040.inc");
+}

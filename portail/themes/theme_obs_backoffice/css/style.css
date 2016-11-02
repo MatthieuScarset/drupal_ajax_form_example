@@ -15,6 +15,11 @@
     overflow-y: scroll !important;
 }
 
-#entity-browser-browse-media-modal-form #edit-actions{
+#entity-browser-browse-media-modal-form #edit-actions,
+#entity-browser-browse-medias-iframe-form #edit-actions{
     float: right !important;
+}
+
+.view-display-id-entity_browser_media .filesize{
+    font-weight: 700;
 }
