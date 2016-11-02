@@ -13,6 +13,9 @@ function oab_christophe_update_dependencies() {
   $dependencies['oab_christophe'][8026] = array(
     'oab_stephanie' => 8015,
   );
+  $dependencies['oab_christophe'][8040] = array(
+    'oab_amel' => 8025,
+  );
 
   return $dependencies;
 }
