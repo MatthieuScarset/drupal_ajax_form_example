@@ -55,3 +55,21 @@
 .data_zone_bbp{
 
 }
+
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form .container{
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form .container .form-item-shadowsites{
+    display: none;
+}
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form .container label,
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form .container .row,
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form .container select{
+    display: inline-block;
+}
+.menu_filter_shadowsite .oab-backbones-filter-performance-data-form input{
+    display: inline-block;
+    margin-top: -5px;
+}

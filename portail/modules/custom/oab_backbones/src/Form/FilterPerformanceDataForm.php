@@ -51,7 +51,11 @@ class FilterPerformanceDataForm extends FormBase
       {
         $selectedSite = array_keys($options)[0];
       }
-
+      // File
+      $form['shadowSites_label'] = array(
+        '#type' => 'label',
+        '#title' => t('View performance from')
+      );
       // File
       $form['shadowSites'] = array(
         '#weight' => '1',
@@ -60,7 +64,9 @@ class FilterPerformanceDataForm extends FormBase
         '#type' => 'select',
         '#options' => $options,
         '#default_value' => $selectedSite,
-        '#title' => t('View performance from')
+        '#title' => ""/*,
+        "#prefix" => "<div class=\"form-item-shadowsites-select-item\">",
+        "#suffix" => "</div>"*/
       );
 
       // Bouton
