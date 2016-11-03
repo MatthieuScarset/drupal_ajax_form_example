@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OabBackbonesController extends ControllerBase
 {
+  /** Méthode appelée quand on va voir le détail d'un import en BO
+   */
   public function viewDataImportAdmin(Request $request, $date_import, $site_sid){
 
     //Récupération du formulaire
@@ -54,6 +56,7 @@ class OabBackbonesController extends ControllerBase
     );
   }
 
+  /** Méthode appelée par la partie FO pour afficher toutes les données */
   public function viewFrontPage(Request $request, $date_import, $site_sid){
 
     //Récupération du formulaire
@@ -104,6 +107,7 @@ class OabBackbonesController extends ControllerBase
     );
   }
 
+  /** Méthode appelée pour l'onglet Global Settings de la partie BO */
   public function viewGlobalSettings(Request $request){
 
     $biObj = new BackbonesImport();

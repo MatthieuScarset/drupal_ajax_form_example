@@ -1,3 +1,4 @@
+#page d'administration par défaut
 oab_backbones.main_page:
   path: 'admin/obs_backoffice/backbones'
   defaults:
@@ -5,7 +6,7 @@ oab_backbones.main_page:
     _title: 'Backbones performance management'
   requirements:
     _permission: 'obs_backbones_functional_access'
-
+#onglet BO Shadow sites
 oab_backbones.shadow_sites:
   path: 'admin/obs_backoffice/backbones/shadow_sites'
   defaults:
@@ -13,7 +14,7 @@ oab_backbones.shadow_sites:
     _title: 'Shadow sites'
   requirements:
     _permission: 'obs_backbones_functional_access'
-
+#onglet BO Performance Data
 oab_backbones.performance_data:
   path: 'admin/obs_backoffice/backbones/performance_data'
   defaults:
@@ -21,7 +22,7 @@ oab_backbones.performance_data:
     _title: 'Performance data'
   requirements:
     _permission: 'obs_backbones_functional_access'
-
+#page de vérification des données de l'import en BO
 oab_backbones.view_import:
   path: 'admin/obs_backbones/data/view/{date_import}/{site_sid}'
   defaults:
@@ -32,7 +33,7 @@ oab_backbones.view_import:
     _permission: 'obs_backbones_functional_access'
     date_import: '^[0-9]{6}$'
     site_sid: '^[0-9]*'
-
+#page du FO
 oab_backbones.view_front_page:
   path: 'network-performance/{date_import}/{site_sid}'
   defaults:

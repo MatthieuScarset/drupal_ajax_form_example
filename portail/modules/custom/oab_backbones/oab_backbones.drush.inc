@@ -2,6 +2,7 @@
 
 /**
  * Implements hook_drush_command().
+ * Méthode permettant d'importer les données de D7
  */
 function oab_backbones_drush_command() {
   $items = array();

@@ -6,17 +6,12 @@
  *
  */
 /**
- * CONSTATES DEFINIES DANS LE FICHIER .MODULE
+ * Les CONSTATES sont définies dans le fichier .MODULE
  */
 
 
 /**
- * import_batch
- * Import each line of the uploaded file
- * @param array $columns Correspond to a line in the file
- * @param array $shadowsites Array of all used shadowsites
- * @param string $month Date of import
- * @param array $context
+ * Méthode executée pour chaque ligne du fichier d'import Performance Data
  *
  */
 function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
@@ -84,6 +79,9 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
   }
 }
 
+/**
+ * Méthode appelée à la fin des batchs
+ */
 function oab_backbones_import_batch_finished($success, $results, $operations) {
   if ($success) {
     $message = \Drupal::translation()->formatPlural(count($results['title']), 'One performance data processed.', '@count performance data processed.');

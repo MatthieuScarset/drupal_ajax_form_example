@@ -42,7 +42,7 @@ class PerformanceDataForm extends FormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
-
+    // lien vers le FO
     $form['link_fontoffice'] = array(
       '#weight' => -50,
       '#type' => 'link',
@@ -52,6 +52,9 @@ class PerformanceDataForm extends FormBase
       '#suffix' => "</p>",
     );
 
+    /*********************************
+     * Formulaire d'import des données pour un mois
+     *********************************/
     $form['import'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Import settings'),
@@ -80,6 +83,10 @@ class PerformanceDataForm extends FormBase
       '#validate' => array('::validateImportHandler'),
     );
 
+
+    /*********************************
+     * Formulaire de validation des import (status + commentaire)
+     *********************************/
     $form['validation'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Validation'),
@@ -184,6 +191,8 @@ class PerformanceDataForm extends FormBase
   }
 
 
+  /** Validation du fichier avant l'import et recopie avec le bon nom
+   */
   public function validateImportHandler(array &$form, FormStateInterface $form_state)
   {
     if(!is_dir(ImportPerformanceData::$IMPORT_DIRECTORY)) {
@@ -220,8 +229,6 @@ class PerformanceDataForm extends FormBase
   }
 
   /** Méthode appelée lorsqu'on clique sur le bouton Importer
-   * @param array $form
-   * @param FormStateInterface $form_state
    */
   public function executeImportHandler(array &$form, FormStateInterface $form_state) {
     $input = &$form_state->getUserInput();
@@ -229,6 +236,8 @@ class PerformanceDataForm extends FormBase
     $importPerfData->executeImport($input['month']);
   }
 
+  /** Méthode appelée pour enregistrer les données saisies (status + commentaire)
+   */
   public function executeValidateHandler(array &$form, FormStateInterface $form_state) {
     $input = &$form_state->getUserInput();
     $bbObj = new BackbonesImport();

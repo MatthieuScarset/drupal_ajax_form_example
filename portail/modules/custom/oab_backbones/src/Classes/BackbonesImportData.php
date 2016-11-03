@@ -11,10 +11,14 @@ namespace Drupal\oab_backbones\Classes;
 
 use Drupal\Core\Database\Database;
 
+/**
+ * Classe pour les méthodes qui concernent les données d'import
+ */
 class BackbonesImportData
 {
   public static $TABLE_NAME = 'oab_backbones_import_data';
 
+  /** Méthode qui supprimes toutes les data pour un import */
   public function deleteAllDataForDates($date)
   {
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
@@ -25,6 +29,7 @@ class BackbonesImportData
     }
   }
 
+  /** Méthode qui crée ou met à jour une ligne de données pour un meme site source, site destination et date */
   public function saveDataLine($date, $sourceSite, $destinationSite, $dataArray){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -38,6 +43,7 @@ class BackbonesImportData
     }
   }
 
+  /** Retourne toutes les données pour un site source et une date */
   public function getDatasForSiteAndDate($date, $site)
   {
     $datas = array();

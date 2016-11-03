@@ -13,6 +13,9 @@ define('PLR_BA', 24);
 function oab_backbones_theme_registry_alter(&$theme_registry) {
 }
 
+/**
+ * Définition des templates custom utilisés et les variables associées
+ */
 function oab_backbones_theme($existing, $type, $theme, $path) {
 
   return array(
