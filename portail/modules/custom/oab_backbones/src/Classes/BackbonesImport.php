@@ -11,6 +11,9 @@ namespace Drupal\oab_backbones\Classes;
 
 use Drupal\Core\Database\Database;
 
+/**
+ * Classe pour les méthodes qui concernent les Imports
+ */
 class BackbonesImport
 {
   public static $TABLE_NAME = 'oab_backbones_import';
@@ -24,6 +27,7 @@ class BackbonesImport
     return $header;
   }
 
+  /** Méthode qui retourne le tableau des derniers imports pour le BO */
   public function getBackbonesImportTable()
   {
     $imports = array();
@@ -39,7 +43,7 @@ class BackbonesImport
     return $imports;
   }
 
-
+  /** Crée ou met à jour un import */
   public function saveNewImport($date)
   {
     if (Database::getConnection()->schema()->tableExists($this->tableName))
@@ -57,6 +61,7 @@ class BackbonesImport
     }
   }
 
+  /** Fait une mise à jour de l'import en BDD (status + commentaire) */
   public function updateImportInDB($date, $status, $comment){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -67,6 +72,7 @@ class BackbonesImport
     }
   }
 
+  /** Retourne les 4 dates des derniers imports */
   public function getLastImportsForSelection()
   {
     $imports = array();
@@ -89,6 +95,7 @@ class BackbonesImport
     return $imports;
   }
 
+  /** Retourne le commentaire saisi pour un import */
   public function getCommentForImport($date)
   {
     $comment = "";

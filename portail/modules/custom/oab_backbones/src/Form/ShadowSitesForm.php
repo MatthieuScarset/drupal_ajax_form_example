@@ -41,7 +41,7 @@ class ShadowSitesForm extends FormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
-
+    // lient vers le FO
     $form['link_fontoffice'] = array(
       '#weight' => -50,
       '#type' => 'link',
@@ -51,6 +51,9 @@ class ShadowSitesForm extends FormBase
       '#suffix' => "</p>",
     );
 
+    /*********************************
+     * Formulaire d'import des Shadow Sites
+     *********************************/
     $form['import'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Import settings'),
@@ -86,6 +89,9 @@ class ShadowSitesForm extends FormBase
     );
 
 
+    /*********************************
+     * Formulaire de modification des Shadow Sites
+     *********************************/
     $form['management'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Management settings'),
@@ -184,8 +190,6 @@ class ShadowSitesForm extends FormBase
   }
 
   /** Méthode appelée lorsqu'on clique sur le bouton Importer
-   * @param array $form
-   * @param FormStateInterface $form_state
    */
   public function executeImportHandler(array &$form, FormStateInterface $form_state) {
     $import = new ImportShadowSites();
@@ -193,8 +197,6 @@ class ShadowSitesForm extends FormBase
   }
 
   /** Méthode appelée lorsqu'on clique sur les bouton Enregistrer
-   * @param array $form
-   * @param FormStateInterface $form_state
    */
   public function saveSitesValuesHandler(array &$form, FormStateInterface $form_state) {
     $shadowSitesObject = new ShadowSites();

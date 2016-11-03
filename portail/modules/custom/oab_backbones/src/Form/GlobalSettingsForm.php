@@ -41,6 +41,7 @@ class GlobalSettingsForm extends FormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state)
   {
+    /** variables nid + texte du FO */
     $form['variables'] = array(
       '#type' => 'fieldset',
       '#title' => $this->t('Variables'),

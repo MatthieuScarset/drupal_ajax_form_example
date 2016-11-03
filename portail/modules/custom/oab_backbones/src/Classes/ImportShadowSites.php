@@ -9,6 +9,9 @@
 namespace Drupal\oab_backbones\Classes;
 
 
+/**
+ * Classe qui va faire l'import des Shadow Sites
+ */
 class ImportShadowSites
 {
   public static $IMPORT_DIRECTORY = 'public://backbones/sites/';

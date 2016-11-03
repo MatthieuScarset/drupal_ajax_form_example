@@ -13,6 +13,9 @@ use Drupal\Core\Archiver\Zip;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 
+/**
+ * Classe qui va faire l'import des données
+ */
 class ImportPerformanceData
 {
   public static $IMPORT_TMP_DIRECTORY = 'public://backbones/tmp/';

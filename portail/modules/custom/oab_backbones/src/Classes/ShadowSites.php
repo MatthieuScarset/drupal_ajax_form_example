@@ -11,6 +11,9 @@ namespace Drupal\oab_backbones\Classes;
 
 use Drupal\Core\Database\Database;
 
+/**
+ * Classe pour les méthodes qui concernent les Shadows sites avec la BDD
+ */
 class ShadowSites
 {
   public static $TABLE_NAME = 'oab_backbones_shadowsites';
@@ -24,6 +27,9 @@ class ShadowSites
     return $header;
   }
 
+  /** Méthode appelée par le BO, onglet Shadow Sites pour avoir la grille modifiable :
+   *      on prend TOUS les sites
+   */
   public function getShadowSitesTable()
   {
     $shadowSites = array();
@@ -39,6 +45,9 @@ class ShadowSites
     return $shadowSites;
   }
 
+  /**
+   * Méthode appelée pour avoir un array avec toutes les données prise dans la BDD
+   */
   public function getShadowSitesArrayFromDB(){
     $shadowSites = array();
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
@@ -58,6 +67,9 @@ class ShadowSites
     return $shadowSites;
   }
 
+  /**
+   * Méthode permettant de sauvegarder un shadow Site en BDD lors de l'IMPORT donc uniquement SID et probe_name
+   */
   public function saveShadowSitesInDB($ss_to_update){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -77,6 +89,7 @@ class ShadowSites
     }
   }
 
+  /** Méthode qui supprime des shadow sites avec les id en paramètre */
   public function deleteShadowSitesInDB($ss_to_delete){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -87,6 +100,7 @@ class ShadowSites
     }
   }
 
+  /** méthode qui réinitialise la valeur used à 0 pour TOUS les shadow sites */
   public function reinitUsedValuesForAllSites(){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -96,6 +110,7 @@ class ShadowSites
     }
   }
 
+  /** Méthode qui sauvegarde les valeurs used et site_label pour un site (formualire BO) */
   public function updateShadowSiteInDB($sid, $used, $siteLabel){
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
@@ -106,6 +121,7 @@ class ShadowSites
     }
   }
 
+  /** Méthode qui retourne un tableau (key=sid) de tous les sites où used =1 */
   public function getAllInformationsForUsedShadowSites(){
     $shadowSites = array();
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
@@ -131,6 +147,7 @@ class ShadowSites
     return $shadowSites;
   }
 
+  /** Méthode appelée par le formulaire de sélection d'un site source (BO et FO) parmis les sites USED */
   public function getUsedShadowSitesForSelector(){
     $shadowSites = array();
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
