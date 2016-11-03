@@ -11,6 +11,7 @@ namespace Drupal\oab_backbones\Controller;
 
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Url;
 use Drupal\oab_backbones\Classes\BackbonesImport;
 use Drupal\oab_backbones\Classes\BackbonesImportData;
 use Drupal\oab_backbones\Form\FilterPerformanceDataForm;
@@ -108,12 +109,14 @@ class OabBackbonesController extends ControllerBase
     $biObj = new BackbonesImport();
     $imports = $biObj->getBackbonesImportTable()->fetchAll();
 
+    //documentation
+    $pathDoc= file_create_url(drupal_get_path('module', 'oab_backbones'). '/BackbonesNotice.pdf');
     //Récupération du formulaire
     $form = \Drupal::formBuilder()->getForm(GlobalSettingsForm::class);
 
     return array(
       '#lastsImports' => $imports,
-      '#documentation' => '',
+      '#documentation' => $pathDoc,
       '#variablesForm' => $form,
       '#theme' => 'backbones_global_settings'
     );
