@@ -46,9 +46,9 @@ class BackbonesImport
   /** Crée ou met à jour un import */
   public function saveNewImport($date)
   {
-    if (Database::getConnection()->schema()->tableExists($this->tableName))
+    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
-      $query = Database::getConnection()->merge($this->tableName)
+      $query = Database::getConnection()->merge($this::$TABLE_NAME)
         ->key(array('date' => $date))
         ->insertFields(array(
           'date' => $date,
