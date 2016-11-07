@@ -153,3 +153,16 @@ function oab_stephanie_update_8019() {
 function oab_stephanie_update_8020() {
   include_once("updates/update_8020.inc");
 }
+
+/**
+ * ajout du champ Metatags pour Container, Profile et Form
+ */
+function oab_stephanie_update_8021() {
+  include_once("updates/update_8021.inc");
+}
+/**
+ * Ajout d'une configuration pour ne pas indexer les offices par défaut
+ */
+function oab_stephanie_update_8022() {
+  include_once("updates/update_8022.inc");
+}
