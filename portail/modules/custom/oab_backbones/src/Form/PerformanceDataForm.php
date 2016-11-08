@@ -195,11 +195,12 @@ class PerformanceDataForm extends FormBase
    */
   public function validateImportHandler(array &$form, FormStateInterface $form_state)
   {
+    $fs = \Drupal::service('file_system');
     if(!is_dir(ImportPerformanceData::$IMPORT_DIRECTORY)) {
-      mkdir(ImportPerformanceData::$IMPORT_DIRECTORY);
+      $fs->mkdir(ImportPerformanceData::$IMPORT_DIRECTORY, NULL, TRUE);
     }
     if(!is_dir(ImportPerformanceData::$IMPORT_TMP_DIRECTORY)) {
-      mkdir(ImportPerformanceData::$IMPORT_TMP_DIRECTORY);
+      $fs->mkdir(ImportPerformanceData::$IMPORT_TMP_DIRECTORY, NULL, TRUE);
     }
     $file = file_save_upload('file', array('file_validate_extensions' => ''),
                                             ImportPerformanceData::$IMPORT_TMP_DIRECTORY, null,
