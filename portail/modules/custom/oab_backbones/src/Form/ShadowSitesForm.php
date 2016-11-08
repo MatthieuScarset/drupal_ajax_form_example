@@ -9,6 +9,7 @@
 namespace Drupal\oab_backbones\Form;
 
 
+use Drupal\Core\File\FileSystem;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_backbones\Classes\ImportShadowSites;
@@ -179,7 +180,8 @@ class ShadowSitesForm extends FormBase
   {
     if(!is_dir(ImportShadowSites::$IMPORT_DIRECTORY))
     {
-      mkdir(ImportShadowSites::$IMPORT_DIRECTORY);
+      $fs = \Drupal::service('file_system');
+      $fs->mkdir(ImportShadowSites::$IMPORT_DIRECTORY, NULL, TRUE);
     }
     $file = file_save_upload('file', array('file_validate_extensions' => ''), ImportShadowSites::$IMPORT_DIRECTORY, null, FILE_EXISTS_REPLACE);
     // If the file passed validation:
