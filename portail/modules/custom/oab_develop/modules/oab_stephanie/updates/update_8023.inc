@@ -7,6 +7,10 @@ use \Drupal\Core\Utility\UpdateException;
  * Création des noeuds pour les pages 404 et 403
  */
 
+$admin_user = \Drupal\user\Entity\User::load(1);
+$current_user = \Drupal::getContainer()->get('current_user');
+\Drupal::getContainer()->set('current_user', $admin_user);
+
 $pages = array(
   array(
     'type' => '404',
@@ -115,3 +119,4 @@ foreach ($pages AS $page){
     $queryUpdate->execute();
   }
 }
+\Drupal::getContainer()->set('current_user', $current_user);
