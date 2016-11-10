@@ -202,3 +202,11 @@ function oab_amel_update_8026() {
 function oab_amel_update_8027() {
     include_once("updates/update_8027.inc");
 }
+
+
+/**
+ *  RUBYPORTAILOBS-2375 - Clone de contenu (module replicate/replicate_ui)
+ */
+function oab_amel_update_8028() {
+    include_once("updates/update_8028.inc");
+}
