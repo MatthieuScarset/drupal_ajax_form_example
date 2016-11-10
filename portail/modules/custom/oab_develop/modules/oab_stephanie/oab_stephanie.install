@@ -173,3 +173,10 @@ function oab_stephanie_update_8022() {
 function oab_stephanie_update_8023() {
   include_once("updates/update_8023.inc");
 }
+
+/**
+ * Modification de traduction : Edit Link
+ */
+function oab_stephanie_update_8024() {
+  include_once("updates/update_8024.inc");
+}
