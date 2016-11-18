@@ -180,3 +180,17 @@ function oab_stephanie_update_8023() {
 function oab_stephanie_update_8024() {
   include_once("updates/update_8024.inc");
 }
+
+/**
+ * Ajout format texte Comments
+ */
+function oab_stephanie_update_8025() {
+  include_once("updates/update_8025.inc");
+}
+
+/**
+ * Ajout Migration des commentaires Blog posts
+ */
+function oab_stephanie_update_8026() {
+  include_once("updates/update_8026.inc");
+}
