@@ -1,7 +1,7 @@
 <?php
 
 $config_factory = \Drupal::configFactory();
-$config = $config_factory->getEditable('user.role.fh_admin');
+$config = $config_factory->getEditable('views.view.content');
 $config->setData(
     array (
         'uuid' => NULL,
