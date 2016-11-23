@@ -6,4 +6,5 @@ pm-enable password_policy_length
 pm-enable password_policy_characters
 pm-enable password_policy_history
 pm-enable autologout
+pm-enable robotstxt
 updatedb
