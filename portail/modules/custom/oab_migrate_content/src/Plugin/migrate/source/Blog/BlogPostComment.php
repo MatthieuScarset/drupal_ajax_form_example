@@ -35,7 +35,7 @@ class BlogPostComment extends SqlBase {
 
     $query = $this->select('comment', 'c');
     $query->join('field_data_comment_body', 'b', 'c.cid = b.entity_id');
-    $query->join('node', 'n', 'n.cid = c.nid');
+    $query->join('node', 'n', 'n.nid = c.nid');
     $query->fields('c', ['cid', 'pid', 'nid', 'uid', 'subject', 'hostname', 'created', 'changed', 'status', 'thread', 'name', 'mail', 'homepage', 'language']);
     $query->fields('b', ['comment_body_value', 'comment_body_format']);
     $query->distinct(TRUE);
