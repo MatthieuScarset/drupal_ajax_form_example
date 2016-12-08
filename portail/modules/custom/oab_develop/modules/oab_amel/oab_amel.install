@@ -238,3 +238,11 @@ function oab_amel_update_8031() {
 function oab_amel_update_8032() {
     include_once("updates/update_8032.inc");
 }
+
+
+/**
+ *  RUBYPORTAILOBS-2609 - Ergonomie de l'interface de saisie blogs posts
+ */
+function oab_amel_update_8033() {
+    include_once("updates/update_8033.inc");
+}

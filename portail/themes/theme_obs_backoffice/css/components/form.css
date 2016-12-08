@@ -317,3 +317,16 @@ select {
 div.filter-options select {
   padding: 0;
 }
+
+
+.form-item-path-0-alias input,
+.form-item-field-owner-0-value input,
+.form-item-field-profile-0-target-id input,
+.form-item-field-subtitle-0-value input,
+.form-item-title-0-value input{
+  width: 100%;
+}
+#edit-field-meta-titre-0-value , #edit-field-meta-descriptif-court-0-value {
+  width: 100%;
+  background-color: lightgrey;
+}
