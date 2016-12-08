@@ -16,5 +16,9 @@
 #}
 {% set classes = [
   is_active ? 'active',
+  link['#title'] == "Workflow" ? 'visually-hidden',
+  link['#title'] == "Processus" ? 'visually-hidden',
 ] %}
+
+
 <li{{ attributes.addClass(classes) }}>{{ link }}</li>

@@ -165,9 +165,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
       '#markup' => $form['field_rendering_model']['widget']['#options'][$current_rendering_model],
       '#weight' => $form['field_rendering_model']['#weight'],
     ];
-    $form['#fieldgroups']['group_general']->children[] = 'field_rendering_model_markup';
-    $form['#group_children']['field_rendering_model_markup'] = 'group_general';
 
+
+
+    $form['#attached']['library'][] = 'oab_backoffice/metadata';
+
+    $form['#fieldgroups']['group_rediger']->children[] = 'field_rendering_model_markup';
+    $form['#group_children']['field_rendering_model_markup'] = 'group_rediger';
+    
     // positionnement des champs dates
     if (isset($form['field_start_date'])
       && isset($form['field_end_date'])){
@@ -187,7 +192,16 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     $form['#group_children']['field_templating_tooltips'] = 'group_contenu';*/
 
     // disposition des taxonomies
-    foreach ($form['#fieldgroups']['group_taxonomie']->children AS $field){
+    /* foreach ($form['#fieldgroups']['group_taxonomie']->children AS $field){
+      if (isset($form[$field])){
+        //kprint_r($form[$field]['widget']);
+        $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
+        $form[$field]['widget']['#size'] = 15;
+      }
+    }*/
+
+    // disposition des taxonomies
+    foreach ($form['#fieldgroups']['group_classer']->children AS $field){
       if (isset($form[$field])){
         //kprint_r($form[$field]['widget']);
         $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
@@ -233,15 +247,13 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
     // valeur par défaut pour le champ "display_title"
     // dans le cas d'une edition et que la valeur n'existe pas encore
-    if ($form_id == 'node_container_edit_form')
-    {
-      if ($node = \Drupal::routeMatch()->getParameter('node'))
-      {
+    if ($form_id == 'node_container_edit_form') {
+      if ($node = \Drupal::routeMatch()->getParameter('node')) {
         $content_type = $node->bundle();
         $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
         if (isset($definitions)
-        && array_key_exists('field_display_title', $definitions))
-        {
+            && array_key_exists('field_display_title', $definitions)
+        ) {
           if ($display_title = $node->get('field_display_title')->getValue()) {
             if (!isset($display_title[0]['value'])) {
               $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
@@ -249,6 +261,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
           }
         }
       }
+      
     }
   }
 
@@ -335,6 +348,31 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
   || $form_id == 'entity_browser_browse_medias_iframe_form'){
     $form['actions']['#weight'] = -10;
   }
+
+
+  // Move the Revision tab:
+  $form['#group_children']['revision_information'] = 'group_publier';
+  $form['revision_information']['#group'] = 'group_publier';
+  $form['revision_information']['#weight'] = 10;
+   // Path is a little MORE stubborn, so we have to change its grouping after the form is built:
+   $form['#after_build'][] = 'oab_backoffice_after_build';
+
+   //$form['advanced']['#access'] = false;
+
+
+}
+
+function oab_backoffice_after_build($form, &$form_state){
+
+  // At last, the incredibly stubborn URL alias settings are finally moved
+ // kint( $form['#group_children']['revision_information']);
+  $form['#group_children']['path'] = 'group_publier';
+  $form['path']['#group'] = 'group_publier';
+  $form['#group_children']['revision_information'] = 'group_publier';
+
+
+
+  return $form;
 }
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
