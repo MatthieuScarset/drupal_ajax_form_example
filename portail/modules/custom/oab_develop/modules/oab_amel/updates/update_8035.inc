@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * Edition de la configuration pour l'ajout du champ au formulaire de création de container
+ */
+/** core.entity_form_display.node.container.default **/
 $config_factory = \Drupal::configFactory();
-$config = $config_factory->getEditable('core.entity_form_display.node.container.default');
+$config_group = $config_factory->getEditable('core.entity_form_display.node.container.default');
 $config_group->setData(
     array (
     'uuid' => NULL,
@@ -668,5 +672,5 @@ $config_group->setData(
             'unpublish_date' => true,
         ),
 ));
-$config->save(TRUE);
+$config_group->save(TRUE);
 
