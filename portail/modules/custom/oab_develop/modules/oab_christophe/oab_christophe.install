@@ -306,3 +306,10 @@ function oab_christophe_update_8040() {
 function oab_christophe_update_8041() {
   include_once("updates/update_8041.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2667 - parametrage pathauto
+ */
+function oab_christophe_update_8042() {
+  include_once("updates/update_8042.inc");
+}
