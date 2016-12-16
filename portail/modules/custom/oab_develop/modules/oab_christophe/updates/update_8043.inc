@@ -180,7 +180,7 @@ $config_group->save(TRUE);
 
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('user.role.fh_admin');
+$config_group = $config_factory->getEditable('user.role.fh_content');
 $config_group->setData(
   array (
     'uuid' => '7dfb2b91-4c6b-48f1-b42d-452a689fbff8',
