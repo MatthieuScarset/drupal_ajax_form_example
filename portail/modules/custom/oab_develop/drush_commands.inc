@@ -17,4 +17,5 @@ pm-uninstall yamlform
 pm-enable webform
 pm-enable webform_node
 pm-enable webform_ui
+pm-enable recaptcha
 updatedb
