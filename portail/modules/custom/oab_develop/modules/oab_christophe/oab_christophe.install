@@ -327,3 +327,10 @@ function oab_christophe_update_8043() {
 function oab_christophe_update_8044() {
   include_once("updates/update_8044.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2529 - flux RSS
+ */
+function oab_christophe_update_8045() {
+  include_once("updates/update_8045.inc");
+}
