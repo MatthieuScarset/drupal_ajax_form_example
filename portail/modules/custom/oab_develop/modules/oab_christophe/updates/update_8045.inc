@@ -516,6 +516,7 @@ $config_group->setData(
                 'display_extenders' =>
                   array (
                   ),
+                'title' => 'Presse',
               ),
             'cache_metadata' =>
               array (
@@ -722,6 +723,7 @@ $config_group->setData(
                         'offset' => 0,
                       ),
                   ),
+                'sitename_title' => false,
               ),
             'cache_metadata' =>
               array (
@@ -770,6 +772,13 @@ $config_group->setData(
                       ),
                   ),
                 'display_description' => '',
+                'title' => 'Realtimes',
+                'defaults' =>
+                  array (
+                    'title' => false,
+                    'sitename_title' => false,
+                  ),
+                'sitename_title' => false,
               ),
             'cache_metadata' =>
               array (
