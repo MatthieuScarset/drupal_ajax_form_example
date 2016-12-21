@@ -75,8 +75,34 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+
+
+
 {% if view_mode == 'blog_post' %}
-{% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+
+    {% set fieldBlog %}
+        {{ content.field_blog }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+    {% set fieldAuthor %}
+        {{ author_name }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "headline" : "{{ node.label }}",
+      "genre" : "{{ fieldBlog|striptags|trim }}",
+      "creationDate": "{{ createdDate }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ fieldAuthor|striptags|trim }}",
+      }
+    }
+    </script>
+
+
 <div class="content_info">
     <span class="date">{{ createdDate }}</span> {{ content.profil_name }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
 </div>

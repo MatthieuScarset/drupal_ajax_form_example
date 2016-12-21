@@ -75,12 +75,39 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+
+
+
+
 {% if view_mode == 'magazine' %}
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+
+    {% set fieldMagazine %}
+        {{ content.field_magazine }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+    {% set fieldAuthor %}
+        {{ author_name }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "{{ node.label }}",
+      "genre": "{{ fieldMagazine|striptags|trim }}",
+      "dateCreated": "{{ createdDate }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ fieldAuthor|striptags|trim }}",
+      }
+    }
+    </script>
+
     <div class="content_info">
         <span class="date">{{ createdDate }}</span> {% trans %}dans{% endtrans %} {{ content.field_magazine }}
     </div>
 {% endif %}
+
 
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
