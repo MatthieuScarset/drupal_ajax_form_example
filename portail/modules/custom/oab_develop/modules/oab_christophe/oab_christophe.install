@@ -306,3 +306,31 @@ function oab_christophe_update_8040() {
 function oab_christophe_update_8041() {
   include_once("updates/update_8041.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2667 - parametrage pathauto
+ */
+function oab_christophe_update_8042() {
+  include_once("updates/update_8042.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2681 - installation du module webform
+ */
+function oab_christophe_update_8043() {
+  include_once("updates/update_8043.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2427 - installation du module ReCaptcha
+ */
+function oab_christophe_update_8044() {
+  include_once("updates/update_8044.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2529 - flux RSS
+ */
+function oab_christophe_update_8045() {
+  include_once("updates/update_8045.inc");
+}
