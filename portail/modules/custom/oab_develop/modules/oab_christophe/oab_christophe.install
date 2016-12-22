@@ -334,3 +334,10 @@ function oab_christophe_update_8044() {
 function oab_christophe_update_8045() {
   include_once("updates/update_8045.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2679 - boutons de partage traduction
+ */
+function oab_christophe_update_8046() {
+  include_once("updates/update_8046.inc");
+}
