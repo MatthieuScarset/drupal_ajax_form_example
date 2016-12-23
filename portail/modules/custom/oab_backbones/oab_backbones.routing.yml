@@ -45,3 +45,13 @@ oab_backbones.view_front_page:
     _permission: 'access content'
     date_import: '^[0-9]{6}$'
     site_sid: '^[0-9]*'
+#page "top ten" d'un import
+oab_backbones.top_ten:
+  path: 'admin/obs_backbones/data/top_ten/{date_import}'
+  defaults:
+    _controller: '\Drupal\oab_backbones\Controller\OabBackbonesController::viewTopTenAdmin'
+    site_sid: ''
+    _title: 'Top ten values (RTD, PLR, JITTER)'
+  requirements:
+    _permission: 'obs_backbones_functional_access'
+    date_import: '^[0-9]{6}$'

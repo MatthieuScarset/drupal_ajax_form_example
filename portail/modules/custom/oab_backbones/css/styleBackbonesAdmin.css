@@ -1,3 +1,30 @@
 .oab-backbones-performance-data-form #edit-validation input[type="checkbox"] {
     display: none;
 }
+
+.backbones_tabs
+{
+    width: 100%;
+}
+
+.backbones_tabs .tab
+{
+    width: 50%;
+    float: left;
+}
+
+
+.backbones_tabs .tab table
+{
+ border: 1px solid #e6e4df;
+}
+
+h2.top_ten_title{
+    margin-top: 30px;
+    display: inline-block;
+}
+
+table tr th span{
+    text-transform: lowercase;
+    font-style: italic;
+}

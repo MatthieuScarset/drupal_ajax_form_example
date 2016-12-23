@@ -34,6 +34,7 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
 
       if (!isset($context['results']['data'][$columns[SID_A]][$columns[SID_B]])
         || $context['results']['data'][$columns[SID_A]][$columns[SID_B]] == "") {
+        \Drupal::logger('oab_backbones')->notice('traitement de : '.$columns[SID_A].' -> '.$columns[SID_B]. ' : '.$context['results']['data'][$columns[SID_A]][$columns[SID_B]]);
         $context['results']['data'][$columns[SID_A]][$columns[SID_B]] = 1;
         $bbImportDataObj = new \Drupal\oab_backbones\Classes\BackbonesImportData();
 
@@ -70,11 +71,17 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
         $context['results']['title'][] = $title;
         $context['message'] = $title;
       } else {
-        $context['results']['fault'][] = $context['results']['total'];
+        $context['results']['fault']['doublon'][] = $context['results']['total'];
+        //\Drupal::logger('oab_backbones')->notice('**************************************************** ');
+        //\Drupal::logger('oab_backbones')->notice('premier ELSE '.$columns[SID_A].' -> '.$columns[SID_B]. ' : '.$context['results']['data'][$columns[SID_A]][$columns[SID_B]]);
+        //\Drupal::logger('oab_backbones')->notice('**************************************************** ');
 
       }
     } else {
-      $context['results']['fault'][] = $context['results']['total'];
+      $context['results']['fault']['emptyValue'][] = $context['results']['total'];
+      //\Drupal::logger('oab_backbones')->notice('**************************************************** ');
+      //\Drupal::logger('oab_backbones')->notice('une des colonnes vides '.$columns[SID_A].' -> '.$columns[SID_B].' : '.$columns[RTD]. ' - '.$columns[JITTER_AB]. ' - '.$columns[JITTER_BA]. ' - '.$columns[PLR_AB]. ' - '.$columns[PLR_BA]. ' ; ');
+      //\Drupal::logger('oab_backbones')->notice('**************************************************** ');
     }
   }
 }
@@ -86,10 +93,15 @@ function oab_backbones_import_batch_finished($success, $results, $operations) {
   if ($success) {
     $message = \Drupal::translation()->formatPlural(count($results['title']), 'One performance data processed.', '@count performance data processed.');
     drupal_set_message($message, 'status', TRUE);
-    if (isset($results['fault'])
-      && count($results['fault']) > 0) {
-      $message = \Drupal::translation()->formatPlural(count($results['fault']), 'One performance data in error.', '@count performance data in error.');
-      drupal_set_message($message, 'error', TRUE);
+    if (isset($results['fault']['doublon'])
+      && count($results['fault']['doublon']) > 0) {
+      $message = \Drupal::translation()->formatPlural(count($results['fault']['doublon']), 'One non-imported line (duplicate source and destination sites).', '@count non-imported lines (duplicate source and destination sites).');
+      drupal_set_message($message, 'warning', TRUE);
+    }
+    if (isset($results['fault']['emptyValue'])
+      && count($results['fault']['emptyValue']) > 0) {
+      $message = \Drupal::translation()->formatPlural(count($results['fault']['emptyValue']), 'One line containing empty values.', '@count lines containing empty values.');
+      drupal_set_message($message, 'warning', TRUE);
     }
   } else {
     $message = t('Finished with an error.');

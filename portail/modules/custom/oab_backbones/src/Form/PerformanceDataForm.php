@@ -114,6 +114,13 @@ class PerformanceDataForm extends FormBase
             '#url' => \Drupal\Core\Url::fromRoute('oab_backbones.view_import', array('date_import' => $import->date))
           )
         ),
+        'top_ten' => array(
+          'data' => array (
+            '#type' => 'link',
+            '#title' => t("See top ten values"),
+            '#url' => \Drupal\Core\Url::fromRoute('oab_backbones.top_ten', array('date_import' => $import->date))
+          )
+        ),
         'status' => array(
           'data' => array (
             '#type' => 'select',

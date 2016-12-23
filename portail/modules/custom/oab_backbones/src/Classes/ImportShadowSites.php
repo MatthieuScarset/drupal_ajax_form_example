@@ -15,10 +15,9 @@ namespace Drupal\oab_backbones\Classes;
 class ImportShadowSites
 {
   public static $IMPORT_DIRECTORY = 'public://backbones/sites/';
-  public static $IMPORT_FILENAME = 'SHADOW_SITE.txt.gz';
 
-  public function executeImport(){
-    $fileNameComplete = $this::$IMPORT_DIRECTORY.$this::$IMPORT_FILENAME;
+  public function executeImport($filename){
+    $fileNameComplete = $this::$IMPORT_DIRECTORY.$filename;
     if(file_exists($fileNameComplete) && filesize($fileNameComplete) > 0){
       $lines = gzfile($fileNameComplete);
       if (count($lines) > 100) {
@@ -53,11 +52,13 @@ class ImportShadowSites
         $timestamp = time();
         \Drupal::state()->set('bbp_last_import_ss', $timestamp);
 
+        drupal_set_message("The file ".$filename."has been imported successfully", 'status', TRUE);
+
       } else {
-        drupal_set_message(t("File SHADOW_SITE.txt.gz has to few lines"), 'error');
+        drupal_set_message(t("File has to few lines"), 'error');
       }
     } else {
-      drupal_set_message(t("File SHADOW_SITE.txt.gz doesn't exist"), 'error');
+      drupal_set_message(t("File doesn't exist"), 'error');
     }
   }
 }

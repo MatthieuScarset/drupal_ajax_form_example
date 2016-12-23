@@ -189,13 +189,21 @@ class ShadowSitesForm extends FormBase
     {
       $form_state->setErrorByName('file', t('No file was uploaded.'));
     }
+    else {
+      $filename = $file[0]->getFilename();
+      $input = &$form_state->getUserInput();
+      $input["filename"] = $filename;
+      $form_state->setUserInput($input);
+    }
   }
 
   /** Méthode appelée lorsqu'on clique sur le bouton Importer
    */
   public function executeImportHandler(array &$form, FormStateInterface $form_state) {
+    $input = &$form_state->getUserInput();
     $import = new ImportShadowSites();
-    $import->executeImport();
+    $import->executeImport($input['filename']);
+
   }
 
   /** Méthode appelée lorsqu'on clique sur les bouton Enregistrer

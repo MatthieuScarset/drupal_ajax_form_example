@@ -48,6 +48,17 @@ function oab_backbones_theme($existing, $type, $theme, $path) {
           'variablesForm' => array()
         ),
         'template' => 'backbones-global-settings-admin'
-      )
+      ),
+    'backbones_top_ten_data_admin' =>
+      array(
+        'variables' => array(
+          'actualimport' => "",
+          'lastimport' => "",
+          'dataRTD' => array(),
+          'dataPLR' => array(),
+          'dataJITTER' => array()
+        ),
+        'template' => 'backbones-top-ten-data-admin'
+      ),
   );
 }

@@ -21,6 +21,7 @@ class BackbonesImport
   public function getHeaderTable(){
     $header = array(
       'date' => array('data' => t('Date'), 'field' => 'date', 'sort' => 'desc'),
+      'top_ten' => array('data' => t('Top Ten'), 'field' => 'top_ten'),
       'status' => array('data' => t('Status'), 'field' => 'status'),
       'comment' => t('Comments')
     );
@@ -114,5 +115,30 @@ class BackbonesImport
       }
     }
     return $comment;
+  }
+
+
+  /** Retourne le dernier import validé avant celui passé en paramètre */
+  public function getLastImportBeforeDate($date)
+  {
+    $dateImport = "";
+    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
+    {
+      $query = Database::getConnection()->select($this::$TABLE_NAME, 'i');
+      $results =	$query->fields('i')
+        ->condition('i.status', 1, '=')
+        ->condition('i.date', $date, '<')
+        ->range(0,1)
+        ->orderBy('i.date', 'DESC');
+      $results = $query->execute()->fetchAll();
+
+      if (is_array($results) && count($results) > 0) {
+        foreach ($results as $result)
+        {
+          $dateImport = $result->date;
+        }
+      }
+    }
+    return $dateImport;
   }
 }

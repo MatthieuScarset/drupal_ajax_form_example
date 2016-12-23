@@ -1,0 +1,85 @@
+
+<h2 class="top_ten_title">Top ten values for delta RTD between <i>{{ lastimport }}</i> import and <i>{{ actualimport }}</i> import :</h2>
+<div class='backbones_tabs'>
+    {% for dRTD in dataRTD %}
+    <div class='tab'>
+        <table summary="">
+            <thead>
+            <tr class="header_col">
+                <th id="source">Source</th>
+                <th id="destination">Destination</th>
+                <th id="delta">Delta <span>(ms)</span></th>
+                <th id="rtd">RTD <span>(ms)</span> ({{ lastimport }})</th>
+                <th id="rtd">RTD <span>(ms)</span> ({{ actualimport }})</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in dRTD %}
+            <tr>
+                <td headers="source" class="td_label">{{ data.source_label|raw }}</td>
+                <td headers="destination" class="td_label">{{ data.destination_label|raw }}</td>
+                <td headers="delta" class="td_data"><b>{{ data.delta|raw }}</b></td>
+                <td headers="rtd" class="td_data">{{ data.d1_RTD|raw }}</td>
+                <td headers="rtd" class="td_data">{{ data.d2_RTD|raw }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    <div class='clear'></div>
+</div>
+
+<h2 class="top_ten_title">Top ten values for PLR :</h2>
+<div class='backbones_tabs'>
+{% for dPLR in dataPLR %}
+    <div class='tab'>
+        <table summary="">
+            <thead>
+            <tr class="header_col">
+                <th id="source">Source</th>
+                <th id="destination">Destination</th>
+                <th id="plr">PLR <span>(%)</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in dPLR %}
+                <tr>
+                    <td headers="source" class="td_label">{{ data.source_label|raw }}</td>
+                    <td headers="destination" class="td_label">{{ data.destination_label|raw }}</td>
+                    <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+<div class='clear'></div>
+</div>
+
+<h2 class="top_ten_title">Top ten values for JITTER :</h2>
+<div class='backbones_tabs'>
+    {% for dJITTER in dataJITTER %}
+        <div class='tab'>
+            <table summary="">
+                <thead>
+                <tr class="header_col">
+                    <th id="source">Source</th>
+                    <th id="destination">Destination</th>
+                    <th id="jitter">Jitter <span>(ms)</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in dJITTER %}
+                    <tr>
+                        <td headers="source" class="td_label">{{ data.source_label|raw }}</td>
+                        <td headers="destination" class="td_label">{{ data.destination_label|raw }}</td>
+                        <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+    <div class='clear'></div>
+</div>
