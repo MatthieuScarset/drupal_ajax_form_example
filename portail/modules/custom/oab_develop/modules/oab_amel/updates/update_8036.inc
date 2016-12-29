@@ -55,7 +55,7 @@ array (
 ));
 $config->save(TRUE);
 
-/** Attribution des permission au nouveau rôle Authenticated */
+/** Attribution des permission au nouveau rôle Authenticated  */
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('user.role.blogger');
 $config->setData(
