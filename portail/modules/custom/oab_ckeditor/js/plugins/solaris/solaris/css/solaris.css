@@ -1,0 +1,38 @@
+#solaris {
+    overflow: auto;
+    text-align: center;
+    height: 400px;
+    width: 100%;
+}
+
+#solaris div {
+    text-align: center;
+}
+
+#solaris a, #solaris span {
+    margin-bottom: .5em;
+    text-align: center;
+}
+
+#solaris a {
+    padding: .5em;
+    display: block;
+    float: left;
+    width: 100px;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    white-space: normal;
+    text-align: center;
+    height: 68px;
+}
+
+#solaris a:hover, #solaris a.active {
+    border: 1px solid #ddd;
+    background: #eee;
+}
+
+#solaris span {
+    font-size: 24px;
+    color: #000;
+}
