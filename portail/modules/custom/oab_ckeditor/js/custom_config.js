@@ -1,5 +1,5 @@
 CKEDITOR.editorConfig = function(config) {
-    CKEDITOR.config.extraPlugins = 'layoutmanager, fontawesome, templating, embed, embedbase, notificationaggregator, notification, toolbar, button';
+    CKEDITOR.config.extraPlugins = 'layoutmanager, fontawesome, templating, embed, embedbase, notificationaggregator, notification, toolbar, button, solaris';
 
     config.templates_files = [
         drupalSettings.path.baseUrl + 'modules/custom/oab_ckeditor/js/custom_templates.js'

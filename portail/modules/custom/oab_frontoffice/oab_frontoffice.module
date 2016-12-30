@@ -81,27 +81,29 @@ function oab_frontoffice_link_alter(&$variables){
  */
 function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
   // Cheking view_mode for node.
-  if ($build['#view_mode'] !== 'full' && $entity Instanceof NodeInterface) {
-    return;
-  }
-  _remove_header_links($build);
+  if ($entity->getEntityType()->id() == 'node') {
+      if (!empty($build['#attached']['html_head_link'])) {
+        _remove_header_links($build);
+      }
+    }
 }
 
 /**
  * Implements hook_page_attachments_alter().
  * @param array $attachments
  */
-function oab_frontoffice_page_attachments_alter(array &$attachments) {
-  //kpr($attachments['#attached']['html_head']);
-  _remove_header_links($attachments);
+function oab_frontoffice_page_attachments_alter(array &$attachments)
+{
+  //Do nothing : test if ok in all pages, unless uncomment below
+  //_remove_header_links($attachments);
 }
 
 function _remove_header_links(array &$attachments) {
   // Cheking html_head on attached tags in head.
-
-  if (!isset($attachments['#attached']['html_head'])) {
+  if (!isset($attachments['#attached']['html_head_link'])) {
     return;
   }
+
   // Array to unset.
   $unset_html_head_link = [
       'shortlink',
@@ -116,9 +118,9 @@ function _remove_header_links(array &$attachments) {
       'drupal:content-translation-delete',
   ];
   // Unset loop.
-  foreach ($attachments['#attached']['html_head'] as $key => $value) {
+  foreach ($attachments['#attached']['html_head_link'] as $key => $value) {
     if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
-      unset($attachments['#attached']['html_head'][$key]);
+      unset($attachments['#attached']['html_head_link'][$key]);
     }
   }
 }
@@ -127,9 +129,12 @@ function _remove_header_links(array &$attachments) {
  * Implements hook_module_implements_alter().
  */
 function oab_frontoffice_module_implements_alter(&$implementations, $hook) {
-  if ($hook === 'page_attachments_alter') {
-    $group = $implementations['oab_frontoffice'];
-    unset($implementations['oab_frontoffice']);
-    $implementations['oab_frontoffice'] = $group;
-  }
+  //Not necessary !
+
+//  echo('implements alter called');
+//  if ($hook === 'page_attachments_alter') {
+//    $group = $implementations['oab_frontoffice'];
+//    unset($implementations['oab_frontoffice']);
+//    $implementations['oab_frontoffice'] = $group;
+//  }
 }
