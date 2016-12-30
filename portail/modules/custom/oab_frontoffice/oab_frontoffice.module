@@ -2,7 +2,9 @@
 
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
-
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
 /**
  * Implements hook_form_alter().
  */
@@ -67,5 +69,65 @@ function oab_frontoffice_link_alter(&$variables){
     catch(\UnexpectedValueException $e){
 
     }
+  }
+}
+
+
+/**
+ * Implements hook_entity_view_alter().
+ * @param array $build
+ * @param EntityInterface $entity
+ * @param EntityViewDisplayInterface $display
+ */
+function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  // Cheking view_mode for node.
+  if ($build['#view_mode'] !== 'full' && $entity Instanceof NodeInterface) {
+    return;
+  }
+  _remove_header_links($build);
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ * @param array $attachments
+ */
+function oab_frontoffice_page_attachments_alter(array &$attachments) {
+  kpr($attachments['#attached']['html_head']);
+  _remove_header_links($attachments);
+}
+
+function _remove_header_links(array &$attachments) {
+  // Cheking html_head_link on attached tags in head.
+  if (!isset($attachments['#attached']['html_head'])) {
+    return;
+  }
+  // Array to unset.
+  $unset_html_head_link = [
+      'delete-form',
+      'edit-form',
+      'version-history',
+      'revision',
+      'display',
+      'drupal:content-translation-overview',
+      'drupal:content-translation-add',
+      'drupal:content-translation-edit',
+      'drupal:content-translation-delete',
+  ];
+  // Unset loop.
+  foreach ($attachments['#attached']['html_head'] as $key => $value) {
+    if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
+      unset($attachments['#attached']['html_head'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function oab_frontoffice_module_implements_alter(&$implementations, $hook) {
+  if ($hook === 'page_attachments_alter') {
+    $group = $implementations['oab_frontoffice'];
+    unset($implementations['oab_frontoffice']);
+    $implementations['oab_frontoffice'] = $group;
   }
 }
