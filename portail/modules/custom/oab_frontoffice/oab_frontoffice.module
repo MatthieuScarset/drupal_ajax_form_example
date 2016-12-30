@@ -92,16 +92,20 @@ function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entit
  * @param array $attachments
  */
 function oab_frontoffice_page_attachments_alter(array &$attachments) {
+  //kpr($attachments['#attached']['html_head']);
   _remove_header_links($attachments);
 }
 
 function _remove_header_links(array &$attachments) {
-  // Cheking html_head_link on attached tags in head.
+  // Cheking html_head on attached tags in head.
+
+  kpr($attachments['#attached']);
   if (!isset($attachments['#attached']['html_head'])) {
     return;
   }
   // Array to unset.
   $unset_html_head_link = [
+      'shortlink',
       'delete-form',
       'edit-form',
       'version-history',
