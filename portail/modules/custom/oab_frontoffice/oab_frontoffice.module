@@ -99,7 +99,6 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
 function _remove_header_links(array &$attachments) {
   // Cheking html_head on attached tags in head.
 
-  kpr($attachments['#attached']);
   if (!isset($attachments['#attached']['html_head'])) {
     return;
   }
