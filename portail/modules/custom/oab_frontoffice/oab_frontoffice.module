@@ -124,17 +124,3 @@ function _remove_header_links(array &$attachments) {
     }
   }
 }
-
-/**
- * Implements hook_module_implements_alter().
- */
-function oab_frontoffice_module_implements_alter(&$implementations, $hook) {
-  //Not necessary !
-
-//  echo('implements alter called');
-//  if ($hook === 'page_attachments_alter') {
-//    $group = $implementations['oab_frontoffice'];
-//    unset($implementations['oab_frontoffice']);
-//    $implementations['oab_frontoffice'] = $group;
-//  }
-}

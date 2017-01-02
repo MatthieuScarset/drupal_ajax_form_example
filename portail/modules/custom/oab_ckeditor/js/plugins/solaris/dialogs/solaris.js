@@ -674,7 +674,7 @@ function in_array(needle, haystack) {
                             widget.setData('size', this.getValue())
                         }
                     }]
-                }, {
+                }, /*{
                     type: 'hbox',
                     widths: ['25%', '25%', '25%', '25%'],
                     children: [{
@@ -745,7 +745,7 @@ function in_array(needle, haystack) {
                             setCheckboxes()
                         }
                     }]
-                }, {
+                },*/ {
                     type: 'text',
                     id: 'solarisSearch',
                     className: 'solarisSearch cke_dialog_ui_input_text',
@@ -763,47 +763,52 @@ function in_array(needle, haystack) {
                         if (widget.data.class != '') {
                             klases = widget.data.class;
                             klases = klases.split(' ');
-                            in_array('fa-border', klases) ? klases.splice(klases.indexOf('fa-border'), 1) : '';
-                            in_array('fa-fw', klases) ? klases.splice(klases.indexOf('fa-fw'), 1) : '';
-                            in_array('fa-spin', klases) ? klases.splice(klases.indexOf('fa-spin'), 1) : '';
-                            in_array('fa-rotate-90', klases) ? klases.splice(klases.indexOf('fa-rotate-90'), 1) : '';
-                            in_array('fa-rotate-180', klases) ? klases.splice(klases.indexOf('fa-rotate-180'), 1) : '';
-                            in_array('fa-rotate-270', klases) ? klases.splice(klases.indexOf('fa-rotate-270'), 1) : '';
-                            in_array('fa-flip-horizontal', klases) ? klases.splice(klases.indexOf('fa-flip-horizontal'), 1) : '';
-                            in_array('fa-flip-vertical', klases) ? klases.splice(klases.indexOf('fa-flip-vertical'), 1) : '';
+                            // in_array('fa-border', klases) ? klases.splice(klases.indexOf('fa-border'), 1) : '';
+                            // in_array('fa-fw', klases) ? klases.splice(klases.indexOf('fa-fw'), 1) : '';
+                            // in_array('fa-spin', klases) ? klases.splice(klases.indexOf('fa-spin'), 1) : '';
+                            // in_array('fa-rotate-90', klases) ? klases.splice(klases.indexOf('fa-rotate-90'), 1) : '';
+                            // in_array('fa-rotate-180', klases) ? klases.splice(klases.indexOf('fa-rotate-180'), 1) : '';
+                            // in_array('fa-rotate-270', klases) ? klases.splice(klases.indexOf('fa-rotate-270'), 1) : '';
+                            // in_array('fa-flip-horizontal', klases) ? klases.splice(klases.indexOf('fa-flip-horizontal'), 1) : '';
+                            // in_array('fa-flip-vertical', klases) ? klases.splice(klases.indexOf('fa-flip-vertical'), 1) : '';
                             klases = klases.join(' ')
                         }
                         this.setValue(klases)
                     },
                     commit: function(widget) {
                         var klases = '';
-                        klases += document.getElementsByClassName('spinning')[0].getElementsByTagName('input')[0].checked ? ' fa-spin' : klases;
-                        klases += document.getElementsByClassName('fixedWidth')[0].getElementsByTagName('input')[0].checked ? ' fa-fw' : klases;
-                        klases += document.getElementsByClassName('bordered')[0].getElementsByTagName('input')[0].checked ? ' fa-border' : klases;
-                        klases += ' ' + document.getElementsByClassName('flippedRotation')[0].getElementsByTagName('select')[0].value;
+                        // klases += document.getElementsByClassName('spinning')[0].getElementsByTagName('input')[0].checked ? ' fa-spin' : klases;
+                        // klases += document.getElementsByClassName('fixedWidth')[0].getElementsByTagName('input')[0].checked ? ' fa-fw' : klases;
+                        // klases += document.getElementsByClassName('bordered')[0].getElementsByTagName('input')[0].checked ? ' fa-border' : klases;
+                        // klases += ' ' + document.getElementsByClassName('flippedRotation')[0].getElementsByTagName('select')[0].value;
                         widget.setData('class', this.getValue() + klases)
                     }
                 },
-                //     {
-                //     type: 'html',
-                //     html: '<link rel="stylesheet" type="text/css" href="' + CKEDITOR.plugins.getPath('solaris') + 'solaris/css/boosted2015.min.css" />'
-                // },
+                    {
+                    type: 'html',
+                    html: '<link rel="stylesheet" type="text/css" href="' + CKEDITOR.plugins.getPath('solaris') + 'solaris/css/boosted.min.css" />'
+                },
                     {
                     type: 'html',
                     html: '<div id="solaris">' + solarisIcons + '</div>'
                 }]
             }],
             onOk: function() {
-                console.log('current', '<span class=\"'+currentIcon.className+'\" ></span>');
-                editor.insertHtml('<span class=\"'+currentIcon.className+'\" ></span>');
+
+                el = document.getElementById('solaris');
+                var iconSize = document.getElementsByClassName('size')[0].getElementsByTagName('input')[0].value;
+                
+                editor.insertHtml('<span class=\"' + currentIcon.className + '\" style=\"color:' + el.getElementsByTagName('span')[0].style.color + '; font-size:' + iconSize + 'rem;\" ></span>');
                 var glyphs = document.getElementById('solaris');
                 glyphs = glyphs.getElementsByTagName('a');
+
                 for (i = 0; i < glyphs.length; i++) {
                     glyphs[i].firstChild.className = glyphs[i].getAttribute('title');
                     glyphs[i].className = '';
                     glyphs[i].style.display = '';
-                    glyphs[i].getElementsByTagName('span')[0].style.color = ''
                 }
+
+
             }
         };
     });
