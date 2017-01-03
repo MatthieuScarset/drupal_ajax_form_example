@@ -1,15 +1,21 @@
 <?php
-
+use \Drupal\Core\Utility\UpdateException;
 use Drupal\Core\Database\Database;
 
 /** Création d'un nouveau Rôle : Blogger */
 
 $data = array('id' => 'blogger', 'label' => 'Blogger');
-//creating role
-$role = \Drupal\user\Entity\Role::create($data);
-//saving role
-$role->save();
+//check if role already exist or not ?
+$role_blogger = \Drupal\user\Entity\Role::load('blogger');
+if(empty($role_blogger) || $role_blogger == null) {
+        //creating role
+        $role = \Drupal\user\Entity\Role::create($data);
+        if ($role)
+                //saving role
+                $role->save();
+}
 
+//throw new \Drupal\Core\Utility\UpdateException();
 
 /** Attribution des permission au nouveau rôle Blogger */
 $config_factory = \Drupal::configFactory();
