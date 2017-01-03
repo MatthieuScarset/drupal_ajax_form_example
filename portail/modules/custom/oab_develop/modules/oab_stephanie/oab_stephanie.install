@@ -194,3 +194,11 @@ function oab_stephanie_update_8025() {
 function oab_stephanie_update_8026() {
   include_once("updates/update_8026.inc");
 }
+
+/**
+ * Ajout module Simplify et configuration de ce dernier
+ */
+
+function oab_stephanie_update_8027() {
+  include_once("updates/update_8027.inc");
+}
