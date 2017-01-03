@@ -26,6 +26,14 @@ function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_st
   }
 }
 
+/**
+ * Hook form alter pour le formulaire des commentaires
+ */
+function oab_frontoffice_form_comment_comment_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // restriction sur le choix du format de texte
+  $form['comment_body']['widget']['0']['#allowed_formats'] = array('comments');
+}
+
 function oab_frontoffice_preprocess_menu(&$variables) {
   if (isset($variables['items'])
   && is_array($variables['items'])) {

@@ -18,4 +18,5 @@ pm-enable webform
 pm-enable webform_node
 pm-enable webform_ui
 pm-enable recaptcha
+pm-enable simplify
 updatedb
