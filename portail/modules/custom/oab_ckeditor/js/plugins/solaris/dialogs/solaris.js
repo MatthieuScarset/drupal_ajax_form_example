@@ -13,27 +13,27 @@ icons[6] = Array('icon-4G_Cam_Outbox_80', '4G Cam outbox');
 icons[7] = Array('icon-4G_Cam_Rec_80', '4G Cam Rec');
 icons[8] = Array('icon-4g_plus', '4G+');
 icons[9] = Array('icon-4G-Cam-Compact', '4G Cam Compact');
-/*icons[10] = Array('fa-angle-double-left', 'Angle Double Left');
-icons[11] = Array('fa-angle-double-right', 'Angle Double Right');
-icons[12] = Array('fa-angle-double-up', 'Angle Double Up');
-icons[13] = Array('fa-angle-down', 'Angle Down');
-icons[14] = Array('fa-angle-left', 'Angle Left');
-icons[15] = Array('fa-angle-right', 'Angle Right');
-icons[16] = Array('fa-angle-up', 'Angle Up');
-icons[17] = Array('fa-apple', 'Apple');
-icons[18] = Array('fa-archive', 'Archive');
-icons[19] = Array('fa-arrow-circle-down', 'Arrow Circle Down');
-icons[20] = Array('fa-arrow-circle-left', 'Arrow Circle Left');
-icons[21] = Array('fa-arrow-circle-o-down', 'Arrow Circle Down (Inverted)');
-icons[22] = Array('fa-arrow-circle-o-left', 'Arrow Circle Left (Inverted)');
-icons[23] = Array('fa-arrow-circle-o-right', 'Arrow Circle Right (Inverted)');
-icons[24] = Array('fa-arrow-circle-o-up', 'Arrow Circle Up (Inverted)');
-icons[25] = Array('fa-arrow-circle-right', 'Arrow Circle Right');
-icons[26] = Array('fa-arrow-circle-up', 'Arrow Circle Up');
-icons[27] = Array('fa-arrow-down', 'Arrow Down');
-icons[28] = Array('fa-arrow-left', 'Arrow Left');
-icons[29] = Array('fa-arrow-right', 'Arrow Right');
-icons[30] = Array('fa-arrows', 'Arrows');
+icons[10] = Array('icon-1013_Reseau', 'Réseau');
+icons[11] = Array('icon-about_event', 'About event');
+icons[12] = Array('icon-Accessability', 'Accessability');
+icons[13] = Array('icon-accessibility_cognition', 'Accessability cognition');
+icons[14] = Array('icon-accessibility_dexterity', 'Accessability Dexterity');
+icons[15] = Array('icon-accessibility_hearing', 'Accessability Hearing');
+icons[16] = Array('icon-accessibility_mobility', 'Accessability Mobility');
+icons[17] = Array('icon-accessibility_speech', 'Accessability Speech');
+icons[18] = Array('icon-accessibility_vision', 'Accessability Vision');
+icons[19] = Array('icon-accessory_headphones', 'Accessory Headphones');
+icons[20] = Array('icon-accessory_shop', 'Accessory Shop');
+icons[21] = Array('icon-Add', 'Add');
+icons[22] = Array('icon-add_more', 'Add more');
+icons[23] = Array('icon-Add_person', 'Add person');
+icons[24] = Array('icon-address_book', 'Address book');
+icons[25] = Array('icon-administrator', 'Administrator');
+icons[26] = Array('icon-Adultcode', 'Adult code');
+icons[27] = Array('icon-Adult', 'Adult');
+icons[28] = Array('icon-advertising', 'Advertising');
+icons[29] = Array('icon-aeroplane', 'Aeroplane');
+/*icons[30] = Array('fa-arrows', 'Arrows');
 icons[31] = Array('fa-arrows-alt', 'Arrows (Alt)');
 icons[32] = Array('fa-arrows-h', 'Arrows (Horizontal)');
 icons[33] = Array('fa-arrows-v', 'Arrows (vertical)');
@@ -557,9 +557,9 @@ for (var i = 0; i < icons.length; i++) {
     title = title.split(' ');
     for (var x = 0; x < title.length; x++) {
         ctr++;
-        newTitle += ctr == 3 ? '<br />' : '';
+        newTitle += ctr == 2 ? '<br />' : '';
         newTitle += title[x] + ' ';
-        ctr = ctr == 3 ? 0 : ctr
+        ctr = ctr == 2 ? 0 : ctr
     }
     solarisIcons += '<a href="#" onclick="klik(this);return false;" title="' + icons[i][0] + '"><span class="' + icons[i][0] + '"></span><div>' + newTitle + '</div></a>'
 };
@@ -786,7 +786,7 @@ function in_array(needle, haystack) {
                 },
                     {
                     type: 'html',
-                    html: '<link rel="stylesheet" type="text/css" href="' + CKEDITOR.plugins.getPath('solaris') + 'solaris/css/boosted.min.css" />'
+                    html: '<link rel="stylesheet" type="text/css" href="' + CKEDITOR.plugins.getPath('solaris') + 'solaris/css/boosted2015.min.css" />'
                 },
                     {
                     type: 'html',
@@ -797,7 +797,7 @@ function in_array(needle, haystack) {
 
                 el = document.getElementById('solaris');
                 var iconSize = document.getElementsByClassName('size')[0].getElementsByTagName('input')[0].value;
-                
+
                 editor.insertHtml('<span class=\"' + currentIcon.className + '\" style=\"color:' + el.getElementsByTagName('span')[0].style.color + '; font-size:' + iconSize + 'rem;\" ></span>');
                 var glyphs = document.getElementById('solaris');
                 glyphs = glyphs.getElementsByTagName('a');
