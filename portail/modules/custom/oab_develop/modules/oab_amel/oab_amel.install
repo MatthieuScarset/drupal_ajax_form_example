@@ -275,3 +275,9 @@ function oab_amel_update_8036() {
 function oab_amel_update_8037() {
     include_once("updates/update_8037.inc");
 }
+/**
+ *  RUBYPORTAILOBS-2392 - Gestion des droits pour les rôles blogger
+ */
+function oab_amel_update_8038() {
+    include_once("updates/update_8038.inc");
+}
