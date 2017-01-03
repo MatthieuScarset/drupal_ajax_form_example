@@ -60,15 +60,15 @@
         {{ page.content }}
         <div id="legendeExpiration">
             <caption>
-                <i class="fa fa-square fa-2x" style="color:#FF0000"></i>{{ " Contenus expirés : la date de fin est dépassée." }}
+                <i class="fa fa-square fa-2x" style="color:#FF0000"></i> {% trans %} Expired Contents : the deadline has been missed  {% endtrans %}
             </caption>
             </br>
             <caption>
-                <i class="fa fa-square fa-2x" style="color:#FFA500"></i>{{ " Contenus critiques : la date de fin est dans moins de 10 jours." }}
+                <i class="fa fa-square fa-2x" style="color:#FFA500"></i> {% trans %} Critical Contents : the deadline is in less than 10 days  {% endtrans %}
             </caption>
             </br>
             <caption>
-                <i class="fa fa-square fa-2x" style="color:#008000"></i>{{ " Contenus tranquilles pépères : la date de fin est dans plus de 10 jours." }}
+                <i class="fa fa-square fa-2x" style="color:#008000"></i> {% trans %} Peaceful Contents : the deadline is in more than 10 days  {% endtrans %}
             </caption>
 
         </div>
