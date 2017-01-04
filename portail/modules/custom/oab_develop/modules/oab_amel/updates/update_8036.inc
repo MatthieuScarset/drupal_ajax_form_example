@@ -61,9 +61,9 @@ array (
 ));
 $config->save(TRUE);
 
-/** Attribution des permission au nouveau rôle Authenticated  */
+/** Attribution des permission au rôle Authenticated  */
 $config_factory = \Drupal::configFactory();
-$config = $config_factory->getEditable('user.role.blogger');
+$config = $config_factory->getEditable('user.role.authenticated');
 $config->setData(
 array (
     'uuid' => '4774f7bb-1605-47fa-ab00-bd987c34ceeb',
@@ -71,10 +71,6 @@ array (
     'status' => true,
     'dependencies' =>
         array (
-        ),
-    '_core' =>
-        array (
-            'default_config_hash' => 'dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI',
         ),
     'id' => 'authenticated',
     'label' => 'Authenticated user',
