@@ -20,9 +20,10 @@ if(empty($role_blogger) || $role_blogger == null) {
 /** Attribution des permission au nouveau rôle Blogger */
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('user.role.blogger');
+$uuid = $config->get('uuid');
 $config->setData(
 array (
-    'uuid' => '7a111929-80bb-4831-aef2-9335863adf91',
+    'uuid' => $uuid,
     'langcode' => 'fr',
     'status' => true,
     'dependencies' =>
@@ -64,9 +65,10 @@ $config->save(TRUE);
 /** Attribution des permission au rôle Authenticated  */
 $config_factory = \Drupal::configFactory();
 $config = $config_factory->getEditable('user.role.authenticated');
+$uuid = $config->get('uuid');
 $config->setData(
 array (
-    'uuid' => '4774f7bb-1605-47fa-ab00-bd987c34ceeb',
+    'uuid' => $uuid,
     'langcode' => 'fr',
     'status' => true,
     'dependencies' =>
