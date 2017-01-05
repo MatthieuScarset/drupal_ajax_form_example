@@ -16,44 +16,6 @@
  */
 function get_address_format_customizations($countryCode) {
     $formatCustomizations = [];
-    // Add missing postal code fields.
-    // https://github.com/googlei18n/libaddressinput/issues/46
-    // https://github.com/googlei18n/libaddressinput/issues/50
-    $formatCustomizations['AL'] = [
-        'format' => "%recipient\n%organization\n%addressLine1\n%addressLine2\n%postalCode\n%locality",
-        'postal_code_type' => 'postal',
-        'postal_code_pattern' => '\d{4}',
-    ];
-    $formatCustomizations['BB'] = [
-        'format' => "%recipient\n%organization\n%addressLine1\n%addressLine2\n%locality %postalCode",
-        'postal_code_type' => 'postal',
-        'postal_code_pattern' => 'BB\d{5}',
-    ];
-    $formatCustomizations['BT'] = [
-        'format' => "%recipient\n%organization\n%addressLine1\n%addressLine2\n%locality %postalCode",
-        'postal_code_type' => 'postal',
-        'postal_code_pattern' => '\d{5}',
-    ];
-    $formatCustomizations['PE'] = [
-        'format' => "%recipient\n%organization\n%addressLine1\n%addressLine2\n%postalCode\n%locality",
-        'postal_code_type' => 'postal',
-        'postal_code_pattern' => '\d{5}',
-    ];
-    $formatCustomizations['VC'] = [
-        'format' => "%recipient\n%organization\n%addressLine1\n%addressLine2\n%locality %postalCode",
-        'postal_code_type' => 'postal',
-        'postal_code_pattern' => 'VC\d{4}',
-    ];
-    // Make the postal code required.
-    // https://github.com/googlei18n/libaddressinput/issues/79
-    $formatCustomizations['HU'] = [
-        'required_fields' => [
-            'recipient',
-            'addressLine1',
-            'locality',
-            'postalCode',
-        ],
-    ];
     // Switch %organization and %recipient.
     // https://github.com/googlei18n/libaddressinput/issues/83
     $formatCustomizations['DE'] = [
@@ -144,17 +106,14 @@ function get_subdivision_customizations($parentId) {
     // Rename three BS provinces.
     // https://github.com/googlei18n/libaddressinput/issues/51
     $subdivisionCustomizations['BS'] = [
-        '_replace' => ['BS-06f3b3', 'BS-7708d4', 'BS-EX'],
-        'BS-06f3b3' => [
-            'code' => 'ABACO',
+        '_replace' => ['BS-fc2a25', 'BS-0adc5a', 'BS-EX'],
+        'BS-fc2a25' => [
             'name' => 'Abaco',
         ],
-        'BS-7708d4' => [
-            'code' => 'ANDROS',
+        'BS-0adc5a' => [
             'name' => 'Andros',
         ],
         'BS-EX' => [
-            'code' => 'EXUMA',
             'name' => 'Exuma',
         ],
     ];
