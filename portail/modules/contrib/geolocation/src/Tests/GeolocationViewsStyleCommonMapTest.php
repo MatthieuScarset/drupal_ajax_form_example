@@ -1,29 +1,31 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\geolocation\Tests\GeolocationViewsStyleCommonMap.
- */
-
 namespace Drupal\geolocation\Tests;
 
 use Drupal\views\Tests\ViewTestBase;
 use Drupal\views\Tests\ViewTestData;
-use Drupal\views\Views;
-
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
 
 /**
  * Tests the grid style plugin.
  *
  * @group views
- * @see \Drupal\views\Plugin\views\style\Grid
  */
-class GeolocationViewsStyleCommonMap extends ViewTestBase {
+class GeolocationViewsStyleCommonMapTest extends ViewTestBase {
 
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['node', 'field', 'views', 'geolocation', 'geolocation_test_views'];
+  public static $modules = [
+    'node',
+    'field',
+    'views',
+    'geolocation',
+    'geolocation_test_views',
+  ];
 
   /**
    * Views used by this test.
@@ -35,35 +37,35 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
-    parent::setUp();
+  protected function setUp($import_test_views = TRUE) {
+    parent::setUp($import_test_views);
 
-    $this->drupalCreateContentType(array('type' => 'article', 'name' => 'Article'));
+    $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
 
     // Add the geolocation field to the article content type.
-    entity_create('field_storage_config', array(
-      'field_name' => 'field_geolocation_test',
+    FieldStorageConfig::create([
+      'field_name' => 'field_geolocation',
       'entity_type' => 'node',
       'type' => 'geolocation',
-    ))->save();
-    entity_create('field_config', array(
-      'field_name' => 'field_geolocation_test',
+    ])->save();
+    FieldConfig::create([
+      'field_name' => 'field_geolocation',
       'label' => 'Geolocation',
       'entity_type' => 'node',
       'bundle' => 'article',
-    ))->save();
+    ])->save();
 
-    entity_get_form_display('node', 'article', 'default')
-      ->setComponent('field_geolocation_test', array(
+    EntityFormDisplay::load('node.article.default')
+      ->setComponent('field_geolocation', [
         'type' => 'geolocation_latlng',
-      ))
+      ])
       ->save();
 
-    entity_get_display('node', 'article', 'default')
-      ->setComponent('field_geolocation_test', array(
+    EntityViewDisplay::load('node.article.default')
+      ->setComponent('field_geolocation', [
         'type' => 'geolocation_latlng',
         'weight' => 1,
-      ))
+      ])
       ->save();
 
     $this->container->get('views.views_data')->clear();
@@ -83,25 +85,28 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
    * Tests the CommonMap style.
    */
   public function testCommonMapLocationsEmpty() {
-    $entity_test_storage = \Drupal::entityManager()->getStorage('node');
-    $entity_test_storage->create(array(
+    $entity_test_storage = \Drupal::entityTypeManager()->getStorage('node');
+
+    $entity_test_storage->create([
       'id' => 1,
       'title' => 'foo bar baz',
       'body' => 'test test',
       'type' => 'article',
-    ))->save();
-    $entity_test_storage->create(array(
+    ])->save();
+
+    $entity_test_storage->create([
       'id' => 2,
       'title' => 'foo test',
       'body' => 'bar test',
       'type' => 'article',
-    ))->save();
-    $entity_test_storage->create(array(
+    ])->save();
+
+    $entity_test_storage->create([
       'id' => 3,
       'title' => 'bar',
       'body' => 'test foobar',
       'type' => 'article',
-    ))->save();
+    ])->save();
 
     $this->drupalGet('geolocation-test');
     $this->assertResponse(200);
@@ -111,13 +116,13 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
    * Tests the CommonMap style.
    */
   public function testCommonMapLocations() {
-    $entity_test_storage = \Drupal::entityManager()->getStorage('node');
+    $entity_test_storage = \Drupal::entityTypeManager()->getStorage('node');
     $entity_test_storage->create([
       'id' => 1,
       'title' => 'foo bar baz',
       'body' => 'test test',
       'type' => 'article',
-      'field_geolocation_test' => [
+      'field_geolocation' => [
         'lat' => 52,
         'lng' => 47,
       ],
@@ -127,7 +132,7 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
       'title' => 'foo test',
       'body' => 'bar test',
       'type' => 'article',
-      'field_geolocation_test' => [
+      'field_geolocation' => [
         'lat' => 53,
         'lng' => 48,
       ],
@@ -137,7 +142,7 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
       'title' => 'bar',
       'body' => 'test foobar',
       'type' => 'article',
-      'field_geolocation_test' => [
+      'field_geolocation' => [
         'lat' => 54,
         'lng' => 49,
       ],
@@ -146,4 +151,5 @@ class GeolocationViewsStyleCommonMap extends ViewTestBase {
     $this->drupalGet('geolocation-test');
     $this->assertResponse(200);
   }
+
 }
