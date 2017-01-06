@@ -6,6 +6,7 @@
  */
 
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Database\Database;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
@@ -186,5 +187,129 @@ function _webform_update_form_settings() {
 
     // Save data.
     $webform_config->setData($data)->save();
+  }
+}
+
+/**
+ * Issue #2834203: Convert webform field target_id to 32 characters.
+ */
+function webform_update_8001() {
+  $database_schema = \Drupal::database()->schema();
+  $schema = \Drupal::keyValue('entity.storage_schema.sql')->getAll();
+  foreach ($schema as $item_name => $item) {
+    foreach ($item as $table_name => $table_schema) {
+      foreach ($table_schema as $schema_key => $schema_data) {
+        if ($schema_key == 'fields') {
+          foreach ($schema_data as $field_name => $field_data) {
+            if (preg_match('/_target_id$/', $field_name) && $field_data['description'] == 'The ID of the webform entity.' && $schema[$item_name][$table_name]['fields'][$field_name]['length'] === 255) {
+              $schema[$item_name][$table_name]['fields'][$field_name]['length'] = 32;
+              $database_schema->changeField($table_name, $field_name, $field_name, $schema[$item_name][$table_name]['fields'][$field_name]);
+            }
+          }
+        }
+      }
+    }
+  }
+  \Drupal::keyValue('entity.storage_schema.sql')->setMultiple($schema);
+}
+
+/**
+ * Issue #2834572: Refactor and improve token management.
+ */
+function webform_update_8002() {
+  $config_factory = \Drupal::configFactory();
+
+  // Update 'webform.settings' configuration.
+  $settings_config = \Drupal::configFactory()->getEditable('webform.settings');
+  $yaml = Yaml::encode($settings_config->getRawData());
+  $yaml = str_replace('[webform_submission:', '[webform_submission:', $yaml);
+  $settings_config->setData(Yaml::decode($yaml));
+  $settings_config->save();
+
+  // Update 'webform.webform.*' configuration.
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $yaml = Yaml::encode($webform_config->getRawData());
+    $yaml = str_replace('[webform_submission:', '[webform_submission:', $yaml);
+    $webform_config->setData(Yaml::decode($yaml));
+    $webform_config->save();
+  }
+}
+
+/**
+ * Issue #2834654: Add close button to messages.
+ */
+function webform_update_8003() {
+  // Change webform.* to webform.* state.
+  $webforms = Webform::loadMultiple();
+  foreach ($webforms as $webform) {
+    $state = \Drupal::state()->get('webform.' . $webform->id(), NULL);
+    if ($state !== NULL) {
+      \Drupal::state()->set('webform.webform.' . $webform->id(), $state);
+      \Drupal::state()->delete('webform.' . $webform->id());
+    }
+  }
+}
+
+/**
+ * Issue #2836948: Problem with autocomplete field. Change '#autocomplete_options' to '#autocomplete_items'.
+ */
+function webform_update_8004() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $elements = $webform_config->get('elements');
+    if (strpos($elements, '#autocomplete_options') !== FALSE) {
+      $elements = str_replace('#autocomplete_options', '#autocomplete_items', $elements);
+      $webform_config->set('elements', $elements);
+      $webform_config->save(TRUE);
+    }
+  }
+}
+
+/**
+ * Issue #2837090: Undefined function call webform_schema.
+ */
+function webform_update_8005() {
+  // @see webform_update_8006() which fixes this broken hook.
+}
+
+/**
+ * Issue #2837090: Undefined function call webform_schema.
+ */
+function webform_update_8006() {
+  // Fix key_value.collection which was no updated during the migration.
+  $module_handler = \Drupal::moduleHandler();
+  $database_type = Database::getConnection('default')->databaseType();
+  if ($module_handler->moduleExists('webform') && !$module_handler->moduleExists('yamlform') && $database_type == 'mysql') {
+    $database = \Drupal::database();
+
+    $select = $database->select('key_value', 'kv');
+    $select->fields('kv', ['collection', 'name', 'value']);
+    $select->condition('collection', '%yamlform%', 'LIKE');
+    $result = $select->execute();
+    while ($record = $result->fetchAssoc()) {
+      $old_collection = $record['collection'];
+      $new_collection = str_replace('yamlform', 'webform', $record['collection']);
+
+      $collection_select = $database->select('key_value', 'kv');
+      $collection_select->fields('kv', ['collection', 'name', 'value']);
+      $collection_select->condition('collection', $new_collection);
+      $collection_result = $collection_select->execute();
+
+      // Only insert the new record if there the collection does not exist.
+      if (!$collection_result->fetchAll()) {
+        $record['collection'] = $new_collection;
+        $database->insert('key_value')
+          ->fields(['collection', 'name', 'value'])
+          ->values(array_values($record))
+          ->execute();
+      }
+
+      // Delete the old record.
+      $database->delete('key_value')
+        ->condition('collection', $old_collection)
+        ->execute();
+    }
   }
 }

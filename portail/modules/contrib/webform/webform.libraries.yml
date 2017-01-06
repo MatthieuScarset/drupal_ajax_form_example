@@ -13,6 +13,26 @@ webform.admin:
     - core/jquery.once
     - webform/webform.form
 
+# Used preload libraries required by (modal) dialogs.
+# @see js/webform.element.codemirror.js
+webform.admin.dialog:
+  version: 1.x
+  css:
+    theme:
+      css/webform.admin.css: {}
+  js:
+    js/webform.admin.js:  {}
+    js/webform.dialog.js:  {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.ui.dialog
+    - webform/webform.form
+    - webform/webform.element.codemirror.yaml
+    - webform/webform.element.html_editor
+    - webform/webform.element.other
+    - webform/webform.element.select2
+
 webform.admin.translation:
   version: 1.x
   css:
@@ -46,6 +66,7 @@ webform.help:
     - core/drupal
     - core/jquery
     - core/jquery.once
+    - core/jquery.ui.accordion
 
 # Webform.
 
@@ -72,12 +93,12 @@ webform.assets.css:
   version: 1.x
   css:
     theme:
-      //webform/{webform}/assets/css: { preprocess: false, minified: false }
+      css/webform.assets.css: { preprocess: false, minified: false }
 
 webform.assets.javascript:
   version: 1.x
   js:
-    //webform/{webform}/assets/javascript: { preprocess: false, minified: false }
+    js/webform.assets.js: { preprocess: false, minified: false }
   dependencies:
     - core/drupal
     - core/jquery
@@ -88,12 +109,6 @@ webform.navigation:
   css:
     theme:
       css/webform.navigation.css: {}
-
-webform.options:
-  version: 1.x
-  css:
-    theme:
-      css/webform.options.css: {}
 
 webform.progress:
   version: 1.x
@@ -277,6 +292,12 @@ webform.element.inputmask:
     - core/jquery.once
     - webform/jquery.inputmask
 
+webform.element.multiple:
+  version: 1.x
+  css:
+    component:
+      css/webform.element.multiple.css: {}
+
 webform.element.likert:
   version: 1.x
   css:
@@ -301,6 +322,12 @@ webform.element.message:
   css:
     theme:
       css/webform.element.message.css: {}
+  js:
+    js/webform.element.message.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
 
 webform.element.options:
   version: 1.x
@@ -573,13 +600,13 @@ jquery.select2:
 
 jquery.timepicker:
   remote: https://github.com/jonthornton/jquery-timepicker
-  version: 1.11.6
+  version: 1.11.8
   license:
     name: MIT
     url: http://opensource.org/licenses/mit-license.php
     gpl-compatible: true
   cdn:
-    /libraries/jquery.timepicker/: https://cdn.rawgit.com/jonthornton/jquery-timepicker/1.11.6/
+    /libraries/jquery.timepicker/: https://cdn.rawgit.com/jonthornton/jquery-timepicker/1.11.8/
   css:
     theme:
       /libraries/jquery.timepicker/jquery.timepicker.css: {}

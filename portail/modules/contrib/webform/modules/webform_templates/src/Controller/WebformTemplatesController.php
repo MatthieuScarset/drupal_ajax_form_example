@@ -108,6 +108,7 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
             'duplicate' => [
               'title' => $this->t('Select'),
               'url' => Url::fromRoute('entity.webform.duplicate_form', $route_parameters),
+              'attributes' => WebformDialogHelper::getModalDialogAttributes(640),
             ],
           ],
         ];
@@ -137,7 +138,9 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
         'tags' => $this->webformStorage->getEntityType()->getListCacheTags(),
       ],
     ];
-    $build['#attached']['library'][] = 'webform/webform.admin';
+
+    // Must preload libraries required by (modal) dialogs.
+    $build['#attached']['library'][] = 'webform/webform.admin.dialog';
 
     return $build;
   }

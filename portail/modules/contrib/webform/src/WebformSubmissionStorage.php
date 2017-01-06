@@ -120,7 +120,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    * {@inheritdoc}
    */
   public function getTotal(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL) {
-    $query = $this->getQuery()->count();
+    $query = $this->getQuery();
     $query->condition('in_draft', FALSE);
     if ($webform) {
       $query->condition('webform_id', $webform->id());
@@ -132,7 +132,11 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     if ($account) {
       $query->condition('uid', $account->id());
     }
-    return $query->execute();
+
+    // Issue: Query count method is not working for SQL Lite.
+    // return $query->count()->execute();
+    // Work-around: Manually count the number of entity ids.
+    return count($query->execute());
   }
 
   /**
@@ -326,7 +330,6 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // Submission ID.
     $columns['sid'] = [
       'title' => $this->t('SID'),
-      'default' => FALSE,
     ];
 
     // UUID.
@@ -527,19 +530,19 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     ];
     switch ($entity->getState()) {
       case WebformSubmissionInterface::STATE_DRAFT;
-        \Drupal::logger('webform')->notice('@form:Submission #@id draft saved.', $context);
+        \Drupal::logger('webform')->notice('@form: Submission #@id draft saved.', $context);
         break;
 
       case WebformSubmissionInterface::STATE_UPDATED;
-        \Drupal::logger('webform')->notice('@form:Submission #@id updated.', $context);
+        \Drupal::logger('webform')->notice('@form: Submission #@id updated.', $context);
         break;
 
       case WebformSubmissionInterface::STATE_COMPLETED;
         if ($result === SAVED_NEW) {
-          \Drupal::logger('webform')->notice('@form:Submission #@id created.', $context);
+          \Drupal::logger('webform')->notice('@form: Submission #@id created.', $context);
         }
         else {
-          \Drupal::logger('webform')->notice('@form:Submission #@id completed.', $context);
+          \Drupal::logger('webform')->notice('@form: Submission #@id completed.', $context);
         }
         break;
     }
@@ -611,7 +614,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     // Log deleted.
     foreach ($entities as $entity) {
       \Drupal::logger('webform')
-        ->notice('Deleted @form:Submission #@id.', [
+        ->notice('Deleted @form: Submission #@id.', [
           '@id' => $entity->id(),
           '@form' => $entity->getWebform()->label(),
         ]);

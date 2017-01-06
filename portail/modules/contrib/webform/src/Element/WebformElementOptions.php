@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
@@ -32,6 +33,7 @@ class WebformElementOptions extends FormElement {
         [$class, 'processAjaxForm'],
       ],
       '#theme_wrappers' => ['form_element'],
+      '#custom__type' => 'webform_options',
     ];
   }
 
@@ -102,20 +104,36 @@ class WebformElementOptions extends FormElement {
     ];
 
     // Custom options.
-    $element['custom'] = [
-      '#type' => 'webform_options',
-      '#title' => $element['#title'],
-      '#title_display' => 'invisible',
-      '#label' => ($element['#likert']) ? t('answer') : t('option'),
-      '#labels' => ($element['#likert']) ? t('answers') : t('options'),
-      '#states' => [
-        'visible' => [
-          'select.js-' . $element['#id'] . '-options' => ['value' => ''],
+    if ($element['#custom__type'] === 'webform_multiple') {
+      $element['custom'] = [
+        '#type' => 'webform_multiple',
+        '#title' => $element['#title'],
+        '#title_display' => 'invisible',
+        '#states' => [
+          'visible' => [
+            'select.js-' . $element['#id'] . '-options' => ['value' => ''],
+          ],
         ],
-      ],
-      '#error_no_message' => TRUE,
-      '#default_value' => (isset($element['#default_value']) && !is_string($element['#default_value'])) ? $element['#default_value'] : [],
-    ];
+        '#error_no_message' => TRUE,
+        '#default_value' => (isset($element['#default_value']) && !is_string($element['#default_value'])) ? $element['#default_value'] : [],
+      ];
+    }
+    else {
+      $element['custom'] = [
+        '#type' => 'webform_options',
+        '#title' => $element['#title'],
+        '#title_display' => 'invisible',
+        '#label' => ($element['#likert']) ? t('answer') : t('option'),
+        '#labels' => ($element['#likert']) ? t('answers') : t('options'),
+        '#states' => [
+          'visible' => [
+            'select.js-' . $element['#id'] . '-options' => ['value' => ''],
+          ],
+        ],
+        '#error_no_message' => TRUE,
+        '#default_value' => (isset($element['#default_value']) && !is_string($element['#default_value'])) ? $element['#default_value'] : [],
+      ];
+    }
 
     $element['#element_validate'] = [[get_called_class(), 'validateWebformElementOptions']];
 
@@ -126,8 +144,9 @@ class WebformElementOptions extends FormElement {
    * Validates a webform element options element.
    */
   public static function validateWebformElementOptions(&$element, FormStateInterface $form_state, &$complete_form) {
-    $options_value = $element['options']['#value'];
-    $custom_value = $element['custom']['#value'];
+    $options_value = NestedArray::getValue($form_state->getValues(), $element['options']['#parents']);
+    $custom_value = NestedArray::getValue($form_state->getValues(), $element['custom']['#parents']);
+
     $value = $options_value;
     if ($options_value == self::CUSTOM_OPTION) {
       try {
