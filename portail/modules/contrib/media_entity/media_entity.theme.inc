@@ -1,11 +1,12 @@
 <?php
+
 /**
  * @file
  * Theme functions for the media_entity module.
  */
 
 use Drupal\Core\Render\Element;
-use Drupal\Core\Url;
+use Drupal\Core\Link;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -18,17 +19,17 @@ use Drupal\Component\Utility\Html;
  *   - content: An array of content types.
  */
 function template_preprocess_media_add_list(&$variables) {
-  $variables['bundles'] = array();
+  $variables['bundles'] = [];
   if (!empty($variables['content'])) {
     foreach ($variables['content'] as $bundle) {
       /** @var \Drupal\media_entity\MediaBundleInterface $bundle */
-      $variables['bundles'][$bundle->id()] = array(
+      $variables['bundles'][$bundle->id()] = [
         'type' => $bundle->id(),
-        'add_link' => \Drupal::l($bundle->label(), new Url('media.add', array('media_bundle' => $bundle->id()))),
-        'description' => array(
+        'add_link' => Link::createFromRoute($bundle->label(), 'media.add', ['media_bundle' => $bundle->id()]),
+        'description' => [
           '#markup' => $bundle->getDescription(),
-        ),
-      );
+        ],
+      ];
     }
   }
 }
