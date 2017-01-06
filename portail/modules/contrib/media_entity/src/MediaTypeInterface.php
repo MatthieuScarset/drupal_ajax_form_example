@@ -28,11 +28,11 @@ interface MediaTypeInterface extends PluginInspectionInterface, ConfigurablePlug
   public function providedFields();
 
   /**
-   * Get's a media-related field/value.
+   * Gets a media-related field/value.
    *
    * @param MediaInterface $media
    *   Media object.
-   * @param $name
+   * @param string $name
    *   Name of field to fetch.
    *
    * @return mixed

@@ -3,8 +3,10 @@
 namespace Drupal\webform\Controller;
 
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,6 +16,30 @@ use Symfony\Component\HttpFoundation\Request;
  * Provides route responses for webform element.
  */
 class WebformElementController extends ControllerBase {
+
+  /**
+   * Returns response for message close using user or state storage.
+   *
+   * @param string $storage
+   *   Mechanism that the message state should be stored in, user or state.
+   * @param string $id
+   *   The unique id of the message.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   An empty AJAX response.
+   *
+   * @throws \Exception
+   *   Throws exception is storage is not set to 'user' or 'state'.
+   *
+   * @see \Drupal\webform\Element\WebformMessage::setClosed
+   */
+  public function close($storage, $id) {
+    if (!in_array($storage, ['user', 'state'])) {
+      throw new \Exception('Undefined storage mechanism for Webform close message.');
+    }
+    WebformMessage::setClosed($storage, $id);
+    return new AjaxResponse();
+  }
 
   /**
    * Returns response for the element autocomplete route.
@@ -44,7 +70,7 @@ class WebformElementController extends ControllerBase {
     // Set default autocomplete properties.
     $element += [
       '#autocomplete_existing' => FALSE,
-      '#autocomplete_options' => [],
+      '#autocomplete_items' => [],
       '#autocomplete_match' => 3,
       '#autocomplete_limit' => 10,
       '#autocomplete_match_operator' => 'CONTAINS',
@@ -55,21 +81,28 @@ class WebformElementController extends ControllerBase {
       return new JsonResponse([]);
     }
 
-    if (!empty($element['#autocomplete_existing'])) {
-      $matches = $this->getMatchesFromExistingValues($q, $webform->id(), $key, $element['#autocomplete_match_operator'], $element['#autocomplete_limit']);
-      return new JsonResponse($matches);
-    }
-    elseif (!empty($element['#autocomplete_options'])) {
-      // Get the element's webform options.
-      $element['#options'] = $element['#autocomplete_options'];
-      $options = WebformOptions::getElementOptions($element);
+    $matches = [];
 
-      $matches = $this->getMatchesFromOptions($q, $options, $element['#autocomplete_match_operator'], $element['#autocomplete_limit']);
-      return new JsonResponse($matches);
+    // Get existing matches.
+    if (!empty($element['#autocomplete_existing'])) {
+      $matches += $this->getMatchesFromExistingValues($q, $webform->id(), $key, $element['#autocomplete_match_operator'], $element['#autocomplete_limit']);
     }
-    else {
-      return new JsonResponse([]);
+
+    // Get items (aka options) matches.
+    if (!empty($element['#autocomplete_items'])) {
+      $element['#options'] = $element['#autocomplete_items'];
+      $options = WebformOptions::getElementOptions($element);
+      $matches += $this->getMatchesFromOptions($q, $options, $element['#autocomplete_match_operator'], $element['#autocomplete_limit']);
     }
+
+    // Sort matches and enforce the limit.
+    if ($matches) {
+      ksort($matches);
+      $matches = array_values($matches);
+      $matches = array_slice($matches, 0, $element['#autocomplete_limit']);
+    }
+
+    return new JsonResponse($matches);
   }
 
   /**
@@ -105,7 +138,7 @@ class WebformElementController extends ControllerBase {
     $values = $query->execute()->fetchCol();
     $matches = [];
     foreach ($values as $value) {
-      $matches[] = ['value' => $value, 'label' => $value];
+      $matches[$value] = ['value' => $value, 'label' => $value];
     }
     return $matches;
   }
@@ -171,14 +204,14 @@ class WebformElementController extends ControllerBase {
 
       if ($operator == 'STARTS_WITH' && stripos($label, $q) === 0) {
         $matches[$label] = [
-          'value' => $value,
+          'value' => $label,
           'label' => $label,
         ];
       }
       // Default to CONTAINS even when operator is empty.
       elseif (stripos($label, $q) !== FALSE) {
         $matches[$label] = [
-          'value' => $value,
+          'value' => $label,
           'label' => $label,
         ];
       }

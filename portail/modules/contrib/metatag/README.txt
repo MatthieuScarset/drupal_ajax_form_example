@@ -35,13 +35,20 @@ The primary features include:
 
 * A large volume of meta tags available, covering X basic tags, Y Open Graph
   tags, Z Twitter Cards tags, Å Dublin Core tags, ∫ Google+ tags, ç App Links
-  tags, ∂ site verification tags.
+  tags, 8 site verification tags.
 
 * A plugin interface allowing for additional meta tags to be easily added via
   custom modules.
 
 * Integration with DrupalConsole [1] to provide a quick method of generating new
   meta tags.
+
+* Site verification meta tags can be added, e.g. as used by the Google search
+  engine to confirm ownership of the site; see the "Metatag: Verification"
+  submodule.
+
+* Certain meta tags used by Google+ may be added by enabling the "Metatag:
+  Google+" submodule.
 
 
 Standard usage scenario
@@ -59,7 +66,7 @@ Standard usage scenario
    5.1 Go to the "Manage fields" of the bundle where you want the metatag field
        to appear.
    5.2 Select "Meta tags" from the "Add a new field" selector.
-   5.3 Fill in a label for the field, e.g. "Meta tags", and set an appropiate
+   5.3 Fill in a label for the field, e.g. "Meta tags", and set an appropriate
        machine name, e.g. "meta_tags".
    5.4 Click the "Save and continue" button.
    5.5 If the site supports multiple languages, and translations have been

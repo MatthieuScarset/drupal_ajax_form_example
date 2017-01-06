@@ -9,6 +9,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\media_entity\Entity\MediaBundle;
 
 /**
  * Implements hook_token_info().
@@ -94,7 +95,7 @@ function media_entity_tokens($type, $tokens, array $data, array $options, Bubble
     $langcode = $options['langcode'];
   }
   else {
-      $langcode = LanguageInterface::LANGCODE_DEFAULT;
+    $langcode = LanguageInterface::LANGCODE_DEFAULT;
   }
   $sanitize = !empty($options['sanitize']);
 
@@ -102,7 +103,7 @@ function media_entity_tokens($type, $tokens, array $data, array $options, Bubble
 
   if ($type == 'media' && !empty($data['media'])) {
     /** @var \Drupal\media_entity\MediaInterface $media */
-    $media = \Drupal::entityManager()->getTranslationFromContext($data['media'], $langcode, array('operation' => 'media_entity_tokens'));
+    $media = \Drupal::service('entity.repository')->getTranslationFromContext($data['media'], $langcode, ['operation' => 'media_entity_tokens']);
 
     foreach ($tokens as $name => $original) {
       switch ($name) {
@@ -124,7 +125,7 @@ function media_entity_tokens($type, $tokens, array $data, array $options, Bubble
           break;
 
         case 'bundle-name':
-          $bundle_name = entity_load('media_bundle', $media->bundle())->label();
+          $bundle_name = MediaBundle::load($media->bundle())->label();
           $replacements[$original] = $sanitize ? Html::escape($bundle_name) : $bundle_name;
           break;
 
@@ -143,11 +144,11 @@ function media_entity_tokens($type, $tokens, array $data, array $options, Bubble
           break;
 
         case 'url':
-          $replacements[$original] = $media->url('canonical', $url_options);
+          $replacements[$original] = $media->toUrl('canonical', $url_options);
           break;
 
         case 'edit-url':
-          $replacements[$original] = $media->url('edit-form', $url_options);
+          $replacements[$original] = $media->toUrl('edit-form', $url_options);
           break;
 
         // Default values for the chained tokens handled below.
@@ -176,15 +177,15 @@ function media_entity_tokens($type, $tokens, array $data, array $options, Bubble
 
     if ($author_tokens = $token_service->findWithPrefix($tokens, 'author')) {
       $account = $media->get('uid')->entity;
-      $replacements += $token_service->generate('user', $author_tokens, array('user' => $account), $options, $bubbleable_metadata);
+      $replacements += $token_service->generate('user', $author_tokens, ['user' => $account], $options, $bubbleable_metadata);
     }
 
     if ($created_tokens = $token_service->findWithPrefix($tokens, 'created')) {
-      $replacements += $token_service->generate('date', $created_tokens, array('date' => $media->getCreatedTime()), $options, $bubbleable_metadata);
+      $replacements += $token_service->generate('date', $created_tokens, ['date' => $media->getCreatedTime()], $options, $bubbleable_metadata);
     }
 
     if ($changed_tokens = $token_service->findWithPrefix($tokens, 'changed')) {
-      $replacements += $token_service->generate('date', $changed_tokens, array('date' => $media->getChangedTime()), $options, $bubbleable_metadata);
+      $replacements += $token_service->generate('date', $changed_tokens, ['date' => $media->getChangedTime()], $options, $bubbleable_metadata);
     }
   }
 

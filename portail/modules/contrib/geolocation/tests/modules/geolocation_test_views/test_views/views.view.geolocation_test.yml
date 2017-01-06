@@ -45,22 +45,24 @@ display:
       pager:
         type: none
         options:
-          items_per_page: 0
           offset: 0
       style:
         type: maps_common
         options:
-          geolocation_field: field_geolocation_test
+          geolocation_field: field_geolocation
           title_field: title
           centre:
              first_row:
                enable: true
                weight: '-9'
+               settings:
+                 zoom: 12
              fixed_value:
                weight: '-8'
                settings:
                  latitude: '0'
                  longitude: '0'
+                 zoom: 12
                enable: 0
       row:
         type: fields
@@ -74,33 +76,6 @@ display:
           admin_label: ''
           label: ''
           exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -116,42 +91,15 @@ display:
           plugin_id: field
           entity_type: node
           entity_field: title
-        field_geolocation_test:
-          id: field_geolocation_test
-          table: node__field_geolocation_test
-          field: field_geolocation_test
+        field_geolocation:
+          id: field_geolocation
+          table: node__field_geolocation
+          field: field_geolocation
           relationship: none
           group_type: group
           admin_label: ''
           label: ''
           exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
@@ -187,8 +135,6 @@ display:
           entity_type: node
           entity_field: status
           id: status
-          expose:
-            operator: ''
           group: 1
         type:
           id: type
