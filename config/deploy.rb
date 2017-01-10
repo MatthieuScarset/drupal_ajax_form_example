@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+#lock '3.4.0'
 
 set :application, 'obs'
-set :repo_url, 'git@gitlab.aql.fr:obs-com/Sources.git'
+set :repo_url, 'git@git-oab.si.fr.intraorange:obs-com/Sources.git'
 set :stages, fetch(:stages, []).push('dev', 'recette', 'recettefinale')
 set :default_stage, "dev"
 set :local_user,  "oab_web"
@@ -146,6 +146,7 @@ namespace :deploy do
    task :drush_update do
     on roles(:all) do
      execute "drush oab:updb --yes --root=#{release_path}/portail"
+	 #execute "drush updb --yes --root=#{release_path}/portail"
 	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
 	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
 	 execute "drush cr --root=#{release_path}/portail"
