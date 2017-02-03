@@ -1,0 +1,63 @@
+langcode: en
+status: true
+pendencies: {  }
+id: dossier_presse_node
+migration_tags: null
+migration_group: dossier_presse
+label: 'Dossier presse nodes'
+source:
+  plugin: dossier_presse_node
+process:
+  status:
+    plugin: default_value
+    default_value: 1
+  type:
+    plugin: default_value
+    default_value: press_kit
+  title: title
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_content/value: content_field
+  field_content/format:
+    plugin: default_value
+    default_value: full_html
+  field_content_field/zone:
+    plugin: default_value
+    default_value: default
+  field_solution:
+    plugin: migration
+    migration: dossier_presse_term
+    source: solutions
+  field_industry:
+    plugin: migration
+    migration: dossier_presse_term
+    source: industries
+  field_partner:
+    plugin: migration
+    migration: dossier_presse_term
+    source: partners
+  field_area:
+    plugin: migration
+    migration: dossier_presse_term
+    source: areas
+  field_customer_story:
+    plugin: migration
+    migration: dossier_presse_term
+    source: customer_stories
+  field_subhomes:
+    plugin: migration
+    migration: blogpost_term
+    source: subhomes
+  field_file:
+    plugin: migration
+    migration: dossier_presse_media
+    source: files
+  path: path
+destination:
+  plugin: 'entity:node'
+migration_dependencies:  
+  required:
+    - dossier_presse_term
+    - dossier_presse_media

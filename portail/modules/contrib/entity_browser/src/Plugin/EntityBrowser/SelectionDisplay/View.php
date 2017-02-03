@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\entity_browser\SelectionDisplayBase;
 use Drupal\views\Views;
+use Drupal\views\Entity\View as ViewEntity;
 
 /**
  * Displays current selection in a View.
@@ -13,7 +14,10 @@ use Drupal\views\Views;
  * @EntityBrowserSelectionDisplay(
  *   id = "view",
  *   label = @Translation("View selection display"),
- *   description = @Translation("Displays current selection in a View.")
+ *   description = @Translation("Use a pre-configured view as selection area."),
+ *   acceptPreselection = TRUE,
+ *   provider = "views",
+ *   js_commands = FALSE
  * )
  */
 class View extends SelectionDisplayBase {
@@ -47,10 +51,11 @@ class View extends SelectionDisplayBase {
     // TODO - if there are entities that are selected multiple times this displays
     // them only once. Reason for that is how SQL and Views work and we probably
     // can't do much about it.
-    if (!empty($this->selectedEntities)) {
-      $ids = array_map(function(EntityInterface $item) {
+    $selected_entities = $form_state->get(['entity_browser', 'selected_entities']);
+    if (!empty($selected_entities)) {
+      $ids = array_map(function (EntityInterface $item) {
         return $item->id();
-      }, $this->selectedEntities);
+      }, $selected_entities);
       $storage['selection_display_view']->setArguments([implode(',', $ids)]);
     }
 
@@ -58,7 +63,7 @@ class View extends SelectionDisplayBase {
 
     $form['use_selected'] = array(
       '#type' => 'submit',
-      '#value' => t('Use selection'),
+      '#value' => $this->t('Use selection'),
       '#name' => 'use_selected',
     );
 
@@ -94,7 +99,7 @@ class View extends SelectionDisplayBase {
       '#default_value' => $this->configuration['view'] . '.' . $this->configuration['view_display'],
       '#options' => $options,
       '#required' => TRUE,
-      '#description' => 'View display to use for displaying currently selected items. Do note that to get something usefull out of this display, its first contextual filter should be a filter on the primary identifier field of your entity type (e.g., Node ID, Media ID).',
+      '#description' => $this->t('View display to use for displaying currently selected items. Do note that to get something usefull out of this display, its first contextual filter should be a filter on the primary identifier field of your entity type (e.g., Node ID, Media ID).'),
     ];
 
     return $form;
@@ -111,6 +116,18 @@ class View extends SelectionDisplayBase {
       $this->configuration['view'] = $view_id;
       $this->configuration['view_display'] = $display_id;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = [];
+    if ($this->configuration['view']) {
+      $view = ViewEntity::load($this->configuration['view']);
+      $dependencies[$view->getConfigDependencyKey()] = [$view->getConfigDependencyName()];
+    }
+    return $dependencies;
   }
 
 }

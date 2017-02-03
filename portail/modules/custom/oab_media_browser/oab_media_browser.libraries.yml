@@ -14,8 +14,6 @@ view:
   dependencies:
     - core/jquery
     - core/drupal
-    - oab_media_browser/imagesloaded
-    - oab_media_browser/masonry
 
 entity_embed:
   version: VERSION
@@ -24,27 +22,13 @@ entity_embed:
   dependencies:
     - core/jquery
     - core/drupal
-
-imagesloaded:
-  remote: https://github.com/desandro/imagesloaded
+mediatheque:
   version: VERSION
-  license:
-    name: MIT
-    url: https://github.com/desandro/imagesloaded/
-    gpl-compatible: true
   js:
-    /libraries/imagesloaded/imagesloaded.pkgd.min.js: { minified: true }
+    js/mediatheque.js: {}
+  css:
+    theme:
+      css/mediatheque.css: {}
   dependencies:
     - core/jquery
-
-masonry:
-  remote: http://masonry.desandro.com/
-  version: VERSION
-  license:
-    name: MIT
-    url: https://github.com/desandro/masonry/
-    gpl-compatible: true
-  js:
-    /libraries/masonry/dist/masonry.pkgd.min.js: { minified: true }
-  dependencies:
-    - core/jquery
+    - core/drupal

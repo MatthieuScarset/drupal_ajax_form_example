@@ -201,11 +201,9 @@ class XmlSitemapGenerator implements XmlSitemapGeneratorInterface {
     $url_options = $sitemap->uri['options'];
     $url_options += array(
       'absolute' => TRUE,
-      'base_url' => rtrim($this->state->get('xmlsitemap_base_url'), '/'),
+      'xmlsitemap_base_url' => $this->state->get('xmlsitemap_base_url'),
       'language' => $this->languageManager->getDefaultLanguage(),
-      // @todo Figure out a way to bring back the alias preloading optimization.
-      //'alias' => $this->config->get('prefetch_aliases'),
-      'alias' => FALSE,
+      'alias' => $this->config->get('prefetch_aliases'),
     );
 
     $last_url = '';
@@ -227,18 +225,20 @@ class XmlSitemapGenerator implements XmlSitemapGeneratorInterface {
 
     while ($link = $links->fetchAssoc()) {
       $link['language'] = $link['language'] != LanguageInterface::LANGCODE_NOT_SPECIFIED ? xmlsitemap_language_load($link['language']) : $url_options['language'];
-      // @todo Figure out a way to bring back the alias preloading optimization.
-//      if (!empty($link['loc']) && $url_options['alias']) {
-//        $link['loc'] = $this->getPathAlias($link['loc'], $link['language']->getId());
-//      }
+      if ($url_options['alias']) {
+        $link['loc'] = $this->getPathAlias($link['loc'], $link['language']->getId());
+      }
+      if ($url_options['base_url']) {
+        $link['loc'] = rtrim($url_options['base_url'], '/') . '/' . ltrim($link['loc'], '/');
+      }
       $link_options = array(
         'language' => $link['language'],
         'xmlsitemap_link' => $link,
         'xmlsitemap_sitemap' => $sitemap,
       );
       // @todo Add a separate hook_xmlsitemap_link_url_alter() here?
-      $link['loc'] = empty($link['loc']) ? '/' : $link['loc'];
-      $link_url = Url::fromUri('internal:' . $link['loc'], $link_options + $url_options)->toString();
+      $link['loc'] = empty($link['loc']) ? '<front>' : $link['loc'];
+      $link_url = Url::fromUri($link['loc'], [], $link_options + $url_options)->toString();
 
       // Skip this link if it was a duplicate of the last one.
       // @todo Figure out a way to do this before generation so we can report

@@ -1,4 +1,4 @@
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: magazineinterview_node
@@ -13,14 +13,16 @@ process:
     default_value: 1
   type:
     plugin: default_value
-    default_value: container
+    default_value: magazine
   title: title
   langcode: language
   uid:
     plugin: default_value
     default_value: 1
-  field_rendering_model/target_id: rendering_model_id
-  field_content_field: content_field
+  field_content/value: content_field
+  field_content/format:
+    plugin: default_value
+    default_value: full_html
   field_magazine:
     plugin: migration
     migration: magazineinterview_term
@@ -45,11 +47,14 @@ process:
     plugin: migration
     migration: magazineinterview_term
     source: customer_stories
+  field_subhomes:
+    plugin: migration
+    migration: blogpost_term
+    source: subhomes
   field_image:
     plugin: migration
     migration: magazineinterview_media
     source: images
-  field_state/value: workflow
   path: path
   field_subtitle: subtitle
   field_short_description: short_description

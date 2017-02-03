@@ -8,6 +8,8 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Utility\Token;
 use Drupal\entity_browser\WidgetBase;
+use Drupal\entity_browser\WidgetValidationManager;
+use Drupal\file\FileInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -17,7 +19,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * @EntityBrowserWidget(
  *   id = "upload",
  *   label = @Translation("Upload"),
- *   description = @Translation("Adds an upload field browser's widget.")
+ *   description = @Translation("Adds an upload field browser's widget."),
+ *   auto_select = FALSE
  * )
  */
 class Upload extends WidgetBase {
@@ -37,7 +40,7 @@ class Upload extends WidgetBase {
   protected $token;
 
   /**
-   * Constructs upload plugin.
+   * Upload constructor.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
@@ -49,13 +52,15 @@ class Upload extends WidgetBase {
    *   Event dispatcher service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
+   * @param \Drupal\entity_browser\WidgetValidationManager $validation_manager
+   *   The Widget Validation Manager service.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
    * @param \Drupal\Core\Utility\Token $token
    *   The token service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EventDispatcherInterface $event_dispatcher, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, Token $token) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $event_dispatcher, $entity_type_manager);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EventDispatcherInterface $event_dispatcher, EntityTypeManagerInterface $entity_type_manager, WidgetValidationManager $validation_manager, ModuleHandlerInterface $module_handler, Token $token) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $event_dispatcher, $entity_type_manager, $validation_manager);
     $this->moduleHandler = $module_handler;
     $this->token = $token;
   }
@@ -70,6 +75,7 @@ class Upload extends WidgetBase {
       $plugin_definition,
       $container->get('event_dispatcher'),
       $container->get('entity_type.manager'),
+      $container->get('plugin.manager.entity_browser.widget_validation'),
       $container->get('module_handler'),
       $container->get('token')
     );
@@ -81,20 +87,29 @@ class Upload extends WidgetBase {
   public function defaultConfiguration() {
     return [
       'upload_location' => 'public://',
+      'multiple' => TRUE,
+      'submit_text' => $this->t('Select files'),
+      'extensions' => 'jpg jpeg gif png txt doc xls pdf ppt pps odt ods odp',
     ] + parent::defaultConfiguration();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getForm(array &$original_form, FormStateInterface $form_state, array $aditional_widget_parameters) {
-    $form = [];
+  public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
+    $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
+    $field_cardinality = $form_state->get(['entity_browser', 'validators', 'cardinality', 'cardinality']);
     $form['upload'] = [
       '#type' => 'managed_file',
-      '#title' => t('Choose a file'),
+      '#title' => $this->t('Choose a file'),
       '#title_display' => 'invisible',
       '#upload_location' => $this->token->replace($this->configuration['upload_location']),
-      '#multiple' => TRUE,
+      // Multiple uploads will only be accepted if the source field allows
+      // more than one value.
+      '#multiple' => $field_cardinality != 1 && $this->configuration['multiple'],
+      '#upload_validators' => [
+        'file_validate_extensions' => [$this->configuration['extensions']],
+      ],
     ];
 
     return $form;
@@ -103,22 +118,30 @@ class Upload extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function validate(array &$form, FormStateInterface $form_state) {
-    $uploaded_files = $form_state->getValue(['upload'], []);
-    $trigger = $form_state->getTriggeringElement();
-    // Only validate if we are uploading a file.
-    if (empty($uploaded_files)  && $trigger['#value'] == 'Upload') {
-      $form_state->setError($form['widget']['upload'], t('At least one file should be uploaded.'));
+  protected function prepareEntities(array $form, FormStateInterface $form_state) {
+    $files = [];
+    foreach ($form_state->getValue(['upload'], []) as $fid) {
+      $files[] = $this->entityTypeManager->getStorage('file')->load($fid);
     }
+    return $files;
   }
 
   /**
    * {@inheritdoc}
    */
   public function submit(array &$element, array &$form, FormStateInterface $form_state) {
-    $files = $this->extractFiles($form_state);
-    $this->selectEntities($files, $form_state);
-    $this->clearFormValues($element, $form_state);
+    if (!empty($form_state->getTriggeringElement()['#eb_widget_main_submit'])) {
+      $files = $this->prepareEntities($form, $form_state);
+      array_walk(
+        $files,
+        function (FileInterface $file) {
+          $file->setPermanent();
+          $file->save();
+        }
+      );
+      $this->selectEntities($files, $form_state);
+      $this->clearFormValues($element, $form_state);
+    }
   }
 
   /**
@@ -137,33 +160,29 @@ class Upload extends WidgetBase {
   }
 
   /**
-   * @param FormStateInterface $form_state
-   *   Form state object.
-   *
-   * @return \Drupal\file\FileInterface[]
-   *   Array of files.
-   */
-  protected function extractFiles(FormStateInterface $form_state) {
-    $files = [];
-    foreach ($form_state->getValue(['upload'], []) as $fid) {
-      /** @var \Drupal\file\FileInterface $file */
-      $file = $this->entityTypeManager->getStorage('file')->load($fid);
-      $file->setPermanent();
-      $file->save();
-      $files[] = $file;
-    }
-
-    return $files;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+
     $form['upload_location'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Upload location'),
       '#default_value' => $this->configuration['upload_location'],
+    ];
+    $form['multiple'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Accept multiple files'),
+      '#default_value' => $this->configuration['multiple'],
+      '#description' => $this->t('Multiple uploads will only be accepted if the source field allows more than one value.'),
+    ];
+    $form['extensions'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Allowed file extensions'),
+      '#description' => $this->t('Separate extensions with a space or comma and do not include the leading dot.'),
+      '#default_value' => $this->configuration['extensions'],
+      '#element_validate' => [[static::class, 'validateExtensions']],
+      '#required' => TRUE,
     ];
 
     if ($this->moduleHandler->moduleExists('token')) {
@@ -175,6 +194,25 @@ class Upload extends WidgetBase {
     }
 
     return $form;
+  }
+
+  /**
+   * Validates a list of file extensions.
+   *
+   * @See \Drupal\file\Plugin\Field\FieldType\FileItem::validateExtensions
+   */
+  public static function validateExtensions($element, FormStateInterface $form_state) {
+    if (!empty($element['#value'])) {
+      $extensions = preg_replace('/([, ]+\.?)/', ' ', trim(strtolower($element['#value'])));
+      $extensions = array_filter(explode(' ', $extensions));
+      $extensions = implode(' ', array_unique($extensions));
+      if (!preg_match('/^([a-z0-9]+([.][a-z0-9])* ?)+$/', $extensions)) {
+        $form_state->setError($element, t('The list of allowed extensions is not valid, be sure to exclude leading dots and to separate extensions with a comma or space.'));
+      }
+      else {
+        $form_state->setValueForElement($element, $extensions);
+      }
+    }
   }
 
 }

@@ -1,0 +1,5 @@
+services:
+    route_subscriber:
+        class: Drupal\oab_media_browser\Routing\RouteSubscriber
+        tags:
+          - {name: event_subscriber }

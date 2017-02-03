@@ -20,6 +20,16 @@
   margin: 5px auto 0;
 }
 
+.entities-list .item-container:hover {
+  cursor: move;
+  opacity: 0.6;
+}
+
 .entities-list .rendered-entity {
-  display: block;
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+.entities-list.hidden {
+  display: none;
 }

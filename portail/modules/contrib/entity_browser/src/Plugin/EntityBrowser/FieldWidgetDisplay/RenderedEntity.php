@@ -80,19 +80,39 @@ class RenderedEntity extends FieldWidgetDisplayBase implements ContainerFactoryP
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $options = [];
-    foreach ($this->entityDisplayRepository->getViewModes($this->configuration['entity_type']) as $id => $view_mode) {
-      $options[$id] = $view_mode['label'];
+    foreach ($this->entityDisplayRepository->getViewModeOptions($this->configuration['entity_type']) as $id => $view_mode_label) {
+      $options[$id] = $view_mode_label;
     }
 
     return [
       'view_mode' => [
         '#type' => 'select',
-        '#title' => t('View mode'),
-        '#description' => t('Select view mode to be used when rendering entities.'),
-        '#default_value' => !empty($this->configuration['view_mode']) ? $this->configuration['view_mode'] : NULL,
+        '#title' => $this->t('View mode'),
+        '#description' => $this->t('Select view mode to be used when rendering entities.'),
+        '#default_value' => $this->configuration['view_mode'],
         '#options' => $options,
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'view_mode' => 'default',
+    ] + parent::defaultConfiguration();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = parent::calculateDependencies();
+    if ($view_mode = $this->entityTypeManager->getStorage('entity_view_mode')->load($this->configuration['entity_type'] . '.' . $this->configuration['view_mode'])) {
+      $dependencies[$view_mode->getConfigDependencyKey()][] = $view_mode->getConfigDependencyName();
+    }
+    return $dependencies;
   }
 
 }

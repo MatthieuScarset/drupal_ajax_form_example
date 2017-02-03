@@ -6,8 +6,6 @@
  *
  * @ingroup xmlsitemap
  */
-
-use Drupal\Core\Database\Database;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Url;
@@ -66,7 +64,7 @@ function xmlsitemap_requirements($phase) {
         }
       }
       if (!empty($directories)) {
-        $items = array('#theme' => 'item_list', '#items' => array_keys($directories));
+        $items = array('#type' => 'item_list', 'items' => array_keys($directories));
         $requirements['xmlsitemap_directory']['value'] = $t('Not found or not writable');
         $requirements['xmlsitemap_directory']['severity'] = REQUIREMENT_ERROR;
         $requirements['xmlsitemap_directory']['description'] = $t('The following directories were not found or are not writable by the server. See <a href="@docpage">@docpage</a> for more information. @directories', array('@directories' => \Drupal::service('renderer')->render($items), '@docpage' => 'http://drupal.org/node/34025'));
@@ -263,11 +261,12 @@ function xmlsitemap_schema() {
         'default' => 0,
       ),
     ),
-    'primary key' => array('id', 'type', 'language'),
+    'primary key' => array('id', 'type'),
     'indexes' => array(
       'loc' => array('loc'),
       'access_status_loc' => array('access', 'status', 'loc'),
       'type_subtype' => array('type', 'subtype'),
+      'language' => array('language'),
     ),
   );
 
@@ -288,7 +287,7 @@ function xmlsitemap_install() {
       ->fields(array(
         'type' => 'frontpage',
         'id' => 0,
-        'loc' => '/',
+        'loc' => '',
         'priority' => \Drupal::config('xmlsitemap.settings')->get('frontpage_priority'),
         'changefreq' => \Drupal::config('xmlsitemap.settings')->get('frontpage_changefreq'),
         'language' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
@@ -343,20 +342,8 @@ function xmlsitemap_uninstall() {
 }
 
 /**
- * Change the primary key of the 'xmlsitemap' table to include the language.
+ * Implements hook_update_last_removed().
  */
-function xmlsitemap_update_8001() {
-  \Drupal::database()->schema()->dropPrimaryKey('xmlsitemap');
-  \Drupal::database()->schema()->addPrimaryKey('xmlsitemap', array('id', 'type', 'language'));
-  \Drupal::database()->schema()->dropIndex('xmlsitemap', 'language');
-}
-
-/**
- * Update the path of the frontpage link.
- */
-function xmlsitemap_update_8002() {
-  \Drupal::database()->update('xmlsitemap')
-    ->fields(['loc' => '/'])
-    ->condition('type', 'frontpage')
-    ->execute();
+function xmlsitemap_update_last_removed() {
+  return 7203;
 }

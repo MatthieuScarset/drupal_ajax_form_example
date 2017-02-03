@@ -14,7 +14,7 @@ function oab_develop_drush_command() {
 
 
 /**
- * Méthode appelée par Drush lorsqu'on lance drush backbones-import
+ * Méthode appelée par Drush lorsqu'on lance
  */
 function drush_oab_develop_oab_updb()
 {

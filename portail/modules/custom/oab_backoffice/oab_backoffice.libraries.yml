@@ -1,20 +1,3 @@
-mediatheque:
-  version: VERSION
-  js:
-    js/mediatheque.js: {}
-  css:
-    theme:
-      css/mediatheque.css: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
-metadata:
-  version: VERSION
-  js:
-    js/metadata.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupal
 jira:
   version: VERSION
   js:

@@ -1,5 +1,0 @@
-# Schema for the configuration files of the OBS Backoffice theme.
-
-theme_obs_backoffice.settings:
-  type: theme_settings
-  label: 'OBS Backoffice settings'

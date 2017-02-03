@@ -4,14 +4,15 @@ type: module
 package: Media
 # core: 8.x
 dependencies:
-  - entity_browser
-  - views
-  - field
-  - file
-  - node
+  - entity_browser:entity_browser
+  - drupal:views
+  - drupal:field
+  - drupal:file
+  - drupal:node
+  - drupal:image
 
-# Information added by Drupal.org packaging script on 2016-07-10
-version: '8.x-1.0-alpha5+9-dev'
+# Information added by Drupal.org packaging script on 2017-01-19
+version: '8.x-1.0-beta4'
 core: '8.x'
 project: 'entity_browser'
-datestamp: 1468183140
+datestamp: 1484816287

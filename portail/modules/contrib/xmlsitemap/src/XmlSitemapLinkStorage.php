@@ -3,13 +3,11 @@
 namespace Drupal\xmlsitemap;
 
 use Drupal\Core\Database\Query\Merge;
-use Drupal\Core\Entity\EntityChangedInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AnonymousUserSession;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 /**
  * XmlSitemap link storage service class.
@@ -51,9 +49,6 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
     $this->anonymousUser = new AnonymousUserSession();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function create(EntityInterface $entity) {
     if (!isset($entity->xmlsitemap)) {
       $entity->xmlsitemap = array();
@@ -63,12 +58,13 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
     }
 
     $settings = xmlsitemap_link_bundle_load($entity->getEntityTypeId(), $entity->bundle());
+    $uri = $entity->url();
     $entity->xmlsitemap += array(
       'type' => $entity->getEntityTypeId(),
       'id' => (string) $entity->id(),
       'subtype' => $entity->bundle(),
-      'status' => (int) $settings['status'],
-      'status_default' => (int) $settings['status'],
+      'status' => $settings['status'],
+      'status_default' => $settings['status'],
       'status_override' => 0,
       'priority' => $settings['priority'],
       'priority_default' => $settings['priority'],
@@ -76,19 +72,14 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
       'changefreq' => isset($settings['changefreq']) ? $settings['changefreq'] : 0,
     );
 
-    if ($entity instanceof EntityChangedInterface) {
+    if (method_exists($entity, 'getChangedTime')) {
       $entity->xmlsitemap['lastmod'] = $entity->getChangedTime();
     }
 
+    $url = $entity->url();
     // The following values must always be checked because they are volatile.
-    try {
-      $loc = ($entity->id() !== NULL && $entity->hasLinkTemplate('canonical')) ? '/' . $entity->toUrl()->getInternalPath() : '';
-    }
-    catch (RouteNotFoundException $e) {
-      $loc = '';
-    }
-    $entity->xmlsitemap['loc'] = $loc;
-    $entity->xmlsitemap['access'] = $loc && $entity->access('view', $this->anonymousUser);
+    $entity->xmlsitemap['loc'] = $uri;
+    $entity->xmlsitemap['access'] = isset($url) && $entity->access('view', $this->anonymousUser);
     $language = $entity->language();
     $entity->xmlsitemap['language'] = !empty($language) ? $language->getId() : LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
@@ -130,7 +121,7 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
     }
 
     $queryStatus = \Drupal::database()->merge('xmlsitemap')
-      ->key(array('type' => $link['type'], 'id' => $link['id'], 'language' => $link['language']))
+      ->key(array('type' => $link['type'], 'id' => $link['id']))
       ->fields(array(
         'loc' => $link['loc'],
         'subtype' => $link['subtype'],
@@ -142,6 +133,7 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
         'priority_override' => $link['priority_override'],
         'changefreq' => $link['changefreq'],
         'changecount' => $link['changecount'],
+        'language' => $link['language'],
       ))
       ->execute();
 
@@ -220,11 +212,8 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
   /**
    * {@inheritdoc}
    */
-  public function delete($entity_type, $entity_id, $langcode = NULL) {
+  public function delete($entity_type, $entity_id) {
     $conditions = array('type' => $entity_type, 'id' => $entity_id);
-    if ($langcode) {
-      $conditions['language'] = $langcode;
-    }
     return $this->deleteMultiple($conditions);
   }
 
@@ -239,8 +228,7 @@ class XmlSitemapLinkStorage implements XmlSitemapLinkStorageInterface {
     // @todo Add a hook_xmlsitemap_link_delete() hook invoked here.
     $query = db_delete('xmlsitemap');
     foreach ($conditions as $field => $value) {
-      $operator = is_array($value) ? 'IN' : '=';
-      $query->condition($field, $value, $operator);
+      $query->condition($field, $value);
     }
 
     return $query->execute();

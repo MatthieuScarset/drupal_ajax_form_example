@@ -22,9 +22,6 @@
 %}
 {% if content %}
 
-
- {# <footer {{ attributes.addClass(classes) }}> #}
-
   <div class="container">
         <div class="row">
             <div class="o-footer">
@@ -38,7 +35,20 @@
                     </div>
                     <div style="border-top:1px solid #999999; margin-top:10px">
                     <div class="container-fluid o-footer-top nopadding">
-                        {{ elements.theme_boosted_footer }}
+
+                        {% if elements.footeren %}
+                            {{ elements.footeren }}
+                        {% endif %}
+                        {% if elements.footerfr %}
+                            {{ elements.footerfr }}
+                        {% endif %}
+                        {% if elements.footerru %}
+                            {{ elements.footerru }}
+                        {% endif %}
+                        {% if elements.footerruen %}
+                            {{ elements.footerruen }}
+                        {% endif %}
+
                         <div class='row'><div class="col-xs-12 nopadding">
                             <ul class="nav navbar-nav footer-iconbar">
                                 <li><a href="#"><span class="icon-footer icon-control_centre"></span> Contact us</a></li>
@@ -50,11 +60,24 @@
                         </div></div>
                     </div>
 
-             {{ elements.bottomfooterbar }}
+
+                       {% if elements.bottomfooterbaren %}
+                            {{ elements.bottomfooterbaren }}
+                        {% endif %}
+                        {% if elements.bottomfooterbarfr %}
+                            {{ elements.bottomfooterbarfr }}
+                        {% endif %}
+                        {% if elements.bottom_footerbar_ru %}
+                            {{ elements.bottom_footerbar_ru }}
+                        {% endif %}
+                        {% if elements.bottomfooterbar_ruen %}
+                            {{ elements.bottomfooterbar_ruen }}
+                        {% endif %}
+
+
           </div>
 
        </div>
 </div>
 
- {# </footer> #}
 {% endif %}

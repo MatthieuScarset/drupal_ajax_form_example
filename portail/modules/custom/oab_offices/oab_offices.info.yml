@@ -1,8 +1,0 @@
-name: OAB Offices
-description: 'Module permettant la gestion de la carte des offices (agences)'
-type: module
-package: OAB
-# Information added by Drupal.org packaging script on 2016-01-20
-version: '8.x-1.0'
-core: '8.x'
-project: 'oab_offices'

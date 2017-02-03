@@ -7,8 +7,8 @@ configure: xmlsitemap_engines.settings
 dependencies:
     - xmlsitemap
 
-# Information added by Drupal.org packaging script on 2016-10-13
-version: '8.x-1.0-alpha2+17-dev'
+# Information added by Drupal.org packaging script on 2016-05-25
+version: '8.x-1.0-alpha2'
 core: '8.x'
 project: 'xmlsitemap'
-datestamp: 1476401641
+datestamp: 1464191056

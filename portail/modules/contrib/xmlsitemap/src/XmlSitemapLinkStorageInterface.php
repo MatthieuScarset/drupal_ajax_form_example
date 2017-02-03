@@ -70,14 +70,11 @@ interface XmlSitemapLinkStorageInterface {
    *   A string with the entity type.
    * @param $entity_id
    *   Entity ID to be deleted.
-   * @param string $langcode
-   *   (optional) The language code for the link that should be deleted.
-   *   If omitted, links for that entity will be removed in all languages.
    *
    * @return
    *   The number of links that were deleted.
    */
-  public function delete($entity_type, $entity_id, $langcode = NULL);
+  public function delete($entity_type, $entity_id);
 
   /**
    * Delete multiple sitemap links from the database.

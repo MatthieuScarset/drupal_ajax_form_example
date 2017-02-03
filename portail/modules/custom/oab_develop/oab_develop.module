@@ -1,11 +1,1 @@
 <?php
-
-class obstools{
-	static function debug($elem){
-		echo '<pre>';print_r($elem);echo '</pre>';
-	}
-	static function lock($elem){
-		self::debug($elem);
-		die();
-	}
-}

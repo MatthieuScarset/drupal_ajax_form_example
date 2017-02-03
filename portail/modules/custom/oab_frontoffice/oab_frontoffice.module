@@ -5,38 +5,11 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
-/**
- * Implements hook_form_alter().
- */
-function oab_frontoffice_form_alter(&$form, Drupal\Core\Form\FormState &$form_state) {
-  if (isset($form['#form_id'])) {
-    if ($form['#form_id'] == 'contact_message_any_request_form') {
-      if (isset($form['name'])){
-        $form['name']['#title'] = t('Your last name');
-      }
-      if (isset($form['mail'])){
-        $form['mail']['#title'] = t('Your email address');
-      }
-      
-      unset($form['actions']['preview']);
-    }
-    if ($form['#form_id'] == 'node_preview_form_select') {
-      $form['#attributes']['class'][] = 'container';
-    }
-  }
-}
 
-/**
- * Hook form alter pour le formulaire des commentaires
- */
-function oab_frontoffice_form_comment_comment_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // restriction sur le choix du format de texte
-  $form['comment_body']['widget']['0']['#allowed_formats'] = array('comments');
-}
 
 function oab_frontoffice_preprocess_menu(&$variables) {
   if (isset($variables['items'])
-  && is_array($variables['items'])) {
+    && is_array($variables['items'])) {
     foreach ($variables['items'] as &$item) {
       $menuLinkEntity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
       if (!empty($menuLinkEntity)) {
@@ -90,20 +63,10 @@ function oab_frontoffice_link_alter(&$variables){
 function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
   // Cheking view_mode for node.
   if ($entity->getEntityType()->id() == 'node') {
-      if (!empty($build['#attached']['html_head_link'])) {
-        _remove_header_links($build);
-      }
+    if (!empty($build['#attached']['html_head_link'])) {
+      _remove_header_links($build);
     }
-}
-
-/**
- * Implements hook_page_attachments_alter().
- * @param array $attachments
- */
-function oab_frontoffice_page_attachments_alter(array &$attachments)
-{
-  //Do nothing : test if ok in all pages, unless uncomment below
-  //_remove_header_links($attachments);
+  }
 }
 
 function _remove_header_links(array &$attachments) {
@@ -114,16 +77,16 @@ function _remove_header_links(array &$attachments) {
 
   // Array to unset.
   $unset_html_head_link = [
-      'shortlink',
-      'delete-form',
-      'edit-form',
-      'version-history',
-      'revision',
-      'display',
-      'drupal:content-translation-overview',
-      'drupal:content-translation-add',
-      'drupal:content-translation-edit',
-      'drupal:content-translation-delete',
+    'shortlink',
+    'delete-form',
+    'edit-form',
+    'version-history',
+    'revision',
+    'display',
+    'drupal:content-translation-overview',
+    'drupal:content-translation-add',
+    'drupal:content-translation-edit',
+    'drupal:content-translation-delete',
   ];
   // Unset loop.
   foreach ($attachments['#attached']['html_head_link'] as $key => $value) {

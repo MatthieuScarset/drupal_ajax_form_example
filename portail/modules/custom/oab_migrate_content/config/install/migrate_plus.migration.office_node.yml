@@ -1,7 +1,7 @@
 id: office_node
 label: Office
 migration_group: office
-langcode: fr
+langcode: en
 status: true
 dependencies:
   module:

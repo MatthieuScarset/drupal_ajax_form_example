@@ -179,30 +179,30 @@
   color: white;
 }
 
-#block-stickyhomeblock{
+#block-socialshareblock{
     width: 100%;
     padding: 0;
     z-index: 1;
 }
-#block-stickyhomeblock #social-share{
+#block-socialshareblock #social-share{
   text-align: right;
 }
-#block-stickyhomeblock #social-share #sharebar{
+#block-socialshareblock #social-share #sharebar{
   padding-right: 10px;
 }
-#block-stickyhomeblock #social-share #counterlabel{
+#block-socialshareblock #social-share #counterlabel{
   display: none;
 }
 
-#block-stickyhomeblock #social-share #sharebar a.visited{
+#block-socialshareblock #social-share #sharebar a.visited{
   background-color: white;
   border-color: black;
 }
-#block-stickyhomeblock #social-share #sharebar a.visited *{
+#block-socialshareblock #social-share #sharebar a.visited *{
   fill: black;
 }
 
-#block-theme-boosted-navigationprincipale {
+#block-mainnavigationen {
   position: static;
 }
 

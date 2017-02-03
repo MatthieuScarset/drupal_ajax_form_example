@@ -6,9 +6,10 @@ package: Testing
 # version: VERSION
 dependencies:
   - entity_browser_entity_form
+  - views
 
-# Information added by Drupal.org packaging script on 2016-07-10
-version: '8.x-1.0-alpha5+9-dev'
+# Information added by Drupal.org packaging script on 2017-01-19
+version: '8.x-1.0-beta4'
 core: '8.x'
 project: 'entity_browser'
-datestamp: 1468183140
+datestamp: 1484816287

@@ -4,7 +4,6 @@ type: module
 package: OAB
 dependencies:
   - ckeditor
-  - basewidget
 libraries:
 - oab_ckeditor/oab_ckeditor.templates
 # core: 8.x

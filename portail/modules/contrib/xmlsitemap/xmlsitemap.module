@@ -10,11 +10,11 @@
  */
 
 use Drupal\Component\Utility\Crypt;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Utility\UrlHelper;
-use Drupal\Core\Link;
+use Drupal\Core\Render\Element;
 use Drupal\Core\Entity\EntityForm;
-use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AnonymousUserSession;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -1535,9 +1535,8 @@ function xmlsitemap_xmlsitemap_index_links($limit) {
   $entity_types = \Drupal::entityTypeManager()->getDefinitions();
   $bundles = \Drupal::service('entity_type.bundle.info')->getAllBundleInfo();
   foreach ($entity_types as $entity_type_id => $entity_type) {
-    // Don't try to loop over non-content entity types or with no bundle
-    // defined.
-    if (!$entity_type instanceof ContentEntityTypeInterface || !isset($bundles[$entity_type_id])) {
+    // Don't try to loop over entity types with no bundle defined.
+    if (!isset($bundles[$entity_type_id])) {
       continue;
     }
 
@@ -1569,24 +1568,41 @@ function xmlsitemap_xmlsitemap_index_links($limit) {
 /**
  * Process sitemap links.
  *
- * @param string $entity_type_id
- *   The entity type to process.
- * @param array $entity_ids
- *   Entity IDs to be processed.
+ * @param array $entities
+ *   An array of \Drupal\Core\Entity\EntityInterface objects.
+ * @param array
+ *   Entity ids to be processed.
  */
-function xmlsitemap_xmlsitemap_process_entity_links($entity_type_id, array $entity_ids) {
-  $link_storage = \Drupal::service('xmlsitemap.link_storage');
-
-  /** @var \Drupal\Core\Entity\ContentEntityInterface[] $entities */
-  $entities = \Drupal::entityTypeManager()->getStorage($entity_type_id)->loadMultiple($entity_ids);
+function xmlsitemap_xmlsitemap_process_entity_links($entity_type, array $ids) {
+  $entities = entity_load_multiple($entity_type, $ids);
+  $anonymous_user = new AnonymousUserSession();
   foreach ($entities as $entity) {
-    // Generate an entry for each translation.
-    foreach ($entity->getTranslationLanguages() as $langcode => $language) {
-      $translation = $entity->getTranslation($langcode);
+    $link_storage = \Drupal::service('xmlsitemap.link_storage');
+    $link = $link_storage->create($entity);
+    $link_storage->save($link);
+  }
+}
 
-      $link = $link_storage->create($translation);
-      $link_storage->save($link);
-    }
+/**
+ * Implements hook_entity_presave().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity that will be presaved.
+ */
+function xmlsitemap_entity_presave(EntityInterface $entity) {
+  $entity_type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
+  $anonymous_user = new AnonymousUserSession();
+
+  if (!xmlsitemap_link_bundle_check_enabled($entity_type, $bundle)) {
+    return;
+  }
+
+  $id = $entity->id();
+  if (!empty($id)) {
+    $link_storage = \Drupal::service('xmlsitemap.link_storage');
+    $link = $link_storage->create($entity);
+    $link_storage->save($link);
   }
 }
 
@@ -1597,19 +1613,17 @@ function xmlsitemap_xmlsitemap_process_entity_links($entity_type_id, array $enti
  *   The entity that will be inserted.
  */
 function xmlsitemap_entity_insert(EntityInterface $entity) {
-  if (!xmlsitemap_link_bundle_check_enabled($entity->getEntityTypeId(), $entity->bundle())) {
+  $entity_type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
+  $anonymous_user = new AnonymousUserSession();
+
+  if (!xmlsitemap_link_bundle_check_enabled($entity_type, $bundle)) {
     return;
   }
 
-  /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
   $link_storage = \Drupal::service('xmlsitemap.link_storage');
-  // Generate an entry for each translation.
-  foreach ($entity->getTranslationLanguages() as $langcode => $language) {
-    $translation = $entity->getTranslation($langcode);
-
-    $link = $link_storage->create($translation);
-    $link_storage->save($link);
-  }
+  $link = $link_storage->create($entity);
+  $link_storage->save($link);
 }
 
 /**
@@ -1619,33 +1633,17 @@ function xmlsitemap_entity_insert(EntityInterface $entity) {
  *   The entity that will be updated.
  */
 function xmlsitemap_entity_update(EntityInterface $entity) {
-  if (!xmlsitemap_link_bundle_check_enabled($entity->getEntityTypeId(), $entity->bundle())) {
+  $entity_type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
+  $anonymous_user = new AnonymousUserSession();
+
+  if (!xmlsitemap_link_bundle_check_enabled($entity_type, $bundle)) {
     return;
   }
 
-  /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
   $link_storage = \Drupal::service('xmlsitemap.link_storage');
-  // Generate an entry for each translation.
-  $translation_languages = $entity->getTranslationLanguages();
-  foreach ($translation_languages as $langcode => $language) {
-    $translation = $entity->getTranslation($langcode);
-
-    $link = $link_storage->create($translation);
-    $link_storage->save($link);
-  }
-
-  // Check if we have differences between the translations from the link
-  // storage and the current translations of the entity.
-  $link_storage_languages = [];
-  $links = $link_storage->loadMultiple(['type' => $entity->getEntityTypeId(), 'id' => $entity->id()]);
-  foreach ($links as $link) {
-    $link_storage_languages[] = $link['language'];
-  }
-
-  // If so, remove the translations that no longer exist.
-  if ($languge_differences = array_diff($link_storage_languages, array_keys($translation_languages))) {
-    $link_storage->deleteMultiple(['type' => $entity->getEntityTypeId(), 'id' => $entity->id(), 'language' => $languge_differences]);
-  }
+  $link = $link_storage->create($entity);
+  $link_storage->save($link);
 }
 
 /**
@@ -1655,15 +1653,10 @@ function xmlsitemap_entity_update(EntityInterface $entity) {
  *   The entity that will be deleted.
  */
 function xmlsitemap_entity_delete(EntityInterface $entity) {
-  $langcode = $entity->language() ? $entity->language()->getId() : NULL;
-  \Drupal::service('xmlsitemap.link_storage')->delete($entity->getEntityTypeId(), $entity->id(), $langcode);
-}
+  $entity_type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
 
-/**
- * Implements hook_entity_translation_delete().
- */
-function xmlsitemap_entity_translation_delete(EntityInterface $translation) {
-  \Drupal::service('xmlsitemap.link_storage')->delete($translation->getEntityTypeId(), $translation->id(), $translation->language()->getId());
+  \Drupal::service('xmlsitemap.link_storage')->delete($entity->getEntityTypeId(), $entity->id());
 }
 
 /**
@@ -1944,14 +1937,22 @@ function xmlsitemap_add_form_entity_summary(&$form, $entity, array $entity_info)
     $totals['indexed'] += $status['indexed'];
     $totals['visible'] += $status['visible'];
 
-    $rows[] = [
-      Link::createFromRoute($bundle_info['label'], 'xmlsitemap.admin_settings_bundle', ['entity' => $entity, 'bundle' => $bundle]),
-      $statuses[$bundle_info['xmlsitemap']['status'] ? 1 : 0],
-      $priorities[number_format($bundle_info['xmlsitemap']['priority'], 1)],
-      $status['total'],
-      $status['indexed'],
-      $status['visible'],
-    ];
+    $row = array();
+    if (\Drupal::service('path.validator')->isValid("admin/config/search/xmlsitemap/settings/$entity/$bundle")) {
+      $edit_link = xmlsitemap_get_operation_link("internal://admin/config/search/xmlsitemap/settings/$entity/$bundle", array('title' => $bundle_info['label'], 'modal' => TRUE));
+      $url = Url::fromUri($edit_link['href'], $edit_link);
+      $row[] = \Drupal::l($edit_link['title'], $url);
+    }
+    else {
+      // Bundle labels are assumed to be un-escaped input.
+      $row[] = SafeMarkup::checkPlain($bundle_info['label']);
+    }
+    $row[] = $statuses[$bundle_info['xmlsitemap']['status'] ? 1 : 0];
+    $row[] = $priorities[number_format($bundle_info['xmlsitemap']['priority'], 1)];
+    $row[] = $status['total'];
+    $row[] = $status['indexed'];
+    $row[] = $status['visible'];
+    $rows[] = $row;
   }
 
   if ($rows) {
@@ -2638,18 +2639,4 @@ function xmlsitemap_link_bundle_enable($entity_type_id, $bundle_id) {
  */
 function xmlsitemap_link_bundle_check_enabled($entity_type_id, $bundle_id) {
   return !\Drupal::config("xmlsitemap.settings.{$entity_type_id}.{$bundle_id}")->isNew();
-}
-
-/**
- * Check if an entity is enabled and configuration exists for the entity type.
- *
- * @param string $entity_type_id
- *   Entity type id.
- *
- * @return bool
- *   Returns TRUE if bundle is enabled, FALSE otherwise.
- */
-function xmlsitemap_link_entity_check_enabled($entity_type_id) {
-  $configuration = \Drupal::configFactory()->listAll("xmlsitemap.settings.{$entity_type_id}.");
-  return !empty($configuration);
 }

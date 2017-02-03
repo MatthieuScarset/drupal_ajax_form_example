@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+migration_group: dossier_presse
+id: dossier_presse_media
+migration_tags: null
+label: Dossier presse medias
+source:
+  plugin: dossier_presse_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: file
+  langcode:
+    plugin: default_value
+    default_value: und
+  name : filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_file:
+    plugin: migration
+    migration: dossier_presse_file
+    source: file_info
+destination:
+  plugin: entity:media
+template: null
+migration_dependencies:
+  required:
+    - dossier_presse_file

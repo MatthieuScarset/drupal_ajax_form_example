@@ -61,8 +61,7 @@ class ReplicateUILocalTasks extends DeriverBase implements ContainerDeriverInter
         $base_route_name = "entity.$entity_type_id.canonical";
         $this->derivatives[$replicate_route_name] = [
           'entity_type' => $entity_type_id,
-          'title' => t('Copy'),
-          /*'title' => 'Replicate',*/  /*Cette ligne est la version d'origine du module, titre remplacé à la demande du client, voir JIRA_RUBYPORTAILOBS-2609 */
+          'title' => 'Replicate',
           'route_name' => $replicate_route_name,
           'base_route' => $base_route_name,
         ] + $base_plugin_definition;

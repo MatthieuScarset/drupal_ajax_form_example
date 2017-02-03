@@ -8,7 +8,7 @@
     display: none;
 }
 .node-form .form-actions .dropbutton-widget{
-    display: none;
+    /*display: none;*/
 }
 .ui-dialog .ui-widget-content.ui-dialog-content{
     overflow-x: hidden !important;

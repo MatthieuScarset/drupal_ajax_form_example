@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @EntityBrowserDisplay(
  *   id = "standalone",
  *   label = @Translation("Standalone form"),
- *   description = @Translation("Displays entity browser as a standalone form."),
+ *   description = @Translation("Displays the entity browser as a standalone form. Only intended for testing or very specific use cases."),
  *   uses_route = TRUE
  * )
  */
@@ -45,8 +45,8 @@ class Standalone extends DisplayBase implements DisplayRouterInterface {
   /**
    * {@inheritdoc}
    */
-  public function displayEntityBrowser(FormStateInterface $form_state, array $entities = []) {
-    parent::displayEntityBrowser($form_state, $entities);
+  public function displayEntityBrowser(array $element, FormStateInterface $form_state, array &$complete_form, array $persistent_data = []) {
+    parent::displayEntityBrowser($element, $form_state, $complete_form, $persistent_data);
     // @TODO Implement it.
   }
 

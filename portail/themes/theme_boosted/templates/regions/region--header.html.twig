@@ -43,19 +43,25 @@
                       {#TODO : insert here a divider to separate sections#}
                       {#Render the main mega menu items in the top navbar #}
                       {#only to display them when collapsed #}
-                      {% if elements.theme_boosted_navigationprincipale %}
-                        {{ elements.theme_boosted_navigationprincipale }}
+                      {% if elements.mainnavigationen %}
+                        {{ elements.mainnavigationen }}
                       {% endif %}
 
-                      {% if elements.navigationprincipaleen %}
-                          {{ elements.navigationprincipaleen }}
+                      {% if elements.mainnavigationfr %}
+                          {{ elements.mainnavigationfr }}
+                      {% endif %}
+                      {% if elements.mainnavigationru %}
+                          {{ elements.mainnavigationru }}
+                      {% endif %}
+                      {% if elements.mainnavigationruen %}
+                          {{ elements.mainnavigationruen }}
                       {% endif %}
                   </div>
 
                    <div id="login_block" class="nav navbar-nav">
                       {#Render the top navbar items#}
-                       {% if elements.topnavbarmenu %}
-                            {{ elements.topnavbarmenu }}
+                       {% if elements.topnavbarfr %}
+                            {{ elements.topnavbarfr }}
                        {% endif %}
                        {% if elements.topnavbaren %}
                            {{ elements.topnavbaren }}
@@ -74,8 +80,8 @@
                       {% if elements.toprightnavbarfr %}
                         {{ elements.toprightnavbarfr }}
                       {% endif %}
-                       {% if elements.servicespace %}
-                           {{ elements.servicespace }}
+                       {% if elements.toprightnavbaren %}
+                           {{ elements.toprightnavbaren }}
                        {% endif %}
                       {% if elements.toprightnavbarru %}
                           {{ elements.toprightnavbarru }}
@@ -96,8 +102,8 @@
           <div class="container-fluid-navbar">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header logo">
-	              {% if elements.theme_boosted_sitebranding %}
-                  {{ elements.theme_boosted_sitebranding }}
+	              {% if elements.theme_boosted_branding %}
+                  {{ elements.theme_boosted_branding }}
 	              {% endif %}
               </div>
 
@@ -106,20 +112,20 @@
               	{#Render the main mega menu items in the top navbar #}
 
                 <div class="nav navbar-nav nav-menu">
-                    {% if elements.theme_boosted_navigationprincipale %}
-                        {{ elements.theme_boosted_navigationprincipale }}
+                    {% if elements.mainnavigationfr %}
+                        {{ elements.mainnavigationfr }}
                     {% endif %}
 
-                    {% if elements.navigationprincipaleen %}
-                        {{ elements.navigationprincipaleen }}
+                    {% if elements.mainnavigationen %}
+                        {{ elements.mainnavigationen }}
                     {% endif %}
 
-                    {% if elements.navigationprincipaleru %}
-                        {{ elements.navigationprincipaleru }}
+                    {% if elements.mainnavigationru %}
+                        {{ elements.mainnavigationfr }}
                     {% endif %}
 
-                    {% if elements.navigationprincipaleruen %}
-                        {{ elements.navigationprincipaleruen }}
+                    {% if elements.mainnavigationruen %}
+                        {{ elements.mainnavigationruen }}
                     {% endif %}
                 </div>
 

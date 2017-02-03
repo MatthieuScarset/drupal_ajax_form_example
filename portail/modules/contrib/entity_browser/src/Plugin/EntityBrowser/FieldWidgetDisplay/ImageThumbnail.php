@@ -83,8 +83,8 @@ class ImageThumbnail extends FieldWidgetDisplayBase implements ContainerFactoryP
     return [
       'image_style' => [
         '#type' => 'select',
-        '#title' => t('Image style'),
-        '#description' => t('Select image style to be used to display thumbnails.'),
+        '#title' => $this->t('Image style'),
+        '#description' => $this->t('Select image style to be used to display thumbnails.'),
         '#default_value' => $this->configuration['image_style'],
         '#options' => $options,
       ],
@@ -96,6 +96,26 @@ class ImageThumbnail extends FieldWidgetDisplayBase implements ContainerFactoryP
    */
   public function isApplicable(EntityTypeInterface $entity_type) {
     return $entity_type->isSubclassOf(FileInterface::class);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    return [
+      'image_style' => 'thumbnail',
+    ] + parent::defaultConfiguration();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = parent::calculateDependencies();
+    if ($image_style = $this->entityTypeManager->getStorage('image_style')->load($this->configuration['image_style'])) {
+      $dependencies[$image_style->getConfigDependencyKey()][] = $image_style->getConfigDependencyName();
+    }
+    return $dependencies;
   }
 
 }

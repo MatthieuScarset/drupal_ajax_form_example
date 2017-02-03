@@ -7,6 +7,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\entity_browser\WidgetBase;
 use Drupal\Core\Url;
+use Drupal\entity_browser\WidgetValidationManager;
+use Drupal\views\Entity\View as ViewEntity;
 use Drupal\views\Views;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -21,7 +23,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  *   id = "view",
  *   label = @Translation("View"),
  *   provider = "views",
- *   description = @Translation("Uses a view to provide entity listing in a browser's widget.")
+ *   description = @Translation("Uses a view to provide entity listing in a browser's widget."),
+ *   auto_select = TRUE
  * )
  */
 class View extends WidgetBase implements ContainerFactoryPluginInterface {
@@ -53,6 +56,7 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
       $plugin_definition,
       $container->get('event_dispatcher'),
       $container->get('entity_type.manager'),
+      $container->get('plugin.manager.entity_browser.widget_validation'),
       $container->get('current_user')
     );
   }
@@ -70,19 +74,21 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    *   Event dispatcher service.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\entity_browser\WidgetValidationManager $validation_manager
+   *   The Widget Validation Manager service.
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   The current user.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EventDispatcherInterface $event_dispatcher, EntityTypeManagerInterface $entity_type_manager, AccountInterface $current_user) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $event_dispatcher, $entity_type_manager);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EventDispatcherInterface $event_dispatcher, EntityTypeManagerInterface $entity_type_manager, WidgetValidationManager $validation_manager, AccountInterface $current_user) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $event_dispatcher, $entity_type_manager, $validation_manager);
     $this->currentUser = $current_user;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getForm(array &$original_form, FormStateInterface $form_state, array $aditional_widget_parameters) {
-    $form = [];
+  public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
+    $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
     // TODO - do we need better error handling for view and view_display (in case
     // either of those is nonexistent or display not of correct type)?
     $form['#attached']['library'] = ['entity_browser/view'];
@@ -96,16 +102,16 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
     // Check if the current user has access to this view.
     if (!$view->access($this->configuration['view_display'])) {
       return [
-        '#markup' => t('You do not have access to this View.'),
+        '#markup' => $this->t('You do not have access to this View.'),
       ];
     }
 
     if (!empty($this->configuration['arguments'])) {
-      if (!empty($aditional_widget_parameters['path_parts'])) {
+      if (!empty($additional_widget_parameters['path_parts'])) {
         $arguments = [];
         // Map configuration arguments with original path parts.
         foreach ($this->configuration['arguments'] as $argument) {
-          $arguments[] = isset($aditional_widget_parameters['path_parts'][$argument]) ? $aditional_widget_parameters['path_parts'][$argument] : '';
+          $arguments[] = isset($additional_widget_parameters['path_parts'][$argument]) ? $additional_widget_parameters['path_parts'][$argument] : '';
         }
         $view->setArguments(array_values($arguments));
       }
@@ -117,12 +123,12 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
       $url = Url::fromRoute('entity.view.edit_form', ['view' => $this->configuration['view']])->toString();
       if ($this->currentUser->hasPermission('administer views')) {
         return [
-          '#markup' => t('Entity browser select form field not found on a view. <a href=":link">Go fix it</a>!', [':link' => $url]),
+          '#markup' => $this->t('Entity browser select form field not found on a view. <a href=":link">Go fix it</a>!', [':link' => $url]),
         ];
       }
       else {
         return [
-          '#markup' => t('Entity browser select form field not found on a view. Go fix it!'),
+          '#markup' => $this->t('Entity browser select form field not found on a view. Go fix it!'),
         ];
       }
     }
@@ -172,7 +178,7 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
             try {
               $storage = $this->entityTypeManager->getStorage($parts[0]);
               if (!$storage->load($parts[1])) {
-                $message = t('The @type Entity @id does not exist.', [
+                $message = $this->t('The @type Entity @id does not exist.', [
                   '@type' => $parts[0],
                   '@id' => $parts[1],
                 ]);
@@ -180,7 +186,7 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
               }
             }
             catch (PluginNotFoundException $e) {
-              $message = t('The Entity Type @type does not exist.', [
+              $message = $this->t('The Entity Type @type does not exist.', [
                 '@type' => $parts[0],
               ]);
               $form_state->setError($form['widget']['view']['entity_browser_select'], $message);
@@ -188,13 +194,18 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
           }
         }
       }
+
+      // If there weren't any errors set, run the normal validators.
+      if (empty($form_state->getErrors())) {
+        parent::validate($form, $form_state);
+      }
     }
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submit(array &$element, array &$form, FormStateInterface $form_state) {
+  protected function prepareEntities(array $form, FormStateInterface $form_state) {
     $selected_rows = array_values(array_filter($form_state->getUserInput()['entity_browser_select']));
     $entities = [];
     foreach ($selected_rows as $row) {
@@ -204,7 +215,14 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
         $entities[] = $entity;
       }
     }
+    return $entities;
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function submit(array &$element, array &$form, FormStateInterface $form_state) {
+    $entities = $this->prepareEntities($form, $form_state);
     $this->selectEntities($entities, $form_state);
   }
 
@@ -212,6 +230,8 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildConfigurationForm($form, $form_state);
+
     $options = [];
     // Get only those enabled Views that have entity_browser displays.
     $displays = Views::getApplicableViews('entity_browser_display');
@@ -238,12 +258,25 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues()['table'][$this->uuid()]['form'];
-
+    $this->configuration['submit_text'] = $values['submit_text'];
+    $this->configuration['auto_select'] = $values['auto_select'];
     if (!empty($values['view'])) {
       list($view_id, $display_id) = explode('.', $values['view']);
       $this->configuration['view'] = $view_id;
       $this->configuration['view_display'] = $display_id;
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    $dependencies = [];
+    if ($this->configuration['view']) {
+      $view = ViewEntity::load($this->configuration['view']);
+      $dependencies[$view->getConfigDependencyKey()] = [$view->getConfigDependencyName()];
+    }
+    return $dependencies;
   }
 
 }

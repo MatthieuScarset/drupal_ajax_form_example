@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\autologout\AutologoutManager.
- */
 
 namespace Drupal\autologout;
 
@@ -152,9 +148,9 @@ class AutologoutManager implements AutologoutManagerInterface {
       // Anonymous doesn't get logged out.
       return 0;
     }
-    $user_settings = $this->configFactory->get('autologout.user.' . $user->id());
+    $user_timeout = \Drupal::service('user.data')->get('autologout', $user->id(), 'timeout');
 
-    if (is_numeric($user_timeout = $user_settings->get('timeout'))) {
+    if (is_numeric($user_timeout)) {
       // User timeout takes precedence.
       return $user_timeout;
     }

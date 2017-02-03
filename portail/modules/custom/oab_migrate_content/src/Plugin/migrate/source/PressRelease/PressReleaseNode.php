@@ -81,19 +81,9 @@ class PressReleaseNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
-    //Id du rendering_model
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('rendering_model', 0, NULL, TRUE);
-
-    foreach ($terms AS $key => $term){
-      $machine_name = $term->get('field_machine_name')->value;
-      if ($machine_name == 'press_release'){
-        $row->setSourceProperty('rendering_model_id', $term->get('tid')->value);
-      }
-    }
-
     //Taxonomie de la Section
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('sections', 0, NULL, TRUE);
-    $sections = array();
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('subhomes', 0, NULL, TRUE);
+    $subhomes = array();
     foreach ($terms AS $key => $term){
       $machine_name = $term->get('field_machine_name')->value;
       $langCode = $term->get('langcode')->value;
@@ -101,7 +91,7 @@ class PressReleaseNode extends SqlBase {
         $sections[] = $term->get('tid')->value;
       }
     }
-    $row->setSourceProperty('sections', $sections);
+    $row->setSourceProperty('subhomes', $subhomes);
 
     // récupération de Country
     $country_query = $this->select('field_data_field_txt_country', 'c');
@@ -340,6 +330,7 @@ class PressReleaseNode extends SqlBase {
       $row->setSourceProperty('files', $files);
     }
 
+    /*
     // récupération du workflow
     $workflow_query = $this->select('workflow_node', 'w');
     $workflow_query->fields('w', ['sid'])
@@ -392,6 +383,7 @@ class PressReleaseNode extends SqlBase {
         $row->setSourceProperty('workflow_transition_comment', $scheduled_comment);
       }
     }
+    */
 
     // path
     $url_source = 'node/' . $row->getSourceProperty('nid');
