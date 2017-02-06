@@ -1,9 +1,0 @@
-uuid: dd30669e-6e88-4412-8a1a-2687d337adb9
-langcode: en
-status: true
-dependencies: {  }
-name: Areas
-vid: areas
-description: ''
-hierarchy: 0
-weight: 0

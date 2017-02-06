@@ -1,8 +1,0 @@
-uuid: b4277a1b-67ee-467f-bc00-a06a7b51fa9f
-langcode: fr
-status: false
-dependencies: {  }
-name: test
-format: test
-weight: -7
-filters: {  }

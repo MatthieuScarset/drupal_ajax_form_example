@@ -1,9 +1,0 @@
-uuid: 828ba3f1-80a6-465a-9300-dd9b134ac6c5
-langcode: und
-status: true
-dependencies: {  }
-name: Blog
-vid: blog
-description: ''
-hierarchy: 0
-weight: 0

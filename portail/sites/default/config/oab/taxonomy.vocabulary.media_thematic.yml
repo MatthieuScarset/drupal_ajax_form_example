@@ -1,9 +1,0 @@
-uuid: 7a3969b1-6e0d-46b8-9207-7fb70f5f14ba
-langcode: und
-status: true
-dependencies: {  }
-name: 'Media thematic'
-vid: media_thematic
-description: ''
-hierarchy: 0
-weight: 0

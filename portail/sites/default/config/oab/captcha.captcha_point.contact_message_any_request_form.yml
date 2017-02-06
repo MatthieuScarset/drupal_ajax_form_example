@@ -1,7 +1,0 @@
-uuid: 857ee2a7-84c9-41cb-8200-e4fa6dec18d7
-langcode: fr
-status: true
-dependencies: {  }
-formId: contact_message_any_request_form
-captchaType: default
-label: 'contact message any request form'

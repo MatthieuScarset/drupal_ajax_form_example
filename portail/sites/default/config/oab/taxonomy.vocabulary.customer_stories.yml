@@ -1,9 +1,0 @@
-uuid: a9621f6d-1d82-4851-8bc8-7f8f1c4fe821
-langcode: en
-status: true
-dependencies: {  }
-name: 'Customer Stories'
-vid: customer_stories
-description: ''
-hierarchy: 0
-weight: 0
