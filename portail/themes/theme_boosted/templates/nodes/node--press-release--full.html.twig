@@ -75,22 +75,20 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
-{% if view_mode == 'press_release' %}
-    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
-    <div class="content_info">
-        <span class="date">{{ createdDate }}</span>
-        {% if content.field_country|trim is not empty or content.field_city|trim is not empty %}
-            <span>
-            {% if content.field_country|trim is not empty %}
-                {{ content.field_country }}-
-            {% endif %}
-                {% if content.field_city|trim is not empty %}
-                    {{ content.field_city }}
-                {% endif %}
-        </span>
+{% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+<div class="content_info">
+    <span class="date">{{ createdDate }}</span>
+    {% if content.field_country|trim is not empty or content.field_city|trim is not empty %}
+        <span>
+        {% if content.field_country|trim is not empty %}
+            {{ content.field_country }}-
         {% endif %}
-    </div>
-{% endif %}
+            {% if content.field_city|trim is not empty %}
+                {{ content.field_city }}
+            {% endif %}
+    </span>
+    {% endif %}
+</div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 

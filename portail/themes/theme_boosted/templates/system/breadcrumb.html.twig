@@ -14,7 +14,11 @@
     {% for item in breadcrumb %}
       <li {{ item.attributes }}>
         {% if item.url %}
-          <a href="{{ item.url }}">{{ item.text }}</a>
+            {% if loop.first %}
+                <a href="{{ item.url }}" class="icon-home" title="{{ item.text }}"></a>
+                {% else %}
+                    <a href="{{ item.url }}">{{ item.text }}</a>
+                {% endif %}
         {% else %}
           {{ item.text }}
         {% endif %}

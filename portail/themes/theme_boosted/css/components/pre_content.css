@@ -7,6 +7,15 @@
 
 .breadcrumb {
     padding-left: 0;
+    padding-top: 3rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.breadcrumb .icon-home{
+    font-size: 2rem;
+}
+.breadcrumb > li + li::before{
+    padding: 0 5px 0 10px;
 }
 
 @media (max-width: 480px) {
@@ -36,4 +45,10 @@
     color: white;
     padding-bottom: 10px;
     margin-top: 5px;
+}
+
+.page-header{
+    margin-top: 6rem;
+    padding-bottom: 2rem;
+    line-height: 3.4rem;
 }
