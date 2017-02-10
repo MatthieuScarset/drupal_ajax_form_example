@@ -9,3 +9,10 @@ function oab_stephanie_install() {
 function oab_stephanie_update_dependencies() {
 
 }
+
+/**
+ * RUBYPORTAILOBS-2638 Configuration de password policy
+ */
+function oab_stephanie_update_8001() {
+	include_once("updates/update_8001.inc");
+}

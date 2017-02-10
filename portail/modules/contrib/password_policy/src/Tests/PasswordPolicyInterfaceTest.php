@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Definition of Drupal\password_policy\Tests\PasswordPolicyInterface.
- */
-
 namespace Drupal\password_policy\Tests;
 
 use Drupal\simpletest\WebTestBase;
@@ -14,18 +9,19 @@ use Drupal\simpletest\WebTestBase;
  *
  * @group password_policy
  */
-class PasswordPolicyInterface extends WebTestBase {
+class PasswordPolicyInterfaceTest extends WebTestBase {
 
   public static $modules = array(
     'password_policy',
     'password_policy_length',
-    'node'
+    'password_policy_character_types',
+    'node',
   );
 
   /**
    * Test failing password and verify it fails.
    */
-  function testOwnUserPasswords() {
+  public function testOwnUserPasswords() {
     // Create user with permission to create policy.
     $user1 = $this->drupalCreateUser(array(
       'administer site configuration',
@@ -67,8 +63,6 @@ class PasswordPolicyInterface extends WebTestBase {
       'roles[' . $rid . ']' => $rid,
     ];
     $this->drupalPostForm(NULL, $edit, 'Finish');
-
-
 
     // Try failing password on form submit.
     $edit = array();
