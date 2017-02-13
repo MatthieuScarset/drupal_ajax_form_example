@@ -6,7 +6,7 @@ $config_group->set('content.field_file', array (
   'weight' => 9,
   'settings' =>
     array (
-      'entity_browser' => 'browse_media_modal',
+      'entity_browser' => 'browser_file_modal',
       'field_widget_display' => 'rendered_entity',
       'field_widget_edit' => true,
       'field_widget_remove' => true,
@@ -30,7 +30,7 @@ $config_group->set('content.field_file', array (
   'weight' => 9,
   'settings' =>
     array (
-      'entity_browser' => 'browse_media_modal',
+      'entity_browser' => 'browser_file_modal',
       'field_widget_display' => 'rendered_entity',
       'field_widget_edit' => true,
       'field_widget_remove' => true,
@@ -54,7 +54,7 @@ $config_group->set('content.field_file', array (
   'weight' => 10,
   'settings' =>
     array (
-      'entity_browser' => 'browse_media_modal',
+      'entity_browser' => 'browser_file_modal',
       'field_widget_display' => 'rendered_entity',
       'field_widget_edit' => true,
       'field_widget_remove' => true,
@@ -78,7 +78,7 @@ $config_group->set('content.field_file', array (
   'weight' => 29,
   'settings' =>
     array (
-      'entity_browser' => 'browse_media_modal',
+      'entity_browser' => 'browser_file_modal',
       'field_widget_display' => 'rendered_entity',
       'field_widget_edit' => true,
       'field_widget_remove' => true,
@@ -102,7 +102,7 @@ $config_group->set('content.field_file', array (
   'weight' => 12,
   'settings' =>
     array (
-      'entity_browser' => 'browse_media_modal',
+      'entity_browser' => 'browser_file_modal',
       'field_widget_display' => 'rendered_entity',
       'field_widget_edit' => true,
       'field_widget_remove' => true,
