@@ -78,13 +78,13 @@ view_mode ? view_mode|clean_class,
 {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 <div class="content_info">
     <span class="date">{{ createdDate }}</span>
-    {% if content.field_country|trim is not empty or content.field_city|trim is not empty %}
+    {% if node.field_country.getString() is not empty or node.field_city.getString() is not empty %}
         <span>
-        {% if content.field_country|trim is not empty %}
-            {{ content.field_country }}-
+        {% if node.field_country.getString() is not empty %}
+            {{ node.field_country.getString() }},
         {% endif %}
-            {% if content.field_city|trim is not empty %}
-                {{ content.field_city }}
+            {% if node.field_city.getString() is not empty %}
+                {{ node.field_city.getString() }}
             {% endif %}
     </span>
     {% endif %}
@@ -103,7 +103,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_area', 'field_file', 'field_file_uri') }}
+        {{ content|without('field_country', 'field_city', 'field_area') }}
     </div>
 
 </article>
