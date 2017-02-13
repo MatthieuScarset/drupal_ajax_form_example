@@ -286,8 +286,6 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
 
 
 function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
-  /*
-
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
@@ -297,10 +295,9 @@ function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
   $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
-  */
 }
 
-/*
+
 function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
   if (isset($data['tabs'][0]) && is_array($data['tabs'][0])){
     foreach ($data['tabs'][0] AS $key => $value){
@@ -328,7 +325,7 @@ function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
     }
   }
 }
-*/
+
 
 
 function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state){
