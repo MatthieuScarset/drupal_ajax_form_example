@@ -45,7 +45,7 @@
 }
 #views-exposed-form-medias-entity-browser-entity-browser-1.form-item, .form-actions {
     margin-bottom: 1em !important;
-    margin-left: 2em;
+   /* margin-left: 2em;*/
     margin-top: 2em !important;
     clear: none !important;
     float: left !important;
