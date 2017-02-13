@@ -17,7 +17,24 @@ class WebformUiElementTest extends WebformTestBase {
    *
    * @var array
    */
-  public static $modules = ['system', 'filter', 'user', 'webform', 'webform_test', 'webform_examples', 'webform_ui'];
+  public static $modules = ['filter', 'webform', 'webform_ui'];
+
+  /**
+   * Webforms to load.
+   *
+   * @var array
+   */
+  protected static $testWebforms = ['test_element_dates'];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Create users.
+    $this->createUsers();
+  }
 
   /**
    * Tests element.
@@ -25,7 +42,7 @@ class WebformUiElementTest extends WebformTestBase {
   public function testElements() {
     global $base_path;
 
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
     /**************************************************************************/
     // Reordering
@@ -162,7 +179,7 @@ class WebformUiElementTest extends WebformTestBase {
    * Tests permissions.
    */
   public function testPermissions() {
-    $webform = $this->createWebform();
+    $webform = Webform::load('contact');
 
     // Check source page access not visible to user with 'administer webform'
     // permission.

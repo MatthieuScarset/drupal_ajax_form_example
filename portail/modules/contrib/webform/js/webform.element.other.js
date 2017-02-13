@@ -54,7 +54,7 @@
       $(context).find('.js-webform-select-other').once('webform-select-other').each(function () {
         var $element = $(this);
 
-        var $select = $element.find('.form-type-select');
+        var $select = $element.find('select');
         var $otherOption = $element.find('option[value="_other_"]');
         var $input = $element.find('.js-webform-select-other-input');
 
@@ -142,6 +142,13 @@
         // Create buttonset and set onchange handler.
         $container.buttonset().change(function () {
           toggleOther(($(this).find(':radio:checked').val() === '_other_'), $input);
+        });
+        // Disable buttonset.
+        $container.buttonset('option', 'disabled', $container.find('input[type="radio"]:disabled').length);
+        // Turn buttonset off/on when the input is disabled/enabled.
+        // @see webform.states.js
+        $container.on('webform:disabled', function () {
+          $container.buttonset('option', 'disabled', $container.find('input[type="radio"]:disabled').length);
         });
       });
     }

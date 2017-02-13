@@ -12,6 +12,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   id = "select",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Select.php/class/Select",
  *   label = @Translation("Select"),
+ *   description = @Translation("Provides a form element for a drop-down menu or scrolling selection box."),
  *   category = @Translation("Options elements"),
  * )
  */
@@ -28,6 +29,13 @@ class Select extends OptionsBase {
       'empty_value' => '',
       'select2' => FALSE,
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function supportsMultipleValues() {
+    return TRUE;
   }
 
   /**

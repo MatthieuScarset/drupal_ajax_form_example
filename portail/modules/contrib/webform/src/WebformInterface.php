@@ -103,6 +103,14 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function setDescription($description);
 
   /**
+   * Returns the webform's global and custom CSS and JavaScript assets.
+   *
+   * @return array
+   *   An associative array container the webform's CSS and JavaScript.
+   */
+  public function getAssets();
+
+  /**
    * Returns the webform's CSS.
    *
    * @return string
@@ -322,7 +330,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * @return array
    *   Webform elements flattened into an associative array keyed by element name.
    */
-  public function getElementsFlattenedAndHasValue();
+  public function getElementsInitializedFlattenedAndHasValue();
 
   /**
    * Get webform elements selectors as options.

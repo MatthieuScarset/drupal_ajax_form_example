@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "textarea",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Textarea.php/class/Textarea",
  *   label = @Translation("Textarea"),
+ *   description = @Translation("Provides a form element for input of multiple-line text."),
  *   category = @Translation("Basic elements"),
  *   multiline = TRUE,
  * )
@@ -42,7 +43,7 @@ class Textarea extends TextBase {
       'counter_maximum' => '',
       'counter_message' => '',
       // Submission display.
-      'format' => $this->getDefaultFormat(),
+      'format' => $this->getItemDefaultFormat(),
     ] + $this->getDefaultBaseProperties();
   }
 
@@ -56,7 +57,7 @@ class Textarea extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtml(array &$element, $value, array $options = []) {
+  public function formatHtmlItem(array &$element, $value, array $options = []) {
     return [
       '#markup' => nl2br(new HtmlEscapedText($value)),
     ];
@@ -67,7 +68,7 @@ class Textarea extends TextBase {
    */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
-    $form['general']['default_value']['#type'] = 'textarea';
+    $form['element']['default_value']['#type'] = 'textarea';
     return $form;
   }
 

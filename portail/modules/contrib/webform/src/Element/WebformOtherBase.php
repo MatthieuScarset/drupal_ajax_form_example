@@ -221,7 +221,7 @@ abstract class WebformOtherBase extends FormElement {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public static function setElementError(&$element, FormStateInterface $form_state) {
+  public static function setElementError(array &$element, FormStateInterface $form_state) {
     if (isset($element['#required_error'])) {
       $form_state->setError($element, $element['#required_error']);
     }
@@ -241,7 +241,7 @@ abstract class WebformOtherBase extends FormElement {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public static function setOtherError(&$element, FormStateInterface $form_state) {
+  public static function setOtherError(array &$element, FormStateInterface $form_state) {
     if (isset($element['#required_error'])) {
       $form_state->setError($element['other'], $element['#required_error']);
     }

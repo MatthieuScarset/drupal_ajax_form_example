@@ -76,6 +76,13 @@ class WebformHelpManager implements WebformHelpManagerInterface {
   protected $librariesManager;
 
   /**
+   * Webform element manager.
+   *
+   * @var \Drupal\webform\WebformElementManagerInterface
+   */
+  protected $elementManager;
+
+  /**
    * Constructs a WebformHelpManager object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
@@ -90,14 +97,17 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    *   The Webform add-ons manager.
    * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
    *   The Webform libraries manager.
+   * @param \Drupal\webform\WebformElementManagerInterface $element_manager
+   *   The webform element manager.
    */
-  public function __construct(AccountInterface $current_user, ModuleHandlerInterface $module_handler, StateInterface $state, PathMatcherInterface $path_matcher, WebformAddOnsManagerInterface $addons_manager, WebformLibrariesManagerInterface $libraries_manager) {
+  public function __construct(AccountInterface $current_user, ModuleHandlerInterface $module_handler, StateInterface $state, PathMatcherInterface $path_matcher, WebformAddOnsManagerInterface $addons_manager, WebformLibrariesManagerInterface $libraries_manager, WebformElementManagerInterface $element_manager) {
     $this->currentUser = $current_user;
     $this->moduleHandler = $module_handler;
     $this->state = $state;
     $this->pathMatcher = $path_matcher;
     $this->addOnsManager = $addons_manager;
     $this->librariesManager = $libraries_manager;
+    $this->elementManager = $element_manager;
 
     $this->help = $this->initHelp();
     $this->videos = $this->initVideos();
@@ -199,6 +209,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       $build['videos'] = $this->buildVideos();
     }
     $build['uses'] = $this->buildUses();
+    $build['elements'] = $this->buildElements();
     $build['addons'] = $this->buildAddOns();
     $build['libraries'] = $this->buildLibraries();
     $build['#attached']['library'][] = 'webform/webform.help';
@@ -231,6 +242,74 @@ class WebformHelpManager implements WebformHelpManagerInterface {
   }
 
   /**
+   * Build the eleents section.
+   *
+   * @return array
+   *   An render array containing the elements section.
+   */
+  protected function buildElements() {
+    $build = [
+      'title' => [
+        '#markup' => $this->t('Form elements'),
+        '#prefix' => '<h3 id="elements">',
+        '#suffix' => '</h3>',
+      ],
+      'content' => [
+        '#markup' => $this->t('Below is a list of all available form and render elements.'),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+      ],
+    ];
+
+    $definitions = $this->elementManager->getDefinitions();
+    $definitions = $this->elementManager->getSortedDefinitions($definitions, 'category');
+    $grouped_definitions = $this->elementManager->getGroupedDefinitions($definitions);
+    foreach ($grouped_definitions as $category_name => $elements) {
+      $build['content'][$category_name]['title'] = [
+        '#markup' => $category_name,
+        '#prefix' => '<h2>',
+        '#suffix' => '</h2>',
+      ];
+      $build['content'][$category_name]['elements'] = [
+        '#prefix' => '<dl>',
+        '#suffix' => '</dl>',
+      ];
+      foreach ($elements as $element_name => $element) {
+        /** @var \Drupal\webform\WebformElementInterface $webform_element */
+        $webform_element = $this->elementManager->createInstance($element_name);
+
+        if ($webform_element->isHidden()) {
+          continue;
+        }
+
+        if ($api_url = $webform_element->getPluginApiUrl()) {
+          $build['content'][$category_name]['elements'][$element_name]['title'] = [
+            '#type' => 'link',
+            '#title' => $element['label'],
+            '#url' => $api_url,
+          ];
+        }
+        else {
+          $build['content'][$category_name]['elements'][$element_name]['title'] = [
+            '#markup' => $element['label'],
+          ];
+        }
+        $build['content'][$category_name]['elements'][$element_name]['title'] += [
+          '#prefix' => '<dt>',
+          '#suffix' => '</dt>',
+        ];
+
+        $build['content'][$category_name]['elements'][$element_name]['description'] = [
+          '#markup' => $element['description'],
+          '#prefix' => '<dd>',
+          '#suffix' => '</dd>',
+        ];
+      }
+    }
+    return $build;
+  }
+
+  /**
    * Build the uses section.
    *
    * @return array
@@ -252,21 +331,26 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         ],
       ],
     ];
-    foreach ($this->help as $id => $help) {
+    foreach ($this->help as $id => $help_info) {
+      // Check that help item should be displated under 'Uses'.
+      if (empty($help_info['uses'])) {
+        continue;
+      }
+
       // Title.
       $build['content']['help'][$id]['title'] = [
         '#prefix' => '<dt>',
         '#suffix' => '</dt>',
       ];
-      if (isset($help['url'])) {
+      if (isset($help_info['url'])) {
         $build['content']['help'][$id]['title']['link'] = [
           '#type' => 'link',
-          '#url' => $help['url'],
-          '#title' => $help['title'],
+          '#url' => $help_info['url'],
+          '#title' => $help_info['title'],
         ];
       }
       else {
-        $build['content']['help'][$id]['title']['#markup'] = $help['title'];
+        $build['content']['help'][$id]['title']['#markup'] = $help_info['title'];
       }
       // Content.
       $build['content']['help'][$id]['content'] = [
@@ -274,7 +358,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '#suffix' => '</dd>',
         'content' => [
           '#theme' => 'webform_help',
-          '#info' => $help,
+          '#info' => $help_info,
         ],
       ];
     }
@@ -338,6 +422,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '#suffix' => '</h3>',
       ],
       'content' => [
+        '#markup' => $this->t("Below is a list of modules and projects that extend and/or provide additional functionality to the Webform module and Drupal's Form API."),
         '#prefix' => '<div>',
         '#suffix' => '</div>',
       ],
@@ -394,8 +479,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         '#suffix' => '</div>',
         'description' => [
           '#markup' => '<p>' . $this->t('The Webform module utilizes the third-party Open Source libraries listed below to enhance webform elements and to provide additional functionality. It is recommended that these libraries be installed in your Drupal installations /libraries directory. If these libraries are not installed, they are automatically loaded from a CDN.') . '</p>' .
-            '<p>' . $this->t('Currently the best way to download all the needed third party libraries is to either add <a href=":href">webform.libraries.make.yml</a> to your drush make file or execute the below drush command from the root of your Drupal installation.', [':href' => 'http://cgit.drupalcode.org/webform/tree/webform.libraries.make.yml?h=8.x-5.x']) . '</p>' .
-            '<hr/><pre>drush webform-libraries-download</pre><hr/><br/>',
+          '<p>' . $this->t('Currently the best way to download all the needed third party libraries is to either add <a href=":href">webform.libraries.make.yml</a> to your drush make file or execute the below drush command from the root of your Drupal installation.', [':href' => 'http://cgit.drupalcode.org/webform/tree/webform.libraries.make.yml?h=8.x-5.x']) . '</p>' .
+          '<hr/><pre>drush webform-libraries-download</pre><hr/><br/>',
         ],
         'libraries' => [
           '#prefix' => '<dl>',
@@ -480,6 +565,12 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'youtube_id' => 'xYBW2g0osd4',
     ];
 
+    $videos['translate'] = [
+      'title' => $this->t('Translating Webforms'),
+      'content' => $this->t('This screencast walks through translating a Webform.'),
+      'youtube_id' => 'rF8Bd-0w6Cg',
+    ];
+
     $videos['admin'] = [
       'title' => $this->t('Administering and Extending the Webform module'),
       'content' => $this->t("This screencast walks through administering the Webform module's admin settings, options, and behaviors."),
@@ -532,6 +623,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'message_storage' => WebformMessage::STORAGE_STATE,
       'access' => $this->currentUser->hasPermission('administer webform'),
       'video_id' => 'install',
+      'uses' => FALSE,
     ];
 
     // Release.
@@ -558,6 +650,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'message_close' => TRUE,
       'message_storage' => WebformMessage::STORAGE_STATE,
       'access' => $this->currentUser->hasPermission('administer webform'),
+      'uses' => FALSE,
     ];
 
     // Introduction.
@@ -636,7 +729,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Defining options'),
       'url' => Url::fromRoute('entity.webform_options.collection'),
-      'content' => $this->t('The Options page lists predefined options which are used to build select menus, radio buttons, checkboxes and likerts.'),
+      'content' => $this->t('The Options page lists predefined options which are used to build select menus, radio buttons, checkboxes and likerts.') . ' ' .
+      $this->t('To find and download additional options, go to <a href=":href">Webform 8.x-5.x: Options</a>.', [':href' => 'https://www.drupal.org/node/2845530']),
     ];
 
     // Elements.
@@ -648,7 +742,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'title' => $this->t('Webform element plugins'),
       'url' => Url::fromRoute('webform.element_plugins'),
       'content' => $this->t('The Elements page lists all available webform element plugins.') . ' ' .
-        $this->t('Webform element plugins are used to enhance existing render/form elements. Webform element plugins provide default properties, data normalization, custom validation, element configuration webform, and customizable display formats.'),
+      $this->t('Webform element plugins are used to enhance existing render/form elements. Webform element plugins provide default properties, data normalization, custom validation, element configuration webform, and customizable display formats.'),
     ];
 
     // Handlers.
@@ -660,7 +754,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'title' => $this->t('Webform handler plugins'),
       'url' => Url::fromRoute('webform.handler_plugins'),
       'content' => $this->t('The Handlers page lists all available webform handler plugins.') . ' ' .
-        $this->t('Handlers are used to route submitted data to external applications and send notifications & confirmations.'),
+      $this->t('Handlers are used to route submitted data to external applications and send notifications & confirmations.'),
     ];
 
     // Exporters.
@@ -672,7 +766,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       'title' => $this->t('Results exporter plugins'),
       'url' => Url::fromRoute('webform.exporter_plugins'),
       'content' => $this->t('The Exporters page lists all available results exporter plugins.') . ' ' .
-        $this->t('Exporters are used to export results into a downloadable format that can be used by MS Excel, Google Sheets, and other spreadsheet applications.'),
+      $this->t('Exporters are used to export results into a downloadable format that can be used by MS Excel, Google Sheets, and other spreadsheet applications.'),
     ];
 
     // Third party settings.
@@ -694,15 +788,30 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Extend the Webform module'),
       'url' => Url::fromRoute('webform.addons'),
-      'content' => $this->t('The Add-ons page includes a list of modules and projects that extend and/or provide additional functionality to the Webform module and Drupal\'s Webform API.  If you would like a module or project to be included in the below list, please submit a request to the <a href=":href">Webform module\'s issue queue</a>.', [':href' => 'https://www.drupal.org/node/add/project-issue/webform']),
+      'content' => $this->t('The Add-ons page includes a list of modules and projects that extend and/or provide additional functionality to the Webform module and Drupal\'s Form API.  If you would like a module or project to be included in the below list, please submit a request to the <a href=":href">Webform module\'s issue queue</a>.', [':href' => 'https://www.drupal.org/node/add/project-issue/webform']),
     ];
-
 
     /****************************************************************************/
     // Webform.
     /****************************************************************************/
 
     // Webform elements.
+    if (!$this->moduleHandler->moduleExists('webform_ui')) {
+      $help['form_elements_warning'] = [
+        'routes' => [
+          // @see /admin/structure/webform/manage/{webform}
+          'entity.webform.edit_form',
+        ],
+        'title' => $this->t('Webform UI is disabled'),
+        'content' => $this->t('Please enable Webform UI module if you would like to add elements from UI.'),
+        'message_type' => 'warning',
+        'message_close' => TRUE,
+        'message_storage' => WebformMessage::STORAGE_STATE,
+        'access' => $this->currentUser->hasPermission('administer webform') && $this->currentUser->hasPermission('administer modules'),
+        'uses' => FALSE,
+      ];
+    }
+
     $help['form_elements'] = [
       'routes' => [
         // @see /admin/structure/webform/manage/{webform}
@@ -721,7 +830,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Editing YAML source'),
       'content' => $this->t("The (View) Source page allows developers to edit a webform's render array using YAML markup.") . ' ' .
-        $this->t("Developers can use the (View) Source page to quickly alter a webform's labels, cut-n-paste multiple elements, reorder elements, and add customize properties and markup to elements."),
+      $this->t("Developers can use the (View) Source page to quickly alter a webform's labels, cut-n-paste multiple elements, reorder elements, and add customize properties and markup to elements."),
       'video_id' => 'source',
     ];
 
@@ -735,7 +844,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Testing a webform'),
       'content' => $this->t("The Webform test page allows a webform to be tested using a customizable test dataset.") . ' ' .
-        $this->t('Multiple test submissions can be created using the devel_generate module.'),
+      $this->t('Multiple test submissions can be created using the devel_generate module.'),
     ];
 
     // Webform settings.
@@ -746,7 +855,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Customizing webform settings'),
       'content' => $this->t("The Webform settings page allows a webform's labels, messaging, and behaviors to be customized.") . ' ' .
-        $this->t('Administrators can open/close a webform, enable/disable drafts, allow previews, set submission limits, and disable the saving of results.'),
+      $this->t('Administrators can open/close a webform, enable/disable drafts, allow previews, set submission limits, and disable the saving of results.'),
       'video_id' => 'form_settings',
     ];
 
@@ -779,8 +888,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Enabling webform handlers'),
       'content' => $this->t('The Webform handlers page lists additional handlers (aka behaviors) that can process webform submissions.') . ' ' .
-        $this->t('Handlers are <a href=":href">plugins</a> that act on a webform submission.', [':href' => 'https://www.drupal.org/developing/api/8/plugins']) . ' ' .
-        $this->t('For example, sending email confirmations and notifications is done using the Email handler which is provided by the Webform module.'),
+      $this->t('Handlers are <a href=":href">plugins</a> that act on a webform submission.', [':href' => 'https://www.drupal.org/developing/api/8/plugins']) . ' ' .
+      $this->t('For example, sending email confirmations and notifications is done using the Email handler which is provided by the Webform module.'),
       'video_id' => 'submissions',
     ];
 
@@ -802,6 +911,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Translating a webform'),
       'content' => $this->t("The Translation page allows a webform's configuration and elements to be translated into multiple languages."),
+      'video_id' => 'translate',
     ];
 
     /****************************************************************************/
@@ -818,7 +928,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       ],
       'title' => $this->t('Managing results'),
       'content' => $this->t("The Results page displays an overview of a webform's submissions.") . ' ' .
-        $this->t("Submissions can be reviewed, updated, flagged, annotated, and downloaded."),
+      $this->t("Submissions can be reviewed, updated, flagged, annotated, and downloaded."),
       'video_id' => 'submissions',
     ];
 
@@ -855,7 +965,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         ],
         'title' => $this->t('Exporting configuration'),
         'content' => $this->t("The Export (form) page allows developers to quickly export a single webform's configuration file.") . ' ' .
-          $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
+        $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
         'video_id' => 'help',
       ];
     }
@@ -885,7 +995,10 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     ];
 
     foreach ($help as $id => &$help_info) {
-      $help_info['id'] = $id;
+      $help_info += [
+        'id' => $id,
+        'uses' => TRUE,
+      ];
     }
 
     return $help;

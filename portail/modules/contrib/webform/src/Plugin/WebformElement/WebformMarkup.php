@@ -11,6 +11,7 @@ use Drupal\Core\Mail\MailFormatHelper;
  * @WebformElement(
  *   id = "webform_markup",
  *   label = @Translation("HTML markup"),
+ *   description = @Translation("Provides an element to render HTML markup."),
  *   category = @Translation("Markup elements"),
  *   states_wrapper = TRUE,
  * )
@@ -40,7 +41,7 @@ class WebformMarkup extends WebformMarkupBase {
    */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
-    $form['markup']['markup']  = [
+    $form['markup']['markup'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('HTML markup'),
       '#description' => $this->t('Enter custom HTML into your webform.'),

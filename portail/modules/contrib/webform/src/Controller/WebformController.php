@@ -25,7 +25,7 @@ class WebformController extends ControllerBase implements ContainerInjectionInte
   protected $requestHandler;
 
   /**
-   * Constructs a new WebformSubmissionController object.
+   * Constructs a WebformController object.
    *
    * @param \Drupal\webform\WebformRequestInterface $request_handler
    *   The webform request handler.
@@ -70,7 +70,8 @@ class WebformController extends ControllerBase implements ContainerInjectionInte
    *   The response object.
    */
   public function css(Request $request, WebformInterface $webform) {
-    return new Response($webform->getCss(), 200, ['Content-Type' => 'text/css']);
+    $assets = $webform->getAssets();
+    return new Response($assets['css'], 200, ['Content-Type' => 'text/css']);
   }
 
   /**
@@ -85,7 +86,8 @@ class WebformController extends ControllerBase implements ContainerInjectionInte
    *   The response object.
    */
   public function javascript(Request $request, WebformInterface $webform) {
-    return new Response($webform->getJavaScript(), 200, ['Content-Type' => 'text/javascript']);
+    $assets = $webform->getAssets();
+    return new Response($assets['javascript'], 200, ['Content-Type' => 'text/javascript']);
   }
 
   /**

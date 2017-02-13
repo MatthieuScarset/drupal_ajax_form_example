@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Tests;
 
-use Drupal\simpletest\WebTestBase;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Entity\Webform;
 
@@ -11,26 +10,29 @@ use Drupal\webform\Entity\Webform;
  *
  * @group Webform
  */
-class WebformTranslationTest extends WebTestBase {
-
-  use WebformTestTrait;
+class WebformTranslationTest extends WebformTestBase {
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  protected static $modules = ['system', 'user', 'block', 'webform', 'webform_examples', 'webform_test_translation'];
+  protected static $modules = ['block', 'webform', 'webform_test_translation'];
 
   /**
    * {@inheritdoc}
    */
   public function setUp() {
     parent::setUp();
+
+    // Place blocks.
     $this->placeBlocks();
 
-    $admin_user = $this->drupalCreateUser(['access content', 'administer webform', 'administer webform submission', 'translate configuration']);
-    $this->drupalLogin($admin_user);
+    // Create users.
+    $this->createUsers();
+
+    // Login admin user.
+    $this->drupalLogin($this->adminWebformUser);
   }
 
   /**

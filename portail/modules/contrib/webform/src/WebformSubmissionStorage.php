@@ -214,6 +214,52 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
   /**
    * {@inheritdoc}
    */
+  public function purge($count) {
+    $days_to_seconds = 60 * 60 * 24;
+
+    $query = $this->entityManager->getStorage('webform')->getQuery();
+    $query->condition('settings.purge', [self::PURGE_DRAFT, self::PURGE_COMPLETED, self::PURGE_ALL], 'IN');
+    $query->condition('settings.purge_days', 0, '>');
+    $webforms_to_purge = array_values($query->execute());
+
+    $webform_submissions_to_purge = [];
+
+    if (!empty($webforms_to_purge)) {
+      $webforms_to_purge = $this->entityManager->getStorage('webform')->loadMultiple($webforms_to_purge);
+      foreach ($webforms_to_purge as $webform) {
+        $query = $this->getQuery();
+        $query->condition('created', REQUEST_TIME - ($webform->getSetting('purge_days') * $days_to_seconds), '<');
+        $query->condition('webform_id', $webform->id());
+        switch ($webform->getSetting('purge')) {
+          case self::PURGE_DRAFT:
+            $query->condition('in_draft', TRUE);
+            break;
+
+          case self::PURGE_COMPLETED:
+            $query->condition('in_draft', FALSE);
+            break;
+        }
+        $query->range(0, $count - count($webform_submissions_to_purge));
+        $result = array_values($query->execute());
+        if (!empty($result)) {
+          $webform_submissions_to_purge = array_merge($webform_submissions_to_purge, $result);
+        }
+        if (count($webform_submissions_to_purge) == $count) {
+          // We've collected enough webform submissions for purging in this run.
+          break;
+        }
+      }
+    }
+
+    if (!empty($webform_submissions_to_purge)) {
+      $webform_submissions_to_purge = $this->loadMultiple($webform_submissions_to_purge);
+      $this->delete($webform_submissions_to_purge);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getTerminusSubmission(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $sort = 'DESC') {
     $query = $this->getQuery();
     $query->condition('webform_id', $webform->id());
@@ -406,7 +452,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
       $element_manager = \Drupal::service('plugin.manager.webform.element');
 
-      $elements = $webform->getElementsFlattenedAndHasValue();
+      $elements = $webform->getElementsInitializedFlattenedAndHasValue();
       foreach ($elements as $element) {
         /** @var \Drupal\webform\WebformElementInterface $element_handler */
         $element_handler = $element_manager->createInstance($element['#type']);
@@ -529,15 +575,15 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
       'link' => $entity->toLink(t('Edit'), 'edit-form')->toString(),
     ];
     switch ($entity->getState()) {
-      case WebformSubmissionInterface::STATE_DRAFT;
+      case WebformSubmissionInterface::STATE_DRAFT:
         \Drupal::logger('webform')->notice('@form: Submission #@id draft saved.', $context);
         break;
 
-      case WebformSubmissionInterface::STATE_UPDATED;
+      case WebformSubmissionInterface::STATE_UPDATED:
         \Drupal::logger('webform')->notice('@form: Submission #@id updated.', $context);
         break;
 
-      case WebformSubmissionInterface::STATE_COMPLETED;
+      case WebformSubmissionInterface::STATE_COMPLETED:
         if ($result === SAVED_NEW) {
           \Drupal::logger('webform')->notice('@form: Submission #@id created.', $context);
         }
@@ -665,7 +711,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
         $sid = $record['sid'];
         $name = $record['name'];
 
-        $elements = $webform_submissions[$sid]->getWebform()->getElementsFlattenedAndHasValue();
+        $elements = $webform_submissions[$sid]->getWebform()->getElementsInitializedFlattenedAndHasValue();
         $element = (isset($elements[$name])) ? $elements[$name] : ['#webform_multiple' => FALSE, '#webform_composite' => FALSE];
 
         if ($element['#webform_multiple']) {
@@ -701,7 +747,7 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
     $webform_id = $webform_submission->getWebform()->id();
     $sid = $webform_submission->id();
 
-    $elements = $webform_submission->getWebform()->getElementsFlattenedAndHasValue();
+    $elements = $webform_submission->getWebform()->getElementsInitializedFlattenedAndHasValue();
 
     $rows = [];
     foreach ($data as $name => $item) {
@@ -770,8 +816,12 @@ class WebformSubmissionStorage extends SqlContentEntityStorage implements Webfor
    *   An array of webform submissions.
    */
   protected function deleteData(array $webform_submissions) {
+    $sids = [];
+    foreach ($webform_submissions as $webform_submission) {
+      $sids[$webform_submission->id()] = $webform_submission->id();
+    }
     Database::getConnection()->delete('webform_submission_data')
-      ->condition('sid', array_keys($webform_submissions), 'IN')
+      ->condition('sid', $sids, 'IN')
       ->execute();
   }
 

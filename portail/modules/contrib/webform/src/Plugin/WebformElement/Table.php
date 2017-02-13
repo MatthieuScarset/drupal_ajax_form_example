@@ -16,7 +16,8 @@ use Drupal\webform\WebformSubmissionInterface;
  *   id = "table",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Table.php/class/Table",
  *   label = @Translation("Table"),
- *   category = @Translation("Table"),
+ *   description = @Translation("Provides an element to render a table."),
+ *   category = @Translation("Markup elements"),
  * )
  */
 class Table extends WebformElementBase {
@@ -77,21 +78,21 @@ class Table extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultFormat() {
+  public function getItemDefaultFormat() {
     return 'table';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFormats() {
+  public function getItemFormats() {
     return ['table'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getTestValue(array $element, WebformInterface $webform) {
+  public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     // Containers should never have values and therefore should never have
     // a test value.
     return NULL;
@@ -100,7 +101,7 @@ class Table extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtml(array &$element, $value, array $options = []) {
+  public function formatHtmlItem(array &$element, $value, array $options = []) {
     // Undo webform submission elements and convert rows back into a simple
     // render array.
     $rows = [];
@@ -130,7 +131,7 @@ class Table extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatText(array &$element, $value, array $options = []) {
+  public function formatTextItem(array &$element, $value, array $options = []) {
     // Render the HTML table.
     $build = $this->formatHtml($element, $value, $options);
     $html = \Drupal::service('renderer')->renderPlain($build);

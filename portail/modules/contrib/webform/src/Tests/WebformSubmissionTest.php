@@ -12,6 +12,20 @@ use Drupal\webform\Entity\WebformSubmission;
 class WebformSubmissionTest extends WebformTestBase {
 
   /**
+   * Modules to enable.
+   *
+   * @var array
+   */
+  protected static $modules = ['node', 'webform'];
+
+  /**
+   * Webforms to load.
+   *
+   * @var array
+   */
+  protected static $testWebforms = ['test_results'];
+
+  /**
    * Tests webform submission entity.
    */
   public function testWebformSubmission() {

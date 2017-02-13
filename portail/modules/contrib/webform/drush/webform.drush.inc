@@ -10,7 +10,7 @@ use Drupal\webform\Controller\WebformResultsExportController;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Form\WebformResultsClearForm;
 use Drupal\webform\Form\WebformSubmissionsPurgeForm;
-use Drupal\webform\Utility\WebformTidy;
+use Drupal\webform\Utility\WebformYamlTidy;
 
 /**
  * Implements hook_drush_command().
@@ -30,6 +30,8 @@ function webform_drush_command() {
     'options' => [
       // Delimited export options.
       'delimiter' => 'Delimiter between columns (defaults to site-wide setting). This option may need to be wrapped in quotes. i.e. --delimiter="\t".',
+      'multiple_delimiter' => 'Delimiter between an element with multiple values (defaults to site-wide setting).',
+
       // Document and managed file export options.
       'file-name' => 'File name used to export submission and uploaded filed. You may use tokens.',
       // Tabular export options.
@@ -382,7 +384,7 @@ function drush_webform_tidy($module = 'webform') {
     }
 
     // Tidy and add new line to the end of the tidied file.
-    $tidied_yaml = WebformTidy::tidy($tidied_yaml) . "\n";
+    $tidied_yaml = WebformYamlTidy::tidy($tidied_yaml) . "\n";
     if ($tidied_yaml != $original_yaml) {
       drush_print(dt('Tidying @file...', ['@file' => $file->filename]));
       file_put_contents($file->uri, $tidied_yaml);

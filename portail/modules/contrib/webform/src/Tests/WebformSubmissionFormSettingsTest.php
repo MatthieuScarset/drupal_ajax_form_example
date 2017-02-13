@@ -6,7 +6,7 @@ use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformSubmission;
 
 /**
- * Tests for webform submission webform settings.
+ * Tests for webform submission form settings.
  *
  * @group Webform
  */
@@ -17,16 +17,50 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system', 'block', 'filter', 'node', 'user', 'webform', 'webform_test'];
+  protected static $modules = ['filter', 'node', 'webform'];
+
+  /**
+   * Webforms to load.
+   *
+   * @var array
+   */
+  protected static $testWebforms = [
+    'test_form_assets',
+    'test_form_closed',
+    'test_form_prepopulate',
+    'test_form_submit_once',
+    'test_form_disable_back',
+    'test_form_unsaved',
+    'test_form_novalidate',
+    'test_form_details_toggle',
+    'test_form_autofocus',
+    'test_form_confidential',
+    'test_form_preview',
+    'test_submission_disabled',
+    'test_token_update',
+    'test_submission_limit',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Create users.
+    $this->createUsers();
+  }
 
   /**
    * Tests webform setting including confirmation.
    */
   public function testSettings() {
     // Login the admin user.
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
+    /**************************************************************************/
     /* Test assets (CSS / JS) */
+    /**************************************************************************/
 
     $webform_assets = Webform::load('test_form_assets');
 
@@ -43,7 +77,20 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw('<link rel="stylesheet" href="' . base_path() . 'webform/test_form_assets/assets/css?v=');
     $this->assertNoRaw('<script src="' . base_path() . 'webform/test_form_assets/assets/javascript?v=');
 
+    // Add global CSS and JS on all webforms.
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('assets.css', '/**/')
+      ->set('assets.javascript', '/**/')
+      ->save();
+
+    // Check has global CSS and JavaScript.
+    $this->drupalGet('webform/test_form_assets');
+    $this->assertRaw('<link rel="stylesheet" href="' . base_path() . 'webform/test_form_assets/assets/css?v=');
+    $this->assertRaw('<script src="' . base_path() . 'webform/test_form_assets/assets/javascript?v=');
+
+    /**************************************************************************/
     /* Test next_serial */
+    /**************************************************************************/
 
     $webform_contact = Webform::load('contact');
 
@@ -59,7 +106,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalPostForm('admin/structure/webform/manage/contact/settings', ['next_serial' => 1], t('Save'));
     $this->assertRaw('The next submission number was increased to 100 to make it higher than existing submissions.');
 
+    /**************************************************************************/
     /* Test webform closed (status=false) */
+    /**************************************************************************/
 
     $webform_closed = Webform::load('test_form_closed');
 
@@ -79,7 +128,7 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw('This form is closed.');
     $this->assertRaw('Sorry...This form is closed to new submissions.');
 
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
     // Check webform is not closed for admins and warning is displayed.
     $this->drupalGet('webform/test_form_closed');
@@ -97,7 +146,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw('This form is closed.');
     $this->assertNoRaw('Only submission administrators are allowed to access this webform and create new submissions.');
 
+    /**************************************************************************/
     /* Test webform prepopulate (form_prepopulate) */
+    /**************************************************************************/
 
     $webform_prepopulate = Webform::load('test_form_prepopulate');
 
@@ -120,7 +171,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_prepopulate', ['query' => ['name' => 'John']]);
     $this->assertFieldByName('name', '');
 
+    /**************************************************************************/
     /* Test webform prepopulate source entity (form_prepopulate_source_entity) */
+    /**************************************************************************/
 
     // Check prepopulating source entity.
     $this->drupalPostForm('webform/test_form_prepopulate', [], t('Submit'), ['query' => ['source_entity_type' => 'webform', 'source_entity_id' => 'contact']]);
@@ -140,7 +193,45 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $submission = WebformSubmission::load($sid);
     $this->assert(!$submission->getSourceEntity());
 
+    /**************************************************************************/
+    /* Test webform submit once (form_submit_once) */
+    /**************************************************************************/
+
+    $webform_form_submit_once = Webform::load('test_form_submit_once');
+
+    // Check webform has webform.form.submit_once.js.
+    $this->drupalGet('webform/test_form_submit_once');
+    $this->assertRaw('webform.form.submit_once.js');
+
+    // Disable YAML specific form_submit_once setting.
+    $webform_form_submit_once->setSetting('form_submit_once', FALSE);
+    $webform_form_submit_once->save();
+
+    // Check submit once checkbox is enabled.
+    $this->drupalGet('admin/structure/webform/manage/test_form_submit_once/settings');
+    $this->assertRaw('<input data-drupal-selector="edit-form-submit-once" aria-describedby="edit-form-submit-once--description" type="checkbox" id="edit-form-submit-once" name="form_submit_once" value class="form-checkbox" />');
+
+    // Check webform no longer has webform.form.submit_once.js.
+    $this->drupalGet('webform/test_form_submit_once');
+    $this->assertNoRaw('webform.form.submit_once.js');
+
+    // Enable default (global) submit_once on all webforms.
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('settings.default_form_submit_once', TRUE)
+      ->save();
+
+    // Check submit_once checkbox is disabled.
+    $this->drupalGet('admin/structure/webform/manage/test_form_submit_once/settings');
+    $this->assertRaw('<input data-drupal-selector="edit-form-submit-once-disabled" aria-describedby="edit-form-submit-once-disabled--description" disabled="disabled" type="checkbox" id="edit-form-submit-once-disabled" name="form_submit_once_disabled" value="1" checked="checked" class="form-checkbox" />');
+    $this->assertRaw('Submit button is disabled immediately after is is clicked form all webforms.');
+
+    // Check webform has webform.form.submit_once.js.
+    $this->drupalGet('webform/test_form_submit_once');
+    $this->assertRaw('webform.form.submit_once.js');
+
+    /**************************************************************************/
     /* Test webform disable back button (form_disable_back) */
+    /**************************************************************************/
 
     $webform_form_disable_back = Webform::load('test_form_disable_back');
 
@@ -152,7 +243,7 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $webform_form_disable_back->setSetting('form_disable_back', FALSE);
     $webform_form_disable_back->save();
 
-    // Check novalidate checkbox is enabled.
+    // Check disable_back checkbox is enabled.
     $this->drupalGet('admin/structure/webform/manage/test_form_disable_back/settings');
     $this->assertRaw('<input data-drupal-selector="edit-form-disable-back" aria-describedby="edit-form-disable-back--description" type="checkbox" id="edit-form-disable-back" name="form_disable_back" value class="form-checkbox" />');
 
@@ -174,7 +265,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_disable_back');
     $this->assertRaw('webform.form.disable_back.js');
 
+    /**************************************************************************/
     /* Test webform (client-side) unsaved (form_unsaved) */
+    /**************************************************************************/
 
     $webform_form_unsaved = Webform::load('test_form_unsaved');
 
@@ -208,7 +301,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_unsaved');
     $this->assertCssSelect('form.js-webform-unsaved', t('Webform has .js-webform-unsaved class.'));
 
+    /**************************************************************************/
     /* Test webform (client-side) novalidate (form_novalidate) */
+    /**************************************************************************/
 
     $webform_form_novalidate = Webform::load('test_form_novalidate');
 
@@ -244,7 +339,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_novalidate');
     $this->assertCssSelect('form[novalidate="novalidate"]', t('Webform has the proper novalidate attribute.'));
 
+    /**************************************************************************/
     /* Test webform details toggle (form_details_toggle) */
+    /**************************************************************************/
 
     $webform_form_details_toggle = Webform::load('test_form_details_toggle');
 
@@ -279,17 +376,21 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_details_toggle');
     $this->assertNoCssSelect('webform.webform-details-toggle', t('Webform does not have the .webform-details-toggle class.'));
 
+    /**************************************************************************/
     /* Test autofocus (form_autofocus) */
+    /**************************************************************************/
 
     // Check webform has autofocus class.
     $this->drupalGet('webform/test_form_autofocus');
     $this->assertCssSelect('.js-webform-autofocus');
 
+    /**************************************************************************/
     /* Test confidential submissions (form_confidential)*/
+    /**************************************************************************/
 
     // Check logout warning.
     $webform_confidential = Webform::load('test_form_confidential');
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
     $this->drupalGet('webform/test_form_confidential');
     $this->assertNoFieldById('edit-name');
     $this->assertRaw('This form is confidential.');
@@ -305,9 +406,11 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $webform_submission = WebformSubmission::load($sid);
     $this->assertEqual($webform_submission->getRemoteAddr(), t('(unknown)'));
 
+    /**************************************************************************/
     /* Test webform preview (form_preview) */
+    /**************************************************************************/
 
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
     $webform_preview = Webform::load('test_form_preview');
 
@@ -344,7 +447,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoFieldByName('op', 'Submit');
     $this->assertFieldByName('op', '{Preview}');
 
+    /**************************************************************************/
     /* Test results disabled (results_disabled=true) */
+    /**************************************************************************/
 
     // Check results disabled.
     $webform_disabled = Webform::load('test_submission_disabled');
@@ -367,7 +472,7 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     // Enabled ignore disabled results.
     $webform_disabled->setSetting('results_disabled_ignore', TRUE);
     $webform_disabled->save();
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
     // Check no error message for admins.
     $this->drupalGet('webform/test_submission_disabled');
@@ -382,10 +487,12 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw(t('Unable to display this webform. Please contact the site administrator.'));
     $this->assertFieldByName('op', 'Submit');
 
+    /**************************************************************************/
     /* Test token update (form_token_update) */
+    /**************************************************************************/
 
     // Post test submission.
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
     $webform_token_update = Webform::load('test_token_update');
     $sid = $this->postSubmissionTest($webform_token_update);
     $webform_submission = WebformSubmission::load($sid);
@@ -405,7 +512,9 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw('Submission information');
     $this->assertNoFieldByName('textfield', $webform_submission->getData('textfield'));
 
+    /**************************************************************************/
     /* Test limits (test_submission_limit) */
+    /**************************************************************************/
 
     $webform_limit = Webform::load('test_submission_limit');
 
@@ -431,7 +540,7 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->drupalLogout();
 
     // Check admin can still edit their submission.
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
     $sid = $this->postSubmission($webform_limit);
     $this->drupalGet("admin/structure/webform/manage/test_submission_limit/submission/$sid/edit");
     $this->assertFieldByName('op', 'Save');
@@ -452,7 +561,7 @@ class WebformSubmissionFormSettingsTest extends WebformTestBase {
     $this->assertNoRaw('You are only allowed to have 1 submission for this webform.');
 
     // Check admin can still post submissions.
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
     $this->drupalGet('webform/test_submission_limit');
     $this->assertFieldByName('op', 'Submit');
     $this->assertRaw('Only 3 submissions are allowed.');

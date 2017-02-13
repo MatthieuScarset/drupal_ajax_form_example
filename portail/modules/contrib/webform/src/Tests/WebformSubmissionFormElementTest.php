@@ -20,7 +20,33 @@ class WebformSubmissionFormElementTest extends WebformTestBase {
    *
    * @var array
    */
-  protected static $modules = ['system', 'block', 'filter', 'node', 'user', 'webform', 'webform_test'];
+  protected static $modules = ['filter', 'node', 'webform'];
+
+  /**
+   * Webforms to load.
+   *
+   * @var array
+   */
+  protected static $testWebforms = [
+    'test_element_validate',
+    'test_element_ignored_properties',
+    'test_element_invalid',
+    'test_element_autocomplete',
+    'test_element_entity_reference',
+    'test_element_text_format',
+    'test_form_properties',
+    'test_form_buttons',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Create users.
+    $this->createUsers();
+  }
 
   /**
    * Tests elements.
@@ -28,22 +54,25 @@ class WebformSubmissionFormElementTest extends WebformTestBase {
   public function testElements() {
     global $base_path;
 
-    /* Test #unique element property */
+    /* Test validate element #minlength and #unique property */
 
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
 
-    $webform_unique = Webform::load('test_element_unique');
+    $webform_validate = Webform::load('test_element_validate');
 
-    // Check element with #unique property only allows one unique 'value' to be
-    // submitted.
-    $sid = $this->postSubmission($webform_unique, [], t('Submit'));
-    $this->assertNoRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">textfield</em> field. You may have already submitted this webform, or you need to use a different value.');
-    $this->drupalPostForm('webform/test_element_unique', [], t('Submit'));
-    $this->assertRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">textfield</em> field. You may have already submitted this webform, or you need to use a different value.');
+    // Check minlength validation.
+    $this->postSubmission($webform_validate, ['minlength_textfield' => 'X'], t('Submit'));
+    $this->assertRaw('<em class="placeholder">minlength_textfield</em> cannot be less than <em class="placeholder">5</em> characters but is currently <em class="placeholder">1</em> characters long.');
 
-    // Check element with #unique can be updated.
-    $this->drupalPostForm("admin/structure/webform/manage/test_element_unique/submission/$sid/edit", [], t('Save'));
-    $this->assertNoRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">textfield</em> field. You may have already submitted this webform, or you need to use a different value.');
+    // Check #unique validation only allows one unique 'value' to be submitted.
+    $sid = $this->postSubmission($webform_validate, [], t('Submit'));
+    $this->assertNoRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">unique_textfield</em> element. You may have already submitted this webform, or you need to use a different value.');
+    $this->drupalPostForm('webform/test_element_validate', [], t('Submit'));
+    $this->assertRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">unique_textfield</em> element. You may have already submitted this webform, or you need to use a different value.');
+
+    // Check #unique element can be updated.
+    $this->drupalPostForm("admin/structure/webform/manage/test_element_validate/submission/$sid/edit", [], t('Save'));
+    $this->assertNoRaw('The value <em class="placeholder">value</em> has already been submitted once for the <em class="placeholder">unique_textfield</em> element. You may have already submitted this webform, or you need to use a different value.');
     // @todo Determine why test_element_unique is not updating correctly during
     // testing.
     // $this->assertRaw('Submission updated in <em class="placeholder">Test: Element: Unique</em>.');
@@ -173,11 +202,11 @@ class WebformSubmissionFormElementTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_properties');
     $this->assertPattern('/Form prefix<form /');
     $this->assertPattern('/<\/form>\s+Form suffix/');
-    $this->assertRaw('<form class="webform-submission-test-form-properties-form webform-submission-form test-form-properties webform-details-toggle" invalid="invalid" style="border: 10px solid red; padding: 1em;" data-drupal-selector="webform-submission-test-form-properties-form" action="https://www.google.com/search" method="get" id="webform-submission-test-form-properties-form" accept-charset="UTF-8">');
+    $this->assertRaw('<form class="webform-submission-test-form-properties-form webform-submission-form test-form-properties js-webform-details-toggle webform-details-toggle" invalid="invalid" style="border: 10px solid red; padding: 1em;" data-drupal-selector="webform-submission-test-form-properties-form" action="https://www.google.com/search" method="get" id="webform-submission-test-form-properties-form" accept-charset="UTF-8">');
 
     // Check editing webform settings style attributes and custom properties
     // updates the element's root properties.
-    $this->drupalLogin($this->adminFormUser);
+    $this->drupalLogin($this->adminWebformUser);
     $edit = [
       'attributes[class][select][]' => ['form--inline clearfix', '_other_'],
       'attributes[class][other]' => 'test-form-properties',
@@ -192,7 +221,7 @@ class WebformSubmissionFormElementTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_properties');
     $this->assertPattern('/Form prefix TEST<form /');
     $this->assertPattern('/<\/form>\s+Form suffix TEST/');
-    $this->assertRaw('<form class="webform-submission-test-form-properties-form webform-submission-form form--inline clearfix test-form-properties webform-details-toggle" style="border: 10px solid green; padding: 1em;" data-drupal-selector="webform-submission-test-form-properties-form" action="' . $base_path . 'webform/test_form_properties" method="post" id="webform-submission-test-form-properties-form" accept-charset="UTF-8">');
+    $this->assertRaw('<form class="webform-submission-test-form-properties-form webform-submission-form form--inline clearfix test-form-properties js-webform-details-toggle webform-details-toggle" style="border: 10px solid green; padding: 1em;" data-drupal-selector="webform-submission-test-form-properties-form" action="' . $base_path . 'webform/test_form_properties" method="post" id="webform-submission-test-form-properties-form" accept-charset="UTF-8">');
 
     /* Test webform buttons */
 

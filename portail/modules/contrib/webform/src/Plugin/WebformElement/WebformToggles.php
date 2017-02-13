@@ -10,8 +10,8 @@ use Drupal\webform\WebformSubmissionInterface;
  * @WebformElement(
  *   id = "webform_toggles",
  *   label = @Translation("Toggles"),
+ *   description = @Translation("Provides a form element for toggling multiple on/off states."),
  *   category = @Translation("Options elements"),
- *   multiple = TRUE,
  * )
  */
 class WebformToggles extends OptionsBase {
@@ -28,6 +28,20 @@ class WebformToggles extends OptionsBase {
       'on_text' => '',
       'off_text' => '',
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function supportsMultipleValues() {
+    return TRUE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasMultipleValues(array $element) {
+    return TRUE;
   }
 
   /**

@@ -139,7 +139,7 @@ drush webform-purge --all -y; drush pmu -y webform_test; drush en -y webform_tes
 
 ```
 # Make sure all modules that are going to be exported are enabled
-drush en -y webform webform_examples webform_templates webform_test webform_node;
+drush en -y webform webform_examples webform_templates webform_test webform_test_translation webform_node;
 
 # Show the difference between the active config and the default config.
 drush features-diff webform
@@ -150,6 +150,10 @@ drush features-export -y webform
 drush features-export -y webform_examples
 drush features-export -y webform_templates
 drush features-export -y webform_test
+drush features-export -y webform_test_element
+drush features-export -y webform_test_handler
+drush features-export -y webform_test_options
+drush features-export -y webform_test_views
 drush features-export -y webform_test_translation
 drush features-export -y webform_node
 
@@ -158,6 +162,10 @@ drush webform-tidy -y --dependencies webform
 drush webform-tidy -y --dependencies webform_examples
 drush webform-tidy -y --dependencies webform_templates
 drush webform-tidy -y --dependencies webform_test
+drush webform-tidy -y --dependencies webform_test_element
+drush webform-tidy -y --dependencies webform_test_handler
+drush webform-tidy -y --dependencies webform_test_options
+drush webform-tidy -y --dependencies webform_test_views
 drush webform-tidy -y --dependencies webform_test_translation
 drush webform-tidy -y --dependencies webform_node
 
@@ -166,6 +174,10 @@ drush features-import -y webform
 drush features-import -y webform_examples
 drush features-import -y webform_templates
 drush features-import -y webform_test
+drush features-import -y webform_test_element
+drush features-import -y webform_test_handler
+drush features-import -y webform_test_options
+drush features-import -y webform_test_views
 drush features-import -y webform_test_translation
 drush features-import -y webform_node
 ```

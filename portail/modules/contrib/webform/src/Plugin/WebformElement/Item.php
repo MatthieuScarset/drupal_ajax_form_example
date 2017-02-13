@@ -12,6 +12,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   id = "item",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Item.php/class/Item",
  *   label = @Translation("Item"),
+ *   description = @Translation("Provides a display-only form element with an optional title and description."),
  *   category = @Translation("Containers"),
  * )
  */
@@ -40,13 +41,13 @@ class Item extends ContainerBase {
    */
   public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
-    $element['#element_validate'][] = [get_class($this), 'validate'];
+    $element['#element_validate'][] = [get_class($this), 'validateItem'];
   }
 
   /**
-   * Webform API callback. Removes ignored element for $form_state values.
+   * Form API callback. Removes ignored element for $form_state values.
    */
-  public static function validate(array &$element, FormStateInterface $form_state) {
+  public static function validateItem(array &$element, FormStateInterface $form_state, array &$completed_form) {
     $name = $element['#name'];
     $form_state->unsetValue($name);
   }

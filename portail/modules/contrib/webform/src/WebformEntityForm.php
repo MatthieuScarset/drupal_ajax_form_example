@@ -44,7 +44,7 @@ class WebformEntityForm extends BundleEntityFormBase {
   protected $tokenManager;
 
   /**
-   * Constructs a new WebformUiElementFormBase.
+   * Constructs a WebformEntityForm.
    *
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer.
@@ -192,7 +192,7 @@ class WebformEntityForm extends BundleEntityFormBase {
       '#mode' => 'yaml',
       '#title' => $this->t('Elements (YAML)'),
       '#description' => $this->t('Enter a <a href=":form_api_href">Form API (FAPI)</a> and/or a <a href=":render_api_href">Render Array</a> as <a href=":yaml_href">YAML</a>.', $t_args) . '<br/>' .
-        '<em>' . $this->t('Please note that comments are not supported and will be removed.') . '</em>',
+      '<em>' . $this->t('Please note that comments are not supported and will be removed.') . '</em>',
       '#default_value' => $webform->get('elements') ,
       '#required' => TRUE,
     ];
