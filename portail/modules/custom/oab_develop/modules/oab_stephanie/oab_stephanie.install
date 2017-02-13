@@ -16,3 +16,10 @@ function oab_stephanie_update_dependencies() {
 function oab_stephanie_update_8001() {
 	include_once("updates/update_8001.inc");
 }
+
+/**
+ * Configuration d'Autologout
+ */
+function oab_stephanie_update_8002() {
+	include_once("updates/update_8002.inc");
+}
