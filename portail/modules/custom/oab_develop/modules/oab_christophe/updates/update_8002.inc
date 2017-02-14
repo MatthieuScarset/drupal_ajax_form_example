@@ -121,3 +121,24 @@ $config_group->set('content.field_file', array (
 $config_group->save(TRUE);
 
 
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.customer_story.default');
+$config_group->setData('settings', array (
+  'handler' => 'default:media',
+  'handler_settings' =>
+    array (
+      'target_bundles' =>
+        array (
+          'file' => 'file',
+        ),
+      'sort' =>
+        array (
+          'field' => '_none',
+        ),
+      'auto_create' => false,
+      'auto_create_bundle' => '',
+    ),
+));
+$config_group->save(TRUE);
+
+
