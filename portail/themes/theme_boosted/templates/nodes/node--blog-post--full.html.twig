@@ -86,8 +86,8 @@ view_mode ? view_mode|clean_class,
     {% set fieldAuthor %}
         {{ author_name }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldProfile %}
-        {{ content.profil_name }}
+    {% set fieldOwner %}
+        {{ content.field_content_owner }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
     <script type="application/ld+json">
@@ -99,21 +99,21 @@ view_mode ? view_mode|clean_class,
       "creationDate": "{{ createdDate }}",
       "author": {
         "@type": "Person",
-        "name": "{{ fieldProfile|striptags|trim }}",
+        "name": "{{ fieldOwner|striptags|trim }}",
       }
     }
     </script>
 
 
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {{ content.profil_name }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
+        <span class="date">{{ createdDate }}</span> {{ content.field_profile }} {% trans %}dans{% endtrans %} {{ content.field_blog }}
     </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_blog', 'profil_name') }}
+        {{ content|without('field_blog', 'field_display_title', 'field_profile', 'field_highlight') }}
     </div>
 
 </article>
