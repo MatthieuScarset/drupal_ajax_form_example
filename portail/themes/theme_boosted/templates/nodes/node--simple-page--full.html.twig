@@ -77,22 +77,16 @@ view_mode ? view_mode|clean_class,
 %}
 
 <div class="content_info">
-    <span class="date">{{ date }}</span> {{ content.title }}
+    <span class="date">{{ date }}</span> {{ content.field_solution }}
 </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
 
-    <div{{ content_attributes.addClass('content, col, col-md-8') }}>
-        {{ content|without(field_highlight) }}
-    </div>
-    <div class="col col-md-4">
-        {{ content.field_highlight }}
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content|without(field_highlight, field_display_title, field_solution) }}
     </div>
 
 </article>
 
-<div id="related_content" class="col col-md-12">
-{{ content.field_end_date }}
-</div>
