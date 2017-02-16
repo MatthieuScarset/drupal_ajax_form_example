@@ -76,18 +76,14 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
-
-
-
-{% if view_mode == 'magazine' %}
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldMagazine %}
         {{ content.field_magazine }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldAuthor %}
-        {{ author_name }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+     {% set fieldAuthor %}
+         {{ author_name }}
+     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
     <script type="application/ld+json">
     {
@@ -104,17 +100,15 @@ view_mode ? view_mode|clean_class,
     </script>
 
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {% trans %}dans{% endtrans %} {{ content.field_magazine }}
+        <span class="date">{{ createdDate }}</span> {% trans %}dans{% endtrans %} {{ content.field_solution }}
     </div>
-{% endif %}
-
 
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_magazine') }}
+        {{ content|without('field_solution', 'field_display_title') }}
     </div>
 
 </article>

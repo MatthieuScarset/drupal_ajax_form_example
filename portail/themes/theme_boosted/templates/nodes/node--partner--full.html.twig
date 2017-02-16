@@ -1,4 +1,4 @@
-partner{#
+{#
 /**
  * @file
  * Default theme implementation to display a node.
@@ -72,28 +72,38 @@ partner{#
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
 
-    {{ title_prefix }}
-    {% if not page %}
-        <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-    {% endif %}
-    {{ title_suffix }}
 
-    {% if display_submitted %}
-        <footer>
-            {{ author_picture }}
-            <div{{ author_attributes }}>
-                {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-                {{ metadata }}
-            </div>
-        </footer>
-    {% endif %}
 
-    <div{{ content_attributes }}>
-        {{ content }}
+{%
+set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+]
+%}
+
+{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+
+
+
+
+<article{{ attributes.addClass(classes) }}>
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content|without('field_display_title', 'field_partner') }}
     </div>
 
 </article>
+
+
+{% if content.field_file_uri %}
+    <p>
+        <a href="{{ content.field_file_uri }}" class="field_file_uri">
+            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-file-pdf-o fa-stack-1x"></i> </span>
+            {% trans %}Download{% endtrans %} PDF
+        </a>
+    </p>
+{% endif %}
