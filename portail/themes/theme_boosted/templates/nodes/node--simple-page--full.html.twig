@@ -75,9 +75,10 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+{% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
 <div class="content_info">
-    <span class="date">{{ date }}</span> {{ content.field_solution }}
+    <span class="date">{{ createdDate }}</span> {{ node.field_solution }}
 </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
