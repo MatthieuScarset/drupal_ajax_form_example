@@ -47,3 +47,17 @@
     height: 3rem;
     padding: 0;
 }
+
+article .content .field--type-text-long ul{
+    list-style: none;
+    padding-left: 2rem;
+}
+article .content .field--type-text-long ul li{
+    position: relative;
+}
+article .content .field--type-text-long ul li:before{
+    content: "■";
+    color: #FF7900;
+    position: absolute;
+    left: -20px;
+}
