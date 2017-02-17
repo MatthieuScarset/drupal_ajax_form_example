@@ -46,3 +46,23 @@ function oab_stephanie_update_8004() {
 function oab_stephanie_update_8005() {
 	include_once("updates/update_8005.inc");
 }
+
+/**
+ * Champ Meta title et meta description obligatoires
+ */
+function oab_stephanie_update_8006() {
+	include_once("updates/update_8006.inc");
+}
+/**
+ * Nouvel onglet SEO dans le formulaire de saisie de contenu
+ */
+function oab_stephanie_update_8007() {
+	include_once("updates/update_8007.inc");
+}
+
+/**
+ * Configuration de metatags
+ */
+function oab_stephanie_update_8008() {
+	include_once("updates/update_8008.inc");
+}
