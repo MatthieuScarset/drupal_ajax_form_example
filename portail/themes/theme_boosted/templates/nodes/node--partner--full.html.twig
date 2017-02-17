@@ -86,6 +86,27 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
+{% set fieldPartner %}
+    {{ content.field_solution }}
+{% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+ {% set fieldAuthor %}
+     {{ author_name }}
+ {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "headline" : "{{ node.label }}",
+      "genre" : "{{ fieldPartner|striptags|trim }}",
+      "creationDate": "{{ createdDate }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ fieldAuthor|striptags|trim }}",
+      }
+    }
+    </script>
+
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 
