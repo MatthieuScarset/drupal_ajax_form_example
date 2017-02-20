@@ -364,3 +364,18 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
 
 }
 */
+
+/**
+ * Altération du formulairede mise en place des redirections
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+	//Pour ajouter le / après l'url et avant le champ source de la redirection
+	// RUBYPORTAILOBS-2753 "Ajout d'un / avant le champs path dans les redirections"
+	if(isset($form['redirect_source']['widget'][0]['path']['#field_prefix']))
+	{
+		$form['redirect_source']['widget'][0]['path']['#field_prefix'] = $form['redirect_source']['widget'][0]['path']['#field_prefix'].'/';
+	}
+}
