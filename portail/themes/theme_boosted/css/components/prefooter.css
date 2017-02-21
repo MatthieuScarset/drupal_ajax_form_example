@@ -1,0 +1,18 @@
+.link_direct_access {
+    color: black;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.text_direct_access {
+    font-size: 1.7rem;
+}
+
+.div_direct_access {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.border-right {
+    border-right: 1px solid black;
+}

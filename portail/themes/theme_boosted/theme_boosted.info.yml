@@ -11,6 +11,7 @@ regions:
   pre_content: 'Pre Content'
   content: 'Content'
   sidebar: 'Side Bar'
+  prefooter: 'Pre Footer'
   footer: 'Footer'
 
 libraries:

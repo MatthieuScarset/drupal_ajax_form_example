@@ -202,7 +202,8 @@
   fill: black;
 }
 
-#block-mainnavigationen {
+#block-main-navigation-en,
+#block-main-navigation-fr {
   position: static;
 }
 

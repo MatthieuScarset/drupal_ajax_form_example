@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: directaccessblock
+theme: theme_boosted
+region: prefooter
+weight: null
+provider: null
+plugin: null
+settings:
+  id: direct_access_block
+  label: 'Direct Access Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  offices_map_custom_text:
+    value: ''
+    format: full_html
+

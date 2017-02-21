@@ -103,11 +103,27 @@
               {% endblock %}
             {% endif %}
 
+
+
+
         </div>
     </div>
 {% endblock %}
 
+
+
+  {# Direct Access Block #}
+{% if page.prefooter %}
+    {% block prefooter %}
+        {{ page.prefooter }}
+
+    {% endblock %}
+{% endif %}
+
 {% if page.footer %}
+
+
+
     {% block footer %}
         <footer class="navbar navbar-default" role="contentinfo">
             {{ page.footer }}
