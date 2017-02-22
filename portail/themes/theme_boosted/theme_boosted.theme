@@ -44,9 +44,9 @@ function theme_boosted_preprocess_page(&$variables) {
       $display_title = $node->get('field_display_title')->getValue();
       if (isset($display_title[0]['value'])
       && $display_title[0]['value'] == 0
-      && isset($variables['page']['pre_content']['theme_boosted_page_title'])
+      && isset($variables['page']['content']['theme_boosted_page_title'])
       ) {
-        $variables['page']['pre_content']['theme_boosted_page_title']['#access'] = FALSE;
+        $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
       }
     }
   }

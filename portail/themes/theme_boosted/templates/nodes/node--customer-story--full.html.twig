@@ -75,10 +75,34 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
-<article{{ attributes.addClass(classes) }}>
+{% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
-    <div{{ content_attributes.addClass('content nowidthlimit') }}>
-        {{ content }}
+{% set fieldCountry %}
+    {{ content.field_country }}
+{% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+{% set fieldAuthor %}
+    {{ author_name }}
+{% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "{{ node.label }}",
+      "dateCreated": "{{ createdDate }}",
+      "locationCreated": "{{ fieldCountry }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ fieldAuthor|striptags|trim }}",
+      }
+    }
+</script>
+
+{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+
+<article{{ attributes.addClass(classes) }}>
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content|without('field_customer_story', 'field_country', 'field_city', 'field_area', 'field_display_title', 'field_meta_description', 'field_meta_title', 'field_highlight') }}
     </div>
 
 </article>

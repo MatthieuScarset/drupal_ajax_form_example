@@ -2,3 +2,10 @@ jira:
   version: VERSION
   js:
     https://jira-build.orangeapplicationsforbusiness.com: { type: external }
+metadata:
+  version: VERSION
+  js:
+    js/metadata.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
