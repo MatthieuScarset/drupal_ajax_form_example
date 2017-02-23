@@ -13,3 +13,11 @@ function oab_amel_install() {
 function oab_amel_update_8001() {
     include_once("updates/update_8001.inc");
 }
+
+/**
+ *  Template Partner - view_display
+ */
+
+function oab_amel_update_8002() {
+    include_once("updates/update_8002.inc");
+}
