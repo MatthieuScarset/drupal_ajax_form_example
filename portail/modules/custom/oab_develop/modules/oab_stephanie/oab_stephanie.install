@@ -66,3 +66,17 @@ function oab_stephanie_update_8007() {
 function oab_stephanie_update_8008() {
 	include_once("updates/update_8008.inc");
 }
+
+/**
+ * Nouveau mode d'affichage : right_linked_content + config pour les type de contenu
+ */
+function oab_stephanie_update_8009() {
+	include_once("updates/update_8009.inc");
+}
+
+/**
+ * Ajout nouvelle vue Right Linked Content + placement du bloc
+ */
+function oab_stephanie_update_8010() {
+	include_once("updates/update_8010.inc");
+}

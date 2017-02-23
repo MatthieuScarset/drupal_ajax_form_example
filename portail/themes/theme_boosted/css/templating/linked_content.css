@@ -1,0 +1,79 @@
+/**
+Feuille de style pour la zone Linked Content (dans la zone promo
+ */
+
+.linked_content_element{
+    margin-top: 20px;
+    width: 100%;
+    background-color: #4BB4E6;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: inline-block;
+}
+
+.linked_content_element .title{
+    font-weight: bold;
+    font-size: 3rem;
+    line-height: 3rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.linked_content_element .highlight{
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.linked_content_element .link_button{
+    margin-top: 2rem;
+    display: inline-block;
+    border: 2px solid black;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.linked_content_element .link_button a{
+    font-weight: bold;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+/**
+Hover sur le bouton :
+ */
+.linked_content_element .link_button:hover{
+    background-color: #000000;
+    color: #FFFFFF;
+}
+.linked_content_element .link_button:hover a,
+.linked_content_element .link_button:hover a:hover{
+    color: #FFFFFF;
+}
+
+/**
+PRESSED sur le bouton :
+ */
+.linked_content_element .link_button:active{
+    border: 2px solid #F16E00;
+    background-color: #F16E00;
+    color: #FFFFFF;
+}
+.linked_content_element .link_button:active a,
+.linked_content_element .link_button:active a:hover{
+    color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+    .linked_content_element{
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
