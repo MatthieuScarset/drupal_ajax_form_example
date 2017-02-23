@@ -15,6 +15,7 @@ global-styling:
       css/components/pre_content.css: {}
       css/components/footer.css: {}
       css/components/prefooter.css: {}
+      css/components/sidebar.css: {}
       css/components/fields.css: {}
     templating:
       css/templating/background.css: {}
