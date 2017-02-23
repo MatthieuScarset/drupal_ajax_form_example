@@ -8,6 +8,7 @@ global-styling:
       css/font-awesome.min.css: {}
       css/style.css: {}
       css/orange_socialbar.css: {}
+      css/swiper.min.css: {}
     component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
@@ -29,6 +30,11 @@ global-styling:
     js/readmorelink.js: {}
     js/header.js: {}
     js/social_bar/orange_socialbar.js: {}
+    js/bsSlider.jquery.js: {}
+    js/jquery.touchSwipe.min.js: {}
+    js/swiper.min.js: {}
+    js/swiper.jquery.min.js: {}
+    js/swiper.jquery.umd.min.js: {}
 
   dependencies:
     - core/jquery
