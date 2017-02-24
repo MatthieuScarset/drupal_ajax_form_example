@@ -87,3 +87,10 @@ function oab_stephanie_update_8010() {
 function oab_stephanie_update_8011() {
 	include_once("updates/update_8011.inc");
 }
+
+/**
+ * Masque en FO les champs meta title, meta description, owner et email owner
+ */
+function oab_stephanie_update_8012() {
+	include_once("updates/update_8012.inc");
+}
