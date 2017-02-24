@@ -80,3 +80,10 @@ function oab_stephanie_update_8009() {
 function oab_stephanie_update_8010() {
 	include_once("updates/update_8010.inc");
 }
+
+/**
+ * Ajout permission changement URL au Chief Editor
+ */
+function oab_stephanie_update_8011() {
+	include_once("updates/update_8011.inc");
+}

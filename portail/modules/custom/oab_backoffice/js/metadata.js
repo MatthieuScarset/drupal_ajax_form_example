@@ -23,7 +23,7 @@
             $("#edit-field-highlight-0-value").keyup(function() {
 
                 var maxDescChar = $previewMetaDesc.attr("maxlength");
-                if($previewMetaDesc.val().length < maxDescChar)
+                if($previewMetaDesc.val().length < (maxDescChar-1))
                 {
                     $previewMetaDesc.val( this.value )
                     $previewMetaDesc.attr("value" , this.value );
