@@ -590,7 +590,7 @@ $config_group->save(TRUE);
 
 //DOCUMENT
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('');
+$config_group = $config_factory->getEditable('core.entity_view_display.node.document.default');
 $config_group->setData(
 	array (
 		'uuid' => '855ef887-55de-4173-9570-b12dbd575669',
