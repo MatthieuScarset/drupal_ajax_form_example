@@ -135,6 +135,17 @@
 
   $(document).ready(function () {
     init_fixed_navbar();
+    $('.bs-slider').bsSlider({
+      slides: '.bs-slide',            // (string) children selector for the slides
+      format: ['bs-size-xs'],         // (array) Size in which format the slider will be initialized.
+      changeOnResize: true,           // (bool) If the slider change on window resize
+      offset: 10,                     // (int) space between the slides in pixels
+      autoChange: false,               // (bool) Set the automatic interval
+      timeChange: 0,               // (int) Time for the interval between slide change
+      swipe: true,                    // (bool) If swipe is enabled (require TouchSwipe-Jquery-Plugin)
+      parentHeightOffset: 10          // (int) Add this value in pixel to the container
+    });
   });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
+

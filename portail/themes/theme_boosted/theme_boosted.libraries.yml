@@ -30,6 +30,8 @@ global-styling:
     js/readmorelink.js: {}
     js/header.js: {}
     js/social_bar/orange_socialbar.js: {}
+    js/jquery.touchSwipe.min.js: {}
+    js/bsSlider.jquery.js: {}
 
   dependencies:
     - core/jquery
