@@ -1,112 +1,129 @@
 [{
-        "id": "banner",
-        "label": "Banner",
-        "title": "Banner",
-        "items": [{
-            "label": "Bandeau",
-            "file": "files/banner/bandeau-solution.html.twig",
-            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-solution.png"
-        }, {
-          "label": "Contenu lié",
-          "file": "files/banner/bandeau-contenu-lie.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-contenu-lie.jpg"
-        }, {
-            "label": "Téléchargement",
-            "file": "files/banner/telechargement.html.twig",
-            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"
-        }, {
-          "label": "Essentiel V2",
-          "file": "files/banner/bandeau-essentiel.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-essentiel.jpg"
-        }, {
-          "label": "Bandeau solution",
-          "file": "files/banner/bandeau-header.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-header.jpg"
-        }]
-    }, {
-        "id": "customer_story",
-        "label": "Customer Story",
-        "title": "Customer Story",
-        "items": [{
-            "label": "Contenu lié",
-            "file": "files/customer_story/contenu-lie.html.twig",
-            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/contenu-lie.jpg"
-        }, {
-            "label": "Verbatim",
-            "file": "files/customer_story/verbatim.html.twig",
-            "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim.jpg"
-        }, {
-          "label": "Benefits",
-          "file": "files/customer_story/benefits.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/benefits.png"
-        }, {
-          "label": "Regards Croisés",
-          "file": "files/customer_story/regards-croises.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/regards-croises.png"
-        }, {
-          "label": "Verbatim V2",
-          "file": "files/customer_story/verbatim-v2.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-v2.png"
-        }, {
-          "label": "Verbatim V2 avec image",
-          "file": "files/customer_story/verbatim-v2-image.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-v2-image.png"
-        }, {
-          "label": "Customer Story 5",
-          "file": "files/customer_story/customer-story-5.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/customer-story-5.jpg"
-        }, {
-          "label": "Cas client standard",
-          "file": "files/customer_story/cas-client-standard.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/cas-client-standard.jpg"
-        }, {
-          "label": "Regards Croisés 2",
-          "file": "files/customer_story/regards-croises-2.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/regards-croises-2.png"
-        }, {
-          "label": "Essentiel",
-          "file": "files/customer_story/essentiel.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/essentiel.jpg"
-        }, {
-          "label": "Keep your business",
-          "file": "files/customer_story/keep-your-business.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/keep-your-business.png"
-        }]
-    }, {
-        "id": "contact",
-        "label": "Contact",
-        "title": "Contact",
-        "items": [{
-          "label": "Call to Action 1",
-          "file": "files/contact/call-to-action-1.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-1.png"
-        }, {
-          "label": "Call to Action 2",
-          "file": "files/contact/call-to-action-2.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-2.png"
-        }, {
-          "label": "Contactez-nous",
-          "file": "files/contact/contactez-nous.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/contactez-nous.png"
-        }, {
-          "label": "Suivez-nous",
-          "file": "files/contact/suivez-nous.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/suivez-nous.png"
-        }]
-      }, {
-        "id": "tools",
-        "label": "Tools",
-        "title": "Tools",
-        "items": [{
-          "label": "Related content",
-          "file": "files/tools/related-content.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/related-content.png"
-        },{
-          "label": "Texte à largeur limitée à 850px",
-          "file": "files/tools/text-limited.html.twig",
-          "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/text-limited.png"
-        }
-        ]
+  "id": "banner",
+  "label": "Banner",
+  "title": "Banner",
+  "items": [{
+    "label": "Bandeau",
+    "file": "files/banner/bandeau-solution.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-solution.png"
+  }, {
+    "label": "Contenu lié",
+    "file": "files/banner/bandeau-contenu-lie.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-contenu-lie.jpg"
+  }, {
+    "label": "Téléchargement",
+    "file": "files/banner/telechargement.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/telechargement.png"
+  }, {
+    "label": "Essentiel V2",
+    "file": "files/banner/bandeau-essentiel.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-essentiel.jpg"
+  }, {
+    "label": "Bandeau solution",
+    "file": "files/banner/bandeau-header.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/bandeau-header.jpg"
+  }, {
+    "label": "Top Zone",
+    "file": "files/banner/top-zone.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
+  }]
+}, {
+  "id": "customer_story",
+  "label": "Customer Story",
+  "title": "Customer Story",
+  "items": [{
+    "label": "Contenu lié",
+    "file": "files/customer_story/contenu-lie.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/contenu-lie.jpg"
+  }, {
+    "label": "Verbatim",
+    "file": "files/customer_story/verbatim.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim.jpg"
+  }, {
+    "label": "Benefits",
+    "file": "files/customer_story/benefits.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/benefits.png"
+  }, {
+    "label": "Regards Croisés",
+    "file": "files/customer_story/regards-croises.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/regards-croises.png"
+  }, {
+    "label": "Verbatim V2",
+    "file": "files/customer_story/verbatim-v2.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-v2.png"
+  }, {
+    "label": "Verbatim V2 avec image",
+    "file": "files/customer_story/verbatim-v2-image.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-v2-image.png"
+  }, {
+    "label": "Customer Story 5",
+    "file": "files/customer_story/customer-story-5.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/customer-story-5.jpg"
+  }, {
+    "label": "Cas client standard",
+    "file": "files/customer_story/cas-client-standard.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/cas-client-standard.jpg"
+  }, {
+    "label": "Regards Croisés 2",
+    "file": "files/customer_story/regards-croises-2.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/regards-croises-2.png"
+  }, {
+    "label": "Essentiel",
+    "file": "files/customer_story/essentiel.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/essentiel.jpg"
+  }, {
+    "label": "Keep your business",
+    "file": "files/customer_story/keep-your-business.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/keep-your-business.png"
+  }]
+}, {
+  "id": "product",
+  "label": "Product",
+  "title": "Product",
+  "items": [{
+    "label": "Modules",
+    "file": "files/product/modules.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/modules.jpg"
+  }, {
+    "label": "Partners",
+    "file": "files/product/partners.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/partners.jpg"
+  }]
+}, {
+  "id": "contact",
+  "label": "Contact",
+  "title": "Contact",
+  "items": [{
+    "label": "Call to Action 1",
+    "file": "files/contact/call-to-action-1.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-1.png"
+  }, {
+    "label": "Call to Action 2",
+    "file": "files/contact/call-to-action-2.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/call-to-action-2.png"
+  }, {
+    "label": "Contactez-nous",
+    "file": "files/contact/contactez-nous.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/contactez-nous.png"
+  }, {
+    "label": "Suivez-nous",
+    "file": "files/contact/suivez-nous.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/contact/suivez-nous.png"
+  }]
+}, {
+  "id": "tools",
+  "label": "Tools",
+  "title": "Tools",
+  "items": [{
+    "label": "Related content",
+    "file": "files/tools/related-content.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/related-content.png"
+  },{
+    "label": "Texte à largeur limitée à 850px",
+    "file": "files/tools/text-limited.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/text-limited.png"
+  }
+  ]
 }
 
 ]
