@@ -447,9 +447,11 @@ body.cke_editable.cke_editable_themed {
 }
 section.left-column{
     padding-left: 0;
+    padding-right: 1.5rem;
 }
-section.right-column{
+aside.right-column{
     padding-right: 0;
+    padding-left: 1.5rem;
 }
 section.left-column > .region,
 aside.right-column > .region{
