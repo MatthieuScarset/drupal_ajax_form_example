@@ -106,7 +106,7 @@ view_mode ? view_mode|clean_class,
 
 
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }}</a>{% trans %} dans{% endtrans %} {{ content.field_blog }}
+        <span class="date">{{ createdDate }}</span> <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }} </a>{% trans %} dans{% endtrans %} {{ content.field_blog }}
     </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
