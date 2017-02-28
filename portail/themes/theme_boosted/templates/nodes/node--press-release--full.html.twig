@@ -102,12 +102,12 @@ view_mode ? view_mode|clean_class,
     <span class="date">{{ createdDate }}</span>
     {% if node.field_country.getString() is not empty or node.field_city.getString() is not empty %}
         <span>
-        {% if node.field_country.getString() is not empty %}
-            {{ node.field_country.getString() }},
+        {% if node.field_city.getString() is not empty %}
+            {{ node.field_city.getString() }},
         {% endif %}
-            {% if node.field_city.getString() is not empty %}
-                {{ node.field_city.getString() }}
-            {% endif %}
+        {% if node.field_country.getString() is not empty %}
+            {{ node.field_country.getString() }}
+        {% endif %}
     </span>
     {% endif %}
 </div>

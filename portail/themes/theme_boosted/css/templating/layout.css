@@ -438,6 +438,9 @@ body {
     vertical-align: middle;
     background-color: #eee;
 }
+body > .main-container{
+    margin-bottom: 3rem;
+}
 body.cke_editable.cke_editable_themed {
     vertical-align: top !important;
     font-size: 1.6rem;
@@ -451,7 +454,8 @@ section.right-column{
 section.left-column > .region,
 aside.right-column > .region{
      background-color: white;
-    padding: 1rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
 }
 
 .row.nomargin {

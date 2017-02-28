@@ -11,17 +11,8 @@
     border: 0 none;
 }
 
-article.node.full,
-article.node.document{
-    padding: 0;
-}
-article.node.full > .content,
-article.node.document > .content{
-    padding: 0;
-}
-
-article.node.document > .content{
-   margin-top: 20px;
+article.node.full{
+    padding-bottom: 6rem;
 }
 
 .field--type-oab-text{
