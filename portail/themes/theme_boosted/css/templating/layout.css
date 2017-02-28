@@ -436,10 +436,22 @@ html {
 body {
     display: table-cell;
     vertical-align: middle;
+    background-color: #eee;
 }
 body.cke_editable.cke_editable_themed {
     vertical-align: top !important;
     font-size: 1.6rem;
+}
+section.left-column{
+    padding-left: 0;
+}
+section.right-column{
+    padding-right: 0;
+}
+section.left-column > .region,
+aside.right-column > .region{
+     background-color: white;
+    padding: 1rem;
 }
 
 .row.nomargin {
