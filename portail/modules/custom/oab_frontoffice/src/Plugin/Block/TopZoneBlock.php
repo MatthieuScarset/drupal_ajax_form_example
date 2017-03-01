@@ -4,6 +4,7 @@ namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 
 /**
  *
@@ -26,10 +27,19 @@ class TopZoneBlock extends BlockBase {
 
   public function build(){
     $block = array();
-    //$node = $this->getContextValue('node');
+    // récupération du contexte
+    $node_ctxt = $this->getContextValue('node');
+    $nid_fld = $node_ctxt->nid->getValue();
+    $nid = $nid_fld[0]['value'];
+    // chargement du noeud et de la valeur top zone
+    $node = Node::load($nid);
+    $top_zone = $node->get('field_top_zone')->getValue();
     $block['type'] = 'markup';
-    $block['#markup'] = 'ok c est bon';
-    //$block['#cache']['max-age'] = 0;
+    if(isset($top_zone[0]['value'])){
+      $block['#markup'] = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);
+    }else{
+      $block['#markup'] = '';
+    }
     return $block;
   }
 
