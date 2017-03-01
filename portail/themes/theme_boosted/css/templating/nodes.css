@@ -42,11 +42,19 @@ article.node.full{
 .content_info .field--type-entity-reference{
     display: inline-block;
 }
-.content_info a{
+.content_info a:hover,
+.content_info a:hover > div{
     color: #f16e00;
 }
+
+
+.content_info a,
+.content_info a > div{
+    color: #000;
+    text-decoration: underline;
+}
 .node-socialbar{
-    margin: 35px 0 35px 0;
+    margin: 60px 0 60px 0;
     /*margin: 65px 0 130px 0; ref.guidelines*/
 }
 .node-socialbar p{
