@@ -12,14 +12,20 @@
     margin-bottom: 0;
 }
 .breadcrumb .icon-home{
-    font-size: 2rem;
+    font-size: 0.938em;
 }
 .breadcrumb > li{
     float: none;
     display: inline;
+    color: #F16000;
 }
+
 .breadcrumb > li + li::before{
-    padding: 0 5px 0 10px;
+    padding: 0 5px 0 5px;
+    content: ">";
+    font-family: "HelvNeueOrange";
+    font-weight: bold;
+    font-size: 0.875em;
 }
 
 @media (max-width: 480px) {
