@@ -100,15 +100,18 @@ view_mode ? view_mode|clean_class,
 
 <div class="content_info">
     <span class="date">{{ createdDate }}</span> {{ content.field_solution }}
+    {# comportement au clic sur le terme Solution : ouverture de la page de recherche du site sur le mot clé cliqué
+    {% if content.field_solution['#object'].nid.value %}
+        <a href="{{ path('entity.node.canonical', {'node': content.field_solution['#object'].nid.value}) }}"> {{ content.field_solution }} </a>
+    {% endif %} #}
 </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
-<article{{ attributes.addClass(classes) }}>
 
+<article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without(field_highlight, field_display_title, field_solution) }}
+        {{ content|without('field_solution', 'field_display_title', 'field_highlight') }}
     </div>
 
 </article>
-
