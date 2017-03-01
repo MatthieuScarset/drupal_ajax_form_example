@@ -1,31 +1,24 @@
 [{
-        "id": "banner",
-        "label": "Banner",
-        "title": "Banner",
-        "items": [{
-
-        }]
-    }, {
-        "id": "customer_story",
-        "label": "Customer Story",
-        "title": "Customer Story",
-        "items": [{
-
-        }]
-    }, {
-        "id": "contact",
-        "label": "Contact",
-        "title": "Contact",
-        "items": [{
-
-        }]
-      }, {
-        "id": "tools",
-        "label": "Tools",
-        "title": "Tools",
-        "items": [{
-
-        }]
+  "id": "banner",
+  "label": "Banner",
+  "title": "Banner",
+  "items": [{
+    "label": "Top Zone",
+    "file": "files/banner/top-zone.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
+  }]
+}, {
+  "id": "product",
+  "label": "Product",
+  "title": "Product",
+  "items": [{
+    "label": "Modules",
+    "file": "files/product/modules.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/modules.jpg"
+  }, {
+    "label": "Partners",
+    "file": "files/product/partners.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/partners.jpg"
+  }]
 }
-
 ]

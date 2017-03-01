@@ -199,6 +199,10 @@ p[class*='bg_']{
     top: 20px;
 }
 
+.banner-topzone .frame-icon-rel {
+    font-size: 10em;
+}
+
 .frame-popout {
     text-align: right;
     top: 60% !important;
@@ -227,6 +231,14 @@ p[class*='bg_']{
     margin: 0;
 }
 
+.banner-topzone .frame-text{
+    font-size: 1.4vw;
+}
+
+.banner-topzone .titre3{
+    margin-top: 10px;
+}
+
 .frame-longtext{
     font-size: 1.3vw;
     text-align: center;
@@ -236,6 +248,12 @@ p[class*='bg_']{
 @media (max-width: 480px) {
     .frame-icon-rel {
         font-size: 8em;
+    }
+    .product_modules.bg_white {
+        background-color: #ddd;
+    }
+    .product_partners .bg-partner .img {
+        background-color: #fff;
     }
 }
 @media (min-width: 480px) {
