@@ -33,9 +33,15 @@ article.node.full{
 
 .content_info{
     font-weight: bold;
+    margin-top: 2rem;
 }
 .content_info .date{
     border-right: 2px solid black;
+    margin-right: 2px;
+    padding-right: 5px;
+}
+
+.content_info .dateOnly {
     margin-right: 2px;
     padding-right: 5px;
 }
