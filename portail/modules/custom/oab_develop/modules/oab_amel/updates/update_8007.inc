@@ -9,8 +9,8 @@ $config_group->set('settings.plugins.stylescombo', array (
                                 div.titre4|sous titre
                                 p.highlight1|paragraphe
                                 p.date|date
-                                a.downloadPDF|download PDF
-                                p.insight|insight bannière
+                                p.insight_banniere|insight bannière
+                                a.downloadPDF|download PDF                                
                                 ul.orange|liste orange
                                 ul.black|liste noire
                                 ul.white|liste blanche

@@ -100,6 +100,13 @@ p.date{
     font-weight: 700;
 }
 
+p.insight_banniere {
+    font-size: 3rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 3rem;
+}
+
 a.downloadPDF {
     font-size: 1.4rem;
     font-family: HelvNeueOrange, Arial, sans-serif;
@@ -109,13 +116,6 @@ a.downloadPDF {
 
 a:hover.downloadPDF{
     color: #f16e00;
-}
-
-p.insight {
-    font-size: 3rem;
-    font-family: HelvNeueOrange, Arial, sans-serif;
-    font-weight: 700;
-    line-height: 3rem;
 }
 
 ul.orange,
