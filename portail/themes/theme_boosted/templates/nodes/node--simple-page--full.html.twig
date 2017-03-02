@@ -99,11 +99,11 @@ view_mode ? view_mode|clean_class,
     </script>
 
 <div class="content_info">
-    <span class="date">{{ createdDate }}</span> {{ content.field_solution }}
-    {# comportement au clic sur le terme Solution : ouverture de la page de recherche du site sur le mot clé cliqué
     {% if content.field_solution['#object'].nid.value %}
-        <a href="{{ path('entity.node.canonical', {'node': content.field_solution['#object'].nid.value}) }}"> {{ content.field_solution }} </a>
-    {% endif %} #}
+        <span class="date">{{ createdDate }}</span> {{ content.field_solution }}
+    {% else %}
+        <span class="dateOnly">{{ createdDate }}</span>
+    {% endif %}
 </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
