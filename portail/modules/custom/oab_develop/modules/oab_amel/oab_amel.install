@@ -45,3 +45,11 @@ function oab_amel_update_8004() {
 function oab_amel_update_8005() {
     include_once("updates/update_8005.inc");
 }
+
+/**
+ *  Ajout field_solution dans entity_view_display de simple_page
+ */
+
+function oab_amel_update_8006() {
+    include_once("updates/update_8006.inc");
+}
