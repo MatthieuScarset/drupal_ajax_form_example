@@ -5,13 +5,16 @@
 }
 
 .text_direct_access {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: block;
+    margin-top: 2rem;
 }
 
 .div_direct_access {
     margin-top: 20px;
     margin-bottom: 20px;
+    height: 6.5rem;
 }
 
 .border-right {
