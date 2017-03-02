@@ -1,8 +1,34 @@
 <?php
 
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
 /**
  * Configuration du type de contenu Product
  */
+
+// CREATION DU FIELD TOP ZONE
+$field_storage = FieldStorageConfig::loadByName('node', 'field_top_zone');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_top_zone',
+    'entity_type' => 'node',
+    'type' => 'text_long',
+  ))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'product', 'field_top_zone');
+if(empty($field)) {
+  $config_array = array(
+    'field_name' =>  'field_top_zone',
+    'entity_type' => 'node',
+    'bundle' => 'product',
+    'label' => 'Top zone',
+    'required' => FALSE,
+  );
+  FieldConfig::create($config_array)->save();
+}
+
 // PRODUIT
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.product');
@@ -334,80 +360,6 @@ $config_group->setData(
       array (
       ),
     'field_type' => 'datetime',
-  )
-);
-$config_group->save(TRUE);
-
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.storage.node.field_top_zone');
-$config_group->setData(
-  array (
-    'uuid' => 'e1329e54-27ae-40a2-a908-13d67db4166d',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'node',
-            1 => 'text',
-          ),
-      ),
-    'id' => 'node.field_top_zone',
-    'field_name' => 'field_top_zone',
-    'entity_type' => 'node',
-    'type' => 'text_long',
-    'settings' =>
-      array (
-      ),
-    'module' => 'text',
-    'locked' => false,
-    'cardinality' => 1,
-    'translatable' => true,
-    'indexes' =>
-      array (
-      ),
-    'persist_with_no_fields' => false,
-    'custom_storage' => false,
-  )
-);
-$config_group->save(TRUE);
-
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.field.node.product.field_top_zone');
-$config_group->setData(
-  array (
-    'uuid' => '7a9ee01b-9d36-485e-8ab1-82c61498ba35',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'config' =>
-          array (
-            0 => 'field.storage.node.field_top_zone',
-            1 => 'node.type.product',
-          ),
-        'module' =>
-          array (
-            0 => 'text',
-          ),
-      ),
-    'id' => 'node.product.field_top_zone',
-    'field_name' => 'field_top_zone',
-    'entity_type' => 'node',
-    'bundle' => 'product',
-    'label' => 'Top zone',
-    'description' => '',
-    'required' => false,
-    'translatable' => false,
-    'default_value' =>
-      array (
-      ),
-    'default_value_callback' => '',
-    'settings' =>
-      array (
-      ),
-    'field_type' => 'text_long',
   )
 );
 $config_group->save(TRUE);
