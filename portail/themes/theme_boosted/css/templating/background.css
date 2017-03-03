@@ -83,6 +83,7 @@
     overflow: hidden;
     position: relative;
 }
+
 /*
 *fond blanc : texte noir, lien orange
 */
@@ -168,6 +169,11 @@
 
 .bg_blue {
     background-color: #4bb4e6;
+}
+
+.region-prefooter .bg_blue{
+    height: 13rem;
+    padding: 1rem 2.5rem;
 }
 
 p[class^='bg_'],

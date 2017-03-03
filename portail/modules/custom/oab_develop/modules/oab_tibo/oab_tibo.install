@@ -10,3 +10,10 @@ function oab_tibo_install() {
 function oab_tibo_update_8001() {
   include_once("updates/update_8001.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-2759 Barre d accès bleue
+ */
+function oab_tibo_update_8002() {
+  include_once("updates/update_8002.inc");
+}
