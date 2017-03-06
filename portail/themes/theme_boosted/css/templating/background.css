@@ -281,6 +281,9 @@ p[class*='bg_']{
     .frame-icon-rel {
         font-size: 20em;
     }
+    #slider_direct_access .col-lg-3:last-child .div_direct_access{
+        border: none;
+    }
 }
 @media (min-width: 1220px) {
 }

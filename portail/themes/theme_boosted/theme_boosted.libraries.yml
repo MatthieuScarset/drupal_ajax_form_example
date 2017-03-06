@@ -8,6 +8,7 @@ global-styling:
       css/font-awesome.min.css: {}
       css/style.css: {}
       css/orange_socialbar.css: {}
+      css/slick.css: {}
     component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
@@ -31,7 +32,7 @@ global-styling:
     js/header.js: {}
     js/social_bar/orange_socialbar.js: {}
     js/jquery.touchSwipe.min.js: {}
-    js/bsSlider.jquery.js: {}
+    js/slick.min.js: {}
 
   dependencies:
     - core/jquery
