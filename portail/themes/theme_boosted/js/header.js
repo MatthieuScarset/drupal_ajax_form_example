@@ -135,17 +135,52 @@
 
   $(document).ready(function () {
     init_fixed_navbar();
-    $('.bs-slider').bsSlider({
-      slides: '.bs-slide',            // (string) children selector for the slides
-      format: ['bs-size-xs'],         // (array) Size in which format the slider will be initialized.
-      changeOnResize: true,           // (bool) If the slider change on window resize
-      offset: 10,                     // (int) space between the slides in pixels
-      autoChange: false,               // (bool) Set the automatic interval
-      timeChange: 0,               // (int) Time for the interval between slide change
-      swipe: true,                    // (bool) If swipe is enabled (require TouchSwipe-Jquery-Plugin)
-      parentHeightOffset: 10          // (int) Add this value in pixel to the container
-    });
+    // slider pour barre accès bleu
+      if ($('#slider_direct_access').length) {
+          jQuery('#slider_direct_access').slick({
+              dots: false,
+              arrows: false,
+              infinite: true,
+              speed: 300,
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              responsive: [
+                  {
+                      breakpoint: 1024,
+                      settings: {
+                          slidesToShow: 4,
+                          slidesToScroll: 1,
+                      }
+                  },
+                  {
+                      breakpoint: 980,
+                      settings: {
+                          slidesToShow: 4,
+                          slidesToScroll: 1,
+                      }
+                  },
+                  {
+                      breakpoint: 768,
+                      settings: {
+                          slidesToShow: 3,
+                          slidesToScroll: 1
+                      }
+                  },
+                  {
+                      breakpoint: 480,
+                      settings: {
+                          slidesToShow: 3,
+                          slidesToScroll: 1
+                      }
+                  }
+              ]
+          });
+      }
   });
+    $('#slider_direct_access').on('init', function(event, slick){
+        // on redimensionne le bloc en fonction de la largeur du main container
+        jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
+    });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
