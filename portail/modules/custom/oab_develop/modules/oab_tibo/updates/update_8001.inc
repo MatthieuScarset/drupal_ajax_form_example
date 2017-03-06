@@ -1268,11 +1268,11 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('block.block.newsletterblock');
+$config_group = $config_factory->getEditable('block.block.topzone');
 $config_group->setData(
   array (
-    'uuid' => 'cd113950-e39d-4adc-9394-2f0bcabf9729',
-    'langcode' => 'en',
+    'uuid' => '4f93e884-e26f-402b-a392-833e615de361',
+    'langcode' => 'fr',
     'status' => true,
     'dependencies' =>
       array (
@@ -1297,7 +1297,7 @@ $config_group->setData(
         'id' => 'top_zone_block',
         'label' => 'Top Zone',
         'provider' => 'oab_frontoffice',
-        'label_display' => 'visible',
+        'label_display' => '0',
         'context_mapping' =>
           array (
             'node' => '@node.node_route_context:node',

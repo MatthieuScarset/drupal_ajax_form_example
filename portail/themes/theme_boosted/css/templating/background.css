@@ -176,6 +176,11 @@
     padding: 1rem 2.5rem;
 }
 
+.product_partners,
+.product_modules{
+    float: none;
+}
+
 p[class^='bg_'],
 p[class*='bg_']{
   margin: 0;
