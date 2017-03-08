@@ -181,6 +181,13 @@
     float: none;
 }
 
+.product_partners{
+    padding-top: 0.5rem !important;
+}
+.product_partners + p{
+    padding-top: 2rem !important;
+}
+
 p[class^='bg_'],
 p[class*='bg_']{
   margin: 0;
