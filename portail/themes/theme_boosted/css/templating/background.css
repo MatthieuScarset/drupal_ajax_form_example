@@ -187,6 +187,13 @@
 .product_partners + p{
     padding-top: 2rem !important;
 }
+.product_modules{
+    padding-top: 1rem !important;
+}
+
+.product_modules + p{
+    padding-top: 2rem !important;
+}
 
 p[class^='bg_'],
 p[class*='bg_']{
