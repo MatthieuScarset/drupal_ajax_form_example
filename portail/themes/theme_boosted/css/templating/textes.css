@@ -555,7 +555,7 @@ p.contenu {
 .bg-partner .img {
     text-align: center;
     background-color: #ededed;
-    height: 85px;
+    height: 130px;
 }
 .bg-partner .img article{
     display: flex;
@@ -563,4 +563,6 @@ p.contenu {
 }
 .bg-partner .img article img{
     margin: auto;
+    max-width: 10.5rem;
+    max-height: 13rem;
 }
