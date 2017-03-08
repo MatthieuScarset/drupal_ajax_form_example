@@ -20,5 +20,14 @@
     "file": "files/product/partners.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/partners.jpg"
   }]
+}, {
+  "id": "partner",
+  "label": "Partner",
+  "title": "Partner",
+  "items": [{
+    "label": "Repères",
+    "file": "files/partner/reperes.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
+  }]
 }
 ]

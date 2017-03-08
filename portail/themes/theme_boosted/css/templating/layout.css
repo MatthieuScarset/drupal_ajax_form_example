@@ -569,3 +569,13 @@ aside.right-column > .region{
 .borderWhite {
     border-right: solid 1px #fff;
 }
+
+.hr_top_bottom {
+    border: 0;
+    border-bottom: 1px solid #CBCBCB;
+    border-top: 1px solid #CBCBCB;
+    padding: 1rem 0 0.5rem 0;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+}
+
