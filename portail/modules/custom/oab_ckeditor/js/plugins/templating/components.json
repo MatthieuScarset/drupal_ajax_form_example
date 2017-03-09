@@ -21,13 +21,32 @@
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/partners.jpg"
   }]
 }, {
-  "id": "partner",
-  "label": "Partner",
-  "title": "Partner",
+    "id": "partner",
+    "label": "Partner",
+    "title": "Partner",
+    "items": [
+      {
+        "label": "Repères",
+        "file": "files/partner/reperes.html.twig",
+        "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
+      }
+    ]
+  },{
+  "id": "tools",
+  "label": "Tools",
+  "title": "Tools",
   "items": [{
-    "label": "Repères",
-    "file": "files/partner/reperes.html.twig",
-    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
+    "label": "Key figures 1 column",
+    "file": "files/tools/key-figures-1.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-1.jpg"
+  },{
+    "label": "Key figures 2 columns",
+    "file": "files/tools/key-figures-2.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-2.jpg"
+  },{
+    "label": "Key figures 3 columns",
+    "file": "files/tools/key-figures-3.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-3.jpg"
   }]
 }
 ]
