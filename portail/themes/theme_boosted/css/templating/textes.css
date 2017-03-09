@@ -566,11 +566,57 @@ p.contenu {
     max-width: 10.5rem;
     max-height: 13rem;
 }
-
 .verbatim-source {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
     font-size: 1.4rem;
     line-height: 1.6rem !important;
 }
-
+/*
+* MODULE KEY FIGURES
+ */
+.module_key_figures_1,
+.module_key_figures_2,
+.module_key_figures_3{
+    float: none;
+}
+.module_key_figures_2,
+.module_key_figures_3{
+    display: flex;
+}
+.module_key_figures_1,
+.module_key_figures_2 .bg,
+.module_key_figures_3 .bg {
+    padding: 3rem 3rem;
+}
+.module_key_figures_1 img,
+.module_key_figures_2 img,
+.module_key_figures_3 img{
+    margin: auto;
+    max-width: 90%;
+    max-height: 90%;
+}
+.module_key_figures_1 article,
+.module_key_figures_2 article,
+.module_key_figures_3 article{
+    height: 100%;
+    display: flex;
+}
+.key_figure_big,
+.key_figure_small{
+    font-weight: bold;
+}
+.key_figure_big{
+    font-size: 10rem;
+    line-height: 10rem;
+}
+.key_figure_small{
+    font-size: 6rem;
+    line-height: 6rem;
+}
+.module_key_figures_1 .titre2,
+.module_key_figures_2 .titre2,
+.module_key_figures_3 .titre2{
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
