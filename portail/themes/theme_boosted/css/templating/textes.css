@@ -566,3 +566,11 @@ p.contenu {
     max-width: 10.5rem;
     max-height: 13rem;
 }
+
+.verbatim-source {
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.6rem !important;
+}
+
