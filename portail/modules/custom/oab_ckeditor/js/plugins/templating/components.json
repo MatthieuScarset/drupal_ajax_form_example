@@ -26,7 +26,7 @@
     "title": "Partner",
     "items": [
       {
-        "label": "Repères",
+        "label": "Repères cas client/partenaire",
         "file": "files/partner/reperes.html.twig",
         "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
       }
