@@ -6,6 +6,7 @@ $vids_to_add = array(
 	array( 'vid' => 'market_segments', 'name' => 'Market Segments'),
 	array( 'vid' => 'partner_types', 'name' => 'Partner Types'),
 	array( 'vid' => 'sub_families', 'name' => 'Sub-families'),
+	array( 'vid' => 'jobs_profiles', 'name' => 'Jobs profiles'),
 );
 $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
 foreach ($vids_to_add as $vid_to_add){
