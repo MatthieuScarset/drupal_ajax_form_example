@@ -101,3 +101,24 @@ function oab_stephanie_update_8012() {
 function oab_stephanie_update_8013() {
 	include_once("updates/update_8013.inc");
 }
+
+/**
+ * Ajout des nouveaux vocabulaires de taxonomie : regions, market segment, partner type, subfamilies, content types
+ */
+function oab_stephanie_update_8014() {
+	include_once("updates/update_8014.inc");
+}
+
+
+/**
+ * Mise a jour des formulaire et vue des contenus pour les taxonomies */
+function oab_stephanie_update_8015() {
+	include_once("updates/update_8015.inc");
+}
+
+/**
+ * suppression des champs concernant les taxonomies à supprimer :  blogs, areas, customer_stories, magazines, partners, topics
+ */
+function oab_stephanie_update_8016() {
+	include_once("updates/update_8016.inc");
+}

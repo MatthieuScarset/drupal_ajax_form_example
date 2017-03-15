@@ -26,7 +26,7 @@
     "title": "Partner",
     "items": [
       {
-        "label": "Repères",
+        "label": "Repères cas client/partenaire",
         "file": "files/partner/reperes.html.twig",
         "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
       }
@@ -47,6 +47,23 @@
     "label": "Key figures 3 columns",
     "file": "files/tools/key-figures-3.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-3.jpg"
+  }]
+}, {
+  "id": "customer_story",
+  "label": "Customer Story",
+  "title": "Customer Story",
+  "items": [{
+    "label": "Verbatim simple",
+    "file": "files/customer_story/verbatim.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim.png"
+  }, {
+    "label": "Verbatim image",
+    "file": "files/customer_story/verbatim-image.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-image.png"
+  }, {
+    "label": "Verbatim double image",
+    "file": "files/customer_story/verbatim-double-image.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-double-image.png"
   }]
 }
 ]
