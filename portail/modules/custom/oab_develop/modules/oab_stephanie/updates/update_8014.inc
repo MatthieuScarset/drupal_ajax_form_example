@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\field\Entity\FieldStorageConfig;
+
 // Ajout des nouveaux vocabulaires de taxonomie : regions, market segment, partner type, subfamilies, content types
 $vids_to_add = array(
 	array( 'vid' => 'regions', 'name' => 'Regions'),
@@ -21,7 +23,16 @@ foreach ($vids_to_add as $vid_to_add){
 
 //ajout des champs
 
+
 //field.storage.node.field_sub_family
+$field_storage = FieldStorageConfig::loadByName('node', 'field_sub_family');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_sub_family',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+  ))->save();
+}
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_sub_family');
 $config_group->setData(
@@ -59,6 +70,14 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 //field.storage.node.field_region
+$field_storage = FieldStorageConfig::loadByName('node', 'field_region');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_region',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+  ))->save();
+}
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_region');
 $config_group->setData(
@@ -96,6 +115,14 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 //field.storage.node.field_partner_type
+$field_storage = FieldStorageConfig::loadByName('node', 'field_partner_type');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_partner_type',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+  ))->save();
+}
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_partner_type');
 $config_group->setData(
@@ -133,6 +160,14 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 //field.storage.node.field_market_segment
+$field_storage = FieldStorageConfig::loadByName('node', 'field_market_segment');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_market_segment',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+  ))->save();
+}
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_market_segment');
 $config_group->setData(
@@ -170,6 +205,14 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 //field.storage.node.field_job_profile
+$field_storage = FieldStorageConfig::loadByName('node', 'field_job_profile');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_job_profile',
+    'entity_type' => 'node',
+    'type' => 'entity_reference',
+  ))->save();
+}
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_job_profile');
 $config_group->setData(
