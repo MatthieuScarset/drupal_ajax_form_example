@@ -635,3 +635,49 @@ aside.right-column > .region{
 .nopaddingright{
     padding-right: 0px !important;
 }
+
+
+
+#related-content-slick-carousel .image img {
+    margin: 0 auto;
+    width: 100%;
+}
+#highlights-container .highlights-items .item .inner .text .title {
+    font-size: 2em;
+    line-height: 1.2em;
+    margin: 5px 8px 10px;
+    color: black;
+}
+#highlights-container .highlights-items {
+    margin: 0 -10px;
+}
+
+.related-content-column-label {
+    height: 25px;
+    color: white;
+    font-size: 1.6rem;
+    margin: 10px 0 5px;
+}
+
+.highlight {
+    font-size: 1.3rem;
+    margin: 20px 20px 60px 20px;
+    color: black;
+    text-decoration: none;
+    min-height : 25px;
+}
+
+.related-content-content{
+    background-color: #ffffff;
+    padding:0;
+}
+
+#related-content-slick-carousel{
+    padding:20px;
+}
+#related-content-slick-carousel .slick-list{
+   width:100% !important;
+}
+.item-related-content{
+    padding: 0px 20px;
+}

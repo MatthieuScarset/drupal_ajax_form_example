@@ -176,8 +176,53 @@
               ]
           });
       }
+      if ($('#related-content-slick-carousel').length) {
+          jQuery('#related-content-slick-carousel').slick({
+              dots: true,
+              arrows: false,
+              infinite: true,
+              speed: 300,
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              responsive: [
+                  {
+                      breakpoint: 1024,
+                      settings: {
+                          slidesToShow: 3,
+                          slidesToScroll: 1,
+                      }
+                  },
+                  {
+                      breakpoint: 980,
+                      settings: {
+                          slidesToShow: 3,
+                          slidesToScroll: 1,
+                      }
+                  },
+                  {
+                      breakpoint: 768,
+                      settings: {
+                          slidesToShow: 1,
+                          slidesToScroll: 1
+                      }
+                  },
+                  {
+                      breakpoint: 480,
+                      settings: {
+                          slidesToShow: 1,
+                          slidesToScroll: 1
+                      }
+                  }
+              ]
+          });
+      }
   });
     $('#slider_direct_access').on('init', function(event, slick){
+        // on redimensionne le bloc en fonction de la largeur du main container
+        jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
+    });
+
+    $('#related-content-slick-carousel').on('init', function(event, slick){
         // on redimensionne le bloc en fonction de la largeur du main container
         jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
     });
