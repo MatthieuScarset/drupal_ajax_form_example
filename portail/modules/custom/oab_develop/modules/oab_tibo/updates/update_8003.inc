@@ -8,12 +8,12 @@ if (!isset($vocabularies['jobs_profiles'])) {
     'name' => t('Jobs profiles'),
   ));
   $vocabulary->save();
-}
-$terms = [t('DSI'),t('DRH'),t('DCOMMERCIAL'),t('DCOMMUNICATION'),t('DMARKETING'),t('DVENTES')];
-foreach ($terms as $term_name) {
-  $term = \Drupal\taxonomy\Entity\Term::create([
-    'vid' => 'jobs_profiles',
-    'name' => $term_name,
-  ]);
-  $term->save();
+  $terms = [t('DSI'),t('DRH'),t('DCOMMERCIAL'),t('DCOMMUNICATION'),t('DMARKETING'),t('DVENTES')];
+  foreach ($terms as $term_name) {
+    $term = \Drupal\taxonomy\Entity\Term::create([
+      'vid' => 'jobs_profiles',
+      'name' => $term_name,
+    ]);
+    $term->save();
+  }
 }
