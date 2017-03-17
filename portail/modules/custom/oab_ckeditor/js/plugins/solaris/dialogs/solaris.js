@@ -561,7 +561,7 @@ for (var i = 0; i < icons.length; i++) {
         newTitle += title[x] + ' ';
         ctr = ctr == 2 ? 0 : ctr
     }
-    solarisIcons += '<a href="#" onclick="klik(this);return false;" title="' + icons[i][0] + '"><span class="' + icons[i][0] + '"></span><div>' + newTitle + '</div></a>'
+    solarisIcons += '<a href="#" onclick="klik(this);return false;" title="solaris ' + icons[i][0] + '"><span class="solaris ' + icons[i][0] + '"></span><div>' + newTitle + '</div></a>'
 };
 var currentIcon = '';
 function klik(el) {

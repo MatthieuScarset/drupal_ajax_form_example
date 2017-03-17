@@ -557,9 +557,13 @@ p.contenu {
     background-color: #ededed;
     height: 130px;
 }
-.bg-partner .img article{
+.bg-partner .img article,
+.bg-partner .img > div{
     display: flex;
     height: 100%;
+}
+.bg-partner .img > div drupal-entity{
+    width: 100%;
 }
 .bg-partner .img article img{
     margin: auto;
