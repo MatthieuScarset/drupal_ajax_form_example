@@ -618,9 +618,8 @@ p.contenu {
     font-size: 6rem;
     line-height: 6rem;
 }
-.module_key_figures_1 .titre2,
-.module_key_figures_2 .titre2,
-.module_key_figures_3 .titre2{
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+.module_key_figures_1 .titre3,
+.module_key_figures_2 .titre3,
+.module_key_figures_3 .titre3{
+    margin-bottom: 0.5rem !important;
 }
