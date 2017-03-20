@@ -57,18 +57,12 @@ options.alignment,
     {% if options.alignment == 'horizontal' %}
         {% for row in items %}
             <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
-                <div id="related-content-slick-carousel" class="related-content-items slick-carousel slick-initialized slick-slider">
-                    <div class="slick-list draggable" tabindex="0" aria-live="polite">
-                        <div class="slick-track">
+                 <div id="related-content-slick-carousel" class="related-content-items">
                             {% for column in row.content %}
-                            <div{{ column.attributes.addClass("item-related-content slick-carousel-item slick-slide slick-active col-md-4") }}>
-                                <div class="inner justified">
+                            <div{{ column.attributes.addClass("item-related-content col-md-4") }}>
                                           {{ column.content }}
-                                </div>
                             </div>
                             {% endfor %}
-                        </div>
-                    </div>
                 </div>
             </div>
         {% endfor %}
