@@ -122,3 +122,17 @@ function oab_stephanie_update_8015() {
 function oab_stephanie_update_8016() {
 	include_once("updates/update_8016.inc");
 }
+
+/**
+ * Traduction des champs
+ */
+function oab_stephanie_update_8017() {
+	include_once("updates/update_8017.inc");
+}
+
+/**
+ * Termes de taxonomies
+ */
+function oab_stephanie_update_8018() {
+	include_once("updates/update_8018.inc");
+}
