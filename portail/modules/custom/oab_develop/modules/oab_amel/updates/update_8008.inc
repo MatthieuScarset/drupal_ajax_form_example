@@ -119,7 +119,7 @@ $config_group->setData(
                     'links' => true,
                     'workbench_moderation_control' => true,
                 ),
-        )
+        ))
 );
 $config_group->save(TRUE);
 
