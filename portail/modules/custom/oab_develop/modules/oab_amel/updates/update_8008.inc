@@ -33,7 +33,6 @@ $config_group->save(TRUE);
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_view_display.node.magazine.related_content');
 $config_group->setData(
-    array (
         array (
             'uuid' => 'c73271d5-589f-4105-91cc-d62ae85e15bc',
             'langcode' => 'en',
@@ -119,7 +118,7 @@ $config_group->setData(
                     'links' => true,
                     'workbench_moderation_control' => true,
                 ),
-        ))
+        )
 );
 $config_group->save(TRUE);
 
