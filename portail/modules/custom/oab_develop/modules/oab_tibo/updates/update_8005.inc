@@ -1,7 +1,7 @@
 <?php
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('image.style.logo_partner');
+$config_group = $config_factory->getEditable('user.settings');
 $config_group->setData(
   array (
     'anonymous' => 'Anonymous',
