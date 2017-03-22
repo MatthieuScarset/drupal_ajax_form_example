@@ -572,9 +572,15 @@ p.contenu {
 }
 .verbatim-source {
     font-family: HelvNeueOrange, Arial, sans-serif;
-    font-weight: 700;
     font-size: 1.4rem;
     line-height: 1.6rem !important;
+}
+.verbatim-title{
+    font-size: 1.8rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 2rem;
+    margin-bottom: 1.2rem;
 }
 /*
 * MODULE KEY FIGURES

@@ -607,12 +607,12 @@ aside.right-column > .region{
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 12px 14px 12px 0;
+    border-width: 12px 7px 12px 0;
     border-color: transparent #CCCCCC;
     display: block;
     width: 0;
     z-index: 1;
-    left: -14px;
+    left: -7px;
     top: 19px;
 }
 
@@ -621,12 +621,12 @@ aside.right-column > .region{
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 12px 14px 12px 0;
+    border-width: 12px 7px 12px 0;
     border-color: transparent #CCCCCC;
     display: block;
     width: 0;
     z-index: 0;
-    left: -15px;
+    left: -8px;
     top: 19px;
 }
 
