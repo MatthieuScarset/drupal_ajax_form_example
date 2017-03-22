@@ -2,10 +2,11 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\State\StateInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Path\PathMatcherInterface;
@@ -39,6 +40,13 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
+
+  /**
+   * The configuration object factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * The module handler.
@@ -87,6 +95,8 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
    *   Current user.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The configuration object factory.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler.
    * @param \Drupal\Core\State\StateInterface $state
@@ -100,8 +110,9 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * @param \Drupal\webform\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    */
-  public function __construct(AccountInterface $current_user, ModuleHandlerInterface $module_handler, StateInterface $state, PathMatcherInterface $path_matcher, WebformAddOnsManagerInterface $addons_manager, WebformLibrariesManagerInterface $libraries_manager, WebformElementManagerInterface $element_manager) {
+  public function __construct(AccountInterface $current_user, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, StateInterface $state, PathMatcherInterface $path_matcher, WebformAddOnsManagerInterface $addons_manager, WebformLibrariesManagerInterface $libraries_manager, WebformElementManagerInterface $element_manager) {
     $this->currentUser = $current_user;
+    $this->configFactory = $config_factory;
     $this->moduleHandler = $module_handler;
     $this->state = $state;
     $this->pathMatcher = $path_matcher;
@@ -163,7 +174,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       }
 
       $is_route_match = in_array($route_name, $help['routes']);
-      $is_path_match = ($help['paths'] && $this->pathMatcher->matchPath($path, implode("\n", $help['paths'])));
+      $is_path_match = ($help['paths'] && $this->pathMatcher->matchPath($path, implode(PHP_EOL, $help['paths'])));
       $has_help = ($is_route_match || $is_path_match);
       if (!$has_help) {
         continue;
@@ -205,7 +216,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
       '#suffix' => '</div>',
     ];
     $build['about'] = $this->buildAbout();
-    if (\Drupal::config('webform.settings')->get('ui.video_display') !== 'hidden') {
+    if ($this->configFactory->get('webform.settings')->get('ui.video_display') !== 'hidden') {
       $build['videos'] = $this->buildVideos();
     }
     $build['uses'] = $this->buildUses();
@@ -519,7 +530,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
 
     $videos['introduction'] = [
       'title' => $this->t('Welcome to the Webform module'),
-      'content' => $this->t('Welcome to new Webform module for Drupal 8.'),
+      'content' => $this->t('Welcome to the Webform module for Drupal 8.'),
       'youtube_id' => 'sQGsfQ_LZJ4',
     ];
 
@@ -628,7 +639,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
 
     // Release.
     $module_info = Yaml::decode(file_get_contents($this->moduleHandler->getModule('webform')->getPathname()));
-    $version = isset($module_info['version']) ? $module_info['version'] : '8.x-1.x-dev';
+    $version = isset($module_info['version']) ? $module_info['version'] : '8.x-5.x-dev';
     $installed_version = $this->state->get('webform.version');
     // Reset storage state if the version has changed.
     if ($installed_version != $version) {
@@ -660,7 +671,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         'entity.webform.collection',
       ],
       'title' => $this->t('Welcome'),
-      'content' => $this->t('Welcome to new Webform module for Drupal 8.'),
+      'content' => $this->t('Welcome to the Webform module for Drupal 8.'),
       'message_type' => 'info',
       'message_close' => TRUE,
       'message_storage' => WebformMessage::STORAGE_USER,

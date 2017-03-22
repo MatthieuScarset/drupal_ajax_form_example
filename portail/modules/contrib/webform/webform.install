@@ -11,6 +11,7 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Render\Element;
 use Drupal\system\Entity\Action;
 use Drupal\webform\Entity\Webform;
+use Drupal\webform\WebformInterface;
 use Drupal\webform\Plugin\WebformElement\ManagedFile;
 
 /**
@@ -145,7 +146,9 @@ function _webform_update_admin_settings() {
 function _webform_update_form_settings() {
   $default_properties = [
     'langcode' => 'en',
-    'status' => TRUE,
+    'status' => WebformInterface::STATUS_OPEN,
+    'open' => NULL,
+    'close' => NULL,
     'dependencies' => [],
     'uid' => '',
     'template' => FALSE,
@@ -450,4 +453,102 @@ function webform_update_8012() {
  */
 function webform_update_8013() {
   _webform_update_actions();
+}
+
+/**
+ * Issue #2848042: Rework #type shorthand prefix handling.
+ */
+function webform_update_8014() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+
+    // Get data, get elements, and update elements #type.
+    $data = $webform_config->getRawData();
+    $elements = Yaml::decode($data['elements']);
+    // Make sure $elements has been decoded into an array.
+    if (is_array($elements)) {
+      _webform_update_8014($elements);
+
+      // Set elements, set data, and save data.
+      $data['elements'] = Yaml::encode($elements);
+      $webform_config->setData($data);
+      $webform_config->save();
+    }
+  }
+}
+
+/**
+ * Add 'webform_' prefix to #type.
+ *
+ * @param array $element
+ *   A form element.
+ */
+function _webform_update_8014(array &$element) {
+  /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
+  $element_manager = \Drupal::service('plugin.manager.webform.element');
+
+  // Add 'webform_' prefix to #type.
+  if (isset($element['#type']) && !$element_manager->hasDefinition($element['#type']) && $element_manager->hasDefinition('webform_' . $element['#type'])) {
+    $element['#type'] = 'webform_' . $element['#type'];
+  }
+
+  foreach (Element::children($element) as $key) {
+    if (is_array($element[$key])) {
+      _webform_update_8014($element[$key]);
+    }
+  }
+}
+
+/**
+ * Issue #2850247: Experiment with system tray integration.
+ */
+function webform_update_8015() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2850455: Add lookup_keys to webform config entity. Flush cache entity definitions.
+ */
+function webform_update_8016() {
+  drupal_flush_all_caches();
+}
+
+/**
+ * Issue #2850455: Add lookup_keys to webform config entity. Update Webform lookup keys.
+ */
+function webform_update_8017() {
+  // Must resave all Webform config lookup keys.
+  // @see \Drupal\Core\Config\Entity\Query\QueryFactory::updateConfigKeyStore
+  $webforms = Webform::loadMultiple();
+  foreach ($webforms as $webform) {
+    $webform->save();
+  }
+}
+
+/**
+ * Issue #2850885: Add ability to disable autocomplete for form and/or element.
+ */
+function webform_update_8018() {
+  _webform_update_admin_settings();
+  _webform_update_form_settings();
+}
+
+/**
+ * Issue #2853302: Allow confirmation page title to be customized.
+ */
+function webform_update_8019() {
+  _webform_update_form_settings();
+}
+
+/**
+ * Issue #2845724: Add webform opening and closing date/time.
+ */
+function webform_update_8020() {
+  // Resave all webforms to convert status boolean to string.
+  $webforms = Webform::loadMultiple();
+  foreach ($webforms as $webform) {
+    $webform->setStatus($webform->get('status'))->save();
+  }
+  _webform_update_form_settings();
 }
