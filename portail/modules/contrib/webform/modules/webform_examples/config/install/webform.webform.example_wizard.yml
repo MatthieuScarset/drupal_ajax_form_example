@@ -1,9 +1,11 @@
 langcode: en
-status: false
+status: open
 dependencies:
   enforced:
     module:
       - webform_examples
+open: null
+close: null
 uid: null
 template: false
 id: example_wizard
@@ -11,10 +13,10 @@ title: 'Example: Wizard'
 description: 'Example of a multiple step ''wizard'' webform.'
 elements: |
   '#attributes':
-    'data-current-page': '[webform-submission:current-page]'
+    data-current-page: '[webform-submission:current-page]'
   information:
     '#title': 'Your Information'
-    '#type': wizard_page
+    '#type': webform_wizard_page
     '#open': true
     first_name:
       '#title': 'First Name'
@@ -24,11 +26,11 @@ elements: |
       '#type': textfield
     gender:
       '#type': radios
-      '#title': 'Gender'
+      '#title': Gender
       '#options': gender
   contact:
     '#title': 'Contact Information'
-    '#type': wizard_page
+    '#type': webform_wizard_page
     '#open': true
     email:
       '#title': Email
@@ -42,7 +44,7 @@ elements: |
       '#options': yes_no
   feedback:
     '#title': 'Your Feedback'
-    '#type': wizard_page
+    '#type': webform_wizard_page
     '#open': true
     comments:
       '#type': textarea
@@ -62,6 +64,7 @@ settings:
   form_confidential_message: ''
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: true
   form_disable_back: false
@@ -90,6 +93,7 @@ settings:
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
+  confirmation_title: ''
   confirmation_message: ''
   confirmation_url: ''
   confirmation_attributes: {  }

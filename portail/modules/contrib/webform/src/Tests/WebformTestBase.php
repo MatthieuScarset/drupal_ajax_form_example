@@ -298,7 +298,7 @@ abstract class WebformTestBase extends WebTestBase {
     $id = $this->randomMachineName(8);
     $webform = Webform::create([
       'langcode' => 'en',
-      'status' => TRUE,
+      'status' => WebformInterface::STATUS_OPEN,
       'id' => $id,
       'title' => $id,
       'elements' => Yaml::encode($elements),
@@ -425,7 +425,7 @@ abstract class WebformTestBase extends WebTestBase {
    *   The created submission's sid.
    */
   protected function postSubmission(WebformInterface $webform, array $edit = [], $submit = NULL) {
-    $submit = $submit ?: t('Submit');
+    $submit = $submit ?: $webform->getSetting('form_submit_label') ?: t('Submit');
     $this->drupalPostForm('webform/' . $webform->id(), $edit, $submit);
     return $this->getLastSubmissionId($webform);
   }
@@ -444,7 +444,7 @@ abstract class WebformTestBase extends WebTestBase {
    *   The created test submission's sid.
    */
   protected function postSubmissionTest(WebformInterface $webform, array $edit = [], $submit = NULL) {
-    $submit = $submit ?: t('Submit');
+    $submit = $submit ?: $webform->getSetting('form_submit_label') ?: t('Submit');
     $this->drupalPostForm('webform/' . $webform->id() . '/test', $edit, $submit);
     return $this->getLastSubmissionId($webform);
   }
@@ -501,10 +501,10 @@ abstract class WebformTestBase extends WebTestBase {
   protected function getExportColumns(WebformInterface $webform) {
     /** @var \Drupal\webform\WebformSubmissionStorageInterface $submission_storage */
     $submission_storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
-    $columns = array_merge(
-      array_keys($submission_storage->getFieldDefinitions()),
-      array_keys($webform->getElementsInitializedAndFlattened())
-    );
+    $field_definitions = $submission_storage->getFieldDefinitions();
+    $field_definitions = $submission_storage->checkFieldDefinitionAccess($webform, $field_definitions);
+    $elements = $webform->getElementsInitializedAndFlattened();
+    $columns = array_merge(array_keys($field_definitions), array_keys($elements));
     return array_combine($columns, $columns);
   }
 

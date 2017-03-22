@@ -77,6 +77,20 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
   protected $element = [];
 
   /**
+   * The webform element key.
+   *
+   * @var string
+   */
+  protected $key;
+
+  /**
+   * The webform element parent key.
+   *
+   * @var string
+   */
+  protected $parent_key;
+
+  /**
    * The webform element's original element type.
    *
    * @var string
@@ -133,6 +147,8 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
    */
   public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL, $key = NULL, $parent_key = '') {
     $this->webform = $webform;
+    $this->key = $key;
+    $this->parent_key = $parent_key;
 
     $webform_element = $this->getWebformElement();
 
@@ -241,7 +257,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
       '#_validate_form' => TRUE,
     ];
 
-    $form = $this->buildDialog($form, $form_state);
+    $form = $this->buildFormDialog($form, $form_state);
 
     return $form;
   }
@@ -327,7 +343,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     drupal_set_message($this->t('%title has been @action.', $t_args));
 
     // Redirect.
-    return $this->redirectForm($form, $form_state, $this->webform->toUrl('edit-form'));
+    return $this->redirectForm($form, $form_state, $this->webform->toUrl('edit-form', ['query' => ['element-update' => $form_state->getValue('key')]]));
   }
 
   /**
@@ -363,6 +379,27 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
    */
   public function getWebformElement() {
     return $this->elementManager->getElementInstance($this->element);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getElement() {
+    return $this->element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getKey() {
+    return $this->key;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getParentKey() {
+    return $this->parent_key;
   }
 
   /**

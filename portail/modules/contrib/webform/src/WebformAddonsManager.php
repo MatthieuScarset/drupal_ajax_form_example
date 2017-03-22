@@ -154,8 +154,16 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
+    // Integration: Webform iContact.
+    $projects['webform_icontact'] = [
+      'title' => $this->t('Webform iContact'),
+      'description' => $this->t('Send Webform submissions to iContact list.'),
+      'url' => Url::fromUri('https://www.drupal.org/sandbox/ibakayoko/2853326'),
+      'category' => 'integration',
+    ];
+
     // Integrations: Webfomr MailChimp.
-    $projects['mailchimp'] = [
+    $projects['webform_mailchimp'] = [
       'title' => $this->t('Webform MailChimp'),
       'description' => $this->t('Posts form submissions to MailChimp list.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_mailchimp'),
@@ -170,11 +178,11 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Handler: YAML Form Queue.
-    $projects['yamlform_queue'] = [
-      'title' => $this->t('YAML Form Queue'),
+    // Handler: Web Form Queue.
+    $projects['webform_queue'] = [
+      'title' => $this->t('Webform Queue'),
       'description' => $this->t('Posts form submissions into a Drupal queue.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/yamlform_queue'),
+      'url' => Url::fromUri('https://www.drupal.org/project/webform_queue'),
       'category' => 'handler',
     ];
 
