@@ -128,78 +128,78 @@ class WebformAdminSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('settings.default_page_base_path'),
     ];
 
-    // Webform.
-    $form['webform'] = [
+    // Form.
+    $form['form'] = [
       '#type' => 'details',
-      '#title' => $this->t('Webform default settings'),
+      '#title' => $this->t('Form default settings'),
       '#tree' => TRUE,
     ];
-    $form['webform']['default_form_closed_message'] = [
+    $form['form']['default_form_closed_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default closed message'),
       '#required' => TRUE,
       '#default_value' => $config->get('settings.default_form_closed_message'),
     ];
-    $form['webform']['default_form_exception_message'] = [
+    $form['form']['default_form_exception_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default closed exception message'),
       '#required' => TRUE,
       '#default_value' => $config->get('settings.default_form_exception_message'),
     ];
-    $form['webform']['default_form_confidential_message'] = [
+    $form['form']['default_form_confidential_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default confidential message'),
       '#required' => TRUE,
       '#default_value' => $config->get('settings.default_form_confidential_message'),
     ];
-    $form['webform']['default_form_submit_label'] = [
+    $form['form']['default_form_submit_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Default submit button label'),
       '#required' => TRUE,
       '#size' => 20,
       '#default_value' => $settings['default_form_submit_label'],
     ];
-    $form['webform']['default_form_submit_once'] = [
+    $form['form']['default_form_submit_once'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Prevent duplicate submissions'),
       '#description' => $this->t('If checked, the submit button will be disabled immediately after is is clicked.'),
       '#default_value' => $settings['default_form_submit_once'],
     ];
-    $form['webform']['default_form_disable_back'] = [
+    $form['form']['default_form_disable_back'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable back button for all webforms'),
       '#description' => $this->t('If checked, users will not be allowed to navigate back to the webform using the browsers back button.'),
       '#return_value' => TRUE,
       '#default_value' => $config->get('settings.default_form_disable_back'),
     ];
-    $form['webform']['default_form_unsaved'] = [
+    $form['form']['default_form_unsaved'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Warn users about unsaved changes'),
       '#description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a webform with unsaved changes.'),
       '#return_value' => TRUE,
       '#default_value' => $config->get('settings.default_form_unsaved'),
     ];
-    $form['webform']['default_form_novalidate'] = [
+    $form['form']['default_form_novalidate'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable client-side validation for all webforms'),
       '#description' => $this->t('If checked, the <a href=":href">novalidate</a> attribute, which disables client-side validation, will be added to all webforms.', [':href' => 'http://www.w3schools.com/tags/att_form_novalidate.asp']),
       '#return_value' => TRUE,
       '#default_value' => $config->get('settings.default_form_novalidate'),
     ];
-    $form['webform']['default_form_details_toggle'] = [
+    $form['form']['default_form_details_toggle'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Display collapse/expand all details link'),
       '#description' => $this->t('If checked, an expand/collapse all (details) link will be added to all webforms with two or more details elements.'),
       '#return_value' => TRUE,
       '#default_value' => $config->get('settings.default_form_details_toggle'),
     ];
-    $form['webform']['form_classes'] = [
+    $form['form']['form_classes'] = [
       '#type' => 'webform_codemirror',
       '#title' => $this->t('Webform CSS classes'),
       '#description' => $this->t('A list of classes that will be provided in the "Webform CSS classes" dropdown. Enter one or more classes on each line. These styles should be available in your theme\'s CSS file.'),
       '#default_value' => $config->get('settings.form_classes'),
     ];
-    $form['webform']['button_classes'] = [
+    $form['form']['button_classes'] = [
       '#type' => 'webform_codemirror',
       '#title' => $this->t('Button CSS classes'),
       '#description' => $this->t('A list of classes that will be provided in "Button CSS classes" dropdown. Enter one or more classes on each line. These styles should be available in your theme\'s CSS file.'),
@@ -456,7 +456,7 @@ class WebformAdminSettingsForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Allow files to be uploaded to public file system.'),
       '#description' => $this->t('Public files upload destination is dangerous for webforms that are available to anonymous and/or untrusted users.') . ' ' .
-      $this->t('For more information see:') . ' <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>',
+      $this->t('For more information see: <a href="@href">DRUPAL-PSA-2016-003</a>', ['@href' => 'https://www.drupal.org/psa-2016-003']),
       '#return_value' => TRUE,
       '#default_value' => $config->get('file.file_public'),
     ];
@@ -684,6 +684,35 @@ class WebformAdminSettingsForm extends ConfigFormBase {
       '#return_value' => TRUE,
       '#default_value' => $config->get('ui.dialog_disabled'),
     ];
+    $form['ui']['offcanvas_disabled'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Disable off-canvas system tray'),
+      '#description' => $this->t('If checked, off-canvas system tray will be disabled.'),
+      '#return_value' => TRUE,
+      '#default_value' => $config->get('ui.offcanvas_disabled'),
+      '#access' => $this->moduleHandler->moduleExists('outside_in') && (floatval(\Drupal::VERSION) >= 8.3),
+      '#states' => [
+        'visible' => [
+          ':input[name="ui[dialog_disabled]"]' => [
+            'checked' => FALSE,
+          ],
+        ],
+      ],
+    ];
+    if (!$this->moduleHandler->moduleExists('outside_in') && (floatval(\Drupal::VERSION) >= 8.3)) {
+      $form['ui']['offcanvas_message'] = [
+        '#type' => 'webform_message',
+        '#message_type' => 'info',
+        '#message_message' => $this->t('Enable the experimental <a href=":href">System tray module</a> to improve the Webform module\'s user experience.', [':href' => 'https://www.drupal.org/blog/drupal-82-now-with-more-outside-in']),
+        '#states' => [
+          'visible' => [
+            ':input[name="ui[dialog_disabled]"]' => [
+              'checked' => FALSE,
+            ],
+          ],
+        ],
+      ];
+    }
     $form['ui']['html_editor_disabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable HTML editor'),
@@ -728,7 +757,7 @@ class WebformAdminSettingsForm extends ConfigFormBase {
     /* Settings */
 
     $settings = $form_state->getValue('page')
-      + $form_state->getValue('webform')
+      + $form_state->getValue('form')
       + $form_state->getValue('wizard')
       + $form_state->getValue('preview')
       + $form_state->getValue('draft')

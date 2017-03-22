@@ -1,9 +1,11 @@
 langcode: en
-status: false
+status: closed
 dependencies:
   enforced:
     module:
       - webform_templates
+open: null
+close: null
 uid: null
 template: true
 id: template_subscribe
@@ -38,6 +40,7 @@ settings:
   form_confidential_message: ''
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: false
   form_disable_back: false
@@ -66,6 +69,7 @@ settings:
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
+  confirmation_title: ''
   confirmation_message: 'Thank you for subscribing.'
   confirmation_url: ''
   confirmation_attributes: {  }

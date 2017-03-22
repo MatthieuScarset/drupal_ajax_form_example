@@ -1,9 +1,11 @@
 langcode: en
-status: false
+status: closed
 dependencies:
   enforced:
     module:
       - webform_templates
+open: null
+close: null
 uid: null
 template: true
 id: template_registration
@@ -25,7 +27,7 @@ elements: |
     '#title': 'Your Contact Information'
     '#type': fieldset
     contact:
-      '#type': contact
+      '#type': webform_contact
       '#title': Contact
       '#title_display': invisible
       '#name__access': false
@@ -41,7 +43,7 @@ elements: |
     '#type': fieldset
     '#open': true
     notes:
-      '#title': 'Comments'
+      '#title': Comments
       '#type': textarea
 css: ''
 javascript: ''
@@ -59,6 +61,7 @@ settings:
   form_confidential_message: ''
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: false
   form_disable_back: false
@@ -87,6 +90,7 @@ settings:
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
+  confirmation_title: ''
   confirmation_message: 'Thank you for registering.'
   confirmation_url: ''
   confirmation_attributes: {  }

@@ -1,9 +1,11 @@
 langcode: en
-status: false
+status: closed
 dependencies:
   enforced:
     module:
       - webform_templates
+open: null
+close: null
 uid: null
 template: true
 id: template_job_application
@@ -30,7 +32,7 @@ elements: |
     '#title': 'Contact Information'
     '#type': fieldset
     contact:
-      '#type': contact
+      '#type': webform_contact
       '#title': Contact
       '#title_display': invisible
       '#name__access': false
@@ -47,10 +49,9 @@ elements: |
       '#suffix': '</div>'
       '#default_value': attach
     resume_file:
-      '#type': container
+      '#type': managed_file
       '#title': Resume
       '#title_display': invisible
-      '#type': managed_file
       '#states':
         visible:
           ':input[name="resume_method"]':
@@ -91,6 +92,7 @@ settings:
   form_confidential_message: ''
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: false
   form_disable_back: false
@@ -119,6 +121,7 @@ settings:
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
+  confirmation_title: ''
   confirmation_message: 'Thank you for applying.'
   confirmation_url: ''
   confirmation_attributes: {  }

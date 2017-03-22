@@ -1,9 +1,11 @@
 langcode: en
-status: false
+status: open
 dependencies:
   enforced:
     module:
       - webform_test
+open: null
+close: null
 uid: null
 template: false
 id: test_form_states_triggers
@@ -17,7 +19,7 @@ elements: |
       '#type': checkbox
       '#title': 'Trigger checked'
     checked_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Checked triggered'
       '#states':
         visible:
@@ -34,7 +36,7 @@ elements: |
         two: 'Two (show)'
         three: 'Three (hide)'
     checked_multiple_and_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Checked multiple triggered using AND operator'
       '#states':
         visible:
@@ -53,7 +55,7 @@ elements: |
         two: 'Two (show)'
         three: 'Three (hide)'
     checked_multiple_or_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Checked multiple using OR operator triggered'
       '#states':
         visible:
@@ -72,7 +74,7 @@ elements: |
         two: 'Two (show)'
         three: 'Three (hide)'
     checked_multiple_xor_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Checked multiple using XOR operator triggered'
       '#states':
         visible:
@@ -92,7 +94,7 @@ elements: |
         hide: hide
         show: show
     value_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Value triggered'
       '#states':
         visible:
@@ -105,7 +107,7 @@ elements: |
       '#type': textfield
       '#title': 'Trigger filled'
     filled_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Filled triggered'
       '#states':
         visible:
@@ -119,7 +121,7 @@ elements: |
       '#type': details
       '#title': 'Trigger collapsed'
     collapsed_markup:
-      '#type': markup
+      '#type': webform_markup
       '#markup': 'Collapsed triggered'
       '#states':
         visible:
@@ -141,6 +143,7 @@ settings:
   form_confidential_message: ''
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: false
   form_disable_back: false
@@ -169,6 +172,7 @@ settings:
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
+  confirmation_title: ''
   confirmation_message: ''
   confirmation_url: ''
   confirmation_attributes: {  }
@@ -179,6 +183,8 @@ settings:
   limit_total_message: ''
   limit_user: null
   limit_user_message: ''
+  purge: none
+  purge_days: null
   entity_limit_total: null
   entity_limit_user: null
   results_disabled: false

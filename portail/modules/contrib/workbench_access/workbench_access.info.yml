@@ -9,8 +9,8 @@ dependencies:
   - taxonomy
   - options
 
-# Information added by Drupal.org packaging script on 2016-10-25
-version: '8.x-1.0-alpha2'
+# Information added by Drupal.org packaging script on 2017-03-12
+version: '8.x-1.0-alpha3'
 core: '8.x'
 project: 'workbench_access'
-datestamp: 1477430317
+datestamp: 1489345686
