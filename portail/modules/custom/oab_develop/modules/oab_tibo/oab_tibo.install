@@ -45,3 +45,10 @@ function oab_tibo_update_8005() {
 function oab_tibo_update_8006() {
   include_once("updates/update_8006.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-2828 changement vue entity browser
+ */
+function oab_tibo_update_8007() {
+  include_once("updates/update_8007.inc");
+}
