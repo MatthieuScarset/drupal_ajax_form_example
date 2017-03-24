@@ -5,7 +5,7 @@ $vidsToClean = array('solutions',
 	'industries',
 	'partner_types',
 	'regions',
-//	'jobs_profiles',
+	'jobs_profiles',
 	'subhomes');
 
 foreach ($vidsToClean as $vid) {
@@ -84,7 +84,7 @@ $terms = array(
 	array( 'vid' => 'regions', 'name' => 'Middle East', 'language' => 'en'),
 	array( 'vid' => 'regions', 'name' => 'North America', 'language' => 'en'),
 	array( 'vid' => 'regions', 'name' => 'Russia', 'language' => 'en'),
-/*
+
 	//Profils métiers FR
 	array( 'vid' => 'jobs_profiles', 'name' => 'Directeur Général (DG)', 'language' => 'fr'),
 	array( 'vid' => 'jobs_profiles', 'name' => 'DSI', 'language' => 'fr'),
@@ -100,7 +100,7 @@ $terms = array(
 	array( 'vid' => 'jobs_profiles', 'name' => 'Chief Marketing Officer (CMO)', 'language' => 'en'),
 	array( 'vid' => 'jobs_profiles', 'name' => 'Sales Director', 'language' => 'en'),
 	array( 'vid' => 'jobs_profiles', 'name' => 'Communications Director', 'language' => 'en'),
-*/
+
 	//Subhomes FR
 	array( 'vid' => 'subhomes', 'name' => 'Partenaires', 'language' => 'fr'),
 	array( 'vid' => 'subhomes', 'name' => 'Cas clients', 'language' => 'fr'),
