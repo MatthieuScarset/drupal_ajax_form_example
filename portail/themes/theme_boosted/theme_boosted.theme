@@ -85,7 +85,10 @@ function theme_boosted_preprocess_file_link(&$variables){
 
   $file_type = strtr($mime_type, array('application/' => '', 'audio/' => '', 'image/' => '', 'multipart/' => '', 'text/' => '', 'video/' => ''));
 
-  $link_text = "Download " . strtr($file_type, array('/' => '-', '.' => '-'));
+  //$node = \Drupal::request()->attributes->get('node');
+  //ksr($node->get('field_file'));
+
+  $link_text = t("Download") . " " . strtr($file_type, array('/' => '-', '.' => '-'));
   $options['attributes']['title'] = $file_entity->getFilename();
 
   // Classes to add to the file field for icons.
