@@ -151,3 +151,10 @@ function oab_stephanie_update_8019() {
 function oab_stephanie_update_8020() {
 	include_once("updates/update_8020.inc");
 }
+
+/**
+ * Termes de taxonomies RU et RU-EN
+ */
+function oab_stephanie_update_8021() {
+	include_once("updates/update_8021.inc");
+}
