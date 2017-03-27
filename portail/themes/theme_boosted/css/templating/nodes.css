@@ -167,7 +167,7 @@ article.node.document .document_field_image{
 }
 
 .image_blogger {
-    max-width:160px;
+   /* max-width:160px;*/
 }
 
 .text-max-witdh{
@@ -180,7 +180,7 @@ article.node.document .document_field_image{
 }
 
 .encart_profil .bloc_textuel{
-    padding: 2.5rem 1.5rem 3rem 1.5rem;
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
 }
 
 .encart_profil .bloc_textuel .title{

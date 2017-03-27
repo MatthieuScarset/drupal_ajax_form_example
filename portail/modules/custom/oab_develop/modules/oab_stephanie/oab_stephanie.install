@@ -144,3 +144,10 @@ function oab_stephanie_update_8018() {
 function oab_stephanie_update_8019() {
 	include_once("updates/update_8019.inc");
 }
+
+/**
+ * Encart profil bloggeur : style image, rendu média, rendu profil teaser
+ */
+function oab_stephanie_update_8020() {
+	include_once("updates/update_8020.inc");
+}
