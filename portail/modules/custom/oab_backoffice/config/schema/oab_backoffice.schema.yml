@@ -1,0 +1,25 @@
+oab.subhomes:
+  type: config_object
+  label: 'Subhomes'
+  mapping:
+    press_term_tid:
+      type: label
+      label: 'Press term id'
+    partner_term_tid:
+      type: label
+      label: 'Partner term id'
+    customer_term_tid:
+      type: label
+      label: 'Customer term id'
+    library_term_tid:
+      type: label
+      label: 'Library term id'
+    blog_term_tid:
+      type: label
+      label: 'Blog term id'
+    magazine_term_tid:
+      type: label
+      label: 'Magazine term id'
+    product_term_tid:
+      type: label
+      label: 'Product term id'

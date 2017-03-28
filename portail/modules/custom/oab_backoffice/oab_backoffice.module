@@ -412,8 +412,3 @@ function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\F
 		$form['redirect_source']['widget'][0]['path']['#field_prefix'] = $form['redirect_source']['widget'][0]['path']['#field_prefix'].'/';
 	}
 }
-
-
-function oab_backoffice_node_customer_story_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
-die();
-}

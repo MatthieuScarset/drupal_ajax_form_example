@@ -1,1 +1,29 @@
 <?php
+
+class OAB_Trace{
+
+  static function debug($elem, $message=""){
+    echo '<pre>';
+    if($message<>""){
+      echo $message.'<br>';
+    }
+    print_r($elem);
+    echo '</pre>';
+  }
+  static function lock($elem){
+    self::debug($elem);
+    die();
+  }
+}
+
+
+/**
+ * fonction de raccourci oabt
+ */
+function oabt($elem, $lock=false, $message=""){
+  if($lock){
+    OAB_Trace::lock($elem);
+  }else{
+    OAB_Trace::debug($elem,$message);
+  }
+}

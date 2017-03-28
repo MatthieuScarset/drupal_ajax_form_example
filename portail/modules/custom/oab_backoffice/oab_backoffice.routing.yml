@@ -1,0 +1,15 @@
+oab.settings:
+  path: '/admin/structure/oab/settings'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OAB settings'
+  requirements:
+    _permission: 'access administration pages'
+
+oab.settings_subhomes:
+  path: '/admin/structure/oab/settings/subhomes'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\oabSettingsSubhomesForm'
+    _title: 'Subhomes settings'
+  requirements:
+    _permission: 'administer site configuration'

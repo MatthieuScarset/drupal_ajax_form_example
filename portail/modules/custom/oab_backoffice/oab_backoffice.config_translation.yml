@@ -1,0 +1,5 @@
+oab.settings_subhomes:
+  title: 'oab Settings'
+  base_route_name: oab.settings_subhomes
+  names:
+    - oab.subhomes

@@ -52,6 +52,35 @@ function theme_boosted_preprocess_page(&$variables) {
   }
 }
 
+function theme_boosted_preprocess_views_view(&$variables){
+  $view = $variables['view'];
+  $id = $view->storage->id();
+
+  if ($id == 'subhomes'){
+    if (isset($view->display_handler->options['arguments'])
+      && is_array($view->display_handler->options['arguments'])) {
+      foreach ($view->display_handler->options['arguments'] AS $field_arg_key => $field_arg_value) {
+        if (isset($field_arg_value['default_argument_type'])
+          && $field_arg_value['default_argument_type'] == 'config_key') {
+          if (isset($field_arg_value['default_argument_options']['config_name'])
+            && !empty($field_arg_value['default_argument_options']['config_name'])
+            && isset($field_arg_value['default_argument_options']['config_key'])
+            && !empty($field_arg_value['default_argument_options']['config_key'])){
+            $term_variable = \Drupal::config($field_arg_value['default_argument_options']['config_name'])->get($field_arg_value['default_argument_options']['config_key']);
+            if (!is_null($term_variable)) {
+              $term = \Drupal\taxonomy\Entity\Term::load((int)$term_variable);
+
+              if (isset($term)
+                && is_object($term)) {
+                $variables['views_term'] = $term->getDescription();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 function theme_boosted_preprocess_field(&$variables){
   /*
