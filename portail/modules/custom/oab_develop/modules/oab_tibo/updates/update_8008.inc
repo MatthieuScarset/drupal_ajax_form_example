@@ -76,13 +76,13 @@ $config_group->setData(
                     'type' => 'basic',
                     'options' =>
                       array (
-                        'submit_button' => 'Apply',
+                        'submit_button' => t('Apply'),
                         'reset_button' => false,
-                        'reset_button_label' => 'Reset',
-                        'exposed_sorts_label' => 'Sort by',
+                        'reset_button_label' => t('Reset'),
+                        'exposed_sorts_label' => t('Sort by'),
                         'expose_sort_order' => true,
-                        'sort_asc_label' => 'Asc',
-                        'sort_desc_label' => 'Desc',
+                        'sort_asc_label' => t('Asc'),
+                        'sort_desc_label' => t('Desc'),
                       ),
                   ),
                 'pager' =>
@@ -96,22 +96,22 @@ $config_group->setData(
                         'total_pages' => NULL,
                         'tags' =>
                           array (
-                            'previous' => '‹ Previous',
-                            'next' => 'Next ›',
+                            'previous' => t('‹ Previous'),
+                            'next' => t('Next ›'),
                           ),
                         'expose' =>
                           array (
                             'items_per_page' => false,
-                            'items_per_page_label' => 'Items per page',
+                            'items_per_page_label' => t('Items per page'),
                             'items_per_page_options' => '5, 10, 25, 50',
                             'items_per_page_options_all' => false,
-                            'items_per_page_options_all_label' => '- All -',
+                            'items_per_page_options_all_label' => t('- All -'),
                             'offset' => false,
-                            'offset_label' => 'Offset',
+                            'offset_label' => t('Offset'),
                           ),
                         'views_infinite_scroll' =>
                           array (
-                            'button_text' => 'Load More',
+                            'button_text' => t('Load More'),
                             'automatically_load_content' => false,
                           ),
                       ),
