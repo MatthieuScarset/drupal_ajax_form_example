@@ -61,3 +61,52 @@ article .content .field--type-text-long ul li:before{
     position: absolute;
     left: -20px;
 }
+
+.view-subhomes .display-subhomes{
+    background-color: #ededed;
+    margin-right: 2rem;
+    height: 22rem;
+    max-height: 22rem;
+    margin-bottom: 2rem;
+}
+.display-subhomes .encart{
+    background: white;
+    padding: 2rem;
+    border-top: 3px solid #ededed;
+    border-left: 3px solid #ededed;
+    border-right: 3px solid #ededed;
+    max-height: 10rem;
+    display: flex;
+}
+.display-subhomes .bigKey{
+    font-size: 5rem;
+    font-weight: bold;
+    margin: auto;
+    line-height: 4rem;
+}
+.display-subhomes .lowKey{
+    font-weight: bold;
+}
+.display-subhomes .txt span{
+    font-size: 1.2rem;
+}
+.display-subhomes .txt div{
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+.link-subhomes > .display-subhomes > .border{
+    border-top: 3px solid #ededed;
+}
+.link-subhomes:hover > .display-subhomes{
+    background-color: #F16e00;
+    color: #fff;
+}
+.link-subhomes:hover > .display-subhomes > .encart{
+    background-color: #F16e00;
+    color: #fff;
+    border-color: #F16e00;
+    /*border-bottom: 3px solid #fff;*/
+}
+.link-subhomes:hover > .display-subhomes > .border{
+    border-top: 3px solid #fff;
+}
