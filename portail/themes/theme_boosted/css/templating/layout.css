@@ -694,3 +694,7 @@ aside.right-column > .region{
 .item-related-content{
     padding: 0px 20px 40px 20px;
 }
+
+#related-content-slick-carousel article.media  {
+    margin-top: 0px !important;
+}

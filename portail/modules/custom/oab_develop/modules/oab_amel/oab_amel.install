@@ -86,3 +86,11 @@ function oab_amel_update_8009() {
 function oab_amel_update_8010() {
     include_once("updates/update_8010.inc");
 }
+
+/**
+ *  Mecanisme related contents (remontées en fonction de l'ID du current content)
+ */
+
+function oab_amel_update_8011() {
+    include_once("updates/update_8011.inc");
+}
