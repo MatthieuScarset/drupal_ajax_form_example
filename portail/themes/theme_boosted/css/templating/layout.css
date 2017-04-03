@@ -698,3 +698,18 @@ aside.right-column > .region{
 #related-content-slick-carousel article.media  {
     margin-top: 0px !important;
 }
+
+.subhomes-filterbar-background{
+    background-color: lightgrey;
+    padding: 20px 30px;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+
+.subhomes-filterbar select{
+    background: grey;
+}
+
+#edit-submit-subhomes{
+    background: white;
+}
