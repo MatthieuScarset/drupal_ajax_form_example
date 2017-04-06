@@ -75,8 +75,17 @@ article .content .field--type-text-long ul li:before{
     border-top: 3px solid #ededed;
     border-left: 3px solid #ededed;
     border-right: 3px solid #ededed;
-    max-height: 10rem;
+    max-height: 12.5rem;
     display: flex;
+}
+
+.display-subhomes .encart-image{
+    padding:0;
+}
+
+.display-subhomes .encart-image img{
+    max-height: 12.5rem;
+    width: 100%;
 }
 .display-subhomes .bigKey{
     font-size: 5rem;
@@ -109,4 +118,8 @@ article .content .field--type-text-long ul li:before{
 }
 .link-subhomes:hover > .display-subhomes > .border{
     border-top: 3px solid #fff;
+}
+
+.date-subhome {
+    color: grey;
 }

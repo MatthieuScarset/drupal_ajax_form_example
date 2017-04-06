@@ -700,7 +700,7 @@ aside.right-column > .region{
 }
 
 .subhomes-filterbar-background{
-    background-color: lightgrey;
+    background-color: #ededed;
     padding: 20px 30px;
     margin-left: -30px;
     margin-right: -30px;
@@ -712,4 +712,8 @@ aside.right-column > .region{
 
 #edit-submit-subhomes{
     background: white;
+}
+
+.subhome-image{
+    height: 125px;
 }

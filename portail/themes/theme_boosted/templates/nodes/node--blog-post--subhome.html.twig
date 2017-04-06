@@ -72,11 +72,43 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+{#<article{{ attributes }}>
     <div class="subhome_blog_post_element">
         <span class="visual">{{ content.field_visual }}</span>
         <span class="publish_date">{{ content.publish_date }}</span>
         <span class="blogger_name">{{ content.field_profile }}</span>
         <span class="title">{{ label }}</span>
     </div>
-</article>
+</article>#}
+
+{% set createdDate = node.getCreatedTime %}
+{% set month = createdDate|date("F") %}
+{% set year = createdDate|date("Y") %}
+
+<a href="{{ url }}" class="link-subhomes">
+    <div class="display-subhomes">
+        <div class="encart encart-image col-lg-12">
+            {% for key, image in content.field_visual  %}
+                {% set media = image.entity %}
+                {% set file = media.field_image.entity %}
+                {% set uri = file_url(file.uri.value) %}
+                {% if uri is not null and media.name.value is not null %}
+                    <img src="{{ uri }}" alt="{{ media.name.value }}" />
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="border col-lg-12"></div>
+        <div class="txt col-lg-12">
+            <span class="date-subhome">{% trans %} {{ month }} {% endtrans %} {{ year }} </span>
+            {% for p in content.field_profile %}
+            {% set profile = p.entity %}
+                {% if profile.field_first_name.value is not null %}
+                <span> - {{ profile.field_first_name.value }} {{ profile.field_last_name.value }}</span>
+            {% endif %}
+            {% endfor %}
+            <div>{{ label }}</div>
+        </div>
+    </div>
+</a>
+
+
