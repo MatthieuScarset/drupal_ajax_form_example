@@ -34,7 +34,7 @@ foreach ($terms as &$term)
   {
     //s'il n'existe pas on le crée
     $entity = \Drupal\taxonomy\Entity\Term::create([
-      'vid' => $term['vid'],
+      'vid' => "subhomes",
       'name' => $term['name'],
       'langcode' => $term['language'],
     ]);
