@@ -6,4 +6,5 @@ pm-enable -y password_policy_history
 pm-enable -y password_policy_length
 pm-enable -y password_policy_username
 pm-enable -y oab_tibo
+pm-enable -y infinite_scroll
 updatedb
