@@ -23,3 +23,12 @@
 .view-display-id-entity_browser_media .filesize{
     font-weight: 700;
 }
+
+#edit-group-classify .field--type-entity-reference{
+    float: left;
+    padding-right: 25px;
+    padding-bottom: 25px;
+}
+#edit-group-classify .field--type-entity-reference select{
+    min-height: 200px;
+}

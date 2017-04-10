@@ -86,7 +86,7 @@
             {# Content #}
             {% set content_classes = [
                 page.sidebar ? 'col-md-8 col-sm-12 left-column',
-                page.sidebar is empty ? 'left-column' ] %}
+                page.sidebar is empty ? 'left-column no-padding' ] %}
             <section{{ content_attributes.addClass(content_classes) }}>
             {% block content %}
                 <a id="main-content"></a>

@@ -41,7 +41,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 	// gestion de la taxonomie
 	// affichage de la langue
-	if (defined('CONTENT_TAXO_FIELDS')) {
+	/*if (defined('CONTENT_TAXO_FIELDS')) {
 		$CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
 		foreach ($CONTENT_TAXO_FIELDS AS $field) {
 			if (isset($form[$field]['widget']['#options'])) {
@@ -56,7 +56,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 				$form[$field]['widget']['#options'] = $new_select_options;
 			}
 		}
-	}
+	}*/
 
   // page de liste des taxonomies
   if ($form_id == 'taxonomy_overview_terms'){
