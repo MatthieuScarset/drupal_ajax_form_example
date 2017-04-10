@@ -63,7 +63,7 @@ class BlogPostImage extends SqlBase {
     //->condition('f.fid', 1757)
     ->condition('n.type', 'blog_post');
    // ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    $query->condition('n.nid', array(11430, 11429, 1449), 'IN');
+    //$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
     //->orderBy('f.fid', 'ASC');
 
     // Filter by scheme(s), if configured.
