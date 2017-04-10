@@ -31,34 +31,10 @@ process:
     plugin: migration
     migration: document_term
     source: document_types
-  field_topic:
-    plugin: migration
-    migration: document_term
-    source: topics
-  field_solution:
-    plugin: migration
-    migration: document_term
-    source: solutions
-  field_industry:
-    plugin: migration
-    migration: document_term
-    source: industries
-  field_partner:
-    plugin: migration
-    migration: document_term
-    source: partners
-  field_area:
-    plugin: migration
-    migration: document_term
-    source: areas
-  field_customer_story:
-    plugin: migration
-    migration: document_term
-    source: customer_stories
-  field_subhomes:
-      plugin: migration
-      migration: blogpost_term
-      source: subhomes
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhomes: subhomes
   field_file:
     plugin: migration
     migration: document_media_file

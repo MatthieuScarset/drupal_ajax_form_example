@@ -21,34 +21,10 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_magazine:
-    plugin: migration
-    migration: magazinearticle_term
-    source: categories
-  field_industry:
-    plugin: migration
-    migration: magazinearticle_term
-    source: industries
-  field_solution:
-    plugin: migration
-    migration: magazinearticle_term
-    source: solutions
-  field_partner:
-    plugin: migration
-    migration: magazinearticle_term
-    source: partners
-  field_area:
-    plugin: migration
-    migration: magazinearticle_term
-    source: areas
-  field_customer_story:
-    plugin: migration
-    migration: magazinearticle_term
-    source: customer_stories
-  field_subhomes:
-    plugin: migration
-    migration: blogpost_term
-    source: subhomes
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhomes: subhomes
   field_image:
     plugin: migration
     migration: magazinearticle_media

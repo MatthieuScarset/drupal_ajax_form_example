@@ -73,17 +73,9 @@ class MagazineArticleNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
-    //Id du rendering_model
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('rendering_model', 0, NULL, TRUE);
-
-    foreach ($terms AS $key => $term){
-      $machine_name = $term->get('field_machine_name')->value;
-      if ($machine_name == 'magazine'){
-        $row->setSourceProperty('rendering_model_id', $term->get('tid')->value);
-      }
-    }
 
     //Taxonomie de la Section
+		/*
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('sections', 0, NULL, TRUE);
     $sections = array();
     foreach ($terms AS $key => $term){
@@ -94,6 +86,7 @@ class MagazineArticleNode extends SqlBase {
       }
     }
     $row->setSourceProperty('sections', $sections);
+		*/
 
     // récupération du BODY
     $body_query = $this->select('field_data_body', 'b');
@@ -168,137 +161,104 @@ class MagazineArticleNode extends SqlBase {
      * récupération des tags
      */
 
-    //MAGAZINE
-    $categories_query = $this->select('field_data_field_taxo_magazine', 'tm');
-    $categories_query->join('taxonomy_term_data', 't', 't.tid = tm.field_taxo_magazine_tid');
-    $categories_query->fields('t', ['tid'])
-      ->condition('tm.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tm.bundle', 'content_magazine_article', '=');
-    $categories_results = $categories_query->execute()->fetchAll();
-    if (is_array($categories_results)){
-      $categories = array();
-      foreach ($categories_results AS $categories_result){
+    // récupération du tag "industries"
+		$industries = array();
+		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
+		if(count($correspondance_taxo_industry) > 0) {
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($categories_result) && isset($categories_result->tid)){
-          $categories[] = $categories_result->tid;
-        }
-        elseif (is_array($categories_result) && isset($categories_result['tid'])){
-          $categories[] = $categories_result['tid'];
-        }
-      }
-      $row->setSourceProperty('categories', $categories);
-    }
+			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
+			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
+			$industrie_query->fields('t', ['tid'])
+				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('i.bundle', 'content_magazine_article', '=');
 
-    //INDUSTRIES
-    $industries_query = $this->select('field_data_field_taxo_industrie', 'ti');
-    $industries_query->join('taxonomy_term_data', 't', 't.tid = ti.field_taxo_industrie_tid');
-    $industries_query->fields('t', ['tid'])
-      ->condition('ti.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('ti.bundle', 'content_magazine_article', '=');
-    $industries_results = $industries_query->execute()->fetchAll();
-    if (is_array($industries_results)){
-      $industries = array();
-      foreach ($industries_results AS $industries_result){
+			$industrie_results = $industrie_query->execute()->fetchAll();
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($industries_result) && isset($industries_result->tid)){
-          $industries[] = $industries_result->tid;
-        }
-        elseif (is_array($industries_result) && isset($industries_result['tid'])){
-          $industries[] = $industries_result['tid'];
-        }
-      }
-      $row->setSourceProperty('industries', $industries);
-    }
+			if (is_array($industrie_results)){
+				$industries = array();
+				foreach ($industrie_results AS $industrie_result){
+					$industry_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($industrie_result) && isset($industrie_result->tid)){
+						$industry_id = $industrie_result->tid;
+					}
+					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
+						$industry_id = $industrie_result['tid'];
+					}
+					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
+						//prendre le tid D8
+						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
+							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('industries', $industries);
+			}
+		}
 
-    //SOLUTIONS
-    $solutions_query = $this->select('field_data_field_taxo_solution', 'ts');
-    $solutions_query->join('taxonomy_term_data', 't', 't.tid = ts.field_taxo_solution_tid');
-    $solutions_query->fields('t', ['tid'])
-      ->condition('ts.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('ts.bundle', 'content_magazine_article', '=');
-    $solutions_results = $solutions_query->execute()->fetchAll();
-    if (is_array($solutions_results)){
-      $solutions = array();
-      foreach ($solutions_results AS $solutions_result){
+    // récupération du tag "solution"
+		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
+		if(count($correspondance_taxo_solution) > 0) {
+			$solutions = array();
+			$solution_query = $this->select('field_data_field_taxo_solution', 's');
+			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
+			$solution_query->fields('t', ['tid'])
+				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('s.bundle', 'content_magazine_article', '=');
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($solutions_result) && isset($solutions_result->tid)){
-          $solutions[] = $solutions_result->tid;
-        }
-        elseif (is_array($solutions_result) && isset($solutions_result['tid'])){
-          $solutions[] = $solutions_result['tid'];
-        }
-      }
-      $row->setSourceProperty('solutions', $solutions);
-    }
+			$solution_results = $solution_query->execute()->fetchAll();
 
-    //PARTNERS
-    $partners_query = $this->select('field_data_field_taxo_partner', 'tp');
-    $partners_query->join('taxonomy_term_data', 't', 't.tid = tp.field_taxo_partner_tid');
-    $partners_query->fields('t', ['tid'])
-      ->condition('tp.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tp.bundle', 'content_magazine_article', '=');
-    $partners_results = $partners_query->execute()->fetchAll();
-    if (is_array($partners_results)){
-      $partners = array();
-      foreach ($partners_results AS $partners_result){
+			if (is_array($solution_results)) {
+				foreach ($solution_results AS $solution_result) {
+					$solution_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($solution_result) && isset($solution_result->tid)) {
+						$solution_id = $solution_result->tid;
+					}
+					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
+						$solution_id = $solution_result['tid'];
+					}
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($partners_result) && isset($partners_result->tid)){
-          $partners[] = $partners_result->tid;
-        }
-        elseif (is_array($partners_result) && isset($partners_result['tid'])){
-          $partners[] = $partners_result['tid'];
-        }
-      }
-      $row->setSourceProperty('partners', $partners);
-    }
+					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
+							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('solutions', $solutions);
+			}
+		}
 
-    //AREAS
-    $areas_query = $this->select('field_data_field_taxo_area', 'ta');
-    $areas_query->join('taxonomy_term_data', 't', 't.tid = ta.field_taxo_area_tid');
-    $areas_query->fields('t', ['tid'])
-      ->condition('ta.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('ta.bundle', 'content_magazine_article', '=');
-    $areas_results = $areas_query->execute()->fetchAll();
-    if (is_array($areas_results)){
-      $areas = array();
-      foreach ($areas_results AS $areas_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($areas_result) && isset($areas_result->tid)){
-          $areas[] = $areas_result->tid;
-        }
-        elseif (is_array($areas_result) && isset($areas_result['tid'])){
-          $areas[] = $areas_result['tid'];
-        }
-      }
-      $row->setSourceProperty('areas', $areas);
-    }
-
-    //CUSTOMER STORIES
-    $customer_query = $this->select('field_data_field_taxo_customer_stories', 'tcs');
-    $customer_query->join('taxonomy_term_data', 't', 't.tid = tcs.field_taxo_customer_stories_tid');
-    $customer_query->fields('t', ['tid'])
-      ->condition('tcs.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tcs.bundle', 'content_magazine_article', '=');
-    $customer_results = $customer_query->execute()->fetchAll();
-    if (is_array($customer_results)){
-      $customers = array();
-      foreach ($customer_results AS $customer_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($customer_result) && isset($customer_result->tid)){
-          $customers[] = $customer_result->tid;
-        }
-        elseif (is_array($customer_result) && isset($customer_result['tid'])){
-          $customers[] = $customer_result['tid'];
-        }
-      }
-      $row->setSourceProperty('customer_stories', $customers);
-    }
+    // récupération du tag "area"
+		$regions = array();
+		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
+		if(count($correspondance_taxo_region) > 0) {
+			$area_query = $this->select('field_data_field_taxo_area', 'a');
+			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
+			$area_query->fields('t', ['tid'])
+				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('a.bundle', 'content_magazine_article', '=');
+			$area_results = $area_query->execute()->fetchAll();
+			if (is_array($area_results)){
+				$regions = array();
+				foreach ($area_results AS $area_result){
+					$region_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($area_result) && isset($area_result->tid)){
+						$region_id = $area_result->tid;
+					}
+					elseif (is_array($area_result) && isset($area_result['tid'])){
+						$region_id = $area_result['tid'];
+					}
+					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
+							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('regions', $regions);
+			}
+		}
 
     // récupération des images
     $images_query = $this->select('field_data_field_image', 'fi');
@@ -327,6 +287,7 @@ class MagazineArticleNode extends SqlBase {
     }
 
     // récupération du workflow
+		/*
     $workflow_query = $this->select('workflow_node', 'w');
     $workflow_query->fields('w', ['sid'])
       ->condition('w.nid', $row->getSourceProperty('nid'), '=');
@@ -378,7 +339,7 @@ class MagazineArticleNode extends SqlBase {
         $row->setSourceProperty('workflow_transition_comment', $scheduled_comment);
       }
     }
-
+*/
     // path
     $url_source = 'node/' . $row->getSourceProperty('nid');
     $path_query = $this->select('url_alias', 'ua')

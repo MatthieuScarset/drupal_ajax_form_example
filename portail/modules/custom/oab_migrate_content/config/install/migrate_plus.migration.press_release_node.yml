@@ -27,30 +27,10 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_industry:
-    plugin: migration
-    migration: press_release_term
-    source: industries
-  field_solution:
-    plugin: migration
-    migration: press_release_term
-    source: solutions
-  field_partner:
-    plugin: migration
-    migration: press_release_term
-    source: partners
-  field_area:
-    plugin: migration
-    migration: press_release_term
-    source: areas
-  field_customer_story:
-    plugin: migration
-    migration: press_release_term
-    source: customer_stories
-  field_subhomes:
-    plugin: migration
-    migration: blogpost_term
-    source: subhomes
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhomes: subhomes
   field_file:
     plugin: migration
     migration: press_release_media
@@ -62,5 +42,4 @@ process:
 migration_dependencies:  
   required:
     - press_release_media
-    - press_release_term
  

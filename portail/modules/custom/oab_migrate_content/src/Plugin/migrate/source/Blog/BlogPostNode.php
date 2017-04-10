@@ -36,9 +36,9 @@ class BlogPostNode extends SqlBase {
      */
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid'])
+			->condition('n.nid', array(11430, 11429, 1449), 'IN')
     ->condition('n.type', 'blog_post', '=');
     //->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    //->condition('n.nid', array(11430, 11429), 'IN');
     return $query;
   }
 
@@ -86,6 +86,7 @@ class BlogPostNode extends SqlBase {
     //Taxonomie de la Section
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('subhomes', 0, NULL, TRUE);
     $subhomes = array();
+    /*
     foreach ($terms AS $key => $term){
       $machine_name = $term->get('field_machine_name')->value;
       $langCode = $term->get('langcode')->value;
@@ -93,7 +94,118 @@ class BlogPostNode extends SqlBase {
         $sections[] = $term->get('tid')->value;
       }
     }
+    */
     $row->setSourceProperty('subhomes', $subhomes);
+
+		// taxonomie solution
+		//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** Migration du Node ".$row->getSourceProperty('nid')." (nid D7) --- ");
+		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
+		if(count($correspondance_taxo_solution) > 0) {
+			//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** State correspondance taxo solutions récupérée");
+			$solutions = array();
+			$solution_query = $this->select('field_data_field_taxo_solution', 's');
+			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
+			$solution_query->fields('t', ['tid'])
+				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('s.bundle', 'blog_post', '=');
+
+			$solution_results = $solution_query->execute()->fetchAll();
+			//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** récupération solutions D7");
+
+			if (is_array($solution_results)) {
+				foreach ($solution_results AS $solution_result) {
+					$solution_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($solution_result) && isset($solution_result->tid)) {
+						$solution_id = $solution_result->tid;
+					}
+					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
+						$solution_id = $solution_result['tid'];
+					}
+
+					//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** solution ID D7 : ".$solution_id);
+					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
+						//prendre le tid D8
+						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
+							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
+						}
+						//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** solution ID D8 : ".$correspondance_taxo_solution[$solution_id]['tid_D8']);
+					}
+				}
+				//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** SOLUTIONS [] : ".serialize($solutions));
+
+				$row->setSourceProperty('solutions', $solutions);
+			}
+		}
+
+		// taxonomie industrie
+		$industries = array();
+		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
+		if(count($correspondance_taxo_industry) > 0) {
+
+			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
+			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
+			$industrie_query->fields('t', ['tid'])
+				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('i.bundle', 'blog_post', '=');
+
+			$industrie_results = $industrie_query->execute()->fetchAll();
+
+			if (is_array($industrie_results)){
+				$industries = array();
+				foreach ($industrie_results AS $industrie_result){
+					$industry_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($industrie_result) && isset($industrie_result->tid)){
+						$industry_id = $industrie_result->tid;
+					}
+					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
+						$industry_id = $industrie_result['tid'];
+					}
+					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
+						//prendre le tid D8
+						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
+							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('industries', $industries);
+			}
+		}
+
+		// taxonomie region
+		$regions = array();
+		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
+		if(count($correspondance_taxo_region) > 0) {
+			$area_query = $this->select('field_data_field_taxo_area', 'a');
+			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
+			$area_query->fields('t', ['tid'])
+				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('a.bundle', 'blog_post', '=');
+			$area_results = $area_query->execute()->fetchAll();
+			if (is_array($area_results)){
+				$regions = array();
+				foreach ($area_results AS $area_result){
+					$region_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($area_result) && isset($area_result->tid)){
+						$region_id = $area_result->tid;
+					}
+					elseif (is_array($area_result) && isset($area_result['tid'])){
+						$region_id = $area_result['tid'];
+					}
+					//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** region ID D7 : ".$region_id);
+					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
+						//prendre le tid D8
+						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
+							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
+							//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** REGION ID D8 : ".$correspondance_taxo_region[$region_id]['tid_D8']);
+						}
+					}
+				}
+				$row->setSourceProperty('regions', $regions);
+			}
+		}
 
     // récupération du body
     $body_query = $this->select('field_data_body', 'b');
@@ -122,152 +234,6 @@ class BlogPostNode extends SqlBase {
           $row->setSourceProperty('content_field', $body_value);
         }
       }
-    }
-
-    // récupération des tags
-
-    //TAG category
-    $categories_query = $this->select('field_data_field_taxo_blog', 'tb');
-    $field1_alias = $categories_query->addField('tb', 'field_taxo_blog_tid', 'tid');
-    $field2_alias = $categories_query->addField('tb', 'delta');
-    //->fields('tb', ['field_taxo_blog_tid'])
-    $categories_query->condition('tb.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tb.bundle', 'blog_post', '=')
-      ->orderBy('tb.delta', 'ASC');
-
-
-    $categories_results = $categories_query->execute()->fetchAll();
-
-    if (is_array($categories_results)){
-      $categories = array();
-      foreach ($categories_results AS $categories_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($categories_result) && isset($categories_result->tid)){
-          $categories[] = $categories_result->tid;
-        }
-        elseif (is_array($categories_result) && isset($categories_result['tid'])){
-          $categories[] = $categories_result['tid'];
-        }
-      }
-      $row->setSourceProperty('categories', $categories);
-    }
-
-    //TAG industry
-    $industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
-    $industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
-    $industrie_query->fields('t', ['tid'])
-      ->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('i.bundle', 'blog_post', '=');
-
-    $industrie_results = $industrie_query->execute()->fetchAll();
-
-    if (is_array($industrie_results)){
-      $industries = array();
-      foreach ($industrie_results AS $industrie_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($industrie_result) && isset($industrie_result->tid)){
-          $industries[] = $industrie_result->tid;
-        }
-        elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
-          $industries[] = $industrie_result['tid'];
-        }
-      }
-      $row->setSourceProperty('industries', $industries);
-    }
-
-    //TAG Solutions
-    $solution_query = $this->select('field_data_field_taxo_solution', 's');
-    $solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
-    $solution_query->fields('t', ['tid'])
-      ->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('s.bundle', 'blog_post', '=');
-
-    $solution_results = $solution_query->execute()->fetchAll();
-
-    if (is_array($solution_results)){
-      $solutions = array();
-      foreach ($solution_results AS $solution_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($solution_result) && isset($solution_result->tid)){
-          $solutions[] = $solution_result->tid;
-        }
-        elseif (is_array($solution_result) && isset($solution_result['tid'])){
-          $solutions[] = $solution_result['tid'];
-        }
-      }
-      $row->setSourceProperty('solutions', $solutions);
-    }
-
-    //tag "partner"
-    $partner_query = $this->select('field_data_field_taxo_partner', 'p');
-    $partner_query->join('taxonomy_term_data', 't', 't.tid = p.field_taxo_partner_tid');
-    $partner_query->fields('t', ['tid'])
-      ->condition('p.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('p.bundle', 'blog_post', '=');
-
-    $partner_results = $partner_query->execute()->fetchAll();
-
-    if (is_array($partner_results)){
-      $partners = array();
-      foreach ($partner_results AS $partner_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($partner_result) && isset($partner_result->tid)){
-          $partners[] = $partner_result->tid;
-        }
-        elseif (is_array($partner_result) && isset($partner_result['tid'])){
-          $partners[] = $partner_result['tid'];
-        }
-      }
-      $row->setSourceProperty('partners', $partners);
-    }
-
-
-    // TAG "area"
-    $area_query = $this->select('field_data_field_taxo_area', 'a');
-    $area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
-    $area_query->fields('t', ['tid'])
-      ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('a.bundle', 'blog_post', '=');
-    $area_results = $area_query->execute()->fetchAll();
-    if (is_array($area_results)){
-      $areas = array();
-      foreach ($area_results AS $area_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($area_result) && isset($area_result->tid)){
-          $areas[] = $area_result->tid;
-        }
-        elseif (is_array($area_result) && isset($area_result['tid'])){
-          $areas[] = $area_result['tid'];
-        }
-      }
-      $row->setSourceProperty('areas', $areas);
-    }
-
-    // tag "case studies"
-    $customer_stories_query = $this->select('field_data_field_taxo_customer_stories', 'cs');
-    $customer_stories_query->join('taxonomy_term_data', 't', 't.tid = cs.field_taxo_customer_stories_tid');
-    $customer_stories_query->fields('t', ['tid'])
-      ->condition('cs.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('cs.bundle', 'blog_post', '=');
-    $customer_stories_results = $customer_stories_query->execute()->fetchAll();
-    if (is_array($customer_stories_results)){
-      $customers = array();
-      foreach ($customer_stories_results AS $customer_stories_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($customer_stories_result) && isset($customer_stories_result->tid)){
-          $customer_stories_name = $customer_stories_result->tid;
-        }
-        elseif (is_array($customer_stories_result) && isset($customer_stories_result['tid'])){
-          $customer_stories_name = $customer_stories_result['tid'];
-        }
-      }
-      $row->setSourceProperty('customer_stories', $customers);
     }
 
 

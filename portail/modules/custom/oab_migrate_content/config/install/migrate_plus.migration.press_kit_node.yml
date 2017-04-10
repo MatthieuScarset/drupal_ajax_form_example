@@ -26,30 +26,10 @@ process:
   field_content_field/zone:
     plugin: default_value
     default_value: default
-  field_solution:
-    plugin: migration
-    migration: dossier_presse_term
-    source: solutions
-  field_industry:
-    plugin: migration
-    migration: dossier_presse_term
-    source: industries
-  field_partner:
-    plugin: migration
-    migration: dossier_presse_term
-    source: partners
-  field_area:
-    plugin: migration
-    migration: dossier_presse_term
-    source: areas
-  field_customer_story:
-    plugin: migration
-    migration: dossier_presse_term
-    source: customer_stories
-  field_subhomes:
-    plugin: migration
-    migration: blogpost_term
-    source: subhomes
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhomes: subhomes
   field_file:
     plugin: migration
     migration: dossier_presse_media
@@ -59,5 +39,4 @@ destination:
   plugin: 'entity:node'
 migration_dependencies:  
   required:
-    - dossier_presse_term
     - dossier_presse_media

@@ -15,13 +15,7 @@ use Drupal\migrate\Row;
  */
 class DocumentTerm extends SqlBase {
 
-  private $correspondanceTaxo = array(9 => "document_types",
-      22 => "topic",
-      10 => "industries",
-      13 => "solutions",
-      16 => "partners",
-      7 => "areas",
-      17 => "customer_stories");
+  private $correspondanceTaxo = array(9 => "document_types");
 
 
   /**
@@ -43,7 +37,7 @@ class DocumentTerm extends SqlBase {
     $query->join('taxonomy_term_hierarchy', 'th', 'th.tid = t.tid');
     $query->fields('t', ['tid', 'vid', 'name', 'language', 'weight'])
     ->fields('th', ['parent'])
-    ->condition('t.vid', array(9, 22, 10, 13, 16, 7, 17), 'IN') // taxo document
+    ->condition('t.vid', 9, '=') // taxo document
     ->orderBy('th.parent', 'ASC');
     return $query;
   }
@@ -80,12 +74,13 @@ class DocumentTerm extends SqlBase {
    */
   public function prepareRow(Row $row) {
     // Find parents for this row.
+		/*
     $parents = $this->select('taxonomy_term_hierarchy', 'th')
     ->fields('th', array('parent'))
     ->condition('th.tid', $row->getSourceProperty('tid'))
     ->execute()
-    ->fetchCol();
-    $row->setSourceProperty('parent', $parents);
+    ->fetchCol();*/
+    $row->setSourceProperty('parent', 0);
 
     $old_vid = $row->getSourceProperty('vid');
     $row->setSourceProperty('vid', $this->correspondanceTaxo[$old_vid]);
@@ -94,7 +89,6 @@ class DocumentTerm extends SqlBase {
     $migrate_groups = \Drupal\migrate_plus\Entity\MigrationGroup::loadMultiple();
     foreach ($migrate_groups AS $migrate_group){
       $migration_term_name = 'migrate_map_' . $migrate_group->get('id') . '_term';
-      //\Drupal::logger('oab_migrate_content')->notice('migrate table : ' . $migration_term_name);
 
       if (Database::getConnection()->schema()->tableExists($migration_term_name)){
         //\Drupal::logger('oab_migrate_content')->notice('table found');

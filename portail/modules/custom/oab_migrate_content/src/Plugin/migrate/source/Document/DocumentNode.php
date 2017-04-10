@@ -83,6 +83,7 @@ class DocumentNode extends SqlBase {
     \Drupal::getContainer()->set('current_user', $admin_user);
 
     //Taxonomie de la Section
+		/*
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('subhomes', 0, NULL, TRUE);
     $subhomes = array();
     foreach ($terms AS $key => $term){
@@ -93,6 +94,7 @@ class DocumentNode extends SqlBase {
       }
     }
     $row->setSourceProperty('subhomes', $subhomes);
+		*/
 
     // récupération du body
     $body_query = $this->select('field_data_body', 'b');
@@ -189,137 +191,105 @@ class DocumentNode extends SqlBase {
       $row->setSourceProperty('document_types', $document_types);
     }
 
-    // récupération du tag "industries"
-    $industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
-    $industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
-    $industrie_query->fields('t', ['tid'])
-      ->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('i.bundle', 'content_document_type', '=');
-    $industrie_results = $industrie_query->execute()->fetchAll();
-    if (is_array($industrie_results)){
-      $industries = array();
-      foreach ($industrie_results AS $industrie_result){
+		// récupération du tag "industries"
+		$industries = array();
+		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
+		if(count($correspondance_taxo_industry) > 0) {
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($industrie_result) && isset($industrie_result->tid)){
-          $industries[] = $industrie_result->tid;
-        }
-        elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
-          $industries[] = $industrie_result['tid'];
-        }
-      }
-      $row->setSourceProperty('industries', $industries);
-    }
+			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
+			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
+			$industrie_query->fields('t', ['tid'])
+				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('i.bundle', 'content_document_type', '=');
 
-    // récupération du tag "solution"
-    $solution_query = $this->select('field_data_field_taxo_solution', 's');
-    $solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
-    $solution_query->fields('t', ['tid'])
-      ->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('s.bundle', 'content_document_type', '=');
-    $solution_results = $solution_query->execute()->fetchAll();
-    if (is_array($solution_results)){
-      $solutions = array();
-      foreach ($solution_results AS $solution_result){
+			$industrie_results = $industrie_query->execute()->fetchAll();
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($solution_result) && isset($solution_result->tid)){
-          $solutions[] = $solution_result->tid;
-        }
-        elseif (is_array($solution_result) && isset($solution_result['tid'])){
-          $solutions[] = $solution_result['tid'];
-        }
-      }
-      $row->setSourceProperty('solutions', $solutions);
-    }
+			if (is_array($industrie_results)){
+				$industries = array();
+				foreach ($industrie_results AS $industrie_result){
+					$industry_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($industrie_result) && isset($industrie_result->tid)){
+						$industry_id = $industrie_result->tid;
+					}
+					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
+						$industry_id = $industrie_result['tid'];
+					}
+					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
+						//prendre le tid D8
+						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
+							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('industries', $industries);
+			}
+		}
 
-    // récupération du tag "partner"
-    $partner_query = $this->select('field_data_field_taxo_partner', 'p');
-    $partner_query->join('taxonomy_term_data', 't', 't.tid = p.field_taxo_partner_tid');
-    $partner_query->fields('t', ['tid'])
-      ->condition('p.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('p.bundle', 'content_document_type', '=');
-    $partner_results = $partner_query->execute()->fetchAll();
-    if (is_array($partner_results)){
-      $partners = array();
-      foreach ($partner_results AS $partner_result){
+		// récupération du tag "solution"
+		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
+		if(count($correspondance_taxo_solution) > 0) {
+			$solutions = array();
+			$solution_query = $this->select('field_data_field_taxo_solution', 's');
+			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
+			$solution_query->fields('t', ['tid'])
+				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('s.bundle', 'content_document_type', '=');
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($partner_result) && isset($partner_result->tid)){
-          $partners[] = $partner_result->tid;
-        }
-        elseif (is_array($partner_result) && isset($partner_result['tid'])){
-          $partners[] = $partner_result['tid'];
-        }
-      }
-      $row->setSourceProperty('partners', $partners);
-    }
+			$solution_results = $solution_query->execute()->fetchAll();
 
-    // récupération du tag "area"
-    $area_query = $this->select('field_data_field_taxo_area', 'a');
-    $area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
-    $area_query->fields('t', ['tid'])
-      ->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('a.bundle', 'content_document_type', '=');
-    $area_results = $area_query->execute()->fetchAll();
-    if (is_array($area_results)){
-      $areas = array();
-      foreach ($area_results AS $area_result){
+			if (is_array($solution_results)) {
+				foreach ($solution_results AS $solution_result) {
+					$solution_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($solution_result) && isset($solution_result->tid)) {
+						$solution_id = $solution_result->tid;
+					}
+					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
+						$solution_id = $solution_result['tid'];
+					}
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($area_result) && isset($area_result->tid)){
-          $areas[] = $area_result->tid;
-        }
-        elseif (is_array($area_result) && isset($area_result['tid'])){
-          $areas[] = $area_result['tid'];
-        }
-      }
-      $row->setSourceProperty('areas', $areas);
-    }
+					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
+							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('solutions', $solutions);
+			}
+		}
 
-    // récupération du tag "case studies"
-    $customer_stories_query = $this->select('field_data_field_taxo_customer_stories', 'cs');
-    $customer_stories_query->join('taxonomy_term_data', 't', 't.tid = cs.field_taxo_customer_stories_tid');
-    $customer_stories_query->fields('t', ['name'])
-      ->condition('cs.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('cs.bundle', 'content_document_type', '=');
-    $customer_stories_results = $customer_stories_query->execute()->fetchAll();
-    if (is_array($customer_stories_results)){
-      $customers = array();
-      foreach ($customer_stories_results AS $customer_stories_result){
+		// récupération du tag "area"
+		$regions = array();
+		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
+		if(count($correspondance_taxo_region) > 0) {
+			$area_query = $this->select('field_data_field_taxo_area', 'a');
+			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
+			$area_query->fields('t', ['tid'])
+				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
+				->condition('a.bundle', 'content_document_type', '=');
+			$area_results = $area_query->execute()->fetchAll();
+			if (is_array($area_results)){
+				$regions = array();
+				foreach ($area_results AS $area_result){
+					$region_id = '';
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($area_result) && isset($area_result->tid)){
+						$region_id = $area_result->tid;
+					}
+					elseif (is_array($area_result) && isset($area_result['tid'])){
+						$region_id = $area_result['tid'];
+					}
+					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
+							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
+						}
+					}
+				}
+				$row->setSourceProperty('regions', $regions);
+			}
+		}
 
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($customer_stories_result) && isset($customer_stories_result->tid)){
-          $customers[] = $customer_stories_result->tid;
-        }
-        elseif (is_array($customer_stories_result) && isset($customer_stories_result['tid'])){
-          $customers[] = $customer_stories_result['tid'];
-        }
-      }
-      $row->setSourceProperty('customer_stories', $customers);
-    }
-
-    // récupération du tag "topic"
-    $topic_query = $this->select('field_data_field_taxo_topic', 'tao');
-    $topic_query->join('taxonomy_term_data', 't', 't.tid = tao.field_taxo_topic_tid');
-    $topic_query->fields('t', ['tid'])
-      ->condition('tao.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tao.bundle', 'content_document_type', '=');
-    $topic_results = $topic_query->execute()->fetchAll();
-    if (is_array($topic_results)){
-      $topics = array();
-      foreach ($topic_results AS $topic_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($topic_result) && isset($topic_result->tid)){
-          $topics[] = $topic_result->tid;
-        }
-        elseif (is_array($topic_result) && isset($topic_result['tid'])){
-          $topics[] = $topic_result['tid'];
-        }
-      }
-      $row->setSourceProperty('topics', $topics);
-    }
 
     // récupération des fichiers PDF
     $files_query = $this->select('field_data_field_file_upl', 'fi');

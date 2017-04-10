@@ -158,3 +158,11 @@ function oab_stephanie_update_8020() {
 function oab_stephanie_update_8021() {
 	include_once("updates/update_8021.inc");
 }
+
+
+/**
+ * Traduction du vocabulaire Region
+ */
+function oab_stephanie_update_8022() {
+	include_once("updates/update_8022.inc");
+}

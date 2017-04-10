@@ -14,10 +14,7 @@ process:
   vid: vid
   langcode: language
   name: name
-  parent:
-    plugin: migration
-    migration: document_term
-    source: parent
+  parent: parent
   weight: weight
 destination:
   plugin: 'entity:taxonomy_term'

@@ -26,30 +26,10 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_solution:
-    plugin: migration
-    migration: blogpost_term
-    source: solutions
-  field_industry:
-    plugin: migration
-    migration: blogpost_term
-    source: industries
-  field_partner:
-    plugin: migration
-    migration: blogpost_term
-    source: partners
-  field_area:
-    plugin: migration
-    migration: blogpost_term
-    source: areas
-  field_customer_story:
-    plugin: migration
-    migration: blogpost_term
-    source: customer_stories
-  field_subhomes:
-    plugin: migration
-    migration: blogpost_term
-    source: subhomes
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhomes: subhomes
   field_image:
     plugin: migration
     migration: blogpost_media
@@ -61,7 +41,6 @@ destination:
 template: null
 migration_dependencies:
   required:
-    - blogpost_term
     - blogpost_image
     - blogpost_media
     - blogpost_profile
