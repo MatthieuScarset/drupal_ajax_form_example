@@ -62,3 +62,8 @@
     line-height: 3.4rem;
     padding-bottom:0;
 }
+@media (max-width: 767px) {
+    .page-header {
+        font-size: 3.4rem;
+    }
+}

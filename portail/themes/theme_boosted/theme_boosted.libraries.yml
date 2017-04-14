@@ -33,6 +33,7 @@ global-styling:
     js/social_bar/orange_socialbar.js: {}
     js/jquery.touchSwipe.min.js: {}
     js/slick.min.js: {}
+    js/scripts.js: {}
 
   dependencies:
     - core/jquery

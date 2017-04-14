@@ -166,8 +166,8 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
           $new_select_options_flatten = array();
           foreach($new_select_options AS $key => $value){
             if (is_array($value)){
-              foreach($value AS $term){
-                $new_select_options_flatten[] = $term;
+              foreach($value AS $tid => $term){
+                $new_select_options_flatten[$tid] = $term;
               }
             }
           }
