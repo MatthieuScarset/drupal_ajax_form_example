@@ -37,7 +37,7 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid'])
     ->condition('n.type', 'blog_post', '=');
-    //->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+//		$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     return $query;
   }
 
@@ -82,19 +82,28 @@ class BlogPostNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
-    //Taxonomie de la Section
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('subhomes', 0, NULL, TRUE);
-    $subhomes = array();
-    /*
-    foreach ($terms AS $key => $term){
-      $machine_name = $term->get('field_machine_name')->value;
-      $langCode = $term->get('langcode')->value;
-      if ($machine_name == 'realtimes' && $langCode == $row->getSourceProperty('language')){
-        $sections[] = $term->get('tid')->value;
-      }
-    }
-    */
-    $row->setSourceProperty('subhomes', $subhomes);
+		//Taxonomie de la Subhome
+		$entity = "";
+		if($row->getSourceProperty('language') == 'fr')
+		{
+			$query = \Drupal::entityQuery('taxonomy_term');
+			$query->condition('vid', 'subhomes');
+			$query->condition('langcode', $row->getSourceProperty('language') );
+			$query->condition('name', 'Blogs');
+			$entity = $query->execute();
+		}
+		elseif ($row->getSourceProperty('language') == 'en')
+		{
+			$query = \Drupal::entityQuery('taxonomy_term');
+			$query->condition('vid', 'subhomes');
+			$query->condition('langcode', $row->getSourceProperty('language') );
+			$query->condition('name', 'Blogs');
+			$entity = $query->execute();
+		}
+		if(isset($entity) && !empty($entity) && count($entity)>0)
+		{
+			$row->setSourceProperty('subhomes', array_pop(array_values($entity)));
+		}
 
 		// taxonomie solution
 		//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** Migration du Node ".$row->getSourceProperty('nid')." (nid D7) --- ");

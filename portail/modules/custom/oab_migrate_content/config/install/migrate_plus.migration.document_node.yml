@@ -34,7 +34,7 @@ process:
   field_solution: solutions
   field_industry: industries
   field_region: regions
-  field_subhomes: subhomes
+  field_subhome: subhomes
   field_file:
     plugin: migration
     migration: document_media_file

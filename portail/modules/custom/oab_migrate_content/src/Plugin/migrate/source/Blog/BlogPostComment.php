@@ -41,7 +41,7 @@ class BlogPostComment extends SqlBase {
     $query->distinct(TRUE);
 		//$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
     //$query->condition('n.type', 'blog_post');
-   // ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+		//$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     $query->condition('c.status', 1, '=');
     $query->orderBy('c.changed', 'ASC');
 

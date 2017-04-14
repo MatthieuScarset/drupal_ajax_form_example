@@ -29,7 +29,7 @@ process:
   field_solution: solutions
   field_industry: industries
   field_region: regions
-  field_subhomes: subhomes
+  field_subhome: subhomes
   field_image:
     plugin: migration
     migration: blogpost_media

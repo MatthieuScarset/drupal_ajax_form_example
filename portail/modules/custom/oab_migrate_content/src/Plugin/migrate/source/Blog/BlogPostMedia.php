@@ -41,7 +41,7 @@ class BlogPostMedia extends SqlBase {
     //$query->condition('f.fid', 1757)
 		//$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
     $query->condition('n.type', 'blog_post');
-    //->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+	//	$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     //->orderBy('m.fid', 'ASC');
     //->range(0, 1);
 
