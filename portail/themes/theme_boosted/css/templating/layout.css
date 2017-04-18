@@ -453,6 +453,16 @@ body {
 body > .main-container{
     margin-bottom: 3rem;
 }
+
+@media (max-width: 767px) {
+    body > .main-container{
+        /*max-width: 100%;*/
+        padding: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
 body.cke_editable.cke_editable_themed {
     vertical-align: top !important;
     font-size: 1.6rem;
@@ -470,6 +480,18 @@ aside.right-column > .region{
      background-color: white;
     padding-right: 3rem;
     padding-left: 3rem;
+}
+@media (max-width: 767px) {
+    /*section.left-column,
+    aside.right-column{
+        padding: 0;
+    }*/
+
+    section.left-column > .region,
+    aside.right-column > .region{
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
 }
 
 .row.nomargin {
@@ -720,4 +742,8 @@ aside.right-column > .region{
 
 .subhome-image{
     height: 125px;
+}
+
+.slick-dots{
+    width: 90%;
 }

@@ -594,6 +594,12 @@ p.contenu {
 .module_key_figures_3{
     display: flex;
 }
+@media (max-width: 767px) {
+    .module_key_figures_2,
+    .module_key_figures_3 {
+        display: block;
+    }
+}
 .module_key_figures_1,
 .module_key_figures_2 .bg,
 .module_key_figures_3 .bg {
