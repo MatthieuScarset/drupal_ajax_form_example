@@ -124,9 +124,9 @@ article .content .field--type-text-long ul li:before{
     color: grey;
 }
 
-a {
+.content a {
     text-decoration: underline !important;
 }
-a:hover {
+.content a:hover {
     color: #F16e00;
 }
