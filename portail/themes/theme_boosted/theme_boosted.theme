@@ -207,12 +207,4 @@ function get_image_uri($entity, $fieldName){
 }
 
 
-
-function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
-    if (isset($build['#attributes']['data-align']) && $build['#attributes']['data-align'] == 'center') {
-        $build['#attributes']['class'][] = 'text-align-center';
-    }
-}
-
-
 ?>
