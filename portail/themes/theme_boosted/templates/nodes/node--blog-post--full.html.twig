@@ -111,8 +111,8 @@ view_mode ? view_mode|clean_class,
         {% if content.field_profile[0]['#node'].id() %}
             <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }} </a>
 
-        {% if content.field_blog %}
-        {% trans %} dans{% endtrans %} {{ content.field_blog }}
+        {% if content.field_solution %}
+        {% trans %} dans{% endtrans %} {{ content.field_solution }}
         {% endif %}
 
         {% endif %}
