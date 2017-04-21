@@ -12,9 +12,6 @@ source:
 destination:
   plugin: 'entity:node'
 process:
-  status:
-    plugin: default_value
-    default_value: 1
   type:
     plugin: default_value
     default_value: document
@@ -46,6 +43,8 @@ process:
   path: path  
   field_subtitle: subtitle
   field_short_description: short_description
+  moderation_state: moderation_state
+  status: status
 migration_dependencies:  
   required:
     - document_media_file

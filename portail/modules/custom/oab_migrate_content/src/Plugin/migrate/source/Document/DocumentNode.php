@@ -31,7 +31,7 @@ class DocumentNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-    ->fields('n', ['nid', 'title', 'language', 'created', 'changed'])
+    ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
     ->condition('n.type', 'content_document_type', '=');
     //->range(0, 10);
 
@@ -57,6 +57,7 @@ class DocumentNode extends SqlBase {
       'file' => $this->t('file'),
       'short_description' => $this->t('short_description'),
       'subtitle' => $this->t('subtitle'),
+			'status' => $this->t('status'),
     ];
 
     return $fields;
@@ -352,7 +353,6 @@ class DocumentNode extends SqlBase {
       $row->setSourceProperty('images', $images);
     }
 
-    /*
     // récupération du workflow
     $workflow_query = $this->select('workflow_node', 'w');
     $workflow_query->fields('w', ['sid'])
@@ -372,41 +372,9 @@ class DocumentNode extends SqlBase {
         }
 
         $workflow_new_state = oab_migrate_workflow_sid_correspondance((int)$sid);
-        $row->setSourceProperty('workflow', $workflow_new_state);
+        $row->setSourceProperty('moderation_state', $workflow_new_state);
       }
     }
-
-    $workflow_scheduled_query = $this->select('workflow_scheduled_transition', 'wst');
-    $workflow_scheduled_query->fields('wst', ['sid', 'scheduled', 'comment'])
-      ->condition('wst.nid', $row->getSourceProperty('nid'))
-      ->condition('wst.entity_type', 'node');
-
-    $workflow_scheduled_results = $workflow_scheduled_query->execute()->fetchAll();
-
-    if (is_array($workflow_scheduled_results)) {
-      foreach ($workflow_scheduled_results AS $workflow_scheduled_result) {
-        $scheduled_sid = '';
-        $scheduled_timestamp = '';
-        $scheduled_comment = '';
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($workflow_scheduled_result) && isset($workflow_scheduled_result->sid) && isset($workflow_scheduled_result->scheduled)) {
-          $scheduled_sid = $workflow_scheduled_result->sid;
-          $scheduled_timestamp = $workflow_scheduled_result->scheduled;
-          $scheduled_comment = isset($workflow_scheduled_result->comment) ? isset($workflow_scheduled_result->comment) : '';
-        }
-        elseif (is_array($workflow_scheduled_result) && isset($workflow_scheduled_result['sid']) && isset($workflow_scheduled_result['scheduled'])) {
-          $scheduled_sid = $workflow_scheduled_result['sid'];
-          $scheduled_timestamp = $workflow_scheduled_result['scheduled'];
-          $scheduled_comment = isset($workflow_scheduled_result['comment']) ? isset($workflow_scheduled_result['comment']) : '';
-        }
-
-        $row->setSourceProperty('workflow_transition_state', oab_migrate_workflow_sid_correspondance($scheduled_sid));
-        $row->setSourceProperty('workflow_transition_time', $scheduled_timestamp);
-        $row->setSourceProperty('workflow_transition_comment', $scheduled_comment);
-      }
-    }
-    */
-
     // path
     $url_source = 'node/' . $row->getSourceProperty('nid');
     $path_query = $this->select('url_alias', 'ua')

@@ -12,9 +12,6 @@ source:
 destination:
   plugin: entity:node
 process:
-  status:
-    plugin: default_value
-    default_value: 1
   type:
     plugin: default_value
     default_value: press_release
@@ -39,6 +36,8 @@ process:
   path: path  
   field_country: country
   field_city: city
+  moderation_state: moderation_state
+  status: status
 migration_dependencies:  
   required:
     - press_release_media
