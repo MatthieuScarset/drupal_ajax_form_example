@@ -8,9 +8,6 @@ label: 'Dossier presse nodes'
 source:
   plugin: dossier_presse_node
 process:
-  status:
-    plugin: default_value
-    default_value: 1
   type:
     plugin: default_value
     default_value: press_kit
@@ -23,9 +20,6 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_content_field/zone:
-    plugin: default_value
-    default_value: default
   field_solution: solutions
   field_industry: industries
   field_region: regions
@@ -35,6 +29,8 @@ process:
     migration: dossier_presse_media
     source: files
   path: path
+  moderation_state: moderation_state
+  status: status
 destination:
   plugin: 'entity:node'
 migration_dependencies:  

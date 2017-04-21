@@ -166,3 +166,19 @@ function oab_stephanie_update_8021() {
 function oab_stephanie_update_8022() {
 	include_once("updates/update_8022.inc");
 }
+
+
+/**
+ * Activation de Workbench moderation sur les press releases
+ */
+function oab_stephanie_update_8023() {
+	include_once("updates/update_8023.inc");
+}
+
+
+/**
+ * Changement d'une industrie FR Secteur public => Gouvernement
+ */
+function oab_stephanie_update_8024() {
+	include_once("updates/update_8024.inc");
+}

@@ -17,23 +17,23 @@ function oab_migrate_workflow_sid_correspondance($old_sid){
   if (is_int($old_sid)){
     // creation
     if (in_array($old_sid, array(7, 21, 26, 32, 35, 38, 41, 51, 55))){
-      $workflow_state = 'content_workflow_(creation)';
+      $workflow_state = 'draft';
     }
     // draft
     if (in_array($old_sid, array(9, 27, 33, 36, 39, 42, 52, 56))){
-      $workflow_state = 'content_workflow_draft';
+      $workflow_state = 'draft';
     }
-    // request for approval
+    // needs review
     elseif (in_array($old_sid, array(8, 24))){
-      $workflow_state = 'content_workflow_awaiting_publication';
+      $workflow_state = 'needs_review';
     }
     // unpublished
     elseif (in_array($old_sid, array(10, 44, 45, 46, 47, 48, 49, 50, 54, 58))){
-      $workflow_state = 'content_workflow_unpublished';
+      $workflow_state = 'unpublished';
     }
     // published
     elseif (in_array($old_sid, array(11, 25, 28, 34, 37, 40, 43, 53, 57))){
-      $workflow_state = 'content_workflow_published';
+      $workflow_state = 'published';
     }
   }
   return $workflow_state;

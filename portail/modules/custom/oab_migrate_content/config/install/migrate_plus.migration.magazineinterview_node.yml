@@ -8,9 +8,6 @@ label: 'Magazine interviews nodes'
 source:
   plugin: magazineinterview_node
 process:
-  status:
-    plugin: default_value
-    default_value: 1
   type:
     plugin: default_value
     default_value: magazine
@@ -38,6 +35,8 @@ process:
   path: path
   field_subtitle: subtitle
   field_short_description: short_description
+  moderation_state: moderation_state
+  status: status
 destination:
   plugin: 'entity:node'
 migration_dependencies:
