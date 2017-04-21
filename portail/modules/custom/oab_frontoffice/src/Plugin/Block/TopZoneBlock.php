@@ -33,7 +33,9 @@ class TopZoneBlock extends BlockBase {
     $nid = $nid_fld[0]['value'];
     // chargement du noeud et de la valeur top zone
     $node = Node::load($nid);
-    $top_zone = $node->get('field_top_zone')->getValue();
+    if ($node->hasField('field_top_zone')) {
+      $top_zone = $node->get('field_top_zone')->getValue();
+    }
     $block['type'] = 'markup';
     if(isset($top_zone[0]['value'])){
       $block['#markup'] = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);

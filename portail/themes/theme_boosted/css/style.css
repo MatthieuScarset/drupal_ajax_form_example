@@ -123,3 +123,10 @@ article .content .field--type-text-long ul li:before{
 .date-subhome {
     color: grey;
 }
+
+.content a {
+    text-decoration: underline !important;
+}
+.content a:hover {
+    color: #F16e00;
+}
