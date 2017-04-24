@@ -420,3 +420,30 @@ function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
     }
 }
 
+
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function oab_backoffice_views_data_alter(array &$data) {
+
+    $data['node_field_data']['node_month'] = array(
+        'title' => t('Node Month filter'),
+        'filter' => array(
+            'title' => t('Node month filter'),
+            'help' => t('Provides a custom filter for nodes by the month of creation.'),
+            'field' => 'created',
+            'id' => 'node_month'
+        ),
+    );
+    $data['node_field_data']['node_year'] = array(
+        'title' => t('Node Year filter'),
+        'filter' => array(
+            'title' => t('Node year filter'),
+            'help' => t('Provides a custom filter for nodes by the year of creation.'),
+            'field' => 'created',
+            'id' => 'node_year'
+        ),
+    );
+
+}
