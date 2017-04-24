@@ -2,24 +2,24 @@
 
 /**
  * @file
- * Definition of Drupal\oab_backoffice\Plugin\views\filter\NodeYear.
+ * Definition of Drupal\oab_backoffice\Plugin\views\filter\NodeMonth.
  */
 
 namespace Drupal\oab_backoffice\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\filter\NumericFilter;
+use Drupal\views\Plugin\views\filter\Date;
 use Drupal\views\ViewExecutable;
 
 /**
- * Filters by node year.
+ * Filters by node month.
  *
  * @ingroup views_filter_handlers
  *
- * @ViewsFilter("oab_backoffice_node_year")
+ * @ViewsFilter("node_month")
  */
-class NodeYear extends Date {
+class NodeMonth extends Date  {
 
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ class NodeYear extends Date {
      * Add a type selector to the value form
      */
     protected function valueForm(&$form, FormStateInterface $form_state) {
-        // parent::valueForm($form, $form_state);
+       // parent::valueForm($form, $form_state);
         $form['value'] = array(
             '#type' => 'select',
             '#options' => $this->generateOptions()
@@ -47,7 +47,7 @@ class NodeYear extends Date {
      * select any options.
      */
     public function query() {
-        $selected_date = mktime(0,0,0,1,1, $this->value['value']);
+       $selected_date = mktime(0,0,0,$this->value['value'],1);
         $this->query->addWhereExpression(0, "node_field_data.created > $selected_date");
     }
 
@@ -68,12 +68,18 @@ class NodeYear extends Date {
     public function generateOptions() {
         // Array keys are used to compare with the table field values.
         return array(
-            '01' => '2017',
-            '02' => '2016',
-            '03' => '2015',
-            '04' => '2014',
-            '05' => '2013',
-            '06' => '2012'
+            '01' => t('January'),
+            '02' => t('February'),
+            '03' => t('March'),
+            '04' => t('April'),
+            '05' => t('May'),
+            '06' => t('June'),
+            '07' => t('July'),
+            '08' => t('August'),
+            '09' => t('September'),
+            '10' => t('October'),
+            '11' => t('November'),
+            '12' => t('December')
         );
     }
 
