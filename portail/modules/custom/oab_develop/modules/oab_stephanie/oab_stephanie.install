@@ -182,3 +182,11 @@ function oab_stephanie_update_8023() {
 function oab_stephanie_update_8024() {
 	include_once("updates/update_8024.inc");
 }
+
+
+/**
+ * Correction de configuration pour les modes d'affichage des documents
+ */
+function oab_stephanie_update_8025() {
+	include_once("updates/update_8025.inc");
+}
