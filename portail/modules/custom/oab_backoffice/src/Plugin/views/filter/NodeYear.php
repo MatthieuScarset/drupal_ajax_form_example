@@ -9,7 +9,7 @@ namespace Drupal\oab_backoffice\Plugin\views\filter;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
-use Drupal\views\Plugin\views\filter\NumericFilter;
+use Drupal\views\Plugin\views\filter\Date;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -26,7 +26,7 @@ class NodeYear extends Date {
      */
     public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
         parent::init($view, $display, $options);
-        $this->valueTitle = t('Node month');
+        $this->valueTitle = t('Node year');
         $this->definition['options callback'] = array($this, 'generateOptions');
     }
 
@@ -48,7 +48,9 @@ class NodeYear extends Date {
      */
     public function query() {
         $selected_date = mktime(0,0,0,1,1, $this->value['value']);
-        $this->query->addWhereExpression(0, "node_field_data.created > $selected_date");
+        if(!empty($selected_date)) {
+            $this->query->addWhereExpression(0, "node_field_data.created > $selected_date");
+        }
     }
 
     /**

@@ -426,7 +426,14 @@ function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
  * Implements hook_views_data_alter().
  */
 function oab_backoffice_views_data_alter(array &$data) {
-
+    /*$data['node']['node_month'] = array(
+        'title' => t('Node month'),
+        'field' => array(
+            'title' => t('Node month'),
+            'help' => t('Flags a specific node month.'),
+            'id' => 'node_month',
+        ),
+    );*/
     $data['node_field_data']['node_month'] = array(
         'title' => t('Node Month filter'),
         'filter' => array(
