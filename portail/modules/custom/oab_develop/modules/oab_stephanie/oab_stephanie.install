@@ -205,3 +205,18 @@ function oab_stephanie_update_8026() {
 function oab_stephanie_update_8027() {
 	include_once("updates/update_8027.inc");
 }
+
+/**
+ * Création vocabulaire thematic + termes
+ */
+function oab_stephanie_update_8028() {
+	include_once("updates/update_8028.inc");
+}
+
+
+/**
+ * Nouveau Champ thematic pour les contenus Blog post, magazine, page simple, press release, document, press kit, partner, cas client
+ */
+function oab_stephanie_update_8029() {
+	include_once("updates/update_8029.inc");
+}
