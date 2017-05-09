@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Plugin\AccessControlHierarchy\Menu.
- */
-
 namespace Drupal\workbench_access\Plugin\AccessControlHierarchy;
 
 use Drupal\workbench_access\AccessControlHierarchyBase;
@@ -36,19 +31,11 @@ use Drupal\Core\Menu\MenuTreeParameters;
 class Menu extends AccessControlHierarchyBase {
 
   /**
-   * The access tree array.
-   *
-   * @var array
-   */
-  public $tree;
-
-  /**
    * @inheritdoc
    */
   public function getTree() {
     if (!isset($this->tree)) {
-      $config = $this->config('workbench_access.settings');
-      $parents = $config->get('parents');
+      $parents = $this->config->get('parents');
       $tree = array();
       $this->menuTree = \Drupal::getContainer()->get('menu.link_tree');
       foreach ($parents as $id => $label) {
@@ -84,7 +71,7 @@ class Menu extends AccessControlHierarchyBase {
    * @return array $tree
    *   The compiled tree data.
    */
-  public function buildTree($id, $data, &$tree) {
+  protected function buildTree($id, $data, &$tree) {
     foreach ($data as $link_id => $link) {
       $tree[$id][$link_id] = array(
         'id' => $link_id,
@@ -119,9 +106,8 @@ class Menu extends AccessControlHierarchyBase {
   /**
    * {@inheritdoc}
    */
-  public function alterOptions($field, WorkbenchAccessManagerInterface $manager) {
+  public function alterOptions($field, WorkbenchAccessManagerInterface $manager, array $user_sections = []) {
     $element = $field;
-    $user_sections = $manager->getUserSections();
     $menu_check = [];
     foreach ($element['link']['menu_parent']['#options'] as $id => $data) {
       // The menu value here prepends the menu name. Remove that.
@@ -170,13 +156,13 @@ class Menu extends AccessControlHierarchyBase {
   public function getViewsJoin($table, $key, $alias = NULL) {
     if ($table == 'users') {
       $configuration['menu'] = [
-       'table' => 'user__' . WORKBENCH_ACCESS_FIELD,
+       'table' => 'user__' . WorkbenchAccessManagerInterface::FIELD_NAME,
        'field' => 'entity_id',
        'left_table' => $table,
        'left_field' => $key,
        'operator' => '=',
-       'table_alias' => WORKBENCH_ACCESS_FIELD,
-       'real_field' => WORKBENCH_ACCESS_FIELD . '_value',
+       'table_alias' => WorkbenchAccessManagerInterface::FIELD_NAME,
+       'real_field' => WorkbenchAccessManagerInterface::FIELD_NAME . '_value',
       ];
     }
     else {

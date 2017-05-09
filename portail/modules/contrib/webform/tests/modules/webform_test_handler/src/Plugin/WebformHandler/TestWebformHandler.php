@@ -17,6 +17,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   description = @Translation("Tests webform submission handler behaviors."),
  *   cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_SINGLE,
  *   results = \Drupal\webform\WebformHandlerInterface::RESULTS_IGNORED,
+ *   submission = \Drupal\webform\WebformHandlerInterface::SUBMISSION_REQUIRED,
  * )
  */
 class TestWebformHandler extends WebformHandlerBase {
@@ -138,6 +139,27 @@ class TestWebformHandler extends WebformHandlerBase {
    */
   public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE) {
     $this->displayMessage(__FUNCTION__, $update ? 'update' : 'insert');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function createHandler() {
+    $this->displayMessage(__FUNCTION__);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function updateHandler() {
+    $this->displayMessage(__FUNCTION__);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function deleteHandler() {
+    $this->displayMessage(__FUNCTION__);
   }
 
   /**

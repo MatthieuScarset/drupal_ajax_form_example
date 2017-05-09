@@ -11,6 +11,7 @@ template: false
 id: test_element_format_multi_comp
 title: 'Test: Element: Format composite multiple values'
 description: 'Test composite element formatting with multiple value.'
+category: 'Test: Element'
 elements: |
   composite_elements:
     '#type': details
@@ -274,6 +275,9 @@ elements: |
       webform_location_ol:
         '#type': webform_location
         '#title': 'Location (Ordered list)'
+        '#map': true
+        '#geolocation': true
+        '#format': map
         '#multiple': true
         '#default_value':
           -
@@ -286,6 +290,9 @@ elements: |
       webform_location_ul:
         '#type': webform_location
         '#title': 'Location (Unordered list)'
+        '#map': true
+        '#geolocation': true
+        '#format': map
         '#multiple': true
         '#default_value':
           -
@@ -298,6 +305,9 @@ elements: |
       webform_location_hr:
         '#type': webform_location
         '#title': 'Location (Horizontal rule)'
+        '#map': true
+        '#geolocation': true
+        '#format': map
         '#multiple': true
         '#default_value':
           -
@@ -401,16 +411,16 @@ elements: |
         '#default_value':
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
         '#format_items': ol
       webform_telephone_ul:
         '#type': webform_telephone
@@ -419,16 +429,16 @@ elements: |
         '#default_value':
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
         '#format_items': ul
       webform_telephone_hr:
         '#type': webform_telephone
@@ -437,16 +447,16 @@ elements: |
         '#default_value':
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
           -
             type: Home
-            phone: 123-456-7890
-            ext: 1
+            phone: '+1 212-333-4444'
+            ext: 0
         '#format_items': hr
 css: ''
 javascript: ''
@@ -458,10 +468,12 @@ settings:
   form_submit_once: false
   form_submit_attributes: {  }
   form_exception_message: ''
-  form_closed_message: ''
+  form_open_message: ''
+  form_close_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_disable_autocomplete: false
@@ -470,6 +482,7 @@ settings:
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
+  submission_log: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -486,7 +499,7 @@ settings:
   preview_prev_button_label: ''
   preview_prev_button_attributes: {  }
   preview_message: ''
-  draft: false
+  draft: none
   draft_auto_save: false
   draft_button_label: ''
   draft_button_attributes: {  }
@@ -546,10 +559,16 @@ handlers:
     status: true
     weight: 1
     settings:
+      states:
+        - completed
       to_mail: default
+      to_options: {  }
       cc_mail: ''
+      cc_options: {  }
       bcc_mail: ''
+      bcc_options: {  }
       from_mail: default
+      from_options: {  }
       from_name: default
       subject: default
       body: default
@@ -557,6 +576,8 @@ handlers:
       html: false
       attachments: false
       debug: true
+      reply_to: ''
+      return_path: ''
   email_html:
     id: email
     label: 'Email (HTML)'
@@ -564,10 +585,16 @@ handlers:
     status: true
     weight: 2
     settings:
+      states:
+        - completed
       to_mail: default
+      to_options: {  }
       cc_mail: ''
+      cc_options: {  }
       bcc_mail: ''
+      bcc_options: {  }
       from_mail: default
+      from_options: {  }
       from_name: default
       subject: default
       body: default
@@ -575,3 +602,5 @@ handlers:
       html: true
       attachments: false
       debug: true
+      reply_to: ''
+      return_path: ''

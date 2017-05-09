@@ -3,10 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-// ISSUE: Below import statement is throwing "Error: Cannot use Drupal\Core\Url
-// as Url because the name is already in use in" when executing any drush
-// webform command that loads this file.
-// use Drupal\Core\Url.
+use Drupal\Core\Url as UrlGenerator;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\Link;
 use Drupal\file\Entity\File;
@@ -32,7 +29,6 @@ abstract class WebformManagedFileBase extends WebformElementBase {
     $file_extensions = $this->getFileExtensions();
     return parent::getDefaultProperties() + [
       'multiple' => FALSE,
-      'multiple__header_label' => '',
       'max_filesize' => $max_filesize,
       'file_extensions' => $file_extensions,
       'uri_scheme' => 'private',
@@ -93,7 +89,7 @@ abstract class WebformManagedFileBase extends WebformElementBase {
       if (!isset($scheme_options[$uri_scheme]) && $this->currentUser->hasPermission('administer webform')) {
         drupal_set_message($this->t('The \'File\' element is unavailable because a <a href="https://www.drupal.org/documentation/modules/file">private files directory</a> has not been configured and public file uploads have not been enabled. For more information see: <a href="https://www.drupal.org/psa-2016-003">DRUPAL-PSA-2016-003</a>'), 'warning');
         $context = [
-          'link' => Link::fromTextAndUrl($this->t('Edit'), \Drupal\Core\Url::fromRoute('<current>'))->toString(),
+          'link' => Link::fromTextAndUrl($this->t('Edit'), UrlGenerator::fromRoute('<current>'))->toString(),
         ];
         $this->logger->notice("The 'File' element is unavailable because no stream wrappers are available", $context);
       }
@@ -142,7 +138,7 @@ abstract class WebformManagedFileBase extends WebformElementBase {
       '#theme' => 'file_upload_help',
       '#description' => '',
       '#upload_validators' => $element['#upload_validators'],
-      '#cardinality' => (empty($element['#multiple'])) ? 1 : -1,
+      '#cardinality' => (empty($element['#multiple'])) ? 1 : $element['#multiple'],
       '#prefix' => '<div class="description">',
       '#suffix' => '</div>',
     ];
@@ -185,7 +181,7 @@ abstract class WebformManagedFileBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  protected function formatHtmlItem(array &$element, $value, array $options = []) {
+  protected function formatHtmlItem(array $element, $value, array $options = []) {
     $file = $this->getFile($element, $value, $options);
     $format = $this->getItemFormat($element);
     switch ($format) {
@@ -219,7 +215,7 @@ abstract class WebformManagedFileBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  protected function formatTextItem(array &$element, $value, array $options = []) {
+  protected function formatTextItem(array $element, $value, array $options = []) {
     $file = $this->getFile($element, $value, $options);
     $format = $this->getItemFormat($element);
     switch ($format) {
@@ -611,8 +607,8 @@ abstract class WebformManagedFileBase extends WebformElementBase {
     $form['file']['multiple'] = [
       '#title' => $this->t('Multiple'),
       '#type' => 'checkbox',
-      '#return_value' => TRUE,
       '#description' => $this->t('Check this option if the user should be allowed to upload multiple files.'),
+      '#return_value' => TRUE,
     ];
     return $form;
   }

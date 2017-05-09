@@ -4,7 +4,7 @@ services:
 
   plugin.manager.webform.element:
     class: Drupal\webform\WebformElementManager
-    parent: default_plugin_manager
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@plugin.manager.element_info']
 
   plugin.manager.webform.handler:
     class: Drupal\webform\WebformHandlerManager
@@ -17,7 +17,7 @@ services:
   # Logger.
 
   logger.channel.webform:
-    class: Drupal\Core\Logger\LoggerChannel√
+    class: Drupal\Core\Logger\LoggerChannel
     factory: logger.factory:get
     arguments: ['webform']
 

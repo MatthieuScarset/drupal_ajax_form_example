@@ -35,6 +35,16 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   const RESULTS_IGNORED = 0;
 
   /**
+   * Value indicating webform submissions must be stored in the database.
+   */
+  const SUBMISSION_REQUIRED = 1;
+
+  /**
+   * Value indicating webform submissions do not have to be stored in the database.
+   */
+  const SUBMISSION_OPTIONAL = 0;
+
+  /**
    * Value indicating webform submissions are processed (ie email or saved) by the handler.
    */
   const RESULTS_PROCESSED = 1;
@@ -160,6 +170,43 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function isDisabled();
 
   /**
+   * Returns the webform submission is optional indicator.
+   *
+   * @return bool
+   *   TRUE if the webform handler does not require the webform submission to
+   *   be saved to the database.
+   */
+  public function isSubmissionOptional();
+
+  /**
+   * Returns the webform submission is required indicator.
+   *
+   * @return bool
+   *   TRUE if the webform handler requires the webform submission to be saved
+   *   to the database.
+   */
+  public function isSubmissionRequired();
+
+  /**
+   * Initialize webform handler.
+   *
+   * @param \Drupal\webform\WebformInterface $webform
+   *   A webform object.
+   *
+   * @return $this
+   *   This webform handler.
+   */
+  public function setWebform(WebformInterface $webform);
+
+  /**
+   * Get the webform that this handler is attached to.
+   *
+   * @return \Drupal\webform\WebformInterface
+   *   A webform.
+   */
+  public function getWebform();
+
+  /**
    * Alter webform submission webform elements.
    *
    * @param array $elements
@@ -278,5 +325,20 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    *   A webform submission.
    */
   public function postDelete(WebformSubmissionInterface $webform_submission);
+
+  /**
+   * Acts on handler after it has been created and added to webform.
+   */
+  public function createHandler();
+
+  /**
+   * Acts on handler after it has been updated.
+   */
+  public function updateHandler();
+
+  /**
+   * Acts on handler after it has been removed.
+   */
+  public function deleteHandler();
 
 }

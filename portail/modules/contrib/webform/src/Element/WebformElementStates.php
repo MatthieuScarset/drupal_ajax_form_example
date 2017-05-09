@@ -86,6 +86,7 @@ class WebformElementStates extends FormElement {
         'expanded' => t('Expanded'),
         'collapsed' => t('Collapsed'),
         'value' => t('Value is'),
+        '!value' => t('Value is not'),
       ],
     ];
 
@@ -191,7 +192,6 @@ class WebformElementStates extends FormElement {
     ];
 
     $element['#attached']['library'][] = 'webform/webform.element.states';
-    $element['#attached']['library'][] = 'webform/webform.element.select2';
 
     return $element;
   }
@@ -226,7 +226,6 @@ class WebformElementStates extends FormElement {
       '#default_value' => $state['state'],
       '#empty_option' => '',
       '#empty_value' => '',
-      '#attributes' => ['class' => ['js-webform-select2', 'webform-select2']],
     ];
     $row['operator'] = [
       '#type' => 'select',
@@ -278,7 +277,6 @@ class WebformElementStates extends FormElement {
       '#default_value' => $condition['selector'],
       '#empty_option' => '',
       '#empty_value' => '',
-      '#attributes' => ['class' => ['js-webform-select2', 'webform-select2']],
     ];
     $row['trigger'] = [
       '#type' => 'select',
@@ -286,7 +284,6 @@ class WebformElementStates extends FormElement {
       '#default_value' => $condition['trigger'],
       '#empty_option' => '',
       '#empty_value' => '',
-      '#attributes' => ['class' => ['js-webform-select2', 'webform-select2']],
     ];
     $row['value'] = [
       '#type' => 'textfield',
@@ -296,7 +293,10 @@ class WebformElementStates extends FormElement {
       '#default_value' => $condition['value'],
       '#states' => [
         'visible' => [
-          $trigger_selector => ['value' => 'value'],
+          [$trigger_selector => ['value' => 'value']],
+          'or',
+          [$trigger_selector => ['value' => '!value']],
+
         ],
       ],
     ];
@@ -493,7 +493,7 @@ class WebformElementStates extends FormElement {
    *
    * @param array $element
    *   An element.
-   * @param $name
+   * @param string $name
    *   The name.
    *
    * @return string

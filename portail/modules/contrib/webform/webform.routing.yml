@@ -60,14 +60,14 @@ entity.webform.assets.javascript:
   defaults:
     _controller: '\Drupal\webform\Controller\WebformController::javascript'
   requirements:
-    _entity_access: 'webform.submission_page'
+    _entity_access: 'webform.view'
 
 entity.webform.assets.css:
   path: '/webform/{webform}/assets/css'
   defaults:
     _controller: '\Drupal\webform\Controller\WebformController::css'
   requirements:
-    _entity_access: 'webform.submission_page'
+    _entity_access: 'webform.view'
 
 entity.webform.confirmation:
   path: '/webform/{webform}/confirmation'
@@ -88,7 +88,6 @@ entity.webform.user.submissions:
         type: 'entity:webform'
   requirements:
     _entity_access: 'webform.submission_view_own'
-    _user_is_logged_in: 'TRUE'
 
 entity.webform.user.submission:
   path: '/webform/{webform}/submissions/{webform_submission}'
@@ -106,6 +105,14 @@ entity.webform.user.submission.edit:
     _title_callback: 'Drupal\webform\Controller\WebformSubmissionController::title'
   requirements:
     _entity_access: 'webform_submission.update'
+
+entity.webform.user.submission.delete:
+  path: '/webform/{webform}/submissions/{webform_submission}/delete'
+  defaults:
+    _entity_form: 'webform_submission.delete'
+    _title: 'Delete webform submission'
+  requirements:
+    _entity_access: 'webform_submission.delete'
 
 entity.webform.test:
   path: '/webform/{webform}/test'
@@ -212,22 +219,8 @@ entity.webform.results_submissions:
     _entity_access: 'webform.submission_view_any'
     _custom_access: '\Drupal\webform\Access\WebformAccess:checkResultsAccess'
 
-
-entity.webform.results_table:
-  path: '/admin/structure/webform/manage/{webform}/results/table'
-  defaults:
-    _entity_list: 'webform_submission'
-    _title_callback: '\Drupal\webform\Controller\WebformController::title'
-  options:
-    parameters:
-      webform:
-        type: 'entity:webform'
-  requirements:
-    _entity_access: 'webform.submission_view_any'
-    _custom_access: '\Drupal\webform\Access\WebformAccess:checkResultsAccess'
-
-entity.webform.results_table.custom:
-  path: '/admin/structure/webform/manage/{webform}/results/table/custom'
+entity.webform.results_submissions.custom:
+  path: '/admin/structure/webform/manage/{webform}/results/submissions/custom'
   defaults:
     _form: 'Drupal\webform\Form\WebformResultsCustomForm'
     _title: 'Customize table'
@@ -278,6 +271,20 @@ entity.webform.results_clear:
     _entity_access: 'webform.submission_purge_any'
     _custom_access: '\Drupal\webform\Access\WebformAccess:checkResultsAccess'
 
+entity.webform.results_log:
+  path: '/admin/structure/webform/manage/{webform}/results/log'
+  defaults:
+    _controller: '\Drupal\webform\Controller\WebformSubmissionLogController::overview'
+    _title_callback: 'Drupal\webform\Controller\WebformController::title'
+  options:
+    parameters:
+      webform:
+        type: 'entity:webform'
+  requirements:
+    _permission: 'access webform submission log'
+    _entity_access: 'webform.submission_view_any'
+    _custom_access: '\Drupal\webform\Access\WebformAccess:checkLogAccess'
+
 # Webform options
 
 entity.webform_options.collection:
@@ -322,13 +329,24 @@ entity.webform_submission.collection:
   requirements:
     _custom_access: '\Drupal\webform\Access\WebformAccess:checkSubmissionAccess'
 
-entity.webform_submission.purge:
+entity.webform_submission.results_purge:
   path: '/admin/structure/webform/results/purge'
   defaults:
     _form: 'Drupal\webform\Form\WebformSubmissionsPurgeForm'
     _title: 'Webforms: Results purge'
   requirements:
     _permission: 'administer webform'
+
+# Webform log (submissions)
+
+entity.webform_submission.results_log:
+  path: '/admin/structure/webform/log'
+  defaults:
+    _controller: '\Drupal\webform\Controller\WebformSubmissionLogController::overview'
+    _title: 'Webforms'
+  requirements:
+    _permission: 'access webform submission log'
+    _custom_access: '\Drupal\webform\Access\WebformAccess:checkSubmissionAccess'
 
 # Webform submissions
 
@@ -367,6 +385,16 @@ entity.webform_submission.yaml:
     type: 'yaml'
   requirements:
     _entity_access: 'webform_submission.view_any'
+
+entity.webform_submission.log:
+  path: '/admin/structure/webform/manage/{webform}/submission/{webform_submission}/log'
+  defaults:
+    _controller: '\Drupal\webform\Controller\WebformSubmissionLogController::overview'
+    _title_callback: 'Drupal\webform\Controller\WebformSubmissionController::title'
+  requirements:
+    _permission: 'access webform submission log'
+    _entity_access: 'webform_submission.view_any'
+    _custom_access: '\Drupal\webform\Access\WebformAccess::checkLogAccess'
 
 entity.webform_submission.edit_form:
   path: '/admin/structure/webform/manage/{webform}/submission/{webform_submission}/edit'

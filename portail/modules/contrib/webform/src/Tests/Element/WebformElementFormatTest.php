@@ -20,7 +20,7 @@ class WebformElementFormatTest extends WebformTestBase {
    *
    * @var array
    */
-  protected static $modules = ['node', 'webform'];
+  public static $modules = ['node', 'taxonomy', 'webform'];
 
   /**
    * Webforms to load.
@@ -53,10 +53,10 @@ class WebformElementFormatTest extends WebformTestBase {
       'Email multiple (Link)' => '<a href="mailto:example@example.com">example@example.com</a>, <a href="mailto:test@test.com">test@test.com</a>, <a href="mailto:random@random.com">random@random.com</a>',
       'Signature (Status)' => '[signed]',
       'Signature (Image)' => '[signed]',
-      'Telephone (Link)' => '<a href="tel:123-456-7890">123-456-7890</a>',
+      'Telephone (Link)' => '<a href="tel:+1 212-333-4444">+1 212-333-4444</a>',
       'Toggle (Value)' => 'No',
       'URL (Link)' => '<a href="http://example.com">http://example.com</a>',
-      'Date (Raw value)' => 'Thu, 18 Jun 1942 00:00:00 +1000am4',
+      'Date (Raw value)' => '1942-06-18',
       'Date (Fallback date format)' => 'Thu, 06/18/1942 - 00:00',
       'Date (HTML Date)' => '1942-06-18',
       'Date (HTML Datetime)' => '1942-06-18T00:00:00+1000',
@@ -92,7 +92,7 @@ class WebformElementFormatTest extends WebformTestBase {
       'Email multiple (Link): example@example.com, test@test.com, random@random.com',
       'Toggle (Value): No',
       'URL (Link): http://example.com',
-      'Date (Raw value): Thu, 18 Jun 1942 00:00:00 +1000am4',
+      'Date (Raw value): 1942-06-18',
       'Date (Fallback date format): Thu, 06/18/1942 - 00:00',
       'Date (HTML Date): 1942-06-18',
       'Date (HTML Datetime): 1942-06-18T00:00:00+1000',

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Form\WorkbenchAccessConfigForm.
- */
-
 namespace Drupal\workbench_access\Form;
 
 use Drupal\workbench_access\WorkbenchAccessManagerInterface;
@@ -133,7 +128,7 @@ class WorkbenchAccessConfigForm extends ConfigFormBase {
     }
     if ($id = $config->get('scheme')) {
       $scheme = $this->manager->getScheme($id);
-      $custom = $this->manager->getActiveScheme()->configForm($scheme, $config->get('parents', array()));
+      $custom = $this->manager->getActiveScheme()->configForm($config->get('parents', array()));
     }
     if (!empty($custom)) {
       $form['custom'] = array(
@@ -173,7 +168,11 @@ class WorkbenchAccessConfigForm extends ConfigFormBase {
     $config = $this->config('workbench_access.settings');
     $config->set('label', $form_state->getValue('label'))
       ->set('plural_label', $form_state->getValue('plural_label'));
-    $extra = $this->manager->getActiveScheme()->configSubmit($form, $form_state);
+    $new_scheme = $form_state->getValue('scheme');
+    if ($config->get('scheme') !== $new_scheme) {
+      $config->set('scheme', $new_scheme);
+    }
+    $extra = $this->manager->getScheme($new_scheme)->configSubmit($form, $form_state);
     foreach ($extra as $key => $value) {
       $config->set($key, $value);
     }

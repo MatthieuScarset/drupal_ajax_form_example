@@ -94,6 +94,7 @@ abstract class WebformHandlerFormBase extends FormBase {
     $form['status'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable the %name handler.', ['%name' => $this->webformHandler->label()]),
+      '#return_value' => TRUE,
       '#default_value' => $this->webformHandler->isEnabled(),
       // Disable broken plugins.
       '#disabled' => ($this->webformHandler->getPluginId() == 'broken'),
@@ -144,9 +145,7 @@ abstract class WebformHandlerFormBase extends FormBase {
       '#button_type' => 'primary',
     ];
 
-    $form = $this->buildFormDialog($form, $form_state);
-
-    return $form;
+    return $this->buildFormDialog($form, $form_state);
   }
 
   /**
@@ -170,10 +169,6 @@ abstract class WebformHandlerFormBase extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    if ($response = $this->validateDialog($form, $form_state)) {
-      return $response;
-    }
-
     $form_state->cleanValues();
 
     // The webform handler configuration is stored in the 'settings' key in
@@ -184,22 +179,28 @@ abstract class WebformHandlerFormBase extends FormBase {
     // Update the original webform values.
     $form_state->setValue('settings', $handler_data->getValues());
 
-    $is_new = ($this->webformHandler->getHandlerId()) ? FALSE : TRUE;
-
     $this->webformHandler->setHandlerId($form_state->getValue('handler_id'));
     $this->webformHandler->setLabel($form_state->getValue('label'));
     $this->webformHandler->setStatus($form_state->getValue('status'));
     $this->webformHandler->setWeight($form_state->getValue('weight'));
-    if ($is_new) {
-      $this->webform->addWebformHandler($this->webformHandler->getConfiguration());
+
+    if ($this instanceof WebformHandlerAddForm) {
+      $this->webform->addWebformHandler($this->webformHandler);
+      drupal_set_message($this->t('The webform handler was successfully added.'));
     }
-    $this->webform->save();
+    else {
+      $this->webform->updateWebformHandler($this->webformHandler);
+      drupal_set_message($this->t('The webform handler was successfully updated.'));
+    }
 
-    // Display status message.
-    drupal_set_message($this->t('The webform handler was successfully applied.'));
+    $form_state->setRedirectUrl($this->getRedirectUrl());
+  }
 
-    // Redirect.
-    return $this->redirectForm($form, $form_state, $this->webform->toUrl('handlers-form'));
+  /**
+   * {@inheritdoc}
+   */
+  protected function getRedirectUrl() {
+    return $this->webform->toUrl('handlers-form');
   }
 
   /**
@@ -243,7 +244,7 @@ abstract class WebformHandlerFormBase extends FormBase {
    *
    * @param \Drupal\Core\Form\FormStateInterface $handler_state
    *   The webform handler webform state.
-   * @param \Drupal\Core\Form\FormStateInterface  &$form_state
+   * @param \Drupal\Core\Form\FormStateInterface &$form_state
    *   The webform state.
    */
   protected function processHandlerFormErrors(FormStateInterface $handler_state, FormStateInterface &$form_state) {

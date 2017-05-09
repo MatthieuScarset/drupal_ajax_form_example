@@ -30,12 +30,12 @@ class WebformEntityHandlersForm extends EntityForm {
 
     // Build table header.
     $header = [
-      $this->t('Title / Description'),
-      $this->t('ID'),
-      $this->t('Summary'),
-      $this->t('Status'),
-      $this->t('Weight'),
-      $this->t('Operations'),
+      ['data' => $this->t('Title / Description')],
+      ['data' => $this->t('ID'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      ['data' => $this->t('Summary'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      ['data' => $this->t('Status'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      ['data' => $this->t('Weight'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      ['data' => $this->t('Operations')],
     ];
 
     // Build table rows for handlers.
@@ -102,7 +102,7 @@ class WebformEntityHandlersForm extends EntityForm {
           'webform' => $this->entity->id(),
           'webform_handler' => $key,
         ]),
-        'attributes' => WebformDialogHelper::getModalDialogAttributes(640),
+        'attributes' => WebformDialogHelper::getModalDialogAttributes(700),
       ];
       $rows[$key]['operations'] = [
         '#type' => 'operations',
@@ -150,7 +150,7 @@ class WebformEntityHandlersForm extends EntityForm {
     ] + $rows;
 
     // Must preload libraries required by (modal) dialogs.
-    $form['#attached']['library'][] = 'webform/webform.admin.dialog';
+    WebformDialogHelper::attachLibraries($form);
 
     return parent::form($form, $form_state);
   }
@@ -185,7 +185,12 @@ class WebformEntityHandlersForm extends EntityForm {
     $webform = $this->getEntity();
     $webform->save();
 
-    $this->logger('webform')->notice('Webform @label handler saved.', ['@label' => $webform->label()]);
+    $context = [
+      '@label' => $webform->label(),
+      'link' => $webform->toLink($this->t('Edit'), 'handlers-form')->toString()
+    ];
+    $this->logger('webform')->notice('Webform @label handler saved.', $context);
+
     drupal_set_message($this->t('Webform %label handler saved.', ['%label' => $webform->label()]));
   }
 

@@ -112,16 +112,11 @@ class WebformEntityForm extends BundleEntityFormBase {
     if ($this->operation == 'duplicate') {
       // Display custom title.
       $form['#title'] = $this->t("Duplicate '@label' form", ['@label' => $webform->label()]);
-      // If template, clear template's description and remove template flag.
-      if ($webform->isTemplate()) {
-        $webform->set('description', '');
-        $webform->set('template', FALSE);
-      }
     }
 
     $form = parent::buildForm($form, $form_state);
-    $form = $this->buildFormDialog($form, $form_state);
-    return $form;
+
+    return $this->buildFormDialog($form, $form_state);
   }
 
   /**
@@ -146,7 +141,6 @@ class WebformEntityForm extends BundleEntityFormBase {
         '#disabled' => (bool) $webform->id() && $this->operation != 'duplicate',
         '#required' => TRUE,
       ];
-
       $form['title'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Title'),
@@ -162,6 +156,15 @@ class WebformEntityForm extends BundleEntityFormBase {
         '#type' => 'webform_html_editor',
         '#title' => $this->t('Administrative description'),
         '#default_value' => $webform->get('description'),
+      ];
+      /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+      $webform_storage = $this->entityTypeManager->getStorage('webform');
+      $form['category'] = [
+        '#type' => 'webform_select_other',
+        '#title' => $this->t('Category'),
+        '#options' => $webform_storage->getCategories(),
+        '#empty_option' => '<' . $this->t('None') . '>',
+        '#default_value' => $webform->get('category'),
       ];
       $form = $this->protectBundleIdElement($form);
     }
@@ -249,13 +252,18 @@ class WebformEntityForm extends BundleEntityFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    if ($response = $this->validateDialog($form, $form_state)) {
-      return $response;
-    }
-
     parent::submitForm($form, $form_state);
+    $form_state->setRedirectUrl($this->getRedirectUrl());
+  }
 
-    return $this->redirectForm($form, $form_state, Url::fromRoute('entity.webform.edit_form', ['webform' => $this->getEntity()->id()]));
+  /**
+   * {@inheritdoc}
+   */
+  public function getRedirectUrl() {
+    if ($url = $this->getRedirectDestinationUrl()) {
+      return $url;
+    }
+    return Url::fromRoute('entity.webform.edit_form', ['webform' => $this->getEntity()->id()]);
   }
 
   /**
@@ -268,13 +276,18 @@ class WebformEntityForm extends BundleEntityFormBase {
     $is_new = $webform->isNew();
     $webform->save();
 
+    $context = [
+      '@label' => $webform->label(),
+      'link' => $webform->toLink($this->t('Edit'), 'edit-form')->toString()
+    ];
+    $t_args = ['%label' => $webform->label()];
     if ($is_new) {
-      $this->logger('webform')->notice('Webform @label created.', ['@label' => $webform->label()]);
-      drupal_set_message($this->t('Webform %label created.', ['%label' => $webform->label()]));
+      $this->logger('webform')->notice('Webform @label created.', $context);
+      drupal_set_message($this->t('Webform %label created.', $t_args));
     }
     else {
-      $this->logger('webform')->notice('Webform @label elements saved.', ['@label' => $webform->label()]);
-      drupal_set_message($this->t('Webform %label elements saved.', ['%label' => $webform->label()]));
+      $this->logger('webform')->notice('Webform @label elements saved.', $context);
+      drupal_set_message($this->t('Webform %label elements saved.', $t_args));
     }
   }
 

@@ -1,13 +1,9 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Tests\WorkbenchAccessTestBase
- */
-
 namespace Drupal\workbench_access\Tests;
 
 use Drupal\simpletest\WebTestBase;
+use Drupal\workbench_access\WorkbenchAccessManagerInterface;
 
 /**
  * Base test class for Workbench Access.
@@ -24,7 +20,7 @@ abstract class WorkbenchAccessTestBase extends WebTestBase {
   /**
    * The Workbench Access manager class.
    *
-   * @var Drupal\workbench_access\WorkbenchAccessManager
+   * @var \Drupal\workbench_access\WorkbenchAccessManager
    */
   protected $pluginmanager;
 
@@ -84,7 +80,7 @@ abstract class WorkbenchAccessTestBase extends WebTestBase {
     for ($i = 1; $i <= 10; $i++) {
       $this->nodes[] = $this->drupalCreateNode(array(
         'type' => 'article',
-        WORKBENCH_ACCESS_FIELD => array($i),
+        WorkbenchAccessManagerInterface::FIELD_NAME => array($i),
       ));
     }
     // Create two page nodes for testing.
