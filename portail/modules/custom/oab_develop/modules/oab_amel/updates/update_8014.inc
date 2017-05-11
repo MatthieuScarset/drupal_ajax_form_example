@@ -85,7 +85,7 @@ $config->set('settings', array (
                     'styles' => "  h1.titre1|titre             
                                 h2.titre2|intertitre
                                 div.titre3|chapô
-                                h4.titre4|sous titre
+                                h3.titre4|sous titre
                                 p.highlight1|paragraphe
                                 p.date|date
                                 p.insight_banniere|insight bannière                                                              
