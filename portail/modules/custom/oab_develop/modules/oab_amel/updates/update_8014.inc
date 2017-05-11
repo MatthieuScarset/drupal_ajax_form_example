@@ -82,23 +82,22 @@ $config->set('settings', array (
                 ),
             'stylescombo' =>
                 array (
-                    'styles' => 'div.titre1|titre 60pt
-                                div.titre2|titre 50pt
-                                div.titre3|titre 40pt
-                                div.titre4|titre 34pt
-                                div.titre5|titre 30pt
-                                div.titre6|titre 24pt
-                                div.titre7|titre 20pt
-                                p.highlight1|paragraphe 18pt
-                                p.highlight2|paragraphe 16pt
+                    'styles' => "  h1.titre1|titre             
+                                h2.titre2|intertitre
+                                div.titre3|chapô
+                                h4.titre4|sous titre
+                                p.highlight1|paragraphe
+                                p.date|date
+                                p.insight_banniere|insight bannière                                                              
                                 ul.orange|liste orange
                                 ul.black|liste noire
                                 ul.white|liste blanche
                                 ul.grey|liste grise
+                                span.downloadPDF|download PDF  
                                 span.orange|texte orange
                                 span.black|texte noir
                                 span.white|texte blanc
-                                span.blue|texte bleu',
+                                span.blue|texte bleu"
                 ),
             'linkit' =>
                 array (

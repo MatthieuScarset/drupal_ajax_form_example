@@ -1,0 +1,50 @@
+<?php
+
+use Drupal\oab_axiome\AxiomeImporter;
+
+define('AXIOME_FOLDER', 'axiome');
+define('AXIOME_SAVE_FOLDER', 'sauvegarde');
+define('AXIOME_REFERENTIEL_FRANCE', 'referentiel_France.xml');
+define('AXIOME_REFERENTIEL_INT', 'referentiel_International.xml');
+define('AXIOME_REFERENTIEL_SCHEMA', 'schema_referentiel.xsd');
+define('AXIOME_FICHE_SCHEMA', 'schema.xsd');
+define('AXIOME_TAXO_FAMILLE', 'products');
+
+
+/**
+ * Implements hook_cron().
+ */
+function oab_axiome_cron(){
+   // $axiome_importer = new AxiomeImporter();
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_axiome_form_alter(&$form, &$form_state, $form_id){
+    global $user,$base_path;
+
+    switch($form_id){
+        case "axiome_node_form":
+            //note les champ subtile et txt_catcher sont caché en css dans le theme obs_backoffice
+
+            $form["field_xml_content"]["#attributes"]['class'][] = 'element-invisible';
+            $form["field_id_fiche"]["#attributes"]['class'][] = 'element-invisible';
+            $form["field_id_offre"]["#attributes"]['class'][] = 'element-invisible';
+            $form['title']['#disabled'] = 1;
+
+            break;
+    }
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function oab_axiome_node_delete($node) {
+    if($node->type == "axiome"){
+        $id_fiche = field_get_items('node', $node, 'field_id_fiche');
+        if(is_dir('public://'.AXIOME_FOLDER.'/'.$id_fiche[0]['value'])){
+            obs_module_deldir('public://'.AXIOME_FOLDER.'/'.$id_fiche[0]['value']);
+        }
+    }
+}
