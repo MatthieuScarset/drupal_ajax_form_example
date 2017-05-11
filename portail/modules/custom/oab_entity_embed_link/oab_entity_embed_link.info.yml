@@ -1,0 +1,10 @@
+name: OAB Entity Embed Link
+type: module
+description: "Permet d'ajouter un lien (URL libre) à une entité embarquée dans le WYSISYG."
+package: OAB
+dependencies:
+  - entity_embed
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_entity_embed_link'
+datestamp: 1494492260

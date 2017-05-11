@@ -8,4 +8,5 @@ pm-enable -y password_policy_username
 pm-enable -y oab_tibo
 pm-enable -y views_infinite_scroll
 pm-enable -y oab_user_access_rights
+pm-enable -y oab_entity_embed_link
 updatedb
