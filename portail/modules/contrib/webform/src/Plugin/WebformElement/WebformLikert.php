@@ -38,6 +38,7 @@ class WebformLikert extends WebformElementBase {
       'description_display' => '',
       // Form validation.
       'required' => FALSE,
+      'required_error' => '',
       // Submission display.
       'format' => $this->getItemDefaultFormat(),
       // Likert settings.
@@ -47,6 +48,10 @@ class WebformLikert extends WebformElementBase {
       'na_answer' => FALSE,
       'na_answer_value' => '',
       'na_answer_text' => $this->t('N/A'),
+      // Attributes.
+      'wrapper_attributes' => [],
+      // iCheck settings.
+      'icheck' => '',
     ] + $this->getDefaultBaseProperties();
   }
 
@@ -75,7 +80,7 @@ class WebformLikert extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array &$element, $value, array $answers = []) {
+  public function formatHtmlItem(array $element, $value, array $options = []) {
     $format = $this->getItemFormat($element);
     switch ($format) {
       case 'raw':
@@ -156,7 +161,7 @@ class WebformLikert extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatTextItem(array &$element, $value, array $answers = []) {
+  public function formatTextItem(array $element, $value, array $options = []) {
     // Return empty value.
     if ($value === '' || $value === NULL || (is_array($value) && empty($value))) {
       return '';

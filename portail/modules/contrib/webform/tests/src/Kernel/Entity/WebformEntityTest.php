@@ -80,53 +80,63 @@ class WebformEntityTest extends KernelTestBase {
     $webform->setStatus(WebformInterface::STATUS_SCHEDULED);
 
     // Check set open date to yesterday.
-    $webform->set('open', date('c', strtotime('today -1 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today -1 days')));
     $webform->set('close', NULL);
     $this->assertTrue($webform->isOpen());
 
     // Check set open date to tomorrow.
-    $webform->set('open', date('c', strtotime('today +1 day')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today +1 day')));
     $webform->set('close', NULL);
     $this->assertFalse($webform->isOpen());
 
     // Check set close date to yesterday.
     $webform->set('open', NULL);
-    $webform->set('close', date('c', strtotime('today -1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today -1 day')));
     $this->assertFalse($webform->isOpen());
 
     // Check set close date to tomorrow.
     $webform->set('open', NULL);
-    $webform->set('close', date('c', strtotime('today +1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today +1 day')));
     $this->assertTrue($webform->isOpen());
 
     // Check set open date to tomorrow with close date in 10 days.
-    $webform->set('open', date('c', strtotime('today +1 day')));
-    $webform->set('close', date('c', strtotime('today +10 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today +1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today +10 days')));
     $this->assertFalse($webform->isOpen());
+    $this->assertTrue($webform->isOpening());
 
     // Check set open date to yesterday with close date in +10 days.
-    $webform->set('open', date('c', strtotime('today -1 day')));
-    $webform->set('close', date('c', strtotime('today +10 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today -1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today +10 days')));
     $this->assertTrue($webform->isOpen());
 
     // Check set open date to yesterday with close date -10 days.
-    $webform->set('open', date('c', strtotime('today -1 day')));
-    $webform->set('close', date('c', strtotime('today -10 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today -1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today -10 days')));
     $this->assertFalse($webform->isOpen());
+    $this->assertFalse($webform->isOpening());
 
-    // Check that open overridess scheduled.
+    // Check that open overrides scheduled.
     $webform->setStatus(TRUE);
-    $webform->set('open', date('c', strtotime('today -1 day')));
-    $webform->set('close', date('c', strtotime('today -10 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today -1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today -10 days')));
     $this->assertTrue($webform->isOpen());
 
     // Check that closed overrides scheduled.
     $webform->setStatus(FALSE);
-    $webform->set('open', date('c', strtotime('today +1 day')));
-    $webform->set('close', date('c', strtotime('today -10 days')));
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today +1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today -10 days')));
     $this->assertFalse($webform->isOpen());
 
+    // Check that open and close date is set to NULL when status is set to open
+    // or closed.
+    $webform->set('open', date('Y-m-d\TH:i:s', strtotime('today +1 day')));
+    $webform->set('close', date('Y-m-d\TH:i:s', strtotime('today -10 days')));
+    $this->assertNotNull($webform->get('open'));
+    $this->assertNotNull($webform->get('close'));
     $webform->setStatus(TRUE);
+    $this->assertNull($webform->get('open'));
+    $this->assertNull($webform->get('close'));
 
     /**************************************************************************/
     // Templates.
@@ -290,8 +300,7 @@ class WebformEntityTest extends KernelTestBase {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::create(['id' => 'webform_test']);
     $webform->save();
-
-    $aliases = db_query('SELECT source, alias FROM {url_alias}')->fetchAllKeyed();
+    $aliases = \Drupal::database()->query('SELECT source, alias FROM {url_alias}')->fetchAllKeyed();
     $this->assertEquals($aliases['/webform/webform_test'], '/form/webform-test');
     $this->assertEquals($aliases['/webform/webform_test/confirmation'], '/form/webform-test/confirmation');
     $this->assertEquals($aliases['/webform/webform_test/submissions'], '/form/webform-test/submissions');

@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\WebformHandler;
 
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformHandlerBase;
 use Drupal\webform\WebformSubmissionInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   description = @Translation("Posts webform submissions to a URL."),
  *   cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_UNLIMITED,
  *   results = \Drupal\webform\WebformHandlerInterface::RESULTS_PROCESSED,
+ *   submission = \Drupal\webform\WebformHandlerInterface::SUBMISSION_OPTIONAL,
  * )
  */
 class RemotePostWebformHandler extends WebformHandlerBase {
@@ -52,8 +54,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, ModuleHandlerInterface $module_handler, ClientInterface $http_client, WebformTokenManagerInterface $token_manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, ClientInterface $http_client, WebformTokenManagerInterface $token_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $logger, $entity_type_manager);
     $this->moduleHandler = $module_handler;
     $this->httpClient = $http_client;
     $this->tokenManager = $token_manager;
@@ -68,6 +70,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $plugin_id,
       $plugin_definition,
       $container->get('logger.factory')->get('webform.remote_post'),
+      $container->get('entity_type.manager'),
       $container->get('module_handler'),
       $container->get('http_client'),
       $container->get('webform.token_manager')
@@ -162,7 +165,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#type' => 'webform_excluded_columns',
       '#title' => $this->t('Posted data'),
       '#title_display' => 'invisible',
-      '#webform' => $webform,
+      '#webform_id' => $webform->id(),
       '#required' => TRUE,
       '#parents' => ['settings', 'excluded_data'],
       '#default_value' => $this->configuration['excluded_data'],
@@ -303,7 +306,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '@type' => $request_type,
         '@url' => $request_url,
         '@message' => $message,
-        'link' => $this->getWebform()->toLink(t('Edit'), 'handlers-form')->toString(),
+        'link' => $this->getWebform()->toLink($this->t('Edit'), 'handlers-form')->toString(),
       ];
       $this->logger->error('@form webform remote @type post (@operation) to @url failed. @message', $context);
       return;
@@ -376,13 +379,9 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       return;
     }
 
-    $build = [];
-
-    // Message.
-    $build['message'] = [
-      '#markup' => $message,
-      '#prefix' => '<b>',
-      '#suffix' => '</b>',
+    $build = [
+      '#type' => 'details',
+      '#title' => $this->t('Debug: Remote post: @title', ['@title' => $this->label()]),
     ];
 
     // Operation.
@@ -390,22 +389,28 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       '#type' => 'item',
       '#title' => $this->t('Remote operation'),
       '#markup' => $operation,
+      '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
     ];
+
+    $build['returned'] = ['#markup' => '<hr/>'];
 
     // Request.
     $build['request_url'] = [
       '#type' => 'item',
       '#title' => $this->t('Request URL'),
       '#markup' => $request_url,
+      '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
     ];
     $build['request_type'] = [
       '#type' => 'item',
       '#title' => $this->t('Request type'),
       '#markup' => $request_type,
+      '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
     ];
     $build['request_post_data'] = [
       '#type' => 'item',
       '#title' => $this->t('Request data'),
+      '#wrapper_attributes' => ['style' => 'margin: 0'],
       'data' => [
         '#markup' => htmlspecialchars(Yaml::encode($request_post_data)),
         '#prefix' => '<pre>',
@@ -413,11 +418,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       ],
     ];
 
-    $build['returned'] = [
-      '#markup' => $this->t('...returned...'),
-      '#prefix' => '<b>',
-      '#suffix' => '</b>',
-    ];
+    $build['returned'] = ['#markup' => '<hr/>'];
 
     // Response.
     if ($response) {
@@ -425,10 +426,12 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '#type' => 'item',
         '#title' => $this->t('Response status code'),
         '#markup' => $response->getStatusCode(),
+        '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
       ];
       $build['response_header'] = [
-        '#type' => 'details',
+        '#type' => 'item',
         '#title' => $this->t('Response header'),
+        '#wrapper_attributes' => ['style' => 'margin: 0'],
         'data' => [
           '#markup' => htmlspecialchars(Yaml::encode($response->getHeaders())),
           '#prefix' => '<pre>',
@@ -436,7 +439,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         ],
       ];
       $build['response_body'] = [
-        '#type' => 'details',
+        '#type' => 'item',
+        '#wrapper_attributes' => ['style' => 'margin: 0'],
         '#title' => $this->t('Response body'),
         'data' => [
           '#markup' => htmlspecialchars($response->getBody()),

@@ -50,7 +50,7 @@ trait WebformEntityReferenceTrait {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array &$element, $value, array $options = []) {
+  public function formatHtmlItem(array $element, $value, array $options = []) {
     $entity = $this->getTargetEntity($element, $value, $options);
     $format = $this->getItemFormat($element);
     switch ($format) {
@@ -77,7 +77,7 @@ trait WebformEntityReferenceTrait {
   /**
    * {@inheritdoc}
    */
-  public function formatTextItem(array &$element, $value, array $options = []) {
+  public function formatTextItem(array $element, $value, array $options = []) {
     $entity = $this->getTargetEntity($element, $value, $options);
     $format = $this->getItemFormat($element);
     switch ($format) {
@@ -103,7 +103,7 @@ trait WebformEntityReferenceTrait {
 
       case 'raw':
         $entity_id = $entity->id();
-        $entity_type = $element['#target_type'];
+        $entity_type = $entity->getEntityTypeId();
         return "$entity_type:$entity_id";
 
       case 'text':
@@ -288,17 +288,12 @@ trait WebformEntityReferenceTrait {
     if (empty($value)) {
       return NULL;
     }
-    if ($value instanceof EntityInterface) {
+    elseif ($value instanceof EntityInterface) {
       return $value;
     }
 
-    $target_type = $this->getTargetType($element);
-    $langcode = (!empty($options['langcode'])) ? $options['langcode'] : \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $entity = $this->entityTypeManager->getStorage($target_type)->load($value);
-    if ($entity && method_exists($entity, 'hasTranslation') && $entity->hasTranslation($langcode)) {
-      $entity = $entity->getTranslation($langcode);
-    }
-    return $entity;
+    $entities = $this->getTargetEntities($element, [$value], $options);
+    return reset($entities);
   }
 
   /**
@@ -341,8 +336,8 @@ trait WebformEntityReferenceTrait {
 
     // Alter element properties.
     if ($properties = $form_state->getValue('properties')) {
-      $target_type = $properties['target_type'];
-      $selection_handler = $properties['selection_handler'];
+      $target_type = (isset($properties['target_type'])) ? $properties['target_type'] : 'node';
+      $selection_handler = (isset($properties['selection_handler'])) ? $properties['selection_handler'] : 'default:' . $target_type;
       // If the default selection handler has changed  when need to update its
       // value.
       if (strpos($selection_handler, 'default:') === 0 && $selection_handler != "default:$target_type") {
@@ -350,7 +345,7 @@ trait WebformEntityReferenceTrait {
         $selection_settings = [];
       }
       else {
-        $selection_settings = $properties['selection_settings'] ?: [];
+        $selection_settings = (isset($properties['selection_settings'])) ? $properties['selection_settings'] : [];
       }
     }
     else {

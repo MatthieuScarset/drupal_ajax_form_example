@@ -28,14 +28,11 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
    *   The entity manager.
-   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
-   *   The entity type bundle service.
-   * @param \Drupal\Component\Datetime\TimeInterface $time
-   *   The time service.
    */
-  public function __construct(EntityManagerInterface $entity_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, WebformRequestInterface $request_handler) {
-    parent::__construct($entity_manager, $entity_type_bundle_info, $time);
-    $this->requestHandler = $request_handler;
+  public function __construct(EntityManagerInterface $entity_manager) {
+    parent::__construct($entity_manager);
+    // @todo Update constructor once Webform is only support Drupal 8.3.x.
+    $this->requestHandler = \Drupal::service('webform.request');
   }
 
   /**
@@ -43,10 +40,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager'),
-      $container->get('entity_type.bundle.info'),
-      $container->get('datetime.time'),
-      $container->get('webform.request')
+      $container->get('entity.manager')
     );
   }
 
@@ -83,8 +77,29 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
       '#return_value' => TRUE,
       '#access' => $this->isModalDialog() ? FALSE : TRUE,
     ];
+    $form['uid'] = [
+      '#type' => 'entity_autocomplete',
+      '#title' => $this->t('Submitted by'),
+      '#description' => $this->t('The username of the user that submitted the webform.'),
+      '#target_type' => 'user',
+      '#selection_setttings' => [
+        'include_anonymous' => FALSE,
+      ],
+      '#required' => TRUE,
+      '#default_value' => $webform_submission->getOwner(),
+    ];
+
     $form['#attached']['library'][] = 'webform/webform.admin';
+
     return parent::form($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    $form = parent::buildForm($form, $form_state);
+    return $this->buildFormDialog($form, $form_state);
   }
 
   /**
@@ -102,6 +117,13 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
   public function save(array $form, FormStateInterface $form_state) {
     parent::save($form, $form_state);
     drupal_set_message($this->t('Submission @sid notes saved.', ['@sid' => '#' . $this->entity->id()]));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getRedirectUrl() {
+    return $this->entity->toUrl('edit-notes-form');
   }
 
 }

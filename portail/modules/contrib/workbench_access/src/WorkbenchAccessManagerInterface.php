@@ -1,13 +1,12 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\WorkbenchAccessManagerInterface.
- */
-
 namespace Drupal\workbench_access;
 
-interface WorkbenchAccessManagerInterface {
+/**
+ * Defines an interface handling Workbench Access configuration.
+ */
+interface WorkbenchAccessManagerInterface extends UserSectionStorageInterface, RoleSectionStorageInterface {
+  const FIELD_NAME = 'field_workbench_access';
 
   /**
    * Returns an array of available access schemes.
@@ -75,26 +74,6 @@ interface WorkbenchAccessManagerInterface {
   public static function getDefaultValue();
 
   /**
-   * Adds a set of sections to a user.
-   *
-   * @param int $user_id
-   *   A user id.
-   * @param array $sections
-   *   An array of section ids to assign to this user.
-   */
-  public function addUser($user_id, $sections = array());
-
-  /**
-   * Adds a set of sections to a role.
-   *
-   * @param int $role_id
-   *   A role id.
-   * @param array $sections
-   *   An array of section ids to assign to this role.
-   */
-  public function addRole($role_id, $sections = array());
-
-  /**
    * Adds a set of sections to an entity.
    *
    * @param int $entity_id
@@ -105,26 +84,6 @@ interface WorkbenchAccessManagerInterface {
    *   An array of section ids to assign to this entity.
    */
   public function addEntity($entity_id, $entity_type, $sections = array());
-
-  /**
-   * Removes a set of sections to a user.
-   *
-   * @param int $user_id
-   *   A user id.
-   * @param array $sections
-   *   An array of section ids to assign to this user.
-   */
-  public function removeUser($user_id, $sections = array());
-
-  /**
-   * Reomves a set of sections to a role.
-   *
-   * @param int $role_id
-   *   A role id.
-   * @param array $sections
-   *   An array of section ids to assign to this role.
-   */
-  public function removeRole($role_id, $sections = array());
 
   /**
    * Removes a set of sections to an entity.
@@ -139,43 +98,6 @@ interface WorkbenchAccessManagerInterface {
   public function removeEntity($entity_id, $entity_type, $sections = array());
 
   /**
-   * Gets a list of editors assigned to a section.
-   *
-   * This method does not return editors assigned by role.
-   *
-   * @param $id
-   *   The section id.
-   *
-   * @return array
-   *   An array of user ids.
-   */
-  public function getEditors($id);
-
-  /**
-   * Gets a list of editors who may be assigned to a section.
-   *
-   * This method does not remove editors already assigned to a section.
-   *
-   * @param $id
-   *   The section id.
-   *
-   * @return array
-   *   An array of user ids.
-   */
-  public function getPotentialEditors($id);
-
-  /**
-   * Gets a list of roles assigned to a section.
-   *
-   * @param $id
-   *   The section id.
-   *
-   * @return array
-   *   An array of role ids.
-   */
-  public function getRoles($id);
-
-  /**
    * Checks that an entity belongs to a user section or its children.
    *
    * @param array $entity_sections
@@ -186,19 +108,6 @@ interface WorkbenchAccessManagerInterface {
    * return boolean
    */
   public function checkTree($entity_sections, $user_sections);
-
-  /**
-   * Gets the editorial sections assigned to a user.
-   *
-   * @param $uid
-   *   An optional user id. If not provided, the active user is returned.
-   * @param $add_roles
-   *   Whether to add the role-based assignments to the user. Defaults to true.
-   *
-   * @return
-   *   An array of section ids that the user is assigned to.
-   */
-  public function getUserSections($uid = NULL, $add_roles = TRUE);
 
   /**
    * Returns a flat array of all active section ids.
@@ -225,22 +134,6 @@ interface WorkbenchAccessManagerInterface {
    * @return boolean
    */
   public function userInAll($uid = NULL);
-
-  /**
-   * Removes all role assignments.
-   *
-   * This method should be triggered when changing access schemes. If possible,
-   * let the administrator choose to run this.
-   */
-  public function flushRoles();
-
-  /**
-   * Removes all user assignments.
-   *
-   * This method should be triggered when changing access schemes. If possible,
-   * let the administrator choose to run this.
-   */
-  public function flushUsers();
 
   /**
    * Removes all field settings.

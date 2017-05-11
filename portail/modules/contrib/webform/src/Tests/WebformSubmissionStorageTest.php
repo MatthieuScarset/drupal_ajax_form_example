@@ -19,22 +19,7 @@ class WebformSubmissionStorageTest extends WebformTestBase {
    *
    * @var array
    */
-  protected static $modules = ['webform'];
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function tearDown() {
-    $this->purgeSubmissions();
-    parent::tearDown();
-  }
+  public static $modules = ['webform'];
 
   /**
    * Test webform submission storage.
@@ -95,7 +80,7 @@ class WebformSubmissionStorageTest extends WebformTestBase {
     $this->drupalLogout();
 
     // Enable the saving of drafts.
-    $webform->setSetting('draft', TRUE)->save();
+    $webform->setSetting('draft', WebformInterface::DRAFT_ENABLED_AUTHENTICATED)->save();
 
     // Create drafts for user1 and user2.
     $this->drupalLogin($user1);

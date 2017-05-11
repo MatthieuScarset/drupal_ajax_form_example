@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Locale\CountryManager;
 use Drupal\webform\Element\WebformTelephone as WebformTelephoneElement;
 
 /**
@@ -26,6 +27,7 @@ class WebformTelephone extends WebformCompositeBase {
     $default_properties = parent::getDefaultProperties();
     $default_properties['title_display'] = '';
     $default_properties['phone__international'] = TRUE;
+    $default_properties['phone__international_initial_country'] = '';
     unset($default_properties['flexbox']);
     return $default_properties;
   }
@@ -112,8 +114,23 @@ class WebformTelephone extends WebformCompositeBase {
     $form['composite']['phone__international'] = [
       '#title' => $this->t('Enhance support for international phone numbers'),
       '#type' => 'checkbox',
-      '#return_value' => TRUE,
       '#description' => $this->t('Enhance the telephone element\'s international support using the jQuery <a href=":href">International Telephone Input</a> plugin.', [':href' => 'http://intl-tel-input.com/']),
+      '#return_value' => TRUE,
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
+    ];
+    $form['composite']['phone__international_initial_country'] = [
+      '#title' => $this->t('Initial country'),
+      '#type' => 'select',
+      '#empty_option' => '',
+      '#options' => [
+        'auto' => $this->t('Auto detect'),
+      ] + CountryManager::getStandardList(),
+      '#states' => [
+        'visible' => [
+          ':input[name="properties[phone__international]"]' => ['checked' => TRUE],
+        ],
+      ],
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
     return $form;
   }

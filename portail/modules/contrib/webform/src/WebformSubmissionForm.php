@@ -148,6 +148,23 @@ class WebformSubmissionForm extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
+  public function getFormId() {
+    $form_id = $this->entity->getEntityTypeId();
+    if ($this->entity->getEntityType()->hasKey('bundle')) {
+      $form_id .= '_' . $this->entity->bundle();
+    }
+    if ($source_entity = $this->entity->getSourceEntity()) {
+      $form_id .= '_' . $source_entity->getEntityTypeId() . '_' . $source_entity->id();
+    }
+    if ($this->operation != 'default') {
+      $form_id .= $this->operation;
+    }
+    return $form_id . '_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function setEntity(EntityInterface $entity) {
     /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
     $webform_submission = $entity;
@@ -196,15 +213,21 @@ class WebformSubmissionForm extends ContentEntityForm {
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
 
+    // Add this webform and the webform settings to the cache tags.
+    $form['#cache']['tags'][] = 'config:webform.settings';
+
     // This submission webform is based on the current URL, and hence it depends
     // on the 'url' cache context.
     $form['#cache']['contexts'][] = 'url';
 
-    // Add this webform and the webform settings to the cache tags.
-    $form['#cache']['tags'][] = 'config:webform.settings';
+    // All anonymous submissions are tracked in the $_SESSION.
+    // @see \Drupal\webform\WebformSubmissionStorage::setAnonymousSubmission
+    if ($this->currentUser()->isAnonymous()) {
+      $form['#cache']['contexts'][] = 'session';
+    }
 
     // Add the webform as a cacheable dependency.
-    \Drupal::service('renderer')->addCacheableDependency($form, $this->getWebform());
+    \Drupal::service('renderer')->addCacheableDependency($form, $webform);
 
     // Display status messages.
     $this->displayMessages($form, $form_state);
@@ -218,6 +241,7 @@ class WebformSubmissionForm extends ContentEntityForm {
     // Call custom webform alter hook.
     $form_id = $this->getFormId();
     $this->thirdPartySettingsManager->alter('webform_submission_form', $form, $form_state, $form_id);
+
     return $form;
   }
 
@@ -424,7 +448,12 @@ class WebformSubmissionForm extends ContentEntityForm {
         $this->messageManager->display(WebformMessageManagerInterface::ADMIN_ACCESS, 'warning');
       }
       else {
-        $form['closed'] = $this->messageManager->build(WebformMessageManagerInterface::FORM_CLOSED_MESSAGE);
+        if ($webform->isOpening()) {
+          $form['opening'] = $this->messageManager->build(WebformMessageManagerInterface::FORM_OPEN_MESSAGE);
+        }
+        else {
+          $form['closed'] = $this->messageManager->build(WebformMessageManagerInterface::FORM_CLOSE_MESSAGE);
+        }
         return $form;
       }
     }
@@ -488,9 +517,30 @@ class WebformSubmissionForm extends ContentEntityForm {
     /* @var $webform_submission \Drupal\webform\WebformSubmissionInterface */
     $webform_submission = $this->getEntity();
     $webform = $this->getWebform();
+    $source_entity = $this->getSourceEntity();
+
     // Display test message.
-    if ($this->isGet() && $this->isRoute('entity.webform.test')) {
+    if ($this->isGet() && $this->isRoute('webform.test')) {
       $this->messageManager->display(WebformMessageManagerInterface::SUBMISSION_TEST, 'warning');
+
+      // Display devel generate link for webform or source entity.
+      if ($this->moduleHandler->moduleExists('devel_generate') && $this->currentUser()->hasPermission('administer webform')) {
+        $query = ['webform_id' => $webform->id()];
+        if ($source_entity) {
+          $query += [
+            'entity_type' => $source_entity->getEntityTypeId(),
+            'entity_id' => $source_entity->id(),
+          ];
+        }
+        $query['destination'] = $this->requestHandler->getUrl($webform, $source_entity, 'webform.results_submissions')->toString();
+        $build = [
+          '#type' => 'link',
+          '#title' => $this->t('Generate webform submissions'),
+          '#url' => Url::fromRoute('devel_generate.webform_submission', [], ['query' => $query]),
+          '#attributes' => ['class' => ['button', 'button--small']],
+        ];
+        drupal_set_message($this->renderer->renderPlain($build), 'warning');
+      }
     }
 
     // Display loaded or saved draft message.
@@ -508,8 +558,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     // submission.
     if ($this->isGet()
       && $this->getWebformSetting('form_previous_submissions', FALSE)
-      && ($this->isRoute('entity.webform.canonical') || $this->isWebformEntityReferenceFromSourceEntity())
-      && $webform->access('submission_view_own')
+      && ($this->isRoute('webform.canonical') || $this->isWebformEntityReferenceFromSourceEntity())
+      && ($webform->access('submission_view_own') || $this->currentUser()->hasPermission('view own webform submission'))
       && ($previous_total = $this->storage->getTotal($webform, $this->sourceEntity, $this->currentUser()))
     ) {
       if ($previous_total > 1) {
@@ -607,11 +657,12 @@ class WebformSubmissionForm extends ContentEntityForm {
       $is_last_page = (in_array($current_page, ['preview', 'complete', $this->getLastPage($form, $form_state)])) ? TRUE : FALSE;
       $is_preview_page = ($current_page == 'preview');
       $is_next_page_preview = ($this->getNextPage($form, $form_state) == 'preview') ? TRUE : FALSE;
+      $is_next_page_complete = ($this->getNextPage($form, $form_state) == 'complete') ? TRUE : FALSE;
       $is_next_page_optional_preview = ($is_next_page_preview && $preview_mode != DRUPAL_REQUIRED);
 
       // Only show that save button if this is the last page of the wizard or
       // on preview page or right before the optional preview.
-      $element['submit']['#access'] = $is_last_page || $is_preview_page || $is_next_page_optional_preview;
+      $element['submit']['#access'] = $is_last_page || $is_preview_page || $is_next_page_optional_preview || $is_next_page_complete;
 
       if (!$is_first_page) {
         if ($is_preview_page) {
@@ -634,7 +685,7 @@ class WebformSubmissionForm extends ContentEntityForm {
         ];
       }
 
-      if (!$is_last_page) {
+      if (!$is_last_page && !$is_next_page_complete) {
         if ($is_next_page_preview) {
           $next_attributes = $this->getWebformSetting('preview_next_button_attributes');
           $next_label = $this->getWebformSetting('preview_next_button_label');
@@ -1155,9 +1206,8 @@ class WebformSubmissionForm extends ContentEntityForm {
     $confirmation_type = $this->getWebformSetting('confirmation_type');
     switch ($confirmation_type) {
       case 'page':
-        $redirect_route_name = $this->requestHandler->getRouteName($webform, $this->sourceEntity, 'webform.confirmation');
-        $redirect_route_parameters = $this->requestHandler->getRouteParameters($webform, $this->sourceEntity);
-        $form_state->setRedirect($redirect_route_name, $redirect_route_parameters, $route_options);
+        $redirect_url = $this->requestHandler->getUrl($webform, $this->sourceEntity, 'webform.confirmation', $route_options);
+        $form_state->setRedirectUrl($redirect_url);
         return;
 
       case 'url':
@@ -1350,7 +1400,7 @@ class WebformSubmissionForm extends ContentEntityForm {
   protected function checkTotalLimit() {
     $webform = $this->getWebform();
 
-    // Check per entity total limit.
+    // Check per source entity total limit.
     $entity_limit_total = $this->getWebformSetting('entity_limit_total');
     if ($entity_limit_total && ($source_entity = $this->getLimitSourceEntity())) {
       if ($this->storage->getTotal($webform, $source_entity) >= $entity_limit_total) {
@@ -1382,7 +1432,7 @@ class WebformSubmissionForm extends ContentEntityForm {
       return FALSE;
     }
 
-    // Check per entity user limit.
+    // Check per source entity user limit.
     $entity_limit_user = $this->getWebformSetting('entity_limit_user');
     if ($entity_limit_user && ($source_entity = $this->getLimitSourceEntity())) {
       if ($this->storage->getTotal($webform, $source_entity, $account) >= $entity_limit_user) {
@@ -1406,8 +1456,30 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   TRUE if drafts are enabled.
    */
   protected function draftEnabled() {
-    $account = $this->currentUser();
-    return ($account->isAuthenticated() && $this->getWebformSetting('draft') && !$this->getWebformSetting('results_disabled')) ? TRUE : FALSE;
+    // Can't saved drafts when saving results is disabled.
+    if ($this->getWebformSetting('results_disabled')) {
+      return FALSE;
+    }
+
+    /** @var WebformSubmissionInterface $webform_submission */
+    $webform_submission = $this->getEntity();
+
+    // Once a form is completed drafts are no longer applicable.
+    if ($webform_submission->isCompleted()) {
+      return FALSE;
+    }
+
+    switch ($this->getWebformSetting('draft')) {
+      case WebformInterface::DRAFT_ENABLED_ALL:
+        return TRUE;
+
+      case WebformInterface::DRAFT_ENABLED_AUTHENTICATED:
+        return $webform_submission->getOwner()->isAuthenticated();
+
+      case WebformInterface::DRAFT_ENABLED_NONE:
+      default:
+        return FALSE;
+    }
   }
 
   /**
@@ -1450,7 +1522,7 @@ class WebformSubmissionForm extends ContentEntityForm {
    *   TRUE if the current request is a specific route (name).
    */
   protected function isRoute($route_name) {
-    return ($route_name == $this->getRouteMatch()->getRouteName()) ? TRUE : FALSE;
+    return ($this->requestHandler->getRouteName($this->getEntity(), $this->getSourceEntity(), $route_name) == $this->getRouteMatch()->getRouteName()) ? TRUE : FALSE;
   }
 
   /**

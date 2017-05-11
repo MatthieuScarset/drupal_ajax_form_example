@@ -11,6 +11,7 @@ template: false
 id: test_element_html_escape
 title: 'Test: Element: HTML escaping'
 description: 'Test element HTML escaping support'
+category: 'Test: Element'
 elements: |
   basic_elements:
     '#type': details
@@ -118,10 +119,6 @@ elements: |
       '#title': 'Telephone multiple | <script>alert(''This markup is not escaped properly!!!'') </script>'
       '#international': true
       '#multiple': true
-    text_format:
-      '#type': text_format
-      '#title': 'Text format | <script>alert(''This markup is not escaped properly!!!'') </script>'
-      '#description': '<b>Known Issues:</b><br/><a href="https://www.drupal.org/node/997826">Issue #997826: #states doesn''t work correctly with type text_format</a><br/><a href="https://www.drupal.org/node/2625128">Issue #2625128: Text format selection stays visible when using editor and a hidden webform state</a><br/><a href="https://www.drupal.org/node/1954968">Issue #1954968: Required CKEditor fields always fail HTML5 validation</a>'
     webform_toggle:
       '#type': webform_toggle
       '#title': 'Toggle | <script>alert(''This markup is not escaped properly!!!'') </script>'
@@ -239,19 +236,35 @@ elements: |
         three: Three
         four: Four
         five: Five
-    webform_likert:
-      '#type': webform_likert
-      '#title': 'Likert | <script>alert(''This markup is not escaped properly!!!'') </script>'
-      '#questions':
-        q1: 'Please answer question 1?'
-        q2: 'How about now answering question 2?'
-        q3: 'Finally, here is question 3?'
-      '#answers':
-        1: 1
-        2: 2
-        3: 3
-        4: 4
-        5: 5
+    webform_image_select:
+      '#type': webform_image_select
+      '#title': 'Image select | <script>alert(''This markup is not escaped properly!!!'') </script>'
+      '#show_label': true
+      '#images':
+        kitten_1:
+          text: 'Cute Kitten 1'
+          src: 'http://placekitten.com/220/200'
+        kitten_2:
+          text: 'Cute Kitten 2'
+          src: 'http://placekitten.com/180/200'
+        kitten_3:
+          text: 'Cute Kitten 3'
+          src: 'http://placekitten.com/130/200'
+    webform_image_select_multiple:
+      '#type': webform_image_select
+      '#title': 'Image select multiple | <script>alert(''This markup is not escaped properly!!!'') </script>'
+      '#show_label': true
+      '#images':
+        kitten_1:
+          text: 'Cute Kitten 1'
+          src: 'http://placekitten.com/220/200'
+        kitten_2:
+          text: 'Cute Kitten 2'
+          src: 'http://placekitten.com/180/200'
+        kitten_3:
+          text: 'Cute Kitten 3'
+          src: 'http://placekitten.com/130/200'
+      '#multiple': true
     radios:
       '#type': radios
       '#title': 'Radios | <script>alert(''This markup is not escaped properly!!!'') </script>'
@@ -453,7 +466,7 @@ elements: |
         include_anonymous: true
       '#options':
         1: Administrator
-        0: 'Anonymous | <script>alert(''This markup is not escaped properly!!!'') </script>'
+        0: Anonymous
     webform_entity_radios:
       '#type': webform_entity_radios
       '#title': 'Entity radios | <script>alert(''This markup is not escaped properly!!!'') </script>'
@@ -461,7 +474,9 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
-      '#options': null
+      '#options':
+        1: Administrator
+        0: Anonymous
     webform_entity_select:
       '#type': webform_entity_select
       '#title': 'Entity select | <script>alert(''This markup is not escaped properly!!!'') </script>'
@@ -478,6 +493,10 @@ elements: |
         include_anonymous: true
       '#multiple': true
       '#select2': true
+    webform_term_checkboxes:
+      '#type': webform_term_checkboxes
+      '#title': 'Term checkboxes | <script>alert(''This markup is not escaped properly!!!'') </script>'
+      '#vocabulary': tags
     webform_term_select:
       '#type': webform_term_select
       '#title': 'Term select | <script>alert(''This markup is not escaped properly!!!'') </script>'
@@ -512,10 +531,12 @@ settings:
   form_submit_once: false
   form_submit_attributes: {  }
   form_exception_message: ''
-  form_closed_message: ''
+  form_open_message: ''
+  form_close_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_disable_autocomplete: false
@@ -524,6 +545,7 @@ settings:
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
+  submission_log: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -540,7 +562,7 @@ settings:
   preview_prev_button_label: ''
   preview_prev_button_attributes: {  }
   preview_message: ''
-  draft: false
+  draft: none
   draft_auto_save: false
   draft_button_label: ''
   draft_button_attributes: {  }

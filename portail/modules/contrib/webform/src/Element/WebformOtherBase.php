@@ -114,8 +114,15 @@ abstract class WebformOtherBase extends FormElement {
       '#type' => 'textfield',
       '#placeholder' => t('Enter other...'),
     ];
+
     $element['other']['#wrapper_attributes']['class'][] = "js-webform-$type-other-input";
     $element['other']['#wrapper_attributes']['class'][] = "webform-$type-other-input";
+
+    if ($element['other']['#type'] == 'datetime') {
+      $element['other']['#prefix'] = '<div class="' . implode(' ', $element['other']['#wrapper_attributes']['class']) . '">';
+      $element['other']['#suffix'] = '</div>';
+      unset($element['other']['#wrapper_attributes']['class']);
+    }
 
     // Remove options.
     unset($element['#options']);
@@ -223,7 +230,7 @@ abstract class WebformOtherBase extends FormElement {
    * @return array
    *   An associative array container (element) type and other value.
    */
-  protected static function convertDefaultValueToElementValue($element) {
+  protected static function convertDefaultValueToElementValue(array $element) {
     $type = str_replace('webform_', '', static::$type);
 
     $default_value = isset($element['#default_value']) ? $element['#default_value'] : NULL;

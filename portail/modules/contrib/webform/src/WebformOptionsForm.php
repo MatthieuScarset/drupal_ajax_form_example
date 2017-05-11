@@ -22,6 +22,9 @@ class WebformOptionsForm extends EntityForm {
     /** @var \Drupal\webform\WebformOptionsInterface $webform_options */
     $webform_options = $this->entity;
 
+    /** @var \Drupal\webform\WebformOptionsStorageInterface $webform_options_storage */
+    $webform_options_storage = $this->entityTypeManager->getStorage('webform_options');
+
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
@@ -38,6 +41,13 @@ class WebformOptionsForm extends EntityForm {
       '#required' => TRUE,
       '#disabled' => !$webform_options->isNew(),
       '#default_value' => $webform_options->id(),
+    ];
+    $form['category'] = [
+      '#type' => 'webform_select_other',
+      '#title' => $this->t('Category'),
+      '#options' => $webform_options_storage->getCategories(),
+      '#empty_option' => '<' . $this->t('None') . '>',
+      '#default_value' => $webform_options->get('category'),
     ];
 
     // Call the isolated edit webform that can be overridden by the
@@ -166,7 +176,12 @@ class WebformOptionsForm extends EntityForm {
     $webform_options->set('options', '');
     $webform_options->save();
 
-    $this->logger('webform')->notice('Options @label have been reset.', ['@label' => $webform_options->label()]);
+    $context = [
+      '@label' => $webform_options->label(),
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
+    ];
+    $this->logger('webform')->notice('Options @label have been reset.', $context);
+
     drupal_set_message($this->t('Options %label have been reset.', ['%label' => $webform_options->label()]));
 
     $form_state->setRedirect('entity.webform_options.collection');
@@ -180,7 +195,12 @@ class WebformOptionsForm extends EntityForm {
     $webform_options = $this->getEntity();
     $webform_options->save();
 
-    $this->logger('webform')->notice('Options @label saved.', ['@label' => $webform_options->label()]);
+    $context = [
+      '@label' => $webform_options->label(),
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
+    ];
+    $this->logger('webform')->notice('Options @label saved.', $context);
+
     drupal_set_message($this->t('Options %label saved.', ['%label' => $webform_options->label()]));
 
     $form_state->setRedirect('entity.webform_options.collection');

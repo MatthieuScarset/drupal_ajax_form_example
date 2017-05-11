@@ -11,6 +11,7 @@ template: false
 id: test_element_flexbox
 title: 'Test: Element: Flexbox'
 description: 'Test flexbox layout.'
+category: 'Test: Element'
 elements: |
   flexbox_processed_text:
     '#type': webform_flexbox
@@ -395,7 +396,9 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
-      '#options': null
+      '#options':
+        1: Administrator
+        0: Anonymous
     flex_webform_entity_radios_right:
       '#type': webform_entity_radios
       '#title': 'Entity radios 02'
@@ -403,7 +406,9 @@ elements: |
       '#selection_handler': 'default:user'
       '#selection_settings':
         include_anonymous: true
-      '#options': null
+      '#options':
+        1: Administrator
+        0: Anonymous
   flexbox_webform_entity_select:
     '#type': webform_flexbox
     flex_webform_entity_select_left:
@@ -446,6 +451,36 @@ elements: |
     flex_webform_image_file_right:
       '#type': webform_image_file
       '#title': 'Image file 02'
+  flexbox_webform_image_select:
+    '#type': webform_flexbox
+    flex_webform_image_select_left:
+      '#type': webform_image_select
+      '#title': 'Image select 01'
+      '#show_label': true
+      '#images':
+        kitten_1:
+          text: 'Cute Kitten 1'
+          src: 'http://placekitten.com/220/200'
+        kitten_2:
+          text: 'Cute Kitten 2'
+          src: 'http://placekitten.com/180/200'
+        kitten_3:
+          text: 'Cute Kitten 3'
+          src: 'http://placekitten.com/130/200'
+    flex_webform_image_select_right:
+      '#type': webform_image_select
+      '#title': 'Image select 02'
+      '#show_label': true
+      '#images':
+        kitten_1:
+          text: 'Cute Kitten 1'
+          src: 'http://placekitten.com/220/200'
+        kitten_2:
+          text: 'Cute Kitten 2'
+          src: 'http://placekitten.com/180/200'
+        kitten_3:
+          text: 'Cute Kitten 3'
+          src: 'http://placekitten.com/130/200'
   flexbox_language_select:
     '#type': webform_flexbox
     flex_language_select_left:
@@ -497,9 +532,15 @@ elements: |
     flex_webform_location_left:
       '#type': webform_location
       '#title': 'Location 01'
+      '#map': true
+      '#geolocation': true
+      '#format': map
     flex_webform_location_right:
       '#type': webform_location
       '#title': 'Location 02'
+      '#map': true
+      '#geolocation': true
+      '#format': map
   flexbox_machine_name:
     '#type': webform_flexbox
     flex_machine_name_left:
@@ -508,6 +549,30 @@ elements: |
     flex_machine_name_right:
       '#type': machine_name
       '#title': 'Machine name 02'
+  flexbox_webform_mapping:
+    '#type': webform_flexbox
+    flex_webform_mapping_left:
+      '#type': webform_mapping
+      '#title': 'Mapping 01'
+      '#source':
+        one: One
+        two: Two
+        three: Three
+      '#destination':
+        four: Four
+        five: Five
+        six: Six
+    flex_webform_mapping_right:
+      '#type': webform_mapping
+      '#title': 'Mapping 02'
+      '#source':
+        one: One
+        two: Two
+        three: Three
+      '#destination':
+        four: Four
+        five: Five
+        six: Six
   flexbox_webform_name:
     '#type': webform_flexbox
     flex_webform_name_left:
@@ -726,6 +791,16 @@ elements: |
     flex_webform_telephone_right:
       '#type': webform_telephone
       '#title': 'Telephone advanced 02'
+  flexbox_webform_term_checkboxes:
+    '#type': webform_flexbox
+    flex_webform_term_checkboxes_left:
+      '#type': webform_term_checkboxes
+      '#title': 'Term checkboxes 01'
+      '#vocabulary': tags
+    flex_webform_term_checkboxes_right:
+      '#type': webform_term_checkboxes
+      '#title': 'Term checkboxes 02'
+      '#vocabulary': tags
   flexbox_webform_term_select:
     '#type': webform_flexbox
     flex_webform_term_select_left:
@@ -855,10 +930,12 @@ settings:
   form_submit_once: false
   form_submit_attributes: {  }
   form_exception_message: ''
-  form_closed_message: ''
+  form_open_message: ''
+  form_close_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_disable_autocomplete: false
@@ -867,6 +944,7 @@ settings:
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
+  submission_log: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -883,7 +961,7 @@ settings:
   preview_prev_button_label: ''
   preview_prev_button_attributes: {  }
   preview_message: ''
-  draft: false
+  draft: none
   draft_auto_save: false
   draft_button_label: ''
   draft_button_attributes: {  }

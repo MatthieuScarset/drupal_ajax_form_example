@@ -4,6 +4,7 @@ namespace Drupal\Tests\workbench_access\Functional;
 
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\workbench_access\WorkbenchAccessManagerInterface;
 
 /**
  * Tests for the node form.
@@ -51,6 +52,13 @@ class NodeFormTest extends BrowserTestBase {
       'name' => 'Super staff',
     ]);
     $super_staff_term->save();
+    $base_term = Term::create([
+      'vid' => $vocab->id(),
+      'name' => 'Editor',
+    ]);
+    $base_term->save();
+    $editor->{WORKBENCH_ACCESS_FIELD} = $base_term->id();
+    $editor->save();
 
     $staff_rid = $this->createRole([], 'staff');
     $super_staff_rid = $this->createRole([], 'super_staff');
@@ -62,21 +70,21 @@ class NodeFormTest extends BrowserTestBase {
     $this->drupalGet('node/add/page');
 
     // Assert we can't see the options yet.
-    $web_assert->optionNotExists(WORKBENCH_ACCESS_FIELD, $staff_term->getName());
-    $web_assert->optionNotExists(WORKBENCH_ACCESS_FIELD, $super_staff_term->getName());
+    $web_assert->optionNotExists(WorkbenchAccessManagerInterface::FIELD_NAME, $staff_term->getName());
+    $web_assert->optionNotExists(WorkbenchAccessManagerInterface::FIELD_NAME, $super_staff_term->getName());
 
     // Add the staff role and check the option exists.
     $editor->addRole($staff_rid);
     $editor->save();
     $this->drupalGet('node/add/page');
-    $web_assert->optionExists(WORKBENCH_ACCESS_FIELD, $staff_term->getName());
+    $web_assert->optionExists(WorkbenchAccessManagerInterface::FIELD_NAME, $staff_term->getName());
 
     // Add the super staff role and check both options exist.
     $editor->addRole($super_staff_rid);
     $editor->save();
     $this->drupalGet('node/add/page');
-    $web_assert->optionExists(WORKBENCH_ACCESS_FIELD, $staff_term->getName());
-    $web_assert->optionExists(WORKBENCH_ACCESS_FIELD, $super_staff_term->getName());
+    $web_assert->optionExists(WorkbenchAccessManagerInterface::FIELD_NAME, $staff_term->getName());
+    $web_assert->optionExists(WorkbenchAccessManagerInterface::FIELD_NAME, $super_staff_term->getName());
   }
 
 }

@@ -4,6 +4,7 @@ namespace Drupal\webform;
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\webform\Utility\WebformArrayHelper;
+use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityForm;
@@ -73,6 +74,9 @@ class WebformEntitySettingsForm extends EntityForm {
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->entity;
 
+    // Set message manager's webform.
+    $this->messageManager->setWebform($webform);
+
     $default_settings = $this->config('webform.settings')->get('settings');
     $settings = $webform->getSettings();
 
@@ -101,10 +105,20 @@ class WebformEntitySettingsForm extends EntityForm {
       '#title' => $this->t('Administrative description'),
       '#default_value' => $webform->get('description'),
     ];
+    /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+    $webform_storage = $this->entityTypeManager->getStorage('webform');
+    $form['general']['category'] = [
+      '#type' => 'webform_select_other',
+      '#title' => $this->t('Category'),
+      '#options' => $webform_storage->getCategories(),
+      '#empty_option' => '<' . $this->t('None') . '>',
+      '#default_value' => $webform->get('category'),
+    ];
     $form['general']['template'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Allow this webform to be used as a template.'),
       '#description' => $this->t('If checked, this webform will be available as a template to all users who can create new webforms.'),
+      '#return_value' => TRUE,
       '#access' => $this->moduleHandler->moduleExists('webform_templates'),
       '#default_value' => $webform->isTemplate(),
     ];
@@ -115,10 +129,25 @@ class WebformEntitySettingsForm extends EntityForm {
       '#return_value' => TRUE,
       '#default_value' => $settings['results_disabled'],
     ];
+
+    // Display warning when submission handler requires submissions to be saved
+    // to the database.
+    $is_submission_required = $webform->getHandlers(NULL, TRUE, WebformHandlerInterface::SUBMISSION_REQUIRED)->count();
+    if ($is_submission_required) {
+      $form['general']['results_disabled']['#default_value'] = FALSE;
+      $form['general']['results_disabled']['#disabled'] = TRUE;
+      unset($form['general']['results_disabled']['#description']);
+      $form['general']['results_disabled_required'] = [
+        '#type' => 'webform_message',
+        '#message_type' => 'warning',
+        '#message_message' => $this->messageManager->get(WebformMessageManagerInterface::HANDLER_SUBMISSION_REQUIRED),
+      ];
+    }
+
     // Display warning when disabling the saving of submissions with no
     // handlers.
-    if (!$webform->getHandlers(NULL, TRUE, WebformHandlerInterface::RESULTS_PROCESSED)->count()) {
-      $this->messageManager->setWebform($webform);
+    $is_results_processed = $webform->getHandlers(NULL, TRUE, WebformHandlerInterface::RESULTS_PROCESSED)->count();
+    if (!$is_results_processed) {
       $form['general']['results_disabled_error'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
@@ -160,6 +189,7 @@ class WebformEntitySettingsForm extends EntityForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Allow users to post submission from a dedicated URL.'),
       '#description' => $this->t('If unchecked, this webform must be attached to a <a href=":node_href">node</a> or a <a href=":block_href">block</a> to receive submissions.', $t_args),
+      '#return_value' => TRUE,
       '#default_value' => $settings['page'],
     ];
     if ($this->moduleHandler->moduleExists('path')) {
@@ -190,156 +220,143 @@ class WebformEntitySettingsForm extends EntityForm {
     // Form.
     $form['form'] = [
       '#type' => 'details',
-      '#title' => $this->t('Webform settings'),
+      '#title' => $this->t('Form settings'),
     ];
     $form['form']['status'] = [
       '#type' => 'radios',
-      '#title' => $this->t('Webform status'),
+      '#title' => $this->t('Form status'),
       '#default_value' => $webform->get('status'),
       '#options' => [
         WebformInterface::STATUS_OPEN => $this->t('Open'),
         WebformInterface::STATUS_CLOSED => $this->t('Closed'),
         WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled'),
       ],
-      '#states' => [
-        'visible' => [
-          ':input[name="template"]' => ['checked' => FALSE],
-        ],
-      ],
     ];
+
+    // @see \Drupal\webform\Plugin\Field\FieldWidget\WebformEntityReferenceAutocompleteWidget::formElement
     $form['form']['scheduled'] = [
       '#type' => 'item',
       '#input' => FALSE,
-      '#attributes' => ['class' => 'container-inline'],
-      '#description' => $this->t('If the open date/time is left blank, this webform will immediately be opened.') .
+      '#description' => $this->t('If the open date/time is left blank, this form will immediately be opened.') .
       '<br/>' .
       $this->t('If the close date/time is left blank, this webform will never be closed.'),
       '#states' => [
         'visible' => [
-          ':input[name="template"]' => ['checked' => FALSE],
           ':input[name="status"]' => ['value' => WebformInterface::STATUS_SCHEDULED],
         ],
       ],
     ];
-    $form['form']['scheduled']['dates'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => 'container-inline'],
-    ];
-    $form['form']['scheduled']['dates']['open'] = [
+    $form['form']['scheduled']['open'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Open'),
+      '#prefix' => '<div class="container-inline form-item">',
+      '#suffix' => '</div>',
       '#default_value' => $webform->get('open') ? DrupalDateTime::createFromTimestamp(strtotime($webform->get('open'))) : NULL,
     ];
-    $form['form']['scheduled']['dates']['space'] = ['#markup' => ' &nbsp; '];
-    $form['form']['scheduled']['dates']['close'] = [
+    $form['form']['scheduled']['close'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Close'),
+      '#prefix' => '<div class="container-inline form-item">',
+      '#suffix' => '</div>',
       '#default_value' => $webform->get('close') ? DrupalDateTime::createFromTimestamp(strtotime($webform->get('close'))) : NULL,
     ];
-    $form['form']['form_closed_message'] = [
+    // If the Webform templates module is enabled, add additional #states.
+    if ($this->moduleHandler->moduleExists('webform_templates')) {
+      $form['form']['status']['#states'] = [
+        'visible' => [
+          ':input[name="template"]' => ['checked' => FALSE],
+        ],
+      ];
+      $form['form']['scheduled']['#states']['visible'][':input[name="template"]'] = ['checked' => FALSE];
+    }
+
+    $form['form']['form_open_message'] = [
       '#type' => 'webform_html_editor',
-      '#title' => $this->t('Webform closed message'),
-      '#description' => $this->t('A message to be displayed notifying the user that the webform is closed.'),
-      '#default_value' => $settings['form_closed_message'],
+      '#title' => $this->t('Form open message'),
+      '#description' => $this->t('A message to be displayed notifying the user that the webform is going to be opening to submissions. The opening message will only be displayed when a webform is scheduled to be opened.'),
+      '#default_value' => $settings['form_open_message'],
+    ];
+    $form['form']['form_close_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Form closed message'),
+      '#description' => $this->t("A message to be displayed notifying the user that the webform is closed. The closed message will be displayed when a webform's status is closed or a submission limit is reached."),
+      '#default_value' => $settings['form_close_message'],
     ];
     $form['form']['form_exception_message'] = [
       '#type' => 'webform_html_editor',
-      '#title' => $this->t('Webform exception message'),
+      '#title' => $this->t('Form exception message'),
       '#description' => $this->t('A message to be displayed if the webform breaks.'),
       '#default_value' => $settings['form_exception_message'],
     ];
     $form['form']['form_submit'] = [
       '#type' => 'details',
-      '#title' => $this->t('Webform submit button'),
+      '#title' => $this->t('Form submit button'),
     ];
     $form['form']['form_submit']['form_submit_label'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Webform submit button label'),
+      '#title' => $this->t('Form submit button label'),
       '#size' => 20,
       '#default_value' => $settings['form_submit_label'],
     ];
     $form['form']['form_submit']['form_submit_attributes'] = [
       '#type' => 'webform_element_attributes',
-      '#title' => $this->t('Webform submit button'),
+      '#title' => $this->t('Form submit button'),
       '#classes' => $this->configFactory->get('webform.settings')->get('settings.button_classes'),
       '#default_value' => $settings['form_submit_attributes'],
     ];
-    $form['form']['form_prepopulate'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Allow elements to be populated using query string parameters.'),
-      '#description' => $this->t("If checked, elements can be populated using query string parameters. For example, appending ?name=John+Smith to a webform's URL would setting an the 'name' element's default value to 'John Smith'."),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['form_prepopulate'],
-    ];
-    $form['form']['form_prepopulate_source_entity'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Allow source entity to be populated using query string parameters.'),
-      '#description' => $this->t("If checked, source entity can be populated using query string parameters. For example, appending ?source_entity_type=user&source_entity_id=1 to a webform's URL would set a submission's 'Submitted to' value to '@user.", ['@user' => User::load(1)->label()]),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['form_prepopulate_source_entity'],
-    ];
-    $settings_elements = [
-      'form_submit_once' => [
-        'title' => $this->t('Prevent duplicate submissions'),
-        'all_description' => $this->t('Submit button is disabled immediately after is is clicked form all webforms.'),
-        'form_description' => $this->t('If checked, the submit button will be disabled immediately after is is clicked.'),
-      ],
-      'form_disable_back' => [
-        'title' => $this->t('Disable back button for all webforms'),
-        'all_description' => $this->t('Back button is disabled for all webforms.'),
-        'form_description' => $this->t('If checked, users will not be allowed to navigate back to the webform using the browsers back button.'),
-      ],
-      'form_unsaved' => [
-        'title' => $this->t('Warn users about unsaved changes'),
-        'all_description' => $this->t('Unsaved warning is enabled for all webforms.'),
-        'form_description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a webform with unsaved changes.'),
-      ],
+
+    // Form Behaviors.
+    $behavior_elements = [
+      // Form specific behaviors.
       'form_disable_autocomplete' => [
         'title' => $this->t('Disable autocompletion'),
         'form_description' => $this->t('If checked, the <a href=":href">autocomplete</a> attribute will be set to off, which disables autocompletion for all form elements.', [':href' => 'http://www.w3schools.com/tags/att_form_autocomplete.asp']),
       ],
+      'form_autofocus' => [
+        'title' => $this->t('Autofocus'),
+        'form_description' => $this->t('If checked, the first visible and enabled input will be focused when adding new submissions.'),
+      ],
+      'form_prepopulate' => [
+        'title' => $this->t('Allow elements to be populated using query string parameters.'),
+        'form_description' => $this->t("If checked, elements can be populated using query string parameters. For example, appending ?name=John+Smith to a webform's URL would setting an the 'name' element's default value to 'John Smith'."),
+      ],
+      'form_prepopulate_source_entity' => [
+        'title' => $this->t('Allow source entity to be populated using query string parameters.'),
+        'form_description' => $this->t("If checked, source entity can be populated using query string parameters. For example, appending ?source_entity_type=user&source_entity_id=1 to a webform's URL would set a submission's 'Submitted to' value to '@user'.", ['@user' => User::load(1)->label()]),
+      ],
+      // Global behaviors.
+      // @see \Drupal\webform\Form\WebformAdminSettingsForm
+      'form_submit_once' => [
+        'title' => $this->t('Prevent duplicate submissions'),
+        'all_description' => $this->t('Submit button is disabled immediately after it is clicked for all forms.'),
+        'form_description' => $this->t('If checked, the submit button will be disabled immediately after it is clicked.'),
+      ],
+      'form_disable_back' => [
+        'title' => $this->t('Disable back button'),
+        'all_description' => $this->t('Back button is disabled for all forms.'),
+        'form_description' => $this->t('If checked, users will not be allowed to navigate back to the form using the browsers back button.'),
+      ],
+      'form_unsaved' => [
+        'title' => $this->t('Warn users about unsaved changes'),
+        'all_description' => $this->t('Unsaved warning is enabled for all forms.'),
+        'form_description' => $this->t('If checked, users will be displayed a warning message when they navigate away from a form with unsaved changes.'),
+      ],
       'form_novalidate' => [
         'title' => $this->t('Disable client-side validation'),
-        'all_description' => $this->t('Client-side validation is disabled for all webforms.'),
-        'form_description' => $this->t('If checked, the <a href=":href">novalidate</a> attribute, which disables client-side validation, will be added to this webform.', [':href' => 'http://www.w3schools.com/tags/att_form_novalidate.asp']),
+        'all_description' => $this->t('Client-side validation is disabled for all forms.'),
+        'form_description' => $this->t('If checked, the <a href=":href">novalidate</a> attribute, which disables client-side validation, will be added to this form.', [':href' => 'http://www.w3schools.com/tags/att_form_novalidate.asp']),
       ],
       'form_details_toggle' => [
         'title' => $this->t('Display collapse/expand all details link'),
-        'all_description' => $this->t('Expand/collapse all (details) link is automatically added to all webforms.'),
+        'all_description' => $this->t('Expand/collapse all (details) link is automatically added to all forms.'),
         'form_description' => $this->t('If checked, an expand/collapse all (details) link will be added to this webform when there are two or more details elements available on the webform.'),
       ],
     ];
-    foreach ($settings_elements as $settings_key => $setting_element) {
-      if (!empty($default_settings['default_' . $settings_key])) {
-        $form['form'][$settings_key . '_disabled'] = [
-          '#type' => 'checkbox',
-          '#title' => $setting_element['title'],
-          '#description' => $setting_element['all_description'],
-          '#disabled' => TRUE,
-          '#default_value' => TRUE,
-        ];
-        $form['form'][$settings_key] = [
-          '#type' => 'value',
-          '#value' => $settings[$settings_key],
-        ];
-      }
-      else {
-        $form['form'][$settings_key] = [
-          '#type' => 'checkbox',
-          '#title' => $setting_element['title'],
-          '#description' => $setting_element['form_description'],
-          '#return_value' => TRUE,
-          '#default_value' => $settings[$settings_key],
-        ];
-      }
-    }
-    $form['form']['form_autofocus'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Autofocus'),
-      '#description' => $this->t('If checked, the first visible and enabled input will be focused when adding new submissions.'),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['form_autofocus'],
+    $form['form_behaviors'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Form behaviors'),
     ];
+    $this->appendBehaviors($form['form_behaviors'], $behavior_elements, $settings, $default_settings);
 
     // Attributes.
     $elements = $webform->getElementsDecoded();
@@ -349,7 +366,7 @@ class WebformEntitySettingsForm extends EntityForm {
     ];
     $form['attributes']['attributes'] = [
       '#type' => 'webform_element_attributes',
-      '#title' => $this->t('Webform'),
+      '#title' => $this->t('Form'),
       '#classes' => $this->configFactory->get('webform.settings')->get('settings.form_classes'),
       '#default_value' => (isset($elements['#attributes'])) ? $elements['#attributes'] : [],
     ];
@@ -372,14 +389,14 @@ class WebformEntitySettingsForm extends EntityForm {
     ];
     $form['wizard']['wizard_progress_pages'] = [
       '#type' => 'checkbox',
-      '#return_value' => TRUE,
       '#title' => $this->t('Show wizard progress pages'),
+      '#return_value' => TRUE,
       '#default_value' => $settings['wizard_progress_pages'],
     ];
     $form['wizard']['wizard_progress_percentage'] = [
       '#type' => 'checkbox',
-      '#return_value' => TRUE,
       '#title' => $this->t('Show wizard progress percentage'),
+      '#return_value' => TRUE,
       '#default_value' => $settings['wizard_progress_percentage'],
     ];
     $form['wizard']['wizard_prev_button'] = [
@@ -524,25 +541,42 @@ class WebformEntitySettingsForm extends EntityForm {
       ],
     ];
     $form['draft']['draft'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Allow your users to save and finish the webform later.'),
-      "#description" => $this->t('This option is available only for authenticated users.'),
-      '#return_value' => TRUE,
+      '#type' => 'radios',
+      '#title' => $this->t('Allow your users to save and finish the webform later'),
       '#default_value' => $settings['draft'],
+      '#options' => [
+        WebformInterface::DRAFT_ENABLED_NONE => $this->t('Disabled'),
+        WebformInterface::DRAFT_ENABLED_AUTHENTICATED => $this->t('Authenticated users'),
+        WebformInterface::DRAFT_ENABLED_ALL => $this->t('Authenticated and anonymous users'),
+      ],
+    ];
+    $form['draft']['draft_message'] = [
+      '#type' => 'webform_message',
+      '#message_type' => 'warning',
+      '#message_message' => $this->t('Please make sure to enable the <a href=":href">automatic purging of draft submissions</a>, to ensure that your database is not filled with abandoned anonymous submissions in draft.', [':href' => Url::fromRoute('<none>', [], ['fragment' => 'edit-purge'])->toString()]),
+      '#states' => [
+        'visible' => [
+          ':input[name="draft"]' => ['value' => WebformInterface::DRAFT_ENABLED_ALL],
+          ':input[name="purge"]' => [
+            ['value' => WebformSubmissionStorageInterface::PURGE_NONE],
+            ['value' => WebformSubmissionStorageInterface::PURGE_COMPLETED],
+          ],
+        ],
+      ],
     ];
     $form['draft']['settings'] = [
       '#type' => 'container',
       '#states' => [
-        'visible' => [
-          ':input[name="draft"]' => ['checked' => TRUE],
+        'invisible' => [
+          ':input[name="draft"]' => ['value' => WebformInterface::DRAFT_ENABLED_NONE],
         ],
       ],
     ];
     $form['draft']['settings']['draft_auto_save'] = [
       '#type' => 'checkbox',
-      '#return_value' => TRUE,
       '#title' => $this->t('Automatically save as draft when paging, previewing, and when there are validation errors.'),
       "#description" => $this->t('Automatically save partial submissions when users click the "Preview" button or when validation errors prevent a webform from being submitted.'),
+      '#return_value' => TRUE,
       '#default_value' => $settings['draft_auto_save'],
     ];
     $form['draft']['settings']['draft_button'] = [
@@ -586,20 +620,33 @@ class WebformEntitySettingsForm extends EntityForm {
         ],
       ],
     ];
-    $form['submission']['form_previous_submissions'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Show the notification about previous submissions'),
-      '#description' => $this->t('Show the previous submissions notification that appears when users have previously submitted this form.'),
-      '#default_value' => $settings['form_previous_submissions'],
+    $form['submission']['next_serial'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Next submission number'),
+      '#description' => $this->t('The value of the next submission number. This is usually 1 when you start and will go up with each webform submission.'),
+      '#min' => 1,
+      '#default_value' => $webform->getState('next_serial') ?: 1,
     ];
-    $form['submission']['form_confidential'] = [
+
+    // Submission Behaviors.
+    $form['submission_behaviors'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Submission behaviors'),
+      '#states' => [
+        'visible' => [
+          ':input[name="results_disabled"]' => ['checked' => FALSE],
+          ':input[name="method"]' => ['value' => ''],
+        ],
+      ],
+    ];
+    $form['submission_behaviors']['form_confidential'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Confidential submissions'),
       '#description' => $this->t('Confidential submissions have no recorded IP address and must be submitted while logged out.'),
       '#return_value' => TRUE,
       '#default_value' => $settings['form_confidential'],
     ];
-    $form['submission']['form_confidential_message'] = [
+    $form['submission_behaviors']['form_confidential_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Webform confidential message'),
       '#description' => $this->t('A message to be displayed when authenticated users try to access a confidential webform.'),
@@ -610,20 +657,37 @@ class WebformEntitySettingsForm extends EntityForm {
         ],
       ],
     ];
-    $form['submission']['token_update'] = [
+    $form['submission_behaviors']['form_convert_anonymous'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Allow users to update a submission using a secure token.'),
-      '#description' => $this->t("If checked users will be able to update a submission using the webform's URL appended with the submission's (secure) token.  The URL to update a submission will be available when viewing a submission's information and can be inserted into the an email using the [webform_submission:update-url] token."),
+      '#title' => $this->t('Convert anonymous user drafts and submissions to authenticated user.'),
+      '#description' => $this->t('If checked, drafts and submissions created by an anonymous user will be reassigned to their user account when they login.'),
       '#return_value' => TRUE,
-      '#default_value' => $settings['token_update'],
+      '#default_value' => $settings['form_convert_anonymous'],
+      '#states' => [
+        'visible' => [
+          ':input[name="form_confidential"]' => ['checked' => FALSE],
+        ],
+      ],
     ];
-    $form['submission']['next_serial'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Next submission number'),
-      '#description' => $this->t('The value of the next submission number. This is usually 1 when you start and will go up with each webform submission.'),
-      '#min' => 1,
-      '#default_value' => $webform->getState('next_serial') ?: 1,
+    $behavior_elements = [
+      // Form specific behaviors.
+      'form_previous_submissions' => [
+        'title' => $this->t('Show the notification about previous submissions'),
+        'form_description' => $this->t('Show the previous submissions notification that appears when users have previously submitted this form.'),
+      ],
+      'token_update' => [
+        'title' => $this->t('Allow users to update a submission using a secure token.'),
+        'form_description' => $this->t("If checked users will be able to update a submission using the webform's URL appended with the submission's (secure) token.  The URL to update a submission will be available when viewing a submission's information and can be inserted into the an email using the [webform_submission:update-url] token."),
+      ],
+      // Global behaviors.
+      // @see \Drupal\webform\Form\WebformAdminSettingsForm
+      'submission_log' => [
+        'title' => $this->t('Log submission events'),
+        'all_description' => $this->t('All submission event are being logged for all webforms.'),
+        'form_description' => $this->t('If checked, events will be logged for submissions to this webforms.'),
+      ],
     ];
+    $this->appendBehaviors($form['submission_behaviors'], $behavior_elements, $settings, $default_settings);
 
     // Limits.
     $form['limits'] = [
@@ -644,7 +708,7 @@ class WebformEntitySettingsForm extends EntityForm {
     ];
     $form['limits']['entity_limit_total'] = [
       '#type' => 'number',
-      '#title' => $this->t('Total submissions limit per entity'),
+      '#title' => $this->t('Total submissions limit per source entity'),
       '#min' => 1,
       '#default_value' => $settings['entity_limit_total'],
     ];
@@ -663,7 +727,7 @@ class WebformEntitySettingsForm extends EntityForm {
     $form['limits']['entity_limit_user'] = [
       '#type' => 'number',
       '#min' => 1,
-      '#title' => $this->t('Per user submission limit per entity'),
+      '#title' => $this->t('Per user submission limit per source entity'),
       '#default_value' => $settings['entity_limit_user'],
     ];
     $form['limits']['limit_user_message'] = [
@@ -892,7 +956,7 @@ class WebformEntitySettingsForm extends EntityForm {
       '#description' =>
       $this->t('Properties do not have to prepended with a hash (#) character, the hash character will be automatically added upon submission.') .
       '<br/>' .
-      $this->t('These properties and callbacks are not allowed: @properties', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
+      $this->t('These properties and callbacks are not allowed: @properties.', ['@properties' => WebformArrayHelper::toString(WebformArrayHelper::addPrefix(WebformElementHelper::$ignoredProperties))]),
       '#default_value' => WebformArrayHelper::removePrefix($properties),
     ];
 
@@ -906,8 +970,15 @@ class WebformEntitySettingsForm extends EntityForm {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    if ($values['status'] === WebformInterface::STATUS_SCHEDULED && empty($values['open']) && empty($values['close'])) {
-      $form_state->setErrorByName('status', $this->t('Please enter an open or close date'));
+    if ($values['status'] === WebformInterface::STATUS_SCHEDULED) {
+      // Require open or close dates.
+      if (empty($values['open']) && empty($values['close'])) {
+        $form_state->setErrorByName('status', $this->t('Please enter an open or close date'));
+      }
+      // Make sure open date is not after close date.
+      if (!empty($values['open']) && !empty($values['close']) && ($values['open'] > $values['close'])) {
+        $form_state->setErrorByName('open', $this->t("The webform's close date cannot be before the open date"));
+      }
     }
   }
 
@@ -924,8 +995,15 @@ class WebformEntitySettingsForm extends EntityForm {
     $webform->set('open', NULL);
     $webform->set('close', NULL);
     if ($values['status'] === WebformInterface::STATUS_SCHEDULED) {
-      $webform->set('open', ($values['open']) ? $values['open']->format('c') : NULL);
-      $webform->set('close', ($values['close']) ? $values['close']->format('c') : NULL);
+      // Massage open/close dates.
+      // @see \Drupal\webform\Plugin\Field\FieldWidget\WebformEntityReferenceAutocompleteWidget::massageFormValues
+      // @see \Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase::massageFormValues
+      $states = ['open', 'close'];
+      foreach ($states as $state) {
+        if (!empty($values[$state]) && $values[$state] instanceof DrupalDateTime) {
+          $webform->set($state, WebformDateHelper::formatStorage($values[$state]));
+        }
+      }
     }
 
     // Set custom properties, class, and style.
@@ -972,6 +1050,7 @@ class WebformEntitySettingsForm extends EntityForm {
       $values['id'],
       $values['title'],
       $values['description'],
+      $values['category'],
       $values['template'],
       $values['status'],
       $values['open'],
@@ -993,7 +1072,12 @@ class WebformEntitySettingsForm extends EntityForm {
     // Save the webform.
     $webform->save();
 
-    $this->logger('webform')->notice('Webform settings @label saved.', ['@label' => $webform->label()]);
+    $context = [
+      '@label' => $webform->label(),
+      'link' => $webform->toLink($this->t('Edit'), 'settings-form')->toString()
+    ];
+    $this->logger('webform')->notice('Webform settings @label saved.', $context);
+
     drupal_set_message($this->t('Webform settings %label saved.', ['%label' => $webform->label()]));
   }
 
@@ -1024,4 +1108,42 @@ class WebformEntitySettingsForm extends EntityForm {
     }
   }
 
+  /**
+   * Append behavior checkboxes to element.
+   *
+   * @param array $element
+   *   An elements
+   * @param array $behavior_elements
+   *   An associative array of behavior elements.
+   * @param array $settings
+   *   The webform's settings.
+   * @param array $default_settings
+   *   The global webform default settings.
+   */
+  protected function appendBehaviors(array &$element, array $behavior_elements, array $settings, array $default_settings) {
+    foreach ($behavior_elements as $behavior_key => $behavior_element) {
+      if (!empty($default_settings['default_' . $behavior_key])) {
+        $element[$behavior_key . '_disabled'] = [
+          '#type' => 'checkbox',
+          '#title' => $behavior_element['title'],
+          '#description' => $behavior_element['all_description'],
+          '#disabled' => TRUE,
+          '#default_value' => TRUE,
+        ];
+        $element[$behavior_key] = [
+          '#type' => 'value',
+          '#value' => $settings[$behavior_key],
+        ];
+      }
+      else {
+        $element[$behavior_key] = [
+          '#type' => 'checkbox',
+          '#title' => $behavior_element['title'],
+          '#description' => $behavior_element['form_description'],
+          '#return_value' => TRUE,
+          '#default_value' => $settings[$behavior_key],
+        ];
+      }
+    }
+  }
 }

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Plugin\views\field\Section.
- */
-
 namespace Drupal\workbench_access\Plugin\views\field;
 
 use Drupal\Core\Form\FormStateInterface;
@@ -85,7 +80,9 @@ class Section extends FieldPluginBase {
           }
         }
       }
-      return trim(implode($this->options['separator'], $output), $this->options['separator']);
+      if (isset($output)) {
+        return trim(implode($this->options['separator'], $output), $this->options['separator']);
+      }
     }
     return '';
   }

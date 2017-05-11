@@ -35,6 +35,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
         'description_display' => '',
         // Form validation.
         'required' => FALSE,
+        'required_error' => '',
         // Flex box.
         'flexbox' => '',
       ] + $this->getDefaultBaseProperties();
@@ -410,7 +411,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array &$element, $value, array $options = []) {
+  public function formatHtmlItem(array $element, $value, array $options = []) {
     // Return empty value.
     if (empty($value) || empty(array_filter($value))) {
       return '';
@@ -481,7 +482,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatTextItem(array &$element, $value, array $options = []) {
+  public function formatTextItem(array $element, $value, array $options = []) {
     // Return empty value.
     if (empty($value) || (is_array($value) && empty(array_filter($value)))) {
       return '';
@@ -689,8 +690,8 @@ abstract class WebformCompositeBase extends WebformElementBase {
     /** @var \Drupal\webform\WebformSubmissionGenerateInterface $generate */
     $generate = \Drupal::service('webform_submission.generate');
 
-    $values = [];
     $composite_elements = $this->getInitializedCompositeElement($element);
+    $values = [];
     for ($i = 1; $i <= 3; $i++) {
       $value = [];
       foreach (RenderElement::children($composite_elements) as $composite_key) {

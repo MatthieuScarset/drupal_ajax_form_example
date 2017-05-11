@@ -9,8 +9,9 @@ close: null
 uid: null
 template: false
 id: test_element_states
-title: 'Test: Elements #states API: States'
+title: 'Test: Element: #States API'
 description: 'Test Drupal''s #states API states (visible, required, disabled, checked, and expanded).'
+category: 'Test: Element'
 elements: |
   states_basic:
     '#type': webform_element_states
@@ -86,10 +87,12 @@ settings:
   form_submit_once: false
   form_submit_attributes: {  }
   form_exception_message: ''
-  form_closed_message: ''
+  form_open_message: ''
+  form_close_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_disable_autocomplete: false
@@ -98,6 +101,7 @@ settings:
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
+  submission_log: false
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
@@ -114,7 +118,7 @@ settings:
   preview_prev_button_label: ''
   preview_prev_button_attributes: {  }
   preview_message: ''
-  draft: false
+  draft: none
   draft_auto_save: false
   draft_button_label: ''
   draft_button_attributes: {  }

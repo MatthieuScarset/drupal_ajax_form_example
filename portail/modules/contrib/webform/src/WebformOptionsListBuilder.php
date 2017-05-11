@@ -17,9 +17,34 @@ class WebformOptionsListBuilder extends ConfigEntityListBuilder {
   /**
    * {@inheritdoc}
    */
+  public function render() {
+    $build = [];
+
+    // Display info.
+    if ($total = $this->getStorage()->getQuery()->count()->execute()) {
+      $t_args = [
+        '@total' => $total,
+        '@results' => $this->formatPlural($total, $this->t('option'), $this->t('options')),
+      ];
+      $build['info'] = [
+        '#markup' => $this->t('@total @results', $t_args),
+        '#prefix' => '<div>',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $build += parent::render();
+
+    return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildHeader() {
     $header['label'] = $this->t('Label');
     $header['id'] = $this->t('ID');
+    $header['category'] = $this->t('Category');
     $header['options'] = [
       'data' => $this->t('Options'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
@@ -38,6 +63,7 @@ class WebformOptionsListBuilder extends ConfigEntityListBuilder {
     /** @var \Drupal\webform\WebformOptionsInterface $entity */
     $row['label'] = $entity->toLink($entity->label(), 'edit-form');
     $row['id'] = $entity->id();
+    $row['category'] = $entity->get('category');
 
     $options = WebformOptions::getElementOptions(['#options' => $entity->id()]);
     $options = OptGroup::flattenOptions($options);

@@ -23,10 +23,25 @@ interface WebformHandlerMessageInterface extends WebformHandlerInterface {
   /**
    * Sends and logs a webform submission message.
    *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
    * @param array $message
    *   An array of message parameters.
    */
-  public function sendMessage(array $message);
+  public function sendMessage(WebformSubmissionInterface $webform_submission, array $message);
+
+  /**
+   * Confirm that a message has a recipient.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   * @param array $message
+   *   An array of message parameters.
+   *
+   * @return bool
+   *  TRUE if the message has a recipient.
+   */
+  public function hasRecipient(WebformSubmissionInterface $webform_submission, array $message);
 
   /**
    * Build resend message webform.

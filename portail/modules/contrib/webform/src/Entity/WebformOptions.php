@@ -2,9 +2,11 @@
 
 namespace Drupal\webform\Entity;
 
+use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformOptionsInterface;
 
@@ -15,6 +17,7 @@ use Drupal\webform\WebformOptionsInterface;
  *   id = "webform_options",
  *   label = @Translation("Webform options"),
  *   handlers = {
+ *     "storage" = "\Drupal\webform\WebformOptionsStorage",
  *     "access" = "Drupal\webform\WebformOptionsAccessControlHandler",
  *     "list_builder" = "Drupal\webform\WebformOptionsListBuilder",
  *     "form" = {
@@ -37,11 +40,14 @@ use Drupal\webform\WebformOptionsInterface;
  *     "id",
  *     "uuid",
  *     "label",
+ *     "category",
  *     "options",
  *   }
  * )
  */
 class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface {
+
+  use StringTranslationTrait;
 
   /**
    * The webform options ID.
@@ -63,6 +69,13 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
    * @var string
    */
   protected $label;
+
+  /**
+   * The webform options category.
+   *
+   * @var string
+   */
+  protected $category;
 
   /**
    * The webform options options.
@@ -89,7 +102,7 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
         $options = (is_array($options)) ? $options : [];
       }
       catch (\Exception $exception) {
-        $link = $this->link(t('Edit'), 'edit-form');
+        $link = $this->link($this->t('Edit'), 'edit-form');
         \Drupal::logger('webform')->notice('%title options are not valid. @message', ['%title' => $this->label(), '@message' => $exception->getMessage(), 'link' => $link]);
         $options = FALSE;
       }
@@ -140,6 +153,15 @@ class WebformOptions extends ConfigEntityBase implements WebformOptionsInterface
 
     // Clear cached properties.
     $this->optionsDecoded = NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function sort(ConfigEntityInterface $a, ConfigEntityInterface $b) {
+    $a_label = $a->get('category') . $a->label();
+    $b_label = $b->get('category') . $b->label();
+    return strnatcasecmp($a_label, $b_label);
   }
 
   /**

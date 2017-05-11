@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\robotstxt\Form\RobotsTxtAdminSettingsForm.
- */
-
 namespace Drupal\robotstxt\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -43,12 +38,7 @@ class RobotsTxtAdminSettingsForm extends ConfigFormBase {
       '#rows' => 20,
     ];
 
-    $form['actions']['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Save'),
-    ];
-
-    return $form;
+    return parent::buildForm($form, $form_state);
   }
 
   /**
@@ -59,6 +49,8 @@ class RobotsTxtAdminSettingsForm extends ConfigFormBase {
     $config
       ->set('content', $form_state->getValue('robotstxt_content'))
       ->save();
+
+    parent::submitForm($form, $form_state);
   }
 
 }

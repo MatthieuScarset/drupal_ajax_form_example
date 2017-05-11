@@ -53,6 +53,11 @@ interface WebformMessageManagerInterface {
    */
   const FORM_FILE_UPLOAD_EXCEPTION = 8;
 
+  /**
+   * Handler submission test.
+   */
+  const HANDLER_SUBMISSION_REQUIRED = 9;
+
   /****************************************************************************/
   // Configurable message constants.
   // Values corresponds to admin config and webform settings.
@@ -69,9 +74,14 @@ interface WebformMessageManagerInterface {
   const FORM_PREVIEW_MESSAGE = 'preview_message';
 
   /**
+   * Webform opening.
+   */
+  const FORM_OPEN_MESSAGE = 'form_open_message';
+
+  /**
    * Webform closed.
    */
-  const FORM_CLOSED_MESSAGE = 'form_closed_message';
+  const FORM_CLOSE_MESSAGE = 'form_close_message';
 
   /**
    * Webform confidential.

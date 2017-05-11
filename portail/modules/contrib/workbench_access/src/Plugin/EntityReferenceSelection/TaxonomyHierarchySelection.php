@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Plugin\EntityReferenceSelection\TaxonomyHierarchySelection.
- */
-
 namespace Drupal\workbench_access\Plugin\EntityReferenceSelection;
 
 use Drupal\Component\Utility\Html;
@@ -22,7 +17,8 @@ use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
  *   label = @Translation("Restricted Taxonomy Term selection"),
  *   entity_types = {"taxonomy_term"},
  *   group = "workbench_access",
- *   weight = 1
+ *   weight = 1,
+ *   base_plugin_label = @Translation("Workbench Access: Restricted term selection")
  * )
  */
 class TaxonomyHierarchySelection extends TermSelection {

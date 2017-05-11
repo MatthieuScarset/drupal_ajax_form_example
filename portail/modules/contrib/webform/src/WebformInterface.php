@@ -13,6 +13,27 @@ use Drupal\user\EntityOwnerInterface;
 interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollectionInterface, EntityOwnerInterface {
 
   /**
+   * Denote drafts are not allowed.
+   *
+   * @var string
+   */
+  const DRAFT_ENABLED_NONE = 'none';
+
+  /**
+   * Denote drafts are allowed for authenticated users only.
+   *
+   * @var string
+   */
+  const DRAFT_ENABLED_AUTHENTICATED = 'authenticated';
+
+  /**
+   * Denote drafts are allowed for authenticated and anonymous users.
+   *
+   * @var string
+   */
+  const DRAFT_ENABLED_ALL = 'all';
+
+  /**
    * Webform status open.
    */
   const STATUS_OPEN = 'open';
@@ -55,9 +76,17 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Determine if the webform is using a Flexbox layout.
    *
    * @return bool
-   *   TRUE if if the webform is using a Flexbox layout.
+   *   TRUE if the webform is using a Flexbox layout.
    */
   public function hasFlexboxLayout();
+
+  /**
+   * Determine if the webform has any containers.
+   *
+   * @return bool
+   *   TRUE if the webform has any containers.
+   */
+  public function hasContainer();
 
   /**
    * Sets the status of the configuration entity.
@@ -97,6 +126,14 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   public function isScheduled();
 
   /**
+   * Determines if the webform is currently closed but scheduled to open.
+   *
+   * @return bool
+   *   TRUE if the webform is currently closed but scheduled to open.
+   */
+  public function isOpening();
+
+  /**
    * Returns the webform template indicator.
    *
    * @return bool
@@ -119,6 +156,14 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   TRUE if the webform has submissions.
    */
   public function hasSubmissions();
+
+  /**
+   * Determine if submissions are being logged.
+   *
+   * @return bool
+   *   TRUE if submissions are being logged.
+   */
+  public function hasSubmissionLog();
 
   /**
    * Determine if the current webform is translated.
@@ -479,34 +524,47 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   (optional) Status used to return enabled or disabled plugin instances
    *   (ie handlers).
    * @param int $results
-   *   (optional) Value indicating if webform submissions are saved to internal or
-   *   external system.
+   *   (optional) Value indicating if webform submissions are saved to internal
+   *   or external system.
+   * @param int $submission
+   *   (optional) Value indicating if webform submissions must be saved to the
+   *   database.
    *
    * @return \Drupal\webform\WebformHandlerPluginCollection|\Drupal\webform\WebformHandlerInterface[]
    *   The webform handler plugin collection.
    */
-  public function getHandlers($plugin_id = NULL, $status = NULL, $results = NULL);
+  public function getHandlers($plugin_id = NULL, $status = NULL, $results = NULL, $submission = NULL);
 
   /**
    * Saves a webform handler for this webform.
    *
-   * @param array $configuration
-   *   An array of webform handler configuration.
+   * @param \Drupal\webform\WebformHandlerInterface $handler
+   *   The webform handler object.
    *
    * @return string
    *   The webform handler ID.
    */
-  public function addWebformHandler(array $configuration);
+  public function addWebformHandler(WebformHandlerInterface $handler);
 
   /**
-   * Deletes a webform handler from this style.
+   * Update a webform handler for this webform.
    *
-   * @param \Drupal\webform\WebformHandlerInterface $effect
+   * @param \Drupal\webform\WebformHandlerInterface $handler
    *   The webform handler object.
    *
    * @return $this
    */
-  public function deleteWebformHandler(WebformHandlerInterface $effect);
+  public function updateWebformHandler(WebformHandlerInterface $handler);
+
+  /**
+   * Deletes a webform handler from this webform.
+   *
+   * @param \Drupal\webform\WebformHandlerInterface $handler
+   *   The webform handler object.
+   *
+   * @return $this
+   */
+  public function deleteWebformHandler(WebformHandlerInterface $handler);
 
   /**
    * Invoke a handlers method.

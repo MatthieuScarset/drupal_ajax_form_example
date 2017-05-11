@@ -11,9 +11,14 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\workbench_access\WorkbenchAccessManagerInterface;
 
 /**
  * Defines the name of the node access control field.
+ *
+ * @deprecated to be removed before 8.x.1.0 - use
+ *   \Drupal\workbench_access\WorkbenchAccessManagerInterface::FIELD_NAME
+ *   instead.
  */
 define('WORKBENCH_ACCESS_FIELD', 'field_workbench_access');
 
@@ -52,13 +57,14 @@ function workbench_access_form_node_form_alter(&$form, FormStateInterface $form_
     $account = \Drupal::currentUser();
     // If the user cannot access the form element or is a superuser, ignore.
     if (!empty($form[$field]['#access']) && !$account->hasPermission('bypass workbench access')) {
-      $form[$field] = $scheme->alterOptions($form[$field], $manager);
+      $form[$field] = $scheme->alterOptions($form[$field], $manager, \Drupal::service('workbench_access.user_section_storage')->getUserSections($account->id()));
       // Add the options hidden from the user silently to the form.
       $options_diff = $scheme->disallowedOptions($form[$field]);
       if (!empty($options_diff)) {
         // @TODO: Potentially show this information to users with permission.
         $form['workbench_access_disallowed'] = workbench_access_hidden_field($options_diff, $scheme);
         // Call our submitEntity() method to merge in values.
+        // @todo Add tests for this.
         $class = '\\' . get_class($scheme) . '::submitEntity';
         // Account for all the submit buttons on the node form.
         $buttons = ['submit', 'publish', 'unpublish'];
@@ -125,11 +131,11 @@ function workbench_access_confirm_fields($entity_type, $bundle) {
         'description' => 'The editorial section for this content.',
       ]
     ];
-    $id = $entity_type . '.' . $bundle . '.' . WORKBENCH_ACCESS_FIELD;
+    $id = $entity_type . '.' . $bundle . '.' . WorkbenchAccessManagerInterface::FIELD_NAME;
 
     if (!$field = \Drupal::entityManager()->getStorage('field_config')->load($id)) {
       $field = array(
-        'field_name' => WORKBENCH_ACCESS_FIELD,
+        'field_name' => WorkbenchAccessManagerInterface::FIELD_NAME,
         'entity_type' => $entity_type,
         'label' => $text[$entity_type]['label'],
         'bundle' => $bundle,
@@ -162,9 +168,34 @@ function workbench_access_node_access(NodeInterface $node, $op, AccountInterface
   if ($scheme = $manager->getActiveScheme()) {
     return $scheme->checkEntityAccess($node, $op, $account, $manager);
   }
-  else {
-    return AccessResult::neutral();
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_node_create_access().
+ *
+ * @link https://www.drupal.org/node/2348203
+ */
+function workbench_access_node_create_access(AccountInterface $account, $context, $entity_bundle) {
+  $return = AccessResult::neutral();
+  // Check that our access control is configured.
+  $manager = \Drupal::service('plugin.manager.workbench_access.scheme');
+  if (!$manager->getActiveScheme()) {
+    return $return;
   }
+
+  // Check that access control applies to this content type.
+  $type = \Drupal::entityTypeManager()->getStorage('node_type')->load($entity_bundle);
+  if (!$type->getThirdPartySetting('workbench_access', 'workbench_access_status', 0)) {
+    return $return;
+  }
+
+  // Check that the user is able to assign content to a section.
+  $user_section_storage = \Drupal::service('workbench_access.user_section_storage');
+  if (!$user_section_storage->getUserSections($account->id())) {
+    return AccessResult::forbidden();
+  }
+  return $return;
 }
 
 /**

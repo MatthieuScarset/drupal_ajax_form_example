@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\workbench_access\Plugin\AccessControlHierarchy\Taxonomy.
- */
-
 namespace Drupal\workbench_access\Plugin\AccessControlHierarchy;
 
 use Drupal\workbench_access\AccessControlHierarchyBase;
@@ -13,7 +8,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
- * Defines a hierarchy based on a Vocaulary.
+ * Defines a hierarchy based on a Vocabulary.
  *
  * @AccessControlHierarchy(
  *   id = "taxonomy",
@@ -27,19 +22,11 @@ use Drupal\taxonomy\Entity\Vocabulary;
 class Taxonomy extends AccessControlHierarchyBase {
 
   /**
-   * The access tree array.
-   *
-   * @var array
-   */
-  public $tree;
-
-  /**
    * @inheritdoc
    */
   public function getTree() {
     if (!isset($this->tree)) {
-      $config = $this->config('workbench_access.settings');
-      $parents = $config->get('parents');
+      $parents = $this->config->get('parents');
       $tree = array();
       foreach ($parents as $id => $label) {
         if ($vocabulary = Vocabulary::load($id)) {
@@ -75,7 +62,7 @@ class Taxonomy extends AccessControlHierarchyBase {
    * @return array $tree
    *   The compiled tree data.
    */
-  public function buildTree($id, $data, &$tree) {
+  protected function buildTree($id, $data, &$tree) {
     foreach ($data as $term) {
       $tree[$id][$term->tid] = array(
         'id' => $term->tid,
@@ -123,7 +110,7 @@ class Taxonomy extends AccessControlHierarchyBase {
       ->condition('field_type', 'entity_reference')
       ->sort('label')
       ->execute();
-    $fields = \Drupal::entityManager()->getStorage('field_config')->loadMultiple(array_keys($query));
+    $fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadMultiple(array_keys($query));
     foreach ($fields as $id => $field) {
       $handler = $field->getSetting('handler');
       $settings = $field->getSetting('handler_settings');
@@ -141,10 +128,9 @@ class Taxonomy extends AccessControlHierarchyBase {
   /**
    * {@inheritdoc}
    */
-  public function alterOptions($field, WorkbenchAccessManagerInterface $manager) {
+  public function alterOptions($field, WorkbenchAccessManagerInterface $manager, array $user_sections = []) {
     $element = $field;
     if (isset($element['widget']['#options'])) {
-      $user_sections = $manager->getUserSections();
       foreach ($element['widget']['#options'] as $id => $data) {
         $sections = [$id];
         if (empty($manager->checkTree($sections, $user_sections))) {
