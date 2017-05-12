@@ -10,3 +10,4 @@ pm-enable -y views_infinite_scroll
 pm-enable -y oab_user_access_rights
 pm-enable -y oab_entity_embed_link
 updatedb
+entity-updates

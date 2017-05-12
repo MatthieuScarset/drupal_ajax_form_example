@@ -3,19 +3,18 @@
 use Drupal\field\Entity\FieldStorageConfig;
 
 // Ajout des nouveaux vocabulaires de taxonomie : regions, market segment, partner type, subfamilies, content types
-$vids_to_add = array(
-	array( 'vid' => 'regions', 'name' => 'Regions'),
-	array( 'vid' => 'market_segments', 'name' => 'Market Segments'),
-	array( 'vid' => 'partner_types', 'name' => 'Partner Types'),
-	array( 'vid' => 'sub_families', 'name' => 'Sub-families'),
-	array( 'vid' => 'jobs_profiles', 'name' => 'Jobs profiles'),
+$vids_to_add = array('regions' => 'Regions',
+'market_segments' => 'Market Segments',
+'partner_types' => 'Partner Types',
+'sub_families' => 'Sub-families',
+'jobs_profiles' => 'Jobs profiles'
 );
 $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
-foreach ($vids_to_add as $vid_to_add){
-	if (!isset($vocabularies[$vid_to_add])) {
+foreach ($vids_to_add as $vid => $name){
+	if (!isset($vocabularies[$vid]) ) {
 	$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
-		'vid' => $vid_to_add['vid'],
-		'name' => $vid_to_add['name']
+		'vid' => $vid,
+		'name' => $name
 	));
 	$vocabulary->save();
 	}

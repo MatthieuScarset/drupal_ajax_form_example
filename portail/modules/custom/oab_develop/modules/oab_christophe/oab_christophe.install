@@ -1,9 +1,34 @@
 <?php
 
-
-
 function oab_christophe_install() {
   drupal_set_installed_schema_version('oab_christophe', 8000);
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_christophe_update_dependencies() {
+	$dependencies['oab_christophe'][8002] = array('oab_stephanie' => 8002	);
+	/*$dependencies['oab_christophe'][8003] = array('oab_christophe' => 8002	);
+	$dependencies['oab_christophe'][8004] = array('oab_christophe' => 8003	);*/
+	$dependencies['oab_christophe'][8005] = array('oab_stephanie' => 8005	);
+	$dependencies['oab_christophe'][8006] = array('oab_stephanie' => 8008	);
+	/*$dependencies['oab_christophe'][8007] = array('oab_christophe' => 8006	);
+	$dependencies['oab_christophe'][8008] = array('oab_christophe' => 8008	);*/
+	$dependencies['oab_christophe'][8009] = array('oab_stephanie' => 8010	);
+	//$dependencies['oab_christophe'][8010] = array('oab_christophe' => 8009	);
+	$dependencies['oab_christophe'][8011] = array('oab_amel' => 8010	);
+	$dependencies['oab_christophe'][8012] = array('oab_tibo' => 8008	);
+	$dependencies['oab_christophe'][8013] = array('oab_stephanie' => 8022	);
+	//$dependencies['oab_christophe'][8014] = array('oab_christophe' => 8013	);
+	//$dependencies['oab_christophe'][8015] = array('oab_christophe' => 8014	);
+	$dependencies['oab_christophe'][8016] = array('oab_amel' => 8012	);
+	$dependencies['oab_christophe'][8017] = array('oab_stephanie' => 8025	);
+	$dependencies['oab_christophe'][8018] = array('oab_stephanie' => 8029	);
+	$dependencies['oab_christophe'][8019] = array('oab_amel' => 8014	);
+
+	return $dependencies;
 }
 
 function oab_christophe_update_8001() {

@@ -6,6 +6,28 @@ function oab_amel_install() {
     drupal_set_installed_schema_version('oab_amel', 8000);
 }
 
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_amel_update_dependencies() {
+	$dependencies['oab_amel'][8001] = array('oab_christophe' => 8008	);
+	$dependencies['oab_amel'][8002] = array('oab_christophe' => 8010	);
+	//$dependencies['oab_amel'][8003] = array('oab_amel' => 8002	);
+	$dependencies['oab_amel'][8004] = array('oab_stephanie' => 8012	);
+/*	$dependencies['oab_amel'][8005] = array('oab_amel' => 8004	);
+	$dependencies['oab_amel'][8006] = array('oab_amel' => 8005	);
+	$dependencies['oab_amel'][8007] = array('oab_amel' => 8006	);*/
+	$dependencies['oab_amel'][8008] = array('oab_tibo' => 8007	);/*
+	$dependencies['oab_amel'][8009] = array('oab_amel' => 8008	);*/
+	$dependencies['oab_amel'][8010] = array('oab_stephanie' => 8021	);
+	$dependencies['oab_amel'][8011] = array('oab_christophe' => 8011	);
+	$dependencies['oab_amel'][8012] = array('oab_christophe' => 8015	);
+	$dependencies['oab_amel'][8013] = array('oab_christophe' => 8018	);
+	//$dependencies['oab_amel'][8014] = array('oab_amel' => 8013	);
+
+	return $dependencies;
+}
+
 /**
  *  Création du block "DirectAccessBlock" pour les accès directs (barre bleue sur le footer) 
  */
