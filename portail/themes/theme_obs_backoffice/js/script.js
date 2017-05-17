@@ -6,4 +6,14 @@
       $(this).text(new_str);
     });
   });
+
+
+    $(document).ready(function () {
+        $( ".close-env-info" ).click(function(){
+            if ($('.env-info').is(":visible")){
+                $('.environnement-info').hide();
+            }
+        });
+    });
+
 })(jQuery, Drupal);

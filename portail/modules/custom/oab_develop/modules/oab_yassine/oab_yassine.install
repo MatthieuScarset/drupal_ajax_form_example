@@ -20,3 +20,10 @@ function oab_yassine_update_dependencies() {
 function oab_yassine_update_8001() {
   include_once("updates/update_8001.inc");
 }
+
+/**
+ *  Definition d'une variable Version
+ */
+function oab_yassine_update_8002() {
+  include_once("updates/update_8002.inc");
+}

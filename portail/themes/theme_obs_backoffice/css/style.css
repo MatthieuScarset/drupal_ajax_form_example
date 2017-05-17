@@ -32,3 +32,19 @@
 #edit-group-classify .field--type-entity-reference select[multiple=multiple]{
     min-height: 200px;
 }
+
+.margin-right-5{
+    margin-right: 5px;
+}
+.environnement-info{
+    padding: 3px 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.atlwdg-trigger.atlwdg-SUBTLE {
+    z-index: 200;
+}
