@@ -91,4 +91,4 @@ $config->set('settings.ruby_version', 'G1R1C0');
 $config->save(TRUE);
 
 
-throw new UpdateException();
+//throw new UpdateException();
