@@ -9,7 +9,9 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\Entity;
 use Drupal\Core\File\FileSystem;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 use Exception;
+use function PHPSTORM_META\type;
 use stdClass;
 
 class AxiomeImporter{
@@ -44,7 +46,7 @@ class AxiomeImporter{
             foreach ($files AS $file){
 
                 if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip'){
-
+                    echo nl2br ("ZipFile found = $file \n");
                     if ($count == 0){
                         exec("rm -fR $folder.'/import'");
                         $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
@@ -366,14 +368,16 @@ class AxiomeImporter{
         }
 
         if ($has_portfolio){
-            //TODO : equivalent dans D8 de field_data_field_id_fiche et vérifier les champs : nid, field_id_fiche_value
-            $query = \Drupal::database()->select('field_data_field_id_fiche', 'f');
+            //nouveaux champs créés dans le type de contenu Produits : id_fiche et id_offre
+            $query = \Drupal::database()->select('node__field_id_fiche', 'f');
             $query->join("node", "n", "n.nid = f.entity_id");
             $query->fields("n", array("nid"))
                 ->condition("f.field_id_fiche_value", $fiche_id, "=")
                 ->range(0, 1);
 
             $results = $query->execute()->fetchObject();
+
+            kint($results);
 
             // Si c'est une nouvelle fiche
             if (!is_object($results)){
@@ -439,7 +443,7 @@ class AxiomeImporter{
      */
     private function axiome_traitement_fiche($xpath_fiche, $language, $nid = FALSE){
 
-        //TODO : migrer le workflow
+        //TODO : workflow
         $fiche_dir = $this->axiome_folder_path.'/'.$xpath_fiche->getAttribute('id');
         if (is_dir($fiche_dir)){
             $files_fiche = scandir($fiche_dir);
@@ -452,7 +456,8 @@ class AxiomeImporter{
                             $nid = (int)$nid;
                             $node = Node::load($nid);
 
-                            $publiee = $xpath_fiche->getElementsByTagName('publiee')->item(0)->nodeValue;
+                       /*  GESTION DU WORKFLOW A FAIRE
+                          $publiee = $xpath_fiche->getElementsByTagName('publiee')->item(0)->nodeValue;
                             if ($publiee == "true"){
                                 $node->revision = 1;
                                 $node->revision_operation = REVISIONING_NEW_REVISION_WITH_MODERATION;
@@ -478,19 +483,34 @@ class AxiomeImporter{
 
                                 $this->axiome_deleted_fiche[$node->field_id_fiche['und'][0]['value']] = $node->field_id_fiche['und'][0]['value'];
                                 if (isset($node)) unset($node);
-                            }
+                            }*/
                         }
                         // Si c'est une nouvelle fiche
                         else{
                             $this->axiome_notification[] = "nouvelle fiche importée";
 
-                            $node = new stdClass();
-                            $node->title = $xpath_fiche->getAttribute('nom_offre_commerciale');
-                            $node->type = 'axiome';
-                            $node->sticky = 0;
-                            $node->promote = 0;
-                            $node->language = $language;
-                            $node->uid = 0;
+                            //creation du node
+                            $node = Node::create();
+                            $node->setTitle($xpath_fiche->getAttribute('nom_offre_commerciale'));
+
+                            //$node.type ?????
+                            //$node.language ?????
+
+                            $node->setSticky(0);
+                            $node->setPromoted(0);
+                            $node->uuid(0);
+
+
+
+
+
+                            //$node = new stdClass();
+                            //$node->title = $xpath_fiche->getAttribute('nom_offre_commerciale');
+                            //$node->type = 'product';
+                            //$node->sticky = 0;
+                            //$node->promote = 0;
+                            //$node->language = $language;
+                            //$node->uid = 0;
 
                             $node->field_id_fiche['und'][0]['value'] = $xpath_fiche->getAttribute('id');
                             $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
@@ -507,7 +527,8 @@ class AxiomeImporter{
                                 // Si c'est une nouvelle fiche
 
                                 //TODO : AXIOME_WORKFLOW_REQUEST ?
-                                if (!$nid){
+                                /* A TRAITER
+                                 * if (!$nid){
                                     //workflow_transition($node, AXIOME_WORKFLOW_REQUEST);
                                     $data = array(
                                         'nid' => $node->nid,
@@ -516,7 +537,7 @@ class AxiomeImporter{
                                         'stamp' => REQUEST_TIME,
                                     );
                                     workflow_update_workflow_node($data);
-                                }
+                                }*/
 
                                 $info_notification = array(
                                     'nom commercial' => $node->title,
@@ -557,23 +578,36 @@ class AxiomeImporter{
         $dom->load($fiche);
         $xpath = new DOMXPath($dom);
 
+
+        // TODO : Remplir le body avec les élements du XML
+
         // short description
         $field_txt_catcher = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
-        $node->field_txt_catcher['und'][0]['value'] = $field_txt_catcher;
+        //$node->field_txt_catcher['und'][0]['value'] = $field_txt_catcher;
+
+
 
         // XML content
         $field_xml_content = file_get_contents($fiche);
-        $node->field_xml_content['und'][0]['value'] = $field_xml_content;
+       // $node->field_xml_content['und'][0]['value'] = $field_xml_content;
 
-        // metatags
+        $node->field_body = $field_txt_catcher . $field_xml_content ;
+
+
+            // metatags
         $meta_title = $xpath->query("/ficheoffre/Attributes/a_savoir")->item(0)->nodeValue;
         $meta_keywords = $xpath->query("/ficheoffre/Attributes/kw")->item(0)->nodeValue;
         if ($meta_title != ""){
-            $node->metatags[$node->language]['title']['value'] = $meta_title;
+
+            $node->field_meta_title->value = $meta_title;
+            //$node->metatags[$node->language]['title']['value'] = $meta_title;
         }
         if ($meta_keywords != ""){
-            $node->metatags[$node->language]['keywords']['value'] = $meta_keywords;
+            $node->field_meta_description->value = $meta_keywords;
+            //$node->metatags[$node->language]['keywords']['value'] = $meta_keywords;
         }
+
+
     }
 
     /**
@@ -587,6 +621,8 @@ class AxiomeImporter{
      */
     private function axiome_fiche_recherche_famille(&$node, $xpath){
         $node->field_taxo_familly_axiome['und'] = array();
+
+        $node->field_product = array();
 
         //$familles = $xpath->getElementsByTagName('classement')->item(0)->getElementsByTagName('element_classement_group')->item(0)->getElementsByTagName('element_classement_list');
         $familles = $xpath->getElementsByTagName('classement')->item(0)->getElementsByTagName('element_classement_group');
@@ -615,20 +651,29 @@ class AxiomeImporter{
                                 $node->field_taxo_familly_axiome['und'][] = array('tid' => $parent_tid);
                             }
                             else{
-                                // création du term parent
-                                $term = new stdClass();
-                                $term->name = $parent_name;
-                                $term->vid = AXIOME_TAXO_FAMILLE;
-                                $term->language = $node->language;
-                                $term->parent = 0;
+                                // TODO :création du term  famille
+                                $fieldsterm =[
+                                    'tid' => $this->t('Term ID'),
+                                    'name' => $parent_name,
+                                    'vid' => AXIOME_TAXO_FAMILLE,
+                                    'language' => $node->language,
+                                    ];
+                                $term = Term::create( array( 'name'=> $parent_name, 'vid' => AXIOME_TAXO_FAMILLE, 'language' => $node->language));
 
+                                //$term = new stdClass();
+                                //$term->name = $parent_name;
+                                //$term->vid = AXIOME_TAXO_FAMILLE;
+                                //$term->language = $node->language;
+                                //$term->parent = 0;
+                                kint($term);
                                 try{
-                                    taxonomy_term_save($term);
+                                    //taxonomy_term_save($term);
+                                    $term->save();
 
                                     $info_notification = array(
-                                        'name' => $term->name,
-                                        'tid' => $term->tid,
-                                        'language' => $term->language,
+                                        'name' => $term->get('name'),
+                                        'tid' => $term->get('tid'),
+                                        'language' => $term->get('language'),
                                     );
 
                                     $this->axiome_notification[] = "Nouveau terme parent de taxonomy créé : ".var_export($info_notification, TRUE);
@@ -651,20 +696,26 @@ class AxiomeImporter{
                     else{
                         if ($parent_id != ""
                             && isset($this->arborescence_famille[$parent_id]['tid'])){
-                            // création du term enfant
+                            // TODO création du term sous famille
+
+
+                            /*
                             $term = new stdClass();
                             $term->name = $children_name;
                             $term->vid = AXIOME_TAXO_FAMILLE;
                             $term->language = $node->language;
                             $term->parent = $this->arborescence_famille[$parent_id]['tid'];
+                            */
+                            $term = Term::create( array( 'name'=> $children_name, 'vid' => AXIOME_TAXO_FAMILLE, 'language' => $node->language, 'parent' => $this->arborescence_famille[$parent_id]['tid']));
 
+                            kint($term);
                             try{
-                                taxonomy_term_save($term);
-
+                                //taxonomy_term_save($term);
+                                $term->save();
                                 $info_notification = array(
-                                    'name' => $term->name,
-                                    'tid' => $term->tid,
-                                    'language' => $term->language,
+                                    'name' => $term->get('name'),
+                                    'tid' => $term->get('tid'),
+                                    'language' => $term->get('language'),
                                 );
 
                                 $this->axiome_notification[] = "Nouveau terme enfant de taxonomy créé : ".var_export($info_notification, TRUE);
@@ -709,12 +760,13 @@ class AxiomeImporter{
      * Verify if any taxonomy term has a node attached
      */
     private function axiome_verif_taxonomy_not_empty(){
-        $query = \Drupal::database()->select('taxonomy_term_data', 't');
+        $query = \Drupal::database()->select('taxonomy_term_field_data', 't');
         $query->leftJoin('taxonomy_index', 'i', 'i.tid = t.tid');
         $query->fields('t', array('tid', 'name'));
-        $query->groupBy('t.tid')
-            ->condition('t.vid', AXIOME_TAXO_FAMILLE, '=')
-            ->havingCondition('max_tid', 0, '=');
+        $query->groupBy('t.tid');
+            $query->groupBy('t.name')
+            ->condition('t.vid', AXIOME_TAXO_FAMILLE, '=');
+          //  ->havingCondition('max_tid', 0, '=');
 
         $alias = $query->addExpression('COUNT(i.tid)', 'max_tid');
 
