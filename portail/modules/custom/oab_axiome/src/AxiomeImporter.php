@@ -25,7 +25,7 @@ class AxiomeImporter{
     function __construct(){
         $axiome_folder_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
         $this->axiome_folder_path = $axiome_folder_path . '/import';
-        echo nl2br ("Axiome_folder_path = $axiome_folder_path \n");
+        //echo nl2br ("Axiome_folder_path = $axiome_folder_path \n");
         $this->axiome_search_archive($axiome_folder_path);
         //kint($this->axiome_notification);
 
@@ -46,7 +46,7 @@ class AxiomeImporter{
             foreach ($files AS $file){
 
                 if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip'){
-                    echo nl2br ("ZipFile found = $file \n");
+                    //echo nl2br ("ZipFile found = $file \n");
                     if ($count == 0){
                         exec("rm -fR $folder.'/import'");
                         $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
@@ -54,37 +54,40 @@ class AxiomeImporter{
                         $this->axiome_notification[] = "file : ".$file;
 
                         if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')){
+
                             file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
 
                             // Scan du dossier "import"
                             $folder_import = $folder.'/import';
-                            echo nl2br("folder_import = $folder_import \n");
+                            //echo nl2br("folder_import = $folder_import \n");
                             $files = scandir($folder_import);
-                           // kint ($files);
+
+
                             foreach ($files AS $file){
 
                                 if (is_file($folder_import.'/'.$file)
                                     && substr($file, -4) == '.zip'
                                     && substr($file, 0, 11) == 'referentiel'){
-                                    echo nl2br("Will handle file $file \n");
+                                    //echo nl2br("Will handle file $file \n");
                                     $this->axiome_notification[] = "referentiel : ".$file;
 
                                     if ($this->axiome_unzip($folder_import.'/'.$file, $folder_import)){
-                                        echo nl2br("Unzip file $file OK \n");
+                                        //echo nl2br("Unzip file $file OK \n");
                                         file_unmanaged_delete($folder_import.'/'.$file);
 
                                         // Recherche du fichier référentiel XML
                                         preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
+
                                         if ($matches && isset($matches[1])){
                                             $referentiel_file = "referentiel_" . $matches[1] . ".xml";
 
                                             if ($dom = $this->axiome_validate_referentiel($folder_import, $referentiel_file)){
-                                                echo nl2br ("RefFile = $referentiel_file \n");
+                                                //echo nl2br ("RefFile = $referentiel_file \n");
                                                 // Traitement des référentiels et fiches
                                                 $this->axiome_scan_fiche_archives($folder_import);
-                                                echo nl2br("Scan fiche archive OK \n");
+                                                //echo nl2br("Scan fiche archive OK \n");
                                                 $this->axiome_parse_referentiel($dom);
-                                                echo nl2br("Parse réferentiel  OK \n");
+                                                //echo nl2br("Parse réferentiel  OK \n");
 
                                                 // Déplacement du référentiel dans "axiome"
                                                 file_unmanaged_move($folder_import.'/'.$referentiel_file, $folder, FILE_EXISTS_REPLACE);
@@ -94,12 +97,13 @@ class AxiomeImporter{
                                 }
                             }
                             // Déplacement des dossiers de fiche dans "axiome"
-                            echo nl2br("Will move folder $folder_import to $folder \n");
+                            //echo nl2br("Will move folder $folder_import to $folder \n");
                             $this->axiome_move_documents($folder_import, $folder);
 
                             $this->axiome_verif_taxonomy_not_empty();
-                            echo nl2br("Will remove folder $folder_import \n");
+                            //echo nl2br("Will remove folder $folder_import \n");
                             exec("rm -fR '$folder_import'");
+
                         }
                         $count ++;
                     }
@@ -152,7 +156,7 @@ class AxiomeImporter{
             $cwd = getcwd();
             chdir($destination);
 
-            echo nl2br(" \n Unzip destination  $destination file =  $file \n");
+            //echo nl2br(" \n Unzip destination  $destination file =  $file \n");
             exec("/usr/bin/unzip '$file' ");
             chdir($cwd);
 
@@ -177,6 +181,7 @@ class AxiomeImporter{
      *   dom string
      */
     private function axiome_validate_referentiel($folder, $file){
+        echo('folder : '.$folder . ' - file :' . $file );
         if (is_file($folder.'/'.$file)){
             $referentiel_xsd = $folder.'/'.AXIOME_REFERENTIEL_SCHEMA;
 
@@ -234,16 +239,21 @@ class AxiomeImporter{
      */
     private function axiome_scan_fiche_archives($folder){
         $files = scandir($folder);
+        echo('files content fiche archive');
+        //kint($files);
         foreach ($files AS $file){
             if (is_file($folder.'/'.$file)
                 && substr($file, -4) == '.zip'){
                 $file_name = $folder. '/fiches/' . substr($file, 0, -4);
+
+                //kint($file_name);
                 if ($this->axiome_create_dir($file_name)){
                     if ($this->axiome_unzip($folder.'/'.$file, $file_name)){
                         file_unmanaged_delete($folder.'/'.$file);
 
                         // renommage du dossier avec l'id de la fiche
                         $files_fiche = scandir($file_name);
+
                         foreach ($files_fiche AS $file_fiche){
                             if (is_file($file_name.'/'.$file_fiche)
                                 && substr($file_fiche, -4) == '.xml'){
@@ -253,7 +263,7 @@ class AxiomeImporter{
                                 $id_fiche = $dom->documentElement->getAttribute('id');
 
                                 $this->fiches_jointent[$id_fiche] = $id_fiche;
-                                echo nl2br( "Will rename $file_name by /fiches/$id_fiche \n");
+                               // echo nl2br( "Will rename $file_name by /fiches/$id_fiche \n");
                                 rename($file_name, $folder.'/fiches/'.$id_fiche);
                             }
                         }
@@ -307,7 +317,6 @@ class AxiomeImporter{
                             'name' => $famille_name,
                             'parent' => 0
                         );
-                        kint($famille_name);
                         if ($tid = $this->axiome_recherche_famille_tid($famille_name, $content_language)){
                             $this->arborescence_famille[$famille_id]['tid'] = $tid;
                         }
@@ -334,7 +343,7 @@ class AxiomeImporter{
             // informations sur les fiches
             $liste_fiches = $xpath->query("/referentiel/complements_ficheoffre/ficheoffre");
             foreach($liste_fiches as $fiche){
-                echo nl2br("Will handle Fiche \n");
+                //echo nl2br("Will handle Fiche \n");
                 // On cherche les fiches à mettre à jour en fonction des dates dans le référentiel
                 $fiche_update_date = $fiche->getAttribute('datemaj');
                 $fiche_id = $fiche->getAttribute('id');
@@ -376,8 +385,6 @@ class AxiomeImporter{
                 ->range(0, 1);
 
             $results = $query->execute()->fetchObject();
-
-            kint($results);
 
             // Si c'est une nouvelle fiche
             if (!is_object($results)){
@@ -441,87 +448,79 @@ class AxiomeImporter{
      * @param $nid
      *   The nid of the node if existing
      */
-    private function axiome_traitement_fiche($xpath_fiche, $language, $nid = FALSE){
+    private function axiome_traitement_fiche($xpath_fiche, $language, $nid = FALSE)
+    {
 
         //TODO : workflow
-        $fiche_dir = $this->axiome_folder_path.'/'.$xpath_fiche->getAttribute('id');
-        if (is_dir($fiche_dir)){
+        $fiche_dir = $this->axiome_folder_path . '/fiches/' . $xpath_fiche->getAttribute('id');
+        if (is_dir($fiche_dir)) {
             $files_fiche = scandir($fiche_dir);
-            foreach ($files_fiche AS $file_fiche){
-                if (is_file($fiche_dir.'/'.$file_fiche)
-                    && substr($file_fiche, -4) == '.xml'){
-                    if ($this->axiome_validate_fiche($fiche_dir, $file_fiche)){
+            foreach ($files_fiche AS $file_fiche) {
+                if (is_file($fiche_dir . '/' . $file_fiche)
+                    && substr($file_fiche, -4) == '.xml'
+                ) {
+                    if ($this->axiome_validate_fiche($fiche_dir, $file_fiche)) {
                         // Si c'est une fiche existante
-                        if ($nid){
+                        if ($nid) {
                             $nid = (int)$nid;
                             $node = Node::load($nid);
 
-                       /*  GESTION DU WORKFLOW A FAIRE
-                          $publiee = $xpath_fiche->getElementsByTagName('publiee')->item(0)->nodeValue;
-                            if ($publiee == "true"){
-                                $node->revision = 1;
-                                $node->revision_operation = REVISIONING_NEW_REVISION_WITH_MODERATION;
-                                $node->revision_uid = $node->uid;
-                                $this->axiome_notification[] = "mise à jour de fiche";
-                            }
-                            else{
-                                $this->axiome_notification[] = "suppression de fiche";
+                            /*  GESTION DU WORKFLOW A FAIRE
+                               $publiee = $xpath_fiche->getElementsByTagName('publiee')->item(0)->nodeValue;
+                                 if ($publiee == "true"){
+                                     $node->revision = 1;
+                                     $node->revision_operation = REVISIONING_NEW_REVISION_WITH_MODERATION;
+                                     $node->revision_uid = $node->uid;
+                                     $this->axiome_notification[] = "mise à jour de fiche";
+                                 }
+                                 else{
+                                     $this->axiome_notification[] = "suppression de fiche";
 
-                                $info_notification = array(
-                                    'nom commercial' => $node->title,
-                                    'langue' => $node->language,
-                                    'id fiche' => $node->field_id_fiche['und'][0]['value'],
-                                    'id offre' => $node->field_id_offre['und'][0]['value'],
-                                    'nid' => $node->nid
-                                );
+                                     $info_notification = array(
+                                         'nom commercial' => $node->title,
+                                         'langue' => $node->language,
+                                         'id fiche' => $node->field_id_fiche['und'][0]['value'],
+                                         'id offre' => $node->field_id_offre['und'][0]['value'],
+                                         'nid' => $node->nid
+                                     );
 
-                                $this->axiome_notification[] = "fiche axiome : ".var_export($info_notification, TRUE);
+                                     $this->axiome_notification[] = "fiche axiome : ".var_export($info_notification, TRUE);
 
-                                //entity_delete($nid);
-                                $node->delete();
+                                     //entity_delete($nid);
+                                     $node->delete();
 
 
-                                $this->axiome_deleted_fiche[$node->field_id_fiche['und'][0]['value']] = $node->field_id_fiche['und'][0]['value'];
-                                if (isset($node)) unset($node);
-                            }*/
-                        }
-                        // Si c'est une nouvelle fiche
-                        else{
+                                     $this->axiome_deleted_fiche[$node->field_id_fiche['und'][0]['value']] = $node->field_id_fiche['und'][0]['value'];
+                                     if (isset($node)) unset($node);
+                                 }*/
+                        } // Si c'est une nouvelle fiche
+                        else {
                             $this->axiome_notification[] = "nouvelle fiche importée";
 
-                            //creation du node
-                            $node = Node::create();
-                            $node->setTitle($xpath_fiche->getAttribute('nom_offre_commerciale'));
+                            //TODO : creation du node
 
-                            //$node.type ?????
-                            //$node.language ?????
+                            /* $node = Node::create();
+                             $node->setTitle($xpath_fiche->getAttribute('nom_offre_commerciale'));
 
-                            $node->setSticky(0);
-                            $node->setPromoted(0);
-                            $node->uuid(0);
+                              //type
+                              //langcode
 
-
-
+                             $node->setSticky(0);
+                             $node->setPromoted(0);
+                             $node->uuid(0);
 
 
-                            //$node = new stdClass();
-                            //$node->title = $xpath_fiche->getAttribute('nom_offre_commerciale');
-                            //$node->type = 'product';
-                            //$node->sticky = 0;
-                            //$node->promote = 0;
-                            //$node->language = $language;
-                            //$node->uid = 0;
-
-                            $node->field_id_fiche['und'][0]['value'] = $xpath_fiche->getAttribute('id');
-                            $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
+                             $node->field_id_fiche['und'][0]['value'] = $xpath_fiche->getAttribute('id');
+                             $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
+                            */
                         }
 
-                        if (isset($node)){
-                            $this->axiome_fiche_recherche_correspondance($node, $fiche_dir.'/'.$file_fiche);
+                        if (isset($node)) {
+                            $this->axiome_fiche_recherche_correspondance($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
-                            try{
-                                $node->save();
+                            try {
+                                // $node->save();
                                 //node_save($node);
 
                                 // Si c'est une nouvelle fiche
@@ -548,21 +547,22 @@ class AxiomeImporter{
                                     'nid' => $node->nid
                                 );
 
-                                $this->axiome_notification[] = "fiche axiome : ".var_export($info_notification, TRUE);
-                            }
-                            catch(Exception $e) {
-                                $this->axiome_notification[] = "ERREUR | la fiche id \"".$xpath_fiche->getAttribute('id')."\" n'a pas pu être importée";
-                                $this->axiome_notification[] = "Exception : ".var_export($e, TRUE);
+                                $this->axiome_notification[] = "fiche axiome : " . var_export($info_notification, TRUE);
+                            } catch (Exception $e) {
+                                $this->axiome_notification[] = "ERREUR | la fiche id \"" . $xpath_fiche->getAttribute('id') . "\" n'a pas pu être importée";
+                                $this->axiome_notification[] = "Exception : " . var_export($e, TRUE);
                             }
                         }
                     }
                 }
             }
         }
-        else{
-            $this->axiome_notification[] = "ERREUR | Pas de dossier pour la fiche : ".$xpath_fiche->getAttribute('id');
-        }
+
+            else{
+                $this->axiome_notification[] = "ERREUR | Pas de dossier pour la fiche : " . $xpath_fiche->getAttribute('id');
+            }
     }
+
 
     /**
      * Crawl the axiome product XML file for field correspondance
@@ -584,7 +584,6 @@ class AxiomeImporter{
         // short description
         $field_txt_catcher = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
         //$node->field_txt_catcher['und'][0]['value'] = $field_txt_catcher;
-
 
 
         // XML content
@@ -633,6 +632,7 @@ class AxiomeImporter{
                 $children_id = $famille->getElementsByTagName('element_classement_list')->item(0)->getElementsByTagName('element_classement_id')->item(0)->nodeValue;
                 $parent_id = "";
 
+
                 // il faut créer le parent avant l'enfant
                 if (isset($this->arborescence_famille[$children_id])
                     && isset($this->arborescence_famille[$children_id]['name'])){
@@ -651,29 +651,15 @@ class AxiomeImporter{
                                 $node->field_taxo_familly_axiome['und'][] = array('tid' => $parent_tid);
                             }
                             else{
-                                // TODO :création du term  famille
-                                $fieldsterm =[
-                                    'tid' => $this->t('Term ID'),
-                                    'name' => $parent_name,
-                                    'vid' => AXIOME_TAXO_FAMILLE,
-                                    'language' => $node->language,
-                                    ];
-                                $term = Term::create( array( 'name'=> $parent_name, 'vid' => AXIOME_TAXO_FAMILLE, 'language' => $node->language));
+                                // TODO :création du term famille
 
-                                //$term = new stdClass();
-                                //$term->name = $parent_name;
-                                //$term->vid = AXIOME_TAXO_FAMILLE;
-                                //$term->language = $node->language;
-                                //$term->parent = 0;
-                                kint($term);
                                 try{
-                                    //taxonomy_term_save($term);
-                                    $term->save();
-
+                                    $term = Term::create([ 'vid' => AXIOME_TAXO_FAMILLE,'name'=> $parent_name, 'langcode' => 'fr'])->save();
+                                    kint($term);
                                     $info_notification = array(
                                         'name' => $term->get('name'),
                                         'tid' => $term->get('tid'),
-                                        'language' => $term->get('language'),
+                                        'langcode' => $term->get('langcode'),
                                     );
 
                                     $this->axiome_notification[] = "Nouveau terme parent de taxonomy créé : ".var_export($info_notification, TRUE);
@@ -698,24 +684,14 @@ class AxiomeImporter{
                             && isset($this->arborescence_famille[$parent_id]['tid'])){
                             // TODO création du term sous famille
 
-
-                            /*
-                            $term = new stdClass();
-                            $term->name = $children_name;
-                            $term->vid = AXIOME_TAXO_FAMILLE;
-                            $term->language = $node->language;
-                            $term->parent = $this->arborescence_famille[$parent_id]['tid'];
-                            */
-                            $term = Term::create( array( 'name'=> $children_name, 'vid' => AXIOME_TAXO_FAMILLE, 'language' => $node->language, 'parent' => $this->arborescence_famille[$parent_id]['tid']));
-
-                            kint($term);
                             try{
-                                //taxonomy_term_save($term);
-                                $term->save();
+                                $term = Term::create( array( 'vid' => AXIOME_TAXO_FAMILLE,'name'=> $children_name,  'langcode' => 'fr', 'parent' => $this->arborescence_famille[$parent_id]['tid']))->save();
+                                kint($term);
+
                                 $info_notification = array(
                                     'name' => $term->get('name'),
                                     'tid' => $term->get('tid'),
-                                    'language' => $term->get('language'),
+                                    'langcode' => $term->get('langcode'),
                                 );
 
                                 $this->axiome_notification[] = "Nouveau terme enfant de taxonomy créé : ".var_export($info_notification, TRUE);
