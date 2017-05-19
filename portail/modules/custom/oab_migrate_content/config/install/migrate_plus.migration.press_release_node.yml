@@ -16,6 +16,8 @@ process:
     plugin: default_value
     default_value: press_release
   title: title
+  created: created
+  changed: changed
   langcode: language
   uid:
     plugin: default_value
@@ -28,6 +30,7 @@ process:
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
+  field_thematic: thematics
   field_file:
     plugin: migration
     migration: press_release_media

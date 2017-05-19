@@ -82,28 +82,17 @@ class DocumentNode extends SqlBase {
     // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
-
+/*
+		$row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
+		$row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
+*/
 		//Taxonomie de la Subhome
-		$entity = "";
-		if($row->getSourceProperty('language') == 'fr')
+		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+		if(isset($subhomes['library'][$row->getSourceProperty('language')])
+			&& isset($subhomes['library'][$row->getSourceProperty('language')]['tid_D8'])
+			&& !empty($subhomes['library'][$row->getSourceProperty('language')]['tid_D8']))
 		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Médiathèque');
-			$entity = $query->execute();
-		}
-		elseif ($row->getSourceProperty('language') == 'en')
-		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Library');
-			$entity = $query->execute();
-		}
-		if(isset($entity) && !empty($entity) && count($entity)>0)
-		{
-			$row->setSourceProperty('subhomes', array_pop(array_values($entity)));
+			$row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
 		}
 
     // récupération du body
@@ -237,6 +226,8 @@ class DocumentNode extends SqlBase {
 		}
 
 		// récupération du tag "solution"
+		$thematics = array();
+		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
 		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
 		if(count($correspondance_taxo_solution) > 0) {
 			$solutions = array();
@@ -264,8 +255,19 @@ class DocumentNode extends SqlBase {
 							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
 						}
 					}
+
+					//on regarde si on doit mettre une thematique pour cette solution
+					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
+							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
+						}
+					}
 				}
 				$row->setSourceProperty('solutions', $solutions);
+				// s'il y a une thématique, on l'affecte
+				if(isset($thematics) && count($thematics) >0)	{
+					$row->setSourceProperty('thematics', $thematics);
+				}
 			}
 		}
 

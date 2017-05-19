@@ -37,7 +37,7 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid', 'status'])
     ->condition('n.type', 'blog_post', '=');
-//		$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+		$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     return $query;
   }
 
@@ -81,43 +81,26 @@ class BlogPostNode extends SqlBase {
     \Drupal::getContainer()->set('current_user', $admin_user);
 
 		//Taxonomie de la Subhome
-		$entity = "";
-		if($row->getSourceProperty('language') == 'fr')
+		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+		if(isset($subhomes['blogs'][$row->getSourceProperty('language')])
+			&& isset($subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8'])
+			&& !empty($subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8']))
 		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Blogs');
-			$entity = $query->execute();
-		}
-		elseif ($row->getSourceProperty('language') == 'en')
-		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Blogs');
-			$entity = $query->execute();
-		}
-		if(isset($entity) && !empty($entity) && count($entity)>0)
-		{
-			$row->setSourceProperty('subhomes', array_pop(array_values($entity)));
+			$row->setSourceProperty('subhomes', $subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8']);
 		}
 
 		// taxonomie solution
-		//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** Migration du Node ".$row->getSourceProperty('nid')." (nid D7) --- ");
+		$thematics = array();
+		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
 		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
 		if(count($correspondance_taxo_solution) > 0) {
-			//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** State correspondance taxo solutions récupérée");
 			$solutions = array();
 			$solution_query = $this->select('field_data_field_taxo_solution', 's');
 			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
 			$solution_query->fields('t', ['tid'])
 				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
 				->condition('s.bundle', 'blog_post', '=');
-
 			$solution_results = $solution_query->execute()->fetchAll();
-			//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** récupération solutions D7");
-
 			if (is_array($solution_results)) {
 				foreach ($solution_results AS $solution_result) {
 					$solution_id = '';
@@ -129,18 +112,25 @@ class BlogPostNode extends SqlBase {
 						$solution_id = $solution_result['tid'];
 					}
 
-					//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** solution ID D7 : ".$solution_id);
 					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
 						//prendre le tid D8
 						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
 							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
 						}
-						//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** solution ID D8 : ".$correspondance_taxo_solution[$solution_id]['tid_D8']);
+					}
+
+					//on regarde si on doit mettre une thematique pour cette solution
+					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
+							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
+						}
 					}
 				}
-				//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** SOLUTIONS [] : ".serialize($solutions));
-
 				$row->setSourceProperty('solutions', $solutions);
+				// s'il y a une thématique, on l'affecte
+				if(isset($thematics) && count($thematics) >0)	{
+					$row->setSourceProperty('thematics', $thematics);
+				}
 			}
 		}
 
