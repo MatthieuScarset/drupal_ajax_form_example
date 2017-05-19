@@ -81,7 +81,7 @@ view_mode ? view_mode|clean_class,
 {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
 <div class="content_info">
-    <span class="date">{{ createdDate }}</span> {{ content.field_document_type }}
+    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
 </div>
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
