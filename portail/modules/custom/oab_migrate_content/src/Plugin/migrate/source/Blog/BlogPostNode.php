@@ -80,6 +80,39 @@ class BlogPostNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
+		//META TITRE
+		$title = $row->getSourceProperty('title');
+		$title = mb_substr($title,0, 55);
+		$row->setSourceProperty('meta_title', $title) ;
+
+		//META DESCRIPTION - récupération de la short description (txt_catcher)
+		$meta_description = "";
+		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+		$catcher_query->fields('c', ['field_txt_catcher_value'])
+			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+			->condition('c.bundle', 'blog_post', '=');
+
+		$catcher_results = $catcher_query->execute()->fetchAll();
+
+		if (is_array($catcher_results)){
+			foreach ($catcher_results AS $catcher_result){
+
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+					$meta_description = $catcher_result->field_txt_catcher_value;
+				}
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+					$meta_description = $catcher_result['field_txt_catcher_value'];
+				}
+			}
+		}
+		if(isset($meta_description) && !empty($meta_description))
+		{
+			$meta_description = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description) ;
+		}
+
+
 		//Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
 		if(isset($subhomes['blogs'][$row->getSourceProperty('language')])

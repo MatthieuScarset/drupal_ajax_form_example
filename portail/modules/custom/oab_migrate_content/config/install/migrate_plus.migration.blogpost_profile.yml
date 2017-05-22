@@ -14,7 +14,7 @@ source:
 process:
   type:
     plugin: default_value
-    default_value: profil_redacteur
+    default_value: profile
   uid:
     plugin: default_value
     default_value: 1
@@ -24,7 +24,7 @@ process:
   field_first_name/value: field_first_name
   field_last_name/value: field_last_name
   field_social_account: field_social_account
-  field_image:
+  field_visual:
     plugin: migration
     migration: blogpost_profile_media
     source: images

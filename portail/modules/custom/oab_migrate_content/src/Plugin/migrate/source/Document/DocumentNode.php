@@ -55,8 +55,6 @@ class DocumentNode extends SqlBase {
       'body' => $this->t('body'),
       'image' => $this->t('image'),
       'file' => $this->t('file'),
-      'short_description' => $this->t('short_description'),
-      'subtitle' => $this->t('subtitle'),
 			'status' => $this->t('status'),
     ];
 
@@ -82,10 +80,39 @@ class DocumentNode extends SqlBase {
     // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
-/*
-		$row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
-		$row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
-*/
+
+		//META TITRE
+		$title = $row->getSourceProperty('title');
+		$title = mb_substr($title,0, 55);
+		$row->setSourceProperty('meta_title', $title) ;
+
+		//META DESCRIPTION - récupération de la short description (txt_catcher)
+		$meta_description = "";
+		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+		$catcher_query->fields('c', ['field_txt_catcher_value'])
+			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+			->condition('c.bundle', 'content_document_type', '=');
+
+		$catcher_results = $catcher_query->execute()->fetchAll();
+
+		if (is_array($catcher_results)){
+			foreach ($catcher_results AS $catcher_result){
+
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+					$meta_description = $catcher_result->field_txt_catcher_value;
+				}
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+					$meta_description = $catcher_result['field_txt_catcher_value'];
+				}
+			}
+		}
+		if(isset($meta_description) && !empty($meta_description))
+		{
+			$meta_description = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description) ;
+		}
+
 		//Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
 		if(isset($subhomes['library'][$row->getSourceProperty('language')])
@@ -122,47 +149,6 @@ class DocumentNode extends SqlBase {
       }
     }
 
-    // récupération du subtitle
-    $descriptif_query = $this->select('field_data_field_descriptif_court', 'd');
-    $descriptif_query->fields('d', ['field_descriptif_court_value'])
-      ->condition('d.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('d.bundle', 'content_document_type', '=');
-
-    $descriptif_results = $descriptif_query->execute()->fetchAll();
-
-    if (is_array($descriptif_results)){
-      foreach ($descriptif_results AS $descriptif_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($descriptif_result) && isset($descriptif_result->field_descriptif_court_value)){
-          $row->setSourceProperty('subtitle', $descriptif_result->field_descriptif_court_value);
-        }
-        elseif (is_array($descriptif_result) && isset($descriptif_result['field_descriptif_court_value'])){
-          $row->setSourceProperty('subtitle', $descriptif_result['field_descriptif_court_value']);
-        }
-      }
-    }
-
-    // récupération de la short description (txt_catcher)
-    $catcher_query = $this->select('field_data_field_txt_catcher', 'c');
-    $catcher_query->fields('c', ['field_txt_catcher_value'])
-      ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('c.bundle', 'content_document_type', '=');
-
-    $catcher_results = $catcher_query->execute()->fetchAll();
-
-    if (is_array($catcher_results)){
-      foreach ($catcher_results AS $catcher_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
-          $row->setSourceProperty('short_description', $catcher_result->field_txt_catcher_value);
-        }
-        elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
-          $row->setSourceProperty('short_description', $catcher_result['field_txt_catcher_value']);
-        }
-      }
-    }
 
     /*
      * Récuperation des TAGS

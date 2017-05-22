@@ -39,15 +39,15 @@ process:
     plugin: migration
     migration: document_media_file
     source: files
-  field_image:
+  field_visual:
     plugin: migration
     migration: document_media_image
     source: images
-  path: path  
-  field_subtitle: subtitle
-  field_short_description: short_description
+  path: path
   moderation_state: moderation_state
   status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
 migration_dependencies:  
   required:
     - document_media_file

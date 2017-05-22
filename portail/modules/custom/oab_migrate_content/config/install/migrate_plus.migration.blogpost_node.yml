@@ -30,7 +30,7 @@ process:
   field_region: regions
   field_subhome: subhomes
   field_thematic: thematics
-  field_image:
+  field_visual:
     plugin: migration
     migration: blogpost_media
     source: images
@@ -38,6 +38,8 @@ process:
   field_profile: profile_blogger_id
   moderation_state: moderation_state
   status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
 destination:
   plugin: entity:node
 template: null

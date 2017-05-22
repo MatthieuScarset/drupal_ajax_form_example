@@ -34,6 +34,8 @@ process:
   path: path
   moderation_state: moderation_state
   status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
 destination:
   plugin: 'entity:node'
 migration_dependencies:  

@@ -74,6 +74,39 @@ class PressKitNode extends SqlBase {
     $admin_user = \Drupal\user\Entity\User::load(1);
     \Drupal::getContainer()->set('current_user', $admin_user);
 
+		//META TITRE
+		$title = $row->getSourceProperty('title');
+		$title = mb_substr($title,0, 55);
+		$row->setSourceProperty('meta_title', $title) ;
+
+		//META DESCRIPTION - récupération de la short description (txt_catcher)
+		$meta_description = "";
+		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+		$catcher_query->fields('c', ['field_txt_catcher_value'])
+			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+			->condition('c.bundle', 'press_kit', '=');
+
+		$catcher_results = $catcher_query->execute()->fetchAll();
+
+		if (is_array($catcher_results)){
+			foreach ($catcher_results AS $catcher_result){
+
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+					$meta_description = $catcher_result->field_txt_catcher_value;
+				}
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+					$meta_description = $catcher_result['field_txt_catcher_value'];
+				}
+			}
+		}
+		if(isset($meta_description) && !empty($meta_description))
+		{
+			$meta_description = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description) ;
+		}
+
+
 		//Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
 		if(isset($subhomes['press'][$row->getSourceProperty('language')])
@@ -85,32 +118,6 @@ class PressKitNode extends SqlBase {
     
     $row->setSourceProperty('content_field', '');
 
-    // récupération du body (short description)
-    $body_query = $this->select('field_data_field_txt_catcher', 'c');
-    $body_query->fields('c', ['field_txt_catcher_value'])
-      ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('c.bundle', 'press_kit', '=');
-
-    $body_results = $body_query->execute()->fetchAll();
-
-    if (is_array($body_results)){
-      foreach ($body_results AS $body_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($body_result) && isset($body_result->field_txt_catcher_value)){
-          $body_value = $body_result->field_txt_catcher_value;
-          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
-          $row->setSourceProperty('content_field', $body_value);
-        }
-        elseif (is_array($body_result) && isset($body_result['field_txt_catcher_value'])){
-          $body_value = $body_result['field_txt_catcher_value'];
-          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
-          $row->setSourceProperty('content_field', $body_value);
-        }
-      }
-    }
 
     /*
      * Récup des TAGS
