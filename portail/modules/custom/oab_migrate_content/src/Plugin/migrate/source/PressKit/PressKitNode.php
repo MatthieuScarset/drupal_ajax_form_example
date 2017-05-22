@@ -10,7 +10,7 @@ use Drupal\migrate\Row;
  * Source plugin for beer content.
  *
  * @MigrateSource(
- *   id = "dossier_presse_node"
+ *   id = "press_kit_node"
  * )
  */
 class PressKitNode extends SqlBase {

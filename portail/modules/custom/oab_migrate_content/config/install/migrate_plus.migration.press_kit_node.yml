@@ -1,12 +1,12 @@
 langcode: en
 status: true
 pendencies: {  }
-id: dossier_presse_node
+id: press_kit_node
 migration_tags: null
-migration_group: dossier_presse
-label: 'Dossier presse nodes'
+migration_group: press_kit
+label: 'Press kit nodes'
 source:
-  plugin: dossier_presse_node
+  plugin: press_kit_node
 process:
   type:
     plugin: default_value
@@ -29,7 +29,7 @@ process:
   field_thematic: thematics
   field_file:
     plugin: migration
-    migration: dossier_presse_media
+    migration: press_kit_media
     source: files
   path: path
   moderation_state: moderation_state
@@ -40,4 +40,4 @@ destination:
   plugin: 'entity:node'
 migration_dependencies:  
   required:
-    - dossier_presse_media
+    - press_kit_media
