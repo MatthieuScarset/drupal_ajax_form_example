@@ -69,10 +69,6 @@ class MagazineArticleNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
-    $admin_user = \Drupal\user\Entity\User::load(1);
-    \Drupal::getContainer()->set('current_user', $admin_user);
-
 		//META TITRE
 		$title = $row->getSourceProperty('title');
 		$title = mb_substr($title,0, 55);

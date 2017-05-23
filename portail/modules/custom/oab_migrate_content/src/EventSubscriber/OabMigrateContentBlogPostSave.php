@@ -7,6 +7,7 @@ namespace Drupal\oab_migrate_content\EventSubscriber;
 
 // This is the interface we are going to implement.
 use Drupal\Core\Database\Database;
+use Drupal\Core\Session\UserSession;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use \Drupal\migrate\Event\MigrateEvents;
 use \Drupal\migrate\Event\MigrateRollbackEvent;
@@ -26,15 +27,31 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     //$events[MigrateEvents::POST_ROW_SAVE][] = array('updateDates');
+		$events[MigrateEvents::PRE_IMPORT][] = array('swtchUserToAdmin');
     $events[MigrateEvents::PRE_IMPORT][] = array('deletePathPattern');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillTaxonomyTIDCorrespondence');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillSubhomeIdInState');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
-    $events[MigrateEvents::POST_IMPORT][] = array('resetPathPattern');
+		$events[MigrateEvents::POST_IMPORT][] = array('resetPathPattern');
+		$events[MigrateEvents::POST_IMPORT][] = array('swtchUserToAnonymous');
 
     return $events;
   }
+
+	public function swtchUserToAdmin(MigrateImportEvent $migrate_row){
+		// On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
+		$accountSwitcher = \Drupal::service('account_switcher');
+		// switch to the admin user
+		$accountSwitcher->switchTo(new UserSession(['uid' => 1]));
+	}
+
+	public function swtchUserToAnonymous(MigrateImportEvent $migrate_row) {
+		// On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
+		$accountSwitcher = \Drupal::service('account_switcher');
+		// switch to the admin user
+		$accountSwitcher->switchTo(new UserSession(['uid' => 0]));
+	}
 
   /**
    * MigrateEvents::POST_ROW_SAVE event handler.
@@ -131,8 +148,10 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
     }*/
 
     // On remet l'utilisateur anonyme par défaut, au cas où
+		/*
     $anonymous_user = \Drupal\user\Entity\User::load(0);
     \Drupal::getContainer()->set('current_user', $anonymous_user);
+    */
   }
 
   /** Suppression des Url alias
