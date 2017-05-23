@@ -130,3 +130,19 @@ article .content .field--type-text-long ul li:before{
 .content a:hover {
     color: #F16e00;
 }
+
+.margin-right-5{
+    margin-right: 5px;
+}
+.environnement-info{
+    padding: 3px 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.atlwdg-trigger.atlwdg-SUBTLE {
+    z-index: 200;
+}
