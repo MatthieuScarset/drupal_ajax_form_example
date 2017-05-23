@@ -29,4 +29,4 @@ $config->set('settings.plugins.colorbutton',
 $config->save(TRUE);
 
 
- throw new UpdateException();
+// throw new UpdateException();
