@@ -31,7 +31,7 @@
         "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
       }
     ]
-  },{
+},{
   "id": "tools",
   "label": "Tools",
   "title": "Tools",
@@ -64,6 +64,19 @@
     "label": "Verbatim double image",
     "file": "files/customer_story/verbatim-double-image.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-double-image.png"
+  }]
+},{
+  "id": "powerpage",
+  "label": "Powerpage",
+  "title": "Powerpage",
+  "items": [{
+    "label": "Pourquoi OBS",
+    "file": "files/powerpage/pourquoi-obs.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/a_remplacer.png"
+  }, {
+    "label": "Pourquoi OBS ligne",
+    "file": "files/powerpage/pourquoi-obs-ligne.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/a_remplacer.png"
   }]
 }
 ]
