@@ -636,30 +636,22 @@ function in_array(needle, haystack) {
                         type: 'hbox',
                         widths: ['75%', '25%'],
                         children: [{
-                            type: 'text',
+                            type: 'select',
+                            items: [ [  Drupal.t('White'), '#FFFFFF' ], [ Drupal.t('Orange') , '#FF7900' ], [ Drupal.t('Black'), '#000000' ] ],
+                            default: '#000000',
                             id: 'colorChooser',
                             className: 'colorChooser',
                             label: 'Color',
-                            onKeyUp: function(e) {
-                                setSpanColor(e.sender.$.value)
+                            onChange: function(e) {
+                                setSpanColor(this.getValue());
                             },
                             setup: function(widget) {
                                 color = widget.data.color != '' ? widget.data.color : '#000000';
                                 this.setValue(color);
-                                setSpanColor(color)
+                                setSpanColor(color);
                             },
                             commit: function(widget) {
                                 widget.setData('color', this.getValue())
-                            }
-                        }, {
-                            type: 'button',
-                            label: 'Select',
-                            style: 'margin-top:1.35em',
-                            onClick: function() {
-                                editor.getColorFromDialog(function(color) {
-                                    document.getElementsByClassName('colorChooser')[0].getElementsByTagName('input')[0].value = color;
-                                    setSpanColor(color)
-                                }, this)
                             }
                         }]
                     }, {
@@ -676,7 +668,7 @@ function in_array(needle, haystack) {
                     }]
                 }, {
                     type: 'html',
-                    html: '<p>Example : color \'red\' and size \'4\'</p>',
+                    html: '<p>'+Drupal.t( 'Choose color : "orange", "black", "white". Choose size (rem) : "2", "4", "6"...' )+'</p>',
                 },/*{
                     type: 'hbox',
                     widths: ['25%', '25%', '25%', '25%'],
