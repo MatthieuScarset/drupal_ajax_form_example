@@ -16,6 +16,8 @@ process:
     plugin: default_value
     default_value: office
   title: title
+  created: created
+  changed: changed
   uid:
     plugin: default_value
     default_value: 1

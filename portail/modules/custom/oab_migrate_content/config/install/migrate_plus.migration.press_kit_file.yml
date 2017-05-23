@@ -4,12 +4,12 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: dossier_presse
-id: dossier_presse_file
+migration_group: press_kit
+id: press_kit_file
 migration_tags: null
-label: Dossier presse file
+label: Press Kit file
 source:
-  plugin: dossier_presse_file
+  plugin: press_kit_file
 process:
   langcode: langcode
   uid: uid

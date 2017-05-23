@@ -10,7 +10,7 @@ use Drupal\migrate\Row;
 /**
  *
  * @MigrateSource(
- *   id = "dossier_presse_file"
+ *   id = "press_kit_file"
  * )
  */
 class PressKitFile extends SqlBase {

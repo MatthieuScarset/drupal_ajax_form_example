@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-id: dossier_presse
-label: 'Dossier de Presse Imports'
+id: press_kit
+label: 'Press kit Imports'
 description: null
 source_type: 'Drupal 7'
 module: null
