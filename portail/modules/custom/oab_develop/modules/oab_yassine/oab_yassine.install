@@ -10,6 +10,7 @@ function oab_yassine_install() {
  */
 function oab_yassine_update_dependencies() {
   $dependencies['oab_yassine'][8001] = array('oab_christophe' => 8020	);
+  $dependencies['oab_yassine'][8004] = array('oab_amel' => 8015	);
 
   return $dependencies;
 }
