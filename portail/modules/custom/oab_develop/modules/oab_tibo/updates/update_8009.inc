@@ -160,6 +160,163 @@ $config_group->setData(
 );
 $config_group->save(TRUE);
 
+// content type product
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.product.default');
+$config_group->setData(
+array (
+  'uuid' => '2836a2b4-4feb-423c-a23c-35e333688957',
+  'langcode' => 'en',
+  'status' => true,
+  'dependencies' =>
+    array (
+      'config' =>
+        array (
+          0 => 'field.field.node.product.field_content',
+          1 => 'field.field.node.product.field_end_date',
+          2 => 'field.field.node.product.field_highlight',
+          3 => 'field.field.node.product.field_id_fiche',
+          4 => 'field.field.node.product.field_id_offre',
+          5 => 'field.field.node.product.field_industry',
+          6 => 'field.field.node.product.field_job_profile',
+          7 => 'field.field.node.product.field_market_segment',
+          8 => 'field.field.node.product.field_meta_description',
+          9 => 'field.field.node.product.field_meta_title',
+          10 => 'field.field.node.product.field_metatags',
+          11 => 'field.field.node.product.field_region',
+          12 => 'field.field.node.product.field_solution',
+          13 => 'field.field.node.product.field_start_date',
+          14 => 'field.field.node.product.field_sub_family',
+          15 => 'field.field.node.product.field_subhome',
+          16 => 'field.field.node.product.field_top_zone',
+          17 => 'field.field.node.product.field_top_zone_background',
+          18 => 'node.type.product',
+        ),
+      'module' =>
+        array (
+          0 => 'metatag',
+          1 => 'text',
+          2 => 'user',
+        ),
+    ),
+  'id' => 'node.product.default',
+  'targetEntityType' => 'node',
+  'bundle' => 'product',
+  'mode' => 'default',
+  'content' =>
+    array (
+      'field_content' =>
+        array (
+          'weight' => 2,
+          'label' => 'hidden',
+          'settings' =>
+            array (
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'type' => 'text_default',
+          'region' => 'content',
+        ),
+      'field_meta_description' =>
+        array (
+          'weight' => 4,
+          'label' => 'hidden',
+          'settings' =>
+            array (
+              'link_to_entity' => false,
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'type' => 'string',
+          'region' => 'content',
+        ),
+      'field_meta_title' =>
+        array (
+          'weight' => 3,
+          'label' => 'hidden',
+          'settings' =>
+            array (
+              'link_to_entity' => false,
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'type' => 'string',
+          'region' => 'content',
+        ),
+      'field_metatags' =>
+        array (
+          'weight' => 5,
+          'label' => 'hidden',
+          'settings' =>
+            array (
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'type' => 'metatag_empty_formatter',
+          'region' => 'content',
+        ),
+      'field_top_zone_background' =>
+        array (
+          'weight' => 6,
+          'label' => 'above',
+          'settings' =>
+            array (
+              'link' => true,
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'type' => 'entity_reference_label',
+          'region' => 'content',
+        ),
+      'links' =>
+        array (
+          'weight' => 1,
+          'settings' =>
+            array (
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'region' => 'content',
+        ),
+      'workbench_moderation_control' =>
+        array (
+          'weight' => 0,
+          'settings' =>
+            array (
+            ),
+          'third_party_settings' =>
+            array (
+            ),
+          'region' => 'content',
+        ),
+    ),
+  'hidden' =>
+    array (
+      'field_end_date' => true,
+      'field_highlight' => true,
+      'field_id_fiche' => true,
+      'field_id_offre' => true,
+      'field_industry' => true,
+      'field_job_profile' => true,
+      'field_market_segment' => true,
+      'field_region' => true,
+      'field_solution' => true,
+      'field_start_date' => true,
+      'field_sub_family' => true,
+      'field_subhome' => true,
+      'field_top_zone' => true,
+      'langcode' => true,
+    ),
+)
+);
+$config_group->save(TRUE);
+
 // bloc top zone
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('block.block.topzone');
