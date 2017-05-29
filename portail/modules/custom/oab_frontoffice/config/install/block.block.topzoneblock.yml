@@ -6,7 +6,7 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: topzoneblock
+id: topzone
 theme: theme_boosted
 region: top_zone
 weight: -15
