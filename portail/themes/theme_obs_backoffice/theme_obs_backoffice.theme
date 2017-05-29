@@ -12,6 +12,9 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function theme_obs_backoffice_preprocess_html(&$variables) {
   // If on a node add or edit page, add a node-layout class.
+  global $config;
+  $variables['header_env'] = $config['header_env'];
+
   $path_args = explode('/', \Drupal::request()->getPathInfo());
   if ($suggestions = theme_get_suggestions($path_args, 'page', '-')) {
     foreach ($suggestions as $suggestion) {

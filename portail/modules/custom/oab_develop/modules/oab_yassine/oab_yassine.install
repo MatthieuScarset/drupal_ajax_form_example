@@ -10,6 +10,7 @@ function oab_yassine_install() {
  */
 function oab_yassine_update_dependencies() {
   $dependencies['oab_yassine'][8001] = array('oab_christophe' => 8020	);
+  $dependencies['oab_yassine'][8004] = array('oab_amel' => 8015	);
 
   return $dependencies;
 }
@@ -19,4 +20,25 @@ function oab_yassine_update_dependencies() {
  */
 function oab_yassine_update_8001() {
   include_once("updates/update_8001.inc");
+}
+
+/**
+ *  Definition d'une variable Version
+ */
+function oab_yassine_update_8002() {
+  include_once("updates/update_8002.inc");
+}
+
+/**
+ *  Traduction type de contenu
+ */
+function oab_yassine_update_8003() {
+  include_once("updates/update_8003.inc");
+}
+
+/**
+ *  Traduction style et suppression couleur bleue
+ */
+function oab_yassine_update_8004() {
+  include_once("updates/update_8004.inc");
 }
