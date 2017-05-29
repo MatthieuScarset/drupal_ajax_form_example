@@ -105,8 +105,9 @@ class BlogPostNode extends SqlBase {
 		}
 		if(isset($meta_description) && !empty($meta_description))
 		{
-			$meta_description = mb_substr($meta_description,0, 155);
-			$row->setSourceProperty('meta_description', $meta_description) ;
+			$row->setSourceProperty('highlight_field', $meta_description) ;
+			$meta_description_short = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description_short) ;
 		}
 
 
