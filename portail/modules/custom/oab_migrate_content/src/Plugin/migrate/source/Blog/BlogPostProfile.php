@@ -117,7 +117,7 @@ class BlogPostProfile extends SqlBase {
     }
 		// compte twitter
     if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')){
-			$row->setSourceProperty('field_social_accounts', substr($field_twitter_account, 0, 255));
+			$row->setSourceProperty('field_social_account', substr($field_twitter_account, 0, 255));
     }
 
     //titre du node
