@@ -1,17 +1,19 @@
 langcode: en
 status: true
 pendencies: {  }
-id: dossier_presse_node
+id: press_kit_node
 migration_tags: null
-migration_group: dossier_presse
-label: 'Dossier presse nodes'
+migration_group: press_kit
+label: 'Press kit nodes'
 source:
-  plugin: dossier_presse_node
+  plugin: press_kit_node
 process:
   type:
     plugin: default_value
     default_value: press_kit
   title: title
+  created: created
+  changed: changed
   langcode: language
   uid:
     plugin: default_value
@@ -24,15 +26,18 @@ process:
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
+  field_thematic: thematics
   field_file:
     plugin: migration
-    migration: dossier_presse_media
+    migration: press_kit_media
     source: files
   path: path
   moderation_state: moderation_state
   status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
 destination:
   plugin: 'entity:node'
 migration_dependencies:  
   required:
-    - dossier_presse_media
+    - press_kit_media

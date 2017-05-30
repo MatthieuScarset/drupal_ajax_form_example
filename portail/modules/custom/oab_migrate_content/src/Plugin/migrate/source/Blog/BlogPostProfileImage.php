@@ -111,6 +111,7 @@ class BlogPostProfileImage extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+
     $imageFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
     //$blogPath = 'public://Blog';
