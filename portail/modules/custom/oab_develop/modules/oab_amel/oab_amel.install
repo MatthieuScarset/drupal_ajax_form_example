@@ -23,9 +23,11 @@ function oab_amel_update_dependencies() {
 	$dependencies['oab_amel'][8011] = array('oab_christophe' => 8011	);
 	$dependencies['oab_amel'][8012] = array('oab_christophe' => 8015	);
 	$dependencies['oab_amel'][8013] = array('oab_christophe' => 8018	);
-	//$dependencies['oab_amel'][8014] = array('oab_amel' => 8013	);
+	$dependencies['oab_amel'][8014] = array('oab_amel' => 8013	);
+    $dependencies['oab_amel'][8015] = array('oab_amel' => 8014	);
+    $dependencies['oab_amel'][8016] = array('oab_yassine' => 8004, 'oab_tibo' => 8009, 'oab_christophe' => 8020	);
 
-	return $dependencies;
+    return $dependencies;
 }
 
 /**
@@ -145,4 +147,11 @@ function oab_amel_update_8014() {
  */
 function oab_amel_update_8015() {
     include_once("updates/update_8015.inc");
+}
+
+/**
+ *  Ajout vocab taxonomie : Produits (Products)
+ */
+function oab_amel_update_8016() {
+    include_once("updates/update_8016.inc");
 }

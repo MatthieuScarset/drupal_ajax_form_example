@@ -578,7 +578,7 @@ class AxiomeImporter{
                                 $this->axiome_notification[] = "fiche axiome : " . var_export($info_notification, TRUE);
                             } catch (Exception $e) {
                                 $this->axiome_notification[] = "ERREUR | la fiche id \"" . $xpath_fiche->getAttribute('id') . "\" n'a pas pu être importée";
-                                $this->axiome_notification[] = "Exception : " . var_export($e, TRUE);
+                                //$this->axiome_notification[] = "Exception : " . var_export($e, TRUE);
                             }
                         }
                     }
