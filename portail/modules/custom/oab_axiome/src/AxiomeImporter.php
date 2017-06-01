@@ -350,13 +350,14 @@ class AxiomeImporter{
                 // On cherche les fiches à mettre à jour en fonction des dates dans le référentiel
                 $fiche_update_date = $fiche->getAttribute('datemaj');
                 $fiche_id = $fiche->getAttribute('id');
-
+               // echo nl2br("Fiche ID = " . $fiche_id . "\n");
                 if ($fiche_update_date == $target_update_date) {
 
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
                 } // Ou si on a une archive pour cette fiche
                 elseif (isset($this->fiches_jointent[$fiche_id])) {
-                    //echo nl2br("Fiche archive date = " . $fiche_id . "\n");
+                   // echo nl2br("Fiche archive date = " . $fiche_id . "\n");
+
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
                 }
             }
@@ -379,8 +380,7 @@ class AxiomeImporter{
        // echo nl2br("Classement found count = " . $classement->length . "\n");
 
         $familles = $classement->item(0)->getElementsByTagName('element_classement_group');
-        //kint($familles);
-        //kint($xpath_fiche); //vide TODO : fonction getElementByTagName à revoir
+
         //echo nl2br("Familles found count = " . $familles->length . "\n");
         foreach ($familles AS $famille){
 
@@ -393,6 +393,8 @@ class AxiomeImporter{
         }
 
         if ($has_portfolio){
+
+            //TODO : QUERY NOK; à rechecker
            // echo nl2br("will handle famille that has portfolio " . "\n");
             //nouveaux champs créés dans le type de contenu Produits : id_fiche et id_offre
             $query = \Drupal::database()->select('node__field_id_fiche', 'f');
@@ -402,7 +404,7 @@ class AxiomeImporter{
                 ->range(0, 1);
 
             $results = $query->execute()->fetchObject();
-
+            //kint($results);
             // Si c'est une nouvelle fiche
             if (!is_object($results)){
                 //echo("c'est une nouvelle fiche \n");
@@ -410,7 +412,8 @@ class AxiomeImporter{
             }
             // Si c'est une fiche existante
             else{
-               // echo nl2br("c'est une fiche existante \n");
+               // echo nl2br("c'est une fiche existante \n")
+
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, $results->nid);
             }
 
@@ -466,7 +469,7 @@ class AxiomeImporter{
      * @param $nid
      *   The nid of the node if existing
      */
-    private function axiome_traitement_fiche($xpath_fiche, $language, $nid = FALSE)
+    private function axiome_traitement_fiche($xpath_fiche, $language, $nid)
     {
 
         //TODO : workflow
@@ -479,9 +482,12 @@ class AxiomeImporter{
                     && substr($file_fiche, -4) == '.xml'
                 ) {
                     if ($this->axiome_validate_fiche($fiche_dir, $file_fiche)) {
+                       // kint($nid);
                         // Si c'est une fiche existante
                         if ($nid) {
                             $nid = (int)$nid;
+
+
                             $node = Node::load($nid);
 
                             /*  GESTION DU WORKFLOW A FAIRE
@@ -512,27 +518,28 @@ class AxiomeImporter{
                                      $this->axiome_deleted_fiche[$node->field_id_fiche['und'][0]['value']] = $node->field_id_fiche['und'][0]['value'];
                                      if (isset($node)) unset($node);
                                  }*/
-                        } // Si c'est une nouvelle fiche
+                        }
+
+                        // Si c'est une nouvelle fiche
                         else {
                             $this->axiome_notification[] = "nouvelle fiche importée";
 
-                            //TODO : creation du node
-
-                            // $node = Node::create();
+                            //creation du node
+                            // TODO : A completer
                             $node = Node::create([
                                 'type'        => 'product',
                                 'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
+                                'langcode'    => $xpath_fiche->getAttribute('language'),
+                                'promoted'    => 0,
+                                'sticky'      => 0
                             ]);
                             $node->save();
-                             //$node->setTitle($xpath_fiche->getAttribute('nom_offre_commerciale'));
 
-                              //type
-                              //langcode
+                           // echo nl2br($xpath_fiche->getAttribute('id'));
 
-                             //$node->setSticky(0);
-                             //$node->setPromoted(0);
-                             //$node->uuid(0);
-
+                            $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
+                            $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
+                            $node->save();
                             /*
                              $node->field_id_fiche['und'][0]['value'] = $xpath_fiche->getAttribute('id');
                              $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
