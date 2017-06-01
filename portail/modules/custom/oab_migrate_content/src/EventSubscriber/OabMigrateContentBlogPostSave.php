@@ -7,6 +7,7 @@ namespace Drupal\oab_migrate_content\EventSubscriber;
 
 // This is the interface we are going to implement.
 use Drupal\Core\Database\Database;
+use Drupal\Core\Session\UserSession;
 use \Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use \Drupal\migrate\Event\MigrateEvents;
 use \Drupal\migrate\Event\MigrateRollbackEvent;
@@ -26,14 +27,31 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     //$events[MigrateEvents::POST_ROW_SAVE][] = array('updateDates');
+		$events[MigrateEvents::PRE_IMPORT][] = array('swtchUserToAdmin');
     $events[MigrateEvents::PRE_IMPORT][] = array('deletePathPattern');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillTaxonomyTIDCorrespondence');
+		$events[MigrateEvents::PRE_IMPORT][] = array('fillSubhomeIdInState');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
-    $events[MigrateEvents::POST_IMPORT][] = array('resetPathPattern');
+		$events[MigrateEvents::POST_IMPORT][] = array('resetPathPattern');
+		$events[MigrateEvents::POST_IMPORT][] = array('swtchUserToAnonymous');
 
     return $events;
   }
+
+	public function swtchUserToAdmin(MigrateImportEvent $migrate_row){
+		// On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
+		$accountSwitcher = \Drupal::service('account_switcher');
+		// switch to the admin user
+		$accountSwitcher->switchTo(new UserSession(['uid' => 1]));
+	}
+
+	public function swtchUserToAnonymous(MigrateImportEvent $migrate_row) {
+		// On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
+		$accountSwitcher = \Drupal::service('account_switcher');
+		// switch to the admin user
+		$accountSwitcher->switchTo(new UserSession(['uid' => 0]));
+	}
 
   /**
    * MigrateEvents::POST_ROW_SAVE event handler.
@@ -96,17 +114,15 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
 
         // Multilingual.
         'title' => $migrate_src_values['title'],
-        'body' => array('value' => $migrate_src_values['field_txt_catcher'], 'format' => 'full_html'),
-        'field_job' => $migrate_src_values['field_profil'],
-        'field_location' => $migrate_src_values['field_location'],
+        'body' => array('value' => $migrate_src_values['field_txt_biography_fr'], 'format' => 'full_html'),
         'field_image' => $migrate_dest_values['field_image'],
       );
 
-      if ($entity->hasTranslation('en')){
-        $entity->removeTranslation('en');
+      if ($entity->hasTranslation('fr')){
+        $entity->removeTranslation('fr');
       }
 
-      $translated_entity = $entity->addTranslation('en', $values);
+      $translated_entity = $entity->addTranslation('fr', $values);
       $translated_entity->save();
 
       $map = $migrate_row->getMigration()->getIdMap();
@@ -132,8 +148,10 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
     }*/
 
     // On remet l'utilisateur anonyme par défaut, au cas où
+		/*
     $anonymous_user = \Drupal\user\Entity\User::load(0);
     \Drupal::getContainer()->set('current_user', $anonymous_user);
+    */
   }
 
   /** Suppression des Url alias
@@ -370,5 +388,66 @@ class OabMigrateContentBlogPostSave implements EventSubscriberInterface {
 				}
 		}
 		\Drupal::state()->set('correspondence_taxo_region', $correspondence_taxo_region);
+
+
+
+
+		//SOLUTION -> THEMATIC
+		$correspondence_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
+		foreach ($correspondence_taxo_solution_to_thematic as $key => $correspondance)
+		{
+			if( $correspondance['label_d8'] != "") {
+				//vérification de l'existance du terme pour ce vocabulaire
+				$query = \Drupal::entityQuery('taxonomy_term');
+				$query->condition('vid', 'thematic');
+				$query->condition('langcode', $correspondance['langcode']);
+				$query->condition('name', $correspondance['label_d8']);
+				$entity = $query->execute();
+
+				if (isset($entity) && !empty($entity) && count($entity) > 0) {
+					$correspondence_taxo_solution_to_thematic[$key]['tid_D8'] = array_pop(array_values($entity));
+				}
+				else {
+					// on n'a pas de terme D8 correspondant
+					\Drupal::logger('oab_migrate_content')
+						->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" ('.$correspondance['langcode'].') ---- pour la correspondance solution -> thematique - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
+				}
+			}
+			else
+			{
+				// on n'a pas de correspondance pour cette Taxonomie
+				\Drupal::logger('oab_migrate_content')->notice('Attention : pas de correspondance D8 pour la correspondance solution -> thematique - term = "'.$correspondance['label_d7'].'" - TID D7 :'.$correspondance['tid_d7']);
+			}
+		}
+		\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $correspondence_taxo_solution_to_thematic);
+
+	}
+
+
+
+	/** Permet de remplir les TID des taxonomyes dans les tableaux de correspondance D7-D8
+	 * @param \Drupal\migrate\Event\MigrateImportEvent $migrate_row
+	 */
+	public function fillSubhomeIdInState(MigrateImportEvent $migrate_row) {
+
+		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+		foreach ($subhomes as $code_subhome => $tableau_langues) {
+			foreach ($tableau_langues as $langCode => $element) {
+				if (empty($element['tid_D8']) || $element['tid_D8'] == '') {
+					if ($element['label'] != "") {
+						$query = \Drupal::entityQuery('taxonomy_term');
+						$query->condition('vid', 'subhomes');
+						$query->condition('langcode', $langCode);
+						$query->condition('name', $element['label']);
+						$entity = $query->execute();
+
+						if (isset($entity) && !empty($entity) && count($entity) > 0) {
+							$subhomes[$code_subhome][$langCode]['tid_D8'] = array_pop(array_values($entity));
+						}
+					}
+				}
+			}
+		}
+		\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
 	}
 }

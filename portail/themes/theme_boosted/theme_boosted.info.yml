@@ -8,6 +8,7 @@ package: 'Theme Boosted'
 
 regions:
   header: 'Header'
+  top_zone: 'Top Zone'
   pre_content: 'Pre Content'
   content: 'Content'
   sidebar: 'Side Bar'

@@ -69,31 +69,46 @@ class MagazineInterviewNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
-    $admin_user = \Drupal\user\Entity\User::load(1);
-    \Drupal::getContainer()->set('current_user', $admin_user);
 
-	//Taxonomie de la Subhome
-		$entity = "";
-		if($row->getSourceProperty('language') == 'fr')
-		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Magazine');
-			$entity = $query->execute();
+		//META TITRE
+		$title = $row->getSourceProperty('title');
+		$title = mb_substr($title,0, 55);
+		$row->setSourceProperty('meta_title', $title) ;
+
+		//META DESCRIPTION - récupération de la short description (txt_catcher)
+		$meta_description = "";
+		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+		$catcher_query->fields('c', ['field_txt_catcher_value'])
+			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+			->condition('c.bundle', 'content_magazine_interview', '=');
+
+		$catcher_results = $catcher_query->execute()->fetchAll();
+
+		if (is_array($catcher_results)){
+			foreach ($catcher_results AS $catcher_result){
+
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+					$meta_description = $catcher_result->field_txt_catcher_value;
+				}
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+					$meta_description = $catcher_result['field_txt_catcher_value'];
+				}
+			}
 		}
-		elseif ($row->getSourceProperty('language') == 'en')
+		if(isset($meta_description) && !empty($meta_description))
 		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Magazine');
-			$entity = $query->execute();
+			$meta_description = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description) ;
 		}
-		if(isset($entity) && !empty($entity) && count($entity)>0)
+
+		//Taxonomie de la Subhome
+		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+		if(isset($subhomes['magazine'][$row->getSourceProperty('language')])
+			&& isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
+			&& !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
 		{
-			$row->setSourceProperty('subhomes', array_pop(array_values($entity)));
+			$row->setSourceProperty('subhomes', $subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']);
 		}
 
     // création du verbatim
@@ -169,47 +184,6 @@ class MagazineInterviewNode extends SqlBase {
       array('value' => $body_value, 'format' => 'full_html'),
     ));
 
-    // récupération du SUBTITLE
-    $subtitle_query = $this->select('field_data_field_descriptif_court', 'd');
-    $subtitle_query->fields('d', ['field_descriptif_court_value'])
-      ->condition('d.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('d.bundle', 'content_magazine_interview', '=');
-
-    $subtitle_results = $subtitle_query->execute()->fetchAll();
-
-    if (is_array($subtitle_results)){
-      foreach ($subtitle_results AS $subtitle_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($subtitle_result) && isset($subtitle_result->field_descriptif_court_value)){
-          $row->setSourceProperty('subtitle', $subtitle_result->field_descriptif_court_value);
-        }
-        elseif (is_array($subtitle_result) && isset($subtitle_result['field_descriptif_court_value'])){
-          $row->setSourceProperty('subtitle', $subtitle_result['field_descriptif_court_value']);
-        }
-      }
-    }
-
-    // récupération du SHORT DESCRIPTION
-    $shortdesc_query = $this->select('field_data_field_txt_catcher', 'tc');
-    $shortdesc_query->fields('tc', ['field_txt_catcher_value'])
-      ->condition('tc.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('tc.bundle', 'content_magazine_interview', '=');
-
-    $shortdesc_results = $shortdesc_query->execute()->fetchAll();
-
-    if (is_array($shortdesc_results)){
-      foreach ($shortdesc_results AS $shortdesc_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($shortdesc_result) && isset($shortdesc_result->field_txt_catcher_value)){
-          $row->setSourceProperty('short_description', $shortdesc_result->field_txt_catcher_value);
-        }
-        elseif (is_array($shortdesc_result) && isset($shortdesc_result['field_txt_catcher_value'])){
-          $row->setSourceProperty('short_description', $shortdesc_result['field_txt_catcher_value']);
-        }
-      }
-    }
 
     /*
      * récupération des tags
@@ -252,6 +226,8 @@ class MagazineInterviewNode extends SqlBase {
 		}
 
     // récupération du tag "solution"
+		$thematics = array();
+		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
 		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
 		if(count($correspondance_taxo_solution) > 0) {
 			$solutions = array();
@@ -279,8 +255,19 @@ class MagazineInterviewNode extends SqlBase {
 							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
 						}
 					}
+
+					//on regarde si on doit mettre une thematique pour cette solution
+					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
+							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
+						}
+					}
 				}
 				$row->setSourceProperty('solutions', $solutions);
+				// s'il y a une thématique, on l'affecte
+				if(isset($thematics) && count($thematics) >0)	{
+					$row->setSourceProperty('thematics', $thematics);
+				}
 			}
 		}
 

@@ -37,7 +37,16 @@
 
   $(document).ready(function () {
     image_resize_width();
+
+      $( ".close-env-info" ).click(function(){
+          if ($('.env-info').is(":visible")){
+              $('.environnement-info').hide();
+          }
+      });
+
+
   });
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
