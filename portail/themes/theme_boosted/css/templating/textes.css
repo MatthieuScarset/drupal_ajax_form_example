@@ -635,3 +635,59 @@ p.contenu {
 .module_key_figures_3 .titre3{
     margin-bottom: 0.5rem !important;
 }
+
+/*
+* MODULE  POURQUOI ORANGE
+ */
+.pourquoi{
+    border: 1px solid #CCC;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.pourquoi .col{
+    width: 33.33%;
+    border-right: 1px solid #CCC;
+    padding: 2.5rem;
+    vertical-align: top;
+}
+.pourquoi .col:last-child{
+    border: none;
+}
+.pourquoi .col div.ligne{
+    border-bottom: 1px solid #CCC;
+    padding: 2.5rem;
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+}
+.pourquoi .col div.ligne:first-child{
+    padding-top: 0;
+}
+.pourquoi .col div.ligne:last-child{
+    padding-bottom: 0;
+    border: none;
+}
+.pourquoi .col div.ligne p:last-child{
+    margin-bottom: 0;
+}
+
+
+@media (max-width: 767px) {
+    .pourquoi table,
+    .pourquoi tr,
+    .pourquoi td{
+        display: block;
+    }
+    .pourquoi .col {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #CCC;
+        padding: 1rem;
+    }
+    .pourquoi .col div.ligne{
+        border-bottom: 1px solid #CCC;
+        padding: 1rem;
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+}
