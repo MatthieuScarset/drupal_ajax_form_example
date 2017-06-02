@@ -55,7 +55,7 @@ class AxiomeImporter{
 
                         if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')){
 
-                            file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
+                            //file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
 
                             // Scan du dossier "import"
                             $folder_import = $folder.'/import';
@@ -553,6 +553,9 @@ class AxiomeImporter{
                             //("création des familles");
                             $this->axiome_fiche_recherche_correspondance($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
+
+                            //Mise à jour du contenu du node
+                            AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche);
 
                             try {
                                 // $node->save();
