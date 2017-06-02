@@ -45,6 +45,7 @@ options.alignment,
 {% if options.col_class_default %}
     {%
     set col_classes = [
+
     'views-col',
     options.alignment == 'vertical' ? 'clearfix',
     ]
@@ -57,9 +58,9 @@ options.alignment,
     {% if options.alignment == 'horizontal' %}
         {% for row in items %}
             <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
-                 <div id="related-content-slick-carousel" class="related-content-items">
+                 <div id="related-content-slick-carousel" class="related-content-items container">
                             {% for column in row.content %}
-                            <div{{ column.attributes.addClass("item-related-content col-md-4") }}>
+                            <div{{ column.attributes.addClass("item-related-content") }}>
                                           {{ column.content }}
                             </div>
                             {% endfor %}

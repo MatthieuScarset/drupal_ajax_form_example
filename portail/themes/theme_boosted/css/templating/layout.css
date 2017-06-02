@@ -717,8 +717,19 @@ aside.right-column > .region{
 }
 
 
-.item-related-content{
-    padding: 0px 20px 40px 20px;
+.item-related-content {
+  padding: 0px 20px 40px 20px;
+  width: 30%;
+  float: left;
+}
+
+#slider_direct_access{
+  width: 100%;
+}
+
+.item-direct-access {
+  width: 20%;
+  float: left;
 }
 
 #related-content-slick-carousel article.media  {
