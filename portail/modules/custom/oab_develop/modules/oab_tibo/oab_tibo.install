@@ -85,3 +85,12 @@ function oab_tibo_update_8008() {
 function oab_tibo_update_8009() {
   include_once("updates/update_8009.inc");
 }
+
+
+
+/**
+ * Correction JS slick
+ */
+function oab_tibo_update_8011() {
+	include_once("updates/update_8011.inc");
+}
