@@ -1,5 +1,29 @@
 <?php
 
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_top_zone_background');
+if(empty($field_storage)) {
+	FieldStorageConfig::create(array(
+		'field_name' => 'field_top_zone_background',
+		'entity_type' => 'node',
+		'type' => 'entity_reference',
+	))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'product', 'field_top_zone_background');
+if(empty($field)) {
+	$config_array = array(
+		'field_name' =>  'field_top_zone_background',
+		'entity_type' => 'node',
+		'bundle' => 'product',
+		'label' => 'Top zone background',
+		'required' => FALSE,
+	);
+	FieldConfig::create($config_array)->save();
+}
+
 // storage
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.storage.node.field_top_zone');
