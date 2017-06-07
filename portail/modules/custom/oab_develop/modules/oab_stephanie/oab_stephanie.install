@@ -22,6 +22,7 @@ function oab_stephanie_update_dependencies() {
 	$dependencies['oab_stephanie'][8023] = array('oab_christophe' => 8016	);
 	$dependencies['oab_stephanie'][8026] = array('oab_christophe' => 8017	);
 	$dependencies['oab_stephanie'][8030] = array('oab_amel' => 8014, 'oab_christophe' => 8019, 'oab_tibo' => 8008	);
+	$dependencies['oab_stephanie'][8031] = array('oab_amel' => 8015, 'oab_christophe' => 8020, 'oab_tibo' => 8009, 'oab_yassine' => 8004	);
 
 	return $dependencies;
 }
@@ -242,4 +243,12 @@ function oab_stephanie_update_8029() {
  */
 function oab_stephanie_update_8030() {
 	include_once("updates/update_8030.inc");
+}
+
+
+/**
+ * Création du champ Axiome data pour stocker les données sérialisées d'axiome
+ */
+function oab_stephanie_update_8031() {
+	include_once("updates/update_8031.inc");
 }

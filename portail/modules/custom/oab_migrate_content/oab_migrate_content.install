@@ -132,4 +132,46 @@ function oab_migrate_content_install(){
 		);
 	\Drupal::state()->set('correspondence_taxo_region', $regions);
 
+	$solution_to_thematic =
+		array(
+			'35144' => array('tid_d7' => '35144', 'label_d7' => 'Digital transformation', 'langcode' => 'en', 'label_d8'=> 'Digital transformation', 'tid_D8' => ''),
+			'35173' => array('tid_d7' => '35173', 'label_d7' => 'Transformation digitale', 'langcode' => 'fr', 'label_d8'=> 'Transformation digitale', 'tid_D8' => ''),
+		);
+	\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);
+
+	$subhomes = array(
+		'blogs' => array(
+			'fr' => array('label' => 'Blogs', 'tid_D8' => ''),
+			'en' => array('label' => 'Blogs', 'tid_D8' => ''),
+			'ru' => array('label' => 'Блоги', 'tid_D8' => ''),
+			'ru-en' => array('label' => '', 'tid_D8' => '')),
+
+		'library' => array(
+			'fr' => array('label' => 'Médiathèque', 'tid_D8' => ''),
+			'en' => array('label' => 'Library', 'tid_D8' => ''),
+			'ru' => array('label' => '', 'tid_D8' => ''),
+			'ru-en' => array('label' => '', 'tid_D8' => '')),
+
+		'magazine' => array(
+			'fr' => array('label' => 'Magazine', 'tid_D8' => ''),
+			'en' => array('label' => 'Magazine', 'tid_D8' => ''),
+			'ru' => array('label' => '', 'tid_D8' => ''),
+			'ru-en' => array('label' => '', 'tid_D8' => '')),
+
+		'press' => array(
+			'fr' => array('label' => 'Presse', 'tid_D8' => ''),
+			'en' => array('label' => 'Press', 'tid_D8' => ''),
+			'ru' => array('label' => 'Новости', 'tid_D8' => ''),
+			'ru-en' => array('label' => 'Newsroom', 'tid_D8' => '')),
+	);
+	\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
+
+
+}
+
+/**
+ * Ajout de la migration du champ Shot description (txt catcher de D7) vers l'accroche (highlight de D8)
+ */
+function oab_migrate_content_update_8001() {
+	include_once("updates/update_8001.inc");
 }

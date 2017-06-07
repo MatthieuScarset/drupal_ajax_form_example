@@ -10,6 +10,8 @@ process:
     plugin: default_value
     default_value: magazine
   title: title
+  created: created
+  changed: changed
   langcode: language
   uid:
     plugin: default_value
@@ -22,15 +24,16 @@ process:
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
-  field_image:
+  field_thematic: thematics
+  field_visual:
     plugin: migration
     migration: magazinearticle_media
     source: images
   path: path
-  field_subtitle: subtitle
-  field_short_description: short_description
   moderation_state: moderation_state
   status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
 migration_dependencies:
   required:
     - magazinearticle_term
