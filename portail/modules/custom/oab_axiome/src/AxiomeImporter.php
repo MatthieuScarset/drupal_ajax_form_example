@@ -554,6 +554,8 @@ class AxiomeImporter{
                             $this->axiome_fiche_recherche_correspondance($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
+                            AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche );
+
                             try {
                                 // $node->save();
                                 //node_save($node);
