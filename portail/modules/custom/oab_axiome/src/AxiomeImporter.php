@@ -404,9 +404,10 @@ class AxiomeImporter{
                 ->range(0, 1);
 
             $results = $query->execute()->fetchObject();
-            //kint($results);
+            //oabt($results,true);
             // Si c'est une nouvelle fiche
-            if (!is_object($results)){
+
+            if (!is_object($results) || !isset($results->nid)){
                 //echo("c'est une nouvelle fiche \n");
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, FALSE);
             }
