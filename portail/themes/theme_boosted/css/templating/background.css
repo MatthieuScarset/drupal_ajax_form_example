@@ -257,8 +257,14 @@ p[class*='bg_']{
 }
 
 .banner-topzone{
-    max-height: 180px;
-    height: 180px;
+    max-height: 280px;
+    height: 280px;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+}
+.banner-topzone .frame-icon-rel{
+    top: 0;
 }
 
 .banner-topzone .frame-text{
@@ -268,7 +274,10 @@ p[class*='bg_']{
 .banner-topzone .titre3{
     margin-top: 10px;
 }
-
+.banner-topzone .topzonebg{
+    margin: auto;
+    width: 100%;
+}
 .banner-topzone .rightcol h2{
     transform: translate(-50%, -50%);
     -webkit-transform: translate(0%, 0%);
