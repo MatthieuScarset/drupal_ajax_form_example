@@ -119,7 +119,7 @@ view_mode ? view_mode|clean_class,
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date') }}
-        
+
     </div>
     {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' %}
     {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' %}
