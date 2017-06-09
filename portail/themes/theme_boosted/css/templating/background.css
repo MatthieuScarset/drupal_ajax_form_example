@@ -256,12 +256,34 @@ p[class*='bg_']{
     margin: 0;
 }
 
+.banner-topzone{
+    max-height: 280px;
+    height: 280px;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+}
+.banner-topzone .frame-icon-rel{
+    top: 0;
+}
+
 .banner-topzone .frame-text{
-    font-size: 1.4vw;
+    font-size: 1.6rem;
 }
 
 .banner-topzone .titre3{
     margin-top: 10px;
+}
+.banner-topzone .topzonebg{
+    margin: auto;
+    width: 100%;
+}
+.banner-topzone .rightcol h2{
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(0%, 0%);
+    left: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .frame-longtext{
@@ -279,6 +301,10 @@ p[class*='bg_']{
     }
     .product_partners .bg-partner .img {
         background-color: #fff;
+    }
+    .banner-topzone .col-md-6,
+    .banner-topzone .rightcol{
+        display: none;
     }
 }
 @media (min-width: 480px) {

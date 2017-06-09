@@ -4,12 +4,12 @@ dependencies:
   module:
     - migrate_plus
     - node
-migration_group: dossier_presse
-id: dossier_presse_media
+migration_group: press_kit
+id: press_kit_media
 migration_tags: null
-label: Dossier presse medias
+label: Press kit medias
 source:
-  plugin: dossier_presse_media
+  plugin: press_kit_media
 process:
   bundle:
     plugin: default_value
@@ -28,11 +28,11 @@ process:
   changed: timestamp
   field_file:
     plugin: migration
-    migration: dossier_presse_file
+    migration: press_kit_file
     source: file_info
 destination:
   plugin: entity:media
 template: null
 migration_dependencies:
   required:
-    - dossier_presse_file
+    - press_kit_file

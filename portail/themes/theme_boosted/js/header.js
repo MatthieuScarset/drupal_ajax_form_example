@@ -156,7 +156,7 @@
                   {
                       breakpoint: 980,
                       settings: {
-                          slidesToShow: 4,
+                          slidesToShow: 3,
                           slidesToScroll: 1,
                       }
                   },
@@ -221,15 +221,15 @@
           });
       }
   });
-     $('#slider_direct_access').on('init', function(event, slick){
+     /*$('#slider_direct_access').on('init', function(event, slick){
          // on redimensionne le bloc en fonction de la largeur du main container
          jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
-     });
+     });*/
 
-   $('#related-content-slick-carousel').on('init', function(event, slick){
+   /*$('#related-content-slick-carousel').on('init', function(event, slick){
         // on redimensionne le bloc en fonction de la largeur du main container
         jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
-    });
+    });*/
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

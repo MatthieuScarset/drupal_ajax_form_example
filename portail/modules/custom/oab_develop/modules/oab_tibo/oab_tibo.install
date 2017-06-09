@@ -4,6 +4,25 @@ function oab_tibo_install() {
     drupal_set_installed_schema_version('oab_tibo', 8000);
 }
 
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_tibo_update_dependencies() {
+	$dependencies['oab_tibo'][8001] = array('oab_amel' => 8007	);
+	//$dependencies['oab_tibo'][8002] = array('oab_tibo' => 8001	);
+	$dependencies['oab_tibo'][8003] = array('oab_stephanie' => 8016	);
+	//$dependencies['oab_tibo'][8004] = array('oab_tibo' => 8003	);
+	$dependencies['oab_tibo'][8005] = array('oab_stephanie' => 8019	);
+	/*$dependencies['oab_tibo'][8006] = array('oab_tibo' => 8005	);
+	$dependencies['oab_tibo'][8007] = array('oab_tibo' => 8006	);
+	$dependencies['oab_amel'][8008] = array('oab_tibo' => 8007	);*/
+	$dependencies['oab_amel'][8009] = array('oab_amel' => 8008	);
+	$dependencies['oab_tibo'][8008] = array('oab_amel' => 8011	);
+
+	return $dependencies;
+}
+
 /**
  * RUBYPORTAILOBS-2765 Templating page produit
  */
@@ -58,4 +77,33 @@ function oab_tibo_update_8007() {
  */
 function oab_tibo_update_8008() {
   include_once("updates/update_8008.inc");
+}
+
+/**
+ * Creation de la topzone
+ */
+function oab_tibo_update_8009() {
+  include_once("updates/update_8009.inc");
+}
+
+/**
+ * ajustement topzone
+ */
+function oab_tibo_update_8010() {
+	include_once( "updates/update_8010.inc" );
+}
+
+
+/**
+ * Correction JS slick
+ */
+function oab_tibo_update_8011() {
+	include_once( "updates/update_8011.inc" );
+}
+
+/**
+ * ajustement topzone
+ */
+function oab_tibo_update_8012() {
+	include_once("updates/update_8012.inc");
 }

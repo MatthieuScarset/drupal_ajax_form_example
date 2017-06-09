@@ -10,7 +10,7 @@ use Drupal\migrate\Row;
  * Source plugin for beer content.
  *
  * @MigrateSource(
- *   id = "dossier_presse_node"
+ *   id = "press_kit_node"
  * )
  */
 class PressKitNode extends SqlBase {
@@ -70,61 +70,51 @@ class PressKitNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
-    $admin_user = \Drupal\user\Entity\User::load(1);
-    \Drupal::getContainer()->set('current_user', $admin_user);
+		//META TITRE
+		$title = $row->getSourceProperty('title');
+		$title = mb_substr($title,0, 55);
+		$row->setSourceProperty('meta_title', $title) ;
+
+		//META DESCRIPTION - récupération de la short description (txt_catcher)
+		$meta_description = "";
+		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+		$catcher_query->fields('c', ['field_txt_catcher_value'])
+			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+			->condition('c.bundle', 'press_kit', '=');
+
+		$catcher_results = $catcher_query->execute()->fetchAll();
+
+		if (is_array($catcher_results)){
+			foreach ($catcher_results AS $catcher_result){
+
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+					$meta_description = $catcher_result->field_txt_catcher_value;
+				}
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+					$meta_description = $catcher_result['field_txt_catcher_value'];
+				}
+			}
+		}
+		if(isset($meta_description) && !empty($meta_description))
+		{
+			$row->setSourceProperty('highlight_field', $meta_description) ;
+			$meta_description_short = mb_substr($meta_description,0, 155);
+			$row->setSourceProperty('meta_description', $meta_description_short) ;
+		}
+
 
 		//Taxonomie de la Subhome
-		$entity = "";
-		if($row->getSourceProperty('language') == 'fr')
+		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+		if(isset($subhomes['press'][$row->getSourceProperty('language')])
+			&& isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
+			&& !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
 		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Presse');
-			$entity = $query->execute();
-		}
-		elseif ($row->getSourceProperty('language') == 'en')
-		{
-			$query = \Drupal::entityQuery('taxonomy_term');
-			$query->condition('vid', 'subhomes');
-			$query->condition('langcode', $row->getSourceProperty('language') );
-			$query->condition('name', 'Press');
-			$entity = $query->execute();
-		}
-		if(isset($entity) && !empty($entity) && count($entity)>0)
-		{
-			$row->setSourceProperty('subhomes', array_pop(array_values($entity)));
+			$row->setSourceProperty('subhomes', $subhomes['press'][$row->getSourceProperty('language')]['tid_D8']);
 		}
     
     $row->setSourceProperty('content_field', '');
 
-    // récupération du body (short description)
-    $body_query = $this->select('field_data_field_txt_catcher', 'c');
-    $body_query->fields('c', ['field_txt_catcher_value'])
-      ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
-      ->condition('c.bundle', 'press_kit', '=');
-
-    $body_results = $body_query->execute()->fetchAll();
-
-    if (is_array($body_results)){
-      foreach ($body_results AS $body_result){
-
-        // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($body_result) && isset($body_result->field_txt_catcher_value)){
-          $body_value = $body_result->field_txt_catcher_value;
-          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
-          $row->setSourceProperty('content_field', $body_value);
-        }
-        elseif (is_array($body_result) && isset($body_result['field_txt_catcher_value'])){
-          $body_value = $body_result['field_txt_catcher_value'];
-          $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
-          $row->setSourceProperty('content_field', $body_value);
-        }
-      }
-    }
 
     /*
      * Récup des TAGS
@@ -166,6 +156,8 @@ class PressKitNode extends SqlBase {
 		}
 
 		// récupération du tag "solution"
+		$thematics = array();
+		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
 		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
 		if(count($correspondance_taxo_solution) > 0) {
 			$solutions = array();
@@ -193,8 +185,19 @@ class PressKitNode extends SqlBase {
 							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
 						}
 					}
+
+					//on regarde si on doit mettre une thematique pour cette solution
+					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
+						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
+							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
+						}
+					}
 				}
 				$row->setSourceProperty('solutions', $solutions);
+				// s'il y a une thématique, on l'affecte
+				if(isset($thematics) && count($thematics) >0)	{
+					$row->setSourceProperty('thematics', $thematics);
+				}
 			}
 		}
 
@@ -287,7 +290,7 @@ class PressKitNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)){
-      $row->setSourceProperty('path', '/' . $path_results->alias);
+			$row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

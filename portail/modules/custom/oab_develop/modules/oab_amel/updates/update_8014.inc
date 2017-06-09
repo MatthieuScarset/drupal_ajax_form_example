@@ -17,8 +17,8 @@ $config->set('settings', array (
                                         array (
                                             0 => 'Styles',
                                             1 => 'Templating',
-                                            3 => 'Solaris',
-                                            4 => 'Templates',
+                                            2 => 'Solaris',
+                                            3 => 'Templates',
                                         ),
                                 ),
                             1 =>
@@ -104,7 +104,7 @@ $config->set('settings', array (
                     'linkit_profile' => 'link',
                 ),
         ),
-
+/*
     'image_upload' =>
         array (
             'status' => true,
@@ -116,7 +116,7 @@ $config->set('settings', array (
                     'width' => NULL,
                     'height' => NULL,
                 ),
-        ),
+        ),*/
 ));
 $config->save(TRUE);
 

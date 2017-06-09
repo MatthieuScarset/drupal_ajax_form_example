@@ -100,7 +100,7 @@ view_mode ? view_mode|clean_class,
 
 <div class="content_info">
     {% if content.field_solution['#object'].nid.value %}
-        <span class="date">{{ createdDate }}</span> {{ content.field_solution }}
+        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
     {% else %}
         <span class="dateOnly">{{ createdDate }}</span>
     {% endif %}

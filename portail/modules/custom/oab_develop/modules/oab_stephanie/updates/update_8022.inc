@@ -36,7 +36,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 //Applique les modifications en bdd pour la traduction : ajout des colonnes necessaires
-\Drupal::entityDefinitionUpdateManager()->applyUpdates();
+//\Drupal::entityDefinitionUpdateManager()->applyUpdates();
 
 
 //On supprime d'abord les termes de taxonomies Solutions RU et RU-EN saisis manuellement
