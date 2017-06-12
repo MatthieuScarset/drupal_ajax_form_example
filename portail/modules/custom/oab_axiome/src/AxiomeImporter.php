@@ -530,7 +530,7 @@ class AxiomeImporter{
                             $node = Node::create([
                                 'type'        => 'product',
                                 'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
-                                'langcode'    => $xpath_fiche->getAttribute('language'),
+                                'langcode'    => $language,
                                 'promoted'    => 0,
                                 'sticky'      => 0
                             ]);
