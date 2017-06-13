@@ -11,10 +11,13 @@ namespace Drupal\oab_axiome;
 use DOMDocument;
 use DOMXPath;
 use Drupal\Component\Utility\Html;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\media_entity\Entity\Media;
 
 class AxiomeContentImporter {
 
-  public static function parseContent(&$node, $fiche){
+  public static function parseContent(&$node, $fiche, $language){
     $s = file_get_contents($fiche);
     $data = (array) simplexml_load_string($s, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -24,9 +27,11 @@ class AxiomeContentImporter {
 
     // Creation du top_zone
     $bannerData = $axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes'];
-    $urlBackground = $bannerData['background_image']['url_archive'];
+    $idOffre = $axiomeData['@attributes']['id'];
+    $urlBackground = $idOffre.'/'.$bannerData['background_image']['url_archive'];
 
 
+    // Top zone
     $content = file_get_contents(
       drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templating/files/banner/top-zone.html.twig'
     );
@@ -38,13 +43,17 @@ class AxiomeContentImporter {
     self::replaceRightBlock($dom, $bannerData);
 
     $content = $dom->saveHTML($dom->getElementsByTagName('div')->item(0));
-//    oabt($content);
     $node->set('field_top_zone', $content);
     $node->field_top_zone->format = 'full_html';
 
+    //TOP Zone Background
+    $urlBackground = 'public://axiome/fiches/'.$urlBackground;
+    $image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
+
+//    echo "Image media ID : ".$image_media_id.'<br/>';
+    $node->set('field_top_zone_background', $image_media_id);
     $node->save();
-//    oabt('==========');
-//    oabt($node->field_top_zone->value);
+
   }
 
   private static function replaceLeftBlock(&$dom, $bannerData){
@@ -97,11 +106,71 @@ class AxiomeContentImporter {
     }
   }
 
-
   private static function getNodesByClass($dom, $classname, $element = "*"){
     $finder = new DomXPath($dom);
     $nodes = $finder->query("//".$element."[contains(@class, '$classname')]");
 
     return $nodes;
+  }
+
+  private static function createTopZoneBackgroundMedia(&$node, $url, $data, $language){
+
+    $imageId = null;
+    $styleTopZone = ImageStyle::load('top_zone');
+    $styleMedium = ImageStyle::load('medium');
+    $styleThumbnail = ImageStyle::load('thumbnail');
+
+    if ($node->hasField('field_top_zone_background')){
+      $top_zone_background = $node->get('field_top_zone_background')->getValue();
+      if(isset($top_zone_background[0]['target_id'])) {
+        $entity = \Drupal::entityTypeManager()
+          ->getStorage('media')
+          ->load((int) $top_zone_background[0]['target_id']);
+        $uri = $entity->getType()->thumbnail($entity);
+        $styleTopZone->flush($uri);
+        $styleMedium->flush($uri);
+        $styleThumbnail->flush($uri);
+        $entity->delete();
+//        echo 'Suppression de l\'image '.$uri.'<br/>';
+      }
+    }
+
+    $filesystem = \Drupal::service('file_system');
+    // Create file entity.
+    $image = File::create();
+    $image->setFileUri($url);
+    $image->setOwnerId(\Drupal::currentUser()->id());
+    $image->setMimeType('image/' . pathinfo($url, PATHINFO_EXTENSION));
+    $image->setFileName($filesystem->basename($url));
+    $image->setPermanent();
+    $image->save();
+
+    $original_image = $url;
+
+    $destination = $styleTopZone->buildUri($url);
+    $styleTopZone->createDerivative($original_image, $destination);
+
+    $destination = $styleMedium->buildUri($url);
+    $styleMedium->createDerivative($original_image, $destination);
+
+    $destination = $styleThumbnail->buildUri($url);
+    $styleThumbnail->createDerivative($original_image, $destination);
+
+
+// Create media entity with saved file.
+    $image_media = Media::create([
+      'bundle' => 'image',
+      'uid' => \Drupal::currentUser()->id(),
+      'langcode' => $language,
+      'status' => Media::PUBLISHED,
+      'field_image' => [
+        'target_id' => $image->id(),
+        'alt' => $data['balise_alt'],
+        'title' => $data['balise_alt'],
+      ],
+    ]);
+    $image_media->save();
+
+    return $image_media->id();
   }
 }
