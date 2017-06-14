@@ -85,6 +85,8 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
+{% set axiomeDocs = content.axiome_data.correspondance %}
+
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldProduct %}
@@ -125,4 +127,5 @@ view_mode ? view_mode|clean_class,
     {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' %}
     {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' %}
     {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' %}
+    {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
 </article>
