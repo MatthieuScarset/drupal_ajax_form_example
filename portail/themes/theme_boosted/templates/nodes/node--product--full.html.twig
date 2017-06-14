@@ -121,9 +121,10 @@ view_mode ? view_mode|clean_class,
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_axiome_data') }}
     </div>
 
+    {% if content.axiome_data is defined %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with field_header %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with field_simple_content %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
-
+    {% endif %}
 </article>
