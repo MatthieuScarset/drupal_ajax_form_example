@@ -59,7 +59,7 @@ class AxiomeImporter{
 
                             // Scan du dossier "import"
                             $folder_import = $folder.'/import';
-                            //echo nl2br("folder_import = $folder_import \n");
+                           // echo nl2br("folder_import = $folder_import \n");
                             $files = scandir($folder_import);
 
 
@@ -350,7 +350,8 @@ class AxiomeImporter{
                 // On cherche les fiches à mettre à jour en fonction des dates dans le référentiel
                 $fiche_update_date = $fiche->getAttribute('datemaj');
                 $fiche_id = $fiche->getAttribute('id');
-               // echo nl2br("Fiche ID = " . $fiche_id . "\n");
+
+                // echo nl2br("Fiche ID = " . $fiche_id . "\n");
                 if ($fiche_update_date == $target_update_date) {
 
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
@@ -373,29 +374,31 @@ class AxiomeImporter{
      * @param $fiche_id
      *   The axiome product fiche id
      */
-    private function axiome_recherche_fiche_existante($fiche_id, $xpath_fiche, $content_language){
+    private function axiome_recherche_fiche_existante($fiche_id, $xpath_fiche, $content_language)
+    {
         // On recherche le classement portfolio dans la fiche. Sinon, ce n'est pas la peine d'enregistrer le contenu
         $has_portfolio = false;
         $classement = $xpath_fiche->getElementsByTagName('classement');
-       // echo nl2br("Classement found count = " . $classement->length . "\n");
+        //§echo nl2br("Classement found count = " . $classement->length . "\n");
 
         $familles = $classement->item(0)->getElementsByTagName('element_classement_group');
 
         //echo nl2br("Familles found count = " . $familles->length . "\n");
-        foreach ($familles AS $famille){
+        foreach ($familles AS $famille) {
 
             $classement_nom = strtolower(trim($famille->getAttribute('identifiant')));
             //echo nl2br("will handle famille " . $classement_nom . "\n");
             if ($classement_nom == "portfolio"
-                || $classement_nom == "porfolio"){
+                || $classement_nom == "porfolio"
+            ) {
                 $has_portfolio = true;
             }
         }
 
-        if ($has_portfolio){
+        if ($has_portfolio) {
 
             //TODO : QUERY NOK; à rechecker
-           // echo nl2br("will handle famille that has portfolio " . "\n");
+            //echo nl2br("will handle famille that has portfolio " . "\n");
             //nouveaux champs créés dans le type de contenu Produits : id_fiche et id_offre
             $query = \Drupal::database()->select('node__field_id_fiche', 'f');
             $query->join("node", "n", "n.nid = f.entity_id");
@@ -407,18 +410,16 @@ class AxiomeImporter{
             //oabt($results,true);
             // Si c'est une nouvelle fiche
 
-            if (!is_object($results) || !isset($results->nid)){
-                //echo("c'est une nouvelle fiche \n");
+            if (!is_object($results) || !isset($results->nid)) {
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, FALSE);
-            }
-            // Si c'est une fiche existante
-            else{
-               // echo nl2br("c'est une fiche existante \n")
+            } // Si c'est une fiche existante
+            else {
+                echo nl2br("c'est une fiche existante \n");
 
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, $results->nid);
             }
 
-            if (isset($this->fiches_jointent[$fiche_id])){
+            if (isset($this->fiches_jointent[$fiche_id])) {
                 unset($this->fiches_jointent[$fiche_id]);
             }
         }
@@ -475,6 +476,8 @@ class AxiomeImporter{
 
         //TODO : workflow
         $fiche_dir = $this->axiome_folder_path . '/fiches/' . $xpath_fiche->getAttribute('id');
+        //echo($fiche_dir);
+
         //echo ("axiome traitment fiche id = " . $xpath_fiche->getAttribute('id'));
         if (is_dir($fiche_dir)) {
             $files_fiche = scandir($fiche_dir);
@@ -482,8 +485,9 @@ class AxiomeImporter{
                 if (is_file($fiche_dir . '/' . $file_fiche)
                     && substr($file_fiche, -4) == '.xml'
                 ) {
+                    echo($file_fiche);
                     if ($this->axiome_validate_fiche($fiche_dir, $file_fiche)) {
-                       // kint($nid);
+
                         // Si c'est une fiche existante
                         if ($nid) {
                             $nid = (int)$nid;
@@ -546,7 +550,7 @@ class AxiomeImporter{
                              $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
                             */
 
-                            //echo nl2br("Node saved OK");
+                           // echo nl2br("Node saved OK");
                             //kint($node);
                         }
 

@@ -85,7 +85,6 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
-{% set axiomeDocs = content.axiome_data.correspondance %}
 
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
@@ -95,6 +94,13 @@ view_mode ? view_mode|clean_class,
      {% set fieldAuthor %}
          {{ author_name }}
      {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+
+    {% set field_header = content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes %}
+    {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
+    {% set field_detailed_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_carac %}
+    {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_freecontent.Attributes %}
+    {% set axiomeDocs = content.axiome_data.correspondance %}
 
 <script type="application/ld+json">
     {
@@ -120,12 +126,15 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date') }}
-
+        {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_axiome_data') }}
     </div>
-    {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' %}
-    {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' %}
-    {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' %}
-    {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' %}
-    {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+
+    {% if content.axiome_data is defined %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with field_header %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with field_simple_content %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+    {% endif %}
+
 </article>
