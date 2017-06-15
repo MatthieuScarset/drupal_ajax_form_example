@@ -85,6 +85,7 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
+
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldProduct %}
@@ -99,6 +100,7 @@ view_mode ? view_mode|clean_class,
     {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
     {% set field_detailed_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_carac %}
     {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_freecontent.Attributes %}
+    {% set axiomeDocs = content.axiome_data.correspondance %}
 
 <script type="application/ld+json">
     {
@@ -114,6 +116,11 @@ view_mode ? view_mode|clean_class,
     }
     </script>
 
+<div class="content_info">
+    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
+</div>
+
+
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
@@ -126,5 +133,7 @@ view_mode ? view_mode|clean_class,
         {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with field_simple_content %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
     {% endif %}
+
 </article>

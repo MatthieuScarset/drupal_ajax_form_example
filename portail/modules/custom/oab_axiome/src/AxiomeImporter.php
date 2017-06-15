@@ -19,14 +19,17 @@ class AxiomeImporter{
     private $fiches_jointent = array();
     private $arborescence_famille = array();
     private $axiome_folder_path = "";
+    public $axiome_folder_root_path = "";
     private $axiome_notification = array();
     private $axiome_deleted_fiche = array();
+    public $message = '';
 
     function __construct(){
-        $axiome_folder_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
-        $this->axiome_folder_path = $axiome_folder_path . '/import';
-        //echo nl2br ("Axiome_folder_path = $axiome_folder_path \n");
-        $this->axiome_search_archive($axiome_folder_path);
+      $this->axiome_folder_root_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
+      $this->axiome_folder_path =  $this->axiome_folder_root_path . '/import';
+
+      $this->message = "== STEP 1 : Contruct ==\nAxiome_folder_path = $this->axiome_folder_path \n";
+      //echo nl2br ("Axiome_folder_path = $axiome_folder_path \n");
         //kint($this->axiome_notification);
 
     }
@@ -37,77 +40,89 @@ class AxiomeImporter{
      * @param $folder
      *   The path of the axiome folder
      */
-    private function axiome_search_archive($folder){
+    public function axiome_search_archive($folder){
         $count = 0;
+
         // Scan du dossier "axiome/import"
+        $this->message .= "== STEP 2 : axiome_search_archive ==\n";
         $this->axiome_create_dir($folder);
         if (is_dir($folder)){
             $files = scandir($folder);
-            foreach ($files AS $file){
+            if(!empty($files)){
+              foreach ($files AS $file){
 
-                if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip'){
-                   //echo nl2br ("ZipFile found = $file \n");
-                    if ($count == 0){
-                        exec("rm -fR $folder.'/import'");
-                        $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
+                  if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip'){
+                      $this->message .= "ZipFile found = $file \n";
 
-                        $this->axiome_notification[] = "file : ".$file;
+                      if ($count == 0){
+                          exec("rm -fR $folder.'/import'");
+                          $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
 
-                        if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')){
+                          $this->axiome_notification[] = "file : ".$file;
 
-                            file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
+                          if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')){
+                              $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER.'\n' ;
+                              file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
 
-                            // Scan du dossier "import"
-                            $folder_import = $folder.'/import';
-                           // echo nl2br("folder_import = $folder_import \n");
-                            $files = scandir($folder_import);
+                              // Scan du dossier "import"
+                              $folder_import = $folder.'/import';
+
+                              $this->message .= "folder_import = $folder_import \n";
+                              $files = scandir($folder_import);
 
 
-                            foreach ($files AS $file){
+                              foreach ($files AS $file){
 
-                                if (is_file($folder_import.'/'.$file)
-                                    && substr($file, -4) == '.zip'
-                                    && substr($file, 0, 11) == 'referentiel'){
-                                   // echo nl2br("Will handle file $file \n");
-                                    $this->axiome_notification[] = "referentiel : ".$file;
+                                  if (is_file($folder_import.'/'.$file)
+                                      && substr($file, -4) == '.zip'
+                                      && substr($file, 0, 11) == 'referentiel'){
+                                      $this->message .= "Will handle file $file \n";
+                                      $this->axiome_notification[] = "referentiel : ".$file;
 
-                                    if ($this->axiome_unzip($folder_import.'/'.$file, $folder_import)){
-                                       // echo nl2br("Unzip file $file OK \n");
-                                        file_unmanaged_delete($folder_import.'/'.$file);
+                                      if ($this->axiome_unzip($folder_import.'/'.$file, $folder_import)){
 
-                                        // Recherche du fichier référentiel XML
-                                        preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
-                                        //kint($matches);
-                                        if ($matches && isset($matches[1])){
-                                            $referentiel_file = "referentiel_" . $matches[1] . ".xml";
+                                          $this->message .= "Unzip file $file OK \n";
+                                          file_unmanaged_delete($folder_import.'/'.$file);
 
-                                            if ($dom = $this->axiome_validate_referentiel($folder_import, $referentiel_file)){
-                                                // echo nl2br ("RefFile = $referentiel_file \n");
+                                          // Recherche du fichier référentiel XML
+                                          preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
+                                          //kint($matches);
+                                          if ($matches && isset($matches[1])){
+                                              $referentiel_file = "referentiel_" . $matches[1] . ".xml";
+
+                                              if ($dom = $this->axiome_validate_referentiel($folder_import, $referentiel_file)){
+                                                  // echo nl2br ("RefFile = $referentiel_file \n");
+
+                                                $this->message .= "-- Traitement des référentiels et fiche --";
+                                                $this->message .= "RefFile = $referentiel_file \n";
                                                 // Traitement des référentiels et fiches
-                                                $this->axiome_scan_fiche_archives($folder_import);
-                                                //echo nl2br("Scan fiche archive OK \n");
-                                                $this->axiome_parse_referentiel($dom);
-                                                //echo nl2br("Parse réferentiel  OK \n");
+                                                  $this->axiome_scan_fiche_archives($folder_import);
+                                                  //echo nl2br("Scan fiche archive OK \n");
+                                                  $this->axiome_parse_referentiel($dom);
+                                                  //echo nl2br("Parse réferentiel  OK \n");
 
-                                                // Déplacement du référentiel dans "axiome"
-                                                file_unmanaged_move($folder_import.'/'.$referentiel_file, $folder, FILE_EXISTS_REPLACE);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            // Déplacement des dossiers de fiche dans "axiome"
-                            //echo nl2br("Will move folder $folder_import to $folder \n");
-                            $this->axiome_move_documents($folder_import, $folder);
+                                                  // Déplacement du référentiel dans "axiome"
+                                                  file_unmanaged_move($folder_import.'/'.$referentiel_file, $folder, FILE_EXISTS_REPLACE);
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+                              // Déplacement des dossiers de fiche dans "axiome"
+                              //echo nl2br("Will move folder $folder_import to $folder \n");
+                              $this->axiome_move_documents($folder_import, $folder);
 
-                            $this->axiome_verif_taxonomy_not_empty();
-                            //echo nl2br("Will remove folder $folder_import \n");
-                            exec("rm -fR '$folder_import'");
+                              $this->axiome_verif_taxonomy_not_empty();
+                              //echo nl2br("Will remove folder $folder_import \n");
+                              exec("rm -fR '$folder_import'");
 
-                        }
-                        $count ++;
-                    }
-                }
+                          }
+                          $count ++;
+                      }
+                  }
+              }
+            }else{
+              $this->message .= "Aucun fichier trouvé.";
             }
         }
         else{
@@ -262,7 +277,7 @@ class AxiomeImporter{
                                 $id_fiche = $dom->documentElement->getAttribute('id');
 
                                 $this->fiches_jointent[$id_fiche] = $id_fiche;
-                               // echo nl2br( "Will rename $file_name by /fiches/$id_fiche \n");
+
                                 rename($file_name, $folder.'/fiches/'.$id_fiche);
                             }
                         }
@@ -280,6 +295,7 @@ class AxiomeImporter{
      */
     private function axiome_parse_referentiel($dom)
     {
+        $this->message .=  "Will parse referenciel \n";
         $xpath = new DOMXPath($dom);
 
         $entryname = $dom->documentElement->getAttribute('environnement_name');
@@ -300,6 +316,7 @@ class AxiomeImporter{
 
             // classement famille/sous-famille
             $liste_classements = $xpath->query("/referentiel/classements/element_classement_group");
+            $this->message .=  "- Traitement des classements \n";
             foreach ($liste_classements as $classements) {
                 $nom_classement = strtolower(trim($classements->getElementsByTagName('Attributes')->item(0)->getElementsByTagName('identifiant')->item(0)->nodeValue));
 
@@ -342,6 +359,7 @@ class AxiomeImporter{
                 }
             }
 
+            $this->message .=  "- Traitement des informations des fiches \n";
             // informations sur les fiches
             $liste_fiches = $xpath->query("/referentiel/complements_ficheoffre/ficheoffre");
            // echo nl2br("Liste_fiches founds count = " . $liste_fiches->length); //284
@@ -352,6 +370,7 @@ class AxiomeImporter{
                 $fiche_id = $fiche->getAttribute('id');
 
                 // echo nl2br("Fiche ID = " . $fiche_id . "\n");
+
                 if ($fiche_update_date == $target_update_date) {
 
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
@@ -411,11 +430,12 @@ class AxiomeImporter{
             // Si c'est une nouvelle fiche
 
             if (!is_object($results) || !isset($results->nid)) {
+
+                $this->message .=  "Fiche nouvelle => insert \n";
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, FALSE);
             } // Si c'est une fiche existante
             else {
-                echo nl2br("c'est une fiche existante \n");
-
+              $this->message .=  "Fiche existante => update \n";
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, $results->nid);
             }
 
@@ -485,7 +505,7 @@ class AxiomeImporter{
                 if (is_file($fiche_dir . '/' . $file_fiche)
                     && substr($file_fiche, -4) == '.xml'
                 ) {
-                    echo($file_fiche);
+//                    echo($file_fiche);
                     if ($this->axiome_validate_fiche($fiche_dir, $file_fiche)) {
 
                         // Si c'est une fiche existante
@@ -559,6 +579,7 @@ class AxiomeImporter{
                             $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
+                            $this->message .=  "Parsing content \n";
                             AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
 
                             try {
