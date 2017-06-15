@@ -637,7 +637,7 @@ function in_array(needle, haystack) {
                         widths: ['75%', '25%'],
                         children: [{
                             type: 'select',
-                            items: [ [  Drupal.t('White'), '#FFFFFF' ], [ Drupal.t('Orange') , '#FF7900' ], [ Drupal.t('Black'), '#000000' ] ],
+                            items: [ [  Drupal.t('White'), '#FFFFFF' ], [ Drupal.t('Orange') , '#F16E00' ], [ Drupal.t('Black'), '#000000' ] ],
                             default: '#000000',
                             id: 'colorChooser',
                             className: 'colorChooser',
