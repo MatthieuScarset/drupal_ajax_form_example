@@ -3,10 +3,15 @@
   "label": "Banner",
   "title": "Banner",
   "items": [{
-    "label": "Top Zone",
+    "label": "Top Zone produit",
     "file": "files/banner/top-zone.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
-  }]
+  },
+    {
+      "label": "Top Zone PWP",
+      "file": "files/banner/top-zone-pwp.html.twig",
+      "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-pwp.jpg"
+    }]
 }, {
   "id": "product",
   "label": "Product",
