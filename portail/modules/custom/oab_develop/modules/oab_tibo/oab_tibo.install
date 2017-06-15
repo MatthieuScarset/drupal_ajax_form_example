@@ -98,5 +98,13 @@ function oab_tibo_update_8010() {
  * ajustement topzone
  */
 function oab_tibo_update_8012() {
-	include_once("updates/update_8012.inc");
+	include_once( "updates/update_8012.inc" );
+}
+
+
+/**
+ * Correction JS slick
+ */
+function oab_tibo_update_8011() {
+	include_once("updates/update_8011.inc");
 }
