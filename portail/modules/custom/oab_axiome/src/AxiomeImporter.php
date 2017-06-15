@@ -556,7 +556,7 @@ class AxiomeImporter{
 
                         if (isset($node)) {
                             //("création des familles");
-                            $this->axiome_fiche_recherche_correspondance($node, $fiche_dir . '/' . $file_fiche);
+                            $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
                             AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
@@ -607,46 +607,33 @@ class AxiomeImporter{
 
 
     /**
-     * Crawl the axiome product XML file for field correspondance
-     *
+     * Crawl the axiome product XML file for 
      * @param $node
      *   The node object reference
      *
      * @param $fiche
      *   The axiome product XML file string
      */
-    private function axiome_fiche_recherche_correspondance(&$node, $fiche){
+    private function axiome_fiche_remplissage_champs(&$node, $fiche){
         $dom = new DOMDocument("1.0");
         $dom->load($fiche);
         $xpath = new DOMXPath($dom);
 
-
-        // TODO : Remplir le body avec les élements du XML
-
         // short description
-        $field_txt_catcher = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
-        //$node->field_txt_catcher['und'][0]['value'] = $field_txt_catcher;
-
+				$node->field_highlight = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
 
         // XML content
-        $field_xml_content = file_get_contents($fiche);
-       // $node->field_xml_content['und'][0]['value'] = $field_xml_content;
+        //$field_xml_content = file_get_contents($fiche);
+       	//$node->field_xml_content['und'][0]['value'] = $field_xml_content;
+				//$node->field_body = $field_txt_catcher . $field_xml_content ;
 
-        $node->field_body = $field_txt_catcher . $field_xml_content ;
+				// metatags
+				$meta_title = $xpath->query("/ficheoffre/Attributes/nom_offre_commerciale")->item(0)->nodeValue;
+				$node->field_meta_title = mb_substr($meta_title,0, 55);
 
+				$meta_description = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
+				$node->field_meta_description = mb_substr($meta_description,0, 155);
 
-            // metatags
-        $meta_title = $xpath->query("/ficheoffre/Attributes/a_savoir")->item(0)->nodeValue;
-        $meta_keywords = $xpath->query("/ficheoffre/Attributes/kw")->item(0)->nodeValue;
-        if ($meta_title != ""){
-
-            $node->field_meta_title->value = $meta_title;
-            //$node->metatags[$node->language]['title']['value'] = $meta_title;
-        }
-        if ($meta_keywords != ""){
-            $node->field_meta_description->value = $meta_keywords;
-            //$node->metatags[$node->language]['keywords']['value'] = $meta_keywords;
-        }
 
 
     }
