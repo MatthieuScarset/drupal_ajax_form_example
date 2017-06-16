@@ -93,6 +93,12 @@ function oab_tibo_update_8010() {
 	include_once("updates/update_8010.inc");
 }
 
+/**
+ * Correction JS slick
+ */
+function oab_tibo_update_8011() {
+	include_once("updates/update_8011.inc");
+}
 
 /**
  * ajustement topzone
@@ -101,10 +107,9 @@ function oab_tibo_update_8012() {
 	include_once( "updates/update_8012.inc" );
 }
 
-
 /**
- * Correction JS slick
+ * bannières PWP solutions industries
  */
-function oab_tibo_update_8011() {
-	include_once("updates/update_8011.inc");
+function oab_tibo_update_8013() {
+	include_once("updates/update_8013.inc");
 }
