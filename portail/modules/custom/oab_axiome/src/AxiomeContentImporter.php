@@ -52,7 +52,6 @@ class AxiomeContentImporter {
 
 //    echo "Image media ID : ".$image_media_id.'<br/>';
     $node->set('field_top_zone_background', $image_media_id);
-    $node->save();
 
   }
 
@@ -126,12 +125,13 @@ class AxiomeContentImporter {
         $entity = \Drupal::entityTypeManager()
           ->getStorage('media')
           ->load((int) $top_zone_background[0]['target_id']);
-        $uri = $entity->getType()->thumbnail($entity);
-        $styleTopZone->flush($uri);
-        $styleMedium->flush($uri);
-        $styleThumbnail->flush($uri);
-        $entity->delete();
-//        echo 'Suppression de l\'image '.$uri.'<br/>';
+        if ($entity != null){
+          $uri = $entity->getType()->thumbnail($entity);
+          $styleTopZone->flush($uri);
+          $styleMedium->flush($uri);
+          $styleThumbnail->flush($uri);
+          $entity->delete();
+        }
       }
     }
 

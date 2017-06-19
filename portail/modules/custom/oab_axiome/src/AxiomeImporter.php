@@ -512,41 +512,10 @@ class AxiomeImporter{
                         if ($nid) {
                             $nid = (int)$nid;
 
-
                             $node = Node::load($nid);
+                          $node->set('moderation_state', array('target_id' => 'draft'));
 
-                            /*  GESTION DU WORKFLOW A FAIRE
-                               $publiee = $xpath_fiche->getElementsByTagName('publiee')->item(0)->nodeValue;
-                                 if ($publiee == "true"){
-                                     $node->revision = 1;
-                                     $node->revision_operation = REVISIONING_NEW_REVISION_WITH_MODERATION;
-                                     $node->revision_uid = $node->uid;
-                                     $this->axiome_notification[] = "mise à jour de fiche";
-                                 }
-                                 else{
-                                     $this->axiome_notification[] = "suppression de fiche";
-
-                                     $info_notification = array(
-                                         'nom commercial' => $node->title,
-                                         'langue' => $node->language,
-                                         'id fiche' => $node->field_id_fiche['und'][0]['value'],
-                                         'id offre' => $node->field_id_offre['und'][0]['value'],
-                                         'nid' => $node->nid
-                                     );
-
-                                     $this->axiome_notification[] = "fiche axiome : ".var_export($info_notification, TRUE);
-
-                                     //entity_delete($nid);
-                                     $node->delete();
-
-
-                                     $this->axiome_deleted_fiche[$node->field_id_fiche['und'][0]['value']] = $node->field_id_fiche['und'][0]['value'];
-                                     if (isset($node)) unset($node);
-                                 }*/
-                        }
-
-                        // Si c'est une nouvelle fiche
-                        else {
+                        } else {// Si c'est une nouvelle fiche
                             $this->axiome_notification[] = "nouvelle fiche importée";
 
                             //creation du node
@@ -554,9 +523,11 @@ class AxiomeImporter{
                             $node = Node::create([
                                 'type'        => 'product',
                                 'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
+                                'isNew'       => true,
                                 'langcode'    => $language,
                                 'promoted'    => 0,
-                                'sticky'      => 0
+                                'sticky'      => 0,
+                                'moderation_state' => 'draft',
                             ]);
                             $node->save();
 
@@ -564,23 +535,19 @@ class AxiomeImporter{
 
                             $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                             $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
-                            $node->save();
-                            /*
-                             $node->field_id_fiche['und'][0]['value'] = $xpath_fiche->getAttribute('id');
-                             $node->field_id_offre['und'][0]['value'] = $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id');
-                            */
 
-                           // echo nl2br("Node saved OK");
-                            //kint($node);
                         }
 
                         if (isset($node)) {
+
+
                             //("création des familles");
                             $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
                             $this->message .=  "Parsing content \n";
                             AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
+
 
                             try {
                                 // $node->save();
@@ -598,21 +565,26 @@ class AxiomeImporter{
                                         'uid' => $node->uid,
                                         'stamp' => REQUEST_TIME,
                                     );
-                                    workflow_update_workflow_node($data);
                                 }*/
 
-                                $info_notification = array(
+                               /* $info_notification = array(
                                     'nom commercial' => $node->title,
                                     'langue' => $node->language,
                                     'status' => $node->status,
                                     'id fiche' => $node->field_id_fiche['und'][0]['value'],
                                     'id offre' => $node->field_id_offre['und'][0]['value'],
                                     'nid' => $node->nid
-                                );
+                                );*/
+
+
+                               // mise à jour du workflow
+
+
 
                                 $this->axiome_notification[] = "fiche axiome : " . var_export($info_notification, TRUE);
                             } catch (Exception $e) {
                                 $this->axiome_notification[] = "ERREUR | la fiche id \"" . $xpath_fiche->getAttribute('id') . "\" n'a pas pu être importée";
+//                                oabt($e);
                                 //$this->axiome_notification[] = "Exception : " . var_export($e, TRUE);
                             }
                         }
