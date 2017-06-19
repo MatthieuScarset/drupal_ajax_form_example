@@ -125,3 +125,10 @@ function oab_christophe_update_8020() {
 function oab_christophe_update_8021() {
   include_once("updates/update_8021.inc");
 }
+
+/**
+ *  Ajout du block "contact bar"
+ */
+/*function oab_christophe_update_8022() {
+  include_once("updates/update_8022.inc");
+}*/
