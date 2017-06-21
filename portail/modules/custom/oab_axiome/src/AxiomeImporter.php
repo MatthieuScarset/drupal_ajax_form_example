@@ -85,7 +85,7 @@ class AxiomeImporter{
                                           file_unmanaged_delete($folder_import.'/'.$file);
 
                                           // Recherche du fichier référentiel XML
-                                          preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
+                                          preg_match("@[a-z_]*_[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
                                           //kint($matches);
                                           if ($matches && isset($matches[1])){
                                               $referentiel_file = "referentiel_" . $matches[1] . ".xml";
@@ -97,9 +97,9 @@ class AxiomeImporter{
                                                 $this->message .= "RefFile = $referentiel_file \n";
                                                 // Traitement des référentiels et fiches
                                                   $this->axiome_scan_fiche_archives($folder_import);
-                                                  //echo nl2br("Scan fiche archive OK \n");
+                                                  echo nl2br("Scan fiche archive OK \n");
                                                   $this->axiome_parse_referentiel($dom);
-                                                  //echo nl2br("Parse réferentiel  OK \n");
+                                                  echo nl2br("Parse réferentiel  OK \n");
 
                                                   // Déplacement du référentiel dans "axiome"
                                                   file_unmanaged_move($folder_import.'/'.$referentiel_file, $folder, FILE_EXISTS_REPLACE);
@@ -362,9 +362,9 @@ class AxiomeImporter{
             $this->message .=  "- Traitement des informations des fiches \n";
             // informations sur les fiches
             $liste_fiches = $xpath->query("/referentiel/complements_ficheoffre/ficheoffre");
-           // echo nl2br("Liste_fiches founds count = " . $liste_fiches->length); //284
+            echo nl2br("Liste_fiches founds count = " . $liste_fiches->length); //284
             foreach ($liste_fiches as $fiche) {
-                //echo nl2br("Will handle Fiche $fiche \n");
+                echo nl2br("Will handle Fiche $fiche \n");
                 // On cherche les fiches à mettre à jour en fonction des dates dans le référentiel
                 $fiche_update_date = $fiche->getAttribute('datemaj');
                 $fiche_id = $fiche->getAttribute('id');
@@ -398,7 +398,7 @@ class AxiomeImporter{
         // On recherche le classement portfolio dans la fiche. Sinon, ce n'est pas la peine d'enregistrer le contenu
         $has_portfolio = false;
         $classement = $xpath_fiche->getElementsByTagName('classement');
-        //§echo nl2br("Classement found count = " . $classement->length . "\n");
+        echo nl2br("Classement found count = " . $classement->length . "\n");
 
         $familles = $classement->item(0)->getElementsByTagName('element_classement_group');
 
