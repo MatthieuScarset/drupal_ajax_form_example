@@ -130,7 +130,6 @@ view_mode ? view_mode|clean_class,
 
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_axiome_data') }}
     </div>
-    {{ kint(content.axiome_data.Children.ruby_theme.Children.ruby_zone_detailed_contents) }}
 
     {% if field_header is defined %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
