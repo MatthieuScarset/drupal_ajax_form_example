@@ -2,9 +2,10 @@
 .obs_template.two_columns_33_66 p,
 .obs_template.two_columns_66_33 p,
 .obs_template.three_columns p,
+.obs_template.four_columns p,
 .obs_template.two_columns p
 {	
-  padding: 10px;
+  /*padding: 10px;*/
 }
 
 .obs_template.obs_background_blue{
@@ -53,42 +54,26 @@
   background-color: #D6D6D6;
   padding: 10px;
 }
-
-/* Liens de couleur noire sur fond de couleur primaire et secondaire */
-.obs_template.obs_background_pink a,
-.obs_template.obs_background_yellow a,
-.obs_template.obs_background_purple a,
-.obs_template.obs_background_green a,
-.obs_template.obs_background_blue a,
-.obs_template.obs_background_light_grey a,
-.obs_template.obs_background_moderate_grey a,
-.obs_template.obs_background_white a,
-.obs_template.obs_background_orange a,
-.obs_template.obs_background_dark_grey a{
-  color: #000000;
-  text-decoration: underline;
+.obs_template.obs_background_lighter_grey{
+    background-color: #EEE;
+    padding: 10px;
 }
 
-.obs_template.obs_background_pink a:hover,
-.obs_template.obs_background_yellow a:hover,
-.obs_template.obs_background_purple a:hover,
-.obs_template.obs_background_green a:hover,
-.obs_template.obs_background_blue a:hover,
-.obs_template.obs_background_orange a:hover,
-.obs_template.obs_background_pink a:focus,
-.obs_template.obs_background_yellow a:focus,
-.obs_template.obs_background_purple a:focus,
-.obs_template.obs_background_green a:focus,
-.obs_template.obs_background_blue a:focus,
-.obs_template.obs_background_orange a:focus{
-  color: #000000;
-  text-decoration: underline;
+/* Liens de couleur noire sur fond de couleur primaire et secondaire */
+.obs_template.div[class*=" obs_background_"] a{
+    color: #000000;
+    text-decoration: underline;
+}
+
+.obs_template.div[class*=" obs_background_"] a:hover,
+.obs_template.div[class*=" obs_background_"] a:focus{
+    color: #000000;
+    text-decoration: underline;
 }
 
 /* Liens de couleur blanche sur fond noir */
 .obs_template.obs_background_black a{
 	color:white;
-	text-decoration: underline;
 }
 
 .obs_template.obs_background_black a:hover,
@@ -97,12 +82,13 @@
 .obs_template.obs_background_white a:focus,
 .obs_template.obs_background_light_grey a:hover,
 .obs_template.obs_background_light_grey a:focus,
+.obs_template.obs_background_lighter_grey a:hover,
+.obs_template.obs_background_lighter_grey a:focus,
 .obs_template.obs_background_moderate_grey a:hover,
 .obs_template.obs_background_moderate_grey a:focus,
 .obs_template.obs_background_dark_grey a:hover,
 .obs_template.obs_background_dark_grey a:focus{
   color:#FF7900;
-  text-decoration: underline;
 }
 
 .obs_template.three_columns img,
@@ -115,7 +101,20 @@
 .obs_template.two_columns_33_66 li > p,
 .obs_template.two_columns_66_33 li > p,
 .obs_template.three_columns li > p,
+.obs_template.four_columns li > p,
 .obs_template.two_columns li > p
 {
   padding: 0px;
+}
+
+.obs_template div[class*=" col-"]:first-child{
+    padding-left: 0;
+}
+.obs_template div[class*=" col-"]:last-child{
+    padding-right: 0;
+}
+
+.obs_template div[class*=" obs_background_"] p{
+    padding-left: 0;
+    padding-right: 0;
 }

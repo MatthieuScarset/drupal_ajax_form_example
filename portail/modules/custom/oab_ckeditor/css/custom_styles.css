@@ -1,3 +1,6 @@
+.cke_show_borders {
+    overflow: scroll !important;
+}
 .cke_show_borders a{
     color: black;
     text-decoration: underline;
