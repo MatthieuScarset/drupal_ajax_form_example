@@ -701,6 +701,14 @@ p.contenu {
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+.local_nav ul{
+    margin: 0;
+    padding: 0;
+}
+.local_nav ul li{
+    list-style: none;
+    float: left;
+}
 .local_nav a{
     font-weight: 700;
     font-size: 1.6rem;

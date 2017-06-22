@@ -1,6 +1,7 @@
 <?php
 
 // ajout du bypass pour password policy
+$config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('user.role.digital_admin');
 $config_group->setData(
 	array (
