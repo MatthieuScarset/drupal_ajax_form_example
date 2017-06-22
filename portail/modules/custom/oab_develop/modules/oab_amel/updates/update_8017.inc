@@ -1300,8 +1300,10 @@ $config_group->setData(
                         12 => 'field.field.node.region.field_region',
                         13 => 'field.field.node.region.field_solution',
                         14 => 'field.field.node.region.field_start_date',
-                        15 => 'field.field.node.region.field_visual',
-                        16 => 'node.type.region',
+                        15 => 'field.field.node.region.field_top_zone',
+                        16 => 'field.field.node.region.field_top_zone_background',
+                        17 => 'field.field.node.region.field_visual',
+                        18 => 'node.type.region',
                     ),
                 'module' =>
                     array (
@@ -1345,8 +1347,10 @@ $config_group->setData(
                                         1 => 'title',
                                         2 => 'field_display_title',
                                         3 => 'field_highlight',
-                                        4 => 'field_content',
-                                        5 => 'field_visual',
+                                        4 => 'field_top_zone',
+                                        5 => 'field_top_zone_background',
+                                        6 => 'field_content',
+                                        7 => 'field_visual',
                                     ),
                                 'parent_name' => 'group_onglets',
                                 'weight' => 7,
@@ -1456,7 +1460,7 @@ $config_group->setData(
             array (
                 'field_content' =>
                     array (
-                        'weight' => 6,
+                        'weight' => 8,
                         'settings' =>
                             array (
                                 'rows' => 5,
@@ -1635,9 +1639,45 @@ $config_group->setData(
                         'type' => 'datetime_default',
                         'region' => 'content',
                     ),
-                'field_visual' =>
+                'field_top_zone' =>
+                    array (
+                        'weight' => 6,
+                        'settings' =>
+                            array (
+                                'rows' => 5,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'text_textarea',
+                        'region' => 'content',
+                    ),
+                'field_top_zone_background' =>
                     array (
                         'weight' => 7,
+                        'settings' =>
+                            array (
+                                'entity_browser' => 'browse_media_modal',
+                                'field_widget_display' => 'rendered_entity',
+                                'field_widget_edit' => true,
+                                'field_widget_remove' => true,
+                                'selection_mode' => 'selection_append',
+                                'field_widget_display_settings' =>
+                                    array (
+                                        'view_mode' => 'default',
+                                    ),
+                                'open' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
+                    ),
+                'field_visual' =>
+                    array (
+                        'weight' => 9,
                         'settings' =>
                             array (
                                 'entity_browser' => 'browse_media_modal',
@@ -1744,8 +1784,10 @@ $config_group->setData(
                         11 => 'field.field.node.region.field_region',
                         12 => 'field.field.node.region.field_solution',
                         13 => 'field.field.node.region.field_start_date',
-                        14 => 'field.field.node.region.field_visual',
-                        15 => 'node.type.region',
+                        14 => 'field.field.node.region.field_top_zone',
+                        15 => 'field.field.node.region.field_top_zone_background',
+                        16 => 'field.field.node.region.field_visual',
+                        17 => 'node.type.region',
                     ),
                 'module' =>
                     array (
@@ -1861,6 +1903,8 @@ $config_group->setData(
                 'field_meta_description' => true,
                 'field_meta_title' => true,
                 'field_start_date' => true,
+                'field_top_zone' => true,
+                'field_top_zone_background' => true,
                 'field_visual' => true,
                 'langcode' => true,
             ),
@@ -1899,8 +1943,10 @@ $config_group->setData(
                         12 => 'field.field.node.country.field_region',
                         13 => 'field.field.node.country.field_solution',
                         14 => 'field.field.node.country.field_start_date',
-                        15 => 'field.field.node.country.field_visual',
-                        16 => 'node.type.country',
+                        15 => 'field.field.node.country.field_top_zone',
+                        16 => 'field.field.node.country.field_top_zone_background',
+                        17 => 'field.field.node.country.field_visual',
+                        18 => 'node.type.country',
                     ),
                 'module' =>
                     array (
@@ -1921,7 +1967,7 @@ $config_group->setData(
                                 'children' =>
                                     array (
                                         0 => 'group_write',
-                                        1 => 'group_classif',
+                                        1 => 'group_classify',
                                         2 => 'group_seo',
                                         3 => 'group_publish',
                                     ),
@@ -1944,8 +1990,10 @@ $config_group->setData(
                                         1 => 'title',
                                         2 => 'field_display_title',
                                         3 => 'field_highlight',
-                                        4 => 'field_content',
-                                        5 => 'field_visual',
+                                        4 => 'field_top_zone',
+                                        5 => 'field_top_zone_background',
+                                        6 => 'field_content',
+                                        7 => 'field_visual',
                                     ),
                                 'parent_name' => 'group_onglets',
                                 'weight' => 7,
@@ -1980,7 +2028,7 @@ $config_group->setData(
                                     ),
                                 'label' => 'SEO',
                             ),
-                        'group_classif' =>
+                        'group_classify' =>
                             array (
                                 'children' =>
                                     array (
@@ -2055,7 +2103,7 @@ $config_group->setData(
             array (
                 'field_content' =>
                     array (
-                        'weight' => 6,
+                        'weight' => 8,
                         'settings' =>
                             array (
                                 'rows' => 5,
@@ -2234,9 +2282,45 @@ $config_group->setData(
                         'type' => 'datetime_default',
                         'region' => 'content',
                     ),
-                'field_visual' =>
+                'field_top_zone' =>
+                    array (
+                        'weight' => 6,
+                        'settings' =>
+                            array (
+                                'rows' => 5,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'text_textarea',
+                        'region' => 'content',
+                    ),
+                'field_top_zone_background' =>
                     array (
                         'weight' => 7,
+                        'settings' =>
+                            array (
+                                'entity_browser' => 'browse_media_modal',
+                                'field_widget_display' => 'rendered_entity',
+                                'field_widget_edit' => true,
+                                'field_widget_remove' => true,
+                                'selection_mode' => 'selection_append',
+                                'field_widget_display_settings' =>
+                                    array (
+                                        'view_mode' => 'default',
+                                    ),
+                                'open' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
+                    ),
+                'field_visual' =>
+                    array (
+                        'weight' => 9,
                         'settings' =>
                             array (
                                 'entity_browser' => 'browse_media_modal',
@@ -2344,8 +2428,10 @@ $config_group->setData(
                         11 => 'field.field.node.country.field_region',
                         12 => 'field.field.node.country.field_solution',
                         13 => 'field.field.node.country.field_start_date',
-                        14 => 'field.field.node.country.field_visual',
-                        15 => 'node.type.country',
+                        14 => 'field.field.node.country.field_top_zone',
+                        15 => 'field.field.node.country.field_top_zone_background',
+                        16 => 'field.field.node.country.field_visual',
+                        17 => 'node.type.country',
                     ),
                 'module' =>
                     array (
@@ -2424,6 +2510,8 @@ $config_group->setData(
                 'field_meta_title' => true,
                 'field_solution' => true,
                 'field_start_date' => true,
+                'field_top_zone' => true,
+                'field_top_zone_background' => true,
                 'field_visual' => true,
                 'langcode' => true,
             ),
