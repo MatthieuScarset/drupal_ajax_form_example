@@ -1,14 +1,18 @@
 <div class="node-axiome-customer-story">
     <div class="col col-md-12 nopadding">
 
-        <p class="highlight1"> highlight : {{ field_customer_case.title }} </p>
+        <p class="highlight1"> {{ field_customer_case.title }} </p>
     </div>
-    <div>code embed : {{ field_customer_case.url }}</div>
+    <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+        {{ field_customer_case.video|replace({'//': "https://"})|raw }}
+    </div>
     <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
         <div class="bubble">
-            <div class="verbatim-title">{{ field_customer_case.url.url_text }}</div>
+            <div class="verbatim-title">{{ field_customer_case.customer_case_name }}</div>
 
-            <p class="verbatim-source">{{ field_customer_case.customer_case_name }}</p>
+            <p class="verbatim-source">{{ field_customer_case.name_and_function }}</p>
         </div>
     </div>
+
+
 </div>
