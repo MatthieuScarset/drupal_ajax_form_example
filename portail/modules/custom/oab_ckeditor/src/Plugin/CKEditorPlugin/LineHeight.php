@@ -48,8 +48,7 @@ class LineHeight extends CKEditorPluginBase
   public function getConfig(Editor $editor)
   {
     $config = array();
-    //$config['line_height'] = '1rem;2rem;3rem;4rem;5rem;6rem';
-    $config['line_height'] = '1;2;3;4;5;6;7;8;9';
+    $config['line_height'] = '0;1rem;2rem;3rem;4rem;5rem';
     return $config;
   }
   /**
@@ -58,7 +57,7 @@ class LineHeight extends CKEditorPluginBase
   public function getButtons()
   {
     return array(
-      'LineHeight' => array(
+      'lineheight' => array(
         'label' => t('LineHeight button'),
         'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/lineheight/icons/icon.png',
       ),
