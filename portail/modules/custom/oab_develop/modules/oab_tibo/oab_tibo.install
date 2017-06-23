@@ -19,6 +19,7 @@ function oab_tibo_update_dependencies() {
 	$dependencies['oab_amel'][8008] = array('oab_tibo' => 8007	);*/
 	$dependencies['oab_tibo'][8009] = array('oab_amel' => 8008	);
 	$dependencies['oab_tibo'][8008] = array('oab_amel' => 8011	);
+	$dependencies['oab_tibo'][8010] = array('oab_amel' => 8015	);
 
 	return $dependencies;
 }
