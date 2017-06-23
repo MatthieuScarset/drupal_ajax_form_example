@@ -716,7 +716,7 @@ p.contenu {
     margin-right: 2rem;
 }
 
-.local_nav.sticky-module .container{ margin-left: 0px; }
+/*.local_nav.sticky-module .container{ margin-left: 0px; }*/
 
 #mobile_dropdown_subnav .btn-default{
     color: black;

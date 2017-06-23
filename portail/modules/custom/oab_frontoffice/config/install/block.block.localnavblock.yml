@@ -9,12 +9,12 @@ dependencies:
 id: topzone
 theme: theme_boosted
 region: top_zone
-weight: -15
+weight: -14
 provider: null
 plugin: null
 settings:
-  id: top_zone_block
-  label: 'Top Zone Block'
+  id: local_nav_block
+  label: 'Local Nav Block'
   provider: oab_frontoffice
   label_display: '0'
 

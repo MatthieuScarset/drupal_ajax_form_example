@@ -12,10 +12,10 @@ use Drupal\image\Entity\ImageStyle;
 
 /**
  *
- * @author DMPT2806
+ * @author CPWS0281
  * @Block(
- *   id = "top_zone_block",
- *   admin_label = @Translation("Top Zone"),
+ *   id = "local_nav_block",
+ *   admin_label = @Translation("Local Nav"),
  *   category = @Translation("Blocks"),
  *   context = {
  *     "node" = @ContextDefinition(
@@ -27,7 +27,7 @@ use Drupal\image\Entity\ImageStyle;
  *
  */
 
-class TopZoneBlock extends BlockBase {
+class LocalNavBlock extends BlockBase {
 
   public function build(){
     $block = array();
@@ -37,29 +37,15 @@ class TopZoneBlock extends BlockBase {
     $nid = $nid_fld[0]['value'];
     // chargement du noeud et de la valeur top zone
     $node = Node::load($nid);
-    if ($node->hasField('field_top_zone')) {
-      $top_zone = $node->get('field_top_zone')->getValue();
+    if ($node->hasField('field_local_nav')) {
+      $localnav = $node->get('field_local_nav')->getValue();
     }
-    if ($node->hasField('field_top_zone_background')) {
-      $top_zone_background = $node->get('field_top_zone_background')->getValue();
-    }
+
     $block['type'] = 'processed_text';
     $block['#markup'] = '';
     $content = '';
-    if(isset($top_zone[0]['value'])){
-      $content = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);
-    }
-    if(isset($top_zone_background[0]['target_id'])){
-      $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
-      $uri = $entity->getType()->thumbnail($entity);
-      $type = $node->getType();
-      if($type == 'product'){
-      	$img_style = 'top_zone';
-      }else{
-      	$img_style = 'top_zone_big';
-      }
-      $url = ImageStyle::load($img_style)->buildUrl($uri);
-      $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', FALSE);
+    if(isset($localnav[0]['value'])){
+      $content = check_markup($localnav[0]['value'], 'full_html', '', FALSE);
     }
     $block['#markup'] = $content;
     return $block;
