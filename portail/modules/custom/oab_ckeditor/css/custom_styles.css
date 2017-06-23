@@ -148,3 +148,15 @@ span.grey{
 span.blue{
     color: #4bb4e6;
 }
+
+div.titre-insight{
+    font-size: 1.875em;
+}
+div.titre-insight span{
+    line-height: 2.875rem;
+}
+@media (max-width:767px){
+    .banner-topzone .frame-icon-rel:before {
+        margin-left: 6px;
+    }
+}
