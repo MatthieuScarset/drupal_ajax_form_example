@@ -8,6 +8,7 @@
 
   $( window ).resize(function() {
     image_resize_width();
+    obs_template_height();
   });
 
   function image_resize_width(){
@@ -35,8 +36,34 @@
     }
   }
 
+  function obs_template_height(){
+    $(".obs_template > div").height('auto');
+    $(".obs_template div[class*= obs_background_]").height('auto');
+    $(".obs_template").each(function() {
+      var max_height = 0;
+      $(this).children().each(function(){
+        var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
+        var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
+        if (($(this).height() - paddings - margins) > max_height){
+          max_height = $(this).height() - paddings - margins;
+        }
+      });
+
+      if ($(this).children().find("div[class*= obs_background_]").length > 0) {
+        $(this).children().find("div[class*= obs_background_]").each(function () {
+          var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
+          var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
+          $(this).height(max_height - paddings - margins);
+        });
+
+        $(this).children().height(max_height);
+      }
+    });
+  }
+
   $(document).ready(function () {
     image_resize_width();
+    obs_template_height();
 
       $( ".close-env-info" ).click(function(){
           if ($('.env-info').is(":visible")){

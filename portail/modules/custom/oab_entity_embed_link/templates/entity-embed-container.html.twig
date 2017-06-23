@@ -13,4 +13,5 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>{%if url %}<a href='{{ url }}'>{{ children }}</a>{% else %}{{ children }}{% endif %}</article>
+{% set link_target = target ? '_blank' : '_self'  %}
+<article{{ attributes }}>{%if url %}<a href='{{ url }}'  target='{{ link_target }}'>{{ children }}</a>{% else %}{{ children }}{% endif %}</article>
