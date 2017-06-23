@@ -105,7 +105,7 @@ function oab_tibo_update_8011() {
  * ajustement topzone
  */
 function oab_tibo_update_8012() {
-	include_once( "updates/update_8012.inc" );
+	include_once("updates/update_8012.inc");
 }
 
 /**
@@ -114,10 +114,15 @@ function oab_tibo_update_8012() {
 function oab_tibo_update_8013() {
 	include_once("updates/update_8013.inc");
 }
-
 /**
  * permissions module password policy
  */
 function oab_tibo_update_8014() {
 	include_once("updates/update_8014.inc");
+}
+/**
+ * ajout du type de contenu pays pour la top zone
+ */
+function oab_tibo_update_8015() {
+	include_once("updates/update_8015.inc");
 }
