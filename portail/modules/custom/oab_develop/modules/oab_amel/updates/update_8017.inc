@@ -1273,6 +1273,96 @@ $config_group->save(TRUE);
 
 /******** REGION *********/
 
+// solution top zone
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.region.field_top_zone');
+$config_group->setData(
+    array (
+        'uuid' => 'cbf75b33-199d-4adc-be97-08eb88c9ec60',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_top_zone',
+                        1 => 'node.type.region',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'text',
+                    ),
+            ),
+        'id' => 'node.region.field_top_zone',
+        'field_name' => 'field_top_zone',
+        'entity_type' => 'node',
+        'bundle' => 'region',
+        'label' => 'Top zone',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+            ),
+        'field_type' => 'text_long',
+    )
+);
+$config_group->save(TRUE);
+
+// solution top zone BG
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.region.field_top_zone_background');
+$config_group->setData(
+    array (
+        'uuid' => 'f0d4374f-1c11-4034-9ea8-99e172bbab81',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_top_zone_background',
+                        1 => 'media_entity.bundle.image',
+                        2 => 'node.type.region',
+                    ),
+            ),
+        'id' => 'node.region.field_top_zone_background',
+        'field_name' => 'field_top_zone_background',
+        'entity_type' => 'node',
+        'bundle' => 'region',
+        'label' => 'Top zone background',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:media',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'image' => 'image',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.region.default');
@@ -1655,6 +1745,8 @@ $config_group->setData(
                     ),
                 'field_top_zone_background' =>
                     array (
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
                         'weight' => 7,
                         'settings' =>
                             array (
@@ -1672,8 +1764,6 @@ $config_group->setData(
                         'third_party_settings' =>
                             array (
                             ),
-                        'type' => 'entity_browser_entity_reference',
-                        'region' => 'content',
                     ),
                 'field_visual' =>
                     array (
@@ -1915,6 +2005,97 @@ $config_group->save(TRUE);
 
 
 /******** COUNTRY *********/
+
+// country top zone
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.country.field_top_zone');
+$config_group->setData(
+    array (
+        'uuid' => '4e0a4221-9c73-4cb8-a521-a6a6719455ab',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_top_zone',
+                        1 => 'node.type.country',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'text',
+                    ),
+            ),
+        'id' => 'node.country.field_top_zone',
+        'field_name' => 'field_top_zone',
+        'entity_type' => 'node',
+        'bundle' => 'country',
+        'label' => 'Top zone',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+            ),
+        'field_type' => 'text_long',
+    )
+);
+$config_group->save(TRUE);
+
+// industrie top zone BG
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.country.field_top_zone_background');
+$config_group->setData(
+    array (
+        'uuid' => 'a4ae2117-a05c-4c4b-b5f8-cfdd2558d56d',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_top_zone_background',
+                        1 => 'media_entity.bundle.image',
+                        2 => 'node.type.country',
+                    ),
+            ),
+        'id' => 'node.country.field_top_zone_background',
+        'field_name' => 'field_top_zone_background',
+        'entity_type' => 'node',
+        'bundle' => 'country',
+        'label' => 'Top zone background',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:media',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'image' => 'image',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
 
 
 $config_factory = \Drupal::configFactory();
@@ -2298,6 +2479,8 @@ $config_group->setData(
                     ),
                 'field_top_zone_background' =>
                     array (
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
                         'weight' => 7,
                         'settings' =>
                             array (
@@ -2315,8 +2498,6 @@ $config_group->setData(
                         'third_party_settings' =>
                             array (
                             ),
-                        'type' => 'entity_browser_entity_reference',
-                        'region' => 'content',
                     ),
                 'field_visual' =>
                     array (
