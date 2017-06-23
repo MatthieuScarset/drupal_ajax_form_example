@@ -8,9 +8,14 @@
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
   },
     {
-      "label": "Top Zone PWP",
+      "label": "Top Zone Solution/Industrie",
       "file": "files/banner/top-zone-pwp.html.twig",
       "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-pwp.jpg"
+    },
+    {
+      "label": "Top Zone Region/Pays",
+      "file": "files/banner/top-zone-region.html.twig",
+      "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-region.jpg"
     }]
 }, {
   "id": "product",

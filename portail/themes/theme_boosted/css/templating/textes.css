@@ -648,7 +648,7 @@ p.contenu {
 .pourquoi .col{
     width: 33.33%;
     border-right: 1px solid #CCC;
-    padding: 2.5rem;
+    padding: 3.5rem 2.5rem;
     vertical-align: top;
 }
 .pourquoi .col:last-child{
@@ -656,7 +656,7 @@ p.contenu {
 }
 .pourquoi .col div.ligne{
     border-bottom: 1px solid #CCC;
-    padding: 2.5rem;
+    padding: 3.5rem 2.5rem;
     margin-left: -2.5rem;
     margin-right: -2.5rem;
 }
