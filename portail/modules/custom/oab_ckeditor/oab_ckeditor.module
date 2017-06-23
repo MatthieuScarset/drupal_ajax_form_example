@@ -84,70 +84,82 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
             'image'       => '3_columns.gif',
         );
         $data[5] = array(
+          'title'       => t('4 columns'),
+          'description' => t('4 columns template'),
+          'html'        => file_get_contents('templates/4_columns.html.twig', FILE_USE_INCLUDE_PATH),
+          'image'       => '4_columns.gif',
+        );
+        $data[6] = array(
             'title'       => t('Blue background'),
             'description' => t('blue background template'),
             'html'        => file_get_contents('templates/background_blue.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_blue.gif',
         );
-        $data[6] = array(
+        $data[7] = array(
             'title'       => t('Green background'),
             'description' => t('green background template'),
             'html'        => file_get_contents('templates/background_green.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_green.gif',
         );
-        $data[7] = array(
+        $data[8] = array(
             'title'       => t('Purple background'),
             'description' => t('purple background template'),
             'html'        => file_get_contents('templates/background_purple.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_purple.gif',
         );
-        $data[8] = array(
+        $data[9] = array(
             'title'       => t('Pink background'),
             'description' => t('pink background template'),
             'html'        => file_get_contents('templates/background_pink.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_pink.gif',
         );
-        $data[9] = array(
+        $data[10] = array(
             'title'       => t('Yellow background'),
             'description' => t('yellow background template'),
             'html'        => file_get_contents('templates/background_yellow.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_yellow.gif',
         );
-        $data[10] = array(
+        $data[11] = array(
             'title'       => t('Black background'),
             'description' => t('black background template'),
             'html'        => file_get_contents('templates/background_black.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_black.gif',
         );
-        $data[11] = array(
+        $data[12] = array(
             'title'       => t('Dark grey background'),
             'description' => t('dark grey background template'),
             'html'        => file_get_contents('templates/background_dark_grey.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_dark_grey.gif',
         );
-        $data[12] = array(
+        $data[13] = array(
             'title'       => t('White background'),
             'description' => t('white background template'),
             'html'        => file_get_contents('templates/background_white.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_white.gif',
         );
-        $data[13] = array(
+        $data[14] = array(
             'title'       => t('Moderate grey background'),
             'description' => t('moderate grey background template'),
             'html'        => file_get_contents('templates/background_moderate_grey.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_moderate_grey.gif',
         );
-        $data[14] = array(
+        $data[15] = array(
             'title'       => t('Orange background'),
             'description' => t('orange background template'),
             'html'        => file_get_contents('templates/background_orange.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_orange.gif',
         );
-        $data[15] = array(
+        $data[16] = array(
             'title'       => t('Light grey background'),
             'description' => t('light grey background template'),
             'html'        => file_get_contents('templates/background_light_grey.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => 'background_light_grey.gif',
+        );
+        $data[17] = array(
+          'title'       => t('Lighter grey background'),
+          'description' => t('lighter grey background template'),
+          'html'        => file_get_contents('templates/background_lighter_grey.html.twig', FILE_USE_INCLUDE_PATH),
+          'image'       => 'background_lighter_grey.gif',
         );
 
         $attachments['#attached']['drupalSettings']['oab_templates'] = $data;

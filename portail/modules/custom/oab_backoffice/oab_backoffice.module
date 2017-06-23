@@ -454,3 +454,4 @@ function oab_backoffice_views_data_alter(array &$data) {
     );
 
 }
+
