@@ -39,3 +39,16 @@ span.icon-footer {
 .o-footer .o-footer-top ul {
     padding: 20px 0;
 }
+
+#block-contactbar{
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+}
+#block-contactbar > .container > .row{
+    margin: 0 2rem;
+}
+#block-contactbar .wrapper_numero{
+    display: inline-block;
+    background-color: white;
+}

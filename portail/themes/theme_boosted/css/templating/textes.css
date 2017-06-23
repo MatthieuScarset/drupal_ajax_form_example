@@ -648,7 +648,7 @@ p.contenu {
 .pourquoi .col{
     width: 33.33%;
     border-right: 1px solid #CCC;
-    padding: 2.5rem;
+    padding: 3.5rem 2.5rem;
     vertical-align: top;
 }
 .pourquoi .col:last-child{
@@ -656,7 +656,7 @@ p.contenu {
 }
 .pourquoi .col div.ligne{
     border-bottom: 1px solid #CCC;
-    padding: 2.5rem;
+    padding: 3.5rem 2.5rem;
     margin-left: -2.5rem;
     margin-right: -2.5rem;
 }
@@ -690,4 +690,45 @@ p.contenu {
         margin-left: -1rem;
         margin-right: -1rem;
     }
+}
+
+/*
+* MODULE  LOCAL NAV
+ */
+.local_nav{
+    border: 1px solid #CCC;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.local_nav ul{
+    margin: 0;
+    padding: 0;
+}
+.local_nav ul li{
+    list-style: none;
+    float: left;
+}
+.local_nav a{
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-right: 2rem;
+}
+
+
+.page-node-type-solution .obs_template.one_column p,
+.page-node-type-solution .obs_template.two_columns_33_66 p,
+.page-node-type-solution .obs_template.two_columns_66_33 p,
+.page-node-type-solution .obs_template.three_columns p,
+.page-node-type-solution .obs_template.two_columns p {
+    padding: 10px 0;
+}
+
+.page-node-type-solution .node-socialbar{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.videoEmbedFull iframe{
+    width: 100%;
 }
