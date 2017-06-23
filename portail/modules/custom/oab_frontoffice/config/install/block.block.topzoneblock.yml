@@ -6,9 +6,9 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: topzoneblock
+id: topzone
 theme: theme_boosted
-region: pre_content
+region: top_zone
 weight: -15
 provider: null
 plugin: null

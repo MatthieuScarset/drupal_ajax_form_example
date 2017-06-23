@@ -224,7 +224,7 @@ p[class*='bg_']{
     top: 20px;
 }
 
-.banner-topzone .frame-icon-rel {
+.banner-topzone .frame-icon-rel{
     font-size: 10em;
 }
 
@@ -257,19 +257,54 @@ p[class*='bg_']{
 }
 
 .banner-topzone{
-    max-height: 180px;
-    height: 180px;
+    max-height: 280px;
+    height: 280px;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
 }
 
-.banner-topzone .frame-text{
+.banner-topzone-pwp{
+    max-height: 550px;
+    height: 550px;
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+}
+
+.banner-topzone .frame-icon-rel,
+.banner-topzone-pwp .frame-icon-rel{
+    top: 0;
+}
+
+.banner-topzone-pwp .frame-icon-rel{
+    font-size: 10em;
+}
+
+.banner-topzone .frame-text,
+.banner-topzone-pwp .frame-text{
     font-size: 1.6rem;
 }
 
-.banner-topzone .titre3{
-    margin-top: 10px;
+.banner-topzone-pwp h1{
+    margin-top: 3rem;
+    font-size: 4rem;
 }
 
-.banner-topzone .rightcol h2{
+.banner-topzone .titre3,
+.banner-topzone-pwp .titre3{
+    margin-top: 10px;
+    font-size: 2rem;
+}
+.banner-topzone .topzonebg,
+.banner-topzone-pwp .topzonebg{
+    margin: auto;
+    width: 100%;
+}
+.banner-topzone .rightcol h2,
+.banner-topzone .leftcol h2,
+.banner-topzone-pwp .rightcol h2,
+.banner-topzone-pwp .leftcol h2{
     transform: translate(-50%, -50%);
     -webkit-transform: translate(0%, 0%);
     left: 0;
@@ -317,4 +352,7 @@ p[class*='bg_']{
     }
 }
 @media (min-width: 1220px) {
+    .banner-topzone-pwp .frame-icon-rel{
+        font-size: 13.5em;
+    }
 }

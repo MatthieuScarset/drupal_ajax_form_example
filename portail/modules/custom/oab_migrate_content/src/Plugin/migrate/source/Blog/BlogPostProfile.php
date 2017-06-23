@@ -69,17 +69,9 @@ class BlogPostProfile extends SqlBase {
     $fields = [];
     $fields['field_first_name'] = ['field_first_name_value'];
     $fields['field_last_name'] = ['field_last_name_value'];
-    $fields['field_txt_catcher'] = ['field_txt_catcher_value'];
+    $fields['field_txt_catcher'] = ['field_txt_catcher_value']; //utilisé pour la biography EN
     $fields['field_txt_biography_fr'] = ['field_txt_biography_fr_value'];
-    $fields['field_profil'] = ['field_profil_value'];
-    $fields['field_profil_fr'] = ['field_profil_fr_value'];
-    $fields['field_location'] = ['field_location_value'];
-    $fields['field_location_fr'] = ['field_location_fr_value'];
-    $fields['field_link'] = ['field_link_url'];
     $fields['field_twitter_account'] = ['field_twitter_account_url'];
-    $fields['field_linkin_account'] = ['field_linkin_account_url'];
-    $fields['field_viadeo_account'] = ['field_viadeo_account_url'];
-    $fields['field_googleplus_account'] = ['field_googleplus_account_value'];
 
     foreach ($fields AS $key => $value) {
       $table = 'field_data_' . $key;
@@ -94,9 +86,7 @@ class BlogPostProfile extends SqlBase {
 
       if (is_array($profile_results)){
         foreach ($profile_results AS $profile_result){
-
           foreach ($value AS $field) {
-
             // On vérifie si on a affaire à un objet ou à un tableau
             if (is_object($profile_result) && isset($profile_result->$field)) {
               $row->setSourceProperty($key, $profile_result->$field);
@@ -104,7 +94,7 @@ class BlogPostProfile extends SqlBase {
             elseif (is_array($profile_result) && isset($profile_result[$field])) {
               $row->setSourceProperty($key, $profile_result[$field]);
             }
-
+						// utilisation du first name et last name pour faire le titre du node
             if ($key == 'field_first_name') {
               if (is_object($profile_result) && isset($profile_result->$field)) {
                 $title .= trim($profile_result->field_first_name_value) . ' ';
@@ -125,35 +115,13 @@ class BlogPostProfile extends SqlBase {
         }
       }
     }
-
-    $social_accounts = [];
+		// compte twitter
     if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')){
-      $social_accounts[0] = substr($field_twitter_account, 0, 255);
+			$row->setSourceProperty('field_social_account', substr($field_twitter_account, 0, 255));
     }
-    else{
-      $social_accounts[0] = ' ';
-    }
-    if ($field_linkin_account = $row->getSourceProperty('field_linkin_account')){
-      $social_accounts[1] = substr($field_linkin_account, 0, 255);
-    }
-    else{
-      $social_accounts[1] = ' ';
-    }
-    if ($field_viadeo_account = $row->getSourceProperty('field_viadeo_account')){
-      $social_accounts[2] = substr($field_viadeo_account, 0, 255);
-    }
-    else{
-      $social_accounts[2] = ' ';
-    }
-    if ($field_googleplus_account = $row->getSourceProperty('field_googleplus_account')){
-      $social_accounts[3] = substr($field_googleplus_account, 0, 255);
-    }
-    else{
-      $social_accounts[3] = ' ';
-    }
-    $row->setSourceProperty('field_social_accounts', $social_accounts);
 
-    if ($title == '') $title = 'test';
+    //titre du node
+    if ($title == '') $title = ' ';
     $row->setSourceProperty('title', $title);
 
     // récupération des images
