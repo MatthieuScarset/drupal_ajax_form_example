@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: topzone
+theme: theme_boosted
+region: top_zone
+weight: -15
+provider: null
+plugin: null
+settings:
+  id: top_zone_block
+  label: 'Top Zone Block'
+  provider: oab_frontoffice
+  label_display: '0'
+
