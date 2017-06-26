@@ -30,6 +30,7 @@ function oab_christophe_update_dependencies() {
   $dependencies['oab_christophe'][8020] = array('oab_stephanie' => 8030	);
   $dependencies['oab_christophe'][8021] = array('oab_amel' => 8014, 'oab_yassine' => 8004	);
   $dependencies['oab_christophe'][8024] = array('oab_amel' => 8017);
+  $dependencies['oab_christophe'][8025] = array('oab_yassine' => 8006);
 
 	return $dependencies;
 }
@@ -146,4 +147,11 @@ function oab_christophe_update_8023() {
  */
 function oab_christophe_update_8024() {
   include_once("updates/update_8024.inc");
+}
+
+/**
+ *  "field_content" dans le group "write" dans les powerpage
+ */
+function oab_christophe_update_8025() {
+  include_once("updates/update_8025.inc");
 }
