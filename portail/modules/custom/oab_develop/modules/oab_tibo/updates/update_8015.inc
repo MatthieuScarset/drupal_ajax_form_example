@@ -6,7 +6,7 @@ $config_group = $config_factory->getEditable('block.block.topzone');
 $config_group->setData(
 	array (
 		'uuid' => '4f93e884-e26f-402b-a392-833e615de361',
-		'langcode' => 'fr',
+		'langcode' => 'en',
 		'status' => true,
 		'dependencies' =>
 			array (
