@@ -103,6 +103,7 @@ view_mode ? view_mode|clean_class,
     {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_simple_contents.Children.ruby_simple_contents_block %}
     {% set axiomeDocs = content.axiome_data.correspondance %}
     {% set id_fiche = content.axiome_data['@attributes'].id %}
+    {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
 {% endif %}
 <script type="application/ld+json">
     {
@@ -130,7 +131,7 @@ view_mode ? view_mode|clean_class,
 
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_axiome_data') }}
     </div>
-
+{{ kint(related_offers) }}
     {% if field_header is defined %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
     {% endif %}
@@ -148,6 +149,9 @@ view_mode ? view_mode|clean_class,
     {% endif %}
     {% if axiomeDocs is defined %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+    {% endif %}
+    {% if related_offers is defined %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}
     {% endif %}
 
 </article>
