@@ -57,6 +57,10 @@
     "label": "Key figures 3 columns",
     "file": "files/tools/key-figures-3.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-3.jpg"
+  },{
+    "label": "Responsive Table",
+    "file": "files/tools/responsive_table.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/responsive_table.png"
   }]
 }, {
   "id": "customer_story",

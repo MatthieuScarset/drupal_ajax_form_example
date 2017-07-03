@@ -103,7 +103,7 @@ function buildElements(container, component) {
 
         return {
             title: 'Templating Modules' ,/*editor.lang.templating.title,*/
-            minWidth: CKEDITOR.env.ie ? 440 : 600,
+            minWidth: CKEDITOR.env.ie ? 440 : 800,
             minHeight: 400,
             //Construire les onglets dynamiquement en fonction du fichier components.json
             contents: buildTabs(components),
