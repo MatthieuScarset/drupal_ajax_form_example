@@ -58,3 +58,10 @@ function oab_yassine_update_8005() {
 function oab_yassine_update_8006() {
   include_once("updates/update_8006.inc");
 }
+
+/**
+ *  Ajout du block local_nav
+ */
+function oab_yassine_update_8007() {
+  include_once("updates/update_8007.inc");
+}
