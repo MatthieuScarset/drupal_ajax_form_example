@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: topzone
+theme: theme_boosted
+region: top_zone
+weight: -14
+provider: null
+plugin: null
+settings:
+  id: local_nav_block
+  label: 'Local Nav Block'
+  provider: oab_frontoffice
+  label_display: '0'
+

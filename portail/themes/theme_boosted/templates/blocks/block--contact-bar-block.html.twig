@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - $block->subject: Block title.
+ * - $content: Block content.
+ * - $block->module: Module that generated the block.
+ * - $block->delta: An ID for the block, unique within each module.
+ * - $block->region: The block region embedding the current block.
+ * - $classes: String of classes that can be used to style contextually through
+ *   CSS. It can be manipulated through the variable $classes_array from
+ *   preprocess functions. The default values can be one or more of the
+ *   following:
+ *   - block: The current template type, i.e., "theming hook".
+ *   - block-[module]: The module generating the block. For example, the user
+ *     module is responsible for handling the default user navigation block. In
+ *     that case the class would be 'block-user'.
+ * - $title_prefix (array): An array containing additional output populated by
+ *   modules, intended to be displayed in front of the main title tag that
+ *   appears in the template.
+ * - $title_suffix (array): An array containing additional output populated by
+ *   modules, intended to be displayed after the main title tag that appears in
+ *   the template.
+ *
+ * Helper variables:
+ * - $classes_array: Array of html class attribute values. It is flattened
+ *   into a string within the variable $classes.
+ * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
+ * - $zebra: Same output as $block_zebra but independent of any block region.
+ * - $block_id: Counter dependent on each block region.
+ * - $id: Same output as $block_id but independent of any block region.
+ * - $is_front: Flags true when presented in the front page.
+ * - $logged_in: Flags true when the current user is a logged-in member.
+ * - $is_admin: Flags true when the current user is an administrator.
+ * - $block_html_id: A valid HTML ID and guaranteed unique.
+ *
+ * @see bootstrap_preprocess_block()
+ * @see template_preprocess()
+ * @see template_preprocess_block()
+ * @see bootstrap_process_block()
+ * @see template_process()
+ *
+ * @ingroup templates
+ */
+#}
+<section{{ attributes.addClass('block', 'clearfix') }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes.addClass('block-title') }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  {% block content %}
+   {# affiche le contenu saisi dans le back office: #}
+    <div class="container">
+        <div class="row">
+          {{ content }}
+            <div class="col-md-7 col-sm-12 nopadding">
+                <span style="font-size: 2rem; font-weight: bold;">Nous contacter ?</span>
+                <span class="wrapper_numero" style="display: inline-block; background-color: white; margin-left: 2rem;">
+                    <span class="numero" style="color: black; font-weight: bold; font-size: 2.8rem; padding: 0.5rem;">0 801 123 456</span>
+                    <span class="text" style="display: inline-block; background-color: black; margin-right: 1rem; font-size: 1.2rem; padding: 0.7rem 1rem 0.7rem 2rem; position: relative;">
+                        <span class="glyphicon glyphicon-play" style="color: white; display: inline-block; position: absolute; left: -1rem; top: 1rem; font-size: 3rem;"></span>
+                        Service & appel <br/> gratuits
+                    </span>
+                </span>
+            </div>
+            <div class="col-md-5 col-sm-12" style="border-left: 1px solid grey; padding: 0 2rem;">
+                <span class="explication" style="padding-right: 2rem; font-size: 1.2rem; display: inline-block;">
+                    Lorem ipsum sit amet,
+                    <br/>
+                    consectetuer adipiscing elit, sed
+                </span>
+                <a class="btn btn_ecrire label label-primary" href="#" style="color: white; padding: 1rem 3rem;">
+                    Nous écrire
+                </a>
+                <a href="#" style="color: white; font-size: 3rem; margin-left: 3rem;">
+                    X
+                </a>
+            </div>
+            <div class="clear"></div>
+         </div>
+    </div>
+  {% endblock %}
+</section>
+
