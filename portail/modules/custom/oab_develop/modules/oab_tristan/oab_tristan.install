@@ -21,6 +21,13 @@ function oab_tristan_update_dependencies() {
 /**
  *  Ajout du module de sélection de couleur dans le wysiwyg
  */
-/*function oab_tristan_update_8001() {
+function oab_tristan_update_8001() {
     include_once("updates/update_8001.inc");
-}*/
+}
+
+/**
+ *  Affichage de l'image du blogueur dans l'encadré blogueur (au lieu d'un texte avant)
+ */
+function oab_tristan_update_8002() {
+    include_once("updates/update_8002.inc");
+}
