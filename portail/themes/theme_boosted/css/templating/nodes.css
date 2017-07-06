@@ -205,6 +205,11 @@ article.node.document .document_field_image{
     height: auto;
 }
 
+.encart_profil .div_twitter_account {
+    padding: 1rem 0;
+    font-size: 1.6rem;
+}
+
 
 /* je met en media queries les tailles en pixels pour les adapter aux petits écrans */
 @media (max-width: 775px) {
