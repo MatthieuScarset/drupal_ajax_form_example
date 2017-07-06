@@ -1,100 +1,8 @@
 <?php
 use \Drupal\Core\Utility\UpdateException;
-/****
- *
- * Modification de l'affichage du teaser du profil d'un blogger pour les contenus de type blog_post
- *
- */
-
 
 /***********************
- * Modification du libellé du firstname + sa traduction FR
- ***********************/
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.field.node.profile.field_first_name');
-$config_group->setData(
-    array (
-        'uuid' => '268e8612-7795-4f1c-b4a4-9fe40d08d28d',
-        'langcode' => 'en',
-        'status' => true,
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.storage.node.field_first_name',
-                        1 => 'node.type.profile',
-                    ),
-            ),
-        'id' => 'node.profile.field_first_name',
-        'field_name' => 'field_first_name',
-        'entity_type' => 'node',
-        'bundle' => 'profile',
-        'label' => 'Firstname',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
-        'default_value' =>
-            array (
-            ),
-        'default_value_callback' => '',
-        'settings' =>
-            array (
-            ),
-        'field_type' => 'string',
-    )
-);
-$config_group->save(TRUE);
-
-$collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$collection->write('field.field.node.profile.field_first_name', array (
-    'label' => 'Prénom',
-));
-
-/***********************
- * Modification du libellé du Twitter Account + sa traduction FR
- ***********************/
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.field.node.profile.field_social_account');
-$config_group->setData(
-    array (
-        'uuid' => 'ff1a34e0-7e7c-4313-83a9-727cc984db42',
-        'langcode' => 'en',
-        'status' => true,
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.storage.node.field_social_account',
-                        1 => 'node.type.profile',
-                    ),
-            ),
-        'id' => 'node.profile.field_social_account',
-        'field_name' => 'field_social_account',
-        'entity_type' => 'node',
-        'bundle' => 'profile',
-        'label' => 'Twitter account',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
-        'default_value' =>
-            array (
-            ),
-        'default_value_callback' => '',
-        'settings' =>
-            array (
-            ),
-        'field_type' => 'string',
-    )
-);
-
-$config_group->save(TRUE);
-$collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$collection->write('field.field.node.profile.field_social_account', array (
-    'label' => 'Compte Twitter',
-));
-
-/***********************
- * Modification de la config pour l'affichage personnalisé du teaser du blogger d'un blog_post
+ * Affichage de l'image du blogueur dans l'encadré blogueur (au lieu d'un texte avant)
  ***********************/
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_view_display.node.profile.teaser');
@@ -185,13 +93,14 @@ $config_group->setData(
                     ),
                 'field_visual' =>
                     array (
-                        'type' => 'entity_reference_label',
+                        'type' => 'entity_reference_entity_view',
                         'weight' => 5,
                         'region' => 'content',
                         'label' => 'hidden',
                         'settings' =>
                             array (
                                 'link' => true,
+                                'view_mode' => 'default',
                             ),
                         'third_party_settings' =>
                             array (
@@ -215,12 +124,8 @@ $config_group->setData(
                 'langcode' => true,
             ),
     )
-
 );
-
-
 $config_group->save(TRUE);
-
 
 #A enlever à la fin des tests
 //throw new UpdateException();
