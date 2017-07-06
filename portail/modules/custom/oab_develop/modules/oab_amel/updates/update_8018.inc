@@ -839,7 +839,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.field.node.product.field_visual');
+$config_group = $config_factory->getEditable('field.field.node.product.field_top_zone_background');
 $config_group->setData(
     array (
         'uuid' => '27560084-d093-4b83-8e70-6a797b70e5c3',
