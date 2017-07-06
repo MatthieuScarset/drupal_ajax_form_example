@@ -87,17 +87,18 @@ view_mode ? view_mode|clean_class,
 <article{{ attributes.addClass(classes) }}>
 
     <div{{ content_attributes.addClass('content') }}>
-        <div class="col col-md-4 image_blogger">
+
+        <div class="col image_blogger">
             {{ content.field_visual }}
         </div>
-
-        <div class="col col-md-8 bloc_textuel">
+        <div class="col bloc_textuel">
             <div class="title">
                 {{ content.field_first_name }}
                 {{ content.field_last_name }}
             </div>
             {{ content.body }}
         </div>
+
     </div>
 
 </article>
