@@ -87,11 +87,11 @@ view_mode ? view_mode|clean_class,
 <article{{ attributes.addClass(classes) }}>
 
     <div{{ content_attributes.addClass('content') }}>
-        <div class="col col-md-4 image_blogger">
+
+        <div class="col image_blogger">
             {{ content.field_visual }}
         </div>
-
-        <div class="col col-md-8 bloc_textuel">
+        <div class="col bloc_textuel">
             <div class="title">
                 {% include 'field--node--field-last-name--profile--teaser.html.twig'
                     with {
@@ -104,6 +104,7 @@ view_mode ? view_mode|clean_class,
             </div>
             {{ content.body }}
         </div>
+
     </div>
 
 </article>

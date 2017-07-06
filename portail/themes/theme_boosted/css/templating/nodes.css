@@ -173,17 +173,51 @@ article.node.document .document_field_image{
 .text-max-witdh{
     max-width: 850px;
 }
-
 .encart_profil{
- background-color: #dddddd;
+    background-color: #dddddd;
     margin-top: 3.5rem; /* avec mesureit pour avoir 40px */
 }
 
 .encart_profil .bloc_textuel{
-    padding: 2.5rem 1.5rem 2rem 1.5rem;
+    padding: 3rem 1.5rem 3rem 0rem;
+    margin-left: 185px;
 }
 
 .encart_profil .bloc_textuel .title{
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    line-height: 1rem;
+}
+
+.encart_profil .bloc_textuel p {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+    line-height: 2.25rem;
+}
+
+.encart_profil .image_blogger {
+    float: left;
+}
+
+.encart_profil .image_blogger img {
+    width: 170px;
+    height: auto;
+}
+
+.encart_profil .div_twitter_account {
+    padding: 1rem 0;
+    font-size: 1.6rem;
+}
+
+
+/* je met en media queries les tailles en pixels pour les adapter aux petits écrans */
+@media (max-width: 775px) {
+    .encart_profil .image_blogger img {
+        width: 120px;
+    }
+
+    .encart_profil .bloc_textuel {
+        margin-left: 135px;
+    }
 }

@@ -26,7 +26,7 @@ Affichage :
     Sinon, ca crée une div avec un lien sans texte ni direction
  #}
 {% if field_social_account.0 is defined and field_social_account.0|length > 0 %}
-    <div>
+    <div class="div_twitter_account">
         <a href="{{ field_social_account.0['#context'].value }}">{{ field_social_account['#title'] }}</a>
     </div>
 {% endif %}
