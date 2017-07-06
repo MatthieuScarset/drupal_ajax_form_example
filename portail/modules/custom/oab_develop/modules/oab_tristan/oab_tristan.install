@@ -19,8 +19,9 @@ function oab_tristan_update_dependencies() {
 }
 
 /**
- *  Ajout du module de sélection de couleur dans le wysiwyg
+ *  Personnalisation du teaser du blogger pour les contents du type blog_post
  */
-/*function oab_tristan_update_8001() {
+function oab_tristan_update_8001() {
     include_once("updates/update_8001.inc");
-}*/
+}
+
