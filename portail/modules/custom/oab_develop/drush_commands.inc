@@ -11,5 +11,6 @@ pm-enable -y oab_user_access_rights
 pm-enable -y oab_entity_embed_link
 pm-enable -y oab_yassine
 pm-enable -y oab_migrate_content
+pm-enable -y oab_tristan
 updatedb
 entity-updates

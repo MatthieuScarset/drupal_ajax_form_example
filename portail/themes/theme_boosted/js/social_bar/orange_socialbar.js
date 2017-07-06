@@ -1048,6 +1048,7 @@ window.onload = function(){
 		}
 	};
 	window.onclick = function(){
+	    $ = jQuery;
 		if($('#sharebar.horizontal').length){
 			$("#sharebar.horizontal #counterlabel")[0].style.maxWidth = Math.round($("#sharebar.horizontal #counterlabel")[0].offsetWidth) + "px";
 		}

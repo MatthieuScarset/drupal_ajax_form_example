@@ -17,8 +17,11 @@ function oab_tibo_update_dependencies() {
 	/*$dependencies['oab_tibo'][8006] = array('oab_tibo' => 8005	);
 	$dependencies['oab_tibo'][8007] = array('oab_tibo' => 8006	);
 	$dependencies['oab_amel'][8008] = array('oab_tibo' => 8007	);*/
-	$dependencies['oab_amel'][8009] = array('oab_amel' => 8008	);
+	$dependencies['oab_tibo'][8009] = array('oab_amel' => 8008	);
 	$dependencies['oab_tibo'][8008] = array('oab_amel' => 8011	);
+	$dependencies['oab_tibo'][8010] = array('oab_amel' => 8015	);
+  $dependencies['oab_tibo'][8009] = array('oab_stephanie' => 8030	);
+	$dependencies['oab_tibo'][8016] = array('oab_christophe' => 8023	);
 
 	return $dependencies;
 }
@@ -93,12 +96,11 @@ function oab_tibo_update_8010() {
 	include_once( "updates/update_8010.inc" );
 }
 
-
 /**
  * Correction JS slick
  */
 function oab_tibo_update_8011() {
-	include_once( "updates/update_8011.inc" );
+	include_once("updates/update_8011.inc");
 }
 
 /**
@@ -106,4 +108,29 @@ function oab_tibo_update_8011() {
  */
 function oab_tibo_update_8012() {
 	include_once("updates/update_8012.inc");
+}
+
+/**
+ * bannières PWP solutions industries
+ */
+function oab_tibo_update_8013() {
+	include_once("updates/update_8013.inc");
+}
+/**
+ * permissions module password policy
+ */
+function oab_tibo_update_8014() {
+	include_once("updates/update_8014.inc");
+}
+/**
+ * ajout du type de contenu pays pour la top zone
+ */
+function oab_tibo_update_8015() {
+	include_once("updates/update_8015.inc");
+}
+/**
+ * node embed wysiwyg
+ */
+function oab_tibo_update_8016() {
+	include_once("updates/update_8016.inc");
 }
