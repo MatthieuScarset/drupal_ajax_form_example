@@ -6,6 +6,7 @@
     CKEDITOR.plugins.add('solaris', {
         // Icône présent dans le répertoire "icons" à la racine du plugin
         icons: 'solaris',
+        lang: 'en,fr,ru',
         init: function(editor) {
 
             /*editor.addCommand('solaris', new CKEDITOR.dialogCommand('solaris'));
