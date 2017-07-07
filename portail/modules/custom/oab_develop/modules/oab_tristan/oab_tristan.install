@@ -1,0 +1,33 @@
+<?php
+
+function oab_tristan_install() {
+    drupal_set_installed_schema_version('oab_tristan', 8000);
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_tristan_update_dependencies() {
+
+   /* $dependencies['oab_tristan'][8001] = array('oab_christophe' => 8020	);
+    $dependencies['oab_tristan'][8004] = array('oab_amel' => 8015	);
+    $dependencies['oab_tristan'][8005] = array('oab_tibo' => 8012	);
+    $dependencies['oab_tristan'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
+
+    return $dependencies;*/
+}
+
+/**
+ *  Personnalisation du teaser du blogger pour les contents du type blog_post
+ */
+function oab_tristan_update_8001() {
+    include_once("updates/update_8001.inc");
+}
+
+/**
+ *  Affichage de l'image du blogueur dans l'encadré blogueur (au lieu d'un texte avant)
+ */
+function oab_tristan_update_8002() {
+    include_once("updates/update_8002.inc");
+}
