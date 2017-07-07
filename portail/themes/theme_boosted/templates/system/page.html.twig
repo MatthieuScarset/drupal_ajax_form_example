@@ -101,7 +101,7 @@
             </section>
 
             {# Sidebar #}
-            {% if page.sidebar %}
+            {% if page.sidebar|striptags|trim|render %}
               {% block sidebar %}
                 <aside class="col-md-4 col-sm-12 right-column" role="complementary">
                   {{ page.sidebar }}
