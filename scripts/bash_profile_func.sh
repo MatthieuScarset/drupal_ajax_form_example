@@ -1,13 +1,22 @@
 # Création d'une nouvelle branche et synchro auto sur le serveur
 git_new_branch() {
+	##Declas pour coloration texte
+	rougefonce='\e[0;31m'
+	neutre='\e[0;m'
+
 	if [ -z "$1" ]
 	then
-		rougefonce='\e[0;31m'
-		neutre='\e[0;m'
 		echo -e "${rougefonce}Error : Vous devez entrer un nom de branche${neutre}"
 	else
-		git checkout -b "$1"
-		git push --set-upstream origin "$1"
+
+		##je me branche sur master que je pull
+		if git checkout master && git pull
+		then
+			git checkout -b "$1"
+			git push --set-upstream origin "$1"
+		else
+			echo -e "${rougefonce}Erreur avec la branche master${neutre}"
+		fi
 	fi
 }
 
@@ -155,10 +164,8 @@ git_merge() {
 
 				##on merge
 				echo -e "${cyanfonce}Merge de ${jaune}$nomBranche${cyanfonce} sur ${bleuclair}$branch${neutre}"
-				if git merge $nomBranche
+				if ! git merge $nomBranche
 				then
-					echo "t"
-				else
 					echo -e "${rougefonce}Erreur lors du merge de $nomBranche sur $branch. ABANDON${neutre}"
 					return
 				fi
