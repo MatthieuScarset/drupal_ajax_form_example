@@ -1,4 +1,4 @@
-#RACCOURCIS BASH POUR LES WORKFLOWS GIT
+# RACCOURCIS BASH POUR LES WORKFLOWS GIT
 
 Installation
 ------
@@ -12,32 +12,32 @@ Les fonctions s'utilisent dans le git-bash comme une commande normale.
 
 Fonctions
 ------
-###git\_new\_branch
+### git\_new\_branch
 * Se connecte à la branche _MASTER_,
 * puis crée une nouvelle branche et la synchronise automatiquement avec le serveur.
 
-###git\_merge\_updates [_nom\_branche_]
+### git\_merge\_updates [_nom\_branche_]
 * *s'utilise depuis la branche locale*
 * Merge de la branche actuelle avec _updates_
 * Si un nom de branche est passé en paramètre, merge de la branche actuelle avec cette branche
 * Merge de _update_ avec _dev_ et _master_
 
-####Exemples
+#### Exemples
 ```bash
-git\_merge\_updates
-git\_merge\_updates mabranche
+git_merge_updates
+git_merge_updates mabranche
 ```
 
-###git\_merge {[_nom\_branche_]}
+### git\_merge {[_nom\_branche_]}
 *Séparer chaque nom de branche par une espace*
 * Merge la branche actuelle avec les branches passées en paramètre
 
-####Exemples
+#### Exemples
 ```bash
-git\_merge ma_branche dev
+git_merge ma_branche dev
 ```
 
-###git\_push\_updates
+### git\_push\_updates
 * Push la branche _updates_.
 * Merge la branche _updates_ avec _dev_ et _master_.
 
