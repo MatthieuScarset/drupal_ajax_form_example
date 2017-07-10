@@ -2,6 +2,7 @@
 var components = drupalSettings.oab_templating_components;
 var mEditor = null;
 var isCreated = false;
+var localNavSubmenuTitle = 'Navigation';
 
 
 function createTemplateComponent(containerId, component) {
@@ -38,6 +39,8 @@ function insertComponentTemplate(containerId, html) {
     var dialog = CKEDITOR.dialog.getCurrent();
     var isReplace = dialog.getValueOf('tab-' + containerId, 'components-chkbox-' + containerId);
 
+    // replace title menu local nav
+    html = html.replace("data-title-mobile='submenu'", "data-title-mobile='"+localNavSubmenuTitle+"'");
     if (isReplace) {
         mEditor.fire('saveSnapshot');
         // Everything should happen after the document is loaded (#4073).
@@ -100,6 +103,8 @@ function buildElements(container, component) {
         mEditor = editor;
         var plugin = CKEDITOR.plugins.get('templating');
         CKEDITOR.document.appendStyleSheet(CKEDITOR.getUrl(plugin.path + 'dialogs/templating.css'));
+        var lang = editor.lang.templating;
+        localNavSubmenuTitle = lang.localNavSubmenu;
 
         return {
             title: 'Templating Modules' ,/*editor.lang.templating.title,*/
