@@ -71,9 +71,13 @@
             </div>
             <div class="col-md-5 col-sm-12" style="border-left: 1px solid grey; padding: 0 2rem;">
                 <span class="explication" style="padding-right: 2rem; font-size: 1.2rem; display: inline-block;">
-                    Lorem ipsum sit amet,
-                    <br/>
-                    consectetuer adipiscing elit, sed
+                    {% if content.detail_numero is not null %}
+                        {{ content.detail_numero }}
+                    {% else %}
+                        Lorem ipsum sit amet,
+                        <br/>
+                        consectetuer adipiscing elit, sed
+                    {% endif %}
                 </span>
                 <a class="btn btn_ecrire label label-primary" href="#" style="color: white; padding: 1rem 3rem;">
                     Nous écrire
