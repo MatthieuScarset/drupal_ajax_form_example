@@ -31,3 +31,12 @@ function oab_tristan_update_8001() {
 function oab_tristan_update_8002() {
     include_once("updates/update_8002.inc");
 }
+
+
+/**
+ * Suppression de la possiblité de traduire l'image du blogueur pour qu'elle s'affiche
+ * avec toutes les langues.
+ */
+function oab_tristan_update_8003() {
+    include_once("updates/update_8003.inc");
+}
