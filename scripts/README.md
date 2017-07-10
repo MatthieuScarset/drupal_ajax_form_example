@@ -12,11 +12,11 @@ Les fonctions s'utilisent dans le git-bash comme une commande normale.
 
 Fonctions
 ------
-### git\_new\_branch
+### git\_new\_branch [nom\_branche]
 * Se connecte à la branche _MASTER_,
 * puis crée une nouvelle branche et la synchronise automatiquement avec le serveur.
 
-### git\_merge\_updates [_nom\_branche_]
+### git\_merge\_updates [nom\_branche]
 * **s'utilise depuis la branche locale**
 * Merge de la branche actuelle avec _updates_
 * Si un nom de branche est passé en paramètre, merge de la branche actuelle avec cette branche
@@ -28,7 +28,7 @@ git_merge_updates
 git_merge_updates mabranche
 ```
 
-### git\_merge {[_nom\_branche_]}
+### git\_merge {[nom\_branche]}
 *Séparer chaque nom de branche par une espace*
 * Merge la branche actuelle avec les branches passées en paramètre
 
