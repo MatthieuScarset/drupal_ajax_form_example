@@ -19,8 +19,24 @@ function oab_tristan_update_dependencies() {
 }
 
 /**
- *  Ajout du module de sélection de couleur dans le wysiwyg
+ *  Personnalisation du teaser du blogger pour les contents du type blog_post
  */
-/*function oab_tristan_update_8001() {
+function oab_tristan_update_8001() {
     include_once("updates/update_8001.inc");
-}*/
+}
+
+/**
+ *  Affichage de l'image du blogueur dans l'encadré blogueur (au lieu d'un texte avant)
+ */
+function oab_tristan_update_8002() {
+    include_once("updates/update_8002.inc");
+}
+
+
+/**
+ * Suppression de la possiblité de traduire l'image du blogueur pour qu'elle s'affiche
+ * avec toutes les langues.
+ */
+function oab_tristan_update_8003() {
+    include_once("updates/update_8003.inc");
+}
