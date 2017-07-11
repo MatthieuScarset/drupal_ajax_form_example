@@ -1,4 +1,8 @@
 <?php
+
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
 $field_storage = FieldStorageConfig::loadByName('node', 'field_meta_title');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
