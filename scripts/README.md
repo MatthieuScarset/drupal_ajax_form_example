@@ -3,10 +3,7 @@
 Installation
 ------
 * Créer/ouvrir le fichier _.bash\_profile_ dans votre home.
-* Copier et adapter la ligne 
-```sh
-_source ~/LIEN/VERS/DOSSIER/RUBY/scripts/bash\_profile\_func.sh_
-```
+* Copier et adapter la ligne ```source ~/LIEN/VERS/DOSSIER/RUBY/scripts/bash\_profile\_func.sh```
 * Relancer le git-bash pour la prise en compte du script.
 
 Utilisation
@@ -17,7 +14,8 @@ Fonctions
 ------
 ### git\_new\_branch [nom\_branche]
 * Se connecte à la branche _MASTER_,
-* puis crée une nouvelle branche et la synchronise automatiquement avec le serveur.
+* Crée une nouvelle branche
+* Synchronise la branche avec le serveur.
 
 ### git\_merge\_updates [nom\_branche]
 * **s'utilise depuis la branche locale**
