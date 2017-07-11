@@ -18,6 +18,7 @@ function theme_boosted_preprocess_html(&$variables) {
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
+
 }
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -60,7 +61,7 @@ function theme_boosted_preprocess_page(&$variables) {
   if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
     $node = node_revision_load($revision);
   }
-  if (is_object($node)
+  if (isset($node) && is_object($node)
   && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
     $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
