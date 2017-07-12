@@ -14,9 +14,10 @@ function oab_yassine_update_dependencies() {
   $dependencies['oab_yassine'][8005] = array('oab_tibo' => 8012	);
   $dependencies['oab_yassine'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
 	$dependencies['oab_yassine'][8009] = array('oab_amel' => 8019	);
+	$dependencies['oab_yassine'][8009] = array('oab_amel' => 8019	);
 
 
-	return $dependencies;
+  return $dependencies;
 }
 
 /**
@@ -80,4 +81,17 @@ function oab_yassine_update_8008() {
  */
 function oab_yassine_update_8009() {
 	include_once("updates/update_8009.inc");
+}
+
+/**
+ *  Template document (config visual ornement)
+ */
+function oab_yassine_update_8010() {
+	include_once("updates/update_8010.inc");
+}
+/**
+ *  Correction Fields manquants sur product
+ */
+function oab_yassine_update_8011() {
+	include_once("updates/update_8011.inc");
 }
