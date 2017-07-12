@@ -90,12 +90,12 @@ view_mode ? view_mode|clean_class,
 <article{{ attributes.addClass(classes) }}>
 
     <div{{ content_attributes.addClass('content') }}>
-        <div class="document_field_image col col-md-2 col-sm-12">
+        <div class="document_field_image col col-md-3 col-xs-12">
             {{ content.field_visual }}
         </div>
 
-        <div class="col col-md-12 col-sm-12">
-            {{ content|without('field_content_field', 'field_image', 'field_document_type',
+        <div class="col col-md-9 col-xs-12">
+            {{ content|without('theme_term', 'field_image', 'field_document_type',
             'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry', 'field_solution') }}
         </div>
     </div>
