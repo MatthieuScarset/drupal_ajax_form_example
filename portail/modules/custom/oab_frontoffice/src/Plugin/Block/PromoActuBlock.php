@@ -9,7 +9,7 @@ use Drupal\node\Entity\Node;
 
 /**
  *
- * @author FFLB8539
+ * @author WLCQ9089
  * @Block(
  *   id = "promo_actu_block",
  *   admin_label = @Translation("Promo Actu"),
@@ -41,6 +41,8 @@ class PromoActuBlock extends BlockBase {
         $node = Node::load($nid);
         $type = $node->getType();
 
+
+
         if($type == 'product'){
             if ($node->hasField('field_axiome_data')) {
 
@@ -48,13 +50,13 @@ class PromoActuBlock extends BlockBase {
                 $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
                 if(count($field_axiome_data) > 0)
                 {
-                    $axiome_data = $field_axiome_data;
-                    // oabt($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']);
 
-                    $block['titre_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_title'];
-                    $block['texte_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_text'];
-                    $block['textelien_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_link_text'];
-                    $block['url_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_url'];
+                    $axiome_data = $field_axiome_data;
+                    $block['titre_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_title']['@attributes'][name];
+                    $block['texte_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_text']['@attributes'][name];
+                    $block['textelien_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_link_text']['@attributes'][name];
+                    $block['url_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_url']['@attributes'][name];
+
                 }
             }
         }

@@ -46,14 +46,32 @@
  */
 #}
 <section{{ attributes.addClass('block', 'clearfix') }}>
-    {{ title_prefix }}
-    {% if label %}
-        <h2{{ title_attributes.addClass('block-title') }}>{{ label }}</h2>
-    {% endif %}
-    {{ title_suffix }}
 
     {% block content %}
-        {{ content }}
+
+
+    {% if content.titre_promoactu is not null %}
+        <div id="block-promoactublock" class="container">
+            <div class="promoactu_title">
+                {{ content.titre_promoactu }}
+            </div>
+            <div class="promoactu_text">
+                {{ content.texte_promoactu }}
+            </div>
+            <a href=" {{ content.url_promoactu }} " class="btn btn-inverse btn-primary">{{ content.textelien_promoactu }}
+            </a>
+
+
+
+        </div>
+
+
+
+
+
+        {% else %}
+            {{ content }}
+    {% endif %}
     {% endblock %}
 </section>
 
