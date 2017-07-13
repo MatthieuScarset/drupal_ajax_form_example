@@ -46,13 +46,17 @@ class AxiomeContentImporter {
     $node->set('field_top_zone', $content);
     $node->field_top_zone->format = 'full_html';
 
+
     //TOP Zone Background
-    $urlBackground = 'public://axiome/fiches/'.$urlBackground;
-    $image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
+		if (!empty($bannerData['background_image']['url_archive'])){
 
-//    echo "Image media ID : ".$image_media_id.'<br/>';
-    $node->set('field_top_zone_background', $image_media_id);
+			$urlBackground = 'public://axiome/fiches/'.$urlBackground;
+			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
 
+	//    echo "Image media ID : ".$image_media_id.'<br/>';
+			$node->set('field_top_zone_background', $image_media_id);
+
+		}
   }
 
   private static function replaceLeftBlock(&$dom, $bannerData){
