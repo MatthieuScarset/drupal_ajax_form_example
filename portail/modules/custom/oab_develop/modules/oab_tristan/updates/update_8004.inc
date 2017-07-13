@@ -328,4 +328,4 @@ foreach ($termList as $taxoTerm => $view) {
 
 
 #A enlever à la fin des tests
-throw new UpdateException();
+//throw new UpdateException();
