@@ -17,7 +17,7 @@ use Drupal\views\ViewExecutable;
  *
  * @ingroup views_filter_handlers
  *
- * @ViewsFilter("oab_backoffice_node_year")
+ * @ViewsFilter("node_year")
  */
 class NodeYear extends Date {
 
@@ -69,15 +69,12 @@ class NodeYear extends Date {
      */
     public function generateOptions() {
         // Array keys are used to compare with the table field values.
-        return array(
-            '01' => '2017',
-            '02' => '2016',
-            '03' => '2015',
-            '04' => '2014',
-            '05' => '2013',
-            '06' => '2012'
-        );
+	    $currentYear = date('Y');
+        $years = array();
+        for($i = $currentYear; $i >= 2012 ; $i--){
+	        array_push($years, $i);
+        }
+	    return $years;
     }
-
 
 }
