@@ -297,17 +297,17 @@ $config_group->save(TRUE);
 
 ##la liste des termes et du nom de la sous-vue correspondante
 $termList = [
-  "Cas clients"       => "subhome_customers",
-  "Catalogue"         => "subhome_catalogue",
-  "Customer Stories"  => "subhome_customers",
-  "Library"           => "subhome_documents",
-  "Magazine"          => "subhome_magazine",
-  "Médiathèque"       => "subhome_documents",
-  "Partenaires"       => "subhome_partners",
-  "Partners"          => "subhome_partners",
-  "Portfolio"         => "subhome_catalogue",
-  "Press"             => "subhome_press",
-  "Presse"            => "subhome_press"
+  "Cas clients"       => "page_customers",
+  "Catalogue"         => "page_catalogue",
+  "Customer Stories"  => "page_customers",
+  "Library"           => "page_documents",
+  "Magazine"          => "page_magazine",
+  "Médiathèque"       => "page_documents",
+  "Partenaires"       => "page_partners",
+  "Partners"          => "page_partners",
+  "Portfolio"         => "page_catalogue",
+  "Press"             => "page_press",
+  "Presse"            => "page_press"
 ];
 
 ##On boucle sur tous les termes de la taxo Subhomes
