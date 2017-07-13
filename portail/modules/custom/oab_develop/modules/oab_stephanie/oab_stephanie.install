@@ -261,3 +261,11 @@ function oab_stephanie_update_8031() {
 function oab_stephanie_update_8032() {
 	include_once("updates/update_8032.inc");
 }
+
+
+/**
+ * Ajout des parametres metatag pour les Products
+ */
+function oab_stephanie_update_8033() {
+	include_once("updates/update_8033.inc");
+}
