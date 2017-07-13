@@ -74,7 +74,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 */
 
 
-    $node = $route_match->getParameter('node');
+
 
 
     ##Si c'est une subhome
@@ -91,29 +91,50 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
       $breadcrumb->addLink(Link::createFromRoute(t($displayName), '<none>' ));
 
-    } elseif (isset($node)) {
+    } else {
+      $node = $route_match->getParameter('node');
 
-      /*$subhomes = $node->get('field_subhome')->getValue();
-      if (is_array($subhomes) && count($subhomes)>0) {
-        $taxo = \Drupal\taxonomy\Entity\Term::load($subhomes[0]['target_id']);
-        kint($taxo);
-      }
-     // kint($subhomes);
+
+
+      // kint($subhomes);
       if (isset($node) && $parameters['node']->getType() != 'simple_page') {
+
         $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+
+
+        $subhomes = $node->get('field_subhome')->getValue();
+        if (is_array($subhomes) && count($subhomes)>0) {
+          //$taxo = \Drupal\taxonomy\Entity\Term::load($subhomes[0]['target_id']);
+          //$taxo = \Drupal\taxonomy\Entity\Term::load('subhomes');
+          //kint($taxo);
+          $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($subhomes[0]['target_id']);
+          /*$field_content_type = $term->get('field_field_content_type');
+
+          if ($field_content_type != null) {
+
+          }*/
+          #$breadcrumb->addLink(Link::createFromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->tid->value], ['absolute' => TRUE]) );
+          #$breadcrumb->addLink(Link::createFromRoute($term->get('name'), '<none>'));
+          #$link = url('taxonomy/term/1');
+          #kint($term->get('field_content_type'));
+          kint($term);
+        }
+
+
+
 
         $contentType = $parameters['node']->getType();
 
         $view = \Drupal\views\Views::getView('subhomes' );
-        $view->setDisplay($parameters['display_id']);
-        $displayObj = $view->getDisplay();
+        //$view->setDisplay($parameters['display_id']);
+        //$displayObj = $view->getDisplay();
 
         //kint($node);
 
       //  kint($displayObj->view->storage);
 
         $breadcrumb->addLink(Link::createFromRoute(t($contentType), '<none>'));
-      }*/
+      }
     }
 
 
