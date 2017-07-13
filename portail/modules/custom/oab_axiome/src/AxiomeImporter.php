@@ -542,13 +542,13 @@ class AxiomeImporter{
                         //oabt($node, true);
                         if (isset($node)) {
 
+													$this->message .=  "Parsing content \n";
+													AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
 
                             //("création des familles");
                             $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
 
-                            $this->message .=  "Parsing content \n";
-                            AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
                             $node->save();
 
                             try {
@@ -610,27 +610,25 @@ class AxiomeImporter{
      *   The axiome product XML file string
      */
     private function axiome_fiche_remplissage_champs(&$node, $fiche){
-        $dom = new DOMDocument("1.0");
-        $dom->load($fiche);
-        $xpath = new DOMXPath($dom);
+			$dom = new DOMDocument("1.0");
+			$dom->load($fiche);
+			$xpath = new DOMXPath($dom);
 
-        // short description
-				$node->field_highlight = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
+			// short description
+			$node->field_highlight = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
 
-        // XML content
-        //$field_xml_content = file_get_contents($fiche);
-       	//$node->field_xml_content['und'][0]['value'] = $field_xml_content;
-				//$node->field_body = $field_txt_catcher . $field_xml_content ;
-
-				// metatags
-				$meta_title = $xpath->query("/ficheoffre/Attributes/nom_offre_commerciale")->item(0)->nodeValue;
+			// metatags
+			$axiome_data = unserialize($node->field_axiome_data->value);
+			if(isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['offre_name']))
+			{
+				$meta_title = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['offre_name'];
 				$node->field_meta_title = mb_substr($meta_title,0, 55);
-
-				$meta_description = $xpath->query("/ficheoffre/Attributes/accroche")->item(0)->nodeValue;
+			}
+			if(isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']))
+			{
+				$meta_description = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'];
 				$node->field_meta_description = mb_substr($meta_description,0, 155);
-
-
-
+			}
     }
 
     /**
