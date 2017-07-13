@@ -1,12 +1,11 @@
 <?php
 use \Drupal\Core\Utility\UpdateException;
 use Drupal\Core\Database\Database;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
 
 
-/*$field = \Drupal::entityManager()->getStorage('field_config')->load('taxonomy_term.subhome.field_content_type');
-$field->delete();
-field_purge_field($field);
-*/
+
 /***********************
  * Desactivation du module easy-breadcrumb afin de gérer
  * les fils d'ariane par un module perso
@@ -39,26 +38,49 @@ if (isset($modules['easy_breadcrumb'])) {
 
 
 #################
-## Ajout de la config pour les taxonomies
-$config_group = $config_factory->getEditable('field.field.taxonomy_term.subhomes.field_content_type');
+## Ajout du nouveau field pour les terms des subhomes
+
+$field_storage = FieldStorageConfig::loadByName('taxonomy_term', 'field_related_view_path');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_related_view_path',
+    'entity_type' => 'taxonomy_term',
+    'type' => 'string',
+  ))->save();
+}
+
+$field = FieldConfig::loadByName('taxonomy_term', 'subhomes', 'field_related_view_path');
+if(empty($field)) {
+  $config_array = array(
+    'field_name' =>  'field_related_view_path',
+    'entity_type' => 'taxonomy_term',
+    'bundle' => 'subhomes',
+    'label' => 'related_view_path',
+    'required' => TRUE,
+  );
+  FieldConfig::create($config_array)->save();
+}
+
+
+$config_group = $config_factory->getEditable('field.field.taxonomy_term.subhomes.field_related_view_path');
 $config_group->setData(
   array (
-    'uuid' => '9799a3bc-107b-4965-80d2-c4df94c13edc',
+    'uuid' => '7a77e91d-f790-4ddc-a603-357484d3613b',
     'langcode' => 'fr',
     'status' => true,
     'dependencies' =>
       array (
         'config' =>
           array (
-            0 => 'field.storage.taxonomy_term.field_field_content_type',
+            0 => 'field.storage.taxonomy_term.field_related_view_path',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
       ),
-    'id' => 'taxonomy_term.subhomes.field_field_content_type',
-    'field_name' => 'field_field_content_type',
+    'id' => 'taxonomy_term.subhomes.field_related_view_path',
+    'field_name' => 'field_related_view_path',
     'entity_type' => 'taxonomy_term',
     'bundle' => 'subhomes',
-    'label' => 'field_content_type',
+    'label' => 'related_view_path',
     'description' => '',
     'required' => true,
     'translatable' => false,
@@ -75,10 +97,10 @@ $config_group->setData(
 
 $config_group->save(TRUE);
 
-$config_group = $config_factory->getEditable('field.storage.taxonomy_term.field_content_type');
+$config_group = $config_factory->getEditable('field.storage.taxonomy_term.field_related_view_path');
 $config_group->setData(
   array (
-    'uuid' => 'b5299c17-d7c2-43b9-ac5a-d83cc6c5f345',
+    'uuid' => 'e3ccb4c4-5239-44f0-8abd-5eeffa106884',
     'langcode' => 'fr',
     'status' => true,
     'dependencies' =>
@@ -88,8 +110,8 @@ $config_group->setData(
             0 => 'taxonomy',
           ),
       ),
-    'id' => 'taxonomy_term.field_field_content_type',
-    'field_name' => 'field_field_content_type',
+    'id' => 'taxonomy_term.field_related_view_path',
+    'field_name' => 'field_related_view_path',
     'entity_type' => 'taxonomy_term',
     'type' => 'string',
     'settings' =>
@@ -122,7 +144,7 @@ $config_group->setData(
       array (
         'config' =>
           array (
-            0 => 'field.field.taxonomy_term.subhomes.field_field_content_type',
+            0 => 'field.field.taxonomy_term.subhomes.field_related_view_path',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
         'module' =>
@@ -139,21 +161,21 @@ $config_group->setData(
       array (
         'description' =>
           array (
-            'type' => 'text_textfield',
-            'weight' => 0,
+            'type' => 'text_textarea',
+            'weight' => 1,
             'region' => 'content',
             'settings' =>
               array (
-                'size' => 60,
                 'placeholder' => '',
+                'rows' => 5,
               ),
             'third_party_settings' =>
               array (
               ),
           ),
-        'field_field_content_type' =>
+        'field_related_view_path' =>
           array (
-            'weight' => 31,
+            'weight' => 4,
             'settings' =>
               array (
                 'size' => 60,
@@ -180,7 +202,7 @@ $config_group->setData(
         'name' =>
           array (
             'type' => 'string_textfield',
-            'weight' => -5,
+            'weight' => 0,
             'region' => 'content',
             'settings' =>
               array (
@@ -194,7 +216,7 @@ $config_group->setData(
         'path' =>
           array (
             'type' => 'path',
-            'weight' => 30,
+            'weight' => 3,
             'region' => 'content',
             'settings' =>
               array (
@@ -222,7 +244,7 @@ $config_group->setData(
       array (
         'config' =>
           array (
-            0 => 'field.field.taxonomy_term.subhomes.field_field_content_type',
+            0 => 'field.field.taxonomy_term.subhomes.field_related_view_path',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
         'module' =>
@@ -249,9 +271,9 @@ $config_group->setData(
               array (
               ),
           ),
-        'field_field_content_type' =>
+        'field_related_view_path' =>
           array (
-            'weight' => 1,
+            'weight' => 3,
             'label' => 'above',
             'settings' =>
               array (
@@ -273,40 +295,37 @@ $config_group->setData(
 );
 $config_group->save(TRUE);
 
-$schema = Database::getConnection()->query(
-  "
-CREATE TABLE `taxonomy_term__field_field_content_type` (
-`bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
-  `entity_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity id this data is attached to',
-  `revision_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity revision id this data is attached to, which for an unversioned entity type is the same as the entity id',
-  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
-  `delta` int(10) UNSIGNED NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
-  `field_field_content_type_value` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for taxonomy_term field field_field_content…'");
+##la liste des termes et du nom de la sous-vue correspondante
+$termList = [
+  "Cas clients"       => "subhome_customers",
+  "Catalogue"         => "subhome_catalogue",
+  "Customer Stories"  => "subhome_customers",
+  "Library"           => "subhome_documents",
+  "Magazine"          => "subhome_magazine",
+  "Médiathèque"       => "subhome_documents",
+  "Partenaires"       => "subhome_partners",
+  "Partners"          => "subhome_partners",
+  "Portfolio"         => "subhome_catalogue",
+  "Press"             => "subhome_press",
+  "Presse"            => "subhome_press"
+];
 
-$schema = Database::getConnection()->query("
-INSERT INTO `taxonomy_term__field_field_content_type` (`bundle`, `deleted`, `entity_id`, `revision_id`, `langcode`, `delta`, `field_field_content_type_value`) VALUES
-('subhomes', 0, 364, 364, 'fr', 0, 'partner'),
-('subhomes', 0, 365, 365, 'fr', 0, 'customer_story'),
-('subhomes', 0, 366, 366, 'fr', 0, 'press_release'),
-('subhomes', 0, 367, 367, 'fr', 0, 'document'),
-('subhomes', 0, 368, 368, 'fr', 0, 'product'),
-('subhomes', 0, 369, 369, 'fr', 0, 'magazine'),
-('subhomes', 0, 370, 370, 'en', 0, 'partner'),
-('subhomes', 0, 371, 371, 'en', 0, 'customer_story'),
-('subhomes', 0, 372, 372, 'en', 0, 'press_release'),
-('subhomes', 0, 373, 373, 'en', 0, 'document'),
-('subhomes', 0, 374, 374, 'en', 0, 'product'),
-('subhomes', 0, 375, 375, 'en', 0, 'magazine')");
+##On boucle sur tous les termes de la taxo Subhomes
+foreach ($termList as $taxoTerm => $view) {
 
+  ##on cherche l'Objet
+  $termsArray = taxonomy_term_load_multiple_by_name($taxoTerm, "subhomes");
 
-$schema = Database::getConnection()->query("
-ALTER TABLE `taxonomy_term__field_field_content_type`
-  ADD PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
-  ADD KEY `bundle` (`bundle`),
-  ADD KEY `revision_id` (`revision_id`)
-");
+  ##On boucle sur tous les termes trouvés (Magazine par exemple..)
+  foreach ($termsArray as $term_id => $termObject) {
+    #related_view_path
+    $termObject->set('field_related_view_path', $view);
+
+    $termObject->save();
+
+  }
+}
+
 
 #A enlever à la fin des tests
 throw new UpdateException();
