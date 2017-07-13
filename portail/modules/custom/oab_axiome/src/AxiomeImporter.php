@@ -61,7 +61,7 @@ class AxiomeImporter{
                           $this->axiome_notification[] = "file : ".$file;
 
                           if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')){
-                              $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER.'\n' ;
+                              $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER."\n" ;
                               file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
 
                               // Scan du dossier "import"
@@ -511,7 +511,7 @@ class AxiomeImporter{
                         // Si c'est une fiche existante
                         if ($nid) {
                             $nid = (int)$nid;
-                            $this->message .= "Chargement du NODE";
+                            $this->message .= "Chargement du NODE \n";
                             $node = Node::load($nid);
                           $node->set('moderation_state', array('target_id' => 'draft'));
 
@@ -543,7 +543,7 @@ class AxiomeImporter{
                         if (isset($node)) {
 
 													$this->message .=  "Parsing content \n";
-													AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language);
+													AxiomeContentImporter::parseContent($node, $fiche_dir . '/' . $file_fiche , $language, $this->message);
 
                             //("création des familles");
                             $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);

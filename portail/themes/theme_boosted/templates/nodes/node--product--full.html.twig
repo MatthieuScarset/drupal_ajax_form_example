@@ -95,7 +95,7 @@ view_mode ? view_mode|clean_class,
          {{ author_name }}
      {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-
+{{ kint(content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes) }}
 {% if content.axiome_data is defined %}
     {% set field_header = content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes %}
     {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
@@ -131,25 +131,25 @@ view_mode ? view_mode|clean_class,
 
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_axiome_data') }}
     </div>
-    {% if field_header is defined %}
+    {% if field_header is not null %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
     {% endif %}
 
-    {% if field_detailed_content is defined %}
+    {% if field_detailed_content is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
     {% endif %}
 
-    {% if field_simple_content is defined %}
+    {% if field_simple_content is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with {'field_simple_content': field_simple_content, 'id_fiche': id_fiche} %}
     {% endif %}
 
-    {% if field_customer_case is defined %}
+    {% if field_customer_case is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
     {% endif %}
-    {% if axiomeDocs is defined %}
+    {% if axiomeDocs is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
     {% endif %}
-    {% if related_offers is defined %}
+    {% if related_offers is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}
     {% endif %}
 
