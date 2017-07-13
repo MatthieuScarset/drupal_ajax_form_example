@@ -2247,17 +2247,24 @@ $config_group->setData(
 				'config' =>
 					array (
 						0 => 'core.entity_view_mode.node.subhome',
-						1 => 'taxonomy.vocabulary.blog_thematics',
-						2 => 'taxonomy.vocabulary.document_types',
-						3 => 'taxonomy.vocabulary.industries',
-						4 => 'taxonomy.vocabulary.solutions',
+						1 => 'node.type.press_kit',
+						2 => 'node.type.press_release',
+						3 => 'taxonomy.vocabulary.blog_thematics',
+						4 => 'taxonomy.vocabulary.document_types',
+						5 => 'taxonomy.vocabulary.industries',
+						6 => 'taxonomy.vocabulary.jobs_profiles',
+						7 => 'taxonomy.vocabulary.market_segments',
+						8 => 'taxonomy.vocabulary.partner_types',
+						9 => 'taxonomy.vocabulary.regions',
+						10 => 'taxonomy.vocabulary.solutions',
 					),
 				'module' =>
 					array (
 						0 => 'node',
-						1 => 'taxonomy',
-						2 => 'user',
-						3 => 'views_infinite_scroll',
+						1 => 'oab_backoffice',
+						2 => 'taxonomy',
+						3 => 'user',
+						4 => 'views_infinite_scroll',
 					),
 			),
 		'id' => 'subhomes',
@@ -3135,6 +3142,132 @@ $config_group->setData(
 												'error_message' => true,
 												'plugin_id' => 'taxonomy_index_tid',
 											),
+										'tid' =>
+											array (
+												'id' => 'tid',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_op',
+														'label' => 'By job profile',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_op',
+														'identifier' => 'tid',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'jobs_profiles',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
+										'tid_1' =>
+											array (
+												'id' => 'tid_1',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_1_op',
+														'label' => 'By market segment',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_1_op',
+														'identifier' => 'tid_1',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'market_segments',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
 									),
 								'filter_groups' =>
 									array (
@@ -3435,6 +3568,69 @@ $config_group->setData(
 												'error_message' => true,
 												'plugin_id' => 'taxonomy_index_tid',
 											),
+										'tid' =>
+											array (
+												'id' => 'tid',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_op',
+														'label' => 'By job profile',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_op',
+														'identifier' => 'tid',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'jobs_profiles',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
 									),
 								'filter_groups' =>
 									array (
@@ -3731,6 +3927,69 @@ $config_group->setData(
 												'type' => 'select',
 												'limit' => true,
 												'vid' => 'document_types',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
+										'tid' =>
+											array (
+												'id' => 'tid',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_op',
+														'label' => 'By job profile',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_op',
+														'identifier' => 'tid',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'jobs_profiles',
 												'hierarchy' => false,
 												'error_message' => true,
 												'plugin_id' => 'taxonomy_index_tid',
@@ -4272,6 +4531,132 @@ $config_group->setData(
 												'error_message' => true,
 												'plugin_id' => 'taxonomy_index_tid',
 											),
+										'tid' =>
+											array (
+												'id' => 'tid',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_op',
+														'label' => 'By type',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_op',
+														'identifier' => 'tid',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'partner_types',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
+										'tid_1' =>
+											array (
+												'id' => 'tid_1',
+												'table' => 'taxonomy_index',
+												'field' => 'tid',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'or',
+												'value' =>
+													array (
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'tid_1_op',
+														'label' => 'By region',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'tid_1_op',
+														'identifier' => 'tid_1',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => false,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'reduce_duplicates' => false,
+												'type' => 'select',
+												'limit' => true,
+												'vid' => 'regions',
+												'hierarchy' => false,
+												'error_message' => true,
+												'plugin_id' => 'taxonomy_index_tid',
+											),
 									),
 								'filter_groups' =>
 									array (
@@ -4449,6 +4834,67 @@ $config_group->setData(
 												'entity_field' => 'langcode',
 												'plugin_id' => 'language',
 											),
+										'type' =>
+											array (
+												'id' => 'type',
+												'table' => 'node_field_data',
+												'field' => 'type',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => 'in',
+												'value' =>
+													array (
+														'press_release' => 'press_release',
+														'press_kit' => 'press_kit',
+													),
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'type_op',
+														'label' => 'By type',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'type_op',
+														'identifier' => 'type',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+														'reduce' => true,
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'entity_type' => 'node',
+												'entity_field' => 'type',
+												'plugin_id' => 'bundle',
+											),
 										'field_solution_target_id' =>
 											array (
 												'id' => 'field_solution_target_id',
@@ -4511,6 +4957,116 @@ $config_group->setData(
 												'hierarchy' => false,
 												'error_message' => true,
 												'plugin_id' => 'taxonomy_index_tid',
+											),
+										'node_year' =>
+											array (
+												'id' => 'node_year',
+												'table' => 'node_field_data',
+												'field' => 'node_year',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => '=',
+												'value' => '01',
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'node_year_op',
+														'label' => 'By year',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'node_year_op',
+														'identifier' => 'node_year',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'entity_type' => 'node',
+												'plugin_id' => 'node_year',
+											),
+										'node_month' =>
+											array (
+												'id' => 'node_month',
+												'table' => 'node_field_data',
+												'field' => 'node_month',
+												'relationship' => 'none',
+												'group_type' => 'group',
+												'admin_label' => '',
+												'operator' => '=',
+												'value' => '01',
+												'group' => 1,
+												'exposed' => true,
+												'expose' =>
+													array (
+														'operator_id' => 'node_month_op',
+														'label' => 'By month',
+														'description' => '',
+														'use_operator' => false,
+														'operator' => 'node_month_op',
+														'identifier' => 'node_month',
+														'required' => false,
+														'remember' => false,
+														'multiple' => false,
+														'remember_roles' =>
+															array (
+																'authenticated' => 'authenticated',
+																'anonymous' => '0',
+																'administrator' => '0',
+																'chief_editor' => '0',
+																'digital_admin' => '0',
+																'webform_manager' => '0',
+																'contributor' => '0',
+															),
+													),
+												'is_grouped' => false,
+												'group_info' =>
+													array (
+														'label' => '',
+														'description' => '',
+														'identifier' => '',
+														'optional' => true,
+														'widget' => 'select',
+														'multiple' => false,
+														'remember' => false,
+														'default_group' => 'All',
+														'default_group_multiple' =>
+															array (
+															),
+														'group_items' =>
+															array (
+															),
+													),
+												'entity_type' => 'node',
+												'plugin_id' => 'node_month',
 											),
 									),
 								'filter_groups' =>
