@@ -117,7 +117,17 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           #$breadcrumb->addLink(Link::createFromRoute($term->get('name'), '<none>'));
           #$link = url('taxonomy/term/1');
           #kint($term->get('field_content_type'));
-          kint($term);
+          #kint($term->get('field_related_view_path')->getValue());
+
+          $value = $term->get('field_related_view_path')->getValue();
+          if (isset($value[0]['value'])) {
+            $view = \Drupal\views\Views::getView('subhomes' );
+            #$view->setDisplay($value[0]['value']);
+            $displayObj = $view->getDisplay('page_catalogue');
+            $displayName = $displayObj->display['display_options']['title'];
+            kint($displayObj);
+            $breadcrumb->addLink(Link::createFromRoute(t($displayName), '<none>'));
+          }
         }
 
 
@@ -133,7 +143,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
       //  kint($displayObj->view->storage);
 
-        $breadcrumb->addLink(Link::createFromRoute(t($contentType), '<none>'));
+
       }
     }
 
