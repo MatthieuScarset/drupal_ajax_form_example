@@ -95,7 +95,6 @@ view_mode ? view_mode|clean_class,
          {{ author_name }}
      {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-{{ kint(content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes) }}
 {% if content.axiome_data is defined %}
     {% set field_header = content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes %}
     {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
