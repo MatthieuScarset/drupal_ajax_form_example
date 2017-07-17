@@ -1,60 +1,61 @@
 <?php
 /***********************
- * Article de blog
+ * Article de blog OK
  ***********************/
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('node.type.customer_story');
+$config_group = $config_factory->getEditable('node.type.blog_post');
 $config_group->setData(
-  array (
-    'uuid' => '19514e03-fd62-4f5d-8e84-7db58bada375',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Blog post  ',
-    'type' => 'blog_post',
-    'description' => '',
-    'help' => '',
-    'new_revision' => false,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '19514e03-fd62-4f5d-8e84-7db58bada375',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Blog post',
+		'type' => 'blog_post',
+		'description' => '',
+		'help' => '',
+		'new_revision' => false,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
+
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('node.type.blog_post', array (
 'name' => 'Article de blog',
@@ -67,8 +68,47 @@ $collection->write('node.type.blog_post', array (
 
 
 /***********************
- * Pays
+ * Pays OK
  ***********************/
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('node.type.country');
+$config_group->setData(
+	array (
+		'uuid' => 'd41b95f2-6aa0-464e-92f0-339b8c74143a',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+			),
+		'name' => 'Country',
+		'type' => 'country',
+		'description' => '',
+		'help' => '',
+		'new_revision' => false,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
+);
+$config_group->save(TRUE);
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('node.type.country', array (
@@ -81,59 +121,59 @@ $collection->write('node.type.country', array (
 ));
 
 /***********************
- * Témoignage client
+ * Témoignage client OK
  ***********************/
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.customer_story');
 $config_group->setData(
-  array (
-    'uuid' => '69b3500d-d0b5-4abb-b29a-3cdf820ccc95',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Case study',
-    'type' => 'customer_story',
-    'description' => '',
-    'help' => '',
-    'new_revision' => true,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '69b3500d-d0b5-4abb-b29a-3cdf820ccc95',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Case study',
+		'type' => 'customer_story',
+		'description' => '',
+		'help' => '',
+		'new_revision' => true,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -148,7 +188,7 @@ $collection->write('node.type.customer_story', array (
 ));
 
 /***********************
- * Document
+ * Document OK
  ***********************/
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
@@ -162,59 +202,59 @@ $collection->write('node.type.document', array (
 ));
 
 /***********************
- * Page full html
+ * Page full html OK
  ***********************/
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.full_html');
 $config_group->setData(
-  array (
-    'uuid' => 'd725e214-2c7a-4ea2-81c7-26a6b2e23fc9',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Full html page',
-    'type' => 'full_html',
-    'description' => '',
-    'help' => '',
-    'new_revision' => true,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => 'd725e214-2c7a-4ea2-81c7-26a6b2e23fc9',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Full html page',
+		'type' => 'full_html',
+		'description' => '',
+		'help' => '',
+		'new_revision' => true,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -229,60 +269,60 @@ $collection->write('node.type.full_html', array (
 ));
 
 /***********************
- * Industrie
+ * Industrie OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.industry');
 $config_group->setData(
-  array (
-    'uuid' => '1316492b-212a-4d06-b57f-f6e6dbf0ee29',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Industry',
-    'type' => 'industry',
-    'description' => '',
-    'help' => '',
-    'new_revision' => true,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '1316492b-212a-4d06-b57f-f6e6dbf0ee29',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Industry',
+		'type' => 'industry',
+		'description' => '',
+		'help' => '',
+		'new_revision' => true,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -297,60 +337,60 @@ $collection->write('node.type.industry', array (
 ));
 
 /***********************
- * Article de magazine
+ * Article de magazine OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.magazine');
 $config_group->setData(
-  array (
-    'uuid' => '0f7e9606-7f88-4c00-884e-3e302f386f63',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Article de magazine',
-    'type' => 'magazine',
-    'description' => '',
-    'help' => '',
-    'new_revision' => true,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '0f7e9606-7f88-4c00-884e-3e302f386f63',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Magazine article',
+		'type' => 'magazine',
+		'description' => '',
+		'help' => '',
+		'new_revision' => true,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -365,46 +405,46 @@ $collection->write('node.type.magazine', array (
 ));
 
 /***********************
- * Bureau
+ * Bureau OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.office');
 $config_group->setData(
-  array (
-    'uuid' => '6b1801ef-2ee2-4683-9bb2-0a8cafea144e',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-      ),
-    'name' => 'Office',
-    'type' => 'office',
-    'description' => '',
-    'help' => '',
-    'new_revision' => false,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '6b1801ef-2ee2-4683-9bb2-0a8cafea144e',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+			),
+		'name' => 'Office',
+		'type' => 'office',
+		'description' => '',
+		'help' => '',
+		'new_revision' => false,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -419,7 +459,7 @@ $collection->write('node.type.office', array (
 ));
 
 /***********************
- * Partenaire
+ * Partenaire OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
@@ -691,7 +731,7 @@ $collection->write('node.type.product', array (
 ));
 
 /***********************
- * Bloggeur
+ * Bloggeur OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
@@ -745,7 +785,7 @@ $collection->write('node.type.profile', array (
 ));
 
 /***********************
- * Région
+ * Région OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
@@ -813,60 +853,60 @@ $collection->write('node.type.region', array (
 ));
 
 /***********************
- * Page simple
+ * Page simple OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('node.type.simple_page');
 $config_group->setData(
-  array (
-    'uuid' => '79ce0bcf-7a44-4600-a616-cd16b748035f',
-    'langcode' => 'en',
-    'status' => true,
-    'dependencies' =>
-      array (
-        'module' =>
-          array (
-            0 => 'menu_ui',
-            1 => 'workbench_access',
-            2 => 'workbench_moderation',
-          ),
-      ),
-    'third_party_settings' =>
-      array (
-        'menu_ui' =>
-          array (
-            'available_menus' =>
-              array (
-              ),
-            'parent' => '',
-          ),
-        'workbench_access' =>
-          array (
-            'workbench_access_status' => false,
-          ),
-        'workbench_moderation' =>
-          array (
-            'enabled' => true,
-            'allowed_moderation_states' =>
-              array (
-                0 => 'published',
-                1 => 'archived',
-                2 => 'draft',
-                3 => 'needs_review',
-                4 => 'unpublished',
-              ),
-            'default_moderation_state' => 'draft',
-          ),
-      ),
-    'name' => 'Simple page',
-    'type' => 'simple_page',
-    'description' => '',
-    'help' => '',
-    'new_revision' => true,
-    'preview_mode' => 1,
-    'display_submitted' => false,
-  )
+	array (
+		'uuid' => '79ce0bcf-7a44-4600-a616-cd16b748035f',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'menu_ui',
+						1 => 'workbench_access',
+						2 => 'workbench_moderation',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'menu_ui' =>
+					array (
+						'available_menus' =>
+							array (
+							),
+						'parent' => '',
+					),
+				'workbench_access' =>
+					array (
+						'workbench_access_status' => false,
+					),
+				'workbench_moderation' =>
+					array (
+						'enabled' => true,
+						'allowed_moderation_states' =>
+							array (
+								0 => 'published',
+								1 => 'archived',
+								2 => 'draft',
+								3 => 'needs_review',
+								4 => 'unpublished',
+							),
+						'default_moderation_state' => 'draft',
+					),
+			),
+		'name' => 'Simple page',
+		'type' => 'simple_page',
+		'description' => '',
+		'help' => '',
+		'new_revision' => true,
+		'preview_mode' => 1,
+		'display_submitted' => false,
+	)
 );
 $config_group->save(TRUE);
 
@@ -895,7 +935,7 @@ $collection->write('node.type.solution', array (
 ));
 
 /***********************
- * Formulaire
+ * Formulaire OK
  ***********************/
 
 $config_factory = \Drupal::configFactory();
@@ -932,7 +972,7 @@ $config_group->setData(
       ),
     'name' => 'Webform',
     'type' => 'webform',
-    'description' => 'Une page de base avec un formulaire attaché',
+    'description' => 'A basic page with an attached webform',
     'help' => '',
     'new_revision' => false,
     'preview_mode' => 1,
@@ -951,4 +991,38 @@ $collection->write('node.type.webform', array (
   'name' => 'Webform',
 ));
 
+
+/**********************************
+ * Ajout de la config de traduction
+ **********************************/
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('language.content_settings.menu_link_content.menu_link_content');
+$config_group->setData(
+	array (
+		'uuid' => 'aff3059d-a120-42f5-a25b-dc231d430de4',
+		'langcode' => 'en',
+		'status' => true,
+		'dependencies' =>
+			array (
+				'module' =>
+					array (
+						0 => 'content_translation',
+						1 => 'menu_link_content',
+					),
+			),
+		'third_party_settings' =>
+			array (
+				'content_translation' =>
+					array (
+						'enabled' => true,
+					),
+			),
+		'id' => 'menu_link_content.menu_link_content',
+		'target_entity_type_id' => 'menu_link_content',
+		'target_bundle' => 'menu_link_content',
+		'default_langcode' => 'site_default',
+		'language_alterable' => true,
+	)
+);
+$config_group->save();
 //throw new \Drupal\Core\Utility\UpdateException();

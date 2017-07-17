@@ -122,6 +122,7 @@ namespace :deploy do
    desc 'Delete unnecessary files'
    task :delete_unnecessary_files do
     on roles(:all) do
+    execute :rm, "-rf #{release_path}/scripts"
      execute :rm, "-rf #{release_path}/config"
      execute :rm, "-rf #{release_path}/.git"
      execute :rm, "-rf #{release_path}/public"
