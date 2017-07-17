@@ -58,7 +58,9 @@
    {# affiche le contenu saisi dans le back office: #}
     <div class="container">
         <div class="row">
-          {{ content }}
+            {% if content.numero is null %}
+                {{ content }}
+            {% endif %}
             <div class="col-md-7 col-sm-12 nopadding">
                 <span style="font-size: 2rem; font-weight: bold;">Nous contacter ?</span>
                 <span class="wrapper_numero" style="display: inline-block; background-color: white; margin-left: 2rem;">
@@ -74,6 +76,7 @@
                     {% if content.detail_numero is not null %}
                         {{ content.detail_numero }}
                     {% else %}
+                        {{ content }}
                         Lorem ipsum sit amet,
                         <br/>
                         consectetuer adipiscing elit, sed
