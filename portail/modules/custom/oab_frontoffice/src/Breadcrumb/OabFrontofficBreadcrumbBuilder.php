@@ -39,114 +39,89 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       ->get('current_route_match');
     $route_name = $current_route_match->getRouteName();
 
-    /*$contentType = [
-      'blog_post'       => 'page_blog',
-      'customer_story'  => 'page_customer',
-      'document'        => 'page_document',
-      'magazine'        => 'page_magazine',
-      'office'          => '',
-      'partner'         => 'page_partners',
-      'press_kit'       => 'page_press',
-      'press_release'   => 'page_press',
-      'produit'         => 'page_catalogue'
-    ];*/
-
-/*
-    $parameters = $route_match->getParameters()->all();
-    if( isset($parameters['node'])
-      && $parameters['node']->getType() != 'simple_page' ) {
-      Drupal::logger('oab_frontoffice')->notice("Breadcrumbs::build : Hors simple page");
-      $breadcrumb = [Link::createFromRoute(t('Home'), '<front>')];
-      $breadcrumb[] = Link::createFromRoute(t('Blog2'), '<<<your route for blog>>>');
-      kint($breadcrumb);
-      return $breadcrumb;
-    }
-*/
 
     ##On crée le breadcrumb
     $breadcrumb = new Breadcrumb();
     ##Par défaut, il est vide, sans le "home".
+    ##Du coup, s'il ne correspond à aucun des cas ci dessous,
+    # rien ne s'affiche, même pas la petite maison
 
 
-    #$contentPageTypes = ["blog_post", ];
-    /*if( isset($parameters['node'])
-      && $parameters['node']->getType() != 'simple_page' )
-*/
-
-
-
-
-
-    ##Si c'est une subhome
+    ## Si la page est une subhome,
+    ## on affiche le nom de la subhome, sans lien
     if (preg_match('/^view.subhomes/', $route_name)) {
-      ##On est dans un subhome
+
+      ##On commence par afficher la racine du fil d'ariane
       $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
 
+      ##On recupère la display view correspondante
       $view = \Drupal\views\Views::getView('subhomes' );
-      //kint($view);
       $view->setDisplay($parameters['display_id']);
       $displayObj = $view->getDisplay();
 
+      #Et on en recupère son titre pour l'affichage
       $displayName = $displayObj->display['display_options']['title'];
 
+      ##On ajoute un lien vide au fil d'ariane
       $breadcrumb->addLink(Link::createFromRoute(t($displayName), '<none>' ));
 
     } else {
+
+      #Liste des types de contenu pour cette config du fil d'ariane
+      $contentTypes = ["blog_post","customer_story", "document", "magazine","office", "partner",
+        "press_kit", "press_release","product" ];
+
+
       $node = $route_match->getParameter('node');
 
+     ##Si on a un bien un node en affichage,
+      # et que le type de contenu est dans le tableau ci-dessus
+      # et qu'il possède le champs 'field_subhome'
+      if (isset($node)
+        && in_array($parameters['node']->getType(), $contentTypes)
+        && $node->hasField('field_subhome')) {
+
+        ##Affichage du fil d'ariane :
+        ## Home > Subhome de rattachement (Lien vers la display view)
 
 
-      // kint($subhomes);
-      if (isset($node) && $parameters['node']->getType() != 'simple_page') {
-
-        $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
-
-
+        ##On recupère la valeur contenue dans le field_subhome (subhome de rattachement)
         $subhomes = $node->get('field_subhome')->getValue();
+
+        ##On vérifie qu'on a bien un résultat
         if (is_array($subhomes) && count($subhomes)>0) {
-          //$taxo = \Drupal\taxonomy\Entity\Term::load($subhomes[0]['target_id']);
-          //$taxo = \Drupal\taxonomy\Entity\Term::load('subhomes');
-          //kint($taxo);
+
+          ##Récupération de la taxo pour la target du subhome en question
           $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($subhomes[0]['target_id']);
-          /*$field_content_type = $term->get('field_field_content_type');
 
-          if ($field_content_type != null) {
+          ##Si le terme a le field "field_related_view_path'
+          #(contient le nom machine de la display view correspondante)
+          if ($term->hasField('field_related_view_path')) {
+            $value = $term->get('field_related_view_path')->getValue();
 
-          }*/
-          #$breadcrumb->addLink(Link::createFromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->tid->value], ['absolute' => TRUE]) );
-          #$breadcrumb->addLink(Link::createFromRoute($term->get('name'), '<none>'));
-          #$link = url('taxonomy/term/1');
-          #kint($term->get('field_content_type'));
-          #kint($term->get('field_related_view_path')->getValue());
+            ##on test si on a un resultat
+            if (isset($value[0]['value'])) {
+              ## On recupère le nom machine de la display view
+              $display_machineName = $value[0]['value'];
 
-          $value = $term->get('field_related_view_path')->getValue();
-          if (isset($value[0]['value'])) {
-            $view = \Drupal\views\Views::getView('subhomes' );
-            #$view->setDisplay($value[0]['value']);
-            $display_machineName = $value[0]['value'];
-            $view->execute($display_machineName);
-            $displayObj = $view->getDisplay();
-            $displayName = $displayObj->display['display_options']['title'];
-            #kint($b);
-           #kint($displayObj);
-            #$displayObj->getRouteName();
-            $breadcrumb->addLink(Link::createFromRoute(t($displayName),'<none>'));
+              ##On charge la vue "Subhome", puis on set avec la display view de la subhome
+              $view = \Drupal\views\Views::getView('subhomes');
+              $view->execute($display_machineName);
+              $displayObj = $view->getDisplay();
+
+              ##On en recupère le nom de la vue (pour le nom du lien)
+              $displayName = $displayObj->display['display_options']['title'];
+
+              ##Et la route de la display view (pour en créer l'url)
+              $routeName = $displayObj->getRouteName();
+
+
+              ##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
+              $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+              $breadcrumb->addLink(Link::createFromRoute(t($displayName), $routeName));
+            }
           }
         }
-
-
-
-
-        $contentType = $parameters['node']->getType();
-
-        $view = \Drupal\views\Views::getView('subhomes' );
-        //$view->setDisplay($parameters['display_id']);
-        //$displayObj = $view->getDisplay();
-
-        //kint($node);
-
-      //  kint($displayObj->view->storage);
-
 
       }
     }
