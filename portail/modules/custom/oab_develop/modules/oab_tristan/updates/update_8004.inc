@@ -40,29 +40,29 @@ if (isset($modules['easy_breadcrumb'])) {
 #################
 ## Ajout du nouveau field pour les terms des subhomes
 
-$field_storage = FieldStorageConfig::loadByName('taxonomy_term', 'field_related_view_path');
+$field_storage = FieldStorageConfig::loadByName('taxonomy_term', 'field_related_display_view');
 if(empty($field_storage)) {
   FieldStorageConfig::create(array(
-    'field_name' => 'field_related_view_path',
+    'field_name' => 'field_related_display_view',
     'entity_type' => 'taxonomy_term',
     'type' => 'string',
   ))->save();
 }
 
-$field = FieldConfig::loadByName('taxonomy_term', 'subhomes', 'field_related_view_path');
+$field = FieldConfig::loadByName('taxonomy_term', 'subhomes', 'field_related_display_view');
 if(empty($field)) {
   $config_array = array(
-    'field_name' =>  'field_related_view_path',
+    'field_name' =>  'field_related_display_view',
     'entity_type' => 'taxonomy_term',
     'bundle' => 'subhomes',
-    'label' => 'related_view_path',
+    'label' => 'related_display_view',
     'required' => TRUE,
   );
   FieldConfig::create($config_array)->save();
 }
 
 
-$config_group = $config_factory->getEditable('field.field.taxonomy_term.subhomes.field_related_view_path');
+$config_group = $config_factory->getEditable('field.field.taxonomy_term.subhomes.field_related_display_view');
 $config_group->setData(
   array (
     'uuid' => '7a77e91d-f790-4ddc-a603-357484d3613b',
@@ -72,15 +72,15 @@ $config_group->setData(
       array (
         'config' =>
           array (
-            0 => 'field.storage.taxonomy_term.field_related_view_path',
+            0 => 'field.storage.taxonomy_term.field_related_display_view',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
       ),
-    'id' => 'taxonomy_term.subhomes.field_related_view_path',
-    'field_name' => 'field_related_view_path',
+    'id' => 'taxonomy_term.subhomes.field_related_display_view',
+    'field_name' => 'field_related_display_view',
     'entity_type' => 'taxonomy_term',
     'bundle' => 'subhomes',
-    'label' => 'related_view_path',
+    'label' => 'related_display_view',
     'description' => '',
     'required' => true,
     'translatable' => false,
@@ -97,7 +97,7 @@ $config_group->setData(
 
 $config_group->save(TRUE);
 
-$config_group = $config_factory->getEditable('field.storage.taxonomy_term.field_related_view_path');
+$config_group = $config_factory->getEditable('field.storage.taxonomy_term.field_related_display_view');
 $config_group->setData(
   array (
     'uuid' => 'e3ccb4c4-5239-44f0-8abd-5eeffa106884',
@@ -110,8 +110,8 @@ $config_group->setData(
             0 => 'taxonomy',
           ),
       ),
-    'id' => 'taxonomy_term.field_related_view_path',
-    'field_name' => 'field_related_view_path',
+    'id' => 'taxonomy_term.field_related_display_view',
+    'field_name' => 'field_related_display_view',
     'entity_type' => 'taxonomy_term',
     'type' => 'string',
     'settings' =>
@@ -144,7 +144,7 @@ $config_group->setData(
       array (
         'config' =>
           array (
-            0 => 'field.field.taxonomy_term.subhomes.field_related_view_path',
+            0 => 'field.field.taxonomy_term.subhomes.field_related_display_view',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
         'module' =>
@@ -173,7 +173,7 @@ $config_group->setData(
               array (
               ),
           ),
-        'field_related_view_path' =>
+        'field_related_display_view' =>
           array (
             'weight' => 4,
             'settings' =>
@@ -244,7 +244,7 @@ $config_group->setData(
       array (
         'config' =>
           array (
-            0 => 'field.field.taxonomy_term.subhomes.field_related_view_path',
+            0 => 'field.field.taxonomy_term.subhomes.field_related_display_view',
             1 => 'taxonomy.vocabulary.subhomes',
           ),
         'module' =>
@@ -271,7 +271,7 @@ $config_group->setData(
               array (
               ),
           ),
-        'field_related_view_path' =>
+        'field_related_display_view' =>
           array (
             'weight' => 3,
             'label' => 'above',
@@ -318,8 +318,8 @@ foreach ($termList as $taxoTerm => $view) {
 
   ##On boucle sur tous les termes trouvés (Magazine par exemple..)
   foreach ($termsArray as $term_id => $termObject) {
-    #related_view_path
-    $termObject->set('field_related_view_path', $view);
+    #related_display_view
+    $termObject->set('field_related_display_view', $view);
 
     $termObject->save();
 
