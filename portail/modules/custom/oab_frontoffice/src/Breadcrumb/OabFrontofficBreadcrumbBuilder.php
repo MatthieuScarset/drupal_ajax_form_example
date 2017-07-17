@@ -31,7 +31,16 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    * @inheritdoc
    */
   public function build(RouteMatchInterface $route_match) {
-    # Ici, on personnalise le breadcrumb
+    # Ici, on personnalise le fil d'ariane
+
+    /**
+     * 3 cas :
+     *    > On est dans une subhome : affichage du home + nom de la subhome non cliquable
+     *    > On est dans un article avec une subhome de rattachement
+     *        - Affichage du home + nom de la subhome de rattachement cliquable
+     *    > On est ailleurs : Pas de fil d'ariane
+     */
+
 
     $parameters = $route_match->getParameters()->all();
 
@@ -60,16 +69,16 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $displayObj = $view->getDisplay();
 
       #Et on en recupère son titre pour l'affichage
-      $displayName = $displayObj->display['display_options']['title'];
+      $displayName = $displayObj->display['display_title'];
 
       ##On ajoute un lien vide au fil d'ariane
-      $breadcrumb->addLink(Link::createFromRoute(t($displayName), '<none>' ));
+      $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
 
     } else {
 
       #Liste des types de contenu pour cette config du fil d'ariane
-      $contentTypes = ["blog_post","customer_story", "document", "magazine","office", "partner",
-        "press_kit", "press_release","product" ];
+      $contentTypes = ["blog_post","customer_story", "document", "magazine",
+        "office", "partner", "press_kit", "press_release","product" ];
 
 
       $node = $route_match->getParameter('node');
@@ -84,7 +93,6 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         ##Affichage du fil d'ariane :
         ## Home > Subhome de rattachement (Lien vers la display view)
 
-
         ##On recupère la valeur contenue dans le field_subhome (subhome de rattachement)
         $subhomes = $node->get('field_subhome')->getValue();
 
@@ -92,12 +100,14 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         if (is_array($subhomes) && count($subhomes)>0) {
 
           ##Récupération de la taxo pour la target du subhome en question
-          $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($subhomes[0]['target_id']);
+          $term = \Drupal::entityTypeManager()
+                        ->getStorage('taxonomy_term')
+                        ->load($subhomes[0]['target_id']);
 
           ##Si le terme a le field "field_related_view_path'
           #(contient le nom machine de la display view correspondante)
-          if ($term->hasField('field_related_view_path')) {
-            $value = $term->get('field_related_view_path')->getValue();
+          if ($term->hasField('field_related_display_view')) {
+            $value = $term->get('field_related_display_view')->getValue();
 
             ##on test si on a un resultat
             if (isset($value[0]['value'])) {
@@ -110,15 +120,14 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
               $displayObj = $view->getDisplay();
 
               ##On en recupère le nom de la vue (pour le nom du lien)
-              $displayName = $displayObj->display['display_options']['title'];
+              $displayName = $displayObj->display['display_title'];
 
               ##Et la route de la display view (pour en créer l'url)
               $routeName = $displayObj->getRouteName();
 
-
               ##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
               $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
-              $breadcrumb->addLink(Link::createFromRoute(t($displayName), $routeName));
+              $breadcrumb->addLink(Link::createFromRoute($displayName, $routeName));
             }
           }
         }
