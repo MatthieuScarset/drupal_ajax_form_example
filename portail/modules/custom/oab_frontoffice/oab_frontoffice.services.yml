@@ -3,3 +3,7 @@ services:
     class: Drupal\oab_frontoffice\EventSubscriber\NodeSourcePathEvent
     tags:
       - { name: event_subscriber }
+  oab_frontoffice.breadcrumb:
+    class: Drupal\oab_frontoffice\Breadcrumb\OabFrontofficBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
