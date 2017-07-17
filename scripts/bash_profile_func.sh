@@ -178,8 +178,8 @@ git_cleanup() {
 	then
 		#on récupère les branches mergées sur master
 		git checkout master && git branch --merged | grep -E -v 'master|recette|dev|updates' | xargs git branch -d
-		echo -e "${CYANFONCE}Votre GIT local est tout propre !{NEUTRE}"
-		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent{NEUTRE}"
+		echo -e "${CYANFONCE}Votre GIT local est tout propre !${NEUTRE}"
+		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
 		echo "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
@@ -192,8 +192,8 @@ git_cleanup_remote() {
 	then
 		#on récupère les branches mergées sur le master remote
 		git checkout master && git fetch -p && git branch -r --merged | grep -E -v 'master|recette|dev|updates' | sed -e 's/origin\//:/' | xargs git push origin
-		echo -e "${CYANFONCE}Votre GIT remote est tout propre !{NEUTRE}"
-		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent{NEUTRE}"
+		echo -e "${CYANFONCE}Votre GIT remote est tout propre !${NEUTRE}"
+		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
 		echo "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
