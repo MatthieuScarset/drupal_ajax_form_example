@@ -123,10 +123,14 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           if (isset($value[0]['value'])) {
             $view = \Drupal\views\Views::getView('subhomes' );
             #$view->setDisplay($value[0]['value']);
-            $displayObj = $view->getDisplay('page_catalogue');
+            $display_machineName = $value[0]['value'];
+            $view->execute($display_machineName);
+            $displayObj = $view->getDisplay();
             $displayName = $displayObj->display['display_options']['title'];
-            kint($displayObj);
-            $breadcrumb->addLink(Link::createFromRoute(t($displayName), '<none>'));
+            #kint($b);
+           #kint($displayObj);
+            #$displayObj->getRouteName();
+            $breadcrumb->addLink(Link::createFromRoute(t($displayName),'<none>'));
           }
         }
 
