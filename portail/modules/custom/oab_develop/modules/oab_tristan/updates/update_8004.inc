@@ -297,12 +297,12 @@ $config_group->save(TRUE);
 
 ##la liste des termes et du nom de la sous-vue correspondante
 $termList = [
-  "Cas clients"       => "page_customers",
+  "Cas clients"       => "page_customer",
   "Catalogue"         => "page_catalogue",
-  "Customer Stories"  => "page_customers",
-  "Library"           => "page_documents",
+  "Customer Stories"  => "page_customer",
+  "Library"           => "page_document",
   "Magazine"          => "page_magazine",
-  "Médiathèque"       => "page_documents",
+  "Médiathèque"       => "page_document",
   "Partenaires"       => "page_partners",
   "Partners"          => "page_partners",
   "Portfolio"         => "page_catalogue",
