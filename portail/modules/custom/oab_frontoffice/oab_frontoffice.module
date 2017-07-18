@@ -120,3 +120,9 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 		}
 	}
 }
+
+function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+  if ($route_match && $node = $route_match->getParameter('node')) {
+    $breadcrumb->addCacheableDependency($node);
+  }
+}
