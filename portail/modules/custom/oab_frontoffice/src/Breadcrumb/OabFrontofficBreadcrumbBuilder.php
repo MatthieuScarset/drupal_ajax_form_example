@@ -55,6 +55,14 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     ##Du coup, s'il ne correspond à aucun des cas ci dessous,
     # rien ne s'affiche, même pas la petite maison
 
+    ## Gestion du cache du breadcrumb (on lui dit qu'il est lié à cette url et ce noeud seulement)
+    # By setting a "cache context" to the "url", each requested URL gets it's own cache.
+    # This way a single breadcrumb isn't cached for all pages on the site.
+    $breadcrumb->addCacheContexts(["url"]);
+
+    # By adding "cache tags" for this specific node, the cache is invalidated when the node is edited.
+    $breadcrumb->addCacheTags(["node:{$node->nid->value}"]);
+
 
     ## Si la page est une subhome,
     ## on affiche le nom de la subhome, sans lien
