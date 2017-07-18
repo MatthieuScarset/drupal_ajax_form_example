@@ -282,3 +282,12 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state){
 		$form['field_regions_target_id']['#options'] = $regions;
 	}
 }
+
+/**
+ * Gestion du cache du breadcrumb : pour le lier au node
+ */
+function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+  if ($route_match && $node = $route_match->getParameter('node')) {
+    $breadcrumb->addCacheableDependency($node);
+  }
+}
