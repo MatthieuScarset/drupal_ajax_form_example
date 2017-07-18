@@ -189,3 +189,24 @@ git_merge() {
 	fi
 
 }
+
+## Surcharge de la fonction cap ** deploy
+## Se met sur la branche en question pour faire le deploy
+cap() {
+	##Si on fait un deploy,
+	if [[ "$2" == "deploy" ]]
+	then
+		##Je me met sur la branche correspondante
+		echo -e "${cyanfonce}git checkout "$1" && git pull${neutre}"
+		if ! git checkout "$1" && git pull
+		then
+		    echo -e "${rougefonce}Erreur lors de la commande \"git checkout $1 && git pull\" - ABANDON${neutre}"
+			##Si le checkout rate, je quitte
+			return
+		fi
+	fi
+
+	##Dans tous les cas, j'execute la commande demandée
+	echo -e "${cyanfonce}cap $@${neutre}"
+	command cap "$@"
+}
