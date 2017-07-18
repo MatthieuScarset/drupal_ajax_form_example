@@ -40,7 +40,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
      *        - Affichage du home + nom de la subhome de rattachement cliquable
      *    > On est ailleurs : Pas de fil d'ariane
      */
-
+    $node = $route_match->getParameter('node');
 
     $parameters = $route_match->getParameters()->all();
 
@@ -80,8 +80,6 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $contentTypes = ["blog_post","customer_story", "document", "magazine",
         "office", "partner", "press_kit", "press_release","product" ];
 
-
-      $node = $route_match->getParameter('node');
 
      ##Si on a un bien un node en affichage,
       # et que le type de contenu est dans le tableau ci-dessus
@@ -135,7 +133,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       }
     }
 
-
+    $breadcrumb->addCacheableDependency($node);
     return $breadcrumb;
 
   }
