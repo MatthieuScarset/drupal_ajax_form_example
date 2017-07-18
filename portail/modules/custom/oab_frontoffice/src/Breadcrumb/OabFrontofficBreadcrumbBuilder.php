@@ -73,7 +73,6 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
       ##On ajoute un lien vide au fil d'ariane
       $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
-      $breadcrumb->addCacheableDependency($node);
     } else {
 
       #Liste des types de contenu pour cette config du fil d'ariane
@@ -131,7 +130,6 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         }
 
       }
-      $breadcrumb->addCacheableDependency($node);
     }
 
     return $breadcrumb;

@@ -146,139 +146,145 @@ function clean_exposed_filters_by_language($options, $txtAll){
 /**
  * Implements hook_views_query_alter().
  */
-function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state){
-	// subhome blogs
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
-		$themes = clean_exposed_filters_by_language(
-			$form['field_blog_thematic_target_id']['#options'],
-			'By thematic'
-		);
-		$form['field_blog_thematic_target_id']['#options'] = $themes;
-	}
-	// subhome magazine
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
-		$themes = clean_exposed_filters_by_language(
-			$form['field_blog_thematic_target_id']['#options'],
-			'By thematic'
-		);
-		$form['field_blog_thematic_target_id']['#options'] = $themes;
-	}
-	// subhome mediatheque
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
-		$themes = clean_exposed_filters_by_language(
-			$form['field_blog_thematic_target_id']['#options'],
-			'By thematic'
-		);
-		$form['field_blog_thematic_target_id']['#options'] = $themes;
+function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
+  // subhome blogs
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
+    $themes = clean_exposed_filters_by_language(
+      $form['field_blog_thematic_target_id']['#options'],
+      'By thematic'
+    );
+    $form['field_blog_thematic_target_id']['#options'] = $themes;
+  }
+  // subhome magazine
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
+    $themes = clean_exposed_filters_by_language(
+      $form['field_blog_thematic_target_id']['#options'],
+      'By thematic'
+    );
+    $form['field_blog_thematic_target_id']['#options'] = $themes;
+  }
+  // subhome mediatheque
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
+    $themes = clean_exposed_filters_by_language(
+      $form['field_blog_thematic_target_id']['#options'],
+      'By thematic'
+    );
+    $form['field_blog_thematic_target_id']['#options'] = $themes;
 
-		$types = clean_exposed_filters_by_language(
-			$form['field_document_type_target_id']['#options'],
-			'By type'
-		);
-		$form['field_document_type_target_id']['#options'] = $types;
+    $types = clean_exposed_filters_by_language(
+      $form['field_document_type_target_id']['#options'],
+      'By type'
+    );
+    $form['field_document_type_target_id']['#options'] = $types;
 
-		$jobs = clean_exposed_filters_by_language(
-			$form['field_jobs_target_id']['#options'],
-			'By job profile'
-		);
-		$form['field_jobs_target_id']['#options'] = $jobs;
+    $jobs = clean_exposed_filters_by_language(
+      $form['field_jobs_target_id']['#options'],
+      'By job profile'
+    );
+    $form['field_jobs_target_id']['#options'] = $jobs;
 
-		$industries = clean_exposed_filters_by_language(
-			$form['field_industry_target_id']['#options'],
-			'By industry'
-		);
-		$form['field_industry_target_id']['#options'] = $industries;
-	}
-	// subhome presse
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-		$targets = clean_exposed_filters_by_language(
-			$form['field_type_target_id']['#options'],
-			'By type'
-		);
-		$form['field_type_target_id']['#options'] = $targets;
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'By industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
+  }
+  // subhome presse
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
+    $targets = clean_exposed_filters_by_language(
+      $form['field_type_target_id']['#options'],
+      'By type'
+    );
+    $form['field_type_target_id']['#options'] = $targets;
 
-		$solutions = clean_exposed_filters_by_language(
-			$form['field_solution_target_id']['#options'],
-			'By solution'
-		);
-		$form['field_solution_target_id']['#options'] = $solutions;
+    $solutions = clean_exposed_filters_by_language(
+      $form['field_solution_target_id']['#options'],
+      'By solution'
+    );
+    $form['field_solution_target_id']['#options'] = $solutions;
 
-		$years = clean_exposed_filters_by_language(
-			$form['field_year_target_id']['#options'],
-			'By year'
-		);
-		$form['field_year_target_id']['#options'] = $years;
+    $years = clean_exposed_filters_by_language(
+      $form['field_year_target_id']['#options'],
+      'By year'
+    );
+    $form['field_year_target_id']['#options'] = $years;
 
-		$months = clean_exposed_filters_by_language(
-			$form['field_month_target_id']['#options'],
-			'By month'
-		);
-		$form['field_month_target_id']['#options'] = $months;
-	}
-	// subhome produits
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
-		$solutions = clean_exposed_filters_by_language(
-			$form['field_solution_target_id']['#options'],
-			'By solution'
-		);
-		$form['field_solution_target_id']['#options'] = $solutions;
+    $months = clean_exposed_filters_by_language(
+      $form['field_month_target_id']['#options'],
+      'By month'
+    );
+    $form['field_month_target_id']['#options'] = $months;
+  }
+  // subhome produits
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
+    $solutions = clean_exposed_filters_by_language(
+      $form['field_solution_target_id']['#options'],
+      'By solution'
+    );
+    $form['field_solution_target_id']['#options'] = $solutions;
 
-		$industries = clean_exposed_filters_by_language(
-			$form['field_industry_target_id']['#options'],
-			'By industry'
-		);
-		$form['field_industry_target_id']['#options'] = $industries;
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'By industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
 
-		$jobs = clean_exposed_filters_by_language(
-			$form['field_jobs_target_id']['#options'],
-			'By job profile'
-		);
-		$form['field_jobs_target_id']['#options'] = $jobs;
+    $jobs = clean_exposed_filters_by_language(
+      $form['field_jobs_target_id']['#options'],
+      'By job profile'
+    );
+    $form['field_jobs_target_id']['#options'] = $jobs;
 
-		$markets = clean_exposed_filters_by_language(
-			$form['field_market_target_id']['#options'],
-			'By market segment'
-		);
-		$form['field_market_target_id']['#options'] = $markets;
-	}
-	// subhome temoignages
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
-		$solutions = clean_exposed_filters_by_language(
-			$form['field_solution_target_id']['#options'],
-			'By solution'
-		);
-		$form['field_solution_target_id']['#options'] = $solutions;
+    $markets = clean_exposed_filters_by_language(
+      $form['field_market_target_id']['#options'],
+      'By market segment'
+    );
+    $form['field_market_target_id']['#options'] = $markets;
+  }
+  // subhome temoignages
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
+    $solutions = clean_exposed_filters_by_language(
+      $form['field_solution_target_id']['#options'],
+      'By solution'
+    );
+    $form['field_solution_target_id']['#options'] = $solutions;
 
-		$industries = clean_exposed_filters_by_language(
-			$form['field_industry_target_id']['#options'],
-			'By industry'
-		);
-		$form['field_industry_target_id']['#options'] = $industries;
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'By industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
 
-		$jobs = clean_exposed_filters_by_language(
-			$form['field_jobs_target_id']['#options'],
-			'By job profile'
-		);
-		$form['field_jobs_target_id']['#options'] = $jobs;
-	}
-	// subhome partenaires
-	if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
-		$solutions = clean_exposed_filters_by_language(
-			$form['field_solution_target_id']['#options'],
-			'By solution'
-		);
-		$form['field_solution_target_id']['#options'] = $solutions;
+    $jobs = clean_exposed_filters_by_language(
+      $form['field_jobs_target_id']['#options'],
+      'By job profile'
+    );
+    $form['field_jobs_target_id']['#options'] = $jobs;
+  }
+  // subhome partenaires
+  if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
+    $solutions = clean_exposed_filters_by_language(
+      $form['field_solution_target_id']['#options'],
+      'By solution'
+    );
+    $form['field_solution_target_id']['#options'] = $solutions;
 
-		$types = clean_exposed_filters_by_language(
-			$form['field_types_target_id']['#options'],
-			'By type'
-		);
-		$form['field_types_target_id']['#options'] = $types;
+    $types = clean_exposed_filters_by_language(
+      $form['field_types_target_id']['#options'],
+      'By type'
+    );
+    $form['field_types_target_id']['#options'] = $types;
 
-		$regions = clean_exposed_filters_by_language(
-			$form['field_regions_target_id']['#options'],
-			'By region'
-		);
-		$form['field_regions_target_id']['#options'] = $regions;
-	}
+    $regions = clean_exposed_filters_by_language(
+      $form['field_regions_target_id']['#options'],
+      'By region'
+    );
+    $form['field_regions_target_id']['#options'] = $regions;
+  }
+}
+
+function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+  if ($route_match && $node = $route_match->getParameter('node')) {
+    $breadcrumb->addCacheableDependency($node);
+  }
 }
