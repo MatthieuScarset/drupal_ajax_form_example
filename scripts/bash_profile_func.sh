@@ -192,6 +192,7 @@ git_merge() {
 
 ## Surcharge de la fonction cap ** deploy
 ## Se met sur la branche en question pour faire le deploy
+## Execute la fonction cap normalement si c'est pas un deploy
 cap() {
 	##Si on fait un deploy,
 	if [[ "$2" == "deploy" ]]
