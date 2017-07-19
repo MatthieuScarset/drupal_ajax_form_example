@@ -47,9 +47,11 @@ class NodeYear extends Date {
      * select any options.
      */
     public function query() {
-        $selected_date = mktime(0,0,0,1,1, $this->value['value']);
-        if(!empty($selected_date)) {
-            $this->query->addWhereExpression(0, "node_field_data.created > $selected_date");
+        if(!empty($this->value['value']) && $this->value['value'] != 'All') {
+        	$timestamp_begin = mktime(0,0,0,1,1, $this->value['value']);
+        	$timestamp_finish = mktime(0,0,0,12,31, $this->value['value']);
+            $this->query->addWhereExpression(0, "node_field_data.created >= $timestamp_begin");
+	        $this->query->addWhereExpression(1, "node_field_data.created <= $timestamp_finish");
         }
     }
 
