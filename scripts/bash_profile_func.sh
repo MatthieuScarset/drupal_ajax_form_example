@@ -1,12 +1,16 @@
+JAUNE='\e[1;33m'
+CYANFONCE='\e[0;36m'
+NEUTRE='\e[0;m'
+VERTCLAIR='\e[1;32m'
+BLEUCLAIR='\e[1;34m'
+ROUGEFONCE='\e[0;31m'
+
 # Création d'une nouvelle branche et synchro auto sur le serveur
 git_new_branch() {
-	##Declas pour coloration texte
-	rougefonce='\e[0;31m'
-	neutre='\e[0;m'
 
 	if [ -z "$1" ]
 	then
-		echo -e "${rougefonce}Error : Vous devez entrer un nom de branche${neutre}"
+		echo -e "${ROUGEFONCE}Error : Vous devez entrer un nom de branche${NEUTRE}"
 	else
 
 		##je me branche sur master que je pull
@@ -15,7 +19,7 @@ git_new_branch() {
 			git checkout -b "$1"
 			git push --set-upstream origin "$1"
 		else
-			echo -e "${rougefonce}Erreur avec la branche master${neutre}"
+			echo -e "${ROUGEFONCE}Erreur avec la branche master${NEUTRE}"
 		fi
 	fi
 }
@@ -24,20 +28,12 @@ git_new_branch() {
 # Push la branche update puis merge avec le dev et le master
 git_push_updates() {
 
-	##paramètres pour changer le style des echo
-	jaune='\e[1;33m'
-	cyanfonce='\e[0;36m'
-	neutre='\e[0;m'
-	vertclair='\e[1;32m'
-	bleuclair='\e[1;34m'
-	rougefonce='\e[0;31m'
-
 	nomBranche=`git branch | grep "*"`
 
 	##Si on n'est pas sur la branche updates, je quitte le script
 	if [[ $nomBranche != "* updates"* ]]
 	then
-		echo -e "${rougefonce}Error : Vous devez être sur la branche updates pour executer cette commande${neutre}"
+		echo -e "${ROUGEFONCE}Error : Vous devez être sur la branche updates pour executer cette commande${NEUTRE}"
 		return
 	fi
 
@@ -47,7 +43,7 @@ git_push_updates() {
 		##On merge dev et master grace à la fonction ci-dessous
 		if git_merge dev master
 		then
-			echo -e "${vertclair}Success : Merge de updates sur dev & master OK${neutre}"
+			echo -e "${VERTCLAIR}Success : Merge de updates sur dev & master OK${NEUTRE}"
 			return
 		fi
 	else
@@ -63,28 +59,20 @@ git_push_updates() {
 # Si une branche est passée en paramètre, merge de cette branche avec update
 git_merge_updates() {
 
-	##paramètres pour changer le style des echo
-	jaune='\e[1;33m'
-	cyanfonce='\e[0;36m'
-	neutre='\e[0;m'
-	vertclair='\e[1;32m'
-	bleuclair='\e[1;34m'
-	rougefonce='\e[0;31m'
-
 	#On recupère le nom de la branche actuelle
 	nomBranche=`git branch | grep "*"`
 	nomBranche=${nomBranche:2:$((${#nomBranche}-1))}
 
 	##On affiche un petit message
-	echo -e "${cyanfonce}___________________________"
-	echo -e "branche actuelle :  ${jaune}$nomBranche${cyanfonce}"
+	echo -e "${CYANFONCE}___________________________"
+	echo -e "branche actuelle :  ${JAUNE}$nomBranche${CYANFONCE}"
 	echo -e "Liste des actions :"
-	echo -e "\t- Merge de ${jaune}$nomBranche${cyanfonce} sur ${bleuclair}updates${cyanfonce}"
+	echo -e "\t- Merge de ${JAUNE}$nomBranche${CYANFONCE} sur ${BLEUCLAIR}updates${CYANFONCE}"
 	if [ $# -gt 0 ]
 	then
-		echo -e "\t $# - Merge de ${bleuclair}updates${neutre} sur ${vertclair}$1${cyanfonce}"
+		echo -e "\t $# - Merge de ${BLEUCLAIR}updates${NEUTRE} sur ${VERTCLAIR}$1${CYANFONCE}"
 	fi
-	echo -e "\t- Merge de ${bleuclair}updates${cyanfonce} sur ${bleuclair}dev${cyanfonce} et ${bleuclair}master${neutre}"
+	echo -e "\t- Merge de ${BLEUCLAIR}updates${CYANFONCE} sur ${BLEUCLAIR}dev${CYANFONCE} et ${BLEUCLAIR}master${NEUTRE}"
 
 	##On demande validation
 	read -p "Etes-vous sur de vouloir continuer ? (O/n)" reponse
@@ -108,23 +96,15 @@ git_merge_updates() {
 			printf 'o' | git_merge dev master
 			git checkout $nomBranche
 		else
-			echo "${rougefonce}Erreur lors de la connexion à la branche updates${neutre}"
+			echo "${ROUGEFONCE}Erreur lors de la connexion à la branche updates${NEUTRE}"
 		fi
 	else
-		echo -e "${rougefonce}Abandon${neutre}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
 
 ## Merge la branche actuelle avec les branches passées en paramètre
 git_merge() {
-
-	##paramètres pour changer le style des echo
-	jaune='\e[1;33m'
-	cyanfonce='\e[0;36m'
-	neutre='\e[0;m'
-	vertclair='\e[1;32m'
-	bleuclair='\e[1;34m'
-	rougefonce='\e[0;31m'
 
 	#On recupère le nom de la branche actuelle
 	nomBranche=`git branch | grep "*"`
@@ -132,13 +112,13 @@ git_merge() {
 	
 	if [ $# == 0 ]
 	then
-		echo -e "${rougefonce}Error : Vous devez entrer les branches à merger${neutre}"
+		echo -e "${ROUGEFONCE}Error : Vous devez entrer les branches à merger${NEUTRE}"
 		return
 	fi
 	##On affiche un petit message
-	echo -e "${cyanfonce}___________________________"
-	echo -e "Vous êtes sur la branche ${jaune}$nomBranche${cyanfonce}"
-	echo -e "Vous allez faire un push puis la merger sur les branches ${bleuclair}$@${neutre}"
+	echo -e "${CYANFONCE}___________________________"
+	echo -e "Vous êtes sur la branche ${JAUNE}$nomBranche${CYANFONCE}"
+	echo -e "Vous allez faire un push puis la merger sur les branches ${BLEUCLAIR}$@${NEUTRE}"
 	
 	read -p "Etes-vous sur de vouloir continuer ? (O/n)" reponse
 
@@ -147,45 +127,96 @@ git_merge() {
 
 		#on push la branche actuelle
 		git push
-		echo -e "${cyanfonce}Push branche $nomBranche : OK${neutre}"
-		echo -e "${cyanfonce}_____________________________${neutre}"
+		echo -e "${CYANFONCE}Push branche $nomBranche : OK${NEUTRE}"
+		echo -e "${CYANFONCE}_____________________________${NEUTRE}"
 
 		#On boucle sur tous les arguments et on merge avec les noms des branches
 		for branch in $*
 		do
-			echo -e "${cyanfonce}Passage sur la branche ${bleuclair}$branch${neutre}"
+			echo -e "${CYANFONCE}Passage sur la branche ${BLEUCLAIR}$branch${NEUTRE}"
 
 			#je check que le passage sur la branche a bien fonctionné
 			if git checkout $branch
 			then 
 				#On maj la data qu'on a sur cette branche
-				echo -e "${cyanfonce}Pull ${bleuclair}$branch${neutre}"
+				echo -e "${CYANFONCE}Pull ${BLEUCLAIR}$branch${NEUTRE}"
 				git pull 
 
 				##on merge
-				echo -e "${cyanfonce}Merge de ${jaune}$nomBranche${cyanfonce} sur ${bleuclair}$branch${neutre}"
+				echo -e "${CYANFONCE}Merge de ${JAUNE}$nomBranche${CYANFONCE} sur ${BLEUCLAIR}$branch${NEUTRE}"
 				if ! git merge $nomBranche
 				then
-					echo -e "${rougefonce}Erreur lors du merge de $nomBranche sur $branch. ABANDON${neutre}"
+					echo -e "${ROUGEFONCE}Erreur lors du merge de $nomBranche sur $branch. ABANDON${NEUTRE}"
 					return
 				fi
 
 				##Resynchro avec le serveur de notre code
 				git push
 
-				echo -e "${cyanfonce}Merge branche ${bleuclair}$branch${cyanfonce} : OK"
+				echo -e "${CYANFONCE}Merge branche ${BLEUCLAIR}$branch${CYANFONCE} : OK"
 			else
-				echo -e "${rougefonce}Erreur lors de la connection à la branche $branch"
+				echo -e "${ROUGEFONCE}Erreur lors de la connection à la branche $branch"
 			fi
-			echo -e "_____________________________${neutre}"
+			echo -e "_____________________________${NEUTRE}"
 		done
-		echo -e "${cyanfonce}Fin des merges demandés${neutre}"
+		echo -e "${CYANFONCE}Fin des merges demandés${NEUTRE}"
 		
 		#Je retourne sur la branche actuelle
-		echo -e "${cyanfonce}Retour sur la branche d'origine${neutre}"
+		echo -e "${CYANFONCE}Retour sur la branche d'origine${NEUTRE}"
 		git checkout $nomBranche && git pull
 	else
-		echo "${rougefonce}Abandon${neutre}"
+		echo "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 
+}
+
+## Cleane les branches locales qui sont déjà mergées sur master
+git_cleanup() {
+	read -p "Etes-vous sur de vouloir nettoyer vos branches locales ? (O/n)" reponse
+
+	if [ $reponse == "O" ] || [ $reponse == "o" ] || [ $reponse == "Y" ] || [ $reponse == "y" ]
+	then
+		#on récupère les branches mergées sur master
+		git checkout master && git branch --merged | grep -E -v 'master|recette|dev|updates' | xargs git branch -d
+		echo -e "${CYANFONCE}Votre GIT local est tout propre !${NEUTRE}"
+		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
+	else
+		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+	fi
+}
+
+git_cleanup_remote() {
+	read -p "Etes-vous sur de vouloir nettoyer les branches du remote ? (O/n)" reponse
+
+	if [ $reponse == "O" ] || [ $reponse == "o" ] || [ $reponse == "Y" ] || [ $reponse == "y" ]
+	then
+		#on récupère les branches mergées sur le master remote
+		git checkout master && git fetch -p && git branch -r --merged | grep -E -v 'master|recette|dev|updates' | sed -e 's/origin\//:/' | xargs git push origin
+		echo -e "${CYANFONCE}Votre GIT remote est tout propre !${NEUTRE}"
+		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
+	else
+		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+	fi
+}
+
+## Surcharge de la fonction cap ** deploy
+## Se met sur la branche en question pour faire le deploy
+## Execute la fonction cap normalement si c'est pas un deploy
+cap() {
+	##Si on fait un deploy,
+	if [[ "$2" == "deploy" ]]
+	then
+		##Je me met sur la branche correspondante
+		echo -e "${CYANFONCE}git checkout "$1" && git pull${NEUTRE}"
+		if ! git checkout "$1" && git pull
+		then
+		    echo -e "${ROUGEFONCE}Erreur lors de la commande \"git checkout $1 && git pull\" - ABANDON${NEUTRE}"
+			##Si le checkout rate, je quitte
+			return
+		fi
+	fi
+
+	##Dans tous les cas, j'execute la commande demandée
+	echo -e "${CYANFONCE}cap $@${NEUTRE}"
+	command cap "$@"
 }

@@ -29,6 +29,8 @@ function oab_amel_update_dependencies() {
     $dependencies['oab_amel'][8017] = array('oab_christophe' => 8021, 'oab_tibo' => 8013 );
     $dependencies['oab_amel'][8018] = array('oab_christophe' => 8025 );
     $dependencies['oab_amel'][8019] = array('oab_yassine' => 8006 );
+    $dependencies['oab_amel'][8020] = array('oab_yassine' => 8009, 'oab_tristan' => 8003 );
+    $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004 );
     return $dependencies;
 }
 
@@ -179,4 +181,27 @@ function oab_amel_update_8018() {
  */
 function oab_amel_update_8019() {
     include_once("updates/update_8019.inc");
+}
+
+
+/**
+ *  Création des champs manquants 8019 amel
+ */
+function oab_amel_update_8020() {
+    include_once("updates/update_8020.inc");
+}
+
+/**
+ *  Correction Faute Meta title + champs required
+ */
+function oab_amel_update_8021() {
+    include_once("updates/update_8021.inc");
+}
+
+
+/**
+ *  Ajout du block Promo Actu
+ */
+function oab_amel_update_8022() {
+    include_once("updates/update_8022.inc");
 }
