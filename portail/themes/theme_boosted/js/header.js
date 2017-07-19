@@ -201,9 +201,13 @@
         mobile_local_nav.removeClass('local_nav');
         mobile_local_nav.addClass('dropdown-menu');
         mobile_local_nav.attr('aria-labelledby', 'dropdownMenu1');
+        var titleMenu = local_nav.attr('data-title-mobile');
+        if (titleMenu == undefined){
+            titleMenu = 'Navigation';
+        }
 
         var divDropdown = $('<div id="mobile_dropdown_subnav" class="dropdown visible-xs"></div>');
-        var button = $('<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+Drupal.t('Sous-menu')+'<span class="caret"></span></button>');
+        var button = $('<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+titleMenu+'<span class="caret"></span></button>');
 
         button.appendTo(divDropdown);
         mobile_local_nav.appendTo(divDropdown);
