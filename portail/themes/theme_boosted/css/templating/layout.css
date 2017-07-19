@@ -748,7 +748,13 @@ aside.right-column > .region{
 }
 
 #edit-submit-subhomes{
+    background: black;
+    color: #fff;
+}
+#edit-submit-subhomes:hover,
+#edit-submit-subhomes:active{
     background: white;
+    color: #000;
 }
 
 .subhome-image{
