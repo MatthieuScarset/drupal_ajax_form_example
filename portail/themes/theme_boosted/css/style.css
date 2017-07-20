@@ -51,6 +51,7 @@
 article .content .field--type-text-long ul{
     list-style: none;
     padding-left: 2rem;
+    margin-bottom: 0px !important;
 }
 article .content .field--type-text-long ul li{
     position: relative;

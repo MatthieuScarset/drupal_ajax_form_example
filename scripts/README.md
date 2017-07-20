@@ -3,7 +3,7 @@
 Installation
 ------
 * Créer/ouvrir le fichier _.bash\_profile_ dans votre home.
-* Copier et adapter la ligne ```source ~/LIEN/VERS/DOSSIER/RUBY/scripts/bash\_profile\_func.sh```
+* Copier et adapter la ligne ```source ~/LIEN/VERS/DOSSIER/RUBY/scripts/bash_profile_func.sh```
 * Relancer le git-bash pour la prise en compte du script.
 
 Utilisation
@@ -51,3 +51,8 @@ Fonctions
 * Met à jour l'index des branches remote
 * Check quelles branches sont déjà mergées sur le _master_.
 * Suppression de ces branches
+
+### cap
+* Surcharge la commande "cap"
+* Se met sur la branche en question lorsqu'on tente un deploy
+* Execute ensuite la commande **cap** normalement.
