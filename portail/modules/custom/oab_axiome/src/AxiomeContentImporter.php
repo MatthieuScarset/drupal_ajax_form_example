@@ -55,8 +55,7 @@ class AxiomeContentImporter {
 
 			$urlBackground = 'public://axiome/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
-
-			//    echo "Image media ID : ".$image_media_id.'<br/>';
+			$messages .= 'Url Top zone : '.$urlBackground."\nMedia #".$image_media_id."\n";
 			$node->set('field_top_zone_background', $image_media_id);
 		}
 	}
@@ -124,22 +123,6 @@ class AxiomeContentImporter {
 		$styleTopZone = ImageStyle::load('top_zone');
 		$styleMedium = ImageStyle::load('medium');
 		$styleThumbnail = ImageStyle::load('thumbnail');
-
-		if ($node->hasField('field_top_zone_background')){
-			$top_zone_background = $node->get('field_top_zone_background')->getValue();
-			if(isset($top_zone_background[0]['target_id'])) {
-				$entity = \Drupal::entityTypeManager()
-					->getStorage('media')
-					->load((int) $top_zone_background[0]['target_id']);
-				if ($entity != null){
-					$uri = $entity->getType()->thumbnail($entity);
-					$styleTopZone->flush($uri);
-					$styleMedium->flush($uri);
-					$styleThumbnail->flush($uri);
-					$entity->delete();
-				}
-			}
-		}
 
 		$filesystem = \Drupal::service('file_system');
 		// Create file entity.
