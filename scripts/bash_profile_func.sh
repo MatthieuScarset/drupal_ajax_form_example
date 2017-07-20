@@ -198,3 +198,25 @@ git_cleanup_remote() {
 		echo "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
+
+## Surcharge de la fonction cap ** deploy
+## Se met sur la branche en question pour faire le deploy
+## Execute la fonction cap normalement si c'est pas un deploy
+cap() {
+	##Si on fait un deploy,
+	if [[ "$2" == "deploy" ]]
+	then
+		##Je me met sur la branche correspondante
+		echo -e "${CYANFONCE}git checkout "$1" && git pull${NEUTRE}"
+		if ! git checkout "$1" && git pull
+		then
+		    echo -e "${ROUGEFONCE}Erreur lors de la commande \"git checkout $1 && git pull\" - ABANDON${NEUTRE}"
+			##Si le checkout rate, je quitte
+			return
+		fi
+	fi
+
+	##Dans tous les cas, j'execute la commande demandée
+	echo -e "${CYANFONCE}cap $@${NEUTRE}"
+	command cap "$@"
+}
