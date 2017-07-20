@@ -60,7 +60,7 @@ article.node.full{
     text-decoration: underline;
 }
 .node-socialbar{
-    margin: 5rem 0 5rem 0;
+    margin: 5rem 0 3rem 0;
     /*margin: 65px 0 130px 0; ref.guidelines*/
     font-size: 1.4rem;
 }
@@ -220,4 +220,8 @@ article.node.document .document_field_image{
     .encart_profil .bloc_textuel {
         margin-left: 135px;
     }
+}
+
+article p {
+    font-size: 1.6rem;
 }
