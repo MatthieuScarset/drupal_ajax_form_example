@@ -155,3 +155,10 @@ function oab_christophe_update_8024() {
 function oab_christophe_update_8025() {
   include_once("updates/update_8025.inc");
 }
+
+/**
+ *  traduction des filtres des subhomes
+ */
+function oab_christophe_update_8026() {
+  include_once("updates/update_8026.inc");
+}
