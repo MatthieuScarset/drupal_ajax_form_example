@@ -5,6 +5,7 @@
     CKEDITOR.plugins.add('templating', {
         // Icône présent dans le répertoire "icons" à la racine du plugin
         icons: 'templating',
+        lang: 'en,fr,ru',
         init: function(editor) {
 
             //create a command for our plugin called

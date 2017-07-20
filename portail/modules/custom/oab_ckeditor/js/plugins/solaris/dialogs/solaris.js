@@ -621,9 +621,9 @@ function in_array(needle, haystack) {
     CKEDITOR.dialog.add('solaris', function(editor) {
 
         CKEDITOR.document.appendStyleSheet(CKEDITOR.plugins.getPath('solaris') + 'solaris/css/solaris.css');
-
+        var lang = editor.lang.solaris;
         return {
-            title: 'Solaris Icons Module' ,
+            title: lang.popinTitle ,
             minWidth: CKEDITOR.env.ie ? 440 : 600,
             minHeight: 400,
             contents: [{
@@ -637,11 +637,11 @@ function in_array(needle, haystack) {
                         widths: ['75%', '25%'],
                         children: [{
                             type: 'select',
-                            items: [ [  Drupal.t('White'), '#FFFFFF' ], [ Drupal.t('Orange') , '#FF7900' ], [ Drupal.t('Black'), '#000000' ] ],
+                            items: [ [  lang.white, '#FFFFFF' ], [ lang.orange , '#F16E00' ], [ lang.black, '#000000' ] ],
                             default: '#000000',
                             id: 'colorChooser',
                             className: 'colorChooser',
-                            label: 'Color',
+                            label: lang.colorTitle,
                             onChange: function(e) {
                                 setSpanColor(this.getValue());
                             },
@@ -658,7 +658,7 @@ function in_array(needle, haystack) {
                         type: 'text',
                         id: 'size',
                         className: 'size',
-                        label: 'Size',
+                        label: lang.sizeTitle,
                         setup: function(widget) {
                             this.setValue(widget.data.size)
                         },
@@ -668,7 +668,7 @@ function in_array(needle, haystack) {
                     }]
                 }, {
                     type: 'html',
-                    html: '<p>'+Drupal.t( 'Choose color : "orange", "black", "white". Choose size (rem) : "2", "4", "6"...' )+'</p>',
+                    html: '<p>'+lang.help+'</p>',
                 },/*{
                     type: 'hbox',
                     widths: ['25%', '25%', '25%', '25%'],
@@ -744,7 +744,7 @@ function in_array(needle, haystack) {
                     type: 'text',
                     id: 'solarisSearch',
                     className: 'solarisSearch cke_dialog_ui_input_text',
-                    label: 'Search',
+                    label: lang.searchTitle,
                     onKeyUp: function(e) {
                         searchIcon(e.sender.$.value)
                     }
