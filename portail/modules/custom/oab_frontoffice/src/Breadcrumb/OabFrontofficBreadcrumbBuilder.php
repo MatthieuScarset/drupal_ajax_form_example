@@ -108,10 +108,10 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           $term = \Drupal::entityTypeManager()
                         ->getStorage('taxonomy_term')
                         ->load($subhomes[0]['target_id']);
-
+	        
           ##Si le terme a le field "field_related_view_path'
           #(contient le nom machine de la display view correspondante)
-          if ($term->hasField('field_related_display_view')) {
+          if (isset($term) && $term->hasField('field_related_display_view')) {
             $value = $term->get('field_related_display_view')->getValue();
 
             ##on test si on a un resultat
