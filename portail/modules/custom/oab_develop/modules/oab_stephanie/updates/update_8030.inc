@@ -1290,7 +1290,7 @@ $config_group->setData(
 );
 $config_group->save(TRUE);
 
-$config_group = $config_factory->getEditable('block.block.topzoneblock');
+$config_group = $config_factory->getEditable('block.block.topzone');
 $config_group->setData(
 	array (
 		'uuid' => 'cd113950-e39d-4adc-9394-2f0bcabf9729',

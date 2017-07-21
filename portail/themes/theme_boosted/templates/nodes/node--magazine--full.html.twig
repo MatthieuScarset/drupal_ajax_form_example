@@ -101,7 +101,7 @@ view_mode ? view_mode|clean_class,
     </script>
 
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {{ content.field_solution }}
+        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
     </div>
 
 
@@ -109,7 +109,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_solution', 'field_display_title') }}
+        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight') }}
     </div>
 
 </article>

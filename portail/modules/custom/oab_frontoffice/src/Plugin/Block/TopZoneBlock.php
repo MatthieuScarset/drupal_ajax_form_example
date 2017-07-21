@@ -5,6 +5,10 @@ namespace Drupal\oab_frontoffice\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Entity;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  *
@@ -36,12 +40,28 @@ class TopZoneBlock extends BlockBase {
     if ($node->hasField('field_top_zone')) {
       $top_zone = $node->get('field_top_zone')->getValue();
     }
-    $block['type'] = 'markup';
-    if(isset($top_zone[0]['value'])){
-      $block['#markup'] = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);
-    }else{
-      $block['#markup'] = '';
+    if ($node->hasField('field_top_zone_background')) {
+      $top_zone_background = $node->get('field_top_zone_background')->getValue();
     }
+    $block['type'] = 'processed_text';
+    $block['#markup'] = '';
+    $content = '';
+    if(isset($top_zone[0]['value'])){
+      $content = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);
+    }
+    if(isset($top_zone_background[0]['target_id'])){
+      $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
+      $uri = $entity->getType()->thumbnail($entity);
+      $type = $node->getType();
+      if($type == 'product'){
+      	$img_style = 'top_zone';
+      }else{
+      	$img_style = 'top_zone_big';
+      }
+      $url = ImageStyle::load($img_style)->buildUrl($uri);
+      $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', FALSE);
+    }
+    $block['#markup'] = $content;
     return $block;
   }
 

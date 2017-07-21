@@ -10,8 +10,13 @@ function oab_yassine_install() {
  */
 function oab_yassine_update_dependencies() {
   $dependencies['oab_yassine'][8001] = array('oab_christophe' => 8020	);
+  $dependencies['oab_yassine'][8004] = array('oab_amel' => 8015	);
+  $dependencies['oab_yassine'][8005] = array('oab_tibo' => 8012	);
+  $dependencies['oab_yassine'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
+	$dependencies['oab_yassine'][8009] = array('oab_amel' => 8019	);
 
-  return $dependencies;
+
+	return $dependencies;
 }
 
 /**
@@ -19,4 +24,73 @@ function oab_yassine_update_dependencies() {
  */
 function oab_yassine_update_8001() {
   include_once("updates/update_8001.inc");
+}
+
+/**
+ *  Definition d'une variable Version
+ */
+function oab_yassine_update_8002() {
+  include_once("updates/update_8002.inc");
+}
+
+/**
+ *  Traduction type de contenu
+ */
+function oab_yassine_update_8003() {
+  include_once("updates/update_8003.inc");
+}
+
+/**
+ *  Traduction style et suppression couleur bleue
+ */
+function oab_yassine_update_8004() {
+  include_once("updates/update_8004.inc");
+}
+
+/**
+ *  Modification de la width de la top_zone à 1400px
+ */
+function oab_yassine_update_8005() {
+  include_once("updates/update_8005.inc");
+}
+
+/**
+ *  Ajout du champ local_nav
+ */
+function oab_yassine_update_8006() {
+  include_once("updates/update_8006.inc");
+}
+
+/**
+ *  Ajout du block local_nav
+ */
+function oab_yassine_update_8007() {
+  include_once("updates/update_8007.inc");
+}
+
+/**
+ *  Traduction type de contenu
+ */
+function oab_yassine_update_8008() {
+	include_once("updates/update_8008.inc");
+}
+
+/**
+ *  Ajout d'exemple local nav
+ */
+function oab_yassine_update_8009() {
+	include_once("updates/update_8009.inc");
+}
+
+/**
+ *  Template document (config visual ornement)
+ */
+function oab_yassine_update_8010() {
+	include_once("updates/update_8010.inc");
+}
+/**
+ *  Correction Fields manquants sur product
+ */
+function oab_yassine_update_8011() {
+	include_once("updates/update_8011.inc");
 }

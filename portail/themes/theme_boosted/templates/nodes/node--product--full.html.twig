@@ -73,12 +73,51 @@
  */
 #}
 
+{%
+set classes = [
+'node',
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+]
+%}
+
+    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+
+    {% set fieldProduct %}
+        {{ content.field_product }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+     {% set fieldAuthor %}
+         {{ author_name }}
+     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "headline": "{{ node.label }}",
+      "genre": "{{ fieldProduct|striptags|trim }}",
+      "dateCreated": "{{ createdDate }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ fieldAuthor|striptags|trim }}",
+      }
+    }
+    </script>
+
+<div class="content_info">
+    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
+</div>
+
+
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
-<article{{ attributes }}>
-
-    <div{{ content_attributes }}>
-        {{ content|without('field_meta_description', 'field_meta_title', 'field_metatags') }}
+<article{{ attributes.addClass(classes) }}>
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_visual', 'field_file') }}
     </div>
 
 </article>

@@ -3,10 +3,20 @@
   "label": "Banner",
   "title": "Banner",
   "items": [{
-    "label": "Top Zone",
+    "label": "Top Zone produit",
     "file": "files/banner/top-zone.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
-  }]
+  },
+    {
+      "label": "Top Zone Solution/Industrie",
+      "file": "files/banner/top-zone-pwp.html.twig",
+      "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-pwp.jpg"
+    },
+    {
+      "label": "Top Zone Region/Pays",
+      "file": "files/banner/top-zone-region.html.twig",
+      "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-region.jpg"
+    }]
 }, {
   "id": "product",
   "label": "Product",
@@ -21,17 +31,17 @@
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/product/partners.jpg"
   }]
 }, {
-    "id": "partner",
-    "label": "Partner",
-    "title": "Partner",
-    "items": [
-      {
-        "label": "Repères cas client/partenaire",
-        "file": "files/partner/reperes.html.twig",
-        "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
-      }
-    ]
-  },{
+  "id": "partner",
+  "label": "Partner",
+  "title": "Partner",
+  "items": [
+    {
+      "label": "Repères cas client/partenaire",
+      "file": "files/partner/reperes.html.twig",
+      "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
+    }
+  ]
+},{
   "id": "tools",
   "label": "Tools",
   "title": "Tools",
@@ -47,6 +57,10 @@
     "label": "Key figures 3 columns",
     "file": "files/tools/key-figures-3.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/key-figures-3.jpg"
+  },{
+    "label": "Responsive Table",
+    "file": "files/tools/responsive_table.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/responsive_table.png"
   }]
 }, {
   "id": "customer_story",
@@ -64,6 +78,27 @@
     "label": "Verbatim double image",
     "file": "files/customer_story/verbatim-double-image.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/customer_story/verbatim-double-image.png"
+  }]
+},{
+  "id": "powerpage",
+  "label": "Powerpage",
+  "title": "Powerpage",
+  "items": [{
+    "label": "Local Nav",
+    "file": "files/powerpage/local-nav.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/local_nav.jpg"
+  }, {
+    "label": "Why OBS 1x3x3",
+    "file": "files/powerpage/pourquoi-obs-1-3-3.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/pourquoi-obs-1-3-3.jpg"
+  }, {
+    "label": "Why OBS 1x2x2",
+    "file": "files/powerpage/pourquoi-obs-1-2-2.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/pourquoi-obs-1-2-2.jpg"
+  }, {
+    "label": "Why OBS 1x1x1",
+    "file": "files/powerpage/pourquoi-obs-1-1-1.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/pourquoi-obs-1-1-1.jpg"
   }]
 }
 ]

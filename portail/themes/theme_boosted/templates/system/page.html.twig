@@ -72,6 +72,12 @@
         </header>
 {% endif %}
 
+
+{# Top Zone #}
+{% if page.top_zone %}
+    {{ page.top_zone }}
+{% endif %}
+
 {# Main #}
 {% block main %}
     <div role="main" class="main-container {{ container }} js-quickedit-main-content">
@@ -95,7 +101,8 @@
             </section>
 
             {# Sidebar #}
-            {% if page.sidebar %}
+
+            {% if page.sidebar is defined and page.sidebar|render|striptags|trim %}
               {% block sidebar %}
                 <aside class="col-md-4 col-sm-12 right-column" role="complementary">
                   {{ page.sidebar }}

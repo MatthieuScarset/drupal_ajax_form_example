@@ -1,45 +1,45 @@
-<?php
+<?php 
 
 
 
-function oab_stephanie_install() {
-  drupal_set_installed_schema_version('oab_stephanie', 8000);
+function oab_stephanie_install() {	
+    drupal_set_installed_schema_version('oab_stephanie', 8000);	
 }
 
 /** Définit l'ordre des updates par rapport aux autres modules
  * @return mixed
  */
 function oab_stephanie_update_dependencies() {
-  $dependencies['oab_stephanie'][8001] = array('oab_christophe' => 8001);
-  $dependencies['oab_stephanie'][8003] = array('oab_christophe' => 8004	);
-  $dependencies['oab_stephanie'][8006] = array('oab_christophe' => 	8005);
-  $dependencies['oab_stephanie'][8009] = array('oab_amel' => 8001	);
-  $dependencies['oab_stephanie'][8011] = array('oab_amel' => 8003	);
-  $dependencies['oab_stephanie'][8013] = array('oab_tibo' => 8002	);
-  $dependencies['oab_stephanie'][8017] = array('oab_tibo' => 8004	);
-  $dependencies['oab_stephanie'][8020] = array('oab_amel' => 8009	);
-  $dependencies['oab_stephanie'][8022] = array('oab_christophe' => 8012	);
-  $dependencies['oab_stephanie'][8023] = array('oab_christophe' => 8016	);
-  $dependencies['oab_stephanie'][8026] = array('oab_christophe' => 8017	);
-  $dependencies['oab_stephanie'][8030] = array('oab_amel' => 8014, 'oab_christophe' => 8019, 'oab_tibo' => 8008	);
-  $dependencies['oab_stephanie'][8031] = array('oab_amel' => 8015, 'oab_christophe' => 8020, 'oab_tibo' => 8009, 'oab_yassine' => 8004	);
-  $dependencies['oab_stephanie'][8032] = array('oab_amel' => 8016, 'oab_christophe' => 8021, 'oab_tibo' => 8012, 'oab_yassine' => 8004	);
+	$dependencies['oab_stephanie'][8001] = array('oab_christophe' => 8001);
+	$dependencies['oab_stephanie'][8003] = array('oab_christophe' => 8004	);
+	$dependencies['oab_stephanie'][8006] = array('oab_christophe' => 	8005);
+	$dependencies['oab_stephanie'][8009] = array('oab_amel' => 8001	);
+	$dependencies['oab_stephanie'][8011] = array('oab_amel' => 8003	);
+	$dependencies['oab_stephanie'][8013] = array('oab_tibo' => 8002	);
+	$dependencies['oab_stephanie'][8017] = array('oab_tibo' => 8004	);
+	$dependencies['oab_stephanie'][8020] = array('oab_amel' => 8009	);
+	$dependencies['oab_stephanie'][8022] = array('oab_christophe' => 8012	);
+	$dependencies['oab_stephanie'][8023] = array('oab_christophe' => 8016	);
+	$dependencies['oab_stephanie'][8026] = array('oab_christophe' => 8017	);
+	$dependencies['oab_stephanie'][8030] = array('oab_amel' => 8014, 'oab_christophe' => 8019, 'oab_tibo' => 8008	);
+	$dependencies['oab_stephanie'][8031] = array('oab_amel' => 8015, 'oab_christophe' => 8020, 'oab_tibo' => 8009, 'oab_yassine' => 8004	);
+	$dependencies['oab_stephanie'][8032] = array('oab_amel' => 8016, 'oab_christophe' => 8021, 'oab_tibo' => 8012, 'oab_yassine' => 8004	);
 
-  return $dependencies;
+	return $dependencies;
 }
 
 /**
  * RUBYPORTAILOBS-2638 Configuration de password policy
  */
 function oab_stephanie_update_8001() {
-  include_once("updates/update_8001.inc");
+	include_once("updates/update_8001.inc");
 }
 
 /**
  * Configuration d'Autologout
  */
 function oab_stephanie_update_8002() {
-  include_once("updates/update_8002.inc");
+	include_once("updates/update_8002.inc");
 }
 
 
@@ -47,14 +47,14 @@ function oab_stephanie_update_8002() {
  * Création du mode de vue media Automatic Teaser
  */
 function oab_stephanie_update_8003() {
-  include_once("updates/update_8003.inc");
+	include_once("updates/update_8003.inc");
 }
 
 /**
  * Configuration de la visibilité du champs Ornemental visual sur les différents types de contenus
  */
 function oab_stephanie_update_8004() {
-  include_once("updates/update_8004.inc");
+	include_once("updates/update_8004.inc");
 }
 
 
@@ -62,97 +62,97 @@ function oab_stephanie_update_8004() {
  * Suppression du title display
  */
 function oab_stephanie_update_8005() {
-  include_once("updates/update_8005.inc");
+	include_once("updates/update_8005.inc");
 }
 
 /**
  * Champ Meta title et meta description obligatoires
  */
 function oab_stephanie_update_8006() {
-  include_once("updates/update_8006.inc");
+	include_once("updates/update_8006.inc");
 }
 /**
  * Nouvel onglet SEO dans le formulaire de saisie de contenu
  */
 function oab_stephanie_update_8007() {
-  include_once("updates/update_8007.inc");
+	include_once("updates/update_8007.inc");
 }
 
 /**
  * Configuration de metatags
  */
 function oab_stephanie_update_8008() {
-  include_once("updates/update_8008.inc");
+	include_once("updates/update_8008.inc");
 }
 
 /**
  * Nouveau mode d'affichage : right_linked_content + config pour les type de contenu
  */
 function oab_stephanie_update_8009() {
-  include_once("updates/update_8009.inc");
+	include_once("updates/update_8009.inc");
 }
 
 /**
  * Ajout nouvelle vue Right Linked Content + placement du bloc
  */
 function oab_stephanie_update_8010() {
-  include_once("updates/update_8010.inc");
+	include_once("updates/update_8010.inc");
 }
 
 /**
  * Ajout permission changement URL au Chief Editor
  */
 function oab_stephanie_update_8011() {
-  include_once("updates/update_8011.inc");
+	include_once("updates/update_8011.inc");
 }
 
 /**
  * Masque en FO les champs meta title, meta description, owner et email owner
  */
 function oab_stephanie_update_8012() {
-  include_once("updates/update_8012.inc");
+	include_once("updates/update_8012.inc");
 }
 
 /**
  * Encart profile bloggeur
  */
 function oab_stephanie_update_8013() {
-  include_once("updates/update_8013.inc");
+	include_once("updates/update_8013.inc");
 }
 
 /**
  * Ajout des nouveaux vocabulaires de taxonomie : regions, market segment, partner type, subfamilies, content types
  */
 function oab_stephanie_update_8014() {
-  include_once("updates/update_8014.inc");
+	include_once("updates/update_8014.inc");
 }
 
 
 /**
  * Mise a jour des formulaire et vue des contenus pour les taxonomies */
 function oab_stephanie_update_8015() {
-  include_once("updates/update_8015.inc");
+	include_once("updates/update_8015.inc");
 }
 
 /**
  * suppression des champs concernant les taxonomies à supprimer :  blogs, areas, customer_stories, magazines, partners, topics
  */
 function oab_stephanie_update_8016() {
-  include_once("updates/update_8016.inc");
+	include_once("updates/update_8016.inc");
 }
 
 /**
  * Traduction des champs
  */
 function oab_stephanie_update_8017() {
-  include_once("updates/update_8017.inc");
+	include_once("updates/update_8017.inc");
 }
 
 /**
  * Termes de taxonomies
  */
 function oab_stephanie_update_8018() {
-  include_once("updates/update_8018.inc");
+	include_once("updates/update_8018.inc");
 }
 
 
@@ -160,21 +160,21 @@ function oab_stephanie_update_8018() {
  * Termes de taxonomies Market segments
  */
 function oab_stephanie_update_8019() {
-  include_once("updates/update_8019.inc");
+	include_once("updates/update_8019.inc");
 }
 
 /**
  * Encart profil bloggeur : style image, rendu média, rendu profil teaser
  */
 function oab_stephanie_update_8020() {
-  include_once("updates/update_8020.inc");
+	include_once("updates/update_8020.inc");
 }
 
 /**
  * Termes de taxonomies RU et RU-EN
  */
 function oab_stephanie_update_8021() {
-  include_once("updates/update_8021.inc");
+	include_once("updates/update_8021.inc");
 }
 
 
@@ -182,7 +182,7 @@ function oab_stephanie_update_8021() {
  * Traduction du vocabulaire Region
  */
 function oab_stephanie_update_8022() {
-  include_once("updates/update_8022.inc");
+	include_once("updates/update_8022.inc");
 }
 
 
@@ -190,7 +190,7 @@ function oab_stephanie_update_8022() {
  * Activation de Workbench moderation sur les press releases
  */
 function oab_stephanie_update_8023() {
-  include_once("updates/update_8023.inc");
+	include_once("updates/update_8023.inc");
 }
 
 
@@ -198,7 +198,7 @@ function oab_stephanie_update_8023() {
  * Changement d'une industrie FR Secteur public => Gouvernement
  */
 function oab_stephanie_update_8024() {
-  include_once("updates/update_8024.inc");
+	include_once("updates/update_8024.inc");
 }
 
 
@@ -206,7 +206,7 @@ function oab_stephanie_update_8024() {
  * Correction de configuration pour les modes d'affichage des documents
  */
 function oab_stephanie_update_8025() {
-  include_once("updates/update_8025.inc");
+	include_once("updates/update_8025.inc");
 }
 
 
@@ -214,21 +214,21 @@ function oab_stephanie_update_8025() {
  * Suppression de champs sur Profile
  */
 function oab_stephanie_update_8026() {
-  include_once("updates/update_8026.inc");
+	include_once("updates/update_8026.inc");
 }
 
 /**
  * Modif langue par défaut
  */
 function oab_stephanie_update_8027() {
-  include_once("updates/update_8027.inc");
+	include_once("updates/update_8027.inc");
 }
 
 /**
  * Création vocabulaire thematic + termes
  */
 function oab_stephanie_update_8028() {
-  include_once("updates/update_8028.inc");
+	include_once("updates/update_8028.inc");
 }
 
 
@@ -236,14 +236,14 @@ function oab_stephanie_update_8028() {
  * Nouveau Champ thematic pour les contenus Blog post, magazine, page simple, press release, document, press kit, partner, cas client
  */
 function oab_stephanie_update_8029() {
-  include_once("updates/update_8029.inc");
+	include_once("updates/update_8029.inc");
 }
 
 /**
  * Mise a jour des fichiers de config pour la recette finale
  */
 function oab_stephanie_update_8030() {
-  include_once("updates/update_8030.inc");
+	include_once("updates/update_8030.inc");
 }
 
 
@@ -263,9 +263,10 @@ function oab_stephanie_update_8032() {
 }
 
 /**
- * termes de taxonomie pour les migrations
+ * Ajout des parametres metatag pour les Products
  */
 function oab_stephanie_update_8033() {
-  // j'ai volontairement modifié l'update d'origine
-  include_once("updates/update_8018.inc");
+	// j'ai volontairement modifié l'update d'origine
+	include_once("updates/update_8018.inc");
+	include_once("updates/update_8033.inc");
 }
