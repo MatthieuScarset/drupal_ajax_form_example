@@ -52,6 +52,11 @@ Fonctions
 * Check quelles branches sont déjà mergées sur le _master_.
 * Suppression de ces branches
 
+### git\_unmerged [nom\_branche]
+* Liste les branches non mergées sur une branche donnée
+* Si pas d'argument, branche cible = master
+* Si argument, branche cible = argument
+
 ### cap
 * Surcharge la commande "cap"
 * Se met sur la branche en question lorsqu'on tente un deploy
