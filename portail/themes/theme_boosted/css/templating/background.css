@@ -224,8 +224,9 @@ p[class*='bg_']{
     top: 20px;
 }
 
-.banner-topzone .frame-icon-rel{
-    font-size: 10em;
+.banner-topzone .frame-icon-rel,
+.banner-topzone-pwp .frame-icon-rel{
+    font-size: 14em;
 }
 
 .frame-popout {
@@ -277,9 +278,7 @@ p[class*='bg_']{
     top: 0;
 }
 
-.banner-topzone-pwp .frame-icon-rel{
-    font-size: 10em;
-}
+
 
 .banner-topzone .frame-text,
 .banner-topzone-pwp .frame-text{
@@ -296,7 +295,7 @@ p[class*='bg_']{
 .banner-topzone .titre3,
 .banner-topzone-pwp .titre3{
     margin-top: 10px;
-    font-size: 2rem;
+    font-size: 3rem;
 }
 .banner-topzone .topzonebg,
 .banner-topzone-pwp .topzonebg{
@@ -325,46 +324,84 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
 }
 
 @media (max-width: 480px) {
-    .frame-icon-rel {
-        font-size: 8em;
-    }
     .product_modules.bg_white {
         background-color: #ddd;
     }
     .product_partners .bg-partner .img {
         background-color: #fff;
     }
-    .banner-topzone .col-md-6,
-    .banner-topzone .rightcol{
-        display: none;
+}
+@media (min-width: 980px) {
+    #slider_direct_access .col-lg-3:last-child .div_direct_access{
+        border: none;
     }
 }
-@media (max-width: 1024px) {
+/* changements police en fonction largeur */
+@media (min-width: 960px) and (max-width: 1380px){
+    .banner-topzone .titre3,
+    .banner-topzone-pwp .titre3{
+        font-size: 2rem;
+    }
+    .banner-topzone .frame-icon-rel,
+    .banner-topzone-pwp .frame-icon-rel{
+        font-size: 10em;
+    }
+    .frame-icon-rel {
+        font-size: 10em;
+    }
+    .banner-topzone .frame-text,
+    .banner-topzone-pwp .frame-text {
+        font-size: 2rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 959px){
+    .banner-topzone .titre3,
+    .banner-topzone-pwp .titre3{
+        font-size: 2rem;
+    }
+    .banner-topzone .frame-icon-rel,
+    .banner-topzone-pwp .frame-icon-rel{
+        font-size: 10em;
+    }
+    .frame-icon-rel {
+        font-size: 10em;
+    }
+    .banner-topzone .frame-text,
+    .banner-topzone-pwp .frame-text {
+        font-size: 2rem;
+    }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+    .banner-topzone .titre3,
+    .banner-topzone-pwp .titre3{
+        font-size: 1.6rem;
+    }
+    .banner-topzone .frame-icon-rel,
+    .banner-topzone-pwp .frame-icon-rel{
+        font-size: 10em;
+    }
+    .frame-icon-rel {
+        font-size: 10em;
+    }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
         font-size: 1.6rem;
     }
 }
-@media (min-width: 480px) {
-    .frame-icon-rel {
-        font-size: 10em;
+@media (max-width: 480px){
+    .banner-topzone .titre3,
+    .banner-topzone-pwp .titre3{
+        font-size: 1.6rem;
     }
-}
-@media (min-width: 768px) {
-    .frame-icon-rel {
-        font-size: 10em;
-    }
-}
-@media (min-width: 980px) {
-    .frame-icon-rel {
-        font-size: 20em;
-    }
-    #slider_direct_access .col-lg-3:last-child .div_direct_access{
-        border: none;
-    }
-}
-@media (min-width: 1220px) {
+    .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 13.5em;
+        font-size: 10em;
+    }
+    .frame-icon-rel {
+        font-size: 10em;
+    }
+    .banner-topzone .frame-text,
+    .banner-topzone-pwp .frame-text {
+        font-size: 1.6rem;
     }
 }
