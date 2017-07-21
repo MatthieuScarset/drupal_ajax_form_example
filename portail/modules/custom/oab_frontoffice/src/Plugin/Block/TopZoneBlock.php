@@ -51,14 +51,17 @@ class TopZoneBlock extends BlockBase {
     }
     if(isset($top_zone_background[0]['target_id'])){
       $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
-      $uri = $entity->getType()->thumbnail($entity);
-      $type = $node->getType();
-      if($type == 'product'){
-      	$img_style = 'top_zone';
-      }else{
-      	$img_style = 'top_zone_big';
-      }
-      $url = ImageStyle::load($img_style)->buildUrl($uri);
+			$url = '';
+      if (!is_null($entity)){
+				$uri = $entity->getType()->thumbnail($entity);
+				$type = $node->getType();
+				if($type == 'product'){
+					$img_style = 'top_zone';
+				}else{
+					$img_style = 'top_zone_big';
+				}
+				$url = ImageStyle::load($img_style)->buildUrl($uri);
+			}
       $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', FALSE);
     }
     $block['#markup'] = $content;
