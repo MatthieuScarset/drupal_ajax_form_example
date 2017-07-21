@@ -4,6 +4,7 @@ namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 
 /**
  *
@@ -12,6 +13,12 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "contact_bar_block",
  *   admin_label = @Translation("Contact Bar"),
  *   category = @Translation("Blocks"),
+ *   context = {
+ *     "node" = @ContextDefinition(
+ *       "entity:node",
+ *       label = @Translation("Current Node")
+ *     )
+ *   }
  * )
  *
  */
@@ -23,6 +30,33 @@ class ContactBarBlock extends BlockBase {
 
     $block['#markup'] = $this->configuration['content'];
     $block['#format'] = $this->configuration['content_format'];
+
+      // récupération du contexte
+      $node_context = $this->getContextValue('node');
+      $nid_field = $node_context->nid->getValue();
+      $nid = $nid_field[0]['value'];
+
+      // chargement du noeud et de la valeur axiome_data
+      $node = Node::load($nid);
+      $type = $node->getType();
+
+      if($type == 'product'){
+        if ($node->hasField('field_axiome_data')) {
+
+            //on deserialise les données à passer au template
+            $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
+            if(count($field_axiome_data) > 0)
+            {
+                $axiome_data = $field_axiome_data;
+               // oabt($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']);
+
+                $block['numero'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['contact_us'];
+
+
+                $block['detail_numero'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['contact_form'];
+            }
+        }
+      }
     return $block;
   }
 

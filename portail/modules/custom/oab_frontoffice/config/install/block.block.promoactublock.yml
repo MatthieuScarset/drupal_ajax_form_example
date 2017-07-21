@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: promoactu
+theme: theme_boosted
+region: sidebar
+weight: -15
+provider: null
+plugin: null
+settings:
+  id: promo_actu_block
+  label: 'Promo Actu Block'
+  provider: oab_frontoffice
+  label_display: '0'
+

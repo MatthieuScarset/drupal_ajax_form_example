@@ -1,0 +1,25 @@
+<div class="node-axiome-detailed-content">
+    <div>
+        <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
+        <p class="highlight1">{{ field_detailed_content.Attributes.description }}</p>
+    </div>
+
+
+    <div class="bg product_modules bg_white col col-md-12 nopadding">
+        {% for i in 0..9 %}
+            <div class="col col-md-6 col-xs-12 nopadding">
+                <div class="col col-md-2 col-xs-3 nopadding">
+                    <p style="margin-top:1rem;"><span class="solaris {{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.icon.boosted_css_name }}" style="font-size:4rem;"></span></p>
+                </div>
+
+                <div class="col col-md-10 col-xs-9">
+                    <h4 class="highlight1">{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.title }}</h4>
+
+                    <p><b>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.header }}</b></p>
+
+                    <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
