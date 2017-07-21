@@ -337,7 +337,7 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
 }
 /* changements police en fonction largeur */
-@media (min-width: 960px) and (max-width: 1024px){
+@media (min-width: 960px) and (max-width: 1380px){
     .banner-topzone .titre3,
     .banner-topzone-pwp .titre3{
         font-size: 2rem;
