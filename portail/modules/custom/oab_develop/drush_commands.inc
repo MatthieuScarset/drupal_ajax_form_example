@@ -13,4 +13,4 @@ pm-enable -y oab_yassine
 pm-enable -y oab_migrate_content
 pm-enable -y oab_tristan
 updatedb
-entity-updates
+#entity-updates
