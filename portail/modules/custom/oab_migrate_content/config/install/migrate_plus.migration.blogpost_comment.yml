@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies: {  }
+id: blogpost_comment
+migration_group: blogpost
+label: 'Blog posts comments'
+source:
+  plugin: blogpost_comment
+destination:
+  plugin: 'entity:comment'
+process:
+  comment_type:
+    plugin: default_value
+    default_value: comment
+  pid: pid_parent
+  entity_id:
+    plugin: migration
+    migration: blogpost_node
+    source: nid
+  entity_type:
+    plugin: default_value
+    default_value: node
+  field_name:
+    plugin: default_value
+    default_value: field_commentaire
+  uid: uid
+  subject: subject
+  hostname: hostname
+  created: created
+  changed: changed
+  status: status
+  thread: thread
+  name: name
+  mail: mail
+  homepage: homepage
+  langcode: language
+  default_langcode: default_langcode
+  comment_body/value: comment_body_value
+  comment_body/format: comment_body_format
+migration_dependencies:
+  required:
+    - blogpost_node

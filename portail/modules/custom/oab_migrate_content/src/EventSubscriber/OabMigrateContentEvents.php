@@ -68,6 +68,10 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
     && $migrate_src_values['plugin'] == 'blogpost_profile'){
       $entity = \Drupal\node\Entity\Node::load($nid);
 
+      $body = $migrate_src_values['field_txt_biography_fr'];
+      if(empty($body)){
+      	$body = $migrate_src_values['field_txt_catcher'];
+			}
       $values = array(
         // Non multilingual.
         'created' => $migrate_src_values['created'],
@@ -78,7 +82,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 
         // Multilingual.
         'title' => $migrate_src_values['title'],
-        'body' => array('value' => $migrate_src_values['field_txt_biography_fr'], 'format' => 'full_html'),
+        'body' => array('value' => $body, 'format' => 'full_html'),
         'field_image' => $migrate_dest_values['field_image'],
       );
 
