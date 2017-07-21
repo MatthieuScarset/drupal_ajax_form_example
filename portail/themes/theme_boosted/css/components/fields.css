@@ -11,3 +11,9 @@
     text-decoration: underline;
     font-weight: 700;
 }
+
+
+.display-subhomes .field--name-field-file {
+    margin: 0 !important;
+    font-weight: 200 !important;
+}
