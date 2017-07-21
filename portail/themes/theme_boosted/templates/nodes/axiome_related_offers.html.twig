@@ -1,0 +1,18 @@
+<div class="node-axiome-know-more">
+    <div class="col col-md-12 nopadding">
+        <h2 class="titre2">{{ 'Offres connexes'|t }}</h2>
+    </div>
+    <div class="col col-md-12 nopadding">
+        <ul>
+            {% if related_offers.offer1_custom_link is defined and related_offers.offer1_custom_link is not iterable %}
+                <li><a href="{{ related_offers.offer1_url }}" target="_blank">{{ related_offers.offer1_custom_link }}</a></li>
+            {% endif %}
+            {% if related_offers.offer2_custom_link is defined and related_offers.offer2_custom_link is not iterable %}
+                <li><a href="{{ related_offers.offer2_url }}" target="_blank">{{ related_offers.offer2_custom_link }}</a></li>
+            {% endif %}
+            {% if related_offers.offer3_custom_link is defined and related_offers.offer3_custom_link is not iterable %}
+                <li><a href="{{ related_offers.offer3_url }}" target="_blank">{{ related_offers.offer3_custom_link }}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
