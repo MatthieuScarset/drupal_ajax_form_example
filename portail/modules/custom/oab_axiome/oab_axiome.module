@@ -41,10 +41,12 @@ function oab_axiome_form_alter(&$form, &$form_state, $form_id){
  * Implements hook_node_delete().
  */
 function oab_axiome_node_delete($node) {
-    if($node->type == "axiome"){
+    if($node->type == "product"){
         $id_fiche = field_get_items('node', $node, 'field_id_fiche');
         if(is_dir('public://'.AXIOME_FOLDER.'/'.$id_fiche[0]['value'])){
             obs_module_deldir('public://'.AXIOME_FOLDER.'/'.$id_fiche[0]['value']);
         }
     }
 }
+
+
