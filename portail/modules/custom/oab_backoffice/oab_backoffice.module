@@ -20,24 +20,24 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
-  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $languages = \Drupal::languageManager()->getLanguages();
-  $current_user_language = Drupal::currentUser()->getPreferredLangcode();
+	//\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
+	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+	$languages = \Drupal::languageManager()->getLanguages();
+	$current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
-  $edit_form = false;
+	$edit_form = false;
 
-  if (preg_match('@node_(.*)_edit_form@', $form_id)){
-    $current_user_language = $current_language;
+	if (preg_match('@node_(.*)_edit_form@', $form_id)){
+		$current_user_language = $current_language;
 
-    if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      $node_language = $node->language();
-      $node_langcode = $node_language->getId();
+		if ($node = \Drupal::routeMatch()->getParameter('node')) {
+			$node_language = $node->language();
+			$node_langcode = $node_language->getId();
 
-      $current_user_language = $node_langcode;
-    }
-    $edit_form = true;
-  }
+			$current_user_language = $node_langcode;
+		}
+		$edit_form = true;
+	}
 
 	// gestion de la taxonomie
 	// affichage de la langue
@@ -58,318 +58,322 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 	}*/
 
-  // page de liste des taxonomies
-  if ($form_id == 'taxonomy_overview_terms'){
-    if (isset($form['terms'])){
-      foreach ($form['terms'] AS $key => $value){
-        if (preg_match('@^tid:@', $key)){
-          if (isset($form['terms'][$key]['term']['#title'])
-            && isset($form['terms'][$key]['#term'])
-            && is_object($form['terms'][$key]['#term'])){
-            $term_language = $form['terms'][$key]['#term']->language()->getId();
-            $form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
-          }
-        }
-      }
-    }
-  }
+	// page de liste des taxonomies
+	if ($form_id == 'taxonomy_overview_terms'){
+		if (isset($form['terms'])){
+			foreach ($form['terms'] AS $key => $value){
+				if (preg_match('@^tid:@', $key)){
+					if (isset($form['terms'][$key]['term']['#title'])
+					    && isset($form['terms'][$key]['#term'])
+					    && is_object($form['terms'][$key]['#term'])){
+						$term_language = $form['terms'][$key]['#term']->language()->getId();
+						$form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
+					}
+				}
+			}
+		}
+	}
 
-  // filtres exposés de views
-  if ($form_id == 'views_exposed_form'){
-    if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media'){
-      $form['field_tags_target_id']['#size'] = 30;
-    }
-  }
+	// filtres exposés de views
+	if ($form_id == 'views_exposed_form'){
+		if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media'){
+			$form['field_tags_target_id']['#size'] = 30;
+		}
+	}
 
-  if ($form_id == 'node_profile_form'
-    || $form_id == 'node_profile_edit_form'){
-    $form['field_social_accounts']['#cardinality_multiple'] = false;
+	if ($form_id == 'node_profile_form'
+	    || $form_id == 'node_profile_edit_form'){
+		$form['field_social_accounts']['#cardinality_multiple'] = false;
 
-    if (isset($form['field_social_accounts']['widget'])
-      && is_array($form['field_social_accounts']['widget'])){
-      $form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
+		if (isset($form['field_social_accounts']['widget'])
+		    && is_array($form['field_social_accounts']['widget'])){
+			$form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
 
-      foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
-        if (isset($value['value']['#title'])) {
-          switch ($key){
-            case '0':
-              $value['value']['#title'] = t('Twitter account');
-              break;
-            case '1':
-              $value['value']['#title'] = t('LinkedIn account');
-              break;
-            case '2':
-              $value['value']['#title'] = t('Viadeo account');
-              break;
-            case '3':
-              $value['value']['#title'] = t('Google + account');
-              break;
-          }
-          $value['value']['#title_display'] = 'before';
-        }
-        if (isset($value['_weight'])){
-          $value['_weight']['#access'] = false;
-        }
-      }
-    }
-  }
+			foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
+				if (isset($value['value']['#title'])) {
+					switch ($key){
+						case '0':
+							$value['value']['#title'] = t('Twitter account');
+							break;
+						case '1':
+							$value['value']['#title'] = t('LinkedIn account');
+							break;
+						case '2':
+							$value['value']['#title'] = t('Viadeo account');
+							break;
+						case '3':
+							$value['value']['#title'] = t('Google + account');
+							break;
+					}
+					$value['value']['#title_display'] = 'before';
+				}
+				if (isset($value['_weight'])){
+					$value['_weight']['#access'] = false;
+				}
+			}
+		}
+	}
 
 
-  if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
-                                'node_customer_story_form', 'node_customer_story_edit_form',
-                                'node_document_form', 'node_document_edit_form',
-                                'node_magazine_form', 'node_magazine_edit_form',
-                                'node_press_kit_form', 'node_press_kit_edit_form',
-                                'node_press_release_form', 'node_press_release_edit_form',
-                                'node_industry_form', 'node_industry_edit_form',
-                                'node_solution_form', 'node_solution_edit_form',
-                                'node_product_form', 'node_product_edit_form',
-                                'node_partner_form', 'node_partner_edit_form',
-                                'node_region_form', 'node_region_edit_form',
-                                'node_simple_page_form', 'node_simple_page_edit_form',
-                                'node_country_form', 'node_country_edit_form',
-																'node_full_html_form', 'node_full_html_edit_form' ))) {
+	if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
+		'node_customer_story_form', 'node_customer_story_edit_form',
+		'node_document_form', 'node_document_edit_form',
+		'node_magazine_form', 'node_magazine_edit_form',
+		'node_press_kit_form', 'node_press_kit_edit_form',
+		'node_press_release_form', 'node_press_release_edit_form',
+		'node_industry_form', 'node_industry_edit_form',
+		'node_solution_form', 'node_solution_edit_form',
+		'node_product_form', 'node_product_edit_form',
+		'node_partner_form', 'node_partner_edit_form',
+		'node_region_form', 'node_region_edit_form',
+		'node_simple_page_form', 'node_simple_page_edit_form',
+		'node_country_form', 'node_country_edit_form',
+		'node_full_html_form', 'node_full_html_edit_form' ))) {
 
-    $form['#attached']['library'][] = 'oab_backoffice/metadata';
+		$form['#attached']['library'][] = 'oab_backoffice/metadata';
 
-    // positionnement des champs dates
-    if (isset($form['field_start_date'])
-      && isset($form['field_end_date'])
-    ) {
-      $form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-      $form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-    }
+		// positionnement des champs dates
+		if (isset($form['field_start_date'])
+		    && isset($form['field_end_date'])
+		) {
+			$form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+			$form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+		}
 
-    // disposition des taxonomies
-    foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
-      if (isset($form[$field])) {
-        $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
-        $form[$field]['widget']['#size'] = 15;
-      }
-    }
+		// disposition des taxonomies
+		if(isset($form['#fieldgroups']['group_classer'])){
+			foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
+				if (isset($form[$field])) {
+					$form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
+					$form[$field]['widget']['#size'] = 15;
+				}
+			}
+		}
 
-    $last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
-    $form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
+		if(isset($form['#fieldgroups']['group_taxonomie']->children)){
+			$last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
+			$form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
+		}
 
-    //on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
+		//on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
 		$roles = \Drupal::currentUser()->getRoles();
 		if(!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
 		{
 			$form['field_metatags']['#access'] = false;
 		}
-  }
+	}
 
 
 
-/*
-    // valeur par défaut pour le champ "display_title"
-    // dans le cas d'une edition et que la valeur n'existe pas encore
-    if ($form_id == 'node_container_edit_form') {
-      if ($node = \Drupal::routeMatch()->getParameter('node')) {
-        $content_type = $node->bundle();
-        $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
-        if (isset($definitions)
-          && array_key_exists('field_display_title', $definitions)
-        ) {
-          if ($display_title = $node->get('field_display_title')->getValue()) {
-            if (!isset($display_title[0]['value'])) {
-              $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
-            }
-          }
-        }
-      }
+	/*
+		// valeur par défaut pour le champ "display_title"
+		// dans le cas d'une edition et que la valeur n'existe pas encore
+		if ($form_id == 'node_container_edit_form') {
+		  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+			$content_type = $node->bundle();
+			$definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
+			if (isset($definitions)
+			  && array_key_exists('field_display_title', $definitions)
+			) {
+			  if ($display_title = $node->get('field_display_title')->getValue()) {
+				if (!isset($display_title[0]['value'])) {
+				  $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
+				}
+			  }
+			}
+		  }
 
-    }
-  }
+		}
+	  }
 
-  //pour la médiathèque : sélection des images dans la liste
-  if($form_id == 'entity_browser_browse_medias_iframe_form'
-    || $form_id =='entity_browser_browse_media_modal_form'
-    || $form_id =='entity_browser_browser_file_modal_form')
-  {
-    $form['#attached']['library'][] = 'oab_backoffice/mediatheque';
-  }
-*/
+	  //pour la médiathèque : sélection des images dans la liste
+	  if($form_id == 'entity_browser_browse_medias_iframe_form'
+		|| $form_id =='entity_browser_browse_media_modal_form'
+		|| $form_id =='entity_browser_browser_file_modal_form')
+	  {
+		$form['#attached']['library'][] = 'oab_backoffice/mediatheque';
+	  }
+	*/
 
-  if ($form_id == 'user_register_form'
-    || $form_id == 'user_form'){
-    if (isset($form['account']['roles']['#options'])
-      && is_array($form['account']['roles']['#options'])){
-      $roles_option = $form['account']['roles']['#options'];
-      foreach($roles_option AS $key => $value){
-        if ($key != 'authenticated') {
-          if (!\Drupal::currentUser()->hasPermission('assign ' . $key . ' role')) {
-            if (in_array($key, $form['account']['roles']['#default_value'])) {
-              $form['account']['roles'][$key] = array(
-                '#default_value' => TRUE,
-                '#disabled' => TRUE
-              );
-            }
-            else {
-              unset($form['account']['roles']['#options'][$key]);
-            }
-          }
-        }
-      }
-    }
-  }
+	if ($form_id == 'user_register_form'
+	    || $form_id == 'user_form'){
+		if (isset($form['account']['roles']['#options'])
+		    && is_array($form['account']['roles']['#options'])){
+			$roles_option = $form['account']['roles']['#options'];
+			foreach($roles_option AS $key => $value){
+				if ($key != 'authenticated') {
+					if (!\Drupal::currentUser()->hasPermission('assign ' . $key . ' role')) {
+						if (in_array($key, $form['account']['roles']['#default_value'])) {
+							$form['account']['roles'][$key] = array(
+								'#default_value' => TRUE,
+								'#disabled' => TRUE
+							);
+						}
+						else {
+							unset($form['account']['roles']['#options'][$key]);
+						}
+					}
+				}
+			}
+		}
+	}
 
-  // Ajout de champ dans les menus
-  if($form_id == 'menu_link_content_menu_link_content_form') {
-    $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
-    $linkOptions = $menuLinkEntity->link->first()->options;
-    $linkTarget = !empty($linkOptions['target']) ? true : false;
-    $linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
-    $linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
+	// Ajout de champ dans les menus
+	if($form_id == 'menu_link_content_menu_link_content_form') {
+		$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+		$linkOptions = $menuLinkEntity->link->first()->options;
+		$linkTarget = !empty($linkOptions['target']) ? true : false;
+		$linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
+		$linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
 
-    $form['link_target'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Open in a new window'),
-      '#description' => t('check to open the link in a new window'),
-      '#default_value' => $linkTarget,
-      '#weight' => -2
-    );
+		$form['link_target'] = array(
+			'#type' => 'checkbox',
+			'#title' => t('Open in a new window'),
+			'#description' => t('check to open the link in a new window'),
+			'#default_value' => $linkTarget,
+			'#weight' => -2
+		);
 
-    $form['link_icon'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Font Awesome Icon'),
-      '#description' => t('type your icon class code'),
-      '#default_value' => $linkIcon,
-      '#weight' => -3
-    );
+		$form['link_icon'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Font Awesome Icon'),
+			'#description' => t('type your icon class code'),
+			'#default_value' => $linkIcon,
+			'#weight' => -3
+		);
 
-    $form['link_classtag'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Link Tag Class'),
-      '#description' => t('type your link tag class'),
-      '#default_value' => $linkClasstag,
-      '#weight' => -4
-    );
+		$form['link_classtag'] = array(
+			'#type' => 'textfield',
+			'#title' => t('Link Tag Class'),
+			'#description' => t('type your link tag class'),
+			'#default_value' => $linkClasstag,
+			'#weight' => -4
+		);
 
-    $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
-  }
+		$form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
+	}
 
 
 }
 
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
-  $values = $form_state->getValues();
-  $link_target = array();
-  $link_icon = array();
-  $link_classtag = array();
+	$values = $form_state->getValues();
+	$link_target = array();
+	$link_icon = array();
+	$link_classtag = array();
 
-  if (isset($values['link_target'])
-    && !empty($values['link_target'])) {
-    $link_target = trim($values['link_target']);
-  }
+	if (isset($values['link_target'])
+	    && !empty($values['link_target'])) {
+		$link_target = trim($values['link_target']);
+	}
 
-  if (isset($values['link_icon'])
-    && !empty($values['link_icon'])) {
-    $link_icon = trim($values['link_icon']);
-  }
+	if (isset($values['link_icon'])
+	    && !empty($values['link_icon'])) {
+		$link_icon = trim($values['link_icon']);
+	}
 
-  if (isset($values['link_classtag'])
-    && !empty($values['link_classtag'])) {
-    $link_classtag = trim($values['link_classtag']);
-  }
+	if (isset($values['link_classtag'])
+	    && !empty($values['link_classtag'])) {
+		$link_classtag = trim($values['link_classtag']);
+	}
 
-  $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
-  $options = $menuLinkEntity->link->first()->options;
+	$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+	$options = $menuLinkEntity->link->first()->options;
 
-  $changed = FALSE;
-  if (empty($link_target)) {
-    if (!empty($options['target'])) {
-      unset($options['target']);
-      $changed = TRUE;
-    }
-  }
-  else {
-    $options['target'] = $link_target ? '_blank' : '_self' ;
-    $changed = TRUE;
-  }
+	$changed = FALSE;
+	if (empty($link_target)) {
+		if (!empty($options['target'])) {
+			unset($options['target']);
+			$changed = TRUE;
+		}
+	}
+	else {
+		$options['target'] = $link_target ? '_blank' : '_self' ;
+		$changed = TRUE;
+	}
 
-  if (empty($link_icon)) {
-    if (!empty($options['icon'])) {
-      unset($options['icon']);
-      $changed = TRUE;
-    }
-  }
-  else {
-    $options['icon'] = $link_icon ;
-    $changed = TRUE;
-  }
+	if (empty($link_icon)) {
+		if (!empty($options['icon'])) {
+			unset($options['icon']);
+			$changed = TRUE;
+		}
+	}
+	else {
+		$options['icon'] = $link_icon ;
+		$changed = TRUE;
+	}
 
-  if (empty($link_classtag)) {
-    if (!empty($options['classtag'])) {
-      unset($options['classtag']);
-      $changed = TRUE;
-    }
-  }
-  else {
-    $options['classtag'] = $link_classtag ;
-    $changed = TRUE;
-  }
+	if (empty($link_classtag)) {
+		if (!empty($options['classtag'])) {
+			unset($options['classtag']);
+			$changed = TRUE;
+		}
+	}
+	else {
+		$options['classtag'] = $link_classtag ;
+		$changed = TRUE;
+	}
 
-  if ($changed) {
-    $menuLinkEntity->link->first()->options = $options;
-    $menuLinkEntity->save();
-  }
+	if ($changed) {
+		$menuLinkEntity->link->first()->options = $options;
+		$menuLinkEntity->save();
+	}
 }
 
 
 function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
-  $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
+	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
 }
 
 
 function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
-  if (isset($data['tabs'][0]) && is_array($data['tabs'][0])){
-    foreach ($data['tabs'][0] AS $key => $value){
-      if (isset($value['#link']['url'])){
-        $local_task_link_url = $value['#link']['url'];
-        $routeName = $local_task_link_url->getRouteName();
-        switch ($routeName){
-          case 'system.admin_content':
-            $data['tabs'][0][$key]['#weight'] = 0;
-            break;
-          case 'view.dashboard.page_1':
-            $data['tabs'][0][$key]['#weight'] = 1;
-            break;
-          case 'view.media.media_page_list':
-            $data['tabs'][0][$key]['#weight'] = 2;
-            break;
-          case 'view.files.page_1':
-            $data['tabs'][0][$key]['#weight'] = 3;
-            break;
-          case 'comment.admin':
-            $data['tabs'][0][$key]['#weight'] = 4;
-            break;
-        }
-      }
-    }
-  }
+	if (isset($data['tabs'][0]) && is_array($data['tabs'][0])){
+		foreach ($data['tabs'][0] AS $key => $value){
+			if (isset($value['#link']['url'])){
+				$local_task_link_url = $value['#link']['url'];
+				$routeName = $local_task_link_url->getRouteName();
+				switch ($routeName){
+					case 'system.admin_content':
+						$data['tabs'][0][$key]['#weight'] = 0;
+						break;
+					case 'view.dashboard.page_1':
+						$data['tabs'][0][$key]['#weight'] = 1;
+						break;
+					case 'view.media.media_page_list':
+						$data['tabs'][0][$key]['#weight'] = 2;
+						break;
+					case 'view.files.page_1':
+						$data['tabs'][0][$key]['#weight'] = 3;
+						break;
+					case 'comment.admin':
+						$data['tabs'][0][$key]['#weight'] = 4;
+						break;
+				}
+			}
+		}
+	}
 }
 
 
 
 function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state){
-  $buildInfo = $form_state->getBuildInfo();
-  $menuLinkContentForm = $buildInfo['callback_object'];
-  return $menuLinkContentForm->getEntity();
+	$buildInfo = $form_state->getBuildInfo();
+	$menuLinkContentForm = $buildInfo['callback_object'];
+	return $menuLinkContentForm->getEntity();
 }
 
 // ajout du type de rendu des champs "path" pour la traduction
 function oab_backoffice_config_schema_info_alter(&$definitions) {
-  $definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
+	$definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
 }
 
 
@@ -377,12 +381,12 @@ function oab_backoffice_config_schema_info_alter(&$definitions) {
  * Implements hook_library_info_alter().
  */
 function oab_backoffice_library_info_alter(&$libraries, $extension) {
-  if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
-    $jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
-    if (isset($jira_url['jira_report_code'])){
-      $libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
-    }
-  }
+	if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
+		$jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
+		if (isset($jira_url['jira_report_code'])){
+			$libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
+		}
+	}
 }
 
 
@@ -415,9 +419,9 @@ function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\F
 
 
 function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
-    if (isset($build['#attributes']['data-align']) && $build['#attributes']['data-align'] == 'center') {
-        $build['#attributes']['class'][] = 'text-align-center';
-    }
+	if (isset($build['#attributes']['data-align']) && $build['#attributes']['data-align'] == 'center') {
+		$build['#attributes']['class'][] = 'text-align-center';
+	}
 }
 
 
@@ -426,32 +430,32 @@ function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
  * Implements hook_views_data_alter().
  */
 function oab_backoffice_views_data_alter(array &$data) {
-    /*$data['node']['node_month'] = array(
-        'title' => t('Node month'),
-        'field' => array(
-            'title' => t('Node month'),
-            'help' => t('Flags a specific node month.'),
-            'id' => 'node_month',
-        ),
-    );*/
-    $data['node_field_data']['node_month'] = array(
-        'title' => t('Node Month filter'),
-        'filter' => array(
-            'title' => t('Node month filter'),
-            'help' => t('Provides a custom filter for nodes by the month of creation.'),
-            'field' => 'created',
-            'id' => 'node_month'
-        ),
-    );
-    $data['node_field_data']['node_year'] = array(
-        'title' => t('Node Year filter'),
-        'filter' => array(
-            'title' => t('Node year filter'),
-            'help' => t('Provides a custom filter for nodes by the year of creation.'),
-            'field' => 'created',
-            'id' => 'node_year'
-        ),
-    );
+	/*$data['node']['node_month'] = array(
+		'title' => t('Node month'),
+		'field' => array(
+			'title' => t('Node month'),
+			'help' => t('Flags a specific node month.'),
+			'id' => 'node_month',
+		),
+	);*/
+	$data['node_field_data']['node_month'] = array(
+		'title' => t('Node Month filter'),
+		'filter' => array(
+			'title' => t('Node month filter'),
+			'help' => t('Provides a custom filter for nodes by the month of creation.'),
+			'field' => 'created',
+			'id' => 'node_month'
+		),
+	);
+	$data['node_field_data']['node_year'] = array(
+		'title' => t('Node Year filter'),
+		'filter' => array(
+			'title' => t('Node year filter'),
+			'help' => t('Provides a custom filter for nodes by the year of creation.'),
+			'field' => 'created',
+			'id' => 'node_year'
+		),
+	);
 
 }
 
