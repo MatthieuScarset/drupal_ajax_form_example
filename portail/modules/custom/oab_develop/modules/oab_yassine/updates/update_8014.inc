@@ -30,4 +30,4 @@ taxonomy_rename_vocab("Géographique", 'Geographic', 'geographics', 'fr');
 taxonomy_rename_vocab("Pays", 'Country', 'countries', 'fr');
 
 
-throw new \Drupal\Core\Utility\UpdateException();
+//throw new \Drupal\Core\Utility\UpdateException();
