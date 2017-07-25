@@ -7,6 +7,8 @@
  */
 namespace Drupal\oab_frontoffice\Twig;
 
+use Drupal\image\Entity\ImageStyle;
+
 class OabExtension extends \Twig_Extension {
 
   /**
@@ -22,6 +24,7 @@ class OabExtension extends \Twig_Extension {
     $filters = [
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
+      new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
     ];
 
     return $filters;
@@ -63,5 +66,24 @@ class OabExtension extends \Twig_Extension {
       $return = strtoupper($fileParts[count($fileParts)-1]);
     }
     return $return;
+  }
+
+  /**
+   * Returns the URL of this image derivative for an original image path or URI.
+   *
+   * @param string $path
+   *   The path or URI to the original image.
+   * @param string $style
+   *   The image style.
+   *
+   * @return string
+   *   The absolute URL where a style image can be downloaded, suitable for use
+   *   in an <img> tag. Requesting the URL will cause the image to be created.
+   */
+  public function image_style_uri($path, $style) {
+    /** @var \Drupal\Image\ImageStyleInterface $image_style */
+    if ($image_style = ImageStyle::load($style)) {
+      return file_url_transform_relative($image_style->buildUrl($path));
+    }
   }
 }
