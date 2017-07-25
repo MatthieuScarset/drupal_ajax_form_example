@@ -89,15 +89,14 @@
         {##############}
         {# Je tourne sur tous les field_file (même s'il n'y en a qu'un seul
             parce que c'est enregistré dans un array) #}
+        {% for key, my_field_file in content.field_file  %}
+            {% set media = my_field_file.entity %}
+            {% set file_entity = media.field_file.entity %}
 
-        {% for key, file in content.field_file  %}
-        {#{% set file = content.field_file["#items"].first %}#}
-            {% set media = file.entity %}
-            {% set file = media.field_file.entity %}
+            {% if file_entity is not null and file_entity.filesize.value is not null %}
 
-            {% if file is not null and file.filesize.value is not null %}
-
-                <span>{% trans %}Dossier de presse{% endtrans %} - {{ file.getFilename | file_format }} {{ file.getsize | format_bytes }} </span>
+                <span>{% trans %}Dossier de presse{% endtrans %} - {{ file_entity.getFilename | file_format }}
+                        {{ file_entity.getsize | format_bytes }} </span>
                 <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
             {% endif %}
         {% endfor %}
