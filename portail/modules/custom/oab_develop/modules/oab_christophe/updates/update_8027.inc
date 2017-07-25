@@ -2,7 +2,7 @@
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_view_display.node.document.subhome');
-$config_group->set('third_party_settings.field_group.group_write.children', array(
+$config_group->setData(array(
   'uuid' => '1c9fb3d3-3e32-4522-95aa-99e73cc671dc',
   'langcode' => 'en',
   'status' => true,
