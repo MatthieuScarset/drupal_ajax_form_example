@@ -79,9 +79,13 @@
             {{ month }}<br/>{{ year }}
         </div>
     </div>
-    <div class="border col-lg-12"></div>
+    {# Pour faire la marge du trait identique aux autres blocs,
+    je suis obligé de la mettre dans un col-lg-12 aussi #}
+    <div class="col-lg-12">
+        <div class="border col-lg-12"></div>
+    </div>
     <div class="txt col-lg-12">
-        <span>{% trans %}Communiqué de presse{% endtrans %} {{ label|length }}</span>
+        <span>{% trans %}Communiqué de presse{% endtrans %}</span>
         <div>{{ label }}</div>
     </div>
 </div>
