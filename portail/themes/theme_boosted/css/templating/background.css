@@ -197,7 +197,7 @@
 
 p[class^='bg_'],
 p[class*='bg_']{
-  margin: 0;
+    margin: 0;
 }
 
 
@@ -347,7 +347,7 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
         font-size: 10em;
     }
     .frame-icon-rel {
-        font-size: 10em;
+        font-size: 13em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
@@ -361,10 +361,10 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
     .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 10em;
+        font-size: 12em;
     }
     .frame-icon-rel {
-        font-size: 10em;
+        font-size: 12em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
