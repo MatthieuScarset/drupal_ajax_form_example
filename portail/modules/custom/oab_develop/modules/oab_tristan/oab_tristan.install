@@ -64,3 +64,11 @@ function oab_tristan_update_8005() {
 function oab_tristan_update_8006() {
   include_once("updates/update_8006.inc");
 }
+
+
+/**
+ * Ajout de la traduction des tailles de fichiers
+ */
+function oab_tristan_update_8007() {
+  include_once("updates/update_8007.inc");
+}
