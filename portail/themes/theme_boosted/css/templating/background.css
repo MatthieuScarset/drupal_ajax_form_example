@@ -266,8 +266,8 @@ p[class*='bg_']{
 }
 
 .banner-topzone-pwp{
-    max-height: 550px;
-    height: 550px;
+    max-height: 500px;
+    height: 500px;
     padding-left: 0;
     width: 100%;
     display: flex;
