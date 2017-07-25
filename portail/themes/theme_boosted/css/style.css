@@ -83,15 +83,18 @@ article .content .field--type-text-long ul li:before{
 }
 .display-subhomes .txt{
     margin-top: 1.5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
 }
 
 .display-subhomes .encart-image{
     padding:0;
+    text-align: center;
+    display: block;
 }
 
 .display-subhomes .encart-image img{
     max-height: 12.5rem;
-    width: 100%;
 }
 .display-subhomes .bigKey{
     font-size: 7rem;
@@ -112,6 +115,9 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 3rem;
+}
+.view-display-id-page_document .txt div{
+    margin-top: 1rem;
 }
 .link-subhomes > .display-subhomes > .border{
     border-top: 3px solid #ededed;
