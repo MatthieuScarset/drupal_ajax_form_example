@@ -10,6 +10,21 @@
   </div>
 </div>
 */
+@media (max-width: 767px) {
+    html {
+        font-size: 8px;
+    }
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 9px;
+    }
+}
+@media (min-width: 1220px) {
+    html {
+        font-size: 10px;
+    }
+}
 .no-padding{
     padding: 0 !important;
 }
