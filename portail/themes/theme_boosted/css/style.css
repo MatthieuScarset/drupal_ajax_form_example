@@ -112,8 +112,9 @@ article .content .field--type-text-long ul li:before{
     margin-top: 2rem;
     margin-bottom: 3rem;
 }
-.link-subhomes > .display-subhomes > .border{
+.link-subhomes > .display-subhomes .border{
     border-top: 3px solid #ededed;
+
 }
 .link-subhomes:hover > .display-subhomes{
     background-color: #F16e00;
@@ -125,8 +126,9 @@ article .content .field--type-text-long ul li:before{
     border-color: #F16e00;
     /*border-bottom: 3px solid #fff;*/
 }
-.link-subhomes:hover > .display-subhomes > .border{
-    border-top: 3px solid #fff;
+.link-subhomes:hover > .display-subhomes .border{
+    border-top: 1px solid #fff;
+
 }
 
 .date-subhome {

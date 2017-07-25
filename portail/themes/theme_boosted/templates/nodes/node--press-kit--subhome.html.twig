@@ -80,10 +80,28 @@
             {{ month }}<br/>{{ year }}
         </div>
     </div>
-    <div class="border col-lg-12"></div>
+    {# Pour faire la marge du trait identique aux autres blocs,
+    je suis obligé de la mettre dans un col-lg-12 aussi #}
+    <div class="col-lg-12">
+        <div class="border col-lg-12"></div>
+    </div>
     <div class="txt col-lg-12">
-        <span>{% trans %}Dossier de presse{% endtrans %} PDF 32MB {{ label|length }}</span>
-        <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
+        {##############}
+        {# Je tourne sur tous les field_file (même s'il n'y en a qu'un seul
+            parce que c'est enregistré dans un array) #}
+
+        {% for key, file in content.field_file  %}
+        {#{% set file = content.field_file["#items"].first %}#}
+            {% set media = file.entity %}
+            {% set file = media.field_file.entity %}
+
+            {% if file is not null and file.filesize.value is not null %}
+
+                <span>{% trans %}Dossier de presse{% endtrans %} - {{ file.getFilename | file_format }} {{ file.getsize | format_bytes }} </span>
+                <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
+            {% endif %}
+        {% endfor %}
+        {##############}
     </div>
 </div>
 </a>
