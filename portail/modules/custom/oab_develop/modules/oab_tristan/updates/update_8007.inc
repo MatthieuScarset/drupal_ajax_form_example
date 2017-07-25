@@ -7,6 +7,7 @@
 
 use Drupal\locale\SourceString;
 
+
 $translations = array(
   array("source" => "B", "translation" => array("fr" => "o")),
   array("source" => "KB", "translation" => array("fr" => "Ko")),
