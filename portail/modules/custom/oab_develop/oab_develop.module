@@ -38,6 +38,14 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang){
 		foreach ($entity as $tid => $value){
 			$tidRename = $tid;
 		}
+	}else{
+		// creation du terme
+		$entity = \Drupal\taxonomy\Entity\Term::create([
+			'vid' => $vid,
+			'name' => $new,
+			'langcode' => $lang,
+		]);
+		$entity->save();
 	}
 	if(isset($tidRename)){
 		$connection = Database::getConnection();
