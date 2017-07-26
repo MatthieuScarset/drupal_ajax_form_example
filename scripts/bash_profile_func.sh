@@ -184,7 +184,7 @@ git_cleanup() {
 		echo "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
-
+## Cleane les branches remote qui sont déjà mergées sur master
 git_cleanup_remote() {
 	read -p "Etes-vous sur de vouloir nettoyer les branches du remote ? (O/n)" reponse
 
@@ -196,6 +196,18 @@ git_cleanup_remote() {
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
 		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+	fi
+}
+## liste les branches non mergées
+git_unmerged() {
+    if [ -z "$1" ]
+	then
+		#on récupère les branches mergées sur le master remote
+		echo -e "${CYANFONCE}Voici les branches non mergées sur la branche ${JAUNE}master${NEUTRE}"
+        git branch --no-merged master | grep -E -v 'master|recette|dev|updates'
+	else
+        echo -e "${CYANFONCE}Voici les branches non mergées sur la branche ${JAUNE}"$1"${NEUTRE}"
+        git branch --no-merged "$1" | grep -E -v 'master|recette|dev|updates'
 	fi
 }
 

@@ -56,3 +56,19 @@ function oab_tristan_update_8004() {
 function oab_tristan_update_8005() {
   include_once("updates/update_8005.inc");
 }
+
+/**
+ * Ajout de la colonne "Status" dans la view "Content", par rapport à l'etat du node dans le workflow
+ * Ajout d'un filtre sur la colonne "Status'
+ */
+function oab_tristan_update_8006() {
+  include_once("updates/update_8006.inc");
+}
+
+
+/**
+ * Ajout de la traduction des tailles de fichiers
+ */
+function oab_tristan_update_8007() {
+  include_once("updates/update_8007.inc");
+}
