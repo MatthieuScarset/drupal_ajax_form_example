@@ -74,8 +74,8 @@ function oab_tristan_update_8007() {
 }
 
 /**
- * Ajouts de blocs aà la région footer pour la mise en page des menus pour la version mobile
+ * Ajouts de blocs à la région footer pour la mise en page des menus pour la version mobile
  */
-//function oab_tristan_update_8008() {
-  //include_once("updates/update_8008.inc");
-//}
+function oab_tristan_update_8008() {
+  include_once("updates/update_8008.inc");
+}
