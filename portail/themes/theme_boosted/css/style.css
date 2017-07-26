@@ -175,10 +175,18 @@ article .content .field--type-text-long ul li:before{
     border-color: #000;
 }
 
+.sandwich-button {
+    margin-top: 0 !important;
+}
+
 .menu-loupe-xs {
     display: inline-block;
-    margin-right: 5px;
-    font-size: 1.2rem;
+    margin-right: 2rem;
+}
+
+.menu-loupe-xs .glyphicon {
+    font-size: 3rem;
+    margin-top: 22px;
 }
 
 .footer-div-border {
