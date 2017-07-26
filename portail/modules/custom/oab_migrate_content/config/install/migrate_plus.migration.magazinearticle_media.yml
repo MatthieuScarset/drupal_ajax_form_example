@@ -21,10 +21,12 @@ process:
     default_value: 1
   created: timestamp
   changed: timestamp
-  field_image:
+  field_image/target_id:
     plugin: migration
     migration: magazinearticle_image
     source: image_info
+  field_image/alt: field_image_alt
+  field_image/title: field_image_title
 migration_dependencies:
   required:
     - magazinearticle_image
