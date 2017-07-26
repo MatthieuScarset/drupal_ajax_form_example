@@ -25,7 +25,7 @@
   <div{{ attributes.addClass(classes) }}>
 
       {#Begin Top Navbar Menu#}
-      <div class="hidden-xs hidden-sm">
+      <div class="hidden-xs ">
           <div id="navtop">
               <nav id="top_navbar" class="navbar navbar-default container">
                   <div class="container">
@@ -40,7 +40,7 @@
 
                       <!-- Collect the nav links, forms, and other content for toggling -->
                       <div id="top-navbar-collapse" class="collapse navbar-collapse">
-                          <div class="hidden-lg hidden-md hidden-sm nav navbar-nav nav-menu">
+                          <div class="hidden-lg hidden-md nav navbar-nav nav-menu">
                               {#TODO : insert here a divider to separate sections#}
                               {#Render the main mega menu items in the top navbar #}
                               {#only to display them when collapsed #}
@@ -102,7 +102,7 @@
       <nav id="main_nav" class="navbar subnav mega-menu" role="navigation">
           <div class="container-fluid-navbar">
               <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="hidden-md hidden-lg pull-right" style="padding: 1rem">
+              <div class="hidden-md hidden-lg pull-right menu-xs" >
                   <div class="menu-loupe-xs">
                       {{ elements.righticonblock }}
                   </div>
