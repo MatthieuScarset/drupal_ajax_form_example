@@ -26,31 +26,31 @@
         <div class="row">
             <div class="o-footer">
                 {#Begin Footer Social Bar#}
-                    <div class="container-fluid o-footer-top nopadding">
+                <div class="container-fluid o-footer-top nopadding">
 
-                         <div class="row">
-                             <div class="col-md-12 nopadding">
-                                  {{ elements.footersocialblock }}
-                             </div>
+                     <div class="row">
+                         <div class="col-md-12 nopadding">
+                              {{ elements.footersocialblock }}
                          </div>
-                    </div>
-                    <div style="border-top:1px solid #999999; margin-top:10px">
-                    <div class="container-fluid o-footer-top nopadding">
+                     </div>
+                </div>
+                <div class="container-fluid o-footer-top nopadding hidden-xs hidden-sm">
 
-                        {% if elements.footeren %}
-                            {{ elements.footeren }}
-                        {% endif %}
-                        {% if elements.footerfr %}
-                            {{ elements.footerfr }}
-                        {% endif %}
-                        {% if elements.footerru %}
-                            {{ elements.footerru }}
-                        {% endif %}
-                        {% if elements.footerruen %}
-                            {{ elements.footerruen }}
-                        {% endif %}
+                    {% if elements.footeren %}
+                        {{ elements.footeren }}
+                    {% endif %}
+                    {% if elements.footerfr %}
+                        {{ elements.footerfr }}
+                    {% endif %}
+                    {% if elements.footerru %}
+                        {{ elements.footerru }}
+                    {% endif %}
+                    {% if elements.footerruen %}
+                        {{ elements.footerruen }}
+                    {% endif %}
 
-                        <div class='row'><div class="col-xs-12 nopadding">
+                    <div class='row'>
+                        <div class="col-xs-12 nopadding">
                             <ul class="nav navbar-nav footer-iconbar">
                                 <li><a href="#"><span class="icon-footer icon-control_centre"></span> Contact us</a></li>
                                 <li><a href="#"><span class="icon-footer icon-location_pin_compass"></span> Locate a store</a></li>
@@ -58,24 +58,42 @@
                                 <li><a href="#"><span class="icon-footer icon-business_lounge"></span> Business</a></li>
                                 <li><a href="#"><span class="icon-footer icon-child_protection"></span> Child protection</a></li>
                             </ul>
-                        </div></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="footer-div-border">
+                    {% if elements.bottomfooterbaren %}
+                        {{ elements.bottomfooterbaren }}
+                   {% endif %}
+                   {% if elements.bottomfooterbarfr %}
+                       {{ elements.bottomfooterbarfr }}
+                   {% endif %}
+                   {% if elements.bottom_footerbar_ru %}
+                        {{ elements.bottom_footerbar_ru }}
+                   {% endif %}
+                   {% if elements.bottomfooterbar_ruen %}
+                        {{ elements.bottomfooterbar_ruen }}
+                   {% endif %}
+                 </div>
+                <div class="hidden-md hidden-lg container footer-div-border">
+
+                    <div id="login_block" >
+                        {#Render the top navbar items#}
+                        {% if elements.topnavbarfr_2 %}
+                            {{ elements.topnavbarfr_2 }}
+                        {% endif %}
+                        {% if elements.topnavbaren_2 %}
+                            {{ elements.topnavbaren_2 }}
+                        {% endif %}
+                        {% if elements.topnavbarru_2 %}
+                            {{ elements.topnavbarru_2 }}
+                        {% endif %}
+                        {% if elements.topnavbarruen_2 %}
+                            {{ elements.topnavbarruen_2 }}
+                        {% endif %}
                     </div>
 
-
-                       {% if elements.bottomfooterbaren %}
-                            {{ elements.bottomfooterbaren }}
-                        {% endif %}
-                        {% if elements.bottomfooterbarfr %}
-                            {{ elements.bottomfooterbarfr }}
-                        {% endif %}
-                        {% if elements.bottom_footerbar_ru %}
-                            {{ elements.bottom_footerbar_ru }}
-                        {% endif %}
-                        {% if elements.bottomfooterbar_ruen %}
-                            {{ elements.bottomfooterbar_ruen }}
-                        {% endif %}
-
-
+                </div>
           </div>
 
        </div>

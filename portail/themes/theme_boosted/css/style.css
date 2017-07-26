@@ -174,3 +174,14 @@ article .content .field--type-text-long ul li:before{
     color: #000;
     border-color: #000;
 }
+
+.menu-loupe-xs {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 1.2rem;
+}
+
+.footer-div-border {
+    border-top:1px solid #999999;
+    margin-top:10px
+}
