@@ -184,3 +184,53 @@ article .content .field--type-text-long ul li:before{
     color: #000;
     border-color: #000;
 }
+
+
+
+
+
+@media (max-width: 767px) {
+    .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
+        display: block !important;
+    }
+    .o-footer-bottom ul li {
+        margin-right: 0px !important;
+    }
+
+    footer .navbar-nav {
+        margin: auto;
+    }
+    footer .navbar-nav > li > a {
+        padding-left: 1rem !important;
+    }
+
+    .sandwich-button {
+         margin-top: 0 !important;
+     }
+
+    .menu-loupe-xs {
+        display: inline-block;
+        margin-right: 2rem;
+    }
+
+    .menu-loupe-xs .glyphicon {
+        font-size: 3rem;
+        margin-top: 22px;   //Pour bloquer le margin 22px de glyphicon
+    }
+
+    .footer-div-border {
+        border-top:1px solid #999999;
+        margin-top:10px
+    }
+
+    .footer-div-border > p {
+        margin-top: 1rem;
+    }
+
+    .menu-xs {
+        padding: 1rem;
+        margin-right: 0px !important;
+    }
+
+
+}
