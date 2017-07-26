@@ -37,6 +37,7 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid', 'status'])
     ->condition('n.type', 'blog_post', '=');
+		//$query->condition('n.nid', array(1887,12968), 'IN');
 	  //$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     return $query;
   }
@@ -248,16 +249,16 @@ class BlogPostNode extends SqlBase {
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->body_value)){
           $body_value = $body_result->body_value;
+					$body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = preg_replace(array('@\r\n@', '@\n\r@', '@\n@', '@\r@'), ' ', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
         elseif (is_array($body_result) && isset($body_result['body_value'])){
           $body_value = $body_result['body_value'];
+					$body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = preg_replace(array('@\r\n@', '@\n\r@', '@\n@', '@\r@'), ' ', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
       }

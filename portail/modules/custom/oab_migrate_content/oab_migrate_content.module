@@ -46,14 +46,14 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 {
   //$content = $content_field->value;
   //Pattern de recherche pour une image dans un WYSIWYG
-  $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
+	$pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
   $searchResults = array();
   $error = false;
   //Recherche du pattern
   while(preg_match($pattern, $content, $searchResults) && !$error)
   {
     //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
-    $fidD7 = $searchResults[1];
+    $fidD7 = end($searchResults);
 
     //Récupération des informations du file D7
     \Drupal\Core\Database\Database::setActiveConnection('drupal7');
