@@ -171,12 +171,15 @@ class MagazineInterviewNode extends SqlBase {
       }
     }
 
-    $verbatim_content = '<div class="bg verbatim">';
-    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<p class="content_verbatim">"' . $field_txt_citation_1_value . '"</p>';
-    if ($field_txt_auteur_1_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_txt_auteur_1_value . '</p>';
-    if ($field_location_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_location_value . '</p>';
-    if ($field_profil_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_profil_value . '</p>';
-    $verbatim_content .= '</div>';
+    $verbatim_content = '<div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+												<div class="bubble">';
+    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<div class="verbatim-title">' . $field_txt_citation_1_value . '</div>';
+    $verbatim_source = "";
+    if ($field_txt_auteur_1_value !== '') $verbatim_source .= $field_txt_auteur_1_value ;
+    if ($field_location_value !== '') $verbatim_source .= ','. $field_location_value ;
+    if ($field_profil_value !== '') $verbatim_source .=  ','. $field_profil_value ;
+		$verbatim_content .= '<p class="verbatim-source">'.$verbatim_source.'</p>';
+    $verbatim_content .= '</div></div>';
 
     $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
 
