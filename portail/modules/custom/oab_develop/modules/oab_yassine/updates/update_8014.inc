@@ -6,10 +6,10 @@ use Drupal\field\Entity\FieldConfig;
 
 
 taxonomy_rename_vocab("Thème de blog", 'Blog thematic', 'blog_thematics', 'fr');
-taxonomy_rename_vocab("Format de blog", 'Blog type', 'bloc_formats', 'fr');
+taxonomy_rename_vocab("Format de blog", 'Blog type', 'blog_formats', 'fr');
 
 taxonomy_rename_vocab("Type de document", 'Documents types', 'document_types', 'fr');
-taxonomy_rename_vocab("Format de document", 'Documents format', 'document_formats', 'fr');
+taxonomy_rename_vocab("Thème de document", 'Documents thematics', 'document_thematics', 'fr');
 
 taxonomy_rename_vocab("Secteur d'activité", 'Industry', 'industries', 'fr');
 taxonomy_rename_vocab("Eclairage", 'Insight', 'thematic', 'fr');
@@ -18,7 +18,7 @@ taxonomy_rename_vocab("Métier", 'Profession', 'jobs_profiles', 'fr');
 taxonomy_rename_vocab("Segment de marché", 'Market segment', 'market_segments', 'fr');
 
 taxonomy_rename_vocab("Catégorie", 'Category', 'partner_types', 'fr');
-taxonomy_rename_vocab("Région", 'Region', 'region', 'fr');
+taxonomy_rename_vocab("Région", 'Region', 'regions', 'fr');
 taxonomy_rename_vocab("Produits", 'Product', 'products', 'fr');
 taxonomy_rename_vocab("Subhome", 'Subhome', 'subhomes', 'fr');
 taxonomy_rename_vocab("Sous-familles", 'Sub-families', 'sub_families', 'fr');
