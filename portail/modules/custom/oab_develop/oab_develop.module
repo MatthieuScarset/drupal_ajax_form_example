@@ -72,8 +72,13 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
 	$service = \Drupal::service('content_translation.manager');
 	$service->setEnabled('taxonomy_term',$vid, true );
 
+	$config_factory = \Drupal::configFactory();
+	$config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);
+	$config_group->set("language_alterable", true);
+	$config_group->set("default_langcode", "current_interface");
+	$config_group->save(TRUE);
+
 	// update default name in english
-		$config_factory = \Drupal::configFactory();
 		$config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
 		$config_group->set("name", $defaultName);
 		$config_group->save(TRUE);
