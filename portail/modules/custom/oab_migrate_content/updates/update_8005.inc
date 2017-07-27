@@ -1,290 +1,38 @@
 <?php
 
-/**
- * Modification des fichiers de config pour la migratoin des images : prise en compte des balises ALT et TITLE
- */
+include '../correspondances/solutionsD7_to_solutionsD8.inc';
+include '../correspondances/industriesD7_to_industriesD8.inc';
+include '../correspondances/regionsD7_to_regionsD8.inc';
+include '../correspondances/solutionsD7_to_thematicD8.inc';
+include '../correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
+include '../correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
 
-//DOCUMENT
-$config_factory = \Drupal::configFactory();
-$config_comment = $config_factory->getEditable('migrate_plus.migration.document_media_image');
-$config_comment->setData(
-	array (
-		'uuid' => '591639e9-1470-4283-a740-2f898582b37a',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
-			array (
-			),
-		'_core' =>
-			array (
-				'default_config_hash' => 'WskzfkpiewwuPmIqNfivTpmpZOiiUJMbm0SC2WnOxJc',
-			),
-		'id' => 'document_media_image',
-		'migration_tags' => NULL,
-		'migration_group' => 'document',
-		'label' => 'Document image medias',
-		'source' =>
-			array (
-				'plugin' => 'document_media_image',
-			),
-		'process' =>
-			array (
-				'bundle' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'image',
-					),
-				'langcode' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'und',
-					),
-				'name' => 'filename',
-				'uid' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'status' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'created' => 'timestamp',
-				'changed' => 'timestamp',
-				'field_image/target_id' =>
-					array (
-						'plugin' => 'migration',
-						'migration' => 'document_image',
-						'source' => 'image_info',
-					),
-				'field_image/alt' => 'field_image_alt',
-				'field_image/title' => 'field_image_title',
-			),
-		'destination' =>
-			array (
-				'plugin' => 'entity:media',
-			),
-		'migration_dependencies' =>
-			array (
-				'required' =>
-					array (
-						0 => 'document_image',
-					),
-			),
-	)
-	);
-$config_comment->save(TRUE);
+//on supprime les valeurs actuelles
+\Drupal::state()->delete('correspondence_taxo_solution');
+\Drupal::state()->delete('correspondence_taxo_industry');
+\Drupal::state()->delete('correspondence_taxo_region');
+\Drupal::state()->delete('correspondence_taxo_solution_to_thematic');
 
-//MAG ARTICLE
-$config_factory = \Drupal::configFactory();
-$config_comment = $config_factory->getEditable('migrate_plus.migration.magazinearticle_media');
-$config_comment->setData(
-	array (
-		'uuid' => '20037605-6ff2-452e-95a7-b81271d333ad',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
-			array (
-			),
-		'_core' =>
-			array (
-				'default_config_hash' => 'OlaKehXSg7j5AAWtDlnXgWa2zTYhJiv7660pcZImGLg',
-			),
-		'id' => 'magazinearticle_media',
-		'migration_tags' => NULL,
-		'migration_group' => 'magazinearticle',
-		'label' => 'Magazine articles medias',
-		'source' =>
-			array (
-				'plugin' => 'magazinearticle_media',
-			),
-		'process' =>
-			array (
-				'bundle' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'image',
-					),
-				'langcode' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'und',
-					),
-				'name' => 'filename',
-				'uid' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'status' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'created' => 'timestamp',
-				'changed' => 'timestamp',
-				'field_image/target_id' =>
-					array (
-						'plugin' => 'migration',
-						'migration' => 'magazinearticle_image',
-						'source' => 'image_info',
-					),
-				'field_image/alt' => 'field_image_alt',
-				'field_image/title' => 'field_image_title',
-			),
-		'destination' =>
-			array (
-				'plugin' => 'entity:media',
-			),
-		'migration_dependencies' =>
-			array (
-				'required' =>
-					array (
-						0 => 'magazinearticle_image',
-					),
-			),
-	)
-);
-$config_comment->save(TRUE);
+$solutions = get_correspondances_soltutionD7_to_solutionD8();
+//correspondances des taxos Solution
+\Drupal::state()->set('correspondence_taxo_solution', $solutions);
 
-//MAG INTERVIEW
-$config_factory = \Drupal::configFactory();
-$config_comment = $config_factory->getEditable('migrate_plus.migration.magazineinterview_media');
-$config_comment->setData(
-	array (
-		'uuid' => 'd77319e6-3dff-477c-acfb-2f604c9ce67e',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
-			array (
-			),
-		'_core' =>
-			array (
-				'default_config_hash' => 'aL1GBb3UIPe4bfJ7OHcPXt2H-3tAkB--gF9BINoVxVI',
-			),
-		'id' => 'magazineinterview_media',
-		'migration_tags' => NULL,
-		'migration_group' => 'magazineinterview',
-		'label' => 'Magazine interviews medias',
-		'source' =>
-			array (
-				'plugin' => 'magazineinterview_media',
-			),
-		'process' =>
-			array (
-				'bundle' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'image',
-					),
-				'langcode' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'und',
-					),
-				'name' => 'filename',
-				'uid' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'status' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'created' => 'timestamp',
-				'changed' => 'timestamp',
-				'field_image/target_id' =>
-					array (
-						'plugin' => 'migration',
-						'migration' => 'magazineinterview_image',
-						'source' => 'image_info',
-					),
-				'field_image/alt' => 'field_image_alt',
-				'field_image/title' => 'field_image_title',
-			),
-		'destination' =>
-			array (
-				'plugin' => 'entity:media',
-			),
-		'migration_dependencies' =>
-			array (
-				'required' =>
-					array (
-						0 => 'magazineinterview_image',
-					),
-			),
-	)
-);
-$config_comment->save(TRUE);
+//BLOGS
+$categBlog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
+//correspondances des taxos Solution
+\Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categBlog_to_thematic);
 
+$categBlog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
+//correspondances des taxos Solution
+\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categBlog_to_type);
 
-//BLOG POST
-$config_factory = \Drupal::configFactory();
-$config_comment = $config_factory->getEditable('migrate_plus.migration.blogpost_media');
-$config_comment->setData(
-	array (
-		'uuid' => 'c49ff4aa-cc4e-44ac-b7ff-89271dd066e0',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
-			array (
-			),
-		'_core' =>
-			array (
-				'default_config_hash' => '19COxlKygx1wRRV5UDH7ohwvVCOIbO8FQ5tdqJ4xhX0',
-			),
-		'id' => 'blogpost_media',
-		'migration_tags' => NULL,
-		'migration_group' => 'blogpost',
-		'label' => 'Blog posts medias',
-		'source' =>
-			array (
-				'plugin' => 'blogpost_media',
-			),
-		'process' =>
-			array (
-				'bundle' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'image',
-					),
-				'langcode' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 'und',
-					),
-				'name' => 'filename',
-				'uid' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'status' =>
-					array (
-						'plugin' => 'default_value',
-						'default_value' => 1,
-					),
-				'created' => 'timestamp',
-				'changed' => 'timestamp',
-				'field_image/target_id' =>
-					array (
-						'plugin' => 'migration',
-						'migration' => 'blogpost_image',
-						'source' => 'image_info',
-					),
-				'field_image/alt' => 'field_image_alt',
-				'field_image/title' => 'field_image_title',
-			),
-		'destination' =>
-			array (
-				'plugin' => 'entity:media',
-			),
-		'migration_dependencies' =>
-			array (
-			),
-	)
-);
-$config_comment->save(TRUE);
+// INDUSTRIES
+$industries = get_correspondances_industriesD7_to_industriesD8();
+\Drupal::state()->set('correspondence_taxo_industry', $industries);
+
+//REGIONS
+$regions = get_correspondances_regionsD7_to_regionsD8();
+\Drupal::state()->set('correspondence_taxo_region', $regions);
+
+$solution_to_thematic = get_correspondances_soltutionD7_to_thematicD8();
+\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);

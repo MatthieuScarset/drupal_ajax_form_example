@@ -1,36 +1,17 @@
 <?php
 
-function get_correspondances_industriesD7_to_industriesD8{
-
-
-	$industries = array(
-		//industries EN
-		'16384' => array('tid_d7' => '16384', 'label_d7' => 'air transport', 'langcode' => 'en', 'label_d8'=> 'Transport and Logistic', 'tid_D8' => ''),
-		'16385' => array('tid_d7' => '16385', 'label_d7' => 'eGovernment', 'langcode' => 'en', 'label_d8'=> 'MOFA’s', 'tid_D8' => ''),
-		'16792' => array('tid_d7' => '16792', 'label_d7' => 'finance', 'langcode' => 'en', 'label_d8'=> 'Financial Services', 'tid_D8' => ''),
-		'16355' => array('tid_d7' => '16355', 'label_d7' => 'health', 'langcode' => 'en', 'label_d8'=> 'Healthcare', 'tid_D8' => ''),
-		'16386' => array('tid_d7' => '16386', 'label_d7' => 'oil & gas', 'langcode' => 'en', 'label_d8'=> 'Oil, gaz, mines', 'tid_D8' => ''),
-		'16383' => array('tid_d7' => '16383', 'label_d7' => 'shipping', 'langcode' => 'en', 'label_d8'=> 'Transport and Logistic', 'tid_D8' => ''),
-		'16791' => array('tid_d7' => '16791', 'label_d7' => 'trading solutions', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-		//industries FR
-		'30442' => array('tid_d7' => '30442', 'label_d7' => 'banque et assurance', 'langcode' => 'fr', 'label_d8'=> 'Banque et Assurance', 'tid_D8' => ''),
-		'35324' => array('tid_d7' => '35324', 'label_d7' => 'Collectivités locales', 'langcode' => 'fr', 'label_d8'=> 'Collectivités locales', 'tid_D8' => ''),
-		'29947' => array('tid_d7' => '29947', 'label_d7' => 'Commerce et distribution', 'langcode' => 'fr', 'label_d8'=> 'Commerce', 'tid_D8' => ''),
-		'18337' => array('tid_d7' => '18337', 'label_d7' => 'e-santé', 'langcode' => 'fr', 'label_d8'=> 'Santé', 'tid_D8' => ''),
-		'18339' => array('tid_d7' => '18339', 'label_d7' => 'éducation', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-		'35118' => array('tid_d7' => '35118', 'label_d7' => "L'Industrie 4.0, l'usine connectée", 'langcode' => 'fr', 'label_d8'=> 'Industrie / Campus numérique', 'tid_D8' => ''),
-		'35172' => array('tid_d7' => '35172', 'label_d7' => 'POWERPAGE FR for digitrans', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-		'18342' => array('tid_d7' => '18342', 'label_d7' => 'secteur public', 'langcode' => 'fr', 'label_d8'=> 'Gouvernement', 'tid_D8' => ''),
-		'31854' => array('tid_d7' => '31854', 'label_d7' => 'Smart Cities', 'langcode' => 'fr', 'label_d8'=> 'Smart Cities', 'tid_D8' => ''),
-		'20201' => array('tid_d7' => '20201', 'label_d7' => 'trading', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-		'17712' => array('tid_d7' => '17712', 'label_d7' => 'transport', 'langcode' => 'fr', 'label_d8'=> 'Transport logistique', 'tid_D8' => ''),
-		//industries RU
-		'25426' => array('tid_d7' => '25426', 'label_d7' => 'решения для здравоохранения', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-		'25746' => array('tid_d7' => '25746', 'label_d7' => 'решения для нефтегазовых организаций', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-		'25428' => array('tid_d7' => '25428', 'label_d7' => 'решения для финансовых организаций', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-		//industries RU-EN
-		'26742' => array('tid_d7' => '26742', 'label_d7' => 'finance', 'langcode' => 'ru-en', 'label_d8'=> '', 'tid_D8' => ''),
-		'25776' => array('tid_d7' => '25776', 'label_d7' => 'oil & gas', 'langcode' => 'ru-en', 'label_d8'=> '', 'tid_D8' => ''),
-	);
+function get_correspondances_regionsD7_to_regionsD8(){
+	$regions =
+		array(
+			'26455' => array('tid_d7' => '26455', 'label_d7' => 'Africa', 'langcode' => 'en', 'label_d8'=> 'Africa', 'tid_D8' => ''),
+			'16780' => array('tid_d7' => '16780', 'label_d7' => 'Asia Pacific', 'langcode' => 'en', 'label_d8'=> 'Asia Pacific', 'tid_D8' => ''),
+			'16793' => array('tid_d7' => '16793', 'label_d7' => 'Europe', 'langcode' => 'en', 'label_d8'=> 'Europe', 'tid_D8' => ''),
+			'16794' => array('tid_d7' => '16794', 'label_d7' => 'Latin America', 'langcode' => 'en', 'label_d8'=> 'Latin America', 'tid_D8' => ''),
+			'16795' => array('tid_d7' => '16795', 'label_d7' => 'Middle East', 'langcode' => 'en', 'label_d8'=> 'Middle East', 'tid_D8' => ''),
+			'16796' => array('tid_d7' => '16796', 'label_d7' => 'North America', 'langcode' => 'en', 'label_d8'=> 'North America', 'tid_D8' => ''),
+			'25003' => array('tid_d7' => '25003', 'label_d7' => 'Russia', 'langcode' => 'en', 'label_d8'=> 'Russia', 'tid_D8' => ''),
+			'35102' => array('tid_d7' => '35102', 'label_d7' => 'Equant Ä°stanbul Telekom A.Åž.', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
+		);
+	return $regions;
 
 }
