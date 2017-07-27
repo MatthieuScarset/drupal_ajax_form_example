@@ -2804,6 +2804,16 @@ $config_group->save(TRUE);
 //========================== CUSTOMER STORY ==========================//
 
 // ajout de field_country
+
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_country');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_country',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+    ))->save();
+}
 $field = FieldConfig::loadByName('node', 'customer_story', 'field_country');
 if(empty($field)) {
     $config_array = array(
