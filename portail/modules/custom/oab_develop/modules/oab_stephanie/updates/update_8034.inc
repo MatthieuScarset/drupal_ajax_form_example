@@ -228,12 +228,9 @@ if(empty($field)) {
 
 $config_factory = \Drupal::configFactory();
 $config_comment = $config_factory->getEditable('core.entity_form_display.node.blog_post.default');
-$config_comment->setData(
-	array (
-		'uuid' => '7783f827-dedc-4463-b4b9-3a3cf835ef89',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
+$config_comment->set('langcode','en');
+$config_comment->set('status', true);
+$config_comment->set('dependencies' ,
 			array (
 				'config' =>
 					array (
@@ -277,8 +274,8 @@ $config_comment->setData(
 						7 => 'text',
 						8 => 'workbench_moderation',
 					),
-			),
-		'third_party_settings' =>
+			));
+$config_comment->set('third_party_settings' ,
 			array (
 				'field_group' =>
 					array (
@@ -436,12 +433,12 @@ $config_comment->setData(
 								'label' => 'SEO',
 							),
 					),
-			),
-		'id' => 'node.blog_post.default',
-		'targetEntityType' => 'node',
-		'bundle' => 'blog_post',
-		'mode' => 'default',
-		'content' =>
+			));
+$config_comment->set('id' , 'node.blog_post.default');
+$config_comment->set('targetEntityType', 'node');
+$config_comment->set('bundle' , 'blog_post');
+$config_comment->set('mode' , 'default');
+$config_comment->set('content' ,
 			array (
 				'field_blog_format' =>
 					array (
@@ -798,8 +795,8 @@ $config_comment->setData(
 							),
 						'region' => 'content',
 					),
-			),
-		'hidden' =>
+			));
+$config_comment->set('hidden' ,
 			array (
 				'created' => true,
 				'field_market_segment' => true,
@@ -807,20 +804,15 @@ $config_comment->setData(
 				'field_thematic' => true,
 				'sticky' => true,
 				'uid' => true,
-			),
-	)
-);
+			));
 $config_comment->save(TRUE);
 
 
 $config_factory = \Drupal::configFactory();
 $config_comment = $config_factory->getEditable('core.entity_view_display.node.blog_post.default');
-$config_comment->setData(
-	array (
-		'uuid' => 'a9af707b-c593-4e61-9d22-a86271f4e7d7',
-		'langcode' => 'en',
-		'status' => true,
-		'dependencies' =>
+$config_comment->set('langcode' , 'en');
+$config_comment->set('status' , true);
+$config_comment->set('dependencies' ,
 			array (
 				'config' =>
 					array (
@@ -860,12 +852,12 @@ $config_comment->setData(
 						3 => 'text',
 						4 => 'user',
 					),
-			),
-		'id' => 'node.blog_post.default',
-		'targetEntityType' => 'node',
-		'bundle' => 'blog_post',
-		'mode' => 'default',
-		'content' =>
+			));
+$config_comment->set('id' , 'node.blog_post.default');
+$config_comment->set('targetEntityType' , 'node');
+$config_comment->set('bundle' , 'blog_post');
+$config_comment->set('mode' , 'default');
+$config_comment->set('content' ,
 			array (
 				'field_comments' =>
 					array (
@@ -1044,8 +1036,8 @@ $config_comment->setData(
 							array (
 							),
 					),
-			),
-		'hidden' =>
+			));
+$config_comment->set('hidden' ,
 			array (
 				'field_blog_format' => true,
 				'field_blog_thematic' => true,
@@ -1062,8 +1054,5 @@ $config_comment->setData(
 				'langcode' => true,
 				'publish_date' => true,
 				'unpublish_date' => true,
-			),
-	)
-
-);
+			));
 $config_comment->save(TRUE);
