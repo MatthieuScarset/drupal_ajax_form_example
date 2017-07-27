@@ -79,3 +79,10 @@ function oab_tristan_update_8007() {
 function oab_tristan_update_8008() {
   include_once("updates/update_8008.inc");
 }
+
+/**
+ * Je cache la petite loupe du right icon block pour les petits et moyens ecrans
+ */
+function oab_tristan_update_8009() {
+  include_once("updates/update_8009.inc");
+}
