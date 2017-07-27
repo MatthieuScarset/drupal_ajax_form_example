@@ -140,3 +140,42 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 
   return $content;
 }
+
+
+function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7, $nid_D7, $bundle_D7)
+{
+	\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+	$dbD7 = \Drupal\Core\Database\Database::getConnection();
+	$new_values = array();
+	$tableau_correspondance = \Drupal::state()->get($name_tab_state);
+	if(count($tableau_correspondance) > 0) {
+		$query = $dbD7->select($table_D7, 'i');
+		$query->join('taxonomy_term_data', 't', 't.tid = i.'.$field_D7);
+		$query->fields('t', ['tid'])
+			->condition('i.entity_id', $nid_D7, '=')
+			->condition('i.bundle', $bundle_D7, '=');
+
+		$results = $query->execute()->fetchAll();
+
+		if (is_array($results)){
+			foreach ($results AS $result){
+				$tid_D7 = '';
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($result) && isset($result->tid)){
+					$tid_D7 = $result->tid;
+				}
+				elseif (is_array($result) && isset($result['tid'])){
+					$tid_D7 = $result['tid'];
+				}
+				if (isset($tableau_correspondance[$tid_D7]) && isset($tableau_correspondance[$tid_D7]['tid_D8'])) {
+					//prendre le tid D8
+					if (isset($tableau_correspondance[$tid_D7]['tid_D8']) && !empty($tableau_correspondance[$tid_D7]['tid_D8']) && $tableau_correspondance[$tid_D7]['tid_D8'] != "") {
+						$new_values[] = $tableau_correspondance[$tid_D7]['tid_D8'];
+					}
+				}
+			}
+		}
+	}
+	\Drupal\Core\Database\Database::setActiveConnection();
+	return $new_values;
+}
