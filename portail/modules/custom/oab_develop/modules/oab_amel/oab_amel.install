@@ -31,6 +31,7 @@ function oab_amel_update_dependencies() {
     $dependencies['oab_amel'][8019] = array('oab_yassine' => 8006 );
     $dependencies['oab_amel'][8020] = array('oab_yassine' => 8009, 'oab_tristan' => 8003 );
     $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004 );
+    $dependencies['oab_amel'][8021] = array('oab_christophe' => 8027, 'oab_yassine' => 8013 );
     return $dependencies;
 }
 

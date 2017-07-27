@@ -2803,6 +2803,59 @@ $config_group->save(TRUE);
 
 //========================== CUSTOMER STORY ==========================//
 
+// ajout de field_country
+$field = FieldConfig::loadByName('node', 'customer_story', 'field_country');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_country',
+        'entity_type' => 'node',
+        'bundle' => 'customer_story',
+        'label' => 'Country',
+        'required' => FALSE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.customer_story.field_country');
+$config_group->setData(
+    array (
+        'uuid' => 'b77ce485-e04b-42da-965c-1f55397e177d',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_country',
+                        1 => 'node.type.customer_story',
+                    ),
+            ),
+        'id' => 'node.customer_story.field_country',
+        'field_name' => 'field_country',
+        'entity_type' => 'node',
+        'bundle' => 'customer_story',
+        'label' => 'Country',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+            ),
+        'field_type' => 'string',
+    )
+);
+$config_group->save(TRUE);
+
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.customer_story.field_country', array (
+    'label' => 'Pays',
+));
+
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.customer_story.default');
 $config_group->setData(
@@ -6250,6 +6303,312 @@ $collection->write('field.field.node.product.field_job_profile', array (
     'label' => 'Métier',
 ));
 
+// Renommage en Profession sur tous les types de contenus
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.blog_post.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => 'fb7fb25d-fa69-42f9-a7ba-6ee7919adfb5',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.blog_post',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.blog_post.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'blog_post',
+        'label' => 'Profession',
+        'description' => '',
+        'required' => false,
+        'translatable' => false,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.customer_story.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => '6af4c92e-c064-48c9-bd76-801a83699df2',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.customer_story',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.customer_story.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'customer_story',
+        'label' => 'Profession',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.document.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => '2a0d1aae-5486-42a2-9006-6736002a3168',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.document',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.document.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'document',
+        'label' => 'Profession',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.magazine.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => 'addec776-ff5b-4755-b64a-8cf7392f953c',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.magazine',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.magazine.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'magazine',
+        'label' => 'Profession',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.press_kit.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => 'b63da216-3a78-44bd-8052-6f1bfeb6b009',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.press_kit',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.press_kit.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'press_kit',
+        'label' => 'Profession',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.press_release.field_job_profile');
+$config_group->setData(
+    array (
+        'uuid' => '076abf21-842c-4531-873d-b99f754ef9fe',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_job_profile',
+                        1 => 'node.type.press_release',
+                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                    ),
+            ),
+        'id' => 'node.press_release.field_job_profile',
+        'field_name' => 'field_job_profile',
+        'entity_type' => 'node',
+        'bundle' => 'press_release',
+        'label' => 'Job profile',
+        'description' => '',
+        'required' => false,
+        'translatable' => true,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'jobs_profiles' => 'jobs_profiles',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
 
 // SUBHOME - RUBRIQUE
 
@@ -6285,3 +6644,117 @@ $collection = \Drupal::service('config.storage')->createCollection('language.fr'
 $collection->write('field.field.node.press_release.field_subhome', array (
     'label' => 'Rubrique',
 ));
+
+//BLOG TYPE - FORMAT BLOG et BLOG THEMATIC - THEME BLOG
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.blog_post.field_blog_format');
+$config_group->setData(
+    array (
+        'uuid' => '7d5218e0-d512-447c-ad41-522ef5449f30',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_blog_format',
+                        1 => 'node.type.blog_post',
+                        2 => 'taxonomy.vocabulary.blog_formats',
+                    ),
+            ),
+        'id' => 'node.blog_post.field_blog_format',
+        'field_name' => 'field_blog_format',
+        'entity_type' => 'node',
+        'bundle' => 'blog_post',
+        'label' => 'Blog format',
+        'description' => '',
+        'required' => false,
+        'translatable' => false,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'blog_formats' => 'blog_formats',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.blog_post.field_blog_format', array (
+    'label' => 'Format blog',
+));
+
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.blog_post.field_blog_thematic');
+$config_group->setData(
+    array (
+        'uuid' => '23990e3f-ae0c-4547-9f4a-f443f71ebfdc',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_blog_thematic',
+                        1 => 'node.type.blog_post',
+                        2 => 'taxonomy.vocabulary.blog_thematics',
+                    ),
+            ),
+        'id' => 'node.blog_post.field_blog_thematic',
+        'field_name' => 'field_blog_thematic',
+        'entity_type' => 'node',
+        'bundle' => 'blog_post',
+        'label' => 'Blog thematic',
+        'description' => '',
+        'required' => false,
+        'translatable' => false,
+        'default_value' =>
+            array (
+            ),
+        'default_value_callback' => '',
+        'settings' =>
+            array (
+                'handler' => 'default:taxonomy_term',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'blog_thematics' => 'blog_thematics',
+                            ),
+                        'sort' =>
+                            array (
+                                'field' => '_none',
+                            ),
+                        'auto_create' => false,
+                        'auto_create_bundle' => '',
+                    ),
+            ),
+        'field_type' => 'entity_reference',
+    )
+);
+$config_group->save(TRUE);
+
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.blog_post.field_blog_thematic', array (
+    'label' => 'Thème blog',
+));
+
