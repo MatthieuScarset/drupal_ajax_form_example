@@ -46,5 +46,3 @@ $config_group->setData(
   )
 );
 $config_group->save(TRUE);
-
-throw new UpdateException();
