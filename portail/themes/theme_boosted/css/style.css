@@ -110,11 +110,13 @@ article .content .field--type-text-long ul li:before{
 }
 .display-subhomes .txt span{
     font-size: 1.2rem;
+
 }
 .display-subhomes .txt div{
     font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 3rem;
+    line-height: 1.5rem;
 }
 
 .view-display-id-page_document .txt div{
