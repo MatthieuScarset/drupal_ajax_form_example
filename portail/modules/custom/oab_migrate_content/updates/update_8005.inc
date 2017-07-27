@@ -1,12 +1,5 @@
 <?php
 
-include '../correspondances/solutionsD7_to_solutionsD8.inc';
-include '../correspondances/industriesD7_to_industriesD8.inc';
-include '../correspondances/regionsD7_to_regionsD8.inc';
-include '../correspondances/solutionsD7_to_thematicD8.inc';
-include '../correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
-include '../correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
-
 //on supprime les valeurs actuelles
 \Drupal::state()->delete('correspondence_taxo_solution');
 \Drupal::state()->delete('correspondence_taxo_industry');

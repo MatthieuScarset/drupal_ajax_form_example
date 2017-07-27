@@ -7,6 +7,14 @@ include 'correspondances/solutionsD7_to_thematicD8.inc';
 include 'correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
 include 'correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
 
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_migrate_content_update_dependencies() {
+	$dependencies['oab_migrate_content'][8005] = array('oab_stephanie' => 8034);
+}
+
 /**
  * implements hook_uninstall()
  */
@@ -18,6 +26,8 @@ function oab_migrate_content_uninstall() {
 }
 
 function oab_migrate_content_install(){
+
+	drupal_set_installed_schema_version('oab_migrate_content_install', 8000);
 
 	$solutions = get_correspondances_soltutionD7_to_solutionD8();
   //correspondances des taxos Solution
@@ -86,7 +96,6 @@ function oab_migrate_content_update_8003() {
 	include_once("updates/update_8003.inc");
 }
 
-
 /**
  * Modif config des medias image pour migrer les alt et title des images D7
  */
@@ -94,6 +103,11 @@ function oab_migrate_content_update_8004() {
 	include_once("updates/update_8004.inc");
 }
 
+/*
+ * Mise a jour des correspondances et le state
+ */
+/*
 function oab_migrate_content_update_8005() {
 	include_once("updates/update_8005.inc");
 }
+*/
