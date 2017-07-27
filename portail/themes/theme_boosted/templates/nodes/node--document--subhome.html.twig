@@ -96,27 +96,39 @@
 <a href="{{ url }}" class="link-subhomes">
     <div class="display-subhomes">
         <div class="encart encart-image col-lg-12">
+            {% set solution = "" %}
+            {% if content.field_solution %}
+                {% set solution %}
+                    {{ content.field_solution }}
+                {% endset %}
+                {% set solution = solution|striptags|trim %}
+            {% endif %}
 
-            {% for key, image in content.field_visual %}
+            {% set document_file_size = 0 %}
+            {% set document_file_type = "pdf" %}
+            {% for key, image in content.field_visual  %}
 
                 {% set media = image.entity %}
                 {% set file = media.field_image.entity %}
-                {% set uri = file_url(file.uri.value) %}
-
+                {% set uri = file.uri.value %}
                 {% if uri is not null and media.name.value is not null %}
 
-            <img src="{{ uri }}" alt="{{ media.name.value }}" /><br/>
+                    <img src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
                 {% endif %}
 
             {% endfor %}
+
+            {% for key, file in content.field_file %}
+                {% if file.entity.field_file.entity.filesize.value is not null %}
+                    {% set document_file_size = file.entity.field_file.entity.filesize.value %}
+                    {% set document_file_type = file.entity.field_file.entity.filename.value %}
+                {% endif %}
+            {% endfor %}
+
         </div>
         <div class="txt col-lg-12">
-            <span>  {{ content.field_solution[0]['#taxonomy_term'].get('name').getString() }} - {{ content.field_file['0']['#media'].label() }}</span>
+            <span>{% if solution is not empty %} {{ solution }} - {% endif %} {% if document_file_type is not null %} {{ document_file_type|file_format() }} {% endif %} {% if document_file_size is not null %} {{ document_file_size|format_bytes() }} {% endif %}</span>
             <div>{{ label }}</div>
         </div>
-
     </div>
 </a>
-
-
-

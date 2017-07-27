@@ -7,3 +7,7 @@ services:
     class: Drupal\oab_frontoffice\Breadcrumb\OabFrontofficBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  oab_frontoffice.twig.OabExtension:
+      class: Drupal\oab_frontoffice\Twig\OabExtension
+      tags:
+        - { name: twig.extension }
