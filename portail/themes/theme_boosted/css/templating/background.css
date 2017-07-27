@@ -197,7 +197,7 @@
 
 p[class^='bg_'],
 p[class*='bg_']{
-  margin: 0;
+    margin: 0;
 }
 
 
@@ -266,8 +266,8 @@ p[class*='bg_']{
 }
 
 .banner-topzone-pwp{
-    max-height: 550px;
-    height: 550px;
+    max-height: 500px;
+    height: 500px;
     padding-left: 0;
     width: 100%;
     display: flex;
@@ -337,17 +337,28 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
 }
 /* changements police en fonction largeur */
-@media (min-width: 960px) and (max-width: 1380px){
+@media (min-width: 1025px) and (max-width: 1380px){
     .banner-topzone .titre3,
     .banner-topzone-pwp .titre3{
         font-size: 2rem;
     }
     .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 10em;
+        font-size: 12em;
     }
-    .frame-icon-rel {
-        font-size: 10em;
+    .banner-topzone .frame-text,
+    .banner-topzone-pwp .frame-text {
+        font-size: 2rem;
+    }
+}
+@media (min-width: 960px) and (max-width: 1024px){
+    .banner-topzone .titre3,
+    .banner-topzone-pwp .titre3{
+        font-size: 2rem;
+    }
+    .banner-topzone .frame-icon-rel,
+    .banner-topzone-pwp .frame-icon-rel{
+        font-size: 11em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
@@ -361,10 +372,8 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
     .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 12em;
+        font-size: 13em;
     }
-    .frame-icon-rel {
-        font-size: 12em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
@@ -378,10 +387,7 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
     .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 10em;
-    }
-    .frame-icon-rel {
-        font-size: 10em;
+        font-size: 12em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {
@@ -395,10 +401,7 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
     }
     .banner-topzone .frame-icon-rel,
     .banner-topzone-pwp .frame-icon-rel{
-        font-size: 10em;
-    }
-    .frame-icon-rel {
-        font-size: 10em;
+        font-size: 12em;
     }
     .banner-topzone .frame-text,
     .banner-topzone-pwp .frame-text {

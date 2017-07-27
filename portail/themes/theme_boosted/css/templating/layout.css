@@ -10,6 +10,51 @@
   </div>
 </div>
 */
+@media (max-width: 767px) {
+    html {
+        font-size: 8px;
+    }
+    h1{
+        font-size: 3.4rem;
+    }
+    h2{
+        font-size: 3rem;
+    }
+    h3{
+        font-size: 2.4rem;
+    }
+    h4{
+        font-size: 2rem;
+    }
+    h5{
+        font-size: 1.8rem;
+    }
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 9px;
+    }
+    h1{
+        font-size: 3.4rem;
+    }
+    h2{
+        font-size: 3rem;
+    }
+    h3{
+        font-size: 2.4rem;
+    }
+    h4{
+        font-size: 2rem;
+    }
+    h5{
+        font-size: 1.8rem;
+    }
+}
+@media (min-width: 1220px) {
+    html {
+        font-size: 10px;
+    }
+}
 .no-padding{
     padding: 0 !important;
 }
