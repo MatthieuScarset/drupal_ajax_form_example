@@ -29,6 +29,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		$events[MigrateEvents::PRE_IMPORT][] = array('swtchUserToAdmin');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillTaxonomyTIDCorrespondence');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillSubhomeIdInState');
+		$events[MigrateEvents::PRE_IMPORT][] = array('fillPressFormatIdInState');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
 		$events[MigrateEvents::POST_IMPORT][] = array('swtchUserToAnonymous');
@@ -174,6 +175,30 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		}
 		\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
 	}
+
+	public function fillPressFormatIdInState(MigrateImportEvent $migrate_row) {
+
+		$formats = \Drupal::state()->get('press_format_for_migration');
+		foreach ($formats as $code_format => $tableau_langues) {
+			foreach ($tableau_langues as $langCode => $element) {
+				if (empty($element['tid_D8']) || $element['tid_D8'] == '') {
+					if ($element['label'] != "") {
+						$query = \Drupal::entityQuery('taxonomy_term');
+						$query->condition('vid', 'press_formats');
+						$query->condition('langcode', $langCode);
+						$query->condition('name', $element['label']);
+						$entity = $query->execute();
+
+						if (isset($entity) && !empty($entity) && count($entity) > 0) {
+							$formats[$code_format][$langCode]['tid_D8'] = array_pop(array_values($entity));
+						}
+					}
+				}
+			}
+		}
+		\Drupal::state()->set('press_format_for_migration', $formats);
+	}
+
 
 	private function genericFillCorrespondance($state_key, $vidD8)
 	{

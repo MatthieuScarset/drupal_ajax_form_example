@@ -6,17 +6,15 @@
 \Drupal::state()->delete('correspondence_taxo_region');
 \Drupal::state()->delete('correspondence_taxo_solution_to_thematic');
 
+
 $solutions = get_correspondances_soltutionD7_to_solutionD8();
-//correspondances des taxos Solution
 \Drupal::state()->set('correspondence_taxo_solution', $solutions);
 
 //BLOGS
 $categBlog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
-//correspondances des taxos Solution
 \Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categBlog_to_thematic);
 
 $categBlog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
-//correspondances des taxos Solution
 \Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categBlog_to_type);
 
 // INDUSTRIES
@@ -29,3 +27,35 @@ $regions = get_correspondances_regionsD7_to_regionsD8();
 
 $solution_to_thematic = get_correspondances_soltutionD7_to_thematicD8();
 \Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);
+
+//MAG CATEG TO MAG FORMAT
+$categMag_to_formatMag = get_correspondances_categoriesMagazineD7_to_MagazineFormatD8();
+\Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categMag_to_formatMag);
+
+//Solution to mag theme
+$solution_to_themeMag = get_correspondances_solutionsD7_to_MagazineThematicD8();
+\Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_themeMag);
+
+//solution to doc theme
+$solution_to_themeDoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
+\Drupal::state()->set('correspondence_solution_to_theme_doc', $solution_to_themeDoc);
+
+//format doc to doc format
+$formatDoc_to_formatDoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
+\Drupal::state()->set('correspondence_format_document', $formatDoc_to_formatDoc);
+
+$press_formats = array(
+	'press_kit' => array(
+		'fr' => array('label' => 'Dossier de presse', 'tid_D8' => ''),
+		'en' => array('label' => 'Press kit', 'tid_D8' => ''),
+		'ru' => array('label' => '', 'tid_D8' => ''),
+		'ru-en' => array('label' => '', 'tid_D8' => '')),
+
+	'press_release' => array(
+		'fr' => array('label' => 'Communiqué de presse', 'tid_D8' => ''),
+		'en' => array('label' => 'Press release', 'tid_D8' => ''),
+		'ru' => array('label' => '', 'tid_D8' => ''),
+		'ru-en' => array('label' => '', 'tid_D8' => '')),
+
+);
+\Drupal::state()->set('press_format_for_migration', $subhomes);

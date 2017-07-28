@@ -52,8 +52,7 @@ $config_comment->setData(
 				'homepage' => 'homepage',
 				'langcode' => 'language',
 				'default_langcode' => 'default_langcode',
-				'comment_body/value' => 'comment_body_value',
-				'comment_body/format' => 'comment_body_format'
+				'comment_body' => 'comment_body',
 			),
 
 		'migration_dependencies' =>
