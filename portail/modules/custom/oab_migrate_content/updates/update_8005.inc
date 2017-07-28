@@ -58,4 +58,4 @@ $press_formats = array(
 		'ru-en' => array('label' => '', 'tid_D8' => '')),
 
 );
-\Drupal::state()->set('press_format_for_migration', $subhomes);
+\Drupal::state()->set('press_format_for_migration', $press_formats);
