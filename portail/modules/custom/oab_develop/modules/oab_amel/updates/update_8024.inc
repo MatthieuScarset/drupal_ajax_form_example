@@ -1115,6 +1115,21 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 
+
+
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.simple_page.field_subhome', array (
+    'label' => 'Rubrique',
+));
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.simple_page.field_job_profile', array (
+    'label' => 'Métier',
+));
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('field.field.node.simple_page.field_industry', array (
+    'label' => 'Secteur d\'activité',
+
+
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.simple_page.default');
 $config_group->setData(
