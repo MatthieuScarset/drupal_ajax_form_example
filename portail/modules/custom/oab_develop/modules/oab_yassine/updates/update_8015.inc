@@ -8,7 +8,7 @@ use Drupal\field\Entity\FieldConfig;
 taxonomy_rename_vocab("Format d'éclairage", 'Insight type', 'insight_types', 'fr');
 
 /**
-	* Taxo Général
+	* Taxo Général FR
  */
 
 // Metier
@@ -88,7 +88,6 @@ taxonomy_rename_taxo('Cybersecurité', 'Cybersecurité', 'thematic', 'fr');
 taxonomy_rename_taxo('Expérience client', 'Expérience client', 'thematic', 'fr');
 taxonomy_rename_taxo('Mobile', 'Mobile', 'thematic', 'fr');
 taxonomy_rename_taxo('Réseaux', 'Réseaux', 'thematic', 'fr');
-taxonomy_delete_taxo('Digital transformation', 'thematic', 'en');
 taxonomy_delete_taxo('Transformation digitale', 'thematic', 'fr');
 
 
@@ -200,3 +199,204 @@ taxonomy_rename_taxo("Catalogue des offres", "Catalogue des offres", 'subhomes',
 taxonomy_rename_taxo("Presse", "Presse", 'subhomes', 'fr');
 
 //throw new \Drupal\Core\Utility\UpdateException();
+
+
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+
+/**
+ * Taxo Général EN
+ */
+
+// Profession.
+
+taxonomy_rename_taxo('CEO', 'CEO', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Communication', 'Communication', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Digital Officer', 'Digital Officer', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Engineering', 'Engineering', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Finance', 'Finance', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Human Resources', 'Human Resources', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('IT & Technical', 'IT & Technical', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Legal', 'Legal', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Marketing & Commercial', 'Marketing & Commercial', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Operation/Customer Service', 'Operation/Customer Service', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Purchasing', 'Purchasing', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('R&D and innovation', 'R&D and innovation', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Sales Director', 'Sales', 'jobs_profiles', 'en');
+taxonomy_rename_taxo('Security', 'Security', 'jobs_profiles', 'en');
+
+// Industry.
+
+taxonomy_rename_taxo('Public sector', 'Public sector', 'industries', 'en');
+taxonomy_rename_taxo('Healthcare', 'Health', 'industries', 'en');
+taxonomy_rename_taxo('Oil, gaz, mines', 'Resources and energy', 'industries', 'en');
+taxonomy_rename_taxo('Transport  and Logistic', 'Transport', 'industries', 'en');
+taxonomy_rename_taxo('Bank & insurance', 'Bank & insurance', 'industries', 'en');
+taxonomy_rename_taxo('Manufacturing', 'Manufacturing', 'industries', 'en');
+taxonomy_rename_taxo('Retail', 'Retail', 'industries', 'en');
+taxonomy_rename_taxo('Automotive', 'Automotive', 'industries', 'en');
+taxonomy_rename_taxo('Technology and business', 'Technology and business', 'industries', 'en');
+taxonomy_rename_taxo('Tourism and personal services', 'Tourism and personal services', 'industries', 'en');
+
+//Solutions.
+taxonomy_rename_taxo('Business Innovation', 'Business Innovation', 'solutions', 'en');
+taxonomy_rename_taxo('Collaborative Workspace', 'Collaborative Workspace', 'solutions', 'en');
+taxonomy_rename_taxo('Cyber Defense', 'Cyber Defense', 'solutions', 'en');
+taxonomy_rename_taxo('Enriched connectivity', 'Enriched connectivity', 'solutions', 'en');
+taxonomy_rename_taxo('Enriched Customer relationship', 'Enriched Customer relationship', 'solutions', 'en');
+taxonomy_rename_taxo('Flexible IT', 'Flexible IT', 'solutions', 'en');
+taxonomy_rename_taxo('Services', 'Services', 'solutions', 'en');
+
+// Region.
+taxonomy_rename_taxo('Middle East & Africa', 'Middle East & Africa', 's', 'en');
+taxonomy_rename_taxo('Asia Pacific', 'Asia Pacific', 's', 'en');
+taxonomy_rename_taxo('Europe', 'Europe', 's', 'en');
+taxonomy_rename_taxo('Latin America', 'Latin America', 's', 'en');
+taxonomy_rename_taxo('North America', 'North America', 's', 'en');
+
+/**
+ * Blogs
+ */
+
+// Blog thematic.
+taxonomy_rename_taxo('Big Data Analytics', 'Big Data', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Cloud Computing', 'Cloud', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Collaboration', 'Collaboration', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Consulting', 'Connectivity', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Customer Experience', 'Customer Experience', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Digital Transformation', 'Digital Transformation', 'blog_thematics', 'en');
+taxonomy_rename_taxo('IoT', 'IoT', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Mobility', 'Mobility', 'blog_thematics', 'en');
+taxonomy_rename_taxo('Security', 'Security', 'blog_thematics', 'en');
+taxonomy_rename_taxo('News', 'News', 'blog_thematics', 'en');
+
+// Blog formats.
+taxonomy_rename_taxo('Article', 'Article', 'blog_formats', 'en');
+taxonomy_rename_taxo('Brochure', 'Brochure', 'blog_formats', 'en');
+taxonomy_rename_taxo('Case study', 'Case study', 'blog_formats', 'en');
+taxonomy_rename_taxo('Guide', 'Guide', 'blog_formats', 'en');
+taxonomy_rename_taxo('Infographic', 'Infographic', 'blog_formats', 'en');
+taxonomy_rename_taxo('paper', 'White paper', 'blog_formats', 'en');
+
+// Eclairages.
+taxonomy_rename_taxo('Home', 'Home', 'thematic', 'en');
+taxonomy_rename_taxo('Big data', 'Big data', 'thematic', 'en');
+taxonomy_rename_taxo('Cloud', 'Cloud', 'thematic', 'en');
+taxonomy_rename_taxo('Collaboration', 'Collaboration', 'thematic', 'en');
+taxonomy_rename_taxo('Connectivity', 'Connectivity', 'thematic', 'en');
+taxonomy_rename_taxo('Customer Experience', 'Customer Experience', 'thematic', 'en');
+taxonomy_rename_taxo('Digital transformation', 'Digital Transformation', 'thematic', 'en');
+taxonomy_rename_taxo('IoT', 'IoT', 'thematic', 'en');
+taxonomy_rename_taxo('Mobility', 'Mobility', 'thematic', 'en');
+taxonomy_rename_taxo('Security', 'Security', 'thematic', 'en');
+
+
+/**
+ * Documents
+ */
+
+// Documents format.
+taxonomy_rename_taxo('Advice sheet', 'Advice sheet', 'document_types', 'en');
+taxonomy_rename_taxo('Blog book', 'Blog book', 'document_types', 'en');
+taxonomy_rename_taxo('Brochure', 'Brochure', 'document_types', 'en');
+taxonomy_rename_taxo('Case study', 'Case study', 'document_types', 'en');
+taxonomy_rename_taxo('Fact sheet', 'Fact sheet', 'document_types', 'en');
+taxonomy_rename_taxo('eBook', 'eBook', 'document_types', 'en');
+taxonomy_rename_taxo('Magazine', 'Magazine', 'document_types', 'en');
+taxonomy_rename_taxo('Publication', 'Publication', 'document_types', 'en');
+taxonomy_rename_taxo('White paper', 'White paper', 'document_types', 'en');
+taxonomy_rename_taxo('Position paper', 'Position paper', 'document_types', 'en');
+
+// Documents thematics.
+taxonomy_rename_taxo('Big Data', 'Big Data', 'document_thematics', 'en');
+taxonomy_rename_taxo('Cloud', 'Cloud', 'document_thematics', 'en');
+taxonomy_rename_taxo('Collaboration', 'Collaboration', 'document_thematics', 'en');
+taxonomy_rename_taxo('Customer Experience', 'Customer Experience', 'document_thematics', 'en');
+taxonomy_rename_taxo('Digital Transformation', 'Digital Transformation', 'document_thematics', 'en');
+taxonomy_rename_taxo('IoT', 'IoT', 'document_thematics', 'en');
+taxonomy_rename_taxo('Mobility', 'Mobility', 'document_thematics', 'en');
+taxonomy_rename_taxo('Security', 'Security', 'document_thematics', 'en');
+
+/**
+ * Magazine
+ */
+// Magazine thematics.
+taxonomy_rename_taxo('Big Data', 'Big Data', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Cloud', 'Cloud', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Collaboration', 'Collaboration', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Connectivity', 'Connectivity', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Customer Experience', 'Customer Experience', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Digital Transformation', 'Digital Transformation', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('IoT', 'IoT', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Mobility', 'Mobility', 'magazine_thematics', 'en');
+taxonomy_rename_taxo('Security', 'Security', 'magazine_thematics', 'en');
+
+// Magazine types.
+taxonomy_rename_taxo('Article', 'Article', 'magazine_types', 'en');
+taxonomy_rename_taxo('Brochure', 'Brochure', 'magazine_types', 'en');
+taxonomy_rename_taxo('Case study', 'Case study', 'magazine_types', 'en');
+taxonomy_rename_taxo('Guide', 'Guide', 'magazine_types', 'en');
+taxonomy_rename_taxo('Infographic', 'Infographic', 'magazine_types', 'en');
+taxonomy_rename_taxo('White paper', 'White paper', 'magazine_types', 'en');
+
+
+/**
+ * Presse
+ */
+// Presse format.
+taxonomy_rename_taxo('Press release', 'Press release', 'press_formats', 'en');
+taxonomy_rename_taxo('Press kit', 'Press kit', 'press_formats', 'en');
+
+/**
+ * Eclairage
+ */
+// Eclairage format.
+taxonomy_rename_taxo("Article", "Article", 'insight_types', 'en');
+taxonomy_rename_taxo("Brochure", "Brochure", 'insight_types', 'en');
+taxonomy_rename_taxo("Case study", "Case study", 'insight_types', 'en');
+taxonomy_rename_taxo("Guide", "Guide", 'insight_types', 'en');
+taxonomy_rename_taxo("Infographic", "Infographic", 'insight_types', 'en');
+taxonomy_rename_taxo("White paper", "White paper", 'insight_types', 'en');
+
+
+/**
+ * Partners
+ */
+// Partner categories.
+taxonomy_rename_taxo("System Integrators Partners", "System Integrators Partners", 'partner_types', 'en');
+taxonomy_rename_taxo("Solutions Partners", "Solutions Partners", 'partner_types', 'en');
+taxonomy_rename_taxo("Telco Partners", "Telco Partners", 'partner_types', 'en');
+taxonomy_rename_taxo("Vertical Partners", "Vertical Partners", 'partner_types', 'en');
+
+// Partner categories
+taxonomy_rename_taxo("Asia Pacific", "Asia Pacific", 'geographics', 'en');
+taxonomy_rename_taxo("Americas", "Americas", 'geographics', 'en');
+taxonomy_rename_taxo("France Corporate", "France Corporate", 'geographics', 'en');
+taxonomy_rename_taxo("France Mid-market", "France Mid-market", 'geographics', 'en');
+taxonomy_rename_taxo("Europe", "Europe", 'geographics', 'en');
+taxonomy_rename_taxo("Russia", "Russia", 'geographics', 'en');
+taxonomy_rename_taxo("Middle-East & Africa", "Middle-East & Africa", 'geographics', 'en');
+
+/**
+ * Market segments.
+ */
+taxonomy_rename_taxo("SME", "SME", 'market_segments', 'en');
+taxonomy_rename_taxo("mid market", "mid market", 'market_segments', 'en');
+taxonomy_rename_taxo("high end market", "high end market", 'market_segments', 'en');
+taxonomy_rename_taxo("key accounts", "key accounts", 'market_segments', 'en');
+taxonomy_rename_taxo("Multinational", "Multinational", 'market_segments', 'en');
+
+/**
+ * Subhomes
+ */
+// Subhomes format.
+taxonomy_rename_taxo("Blogs", "Blogs", 'subhomes', 'en');
+taxonomy_rename_taxo("Case study", "Case study", 'subhomes', 'en');
+taxonomy_rename_taxo("Library", "Library", 'subhomes', 'en');
+taxonomy_rename_taxo("Magazine", "Magazine", 'subhomes', 'en');
+taxonomy_rename_taxo("Partners", "Partners", 'subhomes', 'en');
+taxonomy_rename_taxo("Products", "Products", 'subhomes', 'en');
+taxonomy_rename_taxo("Newsroom", "Newsroom", 'subhomes', 'en');
