@@ -22,7 +22,7 @@ process:
     default_value: node
   field_name:
     plugin: default_value
-    default_value: field_commentaire
+    default_value: field_comments
   uid: uid
   subject: subject
   hostname: hostname
@@ -35,7 +35,8 @@ process:
   homepage: homepage
   langcode: language
   default_langcode: default_langcode
-  comment_body: comment_body
+  comment_body/value: comment_body_value
+  comment_body/format: comment_body_format
 migration_dependencies:
   required:
     - blogpost_node

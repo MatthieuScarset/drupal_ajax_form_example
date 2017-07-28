@@ -109,7 +109,9 @@ class BlogPostComment extends SqlBase {
       $row->setSourceProperty('pid_parent', '0');
     }
 
-		$row->setSourceProperty('comment_body', array('value' => $row->getSourceProperty('comment_body_value'), 'format' => 'comments'));
+		//$row->setSourceProperty('comment_body', array('value' => 'test', 'format' => 'comments'));
+		$row->setSourceProperty('comment_body_value','test');
+		$row->setSourceProperty('comment_body_format','comments');
 
     $row->setSourceProperty('langcode', $row->getSourceProperty('language'));
     $row->setSourceProperty('default_langcode', '1');

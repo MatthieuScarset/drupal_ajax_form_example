@@ -38,7 +38,7 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid', 'status'])
     ->condition('n.type', 'blog_post', '=');
-		//$query->condition('n.nid', array(1887,12968), 'IN');
+		$query->condition('n.nid', array(1887,12968), 'IN');
 	  //$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     return $query;
   }
@@ -130,6 +130,26 @@ class BlogPostNode extends SqlBase {
 		if(count($thematics) > 0){
 
 			$row->setSourceProperty('thematics', $thematics);
+		}
+
+		// taxonomie Categorie blog vers blog thematic
+		$blog_thematics = get_correspondance_tid_D7_tid_D8('correspondence_cat_blog_to_thematic_blog',
+			'field_data_field_taxo_blog',
+			'field_taxo_blog_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($blog_thematics) > 0){
+			$row->setSourceProperty('$blog_thematics', $blog_thematics);
+		}
+
+		// taxonomie Categorie blog vers blog format/type
+		$blog_formats = get_correspondance_tid_D7_tid_D8('correspondence_cat_blog_to_type_blog',
+			'field_data_field_taxo_blog',
+			'field_taxo_blog_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($blog_formats) > 0){
+			$row->setSourceProperty('blog_formats', $blog_formats);
 		}
 
 		// taxonomie industrie

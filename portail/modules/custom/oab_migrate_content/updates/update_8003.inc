@@ -38,7 +38,7 @@ $config_comment->setData(
 				),
 				'field_name' => array (
 					'plugin' => 'default_value',
-					'default_value' => 'field_commentaire'
+					'default_value' => 'field_comments'
 				),
 				'uid' => 'uid',
 				'subject' => 'subject',

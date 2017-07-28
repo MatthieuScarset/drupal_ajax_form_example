@@ -33,6 +33,7 @@ class BlogPostProfile extends SqlBase {
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
     $query->fields('u', ['uid', 'created'])
     ->condition('ur.rid', 4, '=')
+			->condition('ur.rid', 99999, '=')
     ->condition('u.uid', 1, '!=');
     return $query;
   }

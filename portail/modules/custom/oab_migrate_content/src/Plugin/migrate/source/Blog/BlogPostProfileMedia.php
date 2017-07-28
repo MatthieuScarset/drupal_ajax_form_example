@@ -41,6 +41,7 @@ class BlogPostProfileMedia extends SqlBase {
     $query->condition('fi.entity_type', 'profile2')
     ->condition('fi.bundle', 'main')
     ->condition('ur.rid', 4, '=')
+			->condition('ur.rid', 99999, '=')
     ->orderBy('m.fid', 'DESC');
 
     return $query;
