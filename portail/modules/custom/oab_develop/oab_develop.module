@@ -34,19 +34,42 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang){
 	$query->condition('langcode', $lang);
 	$query->condition('name', $old);
 	$entity = $query->execute();
-	if(isset($entity)) {
+	if(isset($entity) && !empty($entity)) {
 		foreach ($entity as $tid => $value){
 			$tidRename = $tid;
 		}
+	}else{
+		// creation du terme
+		$entity = \Drupal\taxonomy\Entity\Term::create([
+			'vid' => $vid,
+			'name' => $new,
+			'langcode' => $lang,
+		]);
+		$entity->save();
+		$tidRename = $entity->id();
 	}
 	if(isset($tidRename)){
-		$connection = Database::getConnection();
+		$connection = \Drupal\Core\Database\Database::getConnection();
 		$query = $connection->update('taxonomy_term_field_data');
 		$query->fields([
 			'name' => $new,
 		]);
 		$query->condition('tid',$tidRename);
 		$query->execute();
+	}
+}
+
+function taxonomy_delete_taxo($name, $vid, $lang){
+	$query = \Drupal::entityQuery('taxonomy_term');
+	$query->condition('vid', $vid);
+	$query->condition('langcode', $lang);
+	$query->condition('name', $name);
+	$tids = $query->execute();
+
+	if (!empty($tids)){
+		$controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+		$entities = $controller->loadMultiple($tids);
+		$controller->delete($entities);
 	}
 }
 
