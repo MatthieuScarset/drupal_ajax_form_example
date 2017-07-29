@@ -63,7 +63,7 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 			$errorAlt = FALSE;
 			if(preg_match($patternAlt, $searchResults[0], $resultsAlt)){
 				$alt_img = end($resultsAlt);
-				var_dump($resultsAlt);
+				//var_dump($resultsAlt);
 			}
 		}
 
