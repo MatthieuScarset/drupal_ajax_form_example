@@ -23,14 +23,16 @@
 </div>
 
 {% macro menu_links(items, attributes, menu_level) %}
-
     {% import _self as menus %}
     {% if items %}
+        {% set isDivAndUl = false %}
         {% for item in items %}
+            {% set isDivAndUl = false %}
             {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
             {% if menu_level == 0 %}
                 <div{{ attributes.addClass('col-xs-12', 'col-sm-6', 'col-md-2', 'nopadding') }}>
                 <ul>
+                {% set isDivAndUl = true %}
                 <h2{{ item.attributes.addClass('footer_link_title') }}>
                     {{ link(item.title, item.url, {'target': link_target, 'class': ('bg_black')}) }}
                 </h2>
@@ -38,17 +40,17 @@
                 <li{{ item.attributes }}>
                     {{ link(item.title, item.url, {'target': link_target}) }}
                 </li>
-
             {% endif %}
-
             {% if item.below %}
                 {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
-
             {% endif %}
-
+            {% if isDivAndUl %}
+                </ul>
+                </div>
+            {% endif %}
         {% endfor %}
-        </ul>
-        </div>
+       {# </ul>
+        </div> #}
     {% endif %}
 
 {% endmacro %}
