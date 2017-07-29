@@ -54,13 +54,18 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   {
     //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
     $fidD7 = end($searchResults);
+    //on recupere le alt de l'image
     $alt_img = "";
-    $title_img="";
-    /*
     if(isset($searchResults[0]))
 		{
-			var_dump($searchResults[0]);
-		}*/
+			$patternAlt = '/"alt":"([^"]*)"/i';
+			$resultsAlt = array();
+			$errorAlt = FALSE;
+			if(preg_match($patternAlt, $searchResults[0], $resultsAlt)){
+				$alt_img = end($resultsAlt);
+				var_dump($resultsAlt);
+			}
+		}
 
     //Récupération des informations du file D7
     \Drupal\Core\Database\Database::setActiveConnection('drupal7');
@@ -95,7 +100,7 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
           if (!empty($media_results) && is_object($media_results)) {
             $newUUID = $media_results->uuid;
 						$media = Media::load($media_results->mid);
-						$media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $title_img));
+						$media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
 						$media->save();
           }
           else
@@ -108,7 +113,7 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
               'uid' => 1
             ));
            // $media->set('field_image', $file->id());
-            $media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $title_img));
+            $media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
             $media->save();
             $newUUID = $media->uuid();
           }
