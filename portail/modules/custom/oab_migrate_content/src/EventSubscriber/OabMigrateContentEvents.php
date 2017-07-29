@@ -139,12 +139,29 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $correspondence_taxo_solution_to_thematic);
 
 		//CAT BLOG -> THEMATIC BLOG
-		$correspondence_taxo_solution_to_thematic = $this->genericFillCorrespondance('correspondence_taxo_solution_to_thematic' ,'thematic');
-		\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $correspondence_taxo_solution_to_thematic);
+		$correspondence_cat_blog_to_thematic_blog= $this->genericFillCorrespondance('correspondence_cat_blog_to_thematic_blog' ,'blog_thematics');
+		\Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $correspondence_cat_blog_to_thematic_blog);
 
 		//CAT BLOG -> FORMAT/TYPE BLOG
-		$correspondence_taxo_solution_to_thematic = $this->genericFillCorrespondance('correspondence_taxo_solution_to_thematic' ,'thematic');
-		\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $correspondence_taxo_solution_to_thematic);
+		$correspondence_cat_blog_to_type_blog = $this->genericFillCorrespondance('correspondence_cat_blog_to_type_blog' ,'blog_formats');
+		\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $correspondence_cat_blog_to_type_blog);
+
+
+		//MAG CATEG TO MAG FORMAT
+		$correspondence_cat_mag_to_format_mag = $this->genericFillCorrespondance('correspondence_cat_mag_to_format_mag' ,'magazine_types');
+		\Drupal::state()->set('correspondence_cat_mag_to_format_mag', $correspondence_cat_mag_to_format_mag);
+
+		//Solution to mag theme
+		$correspondence_solution_to_theme_mag = $this->genericFillCorrespondance('correspondence_solution_to_theme_mag' ,'magazine_thematics');
+		\Drupal::state()->set('correspondence_solution_to_theme_mag', $correspondence_solution_to_theme_mag);
+
+		//solution to doc theme
+		$correspondence_solution_to_theme_doc = $this->genericFillCorrespondance('correspondence_solution_to_theme_doc' ,'document_thematics');
+		\Drupal::state()->set('correspondence_solution_to_theme_doc', $correspondence_solution_to_theme_doc);
+
+		//format doc to doc format
+		$correspondence_cat_blog_to_type_blog = $this->genericFillCorrespondance('correspondence_cat_blog_to_type_blog' ,'document_types');
+		\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $correspondence_cat_blog_to_type_blog);
 
 	}
 
