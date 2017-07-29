@@ -24,7 +24,7 @@ $config_comment->setData(
 			array (
 				'comment_type' => array (
 					'plugin' => 'default_value',
-					'default_value' => 'comment'
+					'default_value' => 'comment_blog'
 				),
 				'pid' => 'pid_parent',
 				'entity_id' => array (
