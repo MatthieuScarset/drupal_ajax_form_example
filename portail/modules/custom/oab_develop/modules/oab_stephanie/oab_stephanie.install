@@ -274,7 +274,6 @@ function oab_stephanie_update_8033() {
 /**
  * Création d'un nouveau type de commentaire avec son body + création champ commentaire sur les blogs
  */
-/*
-function oab_stephanie_update_80334() {
+function oab_stephanie_update_8034() {
 	include_once("updates/update_8034.inc");
-}*/
+}
