@@ -83,15 +83,18 @@ article .content .field--type-text-long ul li:before{
 }
 .display-subhomes .txt{
     margin-top: 1.5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
 }
 
 .display-subhomes .encart-image{
     padding:0;
+    text-align: center;
+    display: block;
 }
 
 .display-subhomes .encart-image img{
     max-height: 12.5rem;
-    width: 100%;
 }
 .display-subhomes .bigKey{
     font-size: 7rem;
@@ -107,15 +110,23 @@ article .content .field--type-text-long ul li:before{
 }
 .display-subhomes .txt span{
     font-size: 1.2rem;
+
 }
 .display-subhomes .txt div{
     font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 3rem;
+    line-height: 1.5rem;
 }
-.link-subhomes > .display-subhomes > .border{
+
+.view-display-id-page_document .txt div{
+    margin-top: 1rem;
+}
+
+.link-subhomes > .display-subhomes .border{
     border-top: 3px solid #ededed;
 }
+
 .link-subhomes:hover > .display-subhomes{
     background-color: #F16e00;
     color: #fff;
@@ -126,8 +137,9 @@ article .content .field--type-text-long ul li:before{
     border-color: #F16e00;
     /*border-bottom: 3px solid #fff;*/
 }
-.link-subhomes:hover > .display-subhomes > .border{
-    border-top: 3px solid #fff;
+.link-subhomes:hover > .display-subhomes .border{
+    border-top: 1px solid #fff;
+
 }
 
 .date-subhome {
@@ -173,4 +185,54 @@ article .content .field--type-text-long ul li:before{
     background-color: #fff;
     color: #000;
     border-color: #000;
+}
+
+
+
+
+
+@media (max-width: 767px) {
+    .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
+        display: block !important;
+    }
+    .o-footer-bottom ul li {
+        margin-right: 0px !important;
+    }
+
+    footer .navbar-nav {
+        margin: auto;
+    }
+    footer .navbar-nav > li > a {
+        padding-left: 1rem !important;
+    }
+
+    .sandwich-button {
+         margin-top: 0 !important;
+     }
+
+    .menu-loupe-xs {
+        display: inline-block;
+        margin-right: 2rem;
+    }
+
+    .menu-loupe-xs .glyphicon {
+        font-size: 3rem;
+        margin-top: 22px;   //Pour bloquer le margin 22px de glyphicon
+    }
+
+    .footer-div-border {
+        border-top:1px solid #999999;
+        margin-top:10px
+    }
+
+    .footer-div-border > p {
+        margin-top: 1rem;
+    }
+
+    .menu-xs {
+        padding: 1rem;
+        margin-right: 0px !important;
+    }
+
+
 }

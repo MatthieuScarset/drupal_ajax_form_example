@@ -31,27 +31,27 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-<ul{{ attributes.addClass('menu') }}>
+        <ul{{ attributes.addClass('menu') }}>
     {% else %}
-    <ul{{ attributes.addClass('dropdown-menu') }}>
-        {% endif %}
-        {% for item in items %}
-            {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
-            {% if menu_level == 0 and item.is_expanded %}
+         <ul{{ attributes.addClass('dropdown-menu') }}
+    {% endif %}
+    {% for item in items %}
+        {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
+        {% if menu_level == 0 and item.is_expanded %}
             <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
                 <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}">{{ item.title }} <span class="caret"></span></a>
-            {% else %}
-                <li{{ item.attributes }}>
-                {{ link(item.title, item.url, {'target': link_target}) }}
-            {% endif %}
-            {% if item.below %}
-                {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
-            {% endif %}
-            </li>
-        {% endfor %}
-        <li>
-            © Orange Business Services 2015
+        {% else %}
+            <li{{ item.attributes }}>
+               {{ link(item.title, item.url, {'target': link_target}) }}
+        {% endif %}
+        {% if item.below %}
+            {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
+        {% endif %}
         </li>
+    {% endfor %}
+    <li class="hidden-xs hidden-sm">
+        © Orange Business Services 2015
+    </li>
     </ul>
-    {% endif %}
-    {% endmacro %}
+  {% endif %}
+{% endmacro %}

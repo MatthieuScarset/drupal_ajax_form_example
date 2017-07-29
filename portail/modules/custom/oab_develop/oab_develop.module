@@ -27,3 +27,89 @@ function oabt($elem, $lock=false, $message=""){
     OAB_Trace::debug($elem,$message);
   }
 }
+
+function taxonomy_rename_taxo($old, $new, $vid, $lang){
+	$query = \Drupal::entityQuery('taxonomy_term');
+	$query->condition('vid', $vid);
+	$query->condition('langcode', $lang);
+	$query->condition('name', $old);
+	$entity = $query->execute();
+	if(isset($entity) && !empty($entity)) {
+		foreach ($entity as $tid => $value){
+			$tidRename = $tid;
+		}
+	}else{
+		// creation du terme
+		$entity = \Drupal\taxonomy\Entity\Term::create([
+			'vid' => $vid,
+			'name' => $new,
+			'langcode' => $lang,
+		]);
+		$entity->save();
+		$tidRename = $entity->id();
+	}
+	if(isset($tidRename)){
+		$connection = \Drupal\Core\Database\Database::getConnection();
+		$query = $connection->update('taxonomy_term_field_data');
+		$query->fields([
+			'name' => $new,
+		]);
+		$query->condition('tid',$tidRename);
+		$query->execute();
+	}
+}
+
+function taxonomy_delete_taxo($name, $vid, $lang){
+	$query = \Drupal::entityQuery('taxonomy_term');
+	$query->condition('vid', $vid);
+	$query->condition('langcode', $lang);
+	$query->condition('name', $name);
+	$tids = $query->execute();
+
+	if (!empty($tids)){
+		$controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+		$entities = $controller->loadMultiple($tids);
+		$controller->delete($entities);
+	}
+}
+
+function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
+//	$query = \Drupal::entityQuery('config');
+//	$query->condition('name', "taxonomy.vocabulary.".$vid);
+//	$entity = $query->execute();
+
+	$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
+	if (!isset($vocabulary)) {
+
+		// create vocabulary
+		$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+			'vid' => $vid,
+			'description' => '',
+			'content_translation' => true,
+			'name' => $defaultName,
+		));
+		$vocabulary->save();
+	}
+
+	// enable translation
+	$service = \Drupal::service('content_translation.manager');
+	$service->setEnabled('taxonomy_term',$vid, true );
+
+	$config_factory = \Drupal::configFactory();
+	$config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);
+	$config_group->set("language_alterable", true);
+	$config_group->set("default_langcode", "current_interface");
+	$config_group->save(TRUE);
+
+	// update default name in english
+		$config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
+		$config_group->set("name", $defaultName);
+		$config_group->save(TRUE);
+
+
+	if($lang != 'en'){
+		$vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
+		$vocaConfig->set('name', $nameVoca);
+		$vocaConfig->save();
+	}
+}

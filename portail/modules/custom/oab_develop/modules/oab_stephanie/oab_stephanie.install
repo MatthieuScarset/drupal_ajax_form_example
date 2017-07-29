@@ -24,7 +24,7 @@ function oab_stephanie_update_dependencies() {
 	$dependencies['oab_stephanie'][8030] = array('oab_amel' => 8014, 'oab_christophe' => 8019, 'oab_tibo' => 8008	);
 	$dependencies['oab_stephanie'][8031] = array('oab_amel' => 8015, 'oab_christophe' => 8020, 'oab_tibo' => 8009, 'oab_yassine' => 8004	);
 	$dependencies['oab_stephanie'][8032] = array('oab_amel' => 8016, 'oab_christophe' => 8021, 'oab_tibo' => 8012, 'oab_yassine' => 8004	);
-
+	$dependencies['oab_stephanie'][8034] = array('oab_amel' => 8023, 'oab_christophe' => 8027, 'oab_tibo' => 8019, 'oab_yassine' => 8014, 'oab_tristan' => 8009	);
 	return $dependencies;
 }
 
@@ -270,4 +270,11 @@ function oab_stephanie_update_8033() {
 	// j'ai volontairement modifié l'update d'origine
 	include_once("updates/update_8018.inc");
 	include_once("updates/update_8033.inc");
+}
+
+/**
+ * Création d'un nouveau type de commentaire avec son body + création champ commentaire sur les blogs
+ */
+function oab_stephanie_update_8034() {
+	include_once("updates/update_8034.inc");
 }

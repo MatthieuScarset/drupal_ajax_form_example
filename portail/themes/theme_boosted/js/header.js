@@ -12,6 +12,7 @@
         var local_nav = $('#local_nav');
         var contact_module = $('#contact_module');
         var preview_bar = $('.node-preview-container');
+        var top_zone = $('#block-topzone');
         if(!top_menu.length && !contact_module.length) return;
         var top_menu_offset = top_menu.offset();
         var contact_module_offset = contact_module.offset();
@@ -22,7 +23,9 @@
         var localnav_offset = 0;
         var topShare = $('#block-socialshareblock').offset().top;
 
-        createSubNavMobile(top_menu, local_nav);
+        if(local_nav.length) {
+            createSubNavMobile(top_menu, local_nav);
+        }
 
         if ($('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length) {
             menu_offset += $('#toolbar-bar').height();
@@ -85,14 +88,14 @@
                 contact_offset += preview_bar.outerHeight();
             }
 
-            moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset);
+            moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone);
         });
 
         $(window).scroll(function () {
-            moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, topShare);
+            moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone);
         });
 
-        moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, topShare);
+        moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone);
 
         //init scrolling animation
         $(".sub_local_menu ul li a").click(function() {
@@ -115,13 +118,13 @@
                     mTop = 0;
                 }
             }
-            $('html, body').animate({ //- 25
+            /*$('html, body').animate({ //- 25
                 scrollTop: $(divToScroll).offset().top + mTop - offsetTop - 25
-            }, 1000);
+            }, 1000);*/
         });
     }
 
-    function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, topShare){
+    function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
@@ -133,11 +136,10 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-
         if (top_menu.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
                 top_menu.addClass('navbar-fixed');
-                $('.main-container').css('margin-top', container_margin_top);
+                //$('.main-container').css('margin-top', container_margin_top);
                 top_menu.css('top', menu_offset);
                 $('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
             } else {
@@ -151,7 +153,7 @@
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
                 preview_bar.addClass('navbar-fixed');
-                $('.main-container').css('margin-top', container_margin_top);
+                //$('.main-container').css('margin-top', container_margin_top);
                 preview_bar.css('top', preview_bar_offset);
                 $('.region-pre-content .affix').css('top', preview_bar.outerHeight() + preview_bar_offset);
             } else {
@@ -166,7 +168,7 @@
         if (contact_module.length) {
             if ($(window).scrollTop() > contact_module_offset.top - contact_offset) {
                 contact_module.addClass('sticky-module');
-                $('.main-container').css('margin-top', container_margin_top);
+                //$('.main-container').css('margin-top', container_margin_top);
                 contact_module.css('top', contact_offset);
             } else {
                 contact_module.removeClass('sticky-module');
@@ -175,21 +177,34 @@
             }
         }
 
+        var top_zone_offset = 0;
+        if(top_zone.length && top_zone.outerHeight() > 0){
+            top_zone_offset = $('#block-topzone').outerHeight();
+        }
+
         // module local_nav
         if (local_nav.length && local_nav.is(':visible')) {
-            if ($(window).scrollTop() > (localnav_offset)) {
+            if ($(window).scrollTop() > (top_zone_offset - localnav_offset)) {
                 local_nav.addClass('sticky-module');
-                $('.main-container').css('margin-top', container_margin_top);
+                if(top_zone.length && top_zone.outerHeight() > 0) {
+                    $('.main-container').css('margin-top', 0);
+                }else{
+                    $('.main-container').css('margin-top', container_margin_top);
+                }
                 local_nav.css('top',  localnav_offset );
                 $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
             } else {
                 local_nav.removeClass('sticky-module');
-                $('.main-container').css('margin-top', 0);
+                if(top_zone.length && top_zone.outerHeight() > 0) {
+                    $('.main-container').css('margin-top', 0);
+                }else{
+                    $('.main-container').css('margin-top', container_margin_top);
+                }
                 local_nav.css('top', 0);
                 // $('#block-socialshareblock').css('top', topShare);
             }
             if($(window).scrollTop() == 0){
-                local_nav.css('top', 0);
+                local_nav.css('top', (localnav_offset + $('#top_navbar').outerHeight()));
             }
         }
 
