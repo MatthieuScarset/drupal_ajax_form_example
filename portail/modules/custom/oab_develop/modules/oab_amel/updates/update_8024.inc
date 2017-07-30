@@ -2028,23 +2028,22 @@ $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('field.field.node.full_html.field_region');
 $config_group->setData(
     array (
-        'uuid' => 'b0b79eb5-4ab8-4124-9d3e-e8e5e1499999',
         'langcode' => 'en',
         'status' => true,
         'dependencies' =>
             array (
                 'config' =>
                     array (
-                        0 => 'field.storage.node.field_job_profile',
+                        0 => 'field.storage.node.field_region',
                         1 => 'node.type.full_html',
-                        2 => 'taxonomy.vocabulary.jobs_profiles',
+                        2 => 'taxonomy.vocabulary.regions',
                     ),
             ),
-        'id' => 'node.full_html.field_job_profile',
-        'field_name' => 'field_job_profile',
+        'id' => 'node.full_html.field_region',
+        'field_name' => 'field_region',
         'entity_type' => 'node',
         'bundle' => 'full_html',
-        'label' => 'Profession',
+        'label' => 'Region',
         'description' => '',
         'required' => false,
         'translatable' => true,
@@ -2059,7 +2058,7 @@ $config_group->setData(
                     array (
                         'target_bundles' =>
                             array (
-                                'jobs_profiles' => 'jobs_profiles',
+                                'regions' => 'regions',
                             ),
                         'sort' =>
                             array (
