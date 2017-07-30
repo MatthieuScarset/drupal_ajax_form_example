@@ -54,7 +54,7 @@ $config_group->setData(
             ),
         'module' => 'core',
         'locked' => false,
-        'cardinality' => 1,
+        'cardinality' => -1,
         'translatable' => true,
         'indexes' =>
             array (
@@ -176,10 +176,6 @@ $collection = \Drupal::service('config.storage')->createCollection('language.fr'
 $collection->write('field.field.node.product.field_subhome', array (
     'label' => 'Rubrique',
 ));
-
-
-
-
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.product.default');
@@ -1115,8 +1111,6 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 
-
-
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('field.field.node.simple_page.field_subhome', array (
     'label' => 'Rubrique',
@@ -1128,7 +1122,7 @@ $collection->write('field.field.node.simple_page.field_job_profile', array (
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('field.field.node.simple_page.field_industry', array (
     'label' => 'Secteur d\'activité',
-
+));
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.simple_page.default');
@@ -1631,7 +1625,8 @@ $config_group->setData(
                 'sticky' => true,
                 'uid' => true,
             ),
-    ));
+    )
+);
 $config_group->save(TRUE);
 
 $config_factory = \Drupal::configFactory();
@@ -2892,3 +2887,829 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 
+// --------------- Reprise des champs taxonomie créés dans update_8023 pour changer la cardinalité
+
+// field_insight
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_market_segment');
+    $config_group->setData(
+    array (
+        'uuid' => '5df06fa5-e18e-49e0-9384-9bd09c56bdaa',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_insight',
+        'field_name' => 'field_insight',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// field_geographic
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_geographic');
+$config_group->setData(
+    array (
+        'uuid' => 'c0b4520b-240f-4a3d-974f-084da217883c',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_geographic',
+        'field_name' => 'field_geographic',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// field_country
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_country');
+$config_group->setData(
+    array (
+        'uuid' => '6f499935-9052-4948-bf8e-884db2233dd4',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                    ),
+            ),
+        'id' => 'node.field_country',
+        'field_name' => 'field_country',
+        'entity_type' => 'node',
+        'type' => 'string',
+        'settings' =>
+            array (
+                'max_length' => 255,
+                'is_ascii' => false,
+                'case_sensitive' => false,
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// field_press_type
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_press_type');
+$config_group->setData(
+    array (
+        'uuid' => 'a06ca612-6342-43f9-84fa-badc53f2ca6b',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_press_type',
+        'field_name' => 'field_press_type',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// document type
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_document_type');
+$config_group->setData(
+    array (
+        'uuid' => 'd72f5e85-f5a0-49f9-bdaa-1635d71def1a',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_document_type',
+        'field_name' => 'field_document_type',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// document thematic
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_document_thematic');
+$config_group->setData(
+    array (
+        'uuid' => 'c173b3f9-bda3-48fb-a7a6-449ca2a1026d',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_document_thematic',
+        'field_name' => 'field_document_thematic',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// magazine type
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_magazine_type');
+$config_group->setData(
+    array (
+        'uuid' => '1ffb439a-dee1-463d-ae84-3bfe23c63dd4',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_magazine_type',
+        'field_name' => 'field_magazine_type',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// magazine thematic
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_magazine_thematic');
+$config_group->setData(
+    array (
+        'uuid' => 'a5a4e421-5754-45a2-8200-ee62571a53ba',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'node',
+                        1 => 'taxonomy',
+                    ),
+            ),
+        'id' => 'node.field_magazine_thematic',
+        'field_name' => 'field_magazine_thematic',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+        'settings' =>
+            array (
+                'target_type' => 'taxonomy_term',
+            ),
+        'module' => 'core',
+        'locked' => false,
+        'cardinality' => -1,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    )
+);
+$config_group->save(TRUE);
+
+// -------------- Correction page Document : form display : enlever solution de l'onglet Classify, ajouter document thematic
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_form_display.node.document.default');
+$config_group->setData(
+    array (
+        'uuid' => '7ab655ee-4a3b-4eaf-b035-2bf9eb907aa6',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'entity_browser.browser.browse_media_modal',
+                        1 => 'field.field.node.document.field_blog_thematic',
+                        2 => 'field.field.node.document.field_content',
+                        3 => 'field.field.node.document.field_content_owner',
+                        4 => 'field.field.node.document.field_display_title',
+                        5 => 'field.field.node.document.field_document_thematic',
+                        6 => 'field.field.node.document.field_document_type',
+                        7 => 'field.field.node.document.field_email_owner',
+                        8 => 'field.field.node.document.field_end_date',
+                        9 => 'field.field.node.document.field_file',
+                        10 => 'field.field.node.document.field_highlight',
+                        11 => 'field.field.node.document.field_industry',
+                        12 => 'field.field.node.document.field_insight',
+                        13 => 'field.field.node.document.field_job_profile',
+                        14 => 'field.field.node.document.field_meta_description',
+                        15 => 'field.field.node.document.field_meta_title',
+                        16 => 'field.field.node.document.field_metatags',
+                        17 => 'field.field.node.document.field_region',
+                        18 => 'field.field.node.document.field_solution',
+                        19 => 'field.field.node.document.field_start_date',
+                        20 => 'field.field.node.document.field_subhome',
+                        21 => 'field.field.node.document.field_thematic',
+                        22 => 'field.field.node.document.field_visual',
+                        23 => 'node.type.document',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'datetime',
+                        1 => 'entity_browser',
+                        2 => 'field_group',
+                        3 => 'metatag',
+                        4 => 'path',
+                        5 => 'text',
+                        6 => 'workbench_moderation',
+                    ),
+            ),
+        'third_party_settings' =>
+            array (
+                'field_group' =>
+                    array (
+                        'group_onglets' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'group_write',
+                                        1 => 'group_classify',
+                                        2 => 'group_seo',
+                                        3 => 'group_publish',
+                                    ),
+                                'parent_name' => '',
+                                'weight' => 0,
+                                'format_type' => 'tabs',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'direction' => 'vertical',
+                                    ),
+                                'label' => 'Onglets',
+                            ),
+                        'group_write' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'langcode',
+                                        1 => 'title',
+                                        2 => 'field_display_title',
+                                        3 => 'field_highlight',
+                                        4 => 'field_visual',
+                                        5 => 'field_file',
+                                        6 => 'field_content',
+                                    ),
+                                'parent_name' => 'group_onglets',
+                                'weight' => 20,
+                                'format_type' => 'tab',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'formatter' => 'closed',
+                                        'description' => '',
+                                        'required_fields' => true,
+                                    ),
+                                'label' => 'Write',
+                            ),
+                        'group_classify' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'field_subhome',
+                                        1 => 'field_document_type',
+                                        2 => 'field_document_thematic',
+                                        3 => 'field_industry',
+                                        4 => 'field_region',
+                                        5 => 'field_job_profile',
+                                        6 => 'field_insight',
+                                    ),
+                                'parent_name' => 'group_onglets',
+                                'weight' => 21,
+                                'format_type' => 'tab',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'formatter' => 'closed',
+                                        'description' => '',
+                                        'required_fields' => true,
+                                    ),
+                                'label' => 'Classify',
+                            ),
+                        'group_publish' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'field_content_owner',
+                                        1 => 'field_email_owner',
+                                        2 => 'group_content_worthy_period',
+                                        3 => 'promote',
+                                        4 => 'path',
+                                        5 => 'field_metatags',
+                                    ),
+                                'parent_name' => 'group_onglets',
+                                'weight' => 23,
+                                'format_type' => 'tab',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'formatter' => 'closed',
+                                        'description' => '',
+                                        'required_fields' => true,
+                                    ),
+                                'label' => 'Publish',
+                            ),
+                        'group_content_worthy_period' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'field_start_date',
+                                        1 => 'field_end_date',
+                                    ),
+                                'parent_name' => 'group_publish',
+                                'weight' => 48,
+                                'format_type' => 'fieldset',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'description' => '',
+                                        'required_fields' => true,
+                                    ),
+                                'label' => 'Content worthy period',
+                            ),
+                        'group_seo' =>
+                            array (
+                                'children' =>
+                                    array (
+                                        0 => 'field_meta_title',
+                                        1 => 'field_meta_description',
+                                    ),
+                                'parent_name' => 'group_onglets',
+                                'weight' => 22,
+                                'format_type' => 'tab',
+                                'format_settings' =>
+                                    array (
+                                        'id' => '',
+                                        'classes' => '',
+                                        'formatter' => 'closed',
+                                        'description' => '',
+                                        'required_fields' => true,
+                                    ),
+                                'label' => 'SEO',
+                            ),
+                    ),
+            ),
+        'id' => 'node.document.default',
+        'targetEntityType' => 'node',
+        'bundle' => 'document',
+        'mode' => 'default',
+        'content' =>
+            array (
+                'field_content' =>
+                    array (
+                        'weight' => 10,
+                        'settings' =>
+                            array (
+                                'rows' => 5,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'text_textarea',
+                        'region' => 'content',
+                    ),
+                'field_content_owner' =>
+                    array (
+                        'weight' => 46,
+                        'settings' =>
+                            array (
+                                'size' => 60,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string_textfield',
+                        'region' => 'content',
+                    ),
+                'field_display_title' =>
+                    array (
+                        'weight' => 4,
+                        'settings' =>
+                            array (
+                                'display_label' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'boolean_checkbox',
+                        'region' => 'content',
+                    ),
+                'field_document_thematic' =>
+                    array (
+                        'weight' => 53,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_document_type' =>
+                    array (
+                        'weight' => 52,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_email_owner' =>
+                    array (
+                        'weight' => 47,
+                        'settings' =>
+                            array (
+                                'size' => 60,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string_textfield',
+                        'region' => 'content',
+                    ),
+                'field_end_date' =>
+                    array (
+                        'weight' => 34,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'datetime_default',
+                        'region' => 'content',
+                    ),
+                'field_file' =>
+                    array (
+                        'weight' => 9,
+                        'settings' =>
+                            array (
+                                'entity_browser' => 'browser_file_modal',
+                                'field_widget_display' => 'rendered_entity',
+                                'field_widget_edit' => true,
+                                'field_widget_remove' => true,
+                                'selection_mode' => 'selection_append',
+                                'field_widget_display_settings' =>
+                                    array (
+                                        'view_mode' => 'default',
+                                    ),
+                                'open' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
+                    ),
+                'field_highlight' =>
+                    array (
+                        'weight' => 6,
+                        'settings' =>
+                            array (
+                                'rows' => 5,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string_textarea',
+                        'region' => 'content',
+                    ),
+                'field_industry' =>
+                    array (
+                        'weight' => 54,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_insight' =>
+                    array (
+                        'weight' => 57,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_job_profile' =>
+                    array (
+                        'weight' => 56,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_meta_description' =>
+                    array (
+                        'weight' => 6,
+                        'settings' =>
+                            array (
+                                'size' => 156,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string_textfield',
+                        'region' => 'content',
+                    ),
+                'field_meta_title' =>
+                    array (
+                        'weight' => 5,
+                        'settings' =>
+                            array (
+                                'size' => 60,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string_textfield',
+                        'region' => 'content',
+                    ),
+                'field_metatags' =>
+                    array (
+                        'weight' => 51,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'metatag_firehose',
+                        'region' => 'content',
+                    ),
+                'field_region' =>
+                    array (
+                        'weight' => 55,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_start_date' =>
+                    array (
+                        'weight' => 33,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'datetime_default',
+                        'region' => 'content',
+                    ),
+                'field_subhome' =>
+                    array (
+                        'weight' => 51,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'options_select',
+                        'region' => 'content',
+                    ),
+                'field_visual' =>
+                    array (
+                        'weight' => 8,
+                        'settings' =>
+                            array (
+                                'entity_browser' => 'browse_media_modal',
+                                'field_widget_display' => 'rendered_entity',
+                                'field_widget_edit' => true,
+                                'field_widget_remove' => true,
+                                'selection_mode' => 'selection_append',
+                                'field_widget_display_settings' =>
+                                    array (
+                                        'view_mode' => 'default',
+                                    ),
+                                'open' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'entity_browser_entity_reference',
+                        'region' => 'content',
+                    ),
+                'langcode' =>
+                    array (
+                        'type' => 'language_select',
+                        'weight' => 2,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+                'path' =>
+                    array (
+                        'type' => 'path',
+                        'weight' => 50,
+                        'settings' =>
+                            array (
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+                'promote' =>
+                    array (
+                        'type' => 'boolean_checkbox',
+                        'weight' => 49,
+                        'settings' =>
+                            array (
+                                'display_label' => true,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+                'title' =>
+                    array (
+                        'type' => 'string_textfield',
+                        'weight' => 3,
+                        'settings' =>
+                            array (
+                                'size' => 60,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+            ),
+        'hidden' =>
+            array (
+                'created' => true,
+                'field_blog_thematic' => true,
+                'field_solution' => true,
+                'field_thematic' => true,
+                'sticky' => true,
+                'uid' => true,
+            ),
+    )
+);
+$config_group->save(TRUE);
