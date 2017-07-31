@@ -31,7 +31,8 @@ function oab_amel_update_dependencies() {
     $dependencies['oab_amel'][8019] = array('oab_yassine' => 8006 );
     $dependencies['oab_amel'][8020] = array('oab_yassine' => 8009, 'oab_tristan' => 8003 );
     $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004 );
-    $dependencies['oab_amel'][8021] = array('oab_christophe' => 8027, 'oab_yassine' => 8013 );
+    $dependencies['oab_amel'][8023] = array('oab_christophe' => 8027, 'oab_yassine' => 8014 );
+    $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
     return $dependencies;
 }
 
@@ -212,4 +213,12 @@ function oab_amel_update_8022() {
  */
 function oab_amel_update_8023() {
     include_once("updates/update_8023.inc");
+}
+
+
+/**
+ *  Modification Référentiel Taxonomy : impacts sur tous les types de contenus
+ */
+function oab_amel_update_8024() {
+    include_once("updates/update_8024.inc");
 }
