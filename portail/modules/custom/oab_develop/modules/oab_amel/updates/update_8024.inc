@@ -2891,7 +2891,7 @@ $config_group->save(TRUE);
 // field_insight
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('field.storage.node.field_market_segment');
+$config_group = $config_factory->getEditable('field.storage.node.field_insight');
     $config_group->setData(
     array (
         'uuid' => '5df06fa5-e18e-49e0-9384-9bd09c56bdaa',
