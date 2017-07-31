@@ -64,11 +64,17 @@ article.node.full{
     /*margin: 65px 0 130px 0; ref.guidelines*/
     font-size: 1.4rem;
 }
+.node-socialbar a{
+    text-decoration: none !important;
+}
 .node-socialbar p{
     margin: 0;
 }
 .node-socialbar .fa-stack{
     width: 1.7em;
+}
+article .node-socialbar p{
+    font-size: 1.4rem;
 }
 
 .node.profil-redacteur.teaser{
