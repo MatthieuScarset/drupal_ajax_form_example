@@ -61,6 +61,10 @@
     "label": "Responsive Table",
     "file": "files/tools/responsive_table.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/responsive_table.png"
+  },{
+    "label": "Social network",
+    "file": "files/tools/social_network.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/social_network.png"
   }]
 }, {
   "id": "customer_story",
