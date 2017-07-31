@@ -76,7 +76,27 @@ class MagazineArticleMedia extends SqlBase {
    */
   public function prepareRow(Row $row) {
 
-    $row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
+		$row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
+
+		// récupération de la balise alt et title
+		$image_query = $this->select('field_data_field_image', 'fi');
+		$image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
+			->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
+			->condition('fi.bundle', 'content_magazine_article', '=');
+		$image_results = $image_query->execute()->fetchAll();
+		if (is_array($image_results)){
+			foreach ($image_results AS $image_result){
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($image_result)){
+					$row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
+					$row->setSourceProperty('field_image_title', $image_result->field_image_title);
+				}
+				elseif (is_array($image_result)){
+					$row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
+					$row->setSourceProperty('field_image_title', $image_result['field_image_title']);
+				}
+			}
+		}
 
     return parent::prepareRow($row);
   }
