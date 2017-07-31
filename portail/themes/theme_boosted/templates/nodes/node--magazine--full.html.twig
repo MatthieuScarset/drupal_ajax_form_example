@@ -80,7 +80,7 @@ view_mode ? view_mode|clean_class,
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldMagazine %}
-        {{ content.field_magazine }}
+        {{ content.theme_term }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
      {% set fieldAuthor %}
          {{ author_name }}
@@ -109,7 +109,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_industry') }}
+        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_industry', 'field_insight', 'field_magazine_thematic', 'field_magazine_type') }}
     </div>
 
 </article>
