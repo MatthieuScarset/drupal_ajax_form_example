@@ -139,7 +139,7 @@ class BlogPostNode extends SqlBase {
 			$row->getSourceProperty('nid'),
 			'blog_post');
 		if(count($blog_thematics) > 0){
-			$row->setSourceProperty('$blog_thematics', $blog_thematics);
+			$row->setSourceProperty('blog_thematics', $blog_thematics);
 		}
 
 		// taxonomie Categorie blog vers blog format/type
