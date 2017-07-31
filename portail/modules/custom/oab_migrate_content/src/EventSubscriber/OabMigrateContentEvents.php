@@ -160,8 +160,8 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		\Drupal::state()->set('correspondence_solution_to_theme_doc', $correspondence_solution_to_theme_doc);
 
 		//format doc to doc format
-		$correspondence_cat_blog_to_type_blog = $this->genericFillCorrespondance('correspondence_cat_blog_to_type_blog' ,'document_types');
-		\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $correspondence_cat_blog_to_type_blog);
+		$correspondence_format_document = $this->genericFillCorrespondance('correspondence_format_document' ,'document_types');
+		\Drupal::state()->set('correspondence_format_document', $correspondence_format_document);
 
 	}
 
