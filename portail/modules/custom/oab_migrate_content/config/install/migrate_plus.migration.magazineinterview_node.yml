@@ -26,11 +26,12 @@ process:
       format:
         plugin: default_value
         default_value: full_html
-  field_solution: solutions
+  field_magazine_thematic: magazine_thematics
+  field_magazine_type: magazine_types
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
-  field_thematic: thematics
+  field_insight: thematics
   field_visual:
     plugin: migration
     migration: magazineinterview_media

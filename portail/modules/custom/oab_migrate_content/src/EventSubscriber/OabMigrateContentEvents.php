@@ -29,6 +29,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		$events[MigrateEvents::PRE_IMPORT][] = array('swtchUserToAdmin');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillTaxonomyTIDCorrespondence');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillSubhomeIdInState');
+		$events[MigrateEvents::PRE_IMPORT][] = array('fillPressFormatIdInState');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
 		$events[MigrateEvents::POST_IMPORT][] = array('swtchUserToAnonymous');
@@ -68,6 +69,10 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
     && $migrate_src_values['plugin'] == 'blogpost_profile'){
       $entity = \Drupal\node\Entity\Node::load($nid);
 
+      $body = $migrate_src_values['field_txt_biography_fr'];
+      if(empty($body)){
+      	$body = $migrate_src_values['field_txt_catcher'];
+			}
       $values = array(
         // Non multilingual.
         'created' => $migrate_src_values['created'],
@@ -78,7 +83,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 
         // Multilingual.
         'title' => $migrate_src_values['title'],
-        'body' => array('value' => $migrate_src_values['field_txt_biography_fr'], 'format' => 'full_html'),
+        'body' => array('value' => $body, 'format' => 'full_html'),
         'field_image' => $migrate_dest_values['field_image'],
       );
 
@@ -118,129 +123,45 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 	 */
 	public function fillTaxonomyTIDCorrespondence(MigrateImportEvent $migrate_row) {
 		///SOLUTIONS
-		$correspondance_taxo_solution = \Drupal::state()
-			->get('correspondence_taxo_solution');
-		foreach ($correspondance_taxo_solution as $key => $correspondance) {
-			if (empty($correspondance['tid_D8']) || $correspondance['tid_D8'] == '') {
-				if ($correspondance['label_d8'] != "") {
-					//vérification de l'existance du terme pour ce vocabulaire
-					$query = \Drupal::entityQuery('taxonomy_term');
-					$query->condition('vid', 'solutions');
-					$query->condition('langcode', $correspondance['langcode']);
-					$query->condition('name', $correspondance['label_d8']);
-					$entity = $query->execute();
-
-					if (isset($entity) && !empty($entity) && count($entity) > 0) {
-						$correspondance_taxo_solution[$key]['tid_D8'] = array_pop(array_values($entity));
-					}
-					else {
-						// on n'a pas de terme D8 correspondant
-						\Drupal::logger('oab_migrate_content')
-							->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" (' . $correspondance['langcode'] . ') ---- pour la taxonomie Solution - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-					}
-				}
-				else {
-					// on n'a pas de correspondance pour cette Taxonomie
-					\Drupal::logger('oab_migrate_content')
-						->notice('Attention : pas de correspondance D8 pour la taxonomie Solution - term = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-				}
-			}
-		}
-		\Drupal::state()
-			->set('correspondence_taxo_solution', $correspondance_taxo_solution);
+		$correspondance_taxo_solution = $this->genericFillCorrespondance('correspondence_taxo_solution' ,'solutions');
+		\Drupal::state()->set('correspondence_taxo_solution', $correspondance_taxo_solution);
 
 		///INDUSTRIES
-		$correspondence_taxo_industry = \Drupal::state()
-			->get('correspondence_taxo_industry');
-		foreach ($correspondence_taxo_industry as $key => $correspondance) {
-			if (empty($correspondance['tid_D8']) || $correspondance['tid_D8'] == '') {
-				if ($correspondance['label_d8'] != "") {
-					//vérification de l'existance du terme pour ce vocabulaire
-					$query = \Drupal::entityQuery('taxonomy_term');
-					$query->condition('vid', 'industries');
-					$query->condition('langcode', $correspondance['langcode']);
-					$query->condition('name', $correspondance['label_d8']);
-					$entity = $query->execute();
-
-					if (isset($entity) && !empty($entity) && count($entity) > 0) {
-						$correspondence_taxo_industry[$key]['tid_D8'] = array_pop(array_values($entity));
-					}
-					else {
-						// on n'a pas de terme D8 correspondant
-						\Drupal::logger('oab_migrate_content')
-							->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" (' . $correspondance['langcode'] . ') ---- pour la taxonomie Industrie - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-					}
-				}
-				else {
-					// on n'a pas de correspondance pour cette Taxonomie
-					\Drupal::logger('oab_migrate_content')
-						->notice('Attention : pas de correspondance D8 pour la taxonomie Industrie - term = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-				}
-			}
-		}
-		\Drupal::state()
-			->set('correspondence_taxo_industry', $correspondence_taxo_industry);
+		$correspondence_taxo_industry = $this->genericFillCorrespondance('correspondence_taxo_industry' ,'industries');
+		\Drupal::state()->set('correspondence_taxo_industry', $correspondence_taxo_industry);
 
 		//REGIONS
-		$correspondence_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
-		foreach ($correspondence_taxo_region as $key => $correspondance)
-		{
-				if( $correspondance['label_d8'] != "") {
-					//vérification de l'existance du terme pour ce vocabulaire
-					$query = \Drupal::entityQuery('taxonomy_term');
-					$query->condition('vid', 'regions');
-					$query->condition('langcode', $correspondance['langcode']);
-					$query->condition('name', $correspondance['label_d8']);
-					$entity = $query->execute();
-
-					if (isset($entity) && !empty($entity) && count($entity) > 0) {
-						$correspondence_taxo_region[$key]['tid_D8'] = array_pop(array_values($entity));
-					}
-					else {
-						// on n'a pas de terme D8 correspondant
-						\Drupal::logger('oab_migrate_content')
-							->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" ('.$correspondance['langcode'].') ---- pour la taxonomie Region - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-					}
-				}
-				else
-				{
-					// on n'a pas de correspondance pour cette Taxonomie
-					\Drupal::logger('oab_migrate_content')->notice('Attention : pas de correspondance D8 pour la taxonomie Region - term = "'.$correspondance['label_d7'].'" - TID D7 :'.$correspondance['tid_d7']);
-				}
-		}
+		$correspondence_taxo_region = $this->genericFillCorrespondance('correspondence_taxo_region' ,'regions');
 		\Drupal::state()->set('correspondence_taxo_region', $correspondence_taxo_region);
 
-
-
-
 		//SOLUTION -> THEMATIC
-		$correspondence_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
-		foreach ($correspondence_taxo_solution_to_thematic as $key => $correspondance)
-		{
-			if( $correspondance['label_d8'] != "") {
-				//vérification de l'existance du terme pour ce vocabulaire
-				$query = \Drupal::entityQuery('taxonomy_term');
-				$query->condition('vid', 'thematic');
-				$query->condition('langcode', $correspondance['langcode']);
-				$query->condition('name', $correspondance['label_d8']);
-				$entity = $query->execute();
-
-				if (isset($entity) && !empty($entity) && count($entity) > 0) {
-					$correspondence_taxo_solution_to_thematic[$key]['tid_D8'] = array_pop(array_values($entity));
-				}
-				else {
-					// on n'a pas de terme D8 correspondant
-					\Drupal::logger('oab_migrate_content')
-						->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" ('.$correspondance['langcode'].') ---- pour la correspondance solution -> thematique - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
-				}
-			}
-			else
-			{
-				// on n'a pas de correspondance pour cette Taxonomie
-				\Drupal::logger('oab_migrate_content')->notice('Attention : pas de correspondance D8 pour la correspondance solution -> thematique - term = "'.$correspondance['label_d7'].'" - TID D7 :'.$correspondance['tid_d7']);
-			}
-		}
+		$correspondence_taxo_solution_to_thematic = $this->genericFillCorrespondance('correspondence_taxo_solution_to_thematic' ,'thematic');
 		\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $correspondence_taxo_solution_to_thematic);
+
+		//CAT BLOG -> THEMATIC BLOG
+		$correspondence_cat_blog_to_thematic_blog= $this->genericFillCorrespondance('correspondence_cat_blog_to_thematic_blog' ,'blog_thematics');
+		\Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $correspondence_cat_blog_to_thematic_blog);
+
+		//CAT BLOG -> FORMAT/TYPE BLOG
+		$correspondence_cat_blog_to_type_blog = $this->genericFillCorrespondance('correspondence_cat_blog_to_type_blog' ,'blog_formats');
+		\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $correspondence_cat_blog_to_type_blog);
+
+
+		//MAG CATEG TO MAG FORMAT
+		$correspondence_cat_mag_to_format_mag = $this->genericFillCorrespondance('correspondence_cat_mag_to_format_mag' ,'magazine_types');
+		\Drupal::state()->set('correspondence_cat_mag_to_format_mag', $correspondence_cat_mag_to_format_mag);
+
+		//Solution to mag theme
+		$correspondence_solution_to_theme_mag = $this->genericFillCorrespondance('correspondence_solution_to_theme_mag' ,'magazine_thematics');
+		\Drupal::state()->set('correspondence_solution_to_theme_mag', $correspondence_solution_to_theme_mag);
+
+		//solution to doc theme
+		$correspondence_solution_to_theme_doc = $this->genericFillCorrespondance('correspondence_solution_to_theme_doc' ,'document_thematics');
+		\Drupal::state()->set('correspondence_solution_to_theme_doc', $correspondence_solution_to_theme_doc);
+
+		//format doc to doc format
+		$correspondence_cat_blog_to_type_blog = $this->genericFillCorrespondance('correspondence_cat_blog_to_type_blog' ,'document_types');
+		\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $correspondence_cat_blog_to_type_blog);
 
 	}
 
@@ -270,5 +191,60 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 			}
 		}
 		\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
+	}
+
+	public function fillPressFormatIdInState(MigrateImportEvent $migrate_row) {
+
+		$formats = \Drupal::state()->get('press_format_for_migration');
+		foreach ($formats as $code_format => $tableau_langues) {
+			foreach ($tableau_langues as $langCode => $element) {
+				if (empty($element['tid_D8']) || $element['tid_D8'] == '') {
+					if ($element['label'] != "") {
+						$query = \Drupal::entityQuery('taxonomy_term');
+						$query->condition('vid', 'press_formats');
+						$query->condition('langcode', $langCode);
+						$query->condition('name', $element['label']);
+						$entity = $query->execute();
+
+						if (isset($entity) && !empty($entity) && count($entity) > 0) {
+							$formats[$code_format][$langCode]['tid_D8'] = array_pop(array_values($entity));
+						}
+					}
+				}
+			}
+		}
+		\Drupal::state()->set('press_format_for_migration', $formats);
+	}
+
+
+	private function genericFillCorrespondance($state_key, $vidD8)
+	{
+		$correspondance_state = \Drupal::state()->get($state_key);
+		foreach ($correspondance_state as $key => $correspondance) {
+			if ($correspondance['label_d8'] != "")
+			{
+				//vérification de l'existance du terme pour ce vocabulaire
+				$query = \Drupal::entityQuery('taxonomy_term');
+				$query->condition('vid', $vidD8);
+				$query->condition('langcode', $correspondance['langcode']);
+				$query->condition('name', $correspondance['label_d8']);
+				$entity = $query->execute();
+
+				if (isset($entity) && !empty($entity) && count($entity) > 0) {
+					$correspondance_state[$key]['tid_D8'] = array_pop(array_values($entity));
+				}
+				else {
+					// on n'a pas de terme D8 correspondant
+					\Drupal::logger('oab_migrate_content')
+						->notice('Attention : pas de terme D8 correspondant à "' . $correspondance['label_d8'] . '" (' . $correspondance['langcode'] . ') ---- pour la taxonomie '.$vidD8.' - terme D7 = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
+				}
+			}
+			else {
+				// on n'a pas de correspondance pour cette Taxonomie
+				\Drupal::logger('oab_migrate_content')
+					->notice('Attention : pas de correspondance D8 pour la taxonomie '.$vidD8.' - term = "' . $correspondance['label_d7'] . '" - TID D7 :' . $correspondance['tid_d7']);
+			}
+		}
+		return $correspondance_state;
 	}
 }
