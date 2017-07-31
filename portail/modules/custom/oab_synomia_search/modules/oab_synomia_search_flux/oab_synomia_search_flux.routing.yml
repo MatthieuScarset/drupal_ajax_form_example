@@ -1,0 +1,8 @@
+#page du flux xml
+oab_synomia_search_flux.flux_xml:
+  path: '/synomia_search_sitemap.xml'
+  defaults:
+    _controller: '\Drupal\oab_synomia_search_flux\Controller\OabSynomiaSearchFluxController::viewFlux'
+    _title: 'Synomia XML sitemap'
+  requirements:
+    _access: 'TRUE'
