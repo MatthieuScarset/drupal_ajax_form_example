@@ -181,6 +181,7 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7,
 			}
 		}
 	}
+	$new_values = array_unique($new_values);
 	\Drupal\Core\Database\Database::setActiveConnection();
 	return $new_values;
 }
