@@ -46,14 +46,26 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 {
   //$content = $content_field->value;
   //Pattern de recherche pour une image dans un WYSIWYG
-  $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
+	$pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
   $searchResults = array();
   $error = false;
   //Recherche du pattern
   while(preg_match($pattern, $content, $searchResults) && !$error)
   {
     //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
-    $fidD7 = $searchResults[1];
+    $fidD7 = end($searchResults);
+    //on recupere le alt de l'image
+    $alt_img = "";
+    if(isset($searchResults[0]))
+		{
+			$patternAlt = '/"alt":"([^"]*)"/i';
+			$resultsAlt = array();
+			$errorAlt = FALSE;
+			if(preg_match($patternAlt, $searchResults[0], $resultsAlt)){
+				$alt_img = end($resultsAlt);
+				//var_dump($resultsAlt);
+			}
+		}
 
     //Récupération des informations du file D7
     \Drupal\Core\Database\Database::setActiveConnection('drupal7');
@@ -87,6 +99,9 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
 
           if (!empty($media_results) && is_object($media_results)) {
             $newUUID = $media_results->uuid;
+						$media = Media::load($media_results->mid);
+						$media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
+						$media->save();
           }
           else
           {
@@ -97,7 +112,8 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
               'status' => $file_results->status,
               'uid' => 1
             ));
-            $media->set('field_image', $file->id());
+           // $media->set('field_image', $file->id());
+            $media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
             $media->save();
             $newUUID = $media->uuid();
           }
@@ -128,4 +144,44 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   }
 
   return $content;
+}
+
+
+function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7, $nid_D7, $bundle_D7)
+{
+	\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+	$dbD7 = \Drupal\Core\Database\Database::getConnection();
+	$new_values = array();
+	$tableau_correspondance = \Drupal::state()->get($name_tab_state);
+	if(count($tableau_correspondance) > 0) {
+		$query = $dbD7->select($table_D7, 'i');
+		$query->join('taxonomy_term_data', 't', 't.tid = i.'.$field_D7);
+		$query->fields('t', ['tid'])
+			->condition('i.entity_id', $nid_D7, '=')
+			->condition('i.bundle', $bundle_D7, '=');
+
+		$results = $query->execute()->fetchAll();
+
+		if (is_array($results)){
+			foreach ($results AS $result){
+				$tid_D7 = '';
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($result) && isset($result->tid)){
+					$tid_D7 = $result->tid;
+				}
+				elseif (is_array($result) && isset($result['tid'])){
+					$tid_D7 = $result['tid'];
+				}
+				if (isset($tableau_correspondance[$tid_D7]) && isset($tableau_correspondance[$tid_D7]['tid_D8'])) {
+					//prendre le tid D8
+					if (isset($tableau_correspondance[$tid_D7]['tid_D8']) && !empty($tableau_correspondance[$tid_D7]['tid_D8']) && $tableau_correspondance[$tid_D7]['tid_D8'] != "") {
+						$new_values[] = $tableau_correspondance[$tid_D7]['tid_D8'];
+					}
+				}
+			}
+		}
+	}
+	$new_values = array_unique($new_values);
+	\Drupal\Core\Database\Database::setActiveConnection();
+	return $new_values;
 }

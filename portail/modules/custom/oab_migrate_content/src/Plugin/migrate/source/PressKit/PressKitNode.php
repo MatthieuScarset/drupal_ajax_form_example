@@ -121,115 +121,52 @@ class PressKitNode extends SqlBase {
      */
 
 		// récupération du tag "industries"
-		$industries = array();
-		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
-		if(count($correspondance_taxo_industry) > 0) {
-
-			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
-			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
-			$industrie_query->fields('t', ['tid'])
-				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('i.bundle', 'press_kit', '=');
-
-			$industrie_results = $industrie_query->execute()->fetchAll();
-
-			if (is_array($industrie_results)){
-				$industries = array();
-				foreach ($industrie_results AS $industrie_result){
-					$industry_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($industrie_result) && isset($industrie_result->tid)){
-						$industry_id = $industrie_result->tid;
-					}
-					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
-						$industry_id = $industrie_result['tid'];
-					}
-					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
-						//prendre le tid D8
-						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
-							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('industries', $industries);
-			}
+		$industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
+			'field_data_field_taxo_industrie',
+			'field_taxo_industrie_tid',
+			$row->getSourceProperty('nid'),
+			'press_kit');
+		if(count($industries) > 0){
+			$row->setSourceProperty('industries', $industries);
 		}
 
 		// récupération du tag "solution"
-		$thematics = array();
-		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
-		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
-		if(count($correspondance_taxo_solution) > 0) {
-			$solutions = array();
-			$solution_query = $this->select('field_data_field_taxo_solution', 's');
-			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
-			$solution_query->fields('t', ['tid'])
-				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('s.bundle', 'press_kit', '=');
+		$solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution',
+			'field_data_field_taxo_solution',
+			'field_taxo_solution_tid',
+			$row->getSourceProperty('nid'),
+			'press_kit');
+		if(count($solutions) > 0){
+			$row->setSourceProperty('solutions', $solutions);
+		}
 
-			$solution_results = $solution_query->execute()->fetchAll();
-
-			if (is_array($solution_results)) {
-				foreach ($solution_results AS $solution_result) {
-					$solution_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($solution_result) && isset($solution_result->tid)) {
-						$solution_id = $solution_result->tid;
-					}
-					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
-						$solution_id = $solution_result['tid'];
-					}
-
-					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
-							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
-						}
-					}
-
-					//on regarde si on doit mettre une thematique pour cette solution
-					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
-							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('solutions', $solutions);
-				// s'il y a une thématique, on l'affecte
-				if(isset($thematics) && count($thematics) >0)	{
-					$row->setSourceProperty('thematics', $thematics);
-				}
-			}
+		// récupération du tag "solution"
+		$solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
+			'field_data_field_taxo_solution',
+			'field_taxo_solution_tid',
+			$row->getSourceProperty('nid'),
+			'press_kit');
+		if(count($solutions) > 0){
+			$row->setSourceProperty('thematics', $solutions);
 		}
 
 		// récupération du tag "area"
-		$regions = array();
-		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
-		if(count($correspondance_taxo_region) > 0) {
-			$area_query = $this->select('field_data_field_taxo_area', 'a');
-			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
-			$area_query->fields('t', ['tid'])
-				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('a.bundle', 'press_kit', '=');
-			$area_results = $area_query->execute()->fetchAll();
-			if (is_array($area_results)){
-				$regions = array();
-				foreach ($area_results AS $area_result){
-					$region_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($area_result) && isset($area_result->tid)){
-						$region_id = $area_result->tid;
-					}
-					elseif (is_array($area_result) && isset($area_result['tid'])){
-						$region_id = $area_result['tid'];
-					}
-					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
-							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('regions', $regions);
-			}
+		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+			'field_data_field_taxo_area',
+			'field_taxo_area_tid',
+			$row->getSourceProperty('nid'),
+			'press_kit');
+		if(count($regions) > 0){
+			$row->setSourceProperty('regions', $regions);
+		}
+
+		//PRESS FORMAT
+		$formats = \Drupal::state()->get('press_format_for_migration');
+		if(isset($formats['press_kit'][$row->getSourceProperty('language')])
+			&& isset($formats['press_kit'][$row->getSourceProperty('language')]['tid_D8'])
+			&& !empty($formats['press_kit'][$row->getSourceProperty('language')]['tid_D8']))
+		{
+			$row->setSourceProperty('press_types', $formats['press_kit'][$row->getSourceProperty('language')]['tid_D8']);
 		}
 
     // récupération des images
