@@ -1,0 +1,4 @@
+oab.settings_synomia_contentTypes_tab:
+  route_name: oab.settings_synomia_contentTypes
+  title: Settings
+  base_route: oab.settings_synomia_contentTypes

@@ -12,5 +12,7 @@ pm-enable -y oab_entity_embed_link
 pm-enable -y oab_yassine
 pm-enable -y oab_migrate_content
 pm-enable -y oab_tristan
+pm-enable -y entity_reference_revisions
+pm-enable -y paragraphs
 updatedb
 #entity-updates

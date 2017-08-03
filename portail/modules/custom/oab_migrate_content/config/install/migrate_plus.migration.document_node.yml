@@ -26,15 +26,12 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_document_type:
-    plugin: migration
-    migration: document_term
-    source: document_types
-  field_solution: solutions
+  field_document_type: document_types
+  field_document_thematic: document_thematics
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
-  field_thematic: thematics
+  field_insight: thematics
   field_file:
     plugin: migration
     migration: document_media_file
@@ -52,5 +49,4 @@ migration_dependencies:
   required:
     - document_media_file
     - document_media_image
-    - document_term
  

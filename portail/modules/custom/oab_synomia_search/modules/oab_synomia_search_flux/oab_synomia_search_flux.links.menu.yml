@@ -1,0 +1,6 @@
+oab.settings_synomia_contentTypes:
+  title: Synomia Content Types
+  route_name: oab.settings_synomia_contentTypes
+  parent: oab.settings
+  description: 'Configure content types for synomia indexing'
+  weight: -20

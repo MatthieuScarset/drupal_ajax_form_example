@@ -75,38 +75,28 @@ class DocumentMediaImage extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    // récupération de la balise alt et title
-    $image_query = $this->select('field_data_field_image', 'fi');
-    $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
-    ->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
-    ->condition('fi.bundle', 'content_document_type', '=');
+		$row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
 
-    $image_results = $image_query->execute()->fetchAll();
+		// récupération de la balise alt et title
+		$image_query = $this->select('field_data_field_image', 'fi');
+		$image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
+			->condition('fi.field_image_fid', $row->getSourceProperty('fid'), '=')
+			->condition('fi.bundle', 'content_document_type', '=');
+		$image_results = $image_query->execute()->fetchAll();
+		if (is_array($image_results)){
+			foreach ($image_results AS $image_result){
+				// On vérifie si on a affaire à un objet ou à un tableau
+				if (is_object($image_result)){
+					$row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
+					$row->setSourceProperty('field_image_title', $image_result->field_image_title);
+				}
+				elseif (is_array($image_result)){
+					$row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
+					$row->setSourceProperty('field_image_title', $image_result['field_image_title']);
+				}
 
-    if (is_array($image_results)){
-      foreach ($image_results AS $image_result){
-        // On vérifie si on a affaire à un objet ou à un tableau
-        $image_info = [];
-        if (is_object($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
-          //$row->setSourceProperty('field_image_title', $image_result->field_image_title);
-          //$row->setSourceProperty('field_image_width', $image_result->field_image_width);
-          //$row->setSourceProperty('field_image_height', $image_result->field_image_height);
-        }
-        elseif (is_array($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
-          //$row->setSourceProperty('field_image_title', $image_result['field_image_title']);
-          //$row->setSourceProperty('field_image_width', $image_result['field_image_width']);
-          //$row->setSourceProperty('field_image_height', $image_result['field_image_height']);
-        }
-
-      }
-    }
-
+			}
+		}
     return parent::prepareRow($row);
   }
 
