@@ -82,7 +82,7 @@ view_mode ? view_mode|clean_class,
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldBlog %}
-        {{ content.field_blog }}
+        {{ content.field_blog_thematic }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
     {% set fieldAuthor %}
         {{ author_name }}
@@ -111,8 +111,8 @@ view_mode ? view_mode|clean_class,
         {% if content.field_profile[0]['#node'].id() %}
             <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }} </a>
 
-            {% if content.theme_term %} {{ content.theme_term }} {% endif %}
-
+            {% if content.theme_term %}  {{ ', ' }} {{ content.theme_term }} {% endif %}
+{{ kint(content.theme_term) }}
         {% endif %}
     </div>
 
@@ -120,7 +120,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('theme_term', 'field_blog', 'field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date') }}
+        {{ content|without('theme_term', 'field_blog', 'field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_blog_thematic', 'field_blog_format', 'field_insight') }}
     </div>
 
 </article>

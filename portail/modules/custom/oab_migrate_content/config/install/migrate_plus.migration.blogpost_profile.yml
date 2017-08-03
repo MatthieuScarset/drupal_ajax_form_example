@@ -21,6 +21,9 @@ process:
   langcode: langcode
   title: title
   body/value: field_txt_catcher
+  body/format:
+    plugin: default_value
+    default_value: full_html
   field_first_name/value: field_first_name
   field_last_name/value: field_last_name
   field_social_account: field_social_account

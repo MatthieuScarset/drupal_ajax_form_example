@@ -31,6 +31,7 @@ process:
   field_region: regions
   field_subhome: subhomes
   field_thematic: thematics
+  field_press_type: press_types
   field_file:
     plugin: migration
     migration: press_release_media

@@ -25,11 +25,12 @@ process:
   field_content/format:
     plugin: default_value
     default_value: full_html
-  field_solution: solutions
+  field_blog_thematic: blog_thematics
+  field_blog_format: blog_formats
   field_industry: industries
   field_region: regions
   field_subhome: subhomes
-  field_thematic: thematics
+  field_insight: thematics
   field_visual:
     plugin: migration
     migration: blogpost_media

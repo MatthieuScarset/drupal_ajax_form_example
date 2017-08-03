@@ -123,3 +123,10 @@ function oab_yassine_update_8014() {
 function oab_yassine_update_8015() {
 	include_once("updates/update_8015.inc");
 }
+
+/**
+ *  Ajout de terme RU
+ */
+function oab_yassine_update_8016() {
+	include_once("updates/update_8016.inc");
+}
