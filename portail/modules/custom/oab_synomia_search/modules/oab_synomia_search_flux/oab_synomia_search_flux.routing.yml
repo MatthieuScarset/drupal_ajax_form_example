@@ -6,3 +6,12 @@ oab_synomia_search_flux.flux_xml:
     _title: 'Synomia XML sitemap'
   requirements:
     _access: 'TRUE'
+
+
+oab.settings_synomia_contentTypes:
+  path: '/admin/structure/oab/settings/synomiaContentTypes'
+  defaults:
+    _form: '\Drupal\oab_synomia_search_flux\Form\OabSettingsSynomiaContentTypesForm'
+    _title: 'Synomia Content Types'
+  requirements:
+    _permission: 'administer site configuration'
