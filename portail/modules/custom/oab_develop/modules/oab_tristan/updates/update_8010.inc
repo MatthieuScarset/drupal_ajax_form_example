@@ -1,7 +1,6 @@
 <?php
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
-
 $contentTypes = [
   'blog_post',
   'customer_story',
@@ -10,7 +9,8 @@ $contentTypes = [
   'magazine',
   'partner',
   'press_release',
-  'simple_page'
+  'simple_page',
+  'webform'
 ];
 
 #field.field.node.blog_post.field_rebond_document
@@ -246,6 +246,38 @@ $traductions = [
   )
 ];
 
+$labels = [
+  'field_rebond_document' => "Document",
+  'field_page_du_site_1'  => "Page du site 1",
+  'field_page_du_site_2'  => "Page du site 2",
+];
+
+
+foreach ( $labels as $fieldName => $label ) {
+  $field_storage = FieldStorageConfig::loadByName('node', $fieldName);
+  if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+      'field_name' => $fieldName,
+      'entity_type' => 'node',
+      'type' => 'entity_reference',
+    ))->save();
+  }
+  foreach ($contentTypes as $contentType) {
+    $field = FieldConfig::loadByName('node', $contentType, $fieldName);
+    if(empty($field)) {
+      $config_array = array(
+        'field_name' =>  $fieldName,
+        'entity_type' => 'node',
+        'bundle' => $contentType,
+        'label' => $label,
+        'required' => false,
+      );
+      FieldConfig::create($config_array)->save();
+    }
+  }
+}
+
+
 
 $onglet = array (
   'children' =>
@@ -275,10 +307,10 @@ $uuid_service = \Drupal::service('uuid');
 ##Je charge la librairie pour accéder aux config en BDD
 $config_factory = \Drupal::configFactory();
 
-
+print("################<br />#Debut creation des fields  ". date('H:i:s') ."<br />");
 ##je loop sur tous mes type de contenu pour leur ajouter les 3 fields nécessaires
 foreach ($contentTypes as $content) {
-  print("### " . $content . "<br />");
+  print("### $content " . date('H:i:s') . "<br />");
 
   ##Nom du content type en BDD
   $contentNode = "node.type." . $content;
@@ -331,12 +363,12 @@ foreach ($contentTypes as $content) {
       $display_form_array['content']['field_rebond_document'] = $field_rebond_document_settings;
 
       ##
-      while (false !== (
+      /*while (false !== (
           $key =
           array_search('group_rebond',$display_form_array['third_party_settings']['field_group']['group_onglets']['children'] ))
         ) {
           unset($display_form_array['third_party_settings']['field_group']['group_onglets']['children'][$key]);
-      }
+      }*/
 
 
       $display_form_array['third_party_settings']['field_group']['group_rebond'] = $onglet;
@@ -349,6 +381,7 @@ foreach ($contentTypes as $content) {
     }
   }
 }
+print("################<br />#Fin de la creation des fields  ". date('H:i:s') ."<br />");
 
 ##Creation de la vue, des blocks et des displays views pour l'affichage
 $configs = [
@@ -1301,6 +1334,7 @@ foreach ($configs as $configName => $config) {
   $config_group->setData($config);
   $config_group->save(TRUE);
 }
+print("################<br />#Fin de l'update ". date('H:i:s') ."<br />");
 
 #A enlever à la fin des tests
 throw new UpdateException();
