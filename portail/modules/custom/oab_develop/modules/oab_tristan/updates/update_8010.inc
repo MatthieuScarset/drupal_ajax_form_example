@@ -10,8 +10,7 @@ $contentTypes = [
   'magazine',
   'partner',
   'press_release',
-  'simple_page',
-  'webform'
+  'simple_page'
 ];
 
 #field.field.node.blog_post.field_rebond_document
@@ -245,7 +244,6 @@ $traductions = [
     'label' => 'Page du site #2',
     'description' => 'Remontée d\'une deuxième page dans la sidebar',
   )
-
 ];
 
 
@@ -350,7 +348,6 @@ foreach ($contentTypes as $content) {
 
     }
   }
-
 }
 
 ##Creation de la vue, des blocks et des displays views pour l'affichage
@@ -1304,3 +1301,6 @@ foreach ($configs as $configName => $config) {
   $config_group->setData($config);
   $config_group->save(TRUE);
 }
+
+#A enlever à la fin des tests
+throw new UpdateException();
