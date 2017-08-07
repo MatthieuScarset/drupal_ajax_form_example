@@ -12,6 +12,10 @@ define('BLOGPOST_SELECT_DATE', 1420066800);
 define('MAGAZINE_ARTICLE_SELECT_DATE', 1388530800);
 define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);
 
+//Date de la migration => 6/8/2017 à 23:59:59
+define('TIMESTAMP_MIGRATION_VALUE', 1502056799 );
+define('TIMESTAMP_MIGRATION_OPERATOR', '<' );
+
 function oab_migrate_workflow_sid_correspondance($old_sid){
   $workflow_state = NULL;
   if (is_int($old_sid)){
@@ -58,13 +62,13 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   	{
   		$pos = strpos($chaineTrouvee, "]]" ); //on cherche la premiere fin
   		$sousChaine = substr($chaineTrouvee, 0, $pos+2);
-			$sousChaineRemplacee = migrate_file_in_string($sousChaine);
+			$sousChaineRemplacee = migrate_file_in_string($sousChaine, $nidD7, $error);
 			$content = str_replace($sousChaine, $sousChaineRemplacee, $content);
 
 		}
 		else {
   		//il n'y a qu'une image a remplacer
-			$newChaine = migrate_file_in_string($chaineTrouvee);
+			$newChaine = migrate_file_in_string($chaineTrouvee, $nidD7, $error);
 			$content = str_replace($searchResults[0], $newChaine, $content);
 		}
   }
@@ -72,10 +76,9 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   return $content;
 }
 
-function migrate_file_in_string($chaineARemplacer) {
+function migrate_file_in_string($chaineARemplacer, $nidD7, &$error) {
 	$pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
 	$searchResults = array();
-	$error = false;
 	while (preg_match($pattern, $chaineARemplacer, $searchResults) && !$error)
 	{
 			//Au moins une image a été trouvée dans le WYSIWYG, on a son fid
@@ -176,7 +179,6 @@ function migrate_file_in_string($chaineARemplacer) {
 				\Drupal::logger('oab_migrate_content')
 					->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
 			}
-
 	}
 	return $chaineARemplacer;
 }

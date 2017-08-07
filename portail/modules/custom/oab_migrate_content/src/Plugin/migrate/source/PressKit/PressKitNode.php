@@ -33,6 +33,7 @@ class PressKitNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
     ->condition('n.type', 'press_kit', '=');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     return $query;
   }
 

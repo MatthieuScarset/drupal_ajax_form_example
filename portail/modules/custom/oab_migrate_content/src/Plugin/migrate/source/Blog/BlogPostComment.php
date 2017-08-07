@@ -44,8 +44,10 @@ class BlogPostComment extends SqlBase {
 		//$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     $query->condition('c.status', 1, '=');
     $query->orderBy('c.changed', 'ASC');
+    $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
-    return $query;
+
+		return $query;
   }
 
   /**
