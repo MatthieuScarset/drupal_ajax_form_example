@@ -95,7 +95,7 @@
                 {% set inactiveClasse = "" %}
                 {% if media is not empty %}
                     {% set url = file_url(media.field_file.entity.uri.value) %}
-                    <a class="rebond-doc-link {{ inactiveClasse }} " href="{{ url }}">
+                    <a class="rebond-link {{ inactiveClasse }} " href="{{ url }}">
                         {{ 'Download'|trans }}
                     </a>
                 {% endif %}

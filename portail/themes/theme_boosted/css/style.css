@@ -262,6 +262,11 @@ article .content .field--type-text-long ul li:before{
     background-color: #FFD200;
 }
 
+.rebond-product article {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 .rebond h4 {
     line-height: 2rem;
 }
@@ -276,6 +281,7 @@ article .content .field--type-text-long ul li:before{
     margin-left: 1.5rem;
     margin-bottom: 0;
     display: inline-block;
+    color: inherit;
 }
 
 .rebond-block-title .glyphicon {
@@ -288,7 +294,11 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
 }
 
-.rebond-doc-link {
+.rebond-product .rebond-block-title h2 {
+    margin-left: 0;
+}
+
+.rebond-link {
     border: 2px solid #000000;
     padding-right: 3rem;
     padding-left: 3rem;
@@ -299,19 +309,56 @@ article .content .field--type-text-long ul li:before{
     margin-top: 4px;
 }
 
-.rebond-doc-link:hover {
+.rebond-link:hover {
     color: #FFFFFF;
     background-color: #000000;
 }
 
-.rebond-doc-link:active {
+
+.rebond-link:active {
     color: #FFFFFF;
     background-color: #F16E00;
     border-color:#F16E00 ;
 }
 
-.rebond-doc-link.rebond-doc-inactif, .rebond-doc-link.rebond-doc-inactif:hover,
-.rebond-doc-link.rebond-doc-inactif:active {
+.rebond-link.rebond-doc-inactif, .rebond-link.rebond-doc-inactif:hover,
+.rebond-link.rebond-doc-inactif:active {
     color: #CCCCCC;
     border-color: #CCCCCC;
+}
+
+
+.rebond-product .rebond-link {
+    color: #FFFFFF;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+.rebond-product .rebond-link:hover {
+    color: #000000;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+.rebond-product .rebond-link:active {
+    color: #FFFFFF;
+    background-color: #000000;
+    border-color: #FFFFFF;
+}
+
+.rebond-product .rebond-product-text {
+    margin-top: 2rem;
+    font-weight: bold;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.rebond-product-text p {
+    margin: 0;
+}
+
+.rebond-product-link {
+    margin-top: 2rem;
+}
+
+.rebond-product-link a {
+    margin: 0;
 }
