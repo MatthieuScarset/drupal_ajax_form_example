@@ -52,98 +52,133 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   //Recherche du pattern
   while(preg_match($pattern, $content, $searchResults) && !$error)
   {
-    //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
-    $fidD7 = end($searchResults);
-    //on recupere le alt de l'image
-    $alt_img = "";
-    if(isset($searchResults[0]))
-		{
-			$patternAlt = '/"alt":"([^"]*)"/i';
-			$resultsAlt = array();
-			$errorAlt = FALSE;
-			if(preg_match($patternAlt, $searchResults[0], $resultsAlt)){
-				$alt_img = end($resultsAlt);
-				//var_dump($resultsAlt);
-			}
+  	$chaineTrouvee = $searchResults[0];
+  	//on teste s'il y a plusieurs images dans un résultat
+  	if(mb_substr_count($chaineTrouvee, "]]") > 1)
+  	{
+  		$pos = strpos($chaineTrouvee, "]]" ); //on cherche la premiere fin
+  		$sousChaine = substr($chaineTrouvee, 0, $pos+2);
+			$sousChaineRemplacee = migrate_file_in_string($sousChaine);
+			$content = str_replace($sousChaine, $sousChaineRemplacee, $content);
+
 		}
-
-    //Récupération des informations du file D7
-    \Drupal\Core\Database\Database::setActiveConnection('drupal7');
-    $dbD7 = \Drupal\Core\Database\Database::getConnection();
-
-    //requete sur le fichier D7
-    $file_query = $dbD7->select('file_managed', 'f');
-    $file_query->fields('f')
-      ->condition('f.fid', $fidD7, '=');
-    $file_results = $file_query->execute()->fetchObject();
-
-    //on remet la connexion D8
-    \Drupal\Core\Database\Database::setActiveConnection();
-    $dbD8 = \Drupal\Core\Database\Database::getConnection();
-
-    if (is_object($file_results)){
-      if (isset($file_results->uri)){
-        $saved_path = str_replace('public:/', \Drupal\Core\Site\Settings::get('migration_files_source_path', 'public:/'), $file_results->uri);
-
-        if (file_exists($saved_path)) {
-
-          $data = file_get_contents(file_create_url($saved_path));
-          $file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
-
-          //on recherche si le media existe déjà
-          $media_query = $dbD8->select('media', 'm');
-          $media_query->join('media__field_image', 'mfi', 'mfi.entity_id = m.mid');
-          $media_query->fields('m')
-            ->condition('mfi.field_image_target_id', $file->id(), '=');
-          $media_results = $media_query->execute()->fetchObject();
-
-          if (!empty($media_results) && is_object($media_results)) {
-            $newUUID = $media_results->uuid;
-						$media = Media::load($media_results->mid);
-						$media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
-						$media->save();
-          }
-          else
-          {
-            //création du média lié au file
-            $media = Media::create(array(
-              'bundle' => 'image',
-              'title' => $file_results->filename,
-              'status' => $file_results->status,
-              'uid' => 1
-            ));
-           // $media->set('field_image', $file->id());
-            $media->set('field_image', array( 'target_id' => $file->id(), 'alt' => $alt_img, 'title' => $alt_img));
-            $media->save();
-            $newUUID = $media->uuid();
-          }
-
-          //creation de la nouvelle syntaxe pour l'image avec l'uuid
-          $syntaxD8 = '<drupal-entity data-embed-button="media_browser" data-entity-embed-display="entity_reference:entity_reference_entity_view" data-entity-embed-settings="{&quot;view_mode&quot;:&quot;default&quot;}" data-entity-type="media" data-entity-uuid="' . $newUUID . '"></drupal-entity>';
-
-          //on remplace l'ancienne syntaxe par la nouvelle
-          $content = str_replace($searchResults[0], $syntaxD8, $content);
-        }
-        else{
-          $error = true; //en cas d'erreur on s'arret sinon boucle infinie
-          //l'image n'existe pas
-          \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : ".$saved_path);
-        }
-      }
-      else{
-        $error = true; //en cas d'erreur on s'arret sinon boucle infinie
-        //l'image n'existe pas
-        \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS.");
-      }
-    }
-    else{
-      $error = true; //en cas d'erreur on s'arret sinon boucle infinie
-      //l'image n'existe pas
-      \Drupal::logger('oab_migrate_content')->notice(" ***** ERREUR ***** Migration du Node ".$nidD7." (nid D7) --- Une ou plusieurs images n'existent PAS.");
-    }
+		else {
+  		//il n'y a qu'une image a remplacer
+			$newChaine = migrate_file_in_string($chaineTrouvee);
+			$content = str_replace($searchResults[0], $newChaine, $content);
+		}
   }
 
   return $content;
+}
+
+function migrate_file_in_string($chaineARemplacer) {
+	$pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
+	$searchResults = array();
+	$error = false;
+	while (preg_match($pattern, $chaineARemplacer, $searchResults) && !$error)
+	{
+			//Au moins une image a été trouvée dans le WYSIWYG, on a son fid
+			$fidD7 = end($searchResults);
+			//on recupere le alt de l'image
+			$alt_img = "";
+			if (isset($searchResults[0])) {
+				$patternAlt = '/"alt":"([^"]*)"/i';
+				$resultsAlt = array();
+				$errorAlt = FALSE;
+				if (preg_match($patternAlt, $searchResults[0], $resultsAlt)) {
+					$alt_img = end($resultsAlt);
+					//var_dump($resultsAlt);
+				}
+			}
+
+			//Récupération des informations du file D7
+			\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+			$dbD7 = \Drupal\Core\Database\Database::getConnection();
+
+			//requete sur le fichier D7
+			$file_query = $dbD7->select('file_managed', 'f');
+			$file_query->fields('f')
+				->condition('f.fid', $fidD7, '=');
+			$file_results = $file_query->execute()->fetchObject();
+
+			//on remet la connexion D8
+			\Drupal\Core\Database\Database::setActiveConnection();
+			$dbD8 = \Drupal\Core\Database\Database::getConnection();
+
+			if (is_object($file_results)) {
+				if (isset($file_results->uri)) {
+					$saved_path = str_replace('public:/', \Drupal\Core\Site\Settings::get('migration_files_source_path', 'public:/'), $file_results->uri);
+
+					if (file_exists($saved_path)) {
+
+						$data = file_get_contents(file_create_url($saved_path));
+						$file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
+
+						//on recherche si le media existe déjà
+						$media_query = $dbD8->select('media', 'm');
+						$media_query->join('media__field_image', 'mfi', 'mfi.entity_id = m.mid');
+						$media_query->fields('m')
+							->condition('mfi.field_image_target_id', $file->id(), '=');
+						$media_results = $media_query->execute()->fetchObject();
+
+						if (!empty($media_results) && is_object($media_results)) {
+							$newUUID = $media_results->uuid;
+							$media = Media::load($media_results->mid);
+							$media->set('field_image', array(
+								'target_id' => $file->id(),
+								'alt' => $alt_img,
+								'title' => $alt_img
+							));
+							$media->save();
+						}
+						else {
+							//création du média lié au file
+							$media = Media::create(array(
+								'bundle' => 'image',
+								'title' => $file_results->filename,
+								'status' => $file_results->status,
+								'uid' => 1
+							));
+							// $media->set('field_image', $file->id());
+							$media->set('field_image', array(
+								'target_id' => $file->id(),
+								'alt' => $alt_img,
+								'title' => $alt_img
+							));
+							$media->save();
+							$newUUID = $media->uuid();
+						}
+
+						//creation de la nouvelle syntaxe pour l'image avec l'uuid
+						$syntaxD8 = '<drupal-entity data-embed-button="media_browser" data-entity-embed-display="entity_reference:entity_reference_entity_view" data-entity-embed-settings="{&quot;view_mode&quot;:&quot;default&quot;}" data-entity-type="media" data-entity-uuid="' . $newUUID . '"></drupal-entity>';
+
+						//on remplace l'ancienne syntaxe par la nouvelle
+						$chaineARemplacer = str_replace($searchResults[0], $syntaxD8, $chaineARemplacer);
+					}
+					else {
+						$error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
+						//l'image n'existe pas
+						\Drupal::logger('oab_migrate_content')
+							->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : " . $saved_path);
+					}
+				}
+				else {
+					$error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
+					//l'image n'existe pas
+					\Drupal::logger('oab_migrate_content')
+						->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
+				}
+			}
+			else {
+				$error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
+				//l'image n'existe pas
+				\Drupal::logger('oab_migrate_content')
+					->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
+			}
+
+	}
+	return $chaineARemplacer;
 }
 
 
