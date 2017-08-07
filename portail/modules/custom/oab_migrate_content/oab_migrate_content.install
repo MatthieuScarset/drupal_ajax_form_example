@@ -10,6 +10,8 @@ include 'correspondances/solutionsD7_to_DocumentThematicD8.inc';
 include 'correspondances/solutionsD7_to_MagazineThematicD8.inc';
 include 'correspondances/solutionsD7_to_solutionsD8.inc';
 include 'correspondances/solutionsD7_to_thematicD8.inc';
+include 'correspondances/press_formats.inc';
+include 'correspondances/subhomes.inc';
 
 
 /** Définit l'ordre des updates par rapport aux autres modules
@@ -70,50 +72,11 @@ function oab_migrate_content_install(){
 	$formatDoc_to_formatDoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
 	\Drupal::state()->set('correspondence_format_document', $formatDoc_to_formatDoc);
 
-  $subhomes = array(
-    'blogs' => array(
-      'fr' => array('label' => 'Blogs', 'tid_D8' => ''),
-      'en' => array('label' => 'Blogs', 'tid_D8' => ''),
-      'ru' => array('label' => 'Блоги', 'tid_D8' => ''),
-      'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-    'library' => array(
-      'fr' => array('label' => 'Médiathèque', 'tid_D8' => ''),
-      'en' => array('label' => 'Library', 'tid_D8' => ''),
-      'ru' => array('label' => '', 'tid_D8' => ''),
-      'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-    'magazine' => array(
-      'fr' => array('label' => 'Magazine', 'tid_D8' => ''),
-      'en' => array('label' => 'Magazine', 'tid_D8' => ''),
-      'ru' => array('label' => '', 'tid_D8' => ''),
-      'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-    'press' => array(
-      'fr' => array('label' => 'Presse', 'tid_D8' => ''),
-      'en' => array('label' => 'Press', 'tid_D8' => ''),
-      'ru' => array('label' => 'Новости', 'tid_D8' => ''),
-      'ru-en' => array('label' => 'Newsroom', 'tid_D8' => '')),
-  );
+  $subhomes = get_correspondances_subhomes();
 	\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
 
-	$press_formats = array(
-		'press_kit' => array(
-			'fr' => array('label' => 'Dossier de presse', 'tid_D8' => ''),
-			'en' => array('label' => 'Press kit', 'tid_D8' => ''),
-			'ru' => array('label' => '', 'tid_D8' => ''),
-			'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-		'press_release' => array(
-			'fr' => array('label' => 'Communiqué de presse', 'tid_D8' => ''),
-			'en' => array('label' => 'Press release', 'tid_D8' => ''),
-			'ru' => array('label' => '', 'tid_D8' => ''),
-			'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-	);
-  \Drupal::state()->set('press_format_for_migration', $subhomes);
-
-
+	$press_formats = get_correspondances_press_formats();
+  \Drupal::state()->set('press_format_for_migration', $press_formats);
 }
 
 /**
@@ -145,16 +108,23 @@ function oab_migrate_content_update_8004() {
 	include_once("updates/update_8004.inc");
 }
 
-/*
+/**
  * Mise a jour des correspondances et le state
  */
 
 function oab_migrate_content_update_8005() {
 	include_once("updates/update_8005.inc");
 }
-/*
+/**
  * Modif config des migrations
  */
 function oab_migrate_content_update_8006() {
 	include_once("updates/update_8006.inc");
+}
+
+/**
+ * Modif de termes subhomes et theme blog
+ */
+function oab_migrate_content_update_8007() {
+	include_once("updates/update_8007.inc");
 }
