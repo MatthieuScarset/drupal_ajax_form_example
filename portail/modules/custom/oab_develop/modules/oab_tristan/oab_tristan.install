@@ -86,3 +86,10 @@ function oab_tristan_update_8008() {
 function oab_tristan_update_8009() {
   include_once("updates/update_8009.inc");
 }
+
+/**
+ * Ajout des blocks, display mode, et fields pour la zone rebond 1/3 (sidebar)
+ */
+function oab_tristan_update_8010() {
+  include_once("updates/update_8010.inc");
+}
