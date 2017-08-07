@@ -277,8 +277,6 @@ foreach ( $labels as $fieldName => $label ) {
   }
 }
 
-
-
 $onglet = array (
   'children' =>
     array (
@@ -307,17 +305,17 @@ $uuid_service = \Drupal::service('uuid');
 ##Je charge la librairie pour accéder aux config en BDD
 $config_factory = \Drupal::configFactory();
 
-print("################<br />#Debut creation des fields  ". date('H:i:s') ."<br />");
+#print("################<br />#Debut creation des fields  ". date('H:i:s') ."<br />");
 ##je loop sur tous mes type de contenu pour leur ajouter les 3 fields nécessaires
 foreach ($contentTypes as $content) {
-  print("### $content " . date('H:i:s') . "<br />");
+  #("### $content " . date('H:i:s') . "<br />");
 
   ##Nom du content type en BDD
   $contentNode = "node.type." . $content;
 
   ##je boucle sur mes 3 fields pour faire les modifs et les ajouter à chaque fois
   foreach ($fields as $field_name=>$field_data) {
-    print("###### $field_name <br />");
+    #print("###### $field_name <br />");
     ##je duplique mon array pour ne pas travailler sur celui de base
     $field_data_m = $field_data;
 
@@ -381,7 +379,8 @@ foreach ($contentTypes as $content) {
     }
   }
 }
-print("################<br />#Fin de la creation des fields  ". date('H:i:s') ."<br />");
+
+#print("################<br />#Fin de la creation des fields  ". date('H:i:s') ."<br />");
 
 ##Creation de la vue, des blocks et des displays views pour l'affichage
 $configs = [
@@ -1334,7 +1333,7 @@ foreach ($configs as $configName => $config) {
   $config_group->setData($config);
   $config_group->save(TRUE);
 }
-print("################<br />#Fin de l'update ". date('H:i:s') ."<br />");
+#print("################<br />#Fin de l'update ". date('H:i:s') ."<br />");
 
 #A enlever à la fin des tests
 throw new UpdateException();
