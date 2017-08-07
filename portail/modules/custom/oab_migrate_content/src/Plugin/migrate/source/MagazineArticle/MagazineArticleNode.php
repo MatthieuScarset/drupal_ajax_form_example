@@ -34,6 +34,7 @@ class MagazineArticleNode extends SqlBase {
       ->condition('n.type', 'content_magazine_article', '=')
       ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
     //  ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     return $query;
   }
 

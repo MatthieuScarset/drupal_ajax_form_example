@@ -175,17 +175,15 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
 		foreach ($subhomes as $code_subhome => $tableau_langues) {
 			foreach ($tableau_langues as $langCode => $element) {
-				if (empty($element['tid_D8']) || $element['tid_D8'] == '') {
-					if ($element['label'] != "") {
-						$query = \Drupal::entityQuery('taxonomy_term');
-						$query->condition('vid', 'subhomes');
-						$query->condition('langcode', $langCode);
-						$query->condition('name', $element['label']);
-						$entity = $query->execute();
+				if ($element['label'] != "") {
+					$query = \Drupal::entityQuery('taxonomy_term');
+					$query->condition('vid', 'subhomes');
+					$query->condition('langcode', $langCode);
+					$query->condition('name', $element['label']);
+					$entity = $query->execute();
 
-						if (isset($entity) && !empty($entity) && count($entity) > 0) {
-							$subhomes[$code_subhome][$langCode]['tid_D8'] = array_pop(array_values($entity));
-						}
+					if (isset($entity) && !empty($entity) && count($entity) > 0) {
+						$subhomes[$code_subhome][$langCode]['tid_D8'] = array_pop(array_values($entity));
 					}
 				}
 			}
@@ -198,17 +196,15 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		$formats = \Drupal::state()->get('press_format_for_migration');
 		foreach ($formats as $code_format => $tableau_langues) {
 			foreach ($tableau_langues as $langCode => $element) {
-				if (empty($element['tid_D8']) || $element['tid_D8'] == '') {
-					if ($element['label'] != "") {
-						$query = \Drupal::entityQuery('taxonomy_term');
-						$query->condition('vid', 'press_formats');
-						$query->condition('langcode', $langCode);
-						$query->condition('name', $element['label']);
-						$entity = $query->execute();
+				if ($element['label'] != "") {
+					$query = \Drupal::entityQuery('taxonomy_term');
+					$query->condition('vid', 'press_formats');
+					$query->condition('langcode', $langCode);
+					$query->condition('name', $element['label']);
+					$entity = $query->execute();
 
-						if (isset($entity) && !empty($entity) && count($entity) > 0) {
-							$formats[$code_format][$langCode]['tid_D8'] = array_pop(array_values($entity));
-						}
+					if (isset($entity) && !empty($entity) && count($entity) > 0) {
+						$formats[$code_format][$langCode]['tid_D8'] = array_pop(array_values($entity));
 					}
 				}
 			}

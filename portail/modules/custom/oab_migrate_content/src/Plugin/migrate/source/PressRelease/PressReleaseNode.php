@@ -33,6 +33,7 @@ class PressReleaseNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
     ->condition('n.type', 'content_press_release', '=');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     //->range(0, 10);
 
     return $query;

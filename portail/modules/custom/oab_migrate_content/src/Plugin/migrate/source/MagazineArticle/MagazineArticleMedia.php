@@ -38,6 +38,7 @@ class MagazineArticleMedia extends SqlBase {
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_magazine_article')
     ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
     return $query;
   }
