@@ -54,7 +54,7 @@ class RebondProductBlock extends BlockBase {
 
           #oabt($axiome_data, true);
            #$block['rebondProduct_']
-           
+
           /**
            * Ordre de priorité :
            *  1. Portail dédié
