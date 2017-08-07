@@ -187,6 +187,60 @@ article .content .field--type-text-long ul li:before{
     border-color: #000;
 }
 
+.page-node-type-homepage section.left-column > .region,
+.page-node-type-homepage aside.right-column > .region{
+    background: none;
+}
+.solution-banner{
+    height: 450px;
+}
+
+.solution-banner .title,
+.solution-banner .highlight-solution{
+    color: white;
+}
+
+.solution-banner .title{
+    padding-top: 100px;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.solution-banner .highlight-solution {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.solution-homepage .carousel-solution{
+    margin-top: -110px;
+    text-align: center;
+}
+.section-solution{
+    display: inline-block;
+}
+.solution-homepage .carousel-solution .left-zone,
+.solution-homepage .carousel-solution .right-zone{
+    float: left;
+    width: 530px;
+
+    height: 290px;
+    padding: 50px 45px;
+    text-align: left;
+    background-color: white;
+}
+
+.solution-homepage .carousel-solution .left-zone{
+    margin-right: 10px;
+}
+.solution-homepage .carousel-solution .right-zone{
+    margin-left: 10px;
+}
+.solution-homepage .carousel-solution .left-zone .row,
+.solution-homepage .carousel-solution .right-zone .row{
+    background-color: white;
+}
+.title-solution-banner{
+
+}
 
 
 
