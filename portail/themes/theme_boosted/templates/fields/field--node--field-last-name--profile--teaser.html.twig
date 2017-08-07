@@ -19,8 +19,9 @@ Affichage :
 #}
 
 {# Affichage du Nom & Prénom #}
-{{ field_first_name.0['#context'].value }} {{ field_last_name.0['#context'].value }}
-
+<div class="div-profile-teaser-name">
+    {{ field_first_name.0['#context'].value }} {{ field_last_name.0['#context'].value }}
+</div>
 {# Affichage du lien twitter #}
 {# Je teste si la valeur existe (tout le monde n'a pas de compte Twitter) avant de mettre la div et le lien
     Sinon, ca crée une div avec un lien sans texte ni direction
