@@ -61,6 +61,7 @@ class MagazineInterviewImage extends SqlBase {
     ->condition('n.type', 'content_magazine_interview')
     ->condition('n.status', 1, '=')
     ->condition('n.changed', MAGAZINE_INTERVIEW_SELECT_DATE, '>');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
 
     return $query;

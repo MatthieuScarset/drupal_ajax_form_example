@@ -34,6 +34,7 @@ class MagazineInterviewNode extends SqlBase {
       ->condition('n.type', 'content_magazine_interview', '=')
       ->condition('n.changed', MAGAZINE_INTERVIEW_SELECT_DATE, '>');
     //->condition('n.nid', array(4836,4837,4838,4839,4840,4841,4842,4843,4844), 'IN');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     return $query;
   }
 

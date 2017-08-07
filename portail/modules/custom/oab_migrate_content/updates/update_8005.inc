@@ -44,18 +44,5 @@ $solution_to_themeDoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
 $formatDoc_to_formatDoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
 \Drupal::state()->set('correspondence_format_document', $formatDoc_to_formatDoc);
 
-$press_formats = array(
-	'press_kit' => array(
-		'fr' => array('label' => 'Dossier de presse', 'tid_D8' => ''),
-		'en' => array('label' => 'Press kit', 'tid_D8' => ''),
-		'ru' => array('label' => '', 'tid_D8' => ''),
-		'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-	'press_release' => array(
-		'fr' => array('label' => 'Communiqué de presse', 'tid_D8' => ''),
-		'en' => array('label' => 'Press release', 'tid_D8' => ''),
-		'ru' => array('label' => '', 'tid_D8' => ''),
-		'ru-en' => array('label' => '', 'tid_D8' => '')),
-
-);
+$press_formats = get_correspondances_press_formats();
 \Drupal::state()->set('press_format_for_migration', $press_formats);
