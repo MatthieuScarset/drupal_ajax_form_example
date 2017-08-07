@@ -53,13 +53,8 @@ class RebondProductBlock extends BlockBase {
           $axiome_data = $field_axiome_data;
 
           #oabt($axiome_data, true);
-          /*$block['titre_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_title']['@attributes'][name];
-          $block['texte_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_text']['@attributes'][name];
-          $block['textelien_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_link_text']['@attributes'][name];
-          $block['url_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_url']['@attributes'][name];
-
-          #$block['rebondProduct_']
-           */
+           #$block['rebondProduct_']
+           
           /**
            * Ordre de priorité :
            *  1. Portail dédié
@@ -78,7 +73,7 @@ class RebondProductBlock extends BlockBase {
             $block['rebondProduct_type'] = 'boutique';
             $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_shops'];
 
-          } else*/if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
+          } elseif (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
           ['Attributes']['online_purchase_customer_area'])) {
 
             $block['rebondProduct']['type'] = 'espaceClient';
@@ -86,7 +81,7 @@ class RebondProductBlock extends BlockBase {
             $block['rebondProduct']['text']  = t("Track your use, manage your bills, options and services 24/24");
             $block['rebondProduct']['link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_customer_area'];
             $block['rebondProduct']['link_text'] = t("Sign in");
-          }
+          } */
 
         }
       }
