@@ -1335,5 +1335,36 @@ foreach ($configs as $configName => $config) {
 }
 #print("################<br />#Fin de l'update ". date('H:i:s') ."<br />");
 
+##Ajout des traductions nécessaires
+$translations = array(
+  array("source" => "Read more", "translation" => array("fr" => "En savoir plus")),
+  array("source" => "My Service Space", "translation" => array("fr"=>"Mon Espace Client Entreprise")),
+  array("source" => "Track your use, manage your bills, options and services 24/24",
+              "translation" => array("fr"=>"Suivez vos consommations, gérez vos factures, vos options et services 24h/24")),
+  array("source" => "Sign in", "translation" => array("fr" => "Se connecter")),
+);
+
+$storage = \Drupal::service('locale.storage');
+
+foreach ($translations AS $translation) {
+  $string = $storage->findString(array('source' => $translation['source']));
+  if (is_null($string)) {
+    $string = new SourceString();
+    $string->setString($translation['source']);
+    $string->setStorage($storage);
+    $string->save();
+  }
+
+  foreach ($translation['translation'] as $language => $translated_string) {
+    // Create translation. If one already exists, it will be replaced.
+    $translation = $storage->createTranslation(array(
+      'lid' => $string->lid,
+      'language' => $language,
+      'translation' => $translated_string,
+    ))->save();
+  }
+}
+
+
 #A enlever à la fin des tests
 throw new UpdateException();
