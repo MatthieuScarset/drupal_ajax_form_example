@@ -1340,7 +1340,7 @@ $translations = array(
   array("source" => "Read more", "translation" => array("fr" => "En savoir plus")),
   array("source" => "My Service Space", "translation" => array("fr"=>"Mon Espace Client Entreprise")),
   array("source" => "Track your use, manage your bills, options and services 24/24",
-              "translation" => array("fr"=>"Suivez vos consommations, gérez vos factures, vos options et services 24h/24")),
+    "translation" => array("fr"=>"Suivez vos consommations, gérez vos factures, vos options et services 24h/24")),
   array("source" => "Sign in", "translation" => array("fr" => "Se connecter")),
 );
 
@@ -1367,4 +1367,4 @@ foreach ($translations AS $translation) {
 
 
 #A enlever à la fin des tests
-throw new UpdateException();
+//throw new UpdateException();
