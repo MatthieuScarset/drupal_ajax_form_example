@@ -20,7 +20,7 @@ Affichage :
 
 {# Affichage du Nom & Prénom #}
 <div class="div-profile-teaser-name">
-    {{ field_first_name.0['#context'].value }} {{ field_last_name.0['#context'].value }}
+    {{ field_title.0['#context'].value }}
 </div>
 {# Affichage du lien twitter #}
 {# Je teste si la valeur existe (tout le monde n'a pas de compte Twitter) avant de mettre la div et le lien
@@ -28,6 +28,6 @@ Affichage :
  #}
 {% if field_social_account.0 is defined and field_social_account.0|length > 0 %}
     <div class="div_twitter_account">
-        <a href="{{ field_social_account.0['#context'].value }}">{{ field_social_account['#title'] }}</a>
+        <a href="{{ field_social_account.0['#context'].value }}" about="_blank">{{ field_social_account['#title'] }}</a>
     </div>
 {% endif %}
