@@ -100,3 +100,9 @@ function oab_tristan_update_8010() {
 function oab_tristan_update_8011() {
   include_once("updates/update_8011.inc");
 }
+/**
+ * Suppression du firstname et lastname du formulaire d'edition d'un blogger
+ */
+function oab_tristan_update_8012() {
+  include_once("updates/update_8012.inc");
+}
