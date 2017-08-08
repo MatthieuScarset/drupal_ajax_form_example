@@ -130,3 +130,10 @@ function oab_yassine_update_8015() {
 function oab_yassine_update_8016() {
 	include_once("updates/update_8016.inc");
 }
+
+/**
+ *  Update des termes en trop
+ */
+function oab_yassine_update_8017() {
+	include_once("updates/update_8017.inc");
+}
