@@ -93,3 +93,10 @@ function oab_tristan_update_8009() {
 function oab_tristan_update_8010() {
   include_once("updates/update_8010.inc");
 }
+
+/**
+ * Modification de l'affichage du form display des profils (Ajouts de fields, modification de l'ordre d'affichage)
+ */
+function oab_tristan_update_8011() {
+  include_once("updates/update_8011.inc");
+}
