@@ -332,7 +332,7 @@ foreach ($contentTypes as $content) {
 
     ##Si le content n'est pas dans les dependances, je l'ajoute
     if (false === array_search($contentNode, $field_data_m['dependencies']['config'])) {
-      $taille = count($field_document_m['dependencies']['config']);
+      $taille = count($field_data_m['dependencies']['config']);
       $field_data_m['dependencies']['config'][$taille] = $contentNode;
     }
 
