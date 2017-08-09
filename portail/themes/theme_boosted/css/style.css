@@ -211,7 +211,7 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
 }
 .solution-homepage .carousel-solution{
-    margin-top: -110px;
+    margin-top: -180px;
     text-align: center;
 }
 .section-solution{
@@ -238,11 +238,25 @@ article .content .field--type-text-long ul li:before{
 .solution-homepage .carousel-solution .right-zone .row{
     background-color: white;
 }
-.title-solution-banner{
-
+.title-solution-banner .title{
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
-
+.solution-zone .content{
+    border-top: 1px solid #ccc;
+    padding-top: 30px !important;
+    margin-top: 20px;
+}
+.solution-zone .content .title-content{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.solution-zone .content .text-content{
+    font-family: "Times New Roman";
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
 
 
 @media (max-width: 767px) {
