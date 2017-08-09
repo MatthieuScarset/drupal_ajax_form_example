@@ -367,3 +367,11 @@ article .content .field--type-text-long ul li:before{
     line-height: 2rem;
 
 }
+
+.webform-button--submit, .webform-button--draft {
+    margin-top: 1rem;
+}
+
+.webform-confirmation {
+    padding: 1rem;
+}
