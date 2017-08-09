@@ -1,6 +1,8 @@
 <?php
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\locale\SourceString;
+
 $contentTypes = [
   'blog_post',
   'customer_story',
