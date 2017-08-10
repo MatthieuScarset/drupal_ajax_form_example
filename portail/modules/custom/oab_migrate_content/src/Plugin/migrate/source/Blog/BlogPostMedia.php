@@ -37,15 +37,11 @@ class BlogPostMedia extends SqlBase {
     $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
-    //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
-    //$query->condition('f.fid', 1757)
-		//$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
     $query->condition('n.type', 'blog_post');
-	//	$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    //->orderBy('m.fid', 'ASC');
-    //->range(0, 1);
+    $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
-    return $query;
+
+		return $query;
   }
 
   /**
@@ -81,6 +77,8 @@ class BlogPostMedia extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+		$row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
+
     // récupération de la balise alt et title
     $image_query = $this->select('field_data_field_image', 'fi');
     $image_query->fields('fi', ['field_image_title', 'field_image_alt', 'field_image_width', 'field_image_height'])
@@ -94,20 +92,12 @@ class BlogPostMedia extends SqlBase {
         // On vérifie si on a affaire à un objet ou à un tableau
         $image_info = [];
         if (is_object($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
-          //$row->setSourceProperty('field_image_title', $image_result->field_image_title);
-          //$row->setSourceProperty('field_image_width', $image_result->field_image_width);
-          //$row->setSourceProperty('field_image_height', $image_result->field_image_height);
+          $row->setSourceProperty('field_image_alt', $image_result->field_image_alt);
+          $row->setSourceProperty('field_image_title', $image_result->field_image_title);
         }
         elseif (is_array($image_result)){
-          $image_info[] = $row->getSourceProperty('mid');
-          $row->setSourceProperty('image_info', $image_info);
-          //$row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
-          //$row->setSourceProperty('field_image_title', $image_result['field_image_title']);
-          //$row->setSourceProperty('field_image_width', $image_result['field_image_width']);
-          //$row->setSourceProperty('field_image_height', $image_result['field_image_height']);
+          $row->setSourceProperty('field_image_alt', $image_result['field_image_alt']);
+          $row->setSourceProperty('field_image_title', $image_result['field_image_title']);
         }
         
       }

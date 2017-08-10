@@ -1,5 +1,26 @@
 <?php
 
+include 'correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
+include 'correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
+include 'correspondances/categoriesMagazineD7_to_MagazineFormatD8.inc';
+include 'correspondances/formatDocumentD7_to_formatDocumentD8.inc';
+include 'correspondances/industriesD7_to_industriesD8.inc';
+include 'correspondances/regionsD7_to_regionsD8.inc';
+include 'correspondances/solutionsD7_to_DocumentThematicD8.inc';
+include 'correspondances/solutionsD7_to_MagazineThematicD8.inc';
+include 'correspondances/solutionsD7_to_solutionsD8.inc';
+include 'correspondances/solutionsD7_to_thematicD8.inc';
+include 'correspondances/press_formats.inc';
+include 'correspondances/subhomes.inc';
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_migrate_content_update_dependencies() {
+	//$dependencies['oab_migrate_content'][8005] = array('oab_stephanie' => 8034);
+}
+
 /**
  * implements hook_uninstall()
  */
@@ -12,166 +33,98 @@ function oab_migrate_content_uninstall() {
 
 function oab_migrate_content_install(){
 
-	//correspondances des taxos Solution
-	$solutions =
-		array(
-			//Solutions EN
-			'32332' => array('tid_d7' => '32332', 'label_d7' => 'big data & analytics', 'langcode' => 'en','label_d8'=> 'Business innovation', 'tid_D8' => ''),
-			'16347' => array('tid_d7' => '16347', 'label_d7' => 'Cloud computing', 'langcode' => 'en','label_d8'=> 'Flexible IT', 'tid_D8' => ''),
-			'35313' => array('tid_d7' => '35313', 'label_d7' => 'Collaborative workspace', 'langcode' => 'en','label_d8'=> 'Collaborative workspace', 'tid_D8' => ''),
-			'16790' => array('tid_d7' => '16790', 'label_d7' => 'conferencing', 'langcode' => 'en','label_d8'=> 'Collaborative workspace', 'tid_D8' => '' ),
-			'35131' => array('tid_d7' => '35131', 'label_d7' => 'Connectivity', 'langcode' => 'en','label_d8'=> 'Enriched connectivity', 'tid_D8' =>'' ),
-			'35028' => array('tid_d7' => '35028', 'label_d7' => 'Consulting', 'langcode' => 'en','label_d8'=> 'Services', 'tid_D8' => ''),
-			'35187' => array('tid_d7' => '35187', 'label_d7' => 'Customer experience', 'langcode' => 'en', 'label_d8'=> 'Enriched customer relationships', 'tid_D8' => ''),
-			'35144' => array('tid_d7' => '35144', 'label_d7' => 'Digital transformation', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-			'35145' => array('tid_d7' => '35145', 'label_d7' => 'Digital Transformation eBook Asset Landing Page', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-			'35072' => array('tid_d7' => '35072', 'label_d7' => 'Digital workspace', 'langcode' => 'en', 'label_d8'=> 'Collaborative workspace', 'tid_D8' => ''),
-			'16788' => array('tid_d7' => '16788', 'label_d7' => 'Internet of Things', 'langcode' => 'en', 'label_d8'=> 'Business innovation', 'tid_D8' => ''),
-			'35219' => array('tid_d7' => '35219', 'label_d7' => 'IoT and data analytics', 'langcode' => 'en', 'label_d8'=> 'Business innovation', 'tid_D8' => ''),
-			'16390' => array('tid_d7' => '16390', 'label_d7' => 'mobility', 'langcode' => 'en', 'label_d8'=> 'Collaborative workspace', 'tid_D8' => ''),
-			'16382' => array('tid_d7' => '16382', 'label_d7' => 'Network', 'langcode' => 'en', 'label_d8'=> 'Enriched connectivity', 'tid_D8' => ''),
-			'35011' => array('tid_d7' => '35011', 'label_d7' => 'Powerpage template sample', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-			'24726' => array('tid_d7' => '24726', 'label_d7' => 'professional services', 'langcode' => 'en', 'label_d8'=> 'Services', 'tid_D8' => ''),
-			'16789' => array('tid_d7' => '16789', 'label_d7' => 'security', 'langcode' => 'en', 'label_d8'=> 'Cyber defense', 'tid_D8' => ''),
-			'35268' => array('tid_d7' => '35268', 'label_d7' => 'Security', 'langcode' => 'en', 'label_d8'=> 'Cyber defense', 'tid_D8' => ''),
-			'16381' => array('tid_d7' => '16381', 'label_d7' => 'unified communications', 'langcode' => 'en', 'label_d8'=> 'Collaborative workspace', 'tid_D8' => ''),
-			'16388' => array('tid_d7' => '16388', 'label_d7' => 'voice and telephony', 'langcode' => 'en', 'label_d8'=> 'Collaborative workspace', 'tid_D8' => ''),
-			'33597' => array('tid_d7' => '33597', 'label_d7' => 'welcome to planet local', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
+	drupal_set_installed_schema_version('oab_migrate_content', 8000);
 
-					//Solutions FR
-			'31988' => array('tid_d7' => '31988', 'label_d7' => 'big data & analytics', 'langcode' => 'fr', 'label_d8'=> 'Innovation au service du business', 'tid_D8' => ''),
-			'35130' => array('tid_d7' => '35130', 'label_d7' => 'Cloud computing', 'langcode' => 'fr', 'label_d8'=> 'IT Flexible', 'tid_D8' => ''),
-			'35210' => array('tid_d7' => '35210', 'label_d7' => 'Connectivité', 'langcode' => 'fr', 'label_d8'=> 'Connectivité enrichie', 'tid_D8' => ''),
-			'20291' => array('tid_d7' => '20291', 'label_d7' => 'conseil et services client', 'langcode' => 'fr', 'label_d8'=> 'Service', 'tid_D8' => ''),
-			'35073' => array('tid_d7' => '35073', 'label_d7' => 'Digital workspace', 'langcode' => 'fr', 'label_d8'=> 'Espace collaboratifs', 'tid_D8' => ''),
-			'35012' => array('tid_d7' => '35012', 'label_d7' => 'Digital workspace', 'langcode' => 'fr', 'label_d8'=> 'Espace collaboratifs', 'tid_D8' => ''),
-			'35272' => array('tid_d7' => '35272', 'label_d7' => 'Espaces collaboratifs', 'langcode' => 'fr', 'label_d8'=> 'Espace collaboratifs', 'tid_D8' => ''),
-			'18992' => array('tid_d7' => '18992', 'label_d7' => 'Expérience client', 'langcode' => 'fr', 'label_d8'=> 'Relation client enrichie', 'tid_D8' => ''),
-			'35286' => array('tid_d7' => '35286', 'label_d7' => 'Expérience client', 'langcode' => 'fr', 'label_d8'=> 'Relation client enrichie', 'tid_D8' => ''),
-			'35146' => array('tid_d7' => '35146', 'label_d7' => 'FR - Digital Transformation eBook Asset Landing Page', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'17630' => array('tid_d7' => '17630', 'label_d7' => 'Internet et réseaux', 'langcode' => 'fr', 'label_d8'=> 'Connectivité enrichie', 'tid_D8' => ''),
-			'35171' => array('tid_d7' => '35171', 'label_d7' => 'IoT et data analytics', 'langcode' => 'fr', 'label_d8'=> 'Innovation au service du business', 'tid_D8' => ''),
-			'33817' => array('tid_d7' => '33817', 'label_d7' => 'Machine to Machine', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'34846' => array('tid_d7' => '34846', 'label_d7' => 'Mobilité', 'langcode' => 'fr', 'label_d8'=> 'Mobile Workspace', 'tid_D8' => ''),
-			'33910' => array('tid_d7' => '33910', 'label_d7' => 'Orange Consulting', 'langcode' => 'fr', 'label_d8'=> 'Service', 'tid_D8' => ''),
-			'25119' => array('tid_d7' => '25119', 'label_d7' => 'Proche de vous aux 4 coins du monde', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'35309' => array('tid_d7' => '35309', 'label_d7' => 'Relation Client Enrichie', 'langcode' => 'fr', 'label_d8'=> 'Relation client enrichie', 'tid_D8' => ''),
-			'35274' => array('tid_d7' => '35274', 'label_d7' => 'Ressources humaines', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'35241' => array('tid_d7' => '35241', 'label_d7' => 'Sécurité', 'langcode' => 'fr', 'label_d8'=> 'Cyberdefense', 'tid_D8' => ''),
-			'35173' => array('tid_d7' => '35173', 'label_d7' => 'Transformation digitale', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'18335' => array('tid_d7' => '18335', 'label_d7' => 'visioconférence', 'langcode' => 'fr', 'label_d8'=> 'Espace collaboratifs', 'tid_D8' => ''),
-
-					//Solutions RU
-			'23250' => array('tid_d7' => '23250', 'label_d7' => 'Аудио- и видеоконференции', 'langcode' => 'ru', 'label_d8'=> 'Аудио- и видеоконференции', 'tid_D8' => ''),
-			'22351' => array('tid_d7' => '22351', 'label_d7' => 'Безопасность', 'langcode' => 'ru', 'label_d8'=> 'Безопасность', 'tid_D8' => ''),
-			'22422' => array('tid_d7' => '22422', 'label_d7' => 'Голосовые услуги', 'langcode' => 'ru', 'label_d8'=> 'Голосовые услуги', 'tid_D8' => ''),
-			'25172' => array('tid_d7' => '25172', 'label_d7' => 'Контакт-центр', 'langcode' => 'ru', 'label_d8'=> 'Контакт-центр', 'tid_D8' => ''),
-			'23647' => array('tid_d7' => '23647', 'label_d7' => 'Корпоративные сети', 'langcode' => 'ru', 'label_d8'=> 'Корпоративные сети', 'tid_D8' => ''),
-			'31965' => array('tid_d7' => '31965', 'label_d7' => 'Мобильность', 'langcode' => 'ru', 'label_d8'=> 'Мобильность', 'tid_D8' => ''),
-			'25166' => array('tid_d7' => '25166', 'label_d7' => 'Облачные вычисления', 'langcode' => 'ru', 'label_d8'=> 'Облачные вычисления', 'tid_D8' => ''),
-			'25750' => array('tid_d7' => '25750', 'label_d7' => 'Унифицированные коммуникации', 'langcode' => 'ru', 'label_d8'=> 'Унифицированные коммуникации', 'tid_D8' => ''),
-
-					//Solutions RU-EN
-			'26697' => array('tid_d7' => '26697', 'label_d7' => 'Cloud Computing', 'langcode' => 'ru-en', 'label_d8'=> 'Cloud Computing', 'tid_D8' => ''),
-			'24129' => array('tid_d7' => '24129', 'label_d7' => 'Conferencing', 'langcode' => 'ru-en', 'label_d8'=> 'Conferencing', 'tid_D8' => ''),
-			'26699' => array('tid_d7' => '26699', 'label_d7' => 'Connectivity', 'langcode' => 'ru-en', 'label_d8'=> 'Connectivity', 'tid_D8' => ''),
-			'26703' => array('tid_d7' => '26703', 'label_d7' => 'Contact Centers', 'langcode' => 'ru-en', 'label_d8'=> 'Contact Centers', 'tid_D8' => ''),
-			'32350' => array('tid_d7' => '32350', 'label_d7' => 'Mobility', 'langcode' => 'ru-en', 'label_d8'=> 'Mobility', 'tid_D8' => ''),
-			'26695' => array('tid_d7' => '26695', 'label_d7' => 'Security', 'langcode' => 'ru-en', 'label_d8'=> 'Security', 'tid_D8' => ''),
-			'26257' => array('tid_d7' => '26257', 'label_d7' => 'Unified Communications', 'langcode' => 'ru-en', 'label_d8'=> 'Unified Communications', 'tid_D8' => ''),
-			'26389' => array('tid_d7' => '26389', 'label_d7' => 'voice and telephony', 'langcode' => 'ru-en', 'label_d8'=> 'Voice and telephony', 'tid_D8' => ''),
-		);
-
+	$solutions = get_correspondances_soltutionD7_to_solutionD8();
 	\Drupal::state()->set('correspondence_taxo_solution', $solutions);
 
+//BLOGS
+	$categBlog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
+	\Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categBlog_to_thematic);
 
-	// INDUSTRIES
-	$industries =
-		array(
-			//industries EN
-			'16384' => array('tid_d7' => '16384', 'label_d7' => 'air transport', 'langcode' => 'en', 'label_d8'=> 'Transport and Logistic', 'tid_D8' => ''),
-			'16385' => array('tid_d7' => '16385', 'label_d7' => 'eGovernment', 'langcode' => 'en', 'label_d8'=> 'MOFA\'s', 'tid_D8' => ''),
-			'16792' => array('tid_d7' => '16792', 'label_d7' => 'finance', 'langcode' => 'en', 'label_d8'=> 'Financial Services', 'tid_D8' => ''),
-			'16355' => array('tid_d7' => '16355', 'label_d7' => 'health', 'langcode' => 'en', 'label_d8'=> 'Healthcare', 'tid_D8' => ''),
-			'16386' => array('tid_d7' => '16386', 'label_d7' => 'oil & gas', 'langcode' => 'en', 'label_d8'=> 'Oil, gaz, mines', 'tid_D8' => ''),
-			'16383' => array('tid_d7' => '16383', 'label_d7' => 'shipping', 'langcode' => 'en', 'label_d8'=> 'Transport and Logistic', 'tid_D8' => ''),
-			'16791' => array('tid_d7' => '16791', 'label_d7' => 'trading solutions', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-			//industries FR
-			'30442' => array('tid_d7' => '30442', 'label_d7' => 'banque et assurance', 'langcode' => 'fr', 'label_d8'=> 'Banque et Assurance', 'tid_D8' => ''),
-			'35324' => array('tid_d7' => '35324', 'label_d7' => 'Collectivités locales', 'langcode' => 'fr', 'label_d8'=> 'Collectivités locales', 'tid_D8' => ''),
-			'29947' => array('tid_d7' => '29947', 'label_d7' => 'Commerce et distribution', 'langcode' => 'fr', 'label_d8'=> 'Commerce', 'tid_D8' => ''),
-			'18337' => array('tid_d7' => '18337', 'label_d7' => 'e-santé', 'langcode' => 'fr', 'label_d8'=> 'Santé', 'tid_D8' => ''),
-			'18339' => array('tid_d7' => '18339', 'label_d7' => 'éducation', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'35118' => array('tid_d7' => '35118', 'label_d7' => "L'Industrie 4.0, l'usine connectée", 'langcode' => 'fr', 'label_d8'=> 'Industrie / Campus numérique', 'tid_D8' => ''),
-			'35172' => array('tid_d7' => '35172', 'label_d7' => 'POWERPAGE FR for digitrans', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'18342' => array('tid_d7' => '18342', 'label_d7' => 'secteur public', 'langcode' => 'fr', 'label_d8'=> 'Gouvernement', 'tid_D8' => ''),
-			'31854' => array('tid_d7' => '31854', 'label_d7' => 'Smart Cities', 'langcode' => 'fr', 'label_d8'=> 'Smart Cities', 'tid_D8' => ''),
-			'20201' => array('tid_d7' => '20201', 'label_d7' => 'trading', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'17712' => array('tid_d7' => '17712', 'label_d7' => 'transport', 'langcode' => 'fr', 'label_d8'=> 'Transport logistique', 'tid_D8' => ''),
-			//industries RU
-			'25426' => array('tid_d7' => '25426', 'label_d7' => 'решения для здравоохранения', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-			'25746' => array('tid_d7' => '25746', 'label_d7' => 'решения для нефтегазовых организаций', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-			'25428' => array('tid_d7' => '25428', 'label_d7' => 'решения для финансовых организаций', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
-			//industries RU-EN
-			'26742' => array('tid_d7' => '26742', 'label_d7' => 'finance', 'langcode' => 'ru-en', 'label_d8'=> '', 'tid_D8' => ''),
-			'25776' => array('tid_d7' => '25776', 'label_d7' => 'oil & gas', 'langcode' => 'ru-en', 'label_d8'=> '', 'tid_D8' => ''),
-		);
+	$categBlog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
+	\Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categBlog_to_type);
+
+// INDUSTRIES
+	$industries = get_correspondances_industriesD7_to_industriesD8();
 	\Drupal::state()->set('correspondence_taxo_industry', $industries);
 
-	//REGIONS
-	$regions =
-		array(
-			'26455' => array('tid_d7' => '26455', 'label_d7' => 'Africa', 'langcode' => 'en', 'label_d8'=> 'Africa', 'tid_D8' => ''),
-			'16780' => array('tid_d7' => '16780', 'label_d7' => 'Asia Pacific', 'langcode' => 'en', 'label_d8'=> 'Asia Pacific', 'tid_D8' => ''),
-			'16793' => array('tid_d7' => '16793', 'label_d7' => 'Europe', 'langcode' => 'en', 'label_d8'=> 'Europe', 'tid_D8' => ''),
-			'16794' => array('tid_d7' => '16794', 'label_d7' => 'Latin America', 'langcode' => 'en', 'label_d8'=> 'Latin America', 'tid_D8' => ''),
-			'16795' => array('tid_d7' => '16795', 'label_d7' => 'Middle East', 'langcode' => 'en', 'label_d8'=> 'Middle East', 'tid_D8' => ''),
-			'16796' => array('tid_d7' => '16796', 'label_d7' => 'North America', 'langcode' => 'en', 'label_d8'=> 'North America', 'tid_D8' => ''),
-			'25003' => array('tid_d7' => '25003', 'label_d7' => 'Russia', 'langcode' => 'en', 'label_d8'=> 'Russia', 'tid_D8' => ''),
-			'35102' => array('tid_d7' => '35102', 'label_d7' => 'Equant Ä°stanbul Telekom A.Åž.', 'langcode' => 'en', 'label_d8'=> '', 'tid_D8' => ''),
-		);
+//REGIONS
+	$regions = get_correspondances_regionsD7_to_regionsD8();
 	\Drupal::state()->set('correspondence_taxo_region', $regions);
 
-	$solution_to_thematic =
-		array(
-			'35144' => array('tid_d7' => '35144', 'label_d7' => 'Digital transformation', 'langcode' => 'en', 'label_d8'=> 'Digital transformation', 'tid_D8' => ''),
-			'35173' => array('tid_d7' => '35173', 'label_d7' => 'Transformation digitale', 'langcode' => 'fr', 'label_d8'=> 'Transformation digitale', 'tid_D8' => ''),
-		);
+	$solution_to_thematic = get_correspondances_soltutionD7_to_thematicD8();
 	\Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);
 
-	$subhomes = array(
-		'blogs' => array(
-			'fr' => array('label' => 'Blogs', 'tid_D8' => ''),
-			'en' => array('label' => 'Blogs', 'tid_D8' => ''),
-			'ru' => array('label' => 'Блоги', 'tid_D8' => ''),
-			'ru-en' => array('label' => '', 'tid_D8' => '')),
+//MAG CATEG TO MAG FORMAT
+	$categMag_to_formatMag = get_correspondances_categoriesMagazineD7_to_MagazineFormatD8();
+	\Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categMag_to_formatMag);
 
-		'library' => array(
-			'fr' => array('label' => 'Médiathèque', 'tid_D8' => ''),
-			'en' => array('label' => 'Library', 'tid_D8' => ''),
-			'ru' => array('label' => '', 'tid_D8' => ''),
-			'ru-en' => array('label' => '', 'tid_D8' => '')),
+//Solution to mag theme
+	$solution_to_themeMag = get_correspondances_solutionsD7_to_MagazineThematicD8();
+	\Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_themeMag);
 
-		'magazine' => array(
-			'fr' => array('label' => 'Magazine', 'tid_D8' => ''),
-			'en' => array('label' => 'Magazine', 'tid_D8' => ''),
-			'ru' => array('label' => '', 'tid_D8' => ''),
-			'ru-en' => array('label' => '', 'tid_D8' => '')),
+//solution to doc theme
+	$solution_to_themeDoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
+	\Drupal::state()->set('correspondence_solution_to_theme_doc', $solution_to_themeDoc);
 
-		'press' => array(
-			'fr' => array('label' => 'Presse', 'tid_D8' => ''),
-			'en' => array('label' => 'Press', 'tid_D8' => ''),
-			'ru' => array('label' => 'Новости', 'tid_D8' => ''),
-			'ru-en' => array('label' => 'Newsroom', 'tid_D8' => '')),
-	);
+//format doc to doc format
+	$formatDoc_to_formatDoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
+	\Drupal::state()->set('correspondence_format_document', $formatDoc_to_formatDoc);
+
+  $subhomes = get_correspondances_subhomes();
 	\Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
 
-
+	$press_formats = get_correspondances_press_formats();
+  \Drupal::state()->set('press_format_for_migration', $press_formats);
 }
 
 /**
  * Ajout de la migration du champ Shot description (txt catcher de D7) vers l'accroche (highlight de D8)
  */
 function oab_migrate_content_update_8001() {
-	include_once("updates/update_8001.inc");
+  include_once("updates/update_8001.inc");
+}
+
+/**
+ * Ajout du format full html sur le body des profils bloggeurs
+ */
+function oab_migrate_content_update_8002() {
+	include_once("updates/update_8002.inc");
+}
+
+
+/**
+ * Ajout de la configuration pour la migration des commentaires
+ */
+function oab_migrate_content_update_8003() {
+	include_once("updates/update_8003.inc");
+}
+
+/**
+ * Modif config des medias image pour migrer les alt et title des images D7
+ */
+function oab_migrate_content_update_8004() {
+	include_once("updates/update_8004.inc");
+}
+
+/**
+ * Mise a jour des correspondances et le state
+ */
+
+function oab_migrate_content_update_8005() {
+	include_once("updates/update_8005.inc");
+}
+/**
+ * Modif config des migrations
+ */
+function oab_migrate_content_update_8006() {
+	include_once("updates/update_8006.inc");
+}
+
+/**
+ * Modif de termes subhomes et theme blog
+ */
+function oab_migrate_content_update_8007() {
+	include_once("updates/update_8007.inc");
 }

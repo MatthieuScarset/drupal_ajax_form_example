@@ -25,6 +25,7 @@ function oab_stephanie_update_dependencies() {
 	$dependencies['oab_stephanie'][8031] = array('oab_amel' => 8015, 'oab_christophe' => 8020, 'oab_tibo' => 8009, 'oab_yassine' => 8004	);
 	$dependencies['oab_stephanie'][8032] = array('oab_amel' => 8016, 'oab_christophe' => 8021, 'oab_tibo' => 8012, 'oab_yassine' => 8004	);
 	$dependencies['oab_stephanie'][8034] = array('oab_amel' => 8023, 'oab_christophe' => 8027, 'oab_tibo' => 8019, 'oab_yassine' => 8014, 'oab_tristan' => 8009	);
+	$dependencies['oab_stephanie'][8035] = array('oab_amel' => 8024, 'oab_christophe' => 8028, 'oab_tibo' => 8019, 'oab_yassine' => 8016, 'oab_tristan' => 8009	);
 	return $dependencies;
 }
 
@@ -251,7 +252,7 @@ function oab_stephanie_update_8030() {
  * Création du champ Axiome data pour stocker les données sérialisées d'axiome
  */
 function oab_stephanie_update_8031() {
-	include_once("updates/update_8031.inc");
+  include_once("updates/update_8031.inc");
 }
 
 
@@ -259,9 +260,8 @@ function oab_stephanie_update_8031() {
  * Ajout du visuel ornemental sur la page simple
  */
 function oab_stephanie_update_8032() {
-	include_once("updates/update_8032.inc");
+  include_once("updates/update_8032.inc");
 }
-
 
 /**
  * Ajout des parametres metatag pour les Products
@@ -277,4 +277,11 @@ function oab_stephanie_update_8033() {
  */
 function oab_stephanie_update_8034() {
 	include_once("updates/update_8034.inc");
+}
+
+/**
+ * Création des champs pour les Offices
+ */
+function oab_stephanie_update_8035() {
+	include_once("updates/update_8035.inc");
 }

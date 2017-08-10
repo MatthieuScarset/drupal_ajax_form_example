@@ -37,6 +37,7 @@ class DocumentMediaFile extends SqlBase {
     ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'content_document_type');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     //->range(0, 10);
     return $query;
   }

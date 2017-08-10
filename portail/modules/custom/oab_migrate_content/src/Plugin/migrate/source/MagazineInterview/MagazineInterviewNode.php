@@ -34,6 +34,7 @@ class MagazineInterviewNode extends SqlBase {
       ->condition('n.type', 'content_magazine_interview', '=')
       ->condition('n.changed', MAGAZINE_INTERVIEW_SELECT_DATE, '>');
     //->condition('n.nid', array(4836,4837,4838,4839,4840,4841,4842,4843,4844), 'IN');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     return $query;
   }
 
@@ -171,12 +172,15 @@ class MagazineInterviewNode extends SqlBase {
       }
     }
 
-    $verbatim_content = '<div class="bg verbatim">';
-    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<p class="content_verbatim">"' . $field_txt_citation_1_value . '"</p>';
-    if ($field_txt_auteur_1_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_txt_auteur_1_value . '</p>';
-    if ($field_location_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_location_value . '</p>';
-    if ($field_profil_value !== '') $verbatim_content .= '<p class="source_verbatim">' . $field_profil_value . '</p>';
-    $verbatim_content .= '</div>';
+    $verbatim_content = '<div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+												<div class="bubble">';
+    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<div class="verbatim-title">' . $field_txt_citation_1_value . '</div>';
+    $verbatim_source = "";
+    if ($field_txt_auteur_1_value !== '') $verbatim_source .= $field_txt_auteur_1_value ;
+    if ($field_location_value !== '') $verbatim_source .= ','. $field_location_value ;
+    if ($field_profil_value !== '') $verbatim_source .=  ','. $field_profil_value ;
+		$verbatim_content .= '<p class="verbatim-source">'.$verbatim_source.'</p>';
+    $verbatim_content .= '</div></div>';
 
     $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
 
@@ -190,117 +194,53 @@ class MagazineInterviewNode extends SqlBase {
      * récupération des tags
      */
 
-
-    // récupération du tag "industries"
-		$industries = array();
-		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
-		if(count($correspondance_taxo_industry) > 0) {
-
-			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
-			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
-			$industrie_query->fields('t', ['tid'])
-				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('i.bundle', 'content_magazine_interview', '=');
-
-			$industrie_results = $industrie_query->execute()->fetchAll();
-
-			if (is_array($industrie_results)){
-				$industries = array();
-				foreach ($industrie_results AS $industrie_result){
-					$industry_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($industrie_result) && isset($industrie_result->tid)){
-						$industry_id = $industrie_result->tid;
-					}
-					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
-						$industry_id = $industrie_result['tid'];
-					}
-					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
-						//prendre le tid D8
-						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
-							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('industries', $industries);
-			}
+		// récupération du tag "industries"
+		$industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
+			'field_data_field_taxo_industrie',
+			'field_taxo_industrie_tid',
+			$row->getSourceProperty('nid'),
+			'content_magazine_interview');
+		if(count($industries) > 0){
+			$row->setSourceProperty('industries', $industries);
 		}
 
-    // récupération du tag "solution"
-		$thematics = array();
-		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
-		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
-		if(count($correspondance_taxo_solution) > 0) {
-			$solutions = array();
-			$solution_query = $this->select('field_data_field_taxo_solution', 's');
-			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
-			$solution_query->fields('t', ['tid'])
-				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('s.bundle', 'content_magazine_interview', '=');
-
-			$solution_results = $solution_query->execute()->fetchAll();
-
-			if (is_array($solution_results)) {
-				foreach ($solution_results AS $solution_result) {
-					$solution_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($solution_result) && isset($solution_result->tid)) {
-						$solution_id = $solution_result->tid;
-					}
-					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
-						$solution_id = $solution_result['tid'];
-					}
-
-					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
-							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
-						}
-					}
-
-					//on regarde si on doit mettre une thematique pour cette solution
-					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
-							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('solutions', $solutions);
-				// s'il y a une thématique, on l'affecte
-				if(isset($thematics) && count($thematics) >0)	{
-					$row->setSourceProperty('thematics', $thematics);
-				}
-			}
+		// récupération du tag "solution"
+		$thematics = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
+			'field_data_field_taxo_solution',
+			'field_taxo_solution_tid',
+			$row->getSourceProperty('nid'),
+			'content_magazine_interview');
+		if(count($thematics) > 0){
+			$row->setSourceProperty('thematics', $thematics);
+		}
+		//theme mag
+		$mag_theme = get_correspondance_tid_D7_tid_D8('correspondence_solution_to_theme_mag',
+			'field_data_field_taxo_solution',
+			'field_taxo_solution_tid',
+			$row->getSourceProperty('nid'),
+			'content_magazine_interview');
+		if(count($mag_theme) > 0){
+			$row->setSourceProperty('magazine_thematics', $mag_theme);
+		}
+//format mag
+		$mag_format = get_correspondance_tid_D7_tid_D8('correspondence_cat_mag_to_format_mag',
+			'field_data_field_taxo_magazine',
+			'field_taxo_magazine_tid',
+			$row->getSourceProperty('nid'),
+			'content_magazine_interview');
+		if(count($mag_format) > 0){
+			$row->setSourceProperty('magazine_types', $mag_format);
 		}
 
-    // récupération du tag "area"
-		$regions = array();
-		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
-		if(count($correspondance_taxo_region) > 0) {
-			$area_query = $this->select('field_data_field_taxo_area', 'a');
-			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
-			$area_query->fields('t', ['tid'])
-				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('a.bundle', 'content_magazine_interview', '=');
-			$area_results = $area_query->execute()->fetchAll();
-			if (is_array($area_results)){
-				$regions = array();
-				foreach ($area_results AS $area_result){
-					$region_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($area_result) && isset($area_result->tid)){
-						$region_id = $area_result->tid;
-					}
-					elseif (is_array($area_result) && isset($area_result['tid'])){
-						$region_id = $area_result['tid'];
-					}
-					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
-							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('regions', $regions);
-			}
+
+		// récupération du tag "area"
+		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+			'field_data_field_taxo_area',
+			'field_taxo_area_tid',
+			$row->getSourceProperty('nid'),
+			'content_magazine_interview');
+		if(count($regions) > 0){
+			$row->setSourceProperty('regions', $regions);
 		}
 
 

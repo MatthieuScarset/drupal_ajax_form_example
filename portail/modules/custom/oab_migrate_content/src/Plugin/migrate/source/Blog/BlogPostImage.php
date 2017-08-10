@@ -62,26 +62,10 @@ class BlogPostImage extends SqlBase {
     //->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //->condition('f.fid', 1757)
     ->condition('n.type', 'blog_post');
+		//$query->condition('n.nid', array(1887,12968), 'IN');
 	//	$query ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    //$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
-    //->orderBy('f.fid', 'ASC');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
-    // Filter by scheme(s), if configured.
-    /*if (isset($this->configuration['scheme'])) {
-      $schemes = array();
-      // Accept either a single scheme, or a list.
-      foreach ((array) $this->configuration['scheme'] as $scheme) {
-        $schemes[] = rtrim($scheme) . '://';
-      }
-      $schemes = array_map([$this->getDatabase(), 'escapeLike'], $schemes);
-
-      // uri LIKE 'public://%' OR uri LIKE 'private://%'
-      $conditions = new Condition('OR');
-      foreach ($schemes as $scheme) {
-        $conditions->condition('uri', $scheme . '%', 'LIKE');
-      }
-      $query->condition($conditions);
-    }*/
 
     return $query;
   }

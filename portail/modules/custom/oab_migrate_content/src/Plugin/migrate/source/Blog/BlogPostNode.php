@@ -10,6 +10,7 @@ use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Session\AccountSwitcher;
 use Drupal\Core\Session\WriteSafeSessionHandler;
 use Drupal\Core\Database\Database;
+use Drupal\node\Entity\Node;
 
 /**
  *
@@ -37,8 +38,10 @@ class BlogPostNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'uid', 'status'])
     ->condition('n.type', 'blog_post', '=');
-	  //$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    return $query;
+		//$query->condition('n.nid', array(1887,12968), 'IN');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+
+		return $query;
   }
 
   /**
@@ -110,7 +113,6 @@ class BlogPostNode extends SqlBase {
 			$row->setSourceProperty('meta_description', $meta_description_short) ;
 		}
 
-
 		//Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
 		if(isset($subhomes['blogs'][$row->getSourceProperty('language')])
@@ -120,118 +122,57 @@ class BlogPostNode extends SqlBase {
 			$row->setSourceProperty('subhomes', $subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8']);
 		}
 
-		// taxonomie solution
-		$thematics = array();
-		$correspondance_taxo_solution_to_thematic = \Drupal::state()->get('correspondence_taxo_solution_to_thematic');
-		$correspondance_taxo_solution = \Drupal::state()->get('correspondence_taxo_solution');
-		if(count($correspondance_taxo_solution) > 0) {
-			$solutions = array();
-			$solution_query = $this->select('field_data_field_taxo_solution', 's');
-			$solution_query->join('taxonomy_term_data', 't', 't.tid = s.field_taxo_solution_tid');
-			$solution_query->fields('t', ['tid'])
-				->condition('s.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('s.bundle', 'blog_post', '=');
-			$solution_results = $solution_query->execute()->fetchAll();
-			if (is_array($solution_results)) {
-				foreach ($solution_results AS $solution_result) {
-					$solution_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($solution_result) && isset($solution_result->tid)) {
-						$solution_id = $solution_result->tid;
-					}
-					elseif (is_array($solution_result) && isset($solution_result['tid'])) {
-						$solution_id = $solution_result['tid'];
-					}
+		// taxonomie solution vers thematic
+		$thematics = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
+			'field_data_field_taxo_solution',
+			'field_taxo_solution_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($thematics) > 0){
 
-					if (isset($correspondance_taxo_solution[$solution_id]) && isset($correspondance_taxo_solution[$solution_id]['tid_D8'])) {
-						//prendre le tid D8
-						if (isset($correspondance_taxo_solution[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution[$solution_id]['tid_D8']) && $correspondance_taxo_solution[$solution_id]['tid_D8'] != "") {
-							$solutions[] = $correspondance_taxo_solution[$solution_id]['tid_D8'];
-						}
-					}
+			$row->setSourceProperty('thematics', $thematics);
+		}
 
-					//on regarde si on doit mettre une thematique pour cette solution
-					if (isset($correspondance_taxo_solution_to_thematic[$solution_id]) && isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'])) {
-						if (isset($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && !empty($correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8']) && $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'] != "") {
-							$thematics[] = $correspondance_taxo_solution_to_thematic[$solution_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('solutions', $solutions);
-				// s'il y a une thématique, on l'affecte
-				if(isset($thematics) && count($thematics) >0)	{
-					$row->setSourceProperty('thematics', $thematics);
-				}
-			}
+		// taxonomie Categorie blog vers blog thematic
+		$blog_thematics = get_correspondance_tid_D7_tid_D8('correspondence_cat_blog_to_thematic_blog',
+			'field_data_field_taxo_blog',
+			'field_taxo_blog_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($blog_thematics) > 0){
+			$row->setSourceProperty('blog_thematics', $blog_thematics);
+		}
+
+		// taxonomie Categorie blog vers blog format/type
+		$blog_formats = get_correspondance_tid_D7_tid_D8('correspondence_cat_blog_to_type_blog',
+			'field_data_field_taxo_blog',
+			'field_taxo_blog_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($blog_formats) > 0){
+			$row->setSourceProperty('blog_formats', $blog_formats);
 		}
 
 		// taxonomie industrie
-		$industries = array();
-		$correspondance_taxo_industry = \Drupal::state()->get('correspondence_taxo_industry');
-		if(count($correspondance_taxo_industry) > 0) {
+		$industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
+			'field_data_field_taxo_industrie',
+			'field_taxo_industrie_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($industries) > 0){
 
-			$industrie_query = $this->select('field_data_field_taxo_industrie', 'i');
-			$industrie_query->join('taxonomy_term_data', 't', 't.tid = i.field_taxo_industrie_tid');
-			$industrie_query->fields('t', ['tid'])
-				->condition('i.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('i.bundle', 'blog_post', '=');
-
-			$industrie_results = $industrie_query->execute()->fetchAll();
-
-			if (is_array($industrie_results)){
-				$industries = array();
-				foreach ($industrie_results AS $industrie_result){
-					$industry_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($industrie_result) && isset($industrie_result->tid)){
-						$industry_id = $industrie_result->tid;
-					}
-					elseif (is_array($industrie_result) && isset($industrie_result['tid'])){
-						$industry_id = $industrie_result['tid'];
-					}
-					if (isset($correspondance_taxo_industry[$industry_id]) && isset($correspondance_taxo_industry[$industry_id]['tid_D8'])) {
-						//prendre le tid D8
-						if (isset($correspondance_taxo_industry[$industry_id]['tid_D8']) && !empty($correspondance_taxo_industry[$industry_id]['tid_D8']) && $correspondance_taxo_industry[$industry_id]['tid_D8'] != "") {
-							$industries[] = $correspondance_taxo_industry[$industry_id]['tid_D8'];
-						}
-					}
-				}
-				$row->setSourceProperty('industries', $industries);
-			}
+			$row->setSourceProperty('industries', $industries);
 		}
 
 		// taxonomie region
-		$regions = array();
-		$correspondance_taxo_region = \Drupal::state()->get('correspondence_taxo_region');
-		if(count($correspondance_taxo_region) > 0) {
-			$area_query = $this->select('field_data_field_taxo_area', 'a');
-			$area_query->join('taxonomy_term_data', 't', 't.tid = a.field_taxo_area_tid');
-			$area_query->fields('t', ['tid'])
-				->condition('a.entity_id', $row->getSourceProperty('nid'), '=')
-				->condition('a.bundle', 'blog_post', '=');
-			$area_results = $area_query->execute()->fetchAll();
-			if (is_array($area_results)){
-				$regions = array();
-				foreach ($area_results AS $area_result){
-					$region_id = '';
-					// On vérifie si on a affaire à un objet ou à un tableau
-					if (is_object($area_result) && isset($area_result->tid)){
-						$region_id = $area_result->tid;
-					}
-					elseif (is_array($area_result) && isset($area_result['tid'])){
-						$region_id = $area_result['tid'];
-					}
-					//\Drupal::logger('oab_migrate_content')->notice(" ************************************************************** region ID D7 : ".$region_id);
-					if (isset($correspondance_taxo_region[$region_id]) && isset($correspondance_taxo_region[$region_id]['tid_D8'])) {
-						//prendre le tid D8
-						if (isset($correspondance_taxo_region[$region_id]['tid_D8']) && !empty($correspondance_taxo_region[$region_id]['tid_D8']) && $correspondance_taxo_region[$region_id]['tid_D8'] != "") {
-							$regions[] = $correspondance_taxo_region[$region_id]['tid_D8'];
-							//\Drupal::logger('oab_migrate_content')->notice(" ******************************************************************** REGION ID D8 : ".$correspondance_taxo_region[$region_id]['tid_D8']);
-						}
-					}
-				}
-				$row->setSourceProperty('regions', $regions);
-			}
+		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+			'field_data_field_taxo_area',
+			'field_taxo_area_tid',
+			$row->getSourceProperty('nid'),
+			'blog_post');
+		if(count($regions) > 0){
+
+			$row->setSourceProperty('regions', $regions);
 		}
 
     // récupération du body
@@ -248,16 +189,16 @@ class BlogPostNode extends SqlBase {
         // On vérifie si on a affaire à un objet ou à un tableau
         if (is_object($body_result) && isset($body_result->body_value)){
           $body_value = $body_result->body_value;
+					$body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = preg_replace(array('@\r\n@', '@\n\r@', '@\n@', '@\r@'), ' ', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
         elseif (is_array($body_result) && isset($body_result['body_value'])){
           $body_value = $body_result['body_value'];
+					$body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = preg_replace(array('@\r\n@', '@\n\r@', '@\n@', '@\r@'), ' ', $body_value);
-          $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
       }

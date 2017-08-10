@@ -100,7 +100,8 @@ view_mode ? view_mode|clean_class,
 
 <div class="content_info">
     {% if content.field_solution['#object'].nid.value %}
-        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
+    {# <span class="date"> #}
+       {{ createdDate }} {# </span> {% if content.theme_term %} {{ content.theme_term }} {% endif %} #}
     {% else %}
         <span class="dateOnly">{{ createdDate }}</span>
     {% endif %}
@@ -111,7 +112,7 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight') }}
+        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_insight', 'field_blog_thematic', 'field_blog_format', 'field_subhome', 'field_industry') }}
     </div>
 
 </article>

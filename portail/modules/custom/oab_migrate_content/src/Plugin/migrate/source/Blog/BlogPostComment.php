@@ -39,13 +39,15 @@ class BlogPostComment extends SqlBase {
     $query->fields('c', ['cid', 'pid', 'nid', 'uid', 'subject', 'hostname', 'created', 'changed', 'status', 'thread', 'name', 'mail', 'homepage', 'language']);
     $query->fields('b', ['comment_body_value', 'comment_body_format']);
     $query->distinct(TRUE);
-		//$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
+		//$query->condition('n.nid', array(1887,12968,825,862,868,928,944), 'IN');
     //$query->condition('n.type', 'blog_post');
 		//$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
     $query->condition('c.status', 1, '=');
     $query->orderBy('c.changed', 'ASC');
+    $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
-    return $query;
+
+		return $query;
   }
 
   /**
@@ -108,6 +110,8 @@ class BlogPostComment extends SqlBase {
     else{
       $row->setSourceProperty('pid_parent', '0');
     }
+
+		$row->setSourceProperty('comment_body', array('value' => $row->getSourceProperty('comment_body_value'), 'format' => 'comments'));
 
     $row->setSourceProperty('langcode', $row->getSourceProperty('language'));
     $row->setSourceProperty('default_langcode', '1');

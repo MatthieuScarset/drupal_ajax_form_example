@@ -251,11 +251,11 @@ taxonomy_rename_taxo('Flexible IT', 'Flexible IT', 'solutions', 'en');
 taxonomy_rename_taxo('Services', 'Services', 'solutions', 'en');
 
 // Region.
-taxonomy_rename_taxo('Middle East & Africa', 'Middle East & Africa', 's', 'en');
-taxonomy_rename_taxo('Asia Pacific', 'Asia Pacific', 's', 'en');
-taxonomy_rename_taxo('Europe', 'Europe', 's', 'en');
-taxonomy_rename_taxo('Latin America', 'Latin America', 's', 'en');
-taxonomy_rename_taxo('North America', 'North America', 's', 'en');
+taxonomy_rename_taxo('Middle East & Africa', 'Middle East & Africa', 'regions', 'en');
+taxonomy_rename_taxo('Asia Pacific', 'Asia Pacific', 'regions', 'en');
+taxonomy_rename_taxo('Europe', 'Europe', 'regions', 'en');
+taxonomy_rename_taxo('Latin America', 'Latin America', 'regions', 'en');
+taxonomy_rename_taxo('North America', 'North America', 'regions', 'en');
 
 /**
  * Blogs
