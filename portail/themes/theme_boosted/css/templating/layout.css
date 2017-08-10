@@ -725,7 +725,7 @@ aside.right-column > .region{
 
 #related-content-slick-carousel .image img {
     margin: 0 auto;
-    width: 100%;
+    width: auto;
 }
 #highlights-container .highlights-items .item .inner .text .title {
     font-size: 2em;
