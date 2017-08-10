@@ -150,4 +150,26 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 expertise-banner">
+        <div class="row title">
+            <div class="col-md-5">
+                Our areas of expertise
+            </div>
+        </div>
+        <div class="row" role="tabpanel">
+            <ul class="nav nav-tabs nav-justified" id='tab-expertise-banner' role="tablist">
+                {% for item in node.field_banner_expertise %}
+                    <li role="presentation" class="active">
+                        <a href="#home" data-toggle="tab" aria-controls="home" role="tab">
+                            <span class="{{ item.entity.field_tab_picto_class.value }}"></span>
+                            {{ item.entity.field_tab_title.value }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="row tab-content">{{ content.field_banner_expertise }}</div>
+        </div>
+
+    </div>
 </div>

@@ -257,6 +257,15 @@ article .content .field--type-text-long ul li:before{
     font-size: 1.6rem;
     margin-bottom: 20px;
 }
+.expertise-banner{
+    background-color: white;
+    padding: 60px 45px;
+}
+.expertise-banner .title{
+    padding-bottom: 30px;
+    font-size: 3rem;
+    font-weight: bold;
+}
 
 
 @media (max-width: 767px) {
