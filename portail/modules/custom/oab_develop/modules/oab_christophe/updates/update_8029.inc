@@ -454,6 +454,7 @@ $config_group->set('field_related_content', array (
     ),
   'region' => 'content',
 ));
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.industry.default');
@@ -513,6 +514,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.region.default');
@@ -570,6 +572,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.country.default');
@@ -626,6 +629,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->save(true);
 
 /****** view display ******/
 $config_factory = \Drupal::configFactory();
