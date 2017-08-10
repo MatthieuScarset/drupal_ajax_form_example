@@ -279,7 +279,7 @@ article .content .field--type-text-long ul li:before{
     line-height: 1.8rem;
 }
 
-#tab-expertise-banner li a.active{
+#tab-expertise-banner li.active a{
     color: #F16E00;
     background-color: #fff;
     border-top: 1px solid #ccc;
@@ -288,7 +288,8 @@ article .content .field--type-text-long ul li:before{
     border-bottom: 1px solid #fff;
 }
 .paragraph--type--homepage-banner-experience{
-    margin: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .tabpanel-expertise{
@@ -301,6 +302,11 @@ article .content .field--type-text-long ul li:before{
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+}
+.field--name-field-content-title{
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 

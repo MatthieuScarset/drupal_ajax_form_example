@@ -27,6 +27,7 @@ global-styling:
       css/templating/nodes.css: {}
       css/templating/linked_content.css: {}
   js:
+    boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}
     js/readmorelink.js: {}
     js/header.js: {}

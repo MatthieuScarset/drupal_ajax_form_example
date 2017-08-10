@@ -39,6 +39,7 @@
 #}
 {%
 set classes = [
+'tab-content',
 'field',
 'field--name-' ~ field_name|clean_class,
 'field--type-' ~ field_type|clean_class,
@@ -53,14 +54,9 @@ label_display == 'visually_hidden' ? 'sr-only',
 %}
 
 
-    <div{{ attributes.addClass(classes) }}>
-        {% if multiple %}
-        <div class="field__items">
-            {% endif %}
-            {% for item in items %}
-                <div{{ item.attributes.addClass('field--item') }}>{{ item.content }}</div>
-            {% endfor %}
-            {% if multiple %}
-        </div>
-        {% endif %}
-    </div>
+<div{{ attributes.addClass(classes) }} >
+    {% for key, item in items %}
+            {% set class = (loop.first) ? "tab-pane field--item active" : "tab-pane field--item" %}
+        <div{{ item.attributes.addClass(class) }} id="tab-{{ key }}"  role="tabpanel" >{{ item.content }}</div>
+    {% endfor %}
+</div>

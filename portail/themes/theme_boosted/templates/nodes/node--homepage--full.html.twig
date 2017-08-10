@@ -158,18 +158,17 @@
         </div>
         <div class="row tabpanel-expertise" role="tabpanel">
             <ul class="nav nav-tabs nav-justified" id='tab-expertise-banner' role="tablist">
-                {% for item in node.field_banner_expertise %}
-                    <li role="presentation" class="active">
-                        <a href="#home" data-toggle="tab" aria-controls="home" role="tab">
+                {% for key, item in node.field_banner_expertise %}
+                    <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
+                        <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
                             <span class="{{ item.entity.field_tab_picto_class.value }}"></span>
                             {{ item.entity.field_tab_title.value }}
                         </a>
                     </li>
                 {% endfor %}
             </ul>
-
-            <div class="row tab-content">{{ content.field_banner_expertise }}</div>
+            {{ content.field_banner_expertise }}
         </div>
-
     </div>
+
 </div>
