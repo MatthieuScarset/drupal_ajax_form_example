@@ -56,6 +56,7 @@ article .content .field--type-text-long ul{
 }
 article .content .field--type-text-long ul li{
     position: relative;
+    font-size: 1.6rem;
 }
 article .content .field--type-text-long ul li:before{
     content: "■";
