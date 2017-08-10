@@ -137,3 +137,10 @@ function oab_yassine_update_8016() {
 function oab_yassine_update_8017() {
 	include_once("updates/update_8017.inc");
 }
+
+/**
+ *  Update des termes
+ */
+function oab_yassine_update_8018() {
+	include_once("updates/update_8018.inc");
+}
