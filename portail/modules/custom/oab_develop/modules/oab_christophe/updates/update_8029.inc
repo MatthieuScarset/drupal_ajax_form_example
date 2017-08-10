@@ -453,6 +453,7 @@ $config_group->set('field_related_content', array (
     ),
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
 $config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
@@ -513,6 +514,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
 $config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
@@ -571,6 +573,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
 $config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
@@ -628,6 +631,7 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
 $config_group->save(true);
 
 /****** view display ******/
