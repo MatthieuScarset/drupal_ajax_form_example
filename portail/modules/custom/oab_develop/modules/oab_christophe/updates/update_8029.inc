@@ -436,7 +436,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   8 => 'field_content',
   9 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'weight' => 11,
   'settings' =>
@@ -497,7 +497,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   8 => 'field_content',
   9 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 44,
   'settings' =>
     array (
@@ -556,7 +556,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   7 => 'field_content',
   8 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 10,
   'settings' =>
     array (
@@ -614,7 +614,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   5 => 'field_content',
   6 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 8,
   'settings' =>
     array (
