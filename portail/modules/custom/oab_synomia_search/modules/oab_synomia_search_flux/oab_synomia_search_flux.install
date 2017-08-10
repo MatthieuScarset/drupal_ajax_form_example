@@ -1,0 +1,65 @@
+<?php
+
+function oab_synomia_search_flux_install() {
+	drupal_set_installed_schema_version('oab_synomia_search_flux', 8000);
+}
+
+/**
+ * Implements hook_schema().
+ */
+function oab_synomia_search_flux_schema() {
+	$schema['synomia_deleted_content'] = array(
+		'description' => 'Deleted node for synomia sitemap indexation',
+		'fields' => array(
+			'nid' => array(
+				'description' => 'node id',
+				'type' => 'int',
+				'unsigned' => TRUE,
+				'not null' => TRUE,
+				'default' => 0,
+			),
+			'content_type' => array(
+				'description' => 'type of content',
+				'type' => 'varchar',
+				'length' => 32,
+				'not null' => TRUE,
+			),
+			'url' => array(
+				'description' => 'url of content',
+				'type' => 'varchar',
+				'length' => 255,
+				'not null' => TRUE,
+			),
+			'language' => array(
+				'description' => 'language of content',
+				'type' => 'varchar',
+				'length' => 12,
+				'not null' => TRUE,
+			),
+			'deleted' => array(
+				'description' => 'date of delete content (unix timestamp)',
+				'type' => 'int',
+				'length' => 11,
+				'not null' => TRUE,
+				'default' => 0,
+			)
+		),
+		'primary key' => array('nid'),
+	);
+
+	return $schema;
+}
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_synomia_search_flux_update_dependencies() {
+	/*$dependencies['oab_synomia_search_flux'][8001] = array('' => );
+	return $dependencies;*/
+}
+
+/*
+function oab_synomia_search_flux_update_8001() {
+	include_once("updates/update_8001.inc");
+}
+*/

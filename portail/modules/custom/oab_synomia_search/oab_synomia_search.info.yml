@@ -1,0 +1,9 @@
+name: OAB Synomia Search
+description: 'OAB Synomia search module'
+type: module
+package: OAB
+
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_synomia_search'
+datestamp: 1501514107

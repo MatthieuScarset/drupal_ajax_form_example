@@ -113,3 +113,14 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
 		$vocaConfig->save();
 	}
 }
+
+/** Permet de tester une chaine de caractère date par rapport au format attendu
+ * @param $date date fournie sous forme string
+ * @param $format format de la chaine attendu
+ * @return bool
+ */
+function isValidDate($date, $format)
+{
+	$d = DateTime::createFromFormat($format, $date);
+	return $d && $d->format($format) == $date;
+}

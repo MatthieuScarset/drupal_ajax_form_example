@@ -76,6 +76,9 @@ article.node.full{
 article .node-socialbar p{
     font-size: 1.4rem;
 }
+article .node-socialbar p.titre{
+    padding: 0 !important;
+}
 
 .node.profil-redacteur.teaser{
     background-color: #f6f6f6;

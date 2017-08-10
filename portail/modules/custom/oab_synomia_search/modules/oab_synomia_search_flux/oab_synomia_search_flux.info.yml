@@ -1,0 +1,10 @@
+name: OAB Synomia Search Flux
+description: 'module for implementing Synomia search XML feed'
+type: module
+package: OAB
+dependencies:
+  - oab_synomia_search
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_synomia_search'
+datestamp: 1501514107

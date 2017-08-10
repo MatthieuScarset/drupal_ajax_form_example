@@ -169,3 +169,10 @@ function oab_christophe_update_8026() {
 function oab_christophe_update_8027() {
   include_once("updates/update_8027.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2631 - dashboard et permissions pour le role contributor
+ */
+function oab_christophe_update_8028() {
+  include_once("updates/update_8028.inc");
+}
