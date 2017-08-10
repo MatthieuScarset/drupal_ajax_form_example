@@ -160,8 +160,7 @@ if(empty($field)) {
   FieldConfig::create($config_array)->save();
 }
 foreach (array('solution', 'industry', 'region', 'country') AS $bundle) {
-  $field = FieldConfig::loadByName('paragraph', 'related_content',
-    'field_related_content');
+  $field = FieldConfig::loadByName('node', $bundle,'field_related_content');
   if (empty($field)) {
     $config_array = array(
       'field_name' => 'field_related_content',
