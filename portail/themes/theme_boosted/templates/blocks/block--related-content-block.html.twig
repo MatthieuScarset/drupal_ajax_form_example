@@ -45,10 +45,11 @@
  * @ingroup templates
  */
 #}
-
+{% if (content|render|striptags|trim) %}
 <section{{ attributes.addClass('block', 'clearfix', 'bg_black') }}>
     <div id="related-content-slick-carousel" class="related-content-items container">
         {{ content }}
     </div>
 </section>
+{% endif %}
 
