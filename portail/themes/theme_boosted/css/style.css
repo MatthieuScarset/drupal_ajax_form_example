@@ -369,6 +369,7 @@ article .content .field--type-text-long ul li:before{
 
 }
 
+
 .webform-button--submit, .webform-button--draft {
     margin-top: 1rem;
 }
@@ -386,4 +387,13 @@ article .content .field--type-text-long ul li:before{
     display: table-cell;
     vertical-align: top;
     padding-left: 10px;
+}
+
+.page-node-type-solution .titre1,
+.page-node-type-industry .titre1,
+.page-node-type-country .titre1,
+.page-node-type-region .titre1 {
+    padding-top: 6rem;
+    margin-top: 0;
+
 }
