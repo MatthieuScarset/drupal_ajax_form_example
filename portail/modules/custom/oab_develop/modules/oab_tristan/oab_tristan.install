@@ -10,12 +10,10 @@ function oab_tristan_install() {
  */
 function oab_tristan_update_dependencies() {
 
-   /* $dependencies['oab_tristan'][8001] = array('oab_christophe' => 8020	);
-    $dependencies['oab_tristan'][8004] = array('oab_amel' => 8015	);
-    $dependencies['oab_tristan'][8005] = array('oab_tibo' => 8012	);
-    $dependencies['oab_tristan'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
+  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024	);
+  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
 
-    return $dependencies;*/
+  return $dependencies;
 }
 
 /**
@@ -127,4 +125,19 @@ function oab_tristan_update_8014() {
  */
 function oab_tristan_update_8015() {
   include_once("updates/update_8015.inc");
+}
+
+/**
+ * Suppression du field field_region (taxo Zone Géographique) à l'affichage du formulaire des contenus de type Produit
+ */
+function oab_tristan_update_8016() {
+  include_once("updates/update_8016.inc");
+}
+
+/**
+ * Modification de la place de 2 éléments dans la form display + masquage de l'ornemental visuel
+ * et ajout du workflow au type de contenu Pays (pour que les boutons save soient plus cohérents
+ */
+function oab_tristan_update_8017() {
+  include_once("updates/update_8017.inc");
 }
