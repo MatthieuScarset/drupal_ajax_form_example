@@ -128,3 +128,10 @@ function oab_migrate_content_update_8006() {
 function oab_migrate_content_update_8007() {
 	include_once("updates/update_8007.inc");
 }
+
+/**
+ * correction format de magazine
+ */
+function oab_migrate_content_update_8008() {
+	include_once("updates/update_8008.inc");
+}

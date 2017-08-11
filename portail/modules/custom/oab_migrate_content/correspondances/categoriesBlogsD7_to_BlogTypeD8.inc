@@ -93,14 +93,14 @@ function get_correspondances_categoriesBlogD7_to_BlogTypeD8(){
 			'252' => array('tid_d7' => '252', 'label_d7' => 'virtualisation ', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
 			'589' => array('tid_d7' => '589', 'label_d7' => 'Web/Tech ', 'langcode' => 'fr', 'label_d8'=> 'Experts', 'tid_D8' => ''),
 			//RU
-			'33951' => array('tid_d7' => '33951', 'label_d7' => 'Безопасность', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33956' => array('tid_d7' => '33956', 'label_d7' => 'Голосовые услуги', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33952' => array('tid_d7' => '33952', 'label_d7' => 'Индустрия', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33953' => array('tid_d7' => '33953', 'label_d7' => 'Корпоративные сети', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33954' => array('tid_d7' => '33954', 'label_d7' => 'Мобильность', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33955' => array('tid_d7' => '33955', 'label_d7' => 'Облачные вычисления', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33957' => array('tid_d7' => '33957', 'label_d7' => 'Унифицированные коммуникации', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
-			'33958' => array('tid_d7' => '33958', 'label_d7' => 'Управление ИТ', 'langcode' => 'fr', 'label_d8'=> '', 'tid_D8' => ''),
+			'33951' => array('tid_d7' => '33951', 'label_d7' => 'Безопасность', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33956' => array('tid_d7' => '33956', 'label_d7' => 'Голосовые услуги', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33952' => array('tid_d7' => '33952', 'label_d7' => 'Индустрия', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33953' => array('tid_d7' => '33953', 'label_d7' => 'Корпоративные сети', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33954' => array('tid_d7' => '33954', 'label_d7' => 'Мобильность', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33955' => array('tid_d7' => '33955', 'label_d7' => 'Облачные вычисления', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33957' => array('tid_d7' => '33957', 'label_d7' => 'Унифицированные коммуникации', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
+			'33958' => array('tid_d7' => '33958', 'label_d7' => 'Управление ИТ', 'langcode' => 'ru', 'label_d8'=> '', 'tid_D8' => ''),
 		);
 	return $correspondances;
 }
