@@ -114,14 +114,16 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
 
-    <div{{ content_attributes.addClass('content') }}>
-        <div class="document_field_image col col-md-3 col-xs-12">
+    <div{{ content_attributes.addClass('content', 'div-display-table') }}>
+        <div class="document_field_image div-display-cell">
             {{ content.field_visual }}
         </div>
 
-        <div class="col col-md-9 col-xs-12">
+        <div class="div-display-table-cell">
             {{ content|without('theme_term', 'field_image', 'field_document_type',
-            'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry', 'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type') }}
+            'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
+            'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
+            'field_start_date', 'field_end_date') }}
         </div>
     </div>
 

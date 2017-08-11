@@ -376,3 +376,14 @@ article .content .field--type-text-long ul li:before{
 .webform-confirmation {
     padding: 1rem;
 }
+
+.div-display-table {
+    display: table;
+
+}
+
+.div-display-table-cell {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 10px;
+}
