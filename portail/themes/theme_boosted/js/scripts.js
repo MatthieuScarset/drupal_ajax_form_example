@@ -72,7 +72,18 @@
       });
 
 
+      //initialize swiper when document ready
+      var mySwiper = new Swiper ('.swiper-container', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: true,
+          dots: true,
+      })
+
   });
+
+
+
 
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

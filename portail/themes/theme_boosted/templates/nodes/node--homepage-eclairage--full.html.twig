@@ -1,0 +1,212 @@
+{#
+/**
+* @file
+* Theme override to display a node.
+*
+* Available variables:
+* - node: The node entity with limited access to object properties and methods.
+Only "getter" methods (method names starting with "get", "has", or "is")
+and a few common methods such as "id" and "label" are available. Calling
+other methods (such as node.delete) will result in an exception.
+* - label: The title of the node.
+* - content: All node items. Use {{ content }} to print them all,
+*   or print a subset such as {{ content.field_example }}. Use
+*   {{ content|without('field_example') }} to temporarily suppress the printing
+*   of a given child element.
+* - author_picture: The node author user entity, rendered using the "compact"
+*   view mode.
+* - metadata: Metadata for this node.
+* - date: Themed creation date field.
+* - author_name: Themed author name field.
+* - url: Direct URL of the current node.
+* - display_submitted: Whether submission information should be displayed.
+* - attributes: HTML attributes for the containing element.
+*   The attributes.class element may contain one or more of the following
+*   classes:
+*   - node: The current template type (also known as a "theming hook").
+*   - node--type-[type]: The current node type. For example, if the node is an
+*     "Article" it would result in "node--type-article". Note that the machine
+*     name will often be in a short form of the human readable label.
+*   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+*     teaser would result in: "node--view-mode-teaser", and
+*     full: "node--view-mode-full".
+*   The following are controlled through the node publishing options.
+*   - node--promoted: Appears on nodes promoted to the front page.
+*   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+*     teaser listings.
+*   - node--unpublished: Appears on unpublished nodes visible only to site
+*     admins.
+* - title_attributes: Same as attributes, except applied to the main title
+*   tag that appears in the template.
+* - content_attributes: Same as attributes, except applied to the main
+*   content tag that appears in the template.
+* - author_attributes: Same as attributes, except applied to the author of
+*   the node tag that appears in the template.
+* - title_prefix: Additional output populated by modules, intended to be
+*   displayed in front of the main title tag that appears in the template.
+* - title_suffix: Additional output populated by modules, intended to be
+*   displayed after the main title tag that appears in the template.
+* - view_mode: View mode; for example, "teaser" or "full".
+* - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+* - page: Flag for the full page state. Will be true if view_mode is 'full'.
+* - readmore: Flag for more state. Will be true if the teaser content of the
+*   node cannot hold the main body content.
+* - logged_in: Flag for authenticated user status. Will be true when the
+*   current user is a logged-in member.
+* - is_admin: Flag for admin user status. Will be true when the current user
+*   is an administrator.
+*
+* @ingroup templates
+*
+* @see template_preprocess_node()
+*
+* @todo Remove the id attribute (or make it a class), because if that gets
+*   rendered twice on a page this is invalid CSS for example: two lists
+*   in different view modes.
+*/
+#}
+{%
+set classes = [
+'node',
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+]
+%}
+
+
+<article{{ attributes.addClass(classes) }}>
+    <div{{ content_attributes.addClass('content') }}>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 home_eclairage_banner">
+                {# HOME MENU #}
+                <div class="col-md-3 col-xs-12 home_menu">
+                    <div class="home_eclairage_title bg_greyblack">
+                        {{ label }}
+                    </div>
+                    <div class="home_eclairage_menulist bg_grey">
+                        {{ content.field_menu_title }}
+                        {# content.menu_homepage_eclairage['#children'] #}
+                        {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                    </div>
+                </div>
+                {# HOME BANNER DESKTOP #}
+                <div class="col-md-9 home_banner_no_padding hidden-xs">
+                    {# BIG IMAGE - FIRST ITEM #}
+                    <div class="col-md-8 home_banner_no_padding">
+                        <a class="home_banner_element_link" href="{{ node.field_home_banner.0.entity.field_link.value }}">
+                        <div class="home_banner_first" style="background:url('{{ file_url(node.field_home_banner.0.entity.field_big_image_desktop_.entity.uri.value) }}');">
+                            <!-- Bottom Container -->
+                            <div class="home_banner_first_bottom_container col-md-12">
+                                <div class="row">
+                                    <!-- Left container / date-->
+                                    <div class="col-md-1 home_banner_first_bottom_left_container">
+                                        <!-- Date -->
+                                        <div class="home_banner_first_date">
+                                            {{ node.field_home_banner.0.entity.field_date.value | date('d') }} <br>
+                                            {{ node.field_home_banner.0.entity.field_date.value | date('m') }} <br>
+                                            {{ node.field_home_banner.0.entity.field_date.value | date('y') }}
+                                        </div>
+                                    </div>
+                                    <!-- Right container/ title -->
+                                    <div class="col-md-10 home_banner_first_bottom_right_container" style="color: {{ node.field_home_banner.0.entity.field_text_color.value }};">
+                                        <p class="home_banner_title">
+                                            {{ node.field_home_banner.0.entity.field_title.value }}
+                                        </p>
+                                        <p class="home_banner_first_nameFunction">
+                                            {{ node.field_home_banner.0.entity.field_name.value }} | {{ node.field_home_banner.0.entity.field_function.value }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    {# SMALL IMAGES - NEXT ITEMS #}
+                    <div class="col-md-4 home_banner_no_padding">
+                        {% for key, value in content.field_home_banner if key != 0 %}
+                            <div class="col-md-12 home_banner_next">
+                                {{ value }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+                {# HOME BANNER MOBILE #}
+                <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_banner_no_padding" >
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            {% for key, value in content.field_home_banner if key|first != '#'  %}
+                                <div class="swiper-slide">
+                                    {{ value }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <br/>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12 home_columns_section">
+            <div class="row">
+                {% for key, value in content.field_home_columns if key|first != '#'  %}
+                    <div class="col-md-4 col-xs-12 col-sm-12 home_column">
+                        {{ value }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+        <br/>
+    <div class="row">
+        <div class="col-md-12 home_playlist">
+            {% for key, value in content.field_home_playlists if key|first != '#' %}
+                    {{ value }}
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default">1</button>
+        <button type="button" class="btn btn-default">2</button>
+
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Dropdown link</a></li>
+                <li><a href="#">Dropdown link</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+</article>
