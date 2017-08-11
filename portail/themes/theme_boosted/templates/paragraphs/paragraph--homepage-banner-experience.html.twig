@@ -40,8 +40,6 @@
 #}
 {%
 set classes = [
-'row',
-'text-center',
 'paragraph',
 'paragraph--type--' ~ paragraph.bundle|clean_class,
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -50,10 +48,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-            <div class="col-md-5">{{ content.field_content_image}}</div>
-            <div class="col-md-7">
-                <div class="col-md-12 text-align-left">{{ content.field_content_title }}</div>
-                <div class="col-md-12 text-align-left">{{ content.field_content }}</div>
+            <div class="homepage-banner-expertise-image">{{ content.field_content_image}}</div>
+            <div class="homepage-banner-expertise-content">
+                {{ content.field_content_title }}
+                {{ content.field_content }}
             </div>
         {% endblock %}
     </div>

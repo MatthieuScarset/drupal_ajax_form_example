@@ -64,6 +64,11 @@ function theme_boosted_preprocess_page(&$variables) {
   if (isset($node) && is_object($node)
   && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
+    if($content_type == 'homepage'){
+			$variables['containerClass'] = 'container-fluid';
+		}else{
+			$variables['containerClass'] = 'container';
+		}
     $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
     && array_key_exists('field_display_title', $definitions)) {

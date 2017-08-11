@@ -105,7 +105,7 @@
     {% endfor %}
 
 
-    <div class="col-md-12 solution-banner" style="background: url({{ url }}) ">
+    <div class="col-md-10 solution-banner" style="background: url({{ url }}) ">
         <div class="row title">
             <div class="col-md-5">
                 {{ content.field_solution_banner_title }}
@@ -118,7 +118,7 @@
         </div>
 
     </div>
-    <div class="col-md-12 carousel-solution">
+    <div class="col-md-10 carousel-solution">
         <div class="section-solution">
             <div class="solution-zone left-zone">
                 <div class="title-solution-banner">
@@ -150,24 +150,34 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 expertise-banner">
-        <div class="row title">
-            <div class="col-md-5">
-                Our areas of expertise
-            </div>
+    <div class="col-md-10 homepage-banner expertise-banner">
+        <div class="title">
+            Our areas of expertise
         </div>
-        <div class="row tabpanel-expertise" role="tabpanel">
+        <div class="tabpanel-expertise" role="tabpanel">
             <ul class="nav nav-tabs nav-justified" id='tab-expertise-banner' role="tablist">
                 {% for key, item in node.field_banner_expertise %}
                     <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
                         <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
-                            <span class="{{ item.entity.field_tab_picto_class.value }}"></span>
+                            <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
                             {{ item.entity.field_tab_title.value }}
                         </a>
                     </li>
                 {% endfor %}
             </ul>
             {{ content.field_banner_expertise }}
+        </div>
+    </div>
+
+    <div class="col-md-10 homepage-banner partner-banner">
+        <div class="title">
+            {{ content.field_partner_title }}
+        </div>
+        <div class="tabpanel-partner">
+            {{ oab_drupal_view('homepage_partner', 'block_1') }}
+            <div class="col-md-12 text-right no-padding no-margin">
+            {{ content.field_partner_button_link }}
+            </div>
         </div>
     </div>
 

@@ -257,12 +257,14 @@ article .content .field--type-text-long ul li:before{
     font-size: 1.6rem;
     margin-bottom: 20px;
 }
-.expertise-banner{
+.homepage-banner{
     background-color: white;
     padding: 60px 45px;
+    margin-top: 20px;
 }
-.expertise-banner .title{
+.homepage-banner .title{
     padding-bottom: 30px;
+    padding-left: 40px;
     font-size: 3rem;
     font-weight: bold;
 }
@@ -277,6 +279,13 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.8rem;
+    display: table;
+    width: 100%;
+}
+
+#tab-expertise-banner li a span.icon-expertise{
+    font-size: 3rem;
+    vertical-align: text-top;
 }
 
 #tab-expertise-banner li.active a{
@@ -292,7 +301,8 @@ article .content .field--type-text-long ul li:before{
     padding-bottom: 30px;
 }
 
-.tabpanel-expertise{
+.tabpanel-expertise,
+.tabpanel-partner{
     margin-left: 40px !important;
     margin-right: 40px !important;
 }
@@ -309,6 +319,53 @@ article .content .field--type-text-long ul li:before{
     margin-bottom: 20px;
 }
 
+.paragraph--type--homepage-banner-experience {
+    margin-right: 0px;
+    margin-left: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: table;
+}
+.homepage-banner-expertise-image{
+    width: 345px;
+    overflow: hidden;
+    display: table-cell;
+    vertical-align: top;
+}
+.homepage-banner-expertise-content{
+    padding-left: 20px;
+    display: table-cell;
+}
+.btn-homepage a{
+    color: #fff !important;
+}
+.btn-homepage:hover{
+    background-color: #fff;
+    color: #f16e00 !important;
+}
+.partner-banner .views-view-grid .views-row{
+    display: table;
+}
+.partner-banner .views-view-grid .views-col{
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #595959;
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+.partner-banner .views-view-grid .views-col:hover{
+    border: 1px solid #F16E00;
+}
+
+.partner-banner .views-view-grid .views-col .field--item{
+    padding: 20px;
+    text-align: center;
+}
+.partner-banner .views-view-grid .views-col .field--item img{
+    width: 100%;
+    height: auto;
+}
 
 @media (max-width: 767px) {
     .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
@@ -353,6 +410,17 @@ article .content .field--type-text-long ul li:before{
         margin-right: 0px !important;
     }
 
+    .paragraph--type--homepage-banner-experience {
+        display: block;
+    }
+    .homepage-banner-expertise-image img{ width: 100%;  height : auto;}
+    .homepage-banner-expertise-content{
+        padding-left: 0px;
+    }
+    .homepage-banner-expertise-image{
+        width: 100%;
+        display: block;
+    }
 
 }
 

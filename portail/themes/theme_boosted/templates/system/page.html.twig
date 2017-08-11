@@ -62,7 +62,7 @@
  */
 #}
 
-{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{% set container = theme.settings.fluid_container ? 'container-fluid' : containerClass %}
 {# Header #}
 {% if page.header %}
         <header id="navbar" role="banner">
