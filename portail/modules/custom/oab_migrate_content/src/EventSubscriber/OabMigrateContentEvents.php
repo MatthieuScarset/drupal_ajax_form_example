@@ -30,6 +30,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillTaxonomyTIDCorrespondence');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillSubhomeIdInState');
 		$events[MigrateEvents::PRE_IMPORT][] = array('fillPressFormatIdInState');
+		$events[MigrateEvents::PRE_IMPORT][] = array('getAllOfficeCountries');
     $events[MigrateEvents::POST_ROW_SAVE][] = array('updateTranslations');
     $events[MigrateEvents::POST_ROW_DELETE][] = array('deleteUrlAlias');
 		$events[MigrateEvents::POST_IMPORT][] = array('swtchUserToAnonymous');
@@ -242,5 +243,65 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 			}
 		}
 		return $correspondance_state;
+	}
+
+
+	/** Recupération de tous les pays des offices
+	 * @param \Drupal\migrate\Event\MigrateImportEvent $migrate_row
+	 */
+	public function getAllOfficeCountries(MigrateImportEvent $migrate_row) {
+		$migration = $migrate_row->getMigration();
+		//seulement pour les migrations d'offices
+		if ($migration->getPluginId() == "office_node") {
+
+			//on remet la connexion D7
+			\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+			$dbD7 = \Drupal\Core\Database\Database::getConnection();
+
+			$query = $dbD7->select('location_country', 'c')
+				->fields('c', ['code', 'name']);
+			$countries_results = $query->execute()->fetchAll();
+
+			//on remet la connexion D8
+			\Drupal\Core\Database\Database::setActiveConnection();
+			$dbD8 = \Drupal\Core\Database\Database::getConnection();
+
+			if (is_array($countries_results)) {
+				foreach ($countries_results AS $country) {
+					$name = "";
+					$code = "";
+					// On vérifie si on a affaire à un objet ou à un tableau
+					if (is_object($country) && isset($country->code)) {
+						$code = $country->code;
+						$name = $country->name;
+					}
+					elseif (is_array($country) && isset($country['code'])) {
+						$code = $country['code'];
+						$name = $country['name'];
+					}
+
+					//vérification de l'existance du terme et création
+					$query = $dbD8->select('taxonomy_term_field_data', 't');
+					$query->leftJoin('taxonomy_term__field_country_code', 'c', 'c.entity_id = t.tid');
+					$query->condition('t.vid', 'office_countries');
+					$query->condition('t.name', $name);
+					$query->condition('c.field_country_code_value', $code);
+					$query->fields('t', array('tid'));
+					$entity = $query->execute()->fetchObject();
+
+					if (!isset($entity) || empty($entity)) {
+						//s'il n'existe pas on le crée
+						$newTerm = \Drupal\taxonomy\Entity\Term::create([
+							'vid' => 'office_countries',
+							'langcode' => 'und',
+							'name' => $name,
+							'field_country_code' => $code,
+						]);
+						$newTerm->save();
+					}
+				}
+			}
+			\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+		}
 	}
 }
