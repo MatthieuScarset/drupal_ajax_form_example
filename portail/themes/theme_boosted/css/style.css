@@ -143,6 +143,10 @@ article .content .field--type-text-long ul li:before{
 
 }
 
+a.link-subhomes:hover .encart-image.subhome-image {
+    background-color: white;
+}
+
 .date-subhome {
     color: grey;
 }
