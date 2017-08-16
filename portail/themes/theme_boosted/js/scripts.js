@@ -77,7 +77,8 @@
           // Optional parameters
           direction: 'horizontal',
           loop: true,
-          dots: true,
+          pagination : '.swiper-pagination',
+          paginationType: 'bullets',
       })
 
   });

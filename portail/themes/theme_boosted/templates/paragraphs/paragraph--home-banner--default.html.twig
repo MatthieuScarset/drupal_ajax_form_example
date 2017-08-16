@@ -52,12 +52,13 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
         {% block content %}
 
         <div class="row">
+            {# DESKTOP DISPLAY #}
             <div class="col-md-12 col-lg-12 hidden-sm hidden-xs home_banner_no_padding">
                 <a class="home_banner_element_link" href="{{ content.field_link[0]['#context']['value'] }}">
                     <div class="home_banner_next" id="smallimage" style="background:url( {{ file_url(content.field_little_image_desktop['#items'].entity.uri.value) }} )">
                     <!-- Bottom Container -->
                         <div class="home_banner_next_bottom_container col-md-12 col-lg-12 hidden-xs hidden-sm">
-                            <div class="row">
+
                                 <!-- Left container / date-->
                                 <div class="col-md-1 home_banner_next_bottom_left_container">
                                     <!-- Date -->
@@ -78,16 +79,16 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </a>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
-                <a class="home_banner_element_link" href="{{ content.field_link[0]['#context']['value'] }}">
 
-                     <div class="home_banner_mobile" id="mobileimage" style="background:url( {{ file_url(content.field_image_mobile['#items'].entity.uri.value) }} )">
+            {# MOBILE DISPLAY #}
+            <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
+                <a class="home_banner_element_mobile_link" href="{{ content.field_link[0]['#context']['value'] }}">
+
+                     <div class="home_banner_mobile" style="background:url( {{ file_url(content.field_image_mobile['#items'].entity.uri.value) }} )">
 
                             <!-- Date -->
                             <div class="home_banner_next_date">

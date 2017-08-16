@@ -87,10 +87,22 @@ view_mode ? view_mode|clean_class,
                     <div class="home_eclairage_title bg_greyblack">
                         {{ label }}
                     </div>
-                    <div class="home_eclairage_menulist bg_grey">
-                        {{ content.field_menu_title }}
+                    <div class="home_eclairage_menulist bg_grey hidden-sm hidden-xs">
+
+                            {{ content.field_menu_title }}
+
+                            {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                    </div>
                         {# content.menu_homepage_eclairage['#children'] #}
-                        {{ oab_drupal_menu('menu-homepage-eclairage') }}
+
+                    <div class="home_eclairage_menulist_mobile bg_grey hidden-md hidden-lg">
+                        <div data-toggle="collapse" data-target="#home_eclairage_menu">
+                            {{ content.field_menu_title }}
+                        </div>
+                        <div id="home_eclairage_menu" class="collapse">
+                            {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                        </div>
+                        {# content.menu_homepage_eclairage['#children'] #}
                     </div>
                 </div>
                 {# HOME BANNER DESKTOP #}
@@ -149,8 +161,8 @@ view_mode ? view_mode|clean_class,
                             {% endfor %}
                         </div>
                         <div class="swiper-pagination"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
+                       {# <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div> #}
                     </div>
                 </div>
             </div>
@@ -179,23 +191,6 @@ view_mode ? view_mode|clean_class,
         </div>
     </div>
 
-
-
-    <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default">1</button>
-        <button type="button" class="btn btn-default">2</button>
-
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Dropdown link</a></li>
-                <li><a href="#">Dropdown link</a></li>
-            </ul>
-        </div>
-    </div>
 
 
 
