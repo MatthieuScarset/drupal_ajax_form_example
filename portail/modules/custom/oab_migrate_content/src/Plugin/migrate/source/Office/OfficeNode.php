@@ -156,13 +156,17 @@ class OfficeNode extends SqlBase {
 		// récupération du pays
 		$country_query = $this->select('location_instance', 'li');
 		$country_query->join('location', 'l', 'l.lid = li.lid');
-		$country_query->fields('l', ['country'])
+		$country_query->join('location_country', 'c', 'l.country = c.code');
+		$country_query->fields('c', ['code', 'name'])
 			->condition('li.nid', $row->getSourceProperty('nid'), '=');
 
 		$country_result = $country_query->execute()->fetchObject();
 
-		if (is_object($country_result) && isset($country_result->country)){
-			
+		if (is_object($country_result) && isset($country_result->code)){
+			$tidCountry = get_country_term($country_result->code, $country_result->name);
+			if(isset($tidCountry)){
+				$row->setSourceProperty('country', $tidCountry);
+			}
 		}
 
     $row->setSourceProperty('path', '/' . $row->getSourceProperty('title'));

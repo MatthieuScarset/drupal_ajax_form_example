@@ -222,3 +222,38 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7,
 	\Drupal\Core\Database\Database::setActiveConnection();
 	return $new_values;
 }
+
+function get_country_term($code, $name)
+{
+	//on remet la connexion D8
+	\Drupal\Core\Database\Database::setActiveConnection();
+	$dbD8 = \Drupal\Core\Database\Database::getConnection();
+
+	//vérification de l'existance du terme et création
+	$query = $dbD8->select('taxonomy_term_field_data', 't');
+	$query->leftJoin('taxonomy_term__field_country_code', 'c', 'c.entity_id = t.tid');
+	$query->condition('t.vid', 'office_countries');
+	$query->condition('t.langcode', 'und');
+	$query->condition('t.name', $name);
+	$query->condition('c.field_country_code_value', $code);
+	$query->fields('t', array('tid'));
+	$entity = $query->execute()->fetchObject();
+
+	if(isset($entity) && isset($entity->tid)) {
+		return $entity->tid;
+	}
+	else{
+		//s'il n'existe pas on le crée
+		$newTerm = \Drupal\taxonomy\Entity\Term::create([
+			'vid' => 'office_countries',
+			'langcode' => 'und',
+			'name' => $name,
+			'field_country_code' => $code,
+		]);
+		$newTerm->save();
+		return $newTerm->id();
+	}
+
+	//on remet la connexion D7
+	\Drupal\Core\Database\Database::setActiveConnection('drupal7');
+}

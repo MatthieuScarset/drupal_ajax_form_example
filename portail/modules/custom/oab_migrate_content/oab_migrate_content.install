@@ -135,3 +135,10 @@ function oab_migrate_content_update_8007() {
 function oab_migrate_content_update_8008() {
 	include_once("updates/update_8008.inc");
 }
+
+/**
+ * Configuration des migrations des offices
+ */
+function oab_migrate_content_update_8009() {
+	include_once("updates/update_8009.inc");
+}
