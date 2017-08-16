@@ -58,8 +58,9 @@ function oab_synomia_search_flux_update_dependencies() {
 	return $dependencies;*/
 }
 
-/*
+/**
+ * Permission administration Synomia au digital admin
+ */
 function oab_synomia_search_flux_update_8001() {
 	include_once("updates/update_8001.inc");
 }
-*/
