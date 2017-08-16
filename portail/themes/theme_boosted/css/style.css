@@ -176,18 +176,33 @@ article .content .field--type-text-long ul li:before{
 .view-subhomes .subhomes-filterbar select{
     margin-right: 20px;
 }
+
+.view-subhomes ul.pager{
+    text-align: right;
+    margin-right: 20px;
+}
+
 .view-subhomes .pager__item .button{
     background-color: #000;
     color: #fff;
     margin-bottom: 20px;
 }
-.view-subhomes .pager__item .button:hover,
-.view-subhomes .pager__item .button:active{
+.view-subhomes .pager__item .button:hover{
     background-color: #fff;
     color: #000;
     border-color: #000;
 }
 
+.view-subhomes .pager__item .button:active{
+    background-color: #F16E00;
+    color: #FFFFFF;
+    border-color: #F16E00;
+}
+.view-subhomes .pager__item .button:disabled{
+    background-color: #CCCCCC;
+    color: #FFFFFF;
+    border-color: #CCCCCC;
+}
 
 
 
