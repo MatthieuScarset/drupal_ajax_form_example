@@ -141,3 +141,10 @@ function oab_tristan_update_8016() {
 function oab_tristan_update_8017() {
   include_once("updates/update_8017.inc");
 }
+
+/**
+ * Ajout d'une description au field visuel ornemental pour les contenus de type document + trad fr
+ */
+function oab_tristan_update_8018() {
+  include_once("updates/update_8018.inc");
+}
