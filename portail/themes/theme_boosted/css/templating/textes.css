@@ -750,3 +750,10 @@ p.contenu {
 .videoEmbedFull iframe{
     width: 100%;
 }
+@media (max-width: 767px) {
+    .module_key_figures_1,
+    .module_key_figures_2 .bg,
+    .module_key_figures_3 .bg {
+        padding: 3rem 1rem;
+    }
+}
