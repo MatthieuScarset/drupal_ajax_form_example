@@ -391,3 +391,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .webform-confirmation {
     padding: 1rem;
 }
+
+.page-node-type-solution .titre1,
+.page-node-type-industry .titre1,
+.page-node-type-country .titre1,
+.page-node-type-region .titre1 {
+    padding-top: 6rem;
+    margin-top: 0;
+}
