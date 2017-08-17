@@ -152,3 +152,9 @@ function oab_tibo_update_8018() {
 function oab_tibo_update_8019() {
     include_once("updates/update_8019.inc");
 }
+/**
+ * bouton image - remplacement icone E
+ */
+function oab_tibo_update_8020() {
+    include_once("updates/update_8020.inc");
+}
