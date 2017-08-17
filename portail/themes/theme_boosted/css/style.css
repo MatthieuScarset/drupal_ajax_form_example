@@ -92,11 +92,16 @@ article .content .field--type-text-long ul li:before{
     padding:0;
     text-align: center;
     display: block;
+    overflow: hidden;
 }
 
 .display-subhomes .encart-image img{
-    max-height: 12.5rem;
+    //max-height: 12.5rem;
+    max-height: none !important;
+    width: 100%;
 }
+
+
 .display-subhomes .bigKey{
     font-size: 7rem;
     font-weight: bold;
@@ -387,7 +392,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     line-height: 2rem;
 
 }
-
 
 .webform-button--submit, .webform-button--draft {
     margin-top: 1rem;
