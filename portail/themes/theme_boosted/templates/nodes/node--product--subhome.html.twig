@@ -95,7 +95,7 @@
 
 <a href="{{ url }}" class="link-subhomes">
     <div class="display-subhomes">
-        <div class="encart encart-image subhome-image col-lg-12">
+        <div class="encart encart-image subhome-image col-lg-12 ">
 
             {% for key, image in content.field_visual  %}
 
@@ -109,11 +109,14 @@
         </div>
         <div class="border col-lg-12"></div>
         <div class="txt col-lg-12">
+            {# Je set la taxo pour avoir un nom moins long pour travailler dessus #}
             {% set taxoTerm = content.field_solution[0]['#taxonomy_term'].get('name').getString() %}
+
+            {#S'il n'y a pas de taxo associée, je met un espace, pour aligner les titres #}
             {% if taxoTerm == "" %}
-                {% set taxoTerm = "Solution" %}
+                {% set taxoTerm = " <br />" %}
             {% endif %}
-            {{ taxoTerm }}
+            {{ taxoTerm|raw }}  {# Le raw, c'est pour afficher le <br /> comme de l'html et pas du texte#}
             <div>{{ label }}</div>
         </div>
     </div>
