@@ -367,3 +367,38 @@ article .content .field--type-text-long ul li:before{
     line-height: 2rem;
 
 }
+
+#arrow-back-to-filter {
+
+    background-color:  #000000;
+    position: fixed;
+
+    /* Gestion de la position fixed pour Chrome... */
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+
+
+    right: 0;
+    bottom: 25%;
+    z-index: 1000;
+    height: 6rem;
+    width: 6rem;
+}
+
+#arrow-back-to-filter a {
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem;
+    margin: auto;
+}
+
+#arrow-back-to-filter a .glyphicon {
+    color : #FFFFFF;
+    font-size: 3rem;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    left: 1px;
+}
