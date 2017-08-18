@@ -585,7 +585,7 @@ a.home_banner_element_mobile_link {
 }
 .homepage-eclairage-playlist-element .views-field-title {
     padding: 0px 30px 20px 30px;
-    width: 310px;
+    width: 100%;
     font-size: 2rem;
     font-weight: bold;
     line-height: 2.4rem;
@@ -658,3 +658,119 @@ a.home_banner_element_mobile_link {
     width: 295px;
     height: auto;
 }
+
+
+/* PAGE THEMATIQUE BANNER */
+.home_thematic_navigationZone {
+    height: 80px;
+    padding-left: 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+    padding-top: 30px;
+}
+
+.home_thematic_navigationZone .field--name-field-navigation-link{
+    display: inline-block;
+    padding-left: 30px;
+}
+
+.home_thematic_navigationZone .field--name-field-navigation-link a{
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.home_thematic_textZone {
+    height: 530px;
+    padding-top: 80px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.home_thematic_textZoneTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 3rem;
+    color: #fff;
+}
+
+.home_thematic_textZoneTxt {
+    padding-left: 20px;
+}
+
+.home_thematic_textZone .node-socialbar span {
+    color: #fff !important;
+}
+
+.home_thematic_textZone .node-socialbar{
+    margin: 2.5rem 0 3rem 0;
+}
+.home_thematic_banner {
+    height: 610px;
+
+}
+
+.home_thematic_nopadding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.home_thematic_banner .home_banner_first_nameFunction {
+    padding-bottom: 80px;
+}
+
+.home_thematic_columnImage {
+    height: 200px;
+   /* width: 420px;*/
+    width: 100%;
+}
+
+.home_thematic_columns{
+    paddint-top:80px;
+}
+.home_thematic_columns_title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #000;
+    padding: 0 10px 30px 10px;
+
+}
+.home_thematic_column {
+    border: 1px solid #ccc;
+
+    height: 445px;
+}
+
+.thematic_column_elements {
+    padding: 30px 30px 40px 30px;
+}
+
+.thematic_column_elements_title {
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    padding-bottom: 15px;
+}
+.thematic_column_elements_highlight {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding-bottom: 15px;
+}
+.thematic_column_elements_nameFunction {
+    font-size: 1.4rem;
+}
+
+
+.home_thematic_ColumnLink a:hover{
+     height:445px;
+}
+.home_thematic_column a {
+    text-decoration: none !important;
+}
+.home_thematic_ColumnLink:hover > .thematic_column_elements{
+     background-color: #F16e00;
+     color: #fff;
+     border-color: #F16e00;
+    height: 245px;
+ }
