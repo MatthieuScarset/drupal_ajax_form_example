@@ -1,0 +1,8 @@
+oab_offices_map.markers:
+  version: VERSION
+  js:
+    js/markers.js: {}
+  css:
+    theme:
+      css/styleMarkersList.css: {}
+      css/markers.css: {}

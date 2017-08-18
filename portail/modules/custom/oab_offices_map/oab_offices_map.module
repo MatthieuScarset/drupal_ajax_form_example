@@ -1,0 +1,31 @@
+<?php
+
+function oab_offices_map_theme(){
+	$theme = array();
+	$theme['offices_map_page'] = array(
+		'variables' => array(
+			'mapBlock' => array(),
+			'officesListBlock' => array(),
+		),
+		'template' => 'offices-map--page'
+	);
+/*
+	$theme['views_view_fields__offices_map_view__offices_addresses_list_block'] = array(
+		'template' => 'views-view-fields--offices-map-view--offices-addresses-list-block',
+		'original hook' => 'views_view_fields',
+		'path' => drupal_get_path('module', 'oab_offices_map') . '/templates',
+	);
+*/
+	return $theme;
+}
+
+
+function oab_offices_map_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+//	oabt($hook);
+/*
+	if($hook == "views_view_fields")
+	{
+		$suggestions[] = 'views_view_fields__offices_map_view__offices_addresses_list_block';
+	}
+*/
+}
