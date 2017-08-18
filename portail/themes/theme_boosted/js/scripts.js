@@ -74,6 +74,78 @@
 
   });
 
+  function getHeaderBarHeight() {
+    //pour compter le decalage à faire à cause des barres sticky
+    var decalSticky = 0;
+    if ($("#toolbar-bar")) {  //Si la toolbar-bar existe, je recupère de quoi decaller
+      decalSticky += $("#toolbar-bar").height();
+
+      var toolbarAdmin = $("#toolbar-item-administration-tray");
+      if (toolbarAdmin && toolbarAdmin.hasClass("is-active toolbar-tray-horizontal")) {
+        decalSticky += toolbarAdmin.height();
+      }
+    }
+
+    //Je recupère la hauteur de la header bar maintenant
+    if ($("#main_nav")) {
+      decalSticky += $("#main_nav").height();
+    }
+
+    return decalSticky;
+  }
+
+
+  function showhideFilters() {
+    //je recupère la hauteur de la scrollBar
+    var scroll = $(window ).scrollTop();
+    var win = scroll + getHeaderBarHeight();  //Je l'ajouter à la hauteur Sticky
+
+    //je recupère la distance de mon element par rapport au haut de la fenetre
+    var elem=$("#ancre-back-to-filter").offset().top;
+
+    //Si scroll+Sticky > distanceElement (cad l'element est caché)
+    //alors j'affiche la flèche
+    if (win>elem) {
+      $("#arrow-back-to-filter").removeClass("hidden");
+    } else {
+      $("#arrow-back-to-filter").addClass("hidden");
+    }
+  }
+
+  //Pour afficher la flèche vers l'ancre du filtre lorsque les filtres ne sont plus visibles
+  $(window).scroll(function(){
+    showhideFilters();
+  });
+
+  //Pour savoir si j'affiche la flèche au chargement de la page
+  // (Quand on refresh, la page garde sa position.. Donc le scroll ne fonctionne pas)
+  $(document).ready(function () {
+    showhideFilters();
+  });
+
+
+  //Pour re-afficher les filtres en appuyant sur la flèche...
+  $("#link-back-to-filter").click(function(){
+
+    var ancre = $(this).attr('href');   //Je recupère l'id de l'ancre contenu dans le href
+
+    var decalSticky = getHeaderBarHeight();
+
+    //On recupère la position de la div de l'ancre
+    var postitionAncre = $(ancre).offset();
+
+    if (postitionAncre) {   //je vérifie que j'ai bien la position de l'ancre souhaitée
+      var top = postitionAncre.top;
+      top -= decalSticky + 10;    //J'enlève la taille des elements stickys trouvés; je rajoute 10 de marge
+
+      //On décale l'element avec un petit effet
+      $("html, body").animate({ scrollTop: top }, "slow");
+    }
+
+    //Je return false pour desactiver le lien vers l'ancre par le navigateur
+    return false;
+  });
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
