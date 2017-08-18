@@ -125,7 +125,7 @@
 
 
   //Pour re-afficher les filtres en appuyant sur la flèche...
-  $("#link-back-to-filter").click(function(){
+  $(document).on("click", '#link-back-to-filter', function(event) {
 
     var ancre = $(this).attr('href');   //Je recupère l'id de l'ancre contenu dans le href
 
