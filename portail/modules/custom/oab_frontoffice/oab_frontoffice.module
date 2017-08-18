@@ -188,10 +188,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
     $themes = clean_exposed_filters_by_language(
-      $form['field_blog_thematic_target_id']['#options'],
+      $form['field_magazine_thematic_target_id']['#options'],
       'By thematic'
     );
-    $form['field_blog_thematic_target_id']['#options'] = $themes;
+    $form['field_magazine_thematic_target_id']['#options'] = $themes;
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
