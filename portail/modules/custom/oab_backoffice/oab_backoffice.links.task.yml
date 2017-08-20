@@ -2,3 +2,8 @@ oab.settings_subhomes_tab:
   route_name: oab.settings_subhomes
   title: Settings
   base_route: oab.settings_subhomes
+
+oab.settings_pardot_tab:
+  route_name: oab.settings_pardot
+  title: Settings
+  base_route: oab.settings_pardot
