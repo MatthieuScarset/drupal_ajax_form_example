@@ -144,14 +144,7 @@ view_mode ? view_mode|clean_class,
     {% endfor %}
 
     <div class="pardot-form" style="margin-top: 4rem;">
-        <iframe allowtransparency="true" frameborder="0" id="myFrame" src="" style="border: 0" target="_blank" type="text/html" width="100%"></iframe>
-        <script language="javascript">
-          var loc = window.location.toString()
-          var y = {{ pardot_iframe }} + "?" + {{ filename }};
-          document.getElementById("myFrame").src=y;
-          var x = document.getElementById("myFrame").src;
-          //alert(x)
-        </script>
+        <iframe allowtransparency="true" frameborder="0" id="myFrame" src="{{ pardot_iframe }}?{{ filename }}" style="border: 0" target="_blank" type="text/html" width="100%"></iframe>
     </div>
 
 </article>
