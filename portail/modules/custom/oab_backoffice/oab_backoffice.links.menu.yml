@@ -11,3 +11,10 @@ oab.settings_subhomes:
   parent: oab.settings
   description: 'Configure oab subhome settings'
   weight: -20
+
+oab.settings_pardot:
+  title: Pardot settings
+  route_name: oab.settings_pardot
+  parent: oab.settings
+  description: 'Configure oab pardot settings'
+  weight: -20
