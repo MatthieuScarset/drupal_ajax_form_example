@@ -125,6 +125,33 @@ view_mode ? view_mode|clean_class,
             'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
             'field_start_date', 'field_end_date') }}
         </div>
+
+    </div>
+
+    {% set pardot_iframe = d_config('oab.pardot').get('iframe_url') %}
+    {% set filename = "" %}
+
+    {% for key, file in content.field_file  %}
+        {% if key == "#items" %}
+            {% set media = file.entity %}
+            {% set file_entity = media.field_image_file.entity %}
+            {% set inactiveClasse = "" %}
+            {% if media is not empty %}
+                {% set filename = media.field_file.entity.filename.value %}
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
+
+    <div class="pardot-form" style="margin-top: 4rem;">
+        <iframe allowtransparency="true" frameborder="0" id="myFrame" src="" style="border: 0" target="_blank" type="text/html" width="100%"></iframe>
+        <script language="javascript">
+          var loc = window.location.toString()
+          var y = {{ pardot_iframe }} + "?" + {{ filename }};
+          document.getElementById("myFrame").src=y;
+          var x = document.getElementById("myFrame").src;
+          //alert(x)
+        </script>
     </div>
 
 </article>

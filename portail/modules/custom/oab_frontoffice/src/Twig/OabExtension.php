@@ -29,6 +29,7 @@ class OabExtension extends \Twig_Extension {
       'is_variadic' => TRUE,
     )),*/
       new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
+      new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
     ];
 
     return $filters;
@@ -77,6 +78,10 @@ class OabExtension extends \Twig_Extension {
 
     if ($stop)
       die();
+  }
+
+  function d_config($config){
+    return \Drupal::config($config);
   }
 
 

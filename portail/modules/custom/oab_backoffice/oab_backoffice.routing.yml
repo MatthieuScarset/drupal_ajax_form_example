@@ -13,3 +13,11 @@ oab.settings_subhomes:
     _title: 'Subhomes settings'
   requirements:
     _permission: 'administer site configuration'
+
+oab.settings_pardot:
+  path: '/admin/structure/oab/settings/pardot'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\oabSettingsPardotForm'
+    _title: 'Pardot settings'
+  requirements:
+    _permission: 'administer site configuration'
