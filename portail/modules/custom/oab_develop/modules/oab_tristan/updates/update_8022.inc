@@ -2064,6 +2064,61 @@ $config_group->setData(array (
                       'error_message' => true,
                       'plugin_id' => 'taxonomy_index_tid',
                     ),
+                  'node_year' =>
+                    array (
+                      'id' => 'node_year',
+                      'table' => 'node_field_data',
+                      'field' => 'node_year',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => '=',
+                      'value' => '0',
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'node_year_op',
+                          'label' => 'Node year filter',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'node_year_op',
+                          'identifier' => 'field_year_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'plugin_id' => 'node_year',
+                    ),
                   'node_month' =>
                     array (
                       'id' => 'node_month',
@@ -2119,6 +2174,670 @@ $config_group->setData(array (
                       'entity_type' => 'node',
                       'plugin_id' => 'node_month',
                     ),
+                ),
+              'filter_groups' =>
+                array (
+                  'operator' => 'AND',
+                  'groups' =>
+                    array (
+                      1 => 'AND',
+                    ),
+                ),
+              'title' => 'Magazine',
+            ),
+          'cache_metadata' =>
+            array (
+              'max-age' => -1,
+              'contexts' =>
+                array (
+                  0 => 'languages:language_content',
+                  1 => 'languages:language_interface',
+                  2 => 'url',
+                  3 => 'url.query_args',
+                  4 => 'user',
+                  5 => 'user.node_grants:view',
+                  6 => 'user.permissions',
+                ),
+              'tags' =>
+                array (
+                ),
+            ),
+          'title' => 'Magazine',
+        ),
+      'page_partners' =>
+        array (
+          'display_plugin' => 'page',
+          'id' => 'page_partners',
+          'display_title' => 'partners',
+          'position' => 1,
+          'display_options' =>
+            array (
+              'display_extenders' =>
+                array (
+                ),
+              'path' => 'subhome_partners',
+              'display_description' => '',
+              'arguments' =>
+                array (
+                  'field_subhome_target_id' =>
+                    array (
+                      'id' => 'field_subhome_target_id',
+                      'table' => 'node__field_subhome',
+                      'field' => 'field_subhome_target_id',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'default_action' => 'default',
+                      'exception' =>
+                        array (
+                          'value' => 'all',
+                          'title_enable' => false,
+                          'title' => 'All',
+                        ),
+                      'title_enable' => false,
+                      'title' => '',
+                      'default_argument_type' => 'config_key',
+                      'default_argument_options' =>
+                        array (
+                          'config_name' => 'oab.subhomes',
+                          'config_key' => 'partner_term_tid',
+                        ),
+                      'default_argument_skip_url' => false,
+                      'summary_options' =>
+                        array (
+                          'base_path' => '',
+                          'count' => true,
+                          'items_per_page' => 25,
+                          'override' => false,
+                        ),
+                      'summary' =>
+                        array (
+                          'sort_order' => 'asc',
+                          'number_of_records' => 0,
+                          'format' => 'default_summary',
+                        ),
+                      'specify_validation' => false,
+                      'validate' =>
+                        array (
+                          'type' => 'none',
+                          'fail' => 'not found',
+                        ),
+                      'validate_options' =>
+                        array (
+                        ),
+                      'break_phrase' => false,
+                      'not' => false,
+                      'plugin_id' => 'numeric',
+                    ),
+                ),
+              'defaults' =>
+                array (
+                  'arguments' => false,
+                  'filters' => false,
+                  'filter_groups' => false,
+                  'title' => false,
+                ),
+              'filters' =>
+                array (
+                  'status' =>
+                    array (
+                      'value' => '1',
+                      'table' => 'node_field_data',
+                      'field' => 'status',
+                      'plugin_id' => 'boolean',
+                      'entity_type' => 'node',
+                      'entity_field' => 'status',
+                      'id' => 'status',
+                      'expose' =>
+                        array (
+                          'operator' => '',
+                        ),
+                      'group' => 1,
+                    ),
+                  'langcode' =>
+                    array (
+                      'id' => 'langcode',
+                      'table' => 'node',
+                      'field' => 'langcode',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'in',
+                      'value' =>
+                        array (
+                          '***LANGUAGE_language_interface***' => '***LANGUAGE_language_interface***',
+                        ),
+                      'group' => 1,
+                      'exposed' => false,
+                      'expose' =>
+                        array (
+                          'operator_id' => '',
+                          'label' => '',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => '',
+                          'identifier' => '',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'entity_field' => 'langcode',
+                      'plugin_id' => 'language',
+                    ),
+                  'field_solution_target_id' =>
+                    array (
+                      'id' => 'field_solution_target_id',
+                      'table' => 'node__field_solution',
+                      'field' => 'field_solution_target_id',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'or',
+                      'value' =>
+                        array (
+                        ),
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'field_solution_target_id_op',
+                          'label' => 'By solution',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'field_solution_target_id_op',
+                          'identifier' => 'field_solution_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'reduce_duplicates' => false,
+                      'type' => 'select',
+                      'limit' => true,
+                      'vid' => 'solutions',
+                      'hierarchy' => false,
+                      'error_message' => true,
+                      'plugin_id' => 'taxonomy_index_tid',
+                    ),
+                  'tid' =>
+                    array (
+                      'id' => 'tid',
+                      'table' => 'taxonomy_index',
+                      'field' => 'tid',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'or',
+                      'value' =>
+                        array (
+                        ),
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'tid_op',
+                          'label' => 'By type',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'tid_op',
+                          'identifier' => 'field_types_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'reduce_duplicates' => false,
+                      'type' => 'select',
+                      'limit' => true,
+                      'vid' => 'partner_types',
+                      'hierarchy' => false,
+                      'error_message' => true,
+                      'plugin_id' => 'taxonomy_index_tid',
+                    ),
+                  'tid_1' =>
+                    array (
+                      'id' => 'tid_1',
+                      'table' => 'taxonomy_index',
+                      'field' => 'tid',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'or',
+                      'value' =>
+                        array (
+                        ),
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'tid_1_op',
+                          'label' => 'By region',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'tid_1_op',
+                          'identifier' => 'field_regions_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'reduce_duplicates' => false,
+                      'type' => 'select',
+                      'limit' => true,
+                      'vid' => 'regions',
+                      'hierarchy' => false,
+                      'error_message' => true,
+                      'plugin_id' => 'taxonomy_index_tid',
+                    ),
+                ),
+              'filter_groups' =>
+                array (
+                  'operator' => 'AND',
+                  'groups' =>
+                    array (
+                      1 => 'AND',
+                    ),
+                ),
+              'title' => 'Partners',
+            ),
+          'cache_metadata' =>
+            array (
+              'max-age' => -1,
+              'contexts' =>
+                array (
+                  0 => 'languages:language_content',
+                  1 => 'languages:language_interface',
+                  2 => 'url',
+                  3 => 'url.query_args',
+                  4 => 'user',
+                  5 => 'user.node_grants:view',
+                  6 => 'user.permissions',
+                ),
+              'tags' =>
+                array (
+                ),
+            ),
+          'title' => 'Partners',
+        ),
+      'page_press' =>
+        array (
+          'display_plugin' => 'page',
+          'id' => 'page_press',
+          'display_title' => 'press',
+          'position' => 1,
+          'display_options' =>
+            array (
+              'display_extenders' =>
+                array (
+                ),
+              'path' => 'subhome_press',
+              'display_description' => '',
+              'arguments' =>
+                array (
+                  'field_subhome_target_id' =>
+                    array (
+                      'id' => 'field_subhome_target_id',
+                      'table' => 'node__field_subhome',
+                      'field' => 'field_subhome_target_id',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'default_action' => 'default',
+                      'exception' =>
+                        array (
+                          'value' => 'all',
+                          'title_enable' => false,
+                          'title' => 'All',
+                        ),
+                      'title_enable' => false,
+                      'title' => '',
+                      'default_argument_type' => 'config_key',
+                      'default_argument_options' =>
+                        array (
+                          'config_name' => 'oab.subhomes',
+                          'config_key' => 'press_term_tid',
+                        ),
+                      'default_argument_skip_url' => false,
+                      'summary_options' =>
+                        array (
+                          'base_path' => '',
+                          'count' => true,
+                          'items_per_page' => 25,
+                          'override' => false,
+                        ),
+                      'summary' =>
+                        array (
+                          'sort_order' => 'asc',
+                          'number_of_records' => 0,
+                          'format' => 'default_summary',
+                        ),
+                      'specify_validation' => false,
+                      'validate' =>
+                        array (
+                          'type' => 'none',
+                          'fail' => 'not found',
+                        ),
+                      'validate_options' =>
+                        array (
+                        ),
+                      'break_phrase' => false,
+                      'not' => false,
+                      'plugin_id' => 'numeric',
+                    ),
+                ),
+              'defaults' =>
+                array (
+                  'arguments' => false,
+                  'filters' => false,
+                  'filter_groups' => false,
+                  'pager' => true,
+                  'use_ajax' => false,
+                  'style' => true,
+                  'row' => true,
+                ),
+              'filters' =>
+                array (
+                  'status' =>
+                    array (
+                      'value' => '1',
+                      'table' => 'node_field_data',
+                      'field' => 'status',
+                      'plugin_id' => 'boolean',
+                      'entity_type' => 'node',
+                      'entity_field' => 'status',
+                      'id' => 'status',
+                      'expose' =>
+                        array (
+                          'operator' => '',
+                        ),
+                      'group' => 1,
+                    ),
+                  'langcode' =>
+                    array (
+                      'id' => 'langcode',
+                      'table' => 'node',
+                      'field' => 'langcode',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'in',
+                      'value' =>
+                        array (
+                          '***LANGUAGE_language_interface***' => '***LANGUAGE_language_interface***',
+                        ),
+                      'group' => 1,
+                      'exposed' => false,
+                      'expose' =>
+                        array (
+                          'operator_id' => '',
+                          'label' => '',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => '',
+                          'identifier' => '',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'entity_field' => 'langcode',
+                      'plugin_id' => 'language',
+                    ),
+                  'type' =>
+                    array (
+                      'id' => 'type',
+                      'table' => 'node_field_data',
+                      'field' => 'type',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'in',
+                      'value' =>
+                        array (
+                          'press_kit' => 'press_kit',
+                          'press_release' => 'press_release',
+                        ),
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'type_op',
+                          'label' => 'By type',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'type_op',
+                          'identifier' => 'field_type_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                          'reduce' => true,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'entity_field' => 'type',
+                      'plugin_id' => 'bundle',
+                    ),
+                  'field_solution_target_id' =>
+                    array (
+                      'id' => 'field_solution_target_id',
+                      'table' => 'node__field_solution',
+                      'field' => 'field_solution_target_id',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => 'or',
+                      'value' =>
+                        array (
+                        ),
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'field_solution_target_id_op',
+                          'label' => 'By solution',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'field_solution_target_id_op',
+                          'identifier' => 'field_solution_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                          'reduce' => false,
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'reduce_duplicates' => false,
+                      'type' => 'select',
+                      'limit' => true,
+                      'vid' => 'solutions',
+                      'hierarchy' => false,
+                      'error_message' => true,
+                      'plugin_id' => 'taxonomy_index_tid',
+                    ),
                   'node_year' =>
                     array (
                       'id' => 'node_year',
@@ -2134,7 +2853,7 @@ $config_group->setData(array (
                       'expose' =>
                         array (
                           'operator_id' => 'node_year_op',
-                          'label' => 'Node year filter',
+                          'label' => 'By year',
                           'description' => '',
                           'use_operator' => false,
                           'operator' => 'node_year_op',
@@ -2142,843 +2861,124 @@ $config_group->setData(array (
                           'required' => false,
                           'remember' => false,
                           'multiple' => false,
-              'remember_roles' =>
-              array (
-                'authenticated' => 'authenticated',
-                'anonymous' => '0',
-                'administrator' => '0',
-                'chief_editor' => '0',
-                'digital_admin' => '0',
-                'webform_manager' => '0',
-                'contributor' => '0',
-              ),
-            ),
-            'is_grouped' => false,
-            'group_info' =>
-            array (
-              'label' => '',
-              'description' => '',
-              'identifier' => '',
-              'optional' => true,
-              'widget' => 'select',
-              'multiple' => false,
-              'remember' => false,
-              'default_group' => 'All',
-              'default_group_multiple' =>
-                array (
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'plugin_id' => 'node_year',
+                    ),
+                  'node_month' =>
+                    array (
+                      'id' => 'node_month',
+                      'table' => 'node_field_data',
+                      'field' => 'node_month',
+                      'relationship' => 'none',
+                      'group_type' => 'group',
+                      'admin_label' => '',
+                      'operator' => '=',
+                      'value' => '01',
+                      'group' => 1,
+                      'exposed' => true,
+                      'expose' =>
+                        array (
+                          'operator_id' => 'node_month_op',
+                          'label' => 'By month',
+                          'description' => '',
+                          'use_operator' => false,
+                          'operator' => 'node_month_op',
+                          'identifier' => 'field_month_target_id',
+                          'required' => false,
+                          'remember' => false,
+                          'multiple' => false,
+                          'remember_roles' =>
+                            array (
+                              'authenticated' => 'authenticated',
+                              'anonymous' => '0',
+                              'administrator' => '0',
+                              'chief_editor' => '0',
+                              'digital_admin' => '0',
+                              'webform_manager' => '0',
+                              'contributor' => '0',
+                            ),
+                        ),
+                      'is_grouped' => false,
+                      'group_info' =>
+                        array (
+                          'label' => '',
+                          'description' => '',
+                          'identifier' => '',
+                          'optional' => true,
+                          'widget' => 'select',
+                          'multiple' => false,
+                          'remember' => false,
+                          'default_group' => 'All',
+                          'default_group_multiple' =>
+                            array (
+                            ),
+                          'group_items' =>
+                            array (
+                            ),
+                        ),
+                      'entity_type' => 'node',
+                      'plugin_id' => 'node_month',
+                    ),
                 ),
-              'group_items' =>
+              'filter_groups' =>
                 array (
+                  'operator' => 'AND',
+                  'groups' =>
+                    array (
+                      1 => 'AND',
+                    ),
                 ),
-            ),
-            'entity_type' => 'node',
-            'plugin_id' => 'node_year',
-          ),
-        ),
-        'filter_groups' =>
-        array (
-          'operator' => 'AND',
-          'groups' =>
-            array (
-              1 => 'AND',
-            ),
-        ),
-        'title' => 'Magazine',
-      ),
-      'cache_metadata' =>
-      array (
-        'max-age' => -1,
-        'contexts' =>
-          array (
-            0 => 'languages:language_content',
-            1 => 'languages:language_interface',
-            2 => 'url',
-            3 => 'url.query_args',
-            4 => 'user',
-            5 => 'user.node_grants:view',
-            6 => 'user.permissions',
-          ),
-        'tags' =>
-          array (
-          ),
-      ),
-      'title' => 'Magazine',
-    ),
-    'page_partners' =>
-    array (
-      'display_plugin' => 'page',
-      'id' => 'page_partners',
-      'display_title' => 'partners',
-      'position' => 1,
-      'display_options' =>
-        array (
-          'display_extenders' =>
-            array (
-            ),
-          'path' => 'subhome_partners',
-          'display_description' => '',
-          'arguments' =>
-            array (
-              'field_subhome_target_id' =>
-                array (
-                  'id' => 'field_subhome_target_id',
-                  'table' => 'node__field_subhome',
-                  'field' => 'field_subhome_target_id',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'default_action' => 'default',
-                  'exception' =>
-                    array (
-                      'value' => 'all',
-                      'title_enable' => false,
-                      'title' => 'All',
-                    ),
-                  'title_enable' => false,
-                  'title' => '',
-                  'default_argument_type' => 'config_key',
-                  'default_argument_options' =>
-                    array (
-                      'config_name' => 'oab.subhomes',
-                      'config_key' => 'partner_term_tid',
-                    ),
-                  'default_argument_skip_url' => false,
-                  'summary_options' =>
-                    array (
-                      'base_path' => '',
-                      'count' => true,
-                      'items_per_page' => 25,
-                      'override' => false,
-                    ),
-                  'summary' =>
-                    array (
-                      'sort_order' => 'asc',
-                      'number_of_records' => 0,
-                      'format' => 'default_summary',
-                    ),
-                  'specify_validation' => false,
-                  'validate' =>
-                    array (
-                      'type' => 'none',
-                      'fail' => 'not found',
-                    ),
-                  'validate_options' =>
-                    array (
-                    ),
-                  'break_phrase' => false,
-                  'not' => false,
-                  'plugin_id' => 'numeric',
-                ),
-            ),
-          'defaults' =>
-            array (
-              'arguments' => false,
-              'filters' => false,
-              'filter_groups' => false,
-              'title' => false,
-            ),
-          'filters' =>
-            array (
-              'status' =>
-                array (
-                  'value' => '1',
-                  'table' => 'node_field_data',
-                  'field' => 'status',
-                  'plugin_id' => 'boolean',
-                  'entity_type' => 'node',
-                  'entity_field' => 'status',
-                  'id' => 'status',
-                  'expose' =>
-                    array (
-                      'operator' => '',
-                    ),
-                  'group' => 1,
-                ),
-              'langcode' =>
-                array (
-                  'id' => 'langcode',
-                  'table' => 'node',
-                  'field' => 'langcode',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'in',
-                  'value' =>
-                    array (
-                      '***LANGUAGE_language_interface***' => '***LANGUAGE_language_interface***',
-                    ),
-                  'group' => 1,
-                  'exposed' => false,
-                  'expose' =>
-                    array (
-                      'operator_id' => '',
-                      'label' => '',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => '',
-                      'identifier' => '',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'entity_type' => 'node',
-                  'entity_field' => 'langcode',
-                  'plugin_id' => 'language',
-                ),
-              'field_solution_target_id' =>
-                array (
-                  'id' => 'field_solution_target_id',
-                  'table' => 'node__field_solution',
-                  'field' => 'field_solution_target_id',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'or',
-                  'value' =>
-                    array (
-                    ),
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'field_solution_target_id_op',
-                      'label' => 'By solution',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'field_solution_target_id_op',
-                      'identifier' => 'field_solution_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'reduce_duplicates' => false,
-                  'type' => 'select',
-                  'limit' => true,
-                  'vid' => 'solutions',
-                  'hierarchy' => false,
-                  'error_message' => true,
-                  'plugin_id' => 'taxonomy_index_tid',
-                ),
-              'tid' =>
-                array (
-                  'id' => 'tid',
-                  'table' => 'taxonomy_index',
-                  'field' => 'tid',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'or',
-                  'value' =>
-                    array (
-                    ),
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'tid_op',
-                      'label' => 'By type',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'tid_op',
-                      'identifier' => 'field_types_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'reduce_duplicates' => false,
-                  'type' => 'select',
-                  'limit' => true,
-                  'vid' => 'partner_types',
-                  'hierarchy' => false,
-                  'error_message' => true,
-                  'plugin_id' => 'taxonomy_index_tid',
-                ),
-              'tid_1' =>
-                array (
-                  'id' => 'tid_1',
-                  'table' => 'taxonomy_index',
-                  'field' => 'tid',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'or',
-                  'value' =>
-                    array (
-                    ),
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'tid_1_op',
-                      'label' => 'By region',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'tid_1_op',
-                      'identifier' => 'field_regions_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'reduce_duplicates' => false,
-                  'type' => 'select',
-                  'limit' => true,
-                  'vid' => 'regions',
-                  'hierarchy' => false,
-                  'error_message' => true,
-                  'plugin_id' => 'taxonomy_index_tid',
-                ),
-            ),
-          'filter_groups' =>
-            array (
-              'operator' => 'AND',
-              'groups' =>
-                array (
-                  1 => 'AND',
-                ),
-            ),
-          'title' => 'Partners',
-        ),
-      'cache_metadata' =>
-        array (
-          'max-age' => -1,
-          'contexts' =>
-            array (
-              0 => 'languages:language_content',
-              1 => 'languages:language_interface',
-              2 => 'url',
-              3 => 'url.query_args',
-              4 => 'user',
-              5 => 'user.node_grants:view',
-              6 => 'user.permissions',
-            ),
-          'tags' =>
-            array (
-            ),
-        ),
-      'title' => 'Partners',
-    ),
-    'page_press' =>
-    array (
-      'display_plugin' => 'page',
-      'id' => 'page_press',
-      'display_title' => 'press',
-      'position' => 1,
-      'display_options' =>
-        array (
-          'display_extenders' =>
-            array (
-            ),
-          'path' => 'subhome_press',
-          'display_description' => '',
-          'arguments' =>
-            array (
-              'field_subhome_target_id' =>
-                array (
-                  'id' => 'field_subhome_target_id',
-                  'table' => 'node__field_subhome',
-                  'field' => 'field_subhome_target_id',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'default_action' => 'default',
-                  'exception' =>
-                    array (
-                      'value' => 'all',
-                      'title_enable' => false,
-                      'title' => 'All',
-                    ),
-                  'title_enable' => false,
-                  'title' => '',
-                  'default_argument_type' => 'config_key',
-                  'default_argument_options' =>
-                    array (
-                      'config_name' => 'oab.subhomes',
-                      'config_key' => 'press_term_tid',
-                    ),
-                  'default_argument_skip_url' => false,
-                  'summary_options' =>
-                    array (
-                      'base_path' => '',
-                      'count' => true,
-                      'items_per_page' => 25,
-                      'override' => false,
-                    ),
-                  'summary' =>
-                    array (
-                      'sort_order' => 'asc',
-                      'number_of_records' => 0,
-                      'format' => 'default_summary',
-                    ),
-                  'specify_validation' => false,
-                  'validate' =>
-                    array (
-                      'type' => 'none',
-                      'fail' => 'not found',
-                    ),
-                  'validate_options' =>
-                    array (
-                    ),
-                  'break_phrase' => false,
-                  'not' => false,
-                  'plugin_id' => 'numeric',
-                ),
-            ),
-          'defaults' =>
-            array (
-              'arguments' => false,
-              'filters' => false,
-              'filter_groups' => false,
-              'pager' => true,
               'use_ajax' => false,
-              'style' => true,
-              'row' => true,
             ),
-          'filters' =>
+          'cache_metadata' =>
             array (
-              'status' =>
+              'max-age' => -1,
+              'contexts' =>
                 array (
-                  'value' => '1',
-                  'table' => 'node_field_data',
-                  'field' => 'status',
-                  'plugin_id' => 'boolean',
-                  'entity_type' => 'node',
-                  'entity_field' => 'status',
-                  'id' => 'status',
-                  'expose' =>
-                    array (
-                      'operator' => '',
-                    ),
-                  'group' => 1,
+                  0 => 'languages:language_content',
+                  1 => 'languages:language_interface',
+                  2 => 'url',
+                  3 => 'url.query_args',
+                  4 => 'user',
+                  5 => 'user.node_grants:view',
+                  6 => 'user.permissions',
                 ),
-              'langcode' =>
+              'tags' =>
                 array (
-                  'id' => 'langcode',
-                  'table' => 'node',
-                  'field' => 'langcode',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'in',
-                  'value' =>
-                    array (
-                      '***LANGUAGE_language_interface***' => '***LANGUAGE_language_interface***',
-                    ),
-                  'group' => 1,
-                  'exposed' => false,
-                  'expose' =>
-                    array (
-                      'operator_id' => '',
-                      'label' => '',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => '',
-                      'identifier' => '',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'entity_type' => 'node',
-                  'entity_field' => 'langcode',
-                  'plugin_id' => 'language',
-                ),
-              'type' =>
-                array (
-                  'id' => 'type',
-                  'table' => 'node_field_data',
-                  'field' => 'type',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'in',
-                  'value' =>
-                    array (
-                      'press_kit' => 'press_kit',
-                      'press_release' => 'press_release',
-                    ),
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'type_op',
-                      'label' => 'By type',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'type_op',
-                      'identifier' => 'field_type_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                      'reduce' => true,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'entity_type' => 'node',
-                  'entity_field' => 'type',
-                  'plugin_id' => 'bundle',
-                ),
-              'field_solution_target_id' =>
-                array (
-                  'id' => 'field_solution_target_id',
-                  'table' => 'node__field_solution',
-                  'field' => 'field_solution_target_id',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => 'or',
-                  'value' =>
-                    array (
-                    ),
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'field_solution_target_id_op',
-                      'label' => 'By solution',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'field_solution_target_id_op',
-                      'identifier' => 'field_solution_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                      'reduce' => false,
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'reduce_duplicates' => false,
-                  'type' => 'select',
-                  'limit' => true,
-                  'vid' => 'solutions',
-                  'hierarchy' => false,
-                  'error_message' => true,
-                  'plugin_id' => 'taxonomy_index_tid',
-                ),
-              'node_year' =>
-                array (
-                  'id' => 'node_year',
-                  'table' => 'node_field_data',
-                  'field' => 'node_year',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => '=',
-                  'value' => '0',
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'node_year_op',
-                      'label' => 'By year',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'node_year_op',
-                      'identifier' => 'field_year_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'entity_type' => 'node',
-                  'plugin_id' => 'node_year',
-                ),
-              'node_month' =>
-                array (
-                  'id' => 'node_month',
-                  'table' => 'node_field_data',
-                  'field' => 'node_month',
-                  'relationship' => 'none',
-                  'group_type' => 'group',
-                  'admin_label' => '',
-                  'operator' => '=',
-                  'value' => '01',
-                  'group' => 1,
-                  'exposed' => true,
-                  'expose' =>
-                    array (
-                      'operator_id' => 'node_month_op',
-                      'label' => 'By month',
-                      'description' => '',
-                      'use_operator' => false,
-                      'operator' => 'node_month_op',
-                      'identifier' => 'field_month_target_id',
-                      'required' => false,
-                      'remember' => false,
-                      'multiple' => false,
-                      'remember_roles' =>
-                        array (
-                          'authenticated' => 'authenticated',
-                          'anonymous' => '0',
-                          'administrator' => '0',
-                          'chief_editor' => '0',
-                          'digital_admin' => '0',
-                          'webform_manager' => '0',
-                          'contributor' => '0',
-                        ),
-                    ),
-                  'is_grouped' => false,
-                  'group_info' =>
-                    array (
-                      'label' => '',
-                      'description' => '',
-                      'identifier' => '',
-                      'optional' => true,
-                      'widget' => 'select',
-                      'multiple' => false,
-                      'remember' => false,
-                      'default_group' => 'All',
-                      'default_group_multiple' =>
-                        array (
-                        ),
-                      'group_items' =>
-                        array (
-                        ),
-                    ),
-                  'entity_type' => 'node',
-                  'plugin_id' => 'node_month',
                 ),
             ),
-          'filter_groups' =>
-            array (
-              'operator' => 'AND',
-              'groups' =>
-                array (
-                  1 => 'AND',
-                ),
-            ),
-          'use_ajax' => false,
+          'title' => 'Press',
         ),
-      'cache_metadata' =>
-        array (
-          'max-age' => -1,
-          'contexts' =>
-            array (
-              0 => 'languages:language_content',
-              1 => 'languages:language_interface',
-              2 => 'url',
-              3 => 'url.query_args',
-              4 => 'user',
-              5 => 'user.node_grants:view',
-              6 => 'user.permissions',
-            ),
-          'tags' =>
-            array (
-            ),
-        ),
-      'title' => 'Press',
     ),
-  ),
 ));
 
 ##On save
