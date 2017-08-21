@@ -172,3 +172,11 @@ function oab_tristan_update_8020() {
 function oab_tristan_update_8021() {
   include_once("updates/update_8021.inc");
 }
+
+
+/**
+ * Ajout des filtres sur la date et l'année à la subhome Magazine
+ */
+function oab_tristan_update_8022() {
+  include_once("updates/update_8022.inc");
+}
