@@ -192,6 +192,19 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'By thematic'
     );
     $form['field_magazine_thematic_target_id']['#options'] = $themes;
+
+    $years = clean_exposed_filters_by_language(
+      $form['field_year_target_id']['#options'],
+      'By year'
+    );
+    $form['field_year_target_id']['#options'] = $years;
+
+    $months = clean_exposed_filters_by_language(
+      $form['field_month_target_id']['#options'],
+      'By month'
+    );
+    $form['field_month_target_id']['#options'] = $months;
+
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
