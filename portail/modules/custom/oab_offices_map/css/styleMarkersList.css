@@ -20,7 +20,8 @@ li.office-address{
     overflow: hidden;
     padding: 5px 5px 5px 60px;
 }
-li.office-address:hover{
+li.office-address:hover,
+li.office-address.selected{
     background: rgba(0, 0, 0, 0) url("../images/marker-obs-hover.png") no-repeat scroll 15px 30px;
 
 }

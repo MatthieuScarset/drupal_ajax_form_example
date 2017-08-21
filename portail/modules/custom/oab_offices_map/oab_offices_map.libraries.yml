@@ -1,7 +1,10 @@
 oab_offices_map.markers:
   version: VERSION
   js:
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyBt9DyqcmbFirrJ1iicRr6NQqwr7XjgecQ&callback=initMap : { type: external }
+    js/infobox.js: {}
     js/markers.js: {}
+    #https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/infobox/src/infobox.js: { type: external }
   css:
     theme:
       css/styleMarkersList.css: {}
