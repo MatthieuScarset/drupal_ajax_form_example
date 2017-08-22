@@ -51,7 +51,6 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
 
-        <div class="row">
             {# DESKTOP DISPLAY #}
             <div class="col-md-12 col-lg-12 hidden-sm hidden-xs home_banner_no_padding">
                 <a class="home_banner_element_link" href="{{ content.field_link[0]['#context']['value'] }}">
@@ -85,30 +84,35 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
             </div>
 
             {# MOBILE DISPLAY #}
-            <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
-                <a class="home_banner_element_mobile_link" href="{{ content.field_link[0]['#context']['value'] }}">
+            <div class="container no-padding">
+                <div class="row">
+                <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
+                    <a class="home_banner_element_mobile_link" href="{{ content.field_link[0]['#context']['value'] }}">
 
-                     <div class="home_banner_mobile" style="background:url( {{ file_url(content.field_image_mobile['#items'].entity.uri.value) }} )">
+                         <div class="home_banner_mobile" style="background:url( {{ file_url(content.field_image_mobile['#items'].entity.uri.value) }} )">
 
-                            <!-- Date -->
-                            <div class="home_banner_next_date">
-                                {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
-                                {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
-                            </div>
+                                <!-- Date -->
+                                <div class="home_banner_next_date">
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                </div>
 
-                            <!-- Right container/ title -->
-                             <div style="color: {{ content.field_text_color[0]['#markup'] }};">
-                                <p class="home_banner_next_title" >
-                                    {{ content.field_title[0]['#context']['value'] }}
-                                </p>
-                             <p class="home_banner_next_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
-                            </div>
+                                <!-- Right container/ title -->
+                                 <div class="home_banner_mobile_title" style="color: {{ content.field_text_color[0]['#markup'] }};">
+                                    <p class="home_banner_title" >
+                                        {{ content.field_title[0]['#context']['value'] }}
+                                    </p>
+                                 <p class="home_banner_first_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
+                                </div>
 
-                     </div>
-                </a>
+                         </div>
+                    </a>
+                </div>
+                </div>
             </div>
-        </div>
+
+
 
         {% endblock %}
     </div>

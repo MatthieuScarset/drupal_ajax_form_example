@@ -48,22 +48,22 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-            <div class="col-md-12 home_playlist_titlezone">
-                 <div class="col-md-1 home_playlist_nopadding playlist_arrows slider-nav">
+            <div class="col-md-12 col-xs-12 col-sm-12 home_playlist_titlezone">
+                 <div class="col-md-1 hidden-sm hidden-xs home_playlist_nopadding playlist_arrows slider-nav">
                      <div class="slider-nav hidden-sm hidden-xs">
                          <div id="home-playlist-slick-carousel-{{ content.field_playlist_taxonomy_term[0]['#options'].entity.id() }}-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
                          <div id="home-playlist-slick-carousel-{{ content.field_playlist_taxonomy_term[0]['#options'].entity.id() }}-next_arrow" class="navigation_arrow next_arrow"> > </div>
                      </div>
                 </div>
-                <div class="col-md-7 col-xs-12 home_playlist_nopadding home_playlist_title">
+                <div class="col-md-7 col-lg-7 home_playlist_nopadding home_playlist_title">
                     {{ content.field_title }}
                 </div>
-                <div class="col-md-4 text-right home_playlist_nopadding">
-                   <a class="btn btn-info hidden-sm hidden-xs" role="button" href="{{ content.field_link_button[0]['#url'] }}">  {{ content.field_link_button[0]['#title'] }}</a>
+                <div class="col-md-4 text-right home_playlist-btn home_playlist_nopadding">
+                   <a class="btn btn-info btn-playlist hidden-sm hidden-xs" role="button" href="{{ content.field_link_button[0]['#url'] }}">  {{ content.field_link_button[0]['#title'] }}</a>
                 </div>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 col-xs-12 col-sm-12">
                {{ oab_drupal_view('home_eclairage_playlist', 'block_1', content.field_playlist_taxonomy_term[0]['#options'].entity.id()) }}
             </div>
         {% endblock %}

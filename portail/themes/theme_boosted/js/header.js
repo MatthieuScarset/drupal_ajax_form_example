@@ -230,8 +230,17 @@
 
         local_nav.addClass('hidden-xs');
     }
+    $( document ).ajaxComplete(function() {
+       console.log( "Triggered ajaxComplete handler." );
+        //TODO Uncomment me + find a better way to handle the first call, if necessary
+       // $('#page_thematique_filter').collapse("toggle");
+
+
+
+    });
 
     $(document).ready(function () {
+
         init_fixed_navbar();
         // slider pour barre accès bleu
 
@@ -320,12 +329,25 @@
         }
 
 
+
+        var clickOnDiscover = function() {
+            if($('#home_playlist_end').hasClass('hidden'))
+            {
+                $('#home_playlist_end').removeClass('hidden');
+            }
+            else
+            {
+                $('#home_playlist_end').addClass('hidden');
+            }
+            $('.home-playlist-items').slick('setPosition');
+        };
+        $('div.btn-decouvrir-plus').click(clickOnDiscover);
+
         if ($('.home-playlist-items').length) {
 
             $('.home-playlist-items').each(function(key, item) {
                 //initialize swiper when document ready
-                console.log("Will init slicker key = " +key)
-                console.log("Will init slicker item.id = " +item.id);
+
                 $('#'+item.id).slick({
                     lazyLoad: 'ondemand',
                     slidesToShow: 4,
@@ -371,31 +393,33 @@
                 });
 
                 $('#'+item.id+'-prev_arrow').on('click', function(){
-                 console.log('click on prevArrow ok');
-                 $('#'+item.id).slick("slickPrev");
+                $('#'+item.id).slick("slickPrev");
                  });
                  $('#'+item.id+'-next_arrow').on('click', function(){
-                 console.log('click on nextArrow ok');
                  $('#'+item.id).slick("slickNext");
                  });
 
             });
-
+           // clickOnDiscover();
 
         }
-        else {
-            console.log("home playlist items empty");
+
+        if ($('.home-banner-items').length) {
+
+            //initialize swiper when document ready
+            jQuery('.home-banner-items').slick({
+                dots: true,
+                arrows: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+
+            });
         }
+
     });
-    /*$('#slider_direct_access').on('init', function(event, slick){
-     // on redimensionne le bloc en fonction de la largeur du main container
-     jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
-     });*/
 
-    /*$('#related-content-slick-carousel').on('init', function(event, slick){
-     // on redimensionne le bloc en fonction de la largeur du main container
-     jQuery('.slick-list').css('width', jQuery('.main-container').width()+'px');
-     });*/
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

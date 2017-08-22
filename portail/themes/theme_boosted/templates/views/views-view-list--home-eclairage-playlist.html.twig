@@ -45,36 +45,3 @@
     </div>
 {% endif %}
 
-
-{#
-<div{{ attributes.addClass(classes) }}>
-    {% if options.alignment == 'horizontal' %}
-        {% for row in items %}
-
-            <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index, 'homepage-eclairage-playlist-element') }}>
-
-                <div id="home-playlist-slick-carousel-{{ row.content.0.content['#view'].args.0 }}" class="home-playlist-items container">
-                    {% for column in row.content %}
-                        <div{{ column.attributes.addClass("item-playlist-content") }}>
-                            {{ column.content }}
-                        </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-
-        {% endfor %}
-
-    {% else %}
-        {% for column in items %}
-            <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index, 'homepage-eclairage-playlist-element') }}>
-                {% for row in column.content %}
-                    <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
-                        {{ row.content }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    {% endif %}
-</div>
-#}
