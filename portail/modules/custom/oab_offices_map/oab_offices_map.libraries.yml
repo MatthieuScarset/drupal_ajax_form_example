@@ -9,3 +9,4 @@ oab_offices_map.markers:
     theme:
       css/styleMarkersList.css: {}
       css/markers.css: {}
+      css/page-offices.css: {}
