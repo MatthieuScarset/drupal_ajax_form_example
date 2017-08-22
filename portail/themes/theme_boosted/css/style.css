@@ -156,7 +156,9 @@ article .content .field--type-text-long ul li:before{
 .content a:hover {
     color: #F16e00;
 }
-
+.content a.btn {
+    text-decoration: none !important;
+}
 .margin-right-5{
     margin-right: 5px;
 }
@@ -268,6 +270,7 @@ article .content .field--type-text-long ul li:before{
     line-height: 2rem;
     margin-left:5px;
     text-align: center;
+    cursor: pointer;
 }
 
 .section-title-corporate .title,
@@ -530,6 +533,7 @@ article .content .field--type-text-long ul li:before{
     margin: 0;
     padding-top: 15px;
     padding-bottom: 15px;
+    width: 95%;
 }
 
 .corporate-banner{
@@ -537,9 +541,9 @@ article .content .field--type-text-long ul li:before{
     background: #FFF;
 }
 .infography{
-    height: 70px;
     background-repeat: no-repeat !important;
     background-size: contain !important;
+    height: 70px;
 }
 .infography .key_figure{
     color: #F16E00;
@@ -640,6 +644,9 @@ article .content .field--type-text-long ul li:before{
         padding-left: 15px !important;
         padding-right: 15px !important;
     }
+    .block-card{
+        margin-bottom: 20px;
+    }
     .block-card img{
         width: 100%;
     }
@@ -709,6 +716,10 @@ article .content .field--type-text-long ul li:before{
     .section-corporate .menu-right{
         width: 100%;
     }
+    .solution-homepage,
+    .infography-banner{
+        margin-top: 20px;
+    }
     .corporate-banner {
         margin-top: 20px;
         height: auto!important;
@@ -721,6 +732,24 @@ article .content .field--type-text-long ul li:before{
         padding-left: 25px !important;
         padding-right: 25px !important;
         margin-top: -25px;
+    }
+    .infography-container{
+        padding: 0px 25px;
+    }
+    .corporate-infography-banner {
+        margin-top: 0px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        margin-bottom: 85px;
+    }
+    .infography{
+        height: auto;
+        background-repeat: no-repeat !important;
+        background-size: 70px !important;
+    }
+    .block-infography .key_figure,
+    .block-infography .description{
+        padding-left: 15px;
     }
 }
 

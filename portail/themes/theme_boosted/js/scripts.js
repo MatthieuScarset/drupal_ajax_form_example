@@ -77,7 +77,7 @@
           $(this).tab('show');
       });
 
-      $('.slick-left-zone').slick({
+      $('.slick-mode').slick({
           infinite: true,
           dots: false,
           arrows: false,

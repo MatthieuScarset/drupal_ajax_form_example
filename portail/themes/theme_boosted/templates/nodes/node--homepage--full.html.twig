@@ -139,49 +139,60 @@
 
             <table class="table hidden-xs">
                 <tr>
+                    {% set numberItems = 0 %}
+                    {% set columnSize = '12' %}
+                    {% set slickMode = 'slick-mode-none' %}
+                    {% for key, news in content.field_solution_banner_left_zone if key|first != '#'  %}
+                        {% set numberItems = numberItems + 1 %}
+                    {% endfor %}
+
                     <td class="left-zone">
                         <div class="title-solution-banner row">
-                            <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                            </div>
-                            <div class="col-md-10 no-padding title">{{ content.field_banner_left_zone_title }}</div>
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                    <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                </div>
+                                {% set columnSize = '10' %}
+                                {% set slickMode = 'slick-mode' %}
+                            {% endif %}
+                            <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_left_zone_title }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2"> </div>
-                            <div id="slick-left-zone" class="col-md-10 content no-padding slick-left-zone">
-                                <div class="row">
-                                    <div class="col-md-12 title-content">Cyberdefense 1</div>
-                                    <div class="col-md-12 text-content">1 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                    <div class="col-md-12 "><a class="btn btn-primary" role="button">Discover</a></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 title-content">Cyberdefense 2</div>
-                                    <div class="col-md-12 text-content">2 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                    <div class="col-md-12"><a class="btn btn-primary" role="button">Discover</a></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 title-content">Cyberdefense 3</div>
-                                    <div class="col-md-12 text-content">3 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                    <div class="col-md-12"><a class="btn btn-primary" role="button">Discover</a></div>
-                                </div>
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2"> </div>
+                            {% endif %}
+                            <div id="slick-left-zone" class="col-md-{{ columnSize }} content no-padding slick-left-zone {{ slickMode }}">
+                                {{ content.field_solution_banner_left_zone }}
                             </div>
                         </div>
                     </td>
+
+                    {% set numberItems = 0 %}
+                    {% set columnSize = '12' %}
+                    {% set slickModeRight = 'slick-mode-none' %}
+                    {% for key, news in content.field_solution_banner_right_zone if key|first != '#'  %}
+                       {% set numberItems = numberItems + 1 %}
+                    {% endfor %}
+
                     <td class="right-zone">
                         <div class="title-solution-banner row">
-                            <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                            </div>
-                            <div class="col-md-10 no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                    <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                </div>
+                                {% set columnSize = '10' %}
+                                {% set slickModeRight = 'slick-mode' %}
+                            {% endif %}
+                            <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2"> </div>
-                            <div id="slick-right-zone" class="col-md-10 no-padding content slick-right-zone">
-                                <div class="col-md-12 title-content">Egovernement</div>
-                                <div class="col-md-12 text-content">Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                <div class="col-md-12"><a href="#" class="btn btn-primary" role="button">Discover</a></div>
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2"> </div>
+                            {% endif %}
+                            <div id="slick-right-zone" class="col-md-{{ columnSize }} no-padding content slick-right-zone {{ slickModeRight }}">
+                                {{ content.field_solution_banner_right_zone }}
                             </div>
                         </div>
                     </td>
@@ -199,22 +210,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2"> </div>
-                        <div id="slick-left-zone" class="col-md-10 no-padding content slick-left-zone">
-                            <div class="row">
-                                <div class="col-md-12 no-padding title-content">Cyberdefense 1</div>
-                                <div class="col-md-12 no-padding text-content">1 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                <div class="col-md-12 no-padding"><a class="btn btn-primary" role="button">Discover</a></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 no-padding title-content">Cyberdefense 2</div>
-                                <div class="col-md-12 no-padding text-content">2 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                <div class="col-md-12 no-padding"><a class="btn btn-primary" role="button">Discover</a></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 no-padding title-content">Cyberdefense 3</div>
-                                <div class="col-md-12 no-padding text-content">3 - Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                                <div class="col-md-12 no-padding"><a class="btn btn-primary" role="button">Discover</a></div>
-                            </div>
+                        <div id="slick-left-zone" class="col-md-10 no-padding content slick-left-zone {{ slickMode }}">
+                            {{ content.field_solution_banner_left_zone }}
                         </div>
                     </div>
                 </div>
@@ -228,10 +225,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2"> </div>
-                        <div id="slick-right-zone" class="col-md-10 no-padding content slick-right-zone">
-                            <div class="col-md-12 no-padding title-content">Egovernement</div>
-                            <div class="col-md-12 no-padding text-content">Lorem ipsum dolor sit amet, bla bla lbal blal </div>
-                            <div class="col-md-12 no-padding"><a href="#" class="btn btn-primary" role="button">Discover</a></div>
+                        <div id="slick-right-zone" class="col-md-10 no-padding content slick-right-zone {{ slickModeRight }}">
+                            {{ content.field_solution_banner_right_zone }}
                         </div>
                     </div>
                 </div>
@@ -242,7 +237,7 @@
                 {{ content.field_expertise_title }}
             </div>
             <div class="tabpanel-expertise" role="tabpanel">
-                <button type="button" class="nav-tabs-dropdown btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Tabs <span class="caret"></span>
                 </button>
                 <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
@@ -323,17 +318,21 @@
         {% endif %}
     </div>
 </div>
-<div class="col-md-8  col-md-offset-2 corporate-infography-banner " style="display: none">
-    <div class="infography-container row text-center">
-        {% for key, infography in content.field_infography if key|first != '#'  %}
-        {% if key == 0 %}
-        <div class="col-md-2 col-md-offset-1 block-infography" >
-            {% else %}
-            <div class="col-md-2 block-infography" >
-                {% endif %}
-                {{ infography }}
+<div class="row infography-banner">
+    <div class="container">
+        <div class="col-md-8  col-md-offset-2 corporate-infography-banner ">
+            <div class="infography-container row text-center">
+                {% for key, infography in content.field_infography if key|first != '#'  %}
+                {% if key == 0 %}
+                <div class="col-md-2 col-md-offset-1 col-xs-12  block-infography" >
+                    {% else %}
+                    <div class="col-md-2 block-infography col-xs-12 " >
+                        {% endif %}
+                        {{ infography }}
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
