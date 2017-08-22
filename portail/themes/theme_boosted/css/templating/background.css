@@ -195,6 +195,10 @@
     padding-top: 2rem !important;
 }
 
+.product_modules h4 {
+    margin-top: 0;
+}
+
 p[class^='bg_'],
 p[class*='bg_']{
     margin: 0;
@@ -326,7 +330,7 @@ _:-ms-fullscreen, :root .banner-topzone-pwp .topzonebg { margin-top: 70px; }
 
 @media (max-width: 480px) {
     .product_modules.bg_white {
-        background-color: #ddd;
+       /* background-color: #ddd;*/
     }
     .product_partners .bg-partner .img {
         background-color: #fff;
