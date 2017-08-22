@@ -61,13 +61,12 @@ function theme_boosted_preprocess_page(&$variables) {
   if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
     $node = node_revision_load($revision);
   }
+	$variables['page']['containerClass'] = 'container';
   if (isset($node) && is_object($node)
   && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
-    if($content_type == 'homepage'){
-			$variables['containerClass'] = 'container-fluid';
-		}else{
-			$variables['containerClass'] = 'container';
+    if($content_type == 'homepage' || $content_type == 'homepage_eclairage'){
+			$variables['page']['containerClass'] = 'container-fluid';
 		}
     $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
