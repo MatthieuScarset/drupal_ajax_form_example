@@ -2,6 +2,14 @@
 
 use Drupal\locale\SourceString;
 
+// vue des subhomes
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('views.view.subhomes');
+$config_group->setData(
+
+);
+$config_group->save(TRUE);
+
 // traductions
 $translations = array(
     array("source" => "Solution", "translation" => array("fr" => "Solution")),
