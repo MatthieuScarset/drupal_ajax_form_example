@@ -59,6 +59,7 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
     {% endif %}
     {% if exposed %}
         <div class="view-filters form-group">
+            <div id="ancre-back-to-filter"></div>
             {{ exposed }}
         </div>
     {% endif %}
@@ -99,4 +100,10 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
             {{ feed_icons }}
         </div>
     {% endif %}
+</div>
+
+<div id="arrow-back-to-filter" class="hidden">
+    <a id="link-back-to-filter" href="#ancre-back-to-filter">
+        <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+    </a>
 </div>
