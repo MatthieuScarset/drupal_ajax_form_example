@@ -180,3 +180,10 @@ function oab_tristan_update_8021() {
 function oab_tristan_update_8022() {
   include_once("updates/update_8022.inc");
 }
+
+/**
+ * Ajout du bloc Mediatheque
+ */
+function oab_tristan_update_8023() {
+  include_once("updates/update_8023.inc");
+}
