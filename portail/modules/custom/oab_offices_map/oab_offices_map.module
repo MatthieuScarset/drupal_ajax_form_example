@@ -6,7 +6,8 @@ function oab_offices_map_theme(){
 		'variables' => array(
 			'mapBlock' => array(),
 			'officesListBlock' => array(),
-			'regionsCountriesForm' => array()
+			'regionsCountriesForm' => array(),
+			'labelList' => array(),
 		),
 		'template' => 'offices-map--page'
 	);

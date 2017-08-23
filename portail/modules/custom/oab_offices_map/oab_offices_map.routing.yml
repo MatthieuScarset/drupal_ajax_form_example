@@ -3,6 +3,6 @@ oab_offices_map.page:
   path: '/offices'
   defaults:
     _controller: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::viewPage'
-    _title: 'Offices map'
+    _title_callback: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::getPageTitle'
   requirements:
     _access: 'TRUE'
