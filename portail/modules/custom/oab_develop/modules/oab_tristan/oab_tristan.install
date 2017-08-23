@@ -187,3 +187,11 @@ function oab_tristan_update_8022() {
 function oab_tristan_update_8023() {
   include_once("updates/update_8023.inc");
 }
+
+/**
+ * Mise à jour du field "field_related_display_view" pour tous les termes de la taxo Subhome
+ * afin de faire fonctionner le fil d'Arianne
+ */
+function oab_tristan_update_8024() {
+  include_once("updates/update_8024.inc");
+}
