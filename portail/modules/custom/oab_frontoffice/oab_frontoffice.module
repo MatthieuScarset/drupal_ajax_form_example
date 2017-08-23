@@ -281,11 +281,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Market segment'
     );
     $form['field_market_target_id']['#options'] = $markets;
-    // en fr on n affiche pas les segments
-      $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    if($current_language != 'en'){
-        unset($form['field_market_target_id']);
-    }
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
