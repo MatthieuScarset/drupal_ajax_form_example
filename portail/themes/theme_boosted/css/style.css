@@ -390,3 +390,7 @@ article .content .field--type-text-long ul li:before{
     height: 5rem;
     margin-right: .5rem;
 }
+
+.block-mediatheque .rebond-link {
+    margin-top: 10px;
+}

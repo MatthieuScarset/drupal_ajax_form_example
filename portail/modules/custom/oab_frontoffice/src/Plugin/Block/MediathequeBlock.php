@@ -24,31 +24,14 @@ use Drupal\image\Entity\ImageStyle;
 class MediathequeBlock extends BlockBase {
 
   public function build(){
-    $block = array();
-    // récupération du contexte
-    /*$node_ctxt = $this->getContextValue('node');
-    $nid_fld = $node_ctxt->nid->getValue();
-    $nid = $nid_fld[0]['value'];
-    // chargement du noeud et de la valeur top zone
-    $node = Node::load($nid);
-    if ($node->hasField('field_local_nav')) {
-      $localnav = $node->get('field_local_nav')->getValue();
-    }
 
-    $block['type'] = 'processed_text';
-    $block['#markup'] = '';
-    $content = '';
-    if(isset($localnav[0]['value'])){
-      $content = check_markup($localnav[0]['value'], 'full_html', '', FALSE);
-    }
-    $block = $content;*/
-
-    //return $block;
-
+    /*
+     * J'ai enlevé les trad car s'affiche seulement sur des contenus FR pour l'instant
+     */
     return array(
-      'text' => t('Vous êtes à la recherche d\'images ou de vidéos pour illustrer vos supports de communication ?'),
-      'link'  => t('https://mediatheque.orange.com/en/mediacenter'),
-      'link_text' => t("Lorem")
+      'text' => 'Vous êtes à la recherche d\'images ou de vidéos pour illustrer vos supports de communication ?',
+      'link'  => 'https://mediatheque.orange.com/fr/mediacenter',
+      'link_text' => "En savoir plus"
     );
   }
 
