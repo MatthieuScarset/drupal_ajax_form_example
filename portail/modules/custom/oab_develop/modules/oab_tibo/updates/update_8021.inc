@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\locale\SourceString;
+use Symfony\Component\Yaml\Yaml;
 
 // traductions
 $translations = array(
