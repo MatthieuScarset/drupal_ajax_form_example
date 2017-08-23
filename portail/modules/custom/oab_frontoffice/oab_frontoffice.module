@@ -181,41 +181,52 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
     $themes = clean_exposed_filters_by_language(
       $form['field_blog_thematic_target_id']['#options'],
-      'By thematic'
+      'Thematic'
     );
     $form['field_blog_thematic_target_id']['#options'] = $themes;
   }
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
     $themes = clean_exposed_filters_by_language(
-      $form['field_blog_thematic_target_id']['#options'],
-      'By thematic'
+      $form['field_magazine_thematic_target_id']['#options'],
+      'Thematic'
     );
-    $form['field_blog_thematic_target_id']['#options'] = $themes;
+    $form['field_magazine_thematic_target_id']['#options'] = $themes;
+      $years = clean_exposed_filters_by_language(
+          $form['field_year_target_id']['#options'],
+          'Year'
+      );
+      $form['field_year_target_id']['#options'] = $years;
+
+      $months = clean_exposed_filters_by_language(
+          $form['field_month_target_id']['#options'],
+          'Month'
+      );
+      $form['field_month_target_id']['#options'] = $months;
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
     $themes = clean_exposed_filters_by_language(
       $form['field_blog_thematic_target_id']['#options'],
-      'By thematic'
+      'Thematic'
     );
     $form['field_blog_thematic_target_id']['#options'] = $themes;
 
     $types = clean_exposed_filters_by_language(
       $form['field_document_type_target_id']['#options'],
-      'By type'
+      'Type'
     );
     $form['field_document_type_target_id']['#options'] = $types;
 
     $jobs = clean_exposed_filters_by_language(
       $form['field_jobs_target_id']['#options'],
-      'By job profile'
+      'Profession'
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
 
     $industries = clean_exposed_filters_by_language(
       $form['field_industry_target_id']['#options'],
-      'By industry'
+      'Industry'
     );
     $form['field_industry_target_id']['#options'] = $industries;
   }
@@ -223,25 +234,25 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
     $targets = clean_exposed_filters_by_language(
       $form['field_type_target_id']['#options'],
-      'By type'
+      'Type'
     );
     $form['field_type_target_id']['#options'] = $targets;
 
     $solutions = clean_exposed_filters_by_language(
       $form['field_solution_target_id']['#options'],
-      'By solution'
+      'Solution'
     );
     $form['field_solution_target_id']['#options'] = $solutions;
 
     $years = clean_exposed_filters_by_language(
       $form['field_year_target_id']['#options'],
-      'By year'
+      'Year'
     );
     $form['field_year_target_id']['#options'] = $years;
 
     $months = clean_exposed_filters_by_language(
       $form['field_month_target_id']['#options'],
-      'By month'
+      'Month'
     );
     $form['field_month_target_id']['#options'] = $months;
   }
@@ -249,25 +260,25 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
     $solutions = clean_exposed_filters_by_language(
       $form['field_solution_target_id']['#options'],
-      'By solution'
+      'Solution'
     );
     $form['field_solution_target_id']['#options'] = $solutions;
 
     $industries = clean_exposed_filters_by_language(
       $form['field_industry_target_id']['#options'],
-      'By industry'
+      'Industry'
     );
     $form['field_industry_target_id']['#options'] = $industries;
 
     $jobs = clean_exposed_filters_by_language(
       $form['field_jobs_target_id']['#options'],
-      'By job profile'
+      'Profession'
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
 
     $markets = clean_exposed_filters_by_language(
       $form['field_market_target_id']['#options'],
-      'By market segment'
+      'Market segment'
     );
     $form['field_market_target_id']['#options'] = $markets;
   }
@@ -275,19 +286,19 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
     $solutions = clean_exposed_filters_by_language(
       $form['field_solution_target_id']['#options'],
-      'By solution'
+      'Solution'
     );
     $form['field_solution_target_id']['#options'] = $solutions;
 
     $industries = clean_exposed_filters_by_language(
       $form['field_industry_target_id']['#options'],
-      'By industry'
+      'Industry'
     );
     $form['field_industry_target_id']['#options'] = $industries;
 
     $jobs = clean_exposed_filters_by_language(
       $form['field_jobs_target_id']['#options'],
-      'By job profile'
+      'Profession'
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
   }
@@ -295,19 +306,19 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
     $solutions = clean_exposed_filters_by_language(
       $form['field_solution_target_id']['#options'],
-      'By solution'
+      'Solution'
     );
     $form['field_solution_target_id']['#options'] = $solutions;
 
     $types = clean_exposed_filters_by_language(
       $form['field_types_target_id']['#options'],
-      'By type'
+      'Category'
     );
     $form['field_types_target_id']['#options'] = $types;
 
     $regions = clean_exposed_filters_by_language(
       $form['field_regions_target_id']['#options'],
-      'By region'
+      'Geography'
     );
     $form['field_regions_target_id']['#options'] = $regions;
   }
