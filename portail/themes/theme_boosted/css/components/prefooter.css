@@ -21,6 +21,10 @@
     border-right: 1px solid black;
 }
 
+#slider_direct_access .item-direct-access:last-child .border-right {
+    border-right: none;
+}
+
 @media (min-width: 1200px) {
     /* line 22, ../sass/global.sass */
     .bs-slide-lg {
