@@ -277,11 +277,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
 
-    $markets = clean_exposed_filters_by_language(
-      $form['field_market_target_id']['#options'],
-      'Market segment'
-    );
-    $form['field_market_target_id']['#options'] = $markets;
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
