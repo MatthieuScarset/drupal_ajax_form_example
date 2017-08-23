@@ -317,6 +317,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Geography'
     );
     $form['field_regions_target_id']['#options'] = $regions;
+
+      $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      if($current_language != 'en'){
+          unset($form['field_regions_target_id']);
+      }
   }
 }
 
