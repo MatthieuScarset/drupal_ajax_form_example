@@ -259,13 +259,13 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 
-.rebond article {
+.rebond article, .block-mediatheque {
     padding: 3rem 2rem;
     margin-bottom: 2rem;
 }
 
 @media (max-width: 767px) {
-    .rebond article {
+    .rebond article, .block-mediatheque {
         padding: 3rem 1rem;
     }
 }
@@ -318,7 +318,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-left: 0;
 }
 
-.rebond-link {
+.rebond-link, .block-link {
     border: 2px solid #000000;
     padding-right: 3rem;
     padding-left: 3rem;
@@ -388,6 +388,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 }
 
+
 .div-display-table {
     display: table;
 
@@ -442,10 +443,36 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 #arrow-back-to-filter a .glyphicon {
-    color : #FFFFFF;
+    color: #FFFFFF;
     font-size: 3rem;
     text-align: center;
     position: relative;
     top: 0px;
     left: 1px;
+}
+
+.block-mediatheque {
+   background-color: #DDDDDD;
+}
+
+.block-mediatheque p {
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 2rem;
+    color: #000000;
+}
+
+.block-mediatheque .block-title {
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.block-mediatheque .block-title img {
+    vertical-align: bottom;
+    height: 5rem;
+    margin-right: .5rem;
+}
+
+.block-mediatheque .rebond-link {
+    margin-top: 10px;
 }

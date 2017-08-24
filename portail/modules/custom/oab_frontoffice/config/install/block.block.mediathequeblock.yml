@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: mediathequeblock
+theme: theme_boosted
+region: sidebar
+weight: -16
+provider: null
+plugin: null
+settings:
+  id: mediatheque_block
+  label: 'Mediatheque Block'
+  provider: oab_frontoffice
+  label_display: '0'
