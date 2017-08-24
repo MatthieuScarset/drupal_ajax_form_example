@@ -4,6 +4,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
 use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Database\Database;
 
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -38,6 +39,38 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$edit_form = true;
 	}
+
+    // on checke les langues auxquelles l utilisateur a droit
+    if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
+        $user = \Drupal::currentUser();
+        $userId = $user->id();
+        if(!in_array('administrator', $user->getRoles())) {
+            $node = \Drupal::routeMatch()->getParameter('node');
+            $node_language = $node->language();
+            $node_langcode = $node_language->getId();
+            $connection = Database::getConnection();
+            $sth = $connection->select('user__field_access_language', 'f')
+                ->fields('f', array('field_access_language_target_id'))
+                ->condition('f.entity_id', $userId, '=');
+            $data = $sth->execute();
+            $results = $data->fetchAll(\PDO::FETCH_OBJ);
+            $canEdit = false;
+            if (count($results) != 0) {
+                foreach ($results as $r) {
+                    if ($r->field_access_language_target_id == $node_langcode) {
+                        $canEdit = true;
+                        break;
+                    }
+                }
+            }
+            if ($canEdit !== true) {
+                drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
+                $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
+                $response->send();
+                exit();
+            }
+        }
+    }
 
 	// gestion de la taxonomie
 	// affichage de la langue
@@ -255,7 +288,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 
 }
-
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
 	$values = $form_state->getValues();

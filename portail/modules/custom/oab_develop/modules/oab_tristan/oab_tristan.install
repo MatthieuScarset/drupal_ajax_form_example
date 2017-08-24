@@ -148,3 +148,50 @@ function oab_tristan_update_8017() {
 function oab_tristan_update_8018() {
   include_once("updates/update_8018.inc");
 }
+
+/**
+ * Ajout de la traduction Fr des mois
+ */
+function oab_tristan_update_8019() {
+  include_once("updates/update_8019.inc");
+}
+
+/**
+ * Mise à jour du display subhome de la subhome Offres (Produits, Catalogue et les 2 autres termes)
+ * pour ajouter l'ornemtal visuel et la solution en actif afin qu'ils puissent être visibles par le template
+ */
+function oab_tristan_update_8020() {
+  include_once("updates/update_8020.inc");
+}
+
+
+/**
+ * Remise en place du filtre "Theme" dans la subhome Magazine pour correspondre avec
+ * le field dans le formulaire
+ */
+function oab_tristan_update_8021() {
+  include_once("updates/update_8021.inc");
+}
+
+
+/**
+ * Ajout des filtres sur la date et l'année à la subhome Magazine
+ */
+function oab_tristan_update_8022() {
+  include_once("updates/update_8022.inc");
+}
+
+/**
+ * Ajout du bloc Mediatheque
+ */
+function oab_tristan_update_8023() {
+  include_once("updates/update_8023.inc");
+}
+
+/**
+ * Mise à jour du field "field_related_display_view" pour tous les termes de la taxo Subhome
+ * afin de faire fonctionner le fil d'Arianne
+ */
+function oab_tristan_update_8024() {
+  include_once("updates/update_8024.inc");
+}
