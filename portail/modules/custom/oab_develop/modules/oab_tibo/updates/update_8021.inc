@@ -1,14 +1,7 @@
 <?php
 
 use Drupal\locale\SourceString;
-
-// vue des subhomes
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('views.view.subhomes');
-$config_group->setData(
-
-);
-$config_group->save(TRUE);
+use Symfony\Component\Yaml\Yaml;
 
 // traductions
 $translations = array(
@@ -45,4 +38,10 @@ foreach ($translations AS $translation) {
         ))->save();
     }
 }
+
+// import view subhomes
+$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/views/views.view.subhomes.yml';
+$data = Yaml::parse($config_path);
+\Drupal::configFactory()->getEditable('views.view.subhomes')->setData($data)->save(TRUE);
+
 //throw new \Drupal\Core\Utility\UpdateException();
