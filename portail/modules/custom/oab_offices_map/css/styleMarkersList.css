@@ -22,7 +22,7 @@ li.office-address{
 }
 li.office-address:hover,
 li.office-address.selected{
-    background: rgba(0, 0, 0, 0) url("../images/marker-obs-hover.png") no-repeat scroll 15px 30px;
+    background: #f2f2f2 url("../images/marker-obs-hover.png") no-repeat scroll 15px 30px;
 
 }
 

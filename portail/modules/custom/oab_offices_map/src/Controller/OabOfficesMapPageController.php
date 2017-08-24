@@ -25,6 +25,7 @@ class OabOfficesMapPageController extends ControllerBase {
 	}
 
 	public function viewPage(Request $request) {
+
 		//paramètres :
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
 		$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
@@ -44,7 +45,7 @@ class OabOfficesMapPageController extends ControllerBase {
 		$officesMapView->execute();
 		$officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
 
-		$regionsCountriesForm = \Drupal::formBuilder()->getForm('Drupal\oab_offices_map\Form\OabOfficesMapRegionsCountriesForm');
+		$regionsCountriesForm = \Drupal::formBuilder()->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
 
 		$listLabel = t('All offices');
 		if($region_id != 'all'){

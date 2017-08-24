@@ -1,6 +1,6 @@
 #page du flux xml
 oab_offices_map.page:
-  path: '/offices'
+  path: '/contacts'
   defaults:
     _controller: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::viewPage'
     _title_callback: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::getPageTitle'

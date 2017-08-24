@@ -13,7 +13,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
-class OabOfficesMapRegionsCountriesForm extends FormBase {
+class MapRegionsCountriesForm extends FormBase {
 	/**
 	 * {@inheritdoc}
 	 */
@@ -30,7 +30,6 @@ class OabOfficesMapRegionsCountriesForm extends FormBase {
 		$selectedRegion = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 		$selectedCountry = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 
-		$form['#method'] = 'get';
 		$regions = $this->getRegions();
 		$countries = $this->getCountries();
 		$form['region_label'] = array(
@@ -55,12 +54,10 @@ class OabOfficesMapRegionsCountriesForm extends FormBase {
 			'#default_value' => $selectedCountry,
 			'#attributes' => array('class' => array('select-countries')),
 		];
-
 		$form['submit'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Apply'),
-			// Prevent op from showing up in the query string.
-			'#name' => '',
+			'#name' => $this->t('Apply'),
 		];
 		return $form;
 	}
@@ -108,19 +105,16 @@ class OabOfficesMapRegionsCountriesForm extends FormBase {
 		return $table_regions;
 	}
 
-
-
 	/**
 	 * {@inheritdoc}
 	 */
 	public function submitForm(array &$form, FormStateInterface $form_state){
-		/*$current_route = \Drupal::routeMatch()->getRouteName();
+		$current_route = \Drupal::routeMatch()->getRouteName();
 		$input = &$form_state->getUserInput();
 		$option = [
 			'query' => array('region' => $input["region"], 'country' => $input["country"]),
 		];
 		$url = Url::fromRoute($current_route, array(), $option);
 		$form_state->setRedirectUrl($url);
-		*/
 	}
 }

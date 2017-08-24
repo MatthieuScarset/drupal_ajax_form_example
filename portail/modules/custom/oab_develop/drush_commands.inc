@@ -15,5 +15,6 @@ pm-enable -y oab_tristan
 pm-enable -y entity_reference_revisions
 pm-enable -y paragraphs
 pm-enable -y geolocation
+pm-enable -y oab_offices_map
 updatedb
 #entity-updates
