@@ -203,3 +203,10 @@ function oab_tristan_update_8024() {
 function oab_tristan_update_8025() {
   include_once("updates/update_8025.inc");
 }
+
+/**
+ * Ajout des trad RU des mois
+ */
+function oab_tristan_update_8026() {
+  include_once("updates/update_8026.inc");
+}
