@@ -195,3 +195,11 @@ function oab_tristan_update_8023() {
 function oab_tristan_update_8024() {
   include_once("updates/update_8024.inc");
 }
+
+/**
+ * Modification du form_display de Pays : Replacement de top zone et top zone background
+ * & rajout de la taxo Région dans l'onglet Classify (les termes ne s'affichaient pas)
+ */
+function oab_tristan_update_8025() {
+  include_once("updates/update_8025.inc");
+}
