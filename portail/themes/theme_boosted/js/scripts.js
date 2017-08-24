@@ -100,15 +100,18 @@
     var scroll = $(window ).scrollTop();
     var win = scroll + getHeaderBarHeight();  //Je l'ajouter à la hauteur Sticky
 
-    //je recupère la distance de mon element par rapport au haut de la fenetre
-    var elem=$("#ancre-back-to-filter").offset().top;
+    //Je ne le fait que dans les pages ou l'ancre existe
+    if ($("#ancre-back-to-filter").length) {
+      //je recupère la distance de mon element par rapport au haut de la fenetre
+      var elem = $("#ancre-back-to-filter").offset().top;
 
-    //Si scroll+Sticky > distanceElement (cad l'element est caché)
-    //alors j'affiche la flèche
-    if (win>elem) {
-      $("#arrow-back-to-filter").removeClass("hidden");
-    } else {
-      $("#arrow-back-to-filter").addClass("hidden");
+      //Si scroll+Sticky > distanceElement (cad l'element est caché)
+      //alors j'affiche la flèche
+      if (win > elem) {
+        $("#arrow-back-to-filter").removeClass("hidden");
+      } else {
+        $("#arrow-back-to-filter").addClass("hidden");
+      }
     }
   }
 
