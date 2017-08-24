@@ -16,5 +16,6 @@ pm-enable -y entity_reference_revisions
 pm-enable -y paragraphs
 pm-enable -y geolocation
 pm-enable -y oab_password_policy_alter
+pm-enable -y oab_offices_map
 updatedb
 #entity-updates

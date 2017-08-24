@@ -1,0 +1,84 @@
+
+.gmap-popup h2 {
+    padding: 9px 15px;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    color: #FFFFFF !important;
+    background-color: #ff6801;
+    background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fe8432), color-stop(100%, #ff6801));
+    background: -webkit-linear-gradient(#fe8432, #ff6801);
+    background: -moz-linear-gradient(#fe8432, #ff6801);
+    background: -o-linear-gradient(#fe8432, #ff6801);
+    background: -ms-linear-gradient(#fe8432, #ff6801);
+    background: linear-gradient(#fe8432, #ff6801);
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -o-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    -khtml-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    margin : 0;
+}
+.infoBox {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: -7px;
+}
+.gmap-popup .close {
+    position: relative;
+    top: 8px;
+    right: 4px;
+    height: 19px;
+    width: 18px;
+    text-indent: -9999px;
+}
+
+.gmap-popup .location-content
+{
+    background-color: #fff;
+    padding: 10px 15px 10px 15px;
+    color: #666666;
+
+}
+.gmap-popup .fleche {
+    background: url('../images/infowindow-macro-bottom.png') bottom left no-repeat;
+    width: 215px;
+    height: 20px;
+    position: absolute;
+}
+.gmap-popup .location-content .views-field-field-region{
+    margin-top: 10px;
+}
+
+
+.gmap-popup .location-content .views-field-field-region a
+{
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333333;
+
+}
+.gmap-popup .location-content .views-field-field-region a:hover,
+.gmap-popup .location-content .views-field-field-region a:active,
+.gmap-popup .location-content .views-field-field-region a:focus{
+    color: #ff7900;
+    text-decoration: underline;
+}
+.gmap-popup .location-content .views-field-field-region span.icon-more {
+    position: absolute;
+    border: none;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    float: left;
+    background-color: transparent;
+    background-image: url('../images/fleche-more.png');
+    background-repeat: no-repeat;
+    font-size: 1px;
+    line-height: 1px;
+    vertical-align: middle;
+}
