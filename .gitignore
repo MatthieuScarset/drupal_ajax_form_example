@@ -1,4 +1,4 @@
-.buildpath
+drupal.buildpath
 .settings
 .project
 nbproject/
@@ -8,3 +8,7 @@ files_media_d7_20170602/
 .metadata/
 dump_bdd/
 files_D7/
+/portail/console/
+/portail/vendor/
+/portail/composer.json
+/portail/composer.lock
