@@ -582,28 +582,34 @@ a.home_banner_element_mobile_link {
         padding: 0;
         margin: 0;
     }
+
     .home_eclairage_banner {
         padding-bottom: 0;
     }
+
     .home_columns_section {
 
         padding: 80px 0px 30px 0px;
     }
-    .home_column{
+
+    .home_column {
         padding-left: 10px;
         padding-right: 10px;
         padding-bottom: 50px;
     }
 
     .home_column_title {
-        padding-left:0px;
+        padding-left: 0px;
     }
+
     .home_column_element {
         padding: 0px 0 10px 0;
     }
+
     .home_column_element_title {
         padding-left: 15px;
     }
+
     .home_column_element_nameFunction {
         padding-left: 15px;
     }
@@ -648,8 +654,27 @@ a.home_banner_element_mobile_link {
         padding-left: 50px;
     }
 
-}
+    .home_banner_no_padding {
+        padding: 20px;
+    }
 
+    .home_thematic_automatic_title {
+        font-size: 2rem !important;
+        font-weight: bold !important;
+
+    }
+
+    #filterbar {
+        padding: 20px 0px 20px 0px !important;
+        font-size: 1.6rem !important;
+        font-weight: bold !important;
+    }
+
+    .page_thematique_filter_display #edit-actions {
+        padding-bottom: 40px;
+        padding-top: 15px;
+    }
+}
 
 /* HOME PLAYLIST */
 
@@ -767,6 +792,13 @@ a.home_banner_element_mobile_link {
 }
 
 /* PAGE THEMATIQUE BANNER */
+
+.page-node-type-hp-eclairage-thematique section.left-column > .region, aside.right-column > .region {
+    background-color: white;
+    padding-right: 0rem;
+    padding-left: 0rem;
+}
+
 .home_thematic_navigationZone {
     height: 80px;
     padding-left: 50px;
@@ -929,6 +961,7 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element .views-field-field-visual {
     padding-bottom: 30px;
+    margin-top: -20px;
 }
 
 .valorisation-element .views-field-title {
@@ -943,6 +976,10 @@ a.home_banner_element_mobile_link {
 }
 
 .valorisation-element .views-field-field-profile {
+    font-size: 1.4rem;
+    padding-left:30px;
+}
+.valorisation-element .views-field-field-job-profile {
     font-size: 1.4rem;
     padding-left:30px;
 }
@@ -970,7 +1007,7 @@ a.home_banner_element_mobile_link {
     padding-top: 6px;
     margin-left: 15px;
     z-index: 3;
-    top: -120px;
+    top: 60px;
     position: absolute;
 }
 #page_thematique_filter {
@@ -991,9 +1028,21 @@ a.home_banner_element_mobile_link {
 }
 
 
+
+.home_thematic_automatic {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
 .home_thematic_automatic_title {
-    max-width: 1320px;
-    margin-right: auto;
-    margin-left: auto;
-    float: left;
+    font-size: 2.4rem;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+#filterbar {
+    padding: 20px 0px 20px 0px;
+    font-size: 2rem;
+    font-weight: bold;
 }
