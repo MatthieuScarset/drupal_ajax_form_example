@@ -40,34 +40,37 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		$edit_form = true;
 	}
 
-    // on checke les langues auxquelles l utilisateur a droit
-    if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
-        $userId = \Drupal::currentUser()->id();
-        $node = \Drupal::routeMatch()->getParameter('node');
-        $node_language = $node->language();
-        $node_langcode = $node_language->getId();
-        $connection = Database::getConnection();
-        $sth = $connection->select('user__field_access_language', 'f')
-            ->fields('f', array('field_access_language_target_id'))
-            ->condition('f.entity_id', $userId, '=');
-        $data = $sth->execute();
-        $results = $data->fetchAll(\PDO::FETCH_OBJ);
-        $canEdit = false;
-        if(count($results) != 0){
-            foreach ($results as $r){
-                if($r->field_access_language_target_id == $node_langcode){
-                    $canEdit = true;
-                    break;
-                }
-            }
-        }
-        if($canEdit !== true){
-            drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
-            $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
-            $response->send();
-            exit();
-        }
-    }
+	// on checke les langues auxquelles l utilisateur a droit
+	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
+		$user = \Drupal::currentUser();
+		$userId = $user->id();
+		if(!in_array('administrator', $user->getRoles())) {
+			$node = \Drupal::routeMatch()->getParameter('node');
+			$node_language = $node->language();
+			$node_langcode = $node_language->getId();
+			$connection = Database::getConnection();
+			$sth = $connection->select('user__field_access_language', 'f')
+				->fields('f', array('field_access_language_target_id'))
+				->condition('f.entity_id', $userId, '=');
+			$data = $sth->execute();
+			$results = $data->fetchAll(\PDO::FETCH_OBJ);
+			$canEdit = false;
+			if (count($results) != 0) {
+				foreach ($results as $r) {
+					if ($r->field_access_language_target_id == $node_langcode) {
+						$canEdit = true;
+						break;
+					}
+				}
+			}
+			if ($canEdit !== true) {
+				drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
+				$response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
+				$response->send();
+				exit();
+			}
+		}
+	}
 
 	// gestion de la taxonomie
 	// affichage de la langue
@@ -94,8 +97,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 			foreach ($form['terms'] AS $key => $value){
 				if (preg_match('@^tid:@', $key)){
 					if (isset($form['terms'][$key]['term']['#title'])
-					    && isset($form['terms'][$key]['#term'])
-					    && is_object($form['terms'][$key]['#term'])){
+						&& isset($form['terms'][$key]['#term'])
+						&& is_object($form['terms'][$key]['#term'])){
 						$term_language = $form['terms'][$key]['#term']->language()->getId();
 						$form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
 					}
@@ -112,11 +115,11 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	}
 
 	if ($form_id == 'node_profile_form'
-	    || $form_id == 'node_profile_edit_form'){
+		|| $form_id == 'node_profile_edit_form'){
 		$form['field_social_accounts']['#cardinality_multiple'] = false;
 
 		if (isset($form['field_social_accounts']['widget'])
-		    && is_array($form['field_social_accounts']['widget'])){
+			&& is_array($form['field_social_accounts']['widget'])){
 			$form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
 
 			foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
@@ -164,7 +167,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 		// positionnement des champs dates
 		if (isset($form['field_start_date'])
-		    && isset($form['field_end_date'])
+			&& isset($form['field_end_date'])
 		) {
 			$form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
 			$form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
@@ -226,9 +229,9 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	*/
 
 	if ($form_id == 'user_register_form'
-	    || $form_id == 'user_form'){
+		|| $form_id == 'user_form'){
 		if (isset($form['account']['roles']['#options'])
-		    && is_array($form['account']['roles']['#options'])){
+			&& is_array($form['account']['roles']['#options'])){
 			$roles_option = $form['account']['roles']['#options'];
 			foreach($roles_option AS $key => $value){
 				if ($key != 'authenticated') {
@@ -293,17 +296,17 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
 	$link_classtag = array();
 
 	if (isset($values['link_target'])
-	    && !empty($values['link_target'])) {
+		&& !empty($values['link_target'])) {
 		$link_target = trim($values['link_target']);
 	}
 
 	if (isset($values['link_icon'])
-	    && !empty($values['link_icon'])) {
+		&& !empty($values['link_icon'])) {
 		$link_icon = trim($values['link_icon']);
 	}
 
 	if (isset($values['link_classtag'])
-	    && !empty($values['link_classtag'])) {
+		&& !empty($values['link_classtag'])) {
 		$link_classtag = trim($values['link_classtag']);
 	}
 

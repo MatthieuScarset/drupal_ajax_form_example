@@ -48,6 +48,9 @@ $config_group->setData(
 		'display_submitted' => false,
 	)
 );
+$config_group->save(TRUE);
+
+
 
 // image style homepage_expertise
 $config_factory = \Drupal::configFactory();
@@ -78,6 +81,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // image style homepage_news
 $config_factory = \Drupal::configFactory();
@@ -108,6 +112,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // image style homepage_solution_banner
 $config_factory = \Drupal::configFactory();
@@ -138,6 +143,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // image style homepage_top_zone
 $config_factory = \Drupal::configFactory();
@@ -168,6 +174,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // image style partner
 $config_factory = \Drupal::configFactory();
@@ -198,39 +205,43 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 
 // ------------------------------
 // Menu
 // ------------------------------
 
+
+if (\Drupal\system\Entity\Menu::load('our-regional-presence') == null) {
 // Menu Corporate
-\Drupal::entityTypeManager()
-	->getStorage('menu')
-	->create([
-		'id' => 'our-regional-presence',
-		'label' => 'Our Regional presence',
-		'description' => '',
-	])
-	->save();
-
-$items = array(
-	'239' => 'North America',
-	'235' => 'Asia Pacific',
-	'521' => 'Middle East & Africa',
-	'236' => 'Europe',
-	'237' => 'Latine America',
-);
-
-foreach($items as $nid => $title) {
-	$menu_link = MenuLinkContent::create([
-		'title' => $title,
-		'link' => ['uri' => 'internal://taxonomy/term/	' . $nid],
-		'menu_name' => 'our-regional-presence',
-		'expanded' => TRUE,
-	]);
-	$menu_link->save();
+	\Drupal::entityTypeManager()
+		->getStorage('menu')
+		->create([
+			'id' => 'our-regional-presence',
+			'label' => 'Our Regional presence',
+			'description' => '',
+		])
+		->save();
 }
+	$items = array(
+		'239' => 'North America',
+		'235' => 'Asia Pacific',
+		'521' => 'Middle East & Africa',
+		'236' => 'Europe',
+		'237' => 'Latine America',
+	);
+
+	foreach($items as $nid => $title) {
+		$menu_link = MenuLinkContent::create([
+			'title' => $title,
+			'link' => ['uri' => 'internal://taxonomy/term/	' . $nid],
+			'menu_name' => 'our-regional-presence',
+			'expanded' => TRUE,
+		]);
+		$menu_link->save();
+	}
+
 
 // ------------------------------
 // Paragraphs
@@ -254,6 +265,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // Paragraphs homepage_banner_item
 $config_factory = \Drupal::configFactory();
@@ -273,6 +285,7 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
 
 // Paragraphs homepage_news
 $config_factory = \Drupal::configFactory();
@@ -292,6 +305,9 @@ $config_group->setData(
 			),
 	)
 );
+$config_group->save(TRUE);
+
+
 
 //-------------------------------------------------
 // FIELDS
@@ -503,7 +519,7 @@ createField('field_partner_button_link', 'homepage', 'Button link', 'link', fals
 	]);
 createField('field_partner_title', 'homepage', 'Title', 'string');
 createField('field_solution_banner_highlight', 'homepage', 'Highlight', 'text_long');
-createField('.field_solution_banner_image', 'homepage', 'Image', 'image', false, 'node',
+createField('field_solution_banner_image', 'homepage', 'Image', 'image', false, 'node',
 	['settings' =>
 		array (
 			'file_directory' => '[date:custom:Y]-[date:custom:m]',
@@ -918,6 +934,8 @@ $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entit
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('node.homepage.full')->setData($data)->save(TRUE);
 
+
+
 // ---------------------------
 // Form Display
 // ---------------------------
@@ -950,3 +968,4 @@ $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/views/view
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('views.view.homepage_partner')->setData($data)->save(TRUE);
 
+drupal_set_message("Update done");
