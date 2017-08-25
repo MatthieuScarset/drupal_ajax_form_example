@@ -33,6 +33,8 @@ function oab_amel_update_dependencies() {
     $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004 );
     $dependencies['oab_amel'][8023] = array('oab_christophe' => 8027, 'oab_yassine' => 8014 );
     $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
+    $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
+    $dependencies['oab_amel'][8025] = array('oab_christophe' => 8032);
     return $dependencies;
 }
 
@@ -222,3 +224,18 @@ function oab_amel_update_8023() {
 function oab_amel_update_8024() {
     include_once("updates/update_8024.inc");
 }
+
+/**
+ *  JIRA 2914 : menu, view, medias
+ */
+function oab_amel_update_8025() {
+    include_once("updates/update_8025.inc");
+}
+
+/**
+ *  JIRA 2914 : paragraphs, fields, nodes, views
+ */
+function oab_amel_update_8026() {
+    include_once("updates/update_8026.inc");
+}
+
