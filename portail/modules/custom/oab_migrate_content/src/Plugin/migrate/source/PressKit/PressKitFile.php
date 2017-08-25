@@ -59,6 +59,7 @@ class PressKitFile extends SqlBase {
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->distinct(TRUE)
     ->condition('n.type', 'press_kit');
+		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
     return $query;
   }

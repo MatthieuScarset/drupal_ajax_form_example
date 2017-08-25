@@ -37,16 +37,11 @@ class BlogPostMedia extends SqlBase {
     $query->fields('m', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
-    //$query->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
-    //$query->condition('f.fid', 1757)
-		//$query->condition('n.nid', array(11430, 11429, 1449), 'IN');
     $query->condition('n.type', 'blog_post');
-		//$query->condition('n.nid', array(1887,12968), 'IN');
-	//	$query->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-    //->orderBy('m.fid', 'ASC');
-    //->range(0, 1);
+    $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
-    return $query;
+
+		return $query;
   }
 
   /**

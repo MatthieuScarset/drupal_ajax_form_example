@@ -10,12 +10,10 @@ function oab_tristan_install() {
  */
 function oab_tristan_update_dependencies() {
 
-   /* $dependencies['oab_tristan'][8001] = array('oab_christophe' => 8020	);
-    $dependencies['oab_tristan'][8004] = array('oab_amel' => 8015	);
-    $dependencies['oab_tristan'][8005] = array('oab_tibo' => 8012	);
-    $dependencies['oab_tristan'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
+  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024	);
+  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
 
-    return $dependencies;*/
+  return $dependencies;
 }
 
 /**
@@ -85,4 +83,138 @@ function oab_tristan_update_8008() {
  */
 function oab_tristan_update_8009() {
   include_once("updates/update_8009.inc");
+}
+
+/**
+ * Ajout des blocks, display mode, et fields pour la zone rebond 1/3 (sidebar)
+ */
+function oab_tristan_update_8010() {
+  include_once("updates/update_8010.inc");
+}
+
+/**
+ * Modification de l'affichage du form display des profils (Ajouts de fields, modification de l'ordre d'affichage)
+ */
+function oab_tristan_update_8011() {
+  include_once("updates/update_8011.inc");
+}
+/**
+ * Suppression du firstname et lastname du formulaire d'edition d'un blogger
+ */
+function oab_tristan_update_8012() {
+  include_once("updates/update_8012.inc");
+}
+
+/**
+ * Resolution d'une erreur de l'update 8010 pour le form_display des formulaires
+ */
+function oab_tristan_update_8013() {
+  include_once("updates/update_8013.inc");
+}
+
+/**
+ * Ajout d'un pattern pour la creation d'alias auto pour les contenus de type webform
+ */
+function oab_tristan_update_8014() {
+  include_once("updates/update_8014.inc");
+}
+
+/**
+ * Setting up du field related_display_view pour la taxo "subhome/Blogs" qui avait été oubliée
+ * dans l'update tristan_8004
+ */
+function oab_tristan_update_8015() {
+  include_once("updates/update_8015.inc");
+}
+
+/**
+ * Suppression du field field_region (taxo Zone Géographique) à l'affichage du formulaire des contenus de type Produit
+ */
+function oab_tristan_update_8016() {
+  include_once("updates/update_8016.inc");
+}
+
+/**
+ * Modification de la place de 2 éléments dans la form display + masquage de l'ornemental visuel
+ * et ajout du workflow au type de contenu Pays (pour que les boutons save soient plus cohérents
+ */
+function oab_tristan_update_8017() {
+  include_once("updates/update_8017.inc");
+}
+
+/**
+ * Ajout d'une description au field visuel ornemental pour les contenus de type document + trad fr
+ */
+function oab_tristan_update_8018() {
+  include_once("updates/update_8018.inc");
+}
+
+/**
+ * Ajout de la traduction Fr des mois
+ */
+function oab_tristan_update_8019() {
+  include_once("updates/update_8019.inc");
+}
+
+/**
+ * Mise à jour du display subhome de la subhome Offres (Produits, Catalogue et les 2 autres termes)
+ * pour ajouter l'ornemtal visuel et la solution en actif afin qu'ils puissent être visibles par le template
+ */
+function oab_tristan_update_8020() {
+  include_once("updates/update_8020.inc");
+}
+
+
+/**
+ * Remise en place du filtre "Theme" dans la subhome Magazine pour correspondre avec
+ * le field dans le formulaire
+ */
+function oab_tristan_update_8021() {
+  include_once("updates/update_8021.inc");
+}
+
+
+/**
+ * Ajout des filtres sur la date et l'année à la subhome Magazine
+ */
+function oab_tristan_update_8022() {
+  include_once("updates/update_8022.inc");
+}
+
+/**
+ * Ajout du bloc Mediatheque
+ */
+function oab_tristan_update_8023() {
+  include_once("updates/update_8023.inc");
+}
+
+/**
+ * Mise à jour du field "field_related_display_view" pour tous les termes de la taxo Subhome
+ * afin de faire fonctionner le fil d'Arianne
+ */
+function oab_tristan_update_8024() {
+  include_once("updates/update_8024.inc");
+}
+
+/**
+ * Modification du form_display de Pays : Replacement de top zone et top zone background
+ * & rajout de la taxo Région dans l'onglet Classify (les termes ne s'affichaient pas)
+ */
+function oab_tristan_update_8025() {
+  include_once("updates/update_8025.inc");
+}
+
+/**
+ * Ajout des trad RU des mois
+ */
+function oab_tristan_update_8026() {
+  include_once("updates/update_8026.inc");
+}
+
+/**
+ * Subhome views => Suppression du calcul automatique de la grille pour passer en bootstrap
+ * pour la version mobile.
+ */
+function oab_tristan_update_8027() {
+  include_once("updates/update_8027.inc");
 }
