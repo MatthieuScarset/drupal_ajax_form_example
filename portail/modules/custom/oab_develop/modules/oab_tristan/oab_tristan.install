@@ -210,3 +210,11 @@ function oab_tristan_update_8025() {
 function oab_tristan_update_8026() {
   include_once("updates/update_8026.inc");
 }
+
+/**
+ * Subhome views => Suppression du calcul automatique de la grille pour passer en bootstrap
+ * pour la version mobile.
+ */
+function oab_tristan_update_8027() {
+  include_once("updates/update_8027.inc");
+}
