@@ -5,7 +5,8 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\paragraphs\Entity\ParagraphsType;
 
-
+//Applique les modifications en bdd pour la traduction : ajout des colonnes necessaires
+\Drupal::entityDefinitionUpdateManager()->applyUpdates();
 /******** Création des PARAGRAPHES ***********
  *   banner
  *   columns
@@ -26,66 +27,252 @@ if(empty($paragraphStorage)) {
 
 // création des champs pour le paragraph paragraphs.paragraphs_type.home_banner
 /****** storage ******/
+//field_title
+//field_big_image_desktop_
+//field_date
+//field_function
+//field_image_mobile
+//field_link
+//field_little_image_desktop
+//field_name
+//field_text_color
+
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_title');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_title',
         'entity_type' => 'paragraph',
         'type' => 'string',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_title');
+$config_group->setData(array (
+    'uuid' => '5e80915b-7198-4f74-a610-53e7e66a4dea',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_title',
+    'field_name' => 'field_title',
+    'entity_type' => 'paragraph',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_big_image_desktop_');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_big_image_desktop_',
         'entity_type' => 'paragraph',
         'type' => 'image',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_big_image_desktop_');
+$config_group->setData(array (
+    'uuid' => '9189fd12-3cad-4168-a3b7-f49a5817fe43',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_big_image_desktop_',
+    'field_name' => 'field_big_image_desktop_',
+    'entity_type' => 'paragraph',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_date');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_date',
         'entity_type' => 'paragraph',
         'type' => 'datetime',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_date');
+$config_group->setData(array (
+    'uuid' => '364232e2-65a6-442d-9424-bb0c3006c489',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'datetime',
+                    1 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_date',
+    'field_name' => 'field_date',
+    'entity_type' => 'paragraph',
+    'type' => 'datetime',
+    'settings' =>
+        array (
+            'datetime_type' => 'date',
+        ),
+    'module' => 'datetime',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_function');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_function',
         'entity_type' => 'paragraph',
         'type' => 'string',
-        'settings' => array (
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_function');
+$config_group->setData(array (
+    'uuid' => '81a3256d-7a08-4397-a323-30c6fce23a29',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_function',
+    'field_name' => 'field_function',
+    'entity_type' => 'paragraph',
+    'type' => 'string',
+    'settings' =>
+        array (
             'max_length' => 156,
             'is_ascii' => false,
             'case_sensitive' => false,
         ),
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
-    ))->save();
-}
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_image_mobile');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_image_mobile',
         'entity_type' => 'paragraph',
         'type' => 'image',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_image_mobile');
+$config_group->setData(array (
+    'uuid' => 'adeb566a-2020-423b-b092-69117cd5c22f',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_image_mobile',
+    'field_name' => 'field_image_mobile',
+    'entity_type' => 'paragraph',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link');
 if(empty($field_storage)) {
@@ -93,17 +280,42 @@ if(empty($field_storage)) {
         'field_name' => 'field_link',
         'entity_type' => 'paragraph',
         'type' => 'string',
-        'settings' =>
-            array (
-                'max_length' => 255,
-                'is_ascii' => false,
-                'case_sensitive' => false,
-            ),
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_link');
+$config_group->setData(array (
+    'uuid' => 'e7fc427f-5845-43ee-8c2a-1dfc2a6151c2',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_link',
+    'field_name' => 'field_link',
+    'entity_type' => 'paragraph',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_little_image_desktop');
 if(empty($field_storage)) {
@@ -111,11 +323,53 @@ if(empty($field_storage)) {
         'field_name' => 'field_little_image_desktop',
         'entity_type' => 'paragraph',
         'type' => 'image',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_little_image_desktop');
+$config_group->setData(array (
+    'uuid' => '75f0a353-f370-4923-909e-51f6af045d7e',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_little_image_desktop',
+    'field_name' => 'field_little_image_desktop',
+    'entity_type' => 'paragraph',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_name');
 if(empty($field_storage)) {
@@ -123,272 +377,601 @@ if(empty($field_storage)) {
         'field_name' => 'field_name',
         'entity_type' => 'paragraph',
         'type' => 'string',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
-
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_name');
+$config_group->setData(array (
+    'uuid' => '8762e1d3-9a05-40d3-a41d-8f93a77491b2',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'paragraph',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 156,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_text_color');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_text_color',
-        'dependencies' =>
-            array (
-                'module' =>
-                    array (
-                        0 => 'options',
-                        1 => 'paragraphs',
-                    ),
-            ),
         'entity_type' => 'paragraph',
         'type' => 'list_string',
-        'settings' =>
-            array (
-                'allowed_values' =>
-                    array (
-                        0 =>
-                            array (
-                                'value' => 'white',
-                                'label' => 'White',
-                            ),
-                        1 =>
-                            array (
-                                'value' => 'black',
-                                'label' => 'Black',
-                            ),
-                    ),
-                'allowed_values_function' => '',
-            ),
-        'module' => 'options',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_text_color');
+$config_group->setData(array (
+    'uuid' => 'b19842ed-7313-45b6-8908-9134df685924',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'options',
+                    1 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_text_color',
+    'field_name' => 'field_text_color',
+    'entity_type' => 'paragraph',
+    'type' => 'list_string',
+    'settings' =>
+        array (
+            'allowed_values' =>
+                array (
+                    0 =>
+                        array (
+                            'value' => 'white',
+                            'label' => 'White',
+                        ),
+                    1 =>
+                        array (
+                            'value' => 'black',
+                            'label' => 'Black',
+                        ),
+                ),
+            'allowed_values_function' => '',
+        ),
+    'module' => 'options',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
+/*** instances*****/
 
-/****** instances ******/
+//field_title
+//field_big_image_desktop_
+//field_date
+//field_function
+//field_image_mobile
+//field_link
+//field_little_image_desktop
+//field_name
+//field_text_color
+
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_title');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_title',
+        'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'label' => 'title',
+        'label' => 'Title',
         'required' => TRUE,
-        'translatable' => false,
-        'language' => 'en',
-        'field_type' => 'string',
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_title');
+$config_group->setData(array (
+    'uuid' => 'b4215cbf-c6cd-4b70-a804-c47429e43665',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_title',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_title',
+    'field_name' => 'field_title',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Title',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_text_color');
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_big_image_desktop_');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_text_color',
+        'field_name' =>  'field_big_image_desktop_',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'label' => 'Text Color',
-        'required' => false,
-        'translatable' => false,
-        'default_value' =>
-            array(
-                0 =>
-                    array(
-                        'value' => 'black',
-                    ),
-            ),
-        'field_type' => 'list_string',
+        'label' => 'Big Image Desktop ',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_big_image_desktop_');
+$config_group->setData(array (
+    'uuid' => '4f510076-06fc-4a92-bc86-4b6a5d6a3feb',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_big_image_desktop_',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_big_image_desktop_',
+    'field_name' => 'field_big_image_desktop_',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Big Image Desktop ',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_name');
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_date');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_name',
+        'field_name' =>  'field_date',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'language' => 'en',
-        'field_type' => 'string',
-        'label' => 'Name',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
+        'label' => 'Date',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_date');
+$config_group->setData(array (
+    'uuid' => '24aa37c0-121b-461c-8753-933cb3a8c5a2',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_date',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+            'module' =>
+                array (
+                    0 => 'datetime',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_date',
+    'field_name' => 'field_date',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Date',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'default_date_type' => 'now',
+                    'default_date' => 'now',
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'datetime',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_little_image_desktop');
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_function');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_little_image_desktop',
+        'field_name' =>  'field_function',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'label' => 'Little Image Desktop',
-        'required' => false,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'file_directory' => '[date:custom:Y]-[date:custom:m]',
-                'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '',
-                'max_resolution' => '',
-                'min_resolution' => '',
-                'alt_field' => true,
-                'alt_field_required' => false,
-                'title_field' => false,
-                'title_field_required' => false,
-                'default_image' =>
-                    array (
-                        'uuid' => '',
-                        'alt' => '',
-                        'title' => '',
-                        'width' => NULL,
-                        'height' => NULL,
-                    ),
-                'handler' => 'default:file',
-            ),
-        'field_type' => 'image',
+        'label' => 'Function',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_function');
+$config_group->setData(array (
+    'uuid' => '3be68e42-6af5-4d32-a9ce-480307389dde',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_function',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_function',
+    'field_name' => 'field_function',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Function',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_image_mobile');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_image_mobile',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_banner',
+        'label' => 'Image Mobile',
+        'required' => FALSE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_image_mobile');
+$config_group->setData(array (
+    'uuid' => '72afd42a-7b0d-4353-9947-3e66be0e3d6d',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_image_mobile',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_image_mobile',
+    'field_name' => 'field_image_mobile',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Image Mobile',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_link');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_link',
+        'field_name' =>  'field_link',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'language' => 'en',
-        'field_type' => 'string',
         'label' => 'Link',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_link');
+$config_group->setData(array (
+    'uuid' => '4d67a023-e20a-42b9-ab29-16f1be58e796',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_link',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_link',
+    'field_name' => 'field_link',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Link',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_image_mobile');
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_little_image_desktop');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_image_mobile',
+        'field_name' =>  'field_little_image_desktop',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'language' => 'en',
-        'label' => 'Image Mobile',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'file_directory' => '[date:custom:Y]-[date:custom:m]',
-                'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '',
-                'max_resolution' => '',
-                'min_resolution' => '',
-                'alt_field' => true,
-                'alt_field_required' => false,
-                'title_field' => false,
-                'title_field_required' => false,
-                'default_image' =>
-                    array (
-                        'uuid' => '',
-                        'alt' => '',
-                        'title' => '',
-                        'width' => NULL,
-                        'height' => NULL,
-                    ),
-                'handler' => 'default:file',
-                'handler_settings' =>
-                    array (
-                    ),
-            ),
-        'field_type' => 'image',
+        'label' => 'Little Image Desktop',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_little_image_desktop');
+$config_group->setData(array (
+    'uuid' => '90b71327-3914-4d54-a1b3-3504d1314e82',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_little_image_desktop',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_little_image_desktop',
+    'field_name' => 'field_little_image_desktop',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Little Image Desktop',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_function');
+
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_name');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_function',
+        'field_name' =>  'field_name',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'language' => 'en',
-        'field_type' => 'string',
-        'label' => 'Function',
-        'required' => false,
-        'translatable' => false,
+        'label' => 'Name',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_name');
+$config_group->setData(array (
+    'uuid' => '8db168ce-164d-4551-acd1-661fa1e0f1d1',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_name',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Name',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_date');
+$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_text_color');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_date',
+        'field_name' =>  'field_text_color',
         'entity_type' => 'paragraph',
         'bundle' => 'home_banner',
-        'language' => 'en',
-        'field_type' => 'datetime',
-        'label' => 'Date',
-        'required' => false,
-        'translatable' => false,
-        'default_value' =>
-            array (
-                0 =>
-                    array (
-                        'default_date_type' => 'now',
-                        'default_date' => 'now',
-                    ),
-            ),
+        'label' => 'Text Color',
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_banner.field_text_color');
+$config_group->setData(array (
+    'uuid' => '48375b0c-d447-4f9e-ba5c-772b993347da',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_text_color',
+                    1 => 'paragraphs.paragraphs_type.home_banner',
+                ),
+            'module' =>
+                array (
+                    0 => 'options',
+                ),
+        ),
+    'id' => 'paragraph.home_banner.field_text_color',
+    'field_name' => 'field_text_color',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_banner',
+    'label' => 'Text Color',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'value' => 'black',
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'list_string',
+));
+$config_group->save(TRUE);
 
-$field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_big_image_desktop_');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' => 'field_big_image_desktop_',
-        'entity_type' => 'paragraph',
-        'bundle' => 'home_banner',
-        'label' => 'Big Image Desktop ',
-        'required' => false,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'file_directory' => '[date:custom:Y]-[date:custom:m]',
-                'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '',
-                'max_resolution' => '',
-                'min_resolution' => '',
-                'alt_field' => true,
-                'alt_field_required' => false,
-                'title_field' => false,
-                'title_field_required' => false,
-                'default_image' =>
-                    array (
-                        'uuid' => '',
-                        'alt' => '',
-                        'title' => '',
-                        'width' => NULL,
-                        'height' => NULL,
-                    ),
-                'handler' => 'default:file',
-                'handler_settings' =>
-                    array (
-                    ),
-            ),
-        'field_type' => 'image',
-    );
-    FieldConfig::create($config_array)->save();
-}
+
 
 
 $config_factory = \Drupal::configFactory();
@@ -733,6 +1316,7 @@ $config_group->setData(
 $config_group->save(true);
 
 
+
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_banner');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
@@ -760,7 +1344,6 @@ if(empty($field_storage)) {
     ))->save();
 }
 
-$config_group->save(TRUE);
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_banner');
 if(empty($field)) {
     $config_array = array(
@@ -799,421 +1382,6 @@ if(empty($field)) {
 }
 
 
-/********************************* PARAGRAPHE HOME COLUMN *********************************/
-
-/********* Paragraphe storage **********/
-// création du bundle de paragraph paragraphs.paragraphs_type.home_column
-$paragraphStorage = ParagraphsType::load('home_banner');
-if(empty($paragraphStorage)) {
-    $paragraphType = ParagraphsType::create([
-        'id' => 'home_column',
-        'label' => 'Home Column',
-        'revision' => false
-    ]);
-    $paragraphType->save();
-}
-
-/********* Fields storage in paragraph **********/
-
-
-//field_title
-
-// création des champs pour le paragraph paragraphs.paragraphs_type.home_column
-/****** storage ******/
-$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_solaris_icon');
-if(empty($field_storage)) {
-    FieldStorageConfig::create(array(
-        'field_name' => 'field_solaris_icon',
-        'entity_type' => 'paragraph',
-        'type' => 'image',
-        'module' => 'image',
-        'locked' => false,
-        'cardinality' => 1,
-        'translatable' => false,
-    ))->save();
-}
-
-
-$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
-if(empty($field_storage)) {
-    FieldStorageConfig::create(array(
-        'field_name' => 'field_column_section',
-        'entity_type' => 'paragraph',
-        'type' => 'entity_reference_revisions',
-        'module' => 'entity_reference_revisions',
-        'locked' => false,
-        'cardinality' => 2,
-        'translatable' => false,
-    ))->save();
-}
-
-
-/********* Instances of fields **********/
-
-
-$field = FieldConfig::loadByName('paragraph', 'home_column', 'field_title');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' => 'field_title',
-        'entity_type' => 'paragraph',
-        'bundle' => 'home_column',
-        'label' => 'Column Title',
-        'required' => true,
-        'translatable' => false,
-        'field_type' => 'string',
-    );
-    FieldConfig::create($config_array)->save();
-}
-
-$field = FieldConfig::loadByName('paragraph', 'home_column', 'field_solaris_icon');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' => 'field_solaris_icon',
-        'entity_type' => 'paragraph',
-        'bundle' => 'home_column',
-        'label' => 'Solaris icon',
-        'required' => true,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'file_directory' => '[date:custom:Y]-[date:custom:m]',
-                'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '',
-                'max_resolution' => '',
-                'min_resolution' => '',
-                'alt_field' => true,
-                'alt_field_required' => false,
-                'title_field' => false,
-                'title_field_required' => false,
-                'default_image' =>
-                    array (
-                        'uuid' => '',
-                        'alt' => '',
-                        'title' => '',
-                        'width' => NULL,
-                        'height' => NULL,
-                    ),
-                'handler' => 'default:file',
-                'handler_settings' =>
-                    array (
-                    ),
-            ),
-        'field_type' => 'image',
-    );
-    FieldConfig::create($config_array)->save();
-}
-
-$field = FieldConfig::loadByName('paragraph', 'home_column', 'field_column_section');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' => 'field_column_section',
-        'entity_type' => 'paragraph',
-        'bundle' => 'home_column',
-        'label' => 'Column_section',
-        'required' => false,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'handler' => 'default:paragraph',
-                'handler_settings' =>
-                    array (
-                        'target_bundles' =>
-                            array (
-                                'home_column_section' => 'home_column_section',
-                            ),
-                        'target_bundles_drag_drop' =>
-                            array (
-                                'home_banner' =>
-                                    array (
-                                        'weight' => 4,
-                                        'enabled' => false,
-                                    ),
-                                'home_column' =>
-                                    array (
-                                        'weight' => 5,
-                                        'enabled' => false,
-                                    ),
-                                'home_column_section' =>
-                                    array (
-                                        'enabled' => true,
-                                        'weight' => 6,
-                                    ),
-                            ),
-                    ),
-            ),
-        'field_type' => 'entity_reference_revisions',
-    );
-    FieldConfig::create($config_array)->save();
-}
-
-/********* Form display et View display of Paragraph **********/
-
-
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('core.entity_form_display.paragraph.home_column.default');
-$config_group->setData(
-    array (
-        'uuid' => '0c095571-e0fd-4669-9716-e36135161d08',
-        'langcode' => 'en',
-        'status' => true,
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.field.paragraph.home_column.field_column_section',
-                        1 => 'field.field.paragraph.home_column.field_solaris_icon',
-                        2 => 'field.field.paragraph.home_column.field_title',
-                        3 => 'image.style.thumbnail',
-                        4 => 'paragraphs.paragraphs_type.home_column',
-                    ),
-                'module' =>
-                    array (
-                        0 => 'image',
-                        1 => 'paragraphs',
-                        2 => 'workbench_moderation',
-                    ),
-            ),
-        'id' => 'paragraph.home_column.default',
-        'targetEntityType' => 'paragraph',
-        'bundle' => 'home_column',
-        'mode' => 'default',
-        'content' =>
-            array (
-                'field_column_section' =>
-                    array (
-                        'type' => 'entity_reference_paragraphs',
-                        'weight' => 3,
-                        'settings' =>
-                            array (
-                                'title' => 'Paragraph',
-                                'title_plural' => 'Paragraphs',
-                                'edit_mode' => 'open',
-                                'add_mode' => 'dropdown',
-                                'form_display_mode' => 'default',
-                                'default_paragraph_type' => '',
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                        'region' => 'content',
-                    ),
-                'field_solaris_icon' =>
-                    array (
-                        'weight' => 0,
-                        'settings' =>
-                            array (
-                                'progress_indicator' => 'throbber',
-                                'preview_image_style' => 'thumbnail',
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                        'type' => 'image_image',
-                        'region' => 'content',
-                    ),
-                'field_title' =>
-                    array (
-                        'type' => 'string_textfield',
-                        'weight' => 1,
-                        'region' => 'content',
-                        'settings' =>
-                            array (
-                                'size' => 60,
-                                'placeholder' => '',
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                    ),
-            ),
-        'hidden' =>
-            array (
-                'created' => true,
-                'status' => true,
-                'uid' => true,
-            ),
-    )
-);
-$config_group->save(true);
-
-$config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('core.entity_view_display.paragraph.home_column.default');
-$config_group->setData(
-    array (
-        'uuid' => '1c32df67-479c-492a-9958-031725a96799',
-        'langcode' => 'en',
-        'status' => true,
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.field.paragraph.home_column.field_column_section',
-                        1 => 'field.field.paragraph.home_column.field_solaris_icon',
-                        2 => 'field.field.paragraph.home_column.field_title',
-                        3 => 'paragraphs.paragraphs_type.home_column',
-                    ),
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                        1 => 'image',
-                    ),
-            ),
-        'id' => 'paragraph.home_column.default',
-        'targetEntityType' => 'paragraph',
-        'bundle' => 'home_column',
-        'mode' => 'default',
-        'content' =>
-            array (
-                'field_column_section' =>
-                    array (
-                        'type' => 'entity_reference_revisions_entity_view',
-                        'weight' => 3,
-                        'label' => 'hidden',
-                        'settings' =>
-                            array (
-                                'view_mode' => 'default',
-                                'link' => '',
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                        'region' => 'content',
-                    ),
-                'field_solaris_icon' =>
-                    array (
-                        'weight' => 2,
-                        'label' => 'hidden',
-                        'settings' =>
-                            array (
-                                'image_style' => '',
-                                'image_link' => '',
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                        'type' => 'image',
-                        'region' => 'content',
-                    ),
-                'field_title' =>
-                    array (
-                        'weight' => 4,
-                        'label' => 'hidden',
-                        'settings' =>
-                            array (
-                                'link_to_entity' => false,
-                            ),
-                        'third_party_settings' =>
-                            array (
-                            ),
-                        'type' => 'string',
-                        'region' => 'content',
-                    ),
-            ),
-        'hidden' =>
-            array (
-            ),
-    )
-);
-$config_group->save(true);
-
-
-
-
-/********* Field storage in node **********/
-
-
-$field_storage = FieldStorageConfig::loadByName('node', 'field_home_columns');
-if(empty($field_storage)) {
-    FieldStorageConfig::create(array(
-        'dependencies' =>
-            array (
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                        1 => 'node',
-                        2 => 'paragraphs',
-                    ),
-            ),
-        'id' => 'node.field_home_columns',
-        'field_name' => 'field_home_columns',
-        'entity_type' => 'node',
-        'type' => 'entity_reference_revisions',
-        'settings' =>
-            array (
-                'target_type' => 'paragraph',
-            ),
-        'module' => 'entity_reference_revisions',
-        'locked' => false,
-        'cardinality' => 3,
-        'translatable' => true,
-    ))->save();
-}
-
-$config_group->save(TRUE);
-$field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_banner');
-if(empty($field)) {
-    $config_array = array(
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.storage.node.field_home_columns',
-                        1 => 'node.type.homepage_eclairage',
-                        2 => 'paragraphs.paragraphs_type.home_column',
-                    ),
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                    ),
-            ),
-        'field_name' => 'field_home_columns',
-        'entity_type' => 'node',
-        'bundle' => 'homepage_eclairage',
-        'label' => 'Home Columns',
-        'required' => false,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'handler' => 'default:paragraph',
-                'handler_settings' =>
-                    array (
-                        'target_bundles' =>
-                            array (
-                                'home_column' => 'home_column',
-                            ),
-                        'target_bundles_drag_drop' =>
-                            array (
-                                'home_banner' =>
-                                    array (
-                                        'weight' => 5,
-                                        'enabled' => false,
-                                    ),
-                                'home_column' =>
-                                    array (
-                                        'enabled' => true,
-                                        'weight' => 6,
-                                    ),
-                                'home_column_section' =>
-                                    array (
-                                        'weight' => 7,
-                                        'enabled' => false,
-                                    ),
-                                'home_playlist' =>
-                                    array (
-                                        'weight' => 8,
-                                        'enabled' => false,
-                                    ),
-                            ),
-                    ),
-            ),
-        'field_type' => 'entity_reference_revisions',
-    );
-    FieldConfig::create($config_array)->save();
-}
-
-
-
-
 
 /********************************  PARAGRAPHE HOME COLUMN SECTION *********************************/
 
@@ -1229,6 +1397,73 @@ if(empty($paragraphStorage)) {
     $paragraphType->save();
 }
 
+/********* Field storage in paragraph **********/
+$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'entity_reference_revisions',
+                        1 => 'paragraphs',
+                    ),
+            ),
+        'id' => 'paragraph.field_column_section',
+        'field_name' => 'field_column_section',
+        'entity_type' => 'paragraph',
+        'type' => 'entity_reference_revisions',
+        'settings' =>
+            array (
+                'target_type' => 'paragraph',
+            ),
+        'module' => 'entity_reference_revisions',
+        'locked' => false,
+        'cardinality' => 2,
+        'translatable' => true,
+        'indexes' =>
+            array (
+            ),
+        'persist_with_no_fields' => false,
+        'custom_storage' => false,
+    ))->save();
+}
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_column_section');
+$config_group->setData(array (
+    'uuid' => 'e28c5cb1-7df0-4db6-8013-69301ffc5b4a',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'entity_reference_revisions',
+                    1 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_column_section',
+    'field_name' => 'field_column_section',
+    'entity_type' => 'paragraph',
+    'type' => 'entity_reference_revisions',
+    'settings' =>
+        array (
+            'target_type' => 'paragraph',
+        ),
+    'module' => 'entity_reference_revisions',
+    'locked' => false,
+    'cardinality' => 2,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
 
 /********* Fields storage in paragraph **********/
 //field_function done
@@ -1243,27 +1478,96 @@ if(empty($field_storage)) {
         'field_name' => 'field_image',
         'entity_type' => 'paragraph',
         'type' => 'image',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_image');
+$config_group->setData(array (
+    'uuid' => '729cd632-8931-4376-94d1-db810f17b875',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_image',
+    'field_name' => 'field_image',
+    'entity_type' => 'paragraph',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 
 //field_link_title
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link_title');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
-        'id' => 'paragraph.field_link_title',
         'field_name' => 'field_link_title',
         'entity_type' => 'paragraph',
         'type' => 'link',
-        'cardinality' => 1,
-        'translatable' => false,
-        'language' => 'en',
     ))->save();
 }
-
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_link_title');
+$config_group->setData(array (
+    'uuid' => '3cc2e153-0fd5-45fe-bcac-11a68be32e20',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'link',
+                    1 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_link_title',
+    'field_name' => 'field_link_title',
+    'entity_type' => 'paragraph',
+    'type' => 'link',
+    'settings' =>
+        array (
+        ),
+    'module' => 'link',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 /********* Instances of fields **********/
 
@@ -1271,42 +1575,73 @@ if(empty($field_storage)) {
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_image');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_image',
+        'field_name' =>  'field_image',
         'entity_type' => 'paragraph',
         'bundle' => 'home_column_section',
         'label' => 'Image',
-        'description' => '',
-        'required' => true,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'file_directory' => '[date:custom:Y]-[date:custom:m]',
-                'file_extensions' => 'png gif jpg jpeg',
-                'max_filesize' => '',
-                'max_resolution' => '',
-                'min_resolution' => '',
-                'alt_field' => true,
-                'alt_field_required' => false,
-                'title_field' => false,
-                'title_field_required' => false,
-                'default_image' =>
-                    array (
-                        'uuid' => '',
-                        'alt' => '',
-                        'title' => '',
-                        'width' => NULL,
-                        'height' => NULL,
-                    ),
-                'handler' => 'default:file',
-                'handler_settings' =>
-                    array (
-                    ),
-            ),
-        'field_type' => 'image',
+        'required' => TRUE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_image');
+$config_group->setData(array (
+    'uuid' => 'e6a65c3c-2247-4b37-acab-90360f990194',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_image',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_image',
+    'field_name' => 'field_image',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Image',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 //field_link
+
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_link');
 if(empty($field)) {
     $config_array = array(
@@ -1318,58 +1653,186 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_link');
+$config_group->setData(array (
+    'uuid' => '8c128036-78c1-437d-98c0-dffb5f2be822',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_link',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_link',
+    'field_name' => 'field_link',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Link',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
+
+
 //field_link_title
+
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_link_title');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_link_title',
+        'field_name' =>  'field_link_title',
         'entity_type' => 'paragraph',
         'bundle' => 'home_column_section',
         'label' => 'Link Title',
-        'required' => true,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'link_type' => 17,
-                'title' => 2,
-            ),
-        'field_type' => 'link',
+        'required' => TRUE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_link_title');
+$config_group->setData(array (
+    'uuid' => '60a65b4a-a081-40b4-92f3-a82733654b10',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_link_title',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+            'module' =>
+                array (
+                    0 => 'link',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_link_title',
+    'field_name' => 'field_link_title',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Link Title',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'link_type' => 17,
+            'title' => 2,
+        ),
+    'field_type' => 'link',
+));
+$config_group->save(TRUE);
 
 //field_name
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_name');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_name',
+        'field_name' =>  'field_name',
         'entity_type' => 'paragraph',
         'bundle' => 'home_column_section',
-        'language' => 'en',
-        'field_type' => 'string',
         'label' => 'Name',
-        'description' => '',
-        'required' => false,
-        'translatable' => false,
+        'required' => FALSE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_name');
+$config_group->setData(
+    array (
+    'uuid' => '46bcd3c4-493e-4630-a33e-4a068dca5a30',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_name',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Name',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
 
 //field_title
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_title');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_title',
+        'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
         'bundle' => 'home_column_section',
         'label' => 'Title',
         'required' => TRUE,
-        'translatable' => false,
-        'language' => 'en',
-        'field_type' => 'string',
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_title');
+$config_group->setData(array (
+    'uuid' => 'a93c5c8a-6061-47cb-a5a1-4e7d99e70e48',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_title',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_title',
+    'field_name' => 'field_title',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Title',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
+
 //field_function
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_function');
 if(empty($field)) {
@@ -1382,6 +1845,40 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column_section.field_function');
+$config_group->setData(array (
+    'uuid' => '158d0ea7-345d-42e0-9121-7e7498115c18',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_function',
+                    1 => 'paragraphs.paragraphs_type.home_column_section',
+                ),
+        ),
+    'id' => 'paragraph.home_column_section.field_function',
+    'field_name' => 'field_function',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_column_section',
+    'label' => 'Function',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
+
 
 /********* Form display et View display of Paragraph **********/
 
@@ -1616,42 +2113,174 @@ $config_group->setData(
 $config_group->save(true);
 
 
-/********* Field storage in paragraph **********/
-$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
+
+
+
+
+
+/********************************* PARAGRAPHE HOME COLUMN *********************************/
+
+/********* Paragraphe storage **********/
+// création du bundle de paragraph paragraphs.paragraphs_type.home_column
+$paragraphStorage = ParagraphsType::load('home_column');
+if(empty($paragraphStorage)) {
+    $paragraphType = ParagraphsType::create([
+        'id' => 'home_column',
+        'label' => 'Home Column',
+        'revision' => false
+    ]);
+    $paragraphType->save();
+}
+
+/********* Fields storage in paragraph **********/
+
+//field_title
+// création des champs pour le paragraph paragraphs.paragraphs_type.home_column
+/****** storage ******/
+$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_solaris_icon');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
-        'dependencies' =>
-            array (
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                        1 => 'paragraphs',
-                    ),
-            ),
-        'id' => 'paragraph.field_column_section',
-        'field_name' => 'field_column_section',
+        'field_name' => 'field_solaris_icon',
         'entity_type' => 'paragraph',
-        'type' => 'entity_reference_revisions',
-        'settings' =>
-            array (
-                'target_type' => 'paragraph',
-            ),
-        'module' => 'entity_reference_revisions',
+        'type' => 'image',
+        'module' => 'image',
         'locked' => false,
-        'cardinality' => 2,
-        'translatable' => true,
-        'indexes' =>
-            array (
-            ),
-        'persist_with_no_fields' => false,
-        'custom_storage' => false,
+        'cardinality' => 1,
+        'translatable' => false,
     ))->save();
 }
 
-$config_group->save(TRUE);
+$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_column_section',
+        'entity_type' => 'paragraph',
+        'type' => 'entity_reference_revisions',
+        'module' => 'entity_reference_revisions',
+        'locked' => false,
+        'cardinality' => 2,
+        'translatable' => false,
+    ))->save();
+}
+
+/********* Instances of fields **********/
+
+$field = FieldConfig::loadByName('paragraph', 'home_column', 'field_title');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' => 'field_title',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_column',
+        'label' => 'Column Title',
+        'required' => true,
+        'translatable' => false,
+        'field_type' => 'string',
+    );
+    FieldConfig::create($config_array)->save();
+}
+
+$field = FieldConfig::loadByName('paragraph', 'home_column', 'field_solaris_icon');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' => 'field_solaris_icon',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_column',
+        'label' => 'Solaris icon',
+        'required' => true,
+        'translatable' => false,
+        'settings' =>
+            array (
+                'file_directory' => '[date:custom:Y]-[date:custom:m]',
+                'file_extensions' => 'png gif jpg jpeg',
+                'max_filesize' => '',
+                'max_resolution' => '',
+                'min_resolution' => '',
+                'alt_field' => true,
+                'alt_field_required' => false,
+                'title_field' => false,
+                'title_field_required' => false,
+                'default_image' =>
+                    array (
+                        'uuid' => '',
+                        'alt' => '',
+                        'title' => '',
+                        'width' => NULL,
+                        'height' => NULL,
+                    ),
+                'handler' => 'default:file',
+                'handler_settings' =>
+                    array (
+                    ),
+            ),
+        'field_type' => 'image',
+    );
+    FieldConfig::create($config_array)->save();
+}
+
 $field = FieldConfig::loadByName('paragraph', 'home_column', 'field_column_section');
 if(empty($field)) {
     $config_array = array(
+        'field_name' => 'field_column_section',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_column',
+        'label' => 'Column_section',
+        'required' => false,
+        'translatable' => false,
+        'settings' =>
+            array (
+                'handler' => 'default:paragraph',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'home_column_section' => 'home_column_section',
+                            ),
+                        'target_bundles_drag_drop' =>
+                            array (
+                                'home_banner' =>
+                                    array (
+                                        'weight' => 4,
+                                        'enabled' => false,
+                                    ),
+                                'home_column' =>
+                                    array (
+                                        'weight' => 5,
+                                        'enabled' => false,
+                                    ),
+                                'home_column_section' =>
+                                    array (
+                                        'enabled' => true,
+                                        'weight' => 6,
+                                    ),
+                            ),
+                    ),
+            ),
+        'field_type' => 'entity_reference_revisions',
+    );
+    FieldConfig::create($config_array)->save();
+}
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_column.field_column_section');
+$config_group->setData(
+    array (
+        'uuid' => 'b3f6fa6e-dfe7-4082-b3de-f560d1d8ebb5',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.paragraph.field_column_section',
+                        1 => 'paragraphs.paragraphs_type.home_column',
+                        2 => 'paragraphs.paragraphs_type.home_column_section',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'entity_reference_revisions',
+                    ),
+            ),
+        'id' => 'paragraph.home_column.field_column_section',
         'field_name' => 'field_column_section',
         'entity_type' => 'paragraph',
         'bundle' => 'home_column',
@@ -1693,6 +2322,272 @@ if(empty($field)) {
                     ),
             ),
         'field_type' => 'entity_reference_revisions',
+    )
+
+);
+$config_group->save(true);
+
+
+/********* Form display et View display of Paragraph **********/
+
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_form_display.paragraph.home_column.default');
+$config_group->setData(
+    array (
+        'uuid' => '0c095571-e0fd-4669-9716-e36135161d08',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.field.paragraph.home_column.field_column_section',
+                        1 => 'field.field.paragraph.home_column.field_solaris_icon',
+                        2 => 'field.field.paragraph.home_column.field_title',
+                        3 => 'image.style.thumbnail',
+                        4 => 'paragraphs.paragraphs_type.home_column',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'image',
+                        1 => 'paragraphs',
+                        2 => 'workbench_moderation',
+                    ),
+            ),
+        'id' => 'paragraph.home_column.default',
+        'targetEntityType' => 'paragraph',
+        'bundle' => 'home_column',
+        'mode' => 'default',
+        'content' =>
+            array (
+                'field_column_section' =>
+                    array (
+                        'type' => 'entity_reference_paragraphs',
+                        'weight' => 3,
+                        'settings' =>
+                            array (
+                                'title' => 'Paragraph',
+                                'title_plural' => 'Paragraphs',
+                                'edit_mode' => 'open',
+                                'add_mode' => 'dropdown',
+                                'form_display_mode' => 'default',
+                                'default_paragraph_type' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+                'field_solaris_icon' =>
+                    array (
+                        'weight' => 0,
+                        'settings' =>
+                            array (
+                                'progress_indicator' => 'throbber',
+                                'preview_image_style' => 'thumbnail',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'image_image',
+                        'region' => 'content',
+                    ),
+                'field_title' =>
+                    array (
+                        'type' => 'string_textfield',
+                        'weight' => 1,
+                        'region' => 'content',
+                        'settings' =>
+                            array (
+                                'size' => 60,
+                                'placeholder' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                    ),
+            ),
+        'hidden' =>
+            array (
+                'created' => true,
+                'status' => true,
+                'uid' => true,
+            ),
+    )
+);
+$config_group->save(true);
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.paragraph.home_column.default');
+$config_group->setData(
+    array (
+        'uuid' => '1c32df67-479c-492a-9958-031725a96799',
+        'langcode' => 'en',
+        'status' => true,
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.field.paragraph.home_column.field_column_section',
+                        1 => 'field.field.paragraph.home_column.field_solaris_icon',
+                        2 => 'field.field.paragraph.home_column.field_title',
+                        3 => 'paragraphs.paragraphs_type.home_column',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'entity_reference_revisions',
+                        1 => 'image',
+                    ),
+            ),
+        'id' => 'paragraph.home_column.default',
+        'targetEntityType' => 'paragraph',
+        'bundle' => 'home_column',
+        'mode' => 'default',
+        'content' =>
+            array (
+                'field_column_section' =>
+                    array (
+                        'type' => 'entity_reference_revisions_entity_view',
+                        'weight' => 3,
+                        'label' => 'hidden',
+                        'settings' =>
+                            array (
+                                'view_mode' => 'default',
+                                'link' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'region' => 'content',
+                    ),
+                'field_solaris_icon' =>
+                    array (
+                        'weight' => 2,
+                        'label' => 'hidden',
+                        'settings' =>
+                            array (
+                                'image_style' => '',
+                                'image_link' => '',
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'image',
+                        'region' => 'content',
+                    ),
+                'field_title' =>
+                    array (
+                        'weight' => 4,
+                        'label' => 'hidden',
+                        'settings' =>
+                            array (
+                                'link_to_entity' => false,
+                            ),
+                        'third_party_settings' =>
+                            array (
+                            ),
+                        'type' => 'string',
+                        'region' => 'content',
+                    ),
+            ),
+        'hidden' =>
+            array (
+            ),
+    )
+);
+$config_group->save(true);
+
+
+
+
+/********* Field storage in node **********/
+
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_home_columns');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'dependencies' =>
+            array (
+                'module' =>
+                    array (
+                        0 => 'entity_reference_revisions',
+                        1 => 'node',
+                        2 => 'paragraphs',
+                    ),
+            ),
+        'id' => 'node.field_home_columns',
+        'field_name' => 'field_home_columns',
+        'entity_type' => 'node',
+        'type' => 'entity_reference_revisions',
+        'settings' =>
+            array (
+                'target_type' => 'paragraph',
+            ),
+        'module' => 'entity_reference_revisions',
+        'locked' => false,
+        'cardinality' => 3,
+        'translatable' => true,
+    ))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_columns');
+if(empty($field)) {
+    $config_array = array(
+        'dependencies' =>
+            array (
+                'config' =>
+                    array (
+                        0 => 'field.storage.node.field_home_columns',
+                        1 => 'node.type.homepage_eclairage',
+                        2 => 'paragraphs.paragraphs_type.home_column',
+                    ),
+                'module' =>
+                    array (
+                        0 => 'entity_reference_revisions',
+                    ),
+            ),
+        'field_name' => 'field_home_columns',
+        'entity_type' => 'node',
+        'bundle' => 'homepage_eclairage',
+        'label' => 'Home Columns',
+        'required' => false,
+        'translatable' => false,
+        'settings' =>
+            array (
+                'handler' => 'default:paragraph',
+                'handler_settings' =>
+                    array (
+                        'target_bundles' =>
+                            array (
+                                'home_column' => 'home_column',
+                            ),
+                        'target_bundles_drag_drop' =>
+                            array (
+                                'home_banner' =>
+                                    array (
+                                        'weight' => 5,
+                                        'enabled' => false,
+                                    ),
+                                'home_column' =>
+                                    array (
+                                        'enabled' => true,
+                                        'weight' => 6,
+                                    ),
+                                'home_column_section' =>
+                                    array (
+                                        'weight' => 7,
+                                        'enabled' => false,
+                                    ),
+                                'home_playlist' =>
+                                    array (
+                                        'weight' => 8,
+                                        'enabled' => false,
+                                    ),
+                            ),
+                    ),
+            ),
+        'field_type' => 'entity_reference_revisions',
     );
     FieldConfig::create($config_array)->save();
 }
@@ -1704,7 +2599,7 @@ if(empty($field)) {
 
 
 /********* Paragraph storage **********/
-// création du bundle de paragraph paragraphs.paragraphs_type.home_column_section
+// création du bundle de paragraph playlist
 $paragraphStorage = ParagraphsType::load('home_playlist');
 if(empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
@@ -2106,33 +3001,49 @@ if(empty($paragraphStorage)) {
 //field_name
 //field_title
 
-/********* Instances of fields **********/
-//field_date
-$field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_date');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' =>  'field_date',
+$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_highlight');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_highlight',
         'entity_type' => 'paragraph',
-        'bundle' => 'home_thematic_columns',
-        'label' => 'Date',
-        'required' => FALSE,
-        'field_type' => 'datetime',
-    );
-    FieldConfig::create($config_array)->save();
+        'type' => 'string_long',
+    ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.paragraph.field_highlight');
+$config_group->setData(array (
+    'uuid' => '57038c33-2839-4604-b339-5e38bfde6f92',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'paragraphs',
+                ),
+        ),
+    'id' => 'paragraph.field_highlight',
+    'field_name' => 'field_highlight',
+    'entity_type' => 'paragraph',
+    'type' => 'string_long',
+    'settings' =>
+        array (
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
-//field_function
-$field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_function');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' =>  'field_function',
-        'entity_type' => 'paragraph',
-        'bundle' => 'home_thematic_columns',
-        'label' => 'Function',
-        'required' => FALSE,
-    );
-    FieldConfig::create($config_array)->save();
-}
+
+/********* Instances of fields **********/
 
 //field_highlight
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_highlight');
@@ -2146,6 +3057,138 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_highlight');
+$config_group->setData(array (
+    'uuid' => '0353d071-1c6f-42a1-8596-bc6858a5f960',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_highlight',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_highlight',
+    'field_name' => 'field_highlight',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Highlight',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string_long',
+));
+$config_group->save(TRUE);
+
+
+//field_date
+$field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_date');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_date',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_thematic_columns',
+        'label' => 'Date',
+        'required' => FALSE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_date');
+$config_group->setData(array (
+    'uuid' => '6f7b5e0a-063e-4b5b-8edf-afe07685f44a',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_date',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+            'module' =>
+                array (
+                    0 => 'datetime',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_date',
+    'field_name' => 'field_date',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Date',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'default_date_type' => 'now',
+                    'default_date' => 'now',
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'datetime',
+));
+$config_group->save(TRUE);
+
+//field_function
+$field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_function');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_function',
+        'entity_type' => 'paragraph',
+        'bundle' => 'home_thematic_columns',
+        'label' => 'Function',
+        'required' => FALSE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_function');
+$config_group->setData(array (
+    'uuid' => '2e36a030-1401-4638-b0da-384cdf2aa635',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_function',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_function',
+    'field_name' => 'field_function',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Function',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 //field_image
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_image');
@@ -2159,6 +3202,76 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_image');
+$config_group->setData(array (
+    'uuid' => '85dd6f94-3de8-40a3-a5a4-8ae5347b8106',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_image',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+            'module' =>
+                array (
+                    0 => 'content_translation',
+                    1 => 'image',
+                ),
+        ),
+    'third_party_settings' =>
+        array (
+            'content_translation' =>
+                array (
+                    'translation_sync' =>
+                        array (
+                            'alt' => 'alt',
+                            'title' => 'title',
+                            'file' => '0',
+                        ),
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_image',
+    'field_name' => 'field_image',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Image',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 
 //field_link
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_link');
@@ -2172,6 +3285,38 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_link');
+$config_group->setData(array (
+    'uuid' => 'f5ca33b6-d7a5-4a16-b86d-7ef263cc4dda',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_link',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_link',
+    'field_name' => 'field_link',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Link',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 //field_name
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_name');
@@ -2185,19 +3330,85 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_name');
+$config_group->setData(array (
+    'uuid' => '4e1e88c8-4af7-48ad-a361-e710d1a19004',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_name',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Name',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
+
+
 //field_title
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_title');
 if(empty($field)) {
     $config_array = array(
-        'field_name' => 'field_title',
+        'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
         'bundle' => 'home_thematic_columns',
         'label' => 'Title',
-        'required' => true,
-        'field_type' => 'string',
+        'required' => TRUE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.paragraph.home_thematic_columns.field_title');
+$config_group->setData(array (
+    'uuid' => 'aa52eae4-9a3c-44fe-876a-fc9affa4303f',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.paragraph.field_title',
+                    1 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+        ),
+    'id' => 'paragraph.home_thematic_columns.field_title',
+    'field_name' => 'field_title',
+    'entity_type' => 'paragraph',
+    'bundle' => 'home_thematic_columns',
+    'label' => 'Title',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 /********* Form display et View display of Paragraph **********/
 
@@ -2343,6 +3554,7 @@ $config_group->setData(
     )
 );
 $config_group->save(true);
+
 //core.entity_view_display.paragraph.home_thematic_columns.default
 
 $config_factory = \Drupal::configFactory();
@@ -2490,97 +3702,130 @@ $config_group->save(true);
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_thematic_columns');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
-        'dependencies' =>
-            array (
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                        1 => 'node',
-                        2 => 'paragraphs',
-                    ),
-            ),
-        'id' => 'node.field_home_thematic_columns',
         'field_name' => 'field_home_thematic_columns',
         'entity_type' => 'node',
         'type' => 'entity_reference_revisions',
-        'settings' =>
-            array (
-                'target_type' => 'paragraph',
-            ),
-        'module' => 'entity_reference_revisions',
-        'locked' => false,
-        'cardinality' => 3,
     ))->save();
 }
-
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_home_thematic_columns');
+$config_group->setData(array (
+    'uuid' => 'e1d4a43b-62e3-40d7-befb-aa53cc4dbfd3',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'entity_reference_revisions',
+                    1 => 'node',
+                    2 => 'paragraphs',
+                ),
+        ),
+    'id' => 'node.field_home_thematic_columns',
+    'field_name' => 'field_home_thematic_columns',
+    'entity_type' => 'node',
+    'type' => 'entity_reference_revisions',
+    'settings' =>
+        array (
+            'target_type' => 'paragraph',
+        ),
+    'module' => 'entity_reference_revisions',
+    'locked' => false,
+    'cardinality' => 3,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
 $config_group->save(TRUE);
+
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_home_thematic_columns');
 if(empty($field)) {
     $config_array = array(
-        'dependencies' =>
-            array (
-                'config' =>
-                    array (
-                        0 => 'field.storage.node.field_home_thematic_columns',
-                        1 => 'node.type.hp_eclairage_thematique',
-                        2 => 'paragraphs.paragraphs_type.home_thematic_columns',
-                    ),
-                'module' =>
-                    array (
-                        0 => 'entity_reference_revisions',
-                    ),
-            ),
-        'id' => 'node.hp_eclairage_thematique.field_home_thematic_columns',
-        'field_name' => 'field_home_thematic_columns',
+        'field_name' =>  'field_home_thematic_columns',
         'entity_type' => 'node',
         'bundle' => 'hp_eclairage_thematique',
         'label' => 'Home Thematic columns',
-        'description' => '',
-        'required' => true,
-        'translatable' => false,
-        'settings' =>
-            array (
-                'handler' => 'default:paragraph',
-                'handler_settings' =>
-                    array (
-                        'target_bundles' =>
-                            array (
-                                'home_thematic_columns' => 'home_thematic_columns',
-                            ),
-                        'target_bundles_drag_drop' =>
-                            array (
-                                'home_thematic_columns' =>
-                                    array (
-                                        'enabled' => true,
-                                        'weight' => 6,
-                                    ),
-                                'home_banner' =>
-                                    array (
-                                        'weight' => 7,
-                                        'enabled' => false,
-                                    ),
-                                'home_column' =>
-                                    array (
-                                        'weight' => 8,
-                                        'enabled' => false,
-                                    ),
-                                'home_column_section' =>
-                                    array (
-                                        'weight' => 9,
-                                        'enabled' => false,
-                                    ),
-                                'home_playlist' =>
-                                    array (
-                                        'weight' => 10,
-                                        'enabled' => false,
-                                    ),
-                            ),
-                    ),
-            ),
-        'field_type' => 'entity_reference_revisions',
+        'required' => TRUE,
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_home_thematic_columns');
+$config_group->setData(array (
+    'uuid' => 'f8489f87-d0d1-4cc4-9344-74f7e0543e0f',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_home_thematic_columns',
+                    1 => 'node.type.hp_eclairage_thematique',
+                    2 => 'paragraphs.paragraphs_type.home_thematic_columns',
+                ),
+            'module' =>
+                array (
+                    0 => 'entity_reference_revisions',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_home_thematic_columns',
+    'field_name' => 'field_home_thematic_columns',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Home Thematic columns',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'handler' => 'default:paragraph',
+            'handler_settings' =>
+                array (
+                    'target_bundles' =>
+                        array (
+                            'home_thematic_columns' => 'home_thematic_columns',
+                        ),
+                    'target_bundles_drag_drop' =>
+                        array (
+                            'home_thematic_columns' =>
+                                array (
+                                    'enabled' => true,
+                                    'weight' => 6,
+                                ),
+                            'home_banner' =>
+                                array (
+                                    'weight' => 7,
+                                    'enabled' => false,
+                                ),
+                            'home_column' =>
+                                array (
+                                    'weight' => 8,
+                                    'enabled' => false,
+                                ),
+                            'home_column_section' =>
+                                array (
+                                    'weight' => 9,
+                                    'enabled' => false,
+                                ),
+                            'home_playlist' =>
+                                array (
+                                    'weight' => 10,
+                                    'enabled' => false,
+                                ),
+                        ),
+                ),
+        ),
+    'field_type' => 'entity_reference_revisions',
+));
+$config_group->save(TRUE);
 
 
 
@@ -3299,18 +4544,161 @@ $config_group->save(true);
 //field_banner_image_title
 //field_banner_link
 //field_grouping_title
-//field_date done
+//field_date
 //field_desktop_image
 //field_display_title
 //field_funct
-//field_meta_description done
-//field_meta_title done
+//field_meta_description
+//field_meta_title
 //field_mobile_image
-//field_name done
+//field_name
 //field_navigation_link
-//field_text_color done
+//field_text_color
 //field_text_zone
 //field_text_zone_link
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_date');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_date',
+        'entity_type' => 'node',
+        'type' => 'datetime',
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_date');
+$config_group->setData(array (
+    'uuid' => '4fb58fa5-af89-4435-9c6f-4e88abdf1186',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'datetime',
+                    1 => 'node',
+                ),
+        ),
+    'id' => 'node.field_date',
+    'field_name' => 'field_date',
+    'entity_type' => 'node',
+    'type' => 'datetime',
+    'settings' =>
+        array (
+            'datetime_type' => 'date',
+        ),
+    'module' => 'datetime',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_name');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_name',
+        'entity_type' => 'node',
+        'type' => 'string',
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_name');
+$config_group->setData(array (
+    'uuid' => '1bfe515f-9b9e-40bd-997e-f5790726b861',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                ),
+        ),
+    'id' => 'node.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'node',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_text_color');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_text_color',
+        'entity_type' => 'node',
+        'type' => 'list_string',
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_text_color');
+$config_group->setData(array (
+    'uuid' => '1c1337b9-a40c-42d3-8901-5faa39747ed8',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                    1 => 'options',
+                ),
+        ),
+    'id' => 'node.field_text_color',
+    'field_name' => 'field_text_color',
+    'entity_type' => 'node',
+    'type' => 'list_string',
+    'settings' =>
+        array (
+            'allowed_values' =>
+                array (
+                    0 =>
+                        array (
+                            'value' => 'black',
+                            'label' => 'Black',
+                        ),
+                    1 =>
+                        array (
+                            'value' => 'white',
+                            'label' => 'White',
+                        ),
+                ),
+            'allowed_values_function' => '',
+        ),
+    'module' => 'options',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_banner_image_title');
 if(empty($field_storage)) {
@@ -3320,6 +4708,42 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_banner_image_title');
+$config_group->setData(array (
+    'uuid' => '10655999-f646-49e1-97b2-3375da7f1b96',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                ),
+        ),
+    'id' => 'node.field_banner_image_title',
+    'field_name' => 'field_banner_image_title',
+    'entity_type' => 'node',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
 $field_storage = FieldStorageConfig::loadByName('node', 'field_banner_link');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
@@ -3328,6 +4752,40 @@ if(empty($field_storage)) {
         'type' => 'link',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_banner_link');
+$config_group->setData(array (
+    'uuid' => 'ad354521-50bf-4f16-a96b-818da593cfd8',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'link',
+                    1 => 'node',
+                ),
+        ),
+    'id' => 'node.field_banner_link',
+    'field_name' => 'field_banner_link',
+    'entity_type' => 'node',
+    'type' => 'link',
+    'settings' =>
+        array (
+        ),
+    'module' => 'link',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
+
 $field_storage = FieldStorageConfig::loadByName('node', 'field_grouping_title');
 if(empty($field_storage)) {
     FieldStorageConfig::create(array(
@@ -3336,6 +4794,41 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_grouping_title');
+$config_group->setData(array (
+    'uuid' => '751cc829-043e-49ae-b12c-a8bb03567bca',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                ),
+        ),
+    'id' => 'node.field_grouping_title',
+    'field_name' => 'field_grouping_title',
+    'entity_type' => 'node',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_mobile_image');
 if(empty($field_storage)) {
@@ -3343,7 +4836,53 @@ if(empty($field_storage)) {
         'field_name' => 'field_mobile_image',
         'entity_type' => 'node',
         'type' => 'image',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_mobile_image');
+$config_group->setData(array (
+    'uuid' => 'cea7a8c9-0a36-477d-91dc-a743576d7510',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'node',
+                ),
+        ),
+    'id' => 'node.field_mobile_image',
+    'field_name' => 'field_mobile_image',
+    'entity_type' => 'node',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_desktop_image');
 if(empty($field_storage)) {
@@ -3351,7 +4890,53 @@ if(empty($field_storage)) {
         'field_name' => 'field_desktop_image',
         'entity_type' => 'node',
         'type' => 'image',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_desktop_image');
+$config_group->setData(array (
+    'uuid' => '260ef82e-e011-46f6-b2c1-05e60ce183b9',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'file',
+                    1 => 'image',
+                    2 => 'node',
+                ),
+        ),
+    'id' => 'node.field_desktop_image',
+    'field_name' => 'field_desktop_image',
+    'entity_type' => 'node',
+    'type' => 'image',
+    'settings' =>
+        array (
+            'uri_scheme' => 'public',
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'target_type' => 'file',
+            'display_field' => false,
+            'display_default' => false,
+        ),
+    'module' => 'image',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_navigation_link');
 if(empty($field_storage)) {
@@ -3359,7 +4944,40 @@ if(empty($field_storage)) {
         'field_name' => 'field_navigation_link',
         'entity_type' => 'node',
         'type' => 'link',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_navigation_link');
+$config_group->setData(array (
+    'uuid' => 'adc2091a-2cf0-457f-9aeb-6db3bffb06ff',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'link',
+                    1 => 'node',
+                ),
+        ),
+    'id' => 'node.field_navigation_link',
+    'field_name' => 'field_navigation_link',
+    'entity_type' => 'node',
+    'type' => 'link',
+    'settings' =>
+        array (
+        ),
+    'module' => 'link',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_funct');
 if(empty($field_storage)) {
@@ -3367,7 +4985,42 @@ if(empty($field_storage)) {
         'field_name' => 'field_funct',
         'entity_type' => 'node',
         'type' => 'string',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_funct');
+$config_group->setData(array (
+    'uuid' => 'a6fe2ff1-d4db-4fc2-8fdc-45b0d7061685',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                ),
+        ),
+    'id' => 'node.field_funct',
+    'field_name' => 'field_funct',
+    'entity_type' => 'node',
+    'type' => 'string',
+    'settings' =>
+        array (
+            'max_length' => 255,
+            'is_ascii' => false,
+            'case_sensitive' => false,
+        ),
+    'module' => 'core',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_text_zone');
 if(empty($field_storage)) {
@@ -3375,7 +5028,41 @@ if(empty($field_storage)) {
         'field_name' => 'field_text_zone',
         'entity_type' => 'node',
         'type' => 'text_long',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_text_zone');
+$config_group->setData(array (
+    'uuid' => 'efe59f6f-0abf-49a5-8b0f-c9339316f80e',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'node',
+                    1 => 'text',
+                ),
+        ),
+    'id' => 'node.field_text_zone',
+    'field_name' => 'field_text_zone',
+    'entity_type' => 'node',
+    'type' => 'text_long',
+    'settings' =>
+        array (
+        ),
+    'module' => 'text',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
+
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_text_zone_link');
 if(empty($field_storage)) {
@@ -3383,7 +5070,40 @@ if(empty($field_storage)) {
         'field_name' => 'field_text_zone_link',
         'entity_type' => 'node',
         'type' => 'link',
-    ))->save();}
+    ))->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.storage.node.field_text_zone_link');
+$config_group->setData(array (
+    'uuid' => '8898dd55-e7a7-4687-bc7a-97c4d2a04e72',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'module' =>
+                array (
+                    0 => 'link',
+                    1 => 'node',
+                ),
+        ),
+    'id' => 'node.field_text_zone_link',
+    'field_name' => 'field_text_zone_link',
+    'entity_type' => 'node',
+    'type' => 'link',
+    'settings' =>
+        array (
+        ),
+    'module' => 'link',
+    'locked' => false,
+    'cardinality' => 1,
+    'translatable' => true,
+    'indexes' =>
+        array (
+        ),
+    'persist_with_no_fields' => false,
+    'custom_storage' => false,
+));
+$config_group->save(TRUE);
 
 
 /********* Instances of fields **********/
@@ -3403,6 +5123,50 @@ if(empty($field_storage)) {
 //field_text_zone
 //field_text_zone_link
 
+$field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_banner_image_title');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_banner_image_title',
+        'entity_type' => 'node',
+        'bundle' => 'hp_eclairage_thematique',
+        'label' => 'Banner Image Title',
+        'required' => TRUE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_banner_image_title');
+$config_group->setData(array (
+    'uuid' => 'dcfc0afc-1add-485a-ac17-415465ec9b88',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_banner_image_title',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_banner_image_title',
+    'field_name' => 'field_banner_image_title',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Banner Image Title',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_zone');
 if(empty($field)) {
     $config_array = array(
@@ -3414,6 +5178,42 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_text_zone');
+$config_group->setData(array (
+    'uuid' => '686bb7b9-a957-4b32-a661-71530ce10489',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_text_zone',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'text',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_text_zone',
+    'field_name' => 'field_text_zone',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Text Zone',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'text_long',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_color');
 if(empty($field)) {
@@ -3426,6 +5226,47 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_text_color');
+$config_group->setData(array (
+    'uuid' => 'b1d5c1e8-5fa9-4d91-96d8-81381860d0a2',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_text_color',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'options',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_text_color',
+    'field_name' => 'field_text_color',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Text Color',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'value' => 'black',
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'list_string',
+));
+$config_group->save(TRUE);
+
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_navigation_link');
 if(empty($field)) {
@@ -3438,6 +5279,45 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_navigation_link');
+$config_group->setData(array (
+    'uuid' => '2337f8bb-5c47-4efd-b3d9-d9e2b253dc4a',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_navigation_link',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'link',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_navigation_link',
+    'field_name' => 'field_navigation_link',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Navigation link',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'link_type' => 17,
+            'title' => 1,
+        ),
+    'field_type' => 'link',
+));
+$config_group->save(TRUE);
+
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_name');
 if(empty($field)) {
@@ -3450,6 +5330,38 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_name');
+$config_group->setData(array (
+    'uuid' => 'd1b20428-0d49-4f16-8cc1-65dc59d44d0a',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_name',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_name',
+    'field_name' => 'field_name',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Name',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_mobile_image');
 if(empty($field)) {
@@ -3462,6 +5374,64 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_mobile_image');
+$config_group->setData(array (
+    'uuid' => 'c647ce3b-9799-4128-9c79-e1fa550f05ad',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_mobile_image',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_mobile_image',
+    'field_name' => 'field_mobile_image',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Mobile Image',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
+
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_meta_title');
 if(empty($field)) {
@@ -3474,6 +5444,38 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_meta_title');
+$config_group->setData(array (
+    'uuid' => '000ba44d-399f-4def-814b-4025d18fb050',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_meta_title',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_meta_title',
+    'field_name' => 'field_meta_title',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Meta title',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_meta_description');
 if(empty($field)) {
@@ -3486,6 +5488,38 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_meta_description');
+$config_group->setData(array (
+    'uuid' => '545bbd35-654c-4ca1-a842-55678d16f6f6',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_meta_description',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_meta_description',
+    'field_name' => 'field_meta_description',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Meta description',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_grouping_title');
 if(empty($field)) {
@@ -3498,6 +5532,39 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_grouping_title');
+$config_group->setData(array (
+    'uuid' => '1569ecca-5730-48be-a737-e2011c3899f3',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_grouping_title',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_grouping_title',
+    'field_name' => 'field_grouping_title',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Columns title',
+    'description' => '',
+    'required' => true,
+    'translatable' => true,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
+
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_funct');
 if(empty($field)) {
@@ -3510,6 +5577,38 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_funct');
+$config_group->setData(array (
+    'uuid' => 'f88fc8fd-5f03-4fe7-840d-14a34af85d29',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_funct',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_funct',
+    'field_name' => 'field_funct',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Function',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'string',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_desktop_image');
 if(empty($field)) {
@@ -3522,6 +5621,63 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_desktop_image');
+$config_group->setData(array (
+    'uuid' => '6c2517dc-ddae-4cfd-b91c-fc46a9e54ed7',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_desktop_image',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'image',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_desktop_image',
+    'field_name' => 'field_desktop_image',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Desktop image',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'file_directory' => '[date:custom:Y]-[date:custom:m]',
+            'file_extensions' => 'png gif jpg jpeg',
+            'max_filesize' => '',
+            'max_resolution' => '',
+            'min_resolution' => '',
+            'alt_field' => true,
+            'alt_field_required' => false,
+            'title_field' => false,
+            'title_field_required' => false,
+            'default_image' =>
+                array (
+                    'uuid' => '',
+                    'alt' => '',
+                    'title' => '',
+                    'width' => NULL,
+                    'height' => NULL,
+                ),
+            'handler' => 'default:file',
+            'handler_settings' =>
+                array (
+                ),
+        ),
+    'field_type' => 'image',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_date');
 if(empty($field)) {
@@ -3534,6 +5690,47 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_date');
+$config_group->setData(array (
+    'uuid' => '13111c15-5ec8-4f8e-b9f3-483204950b64',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_date',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'datetime',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_date',
+    'field_name' => 'field_date',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Date',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'default_date_type' => 'now',
+                    'default_date' => 'now',
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+        ),
+    'field_type' => 'datetime',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_banner_link');
 if(empty($field)) {
@@ -3546,18 +5743,44 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-
-$field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_banner_image_title');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' =>  'field_banner_image_title',
-        'entity_type' => 'node',
-        'bundle' => 'hp_eclairage_thematique',
-        'label' => 'Banner Image Title',
-        'required' => TRUE,
-    );
-    FieldConfig::create($config_array)->save();
-}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_banner_link');
+$config_group->setData(array (
+    'uuid' => '1a46eaff-cd36-41c3-8a84-c4c416d0c9d8',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_banner_link',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'link',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_banner_link',
+    'field_name' => 'field_banner_link',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Banner Link',
+    'description' => '',
+    'required' => true,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'link_type' => 17,
+            'title' => 1,
+        ),
+    'field_type' => 'link',
+));
+$config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_zone_link');
 if(empty($field)) {
@@ -3570,6 +5793,100 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_text_zone_link');
+$config_group->setData(array (
+    'uuid' => '5de2ea1e-79b2-41ae-9a4b-502c06981e68',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_text_zone_link',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+            'module' =>
+                array (
+                    0 => 'link',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_text_zone_link',
+    'field_name' => 'field_text_zone_link',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Text zone Link',
+    'description' => '',
+    'required' => false,
+    'translatable' => false,
+    'default_value' =>
+        array (
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'link_type' => 17,
+            'title' => 1,
+        ),
+    'field_type' => 'link',
+));
+$config_group->save(TRUE);
+
+$field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_display_title');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_display_title',
+        'entity_type' => 'node',
+        'bundle' => 'hp_eclairage_thematique',
+        'label' => 'Display title',
+        'required' => FALSE,
+    );
+    FieldConfig::create($config_array)->save();
+}
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('field.field.node.hp_eclairage_thematique.field_display_title');
+$config_group->setData(
+    array (
+    'uuid' => '913530fc-9b8e-4a7c-bea0-345e44295f4d',
+    'langcode' => 'en',
+    'status' => true,
+    'dependencies' =>
+        array (
+            'config' =>
+                array (
+                    0 => 'field.storage.node.field_display_title',
+                    1 => 'node.type.hp_eclairage_thematique',
+                ),
+        ),
+    'id' => 'node.hp_eclairage_thematique.field_display_title',
+    'field_name' => 'field_display_title',
+    'entity_type' => 'node',
+    'bundle' => 'hp_eclairage_thematique',
+    'label' => 'Display title',
+    'description' => '',
+    'required' => false,
+    'translatable' => true,
+    'default_value' =>
+        array (
+            0 =>
+                array (
+                    'value' => 0,
+                ),
+        ),
+    'default_value_callback' => '',
+    'settings' =>
+        array (
+            'on_label' => 'On',
+            'off_label' => 'Off',
+        ),
+    'field_type' => 'boolean',
+)
+);
+$config_group->save(TRUE);
+
+
+
+
 
 
 /********* Form display et View display of NODE **********/
@@ -4514,7 +6831,7 @@ $config_group->setData(
                                                 'type' => 'entity_reference_entity_view',
                                                 'settings' =>
                                                     array (
-                                                        'view_mode' => 'home_playlist',
+                                                        'view_mode' => 'home_playlist_image',
                                                     ),
                                                 'group_column' => 'target_id',
                                                 'group_columns' =>
