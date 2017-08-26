@@ -21,21 +21,15 @@ class OabExtension extends \Twig_Extension {
   }
 
   public function getFunctions() {
-    $filters = [
-      /*new \Twig_SimpleFunction('kint_t', [$this, 'kint_t'], array(
-      'is_safe' => array('html'),
-      'needs_environment' => TRUE,
-      'needs_context' => TRUE,
-      'is_variadic' => TRUE,
-    )),*/
-      new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
+      return [
+          new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
+          new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
+          new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
       new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
-    ];
+       ];
+}
 
-    return $filters;
-  }
-
-  public function getFilters() {
+    public function getFilters() {
     $filters = [
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
@@ -141,4 +135,41 @@ class OabExtension extends \Twig_Extension {
       return file_url_transform_relative($image_style->buildUrl($path));
     }
   }
+
+    /**
+     * Returns the render array for Drupal menu.
+     *
+     * @param string $menu_name
+     *   The name of the menu.
+     * @param int $level
+     *   (optional) Initial menu level.
+     * @param int $depth
+     *   (optional) Maximum number of menu levels to display.
+     *
+     * @return array
+     *   A render array for the menu.
+     */
+    public function drupalMenu($menu_name, $level = 1, $depth = 0) {
+        /** @var \Drupal\Core\Menu\MenuLinkTreeInterface $menu_tree */
+        $menu_tree = \Drupal::service('menu.link_tree');
+        $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+
+        // Adjust the menu tree parameters based on the block's configuration.
+        $parameters->setMinDepth($level);
+        // When the depth is configured to zero, there is no depth limit. When depth
+        // is non-zero, it indicates the number of levels that must be displayed.
+        // Hence this is a relative depth that we must convert to an actual
+        // (absolute) depth, that may never exceed the maximum depth.
+        if ($depth > 0) {
+            $parameters->setMaxDepth(min($level + $depth - 1, $menu_tree->maxDepth()));
+        }
+
+        $tree = $menu_tree->load($menu_name, $parameters);
+        $manipulators = [
+            ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+            ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+        ];
+        $tree = $menu_tree->transform($tree, $manipulators);
+        return $menu_tree->build($tree);
+    }
 }
