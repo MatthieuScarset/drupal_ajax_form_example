@@ -106,6 +106,40 @@ function theme_boosted_preprocess_views_view(&$variables){
       }
     }
   }
+  elseif ($id == 'offices_map_view'){
+  	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
+  		//kint($variables['rows']);
+			$variables['contact_url'] = 'http://www.google.fr';
+		}
+	}
+}
+function theme_boosted_preprocess_views_view_list(&$variables){
+  $view = $variables['view'];
+  $id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
+}
+function theme_boosted_preprocess_views_view_fields(&$variables){
+	$view = $variables['view'];
+	$id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
 }
 
 function theme_boosted_preprocess_field(&$variables){

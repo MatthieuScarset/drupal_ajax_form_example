@@ -55,19 +55,24 @@
 }
 
 
-.gmap-popup .location-content .views-field-field-region a
+.gmap-popup .location-content .views-field-field-region a,
+.gmap-popup .location-content .contact a
 {
     font-size: 0.9em;
     font-weight: bold;
     color: #333333;
 
 }
+.gmap-popup .location-content .contact a:hover,
+.gmap-popup .location-content .contact a:active,
+.gmap-popup .location-content .contact a:focus,
 .gmap-popup .location-content .views-field-field-region a:hover,
 .gmap-popup .location-content .views-field-field-region a:active,
 .gmap-popup .location-content .views-field-field-region a:focus{
     color: #ff7900;
     text-decoration: underline;
 }
+.gmap-popup .location-content .contact span.icon-more,
 .gmap-popup .location-content .views-field-field-region span.icon-more {
     position: absolute;
     border: none;
@@ -81,4 +86,7 @@
     font-size: 1px;
     line-height: 1px;
     vertical-align: middle;
+}
+.gmap-popup .location-content .views-field-field-region{
+    margin-right: 40px;
 }
