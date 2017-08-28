@@ -43,13 +43,20 @@ li.office-address .views-field-field-phone-number{
 }
 
 
-li.office-address div.views-field-field-region a{
+li.office-address .contact a,
+li.office-address .views-field-field-region a{
     color: #ff7900;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: bold;
 }
-li.office-address div.views-field-field-region a:focus,
-li.office-address div.views-field-field-region a:hover{
+li.office-address .contact a:focus,
+li.office-address .contact a:hover,
+li.office-address .views-field-field-region a:focus,
+li.office-address .views-field-field-region a:hover{
     text-decoration: underline;
+}
+
+li.office-address .views-field-field-region{
+    margin-right: 20px;
 }
