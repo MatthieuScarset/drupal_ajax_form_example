@@ -13,3 +13,10 @@ function oab_offices_map_update_8001() {
   include_once("updates/update_8001.inc");
 }
 
+/**
+ * Modif affichage vue : url Contact
+ */
+function oab_offices_map_update_8002() {
+  include_once("updates/update_8002.inc");
+}
+
