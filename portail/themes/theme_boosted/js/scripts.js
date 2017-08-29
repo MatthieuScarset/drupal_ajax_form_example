@@ -81,21 +81,21 @@
     attach: function (context, settings) {
       //On s'occupe de Facebook
       if (settings.myLibrary.share_siteUrls.facebook.length) {
-        $(".share-button-facebook").each(function() {
+        $("a.share-button-facebook").each(function() {
           $(this).attr("href",settings.myLibrary.share_siteUrls.facebook );
         });
       }
 
       //Maintenant de linkedin
       if (settings.myLibrary.share_siteUrls.linkedin.length) {
-        $(".share-button-linkedin").each(function() {
+        $("a.share-button-linkedin").each(function() {
           $(this).attr("href",settings.myLibrary.share_siteUrls.linkedin );
         });
       }
 
       //Et enfin de twitter
       if (settings.myLibrary.share_siteUrls.twitter.length) {
-        $(".share-button-twitter").each(function() {
+        $("a.share-button-twitter").each(function() {
           $(this).attr("href",settings.myLibrary.share_siteUrls.twitter );
         });
       }
