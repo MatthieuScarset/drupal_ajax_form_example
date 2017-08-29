@@ -25,7 +25,7 @@ require "functions.pl";
 my $VERSION;
 
 my $R_CURRENT;
-my $R_ROOT = "/home/orangecom/ruby";
+my $R_ROOT = "/home/oab_web/ruby";
 my $R_BIN = $R_ROOT. "/bin";
 my $R_LOG = $R_ROOT. "/log";
 my $R_SAVE = $R_ROOT. "/backup/files";
@@ -166,48 +166,35 @@ if ($nb_arg ne 1) {
     close(CONF);
 
     print_log("INFO", "Etape 2 : Recopie du dossier sites/all", "SCREEN");
-    my $cmd_rm = "cd /var/livrable/common; rm -rf sites includes modules profiles scripts themes misc *.php *.txt web.config ";
+    my $cmd_rm = "cd /var/livrable/common; rm -rf core libraries modules profiles sites themes vendor *.php web.config";
     print_log("DEBUG", $cmd_rm, "SCREEN");
     my $retour_rm = `$cmd_rm`;
 
-    my $cmd_cp = "cd /var/www; cp -rpf sites includes modules profiles scripts themes misc *.php *.txt web.config /var/livrable/common";
+    my $cmd_cp = "cd /var/www/current/portail; cp -rpf core libraries modules profiles sites themes vendor *.php web.config /var/livrable/common";
     print_log("DEBUG", $cmd_cp, "SCREEN");
     my $retour_cp = `$cmd_cp`;
 
-    print_log("INFO", "Etape 3 : Recopie du dossier conf", "SCREEN");
-    $cmd_cp = "dos2unix /var/www/conf/drush.conf";
-    print_log("DEBUG", $cmd_cp, "SCREEN");
-    $retour_cp = `$cmd_cp`;
-
-    $cmd_cp = "cp -f /var/www/conf/drush.conf /var/livrable/env/preproduction/conf/";
-    print_log("DEBUG", $cmd_cp, "SCREEN");
-    $retour_cp = `$cmd_cp`;
-
-    $cmd_cp = "cp -f /var/www/conf/drush.conf /var/livrable/env/production/conf/";
-    print_log("DEBUG", $cmd_cp, "SCREEN");
-    $retour_cp = `$cmd_cp`;
-
-    print_log("INFO", "Etape 4 : robots.txt sur PRP", "SCREEN");
+    print_log("INFO", "Etape 3 : robots.txt sur PRP", "SCREEN");
     $url = "http://ruby-prp.multimediabs.com/robots.txt";
     $contents = get_robots($url, 1);
 
     open (ROBOTS, ">", $F_ROBOTS_PRP) or die "ERREUR : impossible d'ouvrir $F_ROBOTS_PRP : $!";
     print ROBOTS $contents;
     close(ROBOTS);
-    
+
     write_robots($F_ROBOTS_PRP);
 
-    print_log("INFO", "Etape 5 : robots.txt sur PROD", "SCREEN");
+    print_log("INFO", "Etape 4 : robots.txt sur PROD", "SCREEN");
     $url = "http://orange-business.com/robots.txt";
     $contents = get_robots($url, 0);
 
     open (ROBOTS, ">", $F_ROBOTS_PROD) or die "ERREUR : impossible d'ouvrir $F_ROBOTS_PROD : $!";
     print ROBOTS $contents;
     close(ROBOTS);
-    
+
     write_robots($F_ROBOTS_PROD);
-    
-    print_log("INFO", "Etape 6 : sitemap.xml sur PRP", "SCREEN");
+
+    print_log("INFO", "Etape 5 : sitemap.xml sur PRP", "SCREEN");
     $url = "http://ruby-prp.multimediabs.com/sitemap.xml";
     $contents = get_robots($url, 1);
 
@@ -215,7 +202,7 @@ if ($nb_arg ne 1) {
     print SITEMAP $contents;
     close(SITEMAP);
 
-    print_log("INFO", "Etape 7 : sitemap.xml sur PROD", "SCREEN");
+    print_log("INFO", "Etape 6 : sitemap.xml sur PROD", "SCREEN");
     $url = "http://orange-business.com/sitemap.xml";
     $contents = get_robots($url, 0);
 
@@ -223,7 +210,7 @@ if ($nb_arg ne 1) {
     print SITEMAP $contents;
     close(SITEMAP);
 
-    print_log("INFO", "Etape 6 : Creation de l'archive", "SCREEN");
+    print_log("INFO", "Etape 7 : Creation de l'archive", "SCREEN");
     my $cmd_tar = "cd /var/livrable; tar cvfzp $A_LIV common/ env/ package.properties";
     print_log("DEBUG", $cmd_tar, "SCREEN");
     my $retour_tar = `$cmd_tar`;
