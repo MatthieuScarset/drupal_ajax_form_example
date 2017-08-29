@@ -1989,7 +1989,7 @@ loadConfigField('field/field', 'field.field.node.homepage.field_corporate_image'
 loadConfigField('field/storage', 'field.storage.node.field_corporate_image');
 
 
-createField('field_corporate_menu', 'homepage', 'Menu', 'entity_reference', false);
+createFieldReference('field_corporate_menu', 'homepage', 'Menu', 'menu', 'entity_reference', false);
 loadConfigField('field/field', 'field.field.node.homepage.field_corporate_menu');
 loadConfigField('field/storage', 'field.storage.node.field_corporate_menu');
 
