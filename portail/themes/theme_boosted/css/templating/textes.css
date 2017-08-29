@@ -734,13 +734,6 @@ p.contenu {
     line-height: 3rem;
 }
 
-.page-node-type-solution .obs_template.one_column p,
-.page-node-type-solution .obs_template.two_columns_33_66 p,
-.page-node-type-solution .obs_template.two_columns_66_33 p,
-.page-node-type-solution .obs_template.three_columns p,
-.page-node-type-solution .obs_template.two_columns p {
-    padding: 10px 0;
-}
 
 .page-node-type-solution .node-socialbar{
     margin-top: 3rem;
