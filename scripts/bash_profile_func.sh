@@ -204,7 +204,7 @@ git_cleanup_remote() {
 ## Execute la fonction cap normalement si c'est pas un deploy
 cap() {
 	##Si on fait un deploy,
-	if [[ "$2" == "deploy" ]]
+	if [[ "$2" == "deploy" ]] && [[ "$1" != "recettefinale" ]]
 	then
 		##Je me met sur la branche correspondante
 		echo -e "${CYANFONCE}git checkout "$1" && git pull${NEUTRE}"
@@ -215,6 +215,17 @@ cap() {
 			return
 		fi
 	fi
+
+    if [[ "$1" == "recettefinale" ]]
+    then
+        read -p "Etes-vous bien sur Master ? Etes-vous sur de vouloir déployer en recette finale ? (O/n)" reponse
+
+        if [ $reponse != "O" ] && [ $reponse != "o" ] && [ $reponse != "Y" ] && [ $reponse != "y" ]
+        then
+            echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
+            return
+        fi
+     fi
 
 	##Dans tous les cas, j'execute la commande demandée
 	echo -e "${CYANFONCE}cap $@${NEUTRE}"
