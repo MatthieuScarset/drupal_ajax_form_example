@@ -3,13 +3,98 @@
         <strong>{% trans %}Share{% endtrans %}</strong>
     </p>
     <p>
-        <a href="http://www.twitter.com" class="twitter" target="_blank" title="{% trans %} Share on {% endtrans %} twitter">
+
+{# --------------------------------------------------------------
+   --------------------------------------------------------------
+   PREPARATION DES PARAMATRES D'URL POUR LE PARTAGE#}
+        {% if (node.hasField('field_meta_decription')) %}
+            {% set meta_description = node.get('field_meta_description').getValue[0].value %}
+        {% endif %}
+
+
+        {% set params = {
+            'twitter'   : {
+                'text'          : label[0]["#context"].value|rawurlencode,
+                'url'           : nodeAbsoluteUrl('entity.node.canonical',node.id)|rawurlencode,
+                'hashtags'      : '',
+                'via'           : 'teta_lambda',
+                'related'       : '',
+                'in-reply-to'   : ''
+            },
+            'facebook' : {
+                'u': nodeAbsoluteUrl('entity.node.canonical',node.id)|rawurlencode
+            },
+            'linkedin' : {
+                'mini'      : 'true',
+                'url'       : nodeAbsoluteUrl('entity.node.canonical',node.id)|rawurlencode,
+                'title'     : label[0]["#context"].value|rawurlencode,
+                'summary'   : meta_decription|rawurlencode,
+                'source'    : url('<front>')["#markup"]|rawurlencode
+            },
+            'mail' : {
+                'subject' : 'Viens voir sur Orange-Business.com'|rawurlencode,
+                'body'    : '<html><body><h1>Coucou c\'est un test</body></html>'|rawurlencode|raw
+            }
+          }
+        %}
+
+        {% set urls = {} %}
+        {% for site, parametres in params %}
+            {% set params_string = '' %}
+            {% for key, value in parametres %}
+                {% if value != '' %}
+                    {% if loop.index > 1 %}
+                       {% set params_string = params_string ~ "&"  %}
+                    {% endif %}
+                    {% set params_string = params_string ~ key ~ "=" ~value  %}
+                {% endif %}
+            {% endfor %}
+            {% set urls = urls|merge({ (site) : params_string})%}
+        {% endfor %}
+
+ {# --------------------------------------------------------------
+   --------------------------------------------------------------#}
+
+        {# TWITTER #}
+       <a
+                href="http://www.twitter.com/intent/tweet?{{ urls.twitter }}"
+                class="twitter"
+                target="_blank"
+                title="{% trans %} Share on {% endtrans %} twitter" >
             <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x"></i> </span>
         </a>
-        <a href="http://www.facebook.com" class="facebook" target="_blank" title="{% trans %} Share on {% endtrans %} facebook">
+
+        {# FACEBOOK #}
+        <a
+                href="https://www.facebook.com/sharer/sharer.php?{{ urls.facebook }}"
+                class="facebook"
+                target="_blank"
+                title="{% trans %} Share on {% endtrans %} facebook">
             <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x"></i> </span>
         </a>
-        <a href="https://www.instagram.com/" class="instagram" target="_blank" title="{% trans %} Share on {% endtrans %} instagram">
+
+
+        {# LINKEDIN #}
+        <a
+                href="https://www.linkedin.com/shareArticle?{{ urls.linkedin }}"
+                class="linkedin"
+                target="_blank"
+                title="{% trans %} Share on {% endtrans %} linkedin">
+            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-linkedin fa-stack-1x"></i> </span>
+        </a>
+
+        {# MAIL #}
+        {# -- EN ATTENTE --
+        <a
+            href="#"
+            class="button-share-mail">
+            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-envelope-o fa-stack-1x"></i> </span>
+        </a>   #}
+
+
+
+        {# AUTRES #}
+        {#<a href="https://www.instagram.com/" class="instagram" target="_blank" title="{% trans %} Share on {% endtrans %} instagram">
             <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-instagram fa-stack-1x"></i> </span>
         </a>
         <a href="https://plus.google.com" class="gplus" target="_blank" title="{% trans %} Share on {% endtrans %} googleplus">
@@ -17,9 +102,6 @@
         </a>
         <a href="https://www.youtube.com" class="youtube" target="_blank" title="{% trans %} Share on {% endtrans %} youtube">
             <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-youtube-play fa-stack-1x"></i> </span>
-        </a>
-        <a href="http://www.linkedin.com" class="linkedin" target="_blank" title="{% trans %} Share on {% endtrans %} linkedin">
-            <span class="fa-lg fa-stack text_black"> <i class="fa fa-circle-thin fa-stack-2x"></i> <i class="fa fa-linkedin fa-stack-1x"></i> </span>
-        </a>
+        </a>#}
     </p>
 </div>
