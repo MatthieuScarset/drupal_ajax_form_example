@@ -165,7 +165,7 @@ git_merge() {
 		echo -e "${CYANFONCE}Retour sur la branche d'origine${NEUTRE}"
 		git checkout $nomBranche && git pull
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 
 }
@@ -181,7 +181,7 @@ git_cleanup() {
 		echo -e "${CYANFONCE}Votre GIT local est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
 
@@ -195,7 +195,7 @@ git_cleanup_remote() {
 		echo -e "${CYANFONCE}Votre GIT remote est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
 
