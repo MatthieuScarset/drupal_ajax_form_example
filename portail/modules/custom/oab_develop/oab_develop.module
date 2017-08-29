@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Yaml\Yaml;
+
 class OAB_Trace{
 
   static function debug($elem, $message=""){
@@ -157,4 +159,10 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
 	}else{
 		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
 	}
+}
+
+function loadConfigField($folder, $key){
+    $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/'.$folder.'/'.$key.'.yml';
+    $data = Yaml::parse($config_path);
+    \Drupal::configFactory()->getEditable($key)->setData($data)->save(TRUE);
 }

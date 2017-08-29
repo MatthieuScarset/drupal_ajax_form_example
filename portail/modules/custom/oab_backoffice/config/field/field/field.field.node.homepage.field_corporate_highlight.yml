@@ -1,0 +1,21 @@
+uuid: 17d8be5a-756d-4909-9d61-72cd49493450
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_corporate_highlight
+    - node.type.homepage
+  module:
+    - text
+id: node.homepage.field_corporate_highlight
+field_name: field_corporate_highlight
+entity_type: node
+bundle: homepage
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
