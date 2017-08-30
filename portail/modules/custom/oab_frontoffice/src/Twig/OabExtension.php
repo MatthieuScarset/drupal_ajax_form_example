@@ -24,6 +24,7 @@ class OabExtension extends \Twig_Extension {
       return [
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
+          new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
           ];
 }
 
@@ -129,5 +130,26 @@ class OabExtension extends \Twig_Extension {
         ];
         $tree = $menu_tree->transform($tree, $manipulators);
         return $menu_tree->build($tree);
+    }
+
+    /**
+     * Returns if the field is empty
+     *
+     * @param Object $field
+     *   The field.
+		 *
+     * @return boolean
+     *   A render array for the menu.
+     */
+    public function is_empty_field($field) {
+    		$empty = true;
+        if (!is_null($field)){
+        	foreach ($field as $key => $value){
+        		if ($key[0] != "#"){
+							$empty = false;
+						}
+					}
+				}
+        return $empty;
     }
 }
