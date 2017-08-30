@@ -1,0 +1,4 @@
+oab.settings_offices_map_tab:
+  route_name: oab.settings_offices_map
+  title: Settings
+  base_route: oab.settings_offices_map
