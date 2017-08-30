@@ -102,9 +102,9 @@
             <span class="date-subhome">{% trans %} {{ month }} {% endtrans %} {{ year }} </span>
             {% for p in content.field_profile %}
             {% set profile = p.entity %}
-                {% if profile.field_first_name.value is not null %}
-                <span> - {{ profile.field_first_name.value }} {{ profile.field_last_name.value }}</span>
-            {% endif %}
+                {% if profile.label is not null %}
+                    <span> - {{ profile.label }}</span>
+                {% endif %}
             {% endfor %}
             <div>{{ label }}</div>
         </div>

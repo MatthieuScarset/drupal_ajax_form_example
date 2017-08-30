@@ -14,4 +14,4 @@ oab.settings_synomia_contentTypes:
     _form: '\Drupal\oab_synomia_search_flux\Form\OabSettingsSynomiaContentTypesForm'
     _title: 'Synomia Content Types'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'oab_synomia_administer'
