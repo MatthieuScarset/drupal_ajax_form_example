@@ -123,166 +123,165 @@
         {% endif %}
     {% endfor %}
 
-
-    {%  if content.field_solution_banner_title is not empty %}
-        <div class="col-md-12 col-xs-12 banner-bg solution-banner" style="background: url({{ url }}) ">
-            <div class="section-title-solution">
-                <div class="col-md-5 no-padding text-left title">
-                    {{ content.field_solution_banner_title }}
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-5 no-padding text-left highlight-solution">
-                    {{ content.field_solution_banner_highlight }}
-                </div>
+    {% if content.field_solution_banner_title|render|trim is not empty %}
+    <div class="col-md-12 col-xs-12 banner-bg solution-banner" style="background: url({{ url }}) ">
+        <div class="section-title-solution">
+            <div class="col-md-5 no-padding text-left title">
+                {{ content.field_solution_banner_title }}
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-5 no-padding text-left highlight-solution">
+                {{ content.field_solution_banner_highlight }}
             </div>
         </div>
+    </div>
     {% endif %}
     <div class="container">
-        {%  if oab_drupal_is_empty_field(content.field_solution_banner_left_zone) == false and oab_drupal_is_empty_field(content.field_solution_banner_right_zone) == false %}
-            <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
+        {% if content.field_solution_banner_title|render|trim is not empty %}
+        <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
 
-                <table class="table hidden-xs">
-                    <tr>
-                        {% set numberItems = 0 %}
-                        {% set columnSize = '12' %}
-                        {% set slickMode = 'slick-mode-none' %}
-                        {% for key, news in content.field_solution_banner_left_zone if key|first != '#'  %}
-                            {% set numberItems = numberItems + 1 %}
-                        {% endfor %}
+            <table class="table hidden-xs">
+                <tr>
+                    {% set numberItems = 0 %}
+                    {% set columnSize = '12' %}
+                    {% set slickMode = 'slick-mode-none' %}
+                    {% for key, news in content.field_solution_banner_left_zone if key|first != '#'  %}
+                        {% set numberItems = numberItems + 1 %}
+                    {% endfor %}
 
-                        <td class="left-zone">
-                            <div class="title-solution-banner row">
-                                {% if numberItems > 1 %}
-                                    <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                        <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                        <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                                    </div>
-                                    {% set columnSize = '10' %}
-                                    {% set slickMode = 'slick-mode' %}
-                                {% endif %}
-                                <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_left_zone_title }}</div>
-                            </div>
-                            <div class="row">
-                                {% if numberItems > 1 %}
-                                    <div class="col-md-2"> </div>
-                                {% endif %}
-                                <div id="slick-left-zone" class="col-md-{{ columnSize }} content no-padding slick-left-zone {{ slickMode }}">
-                                    {{ content.field_solution_banner_left_zone }}
-                                </div>
-                            </div>
-                        </td>
-
-                        {% set numberItems = 0 %}
-                        {% set columnSize = '12' %}
-                        {% set slickModeRight = 'slick-mode-none' %}
-                        {% for key, news in content.field_solution_banner_right_zone if key|first != '#'  %}
-                            {% set numberItems = numberItems + 1 %}
-                        {% endfor %}
-
-                        <td class="right-zone">
-                            <div class="title-solution-banner row">
-                                {% if numberItems > 1 %}
-                                    <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                        <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                        <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                                    </div>
-                                    {% set columnSize = '10' %}
-                                    {% set slickModeRight = 'slick-mode' %}
-                                {% endif %}
-                                <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
-                            </div>
-                            <div class="row">
-                                {% if numberItems > 1 %}
-                                    <div class="col-md-2"> </div>
-                                {% endif %}
-                                <div id="slick-right-zone" class="col-md-{{ columnSize }} no-padding content slick-right-zone {{ slickModeRight }}">
-                                    {{ content.field_solution_banner_right_zone }}
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class="section-solution col-xs-12 table-row visible-xs">
-                    <div class="solution-zone left-zone col-md-5 col-xs-12 table-cell">
+                    <td class="left-zone">
                         <div class="title-solution-banner row">
-                            <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                            </div>
-                            <div class="col-md-10 no-padding title">{{ content.field_banner_left_zone_title }}</div>
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                    <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                </div>
+                                {% set columnSize = '10' %}
+                                {% set slickMode = 'slick-mode' %}
+                            {% endif %}
+                            <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_left_zone_title }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2"> </div>
-                            <div id="slick-left-zone" class="col-md-10 no-padding content slick-left-zone {{ slickMode }}">
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2"> </div>
+                            {% endif %}
+                            <div id="slick-left-zone" class="col-md-{{ columnSize }} content no-padding slick-left-zone {{ slickMode }}">
                                 {{ content.field_solution_banner_left_zone }}
                             </div>
                         </div>
-                    </div>
-                    <div class="solution-zone right-zone col-md-5 col-xs-12 table-cell">
-                        <div class="title-solution-banner">
-                            <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                            </div>
-                            <div class="col-md-10 no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                    </td>
+
+                    {% set numberItems = 0 %}
+                    {% set columnSize = '12' %}
+                    {% set slickModeRight = 'slick-mode-none' %}
+                    {% for key, news in content.field_solution_banner_right_zone if key|first != '#'  %}
+                        {% set numberItems = numberItems + 1 %}
+                    {% endfor %}
+
+                    <td class="right-zone">
+                        <div class="title-solution-banner row">
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                    <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                </div>
+                                {% set columnSize = '10' %}
+                                {% set slickModeRight = 'slick-mode' %}
+                            {% endif %}
+                            <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2"> </div>
-                            <div id="slick-right-zone" class="col-md-10 no-padding content slick-right-zone {{ slickModeRight }}">
+                            {% if numberItems > 1 %}
+                                <div class="col-md-2"> </div>
+                            {% endif %}
+                            <div id="slick-right-zone" class="col-md-{{ columnSize }} no-padding content slick-right-zone {{ slickModeRight }}">
                                 {{ content.field_solution_banner_right_zone }}
                             </div>
                         </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="section-solution col-xs-12 table-row visible-xs">
+                <div class="solution-zone left-zone col-md-5 col-xs-12 table-cell">
+                    <div class="title-solution-banner row">
+                        <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                            <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                            <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                        </div>
+                        <div class="col-md-10 no-padding title">{{ content.field_banner_left_zone_title }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"> </div>
+                        <div id="slick-left-zone" class="col-md-10 no-padding content slick-left-zone {{ slickMode }}">
+                            {{ content.field_solution_banner_left_zone }}
+                        </div>
+                    </div>
+                </div>
+                <div class="solution-zone right-zone col-md-5 col-xs-12 table-cell">
+                    <div class="title-solution-banner">
+                        <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                            <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                            <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                        </div>
+                        <div class="col-md-10 no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"> </div>
+                        <div id="slick-right-zone" class="col-md-10 no-padding content slick-right-zone {{ slickModeRight }}">
+                            {{ content.field_solution_banner_right_zone }}
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         {% endif %}
 
         <!-- Expertise Zone Homepage -->
-        {% if oab_drupal_is_empty_field(content.field_expertise_title)  == false %}
-            <div class="col-md-10 col-md-offset-1 col-xs-12 homepage-banner expertise-banner" >
-                <div class="title">
-                    {{ content.field_expertise_title }}
-                </div>
-                <div class="tabpanel-expertise" role="tabpanel">
-                    <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tabs <span class="caret"></span>
-                    </button>
-                    <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
-                        {% for key, item in node.field_banner_expertise %}
-                            <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
-                                <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
-                                    <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
-                                    {{ item.entity.field_tab_title.value }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    {{ content.field_banner_expertise }}
-                </div>
+        {% if content.field_expertise_title|render|trim is not empty %}
+        <div class="col-md-10 col-md-offset-1 col-xs-12 homepage-banner expertise-banner" >
+            <div class="title">
+                {{ content.field_expertise_title }}
             </div>
-            {% endif %}
+            <div class="tabpanel-expertise" role="tabpanel">
+                <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tabs <span class="caret"></span>
+                </button>
+                <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
+                    {% for key, item in node.field_banner_expertise %}
+                        <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
+                            <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
+                                <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
+                                {{ item.entity.field_tab_title.value }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ content.field_banner_expertise }}
+            </div>
+        </div>
+        {% endif %}
 
         <!-- Partner Zone Homepage -->
-        {% if oab_drupal_is_empty_field(content.field_partner_title) == false %}
-            <div class="col-md-10 col-md-offset-1 homepage-banner partner-banner" style="display: none">
-                <div class="title">
-                    {{ content.field_partner_title }}
-                </div>
-                <div class="tabpanel-partner">
-                    {{ oab_drupal_view('homepage_partner', 'block_1') }}
-                    <div class="col-md-12 text-right no-padding no-margin">
-                        {{ content.field_partner_button_link }}
-                    </div>
+        {% if content.field_partner_title|render|trim is not empty %}
+        <div class="col-md-10 col-md-offset-1 homepage-banner partner-banner" style="display: none">
+            <div class="title">
+                {{ content.field_partner_title }}
+            </div>
+            <div class="tabpanel-partner">
+                {{ oab_drupal_view('homepage_partner', 'block_1') }}
+                <div class="col-md-12 text-right no-padding no-margin">
+                    {{ content.field_partner_button_link }}
                 </div>
             </div>
+        </div>
         {% endif %}
     </div>
 
 </div>
 
 <!-- Corporate Zone Homepage -->
-{% if oab_drupal_is_empty_field(content.field_corporate_title)  == false %}
+{% if content.field_corporate_title|render|trim is not empty %}
     <div class="row corporate-homepage">
         {% set urlPartner = '' %}
 
@@ -308,12 +307,13 @@
                             {{ content.field_corporate_highlight }}
                         </div>
                     </div>
-                    <div class="menu-right hidden-xs">
-                        {% if oab_drupal_is_empty_field(content.field_corporate_menu) == false %}
+
+                    {% if content.field_corporate_show_menu %}
+                        <div class="menu-right hidden-xs">
                             <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
                             {{ oab_drupal_menu('our-regional-presence')  }}
-                        {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
 
 
                 </div>
@@ -334,7 +334,7 @@
         </div>
     {% endif %}
 {% endif %}
-{% if oab_drupal_is_empty_field(content.field_infography) == false %}
+{% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
     <div class="row infography-banner">
         <div class="container">
             <div class="col-md-8  col-md-offset-2 corporate-infography-banner ">
