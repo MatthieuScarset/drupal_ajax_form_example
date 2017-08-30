@@ -218,3 +218,10 @@ function oab_tristan_update_8026() {
 function oab_tristan_update_8027() {
   include_once("updates/update_8027.inc");
 }
+
+/**
+ * Ajout de la selection de la langue dans les contenus de type Webform
+ */
+function oab_tristan_update_8028() {
+  include_once("updates/update_8028.inc");
+}
