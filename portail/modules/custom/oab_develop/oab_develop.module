@@ -1,4 +1,5 @@
 <?php
+use Symfony\Component\Yaml\Yaml;
 
 class OAB_Trace{
 
@@ -133,6 +134,7 @@ function isValidDate($date, $format)
  */
 function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
 {
+
     $file_name_lessext =  substr(file_name,0,-4);
 
     if($dir_name=="/"){
