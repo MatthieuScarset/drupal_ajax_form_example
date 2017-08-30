@@ -1,0 +1,8 @@
+#page du moteur de recherche principal
+oab_synomia_search_engine.engine_url:
+  path: '/content-search'
+  defaults:
+    _controller: '\Drupal\oab_synomia_search_engine\Controller\OabSynomiaSearchEngineController::contentSearch'
+    _title: 'Synomia Search'
+  requirements:
+    _access: 'TRUE'

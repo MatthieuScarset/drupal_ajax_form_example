@@ -82,51 +82,59 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		// Création du flux XML
 		$xml_feed .= '<?xml version=\'1.0\' encoding=\'utf-8\'?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-		//On prend les éléments supprimés
-		$query = Database::getConnection()->select('synomia_deleted_content', 's');
-		$query->condition('s.content_type', $contentTypes, 'IN');
-		$query->condition('s.language', array($current_language, 'und'), 'IN');
-		$query->condition('s.deleted', array($timeDebut, $timeFin), 'BETWEEN');
-		$query->fields('s');
-		$results_deleted = $query->execute()->fetchAll();
+		if(!empty($contentTypes)) {
+			//On prend les éléments supprimés
+			$query = Database::getConnection()
+				->select('synomia_deleted_content', 's');
+			$query->condition('s.content_type', $contentTypes, 'IN');
+			$query->condition('s.language', array($current_language, 'und'), 'IN');
+			$query->condition('s.deleted', array($timeDebut, $timeFin), 'BETWEEN');
+			$query->fields('s');
+			$results_deleted = $query->execute()->fetchAll();
 
-		foreach($results_deleted as $deleted){
-			$xml_feed .= '<url>
-					<loc><![CDATA['.$base_url.'/'.$current_language. $deleted->url.']]></loc>
-					<lastmod><![CDATA['.date("Y-m-d H:i",$deleted->deleted).']]></lastmod>
+			foreach ($results_deleted as $deleted) {
+				$xml_feed .= '<url>
+					<loc><![CDATA[' . $base_url . '/' . $current_language . $deleted->url . ']]></loc>
+					<lastmod><![CDATA[' . date("Y-m-d H:i", $deleted->deleted) . ']]></lastmod>
 					<changefreq>daily</changefreq>
     			<priority>1</priority>
 				</url>';
-		}
-
-		//Noeuds qui ont été ajoutés ou modifiés
-		$query_nodes = Database::getConnection()->select('node_field_data', 'n');
-		$query_nodes->condition('n.type', $contentTypes, 'IN');
-		$query_nodes->condition('n.status', 1, '=');
-		$query_nodes->condition('n.langcode', array($current_language, 'und'), 'IN');
-		$query_nodes->condition('n.changed', array($timeDebut, $timeFin), 'BETWEEN');
-		$query_nodes->fields('n', array('nid', 'langcode', 'changed'));
-		$results_nodes = $query_nodes->execute()->fetchAll();
-
-		foreach($results_nodes as $node){
-			$alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' .$node->nid, $node->langcode);
-			if($node->language == 'und')
-			{
-				$xml_feed .= '<url>
-							<loc><![CDATA['.$base_url. '/'.$current_language.$alias.']]></loc>
-							<lastmod><![CDATA['.date("Y-m-d H:i",$node->changed).']]></lastmod>
-							<changefreq>daily</changefreq>
-							<priority>1</priority>
-						</url>';
 			}
-			else
-			{
-				$xml_feed .= '<url>
-							<loc><![CDATA['.$base_url. '/'.$node->langcode.$alias.']]></loc>
-							<lastmod><![CDATA['.date("Y-m-d H:i",$node->changed).']]></lastmod>
+
+			//Noeuds qui ont été ajoutés ou modifiés
+			$query_nodes = Database::getConnection()->select('node_field_data', 'n');
+			$query_nodes->condition('n.type', $contentTypes, 'IN');
+			$query_nodes->condition('n.status', 1, '=');
+			$query_nodes->condition('n.langcode', array(
+				$current_language,
+				'und'
+			), 'IN');
+			$query_nodes->condition('n.changed', array(
+				$timeDebut,
+				$timeFin
+			), 'BETWEEN');
+			$query_nodes->fields('n', array('nid', 'langcode', 'changed'));
+			$results_nodes = $query_nodes->execute()->fetchAll();
+
+			foreach ($results_nodes as $node) {
+				$alias = \Drupal::service('path.alias_manager')
+					->getAliasByPath('/node/' . $node->nid, $node->langcode);
+				if ($node->language == 'und') {
+					$xml_feed .= '<url>
+							<loc><![CDATA[' . $base_url . '/' . $current_language . $alias . ']]></loc>
+							<lastmod><![CDATA[' . date("Y-m-d H:i", $node->changed) . ']]></lastmod>
 							<changefreq>daily</changefreq>
 							<priority>1</priority>
 						</url>';
+				}
+				else {
+					$xml_feed .= '<url>
+							<loc><![CDATA[' . $base_url . '/' . $node->langcode . $alias . ']]></loc>
+							<lastmod><![CDATA[' . date("Y-m-d H:i", $node->changed) . ']]></lastmod>
+							<changefreq>daily</changefreq>
+							<priority>1</priority>
+						</url>';
+				}
 			}
 		}
 		$xml_feed .= '</urlset>';
