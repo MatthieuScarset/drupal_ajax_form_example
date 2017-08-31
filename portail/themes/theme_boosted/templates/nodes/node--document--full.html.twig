@@ -114,15 +114,37 @@ view_mode ? view_mode|clean_class,
 
 <article{{ attributes.addClass(classes) }}>
 
-    <div{{ content_attributes.addClass('content') }}>
-        <div class="document_field_image col col-md-3 col-xs-12">
+    <div{{ content_attributes.addClass('content', 'div-display-table') }}>
+        <div class="document_field_image div-display-cell">
             {{ content.field_visual }}
         </div>
 
-        <div class="col col-md-9 col-xs-12">
+        <div class="div-display-table-cell">
             {{ content|without('theme_term', 'field_image', 'field_document_type',
-            'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry', 'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type') }}
+            'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
+            'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
+            'field_start_date', 'field_end_date') }}
         </div>
+
+    </div>
+
+    {% set pardot_iframe = d_config('oab.pardot').get('iframe_url') %}
+    {% set filename = "" %}
+
+    {% for key, file in content.field_file  %}
+        {% if key == "#items" %}
+            {% set media = file.entity %}
+            {% set file_entity = media.field_image_file.entity %}
+            {% set inactiveClasse = "" %}
+            {% if media is not empty %}
+                {% set filename = media.field_file.entity.filename.value %}
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
+
+    <div class="pardot-form" style="margin-top: 4rem;">
+        <iframe allowtransparency="true" frameborder="0" id="myFrame" src="{{ pardot_iframe }}?{{ filename }}" style="border: 0" target="_blank" type="text/html" width="100%" height="500"></iframe>
     </div>
 
 </article>
