@@ -1,1 +1,21 @@
 <?php
+
+function oab_synomia_search_engine_theme(){
+	$theme = array();
+	$theme['synomia_search_results_page'] = array(
+		'variables' => array(
+			'searchForm' => array(),
+			'currentPage' => array(),
+			'facets' => array(),
+			'searchMode' => array(),
+			'searchResults' => array(),
+			'pager' => array(),
+			'corrections' => array(),
+			'degradations' => array(),
+			'nbResults' => array(),
+		),
+		'template' => 'synomia-search-results--page'
+	);
+
+	return $theme;
+}
