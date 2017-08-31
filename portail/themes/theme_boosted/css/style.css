@@ -112,6 +112,7 @@ article .content .field--type-text-long ul li:before{
     font-size: 1.2rem;
 
 }
+
 .display-subhomes .txt div{
     font-weight: bold;
     margin-top: 2rem;
@@ -247,6 +248,18 @@ article .content .field--type-text-long ul li:before{
 @media (max-width: 767px) {
     .rebond article {
         padding: 3rem 1rem;
+    }
+
+    .display-subhomes .txt span{
+        font-size: 1.6rem;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .view-subhomes .views-exposed-form .form-submit {
+        margin-top: 2rem;
     }
 }
 
