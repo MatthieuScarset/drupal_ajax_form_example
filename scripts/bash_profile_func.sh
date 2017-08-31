@@ -165,7 +165,7 @@ git_merge() {
 		echo -e "${CYANFONCE}Retour sur la branche d'origine${NEUTRE}"
 		git checkout $nomBranche && git pull
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 
 }
@@ -181,7 +181,7 @@ git_cleanup() {
 		echo -e "${CYANFONCE}Votre GIT local est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
 ## Cleane les branches remote qui sont déjà mergées sur master
@@ -195,7 +195,7 @@ git_cleanup_remote() {
 		echo -e "${CYANFONCE}Votre GIT remote est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
-		echo "${ROUGEFONCE}Abandon${NEUTRE}"
+		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
 	fi
 }
 ## liste les branches non mergées
@@ -216,7 +216,7 @@ git_unmerged() {
 ## Execute la fonction cap normalement si c'est pas un deploy
 cap() {
 	##Si on fait un deploy,
-	if [[ "$2" == "deploy" ]]
+	if [[ "$2" == "deploy" ]] && [[ "$1" != "recettefinale" ]]
 	then
 		##Je me met sur la branche correspondante
 		echo -e "${CYANFONCE}git checkout "$1" && git pull${NEUTRE}"
@@ -227,6 +227,17 @@ cap() {
 			return
 		fi
 	fi
+
+    if [[ "$1" == "recettefinale" ]]
+    then
+        read -p "Etes-vous bien sur Master ? Etes-vous sur de vouloir déployer en recette finale ? (O/n)" reponse
+
+        if [ $reponse != "O" ] && [ $reponse != "o" ] && [ $reponse != "Y" ] && [ $reponse != "y" ]
+        then
+            echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
+            return
+        fi
+     fi
 
 	##Dans tous les cas, j'execute la commande demandée
 	echo -e "${CYANFONCE}cap $@${NEUTRE}"
