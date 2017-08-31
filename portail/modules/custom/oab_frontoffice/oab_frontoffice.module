@@ -61,7 +61,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
             : "",
           'url' => $node_url,
           'hashtags' => '',
-          'via' => 'mal_o_guy_baul',
+          'via' => 'orange_business',
           'related' => '',
           'in-reply-to' => ''
         ]
