@@ -32,7 +32,7 @@ class oabSettingsPardotForm extends ConfigFormBase {
     $config = $this->config('oab.pardot');
 
     $form['iframe_url'] = array(
-      '#type' => 'textfield',
+      '#type' => 'textarea',
       '#title' => $this->t('iframe url'),
       '#default_value' => $config->get('iframe_url'),
     );
