@@ -56,8 +56,8 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		$timeDebut = strtotime("-48 hours", $timeFin);
 
 		//timeDebut et timeFin modifié pour tester
-		$timeFin = 1293836400;
-		$timeDebut = time();
+		$timeFin = time();
+		$timeDebut = 1293836400;
 
 		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin, $contentTypes);
 		return $xml_feed;
