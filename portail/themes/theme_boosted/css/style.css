@@ -183,7 +183,9 @@ article .content .field--type-text-long ul li:before{
     border-color: #000;
 }
 
-
+.view-subhomes .views-row .views-col {
+    padding: 0;
+}
 
 
 
