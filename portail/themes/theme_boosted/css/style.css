@@ -208,6 +208,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-color: #CCCCCC;
 }
 
+.view-subhomes .views-row .views-col {
+    padding: 0;
+}
 
 
 
