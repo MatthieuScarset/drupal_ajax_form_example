@@ -4,7 +4,14 @@
         {{ searchForm }}
     </div>
     <div class="block_principal_results col-lg-12 col-md-12 col-sm-12">
-            {{ searchResults }}
+            {{ kint(searchResults) }}
+            {{ currentPage }}
+            {{ facets }}
+            {{ searchMode }}
+            {{ pager }}
+            {{ corrections }}
+            {{ degradations }}
+            {{ nbResults }}
     </div>
 </div>
 </article>

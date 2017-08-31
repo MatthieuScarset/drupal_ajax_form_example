@@ -5,6 +5,7 @@ namespace Drupal\oab_synomia_search_engine\Controller;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\oab_synomia_search_engine\Classes\SynomiaSearchResponse;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 use Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,24 +22,29 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		$filtre_rubrique = (!empty($parameters) && isset($parameters['rubrique'])) ? $parameters['rubrique'] : '';
 		$numPage = (!empty($parameters) && isset($parameters['page'])) ? $parameters['page'] : '';
 
-		$results = $this->getSynomiaResult($mot_recherche, $filtre_rubrique, $numPage, '');
-		var_dump($results);
+		$result = $this->getSynomiaResult($mot_recherche, $filtre_rubrique, $numPage, '');
+		$response = new SynomiaSearchResponse();
+//kint($result);
+		$response->readXML($result, $filtre_rubrique);
+	//	kint($response);
+
 		if(empty($results))
 		{
 			$erreur = "erreur pas de resultat";
-		}
-		else{
-
 		}
 
 		$searchForm = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchEngineForm');
 
 		return array(
-			//'#mapBlock' => $mapBlock,
-			//'#officesListBlock' => $officesListBlock,
 			'#searchForm' => $searchForm,
-			'#searchResults' => array(),
-			//'#labelList' => $listLabel,
+			'#searchResults' => $response->results,
+			'#currentPage' => $response->current_page,
+			'#facets' => $response->facets,
+			'#searchMode' => $response->searchMode,
+			'#pager' => $response->pager,
+			'#corrections' => $response->corrections,
+			'#degradations' => $response->degradations,
+			'#nbResults' => $response->nbResultsTotal,
 			'#theme' => 'synomia_search_results_page',
 			'#attached' => array(
 		//		'library' =>  array(
