@@ -6,7 +6,7 @@
  * Time: 15:51
  */
 namespace Drupal\oab_frontoffice\Twig;
-
+use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 
 class OabExtension extends \Twig_Extension {
@@ -30,6 +30,7 @@ class OabExtension extends \Twig_Extension {
     )),*/
       new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
       new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
+      new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
     ];
 
     return $filters;
@@ -40,6 +41,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
+      new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
     ];
 
     return $filters;
@@ -140,5 +142,25 @@ class OabExtension extends \Twig_Extension {
     if ($image_style = ImageStyle::load($style)) {
       return file_url_transform_relative($image_style->buildUrl($path));
     }
+  }
+
+  /**
+   * Encode un texte avec rawurlencode ( ...les %20 à la place des espaces)
+   * @param $url
+   * @return string
+   */
+  public function rawurlencode($url) {
+    return rawurlencode($url );
+  }
+
+  /**
+   * Renvoie l'url absolue d'un noeud
+   * @param $type
+   * @param $node
+   * @return mixed
+   */
+  function nodeAbsoluteUrl($type, $node) {
+    $url = Url::fromRoute($type, array('node'=>$node), array('absolute'=>true));
+    return $url->toString();
   }
 }

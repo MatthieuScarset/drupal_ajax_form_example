@@ -5,7 +5,7 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
-
+use Drupal\Core\Url;
 
 function oab_frontoffice_preprocess_menu(&$variables) {
   if (isset($variables['items'])
@@ -18,6 +18,103 @@ function oab_frontoffice_preprocess_menu(&$variables) {
         }
       }
     }
+  }
+}
+
+
+/**
+ * Préparation du JS pour la génération des liens "Shares"
+ * @param $variables
+ */
+function oab_frontoffice_preprocess_node(&$variables) {
+
+
+  if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
+
+    ##Collecte de toutes les données nécessaires
+
+    #Je recupère le nid puis je charge le node associé
+    $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
+    $node = \Drupal\node\Entity\Node::load($nid);
+
+    if (is_null($node) || $node === false)
+      return;
+
+    $meta_description = "";
+    ##Je recupère le field_meta_description s'il existe
+    if ($node->hasField('field_meta_decription'))
+      $meta_description = $node->get('field_meta_description')->getValue();
+
+
+    ##je recupère l'url du node et celui du site
+    $node_url = Url::fromRoute('entity.node.canonical', array('node' => $nid), array('absolute' => TRUE))->toString();
+    $site_url = \Drupal::request()->getHost();
+
+    ##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
+    ## pour chaque site
+    $siteData = [
+      'twitter' => [
+        'url' => "http://www.twitter.com/intent/tweet",
+        'params' => [
+          'text' => isset($variables["label"][0]["#context"]["value"])
+            ? $variables["label"][0]["#context"]["value"]
+            : "",
+          'url' => $node_url,
+          'hashtags' => '',
+          'via' => 'orange_business',
+          'related' => '',
+          'in-reply-to' => ''
+        ]
+      ],
+      'facebook' => [
+        'url' => "https://www.facebook.com/sharer/sharer.php",
+        "params" => [
+          'u' => $node_url
+        ]
+      ],
+      'linkedin' => [
+        'url' => "https://www.linkedin.com/shareArticle",
+        'params' => [
+          'mini' => 'true',
+          'url' => $node_url,
+          'title' => isset($variables["label"][0]["#context"]["value"])
+            ? $variables["label"][0]["#context"]["value"]
+            : "",
+          'summary' => $meta_description,
+          'source' => $site_url
+        ]
+      ],
+
+    ];
+
+    ## Pour traiter les mails plus tard
+    $mail = [
+      'subject' => 'Viens voir sur Orange-Business.com',
+      'body' => '<html><body><h1>Coucou c\'est un test</body></html>'
+    ];
+
+    ##Pour enregistrer les adresses recomposées
+    $siteUrls = [];
+
+    ##je recompose les URLs share
+    foreach ($siteData as $site => $data) {
+      $paramsString = "";
+      foreach ($data['params'] as $paramName => $value) {
+        if (strlen($value)>0)
+          $paramsString .= $paramName . "=" . rawurlencode($value) . "&";
+      }
+      $siteUrls[$site] = $data['url'] . "?"
+          .rtrim($paramsString, "&");
+    }
+
+    #J'enregistre mes urls pour les avoir en JS
+    $variables['#attached'] = [
+      'drupalSettings' => [
+        'myLibrary' => [
+          'share_siteUrls' => $siteUrls
+        ],
+      ],
+    ];
   }
 }
 

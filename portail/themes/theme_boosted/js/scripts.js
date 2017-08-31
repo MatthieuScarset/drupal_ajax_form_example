@@ -61,15 +61,18 @@
     });
   }
 
+
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
 
-      $( ".close-env-info" ).click(function(){
-          if ($('.env-info').is(":visible")){
-              $('.environnement-info').hide();
-          }
-      });
+    $( ".close-env-info" ).click(function(){
+        if ($('.env-info').is(":visible")){
+            $('.environnement-info').hide();
+        }
+    });
+
+
 
 
   });
@@ -149,6 +152,33 @@
     return false;
   });
 
+  Drupal.behaviors.myBehaviour = {
+    attach: function (context, settings) {
+      //On s'occupe de Facebook
+      if (settings.myLibrary.share_siteUrls.facebook.length) {
+        $("a.share-button-facebook").each(function() {
+          $(this).attr("href",settings.myLibrary.share_siteUrls.facebook );
+        });
+      }
+
+      //Maintenant de linkedin
+      if (settings.myLibrary.share_siteUrls.linkedin.length) {
+        $("a.share-button-linkedin").each(function() {
+          $(this).attr("href",settings.myLibrary.share_siteUrls.linkedin );
+        });
+      }
+
+      //Et enfin de twitter
+      if (settings.myLibrary.share_siteUrls.twitter.length) {
+        $("a.share-button-twitter").each(function() {
+          $(this).attr("href",settings.myLibrary.share_siteUrls.twitter );
+        });
+      }
+
+    }
+  };
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
+
+
 
