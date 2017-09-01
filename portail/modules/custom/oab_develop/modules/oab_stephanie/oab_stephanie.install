@@ -314,3 +314,10 @@ function oab_stephanie_update_8039() {
 	include_once("updates/update_8039.inc");
 }
 
+/**
+ * Modif de la config pour la génération du sitemap
+ */
+function oab_stephanie_update_8040() {
+	include_once("updates/update_8040.inc");
+}
+
