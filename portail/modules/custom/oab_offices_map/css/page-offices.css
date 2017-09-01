@@ -1,0 +1,45 @@
+article.page-offices-map{
+    display: table;
+}
+.region-content{
+    background-color: white;
+}
+
+.offices-addresses{
+    height: 340px;
+    overflow: auto;
+}
+
+.block_principal_offices_map .addresses-list .labelList{
+    color: #666666;
+    font-size: 1.077em;
+    line-height: 40px;
+    margin-bottom: 2px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form_filter_regions_countries .oab-offices-map-regions-countries-form label,
+.form_filter_regions_countries .oab-offices-map-regions-countries-form .row,
+.form_filter_regions_countries .oab-offices-map-regions-countries-form select,
+.form_filter_regions_countries .oab-offices-map-regions-countries-form .container{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.form_filter_regions_countries .oab-offices-map-regions-countries-form .row{
+    float: left;
+}
+
+.form_filter_regions_countries .oab-offices-map-regions-countries-form label,
+.form_filter_regions_countries .oab-offices-map-regions-countries-form input.button{
+    margin-left:30px;}
+
+select.select-regions,
+select.select-countries{
+    margin-left:20px;
+}
+.block_principal_offices_map {
+    margin-top: 30px;
+}

@@ -1,0 +1,6 @@
+oab.settings_offices_map:
+  title: Office Map settings
+  route_name: oab.settings_offices_map
+  parent: oab.settings
+  description: 'Configure offices map settings'
+  weight: -20

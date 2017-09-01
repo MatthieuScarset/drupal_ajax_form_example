@@ -1,0 +1,16 @@
+#page du flux xml
+oab_offices_map.page:
+  path: '/contacts'
+  defaults:
+    _controller: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::viewPage'
+    _title_callback: '\Drupal\oab_offices_map\Controller\OabOfficesMapPageController::getPageTitle'
+  requirements:
+    _access: 'TRUE'
+
+oab.settings_offices_map:
+  path: '/admin/structure/oab/settings/offices_map'
+  defaults:
+    _form: '\Drupal\oab_offices_map\Form\oabSettingsOfficesMapForm'
+    _title: 'Offices Map settings'
+  requirements:
+    _permission: 'administer site configuration'

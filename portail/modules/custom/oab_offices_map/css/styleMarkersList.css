@@ -1,0 +1,62 @@
+.offices-addresses{
+
+}
+
+ul.offices-addresses-list{
+    margin: 0;
+    float: left;
+    padding: 0;
+}
+
+li.office-address{
+    border-top: 1px dotted #cdcdcd;
+    list-style: outside none none;
+    padding: 5px;
+    margin: 0;
+    vertical-align: baseline;
+
+    background: rgba(0, 0, 0, 0) url("../images/marker-obs.png") no-repeat scroll 15px 30px;
+    min-height: 70px;
+    overflow: hidden;
+    padding: 5px 5px 5px 60px;
+}
+li.office-address:hover,
+li.office-address.selected{
+    background: #f2f2f2 url("../images/marker-obs-hover.png") no-repeat scroll 15px 30px;
+
+}
+
+li.office-address div.views-field-title h2{
+    color: #666666;
+    font-size: 1.077em;
+    line-height: 40px;
+    margin-bottom: 2px;
+}
+li.office-address .views-field-field-additionnal,
+li.office-address .views-field-field-street,
+li.office-address .views-field-field-postal-code,
+li.office-address .views-field-field-city,
+li.office-address .views-field-field-office-country,
+li.office-address .views-field-field-phone-number{
+    font-size: 1rem;
+    color: #777777;
+}
+
+
+li.office-address .contact a,
+li.office-address .views-field-field-region a{
+    color: #ff7900;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+li.office-address .contact a:focus,
+li.office-address .contact a:hover,
+li.office-address .views-field-field-region a:focus,
+li.office-address .views-field-field-region a:hover{
+    text-decoration: underline;
+}
+
+li.office-address .views-field-field-region{
+    margin-right: 20px;
+}
