@@ -5,13 +5,13 @@
     <div class="col col-md-12 nopadding">
         <ul>
             {% if related_offers.offer1_custom_link is defined and related_offers.offer1_custom_link is not iterable %}
-                <li><a href="{{ related_offers.offer1_url }}" target="_blank">{{ related_offers.offer1_custom_link }}</a></li>
+                <li><a href="{{ related_offers.offer1_url|url_clean_prefix }}" target="_blank">{{ related_offers.offer1_custom_link }}</a></li>
             {% endif %}
             {% if related_offers.offer2_custom_link is defined and related_offers.offer2_custom_link is not iterable %}
-                <li><a href="{{ related_offers.offer2_url }}" target="_blank">{{ related_offers.offer2_custom_link }}</a></li>
+                <li><a href="{{ related_offers.offer2_url|url_clean_prefix }}" target="_blank">{{ related_offers.offer2_custom_link }}</a></li>
             {% endif %}
             {% if related_offers.offer3_custom_link is defined and related_offers.offer3_custom_link is not iterable %}
-                <li><a href="{{ related_offers.offer3_url }}" target="_blank">{{ related_offers.offer3_custom_link }}</a></li>
+                <li><a href="{{ related_offers.offer3_url|url_clean_prefix }}" target="_blank">{{ related_offers.offer3_custom_link }}</a></li>
             {% endif %}
         </ul>
     </div>

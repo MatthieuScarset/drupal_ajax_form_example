@@ -40,6 +40,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
+        new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
     ];
 
     return $filters;
@@ -141,4 +142,15 @@ class OabExtension extends \Twig_Extension {
       return file_url_transform_relative($image_style->buildUrl($path));
     }
   }
+
+    /**
+     * Returns a url without http(s) to avoir SSL warning and other bad bad things
+     *
+     * @param $url
+     */
+    public function url_clean_prefix($url) {
+        $url = str_replace('https:', '', $url);
+        $url = str_replace('http:', '', $url);
+        return $url;
+    }
 }
