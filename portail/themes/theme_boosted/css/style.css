@@ -151,6 +151,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     background-color: white;
 }
 
+.view-display-id-page_partners .display-subhomes .encart-image img,
+.view-display-id-page_customer .display-subhomes .encart-image img{
+    width: auto;
+}
+
+.date-subhome {
+    color: grey;
+}
+
 .content a {
     text-decoration: underline;
 }
