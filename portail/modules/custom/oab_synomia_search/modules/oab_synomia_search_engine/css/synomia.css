@@ -1,0 +1,73 @@
+.search_form {
+    background-color: #f6f6f2;
+    font-size: 100%;
+    padding: 10px 0 42px;
+}
+
+
+.search_form input#edit-mot {
+    border: 1px solid #dddddd;
+    color: black;
+    font-size: 2.8rem;
+    height: 50px;
+    line-height: 2.8rem;
+    padding: 8px 15px;
+    width: 50%;
+}
+
+.block_principal_results .nbResults,
+.corrections .title_corrections,
+.degradations .title_degradations{
+    font-size: 1.6rem;
+}
+
+.corrections ul ,
+.degradations ul {
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+.corrections ul li ,
+.degradations ul li {
+    font-size: 1.6rem;
+    position: relative;
+}
+.corrections ul li::before,
+.degradations ul li::before {
+    color: #ff7900;
+    content: "■";
+    left: -20px;
+    position: absolute;
+}
+
+
+.corrections ul li a,
+.degradations ul li a{
+    color: #F16E00;
+}
+
+.block-facetapi .filters_title{
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 10px;
+    padding: 0 0 5px;
+}
+.block-facetapi .filters_title span{
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.block-facetapi .item-list > ul {
+    margin: 0;
+    padding: 0 0 0 15px;
+}
+.block-facetapi ul li.leaf {
+    list-style-image: none;
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+.block-facetapi ul li {
+    padding: 0.2em 0.5em 0 0;
+}
+.block-facetapi ul li.leaf a {
+    color: #888888;
+}

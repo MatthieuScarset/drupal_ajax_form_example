@@ -32,11 +32,63 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		{
 			$erreur = "erreur pas de resultat";
 		}
-
+//kpr($response);
+		//oabt($response->corrections, true);
 		$searchForm = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchEngineForm');
+
+		if($response->nbResultsTotal > 0) {
+			$resultLabel = '';
+			$current_language = \Drupal::languageManager()
+				->getCurrentLanguage()
+				->getId();
+			if ($current_language != 'ru') {
+				if (count($response->nbResultsTotal) == 1) {
+					$resultLabel = $response->nbResultsTotal . ' ' . t('result') . ' ' . t('for') ;
+				}
+				elseif (count($response->nbResultsTotal) > 1) {
+					$resultLabel = $response->nbResultsTotal . ' ' . t('results') . ' ' . t('for') ;
+				}
+			}
+			else {
+				$rest = $response->nbResultsTotal;
+				if ($rest > 9) {
+					$rest = $response->nbResultsTotal % 10;
+				}
+				switch ($rest) {
+
+					case 0:
+						$resultLabel = t('Найдено %nbResults результатов по запросу ', array(
+							'%nbResults' => $response->nbResultsTotal
+						));
+						break;
+					case 1:
+						$resultLabel = t('Найден %nbResults результат по запросу ', array(
+							'%nbResults' => $response->nbResultsTotal
+						));
+						break;
+					case 2:
+					case 3:
+					case 4:
+						$resultLabel = t('Найдено %nbResults результата по запросу ', array(
+							'%nbResults' => $response->nbResultsTotal
+						));
+						break;
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+						$resultLabel = t('Найдено %nbResults результатов по запросу ', array(
+							'%nbResults' => $response->nbResultsTotal
+						));
+						break;
+				}
+			}
+		}
 
 		return array(
 			'#searchForm' => $searchForm,
+			'#resultLabel' => $resultLabel,
 			'#searchResults' => $response->results,
 			'#currentPage' => $response->current_page,
 			'#facets' => $response->facets,
@@ -45,15 +97,13 @@ class OabSynomiaSearchEngineController extends ControllerBase
 			'#corrections' => $response->corrections,
 			'#degradations' => $response->degradations,
 			'#nbResults' => $response->nbResultsTotal,
+			'#currentSearch' => $mot_recherche,
 			'#theme' => 'synomia_search_results_page',
 			'#attached' => array(
-		//		'library' =>  array(
-		//			'oab_offices_map/oab_offices_map.markers'
-		//		),
-		//		'drupalSettings' =>  array(
-		//			'countriesRegionsTab' => $this->getArrayRegionsCountries(),
-		//		),
-			),
+				'library' =>  array(
+					'oab_synomia_search_engine/oab_synomia_search_engine.global',
+					),
+				),
 		);
   }
 
@@ -92,8 +142,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
 			//filtre sur le type de contenu
 			if(!isset($filtre_rubrique) || empty($filtre_rubrique))
 			{
-				//$path .= "&cluster=rubrique"; //sur D7
-				$path .= "&sortie=facette";
+				$path .= "&cluster=rubrique"; //sur D7
+				//$path .= "&sortie=facette";
 			}
 			else
 			{
@@ -107,8 +157,12 @@ class OabSynomiaSearchEngineController extends ControllerBase
 				$proxy_server .= ':' . variable_get('proxy_port', '');
 			}
 			*/
+//pour les tests de facet
+			$path = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9&q=citron&sortBy=&nbCoocDisplay=5&sortie=facette&cluster=rubrique';
+
+
 			$proxy_server = null;
-			//var_dump($path);
+			var_dump($path);
 			curl_setopt_array
 			(
 				$ch,

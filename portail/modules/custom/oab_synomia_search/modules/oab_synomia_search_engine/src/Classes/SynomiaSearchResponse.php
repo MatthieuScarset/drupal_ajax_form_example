@@ -7,6 +7,7 @@
  */
 namespace Drupal\oab_synomia_search_engine\Classes;
 
+use Drupal\node\Entity\NodeType;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 
 class SynomiaSearchResponse {
@@ -145,7 +146,7 @@ class SynomiaSearchResponse {
 					}
 				}
 			}
-			//obstools::lock($results);
+			//oabt($this->results, true);
 		}
 	}
 
@@ -154,6 +155,7 @@ class SynomiaSearchResponse {
 	 * @param unknown $flux
 	 */
 	private function getFacetsFromXml($dom){
+		//oabt($dom, true);
 		$facetsTag = $dom->getElementsByTagName("facets");
 		if(isset($facetsTag))
 		{
@@ -164,7 +166,14 @@ class SynomiaSearchResponse {
 				foreach($facets as $facet)
 				{
 					if( $facet->firstChild->nodeValue != "#SYNAUTRE#"){
-						$this->$facets[$facet->firstChild->nodeValue] = $facet->getAttribute('nb_res');
+						//$type = NodeType::load($facet->firstChild->nodeValue);
+						$type = NodeType::load('blog_post');
+						if(isset($type) && !empty($type))
+						{
+							$typeName = $type->label();
+						}
+						//$typeName = $facet->firstChild->nodeValue;
+						$this->facets[$facet->firstChild->nodeValue] = array('facetName' => $typeName, 'nbresults' => $facet->getAttribute('nb_res'));
 					}
 				}
 			}

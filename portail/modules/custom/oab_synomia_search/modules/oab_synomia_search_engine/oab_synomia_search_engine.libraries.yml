@@ -1,0 +1,5 @@
+oab_synomia_search_engine.global:
+  version: VERSION
+  css:
+    theme:
+      css/synomia.css: {}

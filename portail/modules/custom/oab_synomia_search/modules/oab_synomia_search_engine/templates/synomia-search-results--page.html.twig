@@ -4,14 +4,69 @@
         {{ searchForm }}
     </div>
     <div class="block_principal_results col-lg-12 col-md-12 col-sm-12">
-            {{ kint(searchResults) }}
-            {{ currentPage }}
-            {{ facets }}
-            {{ searchMode }}
-            {{ pager }}
-            {{ corrections }}
-            {{ degradations }}
-            {{ nbResults }}
+
+        {% if nbResults > 0 %}
+            <span class="nbResults">{{ resultLabel }} <strong>{{ currentSearch }}</strong> : </span>
+
+            {# FILTRES / FACETS#}
+            <div class='block-facetapi col-lg-3 col-md-12 col-sm-12'>
+                <div class='filters_title'>
+                    <span> {% trans %} Sort by {% endtrans %} :</span>
+                </div>
+
+                <div class='item-list'>
+                    <ul class="facetapi">
+                        {% for type, facet in facets %}
+                            <li class='leaf'><a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName }} ({{ facet.nbresults }})</a> </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% if searchMode == 'rubrique' %}
+                        <div class="all_results"><a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': currentSearch }) }}">{{ currentSearch }}</a></div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="results_block col-lg-9 col-md-12 col-sm-12">
+                {# RESULTATS #}
+                searchresult :{{ searchResults }} <br/>
+
+
+
+                currentpage : {{ currentPage }}<br/>
+                searchmode :{{ searchMode }}<br/>
+                pager :{{ pager }}<br/>
+            </div>
+
+
+
+        {% else %}
+
+            <span class="nbResults"> {{ nbResults }} {{ 'result'|trans }} {{ 'for'|trans }} <strong>{{ currentSearch }}</strong></span>
+
+            {# CORRECTIONS #}
+            {% if corrections %}
+                <div class="corrections">
+                    <span class="title_corrections">{% trans %}Spelling suggestions{% endtrans %} :</span>
+                    <ul>
+                    {% for correction in corrections %}
+                        <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': correction }) }}">{{ correction }}</a> </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {# DEGRADATIONS #}
+            {% if degradations %}
+                <div class="degradations">
+                    <span class="title_degradations">{% trans %}Some terms of your search contain results{% endtrans %} :</span>
+                    <ul>
+                        {% for terme, nbResult in degradations %}
+                            <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': terme }) }}">{{ terme }}</a> : {{ nbResult }} resultats</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endif %}
     </div>
 </div>
 </article>
