@@ -264,7 +264,7 @@
 
         <!-- Partner Zone Homepage -->
         {% if content.field_partner_title|render|trim is not empty %}
-        <div class="col-md-10 col-md-offset-1 homepage-banner partner-banner" style="display: none">
+        <div class="col-md-10 col-md-offset-1 homepage-banner partner-banner" {#style="display: none"#}>
             <div class="title">
                 {{ content.field_partner_title }}
             </div>
@@ -338,7 +338,7 @@
     <div class="row infography-banner">
         <div class="container">
             <div class="col-md-8  col-md-offset-2 corporate-infography-banner ">
-                <div class="infography-container row text-center">
+                <div class="row text-center">
                     {% for key, infography in content.field_infography if key|first != '#'  %}
                     {% if key == 0 %}
                     <div class="col-md-2 col-md-offset-1 col-xs-12  block-infography" >
@@ -352,5 +352,5 @@
                 </div>
             </div>
         </div>
-    </div>
+
 {% endif %}

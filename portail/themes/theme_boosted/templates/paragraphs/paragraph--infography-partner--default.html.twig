@@ -58,8 +58,9 @@ set classes = [
 
     <div{{ attributes.addClass(classes) }} style="background: url({{ url }})">
         {% block content %}
-            <div class="col-md-12 text-align-left key_figure">{{ content.field_key_figures }}</div>
-            <div class="col-md-12 text-align-left description">{{ content.field_text_inforgraphy }}</div>
+
+            <div class="col-md-12 text-align-left key_figure">{{ content.field_key_figures.0["#markup"]|number_format(0,'.' ) }}</div>
+            <div class="col-md-12 text-align-left description">{{ content.field_text_infography }}</div>
         {% endblock %}
     </div>
 {% endblock paragraph %}

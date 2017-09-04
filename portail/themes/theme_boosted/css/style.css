@@ -396,9 +396,7 @@ article .content .field--type-text-long ul li:before{
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
 }
-.infography-container{
-    display: inline-block;
-}
+
 #tab-expertise-banner li a span.icon-expertise{
     font-size: 3rem;
     vertical-align: text-top;
@@ -814,7 +812,7 @@ article .content .field--type-text-long ul li:before{
     margin-left: 0;
 }
 
-.rebond-link {
+.rebond-link, .homepage-solution-button {
     border: 2px solid #000000;
     padding-right: 3rem;
     padding-left: 3rem;
@@ -858,6 +856,28 @@ article .content .field--type-text-long ul li:before{
     color: #FFFFFF;
     background-color: #000000;
     border-color: #FFFFFF;
+}
+
+
+.homepage-solution-button-color {
+    color: #FFFFFF;
+    border-color: #F16E00;
+    background-color: #F16E00;
+    text-decoration: none;
+}
+
+.homepage-solution-button-color:hover {
+    color: #FFFFFF !important;
+    border-color: #000000;
+    background-color: #000000;
+    text-decoration: none;
+}
+
+.homepage-solution-button-color:active {
+    color: #000000;
+    border-color: #000000;
+    background-color: #ffffff;
+    text-decoration: none;
 }
 
 .rebond-product .rebond-product-text {
