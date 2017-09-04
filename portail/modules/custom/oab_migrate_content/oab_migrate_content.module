@@ -14,7 +14,7 @@ define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);
 
 //Date de la migration => 6/8/2017 à 23:59:59
 define('TIMESTAMP_MIGRATION_VALUE', 1502056799 );
-define('TIMESTAMP_MIGRATION_OPERATOR', '<' );
+define('TIMESTAMP_MIGRATION_OPERATOR', '>' );
 
 function oab_migrate_workflow_sid_correspondance($old_sid){
   $workflow_state = NULL;

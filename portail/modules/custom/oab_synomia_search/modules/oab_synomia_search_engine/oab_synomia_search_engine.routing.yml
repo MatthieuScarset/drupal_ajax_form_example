@@ -6,3 +6,13 @@ oab_synomia_search_engine.engine_url:
     _title: 'Synomia Search'
   requirements:
     _access: 'TRUE'
+
+
+
+oab.synomia_search_settings_form:
+  path: '/admin/structure/oab/settings/synomiaSearchSettings'
+  defaults:
+    _form: '\Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm'
+    _title: 'Synomia Search Engine Settings'
+  requirements:
+    _permission: 'oab_synomia_administer'

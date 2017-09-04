@@ -116,6 +116,7 @@ article .content .field--type-text-long ul li:before{
     font-size: 1.2rem;
 
 }
+
 .display-subhomes .txt div{
     font-weight: bold;
     margin-top: 2rem;
@@ -148,10 +149,6 @@ article .content .field--type-text-long ul li:before{
 
 a.link-subhomes:hover .encart-image.subhome-image {
     background-color: white;
-}
-
-.date-subhome {
-    color: grey;
 }
 
 .content a {
@@ -211,7 +208,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-color: #CCCCCC;
 }
 
-
+.view-subhomes .views-row .views-col {
+    padding: 0;
+}
 
 
 @media (max-width: 767px) {
@@ -270,6 +269,18 @@ a.link-subhomes:hover .encart-image.subhome-image {
 @media (max-width: 767px) {
     .rebond article, .block-mediatheque {
         padding: 3rem 1rem;
+    }
+
+    .display-subhomes .txt span{
+        font-size: 1.6rem;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .view-subhomes .views-exposed-form .form-submit {
+        margin-top: 2rem;
     }
 }
 

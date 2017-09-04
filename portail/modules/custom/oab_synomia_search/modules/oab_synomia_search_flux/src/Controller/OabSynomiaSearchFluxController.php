@@ -55,6 +55,10 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		// 2. on prend les contenus modifiés sur 48h (par rapport a la date précédente) :
 		$timeDebut = strtotime("-48 hours", $timeFin);
 
+		//timeDebut et timeFin modifié pour tester
+		$timeFin = time();
+		$timeDebut = 1293836400;
+
 		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin, $contentTypes);
 		return $xml_feed;
 	}

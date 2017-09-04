@@ -1,0 +1,4 @@
+oab.settings_synomia_search_engine_tab:
+  route_name: oab.synomia_search_settings_form
+  title: Settings
+  base_route: oab.synomia_search_settings_form
