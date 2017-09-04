@@ -5,6 +5,8 @@ use Drupal\editor\Entity\Editor;
 use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Database\Database;
+use Drupal\image\Entity\ImageStyle;
+use \Drupal\file\Entity\File;
 
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -39,7 +41,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$edit_form = true;
 	}
-
+  
 	// on checke les langues auxquelles l utilisateur a droit
 	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
 		$user = \Drupal::currentUser();
@@ -285,9 +287,51 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 		$form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
 	}
-
-
+    // Regeneration des image style après avoir mis à jour une image
+    if($form_id == 'media_image_edit_form') {
+        $form['#validate'][] = 'oab_backoffice_regenerate_image_style';
+    }
 }
+
+function oab_backoffice_regenerate_image_style($form, &$form_state) {
+    $img = $form_state->getValues();
+    if(isset($img['field_image'][0]['fids'][0])){
+        $fid = $img['field_image'][0]['fids'][0];
+        $entity =  File::load($fid);
+        if ($entity instanceof File) {
+            $image = \Drupal::service('image.factory')->get($entity->getFileUri());
+            if ($image->isValid()) {
+                // vidage de cache à la mano pour la topzone
+                $connection = Database::getConnection();
+                $connection->delete('cache_render')->condition('cid', '%topzone%', 'LIKE')->execute();
+                $connection->delete('cache_render')->condition('cid', '%media_page_list%', 'LIKE')->execute();
+            }
+        }
+    }
+}
+
+/**
+ * Permet de rebuilder les image style quand on créé/édite
+ * un media. Pas besoin de vider les caches
+ * @param $entity
+ */
+/*function oab_backoffice_entity_create($entity) {
+    //\Drupal::cache()->delete();
+    oabt($entity, true);
+    if ($entity instanceof File) {
+        $image = \Drupal::service('image.factory')->get($entity->getFileUri());
+        //if ($image->isValid()) {
+            $styles = ImageStyle::loadMultiple();
+            $image_uri = $entity->getFileUri();
+            foreach ($styles as $style) {
+                $destination = $style->buildUri($image_uri);
+                $style->createDerivative($image_uri, $destination);
+                drupal_set_message($style->id().' has been changed for '.$image_uri);
+                $style->flush();
+            }
+        //}
+    }
+}*/
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
 	$values = $form_state->getValues();

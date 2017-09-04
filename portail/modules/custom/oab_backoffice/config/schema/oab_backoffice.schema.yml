@@ -23,3 +23,11 @@ oab.subhomes:
     product_term_tid:
       type: label
       label: 'Product term id'
+
+oab.pardot:
+  type: config_object
+  label: 'Pardot'
+  mapping:
+    iframe_url:
+      type: label
+      label: 'Iframe url'

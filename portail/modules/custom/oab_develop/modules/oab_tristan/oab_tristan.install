@@ -180,3 +180,55 @@ function oab_tristan_update_8021() {
 function oab_tristan_update_8022() {
   include_once("updates/update_8022.inc");
 }
+
+/**
+ * Ajout du bloc Mediatheque
+ */
+function oab_tristan_update_8023() {
+  include_once("updates/update_8023.inc");
+}
+
+/**
+ * Mise à jour du field "field_related_display_view" pour tous les termes de la taxo Subhome
+ * afin de faire fonctionner le fil d'Arianne
+ */
+function oab_tristan_update_8024() {
+  include_once("updates/update_8024.inc");
+}
+
+/**
+ * Modification du form_display de Pays : Replacement de top zone et top zone background
+ * & rajout de la taxo Région dans l'onglet Classify (les termes ne s'affichaient pas)
+ */
+function oab_tristan_update_8025() {
+  include_once("updates/update_8025.inc");
+}
+
+/**
+ * Ajout des trad RU des mois
+ */
+function oab_tristan_update_8026() {
+  include_once("updates/update_8026.inc");
+}
+
+/**
+ * Subhome views => Suppression du calcul automatique de la grille pour passer en bootstrap
+ * pour la version mobile.
+ */
+function oab_tristan_update_8027() {
+  include_once("updates/update_8027.inc");
+}
+
+/**
+ * Ajout de la selection de la langue dans les contenus de type Webform
+ */
+function oab_tristan_update_8028() {
+  include_once("updates/update_8028.inc");
+}
+
+/**
+ * Suppression des filtres Années et Mois dans la subhome Magazine
+ */
+function oab_tristan_update_8029() {
+  include_once("updates/update_8029.inc");
+}
