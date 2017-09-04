@@ -17,19 +17,45 @@
                 <div class='item-list'>
                     <ul class="facetapi">
                         {% for type, facet in facets %}
+                            {% if facet.nbresults > 0 %}
                             <li class='leaf'><a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName }} ({{ facet.nbresults }})</a> </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
 
                     {% if searchMode == 'rubrique' %}
-                        <div class="all_results"><a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': currentSearch }) }}">{{ currentSearch }}</a></div>
+                        <div class="all_results"><a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': currentSearch }) }}">{% trans %} See all results{% endtrans %}</a></div>
                     {% endif %}
                 </div>
             </div>
 
             <div class="results_block col-lg-9 col-md-12 col-sm-12">
                 {# RESULTATS #}
-                searchresult :{{ searchResults }} <br/>
+                searchresult : {# kint(searchResults) #}<br/>
+                {% for cluster in searchResults %}
+                    {% if cluster.nbResults >0 %}
+                <div class="results_cluster">
+                    <div class="cluster_name"> {{ cluster.typeName }} ({{ cluster.nbResults }})</div>
+                    <ul class="results-list">
+                        {% for result in cluster.results %}
+                            <li>
+                                <a href='{{ result.URL }}'>
+                                <div class="title">{{ result.title }}</div>
+                                <div class="description">{{ result.description }}</div>
+                                <div class="read_more">
+											<span class="btn btn-rounded">
+												<span class="hover">{% trans %} See more {% endtrans %}</span>
+												<img class="icon_nav icon-next-right" width="16" height="16" title="" alt="" src="/sites/common_resources/images/px.png">
+											</span>
+                                </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                    {% endif %}
+                {% endfor %}
+
 
 
 

@@ -59,7 +59,7 @@ class SynomiaSearchResponse {
 			}
 			else
 			{
-				//obstools::lock($flux);
+				//filtré sur une rubrique particuliere
 				$this->searchMode = "rubrique";
 				$this->getResultsSimpleArray($xmlResult, $rubrique);
 
@@ -88,7 +88,17 @@ class SynomiaSearchResponse {
 	 */
 	private function getResultsSimpleArray($xmlResult, $type)
 	{
-		$this->results[$type] = array();
+		$clusterArray = array();
+		$clusterArray['typeId'] = $type;
+		//$typeObject = NodeType::load($type);
+		$typeObject = NodeType::load('blog_post');
+		if(isset($typeObject) && !empty($typeObject))
+		{
+			$typeName = $typeObject->label();
+		}
+		$clusterArray['typeName'] = $typeName;
+		$clusterArray['nbResults'] = $this->nbResultsTotal;
+		$clusterArray['results'] = array();
 		if(isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item))
 		{
 			foreach ($xmlResult->resultElements->item as $item)
@@ -97,9 +107,10 @@ class SynomiaSearchResponse {
 				$myItem['title'] = $item->extitle;
 				$myItem['URL'] = $item->URL;
 				$myItem['description'] = $item->description;
-				$this->results[$type][] = $myItem;
+				$clusterArray['results'][] = $myItem;
 			}
 		}
+		$this->results[$type] = $clusterArray;
 	}
 
 	/**
@@ -110,9 +121,12 @@ class SynomiaSearchResponse {
 	function getResultsClustersArray($dom)
 	{
 		//obstools::lock($xml);
+
+
 		$cluster = $dom->getElementsByTagName("cluster");
 		if(isset($cluster))
 		{
+			$clusterArray = array();
 			$cluster = $cluster->item(0);
 			if(isset($cluster))
 			{
@@ -120,9 +134,18 @@ class SynomiaSearchResponse {
 				foreach ($aspects as $aspect)
 				{
 					$type = $aspect->getAttribute('value');
-					$this->results[$type] = array();
-					$items = $aspect->getElementsByTagName("item");
+					$clusterArray['typeId'] = $type;
+					//$typeObject = NodeType::load($type);
+					$typeObject = NodeType::load('blog_post');
+					if(isset($typeObject) && !empty($typeObject))
+					{
+						$typeName = $typeObject->label();
+					}
+					$clusterArray['typeName'] = $typeName;
+					$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
 
+					$items = $aspect->getElementsByTagName("item");
+					$clusterArray['results'] = array();
 					foreach ($items as $item)
 					{
 						$myItem = array();
@@ -142,8 +165,9 @@ class SynomiaSearchResponse {
 						{
 							$myItem['rubrique'] = $item->getElementsByTagName("rubrique")->item(0)->nodeValue;
 						}
-						$this->results[$type][] = $myItem;
+						$clusterArray['results'][] = $myItem;
 					}
+					$this->results[$type] = $clusterArray;
 				}
 			}
 			//oabt($this->results, true);

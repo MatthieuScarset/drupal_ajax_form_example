@@ -26,10 +26,16 @@ class SynomiaSearchEngineForm extends FormBase {
 	 */
 	public function buildForm(array $form, FormStateInterface $form_state) {
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+
+
+		$form['search_label'] = array(
+			'#type' => 'label',
+			'#title' => t('What are you searching for?')
+		);
+
 		$form['mot'] = array(
 			'#type' => 'textfield',
 			'#name' => 'mot',
-			'#title' => t('Search'),
 			'#required' => TRUE,
 			//'#title_display' => 'invisible',
 			'#default_value' => (!empty($parameters) && isset($parameters['mot'])) ? $parameters['mot'] : '',
@@ -37,7 +43,7 @@ class SynomiaSearchEngineForm extends FormBase {
 
 		$form['submit'] = array(
 			'#type' => 'submit',
-			'#value' => t('apply search'),
+			'#value' => t('Search'),
 			'#attributes' => Array(
 				'title' => t('search')
 			)

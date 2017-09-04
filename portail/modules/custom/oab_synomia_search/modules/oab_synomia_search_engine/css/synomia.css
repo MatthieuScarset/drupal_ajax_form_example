@@ -1,18 +1,44 @@
+article.page-synomia-search-results{
+    display: table;
+}
 .search_form {
-    background-color: #f6f6f2;
     font-size: 100%;
     padding: 10px 0 42px;
+    text-align: center;
 }
 
 
+.search_form form#oab-synomia-search-engine-form label {
+    width: 100%;
+    color: #ff7900;
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 3rem;
+    padding: 20px 0 10px;
+}
 .search_form input#edit-mot {
     border: 1px solid #dddddd;
     color: black;
     font-size: 2.8rem;
     height: 50px;
     line-height: 2.8rem;
-    padding: 8px 15px;
-    width: 50%;
+    padding: 6px 15px;
+}
+
+.search_form .container{
+    width: 35%;
+}
+
+.search_form label,
+.search_form .row,
+.search_form .container,
+.search_form input{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.search_form form#oab-synomia-search-engine-form .row{
+    float: left;
 }
 
 .block_principal_results .nbResults,
@@ -70,4 +96,36 @@
 }
 .block-facetapi ul li.leaf a {
     color: #888888;
+}
+
+
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .cluster_name{
+    background: #efefef none repeat scroll 0 0;
+    border-bottom: 1px solid #f1f1f1;
+    color: black;
+    font-size: 1.685em;
+    font-weight: bold;
+    padding: 0 0 5px 20px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li{
+    border-bottom: 1px solid #f1f1f1;
+    list-style: outside none none;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a{
+    color: black;
+    display: block;
+    padding: 15px 20px;
+    position: relative;
+    text-decoration: none;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a .title {
+    font-weight: bold;
+    margin-bottom: 10px;
 }

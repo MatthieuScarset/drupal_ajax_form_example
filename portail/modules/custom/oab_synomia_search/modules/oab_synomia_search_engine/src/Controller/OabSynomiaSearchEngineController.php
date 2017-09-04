@@ -110,6 +110,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
   private function getSynomiaResult($mot_recherche, $filtre_rubrique, $numPage, $sortBy){
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 		$urlSynomia = \Drupal::state()->get('url_synomia_'.$current_language);
+		//POUR LES TESTS
+		$urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
@@ -157,10 +159,6 @@ class OabSynomiaSearchEngineController extends ControllerBase
 				$proxy_server .= ':' . variable_get('proxy_port', '');
 			}
 			*/
-//pour les tests de facet
-			$path = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9&q=citron&sortBy=&nbCoocDisplay=5&sortie=facette&cluster=rubrique';
-
-
 			$proxy_server = null;
 			var_dump($path);
 			curl_setopt_array
