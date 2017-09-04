@@ -143,6 +143,11 @@ article .content .field--type-text-long ul li:before{
 
 }
 
+.view-display-id-page_partners .display-subhomes .encart-image img,
+.view-display-id-page_customer .display-subhomes .encart-image img{
+    width: auto;
+}
+
 .date-subhome {
     color: grey;
 }
