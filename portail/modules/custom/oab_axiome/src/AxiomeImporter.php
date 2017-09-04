@@ -498,7 +498,7 @@ class AxiomeImporter{
         $fiche_dir = $this->axiome_folder_path . '/fiches/' . $xpath_fiche->getAttribute('id');
         //echo($fiche_dir);
 
-        //echo ("axiome traitment fiche id = " . $xpath_fiche->getAttribute('id'));
+        echo ("axiome traitment fiche id = " . $xpath_fiche->getAttribute('id'));
         if (is_dir($fiche_dir)) {
             $files_fiche = scandir($fiche_dir);
             foreach ($files_fiche AS $file_fiche) {
