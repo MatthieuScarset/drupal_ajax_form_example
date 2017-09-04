@@ -903,3 +903,12 @@ article .content .field--type-text-long ul li:before{
     line-height: 2rem;
 
 }
+
+
+.homepage-title-white {
+    color: white;
+}
+
+.homepage-title-black {
+    color: black;
+}

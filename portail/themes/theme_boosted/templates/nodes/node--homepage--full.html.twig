@@ -86,7 +86,11 @@
         {% endif %}
     {% endfor %}
     <div class="col-md-12 col-xs-12 banner-bg top-banner"  style="background: url({{ url }}) ">
-        <div class="section-title-top-zone">
+        {% set colorClass = "homepage-title-white" %}
+        {% if content.field_title_color.0["#markup"] == "Black" %}
+            {% set colorClass = "homepage-title-black" %}
+        {% endif %}
+        <div class="section-title-top-zone {{ colorClass }}">
             <div class="col-md-7 no-padding text-left subhead-title">
                 {{ content.field_subhead_title_top_zone }}
             </div>
