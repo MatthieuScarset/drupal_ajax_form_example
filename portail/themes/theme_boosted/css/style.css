@@ -298,7 +298,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     display:none;
 }
 
-.navigation_arrow{
+.navigation_arrow_homepage{
     width: 20px;
     height: 20px;
     float: left;
@@ -415,7 +415,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 #tab-expertise-banner li a{
     color: #999;
     text-align: center;
-    padding: 30px;
+    padding: 3rem;
     background-color: #eee;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -425,6 +425,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     display: table;
     width: 100%;
 }
+
 .corporate-infography-banner{
     margin-top: -40px;
     background: #fff;
@@ -1075,3 +1076,4 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .homepage-title-black {
     color: black;
 }
+
