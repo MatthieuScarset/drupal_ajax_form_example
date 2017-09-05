@@ -13,4 +13,4 @@ oab.settings_offices_map:
     _form: '\Drupal\oab_offices_map\Form\oabSettingsOfficesMapForm'
     _title: 'Offices Map settings'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'oab_offices_map_administer'

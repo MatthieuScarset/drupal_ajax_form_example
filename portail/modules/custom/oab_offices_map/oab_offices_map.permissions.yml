@@ -1,0 +1,4 @@
+oab_offices_map_administer:
+  title: Configuration du module Offices map
+  descrption: Accès a l'administration du module OAB Offices Map
+  restrict access: true
