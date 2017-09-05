@@ -1,0 +1,57 @@
+uuid: 5567f072-597f-414d-9a90-d7439046e5fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_news.field_chapo
+    - field.field.paragraph.homepage_news.field_image
+    - field.field.paragraph.homepage_news.field_link_news
+    - field.field.paragraph.homepage_news.field_title
+    - image.style.homepage_news
+    - paragraphs.paragraphs_type.homepage_news
+  module:
+    - image
+    - link
+    - text
+id: paragraph.homepage_news.default
+targetEntityType: paragraph
+bundle: homepage_news
+mode: default
+content:
+  field_chapo:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: homepage_news
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_link_news:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }
