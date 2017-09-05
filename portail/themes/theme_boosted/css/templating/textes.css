@@ -762,3 +762,6 @@ p.contenu {
         padding: 3rem 1rem;
     }
 }
+.clearboth{
+    clear: both;
+}
