@@ -21,7 +21,6 @@ class OabExtension extends \Twig_Extension {
   }
 
   public function getFunctions() {
-
       return [
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
@@ -34,10 +33,9 @@ class OabExtension extends \Twig_Extension {
           )),*/
           new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
-      ];
-
-    return $filters;
-  }
+          new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
+          ];
+}
 
   public function getFilters() {
 
@@ -149,7 +147,6 @@ class OabExtension extends \Twig_Extension {
     }
   }
 
-
     /**
      * Returns the render array for Drupal menu.
      *
@@ -187,6 +184,7 @@ class OabExtension extends \Twig_Extension {
         return $menu_tree->build($tree);
     }
 
+
   /**
    * Encode un texte avec rawurlencode ( ...les %20 à la place des espaces)
    * @param $url
@@ -216,6 +214,27 @@ class OabExtension extends \Twig_Extension {
         $url = str_replace('https:', '', $url);
         $url = str_replace('http:', '', $url);
         return $url;
+    }
+
+    /**
+     * Returns if the field is empty
+     *
+     * @param Object $field
+     *   The field.
+		 *
+     * @return boolean
+     *   A render array for the menu.
+     */
+    public function is_empty_field($field) {
+    		$empty = true;
+        if (!is_null($field)){
+        	foreach ($field as $key => $value){
+        		if ($key[0] != "#"){
+							$empty = false;
+						}
+					}
+				}
+        return $empty;
     }
 
 }
