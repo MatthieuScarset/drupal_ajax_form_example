@@ -1,1 +1,12 @@
 <?php
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
+
+function oab_tristan_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  $allowedValues = array (
+    "white"  => "White",
+    "black" => "Black"
+
+  );
+  return $allowedValues;
+}
