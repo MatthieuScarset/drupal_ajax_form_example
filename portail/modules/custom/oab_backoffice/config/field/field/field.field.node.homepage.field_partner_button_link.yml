@@ -1,0 +1,23 @@
+uuid: 384366ad-59df-4d47-b014-4deb6834bf40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_partner_button_link
+    - node.type.homepage
+  module:
+    - link
+id: node.homepage.field_partner_button_link
+field_name: field_partner_button_link
+entity_type: node
+bundle: homepage
+label: 'Button link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
