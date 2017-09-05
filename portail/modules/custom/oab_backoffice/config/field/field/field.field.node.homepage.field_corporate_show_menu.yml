@@ -1,0 +1,23 @@
+uuid: a126a23d-20a6-4ba0-b299-c770a82c53fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_corporate_show_menu
+    - node.type.homepage
+id: node.homepage.field_corporate_show_menu
+field_name: field_corporate_show_menu
+entity_type: node
+bundle: homepage
+label: 'Show Menu'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Show
+  off_label: Hide
+field_type: boolean
