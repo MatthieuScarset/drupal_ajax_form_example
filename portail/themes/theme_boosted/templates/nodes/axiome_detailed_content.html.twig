@@ -6,8 +6,15 @@
 
 
     <div class="bg product_modules bg_white col col-md-12 nopadding">
+        {% set colIterator = 0 %}
+        {% set cssClear = "" %}
         {% for i in 0..9 %}
-            <div class="col col-md-6 col-xs-12 nopadding">
+            {% if(colIterator%2 == 1) %}
+                {%  set cssClear = "" %}
+            {% else %}
+                {%  set cssClear = "style=clear:both" %}
+            {% endif %}
+            <div class="col col-md-6 col-xs-12 nopadding" {{ cssClear }}>
                 <div class="col col-md-2 col-xs-2 nopadding">
                     <p style="margin-top:1rem;"><span class="solaris {{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.icon.boosted_css_name }}" style="font-size:4rem;"></span></p>
                 </div>
@@ -20,6 +27,7 @@
                     <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description }}</p>
                 </div>
             </div>
+            {%  set colIterator = colIterator + 1 %}
         {% endfor %}
     </div>
 </div>
