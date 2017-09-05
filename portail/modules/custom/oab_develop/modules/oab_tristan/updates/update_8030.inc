@@ -59,12 +59,66 @@ loadConfigField('field/field', 'field.field.node.homepage.field_title_color');
 loadConfigField('field/storage', 'field.storage.node.field_title_color');
 
 
-// import view homepage
+##Je les crée avec la base, puis je charge la config complète
+
+#PARTNERS BUTTON TEXT
+$field_storage = FieldStorageConfig::loadByName('node', 'field_partners_button_text');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_partners_button_text',
+    'entity_type' => 'node',
+    'type' => 'string',
+  ))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'homepage', 'field_partners_button_text');
+if(empty($field)) {
+  $config_array = array(
+    'field_name' =>  'field_partners_button_text',
+    'entity_type' => 'node',
+    'bundle' => 'homepage',
+    'label' => 'Button text',
+    'required' => false,
+  );
+  FieldConfig::create($config_array)->save();
+}
+loadConfigField('field/field', 'field.field.node.homepage.field_partners_button_text');
+loadConfigField('field/storage', 'field.storage.node.field_partners_button_text');
+
+
+#CORPORATE BUTTON TEXT
+$field_storage = FieldStorageConfig::loadByName('node', 'field_corporate_button_text');
+if(empty($field_storage)) {
+  FieldStorageConfig::create(array(
+    'field_name' => 'field_corporate_button_text',
+    'entity_type' => 'node',
+    'type' => 'string',
+  ))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'homepage', 'field_corporate_button_text');
+if(empty($field)) {
+  $config_array = array(
+    'field_name' =>  'field_corporate_button_text',
+    'entity_type' => 'node',
+    'bundle' => 'homepage',
+    'label' => 'Button text',
+    'required' => false,
+  );
+  FieldConfig::create($config_array)->save();
+}
+loadConfigField('field/field', 'field.field.node.homepage.field_corporate_button_text');
+loadConfigField('field/storage', 'field.storage.node.field_corporate_button_text');
+
+
+
+
+// import VIEW DISPLAY FULL
 $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.node.homepage.full.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.node.homepage.full')->setData($data)->save(TRUE);
 
-// import view homepage
+// import FORM DISPLAY DEFAULT
 $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.node.homepage.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.node.homepage.default.yml')->setData($data)->save(TRUE);

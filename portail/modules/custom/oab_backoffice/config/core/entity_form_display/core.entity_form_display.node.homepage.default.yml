@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -6,6 +7,7 @@ dependencies:
     - field.field.node.homepage.field_banner_left_zone_title
     - field.field.node.homepage.field_banner_right_zone_title
     - field.field.node.homepage.field_corporate_button_link
+    - field.field.node.homepage.field_corporate_button_text
     - field.field.node.homepage.field_corporate_highlight
     - field.field.node.homepage.field_corporate_image
     - field.field.node.homepage.field_corporate_menu
@@ -20,16 +22,17 @@ dependencies:
     - field.field.node.homepage.field_news_top_zone
     - field.field.node.homepage.field_partner_button_link
     - field.field.node.homepage.field_partner_title
+    - field.field.node.homepage.field_partners_button_text
     - field.field.node.homepage.field_solution_banner_highlight
     - field.field.node.homepage.field_solution_banner_image
     - field.field.node.homepage.field_solution_banner_left_zone
     - field.field.node.homepage.field_solution_banner_right_zone
     - field.field.node.homepage.field_solution_banner_title
     - field.field.node.homepage.field_subhead_title_top_zone
+    - field.field.node.homepage.field_title_color
     - field.field.node.homepage.field_top_zone_image
     - image.style.homepage_top_zone
     - node.type.homepage
-    - field.field.node.homepage.field_title_color
   module:
     - field_group
     - image
@@ -44,8 +47,8 @@ third_party_settings:
       children:
         - field_header_title
         - field_subhead_title_top_zone
-        - field_title_color
         - field_top_zone_image
+        - field_title_color
         - field_news_top_zone
       parent_name: group_onglets
       weight: 0
@@ -138,9 +141,8 @@ third_party_settings:
         - field_corporate_title
         - field_corporate_highlight
         - field_corporate_button_link
-        - field_corporate_show_menu
+        - field_corporate_button_text
         - field_corporate_menu_title
-        - field_corporate_menu
         - field_corporate_image
         - field_infography
       parent_name: group_onglets
@@ -157,7 +159,7 @@ third_party_settings:
     group_partner_:
       children:
         - field_partner_title
-        - field_partner_button_link
+        - field_partners_button_text
       parent_name: group_onglets
       weight: 3
       format_type: tab
@@ -230,6 +232,14 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  field_corporate_button_text:
+    weight: 35
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_corporate_highlight:
     weight: 33
     settings:
@@ -246,15 +256,6 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
-  field_corporate_menu:
-    weight: 37
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_corporate_menu_title:
     weight: 36
     settings:
@@ -262,13 +263,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_corporate_show_menu:
-    weight: 35
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
     region: content
   field_corporate_title:
     weight: 32
@@ -334,16 +328,16 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     region: content
-  field_partner_button_link:
-    weight: 9
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
   field_partner_title:
     weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_partners_button_text:
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -406,6 +400,12 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_title_color:
+    weight: 45
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_top_zone_image:
     weight: 45
     settings:
@@ -457,11 +457,8 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-  field_title_color:
-    weight: 45
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
 hidden:
+  field_corporate_menu: true
+  field_corporate_show_menu: true
+  field_partner_button_link: true
   translation: true
