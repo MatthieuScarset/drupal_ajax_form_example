@@ -46,42 +46,67 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 
 }
 
-
-function theme_boosted_preprocess_node(&$variables) {
-
-}
-
 function theme_boosted_preprocess_page(&$variables) {
-    if (\Drupal::routeMatch()->getParameter('node')) {
-        $node = \Drupal::routeMatch()->getParameter('node');
+  if (\Drupal::routeMatch()->getParameter('node')) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+  }
+  if (\Drupal::routeMatch()->getParameter('node_preview')) {
+    $node = \Drupal::routeMatch()->getParameter('node_preview');
+  }
+  if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+    $node = node_revision_load($revision);
+  }
+  $variables['page']['containerClass'] = 'container';
+  if (isset($node) && is_object($node)
+    && get_class($node) == 'Drupal\node\Entity\Node') {
+    $content_type = $node->bundle();
+    if ($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique') {
+      $variables['page']['containerClass'] = 'container-fluid';
     }
-    if (\Drupal::routeMatch()->getParameter('node_preview')) {
-        $node = \Drupal::routeMatch()->getParameter('node_preview');
+    $definitions = \Drupal::service('entity_field.manager')
+      ->getFieldDefinitions('node', $content_type);
+    if (isset($definitions)
+      && array_key_exists('field_display_title', $definitions)) {
+      $display_title = $node->get('field_display_title')->getValue();
+      if (isset($display_title[0]['value'])
+        && $display_title[0]['value'] == 0
+        && isset($variables['page']['content']['theme_boosted_page_title'])
+      ) {
+        $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+      }
     }
-    if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-        $node = node_revision_load($revision);
-    }
-    $variables['page']['containerClass'] = 'container';
-    if (isset($node) && is_object($node)
-        && get_class($node) == 'Drupal\node\Entity\Node') {
-        $content_type = $node->bundle();
-        if($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique'){
-            $variables['page']['containerClass'] = 'container-fluid';
-        }
-        $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
-        if (isset($definitions)
-            && array_key_exists('field_display_title', $definitions)) {
-            $display_title = $node->get('field_display_title')->getValue();
-            if (isset($display_title[0]['value'])
-                && $display_title[0]['value'] == 0
-                && isset($variables['page']['content']['theme_boosted_page_title'])
-            ) {
-                $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
-            }
-        }
-    }
-}
+  }
 
+  if (\Drupal::routeMatch()->getParameter('node')) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+  }
+  if (\Drupal::routeMatch()->getParameter('node_preview')) {
+    $node = \Drupal::routeMatch()->getParameter('node_preview');
+  }
+  if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+    $node = node_revision_load($revision);
+  }
+  $variables['page']['containerClass'] = 'container';
+  if (isset($node) && is_object($node)
+    && get_class($node) == 'Drupal\node\Entity\Node') {
+    $content_type = $node->bundle();
+    if ($content_type == 'homepage' || $content_type == 'homepage_eclairage') {
+      $variables['page']['containerClass'] = 'container-fluid';
+    }
+    $definitions = \Drupal::service('entity_field.manager')
+      ->getFieldDefinitions('node', $content_type);
+    if (isset($definitions)
+      && array_key_exists('field_display_title', $definitions)) {
+      $display_title = $node->get('field_display_title')->getValue();
+      if (isset($display_title[0]['value'])
+        && $display_title[0]['value'] == 0
+        && isset($variables['page']['content']['theme_boosted_page_title'])
+      ) {
+        $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+      }
+    }
+  }
+}
 function theme_boosted_preprocess_views_view(&$variables){
   $view = $variables['view'];
   $id = $view->storage->id();

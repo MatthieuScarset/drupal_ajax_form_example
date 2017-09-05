@@ -183,12 +183,65 @@
       top -= decalSticky + 10;    //J'enlève la taille des elements stickys trouvés; je rajoute 10 de marge
 
       //On décale l'element avec un petit effet
-      $("html, body").animate({ scrollTop: top }, "slow");
+      $("html, body").animate({scrollTop: top}, "slow");
     }
 
     //Je return false pour desactiver le lien vers l'ancre par le navigateur
     return false;
   });
+      $('#tab-expertise-banner a').click(function (e) {
+          e.preventDefault();
+          $(this).tab('show');
+      });
+
+      $('.slick-mode').slick({
+          infinite: true,
+          dots: false,
+          arrows: false,
+          responsive: [
+              {
+                  breakpoint: 480,
+                  settings: {
+                      dots: true
+                  }
+              },
+          ],
+      });
+
+      // Homepage carousel solution & industries
+      $('#home-slick-carousel-left-prev_arrow').on('click', function(){
+          console.log('click on prevArrow ok');
+          $('#slick-left-zone').slick("slickPrev");
+      });
+      $('#home-slick-carousel-left-next_arrow').on('click', function(){
+          console.log('click on nextArrow ok');
+          $('#slick-left-zone').slick("slickNext");
+      });
+      $('#home-slick-carousel-right-prev_arrow').on('click', function(){
+          console.log('click on prevArrow ok');
+          $('#slick-right-zone').slick("slickPrev");
+      });
+      $('#home-slick-carousel-right-next_arrow').on('click', function(){
+          console.log('click on nextArrow ok');
+          $('#slick-right-zone').slick("slickNext");
+      });
+
+      //Tabs Homepage Expertise Banner
+      $('.nav-tabs-dropdown').each(function(i, elm) {
+          $(elm).text($(elm).next('ul').find('li.active a').text());
+          $(elm).append('<span class="caret"></span>');
+      });
+
+      $('.nav-tabs-dropdown').on('click', function(e) {
+          e.preventDefault();
+          $(e.target).toggleClass('open').next('ul').slideToggle();
+      });
+
+      $('#tab-expertise-banner a[data-toggle="tab"]').on('click', function(e) {
+          e.preventDefault();
+          $(e.target).closest('ul').hide().prev('button').removeClass('open').text($(this).text());
+          $(e.target).closest('ul').prev('button').append('<span class="caret"></span>');
+      });
 
   Drupal.behaviors.myBehaviour = {
     attach: function (context, settings) {
