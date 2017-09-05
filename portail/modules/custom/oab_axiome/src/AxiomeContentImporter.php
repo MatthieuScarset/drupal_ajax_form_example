@@ -30,9 +30,7 @@ class AxiomeContentImporter {
 		// Creation du top_zone
 		$bannerData = $axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes'];
 		$idOffre = $axiomeData['@attributes']['id'];
-		$urlBackground = $idOffre.'/'.$bannerData['background_image']['url_archive'];
-
-
+		$urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
 
 		// Top zone
 		$content = file_get_contents(
@@ -45,19 +43,19 @@ class AxiomeContentImporter {
 		self::replaceCenterBlock($dom, $bannerData);
 		self::replaceRightBlock($dom, $bannerData);
 
+
 		$content = $dom->saveHTML($dom->getElementsByTagName('div')->item(0));
 		$node->set('field_top_zone', $content);
 		$node->field_top_zone->format = 'full_html';
 
-
 		//TOP Zone Background
 		if (!empty($bannerData['background_image']['url_archive'])){
-
 			$urlBackground = 'public://axiome/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
 			$messages .= 'Url Top zone : '.$urlBackground."\nMedia #".$image_media_id."\n";
 			$node->set('field_top_zone_background', $image_media_id);
 		}
+
 	}
 
 	private static function replaceLeftBlock(&$dom, $bannerData){
@@ -76,6 +74,7 @@ class AxiomeContentImporter {
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleLeftBlock;
 		}
+
 	}
 
 	private static function replaceCenterBlock(&$dom, $bannerData){
@@ -86,6 +85,7 @@ class AxiomeContentImporter {
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleCenter;
 		}
+
 	}
 
 	private static function replaceRightBlock(&$dom, $bannerData){
@@ -108,6 +108,7 @@ class AxiomeContentImporter {
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleRightBlock;
 		}
+
 	}
 
 	private static function getNodesByClass($dom, $classname, $element = "*"){
@@ -145,6 +146,11 @@ class AxiomeContentImporter {
 		$destination = $styleThumbnail->buildUri($url);
 		$styleThumbnail->createDerivative($original_image, $destination);
 
+		if(empty($data['balise_alt'])){
+            $balise_alt = "";
+        }else{
+            $balise_alt = $data['balise_alt'];
+        }
 
 // Create media entity with saved file.
 		$image_media = Media::create([
@@ -154,8 +160,8 @@ class AxiomeContentImporter {
 			'status' => Media::PUBLISHED,
 			'field_image' => [
 				'target_id' => $image->id(),
-				'alt' => $data['balise_alt'],
-				'title' => $data['balise_alt'],
+				'alt' => $balise_alt,
+				'title' => $balise_alt,
 			],
 		]);
 		$image_media->save();

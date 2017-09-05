@@ -13,10 +13,13 @@ use Drupal\block\Entity\Block;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
 use Drupal\taxonomy\Plugin\views\wizard\TaxonomyTerm;
 use Drupal\views\Views;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OabOfficesMapPageController extends ControllerBase {
 
@@ -26,47 +29,77 @@ class OabOfficesMapPageController extends ControllerBase {
 
 	public function viewPage(Request $request) {
 
-		//paramètres :
-		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-		$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
-		$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
-
-		$officesMapView = Views::getView('offices_map_view');
-		$officesMapView->setDisplay('offices_map_block');
-		$officesMapView->args = array($region_id, $country_id);
-		$officesMapView->preExecute();
-		$officesMapView->execute();
-		$mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
-
-		$officesMapView = Views::getView('offices_map_view');
-		$officesMapView->setDisplay('offices_addresses_list_block');
-		$officesMapView->args = array($region_id, $country_id);
-		$officesMapView->preExecute();
-		$officesMapView->execute();
-		$officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
-
-		$regionsCountriesForm = \Drupal::formBuilder()->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
-
-		$listLabel = t('All offices');
-		if($region_id != 'all'){
-			$region =  \Drupal\taxonomy\Entity\Term::load($region_id);
-			$listLabel = $region->label().' offices';
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+		if($current_language == "fr")
+		{
+			//on lance une 404
+			throw new NotFoundHttpException();
 		}
-		return array(
-			'#mapBlock' => $mapBlock,
-			'#officesListBlock' => $officesListBlock,
-			'#regionsCountriesForm' => $regionsCountriesForm,
-			'#labelList' => $listLabel,
-			'#theme' => 'offices_map_page',
-			'#attached' => array(
-				'library' =>  array(
-					'oab_offices_map/oab_offices_map.markers'
-				),
-				'drupalSettings' =>  array(
-					'countriesRegionsTab' => $this->getArrayRegionsCountries(),
-				),
-			),
-		);
+		else {
+			//paramètres :
+			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
+			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
+			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
+			|| ($current_language == "ru" && !empty($country_id) && $country_id =="all"))
+			{
+				// si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
+				$query = \Drupal::entityQuery('taxonomy_term');
+				$query->condition('vid', 'office_countries');
+				$query->condition('name', 'Russia');
+				$entity = $query->execute();
+
+				if(!empty($entity))
+				{
+					$country_id = array_pop(array_values($entity));
+				}
+				$current_route = \Drupal::routeMatch()->getRouteName();
+				$option = [
+					'query' => array('region' => $region_id, 'country' => $country_id),
+				];
+				$url = Url::fromRoute($current_route, array(), $option);
+				return new RedirectResponse($url->toString());
+			}
+			else {
+				$officesMapView = Views::getView('offices_map_view');
+				$officesMapView->setDisplay('offices_map_block');
+				$officesMapView->args = array($region_id, $country_id);
+				$officesMapView->preExecute();
+				$officesMapView->execute();
+				$mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
+
+				$officesMapView = Views::getView('offices_map_view');
+				$officesMapView->setDisplay('offices_addresses_list_block');
+				$officesMapView->args = array($region_id, $country_id);
+				$officesMapView->preExecute();
+				$officesMapView->execute();
+				$officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
+
+				$regionsCountriesForm = \Drupal::formBuilder()
+					->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
+
+				$listLabel = t('All offices');
+				if ($region_id != 'all') {
+					$region = \Drupal\taxonomy\Entity\Term::load($region_id);
+					$listLabel = $region->label() . ' offices';
+				}
+				return array(
+					'#mapBlock' => $mapBlock,
+					'#officesListBlock' => $officesListBlock,
+					'#regionsCountriesForm' => $regionsCountriesForm,
+					'#labelList' => $listLabel,
+					'#theme' => 'offices_map_page',
+					'#attached' => array(
+						'library' => array(
+							'oab_offices_map/oab_offices_map.markers'
+						),
+						'drupalSettings' => array(
+							'countriesRegionsTab' => $this->getArrayRegionsCountries(),
+						),
+					),
+				);
+			}
+		}
 	}
 
 	private function getArrayRegionsCountries(){
