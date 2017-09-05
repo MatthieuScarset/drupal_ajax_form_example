@@ -557,6 +557,18 @@ p.contenu {
     background-color: #ededed;
     height: 130px;
 }
+.node-axiome-partners .bg-partner .img img{
+    margin: auto;
+    max-width: 10.5rem;
+    max-height: 13rem;
+}
+.node-axiome-partners .bg-partner .img{
+    display: flex;
+}
+.node-axiome-partners .bg-partner .img a{
+    display: inherit;
+    margin: auto;
+}
 .bg-partner .img article,
 .bg-partner .img > div{
     display: flex;
