@@ -62,7 +62,7 @@
  */
 #}
 
-{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{% set container = theme.settings.fluid_container ? 'container-fluid' : page.containerClass %}
 {# Header #}
 {% if page.header %}
         <header id="navbar" role="banner">
@@ -81,14 +81,14 @@
 {# Main #}
 {% block main %}
     <div role="main" class="main-container {{ container }} js-quickedit-main-content">
-       <div class="row">
-            {# Content #}
+        {# <div class="row"> #}
+              {# Content #}
             {% block pre_content %}
                 <a id="pre-content"></a>
                 {{ page.pre_content }}
             {% endblock %}
-        </div>
-        <div class="row">
+      {#  </div> #}
+      {#  <div class="row"> #}
             {# Content #}
             {% set content_classes = [
                 page.sidebar ? 'col-md-8 col-sm-12 left-column',
@@ -109,11 +109,7 @@
                 </aside>
               {% endblock %}
             {% endif %}
-
-
-
-
-        </div>
+       {# </div> #}
     </div>
 {% endblock %}
 

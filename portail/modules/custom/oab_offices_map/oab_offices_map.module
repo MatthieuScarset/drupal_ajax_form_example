@@ -1,0 +1,35 @@
+<?php
+
+function oab_offices_map_theme(){
+	$theme = array();
+	$theme['offices_map_page'] = array(
+		'variables' => array(
+			'mapBlock' => array(),
+			'officesListBlock' => array(),
+			'regionsCountriesForm' => array(),
+			'labelList' => array(),
+		),
+		'template' => 'offices-map--page'
+	);
+
+	/*
+	//  Ne fonctionne pas quand on met les templates dans le module = on perds les infos de la vue et des rows ==> l'affichage est vide
+	$theme['views_view_fields__offices_map_view__offices_map_block'] = array(
+		'template' => 'views-view-fields--offices-map-view--offices-map-block',
+		'original hook' => 'views_view_fields',
+		'path' => drupal_get_path('module', 'oab_offices_map') . '/templates',
+	);
+	$theme['views_view_list__offices_map_view__offices_addresses_list_block'] = array(
+		'template' => 'views-view-list--offices-map-view--offices-addresses-list-block',
+		'original hook' => 'views_view_list',
+		'path' => drupal_get_path('module', 'oab_offices_map') . '/templates',
+	);
+	*/
+
+	return $theme;
+}
+
+
+function oab_offices_map_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+
+}

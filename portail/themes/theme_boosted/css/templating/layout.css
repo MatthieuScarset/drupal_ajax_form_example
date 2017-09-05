@@ -58,6 +58,9 @@
 .no-padding{
     padding: 0 !important;
 }
+.no-margin{
+    margin: 0 !important;
+}
 
 .width-xxs-1,
 .width-xs-1,
@@ -725,7 +728,7 @@ aside.right-column > .region{
 
 #related-content-slick-carousel .image img {
     margin: 0 auto;
-    width: 100%;
+    width: auto;
 }
 #highlights-container .highlights-items .item .inner .text .title {
     font-size: 2em;
@@ -808,4 +811,26 @@ aside.right-column > .region{
 
 .slick-dots{
     width: 90%;
+}
+
+
+
+
+#homepage-playlist-slick-carousel .image img {
+    margin: 0 auto;
+    width: 100%;
+}
+#homepage-playlist-slick-carousel article.media  {
+    margin-top: 0px !important;
+}
+#homepage-playlist-slick-carousel{
+    padding:20px;
+}
+#homepage-playlist-slick-carousel .slick-list{
+    width:100% !important;
+}
+.item-homepage-playlist {
+    padding: 0px 20px 40px 20px;
+    width: 30%;
+    float: left;
 }
