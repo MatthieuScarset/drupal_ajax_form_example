@@ -48,13 +48,18 @@
     padding: 0;
 }
 
-article .content .field--type-text-long ul{
+article .content .field--type-text-long ul,
+article.product .node-axiome-know-more ul{
     list-style: none;
     padding-left: 2rem;
     margin-bottom: 0px !important;
     padding-bottom: 1rem;
 }
-article .content .field--type-text-long ul li{
+article.product .node-axiome-know-more ul{
+    padding-left: 0;
+}
+article .content .field--type-text-long ul li,
+article.product .node-axiome-know-more ul li{
     position: relative;
     font-size: 1.6rem;
 }
@@ -149,6 +154,15 @@ article .content .field--type-text-long ul li:before{
 
 a.link-subhomes:hover .encart-image.subhome-image {
     background-color: white;
+}
+
+.view-display-id-page_partners .display-subhomes .encart-image img,
+.view-display-id-page_customer .display-subhomes .encart-image img{
+    width: auto;
+}
+
+.date-subhome {
+    color: grey;
 }
 
 .content a {
