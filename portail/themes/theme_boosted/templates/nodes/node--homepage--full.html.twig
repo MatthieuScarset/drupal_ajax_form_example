@@ -157,8 +157,8 @@
                         <div class="title-solution-banner row">
                             {% if numberItems > 1 %}
                                 <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                    <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                    <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                    <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
                                 </div>
                                 {% set columnSize = '10' %}
                                 {% set slickMode = 'slick-mode' %}
@@ -186,8 +186,8 @@
                         <div class="title-solution-banner row">
                             {% if numberItems > 1 %}
                                 <div class="col-md-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                    <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                                    <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                                    <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
+                                    <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
                                 </div>
                                 {% set columnSize = '10' %}
                                 {% set slickModeRight = 'slick-mode' %}
@@ -255,8 +255,15 @@
                     {% for key, item in node.field_banner_expertise %}
                         <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
                             <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
-                                <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
-                                {{ item.entity.field_tab_title.value }}
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{ item.entity.field_tab_title.value }}
+                                    </div>
+                                </div>
+
                             </a>
                         </li>
                     {% endfor %}

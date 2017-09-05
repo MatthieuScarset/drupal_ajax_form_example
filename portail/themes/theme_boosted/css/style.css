@@ -259,7 +259,7 @@ article .content .field--type-text-long ul li:before{
     display:none;
 }
 
-.navigation_arrow{
+.navigation_arrow_homepage{
     width: 20px;
     height: 20px;
     float: left;
@@ -376,7 +376,7 @@ article .content .field--type-text-long ul li:before{
 #tab-expertise-banner li a{
     color: #999;
     text-align: center;
-    padding: 30px;
+    padding: 3rem;
     background-color: #eee;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -386,6 +386,10 @@ article .content .field--type-text-long ul li:before{
     display: table;
     width: 100%;
 }
+#tab-expertise-banner li {
+    height: 9.6rem;
+}
+
 .corporate-infography-banner{
     margin-top: -40px;
     background: #fff;
@@ -932,3 +936,4 @@ article .content .field--type-text-long ul li:before{
 .homepage-title-black {
     color: black;
 }
+
