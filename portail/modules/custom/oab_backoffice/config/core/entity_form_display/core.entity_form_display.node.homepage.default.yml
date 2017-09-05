@@ -1,4 +1,3 @@
-uuid: 835379da-a3bf-4ea2-8792-71a44d02a4ed
 langcode: en
 status: true
 dependencies:
@@ -30,6 +29,7 @@ dependencies:
     - field.field.node.homepage.field_top_zone_image
     - image.style.homepage_top_zone
     - node.type.homepage
+    - field.field.node.homepage.field_title_color
   module:
     - field_group
     - image
@@ -44,6 +44,7 @@ third_party_settings:
       children:
         - field_header_title
         - field_subhead_title_top_zone
+        - field_title_color
         - field_top_zone_image
         - field_news_top_zone
       parent_name: group_onglets
@@ -456,5 +457,11 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
+  field_title_color:
+    weight: 45
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
 hidden:
   translation: true

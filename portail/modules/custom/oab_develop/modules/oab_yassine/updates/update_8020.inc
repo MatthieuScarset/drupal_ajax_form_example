@@ -229,17 +229,16 @@ if (\Drupal\system\Entity\Menu::load('our-regional-presence') == null) {
 		->save();
 }
 $items = array(
-	'239' => 'North America',
-	'235' => 'Asia Pacific',
-	'521' => 'Middle East & Africa',
-	'236' => 'Europe',
-	'237' => 'Latine America',
+	'394' => 'Americas',
+	'393' => 'Asia Pacific',
+	'399' => 'Middle East & Africa',
+	'397' => 'Europe',
 );
 
 foreach($items as $nid => $title) {
 	$menu_link = MenuLinkContent::create([
 		'title' => $title,
-		'link' => ['uri' => 'internal://taxonomy/term/	' . $nid],
+		'link' => ['uri' => 'internal://taxonomy/term/' . $nid],
 		'menu_name' => 'our-regional-presence',
 		'expanded' => TRUE,
 	]);
