@@ -1,0 +1,4 @@
+oab_synomia_administer:
+  title: Configuration de Synomia
+  descrption: Accès a l'administration de Synomia
+  restrict access: true
