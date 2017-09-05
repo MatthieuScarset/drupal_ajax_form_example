@@ -9,6 +9,7 @@ global-styling:
       css/style.css: {}
       css/orange_socialbar.css: {}
       css/slick.css: {}
+      css/swiper.min.css: {}
     component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
@@ -34,6 +35,7 @@ global-styling:
     js/jquery.touchSwipe.min.js: {}
     js/slick.min.js: {}
     js/scripts.js: {}
+    js/swiper.jquery.min.js: {}
 
   dependencies:
     - core/jquery

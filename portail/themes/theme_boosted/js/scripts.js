@@ -73,9 +73,47 @@
     });
 
 
+      //initialize swiper when document ready
+      var mySwiperHomepage = new Swiper ('.swiper-container', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: true,
+          pagination : '.swiper-pagination',
+          paginationType: 'bullets',
+          // Responsive breakpoints
+          breakpoints: {
+              // when window width is <= 320px
+              320: {
+                  slidesPerView: 1,
+                  spaceBetween: 10
+              },
+              // when window width is <= 480px
+              480: {
+                  slidesPerView: 1,
+                  spaceBetween: 20
+              },
+              // when window width is <= 640px
+              768: {
+                  slidesPerView: 3,
+                  spaceBetween: 30
+              }
+          }
 
+      })
+
+      //initialize swiper when document ready
+      var mySwiperThematic = new Swiper ('.swiper-container-columns', {
+          // Optional parameters
+          direction: 'horizontal',
+          loop: true,
+          pagination : '.swiper-pagination',
+          paginationType: 'bullets',
+      })
 
   });
+
+
+
 
   function getHeaderBarHeight() {
     //pour compter le decalage à faire à cause des barres sticky

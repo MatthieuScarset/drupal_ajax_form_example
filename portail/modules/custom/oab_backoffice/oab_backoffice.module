@@ -466,6 +466,8 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
 }
 
 
+
+
 /*
  function oab_backoffice_query_alter(Drupal\Core\Database\Query\AlterableInterface $query) {
 
@@ -534,4 +536,5 @@ function oab_backoffice_views_data_alter(array &$data) {
 	);
 
 }
+
 
