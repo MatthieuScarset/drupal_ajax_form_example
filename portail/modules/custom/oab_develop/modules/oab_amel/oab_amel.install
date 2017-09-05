@@ -239,3 +239,10 @@ function oab_amel_update_8026() {
     include_once("updates/update_8026.inc");
 }
 
+/**
+ *  Modification update Tristan pour que la page full_html passe en 3/3
+ */
+function oab_amel_update_8027() {
+    include_once("updates/update_8027.inc");
+}
+
