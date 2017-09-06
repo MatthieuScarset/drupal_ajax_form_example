@@ -26,17 +26,18 @@
         return;
       }
 
-      $(context).find('input[data-webform-time-format]').once('webformTimePicker').each(function () {
+      var $context = $(context);
+      // Skip if time inputs are supported by the browser.
+      if (Modernizr.inputtypes.time === true) {
+        return;
+      }
+      $context.find('input[type="time"]').once('timePicker').each(function () {
         var $input = $(this);
 
-        // Skip if time inputs are supported by the browser and input is not a text field.
-        // @see \Drupal\webform\Element\WebformDatetime
-        if (window.Modernizr && Modernizr.inputtypes.time === true && $input.attr('type') != 'text') {
-          return;
-        }
-
         var options = {};
-        options.timeFormat = $input.data('webformTimeFormat');
+        if ($input.data('webformTimeFormat')) {
+          options.timeFormat = $input.data('webformTimeFormat');
+        }
         if ($input.attr('min')) {
           options.minTime = $input.attr('min');
         }

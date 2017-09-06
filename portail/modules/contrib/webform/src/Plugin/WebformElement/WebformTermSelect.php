@@ -3,7 +3,6 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\webform\Element\WebformTermSelect as TermSelectElement;
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 
 /**
  * Provides a 'webform_term_select' element.
@@ -18,7 +17,7 @@ use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
  *   }
  * )
  */
-class WebformTermSelect extends Select implements WebformElementEntityReferenceInterface {
+class WebformTermSelect extends Select implements WebformEntityReferenceInterface {
 
   use WebformTermReferenceTrait;
 

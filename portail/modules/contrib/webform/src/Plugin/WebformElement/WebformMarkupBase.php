@@ -3,14 +3,13 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Plugin\WebformElementBase;
-use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
+use Drupal\webform\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a base 'markup' element.
  */
-abstract class WebformMarkupBase extends WebformElementBase implements WebformElementDisplayOnInterface {
+abstract class WebformMarkupBase extends WebformElementBase implements WebformDisplayOnInterface {
 
   use WebformDisplayOnTrait;
 
@@ -39,19 +38,14 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformEl
   }
 
   /**
-  * {@inheritdoc}
-  */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+ * {@inheritdoc}
+ */
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
 
     // Hide element if it should not be displayed on 'form'.
     if (!$this->isDisplayOn($element, static::DISPLAY_ON_FORM)) {
       $element['#access'] = FALSE;
-    }
-
-    // Add form element wrapper.
-    if ($this->hasProperty('wrapper_attributes')) {
-      $element['#theme_wrappers'][] = 'form_element';
     }
   }
 

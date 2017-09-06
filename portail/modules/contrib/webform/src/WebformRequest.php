@@ -115,11 +115,7 @@ class WebformRequest implements WebformRequestInterface {
       return $source_entity->$webform_field_name->entity;
     }
     else {
-      $webform = $this->routeMatch->getParameter('webform');
-      if (is_string($webform)) {
-        $webform = $this->entityTypeManager->getStorage('webform')->load($webform);
-      }
-      return $webform;
+      return $this->routeMatch->getParameter('webform');
     }
   }
 
@@ -137,9 +133,6 @@ class WebformRequest implements WebformRequestInterface {
    */
   public function getWebformSubmissionEntities() {
     $webform_submission = $this->routeMatch->getParameter('webform_submission');
-    if (is_string($webform_submission)) {
-      $webform_submission = $this->entityTypeManager->getStorage('webform_submission')->load($webform_submission);
-    }
     $source_entity = $this->getCurrentSourceEntity('webform_submission');
     return [$webform_submission, $source_entity];
   }

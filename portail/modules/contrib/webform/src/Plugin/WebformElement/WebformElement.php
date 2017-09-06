@@ -3,7 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\WebformElementBase;
 use Drupal\Core\Url as UrlGenerator;
 
 /**
@@ -21,20 +21,6 @@ class WebformElement extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function isInput(array $element) {
-    return (!empty($element['#type']) && !in_array($element['#type'], ['submit'])) ? TRUE : FALSE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
     return [];
   }
 

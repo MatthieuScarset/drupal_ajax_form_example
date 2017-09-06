@@ -6,14 +6,13 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Core\Render\Element;
 use Drupal\webform\Element\WebformComputedBase as WebformComputedBaseElement;
-use Drupal\webform\Plugin\WebformElementBase;
-use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
+use Drupal\webform\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a base clase for 'webform_computed' elements.
  */
-abstract class WebformComputedBase extends WebformElementBase implements WebformElementDisplayOnInterface {
+abstract class WebformComputedBase extends WebformElementBase implements WebformDisplayOnInterface {
 
   use WebformDisplayOnTrait;
 
@@ -34,7 +33,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
       'value' => '',
       'mode' => WebformComputedBaseElement::MODE_AUTO,
       'store' => FALSE,
-      // Attributes.
+      // Attributes
       'wrapper_attributes' => [],
     ] + $this->getDefaultBaseProperties();
   }
@@ -57,7 +56,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
 
     // Hide element if it should not be displayed on 'form'.
@@ -89,7 +88,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
   /**
    * {@inheritdoc}
    */
-  public function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     if (!empty($element['#store'])) {
       // Get stored value if it is set.
       $value = $webform_submission->getData($element['#webform_key']);
@@ -105,7 +104,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    * {@inheritdoc}
    */
   protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission);
+    $value = $this->processValue($element, $webform_submission);
     if ($this->getMode($element) === WebformComputedBaseElement::MODE_TEXT) {
       return nl2br($value);
     }
@@ -118,7 +117,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    * {@inheritdoc}
    */
   protected function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission);
+    $value = $this->processValue($element, $webform_submission);
     if ($this->getMode($element) === WebformComputedBaseElement::MODE_HTML) {
       return MailFormatHelper::htmlToText($value);
     }
@@ -137,12 +136,8 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
   /**
    * {@inheritdoc}
    */
-  public function preview() {
-    return [
-      '#type' => $this->getTypeName(),
-      '#title' => $this->getPluginLabel(),
-      '#value' => $this->t('This is a @label value.', ['@label' => $this->getPluginLabel()]),
-    ];
+  public function getElementSelectorOptions(array $element) {
+    return [];
   }
 
   /**
@@ -165,11 +160,11 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
     ];
     $form['computed']['display_on_message'] = [
       '#type' => 'webform_message',
-      '#message_message' => $this->t("This computed element's value will only be available as a token or exported value."),
+      '#message_message' => $this->t('This computed element\'s value will only be available as a token or exported value.'),
       '#message_type' => 'warning',
       '#access' => TRUE,
       '#states' => [
-        'visible' => [':input[name="properties[display_on]"]' => ['value' => WebformElementDisplayOnInterface::DISPLAY_ON_NONE]],
+        'visible' => [':input[name="properties[display_on]"]' => ['value' => WebformDisplayOnInterface::DISPLAY_ON_NONE]],
       ],
     ];
     $form['computed']['mode'] = [
@@ -204,7 +199,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
       // Unset the value from the $form_state to prevent modules from relying
       // on this value.
       $key = $element['#webform_key'];
-      $form_state->unsetValue($key);
+      $form_state->unsetValue($key );
     }
   }
 
@@ -229,7 +224,6 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    *
    * @param array $element
    *   An element.
-   *
    * @return string
    *   The type of markup, HTML or plain-text.
    */
@@ -238,7 +232,7 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
   }
 
   /**
-   * Process computed element value.
+   * Process computed element markup.
    *
    * @param array $element
    *   An element.
@@ -248,9 +242,6 @@ abstract class WebformComputedBase extends WebformElementBase implements Webform
    * @return string
    *   Processed markup.
    */
-  protected function processValue(array $element, WebformSubmissionInterface $webform_submission) {
-    $class = $this->getFormElementClassDefinition();
-    return $class::processValue($element, $webform_submission);
-  }
+  abstract protected function processValue(array $element, WebformSubmissionInterface $webform_submission);
 
 }

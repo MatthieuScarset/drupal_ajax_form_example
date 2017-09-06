@@ -13,7 +13,3 @@ html.js .js-webform-image-select {
   position: absolute;
   opacity: 0;
 }
-
-.thumbnails.image_picker_selector p {
-  margin: 0;
-}

@@ -29,12 +29,11 @@ class WebformTime extends FormElement {
     $class = get_class($this);
     return [
       '#input' => TRUE,
-      '#theme' => 'input__webform_time',
+      '#theme' => 'input__time',
       '#process' => [[$class, 'processWebformTime']],
       '#pre_render' => [[$class, 'preRenderWebformTime']],
       '#element_validate' => [[$class, 'validateWebformTime']],
       '#theme_wrappers' => ['form_element'],
-      '#timepicker' => FALSE,
       '#time_format' => 'H:i',
       '#size' => 10,
       '#maxlength' => 10,
@@ -72,8 +71,12 @@ class WebformTime extends FormElement {
    *   The processed element.
    */
   public static function processWebformTime(&$element, FormStateInterface $form_state, &$complete_form) {
-    $element['#attached']['library'][] = 'webform/webform.element.time';
-    $element['#attributes']['data-webform-time-format'] = !empty($element['#time_format']) ? $element['#time_format'] : DateFormat::load('html_time')->getPattern();
+    // Attach JS support for the time field, if we can determine which time
+    // format should be used.
+    if (!empty($element['#time_format'])) {
+      $element['#attached']['library'][] = 'webform/webform.element.time';
+      $element['#attributes']['data-webform-time-format'] = [$element['#time_format']];
+    }
     return $element;
   }
 
@@ -104,7 +107,7 @@ class WebformTime extends FormElement {
     }
 
     $name = empty($element['#title']) ? $element['#parents'][0] : $element['#title'];
-    $time_format = $element['#time_format'];
+    $time_format = (!empty($element['#time_format'])) ? $element['#time_format'] : DateFormat::load('html_time')->getPattern();
 
     // Ensure that the input is greater than the #min property, if set.
     if ($has_access && isset($element['#min'])) {
@@ -141,19 +144,9 @@ class WebformTime extends FormElement {
    *   The $element with prepared variables ready for #theme 'input__time'.
    */
   public static function preRenderWebformTime(array $element) {
-    if (!empty($element['#timepicker'])) {
-      // Render simple text field that is converted to timepicker.
-      $element['#attributes']['type'] = 'text';
-      // Apply #time_format to #value.
-      if (!empty($element['#value'])) {
-        $element['#value'] = date($element['#attributes']['data-webform-time-format'], strtotime($element['#value']));
-      }
-    }
-    else {
-      $element['#attributes']['type'] = 'time';
-    }
+    $element['#attributes']['type'] = 'time';
     Element::setAttributes($element, ['id', 'name', 'type', 'value', 'size', 'min', 'max', 'step']);
-    static::setAttributes($element, ['form-time', 'webform-time']);
+    static::setAttributes($element, ['form-time']);
     return $element;
   }
 

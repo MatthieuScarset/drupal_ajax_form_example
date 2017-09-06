@@ -2,6 +2,10 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\FormElement;
+use Drupal\webform\Entity\WebformSubmission;
+use Drupal\webform\WebformSubmissionForm;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**

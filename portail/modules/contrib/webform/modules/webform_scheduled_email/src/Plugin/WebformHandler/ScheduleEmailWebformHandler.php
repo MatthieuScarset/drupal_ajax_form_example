@@ -21,9 +21,9 @@ use Drupal\webform_scheduled_email\WebformScheduledEmailManagerInterface;
  *   label = @Translation("Scheduled email"),
  *   category = @Translation("Notification"),
  *   description = @Translation("Sends a webform submission via a scheduled email."),
- *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
- *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
- *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_REQUIRED,
+ *   cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_UNLIMITED,
+ *   results = \Drupal\webform\WebformHandlerInterface::RESULTS_PROCESSED,
+ *   submission = \Drupal\webform\WebformHandlerInterface::SUBMISSION_REQUIRED,
  * )
  */
 class ScheduleEmailWebformHandler extends EmailWebformHandler {
@@ -239,7 +239,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
         $this->t("Multiple handlers can be used to schedule multiple emails."),
         $this->t('Deleting this handler will unschedule all scheduled emails.'),
         ['#markup' => $this->t('Scheduled emails are automatically sent starting at midnight using <a href=":href">cron</a>, which is executed at predefined interval.', [':href' => 'https://www.drupal.org/docs/7/setting-up-cron/overview'])],
-      ],
+      ]
     ];
 
     $form['scheduled']['token_tree_link'] = $this->tokenManager->buildTreeLink();

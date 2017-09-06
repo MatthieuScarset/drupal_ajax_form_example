@@ -7,7 +7,7 @@ use Drupal\webform\Element\WebformLikert as WebformLikertElement;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -323,25 +323,7 @@ class WebformLikert extends WebformElementBase {
       return $this->formatHtml($element, $webform_submission);
     }
   }
-  
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    return parent::preview() + [
-      '#questions' => [
-        'q1' => $this->t('Please answer question 1?'),
-        'q2' => $this->t('How about now answering question 2?'),
-        'q3' => $this->t('Finally, here is question 3?'),
-      ],
-      '#answers' => [
-        '1' => '1',
-        '2' => '2',
-        '3' => '3',
-      ],
-    ];
-  }
-  
+
   /**
    * {@inheritdoc}
    */

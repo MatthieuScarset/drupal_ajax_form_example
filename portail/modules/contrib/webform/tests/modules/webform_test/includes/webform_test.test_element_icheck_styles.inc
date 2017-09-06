@@ -17,7 +17,6 @@ function webform_test_test_element_icheck_styles() {
   $skins = [
     'minimal' => t('Minimal'),
     'flat' => t('Flat'),
-    'line' => t('Line'),
     'square' => t('Square'),
   ];
   $colors = [

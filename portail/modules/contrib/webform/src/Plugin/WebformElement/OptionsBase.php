@@ -6,10 +6,8 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\OptGroup;
 use Drupal\webform\Utility\WebformArrayHelper;
-use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\Plugin\WebformElementBase;
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
+use Drupal\webform\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
@@ -86,7 +84,7 @@ abstract class OptionsBase extends WebformElementBase {
     $elements = $this->elementManager->getInstances();
     foreach ($related_types as $type => $related_type) {
       $element_instance = $elements[$type];
-      if ($element_instance instanceof WebformElementEntityReferenceInterface) {
+      if ($element_instance instanceof WebformEntityReferenceInterface) {
         unset($related_types[$type]);
       }
     }
@@ -96,7 +94,7 @@ abstract class OptionsBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
 
     // Randomize options.
@@ -112,17 +110,16 @@ abstract class OptionsBase extends WebformElementBase {
       $is_description_display = (isset($element['#description_display'])) ? TRUE : FALSE;
       $has_description = (!empty($element['#description'])) ? TRUE : FALSE;
       if ($is_description_display && $has_description) {
-        $description = WebformElementHelper::convertToString($element['#description']);
         switch ($element['#description_display']) {
           case 'before':
             $element += ['#field_prefix' => ''];
-            $element['#field_prefix'] = '<div class="description">' . $description . '</div>' . $element['#field_prefix'];
+            $element['#field_prefix'] = '<div class="description">' . $element['#description'] . '</div>' . $element['#field_prefix'];
             unset($element['#description']);
             break;
 
           case 'invisible':
             $element += ['#field_suffix' => ''];
-            $element['#field_suffix'] .= '<div class="description visually-hidden">' . $description . '</div>';
+            $element['#field_suffix'] .= '<div class="description visually-hidden">' . $element['#description'] . '</div>';
             unset($element['#description']);
             break;
         }
@@ -131,7 +128,7 @@ abstract class OptionsBase extends WebformElementBase {
 
     // If the element is #required and the #default_value is an empty string
     // we need to unset the #default_value to prevent the below error.
-    // 'An illegal choice has been detected'.
+    // 'An illegal choice has been detected.'
     if (!empty($element['#required']) && isset($element['#default_value']) && $element['#default_value'] === '') {
       unset($element['#default_value']);
     }
@@ -162,7 +159,7 @@ abstract class OptionsBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function getValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = parent::getValue($element, $webform_submission, $options);
 
     $format = $this->getItemFormat($element);
@@ -182,24 +179,6 @@ abstract class OptionsBase extends WebformElementBase {
     return 'comma';
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    $element = parent::preview();
-    if ($this->hasProperty('options')) {
-      $element['#options'] = [
-        'one' => 'One',
-        'two' => 'Two',
-        'three' => 'Three',
-      ];
-    }
-    if ($this->hasProperty('options_display')) {
-      $element['#options_display'] = 'side_by_side';
-    }
-    return $element;
-  }
-  
   /**
    * {@inheritdoc}
    */
@@ -413,32 +392,12 @@ abstract class OptionsBase extends WebformElementBase {
       '#type' => 'textfield',
       '#title' => $this->t('Empty option label'),
       '#description' => $this->t('The label to show for the initial option denoting no selection in a select element.'),
-      '#states' => [
-        'visible' => [
-          ':input[name="properties[multiple][container][cardinality]"]' => ['value' => 'number'],
-          ':input[name="properties[multiple][container][cardinality_number]"]' => ['value' => 1],
-        ],
-      ],
     ];
-    $default_empty_option = $this->configFactory->get('webform.settings')->get('element.default_empty_option');
-    if ($default_empty_option) {
-      $default_empty_option_required = $this->configFactory->get('webform.settings')->get('element.default_empty_option_required') ?: $this->t('- Select -');
-      $form['options']['empty_option']['#description'] .= '<br />' . $this->t('Required elements default to: %required', ['%required' => $default_empty_option_required]);
-      $default_empty_option_optional = $this->configFactory->get('webform.settings')->get('element.default_empty_option_optional') ?: $this->t('- None -');
-      $form['options']['empty_option']['#description'] .= '<br />' . $this->t('Optional elements default to: %optional', ['%optional' => $default_empty_option_optional]);
-    }
     $form['options']['empty_value'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Empty option value'),
       '#description' => $this->t('The value for the initial option denoting no selection in a select element, which is used to determine whether the user submitted a value or not.'),
-      '#states' => [
-        'visible' => [
-          ':input[name="properties[multiple][container][cardinality]"]' => ['value' => 'number'],
-          ':input[name="properties[multiple][container][cardinality_number]"]' => ['value' => 1],
-        ],
-      ],
     ];
-
     $form['options']['options_randomize'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Randomize options'),

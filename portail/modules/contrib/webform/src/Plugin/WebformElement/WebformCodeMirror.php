@@ -3,7 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -73,15 +73,6 @@ class WebformCodeMirror extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function preview() {
-    return parent::preview() + [
-      '#mode' => 'yaml',
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     $element += ['#mode' => 'text'];
     switch ($element['#mode']) {
@@ -98,6 +89,7 @@ class WebformCodeMirror extends WebformElementBase {
         return [];
 
     }
+
   }
 
   /**

@@ -2,8 +2,6 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
-
 /**
  * Provides a 'webform_entity_radios' element.
  *
@@ -14,7 +12,7 @@ use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
  *   category = @Translation("Entity reference elements"),
  * )
  */
-class WebformEntityRadios extends Radios implements WebformElementEntityReferenceInterface {
+class WebformEntityRadios extends Radios implements WebformEntityReferenceInterface {
 
   use WebformEntityReferenceTrait;
   use WebformEntityOptionsTrait;

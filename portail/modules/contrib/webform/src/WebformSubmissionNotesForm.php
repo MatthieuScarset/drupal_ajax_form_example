@@ -5,7 +5,6 @@ namespace Drupal\webform;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Form\WebformDialogFormTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -13,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class WebformSubmissionNotesForm extends ContentEntityForm {
 
-  use WebformDialogFormTrait;
+  use WebformDialogTrait;
 
   /**
    * Webform request handler.
@@ -54,13 +53,13 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
     $form['navigation'] = [
       '#theme' => 'webform_submission_navigation',
       '#webform_submission' => $webform_submission,
-      '#access' => $this->isDialog() ? FALSE : TRUE,
+      '#access' => $this->isModalDialog() ? FALSE : TRUE,
     ];
     $form['information'] = [
       '#theme' => 'webform_submission_information',
       '#webform_submission' => $webform_submission,
       '#source_entity' => $source_entity,
-      '#access' => $this->isDialog() ? FALSE : TRUE,
+      '#access' => $this->isModalDialog() ? FALSE : TRUE,
     ];
 
     $form['notes'] = [
@@ -74,7 +73,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
       '#title' => $this->t('Star/flag the status of this submission.'),
       '#default_value' => $webform_submission->isSticky(),
       '#return_value' => TRUE,
-      '#access' => $this->isDialog() ? FALSE : TRUE,
+      '#access' => $this->isModalDialog() ? FALSE : TRUE,
     ];
     $form['uid'] = [
       '#type' => 'entity_autocomplete',
@@ -98,7 +97,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
-    return $this->buildDialogForm($form, $form_state);
+    return $this->buildFormDialog($form, $form_state);
   }
 
   /**

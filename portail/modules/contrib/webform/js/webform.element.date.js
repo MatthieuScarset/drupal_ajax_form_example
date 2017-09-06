@@ -7,11 +7,6 @@
 
   'use strict';
 
-  // @see http://api.jqueryui.com/datepicker/
-  Drupal.webform = Drupal.webform || {};
-  Drupal.webform.datePicker = Drupal.webform.datePicker || {};
-  Drupal.webform.datePicker.options = Drupal.webform.datePicker.options || {};
-
   /**
    * Attach datepicker fallback on date elements.
    *
@@ -27,49 +22,41 @@
   Drupal.behaviors.date = {
     attach: function (context, settings) {
       var $context = $(context);
+      // Skip if date are supported by the browser.
+      if (Modernizr.inputtypes.date === true) {
+        return;
+      }
       $context.find('input[data-drupal-date-format]').once('datePicker').each(function () {
         var $input = $(this);
-
-        // Skip if date inputs are supported by the browser and input is not a text field.
-        // @see \Drupal\webform\Element\WebformDatetime
-        if (window.Modernizr && Modernizr.inputtypes.date === true && $input.attr('type') != 'text') {
-          return;
-        }
-
-        var options = $.extend({
-          changeMonth: true,
-          changeYear: true
-        }, Drupal.webform.datePicker.options);
-
+        var datepickerSettings = {};
         var dateFormat = $input.data('drupalDateFormat');
-
         // The date format is saved in PHP style, we need to convert to jQuery
         // datepicker.
         // @see http://stackoverflow.com/questions/16702398/convert-a-php-date-format-to-a-jqueryui-datepicker-date-format
-        options.dateFormat = dateFormat
+        datepickerSettings.dateFormat = dateFormat
           // Year.
           .replace('Y', 'yy')
-          .replace('y', 'y')
           // Month.
           .replace('F', 'MM')
           .replace('m', 'mm')
-          .replace('M', 'M')
           .replace('n', 'm')
           // Date.
-          .replace('D', 'D')
-          .replace('j', 'd')
-          .replace('l', 'DD')
           .replace('d', 'dd');
 
         // Add min and max date if set on the input.
         if ($input.attr('min')) {
-          options.minDate = $input.attr('min');
+          datepickerSettings.minDate = $.datepicker.formatDate(datepickerSettings.dateFormat, $.datepicker.parseDate('yy-mm-dd', $input.attr('min')));
         }
         if ($input.attr('max')) {
-          options.maxDate = $input.attr('max');
+          datepickerSettings.maxDate = $.datepicker.formatDate(datepickerSettings.dateFormat, $.datepicker.parseDate('yy-mm-dd', $input.attr('max')));
         }
 
-        $input.datepicker(options);
+        // Format default value.
+        if ($input.val()) {
+          $input.val($.datepicker.formatDate(datepickerSettings.dateFormat, $.datepicker.parseDate('yy-mm-dd', $input.val())));
+        }
+
+        $input.datepicker(datepickerSettings);
       });
     },
     detach: function (context, settings, trigger) {

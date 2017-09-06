@@ -21,7 +21,7 @@ class WebformElementSignatureTest extends WebformTestBase {
   /**
    * Test signature element.
    */
-  public function testSignature() {
+  public function testSignatureElement() {
     // Check signature display.
     $this->drupalGet('webform/test_element_signature');
     $this->assertRaw('<input data-drupal-selector="edit-signature-basic" aria-describedby="edit-signature-basic--description" type="hidden" name="signature_basic" value="" class="js-webform-signature form-webform-signature" /><div class="js-webform-signature-pad webform-signature-pad">');

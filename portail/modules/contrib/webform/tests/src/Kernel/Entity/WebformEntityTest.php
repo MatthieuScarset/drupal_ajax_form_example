@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Kernel\Entity;
+namespace Drupal\Tests\user\Kernel\Entity;
 
 use Drupal\Core\Serialization\Yaml;
 use Drupal\KernelTests\KernelTestBase;
@@ -26,7 +26,6 @@ class WebformEntityTest extends KernelTestBase {
    * Tests some of the methods.
    */
   public function testWebformMethods() {
-    $this->installSchema('webform', ['webform']);
     $this->installConfig('webform');
 
     /**************************************************************************/
@@ -202,8 +201,7 @@ class WebformEntityTest extends KernelTestBase {
         '#webform_children' => [],
         '#webform_multiple' => FALSE,
         '#webform_composite' => FALSE,
-        '#webform_parents' => ['root'],
-        '#admin_title' => 'root',
+        '#admin_title' => NULL,
       ],
       'container' => [
         '#type' => 'container',
@@ -216,8 +214,7 @@ class WebformEntityTest extends KernelTestBase {
         '#webform_children' => [],
         '#webform_multiple' => FALSE,
         '#webform_composite' => FALSE,
-        '#webform_parents' => ['container'],
-        '#admin_title' => 'container',
+        '#admin_title' => NULL,
       ],
       'child' => [
         '#type' => 'textfield',
@@ -230,8 +227,7 @@ class WebformEntityTest extends KernelTestBase {
         '#webform_children' => [],
         '#webform_multiple' => FALSE,
         '#webform_composite' => FALSE,
-        '#webform_parents' => ['container', 'child'],
-        '#admin_title' => 'child',
+        '#admin_title' => NULL,
       ],
     ];
     $this->assertEquals($webform->getElementsInitializedAndFlattened(), $elements_initialized_and_flattened);
@@ -265,7 +261,7 @@ class WebformEntityTest extends KernelTestBase {
       'page_1' => ['#title' => 'Page 1'],
       'page_2' => ['#title' => 'Page 2'],
       'page_3' => ['#title' => 'Page 3'],
-      'webform_complete' => ['#title' => 'Complete'],
+      'complete' => ['#title' => 'Complete'],
     ];
     $this->assertEquals($webform->getPages(), $wizard_pages);
 
@@ -275,17 +271,17 @@ class WebformEntityTest extends KernelTestBase {
       'page_1' => ['#title' => 'Page 1'],
       'page_2' => ['#title' => 'Page 2'],
       'page_3' => ['#title' => 'Page 3'],
-      'webform_preview' => ['#title' => 'Preview'],
-      'webform_complete' => ['#title' => 'Complete'],
+      'preview' => ['#title' => 'Preview'],
+      'complete' => ['#title' => 'Complete'],
     ];
     $this->assertEquals($webform->getPages(), $wizard_pages);
 
     // Check get wizard pages with preview with disable pages.
     $webform->setSetting('preview', TRUE)->save();
     $wizard_pages = [
-      'webform_start' => ['#title' => 'Start'],
-      'webform_preview' => ['#title' => 'Preview'],
-      'webform_complete' => ['#title' => 'Complete'],
+      'start' => ['#title' => 'Start'],
+      'preview' => ['#title' => 'Preview'],
+      'complete' => ['#title' => 'Complete'],
     ];
     $this->assertEquals($webform->getPages(TRUE), $wizard_pages);
 
@@ -299,7 +295,6 @@ class WebformEntityTest extends KernelTestBase {
    * Test paths.
    */
   public function testPaths() {
-    $this->installSchema('webform', ['webform']);
     $this->installConfig('webform');
 
     /** @var \Drupal\webform\WebformInterface $webform */
@@ -315,7 +310,6 @@ class WebformEntityTest extends KernelTestBase {
    * Test elements CRUD operations.
    */
   public function testElementsCrud() {
-    $this->installSchema('webform', ['webform']);
     $this->installEntitySchema('webform_submission');
 
     /** @var \Drupal\webform\WebformInterface $webform */

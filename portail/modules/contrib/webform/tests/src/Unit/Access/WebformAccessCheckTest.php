@@ -11,7 +11,7 @@ use Drupal\webform\Access\WebformAccess;
  *
  * @group webform
  */
-class WebformAccessCheckTest extends UnitTestCase {
+class PermissionAccessCheckTest extends UnitTestCase {
 
   /**
    * The tested access checker.
@@ -78,7 +78,7 @@ class WebformAccessCheckTest extends UnitTestCase {
     $webform = $this->getMock('Drupal\webform\WebformInterface');
 
     $email_webform = $this->getMock('Drupal\webform\WebformInterface');
-    $handler = $this->getMock('\Drupal\webform\Plugin\WebformHandlerMessageInterface');
+    $handler = $this->getMock('\Drupal\webform\WebformHandlerMessageInterface');
     $email_webform->expects($this->any())
       ->method('getHandlers')
       ->will($this->returnValue([$handler]));

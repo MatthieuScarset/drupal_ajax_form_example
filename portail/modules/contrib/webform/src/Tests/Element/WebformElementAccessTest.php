@@ -40,7 +40,7 @@ class WebformElementAccessTest extends WebformTestBase {
   /**
    * Test element access.
    */
-  public function testAccess() {
+  public function testElementAccess() {
     $webform = Webform::load('test_element_access');
 
     // Check user from USER:1 to admin submission user.
@@ -74,7 +74,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertFieldByName('access_create_roles_anonymous');
     $this->assertNoFieldByName('access_create_roles_authenticated');
     $this->assertNoFieldByName('access_create_users');
-    $this->assertNoFieldByName('access_create_permissions');
 
     // Check authenticated access.
     $this->drupalLogin($this->normalUser);
@@ -82,7 +81,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertNoFieldByName('access_create_roles_anonymous');
     $this->assertFieldByName('access_create_roles_authenticated');
     $this->assertNoFieldByName('access_create_users');
-    $this->assertFieldByName('access_create_permissions');
 
     // Check admin user access.
     $this->drupalLogin($this->adminSubmissionUser);
@@ -90,7 +88,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertNoFieldByName('access_create_roles_anonymous');
     $this->assertFieldByName('access_create_roles_authenticated');
     $this->assertFieldByName('access_create_users');
-    $this->assertFieldByName('access_create_permissions');
 
     /* Update access */
 
@@ -100,7 +97,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertFieldByName('access_update_roles_anonymous');
     $this->assertNoFieldByName('access_update_roles_authenticated');
     $this->assertNoFieldByName('access_update_users');
-    $this->assertNoFieldByName('access_update_permissions');
 
     // Check authenticated role access.
     $this->drupalLogin($this->normalUser);
@@ -108,7 +104,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertNoFieldByName('access_update_roles_anonymous');
     $this->assertFieldByName('access_update_roles_authenticated');
     $this->assertNoFieldByName('access_update_users');
-    $this->assertFieldByName('access_update_permissions');
 
     // Check admin user access.
     $this->drupalLogin($this->adminSubmissionUser);
@@ -116,7 +111,6 @@ class WebformElementAccessTest extends WebformTestBase {
     $this->assertNoFieldByName('access_update_roles_anonymous');
     $this->assertFieldByName('access_update_roles_authenticated');
     $this->assertFieldByName('access_update_users');
-    $this->assertFieldByName('access_update_permissions');
 
     /* View, Table, Customize, and Download access */
 
@@ -136,7 +130,6 @@ class WebformElementAccessTest extends WebformTestBase {
       $this->assertRaw('access_view_roles (anonymous)');
       $this->assertNoRaw('access_view_roles (authenticated)');
       $this->assertNoRaw('access_view_users (USER:' . $this->adminSubmissionUser->id() . ')');
-      $this->assertNoRaw('access_view_permissions (access user profiles)');
 
       // Check authenticated role access.
       $this->drupalLogin($this->rootUser);
@@ -144,7 +137,6 @@ class WebformElementAccessTest extends WebformTestBase {
       $this->assertNoRaw('access_view_roles (anonymous)');
       $this->assertRaw('access_view_roles (authenticated)');
       $this->assertNoRaw('access_view_users (USER:' . $this->adminSubmissionUser->id() . ')');
-      $this->assertRaw('access_view_permissions (access user profiles)');
 
       // Check admin user access.
       $this->drupalLogin($this->adminSubmissionUser);
@@ -152,7 +144,6 @@ class WebformElementAccessTest extends WebformTestBase {
       $this->assertNoRaw('access_view_roles (anonymous)');
       $this->assertRaw('access_view_roles (authenticated)');
       $this->assertRaw('access_view_users (USER:' . $this->adminSubmissionUser->id() . ')');
-      $this->assertRaw('access_view_permissions (access user profiles)');
     }
 
     /* Download token access */

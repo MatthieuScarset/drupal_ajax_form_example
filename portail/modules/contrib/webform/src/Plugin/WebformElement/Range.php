@@ -37,7 +37,7 @@ class Range extends NumericBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
 
     if (!empty($element['#range__output'])) {
@@ -56,20 +56,6 @@ class Range extends NumericBase {
       $element['#attached']['library'][] = 'webform/webform.element.range';
     }
   }
-  
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    return parent::preview() + [
-      '#min'=> 0,
-      '#max'=> 100,
-      '#step'=> 1,
-      '#range__output'=> TRUE,
-      '#range__output_prefix'=> '$',
-      '#range__output_suffix'=> '.00',
-    ];
-  }
 
   /**
    * {@inheritdoc}
@@ -87,7 +73,7 @@ class Range extends NumericBase {
     $form['number']['range__output_prefix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Range output prefix'),
-      '#description' => $this->t('Text or code that is placed directly in front of the output. This can be used to prefix an output with a constant string. Examples=> $, #, -.'),
+      '#description' => $this->t('Text or code that is placed directly in front of the output. This can be used to prefix an output with a constant string. Examples: $, #, -.'),
       '#size' => 10,
       '#states' => [
         'visible' => [
@@ -98,7 +84,7 @@ class Range extends NumericBase {
     $form['number']['range__output_suffix'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Range output suffix'),
-      '#description' => $this->t('Text or code that is placed directly after the output. This can be used to add a unit to an output. Examples=> lb, kg, %.'),
+      '#description' => $this->t('Text or code that is placed directly after the output. This can be used to add a unit to an output. Examples: lb, kg, %.'),
       '#size' => 10,
       '#states' => [
         'visible' => [

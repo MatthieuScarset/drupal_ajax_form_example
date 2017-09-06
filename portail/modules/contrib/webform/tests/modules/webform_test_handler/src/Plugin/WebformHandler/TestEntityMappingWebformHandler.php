@@ -5,7 +5,7 @@ namespace Drupal\webform_test_handler\Plugin\WebformHandler;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Serialization\Yaml;
-use Drupal\webform\Plugin\WebformHandlerBase;
+use Drupal\webform\WebformHandlerBase;
 
 /**
  * Webform submission entity mapping test handler.
@@ -18,9 +18,9 @@ use Drupal\webform\Plugin\WebformHandlerBase;
  *   label = @Translation("Test entity mapping"),
  *   category = @Translation("Testing"),
  *   description = @Translation("Tests mapping webform element's to entity fields."),
- *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
- *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_IGNORED,
- *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_OPTIONAL,
+ *   cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_UNLIMITED,
+ *   results = \Drupal\webform\WebformHandlerInterface::RESULTS_IGNORED,
+ *   submission = \Drupal\webform\WebformHandlerInterface::SUBMISSION_OPTIONAL,
  * )
  */
 class TestEntityMappingWebformHandler extends WebformHandlerBase {
@@ -51,7 +51,7 @@ class TestEntityMappingWebformHandler extends WebformHandlerBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $this->applyFormStateToConfiguration($form_state);
+    $this->applyFormStateSettingsToConfiguration($form_state);
 
     $entity_type_manager = \Drupal::entityTypeManager();
 

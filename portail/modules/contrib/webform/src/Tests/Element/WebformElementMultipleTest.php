@@ -19,9 +19,9 @@ class WebformElementMultipleTest extends WebformTestBase {
   protected static $testWebforms = ['test_element_multiple', 'test_element_multiple_property'];
 
   /**
-   * Tests multiple element.
+   * Tests building of list elements.
    */
-  public function testMultiple() {
+  public function testWebformElementMultiple() {
 
     /**************************************************************************/
     // Processing.

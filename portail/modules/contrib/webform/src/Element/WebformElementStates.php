@@ -64,7 +64,7 @@ class WebformElementStates extends FormElement {
    */
   public static function processWebformStates(&$element, FormStateInterface $form_state, &$complete_form) {
     // Define default #state_options and #trigger_options.
-    // There are also defined by \Drupal\webform\Plugin\WebformElementBase::form.
+    // There are also defined by \Drupal\webform\WebformElementBase::form.
     $element += [
       '#state_options' => [
         'enabled' => t('Enabled'),
@@ -132,7 +132,6 @@ class WebformElementStates extends FormElement {
     $ajax_settings = [
       'callback' => [get_called_class(), 'ajaxCallback'],
       'wrapper' => $table_id,
-      'progress' => ['type' => 'none'],
     ];
 
     // Build header.
@@ -316,7 +315,7 @@ class WebformElementStates extends FormElement {
    *   An array containing Ajax callback settings.
    *
    * @return array
-   *   A render array containing state operations.
+   *   A render array containing state operations..
    */
   protected static function buildOperations($table_id, $row_index, array $ajax_settings) {
     $operations = [];
@@ -632,13 +631,11 @@ class WebformElementStates extends FormElement {
         ];
       }
       else {
-        if (isset($value['selector']['select'])) {
-          $selector = $value['selector']['select'];
-          if ($selector == WebformSelectOther::OTHER_OPTION) {
-            $selector = $value['selector']['other'];
-          }
-          $value['selector'] = $selector;
+        $selector = $value['selector']['select'];
+        if ($selector == WebformSelectOther::OTHER_OPTION) {
+          $selector = $value['selector']['other'];
         }
+        $value['selector'] = $selector;
         $states[$index]['conditions'][] = $value;
       }
     }

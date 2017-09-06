@@ -21,7 +21,7 @@ class WebformElementCodeMirrorTest extends WebformTestBase {
   /**
    * Tests CodeMirror element.
    */
-  public function testCodeMirror() {
+  public function testWebformElementCodeMirror() {
 
     /**************************************************************************/
     // code:text
