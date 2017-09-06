@@ -29,7 +29,7 @@ interface WebformUiElementFormInterface extends FormInterface, ContainerInjectio
   /**
    * Return the webform element associated with this form.
    *
-   * @return \Drupal\webform\Plugin\WebformElementInterface
+   * @return \Drupal\webform\WebformElementInterface
    *   A webform element.
    */
   public function getWebformElement();

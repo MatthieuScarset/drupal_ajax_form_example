@@ -52,25 +52,8 @@
    */
   Drupal.behaviors.webformSubmitNoValidate = {
     attach: function (context) {
-      $(context).find(':submit.js-webform-novalidate').once('webform-novalidate').on('click', function () {
+      $(context).find('input:submit.js-webform-novalidate').once('webform-novalidate').on('click', function () {
         $(this.form).attr('novalidate', 'novalidate');
-      });
-    }
-  };
-
-  /**
-   * Attach behaviors to trigger submit button from input onchange.
-   *
-   * @type {Drupal~behavior}
-   *
-   * @prop {Drupal~behaviorAttach} attach
-   *   Attaches form trigger submit events.
-   */
-  Drupal.behaviors.webformSubmitTrigger = {
-    attach: function (context) {
-      $('[data-webform-trigger-submit]').once('webform-trigger-submit').on('change', function () {
-        var submit = $(this).attr('data-webform-trigger-submit');
-        $(submit).mousedown();
       });
     }
   };
@@ -141,7 +124,6 @@
     attach: function (context, settings) {
       var $input = $('input.webform-form-filter-text').once('webform-form-filter-text');
       var $table = $($input.attr('data-element'));
-      var $details = $table.closest('details');
       var $filter_rows;
 
       /**
@@ -163,27 +145,18 @@
          */
         function toggleEntry(index, label) {
           var $label = $(label);
-          var $row = $label.closest('tr');
+          var $row = $label.parent().parent();
           var textMatch = $label.text().toLowerCase().indexOf(query) !== -1;
           $row.toggle(textMatch);
-          if (textMatch && $details.length) {
-            $row.closest('details').show();
-          }
         }
 
         // Filter if the length of the query is at least 2 characters.
         if (query.length >= 2) {
-          if ($details.length) {
-            $details.hide();
-          }
           $filter_rows.each(toggleEntry);
         }
         else {
           $filter_rows.each(function (index) {
-            $(this).closest('tr').show();
-            if ($details.length) {
-              $details.show();
-            }
+            $(this).parent().parent().show();
           });
         }
       }
@@ -191,9 +164,6 @@
       if ($table.length) {
         $filter_rows = $table.find('div.webform-form-filter-text-source');
         $input.on('keyup', filterElementList);
-        if ($input.val()) {
-          $input.keyup();
-        }
       }
     }
   };

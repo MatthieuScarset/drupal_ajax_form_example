@@ -34,7 +34,7 @@ class Telephone extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     parent::prepare($element, $webform_submission);
 
     // Add international library and classes.
@@ -56,12 +56,14 @@ class Telephone extends TextBase {
     $form['telephone'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Telephone settings'),
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
     $form['telephone']['international'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enhance support for international phone numbers'),
       '#description' => $this->t('Enhance the telephone element\'s international support using the jQuery <a href=":href">International Telephone Input</a> plugin.', [':href' => 'http://intl-tel-input.com/']),
       '#return_value' => TRUE,
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
     $form['telephone']['international_initial_country'] = [
       '#title' => $this->t('Initial country'),
@@ -73,12 +75,8 @@ class Telephone extends TextBase {
       '#states' => [
         'visible' => [':input[name="properties[international]"]' => ['checked' => TRUE]],
       ],
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
-    if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
-      $form['telephone']['#access'] = FALSE;
-      $form['telephone']['international']['#access'] = FALSE;
-      $form['telephone']['international_initial_country']['#access'] = FALSE;
-    }
     return $form;
   }
 
@@ -124,15 +122,6 @@ class Telephone extends TextBase {
   public function getItemFormats() {
     return parent::getItemFormats() + [
       'link' => $this->t('Link'),
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    return parent::preview() + [
-      '#international' => TRUE,
     ];
   }
 

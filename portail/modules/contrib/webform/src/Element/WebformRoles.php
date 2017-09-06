@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\Checkboxes;
 
 /**
- * Provides a webform roles (checkboxes) element.
+ * Provides a roles entity reference webform element.
  *
  * @FormElement("webform_roles")
  */
@@ -26,7 +26,7 @@ class WebformRoles extends Checkboxes {
   }
 
   /**
-   * Processes a webform roles (checkboxes) element.
+   * Processes a checkboxes webform element.
    */
   public static function processCheckboxes(&$element, FormStateInterface $form_state, &$complete_form) {
     $membersonly = (empty($element['#include_anonymous'])) ? TRUE : FALSE;
@@ -37,7 +37,7 @@ class WebformRoles extends Checkboxes {
   }
 
   /**
-   * Webform element validation handler for webform roles (checkboxes) element..
+   * Webform element validation handler for webform_users elements.
    */
   public static function validateWebformRoles(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = $form_state->getValue($element['#parents'], []);

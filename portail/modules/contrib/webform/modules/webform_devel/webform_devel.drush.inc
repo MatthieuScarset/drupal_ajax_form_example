@@ -16,9 +16,9 @@ function webform_devel_drush_command() {
     'core' => ['8+'],
     'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_ROOT,
     'examples' => [
-      'webform-devel-reset' => 'Resets Webform user data and saved state for messages',
+      'webform-repair' => 'Resets Webform user data and saved state for messages',
     ],
-    'aliases' => ['wfdr'],
+    'aliases' => ['webform-reset'],
   ];
 
   return $items;
@@ -41,7 +41,7 @@ function webform_devel_drush_help($section) {
 }
 
 /******************************************************************************/
-// Reset.
+// Repair.
 /******************************************************************************/
 
 /**
@@ -52,9 +52,9 @@ function drush_webform_devel_reset() {
     return drush_user_abort();
   }
 
-  drush_print(dt('Resetting message closed via State API...'));
+  drush_print('Resetting message closed via State API...');
   \Drupal::state()->delete('webform.element.message');
 
-  drush_print(dt('Resetting message closed via User Data...'));
+  drush_print('Resetting message closed via User Data...');
   \Drupal::service('user.data')->delete('webform', NULL, 'webform.element.message');
 }

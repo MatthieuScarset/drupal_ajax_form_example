@@ -2,7 +2,6 @@
 
 namespace Drupal\webform;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -71,10 +70,6 @@ class WebformEntityAssetsForm extends EntityForm {
       'link' => $webform->toLink($this->t('Edit'), 'assets-form')->toString(),
     ];
     $this->logger('webform')->notice('Webform assets for @label saved.', $context);
-
-    // Invalidate library_info cache tag.
-    // @see webform_library_info_build()
-    Cache::invalidateTags(['library_info']);
 
     drupal_set_message($this->t('Webform assets for %label saved.', ['%label' => $webform->label()]));
   }

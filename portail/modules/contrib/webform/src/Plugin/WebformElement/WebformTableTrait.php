@@ -13,7 +13,7 @@ trait WebformTableTrait {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     if ($this->hasMultipleValues($element)) {
       $element['#element_validate'][] = [get_class($this), 'validateMultipleOptions'];
     }

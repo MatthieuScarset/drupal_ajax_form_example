@@ -29,7 +29,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
   /**
    * A webform element.
    *
-   * @var \Drupal\webform\Plugin\WebformElementInterface
+   * @var \Drupal\webform\WebformElementInterface
    */
   protected $webformElement;
 
@@ -45,7 +45,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $type = NULL) {
     // Create a temp webform.
-    $this->webform = Webform::create(['id' => '_webform_ui_temp_form']);
+    $this->webform = Webform::create(['id' => 'webform_ui_element_test_form']);
 
     $this->type = $type;
 
@@ -56,18 +56,20 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
     if ($element = \Drupal::request()->getSession()->get('webform_ui_test_element_' . $type)) {
       $this->element = $element;
     }
-    else {
-      $element = ['#type' => $type] + $this->getWebformElement()->preview();
+    elseif (function_exists('_webform_test_get_example_element') && ($element = _webform_test_get_example_element($type))) {
       $this->element = $element;
     }
+    $this->element['#type'] = $type;
 
-    $webform_element = $this->getWebformElement();
+    $this->webformElement = $this->elementManager->getElementInstance($this->element);
+
     $form['#title'] = $this->t('Test %type element', ['%type' => $type]);
 
     if ($element) {
       $webform_submission = WebformSubmission::create(['webform' => $this->webform]);
-      $webform_element->initialize($this->element);
-      $webform_element->prepare($this->element, $webform_submission);
+      $this->webformElement->initialize($element);
+      $this->webformElement->initialize($this->element);
+      $this->webformElement->prepare($this->element, $webform_submission);
 
       $form['test'] = [
         '#type' => 'details',
@@ -77,11 +79,11 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
           'style' => 'background-color: #f5f5f2',
         ],
         'element' => $this->element,
-        'hr' => ['#markup' => '<hr />'],
+        'hr' => ['#markup' => '<hr/>'],
       ];
 
       if (isset($element['#default_value'])) {
-        $html = $webform_element->formatHtml($element + ['#value' => $element['#default_value']], $webform_submission);
+        $html = $this->webformElement->formatHtml($element + ['#value' => $element['#default_value']], $webform_submission);
         $form['test']['html'] = [
           '#type' => 'item',
           '#title' => $this->t('HTML'),
@@ -91,7 +93,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
         $form['test']['text'] = [
           '#type' => 'item',
           '#title' => $this->t('Plain text'),
-          '#markup' => '<pre>' . $webform_element->formatText($element + ['#value' => $element['#default_value']], $webform_submission) . '</pre>',
+          '#markup' => '<pre>' . $this->webformElement->formatText($element + ['#value' => $element['#default_value']], $webform_submission) . '</pre>',
           '#allowed_tag' => Xss::getAdminTagList(),
         ];
       }
@@ -127,7 +129,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
       '#value' => '',
     ];
 
-    $form['properties'] = $webform_element->buildConfigurationForm([], $form_state);
+    $form['properties'] = $this->webformElement->buildConfigurationForm([], $form_state);
     $form['properties']['#tree'] = TRUE;
     $form['properties']['custom']['#open'] = TRUE;
 
@@ -182,7 +184,7 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
     $element_form_state = clone $form_state;
     $element_form_state->setValues($form_state->getValue('properties'));
 
-    $properties = $this->getWebformElement()->getConfigurationFormProperties($form, $element_form_state);
+    $properties = $this->webformElement->getConfigurationFormProperties($form, $element_form_state);
 
     // Set #default_value using 'test' element value.
     if ($element_value = $form_state->getValue('element')) {
@@ -228,18 +230,6 @@ class WebformUiElementTestForm extends WebformUiElementFormBase {
       }
     }
     return $element;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getWebformElement() {
-    if (empty($this->element)) {
-      return $this->elementManager->getElementInstance(['#type' => $this->type]);
-    }
-    else {
-      return parent::getWebformElement();
-    }
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Kernel\Breadcrumb;
+namespace Drupal\Tests\webform\Unit\Breadcrumb;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Container;
  * @see: \Drupal\Tests\forum\Unit\Breadcrumb\ForumBreadcrumbBuilderBaseTest
  * @see: \Drupal\Tests\forum\Unit\Breadcrumb\ForumNodeBreadcrumbBuilderTest
  *
- * @coversDefaultClass \Drupal\webform\Breadcrumb\WebformBreadcrumbBuilder
+ * @coversDefaultClass \Drupal\webform\BreadCrumb\WebformBreadcrumbBuilder
  *
  * @group webform
  */

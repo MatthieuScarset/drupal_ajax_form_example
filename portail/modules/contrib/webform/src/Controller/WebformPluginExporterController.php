@@ -6,7 +6,6 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -75,27 +74,9 @@ class WebformPluginExporterController extends ControllerBase implements Containe
         $rows[$plugin_id]['class'] = ['color-warning'];
       }
     }
+
     ksort($rows);
-
-    $build = [];
-
-    // Settings
-    $build['settings'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Edit settings'),
-      '#url' => Url::fromRoute('webform.settings.exporters'),
-      '#attributes' => ['class' => ['button', 'button--small'], 'style' => 'float: right'],
-    ];
-
-    // Display info.
-    $build['info'] = [
-      '#markup' => $this->t('@total exporters', ['@total' => count($rows)]),
-      '#prefix' => '<p>',
-      '#suffix' => '</p>',
-    ];
-
-    // Exporters.
-    $build['webform_exporters'] = [
+    return [
       '#type' => 'table',
       '#header' => [
         $this->t('ID'),
@@ -107,8 +88,6 @@ class WebformPluginExporterController extends ControllerBase implements Containe
       '#rows' => $rows,
       '#sticky' => TRUE,
     ];
-
-    return $build;
   }
 
 }

@@ -2,13 +2,13 @@
 
 namespace Drupal\webform\Element;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
-use Drupal\Core\Render\Markup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Utility\WebformElementHelper;
-
+use Drupal\webform\Utility\WebformThemeHelper;
 
 /**
  * Provides a webform element to assist in creation of multiple elements.
@@ -110,7 +110,6 @@ class WebformMultiple extends FormElement {
     $ajax_settings = [
       'callback' => [get_called_class(), 'ajaxCallback'],
       'wrapper' => $table_id,
-      'progress' => ['type' => 'none'],
     ];
 
     $element['#child_keys'] = Element::children($element['#element']);
@@ -200,19 +199,13 @@ class WebformMultiple extends FormElement {
    *   A render array containing inputs for an element's header.
    */
   public static function buildElementHeader(array $element) {
-    $table_id = implode('-', $element['#parents']) . '-table';
-
     if (empty($element['#header'])) {
       return [
         ['data' => '', 'colspan' => 4],
       ];
     }
     elseif (is_array($element['#header'])) {
-      return array_merge(
-        [['class' => ["$table_id--handle", "webform-multiple-table--handle"]]],
-        $element['#header'],
-        [['class' => ["$table_id--weight", "webform-multiple-table--weight"]], ['class' => ["$table_id--handle", "webform-multiple-table--operations"]]]
-      );
+      return array_merge([''], $element['#header'], ['', '']);
     }
     elseif (is_string($element['#header'])) {
       return [
@@ -220,36 +213,22 @@ class WebformMultiple extends FormElement {
       ];
     }
     else {
-
       $header = [];
-      $header['_handle_'] = [
-        'class' => ["$table_id--handle", "webform-multiple-table--handle"],
-      ];
+      $header['_handle_'] = '';
       if ($element['#child_keys']) {
         foreach ($element['#child_keys'] as $child_key) {
           if (static::isHidden($element['#element'][$child_key])) {
             continue;
           }
-          $header[$child_key] = [
-            'data' => (!empty($element['#element'][$child_key]['#title'])) ? $element['#element'][$child_key]['#title'] : '',
-            'class' => ["$table_id--$child_key", "webform-multiple-table--$child_key"],
-          ];
+          $header[$child_key] = (!empty($element['#element'][$child_key]['#title'])) ? $element['#element'][$child_key]['#title'] : '';
         }
       }
       else {
-        $header['item'] = [
-          'data' => (isset($element['#element']['#title'])) ? $element['#element']['#title'] : '',
-          'class' => ["$table_id--item", "webform-multiple-table--item"],
-        ];
+        $header['item'] = (isset($element['#element']['#title'])) ? $element['#element']['#title'] : '';
       }
-      $header['weight'] = [
-        'data' => t('Weight'),
-        'class' => ["$table_id--weight", "webform-multiple-table--weight"],
-      ];
+      $header['weight'] = t('Weight');
       if (empty($element['#cardinality'])) {
-        $header['_operations_'] = [
-          'class' => ["$table_id--operations", "webform-multiple-table--operations"],
-        ];
+        $header['_operations_'] = '';
       }
       return $header;
     }
@@ -331,7 +310,6 @@ class WebformMultiple extends FormElement {
       $row['_operations_'] = [];
       $row['_operations_']['add'] = [
         '#type' => 'image_button',
-        '#title' => t('Add'),
         '#src' => drupal_get_path('module', 'webform') . '/images/icons/plus.svg',
         '#limit_validation_errors' => [],
         '#submit' => [[get_called_class(), 'addItemSubmit']],
@@ -344,7 +322,6 @@ class WebformMultiple extends FormElement {
       ];
       $row['_operations_']['remove'] = [
         '#type' => 'image_button',
-        '#title' => t('Remove'),
         '#src' => drupal_get_path('module', 'webform') . '/images/icons/ex.svg',
         '#limit_validation_errors' => [],
         '#submit' => [[get_called_class(), 'removeItemSubmit']],
@@ -355,6 +332,22 @@ class WebformMultiple extends FormElement {
         '#row_index' => $row_index,
         '#name' => $table_id . '_remove_' . $row_index,
       ];
+
+      // Bootstrap theme does not support image buttons so we are going to use
+      // Boostrap's icon buttons.
+      // @see themes/bootstrap/templates/input/input--button.html.twig
+      if (WebformThemeHelper::isActiveTheme('bootstrap')) {
+        $row['_operations_']['add'] += [
+          '#title' => t('Add'),
+          '#icon_only' => TRUE,
+          '#icon' => \Drupal\bootstrap\Bootstrap::glyphicon('plus-sign'),
+        ];
+        $row['_operations_']['remove'] += [
+          '#title' => t('Remove'),
+          '#icon_only' => TRUE,
+          '#icon' => \Drupal\bootstrap\Bootstrap::glyphicon('minus-sign'),
+        ];
+      }
     }
 
     $row['#weight'] = $weight;
@@ -506,7 +499,7 @@ class WebformMultiple extends FormElement {
       $items = static::convertValuesToItems($element, $values['items']);
     }
     catch (\Exception $exception) {
-      $form_state->setError($element, Markup::create($exception->getMessage()));
+      $form_state->setError($element, new FormattableMarkup($exception->getMessage(), []));
       return;
     }
 

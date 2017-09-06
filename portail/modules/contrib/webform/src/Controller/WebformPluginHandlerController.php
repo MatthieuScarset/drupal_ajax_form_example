@@ -8,7 +8,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\webform\Plugin\WebformHandlerInterface;
+use Drupal\webform\WebformHandlerInterface;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,27 +83,9 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         $rows[$plugin_id]['class'] = ['color-warning'];
       }
     }
+
     ksort($rows);
-
-    $build = [];
-
-    // Settings
-    $build['settings'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Edit settings'),
-      '#url' => Url::fromRoute('webform.settings.handlers'),
-      '#attributes' => ['class' => ['button', 'button--small'], 'style' => 'float: right'],
-    ];
-
-    // Display info.
-    $build['info'] = [
-      '#markup' => $this->t('@total handlers', ['@total' => count($rows)]),
-      '#prefix' => '<p>',
-      '#suffix' => '</p>',
-    ];
-
-    // Handlers.
-    $build['webform_handlers'] = [
+    return [
       '#type' => 'table',
       '#header' => [
         $this->t('ID'),
@@ -119,8 +101,6 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       '#rows' => $rows,
       '#sticky' => TRUE,
     ];
-
-    return $build;
   }
 
   /**

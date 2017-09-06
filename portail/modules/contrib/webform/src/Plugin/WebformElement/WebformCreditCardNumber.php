@@ -2,7 +2,7 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\WebformElementBase;
 
 /**
  * Provides a 'creditcard_number' element.

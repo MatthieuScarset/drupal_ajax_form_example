@@ -49,7 +49,7 @@ class Checkboxes extends OptionsBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     $element['#element_validate'][] = [get_class($this), 'validateMultipleOptions'];
     parent::prepare($element, $webform_submission);
   }

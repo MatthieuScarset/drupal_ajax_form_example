@@ -15,6 +15,7 @@ use Drupal\webform\Utility\WebformOptionsHelper;
  */
 class WebformOptionsForm extends EntityForm {
 
+
   /**
    * {@inheritdoc}
    */
@@ -205,7 +206,7 @@ class WebformOptionsForm extends EntityForm {
 
     $context = [
       '@label' => $webform_options->label(),
-      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString(),
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
     ];
     $this->logger('webform')->notice('Options @label have been reset.', $context);
 
@@ -224,7 +225,7 @@ class WebformOptionsForm extends EntityForm {
 
     $context = [
       '@label' => $webform_options->label(),
-      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString(),
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
     ];
     $this->logger('webform')->notice('Options @label saved.', $context);
 

@@ -21,7 +21,7 @@ class WebformElementRatingTest extends WebformTestBase {
   /**
    * Test rating element.
    */
-  public function testRating() {
+  public function testRatingElement() {
     $this->drupalGet('webform/test_element_rating');
 
     // Check basic rating display.

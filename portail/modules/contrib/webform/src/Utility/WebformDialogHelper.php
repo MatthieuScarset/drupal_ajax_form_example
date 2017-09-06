@@ -83,7 +83,7 @@ class WebformDialogHelper {
       return $class ? ['class' => $class] : [];
     }
     else {
-      $class[] = 'webform-ajax-link';
+      $class[] = 'use-ajax';
       if (WebformDialogHelper::useOffCanvas()) {
         return [
           'class' => $class,

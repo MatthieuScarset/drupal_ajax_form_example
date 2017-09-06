@@ -2,9 +2,10 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManager;
-use Drupal\webform\WebformSubmissionInterface;
+use Drupal\webform\Element\WebformTelephone as WebformTelephoneElement;
 
 /**
  * Provides a 'telephone' (composite) element.
@@ -34,6 +35,22 @@ class WebformTelephone extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
+  protected function getCompositeElements() {
+    return WebformTelephoneElement::getCompositeElements();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getInitializedCompositeElement(array &$element) {
+    $form_state = new FormState();
+    $form_completed = [];
+    return WebformTelephoneElement::processWebformComposite($element, $form_state, $form_completed);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   protected function getCompositeElementOptions($composite_key) {
     if ($composite_key === 'type') {
       $composite_key = 'phone_type';
@@ -44,9 +61,7 @@ class WebformTelephone extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  protected function formatHtmlItemValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
-
+  protected function formatHtmlItemValue(array $element, array $value) {
     $t_args = [
       ':tel' => 'tel:' . $value['phone'],
       '@tel' => $value['phone'],
@@ -71,9 +86,7 @@ class WebformTelephone extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  protected function formatTextItemValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
-
+  protected function formatTextItemValue(array $element, array $value) {
     $t_args = [
       '@tel' => $value['phone'],
       '@ext' => $value['ext'],
@@ -103,6 +116,7 @@ class WebformTelephone extends WebformCompositeBase {
       '#type' => 'checkbox',
       '#description' => $this->t('Enhance the telephone element\'s international support using the jQuery <a href=":href">International Telephone Input</a> plugin.', [':href' => 'http://intl-tel-input.com/']),
       '#return_value' => TRUE,
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
     $form['composite']['phone__international_initial_country'] = [
       '#title' => $this->t('Initial country'),
@@ -116,12 +130,8 @@ class WebformTelephone extends WebformCompositeBase {
           ':input[name="properties[phone__international]"]' => ['checked' => TRUE],
         ],
       ],
+      '#access' => $this->librariesManager->isIncluded('jquery.intl-tel-input'),
     ];
-    if ($this->librariesManager->isExcluded('jquery.intl-tel-input')) {
-      $form['composite']['phone__international']['#access'] = FALSE;
-      $form['composite']['phone__international_initial_country']['#access'] = FALSE;
-    }
-
     return $form;
   }
 

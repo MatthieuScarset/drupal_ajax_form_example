@@ -77,6 +77,17 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
   public function checkFieldDefinitionAccess(WebformInterface $webform, array $definitions);
 
   /**
+   * Returns a webform's max serial number.
+   *
+   * @param \Drupal\webform\WebformInterface $webform
+   *   A webform.
+   *
+   * @return int
+   *   The next serial number.
+   */
+  public function getMaxSerial(WebformInterface $webform);
+
+  /**
    * Delete all webform submissions.
    *
    * @param \Drupal\webform\WebformInterface|null $webform
@@ -103,14 +114,11 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface|null $account
    *   (optional) A user account.
-   * @param bool $in_draft
-   *   (optional) Look for submissions in draft. Defaults to FALSE.
-   *   Setting to NULL will return all saved submissions and drafts.
    *
    * @return int
    *   Total number of submissions.
    */
-  public function getTotal(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $in_draft = FALSE);
+  public function getTotal(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get the maximum sid.
@@ -151,13 +159,13 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    * @param \Drupal\Core\Database\Query\AlterableInterface $query
    *   The query instance.
    * @param \Drupal\webform\WebformInterface $webform
-   *   (optional) A webform.
+   *   A webform.
    * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   (optional) The current user account.
+   *   The current user account.
    * @param array $options
-   *   (optional) Additional options and query conditions.
+   *   Additional options and query conditions.
    */
   public function addQueryConditions(AlterableInterface $query, WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []);
 
@@ -174,13 +182,11 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user account.
-   * @param array $options
-   *   (optional) Additional options and query conditions.
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The webform's first submission.
    */
-  public function getFirstSubmission(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []);
+  public function getFirstSubmission(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get a webform's last submission.
@@ -191,13 +197,11 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user account.
-   * @param array $options
-   *   (optional) Additional options and query conditions.
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The webform's last submission.
    */
-  public function getLastSubmission(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []);
+  public function getLastSubmission(WebformInterface $webform, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get a webform submission's previous sibling.
@@ -208,13 +212,11 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user account.
-   * @param array $options
-   *   (optional) Additional options and query conditions.
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The webform submission's previous sibling.
    */
-  public function getPreviousSubmission(WebformSubmissionInterface $webform_submission, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []);
+  public function getPreviousSubmission(WebformSubmissionInterface $webform_submission, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get a webform submission's next sibling.
@@ -225,13 +227,11 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   (optional) A webform submission source entity.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The current user account.
-   * @param array $options
-   *   (optional) Additional options and query conditions.
    *
    * @return \Drupal\webform\WebformSubmissionInterface|null
    *   The webform submission's next sibling.
    */
-  public function getNextSubmission(WebformSubmissionInterface $webform_submission, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, array $options = []);
+  public function getNextSubmission(WebformSubmissionInterface $webform_submission, EntityInterface $source_entity = NULL, AccountInterface $account = NULL);
 
   /**
    * Get webform submission source entity types.
@@ -264,40 +264,6 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   An associative array of columns keyed by name.
    */
   public function getCustomColumns(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $include_elements = TRUE);
-
-  /**
-   * Get user submission columns used to display results.
-   *
-   * @param \Drupal\webform\WebformInterface|null $webform
-   *   A webform.
-   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
-   *   A webform submission source entity.
-   * @param \Drupal\Core\Session\AccountInterface|null $account
-   *   A user account.
-   * @param bool $include_elements
-   *   Flag that include all form element in the list of columns.
-   *
-   * @return array|mixed
-   *   An associative array of columns keyed by name.
-   */
-  public function getUserColumns(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $include_elements = TRUE);
-
-  /**
-   * Get user default submission columns used to display results.
-   *
-   * @param \Drupal\webform\WebformInterface|null $webform
-   *   A webform.
-   * @param \Drupal\Core\Entity\EntityInterface|null $source_entity
-   *   A webform submission source entity.
-   * @param \Drupal\Core\Session\AccountInterface|null $account
-   *   A user account.
-   * @param bool $include_elements
-   *   Flag that include all form element in the list of columns.
-   *
-   * @return array|mixed
-   *   An associative array of columns names.
-   */
-  public function getUserDefaultColumnNames(WebformInterface $webform = NULL, EntityInterface $source_entity = NULL, AccountInterface $account = NULL, $include_elements = TRUE);
 
   /**
    * Get default submission columns used to display results.
@@ -393,25 +359,6 @@ interface WebformSubmissionStorageInterface extends ContentEntityStorageInterfac
    *   Amount of webform submissions to purge.
    */
   public function purge($count);
-
-  /****************************************************************************/
-  // Data handlers.
-  /****************************************************************************/
-
-  /**
-   * Save webform submission data to the 'webform_submission_data' table.
-   *
-   * This method is public the allow webform handler (ie remote posts) to
-   * update [webform:handler] tokens stored in the submission data.
-   *
-   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
-   *   A webform submission.
-   * @param bool $delete_first
-   *   TRUE to delete any data first. For new submissions this is not needed.
-   *
-   * @see \Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler::remotePost
-   */
-  public function saveData(WebformSubmissionInterface $webform_submission, $delete_first = TRUE);
 
   /****************************************************************************/
   // Log methods.

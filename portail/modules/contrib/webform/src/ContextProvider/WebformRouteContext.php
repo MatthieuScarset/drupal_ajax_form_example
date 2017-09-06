@@ -24,7 +24,7 @@ class WebformRouteContext implements ContextProviderInterface {
   protected $routeMatch;
 
   /**
-   * Constructs a WebformRouteContext.
+   * Constructs a new WebformRouteContext.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The route match object.

@@ -4,6 +4,7 @@ namespace Drupal\webform\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\WebformDialogTrait;
 use Drupal\webform\WebformInterface;
 
 /**
@@ -11,7 +12,7 @@ use Drupal\webform\WebformInterface;
  */
 class WebformHandlerDeleteForm extends ConfirmFormBase {
 
-  use WebformDialogFormTrait;
+  use WebformDialogTrait;
 
   /**
    * The webform containing the webform handler to be deleted.
@@ -23,7 +24,7 @@ class WebformHandlerDeleteForm extends ConfirmFormBase {
   /**
    * The webform handler to be deleted.
    *
-   * @var \Drupal\webform\Plugin\WebformHandlerInterface
+   * @var \Drupal\webform\WebformHandlerInterface
    */
   protected $webformHandler;
 
@@ -63,7 +64,7 @@ class WebformHandlerDeleteForm extends ConfirmFormBase {
     $this->webformHandler = $this->webform->getHandler($webform_handler);
 
     $form = parent::buildForm($form, $form_state);
-    $this->buildDialogConfirmForm($form, $form_state);
+    $this->buildConfirmFormDialog($form, $form_state);
     return $form;
   }
 
@@ -73,7 +74,14 @@ class WebformHandlerDeleteForm extends ConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->webform->deleteWebformHandler($this->webformHandler);
     drupal_set_message($this->t('The webform handler %name has been deleted.', ['%name' => $this->webformHandler->label()]));
-    $form_state->setRedirectUrl($this->webform->toUrl('handlers-form'));
+    $form_state->setRedirectUrl($this->getRedirectUrl());
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getRedirectUrl() {
+    return $this->webform->toUrl('handlers-form');
   }
 
 }

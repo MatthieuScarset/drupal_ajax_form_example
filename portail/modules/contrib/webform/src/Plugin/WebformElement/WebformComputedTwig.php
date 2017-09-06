@@ -4,7 +4,9 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Element\WebformComputedTwig as WebformComputedTwigElement;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'webform_computed_twig' element.
@@ -13,7 +15,7 @@ use Drupal\webform\Utility\WebformElementHelper;
  *   id = "webform_computed_twig",
  *   label = @Translation("Computed Twig"),
  *   description = @Translation("Provides an item to display computed webform submission values using Twig."),
- *   category = @Translation("Computed Elements"),
+ *   category = @Translation("Computed"),
  * )
  */
 class WebformComputedTwig extends WebformComputedBase {
@@ -49,14 +51,14 @@ class WebformComputedTwig extends WebformComputedBase {
     ];
     $output = [];
     $output[] = [
-      '#markup' => '<p>' . $this->t('Learn about <a href=":twig_href">Twig</a> and how it is used in <a href=":drupal_href">Drupal</a>.', $t_args) . '</p>',
+      '#markup' => '<p>' . $this->t('Learn about <a href=":twig_href">Twig</a> and how it is used in <a href=":drupal_href">Drupal</a>.', $t_args) .'</p>',
     ];
     $output[] = [
       '#markup' => '<p>' . $this->t("The following variables are available:") . '</p>',
     ];
     $output[] = [
       '#theme' => 'item_list',
-      '#items' => $items,
+      '#items' => $items
     ];
     $output[] = [
       '#markup' => '<p>' . $this->t("You can also output tokens using the <code>webform_token()</code> function.") . '</p>',
@@ -93,10 +95,17 @@ class WebformComputedTwig extends WebformComputedBase {
     }
     catch (\Exception $exception) {
       $form_state->setErrorByName('markup', [
-        'message' => ['#markup' => $this->t('Failed to render computed Twig value due to error.'), '#suffix' => '<br /><br />'],
+        'message' => ['#markup' => $this->t('Failed to render computed Twig value due to error.'), '#suffix' => '<br/><br/>'],
         'error' => ['#markup' => Html::escape($exception->getMessage()), '#prefix' => '<pre>', '#suffix' => '</pre>'],
       ]);
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function processValue(array $element, WebformSubmissionInterface $webform_submission) {
+    return WebformComputedTwigElement::processValue($element, $webform_submission);
   }
 
 }

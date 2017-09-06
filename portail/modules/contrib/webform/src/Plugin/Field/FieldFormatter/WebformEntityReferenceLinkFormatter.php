@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WebformEntityReferenceLinkFormatter extends WebformEntityReferenceFormatterBase {
 
   /**
-   * The webform message manager.
+   * The message manager.
    *
    * @var \Drupal\webform\WebformMessageManagerInterface
    */
@@ -55,7 +55,7 @@ class WebformEntityReferenceLinkFormatter extends WebformEntityReferenceFormatte
    * @param array $third_party_settings
    *   Third party settings.
    * @param \Drupal\webform\WebformMessageManagerInterface $message_manager
-   *   The webform message manager.
+   *   The message manager.
    * @param \Drupal\Core\Utility\Token $token
    *   The token service.
    */
