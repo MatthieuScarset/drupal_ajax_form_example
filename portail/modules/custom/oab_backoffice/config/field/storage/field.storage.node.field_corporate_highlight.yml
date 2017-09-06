@@ -1,0 +1,19 @@
+uuid: 71d93265-47cd-42a4-82e5-bc40ab330527
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_corporate_highlight
+field_name: field_corporate_highlight
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

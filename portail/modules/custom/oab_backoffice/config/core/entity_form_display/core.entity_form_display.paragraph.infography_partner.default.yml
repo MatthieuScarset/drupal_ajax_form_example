@@ -1,0 +1,45 @@
+uuid: ca3868c9-e00d-4d7e-8805-6f79f0846614
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.infography_partner.field_background_image
+    - field.field.paragraph.infography_partner.field_key_figures
+    - field.field.paragraph.infography_partner.field_text_infography
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.infography_partner
+  module:
+    - image
+    - workbench_moderation
+id: paragraph.infography_partner.default
+targetEntityType: paragraph
+bundle: infography_partner
+mode: default
+content:
+  field_background_image:
+    weight: 6
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_key_figures:
+    weight: 7
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_text_infography:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true
