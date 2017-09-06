@@ -101,7 +101,7 @@ view_mode ? view_mode|clean_class,
     {% set field_detailed_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_detailed_contents %}
     {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_simple_contents.Children.ruby_simple_contents_block %}
     {% set field_partners = content.axiome_data.Children.ruby_theme.Children.ruby_zone_partner %}
-    {% set axiomeDocs = content.axiome_data.correspondance %}
+    {% set axiomeDocs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
     {% set id_fiche = content.axiome_data['@attributes'].id %}
     {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
 {% endif %}
