@@ -1,0 +1,355 @@
+uuid: a8a2d874-fad2-4ae5-b480-d48715177cb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.node.simple_page.field_blog_format
+    - field.field.node.simple_page.field_blog_thematic
+    - field.field.node.simple_page.field_content
+    - field.field.node.simple_page.field_content_owner
+    - field.field.node.simple_page.field_display_title
+    - field.field.node.simple_page.field_email_owner
+    - field.field.node.simple_page.field_end_date
+    - field.field.node.simple_page.field_grouping_title
+    - field.field.node.simple_page.field_highlight
+    - field.field.node.simple_page.field_industry
+    - field.field.node.simple_page.field_job_profile
+    - field.field.node.simple_page.field_market_segment
+    - field.field.node.simple_page.field_meta_description
+    - field.field.node.simple_page.field_meta_title
+    - field.field.node.simple_page.field_metatags
+    - field.field.node.simple_page.field_page_du_site_1
+    - field.field.node.simple_page.field_page_du_site_2
+    - field.field.node.simple_page.field_rebond_document
+    - field.field.node.simple_page.field_region
+    - field.field.node.simple_page.field_solution
+    - field.field.node.simple_page.field_start_date
+    - field.field.node.simple_page.field_subhome
+    - field.field.node.simple_page.field_thematic
+    - field.field.node.simple_page.field_visual
+    - node.type.simple_page
+  module:
+    - datetime
+    - entity_browser
+    - field_group
+    - metatag
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_write
+        - group_classify
+        - group_rebond
+        - group_seo
+        - group_publish
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_write:
+      children:
+        - langcode
+        - title
+        - field_display_title
+        - field_grouping_title
+        - field_highlight
+        - field_content
+        - field_visual
+      parent_name: group_onglets
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Write
+    group_classify:
+      children:
+        - field_subhome
+        - field_industry
+        - field_blog_format
+        - field_blog_thematic
+        - field_solution
+        - field_region
+        - field_job_profile
+      parent_name: group_onglets
+      weight: 4
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
+    group_publish:
+      children:
+        - field_content_owner
+        - field_email_owner
+        - group_content_worthy_period
+        - promote
+        - path
+        - field_metatags
+      parent_name: group_onglets
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publish
+    group_content_worthy_period:
+      children:
+        - field_start_date
+        - field_end_date
+      parent_name: group_publish
+      weight: 15
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Content worthy period'
+    group_seo:
+      children:
+        - field_meta_title
+        - field_meta_description
+      parent_name: group_onglets
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: SEO
+    group_rebond:
+      children:
+        - field_rebond_document
+        - field_page_du_site_1
+        - field_page_du_site_2
+      parent_name: group_onglets
+      weight: 5
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: 'Définition des contenus de la zone Rebond'
+        required_fields: true
+      label: Rebond
+id: node.simple_page.default
+targetEntityType: node
+bundle: simple_page
+mode: default
+content:
+  field_blog_format:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_blog_thematic:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_content:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_content_owner:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_display_title:
+    weight: 3
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_email_owner:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_end_date:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_grouping_title:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_highlight:
+    weight: 5
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_industry:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_job_profile:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_meta_description:
+    weight: 5
+    settings:
+      size: 156
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_meta_title:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_metatags:
+    weight: 18
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_page_du_site_1:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_page_du_site_2:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_rebond_document:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_region:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_solution:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_start_date:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subhome:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_visual:
+    weight: 7
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  langcode:
+    type: language_select
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    weight: 16
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_market_segment: true
+  field_thematic: true
+  sticky: true
+  uid: true
