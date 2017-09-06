@@ -92,7 +92,7 @@
         </footer>
     {% endif %}
 
-    <div{{ content_attributes }}>
+    <div{{ content_attributes.addClass('content') }}>
         {{ content|without('field_local_nav','field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date') }}
     </div>
 
