@@ -246,3 +246,9 @@ function oab_amel_update_8027() {
     include_once("updates/update_8027.inc");
 }
 
+/**
+ *  Robots.txt : disallow /node/*
+ */
+function oab_amel_update_8028() {
+    include_once("updates/update_8028.inc");
+}
