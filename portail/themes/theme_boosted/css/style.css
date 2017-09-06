@@ -266,6 +266,7 @@ article .content .field--type-text-long ul li:before{
 
 
 .rebond article {
+    margin: 2rem 2rem;
     padding: 3rem 2rem;
     margin-bottom: 2rem;
 }
