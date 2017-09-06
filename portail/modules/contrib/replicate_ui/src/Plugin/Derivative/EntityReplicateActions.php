@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Plugin\Derivative\ReplicateUILocalTasks.
- */
-
 namespace Drupal\replicate_ui\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;

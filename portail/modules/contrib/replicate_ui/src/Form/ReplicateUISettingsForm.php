@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Form\ReplicateUISettingsForm.
- */
-
 namespace Drupal\replicate_ui\Form;
 
 use Drupal\Core\Cache\Cache;

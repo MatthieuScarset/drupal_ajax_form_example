@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\ReplicateAccessChecker.
- */
-
 namespace Drupal\replicate_ui;
 
 use Drupal\Core\Routing\Access\AccessInterface;

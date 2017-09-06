@@ -8,14 +8,14 @@
  * Implements hook_action_info().
  */
 function replicate_ui_replicate_action_info() {
-  return array(
-    'replicate_ui_replicate_item' => array(
+  return [
+    'replicate_ui_replicate_item' => [
       'type' => 'entity',
       'label' => t('Replicate item'),
       'configurable' => FALSE,
-      'behavior' => array('replicates_property'),
-    ),
-  );
+      'behavior' => ['replicates_property'],
+    ],
+  ];
 }
 
 /**

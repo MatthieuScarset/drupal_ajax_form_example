@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Hooks\EntityTypeAlter.
- */
-
 namespace Drupal\replicate_ui\Hooks;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
