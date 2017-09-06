@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Plugin\Action\EntityReplicate.
- */
-
 namespace Drupal\replicate_ui\Plugin\Action;
 
 use Drupal\Core\Action\ActionBase;
@@ -71,7 +66,7 @@ class EntityReplicate extends ActionBase implements ContainerFactoryPluginInterf
    * {@inheritdoc}
    */
   public function execute($object = NULL) {
-    $this->executeMultiple(array($object));
+    $this->executeMultiple([$object]);
   }
 
 }

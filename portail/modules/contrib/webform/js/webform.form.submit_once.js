@@ -1,6 +1,6 @@
 /**
  * @file
- * Javascript behaviors for preventing duplicate webform submissions.
+ * JavaScript behaviors for preventing duplicate webform submissions.
  */
 
 (function ($, Drupal) {
@@ -20,16 +20,21 @@
       $('.js-webform-submit-once', context).each(function () {
         var $form = $(this);
         $form.removeAttr('webform-submitted');
-        $form.find('#edit-actions input[type="submit"]').removeAttr('webform-clicked');
+        $form.find('#edit-actions :submit').removeAttr('webform-clicked');
 
         // Track which submit button was clicked.
         // @see http://stackoverflow.com/questions/5721724/jquery-how-to-get-which-button-was-clicked-upon-form-submission
-        $form.find('#edit-actions input[type="submit"]').click(function () {
-          $form.find('#edit-actions input[type="submit"]').removeAttr('webform-clicked');
+        $form.find('#edit-actions :submit').click(function () {
+          $form.find('#edit-actions :submit').removeAttr('webform-clicked');
           $(this).attr('webform-clicked', 'true');
         });
 
         $(this).submit(function () {
+          // Don't submit if client-side validation has failed.
+          if ($.isFunction(jQuery.fn.valid) && !($form.valid())) {
+            return false;
+          }
+
           // Track webform submitted.
           if ($form.attr('webform-submitted')) {
             return false;
@@ -38,7 +43,7 @@
 
           // Visually disable all submit buttons.
           // Submit buttons can't disabled because their op(eration) must to be posted back to the server.
-          $form.find('#edit-actions input[type="submit"]').addClass('is-disabled');
+          $form.find('#edit-actions :submit').addClass('is-disabled');
 
           // Set the throbber progress indicator.
           // @see Drupal.Ajax.prototype.setProgressIndicatorThrobber

@@ -48,6 +48,7 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
    * @var \Drupal\Core\Config\ImmutableConfig
    */
   protected $config;
+
   /**
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
@@ -62,17 +63,17 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
    *   Plugin ID.
    * @param mixed $plugin_definition
    *   Plugin definition.
-   * @param \Drupal\workbench_access\UserSectionStorageInterface $userSectionStorage
+   * @param \Drupal\workbench_access\UserSectionStorageInterface $user_section_storage
    *   User section storage.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   Entity type manager.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, UserSectionStorageInterface $userSectionStorage, ConfigFactoryInterface $configFactory, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, UserSectionStorageInterface $user_section_storage, ConfigFactoryInterface $configFactory, EntityTypeManagerInterface $entityTypeManager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->config = $configFactory->get('workbench_access.settings');
-    $this->userSectionStorage = $userSectionStorage;
+    $this->userSectionStorage = $user_section_storage;
     $this->entityTypeManager = $entityTypeManager;
   }
 
@@ -149,32 +150,32 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
   /**
    * {@inheritdoc}
    */
-  public function configForm($parents = array()) {
+  public function configForm($parents = []) {
     $node_types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
     $form = [];
     /** @var \Drupal\node\NodeTypeInterface $type */
     foreach ($node_types as $id => $type) {
-      $form['workbench_access_status_' . $id] = array(
+      $form['workbench_access_status_' . $id] = [
         '#type' => 'checkbox',
-        '#title' => $this->t('Enable Workbench Access control for @type content.', array('@type' => $type->label())),
-        '#description' => $this->t('If selected, all @type content will be subject to editorial access restrictions.', array('@type' => $type->label())),
+        '#title' => $this->t('Enable Workbench Access control for @type content.', ['@type' => $type->label()]),
+        '#description' => $this->t('If selected, all @type content will be subject to editorial access restrictions.', ['@type' => $type->label()]),
         '#default_value' => $type->getThirdPartySetting('workbench_access', 'workbench_access_status', 0),
-      );
+      ];
       $options = ['' => $this->t('No field set')];
       $options += $this->getFields('node', $type->id(), $parents);
       if (!empty($options)) {
-        $form['field_' . $id] = array(
+        $form['field_' . $id] = [
           '#type' => 'select',
           '#title' => $this->t('Access control field'),
           '#options' => $options,
           '#default_value' => $this->fields('node', $type->id()),
-        );
+        ];
       }
       else {
-        $form['field_' . $id] = array(
+        $form['field_' . $id] = [
           '#type' => 'markup',
           '#markup' => $this->t('There are no eligible fields on this content type.'),
-        );
+        ];
       }
     }
     return $form;
@@ -214,30 +215,34 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
    * {@inheritdoc}
    */
   public function checkEntityAccess(EntityInterface $entity, $op, AccountInterface $account, WorkbenchAccessManagerInterface $manager) {
+    // @TODO: Check for super-admin?
+    // We don't care about the View operation right now.
+    if ($op === 'view' || $op === 'view label' || $account->hasPermission('bypass workbench access')) {
+      // Return early.
+      return AccessResult::neutral();
+    }
+
     // Check that the content type is configured.
     // @TODO: Right now this only handles nodes.
     /** @var \Drupal\node\NodeTypeInterface $type */
-    $type = $this->entityTypeManager->getStorage('node_type')->load($entity->bundle());
-    $active = $type->getThirdPartySetting('workbench_access', 'workbench_access_status', 0);
+    $active = FALSE;
+    if ($type = $this->entityTypeManager->getStorage('node_type')->load($entity->bundle())) {
+      $active = $type->getThirdPartySetting('workbench_access', 'workbench_access_status', 0);
+    }
 
     if (!$active) {
+      // No such node-type or not-active.
       return AccessResult::neutral();
     }
 
-    // Get the field data.
-    $field = $this->fields('node', $type->id());
-
-    // @TODO: Check for super-admin?
-    // We don't care about the View operation right now.
-    if ($op == 'view' || $account->hasPermission('bypass workbench access')) {
-      return AccessResult::neutral();
-    }
-    elseif ($active && !empty($field)) {
+    if ($field = $this->fields('node', $type->id())) {
       // Discover the field and check status.
       $entity_sections = $this->getEntityValues($entity, $field);
       // If no value is set on the entity, ignore.
       // @TODO: Is this the correct logic? It is helpful for new installs.
-      if (empty($entity_sections)) {
+      $deny_on_empty = $this->config->get('deny_on_empty');
+
+      if (!$deny_on_empty && empty($entity_sections)) {
         return AccessResult::neutral();
       }
       $user_sections = $this->userSectionStorage->getUserSections($account->id());
@@ -259,7 +264,7 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
    * {@inheritdoc}
    */
   public function getEntityValues(EntityInterface $entity, $field) {
-    $values = array();
+    $values = [];
     foreach ($entity->get($field)->getValue() as $item) {
       if (isset($item['target_id'])) {
         $values[] = $item['target_id'];
@@ -273,7 +278,7 @@ abstract class AccessControlHierarchyBase extends PluginBase implements AccessCo
    */
   public function fields($entity_type, $bundle) {
     $fields = $this->config->get('fields');
-    return isset($fields[$entity_type][$bundle]) ? $fields[$entity_type][$bundle] : array();
+    return isset($fields[$entity_type][$bundle]) ? $fields[$entity_type][$bundle] : [];
   }
 
   /**

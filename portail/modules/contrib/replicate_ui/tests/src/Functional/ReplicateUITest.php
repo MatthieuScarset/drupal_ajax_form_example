@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\replicate_ui\Functional\ReplicateUITest.
- */
-
 namespace Drupal\Tests\replicate_ui\Functional;
 
 use Drupal\Core\Cache\Cache;

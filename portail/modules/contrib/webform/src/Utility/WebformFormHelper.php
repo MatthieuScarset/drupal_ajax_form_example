@@ -56,7 +56,7 @@ class WebformFormHelper {
   public static function &flattenElements(array &$build) {
     $elements = [];
     $duplicate_element_keys = [];
-    static::flattenElementsRecursive($build, $elements, $duplicate_element_keys);
+    self::flattenElementsRecursive($build, $elements, $duplicate_element_keys);
     return $elements;
   }
 
@@ -66,7 +66,7 @@ class WebformFormHelper {
    * @param array $build
    *   An render array.
    * @param array $elements
-   *   An empty array that  will be populated with references to all elements.
+   *   An empty array that will be populated with references to all elements.
    * @param array $duplicate_element_keys
    *   An array used to track elements with duplicate keys.
    */
@@ -80,24 +80,24 @@ class WebformFormHelper {
           // element's reference to be an array of references.
           if (empty($duplicate_element_keys[$key])) {
             // Store a temporary references to the first element.
-            $first_element =& $elements[$key];
+            $first_element = &$elements[$key];
             // Use unset() to break the reference.
             unset($elements[$key]);
             // Create an array of element references.
             $elements[$key] = [];
             // Append the first to the array of element references.
-            $elements[$key][] =& $first_element;
+            $elements[$key][] = &$first_element;
           }
           // Now append the current element to array of element references.
-          $elements[$key][] =& $build[$key];
+          $elements[$key][] = &$build[$key];
           // Finally †rack elements with duplicate keys.
           $duplicate_element_keys[$key] = TRUE;
         }
         else {
-          $elements[$key] =& $build[$key];
+          $elements[$key] = &$build[$key];
         }
 
-        static::flattenElementsRecursive($element, $elements, $duplicate_element_keys);
+        self::flattenElementsRecursive($element, $elements, $duplicate_element_keys);
       }
     }
   }

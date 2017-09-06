@@ -3,8 +3,9 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'webform_codemirror' element.
@@ -32,7 +33,9 @@ class WebformCodeMirror extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array $element, $value, array $options = []) {
+  public function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    $value = $this->getValue($element, $webform_submission, $options);
+
     if (empty($value)) {
       return '';
     }
@@ -47,7 +50,7 @@ class WebformCodeMirror extends WebformElementBase {
         ];
 
       default:
-        return parent::formatHtmlItem($element, $value, $options);
+        return parent::formatHtmlItem($element, $webform_submission, $options);
     }
   }
 
@@ -70,6 +73,15 @@ class WebformCodeMirror extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
+  public function preview() {
+    return parent::preview() + [
+      '#mode' => 'yaml',
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     $element += ['#mode' => 'text'];
     switch ($element['#mode']) {
@@ -86,7 +98,6 @@ class WebformCodeMirror extends WebformElementBase {
         return [];
 
     }
-
   }
 
   /**

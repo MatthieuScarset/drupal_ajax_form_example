@@ -151,7 +151,7 @@ class WebformArrayHelper {
    * @param string $key
    *   A array key.
    * @param string $direction
-   *   The direction of the  key to retrieve.
+   *   The direction of the key to retrieve.
    *
    * @return string|null
    *   The next or prev(ious) array key or NULL if no key is found.
@@ -243,15 +243,15 @@ class WebformArrayHelper {
    *   Keys.
    *
    * @return bool
-   *  TRUE if multiple keys exist in an array.
+   *   TRUE if multiple keys exist in an array.
    *
-   * @see https://wpscholar.com/blog/check-multiple-array-keys-exist-php/.
+   * @see https://wpscholar.com/blog/check-multiple-array-keys-exist-php/
    */
   public static function keysExist(array $array, array $keys) {
     $count = 0;
     foreach ($keys as $key) {
       if (array_key_exists($key, $array)) {
-        $count ++;
+        $count++;
       }
     }
 

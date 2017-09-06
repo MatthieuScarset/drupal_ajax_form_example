@@ -11,9 +11,36 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 
 /**
- * Provides a webform to set options.
+ * Provides a form to set options.
  */
 class WebformOptionsForm extends EntityForm {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function prepareEntity() {
+    if ($this->operation == 'duplicate') {
+      $this->setEntity($this->getEntity()->createDuplicate());
+    }
+
+    parent::prepareEntity();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    /** @var \Drupal\webform\WebformOptionsInterface $webform */
+    $webform_options = $this->getEntity();
+
+    // Customize title for duplicate webform options.
+    if ($this->operation == 'duplicate') {
+      // Display custom title.
+      $form['#title'] = $this->t("Duplicate '@label' options", ['@label' => $webform_options->label()]);
+    }
+
+    return parent::buildForm($form, $form_state);
+  }
 
   /**
    * {@inheritdoc}
@@ -178,7 +205,7 @@ class WebformOptionsForm extends EntityForm {
 
     $context = [
       '@label' => $webform_options->label(),
-      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString(),
     ];
     $this->logger('webform')->notice('Options @label have been reset.', $context);
 
@@ -197,7 +224,7 @@ class WebformOptionsForm extends EntityForm {
 
     $context = [
       '@label' => $webform_options->label(),
-      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString()
+      'link' => $webform_options->toLink($this->t('Edit'), 'edit-form')->toString(),
     ];
     $this->logger('webform')->notice('Options @label saved.', $context);
 

@@ -45,6 +45,13 @@ class WebformEntityAccessForm extends EntityForm {
         '#title' => $this->t('Users'),
         '#default_value' => $access[$name]['users'] ? $this->entityTypeManager->getStorage('user')->loadMultiple($access[$name]['users']) : [],
       ];
+      $form['access'][$name]['permissions'] = [
+        '#type' => 'webform_permissions',
+        '#title' => $this->t('Permissions'),
+        '#multiple' => TRUE,
+        '#select2' => TRUE,
+        '#default_value' => $access[$name]['permissions'],
+      ];
     }
 
     return parent::form($form, $form_state);
@@ -73,7 +80,7 @@ class WebformEntityAccessForm extends EntityForm {
 
     $context = [
       '@label' => $webform->label(),
-      'link' => $webform->toLink($this->t('Edit'), 'access-form')->toString()
+      'link' => $webform->toLink($this->t('Edit'), 'access-form')->toString(),
     ];
     $this->logger('webform')->notice('Webform access @label saved.', $context);
 

@@ -89,7 +89,7 @@ if ($nb_arg lt 1 || $nb_arg gt 2) {
     print_log("DEBUG", $cmd_rm, "SCREEN");
     my $retour_rm = `$cmd_rm`;
 
-    my $cmd_cp = "cd /var/www/current/portail; cp -rpf core libraries modules profiles sites themes vendor *.php web.config /var/livrable/common";
+    my $cmd_cp = "cd /var/www/current/portail; cp -rpf core libraries modules profiles sites themes vendor .htaccess *.php web.config /var/livrable/common";
     print_log("DEBUG", $cmd_cp, "SCREEN");
     my $retour_cp = `$cmd_cp`;
 

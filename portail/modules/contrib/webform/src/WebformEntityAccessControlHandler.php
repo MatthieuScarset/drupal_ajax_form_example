@@ -30,7 +30,7 @@ class WebformEntityAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   public function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    /** @var  \Drupal\webform\WebformInterface $entity */
+    /** @var \Drupal\webform\WebformInterface $entity */
     // Check 'view' using 'create' custom webform submission access rules.
     // Viewing a webform is the same as creating a webform submission.
     if ($operation == 'view') {
@@ -86,7 +86,10 @@ class WebformEntityAccessControlHandler extends EntityAccessControlHandler {
       }
     }
 
-    return parent::checkAccess($entity, $operation, $account);
+    $access_result = parent::checkAccess($entity, $operation, $account);
+    // Make sure the webform is added as a cache dependency.
+    $access_result->addCacheableDependency($entity);
+    return $access_result;
   }
 
 }

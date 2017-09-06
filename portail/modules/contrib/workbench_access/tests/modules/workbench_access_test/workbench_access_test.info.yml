@@ -6,8 +6,8 @@ hidden: true
 dependencies:
   - workbench_access
 
-# Information added by Drupal.org packaging script on 2017-04-18
-version: '8.x-1.0-alpha4'
+# Information added by Drupal.org packaging script on 2017-07-20
+version: '8.x-1.0-alpha5'
 core: '8.x'
 project: 'workbench_access'
-datestamp: 1492523356
+datestamp: 1500562745

@@ -1,3 +1,11 @@
+entity.webform.references:
+  path: '/admin/structure/webform/manage/{webform}/references'
+  defaults:
+    _controller: '\Drupal\webform_node\Controller\WebformNodeReferencesListController::listing'
+    _title_callback: '\Drupal\webform\Controller\WebformController::title'
+  requirements:
+    _entity_access: 'webform.update'
+
 entity.node.webform.confirmation:
   path: '/node/{node}/webform/confirmation'
   defaults:
@@ -19,6 +27,20 @@ entity.node.webform.user.submissions:
     _title: 'Submissions'
     operation: ''
     entity_access: 'webform.submission_view_own'
+  options:
+    parameters:
+      node:
+        type: 'entity:node'
+  requirements:
+    _custom_access: '\Drupal\webform_node\Access\WebformNodeAccess::checkWebformAccess'
+
+entity.node.webform.user.drafts:
+  path: '/node/{node}/webform/drafts'
+  defaults:
+    _entity_list: 'webform_submission'
+    _title: 'Drafts'
+    operation: view
+    entity_access: 'webform.submission_create'
   options:
     parameters:
       node:
@@ -255,7 +277,7 @@ entity.node.webform_submission.edit_form.all:
     _title_callback: 'Drupal\webform\Controller\WebformSubmissionController::title'
     operation: webform_submission_edit
     entity_access: 'webform_submission.update'
-    disable_pages: true
+    mode: disable_pages
   options:
     _admin_route: TRUE
     parameters:
