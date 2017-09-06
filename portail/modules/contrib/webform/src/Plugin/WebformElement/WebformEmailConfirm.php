@@ -3,8 +3,6 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\Element\WebformHtmlEditor;
-use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'email_confirm' element.
@@ -29,21 +27,8 @@ class WebformEmailConfirm extends Email {
       'confirm__description' => '',
       'confirm__placeholder' => '',
     ];
-    unset(
-      $default_properties['multiple'],
-      $default_properties['multiple__header_label']
-    );
+    unset($default_properties['multiple']);
     return $default_properties;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
-    parent::prepare($element, $webform_submission);
-    if (isset($element['#confirm__description'])) {
-      $element['#confirm__description'] = WebformHtmlEditor::checkMarkup($element['#confirm__description']);
-    }
   }
 
   /**

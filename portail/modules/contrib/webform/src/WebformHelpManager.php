@@ -2,8 +2,10 @@
 
 namespace Drupal\webform;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\State\StateInterface;
@@ -12,7 +14,6 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Path\PathMatcherInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Element\WebformMessage;
-use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
 
@@ -36,13 +37,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * @var array
    */
   protected $videos;
-
-  /**
-   * The current version number of the Webform module.
-   *
-   * @var string
-   */
-  protected $version;
 
   /**
    * The current user.
@@ -80,7 +74,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
   protected $pathMatcher;
 
   /**
-   * The Webform add-ons manager.
+   * The Webform addo-ns manager.
    *
    * @var \Drupal\webform\WebformAddonsManagerInterface
    */
@@ -96,7 +90,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
   /**
    * Webform element manager.
    *
-   * @var \Drupal\webform\Plugin\WebformElementManagerInterface
+   * @var \Drupal\webform\WebformElementManagerInterface
    */
   protected $elementManager;
 
@@ -104,7 +98,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * Constructs a WebformHelpManager object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
+   *   Current user.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
@@ -114,10 +108,10 @@ class WebformHelpManager implements WebformHelpManagerInterface {
    * @param \Drupal\Core\Path\PathMatcherInterface $path_matcher
    *   The path matcher.
    * @param \Drupal\webform\WebformAddOnsManagerInterface $addons_manager
-   *   The webform add-ons manager.
+   *   The Webform add-ons manager.
    * @param \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager
-   *   The webform libraries manager.
-   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
+   *   The Webform libraries manager.
+   * @param \Drupal\webform\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    */
   public function __construct(AccountInterface $current_user, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, StateInterface $state, PathMatcherInterface $path_matcher, WebformAddOnsManagerInterface $addons_manager, WebformLibrariesManagerInterface $libraries_manager, WebformElementManagerInterface $element_manager) {
@@ -177,7 +171,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
         'message_id' => '',
         'message_storage' => '',
         'video_id' => '',
-        'attached' => [],
       ];
 
       if (!$help['access']) {
@@ -202,7 +195,6 @@ class WebformHelpManager implements WebformHelpManagerInterface {
             '#theme' => 'webform_help',
             '#info' => $help,
           ],
-          '#attached' => $help['attached'],
         ];
         if ($help['message_close']) {
           $build['#cache']['max-age'] = 0;
@@ -245,6 +237,7 @@ class WebformHelpManager implements WebformHelpManagerInterface {
     return $build;
   }
 
+
   /**
    * {@inheritdoc}
    */
@@ -280,12 +273,16 @@ SUGGESTIONS
 <h3>Proposed resolution</h3>
 (Description of the proposed solution, the rationale behind it, and workarounds for people who cannot use the patch.)",
       ];
-
+    
     $links = [];
     $links['index'] = [
       'title' => $this->t('How can we help you?'),
       'url' => Url::fromRoute('webform.help.about'),
-      'attributes' => WebformDialogHelper::getModalDialogAttributes(640),
+      'attributes' => [
+        'class' => ['use-ajax'],
+        'data-dialog-type' => 'modal',
+        'data-dialog-options' => Json::encode(['width' => 640]),
+      ],
     ];
     $links['community'] = [
       'title' => $this->t('Join the Drupal Community'),
@@ -296,7 +293,7 @@ SUGGESTIONS
       'url' => Url::fromUri('https://www.drupal.org/association/campaign/value-2017'),
     ];
     $links['documentation'] = [
-      'title' => $this->t('Read Webform Documentation'),
+      'title' => $this->t('Read Webform Documentaion'),
       'url' => Url::fromUri('https://www.drupal.org/docs/8/modules/webform'),
     ];
     if ($this->configFactory->get('webform.settings')->get('ui.video_display') == 'dialog') {
@@ -323,9 +320,8 @@ SUGGESTIONS
       '#attributes' => ['class' => ['webform-help-menu']],
       'operations' => [
         '#type' => 'operations',
-        '#links' => $links,
+        '#links' => $links
       ],
-      '#attached' => ['library' => 'webform/webform.ajax'],
     ];
   }
 
@@ -343,9 +339,9 @@ SUGGESTIONS
     $link_base = [
       '#type' => 'link',
       '#attributes' => ['class' => ['button', 'button--primary']],
-      '#suffix' => '<br /><br /><hr />',
+      '#suffix' => '<br/><br/><hr/>',
     ];
-
+    
     $build = [
       'title' => [
         '#markup' => $this->t('How can we help you?'),
@@ -358,6 +354,7 @@ SUGGESTIONS
       ],
     ];
 
+
     $build['content']['quote'] = [];
     $build['content']['quote']['image'] = [
       '#theme' => 'image',
@@ -366,7 +363,7 @@ SUGGESTIONS
       '#prefix' => '<p>',
       '#suffix' => '</p>',
     ];
-    $build['content']['quote']['content']['#markup'] = '<blockquote><strong>' . $this->t('It’s really the Drupal community and not so much the software that makes the Drupal project what it is. So fostering the Drupal community is actually more important than just managing the code base.') . '</strong><address>' . $this->t('- Dries Buytaert') . '</address></blockquote><hr />';
+    $build['content']['quote']['content']['#markup'] = '<blockquote><strong>' . $this->t('It’s really the Drupal community and not so much the software that makes the Drupal project what it is. So fostering the Drupal community is actually more important than just managing the code base.') . '</strong><address>' . $this->t('- Dries Buytaert') . '</address></blockquote><hr/>';
 
     // Community.
     $build['content']['community'] = [];
@@ -414,7 +411,7 @@ SUGGESTIONS
       $build['content']['help'] = [];
       $build['content']['help']['title']['#markup'] = '<h3>' . $this->t('Help us help you') . '</h3>';
       $build['content']['help']['video'] = $help_video;
-      $build['content']['help']['#suffix'] = '<hr />';
+      $build['content']['help']['#suffix'] = '<hr/>';
     }
 
     // Issue.
@@ -430,7 +427,7 @@ SUGGESTIONS
     // Request.
     $build['content']['request'] = [];
     $build['content']['request']['title']['#markup'] = '<h3>' . $this->t('How can you request a feature?') . '</h3>';
-    $build['content']['request']['content']['#markup'] = '<p>' . $this->t("Feature requests can be added to the Webform module's issue queue. Use the same tips provided for creating issue reports to help you author a feature request. The better you can define your needs and ideas, the easier it will be for people to help you.") . '</p>';
+    $build['content']['request']['content']['#markup'] = '<p>' . $this->t('Feature requests can be added to the Webform module\'s issue queue. Use the same tips provided for creating issue reports to help you author a feature request. The better you can define your needs and ideas, the easier it will be for people to help you.') . '</p>';
     $build['content']['request']['link'] = $link_base + [
       '#url' => $links['request']['url'],
       '#title' => $this->t('Help improve the Webform module'),
@@ -457,6 +454,7 @@ SUGGESTIONS
           '#youtube_id' => $youtube_id,
           '#autoplay' => FALSE,
         ];
+        break;
 
       case 'link':
         return [
@@ -466,10 +464,12 @@ SUGGESTIONS
           '#attributes' => ['class' => ['button', 'button-action', 'button--small', 'button-webform-play']],
           '#prefix' => ' ',
         ];
+        break;
 
       case 'hidden':
       default:
         return [];
+        break;
     }
   }
 
@@ -505,7 +505,7 @@ SUGGESTIONS
         '#suffix' => '</dl>',
       ];
       foreach ($elements as $element_name => $element) {
-        /** @var \Drupal\webform\Plugin\WebformElementInterface $webform_element */
+        /** @var \Drupal\webform\WebformElementInterface $webform_element */
         $webform_element = $this->elementManager->createInstance($element_name);
 
         if ($webform_element->isHidden()) {
@@ -695,7 +695,7 @@ SUGGESTIONS
             '#suffix' => '</dt>',
           ],
           'description' => [
-            '#markup' => $project['description'] . ((isset($project['notes'])) ? '<br /><em>(' . $project['notes'] . ')</em>' : ''),
+            '#markup' => $project['description'] . ((isset($project['notes'])) ? '<br/><em>(' . $project['notes'] . ')</em>' : ''),
             '#prefix' => '<dd>',
             '#suffix' => '</dd>',
           ],
@@ -725,13 +725,12 @@ SUGGESTIONS
             $this->t('If these libraries are not installed, they are automatically loaded from a CDN.') . ' ' .
             $this->t('All libraries are optional and can be excluded via the admin settings form.') .
             '</p>' .
-            '<p>' . $this->t('There are three ways to download the needed third party libraries.') . '</p>' .
+            '<p>' . $this->t('There are twos ways to download the needed third party libraries.') . '</p>' .
             '<ul>' .
               '<li>' . $this->t('Generate a *.make.yml or composer.json file using <code>drush webform-libraries-make</code> or <code>drush webform-libraries-composer</code>.') . '</li>' .
-              '<li>' . $this->t('Execute <code>drush webform-libraries-download</code>, which will download third party libraries required by the Webform module.') . '</li>' .
-              '<li>' . $this->t("Execute <code>drush webform-composer-update</code>, which will update your Drupal installation's composer.json to include the Webform module's selected libraries as repositories.") . '</li>' .
+              '<li>' . $this->t('Execute <code>drush webform-libraries-download</code>, which will download all included libraries.') . '</li>' .
             '</ul>' .
-            '<p><hr /><p>',
+            '<br/><hr/><br/>',
         ],
         'libraries' => [
           '#prefix' => '<dl>',
@@ -761,13 +760,13 @@ SUGGESTIONS
         'description' => [
           'content' => [
             '#markup' => $library['description'],
-            '#suffix' => '<br />'
+            '#suffix' => '<br/>'
           ],
           'notes' => [
             '#markup' => $library['notes'] .
               ($elements ? ' <strong>' . $this->formatPlural(count($elements), 'Required by @type element.', 'Required by @type elements.', ['@type' => WebformArrayHelper::toString($elements)]) . '</strong>': ''),
             '#prefix' => '<em>(',
-            '#suffix' => ')</em><br />',
+            '#suffix' => ')</em><br/>'
           ],
           'download' => [
             '#type' => 'link',
@@ -782,6 +781,7 @@ SUGGESTIONS
         $build['content']['libraries'][$library_name]['title']['#suffix'] = '</dt>';
         unset($build['content']['libraries'][$library_name]['description']['download']);
       }
+
     }
     return $build;
   }
@@ -811,9 +811,9 @@ SUGGESTIONS
     $html = preg_replace('#<thead>.*</thead>#', '', $html);
     // Remove first th cell.
     $html = preg_replace('#<tr><th>.*?</th>#', '<tr>', $html);
-    // Remove empty rows.
+    // Remove empty rows
     $html = preg_replace('#<tr>(<td></td>)+?</tr>#', '', $html);
-    // Remove empty links.
+    // Remove empty links
     $html = str_replace('<a>', '', $html);
     $html = str_replace('</a>', '', $html);
 
@@ -888,36 +888,6 @@ SUGGESTIONS
   }
 
   /****************************************************************************/
-  // Module.
-  /****************************************************************************/
-
-  /**
-   * Get the current version number of the Webform module.
-   *
-   * @return string
-   *   The current version number of the Webform module.
-   */
-  protected function getVersion() {
-    if (isset($this->version)) {
-      return $this->version;
-    }
-
-    $module_info = Yaml::decode(file_get_contents($this->moduleHandler->getModule('webform')->getPathname()));
-    $this->version = (isset($module_info['version']) && !preg_match('/^8.x-5.\d+-.*-dev$/', $module_info['version'])) ? $module_info['version'] : '8.x-5.x-dev';
-    return $this->version;
-  }
-
-  /**
-   * Determine if the Webform module has been updated.
-   *
-   * @return bool
-   *   TRUE if the Webform module has been updated.
-   */
-  protected function isUpdated() {
-    return ($this->getVersion() !== $this->state->get('webform.version')) ? TRUE : FALSE;
-  }
-
-  /****************************************************************************/
   // Videos.
   /****************************************************************************/
 
@@ -926,14 +896,6 @@ SUGGESTIONS
    */
   protected function initVideos() {
     $videos = [];
-
-    $videos['promotion_lingotek'] = [
-      'title' => $this->t('Webform & Lingotek Partnership'),
-      'content' => $this->t('You can help support the Webform module by signing up and trying the Lingotek-Inside Drupal Translation Module for <strong>free</strong>.'),
-      'youtube_id' => '83L99vYbaGQ',
-      'submit_label' => $this->t('Sign up and try Lingotek'),
-      'submit_url' => Url::fromUri('https://lingotek.com/webform'),
-    ];
 
     $videos['introduction_short'] = [
       'title' => $this->t('Welcome to the Webform module'),
@@ -1058,16 +1020,22 @@ SUGGESTIONS
     ];
 
     // Release.
+    $module_info = Yaml::decode(file_get_contents($this->moduleHandler->getModule('webform')->getPathname()));
+    $version = (isset($module_info['version']) && !preg_match('/^8.x-5.\d+-.*-dev$/', $module_info['version'])) ? $module_info['version'] : '8.x-5.x-dev';
+    $installed_version = $this->state->get('webform.version');
+    // Reset storage state if the version has changed.
+    if ($installed_version != $version) {
+      WebformMessage::resetClosed(WebformMessage::STORAGE_STATE, 'webform.help.release');
+      $this->state->set('webform.version', $version);
+    }
     $t_args = [
-      '@version' => $this->getVersion(),
-      ':href' => 'https://www.drupal.org/project/webform/releases/' . $this->getVersion(),
+      '@version' => $version,
+      ':href' => 'https://www.drupal.org/project/webform/releases/' . $version,
     ];
     $help['release'] = [
       'routes' => [
-        // @see /admin/modules
-        'system.modules_list',
-        // @see /admin/reports/updates
-        'update.status',
+        // @see /admin/structure/webform
+        'entity.webform.collection',
       ],
       'title' => $this->t('You have successfully updated...'),
       'content' => $this->t('You have successfully updated to the @version release of the Webform module. <a href=":href">Learn more</a>', $t_args),
@@ -1076,7 +1044,6 @@ SUGGESTIONS
       'message_storage' => WebformMessage::STORAGE_STATE,
       'access' => $this->currentUser->hasPermission('administer webform'),
       'uses' => FALSE,
-      'reset_version' => TRUE,
     ];
 
     // Introduction.
@@ -1093,41 +1060,6 @@ SUGGESTIONS
       'access' => $this->currentUser->hasPermission('administer webform'),
       'video_id' => 'introduction',
     ];
-
-    /****************************************************************************/
-    // Promotions.
-    // Disable promotions via Webform admin settings.
-    // (/admin/structure/webform/settings/advanced).
-    /****************************************************************************/
-
-    if (!$this->configFactory->get('webform.settings')->get('ui.promotions_disabled')) {
-      // Lingotek.
-      $help['promotion_lingotek'] = [
-        'routes' => [
-          // @see /admin/structure/webform
-          'entity.webform.collection',
-        ],
-        'title' => $this->t('Webform & Lingotek Translation Partnership'),
-        'content' => $this->t("Help <strong>support</strong> the Webform module and internationalize your website using the Lingotek-Inside Drupal Module for continuous translation. <em>Multilingual capability + global access = increased web traffic.</em>"),
-        'message_type' => 'promotion_lingotek',
-        'message_close' => TRUE,
-        'message_storage' => WebformMessage::STORAGE_STATE,
-        'attached' => ['library' => ['webform/webform.promotions']],
-        'access' => $this->currentUser->hasPermission('administer webform'),
-        'video_id' => 'promotion_lingotek',
-        'uses' => FALSE,
-        'reset_version' => TRUE,
-      ];
-
-      // Lingotek.
-      // Note: Creating separate dismissible message for translation overview.
-      $help['promotion_lingotek_translation_overview'] = [
-        'routes' => [
-          // @see /admin/structure/webform/manage/{webform}/translate
-          'entity.webform.config_translation_overview',
-        ],
-      ] + $help['promotion_lingotek'];
-    }
 
     /****************************************************************************/
     // General.
@@ -1182,126 +1114,34 @@ SUGGESTIONS
       'content' => $this->t('The Log page lists all submission events for all webforms.'),
     ];
 
-    // Addons.
-    $help['addons'] = [
-      'routes' => [
-        // @see /admin/structure/webform/addons
-        'webform.addons',
-      ],
-      'title' => $this->t('Extend the Webform module'),
-      'url' => Url::fromRoute('webform.addons'),
-      'content' => $this->t('The Add-ons page includes a list of modules and projects that extend and/or provide additional functionality to the Webform module and Drupal\'s Form API.  If you would like a module or project to be included in the below list, please submit a request to the <a href=":href">Webform module\'s issue queue</a>.', [':href' => 'https://www.drupal.org/node/add/project-issue/webform']),
-    ];
-
-    /****************************************************************************/
     // Settings.
-    /****************************************************************************/
-
-    // Forms.
-    $help['settings_forms'] = [
+    $help['settings'] = [
       'routes' => [
-        // @see /admin/structure/webform/settings/forms
+        // @see /admin/structure/webform/settings
         'webform.settings',
       ],
-      'title' => $this->t('Defining default form settings'),
+      'title' => $this->t('Defining default settings'),
       'url' => Url::fromRoute('webform.settings'),
-      'content' => $this->t('The Forms settings page allows administrators to manage form settings, behaviors, labels, and messages.'),
-      'video_id' => 'admin',
-    ];
-
-    // Elements.
-    $help['settings_elements'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/element
-        'webform.settings.elements',
-      ],
-      'title' => $this->t('Defining default element settings'),
-      'url' => Url::fromRoute('webform.settings.elements'),
-      'content' => $this->t('The Elements settings page allows administrators to manage element specific settings and HTML formatting.'),
+      'content' => $this->t('The Settings page allows administrators to manage global webform and UI configuration settings, including updating default labels & descriptions, settings default format, and defining test dataset.'),
       'video_id' => 'admin',
     ];
 
     // Options.
-    $help['settings_options'] = [
+    $help['options'] = [
       'routes' => [
-        // @see /admin/structure/webform/settings/options
+        // @see /admin/structure/webform/settings/options/manage
         'entity.webform_options.collection',
       ],
       'title' => $this->t('Defining options'),
       'url' => Url::fromRoute('entity.webform_options.collection'),
       'content' => $this->t('The Options page lists predefined options which are used to build select menus, radio buttons, checkboxes and likerts.') . ' ' .
-        $this->t('To find and download additional options, go to <a href=":href">Webform 8.x-5.x: Cookbook</a>.', [':href' => 'https://www.drupal.org/docs/8/modules/webform/webform-cookbook']),
-      'video_id' => 'admin',
+      $this->t('To find and download additional options, go to <a href=":href">Webform 8.x-5.x: Options</a>.', [':href' => 'https://www.drupal.org/node/2845530']),
     ];
-
-    // Submissions.
-    $help['settings_submissions'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/submissions
-        'webform.settings.submissions',
-      ],
-      'title' => $this->t('Defining default submission settings'),
-      'url' => Url::fromRoute('webform.settings.submissions'),
-      'content' => $this->t('The Submissions settings page allows administrators to manage submissions settings and behaviors.'),
-      'video_id' => 'admin',
-    ];
-
-    // Handlers.
-    $help['settings_handlers'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/handlers
-        'webform.settings.handlers',
-      ],
-      'title' => $this->t('Defining default email and handler settings'),
-      'url' => Url::fromRoute('webform.settings.handlers'),
-      'content' => $this->t('The Handlers settings page allows administrators to manage email and handler default values and behaviors.'),
-      'video_id' => 'admin',
-    ];
-
-    // Exporters.
-    $help['settings_exporters'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/exporters
-        'webform.settings.exporters',
-      ],
-      'title' => $this->t('Defining default exporter settings'),
-      'url' => Url::fromRoute('webform.settings.exporters'),
-      'content' => $this->t('The Handlers settings page allows administrators to manage exporter default settings.'),
-      'video_id' => 'admin',
-    ];
-
-    // Libraries.
-    $help['settings_libraries'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/libraries
-        'webform.settings.libraries',
-      ],
-      'title' => $this->t('Defining default CSS/JS and library settings'),
-      'url' => Url::fromRoute('webform.settings.libraries'),
-      'content' => $this->t('The Libraries settings page allows administrators to add custom CSS/JS to all form and enabled/disable external libraries.'),
-      'video_id' => 'admin',
-    ];
-
-    // Advanced.
-    $help['settings_advanced'] = [
-      'routes' => [
-        // @see /admin/structure/webform/settings/advanced
-        'webform.settings.advanced',
-      ],
-      'title' => $this->t('Defining advanced settings'),
-      'url' => Url::fromRoute('webform.settings.advanced'),
-      'content' => $this->t('The Libraries settings page allows administrators to managed advanced settings including UI behaviors and test data.'),
-      'video_id' => 'admin',
-    ];
-
-    /****************************************************************************/
-    // Plugins.
-    /****************************************************************************/
 
     // Elements.
-    $help['plugins_elements'] = [
+    $help['elements'] = [
       'routes' => [
-        // @see /admin/structure/webform/plugins/elements
+        // @see /admin/structure/webform/settings/elements
         'webform.element_plugins',
       ],
       'title' => $this->t('Webform element plugins'),
@@ -1311,9 +1151,9 @@ SUGGESTIONS
     ];
 
     // Handlers.
-    $help['plugins_handlers'] = [
+    $help['handlers'] = [
       'routes' => [
-        // @see /admin/structure/webform/plugins/handlers
+        // @see /admin/structure/webform/settings/handlers
         'webform.handler_plugins',
       ],
       'title' => $this->t('Webform handler plugins'),
@@ -1323,15 +1163,26 @@ SUGGESTIONS
     ];
 
     // Exporters.
-    $help['plugins_exporters'] = [
+    $help['exporters'] = [
       'routes' => [
-        // @see /admin/structure/webform/plugins/exporters
+        // @see /admin/structure/webform/settings/exporters
         'webform.exporter_plugins',
       ],
       'title' => $this->t('Results exporter plugins'),
       'url' => Url::fromRoute('webform.exporter_plugins'),
       'content' => $this->t('The Exporters page lists all available results exporter plugins.') . ' ' .
       $this->t('Exporters are used to export results into a downloadable format that can be used by MS Excel, Google Sheets, and other spreadsheet applications.'),
+    ];
+
+    // Addons.
+    $help['addons'] = [
+      'routes' => [
+        // @see /admin/structure/webform/addons
+        'webform.addons',
+      ],
+      'title' => $this->t('Extend the Webform module'),
+      'url' => Url::fromRoute('webform.addons'),
+      'content' => $this->t('The Add-ons page includes a list of modules and projects that extend and/or provide additional functionality to the Webform module and Drupal\'s Form API.  If you would like a module or project to be included in the below list, please submit a request to the <a href=":href">Webform module\'s issue queue</a>.', [':href' => 'https://www.drupal.org/node/add/project-issue/webform']),
     ];
 
     /****************************************************************************/
@@ -1513,15 +1364,6 @@ SUGGESTIONS
         $this->t('If you run into any issues with a webform, you can also attach the below configuration (without any personal information) to a new ticket in the Webform module\'s <a href=":href">issue queue</a>.', [':href' => 'https://www.drupal.org/project/issues/webform']),
         'video_id' => 'help',
       ];
-      // Webform Schema.
-      $help['webform_schema'] = [
-        'routes' => [
-          // @see /admin/structure/webform/manage/{webform}/schema
-          'entity.webform.schema_form',
-        ],
-        'title' => $this->t('Webform schema'),
-        'content' => $this->t("The Webform schema page displays an overview of a webform's elements and specified data types, which can be used to map webform submissions to a remote post API."),
-      ];
     }
 
     /****************************************************************************/
@@ -1554,14 +1396,6 @@ SUGGESTIONS
       'content' => $this->t("A webform node allows webforms to be fully integrated into a website as nodes."),
       'video_id' => 'blocks',
     ];
-    $help['webform_node_reference'] = [
-      'routes' => [
-        // @see /admin/structure/webform/manage/{webform}/references
-        'entity.webform.references',
-      ],
-      'title' => $this->t('Webform references'),
-      'content' => $this->t("The Reference pages displays an overview of a webform's references and allows you to quickly create new references (a.k.a Webform nodes)."),
-    ];
 
     // Webform Block.
     $help['webform_block'] = [
@@ -1573,25 +1407,11 @@ SUGGESTIONS
       'video_id' => 'blocks',
     ];
 
-    /****************************************************************************/
-
-    // Initialize help.
     foreach ($help as $id => &$help_info) {
       $help_info += [
         'id' => $id,
         'uses' => TRUE,
-        'reset_version' => FALSE,
       ];
-    }
-
-    // Reset storage state if the Webform module version has changed.
-    if ($this->isUpdated()) {
-      foreach ($help as $id => $help_info) {
-        if (!empty($help_info['reset_version'])) {
-          WebformMessage::resetClosed(WebformMessage::STORAGE_STATE, 'webform.help.' . $id);
-        }
-      }
-      $this->state->set('webform.version', $this->getVersion());
     }
 
     return $help;

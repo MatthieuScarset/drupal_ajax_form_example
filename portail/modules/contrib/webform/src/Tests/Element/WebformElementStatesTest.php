@@ -2,7 +2,10 @@
 
 namespace Drupal\webform\Tests\Element;
 
+use Drupal\Core\Form\OptGroup;
 use Drupal\webform\Tests\WebformTestBase;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\WebformInterface;
 
 /**
  * Tests for webform element #states.
@@ -12,11 +15,54 @@ use Drupal\webform\Tests\WebformTestBase;
 class WebformElementStatesTest extends WebformTestBase {
 
   /**
+   * Modules to enable.
+   *
+   * @var array
+   */
+  public static $modules = ['filter', 'file', 'language', 'taxonomy', 'node', 'webform'];
+
+  /**
    * Webforms to load.
    *
    * @var array
    */
-  protected static $testWebforms = ['test_element_states'];
+  protected static $testWebforms = ['example_elements', 'example_elements_composite', 'test_element_states'];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Create 'tags' vocabulary.
+    $this->createTags();
+  }
+
+  /**
+   * Tests element #states selectors for basic and composite elements.
+   */
+  public function testSelectors() {
+    foreach (['example_elements', 'example_elements_composite'] as $weform_id) {
+      /** @var \Drupal\webform\WebformInterface $webform */
+      $webform = Webform::load($weform_id);
+      $webform->setStatus(WebformInterface::STATUS_OPEN)->save();
+
+      $this->drupalGet('webform/' . $weform_id);
+
+      $selectors = OptGroup::flattenOptions($webform->getElementsSelectorOptions());
+      // Ignore text format and captcha selectors which are not available during
+      // this test.
+      unset(
+        $selectors[':input[name="text_format[format]"]'],
+        $selectors[':input[name="captcha"]']
+      );
+      foreach ($selectors as $selector => $name) {
+        // Remove :input since it is a jQuery specific selector.
+        $selector = str_replace(':input', '', $selector);
+        $this->assertCssSelect($selector);
+      }
+    }
+  }
 
   /**
    * Tests element #states.
@@ -29,7 +75,6 @@ class WebformElementStatesTest extends WebformTestBase {
 
     // Check default value handling.
     $this->drupalPostForm('webform/test_element_states', [], t('Submit'));
-
     $this->assertRaw("states_basic:
   enabled:
     selector_01:

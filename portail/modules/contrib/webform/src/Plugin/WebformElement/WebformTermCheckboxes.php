@@ -3,7 +3,6 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\webform\Element\WebformTermCheckboxes as TermCheckboxesElement;
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 
 /**
  * Provides a 'webform_term_checkboxes' element.
@@ -15,7 +14,7 @@ use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
  *   category = @Translation("Entity reference elements"),
  * )
  */
-class WebformTermCheckboxes extends Checkboxes implements WebformElementEntityReferenceInterface {
+class WebformTermCheckboxes extends Checkboxes implements WebformEntityReferenceInterface {
 
   use WebformTermReferenceTrait;
 

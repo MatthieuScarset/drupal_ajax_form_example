@@ -23,23 +23,10 @@ class ProcessedText extends WebformMarkupBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    if (function_exists('filter_formats')) {
-      // Works around filter_default_format() throwing fatal error when
-      // user is not allowed to use any filter formats.
-      // @see filter_default_format.
-      $formats = filter_formats(\Drupal::currentUser());
-      $format = reset($formats);
-      $default_format = $format ? $format->id() : filter_fallback_format();
-    }
-    else {
-      $default_format = '';
-    }
-
     return parent::getDefaultProperties() + [
-      'wrapper_attributes' => [],
       // Markup settings.
       'text' => '',
-      'format' => $default_format ,
+      'format' => (function_exists('filter_default_format')) ? filter_default_format(\Drupal::currentUser()) : '',
     ];
   }
 
@@ -64,13 +51,6 @@ class ProcessedText extends WebformMarkupBase {
     unset($element['#type'], $element['#text'], $element['#format']);
 
     return parent::buildText($element, $webform_submission, $options);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    return (\Drupal::moduleHandler()->moduleExists('filter')) ? parent::preview() : [];
   }
 
   /**

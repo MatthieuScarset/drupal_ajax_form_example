@@ -28,18 +28,28 @@ class WebformTemplatesTest extends WebformTestBase {
   protected static $testWebforms = ['test_form_template'];
 
   /**
-   * Tests webform templates.
+   * {@inheritdoc}
    */
-  public function testTemplates() {
-    // Login the own user.
-    $this->drupalLogin($this->rootUser);
+  public function setUp() {
+    parent::setUp();
 
+    // Create users.
+    $this->createUsers();
+  }
+
+  /**
+   * Tests webform template setting.
+   */
+  public function testSettings() {
     $template_webform = Webform::load('test_form_template');
 
     // Check the templates always will remain closed.
     $this->assertTrue($template_webform->isClosed());
     $template_webform->setStatus(WebformInterface::STATUS_OPEN)->save();
     $this->assertTrue($template_webform->isClosed());
+
+    // Login the own user.
+    $this->drupalLogin($this->ownWebformUser);
 
     // Check template is included in the 'Templates' list display.
     $this->drupalGet('admin/structure/webform/templates');
@@ -50,6 +60,9 @@ class WebformTemplatesTest extends WebformTestBase {
     $this->drupalGet('webform/test_form_template');
     $this->assertResponse(200);
     $this->assertRaw('You are previewing the below template,');
+
+    // Login the admin user.
+    $this->drupalLogin($this->rootUser);
   }
 
 }

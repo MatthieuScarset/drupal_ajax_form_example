@@ -45,7 +45,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
     // Replace tokens within an array.
     if (is_array($text)) {
       foreach ($text as $key => $value) {
-        $text[$key] = $this->replace($value, $entity, $data, $options);
+        $text[$key] = $this->replace($value, $entity);
       }
       return $text;
     }
@@ -70,7 +70,7 @@ class WebformTokenManager implements WebformTokenManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function buildTreeLink(array $token_types = ['webform', 'webform_submission', 'webform_handler']) {
+  public function buildTreeLink(array $token_types = ['webform', 'webform_submission']) {
     if ($this->moduleHandler->moduleExists('token')) {
       // @todo Issue #2235581: Make Token Dialog support inserting in WYSIWYGs.
       return [

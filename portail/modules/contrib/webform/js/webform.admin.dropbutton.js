@@ -7,11 +7,6 @@
 
   'use strict';
 
-  // Make sure that dropButton behavior exists.
-  if (!Drupal.behaviors.dropButton) {
-    return;
-  }
-
   /**
    * Wrap Drupal's dropbutton behavior so that the dropbutton widget is only visible after it is initialized.
    */

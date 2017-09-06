@@ -9,7 +9,7 @@ use Drupal\Core\Link;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\webform\Entity\WebformSubmission;
-use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\WebformElementBase;
 use Drupal\Component\Utility\Bytes;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -44,9 +44,6 @@ abstract class WebformManagedFileBase extends WebformElementBase {
       'max_filesize' => $max_filesize,
       'file_extensions' => $file_extensions,
       'uri_scheme' => 'private',
-      'button' => FALSE,
-      'button__title' => '',
-      'button__attributes' => [],
     ];
   }
 
@@ -114,9 +111,9 @@ abstract class WebformManagedFileBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
     // Track if this element has been processed because the work-around below
-    // for 'Issue #2705471: Webform states File fields' which nests the
+    // for 'Issue #2705471: Webform states File fields' which nests  the
     // 'managed_file' element in a basic container, which triggers this element
     // to processed a second time.
     if (!empty($element['#webform_managed_file_processed'])) {
@@ -614,37 +611,6 @@ abstract class WebformManagedFileBase extends WebformElementBase {
       '#description' => $this->t('Check this option if the user should be allowed to upload multiple files.'),
       '#return_value' => TRUE,
     ];
-
-    // Button.
-    // @see webform_preprocess_file_managed_file()
-    $form['file']['button'] = [
-      '#title' => $this->t('Replace file upload input with button'),
-      '#type' => 'checkbox',
-      '#description' => $this->t('If checked the file upload input will be replaced with click-able label styled as button.'),
-      '#return_value' => TRUE,
-    ];
-    $form['file']['button__title'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Button title'),
-      '#description' => $this->t('Defaults to: %value', ['%value' => $this->t('Choose file')]),
-      '#states' => [
-        'visible' => [
-          ':input[name="properties[button]"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-    $form['file']['button__attributes'] = [
-      '#type' => 'webform_element_attributes',
-      '#title' => $this->t('Button attributes'),
-      '#classes' => $this->configFactory->get('webform.settings')->get('settings.button_classes'),
-      '#class__description' => $this->t("Apply classes to the button. Button classes default to 'button button-primary'."),
-      '#states' => [
-        'visible' => [
-          ':input[name="properties[button]"]' => ['checked' => TRUE],
-        ],
-      ],
-    ];
-
     return $form;
   }
 
@@ -705,6 +671,7 @@ abstract class WebformManagedFileBase extends WebformElementBase {
         }
 
         // Return file content headers.
+
         $headers = file_get_content_headers($file);
 
         // Force blacklisted files to be downloaded.

@@ -37,7 +37,7 @@ class WebformSubmissionDeleteMultiple extends ConfirmFormBase {
   protected $manager;
 
   /**
-   * Constructs a WebformSubmissionDeleteMultiple object.
+   * Constructs a DeleteMultiple form object.
    *
    * @param \Drupal\user\PrivateTempStoreFactory $temp_store_factory
    *   The tempstore factory.

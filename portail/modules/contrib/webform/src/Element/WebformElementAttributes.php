@@ -25,9 +25,6 @@ class WebformElementAttributes extends FormElement {
       '#process' => [
         [$class, 'processWebformElementAttributes'],
       ],
-      '#pre_render' => [
-        [$class, 'preRenderWebformElementAttributes'],
-      ],
       '#theme_wrappers' => ['container'],
       '#classes' => '',
     ];
@@ -195,20 +192,6 @@ class WebformElementAttributes extends FormElement {
     $form_state->setValueForElement($element['style'], NULL);
     $form_state->setValueForElement($element['attributes'], NULL);
     $form_state->setValueForElement($element, $attributes);
-  }
-
-  /**
-   * Prepares a #type 'webform_element_attributes' render element.
-   *
-   * @param array $element
-   *   An associative array containing the properties of the element.
-   *
-   * @return array
-   *   The $element.
-   */
-  public static function preRenderWebformElementAttributes($element) {
-    static::setAttributes($element, ['webform-element-attributes']);
-    return $element;
   }
 
 }

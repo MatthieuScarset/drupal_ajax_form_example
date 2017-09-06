@@ -2,8 +2,9 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Core\Form\FormState;
 use Drupal\Core\Render\Element;
-use Drupal\webform\WebformSubmissionInterface;
+use Drupal\webform\Element\WebformName as WebformNameElement;
 
 /**
  * Provides a 'name' element.
@@ -22,16 +23,30 @@ class WebformName extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  protected function formatHtmlItemValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    return $this->formatTextItemValue($element, $webform_submission, $options);
+  protected function getCompositeElements() {
+    return WebformNameElement::getCompositeElements();
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function formatTextItemValue(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
+  protected function getInitializedCompositeElement(array &$element) {
+    $form_state = new FormState();
+    $form_completed = [];
+    return WebformNameElement::processWebformComposite($element, $form_state, $form_completed);
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  protected function formatHtmlItemValue(array $element, array $value) {
+    return $this->formatTextItemValue($element, $value);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function formatTextItemValue(array $element, array $value) {
     $name_parts = [];
     $composite_elements = $this->getCompositeElements();
     foreach (Element::children($composite_elements) as $name_part) {

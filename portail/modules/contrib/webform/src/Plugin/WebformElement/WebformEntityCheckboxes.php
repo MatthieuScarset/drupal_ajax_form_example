@@ -2,8 +2,6 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
-
 /**
  * Provides a 'webform_entity_checkboxes' element.
  *
@@ -14,7 +12,7 @@ use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
  *   category = @Translation("Entity reference elements"),
  * )
  */
-class WebformEntityCheckboxes extends Checkboxes implements WebformElementEntityReferenceInterface {
+class WebformEntityCheckboxes extends Checkboxes implements WebformEntityReferenceInterface {
 
   use WebformEntityReferenceTrait;
   use WebformEntityOptionsTrait;

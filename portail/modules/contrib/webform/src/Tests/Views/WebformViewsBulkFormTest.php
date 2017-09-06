@@ -31,9 +31,9 @@ class WebformViewsBulkFormTest extends WebformTestBase {
   }
 
   /**
-   * Tests the webform views bulk form.
+   * Tests the webform submission bulk form.
    */
-  public function testViewsBulkForm() {
+  public function testBulkForm() {
     $this->drupalLogin($this->adminSubmissionUser);
 
     // Check no submissions.

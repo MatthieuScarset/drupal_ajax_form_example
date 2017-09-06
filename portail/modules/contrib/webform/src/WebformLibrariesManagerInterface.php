@@ -29,7 +29,7 @@ interface WebformLibrariesManagerInterface {
   /**
    * Get libraries.
    *
-   * @param boolean|null $included
+   * @param boolean|NULL $included
    *   Optionally filter by include (TRUE) or excluded (FALSE)
    * @return array
    *   An associative array of libraries.

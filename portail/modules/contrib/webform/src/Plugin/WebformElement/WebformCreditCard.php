@@ -2,6 +2,9 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Core\Form\FormState;
+use Drupal\webform\Element\WebformCreditCard as WebformCreditCardElement;
+
 /**
  * Provides a 'creditcard' element.
  *
@@ -29,6 +32,24 @@ class WebformCreditCard extends WebformCompositeBase {
       $properties['expiration_year__options']
     );
     return $properties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getCompositeElements() {
+    $elements = WebformCreditCardElement::getCompositeElements();
+    unset($elements['expiration']);
+    return $elements;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getInitializedCompositeElement(array &$element) {
+    $form_state = new FormState();
+    $form_completed = [];
+    return WebformCreditCardElement::processWebformComposite($element, $form_state, $form_completed);
   }
 
 }

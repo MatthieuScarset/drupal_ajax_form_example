@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Form;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\WebformEntityStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -29,11 +29,13 @@ class WebformEntityFilterForm extends FormBase {
   /**
    * Constructs a WebformResultsCustomForm object.
    *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
+   * @param \Drupal\webform\WebformSubmissionStorageInterface $webform_storage
+   *   The webform submission storage.
+   * @param \Drupal\webform\WebformRequestInterface $request_handler
+   *   The webform request handler.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
-    $this->webformStorage = $entity_type_manager->getStorage('webform');
+  public function __construct(WebformEntityStorageInterface $webform_storage) {
+    $this->webformStorage = $webform_storage;
   }
 
   /**
@@ -41,7 +43,7 @@ class WebformEntityFilterForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager')->getStorage('webform')
     );
   }
 

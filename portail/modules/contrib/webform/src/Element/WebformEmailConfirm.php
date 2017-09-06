@@ -34,7 +34,7 @@ class WebformEmailConfirm extends FormElement {
         [$class, 'preRenderCompositeFormElement'],
       ],
       '#element_validate' => [[$class, 'validateWebformEmailConfirm']],
-      '#theme_wrappers' => ['form_element'],
+      '#theme_wrappers' => ['container'],
       '#required' => FALSE,
     ];
   }
@@ -146,7 +146,7 @@ class WebformEmailConfirm extends FormElement {
     }
 
     // Set #title for other validation callbacks.
-    // @see \Drupal\webform\Plugin\WebformElementBase::validateUnique
+    // @see \Drupal\webform\WebformElementBase::validateUnique
     if (isset($element['mail_1']['#title'])) {
       $element['#title'] = $element['mail_1']['#title'];
     }

@@ -6,7 +6,6 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\user\EntityOwnerInterface;
-use Drupal\webform\Plugin\WebformHandlerInterface;
 
 /**
  * Provides an interface defining a webform entity.
@@ -18,21 +17,21 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *
    * @var string
    */
-  const DRAFT_NONE = 'none';
+  const DRAFT_ENABLED_NONE = 'none';
 
   /**
    * Denote drafts are allowed for authenticated users only.
    *
    * @var string
    */
-  const DRAFT_AUTHENTICATED = 'authenticated';
+  const DRAFT_ENABLED_AUTHENTICATED = 'authenticated';
 
   /**
    * Denote drafts are allowed for authenticated and anonymous users.
    *
    * @var string
    */
-  const DRAFT_ALL = 'all';
+  const DRAFT_ENABLED_ALL = 'all';
 
   /**
    * Webform status open.
@@ -48,41 +47,6 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * Webform status scheduled.
    */
   const STATUS_SCHEDULED = 'scheduled';
-
-  /**
-   * Webform confirmation page.
-   */
-  const CONFIRMATION_PAGE = 'page';
-
-  /**
-   * Webform confirmation URL.
-   */
-  const CONFIRMATION_URL = 'url';
-
-  /**
-   * Webform confirmation URL with message.
-   */
-  const CONFIRMATION_URL_MESSAGE = 'url_message';
-
-  /**
-   * Webform confirmation inline.
-   */
-  const CONFIRMATION_INLINE = 'inline';
-
-  /**
-   * Webform confirmation message.
-   */
-  const CONFIRMATION_MESSAGE = 'message';
-
-  /**
-   * Webform confirmation modal.
-   */
-  const CONFIRMATION_MODAL = 'modal';
-
-  /**
-   * Webform confirmation default.
-   */
-  const CONFIRMATION_DEFAULT = 'default';
 
   /**
    * Returns the webform's (original) langcode.
@@ -533,12 +497,11 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *
    * @param string $key
    *   The element's key.
-   * @param bool $include_children
-   *   Include initialized children.
+   *
    * @return array|null
    *   An associative array containing an initialized element.
    */
-  public function getElement($key, $include_children = FALSE);
+  public function getElement($key);
 
   /**
    * Get a webform's raw (uninitialized) element.
@@ -590,7 +553,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    * @param string $handler_id
    *   The webform handler ID.
    *
-   * @return \Drupal\webform\Plugin\WebformHandlerInterface
+   * @return \Drupal\webform\WebformHandlerInterface
    *   The webform handler object.
    */
   public function getHandler($handler_id);
@@ -611,7 +574,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   (optional) Value indicating if webform submissions must be saved to the
    *   database.
    *
-   * @return \Drupal\webform\Plugin\WebformHandlerPluginCollection|\Drupal\webform\Plugin\WebformHandlerInterface[]
+   * @return \Drupal\webform\WebformHandlerPluginCollection|\Drupal\webform\WebformHandlerInterface[]
    *   The webform handler plugin collection.
    */
   public function getHandlers($plugin_id = NULL, $status = NULL, $results = NULL, $submission = NULL);
@@ -619,7 +582,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   /**
    * Saves a webform handler for this webform.
    *
-   * @param \Drupal\webform\Plugin\WebformHandlerInterface $handler
+   * @param \Drupal\webform\WebformHandlerInterface $handler
    *   The webform handler object.
    *
    * @return string
@@ -630,7 +593,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   /**
    * Update a webform handler for this webform.
    *
-   * @param \Drupal\webform\Plugin\WebformHandlerInterface $handler
+   * @param \Drupal\webform\WebformHandlerInterface $handler
    *   The webform handler object.
    *
    * @return $this
@@ -640,7 +603,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
   /**
    * Deletes a webform handler from this webform.
    *
-   * @param \Drupal\webform\Plugin\WebformHandlerInterface $handler
+   * @param \Drupal\webform\WebformHandlerInterface $handler
    *   The webform handler object.
    *
    * @return $this
@@ -721,7 +684,7 @@ interface WebformInterface extends ConfigEntityInterface, EntityWithPluginCollec
    *   The key of the data to retrieve.
    *
    * @return bool
-   *   TRUE if the stored value for a given key exists
+   *   TRUE if the  stored value for a given key exists
    */
   public function hasState($key);
 

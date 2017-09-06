@@ -29,15 +29,4 @@ class Number extends NumericBase {
     ];
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function preview() {
-    return parent::preview() + [
-      '#min' => 0,
-      '#max' => 10,
-      '#step' => 1,
-    ];
-  }
-
 }

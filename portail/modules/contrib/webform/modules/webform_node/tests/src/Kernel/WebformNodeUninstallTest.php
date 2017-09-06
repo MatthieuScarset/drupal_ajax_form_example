@@ -29,7 +29,6 @@ class WebformNodeUninstallTest extends KernelTestBase {
     $this->installEntitySchema('node');
     $this->installEntitySchema('webform');
     $this->installEntitySchema('webform_submission');
-    $this->installSchema('webform', ['webform']);
     $this->installSchema('node', ['node_access']);
     $this->installConfig(['system', 'node', 'webform', 'webform_node']);
     // For uninstall to work.

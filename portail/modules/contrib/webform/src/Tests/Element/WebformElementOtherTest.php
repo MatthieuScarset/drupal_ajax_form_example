@@ -20,7 +20,7 @@ class WebformElementOtherTest extends WebformTestBase {
   protected static $testWebforms = ['test_element_other'];
 
   /**
-   * Tests options with other elements.
+   * Tests building of other elements.
    */
   public function testBuildingOtherElements() {
     $this->drupalGet('webform/test_element_other');
