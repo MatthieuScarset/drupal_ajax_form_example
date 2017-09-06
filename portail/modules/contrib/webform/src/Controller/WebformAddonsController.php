@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WebformAddonsController extends ControllerBase implements ContainerInjectionInterface {
 
   /**
-   * The add-ons manager.
+   * The webform add-ons manager.
    *
    * @var \Drupal\webform\WebformAddonsManagerInterface
    */
@@ -24,7 +24,7 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
    * Constructs a WebformAddonsController object.
    *
    * @param \Drupal\webform\WebformAddonsManagerInterface $addons
-   *   The add-ons manager.
+   *   The webform add-ons manager.
    */
   public function __construct(WebformAddonsManagerInterface $addons) {
     $this->addons = $addons;
@@ -49,31 +49,59 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
     $build = [
       '#type' => 'container',
       '#attributes' => [
-        'class' => ['webform-addons', 'js-webform-details-toggle', 'webform-details-toggle'],
+        'class' => ['webform-addons'],
       ],
     ];
-    $build['#attached']['library'][] = 'webform/webform.admin';
-    $build['#attached']['library'][] = 'webform/webform.element.details.toggle';
+
+    // Promotions.
+    $build['promotions'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['webform-addons-promotions'],
+      ],
+
+    ];
+    $promotions = $this->addons->getPromotions();
+    foreach ($promotions as $promotion_name => $promotion) {
+      $build['promotions'][$promotion_name] = [
+        '#type' => 'webform_message',
+        '#message_type' => $promotion_name,
+        '#message_message' => $promotion['content'],
+        '#message_close' => TRUE,
+        '#message_id' => 'webform.addons.promotion.' . $promotion_name,
+        '#message_storage' => WebformMessage::STORAGE_SESSION,
+      ];
+    }
+
+    // Projects.
+    $build['projects'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['webform-addons-projects', 'js-webform-details-toggle', 'webform-details-toggle'],
+      ],
+    ];
+    $build['projects']['#attached']['library'][] = 'webform/webform.addons';
 
     $categories = $this->addons->getCategories();
     foreach ($categories as $category_name => $category) {
-      $build[$category_name] = [
+      $build['projects'][$category_name] = [
         '#type' => 'details',
         '#title' => $category['title'],
+        '#attributes' => ['data-webform-element-id' => 'webform-addons-' . $category_name],
         '#open' => TRUE,
       ];
       $projects = $this->addons->getProjects($category_name);
       foreach ($projects as $project_name => &$project) {
-        $project['description'] .= '<br/><small>' . $project['url']->toString() . '</small>';
+        $project['description'] .= '<br /><small>' . $project['url']->toString() . '</small>';
 
         if (!empty($project['recommended']) && !$this->moduleHandler()->moduleExists($project_name)) {
 
           // Append recommended to project's description.
-          $project['description'] .= '<br/><b class="color-error">' . $this->t('Recommended') . '</b>';
+          $project['description'] .= '<br /><b class="color-error">' . $this->t('Recommended') . '</b>';
 
           // If current user can install module then display a dismissible warning.
           if ($this->currentUser()->hasPermission('administer modules')) {
-            $build[$project_name . '_message'] = [
+            $build['projects'][$project_name . '_message'] = [
               '#type' => 'webform_message',
               '#message_id' => $project_name . '_message',
               '#message_type' => 'warning',
@@ -86,11 +114,12 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
         }
       }
 
-      $build[$category_name]['content'] = [
+      $build['projects'][$category_name]['content'] = [
         '#theme' => 'admin_block_content',
         '#content' => $projects,
       ];
     }
+
     return $build;
   }
 

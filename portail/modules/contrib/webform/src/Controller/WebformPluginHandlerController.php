@@ -3,11 +3,12 @@
 namespace Drupal\webform\Controller;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\webform\WebformHandlerInterface;
+use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
  * Controller for all webform handlers.
  */
 class WebformPluginHandlerController extends ControllerBase implements ContainerInjectionInterface {
+
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
 
   /**
    * A webform handler plugin manager.
@@ -27,10 +35,13 @@ class WebformPluginHandlerController extends ControllerBase implements Container
   /**
    * Constructs a WebformPluginHanderController object.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
    * @param \Drupal\Component\Plugin\PluginManagerInterface $plugin_manager
    *   A webform handler plugin manager.
    */
-  public function __construct(PluginManagerInterface $plugin_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, PluginManagerInterface $plugin_manager) {
+    $this->configFactory = $config_factory;
     $this->pluginManager = $plugin_manager;
   }
 
@@ -39,6 +50,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('config.factory'),
       $container->get('plugin.manager.webform.handler')
     );
   }
@@ -47,31 +59,58 @@ class WebformPluginHandlerController extends ControllerBase implements Container
    * {@inheritdoc}
    */
   public function index() {
+    $excluded_handlers = $this->config('webform.settings')->get('handler.excluded_handlers');
+
     $definitions = $this->pluginManager->getDefinitions();
     $definitions = $this->pluginManager->getSortedDefinitions($definitions);
 
     $rows = [];
     foreach ($definitions as $plugin_id => $definition) {
       $rows[$plugin_id] = [
-        $plugin_id,
-        $definition['label'],
-        $definition['description'],
-        $definition['category'],
-        ($definition['cardinality'] == -1) ? $this->t('Unlimited') : $definition['cardinality'],
-        $definition['submission'] ? $this->t('Required') : $this->t('Optional'),
-        $definition['results'] ? $this->t('Processed') : $this->t('Ignored'),
-        $definition['provider'],
+        'data' => [
+          $plugin_id,
+          $definition['label'],
+          $definition['description'],
+          $definition['category'],
+          (isset($excluded_handlers[$plugin_id])) ? $this->t('Yes') : $this->t('No'),
+          ($definition['cardinality'] == -1) ? $this->t('Unlimited') : $definition['cardinality'],
+          $definition['submission'] ? $this->t('Required') : $this->t('Optional'),
+          $definition['results'] ? $this->t('Processed') : $this->t('Ignored'),
+          $definition['provider'],
+        ],
       ];
+      if (isset($excluded_handlers[$plugin_id])) {
+        $rows[$plugin_id]['class'] = ['color-warning'];
+      }
     }
-
     ksort($rows);
-    return [
+
+    $build = [];
+
+    // Settings
+    $build['settings'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Edit settings'),
+      '#url' => Url::fromRoute('webform.settings.handlers'),
+      '#attributes' => ['class' => ['button', 'button--small'], 'style' => 'float: right'],
+    ];
+
+    // Display info.
+    $build['info'] = [
+      '#markup' => $this->t('@total handlers', ['@total' => count($rows)]),
+      '#prefix' => '<p>',
+      '#suffix' => '</p>',
+    ];
+
+    // Handlers.
+    $build['webform_handlers'] = [
       '#type' => 'table',
       '#header' => [
         $this->t('ID'),
         $this->t('Label'),
         $this->t('Description'),
         $this->t('Category'),
+        $this->t('Excluded'),
         $this->t('Cardinality'),
         $this->t('Database'),
         $this->t('Results'),
@@ -80,6 +119,8 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       '#rows' => $rows,
       '#sticky' => TRUE,
     ];
+
+    return $build;
   }
 
   /**
@@ -103,6 +144,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
 
     $definitions = $this->pluginManager->getDefinitions();
     $definitions = $this->pluginManager->getSortedDefinitions($definitions);
+    $definitions = $this->pluginManager->removeExcludeDefinitions($definitions);
 
     $rows = [];
     foreach ($definitions as $plugin_id => $definition) {
@@ -141,7 +183,6 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       $is_submission_required = ($definition['submission'] === WebformHandlerInterface::SUBMISSION_REQUIRED);
       $is_results_disabled = $webform->getSetting('results_disabled');
       if ($is_submission_required && $is_results_disabled) {
-        $row_class[] = 'color-warning';
         $row['operations']['data'] = [
           '#type' => 'html_tag',
           '#tag' => 'span',

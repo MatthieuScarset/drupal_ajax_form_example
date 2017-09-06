@@ -8,8 +8,8 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\Url;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -69,9 +69,9 @@ class WebformMessageManager implements WebformMessageManagerInterface {
   protected $requestHandler;
 
   /**
-   * The token manager.
+   * The webform token manager.
    *
-   * @var \Drupal\webform\WebformTranslationManagerInterface
+   * @var \Drupal\webform\WebformTokenManagerInterface
    */
   protected $tokenManager;
 
@@ -100,7 +100,7 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    * Constructs a WebformMessageManager object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   Current user.
+   *   The current user.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -112,7 +112,7 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    * @param \Drupal\webform\WebformRequestInterface $request_handler
    *   The webform request handler.
    * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
-   *   The token manager.
+   *   The webform token manager.
    */
   public function __construct(AccountInterface $current_user, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, LoggerInterface $logger, RendererInterface $renderer, WebformRequestInterface $request_handler, WebformTokenManagerInterface $token_manager) {
     $this->currentUser = $current_user;
@@ -122,6 +122,17 @@ class WebformMessageManager implements WebformMessageManagerInterface {
     $this->renderer = $renderer;
     $this->requestHandler = $request_handler;
     $this->tokenManager = $token_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setWebformSubmission(WebformSubmissionInterface $webform_submission = NULL) {
+    $this->webformSubmission = $webform_submission;
+    if ($webform_submission) {
+      $this->webform = $webform_submission->getWebform();
+      $this->sourceEntity = $webform_submission->getSourceEntity();
+    }
   }
 
   /**
@@ -141,11 +152,15 @@ class WebformMessageManager implements WebformMessageManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function setWebformSubmission(WebformSubmissionInterface $webform_submission = NULL) {
-    $this->webformSubmission = $webform_submission;
-    if ($webform_submission && empty($this->webform)) {
-      $this->webform = $webform_submission->getWebform();
-    }
+  public function append(array $build, $key, $type = 'status') {
+    // Append namespace message and allow for multiple messages.
+    $build['webform_message'][] = [
+      '#type' => 'webform_message',
+      '#message_message' => $this->build($key),
+      '#message_type' => $type,
+      '#weight' => -100,
+    ];
+    return $build;
   }
 
   /**
@@ -153,14 +168,7 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    */
   public function display($key, $type = 'status') {
     $build = $this->build($key);
-    // Do not display message via Ajax request.
-    if ($build && !$this->requestHandler->isAjax()) {
-      drupal_set_message($this->renderer->renderPlain($build), $type);
-      return TRUE;
-    }
-    else {
-      return FALSE;
-    }
+    drupal_set_message($this->renderer->renderPlain($build), $type);
   }
 
   /**
@@ -168,10 +176,21 @@ class WebformMessageManager implements WebformMessageManagerInterface {
    */
   public function build($key) {
     if ($message = $this->get($key)) {
-      return [
-        '#markup' => $message,
-        '#allowed_tags' => Xss::getAdminTagList(),
-      ];
+      // Make sure $message is renderable array.
+      if (!is_array($message)) {
+        $message = [
+          '#markup' => $message,
+          '#allowed_tags' => Xss::getAdminTagList(),
+        ];
+      }
+
+      // Set max-age to 0 if settings message contains any [token] values.
+      $setting_message = $this->setting($key);
+      if ($setting_message && strpos($setting_message, '[') !== FALSE) {
+        $message['#cache']['max-age'] = 0;
+      }
+
+      return $message;
     }
     else {
       return [];
@@ -181,16 +200,27 @@ class WebformMessageManager implements WebformMessageManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function get($key) {
+  public function setting($key) {
     $webform_settings = ($this->webform) ? $this->webform->getSettings() : [];
-    $entity = $this->webformSubmission ?: $this->webform;
     if (!empty($webform_settings[$key])) {
-      return $this->tokenManager->replace($webform_settings[$key], $entity);
+      return $webform_settings[$key];
     }
 
     $default_settings = $this->configFactory->get('webform.settings')->get('settings');
     if (!empty($default_settings['default_' . $key])) {
-      return $this->tokenManager->replace($default_settings['default_' . $key], $entity);
+      return $default_settings['default_' . $key];
+    }
+    return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function get($key) {
+    // Get message from settings.
+    if ($setting = $this->setting($key)) {
+      $entity = $this->webformSubmission ?: $this->webform;
+      return WebformHtmlEditor::checkMarkup($this->tokenManager->replace($setting, $entity));
     }
 
     $webform = $this->webform;
@@ -225,6 +255,20 @@ class WebformMessageManager implements WebformMessageManagerInterface {
         $t_args[':submissions_href'] = $this->requestHandler->getUrl($webform, $source_entity, 'webform.user.submissions')->toString();
         return $this->t('You have already submitted this webform.') . ' ' . $this->t('<a href=":submissions_href">View your previous submissions</a>.', $t_args);
 
+      case WebformMessageManagerInterface::DRAFT_PREVIOUS:
+        $webform_draft = $this->entityStorage->loadDraft($webform, $source_entity, $this->currentUser);
+        if ($source_entity && $source_entity->hasLinkTemplate('canonical')) {
+          $t_args[':draft_href'] = $source_entity->toUrl('canonical', ['query' => ['token' => $webform_draft->getToken()]])->toString();
+        }
+        else {
+          $t_args[':draft_href'] = $webform->toUrl('canonical', ['query' => ['token' => $webform_draft->getToken()]])->toString();
+        }
+        return $this->t('You have a pending draft for this webform.') . ' ' . $this->t('<a href=":draft_href">Load your pending draft</a>.', $t_args);
+
+      case WebformMessageManagerInterface::DRAFTS_PREVIOUS:
+        $t_args[':drafts_href'] = $this->requestHandler->getUrl($webform, $source_entity, 'webform.user.drafts')->toString();
+        return $this->t('You have pending drafts for this webform.') . ' ' . $this->t('<a href=":drafts_href">View your pending drafts</a>.', $t_args);
+
       case WebformMessageManagerInterface::SUBMISSION_UPDATED:
         return $this->t('Submission updated in %form.', $t_args);
 
@@ -233,6 +277,10 @@ class WebformMessageManager implements WebformMessageManagerInterface {
 
       case WebformMessageManagerInterface::TEMPLATE_PREVIEW:
         return $this->t('You are previewing the below template, which can be used to <a href=":duplicate_href">create a new webform</a>. <strong>Submitted data will be ignored</strong>.', $t_args);
+
+      case WebformMessageManagerInterface::PREPOPULATE_SOURCE_ENTITY_TYPE:
+      case WebformMessageManagerInterface::PREPOPULATE_SOURCE_ENTITY_REQUIRED:
+        return $this->t('This webform is not available. Please contact the site administrator.', $t_args);
 
       default:
         return FALSE;
@@ -257,6 +305,17 @@ class WebformMessageManager implements WebformMessageManagerInterface {
         $context['%form'] = $webform->label();
         $message = '%form is not saving any submitted data and has been disabled.';
         break;
+
+      case WebformMessageManagerInterface::PREPOPULATE_SOURCE_ENTITY_TYPE:
+        $context['%form'] = $webform->label();
+        $message = '%form prepopulated source entity is not valid.';
+        break;
+
+      case WebformMessageManagerInterface::PREPOPULATE_SOURCE_ENTITY_REQUIRED:
+        $context['%form'] = $webform->label();
+        $message = '%form prepopulated source entity is required.';
+        break;
+
     }
 
     $this->logger->$type($message, $context);

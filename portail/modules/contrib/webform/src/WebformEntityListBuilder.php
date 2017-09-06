@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Url;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -50,6 +51,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    */
   public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage) {
     parent::__construct($entity_type, $storage);
+
     $this->keys = \Drupal::request()->query->get('search');
     $this->category = \Drupal::request()->query->get('category');
     $this->state = \Drupal::request()->query->get('state');
@@ -101,12 +103,8 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
 
     // Display info.
     if ($total = $this->getTotal($this->keys, $this->category, $this->state)) {
-      $t_args = [
-        '@total' => $total,
-        '@results' => $this->formatPlural($total, $this->t('webform'), $this->t('webforms')),
-      ];
       $build['info'] = [
-        '#markup' => $this->t('@total @results', $t_args),
+        '#markup' => $this->formatPlural($total, '@total webform', '@total webforms', ['@total' => $total]),
         '#prefix' => '<div>',
         '#suffix' => '</div>',
       ];
@@ -172,7 +170,7 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     if ($entity->isTemplate()) {
       $row['title']['data']['template'] = ['#markup' => ' <b>(' . $this->t('Template') . ')</b>'];
     }
-    $row['description']['data']['#markup'] = $entity->get('description');
+    $row['description']['data'] = WebformHtmlEditor::checkMarkup($entity->get('description'));
     $row['category']['data']['#markup'] = $entity->get('category');
     switch ($entity->get('status')) {
       case WebformInterface::STATUS_OPEN:

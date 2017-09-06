@@ -10,6 +10,9 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Render\Element;
 use Drupal\webform\Entity\Webform;
 use Drupal\webform\Entity\WebformOptions;
+use Drupal\webform\Plugin\Field\FieldType\WebformEntityReferenceItem;
+use Drupal\webform\Utility\WebformOptionsHelper;
+use Drupal\webform\Utility\WebformReflectionHelper;
 use Drupal\webform\WebformInterface;
 
 /******************************************************************************/
@@ -236,7 +239,7 @@ function webform_update_8011() {
  */
 function _webform_update_8011(array &$element) {
   if (isset($element['#format'])) {
-    /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
+    /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
     $element_manager = \Drupal::service('plugin.manager.webform.element');
     $webform_element = $element_manager->getElementInstance($element);
 
@@ -305,7 +308,7 @@ function webform_update_8014() {
  *   A form element.
  */
 function _webform_update_8014(array &$element) {
-  /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
+  /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
   $element_manager = \Drupal::service('plugin.manager.webform.element');
 
   // Add 'webform_' prefix to #type.
@@ -482,6 +485,7 @@ function webform_update_8024() {
  * Issue #2857417: Add support for open and close date/time to Webform nodes. Update database scheme.
  */
 function webform_update_8025() {
+  $webform_tables = WebformEntityReferenceItem::getTableNames();
   $database_schema = \Drupal::database()->schema();
   $schema = \Drupal::keyValue('entity.storage_schema.sql')->getAll();
   foreach ($schema as $item_name => $item) {
@@ -489,7 +493,9 @@ function webform_update_8025() {
       foreach ($table_schema as $schema_key => $schema_data) {
         if ($schema_key == 'fields') {
           foreach ($schema_data as $field_name => $field_data) {
-            if (preg_match('/_status$/', $field_name) && $field_data['description'] == 'Flag to control whether this webform should be open or closed to new submissions.') {
+            $is_webform_field_status = (isset($webform_tables[$table_name]) && $field_name === $webform_tables[$table_name] . '_status');
+            $is_webform_field_integer = ($field_data['type'] == 'int');
+            if ($is_webform_field_status && $is_webform_field_integer) {
               $temp_field_name = $field_name . '_temp';
 
               // Add temp status field and copy value.
@@ -498,10 +504,10 @@ function webform_update_8025() {
                 'length' => 20,
               ]);
               \Drupal::database()
-                ->query("UPDATE {$table_name} SET $temp_field_name = 'open' WHERE $field_name = 1")
+                ->query("UPDATE {" . $table_name . "} SET $temp_field_name = 'open' WHERE $field_name = 1")
                 ->execute();
               \Drupal::database()
-                ->query("UPDATE {$table_name} SET $temp_field_name = 'closed' WHERE $field_name <> 1")
+                ->query("UPDATE {" . $table_name . "} SET $temp_field_name = 'closed' WHERE $field_name <> 1")
                 ->execute();
 
               // Drop, re-create, and restore status field.
@@ -513,7 +519,7 @@ function webform_update_8025() {
               $database_schema->dropField($table_name, $field_name);
               $database_schema->addField($table_name, $field_name, $schema[$item_name][$table_name]['fields'][$field_name]);
               \Drupal::database()
-                ->query("UPDATE {$table_name} SET $field_name = $temp_field_name")
+                ->query("UPDATE {" . $table_name . "} SET $field_name = $temp_field_name")
                 ->execute();
 
               // Drop temp field.
@@ -605,7 +611,7 @@ function webform_update_8030() {
   foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
     $webform_config = $config_factory->getEditable($webform_config_name);
     $data = $webform_config->getRawData();
-    $data['settings']['draft'] = ($data['settings']['draft'] == TRUE) ? WebformInterface::DRAFT_ENABLED_AUTHENTICATED : WebformInterface::DRAFT_ENABLED_NONE;
+    $data['settings']['draft'] = ($data['settings']['draft'] == TRUE) ? WebformInterface::DRAFT_AUTHENTICATED : WebformInterface::DRAFT_NONE;
     $webform_config->setData($data)->save();
   }
 }

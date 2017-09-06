@@ -2,9 +2,10 @@
 
 namespace Drupal\webform\Utility;
 
-use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Xss;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Template\Attribute;
 
@@ -96,6 +97,27 @@ class WebformElementHelper {
   }
 
   /**
+   * Set a property on all elements.
+   *
+   * @param array $element
+   *   A render element.
+   * @param string $property_key
+   *   The property key.
+   * @param mixed $property_value
+   *   The property value.
+   *
+   * @return array
+   *   A render element with with a property set on all elements.
+   */
+  public static function setPropertyRecursive(array $element, $property_key, $property_value) {
+    $element[$property_key] = $property_value;
+    foreach (Element::children($element) as $key) {
+      self::setPropertyRecursive($element[$key], $property_key, $property_value);
+    }
+    return $element;
+  }
+
+  /**
    * Fix webform element #states handling.
    *
    * @param array $element
@@ -116,7 +138,7 @@ class WebformElementHelper {
     // $element['#prefix'] = '<div ' . new Attribute($attributes) . '>' . $element['#prefix'];
     // WORKAROUND: Safely set filtered #prefix to FormattableMarkup.
     $allowed_tags = isset($element['#allowed_tags']) ? $element['#allowed_tags'] : Xss::getHtmlTagList();
-    $element['#prefix'] = new FormattableMarkup('<div' . new Attribute($attributes) . '>' . Xss::filter($element['#prefix'], $allowed_tags), []);
+    $element['#prefix'] = Markup::create('<div' . new Attribute($attributes) . '>' . Xss::filter($element['#prefix'], $allowed_tags));
     $element['#suffix'] = $element['#suffix'] . '</div>';
 
     // Attach library.
@@ -295,9 +317,29 @@ class WebformElementHelper {
       if (is_array($value)) {
         self::convertRenderMarkupToStrings($value);
       }
-      elseif ($value instanceof \Drupal\Component\Render\MarkupInterface) {
+      elseif ($value instanceof MarkupInterface) {
         $elements[$key] = (string) $value;
       }
+    }
+  }
+
+  /**
+   * Convert element or property to a string.
+   *
+   * This method is used to prevent 'Array to string conversion' errors.
+   *
+   * @param array|string|MarkupInterface $element
+   *   An element, render array, string, or markup.
+   *
+   * @return string
+   *   The element or property to a string.
+   */
+  public static function convertToString($element) {
+    if (is_array($element)) {
+      return (string) \Drupal::service('renderer')->renderPlain($element);
+    }
+    else {
+      return (string) $element;
     }
   }
 

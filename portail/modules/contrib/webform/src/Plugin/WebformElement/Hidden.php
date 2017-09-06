@@ -21,8 +21,16 @@ class Hidden extends TextBase {
   public function getDefaultProperties() {
     return [
       // Element settings.
+      'title' => '',
       'value' => '',
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preview() {
+    return [];
   }
 
 }

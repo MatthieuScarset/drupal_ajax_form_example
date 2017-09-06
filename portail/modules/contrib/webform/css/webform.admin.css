@@ -4,10 +4,10 @@
  */
 
 /**
- * Hide throbber which causes layout issue in dropbutton
+ * Local actions.
  */
-.dropbutton-multiple .ajax-progress-throbber {
-  display: none;
+.webform-form .action-links {
+  margin-bottom: 0;
 }
 
 /**
@@ -21,14 +21,6 @@
 .button.button-webform-setting:before {
   content: '⚙';
   font-size: 1.2em;
-}
-
-/**
- * Add light gray background to Add-on details widget.
- * @see /admin/structure/webform/addons
- */
-.webform-addons details {
-  background-color: #f8f8f8;
 }
 
 /**

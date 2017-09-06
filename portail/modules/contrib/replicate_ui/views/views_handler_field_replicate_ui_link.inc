@@ -21,7 +21,7 @@ class views_handler_field_replicate_ui_link extends views_handler_field_node_lin
     if (replicate_ui_access($type, $entity->{$this->base_field})) {
       $this->options['alter']['make_link'] = TRUE;
       $this->options['alter']['path'] = 'replicate/' . $type . '/' . $entity->{$this->base_field};
-      $this->options['alter']['query'] = array('destination' => current_path());
+      $this->options['alter']['query'] = ['destination' => current_path()];
       // output text as default or the option text
       $text = !empty($this->options['text']) ? $this->options['text'] : t('replicate');
       return $text;

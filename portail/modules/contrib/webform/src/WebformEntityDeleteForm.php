@@ -5,13 +5,14 @@ namespace Drupal\webform;
 use Drupal\Core\Entity\EntityDeleteForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\webform\Form\WebformDialogFormTrait;
 
 /**
  * Provides a delete webform.
  */
 class WebformEntityDeleteForm extends EntityDeleteForm {
 
-  use WebformDialogTrait;
+  use WebformDialogFormTrait;
 
   /**
    * {@inheritdoc}
@@ -20,12 +21,12 @@ class WebformEntityDeleteForm extends EntityDeleteForm {
     $form = parent::buildForm($form, $form_state);
     $form['confirm'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Yes, I want to the delete this webform.'),
+      '#title' => $this->t('Yes, I want to delete this webform.'),
       '#required' => TRUE,
       '#weight' => 10,
     ];
 
-    return $this->buildConfirmFormDialog($form, $form_state);
+    return $this->buildDialogConfirmForm($form, $form_state);
   }
 
   /**

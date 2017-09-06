@@ -2,8 +2,10 @@
 
 namespace Drupal\webform_templates\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides the webform templates filter webform.
@@ -15,6 +17,32 @@ class WebformtemplatesFilterForm extends FormBase {
    */
   public function getFormId() {
     return 'webform_templates_filter_form';
+  }
+
+  /**
+   * The webform storage.
+   *
+   * @var \Drupal\webform\WebformEntityStorageInterface
+   */
+  protected $webformStorage;
+
+  /**
+   * Constructs a WebformResultsCustomForm object.
+   *
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
+   */
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->webformStorage = $entity_type_manager->getStorage('webform');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity_type.manager')
+    );
   }
 
   /**
@@ -38,13 +66,11 @@ class WebformtemplatesFilterForm extends FormBase {
       '#autocomplete_route_name' => 'entity.webform.templates.autocomplete',
       '#default_value' => $search,
     ];
-    /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
-    $webform_storage = \Drupal::service('entity_type.manager')->getStorage('webform');
     $form['filter']['category'] = [
       '#type' => 'select',
       '#title' => $this->t('Category'),
       '#title_display' => 'invisible',
-      '#options' => $webform_storage->getCategories(TRUE),
+      '#options' => $this->webformStorage->getCategories(TRUE),
       '#empty_option' => ($category) ? $this->t('Show all webforms') : $this->t('Filter by category'),
       '#default_value' => $category,
     ];

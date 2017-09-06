@@ -37,12 +37,11 @@ elements: |
 css: ''
 javascript: ''
 settings:
+  ajax: false
   page: true
   page_submit_path: ''
   page_confirm_path: ''
-  form_submit_label: ''
   form_submit_once: false
-  form_submit_attributes: {  }
   form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
@@ -52,33 +51,34 @@ settings:
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_unsaved: false
   form_disable_back: false
   form_autofocus: false
   form_details_toggle: false
+  submission_label: ''
   submission_log: true
+  submission_user_columns: {  }
   wizard_progress_bar: true
   wizard_progress_pages: false
   wizard_progress_percentage: false
-  wizard_next_button_label: ''
-  wizard_next_button_attributes: {  }
-  wizard_prev_button_label: ''
-  wizard_prev_button_attributes: {  }
   wizard_start_label: ''
   wizard_complete: true
   wizard_complete_label: ''
   preview: 0
-  preview_next_button_label: ''
-  preview_next_button_attributes: {  }
-  preview_prev_button_label: ''
-  preview_prev_button_attributes: {  }
+  preview_label: ''
+  preview_title: ''
   preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
   draft: all
+  draft_multiple: false
   draft_auto_save: false
-  draft_button_label: ''
-  draft_button_attributes: {  }
   draft_saved_message: ''
   draft_loaded_message: ''
   confirmation_type: page
@@ -106,27 +106,35 @@ access:
       - anonymous
       - authenticated
     users: {  }
+    permissions: {  }
   view_any:
     roles: {  }
     users: {  }
+    permissions: {  }
   update_any:
     roles: {  }
     users: {  }
+    permissions: {  }
   delete_any:
     roles: {  }
     users: {  }
+    permissions: {  }
   purge_any:
     roles: {  }
     users: {  }
+    permissions: {  }
   view_own:
     roles: {  }
     users: {  }
+    permissions: {  }
   update_own:
     roles: {  }
     users: {  }
+    permissions: {  }
   delete_own:
     roles: {  }
     users: {  }
+    permissions: {  }
 handlers:
   tomorrow:
     id: scheduled_email
@@ -139,7 +147,8 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        tomorrow: '[site:mail]'
+        - value: tomorrow
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -158,6 +167,8 @@ handlers:
       send: '[webform_submission:completed:html_date]'
       days: 1
       unschedule: false
+      ignore_access: false
+      exclude_empty: true
   yesterday:
     id: scheduled_email
     label: Yesterday
@@ -169,7 +180,8 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        yesterday: '[site:mail]'
+        - value: yesterday
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -188,6 +200,8 @@ handlers:
       send: '[webform_submission:completed:html_date]'
       days: -1
       unschedule: false
+      ignore_access: false
+      exclude_empty: true
   last_year:
     id: scheduled_email
     label: 'Last year'
@@ -199,7 +213,8 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        last_year: '[site:mail]'
+        - value: last_year
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -218,6 +233,8 @@ handlers:
       send: '2016-01-01'
       days: 0
       unschedule: false
+      ignore_access: false
+      exclude_empty: true
   broken:
     id: scheduled_email
     label: Broken
@@ -229,7 +246,8 @@ handlers:
         - completed
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        broken: '[site:mail]'
+        - value: broken
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -248,6 +266,8 @@ handlers:
       send: '[broken]'
       days: 0
       unschedule: false
+      ignore_access: false
+      exclude_empty: true
   other:
     id: scheduled_email
     label: Other
@@ -261,7 +281,8 @@ handlers:
         - updated
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        other: '[site:mail]'
+        - value: other
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -280,6 +301,8 @@ handlers:
       send: '[webform_submission:values:date:html_date]'
       days: 14
       unschedule: false
+      ignore_access: false
+      exclude_empty: true
   draft_reminder:
     id: scheduled_email
     label: 'Draft reminder'
@@ -291,7 +314,8 @@ handlers:
         - draft
       to_mail: '[webform_submission:values:send:raw]'
       to_options:
-        draft_reminder: '[site:mail]'
+        - value: draft_reminder
+          text: '[site:mail]'
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
@@ -310,3 +334,5 @@ handlers:
       send: '[date:html_date]'
       days: 14
       unschedule: true
+      ignore_access: false
+      exclude_empty: true

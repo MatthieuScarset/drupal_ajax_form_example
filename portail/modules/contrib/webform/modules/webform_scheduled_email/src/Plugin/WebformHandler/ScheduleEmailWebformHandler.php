@@ -21,9 +21,9 @@ use Drupal\webform_scheduled_email\WebformScheduledEmailManagerInterface;
  *   label = @Translation("Scheduled email"),
  *   category = @Translation("Notification"),
  *   description = @Translation("Sends a webform submission via a scheduled email."),
- *   cardinality = \Drupal\webform\WebformHandlerInterface::CARDINALITY_UNLIMITED,
- *   results = \Drupal\webform\WebformHandlerInterface::RESULTS_PROCESSED,
- *   submission = \Drupal\webform\WebformHandlerInterface::SUBMISSION_REQUIRED,
+ *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
+ *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
+ *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_REQUIRED,
  * )
  */
 class ScheduleEmailWebformHandler extends EmailWebformHandler {
@@ -70,9 +70,12 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
       }
       $build[$type] = [
         '#type' => 'webform_message',
-        '#message_message' => $total .
-          ' ' . $this->formatPlural($total, $this->t('email'), $this->t('emails')) .
-          ' ' . $status_messages[$type]['message'],
+        '#message_message' => $this->formatPlural(
+          $total,
+          '@total email @message',
+          '@total emails @message',
+          ['@total' => $total, '@message' => $status_messages[$type]['message']]
+        ),
         '#message_type' => $status_messages[$type]['type'],
       ];
 
@@ -133,7 +136,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
         '#message_type' => 'error',
         '#message_message' => $this->t('It is strongly recommended that <a href=":href">submission logging</a> is enable to track scheduled emails.', [':href' => $webform->toUrl('settings-form')->toString()]),
         '#message_close' => TRUE,
-        '#message_id' => 'webform_scheduled_email-' . $webform ->id(),
+        '#message_id' => 'webform_scheduled_email-' . $webform->id(),
         '#message_storage' => WebformMessage::STORAGE_LOCAL,
       ];
     }
@@ -236,7 +239,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
         $this->t("Multiple handlers can be used to schedule multiple emails."),
         $this->t('Deleting this handler will unschedule all scheduled emails.'),
         ['#markup' => $this->t('Scheduled emails are automatically sent starting at midnight using <a href=":href">cron</a>, which is executed at predefined interval.', [':href' => 'https://www.drupal.org/docs/7/setting-up-cron/overview'])],
-      ]
+      ],
     ];
 
     $form['scheduled']['token_tree_link'] = $this->tokenManager->buildTreeLink();
@@ -257,7 +260,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
 
     $values = $form_state->getValues();
 
-    // Cast days string to in
+    // Cast days string to int.
     $values['days'] = (int) $values['days'];
 
     // If token skip validation.
@@ -327,7 +330,7 @@ class ScheduleEmailWebformHandler extends EmailWebformHandler {
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
    *   A webform submission.
    *
-   * @return boolean|string
+   * @return bool|string
    *   The status of scheduled email. FALSE is email was not scheduled.
    */
   protected function scheduleMessage(WebformSubmissionInterface $webform_submission) {

@@ -5,6 +5,7 @@ namespace Drupal\webform;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -31,7 +32,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
   /**
    * Webform element manager.
    *
-   * @var \Drupal\webform\WebformElementManagerInterface
+   * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
   protected $elementManager;
 
@@ -42,7 +43,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    *   The language manager.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
-   * @param \Drupal\webform\WebformElementManagerInterface $element_manager
+   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    */
   public function __construct(LanguageManagerInterface $language_manager, ConfigFactoryInterface $config_factory, WebformElementManagerInterface $element_manager) {
@@ -54,7 +55,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function getConfigElements(WebformInterface $webform, $langcode = NULL, $reset = FALSE) {
+  public function getElements(WebformInterface $webform, $langcode = NULL, $reset = FALSE) {
     // Note: Below code return the default languages elements for missing
     // translations.
     $config_override_language = $this->languageManager->getConfigOverrideLanguage();
@@ -91,7 +92,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   public function getBaseElements(WebformInterface $webform) {
     $default_langcode = $this->getOriginalLangcode($webform) ?: $this->languageManager->getDefaultLanguage()->getId();
-    $config_elements = $this->getConfigElements($webform, $default_langcode);
+    $config_elements = $this->getElements($webform, $default_langcode);
     $elements = WebformElementHelper::getFlattened($config_elements);
     $translatable_properties = WebformArrayHelper::addPrefix($this->elementManager->getTranslatableProperties());
     foreach ($elements as $element_key => &$element) {
@@ -123,8 +124,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    * {@inheritdoc}
    */
   public function getSourceElements(WebformInterface $webform) {
-    $elements = $this->getBaseElements($webform);
-    return $elements;
+    return $this->getBaseElements($webform);
   }
 
   /**
@@ -132,7 +132,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   public function getTranslationElements(WebformInterface $webform, $langcode) {
     $elements = $this->getSourceElements($webform);
-    $translation_elements = $this->getConfigElements($webform, $langcode);
+    $translation_elements = $this->getElements($webform, $langcode);
     if ($elements == $translation_elements) {
       return $elements;
     }
@@ -144,7 +144,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    * {@inheritdoc}
    */
   public function getOriginalLangcode(WebformInterface $webform) {
-    // NOTE: Can't inject ConfigMapperInterface  because it requires that
+    // NOTE: Can't inject ConfigMapperInterface because it requires that
     // config_translation.module to be installed.
     /** @var \Drupal\config_translation\ConfigMapperInterface $mapper */
     $mapper = \Drupal::service('plugin.manager.config_translation.mapper')->createInstance('webform');
