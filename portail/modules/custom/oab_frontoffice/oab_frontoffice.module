@@ -178,6 +178,7 @@ function clean_exposed_filters_by_language($options, $txtAll){
  */
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   // subhome blogs
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
     $themes = clean_exposed_filters_by_language(
       $form['field_blog_thematic_target_id']['#options'],
@@ -255,6 +256,12 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Month'
     );
     $form['field_month_target_id']['#options'] = $months;
+
+    //Suppression de filtres pour le russe
+    if($current_language == 'ru' ){
+      unset($form['field_type_target_id']);
+    }
+
   }
   // subhome produits
   if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
@@ -276,6 +283,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
 
+    //Suppression de filtres pour le russe
+    if($current_language == 'ru' ){
+      unset($form['field_jobs_target_id']);
+    }
+
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
@@ -296,6 +308,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Profession'
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
+
+    if($current_language == 'ru' ){
+      unset($form['field_jobs_target_id']);
+    }
   }
   // subhome partenaires
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
@@ -317,7 +333,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_regions_target_id']['#options'] = $regions;
 
-      $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
       if($current_language != 'en'){
           unset($form['field_regions_target_id']);
       }
