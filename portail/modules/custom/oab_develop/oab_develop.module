@@ -127,6 +127,7 @@ function isValidDate($date, $format)
 	return $d && $d->format($format) == $date;
 }
 
+
 /**
  * Creation d'un field en bdd
  */

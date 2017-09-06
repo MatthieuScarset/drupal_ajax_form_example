@@ -240,3 +240,13 @@ function oab_tristan_update_8029() {
 function oab_tristan_update_8030() {
   include_once("updates/update_8030.inc");
 }
+
+/**
+ * Mise à jour des blocks rebond :
+ *  - Activation du block Rebond-Product
+ *  - Desactivation du linked Content
+ *  - Remise en place des fields Rebonds Document & Page du site
+ */
+function oab_tristan_update_8031() {
+  include_once("updates/update_8031.inc");
+}
