@@ -10,6 +10,9 @@ namespace Drupal\replicate;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldException;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\replicate\Events\AfterSaveEvent;
 use Drupal\replicate\Events\ReplicateAlterEvent;
 use Drupal\replicate\Events\ReplicateEntityEvent;
@@ -119,7 +122,8 @@ class Replicator {
       $this->eventDispatcher->dispatch(ReplicatorEvents::replicateEntityEvent($entity->getEntityTypeId()), $event);
 
       if ($clone instanceof FieldableEntityInterface) {
-        $this->cloneEntityFields($clone);
+        /** @var FieldableEntityInterface $clone */
+        $this->dispatchEventCloneEntityFields($clone);
       }
 
       $event = new ReplicateAlterEvent($clone, $entity);
@@ -129,16 +133,73 @@ class Replicator {
   }
 
   /**
+   * Clone an entity field to another.
+   *
+   * We can not create and return the target field here, because it needs to
+   * know its parent entity, which can not be changed after creation.
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $field
+   *   The field to clone.
+   * @param \Drupal\Core\Field\FieldItemListInterface $target_field
+   *   The field to clone into.
+   */
+  public function cloneEntityField(FieldItemListInterface $field, FieldItemListInterface $target_field) {
+    $target_field->setValue($field->getValue());
+
+    $this->postCloneEntityField($target_field);
+  }
+
+  /**
+   * Postprocess a cloned entity field.
+   *
+   * A public API method so modules can e.g. clone a field partially.
+   *
+   * @param \Drupal\Core\Field\FieldItemListInterface $target_field
+   *   The cloned field.
+   */
+  public function postCloneEntityField(FieldItemListInterface $target_field) {
+    $entity = $target_field->getEntity();
+    if (!$entity instanceof FieldableEntityInterface) {
+      // @todo Can this ever happen? The interface only assures EntityInterface.
+      throw new FieldException(t('Trying to clone into non fieldable Entity.'));
+    }
+    /** @var FieldableEntityInterface $entity */
+
+    $violations = $target_field->validate();
+    if ($violations->count()) {
+      // This autocasts violations to string.
+      $t_args = array('%violations' => implode(' & ', $violations));
+      throw new FieldException(t('Trying to clone into incompatible field: %violations', $t_args));
+    }
+
+    $this->dispatchEventCloneEntityField($entity, $target_field->getName(), $target_field->getFieldDefinition());
+  }
+
+  /**
    * Fires events for each field of a fieldable entity.
    *
    * @param \Drupal\Core\Entity\FieldableEntityInterface $clone
    *   The cloned fieldable entity.
    */
-  protected function cloneEntityFields(FieldableEntityInterface $clone) {
+  protected function dispatchEventCloneEntityFields(FieldableEntityInterface $clone) {
     foreach ($clone->getFieldDefinitions() as $field_name => $field_definition) {
-      $event = new ReplicateEntityFieldEvent($clone->get($field_name), $clone);
-      $this->eventDispatcher->dispatch(ReplicatorEvents::replicateEntityField($field_definition->getType()), $event);
+      $this->dispatchEventCloneEntityField($clone, $field_name, $field_definition);
     }
+  }
+
+  /**
+   * Fires events for a single field of a fieldable entity.
+   *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $clone
+   *   The cloned fieldable entity.
+   * @param $field_name
+   *   The field name.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $field_definition
+   *   The field definition.
+   */
+  private function dispatchEventCloneEntityField(FieldableEntityInterface $clone, $field_name, FieldDefinitionInterface $field_definition) {
+    $event = new ReplicateEntityFieldEvent($clone->get($field_name), $clone);
+    $this->eventDispatcher->dispatch(ReplicatorEvents::replicateEntityField($field_definition->getType()), $event);
   }
 
 }

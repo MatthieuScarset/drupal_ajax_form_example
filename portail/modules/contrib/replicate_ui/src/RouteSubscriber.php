@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\RouteSubscriber.
- */
-
 namespace Drupal\replicate_ui;
 
 use Drupal\Core\Config\ConfigFactoryInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\replicate_ui\Functional\ReplicateUISettingsTest.
- */
-
 namespace Drupal\Tests\replicate_ui\Functional;
 
 use Drupal\simpletest\BrowserTestBase;

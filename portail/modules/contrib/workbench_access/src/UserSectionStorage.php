@@ -45,13 +45,13 @@ class UserSectionStorage implements UserSectionStorageInterface {
    *   Entity type manager.
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   Current user.
-   * @param \Drupal\workbench_access\RoleSectionStorageInterface $roleSectionStorage
+   * @param \Drupal\workbench_access\RoleSectionStorageInterface $role_section_storage
    *   Role section storage.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, AccountInterface $currentUser, RoleSectionStorageInterface $roleSectionStorage) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, AccountInterface $currentUser, RoleSectionStorageInterface $role_section_storage) {
     $this->userStorage = $entityTypeManager->getStorage('user');
     $this->currentUser = $currentUser;
-    $this->roleSectionStorage = $roleSectionStorage;
+    $this->roleSectionStorage = $role_section_storage;
   }
 
   /**
@@ -84,18 +84,19 @@ class UserSectionStorage implements UserSectionStorageInterface {
   /**
    * {@inheritdoc}
    */
-  public function addUser($user_id, $sections = array()) {
+  public function addUser($user_id, $sections = []) {
     $entity = $this->userStorage->load($user_id);
     $values = $this->getUserSections($user_id, FALSE);
     $new = array_merge($values, $sections);
     $entity->set(WorkbenchAccessManagerInterface::FIELD_NAME, $new);
     $entity->save();
+    $this->userSectionCache[$user_id] = $new;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function removeUser($user_id, $sections = array()) {
+  public function removeUser($user_id, $sections = []) {
     $entity = $this->userStorage->load($user_id);
     $values = $this->getUserSections($user_id, FALSE);
     $new = array_flip($values);
@@ -104,6 +105,7 @@ class UserSectionStorage implements UserSectionStorageInterface {
     }
     $entity->set(WorkbenchAccessManagerInterface::FIELD_NAME, array_keys($new));
     $entity->save();
+    $this->userSectionCache[$user_id] = array_keys($new);
   }
 
   /**
@@ -160,7 +162,7 @@ class UserSectionStorage implements UserSectionStorageInterface {
   /**
    * {@inheritdoc}
    */
-  protected function filterByPermission($users = array()) {
+  protected function filterByPermission($users = []) {
     $list = [];
     $entities = $this->userStorage->loadMultiple($users);
     foreach ($entities as $account) {

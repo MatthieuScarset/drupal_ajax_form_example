@@ -35,13 +35,13 @@ class WebformEmailMultiple extends FormElement {
       '#pre_render' => [
         [$class, 'preRenderWebformEmailMultiple'],
       ],
-      '#theme' => 'input__email_multiple',
+      '#theme' => 'input__webform_email_multiple',
       '#theme_wrappers' => ['form_element'],
     ];
   }
 
   /**
-   * Webform element validation handler for #type 'email_multiple'.
+   * Webform element validation handler for #type 'webform_email_multiple'.
    */
   public static function validateWebformEmailMultiple(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = trim($element['#value']);
@@ -70,10 +70,15 @@ class WebformEmailMultiple extends FormElement {
         elseif (isset($element['#title'])) {
           $t_args = [
             '%name' => empty($element['#title']) ? $element['#parents'][0] : $element['#title'],
-            '@values' => \Drupal::translation()->formatPlural($element['#cardinality'], t('value'), t('values')),
             '@count' => $element['#cardinality'],
           ];
-          $form_state->setError($element, t('%name: this element cannot hold more than @count @values.', $t_args));
+          $error_message = \Drupal::translation()->formatPlural(
+            $element['#cardinality'],
+            '%name: this element cannot hold more than @count value.',
+            '%name: this element cannot hold more than @count values.',
+            $t_args
+          );
+          $form_state->setError($element, $error_message);
         }
         else {
           $form_state->setError($element);
@@ -83,7 +88,7 @@ class WebformEmailMultiple extends FormElement {
   }
 
   /**
-   * Prepares a #type 'email_multiple' render element for theme_element().
+   * Prepares a #type 'webform_email_multiple' render element for theme_element().
    *
    * @param array $element
    *   An associative array containing the properties of the element.
@@ -96,7 +101,7 @@ class WebformEmailMultiple extends FormElement {
   public static function preRenderWebformEmailMultiple(array $element) {
     $element['#attributes']['type'] = 'text';
     Element::setAttributes($element, ['id', 'name', 'value', 'size', 'maxlength', 'placeholder']);
-    static::setAttributes($element, ['form-textfield', 'form-email-multiple']);
+    static::setAttributes($element, ['form-text', 'webform-email-multiple']);
     return $element;
   }
 

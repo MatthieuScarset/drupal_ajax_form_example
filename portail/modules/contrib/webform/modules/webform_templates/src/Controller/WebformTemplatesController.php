@@ -45,7 +45,7 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
    * Constructs a WebformTemplatesController object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   Current user.
+   *   The current user.
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The webform builder.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -134,12 +134,8 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
 
     // Display info.
     if ($total = count($rows)) {
-      $t_args = [
-        '@total' => count($rows),
-        '@results' => $this->formatPlural($total, $this->t('template'), $this->t('templates')),
-      ];
       $build['info'] = [
-        '#markup' => $this->t('@total @results', $t_args),
+        '#markup' => $this->formatPlural($total, '@total template', '@total templates', ['@total' => $total]),
         '#prefix' => '<div>',
         '#suffix' => '</div>',
       ];

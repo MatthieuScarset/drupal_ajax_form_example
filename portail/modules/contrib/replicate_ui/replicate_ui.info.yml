@@ -8,8 +8,8 @@ dependencies:
   - replicate
 configure: replicate_ui.settings
 
-# Information added by Drupal.org packaging script on 2016-11-02
+# Information added by Drupal.org packaging script on 2017-08-24
 version: '8.x-1.x-dev'
 core: '8.x'
 project: 'replicate_ui'
-datestamp: 1478049761
+datestamp: 1503585849

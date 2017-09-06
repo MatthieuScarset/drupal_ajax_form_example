@@ -1,6 +1,6 @@
 /**
  * @file
- * Javascript behaviors for signature pad integration.
+ * JavaScript behaviors for signature pad integration.
  */
 
 (function ($, Drupal) {
@@ -28,7 +28,7 @@
         var value = $input.val();
         var $wrapper = $input.parent();
         var $canvas = $wrapper.find('canvas');
-        var $button = $wrapper.find('input[type="submit"]');
+        var $button = $wrapper.find(':button');
         var canvas = $canvas[0];
 
         // Set height.

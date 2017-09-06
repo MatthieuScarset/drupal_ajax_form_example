@@ -6,7 +6,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Url;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformRequestInterface;
 use Drupal\webform\WebformSubmissionInterface;
@@ -15,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for webform submission log routes.
  *
- * Copied from: \Drupal\dblog\Controller\DbLogController
+ * Copied from: \Drupal\dblog\Controller\DbLogController.
  */
 class WebformSubmissionLogController extends ControllerBase {
 
@@ -62,7 +61,7 @@ class WebformSubmissionLogController extends ControllerBase {
   protected $requestHandler;
 
   /**
-   * Constructs a DbLogController object.
+   * Constructs a WebformSubmissionLogController object.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   A database connection.

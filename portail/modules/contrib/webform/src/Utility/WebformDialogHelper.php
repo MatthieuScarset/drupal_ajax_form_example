@@ -62,8 +62,8 @@ class WebformDialogHelper {
     $build['#attached']['library'][] = 'webform/webform.admin.dialog';
     // @see \Drupal\webform\Element\WebformHtmlEditor::preRenderWebformHtmlEditor
     if (\Drupal::moduleHandler()->moduleExists('imce') && \Drupal\imce\Imce::access()) {
-      $element['#attached']['library'][] = 'imce/drupal.imce.ckeditor';
-      $element['#attached']['drupalSettings']['webform']['html_editor']['ImceImageIcon'] = file_create_url(drupal_get_path('module', 'imce') . '/js/plugins/ckeditor/icons/imceimage.png');
+      $build['#attached']['library'][] = 'imce/drupal.imce.ckeditor';
+      $build['#attached']['drupalSettings']['webform']['html_editor']['ImceImageIcon'] = file_create_url(drupal_get_path('module', 'imce') . '/js/plugins/ckeditor/icons/imceimage.png');
     }
   }
 
@@ -83,7 +83,7 @@ class WebformDialogHelper {
       return $class ? ['class' => $class] : [];
     }
     else {
-      $class[] = 'use-ajax';
+      $class[] = 'webform-ajax-link';
       if (WebformDialogHelper::useOffCanvas()) {
         return [
           'class' => $class,

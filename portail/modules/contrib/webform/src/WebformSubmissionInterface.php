@@ -227,9 +227,9 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
   /**
    * Track the state of a submission.
    *
-   * @return int
-   *   Either STATE_NEW, STATE_DRAFT, STATE_COMPLETED, or STATE_UPDATED,
-   *   depending on the last save operation performed.
+   * @return string
+   *   Either STATE_NEW, STATE_DRAFT, STATE_COMPLETED, STATE_UPDATED, or
+   *   STATE_CONVERTED depending on the last save operation performed.
    */
   public function getState();
 
@@ -254,7 +254,7 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
   public function setData(array $data);
 
   /**
-   * Gets the webform submission's original data before any changes..
+   * Gets the webform submission's original data before any changes.
    *
    * @param string $key
    *   A string that maps to a key in the submission's original data.

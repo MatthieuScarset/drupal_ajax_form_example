@@ -15,15 +15,11 @@ use Drupal\webform\WebformInterface;
  *   An array containing test elements formats.
  */
 function webform_test_test_element_format(WebformInterface $webform, $composite = FALSE, $multiple = FALSE) {
-  // Elements to be ignored.
-  $skipped_elements = [
-    'hidden',
+  // Element types to be ignored.
+  $skipped_element_types = [
     'language_select',
     'text_format_raw',
     'text_format_value',
-    'value',
-    'webform_element',
-    'webform_test',
     // @todo Fix file display
     'managed_file',
     'webform_audio_file',
@@ -36,7 +32,7 @@ function webform_test_test_element_format(WebformInterface $webform, $composite 
   /** @var \Drupal\webform\WebformSubmissionGenerateInterface $submission_generate */
   $submission_generate = \Drupal::service('webform_submission.generate');
 
-  /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
+  /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
   $element_manager = \Drupal::service('plugin.manager.webform.element');
 
   $definitions = $element_manager->getDefinitions();
@@ -49,12 +45,12 @@ function webform_test_test_element_format(WebformInterface $webform, $composite 
   ];
   foreach ($definitions as $definition) {
     $element_type = $definition['id'];
-    if (in_array($element_type, $skipped_elements)) {
+    if (in_array($element_type, $skipped_element_types)) {
       continue;
     }
 
     $webform_element = $elements[$element_type];
-    $element = _webform_test_get_example_element($element_type, ['issues' => FALSE]);
+    $element = _webform_test_get_element_preview($element_type, ['issues' => FALSE]);
     if (!$element || !$webform_element->isInput($element)) {
       continue;
     }
@@ -107,7 +103,7 @@ function webform_test_test_element_format(WebformInterface $webform, $composite 
     ];
     foreach ($item_formats as $item_format_name => $item_format_title) {
       // Skip unsupported element type formats.
-      if (in_array($element_type . '_' . $item_format_name, $skipped_elements)) {
+      if (in_array($element_type . '_' . $item_format_name, $skipped_element_types)) {
         continue;
       }
 
