@@ -45,9 +45,9 @@ span.icon-footer {
     color: white;
     padding: 2rem 0;
 }
-#block-contactbar > .container > .row{
+/*#block-contactbar > .container > .row{
     margin: 0 2rem;
-}
+}*/
 #block-contactbar .wrapper_numero{
     display: inline-block;
     background-color: white;
