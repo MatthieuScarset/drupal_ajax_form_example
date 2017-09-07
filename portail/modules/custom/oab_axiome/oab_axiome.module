@@ -8,8 +8,9 @@ define('AXIOME_REFERENTIEL_FRANCE', 'referentiel_France.xml');
 define('AXIOME_REFERENTIEL_INT', 'referentiel_International.xml');
 define('AXIOME_REFERENTIEL_SCHEMA', 'schema_referentiel.xsd');
 define('AXIOME_FICHE_SCHEMA', 'schema.xsd');
-define('AXIOME_TAXO_FAMILLE', 'products');
-
+define('AXIOME_TAXO_FAMILLE', 'solutions');
+define('AXIOME_TAXO_SECTEURS', 'industries');
+define('AXIOME_TAXO_METIERS', 'jobs_profiles');
 
 /**
  * Implements hook_cron().
