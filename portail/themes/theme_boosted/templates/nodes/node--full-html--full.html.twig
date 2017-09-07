@@ -76,51 +76,32 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+{% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+{% set fieldPage %}
+    {{ content.field_solution }}
+{% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+ {% set fieldAuthor %}
+     {{ author_name }}
+ {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-
-
-    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
-
-    {% set fieldBlog %}
-        {{ content.field_blog_thematic }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldAuthor %}
-        {{ author_name }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldOwner %}
-        {{ content.field_content_owner }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {
       "@context": "http://schema.org",
-      "@type": "BlogPosting",
+      "@type": "WebPage",
       "headline" : "{{ node.label }}",
-      "genre" : "{{ fieldBlog|striptags|trim }}",
+      "genre" : "{{ fieldPage|striptags|trim }}",
       "creationDate": "{{ createdDate }}",
       "author": {
         "@type": "Person",
-        "name": "{{ fieldOwner|striptags|trim }}",
+        "name": "{{ fieldAuthor|striptags|trim }}",
       }
     }
     </script>
 
 
-    <div class="content_info">
-        <span class="date">{{ createdDate }}</span>
-        {% if content.field_profile[0]['#node'].id() %}
-            <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }} </a>
-
-            {% if content.theme_term %}  {{ ', ' }}  {% endif %}
-        {% endif %}
-        {{ content.theme_term }}
-    </div>
-
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
-
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('theme_term', 'field_blog', 'field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_blog_thematic', 'field_blog_format', 'field_insight') }}
+        {{ content|without('theme_term', 'field_solution', 'field_region', 'field_display_title', 'field_job_profile', 'field_highlight', 'field_insight', 'field_blog_thematic', 'field_blog_format', 'field_subhome', 'field_industry') }}
     </div>
 
 </article>
