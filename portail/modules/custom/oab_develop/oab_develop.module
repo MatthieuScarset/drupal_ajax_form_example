@@ -202,6 +202,7 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice") 
   return TRUE;
 }
 
+
 /**
  * Creation d'un field en bdd
  */
