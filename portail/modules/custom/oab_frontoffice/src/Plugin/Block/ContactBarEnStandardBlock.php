@@ -60,39 +60,39 @@ class ContactBarEnStandardBlock extends BlockBase {
         $form['link_offices'] = [
             '#title' => $this->t('Link to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => 'http://www.orange-business.com/en/where-we-are',
+            '#default_value' => isset($this->configuration['link_offices']) ? $this->configuration['link_offices'] : 'http://www.orange-business.com/en/where-we-are',
             '#required' => false,
         ];
         $form['link_offices_text'] = [
             '#title' => $this->t('Link text to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => 'Our local offices',
+            '#default_value' => isset($this->configuration['link_offices_text']) ? $this->configuration['link_offices_text'] : 'Our local offices',
             '#required' => false,
         ];
 
         $form['link_help'] = [
             '#title' => $this->t('Link to Get help'),
             '#type' => 'textfield',
-            '#default_value' => '',
+            '#default_value' => isset($this->configuration['link_help']) ? $this->configuration['link_help'] : '',
             '#required' => false,
         ];
         $form['link_help_text'] = [
             '#title' => $this->t('Link text to Get Help'),
             '#type' => 'textfield',
-            '#default_value' => 'Get help',
+            '#default_value' => isset($this->configuration['link_help_text']) ? $this->configuration['link_help_text'] : 'Get help',
             '#required' => false,
         ];
 
         $form['link_contact'] = [
             '#title' => $this->t('Link to Contact sales'),
             '#type' => 'textfield',
-            '#default_value' => '',
+            '#default_value' => isset($this->configuration['link_contact']) ? $this->configuration['link_contact'] : '',
             '#required' => false,
         ];
         $form['link_contact_text'] = [
             '#title' => $this->t('Link text to Contact sales'),
             '#type' => 'textfield',
-            '#default_value' => 'Contact sales',
+            '#default_value' => isset($this->configuration['link_contact_text']) ? $this->configuration['link_contact_text'] : 'Contact sales',
             '#required' => false,
         ];
 

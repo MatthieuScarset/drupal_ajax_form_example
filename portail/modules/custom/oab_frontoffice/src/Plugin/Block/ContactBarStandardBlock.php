@@ -62,39 +62,39 @@ class ContactBarStandardBlock extends BlockBase {
         $form['link_assistance'] = [
             '#title' => $this->t('Lien vers l\'espace assistance'),
             '#type' => 'textfield',
-            '#default_value' => '',
+            '#default_value' => isset($this->configuration['link_assistance']) ? $this->configuration['link_assistance'] : '',
             '#required' => false,
         ];
         $form['link_assistance_text'] = [
             '#title' => $this->t('Texte du lien vers l\'espace assistance'),
             '#type' => 'textfield',
-            '#default_value' => 'Assistance',
+            '#default_value' => isset($this->configuration['link_assistance_text']) ? $this->configuration['link_assistance_text'] : 'Assistance',
             '#required' => false,
         ];
 
         $form['link_contact'] = [
             '#title' => $this->t('Lien vers Nous contacter'),
             '#type' => 'textfield',
-            '#default_value' => '',
+            '#default_value' => isset($this->configuration['link_contact']) ? $this->configuration['link_contact'] : '',
             '#required' => false,
         ];
         $form['link_contact_text'] = [
             '#title' => $this->t('Texte du lien vers Nous contacter'),
             '#type' => 'textfield',
-            '#default_value' => 'Nous contacter',
+            '#default_value' => isset($this->configuration['link_contact_text']) ? $this->configuration['link_contact_text'] : 'Nous contacter',
             '#required' => false,
         ];
 
         $form['link_ecrire'] = [
             '#title' => $this->t('Lien vers Nous écrire'),
             '#type' => 'textfield',
-            '#default_value' => 'www.orange-business.com/fr/contact-commercial',
+            '#default_value' => isset($this->configuration['link_ecrire']) ? $this->configuration['link_ecrire'] : 'http://www.orange-business.com/fr/contact-commercial',
             '#required' => false,
         ];
         $form['link_ecrire_text'] = [
             '#title' => $this->t('Texte du lien vers Nous écrire'),
             '#type' => 'textfield',
-            '#default_value' => 'Nous écrire',
+            '#default_value' => isset($this->configuration['link_ecrire_text']) ? $this->configuration['link_ecrire_text'] : 'Nous écrire',
             '#required' => false,
         ];
 
