@@ -90,8 +90,7 @@ class SynomiaSearchResponse {
 	{
 		$clusterArray = array();
 		$clusterArray['typeId'] = $type;
-		//$typeObject = NodeType::load($type);
-		$typeObject = NodeType::load('blog_post');
+		$typeObject = NodeType::load($type);
 		if(isset($typeObject) && !empty($typeObject))
 		{
 			$typeName = $typeObject->label();
@@ -120,9 +119,6 @@ class SynomiaSearchResponse {
 	 */
 	function getResultsClustersArray($dom)
 	{
-		//obstools::lock($xml);
-
-
 		$cluster = $dom->getElementsByTagName("cluster");
 		if(isset($cluster))
 		{
@@ -135,8 +131,7 @@ class SynomiaSearchResponse {
 				{
 					$type = $aspect->getAttribute('value');
 					$clusterArray['typeId'] = $type;
-					//$typeObject = NodeType::load($type);
-					$typeObject = NodeType::load('blog_post');
+					$typeObject = NodeType::load($type);
 					if(isset($typeObject) && !empty($typeObject))
 					{
 						$typeName = $typeObject->label();
@@ -190,14 +185,13 @@ class SynomiaSearchResponse {
 				foreach($facets as $facet)
 				{
 					if( $facet->firstChild->nodeValue != "#SYNAUTRE#"){
-						//$type = NodeType::load($facet->firstChild->nodeValue);
-						$type = NodeType::load('blog_post');
+						$type = NodeType::load(str_replace(' ','_',$facet->firstChild->nodeValue));
 						if(isset($type) && !empty($type))
 						{
 							$typeName = $type->label();
 						}
 						//$typeName = $facet->firstChild->nodeValue;
-						$this->facets[$facet->firstChild->nodeValue] = array('facetName' => $typeName, 'nbresults' => $facet->getAttribute('nb_res'));
+						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $typeName, 'nbresults' => $facet->getAttribute('nb_res'));
 					}
 				}
 			}

@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ *
+ * @ingroup themeable
+ */
+#}
+<form{{ attributes }}>
+  <div class="top-block-search-form">
+  {{ children }}
+<!--
+    <button id="search-link" class="search-link" type="submit" data-bkg="gray">
+      <span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em" style="margin: 0"></span>
+    </button>-->
+  </div>
+    {{ form.form_build_id }}
+    {{ form.form_token }}
+    {{ form.form_id }}
+</form>

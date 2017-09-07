@@ -3,3 +3,17 @@ oab_synomia_search_engine.global:
   css:
     theme:
       css/synomia.css: {}
+
+oab_synomia_search_engine.autocomplete_fr:
+  version: VERSION
+  js:
+    js/autocompletion_obs_fr.js: {}
+  dependencies:
+    - core/jquery
+
+oab_synomia_search_engine.autocomplete_en:
+  version: VERSION
+  js:
+    js/autocompletion_obs_en.js: {}
+  dependencies:
+    - core/jquery

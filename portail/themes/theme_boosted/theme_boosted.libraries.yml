@@ -18,6 +18,7 @@ global-styling:
       css/components/prefooter.css: {}
       css/components/sidebar.css: {}
       css/components/fields.css: {}
+      css/components/form.css: {}
     templating:
       css/templating/background.css: {}
       css/templating/buttons.css: {}

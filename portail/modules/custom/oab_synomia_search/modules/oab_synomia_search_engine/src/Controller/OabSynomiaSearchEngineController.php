@@ -17,6 +17,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 
   /** Méthode appelée lorsqu'on appelle la page de recherche */
   public function contentSearch(Request $request){
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
 		$mot_recherche = (!empty($parameters) && isset($parameters['mot'])) ? $parameters['mot'] : '';
 		$filtre_rubrique = (!empty($parameters) && isset($parameters['rubrique'])) ? $parameters['rubrique'] : '';
@@ -37,10 +38,11 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		$searchForm = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchEngineForm');
 
 		if($response->nbResultsTotal > 0) {
+
+			if($response->searchMode == 'rubrique') {
+				$page = pager_default_initialize($response->nbResultsTotal, 10);
+			}
 			$resultLabel = '';
-			$current_language = \Drupal::languageManager()
-				->getCurrentLanguage()
-				->getId();
 			if ($current_language != 'ru') {
 				if (count($response->nbResultsTotal) == 1) {
 					$resultLabel = $response->nbResultsTotal . ' ' . t('result') . ' ' . t('for') ;
@@ -85,8 +87,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
 				}
 			}
 		}
-
-		return array(
+		$render_array = array();
+		$render_array[]= array(
 			'#searchForm' => $searchForm,
 			'#resultLabel' => $resultLabel,
 			'#searchResults' => $response->results,
@@ -105,21 +107,43 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					),
 				),
 		);
+
+		if($current_language == 'fr'){
+			$render_array[]= array(
+				'#attached' => array(
+					'library' =>  array(
+						'oab_synomia_search_engine/oab_synomia_search_engine.autocomplete_fr',
+					),
+				),
+			);
+		}
+		elseif ($current_language == 'en'){
+			$render_array[]= array(
+				'#attached' => array(
+					'library' =>  array(
+						'oab_synomia_search_engine/oab_synomia_search_engine.autocomplete_en',
+					),
+				),
+			);
+		}
+		$render_array[] =  ['#type' => 'pager'];
+
+		return $render_array;
   }
 
   private function getSynomiaResult($mot_recherche, $filtre_rubrique, $numPage, $sortBy){
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 		$urlSynomia = \Drupal::state()->get('url_synomia_'.$current_language);
 		//POUR LES TESTS
-		$urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
+		//$urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
 			if ($current_language == 'ru') {
-				$path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy . "&nbCoocDisplay=5";
+				$path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
 			else {
-				$path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy . "&nbCoocDisplay=5";
+				$path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
 
 			//on récupère le nb de résultats par page
@@ -160,7 +184,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 			}
 			*/
 			$proxy_server = null;
-			var_dump($path);
+			//var_dump($path);
 			curl_setopt_array
 			(
 				$ch,
