@@ -743,7 +743,7 @@ aside.right-column > .region{
 
 .related-content-column-label {
     color: black;
-    font-size: 1.6rem;
+    font-size: 2rem;
     margin: 1.5rem 2rem 1rem;
     font-weight: bold;
 }
@@ -754,6 +754,9 @@ aside.right-column > .region{
     color: black;
     text-decoration: none;
     min-height : 25px;
+}
+.related-content-content .highlight{
+    font-size: 1.6rem;
 }
 
 .related-content-content{
