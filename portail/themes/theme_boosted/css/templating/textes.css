@@ -557,6 +557,18 @@ p.contenu {
     background-color: #ededed;
     height: 130px;
 }
+.node-axiome-partners .bg-partner .img img{
+    margin: auto;
+    max-width: 10.5rem;
+    max-height: 13rem;
+}
+.node-axiome-partners .bg-partner .img{
+    display: flex;
+}
+.node-axiome-partners .bg-partner .img a{
+    display: inherit;
+    margin: auto;
+}
 .bg-partner .img article,
 .bg-partner .img > div{
     display: flex;
@@ -734,13 +746,6 @@ p.contenu {
     line-height: 3rem;
 }
 
-.page-node-type-solution .obs_template.one_column p,
-.page-node-type-solution .obs_template.two_columns_33_66 p,
-.page-node-type-solution .obs_template.two_columns_66_33 p,
-.page-node-type-solution .obs_template.three_columns p,
-.page-node-type-solution .obs_template.two_columns p {
-    padding: 10px 0;
-}
 
 .page-node-type-solution .node-socialbar{
     margin-top: 3rem;
@@ -749,4 +754,14 @@ p.contenu {
 
 .videoEmbedFull iframe{
     width: 100%;
+}
+@media (max-width: 767px) {
+    .module_key_figures_1,
+    .module_key_figures_2 .bg,
+    .module_key_figures_3 .bg {
+        padding: 3rem 1rem;
+    }
+}
+.clearboth{
+    clear: both;
 }

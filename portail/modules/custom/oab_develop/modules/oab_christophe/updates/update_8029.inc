@@ -160,8 +160,7 @@ if(empty($field)) {
   FieldConfig::create($config_array)->save();
 }
 foreach (array('solution', 'industry', 'region', 'country') AS $bundle) {
-  $field = FieldConfig::loadByName('paragraph', 'related_content',
-    'field_related_content');
+  $field = FieldConfig::loadByName('node', $bundle,'field_related_content');
   if (empty($field)) {
     $config_array = array(
       'field_name' => 'field_related_content',
@@ -437,7 +436,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   8 => 'field_content',
   9 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'weight' => 11,
   'settings' =>
@@ -454,6 +453,8 @@ $config_group->set('field_related_content', array (
     ),
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.industry.default');
@@ -496,7 +497,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   8 => 'field_content',
   9 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 44,
   'settings' =>
     array (
@@ -513,6 +514,8 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.region.default');
@@ -553,7 +556,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   7 => 'field_content',
   8 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 10,
   'settings' =>
     array (
@@ -570,6 +573,8 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
+$config_group->save(true);
 
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('core.entity_form_display.node.country.default');
@@ -609,7 +614,7 @@ $config_group->set('third_party_settings.field_group.group_write.children', arra
   5 => 'field_content',
   6 => 'field_related_content',
 ));
-$config_group->set('field_related_content', array (
+$config_group->set('content.field_related_content', array (
   'weight' => 8,
   'settings' =>
     array (
@@ -626,6 +631,8 @@ $config_group->set('field_related_content', array (
   'type' => 'entity_reference_paragraphs',
   'region' => 'content',
 ));
+$config_group->clear('hidden.field_related_content');
+$config_group->save(true);
 
 /****** view display ******/
 $config_factory = \Drupal::configFactory();

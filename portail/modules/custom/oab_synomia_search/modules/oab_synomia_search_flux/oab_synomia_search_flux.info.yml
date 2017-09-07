@@ -6,5 +6,5 @@ dependencies:
   - oab_synomia_search
 version: '8.x-1.0'
 core: '8.x'
-project: 'oab_synomia_search'
+project: 'oab_synomia_search_flux'
 datestamp: 1501514107

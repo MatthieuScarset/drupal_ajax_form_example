@@ -1,20 +1,23 @@
+{% if (axiomeDocs.doc1_url|trim is not empty and axiomeDocs.doc1_custom_link|trim is not empty)
+   or (axiomeDocs.doc2_url|trim is not empty and axiomeDocs.doc2_custom_link|trim is not empty)
+   or (axiomeDocs.doc3_url|trim is not empty and axiomeDocs.doc3_custom_link|trim is not empty)
+%}
 <div class="node-axiome-know-more">
     <div class="col col-md-12 nopadding">
         <h2 class="titre2">En savoir plus</h2>
     </div>
     <div class="col col-md-12 nopadding">
         <ul>
-            {% for item in axiomeDocs.doc %}
-                {% if item.type  == 'doc'%}
-                    <li><span class="icon-document_stack"></span> <a href="{{ item.url }}" target="_blank"><span class="downloadPDF">{{ item.Attributes.name }}</span></a></li>
-                {% elseif item.type  == 'url'%}
-                    <li><span class="icon-internet"></span> <a href="{{ item.url }}" target="_blank"><span class="downloadPDF">{{ item.Attributes.name }}</span></a></li>
-                {% elseif item.type  == 'video_externe'%}
-                    <li><span class="icon-video"></span><a href="{{ item.url }}" target="_blank"><span class="downloadPDF"> {{ item.Attributes.name }}</span></a></li>
-                {% elseif item.type  == 'image'%}
-                    <li><span class="icon-image"></span> <a href="{{ item.url }}" target="_blank"><span class="downloadPDF">{{ item.Attributes.name }}</span></a></li>
-                {% endif %}
-            {% endfor %}
+            {% if axiomeDocs.doc1_url|trim is not empty and axiomeDocs.doc1_custom_link|trim is not empty %}
+                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc1_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc1_custom_link }}</span></a></li>
+            {% endif %}
+            {% if axiomeDocs.doc2_url|trim is not empty and axiomeDocs.doc2_custom_link|trim is not empty %}
+                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc2_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc2_custom_link }}</span></a></li>
+            {% endif %}
+            {% if axiomeDocs.doc3_url|trim is not empty and axiomeDocs.doc3_custom_link|trim is not empty %}
+                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc3_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc3_custom_link }}</span></a></li>
+            {% endif %}
         </ul>
     </div>
 </div>
+{% endif %}

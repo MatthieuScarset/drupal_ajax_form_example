@@ -32,7 +32,7 @@ class TaxonomyHierarchySelection extends TermSelection {
       $options = parent::getReferenceableEntities($match , $match_operator, $limit);
     }
     else {
-      $options = array();
+      $options = [];
 
       $bundles = $this->entityManager->getBundleInfo('taxonomy_term');
       $handler_settings = $this->configuration['handler_settings'];
@@ -56,7 +56,8 @@ class TaxonomyHierarchySelection extends TermSelection {
     }
     // Check each section for access.
     $manager = \Drupal::getContainer()->get('plugin.manager.workbench_access.scheme');
-    $user_sections = $manager->getUserSections($account->id());
+    $user_section_storage = \Drupal::getContainer()->get('workbench_access.user_section_storage');
+    $user_sections = $user_section_storage->getUserSections($account->id());
     foreach ($options as $key => $values) {
       if ($manager->checkTree([$key], $user_sections)) {
         continue;

@@ -100,7 +100,8 @@ view_mode ? view_mode|clean_class,
     {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
     {% set field_detailed_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_detailed_contents %}
     {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_simple_contents.Children.ruby_simple_contents_block %}
-    {% set axiomeDocs = content.axiome_data.correspondance %}
+    {% set field_partners = content.axiome_data.Children.ruby_theme.Children.ruby_zone_partner %}
+    {% set axiomeDocs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
     {% set id_fiche = content.axiome_data['@attributes'].id %}
     {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
 {% endif %}
@@ -121,7 +122,6 @@ view_mode ? view_mode|clean_class,
 <div class="content_info">
     <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
 </div>
-
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
@@ -144,6 +144,9 @@ view_mode ? view_mode|clean_class,
 
     {% if field_customer_case is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
+    {% endif %}
+    {% if field_partners is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_partners.html.twig' with field_partners %}
     {% endif %}
     {% if axiomeDocs is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}

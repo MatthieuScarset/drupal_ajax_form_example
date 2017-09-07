@@ -1,0 +1,21 @@
+uuid: 2320bdac-06ea-4d69-9b5d-36c52fdb64b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solution_banner_highlight
+    - node.type.homepage
+  module:
+    - text
+id: node.homepage.field_solution_banner_highlight
+field_name: field_solution_banner_highlight
+entity_type: node
+bundle: homepage
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

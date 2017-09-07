@@ -183,3 +183,24 @@ function oab_christophe_update_8028() {
 function oab_christophe_update_8029() {
   include_once("updates/update_8029.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-3005 - position du bloc related content
+ */
+function oab_christophe_update_8030() {
+  include_once("updates/update_8030.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2631 - paramètre rol_assign pour les contributeur
+ */
+function oab_christophe_update_8031() {
+  include_once("updates/update_8031.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-3005 - Champ related content dans les powerpages
+ */
+function oab_christophe_update_8032() {
+  include_once("updates/update_8032.inc");
+}

@@ -20,15 +20,71 @@ class OabExtension extends \Twig_Extension {
     return "OAB Twig extension";
   }
 
+  public function getFunctions() {
+    $filters = [
+      /*new \Twig_SimpleFunction('kint_t', [$this, 'kint_t'], array(
+      'is_safe' => array('html'),
+      'needs_environment' => TRUE,
+      'needs_context' => TRUE,
+      'is_variadic' => TRUE,
+    )),*/
+      new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
+      new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
+    ];
+
+    return $filters;
+  }
+
   public function getFilters() {
     $filters = [
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
+        new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
     ];
 
     return $filters;
   }
+
+  /**
+   * Ré-écriture de la fonction Kint pour Twig
+   *  => Si besoin d'arrêter le script,
+   *
+   * @param $data
+   * @param bool $stop
+   */
+  /*function kint_t(\Twig_Environment $env,  array $context, array $args = []) {
+
+  //A Remettre en place, pour utiliser le vrai fonctionnement
+  // de Kint, avec un nombre infini de paramètres;
+  //Pour l'instant, problème avec $args, et plantage lorsque var_dump($args)
+  // et args semble etre vide.......;
+
+    $stop = false;
+    ##Si on a un booléen comme dernier paramètre passé, c'est pas savoir si on
+    ##stop le script ou non
+    if (count($args) > 0 && is_bool($args[count($args)])) {
+      $stop = $args[count($args)];
+    }
+
+    ##Ensuite, j'appelle la vraie fonction kint
+    call_user_func_array('kint',$args);
+
+    ##Ensuite, si on a demandé à s'arreter, on coupe PHP
+    if ($stop)
+      die();
+  }*/
+  function kint_t($array, $stop = false) {
+    kint($array);
+
+    if ($stop)
+      die();
+  }
+
+  function d_config($config){
+    return \Drupal::config($config);
+  }
+
 
   /**
    * Affichage de la taille d'un fichier dans le bon format. (o, Ko, Mo, Go, To)
@@ -86,4 +142,15 @@ class OabExtension extends \Twig_Extension {
       return file_url_transform_relative($image_style->buildUrl($path));
     }
   }
+
+    /**
+     * Returns a url without http(s) to avoir SSL warning and other bad bad things
+     *
+     * @param $url
+     */
+    public function url_clean_prefix($url) {
+        $url = str_replace('https:', '', $url);
+        $url = str_replace('http:', '', $url);
+        return $url;
+    }
 }

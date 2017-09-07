@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\Yaml\Yaml;
+
 class OAB_Trace{
 
   static function debug($elem, $message=""){
@@ -123,4 +125,81 @@ function isValidDate($date, $format)
 {
 	$d = DateTime::createFromFormat($format, $date);
 	return $d && $d->format($format) == $date;
+}
+
+
+/**
+ * Creation d'un field en bdd
+ */
+function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()){
+
+	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+	if(empty($field_storage)) {
+		\Drupal\field\Entity\FieldStorageConfig::create(array(
+			'field_name' => $field_name,
+			'entity_type' => $entity_type_id,
+			'type' => $type,
+		))->save();
+	}else{
+		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+	}
+
+	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+	if(empty($field)) {
+		$config_array = array(
+			'field_name' =>  $field_name,
+			'entity_type' => $entity_type_id,
+			'bundle' => $bundle,
+			'label' => $label,
+			'required' => $required,
+		);
+		if(!empty($other_config)){
+			$config_array = array_merge($config_array, $other_config);
+		}
+		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
+	}else{
+		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+	}
+}
+
+/**
+ * Creation d'un field en bdd
+ */
+function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()){
+
+	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+	if(empty($field_storage)) {
+		\Drupal\field\Entity\FieldStorageConfig::create(array(
+			'field_name' => $field_name,
+			'entity_type' => $entity_type_id,
+			'type' => $type,
+			'settings' => array('target_type' => $target)
+		))->save();
+	}else{
+		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+	}
+
+	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+	if(empty($field)) {
+		$config_array = array(
+			'field_name' =>  $field_name,
+			'entity_type' => $entity_type_id,
+			'bundle' => $bundle,
+			'label' => $label,
+			'required' => $required,
+			''
+		);
+		if(!empty($other_config)){
+			$config_array = array_merge($config_array, $other_config);
+		}
+		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
+	}else{
+		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+	}
+}
+
+function loadConfigField($folder, $key){
+    $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/'.$folder.'/'.$key.'.yml';
+    $data = Yaml::parse($config_path);
+    \Drupal::configFactory()->getEditable($key)->setData($data)->save(TRUE);
 }
