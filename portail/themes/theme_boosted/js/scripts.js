@@ -61,10 +61,27 @@
     });
   }
 
+    function resizeIframeAuto(){
+        var obj = document.getElementById('myFrame');
+
+        jQuery(function(){
+            var lastHeight = 0, curHeight = 0, maframe = $('iframe:eq(0)');
+            setInterval(function(){
+                curHeight = maframe.contents().find('body').height();
+                if ( curHeight != lastHeight ) {
+                    maframe.css('height', (lastHeight = curHeight) + 'px' );
+                } else {
+                    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+                    return true;
+                }
+            },0);
+        });
+    }
 
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
+    //resizeIframeAuto('iframePardot');
 
     $( ".close-env-info" ).click(function(){
         if ($('.env-info').is(":visible")){

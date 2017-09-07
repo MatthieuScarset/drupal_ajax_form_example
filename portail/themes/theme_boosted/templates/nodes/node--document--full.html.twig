@@ -143,8 +143,16 @@ view_mode ? view_mode|clean_class,
         {% endif %}
     {% endfor %}
 
+    {% if content.field_file['#language'] == 'en'%}
     <div class="pardot-form" style="margin-top: 4rem;">
-        <iframe allowtransparency="true" frameborder="0" id="myFrame" src="{{ pardot_iframe }}?{{ filename }}" style="border: 0" target="_blank" type="text/html" width="100%" height="500"></iframe>
+        <iframe src="" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
+        <script language="javascript">
+            var loc = window.location.toString()
+            params = loc.split('?')[1];
+            var y = "{{ pardot_iframe }}" + "?" + params;
+            document.getElementById("myFrame").src=y;
+            var x = document.getElementById("myFrame").src;
+        </script>
     </div>
-
+    {% endif %}
 </article>

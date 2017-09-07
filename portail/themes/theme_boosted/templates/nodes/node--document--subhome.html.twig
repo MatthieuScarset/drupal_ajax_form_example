@@ -92,8 +92,13 @@
 #}
 
 {% set createdDate = node.getCreatedTime %}
-
-<a href="{{ url }}" class="link-subhomes">
+{% set filename = "" %}
+{% for key, file in content.field_file %}
+    {% if file.entity.field_file.entity.filename.value is not null and content.field_file['#language'] == 'en' %}
+        {% set filename = ('?dw=' ~ file.entity.field_file.entity.filename.value) %}
+    {% endif %}
+{% endfor %}
+<a href="{{ url }}{{ filename }}" class="link-subhomes">
     <div class="display-subhomes">
         <div class="encart encart-image col-lg-12">
             {% set solution = "" %}
