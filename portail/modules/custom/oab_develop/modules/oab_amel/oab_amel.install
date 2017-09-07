@@ -35,6 +35,7 @@ function oab_amel_update_dependencies() {
     $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
     $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
     $dependencies['oab_amel'][8025] = array('oab_christophe' => 8032);
+    $dependencies['oab_amel'][8029] = array('oab_tibo' => 8023);
     return $dependencies;
 }
 
@@ -244,5 +245,19 @@ function oab_amel_update_8026() {
  */
 function oab_amel_update_8027() {
     include_once("updates/update_8027.inc");
+}
+
+/**
+ *  Robots.txt : disallow /node/*
+ */
+function oab_amel_update_8028() {
+    include_once("updates/update_8028.inc");
+}
+
+/**
+ *  Contact Bar : ajout des variantes standard, standard EN et press
+ */
+function oab_amel_update_8029() {
+    include_once("updates/update_8029.inc");
 }
 
