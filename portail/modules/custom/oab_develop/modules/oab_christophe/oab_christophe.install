@@ -204,3 +204,10 @@ function oab_christophe_update_8031() {
 function oab_christophe_update_8032() {
   include_once("updates/update_8032.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-2906 - Url alias pour les powerpages
+ */
+function oab_christophe_update_8033() {
+  include_once("updates/update_8033.inc");
+}

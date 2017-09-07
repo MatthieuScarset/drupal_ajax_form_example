@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Plugin\views\field\ReplicateUILink.
- */
-
 namespace Drupal\replicate_ui\Plugin\views\field;
 
 use Drupal\views\Plugin\views\field\EntityLink;

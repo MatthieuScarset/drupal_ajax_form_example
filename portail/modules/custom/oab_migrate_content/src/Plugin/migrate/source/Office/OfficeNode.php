@@ -77,11 +77,6 @@ class OfficeNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-
-  	//on passe tout en EN
-		$row->setSourceProperty('language', 'en') ;
-
-
     // récupération de l'adresse
     $address_query = $this->select('location_instance', 'li');
     $address_query->join('location', 'l', 'l.lid = li.lid');

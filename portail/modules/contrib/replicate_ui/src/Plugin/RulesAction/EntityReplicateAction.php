@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\replicate_ui\Plugin\RulesAction\EntityReplicateAction.
- */
-
 namespace Drupal\replicate_ui\Plugin\RulesAction;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;

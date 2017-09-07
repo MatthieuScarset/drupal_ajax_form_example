@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\replicate_ui\Unit\RouteSubscriberTest.
- */
-
 namespace Drupal\Tests\replicate_ui\Unit;
 
 use Drupal\Core\Entity\ContentEntityType;

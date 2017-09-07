@@ -78,34 +78,34 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
    *   The module handler.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   Entity type manager.
-   * @param \Drupal\workbench_access\UserSectionStorageInterface $userSectionStorage
+   * @param \Drupal\workbench_access\UserSectionStorageInterface $user_section_storage
    *   User section storage.
-   * @param \Drupal\workbench_access\RoleSectionStorageInterface $roleSectionStorage
+   * @param \Drupal\workbench_access\RoleSectionStorageInterface $role_section_storage
    *   Role section storage.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    *   Current user.
    */
-  public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entityTypeManager, UserSectionStorageInterface $userSectionStorage, RoleSectionStorageInterface $roleSectionStorage, ConfigFactoryInterface $configFactory, AccountInterface $currentUser) {
+  public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entityTypeManager, UserSectionStorageInterface $user_section_storage, RoleSectionStorageInterface $role_section_storage, ConfigFactoryInterface $configFactory, AccountInterface $currentUser) {
     parent::__construct('Plugin/AccessControlHierarchy', $namespaces, $module_handler, 'Drupal\workbench_access\AccessControlHierarchyInterface', 'Drupal\workbench_access\Annotation\AccessControlHierarchy');
 
     $this->alterInfo('workbench_access_info');
     $this->setCacheBackend($cache_backend, 'workbench_access_plugins');
     $this->moduleHandler = $module_handler;
     $this->namespaces = $namespaces;
-    $this->userSectionStorage = $userSectionStorage;
+    $this->userSectionStorage = $user_section_storage;
     $this->configFactory = $configFactory;
     $this->currentUser = $currentUser;
     $this->entityTypeManager = $entityTypeManager;
-    $this->roleSectionStorage = $roleSectionStorage;
+    $this->roleSectionStorage = $role_section_storage;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getSchemes() {
-    $schemes = array();
+    $schemes = [];
     $definitions = $this->getDefinitions();
 
     foreach ($definitions as $id => $info) {
@@ -181,14 +181,14 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
   /**
    * {@inheritdoc}
    */
-  public function addEntity($entity_id, $entity_type, $sections = array()) {
+  public function addEntity($entity_id, $entity_type, $sections = []) {
 
   }
 
   /**
    * {@inheritdoc}
    */
-  public function removeEntity($entity_id, $entity_type, $sections = array()) {
+  public function removeEntity($entity_id, $entity_type, $sections = []) {
 
   }
 
@@ -246,7 +246,7 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
    * @deprecated To be removed before 8.x-1.0 - use
    *   \Drupal\workbench_access\RoleSectionStorage::addRole() instead
    */
-  public function addRole($role_id, $sections = array()) {
+  public function addRole($role_id, $sections = []) {
     trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated, please use \Drupal\workbench_access\RoleSectionStorage::' . __METHOD__ . ' instead', E_USER_DEPRECATED);
     $this->roleSectionStorage->addRole($role_id, $sections);
   }
@@ -257,7 +257,7 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
    * @deprecated To be removed before 8.x-1.0 - use
    *   \Drupal\workbench_access\RoleSectionStorage::removeRole() instead
    */
-  public function removeRole($role_id, $sections = array()) {
+  public function removeRole($role_id, $sections = []) {
     trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated, please use \Drupal\workbench_access\RoleSectionStorage::' . __METHOD__ . ' instead', E_USER_DEPRECATED);
     $this->roleSectionStorage->removeRole($role_id, $sections);
   }
@@ -290,7 +290,7 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
    * @deprecated To be removed before 8.x-1.0 - use
    *   \Drupal\workbench_access\UserSectionStorage::addUser() instead
    */
-  public function addUser($user_id, $sections = array()) {
+  public function addUser($user_id, $sections = []) {
     trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated, please use \Drupal\workbench_access\UserSectionStorage::' . __METHOD__ . ' instead', E_USER_DEPRECATED);
     $this->userSectionStorage->addUser($user_id, $sections);
   }
@@ -301,7 +301,7 @@ class WorkbenchAccessManager extends DefaultPluginManager implements WorkbenchAc
    * @deprecated To be removed before 8.x-1.0 - use
    *   \Drupal\workbench_access\UserSectionStorage::removeUser() instead
    */
-  public function removeUser($user_id, $sections = array()) {
+  public function removeUser($user_id, $sections = []) {
     trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated, please use \Drupal\workbench_access\UserSectionStorage::' . __METHOD__ . ' instead', E_USER_DEPRECATED);
     $this->userSectionStorage->removeUser($user_id, $sections);
   }
