@@ -13,12 +13,12 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
-class SynomiaSearchEngineForm extends FormBase {
+class SynomiaSearchHeaderBlockForm extends FormBase {
 	/**
 	 * {@inheritdoc}
 	 */
 	public function getFormId() {
-		return 'oab_synomia_search_engine_form';
+		return 'oab_synomia_search_header_block_form';
 	}
 
 	/**
@@ -27,27 +27,32 @@ class SynomiaSearchEngineForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state) {
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
 
-
-		$form['search_label'] = array(
-			'#type' => 'label',
-			'#title' => t('What are you searching for?')
-		);
-
 		$form['mot'] = array(
 			'#type' => 'textfield',
 			'#name' => 'mot',
-			'#required' => TRUE,
-			//'#title_display' => 'invisible',
-			'#default_value' => (!empty($parameters) && isset($parameters['mot'])) ? $parameters['mot'] : '',
+			'#attributes'=> ['class'=>['search-textfield']],
+			'#size' => 15,
 		);
-
+		$form['submit'] = [
+			'#type' => 'submit',
+			'#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
+			'#attributes'=> ['class'=>['search-link']],
+			'#suffix' => '</div>',
+		];
+/*
 		$form['submit'] = array(
 			'#type' => 'submit',
-			'#value' => t('Search'),
-			'#attributes' => Array(
-				'title' => t('search')
-			)
-		);
+			'#markup' => '<button id="search-link" class="search-link" type="submit" data-bkg="gray"><span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em"></span></button>',
+		);*/
+/*
+	$form['submit'] = array
+		(
+			'#type' => 'submit',
+			'#value' => '',
+			'#submit' => array( 'submitForm' ),
+			'#prefix' => '<button id="search-link" class="search-link" type="submit" data-bkg="gray"><span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em">',
+			'#suffix' => '</span></button>',
+		);*/
 
 		return $form;
 	}

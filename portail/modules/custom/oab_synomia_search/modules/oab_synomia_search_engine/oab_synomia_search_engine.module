@@ -5,6 +5,8 @@ function oab_synomia_search_engine_theme(){
 	$theme['synomia_search_results_page'] = array(
 		'variables' => array(
 			'searchForm' => array(),
+			'currentSearch' => array(),
+			'resultLabel' => array(),
 			'currentPage' => array(),
 			'facets' => array(),
 			'searchMode' => array(),
