@@ -728,7 +728,8 @@ aside.right-column > .region{
 
 #related-content-slick-carousel .image img {
     margin: 0 auto;
-    width: auto;
+    width: 100%;
+    height: auto;
 }
 #highlights-container .highlights-items .item .inner .text .title {
     font-size: 2em;
@@ -741,15 +742,15 @@ aside.right-column > .region{
 }
 
 .related-content-column-label {
-    height: 25px;
-    color: white;
+    color: black;
     font-size: 1.6rem;
-    margin: 40px 0 25px;
+    margin: 1.5rem 2rem 1rem;
+    font-weight: bold;
 }
 
 .highlight {
     font-size: 1.3rem;
-    margin: 20px 20px 60px 20px;
+    margin: 0 20px 60px 20px;
     color: black;
     text-decoration: none;
     min-height : 25px;
@@ -761,7 +762,8 @@ aside.right-column > .region{
 }
 
 #related-content-slick-carousel{
-    padding:20px;
+    margin-top: 1rem;
+    padding: 2rem;
 }
 
 
