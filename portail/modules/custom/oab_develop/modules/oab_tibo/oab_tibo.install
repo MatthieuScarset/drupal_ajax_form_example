@@ -170,3 +170,9 @@ function oab_tibo_update_8021() {
 function oab_tibo_update_8022() {
     include_once("updates/update_8022.inc");
 }
+/**
+ * Classements Axiome
+ */
+function oab_tibo_update_8023() {
+    include_once("updates/update_8023.inc");
+}
