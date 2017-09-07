@@ -56,12 +56,11 @@ class SynomiaSearchEngineForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function submitForm(array &$form, FormStateInterface $form_state){
-		$current_route = \Drupal::routeMatch()->getRouteName();
 		$input = &$form_state->getUserInput();
 		$option = [
 			'query' => array('mot' => $input["mot"]),
 		];
-		$url = Url::fromRoute($current_route, array(), $option);
+		$url = Url::fromRoute('oab_synomia_search_engine.engine_url', array(), $option);
 		$form_state->setRedirectUrl($url);
 	}
 }
