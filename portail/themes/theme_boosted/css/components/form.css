@@ -1,6 +1,7 @@
 .oab-synomia-search-header-block-form{
     display: inline-block;
     margin-top: 30px;
+    position: relative;
 
 }
 
@@ -51,4 +52,16 @@
 .oab-synomia-search-header-block-form .top-block-search-form .form-text{
     background-color: #000000;
     display: inline-block;
+}
+
+.oab-synomia-search-header-block-form .top-btn-search ,
+.oab-synomia-search-header-block-form .top-btn-search i,
+.oab-synomia-search-header-block-form .top-btn-search .search-link{
+    position: absolute;
+    top: 5px !important;
+    right: 5px;
+}
+
+.oab-synomia-search-header-block-form .top-btn-search i{
+    margin : 0 !important;
 }

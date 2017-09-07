@@ -35,8 +35,9 @@ class SynomiaSearchHeaderBlockForm extends FormBase {
 		);
 		$form['submit'] = [
 			'#type' => 'submit',
-			'#markup' => '<span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em" style="margin: 0"></span>',
-			'#attributes'=> ['class'=>['glyphicon', 'glyphicon-search', 'search-link']],
+			'#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
+			'#attributes'=> ['class'=>['search-link']],
+			'#suffix' => '</div>',
 		];
 /*
 		$form['submit'] = array(
