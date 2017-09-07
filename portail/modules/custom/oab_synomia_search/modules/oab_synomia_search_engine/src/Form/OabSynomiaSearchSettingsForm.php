@@ -56,7 +56,6 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
     $config = $this->config($this->getConfigName());
 		$languages = \Drupal::languageManager()->getLanguages();
 		foreach ($languages as $language){
-			//$config->set('url_synomia.'.$language->getId(), $form_state->getValue('url_synomia_'.$language->getId()));
 			\Drupal::state()->set('url_synomia_'.$language->getId(), $form_state->getValue('url_synomia_'.$language->getId()));
 		}
 		$config->set('nb_results_per_page', $form_state->getValue('nb_results_per_page'));

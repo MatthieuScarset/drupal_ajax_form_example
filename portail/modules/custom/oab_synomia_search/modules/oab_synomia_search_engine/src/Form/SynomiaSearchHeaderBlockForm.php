@@ -25,8 +25,6 @@ class SynomiaSearchHeaderBlockForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function buildForm(array $form, FormStateInterface $form_state) {
-		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-
 		$form['mot'] = array(
 			'#type' => 'textfield',
 			'#name' => 'mot',
@@ -39,21 +37,6 @@ class SynomiaSearchHeaderBlockForm extends FormBase {
 			'#attributes'=> ['class'=>['search-link']],
 			'#suffix' => '</div>',
 		];
-/*
-		$form['submit'] = array(
-			'#type' => 'submit',
-			'#markup' => '<button id="search-link" class="search-link" type="submit" data-bkg="gray"><span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em"></span></button>',
-		);*/
-/*
-	$form['submit'] = array
-		(
-			'#type' => 'submit',
-			'#value' => '',
-			'#submit' => array( 'submitForm' ),
-			'#prefix' => '<button id="search-link" class="search-link" type="submit" data-bkg="gray"><span class="glyphicon glyphicon-search" aria-hidden="true" data-target="#search-form" data-toggle="collapse" font-size="2em">',
-			'#suffix' => '</span></button>',
-		);*/
-
 		return $form;
 	}
 
@@ -61,12 +44,11 @@ class SynomiaSearchHeaderBlockForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function submitForm(array &$form, FormStateInterface $form_state){
-		$current_route = \Drupal::routeMatch()->getRouteName();
 		$input = &$form_state->getUserInput();
 		$option = [
 			'query' => array('mot' => $input["mot"]),
 		];
-		$url = Url::fromRoute($current_route, array(), $option);
+		$url = Url::fromRoute('oab_synomia_search_engine.engine_url', array(), $option);
 		$form_state->setRedirectUrl($url);
 	}
 }
