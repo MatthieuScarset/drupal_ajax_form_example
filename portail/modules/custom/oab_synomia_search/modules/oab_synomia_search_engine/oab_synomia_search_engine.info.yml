@@ -1,0 +1,11 @@
+name: OAB Synomia Search Engine
+description: 'module for implementing Synomia search engine'
+type: module
+package: OAB
+dependencies:
+  - oab_synomia_search
+  - oab_synomia_search_flux
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_synomia_search_engine'
+datestamp: 1501514107

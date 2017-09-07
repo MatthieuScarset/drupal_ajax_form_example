@@ -1,0 +1,13 @@
+<?php
+
+function oab_synomia_search_engine_install() {
+	drupal_set_installed_schema_version('oab_synomia_search_engine', 8000);
+}
+
+
+/**
+ * Traduction d'interface pour Synomia
+ */
+function oab_synomia_search_engine_update_8001() {
+	include_once("updates/update_8001.inc");
+}

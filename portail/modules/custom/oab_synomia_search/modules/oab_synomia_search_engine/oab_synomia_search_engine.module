@@ -1,0 +1,33 @@
+<?php
+
+function oab_synomia_search_engine_theme(){
+	$theme = array();
+	$theme['synomia_search_results_page'] = array(
+		'variables' => array(
+			'searchForm' => array(),
+			'currentSearch' => array(),
+			'resultLabel' => array(),
+			'currentPage' => array(),
+			'facets' => array(),
+			'searchMode' => array(),
+			'searchResults' => array(),
+			'pager' => array(),
+			'corrections' => array(),
+			'degradations' => array(),
+			'nbResults' => array(),
+		),
+		'template' => 'synomia-search-results--page'
+	);
+
+	return $theme;
+}
+
+function oab_synomia_search_engine_page_attachments(array &$attachments) {
+	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+	if ($current_language == 'fr') {
+		$attachments['#attached']['library'][] = 'oab_synomia_search_engine/oab_synomia_search_engine.autocomplete_fr';
+	}
+	elseif ($current_language == 'en') {
+		$attachments['#attached']['library'][] = 'oab_synomia_search_engine/oab_synomia_search_engine.autocomplete_en';
+	}
+}

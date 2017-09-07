@@ -477,3 +477,17 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
   }
 }
 
+/**
+ * Implements hook_theme().
+ */
+function oab_frontoffice_theme($existing, $type, $theme, $path) {
+	$theme = array();
+	$theme['custom-righticonblock'] = array(
+		'variables' => array(
+			'synomiaSearchForm' => array(),
+		),
+		'template' => 'block--righticonblock-custom'
+	);
+	return $theme;
+}
+

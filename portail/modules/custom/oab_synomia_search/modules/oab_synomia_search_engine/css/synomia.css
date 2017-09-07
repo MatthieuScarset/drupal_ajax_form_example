@@ -1,0 +1,217 @@
+.path-content-search .container .region-content #block-theme-boosted-page-title{
+    display: none !important;
+}
+
+article.page-synomia-search-results{
+    display: table;
+}
+.search_form {
+    font-size: 100%;
+    padding: 10px 0 42px;
+    text-align: center;
+}
+
+
+.search_form form#oab-synomia-search-engine-form label {
+    width: 100%;
+    color: #ff7900;
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 3rem;
+    padding: 20px 0 10px;
+}
+.search_form input#edit-mot {
+    border: 1px solid #dddddd;
+    color: black;
+    font-size: 2.8rem;
+    height: 50px;
+    line-height: 2.8rem;
+    padding: 6px 15px;
+}
+
+.search_form .container{
+    width: 35%;
+}
+
+.search_form label,
+.search_form .row,
+.search_form .container,
+.search_form input{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.search_form form#oab-synomia-search-engine-form .row{
+    float: left;
+}
+
+.block_principal_results .nbResults,
+.corrections .title_corrections,
+.degradations .title_degradations{
+    font-size: 1.6rem;
+}
+.block_principal_results .nbResults{
+    padding-left: 10px;
+}
+
+.corrections ul ,
+.degradations ul {
+    list-style: outside none none;
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+}
+.corrections ul li ,
+.degradations ul li {
+    font-size: 1.6rem;
+    position: relative;
+}
+.corrections ul li::before,
+.degradations ul li::before {
+    color: #ff7900;
+    content: "■";
+    left: -20px;
+    position: absolute;
+}
+
+
+.corrections ul li a,
+.degradations ul li a{
+    color: #F16E00;
+}
+
+.block-facetapi .filters_title{
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 10px;
+    padding: 0 0 5px;
+}
+.block-facetapi .filters_title span{
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.block-facetapi .item-list > ul {
+    margin: 0;
+    padding: 0 0 0 15px;
+}
+.block-facetapi ul li.leaf {
+    list-style-image: none;
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+.block-facetapi ul li {
+    padding: 0.2em 0.5em 0 0;
+}
+.block-facetapi ul li.leaf a {
+    color: #888888;
+}
+
+.page-synomia-search-results .block_principal_results .results_block{
+    margin-bottom: 20px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .cluster_name{
+    background: #efefef none repeat scroll 0 0;
+    border-bottom: 1px solid #f1f1f1;
+    color: black;
+    font-size: 1.685em;
+    font-weight: bold;
+    padding: 5px 0 5px 20px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list{
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li{
+    border-bottom: 1px solid #f1f1f1;
+    list-style: outside none none;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a{
+    color: black;
+    display: block;
+    padding: 15px 20px;
+    position: relative;
+    text-decoration: none;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a:hover,
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a:focus{
+    background-color: #F1F1F1;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li a .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .cluster_link_more {
+    margin-bottom: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    text-align: right;
+    width: calc(100% - 20px);
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li .read_more{
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    top: calc(50% - 18px);
+}
+
+
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list .btn-rounded {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: medium none;
+    -khtml-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    padding: 9px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list .btn:hover,
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list .btn:focus,
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list .btn:active {
+    background-color: #ff6801;
+    border-color: #ff6801;
+    color: #fff;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fe8432), color-stop(100%, #ff6801));
+    background-image: -webkit-linear-gradient(top, #fe8432, #ff6801);
+    background-image: -moz-linear-gradient(top, #fe8432, #ff6801);
+    background-image: -o-linear-gradient(top, #fe8432, #ff6801);
+    background-image: -ms-linear-gradient(top, #fe8432, #ff6801);
+    background-image: linear-gradient(top, #fe8432, #ff6801);
+    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fe8432', endColorstr='#ff6801');
+    text-decoration: none;
+}
+
+
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list .btn-rounded .hover {
+    display: none;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:hover .btn-rounded,
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:focus .btn-rounded  {
+    background-color: #FF6801;
+    background: -webkit-linear-gradient(#FE8432, #FF6801) repeat scroll 0 0 transparent;
+    background: -moz-linear-gradient(#FE8432, #FF6801) repeat scroll 0 0 transparent;
+    background: -o-linear-gradient(#FE8432, #FF6801) repeat scroll 0 0 transparent;
+    background: -ms-linear-gradient(#FE8432, #FF6801) repeat scroll 0 0 transparent;
+    background: linear-gradient(#FE8432, #FF6801) repeat scroll 0 0 transparent;
+    filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fe8432', endColorstr='#ff6801');
+    border-color: #FF6801;
+    color: #FFFFFF;
+    padding-left: 12px;
+}
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:hover .btn-rounded .hover,
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:hover .btn-rounded .focus  {
+    display: inline;
+}
+
+.page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list img.icon_nav {
+    display: inline;
+    float: none;
+    text-indent: 0;
+    font-size: 1.5rem;
+}
+.page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-minus,
+.page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-plus{
+    display: none;
+}

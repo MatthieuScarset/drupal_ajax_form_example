@@ -1,0 +1,6 @@
+oab.synomia_search_settings_form:
+  title: Synomia Search engine settings
+  route_name: oab.synomia_search_settings_form
+  parent: oab.settings
+  description: 'Configure Synomia search engine'
+  weight: -20
