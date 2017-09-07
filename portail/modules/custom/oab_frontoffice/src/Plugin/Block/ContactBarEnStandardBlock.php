@@ -10,7 +10,7 @@ use Drupal\node\Entity\Node;
  *
  * @author FFLB8539
  * @Block(
- *   id = "contact_bar_en_block",
+ *   id = "contact_bar_en_standard_block",
  *   admin_label = @Translation("Contact Bar EN Standard"),
  *   category = @Translation("Blocks"),
  *   context = {
@@ -23,15 +23,33 @@ use Drupal\node\Entity\Node;
  *
  */
 
-class ContactBarEnBlock extends BlockBase {
+class ContactBarEnStandardBlock extends BlockBase {
 
     public function build(){
-        $block = array();
-
+        //$block = array();
         //$block['#markup'] = $this->configuration['content'];
         //$block['#format'] = $this->configuration['content_format'];
 
-        return $block;
+        //return $block;
+
+        $config = $this->getConfiguration();
+
+        $link_offices = isset($config['link_offices']) ? $config['link_offices'] : '';
+        $link_offices_text = isset($config['link_offices_text']) ? $config['link_offices_text'] : '';
+        $link_help = isset($config['link_help']) ? $config['link_help'] : '';
+        $link_help_text = isset($config['link_help_text']) ? $config['link_help_text'] : '';
+        $link_contact = isset($config['link_contact']) ? $config['link_contact'] : '';
+        $link_contact_text = isset($config['link_contact_text']) ? $config['link_contact_text'] : '';
+
+        $build = array();
+        $build['link_offices_text'] = $link_offices_text;
+        $build['link_offices'] = $link_offices;
+        $build['link_help'] = $link_help;
+        $build['link_help_text'] = $link_help_text;
+        $build['link_contact'] = $link_contact;
+        $build['link_contact_text'] = $link_contact_text;
+
+        return $build;
     }
 
     /**

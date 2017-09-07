@@ -27,12 +27,23 @@ class ContactBarStandardBlock extends BlockBase {
 
     public function build(){
         $config = $this->getConfiguration();
+
         $link_assistance = isset($config['link_assistance']) ? $config['link_assistance'] : '';
         $link_assistance_text = isset($config['link_assistance_text']) ? $config['link_assistance_text'] : '';
+        $link_contact = isset($config['link_contact']) ? $config['link_contact'] : '';
+        $link_contact_text = isset($config['link_contact_text']) ? $config['link_contact_text'] : '';
+        $link_ecrire = isset($config['link_ecrire']) ? $config['link_ecrire'] : '';
+        $link_ecrire_text = isset($config['link_ecrire_text']) ? $config['link_ecrire_text'] : '';
 
-        return array(
-            '#markup' => $this->t('Text link: @link_assistance_text', array('@linkassistance'=> $link_assistance,'@link_assistance_text'=> $link_assistance_text)),
-        );
+        $build = array();
+        $build['link_assistance'] = $link_assistance;
+        $build['link_assistance_text'] = $link_assistance_text;
+        $build['link_contact'] = $link_contact;
+        $build['link_contact_text'] = $link_contact_text;
+        $build['link_ecrire'] = $link_ecrire;
+        $build['link_ecrire_text'] = $link_ecrire_text;
+
+        return $build;
     }
 
     /**
@@ -61,13 +72,13 @@ class ContactBarStandardBlock extends BlockBase {
             '#required' => false,
         ];
 
-        $form['link_contacter'] = [
+        $form['link_contact'] = [
             '#title' => $this->t('Lien vers Nous contacter'),
             '#type' => 'textfield',
             '#default_value' => '',
             '#required' => false,
         ];
-        $form['link_contacter_text'] = [
+        $form['link_contact_text'] = [
             '#title' => $this->t('Texte du lien vers Nous contacter'),
             '#type' => 'textfield',
             '#default_value' => 'Nous contacter',
@@ -107,8 +118,8 @@ class ContactBarStandardBlock extends BlockBase {
 
         $this->setConfigurationValue('link_assistance', $form_state->getValue('link_assistance'));
         $this->setConfigurationValue('link_assistance_text', $form_state->getValue('link_assistance_text'));
-        $this->setConfigurationValue('link_contacter', $form_state->getValue('link_contacter'));
-        $this->setConfigurationValue('link_contacter_text', $form_state->getValue('link_contacter_text'));
+        $this->setConfigurationValue('link_contact', $form_state->getValue('link_contact'));
+        $this->setConfigurationValue('link_contact_text', $form_state->getValue('link_contact_text'));
         $this->setConfigurationValue('link_ecrire', $form_state->getValue('link_ecrire'));
         $this->setConfigurationValue('link_ecrire_text', $form_state->getValue('link_ecrire_text'));
     }
