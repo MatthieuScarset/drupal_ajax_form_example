@@ -119,10 +119,6 @@ view_mode ? view_mode|clean_class,
     }
     </script>
 
-<div class="content_info">
-    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
-</div>
-
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 <article{{ attributes.addClass(classes) }}>
