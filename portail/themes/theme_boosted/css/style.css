@@ -94,13 +94,18 @@ article .content .field--type-text-long ul li:before{
 }
 
 .display-subhomes .encart-image{
+    padding:0;
     text-align: center;
+    display: block;
+}
+.view-display-id-page_partners .display-subhomes .encart-image{
     display: flex;
-    margin: auto;
 }
 
 .display-subhomes .encart-image img{
     max-height: 12.5rem;
+}
+.view-display-id-page_partners img{
     max-width: 11rem;
 }
 .display-subhomes .bigKey{
