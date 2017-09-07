@@ -34,12 +34,12 @@ class AxiomeContentImporter {
 
 		// Top zone
 		$content = file_get_contents(
-			drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/templating/files/banner/top-zone.html.twig'
+			drupal_get_path('theme', 'theme_boosted') . '/templates/nodes/axiome_topzone.html.twig'
 		);
 
 		$dom = Html::load($content);
 
-		self::replaceLeftBlock($dom, $bannerData);
+		self::replaceLeftBlock($dom, $bannerData, $node);
 		self::replaceCenterBlock($dom, $bannerData);
 		self::replaceRightBlock($dom, $bannerData);
 
@@ -58,9 +58,65 @@ class AxiomeContentImporter {
 
 	}
 
-	private static function replaceLeftBlock(&$dom, $bannerData){
+	private static function replaceLeftBlock(&$dom, $bannerData, $node){
 		$cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
-		$titleLeftBlock = $bannerData['title'];
+
+		//$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
+
+        switch($cssClassLeftBlock){
+            case 'icon-frame-connectivity':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Connectivity';
+                }else{
+                    $titleLeftBlock = 'Connectivité';
+                }
+                break;
+            case 'icon-frame-teamwork':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Teamwork';
+                }else{
+                    $titleLeftBlock = 'Équipe';
+                }
+                break;
+            case 'icon-frame-my-customers':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'My customers';
+                }else{
+                    $titleLeftBlock = 'Mes clients ';
+                }
+                break;
+            case 'icon-frame-performance':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Performance';
+                }else{
+                    $titleLeftBlock = 'Performance';
+                }
+                break;
+            case 'icon-frame-security':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Security';
+                }else{
+                    $titleLeftBlock = 'Sécurité';
+                }
+                break;
+            case 'icon-frame-care':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Care';
+                }else{
+                    $titleLeftBlock = 'Service';
+                }
+                break;
+            case 'icon-frame-tech':
+                if($node->language()->getId() == 'en'){
+                    $titleLeftBlock = 'Tech';
+                }else{
+                    $titleLeftBlock = 'Tech';
+                }
+                break;
+            default:
+                $titleLeftBlock = '';
+                break;
+        }
 
 		// change class name
 		$nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
@@ -70,7 +126,7 @@ class AxiomeContentImporter {
 		}
 
 		// change title
-		$nodesSpan = self::getNodesByClass($dom, 'black', 'span');
+		$nodesSpan = self::getNodesByClass($dom, 'frame', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleLeftBlock;
 		}
@@ -104,7 +160,7 @@ class AxiomeContentImporter {
 		}
 
 		// change title
-		$nodesSpan = self::getNodesByClass($dom, 'white', 'span');
+		$nodesSpan = self::getNodesByClass($dom, 'popout', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleRightBlock;
 		}
