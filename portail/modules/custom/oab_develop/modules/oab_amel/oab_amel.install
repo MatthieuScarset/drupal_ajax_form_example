@@ -252,3 +252,11 @@ function oab_amel_update_8027() {
 function oab_amel_update_8028() {
     include_once("updates/update_8028.inc");
 }
+
+/**
+ *  Contact Bar : ajout des variantes standard, standard EN et press
+ */
+function oab_amel_update_8029() {
+    include_once("updates/update_8029.inc");
+}
+

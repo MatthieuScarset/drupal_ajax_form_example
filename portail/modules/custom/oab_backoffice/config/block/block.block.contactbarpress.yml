@@ -1,0 +1,33 @@
+uuid: 0420c046-aca0-4e56-98a9-a936c67b9305
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: contactbarpress
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: contact_bar_press_block
+settings:
+  id: contact_bar_press_block
+  label: 'Contact Bar Press'
+  provider: oab_frontoffice
+  label_display: '0'
+  link_ecrire: 'http://www.orange-business.com/fr/contact-commercial'
+  link_ecrire_text: 'Nous écrire'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      press_kit: press_kit
+      press_release: press_release
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
