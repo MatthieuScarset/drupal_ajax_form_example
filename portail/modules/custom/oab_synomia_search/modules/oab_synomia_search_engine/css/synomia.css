@@ -1,3 +1,7 @@
+.path-content-search .container .region-content #block-theme-boosted-page-title{
+    display: none !important;
+}
+
 article.page-synomia-search-results{
     display: table;
 }
@@ -45,6 +49,9 @@ article.page-synomia-search-results{
 .corrections .title_corrections,
 .degradations .title_degradations{
     font-size: 1.6rem;
+}
+.block_principal_results .nbResults{
+    padding-left: 10px;
 }
 
 .corrections ul ,
@@ -98,14 +105,16 @@ article.page-synomia-search-results{
     color: #888888;
 }
 
-
+.page-synomia-search-results .block_principal_results .results_block{
+    margin-bottom: 20px;
+}
 .page-synomia-search-results .block_principal_results .results_block .results_cluster .cluster_name{
     background: #efefef none repeat scroll 0 0;
     border-bottom: 1px solid #f1f1f1;
     color: black;
     font-size: 1.685em;
     font-weight: bold;
-    padding: 0 0 5px 20px;
+    padding: 5px 0 5px 20px;
 }
 .page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list{
     display: inline-block;
@@ -201,4 +210,8 @@ article.page-synomia-search-results{
     float: none;
     text-indent: 0;
     font-size: 1.5rem;
+}
+.page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-minus,
+.page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-plus{
+    display: none;
 }

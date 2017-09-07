@@ -35,6 +35,7 @@ global-styling:
     js/jquery.touchSwipe.min.js: {}
     js/slick.min.js: {}
     js/scripts.js: {}
+    js/switch.js: {}
 
   dependencies:
     - core/jquery

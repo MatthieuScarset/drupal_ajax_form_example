@@ -15,6 +15,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class OabSynomiaSearchEngineController extends ControllerBase
 {
 
+	public function getPageTitle(){
+		return null;
+	}
+
   /** Méthode appelée lorsqu'on appelle la page de recherche */
   public function contentSearch(Request $request){
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
