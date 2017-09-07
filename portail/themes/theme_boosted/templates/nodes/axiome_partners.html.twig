@@ -1,3 +1,4 @@
+{% if field_partners.Attributes.title|trim is not empty %}
 <div class="node-axiome-partners">
     <div>
         <h2 class="titre2">{{ field_partners.Attributes.title }}</h2>
@@ -23,3 +24,4 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
