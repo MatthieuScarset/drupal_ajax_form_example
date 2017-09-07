@@ -317,6 +317,7 @@
                     }
                 ]
             });
+          jQuery('.related-content-items .slick-track').addClass('row');
         }
     });
     /*$('#slider_direct_access').on('init', function(event, slick){
