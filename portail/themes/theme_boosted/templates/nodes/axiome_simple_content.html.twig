@@ -1,3 +1,4 @@
+{% if field_simple_content.0.Attributes.title|trim is not empty %}
 <div class="node-axiome-simple-content">
     <div class="col col-md-12 nopadding">
         <h2 class="titre2">{{ field_simple_content.0.Attributes.title }}</h2>
@@ -19,3 +20,4 @@
         <div> {{ field_simple_content.1.Attributes.video|replace({'//': "https://"})|raw }}</div>
     </div>
 </div>
+{% endif %}

@@ -1,3 +1,4 @@
+{% if field_detailed_content.Attributes.intertitle|trim is not empty %}
 <div class="node-axiome-detailed-content">
     <div>
         <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
@@ -31,3 +32,4 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
