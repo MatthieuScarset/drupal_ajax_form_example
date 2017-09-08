@@ -250,3 +250,10 @@ function oab_tristan_update_8030() {
 function oab_tristan_update_8031() {
   include_once("updates/update_8031.inc");
 }
+
+/**
+ * Supp et Ajout de termes de taxos
+ */
+function oab_tristan_update_8032() {
+  include_once("updates/update_8032.inc");
+}
