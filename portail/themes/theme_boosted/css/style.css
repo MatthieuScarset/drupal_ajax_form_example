@@ -770,14 +770,14 @@ article .content .field--type-text-long ul li:before{
         padding-left: 15px;
     }
 
-
     .partner-banner .views-view-grid .views-row {
         margin-left: -20px;
     }
 }
 
 
-.rebond article {
+.rebond article, .block-mediatheque {
+    margin: 2rem 2rem;
     padding: 3rem 2rem;
     margin-bottom: 2rem;
 }
