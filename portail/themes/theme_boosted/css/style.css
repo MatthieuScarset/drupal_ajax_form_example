@@ -407,3 +407,11 @@ article .content .field--type-text-long ul li:before{
     padding-top: 6rem;
     margin-top: 0;
 }
+
+.path-webform .region-content form .container{
+    padding-bottom: 1rem;
+}
+
+.path-webform .region-content form #edit-actions{
+    padding: 1rem 0;
+}
