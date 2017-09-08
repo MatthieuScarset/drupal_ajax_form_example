@@ -79,7 +79,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 			$displayObj = $view->getDisplay();
 
 			#Et on en recupère son titre pour l'affichage
-			$displayName = $displayObj->display['display_title'];
+			$displayName = ucfirst($displayObj->display['display_title']);
 
 			##On ajoute un lien vide au fil d'ariane
 			$breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
@@ -105,8 +105,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
 				##On vérifie qu'on a bien un résultat
 				if (is_array($subhomes) && count($subhomes)>0) {
-
-					##Récupération de la taxo pour la target du subhome en question
+          ##Récupération de la taxo pour la target du subhome en question
 					$term = \Drupal::entityTypeManager()
 					               ->getStorage('taxonomy_term')
 					               ->load($subhomes[0]['target_id']);
@@ -127,7 +126,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 							$displayObj = $view->getDisplay();
 
 							##On en recupère le nom de la vue (pour le nom du lien)
-							$displayName = $displayObj->display['display_title'];
+							$displayName = ucfirst($displayObj->display['display_title']);
 
 							##Et la route de la display view (pour en créer l'url)
 							$routeName = $displayObj->getRouteName();

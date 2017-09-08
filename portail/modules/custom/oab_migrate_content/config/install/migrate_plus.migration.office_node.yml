@@ -18,16 +18,19 @@ process:
   title: title
   created: created
   changed: changed
+  status: status
+  langcode: language
   uid:
     plugin: default_value
     default_value: 1
-  field_gps_coordinates/lat: latitude
-  field_gps_coordinates/lng: longitude
-  field_address/langcode: langcode
-  field_address/country_code: country
-  field_address/locality: city
-  field_address/postal_code: postal_code
-  field_address/address_line1: street
-  field_address/address_line2: additional
-  field_areas/target_id: area
+  field_office_location/lat: latitude
+  field_office_location/lng: longitude
+  field_office_country: country
+  field_city: city
+  field_postal_code: postal_code
+  field_phone_number: phone_number
+  field_street: street
+  field_additionnal: additional
+  field_email_address: email_address
+  field_region: regions
 migration_dependencies: {  }

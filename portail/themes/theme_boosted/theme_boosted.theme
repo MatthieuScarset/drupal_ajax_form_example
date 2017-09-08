@@ -52,27 +52,64 @@ function theme_boosted_preprocess_node(&$variables) {
 }
 
 function theme_boosted_preprocess_page(&$variables) {
+
   if (\Drupal::routeMatch()->getParameter('node')) {
     $node = \Drupal::routeMatch()->getParameter('node');
   }
   if (\Drupal::routeMatch()->getParameter('node_preview')) {
     $node = \Drupal::routeMatch()->getParameter('node_preview');
   }
-  if($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+  if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
     $node = node_revision_load($revision);
   }
+  $variables['page']['containerClass'] = 'container';
   if (isset($node) && is_object($node)
-  && get_class($node) == 'Drupal\node\Entity\Node') {
+    && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
-    $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
+    if ($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique') {
+      $variables['page']['containerClass'] = 'container-fluid';
+    }
+    $definitions = \Drupal::service('entity_field.manager')
+      ->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
-    && array_key_exists('field_display_title', $definitions)) {
+      && array_key_exists('field_display_title', $definitions)) {
       $display_title = $node->get('field_display_title')->getValue();
       if (isset($display_title[0]['value'])
-      && $display_title[0]['value'] == 0
-      && isset($variables['page']['content']['theme_boosted_page_title'])
+        && $display_title[0]['value'] == 0
+        && isset($variables['page']['content']['theme_boosted_page_title'])
       ) {
         $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+      }
+    }
+
+
+    if (\Drupal::routeMatch()->getParameter('node')) {
+      $node = \Drupal::routeMatch()->getParameter('node');
+    }
+    if (\Drupal::routeMatch()->getParameter('node_preview')) {
+      $node = \Drupal::routeMatch()->getParameter('node_preview');
+    }
+    if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+      $node = node_revision_load($revision);
+    }
+    $variables['page']['containerClass'] = 'container';
+    if (isset($node) && is_object($node)
+      && get_class($node) == 'Drupal\node\Entity\Node') {
+      $content_type = $node->bundle();
+      if ($content_type == 'homepage' || $content_type == 'homepage_eclairage') {
+        $variables['page']['containerClass'] = 'container-fluid';
+      }
+      $definitions = \Drupal::service('entity_field.manager')
+        ->getFieldDefinitions('node', $content_type);
+      if (isset($definitions)
+        && array_key_exists('field_display_title', $definitions)) {
+        $display_title = $node->get('field_display_title')->getValue();
+        if (isset($display_title[0]['value'])
+          && $display_title[0]['value'] == 0
+          && isset($variables['page']['content']['theme_boosted_page_title'])
+        ) {
+          $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+        }
       }
     }
   }
@@ -106,6 +143,40 @@ function theme_boosted_preprocess_views_view(&$variables){
       }
     }
   }
+  elseif ($id == 'offices_map_view'){
+  	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
+  		//kint($variables['rows']);
+			$variables['contact_url'] = 'http://www.google.fr';
+		}
+	}
+}
+function theme_boosted_preprocess_views_view_list(&$variables){
+  $view = $variables['view'];
+  $id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
+}
+function theme_boosted_preprocess_views_view_fields(&$variables){
+	$view = $variables['view'];
+	$id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
 }
 
 function theme_boosted_preprocess_field(&$variables){
@@ -218,6 +289,25 @@ function get_image_uri($entity, $fieldName){
         }
     }
     return $image_uri;
+}
+
+
+function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+    /**
+     * Homepage Eclairage View Grid Twig Template Suggestions
+     */
+    // Firstly check it's a view
+    if($hook === 'views_view') {
+        // Check if it's the 'home_eclairage_playlist' view
+        if($variables['view']->id() === 'home_eclairage_playlist') {
+            if($hook === 'views_view_grid') {
+
+                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+            }
+        }
+    }
+
 }
 
 
