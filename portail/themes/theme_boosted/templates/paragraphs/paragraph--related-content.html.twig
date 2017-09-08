@@ -52,8 +52,8 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
-            {% if content.field_link[0]['#url'] %}
-            <a href="{{ content.field_link[0]['#url']|render }}" style="display: block;">
+            {% if content.field_reallink[0]['#url'] %}
+            <a href="{{ content.field_reallink[0]['#url']|render }}" style="display: block;">
             {% endif %}
                 <div class="related-content-content col-md-12 col-sm-12 col-xs-12">
                     <div class="image">
@@ -74,7 +74,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                         {{ content.field_catcher }}
                     </div>
                 </div>
-            {% if content.field_link[0]['#url'] %}
+            {% if content.field_reallink[0]['#url'] %}
             </a>
             {% endif %}
         {% endblock %}
