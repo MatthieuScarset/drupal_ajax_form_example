@@ -237,3 +237,78 @@ function oabt_TranslationImport($source_import,$language_import,$translation_imp
         }
     }
 }
+
+/** Permet de faire un import yml d'un module au format fichier
+ * @param $file_name nom du fichier avec extention .yml
+ * @param $dir_name sous-arbo de config dans le module cible
+ * @param $module_name module cible du fichier yml sous forme string
+ * @return bool
+ */
+function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
+{
+
+  $file_name_lessext =  substr($file_name,0,-4);
+
+  if($dir_name=="/"){
+    $tab_file_name_lessext = explode('.',$file_name);
+    $dir_name .= $tab_file_name_lessext[1]."/";
+  }
+
+  $config_path = drupal_get_path('module', $module_name) . '/config' . $dir_name . $file_name;
+  $data = Yaml::parse($config_path);
+  \Drupal::configFactory()->getEditable($file_name_lessext)->setData($data)->save(TRUE);
+
+  /*
+
+  field.storage.node.field_phone_number.yml
+
+  uuid: 0358c006-2a4c-4163-aaa1-c42e2c8f8fde
+  langcode: en
+  status: true
+  dependencies:
+    module:
+      - node
+  id: node.field_phone_number
+  field_name: field_phone_number
+  entity_type: node
+  type: string
+  settings:
+    max_length: 255
+    is_ascii: false
+    case_sensitive: false
+  module: core
+  locked: false
+  cardinality: 1
+  translatable: false
+  indexes: {  }
+  persist_with_no_fields: false
+  custom_storage: false
+
+  CREATE TABLE `node__field_phone_number` (
+    `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+    `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+    `entity_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity id this data is attached to',
+    `revision_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity revision id this data is attached to',
+    `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+    `delta` int(10) UNSIGNED NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+    `field_phone_number_value` varchar(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_phone_number.';
+
+  CREATE TABLE `node_revision__field_phone_number` (
+    `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+    `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+    `entity_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity id this data is attached to',
+    `revision_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity revision id this data is attached to',
+    `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+    `delta` int(10) UNSIGNED NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+    `field_phone_number_value` varchar(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_phone_number.';
+
+
+  */
+
+
+
+  return true;
+}
+
