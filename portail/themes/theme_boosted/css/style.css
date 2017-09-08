@@ -893,6 +893,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 .rebond article, .block-mediatheque {
+    margin: 2rem 2rem;
     padding: 3rem 2rem;
     margin-bottom: 2rem;
 }
@@ -1074,7 +1075,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     line-height: 2rem;
 
 }
-}
+
 
 .div-display-table {
     display: table;
@@ -1089,14 +1090,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .webform-button--submit, .webform-button--draft {
     margin-top: 1rem;
+}
 .webform-confirmation {
     padding: 1rem;
+}
 .page-node-type-solution .titre1,
 .page-node-type-industry .titre1,
 .page-node-type-country .titre1,
 .page-node-type-region .titre1 {
     padding-top: 6rem;
     margin-top: 0;
+}
 
 #arrow-back-to-filter {
 
