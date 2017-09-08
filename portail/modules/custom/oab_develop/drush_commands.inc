@@ -19,4 +19,5 @@ pm-enable -y oab_password_policy_alter
 pm-enable -y oab_offices_map
 pm-enable -y oab_synomia_search_flux
 pm-enable -y oab_synomia_search_engine
+updb
 #entity-updates
