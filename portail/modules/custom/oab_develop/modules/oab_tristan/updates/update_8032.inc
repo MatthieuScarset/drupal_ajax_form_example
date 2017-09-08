@@ -1,8 +1,6 @@
 <?php
 
 
-
-
 /**
  * Mise à jour du field "field_related_display_view" pour tous les termes de la taxo Subhome
  * afin de faire fonctionner le fil d'Arianne
@@ -15,12 +13,11 @@ $vocaList = [
   ],
   "industries"  => [
     "EN"  => [
-      "Transport  and Logistic",
+      "Transport and Logistic",
     ]
   ],
   "solutions" => [
     "EN"  => [
-      "enriched-connectivity-0" => "Enriched connectivity",
       "Enriched Customer relationship"
     ]
   ],
@@ -32,25 +29,49 @@ $vocaList = [
     "EN"  => [
       "Blogbook",
       "Partner Brief",
-      "white-paper-0" => "White paper"
     ]
-
   ],
 ];
-$i = 0;
+
+
+$doublons = [
+  "solutions" => [
+    "Enriched connectivity",
+  ],
+  "document_types"  => [
+    "White paper"
+  ]
+];
+
 foreach ($vocaList as $voca => $languageList) {
   foreach ($languageList as $language => $termlist) {
     foreach ($termlist as $key => $term) {
       ##on cherche l'Objet
-      echo $voca . " => " . $term . "\n";
       $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
-      foreach ($termsArray as $term_id => $termObject) {
-        $name = $termObject->get('name');
-        var_dump($name);
-        $lang = $termObject["langcode"];
-
-        echo "$lang \n";
+      ##Je supprime les termes trouvés
+      foreach ($termsArray as $termObject){
+        $termObject->delete();
       }
     }
   }
 }
+
+foreach ($doublons as $voca => $languageList) {
+  foreach ($termlist as $key => $term) {
+    ##on cherche l'Objet
+    $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
+    ##En cas de doublon à supprimer, je supprime le dernier
+    if (count($termsArray) > 1) {
+      $termsArray[1]->delete();
+    }
+  }
+}
+
+
+##Création des termes demandés
+$term = \Drupal\taxonomy\Entity\Term::create([
+  'name' => 'Connectivity',
+  'vid' => 'document_thematics'
+]);
+$term->set('langcode', 'en');
+$term->save();
