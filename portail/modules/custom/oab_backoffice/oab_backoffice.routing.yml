@@ -13,3 +13,11 @@ oab.settings_subhomes:
     _title: 'Subhomes settings'
   requirements:
     _permission: 'administer site configuration'
+
+oab.general_settings:
+  path: '/admin/structure/oab/settings/general'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\OabGeneralSettingsForm'
+    _title: 'General settings'
+  requirements:
+    _permission: 'administer site configuration'

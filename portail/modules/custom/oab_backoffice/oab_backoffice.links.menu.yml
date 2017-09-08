@@ -11,3 +11,10 @@ oab.settings_subhomes:
   parent: oab.settings
   description: 'Configure oab subhome settings'
   weight: -20
+
+oab.general_settings:
+  title: General settings
+  route_name: oab.general_settings
+  parent: oab.settings
+  description: 'Configure general site settings'
+  weight: -20

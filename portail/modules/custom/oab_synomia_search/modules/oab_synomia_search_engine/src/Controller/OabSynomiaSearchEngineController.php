@@ -5,6 +5,7 @@ namespace Drupal\oab_synomia_search_engine\Controller;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\oab_backoffice\Form\OabGeneralSettingsForm;
 use Drupal\oab_synomia_search_engine\Classes\SynomiaSearchResponse;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 use Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent;
@@ -188,13 +189,15 @@ class OabSynomiaSearchEngineController extends ControllerBase
 			}
 
 			$ch = curl_init();
-/*
-			$proxy_server =  variable_get('proxy_server', null);
-			if ($proxy_server != null) {
-				$proxy_server .= ':' . variable_get('proxy_port', '');
+
+			$configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
+			if(!empty($config) && !empty($configProxy->get('proxy_server')) && !empty($configProxy->get('proxy_port')))			{
+				$proxy_server = $configProxy->get('proxy_server'.':'.$configProxy->get('proxy_port'));
 			}
-			*/
-			$proxy_server = null;
+			else{
+				$proxy_server = NULL;
+			}
+
 			//var_dump($path);
 			curl_setopt_array
 			(

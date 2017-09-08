@@ -2,3 +2,8 @@ oab.settings_subhomes_tab:
   route_name: oab.settings_subhomes
   title: Settings
   base_route: oab.settings_subhomes
+
+oab.general_settings_tab:
+  route_name: oab.general_settings
+  title: General Settings
+  base_route: oab.general_settings
