@@ -291,6 +291,11 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     if($form_id == 'media_image_edit_form') {
         $form['#validate'][] = 'oab_backoffice_regenerate_image_style';
     }
+
+    // langue RU pour les webforms
+    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
+        $form['elements']['actions']['#submit__label'] = 'Отправить';
+    }
 }
 
 function oab_backoffice_regenerate_image_style($form, &$form_state) {
