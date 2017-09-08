@@ -321,3 +321,10 @@ function oab_stephanie_update_8040() {
 	include_once("updates/update_8040.inc");
 }
 
+/**
+ * Traduction du bouton Load More
+ */
+function oab_stephanie_update_8041() {
+	include_once("updates/update_8041.inc");
+}
+
