@@ -459,18 +459,26 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
 }
 
+#tab-expertise-banner li {
+    background-color: #eee;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
 #tab-expertise-banner li a{
     color: #999;
     text-align: center;
     padding: 3rem;
-    background-color: #eee;
     border: none;
-    border-bottom: 1px solid #ccc;
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.8rem;
-    display: table;
+    display: block;
+    height: 100%;
     width: 100%;
+}
+#tab-expertise-banner li a:hover {
+    background-color: #eee;
 }
 
 
@@ -490,7 +498,7 @@ article .content .field--type-text-long ul li:before{
     vertical-align: text-top;
 }
 
-#tab-expertise-banner li.active a{
+#tab-expertise-banner li.active {
     color: #F16E00;
     background-color: #fff;
     border-top: 1px solid #ccc;
@@ -498,6 +506,11 @@ article .content .field--type-text-long ul li:before{
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #fff;
 }
+
+#tab-expertise-banner li.active a:hover {
+    background-color: #fff;
+}
+
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
