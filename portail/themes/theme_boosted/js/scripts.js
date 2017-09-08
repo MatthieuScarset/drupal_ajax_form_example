@@ -116,7 +116,7 @@
               }
           }
 
-      })
+      });
 
       //initialize swiper when document ready
       var mySwiperThematic = new Swiper ('.swiper-container-columns', {
@@ -125,7 +125,7 @@
           loop: true,
           pagination : '.swiper-pagination',
           paginationType: 'bullets',
-      })
+      });
 
   });
 
@@ -206,6 +206,7 @@
     //Je return false pour desactiver le lien vers l'ancre par le navigateur
     return false;
   });
+
       $('#tab-expertise-banner a').click(function (e) {
           e.preventDefault();
           $(this).tab('show');

@@ -24,8 +24,9 @@ class OabExtension extends \Twig_Extension {
       return [
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
-          new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
           new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
+          new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
+
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
       ];
