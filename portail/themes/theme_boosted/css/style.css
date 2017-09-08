@@ -1157,3 +1157,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .homepage-title-black {
     color: black;
 }
+
+.path-webform .region-content form .container{
+    padding-bottom: 1rem;
+}
+
+.path-webform .region-content form #edit-actions{
+    padding: 1rem 0;
+}
