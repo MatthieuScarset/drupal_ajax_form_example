@@ -56,6 +56,16 @@ class AxiomeContentImporter {
 			$node->set('field_top_zone_background', $image_media_id);
 		}
 
+        // Creation image catalog
+        $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
+
+        if (!empty($bannerData['catalog_image']['url_archive'])){
+            $urlCatalog = 'public://axiome/fiches/'.$urlCatalog;
+            $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
+            $messages .= 'Url Catalog : '.$urlCatalog."\nMedia #".$image_media_id."\n";
+            $node->set('field_visual', $image_media_id);
+        }
+
 	}
 
 	private static function replaceLeftBlock(&$dom, $bannerData, $node){
@@ -147,16 +157,11 @@ class AxiomeContentImporter {
 	private static function replaceRightBlock(&$dom, $bannerData){
 		$cssClassRightBlock =  $bannerData['pop_out_color']['boosted_css_name'];
 		$titleRightBlock = $bannerData['offre_name'];
-
 		// change class name
-		$nodes = self::getNodesByClass($dom, 'icon-frame-connectivity');
-		$firstItem = true;
+		$nodes = self::getNodesByClass($dom, 'icon-popout-connectivity');
 		foreach($nodes as $el) {
-			if (!$firstItem){
-				$el->removeAttribute('class');
-				$el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassRightBlock);
-			}
-			$firstItem = false;
+            $el->removeAttribute('class');
+            $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassRightBlock);
 		}
 
 		// change title
@@ -178,8 +183,6 @@ class AxiomeContentImporter {
 
 		$imageId = null;
 		$styleTopZone = ImageStyle::load('top_zone');
-		$styleMedium = ImageStyle::load('medium');
-		$styleThumbnail = ImageStyle::load('thumbnail');
 
 		$filesystem = \Drupal::service('file_system');
 		// Create file entity.
@@ -196,11 +199,11 @@ class AxiomeContentImporter {
 		$destination = $styleTopZone->buildUri($url);
 		$styleTopZone->createDerivative($original_image, $destination);
 
-		$destination = $styleMedium->buildUri($url);
+		/*$destination = $styleMedium->buildUri($url);
 		$styleMedium->createDerivative($original_image, $destination);
 
 		$destination = $styleThumbnail->buildUri($url);
-		$styleThumbnail->createDerivative($original_image, $destination);
+		$styleThumbnail->createDerivative($original_image, $destination);*/
 
 		if(empty($data['balise_alt'])){
             $balise_alt = "";
@@ -224,6 +227,48 @@ class AxiomeContentImporter {
 
 		return $image_media->id();
 	}
+
+    private static function createCatalogMedia(&$node, $url, $data, $language){
+
+        $imageId = null;
+        $styleTopZone = ImageStyle::load('subhome');
+
+        $filesystem = \Drupal::service('file_system');
+        // Create file entity.
+        $image = File::create();
+        $image->setFileUri($url);
+        $image->setOwnerId(\Drupal::currentUser()->id());
+        $image->setMimeType('image/' . pathinfo($url, PATHINFO_EXTENSION));
+        $image->setFileName($filesystem->basename($url));
+        $image->setPermanent();
+        $image->save();
+
+        $original_image = $url;
+
+        $destination = $styleTopZone->buildUri($url);
+        $styleTopZone->createDerivative($original_image, $destination);
+
+        if(empty($data['balise_alt'])){
+            $balise_alt = "";
+        }else{
+            $balise_alt = $data['balise_alt'];
+        }
+
+        $image_media = Media::create([
+            'bundle' => 'image',
+            'uid' => \Drupal::currentUser()->id(),
+            'langcode' => $language,
+            'status' => Media::PUBLISHED,
+            'field_image' => [
+                'target_id' => $image->id(),
+                'alt' => $balise_alt,
+                'title' => $balise_alt,
+            ],
+        ]);
+        $image_media->save();
+
+        return $image_media->id();
+    }
 
 	public static function isValidContent($axiomeData, &$message){
 		$isValid = true;
