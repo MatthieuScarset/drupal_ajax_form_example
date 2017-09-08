@@ -192,7 +192,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 
 			$configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
 			if(!empty($config) && !empty($configProxy->get('proxy_server')) && !empty($configProxy->get('proxy_port')))			{
-				$proxy_server = $configProxy->get('proxy_server'.':'.$configProxy->get('proxy_port'));
+				$proxy_server = $configProxy->get('proxy_server').':'.$configProxy->get('proxy_port');
 			}
 			else{
 				$proxy_server = NULL;
