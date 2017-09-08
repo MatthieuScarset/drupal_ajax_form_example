@@ -361,7 +361,7 @@
 {% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
     <div class="row infography-banner">
         <div class="container">
-            <div class="col-md-8  col-md-offset-2 corporate-infography-banner ">
+            <div class="col-md-12 corporate-infography-banner ">
                 <div class="row text-center">
                     {% for key, infography in content.field_infography if key|first != '#'  %}
                     {% if key == 0 %}

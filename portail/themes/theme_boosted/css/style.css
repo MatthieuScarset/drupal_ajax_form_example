@@ -355,6 +355,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 
+.section-title-corporate {
+    margin-left: -10px;
+}
+
 .section-title-corporate .title,
 .section-title-solution .title{
     font-size: 3rem;
@@ -516,6 +520,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
+    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -618,6 +623,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .section-corporate{
     max-width: 1080px;
     margin: auto;
+    padding-left: -10px;
     color: #fff;
 }
 .section-corporate .title{
