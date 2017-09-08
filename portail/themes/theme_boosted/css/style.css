@@ -48,6 +48,7 @@
     padding: 0;
 }
 
+article .field--type-text-long ul,
 article .content .field--type-text-long ul,
 article.product .node-axiome-know-more ul{
     list-style: none;
@@ -58,11 +59,13 @@ article.product .node-axiome-know-more ul{
 article.product .node-axiome-know-more ul{
     padding-left: 0;
 }
+article .field--type-text-long ul li,
 article .content .field--type-text-long ul li,
 article.product .node-axiome-know-more ul li{
     position: relative;
     font-size: 1.6rem;
 }
+article .field--type-text-long ul li:before,
 article .content .field--type-text-long ul li:before{
     content: "■";
     color: #FF7900;
