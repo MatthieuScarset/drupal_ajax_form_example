@@ -198,11 +198,31 @@ article .content .field--type-text-long ul li:before{
     max-width: 1180px;
     margin-top: -70px;
 }
+
+@media (min-width: 1200px) {
+    .block-card-container {
+        display: flex;
+    }
+}
+
+@media (max-width: 1200px) {
+    .block-card{
+        margin-bottom: 20px;
+    }
+}
+
 .block-card{
     max-width: 380px;
-    margin-left: 5px !important;
-    margin-right: 5px !important;
-    padding-bottom: 25px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    padding: 0 !important;
+
+}
+
+.block-card a {
+    padding-bottom: 20px !important;
+    display: block;
+    overflow: hidden;
 }
 
 .block-card .news-title{
@@ -268,10 +288,22 @@ article .content .field--type-text-long ul li:before{
     font-weight: bold;
     font-size: 1.45rem;
     line-height: 2rem;
-    margin-left:5px;
     text-align: center;
     cursor: pointer;
 }
+
+.navigation_arrow_homepage.next_arrow {
+    margin-left: 5px;
+}
+
+@media (min-width: 768px) and (max-width:980px ) {
+    .title-solution-banner .col-md-3.slider-nav {
+        padding-right: 0px !important;
+        padding-left: 0px! important;
+    }
+}
+
+
 
 .section-title-corporate .title,
 .section-title-solution .title{
@@ -304,6 +336,10 @@ article .content .field--type-text-long ul li:before{
     color: #fff;
 }
 
+.section-title-solution {
+    padding-left: 20px;
+}
+
 .section-solution{
     display: inline-block;
 }
@@ -314,6 +350,10 @@ article .content .field--type-text-long ul li:before{
     table-layout: fixed;
     width: 100%;
 }
+.homepage-banner-container {
+    padding: 0 20px;
+}
+
 .solution-homepage .carousel-solution td.left-zone,
 .solution-homepage .carousel-solution td.right-zone{
     padding: 50px 45px;
@@ -572,9 +612,14 @@ article .content .field--type-text-long ul li:before{
     text-align: left;
 }
 
+
+#tab-expertise-banner li a  {
+    height: 100px;
+}
+
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
-        display: block!important;
+       display: block!important;
     }
 }
 @media (max-width: 767px) {
