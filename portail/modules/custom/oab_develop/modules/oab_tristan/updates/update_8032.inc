@@ -56,7 +56,7 @@ foreach ($vocaList as $voca => $languageList) {
   }
 }
 
-foreach ($doublons as $voca => $languageList) {
+foreach ($doublons as $voca => $termlist) {
   foreach ($termlist as $key => $term) {
     ##on cherche l'Objet
     $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
