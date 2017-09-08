@@ -106,7 +106,7 @@ function theme_boosted_preprocess_page(&$variables) {
         }
     }
   }
-  }
+
 }
 function theme_boosted_preprocess_views_view(&$variables){
   $view = $variables['view'];
