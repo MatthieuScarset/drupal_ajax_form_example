@@ -211,3 +211,10 @@ function oab_christophe_update_8032() {
 function oab_christophe_update_8033() {
   include_once("updates/update_8033.inc");
 }
+
+/**
+ *  correction de l'update 8026 d'Amel qui entre en conflit avec les champ "field_title" et "field_link" du paragraph related content
+ */
+function oab_christophe_update_8034() {
+  include_once("updates/update_8034.inc");
+}
