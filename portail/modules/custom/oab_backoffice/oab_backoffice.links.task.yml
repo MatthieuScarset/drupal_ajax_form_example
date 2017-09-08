@@ -7,3 +7,8 @@ oab.settings_pardot_tab:
   route_name: oab.settings_pardot
   title: Settings
   base_route: oab.settings_pardot
+
+oab.general_settings_tab:
+  route_name: oab.general_settings
+  title: General Settings
+  base_route: oab.general_settings
