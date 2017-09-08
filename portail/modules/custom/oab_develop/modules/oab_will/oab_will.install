@@ -23,13 +23,13 @@ function oab_will_update_8001() {
 }
 
 /**
- * changement du poids du module a 30 et
- * RUBYPORTAILOBS-2739 insertion du champs contributeur externe au users
+ * RUBYPORTAILOBS-2722 changement du poids du module a 20
  */
 
 function oab_will_update_8002() {
     include_once("updates/update_8002.inc");
 }
+
 
 /**
  * RUBYPORTAILOBS-2703insertion de trad Submit RU et FR
