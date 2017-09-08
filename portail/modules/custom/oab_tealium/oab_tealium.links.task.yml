@@ -1,0 +1,4 @@
+oab.settings_tealium:
+  route_name: oab.settings_tealium
+  title: Settings
+  base_route: oab.settings_tealium

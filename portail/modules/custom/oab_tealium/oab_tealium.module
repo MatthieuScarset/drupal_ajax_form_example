@@ -1,0 +1,12 @@
+<?php
+
+function oab_tealium_page_attachments(array &$attachments) {
+  $attachments['#attached']['drupalSettings']['tealium']['sous_domaine'] = 'Portail';
+  $attachments['#attached']['drupalSettings']['tealium']['univers_affichage'] = 'Orange Business';
+  $attachments['#attached']['drupalSettings']['tealium']['sous_univers'] = 'Portail';
+  $attachments['#attached']['drupalSettings']['tealium']['domaine_marketing'] = 'TRANSVERSE';
+  $attachments['#attached']['drupalSettings']['tealium']['code_univers'] = 'OB';
+  $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'Plop';
+  $attachments['#attached']['drupalSettings']['tealium']['titre_page'] = 'Test';
+  $attachments['#attached']['drupalSettings']['tealium']['tealium_url'] = '//tags.tiqcdn.com/utag/orange/obscare/qa/utag.js';
+}
