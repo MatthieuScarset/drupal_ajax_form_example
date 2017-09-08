@@ -54,3 +54,45 @@
     width: 600px;
     height: 300px;
 }
+
+#block-contactbarstandard {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+}
+
+.solaris-contactbar {
+    font-size: 4rem !important;
+    padding-right: 1rem;
+}
+
+.textlink-contactbar {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-top: 10px;
+    position: absolute;
+}
+.textlink-contactbar a{
+    color: white;
+}
+
+.iconblock {
+    position: relative;
+}
+
+.iconblock:hover, .iconblock a:hover {
+    color: rgb(255,121,0);
+    cursor: pointer;
+}
+
+#block-contactbarenstandard {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+}
+
+#block-contactbarpress {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+}
