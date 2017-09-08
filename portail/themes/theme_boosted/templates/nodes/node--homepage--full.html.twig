@@ -90,7 +90,7 @@
         {% if content.field_title_color.0["#markup"] == "Black" %}
             {% set colorClass = "homepage-title-black" %}
         {% endif %}
-        <div class="section-title-top-zone {{ colorClass }}">
+        <div class="section-title-top-zone {{ colorClass }} container-fluid-navbar">
             <div class="col-md-7 no-padding text-left subhead-title">
                 {{ content.field_subhead_title_top_zone }}
             </div>
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-1 col-xs-12 col-xs-offset-1 carousel-solution no-padding">
+    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 carousel-solution no-padding">
         <div class="block-card-container">
             {% for key, news in content.field_news_top_zone if key|first != '#'  %}
                 <div class="col-xl-4 col-lg-offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 block-card text-align-center" style="background-color: white; ">
@@ -130,7 +130,7 @@
     {% if content.field_solution_banner_title|render|trim is not empty %}
     <div class="col-md-12 col-xs-12 banner-bg solution-banner" style="background: url({{ url }}) ">
         <div class="container">
-            <div class="col-md-offset-1 section-title-solution">
+            <div class="col-md-offset-1 section-title-solution container-fluid-navbar">
                 <div class="col-md-5 no-padding text-left title">
                     {{ content.field_solution_banner_title }}
                 </div>
@@ -282,7 +282,7 @@
 
         <!-- Partner Zone Homepage -->
         {% if content.field_partner_title|render|trim is not empty %}
-        <div class="col-md-10 col-md-offset-1 homepage-banner partner-banner col-xs-hidden" {#style="display: none"#}>
+        <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 homepage-banner partner-banner" {#style="display: none"#}>
             <div class="title">
                 {{ content.field_partner_title }}
             </div>
@@ -316,7 +316,7 @@
 
 
         <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
-            <div class="section-corporate">
+            <div class="section-corporate container-fluid-navbar">
                 <div class="section-title-corporate">
                     <div class="col-md-7  col-xs-12" >
                         <div class="col-md-12 no-padding text-left title">
@@ -333,7 +333,7 @@
                     </div>
 
                     {% if content.field_corporate_show_menu %}
-                        <div class="menu-right hidden-xs">
+                        <div class="menu-right hidden-xs hidden-sm">
                             <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
                             {{ oab_drupal_menu('our-regional-presence')  }}
                         </div>
@@ -347,7 +347,7 @@
 
     </div>
     {% if content.field_corporate_show_menu %}
-        <div class="container visible-xs">
+        <div class="container visible-xs visible-sm">
 
             <div class="menu-right col-xs-12">
                 {% if content.field_corporate_menu is not null %}
@@ -365,9 +365,9 @@
                 <div class="row text-center">
                     {% for key, infography in content.field_infography if key|first != '#'  %}
                     {% if key == 0 %}
-                    <div class="col-md-2 col-md-offset-1 col-xs-12  block-infography" >
+                    <div class="col-md-2 col-md-offset-1 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10  block-infography" >
                         {% else %}
-                        <div class="col-md-2 block-infography col-xs-12 " >
+                        <div class="col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10 block-infography col-xs-12 " >
                             {% endif %}
                             {{ infography }}
                         </div>
