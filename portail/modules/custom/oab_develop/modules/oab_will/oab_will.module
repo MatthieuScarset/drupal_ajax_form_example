@@ -17,6 +17,8 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     $current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
     $edit_form = false;
+
+
 /*
     foreach($form as $key=>$value){
         oabt($key);
