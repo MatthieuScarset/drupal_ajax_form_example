@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\editor\Entity\Editor;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Database\Database;
+use Drupal\image\Entity\ImageStyle;
+use \Drupal\file\Entity\File;
+
+function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $languages = \Drupal::languageManager()->getLanguages();
+    $current_user_language = Drupal::currentUser()->getPreferredLangcode();
+
+    $edit_form = false;
+/*
+    foreach($form as $key=>$value){
+        oabt($key);
+    }
+
+    oabt("fin");
+*/
+}
