@@ -891,12 +891,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 15px;
     }
 
-
     .partner-banner .views-view-grid .views-row {
         margin-left: -20px;
     }
 }
-
 
 .rebond article, .block-mediatheque {
     margin: 2rem 2rem;
@@ -1179,4 +1177,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .homepage-title-black {
     color: black;
+}
+
+.path-webform .region-content form .container{
+    padding-bottom: 1rem;
+}
+
+.path-webform .region-content form #edit-actions{
+    padding: 1rem 0;
 }
