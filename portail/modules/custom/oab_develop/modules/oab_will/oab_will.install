@@ -2,6 +2,7 @@
 
 function oab_will_install() {
     drupal_set_installed_schema_version('oab_will', 8000);
+    module_set_weight("oab_will",30);
 }
 
 
@@ -14,7 +15,7 @@ function oab_will_update_dependencies() {
 }
 
 /**
- * RUBYPORTAILOBS-2739 Rajout champ contributeur externe au user
+ * RUBYPORTAILOBS-2722 rajout daste par defaut au champs de publication
  */
 
 function oab_will_update_8001() {
@@ -22,10 +23,17 @@ function oab_will_update_8001() {
 }
 
 /**
- * RUBYPORTAILOBS-2722 changement du poids du module a 20
+ * changement du poids du module a 30 et
+ * RUBYPORTAILOBS-2739 insertion du champs contributeur externe au users
  */
 
 function oab_will_update_8002() {
     include_once("updates/update_8002.inc");
 }
 
+/**
+ * RUBYPORTAILOBS-2703insertion de trad Submit RU et FR
+*/
+function oab_will_update_8003(){
+    include_once("updates/update_8003.inc");
+}
