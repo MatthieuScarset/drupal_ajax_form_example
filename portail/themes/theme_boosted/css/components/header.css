@@ -207,6 +207,10 @@
   position: static;
 }
 
+.dropdown-menu {
+    top:auto !important;
+}
+
 #items_megamenu h2 {
   margin-top:0rem;
   margin-bottom:1.3em;
