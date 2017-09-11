@@ -494,6 +494,10 @@ article .content .field--type-text-long ul li:before{
     background-color: #fff;
 }
 
+#tab-expertise-banner div.tab-title {
+    text-align: left;
+}
+
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
