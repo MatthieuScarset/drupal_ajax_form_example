@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\locale\SourceString;
 
 /**
  * Ajout des traductions russes des mois
