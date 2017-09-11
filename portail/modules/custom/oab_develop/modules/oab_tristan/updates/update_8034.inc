@@ -41,6 +41,8 @@ $translations = array(
   array("source" => "Document", "translation" => array("ru" => "Брошюра")),
   array("source" => "Download", "translation" => array("ru" => "Скачать")),
   array("source" => "Read more", "translation" => array("ru" => "Читать дальше")),
+  array("source" => "Load more", "translation" => array("ru" => "Читать дальше")),
+  array("source" => "Load More", "translation" => array("ru" => "Читать дальше")),
 
   //Where we are
   array("source" => "All offices", "translation" => array("ru" => "Офисы")),
