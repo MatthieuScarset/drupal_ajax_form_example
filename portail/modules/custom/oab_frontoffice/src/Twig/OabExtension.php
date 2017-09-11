@@ -79,10 +79,13 @@ class OabExtension extends \Twig_Extension {
       die();
   }*/
   function kint_t($array, $stop = false) {
-    kint($array);
+    $moduleHandler = \Drupal::service('module_handler');
+    if($moduleHandler->moduleExists('kint')) {
+      kint($array);
 
-    if ($stop)
-      die();
+      if ($stop)
+        die();
+    }
   }
 
   function d_config($config){

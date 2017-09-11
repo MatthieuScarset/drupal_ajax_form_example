@@ -65,7 +65,6 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                         if ($new_url != ''
                             && $new_url !== $current_uri
                         ) {
-                            oabt($new_url,true);
                             $response = new RedirectResponse($new_url, 301);
                             $event->setResponse($response);
                         }
