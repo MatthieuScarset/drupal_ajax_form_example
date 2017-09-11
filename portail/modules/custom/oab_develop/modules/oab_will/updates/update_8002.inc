@@ -2,9 +2,12 @@
 
 
 /*
- * gestion du module en poid de 30.
+ * changement sur la valeur par defaut dde la date de publication
  */
 
+/*
+ * RUBYPORTAILOBS-2739 insertion du champs contributeur externe au users
+ */
 
 oabt_YmlImport('core.entity_form_display.user.user.default.yml');
 oabt_YmlImport('core.entity_view_display.user.user.default.yml');

@@ -355,6 +355,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 
+.section-title-corporate {
+    margin-left: -10px;
+}
+
 .section-title-corporate .title,
 .section-title-solution .title{
     font-size: 3rem;
@@ -487,18 +491,26 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
+#tab-expertise-banner li {
+    background-color: #eee;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
 #tab-expertise-banner li a{
     color: #999;
     text-align: center;
     padding: 3rem;
-    background-color: #eee;
     border: none;
-    border-bottom: 1px solid #ccc;
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.8rem;
-    display: table;
+    display: block;
+    height: 100%;
     width: 100%;
+}
+#tab-expertise-banner li a:hover {
+    background-color: #eee;
 }
 
 
@@ -508,6 +520,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
+    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -518,7 +531,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: text-top;
 }
 
-#tab-expertise-banner li.active a{
+#tab-expertise-banner li.active {
     color: #F16E00;
     background-color: #fff;
     border-top: 1px solid #ccc;
@@ -526,6 +539,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #fff;
 }
+
+#tab-expertise-banner li.active a:hover {
+    background-color: #fff;
+}
+
+#tab-expertise-banner div.tab-title {
+    text-align: left;
+}
+
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
@@ -605,6 +627,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .section-corporate{
     max-width: 1080px;
     margin: auto;
+    padding-left: -10px;
     color: #fff;
 }
 .section-corporate .title{
@@ -650,7 +673,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 15px;
     padding-bottom: 15px;
     width: 95%;
->>>>>>> RUBYPORTAILOBS-2912
 }
 
 .corporate-banner{
@@ -872,14 +894,13 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 15px;
     }
 
-
     .partner-banner .views-view-grid .views-row {
         margin-left: -20px;
     }
 }
 
-
 .rebond article, .block-mediatheque {
+    margin: 2rem 2rem;
     padding: 3rem 2rem;
     margin-bottom: 2rem;
 }
@@ -1061,7 +1082,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     line-height: 2rem;
 
 }
-}
+
 
 .div-display-table {
     display: table;
@@ -1076,14 +1097,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .webform-button--submit, .webform-button--draft {
     margin-top: 1rem;
+}
 .webform-confirmation {
     padding: 1rem;
+}
 .page-node-type-solution .titre1,
 .page-node-type-industry .titre1,
 .page-node-type-country .titre1,
 .page-node-type-region .titre1 {
     padding-top: 6rem;
     margin-top: 0;
+}
 
 #arrow-back-to-filter {
 
