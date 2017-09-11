@@ -130,6 +130,7 @@ view_mode ? view_mode|clean_class,
 
     {% set pardot_iframe = d_config('oab.pardot').get('iframe_url') %}
     {% set filename = "" %}
+    {% set fullUrl = "" %}
 
     {% for key, file in content.field_file  %}
         {% if key == "#items" %}
@@ -137,7 +138,7 @@ view_mode ? view_mode|clean_class,
             {% set file_entity = media.field_image_file.entity %}
             {% set inactiveClasse = "" %}
             {% if media is not empty %}
-                {% set filename = '?dw=' ~ media.field_file.entity.filename.value %}
+                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder ~ media.field_file.entity.filename.value %}
             {% endif %}
         {% endif %}
     {% endfor %}
