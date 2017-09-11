@@ -45,7 +45,7 @@ $translations = array(
   array("source" => "Load more", "translation" => array("ru" => "Читать дальше")),
   array("source" => "Load More", "translation" => array("ru" => "Читать дальше")),
 
-  //Where we are
+  //Where we are - Contacts - Our local offices
   array("source" => "All offices", "translation" => array("ru" => "Офисы")),
   array("source" => "Contact", "translation" => array("ru" => "Контакт")),
   array("source" => "Our local offices", "translation" => array("ru" => "Контакты")),
@@ -70,7 +70,103 @@ foreach ($translations AS $translation) {
     $translation = $storage->createTranslation(array(
       'lid' => $string->lid,
       'language' => $language,
-      'translation' => $translated_string,
+      'translation' => $translated_string
     ))->save();
   }
 }
+
+//////////////////////////////////
+/// Ajout des trads pour le context "Long month name"
+///
+
+//Mois dans le context "Long month name"
+$translations_LMNcontext = array(
+  array("source" => "January", "translation" => array("ru" => "Января")),
+  array("source" => "February", "translation" => array("ru" => "Февраля")),
+  array("source" => "March", "translation" => array("ru" => "Марта")),
+  array("source" => "April", "translation" => array("ru" => "Апреля")),
+  array("source" => "May", "translation" => array("ru" => "Мая")),
+  array("source" => "June", "translation" => array("ru" => "Июня")),
+  array("source" => "July", "translation" => array("ru" => "Июля")),
+  array("source" => "August", "translation" => array("ru" => "Августа")),
+  array("source" => "September", "translation" => array("ru" => "Сентября")),
+  array("source" => "October", "translation" => array("ru" => "Октября")),
+  array("source" => "November", "translation" => array("ru" => "Ноября")),
+  array("source" => "December", "translation" => array("ru" => "Декабря")),
+
+  array("source" => "January", "translation" => array("fr" => "Janvier")),
+  array("source" => "February", "translation" => array("fr" => "Février")),
+  array("source" => "March", "translation" => array("fr" => "Mars")),
+  array("source" => "April", "translation" => array("fr" => "Avril")),
+  array("source" => "May", "translation" => array("fr" => "Mai")),
+  array("source" => "June", "translation" => array("fr" => "Juin")),
+  array("source" => "July", "translation" => array("fr" => "Juillet")),
+  array("source" => "August", "translation" => array("fr" => "Août")),
+  array("source" => "September", "translation" => array("fr" => "Septembre")),
+  array("source" => "October", "translation" => array("fr" => "Octobre")),
+  array("source" => "November", "translation" => array("fr" => "Novembre")),
+  array("source" => "December", "translation" => array("fr" => "Décembre")),
+);
+
+$storage = \Drupal::service('locale.storage');
+
+foreach ($translations_LMNcontext AS $translation) {
+  $string = $storage->findString(array(
+        'source' => $translation['source'],
+        'context'  => 'Long month name')
+  );
+  if (is_null($string)) {
+    $string = new SourceString();
+    $string->setString($translation['source']);
+    $string->setStorage($storage);
+    $string->save();
+  }
+
+  foreach ($translation['translation'] AS $language => $translated_string) {
+    // Create translation. If one already exists, it will be replaced.
+    $translation = $storage->createTranslation(array(
+      'lid' => $string->lid,
+      'language' => $language,
+      'translation' => $translated_string
+    ))->save();
+  }
+}
+
+
+
+#############################
+#############################
+##Ajouts de taxos russes pour le voca Région
+$termes = array(
+  "Азия",
+  "Ближний Восток и Африка",
+  "Европа",
+  "Латинская Америка",
+  "Северная Америка",
+  "Россия"
+);
+
+#Création des taxos
+$config = array();
+
+foreach ($terms as $term)
+{
+  //vérification de l'existance du terme pour ce vocabulaire
+  $query = \Drupal::entityQuery('taxonomy_term');
+  $query->condition('vid', "regions");
+  $query->condition('langcode','ru');
+  $query->condition('name', $term);
+  $entity = $query->execute();
+
+  ##On le cherche et on le crée que s'il existe
+  if(!isset($entity) || empty($entity)) {
+    //s'il n'existe pas on le crée
+    $entity = \Drupal\taxonomy\Entity\Term::create([
+      'vid' => "regions",
+      'name' => $term,
+      'langcode' => 'ru',
+    ]);
+    $entity->save();
+  }
+}
+
