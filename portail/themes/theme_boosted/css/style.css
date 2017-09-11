@@ -327,6 +327,10 @@ article .content .field--type-text-long ul li:before{
 
 
 
+.section-title-corporate {
+    margin-left: -10px;
+}
+
 .section-title-corporate .title,
 .section-title-solution .title{
     font-size: 3rem;
@@ -488,6 +492,7 @@ article .content .field--type-text-long ul li:before{
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
+    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -509,6 +514,10 @@ article .content .field--type-text-long ul li:before{
 
 #tab-expertise-banner li.active a:hover {
     background-color: #fff;
+}
+
+#tab-expertise-banner div.tab-title {
+    text-align: left;
 }
 
 .paragraph--type--homepage-banner-experience{
@@ -590,6 +599,7 @@ article .content .field--type-text-long ul li:before{
 .section-corporate{
     max-width: 1080px;
     margin: auto;
+    padding-left: -10px;
     color: #fff;
 }
 .section-corporate .title{
