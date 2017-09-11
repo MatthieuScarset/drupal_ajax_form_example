@@ -137,22 +137,14 @@ view_mode ? view_mode|clean_class,
             {% set file_entity = media.field_image_file.entity %}
             {% set inactiveClasse = "" %}
             {% if media is not empty %}
-                {% set filename = media.field_file.entity.filename.value %}
+                {% set filename = '?dw=' ~ media.field_file.entity.filename.value %}
             {% endif %}
-
         {% endif %}
     {% endfor %}
 
     {% if content.field_file['#language'] == 'en'%}
     <div class="pardot-form" style="margin-top: 4rem;">
-        <iframe src="" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
-        <script language="javascript">
-            var loc = window.location.toString()
-            params = loc.split('?')[1];
-            var y = "{{ pardot_iframe }}" + "?" + params;
-            document.getElementById("myFrame").src=y;
-            var x = document.getElementById("myFrame").src;
-        </script>
+        <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
     </div>
     {% endif %}
 </article>
