@@ -58,10 +58,13 @@
 .oab-synomia-search-header-block-form .top-btn-search i,
 .oab-synomia-search-header-block-form .top-btn-search .search-link{
     position: absolute;
-    top: 5px !important;
+    top: 4px !important;
     right: 5px;
 }
 
 .oab-synomia-search-header-block-form .top-btn-search i{
     margin : 0 !important;
+}
+.oab-synomia-search-header-block-form .top-btn-search .glyphicon-search{
+    font-size: 2rem !important;
 }

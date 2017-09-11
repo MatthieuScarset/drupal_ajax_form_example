@@ -11,3 +11,9 @@ function oab_synomia_search_engine_install() {
 function oab_synomia_search_engine_update_8001() {
 	include_once("updates/update_8001.inc");
 }
+/**
+ * Traduction d'interface pour Synomia
+ */
+function oab_synomia_search_engine_update_8002() {
+	include_once("updates/update_8002.inc");
+}
