@@ -12,6 +12,7 @@ $translations = array(
   array("source" => "Solution", "translation" => array("ru" => "Решения")),
   array("source" => "Industry", "translation" => array("ru" => "Oтрасли")),
   array("source" => "Share", "translation" => array("ru" => "Поделиться")),
+  array("source" => "Share", "translation" => array("fr" => "Partager")),
   array("source" => "Follow us", "translation" => array("ru" => "Подпишитесь на наши новости")),
 
   //Mois & Années
