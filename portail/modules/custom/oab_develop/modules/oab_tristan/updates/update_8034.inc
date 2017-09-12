@@ -51,6 +51,7 @@ $translations = array(
   array("source" => "Our local offices", "translation" => array("ru" => "Контакты")),
   array("source" => "All", "translation" => array("ru" => "Все")),
   array("source" => "Country", "translation" => array("ru" => "Cтрана")),
+  array("source" => "Region", "translation" => array("ru" => "Pегионы")),
 );
 
 
@@ -137,7 +138,7 @@ foreach ($translations_LMNcontext AS $translation) {
 #############################
 #############################
 ##Ajouts de taxos russes pour le voca Région
-$termes = array(
+/*$termes = array(
   "Азия",
   "Ближний Восток и Африка",
   "Европа",
@@ -170,3 +171,4 @@ foreach ($terms as $term)
   }
 }
 
+*/
