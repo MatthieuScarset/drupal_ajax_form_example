@@ -268,6 +268,7 @@ p[class*='bg_']{
     max-height: 280px;
     height: 280px;
     padding-left: 0;
+    padding-right: 0;
     width: 100%;
     display: flex;
 }
@@ -309,6 +310,11 @@ p[class*='bg_']{
 .banner-topzone-pwp .topzonebg{
     margin: auto;
     width: 100%;
+}
+
+.banner-topzone .topzonebg .rightcol,
+.banner-topzone-pwp .topzonebg .rightcol{
+    text-align: right;
 }
 
 _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
