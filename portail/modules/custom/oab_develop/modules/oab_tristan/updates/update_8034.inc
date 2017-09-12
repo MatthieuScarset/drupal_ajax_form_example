@@ -138,37 +138,24 @@ foreach ($translations_LMNcontext AS $translation) {
 #############################
 #############################
 ##Ajouts de taxos russes pour le voca Région
-/*$termes = array(
-  "Азия",
-  "Ближний Восток и Африка",
-  "Европа",
-  "Латинская Америка",
-  "Северная Америка",
-  "Россия"
+$termes = array(
+  "Asia Pacific" => "Азия",
+  "Middle East & Africa" => "Ближний Восток и Африка",
+  "Europe" => "Европа",
+  "Latin America" => "Латинская Америка",
+  "North America" => "Северная Америка",
+  "Russia" => "Россия"
 );
 
-#Création des taxos
-$config = array();
-
-foreach ($terms as $term)
-{
-  //vérification de l'existance du terme pour ce vocabulaire
-  $query = \Drupal::entityQuery('taxonomy_term');
-  $query->condition('vid', "regions");
-  $query->condition('langcode','ru');
-  $query->condition('name', $term);
-  $entity = $query->execute();
-
-  ##On le cherche et on le crée que s'il existe
-  if(!isset($entity) || empty($entity)) {
-    //s'il n'existe pas on le crée
-    $entity = \Drupal\taxonomy\Entity\Term::create([
-      'vid' => "regions",
-      'name' => $term,
-      'langcode' => 'ru',
-    ]);
-    $entity->save();
+foreach ($termes as $term => $trad) {
+  $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
+  foreach($termsArray as $foundterm) {
+    if (!empty($foundterm) && !$foundterm->hasTranslation('ru')) {
+      $entity_array = $foundterm->toArray();
+      $translated_fields = [];
+      $translated_fields['name'] = $trad;
+      $translated_entity_array = array_merge($entity_array, $translated_fields);
+      $foundterm->addTranslation('ru', $translated_entity_array)->save();
+    }
   }
 }
-
-*/
