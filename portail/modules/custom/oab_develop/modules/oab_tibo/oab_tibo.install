@@ -176,3 +176,9 @@ function oab_tibo_update_8022() {
 function oab_tibo_update_8023() {
     include_once("updates/update_8023.inc");
 }
+/**
+ * Suppression d un block top zone qui créait un dysfonctionnement
+ */
+function oab_tibo_update_8024() {
+    include_once("updates/update_8024.inc");
+}
