@@ -175,6 +175,9 @@
   //Pour afficher la flèche vers l'ancre du filtre lorsque les filtres ne sont plus visibles
   $(window).scroll(function(){
     showhideFilters();
+      if ($(window).width() > 767){
+          $(".navbar-nav li.open").removeClass("open");
+      }
   });
 
   //Pour savoir si j'affiche la flèche au chargement de la page
