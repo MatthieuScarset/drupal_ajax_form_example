@@ -159,3 +159,10 @@ foreach ($termes as $term => $trad) {
     }
   }
 }
+
+
+##Ajout d'un format de date RU pour le format "Node created date"
+$collection = \Drupal::service('config.storage')->createCollection('language.ru');
+$collection->write('core.date_format.node_created_date', array (
+  'pattern' => 'd F Y',
+));
