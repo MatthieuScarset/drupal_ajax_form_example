@@ -264,3 +264,10 @@ function oab_tristan_update_8032() {
 function oab_tristan_update_8033() {
   include_once("updates/update_8033.inc");
 }
+
+/**
+ * Ajout de traductions
+ */
+function oab_tristan_update_8034() {
+  include_once("updates/update_8034.inc");
+}
