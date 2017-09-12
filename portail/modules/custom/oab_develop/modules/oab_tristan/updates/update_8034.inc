@@ -137,7 +137,7 @@ foreach ($translations_LMNcontext AS $translation) {
 
 #############################
 #############################
-##Ajouts de taxos russes pour le voca Région
+##Ajouts de taxos russes pour le voca Région (En gros : trad des régions en RU)
 $termes = array(
   "Asia Pacific" => "Азия",
   "Middle East & Africa" => "Ближний Восток и Африка",
