@@ -77,7 +77,7 @@
     <div class="encart col-lg-12">
         <div class="bigKey col-lg-5 nopadding">{{ day }}</div>
         <div class="lowKey col-lg-7 nopadding">
-            {{ month }}<br/>{{ year }}
+            {{ month|trans }}<br/>{{ year }}
         </div>
     </div>
     {# Pour faire la marge du trait identique aux autres blocs,
@@ -95,7 +95,7 @@
 
             {% if file_entity is not null and file_entity.filesize.value is not null %}
 
-                <span>{% trans %}Dossier de presse{% endtrans %} - {{ file_entity.getFilename | file_format }}
+                <span>{{ 'Press folder'|trans }} - {{ file_entity.getFilename | file_format }}
                         {{ file_entity.getsize | format_bytes }} </span>
                 <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
             {% endif %}
