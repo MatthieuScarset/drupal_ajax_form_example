@@ -92,14 +92,21 @@ class MapRegionsCountriesForm extends FormBase {
 		$query->condition('n.status', 1, '=');
 		$query->addField('t', 'tid', 'region_tid');
 		$query->addField('t', 'name', 'region_name');
+    $query->addField('t', 'langcode', 'region_langcode');
 		$query->orderBy('t.name');
 		$results =	$query->execute()->fetchAll();
 
 		$table_regions = array();
-		$table_regions['all'] = 'All';
-		foreach ($results as $region){
-			if(!array_key_exists($region->region_tid, $table_regions) && !empty($region->region_tid)){
-				$table_regions[$region->region_tid] = $region->region_name;
+		$table_regions['all'] = $this->t('All');
+
+
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+    foreach ($results as $region){
+			if(!array_key_exists($region->region_tid, $table_regions)
+            && !empty($region->region_tid)
+            && $region->region_langcode == $current_language ){
+			  $table_regions[$region->region_tid] = $region->region_name;
 			}
 		}
 		return $table_regions;
