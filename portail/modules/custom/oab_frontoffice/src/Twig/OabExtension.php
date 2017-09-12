@@ -8,6 +8,7 @@
 namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\views\Views;
 
 class OabExtension extends \Twig_Extension {
 
@@ -29,6 +30,8 @@ class OabExtension extends \Twig_Extension {
 
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
+
+          new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
       ];
 }
 
@@ -228,5 +231,33 @@ class OabExtension extends \Twig_Extension {
 					}
 				}
         return $empty;
+    }
+
+    /**
+     * Returns the total rows count for Drupal view.
+     *
+     * @param string $view_name
+     *   The name of the view.
+     * @param int $tid
+     *   The id of the argument.
+     *
+     * @return array
+     *   A render array for the view.
+     */
+    public function view_count($view_name, $tid) {
+        // recupere la vue
+        $args = [$tid];
+        $view = Views::getView($view_name);
+        $view->setDisplay('block_1');
+        $view->setArguments($args);
+        $view->preExecute();
+        $view->execute();
+        //$content = $view->buildRenderable();
+        $total_rows = $view->total_rows;
+
+        return [
+            'rows' => $total_rows,
+            'render' => $view->render('block_1')
+        ];
     }
 }
