@@ -1,13 +1,23 @@
 (function ($, Drupal, Bootstrap) {
   $(document).ready(function () {
-    var sous_domaine = Drupal.settings.tealium.sous_domaine;
-    var univers_affichage = Drupal.settings.tealium.univers_affichage;
-    var sous_univers = Drupal.settings.tealium.sous_univers;
-    var domaine_marketing = Drupal.settings.tealium.domaine_marketing;
-    var code_univers = Drupal.settings.tealium.code_univers;
-    var type_page = Drupal.settings.tealium.type_page;
-    var titre_page = Drupal.settings.tealium.titre_page;
-    var tealium_url = Drupal.settings.tealium.tealium_url;
+    var sous_domaine = drupalSettings.tealium.sous_domaine;
+    var univers_affichage = drupalSettings.tealium.univers_affichage;
+    var sous_univers = drupalSettings.tealium.sous_univers;
+    var domaine_marketing = drupalSettings.tealium.domaine_marketing;
+    var code_univers = drupalSettings.tealium.code_univers;
+    var type_page = drupalSettings.tealium.type_page;
+    var titre_page = drupalSettings.tealium.titre_page;
+    var tealium_url = drupalSettings.tealium.tealium_url;
+
+    var utag_data={
+      "sous_domaine" : sous_domaine,
+      "univers_affichage" : univers_affichage,
+      "sous_univers" : sous_univers,
+      "domaine_marketing" : domaine_marketing ,
+      "code_univers" : code_univers,
+      "type_page" : type_page,
+      "titre_page" : titre_page
+    };
 
     (function(a,b,c,d){
       a=tealium_url;
