@@ -271,3 +271,10 @@ function oab_tristan_update_8033() {
 function oab_tristan_update_8034() {
   include_once("updates/update_8034.inc");
 }
+
+/**
+ * Ajout de la traductabilité des homePage
+ */
+function oab_tristan_update_8035() {
+  include_once("updates/update_8035.inc");
+}
