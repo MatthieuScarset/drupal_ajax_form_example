@@ -2,9 +2,8 @@
 
 
 /*
- * changement sur la valeur par defaut dde la date de publication
+ * RUBYPORTAILOBS-2722 rajout daste par defaut au champs de publication
  */
-
 
 oabt_YmlImport('field.field.node.blog_post.field_start_date.yml');
 oabt_YmlImport('field.field.node.customer_story.field_start_date.yml');
