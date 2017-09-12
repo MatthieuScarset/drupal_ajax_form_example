@@ -316,9 +316,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    if ($current_language == 'fr') {
-      if ( isset($form['actions']['submit']['#value']) ) {
-        $form['actions']['submit']['#value'] = "Filtrer";
+    if ( isset($form['actions']['submit']['#value']) ) {
+      if ($current_language == 'fr') {
+         $form['actions']['submit']['#value'] = "Filtrer";
+      } elseif ($current_language == 'ru') {
+        $form['actions']['submit']['#value'] = "Найти";
       }
     }
   }
