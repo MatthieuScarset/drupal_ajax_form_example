@@ -232,7 +232,7 @@ class OabExtension extends \Twig_Extension {
         // on enlève la dernière partie
         $cursor = strrpos($url, '/') + 1;
         $url = substr($url, 0, $cursor);
-        return urlencode($url);
+        return $url;
     }
 
     /**
