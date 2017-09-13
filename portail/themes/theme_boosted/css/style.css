@@ -106,7 +106,8 @@ article .content .field--type-text-long ul li:before{
     display: block;
     overflow: hidden;
 }
-.view-display-id-page_partners .display-subhomes .encart-image{
+.view-display-id-page_partners .display-subhomes .encart-image,
+.view-display-id-page_customer .display-subhomes .encart-image{
     display: flex;
     -ms-flex: 1;
     -webkit-flex: 1;
@@ -123,7 +124,8 @@ article .content .field--type-text-long ul li:before{
     width: 100%;
 }
 
-.view-display-id-page_partners img{
+.view-display-id-page_partners img,
+.view-display-id-page_customer img{
     max-width: 10rem;
 }
 
