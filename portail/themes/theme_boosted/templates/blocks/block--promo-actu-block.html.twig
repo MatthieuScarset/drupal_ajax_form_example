@@ -45,7 +45,7 @@
  * @ingroup templates
  */
 #}
-<section{{ attributes.addClass('block', 'clearfix') }}>
+<section{{ attributes.addClass('block', 'clearfix' ) }}>
 
     {% block content %}
 
@@ -61,8 +61,6 @@
             <a href=" {{ content.url_promoactu }} " class="btn btn-inverse btn-primary">{{ content.textelien_promoactu }}
                 </a>
 
-
-
         </div>
 
 
@@ -72,6 +70,7 @@
         {% else %}
             {{ content }}
     {% endif %}
+
     {% endblock %}
 </section>
 
