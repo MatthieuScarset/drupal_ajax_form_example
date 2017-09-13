@@ -1198,3 +1198,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .path-webform .region-content form #edit-actions{
     padding: 1rem 0;
 }
+
+#block-localnav #local_nav{
+    z-index: 1;
+}
