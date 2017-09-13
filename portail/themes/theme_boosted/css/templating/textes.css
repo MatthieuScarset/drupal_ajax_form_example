@@ -455,6 +455,10 @@ a.contact_link {
     text-decoration: underline;
 }
 
+.region-content article a{
+    text-decoration: underline;
+}
+
 
 /*
 *  TEMPLATE CONTENU LIE

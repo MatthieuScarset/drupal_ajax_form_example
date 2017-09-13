@@ -127,6 +127,10 @@ article .content .field--type-text-long ul li:before{
     max-width: 10rem;
 }
 
+.view-display-id-page_document img{
+    width: auto;
+}
+
 .display-subhomes .bigKey{
     font-size: 7rem;
     font-weight: bold;
