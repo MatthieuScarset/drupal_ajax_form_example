@@ -128,7 +128,7 @@ article .content .field--type-text-long ul li:before{
 }
 
 .view-display-id-page_document img{
-    width: auto;
+    width: auto !important;
 }
 
 .display-subhomes .bigKey{
