@@ -278,3 +278,11 @@ function oab_tristan_update_8034() {
 function oab_tristan_update_8035() {
   include_once("updates/update_8035.inc");
 }
+
+/**
+ * Réimport de la config de la vue "Block rebond document"
+ * qui semble avoir ete alteree en recette
+ */
+function oab_tristan_update_8036() {
+  include_once("updates/update_8036.inc");
+}
