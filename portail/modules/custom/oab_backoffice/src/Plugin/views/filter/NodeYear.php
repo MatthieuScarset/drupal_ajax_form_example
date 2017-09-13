@@ -53,12 +53,7 @@ class NodeYear extends Date {
         	$timestamp_finish = mktime(0,0,0,12,31, $this->value['value']);
             $this->query->addWhereExpression(0, "node_field_data.created >= $timestamp_begin");
 	        $this->query->addWhereExpression(1, "node_field_data.created <= $timestamp_finish");
-        }/*
-        kint($this->value);
-        if(!empty($this->value['value']) && $this->value['value'] != 'All') {
-          $year = $this->value['value'];
-          $this->query->addWhereExpression(0, "YEAR(FROM_UNIXTIME(node_field_data.created)) = $year");
-        }*/
+        }
     }
 
     /**
