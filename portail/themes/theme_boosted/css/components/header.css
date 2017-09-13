@@ -203,7 +203,8 @@
 }
 
 #block-main-navigation-en,
-#block-main-navigation-fr {
+#block-main-navigation-fr,
+#block-main-navigation-ru {
   position: static;
 }
 
