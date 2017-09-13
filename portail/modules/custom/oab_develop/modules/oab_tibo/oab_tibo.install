@@ -182,3 +182,9 @@ function oab_tibo_update_8023() {
 function oab_tibo_update_8024() {
     include_once("updates/update_8024.inc");
 }
+/**
+ * Réactivation d ajax sur les vues subhomes
+ */
+function oab_tibo_update_8025() {
+    include_once("updates/update_8025.inc");
+}
