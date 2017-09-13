@@ -1,3 +1,3 @@
 <?php
 
-oabt_YmlImport('view.view.subhomes.yml');
+oabt_YmlImport('views.view.subhomes.yml');
