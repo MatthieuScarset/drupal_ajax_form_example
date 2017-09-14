@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: node_created_date
+label: 'Node created date'
+locked: false
+pattern: 'F d, Y'
