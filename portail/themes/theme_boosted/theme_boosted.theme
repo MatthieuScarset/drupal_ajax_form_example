@@ -46,6 +46,34 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 
 }
 
+
+function theme_boosted_preprocess_node(&$variables) {
+
+  if (isset($variables['node'])
+  && is_object($variables['node'])){
+    switch ($variables['node']->type->entity){
+      case 'homepage':
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "HP";
+        break;
+      case 'product':
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = t("our products");
+        $variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'fiches_produits';
+        $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+        break;
+      case 'customer_story':
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients témoignent";
+        $variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'temoignage';
+        $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+        break;
+    }
+  }
+
+  $request = \Drupal::request();
+  if ($request->attributes->has('_title')) {
+    $variables['#attached']['drupalSettings']['tealium']['type_page'] = $request->attributes->get('_title');
+  }
+}
+
 function theme_boosted_preprocess_page(&$variables) {
   if (\Drupal::routeMatch()->getParameter('node')) {
     $node = \Drupal::routeMatch()->getParameter('node');
@@ -107,7 +135,12 @@ function theme_boosted_preprocess_page(&$variables) {
     }
   }
 
+  $request = \Drupal::request();
+  if ($request->attributes->has('_title')) {
+    $variables['#attached']['drupalSettings']['tealium']['type_page'] = $request->attributes->get('_title');
+  }
 }
+
 function theme_boosted_preprocess_views_view(&$variables){
   $view = $variables['view'];
   $id = $view->storage->id();
@@ -142,7 +175,6 @@ function theme_boosted_preprocess_views_view(&$variables){
 			$variables['contact_url'] = 'http://www.google.fr';
 		}
 	}
-
 }
 function theme_boosted_preprocess_views_view_list(&$variables){
   $view = $variables['view'];
@@ -157,7 +189,6 @@ function theme_boosted_preprocess_views_view_list(&$variables){
 			}
 		}
 	}
-
 }
 function theme_boosted_preprocess_views_view_fields(&$variables){
 	$view = $variables['view'];

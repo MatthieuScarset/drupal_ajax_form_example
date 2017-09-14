@@ -260,7 +260,7 @@
                     <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
                         {% for key, item in node.field_banner_expertise %}
                             <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
-                                <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab">
+                                <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
@@ -289,7 +289,7 @@
             <div class="tabpanel-partner">
                 {{ oab_drupal_view('homepage_partner', 'block_1') }}
                 <div class="col-md-12 text-right no-padding no-margin">
-                    <a class="btn btn-homepage btn-homepage-partners" href="{{ path('view.subhomes.page_partners') }}">
+                    <a class="btn btn-homepage btn-homepage-partners" href="{{ path('view.subhomes.page_partners') }}" onmousedown="utag_link('Homepage', 'Partenaires', '{{ content.field_partners_button_text.0["#context"].value|raw }}', '')">
                         {{ content.field_partners_button_text.0["#context"].value }}
                     </a>
                 </div>
@@ -325,7 +325,7 @@
                         <div class="clearfix"></div>
                         <div class="col-md-12 no-padding text-left highlight-corporate">
                             {{ content.field_corporate_highlight }}
-                           <a class="btn btn-default" href="{{ content.field_corporate_button_link.0["#url"] }}">
+                           <a class="btn btn-default" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
                                 {{ content.field_corporate_button_text.0["#context"].value }}
                             </a>
                         </div>

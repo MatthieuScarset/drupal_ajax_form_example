@@ -1,0 +1,22 @@
+oab.tealium:
+  type: config_object
+  label: 'Tealium'
+  mapping:
+    sous_domaine:
+      type: label
+      label: 'sous domaine'
+    univers_affichage:
+      type: label
+      label: 'univers affichage'
+    sous_univers:
+      type: label
+      label: 'sous univers'
+    domaine_marketing:
+      type: label
+      label: 'domaine marketing'
+    code_univers:
+      type: label
+      label: 'code univers'
+    tealium_url:
+      type: label
+      label: 'tealium url'
