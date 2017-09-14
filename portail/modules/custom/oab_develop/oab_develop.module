@@ -237,8 +237,6 @@ function oabt_TranslationImport($source_import,$language_import,$translation_imp
             ))->save();
         }
     }
-}
-
 /** Permet de faire un import yml d'un module au format fichier
  * @param $file_name nom du fichier avec extention .yml
  * @param $dir_name sous-arbo de config dans le module cible
