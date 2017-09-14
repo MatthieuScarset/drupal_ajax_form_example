@@ -45,7 +45,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
       new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
         new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
-        new \Twig_SimpleFilter('get_files_folder', [$this, 'get_files_folder']),
+        new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
     ];
 
     return $filters;
@@ -225,13 +225,13 @@ class OabExtension extends \Twig_Extension {
      *
      * @param $url
      */
-    public function get_files_folder($uri) {
+    public function get_files_folder_pardot($uri) {
         $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
         $cursor = strrpos($url, '/sites/default/files');
         $url = substr($url, $cursor);
         // on enlève la dernière partie
         $cursor = strrpos($url, '/') + 1;
-        $url = substr($url, 0, $cursor);
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
         return $url;
     }
 
