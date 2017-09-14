@@ -8,6 +8,7 @@
 namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\views\Views;
 
 class OabExtension extends \Twig_Extension {
 
@@ -29,6 +30,8 @@ class OabExtension extends \Twig_Extension {
 
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
+
+          new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
       ];
 }
 
@@ -39,6 +42,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
       new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
         new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
+        new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
     ];
 
     return $filters;
@@ -73,10 +77,13 @@ class OabExtension extends \Twig_Extension {
       die();
   }*/
   function kint_t($array, $stop = false) {
-    kint($array);
+    $moduleHandler = \Drupal::service('module_handler');
+    if($moduleHandler->moduleExists('kint')) {
+      kint($array);
 
-    if ($stop)
-      die();
+      if ($stop)
+        die();
+    }
   }
 
   function d_config($config){
@@ -210,6 +217,21 @@ class OabExtension extends \Twig_Extension {
     }
 
     /**
+     * Returns a url without http(s) to avoir SSL warning and other bad bad things
+     *
+     * @param $url
+     */
+    public function get_files_folder_pardot($uri) {
+        $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
+        $cursor = strrpos($url, '/sites/default/files');
+        $url = substr($url, $cursor);
+        // on enlève la dernière partie
+        $cursor = strrpos($url, '/') + 1;
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
+        return $url;
+    }
+
+    /**
      * Returns if the field is empty
      *
      * @param Object $field
@@ -228,5 +250,33 @@ class OabExtension extends \Twig_Extension {
 					}
 				}
         return $empty;
+    }
+
+    /**
+     * Returns the total rows count for Drupal view.
+     *
+     * @param string $view_name
+     *   The name of the view.
+     * @param int $tid
+     *   The id of the argument.
+     *
+     * @return array
+     *   A render array for the view.
+     */
+    public function view_count($view_name, $tid) {
+        // recupere la vue
+        $args = [$tid];
+        $view = Views::getView($view_name);
+        $view->setDisplay('block_1');
+        $view->setArguments($args);
+        $view->preExecute();
+        $view->execute();
+        //$content = $view->buildRenderable();
+        $total_rows = $view->total_rows;
+
+        return [
+            'rows' => $total_rows,
+            'render' => $view->render('block_1')
+        ];
     }
 }

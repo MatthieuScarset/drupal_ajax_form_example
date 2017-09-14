@@ -183,6 +183,8 @@ class AxiomeContentImporter {
 
 		$imageId = null;
 		$styleTopZone = ImageStyle::load('top_zone');
+        $styleMedium = ImageStyle::load('medium');
+        $styleThumbnail = ImageStyle::load('thumbnail');
 
 		$filesystem = \Drupal::service('file_system');
 		// Create file entity.
@@ -199,11 +201,11 @@ class AxiomeContentImporter {
 		$destination = $styleTopZone->buildUri($url);
 		$styleTopZone->createDerivative($original_image, $destination);
 
-		/*$destination = $styleMedium->buildUri($url);
+		$destination = $styleMedium->buildUri($url);
 		$styleMedium->createDerivative($original_image, $destination);
 
 		$destination = $styleThumbnail->buildUri($url);
-		$styleThumbnail->createDerivative($original_image, $destination);*/
+		$styleThumbnail->createDerivative($original_image, $destination);
 
 		if(empty($data['balise_alt'])){
             $balise_alt = "";
@@ -232,6 +234,8 @@ class AxiomeContentImporter {
 
         $imageId = null;
         $styleTopZone = ImageStyle::load('subhome');
+        $styleMedium = ImageStyle::load('medium');
+        $styleThumbnail = ImageStyle::load('thumbnail');
 
         $filesystem = \Drupal::service('file_system');
         // Create file entity.
@@ -247,6 +251,12 @@ class AxiomeContentImporter {
 
         $destination = $styleTopZone->buildUri($url);
         $styleTopZone->createDerivative($original_image, $destination);
+
+        $destination = $styleMedium->buildUri($url);
+        $styleMedium->createDerivative($original_image, $destination);
+
+        $destination = $styleThumbnail->buildUri($url);
+        $styleThumbnail->createDerivative($original_image, $destination);
 
         if(empty($data['balise_alt'])){
             $balise_alt = "";

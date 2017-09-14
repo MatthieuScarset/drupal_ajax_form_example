@@ -455,6 +455,10 @@ a.contact_link {
     text-decoration: underline;
 }
 
+.region-content article a{
+    text-decoration: underline;
+}
+
 
 /*
 *  TEMPLATE CONTENU LIE
@@ -745,7 +749,6 @@ p.contenu {
 #mobile_dropdown_subnav ul li{
     line-height: 3rem;
 }
-
 
 .page-node-type-solution .node-socialbar{
     margin-top: 3rem;

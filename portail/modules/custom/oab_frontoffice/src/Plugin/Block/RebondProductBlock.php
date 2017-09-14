@@ -73,7 +73,7 @@ class RebondProductBlock extends BlockBase {
             $block['rebondProduct_type'] = 'boutique';
             $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_shops'];
 
-          } elseif (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
+          } else*/if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
           ['Attributes']['online_purchase_customer_area'])) {
 
             $block['rebondProduct']['type'] = 'espaceClient';
@@ -81,7 +81,7 @@ class RebondProductBlock extends BlockBase {
             $block['rebondProduct']['text']  = t("Track your use, manage your bills, options and services 24/24");
             $block['rebondProduct']['link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_customer_area'];
             $block['rebondProduct']['link_text'] = t("Sign in");
-          } */
+          }
 
         }
       }

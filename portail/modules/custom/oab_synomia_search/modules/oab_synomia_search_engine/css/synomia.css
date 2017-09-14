@@ -7,8 +7,7 @@ article.page-synomia-search-results{
 }
 .search_form {
     font-size: 100%;
-    padding: 10px 0 42px;
-    text-align: center;
+    padding: 10px 0 42px 30px !important;
 }
 
 
@@ -30,7 +29,11 @@ article.page-synomia-search-results{
 }
 
 .search_form .container{
-    width: 35%;
+    width: calc(100% - 130px);
+    padding-right: 0 !important;
+}
+.search_form .container .row{
+    margin-right: 0px !important;
 }
 
 .search_form label,
@@ -51,7 +54,7 @@ article.page-synomia-search-results{
     font-size: 1.6rem;
 }
 .block_principal_results .nbResults{
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .corrections ul ,
@@ -149,6 +152,11 @@ article.page-synomia-search-results{
     text-align: right;
     width: calc(100% - 20px);
 }
+
+.page-synomia-search-results .block_principal_results .results_block .results_cluster div.description {
+    padding-right: 30px;
+}
+
 .page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list li .read_more{
     display: block;
     position: absolute;
@@ -198,7 +206,7 @@ article.page-synomia-search-results{
     filter: progid: DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#fe8432', endColorstr='#ff6801');
     border-color: #FF6801;
     color: #FFFFFF;
-    padding-left: 12px;
+    padding-left: 9px;
 }
 .page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:hover .btn-rounded .hover,
 .page-synomia-search-results .block_principal_results .results_block .results_cluster .results-list a:hover .btn-rounded .focus  {

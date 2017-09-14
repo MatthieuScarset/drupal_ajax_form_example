@@ -1,9 +1,14 @@
 <article class="page-synomia-search-results">
 <div class="region region-content" >
-    <div class='search_form col col-md-12 col-sm-12'>
-        {% if searchForm %}
-        {{ searchForm }}
-        {% endif %}
+    <div class='col col-md-12 col-sm-12'>
+        <div class='col-lg-3 col-md-12 col-sm-12'>
+
+        </div>
+        <div class="search_form col-lg-9 col-md-12 col-sm-12">
+            {% if searchForm %}
+                {{ searchForm }}
+            {% endif %}
+        </div>
     </div>
     <div class="block_principal_results col-lg-12 col-md-12 col-sm-12">
 
@@ -48,7 +53,6 @@
                                         <div class="description">{{ result.description }}</div>
                                         <div class="read_more">
                                                     <span class="btn btn-rounded">
-                                                        <span class="hover">{{ 'See more'|t }}</span>
                                                         <span aria-hidden="true" class="glyphicon glyphicon-menu-right icon_nav" data-target="#search-form" data-toggle="collapse"></span>
                                                     </span>
                                         </div>

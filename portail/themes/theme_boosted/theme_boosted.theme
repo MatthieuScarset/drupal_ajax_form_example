@@ -142,6 +142,7 @@ function theme_boosted_preprocess_views_view(&$variables){
 			$variables['contact_url'] = 'http://www.google.fr';
 		}
 	}
+
 }
 function theme_boosted_preprocess_views_view_list(&$variables){
   $view = $variables['view'];
@@ -156,6 +157,7 @@ function theme_boosted_preprocess_views_view_list(&$variables){
 			}
 		}
 	}
+
 }
 function theme_boosted_preprocess_views_view_fields(&$variables){
 	$view = $variables['view'];

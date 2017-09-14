@@ -316,9 +316,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    if ($current_language == 'fr') {
-      if ( isset($form['actions']['submit']['#value']) ) {
-        $form['actions']['submit']['#value'] = "Filtrer";
+    if ( isset($form['actions']['submit']['#value']) ) {
+      if ($current_language == 'fr') {
+         $form['actions']['submit']['#value'] = "Filtrer";
+      } elseif ($current_language == 'ru') {
+        $form['actions']['submit']['#value'] = "Найти";
       }
     }
   }
@@ -331,6 +333,32 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Thematic'
     );
     $form['field_blog_thematic_target_id']['#options'] = $themes;
+
+    $formats = clean_exposed_filters_by_language(
+      $form['field_blog_format_target_id']['#options'],
+      'Type'
+    );
+    $form['field_blog_format_target_id']['#options'] = $formats;
+
+    $metiers = clean_exposed_filters_by_language(
+      $form['field_job_profile_target_id']['#options'],
+      'Profession'
+    );
+    $form['field_job_profile_target_id']['#options'] = $metiers;
+
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'Industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
+
+    //Suppression ees filtres format, metier et industry pour la subhome RU
+    if($current_language == 'ru' ){
+      unset($form['field_blog_format_target_id']);
+      unset($form['field_job_profile_target_id']);
+      unset($form['field_industry_target_id']);
+    }
+
   }
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
@@ -340,17 +368,30 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_magazine_thematic_target_id']['#options'] = $themes;
 
-    $years = clean_exposed_filters_by_language(
-        $form['field_year_target_id']['#options'],
-        'Year'
+    $formats = clean_exposed_filters_by_language(
+      $form['field_magazine_type_target_id']['#options'],
+      'Type'
     );
-    $form['field_year_target_id']['#options'] = $years;
+    $form['field_magazine_type_target_id']['#options'] = $formats;
 
-    $months = clean_exposed_filters_by_language(
-        $form['field_month_target_id']['#options'],
-        'Month'
+    $metiers = clean_exposed_filters_by_language(
+      $form['field_job_profile_target_id']['#options'],
+      'Profession'
     );
-    $form['field_month_target_id']['#options'] = $months;
+    $form['field_job_profile_target_id']['#options'] = $metiers;
+
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'Industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
+
+    //Suppression ees filtres format, metier et industry pour la subhome RU
+    if($current_language == 'ru' ){
+      unset($form['field_blog_format_target_id']);
+      unset($form['field_job_profile_target_id']);
+      unset($form['field_industry_target_id']);
+    }
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {

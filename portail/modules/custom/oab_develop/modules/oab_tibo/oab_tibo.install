@@ -176,3 +176,22 @@ function oab_tibo_update_8022() {
 function oab_tibo_update_8023() {
     include_once("updates/update_8023.inc");
 }
+/**
+ * Suppression d un block top zone qui créait un dysfonctionnement
+ */
+function oab_tibo_update_8024() {
+    include_once("updates/update_8024.inc");
+}
+/**
+ * Réactivation d ajax sur les vues subhomes
+ */
+function oab_tibo_update_8025() {
+    include_once("updates/update_8025.inc");
+}
+
+/**
+ * MAJ vue media admin
+ */
+function oab_tibo_update_8026() {
+    include_once("updates/update_8026.inc");
+}

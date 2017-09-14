@@ -51,12 +51,21 @@ class PromoActuBlock extends BlockBase {
                 if(count($field_axiome_data) > 0)
                 {
 
-                    $axiome_data = $field_axiome_data;
-                    $block['titre_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_title']['@attributes'][name];
-                    $block['texte_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_text']['@attributes'][name];
-                    $block['textelien_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_link_text']['@attributes'][name];
-                    $block['url_promoactu'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['free_test_url']['@attributes'][name];
+                    if( isset($field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'])) {
+                      $zoneSeeMoreAttr = $field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'];
 
+                      if (isset($zoneSeeMoreAttr['free_test_title']) && is_string($zoneSeeMoreAttr['free_test_title'])
+                        && isset($zoneSeeMoreAttr['free_test_text']) && is_string($zoneSeeMoreAttr['free_test_text'])
+                        && isset($zoneSeeMoreAttr['free_test_link_text']) && is_string($zoneSeeMoreAttr['free_test_link_text'])
+                        && isset($zoneSeeMoreAttr['free_test_url']) && is_string($zoneSeeMoreAttr['free_test_url'])
+                      ) {
+                          $block['titre_promoactu'] = $zoneSeeMoreAttr['free_test_title'];
+                          $block['texte_promoactu'] = $zoneSeeMoreAttr['free_test_text'];
+                          $block['textelien_promoactu'] = $zoneSeeMoreAttr['free_test_link_text'];
+                          $block['url_promoactu'] = $zoneSeeMoreAttr['free_test_url'];
+                      }
+
+                    }
                 }
             }
         }
