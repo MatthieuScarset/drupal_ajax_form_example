@@ -1016,6 +1016,10 @@ a.home_banner_element_mobile_link {
     height: 10px;
     display: inline-block;
 }
+
+.homeplaylist-element-date-wrapper {
+    position: relative;
+}
 .valorisation-element-date {
     text-align: center;
     background-color: black;
