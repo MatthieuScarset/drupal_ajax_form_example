@@ -25,6 +25,8 @@
       utag_data[custom_variable_key] = custom_variable_value;
     }
 
+    window.utag_data = utag_data;
+
     (function(a,b,c,d){
       a=tealium_url;
       b=document;c="script";d=b.createElement(c);d.src=a;d.type="text/java"+c;d.async=true;
