@@ -7,6 +7,8 @@
     var code_univers = drupalSettings.tealium.code_univers;
     var type_page = drupalSettings.tealium.type_page;
     var titre_page = drupalSettings.tealium.titre_page;
+    var custom_variable_key = drupalSettings.tealium.custom_variable_key;
+    var custom_variable_value = drupalSettings.tealium.custom_variable_value;
     var tealium_url = drupalSettings.tealium.tealium_url;
 
     var utag_data={
@@ -18,6 +20,10 @@
       "type_page" : type_page,
       "titre_page" : titre_page
     };
+
+    if (typeof custom_variable_key !== 'undefined' && typeof custom_variable_value !== 'undefined'){
+      utag_data[custom_variable_key] = custom_variable_value;
+    }
 
     (function(a,b,c,d){
       a=tealium_url;
