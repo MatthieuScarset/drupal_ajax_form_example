@@ -810,7 +810,11 @@ a.home_banner_element_mobile_link {
     padding-top: 5px;
 }
 
-/* PAGE THEMATIQUE BANNER */
+.item-playlist-content .views-field-field-profile .field-content a {
+    text-decoration: none;
+}
+
+    /* PAGE THEMATIQUE BANNER */
 
 .page-node-type-hp-eclairage-thematique section.left-column > .region, aside.right-column > .region {
     background-color: white;
