@@ -29,7 +29,7 @@ article.page-synomia-search-results{
 }
 
 .search_form .container{
-    width: calc(100% - 110px);
+    width: calc(100% - 130px);
     padding-right: 0 !important;
 }
 .search_form .container .row{
