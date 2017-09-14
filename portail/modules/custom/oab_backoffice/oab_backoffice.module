@@ -317,10 +317,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 }*/
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
-    drupal_set_message('on passe dans update');
-    drupal_set_message('instance '.($entity instanceof FileInterface));
     /** @var \Drupal\file\Entity\File $entity */
-    if ($entity instanceof FileInterface) {
+    if ($entity instanceof Drupal\file\Entity\File) {
         $image = \Drupal::service('image.factory')->get($entity->getFileUri());
         /** @var \Drupal\Core\Image\Image $image */
         if ($image->isValid()) {
@@ -328,19 +326,27 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             // on vide les caches en BDD (pas trouvé mieux pour la top zone)
             $connection = Database::getConnection();
             $connection->delete('cache_render')->condition('cid', '%topzone%', 'LIKE')->execute();
-            // on checke les file_managed qui utilisent le media
-            drupal_set_message('entity id : '.$entity->id());
-            drupal_set_message('image uri : '.$image_uri);
-            $results= $connection->select('file_usage','fu')->fields('fu')->condition('id', $entity->id())->condition('type', 'media')->condition('module', 'file')->execute();
-            foreach($results as $r){
-                $connection->update('file_managed','fm')->fields(['uri' => $image_uri])->condition('fid', $r->fid)->execute();
-            }
             // on regénère les styles
             $styles = ImageStyle::loadMultiple();
             /** @var \Drupal\image\Entity\ImageStyle $style */
+            $tabRefresh = array(
+                'file_entity_browser_thumbnail',
+                'homepage_expertise',
+                'homepage_solution_banner',
+                'homepage_news',
+                'homepage_top_zone',
+                'large',
+                'medium',
+                'subhome',
+                'thumbnail',
+                'top_zone',
+                'top_zone_big'
+                );
             foreach ($styles as $style) {
-                $destination = $style->buildUri($image_uri);
-                $style->createDerivative($image_uri, $destination);
+                if(in_array($style->id(), $tabRefresh)){
+                    $destination = $style->buildUri($image_uri);
+                    $style->createDerivative($image_uri, $destination);
+                }
             }
         }
     }
