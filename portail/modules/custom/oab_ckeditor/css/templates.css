@@ -122,3 +122,12 @@
 .obs_template div[class*=" col-"]:last-child{
     padding-right: 0;
 }*/
+
+/*
+    Ajout d'un margin bottom lorsque les contenus passe en col-sm-12
+ */
+@media (max-width: 767px) {
+    .obs_template .col-sm-12 p {
+        margin-bottom: 2rem;
+    }
+}
