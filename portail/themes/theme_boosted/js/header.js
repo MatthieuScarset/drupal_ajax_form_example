@@ -344,6 +344,25 @@
         };
         $('div.btn-decouvrir-plus').click(clickOnDiscover);
 
+        var clickOnContact = function() {
+            if($('#contactbar-container-standard').hasClass('hidden'))
+            {
+                $('#contactbar-container-standard').removeClass('hidden');
+                $('#contactbar-container-light').addClass('hidden');
+            }
+            else
+            {
+                $('#contactbar-container-standard').addClass('hidden');
+                $('#contactbar-container-light').removeClass('hidden');
+            }
+
+        };
+        $('div.expandContactBar').click(clickOnContact);
+        $('div.collapseContactBar').click(clickOnContact);
+
+
+
+
         if ($('.home-playlist-items').length) {
 
             $('.home-playlist-items').each(function(key, item) {
@@ -419,7 +438,7 @@
             });
         }
 
-        $('#myAffix').affix({
+      /*  $('#myAffix').affix({
             offset: {
                 top: 100,
                 bottom: function () {
@@ -427,6 +446,9 @@
                 }
             }
         })
+        $('#myAffix').affix('checkPosition')*/
+
+
 
     });
 

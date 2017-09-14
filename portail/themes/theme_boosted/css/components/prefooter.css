@@ -58,7 +58,8 @@
 #block-contactbarstandard {
     background-color: #333;
     color: white;
-    padding: 2rem 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .solaris-contactbar {
@@ -88,11 +89,45 @@
 #block-contactbarenstandard {
     background-color: #333;
     color: white;
-    padding: 2rem 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#block-contactbarrustandard {
+    background-color: #333;
+    color: white;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #block-contactbarpress {
     background-color: #333;
     color: white;
-    padding: 2rem 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#block-contactbaranalyst {
+    background-color: #333;
+    color: white;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.text-needhelp
+{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+#contactbar-container-light {
+    padding: 1rem 0rem;
+}
+
+#contactbar-container-standard {
+    padding: 2rem 1rem;
+}
+
+.expandContactBar{
+    padding-top: 5px;
+    position: absolute;
 }
