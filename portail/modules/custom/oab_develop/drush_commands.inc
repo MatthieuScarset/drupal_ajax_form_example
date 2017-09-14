@@ -20,6 +20,6 @@ pm-enable -y oab_offices_map
 pm-enable -y oab_synomia_search_flux
 pm-enable -y oab_synomia_search_engine
 pm-enable -y oab_will
-
+pm-enable -y oab_tealium
 updb
 #entity-updates
