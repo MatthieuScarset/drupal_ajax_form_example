@@ -1,4 +1,4 @@
-langcode: fr
+langcode: en
 status: true
 dependencies:
   module:
@@ -6,27 +6,26 @@ dependencies:
     - oab_frontoffice
   theme:
     - theme_boosted
-id: contactbarpress
+id: promoactu
 theme: theme_boosted
-region: prefooter
-weight: 0
+region: sidebar
+weight: -21
 provider: null
-plugin: contact_bar_press_block
+plugin: promo_actu_block
 settings:
-  id: contact_bar_press_block
-  label: 'Contact Bar Press'
+  id: promo_actu_block
+  label: 'Promo Actu'
   provider: oab_frontoffice
   label_display: '0'
-  link_ecrire: 'http://www.orange-business.com/fr/contact-commercial'
-  link_ecrire_text: 'Nous écrire'
+  content: ''
+  content_format: full_html
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      press_kit: press_kit
-      press_release: press_release
+      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
