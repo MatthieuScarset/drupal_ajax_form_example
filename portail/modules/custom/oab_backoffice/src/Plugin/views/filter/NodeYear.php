@@ -47,6 +47,7 @@ class NodeYear extends Date {
      * select any options.
      */
     public function query() {
+
         if(!empty($this->value['value']) && $this->value['value'] != 'All') {
         	$timestamp_begin = mktime(0,0,0,1,1, $this->value['value']);
         	$timestamp_finish = mktime(0,0,0,12,31, $this->value['value']);
@@ -74,7 +75,7 @@ class NodeYear extends Date {
 	    $currentYear = date('Y');
         $years = array();
         for($i = $currentYear; $i >= 2012 ; $i--){
-	        array_push($years, $i);
+	        $years[$i] = $i;
         }
 	    return $years;
     }

@@ -909,15 +909,19 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 15px;
     }
 
+
     .partner-banner .views-view-grid .views-row {
         margin-left: -20px;
     }
 }
 
-.rebond article, .block-mediatheque {
-    margin: 2rem 2rem;
+.rebond article, .block-mediatheque, #block-promoactublock {
+    margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
-    margin-bottom: 2rem;
+}
+
+.rebond .form-group {
+    margin-bottom: 0;
 }
 
 @media (max-width: 767px) {
@@ -1203,3 +1207,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .path-webform .region-content form #edit-actions{
     padding: 1rem 0;
 }
+
+#block-localnav #local_nav{
+    z-index: 1;
+}
+
