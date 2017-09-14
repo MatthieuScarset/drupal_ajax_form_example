@@ -7,8 +7,7 @@ article.page-synomia-search-results{
 }
 .search_form {
     font-size: 100%;
-    padding: 10px 0 42px;
-    text-align: center;
+    padding: 10px 0 42px 30px !important;
 }
 
 
@@ -30,7 +29,11 @@ article.page-synomia-search-results{
 }
 
 .search_form .container{
-    width: 35%;
+    width: calc(100% - 110px);
+    padding-right: 0 !important;
+}
+.search_form .container .row{
+    margin-right: 0px !important;
 }
 
 .search_form label,
@@ -51,7 +54,7 @@ article.page-synomia-search-results{
     font-size: 1.6rem;
 }
 .block_principal_results .nbResults{
-    padding-left: 10px;
+    padding-left: 30px;
 }
 
 .corrections ul ,
