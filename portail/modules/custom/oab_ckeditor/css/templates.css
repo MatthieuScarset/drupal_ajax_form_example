@@ -107,14 +107,18 @@
   padding: 0px;
 }
 
-.obs_template div[class*=" col-"]:first-child{
+/**
+    Mis en commentaire : Semble poser problème
+    La suppression des paddings des 1ères et dernières colonnes augmente par
+    conséquence leur taille disponible à l'intérieur.
+    Exmple pour le 3 columns :
+      |  Col 1  |  Col 2  |  Col 3  |
+      |  234px  |  223px  |  234px  |
+    A voir si cela pose problème ailleurs
+ */
+/*.obs_template div[class*=" col-"]:first-child{
     padding-left: 0;
 }
 .obs_template div[class*=" col-"]:last-child{
     padding-right: 0;
-}
-
-.obs_template div[class*=" obs_background_"] p{
-    padding-left: 0;
-    padding-right: 0;
-}
+}*/
