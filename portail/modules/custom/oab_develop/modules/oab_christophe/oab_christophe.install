@@ -31,6 +31,7 @@ function oab_christophe_update_dependencies() {
   $dependencies['oab_christophe'][8021] = array('oab_amel' => 8014, 'oab_yassine' => 8004	);
   $dependencies['oab_christophe'][8024] = array('oab_amel' => 8017);
   $dependencies['oab_christophe'][8025] = array('oab_yassine' => 8006);
+  $dependencies['oab_christophe'][8035] = array('oab_yassine' => 8020);
 
 	return $dependencies;
 }
@@ -217,4 +218,11 @@ function oab_christophe_update_8033() {
  */
 function oab_christophe_update_8034() {
   include_once("updates/update_8034.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-2416 - modification de la view homepage partner
+ */
+function oab_christophe_update_8035() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
 }
