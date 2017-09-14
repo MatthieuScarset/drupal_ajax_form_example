@@ -705,7 +705,7 @@ a.home_banner_element_mobile_link {
     background-color: black;
     color: white;
     width: 30px;
-    font-weigt: bold;
+    font-weight: bold;
     line-height: 24px;
     font-size: 20px;
     height: 30px;
@@ -810,7 +810,11 @@ a.home_banner_element_mobile_link {
     padding-top: 5px;
 }
 
-/* PAGE THEMATIQUE BANNER */
+.item-playlist-content .views-field-field-profile .field-content a {
+    text-decoration: none;
+}
+
+    /* PAGE THEMATIQUE BANNER */
 
 .page-node-type-hp-eclairage-thematique section.left-column > .region, aside.right-column > .region {
     background-color: white;
@@ -884,8 +888,9 @@ a.home_banner_element_mobile_link {
 }
 
 .home_thematic_columns{
-    paddint-top:80px;
+    padding-top:80px;
 }
+
 .home_thematic_columns_title {
     font-size: 2.4rem;
     font-weight: bold;
@@ -1015,6 +1020,10 @@ a.home_banner_element_mobile_link {
     position: relative;
     height: 10px;
     display: inline-block;
+}
+
+.homeplaylist-element-date-wrapper {
+    position: relative;
 }
 .valorisation-element-date {
     text-align: center;
