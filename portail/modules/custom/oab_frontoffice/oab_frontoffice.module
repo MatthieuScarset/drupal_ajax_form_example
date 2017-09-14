@@ -316,9 +316,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    if ($current_language == 'fr') {
-      if ( isset($form['actions']['submit']['#value']) ) {
-        $form['actions']['submit']['#value'] = "Filtrer";
+    if ( isset($form['actions']['submit']['#value']) ) {
+      if ($current_language == 'fr') {
+         $form['actions']['submit']['#value'] = "Filtrer";
+      } elseif ($current_language == 'ru') {
+        $form['actions']['submit']['#value'] = "Найти";
       }
     }
   }
@@ -339,17 +341,18 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Thematic'
     );
     $form['field_magazine_thematic_target_id']['#options'] = $themes;
-      $years = clean_exposed_filters_by_language(
-          $form['field_year_target_id']['#options'],
-          'Year'
-      );
-      $form['field_year_target_id']['#options'] = $years;
 
-      $months = clean_exposed_filters_by_language(
-          $form['field_month_target_id']['#options'],
-          'Month'
-      );
-      $form['field_month_target_id']['#options'] = $months;
+    $years = clean_exposed_filters_by_language(
+        $form['field_year_target_id']['#options'],
+        'Year'
+    );
+    $form['field_year_target_id']['#options'] = $years;
+
+    $months = clean_exposed_filters_by_language(
+        $form['field_month_target_id']['#options'],
+        'Month'
+    );
+    $form['field_month_target_id']['#options'] = $months;
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
@@ -490,5 +493,19 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
   if ($route_match && $node = $route_match->getParameter('node')) {
     $breadcrumb->addCacheableDependency($node);
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oab_frontoffice_theme($existing, $type, $theme, $path) {
+	$theme = array();
+	$theme['custom-righticonblock'] = array(
+		'variables' => array(
+			'synomiaSearchForm' => array(),
+		),
+		'template' => 'block--righticonblock-custom'
+	);
+	return $theme;
 }
 

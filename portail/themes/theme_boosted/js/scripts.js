@@ -90,8 +90,6 @@
     });
 
 
-
-
       //initialize swiper when document ready
       var mySwiperHomepage = new Swiper ('.swiper-container', {
           // Optional parameters
@@ -130,6 +128,9 @@
       });
 
   });
+
+
+
 
   function getHeaderBarHeight() {
     //pour compter le decalage à faire à cause des barres sticky
@@ -175,6 +176,9 @@
   //Pour afficher la flèche vers l'ancre du filtre lorsque les filtres ne sont plus visibles
   $(window).scroll(function(){
     showhideFilters();
+      if ($(window).width() > 767){
+          $(".navbar-nav li.open").removeClass("open");
+      }
   });
 
   //Pour savoir si j'affiche la flèche au chargement de la page
@@ -259,10 +263,6 @@
           $(e.target).closest('ul').hide().prev('button').removeClass('open').text($(this).text());
           $(e.target).closest('ul').prev('button').append('<span class="caret"></span>');
       });
-
-
-
-
 
   Drupal.behaviors.myBehaviour = {
     attach: function (context, settings) {

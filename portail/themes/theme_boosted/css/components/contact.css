@@ -16,3 +16,20 @@
 
 #contact-message-any-request-form label {
 }
+
+
+
+
+.affix-top {
+
+}
+
+.affix {
+  position: fixed;
+}
+
+.affix-bottom {
+  position: absolute;
+}
+
+

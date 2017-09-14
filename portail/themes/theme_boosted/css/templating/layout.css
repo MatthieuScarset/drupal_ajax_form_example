@@ -499,7 +499,7 @@ body {
     background-color: #eee;
 }
 body > .main-container{
-    margin-bottom: 3rem;
+   /* margin-bottom: 3rem; */
     padding-left: 0;
     padding-right: 0;
 }

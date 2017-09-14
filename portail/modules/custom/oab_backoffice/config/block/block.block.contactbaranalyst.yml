@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: contactbaranalyst
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: contact_bar_analyst_block
+settings:
+  id: contact_bar_analyst_block
+  label: 'Contact Bar Analyst'
+  provider: oab_frontoffice
+  label_display: '0'
+  link_ecrire: 'http://www.orange-business.com/fr/contact-commercial'
+  link_ecrire_text: 'Analyst Relations'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  request_path:
+    id: request_path
+    pages: /ocean82-customer-experience-benchmark-apr-2016
+    negate: false
+    context_mapping: {  }
