@@ -60,7 +60,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                     <span class="home_playlist_count"> | {{ oab_drupal_view_count('home_eclairage_playlist', content.field_playlist_taxonomy_term[0]['#options'].entity.id()).rows }} {{ 'contents'|trans }} </span>
                 </div>
                 <div class="col-md-4 text-right home_playlist-btn home_playlist_nopadding">
-                   <a class="btn btn-info btn-playlist hidden-sm hidden-xs" role="button" href="{{ content.field_link_button[0]['#url'] }}">  {{ content.field_link_button[0]['#title'] }}</a>
+                   <a class="btn btn-info btn-playlist hidden-sm hidden-xs" role="button" href="{{ content.field_link_button[0]['#url'] }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_link_button[0]['#title']|raw }}', '')">  {{ content.field_link_button[0]['#title'] }}</a>
                 </div>
             </div>
 

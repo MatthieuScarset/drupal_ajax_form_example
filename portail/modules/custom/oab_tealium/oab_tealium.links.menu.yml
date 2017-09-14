@@ -1,0 +1,6 @@
+oab.settings_tealium:
+  title: Tealium settings
+  route_name: oab.settings_tealium
+  parent: oab.settings
+  description: 'Configure oab tealium settings'
+  weight: -20

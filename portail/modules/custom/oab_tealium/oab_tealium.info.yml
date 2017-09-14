@@ -1,0 +1,11 @@
+name: OAB Tealium
+description: 'OAB tealium management'
+type: module
+package: OAB
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2017-09-08
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_tealium'
+datestamp: 1504855256
