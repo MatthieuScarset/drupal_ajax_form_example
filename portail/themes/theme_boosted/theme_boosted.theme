@@ -119,22 +119,22 @@ function theme_boosted_preprocess_page(&$variables) {
   if (isset($node) && is_object($node)
   && get_class($node) == 'Drupal\node\Entity\Node') {
     $content_type = $node->bundle();
-    if ($content_type == 'homepage' || $content_type == 'homepage_eclairage') {
-      $variables['page']['containerClass'] = 'container-fluid';
-    }
-    $definitions = \Drupal::service('entity_field.manager')
-    ->getFieldDefinitions('node', $content_type);
+      if ($content_type == 'homepage' || $content_type == 'homepage_eclairage') {
+        $variables['page']['containerClass'] = 'container-fluid';
+      }
+      $definitions = \Drupal::service('entity_field.manager')
+        ->getFieldDefinitions('node', $content_type);
     if (isset($definitions)
-    && array_key_exists('field_display_title', $definitions)) {
+        && array_key_exists('field_display_title', $definitions)) {
       $display_title = $node->get('field_display_title')->getValue();
       if (isset($display_title[0]['value'])
-      && $display_title[0]['value'] == 0
-      && isset($variables['page']['content']['theme_boosted_page_title'])
+          && $display_title[0]['value'] == 0
+          && isset($variables['page']['content']['theme_boosted_page_title'])
       ) {
-        $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+          $variables['page']['content']['theme_boosted_page_title']['#access'] = false;
+      }
       }
     }
-  }
 
   $request = \Drupal::request();
   if ($request->attributes->has('_title')) {
@@ -176,7 +176,6 @@ function theme_boosted_preprocess_views_view(&$variables){
 			$variables['contact_url'] = 'http://www.google.fr';
 		}
 	}
-
 }
 function theme_boosted_preprocess_views_view_list(&$variables){
   $view = $variables['view'];
@@ -191,7 +190,6 @@ function theme_boosted_preprocess_views_view_list(&$variables){
 			}
 		}
 	}
-
 }
 function theme_boosted_preprocess_views_view_fields(&$variables){
 	$view = $variables['view'];
