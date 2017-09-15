@@ -328,3 +328,11 @@ function oab_stephanie_update_8041() {
 	include_once("updates/update_8041.inc");
 }
 
+/**
+ * Nouveaux menus / block our les acces directs
+ */
+
+function oab_stephanie_update_8042() {
+	include_once("updates/update_8042.inc");
+}
+
