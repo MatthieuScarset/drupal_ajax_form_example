@@ -46,6 +46,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
         new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
         new \Twig_SimpleFilter('get_files_folder', [$this, 'get_files_folder']),
+      new \Twig_SimpleFilter('formatDate', [$this, 'formatDate']),
     ];
 
     return $filters;
@@ -255,5 +256,28 @@ class OabExtension extends \Twig_Extension {
 				}
         return $empty;
     }
+
+
+  /**
+   * Render a custom date format with Twig
+   * Use the internal helper "format_date" to render the date using the current language for texts
+   *
+   * Permet surtout d'avoir le "Long month name", que ne permet pas la fonction "format_date",
+   * ce qui est utile pour les mois RU qui ont deux formats
+   */
+  public static function formatDate($date, $format) {
+    if ($date_format = \DateTime::createFromFormat('Y-m-d', $date)) {
+      $timestmap = strtotime($date);
+    }elseif (is_a($date, 'Drupal\Core\Datetime\DrupalDateTime') || is_a($date, 'DateTime')){
+      $timestmap = $date->getTimestamp();
+    }else{
+      $timestmap = $date;
+    }
+
+    return format_date($timestmap, "Node created date", $format);
+  }
+
+
+
 
 }
