@@ -274,7 +274,7 @@ class OabExtension extends \Twig_Extension {
       $timestmap = $date;
     }
 
-    return format_date($timestmap, "Node created date", $format);
+    return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
   }
 
 
