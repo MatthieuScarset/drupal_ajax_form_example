@@ -68,7 +68,7 @@
 
 {% set createdDate = node.getCreatedTime %}
 {% set day = createdDate|date("d") %}
-{% set month = createdDate|date("F") %}
+{% set month = node.getCreatedTime|formatDate("F") %}
 {% set year = createdDate|date("Y") %}
 
 <a href="{{ url }}" class="link-subhomes">
