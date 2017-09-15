@@ -791,6 +791,10 @@ aside.right-column > .region{
     margin-top: 0px !important;
 }
 
+#views-exposed-form-subhomes-page-document.subhomes-filterbar-background{
+    padding: 20px 20px !important;
+}
+
 .subhomes-filterbar-background{
     background-color: #ededed;
     padding: 20px 30px;

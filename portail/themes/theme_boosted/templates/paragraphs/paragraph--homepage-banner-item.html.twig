@@ -38,14 +38,22 @@
  * @ingroup themeable
  */
 #}
+
 {% block paragraph %}
+    {% set zone_type = "Solutions" %}
+    {% if paragraph.parent_field_name.value == "field_solution_banner_left_zone" %}
+        {% set zone_type = "Solutions" %}
+    {% endif %}
+    {% if paragraph.parent_field_name.value == "field_solution_banner_right_zone" %}
+        {% set zone_type = "Industries" %}
+    {% endif %}
 
     <div class="row">
         {% block content %}
             <div class="col-md-12 col-sm-12 col-xs-12 title-content">{{ content.field_card_title}}</div>
             <div class="col-md-12 col-sm-12 col-xs-12 text-content">{{ content.field_card_text }}</div>
             <div class="col-md-12 col-sm-12 col-xs-12 ">
-                <a href="{{ content.field_card_link[0]['#url'] }}" class="btn homepage-solution-button homepage-solution-button-color" role="button">
+                <a href="{{ content.field_card_link[0]['#url'] }}" onmousedown="utag_link('Homepage', {{ zone_type }}, '{{ content.field_card_title[0]['#context']['value'] }}', '')" class="btn homepage-solution-button homepage-solution-button-color" role="button">
                     {{ content.field_button_text }}
                 </a>
             </div>

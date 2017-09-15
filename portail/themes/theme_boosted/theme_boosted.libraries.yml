@@ -37,6 +37,7 @@ global-styling:
     js/jquery.touchSwipe.min.js: {}
     js/slick.min.js: {}
     js/scripts.js: {}
+    js/tealium.js: {}
     js/swiper.jquery.min.js: {}
     js/switch.js: {}
 
