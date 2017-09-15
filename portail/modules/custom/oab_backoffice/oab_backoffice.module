@@ -6,6 +6,7 @@ use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Database\Database;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Entity\EntityInterface;
 use \Drupal\file\Entity\File;
 
 //include_once 'includes/mediatheque.inc';
@@ -287,51 +288,48 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 		$form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
 	}
-    // Regeneration des image style après avoir mis à jour une image
-    if($form_id == 'media_image_edit_form') {
-        $form['#validate'][] = 'oab_backoffice_regenerate_image_style';
+
+    // langue RU pour les webforms
+    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
+        $form['elements']['actions']['#submit__label'] = 'Отправить';
     }
 }
 
-function oab_backoffice_regenerate_image_style($form, &$form_state) {
-    $img = $form_state->getValues();
-    if(isset($img['field_image'][0]['fids'][0])){
-        $fid = $img['field_image'][0]['fids'][0];
-        $entity =  File::load($fid);
-        if ($entity instanceof File) {
-            $image = \Drupal::service('image.factory')->get($entity->getFileUri());
-            if ($image->isValid()) {
-                // vidage de cache à la mano pour la topzone
-                $connection = Database::getConnection();
-                $connection->delete('cache_render')->condition('cid', '%topzone%', 'LIKE')->execute();
-                $connection->delete('cache_render')->condition('cid', '%media_page_list%', 'LIKE')->execute();
+function oab_backoffice_entity_update(EntityInterface $entity) {
+    /** @var \Drupal\file\Entity\File $entity */
+    if ($entity instanceof Drupal\file\Entity\File) {
+        $image = \Drupal::service('image.factory')->get($entity->getFileUri());
+        /** @var \Drupal\Core\Image\Image $image */
+        if ($image->isValid()) {
+            $image_uri = $entity->getFileUri();
+            // on vide les caches en BDD (pas trouvé mieux pour la top zone)
+            $connection = Database::getConnection();
+            $connection->delete('cache_render')->condition('cid', '%topzone%', 'LIKE')->execute();
+            // on regénère les styles
+            $styles = ImageStyle::loadMultiple();
+            /** @var \Drupal\image\Entity\ImageStyle $style */
+            $tabRefresh = array(
+                'file_entity_browser_thumbnail',
+                'homepage_expertise',
+                'homepage_solution_banner',
+                'homepage_news',
+                'homepage_top_zone',
+                'large',
+                'medium',
+                'subhome',
+                'thumbnail',
+                'top_zone',
+                'top_zone_big'
+                );
+            foreach ($styles as $style) {
+                if(in_array($style->id(), $tabRefresh)){
+                    $destination = $style->buildUri($image_uri);
+                    $style->createDerivative($image_uri, $destination);
+                }
             }
         }
     }
 }
-
-/**
- * Permet de rebuilder les image style quand on créé/édite
- * un media. Pas besoin de vider les caches
- * @param $entity
- */
-/*function oab_backoffice_entity_create($entity) {
-    //\Drupal::cache()->delete();
-    oabt($entity, true);
-    if ($entity instanceof File) {
-        $image = \Drupal::service('image.factory')->get($entity->getFileUri());
-        //if ($image->isValid()) {
-            $styles = ImageStyle::loadMultiple();
-            $image_uri = $entity->getFileUri();
-            foreach ($styles as $style) {
-                $destination = $style->buildUri($image_uri);
-                $style->createDerivative($image_uri, $destination);
-                drupal_set_message($style->id().' has been changed for '.$image_uri);
-                $style->flush();
-            }
-        //}
-    }
-}*/
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
 	$values = $form_state->getValues();

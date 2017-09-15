@@ -64,7 +64,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
             : "",
           'url' => $node_url,
           'hashtags' => '',
-          'via' => 'mal_o_guy_baul',
+          'via' => 'orange_business',
           'related' => '',
           'in-reply-to' => ''
         ]
@@ -324,12 +324,39 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   }
 
   // subhome blogs
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
     $themes = clean_exposed_filters_by_language(
       $form['field_blog_thematic_target_id']['#options'],
       'Thematic'
     );
     $form['field_blog_thematic_target_id']['#options'] = $themes;
+
+    $formats = clean_exposed_filters_by_language(
+      $form['field_blog_format_target_id']['#options'],
+      'Type'
+    );
+    $form['field_blog_format_target_id']['#options'] = $formats;
+
+    $metiers = clean_exposed_filters_by_language(
+      $form['field_job_profile_target_id']['#options'],
+      'Profession'
+    );
+    $form['field_job_profile_target_id']['#options'] = $metiers;
+
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'Industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
+
+    //Suppression ees filtres format, metier et industry pour la subhome RU
+    if($current_language == 'ru' ){
+      unset($form['field_blog_format_target_id']);
+      unset($form['field_job_profile_target_id']);
+      unset($form['field_industry_target_id']);
+    }
+
   }
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
@@ -338,17 +365,32 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Thematic'
     );
     $form['field_magazine_thematic_target_id']['#options'] = $themes;
-      $years = clean_exposed_filters_by_language(
-          $form['field_year_target_id']['#options'],
-          'Year'
-      );
-      $form['field_year_target_id']['#options'] = $years;
 
-      $months = clean_exposed_filters_by_language(
-          $form['field_month_target_id']['#options'],
-          'Month'
-      );
-      $form['field_month_target_id']['#options'] = $months;
+    $formats = clean_exposed_filters_by_language(
+      $form['field_magazine_type_target_id']['#options'],
+      'Type'
+    );
+    $form['field_magazine_type_target_id']['#options'] = $formats;
+
+    $metiers = clean_exposed_filters_by_language(
+      $form['field_job_profile_target_id']['#options'],
+      'Profession'
+    );
+    $form['field_job_profile_target_id']['#options'] = $metiers;
+
+    $industries = clean_exposed_filters_by_language(
+      $form['field_industry_target_id']['#options'],
+      'Industry'
+    );
+    $form['field_industry_target_id']['#options'] = $industries;
+
+    //Suppression ees filtres format, metier et industry pour la subhome RU
+    if($current_language == 'ru' ){
+      unset($form['field_blog_format_target_id']);
+      unset($form['field_job_profile_target_id']);
+      unset($form['field_industry_target_id']);
+    }
+
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
@@ -401,6 +443,12 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Month'
     );
     $form['field_month_target_id']['#options'] = $months;
+
+    //Suppression de filtres pour le russe
+    if($current_language == 'ru' ){
+      unset($form['field_type_target_id']);
+    }
+
   }
   // subhome produits
   if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
@@ -422,6 +470,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
 
+    //Suppression de filtres pour le russe
+    if($current_language == 'ru' ){
+      unset($form['field_jobs_target_id']);
+    }
+
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
@@ -442,6 +495,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Profession'
     );
     $form['field_jobs_target_id']['#options'] = $jobs;
+
+    if($current_language == 'ru' ){
+      unset($form['field_jobs_target_id']);
+    }
   }
   // subhome partenaires
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
@@ -463,7 +520,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     );
     $form['field_regions_target_id']['#options'] = $regions;
 
-      $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
       if($current_language != 'en'){
           unset($form['field_regions_target_id']);
       }
@@ -474,5 +531,19 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
   if ($route_match && $node = $route_match->getParameter('node')) {
     $breadcrumb->addCacheableDependency($node);
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oab_frontoffice_theme($existing, $type, $theme, $path) {
+	$theme = array();
+	$theme['custom-righticonblock'] = array(
+		'variables' => array(
+			'synomiaSearchForm' => array(),
+		),
+		'template' => 'block--righticonblock-custom'
+	);
+	return $theme;
 }
 

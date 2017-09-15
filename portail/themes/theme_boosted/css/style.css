@@ -52,6 +52,7 @@
     padding: 0;
 }
 
+article .field--type-text-long ul,
 article .content .field--type-text-long ul,
 article.product .node-axiome-know-more ul{
     list-style: none;
@@ -62,11 +63,13 @@ article.product .node-axiome-know-more ul{
 article.product .node-axiome-know-more ul{
     padding-left: 0;
 }
+article .field--type-text-long ul li,
 article .content .field--type-text-long ul li,
 article.product .node-axiome-know-more ul li{
     position: relative;
     font-size: 1.6rem;
 }
+article .field--type-text-long ul li:before,
 article .content .field--type-text-long ul li:before{
     content: "■";
     color: #FF7900;
@@ -103,16 +106,31 @@ article .content .field--type-text-long ul li:before{
     display: block;
     overflow: hidden;
 }
-.view-display-id-page_partners .display-subhomes .encart-image{
+.view-display-id-page_partners .display-subhomes .encart-image,
+.view-display-id-page_customer .display-subhomes .encart-image{
     display: flex;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
 }
 
 .display-subhomes .encart-image img{
     width: 100%;
 }
 
-.view-display-id-page_partners img{
-    max-width: 11rem;
+.view-display-id-page_partners img,
+.view-display-id-page_customer img{
+    max-width: 10rem;
+}
+
+.view-display-id-page_document img{
+    width: auto !important;
 }
 
 .display-subhomes .bigKey{
@@ -243,11 +261,31 @@ a.link-subhomes:hover .encart-image.subhome-image {
     max-width: 1180px;
     margin-top: -70px;
 }
+
+@media (min-width: 1200px) {
+    .block-card-container {
+        display: flex;
+    }
+}
+
+@media (max-width: 1200px) {
+    .block-card{
+        margin-bottom: 20px;
+    }
+}
+
 .block-card{
     max-width: 380px;
-    margin-left: 5px !important;
-    margin-right: 5px !important;
-    padding-bottom: 25px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    padding: 0 !important;
+
+}
+
+.block-card a {
+    padding-bottom: 20px !important;
+    display: block;
+    overflow: hidden;
 }
 
 .block-card .news-title{
@@ -304,7 +342,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     display:none;
 }
 
-.navigation_arrow{
+.navigation_arrow_homepage{
     width: 20px;
     height: 20px;
     float: left;
@@ -313,9 +351,25 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     font-size: 1.45rem;
     line-height: 2rem;
-    margin-left:5px;
     text-align: center;
     cursor: pointer;
+}
+
+.navigation_arrow_homepage.next_arrow {
+    margin-left: 5px;
+}
+
+@media (min-width: 768px) and (max-width:980px ) {
+    .title-solution-banner .col-md-3.slider-nav {
+        padding-right: 0px !important;
+        padding-left: 0px! important;
+    }
+}
+
+
+
+.section-title-corporate {
+    margin-left: -10px;
 }
 
 .section-title-corporate .title,
@@ -349,6 +403,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #fff;
 }
 
+.section-title-solution {
+    padding-left: 20px;
+}
+
 .section-solution{
     display: inline-block;
 }
@@ -359,6 +417,34 @@ a.link-subhomes:hover .encart-image.subhome-image {
     table-layout: fixed;
     width: 100%;
 }
+.homepage-banner-container {
+    padding: 0 20px;
+}
+@media (max-width:786px ) {
+    .homepage-banner-container {
+        padding: 0;
+    }
+
+    .block-infography {
+        padding-bottom: 2rem;
+    }
+
+    .homepage-banner.partner-banner .tabpanel-partner .views-element-container {
+        overflow: hidden;
+    }
+    .homepage-banner.partner-banner .tabpanel-partner .views-element-container .view-homepage-partner {
+        overflow-x: scroll;
+    }
+    .homepage-banner.partner-banner .tabpanel-partner .views-element-container .view-homepage-partner .views-view-grid horizontal {
+        width: 1000px;
+
+    }
+}
+
+.corporate-infography-banner .infography .description {
+    font-weight: bold;
+}
+
 .solution-homepage .carousel-solution td.left-zone,
 .solution-homepage .carousel-solution td.right-zone{
     padding: 50px 45px;
@@ -418,25 +504,36 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
+#tab-expertise-banner li {
+    background-color: #eee;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
 #tab-expertise-banner li a{
     color: #999;
     text-align: center;
-    padding: 30px;
-    background-color: #eee;
+    padding: 3rem;
     border: none;
-    border-bottom: 1px solid #ccc;
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 1.8rem;
-    display: table;
+    display: block;
+    height: 100%;
     width: 100%;
 }
+#tab-expertise-banner li a:hover {
+    background-color: #eee;
+}
+
+
 .corporate-infography-banner{
     margin-top: -40px;
     background: #fff;
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
+    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -447,7 +544,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: text-top;
 }
 
-#tab-expertise-banner li.active a{
+#tab-expertise-banner li.active {
     color: #F16E00;
     background-color: #fff;
     border-top: 1px solid #ccc;
@@ -455,6 +552,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #fff;
 }
+
+#tab-expertise-banner li.active a:hover {
+    background-color: #fff;
+}
+
+#tab-expertise-banner div.tab-title {
+    text-align: left;
+}
+
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
@@ -507,6 +613,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .partner-banner .views-view-grid .views-row{
     display: table;
     border-spacing:10px;
+    margin-right: 10px;
+
 }
 .partner-banner .views-view-grid .views-col{
     margin-left: 10px;
@@ -525,13 +633,14 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-align: center;
 }
 .partner-banner .views-view-grid .views-col .field--item img{
-    width: 100%;
+    width: 100px;
     height: auto;
 }
 
 .section-corporate{
     max-width: 1080px;
     margin: auto;
+    padding-left: -10px;
     color: #fff;
 }
 .section-corporate .title{
@@ -577,7 +686,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 15px;
     padding-bottom: 15px;
     width: 95%;
->>>>>>> RUBYPORTAILOBS-2912
 }
 
 .corporate-banner{
@@ -617,9 +725,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-align: left;
 }
 
+
+
+
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
-        display: block!important;
+       display: block!important;
     }
 }
 @media (max-width: 767px) {
@@ -795,13 +906,21 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .block-infography .description{
         padding-left: 15px;
     }
+
+
+    .partner-banner .views-view-grid .views-row {
+        margin-left: -20px;
+    }
 }
 
 
-
-.rebond article, .block-mediatheque {
+.rebond article, .block-mediatheque, #block-promoactublock {
+    margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
-    margin-bottom: 2rem;
+}
+
+.rebond .form-group {
+    margin-bottom: 0;
 }
 
 @media (max-width: 767px) {
@@ -1081,3 +1200,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .homepage-title-black {
     color: black;
 }
+
+.path-webform .region-content form .container{
+    padding-bottom: 1rem;
+}
+
+.path-webform .region-content form #edit-actions{
+    padding: 1rem 0;
+}
+
+#block-localnav #local_nav{
+    z-index: 1;
+}
+

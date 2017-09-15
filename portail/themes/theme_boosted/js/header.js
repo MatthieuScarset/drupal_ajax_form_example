@@ -326,6 +326,7 @@
                     }
                 ]
             });
+          jQuery('.related-content-items .slick-track').addClass('row');
         }
 
 

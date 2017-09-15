@@ -45,6 +45,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
       new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
         new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
+        new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
     ];
 
     return $filters;
@@ -79,10 +80,13 @@ class OabExtension extends \Twig_Extension {
       die();
   }*/
   function kint_t($array, $stop = false) {
-    kint($array);
+    $moduleHandler = \Drupal::service('module_handler');
+    if($moduleHandler->moduleExists('kint')) {
+      kint($array);
 
-    if ($stop)
-      die();
+      if ($stop)
+        die();
+    }
   }
 
   function d_config($config){
@@ -213,6 +217,21 @@ class OabExtension extends \Twig_Extension {
     public function url_clean_prefix($url) {
         $url = str_replace('https:', '', $url);
         $url = str_replace('http:', '', $url);
+        return $url;
+    }
+
+    /**
+     * Returns a url without http(s) to avoir SSL warning and other bad bad things
+     *
+     * @param $url
+     */
+    public function get_files_folder_pardot($uri) {
+        $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
+        $cursor = strrpos($url, '/sites/default/files');
+        $url = substr($url, $cursor);
+        // on enlève la dernière partie
+        $cursor = strrpos($url, '/') + 1;
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
         return $url;
     }
 

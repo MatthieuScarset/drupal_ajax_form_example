@@ -55,12 +55,20 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
             {% if content.field_reallink[0]['#url'] %}
             <a href="{{ content.field_reallink[0]['#url']|render }}" style="display: block;">
             {% endif %}
-                <div class="related-content-column-label col-md-12 col-sm-12 col-xs-12">
-                    {{ content.field_title }}
-                </div>
                 <div class="related-content-content col-md-12 col-sm-12 col-xs-12">
                     <div class="image">
-                        {{ content.field_visual }}
+                        {% for key, image in content.field_visual  %}
+
+                            {% set media = image.entity %}
+                            {% set file = media.field_image.entity %}
+                            {% set uri = file.uri.value %}
+                            {% if uri is not null and media.name.value is not null %}
+                                <img src="{{ uri|image_style_uri('related_contents') }}" alt="{{ media.name.value }}" />
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="related-content-column-label">
+                        {{ content.field_title }}
                     </div>
                     <div class="highlight">
                         {{ content.field_catcher }}
