@@ -7,6 +7,7 @@
     <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
         {{ field_customer_case.video|raw }}
     </div>
+    {% if field_customer_case.customer_case_name|trim is not empty %}
     <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
         <div class="bubble">
             <div class="verbatim-title">{{ field_customer_case.customer_case_name }}</div>
@@ -14,5 +15,6 @@
             <p class="verbatim-source">{{ field_customer_case.name_and_function }}</p>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endif %}
