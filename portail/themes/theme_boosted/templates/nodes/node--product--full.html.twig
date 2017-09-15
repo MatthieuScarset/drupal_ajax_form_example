@@ -126,7 +126,7 @@ view_mode ? view_mode|clean_class,
 
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title',
                 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date',
-                'field_axiome_data', 'field_email_owner', 'field_content_owner') }}
+                'field_axiome_data', 'field_email_owner', 'field_content_owner', 'field_visual') }}
     </div>
     {% if field_header is not null %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
