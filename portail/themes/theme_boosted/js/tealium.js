@@ -33,16 +33,17 @@
       a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
     })();
 
-    function utag_link(track_page, track_zone, track_nom, track_cible)
-    {
-      utag.link({
-        "track_page": track_page,
-        "track_zone": track_zone,
-        "track_nom": track_nom,
-        "track_cible": track_cible,
-        "track_type_evt": "clic"
-      });
-    }
   });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
+
+function utag_link(track_page, track_zone, track_nom, track_cible)
+{
+  return utag.link({
+    "track_page": track_page,
+    "track_zone": track_zone,
+    "track_nom": track_nom,
+    "track_cible": track_cible,
+    "track_type_evt": "clic"
+  });
+}
