@@ -41,8 +41,8 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
       new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
       new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
-        new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
-        new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
+      new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
+      new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
       new \Twig_SimpleFilter('formatDate', [$this, 'formatDate']),
     ];
 
