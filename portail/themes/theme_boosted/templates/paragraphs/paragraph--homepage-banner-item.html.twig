@@ -53,7 +53,7 @@
             <div class="col-md-12 title-content">{{ content.field_card_title}}</div>
             <div class="col-md-12 text-content">{{ content.field_card_text }}</div>
             <div class="col-md-12 ">
-                <a href="{{ content.field_card_link[0]['#url'] }}" onmousedown="utag_link('Homepage', {{ zone_type }}, '{{ content.field_card_title[0]['#context']['value'] }}', '')" class="btn homepage-solution-button homepage-solution-button-color" role="button">
+                <a href="{{ content.field_card_link[0]['#url'] }}" onmousedown="utag_link('Homepage', '{{ zone_type }}', '{{ content.field_card_title[0]['#context']['value'] }}', '')" class="btn homepage-solution-button homepage-solution-button-color" role="button">
                     {{ content.field_button_text }}
                 </a>
             </div>
