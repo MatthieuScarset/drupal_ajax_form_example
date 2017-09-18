@@ -227,6 +227,12 @@ function theme_boosted_preprocess_file_link(&$variables){
   //ksr($node->get('field_file'));
 
   $link_text = t("Download") . " " . strtr($file_type, array('/' => '-', '.' => '-'));
+    // pour le russe on met juste Download
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if(substr($current_language, 0, 2) == "ru"){
+        $link_text = t("Download");
+    }
+
   $options['attributes']['title'] = $file_entity->getFilename();
 
   // Classes to add to the file field for icons.
