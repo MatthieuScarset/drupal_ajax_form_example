@@ -9,7 +9,6 @@ dependencies:
   module:
     - node
     - taxonomy
-    - user
 id: rss_feeds
 label: 'RSS feeds'
 module: views
@@ -26,9 +25,8 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
-        options:
-          perm: 'access content'
+        type: none
+        options: {  }
       cache:
         type: none
         options: {  }
@@ -251,7 +249,6 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   feed_blogs_publication:
     display_plugin: feed
@@ -276,7 +273,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_blog:
     display_plugin: feed
@@ -351,7 +347,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_blogger:
     display_plugin: feed
@@ -410,7 +405,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_blogs:
     display_plugin: feed
@@ -436,7 +430,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_magazine:
     display_plugin: feed
@@ -560,7 +553,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_magazine_category:
     display_plugin: feed
@@ -722,7 +714,6 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
   rss_press:
     display_plugin: feed
@@ -847,5 +838,4 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - 'user.node_grants:view'
-        - user.permissions
       tags: {  }
