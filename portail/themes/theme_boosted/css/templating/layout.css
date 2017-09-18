@@ -499,7 +499,7 @@ body {
     background-color: #eee;
 }
 body > .main-container{
-    margin-bottom: 3rem;
+   /* margin-bottom: 3rem; */
     padding-left: 0;
     padding-right: 0;
 }
@@ -789,6 +789,10 @@ aside.right-column > .region{
 
 #related-content-slick-carousel article.media  {
     margin-top: 0px !important;
+}
+
+#views-exposed-form-subhomes-page-document.subhomes-filterbar-background{
+    padding: 20px 20px !important;
 }
 
 .subhomes-filterbar-background{

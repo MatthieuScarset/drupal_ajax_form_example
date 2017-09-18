@@ -90,8 +90,6 @@
     });
 
 
-
-
       //initialize swiper when document ready
       var mySwiperHomepage = new Swiper ('.swiper-container', {
           // Optional parameters
@@ -130,6 +128,9 @@
       });
 
   });
+
+
+
 
   function getHeaderBarHeight() {
     //pour compter le decalage à faire à cause des barres sticky
@@ -259,10 +260,6 @@
           $(e.target).closest('ul').hide().prev('button').removeClass('open').text($(this).text());
           $(e.target).closest('ul').prev('button').append('<span class="caret"></span>');
       });
-
-
-
-
 
   Drupal.behaviors.myBehaviour = {
     attach: function (context, settings) {

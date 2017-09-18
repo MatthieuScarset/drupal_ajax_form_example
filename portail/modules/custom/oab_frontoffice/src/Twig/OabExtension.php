@@ -8,6 +8,7 @@
 namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\views\Views;
 
 class OabExtension extends \Twig_Extension {
 
@@ -25,20 +26,16 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
           new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
-          /*new \Twig_SimpleFunction('kint_t', [$this, 'kint_t'], array(
-          'is_safe' => array('html'),
-          'needs_environment' => TRUE,
-          'needs_context' => TRUE,
-          'is_variadic' => TRUE,
-          )),*/
           new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
+
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
-          ];
+
+          new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
+      ];
 }
 
   public function getFilters() {
-
     $filters = [
       new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
       new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
@@ -188,8 +185,7 @@ class OabExtension extends \Twig_Extension {
         $tree = $menu_tree->transform($tree, $manipulators);
         return $menu_tree->build($tree);
     }
-
-
+    
   /**
    * Encode un texte avec rawurlencode ( ...les %20 à la place des espaces)
    * @param $url
@@ -216,9 +212,9 @@ class OabExtension extends \Twig_Extension {
      * @param $url
      */
     public function url_clean_prefix($url) {
-        $url = str_replace('https:', '', $url);
-        $url = str_replace('http:', '', $url);
-        return $url;
+      $url = str_replace('https:', '', $url);
+      $url = str_replace('http:', '', $url);
+      return $url;
     }
 
     /**
@@ -280,4 +276,31 @@ class OabExtension extends \Twig_Extension {
 
 
 
+    /**
+     * Returns the total rows count for Drupal view.
+     *
+     * @param string $view_name
+     *   The name of the view.
+     * @param int $tid
+     *   The id of the argument.
+     *
+     * @return array
+     *   A render array for the view.
+     */
+    public function view_count($view_name, $tid) {
+        // recupere la vue
+        $args = [$tid];
+        $view = Views::getView($view_name);
+        $view->setDisplay('block_1');
+        $view->setArguments($args);
+        $view->preExecute();
+        $view->execute();
+        //$content = $view->buildRenderable();
+        $total_rows = $view->total_rows;
+
+        return [
+            'rows' => $total_rows,
+            'render' => $view->render('block_1')
+        ];
+    }
 }

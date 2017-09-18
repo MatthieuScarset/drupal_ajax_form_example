@@ -1,3 +1,4 @@
+uuid: a0ba376f-8715-4191-b01d-32681a5161e9
 langcode: en
 status: true
 dependencies:
@@ -5,29 +6,35 @@ dependencies:
     - ctools
     - language
     - oab_frontoffice
-    - system
   theme:
     - theme_boosted
-id: contactbarenstandard
+id: contactbarrustandard
 theme: theme_boosted
 region: prefooter
 weight: 0
 provider: null
-plugin: contact_bar_en_standard_block
+plugin: contact_bar_ru_standard_block
 settings:
-  id: contact_bar_en_standard_block
-  label: 'Contact Bar EN Standard'
+  id: contact_bar_ru_standard_block
+  label: 'Contact Bar RU Standard'
   provider: oab_frontoffice
   label_display: '0'
-  link_offices: 'http://www.orange-business.com/en/where-we-are'
-  link_offices_text: 'Our local offices'
+  link_offices: ' www.orange-business.com/ ru/contacts?region=all&country=659'
+  link_offices_text: 'Найти наш офис'
   link_help: ''
-  link_help_text: 'Get help'
+  link_help_text: 'Сообщить о проблеме'
   link_contact: ''
-  link_contact_text: 'Contact sales'
+  link_contact_text: 'Стать клиентом'
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
+  language:
+    id: language
+    langcodes:
+      ru: ru
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
@@ -42,21 +49,11 @@ visibility:
       industry: industry
       magazine: magazine
       partner: partner
+      press_kit: press_kit
+      press_release: press_release
       product: product
       simple_page: simple_page
       solution: solution
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
-  language:
-    id: language
-    langcodes:
-      en: en
-    negate: false
-    context_mapping:
-      language: '@language.current_language_context:language_interface'
-  request_path:
-    id: request_path
-    pages: /ocean82-customer-experience-benchmark-apr-2016
-    negate: true
-    context_mapping: {  }

@@ -200,9 +200,17 @@ view_mode ? view_mode|clean_class,
     </div>
 
     <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 no-padding">
-        <div class="col-md-12 col-xs-12 col-sm-12 home_playlist">
+        <div class="col-md-12 col-xs-12 col-sm-12 no-padding">
             {% for key, value in content.field_home_playlists if key|first != '#' and key < 4 %}
-                    {{ value }}
+                {% if key is even %}
+                    <div class="home_playlist_grey">
+                       {{ value }}
+                    </div>
+                {% else %}
+                    <div class="home_playlist_white">
+                        {{ value }}
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12 home_playlist hidden" id="home_playlist_end">

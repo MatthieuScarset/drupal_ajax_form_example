@@ -180,6 +180,7 @@ article .content .field--type-text-long ul li:before{
 
 }
 
+
 a.link-subhomes:hover .encart-image.subhome-image {
     background-color: white;
 }
@@ -196,6 +197,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .content a {
     text-decoration: underline;
 }
+
 .content a:hover {
     color: #F16e00;
 }
@@ -907,12 +909,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 15px;
     }
 
-
     .partner-banner .views-view-grid .views-row {
         margin-left: -20px;
     }
 }
-
 
 .rebond article, .block-mediatheque, #block-promoactublock {
     margin: 2rem 2rem 0 2rem;
@@ -989,8 +989,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-left: 0;
 }
 
-.rebond-link,.block-link, .homepage-solution-button {
-
+.rebond-link, .block-link , .homepage-solution-button {
     border: 2px solid #000000;
     padding-right: 3rem;
     padding-left: 3rem;
@@ -1122,15 +1121,19 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-left: 10px;
 }
 
+.webform-button--submit, .webform-button--draft {
+    margin-top: 1rem;
+}
+.webform-confirmation {
+    padding: 1rem;
+}
 .page-node-type-solution .titre1,
 .page-node-type-industry .titre1,
 .page-node-type-country .titre1,
 .page-node-type-region .titre1 {
     padding-top: 6rem;
     margin-top: 0;
-
 }
-
 
 #arrow-back-to-filter {
 
@@ -1159,7 +1162,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 #arrow-back-to-filter a .glyphicon {
-    color : #FFFFFF;
+    color: #FFFFFF;
     font-size: 3rem;
     text-align: center;
     position: relative;
@@ -1193,6 +1196,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 10px;
 }
 
+.block-mediatheque .rebond-link {
+    margin-top: 10px;
+}
+
 .homepage-title-white {
     color: white;
 }
@@ -1212,4 +1219,3 @@ a.link-subhomes:hover .encart-image.subhome-image {
 #block-localnav #local_nav{
     z-index: 1;
 }
-

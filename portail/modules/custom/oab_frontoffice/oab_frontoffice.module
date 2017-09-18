@@ -392,7 +392,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       unset($form['field_job_profile_target_id']);
       unset($form['field_industry_target_id']);
     }
-
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
