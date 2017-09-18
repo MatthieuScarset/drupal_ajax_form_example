@@ -36,7 +36,7 @@ class ShadowSites
     if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
     {
       $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
-        ->orderBy('sid', 'DESC')
+        ->orderBy('used', 'DESC')
         ->extend('Drupal\Core\Database\Query\TableSortExtender');
       $shadowSites = $query->fields('obs')
         ->orderByHeader($this->getHeaderTable())
