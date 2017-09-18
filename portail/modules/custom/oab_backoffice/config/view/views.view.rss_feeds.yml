@@ -826,7 +826,7 @@ display:
         operator: AND
         groups:
           1: AND
-      path: press/feed_rss
+      path: press/feed_rss.xml
       pager:
         type: some
         options:
