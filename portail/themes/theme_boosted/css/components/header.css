@@ -157,6 +157,11 @@
     margin-top: 0;
 }
 
+.mega-menu.navbar .nav > li.open > a {
+    color: rgb(255,121, 0) !important;
+}
+
+
 @media (max-width: 1219px) {
     .mega-menu .navbar .nav > li{
         padding-right: 10px;
