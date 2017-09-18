@@ -712,13 +712,17 @@ a.home_banner_element_mobile_link {
     display: inline-block;
     cursor: pointer;
 }
-.home_playlist_titlezone{
-    padding-bottom: 75px;
-    max-width: 1320px;
-    margin-right: auto;
-    margin-left: auto;
-    float: inherit;
-}
+
+
+
+    .home_playlist_titlezone{
+        padding-bottom: 75px;
+        max-width: 1320px;
+        margin-left: auto;
+        margin-right: auto;
+        float: inherit;
+    }
+
 
 .home_playlist_nopadding {
     padding-left: 0px;
