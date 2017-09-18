@@ -24,7 +24,7 @@ function theme_boosted_preprocess_html(&$variables) {
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $variables) {
-    $suggestions[] = 'form__' . $variables['element']['#form_id'];
+  $suggestions[] = 'form__' . $variables['element']['#form_id'];
   return $suggestions;
 }
 
@@ -37,12 +37,12 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
 }
 
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
-    $current_route_match = \Drupal::getContainer()->get('current_route_match');
-    $route_match = $current_route_match->getRouteName();
-    if(preg_match('/^view.subhomes/', $route_match)
-        || $route_match == 'views.ajax') {
-        $suggestions[]='form_element__subhomes';
-    }
+  $current_route_match = \Drupal::getContainer()->get('current_route_match');
+  $route_match = $current_route_match->getRouteName();
+  if(preg_match('/^view.subhomes/', $route_match)
+    || $route_match == 'views.ajax') {
+    $suggestions[]='form_element__subhomes';
+  }
 
 }
 
@@ -50,10 +50,10 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 function theme_boosted_preprocess_node(&$variables) {
 
   if (isset($variables['node'])
-  && is_object($variables['node'])){
-    switch ($variables['node']->type->entity){
+    && is_object($variables['node'])){
+    switch ($variables['node']->type->entity->get('type')){
       case 'homepage':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "HP";
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Homepage";
         break;
       case 'product':
         $variables['#attached']['drupalSettings']['tealium']['type_page'] = t("our products");
@@ -61,17 +61,20 @@ function theme_boosted_preprocess_node(&$variables) {
         $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
         break;
       case 'customer_story':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients témoignent";
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients t??moignent";
         $variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'temoignage';
         $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+        break;
+      default:
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = $variables['node']->type->entity->label();
         break;
     }
   }
 
   $request = \Drupal::request();
-  if ($request->attributes->has('_title')) {
-    $variables['#attached']['drupalSettings']['tealium']['type_page'] = $request->attributes->get('_title');
-  }
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 }
 
 function theme_boosted_preprocess_page(&$variables) {
@@ -106,40 +109,26 @@ function theme_boosted_preprocess_page(&$variables) {
     }
   }
 
-    if (\Drupal::routeMatch()->getParameter('node')) {
-      $node = \Drupal::routeMatch()->getParameter('node');
-    }
-    if (\Drupal::routeMatch()->getParameter('node_preview')) {
-      $node = \Drupal::routeMatch()->getParameter('node_preview');
-    }
+  if (\Drupal::routeMatch()->getParameter('node')) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+  }
+  if (\Drupal::routeMatch()->getParameter('node_preview')) {
+    $node = \Drupal::routeMatch()->getParameter('node_preview');
+  }
   if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-      $node = node_revision_load($revision);
-    }
+    $node = node_revision_load($revision);
+  }
   $variables['page']['containerClass'] = 'container';
-  if (isset($node) && is_object($node)
-  && get_class($node) == 'Drupal\node\Entity\Node') {
-    $content_type = $node->bundle();
-      if ($content_type == 'homepage' || $content_type == 'homepage_eclairage') {
-        $variables['page']['containerClass'] = 'container-fluid';
-      }
-      $definitions = \Drupal::service('entity_field.manager')
-        ->getFieldDefinitions('node', $content_type);
-    if (isset($definitions)
-        && array_key_exists('field_display_title', $definitions)) {
-      $display_title = $node->get('field_display_title')->getValue();
-      if (isset($display_title[0]['value'])
-          && $display_title[0]['value'] == 0
-          && isset($variables['page']['content']['theme_boosted_page_title'])
-      ) {
-          $variables['page']['content']['theme_boosted_page_title']['#access'] = false;
-      }
-      }
-    }
+    && get_class($node) == 'Drupal\node\Entity\Node') {
+      ->getFieldDefinitions('node', $content_type);
+      && array_key_exists('field_display_title', $definitions)) {
+        && $display_title[0]['value'] == 0
+        && isset($variables['page']['content']['theme_boosted_page_title'])
 
   $request = \Drupal::request();
-  if ($request->attributes->has('_title')) {
-    $variables['#attached']['drupalSettings']['tealium']['type_page'] = $request->attributes->get('_title');
-  }
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 }
 
 function theme_boosted_preprocess_views_view(&$variables){
@@ -171,39 +160,41 @@ function theme_boosted_preprocess_views_view(&$variables){
     }
   }
   elseif ($id == 'offices_map_view'){
-  	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
-  		//kint($variables['rows']);
-			$variables['contact_url'] = 'http://www.google.fr';
-		}
-	}
+    if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
+      //kint($variables['rows']);
+      $variables['contact_url'] = 'http://www.google.fr';
+    }
+  }
+
 }
 function theme_boosted_preprocess_views_view_list(&$variables){
   $view = $variables['view'];
   $id = $view->storage->id();
-	if ($id == 'offices_map_view'){
-		$config_factory = \Drupal::configFactory();
-		$config_group = $config_factory->get('oab.offices_map');
-		if(!empty($config_group)) {
-			$url_contact = $config_group->get('contact_url');
-			if(!empty($url_contact)) {
-				$variables['contact_url'] = $url_contact;
-			}
-		}
-	}
+  if ($id == 'offices_map_view'){
+    $config_factory = \Drupal::configFactory();
+    $config_group = $config_factory->get('oab.offices_map');
+    if(!empty($config_group)) {
+      $url_contact = $config_group->get('contact_url');
+      if(!empty($url_contact)) {
+        $variables['contact_url'] = $url_contact;
+      }
+    }
+  }
+
 }
 function theme_boosted_preprocess_views_view_fields(&$variables){
-	$view = $variables['view'];
-	$id = $view->storage->id();
-	if ($id == 'offices_map_view'){
-		$config_factory = \Drupal::configFactory();
-		$config_group = $config_factory->get('oab.offices_map');
-		if(!empty($config_group)) {
-			$url_contact = $config_group->get('contact_url');
-			if(!empty($url_contact)) {
-				$variables['contact_url'] = $url_contact;
-			}
-		}
-	}
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  if ($id == 'offices_map_view'){
+    $config_factory = \Drupal::configFactory();
+    $config_group = $config_factory->get('oab.offices_map');
+    if(!empty($config_group)) {
+      $url_contact = $config_group->get('contact_url');
+      if(!empty($url_contact)) {
+        $variables['contact_url'] = $url_contact;
+      }
+    }
+  }
 }
 
 function theme_boosted_preprocess_field(&$variables){
@@ -217,14 +208,14 @@ function theme_boosted_preprocess_field(&$variables){
   }
   */
 
-        if($variables['field_name'] == 'field_visual'){
-            /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $field */
-            $field = $variables['element']['#items'][0];
+  if($variables['field_name'] == 'field_visual'){
+    /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $field */
+    $field = $variables['element']['#items'][0];
 
-            $field_image_url = get_image_uri($field->getEntity(), 'field_visual');
+    $field_image_url = get_image_uri($field->getEntity(), 'field_visual');
 
-            $variables['banner_url'] = file_create_url($field_image_url);
-        }
+    $variables['banner_url'] = file_create_url($field_image_url);
+  }
 
 }
 
@@ -252,6 +243,12 @@ function theme_boosted_preprocess_file_link(&$variables){
   //ksr($node->get('field_file'));
 
   $link_text = t("Download") . " " . strtr($file_type, array('/' => '-', '.' => '-'));
+    // pour le russe on met juste Download
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if(substr($current_language, 0, 2) == "ru"){
+        $link_text = t("Download");
+    }
+
   $options['attributes']['title'] = $file_entity->getFilename();
 
   // Classes to add to the file field for icons.
@@ -278,62 +275,62 @@ function theme_boosted_preprocess_file_link(&$variables){
  * @return null|string
  */
 function get_image_uri($entity, $fieldName){
-    $image_uri = NULL;
-    if($entity->hasField($fieldName)){
-        try{
-            $field = $entity->{$fieldName}; // Try loading from field values first.
-            if($field && $field->target_id){
-                $file = \Drupal\file\Entity\File::load($field->target_id);
-                if($file){
-                    $image_uri = $file->getFileUri();
-                }
-            }
-        } catch(\Exception $e){
-            \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+  $image_uri = NULL;
+  if($entity->hasField($fieldName)){
+    try{
+      $field = $entity->{$fieldName}; // Try loading from field values first.
+      if($field && $field->target_id){
+        $file = \Drupal\file\Entity\File::load($field->target_id);
+        if($file){
+          $image_uri = $file->getFileUri();
         }
-        // If a set value above wasn't found, try the default image.
-        if(is_null($image_uri)){
-            try{
-                $field = $entity->get($fieldName); // Loading from field definition
-                if($field){
-                    // From the image module /core/modules/image/ImageFormatterBase.php
-                    // $default_image = $test->fieldDefinition->getFieldStorageDefinition()->getSetting('default_image');
-                    $default_image = $field->getSetting('default_image');
-                    if($default_image && $default_image['uuid']){
-                        // $defaultImageFile = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']));
-                        // See https://www.drupal.org/node/2549139  entityManager is deprecated.
-                        // Use entity.repository instead.
-                        $entityrepository = Drupal::service('entity.repository');
-                        $defaultImageFile = $entityrepository->loadEntityByUuid('file', $default_image['uuid']);
-                        if($defaultImageFile){
-                            $image_uri = $defaultImageFile->getFileUri();
-                        }
-                    }
-                }
-            } catch(\Exception $e){
-                \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
-            }
-        }
+      }
+    } catch(\Exception $e){
+      \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
     }
-    return $image_uri;
+    // If a set value above wasn't found, try the default image.
+    if(is_null($image_uri)){
+      try{
+        $field = $entity->get($fieldName); // Loading from field definition
+        if($field){
+          // From the image module /core/modules/image/ImageFormatterBase.php
+          // $default_image = $test->fieldDefinition->getFieldStorageDefinition()->getSetting('default_image');
+          $default_image = $field->getSetting('default_image');
+          if($default_image && $default_image['uuid']){
+            // $defaultImageFile = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']));
+            // See https://www.drupal.org/node/2549139  entityManager is deprecated.
+            // Use entity.repository instead.
+            $entityrepository = Drupal::service('entity.repository');
+            $defaultImageFile = $entityrepository->loadEntityByUuid('file', $default_image['uuid']);
+            if($defaultImageFile){
+              $image_uri = $defaultImageFile->getFileUri();
+            }
+          }
+        }
+      } catch(\Exception $e){
+        \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+      }
+    }
+  }
+  return $image_uri;
 }
 
 
 function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
 
-    /**
-     * Homepage Eclairage View Grid Twig Template Suggestions
-     */
-    // Firstly check it's a view
-    if($hook === 'views_view') {
-        // Check if it's the 'home_eclairage_playlist' view
-        if($variables['view']->id() === 'home_eclairage_playlist') {
-            if($hook === 'views_view_grid') {
+  /**
+   * Homepage Eclairage View Grid Twig Template Suggestions
+   */
+  // Firstly check it's a view
+  if($hook === 'views_view') {
+    // Check if it's the 'home_eclairage_playlist' view
+    if($variables['view']->id() === 'home_eclairage_playlist') {
+      if($hook === 'views_view_grid') {
 
-                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
-            }
-        }
+        $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+      }
     }
+  }
 
 }
 

@@ -74,7 +74,8 @@ class RebondProductBlock extends BlockBase {
             $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_shops'];
 
           } else*/if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
-          ['Attributes']['online_purchase_customer_area'])) {
+          ['Attributes']['online_purchase_customer_area']) && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
+            ['Attributes']['online_purchase_customer_area'])) {
 
             $block['rebondProduct']['type'] = 'espaceClient';
             $block['rebondProduct']['title'] = t('My Service Space');

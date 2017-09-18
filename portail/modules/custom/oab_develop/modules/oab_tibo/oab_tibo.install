@@ -195,3 +195,10 @@ function oab_tibo_update_8025() {
 function oab_tibo_update_8026() {
     include_once("updates/update_8026.inc");
 }
+
+/**
+ * Vue pour les RSS Feeds
+ */
+function oab_tibo_update_8027() {
+    include_once("updates/update_8027.inc");
+}
