@@ -1102,6 +1102,14 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
+.webform-button--submit, .webform-button--draft {
+    margin-top: 1rem;
+}
+
+.webform-confirmation {
+    padding: 1rem;
+}
+
 .div-display-table {
     display: table;
 
@@ -1212,4 +1220,3 @@ a.link-subhomes:hover .encart-image.subhome-image {
 #block-localnav #local_nav{
     z-index: 1;
 }
-
