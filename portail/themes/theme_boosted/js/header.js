@@ -438,15 +438,17 @@
             });
         }
 
-      /*  $('#myAffix').affix({
+       $('.contactBarAffix').affix({
             offset: {
-                top: 100,
-                bottom: function () {
-                    return (this.bottom = $('.footer').outerHeight(true))
-                }
+                bottom:
+                    function () {
+                    var heightDirectAccess = $("nav[id*='block-directaccessbar']").height();
+                    var heightFooter = $("footer.navbar").outerHeight();
+                    return (this.bottom = heightDirectAccess + heightFooter) }
             }
-        })
-        $('#myAffix').affix('checkPosition')*/
+        });
+
+        $('.contactBarAffix').affix('checkPosition');
 
 
 
