@@ -545,7 +545,7 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
    * Modification de l'affichage des remontées pour l'autocomplete des rebonds
    * Ajout du type de contenu et du NID
    */
-  if ($view->id() == 'entity_ref_document_for_rebond') {
+  if ($view->id() == 'rebond_entity_reference') {
 
     foreach ($view->result as $i => $result) {
       #On recupère les données nécessaires
