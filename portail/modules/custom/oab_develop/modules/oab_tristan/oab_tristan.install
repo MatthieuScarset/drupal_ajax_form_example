@@ -315,3 +315,19 @@ function oab_tristan_update_8039() {
 function oab_tristan_update_8040() {
   include_once("updates/update_8040.inc");
 }
+
+
+/**
+ * Création d'une vue contenant 2 display view de type "Entity Ref"
+ * afin de modifier le retour des autocomplete de la zone rebond
+ */
+function oab_tristan_update_8041() {
+  include_once("updates/update_8041.inc");
+}
+
+/**
+ * Ajout d'une trad d'un field + Supp d'un terme de taxo
+ */
+function oab_tristan_update_8042() {
+  include_once("updates/update_8042.inc");
+}
