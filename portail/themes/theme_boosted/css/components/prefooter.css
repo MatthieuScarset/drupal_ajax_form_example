@@ -3,6 +3,10 @@
     font-size: 4rem;
     font-weight: bold;
 }
+.div_direct_access a:hover .text_direct_access,
+.div_direct_access a:focus .text_direct_access{
+    text-decoration: underline;
+}
 
 .text_direct_access {
     font-size: 1.4rem;
