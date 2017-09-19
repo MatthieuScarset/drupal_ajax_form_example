@@ -202,3 +202,10 @@ function oab_tibo_update_8026() {
 function oab_tibo_update_8027() {
     include_once("updates/update_8027.inc");
 }
+
+/**
+ * subhomes meta title traductions
+ */
+function oab_tibo_update_8028() {
+    include_once("updates/update_8028.inc");
+}
