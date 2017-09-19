@@ -437,7 +437,7 @@
 
             });
         }
-/*
+
        $('.contactBarAffix').affix({
             offset: {
                 bottom:
@@ -451,7 +451,7 @@
         $('.contactBarAffix').affix('checkPosition');
 
 
-*/
+
     });
 
 
