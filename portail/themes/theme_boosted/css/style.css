@@ -175,7 +175,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .date-subhome {
-    color: grey;
+    color: inherit;
 }
 
 .content a {
