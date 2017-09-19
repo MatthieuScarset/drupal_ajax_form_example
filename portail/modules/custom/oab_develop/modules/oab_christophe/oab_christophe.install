@@ -233,3 +233,10 @@ function oab_christophe_update_8035() {
 function oab_christophe_update_8036() {
   include_once("updates/update_8036.inc");
 }
+
+/**
+ *  permissions de modification des taxonomies
+ */
+function oab_christophe_update_8037() {
+  oabt_YmlImport('user.role.digital_admin.yml');
+}
