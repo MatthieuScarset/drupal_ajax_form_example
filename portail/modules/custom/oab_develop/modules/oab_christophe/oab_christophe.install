@@ -240,3 +240,11 @@ function oab_christophe_update_8036() {
 function oab_christophe_update_8037() {
   oabt_YmlImport('user.role.digital_admin.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3038 - affichage du main menu en EN, RU et RU-EN
+ */
+function oab_christophe_update_8038() {
+  oabt_YmlImport('block.block.mainnavigationru.yml');
+  oabt_YmlImport('block.block.mainnavigationruen.yml');
+}
