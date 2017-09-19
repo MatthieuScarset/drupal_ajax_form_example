@@ -135,3 +135,18 @@
     padding-top: 5px;
     position: absolute;
 }
+
+.affix{
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+
+
+.affix-bottom{
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
