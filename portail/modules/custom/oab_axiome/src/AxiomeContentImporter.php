@@ -50,7 +50,7 @@ class AxiomeContentImporter {
 
 		//TOP Zone Background
 		if (!empty($bannerData['background_image']['url_archive'])){
-			$urlBackground = 'public://axiome2/fiches/'.$urlBackground;
+			$urlBackground = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
 			$messages .= 'Url Top zone : '.$urlBackground."\nMedia #".$image_media_id."\n";
 			$node->set('field_top_zone_background', $image_media_id);
@@ -60,7 +60,7 @@ class AxiomeContentImporter {
         $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
 
         if (!empty($bannerData['catalog_image']['url_archive'])){
-            $urlCatalog = 'public://axiome2/fiches/'.$urlCatalog;
+            $urlCatalog = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlCatalog;
             $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
             $messages .= 'Url Catalog : '.$urlCatalog."\nMedia #".$image_media_id."\n";
             $node->set('field_visual', $image_media_id);
