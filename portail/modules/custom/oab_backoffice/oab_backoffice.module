@@ -536,3 +536,27 @@ function oab_backoffice_views_data_alter(array &$data) {
 }
 
 
+/**
+ * Implements hook_views_pre_render().
+ */
+function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
+
+  /**
+   * Modification de l'affichage des remontées pour l'autocomplete des rebonds
+   * Ajout du type de contenu et du NID
+   */
+  if ($view->id() == 'rebond_entity_reference') {
+
+    foreach ($view->result as $i => $result) {
+      #On recupère les données nécessaires
+      $node_type = $result->_entity->get('type')->entity->label();
+      $node_id = $result->_entity->id();
+      $node_label =  $result->_entity->getTitle();
+
+      #On set la nouvelle valeur
+      $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($node_type : $node_id)"));
+    }
+  }
+}
+
+
