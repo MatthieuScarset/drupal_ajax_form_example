@@ -2,7 +2,7 @@
 
 use Drupal\oab_axiome\AxiomeImporter;
 
-define('AXIOME_FOLDER', 'axiome');
+define('AXIOME_FOLDER', 'axiome2');
 define('AXIOME_SAVE_FOLDER', 'sauvegarde');
 define('AXIOME_REFERENTIEL_FRANCE', 'referentiel_France.xml');
 define('AXIOME_REFERENTIEL_INT', 'referentiel_International.xml');
