@@ -324,3 +324,10 @@ function oab_tristan_update_8040() {
 function oab_tristan_update_8041() {
   include_once("updates/update_8041.inc");
 }
+
+/**
+ * Ajout d'une trad d'un field + Supp d'un terme de taxo
+ */
+function oab_tristan_update_8042() {
+  include_once("updates/update_8042.inc");
+}
