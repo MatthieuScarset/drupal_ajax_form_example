@@ -23,6 +23,27 @@ oab.subhomes:
     product_term_tid:
       type: label
       label: 'Product term id'
+    press_meta:
+      type: label
+      label: 'Press meta title'
+    partner_meta:
+      type: label
+      label: 'Partner meta title'
+    customer_meta:
+      type: label
+      label: 'Customer meta title'
+    library_meta:
+      type: label
+      label: 'Library meta title'
+    blog_meta:
+      type: label
+      label: 'Blog meta title'
+    magazine_meta:
+      type: label
+      label: 'Magazine meta title'
+    product_meta:
+      type: label
+      label: 'Product meta title'
 
 oab.pardot:
   type: config_object

@@ -6,6 +6,7 @@ use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
@@ -526,6 +527,67 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
           unset($form['field_regions_target_id']);
       }
   }
+}
+
+function oab_frontoffice_views_post_render($view) {
+    if ($view->id() !== 'VIEW_ID' && $view->getDisplay()->getPluginId() !== 'page') {
+        return;
+    }
+    $request = \Drupal::request();
+
+    if ($view->id() == 'subhomes') {
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)){
+            // on recupere les valeurs dans oab.subhomes
+            $connection = Database::getConnection();
+            $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $collection = '';
+            if($current_language == "fr") {
+                $collection = 'language.fr';
+            }
+            if($current_language == "ru") {
+                $collection = 'language.ru';
+            }
+            $sth = $connection->select('config', 'c')
+                ->fields('c', array('data'))
+                ->condition('name', 'oab.subhomes')
+                ->condition('collection', $collection);
+            $data = $sth->execute();
+            $results = $data->fetchAll(\PDO::FETCH_OBJ);
+            if(count($results) > 0) {
+                $data = unserialize($results[0]->data);
+                switch ($view->current_display) {
+                    case 'page_press':
+                        $route->setDefault('_title', $data['press_meta']);
+                        $view->setTitle($data['press_meta']);
+                        break;
+                    case 'page_partners':
+                        $route->setDefault('_title', $data['partner_meta']);
+                        $view->setTitle($data['partner_meta']);
+                        break;
+                    case 'page_customer':
+                        $route->setDefault('_title', $data['customer_meta']);
+                        $view->setTitle($data['customer_meta']);
+                        break;
+                    case 'page_document':
+                        $route->setDefault('_title', $data['library_meta']);
+                        $view->setTitle($data['library_meta']);
+                        break;
+                    case 'page_blog':
+                        $route->setDefault('_title', $data['blog_meta']);
+                        $view->setTitle($data['blog_meta']);
+                        break;
+                    case 'page_magazine':
+                        $route->setDefault('_title', $data['magazine_meta']);
+                        $view->setTitle($data['magazine_meta']);
+                        break;
+                    case 'page_catalogue':
+                        $route->setDefault('_title', $data['product_meta']);
+                        $view->setTitle($data['product_meta']);
+                        break;
+                }
+            }
+        }
+    }
 }
 
 function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
