@@ -1052,9 +1052,15 @@ a.home_banner_element_mobile_link {
 }
 
 .filter_name:after{
-    content: "v";
+    content: "";
     float: right;
-    padding-right: 2rem;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #000;
+    clear: both;
+    margin-top: 10px;
 }
 
 .page_thematique_filter_display #edit-actions {
@@ -1076,7 +1082,32 @@ a.home_banner_element_mobile_link {
 }
 
 #filterbar {
-    padding: 20px 0px 20px 0px;
+    padding: 20px 10px 20px 10px;
     font-size: 2rem;
     font-weight: bold;
+}
+
+.view-page-thematique > ul.pager > li.pager__item > a.button {
+    background-color: black;
+    border: 1px solid #000;
+    border-radius: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    height: 40px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 8px;
+}
+.view-page-thematique > ul.pager > li.pager__item > a.button:hover {
+    background-color: white;
+    color: black;
+
+}
+.view-page-thematique > ul.pager > li.pager__item > a.button:active {
+    background-color: #F16E00;
+    color: white;
+    border: 1px solid #fff;
+
 }
