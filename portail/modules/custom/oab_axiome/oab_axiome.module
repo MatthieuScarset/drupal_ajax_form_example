@@ -16,7 +16,8 @@ define('AXIOME_TAXO_METIERS', 'jobs_profiles');
  * Implements hook_cron().
  */
 function oab_axiome_cron(){
-   // $axiome_importer = new AxiomeImporter();
+  $axiome_importer = new AxiomeImporter();
+  $axiome_importer->axiome_search_archive($axiome_importer->axiome_folder_root_path);
 }
 
 /**
