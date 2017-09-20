@@ -136,7 +136,12 @@
     position: absolute;
 }
 
-.affix{
+#block-contactbarstandard.affix,
+#block-contactbaranalyst.affix,
+#block-contactbarpress.affix,
+#block-contactbarrustandard.affix,
+#block-contactbarenstandard.affix ,
+#block-contactbar.affix{
     bottom: 0;
     height: auto;
     width: 100%;
@@ -145,7 +150,12 @@
 }
 
 
-.affix-bottom{
+#block-contactbarstandard.affix-bottom,
+#block-contactbaranalyst.affix-bottom,
+#block-contactbarpress.affix-bottom,
+#block-contactbarrustandard.affix-bottom,
+#block-contactbarenstandard.affix-bottom,
+#block-contactbar.affix-bottom{
     width: 100%;
     position: relative;
     z-index: 10;

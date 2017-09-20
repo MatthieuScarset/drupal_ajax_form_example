@@ -526,6 +526,38 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
           unset($form['field_regions_target_id']);
       }
   }
+
+    // view Page thématique
+    if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {
+        $insight = clean_exposed_filters_by_language(
+            $form['field_insight_target_id']['#options'],
+            'Insight'
+        );
+        $form['field_insight_target_id']['#options'] = $insight;
+
+        $profession = clean_exposed_filters_by_language(
+            $form['field_job_profile_target_id']['#options'],
+            'Profession'
+        );
+        $form['field_job_profile_target_id']['#options'] = $profession;
+
+        $industry = clean_exposed_filters_by_language(
+            $form['field_industry_target_id']['#options'],
+            'Industry'
+        );
+        $form['field_industry_target_id']['#options'] = $industry;
+
+        $region = clean_exposed_filters_by_language(
+            $form['field_region_target_id']['#options'],
+            'Geography'
+        );
+        $form['field_region_target_id']['#options'] = $region;
+
+        if($current_language != 'en'){
+            unset($form['field_region_target_id']);
+        }
+    }
+
 }
 
 function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
