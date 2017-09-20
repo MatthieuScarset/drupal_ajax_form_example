@@ -30,7 +30,6 @@ class AxiomeContentImporter {
 		// Creation du top_zone
 		$bannerData = $axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes'];
 		$idOffre = $axiomeData['@attributes']['id'];
-		$urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
 
 		// Top zone
 		$content = file_get_contents(
@@ -49,7 +48,8 @@ class AxiomeContentImporter {
 		$node->field_top_zone->format = 'full_html';
 
 		//TOP Zone Background
-		if (!empty($bannerData['background_image']['url_archive'])){
+        if (!empty($bannerData['background_image']['url_archive']) && is_string($bannerData['background_image']['url_archive'])){
+            $urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
 			$urlBackground = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
 			$messages .= 'Url Top zone : '.$urlBackground."\nMedia #".$image_media_id."\n";
@@ -59,7 +59,7 @@ class AxiomeContentImporter {
         // Creation image catalog
         $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
 
-        if (!empty($bannerData['catalog_image']['url_archive'])){
+        if (!empty($bannerData['catalog_image']['url_archive']) && is_string($bannerData['catalog_image']['url_archive'])){
             $urlCatalog = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlCatalog;
             $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
             $messages .= 'Url Catalog : '.$urlCatalog."\nMedia #".$image_media_id."\n";
@@ -306,6 +306,10 @@ class AxiomeContentImporter {
 			$message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
 			$isValid = false;
 		}
+        if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['catalog_image']['url_archive'])){
+            $message .= "\t WARNING : missing `ruby_zone_banner.catalog_image.url_archive` \n";
+            $isValid = false;
+        }
 
 		return $isValid;
 	}

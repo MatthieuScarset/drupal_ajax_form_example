@@ -102,6 +102,7 @@ view_mode ? view_mode|clean_class,
     {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_simple_contents.Children.ruby_simple_contents_block %}
     {% set field_partners = content.axiome_data.Children.ruby_theme.Children.ruby_zone_partner %}
     {% set axiomeDocs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
+    {% set tarifs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_price %}
     {% set id_fiche = content.axiome_data['@attributes'].id %}
     {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
 {% endif %}
@@ -148,6 +149,9 @@ view_mode ? view_mode|clean_class,
     {% endif %}
     {% if axiomeDocs is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+    {% endif %}
+    {% if tarifs is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_tarifs.html.twig' with tarifs %}
     {% endif %}
     {% if related_offers is not null  %}
         {% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}

@@ -481,7 +481,7 @@ class AxiomeImporter{
         //TODO : workflow
         $fiche_dir = $this->axiome_folder_path . '/fiches/' . $xpath_fiche->getAttribute('id');
 
-        $this->message .= "axiome traitement fiche id = " . $xpath_fiche->getAttribute('id')."\n";
+        $this->message .= "axiome traitement fiche id = " . $xpath_fiche->getAttribute('id')." - ".$xpath_fiche->getAttribute('nom_offre_commerciale')."\n";
         if (is_dir($fiche_dir)) {
             $files_fiche = scandir($fiche_dir);
             foreach ($files_fiche AS $file_fiche) {

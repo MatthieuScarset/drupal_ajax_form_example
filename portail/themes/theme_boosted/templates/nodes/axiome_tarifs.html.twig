@@ -1,0 +1,22 @@
+<div class="node-axiome-tarifs">
+    <div class="col col-md-12 nopadding">
+        <h2 class="titre2"> {{ tarifs.Attributes.title }} </h2>
+    </div>
+    {% for price in tarifs.Children.ruby_price %}
+    <div class="col col-md-2 tarif">
+        <div class="title">{{ price.Attributes.title }}</div>
+        <div class="bg_black">
+            <div class="price">{{ price.Attributes.price }}</div>
+            <div class="explain">{{ price.Attributes.price_explain }}</div>
+        </div>
+        <div class="details">
+            <div class="bloc1">
+                <div>{{ price.Attributes.detail_bloc_1 }}</div>
+            </div>
+            <div class="bloc2">
+                <div>{{ price.Attributes.detail_bloc_2 }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
