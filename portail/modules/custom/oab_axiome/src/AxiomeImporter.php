@@ -499,7 +499,7 @@ class AxiomeImporter{
                         // Si c'est une fiche existante
                         if ($nid) {
                             $nid = (int)$nid;
-                            $this->message .= "Chargement du NODE \n";
+                            $this->message .= "Chargement du NODE $nid\n";
                             $node = Node::load($nid);
                             $node->set('moderation_state', array('target_id' => 'draft'));
 
@@ -663,8 +663,7 @@ class AxiomeImporter{
                 // supprimé car référence pour les images catalog et banniere !
                 /*$cmd = escapeshellcmd("rm -fR '$destination/$file'");
                 exec($cmd);*/
-                $cmd = "mv $source/$file/* $destination/$file/";
-                $this->message .= $cmd."\n";
+                $cmd = "cp -R $source/$file/* $destination/$file/";
                 exec($cmd);
             }
         }
