@@ -53,7 +53,8 @@ class AxiomeImporter{
                         $this->message .= "ZipFile found = $file \n";
 
                         if ($count == 0){
-                            exec("rm -fR $folder.'/import'");
+                            $cmd = escapeshellcmd("rm -fR $folder.'/import'");
+                            exec($cmd);
                             $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
 
                             $this->axiome_notification[] = "file : ".$file;
@@ -104,7 +105,8 @@ class AxiomeImporter{
                                 // Déplacement des dossiers de fiche dans "axiome"
                                 $this->axiome_move_documents($folder_import, $folder);
                                 $this->axiome_verif_taxonomy_not_empty();
-                                exec("rm -fR '$folder_import'");
+                                $cmd = escapeshellcmd("rm -fR '$folder_import'");
+                                exec($cmd);
                             }
                             $count ++;
                         }
@@ -158,7 +160,8 @@ class AxiomeImporter{
         if (is_dir($destination)) {
             $cwd = getcwd();
             chdir($destination);
-            exec("/usr/bin/unzip '$file' ");
+            $cmd = escapeshellcmd("/usr/bin/unzip '$file' ");
+            exec($cmd);
             chdir($cwd);
             return TRUE;
         }
@@ -654,8 +657,10 @@ class AxiomeImporter{
                 && $file != '.'
                 && $file != '..'
                 && !in_array($file, $this->axiome_deleted_fiche)){
-                exec("rm -fR '$destination/$file'");
-                exec("mv '$source/$file' '$destination/$file'");
+                $cmd = escapeshellcmd("rm -fR '$destination/$file'");
+                exec($cmd);
+                $cmd = escapeshellcmd("mv '$source/$file' '$destination/$file'");
+                exec($cmd);
             }
         }
     }
