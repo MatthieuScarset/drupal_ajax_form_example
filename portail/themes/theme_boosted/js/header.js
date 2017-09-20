@@ -463,7 +463,7 @@
             offset: {
                 bottom:
                     function () {
-                    var heightDirectAccess = $("nav[id*='block-directaccessbar']").height();
+                    var heightDirectAccess = $("section[id*='block-directaccessbar']").height();
                     var heightFooter = $("footer.navbar").outerHeight();
                     return (this.bottom = heightDirectAccess + heightFooter) }
             }

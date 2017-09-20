@@ -58,13 +58,13 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
         </div>
     {% endif %}
     {% if exposed %}
-    <div id="filterbar" data-toggle="collapse" data-target="#page_thematique_filter">
+    <div id="filterbar" data-toggle="collapse" data-target="#page_thematique_filter" class="container">
         <div class="filter_name">
             {{ "Filters"|t }}
         </div>
 
     </div>
-    <div id="page_thematique_filter" class="collapse in">
+    <div id="page_thematique_filter" class="collapse in container">
         <div class="view-filters form-group">
             {{ exposed }}
         </div>
