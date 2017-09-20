@@ -510,7 +510,7 @@ class AxiomeImporter{
                             // TODO : A completer
                             $this->message .= "Création du NODE \n";
 
-                            /*$node = Node::create([
+                            $node = Node::create([
                                 'type'        => 'product',
                                 'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
                                 'isNew'       => true,
@@ -523,7 +523,7 @@ class AxiomeImporter{
 
                             $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                             $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
-*/
+
                         }
 
                         if (isset($node)) {
