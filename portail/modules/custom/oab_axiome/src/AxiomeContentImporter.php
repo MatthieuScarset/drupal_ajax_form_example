@@ -57,9 +57,8 @@ class AxiomeContentImporter {
 		}
 
         // Creation image catalog
-        $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
-
         if (!empty($bannerData['catalog_image']['url_archive']) && is_string($bannerData['catalog_image']['url_archive'])){
+            $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
             $urlCatalog = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlCatalog;
             $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
             $messages .= 'Url Catalog : '.$urlCatalog."\nMedia #".$image_media_id."\n";
