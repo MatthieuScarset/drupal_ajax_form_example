@@ -25,6 +25,7 @@ class AxiomeImporter{
     private $axiome_notification = array();
     private $axiome_deleted_fiche = array();
     public $message = '';
+    private $id_en_cours = '';
 
     function __construct(){
         $this->axiome_folder_root_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
@@ -244,6 +245,7 @@ class AxiomeImporter{
 
                 if ($this->axiome_create_dir($file_name)){
                     if ($this->axiome_unzip($folder.'/'.$file, $file_name)){
+
                         file_unmanaged_delete($folder.'/'.$file);
 
                         // renommage du dossier avec l'id de la fiche
@@ -484,6 +486,7 @@ class AxiomeImporter{
         //TODO : workflow
         $fiche_dir = $this->axiome_folder_path . '/fiches/' . $xpath_fiche->getAttribute('id');
 
+        $this->id_en_cours = $xpath_fiche->getAttribute('id');
         $this->message .= "axiome traitement fiche id = " . $xpath_fiche->getAttribute('id')." - ".$xpath_fiche->getAttribute('nom_offre_commerciale')."\n";
         if (is_dir($fiche_dir)) {
             $files_fiche = scandir($fiche_dir);
@@ -657,9 +660,10 @@ class AxiomeImporter{
                 && $file != '.'
                 && $file != '..'
                 && !in_array($file, $this->axiome_deleted_fiche)){
-                $cmd = escapeshellcmd("rm -fR '$destination/$file'");
-                exec($cmd);
-                $cmd = escapeshellcmd("mv '$source/$file' '$destination/$file'");
+                // supprimé car référence pour les images catalog et banniere !
+                /*$cmd = escapeshellcmd("rm -fR '$destination/$file'");
+                exec($cmd);*/
+                $cmd = "mv $source/$file/* $destination/$file/";
                 exec($cmd);
             }
         }
@@ -676,12 +680,10 @@ class AxiomeImporter{
         $query->groupBy('t.tid');
         $query->groupBy('t.name')
             ->condition('t.vid', AXIOME_TAXO_FAMILLE, '=');
-        //  ->havingCondition('max_tid', 0, '=');
 
         $alias = $query->addExpression('COUNT(i.tid)', 'max_tid');
 
         $results = $query->execute()->fetchAll();
-        // kint($results);
         foreach ($results AS $result){
             if ($result->max_tid == 0){
                 //taxonomy_term_delete($result->tid);
