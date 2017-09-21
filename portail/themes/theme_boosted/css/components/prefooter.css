@@ -133,5 +133,31 @@
 
 .expandContactBar{
     padding-top: 5px;
-    position: absolute;
+   // position: absolute;
+}
+
+#block-contactbarstandard.affix,
+#block-contactbaranalyst.affix,
+#block-contactbarpress.affix,
+#block-contactbarrustandard.affix,
+#block-contactbarenstandard.affix ,
+#block-contactbar.affix{
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+
+
+#block-contactbarstandard.affix-bottom,
+#block-contactbaranalyst.affix-bottom,
+#block-contactbarpress.affix-bottom,
+#block-contactbarrustandard.affix-bottom,
+#block-contactbarenstandard.affix-bottom,
+#block-contactbar.affix-bottom{
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    top: 0 !important;
 }

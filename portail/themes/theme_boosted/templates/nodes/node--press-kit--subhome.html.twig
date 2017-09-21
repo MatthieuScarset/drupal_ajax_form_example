@@ -72,6 +72,13 @@
 {% set year = createdDate|date("Y") %}
 {% set node_title = label %}
 
+{% set tmp_month = month|trans %}
+{% set lang = node.get('langcode').getValue()[0].value %}
+{% if lang == 'fr' or  lang == 'ru' %}
+    {% set month = tmp_month|lower %}
+{% endif %}
+
+
 <a href="{{ url }}" class="link-subhomes">
 <div class="display-subhomes">
     <div class="encart col-lg-12">

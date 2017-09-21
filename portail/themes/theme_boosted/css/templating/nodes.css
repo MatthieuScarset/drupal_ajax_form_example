@@ -250,10 +250,26 @@ article p {
     line-height: 4rem;
 }
 
+.home_banner_title_mobile {
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 4rem;
+    padding-top: 20px;
+}
+
+
 .home_banner_first_bottom_container {
     position: absolute;
     width:100%;
     bottom:40px;
+    padding-left: 50px;
+}
+
+
+
+.home_banner_first_bottom_container_mobile {
+    width:100%;
+    padding-top: 30px;
     padding-left: 50px;
 }
 
@@ -547,7 +563,7 @@ a.home_banner_element_mobile_link {
 }
 
 .home_column_element_title a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .home_column_element_nameFunction{
     font-size: 1.4rem;
@@ -654,7 +670,6 @@ a.home_banner_element_mobile_link {
         margin-right: auto;
         margin-left: auto;
         float: inherit;
-        padding-left: 50px;
     }
 
     .home_banner_no_padding {
@@ -712,13 +727,17 @@ a.home_banner_element_mobile_link {
     display: inline-block;
     cursor: pointer;
 }
-.home_playlist_titlezone{
-    padding-bottom: 75px;
-    max-width: 1320px;
-    margin-right: auto;
-    margin-left: auto;
-    float: inherit;
-}
+
+
+
+    .home_playlist_titlezone{
+        padding-bottom: 75px;
+        max-width: 1320px;
+        margin-left: auto;
+        margin-right: auto;
+        float: inherit;
+    }
+
 
 .home_playlist_nopadding {
     padding-left: 0px;
@@ -877,9 +896,7 @@ a.home_banner_element_mobile_link {
     padding-right: 0px;
 }
 
-.home_thematic_banner .home_banner_first_nameFunction {
-    padding-bottom: 80px;
-}
+
 
 .home_thematic_columnImage {
     height: 200px;
@@ -904,6 +921,19 @@ a.home_banner_element_mobile_link {
     height: 445px;
 }
 
+
+.swiper-container-columns > .swiper-pagination-bullets{
+    bottom:0px;
+}
+
+.swiper-container-columns > .swiper-pagination-bullets > .swiper-pagination-bullet{
+    background: #eee;
+}
+
+.swiper-container-columns > .swiper-pagination-bullets .swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #F16E00;
+}
 .thematic_column_elements {
     padding: 30px 30px 40px 30px;
 }
@@ -1048,9 +1078,15 @@ a.home_banner_element_mobile_link {
 }
 
 .filter_name:after{
-    content: "v";
+    content: "";
     float: right;
-    padding-right: 2rem;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #000;
+    clear: both;
+    margin-top: 10px;
 }
 
 .page_thematique_filter_display #edit-actions {
@@ -1072,7 +1108,32 @@ a.home_banner_element_mobile_link {
 }
 
 #filterbar {
-    padding: 20px 0px 20px 0px;
+    padding: 20px 10px 20px 10px;
     font-size: 2rem;
     font-weight: bold;
+}
+
+.view-page-thematique > ul.pager > li.pager__item > a.button {
+    background-color: black;
+    border: 1px solid #000;
+    border-radius: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    height: 40px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 8px;
+}
+.view-page-thematique > ul.pager > li.pager__item > a.button:hover {
+    background-color: white;
+    color: black;
+
+}
+.view-page-thematique > ul.pager > li.pager__item > a.button:active {
+    background-color: #F16E00;
+    color: white;
+    border: 1px solid #fff;
+
 }

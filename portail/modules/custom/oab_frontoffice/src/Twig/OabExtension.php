@@ -27,10 +27,8 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
           new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
           new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
-
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
-
           new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
       ];
 }
@@ -253,7 +251,6 @@ class OabExtension extends \Twig_Extension {
         return $empty;
     }
 
-
   /**
    * Render a custom date format with Twig
    * Use the internal helper "format_date" to render the date using the current language for texts
@@ -272,9 +269,6 @@ class OabExtension extends \Twig_Extension {
 
     return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
   }
-
-
-
 
     /**
      * Returns the total rows count for Drupal view.
