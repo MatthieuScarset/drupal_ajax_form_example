@@ -2,7 +2,7 @@
 <div class="node-axiome-detailed-content">
     <div>
         <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
-        <p class="highlight1">{{ field_detailed_content.Attributes.description|nl2br }}</p>
+        <p class="highlight1">{{ field_detailed_content.Attributes.description|raw|nl2br }}</p>
     </div>
 
 
@@ -25,7 +25,7 @@
 
                     <p><b>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.header }}</b></p>
 
-                    <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description|nl2br }}</p>
+                    <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description|raw|nl2br }}</p>
                 </div>
             </div>
             {%  set colIterator = colIterator + 1 %}
