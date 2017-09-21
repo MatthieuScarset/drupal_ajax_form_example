@@ -3,7 +3,7 @@
     <div>
         <h2 class="titre2">{{ field_partners.Attributes.title }}</h2>
         <h3 class="titre3">{{ field_partners.Attributes.midtitle }}</h3>
-        <p class="highlight1">{{ field_partners.Attributes.text }}</p>
+        <p class="highlight1">{{ field_partners.Attributes.text|raw|nl2br }}</p>
     </div>
 
     <div class="bg product_partners bg_white col col-md-12 col-xs-12 nopadding">
@@ -14,7 +14,7 @@
                     {% if partner.obs_url.url_link is not empty %}
                         <a href="{{ partner.obs_url.url_link|url_clean_prefix }}" target="_blank" title="{{ partner.obs_url.url_text|url_clean_prefix }}">
                     {% endif %}
-                    <img src="/sites/default/files/axiome/fiches/{{ id_fiche }}{{ partner.image.url_archive }}" alt="{{ partner.image.balise_alt }}" />
+                    <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ partner.image.url_archive }}" alt="{{ partner.image.balise_alt }}" />
                     {% if partner.obs_url.url_link is not empty %}
                         </a>
                     {% endif %}

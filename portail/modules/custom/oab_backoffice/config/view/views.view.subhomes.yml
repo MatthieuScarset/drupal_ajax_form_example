@@ -41,7 +41,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -447,7 +447,7 @@ display:
           exposed: true
           expose:
             operator_id: field_blog_format_target_id_op
-            label: 'By type'
+            label: 'By format'
             description: ''
             use_operator: false
             operator: field_blog_format_target_id_op
@@ -481,7 +481,7 @@ display:
           limit: true
           vid: blog_formats
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_job_profile_target_id:
           id: field_job_profile_target_id
@@ -530,7 +530,7 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_industry_target_id:
           id: field_industry_target_id
@@ -1646,7 +1646,7 @@ display:
           limit: true
           vid: magazine_types
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_job_profile_target_id:
           id: field_job_profile_target_id
@@ -1695,7 +1695,7 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_industry_target_id:
           id: field_industry_target_id
@@ -1744,7 +1744,7 @@ display:
           limit: true
           vid: industries
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
@@ -2322,7 +2322,7 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: false
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:

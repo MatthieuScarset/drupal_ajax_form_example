@@ -88,20 +88,10 @@
     {{ title_suffix }}
 
     <div{{ content_attributes }}>
-        {% for key, file in content.field_file  %}
-            {% if key == "#items" %}
-                {% set media = file.entity %}
-                {% set file_entity = media.field_image_file.entity %}
-                {% set inactiveClasse = "" %}
-                {% if media is not empty %}
-                    {% set url = file_url(media.field_file.entity.uri.value) %}
-                    <a class="rebond-link {{ inactiveClasse }} " href="{{ url }}">
-                        {{ 'Download'|trans }}
-                    </a>
-                {% endif %}
+        <a class="rebond-link {{ inactiveClasse }} " href="{{ url }}">
+            {{ 'Download'|trans }}
+        </a>
 
-            {% endif %}
-        {% endfor %}
     </div>
 
 </article>

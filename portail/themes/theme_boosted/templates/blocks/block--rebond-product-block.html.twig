@@ -45,11 +45,13 @@
  * @ingroup templates
  */
 #}
+
+
 <section{{ attributes.addClass('block', 'clearfix', 'rebond', 'rebond-product') }}>
     <div class="form-group">
     {% block content %}
 
-       {% if content.rebondProduct is not null %}
+        {% if content.rebondProduct is not null %}
            <article>
                 <div class="rebond-block-title">
                     <h2>{{ content.rebondProduct.title }}</h2>
@@ -60,10 +62,16 @@
                     </p>
                 </div>
                <div class="rebond-product-link">
-                    <a href="{{ content.rebondProduct.link }}" target="_blank" class="rebond-link">
-                        {{ content.rebondProduct.link_text }}
+                    <a href="{{ content.rebondProduct.signin_link }}" target="_blank" class="rebond-link">
+                        {{ content.rebondProduct.signin_text }}
                     </a>
                 </div>
+               <div class="rebond-product-link-create">
+                   <a href="{{ content.rebondProduct.create_link }}" target="_blank" >
+                       {{ content.rebondProduct.create_text }}
+                   </a>
+               </div>
+
            </article>
         {% else %}
             {{ content }}

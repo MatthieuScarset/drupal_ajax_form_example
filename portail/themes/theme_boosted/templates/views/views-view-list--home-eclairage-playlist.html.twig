@@ -28,7 +28,7 @@
 {% if rows.0 is defined %}
     <div class="homepage-eclairage-playlist-element">
 
-        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 }}" class="home-playlist-items container">
+        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 }}" class="home-playlist-items container no-padding">
             {% for row in rows %}
                 <div class="item-playlist-content">
                     {{ row.content }}

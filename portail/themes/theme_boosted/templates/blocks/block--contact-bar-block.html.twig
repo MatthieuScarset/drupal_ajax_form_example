@@ -47,7 +47,7 @@
 #}
 
 
-<section{{ attributes.addClass('block', 'clearfix') }}>
+<section data-spy="affix" {{ attributes.addClass('block', 'clearfix', 'contactBarAffix') }}>
   {{ title_prefix }}
   {% if label %}
     <h2{{ title_attributes.addClass('block-title') }}>{{ label }}</h2>
@@ -63,7 +63,7 @@
 
           </div>
           <div class="col-md-3 col-sm-12 nopadding">
-              <span class="text-needhelp"> {{ "You need help ?"|trans }} </span>
+              <span class="text-needhelp"> {{ "Besoin d'aide ?"|trans }} </span>
           </div>
           <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
               <div class="glyphicon glyphicon-triangle-bottom expandContactBar" role="button"></div>
@@ -74,10 +74,10 @@
 
       <div id="contactbar-container-standard" class="container hidden">
         <div class="row">
-            <div class="col-md-3 col-sm-12 nopadding iconblock">
+            <div class="col-md-2 col-sm-12 nopadding iconblock">
                 <span class="glyphicon glyphicon-question-sign solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_assistance }}">{{ content.link_assistance_text }}</a></span>
             </div>
-            <div class="col-md-3 col-sm-12 nopadding">
+            <div class="col-md-4 col-sm-12 nopadding text-align-center">
                <span class="wrapper_numero" style="display: inline-block; background-color: white; ">
                     <span class="numero" style="color: black; font-weight: bold; font-size: 2.8rem; padding: 0.5rem;">0 800 018 028</span>
                     <span class="text" style="display: inline-block; background-color: black; margin-right: 1rem; font-size: 1.2rem; padding: 0.7rem 1rem 0.7rem 2rem; position: relative;">

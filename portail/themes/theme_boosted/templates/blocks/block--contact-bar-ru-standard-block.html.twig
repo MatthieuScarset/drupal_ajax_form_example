@@ -47,7 +47,7 @@
 #}
 
 
-<section{{ attributes.addClass('block', 'clearfix') }}>
+<section data-spy="affix" {{ attributes.addClass('block', 'clearfix', 'contactBarAffix') }}>
     {{ title_prefix }}
     {% if label %}
         <h2{{ title_attributes.addClass('block-title') }}>{{ label }}</h2>
@@ -63,7 +63,7 @@
 
             </div>
             <div class="col-md-3 col-sm-12 nopadding">
-                <span class="text-needhelp"> {{ "You need help ?"|trans }} </span>
+                <span class="text-needhelp"> {{ "Возникли вопросы ?"|trans }} </span>
             </div>
             <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
                 <div class="glyphicon glyphicon-triangle-bottom expandContactBar" role="button"></div>

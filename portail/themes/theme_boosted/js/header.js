@@ -98,7 +98,7 @@
         moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone);
 
         //init scrolling animation
-        $(".sub_local_menu ul li a").click(function() {
+        $(".sub_local_menu ul li a").click(function(event ) {
             event.preventDefault();
 
             var divToScroll  = $(this).attr('href');
@@ -118,9 +118,30 @@
                     mTop = 0;
                 }
             }
-            /*$('html, body').animate({ //- 25
-                scrollTop: $(divToScroll).offset().top + mTop - offsetTop - 25
-            }, 1000);*/
+
+            //gestion de la hauteur de scroll
+
+            if(Math.round($("#local_nav").position().top) == "0"){
+                if(Math.round($("#block-localnav").position().top) == "720"){
+                    add_height = -225;
+                }else{
+                    add_height = -125;
+                }
+            }else if(Math.round($("#local_nav").position().top) == "100"){
+                    add_height = 1;
+            }else if(Math.round($("#local_nav").position().top) == "179"){
+                    add_height = -80;
+            }else if(Math.round($("#local_nav").position().top) == "540"){
+                    add_height = -45;
+            }else if(Math.round($("#local_nav").position().top) == "640"){
+                add_height = -145;
+            }else{
+                add_height = 10;
+            }
+
+            $('html, body').animate({ //+10 -130
+                scrollTop: $(divToScroll).offset().top + mTop + add_height
+            }, 1000);
         });
     }
 
@@ -438,15 +459,17 @@
             });
         }
 
-      /*  $('#myAffix').affix({
+       $('.contactBarAffix').affix({
             offset: {
-                top: 100,
-                bottom: function () {
-                    return (this.bottom = $('.footer').outerHeight(true))
-                }
+                bottom:
+                    function () {
+                    var heightDirectAccess = $("section[id*='block-directaccessbar']").height();
+                    var heightFooter = $("footer.navbar").outerHeight();
+                    return (this.bottom = heightDirectAccess + heightFooter) }
             }
-        })
-        $('#myAffix').affix('checkPosition')*/
+        });
+
+        $('.contactBarAffix').affix('checkPosition');
 
 
 

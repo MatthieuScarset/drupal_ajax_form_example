@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.hp_eclairage_thematique
+id: node.hp_eclairage_thematique
+target_entity_type_id: node
+target_bundle: hp_eclairage_thematique
+default_langcode: current_interface
+language_alterable: true

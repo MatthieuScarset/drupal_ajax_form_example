@@ -73,6 +73,48 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
       '#default_value' => $config->get('product_term_tid'),
     );
 
+      $form['press_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Press subhome'),
+          '#default_value' => $config->get('press_meta'),
+      );
+
+      $form['partner_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Partner subhome'),
+          '#default_value' => $config->get('partner_meta'),
+      );
+
+      $form['customer_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Customer subhome'),
+          '#default_value' => $config->get('customer_meta'),
+      );
+
+      $form['library_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Library subhome'),
+          '#default_value' => $config->get('library_meta'),
+      );
+
+      $form['blog_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Blog subhome'),
+          '#default_value' => $config->get('blog_meta'),
+      );
+
+      $form['magazine_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Magazine subhome'),
+          '#default_value' => $config->get('magazine_meta'),
+      );
+
+      $form['product_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Product subhome'),
+          '#default_value' => $config->get('product_meta'),
+      );
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -89,6 +131,13 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
       ->set('blog_term_tid', $form_state->getValue('blog_term_tid'))
       ->set('magazine_term_tid', $form_state->getValue('magazine_term_tid'))
       ->set('product_term_tid', $form_state->getValue('product_term_tid'))
+        ->set('press_meta', $form_state->getValue('press_meta'))
+        ->set('partner_meta', $form_state->getValue('partner_meta'))
+        ->set('customer_meta', $form_state->getValue('customer_meta'))
+        ->set('library_meta', $form_state->getValue('library_meta'))
+        ->set('blog_meta', $form_state->getValue('blog_meta'))
+        ->set('magazine_meta', $form_state->getValue('magazine_meta'))
+        ->set('product_meta', $form_state->getValue('product_meta'))
       ->save();
 
     parent::submitForm($form, $form_state);

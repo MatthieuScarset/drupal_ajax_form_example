@@ -2,19 +2,19 @@
 <div class="node-axiome-simple-content">
     <div class="col col-md-12 nopadding">
         <h2 class="titre2">{{ field_simple_content.0.Attributes.title }}</h2>
-        <p class="highlight1">{{ field_simple_content.0.Attributes.paragraph }}</p>
+        <p class="highlight1">{{ field_simple_content.0.Attributes.paragraph|raw|nl2br }}</p>
 
         <div class="col col-md-12 nopadding image">
-            <img src="/sites/default/files/axiome/fiches/{{ id_fiche }}{{ field_simple_content.0.Attributes.schema.url_archive }}" alt="{{ field_simple_content.0.Attributes.schema.balise_alt }}" />
+            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field_simple_content.0.Attributes.schema.url_archive }}" alt="{{ field_simple_content.0.Attributes.schema.balise_alt }}" />
         </div>
         <div> {{ field_simple_content.0.Attributes.video|replace({'//': "https://"})|raw }}</div>
     </div>
 
     <div class="col col-md-12 nopadding">
         <h2 class="titre2">{{ field_simple_content.1.Attributes.title }}</h2>
-        <p class="highlight1">{{ field_simple_content.1.Attributes.paragraph }}</p>
+        <p class="highlight1">{{ field_simple_content.1.Attributes.paragraph|raw|nl2br }}</p>
         <div class="col col-md-12 nopadding image">
-            <img src="/sites/default/files/axiome/fiches/{{ id_fiche }}{{ field_simple_content.1.Attributes.schema.url_archive }}" alt="{{ field_simple_content.1.Attributes.schema.balise_alt }}" />
+            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field_simple_content.1.Attributes.schema.url_archive }}" alt="{{ field_simple_content.1.Attributes.schema.balise_alt }}" />
         </div>
 
         <div> {{ field_simple_content.1.Attributes.video|replace({'//': "https://"})|raw }}</div>

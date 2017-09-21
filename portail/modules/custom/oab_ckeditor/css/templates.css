@@ -5,7 +5,7 @@
 .obs_template.four_columns p,
 .obs_template.two_columns p
 {	
-  /*padding: 10px;*/
+  padding: 10px;
 }
 
 .obs_template.obs_background_blue{
@@ -131,3 +131,23 @@
         margin-bottom: 2rem;
     }
 }
+
+.obs_template.obs_background_orange ul li:before {
+    color: black !important;
+}
+.obs_template.obs_background_orange a:hover {
+    color: black !important;
+    text-decoration: none;
+}
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+}
+

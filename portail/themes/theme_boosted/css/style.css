@@ -191,7 +191,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .date-subhome {
-    color: grey;
+    color: inherit;
 }
 
 .content a {
@@ -1135,6 +1135,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 0;
 }
 
+
 #arrow-back-to-filter {
 
     background-color:  #000000;
@@ -1218,4 +1219,19 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 #block-localnav #local_nav{
     z-index: 1;
+}
+
+.rebond-product-link-create {
+    margin-top: 2rem;
+}
+
+.rebond-product-link-create a {
+    color: white;
+    text-decoration: underline;
+    font-size: 1.4rem;
+}
+
+.rebond-product-link-create a:hover,
+.rebond-product-link-create a:active {
+    text-decoration: underline;
 }
