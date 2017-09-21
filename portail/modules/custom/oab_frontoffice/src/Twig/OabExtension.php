@@ -44,7 +44,6 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
       new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
       new \Twig_SimpleFilter('formatDate', [$this, 'formatDate']),
-        new \Twig_SimpleFilter('clean_axiome', [$this, 'formatDate']),
     ];
 
     return $filters;
@@ -303,15 +302,5 @@ class OabExtension extends \Twig_Extension {
             'rows' => $total_rows,
             'render' => $view->render('block_1')
         ];
-    }
-
-    /**
-     * Returns a string without some balises
-     *
-     * @param $url
-     */
-    public function clean_axiome($str) {
-        $str = strip_tags($str, '<br>');
-        return $str;
     }
 }
