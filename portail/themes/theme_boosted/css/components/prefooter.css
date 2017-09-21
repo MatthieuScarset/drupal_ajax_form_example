@@ -133,7 +133,7 @@
 
 .expandContactBar{
     padding-top: 5px;
-    position: absolute;
+   // position: absolute;
 }
 
 #block-contactbarstandard.affix,
@@ -159,4 +159,5 @@
     width: 100%;
     position: relative;
     z-index: 10;
+    top: 0 !important;
 }
