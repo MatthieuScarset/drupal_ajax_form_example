@@ -93,6 +93,9 @@ function oab_backbones_import_batch_finished($success, $results, $operations) {
   if ($success) {
     $message = \Drupal::translation()->formatPlural(count($results['title']), 'One performance data processed.', '@count performance data processed.');
     drupal_set_message($message, 'status', TRUE);
+    // 18/09/17 - SJO : je mets en commentaire les warnings/errors et info sur les lignes car les personnes réalisant l'import ne veulent pas ces infos.
+		// Ca n'a jamais fonctionné sur D7 (erreur nommage méthode et appel) donc ils sont perturbés par les informations qu'on donne
+    /*
     if (isset($results['fault']['doublon'])
       && count($results['fault']['doublon']) > 0) {
       $message = \Drupal::translation()->formatPlural(count($results['fault']['doublon']), 'One non-imported line (duplicate source and destination sites).', '@count non-imported lines (duplicate source and destination sites).');
@@ -102,7 +105,7 @@ function oab_backbones_import_batch_finished($success, $results, $operations) {
       && count($results['fault']['emptyValue']) > 0) {
       $message = \Drupal::translation()->formatPlural(count($results['fault']['emptyValue']), 'One line containing empty values.', '@count lines containing empty values.');
       drupal_set_message($message, 'warning', TRUE);
-    }
+    }*/
   } else {
     $message = t('Finished with an error.');
     drupal_set_message($message, 'error', TRUE);
