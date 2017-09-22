@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.customer_story.field_file
     - field.field.node.customer_story.field_highlight
     - field.field.node.customer_story.field_industry
+    - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_job_profile
     - field.field.node.customer_story.field_market_segment
     - field.field.node.customer_story.field_meta_description
@@ -79,6 +81,7 @@ third_party_settings:
         - field_region
         - field_country
         - field_job_profile
+        - field_insight
       parent_name: group_onglets
       weight: 21
       format_type: tab
@@ -154,6 +157,12 @@ targetEntityType: node
 bundle: customer_story
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_content:
     weight: 8
     settings:
@@ -223,6 +232,12 @@ content:
     region: content
   field_industry:
     weight: 49
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
+    weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -347,9 +362,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
   field_market_segment: true
   field_thematic: true
   sticky: true
-  uid: true

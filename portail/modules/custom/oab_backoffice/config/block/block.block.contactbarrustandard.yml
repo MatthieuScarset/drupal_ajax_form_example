@@ -49,8 +49,6 @@ visibility:
       industry: industry
       magazine: magazine
       partner: partner
-      press_kit: press_kit
-      press_release: press_release
       product: product
       simple_page: simple_page
       solution: solution
