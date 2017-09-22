@@ -101,7 +101,10 @@
         $(".sub_local_menu ul li a").click(function(event ) {
             event.preventDefault();
 
-            var divToScroll  = $(this).attr('href');
+            var LinkToScroll  = $(this).attr('href');
+            var tab_divToScroll = LinkToScroll.split("#");
+            var divToScroll = "#"+tab_divToScroll[1];
+
             var offsetTop = 0;
 
             if (top_menu.length) { offsetTop += top_menu.outerHeight(); }
