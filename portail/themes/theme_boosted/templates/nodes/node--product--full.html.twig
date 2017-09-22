@@ -85,6 +85,9 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
 
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
@@ -122,7 +125,6 @@ view_mode ? view_mode|clean_class,
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
-<article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
 
         {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title',
