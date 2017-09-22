@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - ctools
+    - language
     - oab_frontoffice
   theme:
     - theme_boosted
@@ -29,3 +30,11 @@ visibility:
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
