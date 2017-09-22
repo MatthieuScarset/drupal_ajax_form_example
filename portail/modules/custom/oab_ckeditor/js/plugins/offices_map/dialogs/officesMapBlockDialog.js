@@ -30,7 +30,7 @@ CKEDITOR.dialog.add('officesMapBlockDialog', function (editor) {
                         type: 'select',
                         items: regionsArray,
                         default: 'all',
-                        id: 'regionChooser',
+                        id: 'region_chooser',
                         className: 'regionChooser',
                         label: 'Region',
                     },
@@ -38,7 +38,7 @@ CKEDITOR.dialog.add('officesMapBlockDialog', function (editor) {
                         type: 'select',
                         items: countriesArray,
                         default: 'all',
-                        id: 'countryChooser',
+                        id: 'country_chooser',
                         className: 'countryChooser',
                         label: 'Country',
                     }
@@ -46,26 +46,18 @@ CKEDITOR.dialog.add('officesMapBlockDialog', function (editor) {
             }
         ],
         onOk: function () {
-            /*
-            var
-                    dialog = this,
-                    div_container = new CKEDITOR.dom.element('div'),
-                    css = 'videoEmbed';
-            // Set custom css class name
-            if (dialog.getValueOf('tab-basic', 'css_class').length > 0) {
-                css = dialog.getValueOf('tab-basic', 'css_class');
-            }
-            div_container.setAttribute('class', css);
+            var dialog = this;
+            var region_id = 'all';
+            var country_id = 'all';
 
-            // Auto-detect if youtube, vimeo or dailymotion url
-            var url = detect(dialog.getValueOf('tab-basic', 'url_video'));
-            // Create iframe with specific url
-            if (url.length > 1) {
-                var iframe = new CKEDITOR.dom.element.createFromHtml('<iframe frameborder="0" width="560" height="349" src="' + url + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
-                div_container.append(iframe);
-                editor.insertElement(div_container);
-            }*/
-            editor.insertHtml( '||{"type":"block", "block_id":"offices_map_block"}||' );
+            if (dialog.getValueOf('tab-basic', 'region_chooser').length > 0) {
+                region_id = dialog.getValueOf('tab-basic', 'region_chooser');
+            }
+            if (dialog.getValueOf('tab-basic', 'country_chooser').length > 0) {
+                country_id = dialog.getValueOf('tab-basic', 'country_chooser');
+            }
+
+            editor.insertHtml( '||{"type":"block", "block_id":"offices_map_block", "region_id":"' + region_id + '", "country_id":"'+ country_id + '"}||' );
         }
     };
     return tab;

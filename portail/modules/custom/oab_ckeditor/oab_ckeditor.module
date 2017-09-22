@@ -220,7 +220,6 @@ function getArrayRegionsCountries(){
 	$query->addField('oc', 'name', 'country_name');
 	$query->orderBy('oc.name');
 	$results =	$query->execute()->fetchAll();
-
 	$table_countries = array();
 	$table_countries[] = array(t('All'), 'all');
 	foreach ($results as $country){
@@ -242,12 +241,9 @@ function getArrayRegionsCountries(){
 	$query->addField('t', 'langcode', 'region_langcode');
 	$query->orderBy('t.name');
 	$results =	$query->execute()->fetchAll();
-
 	$table_regions = array();
 	$table_regions[] = array(t('All'), 'all');
-
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
 	foreach ($results as $region){
 		if(!in_array(array($region->region_name, $region->region_tid), $table_regions)
 			&& !empty($region->region_tid)
