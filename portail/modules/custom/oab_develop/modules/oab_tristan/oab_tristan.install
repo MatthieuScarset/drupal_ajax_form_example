@@ -346,3 +346,10 @@ function oab_tristan_update_8043() {
 function oab_tristan_update_8044() {
   include_once("updates/update_8044.inc");
 }
+
+/**
+ * Suppression du block product sur les langues RU et RU-EN
+ */
+function oab_tristan_update_8045() {
+  include_once("updates/update_8045.inc");
+}
