@@ -22,5 +22,6 @@ pm-enable -y oab_synomia_search_engine
 pm-enable -y oab_will
 pm-enable -y oab_tealium
 pm-enable -y oab_axiome
+pm-enable -y oab_backbones
 updb
 #entity-updates

@@ -336,3 +336,11 @@ function oab_stephanie_update_8042() {
 	include_once("updates/update_8042.inc");
 }
 
+
+/**
+ * Desactivation du droit pour Chief editor d'activer les commentaires sur les blogs
+ */
+
+function oab_stephanie_update_8043() {
+	include_once("updates/update_8043.inc");
+}
