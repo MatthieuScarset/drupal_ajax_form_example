@@ -26,10 +26,22 @@
   {#  <{{ list.type }}{{ list.attributes }}> #}
 
 {% if rows.0 is defined %}
-    <div class="homepage-eclairage-playlist-element">
+    <div class="homepage-eclairage-playlist-element hidden-xs hidden-sm">
 
-        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 }}" class="home-playlist-items container no-padding">
+        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 }}" class="home-playlist-items container no-padding hidden-xs hidden-sm">
             {% for row in rows %}
+                <div class="item-playlist-content">
+                    {{ row.content }}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="homepage-eclairage-playlist-element hidden-md hidden-lg">
+{# on différencie le carrousel du deskotp qui affiche tous les contenus, du swiper mobile qui n'en affiche que 6
+Pour pallier au probleme JS qui fait qu'on ne peut avoir 2 slick carousel avec le meme ID, j'ajoute +100 à celui du mobile #}
+        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 + 100 }}" class="home-playlist-items container no-padding hidden-md hidden-lg">
+            {% for row in rows|slice(0,5) %}
                 <div class="item-playlist-content">
                     {{ row.content }}
                 </div>
