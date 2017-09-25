@@ -1,0 +1,33 @@
+uuid: 0a953f33-4f5e-4d94-b041-1a1a9a1ca8aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: localnav
+theme: theme_boosted
+region: top_zone
+weight: 0
+provider: null
+plugin: local_nav_block
+settings:
+  id: local_nav_block
+  label: 'Local Nav'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      country: country
+      industry: industry
+      region: region
+      solution: solution
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
