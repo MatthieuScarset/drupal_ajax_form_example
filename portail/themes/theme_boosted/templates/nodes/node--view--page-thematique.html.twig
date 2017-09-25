@@ -1,13 +1,20 @@
 {#
 /**
  * @file
- * Theme override to display a node.
+ * Default theme implementation to display a node.
  *
  * Available variables:
  * - node: The node entity with limited access to object properties and methods.
-     Only "getter" methods (method names starting with "get", "has", or "is")
-     and a few common methods such as "id" and "label" are available. Calling
-     other methods (such as node.delete) will result in an exception.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
  * - label: The title of the node.
  * - content: All node items. Use {{ content }} to print them all,
  *   or print a subset such as {{ content.field_example }}. Use
@@ -56,43 +63,22 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  *
- * @ingroup templates
- *
  * @see template_preprocess_node()
  *
  * @todo Remove the id attribute (or make it a class), because if that gets
  *   rendered twice on a page this is invalid CSS for example: two lists
  *   in different view modes.
+ *
+ * @ingroup themeable
  */
 #}
-
-{% set createdDate = node.getCreatedTime %}
-{% set day = createdDate|date("d") %}
-{% set month = node.getCreatedTime|formatDate("F") %}
-{% set year = createdDate|date("Y") %}
-
-{% set tmp_month = month|trans %}
-{% set lang = node.get('langcode').getValue()[0].value %}
-{% if lang == 'fr' or  lang == 'ru' %}
-    {% set month = tmp_month|lower %}
-{% endif %}
-
-<a href="{{ url }}" class="link-subhomes">
-<div class="display-subhomes">
-    <div class="encart col-lg-12">
-        <div class="bigKey col-lg-5 nopadding">{{ day }}</div>
-        <div class="lowKey col-lg-7 nopadding">
-            {{ month }}<br/>{{ year }}
+{#<article{{ attributes }}>#}
+<a href="{{ url }}" target="_blank">
+    <div class="thematique-zone">
+        <div class="thematic-content-label col-md-12 col-sm-12 col-xs-12"> {{ label }} </div>
+        <div class="thematic-content-content col-md-12 col-sm-12 col-xs-12">
+            <div class="image"> {{ content.field_visual }}</div>
+            <div class="highlight"> {{ content.field_highlight }}</div>
         </div>
     </div>
-    {# Pour faire la marge du trait identique aux autres blocs,
-    je suis obligé de la mettre dans un col-lg-12 aussi #}
-    <div class="col-lg-12">
-        <div class="border col-lg-12"></div>
-    </div>
-    <div class="txt col-lg-12">
-        <span>{{ 'Press release'|trans }}</span>
-        <div>{{ label }}</div>
-    </div>
-</div>
 </a>

@@ -79,6 +79,8 @@ view_mode ? view_mode|clean_class,
 
 
 <article{{ attributes.addClass(classes) }} xmlns="http://www.w3.org/1999/html">
+    {{ title_suffix }}
+    {{ title_prefix }}
     <div{{ content_attributes.addClass('content') }}>
         <div class="row">
             <div class="col-md-12 home_thematic_banner home_thematic_nopadding">
@@ -100,6 +102,7 @@ view_mode ? view_mode|clean_class,
 
                     </div>
                 </div>
+                {# DESKTOP #}
                 <div class="col-md-6 col-lg-6 hidden-sm hidden-xs home_thematic_nopadding">
                     {# DESKTOP IMAGE #}
                     <a class="home_banner_element_link" href="{{ content.field_banner_link.0.entity.field_link.value }}">
@@ -127,24 +130,24 @@ view_mode ? view_mode|clean_class,
                         </div>
                     </a>
                 </div>
-
+                {# MOBILE #}
                 <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_thematic_nopadding">
                     {# DESKTOP IMAGE #}
                     <a class="home_banner_element_link" href="{{ content.field_banner_link.0.entity.field_link.value }}">
                         <div class="home_thematic_banner" style="background:url('{{ file_url(content.field_mobile_image['#items'].entity.uri.value) }}'); background-repeat: no-repeat;">
-                            <div class="home_banner_first_bottom_container col-md-12">
+                            <div class="home_banner_first_bottom_container_mobile">
                                 <!-- Left container / date-->
-                                <div class="col-md-1 ">
+                                <div class="col-xs-12 col-sm-12 align-left">
                                     <!-- Date -->
-                                    <div class="home_banner_next_date">
+                                    <div class="home_banner_first_date">
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
-                                <div class="col-md-10 " style="color: {{ content.field_text_color.0 }};">
-                                    <p class="home_banner_title">
+                                <div class="col-xs-12 col-sm-12" style="color: {{ content.field_text_color.0 }};">
+                                    <p class="home_banner_title_mobile">
                                         {{ content.field_banner_image_title.0 }}
                                     </p>
                                     <p class="home_banner_first_nameFunction">
@@ -168,7 +171,7 @@ view_mode ? view_mode|clean_class,
 
         <br/>
         {# THEMATIQUE COLUMNS A LA UNE #}
-        <div class="home_thematic_columns">
+        <div class="home_thematic_columns hidden-xs hidden-sm">
         <div class="container">
            <div class="row">
                 <div class="col-md-12 col-lg-12 hidden-xs hidden-sm home_thematic_section">
@@ -191,6 +194,11 @@ view_mode ? view_mode|clean_class,
 
         {# THEMATIQUE COLUMNS MOBILE #}
         <div class="container">
+            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg" >
+                <div class="home_thematic_columns_title">
+                    {{ content.field_grouping_title.0 }}
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_banner_no_padding" >
                 <div class="swiper-container-columns">
                     <div class="swiper-wrapper">
@@ -214,7 +222,7 @@ view_mode ? view_mode|clean_class,
 
             <div class="row">
                 <div class="col-md-12 col-lg-12 home_banner_no_padding">
-                    <div class="home_thematic_automatic_title">
+                    <div class="home_thematic_automatic_title container">
                        {{ "All contents"|t }}
                     </div><br/>
                     {{ oab_drupal_view('page_thematique', 'block_1') }}
