@@ -760,8 +760,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .menu-loupe-xs .glyphicon {
-        font-size: 3rem;
-        margin-top: 22px;   //Pour bloquer le margin 22px de glyphicon
+        font-size: 3.5rem;
+        margin-top: 22px;   /*Pour bloquer le margin 22px de glyphicon*/
     }
 
     .footer-div-border {
@@ -776,6 +776,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .menu-xs {
         padding: 1rem;
         margin-right: 0px !important;
+        margin-top: 10px;
     }
 
     .paragraph--type--homepage-banner-experience {
@@ -1233,4 +1234,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .rebond-product-link-create a:hover,
 .rebond-product-link-create a:active {
     text-decoration: underline;
+}
+
+.link-white {
+    color: white;
+}
+
+.link-white:hover {
+    color: #F16E00;
+}
+
+.divSynomia {
+    display: inline-block;
 }
