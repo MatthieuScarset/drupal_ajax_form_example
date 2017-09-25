@@ -119,7 +119,7 @@ view_mode ? view_mode|clean_class,
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_country', 'field_city', 'field_area', 'field_display_title', 'field_meta_description', 'field_meta_title', 'field_highlight', 'field_solution', 'field_industry','field_press_type') }}
+        {{ content|without('field_country', 'field_city', 'field_area', 'field_display_title', 'field_meta_description', 'field_meta_title', 'field_highlight', 'field_solution', 'field_industry','field_press_type', 'field_start_date', 'field_end_date') }}
     </div>
 
 </article>
