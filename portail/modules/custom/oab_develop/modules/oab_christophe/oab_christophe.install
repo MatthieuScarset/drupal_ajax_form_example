@@ -248,3 +248,10 @@ function oab_christophe_update_8038() {
   oabt_YmlImport('block.block.mainnavigationru.yml');
   oabt_YmlImport('block.block.mainnavigationruen.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3049 - block local nav sur les contenus "pays" et "region"
+ */
+function oab_christophe_update_8039() {
+  oabt_YmlImport('block.block.localnav.yml');
+}
