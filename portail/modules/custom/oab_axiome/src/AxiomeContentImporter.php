@@ -65,6 +65,14 @@ class AxiomeContentImporter {
             $node->set('field_visual', $image_media_id);
         }
 
+        // changement du title du noeud par le h1_title present dans la fiche XML
+        if(!empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])
+        && is_string($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])) {
+            $messages .= 'CHANGEMENT DE TITRE pour '.$node->id().' :'.$axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']."\n";
+            $node->setTitle($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']);
+        }
+
+        $node->save();
 	}
 
 	private static function replaceLeftBlock(&$dom, $bannerData, $node){
