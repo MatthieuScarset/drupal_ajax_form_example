@@ -255,3 +255,15 @@ function oab_christophe_update_8038() {
 function oab_christophe_update_8039() {
   oabt_YmlImport('block.block.localnav.yml');
 }
+
+/**
+ *  Désactivation du pattern d'url pour les taxonomies
+ *  Suppression des url alias existantes pour les taxonomies
+ */
+function oab_christophe_update_8040() {
+  oabt_YmlImport('pathauto.pattern.terms.yml');
+
+  $query = \Drupal::database()->delete('url_alias');
+  $query->condition('source', '/taxonomy/term/%', 'LIKE');
+  $query->execute();
+}

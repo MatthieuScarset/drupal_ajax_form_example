@@ -1,0 +1,31 @@
+uuid: f187cbf1-4e85-4363-b673-4fc17dbac510
+langcode: en
+status: false
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: terms
+label: terms
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:name]'
+selection_criteria:
+  6a3a30b5-1b02-4915-920d-275827c9bf18:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      areas: areas
+      blogs: blogs
+      customer_stories: customer_stories
+      document_types: document_types
+      industries: industries
+      magazines: magazines
+      partners: partners
+      solutions: solutions
+      topics: topics
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 6a3a30b5-1b02-4915-920d-275827c9bf18
+selection_logic: and
+weight: -5
+relationships: {  }
