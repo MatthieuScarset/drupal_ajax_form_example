@@ -229,6 +229,9 @@ article.node.document .document_field_image{
     .encart_profil .bloc_textuel {
         margin-left: 135px;
     }
+
+
+
 }
 
 article p {
@@ -998,6 +1001,18 @@ a.home_banner_element_mobile_link {
     margin-bottom:20px;
 }
 
+
+@media (max-width: 1320px) {
+    .valorisation-element {
+        width: 275px !important;
+    }
+    .valorisation-element .views-field-title {
+        width: 275px !important;
+    }
+    .valorisation-element .views-field-field-highlight {
+        width: 275px !important;
+    }
+}
 .valorisation-element:hover {
     background-color: #F16e00;
     color: #fff;
