@@ -30,7 +30,7 @@ var followbar_parameters = {
 	background_color: 'black',
   	layout: 'horizontal',
   	auto_load: true,
-  	locale: 'fr_FR',
+  	locale: 'en_US',
   	page_facebook: 'https://www.facebook.com/orangebusiness',
   	page_twitter: 'https://twitter.com/orangebusiness',
   	page_googleplus: 'https://plus.google.com/+orange/posts',

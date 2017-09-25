@@ -152,7 +152,29 @@ var staticText = {
             follow: 'تتبعوا أخبارنا',
             newsletter: 'رسالة إخبارية'
         }
-    }
+    },
+    ru_RU:
+        {
+            shares: 'shares',
+            share: 'share',
+            toshare: 'Share',
+            follow: 'Присоединяйтесь к нам',
+            to: 'To',
+            from: 'From',
+            subject: 'Subject',
+            message: 'Message',
+            email: 'email address',
+            optional: 'optional',
+            cancel: 'cancel',
+            send: 'send',
+            more: 'More options',
+            accessibility: {
+                shareon: 'Share on',
+                sharewith: 'Share with',
+                follow: 'Follow us on',
+                newsletter: 'Subscribe to our newsletter'
+            }
+        }
     // (sharebar/followbar) add new language
     // xy_XY:
     // {
@@ -179,28 +201,22 @@ var staticText = {
 };
 
 //check language
-if(typeof sharebar_parameters !== "undefined"){
-    if(typeof sharebar_parameters.og_locale !== "undefined" && sharebar_parameters.og_locale !== null){
-        if(sharebar_parameters.og_locale === "en_US"){
-            var staticTextLocale = staticText.en_US;
-        }else if(sharebar_parameters.og_locale === "fr_FR"){
-            var staticTextLocale = staticText.fr_FR;
-        }else if(sharebar_parameters.og_locale === "es_ES"){
-            var staticTextLocale = staticText.es_ES;
-        }else if(sharebar_parameters.og_locale === "pl_PL"){
-            var staticTextLocale = staticText.pl_PL;
-        }else if(sharebar_parameters.og_locale === "ro_RO"){
-            var staticTextLocale = staticText.ro_RO;
-        }else if(sharebar_parameters.og_locale === "ar_AR"){
-            var staticTextLocale = staticText.ar_AR;
-        // (sharebar) add new language
-        // }else if(sharebar_parameters.og_locale === "xy_XY"){
-        //  var staticTextLocale = staticText.xy_XY;
-        }else{
-            var staticTextLocale = staticText.en_US;
-        }
+var currentLang = jQuery('html').attr('lang');
+if(typeof currentLang !== "undefined" && currentLang !== null){
+    if(currentLang === "en"){
+        var staticTextLocale = staticText.en_US;
+    }else if(currentLang === "fr"){
+        var staticTextLocale = staticText.fr_FR;
+    }else if(currentLang === "ru"){
+        var staticTextLocale = staticText.ru_RU;
+    // (sharebar) add new language
+    // }else if(sharebar_parameters.og_locale === "xy_XY"){
+    //  var staticTextLocale = staticText.xy_XY;
+    }else{
+        var staticTextLocale = staticText.en_US;
     }
-}else if(typeof followbar_parameters !== "undefined"){
+}
+/*}else if(typeof followbar_parameters !== "undefined"){
     if(typeof followbar_parameters.locale !== "undefined" && followbar_parameters.locale !== null){
         if(followbar_parameters.locale === "en_US"){
             var staticTextLocale = staticText.en_US;
@@ -223,7 +239,7 @@ if(typeof sharebar_parameters !== "undefined"){
     }
 }else{
     var staticTextLocale = staticText.en_US;
-}
+}*/
 
 var checkIfRightToLeft = function(){
     if(typeof sharebar_parameters !== "undefined"){
