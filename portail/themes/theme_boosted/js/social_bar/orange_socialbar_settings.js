@@ -36,6 +36,7 @@ var followbar_parameters = {
   	page_googleplus: 'https://plus.google.com/+orange/posts',
   	page_linkedin: 'http://www.linkedin.com/company/orange-business-services',
   	page_pinterest: 'http://pinterest.com/orangebusiness/',
+    page_slideshare: 'http://www.slideshare.net/orangebusiness',
   	page_youtube: 'http://www.youtube.com/user/orangebusiness',
   	page_dailymotion: 'http://www.dailymotion.com/orangebusiness'
   		
@@ -43,9 +44,9 @@ var followbar_parameters = {
 var visible_followbar_buttons = [
     {button: 'twitter'},
     {button: 'linkedin'},
-    {button: 'googleplus'},
     {button: 'facebook'},
-    {button: 'dailymotion'},
-    {button: 'youtube'},    
-    {button: 'pinterest'}
+    {button: 'slideshare'},
+    {button: 'pinterest'},
+    {button: 'youtube'},
+    {button: 'dailymotion'}
 ];
