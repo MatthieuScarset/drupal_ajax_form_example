@@ -779,6 +779,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-top: 10px;
     }
 
+    .menu-xs .sandwich-button {
+        border: none;
+    }
+
     .paragraph--type--homepage-banner-experience {
         display: block;
     }
