@@ -765,8 +765,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .menu-loupe-xs .glyphicon {
-        font-size: 3rem;
-        margin-top: 22px;   //Pour bloquer le margin 22px de glyphicon
+        font-size: 3.5rem;
+        margin-top: 22px;   /*Pour bloquer le margin 22px de glyphicon*/
     }
 
     .footer-div-border {
@@ -781,6 +781,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .menu-xs {
         padding: 1rem;
         margin-right: 0px !important;
+        margin-top: 10px;
+    }
+
+    .menu-xs .sandwich-button {
+        border: none;
     }
 
     .paragraph--type--homepage-banner-experience {
@@ -1178,6 +1183,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .block-mediatheque {
    background-color: #DDDDDD;
+    display: inline-block;
 }
 
 .block-mediatheque p {
@@ -1185,6 +1191,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     line-height: 2rem;
     color: #000000;
+}
+
+aside.right-column > .region {
+    padding-bottom: 2rem;
 }
 
 .block-mediatheque .block-title {
@@ -1239,4 +1249,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .rebond-product-link-create a:hover,
 .rebond-product-link-create a:active {
     text-decoration: underline;
+}
+
+.link-white {
+    color: white;
+}
+
+.link-white:hover {
+    color: #F16E00;
+}
+
+.divSynomia {
+    display: inline-block;
 }
