@@ -506,4 +506,12 @@
     .mega-menu.navbar .nav > li > a {
         font-size: 2.5rem;
     }
+
+    .iconblock .icon-email {
+        margin-left: 0;
+    }
+
+    .textlink-contactbar {
+        margin-top: -50px;
+    }
 }
