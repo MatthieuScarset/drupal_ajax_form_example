@@ -353,3 +353,10 @@ function oab_tristan_update_8044() {
 function oab_tristan_update_8045() {
   include_once("updates/update_8045.inc");
 }
+
+/**
+ * Modification de l'affichage de "Presse" pour le fil d'ariane
+ */
+function oab_tristan_update_8046() {
+  include_once("updates/update_8046.inc");
+}
