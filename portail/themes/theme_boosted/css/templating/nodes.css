@@ -229,6 +229,7 @@ article.node.document .document_field_image{
     .encart_profil .bloc_textuel {
         margin-left: 135px;
     }
+
 }
 
 article p {
@@ -672,6 +673,17 @@ a.home_banner_element_mobile_link {
         float: inherit;
     }
 
+
+    .home_playlist_grey {
+        padding-top: 65px !important;
+        padding-bottom: 55px !important;
+    }
+
+    .home_playlist_white {
+        padding-top: 65px !important;
+        padding-bottom: 55px !important;
+    }
+
     .home_banner_no_padding {
         padding: 20px;
     }
@@ -692,6 +704,7 @@ a.home_banner_element_mobile_link {
         padding-bottom: 40px;
         padding-top: 15px;
     }
+
 }
 
 /* HOME PLAYLIST */
@@ -772,11 +785,9 @@ a.home_banner_element_mobile_link {
     color: black ;
 }
 
-
-
 .home_playlist_grey {
     background-color: #eee;
-    padding-top: 75px;
+    padding-top: 80px;
     padding-bottom: 45px;
 }
 
