@@ -578,6 +578,7 @@ var showFollowBar = function(){
         {
             if(typeof followbar_parameters.page_facebook !== "undefined" && followbar_parameters.page_facebook != null && followbar_parameters.page_facebook != ""){
                 currentSVGIcon = svgIcons.facebook;
+                var currentLang = jQuery('html').attr('lang');
                 if(currentLang != 'ru'){
                     currentFollowPage = followbar_parameters.page_facebook;
                 }else{
