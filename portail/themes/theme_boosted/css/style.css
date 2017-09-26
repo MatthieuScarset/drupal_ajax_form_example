@@ -1177,6 +1177,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .block-mediatheque {
    background-color: #DDDDDD;
+    display: inline-block;
 }
 
 .block-mediatheque p {
@@ -1184,6 +1185,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     line-height: 2rem;
     color: #000000;
+}
+
+aside.right-column > .region {
+    padding-bottom: 2rem;
 }
 
 .block-mediatheque .block-title {
