@@ -274,6 +274,15 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
+
+    #items_megamenu > div h3 {
+        border-bottom: 1px solid white;
+    }
+
+    #items_megamenu > div:last-child h3 {
+        border-bottom: none;
+    }
+
     #items_megamenu li {
         border-top: 1px solid white;
     }
