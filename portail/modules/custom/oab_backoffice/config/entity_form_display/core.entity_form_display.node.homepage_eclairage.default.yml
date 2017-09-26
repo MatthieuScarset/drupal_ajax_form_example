@@ -1,4 +1,3 @@
-uuid: 3a82f231-a0a7-43cb-91e1-d10a801e6aad
 langcode: en
 status: true
 dependencies:
@@ -14,6 +13,7 @@ dependencies:
   module:
     - field_group
     - paragraphs
+    - path
     - workbench_moderation
 third_party_settings:
   field_group:
@@ -184,6 +184,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -203,6 +209,5 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
-  path: true
   promote: true
   sticky: true

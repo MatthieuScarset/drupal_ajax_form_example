@@ -69,23 +69,45 @@
 .solaris-contactbar {
     font-size: 4rem !important;
     padding-right: 1rem;
+    vertical-align: bottom;
+}
+
+.arrow-contactbar {
+    text-align: right;
+    margin-top: 10px;
 }
 
 .textlink-contactbar {
     font-size: 1.6rem;
     font-weight: bold;
-    margin-top: 10px;
-    position: absolute;
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    padding-bottom: 5px;
 }
 .textlink-contactbar a{
     color: white;
 }
+.textlink-contactbar a:hover {
+    color: rgb(255,121,0);
+}
 
 .iconblock {
     position: relative;
+    cursor: pointer;
 }
 
-.iconblock:hover, .iconblock a:hover {
+.iconblock .icon-email {
+    margin:0;
+}
+
+.iconblock a {
+    display: table-cell;
+    color: white;
+}
+
+
+.iconblock a:hover {
     color: rgb(255,121,0);
     cursor: pointer;
 }
