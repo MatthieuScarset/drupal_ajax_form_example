@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_title
+    - paragraphs.paragraphs_type.home_thematic_columns
+  module:
+    - link
+id: paragraph.home_thematic_columns.field_link_title
+field_name: field_link_title
+entity_type: paragraph
+bundle: home_thematic_columns
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
