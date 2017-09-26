@@ -1,12 +1,14 @@
-{% if field_customer_case.title|trim is not empty %}
 <div class="node-axiome-customer-story">
+    {% if field_customer_case.title|trim is not empty %}
     <div class="col col-md-12 nopadding">
-
         <p class="highlight1"> {{ field_customer_case.title }} </p>
     </div>
+    {% endif %}
+    {% if field_customer_case.video|trim is not empty %}
     <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
         {{ field_customer_case.video|raw }}
     </div>
+    {% endif %}
     {% if field_customer_case.customer_case_name|trim is not empty %}
     <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
         <div class="bubble">
@@ -17,4 +19,3 @@
     </div>
     {% endif %}
 </div>
-{% endif %}

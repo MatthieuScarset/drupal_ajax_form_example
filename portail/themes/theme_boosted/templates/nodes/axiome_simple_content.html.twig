@@ -1,23 +1,20 @@
-{% if field_simple_content.0.Attributes.title|trim is not empty %}
 <div class="node-axiome-simple-content">
+    {% for sc in field_simple_content %}
     <div class="col col-md-12 nopadding">
-        <h2 class="titre2">{{ field_simple_content.0.Attributes.title }}</h2>
-        <p class="highlight1">{{ field_simple_content.0.Attributes.paragraph|raw|nl2br }}</p>
-
+        {% if sc.title|trim is not empty %}
+        <h2 class="titre2">{{ sc.title }}</h2>
+        {% endif %}
+        {% if sc.paragraph|trim is not empty %}
+        <p class="highlight1">{{ sc.paragraph|raw|nl2br }}</p>
+        {% endif %}
+        {% if sc.schema.url_archive|trim is not empty %}
         <div class="col col-md-12 nopadding image">
-            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field_simple_content.0.Attributes.schema.url_archive }}" alt="{{ field_simple_content.0.Attributes.schema.balise_alt }}" />
+            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ sc.schema.url_archive }}" alt="{{ sc.schema.balise_alt }}" />
         </div>
-        <div> {{ field_simple_content.0.Attributes.video|replace({'//': "https://"})|raw }}</div>
+        {% endif %}
+        {% if sc.video|trim is not empty %}
+        <div> {{ sc.video|replace({'//': "https://"})|raw }}</div>
+        {% endif %}
     </div>
-
-    <div class="col col-md-12 nopadding">
-        <h2 class="titre2">{{ field_simple_content.1.Attributes.title }}</h2>
-        <p class="highlight1">{{ field_simple_content.1.Attributes.paragraph|raw|nl2br }}</p>
-        <div class="col col-md-12 nopadding image">
-            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field_simple_content.1.Attributes.schema.url_archive }}" alt="{{ field_simple_content.1.Attributes.schema.balise_alt }}" />
-        </div>
-
-        <div> {{ field_simple_content.1.Attributes.video|replace({'//': "https://"})|raw }}</div>
-    </div>
+    {% endfor %}
 </div>
-{% endif %}
