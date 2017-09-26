@@ -77,6 +77,11 @@ article .content .field--type-text-long ul li:before{
     left: -20px;
 }
 
+article .field--type-text-long ul.nav-tabs li:before,
+article .content .field--type-text-long ul.nav-tabs li:before{
+    content: "";
+}
+
 .view-subhomes .display-subhomes{
     background-color: #eee;
     margin-right: 2rem;
@@ -1177,6 +1182,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .block-mediatheque {
    background-color: #DDDDDD;
+    display: inline-block;
 }
 
 .block-mediatheque p {
@@ -1184,6 +1190,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     line-height: 2rem;
     color: #000000;
+}
+
+aside.right-column > .region {
+    padding-bottom: 2rem;
 }
 
 .block-mediatheque .block-title {
