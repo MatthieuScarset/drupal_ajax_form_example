@@ -77,6 +77,11 @@ article .content .field--type-text-long ul li:before{
     left: -20px;
 }
 
+article .field--type-text-long ul.nav-tabs li:before,
+article .content .field--type-text-long ul.nav-tabs li:before{
+    content: "";
+}
+
 .view-subhomes .display-subhomes{
     background-color: #eee;
     margin-right: 2rem;
