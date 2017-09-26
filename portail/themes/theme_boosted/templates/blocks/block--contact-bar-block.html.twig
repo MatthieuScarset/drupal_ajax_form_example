@@ -63,7 +63,7 @@
 
           </div>
           <div class="col-md-3 col-sm-12 nopadding">
-              <span class="text-needhelp"> {{ "Besoin d'aide ?"|trans }} </span>
+              <span class="text-needhelp"> {{ "Besoin d'aide ?"|t }} </span>
           </div>
           <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
               <div class="glyphicon glyphicon-triangle-bottom expandContactBar" role="button"></div>
@@ -75,7 +75,10 @@
       <div id="contactbar-container-standard" class="container hidden">
         <div class="row">
             <div class="col-md-2 col-sm-12 nopadding iconblock">
-                <span class="glyphicon glyphicon-question-sign solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_assistance }}">{{ content.link_assistance_text }}</a></span>
+                <a href="{{ content.link_assistance }}">
+                    <span class="glyphicon glyphicon-question-sign solaris-contactbar"></span>
+                    <span class="textlink-contactbar">{{ content.link_assistance_text }}</span>
+                </a>
             </div>
             <div class="col-md-4 col-sm-12 nopadding text-align-center">
                <span class="wrapper_numero" style="display: inline-block; background-color: white; ">
@@ -87,9 +90,12 @@
                 </span>
             </div>
             <div class="col-md-3 col-sm-12 nopadding iconblock">
-                <span class="icon icon-email solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_ecrire }}">{{ content.link_ecrire_text }}</a></span>
+                <a href="{{ content.link_ecrire }}">
+                    <span class="icon icon-email solaris-contactbar"></span>
+                    <span class="textlink-contactbar">{{ content.link_ecrire_text }}</span>
+                </a>
             </div>
-            <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
+            <div class="col-md-3 col-sm-12 nopadding arrow-contactbar">
                 <div class="glyphicon glyphicon-triangle-top textlink-contactbar collapseContactBar" role="button"></div>
             </div>
             <div class="clear"></div>

@@ -62,7 +62,7 @@
 
             </div>
             <div class="col-md-3 col-sm-12 nopadding">
-                <span class="text-needhelp"> {{ "You need help ?"|trans }} </span>
+                <span class="text-needhelp"> {{ "You need help ?"|t }} </span>
             </div>
             <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
                 <div class="glyphicon glyphicon-triangle-bottom expandContactBar" role="button"></div>
@@ -79,9 +79,12 @@
 
                 </div>
                 <div class="col-md-3 col-sm-12 nopadding iconblock">
-                    <span class="icon icon-email solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_ecrire }}">{{ content.link_ecrire_text }}</a></span>
+                    <a href="{{ content.link_ecrire }}">
+                        <span class="icon icon-email solaris-contactbar"></span>
+                        <span class="textlink-contactbar">{{ content.link_ecrire_text }}</span>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
+                <div class="col-md-3 col-sm-12 nopadding arrow-contactbar">
                     <div class="glyphicon glyphicon-triangle-top textlink-contactbar collapseContactBar" role="button"></div>
                 </div>
             </div>
