@@ -57,13 +57,13 @@
     {% block content %}
         {# affiche le contenu saisi dans le back office: #}
 
-        <div id="contactbar-container-light" class="container">
+        <div id="contactbar-container-light" class="container expandContactBar" role="button">
 
             <div class="col-md-6 col-sm-12 nopadding" style="text-align: right;">
 
             </div>
             <div class="col-md-3 col-sm-12 nopadding">
-                <span class="text-needhelp"> {{ "Возникли вопросы ?"|trans }} </span>
+                <span class="text-needhelp"> {{ "Возникли вопросы ?"|t }} </span>
             </div>
             <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
                 <div class="glyphicon glyphicon-triangle-bottom expandContactBar" role="button"></div>
@@ -74,15 +74,24 @@
         <div id="contactbar-container-standard" class="container hidden">
             <div class="row">
                 <div class="col-md-3 col-sm-12 nopadding iconblock">
-                    <span class="glyphicon glyphicon-question-sign solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_offices }}"> {{ content.link_offices_text }}</a> </span>
+                   <a href="{{ content.link_offices }}">
+                       <span class="glyphicon glyphicon-question-sign solaris-contactbar"></span>
+                       <span class="textlink-contactbar"> {{ content.link_offices_text }} </span>
+                   </a>
                 </div>
                 <div class="col-md-3 col-sm-12 nopadding iconblock">
-                    <span class="icon icon-control_centre solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_help }}"> {{ content.link_help_text }}</a></span>
+                    <a href="{{ content.link_help }}">
+                        <span class="icon icon-control_centre solaris-contactbar"></span>
+                        <span class="textlink-contactbar">{{ content.link_help_text }}</span>
+                    </a>
                 </div>
                 <div class="col-md-3 col-sm-12 nopadding iconblock">
-                    <span class="icon icon-email solaris-contactbar"></span><span class="textlink-contactbar"><a href="{{ content.link_contact }}">{{ content.link_contact_text }}</a></span>
+                    <a href="{{ content.link_contact }}">
+                        <span class="icon icon-email solaris-contactbar"></span>
+                        <span class="textlink-contactbar">{{ content.link_contact_text }}</span>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-12 nopadding" style="text-align: right;">
+                <div class="col-md-3 col-sm-12 nopadding arrow-contactbar">
                     <div class="glyphicon glyphicon-triangle-top textlink-contactbar collapseContactBar" role="button"></div>
                 </div>
             </div>
