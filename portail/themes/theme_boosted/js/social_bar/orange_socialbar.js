@@ -578,7 +578,11 @@ var showFollowBar = function(){
         {
             if(typeof followbar_parameters.page_facebook !== "undefined" && followbar_parameters.page_facebook != null && followbar_parameters.page_facebook != ""){
                 currentSVGIcon = svgIcons.facebook;
-                currentFollowPage = followbar_parameters.page_facebook;
+                if(currentLang != 'ru'){
+                    currentFollowPage = followbar_parameters.page_facebook;
+                }else{
+                    currentFollowPage = followbar_parameters.page_facebook_ru;
+                }
             }else{
                 currentSVGIcon = "";
                 currentFollowPage = "";
