@@ -1,10 +1,12 @@
-{% if field_detailed_content.Attributes.intertitle|trim is not empty %}
 <div class="node-axiome-detailed-content">
     <div>
-        <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
-        <p class="highlight1">{{ field_detailed_content.Attributes.description|raw|nl2br }}</p>
+        {% if field_detailed_content.Attributes.intertitle|trim is not empty %}
+            <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
+        {% endif %}
+        {% if field_detailed_content.Attributes.description|trim is not empty %}
+            <p class="highlight1">{{ field_detailed_content.Attributes.description|raw|nl2br }}</p>
+        {% endif %}
     </div>
-
 
     <div class="bg product_modules bg_white col col-md-12 nopadding">
         {% set colIterator = 0 %}
@@ -16,20 +18,24 @@
                 {%  set cssClear = ' clearboth' %}
             {% endif %}
             <div class="col col-md-6 col-xs-12 nopadding{{ cssClear }}">
-                <div class="col col-md-2 col-xs-2 nopadding">
-                    <p style="margin-top:1rem;"><span class="solaris {{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.icon.boosted_css_name }}" style="font-size:4rem;"></span></p>
-                </div>
-
+                {% if field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.icon.boosted_css_name|trim is not empty %}
+                    <div class="col col-md-2 col-xs-2 nopadding">
+                        <p style="margin-top:1rem;"><span class="solaris {{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.icon.boosted_css_name }}" style="font-size:4rem;"></span></p>
+                    </div>
+                {% endif %}
                 <div class="col col-md-10 col-xs-10">
-                    <h4 class="highlight1">{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.title }}</h4>
-
-                    <p><b>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.header }}</b></p>
-
-                    <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description|raw|nl2br }}</p>
+                    {% if field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.title|trim is not empty %}
+                        <h4 class="highlight1">{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.title }}</h4>
+                    {% endif %}
+                    {% if field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.header|trim is not empty %}
+                        <p><b>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.header }}</b></p>
+                    {% endif %}
+                    {% if field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description|trim is not empty %}
+                        <p>{{ field_detailed_content.Children.ruby_detailed_contents_block[i].Attributes.description|raw|nl2br }}</p>
+                    {% endif %}
                 </div>
             </div>
             {%  set colIterator = colIterator + 1 %}
         {% endfor %}
     </div>
 </div>
-{% endif %}
