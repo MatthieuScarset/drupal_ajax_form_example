@@ -77,7 +77,7 @@ class AxiomeContentImporter {
 
 	private static function replaceLeftBlock(&$dom, $bannerData, $node){
 		$cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
-
+        $fontColor = $bannerData['font_color'];
 		//$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
         switch($cssClassLeftBlock){
@@ -146,17 +146,19 @@ class AxiomeContentImporter {
 		$nodesSpan = self::getNodesByClass($dom, 'frame', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleLeftBlock;
+            $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
 
 	private static function replaceCenterBlock(&$dom, $bannerData){
 		$titleCenter = $bannerData['insight'];
-
+        $fontColor = $bannerData['font_color'];
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'titre3');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleCenter;
+            $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
@@ -164,17 +166,23 @@ class AxiomeContentImporter {
 	private static function replaceRightBlock(&$dom, $bannerData){
 		$cssClassRightBlock =  $bannerData['pop_out_color']['boosted_css_name'];
 		$titleRightBlock = $bannerData['offre_name'];
+		$popoutColor = $bannerData['pop_out_color']['color'];
 		// change class name
 		$nodes = self::getNodesByClass($dom, 'icon-popout-connectivity');
 		foreach($nodes as $el) {
             $el->removeAttribute('class');
             $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassRightBlock);
+            $el->setAttribute('style', 'color: '.$popoutColor.' !important');
 		}
 
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'popout', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleRightBlock;
+			// hack pour mettre en blanc qd le fond est noir
+			if($popoutColor == '#000000'){
+                $el->setAttribute('style', 'color: #FFF !important');
+            }
 		}
 
 	}
