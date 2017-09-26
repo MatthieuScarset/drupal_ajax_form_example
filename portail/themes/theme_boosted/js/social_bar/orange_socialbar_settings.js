@@ -32,6 +32,7 @@ var followbar_parameters = {
   	auto_load: true,
   	locale: 'en_US',
   	page_facebook: 'https://www.facebook.com/orangebusiness',
+    page_facebook_ru: 'https://www.facebook.com/OrangeRussia',
   	page_twitter: 'https://twitter.com/orangebusiness',
   	page_googleplus: 'https://plus.google.com/+orange/posts',
   	page_linkedin: 'http://www.linkedin.com/company/orange-business-services',
