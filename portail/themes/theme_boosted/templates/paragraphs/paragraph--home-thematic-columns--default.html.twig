@@ -49,7 +49,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
             <div class="col-md-12 col-lg-12 home_thematic_nopadding home_thematic_column">
-            <a class="home_thematic_ColumnLink" href="{{ content.field_link.0 }}">
+            <a class="home_thematic_ColumnLink" href="{{ content.field_link_title[0]['#url'] }}">
                 <img class="home_thematic_columnImage" src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" />
                 <div class="thematic_column_elements">
 

@@ -1,4 +1,3 @@
-uuid: 2ae6e06e-ee41-49d5-9e49-2b3c458a0fc2
 langcode: en
 status: true
 dependencies:
@@ -27,6 +26,7 @@ dependencies:
     - image
     - link
     - paragraphs
+    - path
     - text
     - workbench_moderation
 third_party_settings:
@@ -277,6 +277,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 29
@@ -296,6 +302,5 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
-  path: true
   promote: true
   sticky: true
