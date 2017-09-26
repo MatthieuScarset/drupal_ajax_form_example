@@ -1,0 +1,9 @@
+uuid: c1c2bb74-5137-4913-b879-fec1ef1130f8
+langcode: en
+status: true
+dependencies: {  }
+id: node__homepage_eclairage
+label: 'Content: Homepage Eclairage'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

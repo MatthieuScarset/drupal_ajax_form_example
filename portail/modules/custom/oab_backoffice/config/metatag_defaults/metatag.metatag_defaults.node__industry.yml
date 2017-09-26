@@ -1,0 +1,9 @@
+uuid: fcbab868-477d-4970-9cc6-dac9d89d3949
+langcode: en
+status: true
+dependencies: {  }
+id: node__industry
+label: 'Content: Industry'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'
