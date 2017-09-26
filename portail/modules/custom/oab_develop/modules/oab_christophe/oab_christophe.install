@@ -267,3 +267,10 @@ function oab_christophe_update_8040() {
   $query->condition('source', '/taxonomy/term/%', 'LIKE');
   $query->execute();
 }
+
+/**
+ *  RUBYPORTAILOBS-3046 - paramétrage metatags
+ */
+function oab_christophe_update_8041() {
+  include_once("updates/update_8041.inc");
+}

@@ -1,0 +1,9 @@
+uuid: bba1400a-58bc-4c76-b764-e0c06a40f1c5
+langcode: en
+status: true
+dependencies: {  }
+id: node__solution
+label: 'Content: Solution'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'
