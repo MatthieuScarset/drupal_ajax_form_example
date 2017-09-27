@@ -318,5 +318,112 @@ function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $
 
 }
 
+function theme_boosted_views_pre_render(\Drupal\views\ViewExecutable &$view) {
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    // header des subhomes
+    if ($view->id() == 'subhomes') {
+        $intro = '';
+        if ($view->current_display == 'page_blog') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Engager la discussion sur les défis, les opportunités et les impacts du digital pour l’entreprise, c’est le but visé par nos blogs que nous voulons ouverts et curieux… Dites-nous si nous avons réussi ! ;-)';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_catalogue') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Que vous soyez une PME, une ETI, une grande entreprise ou une multinationale, nous mettons à votre disposition des solutions digitales adaptées à vos besoins pour vous aider à développer vos activités. Découvrez-les.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_customer') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Avec nos clients, nous écrivons ensemble une histoire. Pour évoquer cette aventure humaine, ils prennent la parole et nous livrent leurs témoignages.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_document') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Vous voulez vous informer sur le cloud, la connectivité enrichie ou la transformation digitale de l’entreprise ? Consultables d’un clic, brochures et Livres blancs vous offrent toutes les clés pour comprendre les évolutions de votre secteur.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_magazine') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'À travers des articles sur toutes les nouvelles tendances de l’innovation digitale au service de l’entreprise, découvrez les expertises d\'Orange Business Services.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_partners') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Pour répondre à vos besoins, vous fournir les solutions les plus efficaces et un accès simple aux meilleures technologies, nous avons construit des alliances avec les fournisseurs mondiaux les plus performants et disposant des plus hauts niveaux de certification.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }elseif ($view->current_display == 'page_press') {
+            switch ($current_language) {
+                case 'fr':
+                    $intro = 'Retrouvez sur cette page les dossiers, les communiqués de presse ainsi que toutes les informations relatives à l\'actualité d\'Orange Business Services.';
+                    break;
+                case 'en':
+                case 'ru':
+                case 'ru-en':
+                    $intro = '';
+                    break;
+                default:
+                    $intro = '';
+                    break;
+            }
+        }
+        $view->header['area']->options['content']['value'] = $intro;
+    }
+}
 
 ?>
