@@ -707,6 +707,10 @@ a.home_banner_element_mobile_link {
         padding-top: 15px;
     }
 
+    .valorisation-grid .views-col {
+        width:100% !important;
+    }
+
 }
 
 /* HOME PLAYLIST */
@@ -997,32 +1001,20 @@ a.home_banner_element_mobile_link {
 }
 
 .view-grid-valorisation {
-    max-width: 1320px;
+    /*max-width: 1320px;*/
     margin-right: auto;
     margin-left: auto;
 }
 
+
 .valorisation-element {
     background-color: #fff;
     margin-right: 10px;
-    margin-left: 10px;
-    width: 310px !important;
     height: 440px;
     margin-bottom:20px;
 }
 
 
-@media (max-width: 1320px) {
-    .valorisation-element {
-        width: 275px !important;
-    }
-    .valorisation-element .views-field-title {
-        width: 275px !important;
-    }
-    .valorisation-element .views-field-field-highlight {
-        width: 275px !important;
-    }
-}
 .valorisation-element:hover {
     background-color: #F16e00;
     color: #fff;
@@ -1043,12 +1035,15 @@ a.home_banner_element_mobile_link {
     margin-top: -20px;
 }
 
+.valorisation-element img{
+    width:100% ;
+}
+
 .valorisation-element .views-field-title {
     font-size: 2rem;
     font-weight: bold;
     line-height: 2.4rem;
     padding: 0 30px 15px 30px;
-    width: 310px;
 }
 .valorisation-element .views-field-title a {
     text-decoration: none;
@@ -1058,6 +1053,7 @@ a.home_banner_element_mobile_link {
 .item-playlist-content .views-field-field-profile {
     font-size: 1.4rem;
     padding-left:30px;
+    padding-right:30px;
 }
 .valorisation-element .views-field-field-job-profile,
 .item-playlist-content .views-field-field-job-profile{
@@ -1068,7 +1064,6 @@ a.home_banner_element_mobile_link {
     font-size: 1.6rem;
     line-height: 2rem;
     padding: 0 30px 15px 30px;
-    width: 310px;
 }
 
 .valorisation-element-date-wrapper {
@@ -1133,7 +1128,7 @@ a.home_banner_element_mobile_link {
 }
 
 #filterbar {
-    padding: 20px 10px 20px 10px;
+    padding: 20px 0px 20px 0px;
     font-size: 2rem;
     font-weight: bold;
 }
