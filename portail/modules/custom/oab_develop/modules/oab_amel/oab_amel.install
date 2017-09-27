@@ -310,3 +310,10 @@ function oab_amel_update_8035() {
 function oab_amel_update_8036() {
     include_once("updates/update_8036.inc");
 }
+
+/**
+ *  Modification de la vue Page thématique pour rajouter un filtre contextuel, modification du type de contenus pour ajouter les champs également
+ */
+function oab_amel_update_8037() {
+    include_once("updates/update_8037.inc");
+}
