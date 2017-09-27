@@ -1262,3 +1262,19 @@ aside.right-column > .region {
 .divSynomia {
     display: inline-block;
 }
+
+.region-content article.full-html.full,
+.region-content article.simple-page.full,
+.region-content article.solution.full,
+.region-content article.product.full,
+.region-content article.press-release.full,
+.region-content article.press-kit.full,
+.region-content article.partner.full,
+.region-content article.magazine.full,
+.region-content article.industry.full,
+.region-content article.document.full,
+.region-content article.customer-story.full,
+.region-content article.blog-post.full
+{
+    margin-bottom: 2rem;
+}
