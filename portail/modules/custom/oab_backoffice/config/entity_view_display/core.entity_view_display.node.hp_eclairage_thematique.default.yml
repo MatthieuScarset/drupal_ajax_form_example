@@ -9,7 +9,9 @@ dependencies:
     - field.field.node.hp_eclairage_thematique.field_display_title
     - field.field.node.hp_eclairage_thematique.field_funct
     - field.field.node.hp_eclairage_thematique.field_grouping_title
+    - field.field.node.hp_eclairage_thematique.field_header_title
     - field.field.node.hp_eclairage_thematique.field_home_thematic_columns
+    - field.field.node.hp_eclairage_thematique.field_insight
     - field.field.node.hp_eclairage_thematique.field_meta_description
     - field.field.node.hp_eclairage_thematique.field_meta_title
     - field.field.node.hp_eclairage_thematique.field_mobile_image
@@ -103,6 +105,14 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_header_title:
+    weight: 19
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_home_thematic_columns:
     type: entity_reference_revisions_entity_view
     weight: 4
@@ -111,6 +121,14 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_insight:
+    weight: 18
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_meta_description:
     weight: 1
