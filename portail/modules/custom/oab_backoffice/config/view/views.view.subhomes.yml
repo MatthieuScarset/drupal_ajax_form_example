@@ -264,7 +264,20 @@ display:
             label: ''
           granularity: second
       title: Press
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '--header--'
+            format: full_html
+          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }
@@ -333,6 +346,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        header: true
       filters:
         status:
           value: '1'
