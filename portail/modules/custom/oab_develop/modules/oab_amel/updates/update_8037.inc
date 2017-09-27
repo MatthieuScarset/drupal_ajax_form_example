@@ -23,3 +23,4 @@ oabt_YmlImport('core.entity_view_display.node.hp_eclairage_thematique.default.ym
 // MAJ du style d'image valorisation et des modes de rendu Teaser -> application du style d'image valorisation
 oabt_YmlImport('core.entity_view_display.media.image.teaser.yml');
 oabt_YmlImport('image.style.valorisation.yml');
+
