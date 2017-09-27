@@ -360,3 +360,10 @@ function oab_tristan_update_8045() {
 function oab_tristan_update_8046() {
   include_once("updates/update_8046.inc");
 }
+
+/**
+ * MAJ des API Keys pour l'utilisation de recaptcha
+ */
+function oab_tristan_update_8047() {
+  oabt_YmlImport('recaptcha.settings.yml');
+}
