@@ -281,12 +281,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-.block-card{
+.block-card a{
     max-width: 380px;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
-    padding: 0 !important;
-
+    /* padding-left: 10px !important;
+     padding-right: 10px !important;
+     padding: 0 !important;*/
+    background: white;
 }
 
 .block-card a {
