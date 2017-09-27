@@ -367,3 +367,10 @@ function oab_tristan_update_8046() {
 function oab_tristan_update_8047() {
   oabt_YmlImport('recaptcha.settings.yml');
 }
+
+/**
+ * Ajout de la date de publication des contenus dans les pages /admin/content et /admin/content/my-content
+ */
+function oab_tristan_update_8048() {
+  oabt_YmlImport('views.view.content.yml');
+}
