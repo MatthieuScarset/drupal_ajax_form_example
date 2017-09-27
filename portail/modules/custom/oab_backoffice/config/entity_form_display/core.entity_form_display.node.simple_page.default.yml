@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.simple_page.field_grouping_title
     - field.field.node.simple_page.field_highlight
     - field.field.node.simple_page.field_industry
+    - field.field.node.simple_page.field_insight
     - field.field.node.simple_page.field_job_profile
     - field.field.node.simple_page.field_market_segment
     - field.field.node.simple_page.field_meta_description
@@ -82,6 +83,7 @@ third_party_settings:
         - field_solution
         - field_region
         - field_job_profile
+        - field_insight
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -157,6 +159,12 @@ targetEntityType: node
 bundle: simple_page
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_blog_format:
     weight: 28
     settings: {  }
@@ -224,6 +232,12 @@ content:
     region: content
   field_industry:
     weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -347,9 +361,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
   field_market_segment: true
   field_thematic: true
   sticky: true
-  uid: true

@@ -9,7 +9,9 @@ dependencies:
     - field.field.node.hp_eclairage_thematique.field_display_title
     - field.field.node.hp_eclairage_thematique.field_funct
     - field.field.node.hp_eclairage_thematique.field_grouping_title
+    - field.field.node.hp_eclairage_thematique.field_header_title
     - field.field.node.hp_eclairage_thematique.field_home_thematic_columns
+    - field.field.node.hp_eclairage_thematique.field_insight
     - field.field.node.hp_eclairage_thematique.field_meta_description
     - field.field.node.hp_eclairage_thematique.field_meta_title
     - field.field.node.hp_eclairage_thematique.field_mobile_image
@@ -36,6 +38,7 @@ third_party_settings:
         - group_banner
         - group_columns
         - group_seo
+        - group_automatic_zone
       parent_name: ''
       weight: 1
       format_type: tabs
@@ -133,6 +136,20 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Image Zone'
+    group_automatic_zone:
+      children:
+        - field_header_title
+        - field_insight
+      parent_name: group_content
+      weight: 36
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Automatic zone'
 id: node.hp_eclairage_thematique.default
 targetEntityType: node
 bundle: hp_eclairage_thematique
@@ -197,6 +214,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_header_title:
+    weight: 37
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_home_thematic_columns:
     type: entity_reference_paragraphs
     weight: 9
@@ -208,6 +233,15 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
+    region: content
+  field_insight:
+    weight: 38
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_meta_description:
     weight: 5
