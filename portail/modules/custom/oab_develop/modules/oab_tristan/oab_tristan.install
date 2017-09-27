@@ -360,3 +360,17 @@ function oab_tristan_update_8045() {
 function oab_tristan_update_8046() {
   include_once("updates/update_8046.inc");
 }
+
+/**
+ * MAJ des API Keys pour l'utilisation de recaptcha
+ */
+function oab_tristan_update_8047() {
+  oabt_YmlImport('recaptcha.settings.yml');
+}
+
+/**
+ * Ajout de la date de publication des contenus dans les pages /admin/content et /admin/content/my-content
+ */
+function oab_tristan_update_8048() {
+  oabt_YmlImport('views.view.content.yml');
+}

@@ -72,7 +72,13 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+{%
+set classes = [
+node.bundle|clean_class,
+view_mode ? view_mode|clean_class,
+]
+%}
+<article{{ attributes.addClass(classes) }}>
 
     {{ title_prefix }}
     {% if not page %}
