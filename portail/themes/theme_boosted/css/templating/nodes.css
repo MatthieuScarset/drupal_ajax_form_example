@@ -809,6 +809,9 @@ a.home_banner_element_mobile_link {
     text-align: center;
 }
 
+.playlist-button-mobile {
+    width: 277px;
+}
 
 .btn-decouvrir-plus {
     width: 100%;
