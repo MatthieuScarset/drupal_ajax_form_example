@@ -618,12 +618,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #f16e00 !important;
 }
 .partner-banner .views-view-grid .views-row{
-    display: block;
+    display: table;
     border-spacing:10px;
     margin-right: 10px;
 
 }
-.partner-banner .views-view-grid .views-col{
+.partner-banner .views-view-grid .partner-img{
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid #595959;
@@ -631,16 +631,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: middle;
     float: none;
 }
-.partner-banner .views-view-grid .views-col:hover{
+.partner-banner .views-view-grid .partner-img:hover{
     border: 1px solid #F16E00;
 }
 
-.partner-banner .views-view-grid .views-col .field--item{
+.partner-banner .views-view-grid .partner-img .field--item{
     padding: 20px;
     text-align: center;
 }
-.partner-banner .views-view-grid .views-col .field--item img{
-    width: 100px;
+.partner-banner .views-view-grid .partner-img .field--item img{
+    max-width: 100px;
+    width: 100%;
     height: auto;
 }
 
@@ -925,10 +926,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .partner-banner .views-view-grid .views-row {
-        margin-left: -20px;
+        /*margin-left: -20px;*/
     }
-}
 
+
+    .partner-banner .views-view-grid .partner-img {
+        min-width: 190px;
+    }
+
+}
 .rebond article, .block-mediatheque, #block-promoactublock {
     margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
