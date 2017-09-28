@@ -903,9 +903,13 @@ a.home_banner_element_mobile_link {
 .home_thematic_textZone .node-socialbar{
     margin: 2.5rem 0 3rem 0;
 }
-.home_thematic_banner {
-    height: 610px;
 
+.home_thematic_banner_mobile {
+    height: 350px;
+}
+
+.home_thematic_banner_desktop {
+    height: 610px;
 }
 
 .home_thematic_nopadding {
@@ -1011,7 +1015,6 @@ a.home_banner_element_mobile_link {
     background-color: #fff;
     margin-right: 10px;
     height: 440px;
-    margin-bottom:20px;
 }
 
 
@@ -1037,6 +1040,10 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element img{
     width:100% ;
+}
+
+.valorisation-grid {
+    padding-bottom: 10px;
 }
 
 .valorisation-element .views-field-title {
