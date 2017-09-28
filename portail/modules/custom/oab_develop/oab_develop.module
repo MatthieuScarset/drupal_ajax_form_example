@@ -242,7 +242,6 @@ function oabt_TranslationImport($source_import,$language_import,$translation_imp
   }
 }
 
-
 /** Permet de faire un import yml d'un module au format fichier
  * @param $file_name nom du fichier avec extention .yml
  * @param $dir_name sous-arbo de config dans le module cible
@@ -317,4 +316,17 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
   return true;
 }
 
+function oabt_taxoAddDescription($termId, $text){
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('tid', $termId);
+    $entity = $query->execute();
+    if(isset($entity)) {
+        foreach($entity as $tid) {
+            // on update le champ description
+            $termUpdate = \Drupal\taxonomy\Entity\Term::load($tid);
+            $termUpdate->set('description', $text);
+            $termUpdate->save();
+        }
+    }
+}
 
