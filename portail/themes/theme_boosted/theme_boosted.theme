@@ -48,33 +48,46 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 
 
 function theme_boosted_preprocess_node(&$variables) {
+	if($variables['view_mode'] == "full") {
+		if (isset($variables['node'])
+			&& is_object($variables['node'])) {
+			$variables['#attached']['drupalSettings']['tealium']['type_page'] = $variables['node']->type->entity->label();
+			switch ($variables['node']->type->entity->get('type')) {
+				case 'homepage':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "Homepage";
+					break;
+				case 'product':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = t("our products");
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'fiches_produits';
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+					break;
+				case 'customer_story':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients témoignent";
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'temoignage';
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+					break;
+				case 'blog_post':
+					if (isset($variables['node']->field_blog_thematic)) {
+						$field_blog = $variables['node']->field_blog_thematic->getValue();
+						if (!empty($field_blog) && isset($field_blog[0])) {
+							$theme_term = $field_blog[0]['target_id'];
+							$term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+							if (isset($term)) {
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'blog';
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = $term->getName();
+							}
+						}
+					}
+					break;
+			}
+		}
 
-  if (isset($variables['node'])
-    && is_object($variables['node'])){
-    switch ($variables['node']->type->entity->get('type')){
-      case 'homepage':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Homepage";
-        break;
-      case 'product':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = t("our products");
-        $variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'fiches_produits';
-        $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
-        break;
-      case 'customer_story':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients témoignent";
-        $variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'temoignage';
-        $variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
-        break;
-      default:
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = $variables['node']->type->entity->label();
-        break;
-    }
-  }
-
-  $request = \Drupal::request();
-  $route_match = \Drupal::routeMatch();
-  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
+		$request = \Drupal::request();
+		$route_match = \Drupal::routeMatch();
+		$title = \Drupal::service('title_resolver')
+			->getTitle($request, $route_match->getRouteObject());
+		$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
+	}
 }
 
 function theme_boosted_preprocess_page(&$variables) {

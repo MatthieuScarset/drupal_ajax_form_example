@@ -40,10 +40,10 @@
             {% if menu_level == 0 and item.is_expanded %}
             <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
                 <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}"
-                   onmousedown="utag_link(utag_data.type_page, 'Footer', '{{ item.title }}', '');">{{ item.title }} <span class="caret"></span></a>
+                   onmousedown="utag_link(utag_data.titre_page, 'Footer', '{{ item.title }}', '');">{{ item.title }} <span class="caret"></span></a>
             {% else %}
                 <li{{ item.attributes }}>
-                {{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.type_page, \'Footer\', \'' ~ item.title ~ '\', \'\');'}) }}
+                {{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'' ~ item.title ~ '\', \'\');'}) }}
             {% endif %}
             {% if item.below %}
                 {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
