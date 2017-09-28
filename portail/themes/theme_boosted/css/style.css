@@ -618,7 +618,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #f16e00 !important;
 }
 .partner-banner .views-view-grid .views-row{
-    display: table;
+    display: block;
     border-spacing:10px;
     margin-right: 10px;
 
