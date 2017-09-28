@@ -733,7 +733,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
-
+.block-card img{
+    width: 100%;
+    height: auto;
+}
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
@@ -741,6 +744,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 @media (max-width: 767px) {
+
     .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
         display: block !important;
     }
@@ -816,6 +820,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
     .block-card img{
         width: 100%;
+        height: auto;
     }
     .news-chapo{
         padding-bottom: 10px;
@@ -948,6 +953,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
 @media (max-width: 480px) {
     .view-subhomes .views-exposed-form .form-submit {
         margin-top: 2rem;
+    }
+    .block-card img {
+       /* max-width:312px; */
     }
 }
 
