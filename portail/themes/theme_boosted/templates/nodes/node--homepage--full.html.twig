@@ -316,14 +316,14 @@
 
 
         <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
-            <div class="section-corporate container-fluid-navbar">
+            <div class="section-corporate container">
                 <div class="section-title-corporate">
-                    <div class="col-md-7  col-xs-12" >
-                        <div class="col-md-12 no-padding text-left title">
+                    <div class="col-md-offset-1 col-md-5 col-sm-12 col-xs-12 " >
+                        <div class="no-padding text-left title">
                             {{ content.field_corporate_title }}
                         </div>
                         <div class="clearfix"></div>
-                        <div class="col-md-12 no-padding text-left highlight-corporate">
+                        <div class="no-padding text-left highlight-corporate">
                             {{ content.field_corporate_highlight }}
                            <a class="btn btn-default" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
                                 {{ content.field_corporate_button_text.0["#context"].value }}
