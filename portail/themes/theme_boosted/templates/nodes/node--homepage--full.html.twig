@@ -317,8 +317,8 @@
 
         <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
             <div class="section-corporate container">
-                <div class="section-title-corporate">
-                    <div class="col-md-offset-1 col-md-5 col-sm-12 col-xs-12 " >
+                <div class="col-md-offset-1 col-md-10 section-title-corporate">
+                    <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
                         <div class="no-padding text-left title">
                             {{ content.field_corporate_title }}
                         </div>
@@ -333,7 +333,7 @@
                     </div>
 
                     {% if content.field_corporate_show_menu %}
-                        <div class="menu-right hidden-xs hidden-sm">
+                        <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
                             <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
                             {{ oab_drupal_menu('our-regional-presence')  }}
                         </div>
