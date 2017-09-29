@@ -291,3 +291,10 @@ function oab_christophe_update_8042() {
 function oab_christophe_update_8043() {
   oabt_YmlImport('field.field.node.homepage.field_metatags.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3083 - config pathauto
+ */
+function oab_christophe_update_8044() {
+  oabt_YmlImport('pathauto.settings.yml');
+}
