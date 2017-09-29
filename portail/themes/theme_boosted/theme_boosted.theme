@@ -91,41 +91,57 @@ function theme_boosted_preprocess_node(&$variables) {
 }
 
 function theme_boosted_preprocess_page(&$variables) {
+	$request = \Drupal::request();
 
-  if (\Drupal::routeMatch()->getParameter('node')) {
-    $node = \Drupal::routeMatch()->getParameter('node');
-  }
-  if (\Drupal::routeMatch()->getParameter('node_preview')) {
-    $node = \Drupal::routeMatch()->getParameter('node_preview');
-  }
-  if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-    $node = node_revision_load($revision);
-  }
-  $variables['page']['containerClass'] = 'container';
-  if (isset($node) && is_object($node)
-    && get_class($node) == 'Drupal\node\Entity\Node') {
-    $content_type = $node->bundle();
-    if ($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique') {
-      $variables['page']['containerClass'] = 'container-fluid';
-    }
-    $definitions = \Drupal::service('entity_field.manager')
-      ->getFieldDefinitions('node', $content_type);
-    if (isset($definitions)
-      && array_key_exists('field_display_title', $definitions)) {
-      $display_title = $node->get('field_display_title')->getValue();
-      if (isset($display_title[0]['value'])
-        && $display_title[0]['value'] == 0
-        && isset($variables['page']['content']['theme_boosted_page_title'])
-      ) {
-        $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
-      }
-    }
-  }
+	$exception = $request->attributes->get('exception');
+	$code = 200;
+	if(!empty($exception)){
+		$code = \Drupal::request()->attributes->get('exception')->getStatusCode();
+	}
+	if(!empty($code) && $code != 200)
+	{
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page erreur';
+		$variables['#attached']['drupalSettings']['tealium']['erreur_code'] = $code;
+		$url = "";
+		$url  = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
+		$variables['#attached']['drupalSettings']['tealium']['url_referente'] = $url;
+	}
+	if (\Drupal::routeMatch()->getParameter('node')) {
+		$node = \Drupal::routeMatch()->getParameter('node');
+	}
+	if (\Drupal::routeMatch()->getParameter('node_preview')) {
+		$node = \Drupal::routeMatch()->getParameter('node_preview');
+	}
+	if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+		$node = node_revision_load($revision);
+	}
+	$variables['page']['containerClass'] = 'container';
+	if (isset($node) && is_object($node)
+		&& get_class($node) == 'Drupal\node\Entity\Node') {
+		$content_type = $node->bundle();
+		if ($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique') {
+			$variables['page']['containerClass'] = 'container-fluid';
+		}
+		$definitions = \Drupal::service('entity_field.manager')
+			->getFieldDefinitions('node', $content_type);
+		if (isset($definitions)
+			&& array_key_exists('field_display_title', $definitions)) {
+			$display_title = $node->get('field_display_title')->getValue();
+			if (isset($display_title[0]['value'])
+				&& $display_title[0]['value'] == 0
+				&& isset($variables['page']['content']['theme_boosted_page_title'])
+			) {
+				$variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+			}
+		}
+	}
+	$route_match = \Drupal::routeMatch();
+	$title = \Drupal::service('title_resolver')
+		->getTitle($request, $route_match->getRouteObject());
+	$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 
-  $request = \Drupal::request();
-  $route_match = \Drupal::routeMatch();
-  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
-  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 }
 
 function theme_boosted_preprocess_views_view(&$variables){
