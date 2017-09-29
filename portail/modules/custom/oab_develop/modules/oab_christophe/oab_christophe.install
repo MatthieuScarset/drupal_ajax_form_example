@@ -284,3 +284,10 @@ function oab_christophe_update_8042() {
   oabt_YmlImport('field.field.node.homepage.field_meta_title.yml');
   oabt_YmlImport('field.field.node.homepage.field_meta_description.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3046 - création du champ "metatags" sur la homepage
+ */
+function oab_christophe_update_8043() {
+  oabt_YmlImport('field.field.node.homepage.field_metatags.yml');
+}
