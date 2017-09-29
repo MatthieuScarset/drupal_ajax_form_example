@@ -17,12 +17,14 @@
 #}
 {% block content %}
   {% if site_logo %}
-    <a class="logo navbar-btn pull-left" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+    <a class="logo navbar-btn pull-left" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home"
+       onmousedown="utag_link(utag_data.titre_page, 'Menu', 'Orange Business Services ', '');">
       <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
     </a>
   {% endif %}
   {% if site_name %}
-    <a class="name navbar-brand" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
+    <a class="name navbar-brand" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home"
+       onmousedown="utag_link(utag_data.titre_page, 'Menu', 'Orange Business Services ', '');">{{ site_name }}</a>
   {% endif %}
   {% if site_slogan %}
     <p class="navbar-text">{{ site_slogan }}</p>

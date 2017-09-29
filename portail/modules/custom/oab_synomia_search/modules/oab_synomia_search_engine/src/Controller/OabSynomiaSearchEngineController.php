@@ -137,6 +137,12 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					'library' => array(
 						'oab_synomia_search_engine/oab_synomia_search_engine.global',
 					),
+					'drupalSettings' => array(
+						'tealium' => array(
+							'type_page' => 'Recherche',
+							'titre_page' => 'Résultats de recherche'
+						),
+					)
 				),
 			);
 		}
