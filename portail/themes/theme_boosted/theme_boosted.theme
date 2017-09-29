@@ -79,6 +79,19 @@ function theme_boosted_preprocess_node(&$variables) {
 						}
 					}
 					break;
+				case 'magazine':
+					if (isset($variables['node']->field_magazine_thematic)) {
+						$field_magazine = $variables['node']->field_magazine_thematic->getValue();
+						if (!empty($field_magazine) && isset($field_magazine[0])) {
+							$theme_term = $field_magazine[0]['target_id'];
+							$term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+							if (isset($term)) {
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = $term->getName();
+							}
+						}
+					}
+					break;
 			}
 		}
 
