@@ -274,3 +274,13 @@ function oab_christophe_update_8040() {
 function oab_christophe_update_8041() {
   include_once("updates/update_8041.inc");
 }
+
+/**
+ *  RUBYPORTAILOBS-3046 - paramétrage des champs meta title et meta description
+ */
+function oab_christophe_update_8042() {
+  oabt_YmlImport('field.field.node.full_html.field_meta_title.yml');
+  oabt_YmlImport('field.field.node.full_html.field_meta_description.yml');
+  oabt_YmlImport('field.field.node.homepage.field_meta_title.yml');
+  oabt_YmlImport('field.field.node.homepage.field_meta_description.yml');
+}
