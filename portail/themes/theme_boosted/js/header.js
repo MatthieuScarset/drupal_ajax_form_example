@@ -105,46 +105,15 @@
             var tab_divToScroll = LinkToScroll.split("#");
             var divToScroll = "#"+tab_divToScroll[1];
 
-            var offsetTop = 0;
-
-            if (top_menu.length) { offsetTop += top_menu.outerHeight(); }
-            if (preview_bar.length) { offsetTop += preview_bar.outerHeight(); }
-            if (navtop.length) { offsetTop += navtop.outerHeight(); }
-            if ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length) { offsetTop += $('#toolbar-item-administration-tray').outerHeight(); }
-            // if (local_nav.length && local_nav.is(':visible')) { offsetTop += $(this).parents(".sub_local_menu").height(); }
-            if ($('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length) { offsetTop += $('#toolbar-bar').outerHeight(); }
-
-            var mTop = 0;
-            if (top_menu.hasClass('navbar-fixed')){
-                mTop = parseInt($('.main-container-resized').css('margin-top'));
-                if (isNaN(mTop)){
-                    mTop = 0;
-                }
-            }
-
-            //gestion de la hauteur de scroll
-
-            if(Math.round($("#local_nav").position().top) == "0"){
-                if(Math.round($("#block-localnav").position().top) == "720"){
-                    add_height = -225;
-                }else{
-                    add_height = -125;
-                }
-            }else if(Math.round($("#local_nav").position().top) == "100"){
-                    add_height = 1;
-            }else if(Math.round($("#local_nav").position().top) == "179"){
-                    add_height = -80;
-            }else if(Math.round($("#local_nav").position().top) == "540"){
-                    add_height = -45;
-            }else if(Math.round($("#local_nav").position().top) == "640"){
-                add_height = -145;
-            }else{
-                add_height = 10;
-            }
-
             $('html, body').animate({ //+10 -130
-                scrollTop: $(divToScroll).offset().top + mTop + add_height
+                scrollTop: $(divToScroll).offset().top
             }, 1000);
+            setTimeout(function(){
+                $('html, body').animate({ //+10 -130
+                    scrollTop: $(divToScroll).offset().top
+                }, 1);
+            }, 1000);
+
         });
     }
 
