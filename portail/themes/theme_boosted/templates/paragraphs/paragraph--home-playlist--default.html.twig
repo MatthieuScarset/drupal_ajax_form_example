@@ -69,7 +69,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
             <div class="col-md-12 col-xs-12 col-sm-12">
                {{ oab_drupal_view('home_eclairage_playlist', 'block_1', content.field_playlist_taxonomy_term[0]['#options'].entity.id()) }}
+                <a class="btn btn-info btn-playlist hidden-lg hidden-md col-xs-12 col-sm-12 playlist-button-mobile" role="button" href="{{ content.field_link_button[0]['#url'] }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_link_button[0]['#title']|raw }}', '')">  {{ content.field_link_button[0]['#title'] }}</a>
+
             </div>
+
         {% endblock %}
     </div>
 {% endblock paragraph %}

@@ -52,6 +52,10 @@
     .bs-slide-xs {
         display: block !important;
     }
+
+    .textlink-contactbar {
+        vertical-align: baseline !important;
+    }
 }
 
 .swiper-container {
@@ -179,7 +183,7 @@
 #block-contactbarenstandard.affix-bottom,
 #block-contactbar.affix-bottom{
     width: 100%;
-    position: relative;
+   /* position: relative;*/
     z-index: 10;
-    top: 0 !important;
+   /* top: 0 !important;*/
 }
