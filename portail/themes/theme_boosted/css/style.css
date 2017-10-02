@@ -289,6 +289,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
      padding-right: 10px !important;
      padding: 0 !important;*/
     background: white;
+    text-decoration: none !important;
 }
 
 .block-card a {
