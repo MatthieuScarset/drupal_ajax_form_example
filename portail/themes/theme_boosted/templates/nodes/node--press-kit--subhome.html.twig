@@ -85,7 +85,7 @@ parce que c'est enregistré dans un array) #}
    {% set media = my_field_file.entity %}
    {% set file_entity = media.field_file.entity %}
     {% if file_entity is not null and file_entity.filesize.value is not null %}
-        <a href="{{ file_url(file_entity.getFileUri) }}" class="link-subhomes">
+        <a href="{{ file_url(file_entity.getFileUri) }}" class="link-subhomes" target="_blank">
             <div class="display-subhomes">
                 <div class="encart col-lg-12">
                     <div class="bigKey col-lg-5 "><span>{{ day }}</span></div>
