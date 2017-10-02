@@ -271,9 +271,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: -70px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
     .block-card-container {
         display: flex;
+    }
+
+    .block-card img{
+        width: 100%;
+        max-width: 380px;
+        height: auto;
     }
 }
 
@@ -296,6 +302,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-bottom: 20px !important;
     display: block;
     overflow: hidden;
+    height: 100%;
 }
 
 .block-card .news-title{
