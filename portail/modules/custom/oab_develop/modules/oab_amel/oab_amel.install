@@ -319,7 +319,7 @@ function oab_amel_update_8037() {
 }
 
 /**
- *  Correction vue home playlist pour ne pas mettre de pager
+ *  Correction vue home playlist pour ne pas mettre de pager + tri sur les vues playlist et thématique + création des menus homepage eclairage
  */
 function oab_amel_update_8038() {
     include_once("updates/update_8038.inc");
