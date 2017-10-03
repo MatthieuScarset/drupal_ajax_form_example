@@ -944,7 +944,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
         font-size: 1.6rem;
     }
 
-
+    aside.right-column {
+        padding-left: 0 !imop;
+    }
 }
 
 @media (max-width: 480px) {
