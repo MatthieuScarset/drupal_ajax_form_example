@@ -1452,3 +1452,8 @@ aside .region.region-sidebar
 {
     margin-bottom: 2rem;
 }
+
+
+.logo_reperes {
+    overflow: hidden;
+}
