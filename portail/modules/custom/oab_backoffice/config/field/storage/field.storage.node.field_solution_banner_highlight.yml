@@ -1,0 +1,19 @@
+uuid: 860bf1c0-ecd2-49da-b774-19d86c486b22
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_solution_banner_highlight
+field_name: field_solution_banner_highlight
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
