@@ -228,19 +228,15 @@
 
       // Homepage carousel solution & industries
       $('#home-slick-carousel-left-prev_arrow').on('click', function(){
-          console.log('click on prevArrow ok');
           $('#slick-left-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-left-next_arrow').on('click', function(){
-          console.log('click on nextArrow ok');
           $('#slick-left-zone').slick("slickNext");
       });
       $('#home-slick-carousel-right-prev_arrow').on('click', function(){
-          console.log('click on prevArrow ok');
           $('#slick-right-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-right-next_arrow').on('click', function(){
-          console.log('click on nextArrow ok');
           $('#slick-right-zone').slick("slickNext");
       });
 
@@ -284,10 +280,14 @@
         });
       }
 
+      // balises OG
+        $('head meta[property="og:locale"]').attr("content", settings.myLibrary.og_locale );
+        $('head meta[property="og:title"]').attr("content", settings.myLibrary.og_title );
+        $('head meta[property="og:description"]').attr("content", settings.myLibrary.og_desc );
+        $('head meta[property="og:url"]').attr("content", settings.myLibrary.og_url );
+        $('head meta[property="og:image"]').attr("content", settings.myLibrary.og_image );
+
     }
   };
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
-
-
-

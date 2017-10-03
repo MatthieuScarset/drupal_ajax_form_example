@@ -32,6 +32,7 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  */
 function oab_frontoffice_preprocess_node(&$variables) {
 
+    global $base_root;
 
   if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
@@ -46,9 +47,9 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     $meta_description = "";
     ##Je recupère le field_meta_description s'il existe
-    if ($node->hasField('field_meta_decription'))
+    if ($node->hasField('field_meta_decription')){
       $meta_description = $node->get('field_meta_description')->getValue();
-
+    }
 
     ##je recupère l'url du node et celui du site
     $node_url = Url::fromRoute('entity.node.canonical', array('node' => $nid), array('absolute' => TRUE))->toString();
@@ -111,11 +112,45 @@ function oab_frontoffice_preprocess_node(&$variables) {
           .rtrim($paramsString, "&");
     }
 
-    #J'enregistre mes urls pour les avoir en JS
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    switch($current_language){
+        case 'fr':
+            $og_locale = 'fr_FR';
+            break;
+        case 'en':
+        case 'ru-en':
+            $og_locale = 'en_US';
+            break;
+        case 'ru':
+            $og_locale = 'ru_RU';
+            break;
+        default:
+            $og_locale = 'fr_FR';
+            break;
+    }
+
+    $og_url = $base_root . \Drupal::request()->getRequestUri();
+
+      $og_image = $file = "";
+      if ($node->hasField('field_visual')){
+          $file = $node->get('field_visual')->getValue();
+          if(!empty($file[0]['target_id'])){
+              $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+              $og_image = $file->url();
+          }
+      }
+
+      //oabt($node->get('field_meta_description')->, true);
+    #J'enregistre mes urls et variables OG pour les avoir en JS
     $variables['#attached'] = [
       'drupalSettings' => [
         'myLibrary' => [
-          'share_siteUrls' => $siteUrls
+          'share_siteUrls' => $siteUrls,
+            'og_locale' => $og_locale,
+            'og_title' => $node->getTitle(),
+            'og_desc' => $meta_description,
+            'og_url' => $og_url,
+            'og_image' => $og_image
         ],
       ],
     ];
