@@ -391,6 +391,10 @@
     color: #fff;
 }
 
+.glyphicon-question-sign.link_icon{
+    font-size:2.1rem
+}
+
 .link_icon_items a {
     display: inline-block !important;
     padding: 0 !important;
