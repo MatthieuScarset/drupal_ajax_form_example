@@ -61,6 +61,7 @@ class TopZoneBlock extends BlockBase {
 					$img_style = 'top_zone_big';
 				}
 				$url = ImageStyle::load($img_style)->buildUrl($uri);
+				$url = file_url_transform_relative($url);
 			}
       $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', FALSE);
     }
