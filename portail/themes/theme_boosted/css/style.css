@@ -1264,3 +1264,8 @@ aside.right-column > .region {
 .divSynomia {
     display: inline-block;
 }
+
+
+.logo_reperes {
+    overflow: hidden;
+}
