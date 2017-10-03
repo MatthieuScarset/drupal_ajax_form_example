@@ -1073,6 +1073,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .display-subhomes .txt span{
         font-size: 1.6rem;
     }
+    .logo_reperes img {
+        width: initial !important;
+    }
+}
+.logo_reperes img {
+    width: 100%;
 }
 
 @media (max-width: 480px) {
@@ -1415,4 +1421,9 @@ aside.right-column > .region {
 aside .region.region-sidebar
 {
     margin-bottom: 2rem;
+}
+
+
+.logo_reperes {
+    overflow: hidden;
 }
