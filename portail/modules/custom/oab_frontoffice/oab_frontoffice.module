@@ -55,16 +55,17 @@ function oab_frontoffice_preprocess_node(&$variables) {
     $node_url = Url::fromRoute('entity.node.canonical', array('node' => $nid), array('absolute' => TRUE))->toString();
     $site_url = \Drupal::request()->getHost();
 
+    $og_url = $base_root . \Drupal::request()->getRequestUri();
+    $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
+
     ##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
     ## pour chaque site
     $siteData = [
       'twitter' => [
         'url' => "http://www.twitter.com/intent/tweet",
         'params' => [
-          'text' => isset($variables["label"][0]["#context"]["value"])
-            ? $variables["label"][0]["#context"]["value"]
-            : "",
-          'url' => $node_url,
+          'text' => $node_title,
+          'url' => $og_url,
           'hashtags' => '',
           'via' => 'orange_business',
           'related' => '',
@@ -74,19 +75,17 @@ function oab_frontoffice_preprocess_node(&$variables) {
       'facebook' => [
         'url' => "https://www.facebook.com/sharer/sharer.php",
         "params" => [
-          'u' => $node_url
+          'u' => $og_url
         ]
       ],
       'linkedin' => [
         'url' => "https://www.linkedin.com/shareArticle",
         'params' => [
           'mini' => 'true',
-          'url' => $node_url,
-          'title' => isset($variables["label"][0]["#context"]["value"])
-            ? $variables["label"][0]["#context"]["value"]
-            : "",
+          'url' => $og_url,
+          'title' => $node_title,
           'summary' => $meta_description,
-          'source' => $site_url
+          'source' => $og_url
         ]
       ],
 
@@ -129,8 +128,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
             break;
     }
 
-    $og_url = $base_root . \Drupal::request()->getRequestUri();
-
       $og_image = $file = "";
       if ($node->hasField('field_visual')){
           $file = $node->get('field_visual')->getValue();
@@ -147,7 +144,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
         'myLibrary' => [
           'share_siteUrls' => $siteUrls,
             'og_locale' => $og_locale,
-            'og_title' => $node->getTitle(),
+            'og_title' => $node_title,
             'og_desc' => $meta_description,
             'og_url' => $og_url,
             'og_image' => $og_image
