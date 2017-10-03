@@ -179,6 +179,14 @@
     padding: 1rem 2.5rem;
 }
 
+@media (max-width: 767px) {
+    #block-directaccessbarfr div,
+    #block-directaccessbaren div,
+    #block-directaccessbarru div {
+        padding: 1rem 0;
+    }
+}
+
 .product_partners,
 .product_modules{
     float: none;
