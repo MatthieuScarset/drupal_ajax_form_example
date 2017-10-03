@@ -183,7 +183,8 @@
     #block-directaccessbarfr div,
     #block-directaccessbaren div,
     #block-directaccessbarru div {
-        padding: 1rem 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
