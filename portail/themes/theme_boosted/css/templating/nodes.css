@@ -809,6 +809,9 @@ a.home_banner_element_mobile_link {
     text-align: center;
 }
 
+.playlist-button-mobile {
+    width: 277px;
+}
 
 .btn-decouvrir-plus {
     width: 100%;
@@ -903,9 +906,13 @@ a.home_banner_element_mobile_link {
 .home_thematic_textZone .node-socialbar{
     margin: 2.5rem 0 3rem 0;
 }
-.home_thematic_banner {
-    height: 610px;
 
+.home_thematic_banner_mobile {
+    height: 350px;
+}
+
+.home_thematic_banner_desktop {
+    height: 610px;
 }
 
 .home_thematic_nopadding {
@@ -929,12 +936,11 @@ a.home_banner_element_mobile_link {
     font-size: 2.4rem;
     font-weight: bold;
     color: #000;
-    padding: 0 10px 30px 10px;
+    padding: 30px 10px 30px 10px;
 
 }
 .home_thematic_column {
     border: 1px solid #ccc;
-
     height: 445px;
 }
 
@@ -1011,7 +1017,6 @@ a.home_banner_element_mobile_link {
     background-color: #fff;
     margin-right: 10px;
     height: 440px;
-    margin-bottom:20px;
 }
 
 
@@ -1037,6 +1042,10 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element img{
     width:100% ;
+}
+
+.valorisation-grid {
+    padding-bottom: 10px;
 }
 
 .valorisation-element .views-field-title {
@@ -1116,8 +1125,8 @@ a.home_banner_element_mobile_link {
 
 
 .home_thematic_automatic {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 
