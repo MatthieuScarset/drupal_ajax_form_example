@@ -217,3 +217,17 @@ function oab_tibo_update_8028() {
 function oab_tibo_update_8029() {
     include_once("updates/update_8029.inc");
 }
+
+/**
+ * subhomes headers
+ */
+function oab_tibo_update_8030() {
+    include_once("updates/update_8030.inc");
+}
+
+/**
+ * subhomes intro
+ */
+function oab_tibo_update_8031() {
+    include_once("updates/update_8031.inc");
+}

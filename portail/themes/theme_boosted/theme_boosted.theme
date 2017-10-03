@@ -318,5 +318,4 @@ function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $
 
 }
 
-
 ?>

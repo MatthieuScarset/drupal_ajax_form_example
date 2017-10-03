@@ -54,23 +54,24 @@
 
 article .field--type-text-long ul,
 article .content .field--type-text-long ul,
-article.product .node-axiome-know-more ul{
+article.product ul{
     list-style: none;
     padding-left: 2rem;
     margin-bottom: 0px !important;
     padding-bottom: 1rem;
 }
-article.product .node-axiome-know-more ul{
+article.product ul{
     padding-left: 0;
 }
 article .field--type-text-long ul li,
 article .content .field--type-text-long ul li,
-article.product .node-axiome-know-more ul li{
+article.product ul li{
     position: relative;
     font-size: 1.6rem;
 }
 article .field--type-text-long ul li:before,
-article .content .field--type-text-long ul li:before{
+article .content .field--type-text-long ul li:before,
+article .product ul li:before{
     content: "■";
     color: #FF7900;
     position: absolute;
@@ -78,7 +79,8 @@ article .content .field--type-text-long ul li:before{
 }
 
 article .field--type-text-long ul.nav-tabs li:before,
-article .content .field--type-text-long ul.nav-tabs li:before{
+article .content .field--type-text-long ul.nav-tabs li:before,
+article .product ul.nav-tabs li:before{
     content: "";
 }
 
@@ -141,14 +143,14 @@ article .content .field--type-text-long ul.nav-tabs li:before{
 .display-subhomes .bigKey{
     font-size: 7rem;
     font-weight: bold;
-    margin: auto;
-    line-height: 4rem;
+    line-height: 6rem;
+    padding-top: 1rem;
 }
 .display-subhomes .lowKey{
     font-weight: inherit;
     font-size: 3rem;
     line-height: 3rem;
-    margin: auto;
+    padding-top: 1rem;
 }
 .display-subhomes .txt span{
     font-size: 1.2rem;
@@ -281,12 +283,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-.block-card{
+.block-card a{
     max-width: 380px;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
-    padding: 0 !important;
-
+    /* padding-left: 10px !important;
+     padding-right: 10px !important;
+     padding: 0 !important;*/
+    background: white;
 }
 
 .block-card a {
