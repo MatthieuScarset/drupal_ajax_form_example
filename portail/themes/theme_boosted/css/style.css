@@ -1263,6 +1263,9 @@ aside.right-column > .region {
     display: inline-block;
 }
 
+@media (max-width: 767px) {
+
+}
 .region-content article.full-html.full,
 .region-content article.simple-page.full,
 .region-content article.solution.full,
@@ -1274,7 +1277,9 @@ aside.right-column > .region {
 .region-content article.industry.full,
 .region-content article.document.full,
 .region-content article.customer-story.full,
-.region-content article.blog-post.full
+.region-content article.blog-post.full,
+.region-content article.page-offices-map,
+aside .region.region-sidebar
 {
     margin-bottom: 2rem;
 }
