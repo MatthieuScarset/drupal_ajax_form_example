@@ -105,12 +105,14 @@
             var tab_divToScroll = LinkToScroll.split("#");
             var divToScroll = "#"+tab_divToScroll[1];
 
-            $('html, body').animate({ //+10 -130
-                scrollTop: $(divToScroll).offset().top
+            //gestion de la hauteur de scroll
+
+            $('html, body').animate({
+                scrollTop: $(divToScroll).offset().top - 15
             }, 1000);
             setTimeout(function(){
-                $('html, body').animate({ //+10 -130
-                    scrollTop: $(divToScroll).offset().top
+                $('html, body').animate({
+                    scrollTop: $(divToScroll).offset().top - 15
                 }, 1);
             }, 1000);
 
