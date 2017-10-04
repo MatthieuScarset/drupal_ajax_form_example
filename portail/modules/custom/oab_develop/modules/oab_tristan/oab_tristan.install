@@ -374,3 +374,10 @@ function oab_tristan_update_8047() {
 function oab_tristan_update_8048() {
   oabt_YmlImport('views.view.content.yml');
 }
+
+/**
+ * Changement du mode d'affichage des visuels ornemtaux des partners de la HP
+ */
+function oab_tristan_update_8049() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
