@@ -869,8 +869,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .menu-loupe-xs .glyphicon {
-        font-size: 3.5rem;
-        margin-top: 22px;   /*Pour bloquer le margin 22px de glyphicon*/
+        font-size: 3rem;
+        margin-top: 25px;   /*Pour bloquer le margin 22px de glyphicon*/
     }
 
     .footer-div-border {
