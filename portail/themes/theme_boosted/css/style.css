@@ -1264,3 +1264,18 @@ aside.right-column > .region {
 .divSynomia {
     display: inline-block;
 }
+
+.node-axiome-chapeau h2,
+.node-axiome-detailed-content h2,
+.node-axiome-simple-content h2,
+.node-axiome-know-more h2,
+.node-axiome-customer-story h2,
+.node-axiome-partners h2,
+.node-axiome-tarifs h2
+{
+    margin-bottom: 1.5rem;
+}
+
+article.product .highlight1{
+    margin-top: 0.5rem;
+}
