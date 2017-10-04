@@ -113,6 +113,25 @@ article .product ul.nav-tabs li:before{
     display: block;
     overflow: hidden;
 }
+
+/* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
+@media (min-width: 768px) and (max-width: 979px) {
+    .display-subhomes .encart-image{
+        height: 76px;
+    }
+}
+@media (min-width: 980px) and (max-width: 1219px) {
+    .display-subhomes .encart-image{
+        height: 103px;
+    }
+}
+@media (min-width: 1220px)  {
+    .display-subhomes .encart-image{
+        height: 151px;
+    }
+}
+
+
 .view-display-id-page_partners .display-subhomes .encart-image,
 .view-display-id-page_customer .display-subhomes .encart-image{
     display: flex;
