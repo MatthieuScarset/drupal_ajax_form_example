@@ -30,6 +30,14 @@
     padding-left: 0;
     margin: 0 !important;
 }
+@media (max-width: 767px) {
+    .navbar-header {
+        padding-left: 10px;
+    }
+    #main_nav .logo img {
+        width: 125px;
+    }
+}
 #main_nav .logo img{
     width: 140px;
 }
@@ -271,16 +279,16 @@
     }
 
     .mega-menu ul.menu.nav.navbar-nav > li {
-        border-top: 2px solid white;
+        border-top: 1px solid #333333;
         padding: 0.5rem 0;
     }
 
     #items_megamenu > div h3 {
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid #333333;
     }
 
     #items_megamenu > div li {
-        border-top: 1px solid white;
+        border-top: 1px solid #333333;
     }
 
     #items_megamenu > div li:first-child {
@@ -288,11 +296,11 @@
     }
 
     #items_megamenu > div li:last-child {
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid #333333;
     }
 
     #items_megamenu > div:last-child li:first-child {
-        border-top: 1px solid white;
+        border-top: 1px solid #333333;
     }
 
     #items_megamenu > div:last-child li:last-child {
@@ -514,6 +522,7 @@
 @media (max-width: 767px) {
     .mega-menu .nav, .mega-menu .collapse {
         margin-left: 0;
+        margin-top: 0px;
     }
 
     .mega-menu .navbar-collapse {
@@ -521,7 +530,8 @@
     }
 
     .mega-menu.navbar .nav > li > a {
-        font-size: 2.5rem;
+        font-size: 1.6rem;
+        padding: 10px 10px;
     }
 
     .iconblock .icon-email {
@@ -531,4 +541,33 @@
     .textlink-contactbar {
         margin-top: -50px;
     }
+}
+
+@media (min-width: 980px) {
+
+    .mega-menu .nav-item.dropdown .dropdown-menu {
+        margin-top: 10px;
+    }
+}
+
+
+.sandwich-button .close-env-info{
+    display:none;
+    font-size: 3.2rem;
+    margin-top: -0.5rem;
+    color: #F16E00;
+    margin-right: 2px;
+}
+.sandwich-button.panel-chevron-open .close-env-info{
+    display:block;
+}
+.sandwich-button .icon-bar{
+    display:block;
+}
+
+.sandwich-button.panel-chevron-open .icon-bar{
+    display:none;
+}
+.mega-menu.navbar .navbar-toggle:hover {
+    background: none;
 }
