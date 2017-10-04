@@ -381,3 +381,10 @@ function oab_tristan_update_8048() {
 function oab_tristan_update_8049() {
   oabt_YmlImport('views.view.homepage_partner.yml');
 }
+
+/**
+ * Update de la view SUBHOMES => Modif du filtre "thematic" de la subhome Document/Médiatheque
+ */
+function oab_tristan_update_8050() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
