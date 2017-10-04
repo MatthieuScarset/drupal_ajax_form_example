@@ -770,6 +770,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 15px;
     padding-bottom: 15px;
     width: 95%;
+    text-decoration: none !important;
 }
 
 .corporate-banner{
