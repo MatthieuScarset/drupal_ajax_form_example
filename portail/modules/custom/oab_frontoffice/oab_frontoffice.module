@@ -131,9 +131,11 @@ function oab_frontoffice_preprocess_node(&$variables) {
       $og_image = $file = "";
       if ($node->hasField('field_visual')){
           $file = $node->get('field_visual')->getValue();
-          if(!empty($file[0]['target_id'])){
+          if(!empty($file[0]['target_id']) && $file[0]['target_id'] != null){
               $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-              $og_image = $file->url();
+              if(file instanceof \Drupal\file\Entity\File){
+                $og_image = $file->url();
+              }
           }
       }
 
