@@ -713,6 +713,22 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-right: 10px;
 
 }
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .partner-banner .views-view-grid .views-row::before {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row::after {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row {
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+}
+
 .partner-banner .views-view-grid .partner-img{
     margin-left: 10px;
     margin-right: 10px;
