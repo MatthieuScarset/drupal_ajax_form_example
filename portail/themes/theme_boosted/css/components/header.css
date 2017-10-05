@@ -530,6 +530,9 @@
 
 
 @media (max-width: 767px) {
+    a:focus {outline-style:none; outline:none; }
+    a:active {outline: none;}
+    
     .mega-menu .nav, .mega-menu .collapse {
         margin-left: 0;
         margin-top: 0px;
