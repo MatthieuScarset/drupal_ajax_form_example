@@ -34,6 +34,8 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     global $base_root;
 
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
   if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
     ##Collecte de toutes les données nécessaires
@@ -88,6 +90,18 @@ function oab_frontoffice_preprocess_node(&$variables) {
           'source' => $og_url
         ]
       ],
+    'rss_blogs' => [
+        'url' => "/".$current_language."/blogs/rss.xml",
+        'params' => []
+    ],
+        'rss_magazine' => [
+            'url' => "/".$current_language."/magazine/rss.xml",
+            'params' => []
+        ],
+        'rss_presse' => [
+            'url' => "/".$current_language."/press/feed_rss.xml",
+            'params' => []
+        ],
 
     ];
 
@@ -107,8 +121,11 @@ function oab_frontoffice_preprocess_node(&$variables) {
         if (strlen($value)>0)
           $paramsString .= $paramName . "=" . rawurlencode($value) . "&";
       }
-      $siteUrls[$site] = $data['url'] . "?"
-          .rtrim($paramsString, "&");
+      $siteUrls[$site] = $data['url'];
+      if($paramsString != "") {
+          $siteUrls[$site] .= "?"
+              . rtrim($paramsString, "&");
+      }
     }
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
