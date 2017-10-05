@@ -34,11 +34,6 @@
         %}
         <li{{ row.attributes.addClass(row_classes) }}>
             {{ row.content }}
-            {% if contact_url %}
-                <span class="contact">
-                    <a href="{{  contact_url }}" title="" class="more"><span class="icon icon-more"></span>{{ 'Contact'|trans }}</a>
-                </span>
-            {% endif %}
         </li>
     {% endfor %}
 

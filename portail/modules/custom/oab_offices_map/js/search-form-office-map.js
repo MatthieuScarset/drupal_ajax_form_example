@@ -15,7 +15,7 @@
             $("#edit-country").empty();
             $("#edit-country").append($("<option></option>")
                     .attr("value","all")
-                    .text("All"));
+                    .text(Drupal.t('Country')));
 
             $.each(allCountriesArray , function(i, val) {
                 if((offices[val.id] == region_id || region_id == 'all') && val.id != 'all' && val.id != '' && val.id != 'undefined'  && val.id != null) {

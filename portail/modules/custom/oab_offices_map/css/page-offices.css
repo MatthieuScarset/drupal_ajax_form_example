@@ -18,7 +18,9 @@ article.page-offices-map{
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+.form_filter_regions_countries{
+    width: 100%;
+}
 .form_filter_regions_countries .oab-offices-map-regions-countries-form label,
 .form_filter_regions_countries .oab-offices-map-regions-countries-form .row,
 .form_filter_regions_countries .oab-offices-map-regions-countries-form select,
@@ -26,10 +28,32 @@ article.page-offices-map{
     display: inline-block;
     vertical-align: middle;
 }
+.page-offices-map .form_filter_regions_countries,
+.page-offices-map .block_principal_offices_map{
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
 
+.page-offices-map .form_filter_regions_countries > .container,
+.page-offices-map .form_filter_regions_countries > .container > .row > col-sm-12{
+    padding-left: 0;
+}
+.page-offices-map .form_filter_regions_countries .container{
+    margin-right: 20px;
+}
+.page-offices-map .form_filter_regions_countries .container select{
+    margin-left: 0 !important;
+}
 
 .form_filter_regions_countries .oab-offices-map-regions-countries-form .row{
     float: left;
+}
+
+.form_filter_regions_countries .oab-offices-map-regions-countries-form #edit-submit{
+    position: absolute;
+    right: 20px;
 }
 
 .form_filter_regions_countries .oab-offices-map-regions-countries-form label,

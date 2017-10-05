@@ -141,7 +141,7 @@ class OabOfficesMapPageController extends ControllerBase {
 		$results =	$query->execute()->fetchAll();
 
 		$table_countries = array();
-		$table_countries['all'] = 'All';
+		$table_countries['all'] = $this->t('Country');
 		foreach ($results as $country){
 			if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
 				$keys[] = $country->country_tid;
