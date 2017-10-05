@@ -131,11 +131,11 @@
     <div class="col-md-12 col-xs-12 banner-bg solution-banner" style="background: url({{ url }}) ">
         <div class="container">
             <div class="col-md-offset-1 section-title-solution">
-                <div class="col-md-5 no-padding text-left title">
+                <div class="col-md-7 col-lg-5 no-padding text-left title">
                     {{ content.field_solution_banner_title }}
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-md-5 no-padding text-left highlight-solution">
+                <div class="col-md-7 col-lg-5 no-padding text-left highlight-solution">
                     {{ content.field_solution_banner_highlight }}
                 </div>
             </div>
@@ -282,6 +282,7 @@
 
         <!-- Partner Zone Homepage -->
         {% if content.field_partner_title|render|trim is not empty %}
+            <div class="homepage-banner-container">
         <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 homepage-banner partner-banner" {#style="display: none"#}>
             <div class="title">
                 {{ content.field_partner_title }}
@@ -294,7 +295,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div></div>
         {% endif %}
     </div>
 
@@ -316,16 +317,16 @@
 
 
         <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
-            <div class="section-corporate container-fluid-navbar">
-                <div class="section-title-corporate">
-                    <div class="col-md-7  col-xs-12" >
-                        <div class="col-md-12 no-padding text-left title">
+            <div class="section-corporate container">
+                <div class="col-md-offset-1 col-md-10 section-title-corporate">
+                    <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
+                        <div class="no-padding text-left title">
                             {{ content.field_corporate_title }}
                         </div>
                         <div class="clearfix"></div>
-                        <div class="col-md-12 no-padding text-left highlight-corporate">
+                        <div class="no-padding text-left highlight-corporate">
                             {{ content.field_corporate_highlight }}
-                           <a class="btn btn-default" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
+                           <a class="btn btn-inverse btn-info" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
                                 {{ content.field_corporate_button_text.0["#context"].value }}
                             </a>
                         </div>
@@ -333,7 +334,7 @@
                     </div>
 
                     {% if content.field_corporate_show_menu %}
-                        <div class="menu-right hidden-xs hidden-sm">
+                        <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
                             <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
                             {{ oab_drupal_menu('our-regional-presence')  }}
                         </div>

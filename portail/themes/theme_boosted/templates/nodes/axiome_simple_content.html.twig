@@ -1,19 +1,19 @@
 <div class="node-axiome-simple-content">
     {% for sc in field_simple_content %}
         <div class="col col-md-12 nopadding">
-            {% if sc.title|trim is not empty %}
-                <h2 class="titre2">{{ sc.title }}</h2>
+            {% if sc.Attributes.title|trim is not empty %}
+                <h2 class="titre2">{{ sc.Attributes.title }}</h2>
             {% endif %}
-            {% if sc.paragraph|trim is not empty %}
-                <p class="highlight1">{{ sc.paragraph|raw|nl2br }}</p>
+            {% if sc.Attributes.paragraph|trim is not empty %}
+                <p class="highlight1">{{ sc.Attributes.paragraph|raw|nl2br }}</p>
             {% endif %}
-            {% if sc.schema.url_archive|trim is not empty %}
+            {% if sc.Attributes.schema.url_archive|trim is not empty %}
                 <div class="col col-md-12 nopadding image">
-                    <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ sc.schema.url_archive }}" alt="{{ sc.schema.balise_alt }}" />
+                    <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ sc.Attributes.schema.url_archive }}" alt="{{ sc.Attributes.schema.balise_alt }}" />
                 </div>
             {% endif %}
-            {% if sc.video|trim is not empty %}
-                <div> {{ sc.video|replace({'//': "https://"})|raw }}</div>
+            {% if sc.Attributes.video|trim is not empty %}
+                <div> {{ sc.Attributes.video|replace({'//': "https://"})|raw }}</div>
             {% endif %}
         </div>
     {% endfor %}

@@ -13,6 +13,7 @@ function oab_tristan_update_dependencies() {
   $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024	);
   $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
   $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020	);
+  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031	);
 
   return $dependencies;
 }
@@ -373,4 +374,18 @@ function oab_tristan_update_8047() {
  */
 function oab_tristan_update_8048() {
   oabt_YmlImport('views.view.content.yml');
+}
+
+/**
+ * Changement du mode d'affichage des visuels ornemtaux des partners de la HP
+ */
+function oab_tristan_update_8049() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
+
+/**
+ * Update de la view SUBHOMES => Modif du filtre "thematic" de la subhome Document/Médiatheque
+ */
+function oab_tristan_update_8050() {
+  oabt_YmlImport('views.view.subhomes.yml');
 }
