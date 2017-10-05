@@ -10,19 +10,21 @@
             var regionSelect = document.getElementById('edit-region');
             var region_id = regionSelect.options[regionSelect.selectedIndex].value;
             var offices = drupalSettings.countriesRegionsTab;
-            $(document.getElementById('edit-country').options).each(function (index, option) {
-                option.hidden = false;
-                option.style.display = 'block';
+            var allCountriesArray = drupalSettings.allCountriesArray;
+
+            $("#edit-country").empty();
+            $("#edit-country").append($("<option></option>")
+                    .attr("value","all")
+                    .text("All"));
+
+            $.each(allCountriesArray , function(i, val) {
+                if((offices[val.id] == region_id || region_id == 'all') && val.id != 'all' && val.id != '' && val.id != 'undefined'  && val.id != null) {
+                    // si le tableau office_id => region ID a la bonne région pour ce pays, on l'ajoute à la liste
+                    $("#edit-country").append($("<option></option>")
+                        .attr("value", val.id)
+                        .text(val.name));
+                }
             });
-            if(region_id != 'all') {
-                $(document.getElementById('edit-country').options).each(function (index, option) {
-                    if (option.value != 'all' && offices[option.value] != region_id) {
-                        option.style.display = 'none';
-                        option.hidden = true;
-                        option.selected = false;
-                    }
-                });
-            }
         }
 
     });

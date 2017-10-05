@@ -95,6 +95,7 @@ class OabOfficesMapPageController extends ControllerBase {
 						),
 						'drupalSettings' => array(
 							'countriesRegionsTab' => $this->getArrayRegionsCountries(),
+							'allCountriesArray' => $this->getCountries(),
 						),
 					),
 				);
@@ -117,16 +118,6 @@ class OabOfficesMapPageController extends ControllerBase {
 		$query->addField('oc', 'name', 'country_name');
 		$query->addField('occ', 'field_country_code_value', 'country_code');
 		$results =	$query->execute()->fetchAll();
-		/*
-		$table_regions_countries = array();
-		foreach ($results as $rowCountryRegion){
-			if((!array_key_exists($rowCountryRegion->region_tid, $table_regions_countries)
-					|| !in_array($rowCountryRegion->country_tid, $table_regions_countries[$rowCountryRegion->region_tid]))
-				&& !empty($rowCountryRegion->region_tid)){
-				$table_regions_countries[$rowCountryRegion->region_tid][] = $rowCountryRegion->country_tid;
-			}
-		}*/
-
 		//tableau [pays id] => region id
 		$table_country_region = array();
 		foreach ($results as $rowCountryRegion){
@@ -134,6 +125,30 @@ class OabOfficesMapPageController extends ControllerBase {
 		}
 
 		return $table_country_region;
+	}
+
+
+	private function getCountries(){
+		$keys = array();
+		$query = Database::getConnection()->select('node_field_data', 'n');
+		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
+		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
+		$query->condition('n.type', 'office', '=');
+		$query->condition('n.status', 1, '=');
+		$query->addField('oc', 'tid', 'country_tid');
+		$query->addField('oc', 'name', 'country_name');
+		$query->orderBy('oc.name');
+		$results =	$query->execute()->fetchAll();
+
+		$table_countries = array();
+		$table_countries['all'] = 'All';
+		foreach ($results as $country){
+			if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
+				$keys[] = $country->country_tid;
+				$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
+			}
+		}
+		return $table_countries;
 	}
 
 }
