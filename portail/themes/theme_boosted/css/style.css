@@ -625,7 +625,23 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-right: 10px;
 
 }
-.partner-banner .views-view-grid .views-col{
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .partner-banner .views-view-grid .views-row::before {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row::after {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row {
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+}
+
+.partner-banner .views-view-grid .partner-img{
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid #595959;
@@ -633,16 +649,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: middle;
     float: none;
 }
-.partner-banner .views-view-grid .views-col:hover{
+.partner-banner .views-view-grid .partner-img:hover{
     border: 1px solid #F16E00;
 }
 
-.partner-banner .views-view-grid .views-col .field--item{
+.partner-banner .views-view-grid .partner-img .field--item{
     padding: 20px;
     text-align: center;
 }
-.partner-banner .views-view-grid .views-col .field--item img{
-    width: 100px;
+.partner-banner .views-view-grid .partner-img .field--item img{
+    max-width: 100px;
+    width: 100%;
     height: auto;
 }
 
@@ -735,7 +752,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
-
+.block-card img{
+    width: 100%;
+    height: auto;
+}
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
@@ -743,6 +763,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 @media (max-width: 767px) {
+
     .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
         display: block !important;
     }
@@ -818,6 +839,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
     .block-card img{
         width: 100%;
+        height: auto;
     }
     .news-chapo{
         padding-bottom: 10px;
@@ -922,10 +944,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .partner-banner .views-view-grid .views-row {
-        margin-left: -20px;
+        /*margin-left: -20px;*/
     }
-}
 
+
+    .partner-banner .views-view-grid .partner-img {
+        min-width: 190px;
+    }
+
+}
 .rebond article, .block-mediatheque, #block-promoactublock {
     margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
@@ -950,6 +977,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
 @media (max-width: 480px) {
     .view-subhomes .views-exposed-form .form-submit {
         margin-top: 2rem;
+    }
+    .block-card img {
+       /* max-width:312px; */
     }
 }
 
