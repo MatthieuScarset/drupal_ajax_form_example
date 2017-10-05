@@ -378,7 +378,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 .section-title-corporate {
-    margin-left: -10px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
 }
 
 .section-title-corporate .title,
@@ -676,7 +677,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .menu-right{
     background: white;
     margin: 0;
-    padding: 40px;
+    padding: 40px !important;
     color: #000;
     font-weight: bold;
     width: 25%;
@@ -703,15 +704,21 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding: 10px 0px 5px 0px !important;
     border-bottom: 1px #ccc solid;
 }
+
 .menu-right ul.menu .link_icon_items a:focus,
 .menu-right ul.menu .link_icon_items a:hover{
     background: none !important;
 }
+.menu-right ul.menu .link_icon_items a:hover i {
+    color: #F16E00;
+}
+
 .menu-right ul.menu .link_icon_items a{
     margin: 0;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 95%;
+    text-decoration: none !important;
 }
 
 .corporate-banner{
