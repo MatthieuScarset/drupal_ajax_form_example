@@ -50,11 +50,11 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
         {% block content %}
             <div class="col-md-12 col-lg-12 home_column_element home_column_no_padding">
 
-                <div class="col col-md-4 col-xs-4 home_column_no_padding">
+                <div class="col col-md-4 col-xs-4 home_column_no_padding home_column_element_image">
                     <img class="home_column_element_image" src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" />
                 </div>
 
-                 <div class="col-md-8 col-xs-8 home_column_no_padding">
+                 <div class="col-md-8 col-xs-8 home_column_no_padding home_column_element_text">
                     <div class="home_column_element_title">{{ content.field_link_title }}</div>
                     <div class="home_column_element_nameFunction">{{ content.field_name }} | {{ content.field_function }} </div>
                  </div>

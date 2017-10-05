@@ -79,10 +79,12 @@ view_mode ? view_mode|clean_class,
 
 
 <article{{ attributes.addClass(classes) }} xmlns="http://www.w3.org/1999/html">
+    {{ title_suffix }}
+    {{ title_prefix }}
     <div{{ content_attributes.addClass('content') }}>
         <div class="row">
             <div class="col-md-12 home_thematic_banner home_thematic_nopadding">
-                <div class="col-md-6 home_thematic_nopadding">
+                <div class="col-md-6 col-lg-6 home_thematic_nopadding">
                     <div class="home_thematic_navigationZone bg_greyblack">
                         <span class="glyphicon icon-arrow-previous" aria-hidden="true"> </span>
                         {{ content.field_navigation_link }}
@@ -221,7 +223,7 @@ view_mode ? view_mode|clean_class,
             <div class="row">
                 <div class="col-md-12 col-lg-12 home_banner_no_padding">
                     <div class="home_thematic_automatic_title container">
-                       {{ "All contents"|t }}
+                       {{ content.field_header_title }}
                     </div><br/>
                     {{ oab_drupal_view('page_thematique', 'block_1') }}
 

@@ -123,9 +123,10 @@ view_mode ? view_mode|clean_class,
                                         <div class="col-md-1 home_banner_first_bottom_left_container">
                                             <!-- Date -->
                                             <div class="home_banner_first_date">
-                                                {{ node.field_home_banner.0.entity.field_date.value | date('d') }} <br>
-                                                {{ node.field_home_banner.0.entity.field_date.value | date('m') }} <br>
-                                                {{ node.field_home_banner.0.entity.field_date.value | date('y') }}
+                                                {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                                {{ date | trim }}<br>
+                                                {{ node.field_home_banner.0.entity.field_date.value | date('m') |trim }}<br>
+                                                {{ node.field_home_banner.0.entity.field_date.value | date('y') |trim }}
                                             </div>
                                         </div>
                                         <!-- Right container/ title -->
