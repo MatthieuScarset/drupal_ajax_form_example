@@ -879,6 +879,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-top:10px
     }
 
+    .footer-div-border:empty {
+        display: none;
+    }
+
     .footer-div-border > p {
         margin-top: 1rem;
     }

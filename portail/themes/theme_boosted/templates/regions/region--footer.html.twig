@@ -50,19 +50,26 @@
                     {% endif %}
 
                 </div>
-                 <div class="footer-div-border">
-                    {% if elements.bottomfooterbaren %}
-                        {{ elements.bottomfooterbaren }}
-                   {% endif %}
-                   {% if elements.bottomfooterbarfr %}
-                       {{ elements.bottomfooterbarfr }}
-                   {% endif %}
-                   {% if elements.bottomfooterbarru %}
-                        {{ elements.bottomfooterbarru }}
-                   {% endif %}
-                   {% if elements.bottomfooterbarruen %}
-                        {{ elements.bottomfooterbarruen }}
-                   {% endif %}
+
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en ru, y a pas de menu finalement...; #}
+                {% if elements.bottomfooterbaren %}
+                    {% set bottomfooterbar = elements.bottomfooterbaren %}
+                {% endif %}
+                {% if elements.bottomfooterbarfr %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarfr %}
+                {% endif %}
+
+                {% if elements.bottomfooterbarru %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarru %}
+                {% endif %}
+                {% if elements.bottomfooterbarruen %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarruen %}
+                {% endif %}
+                {% if bottomfooterbar["#markup"]|render|trim is empty %}
+                    {% set classSupp = "hidden" %}
+                {% endif %}
+                 <div class="footer-div-border {{ classSupp }}">
+                    {{ bottomfooterbar }}
                  </div>
                 <div class="hidden-md hidden-lg container footer-div-border">
                     <div id="login_block" >
