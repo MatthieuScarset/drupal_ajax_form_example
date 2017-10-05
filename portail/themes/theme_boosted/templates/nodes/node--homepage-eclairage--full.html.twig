@@ -76,7 +76,7 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
-
+{% set lang = node.get('langcode').getValue()[0].value %}
 
 <article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
@@ -94,7 +94,15 @@ view_mode ? view_mode|clean_class,
 
                             {{ content.field_menu_title }}
 
-                            {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                            {% if lang == "en" %}
+                                {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                            {% elseif lang == "fr" %}
+                                {{ oab_drupal_menu('menu-homepage-eclairage-fr') }}
+                            {% elseif lang == "ru" %}
+                                {{ oab_drupal_menu('menu-homepage-eclairage-ru') }}
+                            {% elseif lang == "ru-en" %}
+                                {{ oab_drupal_menu('menu-homepage-eclairage-ru') }}
+                            {% endif %}
                         </div>
                         {# content.menu_homepage_eclairage['#children'] #}
 
@@ -104,11 +112,19 @@ view_mode ? view_mode|clean_class,
                                 {{ content.field_menu_title }}
                             </div>
                             <div id="home_eclairage_menu" class="collapse">
-                                {{ oab_drupal_menu('menu-homepage-eclairage') }}
+
+                                {% if lang == "en" %}
+                                    {{ oab_drupal_menu('menu-homepage-eclairage') }}
+                                {% elseif lang == "fr" %}
+                                     {{ oab_drupal_menu('menu-homepage-eclairage-fr') }}
+                                {% elseif lang == "ru" %}
+                                    {{ oab_drupal_menu('menu-homepage-eclairage-ru') }}
+                                {% elseif lang == "ru-en" %}
+                                    {{ oab_drupal_menu('menu-homepage-eclairage-ru') }}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-
                 {# END DISPLAY HOME MENU COMMON #}
                 {# HOME BANNER DESKTOP #}
                 <div class="col-md-9 home_banner_no_padding hidden-xs">
@@ -227,7 +243,7 @@ view_mode ? view_mode|clean_class,
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="btn btn-info btn-decouvrir-plus" role="button" href=""> v {{ "Display more"|t }}</div>
+        <div class="btn btn-info btn-decouvrir-plus" role="button" href=""> &#9660; {{ "Display more"|t }}  </div>
     </div>
     </div>
 

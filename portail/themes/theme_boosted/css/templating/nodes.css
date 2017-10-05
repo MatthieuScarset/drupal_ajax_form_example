@@ -959,6 +959,9 @@ a.home_banner_element_mobile_link {
     text-align: center;
 }
 
+.playlist-button-mobile {
+    width: 277px;
+}
 
 .btn-decouvrir-plus {
     width: 100%;
@@ -1043,9 +1046,13 @@ a.home_banner_element_mobile_link {
 .home_thematic_textZone .node-socialbar{
     margin: 2.5rem 0 3rem 0;
 }
-.home_thematic_banner {
-    height: 610px;
 
+.home_thematic_banner_mobile {
+    height: 350px;
+}
+
+.home_thematic_banner_desktop {
+    height: 610px;
 }
 
 .home_thematic_nopadding {
@@ -1069,12 +1076,11 @@ a.home_banner_element_mobile_link {
     font-size: 2.4rem;
     font-weight: bold;
     color: #000;
-    padding: 0 10px 30px 10px;
+    padding: 30px 10px 30px 10px;
 
 }
 .home_thematic_column {
     border: 1px solid #ccc;
-
     height: 445px;
 }
 
@@ -1141,32 +1147,20 @@ a.home_banner_element_mobile_link {
 }
 
 .view-grid-valorisation {
-    max-width: 1320px;
+    /*max-width: 1320px;*/
     margin-right: auto;
     margin-left: auto;
 }
 
+
 .valorisation-element {
     background-color: #fff;
     margin-right: 10px;
-    margin-left: 10px;
-    width: 310px !important;
     height: 440px;
     margin-bottom: 10px;
 }
 
 
-@media (max-width: 1320px) {
-    .valorisation-element {
-        width: 275px !important;
-    }
-    .valorisation-element .views-field-title {
-        width: 275px !important;
-    }
-    .valorisation-element .views-field-field-highlight {
-        width: 275px !important;
-    }
-}
 .valorisation-element:hover {
     background-color: #F16e00;
     color: #fff;
@@ -1193,12 +1187,12 @@ a.home_banner_element_mobile_link {
 .valorisation-grid {
    /* padding-bottom: 10px;*/
 }
+
 .valorisation-element .views-field-title {
     font-size: 2rem;
     font-weight: bold;
     line-height: 2.4rem;
     padding: 0 30px 15px 30px;
-    width: 310px;
 }
 .valorisation-element .views-field-title a {
     text-decoration: none;
@@ -1208,6 +1202,7 @@ a.home_banner_element_mobile_link {
 .item-playlist-content .views-field-field-profile {
     font-size: 1.4rem;
     padding-left:30px;
+    padding-right:30px;
 }
 .valorisation-element .views-field-field-job-profile,
 .item-playlist-content .views-field-field-job-profile{
