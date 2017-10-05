@@ -51,3 +51,24 @@ span.icon-footer {
     display: inline-block;
     background-color: white;
 }
+
+#block-footeren ul li a,
+#block-footerfr ul li a,
+#block-footerru ul li a{
+    line-height: 1.8rem;
+}
+
+#block-footeren ul li,
+#block-footerfr ul li,
+#block-footerru ul li{
+    margin-bottom: 5px;
+}
+
+@media (max-width: 767px ) {
+    #block-footersocialblock .followbar div.content {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0;
+    }
+}

@@ -333,6 +333,12 @@
     padding-right: 2rem;
 }
 
+@media (max-width: 767px) {
+   .o-footer .navbar-nav > li > a {
+        padding-right: 0;
+    }
+}
+
 /* barre de navigation en langue EN */
 .navbar-en {
     margin-top: 0;
