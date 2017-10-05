@@ -525,6 +525,14 @@ aside.right-column{
     padding-right: 0;
     padding-left: 1rem;
 }
+
+@media (max-width: 767px) {
+    aside.right-column {
+        padding-left: 0;
+        padding-right: 1rem;
+    }
+}
+
 section.left-column > .region,
 aside.right-column > .region{
      background-color: white;
