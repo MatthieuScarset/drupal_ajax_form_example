@@ -196,13 +196,14 @@
                                 {% set columnSize = '9' %}
                                 {% set slickModeRight = 'slick-mode' %}
                             {% endif %}
-                            <div class="col-md-{{ columnSize }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                            {% set columnSizeXl = (columnSize == 12 ) ? 12 : columnSize + 1 %}
+                            <div class="col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
                         </div>
                         <div class="row">
                             {% if numberItems > 1 %}
-                                <div class="col-md-2"> </div>
+                                {% set classCompl = "col-md-offset-3 col-xl-offset-2" %}
                             {% endif %}
-                            <div id="slick-right-zone" class="col-md-{{ columnSize }} no-padding content slick-right-zone {{ slickModeRight }}">
+                            <div id="slick-right-zone" class="{{ classCompl }} col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} content no-padding slick-right-zone {{ slickMode }}">
                                 {{ content.field_solution_banner_right_zone }}
                             </div>
                         </div>
@@ -221,13 +222,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2"> </div>
-                        <div id="slick-left-zone" class="col-xs-12 col-sm-12 no-padding content slick-left-zone {{ slickMode }}">
+                        <div id="slick-left-zone" class="col-sm-12 col-xs-12 no-padding content slick-left-zone {{ slickMode }}">
                             {{ content.field_solution_banner_left_zone }}
                         </div>
                     </div>
                 </div>
                 <div class="solution-zone right-zone col-md-5 col-xs-12 table-cell">
-                    <div class="title-solution-banner">
+                    <div class="title-solution-banner row">
                         <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
                             <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
                             <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
