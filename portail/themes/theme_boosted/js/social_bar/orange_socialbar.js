@@ -170,7 +170,7 @@ var staticText = {
             send: 'send',
             more: 'More options',
             accessibility: {
-                shareon: 'Share on',
+                shareon: 'Поделиться нa',
                 sharewith: 'Share with',
                 follow: 'Follow us on',
                 newsletter: 'Subscribe to our newsletter'
