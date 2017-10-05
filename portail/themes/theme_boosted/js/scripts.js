@@ -284,6 +284,23 @@
         });
       }
 
+      // RSS
+        if (settings.myLibrary.share_siteUrls.rss_blogs.length) {
+            $("a.share-button-rss-blogs").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_blogs );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_magazine.length) {
+            $("a.share-button-rss-magazine").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_magazine );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_presse.length) {
+            $("a.share-button-rss-presse").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_presse );
+            });
+        }
+
     }
   };
 

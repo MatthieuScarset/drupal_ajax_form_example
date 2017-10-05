@@ -31,7 +31,7 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  * @param $variables
  */
 function oab_frontoffice_preprocess_node(&$variables) {
-
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
@@ -88,6 +88,18 @@ function oab_frontoffice_preprocess_node(&$variables) {
           'source' => $site_url
         ]
       ],
+    'rss_blogs' => [
+        'url' => "/".$current_language."/blogs/rss.xml",
+        'params' => []
+    ],
+        'rss_magazine' => [
+            'url' => "/".$current_language."/magazine/rss.xml",
+            'params' => []
+        ],
+        'rss_presse' => [
+            'url' => "/".$current_language."/press/feed_rss.xml",
+            'params' => []
+        ],
 
     ];
 
@@ -107,8 +119,11 @@ function oab_frontoffice_preprocess_node(&$variables) {
         if (strlen($value)>0)
           $paramsString .= $paramName . "=" . rawurlencode($value) . "&";
       }
-      $siteUrls[$site] = $data['url'] . "?"
-          .rtrim($paramsString, "&");
+      $siteUrls[$site] = $data['url'];
+      if($paramsString != "") {
+          $siteUrls[$site] .= "?"
+              . rtrim($paramsString, "&");
+      }
     }
 
     #J'enregistre mes urls pour les avoir en JS
