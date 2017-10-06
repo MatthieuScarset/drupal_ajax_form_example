@@ -113,6 +113,25 @@ article .product ul.nav-tabs li:before{
     display: block;
     overflow: hidden;
 }
+
+/* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
+@media (min-width: 768px) and (max-width: 979px) {
+    .display-subhomes .encart-image{
+        height: 76px;
+    }
+}
+@media (min-width: 980px) and (max-width: 1219px) {
+    .display-subhomes .encart-image{
+        height: 103px;
+    }
+}
+@media (min-width: 1220px)  {
+    .display-subhomes .encart-image{
+        height: 151px;
+    }
+}
+
+
 .view-display-id-page_partners .display-subhomes .encart-image,
 .view-display-id-page_customer .display-subhomes .encart-image{
     display: flex;
@@ -378,7 +397,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 
 .section-title-corporate {
-    margin-left: -10px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
 }
 
 .section-title-corporate .title,
@@ -625,7 +645,23 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-right: 10px;
 
 }
-.partner-banner .views-view-grid .views-col{
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .partner-banner .views-view-grid .views-row::before {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row::after {
+        content: normal;
+    }
+
+    .partner-banner .views-view-grid .views-row {
+        padding-right: 9px;
+        padding-left: 9px;
+    }
+}
+
+.partner-banner .views-view-grid .partner-img{
     margin-left: 10px;
     margin-right: 10px;
     border: 1px solid #595959;
@@ -633,16 +669,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: middle;
     float: none;
 }
-.partner-banner .views-view-grid .views-col:hover{
+.partner-banner .views-view-grid .partner-img:hover{
     border: 1px solid #F16E00;
 }
 
-.partner-banner .views-view-grid .views-col .field--item{
+.partner-banner .views-view-grid .partner-img .field--item{
     padding: 20px;
     text-align: center;
 }
-.partner-banner .views-view-grid .views-col .field--item img{
-    width: 100px;
+.partner-banner .views-view-grid .partner-img .field--item img{
+    max-width: 100px;
+    width: 100%;
     height: auto;
 }
 
@@ -659,7 +696,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .menu-right{
     background: white;
     margin: 0;
-    padding: 40px;
+    padding: 40px !important;
     color: #000;
     font-weight: bold;
     width: 25%;
@@ -686,15 +723,21 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding: 10px 0px 5px 0px !important;
     border-bottom: 1px #ccc solid;
 }
+
 .menu-right ul.menu .link_icon_items a:focus,
 .menu-right ul.menu .link_icon_items a:hover{
     background: none !important;
 }
+.menu-right ul.menu .link_icon_items a:hover i {
+    color: #F16E00;
+}
+
 .menu-right ul.menu .link_icon_items a{
     margin: 0;
     padding-top: 15px;
     padding-bottom: 15px;
     width: 95%;
+    text-decoration: none !important;
 }
 
 .corporate-banner{
@@ -735,7 +778,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
-
+.block-card img{
+    width: 100%;
+    height: auto;
+}
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
@@ -743,6 +789,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 @media (max-width: 767px) {
+
     .o-footer-bottom > ul > li :not(.hidden-xs):not(.hidden-sm) {
         display: block !important;
     }
@@ -818,6 +865,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
     .block-card img{
         width: 100%;
+        height: auto;
     }
     .news-chapo{
         padding-bottom: 10px;
@@ -922,10 +970,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .partner-banner .views-view-grid .views-row {
-        margin-left: -20px;
+        /*margin-left: -20px;*/
     }
-}
 
+
+    .partner-banner .views-view-grid .partner-img {
+        min-width: 190px;
+    }
+
+}
 .rebond article, .block-mediatheque, #block-promoactublock {
     margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
@@ -943,13 +996,14 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .display-subhomes .txt span{
         font-size: 1.6rem;
     }
-
-
 }
 
 @media (max-width: 480px) {
     .view-subhomes .views-exposed-form .form-submit {
         margin-top: 2rem;
+    }
+    .block-card img {
+       /* max-width:312px; */
     }
 }
 
@@ -1263,4 +1317,25 @@ aside.right-column > .region {
 
 .divSynomia {
     display: inline-block;
+}
+
+@media (max-width: 767px) {
+
+}
+.region-content article.full-html.full,
+.region-content article.simple-page.full,
+.region-content article.solution.full,
+.region-content article.product.full,
+.region-content article.press-release.full,
+.region-content article.press-kit.full,
+.region-content article.partner.full,
+.region-content article.magazine.full,
+.region-content article.industry.full,
+.region-content article.document.full,
+.region-content article.customer-story.full,
+.region-content article.blog-post.full,
+.region-content article.page-offices-map,
+aside .region.region-sidebar
+{
+    margin-bottom: 2rem;
 }

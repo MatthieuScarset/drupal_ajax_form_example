@@ -7,6 +7,7 @@ dependencies:
     - node.type.press_release
     - taxonomy.vocabulary.blog_formats
     - taxonomy.vocabulary.blog_thematics
+    - taxonomy.vocabulary.document_thematics
     - taxonomy.vocabulary.document_types
     - taxonomy.vocabulary.industries
     - taxonomy.vocabulary.jobs_profiles
@@ -1235,10 +1236,10 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_blog_thematic_target_id:
-          id: field_blog_thematic_target_id
-          table: node__field_blog_thematic
-          field: field_blog_thematic_target_id
+        field_document_thematic_target_id:
+          id: field_document_thematic_target_id
+          table: node__field_document_thematic
+          field: field_document_thematic_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1247,12 +1248,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_blog_thematic_target_id_op
+            operator_id: field_document_thematic_target_id_op
             label: 'By thematic'
             description: ''
             use_operator: false
-            operator: field_blog_thematic_target_id_op
-            identifier: field_blog_thematic_target_id
+            operator: field_document_thematic_target_id_op
+            identifier: field_document_thematic_target_id
             required: false
             remember: false
             multiple: false
@@ -1280,7 +1281,7 @@ display:
           reduce_duplicates: false
           type: select
           limit: true
-          vid: blog_thematics
+          vid: document_thematics
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
