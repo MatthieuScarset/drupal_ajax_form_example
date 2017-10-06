@@ -492,11 +492,8 @@
         $('.contactBarAffix').affix('checkPosition');
 
         $(window).one('scroll', function() {
-            if ($(document).scrollTop() > 200) {
                 $('#contactbar-container-standard').removeClass('hidden');
                 $('#contactbar-container-light').addClass('hidden');
-            }
-
         });
 
     });

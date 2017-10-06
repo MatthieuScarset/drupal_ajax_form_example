@@ -767,6 +767,10 @@ a.home_banner_element_mobile_link {
         bottom: 0px;
     }
 
+    .home-thematic-columns-items{
+        margin-bottom: 30px
+    }
+
 }
 
 
@@ -887,13 +891,6 @@ a.home_banner_element_mobile_link {
         height: 340px;
     }
 
-    .home_eclairage_menulist ul li:after {
-        content: "";
-        display: block;
-        height: 1px;
-        width: 240px;
-        background: #fff;
-    }
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
