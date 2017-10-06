@@ -1338,3 +1338,11 @@ aside .region.region-sidebar
 {
     margin-bottom: 2rem;
 }
+
+.webform-submission-form .captcha{
+    margin-top: 2rem;
+}
+
+article .webform-submission-form #edit-submit{
+    margin-bottom: 6rem;
+}
