@@ -1473,7 +1473,6 @@ aside .region.region-sidebar
     margin-bottom: 2rem;
 }
 
-
 .logo_reperes {
     overflow: hidden;
 }
@@ -1488,6 +1487,13 @@ aside .region.region-sidebar
     margin-bottom: 1.5rem;
 }
 
-article.product .highlight1{
+article.product .highlight1 {
     margin-top: 0.5rem;
+}
+.webform-submission-form .captcha{
+    margin-top: 2rem;
+}
+
+article .webform-submission-form #edit-submit{
+    margin-bottom: 6rem;
 }
