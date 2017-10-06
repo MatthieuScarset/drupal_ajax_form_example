@@ -33,6 +33,7 @@ function oab_frontoffice_preprocess_menu(&$variables) {
 function oab_frontoffice_preprocess_node(&$variables) {
 
     global $base_root;
+
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
   if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
@@ -447,10 +448,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
     $themes = clean_exposed_filters_by_language(
-      $form['field_document_thematic_target_id']['#options'],
+      $form['field_blog_thematic_target_id']['#options'],
       'Thematic'
     );
-    $form['field_document_thematic_target_id']['#options'] = $themes;
+    $form['field_blog_thematic_target_id']['#options'] = $themes;
 
     $types = clean_exposed_filters_by_language(
       $form['field_document_type_target_id']['#options'],

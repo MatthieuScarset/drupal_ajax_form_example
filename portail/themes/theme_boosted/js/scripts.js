@@ -280,6 +280,7 @@
         });
       }
 
+
       // balises OG
         $('head meta[property="og:locale"]').attr("content", settings.myLibrary.og_locale );
         $('head meta[property="og:title"]').attr("content", settings.myLibrary.og_title );
