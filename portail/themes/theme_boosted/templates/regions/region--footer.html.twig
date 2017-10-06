@@ -71,21 +71,29 @@
                  <div class="footer-div-border {{ classSupp }}">
                     {{ bottomfooterbar }}
                  </div>
-                <div class="hidden-md hidden-lg container footer-div-border">
+
+
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en en, y a pas de menu finalement...; #}
+                {% if elements.topnavbaren_2 %}
+                    {% set topnavbar_2 = elements.topnavbaren_2 %}
+                {% endif %}
+                {% if elements.topnavbarfr_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarfr_2 %}
+                {% endif %}
+
+                {% if elements.topnavbarru_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarru_2 %}
+                {% endif %}
+                {% if elements.topnavbarruen_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarruen_2 %}
+                {% endif %}
+                {% if topnavbar_2["#markup"]|render|trim is empty %}
+                    {% set classSupp_topnavbar = "hidden" %}
+                {% endif %}
+                <div class="hidden-md hidden-lg container footer-div-border {{ classSupp_topnavbar }}">
                     <div id="login_block" >
                         {#Render the top navbar items#}
-                        {% if elements.topnavbarfr_2 %}
-                            {{ elements.topnavbarfr_2 }}
-                        {% endif %}
-                        {% if elements.topnavbaren_2 %}
-                            {{ elements.topnavbaren_2 }}
-                        {% endif %}
-                        {% if elements.topnavbarru_2 %}
-                            {{ elements.topnavbarru_2 }}
-                        {% endif %}
-                        {% if elements.topnavbarruen_2 %}
-                            {{ elements.topnavbarruen_2 }}
-                        {% endif %}
+                        {{ topnavbar_2 }}
                     </div>
 
                 </div>
