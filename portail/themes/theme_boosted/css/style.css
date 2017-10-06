@@ -1358,6 +1358,14 @@ article .webform-submission-form #edit-submit{
     margin-bottom: 1.5rem;
 }
 
-article.product .highlight1{
+article.product .highlight1 {
     margin-top: 0.5rem;
+}
+
+@media (max-width: 767px) {
+    #block-topnavbaren-2 li.lien-site-groupe-orange a,
+    #block-topnavbarfr-2 li.lien-site-groupe-orange a,
+    #block-topnavbarru-2 li.lien-site-groupe-orange a {
+       color: #F16E00;
+    }
 }
