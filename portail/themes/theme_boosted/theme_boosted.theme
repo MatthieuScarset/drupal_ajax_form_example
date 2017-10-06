@@ -179,6 +179,7 @@ function theme_boosted_preprocess_views_view(&$variables){
                 && is_object($term)) {
                 $variables['views_term'] = $term->getDescription();
               }
+							$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Subhome '.$term->getName();
             }
           }
         }
@@ -186,6 +187,7 @@ function theme_boosted_preprocess_views_view(&$variables){
     }
   }
   elseif ($id == 'offices_map_view'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
   	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
   		//kint($variables['rows']);
 			$variables['contact_url'] = 'http://www.google.fr';
