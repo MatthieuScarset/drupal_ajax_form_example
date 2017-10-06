@@ -11,8 +11,7 @@
     border: 0 none;
 }
 
-article.node.full,
-article .webform-submission-form{
+article.node.full{
     padding-bottom: 6rem;
 }
 
