@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_highlight
     - field.storage.node.field_job_profile
     - field.storage.node.field_profile
     - field.storage.node.field_start_date
@@ -109,7 +108,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"valorisation-element-date\">\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('d') }} <br>\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('m') }} <br>\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('y') }}\n                                                        </div>"
+            text: "<div class=\"valorisation-element-date\"> {{ field_start_date[0]['#attributes']['datetime'] | date('d') }} <br> {{ field_start_date[0]['#attributes']['datetime'] | date('m') }} <br>                                                      {{ field_start_date[0]['#attributes']['datetime'] | date('y') }}\n                                                        </div>"
             make_link: false
             path: ''
             absolute: false
@@ -290,68 +289,6 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_highlight:
-          id: field_highlight
-          table: node__field_highlight
-          field: field_highlight
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 150
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: true
-            preserve_tags: ''
-            html: true
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: basic_string
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         field_job_profile:
           id: field_job_profile
           table: node__field_job_profile
@@ -426,7 +363,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if field_job_profile is not empty %}\n                        {{ field_profile }} | {{ field_job_profile }} \n                        {% else %}\n                        {{ field_profile }}\n                        {% endif %}\n                        "
+            text: "{% if field_job_profile is not empty %} {{ field_profile }} | {{ field_job_profile }} {% else %} {{ field_profile }} {% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -840,7 +777,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_highlight'
         - 'config:field.storage.node.field_job_profile'
         - 'config:field.storage.node.field_profile'
         - 'config:field.storage.node.field_start_date'
@@ -863,7 +799,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_highlight'
         - 'config:field.storage.node.field_job_profile'
         - 'config:field.storage.node.field_profile'
         - 'config:field.storage.node.field_start_date'
