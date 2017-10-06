@@ -550,6 +550,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
     height: 100%;
     width: 100%;
 }
+
+@media (min-width: 980px) and (max-width: 1279px) {
+    #tab-expertise-banner li a {
+        padding-left: .5rem;
+        padding-right: .5rem;
+    }
+
+}
+
 #tab-expertise-banner li a:hover {
     background-color: #eee;
 }
