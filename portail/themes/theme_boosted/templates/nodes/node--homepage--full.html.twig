@@ -73,6 +73,9 @@
  */
 #}
 
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
 <!-- Top Zone Homepage -->
 <div class="row top-zone-homepage">
     {% set url = '' %}
@@ -378,5 +381,8 @@
                 </div>
             </div>
         </div>
-
+    </div>
 {% endif %}
+
+
+</article>

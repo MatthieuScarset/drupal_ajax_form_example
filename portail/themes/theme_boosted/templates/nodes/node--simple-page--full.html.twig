@@ -76,6 +76,10 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
 {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 {% set fieldPage %}
     {{ content.field_solution }}
@@ -101,7 +105,6 @@ view_mode ? view_mode|clean_class,
 {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
 
-<article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
         {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_insight', 'field_blog_thematic', 'field_blog_format', 'field_subhome', 'field_industry', 'field_start_date', 'field_end_date') }}
     </div>
