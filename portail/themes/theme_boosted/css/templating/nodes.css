@@ -607,6 +607,12 @@ a.home_banner_element_mobile_link {
     padding-left: 20px;
 }
 
+
+.valorisation-grid {
+    margin-bottom: 20px;
+}
+
+
 @media (max-width: 480px) {
     .home_menu {
         height: auto;
@@ -735,9 +741,12 @@ a.home_banner_element_mobile_link {
 
     .valorisation-grid .views-col {
         width: 100% !important;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
+    .valorisation-grid {
+        margin-bottom: 20px;
+    }
 
     .page_thematique_filter_display #edit-actions {
         padding-bottom: 0px;
@@ -954,6 +963,11 @@ a.home_banner_element_mobile_link {
 
     .valorisation-grid .views-col {
         width: 50% !important;
+        margin-bottom: 10px;
+    }
+
+    .valorisation-grid {
+        margin-bottom: 20px;
     }
 
     .view-mode-home-playlist-image img {
