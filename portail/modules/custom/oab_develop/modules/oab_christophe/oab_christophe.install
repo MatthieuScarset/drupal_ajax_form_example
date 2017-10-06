@@ -298,3 +298,11 @@ function oab_christophe_update_8043() {
 function oab_christophe_update_8044() {
   oabt_YmlImport('pathauto.settings.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3046 - ajout du champ metatags au form des contenu homepage et full html
+ */
+function oab_christophe_update_8045() {
+  oabt_YmlImport('core.entity_form_display.node.full_html.default.yml');
+  oabt_YmlImport('core.entity_form_display.node.homepage.default.yml');
+}
