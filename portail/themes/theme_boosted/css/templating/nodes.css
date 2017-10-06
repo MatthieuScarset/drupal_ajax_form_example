@@ -1395,10 +1395,11 @@ a.home_banner_element_mobile_link {
     text-decoration: none;
     font-weight: 700;
     height: 40px;
-    text-align: center;
+    text-align: right !important;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 8px;
+    margin-right: 10px;
 }
 .view-page-thematique > ul.pager > li.pager__item > a.button:hover {
     background-color: white;
@@ -1410,4 +1411,8 @@ a.home_banner_element_mobile_link {
     color: white;
     border: 1px solid #fff;
 
+}
+
+.view-page-thematique .pager {
+    text-align: right;
 }
