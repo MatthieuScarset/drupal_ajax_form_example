@@ -435,6 +435,20 @@
             });
         }
 
+        if ($('.home-thematic-columns-items').length) {
+
+            //initialize swiper when document ready
+            jQuery('.home-thematic-columns-items').slick({
+                dots: true,
+                arrows: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+
+            });
+        }
+
        $('.contactBarAffix').affix({
                offset: {
                    bottom: 0
@@ -449,11 +463,8 @@
         $('.contactBarAffix').affix('checkPosition');
 
         $(window).one('scroll', function() {
-            if ($(document).scrollTop() > 200) {
                 $('#contactbar-container-standard').removeClass('hidden');
                 $('#contactbar-container-light').addClass('hidden');
-            }
-
         });
 
     });

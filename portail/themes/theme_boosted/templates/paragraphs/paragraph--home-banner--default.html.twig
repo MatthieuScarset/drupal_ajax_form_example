@@ -63,9 +63,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <!-- Date -->
                                     <div class="home_banner_next_date">
 
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                        {{ date | trim }}<br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
@@ -93,9 +94,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
                                 <!-- Date -->
                                 <div class="home_banner_next_date">
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                    {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                    {{ date | trim }}<br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
                                 </div>
 
                                 <!-- Right container/ title -->
