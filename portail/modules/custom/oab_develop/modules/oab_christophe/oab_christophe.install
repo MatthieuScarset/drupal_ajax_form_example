@@ -306,3 +306,12 @@ function oab_christophe_update_8045() {
   oabt_YmlImport('core.entity_form_display.node.full_html.default.yml');
   oabt_YmlImport('core.entity_form_display.node.homepage.default.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3046 - suppression du paramétrage metatags frontpage
+ */
+function oab_christophe_update_8046() {
+  $config_factory = \Drupal::configFactory();
+  $config_group = $config_factory->getEditable('metatag.metatag_defaults.front');
+  $config_group->delete();
+}
