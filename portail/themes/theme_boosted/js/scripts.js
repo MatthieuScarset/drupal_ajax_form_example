@@ -280,12 +280,30 @@
         });
       }
 
+
       // balises OG
         $('head meta[property="og:locale"]').attr("content", settings.myLibrary.og_locale );
         $('head meta[property="og:title"]').attr("content", settings.myLibrary.og_title );
         $('head meta[property="og:description"]').attr("content", settings.myLibrary.og_desc );
         $('head meta[property="og:url"]').attr("content", settings.myLibrary.og_url );
         $('head meta[property="og:image"]').attr("content", settings.myLibrary.og_image );
+
+      // RSS
+        if (settings.myLibrary.share_siteUrls.rss_blogs.length) {
+            $("a.share-button-rss-blogs").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_blogs );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_magazine.length) {
+            $("a.share-button-rss-magazine").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_magazine );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_presse.length) {
+            $("a.share-button-rss-presse").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_presse );
+            });
+        }
 
     }
   };

@@ -231,3 +231,10 @@ function oab_tibo_update_8030() {
 function oab_tibo_update_8031() {
     include_once("updates/update_8031.inc");
 }
+
+/**
+ * traductions pour sharebar
+ */
+function oab_tibo_update_8032() {
+    include_once("updates/update_8032.inc");
+}

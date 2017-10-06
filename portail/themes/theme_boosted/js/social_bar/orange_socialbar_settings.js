@@ -20,10 +20,10 @@ var sharebar_parameters = {
 };
 var visible_sharebar_buttons = [
 	{button: 'twitter'},
-	{button: 'linkedin'},
-	{button: 'googleplus'},
-    {button: 'facebook'},    
-    {button: 'pinterest'}   
+	//{button: 'googleplus'},
+    {button: 'facebook'},
+    {button: 'linkedin'}
+    //{button: 'pinterest'}
 ];
 
 var followbar_parameters = {
