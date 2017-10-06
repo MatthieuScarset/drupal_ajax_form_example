@@ -84,7 +84,7 @@ view_mode ? view_mode|clean_class,
     <div{{ content_attributes.addClass('content') }}>
 
         <div class="col-md-12 home_thematic_nopadding">
-                <div class="col-md-6 home_thematic_nopadding">
+                <div class="col-md-6 col-lg-6 home_thematic_nopadding">
                     <div class="home_thematic_navigationZone bg_greyblack">
                         <span class="glyphicon icon-arrow-previous" aria-hidden="true"> </span>
                         {{ content.field_navigation_link }}
@@ -112,7 +112,8 @@ view_mode ? view_mode|clean_class,
                                 <div class="col-md-1 home_banner_first_bottom_left_container">
                                     <!-- Date -->
                                     <div class="home_banner_first_date">
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                        {{ date | trim }}<br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
                                     </div>
@@ -140,7 +141,8 @@ view_mode ? view_mode|clean_class,
                                 <div class="col-xs-12 col-sm-12 align-left">
                                     <!-- Date -->
                                     <div class="home_banner_first_date">
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                        {{ date | trim }}<br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
                                         {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
                                     </div>
@@ -200,7 +202,7 @@ view_mode ? view_mode|clean_class,
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_banner_no_padding" >
-                <div class="swiper-container-columns">
+               {# <div class="swiper-container-columns">
                     <div class="swiper-wrapper">
                         <!-- Slides -->
                         {% for key, value in content.field_home_thematic_columns if key|first != '#'  %}
@@ -210,6 +212,14 @@ view_mode ? view_mode|clean_class,
                         {% endfor %}
                     </div>
                     <div class="swiper-pagination"></div>
+                </div> #}
+
+
+                <!-- Slides -->
+                <div class="home-thematic-columns-items">
+                {% for key, value in content.field_home_thematic_columns if key|first != '#'  %}
+                        {{ value }}
+                {% endfor %}
                 </div>
             </div>
         </div>
@@ -223,7 +233,7 @@ view_mode ? view_mode|clean_class,
             <div class="row">
                 <div class="col-md-12 col-lg-12 home_banner_no_padding">
                     <div class="home_thematic_automatic_title container">
-                        {{ content.field_header_title }}
+                       {{ content.field_header_title }}
                     </div><br/>
                     {{ oab_drupal_view('page_thematique', 'block_1', content.field_insight[0]['#options'].entity.id()) }}
                 </div>
