@@ -24,7 +24,8 @@
       "code_univers" : code_univers,
       "type_page" : type_page,
       "titre_page" : titre_page,
-      "profil_compte" : profil_compte,
+      "profil_compte_navigation" : profil_compte,
+      "profil_client" : profil_compte, // au cas où profil compte navigation ne fonctionne pas
       "type_langue" : type_langue,
       "erreur_code" : erreur_code,
       "url_appelee" : url_appelee,
