@@ -785,6 +785,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-align: left;
 }
 
+@media (min-width: 768px) and (max-width: 979px) {
+    #tab-expertise-banner li a {
+        padding: 1rem;
+    }
+}
 
 .block-card img{
     width: 100%;
