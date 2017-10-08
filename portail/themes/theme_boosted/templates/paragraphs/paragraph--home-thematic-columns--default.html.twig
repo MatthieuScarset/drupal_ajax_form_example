@@ -55,7 +55,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
                     <div class="thematic_column_elements_title">{{ content.field_title.0 }}</div>
                     <div class="thematic_column_elements_highlight">{{ content.field_highlight.0 }}</div>
-                    <div class="thematic_column_elements_nameFunction">{{ content.field_name.0 }} | {{ content.field_function.0 }} </div>
+                    <div class="thematic_column_elements_nameFunction"> {% if content.field_function.0 is not empty %} {{ content.field_name.0 }} | {{ content.field_function.0 }} {% else %}  {{ content.field_name.0 }} {% endif %} </div>
                 </div>
             </a>
             </div>
