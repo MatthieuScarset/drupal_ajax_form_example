@@ -344,3 +344,11 @@ function oab_stephanie_update_8042() {
 function oab_stephanie_update_8043() {
 	include_once("updates/update_8043.inc");
 }
+
+/**
+ * Nouveau champ pour taxo Region
+ */
+
+function oab_stephanie_update_8044() {
+	include_once("updates/update_8044.inc");
+}
