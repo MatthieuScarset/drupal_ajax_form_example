@@ -929,13 +929,17 @@ a.home_banner_element_mobile_link {
     .valorisation-element .views-field-title {
         padding: 0 15px 15px 15px;
     }
-    .valorisation-element .views-field-field-profile, .item-playlist-content .views-field-field-profile {
+    .valorisation-element .views-field-field-profile {
         padding-left: 15px;
         padding-right: 15px;
     }
 
     .thematic_column_elements {
         padding: 15px 15px 10px 15px;
+    }
+
+    .home_thematic_column {
+        overflow: hidden;
     }
 
     .thematic_column_elements_highlight {
