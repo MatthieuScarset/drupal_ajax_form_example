@@ -1,8 +1,8 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_job_profile
     - field.storage.node.field_profile
     - field.storage.node.field_start_date
     - field.storage.node.field_visual
@@ -108,7 +108,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"valorisation-element-date\"> {{ field_start_date[0]['#attributes']['datetime'] | date('d') }} <br> {{ field_start_date[0]['#attributes']['datetime'] | date('m') }} <br>                                                      {{ field_start_date[0]['#attributes']['datetime'] | date('y') }}\n                                                        </div>"
+            text: "<div class=\"valorisation-element-date\">\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('d') }} <br>\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('m') }} <br>\n                                                        {{ field_start_date[0]['#attributes']['datetime'] | date('y') }}\n                                                        </div>"
             make_link: false
             path: ''
             absolute: false
@@ -150,7 +150,7 @@ display:
           settings:
             timezone_override: ''
             format_type: html_date
-          group_column: value
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -213,7 +213,7 @@ display:
           type: entity_reference_entity_view
           settings:
             view_mode: teaser
-          group_column: target_id
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -276,7 +276,7 @@ display:
           type: string
           settings:
             link_to_entity: true
-          group_column: value
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -289,69 +289,6 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_job_profile:
-          id: field_job_profile
-          table: node__field_job_profile
-          field: field_job_profile
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         field_profile:
           id: field_profile
           table: node__field_profile
@@ -362,8 +299,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: true
-            text: "{% if field_job_profile is not empty %} {{ field_profile }} | {{ field_job_profile }} {% else %} {{ field_profile }} {% endif %}"
+            alter_text: false
+            text: "{{ field_profile }}\n                        "
             make_link: false
             path: ''
             absolute: false
@@ -404,7 +341,7 @@ display:
           type: entity_reference_label
           settings:
             link: false
-          group_column: target_id
+          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -766,6 +703,7 @@ display:
         groups:
           1: AND
       use_ajax: true
+      group_by: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -777,7 +715,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_job_profile'
         - 'config:field.storage.node.field_profile'
         - 'config:field.storage.node.field_start_date'
         - 'config:field.storage.node.field_visual'
@@ -799,7 +736,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_job_profile'
         - 'config:field.storage.node.field_profile'
         - 'config:field.storage.node.field_start_date'
         - 'config:field.storage.node.field_visual'
