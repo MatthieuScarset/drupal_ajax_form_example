@@ -693,3 +693,9 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
 	return $theme;
 }
 
+
+function oab_frontoffice_mail_alter(&$message) {
+    for($i = 0; $i < count($message["body"]); $i++){
+        $message["body"][$i] = str_replace("http://", "https://", $message["body"][$i]);
+    }
+}
