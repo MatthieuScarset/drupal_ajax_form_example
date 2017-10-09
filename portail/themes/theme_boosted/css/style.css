@@ -1476,3 +1476,10 @@ article.product .highlight1{
     width: 100% !important;
 }
 
+@media (max-width: 767px) {
+    #block-topnavbaren-2 li.lien-site-groupe-orange a,
+    #block-topnavbarfr-2 li.lien-site-groupe-orange a,
+    #block-topnavbarru-2 li.lien-site-groupe-orange a {
+       color: #F16E00;
+    }
+}
