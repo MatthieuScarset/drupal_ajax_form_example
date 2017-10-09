@@ -74,7 +74,16 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <p class="home_banner_next_title" >
                                         {{ content.field_title[0]['#context']['value'] }}
                                     </p>
-                                    <p class="home_banner_next_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
+                                    <p class="home_banner_next_nameFunction">
+                                        {% set name_function %}
+                                            {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }}
+                                        {% endset %}
+                                        {% if content.field_function[0]['#context']['value'] is not empty %}
+                                            {{ name_function }}
+                                        {% else %}
+                                            {{ content.field_name[0]['#context']['value'] }}
+                                        {% endif %}
+                                    </p>
 
 
                                 </div>
@@ -105,7 +114,15 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <p class="home_banner_title" >
                                         {{ content.field_title[0]['#context']['value'] }}
                                     </p>
-                                 <p class="home_banner_first_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
+                                 <p class="home_banner_first_nameFunction">
+                                     {% set name_function %}
+                                         {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }}
+                                     {% endset %}
+                                     {% if content.field_function[0]['#context']['value'] is not empty %}
+                                         {{ name_function }}
+                                     {% else %}
+                                         {{ content.field_name[0]['#context']['value'] }}
+                                     {% endif %} </p>
                                 </div>
 
                          </div>

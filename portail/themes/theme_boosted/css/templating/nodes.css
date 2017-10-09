@@ -397,7 +397,6 @@ a.home_banner_element_mobile_link {
 
 
 .home-banner-items .slick-dots {
-    bottom: 20px;
     width: 100%;
 }
 .home-banner-items .slick-dots li button {
@@ -417,7 +416,8 @@ a.home_banner_element_mobile_link {
     margin-bottom: 0px;
 }
 .home-playlist-items .slick-dots {
-    bottom: 20px;
+    bottom: 0px;
+    padding-top: 10px;
 }
 .home-playlist-items .slick-dots li button {
 
@@ -723,8 +723,8 @@ a.home_banner_element_mobile_link {
         max-width: 312px;
         padding-right:0;
         padding-left:0;
-        margin-right:0;
-        margin-left:0;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .home_thematic_columnImage {
@@ -760,15 +760,21 @@ a.home_banner_element_mobile_link {
         width: 100% !important;
     }
 
-    .slick-dotted.slick-slider {
-        margin-bottom: 10px;
-    }
+
     .home-playlist-items .slick-dots {
-        bottom: 0px;
+        bottom: -25px;
     }
 
     .home-thematic-columns-items{
         margin-bottom: 30px
+    }
+
+    .home-playlist-items .slick-dots {
+        bottom: 20px;
+    }
+
+    .homepage-eclairage-playlist-element .slick-dotted.slick-slider {
+        margin-bottom: 10px;
     }
 
 }
@@ -944,7 +950,7 @@ a.home_banner_element_mobile_link {
         overflow: hidden;
     }
     .home_eclairage_title {
-        padding-left: 50px;
+        padding-left: 20px;
     }
     .playlist-button-mobile {
         width: 277px;
@@ -953,9 +959,10 @@ a.home_banner_element_mobile_link {
     .home-banner-items .slick-dotted.slick-slider {
         bottom: 0px !important;
     }
-    .home-banner-items .slick-dots {
-        bottom: 20px;
-    }
+
+    #filterbar {
+        padding: 0px 0px 20px 0px;
+     }
 
 }
 @media (min-width: 481px) and (max-width: 767px){
@@ -1014,6 +1021,16 @@ a.home_banner_element_mobile_link {
     }
     .home_column_element {
         padding-left: 0px;
+    }
+    .slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+    .home_banner_mobile_title {
+        padding: 10px 10px 0px 0px;
+    }
+
+    .home-playlist-items .slick-dots {
+        bottom: 20px;
     }
 }
 
@@ -1300,8 +1317,8 @@ a.home_banner_element_mobile_link {
 .valorisation-element {
     background-color: #fff;
     margin-right: 10px;
-    height: 400px;
-    margin-bottom: 20px;
+    height: 350px;
+    overflow: hidden;
 }
 
 
@@ -1309,7 +1326,7 @@ a.home_banner_element_mobile_link {
     background-color: #F16e00;
     color: #fff;
     border-color: #F16e00;
-    height: 400px;
+    height: 350px;
 }
 
 .valorisation-element:hover a,
@@ -1322,8 +1339,8 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element .views-field-field-visual {
     padding-bottom: 30px;
-    margin-top: -20px;
 }
+
 .valorisation-element img{
     width:100% ;
 }
@@ -1359,8 +1376,6 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element-date-wrapper {
     position: relative;
-    height: 10px;
-    display: inline-block;
 }
 
 .homeplaylist-element-date-wrapper {
