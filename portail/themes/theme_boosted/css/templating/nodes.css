@@ -613,6 +613,28 @@ a.home_banner_element_mobile_link {
 }
 
 
+
+.valorisation-element .views-field-field-visual {
+    padding-bottom: 30px;
+}
+
+.valorisation-element .views-field-field-profile,
+.item-playlist-content .views-field-field-profile {
+    font-size: 1.4rem;
+    padding-left:30px;
+    padding-right:30px;
+}
+.thematic_column_elements {
+    padding: 30px 30px 40px 30px;
+}
+.valorisation-element .views-field-title {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 2.4rem;
+    padding: 0 30px 15px 30px;
+}
+
+
 @media (max-width: 480px) {
     .home_menu {
         height: auto;
@@ -900,6 +922,33 @@ a.home_banner_element_mobile_link {
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
+    .valorisation-element .views-field-field-visual {
+        padding-bottom: 10px;
+    }
+
+    .valorisation-element .views-field-title {
+        padding: 0 15px 15px 15px;
+    }
+    .valorisation-element .views-field-field-profile {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .thematic_column_elements {
+        padding: 15px 15px 10px 15px;
+    }
+
+    .home_thematic_column {
+        overflow: hidden;
+    }
+
+    .thematic_column_elements_highlight {
+        font-size: 1.6rem;
+        line-height: 2rem;
+        margin-bottom: 15px;
+        max-height: 140px;
+        overflow: hidden;
+    }
 
     .item-playlist-content {
         border: 1px solid #ccc;
@@ -1268,9 +1317,6 @@ a.home_banner_element_mobile_link {
     opacity: 1;
     background: #F16E00;
 }
-.thematic_column_elements {
-    padding: 30px 30px 40px 30px;
-}
 
 .thematic_column_elements_title {
     font-weight: bold;
@@ -1343,32 +1389,17 @@ a.home_banner_element_mobile_link {
 }
 
 
-.valorisation-element .views-field-field-visual {
-    padding-bottom: 30px;
-}
-
 .valorisation-element img{
     width:100% ;
 }
 
 
 
-.valorisation-element .views-field-title {
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 2.4rem;
-    padding: 0 30px 15px 30px;
-}
+
 .valorisation-element .views-field-title a {
     text-decoration: none;
 }
 
-.valorisation-element .views-field-field-profile,
-.item-playlist-content .views-field-field-profile {
-    font-size: 1.4rem;
-    padding-left:30px;
-    padding-right:30px;
-}
 .valorisation-element .views-field-field-job-profile,
 .item-playlist-content .views-field-field-job-profile{
     font-size: 1.4rem;
