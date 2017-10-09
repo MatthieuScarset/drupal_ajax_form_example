@@ -120,8 +120,14 @@ function theme_boosted_preprocess_page(&$variables) {
 		$url  = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
 		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
-		$variables['#attached']['drupalSettings']['tealium']['url_referente'] = $url;
+
+		if(isset($request->server) && isset($request->server)) {
+			$headers = $request->server->getHeaders();
+			$referer_url = isset($headers['REFERER']) ? $headers['REFERER'] : '';
+			$variables['#attached']['drupalSettings']['tealium']['url_referente'] = htmlspecialchars($referer_url);
+		}
 	}
+
 	if (\Drupal::routeMatch()->getParameter('node')) {
 		$node = \Drupal::routeMatch()->getParameter('node');
 	}
@@ -156,6 +162,12 @@ function theme_boosted_preprocess_page(&$variables) {
 		->getTitle($request, $route_match->getRouteObject());
 	$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 
+	$route_name = \Drupal::routeMatch()->getRouteName();
+	if($route_name == 'user.login'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Connexion';
+	}elseif($route_name == 'user.pass'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
+	}
 }
 
 function theme_boosted_preprocess_views_view(&$variables){
