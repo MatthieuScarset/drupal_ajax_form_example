@@ -964,6 +964,12 @@ a.home_banner_element_mobile_link {
         padding: 0px 0px 20px 0px;
      }
 
+    .home_banner_next_bottom_container {
+        position: absolute;
+        width: 100%;
+        top: 20px;
+    }
+
 }
 @media (min-width: 481px) and (max-width: 767px){
     .item-playlist-content {
