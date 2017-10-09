@@ -161,6 +161,12 @@ function theme_boosted_preprocess_page(&$variables) {
 		->getTitle($request, $route_match->getRouteObject());
 	$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 
+	$route_name = \Drupal::routeMatch()->getRouteName();
+	if($route_name == 'user.login'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Connexion';
+	}elseif($route_name == 'user.pass'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
+	}
 }
 
 function theme_boosted_preprocess_views_view(&$variables){
