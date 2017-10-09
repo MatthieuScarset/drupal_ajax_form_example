@@ -50,12 +50,12 @@
     height: 20px;
     position: absolute;
 }
-.gmap-popup .location-content .views-field-field-region{
+.gmap-popup .location-content .views-field-field-linked-content{
     margin-top: 10px;
 }
 
 
-.gmap-popup .location-content .views-field-field-region a,
+.gmap-popup .location-content .views-field-field-linked-content a,
 .gmap-popup .location-content .contact a
 {
     font-size: 0.9em;
@@ -66,14 +66,14 @@
 .gmap-popup .location-content .contact a:hover,
 .gmap-popup .location-content .contact a:active,
 .gmap-popup .location-content .contact a:focus,
-.gmap-popup .location-content .views-field-field-region a:hover,
-.gmap-popup .location-content .views-field-field-region a:active,
-.gmap-popup .location-content .views-field-field-region a:focus{
+.gmap-popup .location-content .views-field-field-linked-content a:hover,
+.gmap-popup .location-content .views-field-field-linked-content a:active,
+.gmap-popup .location-content .views-field-field-linked-content a:focus{
     color: #ff7900;
     text-decoration: underline;
 }
 .gmap-popup .location-content .contact span.icon-more,
-.gmap-popup .location-content .views-field-field-region span.icon-more {
+.gmap-popup .location-content .views-field-field-linked-content span.icon-more {
     position: absolute;
     border: none;
     overflow: hidden;
@@ -87,6 +87,6 @@
     line-height: 1px;
     vertical-align: middle;
 }
-.gmap-popup .location-content .views-field-field-region{
+.gmap-popup .location-content .views-field-field-linked-content{
     margin-right: 40px;
 }

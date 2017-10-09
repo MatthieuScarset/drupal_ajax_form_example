@@ -44,7 +44,7 @@ li.office-address .views-field-field-phone-number{
 
 
 li.office-address .contact a,
-li.office-address .views-field-field-region a{
+li.office-address .views-field-field-linked-content a{
     color: #ff7900;
     text-decoration: none;
     font-size: 1.2rem;
@@ -52,11 +52,11 @@ li.office-address .views-field-field-region a{
 }
 li.office-address .contact a:focus,
 li.office-address .contact a:hover,
-li.office-address .views-field-field-region a:focus,
-li.office-address .views-field-field-region a:hover{
+li.office-address .views-field-field-linked-content a:focus,
+li.office-address .views-field-field-linked-content a:hover{
     text-decoration: underline;
 }
 
-li.office-address .views-field-field-region{
+li.office-address .views-field-field-linked-content{
     margin-right: 20px;
 }
