@@ -540,9 +540,19 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
     .open > .dropdown-menu {
-        position: relative;
+        /*position: relative;
         display: block;
-        width: 100%;
+        width: 100%;*/
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        border: 0;
+        box-shadow: none;
     }
 }
 
+nav .menu.navbar-nav a:active,
+nav .menu.navbar-nav a:focus {
+    outline: none;
+}
