@@ -1347,3 +1347,7 @@ aside .region.region-sidebar
 article .webform-submission-form #edit-submit{
     margin-bottom: 6rem;
 }
+.g-recaptcha > div,
+.g-recaptcha iframe{
+    width: 100% !important;
+}
