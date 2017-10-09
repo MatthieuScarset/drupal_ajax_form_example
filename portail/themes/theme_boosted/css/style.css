@@ -816,7 +816,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 @media (min-width: 768px) and (max-width: 979px) {
     #tab-expertise-banner li a {
-        padding: 1rem;
+        padding: 2rem 1rem;
     }
 
     .homepage-banner.expertise-banner .tabpanel-expertise {
