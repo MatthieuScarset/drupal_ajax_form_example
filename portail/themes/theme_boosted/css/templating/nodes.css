@@ -769,6 +769,14 @@ a.home_banner_element_mobile_link {
         margin-bottom: 30px
     }
 
+    .home-playlist-items .slick-dots {
+        bottom: 20px;
+    }
+
+    .homepage-eclairage-playlist-element .slick-dotted.slick-slider {
+        margin-bottom: 10px;
+    }
+
 }
 
 
@@ -942,7 +950,7 @@ a.home_banner_element_mobile_link {
         overflow: hidden;
     }
     .home_eclairage_title {
-        padding-left: 50px;
+        padding-left: 20px;
     }
     .playlist-button-mobile {
         width: 277px;
@@ -1016,6 +1024,13 @@ a.home_banner_element_mobile_link {
     }
     .slick-dotted.slick-slider {
         margin-bottom: 0px;
+    }
+    .home_banner_mobile_title {
+        padding: 10px 10px 0px 0px;
+    }
+
+    .home-playlist-items .slick-dots {
+        bottom: 20px;
     }
 }
 
@@ -1303,7 +1318,6 @@ a.home_banner_element_mobile_link {
     background-color: #fff;
     margin-right: 10px;
     height: 350px;
-    margin-bottom: 20px;
     overflow: hidden;
 }
 
@@ -1325,8 +1339,8 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element .views-field-field-visual {
     padding-bottom: 30px;
-    margin-top: -20px;
 }
+
 .valorisation-element img{
     width:100% ;
 }
@@ -1362,8 +1376,6 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element-date-wrapper {
     position: relative;
-    height: 10px;
-    display: inline-block;
 }
 
 .homeplaylist-element-date-wrapper {
