@@ -1375,3 +1375,9 @@ article .webform-submission-form #edit-submit{
 article.product .highlight1{
     margin-top: 0.5rem;
 }
+
+.g-recaptcha > div,
+.g-recaptcha iframe{
+    width: 100% !important;
+}
+
