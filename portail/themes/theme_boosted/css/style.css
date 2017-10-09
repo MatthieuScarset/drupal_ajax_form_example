@@ -1383,3 +1383,9 @@ article.product .highlight1 {
        color: #F16E00;
     }
 }
+
+.g-recaptcha > div,
+.g-recaptcha iframe{
+    width: 100% !important;
+}
+
