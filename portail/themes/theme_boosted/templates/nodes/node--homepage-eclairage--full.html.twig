@@ -85,7 +85,7 @@ view_mode ? view_mode|clean_class,
             <div class="home_eclairage_banner">
                 {# DISPLAY HOME MENU COMMON #}
 
-                    <div class="col-lg-3 hidden-md hidden-sm hidden-xs home_menu">
+                    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs home_menu">
                         <div class="home_eclairage_title bg_greyblack">
                             {{ label }}
                         </div>
@@ -127,9 +127,9 @@ view_mode ? view_mode|clean_class,
                     </div>
                 {# END DISPLAY HOME MENU COMMON #}
                 {# HOME BANNER DESKTOP #}
-                <div class="col-lg-9 home_banner_no_padding hidden-md hidden-sm hidden-xs">
+                <div class="col-lg-9 col-md-9 home_banner_no_padding hidden-sm hidden-xs">
                     {# BIG IMAGE - FIRST ITEM #}
-                    <div class="col-lg-8 col-md-12 home_banner_no_padding">
+                    <div class="col-lg-8 col-md-8 home_banner_no_padding">
                         <a class="home_banner_element_link" href="{{ node.field_home_banner.0.entity.field_link_title.0.url }}">
                             <div class="home_banner_first" style="background:url('{{ file_url(node.field_home_banner.0.entity.field_big_image_desktop_.entity.uri.value) }}');">
                                 <!-- Bottom Container -->
@@ -160,7 +160,7 @@ view_mode ? view_mode|clean_class,
                         </a>
                     </div>
                     {# SMALL IMAGES - NEXT ITEMS #}
-                    <div class="col-lg-4 home_banner_no_padding">
+                    <div class="col-lg-4 col-md-4 home_banner_no_padding">
                         {% for key, value in content.field_home_banner if key != 0 %}
                             <div class="col-md-12 home_banner_next home_banner_no_padding">
                                 {{ value }}
@@ -172,10 +172,10 @@ view_mode ? view_mode|clean_class,
             </div>
 
             {# DISPLAY HOME MENU MOBILE #}
-            <div class="home_eclairage_title bg_greyblack col-xs-12 col-sm-12 col-md-12 hidden-lg">
+            <div class="home_eclairage_title bg_greyblack col-xs-12 col-sm-12 hidden-md hidden-lg">
                 {{ label }}
             </div>
-            <div class="home_eclairage_menulist_mobile bg_grey col-xs-12 col-sm-12 col-md-12 hidden-lg">
+            <div class="home_eclairage_menulist_mobile bg_grey col-xs-12 col-sm-12 hidden-md hidden-lg">
                 <div data-toggle="collapse" data-target="#home_eclairage_menu">
                     {{ content.field_menu_title }}
                 </div>
@@ -195,7 +195,7 @@ view_mode ? view_mode|clean_class,
 
             {# HOME BANNER MOBILE #}
 
-            <div class="col-xs-12 col-sm-12 col-md-12 hidden-lg home_banner_no_padding" >
+            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_banner_no_padding" >
                 <div class="container">
                 <div class="home-banner-items">
                     <!-- Slides -->
