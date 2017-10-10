@@ -466,10 +466,17 @@ a.home_banner_element_mobile_link {
     padding-bottom: 2rem;
     font-weight: 700;
 }
-.home_eclairage_menulist_mobile .field--name-field-menu-title:after{
-    content: "v";
+.home_eclairage_menulist_mobile .field--name-field-menu-title:after {
+    content: "";
     float: right;
-    padding-right: 2rem;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #fff;
+    margin-top: 10px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 .home_eclairage_menulist_mobile .link_icon_items a{
     text-decoration: none !important;
@@ -714,7 +721,7 @@ a.home_banner_element_mobile_link {
 
     .home_playlist_grey {
         padding-top: 65px !important;
-        padding-bottom: 55px !important;
+        padding-bottom: 65px !important;
     }
 
     .home_playlist_white {
@@ -783,20 +790,20 @@ a.home_banner_element_mobile_link {
     }
 
 
-    .home-playlist-items .slick-dots {
-        bottom: -25px;
-    }
-
     .home-thematic-columns-items{
         margin-bottom: 30px
     }
 
     .home-playlist-items .slick-dots {
-        bottom: 20px;
+        bottom: 0px;
     }
 
     .homepage-eclairage-playlist-element .slick-dotted.slick-slider {
         margin-bottom: 10px;
+    }
+
+    .home_eclairage_menulist_mobile .field--name-field-menu-title {
+        padding-left: 2rem;
     }
 
 }
@@ -1084,8 +1091,20 @@ a.home_banner_element_mobile_link {
         padding: 10px 10px 0px 0px;
     }
 
-    .home-playlist-items .slick-dots {
-        bottom: 20px;
+    .home_banner_next_bottom_container {
+        position: absolute;
+        width: 100%;
+        top: 20px;
+    }
+
+    .home_playlist_grey {
+        background-color: #eee;
+        padding-top: 80px;
+        padding-bottom: 65px;
+    }
+
+    .home-thematic-columns-items .slick-dots {
+        bottom: 30px !important;
     }
 }
 
