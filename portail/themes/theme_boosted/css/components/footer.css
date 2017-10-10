@@ -51,3 +51,7 @@ span.icon-footer {
     display: inline-block;
     background-color: white;
 }
+
+.o-footer {
+    padding-bottom: 70px;
+}

@@ -35,6 +35,7 @@
 {%
 set classes = [
 'view',
+'container',
 'view-' ~ id|clean_class,
 'view-id-' ~ id,
 'view-display-id-' ~ display_id,
@@ -60,7 +61,7 @@ dom_id ? 'js-view-dom-id-' ~ dom_id,
     {% if exposed %}
     <div id="filterbar" data-toggle="collapse" data-target="#page_thematique_filter" class="container">
         <div class="filter_name">
-            {{ "Filters"|t }}
+
         </div>
 
     </div>
