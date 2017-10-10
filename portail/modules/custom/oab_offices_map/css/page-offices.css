@@ -1,6 +1,11 @@
 article.page-offices-map{
     display: table;
 }
+.page-offices-map > .region-content,
+.block_carte{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 .region-content{
     background-color: white;
 }
