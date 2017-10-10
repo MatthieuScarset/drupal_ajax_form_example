@@ -64,11 +64,9 @@
 
     function changeHeightSubhome(){
         $('.cols-4').each(function (index){
-            console.log("cols-4 - "+index);
             for (var i = 0; i <= 3; i++){
 
                 $(this).children("div[class*=row-"+i+"] ").each(function(idx){
-                    console.log("====row-"+idx+"====");
                     var max_height = 0;
                     // get max height by row
                     $(this).children("div[class*=col-]").each(function (){
@@ -93,7 +91,6 @@
 
                     });
 
-                    console.log(max_height);
                 });
 
             }
@@ -224,6 +221,16 @@
         showhideFilters();
         changeHeightSubhome();
     });
+
+    Drupal.behaviors.infiniteScrollChangeHeightSubhome = {
+        attach: function (context, settings) {
+
+            if (settings.path.currentPath.indexOf('subhome') >= 0){
+                changeHeightSubhome();
+            }
+
+        }
+    };
 
 
     //Pour re-afficher les filtres en appuyant sur la flèche...
