@@ -770,6 +770,17 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #000 !important;
     opacity: 1;
 }
+
+#related-content-slick-carousel .slick-dots li button::before {
+    color: #fff !important;
+    opacity: 0.55;
+}
+
+#related-content-slick-carousel .slick-dots li.slick-active button:before{
+    color: #F16E00 !important;
+    opacity: 1;
+}
+
 .nav-tabs-dropdown {
     display: none !important;
     width: 100%;
