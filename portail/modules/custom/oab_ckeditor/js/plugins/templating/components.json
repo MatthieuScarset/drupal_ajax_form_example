@@ -63,7 +63,7 @@
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/responsive_table.png"
   },{
     "label": "Social network",
-    "file": "/../../../themes/theme_boosted/templates/nodes/socialbar.html.twig",
+    "file": "/../../../themes/theme_boosted/templates/nodes/social_network.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/tools/social_network.png"
   }]
 }, {
