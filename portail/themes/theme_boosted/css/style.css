@@ -87,8 +87,9 @@ article .product ul.nav-tabs li:before{
 .view-subhomes .display-subhomes{
     background-color: #eee;
     margin-right: 2rem;
-    height: 30rem;
-    max-height: 30rem;
+    min-height: 30rem;
+    /*max-height: 30rem;*/
+    padding-bottom: 0.3rem;
     margin-bottom: 2rem;
 }
 .display-subhomes .encart{
