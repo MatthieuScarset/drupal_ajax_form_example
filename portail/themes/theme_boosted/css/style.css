@@ -1081,6 +1081,13 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .display-subhomes .txt span{
         font-size: 1.6rem;
     }
+    .logo_reperes img {
+        width: initial !important;
+    }
+}
+
+.logo_reperes img {
+    width: 100%;
 }
 
 @media (max-width: 480px) {
@@ -1404,9 +1411,10 @@ aside.right-column > .region {
     display: inline-block;
 }
 
-@media (max-width: 767px) {
-
+.logo_reperes {
+    overflow: hidden;
 }
+
 .region-content article.full-html.full,
 .region-content article.simple-page.full,
 .region-content article.solution.full,
@@ -1453,6 +1461,7 @@ article.product .highlight1{
 .g-recaptcha iframe{
     width: 100% !important;
 }
+
 
 @media (max-width: 767px) {
     #block-topnavbaren-2 li.lien-site-groupe-orange a,

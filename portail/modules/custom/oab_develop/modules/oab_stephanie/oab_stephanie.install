@@ -348,7 +348,13 @@ function oab_stephanie_update_8043() {
 /**
  * Nouveau champ pour taxo Region
  */
-
 function oab_stephanie_update_8044() {
 	include_once("updates/update_8044.inc");
+}
+
+/**
+ * Affectation des nodes Region aux taxos regions
+ */
+function oab_stephanie_update_8045() {
+	include_once("updates/update_8045.inc");
 }
