@@ -1344,10 +1344,11 @@ aside .region.region-sidebar
     margin-bottom: 2rem;
 }
 
-@media (max-width: 767px) {
-    #block-topnavbaren-2 li.lien-site-groupe-orange a,
-    #block-topnavbarfr-2 li.lien-site-groupe-orange a,
-    #block-topnavbarru-2 li.lien-site-groupe-orange a {
-       color: #F16E00;
-    }
+#block-topnavbaren li.lien-site-groupe-orange a,
+#block-topnavbarfr li.lien-site-groupe-orange a,
+#block-topnavbarru li.lien-site-groupe-orange a,
+#block-topnavbaren-2 li.lien-site-groupe-orange a,
+#block-topnavbarfr-2 li.lien-site-groupe-orange a,
+#block-topnavbarru-2 li.lien-site-groupe-orange a {
+   color: #F16E00;
 }
