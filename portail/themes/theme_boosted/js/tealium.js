@@ -10,6 +10,11 @@
     var custom_variable_key = drupalSettings.tealium.custom_variable_key;
     var custom_variable_value = drupalSettings.tealium.custom_variable_value;
     var tealium_url = drupalSettings.tealium.tealium_url;
+    var profil_compte = drupalSettings.tealium.profil_compte_navigation;
+    var type_langue = drupalSettings.tealium.type_langue;
+    var erreur_code = drupalSettings.tealium.erreur_code;
+    var url_appelee = drupalSettings.tealium.url_appelee;
+    var url_referente = drupalSettings.tealium.url_referente;
 
     var utag_data={
       "sous_domaine" : sous_domaine,
@@ -18,9 +23,14 @@
       "domaine_marketing" : domaine_marketing ,
       "code_univers" : code_univers,
       "type_page" : type_page,
-      "titre_page" : titre_page
+      "titre_page" : titre_page,
+      "profil_compte_navigation" : profil_compte,
+      "profil_client" : profil_compte, // au cas où profil compte navigation ne fonctionne pas
+      "type_langue" : type_langue,
+      "erreur_code" : erreur_code,
+      "url_appelee" : url_appelee,
+      "url_referente" : url_referente
     };
-
     if (typeof custom_variable_key !== 'undefined' && typeof custom_variable_value !== 'undefined'){
       utag_data[custom_variable_key] = custom_variable_value;
     }
