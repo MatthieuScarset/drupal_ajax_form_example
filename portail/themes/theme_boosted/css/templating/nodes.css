@@ -1102,6 +1102,10 @@ a.home_banner_element_mobile_link {
         padding-top: 80px;
         padding-bottom: 65px;
     }
+
+    .home-thematic-columns-items .slick-dots {
+        bottom: 30px !important;
+    }
 }
 
 
