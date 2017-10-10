@@ -228,15 +228,19 @@
 
       // Homepage carousel solution & industries
       $('#home-slick-carousel-left-prev_arrow').on('click', function(){
+
           $('#slick-left-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-left-next_arrow').on('click', function(){
+
           $('#slick-left-zone').slick("slickNext");
       });
       $('#home-slick-carousel-right-prev_arrow').on('click', function(){
+
           $('#slick-right-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-right-next_arrow').on('click', function(){
+
           $('#slick-right-zone').slick("slickNext");
       });
 
@@ -309,3 +313,6 @@
   };
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
+
+
+
