@@ -47,6 +47,12 @@
         display: block !important;
     }
 }
+
+.link-contactbar {
+    vertical-align: middle;
+    display: table-cell;
+    height: 30px;
+}
 @media (max-width: 767px) {
     /* line 31, ../sass/global.sass */
     .bs-slide-xs {
@@ -55,6 +61,10 @@
 
     .textlink-contactbar {
         vertical-align: baseline !important;
+    }
+
+    .link-contactbar {
+        height: 15px !important;
     }
 }
 
@@ -74,6 +84,7 @@
     font-size: 4rem !important;
     padding-right: 1rem;
     vertical-align: bottom;
+    line-height: 1;
 }
 
 .arrow-contactbar {
@@ -84,10 +95,8 @@
 .textlink-contactbar {
     font-size: 1.6rem;
     font-weight: bold;
-    vertical-align: middle;
     display: inline-block;
     height: 100%;
-    padding-bottom: 5px;
 }
 .textlink-contactbar a{
     color: white;
@@ -96,8 +105,8 @@
     color: rgb(255,121,0);
 }
 
+
 .iconblock {
-    position: relative;
     cursor: pointer;
 }
 
@@ -106,7 +115,6 @@
 }
 
 .iconblock a {
-    display: table-cell;
     color: white;
 }
 
