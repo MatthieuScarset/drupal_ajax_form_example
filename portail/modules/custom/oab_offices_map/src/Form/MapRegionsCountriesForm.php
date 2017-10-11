@@ -32,10 +32,6 @@ class MapRegionsCountriesForm extends FormBase {
 
 		$regions = $this->getRegions();
 		$countries = $this->getCountries();
-		$form['region_label'] = array(
-			'#type' => 'label',
-			'#title' => t('Region')
-		);
 		$form['region'] = [
 			'#multiple_toggle' => '1',
 			'#type' => 'select',
@@ -43,10 +39,6 @@ class MapRegionsCountriesForm extends FormBase {
 			'#default_value' => $selectedRegion,
 			'#attributes' => array('class' => array('select-regions')),
 		];
-		$form['country_label'] = array(
-			'#type' => 'label',
-			'#title' => t('Country')
-		);
 		$form['country'] = [
 			'#multiple_toggle' => '1',
 			'#type' => 'select',
@@ -75,7 +67,7 @@ class MapRegionsCountriesForm extends FormBase {
 		$results =	$query->execute()->fetchAll();
 
 		$table_countries = array();
-		$table_countries['all'] = 'All';
+		$table_countries['all'] = $this->t('Country');
 		foreach ($results as $country){
 			if(!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid)){
 				$table_countries[$country->country_tid] = $country->country_name;
@@ -97,7 +89,7 @@ class MapRegionsCountriesForm extends FormBase {
 		$results =	$query->execute()->fetchAll();
 
 		$table_regions = array();
-		$table_regions['all'] = $this->t('All');
+		$table_regions['all'] = $this->t('Region');
 
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();

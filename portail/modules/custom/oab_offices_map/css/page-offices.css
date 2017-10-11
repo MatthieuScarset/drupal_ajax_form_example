@@ -1,6 +1,11 @@
 article.page-offices-map{
     display: table;
 }
+.page-offices-map > .region-content,
+.block_carte{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 .region-content{
     background-color: white;
 }
@@ -18,7 +23,9 @@ article.page-offices-map{
     font-weight: bold;
     margin-bottom: 20px;
 }
-
+.form_filter_regions_countries{
+    width: 100%;
+}
 .form_filter_regions_countries .oab-offices-map-regions-countries-form label,
 .form_filter_regions_countries .oab-offices-map-regions-countries-form .row,
 .form_filter_regions_countries .oab-offices-map-regions-countries-form select,
@@ -26,10 +33,32 @@ article.page-offices-map{
     display: inline-block;
     vertical-align: middle;
 }
+.page-offices-map .form_filter_regions_countries,
+.page-offices-map .block_principal_offices_map{
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
 
+.page-offices-map .form_filter_regions_countries > .container,
+.page-offices-map .form_filter_regions_countries > .container > .row > col-sm-12{
+    padding-left: 0;
+}
+.page-offices-map .form_filter_regions_countries .container{
+    margin-right: 20px;
+}
+.page-offices-map .form_filter_regions_countries .container select{
+    margin-left: 0 !important;
+}
 
 .form_filter_regions_countries .oab-offices-map-regions-countries-form .row{
     float: left;
+}
+
+.form_filter_regions_countries .oab-offices-map-regions-countries-form #edit-submit{
+    position: absolute;
+    right: 20px;
 }
 
 .form_filter_regions_countries .oab-offices-map-regions-countries-form label,
@@ -42,4 +71,46 @@ select.select-countries{
 }
 .block_principal_offices_map {
     margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+    .page-offices-map .form_filter_regions_countries .container {
+        margin-right: 0;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form .container,
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form .row {
+        max-width: none;
+        display: block;
+        float: none;
+        vertical-align: baseline;
+    }
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form select {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button {
+        margin: 0;
+        margin-left: 5px;
+        float: right;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button::after {
+        clear: both;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form #edit-submit {
+        margin-right: 5px;
+        position: inherit;
+    }
+
+    .block_principal_offices_map {
+        margin-top: 40px;
+    }
+
+    ul.offices-addresses-list {
+        width: 100%;
+    }
 }
