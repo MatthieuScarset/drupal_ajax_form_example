@@ -826,7 +826,18 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-align: left;
 }
 
-.block-card img{
+@media (min-width: 768px) and (max-width: 979px) {
+    #tab-expertise-banner li a {
+        padding: 2rem 1rem;
+    }
+
+    .homepage-banner.expertise-banner .tabpanel-expertise {
+        margin-right: 2rem !important;
+        margin-left: 2rem !important;
+    }
+}
+
+.block-card img {
     width: 100%;
     height: auto;
 }
@@ -841,6 +852,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-left: 2rem !important;
     }
 }
+
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
@@ -994,6 +1006,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         border: 1px solid #ccc;
         background-color: white;
         color: black;
+
     }
 
     .expertise-banner {
@@ -1089,7 +1102,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .partner-banner .views-view-grid .views-row {
-        /*margin-left: -20px;*/
+        margin-left: -20px;
     }
 
 
