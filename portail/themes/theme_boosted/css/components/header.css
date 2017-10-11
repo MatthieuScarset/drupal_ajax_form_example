@@ -254,11 +254,7 @@
     padding-bottom: 30px;
 }
 
-<<<<<<< HEAD
-@media (max-width: 767px) {
-=======
 @media (max-width: 979px) {
->>>>>>> JIRA_3100
     #items_megamenu {
         padding-left: 30px;
         padding-bottom: 0px;
