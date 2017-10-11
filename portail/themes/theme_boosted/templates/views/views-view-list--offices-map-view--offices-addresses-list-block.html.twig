@@ -34,10 +34,15 @@
         %}
         <li{{ row.attributes.addClass(row_classes) }}>
             {{ row.content }}
-            {% if contact_url %}
-                <span class="contact">
-                    <a href="{{  contact_url }}" title="" class="more"><span class="icon icon-more"></span>{{ 'Contact'|trans }}</a>
-                </span>
+
+            {% set regionName = row.content["#row"]._entity.field_region[0].get('entity').getValue().get('name').value %}
+            {% if row.content["#row"]._entity.field_region[0] is not empty
+                and row.content["#row"]._entity.field_region[0].get('entity').getValue().get('field_linked_content')[0] is not empty %}
+                {% set regionPage_nid = row.content["#row"]._entity.field_region[0].get('entity').getValue().get('field_linked_content')[0].value['target_id'] %}
+                {% set regionPage_url = path( 'entity.node.canonical', {'node': regionPage_nid}) %}
+                <div class="link_region_content">
+                    <a href="{{ regionPage_url }}">{{ regionName }}</a>
+                </div>
             {% endif %}
         </li>
     {% endfor %}
