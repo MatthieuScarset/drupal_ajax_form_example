@@ -252,7 +252,7 @@
         <!-- Expertise Zone Homepage -->
         {% if content.field_expertise_title|render|trim is not empty %}
         <div class="homepage-banner-container">
-            <div class="col-md-10 col-md-offset-1 col-xs-12 homepage-banner expertise-banner" >
+            <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
 
                 <div class="title">
                     {{ content.field_expertise_title }}
@@ -266,10 +266,10 @@
                             <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
                                 <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-lg-3 hidden-md hidden-sm hidden-xs">
                                             <span class="icon-expertise {{ item.entity.field_tab_picto_class.value }}"></span>
                                         </div>
-                                        <div class="col-md-9 tab-title">
+                                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 tab-title">
                                             {{ item.entity.field_tab_title.value }}
                                         </div>
                                     </div>
