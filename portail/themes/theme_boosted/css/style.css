@@ -514,12 +514,14 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-size: 2rem;
     font-weight: bold;
 }
-.carousel-solution .content .text-content{
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
-    font-family: HelvNeueOrange, Arial, sans-serif;
-    line-height: 2rem;
-}
+
+ .carousel-solution .content .text-content{
+     font-size: 1.6rem;
+     margin-bottom: 2rem;
+     font-family: HelvNeueOrange, Arial, sans-serif;
+     line-height: 2rem;
+ }
+
 .homepage-banner{
     background-color: white;
     padding: 60px 45px;
