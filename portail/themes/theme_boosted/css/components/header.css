@@ -262,7 +262,6 @@
     padding-bottom: 30px;
 }
 
-
 @media (max-width: 979px) {
     #items_megamenu {
         padding-left: 30px;
@@ -280,16 +279,16 @@
     }
 
     .mega-menu ul.menu.nav.navbar-nav > li {
-        border-top: 1px solid #333333;
+        border-top: 2px solid white;
         padding: 0.5rem 0;
     }
 
     #items_megamenu > div h3 {
-        border-bottom: 1px solid #333333;
+        border-bottom: 1px solid white;
     }
 
     #items_megamenu > div li {
-        border-top: 1px solid #333333;
+        border-top: 1px solid white;
     }
 
     #items_megamenu > div li:first-child {
@@ -297,11 +296,11 @@
     }
 
     #items_megamenu > div li:last-child {
-        border-bottom: 1px solid #333333;
+        border-bottom: 1px solid white;
     }
 
     #items_megamenu > div:last-child li:first-child {
-        border-top: 1px solid #333333;
+        border-top: 1px solid white;
     }
 
     #items_megamenu > div:last-child li:last-child {
@@ -550,7 +549,6 @@
 @media (max-width: 979px) {
     .mega-menu .nav, .mega-menu .collapse {
         margin-left: 0;
-        margin-top: 0px;
     }
 
     .mega-menu .navbar-collapse {
@@ -558,8 +556,7 @@
     }
 
     .mega-menu.navbar .nav > li > a {
-        font-size: 1.6rem;
-        padding: 10px 10px;
+        font-size: 2.5rem;
     }
 
     .iconblock .icon-email {
