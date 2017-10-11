@@ -72,3 +72,45 @@ select.select-countries{
 .block_principal_offices_map {
     margin-top: 30px;
 }
+
+@media (max-width: 767px) {
+    .page-offices-map .form_filter_regions_countries .container {
+        margin-right: 0;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form .container,
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form .row {
+        max-width: none;
+        display: block;
+        float: none;
+        vertical-align: baseline;
+    }
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form select {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button {
+        margin: 0;
+        margin-left: 5px;
+        float: right;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button::after {
+        clear: both;
+    }
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form #edit-submit {
+        margin-right: 5px;
+        position: inherit;
+    }
+
+    .block_principal_offices_map {
+        margin-top: 40px;
+    }
+
+    ul.offices-addresses-list {
+        width: 100%;
+    }
+}
