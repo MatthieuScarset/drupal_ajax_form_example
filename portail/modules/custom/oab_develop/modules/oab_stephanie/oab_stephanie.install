@@ -358,3 +358,11 @@ function oab_stephanie_update_8044() {
 function oab_stephanie_update_8045() {
 	include_once("updates/update_8045.inc");
 }
+
+
+/**
+ * Modif vue offices map
+ */
+function oab_stephanie_update_8046() {
+	include_once("updates/update_8046.inc");
+}
