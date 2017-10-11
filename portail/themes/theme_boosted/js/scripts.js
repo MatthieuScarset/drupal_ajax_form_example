@@ -9,6 +9,7 @@
   $( window ).resize(function() {
     image_resize_width();
     obs_template_height();
+      changeHeightSubhome();
   });
 
   function image_resize_width(){
@@ -60,6 +61,41 @@
       }
     });
   }
+
+    function changeHeightSubhome(){
+        $('.cols-4').each(function (index){
+            for (var i = 0; i <= 3; i++){
+
+                $(this).children("div[class*=row-"+i+"] ").each(function(idx){
+                    var max_height = 0;
+                    // get max height by row
+                    $(this).children("div[class*=col-]").each(function (){
+                        var blocs = $(this).find(".display-subhomes");
+                        for (var j = 0; j < blocs.length; j++){
+                            if ($(blocs[j]).height() > max_height) {
+                                max_height = $(blocs[j]).height();
+                            }
+                        }
+
+                    });
+                    // set max height by row
+                    $(this).children("div[class*=col-]").each(function (){
+                        var blocs = $(this).find(".display-subhomes");
+                        for (var j = 0; j < blocs.length; j++){
+                            if (max_height < 300){ // 300 = min-height of the bloc
+                                $(blocs[j]).height(300);
+                            }else{
+                                $(blocs[j]).height(max_height);
+                            }
+                        }
+
+                    });
+
+                });
+
+            }
+        });
+    }
 
     function resizeIframeAuto(){
         var obj = document.getElementById('myFrame');
@@ -182,10 +218,21 @@
   // (Quand on refresh, la page garde sa position.. Donc le scroll ne fonctionne pas)
   $(document).ready(function () {
     showhideFilters();
+      changeHeightSubhome();
   });
 
+    Drupal.behaviors.infiniteScrollChangeHeightSubhome = {
+        attach: function (context, settings) {
 
-  //Pour re-afficher les filtres en appuyant sur la flèche...
+            if (settings.path.currentPath.indexOf('subhome') >= 0){
+                changeHeightSubhome();
+            }
+
+        }
+    };
+
+
+    //Pour re-afficher les filtres en appuyant sur la flèche...
   $(document).on("click", '#link-back-to-filter', function(event) {
 
     var ancre = $(this).attr('href');   //Je recupère l'id de l'ancre contenu dans le href
