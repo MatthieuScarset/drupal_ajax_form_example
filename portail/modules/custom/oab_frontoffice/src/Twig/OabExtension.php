@@ -8,6 +8,7 @@
 namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Plugin\views\field\Node;
 use Drupal\views\Views;
 
 class OabExtension extends \Twig_Extension {
@@ -199,8 +200,14 @@ class OabExtension extends \Twig_Extension {
    * @param $node
    * @return mixed
    */
-  function nodeAbsoluteUrl($type, $node) {
-    $url = Url::fromRoute($type, array('node'=>$node), array('absolute'=>true));
+  function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
+
+  	$options = array('absolute' => TRUE);
+  	if($defaultLanguage) {
+			$node = \Drupal\node\Entity\Node::load($nid);
+			$options['language'] = $node->language();
+		}
+		$url = Url::fromRoute($type, array('node' => $nid), $options);
     return $url->toString();
   }
 
