@@ -556,7 +556,8 @@
     }
 
     .mega-menu.navbar .nav > li > a {
-        font-size: 2.5rem;
+        font-size: 1.6rem;
+        padding: 10px 10px;
     }
 
     .iconblock .icon-email {
@@ -564,7 +565,7 @@
     }
 
     .textlink-contactbar {
-        margin-top: -50px;
+        margin-top: -15px;
     }
 }
 
@@ -575,6 +576,12 @@
     }
 }
 
+@media (min-width: 980px) {
+
+    .mega-menu .nav-item.dropdown .dropdown-menu {
+        margin-top: 10px;
+    }
+}
 
 .sandwich-button .close-env-info{
     display:none;
