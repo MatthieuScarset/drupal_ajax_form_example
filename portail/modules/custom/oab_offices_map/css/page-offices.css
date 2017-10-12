@@ -112,6 +112,6 @@ select.select-countries{
 @media (max-width: 480px) {
 
     .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button {
-        margin-left: 5px;
+        /*margin-left: 5px;*/
     }
 }
