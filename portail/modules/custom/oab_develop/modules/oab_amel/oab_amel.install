@@ -338,3 +338,10 @@ function oab_amel_update_8039() {
 function oab_amel_update_8040() {
     include_once("updates/update_8040.inc");
 }
+
+/**
+ *  MAJ vue thématique et playlist eclairage : remplacement start date par changed date
+ */
+function oab_amel_update_8041() {
+    include_once("updates/update_8041.inc");
+}
