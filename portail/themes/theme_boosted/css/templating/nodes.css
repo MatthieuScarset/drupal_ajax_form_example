@@ -1482,7 +1482,8 @@ a.home_banner_element_mobile_link {
 .home_thematic_automatic_title {
     font-size: 2.4rem;
     font-weight: bold;
-    padding-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 25px;
 }
 
 #filterbar {
