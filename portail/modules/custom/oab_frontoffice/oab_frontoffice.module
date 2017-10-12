@@ -605,6 +605,9 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       if($current_language == 'ru' ){
           unset($form['field_industry_target_id']);
       }
+      if($current_language == 'en' ){
+          unset($form['field_jobs_target_id']);
+      }
   }
   // subhome partenaires
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
