@@ -56,14 +56,10 @@ article.page-offices-map{
     float: left;
 }
 
-.form_filter_regions_countries .oab-offices-map-regions-countries-form #edit-submit{
-    position: absolute;
-    right: 20px;
-}
 
 .form_filter_regions_countries .oab-offices-map-regions-countries-form label,
-.form_filter_regions_countries .oab-offices-map-regions-countries-form input.button{
-    margin-left:30px;}
+.form_filter_regions_countries .oab-offices-map-regions-countries-form input.button{/*
+    margin-left:30px;*/}
 
 select.select-regions,
 select.select-countries{
@@ -93,8 +89,6 @@ select.select-countries{
 
     .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button {
         margin: 0;
-        margin-left: 5px;
-        float: right;
     }
 
     .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button::after {
@@ -112,5 +106,12 @@ select.select-countries{
 
     ul.offices-addresses-list {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .form_filter_regions_countries .oab-offices-map-regions-countries-form input.button {
+        margin-left: 5px;
     }
 }
