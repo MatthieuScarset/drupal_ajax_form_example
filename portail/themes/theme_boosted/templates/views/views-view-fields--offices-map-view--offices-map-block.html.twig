@@ -59,7 +59,7 @@ and row._entity.field_region[0].get('entity').getValue().get('field_linked_conte
     {% set regionPage_nid = row._entity.field_region[0].get('entity').getValue().get('field_linked_content')[0].value['target_id'] %}
     {% set regionPage_url = path( 'entity.node.canonical', {'node': regionPage_nid}) %}
     <div class="link_region_content">
-        <a href="{{ regionPage_url }}">{{ regionName }}</a>
+        <a href="{{ nodeAbsoluteUrl('entity.node.canonical',regionPage_nid, true) }}">{{ regionName }}</a>
         <span class="icon icon-more"></span>
     </div>
 {% endif %}
