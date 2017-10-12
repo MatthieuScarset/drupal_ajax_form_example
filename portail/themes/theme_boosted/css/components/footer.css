@@ -55,7 +55,31 @@ span.icon-footer {
 .o-footer {
     padding-bottom: 70px;
 }
+#block-footeren ul li a,
+#block-footerfr ul li a,
+#block-footerru ul li a{
+    line-height: 1.8rem;
+}
 
+#block-footeren ul li,
+#block-footerfr ul li,
+#block-footerru ul li{
+    margin-bottom: 5px;
+}
+
+@media (max-width: 767px ) {
+    #block-footersocialblock .followbar div.content {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0;
+    }
+
+    #block-contactbar .wrapper_numero {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}
 
 @media (max-width: 480px) {
     #block-contactbar .wrapper_numero {
