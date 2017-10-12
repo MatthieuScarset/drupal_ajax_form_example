@@ -501,9 +501,10 @@ class AxiomeImporter{
                             $nid = (int)$nid;
                             $this->message .= "Chargement du NODE $nid\n";
                             $node = Node::load($nid);
+                            $node->setChangedTime(time());
+                            $node->save();
                             $node->set('moderation_state', array('target_id' => 'draft'));
-                            $node->setChangedTime(mktime());
-                            $this->message .= "microtime ".mktime()."\n";
+                            $this->message .= "microtime ".time()."\n";
 
                         } else {// Si c'est une nouvelle fiche
                             $this->axiome_notification[] = "nouvelle fiche importée";
