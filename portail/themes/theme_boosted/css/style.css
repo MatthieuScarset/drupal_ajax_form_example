@@ -171,6 +171,18 @@ article .product ul.nav-tabs li:before{
     line-height: 3rem;
     padding-top: 1rem;
 }
+@media (min-width:768px )  and (max-width:1200px ) {
+    .display-subhomes .bigKey{
+        font-size: 4.4rem !important;
+        line-height: 4rem !important;
+        margin-left: 0px;
+        margin-right: 5px;
+    }
+    .display-subhomes .lowKey{
+        font-size: 1.8rem !important;
+        line-height: 1.9rem !important;
+    }
+}
 .display-subhomes .txt span{
     font-size: 1.2rem;
 
