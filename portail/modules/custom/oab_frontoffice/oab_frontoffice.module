@@ -150,7 +150,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
           $file = $node->get('field_visual')->getValue();
           if(!empty($file[0]['target_id']) && $file[0]['target_id'] != null){
               $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-              if(file instanceof \Drupal\file\Entity\File){
+              if($file instanceof \Drupal\file\Entity\File){
                 $og_image = $file->url();
               }
           }
@@ -410,7 +410,16 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       unset($form['field_job_profile_target_id']);
       unset($form['field_industry_target_id']);
     }
-
+      // HACK POUR LA SORTIE
+      if($current_language == 'fr' ){
+          unset($form['field_job_profile_target_id']);
+          unset($form['field_industry_target_id']);
+      }
+      if($current_language == 'en' ){
+          unset($form['field_blog_format_target_id']);
+          unset($form['field_job_profile_target_id']);
+          unset($form['field_industry_target_id']);
+      }
   }
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
@@ -444,6 +453,16 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       unset($form['field_job_profile_target_id']);
       unset($form['field_industry_target_id']);
     }
+      // HACK POUR LA SORTIE
+      if($current_language == 'fr' ){
+          unset($form['field_job_profile_target_id']);
+          unset($form['field_industry_target_id']);
+      }
+      if($current_language == 'en' ){
+          unset($form['field_magazine_type_target_id']);
+          unset($form['field_job_profile_target_id']);
+          unset($form['field_industry_target_id']);
+      }
   }
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
@@ -470,6 +489,20 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       'Industry'
     );
     $form['field_industry_target_id']['#options'] = $industries;
+
+      // HACK POUR LA SORTIE
+      if($current_language == 'fr' ){
+          unset($form['field_jobs_target_id']);
+          unset($form['field_industry_target_id']);
+          // on supprime "eBook"
+          unset($form['field_document_type_target_id']['#options'][139]);
+      }
+      if($current_language == 'en' ){
+          unset($form['field_jobs_target_id']);
+          unset($form['field_industry_target_id']);
+          // on supprime "position paper"
+          unset($form['field_document_type_target_id']['#options'][357]);
+      }
   }
   // subhome presse
   if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
@@ -526,8 +559,18 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     //Suppression de filtres pour le russe
     if($current_language == 'ru' ){
       unset($form['field_jobs_target_id']);
+      unset($form['field_industry_target_id']);
     }
-
+      // HACK POUR LA SORTIE
+      if($current_language == 'fr' ){
+        // on supprime "ressources et énergie" et "transport"
+          unset($form['field_industry_target_id']['#options'][238]);
+          unset($form['field_industry_target_id']['#options'][163]);
+      }
+      if($current_language == 'en' ){
+          unset($form['field_industry_target_id']);
+          unset($form['field_jobs_target_id']);
+      }
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
@@ -552,6 +595,16 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     if($current_language == 'ru' ){
       unset($form['field_jobs_target_id']);
     }
+    // HACK POUR LA SORTIE
+      if($current_language == 'fr' ){
+          unset($form['field_jobs_target_id']);
+          // on supprime "ressources et énergie" et "transport"
+          unset($form['field_industry_target_id']['#options'][238]);
+          unset($form['field_industry_target_id']['#options'][163]);
+      }
+      if($current_language == 'ru' ){
+          unset($form['field_industry_target_id']);
+      }
   }
   // subhome partenaires
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
@@ -575,6 +628,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
 
       if($current_language != 'en'){
+          unset($form['field_regions_target_id']);
+      }
+      // HACK POUR SORTIE
+      if($current_language == 'en' ){
           unset($form['field_regions_target_id']);
       }
   }
