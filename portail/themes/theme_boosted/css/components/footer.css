@@ -75,3 +75,17 @@ span.icon-footer {
         margin-left: 0;
     }
 }
+
+@media (max-width: 480px) {
+    #block-contactbar .wrapper_numero {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    #block-contactbar .wrapper_numero {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
