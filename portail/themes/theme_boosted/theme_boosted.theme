@@ -107,6 +107,10 @@ function theme_boosted_preprocess_node(&$variables) {
 function theme_boosted_preprocess_page(&$variables) {
 	$request = \Drupal::request();
 
+	$route_match = \Drupal::routeMatch();
+	$title = \Drupal::service('title_resolver')
+		->getTitle($request, $route_match->getRouteObject());
+
 	$exception = $request->attributes->get('exception');
 	$code = 200;
 	if(!empty($exception)){
@@ -157,11 +161,16 @@ function theme_boosted_preprocess_page(&$variables) {
 			}
 		}
 	}
-	$route_match = \Drupal::routeMatch();
-	$title = \Drupal::service('title_resolver')
-		->getTitle($request, $route_match->getRouteObject());
+	else{
+		//ajout de la social share bar
+		$variables['#attached'] = [
+			'drupalSettings' => [
+				'myLibrary' => getSocialBarParameters($title, "", "")
+			],
+		];
+	}
+	//tealium
 	$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
-
 	$route_name = \Drupal::routeMatch()->getRouteName();
 	if($route_name == 'user.login'){
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Connexion';
@@ -374,5 +383,7 @@ function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $
     }
 
 }
+
+
 
 ?>
