@@ -1526,6 +1526,7 @@ article.product .highlight1{
     #main_nav .navbar-nav > li > a {
         padding-top: 10px;
         padding-bottom: 10px;
+        padding-left: 10px;
     }
 
     #main_nav .collapse.in {
