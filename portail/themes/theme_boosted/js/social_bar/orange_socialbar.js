@@ -292,7 +292,7 @@ var getFacebookShare = function(){
     $.ajax({
         type : "GET",
         dataType : "jsonp",
-        url : "http://graph.facebook.com/?id=" + sharebar_parameters.og_url,
+        url : "https://graph.facebook.com/?id=" + sharebar_parameters.og_url,
         success: function(data){
             if(!data.shares || data.shares === ""){
                 data.shares = 0;
@@ -336,7 +336,7 @@ var getPinterestShare = function(){
     $.ajax({
         type : "GET",
         dataType : "jsonp",
-        url : "http://api.pinterest.com/v1/urls/count.json?callback=receiveCount&url=" + sharebar_parameters.og_url,
+        url : "https://api.pinterest.com/v1/urls/count.json?callback=receiveCount&url=" + sharebar_parameters.og_url,
         success: function(data){}
     });
 };
@@ -353,7 +353,7 @@ var receiveCount = function(data){
 var getLinkedinShare = function(){
     $.ajax({
         type : "GET",
-        dataType : "jsonp",
+        dataType : "json",
         url : "https://www.linkedin.com/countserv/count/share?url=" + sharebar_parameters.og_url,
         success: function(data){
             if(!data.count || data.count === ""){
@@ -383,12 +383,12 @@ var getShortUrl = function(url){
 if(typeof sharebar_parameters !== "undefined"){
     var via = sharebar_parameters.twitter_site.substring(1, sharebar_parameters.twitter_site.length);
     var share_links = {
-        facebook: "http://www.facebook.com/sharer.php?u=" + drupalSettings.myLibrary.og_url,
+        facebook: "https://www.facebook.com/sharer.php?u=" + drupalSettings.myLibrary.og_url,
         twitter: "https://twitter.com/intent/tweet?text=" + "" + "&url=" + drupalSettings.myLibrary.og_url + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         twitter_short: "https://twitter.com/intent/tweet?text=" + '' + "&url=" + getShortUrl(drupalSettings.myLibrary.og_url) + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         googleplus: "https://plus.google.com/share?url=" + drupalSettings.myLibrary.og_url + "&hl=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         linkedin: "https://www.linkedin.com/shareArticle?mini=true&url=" + drupalSettings.myLibrary.og_url,
-        pinterest: "http://pinterest.com/pin/create/button/?url=" + drupalSettings.myLibrary.og_url + "&media=" + drupalSettings.myLibrary.og_image + "&description=" + drupalSettings.myLibrary.og_title
+        pinterest: "https://pinterest.com/pin/create/button/?url=" + drupalSettings.myLibrary.og_url + "&media=" + drupalSettings.myLibrary.og_image + "&description=" + drupalSettings.myLibrary.og_title
     };
 }
 
@@ -398,61 +398,31 @@ var shareClick = function(button){
     var config = "toolbar = no, location = no, directories = no, menubar = no, width = 560, height = 500";
 
     if(button === 'facebook'){
-        if(sharebar_parameters.show_counter){
-            getFacebookShare();
-        }
         var link = share_links.facebook;
         var popup_title = "Facebook share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'twitter' && sharebar_parameters.use_bitly === true){
-        if(sharebar_parameters.show_counter){
-            getTwitterShare();
-        }
         var link = share_links.twitter_short;
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'twitter'){
-        if(sharebar_parameters.show_counter){
-            getTwitterShare();
-        }
         var link = share_links.twitter;
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'googleplus'){
-        /*if(googleshares){
-            if(sharebar_parameters.show_counter && googleshares <= 0){
-                shares.google = googleshares;
-            }
-        }*/
         var link = share_links.googleplus;
         var popup_title = "Google Plus share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'linkedin'){
-        if(sharebar_parameters.show_counter){
-            getLinkedinShare();
-        }
         var link = share_links.linkedin;
         var popup_title = "LinkedIn share";
         window.open(link, popup_title, config);
         //shares.user += 1;
-        getShares();
     }else if(button === 'pinterest'){
-        /*if(sharebar_parameters.show_counter){
-            getLinkedinShare();
-        }*/
         var link = share_links.pinterest;
         var popup_title = "Pinterest share";
         window.open(link, popup_title, config);
         //shares.user += 1;
-        getShares();
     }else if(button === 'email'){
         openMail();
     }else if(button === 'sms'){
@@ -939,14 +909,14 @@ window.onload = function(){
 				if(sharebar_parameters.auto_load === true){
 					showShareBar();
 				};
-				getShares();
+				//getShares();
 
-				if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
+				/*if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
 					if(sharebar_parameters.counter_reload_time > 0){
 						var time = sharebar_parameters.counter_reload_time * 1000;
 						window.setInterval(function(){ getShares(); }, time);
 					}
-				}
+				}*/
 			}
 		}
 	}
