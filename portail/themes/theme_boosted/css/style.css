@@ -87,8 +87,9 @@ article .product ul.nav-tabs li:before{
 .view-subhomes .display-subhomes{
     background-color: #eee;
     margin-right: 2rem;
-    height: 30rem;
-    max-height: 30rem;
+    min-height: 30rem;
+    /*max-height: 30rem;*/
+    padding-bottom: 0.3rem;
     margin-bottom: 2rem;
 }
 .display-subhomes .encart{
@@ -159,6 +160,40 @@ article .product ul.nav-tabs li:before{
     width: auto !important;
 }
 
+@media (max-width: 767px) {
+    .display-subhomes .bigKey{
+        margin-right: 5px;
+    }
+    .display-subhomes .lowKey{
+        margin-left: 5px;
+    }
+}
+@media (min-width: 768px) and (max-width:980px ) {
+    .display-subhomes .encart {
+        display: block;
+    }
+    .display-subhomes .bigKey{
+        font-size: 4rem !important;
+        line-height: 3rem !important;
+        padding-top: 0.5rem !important;
+    }
+    .display-subhomes .lowKey{
+        font-size: 2rem !important;
+        line-height: 2rem !important;
+        padding-top: 0.5rem !important;
+    }
+}
+
+@media (min-width:980px )  and (max-width:1200px) {
+    .display-subhomes .bigKey{
+        font-size: 5rem !important;
+        line-height: 4rem !important;
+    }
+    .display-subhomes .lowKey{
+        font-size: 2rem !important;
+        line-height: 2rem !important;
+    }
+}
 .display-subhomes .bigKey{
     font-size: 7rem;
     font-weight: bold;
@@ -399,6 +434,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .title-solution-banner .col-md-3.slider-nav {
         padding-right: 0px !important;
         padding-left: 0px! important;
+    }
+
+    .view-subhomes .subhomes-filterbar select{
+        max-width:18%;
     }
 }
 
@@ -875,6 +914,19 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 1rem !important;
     }
 
+    .sandwich-button {
+         margin-top: 0 !important;
+     }
+
+    .menu-loupe-xs {
+        display: inline-block;
+        margin-right: 2rem;
+    }
+
+    .menu-loupe-xs .glyphicon {
+        font-size: 3.5rem;
+        margin-top: 22px;   /*Pour bloquer le margin 22px de glyphicon*/
+    }
 
     .footer-div-border {
         border-top:1px solid #999999;
@@ -887,6 +939,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
     .footer-div-border > p {
         margin-top: 1rem;
+    }
+
+    .menu-xs {
+        padding: 1rem;
+        margin-right: 0px !important;
+        margin-top: 10px;
+    }
+
+    .menu-xs .sandwich-button {
+        border: none;
     }
 
     .paragraph--type--homepage-banner-experience {
