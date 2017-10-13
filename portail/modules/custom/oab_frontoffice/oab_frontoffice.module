@@ -61,7 +61,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
 				}
 		}
 
-      //oabt($node->get('field_meta_description')->, true);
     #J'enregistre mes urls et variables OG pour les avoir en JS
     $variables['#attached'] = [
       'drupalSettings' => [
