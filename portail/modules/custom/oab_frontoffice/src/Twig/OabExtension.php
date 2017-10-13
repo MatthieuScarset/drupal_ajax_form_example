@@ -229,11 +229,12 @@ class OabExtension extends \Twig_Extension {
      */
     public function get_files_folder_pardot($uri) {
         $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
-        $cursor = strrpos($url, '/sites/default/files');
+        $cursor = strrpos($url, '/files');
         $url = substr($url, $cursor);
         // on enlève la dernière partie
-        $cursor = strrpos($url, '/') + 1;
-        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
+        //$cursor = strrpos($url, '/') + 1;
+       // $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/sites/default'.$url;
         return $url;
     }
 
@@ -257,25 +258,6 @@ class OabExtension extends \Twig_Extension {
 				}
         return $empty;
     }
-
-  /**
-   * Render a custom date format with Twig
-   * Use the internal helper "format_date" to render the date using the current language for texts
-   *
-   * Permet surtout d'avoir le "Long month name", que ne permet pas la fonction "format_date",
-   * ce qui est utile pour les mois RU qui ont deux formats
-   */
-  public static function formatDate($date, $format) {
-    if ($date_format = \DateTime::createFromFormat('Y-m-d', $date)) {
-      $timestmap = strtotime($date);
-    }elseif (is_a($date, 'Drupal\Core\Datetime\DrupalDateTime') || is_a($date, 'DateTime')){
-      $timestmap = $date->getTimestamp();
-    }else{
-      $timestmap = $date;
-    }
-
-    return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
-  }
 
     /**
      * Returns the total rows count for Drupal view.
@@ -304,4 +286,23 @@ class OabExtension extends \Twig_Extension {
             'render' => $view->render('block_1')
         ];
     }
+
+  /**
+   * Render a custom date format with Twig
+   * Use the internal helper "format_date" to render the date using the current language for texts
+   *
+   * Permet surtout d'avoir le "Long month name", que ne permet pas la fonction "format_date",
+   * ce qui est utile pour les mois RU qui ont deux formats
+   */
+  public static function formatDate($date, $format) {
+    if ($date_format = \DateTime::createFromFormat('Y-m-d', $date)) {
+      $timestmap = strtotime($date);
+    }elseif (is_a($date, 'Drupal\Core\Datetime\DrupalDateTime') || is_a($date, 'DateTime')){
+      $timestmap = $date->getTimestamp();
+    }else{
+      $timestmap = $date;
+    }
+
+    return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
+  }
 }

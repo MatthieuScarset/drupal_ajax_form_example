@@ -5,6 +5,12 @@
   position: relative;
 }
 
+
+.page-node-type-homepage #block-socialshareblock {
+    max-width: none;
+}
+
+
 .breadcrumb {
     padding-left: 0;
     padding-top: 3rem;
