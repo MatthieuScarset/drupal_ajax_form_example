@@ -2,7 +2,7 @@ var sharebar_parameters = {
     background_color: 'white', //'black' or 'white'
     layout: 'horizontal', //'horizontal' or 'vertical' or 'grid'
     auto_load: true, //load of the sharebar automatically, if set to false, you must call the showShareBar() function
-    show_counter: true, //show counter and requests
+    show_counter: false, //show counter and requests
     counter_reload_time: 0, //time in seconds between 2 reload of the counter (must be > 0)
     og_url: "http://www.orange.fr", //url of the shared page
     og_title: 'Titre de la page partagée', //title of the share
@@ -35,11 +35,11 @@ var followbar_parameters = {
     page_facebook_ru: 'https://www.facebook.com/OrangeRussia',
   	page_twitter: 'https://twitter.com/orangebusiness',
   	page_googleplus: 'https://plus.google.com/+orange/posts',
-  	page_linkedin: 'http://www.linkedin.com/company/orange-business-services',
-  	page_pinterest: 'http://pinterest.com/orangebusiness/',
-    page_slideshare: 'http://www.slideshare.net/orangebusiness',
-  	page_youtube: 'http://www.youtube.com/user/orangebusiness',
-  	page_dailymotion: 'http://www.dailymotion.com/orangebusiness'
+  	page_linkedin: 'https://www.linkedin.com/company/orange-business-services',
+  	page_pinterest: 'https://pinterest.com/orangebusiness/',
+    page_slideshare: 'https://www.slideshare.net/orangebusiness',
+  	page_youtube: 'https://www.youtube.com/user/orangebusiness',
+  	page_dailymotion: 'https://www.dailymotion.com/orangebusiness'
   		
 };
 var visible_followbar_buttons = [
