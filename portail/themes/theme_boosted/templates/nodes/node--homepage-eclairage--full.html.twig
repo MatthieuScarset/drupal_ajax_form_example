@@ -153,7 +153,14 @@ view_mode ? view_mode|clean_class,
                                                 {{ node.field_home_banner.0.entity.field_title.value }}
                                             </p>
                                             <p class="home_banner_first_nameFunction">
-                                                {{ node.field_home_banner.0.entity.field_name.value }} | {{ node.field_home_banner.0.entity.field_function.value }}
+                                                {% set name_function %}
+                                                    {{ node.field_home_banner.0.entity.field_name.value }} | {{ node.field_home_banner.0.entity.field_function.value }}
+                                                {% endset %}
+                                                {% if node.field_home_banner.0.entity.field_function.value is not empty %}
+                                                    {{ name_function }}
+                                                {% else %}
+                                                    {{ node.field_home_banner.0.entity.field_name.value }}
+                                                {% endif %}
                                             </p>
                                         </div>
                                     </div>
