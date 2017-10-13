@@ -292,7 +292,7 @@ var getFacebookShare = function(){
     $.ajax({
         type : "GET",
         dataType : "jsonp",
-        url : "http://graph.facebook.com/?id=" + sharebar_parameters.og_url,
+        url : "https://graph.facebook.com/?id=" + sharebar_parameters.og_url,
         success: function(data){
             if(!data.shares || data.shares === ""){
                 data.shares = 0;
@@ -336,7 +336,7 @@ var getPinterestShare = function(){
     $.ajax({
         type : "GET",
         dataType : "jsonp",
-        url : "http://api.pinterest.com/v1/urls/count.json?callback=receiveCount&url=" + sharebar_parameters.og_url,
+        url : "https://api.pinterest.com/v1/urls/count.json?callback=receiveCount&url=" + sharebar_parameters.og_url,
         success: function(data){}
     });
 };
@@ -353,7 +353,7 @@ var receiveCount = function(data){
 var getLinkedinShare = function(){
     $.ajax({
         type : "GET",
-        dataType : "jsonp",
+        dataType : "json",
         url : "https://www.linkedin.com/countserv/count/share?url=" + sharebar_parameters.og_url,
         success: function(data){
             if(!data.count || data.count === ""){
@@ -383,12 +383,12 @@ var getShortUrl = function(url){
 if(typeof sharebar_parameters !== "undefined"){
     var via = sharebar_parameters.twitter_site.substring(1, sharebar_parameters.twitter_site.length);
     var share_links = {
-        facebook: "http://www.facebook.com/sharer.php?u=" + drupalSettings.myLibrary.og_url,
+        facebook: "https://www.facebook.com/sharer.php?u=" + drupalSettings.myLibrary.og_url,
         twitter: "https://twitter.com/intent/tweet?text=" + "" + "&url=" + drupalSettings.myLibrary.og_url + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         twitter_short: "https://twitter.com/intent/tweet?text=" + '' + "&url=" + getShortUrl(drupalSettings.myLibrary.og_url) + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         googleplus: "https://plus.google.com/share?url=" + drupalSettings.myLibrary.og_url + "&hl=" + drupalSettings.myLibrary.og_locale.substring(0,2),
         linkedin: "https://www.linkedin.com/shareArticle?mini=true&url=" + drupalSettings.myLibrary.og_url,
-        pinterest: "http://pinterest.com/pin/create/button/?url=" + drupalSettings.myLibrary.og_url + "&media=" + drupalSettings.myLibrary.og_image + "&description=" + drupalSettings.myLibrary.og_title
+        pinterest: "https://pinterest.com/pin/create/button/?url=" + drupalSettings.myLibrary.og_url + "&media=" + drupalSettings.myLibrary.og_image + "&description=" + drupalSettings.myLibrary.og_title
     };
 }
 
