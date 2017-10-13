@@ -229,11 +229,12 @@ class OabExtension extends \Twig_Extension {
      */
     public function get_files_folder_pardot($uri) {
         $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
-        $cursor = strrpos($url, '/sites/default/files');
+        $cursor = strrpos($url, '/files');
         $url = substr($url, $cursor);
         // on enlève la dernière partie
-        $cursor = strrpos($url, '/') + 1;
-        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
+        //$cursor = strrpos($url, '/') + 1;
+       // $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].substr($url, 0, $cursor);
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/sites/default'.$url;
         return $url;
     }
 
