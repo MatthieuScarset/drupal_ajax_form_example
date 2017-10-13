@@ -124,7 +124,10 @@ view_mode ? view_mode|clean_class,
                                         {{ content.field_banner_image_title.0 }}
                                     </p>
                                     <p class="home_banner_first_nameFunction">
-                                        {{ content.field_name.0 }} | {{ content.field_funct.0 }}
+                                       {% if content.field_funct.0 %} {{ content.field_name.0 }} | {{ content.field_funct.0 }}
+                                        {% else %}
+                                           {{ content.field_funct.0 }}
+                                        {% endif %}
                                     </p>
                                 </div>
                             </div>
