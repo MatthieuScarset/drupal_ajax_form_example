@@ -31,11 +31,6 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  * @param $variables
  */
 function oab_frontoffice_preprocess_node(&$variables) {
-
-    global $base_root;
-
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
   if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
     ##Collecte de toutes les données nécessaires
@@ -53,121 +48,24 @@ function oab_frontoffice_preprocess_node(&$variables) {
       $meta_description = $node->get('field_meta_description')->getValue();
     }
 
-    ##je recupère l'url du node et celui du site
-    $node_url = Url::fromRoute('entity.node.canonical', array('node' => $nid), array('absolute' => TRUE))->toString();
-    $site_url = \Drupal::request()->getHost();
-
-    $og_url = $base_root . \Drupal::request()->getRequestUri();
     $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
 
-    ##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
-    ## pour chaque site
-    $siteData = [
-      'twitter' => [
-        'url' => "http://www.twitter.com/intent/tweet",
-        'params' => [
-          'text' => $node_title,
-          'url' => $og_url,
-          'hashtags' => '',
-          'via' => 'orange_business',
-          'related' => '',
-          'in-reply-to' => ''
-        ]
-      ],
-      'facebook' => [
-        'url' => "https://www.facebook.com/sharer/sharer.php",
-        "params" => [
-          'u' => $og_url
-        ]
-      ],
-      'linkedin' => [
-        'url' => "https://www.linkedin.com/shareArticle",
-        'params' => [
-          'mini' => 'true',
-          'url' => $og_url,
-          'title' => $node_title,
-          'summary' => $meta_description,
-          'source' => $og_url
-        ]
-      ],
-    'rss_blogs' => [
-        'url' => "/".$current_language."/blogs/rss.xml",
-        'params' => []
-    ],
-        'rss_magazine' => [
-            'url' => "/".$current_language."/magazine/rss.xml",
-            'params' => []
-        ],
-        'rss_presse' => [
-            'url' => "/".$current_language."/press/feed_rss.xml",
-            'params' => []
-        ],
-
-    ];
-
-    ## Pour traiter les mails plus tard
-    $mail = [
-      'subject' => 'Viens voir sur Orange-Business.com',
-      'body' => '<html><body><h1>Coucou c\'est un test</body></html>'
-    ];
-
-    ##Pour enregistrer les adresses recomposées
-    $siteUrls = [];
-
-    ##je recompose les URLs share
-    foreach ($siteData as $site => $data) {
-      $paramsString = "";
-      foreach ($data['params'] as $paramName => $value) {
-        if (strlen($value)>0)
-          $paramsString .= $paramName . "=" . rawurlencode($value) . "&";
-      }
-      $siteUrls[$site] = $data['url'];
-      if($paramsString != "") {
-          $siteUrls[$site] .= "?"
-              . rtrim($paramsString, "&");
-      }
-    }
-
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    switch($current_language){
-        case 'fr':
-            $og_locale = 'fr_FR';
-            break;
-        case 'en':
-        case 'ru-en':
-            $og_locale = 'en_US';
-            break;
-        case 'ru':
-            $og_locale = 'ru_RU';
-            break;
-        default:
-            $og_locale = 'fr_FR';
-            break;
-    }
-
-      $og_image = $file = "";
-      if ($node->hasField('field_visual')){
-          $file = $node->get('field_visual')->getValue();
-          if(!empty($file[0]['target_id']) && $file[0]['target_id'] != null){
-              $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-              if($file instanceof \Drupal\file\Entity\File){
-                $og_image = $file->url();
-              }
-          }
-      }
+		$og_image = $file = "";
+		if ($node->hasField('field_visual')){
+				$file = $node->get('field_visual')->getValue();
+				if(!empty($file[0]['target_id']) && $file[0]['target_id'] != null){
+						$file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+						if($file instanceof \Drupal\file\Entity\File){
+							$og_image = $file->url();
+						}
+				}
+		}
 
       //oabt($node->get('field_meta_description')->, true);
     #J'enregistre mes urls et variables OG pour les avoir en JS
     $variables['#attached'] = [
       'drupalSettings' => [
-        'myLibrary' => [
-          'share_siteUrls' => $siteUrls,
-            'og_locale' => $og_locale,
-            'og_title' => $node_title,
-            'og_desc' => $meta_description,
-            'og_url' => $og_url,
-            'og_image' => $og_image
-        ],
+        'myLibrary' => getSocialBarParameters($node_title, $meta_description, $og_image)
       ],
     ];
   }
@@ -753,3 +651,105 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
 	return $theme;
 }
 
+
+function getSocialBarParameters($pageTitle, $meta_description, $og_image)
+{
+	global $base_root;
+	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+	$og_url = $base_root . \Drupal::request()->getRequestUri();
+
+	##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
+	## pour chaque site
+	$siteData = [
+		'twitter' => [
+			'url' => "http://www.twitter.com/intent/tweet",
+			'params' => [
+				'text' => $pageTitle,
+				'url' => $og_url,
+				'hashtags' => '',
+				'via' => 'orange_business',
+				'related' => '',
+				'in-reply-to' => ''
+			]
+		],
+		'facebook' => [
+			'url' => "https://www.facebook.com/sharer/sharer.php",
+			"params" => [
+				'u' => $og_url
+			]
+		],
+		'linkedin' => [
+			'url' => "https://www.linkedin.com/shareArticle",
+			'params' => [
+				'mini' => 'true',
+				'url' => $og_url,
+				'title' => $pageTitle,
+				'summary' => $meta_description,
+				'source' => $og_url
+			]
+		],
+		'rss_blogs' => [
+			'url' => "/".$current_language."/blogs/rss.xml",
+			'params' => []
+		],
+		'rss_magazine' => [
+			'url' => "/".$current_language."/magazine/rss.xml",
+			'params' => []
+		],
+		'rss_presse' => [
+			'url' => "/".$current_language."/press/feed_rss.xml",
+			'params' => []
+		],
+	];
+
+	## Pour traiter les mails plus tard
+	$mail = [
+		'subject' => 'Viens voir sur Orange-Business.com',
+		'body' => '<html><body><h1>Coucou c\'est un test</body></html>'
+	];
+
+	##Pour enregistrer les adresses recomposées
+	$siteUrls = [];
+
+	##je recompose les URLs share
+	foreach ($siteData as $site => $data) {
+		$paramsString = "";
+		foreach ($data['params'] as $paramName => $value) {
+			if (strlen($value)>0)
+				$paramsString .= $paramName . "=" . rawurlencode($value) . "&";
+		}
+		$siteUrls[$site] = $data['url'];
+		if($paramsString != "") {
+			$siteUrls[$site] .= "?"
+				. rtrim($paramsString, "&");
+		}
+	}
+
+	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+	switch($current_language){
+		case 'fr':
+			$og_locale = 'fr_FR';
+			break;
+		case 'en':
+		case 'ru-en':
+			$og_locale = 'en_US';
+			break;
+		case 'ru':
+			$og_locale = 'ru_RU';
+			break;
+		default:
+			$og_locale = 'fr_FR';
+			break;
+	}
+
+	#J'enregistre mes urls et variables OG pour les avoir en JS
+	$array_sharbar = array(
+		'share_siteUrls' => $siteUrls,
+		'og_locale' => $og_locale,
+		'og_title' => $pageTitle,
+		'og_desc' => $meta_description,
+		'og_url' => $og_url,
+		'og_image' => $og_image
+	);
+	return $array_sharbar;
+}

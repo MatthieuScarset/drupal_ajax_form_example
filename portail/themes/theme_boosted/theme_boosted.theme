@@ -168,6 +168,13 @@ function theme_boosted_preprocess_page(&$variables) {
 	}elseif($route_name == 'user.pass'){
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
+
+	//ajout de la social share bar
+	$variables['#attached'] = [
+		'drupalSettings' => [
+			'myLibrary' => getSocialBarParameters($title, "", "")
+		],
+	];
 }
 
 function theme_boosted_preprocess_views_view(&$variables){
@@ -374,5 +381,7 @@ function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $
     }
 
 }
+
+
 
 ?>
