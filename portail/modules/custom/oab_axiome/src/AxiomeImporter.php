@@ -625,8 +625,10 @@ class AxiomeImporter{
         $tidParent = array();
         foreach($children_id as $child){
             foreach($taxo as $key => $value){
-                if ($classement_nom == "portfolio"
-                    || $classement_nom == "porfolio") {
+                $pattern = '/^port?folio\s*/i';
+                if(preg_match($pattern, $classement_nom)){
+                /*if ($classement_nom == "portfolio"
+                    || $classement_nom == "porfolio") {*/
                     if (in_array($child->nodeValue, $value['children']) && isset($value['tid'])) {
                         array_push($tidParent, $value['tid']);
                     }
