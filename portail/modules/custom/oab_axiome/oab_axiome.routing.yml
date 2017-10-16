@@ -6,3 +6,11 @@ oab_axiome.main_page:
     _title: 'Axiome files unzip'
   requirements:
     _permission: 'access content'
+
+oab.axiome_settings:
+  path: '/admin/structure/oab/settings/axiome'
+  defaults:
+    _form: '\Drupal\oab_axiome\Form\OabAxiomeSettingsForm'
+    _title: 'Axiome settings'
+  requirements:
+    _permission: 'administer site configuration'
