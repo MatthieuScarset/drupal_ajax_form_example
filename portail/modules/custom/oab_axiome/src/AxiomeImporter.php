@@ -502,7 +502,7 @@ class AxiomeImporter{
                             $this->message .= "Chargement du NODE $nid\n";
                             $node = Node::load($nid);
                             $node->setChangedTime(time());
-                            $node->save();
+                            //$node->save(); -> Pas besoin, déjà save plus bas
                             $node->set('moderation_state', array('target_id' => 'draft'));
                             $this->message .= "microtime ".time()."\n";
 
