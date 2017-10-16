@@ -112,10 +112,17 @@ view_mode ? view_mode|clean_class,
                                 <div class="col-md-1 home_banner_first_bottom_left_container">
                                     <!-- Date -->
                                     <div class="home_banner_first_date">
-                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
-                                        {{ date | trim }}<br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% if (language.getId() == 'fr') %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% else %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
@@ -144,10 +151,17 @@ view_mode ? view_mode|clean_class,
                                 <div class="col-xs-12 col-sm-12 align-left">
                                     <!-- Date -->
                                     <div class="home_banner_first_date">
-                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
-                                        {{ date | trim }}<br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% if (language.getId() == 'fr') %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% else %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
