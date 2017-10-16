@@ -41,7 +41,7 @@ class OabOfficesMapPageController extends ControllerBase {
 			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
-			|| ($current_language == "ru" && !empty($country_id) && $country_id =="all"))
+			|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
 			{
 				// si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
 				$query = \Drupal::entityQuery('taxonomy_term');

@@ -398,61 +398,31 @@ var shareClick = function(button){
     var config = "toolbar = no, location = no, directories = no, menubar = no, width = 560, height = 500";
 
     if(button === 'facebook'){
-        if(sharebar_parameters.show_counter){
-            getFacebookShare();
-        }
         var link = share_links.facebook;
         var popup_title = "Facebook share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'twitter' && sharebar_parameters.use_bitly === true){
-        if(sharebar_parameters.show_counter){
-            getTwitterShare();
-        }
         var link = share_links.twitter_short;
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'twitter'){
-        if(sharebar_parameters.show_counter){
-            getTwitterShare();
-        }
         var link = share_links.twitter;
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'googleplus'){
-        /*if(googleshares){
-            if(sharebar_parameters.show_counter && googleshares <= 0){
-                shares.google = googleshares;
-            }
-        }*/
         var link = share_links.googleplus;
         var popup_title = "Google Plus share";
         window.open(link, popup_title, config);
-        //shares.user += 1;
-        getShares();
     }else if(button === 'linkedin'){
-        if(sharebar_parameters.show_counter){
-            getLinkedinShare();
-        }
         var link = share_links.linkedin;
         var popup_title = "LinkedIn share";
         window.open(link, popup_title, config);
         //shares.user += 1;
-        getShares();
     }else if(button === 'pinterest'){
-        /*if(sharebar_parameters.show_counter){
-            getLinkedinShare();
-        }*/
         var link = share_links.pinterest;
         var popup_title = "Pinterest share";
         window.open(link, popup_title, config);
         //shares.user += 1;
-        getShares();
     }else if(button === 'email'){
         openMail();
     }else if(button === 'sms'){
@@ -939,14 +909,14 @@ window.onload = function(){
 				if(sharebar_parameters.auto_load === true){
 					showShareBar();
 				};
-				getShares();
+				//getShares();
 
-				if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
+				/*if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
 					if(sharebar_parameters.counter_reload_time > 0){
 						var time = sharebar_parameters.counter_reload_time * 1000;
 						window.setInterval(function(){ getShares(); }, time);
 					}
-				}
+				}*/
 			}
 		}
 	}
