@@ -5,7 +5,7 @@
  */
 
 ##Config par défaut (desactivé)
-\Drupal::config('oab.axiome_settings')->set('axiome_enable_cron', 0)->save();
+oabt_YmlImport('oab.axiome_settings.yml');
 
 ##Ajout de la trad
 $translations = array(
