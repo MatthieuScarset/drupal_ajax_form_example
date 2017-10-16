@@ -389,3 +389,10 @@ function oab_tristan_update_8049() {
 function oab_tristan_update_8050() {
   oabt_YmlImport('views.view.subhomes.yml');
 }
+
+/**
+ * Config par défaut pour l'activation du cron d'axiome + ajout de la trad du texte de la config
+ */
+function oab_tristan_update_8051() {
+  include_once("updates/update_8051.inc");
+}
