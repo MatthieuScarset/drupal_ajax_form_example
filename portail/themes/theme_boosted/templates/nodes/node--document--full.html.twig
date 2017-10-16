@@ -140,7 +140,7 @@ view_mode ? view_mode|clean_class,
             {% set file_entity = media.field_image_file.entity %}
             {% set inactiveClasse = "" %}
             {% if media is not empty %}
-                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot ~ media.field_file.entity.filename.value ~ '&fname=' ~ media.field_file.entity.filename.value %}
+                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot ~ '&fname=' ~ media.field_file.entity.filename.value %}
             {% endif %}
         {% endif %}
     {% endfor %}
