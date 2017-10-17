@@ -3,6 +3,7 @@
 /**
  * Config par défaut pour l'activation du cron d'axiome + ajout de la trad du texte de la config
  */
+use Drupal\locale\SourceString;
 
 ##Config par défaut (desactivé)
 oabt_YmlImport('oab.axiome_settings.yml');
