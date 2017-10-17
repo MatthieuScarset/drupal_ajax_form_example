@@ -396,3 +396,10 @@ function oab_tristan_update_8050() {
 function oab_tristan_update_8051() {
   include_once("updates/update_8051.inc");
 }
+
+/**
+ * Pour mettre la revision d'un contenu "dépublié" comme "révision actuelle" lors de la depublication d'un contenu
+ */
+function oab_tristan_update_8052() {
+  oabt_YmlImport('workbench_moderation.moderation_state.unpublished.yml');
+}
