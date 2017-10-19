@@ -538,6 +538,7 @@ aside.right-column > .region{
      background-color: white;
     padding-right: 3rem;
     padding-left: 3rem;
+    height: 300px;
 }
 @media (max-width: 767px) {
     /*section.left-column,
