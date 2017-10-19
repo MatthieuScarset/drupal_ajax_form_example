@@ -101,7 +101,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"valorisation-element-date\">\n                                                        {{ changed | date('d') }} <br>\n                                                        {{ changed | date('m') }} <br>\n                                                        {{ changed | date('y') }}\n                                                        </div>"
+            text: "<div class=\"valorisation-element-date\">\n {% if (language.getId() == 'fr') %}\n                                                        {{ changed | date('d') }} <br>\n                                                        {{ changed | date('m') }} <br>\n                                                        {{ changed | date('y') }}\n{% else %}\n{{ changed | date('m') }} <br>\n{{ changed | date('d') }} <br>\n{{ changed | date('y') }}\n{% endif %}\n</div>"
             make_link: false
             path: ''
             absolute: false
