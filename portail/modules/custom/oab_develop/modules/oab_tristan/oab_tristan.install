@@ -403,3 +403,10 @@ function oab_tristan_update_8051() {
 function oab_tristan_update_8052() {
   oabt_YmlImport('workbench_moderation.moderation_state.unpublished.yml');
 }
+
+/**
+ * Rendre le bloggeur obligatoire sur les contenus Blog
+ */
+function oab_tristan_update_8053() {
+  oabt_YmlImport('field.field.node.blog_post.field_profile.yml');
+}
