@@ -1,3 +1,4 @@
+{% if tarifs.Children.ruby_price is not empty %}
 <div class="node-axiome-tarifs col-md-12 nopadding">
     {% if tarifs.Attributes.title|trim is not empty %}
         <div class="col col-md-12 nopadding">
@@ -29,7 +30,7 @@
                     </div>
                 {% endif %}
             </div>
-            {% endif %}
         </div>
     {% endfor %}
 </div>
+{% endif %}
