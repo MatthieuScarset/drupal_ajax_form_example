@@ -126,7 +126,7 @@
 
 .slick-dots
 {
-    position: absolute;
+    position: relative;
     bottom: -25px;
 
     display: block;
@@ -145,9 +145,9 @@
 
     display: inline-block;
 
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
+    width: 5px;
+    height: 10px;
+    margin: 0 5px 10px;
     padding: 0;
 
     cursor: pointer;

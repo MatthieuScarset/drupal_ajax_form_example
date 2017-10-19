@@ -168,6 +168,7 @@ div.followbar a.follow_twitter:hover {border-color: #fff;background: #fff;}/*#00
 div.followbar a.follow_googleplus:hover {border-color: #fff;background: #fff;}/*#dd4b39*/
 div.followbar a.follow_linkedin:hover {border-color: #fff;background: #fff;}/*#007bb6*/
 div.followbar a.follow_pinterest:hover {border-color: #fff;background: #fff;}/*#cb2027*/
+div.followbar a.follow_slideshare:hover {border-color: #fff;background: #fff;}/*#cb2027*/
 div.followbar a.follow_newsletter:hover {border-color: #fff;background: #fff;}/*#ff7900*/
 div.followbar a.follow_instagram:hover {border-color: #fff;background: #fff;}/*#fb324f*/
 div.followbar a.follow_youtube:hover {border-color: #fff;background: #fff;}/*#cd201f*/
@@ -178,6 +179,7 @@ div.followbar a.follow_twitter:hover path {fill: #000;}/*#00aced*/
 div.followbar a.follow_googleplus:hover path, div.followbar a.follow_googleplus:hover polygon {fill: #000;}/*#dd4b39*/
 div.followbar a.follow_linkedin:hover path {fill: #000;}/*#007bb6*/
 div.followbar a.follow_pinterest:hover path {fill: #000;}/*#cb2027*/
+div.followbar a.follow_slideshare:hover path {fill: #000;}/*#cb2027*/
 div.followbar a.follow_newsletter:hover path {fill: #000;}/*#ff7900*/
 div.followbar a.follow_instagram:hover path {fill: #000;}/*#fb324f*/
 div.followbar a.follow_youtube:hover path {fill: #000;}/*#cd201f*/
@@ -188,6 +190,7 @@ div.followbar.white a.follow_twitter:hover {border-color: #000;background: #000;
 div.followbar.white a.follow_googleplus:hover {border-color: #000;background: #000;}/*#dd4b39*/
 div.followbar.white a.follow_linkedin:hover {border-color: #000;background: #000;}/*#007bb6*/
 div.followbar.white a.follow_pinterest:hover {border-color: #000;background: #000;}/*#cb2027*/
+div.followbar.white a.follow_slideshare:hover {border-color: #000;background: #000;}/*#cb2027*/
 div.followbar.white a.follow_newsletter:hover {border-color: #000;background: #000;}/*#ff7900*/
 div.followbar.white a.follow_instagram:hover {border-color: #000;background: #000;}/*#fb324f*/
 div.followbar.white a.follow_youtube:hover {border-color: #000;background: #000;}/*#cd201f*/
@@ -198,6 +201,7 @@ div.followbar.white a.follow_twitter:hover path {fill: #fff;}/*#00aced*/
 div.followbar.white a.follow_googleplus:hover path, div.followbar.white a.follow_googleplus:hover polygon {fill: #fff;}/*#dd4b39*/
 div.followbar.white a.follow_linkedin:hover path {fill: #fff;}/*#007bb6*/
 div.followbar.white a.follow_pinterest:hover path {fill: #fff;}/*#cb2027*/
+div.followbar.white a.follow_slideshare:hover path {fill: #fff;}/*#cb2027*/
 div.followbar.white a.follow_newsletter:hover path {fill: #fff;}/*#ff7900*/
 div.followbar.white a.follow_instagram:hover path {fill: #fff;}/*#fb324f*/
 div.followbar.white a.follow_youtube:hover path {fill: #fff;}/*#cd201f*/
@@ -208,6 +212,7 @@ div.followbar a.follow_twitter.visited {background-color: #00aced;border-color: 
 div.followbar a.follow_googleplus.visited {background-color: #dd4b39;border-color: #dd4b39;}
 div.followbar a.follow_linkedin.visited {background-color: #007bb6;border-color: #007bb6;}
 div.followbar a.follow_pinterest.visited {background-color: #cb2027;border-color: #cb2027;}
+div.followbar a.follow_slideshare.visited {background-color: #007bb6;border-color: #007bb6;}
 div.followbar a.follow_newsletter.visited {background-color: #ff7900;border-color: #ff7900;}
 div.followbar a.follow_instagram.visited{background-color: #fb324f;border-color: #fb324f;}
 div.followbar a.follow_youtube.visited {background-color: #cd201f;border-color: #cd201f;}

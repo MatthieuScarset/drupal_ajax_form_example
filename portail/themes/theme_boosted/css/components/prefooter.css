@@ -47,10 +47,24 @@
         display: block !important;
     }
 }
+
+.link-contactbar {
+    vertical-align: middle;
+    display: table-cell;
+    height: 30px;
+}
 @media (max-width: 767px) {
     /* line 31, ../sass/global.sass */
     .bs-slide-xs {
         display: block !important;
+    }
+
+    .textlink-contactbar {
+        vertical-align: baseline !important;
+    }
+
+    .link-contactbar {
+        height: 15px !important;
     }
 }
 
@@ -69,23 +83,42 @@
 .solaris-contactbar {
     font-size: 4rem !important;
     padding-right: 1rem;
+    line-height: 1;
+}
+
+.arrow-contactbar {
+    text-align: right;
+    margin-top: 10px;
 }
 
 .textlink-contactbar {
     font-size: 1.6rem;
     font-weight: bold;
-    margin-top: 10px;
-    position: absolute;
+    display: inline-block;
+    height: 100%;
 }
 .textlink-contactbar a{
     color: white;
 }
-
-.iconblock {
-    position: relative;
+.textlink-contactbar a:hover {
+    color: rgb(255,121,0);
 }
 
-.iconblock:hover, .iconblock a:hover {
+
+.iconblock {
+    cursor: pointer;
+}
+
+.iconblock .icon-email {
+    margin:0;
+}
+
+.iconblock a {
+    color: white;
+}
+
+
+.iconblock a:hover {
     color: rgb(255,121,0);
     cursor: pointer;
 }
@@ -133,5 +166,31 @@
 
 .expandContactBar{
     padding-top: 5px;
-    position: absolute;
+   // position: absolute;
+}
+
+#block-contactbarstandard.affix,
+#block-contactbaranalyst.affix,
+#block-contactbarpress.affix,
+#block-contactbarrustandard.affix,
+#block-contactbarenstandard.affix ,
+#block-contactbar.affix{
+    bottom: 0;
+    height: auto;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+}
+
+
+#block-contactbarstandard.affix-bottom,
+#block-contactbaranalyst.affix-bottom,
+#block-contactbarpress.affix-bottom,
+#block-contactbarrustandard.affix-bottom,
+#block-contactbarenstandard.affix-bottom,
+#block-contactbar.affix-bottom{
+    width: 100%;
+   /* position: relative;*/
+    z-index: 10;
+   /* top: 0 !important;*/
 }

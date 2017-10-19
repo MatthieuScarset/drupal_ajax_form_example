@@ -38,8 +38,10 @@
         <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
         <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}" onmousedown="utag_link('Homepage', 'Corporate', '{{ item.title }}', '')"><i class="{{ link_icon }} link_icon"></i> {{ item.title }} <span class="caret"></span></a>
       {% else %}
-        <li {{ item.attributes }} class="link_icon_items"> <i class="{{ link_icon }} link_icon"></i> {{ link( item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(\'Homepage\', \'Corporate\', \'' ~ item.title ~ '\', \'\');'}) }}
-      {% endif %}
+          <li{{ item.attributes }} class="link_icon_items">
+          <a href="{{ item.url }}" target="{{ link_target }}" onmousedown="utag_link('Homepage', 'Corporate', '{{ item.title }}', '')"><i class="{{ link_icon }} link_icon"></i> {{ item.title }}</a>
+</li>
+       {% endif %}
       {% if item.below %}
         {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
       {% endif %}

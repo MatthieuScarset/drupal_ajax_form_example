@@ -7,6 +7,7 @@ dependencies:
     - node.type.press_release
     - taxonomy.vocabulary.blog_formats
     - taxonomy.vocabulary.blog_thematics
+    - taxonomy.vocabulary.document_thematics
     - taxonomy.vocabulary.document_types
     - taxonomy.vocabulary.industries
     - taxonomy.vocabulary.jobs_profiles
@@ -41,7 +42,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -333,6 +334,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        header: true
       filters:
         status:
           value: '1'
@@ -447,7 +449,7 @@ display:
           exposed: true
           expose:
             operator_id: field_blog_format_target_id_op
-            label: 'By type'
+            label: 'By format'
             description: ''
             use_operator: false
             operator: field_blog_format_target_id_op
@@ -481,7 +483,7 @@ display:
           limit: true
           vid: blog_formats
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_job_profile_target_id:
           id: field_job_profile_target_id
@@ -530,7 +532,7 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_industry_target_id:
           id: field_industry_target_id
@@ -1234,10 +1236,10 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_blog_thematic_target_id:
-          id: field_blog_thematic_target_id
-          table: node__field_blog_thematic
-          field: field_blog_thematic_target_id
+        field_document_thematic_target_id:
+          id: field_document_thematic_target_id
+          table: node__field_document_thematic
+          field: field_document_thematic_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1246,12 +1248,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_blog_thematic_target_id_op
+            operator_id: field_document_thematic_target_id_op
             label: 'By thematic'
             description: ''
             use_operator: false
-            operator: field_blog_thematic_target_id_op
-            identifier: field_blog_thematic_target_id
+            operator: field_document_thematic_target_id_op
+            identifier: field_document_thematic_target_id
             required: false
             remember: false
             multiple: false
@@ -1279,7 +1281,7 @@ display:
           reduce_duplicates: false
           type: select
           limit: true
-          vid: blog_thematics
+          vid: document_thematics
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
@@ -1646,7 +1648,7 @@ display:
           limit: true
           vid: magazine_types
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_job_profile_target_id:
           id: field_job_profile_target_id
@@ -1695,7 +1697,7 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
         field_industry_target_id:
           id: field_industry_target_id
@@ -1744,7 +1746,7 @@ display:
           limit: true
           vid: industries
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
@@ -2322,7 +2324,7 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: false
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:

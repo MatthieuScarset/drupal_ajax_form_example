@@ -1,0 +1,36 @@
+{% if tarifs.Children.ruby_price is not empty %}
+<div class="node-axiome-tarifs col-md-12 nopadding">
+    {% if tarifs.Attributes.title|trim is not empty %}
+        <div class="col col-md-12 nopadding">
+            <h2 class="titre2"> {{ tarifs.Attributes.title }} </h2>
+        </div>
+    {% endif %}
+    {% for price in tarifs.Children.ruby_price %}
+        <div class="col col-md-2 tarif">
+            {% if price.Attributes.title|trim is not empty %}
+                <div class="title">{{ price.Attributes.title }}</div>
+            {% endif %}
+            <div class="bg_black">
+                {% if price.Attributes.price|trim is not empty %}
+                    <div class="price">{{ price.Attributes.price }}</div>
+                {% endif %}
+                {% if price.Attributes.price_explain|trim is not empty %}
+                    <div class="explain">{{ price.Attributes.price_explain|raw|nl2br }}</div>
+                {% endif %}
+            </div>
+            <div class="details">
+                {% if price.Attributes.detail_bloc_1|trim is not empty %}
+                    <div class="bloc1">
+                        <div>{{ price.Attributes.detail_bloc_1|raw|nl2br }}</div>
+                    </div>
+                {% endif %}
+                {% if price.Attributes.detail_bloc_2|trim is not empty %}
+                    <div class="bloc2">
+                        <div>{{ price.Attributes.detail_bloc_2|raw|nl2br }}</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

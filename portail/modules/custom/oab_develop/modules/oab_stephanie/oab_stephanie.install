@@ -336,3 +336,33 @@ function oab_stephanie_update_8042() {
 	include_once("updates/update_8042.inc");
 }
 
+
+/**
+ * Desactivation du droit pour Chief editor d'activer les commentaires sur les blogs
+ */
+
+function oab_stephanie_update_8043() {
+	include_once("updates/update_8043.inc");
+}
+
+/**
+ * Nouveau champ pour taxo Region
+ */
+function oab_stephanie_update_8044() {
+	include_once("updates/update_8044.inc");
+}
+
+/**
+ * Affectation des nodes Region aux taxos regions
+ */
+function oab_stephanie_update_8045() {
+	include_once("updates/update_8045.inc");
+}
+
+
+/**
+ * Modif vue offices map
+ */
+function oab_stephanie_update_8046() {
+	include_once("updates/update_8046.inc");
+}

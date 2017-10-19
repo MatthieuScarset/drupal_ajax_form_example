@@ -76,6 +76,9 @@ view_mode ? view_mode|clean_class,
 'clearfix',
 ]
 %}
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
 
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
@@ -105,11 +108,10 @@ view_mode ? view_mode|clean_class,
     </div>
 
 
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+{% include 'themes/theme_boosted/templates/nodes/socialbar_magazine.html.twig' %}
 
-<article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_industry', 'field_insight', 'field_magazine_thematic', 'field_magazine_type') }}
+        {{ content|without('theme_term', 'field_solution', 'field_display_title', 'field_highlight', 'field_industry', 'field_insight', 'field_magazine_thematic', 'field_magazine_type', 'field_start_date', 'field_end_date') }}
     </div>
 
 </article>

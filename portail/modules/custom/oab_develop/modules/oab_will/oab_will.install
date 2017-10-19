@@ -24,7 +24,6 @@ function oab_will_update_8001() {
 
 /**
  * RUBYPORTAILOBS-2739 insertion du champs contributeur externe au users
- * RUBYPORTAILOBS-2722 changement du poids du module a 20
  */
 
 function oab_will_update_8002() {
@@ -43,4 +42,11 @@ function oab_will_update_8003(){
  */
 function oab_will_update_8004(){
     include_once("updates/update_8004.inc");
+}
+
+/**
+ * RUBYPORTAILOBS-3034 Remplacement favicon drupal8
+ */
+function oab_will_update_8005(){
+    include_once("updates/update_8005.inc");
 }

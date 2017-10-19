@@ -458,7 +458,11 @@ a.contact_link {
 .region-content article a{
     text-decoration: underline;
 }
-
+.region-content article .nav-tabs a,
+.region-content article .nav-tabs a:hover,
+.region-content article .nav-tabs a.active{
+    text-decoration: none !important;
+}
 
 /*
 *  TEMPLATE CONTENU LIE
@@ -767,4 +771,24 @@ p.contenu {
 }
 .clearboth{
     clear: both;
+}
+.node-axiome-tarifs .title{
+    text-align: center;
+}
+.node-axiome-tarifs .bg_black{
+    padding: 3rem;
+}
+.node-axiome-tarifs .price{
+    font-size: 2.4rem;
+    color: rgb(255, 121, 0);
+}
+.node-axiome-tarifs .details{
+    background-color: #ccc;
+}
+.node-axiome-tarifs .bloc1{
+    border-bottom: 1px solid #666666;
+}
+.node-axiome-tarifs .bloc1 div,
+.node-axiome-tarifs .bloc2 div{
+    padding: 3rem;
 }

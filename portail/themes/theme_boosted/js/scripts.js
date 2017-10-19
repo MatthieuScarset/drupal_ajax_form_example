@@ -6,60 +6,96 @@
 
 (function ($, Drupal, Bootstrap) {
 
-  $( window ).resize(function() {
-    image_resize_width();
-    obs_template_height();
-  });
-
-  function image_resize_width(){
-    if ($(window).width() < 767){
-      $("body > .main-container").addClass("main-container-resized");
-      $("body > .main-container").removeClass("main-container");
-      $("article .content img").each(function(){
-        if ($(this).width() > $(window).width()){
-          $(this).width("100%");
-          $(this).height("auto");
-          $(this).attr("resized", "true");
-        }
-      });
-    }
-    else{
-      $("body > .main-container-resized").addClass("main-container");
-      $("body > .main-container-resized").removeClass("main-container-resized");
-      $("article .content img").each(function(){
-        if ($(this).attr("resized")){
-          $(this).width("");
-          $(this).height("");
-          $(this).removeAttr("resized");
-        }
-      });
-    }
-  }
-
-  function obs_template_height(){
-    $(".obs_template > div").height('auto');
-    $(".obs_template div[class*= obs_background_]").height('auto');
-    $(".obs_template").each(function() {
-      var max_height = 0;
-      $(this).children().each(function(){
-        var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
-        var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
-        if (($(this).height() - paddings - margins) > max_height){
-          max_height = $(this).height() - paddings - margins;
-        }
-      });
-
-      if ($(this).children().find("div[class*= obs_background_]").length > 0) {
-        $(this).children().find("div[class*= obs_background_]").each(function () {
-          var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
-          var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
-          $(this).height(max_height - paddings - margins);
-        });
-
-        $(this).children().height(max_height);
-      }
+    $( window ).resize(function() {
+        image_resize_width();
+        obs_template_height();
+        changeHeightSubhome();
     });
-  }
+
+    function image_resize_width(){
+        if ($(window).width() < 767){
+            $("body > .main-container").addClass("main-container-resized");
+            $("body > .main-container").removeClass("main-container");
+            $("article .content img").each(function(){
+                if ($(this).width() > $(window).width()){
+                    $(this).width("100%");
+                    $(this).height("auto");
+                    $(this).attr("resized", "true");
+                }
+            });
+        }
+        else{
+            $("body > .main-container-resized").addClass("main-container");
+            $("body > .main-container-resized").removeClass("main-container-resized");
+            $("article .content img").each(function(){
+                if ($(this).attr("resized")){
+                    $(this).width("");
+                    $(this).height("");
+                    $(this).removeAttr("resized");
+                }
+            });
+        }
+    }
+
+    function obs_template_height(){
+        $(".obs_template > div").height('auto');
+        $(".obs_template div[class*= obs_background_]").height('auto');
+        $(".obs_template").each(function() {
+            var max_height = 0;
+            $(this).children().each(function(){
+                var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
+                var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
+                if (($(this).height() - paddings - margins) > max_height){
+                    max_height = $(this).height() - paddings - margins;
+                }
+            });
+
+            if ($(this).children().find("div[class*= obs_background_]").length > 0) {
+                $(this).children().find("div[class*= obs_background_]").each(function () {
+                    var paddings = parseInt($(this).css('padding-top')) + parseInt($(this).css('padding-bottom'));
+                    var margins = parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'));
+                    $(this).height(max_height - paddings - margins);
+                });
+
+                $(this).children().height(max_height);
+            }
+        });
+    }
+
+    function changeHeightSubhome(){
+        $('.cols-4').each(function (index){
+            for (var i = 0; i <= 3; i++){
+
+                $(this).children("div[class*=row-"+i+"] ").each(function(idx){
+                    var max_height = 0;
+                    // get max height by row
+                    $(this).children("div[class*=col-]").each(function (){
+                        var blocs = $(this).find(".display-subhomes");
+                        for (var j = 0; j < blocs.length; j++){
+                            if ($(blocs[j]).height() > max_height) {
+                                max_height = $(blocs[j]).height();
+                            }
+                        }
+
+                    });
+                    // set max height by row
+                    $(this).children("div[class*=col-]").each(function (){
+                        var blocs = $(this).find(".display-subhomes");
+                        for (var j = 0; j < blocs.length; j++){
+                            if (max_height < 300){ // 300 = min-height of the bloc
+                                $(blocs[j]).height(300);
+                            }else{
+                                $(blocs[j]).height(max_height);
+                            }
+                        }
+
+                    });
+
+                });
+
+            }
+        });
+    }
 
     function resizeIframeAuto(){
         var obj = document.getElementById('myFrame');
@@ -78,10 +114,10 @@
         });
     }
 
-  $(document).ready(function () {
-    image_resize_width();
-    obs_template_height();
-    //resizeIframeAuto('iframePardot');
+    $(document).ready(function () {
+        image_resize_width();
+        obs_template_height();
+        //resizeIframeAuto('iframePardot');
 
     $( ".close-env-info" ).click(function(){
         if ($('.env-info').is(":visible")){
@@ -228,19 +264,19 @@
 
       // Homepage carousel solution & industries
       $('#home-slick-carousel-left-prev_arrow').on('click', function(){
-          console.log('click on prevArrow ok');
+
           $('#slick-left-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-left-next_arrow').on('click', function(){
-          console.log('click on nextArrow ok');
+
           $('#slick-left-zone').slick("slickNext");
       });
       $('#home-slick-carousel-right-prev_arrow').on('click', function(){
-          console.log('click on prevArrow ok');
+
           $('#slick-right-zone').slick("slickPrev");
       });
       $('#home-slick-carousel-right-next_arrow').on('click', function(){
-          console.log('click on nextArrow ok');
+
           $('#slick-right-zone').slick("slickNext");
       });
 
@@ -284,8 +320,32 @@
         });
       }
 
-    }
-  };
+
+  // balises OG
+        $('head meta[property="og:locale"]').attr("content", settings.myLibrary.og_locale );
+        $('head meta[property="og:title"]').attr("content", settings.myLibrary.og_title );
+        $('head meta[property="og:description"]').attr("content", settings.myLibrary.og_desc );
+        $('head meta[property="og:url"]').attr("content", settings.myLibrary.og_url );
+        $('head meta[property="og:image"]').attr("content", settings.myLibrary.og_image );
+
+      // RSS
+        if (settings.myLibrary.share_siteUrls.rss_blogs.length) {
+            $("a.share-button-rss-blogs").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_blogs );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_magazine.length) {
+            $("a.share-button-rss-magazine").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_magazine );
+            });
+        }
+        if (settings.myLibrary.share_siteUrls.rss_presse.length) {
+            $("a.share-button-rss-presse").each(function() {
+                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_presse );
+            });
+        }
+
+    }};
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

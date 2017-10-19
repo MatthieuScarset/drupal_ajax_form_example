@@ -233,3 +233,85 @@ function oab_christophe_update_8035() {
 function oab_christophe_update_8036() {
   include_once("updates/update_8036.inc");
 }
+
+/**
+ *  permissions de modification des taxonomies
+ */
+function oab_christophe_update_8037() {
+  oabt_YmlImport('user.role.digital_admin.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3038 - affichage du main menu en EN, RU et RU-EN
+ */
+function oab_christophe_update_8038() {
+  oabt_YmlImport('block.block.mainnavigationru.yml');
+  oabt_YmlImport('block.block.mainnavigationruen.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3049 - block local nav sur les contenus "pays" et "region"
+ */
+function oab_christophe_update_8039() {
+  oabt_YmlImport('block.block.localnav.yml');
+}
+
+/**
+ *  Désactivation du pattern d'url pour les taxonomies
+ *  Suppression des url alias existantes pour les taxonomies
+ */
+function oab_christophe_update_8040() {
+  oabt_YmlImport('pathauto.pattern.terms.yml');
+
+  $query = \Drupal::database()->delete('url_alias');
+  $query->condition('source', '/taxonomy/term/%', 'LIKE');
+  $query->execute();
+}
+
+/**
+ *  RUBYPORTAILOBS-3046 - paramétrage metatags
+ */
+function oab_christophe_update_8041() {
+  include_once("updates/update_8041.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-3046 - paramétrage des champs meta title et meta description
+ */
+function oab_christophe_update_8042() {
+  oabt_YmlImport('field.field.node.full_html.field_meta_title.yml');
+  oabt_YmlImport('field.field.node.full_html.field_meta_description.yml');
+  oabt_YmlImport('field.field.node.homepage.field_meta_title.yml');
+  oabt_YmlImport('field.field.node.homepage.field_meta_description.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3046 - création du champ "metatags" sur la homepage
+ */
+function oab_christophe_update_8043() {
+  oabt_YmlImport('field.field.node.homepage.field_metatags.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3083 - config pathauto
+ */
+function oab_christophe_update_8044() {
+  oabt_YmlImport('pathauto.settings.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3046 - ajout du champ metatags au form des contenu homepage et full html
+ */
+function oab_christophe_update_8045() {
+  oabt_YmlImport('core.entity_form_display.node.full_html.default.yml');
+  oabt_YmlImport('core.entity_form_display.node.homepage.default.yml');
+}
+
+/**
+ *  RUBYPORTAILOBS-3046 - suppression du paramétrage metatags frontpage
+ */
+function oab_christophe_update_8046() {
+  $config_factory = \Drupal::configFactory();
+  $config_group = $config_factory->getEditable('metatag.metatag_defaults.front');
+  $config_group->delete();
+}

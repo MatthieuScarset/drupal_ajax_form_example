@@ -94,8 +94,9 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 			# et que le type de contenu est dans le tableau ci-dessus
 			# et qu'il possède le champs 'field_subhome'
 			if (isset($node)
-			    && in_array($parameters['node']->getType(), $contentTypes)
-			    && $node->hasField('field_subhome')) {
+        && method_exists(get_class($parameters['node']), 'getType')
+        && in_array($parameters['node']->getType(), $contentTypes)
+		    && $node->hasField('field_subhome')) {
 
 				##Affichage du fil d'ariane :
 				## Home > Subhome de rattachement (Lien vers la display view)

@@ -1,0 +1,21 @@
+block.settings.contact_bar_press_block:
+  type: block_settings
+  label: 'Contact Bar Press'
+  mapping:
+    link_ecrire:
+      type: label
+      label: 'Lien vers Nous écrire'
+    link_ecrire_text:
+      type: label
+      label: 'Texte du lien vers Nous écrire'
+
+block.settings.contact_bar_analyst_block:
+  type: block_settings
+  label: 'Contact Bar Analyst'
+  mapping:
+    link_ecrire:
+      type: label
+      label: 'Lien vers Nous écrire'
+    link_ecrire_text:
+      type: label
+      label: 'Texte du lien vers Nous écrire'

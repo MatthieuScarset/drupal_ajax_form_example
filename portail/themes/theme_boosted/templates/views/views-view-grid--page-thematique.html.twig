@@ -59,8 +59,11 @@ options.alignment,
         {% for row in items %}
             <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index, 'valorisation-grid') }}>
                 {% for column in row.content %}
-                    <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index, 'valorisation-element') }}>
-                        {{ column.content }}
+                    <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index) }}>
+                        <div class="valorisation-element">
+                            {{ column.content }}
+                        </div>
+
                     </div>
                 {% endfor %}
             </div>

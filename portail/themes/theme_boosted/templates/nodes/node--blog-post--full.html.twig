@@ -77,7 +77,9 @@ view_mode ? view_mode|clean_class,
 ]
 %}
 
-
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
 
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
@@ -106,19 +108,18 @@ view_mode ? view_mode|clean_class,
     </script>
 
 
-    <div class="content_info">
-        <span class="date">{{ createdDate }}</span>
-        {% if content.field_profile[0]['#node'].id() %}
-            <a href="{{ path('entity.node.canonical', {'node': content.field_profile[0]['#node'].id()}) }}"> {{ content.field_profile[0]['#node'].getTitle() }} </a>
+<div class="content_info">
+    <span class="date">{{ createdDate }}</span>
+    {% if content.field_profile[0]['#node'].id() %}
+        <a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': content.field_profile[0]['#node'].getTitle() }) }}">{{ content.field_profile[0]['#node'].getTitle() }}</a>
+        {% if content.theme_term %}{{ ', ' }}{% endif %}
+    {% endif %}
+    {{ content.theme_term }}
+</div>
 
-            {% if content.theme_term %}  {{ ', ' }}  {% endif %}
-        {% endif %}
-        {{ content.theme_term }}
-    </div>
+{% include 'themes/theme_boosted/templates/nodes/socialbar_blogs.html.twig' %}
 
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
-<article{{ attributes.addClass(classes) }}>
     <div{{ content_attributes.addClass('content') }}>
         {{ content|without('theme_term', 'field_blog', 'field_display_title', 'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date', 'field_blog_thematic', 'field_blog_format', 'field_insight') }}
     </div>

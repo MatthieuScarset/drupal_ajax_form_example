@@ -33,7 +33,8 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
     {
         $request = $event->getRequest();
 
-        if ($request->attributes->get('exception') instanceof FlattenException) {
+        if (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
+        || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException"){
             $code = $request->attributes->get('exception')->getStatusCode();
             if (!in_array($code, array(403, 404)))
             {
@@ -75,7 +76,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
             //page existante avec un acces granted mais pas d'alias
             $attr = $event->getRequest()->attributes;
             $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
-
+          
             if (NULL !== $attr
                 && NULL !== $attr->get('node')
                 && $attr->get('_controller') == '\Drupal\node\Controller\NodeViewController::view'

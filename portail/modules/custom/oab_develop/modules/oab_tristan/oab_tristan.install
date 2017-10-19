@@ -13,6 +13,7 @@ function oab_tristan_update_dependencies() {
   $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024	);
   $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
   $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020	);
+  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031	);
 
   return $dependencies;
 }
@@ -314,4 +315,91 @@ function oab_tristan_update_8039() {
  */
 function oab_tristan_update_8040() {
   include_once("updates/update_8040.inc");
+}
+
+
+/**
+ * Création d'une vue contenant 2 display view de type "Entity Ref"
+ * afin de modifier le retour des autocomplete de la zone rebond
+ */
+function oab_tristan_update_8041() {
+  include_once("updates/update_8041.inc");
+}
+
+/**
+ * Ajout d'une trad d'un field + Supp d'un terme de taxo
+ */
+function oab_tristan_update_8042() {
+  include_once("updates/update_8042.inc");
+}
+
+/**
+ * Modif des trads FR/RU des mois
+ */
+function oab_tristan_update_8043() {
+  include_once("updates/update_8043.inc");
+}
+
+/**
+ * Ajout de filtres pour blog et magazine
+ * Remise en place de l'AJAX pour la subhome press
+ */
+function oab_tristan_update_8044() {
+  include_once("updates/update_8044.inc");
+}
+
+/**
+ * Suppression du block product sur les langues RU et RU-EN
+ */
+function oab_tristan_update_8045() {
+  include_once("updates/update_8045.inc");
+}
+
+/**
+ * Modification de l'affichage de "Presse" pour le fil d'ariane
+ */
+function oab_tristan_update_8046() {
+  include_once("updates/update_8046.inc");
+}
+
+/**
+ * MAJ des API Keys pour l'utilisation de recaptcha
+ */
+function oab_tristan_update_8047() {
+  oabt_YmlImport('recaptcha.settings.yml');
+}
+
+/**
+ * Ajout de la date de publication des contenus dans les pages /admin/content et /admin/content/my-content
+ */
+function oab_tristan_update_8048() {
+  oabt_YmlImport('views.view.content.yml');
+}
+
+/**
+ * Changement du mode d'affichage des visuels ornemtaux des partners de la HP
+ */
+function oab_tristan_update_8049() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
+
+/**
+ * Update de la view SUBHOMES => Modif du filtre "thematic" de la subhome Document/Médiatheque
+ */
+function oab_tristan_update_8050() {
+  oabt_YmlImport('views.view.subhomes.yml');
+}
+
+/**
+ * Config par défaut pour l'activation du cron d'axiome + ajout de la trad du texte de la config
+ */
+function oab_tristan_update_8051() {
+  include_once("updates/update_8051.inc");
+}
+
+/**
+ * Pour mettre la revision d'un contenu "dépublié" comme "révision actuelle" lors de la depublication d'un contenu
+ */
+function oab_tristan_update_8052() {
+  oabt_YmlImport('workbench_moderation.moderation_state.unpublished.yml');
 }

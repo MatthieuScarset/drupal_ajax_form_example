@@ -276,3 +276,72 @@ function oab_amel_update_8031() {
     include_once("updates/update_8031.inc");
 }
 
+/**
+ *  Correction Homepage Eclairage : Lien sur l'image + restriction swiper à 6 contenus en mobile
+ */
+function oab_amel_update_8032() {
+    include_once("updates/update_8032.inc");
+}
+
+/**
+ *  Correction Homepage Eclairage et Page thématique : Choix de la langue lors de la création de la page
+ */
+function oab_amel_update_8033() {
+    include_once("updates/update_8033.inc");
+}
+
+/**
+ *  Correction View Page thématique Eclairage
+ */
+function oab_amel_update_8034() {
+    include_once("updates/update_8034.inc");
+}
+
+/**
+ *  Ajout Insight aux témoignages clients, et correction affichage de la contact bar sur les press russe
+ */
+function oab_amel_update_8035() {
+    include_once("updates/update_8035.inc");
+}
+
+/**
+ *  Ajout Insight aux témoignages clients, et correction affichage de la contact bar sur les press russe
+ */
+function oab_amel_update_8036() {
+    include_once("updates/update_8036.inc");
+}
+
+/**
+ *  Modification de la vue Page thématique pour rajouter un filtre contextuel, modification du type de contenus pour ajouter les champs également
+ */
+function oab_amel_update_8037() {
+    include_once("updates/update_8037.inc");
+}
+
+/**
+ *  Correction vue home playlist pour ne pas mettre de pager + tri sur les vues playlist et thématique + création des menus homepage eclairage
+ */
+function oab_amel_update_8038() {
+    include_once("updates/update_8038.inc");
+}
+
+/**
+ *  MAJ vues playlist et thématique
+ */
+function oab_amel_update_8039() {
+    include_once("updates/update_8039.inc");
+}
+
+/**
+ *  MAJ vue thématique : suppression du métier et aggrégation
+ */
+function oab_amel_update_8040() {
+    include_once("updates/update_8040.inc");
+}
+
+/**
+ *  MAJ vue thématique et playlist eclairage : remplacement start date par changed date
+ */
+function oab_amel_update_8041() {
+    include_once("updates/update_8041.inc");
+}

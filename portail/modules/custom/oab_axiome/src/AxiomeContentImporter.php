@@ -30,7 +30,6 @@ class AxiomeContentImporter {
 		// Creation du top_zone
 		$bannerData = $axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes'];
 		$idOffre = $axiomeData['@attributes']['id'];
-		$urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
 
 		// Top zone
 		$content = file_get_contents(
@@ -49,28 +48,36 @@ class AxiomeContentImporter {
 		$node->field_top_zone->format = 'full_html';
 
 		//TOP Zone Background
-		if (!empty($bannerData['background_image']['url_archive'])){
-			$urlBackground = 'public://axiome/fiches/'.$urlBackground;
+        if (!empty($bannerData['background_image']['url_archive']) && is_string($bannerData['background_image']['url_archive'])){
+            $urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
+			$urlBackground = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
 			$messages .= 'Url Top zone : '.$urlBackground."\nMedia #".$image_media_id."\n";
 			$node->set('field_top_zone_background', $image_media_id);
 		}
 
         // Creation image catalog
-        $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
-
-        if (!empty($bannerData['catalog_image']['url_archive'])){
-            $urlCatalog = 'public://axiome/fiches/'.$urlCatalog;
+        if (!empty($bannerData['catalog_image']['url_archive']) && is_string($bannerData['catalog_image']['url_archive'])){
+            $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
+            $urlCatalog = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlCatalog;
             $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
             $messages .= 'Url Catalog : '.$urlCatalog."\nMedia #".$image_media_id."\n";
             $node->set('field_visual', $image_media_id);
         }
 
+        // changement du title du noeud par le h1_title present dans la fiche XML
+        if(!empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])
+        && is_string($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])) {
+            $messages .= 'CHANGEMENT DE TITRE pour '.$node->id().' :'.$axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']."\n";
+            $node->setTitle($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']);
+        }
+
+        $node->save();
 	}
 
 	private static function replaceLeftBlock(&$dom, $bannerData, $node){
 		$cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
-
+        $fontColor = $bannerData['font_color'];
 		//$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
         switch($cssClassLeftBlock){
@@ -139,17 +146,19 @@ class AxiomeContentImporter {
 		$nodesSpan = self::getNodesByClass($dom, 'frame', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleLeftBlock;
+            $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
 
 	private static function replaceCenterBlock(&$dom, $bannerData){
 		$titleCenter = $bannerData['insight'];
-
+        $fontColor = $bannerData['font_color'];
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'titre3');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleCenter;
+            $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
@@ -157,17 +166,23 @@ class AxiomeContentImporter {
 	private static function replaceRightBlock(&$dom, $bannerData){
 		$cssClassRightBlock =  $bannerData['pop_out_color']['boosted_css_name'];
 		$titleRightBlock = $bannerData['offre_name'];
+		$popoutColor = $bannerData['pop_out_color']['color'];
 		// change class name
 		$nodes = self::getNodesByClass($dom, 'icon-popout-connectivity');
 		foreach($nodes as $el) {
             $el->removeAttribute('class');
             $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassRightBlock);
+            $el->setAttribute('style', 'color: '.$popoutColor.' !important');
 		}
 
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'popout', 'span');
 		foreach($nodesSpan as $el) {
 			$el->textContent = $titleRightBlock;
+			// hack pour mettre en blanc qd le fond est noir
+			if($popoutColor == '#000000'){
+                $el->setAttribute('style', 'color: #FFF !important');
+            }
 		}
 
 	}
@@ -306,6 +321,10 @@ class AxiomeContentImporter {
 			$message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
 			$isValid = false;
 		}
+        if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['catalog_image']['url_archive'])){
+            $message .= "\t WARNING : missing `ruby_zone_banner.catalog_image.url_archive` \n";
+            $isValid = false;
+        }
 
 		return $isValid;
 	}

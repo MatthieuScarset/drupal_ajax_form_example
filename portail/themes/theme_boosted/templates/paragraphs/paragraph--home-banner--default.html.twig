@@ -53,7 +53,7 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
             {# DESKTOP DISPLAY #}
             <div class="col-md-12 col-lg-12 hidden-sm hidden-xs home_banner_no_padding">
-                <a class="home_banner_element_link" href="{{ content.field_link[0]['#context']['value'] }}">
+                <a class="home_banner_element_link" href="{{ content.field_link_title[0]['#url'] }}">
                     <div class="home_banner_next" id="smallimage" style="background:url( {{ file_url(content.field_little_image_desktop['#items'].entity.uri.value) }} )">
                     <!-- Bottom Container -->
                         <div class="home_banner_next_bottom_container col-md-12 col-lg-12 hidden-xs hidden-sm">
@@ -63,9 +63,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <!-- Date -->
                                     <div class="home_banner_next_date">
 
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                        {{ date | trim }}<br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
@@ -73,7 +74,16 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <p class="home_banner_next_title" >
                                         {{ content.field_title[0]['#context']['value'] }}
                                     </p>
-                                    <p class="home_banner_next_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
+                                    <p class="home_banner_next_nameFunction">
+                                        {% set name_function %}
+                                            {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }}
+                                        {% endset %}
+                                        {% if content.field_function[0]['#context']['value'] is not empty %}
+                                            {{ name_function }}
+                                        {% else %}
+                                            {{ content.field_name[0]['#context']['value'] }}
+                                        {% endif %}
+                                    </p>
 
 
                                 </div>
@@ -85,17 +95,18 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
             {# MOBILE DISPLAY #}
             <div class="container no-padding">
-                <div class="row">
+
                 <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
-                    <a class="home_banner_element_mobile_link" href="{{ content.field_link[0]['#context']['value'] }}">
+                    <a class="home_banner_element_mobile_link" href="{{ content.field_link_title[0]['#url'] }}">
 
                          <div class="home_banner_mobile" style="background:url( {{ file_url(content.field_image_mobile['#items'].entity.uri.value) }} )">
 
                                 <!-- Date -->
                                 <div class="home_banner_next_date">
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                    {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
+                                    {{ date | trim }}<br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
                                 </div>
 
                                 <!-- Right container/ title -->
@@ -103,13 +114,21 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <p class="home_banner_title" >
                                         {{ content.field_title[0]['#context']['value'] }}
                                     </p>
-                                 <p class="home_banner_first_nameFunction"> {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }} </p>
+                                 <p class="home_banner_first_nameFunction">
+                                     {% set name_function %}
+                                         {{ content.field_name[0]['#context']['value'] }} | {{ content.field_function[0]['#context']['value'] }}
+                                     {% endset %}
+                                     {% if content.field_function[0]['#context']['value'] is not empty %}
+                                         {{ name_function }}
+                                     {% else %}
+                                         {{ content.field_name[0]['#context']['value'] }}
+                                     {% endif %} </p>
                                 </div>
 
                          </div>
                     </a>
                 </div>
-                </div>
+
             </div>
 
 

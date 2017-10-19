@@ -41,12 +41,12 @@ set classes = [
 dom_id ? 'js-view-dom-id-' ~ dom_id,
 ]
 %}
-{% if views_term %}
-<div class="subhome_description">
-    {{  views_term|raw }}
-</div>
-{% endif %}
 <div{{ attributes.addClass(classes) }}>
+    {% if views_term %}
+        <div class="subhome_description">
+            {{  views_term|raw }}
+        </div>
+    {% endif %}
     {{ title_prefix }}
     {% if title %}
         {{ title }}

@@ -49,13 +49,13 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
             <div class="col-md-12 col-lg-12 home_thematic_nopadding home_thematic_column">
-            <a class="home_thematic_ColumnLink" href="{{ content.field_link.0 }}">
+            <a class="home_thematic_ColumnLink" href="{{ content.field_link_title[0]['#url'] }}">
                 <img class="home_thematic_columnImage" src="{{ file_url(content.field_image['#items'].entity.uri.value) }}" />
                 <div class="thematic_column_elements">
 
                     <div class="thematic_column_elements_title">{{ content.field_title.0 }}</div>
                     <div class="thematic_column_elements_highlight">{{ content.field_highlight.0 }}</div>
-                    <div class="thematic_column_elements_nameFunction">{{ content.field_name.0 }} | {{ content.field_function.0 }} </div>
+                    <div class="thematic_column_elements_nameFunction"> {% if content.field_function.0 is not empty %} {{ content.field_name.0 }} | {{ content.field_function.0 }} {% else %}  {{ content.field_name.0 }} {% endif %} </div>
                 </div>
             </a>
             </div>

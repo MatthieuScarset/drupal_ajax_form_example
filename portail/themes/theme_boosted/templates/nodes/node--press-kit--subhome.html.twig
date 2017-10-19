@@ -72,35 +72,40 @@
 {% set year = createdDate|date("Y") %}
 {% set node_title = label %}
 
-<a href="{{ url }}" class="link-subhomes">
-<div class="display-subhomes">
-    <div class="encart col-lg-12">
-        <div class="bigKey col-lg-5 nopadding">{{ day }}</div>
-        <div class="lowKey col-lg-7 nopadding">
-            {{ month|trans }}<br/>{{ year }}
-        </div>
-    </div>
-    {# Pour faire la marge du trait identique aux autres blocs,
-    je suis obligé de la mettre dans un col-lg-12 aussi #}
-    <div class="col-lg-12">
-        <div class="border col-lg-12"></div>
-    </div>
-    <div class="txt col-lg-12">
-        {##############}
-        {# Je tourne sur tous les field_file (même s'il n'y en a qu'un seul
-            parce que c'est enregistré dans un array) #}
-        {% for key, my_field_file in content.field_file  %}
-            {% set media = my_field_file.entity %}
-            {% set file_entity = media.field_file.entity %}
+{% set tmp_month = month|trans %}
+{% set lang = node.get('langcode').getValue()[0].value %}
+{% if lang == 'fr' or  lang == 'ru' %}
+    {% set month = tmp_month|lower %}
+{% endif %}
 
-            {% if file_entity is not null and file_entity.filesize.value is not null %}
+{##############}
+{# Je tourne sur tous les field_file (même s'il n'y en a qu'un seul
+parce que c'est enregistré dans un array) #}
+{% for key, my_field_file in content.field_file  %}
+   {% set media = my_field_file.entity %}
+   {% set file_entity = media.field_file.entity %}
+    {% if file_entity is not null and file_entity.filesize.value is not null %}
+        <a href="{{ file_url(file_entity.getFileUri) }}" class="link-subhomes" target="_blank">
+            <div class="display-subhomes">
+                <div class="encart col-lg-12">
+                    <div class="bigKey col-lg-5 "><span>{{ day }}</span></div>
+                    <div class="lowKey col-lg-7 "><span>
+                        {{ month|trans }}<br/>{{ year }}</span>
+                    </div>
+                </div>
+                {# Pour faire la marge du trait identique aux autres blocs,
+                je suis obligé de la mettre dans un col-lg-12 aussi #}
+                <div class="col-lg-12">
+                    <div class="border col-lg-12"></div>
+                </div>
+                <div class="txt col-lg-12">
+                            <span>{{ 'Press folder'|trans }} - {{ file_entity.getFilename | file_format }}
+                                    {{ file_entity.getsize | format_bytes }} </span>
+                            <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
 
-                <span>{{ 'Press folder'|trans }} - {{ file_entity.getFilename | file_format }}
-                        {{ file_entity.getsize | format_bytes }} </span>
-                <div>{{ node_title|length > 20 ? node_title|slice(0, 20) ~ '...' : node_title }}</div>
-            {% endif %}
-        {% endfor %}
-        {##############}
-    </div>
-</div>
-</a>
+                </div>
+            </div>
+        </a>
+    {% endif %}
+{% endfor %}
+{##############}
