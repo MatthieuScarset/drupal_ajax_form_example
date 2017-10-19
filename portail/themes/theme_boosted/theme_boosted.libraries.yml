@@ -40,6 +40,7 @@ global-styling:
     js/swiper.jquery.min.js: {}
     js/switch.js: {}
     js/tealium.js: {}
+    js/cssua.min.js: {}
 
   dependencies:
     - core/jquery
