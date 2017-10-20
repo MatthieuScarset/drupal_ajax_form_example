@@ -347,6 +347,16 @@
 
     }};
 
+  $(document).on('click', function(e) {
+
+    var re = new RegExp("^share*");
+    if ( !re.test(e.target.id)
+    && !$(e.target).is('path') // TODO faire marcher ça
+    && $('#social-share').hasClass('in')) {
+      $('.icon-share[data-target="#social-share"]').click();
+    }
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
 
