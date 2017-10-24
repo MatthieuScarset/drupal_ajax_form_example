@@ -1,4 +1,3 @@
-uuid: 85401b23-d860-4858-ba0e-3bb1b833eebd
 langcode: en
 status: true
 dependencies: {  }
@@ -10,6 +9,7 @@ permissions:
   - 'access administration pages'
   - 'access browse_medias_iframe entity browser pages'
   - 'access browser_modal_for_medias entity browser pages'
+  - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
   - 'access in-place editing'
@@ -37,11 +37,15 @@ permissions:
   - 'assign workbench access'
   - 'bypass password policies'
   - 'create content translations'
+  - 'create office content'
   - 'create product content'
   - 'create url aliases'
   - 'delete all revisions'
+  - 'delete any office content'
   - 'delete any product content'
   - 'delete content translations'
+  - 'delete office revisions'
+  - 'delete own office content'
   - 'delete own product content'
   - 'delete product revisions'
   - 'delete terms in areas'
@@ -50,7 +54,9 @@ permissions:
   - 'delete terms in magazines'
   - 'delete terms in partners'
   - 'delete terms in topics'
+  - 'edit any office content'
   - 'edit any product content'
+  - 'edit own office content'
   - 'edit own product content'
   - 'edit terms in areas'
   - 'edit terms in blogs'
@@ -62,6 +68,7 @@ permissions:
   - oab_synomia_administer
   - 'replicate entities'
   - 'revert all revisions'
+  - 'revert office revisions'
   - 'revert product revisions'
   - 'translate any entity'
   - 'translate interface'
@@ -84,6 +91,7 @@ permissions:
   - 'view any unpublished content'
   - 'view latest version'
   - 'view moderation states'
+  - 'view office revisions'
   - 'view own unpublished content'
   - 'view product revisions'
   - 'view scheduled update entities'
