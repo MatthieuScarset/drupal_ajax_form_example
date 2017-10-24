@@ -111,7 +111,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						'drupalSettings' => array(
 							'tealium' => array(
 								'type_page' => 'Recherche',
-								'titre_page' => 'Résultats de recherche'
+								'titre_page' => t('Résultats de recherche')
 							),
 						)
 					),
@@ -133,7 +133,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						'drupalSettings' => array(
 							'tealium' => array(
 								'type_page' => 'Recherche',
-								'titre_page' => 'Résultats de recherche'
+								'titre_page' => t('Résultats de recherche')
 							),
 						)
 					),
@@ -154,7 +154,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					'drupalSettings' => array(
 						'tealium' => array(
 							'type_page' => 'Recherche',
-							'titre_page' => 'Résultats de recherche'
+							'titre_page' => t('Résultats de recherche')
 						),
 					)
 				),
