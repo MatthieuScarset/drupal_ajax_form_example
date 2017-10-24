@@ -89,7 +89,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					}
 				}
 
-				kint($response->facets);
+				//kint($response->facets);
 
 				$render_array[] = array(
 					'#searchForm' => $searchForm,

@@ -27,7 +27,7 @@
                     <ul class="facetapi">
                         {% for type, facet in facets %}
                             {% if facet.nbresults > 0 %}
-                            <li class='leaf'><a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName }} ({{ facet.nbresults }})</a> </li>
+                            <li class='leaf'><a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName|t }} ({{ facet.nbresults }})</a> </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
