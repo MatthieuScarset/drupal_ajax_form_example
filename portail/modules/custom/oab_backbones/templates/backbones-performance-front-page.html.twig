@@ -1,3 +1,4 @@
+<article class="backbones-performance-front">
 <div class='filter_month'>{% trans %}Monthly data{% endtrans %}</div>
 <div class='menu_filter_month'>
     <!-- méthode des espaces html entre les li pour éviter les espaces entre les element html au rendu du navigateur des li (display inline-block)-->
@@ -14,9 +15,11 @@
     --></ul>
 </div>
 
-<div class='filter_shadowsite col col-md-12 col-sm-12'>
-   {{ intro }}
-</div>
+    <div class='filter_shadowsite col col-md-12 col-sm-12'>
+        {{ intro }}
+    </div>
+</article>
+
 
 <div class='menu_filter_shadowsite col col-md-12 col-sm-12'>
     {{ filterForm }}

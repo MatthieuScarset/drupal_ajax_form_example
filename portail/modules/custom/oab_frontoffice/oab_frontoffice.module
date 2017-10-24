@@ -753,7 +753,6 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 	return $array_sharbar;
 }
 
-
 function oab_frontoffice_mail_alter(&$message) {
     for($i = 0; $i < count($message["body"]); $i++){
         $message["body"][$i] = str_replace("http://", "https://", $message["body"][$i]);
