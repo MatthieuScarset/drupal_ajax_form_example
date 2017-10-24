@@ -89,7 +89,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					}
 				}
 
-				//kint($response->facets);
+				kint($response->facets);
 
 				$render_array[] = array(
 					'#searchForm' => $searchForm,
@@ -177,7 +177,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
         /*
          *RU
         */
-        $urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=881b89aaa6a6c12de7d7575a37803722';
+       // $urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=881b89aaa6a6c12de7d7575a37803722';
 
 		if(!empty($urlSynomia))
 		{
