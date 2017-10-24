@@ -1,15 +1,14 @@
 global-styling:
   version: VERSION
   css:
-    boosted:
-      boosted/css/bootstrap-orange2015.min.css: {}
-      boosted/css/boosted2015.min.css: {}
     base:
       css/font-awesome.min.css: {}
       css/style.css: {}
       css/orange_socialbar.css: {}
       css/slick.css: {}
       css/swiper.min.css: {}
+      boosted/css/bootstrap-orange2015.min.css: {}
+      boosted/css/boosted2015.min.css: {}
     component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
@@ -20,7 +19,6 @@ global-styling:
       css/components/sidebar.css: {}
       css/components/fields.css: {}
       css/components/form.css: {}
-    templating:
       css/templating/background.css: {}
       css/templating/buttons.css: {}
       css/templating/shareIcons.css: {}
