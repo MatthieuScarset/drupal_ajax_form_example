@@ -13,7 +13,7 @@
     <div class="block_principal_results col-lg-12 col-md-12 col-sm-12">
 
         {% if nbResults > 0 %}
-            <span class="nbResults">{{ resultLabel }} <strong>{{ currentSearch }}</strong> : </span>
+            <span class="nbResults">{{ resultLabel }} <strong>{{ currentSearch }}</strong>: </span>
 
             {# FILTRES / FACETS#}
             <div class='block-facetapi col-lg-3 col-md-12 col-sm-12'>
@@ -50,7 +50,7 @@
                                     <li>
                                         <a href='{{ result.URL }}'>
                                         <div class="title">{{ result.title }}</div>
-                                        <div class="description">{{ result.description }}</div>
+                                        <div class="description">{{ result.description }} ...</div>
                                         <div class="read_more">
                                                     <span class="btn btn-rounded">
                                                         <span aria-hidden="true" class="glyphicon glyphicon-menu-right icon_nav" data-target="#search-form" data-toggle="collapse"></span>

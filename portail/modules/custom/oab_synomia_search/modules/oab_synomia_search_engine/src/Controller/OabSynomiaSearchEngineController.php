@@ -89,6 +89,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					}
 				}
 
+				//kint($response->facets);
+
 				$render_array[] = array(
 					'#searchForm' => $searchForm,
 					'#resultLabel' => $resultLabel,
@@ -166,6 +168,17 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		$urlSynomia = \Drupal::state()->get('url_synomia_'.$current_language);
 		//POUR LES TESTS
 		//$urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
+
+
+        /*
+         * FR
+
+        $urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=d306c28a3cb54099004b94e878f78bf6';*/
+        /*
+         *RU
+        */
+        $urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=881b89aaa6a6c12de7d7575a37803722';
+
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
