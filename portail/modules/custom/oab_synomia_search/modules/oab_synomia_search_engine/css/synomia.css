@@ -64,6 +64,10 @@ article.page-synomia-search-results{
     padding-left: 30px;
 }
 
+.block_principal_results .nbResults .placeholder {
+   font-style: normal;
+}
+
 .corrections ul ,
 .degradations ul {
     list-style: outside none none;

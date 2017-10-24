@@ -89,6 +89,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					}
 				}
 
+				//kint($response->facets);
+
 				$render_array[] = array(
 					'#searchForm' => $searchForm,
 					'#resultLabel' => $resultLabel,
@@ -109,7 +111,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						'drupalSettings' => array(
 							'tealium' => array(
 								'type_page' => 'Recherche',
-								'titre_page' => 'Résultats de recherche'
+								'titre_page' => t('Résultats de recherche')
 							),
 						)
 					),
@@ -131,7 +133,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						'drupalSettings' => array(
 							'tealium' => array(
 								'type_page' => 'Recherche',
-								'titre_page' => 'Résultats de recherche'
+								'titre_page' => t('Résultats de recherche')
 							),
 						)
 					),
@@ -152,7 +154,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 					'drupalSettings' => array(
 						'tealium' => array(
 							'type_page' => 'Recherche',
-							'titre_page' => 'Résultats de recherche'
+							'titre_page' => t('Résultats de recherche')
 						),
 					)
 				),
@@ -166,6 +168,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		$urlSynomia = \Drupal::state()->get('url_synomia_'.$current_language);
 		//POUR LES TESTS
 		//$urlSynomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
+
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
