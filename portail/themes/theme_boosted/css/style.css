@@ -1651,6 +1651,7 @@ article.product .highlight1{
 html.ua-mobile-ipad .three_columns,
 html.ua-mobile-ipad .four_columns {
     margin: 0px -10px;
+    border: dotted 1px;
 }
 
 html.ua-mobile-ipad .three_columns .col-md-4,
