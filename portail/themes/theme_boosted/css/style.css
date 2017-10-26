@@ -1663,19 +1663,7 @@ article.product .highlight1{
 }
 
 /* cas spécifique ipad */
-html.ua-mobile-ipad .three_columns,
-html.ua-mobile-ipad .four_columns {
-    margin: 0px;
-}
-
 html.ua-mobile-ipad .three_columns img,
 html.ua-mobile-ipad .four_columns img{
-    max-width: 99%;
-}
-
-html.ua-mobile-ipad .three_columns .col-md-4,
-html.ua-mobile-ipad .four_columns .col-md-3{
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: 0px;
+   display:none;
 }
