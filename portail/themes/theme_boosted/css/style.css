@@ -1650,7 +1650,7 @@ article.product .highlight1{
 /* cas spécifique ipad */
 html.ua-mobile-ipad .three_columns,
 html.ua-mobile-ipad .four_columns {
-    margin: 0px -10px;
+    margin: 0px -15px;
     border: dotted 1px;
 }
 
