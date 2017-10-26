@@ -1655,7 +1655,7 @@ html.ua-mobile-ipad .four_columns {
 
 html.ua-mobile-ipad .three_columns .col-md-4,
 html.ua-mobile-ipad .four_columns .col-md-3{
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
     margin: 0px;
 }
