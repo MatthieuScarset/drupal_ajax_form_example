@@ -563,11 +563,29 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
 function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) {
     if ($langcode == 'ru') {
         // changements demandés par Alexandra (majuscules et minuscules)
-        // caractère ч ӵ
+        // caractère ч ӵ => ch
         $overrides[0x0447] = $overrides[0x0427] = $overrides[0x04F4] = $overrides[0x04F5] = 'ch';
-        // caractère я
+        // caractère я => ya
         $overrides[0x042F] = $overrides[0x044F] = 'ya';
-        // caractère ж ӂ ӝ
+        // caractère ж ӂ ӝ => zh
         $overrides[0x04C1] = $overrides[0x04C2] = $overrides[0x0416] = $overrides[0x0436] = $overrides[0x04DC] = $overrides[0x04DD] = 'zh';
+        // caractères Ё, ё => e
+        $overrides[0x0401] = $overrides[0x0451] = "e";
+        // caractères Й, й => i
+        $overrides[0x0419] = $overrides[0x0439] = "i";
+        // caractères Х, х => kh
+        $overrides[0x0425] = $overrides[0x0445] = "kh";
+        // caractères Ц, ц => ts
+        $overrides[0x0426] = $overrides[0x0446] = "ts";
+        // caractères Ш, ш => sh
+        $overrides[0x0428] = $overrides[0x0448] = "sh";
+        // caractères Щ, щ => sch
+        $overrides[0x0429] = $overrides[0x0449] = "sch";
+        // caractères Ы, ы, Ӹ, ӹ => i
+        $overrides[0x042B] = $overrides[0x044B] = $overrides[0x04F8] = $overrides[0x04F9] = "i";
+        // caractères Э, э, Ӭ, ӭ => e
+        $overrides[0x042D] = $overrides[0x044D] = $overrides[0x04EC] = $overrides[0x04ED] = "e";
+        // caractères Ю, ю => yu
+        $overrides[0x042E] = $overrides[0x044E] = "yu";
     }
 }
