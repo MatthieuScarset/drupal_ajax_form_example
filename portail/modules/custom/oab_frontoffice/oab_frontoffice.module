@@ -364,10 +364,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
     $themes = clean_exposed_filters_by_language(
-      $form['field_blog_thematic_target_id']['#options'],
+      $form['field_document_thematic_target_id']['#options'],
       'Thematic'
     );
-    $form['field_blog_thematic_target_id']['#options'] = $themes;
+    $form['field_document_thematic_target_id']['#options'] = $themes;
 
     $types = clean_exposed_filters_by_language(
       $form['field_document_type_target_id']['#options'],
@@ -752,7 +752,6 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 	);
 	return $array_sharbar;
 }
-
 
 function oab_frontoffice_mail_alter(&$message) {
     for($i = 0; $i < count($message["body"]); $i++){

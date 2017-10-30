@@ -345,3 +345,17 @@ function oab_amel_update_8040() {
 function oab_amel_update_8041() {
     include_once("updates/update_8041.inc");
 }
+
+/**
+ *  MAJ vues pour les dates en anglais + style d'image playlist
+ */
+function oab_amel_update_8042() {
+    include_once("updates/update_8042.inc");
+}
+
+/**
+ *  MAJ vues pour les dates de création (et non plus de modification) + Menu footer et placement des blocks
+ */
+function oab_amel_update_8043() {
+    include_once("updates/update_8043.inc");
+}

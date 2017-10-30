@@ -117,22 +117,31 @@ article .product ul.nav-tabs li:before{
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
     .display-subhomes .encart-image{
-        height: 76px;
+        height: 72px;
     }
     .display-subhomes .encart-image img{
         width: 100%;
     }
+    .view-display-id-page_catalogue .display-subhomes .encart-image {
+        height: 61px;
+    }
+
     .display-subhomes .encart-image .default-image{
         width: auto;
     }
 }
 @media (min-width: 980px) and (max-width: 1219px) {
     .display-subhomes .encart-image{
-        height: 103px;
+        height: 97px;
     }
     .display-subhomes .encart-image img{
         width: 100%;
     }
+
+    .view-display-id-page_catalogue .display-subhomes .encart-image {
+        height: 83px;
+    }
+
     .display-subhomes .encart-image .default-image{
         width: auto;
     }
@@ -141,9 +150,15 @@ article .product ul.nav-tabs li:before{
     .display-subhomes .encart-image{
         height: 125px;
     }
-    .display-subhomes .encart-image img{
-        width: auto !important;
+
+    .view-display-id-page_catalogue .display-subhomes .encart-image{
+        height: 106px;
     }
+
+    .display-subhomes .encart-image img {
+        width: 100%;
+    }
+
     * .view-display-id-page_customer .display-subhomes .encart-image img,
     * .view-display-id-page_partners .display-subhomes .encart-image img{
         width: 100% !important;
@@ -1645,4 +1660,13 @@ article.product .highlight1{
 #block-topnavbarfr-2 li.lien-site-groupe-orange a,
 #block-topnavbarru-2 li.lien-site-groupe-orange a {
    color: #F16E00;
+}
+
+/* cas spécifique ipad */
+html.ua-mobile-ipad .three_columns .col-md-4{
+    width: 33.2%;
+}
+
+html.ua-mobile-ipad .four_columns .col-md-3{
+    width: 24.8%;
 }

@@ -31,6 +31,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      */
     public function onRequest(GetResponseEvent $event)
     {
+
         $request = $event->getRequest();
 
         if (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
@@ -59,8 +60,11 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                             $node_language = \Drupal::languageManager()->getCurrentLanguage();
                         }
 
-                        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['language' => $node_language]);
-                        $new_url = $url->toString();
+                        $options = [
+                          'language'  => $node_language,
+                          'query'     => $request->query->all()
+                        ];
+                        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()],$options);$new_url = $url->toString();
                         $current_uri = $_SERVER['REQUEST_URI'];
 
                         if ($new_url != ''
@@ -94,8 +98,11 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     if ($node_langId == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
                         $node_language = \Drupal::languageManager()->getCurrentLanguage();
                     }
-
-                    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['language' => $node_language]);
+                    $options = [
+                      'language'  => $node_language,
+                      'query'     => $request->query->all()
+                    ];
+                    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()],$options);
                     $new_url = $url->toString();
                     $current_uri = $_SERVER['REQUEST_URI'];
 

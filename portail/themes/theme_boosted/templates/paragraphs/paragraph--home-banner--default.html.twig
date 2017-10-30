@@ -45,7 +45,7 @@ set classes = [
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
-
+{% set lang = paragraph.get('langcode').getValue()[0].value %}
 
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
@@ -63,10 +63,17 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                                     <!-- Date -->
                                     <div class="home_banner_next_date">
 
-                                        {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
-                                        {{ date | trim }}<br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
-                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+                                        {% if (lang == 'fr') %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+                                        {% else %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('d') | trim }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <!-- Right container/ title -->
@@ -103,10 +110,18 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
                                 <!-- Date -->
                                 <div class="home_banner_next_date">
-                                    {% set date = node.field_home_banner.0.entity.field_date.value | date('d') %}
-                                    {{ date | trim }}<br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
-                                    {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+
+                                    {% if (lang == 'fr') %}
+                                        {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                        {{ date | trim }}<br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('m') | trim }} <br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+                                    {% else %}
+                                        {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                        {{ date | trim }}<br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('d') | trim }} <br>
+                                        {{ content.field_date[0]['#attributes']['datetime'] | date('y') | trim }}
+                                    {% endif %}
                                 </div>
 
                                 <!-- Right container/ title -->

@@ -259,7 +259,7 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
   }
 
   $config_path = drupal_get_path('module', $module_name) . '/config' . $dir_name . $file_name;
-  $data = Yaml::parse($config_path);
+  $data = Yaml::parse(file_get_contents($config_path));
   \Drupal::configFactory()->getEditable($file_name_lessext)->setData($data)->save(TRUE);
 
   /*

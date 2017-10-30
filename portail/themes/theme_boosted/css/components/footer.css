@@ -81,6 +81,15 @@ span.icon-footer {
     }
 }
 
+@media (max-width: 767px ) {
+    #block-footersocialblock .followbar div.content {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0;
+    }
+}
+
 @media (max-width: 480px) {
     #block-contactbar .wrapper_numero {
         margin-top: 10px;
@@ -93,4 +102,8 @@ span.icon-footer {
         margin-top: 10px;
         margin-bottom: 10px;
     }
+}
+
+#rightnavbar_footerblock .link_icon_items {
+    padding-left: 0px !important;
 }
