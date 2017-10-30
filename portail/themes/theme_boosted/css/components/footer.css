@@ -103,3 +103,7 @@ span.icon-footer {
         margin-bottom: 10px;
     }
 }
+
+#rightnavbar_footerblock .link_icon_items {
+    padding-left: 0px !important;
+}

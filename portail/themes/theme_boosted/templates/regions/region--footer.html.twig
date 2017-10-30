@@ -97,6 +97,34 @@
                     </div>
 
                 </div>
+                {# GESTION SI LE CONTENU EST VIDE  #}
+                {% set toprightnavbar_footer = 0 %}
+                {% if elements.toprightnavbarfooteren %}
+                    {% set toprightnavbar_footer = elements.toprightnavbarfooteren %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterfr %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterfr %}
+                {% endif %}
+
+                {% if elements.toprightnavbarfooterru %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterru %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterruen %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterruen %}
+                {% endif %}
+
+                {% if toprightnavbar_footer["#markup"]|render|trim is empty %}
+                    {% set classSupp_topnavbarfooter = "hidden" %}
+                {% endif %}
+
+                <div class="hidden-md hidden-lg container footer-div-border {{ classSupp_topnavbarfooter }}">
+
+                    <div id="rightnavbar_footerblock">
+
+                        {{ toprightnavbar_footer }}
+                    </div>
+
+                </div>
                 <div class="hidden-md hidden-lg container footer-div-border">
                     <p >
                         © Orange Business Services {{ "now"|date("Y") }}
