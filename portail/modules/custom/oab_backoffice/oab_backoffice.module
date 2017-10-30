@@ -42,6 +42,11 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$edit_form = true;
 	}
+
+	// formulaire replicate
+  if (preg_match('@node_(.*)_replicate_form@', $form_id)){
+    $form['#attributes']['class'][] = "replicate-form";
+  }
   
 	// on checke les langues auxquelles l utilisateur a droit
 	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
