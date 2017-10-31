@@ -41,11 +41,11 @@ class LocalNavBlock extends BlockBase {
       $localnav = $node->get('field_local_nav')->getValue();
     }
 
-    $block['type'] = 'processed_text';
+    $block['#type'] = 'processed_text';
     $block['#markup'] = '';
     $content = '';
     if(isset($localnav[0]['value'])){
-      $content = check_markup($localnav[0]['value'], 'full_html', '', FALSE);
+      $content = check_markup($localnav[0]['value'], 'full_html', '', []);
     }
     $block['#markup'] = $content;
     return $block;

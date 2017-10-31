@@ -22,7 +22,8 @@ class RightIconBlock extends BlockBase {
     public function build(){
 			$form = NULL;
 			if (\Drupal::moduleHandler()->moduleExists('oab_synomia_search_engine')) {
-				$form = render(\Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchHeaderBlockForm'));
+                $render = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchHeaderBlockForm');
+				$form = render($render);
 			}
 			return array(
 				'#theme' => 'custom-righticonblock',

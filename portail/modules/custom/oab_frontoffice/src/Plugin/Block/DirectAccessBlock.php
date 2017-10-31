@@ -23,7 +23,6 @@ class DirectAccessBlock extends BlockBase {
         $config = $this->getConfiguration();
         $direct_access_custom_text = isset($config['direct_access_custom_text']) ? $config['direct_access_custom_text'] : '';
         return array(
-            'type' => 'markup',
             '#markup' => check_markup($direct_access_custom_text['value'], $direct_access_custom_text['format']),
         );
     }
