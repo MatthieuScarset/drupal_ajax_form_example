@@ -791,31 +791,13 @@ function oab_frontoffice_mail_alter(&$message) {
 
 function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
-    $node = \Drupal::routeMatch()->getParameter('node');
 
-    if ($node instanceof \Drupal\node\NodeInterface) {
-      // You can get nid and anything else you need from the node object.
-      /*if (null !== $field_file = $node->get('field_file') ) {
-
-        ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
-        $field_value = $field_file->getValue();
-        $media = \Drupal\media_entity\Entity\Media::load($field_value[0]['target_id']);
-
-        ##On load le file contenu dans l'entity media
-        $file_value = $media->get('field_file')->getValue();
-        $file_id = $file_value[0]['target_id'];
-        $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)->getFileUri());
-
-
-      }*/
-      $form['elements']['url_du_fichier']["#value"] = $node->id();
-      foreach (array_keys($form['actions']) as $action) {
+  foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-          $form['actions'][$action]['#submit'][] = 'oab_frontoffice_telechargement_documents_form_submit';
+          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
         }
       }
     }
-  }
 }
 
 /**
@@ -846,9 +828,8 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
         $file_id = $file_value[0]['target_id'];
         $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
           ->getFileUri());
-
         ##je remplace la valeur d'url_du_fichier par l'url générée
-        $form_state->set('url_du_fichier', $file_url);
+        $form_state->setValue('url_du_fichier', $file_url);
       }
     }
 
