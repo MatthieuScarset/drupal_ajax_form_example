@@ -315,3 +315,10 @@ function oab_christophe_update_8046() {
   $config_group = $config_factory->getEditable('metatag.metatag_defaults.front');
   $config_group->delete();
 }
+
+/**
+ *  RUBYPORTAILOBS-3013 - autocomplete bloggers
+ */
+function oab_christophe_update_8047() {
+  include_once("updates/update_8047.inc");
+}
