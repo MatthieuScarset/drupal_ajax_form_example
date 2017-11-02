@@ -330,6 +330,7 @@
             if($('#home_playlist_end').hasClass('hidden'))
             {
                 $('#home_playlist_end').removeClass('hidden');
+                $('.btn-decouvrir-plus').addClass('hidden');
             }
             else
             {

@@ -258,7 +258,9 @@ view_mode ? view_mode|clean_class,
             {% endfor %}
         </div>
         <div class="col-md-12 col-xs-12 col-sm-12 home_playlist hidden" id="home_playlist_end">
+            {% set button_hidden = "hidden" %}
             {% for key, value in content.field_home_playlists if key|first != '#' and key >= 4 %}
+                {% set button_hidden = "" %}
                 {% if key is even %}
                     <div class="home_playlist_grey">
                         {{ value }}
@@ -270,7 +272,9 @@ view_mode ? view_mode|clean_class,
                 {% endif %}
             {% endfor %}
         </div>
-        <div class="btn btn-info btn-decouvrir-plus" role="button" href=""> &#9660; {{ "Display more"|t }}  </div>
+
+        <div class="btn btn-info btn-decouvrir-plus {{ button_hidden }}" role="button" href=""> &#9660; {{ "Display more"|t }}  </div>
+
     </div>
     </div>
 
