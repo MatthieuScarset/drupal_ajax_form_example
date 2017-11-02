@@ -483,7 +483,7 @@ a.home_banner_element_mobile_link {
     color: white;
     padding-left: 3rem !important;
     margin-top: 0;
-    font-size: 1.4rem !important;
+    font-size: 1.6rem !important;
 }
 
 
@@ -1529,4 +1529,13 @@ a.home_banner_element_mobile_link {
         width: 300px;
         background: #fff;
     }
+}
+
+
+.home_eclairage_menulist_mobile ul li:after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 200px;
+    background: #fff;
 }
