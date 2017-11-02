@@ -162,6 +162,8 @@ submit_button_s_:
   'settings'  => [
     'page'              => false,
     'confirmation_type' => 'inline',
+    'confirmation_back' => false,
+    'confirmation_back_label' => "Retour au formulaire",
     'confirmation_message'  => '<p>Bonjour,</p>
 
 <p>Nous avons le plaisir de vous communiquer le lien du document que vous venez de s&eacute;lectionner :<br />
