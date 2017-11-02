@@ -387,5 +387,3 @@ L&#39;&eacute;quipe digitale</p>
 ]);
 
 $form->save();
-
-throw new UpdateException();
