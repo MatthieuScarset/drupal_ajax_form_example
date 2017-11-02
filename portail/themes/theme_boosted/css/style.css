@@ -1676,3 +1676,36 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .replicate-form #edit-xmlsitemap{
     display: none !important;
 }
+
+
+.webform-dl-document {
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+
+.webform-dl-document .webform-dl-document-container {
+    margin-top: 15px;
+}
+
+.webform-dl-document .webform-dl-document-element {
+
+}
+
+.webform-dl-document .webform-dl-document-element.form-checkbox.form-control {
+
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+
+.webform-dl-document label {
+    display: inline;
+}
+
+.webform-dl-document #edit-submit-button-s- {
+    text-align: center;
+    margin-top: 20px;
+
+}
+
