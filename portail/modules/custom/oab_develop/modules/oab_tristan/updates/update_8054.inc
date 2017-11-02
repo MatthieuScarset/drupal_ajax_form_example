@@ -11,11 +11,11 @@ oabt($form);
 
 $form = \Drupal\webform\Entity\Webform::create([
   'type'      => 'webform',
-  'title'     => 'Telechargement Documents 2',
+  'title'     => 'Telechargement Documents',
   'langcode'  => 'fr',
   'uid'       => '1',
   'status'    => 'open',
-  'id'        => 'telechargement_documents_2',
+  'id'        => 'telechargement_documents',
   'elements'  => '\'#attributes\':
   class:
     - webform-dl-document
@@ -28,7 +28,7 @@ titre:
       - webform-dl-document-container
   \'#attributes\':
     class:
-      - \'webform-dl-document-element col-sm-4\'
+      - \'webform-dl-document-element\'
   \'#options\':
     Madame: Mme
     Mademoiselle: Mlle
