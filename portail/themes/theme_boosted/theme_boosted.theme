@@ -300,6 +300,7 @@ function theme_boosted_preprocess_file_link(&$variables){
     }
 
   $options['attributes']['title'] = $file_entity->getFilename();
+  $options['attributes']['target'] = '_blank';
 
   // Classes to add to the file field for icons.
   $classes = array(
