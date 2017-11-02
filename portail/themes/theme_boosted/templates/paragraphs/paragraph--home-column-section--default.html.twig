@@ -56,7 +56,17 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
                  <div class="col-md-8 col-xs-8 home_column_no_padding home_column_element_text">
                     <div class="home_column_element_title">{{ content.field_link_title }}</div>
-                    <div class="home_column_element_nameFunction">{{ content.field_name }} | {{ content.field_function }} </div>
+                    <div class="home_column_element_nameFunction">
+                        {% set name_function %}
+                            {{ content.field_name }} | {{ content.field_function }}
+                        {% endset %}
+                        {% if content.field_function[0]['#context']['value'] is not null %}
+                            {{ name_function }}
+                        {% else %}
+                            {{ content.field_name }}
+                        {% endif %}
+
+                    </div>
                  </div>
                 <hr/>
              </div>
