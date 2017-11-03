@@ -1709,3 +1709,9 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 
 }
 
+.embedded-entity.align-left{
+    margin-right: 10px;
+}
+.embedded-entity.align-right{
+    margin-left: 10px;
+}
