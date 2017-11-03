@@ -163,3 +163,10 @@ div.titre-insight span{
         margin-left: 6px;
     }
 }
+
+.cke_show_borders.align-left{
+    margin-right: 10px;
+}
+.cke_show_borders.align-right{
+    margin-left: 10px;
+}

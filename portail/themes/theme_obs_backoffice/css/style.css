@@ -48,3 +48,11 @@
 .atlwdg-trigger.atlwdg-SUBTLE {
     z-index: 200;
 }
+
+
+.embedded-entity.align-left{
+    margin-right: 10px;
+}
+.embedded-entity.align-right{
+    margin-left: 10px;
+}
