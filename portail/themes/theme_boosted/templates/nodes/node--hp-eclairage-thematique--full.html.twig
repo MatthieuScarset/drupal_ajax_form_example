@@ -105,7 +105,7 @@ view_mode ? view_mode|clean_class,
                 {# DESKTOP #}
                 <div class="col-md-6 col-lg-6 hidden-sm hidden-xs home_thematic_nopadding">
                     {# DESKTOP IMAGE #}
-                    <a class="home_banner_element_link" href="{{ content.field_banner_link.0.entity.field_link.value }}">
+                    <a class="home_banner_element_link" href="{{ content.field_banner_link[0]['#url'] }}">
                         <div class="home_thematic_banner_desktop" style="background:url('{{ file_url(content.field_desktop_image['#items'].entity.uri.value) }}');">
                             <div class="home_banner_first_bottom_container col-md-12">
                                 <!-- Left container / date-->
@@ -144,7 +144,7 @@ view_mode ? view_mode|clean_class,
                 {# MOBILE #}
                 <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_thematic_nopadding">
                     {# DESKTOP IMAGE #}
-                    <a class="home_banner_element_link" href="{{ content.field_banner_link.0.entity.field_link.value }}">
+                    <a class="home_banner_element_link" href="{{ content.field_banner_link[0]['#url'] }}">
                         <div class="home_thematic_banner_mobile" style="background:url('{{ file_url(content.field_mobile_image['#items'].entity.uri.value) }}'); background-repeat: no-repeat;">
                             <div class="home_banner_first_bottom_container_mobile">
                                 <!-- Left container / date-->
