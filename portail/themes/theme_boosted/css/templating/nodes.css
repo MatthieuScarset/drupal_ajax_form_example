@@ -623,6 +623,7 @@ a.home_banner_element_mobile_link {
 
 .valorisation-element .views-field-field-visual {
     padding-bottom: 30px;
+    height: 180px;
 }
 
 .valorisation-element .views-field-field-profile,
@@ -1451,6 +1452,11 @@ a.home_banner_element_mobile_link {
     z-index: 3;
     top: 60px;
     position: absolute;
+}
+.valorisation-grid .valorisation-element-date {
+    top: inherit;
+    margin-top: 40px
+
 }
 #page_thematique_filter {
     padding-left: 0;
