@@ -164,9 +164,9 @@ div.titre-insight span{
     }
 }
 
-.cke_show_borders.align-left{
+.cke_show_borders .align-left{
     margin-right: 10px;
 }
-.cke_show_borders.align-right{
+.cke_show_borders .align-right{
     margin-left: 10px;
 }
