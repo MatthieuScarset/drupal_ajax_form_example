@@ -604,7 +604,7 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
 function oab_backoffice_cron() {
   ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
   #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-  if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
+  #if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
 
     ##je recupère la date d'il y a un an
     $date = new Datetime\DrupalDateTime('1 year ago',new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
@@ -624,7 +624,7 @@ function oab_backoffice_cron() {
     $storage->delete($webform_submissions);
 
     ## Petit message d'information au cas ou...
-    \Drupal::logger('Cron Webform')->notice("$nbSubmissions résultats de webforms de plus d'un an ont été supprimés");
+   # \Drupal::logger('Cron Webform')->notice("$nbSubmissions résultats de webforms de plus d'un an ont été supprimés");
 
-  }
+  #}
 }
