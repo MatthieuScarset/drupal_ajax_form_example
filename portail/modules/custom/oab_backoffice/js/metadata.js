@@ -4,7 +4,7 @@
 (function ($, Drupal) {
     /**
      * Registers behaviours related to view widget.
-     */
+
     Drupal.behaviors.Metadata = {
         attach: function (context) {
             var $previewMetaTitle = $("#edit-field-meta-title-0-value");
@@ -32,6 +32,6 @@
 
             });
         }
-    };
+    }; RUBYPORTAILOBS-3179 : désactivation de la fonctionnalité d'autocomplétion des champs metas */
 
 }(jQuery, Drupal));
