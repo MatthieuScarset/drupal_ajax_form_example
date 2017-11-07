@@ -114,6 +114,37 @@
         });
     }
 
+
+  // classe CSS sur les petites images dans les templates colonnages
+  function manageSmallImageInTemplates(){
+    $('.pourquoi .col div.ligne img').each(function(){
+      if ($(this).attr('width') < 220){
+        $(this).addClass('small-image');
+      }
+    });
+    $('.obs_template > .col-md-8 img').each(function(){
+      if ($(this).attr('width') < 480){
+        $(this).addClass('small-image');
+      }
+    });
+    $('.obs_template > .col-md-6 img').each(function(){
+      if ($(this).attr('width') < 355){
+        $(this).addClass('small-image');
+      }
+    });
+    $('.obs_template > .col-md-4 img').each(function(){
+      if ($(this).attr('width') < 230){
+        $(this).addClass('small-image');
+      }
+    });
+    $('.obs_template > .col-md-3 img').each(function(){
+      if ($(this).attr('width') < 170){
+        $(this).addClass('small-image');
+      }
+    });
+  }
+  
+
     $(document).ready(function () {
         image_resize_width();
         obs_template_height();
@@ -166,6 +197,9 @@
   });
 
 
+  $(window).on('load', function(){
+    manageSmallImageInTemplates();
+  });
 
 
   function getHeaderBarHeight() {
@@ -346,6 +380,16 @@
         }
 
     }};
+
+  $(document).on('click', function(e) {
+
+    var re = new RegExp("^share*");
+    if ( !re.test(e.target.id)
+      && !$(e.target).is('path')
+      && $('#social-share').hasClass('in')) {
+      $('.icon-share[data-target="#social-share"]').click();
+    }
+  });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
