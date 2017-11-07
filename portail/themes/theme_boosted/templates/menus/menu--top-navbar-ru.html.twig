@@ -31,7 +31,7 @@
       {% set link_classtag = item.url.options.classtag %}
       {% if menu_level == 0 and item.is_expanded %}
         <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
-        <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}"
+        <a href="{{ item.url }}" class="dropdown-toggle" data-toggle="dropdown" target="{{ link_target }}"
            onmousedown="utag_link(utag_data.titre_page, 'Header', '{{ item.title }}', '');"><span class="{{ link_icon }}"></span>{{ item.title }} <span class="caret"></span></a>
       {% else %}
        <li class="{{ link_classtag }} pull-left">{{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Header\', \'' ~ item.title ~ '\', \'\');'}) }}

@@ -348,7 +348,8 @@
     }};
 
   $(".dropdown-toggle").click(function(e) {
-    alert("bla");
+    $(".dropdown-toggle").dropdown();
+    return false;
   });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
