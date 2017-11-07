@@ -349,5 +349,3 @@
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
-
-
