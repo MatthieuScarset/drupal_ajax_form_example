@@ -197,6 +197,9 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 			$form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
 		}
 
+        // Disable browser HTML5 validation
+        $form['#attributes']['novalidate'] = 'novalidate';
+
 		//on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
 		$roles = \Drupal::currentUser()->getRoles();
 		if(!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
