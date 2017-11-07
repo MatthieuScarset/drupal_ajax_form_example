@@ -25,10 +25,17 @@ class MapRegionsCountriesForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function buildForm(array $form, FormStateInterface $form_state) {
-
-		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-		$selectedRegion = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
-		$selectedCountry = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
+		$arguments = $form_state->getBuildInfo()['args'];
+		if(count($arguments) > 0){
+			//oabt($arguments);
+			$selectedRegion = (isset($arguments[0]['region_id']) && !empty($arguments[0]['region_id'])) ? $arguments[0]['region_id'] : 'all';
+			$selectedCountry = (isset($arguments[0]['country_id']) && !empty($arguments[0]['country_id'])) ?$arguments[0]['country_id'] : 'all';
+		}
+		else{
+			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+			$selectedRegion = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
+			$selectedCountry = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
+		}
 
 		$regions = $this->getRegions();
 		$countries = $this->getCountries();
@@ -109,11 +116,15 @@ class MapRegionsCountriesForm extends FormBase {
 	 */
 	public function submitForm(array &$form, FormStateInterface $form_state){
 		$current_route = \Drupal::routeMatch()->getRouteName();
+		$routeParameters = array();
+		if ($current_route == 'entity.node.canonical') {
+			$routeParameters['node'] = \Drupal::routeMatch()->getRawParameter('node');
+		}
 		$input = &$form_state->getUserInput();
 		$option = [
 			'query' => array('region' => $input["region"], 'country' => $input["country"]),
 		];
-		$url = Url::fromRoute($current_route, array(), $option);
+		$url = Url::fromRoute($current_route, $routeParameters, $option);
 		$form_state->setRedirectUrl($url);
 	}
 }

@@ -18,8 +18,23 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings)
  */
 function oab_ckeditor_ckeditor_plugin_info_alter(array &$plugins)
 {
-    //kpr($plugins);
-    //  die;
+	$current_path = \Drupal::service('path.current')->getPath();
+	$args = explode('/', $current_path);
+	if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
+		if ($args['2'] == "add") {
+			$nodetype = $args['3'] ;
+		} else {
+			if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
+				$nodetype = $noeud->getType();
+			}
+		}
+		if (isset($nodetype) && !empty($nodetype)) {
+			if(!in_array($nodetype, array('region', 'country'))){
+				oabt($plugins['offices_map'], true);
+				//unset($plugins['offices_map'] );
+			}
+		}
+	}
 }
 
 /**

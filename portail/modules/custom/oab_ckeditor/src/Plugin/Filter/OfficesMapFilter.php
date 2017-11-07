@@ -7,6 +7,7 @@
 
 namespace Drupal\oab_ckeditor\Plugin\Filter;
 
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\views\Views;
@@ -46,18 +47,43 @@ class OfficesMapFilter extends FilterBase {
 				$text = str_replace($searchResults[0], $newChaine, $text);
 			}
 		}
-		return new FilterProcessResult($text);
+		$result = new FilterProcessResult($text);
+		$result->addAttachments( array( 'library' => ['oab_offices_map/oab_offices_map.markers']));
+		return $result;
 	}
 
 	function render_offices_map_block($chaineARemplacer) {
 		$newText = "";
+		$region_id = "";
+		$country_id = "";
 		$chaine_json = str_replace("||", "", $chaineARemplacer);
-
 		$tag_info = json_decode($chaine_json);
-		var_dump($tag_info);
+
 		if(isset($tag_info->block_id) && $tag_info->block_id == "offices_map_block"){
-			$region_id = (!empty($tag_info->region_id)) ? $tag_info->region_id : 'all';
-			$country_id = (!empty($tag_info->country_id)) ? $tag_info->country_id : 'all';
+
+			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+			if(!empty($parameters) && isset($parameters['region'])){
+				$region_id = $parameters['region'];
+			}elseif (!empty($tag_info->region_id)){
+				$region_id = $tag_info->region_id;
+			}
+			else{
+				$region_id = 'all';
+			}
+
+			if(!empty($parameters) && isset($parameters['country'])){
+				$country_id = $parameters['country'];
+			}elseif (!empty($tag_info->country_id)){
+				$country_id = $tag_info->country_id;
+			}
+			else{
+				$country_id = 'all';
+			}
+			$regionsCountriesForm = \Drupal::formBuilder()
+				->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm', array('region_id' => $region_id, 'country_id' => $country_id));
+
+
+
 			//on doit remplacer la chaine par le rendu du block
 			$officesMapView = Views::getView('offices_map_view');
 			$officesMapView->setDisplay('offices_map_block');
@@ -66,7 +92,8 @@ class OfficesMapFilter extends FilterBase {
 			$officesMapView->execute();
 			$mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
 		}
-		$newText = render($mapBlock). "++++ chaine remplacée";
+		$newText = render($regionsCountriesForm).render($mapBlock);// "++++ chaine remplacée";
+
 		return $newText;
 	}
 }
