@@ -32,6 +32,6 @@
 
             });
         }
-    }; RUBYPORTAILOBS-3179 : désactivation de la fonctionnalité d'autocomplétion des champs metas /
+    }; RUBYPORTAILOBS-3179 : désactivation de la fonctionnalité d'autocomplétion des champs metas */
 
 }(jQuery, Drupal));
