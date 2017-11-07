@@ -347,10 +347,5 @@
 
     }};
 
-  $(".dropdown-toggle").click(function(e) {
-    $(".dropdown-toggle").dropdown();
-    return false;
-  });
-
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
