@@ -347,7 +347,9 @@
 
     }};
 
+  $(".dropdown-toggle").click(function(e) {
+    alert("bla");
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
-
-
 
