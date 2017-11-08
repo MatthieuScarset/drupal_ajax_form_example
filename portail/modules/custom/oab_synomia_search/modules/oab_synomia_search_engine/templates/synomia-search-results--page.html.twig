@@ -43,7 +43,7 @@
                 {% for cluster in searchResults %}
                     {% if cluster.nbResults >0 %}
                         <div class="results_cluster">
-                            <div class="cluster_name"> {{ cluster.typeName }} ({{ cluster.nbResults }})</div>
+                            <div class="cluster_name"> {{ cluster.typeName|t }} ({{ cluster.nbResults }})</div>
                             <ul class="results-list">
                                 {% for result in cluster.results %}
                                     {% if (loop.index < 4 and searchMode == 'global') or searchMode == 'rubrique'%} {# affichage que de 3 resultats #}
