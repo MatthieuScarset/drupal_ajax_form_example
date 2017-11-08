@@ -546,8 +546,8 @@ function oab_backoffice_views_data_alter(array &$data) {
 			'id' => 'node_year'
 		),
 	);
-
 }
+
 
 
 /**
@@ -595,36 +595,29 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
                     }
                 }
                 // on ajoute l état de la dernière révision et la date d'update
-                if($result->_entity->id() == 8389){
-                    $node = Node::load($result->_entity->id());
-                    $vids = \Drupal::entityManager()->getStorage('node')->revisionIds($node);
-                    $vids =array_reverse($vids);
-                    if(isset($vids[0])){
-                        $last_revision_id = $vids[0];
-                        // on charge la révision pour avoir son statut et sa date d update
-                        $maRevision = node_revision_load($last_revision_id);
-                        $updateMktime = $maRevision->getChangedTime();
-                        $moderationState = $maRevision->get('moderation_state')->getValue();
-                        $state = array();
-                        if(isset($moderationState[0]['target_id'])){
-                            //$moderationState = $moderationState[0]['target_id'];
-                            $state = $moderationState;
-                        }
-                        oabt($view->result[$i]->_entity->get('moderation_state')->getValue());
-                        oabt($state);
-                        //oabt($updateMktime.' '.$moderationState);
-                        $view->result[$i]->_entity->get('moderation_state')->setValue($state);
-                        //oabt($view->result[$i]);
-                        //$view->result[$i]->_entity->get('field_title_1')->setValue(array(0=>"$moderationState"));
-                        //$view->result[$i]->_entity->get('field_revision_id')->setValue(array(0=>"$moderationState"));
-                        /*$view->result[$i]->_entity->get('latest_revision_update')->setValue(array(0=>"$updateMktime"));*/
+                $node = Node::load($result->_entity->id());
+                $vids = \Drupal::entityManager()->getStorage('node')->revisionIds($node);
+                $vids =array_reverse($vids);
+                if(isset($vids[0])){
+                    $last_revision_id = $vids[0];
+                    // on charge la révision pour avoir son statut et sa date d update
+                    $maRevision = node_revision_load($last_revision_id);
+                    $updateMktime = $maRevision->getChangedTime();
+                    $moderationState = $maRevision->get('moderation_state')->getValue();
+                    $state = array();
+                    if(isset($moderationState[0]['target_id'])){
+                        $moderationState = $moderationState[0]['target_id'];
                     }
+                    oabt($view->result[$i]->_entity->get('moderation_state')->getValue());
+                    oabt($updateMktime.' '.$moderationState);
+                    //$view->result[$i]->_entity->get('moderation_state')->setValue($state);
+                    //oabt($view->result[$i]);
+                    //$view->result[$i]->_entity->get('field_title_1')->setValue(array(0=>"$moderationState"));
                 }
             }
         }
     }
 }
-
 
 function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) {
     if ($langcode == 'ru') {
