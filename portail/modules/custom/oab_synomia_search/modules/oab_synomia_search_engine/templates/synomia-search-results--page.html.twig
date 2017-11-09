@@ -49,7 +49,8 @@
                                     {% if (loop.index < 4 and searchMode == 'global') or searchMode == 'rubrique'%} {# affichage que de 3 resultats #}
                                     <li>
                                         <a href='{{ result.URL }}'>
-                                        <div class="title">{{ result.title }}</div>
+
+                                        <div class="title">{{ result.title|split('|')[0] }}</div>
                                         <div class="description">{{ result.description }}...</div>
                                         <div class="read_more">
                                                     <span class="btn btn-rounded">
