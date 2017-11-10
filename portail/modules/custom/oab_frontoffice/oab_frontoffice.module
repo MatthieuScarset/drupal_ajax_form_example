@@ -744,7 +744,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 	foreach ($siteData as $site => $data) {
 		$paramsString = "";
 		foreach ($data['params'] as $paramName => $value) {
-			if (strlen($value)>0)
+			if (is_string($value) && strlen($value)>0)
 				$paramsString .= $paramName . "=" . rawurlencode($value) . "&";
 		}
 		$siteUrls[$site] = $data['url'];

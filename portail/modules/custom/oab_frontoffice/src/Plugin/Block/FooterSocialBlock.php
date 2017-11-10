@@ -23,7 +23,6 @@ class FooterSocialBlock extends BlockBase {
         $config = $this->getConfiguration();
         $footer_social_custom_text = isset($config['footer_social_custom_text']) ? $config['footer_social_custom_text'] : '';
         return array(
-            'type' => 'markup',
             '#markup' => check_markup($footer_social_custom_text['value'], $footer_social_custom_text['format']),
             '#attached' => array(
                 'library' =>  array(
