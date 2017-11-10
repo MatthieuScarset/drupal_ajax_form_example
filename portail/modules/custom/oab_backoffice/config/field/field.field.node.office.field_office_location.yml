@@ -1,0 +1,21 @@
+uuid: cab96866-a08c-4f47-89fa-e33d1447cdd0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_office_location
+    - node.type.office
+  module:
+    - geolocation
+id: node.office.field_office_location
+field_name: field_office_location
+entity_type: node
+bundle: office
+label: Location
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

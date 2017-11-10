@@ -1,0 +1,19 @@
+uuid: 5d3356be-5a85-4b3f-a871-abbfea62aa2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_street
+    - node.type.office
+id: node.office.field_street
+field_name: field_street
+entity_type: node
+bundle: office
+label: Street
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
