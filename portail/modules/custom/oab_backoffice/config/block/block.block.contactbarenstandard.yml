@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -43,6 +44,7 @@ visibility:
       magazine: magazine
       partner: partner
       product: product
+      region: region
       simple_page: simple_page
       solution: solution
     negate: false
