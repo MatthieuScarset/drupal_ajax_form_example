@@ -14,6 +14,9 @@ oabt_YmlImport('field.field.node.office.field_region.yml');
 oabt_YmlImport('field.field.node.office.field_street.yml');
 */
 
+//mise a jour de la vue
+oabt_YmlImport('views.view.offices_map_view.yml');
+
 //on passe tous les nodes Office en EN
 $nids= \Drupal::entityQuery('node')
 	->condition('type', 'office')
