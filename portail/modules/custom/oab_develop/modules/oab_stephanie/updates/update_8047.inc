@@ -118,11 +118,6 @@ foreach($termsCountries as $termObj) {
 			if(isset($countriesTrad[$termObj->label()]))
 			{
 				$termArray['name'] = $countriesTrad[$termObj->label()];
-				print $termObj->label(). " => ".$countriesTrad[$termObj->label()]. " ===== term name=".$termArray['name']."<br/>";
-			}
-			else{
-
-				print $termObj->label(). " => ".$termObj->label(). "<br/>";
 			}
 			$termObj->addTranslation('ru', $termArray)->save();
 		}
