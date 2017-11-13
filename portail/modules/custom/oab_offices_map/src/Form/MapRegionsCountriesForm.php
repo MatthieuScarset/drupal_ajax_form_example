@@ -55,7 +55,7 @@ class MapRegionsCountriesForm extends FormBase {
 	}
 
 
-	private function getCountries(){
+	private function getCountries() {
 		$query = Database::getConnection()->select('node_field_data', 'n');
 		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
 		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
@@ -63,13 +63,22 @@ class MapRegionsCountriesForm extends FormBase {
 		$query->condition('n.status', 1, '=');
 		$query->addField('oc', 'tid', 'country_tid');
 		$query->addField('oc', 'name', 'country_name');
+		$query->addField('oc', 'langcode', 'country_langcode');
 		$query->orderBy('oc.name');
 		$results =	$query->execute()->fetchAll();
 
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 		$table_countries = array();
 		$table_countries['all'] = $this->t('Country');
-		foreach ($results as $country){
-			if(!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid)){
+
+		foreach ($results as $country) {
+			if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
+				$table_countries[$country->country_tid] = $country->country_name;
+			}
+		}
+
+		foreach ($results as $country) {
+			if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid)) {
 				$table_countries[$country->country_tid] = $country->country_name;
 			}
 		}
@@ -84,7 +93,7 @@ class MapRegionsCountriesForm extends FormBase {
 		$query->condition('n.status', 1, '=');
 		$query->addField('t', 'tid', 'region_tid');
 		$query->addField('t', 'name', 'region_name');
-    $query->addField('t', 'langcode', 'region_langcode');
+		$query->addField('t', 'langcode', 'region_langcode');
 		$query->orderBy('t.name');
 		$results =	$query->execute()->fetchAll();
 
@@ -92,13 +101,13 @@ class MapRegionsCountriesForm extends FormBase {
 		$table_regions['all'] = $this->t('Region');
 
 
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    foreach ($results as $region){
+		foreach ($results as $region){
 			if(!array_key_exists($region->region_tid, $table_regions)
-            && !empty($region->region_tid)
-            && $region->region_langcode == $current_language ){
-			  $table_regions[$region->region_tid] = $region->region_name;
+				&& !empty($region->region_tid)
+				&& $region->region_langcode == $current_language ){
+				$table_regions[$region->region_tid] = $region->region_name;
 			}
 		}
 		return $table_regions;

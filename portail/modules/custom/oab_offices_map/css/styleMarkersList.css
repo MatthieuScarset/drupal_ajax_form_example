@@ -42,6 +42,9 @@ li.office-address .views-field-field-phone-number{
     color: #777777;
 }
 
+li.office-address .views-field-field-city{
+    padding-left: 5px;
+}
 
 li.office-address .contact a,
 li.office-address .link_region_content a{

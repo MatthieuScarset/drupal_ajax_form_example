@@ -41,7 +41,7 @@ class OabOfficesMapPageController extends ControllerBase {
 			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
-			|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
+				|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
 			{
 				// si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
 				$query = \Drupal::entityQuery('taxonomy_term');
@@ -95,7 +95,9 @@ class OabOfficesMapPageController extends ControllerBase {
 						),
 						'drupalSettings' => array(
 							'countriesRegionsTab' => $this->getArrayRegionsCountries(),
-							'allCountriesArray' => $this->getCountries(),
+							'allCountriesArray' => $this->getCountriesForJS(),
+							'selectedCountryParameter' => $country_id,
+							'selectedRegionParameter' => $region_id,
 						),
 					),
 				);
@@ -104,6 +106,8 @@ class OabOfficesMapPageController extends ControllerBase {
 	}
 
 	private function getArrayRegionsCountries(){
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
 		$query = Database::getConnection()->select('node_field_data', 'n');
 		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
 		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
@@ -116,6 +120,7 @@ class OabOfficesMapPageController extends ControllerBase {
 		$query->addField('t', 'name', 'region_name');
 		$query->addField('oc', 'tid', 'country_tid');
 		$query->addField('oc', 'name', 'country_name');
+		$query->addField('oc', 'langcode', 'country_langcode');
 		$query->addField('occ', 'field_country_code_value', 'country_code');
 		$results =	$query->execute()->fetchAll();
 		//tableau [pays id] => region id
@@ -128,7 +133,7 @@ class OabOfficesMapPageController extends ControllerBase {
 	}
 
 
-	private function getCountries(){
+	private function getCountriesForJS(){
 		$keys = array();
 		$query = Database::getConnection()->select('node_field_data', 'n');
 		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
@@ -137,11 +142,20 @@ class OabOfficesMapPageController extends ControllerBase {
 		$query->condition('n.status', 1, '=');
 		$query->addField('oc', 'tid', 'country_tid');
 		$query->addField('oc', 'name', 'country_name');
+		$query->addField('oc', 'langcode', 'country_langcode');
 		$query->orderBy('oc.name');
 		$results =	$query->execute()->fetchAll();
 
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 		$table_countries = array();
 		$table_countries['all'] = $this->t('Country');
+		foreach ($results as $country){
+			if(!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language){
+				$keys[] = $country->country_tid;
+				$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
+			}
+		}
+		//pour ceux qui n'ont pas de traduction, on prend le libellé sans restriction de langue
 		foreach ($results as $country){
 			if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
 				$keys[] = $country->country_tid;
