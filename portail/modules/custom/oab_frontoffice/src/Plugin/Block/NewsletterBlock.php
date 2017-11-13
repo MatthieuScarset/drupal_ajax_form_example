@@ -24,7 +24,6 @@ class NewsletterBlock extends BlockBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\oab_frontoffice\Form\NewsletterForm');
 
     return array(
-      'type' => 'markup',
       '#markup' => render($form),
       '#attached' => array(
       ),

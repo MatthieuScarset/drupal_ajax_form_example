@@ -36,7 +36,7 @@
       {% set link_icon = item.url.options.icon %}
       {% if menu_level == 0 and item.is_expanded %}
         <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
-        <a href="{{ item.url }}" class="dropdown-toggle" data-target="#" data-toggle="dropdown" target="{{ link_target }}"><i class="{{ link_icon }} link_icon"></i> {{ item.title }} <span class="caret"></span></a>
+        <a href="{{ item.url }}" class="dropdown-toggle" data-toggle="dropdown" target="{{ link_target }}"><i class="{{ link_icon }} link_icon"></i> {{ item.title }} <span class="caret"></span></a>
       {% else %}
         <li {{ item.attributes }} class="link_icon_items"> <i class="{{ link_icon }} link_icon"></i> {{ link( item.title, item.url, {'target': link_target}) }}
       {% endif %}

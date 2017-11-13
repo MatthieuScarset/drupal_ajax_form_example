@@ -43,11 +43,11 @@ class TopZoneBlock extends BlockBase {
     if ($node->hasField('field_top_zone_background')) {
       $top_zone_background = $node->get('field_top_zone_background')->getValue();
     }
-    $block['type'] = 'processed_text';
+    $block['#type'] = 'processed_text';
     $block['#markup'] = '';
     $content = '';
     if(isset($top_zone[0]['value'])){
-      $content = check_markup($top_zone[0]['value'], 'full_html', '', FALSE);
+      $content = check_markup($top_zone[0]['value'], 'full_html', '', []);
     }
     if(isset($top_zone_background[0]['target_id'])){
       $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
@@ -63,7 +63,7 @@ class TopZoneBlock extends BlockBase {
 				$url = ImageStyle::load($img_style)->buildUrl($uri);
 				$url = file_url_transform_relative($url);
 			}
-      $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', FALSE);
+      $content = check_markup('<div id="topzonebg" style="background:url('.$url.') top center no-repeat">'.$content.'</div>', 'full_html', '', []);
     }
     $block['#markup'] = $content;
     return $block;

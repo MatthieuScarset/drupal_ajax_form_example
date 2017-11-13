@@ -23,7 +23,6 @@ class SocialShareBlock extends BlockBase {
         $config = $this->getConfiguration();
         $social_share_custom_text = isset($config['social_share_custom_text']) ? $config['social_share_custom_text'] : '';
         return array(
-            'type' => 'markup',
             '#markup' => check_markup($social_share_custom_text['value'], $social_share_custom_text['format']),
             '#attached' => array(
                 'library' =>  array(

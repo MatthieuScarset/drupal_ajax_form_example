@@ -52,3 +52,11 @@ oab.pardot:
     iframe_url:
       type: label
       label: 'Iframe url'
+
+action.configuration.oab_backoffice_node_workbench_publish:
+  type: action_configuration_default
+  label: 'Node workbench publish'
+
+action.configuration.oab_backoffice_node_workbench_unpublish:
+  type: action_configuration_default
+  label: 'Node workbench unpublish'

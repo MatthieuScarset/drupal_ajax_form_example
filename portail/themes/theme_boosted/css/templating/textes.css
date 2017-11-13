@@ -690,6 +690,15 @@ p.contenu {
 .pourquoi .col div.ligne p:last-child{
     margin-bottom: 0;
 }
+.pourquoi .col div.ligne img,
+.pourquoi .col div.ligne p > img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
+.pourquoi .col div.ligne .small-image{
+    width: auto !important;
+}
 
 
 @media (max-width: 767px) {

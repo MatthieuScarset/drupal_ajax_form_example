@@ -1670,3 +1670,77 @@ html.ua-mobile-ipad .three_columns .col-md-4{
 html.ua-mobile-ipad .four_columns .col-md-3{
     width: 24.8%;
 }
+
+
+/* partie xmlsitemap dans la page de replicate */
+.replicate-form #edit-xmlsitemap{
+    display: none !important;
+}
+
+
+.webform-dl-document {
+    /*background-color: #F5F5F5;*/
+    padding: 20px;
+}
+
+.webform-dl-document .webform-dl-document-container {
+    /*margin-top: 15px;*/
+}
+
+.webform-dl-document .webform-dl-document-element {
+
+}
+
+.webform-dl-document .webform-element--title-inline label::after {
+    content: '';
+}
+
+.webform-dl-document .webform-element--title-inline label {
+    padding-right: 0;
+}
+.webform-dl-document .webform-dl-document-form-element {
+    margin-top: 15px;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.webform-dl-document .container:not(.webform-dl-document-form-element) {
+    padding-top: 20px;
+}
+
+.webform-dl-document .webform-dl-document-form-element .webform-dl-document-container {
+    padding-top: 5px;
+}
+
+.webform-dl-document .webform-dl-document-element.form-checkbox.form-control {
+
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+
+.webform-dl-document .webform-dl-document-element.form-checkbox {
+    /*margin-top: 15px;*/
+}
+
+.webform-dl-document label {
+    display: inline;
+}
+
+.webform-dl-document #edit-submit-button-s- {
+    text-align: right;
+    margin-top: 20px;
+
+}
+
+.webform-dl-document-mentionsLegales {
+    font-size: 8px;
+}
+
+.embedded-entity.align-left{
+    margin-right: 10px;
+}
+.embedded-entity.align-right{
+    margin-left: 10px;
+}
