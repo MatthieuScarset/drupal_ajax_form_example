@@ -12,17 +12,34 @@ use Drupal\image\Entity\ImageStyle;
 use \Drupal\file\Entity\File;
 
 function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    $user = \Drupal::currentUser();
+    $userId = $user->id();
+
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $languages = \Drupal::languageManager()->getLanguages();
   $current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
   $edit_form = FALSE;
+
+  //R-3177 suppression des formats systeme pour les non admin
+  if($form_id=="entity_embed_dialog"){
+     if($userId <> 1) {
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["document_visual_image"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["file_entity_browser_thumbnail"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["homepage_expertise"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["homepage_news"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["homepage_solution_banner"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["homepage_top_zone"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["linkit_result_thumbnail"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["max_1300x1300"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["max_2600x2600"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["playlist"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["related_contents"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["subhome"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["top_zone"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["top_zone_big"]);
+        unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["valorisation"]);
+     }
+  }
 }
 
-/*
-    foreach($form as $key=>$value){
-        oabt($key);
-    }
-
-    oabt("fin");
-*/
