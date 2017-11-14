@@ -415,7 +415,7 @@ function oab_tristan_update_8053() {
  * Création du formulaire pour dl les fichiers FR
  */
 function oab_tristan_update_8054() {
-  #include_once("updates/update_8054.inc");
+  include_once("updates/update_8054.inc");
 }
 
 /**
