@@ -1,5 +1,5 @@
 CKEDITOR.editorConfig = function(config) {
-    CKEDITOR.config.extraPlugins = 'layoutmanager, fontawesome, templating, embed, embedbase, notificationaggregator, notification, toolbar, button, solaris, panel, panelbutton, colorbutton, font, lineheight';
+    CKEDITOR.config.extraPlugins = 'layoutmanager, fontawesome, templating, embed, embedbase, notificationaggregator, notification, toolbar, button, solaris, panel, panelbutton, colorbutton, font, lineheight, offices_map';
 
     config.templates_files = [
         drupalSettings.path.baseUrl + 'modules/custom/oab_ckeditor/js/custom_templates.js'
@@ -13,6 +13,6 @@ CKEDITOR.editorConfig = function(config) {
     delete CKEDITOR.config.coreStyles_italic;
 
     CKEDITOR.config.embed_provider = '//iframe.ly/api/oembed?url={url}&callback={callback}&api_key=999d16e5ad074182bbe882';
-    CKEDITOR.config.removePlugins = 'offices_map';
+
     /*CKEDITOR.config.removePlugins = 'drupallink';*/
 };

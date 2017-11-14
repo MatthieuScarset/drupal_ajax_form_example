@@ -91,8 +91,31 @@ class OfficesMapFilter extends FilterBase {
 			$officesMapView->preExecute();
 			$officesMapView->execute();
 			$mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
+
+			$officesMapView = Views::getView('offices_map_view');
+			$officesMapView->setDisplay('offices_addresses_list_block');
+			$officesMapView->args = array($region_id, $country_id);
+			$officesMapView->preExecute();
+			$officesMapView->execute();
+			$officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
 		}
-		$newText = render($regionsCountriesForm).render($mapBlock);// "++++ chaine remplacée";
+		$newText = '<div class="officeMapBlock">'.
+			'<div class="region region-content col-md-12 col-sm-12" >'.
+									'<div class="form_filter_regions_countries col col-md-12 col-sm-12">'.
+											render($regionsCountriesForm).
+            			'</div>'.
+            			'<div class="block_principal_offices_map col-lg-12 col-md-12 col-sm-12">'.
+               			' <div class="block_carte col-lg-9 col-md-8 col-sm-12">'.
+												render($mapBlock).
+                		'</div>'.
+                		'<div class="col-lg-3 col-md-4 col-sm-12 addresses-list">'.
+                    	'<div class="col-lg-12 col-md-12 col-sm-12 labelList">'.'label'.'</div>'.
+                  		 ' <div class="col-lg-12 col-md-12 col-sm-12 list">'.
+													 render($officesListBlock).'</div>'.
+               				' </div>'.
+           					' </div>'.
+           					' </div>'.
+										'</div>';
 
 		return $newText;
 	}

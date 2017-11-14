@@ -5,37 +5,34 @@ use Drupal\editor\Entity\Editor;
 /**
  * Implements hook_editor_js_settings_alter(array &$settings)
  */
-function oab_ckeditor_editor_js_settings_alter(array &$settings)
-{
-    $settings['editor']['formats']['full_html']['editorSettings']['customConfig']                        = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
-    $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
-
-    $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
-}
-
-/**
- * Implements hook_ckeditor_plugin_info_alter(array &$plugins)
- */
-function oab_ckeditor_ckeditor_plugin_info_alter(array &$plugins)
-{
+function oab_ckeditor_editor_js_settings_alter(array &$settings) {
+	$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
 	$current_path = \Drupal::service('path.current')->getPath();
 	$args = explode('/', $current_path);
 	if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
 		if ($args['2'] == "add") {
-			$nodetype = $args['3'] ;
-		} else {
+			$nodetype = $args['3'];
+		}
+		else {
 			if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
 				$nodetype = $noeud->getType();
 			}
 		}
 		if (isset($nodetype) && !empty($nodetype)) {
-			if(!in_array($nodetype, array('region', 'country'))){
-				oabt($plugins['offices_map'], true);
-				//unset($plugins['offices_map'] );
+			if ($nodetype == 'region') {
+				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
+			}
+			elseif ($nodetype == 'country') {
+				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
 			}
 		}
+		$settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
+		$settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+
+		$settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
 	}
 }
+
 
 /**
  * Implements hook_page_attachments(array &$page)
