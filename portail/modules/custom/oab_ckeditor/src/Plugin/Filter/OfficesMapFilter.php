@@ -47,8 +47,30 @@ class OfficesMapFilter extends FilterBase {
 				$text = str_replace($searchResults[0], $newChaine, $text);
 			}
 		}
+
+		//on regarde s'il y a des paramètres dans l'url
+		$region_id = "";
+		$country_id = "";
+		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+		if(!empty($parameters) && isset($parameters['region'])){
+			$region_id = $parameters['region'];
+		}
+		if(!empty($parameters) && isset($parameters['country'])){
+			$country_id = $parameters['country'];
+		}
+
 		$result = new FilterProcessResult($text);
-		$result->addAttachments( array( 'library' => ['oab_offices_map/oab_offices_map.markers']));
+		$result->addAttachments(
+			array(
+				'library' => ['oab_offices_map/oab_offices_map.markers'],
+				'drupalSettings' => array(
+					'countriesRegionsTab' => getArrayRegionsCountries(),
+					'allCountriesArray' => getCountriesForJS(),
+					'selectedCountryParameter' => $country_id,
+					'selectedRegionParameter' => $region_id,
+				),
+				)
+		);
 		return $result;
 	}
 
@@ -109,7 +131,6 @@ class OfficesMapFilter extends FilterBase {
 												render($mapBlock).
                 		'</div>'.
                 		'<div class="col-lg-3 col-md-4 col-sm-12 addresses-list">'.
-                    	'<div class="col-lg-12 col-md-12 col-sm-12 labelList">'.'label'.'</div>'.
                   		 ' <div class="col-lg-12 col-md-12 col-sm-12 list">'.
 													 render($officesListBlock).'</div>'.
                				' </div>'.

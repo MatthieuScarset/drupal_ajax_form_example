@@ -37,8 +37,8 @@ class MapRegionsCountriesForm extends FormBase {
 			$selectedCountry = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 		}
 
-		$regions = $this->getRegions();
-		$countries = $this->getCountries();
+		$regions = getRegions();
+		$countries = getCountries();
 		$form['region'] = [
 			'#multiple_toggle' => '1',
 			'#type' => 'select',
@@ -59,56 +59,6 @@ class MapRegionsCountriesForm extends FormBase {
 			'#name' => $this->t('Apply'),
 		];
 		return $form;
-	}
-
-
-	private function getCountries(){
-		$query = Database::getConnection()->select('node_field_data', 'n');
-		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-		$query->condition('n.type', 'office', '=');
-		$query->condition('n.status', 1, '=');
-		$query->addField('oc', 'tid', 'country_tid');
-		$query->addField('oc', 'name', 'country_name');
-		$query->orderBy('oc.name');
-		$results =	$query->execute()->fetchAll();
-
-		$table_countries = array();
-		$table_countries['all'] = $this->t('Country');
-		foreach ($results as $country){
-			if(!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid)){
-				$table_countries[$country->country_tid] = $country->country_name;
-			}
-		}
-		return $table_countries;
-	}
-
-	private function getRegions(){
-		$query = Database::getConnection()->select('node_field_data', 'n');
-		$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
-		$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
-		$query->condition('n.type', 'office', '=');
-		$query->condition('n.status', 1, '=');
-		$query->addField('t', 'tid', 'region_tid');
-		$query->addField('t', 'name', 'region_name');
-    $query->addField('t', 'langcode', 'region_langcode');
-		$query->orderBy('t.name');
-		$results =	$query->execute()->fetchAll();
-
-		$table_regions = array();
-		$table_regions['all'] = $this->t('Region');
-
-
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-    foreach ($results as $region){
-			if(!array_key_exists($region->region_tid, $table_regions)
-            && !empty($region->region_tid)
-            && $region->region_langcode == $current_language ){
-			  $table_regions[$region->region_tid] = $region->region_name;
-			}
-		}
-		return $table_regions;
 	}
 
 	/**

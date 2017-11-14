@@ -94,8 +94,8 @@ class OabOfficesMapPageController extends ControllerBase {
 							'oab_offices_map/oab_offices_map.markers'
 						),
 						'drupalSettings' => array(
-							'countriesRegionsTab' => $this->getArrayRegionsCountries(),
-							'allCountriesArray' => $this->getCountries(),
+							'countriesRegionsTab' => getArrayRegionsCountries(),
+							'allCountriesArray' => getCountriesForJS(),
 						),
 					),
 				);
