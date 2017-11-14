@@ -860,7 +860,7 @@ function getCountriesForJS(){
 
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 	$table_countries = array();
-	$table_countries['all'] = $this->t('Country');
+	$table_countries['all'] = t('Country');
 	foreach ($results as $country){
 		if(!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language){
 			$keys[] = $country->country_tid;
@@ -926,7 +926,7 @@ function getCountries() {
 
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 	$table_countries = array();
-	$table_countries['all'] = $this->t('Country');
+	$table_countries['all'] = t('Country');
 
 	foreach ($results as $country) {
 		if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
@@ -959,7 +959,7 @@ function getRegions(){
 	$results =	$query->execute()->fetchAll();
 
 	$table_regions = array();
-	$table_regions['all'] = $this->t('Region');
+	$table_regions['all'] = t('Region');
 
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
