@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 name: valorisation
-label: Valorisation
+label: 'Valorisation (310x150)'
 effects:
   61b55c8f-22ce-48b5-bd50-597e0bd366ab:
     uuid: 61b55c8f-22ce-48b5-bd50-597e0bd366ab

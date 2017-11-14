@@ -116,12 +116,12 @@ view_mode ? view_mode|clean_class,
 
 
 
-    <div{{ content_attributes.addClass('content', 'div-display-table') }}>
-        <div class="document_field_image div-display-cell">
+    <div{{ content_attributes.addClass('content', 'div-display-table', 'row') }}>
+        <div class="document_field_image div-display-cell col-md-3 col-xs-12">
             {{ content.field_visual }}
         </div>
 
-        <div class="div-display-table-cell">
+        <div class="div-display-table-cell col-md-9 col-xs-12">
             {{ content|without('theme_term', 'field_image', 'field_document_type',
             'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
             'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
