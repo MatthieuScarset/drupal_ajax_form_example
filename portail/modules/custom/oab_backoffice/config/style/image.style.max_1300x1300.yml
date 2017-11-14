@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: max_1300x1300
+label: 'Max 1300x1300'
+effects:
+  fd45fad8-a8c5-46bf-a63f-9c79b222e12c:
+    uuid: fd45fad8-a8c5-46bf-a63f-9c79b222e12c
+    id: image_scale
+    weight: 1
+    data:
+      width: 1300
+      height: 1300
+      upscale: false

@@ -1,0 +1,14 @@
+langcode: fr
+status: true
+dependencies: {  }
+name: logo_partner
+label: 'logo partner (105x105)'
+effects:
+  ef2077bb-4168-4d8a-9786-b3e69fc7be3c:
+    uuid: ef2077bb-4168-4d8a-9786-b3e69fc7be3c
+    id: image_scale
+    weight: 1
+    data:
+      width: 105
+      height: 105
+      upscale: false
