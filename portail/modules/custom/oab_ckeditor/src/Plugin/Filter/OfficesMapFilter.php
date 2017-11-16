@@ -23,8 +23,28 @@ use Drupal\views\Views;
 class OfficesMapFilter extends FilterBase {
 
 	private $pattern = '/\|\|.*?\|\|/s';
+	private $region_id = "";
+	private $country_id = "";
+	private $boolParamsUrl = false;
 
-	public function process($text, $langcode) {
+	public function process($text, $langcode){
+		//on regarde d'abord s'il y a des paramètres dans l'url
+		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
+		if(!empty($parameters) && isset($parameters['region'])){
+			$this->boolParamsUrl = true;
+			$this->region_id = $parameters['region'];
+		}
+		else{
+			$this->region_id = 'all';
+		}
+		if(!empty($parameters) && isset($parameters['country'])){
+			$this->country_id = $parameters['country'];
+			$this->boolParamsUrl = true;
+		}
+		else{
+			$this->country_id = 'all';
+		}
+
 		//Pattern de recherche pour une MAP dans un WYSIWYG
 		$searchResults = array();
 		$error = false;
@@ -48,17 +68,6 @@ class OfficesMapFilter extends FilterBase {
 			}
 		}
 
-		//on regarde s'il y a des paramètres dans l'url
-		$region_id = "";
-		$country_id = "";
-		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-		if(!empty($parameters) && isset($parameters['region'])){
-			$region_id = $parameters['region'];
-		}
-		if(!empty($parameters) && isset($parameters['country'])){
-			$country_id = $parameters['country'];
-		}
-
 		$result = new FilterProcessResult($text);
 		$result->addAttachments(
 			array(
@@ -66,8 +75,8 @@ class OfficesMapFilter extends FilterBase {
 				'drupalSettings' => array(
 					'countriesRegionsTab' => getArrayRegionsCountries(),
 					'allCountriesArray' => getCountriesForJS(),
-					'selectedCountryParameter' => $country_id,
-					'selectedRegionParameter' => $region_id,
+					'selectedCountryParameter' => $this->country_id,
+					'selectedRegionParameter' => $this->region_id,
 				),
 				)
 		);
@@ -76,33 +85,21 @@ class OfficesMapFilter extends FilterBase {
 
 	function render_offices_map_block($chaineARemplacer) {
 		$newText = "";
-		$region_id = "";
-		$country_id = "";
 		$chaine_json = str_replace("||", "", $chaineARemplacer);
 		$tag_info = json_decode($chaine_json);
 
 		if(isset($tag_info->block_id) && $tag_info->block_id == "offices_map_block"){
 
 			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-			if(!empty($parameters) && isset($parameters['region'])){
-				$region_id = $parameters['region'];
-			}elseif (!empty($tag_info->region_id)){
-				$region_id = $tag_info->region_id;
-			}
-			else{
-				$region_id = 'all';
+			if(!$this->boolParamsUrl && !empty($tag_info->region_id)){
+				$this->region_id = $tag_info->region_id;
 			}
 
-			if(!empty($parameters) && isset($parameters['country'])){
-				$country_id = $parameters['country'];
-			}elseif (!empty($tag_info->country_id)){
-				$country_id = $tag_info->country_id;
-			}
-			else{
-				$country_id = 'all';
+			if(!$this->boolParamsUrl && !empty($tag_info->country_id)){
+				$this->country_id = $tag_info->country_id;
 			}
 			$regionsCountriesForm = \Drupal::formBuilder()
-				->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm', array('region_id' => $region_id, 'country_id' => $country_id));
+				->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm', array('region_id' => $this->region_id, 'country_id' => $this->country_id));
 
 
 

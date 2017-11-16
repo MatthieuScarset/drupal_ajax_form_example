@@ -191,12 +191,12 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
 
         // regions et pays pour le plugin offices_map
 				$attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
-				$attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegions();
-				$attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountries();
+				$attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
+				$attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
     }
 }
 
- function getAllCountries(){
+ function getAllCountriesForJSOptions(){
 	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
 	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
@@ -216,7 +216,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
 	return $table_countries;
 }
 
- function getAllRegions(){
+ function getAllRegionsForJSOptions(){
 	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
 	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
