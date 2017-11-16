@@ -1238,6 +1238,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #FFFFFF;
 }
 
+.rebond-wysiwyg article{
+    background-color: #DDDDDD;
+}
+
 .rebond h4 {
     line-height: 2rem;
 }

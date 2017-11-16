@@ -26,7 +26,6 @@ use Drupal\node\Entity\Node;
 class ZoneRebondWysiwygBlock extends BlockBase {
 
   public function build(){
-    $content = "";
     $block = array();
     // récupération du contexte
     $node_ctxt = $this->getContextValue('node');
@@ -36,16 +35,13 @@ class ZoneRebondWysiwygBlock extends BlockBase {
     // chargement du noeud et du field Wysiwyg
     $node = Node::load($nid);
     if ($node->hasField('field_wysiwyg_rebond')) {
-      $related_content = $node->get('field_wysiwyg_rebond');
-      #$related_content = $node->get('field_wysiwyg_rebond');
-      #$content .= render($related_content);
-     # kint(gettype($related_content));
-      #kint($related_content[0]->getValue()); die();
-      $b = $related_content[0]->getValue();
-      $block["#markup"] = $b['value'];
+      $field_data = $node->get('field_wysiwyg_rebond');
+      if (isset($field_data[0])) {
+        $field_value= $field_data[0]->getValue();
+        $block["#markup"] = $field_value['value'];
+      }
     }
 
-    #$block = $content;
     return $block;
   }
 
