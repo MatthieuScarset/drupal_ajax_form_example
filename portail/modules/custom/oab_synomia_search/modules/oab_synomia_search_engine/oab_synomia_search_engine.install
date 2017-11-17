@@ -17,3 +17,11 @@ function oab_synomia_search_engine_update_8001() {
 function oab_synomia_search_engine_update_8002() {
 	include_once("updates/update_8002.inc");
 }
+
+
+/**
+ * Initialisation de l'ordre d'affichage des types de contenus
+ */
+function oab_synomia_search_engine_update_8004() {
+	include_once("updates/update_8004.inc");
+}

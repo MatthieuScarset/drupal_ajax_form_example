@@ -90,6 +90,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
 				}
 
 				//kint($response->facets);
+				$response->facets = $this->orderFacetsArray($response->facets);
+				$response->results = $this->orderResultsArray($response->results);
 
 				$render_array[] = array(
 					'#searchForm' => $searchForm,
@@ -241,5 +243,62 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		else{
 			return null;
 		}
+	}
+
+	/** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
+	 * @param $oldFacetsArray
+	 * @return array
+	 */
+	private function orderFacetsArray($oldFacetsArray){
+  	$newFacetsArrayOrdered = array();
+		$contentTypes = $this->getOrderContentTypesArray();
+		if(!empty($contentTypes))
+		{
+			foreach ($contentTypes as $contentType )
+			{
+				$newFacetsArrayOrdered[$contentType] = $oldFacetsArray[$contentType];
+				unset($oldFacetsArray[$contentType]);
+			}
+			return array_merge($newFacetsArrayOrdered, $oldFacetsArray);
+		}
+		return $oldFacetsArray;
+	}
+
+	/** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
+	 * @param $oldFacetsArray
+	 * @return array
+	 */
+	private function orderResultsArray($oldResultsArray){
+  	$newResultsArrayOrdered = array();
+		$contentTypes = $this->getOrderContentTypesArray();
+		if(!empty($contentTypes))
+		{
+			foreach ($contentTypes as $contentType )
+			{
+				$newResultsArrayOrdered[$contentType] = $oldResultsArray[$contentType];
+				unset($oldResultsArray[$contentType]);
+			}
+			return array_merge($newResultsArrayOrdered, $oldResultsArray);
+		}
+		return $oldResultsArray;
+	}
+
+	private function getOrderContentTypesArray(){
+		$contentTypes = array();
+		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+		//on récupère le nb de résultats par page
+		$config_factory = \Drupal::configFactory();
+		$config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
+		if(!empty($config) && !empty($config->get('order_content_types_'.$current_language)))
+		{
+			$orderString = $config->get('order_content_types_'.$current_language);
+			if(!empty($orderString)) {
+				$tmpContentTypes = explode(',', $orderString);
+				foreach ($tmpContentTypes as $tmp){
+					$contentTypes[] = trim($tmp);
+				}
+			}
+		}
+		return $contentTypes;
 	}
 }

@@ -33,6 +33,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
 		$config = $this->config($this->getConfigName());
 		$languages = \Drupal::languageManager()->getLanguages();
+		//urls synomia selon les langue pour l'appel du flux de recherche
 		foreach ($languages as $language)
 		{
 			$form['url_synomia_'.$language->getId()] = array(
@@ -40,11 +41,23 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 				'#title' => 'URL Synomia for '.$language->getName(),
 				'#default_value' => \Drupal::state()->get('url_synomia_'.$language->getId()),
 			);
-		}$form['nb_results_per_page'.$language->getId()] = array(
+		}
+		//nombre de résultats par page
+		$form['nb_results_per_page'.$language->getId()] = array(
 			'#type' => 'textfield',
 			'#title' => 'Number of results per page (default : 10)',
 			'#default_value' => $config->get('nb_results_per_page'),
 		);
+		//ordre des tyoes de contenus
+		foreach ($languages as $language)
+		{
+			$form['order_content_types_'.$language->getId()] = array(
+				'#type' => 'textfield',
+				'#size' => '200',
+				'#title' => 'Content types order for '.$language->getName(),
+				'#default_value' => $config->get('order_content_types_'.$language->getId()),
+			);
+		}
     return parent::buildForm($form, $form_state);
   }
 
@@ -57,6 +70,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 		$languages = \Drupal::languageManager()->getLanguages();
 		foreach ($languages as $language){
 			\Drupal::state()->set('url_synomia_'.$language->getId(), $form_state->getValue('url_synomia_'.$language->getId()));
+			$config->set('order_content_types_'.$language->getId(), $form_state->getValue('order_content_types_'.$language->getId()));
 		}
 		$config->set('nb_results_per_page', $form_state->getValue('nb_results_per_page'));
 		$config->save();
