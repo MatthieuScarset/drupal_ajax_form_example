@@ -106,14 +106,14 @@ class OfficesMapFilter extends FilterBase {
 			//on doit remplacer la chaine par le rendu du block
 			$officesMapView = Views::getView('offices_map_view');
 			$officesMapView->setDisplay('offices_map_block');
-			$officesMapView->args = array($region_id, $country_id);
+			$officesMapView->args = array( $this->region_id,  $this->country_id);
 			$officesMapView->preExecute();
 			$officesMapView->execute();
 			$mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
 
 			$officesMapView = Views::getView('offices_map_view');
 			$officesMapView->setDisplay('offices_addresses_list_block');
-			$officesMapView->args = array($region_id, $country_id);
+			$officesMapView->args = array( $this->region_id,  $this->country_id);
 			$officesMapView->preExecute();
 			$officesMapView->execute();
 			$officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
