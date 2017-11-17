@@ -43,12 +43,11 @@ foreach ($contentTypes as $contentType) {
 }
 
 ##Mise en place du field dans les différents contenus
-$fieldName = "";
 foreach ($contentTypes as $contentType) {
-  $fieldName = "field.field.node.$contentType.field_wysiwyg_rebond.yml";
-  oabt_YmlImport($fieldName);
+  oabt_YmlImport("field.field.node.$contentType.field_wysiwyg_rebond.yml");
+  oabt_YmlImport("core.entity_view_display.node.$contentType.default.yml");
+  oabt_YmlImport("core.entity_form_display.node.$contentType.default.yml");
 }
-
 
 #Mise en place du bloc
 oabt_YmlImport("block.block.zonerebondwysiwyg.yml");
