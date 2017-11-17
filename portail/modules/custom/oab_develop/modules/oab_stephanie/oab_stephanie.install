@@ -366,3 +366,11 @@ function oab_stephanie_update_8045() {
 function oab_stephanie_update_8046() {
 	include_once("updates/update_8046.inc");
 }
+
+/**
+ * Activation traduction des Offices + passage de tous les office en EN
+ */
+
+function oab_stephanie_update_8047() {
+	include_once("updates/update_8047.inc");
+}
