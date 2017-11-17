@@ -123,3 +123,15 @@ foreach($termsCountries as $termObj) {
 		}
 	}
 }
+
+
+$role = \Drupal\user\Entity\Role::load('digital_admin');
+if(!empty($role)) {
+	//affectation de la permission
+	$permissions = $role->getPermissions();
+	if (!in_array('translate office node', $permissions)) {
+		$role->grantPermission('translate office node');
+		$role->save();
+		drupal_set_message("Permission affectée (translate office node) au role digital_admin", 'status');
+	}
+}
