@@ -1749,3 +1749,8 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     width:100%;
     height:auto;
 }
+
+.path-content-search .pager-nav .pagination .pager__item--previous a,
+.path-content-search .pager-nav .pagination .pager__item--next a{
+    width:auto;
+}
