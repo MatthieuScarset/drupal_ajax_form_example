@@ -1744,3 +1744,8 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .embedded-entity.align-right{
     margin-left: 10px;
 }
+
+.page-node-type-document .document_field_image img{
+    width:100%;
+    height:auto;
+}
