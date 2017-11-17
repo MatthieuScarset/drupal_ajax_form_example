@@ -32,3 +32,14 @@ oabt_YmlImport('image.style.top_zone.yml');
 oabt_YmlImport('image.style.top_zone_big.yml');
 oabt_YmlImport('image.style.valorisation.yml');
 
+$connection = \Drupal\Core\Database\Database::getConnection();
+$query_create = $connection->insert('config')
+    ->fields(array(
+        'collection' => 'language.fr',
+        'name' => 'image.style.blogger_insert',
+        'data' => serialize(array (
+            'label' => 'Encart bloggeur (170x170)',
+        ))
+    ))
+    ->execute();
+
