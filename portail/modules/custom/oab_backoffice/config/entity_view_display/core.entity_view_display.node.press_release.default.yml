@@ -2,50 +2,44 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.customer_story.field_content
-    - field.field.node.customer_story.field_content_owner
-    - field.field.node.customer_story.field_country
-    - field.field.node.customer_story.field_display_title
-    - field.field.node.customer_story.field_email_owner
-    - field.field.node.customer_story.field_end_date
-    - field.field.node.customer_story.field_file
-    - field.field.node.customer_story.field_highlight
-    - field.field.node.customer_story.field_industry
-    - field.field.node.customer_story.field_insight
-    - field.field.node.customer_story.field_job_profile
-    - field.field.node.customer_story.field_market_segment
-    - field.field.node.customer_story.field_meta_description
-    - field.field.node.customer_story.field_meta_title
-    - field.field.node.customer_story.field_metatags
-    - field.field.node.customer_story.field_page_du_site_1
-    - field.field.node.customer_story.field_page_du_site_2
-    - field.field.node.customer_story.field_rebond_document
-    - field.field.node.customer_story.field_region
-    - field.field.node.customer_story.field_solution
-    - field.field.node.customer_story.field_start_date
-    - field.field.node.customer_story.field_subhome
-    - field.field.node.customer_story.field_thematic
-    - field.field.node.customer_story.field_visual
-    - field.field.node.customer_story.field_wysiwyg_rebond
-    - node.type.customer_story
+    - field.field.node.press_release.field_city
+    - field.field.node.press_release.field_content
+    - field.field.node.press_release.field_content_owner
+    - field.field.node.press_release.field_country
+    - field.field.node.press_release.field_display_title
+    - field.field.node.press_release.field_email_owner
+    - field.field.node.press_release.field_end_date
+    - field.field.node.press_release.field_file
+    - field.field.node.press_release.field_highlight
+    - field.field.node.press_release.field_industry
+    - field.field.node.press_release.field_job_profile
+    - field.field.node.press_release.field_market_segment
+    - field.field.node.press_release.field_meta_description
+    - field.field.node.press_release.field_meta_title
+    - field.field.node.press_release.field_metatags
+    - field.field.node.press_release.field_page_du_site_1
+    - field.field.node.press_release.field_page_du_site_2
+    - field.field.node.press_release.field_press_type
+    - field.field.node.press_release.field_rebond_document
+    - field.field.node.press_release.field_region
+    - field.field.node.press_release.field_solution
+    - field.field.node.press_release.field_start_date
+    - field.field.node.press_release.field_subhome
+    - field.field.node.press_release.field_thematic
+    - field.field.node.press_release.field_visual
+    - field.field.node.press_release.field_wysiwyg_rebond
+    - node.type.press_release
   module:
     - datetime
     - metatag
     - text
     - user
-id: node.customer_story.default
+id: node.press_release.default
 targetEntityType: node
-bundle: customer_story
+bundle: press_release
 mode: default
 content:
-  field_content:
-    weight: 4
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: content
-  field_country:
+  field_city:
     weight: 10
     label: hidden
     settings:
@@ -53,8 +47,23 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_content:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_country:
+    weight: 11
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_end_date:
-    weight: 9
+    weight: 2
     label: hidden
     settings:
       format_type: medium
@@ -63,7 +72,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 3
+    weight: 7
     label: hidden
     settings:
       link: true
@@ -72,22 +81,14 @@ content:
     type: entity_reference_entity_view
     region: content
   field_highlight:
-    weight: 2
+    weight: 5
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_industry:
-    weight: 6
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_insight:
-    weight: 11
+    weight: 9
     label: hidden
     settings:
       link: true
@@ -95,14 +96,22 @@ content:
     type: entity_reference_label
     region: content
   field_metatags:
-    weight: 7
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
     region: content
+  field_press_type:
+    weight: 12
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_solution:
-    weight: 5
+    weight: 8
     label: hidden
     settings:
       link: true
@@ -110,7 +119,7 @@ content:
     type: entity_reference_label
     region: content
   field_start_date:
-    weight: 8
+    weight: 3
     label: hidden
     settings:
       format_type: medium
