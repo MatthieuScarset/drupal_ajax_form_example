@@ -580,10 +580,10 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
 function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
 
     if ($view->id() == 'content') {
-        foreach ($view->result as $i => $result) {
+      foreach ($view->result as $i => $result) {
             # On recupère les données nécessaires
-            $node_type = $result->_entity->get('type')->entity->label();
-            if($node_type == 'Product'){
+           $node_type = $result->_entity->get('type')->entity->id();
+            if($node_type == 'product'){
                 $node_label =  $result->_entity->getTitle();
                 $node_axiome_data =  $result->_entity->get('field_axiome_data')->getValue();
                 if(isset($node_axiome_data[0]['value'])){
@@ -595,25 +595,32 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
                     }
                 }
                 // on ajoute l état de la dernière révision et la date d'update
-                $node = Node::load($result->_entity->id());
+                /*$node = Node::load($result->_entity->id());
                 $vids = \Drupal::entityManager()->getStorage('node')->revisionIds($node);
                 $vids =array_reverse($vids);
-                if(isset($vids[0])){
-                    $last_revision_id = $vids[0];
+                if(isset($vids[0])){*/
+                    #$last_revision_id = $vids[0];
                     // on charge la révision pour avoir son statut et sa date d update
-                    $maRevision = node_revision_load($last_revision_id);
+                    $maRevision = node_revision_load($result->workbench_revision_tracker_revision_id);
                     $updateMktime = $maRevision->getChangedTime();
-                    $moderationState = $maRevision->get('moderation_state')->getValue();
+                    $moderationState = $maRevision->get('moderation_state');
                     $state = array();
-                    if(isset($moderationState[0]['target_id'])){
+                    kint($moderationState[0]->get());
+                    if(isset($moderationState)){
                         $moderationState = $moderationState[0]['target_id'];
                     }
-                    oabt($view->result[$i]->_entity->get('moderation_state')->getValue());
-                    oabt($updateMktime.' '.$moderationState);
+                    #oabt($moderationState);
+                    #oabt($moderationState);
+                  $result->workbench_revision_tracker_revision_id = $moderationState;
+                    #oabt($view->result[$i]->_entity, TRUE);
+                    #oabt($view->result[$i]->_entity->get('moderation_state'));
+                    #kint($view->result[$i]->_entity); die();
+                    #oabt($updateMktime.' '.$moderationState);
+                    #$view->result[$i]->_entity->get('revision_id')->setValue($moderationState);
                     //$view->result[$i]->_entity->get('moderation_state')->setValue($state);
                     //oabt($view->result[$i]);
                     //$view->result[$i]->_entity->get('field_title_1')->setValue(array(0=>"$moderationState"));
-                }
+                #}
             }
         }
     }
