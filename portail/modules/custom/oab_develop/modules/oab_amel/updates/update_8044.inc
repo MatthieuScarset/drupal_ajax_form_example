@@ -33,6 +33,13 @@ oabt_YmlImport('field.field.paragraph.home_thematic_columns.field_image.yml');
 oabt_YmlImport('field.field.paragraph.homepage_news.field_image.yml');
 oabt_YmlImport('field.field.paragraph.related_content.field_visual.yml');
 
+oabt_YmlImport('field.field.node.homepage.field_infography.yml');
+oabt_YmlImport('field.field.node.homepage.field_corporate_image.yml');
+oabt_YmlImport('field.field.node.region.field_top_zone_background.yml');
+oabt_YmlImport('field.field.paragraph.home_column.field_solaris_icon.yml');
+oabt_YmlImport('field.field.node.industry.field_top_zone_background.yml');
+
+
 $contentTypes = [
     'customer_story',
     'partner',
