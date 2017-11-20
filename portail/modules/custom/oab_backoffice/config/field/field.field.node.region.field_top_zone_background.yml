@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_visual
+    - field.storage.node.field_top_zone_background
     - media_entity.bundle.image
-    - node.type.industry
-id: node.industry.field_visual
-field_name: field_visual
+    - node.type.region
+id: node.region.field_top_zone_background
+field_name: field_top_zone_background
 entity_type: node
-bundle: industry
-label: 'Image'
-description: 'image size : 310x125px'
+bundle: region
+label: 'Top zone background'
+description: 'Image size: 1400x500px'
 required: false
 translatable: true
 default_value: {  }

@@ -1,19 +1,18 @@
-uuid: 18d0545f-83ce-4ddb-a087-1287fd6f7c40
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_corporate_image
-    - node.type.homepage
+    - field.storage.paragraph.field_solaris_icon
+    - paragraphs.paragraphs_type.home_column
   module:
     - image
-id: node.homepage.field_corporate_image
-field_name: field_corporate_image
-entity_type: node
-bundle: homepage
-label: Image
-description: 'Image size: 1400x500px'
-required: false
+id: paragraph.home_column.field_solaris_icon
+field_name: field_solaris_icon
+entity_type: paragraph
+bundle: home_column
+label: 'Solaris icon'
+description: 'Image size: 20x20px'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -25,7 +24,7 @@ settings:
   min_resolution: ''
   alt_field: true
   alt_field_required: false
-  title_field: true
+  title_field: false
   title_field_required: false
   default_image:
     uuid: ''
