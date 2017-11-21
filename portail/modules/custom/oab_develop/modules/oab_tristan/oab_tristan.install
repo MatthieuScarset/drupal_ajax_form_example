@@ -438,3 +438,10 @@ function oab_tristan_update_8056() {
 function oab_tristan_update_8057() {
   include_once("updates/update_8057.inc");
 }
+
+/**
+ * Ajout d'une colonne dans la vue /admin/content
+ */
+function oab_tristan_update_8058() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
