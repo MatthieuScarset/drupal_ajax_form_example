@@ -415,7 +415,7 @@ function oab_tristan_update_8053() {
  * Création du formulaire pour dl les fichiers FR
  */
 function oab_tristan_update_8054() {
-  #include_once("updates/update_8054.inc");
+  include_once("updates/update_8054.inc");
 }
 
 /**
@@ -423,4 +423,18 @@ function oab_tristan_update_8054() {
  */
 function oab_tristan_update_8055() {
   include_once("updates/update_8055.inc");
+}
+
+/**
+ * Ajout d'un filtre sur la langue de la page en cours dans le vue "homepage partners"
+ */
+function oab_tristan_update_8056() {
+  oabt_YmlImport('views.view.homepage_partner.yml');
+}
+
+/**
+ * Création d'un filed Wysiwig/champ libre pour la zone Rebond
+ */
+function oab_tristan_update_8057() {
+  include_once("updates/update_8057.inc");
 }

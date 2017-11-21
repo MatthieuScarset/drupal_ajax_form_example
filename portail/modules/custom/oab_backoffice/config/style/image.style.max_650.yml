@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: max_650
+label: 'Max 650x650'
+effects:
+  a5f81b0e-5cf8-4231-9f2e-02a401c9b53b:
+    uuid: a5f81b0e-5cf8-4231-9f2e-02a401c9b53b
+    id: image_scale
+    weight: 1
+    data:
+      width: 650
+      height: 650
+      upscale: false

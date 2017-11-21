@@ -41,7 +41,7 @@ git_push_updates() {
 	if git push
 	then
 		##On merge dev et master grace à la fonction ci-dessous
-		if git_merge dev master
+		if git_merge dev integration master
 		then
 			echo -e "${VERTCLAIR}Success : Merge de updates sur dev & master OK${NEUTRE}"
 			return
@@ -55,7 +55,7 @@ git_push_updates() {
 
 
 # Merge la branche actuelle avec la branche update
-# puis merge la branche update avec dev & master
+# puis merge la branche update avec dev, integration & master
 # Si une branche est passée en paramètre, merge de cette branche avec update
 git_merge_updates() {
 
@@ -72,28 +72,29 @@ git_merge_updates() {
 	then
 		echo -e "\t $# - Merge de ${BLEUCLAIR}updates${NEUTRE} sur ${VERTCLAIR}$1${CYANFONCE}"
 	fi
-	echo -e "\t- Merge de ${BLEUCLAIR}updates${CYANFONCE} sur ${BLEUCLAIR}dev${CYANFONCE} et ${BLEUCLAIR}master${NEUTRE}"
+	echo -e "\t- Merge de ${BLEUCLAIR}updates${CYANFONCE} sur ${BLEUCLAIR}dev${CYANFONCE},${BLEUCLAIR}integration${CYANFONCE}  et ${BLEUCLAIR}master${NEUTRE}"
 
 	##On demande validation
 	read -p "Etes-vous sur de vouloir continuer ? (O/n)" reponse
 
 	if [ $reponse == "O" ] || [ $reponse == "o" ] || [ $reponse == "Y" ] || [ $reponse == "y" ]
 	then
-
+        echo -e "${CYANFONCE}MERGE de $nomBranche sur updates"
 		##on merge updates  (le printf 'o' est pour donner la réponse à la question de la fonction git_merge)
 		printf 'o' | git_merge updates
 
-		##S'il y a une branche en paramètre, on merge avec cette branche
-		if [ $# -gt 0 ]
-		then
-			printf 'o' | git_merge $1
-		fi
-
+		echo -e "${CYANFONCE}git checkout updates"
 		##On se déplace sur updates
 		if git checkout updates
 		then
+		    ##S'il y a une branche en paramètre, on merge avec cette branche
+            if [ $# -gt 0 ]
+            then
+                printf 'o' | git_merge $1
+            fi
+
 			##On merge updates avec dev et master
-			printf 'o' | git_merge dev master
+			printf 'o' | git_merge dev integration master
 			git checkout $nomBranche
 		else
 			echo "${ROUGEFONCE}Erreur lors de la connexion à la branche updates${NEUTRE}"
@@ -162,7 +163,7 @@ git_merge() {
 		echo -e "${CYANFONCE}Fin des merges demandés${NEUTRE}"
 		
 		#Je retourne sur la branche actuelle
-		echo -e "${CYANFONCE}Retour sur la branche d'origine${NEUTRE}"
+		echo -e "${CYANFONCE}Retour sur la branche d'origine : $nomBranche${NEUTRE}"
 		git checkout $nomBranche && git pull
 	else
 		echo -e "${ROUGEFONCE}Abandon${NEUTRE}"
