@@ -13,7 +13,7 @@ field_name: field_infography
 entity_type: node
 bundle: homepage
 label: Infography
-description: ''
+description: 'Image size: 100x100px'
 required: false
 translatable: false
 default_value: {  }

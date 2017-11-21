@@ -1,18 +1,17 @@
-uuid: 18d0545f-83ce-4ddb-a087-1287fd6f7c40
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_corporate_image
-    - node.type.homepage
+    - field.storage.node.field_mobile_image
+    - node.type.hp_eclairage_thematique
   module:
     - image
-id: node.homepage.field_corporate_image
-field_name: field_corporate_image
+id: node.hp_eclairage_thematique.field_mobile_image
+field_name: field_mobile_image
 entity_type: node
-bundle: homepage
-label: Image
-description: 'Image size: 1400x500px'
+bundle: hp_eclairage_thematique
+label: 'Mobile Image'
+description: 'Image size: 420x370px'
 required: false
 translatable: false
 default_value: {  }
@@ -25,7 +24,7 @@ settings:
   min_resolution: ''
   alt_field: true
   alt_field_required: false
-  title_field: true
+  title_field: false
   title_field_required: false
   default_image:
     uuid: ''
