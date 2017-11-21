@@ -123,3 +123,7 @@ $collection->write("field.field.paragraph.related_content.field_visual", array (
     "description" => "Taille de l'image (largeur x hauteur) : 400x200px"
 ));
 
+
+
+//JIRA_3185 : attribution des droits au Chief Editor pour accéder aux champs Scheduled Updates
+oabt_YmlImport('user.role.chief_editor.yml');
