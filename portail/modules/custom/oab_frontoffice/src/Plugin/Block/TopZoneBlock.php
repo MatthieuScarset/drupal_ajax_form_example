@@ -43,7 +43,7 @@ class TopZoneBlock extends BlockBase {
     if ($node->hasField('field_top_zone_background')) {
       $top_zone_background = $node->get('field_top_zone_background')->getValue();
     }
-    $block['#type'] = 'processed_text';
+    $block['#type'] = 'markup';
     $block['#markup'] = '';
     $content = '';
     if(isset($top_zone[0]['value'])){
