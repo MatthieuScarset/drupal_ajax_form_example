@@ -41,7 +41,7 @@ class OabOfficesMapPageController extends ControllerBase {
 			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
-			|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
+				|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
 			{
 				// si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
 				$query = \Drupal::entityQuery('taxonomy_term');
@@ -96,59 +96,12 @@ class OabOfficesMapPageController extends ControllerBase {
 						'drupalSettings' => array(
 							'countriesRegionsTab' => getArrayRegionsCountries(),
 							'allCountriesArray' => getCountriesForJS(),
+							'selectedCountryParameter' => $country_id,
+							'selectedRegionParameter' => $region_id,
 						),
 					),
 				);
 			}
 		}
 	}
-
-	private function getArrayRegionsCountries(){
-		$query = Database::getConnection()->select('node_field_data', 'n');
-		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-		$query->leftjoin('taxonomy_term__field_country_code', 'occ', 'occ.entity_id = c.field_office_country_target_id');
-		$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
-		$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
-		$query->condition('n.type', 'office', '=');
-		$query->condition('n.status', 1, '=');
-		$query->addField('t', 'tid', 'region_tid');
-		$query->addField('t', 'name', 'region_name');
-		$query->addField('oc', 'tid', 'country_tid');
-		$query->addField('oc', 'name', 'country_name');
-		$query->addField('occ', 'field_country_code_value', 'country_code');
-		$results =	$query->execute()->fetchAll();
-		//tableau [pays id] => region id
-		$table_country_region = array();
-		foreach ($results as $rowCountryRegion){
-			$table_country_region[$rowCountryRegion->country_tid] = $rowCountryRegion->region_tid;
-		}
-
-		return $table_country_region;
-	}
-
-
-	private function getCountries(){
-		$keys = array();
-		$query = Database::getConnection()->select('node_field_data', 'n');
-		$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-		$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-		$query->condition('n.type', 'office', '=');
-		$query->condition('n.status', 1, '=');
-		$query->addField('oc', 'tid', 'country_tid');
-		$query->addField('oc', 'name', 'country_name');
-		$query->orderBy('oc.name');
-		$results =	$query->execute()->fetchAll();
-
-		$table_countries = array();
-		$table_countries['all'] = $this->t('Country');
-		foreach ($results as $country){
-			if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
-				$keys[] = $country->country_tid;
-				$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
-			}
-		}
-		return $table_countries;
-	}
-
 }

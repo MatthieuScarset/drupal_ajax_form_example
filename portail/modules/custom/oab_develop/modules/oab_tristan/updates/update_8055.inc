@@ -1,5 +1,12 @@
 <?php
 $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
+
+if ($form === null ) {
+  include_once("update_8054.inc");
+  $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
+}
+
+
 $newConfMess = "<p>Bonjour,</p>
 
 <p>Nous avons le plaisir de vous communiquer le lien du document que vous venez de s&eacute;lectionner :<br />

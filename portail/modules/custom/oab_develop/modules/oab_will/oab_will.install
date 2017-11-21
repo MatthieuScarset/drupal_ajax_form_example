@@ -57,3 +57,17 @@ function oab_will_update_8005(){
 function oab_will_update_8006(){
     include_once("updates/update_8006.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-3177 mise a jour des images styles
+ */
+function oab_will_update_8007(){
+    include_once("updates/update_8007.inc");
+}
+
+/**
+ * RUBYPORTAILOBS-3195 traduction du pager du moteur de recherche
+ */
+function oab_will_update_8008(){
+    include_once("updates/update_8008.inc");
+}

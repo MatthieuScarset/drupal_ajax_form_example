@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: miniature_document
+label: 'Miniature document (130x185)'
+effects:
+  f0bd60aa-2451-4cab-99e0-9cde2059abcb:
+    uuid: f0bd60aa-2451-4cab-99e0-9cde2059abcb
+    id: image_scale
+    weight: 1
+    data:
+      width: 130
+      height: 185
+      upscale: false

@@ -1,0 +1,18 @@
+uuid: 6151d7e8-a218-40c0-9591-eb2aeb64c901
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.office_countries
+id: taxonomy_term.office_countries.name
+field_name: name
+entity_type: taxonomy_term
+bundle: office_countries
+label: Name
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
