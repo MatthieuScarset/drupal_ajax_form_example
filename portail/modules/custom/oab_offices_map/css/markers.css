@@ -90,3 +90,8 @@
 .gmap-popup .location-content .link_region_content{
     margin-right: 40px;
 }
+
+
+.gmap-popup .location-content .views-field-field-postal-code{
+    padding-right: 5px;
+}
