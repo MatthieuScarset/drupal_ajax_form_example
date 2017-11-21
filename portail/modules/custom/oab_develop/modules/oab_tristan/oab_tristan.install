@@ -443,5 +443,5 @@ function oab_tristan_update_8057() {
  * Ajout d'une colonne dans la vue /admin/content
  */
 function oab_tristan_update_8058() {
-  oabt_YmlImport('views.view.homepage_partner.yml');
+  oabt_YmlImport('views.view.content.yml');
 }
