@@ -4,13 +4,13 @@ dependencies:
   config:
     - field.storage.node.field_visual
     - media_entity.bundle.image
-    - node.type.profile
-id: node.profile.field_visual
+    - node.type.customer_story
+id: node.customer_story.field_visual
 field_name: field_visual
 entity_type: node
-bundle: profile
-label: 'Image Blogger',
-description: 'Image size : 170x170px'
+bundle: customer_story
+label: 'Visual for sub-home'
+description: 'Image Size : 310x125px'
 required: false
 translatable: false
 default_value: {  }

@@ -1,20 +1,27 @@
-uuid: 18d0545f-83ce-4ddb-a087-1287fd6f7c40
+uuid: 85dd6f94-3de8-40a3-a5a4-8ae5347b8106
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_corporate_image
-    - node.type.homepage
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.home_thematic_columns
   module:
+    - content_translation
     - image
-id: node.homepage.field_corporate_image
-field_name: field_corporate_image
-entity_type: node
-bundle: homepage
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
+id: paragraph.home_thematic_columns.field_image
+field_name: field_image
+entity_type: paragraph
+bundle: home_thematic_columns
 label: Image
-description: 'Image size: 1400x500px'
-required: false
-translatable: false
+description: 'Image size: 420x200px'
+required: true
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -25,7 +32,7 @@ settings:
   min_resolution: ''
   alt_field: true
   alt_field_required: false
-  title_field: true
+  title_field: false
   title_field_required: false
   default_image:
     uuid: ''
