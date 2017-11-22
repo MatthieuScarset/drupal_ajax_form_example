@@ -1,19 +1,18 @@
-uuid: 18d0545f-83ce-4ddb-a087-1287fd6f7c40
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_corporate_image
-    - node.type.homepage
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.home_column_section
   module:
     - image
-id: node.homepage.field_corporate_image
-field_name: field_corporate_image
-entity_type: node
-bundle: homepage
+id: paragraph.home_column_section.field_image
+field_name: field_image
+entity_type: paragraph
+bundle: home_column_section
 label: Image
-description: 'Image size: 1400x500px'
-required: false
+description: 'Image size: 90x55px'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -25,7 +24,7 @@ settings:
   min_resolution: ''
   alt_field: true
   alt_field_required: false
-  title_field: true
+  title_field: false
   title_field_required: false
   default_image:
     uuid: ''
