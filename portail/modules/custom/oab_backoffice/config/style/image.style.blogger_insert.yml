@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: blogger_insert
+label: 'Blogger insert (170x170)'
+effects:
+  3aa2356b-84fb-4275-9097-9dc6af6c772d:
+    uuid: 3aa2356b-84fb-4275-9097-9dc6af6c772d
+    id: image_scale
+    weight: 1
+    data:
+      width: 170
+      height: 170
+      upscale: false

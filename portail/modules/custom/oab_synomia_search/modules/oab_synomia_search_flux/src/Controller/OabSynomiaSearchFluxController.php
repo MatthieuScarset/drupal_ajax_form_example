@@ -46,8 +46,6 @@ class OabSynomiaSearchFluxController extends ControllerBase
 
 	private function getSitemapSynomiaSimple()
 	{
-		$contentTypes = $this->getContentTypeToIndex();
-
 		//calcul de l'intervalle de temps à prendre en compte :
 		// 1. on prend les contenus qui ont été modifiés il y a au moins 12h (pour que le cache Akamai soit rafraichi) :
 		$timeFin = strtotime("-12 hours", time());
@@ -55,26 +53,26 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		// 2. on prend les contenus modifiés sur 48h (par rapport a la date précédente) :
 		$timeDebut = strtotime("-48 hours", $timeFin);
 
-		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin, $contentTypes);
+		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin);
 		return $xml_feed;
 	}
 
   private function getSitemapSynomiaByDates($debut, $fin)
 	{
-		$contentTypes = $this->getContentTypeToIndex();
-
 		$startDate = \DateTime::createFromFormat('Ymd H:i:s', $debut.'00:00:00');
 		$timeDebut = $startDate->getTimestamp();
 
 		$endDate = \DateTime::createFromFormat('Ymd H:i:s', $fin.'23:59:59');
 		$timeFin = $endDate->getTimestamp();
 
-		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin, $contentTypes);
+		$xml_feed = $this->get_sitemap_synomia_by_dates($timeDebut, $timeFin);
 		return $xml_feed;
 	}
 
-	private function get_sitemap_synomia_by_dates($timeDebut, $timeFin, $contentTypes)
+	private function get_sitemap_synomia_by_dates($timeDebut, $timeFin)
 	{
+		$contentTypes = $this->getContentTypeToIndex();
+		$startCreationDateLimit = $this->getCreationDateLimit();
 		$base_url = \Drupal::request()->getSchemeAndHttpHost();
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -113,6 +111,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 				$timeDebut,
 				$timeFin
 			), 'BETWEEN');
+			$query_nodes->condition('n.created', $startCreationDateLimit, '>=');
 			$query_nodes->fields('n', array('nid', 'langcode', 'changed'));
 			$results_nodes = $query_nodes->execute()->fetchAll();
 
@@ -160,6 +159,25 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		}
 		//oabt($types);die();
 		return $types;
+	}
+
+	/** Retourne la liste des types de contenus à indexer (dans la config)
+	 * @return array
+	 */
+	private function getCreationDateLimit(){
+		$config_factory = \Drupal::configFactory();
+		//on récupère la configuration oab.synomia.contentTypes
+		$config = $config_factory->get('oab.synomia.contentTypes');
+		$date = $config->get('creationDateLimit');
+		if(isset($date) && !empty($date))
+		{
+			$timestamp = strtotime($date);
+		}
+		else{
+			$timestamp = strtotime('2015-01-01');
+		}
+		//oabt($timestamp, true);
+		return $timestamp;
 	}
 
 }

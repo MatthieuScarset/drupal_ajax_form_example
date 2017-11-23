@@ -1,4 +1,3 @@
-uuid: d204eff1-4049-4d05-97a3-10f4f436a154
 langcode: en
 status: true
 dependencies:
@@ -26,6 +25,7 @@ dependencies:
     - field.field.node.partner.field_subhome
     - field.field.node.partner.field_thematic
     - field.field.node.partner.field_visual
+    - field.field.node.partner.field_wysiwyg_rebond
     - node.type.partner
   module:
     - datetime
@@ -137,6 +137,7 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
+        - field_wysiwyg_rebond
       parent_name: group_onglets
       weight: 22
       format_type: tab
@@ -152,6 +153,12 @@ targetEntityType: node
 bundle: partner
 mode: default
 content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_content:
     weight: 8
     settings:
@@ -218,7 +225,7 @@ content:
     type: string_textarea
     region: content
   field_meta_description:
-    weight: 6
+    weight: 124
     settings:
       size: 156
       placeholder: ''
@@ -226,7 +233,7 @@ content:
     type: string_textfield
     region: content
   field_meta_title:
-    weight: 5
+    weight: 123
     settings:
       size: 60
       placeholder: ''
@@ -304,10 +311,19 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
+  field_wysiwyg_rebond:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   langcode:
     type: language_select
     weight: 2
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
     region: content
   path:
@@ -323,6 +339,13 @@ content:
       display_label: true
     third_party_settings: {  }
     region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: 3
@@ -331,10 +354,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  created: true
   field_industry: true
   field_region: true
   field_thematic: true
   sticky: true
-  uid: true

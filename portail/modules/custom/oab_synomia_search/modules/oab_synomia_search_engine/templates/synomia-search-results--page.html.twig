@@ -18,7 +18,7 @@
             {# FILTRES / FACETS#}
             <div class='block-facetapi col-lg-3 col-md-12 col-sm-12'>
                 <div class='filters_title'>
-                    <span> {{ 'Sort by'|t }} :</span>
+                    <span> {{ 'Sort by'|t }}:</span>
                     <span aria-hidden="true" class="glyphicon glyphicon-plus icon_nav" data-target="#search-form" data-toggle="collapse"></span>
                     <span aria-hidden="true" class="glyphicon glyphicon-minus icon_nav" data-target="#search-form" data-toggle="collapse"></span>
                 </div>
@@ -78,7 +78,7 @@
                 {# CORRECTIONS #}
                 {% if corrections %}
                     <div class="corrections">
-                        <span class="title_corrections">{{ 'Spelling suggestions'|t }} :</span>
+                        <span class="title_corrections">{{ 'Spelling suggestions'|t }}:</span>
                         <ul>
                         {% for correction in corrections %}
                             <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': correction }) }}">{{ correction }}</a> </li>
@@ -89,7 +89,7 @@
                 {# DEGRADATIONS #}
                 {% if degradations %}
                     <div class="degradations">
-                        <span class="title_degradations">{{ 'Some terms of your search contain results'|t }} :</span>
+                        <span class="title_degradations">{{ 'Some terms of your search contain results'|t }}:</span>
                         <ul>
                             {% for terme, nbResult in degradations %}
                                 <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': terme }) }}">{{ terme }}</a> : {{ nbResult }} {{ 'results'|t }}</li>
