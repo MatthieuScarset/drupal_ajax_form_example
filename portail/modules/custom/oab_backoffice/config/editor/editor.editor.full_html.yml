@@ -1,0 +1,82 @@
+uuid: 07f45a87-ce0b-4c1c-aea9-fe032a75e936
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ckeditor
+format: full_html
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Plugins
+          items:
+            - Styles
+            - FontSize
+            - lineheight
+            - Templating
+            - Solaris
+            - Templates
+            - OfficesMap
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Underline
+            - TextColor
+            - '-'
+            - RemoveFormat
+            - Blockquote
+            - '-'
+            - media_browser
+            - Table
+            - VideoEmbed
+            - node
+            - HorizontalRule
+            - BulletedList
+            - SpecialChar
+            - '-'
+            - Outdent
+            - Indent
+            - '-'
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - '-'
+            - Undo
+            - Redo
+        -
+          name: Linking
+          items:
+            - Linkit
+            - DrupalUnlink
+        -
+          name: Tools
+          items:
+            - ShowBlocks
+            - Source
+            - PasteFromWord
+            - Maximize
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: "h1.titre1|Title (H1)             \r\nh2.titre2|Heading (H2)\r\ndiv.titre3|Introduction\r\nh3.titre4|Subtitle (H3)\r\np.highlight1|Paragraph\r\np.date|Date\r\np.insight_banniere|Banner insight                                                           \r\nul.orange|Orange list\r\nul.black|Black bulleted list\r\nul.white|White bulleted list\r\nul.grey|Grey bulleted list\r\nspan.downloadPDF|download PDF \r\n"
+    linkit:
+      linkit_profile: link
+    colorbutton:
+      colors: 'FF7900,000,fff'
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -445,3 +445,10 @@ function oab_tristan_update_8057() {
 function oab_tristan_update_8058() {
   oabt_YmlImport('views.view.content.yml');
 }
+
+/**
+ * Ajout d'un tri aux résultats de la vue MapMonde
+ */
+function oab_tristan_update_8059() {
+  oabt_YmlImport('views.view.offices_map_view.yml');
+}
