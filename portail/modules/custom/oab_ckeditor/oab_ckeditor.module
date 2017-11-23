@@ -5,22 +5,34 @@ use Drupal\editor\Entity\Editor;
 /**
  * Implements hook_editor_js_settings_alter(array &$settings)
  */
-function oab_ckeditor_editor_js_settings_alter(array &$settings)
-{
-    $settings['editor']['formats']['full_html']['editorSettings']['customConfig']                        = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
-    $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+function oab_ckeditor_editor_js_settings_alter(array &$settings) {
+	$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
+	$current_path = \Drupal::service('path.current')->getPath();
+	$args = explode('/', $current_path);
+	if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
+		if ($args['2'] == "add") {
+			$nodetype = $args['3'];
+		}
+		else {
+			if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
+				$nodetype = $noeud->getType();
+			}
+		}
+		if (isset($nodetype) && !empty($nodetype)) {
+			if ($nodetype == 'region') {
+				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
+			}
+			elseif ($nodetype == 'country') {
+				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
+			}
+		}
+		$settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
+		$settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
-    $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+		$settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+	}
 }
 
-/**
- * Implements hook_ckeditor_plugin_info_alter(array &$plugins)
- */
-function oab_ckeditor_ckeditor_plugin_info_alter(array &$plugins)
-{
-    //kpr($plugins);
-    //  die;
-}
 
 /**
  * Implements hook_page_attachments(array &$page)
@@ -176,64 +188,54 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
         }
 
         $attachments['#attached']['drupalSettings']['oab_templating_components'] = $componentsList;
+
+        // regions et pays pour le plugin offices_map
+				$attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
+				$attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
+				$attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
     }
 }
 
-/**
- * Implements hook_theme().
- */
-/*
-function oab_ckeditor_theme(){
-//définition des templates utilisés
-return array(
-'template_1_column' => array(
-'template' => '1_column'
-),
-'template_2_columns' => array(
-'template' => '2_columns'
-),
-'template_2_columns_66_33' => array(
-'template' => '2_columns_66_33'
-),
-'template_2_columns_33_66' => array(
-'template' => '2_columns_33_66'
-),
-'template_3_columns' => array(
-'template' => '3_columns'
-),
-'template_background_blue' => array(
-'template' => 'background_blue'
-),
-'template_background_green' => array(
-'template' => 'background_green'
-),
-'template_background_purple' => array(
-'template' => 'background_purple'
-),
-'template_background_pink' => array(
-'template' => 'background_pink'
-),
-'template_background_yellow' => array(
-'template' => 'background_yellow'
-),
-'template_background_black' => array(
-'template' => 'background_black'
-),
-'template_background_dark_grey' => array(
-'template' => 'background_dark_grey'
-),
-'template_background_white' => array(
-'template' => 'background_white'
-),
-'template_background_moderate_grey' => array(
-'template' => 'background_moderate_grey'
-),
-'template_background_orange' => array(
-'template' => 'background_orange'
-),
-'template_background_light_grey' => array(
-'template' => 'background_light_grey'
-),
-);
+ function getAllCountriesForJSOptions(){
+	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
+	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
+	$query->condition('n.type', 'office', '=');
+	$query->condition('n.status', 1, '=');
+	$query->addField('oc', 'tid', 'country_tid');
+	$query->addField('oc', 'name', 'country_name');
+	$query->orderBy('oc.name');
+	$results =	$query->execute()->fetchAll();
+	$table_countries = array();
+	$table_countries[] = array(t('All'), 'all');
+	foreach ($results as $country){
+		if(!in_array(array( $country->country_name,$country->country_tid), $table_countries) && !empty($country->country_tid)){
+			$table_countries[] = array( $country->country_name,$country->country_tid) ;
+		}
+	}
+	return $table_countries;
 }
- */
+
+ function getAllRegionsForJSOptions(){
+	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
+	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
+	$query->condition('n.type', 'office', '=');
+	$query->condition('n.status', 1, '=');
+	$query->addField('t', 'tid', 'region_tid');
+	$query->addField('t', 'name', 'region_name');
+	$query->addField('t', 'langcode', 'region_langcode');
+	$query->orderBy('t.name');
+	$results =	$query->execute()->fetchAll();
+	$table_regions = array();
+	$table_regions[] = array(t('All'), 'all');
+	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+	foreach ($results as $region){
+		if(!in_array(array($region->region_name, $region->region_tid), $table_regions)
+			&& !empty($region->region_tid)
+			&& $region->region_langcode == $current_language ){
+			$table_regions[] = array($region->region_name, $region->region_tid);
+		}
+	}
+	return $table_regions;
+}
