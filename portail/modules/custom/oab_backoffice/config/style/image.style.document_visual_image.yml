@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: document_visual_image
+label: 'Document visual image (210x270)'
+effects:
+  172a8680-0908-4c8b-90aa-58da3beac3f9:
+    uuid: 172a8680-0908-4c8b-90aa-58da3beac3f9
+    id: image_scale
+    weight: 2
+    data:
+      width: 210
+      height: 270
+      upscale: false

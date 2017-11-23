@@ -17,7 +17,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 {
 
 	public function getPageTitle(){
-		return null;
+		return t('Search results');
 	}
 
   /** Méthode appelée lorsqu'on appelle la page de recherche */

@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -207,9 +208,9 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: node_created_date
+            date_format: html_date
             custom_date_format: ''
-            timezone: ''
+            timezone: Europe/Paris
           group_column: entity_id
           group_columns: {  }
           group_rows: true

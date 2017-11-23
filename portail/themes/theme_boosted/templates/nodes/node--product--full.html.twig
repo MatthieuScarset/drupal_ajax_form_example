@@ -135,29 +135,29 @@ view_mode ? view_mode|clean_class,
         {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
     {% endif %}
 
-    {#{% if field_detailed_content is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}#}
-    {#{% endif %}#}
+    {% if field_detailed_content is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
+    {% endif %}
 
-    {#{% if field_simple_content is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with {'field_simple_content': field_simple_content, 'id_fiche': id_fiche} %}#}
-    {#{% endif %}#}
+    {% if field_simple_content is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with {'field_simple_content': field_simple_content, 'id_fiche': id_fiche} %}
+    {% endif %}
 
-    {#{% if field_customer_case is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}#}
-    {#{% endif %}#}
-    {#{% if field_partners is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_partners.html.twig' with field_partners %}#}
-    {#{% endif %}#}
-    {#{% if axiomeDocs is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}#}
-    {#{% endif %}#}
-    {#{% if tarifs is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_tarifs.html.twig' with tarifs %}#}
-    {#{% endif %}#}
-    {#{% if related_offers is not null  %}#}
-        {#{% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}#}
-    {#{% endif %}#}
+    {% if field_customer_case is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
+    {% endif %}
+    {% if field_partners is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_partners.html.twig' with field_partners %}
+    {% endif %}
+    {% if axiomeDocs is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+    {% endif %}
+    {% if tarifs is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_tarifs.html.twig' with tarifs %}
+    {% endif %}
+    {% if related_offers is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}
+    {% endif %}
 
 </article>
 

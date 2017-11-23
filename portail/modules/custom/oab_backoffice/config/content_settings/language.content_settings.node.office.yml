@@ -1,0 +1,16 @@
+uuid: 535a90c7-7c27-48d7-87ea-b50dc7edc684
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.office
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.office
+target_entity_type_id: node
+target_bundle: office
+default_langcode: en
+language_alterable: true
