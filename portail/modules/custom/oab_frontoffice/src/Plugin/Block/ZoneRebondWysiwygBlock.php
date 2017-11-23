@@ -36,7 +36,9 @@ class ZoneRebondWysiwygBlock extends BlockBase {
     $node = Node::load($nid);
     if ($node->hasField('field_wysiwyg_rebond')) {
       $field_data = $node->get('field_wysiwyg_rebond');
-      $block = $field_data[0]->view();
+      if (isset($field_data[0])) {
+        $block = $field_data[0]->view();
+      }
     }
 
     return $block;
