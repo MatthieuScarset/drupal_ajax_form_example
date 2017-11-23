@@ -1196,6 +1196,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-bottom: 0;
 }
 
+.rebond.rebond-wysiwyg article article {
+    margin: initial;
+    padding: initial;
+
+}
+
 @media (max-width: 767px) {
     .rebond article, .block-mediatheque {
         padding: 3rem 1rem;
