@@ -52,7 +52,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 		foreach ($languages as $language)
 		{
 			$form['order_content_types_'.$language->getId()] = array(
-				'#type' => 'textfield',
+				'#type' => 'textarea',
 				'#size' => '200',
 				'#title' => 'Content types order for '.$language->getName(),
 				'#default_value' => $config->get('order_content_types_'.$language->getId()),

@@ -211,6 +211,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 				$path .= "&filtres[]=rubrique:".$filtre_rubrique;
 			}
 
+			//oabt($path);die();
 			$ch = curl_init();
 
 			$configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());

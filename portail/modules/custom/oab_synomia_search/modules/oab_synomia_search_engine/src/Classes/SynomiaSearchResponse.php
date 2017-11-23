@@ -89,22 +89,22 @@ class SynomiaSearchResponse {
 	private function getResultsSimpleArray($xmlResult, $type)
 	{
 		$clusterArray = array();
-		$clusterArray['typeId'] = $type;
-		$clusterArray['typeName'] = $this->getTypeLabel($type);
-		$clusterArray['nbResults'] = $this->nbResultsTotal;
-		$clusterArray['results'] = array();
-		if(isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item))
-		{
-			foreach ($xmlResult->resultElements->item as $item)
-			{
-				$myItem = array();
-				$myItem['title'] = $item->extitle;
-				$myItem['URL'] = $item->URL;
-				$myItem['description'] = $item->description;
-				$clusterArray['results'][] = $myItem;
+		if( $type != "#SYNAUTRE#") {
+			$clusterArray['typeId'] = $type;
+			$clusterArray['typeName'] = $this->getTypeLabel($type);
+			$clusterArray['nbResults'] = $this->nbResultsTotal;
+			$clusterArray['results'] = array();
+			if (isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item)) {
+				foreach ($xmlResult->resultElements->item as $item) {
+					$myItem = array();
+					$myItem['title'] = $item->extitle;
+					$myItem['URL'] = $item->URL;
+					$myItem['description'] = $item->description;
+					$clusterArray['results'][] = $myItem;
+				}
 			}
+			$this->results[$type] = $clusterArray;
 		}
-		$this->results[$type] = $clusterArray;
 	}
 
 	/**
@@ -125,34 +125,35 @@ class SynomiaSearchResponse {
 				foreach ($aspects as $aspect)
 				{
 					$type = $aspect->getAttribute('value');
-					$clusterArray['typeId'] = $type;
-					$clusterArray['typeName'] = $this->getTypeLabel($type);
-					$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
+					if( $type != "#SYNAUTRE#") {
+						$clusterArray['typeId'] = $type;
+						$clusterArray['typeName'] = $this->getTypeLabel($type);
+						$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
 
-					$items = $aspect->getElementsByTagName("item");
-					$clusterArray['results'] = array();
-					foreach ($items as $item)
-					{
-						$myItem = array();
-						if($item->getElementsByTagName("extitle")->length > 0)
-						{
-							$myItem['title'] = $item->getElementsByTagName("extitle")->item(0)->nodeValue;
+						$items = $aspect->getElementsByTagName("item");
+						$clusterArray['results'] = array();
+						foreach ($items as $item) {
+							$myItem = array();
+							if ($item->getElementsByTagName("extitle")->length > 0) {
+								$myItem['title'] = $item->getElementsByTagName("extitle")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("URL")->length > 0) {
+								$myItem['URL'] = $item->getElementsByTagName("URL")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("description")->length > 0) {
+								$myItem['description'] = $item->getElementsByTagName("description")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("rubrique")->length > 0) {
+								$myItem['rubrique'] = $item->getElementsByTagName("rubrique")
+									->item(0)->nodeValue;
+							}
+							$clusterArray['results'][] = $myItem;
 						}
-						if($item->getElementsByTagName("URL")->length > 0)
-						{
-							$myItem['URL'] = $item->getElementsByTagName("URL")->item(0)->nodeValue;
-						}
-						if($item->getElementsByTagName("description")->length > 0)
-						{
-							$myItem['description'] = $item->getElementsByTagName("description")->item(0)->nodeValue;
-						}
-						if($item->getElementsByTagName("rubrique")->length > 0)
-						{
-							$myItem['rubrique'] = $item->getElementsByTagName("rubrique")->item(0)->nodeValue;
-						}
-						$clusterArray['results'][] = $myItem;
+						$this->results[$type] = $clusterArray;
 					}
-					$this->results[$type] = $clusterArray;
 				}
 			}
 			//oabt($this->results, true);
@@ -210,10 +211,10 @@ class SynomiaSearchResponse {
 		$typeName = "";
 		switch ($type_id){
 			case 'full_html':
-				$typeName = t('Content');
+				$typeName = 'Content';
 				break;
 			case 'simple_page':
-				$typeName = t('Article');
+				$typeName = 'Article';
 				break;
 			default:
 				$typeObject = NodeType::load($type_id);
