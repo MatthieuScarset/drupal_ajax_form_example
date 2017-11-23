@@ -1549,6 +1549,7 @@ aside.right-column > .region {
 .region-content article.customer-story.full,
 .region-content article.blog-post.full,
 .region-content article.page-offices-map,
+.region-content div.officeMapBlock,
 aside .region.region-sidebar
 {
     margin-bottom: 2rem;
