@@ -9,7 +9,7 @@ id: node.profile.field_visual
 field_name: field_visual
 entity_type: node
 bundle: profile
-label: 'Image Blogger',
+label: 'Image Blogger'
 description: 'Image size : 170x170px'
 required: false
 translatable: false
