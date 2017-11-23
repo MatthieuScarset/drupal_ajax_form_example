@@ -90,12 +90,7 @@ class SynomiaSearchResponse {
 	{
 		$clusterArray = array();
 		$clusterArray['typeId'] = $type;
-		$typeObject = NodeType::load($type);
-		if(isset($typeObject) && !empty($typeObject))
-		{
-			$typeName = $typeObject->label();
-		}
-		$clusterArray['typeName'] = $typeName;
+		$clusterArray['typeName'] = $this->getTypeLabel($type);
 		$clusterArray['nbResults'] = $this->nbResultsTotal;
 		$clusterArray['results'] = array();
 		if(isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item))
@@ -131,12 +126,7 @@ class SynomiaSearchResponse {
 				{
 					$type = $aspect->getAttribute('value');
 					$clusterArray['typeId'] = $type;
-					$typeObject = NodeType::load($type);
-					if(isset($typeObject) && !empty($typeObject))
-					{
-						$typeName = $typeObject->label();
-					}
-					$clusterArray['typeName'] = $typeName;
+					$clusterArray['typeName'] = $this->getTypeLabel($type);
 					$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
 
 					$items = $aspect->getElementsByTagName("item");
@@ -185,13 +175,7 @@ class SynomiaSearchResponse {
 				foreach($facets as $facet)
 				{
 					if( $facet->firstChild->nodeValue != "#SYNAUTRE#"){
-						$type = NodeType::load(str_replace(' ','_',$facet->firstChild->nodeValue));
-						if(isset($type) && !empty($type))
-						{
-							$typeName = $type->label();
-						}
-						//$typeName = $facet->firstChild->nodeValue;
-						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $typeName, 'nbresults' => $facet->getAttribute('nb_res'));
+						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ','_',$facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
 					}
 				}
 			}
@@ -218,4 +202,28 @@ class SynomiaSearchResponse {
 			}
 		}
 	}
+
+	/** Retourne le libellé du Type passé en paramètre
+	 * @param $type_id
+	 */
+	private function getTypeLabel($type_id){
+		$typeName = "";
+		switch ($type_id){
+			case 'full_html':
+				$typeName = t('Content');
+				break;
+			case 'simple_page':
+				$typeName = t('Article');
+				break;
+			default:
+				$typeObject = NodeType::load($type_id);
+				if(isset($typeObject) && !empty($typeObject))
+				{
+					$typeName = $typeObject->label();
+				}
+
+		}
+		return $typeName;
+	}
 }
+
