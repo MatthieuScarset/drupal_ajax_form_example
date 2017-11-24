@@ -1325,6 +1325,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-color: #FFFFFF;
 }
 
+.rebond-wysiwyg img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 .homepage-solution-button-color {
     color: #FFFFFF;
