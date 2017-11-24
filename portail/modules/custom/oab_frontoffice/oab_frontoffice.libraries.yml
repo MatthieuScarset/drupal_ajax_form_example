@@ -1,0 +1,8 @@
+views-ajax-url:
+  version: VERSION
+  js:
+    js/views-ajax-url.js : {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.debounce

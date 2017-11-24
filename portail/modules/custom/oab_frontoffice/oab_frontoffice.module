@@ -972,3 +972,9 @@ function getRegions(){
 	}
 	return $table_regions;
 }
+
+function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
+  if (isset($view) && ($view->storage->id() == 'subhomes')) {
+    $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
+  }
+}
