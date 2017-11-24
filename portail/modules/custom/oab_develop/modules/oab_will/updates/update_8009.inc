@@ -8,4 +8,5 @@ use Symfony\Component\Yaml\Yaml;
 
 
 oabt_YmlImport('views.view.autocomplete.yml');
+oabt_YmlImport('views.view.content.yml');
 
