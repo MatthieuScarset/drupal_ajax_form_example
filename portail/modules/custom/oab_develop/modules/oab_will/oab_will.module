@@ -33,8 +33,11 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     }
 }
 
-function views_exposed_form_content_page_1_form_validate($form,FormStateInterface &$form_state) {
+function views_exposed_form_content_page_1_form_validate($form,FormStateInterface &$form_state)
+{
     $values = $form_state->getValue('field_profile_target_id');
-    $tab_values = explode(" | ",$values);
-    $form_state->setValue('field_profile_target_id',$tab_values[1]);
+    if (isset($values) && $values <> "") {
+        $tab_values = explode(" | ", $values);
+        $form_state->setValue('field_profile_target_id', $tab_values[1]);
+    }
 }
