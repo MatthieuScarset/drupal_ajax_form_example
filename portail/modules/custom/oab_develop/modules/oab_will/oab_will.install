@@ -57,3 +57,10 @@ function oab_will_update_8005(){
 function oab_will_update_8006(){
     include_once("updates/update_8006.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-3181 gestion autocomplete de la view content pour les blogger
+ */
+function oab_will_update_8009(){
+    include_once("updates/update_8009.inc");
+}
