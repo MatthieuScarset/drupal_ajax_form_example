@@ -14,6 +14,7 @@ function oab_tristan_update_dependencies() {
   $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
   $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020	);
   $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031	);
+  $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023	);
 
   return $dependencies;
 }
@@ -451,4 +452,13 @@ function oab_tristan_update_8058() {
  */
 function oab_tristan_update_8059() {
   oabt_YmlImport('views.view.offices_map_view.yml');
+}
+
+/**
+ * Ajout d'un field top zone background image aux produits
+ */
+function oab_tristan_update_8060() {
+  oabt_YmlImport('field.field.node.product.field_top_zone_bg_mobile.yml');
+  oabt_YmlImport('core.entity_form_display.node.product.default.yml');
+  oabt_YmlImport('core.entity_view_display.node.product.default.yml');
 }
