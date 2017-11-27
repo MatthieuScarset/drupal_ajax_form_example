@@ -63,10 +63,10 @@ class SubhomeUrlAlterEvent implements EventSubscriberInterface {
       'method' =>  'replaceWith'
     ));*/
 
-    $commands[] = array(
+    /*$commands[] = array(
       'command' => 'viewsAjaxUrl',
       'method' =>  'replaceWith'
-    );
+    );*/
 
     /*foreach ($commands as $delta => &$command) {
       //if (isset($command['method']) && $command['method'] === 'replaceWith') {

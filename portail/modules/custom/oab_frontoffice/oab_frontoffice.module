@@ -302,6 +302,17 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         $form['actions']['submit']['#value'] = "Найти";
       }
     }
+    kint($form);
+    if (isset($form['name'])){
+      $form['name']['#type'] = "select";
+      $form['name']['#options'] = array(
+        'All' => '- Any -',
+        'Business Innovation' => 'Business Innovation',
+        'Collaborative Workspace' => 'Collaborative Workspace',
+        'Enriched Connectivity' => 'Enriched Connectivity'
+      );
+      $form['name']['#default'] = '- Any -';
+    }
   }
 
   // subhome blogs
@@ -973,8 +984,8 @@ function getRegions(){
 	return $table_regions;
 }
 
-function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
+/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
   if (isset($view) && ($view->storage->id() == 'subhomes')) {
     $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
   }
-}
+}*/
