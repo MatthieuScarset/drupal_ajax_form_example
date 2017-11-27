@@ -10,3 +10,9 @@ function oab_dvi_install() {
 function oab_dvi_update_8001() {
   include_once("updates/update_8001.inc");
 }
+/**
+ * Création de la taxo des departements
+ */
+function oab_dvi_update_8002() {
+  include_once("updates/update_8002.inc");
+}
