@@ -43,6 +43,11 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
 				'#default_value' => $config->get($contentType->id()),
 			);
 		}
+		$form['creationDateLimit'] = array(
+			'#type' => 'date',
+			'#title' => "Creation date limit",
+			'#default_value' => $config->get('creationDateLimit'),
+		);
     return parent::buildForm($form, $form_state);
   }
 
@@ -56,6 +61,8 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
 		foreach ($contentTypes as $contentType) {
 			$config->set($contentType->id(), $form_state->getValue($contentType->id()));
 		}
+
+		$config->set('creationDateLimit', $form_state->getValue('creationDateLimit'));
 		$config->save();
     parent::submitForm($form, $form_state);
   }

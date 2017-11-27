@@ -46,7 +46,7 @@ class TopZoneBlock extends BlockBase {
 		if ($node->hasField('field_top_zone_bg_mobile')) {
 			$top_zone_background_mobile = $node->get('field_top_zone_bg_mobile')->getValue();
 		}
-		$block['#type'] = 'processed_text';
+		$block['#type'] = 'markup';
 		$block['#markup'] = '';
 		$content = '';
 		$contentTop = '';
@@ -58,6 +58,7 @@ class TopZoneBlock extends BlockBase {
 		}
 		if(isset($top_zone_background[0]['target_id'])){
 			$entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
+
 			$url = '';
 			if (!is_null($entity)){
 				$uri = $entity->getType()->thumbnail($entity);

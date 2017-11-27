@@ -12,7 +12,7 @@ field_name: field_corporate_image
 entity_type: node
 bundle: homepage
 label: Image
-description: ''
+description: 'Image size: 1400x500px'
 required: false
 translatable: false
 default_value: {  }
