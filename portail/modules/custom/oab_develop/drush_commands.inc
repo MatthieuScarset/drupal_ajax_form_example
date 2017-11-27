@@ -23,5 +23,6 @@ pm-enable -y oab_will
 pm-enable -y oab_tealium
 pm-enable -y oab_axiome
 pm-enable -y oab_backbones
+pm-enable -y views_autocomplete_api
 updb
 #entity-updates
