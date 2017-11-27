@@ -60,9 +60,6 @@ article.product ul{
     margin-bottom: 0px !important;
     padding-bottom: 1rem;
 }
-article.product ul{
-    padding-left: 0;
-}
 article .field--type-text-long ul li,
 article .content .field--type-text-long ul li,
 article.product ul li{
@@ -71,7 +68,7 @@ article.product ul li{
 }
 article .field--type-text-long ul li:before,
 article .content .field--type-text-long ul li:before,
-article .product ul li:before{
+article.product.full ul li:before{
     content: "■";
     color: #FF7900;
     position: absolute;
@@ -80,7 +77,7 @@ article .product ul li:before{
 
 article .field--type-text-long ul.nav-tabs li:before,
 article .content .field--type-text-long ul.nav-tabs li:before,
-article .product ul.nav-tabs li:before{
+article.product.full ul.nav-tabs li:before{
     content: "";
 }
 

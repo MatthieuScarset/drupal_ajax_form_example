@@ -24,4 +24,5 @@ pm-enable -y oab_tealium
 pm-enable -y oab_axiome
 pm-enable -y oab_backbones
 updb
+cr
 #entity-updates
