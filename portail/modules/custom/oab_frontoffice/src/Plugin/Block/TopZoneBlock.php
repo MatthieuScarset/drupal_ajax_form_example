@@ -70,7 +70,11 @@ class TopZoneBlock extends BlockBase {
 				$url = ImageStyle::load($img_style)->buildUrl($uri);
 				$url = file_url_transform_relative($url);
 			}
-			$contentDesktop = check_markup('<div id="topzonebg"  class="hidden-xs" style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
+			$classHiddenXs = "";
+			if(isset($top_zone_background_mobile[0]['target_id'])){
+				$classHiddenXs = 'class="hidden-xs"';
+			}
+			$contentDesktop = check_markup('<div id="topzonebg"  '.$classHiddenXs.' style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
 			$content = $contentDesktop;
 		}
 		if(isset($top_zone_background_mobile[0]['target_id'])){
