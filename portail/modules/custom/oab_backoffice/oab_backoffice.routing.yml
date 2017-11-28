@@ -29,3 +29,11 @@ oab.general_settings:
     _title: 'General settings'
   requirements:
     _permission: 'administer site configuration'
+
+oab.settings_ece:
+  path: '/admin/structure/oab/settings/ece'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\oabSettingsEceForm'
+    _title: 'ECE settings'
+  requirements:
+    _permission: 'administer site configuration'
