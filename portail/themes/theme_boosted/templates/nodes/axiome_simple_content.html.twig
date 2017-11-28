@@ -16,7 +16,7 @@
                         <h2 class="titre2">{{ field.Attributes.title }}</h2>
                     {% endif %}
                     {% if field.Attributes.paragraph|trim is not empty %}
-                        <p class="highlight1">{{ field.Attributes.paragraph|raw|nl2br }}</p>
+                        <p class="highlight1">{{ field.Attributes.paragraph|linkAxiome|raw }}</p>
                     {% endif %}
                     {% if field.Attributes.schema.url_archive|trim is not empty %}
                         <div class="col col-md-12 nopadding image">

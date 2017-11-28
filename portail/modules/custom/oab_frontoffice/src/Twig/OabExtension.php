@@ -43,6 +43,7 @@ class OabExtension extends \Twig_Extension {
       new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
       new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
       new \Twig_SimpleFilter('formatDate', [$this, 'formatDate']),
+      new \Twig_SimpleFilter('linkAxiome', [$this, 'linkAxiome']),
     ];
 
     return $filters;
@@ -304,5 +305,11 @@ class OabExtension extends \Twig_Extension {
     }
 
     return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
+  }
+
+  public function linkAxiome($content){
+    $content = str_replace("<link", "<a", $content);
+    $content = str_replace("</link>", "</a>", $content);
+    return $content;
   }
 }
