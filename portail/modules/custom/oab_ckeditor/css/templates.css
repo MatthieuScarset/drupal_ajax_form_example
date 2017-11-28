@@ -97,16 +97,16 @@
     width: 100%;
     height: auto;
 }
-.node.full-html.full .obs_template > .col-md-6 img,
-.node.full-html.full .obs_template > .col-md-6 p > img,
-.solution.full .obs_template > .col-md-6 img,
-.solution.full .obs_template > .col-md-6 p > img,
-.industry.full .obs_template > .col-md-6 img,
-.industry.full .obs_template > .col-md-6 p > img,
-.region.full .obs_template > .col-md-6 img,
-.region.full .obs_template > .col-md-6 p > img,
-.country.full .obs_template > .col-md-6 img,
-.country.full .obs_template > .col-md-6 p > img{
+.node.full-html.full .obs_template > .col-md-8 img,
+.node.full-html.full .obs_template > .col-md-8 p > img,
+.solution.full .obs_template > .col-md-8 img,
+.solution.full .obs_template > .col-md-8 p > img,
+.industry.full .obs_template > .col-md-8 img,
+.industry.full .obs_template > .col-md-8 p > img,
+.region.full .obs_template > .col-md-8 img,
+.region.full .obs_template > .col-md-8 p > img,
+.country.full .obs_template > .col-md-8 img,
+.country.full .obs_template > .col-md-8 p > img{
     max-width: 753px;
 }
 .obs_template > .col-md-6 img,
