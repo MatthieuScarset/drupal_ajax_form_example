@@ -12,7 +12,7 @@ field_name: field_top_zone_image_mobile
 entity_type: node
 bundle: homepage
 label: 'Image Mobile'
-description: 'Max height : 500px'
+description: 'Max height : 450px'
 required: false
 translatable: false
 default_value: {  }
