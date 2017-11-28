@@ -170,7 +170,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		'node_region_form', 'node_region_edit_form',
 		'node_simple_page_form', 'node_simple_page_edit_form',
 		'node_country_form', 'node_country_edit_form',
-		'node_full_html_form', 'node_full_html_edit_form' ))) {
+		'node_full_html_form', 'node_full_html_edit_form',
+        'node_distributor_form', 'node_distributor_edit_form'))) {
 
 		$form['#attached']['library'][] = 'oab_backoffice/metadata';
 
