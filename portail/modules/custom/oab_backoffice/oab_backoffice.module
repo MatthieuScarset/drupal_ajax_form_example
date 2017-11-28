@@ -302,6 +302,22 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
         $form['elements']['actions']['#submit__label'] = 'Отправить';
     }
+
+
+	//preselection des departements et segments de marché sur les PARTNERS
+	if (in_array($form_id, array( 'node_partner_form' )))
+	{
+		print 'partenaire <br/>';
+		if(isset($form['field_department'])){
+			print 'field departement <br/>';
+			$departments_option = $form['field_department']['widget']['#options'];
+
+			foreach($departments_option AS $key => $value){
+				$form['field_department']['widget']['#options'][$key]['selected'] = TRUE;
+			}
+			oabt($form['field_department']['widget']['#options'], TRUE); die();
+		}
+	}
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
