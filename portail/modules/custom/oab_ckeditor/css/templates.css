@@ -97,7 +97,18 @@
     width: 100%;
     height: auto;
 }
-
+.node.full-html.full .obs_template > .col-md-6 img,
+.node.full-html.full .obs_template > .col-md-6 p > img,
+.solution.full .obs_template > .col-md-6 img,
+.solution.full .obs_template > .col-md-6 p > img,
+.industry.full .obs_template > .col-md-6 img,
+.industry.full .obs_template > .col-md-6 p > img,
+.region.full .obs_template > .col-md-6 img,
+.region.full .obs_template > .col-md-6 p > img,
+.country.full .obs_template > .col-md-6 img,
+.country.full .obs_template > .col-md-6 p > img{
+    max-width: 753px;
+}
 .obs_template > .col-md-6 img,
 .obs_template > .col-md-6 p > img {
     max-width: 355px;
@@ -154,6 +165,16 @@
 }
 .obs_template .small-image{
     width: auto !important;
+}
+.cke_editable .obs_template > .col-md-8 img,
+.cke_editable .obs_template > .col-md-8 p > img,
+.cke_editable .obs_template > .col-md-6 img,
+.cke_editable .obs_template > .col-md-6 p > img,
+.cke_editable .obs_template > .col-md-4 img,
+.cke_editable .obs_template > .col-md-4 p > img,
+.cke_editable .obs_template > .col-md-3 img,
+.cke_editable .obs_template > .col-md-3 p > img{
+    max-width: 100%;
 }
 
 .obs_template.one_column li > p,
