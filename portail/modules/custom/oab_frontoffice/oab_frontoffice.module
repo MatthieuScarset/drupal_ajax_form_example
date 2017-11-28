@@ -302,16 +302,18 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         $form['actions']['submit']['#value'] = "Найти";
       }
     }
-    kint($form);
-    if (isset($form['name'])){
-      $form['name']['#type'] = "select";
-      $form['name']['#options'] = array(
+
+    if (isset($form['solution'])){
+      $form['solution']['#type'] = "select";
+      $form['solution']['#options'] = array(
         'All' => '- Any -',
-        'Business Innovation' => 'Business Innovation',
+        'Cyber Defense' => 'Cyber Defense',
         'Collaborative Workspace' => 'Collaborative Workspace',
         'Enriched Connectivity' => 'Enriched Connectivity'
       );
-      $form['name']['#default'] = '- Any -';
+      $form['solution']['#default_value'] = 'All';
+      $form['solution']['#size'] = null;
+      $form['solution']['#validated'] = TRUE;
     }
   }
 
