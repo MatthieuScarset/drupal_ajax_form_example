@@ -10,7 +10,7 @@ field_name: field_top_zone_bg_mobile
 entity_type: node
 bundle: product
 label: 'Top zone background mobile'
-description: ''
+description: 'Max-height: 280px'
 required: false
 translatable: true
 default_value: {  }
