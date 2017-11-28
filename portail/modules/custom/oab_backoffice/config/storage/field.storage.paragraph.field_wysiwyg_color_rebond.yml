@@ -1,0 +1,21 @@
+uuid: e0802654-19ea-4a72-8205-e59cd94fa238
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_wysiwyg_color_rebond
+field_name: field_wysiwyg_color_rebond
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: 'oab_backoffice_paragraph_rebond_wysiwyg_allowed_values'
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

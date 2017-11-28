@@ -9,6 +9,8 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Entity\EntityInterface;
 use \Drupal\file\Entity\File;
 use Drupal\Core\Datetime;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
 
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -599,7 +601,6 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
     }
 }
 
-
 /**
  * Implements hook_cron().
  * Suppression des resultats des webforms de plus d'un an
@@ -630,4 +631,14 @@ function oab_backoffice_cron() {
    # \Drupal::logger('Cron Webform')->notice("$nbSubmissions résultats de webforms de plus d'un an ont été supprimés");
 
   #}
+}
+
+/**
+ * fonction qui retournent les valeurs disponibles pour le choix de la couleur du block Rebond Wysiwyg
+ */
+function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  return [
+    "white"  => "White",
+    "black" => "Black"
+  ];
 }
