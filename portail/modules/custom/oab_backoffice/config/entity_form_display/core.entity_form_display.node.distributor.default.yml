@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.distributor.field_navigation_link
     - field.field.node.distributor.field_phone_number
     - field.field.node.distributor.field_postal_code
+    - field.field.node.distributor.field_products
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
     - image.style.thumbnail
@@ -69,6 +70,7 @@ third_party_settings:
         - field_postal_code
         - field_city
         - field_phone_number
+        - field_products
       parent_name: group_onglets
       weight: 8
       format_type: tab
@@ -203,6 +205,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_products:
+    weight: 14
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_solution:
     weight: 9
