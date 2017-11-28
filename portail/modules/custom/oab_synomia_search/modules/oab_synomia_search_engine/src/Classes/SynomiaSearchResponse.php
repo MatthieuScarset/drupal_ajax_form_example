@@ -89,27 +89,22 @@ class SynomiaSearchResponse {
 	private function getResultsSimpleArray($xmlResult, $type)
 	{
 		$clusterArray = array();
-		$clusterArray['typeId'] = $type;
-		$typeObject = NodeType::load($type);
-		if(isset($typeObject) && !empty($typeObject))
-		{
-			$typeName = $typeObject->label();
-		}
-		$clusterArray['typeName'] = $typeName;
-		$clusterArray['nbResults'] = $this->nbResultsTotal;
-		$clusterArray['results'] = array();
-		if(isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item))
-		{
-			foreach ($xmlResult->resultElements->item as $item)
-			{
-				$myItem = array();
-				$myItem['title'] = $item->extitle;
-				$myItem['URL'] = $item->URL;
-				$myItem['description'] = $item->description;
-				$clusterArray['results'][] = $myItem;
+		if( $type != "#SYNAUTRE#") {
+			$clusterArray['typeId'] = $type;
+			$clusterArray['typeName'] = $this->getTypeLabel($type);
+			$clusterArray['nbResults'] = $this->nbResultsTotal;
+			$clusterArray['results'] = array();
+			if (isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item)) {
+				foreach ($xmlResult->resultElements->item as $item) {
+					$myItem = array();
+					$myItem['title'] = $item->extitle;
+					$myItem['URL'] = $item->URL;
+					$myItem['description'] = $item->description;
+					$clusterArray['results'][] = $myItem;
+				}
 			}
+			$this->results[$type] = $clusterArray;
 		}
-		$this->results[$type] = $clusterArray;
 	}
 
 	/**
@@ -130,39 +125,35 @@ class SynomiaSearchResponse {
 				foreach ($aspects as $aspect)
 				{
 					$type = $aspect->getAttribute('value');
-					$clusterArray['typeId'] = $type;
-					$typeObject = NodeType::load($type);
-					if(isset($typeObject) && !empty($typeObject))
-					{
-						$typeName = $typeObject->label();
-					}
-					$clusterArray['typeName'] = $typeName;
-					$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
+					if( $type != "#SYNAUTRE#") {
+						$clusterArray['typeId'] = $type;
+						$clusterArray['typeName'] = $this->getTypeLabel($type);
+						$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
 
-					$items = $aspect->getElementsByTagName("item");
-					$clusterArray['results'] = array();
-					foreach ($items as $item)
-					{
-						$myItem = array();
-						if($item->getElementsByTagName("extitle")->length > 0)
-						{
-							$myItem['title'] = $item->getElementsByTagName("extitle")->item(0)->nodeValue;
+						$items = $aspect->getElementsByTagName("item");
+						$clusterArray['results'] = array();
+						foreach ($items as $item) {
+							$myItem = array();
+							if ($item->getElementsByTagName("extitle")->length > 0) {
+								$myItem['title'] = $item->getElementsByTagName("extitle")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("URL")->length > 0) {
+								$myItem['URL'] = $item->getElementsByTagName("URL")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("description")->length > 0) {
+								$myItem['description'] = $item->getElementsByTagName("description")
+									->item(0)->nodeValue;
+							}
+							if ($item->getElementsByTagName("rubrique")->length > 0) {
+								$myItem['rubrique'] = $item->getElementsByTagName("rubrique")
+									->item(0)->nodeValue;
+							}
+							$clusterArray['results'][] = $myItem;
 						}
-						if($item->getElementsByTagName("URL")->length > 0)
-						{
-							$myItem['URL'] = $item->getElementsByTagName("URL")->item(0)->nodeValue;
-						}
-						if($item->getElementsByTagName("description")->length > 0)
-						{
-							$myItem['description'] = $item->getElementsByTagName("description")->item(0)->nodeValue;
-						}
-						if($item->getElementsByTagName("rubrique")->length > 0)
-						{
-							$myItem['rubrique'] = $item->getElementsByTagName("rubrique")->item(0)->nodeValue;
-						}
-						$clusterArray['results'][] = $myItem;
+						$this->results[$type] = $clusterArray;
 					}
-					$this->results[$type] = $clusterArray;
 				}
 			}
 			//oabt($this->results, true);
@@ -185,13 +176,7 @@ class SynomiaSearchResponse {
 				foreach($facets as $facet)
 				{
 					if( $facet->firstChild->nodeValue != "#SYNAUTRE#"){
-						$type = NodeType::load(str_replace(' ','_',$facet->firstChild->nodeValue));
-						if(isset($type) && !empty($type))
-						{
-							$typeName = $type->label();
-						}
-						//$typeName = $facet->firstChild->nodeValue;
-						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $typeName, 'nbresults' => $facet->getAttribute('nb_res'));
+						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ','_',$facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
 					}
 				}
 			}
@@ -218,4 +203,28 @@ class SynomiaSearchResponse {
 			}
 		}
 	}
+
+	/** Retourne le libellé du Type passé en paramètre
+	 * @param $type_id
+	 */
+	private function getTypeLabel($type_id){
+		$typeName = "";
+		switch ($type_id){
+			case 'full_html':
+				$typeName = 'Content';
+				break;
+			case 'simple_page':
+				$typeName = 'Article';
+				break;
+			default:
+				$typeObject = NodeType::load($type_id);
+				if(isset($typeObject) && !empty($typeObject))
+				{
+					$typeName = $typeObject->label();
+				}
+
+		}
+		return $typeName;
+	}
 }
+
