@@ -106,14 +106,14 @@
 }
 .node.full-html.full .obs_template > .col-md-6 img,
 .node.full-html.full .obs_template > .col-md-6 p > img,
-.node.solution.full .obs_template > .col-md-6 img,
-.node.solution.full .obs_template > .col-md-6 p > img,
-.node.industry.full .obs_template > .col-md-6 img,
-.node.industry.full .obs_template > .col-md-6 p > img,
-.node.region.full .obs_template > .col-md-6 img,
-.node.region.full .obs_template > .col-md-6 p > img,
-.node.country.full .obs_template > .col-md-6 img,
-.node.country.full .obs_template > .col-md-6 p > img{
+.solution.full .obs_template > .col-md-6 img,
+.solution.full .obs_template > .col-md-6 p > img,
+.industry.full .obs_template > .col-md-6 img,
+.industry.full .obs_template > .col-md-6 p > img,
+.region.full .obs_template > .col-md-6 img,
+.region.full .obs_template > .col-md-6 p > img,
+.country.full .obs_template > .col-md-6 img,
+.country.full .obs_template > .col-md-6 p > img{
     max-width: 560px;
 }
 .obs_template > .col-md-4 img,
@@ -124,14 +124,14 @@
 }
 .node.full-html.full .obs_template > .col-md-4 img,
 .node.full-html.full .obs_template > .col-md-4 p > img,
-.node.solution.full .obs_template > .col-md-4 img,
-.node.solution.full .obs_template > .col-md-4 p > img,
-.node.industry.full .obs_template > .col-md-4 img,
-.node.industry.full .obs_template > .col-md-4 p > img,
-.node.region.full .obs_template > .col-md-4 img,
-.node.region.full .obs_template > .col-md-4 p > img,
-.node.country.full .obs_template > .col-md-4 img,
-.node.country.full .obs_template > .col-md-4 p > img{
+.solution.full .obs_template > .col-md-4 img,
+.solution.full .obs_template > .col-md-4 p > img,
+.industry.full .obs_template > .col-md-4 img,
+.industry.full .obs_template > .col-md-4 p > img,
+.region.full .obs_template > .col-md-4 img,
+.region.full .obs_template > .col-md-4 p > img,
+.country.full .obs_template > .col-md-4 img,
+.country.full .obs_template > .col-md-4 p > img{
     max-width: 367px;
 }
 .obs_template > .col-md-3 img,
@@ -142,14 +142,14 @@
 }
 .node.full-html.full .obs_template > .col-md-3 img,
 .node.full-html.full .obs_template > .col-md-3 p > img,
-.node.solution.full .obs_template > .col-md-3 img,
-.node.solution.full .obs_template > .col-md-3 p > img,
-.node.industry.full .obs_template > .col-md-3 img,
-.node.industry.full .obs_template > .col-md-3 p > img,
-.node.region.full .obs_template > .col-md-3 img,
-.node.region.full .obs_template > .col-md-3 p > img,
-.node.country.full .obs_template > .col-md-3 img,
-.node.country.full .obs_template > .col-md-3 p > img{
+.solution.full .obs_template > .col-md-3 img,
+.solution.full .obs_template > .col-md-3 p > img,
+.industry.full .obs_template > .col-md-3 img,
+.industry.full .obs_template > .col-md-3 p > img,
+.region.full .obs_template > .col-md-3 img,
+.region.full .obs_template > .col-md-3 p > img,
+.country.full .obs_template > .col-md-3 img,
+.country.full .obs_template > .col-md-3 p > img{
     max-width: 270px;
 }
 .obs_template .small-image{
