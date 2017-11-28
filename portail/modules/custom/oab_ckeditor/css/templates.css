@@ -107,7 +107,7 @@
 .region.full .obs_template > .col-md-8 p > img,
 .country.full .obs_template > .col-md-8 img,
 .country.full .obs_template > .col-md-8 p > img{
-    max-width: 753px;
+    max-width: 833px;
 }
 .obs_template > .col-md-6 img,
 .obs_template > .col-md-6 p > img {
@@ -125,7 +125,7 @@
 .region.full .obs_template > .col-md-6 p > img,
 .country.full .obs_template > .col-md-6 img,
 .country.full .obs_template > .col-md-6 p > img{
-    max-width: 560px;
+    max-width: 620px;
 }
 .obs_template > .col-md-4 img,
 .obs_template > .col-md-4 p > img {
@@ -143,7 +143,7 @@
 .region.full .obs_template > .col-md-4 p > img,
 .country.full .obs_template > .col-md-4 img,
 .country.full .obs_template > .col-md-4 p > img{
-    max-width: 367px;
+    max-width: 407px;
 }
 .obs_template > .col-md-3 img,
 .obs_template > .col-md-3 p > img {
@@ -161,7 +161,7 @@
 .region.full .obs_template > .col-md-3 p > img,
 .country.full .obs_template > .col-md-3 img,
 .country.full .obs_template > .col-md-3 p > img{
-    max-width: 270px;
+    max-width: 300px;
 }
 .obs_template .small-image{
     width: auto !important;
