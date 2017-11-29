@@ -9,7 +9,9 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Entity\EntityInterface;
 use \Drupal\file\Entity\File;
 use Drupal\Core\Datetime;
-
+use Drupal\node\Entity\Node;
+use Drupal\entity\Revision\RevisionableContentEntityBase;
+use Drupal\workbench_moderation\Entity\ModerationState;
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 	'field_job_profile',
@@ -208,7 +210,14 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 	}
 
-
+    /*if ($form_id == 'views_form_content_page_1'){
+	    $results = $form['output'][0]['#view'];
+	    oabt($results);
+	    foreach($results as $n){
+	        oabt($n->_entity);
+            $n->_entity->setTitle('yihaaa');
+        }
+    }*/
 
 	/*
 		// valeur par défaut pour le champ "display_title"
@@ -541,12 +550,12 @@ function oab_backoffice_views_data_alter(array &$data) {
 			'id' => 'node_year'
 		),
 	);
-
 }
 
 
+
 /**
- * Implements hook_views_pre_render().
+ * Implements hook_views_post_render().
  */
 function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
 
@@ -566,8 +575,47 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
       $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($node_type : $node_id)"));
     }
   }
+
 }
 
+/**
+ * Implements hook_views_pre_render().
+ */
+function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
+
+    if ($view->id() == 'content') {
+      foreach ($view->result as $i => $result) {
+            # On recupère les données nécessaires
+         $node_type = $result->_entity->get('type')->entity->id();
+          if($node_type == 'product'){
+            $node_label =  $result->_entity->getTitle();
+            $node_axiome_data =  $result->_entity->get('field_axiome_data')->getValue();
+            if(isset($node_axiome_data[0]['value'])){
+              $data = unserialize($node_axiome_data[0]['value']);
+              if(isset($data['Attributes']['nom_offre_commerciale']) && $data['Attributes']['nom_offre_commerciale'] != ''){
+                $offre_commerciale = $data['Attributes']['nom_offre_commerciale'];
+                # On set la nouvelle valeur
+                $view->result[$i]->_entity->get('title')->setValue(array(0=>"$offre_commerciale ($node_label)"));
+              }
+            }
+          }
+
+          if (isset($result->workbench_revision_tracker_revision_id)
+            && $result->workbench_revision_tracker_revision_id != 0
+            && $result->workbench_revision_tracker_revision_id !== null ) {
+
+            #kint($result->workbench_revision_tracker_revision_id);
+
+            $maRevision = node_revision_load($result->workbench_revision_tracker_revision_id);
+            $moderationState = $maRevision->get('moderation_state')->getValue();
+            #Obligé de load le ModerationState complet, il n'y est pas dans l'objet de la revision.....
+            $moderationStateObject = ModerationState::load( $moderationState[0]['target_id']);
+            $result->workbench_revision_tracker_revision_id = $moderationStateObject->get('label');
+
+          }
+      }
+    }
+}
 
 function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) {
     if ($langcode == 'ru') {
