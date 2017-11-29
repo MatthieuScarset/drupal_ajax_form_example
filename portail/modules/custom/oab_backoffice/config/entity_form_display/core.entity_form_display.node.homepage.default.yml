@@ -29,16 +29,17 @@ dependencies:
     - field.field.node.homepage.field_solution_banner_left_zone
     - field.field.node.homepage.field_solution_banner_right_zone
     - field.field.node.homepage.field_solution_banner_title
+    - field.field.node.homepage.field_solution_image_mobile
     - field.field.node.homepage.field_subhead_title_top_zone
     - field.field.node.homepage.field_title_color
     - field.field.node.homepage.field_top_zone_image
-    - image.style.homepage_top_zone
+    - field.field.node.homepage.field_top_zone_image_mobile
+    - image.style.max_650
     - node.type.homepage
   module:
     - field_group
     - image
     - link
-    - metatag
     - paragraphs
     - path
     - text
@@ -50,6 +51,7 @@ third_party_settings:
         - field_header_title
         - field_subhead_title_top_zone
         - field_top_zone_image
+        - field_top_zone_image_mobile
         - field_title_color
         - field_news_top_zone
       parent_name: group_onglets
@@ -84,6 +86,7 @@ third_party_settings:
         - field_solution_banner_title
         - field_solution_banner_highlight
         - field_solution_banner_image
+        - field_solution_image_mobile
         - group_left_zone
         - group_right
       parent_name: group_onglets
@@ -102,7 +105,7 @@ third_party_settings:
         - field_banner_left_zone_title
         - field_solution_banner_left_zone
       parent_name: group_solution_banner
-      weight: 29
+      weight: 30
       format_type: fieldset
       format_settings:
         id: ''
@@ -115,7 +118,7 @@ third_party_settings:
         - field_banner_right_zone_title
         - field_solution_banner_right_zone
       parent_name: group_solution_banner
-      weight: 30
+      weight: 31
       format_type: fieldset
       format_settings:
         id: ''
@@ -318,15 +321,9 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_metatags:
-    type: metatag_firehose
-    weight: 8
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_news_top_zone:
     type: entity_reference_paragraphs
-    weight: 46
+    weight: 48
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -400,6 +397,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_solution_image_mobile:
+    weight: 29
+    settings:
+      preview_image_style: large
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_subhead_title_top_zone:
     weight: 44
     settings:
@@ -409,7 +414,7 @@ content:
     type: string_textfield
     region: content
   field_title_color:
-    weight: 45
+    weight: 47
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -422,11 +427,20 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_top_zone_image_mobile:
+    weight: 46
+    settings:
+      preview_image_style: max_650
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
   langcode:
     type: language_select
     weight: 1
     region: content
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
   path:
     type: path
@@ -441,6 +455,13 @@ content:
     weight: 5
     region: content
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
@@ -468,5 +489,6 @@ content:
 hidden:
   field_corporate_menu: true
   field_corporate_show_menu: true
+  field_metatags: true
   field_partner_button_link: true
   translation: true
