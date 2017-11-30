@@ -41,3 +41,10 @@ function oab_dvi_update_8005() {
 }
 
 
+/**
+ * Création du webform DVI Contact Global
+ * See JIRA DVI-6
+ */
+function oab_dvi_update_8006() {
+  include_once("updates/update_8006.inc");
+}
