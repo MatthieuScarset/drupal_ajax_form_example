@@ -31,3 +31,13 @@ function oab_dvi_update_8003() {
 function oab_dvi_update_8004() {
   include_once("updates/update_8004.inc");
 }
+
+/**
+ * Création des subhomes DVI Products et Distributors, création du mode de rendu Subhome pour les Distributeurs,
+ * ajout du champ subhome pour le type de contenu distributeur
+ */
+function oab_dvi_update_8005() {
+    include_once("updates/update_8005.inc");
+}
+
+

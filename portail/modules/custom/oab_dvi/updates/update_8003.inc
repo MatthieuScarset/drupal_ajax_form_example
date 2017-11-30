@@ -16,10 +16,12 @@ if(empty($nodeStorage)) {
 //yml node.type.distributor.yml
 oabt_YmlImport("node.type.distributor.yml");
 
+
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('node.type.distributor', array (
     'label' => 'Distributeur',
 ));
+
 
 
 ##Création du field et du field storage
@@ -48,29 +50,8 @@ if(empty($field)) {
 oabt_YmlImport("field.field.node.distributor.field_certification_obs.yml");
 
 
-$field_storage = FieldStorageConfig::loadByName('node', 'field_logo');
-if(empty($field_storage)) {
-    FieldStorageConfig::create(array(
-        'field_name' => 'field_logo',
-        'entity_type' => 'node',
-        'type' => 'image',
-    ))->save();
-}
-oabt_YmlImport("field.storage.node.field_logo.yml");
 
-$field = FieldConfig::loadByName('node', 'distributor', 'field_logo');
-if(empty($field)) {
-    $config_array = array(
-        'field_name' => 'field_logo',
-        'entity_type' => 'node',
-        'bundle' => 'distributor',
-        'label' => 'Logo',
-        'description' => '',
-        'required' => false,
-    );
-    FieldConfig::create($config_array)->save();
-}
-oabt_YmlImport("field.field.node.distributor.field_logo.yml");
+
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_departments');
@@ -140,6 +121,7 @@ $collection->write('field.field.node.distributor.field_products', array (
 
 ##Distributor's existing fields
 
+oabt_YmlImport("field.field.node.distributor.field_visual.yml");
 oabt_YmlImport("field.field.node.distributor.field_additionnal.yml");
 oabt_YmlImport("field.field.node.distributor.field_city.yml");
 oabt_YmlImport("field.field.node.distributor.field_email_address.yml");
