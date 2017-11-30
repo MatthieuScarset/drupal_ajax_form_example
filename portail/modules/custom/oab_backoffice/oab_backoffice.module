@@ -638,7 +638,17 @@ function oab_backoffice_cron() {
  */
 function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
   return [
-    "white"  => "White",
-    "black" => "Black"
+    "#f60"        => "Orange",
+    "#fff"        => "White",
+    "#000"        => "Black",
+    "#55bc87"     => "Green",
+    "#a786d5"     => "Purple",
+    "#4bb4e6"     => "Blue",
+    "#ffd200"     => "Yellow",
+    "#ffb4e6"     => "Pink",
+    "#595959"     => "Grey",
+    "#8F8C87"     => "Dark grey",
+    "#58595b"     =>"Darker grey",
+    "#333333"     => "Grey black",
   ];
 }
