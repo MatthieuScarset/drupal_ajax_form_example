@@ -10,7 +10,6 @@ dependencies:
     - field.field.node.distributor.field_departments
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_highlight
-    - field.field.node.distributor.field_logo
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -21,49 +20,56 @@ dependencies:
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
     - field.field.node.distributor.field_subhome
+    - field.field.node.distributor.field_visual
     - node.type.distributor
   module:
-    - responsive_image
-    - taxonomy
     - user
 id: node.distributor.subhome
 targetEntityType: node
 bundle: distributor
 mode: subhome
 content:
-  field_certification_obs:
-    weight: 3
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-    label: visually_hidden
-  field_highlight:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-    label: visually_hidden
-  field_logo:
+  field_additionnal:
+    type: string
     weight: 2
+    region: content
+    label: hidden
     settings:
-      responsive_image_style: ''
-      image_link: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: responsive_image
-    region: content
-    label: visually_hidden
-  field_solution:
+  field_city:
+    type: string
     weight: 4
-    settings: {  }
-    third_party_settings: {  }
-    type: entity_reference_rss_category
     region: content
-    label: visually_hidden
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_postal_code:
+    type: string
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_street:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: subhome_image
+      link: false
+    third_party_settings: {  }
   path:
     type: path
     weight: 1
@@ -77,27 +83,22 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  workbench_moderation_control:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   body: true
-  field_additionnal: true
-  field_city: true
+  field_certification_obs: true
   field_departments: true
   field_email_address: true
+  field_highlight: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
   field_navigation_link: true
   field_phone_number: true
-  field_postal_code: true
   field_products: true
-  field_street: true
+  field_solution: true
   field_subhome: true
   langcode: true
   links: true
   promote: true
   sticky: true
+  workbench_moderation_control: true

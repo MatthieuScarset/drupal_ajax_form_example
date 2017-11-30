@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_media_modal
     - field.field.node.distributor.body
     - field.field.node.distributor.field_additionnal
     - field.field.node.distributor.field_certification_obs
@@ -9,7 +10,6 @@ dependencies:
     - field.field.node.distributor.field_departments
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_highlight
-    - field.field.node.distributor.field_logo
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -20,11 +20,11 @@ dependencies:
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
     - field.field.node.distributor.field_subhome
-    - image.style.thumbnail
+    - field.field.node.distributor.field_visual
     - node.type.distributor
   module:
+    - entity_browser
     - field_group
-    - image
     - link
     - path
     - workbench_moderation
@@ -62,7 +62,7 @@ third_party_settings:
         - langcode
         - title
         - field_highlight
-        - field_logo
+        - field_visual
         - field_certification_obs
         - field_navigation_link
         - field_email_address
@@ -236,6 +236,19 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_visual:
+    weight: 5
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   langcode:
     type: language_select

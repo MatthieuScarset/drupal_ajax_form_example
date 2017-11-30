@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.distributor.field_departments
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_highlight
-    - field.field.node.distributor.field_logo
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -20,10 +19,10 @@ dependencies:
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
     - field.field.node.distributor.field_subhome
+    - field.field.node.distributor.field_visual
     - node.type.distributor
   module:
     - link
-    - responsive_image
     - taxonomy
     - user
 id: node.distributor.default
@@ -162,6 +161,15 @@ content:
     type: string
     region: content
     label: hidden
+  field_visual:
+    weight: 101
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   langcode:
     type: language
     weight: 2
