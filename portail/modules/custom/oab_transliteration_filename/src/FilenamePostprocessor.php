@@ -1,3 +1,5 @@
+<?php
+
 namespace Drupal\oab_transliteration_filename;
 
 use Drupal\Component\Transliteration\TransliterationInterface;

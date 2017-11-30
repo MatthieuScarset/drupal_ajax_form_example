@@ -1,7 +1,9 @@
 <?php
 
-namespaceDrupaloab_transliteration_filename;
-useDrupalCoreTransliterationPhpTransliteration;
+namespace Drupal\oab_transliteration_filename;
+
+use Drupal\Core\Transliteration\PhpTransliteration;
+
 class Transliteration extends PhpTransliteration {
 
     public function transliterate($string, $langcode = 'en', $unknown_character = '?', $max_length = NULL) {

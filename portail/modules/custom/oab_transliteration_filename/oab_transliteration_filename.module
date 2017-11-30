@@ -4,7 +4,7 @@
  * Implements hook_ENTITY_TYPE_field_values_init().
  */
 function oab_transliteration_filename_file_field_values_init($entity) {
-    $filename_postprocessor = Drupal::service('ge_assets.filename_postprocessor');
+    $filename_postprocessor = Drupal::service('oab_transliteration_filename.filename_postprocessor');
     $filename = $entity->getFilename();
     $filename = $filename_postprocessor->process($filename);
     $entity->setFilename($filename);
@@ -13,8 +13,8 @@ function oab_transliteration_filename_file_field_values_init($entity) {
 /**
  * Implements hook_ENTITY_TYPE_presave().
  */
-function oab_transliteration_filename_file_presave(DrupalCoreEntityEntityInterface $entity) {
-    $filename_postprocessor = Drupal::service('ge_assets.filename_postprocessor');
+function oab_transliteration_filename_file_presave($entity) {
+    $filename_postprocessor = Drupal::service('oab_transliteration_filename.filename_postprocessor');
     $new_filename = $filename_postprocessor->process($entity->getFilename());
     if ($new_filename != drupal_basename($entity->getFileUri())) {
         $uri = $entity->getFileUri();
@@ -26,3 +26,5 @@ function oab_transliteration_filename_file_presave(DrupalCoreEntityEntityInterfa
         }
     }
 }
+
+

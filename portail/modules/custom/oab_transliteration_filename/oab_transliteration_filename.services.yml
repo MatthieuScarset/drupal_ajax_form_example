@@ -1,4 +1,4 @@
 services:
-oab_transliteration_filename.filename_postprocessor:
-class: Drupal\oab_transliteration_filename\FilenamePostprocessor
-arguments: ['@config.factory', '@transliteration']
+  oab_transliteration_filename.filename_postprocessor:
+    class: Drupal\oab_transliteration_filename\FilenamePostprocessor
+    arguments: ['@config.factory', '@transliteration']
