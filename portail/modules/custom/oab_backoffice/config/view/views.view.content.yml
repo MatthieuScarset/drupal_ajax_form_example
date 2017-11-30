@@ -1207,17 +1207,6 @@ display:
           admin_label: author
           required: true
           plugin_id: standard
-        uid_1:
-          id: uid_1
-          table: node_field_revision
-          field: uid
-          relationship: none
-          group_type: group
-          admin_label: User
-          required: true
-          entity_type: node
-          entity_field: uid
-          plugin_id: standard
     display_plugin: page
     display_title: Page
     id: page_1
