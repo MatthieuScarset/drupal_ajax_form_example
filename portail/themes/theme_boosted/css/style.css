@@ -1679,7 +1679,7 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 }
 
 
-.webform-dl-document {
+.webform-dl-document, .webform-dvi-contact-global {
     /*background-color: #F5F5F5;*/
     padding: 20px;
 }
@@ -1699,7 +1699,8 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .webform-dl-document .webform-element--title-inline label {
     padding-right: 0;
 }
-.webform-dl-document .webform-dl-document-form-element {
+.webform-dl-document .webform-dl-document-form-element,
+.webform-dvi-contact-global .webform-dvi-contact-global-form-element {
     margin-top: 15px;
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -1729,15 +1730,29 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     display: inline;
 }
 
-.webform-dl-document #edit-submit-button-s- {
+.webform-dl-document #edit-submit-button-s-,
+.webform-dvi-contact-global .dvi-contact-global-submit-container
+{
     text-align: right;
     margin-top: 20px;
-
 }
+
+.webform-dvi-contact-global .g-recaptcha {
+    float: right;
+}
+.webform-dvi-contact-global .dvi-contact-global-submit-container {
+    clear: both;
+}
+
 
 .webform-dl-document-mentionsLegales {
     font-size: 8px;
 }
+
+.webform-dvi-contact-global span.form-required {
+    color:#e74c3c;
+}
+
 
 .embedded-entity.align-left{
     margin-right: 10px;
