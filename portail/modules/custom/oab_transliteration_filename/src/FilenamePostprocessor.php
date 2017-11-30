@@ -18,7 +18,7 @@ class FilenamePostprocessor {
 
     public function process($filename) {
         $filename = Unicode::strtolower($filename);
-        $filename = str_replace(' ', '_', $filename);
+        $filename = str_replace(' ', '-', $filename);
         $filename = $this->transliteration->transliterate($filename);
 
         return $filename;
