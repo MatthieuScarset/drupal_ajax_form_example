@@ -33,6 +33,30 @@ function oab_dvi_update_8004() {
 }
 
 /**
+ * Création des subhomes DVI Products et Distributors, création du mode de rendu Subhome pour les Distributeurs,
+ * ajout du champ subhome pour le type de contenu distributeur
+ */
+function oab_dvi_update_8005() {
+    include_once("updates/update_8005.inc");
+}
+
+
+/**
+ * Création du webform DVI Contact Global
+ * See JIRA DVI-6
+ */
+function oab_dvi_update_8006() {
+  include_once("updates/update_8006.inc");
+}
+
+/**
+ * Ajout des Distributor dans la configuration Synomia pour la recherche + Meta data pour Distributor
+ */
+function oab_dvi_update_8007() {
+  include_once("updates/update_8007.inc");
+}
+
+/**
  * Création du rôle DVI et ses permissions
  */
 function oab_dvi_update_8008() {
