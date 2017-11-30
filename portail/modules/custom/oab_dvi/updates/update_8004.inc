@@ -1,7 +1,7 @@
 <?php
 
 //Champs Department
-$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_department');
+$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_departments');
 if(empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
@@ -12,7 +12,7 @@ if(empty($field_storage)) {
 						1 => 'taxonomy',
 					),
 			),
-		'field_name' => 'field_department',
+		'field_name' => 'field_departments',
 		'entity_type' => 'node',
 		'type' => 'entity_reference',
 		'settings' =>
@@ -29,19 +29,19 @@ if(empty($field_storage)) {
 	))->save();
 }
 
-$field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'partner', 'field_department');
+$field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'partner', 'field_departments');
 if(empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (
 				'config' =>
 					array (
-						0 => 'field.storage.node.field_department',
+						0 => 'field.storage.node.field_departments',
 						1 => 'node.type.partner',
 						2 => 'taxonomy.vocabulary.departments',
 					),
 			),
-		'field_name' => 'field_department',
+		'field_name' => 'field_departments',
 		'entity_type' => 'node',
 		'bundle' => 'partner',
 		'label' => 'Department',
