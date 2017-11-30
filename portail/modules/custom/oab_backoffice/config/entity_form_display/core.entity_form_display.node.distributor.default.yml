@@ -19,6 +19,7 @@ dependencies:
     - field.field.node.distributor.field_products
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
+    - field.field.node.distributor.field_subhome
     - image.style.thumbnail
     - node.type.distributor
   module:
@@ -86,6 +87,7 @@ third_party_settings:
         - field_market_segment
         - field_solution
         - field_departments
+        - field_subhome
       parent_name: group_onglets
       weight: 9
       format_type: tab
@@ -228,6 +230,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_subhome:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select

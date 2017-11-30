@@ -19,222 +19,162 @@ dependencies:
     - field.field.node.distributor.field_products
     - field.field.node.distributor.field_solution
     - field.field.node.distributor.field_street
-    - image.style.thumbnail
+    - field.field.node.distributor.field_subhome
     - node.type.distributor
   module:
-    - field_group
-    - image
     - link
-    - path
-    - workbench_moderation
-third_party_settings:
-  field_group:
-    group_onglets:
-      children:
-        - group_write
-        - group_classify
-        - group_seo
-      parent_name: ''
-      weight: 0
-      format_type: tabs
-      format_settings:
-        id: ''
-        classes: ''
-        direction: vertical
-      label: Onglets
-    group_seo:
-      children:
-        - field_meta_title
-        - field_meta_description
-      parent_name: group_onglets
-      weight: 10
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: SEO
-    group_write:
-      children:
-        - langcode
-        - title
-        - field_highlight
-        - field_logo
-        - field_certification_obs
-        - field_navigation_link
-        - field_email_address
-        - field_street
-        - field_additionnal
-        - field_postal_code
-        - field_city
-        - field_phone_number
-        - field_products
-      parent_name: group_onglets
-      weight: 8
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: Write
-    group_classify:
-      children:
-        - field_market_segment
-        - field_solution
-        - field_departments
-      parent_name: group_onglets
-      weight: 9
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: Classify
+    - responsive_image
+    - taxonomy
+    - user
 id: node.distributor.default
 targetEntityType: node
 bundle: distributor
 mode: default
 content:
-  created:
-    type: datetime_timestamp
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_additionnal:
     weight: 10
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_certification_obs:
     weight: 6
     settings:
-      display_label: true
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
-    type: boolean_checkbox
+    type: boolean
     region: content
+    label: hidden
   field_city:
     weight: 12
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_departments:
     weight: 10
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+    type: entity_reference_rss_category
     region: content
+    label: hidden
   field_email_address:
     weight: 8
-    settings:
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: email_default
+    type: basic_string
     region: content
+    label: hidden
   field_highlight:
     weight: 4
-    settings:
-      rows: 5
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: string_textarea
+    type: basic_string
     region: content
+    label: hidden
   field_logo:
     weight: 5
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      responsive_image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: image_image
+    type: responsive_image
     region: content
+    label: hidden
   field_market_segment:
     weight: 8
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+    type: entity_reference_rss_category
     region: content
+    label: hidden
   field_meta_description:
     weight: 7
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_meta_title:
     weight: 6
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_navigation_link:
     weight: 7
     settings:
-      placeholder_url: ''
-      placeholder_title: ''
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
-    type: link_default
+    type: link
     region: content
+    label: hidden
   field_phone_number:
     weight: 13
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_postal_code:
     weight: 11
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   field_products:
     weight: 14
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: entity_reference_entity_view
     region: content
+    label: hidden
   field_solution:
     weight: 9
     settings: {  }
     third_party_settings: {  }
-    type: options_select
+    type: entity_reference_rss_category
     region: content
+    label: hidden
   field_street:
     weight: 9
     settings:
-      size: 60
-      placeholder: ''
+      link_to_entity: false
     third_party_settings: {  }
-    type: string_textfield
+    type: string
     region: content
+    label: hidden
   langcode:
-    type: language_select
+    type: language
     weight: 2
     region: content
     settings:
-      include_locked: true
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
+    label: hidden
+  links:
+    weight: 100
+    region: content
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -249,24 +189,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  title:
-    type: string_textfield
-    weight: 3
+  workbench_moderation_control:
+    weight: -20
     region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 2
-    region: content
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
 hidden:
   body: true
+  field_subhome: true
   promote: true
   sticky: true
