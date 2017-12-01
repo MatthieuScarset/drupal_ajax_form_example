@@ -24,7 +24,7 @@
                         </div>
                     {% endif %}
                     {% if field.Attributes.video|trim is not empty %}
-                        <div> {{ field.Attributes.video|replace({'//': "https://"})|raw }}</div>
+                        <div> {{ field.Attributes.video|replace({'https://': "//"})|raw }}</div>
                     {% endif %}
                 </div>
                 {% endif %}
