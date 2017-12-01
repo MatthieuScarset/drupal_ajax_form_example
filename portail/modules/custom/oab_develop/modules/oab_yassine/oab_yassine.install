@@ -174,3 +174,9 @@ function oab_yassine_update_8022() {
 function oab_yassine_update_8023() {
 	include_once("updates/update_8023.inc");
 }
+/**
+ *  Ajout du field top_zone mobile
+ */
+function oab_yassine_update_8024() {
+	include_once("updates/update_8024.inc");
+}
