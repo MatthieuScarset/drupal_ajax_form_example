@@ -62,3 +62,9 @@ function oab_dvi_update_8007() {
 function oab_dvi_update_8008() {
   include_once("updates/update_8008.inc");
 }
+/**
+ * MAJ Tous les Products : taggage market segment +50 et +250 salarié
+ */
+function oab_dvi_update_8009() {
+  include_once("updates/update_8009.inc");
+}
