@@ -1,0 +1,385 @@
+uuid: 25a16d28-a765-4ea1-bcc0-dcbd469c1613
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_content
+    - field.field.node.product.field_content_owner
+    - field.field.node.product.field_email_owner
+    - field.field.node.product.field_end_date
+    - field.field.node.product.field_file
+    - field.field.node.product.field_highlight
+    - field.field.node.product.field_id_fiche
+    - field.field.node.product.field_id_offre
+    - field.field.node.product.field_industry
+    - field.field.node.product.field_job_profile
+    - field.field.node.product.field_market_segment
+    - field.field.node.product.field_meta_description
+    - field.field.node.product.field_meta_title
+    - field.field.node.product.field_metatags
+    - field.field.node.product.field_region
+    - field.field.node.product.field_solution
+    - field.field.node.product.field_start_date
+    - field.field.node.product.field_sub_family
+    - field.field.node.product.field_subhome
+    - field.field.node.product.field_test_showroom
+    - field.field.node.product.field_top_zone
+    - field.field.node.product.field_top_zone_background
+    - field.field.node.product.field_try_and_buy
+    - field.field.node.product.field_visual
+    - node.type.product
+  module:
+    - datetime
+    - entity_browser
+    - field_group
+    - metatag
+    - paragraphs
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_write
+        - group_classify
+        - group_seo
+        - group_publish
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_write:
+      children:
+        - langcode
+        - title
+        - field_highlight
+        - field_top_zone
+        - field_top_zone_background
+        - field_content
+        - field_file
+        - field_visual
+        - group_try_and_buy_block
+        - group_test_showroom_block
+      parent_name: group_onglets
+      weight: 5
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Write
+    group_publish:
+      children:
+        - field_content_owner
+        - field_email_owner
+        - group_content_worthy_period
+        - path
+        - field_metatags
+      parent_name: group_onglets
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publish
+    group_seo:
+      children:
+        - field_meta_title
+        - field_meta_description
+      parent_name: group_onglets
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: SEO
+    group_content_worthy_period:
+      children:
+        - field_start_date
+        - field_end_date
+      parent_name: group_publish
+      weight: 37
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Content worthy period'
+    group_classify:
+      children:
+        - field_subhome
+        - field_solution
+        - field_industry
+        - field_job_profile
+        - field_market_segment
+      parent_name: group_onglets
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
+    group_try_and_buy_block:
+      children:
+        - field_try_and_buy
+      parent_name: group_write
+      weight: 10
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Try and buy block'
+    group_test_showroom_block:
+      children:
+        - field_test_showroom
+      parent_name: group_write
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Test Showroom Block'
+id: node.product.default
+targetEntityType: node
+bundle: product
+mode: default
+content:
+  field_content:
+    weight: 7
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_content_owner:
+    weight: 35
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_email_owner:
+    weight: 36
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_end_date:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_file:
+    weight: 8
+    settings:
+      entity_browser: browser_file_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_highlight:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_industry:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_job_profile:
+    weight: 38
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_market_segment:
+    weight: 40
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_meta_description:
+    weight: 14
+    settings:
+      size: 156
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_meta_title:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_metatags:
+    weight: 39
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_solution:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_start_date:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subhome:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_test_showroom:
+    type: entity_reference_paragraphs
+    weight: 12
+    settings:
+      title: 'Test Showroom block'
+      title_plural: 'Test Showroom blocks'
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: paragraph_block_rebond
+    third_party_settings: {  }
+    region: content
+  field_top_zone:
+    weight: 5
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_top_zone_background:
+    type: entity_browser_entity_reference
+    weight: 6
+    region: content
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+  field_try_and_buy:
+    type: entity_reference_paragraphs
+    weight: 11
+    settings:
+      title: 'Try and buy block'
+      title_plural: 'Try and buy blocks'
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: paragraph_block_rebond
+    third_party_settings: {  }
+    region: content
+  field_visual:
+    weight: 9
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 38
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_axiome_data: true
+  field_id_fiche: true
+  field_id_offre: true
+  field_product: true
+  field_region: true
+  field_sub_family: true
+  promote: true
+  sticky: true

@@ -1,0 +1,45 @@
+uuid: 761609b2-adfa-4b38-99b0-8c2e52e5cdc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_block_rebond.field_description
+    - field.field.paragraph.paragraph_block_rebond.field_link_button
+    - field.field.paragraph.paragraph_block_rebond.field_title
+    - paragraphs.paragraphs_type.paragraph_block_rebond
+  module:
+    - link
+id: paragraph.paragraph_block_rebond.default
+targetEntityType: paragraph
+bundle: paragraph_block_rebond
+mode: default
+content:
+  field_description:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_link_button:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link_separate
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }
