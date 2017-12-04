@@ -331,7 +331,7 @@ function oab_christophe_update_8048() {
 }
 
 /**
- *  RUBYPORTAILOBS-3217 - priorisation des villes sur la carte
+ *  RUBYPORTAILOBS-3217 - priorisation des offices sur la carte
  */
 function oab_christophe_update_8049() {
   oabt_YmlImport('core.entity_form_display.node.office.default.yml');
