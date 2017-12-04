@@ -9,3 +9,9 @@ oab.settings_pardot:
   base_route_name: oab.settings_pardot
   names:
     - oab.pardot
+
+oab.settings_ece:
+  title: 'oab ECE Settings'
+  base_route_name: oab.settings_ece
+  names:
+    - oab.ece
