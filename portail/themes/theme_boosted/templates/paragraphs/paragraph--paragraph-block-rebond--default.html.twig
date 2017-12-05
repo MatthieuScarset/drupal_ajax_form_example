@@ -8,9 +8,7 @@
             {{ content.field_description.0 }}
         </p>
     </div>
-    <div class="rebond-link">
-        <a href="{{ content.rebondProduct.signin_link }}" target="_blank" class="rebond-link">
-            {{ content.rebondProduct.signin_text }}
-        </a>
-    </div>
+    <a href="{{ content.field_link_button[0]['#url'] }}" target="_blank" class="rebond-link">
+        {{ content.field_link_button[0]['#title'] }}
+    </a>
 </article>
