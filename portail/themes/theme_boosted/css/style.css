@@ -1265,8 +1265,18 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
-.rebond-product .rebond-block-title h2 {
+.rebond-product .rebond-block-title h2,
+.rebond-testshowroom .paragraph_block_rebond .rebond-block-title h2,
+.rebond-tryandbuy .paragraph_block_rebond .rebond-block-title h2 {
     margin-left: 0;
+}
+.rebond-testshowroom .paragraph_block_rebond{
+    background-color: #595959;
+    color: #FFFFFF;
+}
+.rebond-tryandbuy .paragraph_block_rebond{
+    background-color: #ff6600;
+    color: #FFFFFF;
 }
 
 .rebond-link, .block-link , .homepage-solution-button {

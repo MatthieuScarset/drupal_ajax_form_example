@@ -14,8 +14,8 @@ use Drupal\node\Entity\Node;
  *
  * @author QWWT2837
  * @Block(
- *   id = "try_and_buy_block",
- *   admin_label = @Translation("Try and Buy Block"),
+ *   id = "test_showroom_block",
+ *   admin_label = @Translation("Test Showroom Block"),
  *   category = @Translation("Blocks"),
  *   context = {
  *     "node" = @ContextDefinition(
@@ -27,7 +27,7 @@ use Drupal\node\Entity\Node;
  *
  */
 
-class TryAndBuyBlock  extends BlockBase {
+class TestShowroomBlock  extends BlockBase {
 
 	public function build(){
 		$block = array();
@@ -56,8 +56,8 @@ class TryAndBuyBlock  extends BlockBase {
 			*/
 			//var_dump($blockEmpty) ; die();
 			if($blockEmpty){
-				if ($node->hasField('field_try_and_buy')) {
-					$field_data = $node->get('field_try_and_buy');
+				if ($node->hasField('field_test_showroom')) {
+					$field_data = $node->get('field_test_showroom');
 					foreach ($field_data as $data) {
 						$block[] = $data->view();
 					}

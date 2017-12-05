@@ -63,13 +63,6 @@ function oab_dvi_update_8008() {
     include_once("updates/update_8008.inc");
 }
 
-
-/**
- * Création du block Phone Number pour le Distributeur (sidebar)
- */
-function oab_dvi_update_8010() {
-    include_once("updates/update_8010.inc");
-}
 /**
  * MAJ Tous les Products : taggage market segment +50 et +250 salarié
  */
@@ -78,8 +71,21 @@ function oab_dvi_update_8009() {
 }
 
 /**
+ * Création du block Phone Number pour le Distributeur (sidebar)
+ */
+function oab_dvi_update_8010() {
+	include_once("updates/update_8010.inc");
+}
+/**
  * Creation nouveau paragraph block rebond et champs pour le product
  */
 function oab_dvi_update_8011() {
   include_once("updates/update_8011.inc");
+}
+
+/**
+ * Nouveaux blocks Try & Buy & Test Showroom
+ */
+function oab_dvi_update_8012() {
+  include_once("updates/update_8012.inc");
 }
