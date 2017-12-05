@@ -245,27 +245,3 @@ cap() {
 	command cap "$@"
 }
 
-# construit l archive pour IPP
-# avec en premier parametre la branche à déployée
-# de type MEP-XXXX
-archive-ipp() {
-    if [ $# -ne 2 ]
-	then
-		echo -e "${ROUGEFONCE}Erreur : Vous devez entrer un nom de branche (ex : MEP-20171120) et la version (ex : 1.0.27)${NEUTRE}"
-		echo -e "${ROUGEFONCE}Syntaxe : archive-ipp <BRANCHE> <VERSION>${NEUTRE}"
-		return
-	else
-		##je me branche sur cette branche que je pull
-		echo -e "${CYANFONCE}git checkout "$1" && git pull${NEUTRE}"
-		if ! git checkout "$1" && git pull
-		then
-		    echo -e "${ROUGEFONCE}Erreur lors de la commande \"git checkout $1 && git pull\" - ABANDON${NEUTRE}"
-			##Si le checkout rate, je quitte
-			return
-		fi
-
-		# on appelle le script d archive ipp PERL
-		echo -e "${JAUNE}On lance le script Perl pour l archive${NEUTRE}"
-		command bin/archive_ipp.pl "$2"
-	fi
-}
