@@ -1,0 +1,11 @@
+name: OAB DVI
+description: 'OAB DVI'
+type: module
+package: OAB
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2017-11-24
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_dvi'
+datestamp: 1511528169

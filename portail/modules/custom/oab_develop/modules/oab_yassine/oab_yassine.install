@@ -161,11 +161,12 @@ function oab_yassine_update_8020() {
 function oab_yassine_update_8021() {
 	include_once("updates/update_8021.inc");
 }
+
 /**
  *  Ajout de la colonne blooger sur les contents
  */
 function oab_yassine_update_8022() {
-	include_once("updates/update_8022.inc");
+  include_once("updates/update_8022.inc");
 }
 
 /**
@@ -173,10 +174,4 @@ function oab_yassine_update_8022() {
  */
 function oab_yassine_update_8023() {
 	include_once("updates/update_8023.inc");
-}
-/**
- *  Ajout du field top_zone mobile
- */
-function oab_yassine_update_8024() {
-	include_once("updates/update_8024.inc");
 }

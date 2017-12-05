@@ -29,6 +29,12 @@ display:
         type: tag
       query:
         type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: true
+          replica: false
+          query_comment: ''
+          query_tags: {  }
       exposed_form:
         type: basic
         options:
@@ -973,6 +979,7 @@ display:
         groups:
           1: AND
       display_extenders: {  }
+      group_by: true
     display_plugin: default
     display_title: Master
     id: default

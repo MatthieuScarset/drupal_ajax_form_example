@@ -503,7 +503,7 @@ class AxiomeImporter{
                             $node = Node::load($nid);
                             $node->setChangedTime(time());
                             //$node->save(); -> Pas besoin, déjà save plus bas
-                            $node->set('moderation_state', array('target_id' => 'draft'));
+                            $node->set('moderation_state', array('target_id' => 'needs_review'));
                             $this->message .= "microtime ".time()."\n";
 
                         } else {// Si c'est une nouvelle fiche
