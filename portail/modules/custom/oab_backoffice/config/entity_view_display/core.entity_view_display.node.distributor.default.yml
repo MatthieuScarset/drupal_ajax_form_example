@@ -23,7 +23,6 @@ dependencies:
     - node.type.distributor
   module:
     - link
-    - taxonomy
     - user
 id: node.distributor.default
 targetEntityType: node
@@ -31,7 +30,7 @@ bundle: distributor
 mode: default
 content:
   field_additionnal:
-    weight: 10
+    weight: 5
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -39,7 +38,7 @@ content:
     region: content
     label: hidden
   field_certification_obs:
-    weight: 6
+    weight: 0
     settings:
       format: default
       format_custom_false: ''
@@ -49,29 +48,15 @@ content:
     region: content
     label: hidden
   field_city:
-    weight: 12
+    weight: 7
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
     label: hidden
-  field_departments:
-    weight: 10
-    settings: {  }
-    third_party_settings: {  }
-    type: entity_reference_rss_category
-    region: content
-    label: hidden
-  field_email_address:
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-    label: hidden
   field_highlight:
-    weight: 4
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: basic_string
@@ -86,31 +71,8 @@ content:
     type: responsive_image
     region: content
     label: hidden
-  field_market_segment:
-    weight: 8
-    settings: {  }
-    third_party_settings: {  }
-    type: entity_reference_rss_category
-    region: content
-    label: hidden
-  field_meta_description:
-    weight: 7
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-    label: hidden
-  field_meta_title:
-    weight: 6
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-    label: hidden
   field_navigation_link:
-    weight: 7
+    weight: 8
     settings:
       trim_length: 80
       url_only: false
@@ -121,16 +83,8 @@ content:
     type: link
     region: content
     label: hidden
-  field_phone_number:
-    weight: 13
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-    label: hidden
   field_postal_code:
-    weight: 11
+    weight: 6
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -138,7 +92,7 @@ content:
     region: content
     label: hidden
   field_products:
-    weight: 14
+    weight: 2
     settings:
       view_mode: default
       link: false
@@ -146,15 +100,8 @@ content:
     type: entity_reference_entity_view
     region: content
     label: hidden
-  field_solution:
-    weight: 9
-    settings: {  }
-    third_party_settings: {  }
-    type: entity_reference_rss_category
-    region: content
-    label: hidden
   field_street:
-    weight: 9
+    weight: 4
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -162,7 +109,7 @@ content:
     region: content
     label: hidden
   field_visual:
-    weight: 101
+    weight: 3
     label: hidden
     settings:
       link: true
@@ -170,20 +117,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  langcode:
-    type: language
-    weight: 2
-    region: content
-    settings:
-      link_to_entity: false
-      native_language: false
-    third_party_settings: {  }
-    label: hidden
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   path:
     type: path
     weight: 1
@@ -197,13 +130,18 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  workbench_moderation_control:
-    weight: -20
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   body: true
+  field_departments: true
+  field_email_address: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_phone_number: true
+  field_solution: true
   field_subhome: true
+  langcode: true
+  links: true
   promote: true
   sticky: true
+  workbench_moderation_control: true

@@ -107,14 +107,10 @@ view_mode ? view_mode|clean_class,
     }
     </script>
 
-
-    <div class="content_info">
-        <span class="date">{{ createdDate }}</span>
-
-    </div>
+    {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
     <div{{ content_attributes.addClass('content') }}>
-        {{ content|without('field_highlight', 'field_solution', 'field_subhome', 'field_market_segment', 'field_departments') }}
+        {{ content|without('field_highlight', 'field_solution', 'field_subhome', 'field_market_segment', 'field_departments', 'field_meta_description','field_meta_title', 'fiels_certification_obs', 'field_phonenumber') }}
     </div>
 
 </article>
