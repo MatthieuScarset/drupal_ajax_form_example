@@ -1316,6 +1316,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
+.rebond-contact-distributor h2 {
+    margin-top: 0;
+}
+
+.rebond-contact-distributor h2 span.dvi-form-distributor-name {
+    text-transform: uppercase;
+    color: #F16E00;
+}
+
+
 .homepage-solution-button-color {
     color: #FFFFFF;
     border-color: #F16E00;
@@ -1749,8 +1759,13 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     font-size: 8px;
 }
 
-.webform-dvi-contact-global span.form-required {
+.webform-dvi-contact-global span.form-required,
+.webform-dvi-contact-distributor span.form-required {
     color:#e74c3c;
+}
+
+.webform-dvi-contact-distributor .container {
+    margin-top: 1.5rem;
 }
 
 

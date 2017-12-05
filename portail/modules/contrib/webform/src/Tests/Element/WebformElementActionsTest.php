@@ -21,7 +21,7 @@ class WebformElementActionsTest extends WebformTestBase {
   /**
    * Tests actions element.
    */
-  public function testWebformElementActions() {
+  public function testActions() {
     /* Test webform actions */
 
     // Get form.
@@ -29,8 +29,9 @@ class WebformElementActionsTest extends WebformTestBase {
 
     // Check custom actions.
     $this->assertRaw('<div style="border: 2px solid red; padding: 10px" data-drupal-selector="edit-actions-custom" class="form-actions webform-actions js-form-wrapper form-wrapper" id="edit-actions-custom">');
-    $this->assertRaw('<input class="webform-button--draft custom-draft button js-form-submit form-submit" style="font-weight: bold" data-custom-draft data-drupal-selector="edit-actions-custom-draft" type="submit" id="edit-actions-custom-draft" name="op" value="{Custom draft}" />');
+    $this->assertRaw('<input class="webform-button--draft js-webform-novalidate custom-draft button js-form-submit form-submit" style="font-weight: bold" data-custom-draft data-drupal-selector="edit-actions-custom-draft" type="submit" id="edit-actions-custom-draft" name="op" value="{Custom draft}" />');
     $this->assertRaw('<input class="webform-button--next custom-wizard-next button js-form-submit form-submit" style="font-weight: bold" data-custom-wizard-next data-drupal-selector="edit-actions-custom-wizard-next" type="submit" id="edit-actions-custom-wizard-next" name="op" value="{Custom wizard next}" />');
+    $this->assertRaw('<input class="webform-button--reset js-webform-novalidate custom-reet button js-form-submit form-submit" style="font-weight: bold" data-custom-reset data-drupal-selector="edit-actions-custom-reset" type="submit" id="edit-actions-custom-reset" name="op" value="{Custom reset}" />');
 
     // Check wizard next.
     $this->assertRaw('id="edit-actions-wizard-next-wizard-next"');
@@ -49,10 +50,13 @@ class WebformElementActionsTest extends WebformTestBase {
     // Check submit button.
     $this->assertRaw('id="edit-actions-submit-submit"');
 
+    // Check reset button.
+    $this->assertRaw('id="edit-actions-reset-reset"');
+
     // Submit form.
     $this->drupalPostForm(NULL, [], t('Submit'));
 
-    // Check no actions
+    // Check no actions.
     $this->assertNoRaw('form-actions');
 
     /* Test actions buttons */
@@ -61,7 +65,7 @@ class WebformElementActionsTest extends WebformTestBase {
     $this->drupalGet('webform/test_element_actions_buttons');
 
     // Check draft button.
-    $this->assertRaw('<input class="webform-button--draft draft_button_attributes button js-form-submit form-submit" style="color: blue" data-drupal-selector="edit-actions-draft" type="submit" id="edit-actions-draft" name="op" value="Save Draft" />');
+    $this->assertRaw('<input class="webform-button--draft js-webform-novalidate draft_button_attributes button js-form-submit form-submit" style="color: blue" data-drupal-selector="edit-actions-draft" type="submit" id="edit-actions-draft" name="op" value="Save Draft" />');
     // Check next button.
     $this->assertRaw('<input class="webform-button--next wizard_next_button_attributes button js-form-submit form-submit" style="color: yellow" data-drupal-selector="edit-actions-wizard-next" type="submit" id="edit-actions-wizard-next" name="op" value="Next Page &gt;" />');
 
