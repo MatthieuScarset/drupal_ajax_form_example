@@ -291,6 +291,32 @@ function clean_exposed_filters_by_language($options, $txtAll){
 /**
  * Implements hook_views_query_alter().
  */
+function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query){
+  if ($view->id() == 'offices_map_view'){
+    $language = \Drupal::languageManager()->getCurrentLanguage();
+    $language_id = $language->getId();
+
+    // Modification du trie sur les maps qui ne sont pas sur une page "ru"
+    // On enlève le "order by sticky" dans ce cas là
+    // On doit faire ça à cause du fonctionnement de la view et des traductions
+    // le sticky doit être enregistré au niveau du contenu principal, pas dans ses traductions
+    if(isset($query->orderby)
+    && !empty($query->orderby)){
+      foreach ($query->orderby AS $key=>$value){
+        if (is_array($value)
+        && isset($value['field'])
+        && $value['field'] == "node_field_data_sticky"
+          && $language_id != "ru"){
+          unset($query->orderby[$key]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
