@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.customer_story.field_meta_description
     - field.field.node.customer_story.field_meta_title
     - field.field.node.customer_story.field_metatags
+    - field.field.node.customer_story.field_p_wysiwyg_rebond
     - field.field.node.customer_story.field_page_du_site_1
     - field.field.node.customer_story.field_page_du_site_2
     - field.field.node.customer_story.field_rebond_document
@@ -27,6 +28,7 @@ dependencies:
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
     - field.field.node.customer_story.field_wysiwyg_rebond
+    - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
     - datetime
@@ -136,6 +138,7 @@ hidden:
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
+  field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
   field_rebond_document: true
@@ -145,3 +148,4 @@ hidden:
   field_visual: true
   field_wysiwyg_rebond: true
   langcode: true
+  moderation_state_update: true

@@ -463,3 +463,7 @@ function oab_tristan_update_8060() {
   oabt_YmlImport('core.entity_form_display.node.product.default.yml');
   oabt_YmlImport('core.entity_view_display.node.product.default.yml');
 }
+
+function oab_tristan_update_8062() {
+    include_once("updates/update_8062.inc");
+}
