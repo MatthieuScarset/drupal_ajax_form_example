@@ -94,7 +94,7 @@ content:
   field_products:
     weight: 2
     settings:
-      view_mode: default
+      view_mode: subhome
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view

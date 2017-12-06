@@ -76,3 +76,11 @@ function oab_dvi_update_8010() {
 function oab_dvi_update_8009() {
   include_once("updates/update_8009.inc");
 }
+
+
+/**
+ * MAJ Display VIEW du node distributeur
+ */
+function oab_dvi_update_8013() {
+    include_once("updates/update_8013.inc");
+}
