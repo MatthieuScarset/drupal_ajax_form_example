@@ -15,21 +15,7 @@ if(empty($paragraphType)) {
     $paragraphType->save();
 }
 oabt_YmlImport("paragraphs.paragraphs_type.rebond_wysiwyg.yml");
-oabt_YmlImport("core.entity_view_display.paragraph.rebond_wysiwyg.default.yml");
-oabt_YmlImport("core.entity_form_display.paragraph.rebond_wysiwyg.default.yml");
 
-##creation des fields du paragraph
-$field_storage = FieldStorageConfig::loadByName('paragraph', 'field_p_rebond_wysiwyg_contenu');
-if(empty($field_storage)) {
-    FieldStorageConfig::create(array(
-        'field_name' => 'field_p_rebond_wysiwyg_contenu',
-        'entity_type' => 'paragraph',
-        'type' => 'text_long',
-    ))->save();
-}
-oabt_YmlImport("field.storage.paragraph.field_p_rebond_wysiwyg_contenu.yml");
-oabt_YmlImport("field.field.paragraph.rebond_wysiwyg.field_p_rebond_wysiwyg_contenu.yml");
-oabt_YmlImport("field.field.paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color.yml");
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_p_wysiwyg_rebond_color');
 if(empty($field_storage)) {
@@ -40,6 +26,10 @@ if(empty($field_storage)) {
     ))->save();
 }
 oabt_YmlImport("field.storage.paragraph.field_p_wysiwyg_rebond_color.yml");
+oabt_YmlImport("field.field.paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color.yml");
+
+oabt_YmlImport("core.entity_view_display.paragraph.rebond_wysiwyg.default.yml");
+oabt_YmlImport("core.entity_form_display.paragraph.rebond_wysiwyg.default.yml");
 
 
 ###Création du field storage du field pour les node content

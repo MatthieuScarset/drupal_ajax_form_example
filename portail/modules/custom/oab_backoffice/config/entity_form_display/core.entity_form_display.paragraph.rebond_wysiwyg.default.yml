@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.rebond_wysiwyg.field_p_rebond_wysiwyg_contenu
     - field.field.paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color
     - paragraphs.paragraphs_type.rebond_wysiwyg
   module:
@@ -13,14 +12,6 @@ targetEntityType: paragraph
 bundle: rebond_wysiwyg
 mode: default
 content:
-  field_p_rebond_wysiwyg_contenu:
-    weight: 6
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_p_wysiwyg_rebond_color:
     weight: 7
     settings: {  }
