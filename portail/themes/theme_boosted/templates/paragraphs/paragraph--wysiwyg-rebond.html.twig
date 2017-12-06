@@ -1,7 +1,0 @@
-
-{# Je recupère la couleur du background définie par l'utilisateur#}
-{% set bgColor = content.field_wysiwyg_color_rebond["#items"].0.getValue.value %}
-
-<article style="background-color: {{ bgColor }}">
-    {{ content.field_paragraph_wysiwyg_rebond.0 }}
-</article>
