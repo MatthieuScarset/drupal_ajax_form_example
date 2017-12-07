@@ -1568,3 +1568,12 @@ a.home_banner_element_mobile_link {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
+.intro_distributeur {
+    font-weight: bold;
+}
+
+.certification_distributeur img{
+    width: 100px;
+    margin-bottom:20px
+}

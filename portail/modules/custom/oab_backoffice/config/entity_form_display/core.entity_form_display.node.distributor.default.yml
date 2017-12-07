@@ -8,7 +8,9 @@ dependencies:
     - field.field.node.distributor.field_certification_obs
     - field.field.node.distributor.field_city
     - field.field.node.distributor.field_departments
+    - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
+    - field.field.node.distributor.field_header_title
     - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
@@ -27,6 +29,7 @@ dependencies:
     - field_group
     - link
     - path
+    - text
     - workbench_moderation
 third_party_settings:
   field_group:
@@ -61,7 +64,10 @@ third_party_settings:
       children:
         - langcode
         - title
+        - field_display_title
+        - field_header_title
         - field_highlight
+        - body
         - field_visual
         - field_certification_obs
         - field_navigation_link
@@ -103,6 +109,15 @@ targetEntityType: node
 bundle: distributor
 mode: default
 content:
+  body:
+    type: text_textarea_with_summary
+    weight: 7
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 3
@@ -110,7 +125,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_additionnal:
-    weight: 10
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -118,14 +133,14 @@ content:
     type: string_textfield
     region: content
   field_certification_obs:
-    weight: 6
+    weight: 9
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_city:
-    weight: 12
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -138,16 +153,31 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_display_title:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_email_address:
-    weight: 8
+    weight: 11
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: email_default
     region: content
+  field_header_title:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_highlight:
-    weight: 4
+    weight: 6
     settings:
       rows: 5
       placeholder: ''
@@ -185,7 +215,7 @@ content:
     type: string_textfield
     region: content
   field_navigation_link:
-    weight: 7
+    weight: 10
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -193,7 +223,7 @@ content:
     type: link_default
     region: content
   field_phone_number:
-    weight: 13
+    weight: 16
     settings:
       size: 60
       placeholder: ''
@@ -201,7 +231,7 @@ content:
     type: string_textfield
     region: content
   field_postal_code:
-    weight: 11
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -209,7 +239,7 @@ content:
     type: string_textfield
     region: content
   field_products:
-    weight: 14
+    weight: 17
     settings:
       match_operator: CONTAINS
       size: 60
@@ -224,7 +254,7 @@ content:
     type: options_select
     region: content
   field_street:
-    weight: 9
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -238,7 +268,7 @@ content:
     type: options_select
     region: content
   field_visual:
-    weight: 5
+    weight: 8
     settings:
       entity_browser: browse_media_modal
       field_widget_display: label
@@ -288,6 +318,5 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
-  body: true
   promote: true
   sticky: true
