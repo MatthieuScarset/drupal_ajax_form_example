@@ -7,7 +7,9 @@ dependencies:
     - field.field.node.distributor.field_certification_obs
     - field.field.node.distributor.field_city
     - field.field.node.distributor.field_departments
+    - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
+    - field.field.node.distributor.field_header_title
     - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
@@ -23,31 +25,21 @@ dependencies:
     - node.type.distributor
   module:
     - link
+    - text
     - user
 id: node.distributor.default
 targetEntityType: node
 bundle: distributor
 mode: default
 content:
+  body:
+    type: text_default
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_additionnal:
-    weight: 5
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-    label: hidden
-  field_certification_obs:
-    weight: 0
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-    label: hidden
-  field_city:
     weight: 7
     settings:
       link_to_entity: false
@@ -55,8 +47,34 @@ content:
     type: string
     region: content
     label: hidden
-  field_highlight:
+  field_certification_obs:
     weight: 1
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+    label: visually_hidden
+  field_city:
+    weight: 9
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+    label: hidden
+  field_header_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_highlight:
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: basic_string
@@ -72,7 +90,7 @@ content:
     region: content
     label: hidden
   field_navigation_link:
-    weight: 8
+    weight: 10
     settings:
       trim_length: 80
       url_only: false
@@ -84,7 +102,7 @@ content:
     region: content
     label: hidden
   field_postal_code:
-    weight: 6
+    weight: 8
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -92,16 +110,16 @@ content:
     region: content
     label: hidden
   field_products:
-    weight: 2
+    weight: 4
     settings:
-      view_mode: default
+      view_mode: subhome
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
     label: hidden
   field_street:
-    weight: 4
+    weight: 6
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -109,7 +127,7 @@ content:
     region: content
     label: hidden
   field_visual:
-    weight: 3
+    weight: 5
     label: hidden
     settings:
       link: true
@@ -131,8 +149,8 @@ content:
       display_label: true
     third_party_settings: {  }
 hidden:
-  body: true
   field_departments: true
+  field_display_title: true
   field_email_address: true
   field_market_segment: true
   field_meta_description: true
