@@ -70,10 +70,10 @@ dvi_contact_distributor_description:
     ]);
     $form->save();
 }
-
+##Je reload la config complete du webform
 oabt_YmlImport('webform.webform.dvi_contact_distributor.yml');
 
-
+##creation des trad
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $collection->write('webform.webform.dvi_contact_distributor', array (
     "elements" => "last_name:
@@ -95,3 +95,7 @@ dvi_contact_distributor_description:
     'confirmation_back_label' => 'Retour au formulaire',
   ),
 ));
+
+
+##Création du block
+oabt_YmlImport("block.block.dvicontactdistributorblock.yml");
