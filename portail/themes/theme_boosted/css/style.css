@@ -1199,7 +1199,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .rebond.rebond-wysiwyg article article {
     margin: initial;
     padding: initial;
-
+}
+* .rebond.rebond-wysiwyg article article {
+    margin: auto;
+    padding: 0;
 }
 
 @media (max-width: 767px) {
