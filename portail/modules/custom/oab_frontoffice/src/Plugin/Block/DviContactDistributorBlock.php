@@ -41,27 +41,20 @@ class DviContactDistributorBlock extends BlockBase {
         $type = $node->getType();
 
         if($type == 'distributor'){
-            $form = \Drupal\webform\Entity\Webform::load('dvi_contact_distributor');
-            $form_output = \Drupal::entityManager()
+            /*$form = \Drupal\webform\Entity\Webform::load('dvi_contact_distributor');
+            #$form = \Drupal::entityTypeManager()->getStorage('webform')->load('dvi_contact_distributor');
+
+            $block["form"] = \Drupal::service('entity_type.manager')
                 ->getViewBuilder('webform')
-                ->view($form);
-            /*$webform = \Drupal::entityTypeManager()->getStorage('webform')->load('dvi_contact_distributor');
-            $block["form"] = $webform->getSubmissionForm();*/
+                ->view($form);*/
 
-            #$block["form"] = \Drupal::service('renderer')->renderRoot($form_output);
-            /*$block["form"] = $form_output;
-            $block["form"]["#webform"] = 'dvi_contact_distributor';
-
-            $block["distributorName"] = $node->getTitle();*/
-            #kint($block); die();
+            $block["form"] = [
+                '#type' => 'webform',
+                '#webform' => 'dvi_contact_distributor',
+            ];
 
 
-            /*$b = \Drupal\block\Entity\Block::load('dvi_contact_distributor');
-            $block_content = \Drupal::entityManager()
-                ->getViewBuilder('block')
-                ->view($b);*/
-
-
+            $block["distributorName"] = $node->getTitle();
         }
         return $block;
     }

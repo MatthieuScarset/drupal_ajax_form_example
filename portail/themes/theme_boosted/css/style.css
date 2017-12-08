@@ -1192,6 +1192,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding: 3rem 2rem;
 }
 
+.rebond.rebond-contact-distributor article {
+    padding: 3rem 1rem;
+}
+
 .rebond .form-group {
     margin-bottom: 0;
 }
