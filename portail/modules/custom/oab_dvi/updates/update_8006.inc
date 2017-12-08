@@ -5,7 +5,7 @@
  * See JIRA DVI-6
  */
 
-$form = \Drupal\webform\Entity\Webform::load('dvi_contact_global_2');
+$form = \Drupal\webform\Entity\Webform::load('dvi_contact_global');
 
 if ($form === null ) {
   $form = \Drupal\webform\Entity\Webform::create([
@@ -14,7 +14,7 @@ if ($form === null ) {
       'langcode'  => 'fr',
       'uid'       => '1',
       'status'    => 'open',
-      'id'        => 'dvi_contact_global_2',
+      'id'        => 'dvi_contact_global',
       'elements'  => "'#attributes':
   class:
     - webform-dvi-contact-global
@@ -31,10 +31,10 @@ dvi_contact_global_description:
 first_name:
   '#type': textfield
   '#title': 'First Name'
-  '#required': true
 last_name:
   '#type': textfield
   '#title': 'Last Name'
+  '#required': true
 company:
   '#type': textfield
   '#title': Company
@@ -71,13 +71,13 @@ actions:
   $form->save();
 }
 
-oabt_YmlImport('webform.webform.dvi_contact_global_2.yml');
+oabt_YmlImport('webform.webform.dvi_contact_global.yml');
 
 
 $formNode = \Drupal\node\Entity\Node::create([
   'type'    => 'webform',
-  'title'   => 'Test webform',
-  'webform' => 'dvi_contact_global_2',
+  'title'   => 'DVI Contact Global',
+  'webform' => 'dvi_contact_global',
   'langcode'  => 'fr',
 ]);
 

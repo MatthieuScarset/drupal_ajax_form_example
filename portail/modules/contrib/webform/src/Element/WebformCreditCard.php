@@ -12,6 +12,13 @@ class WebformCreditCard extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
+  public function getInfo() {
+    return parent::getInfo() + ['#theme' => 'webform_composite_creditcard'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function getCompositeElements() {
     $month_options = range(1, 12);
     $year_options = range(date('Y'), date('Y') + 10);
@@ -30,6 +37,7 @@ class WebformCreditCard extends WebformCompositeBase {
       '#type' => 'select',
       '#title' => t('Type of Card'),
       '#options' => 'creditcard_codes',
+      '#empty_option' => '',
     ];
     $elements['number'] = [
       '#type' => 'webform_creditcard_number',

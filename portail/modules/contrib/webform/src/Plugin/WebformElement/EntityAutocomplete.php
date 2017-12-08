@@ -2,9 +2,9 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
-use Drupal\Core\Entity\Element\EntityAutocomplete as EntityAutocompleteElement;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
@@ -18,7 +18,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   category = @Translation("Entity reference elements"),
  * )
  */
-class EntityAutocomplete extends WebformElementBase implements WebformEntityReferenceInterface {
+class EntityAutocomplete extends WebformElementBase implements WebformElementEntityReferenceInterface {
 
   use WebformEntityReferenceTrait;
 
@@ -26,43 +26,32 @@ class EntityAutocomplete extends WebformElementBase implements WebformEntityRefe
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return parent::getDefaultProperties() + [
-      'multiple' => FALSE,
-      'multiple__header_label' => '',
+    return [
       // Entity reference settings.
       'target_type' => '',
       'selection_handler' => 'default',
       'selection_settings' => [],
       'tags' => FALSE,
-    ];
+    ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
   }
 
   /**
    * {@inheritdoc}
    */
   public function setDefaultValue(array &$element) {
-    // To support #multiple and #tags needs manually set the #default_value to
-    // the entity label(s).
-    // @see \Drupal\Core\Entity\Element\EntityAutocomplete::valueCallback.
-    $element['#process_default_value'] = FALSE;
-    if (isset($element['#default_value']) && (!empty($element['#default_value']) || $element['#default_value'] === 0)) {
-      if ($this->hasMultipleValues($element)) {
-        $entities = $this->getTargetEntities($element, $element['#default_value']);
-        $element['#default_value'] = [];
-        if ($entities) {
-          if (!empty($element['#multiple'])) { // #multiple requires an array.
-            foreach ($entities as $entity) {
-              $element['#default_value'][] = EntityAutocompleteElement::getEntityLabels([$entity]);
-            }
-          }
-          else { // #tags requires comma delimited entity labels.
-            $element['#default_value'] = EntityAutocompleteElement::getEntityLabels($entities);
-          }
-        }
+    if (isset($element['#multiple'])) {
+      $element['#default_value'] = (isset($element['#default_value'])) ? (array) $element['#default_value'] : NULL;
+      return;
+    }
+
+    if (!empty($element['#default_value'])) {
+      $target_type = $this->getTargetType($element);
+      $entity_storage = $this->entityTypeManager->getStorage($target_type);
+      if ($entities = $entity_storage->loadMultiple((array) $element['#default_value'])) {
+        $element['#default_value'] = (empty($element['#tags'])) ? reset($entities) : $entities;
       }
       else {
-        $entity = $this->getTargetEntity($element, $element['#default_value']);
-        $element['#default_value'] = ($entity) ? EntityAutocompleteElement::getEntityLabels([$entity]) : NULL;
+        $element['#default_value'] = NULL;
       }
     }
     else {
@@ -99,14 +88,12 @@ class EntityAutocomplete extends WebformElementBase implements WebformEntityRefe
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
-    // If #tags (aka multiple entities) use #after_builder to set #element_value
-    // which must be executed after
-    // \Drupal\Core\Entity\Element\EntityAutocomplete::validateEntityAutocomplete().
-    if ($this->hasMultipleValues($element)) {
-      $element['#after_build'][] = [get_class($this), 'afterBuildEntityAutocomplete'];
-    }
+    $element['#after_build'][] = [get_class($this), 'afterBuildEntityAutocomplete'];
+
+    // Remove maxlength.
+    $element['#maxlength'] = NULL;
 
     // If selection handler include auto_create when need to also set it for
     // the $element.
@@ -130,26 +117,45 @@ class EntityAutocomplete extends WebformElementBase implements WebformEntityRefe
   public static function validateEntityAutocomplete(array &$element, FormStateInterface $form_state) {
     $name = $element['#name'];
     $value = $form_state->getValue($name);
-    if (is_array($value) && !empty($value)) {
+    if (empty($value) || !is_array($value)) {
+      return;
+    }
+
+    if (empty($element['#webform_multiple'])) {
+      $form_state->setValueForElement($element, static::getEntityIdFromItem($value));
+    }
+    else {
       $entity_ids = [];
       foreach ($value as $item) {
-        if (isset($item['target_id'])) {
-          $entity_ids[] = $item['target_id'];
-        }
-        elseif (isset($item['entity'])) {
-          // If #auto_create is set then we need to save the entity and get
-          // the new entity's id.
-          // @todo Decide what level of access controls are needed to allow
-          // users to create entities.
-          $entity = $item['entity'];
-          $entity->save();
-          $entity_ids[] = $entity->id();
-        }
-        else {
-          $entity_ids[] = $item;
-        }
+        $entity_ids[] = static::getEntityIdFromItem($item);
       }
       $form_state->setValueForElement($element, $entity_ids);
+    }
+  }
+
+  /**
+   * Get the entity id from the submitted and processed #value.
+   *
+   * @param array|string $item
+   *   The entity item.
+   *
+   * @return string
+   *   The entity id.
+   */
+  protected static function getEntityIdFromItem($item) {
+    if (isset($item['target_id'])) {
+      return $item['target_id'];
+    }
+    elseif (isset($item['entity'])) {
+      // If #auto_create is set then we need to save the entity and get
+      // the new entity's id.
+      // @todo Decide what level of access controls are needed to allow users to create entities.
+      $entity = $item['entity'];
+      $entity->save();
+      return $entity->id();
+    }
+    else {
+      return $item;
     }
   }
 

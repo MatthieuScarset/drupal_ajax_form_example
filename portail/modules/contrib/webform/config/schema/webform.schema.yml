@@ -14,6 +14,9 @@ webform.settings:
         default_submit_button_label:
           type: label
           label: 'Default webform submit button label'
+        default_reset_button_label:
+          type: label
+          label: 'Default webform reset button label'
         default_form_submit_once:
           type: boolean
           label: 'Prevent duplicate submissions'
@@ -50,9 +53,9 @@ webform.settings:
         default_wizard_start_label:
           type: label
           label: 'Default wizard start label'
-        default_wizard_complete_label:
+        default_wizard_confirmation_label:
           type: label
-          label: 'Default wizard complete label'
+          label: 'Default wizard confirmation label'
         default_preview_next_button_label:
           type: label
           label: 'Default preview button label'
@@ -89,6 +92,9 @@ webform.settings:
         default_limit_user_message:
           type: text
           label: 'Default limit user message'
+        default_submission_label:
+          type: label
+          label: 'Default submission label'
         default_submission_log:
           type: boolean
           label: 'Default submission logging'
@@ -98,6 +104,9 @@ webform.settings:
         button_classes:
           type: string
           label: 'Button CSS classes'
+        preview_classes:
+          type: string
+          label: 'Preview CSS classes'
         confirmation_classes:
           type: string
           label: 'Confirmation CSS classes'
@@ -118,6 +127,9 @@ webform.settings:
       type: mapping
       label: 'Element default settings'
       mapping:
+        empty_message:
+          type: label
+          label: 'Empty element message/placeholder'
         allowed_tags:
           type: string
           label: 'Allowed tags'
@@ -127,18 +139,49 @@ webform.settings:
         classes:
           type: string
           label: 'Element CSS classes'
+        horizontal_rule_classes:
+          type: string
+          label: 'Horizontal rule CSS classes'
         default_icheck:
           type: string
           label: 'Default iCheck style'
         default_description_display:
           type: string
           label: 'Default title display'
+        default_more_title:
+          type: label
+          label: 'Default more title'
+        default_section_title_tag:
+          type: label
+          label: 'Default section title tag'
+        default_empty_option:
+          type: boolean
+          label: 'Default empty option'
+        default_empty_option_required:
+          type: label
+          label: 'Default empty option required label'
+        default_empty_option_optional:
+          type: label
+          label: 'Default empty option optional label'
         default_google_maps_api_key:
           type: string
           label: 'Default Google Maps API key'
         excluded_elements:
           type: ignore
           label: 'Excluded types'
+    html_editor:
+      type: mapping
+      label: 'HTML editor settings'
+      mapping:
+        disabled:
+          type: boolean
+          label: 'Disable HTML editor'
+        format:
+          type: string
+          label: 'Text format'
+        tidy:
+          type: boolean
+          label: 'Tidy HTML markup'
     file:
       type: mapping
       label: 'File upload default settings'
@@ -146,6 +189,9 @@ webform.settings:
         file_public:
           type: boolean
           label: 'Allow files to be uploaded to public file system.'
+        file_private_redirect:
+          type: boolean
+          label: 'Redirect anonymous users to login when attempting to access private file uploads.'
         default_max_filesize:
           type: string
           label: 'Default maximum upload size'
@@ -171,6 +217,9 @@ webform.settings:
       type: mapping
       label: 'Email default settings'
       mapping:
+        default_to_mail:
+          type: email
+          label: 'Default to email'
         default_from_mail:
           type: email
           label: 'Default from email'
@@ -183,6 +232,12 @@ webform.settings:
         default_return_path:
           type: label
           label: 'Default return path email'
+        default_sender_mail:
+          type: email
+          label: 'Default sender email'
+        default_sender_name:
+          type: label
+          label: 'Default sender name'
         default_subject:
           type: label
           label: 'Default email subject'
@@ -229,15 +284,21 @@ webform.settings:
         header_prefix_label_delimiter:
           type: string
           label: 'Column header prefix label delimiter'
-        entity_reference_format:
+        entity_reference_items:
+          type: sequence
+          label: 'Entity reference format items'
+          sequence:
+            type: string
+            label: 'Entity reference format item'
+        options_single_format:
           type: string
-          label: 'Options format'
-        options_format:
+          label: 'Options single value format'
+        options_multiple_format:
           type: string
-          label: 'Options item format'
+          label: 'Options multiple values format'
         options_item_format:
           type: string
-          label: 'Entity reference format'
+          label: 'Options item format'
         likert_answers_format:
           type: string
           label: 'Likert answers format'
@@ -270,6 +331,9 @@ webform.settings:
         default_batch_delete_size:
           type: integer
           label: 'Batch delete size'
+        default_batch_email_size:
+          type: integer
+          label: 'Batch email size'
     purge:
       type: mapping
       label: 'Purging settings'
@@ -297,18 +361,21 @@ webform.settings:
         dialog_disabled:
           type: boolean
           label: 'Disable dialogs'
-        help_menu_disabled:
+        about_disabled:
           type: boolean
-          label: 'Disable help menu'
+          label: 'Disable about'
         offcanvas_disabled:
           type: boolean
           label: 'Disable system tray'
-        html_editor_disabled:
+        promotions_disabled:
           type: boolean
-          label: 'Disable HTML editor'
+          label: 'Disable promotions'
         details_save:
           type: boolean
           label: 'Save details open/close state'
+        description_help:
+          type: boolean
+          label: 'Display element description as help text (tooltip)'
     libraries:
       type: mapping
       label: 'Library settings'
@@ -319,6 +386,19 @@ webform.settings:
         cdn:
           type: boolean
           label: 'Use CDN'
+    requirements:
+      type: mapping
+      label: 'Requirements'
+      mapping:
+        cdn:
+          type: boolean
+          label: 'Check if CDN is being used for external libraries'
+        bootstrap:
+          type: boolean
+          label: 'Check if Webform Bootstrap Integration module is installed when using the Bootstrap theme'
+        spam:
+          type: boolean
+          label: 'Check if SPAM protection module is installed'
     third_party_settings:
       type: sequence
       label: 'Third party settings'
@@ -369,6 +449,12 @@ webform.webform.*:
       type: mapping
       label: 'Settings'
       mapping:
+        ajax:
+          type: boolean
+          label: 'Use Ajax'
+        ajax_scroll_top:
+          type: string
+          label: 'Ajax scroll top'
         page:
           type: boolean
           label: 'Enable page'
@@ -408,6 +494,12 @@ webform.webform.*:
         form_prepopulate_source_entity:
           type: boolean
           label: 'Form prepopulate source entity'
+        form_prepopulate_source_entity_required:
+          type: boolean
+          label: 'Form prepopulate source entity required'
+        form_prepopulate_source_entity_type:
+          type: string
+          label: 'Form prepopulate source entity type'
         form_unsaved:
           type: boolean
           label: 'Warn users about unsaved changes'
@@ -426,9 +518,21 @@ webform.webform.*:
         form_details_toggle:
           type: boolean
           label: 'Display collapse/expand all details link'
+        form_reset:
+          type: boolean
+          label: 'Display reset button'
+        submission_label:
+          type: label
+          label: 'Default submission label'
         submission_log:
           type: boolean
           label: 'Submission logging'
+        submission_user_columns:
+          type: sequence
+          label: 'Submission user columns'
+          sequence:
+            type: string
+            label: 'Column name'
         wizard_progress_bar:
           type: boolean
           label: 'Show wizard progress bar'
@@ -444,12 +548,15 @@ webform.webform.*:
         wizard_start_attributes:
           type: ignore
           label: 'Wizard start attributes'
-        wizard_complete:
+        wizard_confirmation:
           type: boolean
           label: 'Include confirmation page in progress'
-        wizard_complete_label:
+        wizard_confirmation_label:
           type: label
-          label: 'Wizard complete label'
+          label: 'Wizard confirmation label'
+        wizard_track:
+          type: text
+          label: 'Track wizard progress in the URL'
         preview:
           type: integer
           label: 'Enable preview page'
@@ -462,9 +569,24 @@ webform.webform.*:
         preview_message:
           type: text
           label: 'Preview message'
+        preview_attributes:
+          type: ignore
+          label: 'Preview attributes'
+        preview_excluded_elements:
+          type: sequence
+          label: 'Preview excluded elements'
+          sequence:
+            type: string
+            label: 'Element name'
+        preview_exclude_empty:
+          type: boolean
+          label: 'Preview exclude empty elements'
         draft:
           type: string
-          label: 'Allow your users to save and finish the webform later.'
+          label: 'Allow users to save and finish the webform later.'
+        draft_multiple:
+          type: boolean
+          label: 'Allow users to save multiple drafts'
         draft_auto_save:
           type: boolean
           label: 'Automatically save as draft when previewing and when there are validation errors.'
@@ -551,6 +673,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         view_any:
           type: mapping
           label: 'View any webform submissions'
@@ -567,6 +695,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         update_any:
           type: mapping
           label: 'Update any webform submissions'
@@ -583,6 +717,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         delete_any:
           type: mapping
           label: 'Delete any webform submissions'
@@ -599,6 +739,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         purge_any:
           type: mapping
           label: 'Purge any webform submissions'
@@ -615,6 +761,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         view_own:
           type: mapping
           label: 'View own webform submissions'
@@ -631,6 +783,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         update_own:
           type: mapping
           label: 'Update own webform submissions'
@@ -647,6 +805,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
         delete_own:
           type: mapping
           label: 'Delete own webform submissions'
@@ -663,6 +827,12 @@ webform.webform.*:
               sequence:
                 type: integer
                 label: 'User IDs'
+            permissions:
+              type: sequence
+              label: 'Permissions'
+              sequence:
+                type: string
+                label: 'Permission'
     handlers:
       type: sequence
       label: 'Webform handlers'
@@ -671,14 +841,22 @@ webform.webform.*:
         mapping:
           id:
             type: string
+            label: 'Handle plugin ID'
           handler_id:
             type: string
+            label: 'Handler instance ID'
           label:
             type: label
+            label: 'Label'
           status:
             type: boolean
+            label: 'Status'
+          conditions:
+            type: ignore
+            label: 'Conditional logic'
           weight:
             type: integer
+            label: 'Weight'
           settings:
             type: webform.handler.[%parent.id]
     third_party_settings:
@@ -739,6 +917,12 @@ webform.handler.email:
     return_path:
       type: label
       label: 'Return path email'
+    sender_mail:
+      type: email
+      label: 'Sender email'
+    sender_name:
+      type: label
+      label: 'Sender name'
     subject:
       label: 'Email subject'
       type: label
@@ -751,6 +935,12 @@ webform.handler.email:
       sequence:
         type: string
         label: 'Element name'
+    ignore_access:
+      type: boolean
+      label: 'Always include private and restricted access elements.'
+    exclude_empty:
+      type: boolean
+      label: 'Preview exclude empty elements'
     html:
       type: boolean
       label: 'HTML'
@@ -765,18 +955,12 @@ webform.handler.remote_post:
   type: mapping
   label: 'Remote Post'
   mapping:
+    method:
+      label: 'Method'
+      type: string
     type:
       label: 'Type'
       type: string
-    insert_url:
-      label: 'Insert URL'
-      type: uri
-    update_url:
-      label: 'Update URL'
-      type: uri
-    delete_url:
-      label: 'Delete URL'
-      type: uri
     excluded_data:
       type: sequence
       label: 'Excluded data'
@@ -786,18 +970,42 @@ webform.handler.remote_post:
     custom_data:
       label: 'Custom data'
       type: string
-    insert_custom_data:
-      label: 'Insert custom data'
-      type: string
-    update_custom_data:
-      label: 'Update custom data'
-      type: string
-    delete_custom_data:
-      label: 'Delete custom data'
+    custom_options:
+      label: 'Custom options'
       type: string
     debug:
       type: boolean
       label: 'Enable debugging'
+    completed_url:
+      label: 'Completed URL'
+      type: uri
+    completed_custom_data:
+      label: 'Completed custom data'
+      type: string
+    updated_url:
+      label: 'Updated URL'
+      type: uri
+    updated_custom_data:
+      label: 'Updated custom data'
+      type: string
+    deleted_url:
+      label: 'Deleted URL'
+      type: uri
+    deleted_custom_data:
+      label: 'Deleted custom data'
+      type: string
+    draft_url:
+      label: 'Draft URL'
+      type: uri
+    draft_custom_data:
+      label: 'Draft custom data'
+      type: string
+    converted_url:
+      label: 'Converted URL'
+      type: uri
+    converted_custom_data:
+      label: 'Converted custom data'
+      type: string
 
 webform.exporter.*:
   type: mapping
@@ -828,16 +1036,50 @@ webform.webform_options.*:
       type: text
       label: 'Options (YAML)'
 
+# Schema for the configuration of blocks.
+
 block.settings.webform_block:
   type: block_settings
   label: 'Webforms block'
   mapping:
     webform_id:
-      type: text
-      label: 'Webforms'
+      type: string
+      label: 'Webform'
     default_data:
       type: text
       label: 'Default webform submission data'
+
+block.settings.webform_submission_limit_block:
+  type: block_settings
+  label: 'Webform submission limits block'
+  mapping:
+    type:
+      type: text
+      label: 'Type'
+    source_entity:
+      type: boolean
+      label: 'Source entity'
+    content:
+      label: 'Content'
+      type: text
+    progress_bar:
+      type: boolean
+      label: 'Progress bar'
+    progress_bar_label:
+      type: label
+      label: 'Progress bar label'
+    progress_bar_message:
+      type: label
+      label: 'Progress bar message'
+    webform_id:
+      type: string
+      label: 'Webform'
+    entity_type:
+      type: string
+      label: 'Source entity type'
+    entity_id:
+      type: string
+      label: 'Source entity id'
 
 # Schema for the configuration of the webform field type.
 

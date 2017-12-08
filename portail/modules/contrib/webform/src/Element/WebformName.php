@@ -12,12 +12,20 @@ class WebformName extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
+  public function getInfo() {
+    return parent::getInfo() + ['#theme' => 'webform_composite_name'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function getCompositeElements() {
     $elements = [];
     $elements['title'] = [
       '#type' => 'webform_select_other',
       '#title' => t('Title'),
       '#options' => 'titles',
+      '#empty_option' => '',
     ];
     $elements['first'] = [
       '#type' => 'textfield',

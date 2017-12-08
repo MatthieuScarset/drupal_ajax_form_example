@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\webform\Unit\Breadcrumb;
+namespace Drupal\Tests\webform\Kernel\Breadcrumb;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\Container;
  * @see: \Drupal\Tests\forum\Unit\Breadcrumb\ForumBreadcrumbBuilderBaseTest
  * @see: \Drupal\Tests\forum\Unit\Breadcrumb\ForumNodeBreadcrumbBuilderTest
  *
- * @coversDefaultClass \Drupal\webform\BreadCrumb\WebformBreadcrumbBuilder
+ * @coversDefaultClass \Drupal\webform\Breadcrumb\WebformBreadcrumbBuilder
  *
  * @group webform
  */
@@ -393,7 +393,7 @@ class WebformBreadcrumbBuilderTest extends UnitTestCase {
       Link::createFromRoute('Structure', 'system.admin_structure'),
       Link::createFromRoute('Webforms', 'entity.webform.collection'),
       Link::createFromRoute($this->webform->label(), 'entity.webform.canonical', ['webform' => $this->webform->id()]),
-      Link::createFromRoute('Emails / Handlers', 'entity.webform.handlers_form', ['webform' => $this->webform->id()]),
+      Link::createFromRoute('Emails / Handlers', 'entity.webform.handlers', ['webform' => $this->webform->id()]),
     ];
     $this->assertLinks($route_match, $links);
   }

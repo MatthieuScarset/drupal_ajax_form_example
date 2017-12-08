@@ -45,7 +45,7 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
    * Constructs a WebformTemplatesController object.
    *
    * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   Current user.
+   *   The current user.
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The webform builder.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -105,26 +105,18 @@ class WebformTemplatesController extends ControllerBase implements ContainerInje
       $row['description']['data']['#markup'] = $webform->get('description');
       $row['category']['data']['#markup'] = $webform->get('category');
       if ($this->currentUser->hasPermission('create webform')) {
-        $row['select']['data'] = [
-          '#type' => 'operations',
-          '#links' => [
-            'duplicate' => [
-              'title' => $this->t('Select'),
-              'url' => Url::fromRoute('entity.webform.duplicate_form', $route_parameters),
-              'attributes' => WebformDialogHelper::getModalDialogAttributes(700),
-            ],
-          ],
+        $row['operations']['data']['select'] = [
+          '#type' => 'link',
+          '#title' => $this->t('Select'),
+          '#url' => Url::fromRoute('entity.webform.duplicate_form', $route_parameters),
+          '#attributes' => WebformDialogHelper::getModalDialogAttributes(700, ['button', 'button--primary']),
         ];
       }
-      $row['preview']['data'] = [
-        '#type' => 'operations',
-        '#links' => [
-          'preview' => [
-            'title' => $this->t('Preview'),
-            'url' => Url::fromRoute('entity.webform.preview', $route_parameters),
-            'attributes' => WebformDialogHelper::getModalDialogAttributes(800),
-          ],
-        ],
+      $row['operations']['data']['preview'] = [
+        '#type' => 'link',
+        '#title' => $this->t('Preview'),
+        '#url' => Url::fromRoute('entity.webform.preview', $route_parameters),
+        '#attributes' => WebformDialogHelper::getModalDialogAttributes(800, ['button']),
       ];
       $rows[] = $row;
     }

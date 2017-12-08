@@ -2,7 +2,10 @@
 
 namespace Drupal\webform\Plugin\WebformElement;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\WebformSubmissionConditionsValidator;
+use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a 'datelist' element.
@@ -21,7 +24,7 @@ class DateList extends DateBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return parent::getDefaultProperties() + [
+    return [
       // Date settings.
       'date_part_order' => [
         'year',
@@ -34,8 +37,18 @@ class DateList extends DateBase {
         'year',
       ],
       'date_year_range' => '1900:2050',
+      'date_year_range_reverse' => FALSE,
       'date_increment' => 1,
-    ];
+    ] + parent::getDefaultProperties();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+    parent::prepare($element, $webform_submission);
+
+    $element['#after_build'][] = [get_class($this), 'afterBuild'];
   }
 
   /**
@@ -65,12 +78,58 @@ class DateList extends DateBase {
   /**
    * {@inheritdoc}
    */
+  public function getElementSelectorInputValue($selector, $trigger, array $element, WebformSubmissionInterface $webform_submission) {
+    $value = $this->getRawValue($element, $webform_submission);
+    if (empty($value)) {
+      return NULL;
+    }
+
+    // Return date part value.
+    // @see \Drupal\Core\Datetime\Element\Datelist::valueCallback
+    $input_name = WebformSubmissionConditionsValidator::getSelectorInputName($selector);
+    $part = WebformSubmissionConditionsValidator::getInputNameAsArray($input_name, 1);
+    switch ($part) {
+      case 'day':
+        $format = 'j';
+        break;
+
+      case 'month':
+        $format = 'n';
+        break;
+
+      case 'year':
+        $format = 'Y';
+        break;
+
+      case 'hour':
+        $format = in_array('ampm', $element['#date_part_order']) ? 'g' : 'G';
+        break;
+
+      case 'minute':
+        $format = 'i';
+        break;
+
+      case 'second':
+        $format = 's';
+        break;
+
+      case 'ampm':
+        $format = 'a';
+        break;
+
+      default:
+        $format = '';
+    }
+    $date = DrupalDateTime::createFromTimestamp(strtotime($value));
+    return $date->format($format);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
-    $form['date'] = [
-      '#type' => 'fieldset',
-      '#title' => $this->t('Date list settings'),
-    ];
+    $form['date']['#title'] = $this->t('Date list settings');
     $form['date']['date_part_order_label'] = [
       '#type' => 'item',
       '#title' => $this->t('Date part and order'),
@@ -92,6 +151,7 @@ class DateList extends DateBase {
     ];
     $form['date']['date_text_parts'] = [
       '#type' => 'checkboxes',
+      '#options_display' => 'side_by_side',
       '#title' => $this->t('Date text parts'),
       '#description' => $this->t("Select date parts that should be presented as text fields instead of drop-down selectors."),
       '#options' => [
@@ -107,7 +167,13 @@ class DateList extends DateBase {
       '#type' => 'textfield',
       '#title' => $this->t('Date year range'),
       '#description' => $this->t("A description of the range of years to allow, like '1900:2050', '-3:+3' or '2000:+3', where the first value describes the earliest year and the second the latest year in the range.") . ' ' .
-      $this->t('Use min/max validation to define a more specific date range.'),
+        $this->t('Use min/max validation to define a more specific date range.'),
+    ];
+    $form['date']['date_year_range_reverse'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Date year range reverse'),
+      '#description' => $this->t('If checked date year range will be listed from max to min.'),
+      '#return_type' => TRUE,
     ];
     $form['date']['date_increment'] = [
       '#type' => 'number',
@@ -115,6 +181,7 @@ class DateList extends DateBase {
       '#description' => $this->t('The increment to use for minutes and seconds'),
       '#min' => 1,
       '#size' => 4,
+      '#weight' => 10,
     ];
     return $form;
   }
@@ -138,6 +205,19 @@ class DateList extends DateBase {
       $element_properties[$property_name] = array_combine($element_properties[$property_name], $element_properties[$property_name]);
     }
     parent::setConfigurationFormDefaultValue($form, $element_properties, $property_element, $property_name);
+  }
+
+  /**
+   * After build handler for Datelist element.
+   */
+  public static function afterBuild(array $element, FormStateInterface $form_state) {
+    // Reverse years from min:max to max:min.
+    // @see \Drupal\Core\Datetime\Element\DateElementBase::datetimeRangeYears
+    if (!empty($element['#date_year_range_reverse']) && isset($element['year']) && isset($element['year']['#options'])) {
+      $options = $element['year']['#options'];
+      $element['year']['#options'] = ['' => $options['']] + array_reverse($options, TRUE);
+    }
+    return $element;
   }
 
 }

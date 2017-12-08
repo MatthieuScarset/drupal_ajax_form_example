@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for webform submission log routes.
  *
- * Copied from: \Drupal\dblog\Controller\DbLogController
+ * Copied from: \Drupal\dblog\Controller\DbLogController.
  */
 class WebformSubmissionLogController extends ControllerBase {
 
@@ -61,7 +61,7 @@ class WebformSubmissionLogController extends ControllerBase {
   protected $requestHandler;
 
   /**
-   * Constructs a DbLogController object.
+   * Constructs a WebformSubmissionLogController object.
    *
    * @param \Drupal\Core\Database\Connection $database
    *   A database connection.

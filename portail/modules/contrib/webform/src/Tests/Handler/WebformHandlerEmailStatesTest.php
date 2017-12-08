@@ -37,12 +37,15 @@ class WebformHandlerEmailStatesTest extends WebformTestBase {
 
     // Check converted email.
     $email = $this->getLastEmail();
-    $this->assertEqual($email['id'], 'webform_email.email_converted');
+    $this->assertEqual($email['id'], 'webform_email_email_converted');
 
     // Check updated email.
     $this->drupalPostForm("/admin/structure/webform/manage/test_handler_email_states/submission/$sid/edit", [], t('Save'));
+
+    /**************************************************************************/
     // @todo Fix random test failure that can't be reproduced locally.
     // $this->assertRaw('Debug: Email: Submission updated');
+    /**************************************************************************/
 
     // Check deleted email.
     $this->drupalPostForm("/admin/structure/webform/manage/test_handler_email_states/submission/$sid/delete", [], t('Delete'));

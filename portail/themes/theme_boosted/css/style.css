@@ -1192,6 +1192,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding: 3rem 2rem;
 }
 
+.rebond.rebond-contact-distributor article {
+    padding: 3rem 1rem;
+}
+
 .rebond .form-group {
     margin-bottom: 0;
 }
@@ -1313,6 +1317,16 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #FFFFFF;
     background-color: #000000;
     border-color: #FFFFFF;
+}
+
+
+.rebond-contact-distributor h2 {
+    margin-top: 0;
+}
+
+.rebond-contact-distributor h2 span.dvi-form-distributor-name {
+    text-transform: uppercase;
+    color: #F16E00;
 }
 
 
@@ -1749,8 +1763,13 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     font-size: 8px;
 }
 
-.webform-dvi-contact-global span.form-required {
+.webform-dvi-contact-global span.form-required,
+.webform-dvi-contact-distributor span.form-required {
     color:#e74c3c;
+}
+
+.webform-dvi-contact-distributor .container {
+    margin-top: 1.5rem;
 }
 
 

@@ -81,6 +81,15 @@ function oab_dvi_update_8009() {
 /**
  * MAJ Display VIEW du node distributeur
  */
-function oab_dvi_update_8013() {
+function oab_dvi_update_8013()
+{
     include_once("updates/update_8013.inc");
+}
+
+/**
+ * Création du formulaire "Contact Distributor"
+ */
+function oab_dvi_update_8014() {
+    include_once("updates/update_8014.inc");
+
 }

@@ -6,7 +6,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\filter\Entity\FilterFormat;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
@@ -28,13 +28,22 @@ class TextFormat extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $default_properties = parent::getDefaultProperties() + [
+    $properties = parent::getDefaultProperties() + [
       // Text format settings.
       'allowed_formats' => [],
       'hide_help' => FALSE,
     ];
-    unset($default_properties['disabled']);
-    return $default_properties;
+    unset(
+      $properties['disabled'],
+      $properties['attributes'],
+      $properties['wrapper_attributes'],
+      $properties['title_display'],
+      $properties['description_display'],
+      $properties['field_prefix'],
+      $properties['field_suffix'],
+      $properties['help']
+    );
+    return $properties;
   }
 
   /**
@@ -47,7 +56,7 @@ class TextFormat extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
     $element['#after_build'] = [[get_class($this), 'afterBuild']];
     $element['#attached']['library'][] = 'webform/webform.element.text_format';
@@ -77,7 +86,7 @@ class TextFormat extends WebformElementBase {
       // Display tips in a modal.
       $element['format']['help']['about']['#attributes']['class'][] = 'use-ajax';
       $element['format']['help']['about']['#attributes'] += [
-        'data-dialog-type' => 'modal',
+        'data-dialog-type' => 'dialog',
         'data-dialog-options' => Json::encode([
           'dialogClass' => 'webform-text-format-help-dialog',
           'width' => 800,
@@ -182,6 +191,13 @@ class TextFormat extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
+  public function preview() {
+    return (\Drupal::moduleHandler()->moduleExists('filter')) ? parent::preview() : [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
@@ -217,6 +233,17 @@ class TextFormat extends WebformElementBase {
     $allowed_formats = array_filter($allowed_formats);
     $form_state->setValue('allowed_formats', $allowed_formats);
     parent::validateConfigurationForm($form, $form_state);
+  }
+
+  /**
+   * Get composite element.
+   *
+   * @return array
+   *   A composite sub-elements.
+   */
+  public function hasCompositeElement(array $element, $key) {
+    $elements = $this->getCompositeElements();
+    return (isset($elements[$key])) ? TRUE : FALSE;
   }
 
 }
