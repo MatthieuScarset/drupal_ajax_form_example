@@ -5,11 +5,11 @@ open: null
 close: null
 uid: 1
 template: false
-id: dvi_contact_global_2
+id: dvi_contact_global
 title: 'DVI - Contact global'
 description: ''
 category: DVI
-elements: "'#attributes':\n  class:\n    - webform-dvi-contact-global\ndvi_contact_global_description:\n  '#type': processed_text\n  '#text': \"<p>Vous avez un projet, une question ? Vous êtes intéressé par une de nos solutions ? Merci de renseigner le fomulaire suivant, nous vous contacterons dans les plus brefs délais.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<hr />\\r\\n<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Phone\n  '#required': true\nsubject:\n  '#type': textfield\n  '#title': Subject\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha_dvi_global:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#attributes':\n    class:\n      - dvi-contact-global-submit-container\n  '#submit__attributes':\n    class:\n      - dvi-contact-global-submit\n"
+elements: "'#attributes':\n  class:\n    - webform-dvi-contact-global\ndvi_contact_global_description:\n  '#type': processed_text\n  '#text': \"<p>Vous avez un projet, une question ? Vous êtes intéressé par une de nos solutions ? Merci de renseigner le fomulaire suivant, nous vous contacterons dans les plus brefs délais.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<hr />\\r\\n<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Phone\n  '#required': true\nsubject:\n  '#type': textfield\n  '#title': Subject\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha_dvi_global:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#attributes':\n    class:\n      - dvi-contact-global-submit-container\n  '#submit__attributes':\n    class:\n      - dvi-contact-global-submit\n"
 css: ''
 javascript: ''
 settings:

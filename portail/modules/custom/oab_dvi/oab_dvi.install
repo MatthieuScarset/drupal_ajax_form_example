@@ -68,3 +68,11 @@ function oab_dvi_update_8008() {
 function oab_dvi_update_8009() {
   include_once("updates/update_8009.inc");
 }
+
+
+/**
+ * Création du formulaire "Contact Distributor"
+ */
+function oab_dvi_update_8014() {
+    include_once("updates/update_8014.inc");
+}
