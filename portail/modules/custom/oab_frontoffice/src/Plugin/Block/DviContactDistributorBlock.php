@@ -41,18 +41,10 @@ class DviContactDistributorBlock extends BlockBase {
         $type = $node->getType();
 
         if($type == 'distributor'){
-            /*$form = \Drupal\webform\Entity\Webform::load('dvi_contact_distributor');
-            #$form = \Drupal::entityTypeManager()->getStorage('webform')->load('dvi_contact_distributor');
-
+            $form = \Drupal\webform\Entity\Webform::load('dvi_contact_distributor');
             $block["form"] = \Drupal::service('entity_type.manager')
                 ->getViewBuilder('webform')
-                ->view($form);*/
-
-            $block["form"] = [
-                '#type' => 'webform',
-                '#webform' => 'dvi_contact_distributor',
-            ];
-
+                ->view($form);
 
             $block["distributorName"] = $node->getTitle();
         }
