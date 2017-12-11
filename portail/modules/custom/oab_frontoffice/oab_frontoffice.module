@@ -42,14 +42,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
     ##Je charge le webform juste pour les contenus fr
     if($currentLanguageCode == 'fr') {
       $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
-      //Je recupère le nid pour setter le formulaire
-      /*$nid = $variables['node']->id();
-
-      $options = ['absolute' => TRUE];
-      $url_object = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
-
-      $values = ['data' => ['name' => 'url_du_fichier', '#value' => $url_object]];
-      $form->getSubmissionForm($values);*/
       $form_output = \Drupal::entityManager()
         ->getViewBuilder('webform')
         ->view($form);
