@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.document_visual
+    - field.field.media.image.field_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - image.style.max_650
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.document_visual
+targetEntityType: media
+bundle: image
+mode: document_visual
+content:
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: max_650
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

@@ -238,3 +238,17 @@ function oab_tibo_update_8031() {
 function oab_tibo_update_8032() {
     include_once("updates/update_8032.inc");
 }
+
+/**
+ * ECE settings
+ */
+function oab_tibo_update_8033() {
+    include_once("updates/update_8033.inc");
+}
+
+/**
+ * maj subhomes
+ */
+function oab_tibo_update_8034() {
+    include_once("updates/update_8034.inc");
+}
