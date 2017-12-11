@@ -3,18 +3,6 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.subhome
-    - node.type.press_kit
-    - node.type.press_release
-    - taxonomy.vocabulary.blog_formats
-    - taxonomy.vocabulary.blog_thematics
-    - taxonomy.vocabulary.document_thematics
-    - taxonomy.vocabulary.document_types
-    - taxonomy.vocabulary.industries
-    - taxonomy.vocabulary.jobs_profiles
-    - taxonomy.vocabulary.magazine_thematics
-    - taxonomy.vocabulary.magazine_types
-    - taxonomy.vocabulary.partner_types
-    - taxonomy.vocabulary.regions
     - taxonomy.vocabulary.solutions
   module:
     - node
@@ -48,7 +36,7 @@ display:
         type: views_query
         options:
           disable_sql_rewrite: false
-          distinct: false
+          distinct: true
           replica: false
           query_comment: ''
           query_tags: {  }
@@ -56,6 +44,7 @@ display:
         type: basic
         options:
           submit_button: Apply
+          disable_ajax_submit: true
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -272,6 +261,7 @@ display:
       arguments: {  }
       display_extenders: {  }
       use_ajax: true
+      group_by: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -335,6 +325,7 @@ display:
         filter_groups: false
         title: false
         header: true
+        relationships: false
       filters:
         status:
           value: '1'
@@ -387,24 +378,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_blog_thematic_target_id:
-          id: field_blog_thematic_target_id
-          table: node__field_blog_thematic
-          field: field_blog_thematic_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_blog_thematic
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_blog_thematic_target_id_op
-            label: 'By thematic'
+            operator_id: name_op
+            label: Thematic
             description: ''
             use_operator: false
-            operator: field_blog_thematic_target_id_op
-            identifier: field_blog_thematic_target_id
+            operator: name_op
+            identifier: blog_thematics
             required: false
             remember: false
             multiple: false
@@ -416,7 +407,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -429,31 +420,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: blog_thematics
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_blog_format_target_id:
-          id: field_blog_format_target_id
-          table: node__field_blog_format
-          field: field_blog_format_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_blog_format
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_blog_format_target_id_op
-            label: 'By format'
+            operator_id: name_2_op
+            label: Format
             description: ''
             use_operator: false
-            operator: field_blog_format_target_id_op
-            identifier: field_blog_format_target_id
+            operator: name_2_op
+            identifier: blog_formats
             required: false
             remember: false
             multiple: false
@@ -465,7 +452,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -478,116 +465,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: blog_formats
-          hierarchy: false
-          error_message: false
-          plugin_id: taxonomy_index_tid
-        field_job_profile_target_id:
-          id: field_job_profile_target_id
-          table: node__field_job_profile
-          field: field_job_profile_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_job_profile_target_id_op
-            label: 'By profession'
-            description: ''
-            use_operator: false
-            operator: field_job_profile_target_id_op
-            identifier: field_job_profile_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: jobs_profiles
-          hierarchy: false
-          error_message: false
-          plugin_id: taxonomy_index_tid
-        field_industry_target_id:
-          id: field_industry_target_id
-          table: node__field_industry
-          field: field_industry_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_industry_target_id_op
-            label: 'By industry'
-            description: ''
-            use_operator: false
-            operator: field_industry_target_id_op
-            identifier: field_industry_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: industries
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Blog
+      relationships:
+        field_blog_thematic:
+          id: field_blog_thematic
+          table: node__field_blog_thematic
+          field: field_blog_thematic
+          relationship: none
+          group_type: group
+          admin_label: 'field_blog_thematic: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_blog_format:
+          id: field_blog_format
+          table: node__field_blog_format
+          field: field_blog_format
+          relationship: none
+          group_type: group
+          admin_label: 'field_blog_format: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -595,7 +499,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -650,6 +553,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        relationships: false
       filters:
         status:
           value: '1'
@@ -702,24 +606,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_solution_target_id_op
-            label: 'By solution'
+            operator_id: name_op
+            label: Solution
             description: ''
             use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
+            operator: name_op
+            identifier: solutions
             required: false
             remember: false
             multiple: false
@@ -731,7 +635,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -744,31 +648,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_industry_target_id:
-          id: field_industry_target_id
-          table: node__field_industry
-          field: field_industry_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_industry
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_industry_target_id_op
-            label: 'By industry'
+            operator_id: name_1_op
+            label: Industry
             description: ''
             use_operator: false
-            operator: field_industry_target_id_op
-            identifier: field_industry_target_id
+            operator: name_1_op
+            identifier: industries
             required: false
             remember: false
             multiple: false
@@ -780,7 +680,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -793,31 +693,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: industries
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_job_profile
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_op
-            label: 'By job profile'
+            operator_id: name_2_op
+            label: 'Job profile'
             description: ''
             use_operator: false
-            operator: tid_op
-            identifier: field_jobs_target_id
+            operator: name_2_op
+            identifier: jobs_profiles
             required: false
             remember: false
             multiple: false
@@ -829,7 +725,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -842,18 +738,42 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: jobs_profiles
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Catalogue
+      relationships:
+        field_solution:
+          id: field_solution
+          table: node__field_solution
+          field: field_solution
+          relationship: none
+          group_type: group
+          admin_label: 'field_solution: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_industry:
+          id: field_industry
+          table: node__field_industry
+          field: field_industry
+          relationship: none
+          group_type: group
+          admin_label: 'field_industry: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_job_profile:
+          id: field_job_profile
+          table: node__field_job_profile
+          field: field_job_profile
+          relationship: none
+          group_type: group
+          admin_label: 'field_job_profile: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -861,7 +781,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -917,6 +836,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        relationships: false
       filters:
         status:
           value: '1'
@@ -969,24 +889,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_solution_target_id_op
-            label: 'By solution'
+            operator_id: name_op
+            label: Solution
             description: ''
             use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
+            operator: name_op
+            identifier: solutions
             required: false
             remember: false
             multiple: false
@@ -998,7 +918,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1011,31 +931,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_industry_target_id:
-          id: field_industry_target_id
-          table: node__field_industry
-          field: field_industry_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_industry
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_industry_target_id_op
-            label: 'By industry'
+            operator_id: name_1_op
+            label: Industry
             description: ''
             use_operator: false
-            operator: field_industry_target_id_op
-            identifier: field_industry_target_id
+            operator: name_1_op
+            identifier: industries
             required: false
             remember: false
             multiple: false
@@ -1047,7 +963,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1060,67 +976,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: industries
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_op
-            label: 'By job profile'
-            description: ''
-            use_operator: false
-            operator: tid_op
-            identifier: field_jobs_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: jobs_profiles
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Customers
+      relationships:
+        field_solution:
+          id: field_solution
+          table: node__field_solution
+          field: field_solution
+          relationship: none
+          group_type: group
+          admin_label: 'field_solution: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_industry:
+          id: field_industry
+          table: node__field_industry
+          field: field_industry
+          relationship: none
+          group_type: group
+          admin_label: 'field_industry: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1128,7 +1010,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1184,6 +1065,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        relationships: false
       filters:
         status:
           value: '1'
@@ -1236,24 +1118,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_document_thematic_target_id:
-          id: field_document_thematic_target_id
-          table: node__field_document_thematic
-          field: field_document_thematic_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_document_thematic
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_document_thematic_target_id_op
-            label: 'By thematic'
+            operator_id: name_op
+            label: Thematic
             description: ''
             use_operator: false
-            operator: field_document_thematic_target_id_op
-            identifier: field_document_thematic_target_id
+            operator: name_op
+            identifier: document_thematics
             required: false
             remember: false
             multiple: false
@@ -1265,7 +1147,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1278,31 +1160,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: document_thematics
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_document_type_target_id:
-          id: field_document_type_target_id
-          table: node__field_document_type
-          field: field_document_type_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_document_type
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_document_type_target_id_op
-            label: 'By type'
+            operator_id: name_1_op
+            label: Format
             description: ''
             use_operator: false
-            operator: field_document_type_target_id_op
-            identifier: field_document_type_target_id
+            operator: name_1_op
+            identifier: document_types
             required: false
             remember: false
             multiple: false
@@ -1314,7 +1192,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1327,116 +1205,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: document_types
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_op
-            label: 'By job profile'
-            description: ''
-            use_operator: false
-            operator: tid_op
-            identifier: field_jobs_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: jobs_profiles
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_industry_target_id:
-          id: field_industry_target_id
-          table: node__field_industry
-          field: field_industry_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_industry_target_id_op
-            label: 'By industry'
-            description: ''
-            use_operator: false
-            operator: field_industry_target_id_op
-            identifier: field_industry_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: industries
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Documents
+      relationships:
+        field_document_thematic:
+          id: field_document_thematic
+          table: node__field_document_thematic
+          field: field_document_thematic
+          relationship: none
+          group_type: group
+          admin_label: 'field_document_thematic: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_document_type:
+          id: field_document_type
+          table: node__field_document_type
+          field: field_document_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_document_type: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1444,7 +1239,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1500,6 +1294,7 @@ display:
         filters: false
         filter_groups: false
         title: false
+        relationships: false
       filters:
         status:
           value: '1'
@@ -1552,24 +1347,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_magazine_thematic_target_id:
-          id: field_magazine_thematic_target_id
-          table: node__field_magazine_thematic
-          field: field_magazine_thematic_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_magazine_thematic
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_magazine_thematic_target_id_op
-            label: 'By thematic'
+            operator_id: name_op
+            label: Thematic
             description: ''
             use_operator: false
-            operator: field_magazine_thematic_target_id_op
-            identifier: field_magazine_thematic_target_id
+            operator: name_op
+            identifier: magazine_thematics
             required: false
             remember: false
             multiple: false
@@ -1581,7 +1376,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1594,31 +1389,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: magazine_thematics
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_magazine_type_target_id:
-          id: field_magazine_type_target_id
-          table: node__field_magazine_type
-          field: field_magazine_type_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_magazine_type
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_magazine_type_target_id_op
-            label: 'By type'
+            operator_id: name_1_op
+            label: Format
             description: ''
             use_operator: false
-            operator: field_magazine_type_target_id_op
-            identifier: field_magazine_type_target_id
+            operator: name_1_op
+            identifier: magazine_types
             required: false
             remember: false
             multiple: false
@@ -1630,7 +1421,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -1643,116 +1434,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: magazine_types
-          hierarchy: false
-          error_message: false
-          plugin_id: taxonomy_index_tid
-        field_job_profile_target_id:
-          id: field_job_profile_target_id
-          table: node__field_job_profile
-          field: field_job_profile_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_job_profile_target_id_op
-            label: 'By profession'
-            description: ''
-            use_operator: false
-            operator: field_job_profile_target_id_op
-            identifier: field_job_profile_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: jobs_profiles
-          hierarchy: false
-          error_message: false
-          plugin_id: taxonomy_index_tid
-        field_industry_target_id:
-          id: field_industry_target_id
-          table: node__field_industry
-          field: field_industry_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_industry_target_id_op
-            label: 'By industry'
-            description: ''
-            use_operator: false
-            operator: field_industry_target_id_op
-            identifier: field_industry_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: industries
-          hierarchy: false
-          error_message: false
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Magazine
+      relationships:
+        field_magazine_thematic:
+          id: field_magazine_thematic
+          table: node__field_magazine_thematic
+          field: field_magazine_thematic
+          relationship: none
+          group_type: group
+          admin_label: 'field_magazine_thematic: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_magazine_type:
+          id: field_magazine_type
+          table: node__field_magazine_type
+          field: field_magazine_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_magazine_type: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1760,7 +1468,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1816,6 +1523,8 @@ display:
         filters: false
         filter_groups: false
         title: false
+        footer: false
+        relationships: false
       filters:
         status:
           value: '1'
@@ -1828,9 +1537,99 @@ display:
           expose:
             operator: ''
           group: 1
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: Solution
+            description: ''
+            use_operator: false
+            operator: name_op
+            identifier: solutions
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+              fh_backbones: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_partner_type
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_1_op
+            label: Category
+            description: ''
+            use_operator: false
+            operator: name_1_op
+            identifier: partner_types
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+              fh_backbones: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
         langcode:
           id: langcode
-          table: node
+          table: node_field_data
           field: langcode
           relationship: none
           group_type: group
@@ -1868,158 +1667,31 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_solution_target_id_op
-            label: 'By solution'
-            description: ''
-            use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        tid:
-          id: tid
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_op
-            label: 'By type'
-            description: ''
-            use_operator: false
-            operator: tid_op
-            identifier: field_types_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: partner_types
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        tid_1:
-          id: tid_1
-          table: taxonomy_index
-          field: tid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: tid_1_op
-            label: 'By region'
-            description: ''
-            use_operator: false
-            operator: tid_1_op
-            identifier: field_regions_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: regions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Partners
+      footer: {  }
+      relationships:
+        field_solution:
+          id: field_solution
+          table: node__field_solution
+          field: field_solution
+          relationship: none
+          group_type: group
+          admin_label: 'field_solution: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_partner_type:
+          id: field_partner_type
+          table: node__field_partner_type
+          field: field_partner_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_partner_type: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -2027,7 +1699,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2086,6 +1757,7 @@ display:
         use_ajax: false
         style: true
         row: true
+        relationships: false
       filters:
         status:
           value: '1'
@@ -2138,26 +1810,24 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          relationship: none
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_press_type
           group_type: group
           admin_label: ''
-          operator: in
-          value:
-            press_kit: press_kit
-            press_release: press_release
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: type_op
-            label: 'By type'
+            operator_id: name_1_op
+            label: Format
             description: ''
             use_operator: false
-            operator: type_op
-            identifier: field_type_target_id
+            operator: name_1_op
+            identifier: press_formats
             required: false
             remember: false
             multiple: false
@@ -2169,7 +1839,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: true
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -2182,27 +1852,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_solution_target_id_op
-            label: 'By solution'
+            operator_id: name_op
+            label: Solution
             description: ''
             use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
+            operator: name_op
+            identifier: solutions
             required: false
             remember: false
             multiple: false
@@ -2214,7 +1884,7 @@ display:
               digital_admin: '0'
               webform_manager: '0'
               contributor: '0'
-            reduce: false
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -2227,13 +1897,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
         node_year:
           id: node_year
           table: node_field_data
@@ -2325,6 +1991,25 @@ display:
         groups:
           1: AND
       use_ajax: true
+      relationships:
+        field_solution:
+          id: field_solution
+          table: node__field_solution
+          field: field_solution
+          relationship: none
+          group_type: group
+          admin_label: 'field_solution: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_press_type:
+          id: field_press_type
+          table: node__field_press_type
+          field: field_press_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_press_type: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -2332,7 +2017,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
