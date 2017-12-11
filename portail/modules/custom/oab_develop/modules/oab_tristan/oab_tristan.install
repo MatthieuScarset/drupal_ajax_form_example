@@ -463,3 +463,11 @@ function oab_tristan_update_8060() {
   oabt_YmlImport('core.entity_form_display.node.product.default.yml');
   oabt_YmlImport('core.entity_view_display.node.product.default.yml');
 }
+
+
+/**
+ * Ajout d'un bloc de mentions legales au formulaire de dl de documents
+ */
+function oab_tristan_update_8061() {
+  include_once("updates/update_8061.inc");
+}
