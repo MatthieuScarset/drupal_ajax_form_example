@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_wysiwyg_rebond_color
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - options
+id: paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color
+field_name: field_p_wysiwyg_rebond_color
+entity_type: paragraph
+bundle: rebond_wysiwyg
+label: 'Background color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

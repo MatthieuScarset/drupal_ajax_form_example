@@ -25,4 +25,3 @@ $collection->write('oab.ece', array (
     'create_txt' => 'Créer un compte',
     'create_link' => 'https://espaceclient.orange-business.com/web/ece2/creation',
 ));
-

@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.partner.field_meta_description
     - field.field.node.partner.field_meta_title
     - field.field.node.partner.field_metatags
+    - field.field.node.partner.field_p_wysiwyg_rebond
     - field.field.node.partner.field_page_du_site_1
     - field.field.node.partner.field_page_du_site_2
     - field.field.node.partner.field_partner_type
@@ -25,6 +26,7 @@ dependencies:
     - field.field.node.partner.field_thematic
     - field.field.node.partner.field_visual
     - field.field.node.partner.field_wysiwyg_rebond
+    - field.field.node.partner.moderation_state_update
     - node.type.partner
   module:
     - datetime
@@ -109,6 +111,7 @@ hidden:
   field_industry: true
   field_meta_description: true
   field_meta_title: true
+  field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
   field_partner_type: true
@@ -120,3 +123,4 @@ hidden:
   field_visual: true
   field_wysiwyg_rebond: true
   langcode: true
+  moderation_state_update: true

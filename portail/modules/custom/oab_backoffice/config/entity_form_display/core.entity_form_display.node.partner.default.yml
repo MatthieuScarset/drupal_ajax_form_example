@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.partner.field_meta_description
     - field.field.node.partner.field_meta_title
     - field.field.node.partner.field_metatags
+    - field.field.node.partner.field_p_wysiwyg_rebond
     - field.field.node.partner.field_page_du_site_1
     - field.field.node.partner.field_page_du_site_2
     - field.field.node.partner.field_partner_type
@@ -26,12 +27,15 @@ dependencies:
     - field.field.node.partner.field_thematic
     - field.field.node.partner.field_visual
     - field.field.node.partner.field_wysiwyg_rebond
+    - field.field.node.partner.moderation_state_update
     - node.type.partner
   module:
     - datetime
     - entity_browser
     - field_group
+    - inline_entity_form
     - metatag
+    - paragraphs
     - path
     - text
     - workbench_moderation
@@ -95,6 +99,7 @@ third_party_settings:
         - promote
         - path
         - field_metatags
+        - moderation_state_update
       parent_name: group_onglets
       weight: 24
       format_type: tab
@@ -138,6 +143,7 @@ third_party_settings:
         - field_page_du_site_1
         - field_page_du_site_2
         - field_wysiwyg_rebond
+        - field_p_wysiwyg_rebond
       parent_name: group_onglets
       weight: 22
       format_type: tab
@@ -246,6 +252,18 @@ content:
     third_party_settings: {  }
     type: metatag_firehose
     region: content
+  field_p_wysiwyg_rebond:
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
   field_page_du_site_1:
     type: entity_reference_autocomplete
     weight: 1
@@ -324,6 +342,19 @@ content:
     weight: 2
     settings:
       include_locked: true
+    third_party_settings: {  }
+    region: content
+  moderation_state_update:
+    type: inline_entity_form_complex
+    weight: 40
+    settings:
+      override_labels: true
+      label_singular: 'Moderation state update'
+      label_plural: 'Moderation state updates'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
     third_party_settings: {  }
     region: content
   path:

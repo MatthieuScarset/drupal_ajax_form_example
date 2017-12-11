@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.webform.field_p_wysiwyg_rebond
     - field.field.node.webform.field_page_du_site_1
     - field.field.node.webform.field_page_du_site_2
     - field.field.node.webform.field_rebond_document
     - field.field.node.webform.field_wysiwyg_rebond
+    - field.field.node.webform.moderation_state_update
     - field.field.node.webform.webform
     - node.type.webform
   module:
@@ -32,8 +34,10 @@ content:
     type: webform_entity_reference_entity_view
     region: content
 hidden:
+  field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
   field_rebond_document: true
   field_wysiwyg_rebond: true
   langcode: true
+  moderation_state_update: true
