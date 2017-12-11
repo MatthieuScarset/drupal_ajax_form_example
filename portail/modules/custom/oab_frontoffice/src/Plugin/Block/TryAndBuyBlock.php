@@ -60,10 +60,15 @@ class TryAndBuyBlock  extends BlockBase {
 					$field_data = $node->get('field_try_and_buy');
 					foreach ($field_data as $data) {
 						$block[] = $data->view();
+						$blockEmpty = FALSE;
 					}
 				}
 			}
 		}
-		return $block;
+		if(!$blockEmpty){
+			return $block;
+		}
+		else
+			return NULL;
 	}
 }

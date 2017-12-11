@@ -60,10 +60,15 @@ class TestShowroomBlock  extends BlockBase {
 					$field_data = $node->get('field_test_showroom');
 					foreach ($field_data as $data) {
 						$block[] = $data->view();
+						$blockEmpty = FALSE;
 					}
 				}
 			}
 		}
-		return $block;
+		if(!$blockEmpty){
+			return $block;
+		}
+		else
+			return NULL;
 	}
 }

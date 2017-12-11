@@ -44,6 +44,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_rebond
         - group_classify
         - group_seo
         - group_publish
@@ -65,8 +66,6 @@ third_party_settings:
         - field_content
         - field_file
         - field_visual
-        - group_try_and_buy_block
-        - group_test_showroom_block
       parent_name: group_onglets
       weight: 5
       format_type: tab
@@ -141,21 +140,37 @@ third_party_settings:
     group_try_and_buy_block:
       children:
         - field_try_and_buy
-      parent_name: group_write
-      weight: 10
+      parent_name: group_rebond
+      weight: 21
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
+        label: 'Try and buy block'
+        formatter: open
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
       label: 'Try and buy block'
     group_test_showroom_block:
       children:
         - field_test_showroom
-      parent_name: group_write
+      parent_name: group_rebond
       weight: 20
+      format_type: tab
+      format_settings:
+        label: 'Test Showroom Block'
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Test Showroom Block'
+    group_rebond:
+      children:
+        - group_test_showroom_block
+        - group_try_and_buy_block
+      parent_name: group_onglets
+      weight: 6
       format_type: tab
       format_settings:
         id: ''
@@ -163,7 +178,7 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Test Showroom Block'
+      label: Rebond
 id: node.product.default
 targetEntityType: node
 bundle: product
@@ -284,10 +299,10 @@ content:
     settings:
       title: 'Test Showroom block'
       title_plural: 'Test Showroom blocks'
-      edit_mode: closed
+      edit_mode: open
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: paragraph_block_rebond
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   field_top_zone:
@@ -317,10 +332,10 @@ content:
     settings:
       title: 'Try and buy block'
       title_plural: 'Try and buy blocks'
-      edit_mode: closed
+      edit_mode: open
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: paragraph_block_rebond
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   field_visual:

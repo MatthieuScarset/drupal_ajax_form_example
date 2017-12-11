@@ -1270,12 +1270,25 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .rebond-tryandbuy .paragraph_block_rebond .rebond-block-title h2 {
     margin-left: 0;
 }
+
+.block-finddistributor article h2{
+    margin-left: 0;
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    color: inherit;
+}
 .rebond-testshowroom .paragraph_block_rebond{
     background-color: #595959;
     color: #FFFFFF;
 }
 .rebond-tryandbuy .paragraph_block_rebond{
     background-color: #ff6600;
+    color: #FFFFFF;
+}
+.block-finddistributor article{
+    background-color: #a885d8;
     color: #FFFFFF;
 }
 
@@ -1290,6 +1303,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 4px;
 }
 
+.block-finddistributor .rebond-link,
 .paragraph_block_rebond .rebond-link{
     color: #FFFFFF;
     border-color: #FFFFFF;
@@ -1330,6 +1344,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     border-color: #FFFFFF;
 }
 
+.block-finddistributor .rebond-link:hover,
 .paragraph_block_rebond .rebond-link:hover,
 .rebond-product .rebond-link:active{
     color: #000000;

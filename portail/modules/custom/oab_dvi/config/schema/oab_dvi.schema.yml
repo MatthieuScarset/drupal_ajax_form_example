@@ -1,0 +1,13 @@
+block.settings.find_distributor_block:
+  type: block_settings
+  label: Find Distributor'
+  mapping:
+    title:
+      type: label
+      label: 'Block Title'
+    description:
+      type: label
+      label: 'Description block'
+    button_label:
+      type: label
+      label: 'Button label'
