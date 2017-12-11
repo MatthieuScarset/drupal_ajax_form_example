@@ -8,7 +8,9 @@ dependencies:
     - field.field.node.distributor.field_certification_obs
     - field.field.node.distributor.field_city
     - field.field.node.distributor.field_departments
+    - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
+    - field.field.node.distributor.field_header_title
     - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
@@ -29,37 +31,12 @@ targetEntityType: node
 bundle: distributor
 mode: subhome
 content:
-  field_additionnal:
-    type: string
-    weight: 2
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_city:
-    type: string
-    weight: 4
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_postal_code:
-    type: string
-    weight: 3
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_street:
-    type: string
+  field_highlight:
+    type: basic_string
     weight: 1
     region: content
     label: hidden
-    settings:
-      link_to_entity: false
+    settings: {  }
     third_party_settings: {  }
   field_visual:
     type: entity_reference_entity_view
@@ -85,17 +62,22 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
+  field_additionnal: true
   field_certification_obs: true
+  field_city: true
   field_departments: true
+  field_display_title: true
   field_email_address: true
-  field_highlight: true
+  field_header_title: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
   field_navigation_link: true
   field_phone_number: true
+  field_postal_code: true
   field_products: true
   field_solution: true
+  field_street: true
   field_subhome: true
   langcode: true
   links: true
