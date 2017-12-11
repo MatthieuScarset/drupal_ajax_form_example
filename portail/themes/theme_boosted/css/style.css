@@ -1367,6 +1367,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .rebond-product-link {
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .rebond-product-link a {
@@ -1504,7 +1505,7 @@ aside.right-column > .region {
 }
 
 .rebond-product-link-create {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .rebond-product-link-create a {
