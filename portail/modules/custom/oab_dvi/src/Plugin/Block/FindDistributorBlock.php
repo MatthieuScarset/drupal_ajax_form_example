@@ -10,6 +10,7 @@ namespace Drupal\oab_dvi\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 
 /**
@@ -99,7 +100,7 @@ class FindDistributorBlock  extends BlockBase {
 				$block = array(
 					'title' => isset($config['title']) ? t($config['title']) : '',
 					'text' => isset($config['description']) ? t($config['description']) : '',
-					'link'  => 'http://www.googole.Fr',
+					'link'  => Url::fromRoute('view.subhomes.page_distributor', array( 'product' => $nid )) ,
 					'link_text' => isset($config['button_label']) ? t($config['button_label']) : '',
 				);
 				$showBlock = TRUE;
