@@ -93,3 +93,12 @@ function oab_dvi_update_8014() {
     include_once("updates/update_8014.inc");
 
 }
+
+
+/**
+ * Création du webform DVI Becoming distributor
+ * See JIRA DVI-5
+ */
+function oab_dvi_update_8016() {
+    include_once("updates/update_8016.inc");
+}
