@@ -12,3 +12,8 @@ oab.general_settings_tab:
   route_name: oab.general_settings
   title: General Settings
   base_route: oab.general_settings
+
+oab.settings_ece_tab:
+  route_name: oab.settings_ece
+  title: Settings
+  base_route: oab.settings_ece

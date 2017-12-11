@@ -178,7 +178,7 @@ git_cleanup() {
 	if [ $reponse == "O" ] || [ $reponse == "o" ] || [ $reponse == "Y" ] || [ $reponse == "y" ]
 	then
 		#on récupère les branches mergées sur master
-		git checkout master && git branch --merged | grep -E -v 'master|recette|dev|updates' | xargs git branch -d
+		git checkout master && git branch --merged | grep -E -v 'master|recette|dev|integration|updates' | xargs git branch -d
 		echo -e "${CYANFONCE}Votre GIT local est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
@@ -192,7 +192,7 @@ git_cleanup_remote() {
 	if [ $reponse == "O" ] || [ $reponse == "o" ] || [ $reponse == "Y" ] || [ $reponse == "y" ]
 	then
 		#on récupère les branches mergées sur le master remote
-		git checkout master && git fetch -p && git branch -r --merged | grep -E -v 'master|recette|dev|updates' | sed -e 's/origin\//:/' | xargs git push origin
+		git checkout master && git fetch -p && git branch -r --merged | grep -E -v 'master|recette|dev|integration|updates' | sed -e 's/origin\//:/' | xargs git push origin
 		echo -e "${CYANFONCE}Votre GIT remote est tout propre !${NEUTRE}"
 		echo -e "${CYANFONCE}Plus de vilaines branches mergées sur le master qui traînent${NEUTRE}"
 	else
@@ -205,10 +205,10 @@ git_unmerged() {
 	then
 		#on récupère les branches mergées sur le master remote
 		echo -e "${CYANFONCE}Voici les branches non mergées sur la branche ${JAUNE}master${NEUTRE}"
-        git branch --no-merged master | grep -E -v 'master|recette|dev|updates'
+        git branch --no-merged master | grep -E -v 'master|recette|dev|integration|updates'
 	else
         echo -e "${CYANFONCE}Voici les branches non mergées sur la branche ${JAUNE}"$1"${NEUTRE}"
-        git branch --no-merged "$1" | grep -E -v 'master|recette|dev|updates'
+        git branch --no-merged "$1" | grep -E -v 'master|recette|dev|integration|updates'
 	fi
 }
 
@@ -244,3 +244,4 @@ cap() {
 	echo -e "${CYANFONCE}cap $@${NEUTRE}"
 	command cap "$@"
 }
+
