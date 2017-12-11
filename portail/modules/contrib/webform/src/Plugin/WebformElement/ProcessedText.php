@@ -11,6 +11,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *
  * @WebformElement(
  *   id = "processed_text",
+ *   default_key = "processed_text",
  *   label = @Translation("Advanced HTML/Text"),
  *   category = @Translation("Markup elements"),
  *   description = @Translation("Provides an element to render advanced HTML markup and processed text."),
@@ -23,11 +24,24 @@ class ProcessedText extends WebformMarkupBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return parent::getDefaultProperties() + [
+    if (function_exists('filter_formats')) {
+      // Works around filter_default_format() throwing fatal error when
+      // user is not allowed to use any filter formats.
+      // @see filter_default_format.
+      $formats = filter_formats(\Drupal::currentUser());
+      $format = reset($formats);
+      $default_format = $format ? $format->id() : filter_fallback_format();
+    }
+    else {
+      $default_format = '';
+    }
+
+    return [
+      'wrapper_attributes' => [],
       // Markup settings.
       'text' => '',
-      'format' => (function_exists('filter_default_format')) ? filter_default_format(\Drupal::currentUser()) : '',
-    ];
+      'format' => $default_format ,
+    ] + parent::getDefaultProperties();
   }
 
   /**
@@ -51,6 +65,13 @@ class ProcessedText extends WebformMarkupBase {
     unset($element['#type'], $element['#text'], $element['#format']);
 
     return parent::buildText($element, $webform_submission, $options);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preview() {
+    return (\Drupal::moduleHandler()->moduleExists('filter')) ? parent::preview() : [];
   }
 
   /**

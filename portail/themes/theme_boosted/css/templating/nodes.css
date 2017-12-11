@@ -1545,3 +1545,35 @@ a.home_banner_element_mobile_link {
     width: 92%;
     background: #fff;
 }
+
+
+.block_ditributor_infos {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 2px solid darkgrey;
+    border-bottom: 2px solid darkgrey;
+    display: table;
+    width: 100%
+}
+
+.block_distributor_address {
+    font-weight: bold;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.distributors_offers_title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.intro_distributeur {
+    font-weight: bold;
+}
+
+.certification_distributeur img{
+    width: 100px;
+    margin-bottom:20px
+}

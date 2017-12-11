@@ -22,12 +22,15 @@ class WebformToggles extends OptionsBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    return parent::getDefaultProperties() + [
+    $properties = [
       'toggle_theme' => 'light',
       'toggle_size' => 'medium',
       'on_text' => '',
       'off_text' => '',
-    ];
+    ] + parent::getDefaultProperties();
+    unset($properties['required'], $properties['required_message']);
+    return $properties;
+
   }
 
   /**
@@ -47,7 +50,7 @@ class WebformToggles extends OptionsBase {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     $element['#element_validate'][] = [get_class($this), 'validateMultipleOptions'];
     parent::prepare($element, $webform_submission);
   }

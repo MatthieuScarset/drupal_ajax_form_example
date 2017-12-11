@@ -58,27 +58,40 @@ Tidy YAML files
 [SimpleTest](https://www.drupal.org/node/645286)
 
     # Run all tests
-    php core/scripts/run-tests.sh --url http://localhost/d8_dev --module webform
+    cd /var/www/sites/d8_webform
+    php core/scripts/run-tests.sh --url http://localhost/wf --module webform --dburl mysql://drupal_d8_webform:drupal.@dm1n@localhost/drupal_d8_webform
+
+    # Run single tests
+    cd /var/www/sites/d8_webform
+    php core/scripts/run-tests.sh --verbose --class "Drupal\webform\Tests\WebformSubmissionStorageTest"
 
 [PHPUnit](https://www.drupal.org/node/2116263)
+     
+Notes
+- Links to PHP Unit HTML responses are not being printed by PHPStrom
+
+References 
+- [Issue #2870145: Set printerClass in phpunit.xml.dist](https://www.drupal.org/node/2870145) 
+- [Lesson 10.2 - Unit testing](https://docs.acquia.com/article/lesson-102-unit-testing)
+
 
     # Execute all Webform PHPUnit tests.
-    cd core
-    php ../vendor/phpunit/phpunit/phpunit --group webform
+    cd /var/www/sites/d8_webform/core
+    php ../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --group webform
 
-    cd core
+    cd /var/www/sites/d8_webform/core
 
     # Execute individual PHPUnit tests.
-    export SIMPLETEST_DB=mysql://drupal_d8_dev:drupal.@dm1n@localhost/drupal_d8_dev;
+    export SIMPLETEST_DB=mysql://drupal_d8_webform:drupal.@dm1n@localhost/drupal_d8_webform;
 
     # Functional test.    
-    php ../vendor/phpunit/phpunit/phpunit ../modules/sandbox/webform/tests/src/Functional/WebformExampleFunctionalTest.php
+    php ../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Functional/WebformExampleFunctionalTest.php
 
     # Kernal test.    
-    php ../vendor/phpunit/phpunit/phpunit ../modules/sandbox/webform/tests/src/Kernal/Utility/WebformDialogHelperTest.php
+    php ../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" ../modules/sandbox/webform/tests/src/Kernal/Utility/WebformDialogHelperTest.php
 
     # Unit test.
-    php ../vendor/phpunit/phpunit/phpunit ../modules/sandbox/webform/tests/src/Unit/Utility/WebformYamlTest.php
+    php ../vendor/phpunit/phpunit/phpunit --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter"  ../modules/sandbox/webform/tests/src/Unit/Utility/WebformYamlTest.php
 
 
 5. Generate release notes

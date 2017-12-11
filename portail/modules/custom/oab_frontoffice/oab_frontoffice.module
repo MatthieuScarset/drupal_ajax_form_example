@@ -792,12 +792,20 @@ function oab_frontoffice_mail_alter(&$message) {
 function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
-  foreach (array_keys($form['actions']) as $action) {
+    foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
         }
-      }
     }
+  } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
+
+      foreach (array_keys($form['actions']) as $action) {
+
+          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit' );
+          }
+      }
+  }
 }
 
 /**
@@ -833,6 +841,28 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
       }
     }
 
+
+}
+
+function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+        if ($node->bundle() == 'distributor') {
+            $field_distrib_email = $node->get('field_email_address');
+
+            $distribMail = "";
+            if(isset($field_distrib_email[0])) {
+                $value = $field_distrib_email[0]->getValue();
+                $distribMail = $value['value'];
+            }
+
+            $form_state->setValue('distributeur_email', $distribMail);
+            $form_state->setValue('distributeur_name', $node->getTitle());
+            $form_state->setValue('distributeur_nid', $node->id());
+        }
+
+    }
 
 }
 

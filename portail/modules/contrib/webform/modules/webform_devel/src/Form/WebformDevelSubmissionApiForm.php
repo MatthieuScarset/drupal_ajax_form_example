@@ -33,14 +33,14 @@ class WebformDevelSubmissionApiForm extends FormBase {
   protected $requestHandler;
 
   /**
-   * Webform submission generation service.
+   * The webform submission generation service.
    *
    * @var \Drupal\webform\WebformSubmissionGenerateInterface
    */
   protected $generate;
 
   /**
-   * Constructs a WebformTestController object.
+   * Constructs a WebformDevelSubmissionApiForm object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
