@@ -51,10 +51,18 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
   }
 
   if ( $variables['element']['#webform'] === 'dvi_contact_global'
-    && $variables['element']['#type'] != "checkbox") {
+    && $variables['element']['#type'] != "checkbox"
+    && $variables['element']['#type'] != "processed_text") {
     $suggestions[] = 'form_element__dvi_contact_global';
-    $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'] ;
+    $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
   }
+
+    if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
+        && $variables['element']['#type'] != "checkbox"
+        && $variables['element']['#type'] != "processed_text") {
+        $suggestions[] = 'form_element__dvi_becoming_distributor';
+        $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
+    }
 
 }
 
