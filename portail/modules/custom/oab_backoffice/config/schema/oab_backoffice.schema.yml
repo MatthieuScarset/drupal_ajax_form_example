@@ -60,3 +60,32 @@ action.configuration.oab_backoffice_node_workbench_publish:
 action.configuration.oab_backoffice_node_workbench_unpublish:
   type: action_configuration_default
   label: 'Node workbench unpublish'
+
+oab.ece:
+  type: config_object
+  label: 'ECE'
+  mapping:
+    title:
+      type: label
+      label: 'Title'
+    intro:
+      type: label
+      label: 'Intro'
+    connect_txt:
+      type: label
+      label: 'Texte se connecter'
+    connect_link:
+      type: label
+      label: 'Lien se connecter'
+    discover_txt:
+      type: label
+      label: 'Texte découvrir'
+    discover_link:
+      type: label
+      label: 'Lien découvrir'
+    create_txt:
+      type: label
+      label: 'Texte créer compte'
+    create_link:
+      type: label
+      label: 'Lien créer compte'

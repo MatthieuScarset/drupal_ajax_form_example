@@ -85,3 +85,10 @@ function oab_will_update_8009(){
 function oab_will_update_8010(){
     include_once("updates/update_8010.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-3215 gestion des images avec texte illisible
+ */
+function oab_will_update_8011(){
+    include_once("updates/update_8011.inc");
+}
