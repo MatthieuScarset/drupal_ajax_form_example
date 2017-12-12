@@ -101,9 +101,11 @@ $collection = \Drupal::service('config.storage')->createCollection('language.fr'
 $collection->write('webform.webform.dvi_becoming_distributor',array (
     'title' => 'DVI - Devenir distributeur',
     'elements' => "dvi_becoming_distributor_description:
-  '#text': \"<p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>\n\"
+  '#text': |
+    <p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>
 votre_societe_desc:
-  '#text': \"<h3 class=\"titre4\">Votre société</h3>\n\"
+  '#text': |
+    <h3 class=\"titre4\">Votre société</h3>
 business_name:
   '#title': 'Raison sociale'
 sector:
@@ -118,7 +120,8 @@ zip_code:
 city:
   '#title': Ville
 vous_desc:
-  '#text': \"<h3 class=\"titre4\">Vous</h3>\n\"
+  '#text': |
+    <h3 class=\"titre4\">You</h3>
 last_name:
   '#title': Nom
 first_name:
