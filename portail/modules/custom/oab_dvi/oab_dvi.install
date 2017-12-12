@@ -122,3 +122,10 @@ function oab_dvi_update_8015() {
 function oab_dvi_update_8016() {
     include_once("updates/update_8016.inc");
 }
+
+/**
+ * Création des termes Distributeur et term_id
+ */
+function oab_dvi_update_8017() {
+    include_once("updates/update_8017.inc");
+}

@@ -603,6 +603,17 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
       $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($node_type : $node_id)"));
     }
   }
+
+    if ($view->id() == 'product_autocomplete') {
+        foreach ($view->result as $i => $result) {
+            #On recupère les données nécessaires
+            $node_lang = $result->_entity->language()->getName();
+            $node_label =  $result->_entity->getTitle();
+            $langcode = strtoupper(substr($node_lang, 0, 2));
+            #On set la nouvelle valeur
+           $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($langcode)"));
+        }
+    }
 }
 
 
