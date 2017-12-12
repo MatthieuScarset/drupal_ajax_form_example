@@ -101,3 +101,32 @@ oabt_YmlImport("core.entity_form_display.node.partner.default.yml");
 oabt_YmlImport("core.entity_form_display.node.press_release.default.yml");
 oabt_YmlImport("core.entity_form_display.node.simple_page.default.yml");
 oabt_YmlImport("core.entity_form_display.node.webform.default.yml");
+
+
+
+$contentTypes = [
+    'blog_post',
+    'customer_story',
+    'document',
+    'magazine',
+    'partner',
+    'press_release',
+    'simple_page',
+    'webform'
+];
+
+
+$oldFieldName = "field_wysiwyg_rebond";
+foreach ($contentTypes as $contentType) {
+    #j'en profite pour supprimer l'ancien field basique s'il avait été créé
+    $field_toDel = FieldConfig::loadByName('node', $contentType, $oldFieldName);
+    if ($field_toDel !== null) {
+        $field_toDel->delete();
+    }
+}
+
+##Et je supprime le field storage à la fin
+$field_storage = FieldStorageConfig::loadByName('node', 'field_wysiwyg_rebond');
+if ($field_storage!== null) {
+    $field_storage->delete();
+}
