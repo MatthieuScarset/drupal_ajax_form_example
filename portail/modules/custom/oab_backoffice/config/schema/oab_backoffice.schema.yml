@@ -44,6 +44,9 @@ oab.subhomes:
     product_meta:
       type: label
       label: 'Product meta title'
+    distributor_term_tid:
+      type: label
+      label: 'Distributor term id'
 
 oab.pardot:
   type: config_object
