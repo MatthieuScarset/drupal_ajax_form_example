@@ -6,7 +6,8 @@ $terms = array(
 );
 
 $FRConfig = array();
-
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$FRConfig = $collection->read('oab.subhomes');
 foreach ($terms as &$term) {
     $term_id = "";
     //vérification de l'existance du terme pour ce vocabulaire
@@ -37,7 +38,6 @@ foreach ($terms as &$term) {
         $config_group->save(TRUE);
     } elseif ($term['language'] == 'fr'){
         $FRConfig[$term['variable']] = $term_id;
-        $collection = \Drupal::service('config.storage')->createCollection('language.fr');
         $collection->write('oab.subhomes', $FRConfig);
     }
 }
