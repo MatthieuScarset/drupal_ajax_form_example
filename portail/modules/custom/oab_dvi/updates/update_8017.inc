@@ -47,6 +47,9 @@ oabt_YmlImport("views.view.product_autocomplete.yml");
 oabt_YmlImport("field.field.node.distributor.field_products.yml");
 
 
+oabt_YmlImport("node.type.distributor.yml");
+
+
 
 
 
