@@ -2,14 +2,51 @@
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
-// sauvegarder les entity reference du champ "field_partner_type" pour les partenaires
-// exporter le form display et le view display
-// supprimer le champ du type de contenu partenaires
+// sauvegarder les entity reference du champ "field_partner_type" pour les partenaires => OK
+// exporter le form display et le view display => OK
+// supprimer le champ du type de contenu partenaires => OK
 // créer le storage pour le champ => OK
 // créer le champ du type de contenu partenaires => OK
-// importer les form display et view display
-// reinjecter les données sauvegardées
-// importer la config de views
+// importer les form display et view display => OK
+// reinjecter les données sauvegardées => OK
+// importer la config de views => OK
+
+$nids = \Drupal::entityQuery('node')->condition('type','partner')->execute();
+$nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
+
+$saved_values = array();
+
+if (is_array($nodes)
+&& !empty($nodes)){
+  foreach ($nodes AS $node){
+    $field_partner_type = $node->get('field_partner_type');
+    $saved_values[$node->id()] = $field_partner_type->getValue();
+  }
+}
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_form_display.node.partner.default');
+$partner_form_display = $config_group->getRawData();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.default');
+$partner_view_display_default = $config_group->getRawData();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.related_content');
+$partner_view_display_related_content = $config_group->getRawData();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.right_linked_content');
+$partner_view_display_right_linked_content = $config_group->getRawData();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.subhome');
+$partner_view_display_subhome = $config_group->getRawData();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.teaser');
+$partner_view_display_teaser = $config_group->getRawData();
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_partner_type');
 if (!empty($field_storage)){
@@ -93,5 +130,45 @@ if(empty($field)) {
   );
   FieldConfig::create($config_array)->save();
 }
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_form_display.node.partner.default');
+$config_group->setData($partner_form_display);
+$config_group->save();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.default');
+$config_group->setData($partner_view_display_default);
+$config_group->save();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.related_content');
+$config_group->setData($partner_view_display_related_content);
+$config_group->save();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.right_linked_content');
+$config_group->setData($partner_view_display_right_linked_content);
+$config_group->save();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.subhome');
+$config_group->setData($partner_view_display_subhome);
+$config_group->save();
+
+$config_factory = \Drupal::configFactory();
+$config_group = $config_factory->getEditable('core.entity_view_display.node.partner.teaser');
+$config_group->setData($partner_view_display_teaser);
+$config_group->save();
+
+
+if (is_array($nodes)
+  && !empty($nodes)){
+  foreach ($nodes AS $node){
+    $node->set('field_partner_type', $saved_values[$node->id()]);
+    $node->save();
+  }
+}
+
 
 oabt_YmlImport('views.view.subhomes.yml');
