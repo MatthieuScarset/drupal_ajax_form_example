@@ -110,8 +110,8 @@ view_mode ? view_mode|clean_class,
     {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 
     <div{{ content_attributes.addClass('content') }}>
-
-        {% if node.field_certification_obs == true %}
+        
+        {% if node.field_certification_obs.value == true %}
         <div class="certification_distributeur">
             <img src="/{{ base_path ~ directory }}/images/logo_certif_obs.png"/>
         </div>
