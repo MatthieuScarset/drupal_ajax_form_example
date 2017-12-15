@@ -381,3 +381,10 @@ function oab_stephanie_update_8047() {
 function oab_stephanie_update_8048() {
 	include_once("updates/update_8048.inc");
 }
+
+/**
+ * Création du type de contenu Custom page
+ */
+function oab_stephanie_update_8049() {
+	include_once("updates/update_8049.inc");
+}
