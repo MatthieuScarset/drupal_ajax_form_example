@@ -25,3 +25,10 @@ oab.general_settings:
   parent: oab.settings
   description: 'Configure general site settings'
   weight: -20
+
+oab.settings_ece:
+  title: ECE settings
+  route_name: oab.settings_ece
+  parent: oab.settings
+  description: 'Configure oab ECE settings'
+  weight: -20

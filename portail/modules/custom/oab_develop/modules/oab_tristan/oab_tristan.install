@@ -471,3 +471,11 @@ function oab_tristan_update_8060() {
 function oab_tristan_update_8061() {
   include_once("updates/update_8061.inc");
 }
+
+
+/**
+ * Création du block WYSIWYG pour avoir un block de contenu libre dans la zone Rebond 1/3
+ */
+function oab_tristan_update_8062() {
+    include_once("updates/update_8062.inc");
+}
