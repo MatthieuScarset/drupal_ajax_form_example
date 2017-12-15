@@ -19,24 +19,14 @@ mode: default
 content:
   field_content:
     weight: 2
-    label: above
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  field_display_title:
-    weight: 3
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_metatags:
-    weight: 4
-    label: above
+    weight: 3
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: metatag_empty_formatter
@@ -52,6 +42,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_display_title: true
   field_meta_description: true
   field_meta_title: true
   langcode: true
