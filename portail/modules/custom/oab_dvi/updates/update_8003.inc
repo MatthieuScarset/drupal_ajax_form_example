@@ -40,6 +40,8 @@ if(empty($nodeStorage)) {
 
 //yml node.type.distributor.yml
 oabt_YmlImport("node.type.distributor.yml");
+oabt_YmlImport("core.base_field_override.node.distributor.promote.yml");
+oabt_YmlImport("core.base_field_override.node.distributor.status.yml");
 
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
