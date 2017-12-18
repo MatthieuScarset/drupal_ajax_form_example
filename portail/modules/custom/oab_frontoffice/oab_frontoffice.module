@@ -704,50 +704,6 @@ function oab_frontoffice_views_query_alter(Drupal\views\ViewExecutable $view, Dr
     }
 }
 
-// helper function: (takes in conditions group argument)
-function _recursively_alter_query_conditions(&$conditions) {
-    // foreach condition in condition group
-    $i = 0;
-    foreach ($conditions as &$condition) {
-        // if condition is itself a condition group
-        if (isset($condition['field']) && is_a($condition['field'], 'Drupal\Core\Database\Query\Condition')) {
-            _recursively_alter_query_conditions($condition['field']->conditions());
-        }
-        else {
-            _alter_query_condition($condition, $i);
-        }
-    }
-    kint($conditions);
-}
-
-function _alter_query_condition(&$condition, &$i)
-{
-    $terms = array("- 50 employees", "- 50 salariés", "Public Sector", "Secteur Public");
-    $terms_ids = array();
-
-    foreach ($terms as $key => $term) {
-
-        //vérification de l'existance du terme pour ce vocabulaire
-        $queryTaxo = \Drupal::entityQuery('taxonomy_term');
-        $queryTaxo->condition('vid', "market_segments");
-        $queryTaxo->condition('name', $term);
-        $entity = $queryTaxo->execute();
-        if ( $entity !== null) {
-            $terms_ids[] = key($entity);
-        }
-    }
-        if ($condition['field'] == "node__field_market_segment_value_$i.field_market_segment_target_id") {
-            $condition = array(
-                'field' => "node__field_market_segment_value_$i.field_market_segment_target_id",
-                'value' => $terms_ids[$i],
-                'operator' => '='
-            );
-            $i++;
-        }
-}
-
-
-
 
 function oab_frontoffice_views_post_render($view) {
     if ($view->id() !== 'VIEW_ID' && $view->getDisplay()->getPluginId() !== 'page') {
