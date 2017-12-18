@@ -1748,4 +1748,5 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .page-node-type-document .document_field_image img{
     width:100%;
     height:auto;
+    margin-bottom: 10px;
 }
