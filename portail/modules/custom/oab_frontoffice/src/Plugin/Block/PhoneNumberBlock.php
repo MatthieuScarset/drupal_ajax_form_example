@@ -42,7 +42,8 @@ class PhoneNumberBlock extends BlockBase {
         $block['#markup'] = '';
         $content = '';
         if(isset($phone_number[0]['value'])){
-            $content = check_markup($phone_number[0]['value'], 'full_html', '', []);
+            //$content = check_markup($phone_number[0]['value'], 'full_html', '', []);
+            $content = $phone_number[0]['value'];
         }
 
         $block['#markup'] = $content;
