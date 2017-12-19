@@ -83,4 +83,4 @@ $formNode = \Drupal\node\Entity\Node::create([
 
 $formNode->save();
 
-\Drupal::service('path.alias_storage')->save("/node/" . $formNode->id(), "/ventes-indirectes/contact", "fr");
+#\Drupal::service('path.alias_storage')->save("/node/" . $formNode->id(), "/ventes-indirectes/contact", "fr");
