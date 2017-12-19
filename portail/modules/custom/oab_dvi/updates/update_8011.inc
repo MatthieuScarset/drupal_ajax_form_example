@@ -113,8 +113,8 @@ if(empty($field_storage)) {
 				'module' =>
 					array (
 						0 => 'entity_reference_revisions',
-						0 => 'node',
-						0 => 'paragraphs',
+						1 => 'node',
+						2 => 'paragraphs',
 					),
 			),
 		'field_name' => 'field_try_and_buy',
@@ -145,8 +145,8 @@ if(empty($field_storage)) {
 				'module' =>
 					array (
 						0 => 'entity_reference_revisions',
-						0 => 'node',
-						0 => 'paragraphs',
+						1 => 'node',
+						2 => 'paragraphs',
 					),
 			),
 		'field_name' => 'field_test_showroom',
