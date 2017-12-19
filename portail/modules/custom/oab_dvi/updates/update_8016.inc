@@ -55,10 +55,11 @@ zip_code:
 city:
   '#type': textfield
   '#title': City
+  '#required': true
 vous_desc:
   '#type': processed_text
   '#text': |
-    <h3 class=\"titre4\">You</h3>
+    <h3 class=\"titre4\">Vous</h3>
   '#format': full_html
 last_name:
   '#type': textfield

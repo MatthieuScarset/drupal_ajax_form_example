@@ -28,13 +28,13 @@ dvi_contact_global_description:
     <hr />
     <p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>
   '#format': full_html
-first_name:
-  '#type': textfield
-  '#title': 'First Name'
 last_name:
   '#type': textfield
   '#title': 'Last Name'
   '#required': true
+first_name:
+  '#type': textfield
+  '#title': 'First Name'
 company:
   '#type': textfield
   '#title': Company
