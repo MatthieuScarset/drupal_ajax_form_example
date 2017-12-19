@@ -1,16 +1,16 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.distributor.body
     - field.field.node.distributor.field_additionnal
     - field.field.node.distributor.field_certification_obs
     - field.field.node.distributor.field_city
+    - field.field.node.distributor.field_content
     - field.field.node.distributor.field_departments
     - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_header_title
-    - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -40,7 +40,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_additionnal:
-    weight: 7
+    weight: 5
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -58,13 +58,20 @@ content:
     region: content
     label: visually_hidden
   field_city:
-    weight: 9
+    weight: 8
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
     label: hidden
+  field_content:
+    type: text_default
+    weight: 7
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_header_title:
     weight: 0
     label: hidden
@@ -73,13 +80,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_highlight:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-    label: hidden
   field_logo:
     weight: 5
     settings:
@@ -90,7 +90,7 @@ content:
     region: content
     label: hidden
   field_navigation_link:
-    weight: 10
+    weight: 9
     settings:
       trim_length: 80
       url_only: false
@@ -102,7 +102,7 @@ content:
     region: content
     label: hidden
   field_postal_code:
-    weight: 8
+    weight: 6
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -110,7 +110,7 @@ content:
     region: content
     label: hidden
   field_products:
-    weight: 4
+    weight: 2
     settings:
       view_mode: subhome
       link: false
@@ -119,7 +119,7 @@ content:
     region: content
     label: hidden
   field_street:
-    weight: 6
+    weight: 4
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -127,7 +127,7 @@ content:
     region: content
     label: hidden
   field_visual:
-    weight: 5
+    weight: 3
     label: hidden
     settings:
       link: true

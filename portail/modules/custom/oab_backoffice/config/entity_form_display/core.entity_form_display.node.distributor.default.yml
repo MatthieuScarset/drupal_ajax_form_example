@@ -1,17 +1,17 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
-    - field.field.node.distributor.body
     - field.field.node.distributor.field_additionnal
     - field.field.node.distributor.field_certification_obs
     - field.field.node.distributor.field_city
+    - field.field.node.distributor.field_content
     - field.field.node.distributor.field_departments
     - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_header_title
-    - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -66,8 +66,7 @@ third_party_settings:
         - title
         - field_display_title
         - field_header_title
-        - field_highlight
-        - body
+        - field_content
         - field_visual
         - field_certification_obs
         - field_navigation_link
@@ -125,7 +124,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_additionnal:
-    weight: 13
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -133,20 +132,28 @@ content:
     type: string_textfield
     region: content
   field_certification_obs:
-    weight: 9
+    weight: 8
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_city:
-    weight: 15
+    weight: 14
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_content:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_departments:
     weight: 10
     settings: {  }
@@ -161,7 +168,7 @@ content:
     type: boolean_checkbox
     region: content
   field_email_address:
-    weight: 11
+    weight: 10
     settings:
       size: 60
       placeholder: ''
@@ -175,14 +182,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_highlight:
-    weight: 6
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textarea
     region: content
   field_logo:
     weight: 5
@@ -215,7 +214,7 @@ content:
     type: string_textfield
     region: content
   field_navigation_link:
-    weight: 10
+    weight: 9
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -223,7 +222,7 @@ content:
     type: link_default
     region: content
   field_phone_number:
-    weight: 16
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -231,7 +230,7 @@ content:
     type: string_textfield
     region: content
   field_postal_code:
-    weight: 14
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -239,7 +238,7 @@ content:
     type: string_textfield
     region: content
   field_products:
-    weight: 17
+    weight: 16
     settings:
       match_operator: CONTAINS
       size: 60
@@ -254,7 +253,7 @@ content:
     type: options_select
     region: content
   field_street:
-    weight: 12
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -268,7 +267,7 @@ content:
     type: options_select
     region: content
   field_visual:
-    weight: 8
+    weight: 7
     settings:
       entity_browser: browse_media_modal
       field_widget_display: label
