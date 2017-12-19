@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.subhome
+    - field.field.node.distributor.body
+    - field.field.node.distributor.field_additionnal
+    - field.field.node.distributor.field_certification_obs
+    - field.field.node.distributor.field_city
+    - field.field.node.distributor.field_departments
+    - field.field.node.distributor.field_display_title
+    - field.field.node.distributor.field_email_address
+    - field.field.node.distributor.field_header_title
+    - field.field.node.distributor.field_highlight
+    - field.field.node.distributor.field_market_segment
+    - field.field.node.distributor.field_meta_description
+    - field.field.node.distributor.field_meta_title
+    - field.field.node.distributor.field_navigation_link
+    - field.field.node.distributor.field_phone_number
+    - field.field.node.distributor.field_postal_code
+    - field.field.node.distributor.field_products
+    - field.field.node.distributor.field_solution
+    - field.field.node.distributor.field_street
+    - field.field.node.distributor.field_subhome
+    - field.field.node.distributor.field_visual
+    - node.type.distributor
+  module:
+    - user
+id: node.distributor.subhome
+targetEntityType: node
+bundle: distributor
+mode: subhome
+content:
+  field_highlight:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: subhome_image
+      link: false
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_additionnal: true
+  field_certification_obs: true
+  field_city: true
+  field_departments: true
+  field_display_title: true
+  field_email_address: true
+  field_header_title: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_navigation_link: true
+  field_phone_number: true
+  field_postal_code: true
+  field_products: true
+  field_solution: true
+  field_street: true
+  field_subhome: true
+  langcode: true
+  links: true
+  promote: true
+  sticky: true
+  workbench_moderation_control: true

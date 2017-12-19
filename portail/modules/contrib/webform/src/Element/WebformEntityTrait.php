@@ -55,18 +55,7 @@ trait WebformEntityTrait {
       $options += $bundle_options;
     }
 
-    // Issue #2878842 Entity Radios label not translated
-    // Related to Drupal Core issue #2144377:
-    // Entity reference autocomplete lists
-    // entity labels only in current content language.
-    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    foreach ($options as $key => $value) {
-      $option = \Drupal::entityTypeManager()->getStorage($element['#target_type'])->load($key);
-      if ($option->hasTranslation($langcode)) {
-        $translation = $option->getTranslation($langcode);
-        $options[$key] = $translation->label();
-      }
-    }
+    $options = self::translateOptions($options, $element);
 
     // Only select menu can support optgroups.
     if ($element['#type'] !== 'webform_entity_select') {
@@ -77,6 +66,37 @@ trait WebformEntityTrait {
     $options = WebformOptionsHelper::decodeOptions($options);
 
     $element['#options'] = $options;
+  }
+
+  /**
+   * Translate the select options.
+   *
+   * @param array $options
+   *   Untranslated options.
+   * @param array $element
+   *   An element.
+   *
+   * @return array
+   *   Translated options.
+   */
+  protected static function translateOptions(array $options, array $element) {
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+    $entity_repository = \Drupal::service('entity.repository');
+
+    foreach ($options as $key => $value) {
+      if (is_array($value)) {
+        $options[$key] = self::translateOptions($value, $element);
+      }
+      else {
+        // Set the entity in the correct language for display.
+        $option = \Drupal::entityTypeManager()
+          ->getStorage($element['#target_type'])
+          ->load($key);
+        $option = $entity_repository->getTranslationFromContext($option);
+        $options[$key] = $option->label();
+      }
+    }
+    return $options;
   }
 
 }

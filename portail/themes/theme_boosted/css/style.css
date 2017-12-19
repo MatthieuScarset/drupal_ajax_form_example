@@ -1189,6 +1189,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding: 3rem 2rem;
 }
 
+.rebond.rebond-contact-distributor article {
+    padding: 3rem 1rem;
+}
+
 .rebond .form-group {
     margin-bottom: 0;
 }
@@ -1275,8 +1279,31 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
-.rebond-product .rebond-block-title h2 {
+.rebond-product .rebond-block-title h2,
+.rebond-testshowroom .paragraph_block_rebond .rebond-block-title h2,
+.rebond-tryandbuy .paragraph_block_rebond .rebond-block-title h2 {
     margin-left: 0;
+}
+
+.block-finddistributor article h2{
+    margin-left: 0;
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    color: inherit;
+}
+.rebond-testshowroom .paragraph_block_rebond{
+    background-color: #595959;
+    color: #FFFFFF;
+}
+.rebond-tryandbuy .paragraph_block_rebond{
+    background-color: #ff6600;
+    color: #FFFFFF;
+}
+.block-finddistributor article{
+    background-color: #a885d8;
+    color: #FFFFFF;
 }
 
 .rebond-link, .block-link , .homepage-solution-button {
@@ -1288,6 +1315,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     font-size: 1.6rem;
     margin-top: 4px;
+}
+
+.block-finddistributor .rebond-link,
+.paragraph_block_rebond .rebond-link{
+    color: #FFFFFF;
+    border-color: #FFFFFF;
 }
 
 .rebond-link:hover {
@@ -1328,6 +1361,22 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .rebond-wysiwyg img {
     max-width: 100%;
     height: auto;
+}
+.block-finddistributor .rebond-link:hover,
+.paragraph_block_rebond .rebond-link:hover,
+.rebond-product .rebond-link:active{
+    color: #000000;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.rebond-contact-distributor h2 {
+    margin-top: 0;
+}
+
+.rebond-contact-distributor h2 span.dvi-form-distributor-name {
+    text-transform: uppercase;
+    color: #F16E00;
 }
 
 
@@ -1695,7 +1744,7 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 }
 
 
-.webform-dl-document {
+.webform-dl-document, .webform-dvi-contact-global, .webform-dvi-becoming-distributor {
     /*background-color: #F5F5F5;*/
     padding: 20px;
 }
@@ -1715,7 +1764,9 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .webform-dl-document .webform-element--title-inline label {
     padding-right: 0;
 }
-.webform-dl-document .webform-dl-document-form-element {
+.webform-dl-document .webform-dl-document-form-element,
+.webform-dvi-contact-global .webform-dvi-contact-global-form-element,
+.webform-dvi-becoming-distributor .webform-dvi-becoming-distributor-form-element {
     margin-top: 15px;
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -1723,6 +1774,12 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 
 .webform-dl-document .container:not(.webform-dl-document-form-element) {
     padding-top: 20px;
+}
+
+.webform-dvi-becoming-distributor input[type="file"] {
+    padding: 0;
+    border: none;
+    height: initial;
 }
 
 .webform-dl-document .webform-dl-document-form-element .webform-dl-document-container {
@@ -1745,15 +1802,39 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     display: inline;
 }
 
-.webform-dl-document #edit-submit-button-s- {
+.webform-dl-document #edit-submit-button-s-,
+.webform-dvi-contact-global .dvi-contact-global-submit-container,
+.webform-dvi-becoming-distributor .dvi-becoming-distributor-submit-container
+{
     text-align: right;
     margin-top: 20px;
-
 }
+
+.webform-dvi-contact-global .g-recaptcha,
+.webform-dvi-becoming-distributor .g-recaptcha {
+    float: right;
+}
+.webform-dvi-contact-global .dvi-contact-global-submit-container,
+.webform-dvi-becoming-distributor .dvi-becoming-distributor-submit-container
+{
+    clear: both;
+}
+
 
 .webform-dl-document-mentionsLegales {
     font-size: 8px;
 }
+
+.webform-dvi-contact-global span.form-required,
+.webform-dvi-contact-distributor span.form-required,
+.webform-dvi-becoming-distributor span.form-required {
+    color:#e74c3c;
+}
+
+.webform-dvi-contact-distributor .container {
+    margin-top: 1.5rem;
+}
+
 
 .embedded-entity.align-left{
     margin-right: 10px;

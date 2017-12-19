@@ -617,6 +617,111 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
 }
 
+
+function oab_frontoffice_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
+
+    $displayObj = $view->getDisplay();
+    $displayName = $displayObj->display['display_title'];
+
+    if ($view->id() == 'subhomes' && $displayName == 'distributors') {
+        /*foreach ($query->where as &$condition_group) {
+            _recursively_alter_query_conditions($condition_group['conditions']);
+
+        }*/
+        #kint($query); die();
+        $condition_group = array();
+
+
+        $terms = array("- 50 employees", "- 50 salariés", "Public Sector", "Secteur Public");
+        $terms_ids = array();
+
+        foreach ($terms as $key => $term) {
+            //vérification de l'existance du terme pour ce vocabulaire
+            $queryTaxo = \Drupal::entityQuery('taxonomy_term');
+            $queryTaxo->condition('vid', "market_segments");
+            $queryTaxo->condition('name', $term);
+            $entity = $queryTaxo->execute();
+            if ( $entity !== null) {
+                $terms_ids[] = key($entity);
+            }
+        }
+        $conditions = new Drupal\Core\Database\Query\Condition('or');
+
+
+        $table_name = "node__field_market_segment";
+        $field_name = "field_market_segment_target_id";
+        $tables = array();
+        foreach ($terms_ids as $key => $term_id) {
+
+            $joinConfig = [
+                'table'             => $table_name,
+                'left_field'        => 'nid',
+                'field'             => 'entity_id',
+                'extra'             => [
+                    [
+                        'field'     => 'deleted',
+                        'value'     =>  0,
+                        'numeric'   =>  true
+                    ],
+                    [
+                        'left_field'    => "langcode",
+                        'field'         => "langcode",
+                    ]
+
+                ],
+                'left_table'        => 'node_field_data',
+                'type'              => 'LEFT',
+                'extra_operator'    => 'AND',
+            ];
+
+
+            $join = new \Drupal\views\Plugin\views\join\Standard(
+                $joinConfig,
+                "standard",
+                [
+                    'plugin_type'   => "join",
+                    'id'            => "standard",
+                    'class'         => 'Drupal\views\Plugin\views\join\Standard',
+                    'provider'      => 'views'
+                ]
+            );
+
+            $join->extra = [
+                [
+                    'field'     => $field_name,
+                    'value'     => $term_id,
+                    'numeric'   => false
+                ]
+            ];
+
+            $table_alias = $query->addTable(
+                $table_name,
+                "node_field_data",
+                $join
+            );
+
+            if ($table_alias !== false && is_string($table_alias)) {
+                $conditions->condition(
+                    "$table_alias.$field_name",
+                    $term_id,
+                    '='
+                );
+            }
+            /*$condition_group[] = array(
+                'field' => "node__field_market_segment_value_$key.field_market_segment_target_id",
+                'value' => $term_id,
+                'operator' => '='
+            );*/
+
+        }
+
+        $query->addWhere(1, $conditions);
+
+
+    }
+}
+
+
 function oab_frontoffice_views_post_render($view) {
     if ($view->id() !== 'VIEW_ID' && $view->getDisplay()->getPluginId() !== 'page') {
         return;
@@ -810,12 +915,20 @@ function oab_frontoffice_mail_alter(&$message) {
 function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
-  foreach (array_keys($form['actions']) as $action) {
+    foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
         }
-      }
     }
+  } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
+
+      foreach (array_keys($form['actions']) as $action) {
+
+          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit' );
+          }
+      }
+  }
 }
 
 /**
@@ -851,6 +964,28 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
       }
     }
 
+
+}
+
+function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+        if ($node->bundle() == 'distributor') {
+            $field_distrib_email = $node->get('field_email_address');
+
+            $distribMail = "";
+            if(isset($field_distrib_email[0])) {
+                $value = $field_distrib_email[0]->getValue();
+                $distribMail = $value['value'];
+            }
+
+            $form_state->setValue('distributeur_email', $distribMail);
+            $form_state->setValue('distributeur_name', $node->getTitle());
+            $form_state->setValue('distributeur_nid', $node->id());
+        }
+
+    }
 
 }
 

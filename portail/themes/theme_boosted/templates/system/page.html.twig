@@ -101,8 +101,8 @@
             </section>
 
             {# Sidebar #}
-
-            {% if page.sidebar is defined and page.sidebar|render|striptags|trim %}
+            {% if page.sidebar is defined and (page.sidebar|render|striptags|trim
+            or page.sidebar.dvicontactdistributorblock is defined )%}
               {% block sidebar %}
                 <aside class="col-md-4 col-sm-12 right-column" role="complementary">
                   {{ page.sidebar }}

@@ -5,6 +5,7 @@ namespace Drupal\webform;
 use Drupal\Core\Form\OptGroup;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\webform\Plugin\WebformElementManagerInterface;
 
 /**
  * Webform submission generator.
@@ -31,7 +32,7 @@ class WebformSubmissionGenerate implements WebformSubmissionGenerateInterface {
   /**
    * The webform element manager.
    *
-   * @var \Drupal\webform\WebformElementManagerInterface
+   * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
   protected $elementManager;
 
@@ -56,7 +57,7 @@ class WebformSubmissionGenerate implements WebformSubmissionGenerateInterface {
    *   The configuration object factory.
    * @param \Drupal\webform\WebformTokenManagerInterface $token_manager
    *   The webform token manager.
-   * @param \Drupal\webform\WebformElementManagerInterface $element_manager
+   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    */
   public function __construct(ConfigFactoryInterface $config_factory, WebformTokenManagerInterface $token_manager, WebformElementManagerInterface $element_manager) {
@@ -94,12 +95,12 @@ class WebformSubmissionGenerate implements WebformSubmissionGenerateInterface {
       'random' => TRUE,
     ];
 
-    /** @var \Drupal\webform\WebformElementInterface $element_handler */
+    /** @var \Drupal\webform\Plugin\WebformElementInterface $element_plugin */
     $plugin_id = $this->elementManager->getElementPluginId($element);
-    $element_handler = $this->elementManager->createInstance($plugin_id);
+    $element_plugin = $this->elementManager->createInstance($plugin_id);
 
     // Exit if element does not have a value.
-    if (!$element_handler->isInput($element)) {
+    if (!$element_plugin->isInput($element)) {
       return NULL;
     }
 
@@ -116,11 +117,23 @@ class WebformSubmissionGenerate implements WebformSubmissionGenerateInterface {
     // $values = $this->tokenManager->replace($values, $webform);.
     // Elements that use multiple values require an array as the
     // default value.
-    if ($element_handler->hasMultipleValues($element)) {
+    if ($element_plugin->hasMultipleValues($element)) {
       if ($options['random']) {
         shuffle($values);
       }
-      $limit = (isset($element['#multiple']) && $element['#multiple'] > 1 && $element['#multiple'] < 3) ? $element['#multiple'] : 3;
+
+      $limit = 3;
+      if (isset($element['#multiple'])) {
+        // #multiple: FALSE is only applicable to webform_composite element.
+        // @see \Drupal\webform\Plugin\WebformElement\WebformComposite
+        if ($element['#multiple'] === FALSE) {
+          $limit = 1;
+        }
+        elseif ($element['#multiple'] > 1 && $element['#multiple'] < 3) {
+          $limit =  $element['#multiple'];
+        }
+      }
+
       return array_slice($values, 0, $limit);
     }
     else {

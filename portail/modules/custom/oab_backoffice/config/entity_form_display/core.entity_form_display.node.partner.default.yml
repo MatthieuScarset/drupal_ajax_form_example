@@ -5,6 +5,7 @@ dependencies:
     - entity_browser.browser.browse_media_modal
     - field.field.node.partner.field_content
     - field.field.node.partner.field_content_owner
+    - field.field.node.partner.field_departments
     - field.field.node.partner.field_display_title
     - field.field.node.partner.field_email_owner
     - field.field.node.partner.field_end_date
@@ -81,6 +82,8 @@ third_party_settings:
         - field_solution
         - field_partner_type
         - field_geographic
+        - field_departments
+        - field_market_segment
       parent_name: group_onglets
       weight: 21
       format_type: tab
@@ -180,6 +183,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_departments:
+    weight: 48
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_display_title:
     weight: 4

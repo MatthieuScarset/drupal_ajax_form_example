@@ -3,7 +3,7 @@
 namespace Drupal\webform\Plugin\WebformExporter;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformExporterBase;
+use Drupal\webform\Plugin\WebformExporterBase;
 
 /**
  * Defines abstract document exporter used to export YAML or JSON.
@@ -30,7 +30,7 @@ abstract class DocumentBaseWebformExporter extends WebformExporterBase {
     $form['file_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('File name'),
-      '#description' => $this->t('Submission file names must be unique.'),
+      '#description' => $this->t('Used to create unique file names for exported submissions.'),
       '#required' => TRUE,
       '#default_value' => $this->configuration['file_name'],
       '#states' => [

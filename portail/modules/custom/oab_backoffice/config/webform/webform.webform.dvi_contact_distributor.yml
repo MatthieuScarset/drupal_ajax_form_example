@@ -1,0 +1,200 @@
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: dvi_contact_distributor
+title: 'DVI - Contact distributor'
+description: ''
+category: DVI
+elements: "'#attributes':\n  class:\n    - webform-dvi-contact-distributor\nlast_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#multiple__header_label': Bla\n  '#required': true\nfirst_name:\n  '#type': textfield\n  '#title': 'First name'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Phone\n  '#required': true\n  '#international': true\n  '#international_initial_country': FR\n  '#label': bli\nsubject:\n  '#type': textfield\n  '#title': Subject\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha_dvi_contact_distributor:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\n  '#captcha_admin_mode': true\ndistributeur_email:\n  '#type': hidden\n  '#title': distributeur-email\ndistributeur_name:\n  '#type': hidden\n  '#title': distributeur-name\ndistributeur_nid:\n  '#type': hidden\n  '#title': distributeur-nid\ndvi_contact_distributor_description:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\n\"\n  '#format': full_html\n"
+css: ''
+javascript: ''
+settings:
+  ajax: true
+  ajax_scroll_top: form
+  page: false
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_submit_once: true
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: false
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: false
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: 'Thank you. The distributor will get back to you shortly.'
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: 'Back to form'
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+  wizard_comfirmation: true
+  wizard_comfirmation_label: ''
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_to_user:
+    id: email
+    label: 'Email to user'
+    handler_id: email_to_user
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: contact.dvi@orange.com
+      from_options: {  }
+      from_name: 'Contact DVI'
+      subject: '[webform_submission:values:subject:raw]'
+      body: "<span id=\"docs-internal-guid-c7125d3d-36d5-2f96-91cf-a79e5e60860c\" style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Bonjour,</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous avons bien transmis votre message &agrave; la soci&eacute;t&eacute; [</span>webform_submission:values:distributeur_email] <span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">. </span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Cordialement,</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">La Direction des Ventes Indirectes.</span>"
+      excluded_elements:
+        last_name: last_name
+        first_name: first_name
+        company: company
+        e_mail: e_mail
+        phone: phone
+        subject: subject
+        message: message
+        distributeur_email: distributeur_email
+        distributeur_name: distributeur_name
+        distributeur_nid: distributeur_nid
+      ignore_access: false
+      exclude_empty: false
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+  email_to_dvi_team:
+    id: email
+    label: 'Email to DVI team'
+    handler_id: email_to_dvi_team
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: partenaires.dvi@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: '[webform_submission:values:e_mail:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:last_name:raw]'
+      subject: 'Message Transmis à [webform_submission:values:distributeur_name]'
+      body: "<span id=\"docs-internal-guid-c7125d3d-36dd-1b08-e6dd-af15f61c2864\" style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Le message suivant a &eacute;t&eacute; transmis &agrave; </span>[webform_submission:values:distributeur_name]<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\"> : </span><br class=\"kix-line-break\" />\n[webform_submission:values:message]<br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Par</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Soci&eacute;t&eacute; </span>[webform_submission:values:company]<br class=\"kix-line-break\" />\n[webform_submission:values:last_name]&nbsp;[webform_submission:values:first_name]<br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Email : </span>[webform_submission:values:e_mail]<br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Contacter au num&eacute;ro : </span>[webform_submission:values:phone]<br />\n&nbsp;"
+      excluded_elements:
+        last_name: last_name
+        first_name: first_name
+        company: company
+        e_mail: e_mail
+        phone: phone
+        subject: subject
+        message: message
+        distributeur_email: distributeur_email
+        distributeur_name: distributeur_name
+        distributeur_nid: distributeur_nid
+      ignore_access: false
+      exclude_empty: false
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
