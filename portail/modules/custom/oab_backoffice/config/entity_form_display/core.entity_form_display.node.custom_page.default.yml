@@ -7,9 +7,12 @@ dependencies:
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.moderation_state_update
     - node.type.custom_page
   module:
+    - entity_browser_entity_form
     - field_group
+    - inline_entity_form
     - metatag
     - path
     - text
@@ -20,6 +23,7 @@ third_party_settings:
       children:
         - group_write
         - group_seo
+        - group_publish
       parent_name: ''
       weight: 0
       format_type: tabs
@@ -58,6 +62,19 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
+    group_publish:
+      children:
+        - moderation_state_update
+      parent_name: group_onglets
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publish
 id: node.custom_page.default
 targetEntityType: node
 bundle: custom_page
@@ -113,6 +130,21 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  moderation_state_update:
+    weight: 26
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      match_operator: CONTAINS
+      override_labels: false
+      allow_existing: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   path:
     type: path
     weight: 10
