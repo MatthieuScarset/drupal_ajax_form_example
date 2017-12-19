@@ -141,4 +141,5 @@ $formNode = \Drupal\node\Entity\Node::create([
 ]);
 $formNode->save();
 
+\Drupal::service('path.alias_storage')->delete(array('source' => "/node/" . $formNode->id()));
 \Drupal::service('path.alias_storage')->save("/node/" . $formNode->id(), "/ventes-indirectes/devenir-revendeur", "fr");
