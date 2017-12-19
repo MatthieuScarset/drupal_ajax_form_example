@@ -6,5 +6,5 @@ dependencies:
 id: node.distributor
 target_entity_type_id: node
 target_bundle: distributor
-default_langcode: current_interface
+default_langcode: fr
 language_alterable: true

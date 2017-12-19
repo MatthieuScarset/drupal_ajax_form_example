@@ -9,6 +9,8 @@
     var titre_page = drupalSettings.tealium.titre_page;
     var custom_variable_key = drupalSettings.tealium.custom_variable_key;
     var custom_variable_value = drupalSettings.tealium.custom_variable_value;
+    var custom_variable_key2 = drupalSettings.tealium.custom_variable_key2;
+    var custom_variable_value2 = drupalSettings.tealium.custom_variable_value2;
     var tealium_url = drupalSettings.tealium.tealium_url;
     var profil_compte = drupalSettings.tealium.profil_compte_navigation;
     var type_langue = drupalSettings.tealium.type_langue;
@@ -33,6 +35,9 @@
     };
     if (typeof custom_variable_key !== 'undefined' && typeof custom_variable_value !== 'undefined'){
       utag_data[custom_variable_key] = custom_variable_value;
+    }
+    if (typeof custom_variable_key2 !== 'undefined' && typeof custom_variable_value2 !== 'undefined'){
+      utag_data[custom_variable_key2] = custom_variable_value2;
     }
 
     window.utag_data = utag_data;

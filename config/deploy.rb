@@ -151,8 +151,8 @@ namespace :deploy do
 	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
 	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
 	 execute "drush cr --root=#{release_path}/portail"
-	 execute "ln -s /home/oab_web/drupal7 #{release_path}/portail/drupal7"
-	 execute "ln -s /var/www/DVI/current/portail /var/www/current/portail/DVI"
+	 execute "ln -sf /home/oab_web/drupal7 #{release_path}/portail/drupal7"
+	 execute "ln -sf /var/www/DVI/current/portail /var/www/current/portail/DVI"
     end
    end
 end

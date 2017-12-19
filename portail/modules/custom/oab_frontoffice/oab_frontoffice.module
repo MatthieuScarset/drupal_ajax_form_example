@@ -697,7 +697,6 @@ function oab_frontoffice_views_query_alter(Drupal\views\ViewExecutable $view, Dr
 
         }
 
-
         $query->addWhere(1, $conditions);
 
 
