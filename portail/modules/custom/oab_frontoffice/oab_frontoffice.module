@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Database\Database;
+use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
@@ -313,29 +314,9 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
     $displayName = $displayObj->display['display_title'];
 
     if ($view->id() == 'subhomes' && $displayName == 'distributors') {
-        /*foreach ($query->where as &$condition_group) {
-            _recursively_alter_query_conditions($condition_group['conditions']);
+        $terms_ids = DviHelper::getMSTaxoTermsIds();
 
-        }*/
-        #kint($query); die();
-        $condition_group = array();
-
-
-        $terms = array("- 50 employees", "- 50 salariés", "Public Sector", "Secteur Public");
-        $terms_ids = array();
-
-        foreach ($terms as $key => $term) {
-            //vérification de l'existance du terme pour ce vocabulaire
-            $queryTaxo = \Drupal::entityQuery('taxonomy_term');
-            $queryTaxo->condition('vid', "market_segments");
-            $queryTaxo->condition('name', $term);
-            $entity = $queryTaxo->execute();
-            if ( $entity !== null) {
-                $terms_ids[] = key($entity);
-            }
-        }
         $conditions = new Drupal\Core\Database\Query\Condition('or');
-
 
         $table_name = "node__field_market_segment";
         $field_name = "field_market_segment_target_id";
@@ -396,11 +377,6 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
                     '='
                 );
             }
-            /*$condition_group[] = array(
-                'field' => "node__field_market_segment_value_$key.field_market_segment_target_id",
-                'value' => $term_id,
-                'operator' => '='
-            );*/
 
         }
 
