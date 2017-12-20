@@ -666,6 +666,35 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       }
   }
 
+    //Subhome Distributors
+    if ($form['#id'] == 'views-exposed-form-subhomes-page-distributor') {
+        $solutions = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solution'
+        );
+        $form['field_solution_target_id']['#options'] = $solutions;
+
+        $departements = clean_exposed_filters_by_language(
+            $form['field_departments_target_id']['#options'],
+            'Departements'
+        );
+        $form['field_departments_target_id']['#options'] = $departements;
+
+    }
+
+
+    //Subhome Products DVI
+    if ($form['#id'] == 'views-exposed-form-subhomes-page-products') {
+        $solutions = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solution'
+        );
+        $form['field_solution_target_id']['#options'] = $solutions;
+    }
+
+
+
+
     // view Page thématique
     if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {
         $insight = clean_exposed_filters_by_language(
