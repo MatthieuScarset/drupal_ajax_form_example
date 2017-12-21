@@ -182,3 +182,10 @@ function oab_dvi_update_8023() {
 function oab_dvi_update_8024() {
   include_once("updates/update_8024.inc");
 }
+
+/**
+ * Renommage des terms de taxonomie pour les url des subhomes
+ */
+function oab_dvi_update_8025() {
+  include_once("updates/update_8025.inc");
+}
