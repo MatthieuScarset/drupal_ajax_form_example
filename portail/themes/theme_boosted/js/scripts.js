@@ -122,17 +122,17 @@
         $(this).addClass('small-image');
       }
     });
-    $('.left-column.obs_template > .col-md-8 img').each(function(){
+    $('.left-column .obs_template > .col-md-8 img').each(function(){
       if ($(this).attr('width') < 480){
         $(this).addClass('small-image');
       }
     });
-    $('.left-column.obs_template > .col-md-6 img').each(function(){
+    $('.left-column .obs_template > .col-md-6 img').each(function(){
       if ($(this).attr('width') < 355){
         $(this).addClass('small-image');
       }
     });
-    $('.left-column.obs_template > .col-md-4 img').each(function(){
+    $('.left-column .obs_template > .col-md-4 img').each(function(){
       if ($(this).attr('width') < 230){
         $(this).addClass('small-image');
       }

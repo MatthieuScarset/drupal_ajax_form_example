@@ -828,7 +828,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 				'text' => $pageTitle,
 				'url' => $og_url,
 				'hashtags' => '',
-				'via' => 'orange_business',
+				'via' => 'orangebusiness',
 				'related' => '',
 				'in-reply-to' => ''
 			]
