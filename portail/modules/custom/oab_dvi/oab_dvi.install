@@ -161,3 +161,10 @@ function oab_dvi_update_8020() {
 function oab_dvi_update_8021() {
     include_once("updates/update_8021.inc");
 }
+
+/**
+ * Traduction du block find distributor
+ */
+function oab_dvi_update_8023() {
+    include_once("updates/update_8023.inc");
+}
