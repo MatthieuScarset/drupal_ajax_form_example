@@ -9,10 +9,11 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Entity\EntityInterface;
 use \Drupal\file\Entity\File;
 use Drupal\Core\Datetime;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\entity\Revision\RevisionableContentEntityBase;
 use Drupal\workbench_moderation\Entity\ModerationState;
-
 
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -212,14 +213,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 	}
 
-    /*if ($form_id == 'views_form_content_page_1'){
-	    $results = $form['output'][0]['#view'];
-	    oabt($results);
-	    foreach($results as $n){
-	        oabt($n->_entity);
-            $n->_entity->setTitle('yihaaa');
-        }
-    }*/
+
 
 	/*
 		// valeur par défaut pour le champ "display_title"
@@ -555,7 +549,6 @@ function oab_backoffice_views_data_alter(array &$data) {
 }
 
 
-
 /**
  * Implements hook_views_post_render().
  */
@@ -577,7 +570,6 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
       $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($node_type : $node_id)"));
     }
   }
-
 }
 
 /**
@@ -649,7 +641,6 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
     }
 }
 
-
 /**
  * Implements hook_cron().
  * Suppression des resultats des webforms de plus d'un an
@@ -680,4 +671,24 @@ function oab_backoffice_cron() {
    # \Drupal::logger('Cron Webform')->notice("$nbSubmissions résultats de webforms de plus d'un an ont été supprimés");
 
   #}
+}
+
+/**
+ * fonction qui retournent les valeurs disponibles pour le choix de la couleur du block Rebond Wysiwyg
+ */
+function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  return [
+    "#f60"        => "Orange",
+    "#fff"        => "White",
+    "#000"        => "Black",
+    "#55bc87"     => "Green",
+    "#a786d5"     => "Purple",
+    "#4bb4e6"     => "Blue",
+    "#ffd200"     => "Yellow",
+    "#ffb4e6"     => "Pink",
+    "#595959"     => "Grey",
+    "#8F8C87"     => "Dark grey",
+    "#58595b"     =>"Darker grey",
+    "#333333"     => "Grey black",
+  ];
 }
