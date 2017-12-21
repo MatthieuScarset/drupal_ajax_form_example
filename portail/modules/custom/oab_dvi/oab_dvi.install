@@ -161,3 +161,17 @@ function oab_dvi_update_8020() {
 function oab_dvi_update_8021() {
     include_once("updates/update_8021.inc");
 }
+
+/**
+ * Traduction des webforms
+ */
+function oab_dvi_update_8022() {
+  include_once("updates/update_8022.inc");
+}
+
+/**
+ * Style d'image pour le logo
+ */
+function oab_dvi_update_8024() {
+  include_once("updates/update_8024.inc");
+}

@@ -1,4 +1,3 @@
-uuid: null
 langcode: en
 status: true
 dependencies:
@@ -11,6 +10,7 @@ dependencies:
     - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_header_title
+    - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
@@ -130,8 +130,8 @@ content:
     weight: 3
     label: hidden
     settings:
-      link: true
-      view_mode: default
+      view_mode: document_visual
+      link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
@@ -152,6 +152,7 @@ hidden:
   field_departments: true
   field_display_title: true
   field_email_address: true
+  field_highlight: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
