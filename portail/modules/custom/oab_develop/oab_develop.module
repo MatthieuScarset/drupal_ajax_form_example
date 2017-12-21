@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Yaml\Yaml;
+use Drupal\locale\SourceString;
 
 class OAB_Trace{
 
