@@ -19,9 +19,9 @@ abstract class DviHelper {
      * Langue du term en 2 lettres
      */
     const MS_U50_EMPLOYEES_EN = "- 50 employees";
-    const MS_U50_EMPLOYEES_FR = "- 50 salariés";
+    const MS_U50_EMPLOYEES_FR = "moins-50-salaries";
     const MS_PUBLIC_SECTOR_EN = "Public Sector";
-    const MS_PUBLIC_SECTOR_FR = "Secteur Public";
+    const MS_PUBLIC_SECTOR_FR = "secteur-public";
 
 
 

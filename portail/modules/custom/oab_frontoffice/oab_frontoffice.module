@@ -317,73 +317,74 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 
         $terms_ids = DviHelper::getMSTaxoTermsIds();
 
-        $conditions = new Drupal\Core\Database\Query\Condition('or');
+        if (count($terms_ids)>0) {
+           $conditions = new Drupal\Core\Database\Query\Condition('or');
 
-        $table_name = "node__field_market_segment";
-        $field_name = "field_market_segment_target_id";
-        $tables = array();
-        foreach ($terms_ids as $key => $term_id) {
+           $table_name = "node__field_market_segment";
+           $field_name = "field_market_segment_target_id";
+           $tables = array();
+           foreach ($terms_ids as $key => $term_id) {
 
-            $joinConfig = [
-                'table'             => $table_name,
-                'left_field'        => 'nid',
-                'field'             => 'entity_id',
-                'extra'             => [
-                    [
-                        'field'     => 'deleted',
-                        'value'     =>  0,
-                        'numeric'   =>  true
-                    ],
-                    [
-                        'left_field'    => "langcode",
-                        'field'         => "langcode",
-                    ]
+               $joinConfig = [
+                   'table' => $table_name,
+                   'left_field' => 'nid',
+                   'field' => 'entity_id',
+                   'extra' => [
+                       [
+                           'field' => 'deleted',
+                           'value' => 0,
+                           'numeric' => true
+                       ],
+                       [
+                           'left_field' => "langcode",
+                           'field' => "langcode",
+                       ]
 
-                ],
-                'left_table'        => 'node_field_data',
-                'type'              => 'LEFT',
-                'extra_operator'    => 'AND',
-            ];
-
-
-            $join = new \Drupal\views\Plugin\views\join\Standard(
-                $joinConfig,
-                "standard",
-                [
-                    'plugin_type'   => "join",
-                    'id'            => "standard",
-                    'class'         => 'Drupal\views\Plugin\views\join\Standard',
-                    'provider'      => 'views'
-                ]
-            );
-
-            $join->extra = [
-                [
-                    'field'     => $field_name,
-                    'value'     => $term_id,
-                    'numeric'   => false
-                ]
-            ];
-
-            $table_alias = $query->addTable(
-                $table_name,
-                "node_field_data",
-                $join
-            );
-
-            if ($table_alias !== false && is_string($table_alias)) {
-                $conditions->condition(
-                    "$table_alias.$field_name",
-                    $term_id,
-                    '='
-                );
-            }
-
-        }
-
-        $query->addWhere(1, $conditions);
+                   ],
+                   'left_table' => 'node_field_data',
+                   'type' => 'LEFT',
+                   'extra_operator' => 'AND',
+               ];
 
 
+               $join = new \Drupal\views\Plugin\views\join\Standard(
+                   $joinConfig,
+                   "standard",
+                   [
+                       'plugin_type' => "join",
+                       'id' => "standard",
+                       'class' => 'Drupal\views\Plugin\views\join\Standard',
+                       'provider' => 'views'
+                   ]
+               );
+
+               $join->extra = [
+                   [
+                       'field' => $field_name,
+                       'value' => $term_id,
+                       'numeric' => false
+                   ]
+               ];
+
+               $table_alias = $query->addTable(
+                   $table_name,
+                   "node_field_data",
+                   $join
+               );
+
+               if ($table_alias !== false && is_string($table_alias)) {
+                   $conditions->condition(
+                       "$table_alias.$field_name",
+                       $term_id,
+                       '='
+                   );
+               }
+
+           }
+
+           $query->addWhere(1, $conditions);
+
+       }
     }
 
 
