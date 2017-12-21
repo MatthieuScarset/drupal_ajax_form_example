@@ -12,6 +12,8 @@ use Drupal\Core\Datetime;
 use Drupal\node\Entity\Node;
 use Drupal\entity\Revision\RevisionableContentEntityBase;
 use Drupal\workbench_moderation\Entity\ModerationState;
+
+
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 	'field_job_profile',
