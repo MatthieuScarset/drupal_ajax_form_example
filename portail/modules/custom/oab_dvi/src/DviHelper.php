@@ -132,6 +132,10 @@ abstract class DviHelper {
             }
         }
 
+        if (count($return) == 0 ) {
+            \Drupal::logger('DviHelper')->notice("Erreur avec les termes taxo Market Segment pour DVI : il semble qu'ils ne soient pas corrects - Aucune entité trouvée pour les termes fournis");
+        }
+
         return $return;
     }
 
