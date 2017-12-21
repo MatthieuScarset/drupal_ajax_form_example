@@ -170,14 +170,15 @@ function oab_dvi_update_8022() {
 }
 
 /**
+ * Traduction du block find distributor
+ */
+function oab_dvi_update_8023() {
+	include_once("updates/update_8023.inc");
+}
+
+/**
  * Style d'image pour le logo
  */
 function oab_dvi_update_8024() {
   include_once("updates/update_8024.inc");
-}
-/**
- * Traduction du block find distributor
- */
-function oab_dvi_update_8023() {
-    include_once("updates/update_8023.inc");
 }
