@@ -311,9 +311,10 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 
     ## Filtre sur la subhome distributeur
     $displayObj = $view->getDisplay();
-    $displayName = $displayObj->display['display_title'];
+    $displayId = $displayObj->display['id'];
+   if ( ($view->id() == 'subhomes' && ($displayId == 'page_distributor' || $displayId == 'page_products'))
+            || $view->id() == 'product_autocomplete') {
 
-    if ($view->id() == 'subhomes' && $displayName == 'distributors') {
         $terms_ids = DviHelper::getMSTaxoTermsIds();
 
         $conditions = new Drupal\Core\Database\Query\Condition('or');

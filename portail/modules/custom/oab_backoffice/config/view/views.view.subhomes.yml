@@ -15,15 +15,9 @@ dependencies:
     - taxonomy.vocabulary.jobs_profiles
     - taxonomy.vocabulary.magazine_thematics
     - taxonomy.vocabulary.magazine_types
-    - taxonomy.vocabulary.market_segments
     - taxonomy.vocabulary.partner_types
     - taxonomy.vocabulary.regions
     - taxonomy.vocabulary.solutions
-  content:
-    - 'taxonomy_term:market_segments:397a6f06-fd95-4d10-b609-e18589bfa3f5'
-    - 'taxonomy_term:media_tags:148c1aab-6a18-43a2-9e67-26730eb07a18'
-    - 'taxonomy_term:media_tags:338d264e-28a2-47fe-b7f2-8a8d4a2f1099'
-    - 'taxonomy_term:media_tags:d9414409-aee5-4e94-a7a1-45395f3bfab4'
   module:
     - node
     - oab_backoffice
@@ -291,6 +285,7 @@ display:
       arguments: {  }
       display_extenders: {  }
       use_ajax: true
+      group_by: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -2886,53 +2881,6 @@ display:
           type: select
           limit: true
           vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_market_segment_target_id:
-          id: field_market_segment_target_id
-          table: node__field_market_segment
-          field: field_market_segment_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            737: 737
-            733: 733
-            736: 736
-            732: 732
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          type: select
-          limit: true
-          vid: market_segments
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
