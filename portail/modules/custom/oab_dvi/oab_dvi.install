@@ -197,3 +197,10 @@ function oab_dvi_update_8025() {
 function oab_dvi_update_8026() {
     include_once("updates/update_8026.inc");
 }
+
+/**
+ * Ajout traduction 'Retour au formulaire' sur le formulaire becoming DVI
+ */
+function oab_dvi_update_8027() {
+    include_once("updates/update_8027.inc");
+}
