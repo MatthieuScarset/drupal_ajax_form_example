@@ -189,3 +189,11 @@ function oab_dvi_update_8024() {
 function oab_dvi_update_8025() {
   include_once("updates/update_8025.inc");
 }
+
+
+/**
+ * Modification du mail Contact Distributeur DVI
+ */
+function oab_dvi_update_8026() {
+    include_once("updates/update_8026.inc");
+}
