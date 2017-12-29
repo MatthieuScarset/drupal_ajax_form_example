@@ -204,3 +204,10 @@ function oab_dvi_update_8026() {
 function oab_dvi_update_8027() {
     include_once("updates/update_8027.inc");
 }
+
+/**
+ * View mode Subhome_distributeur pour les produits et fusion des subhomes Products et Product DVI
+ */
+function oab_dvi_update_8028() {
+    include_once("updates/update_8028.inc");
+}
