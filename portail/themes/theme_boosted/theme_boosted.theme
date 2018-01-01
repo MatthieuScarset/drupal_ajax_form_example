@@ -267,10 +267,28 @@ function theme_boosted_preprocess_views_view(&$variables){
   	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
   		//kint($variables['rows']);
 			$variables['contact_url'] = 'http://www.google.fr';
-		}
-	}
+    }
+  }
 
+  if ($id == 'subhomes'){
+      if($view->current_display == 'page_catalogue')		{ //subhome produits
+         if (isset($view->display_handler->options['arguments'])){
+
+             $current_query = \Drupal::request()->getQueryString();
+
+             if ($current_query != null ){
+                 // j'affecte le view mode à subhome_distributeur
+                 for ($i = 0 ; $i < count($variables['rows'][0]['#rows']); $i++) {
+                     $variables['rows'][0]['#rows'][$i]['#view_mode'] = 'subhome_distributeur';
+                 }
+             }
+
+         }
+      }
+  }
 }
+
+
 function theme_boosted_preprocess_views_view_list(&$variables){
   $view = $variables['view'];
   $id = $view->storage->id();
