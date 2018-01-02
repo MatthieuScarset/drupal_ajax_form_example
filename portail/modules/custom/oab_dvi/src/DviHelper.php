@@ -119,6 +119,11 @@ abstract class DviHelper {
 
 
         foreach ($default_labels as $label) {
+
+            if (false !== $tid = self::getMSTaxoTermId($label, $lang)) {
+                $return[] = $tid;
+            }
+/*
             $query = \Drupal::entityQuery('taxonomy_term');
             $query->condition('vid', 'market_segments');
             $query->condition('name', $label);
@@ -129,11 +134,34 @@ abstract class DviHelper {
 
             if (!empty($entity)) {
                 $return[] = key($entity);
-            }
+            }*/
         }
 
         if (count($return) == 0 ) {
             \Drupal::logger('DviHelper')->notice("Erreur avec les termes taxo Market Segment pour DVI : il semble qu'ils ne soient pas corrects - Aucune entité trouvée pour les termes fournis");
+        }
+
+        return $return;
+    }
+
+    /**
+     * Renvoie l'id du term passé en paramètre
+     * @param $taxoTerm
+     * @param null $lang
+     * @return bool|int|null|string
+     */
+    public static function getMSTaxoTermId($taxoTerm, $lang = null) {
+        $return = false;
+        $query = \Drupal::entityQuery('taxonomy_term');
+        $query->condition('vid', 'market_segments');
+        $query->condition('name', $taxoTerm);
+        if ($lang !== null) {
+            $query->condition('langcode', $lang);
+        }
+        $entity = $query->execute();
+
+        if (!empty($entity)) {
+            $return = key($entity);
         }
 
         return $return;
@@ -191,5 +219,15 @@ abstract class DviHelper {
             $dvi_product = self::hasMSTaxoTerm($node);
         }
         return $dvi_product;
+    }
+
+    /**
+     * Dit si le term passé en paramètre est un market segment
+     * @param $term
+     * @return bool
+     */
+    public static function isMSTerm($term) {
+        $ms_terms = self::getMSTerms();
+        return in_array($term, $ms_terms);
     }
 }
