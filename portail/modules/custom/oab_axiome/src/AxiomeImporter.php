@@ -304,8 +304,7 @@ class AxiomeImporter{
             foreach ($liste_classements as $classements) {
                 $nom_classement = strtolower(trim($classements->getElementsByTagName('Attributes')->item(0)->getElementsByTagName('identifiant')->item(0)->nodeValue));
 
-                if ($nom_classement == 'portfolio'
-                    || $nom_classement == 'porfolio'
+                if ($this->isPortfolio($nom_classement)
                     || $nom_classement == 'secteurs'
                     || $nom_classement == 'metiers'
                 ) {
@@ -342,8 +341,7 @@ class AxiomeImporter{
     private function axiome_manage_classement($xpath, $classements, $nom_classement, $content_language){
         $this->message .=  "AXIOME MANAGE CLASSEMENT $nom_classement \n";
         $liste_famille = $xpath->query($classements->getNodePath() . '/Children/element_classement');
-        if ($nom_classement == "portfolio"
-            || $nom_classement == "porfolio"){
+        if ($this->isPortfolio($nom_classement)){
             $taxo = $this->arborescence_famille;
         }elseif ($nom_classement == "secteurs"){
             $taxo = $this->arborescence_secteur;
@@ -370,8 +368,7 @@ class AxiomeImporter{
                 array_push($taxo[$famille_id]['children'], $sousfamille_id);
             }
         }
-        if ($nom_classement == "portfolio"
-            || $nom_classement == "porfolio"){
+        if ($this->isPortfolio($nom_classement)){
             $this->arborescence_famille = $taxo;
         }elseif ($nom_classement == "secteurs"){
             $this->arborescence_secteur = $taxo;
@@ -395,8 +392,7 @@ class AxiomeImporter{
 
         foreach ($familles AS $famille) {
             $classement_nom = strtolower(trim($famille->getAttribute('identifiant')));
-            if ($classement_nom == "portfolio"
-                || $classement_nom == "porfolio"
+            if ($this->isPortfolio($classement_nom)
             ) {
                 $has_portfolio = true;
             }
@@ -445,8 +441,7 @@ class AxiomeImporter{
     private function axiome_recherche_famille_tid($name, $language, $nom_classement){
         $connection = Database::getConnection();
 
-        if ($nom_classement == "portfolio"
-            || $nom_classement == "porfolio"){
+        if ($this->isPortfolio($nom_classement)){
             $vid = AXIOME_TAXO_FAMILLE;
         }elseif ($nom_classement == "secteurs"){
             $vid = AXIOME_TAXO_SECTEURS;
@@ -598,8 +593,7 @@ class AxiomeImporter{
         $familles = $xpath->getElementsByTagName('classement')->item(0)->getElementsByTagName('element_classement_group');
         foreach ($familles AS $famille){
             $classement_nom = strtolower(trim($famille->getAttribute('identifiant')));
-            if ($classement_nom == "portfolio"
-                || $classement_nom == "porfolio"
+            if ($this->isPortfolio($classement_nom)
                 || $classement_nom == "secteurs"
                 || $classement_nom == "metiers"
             ) {
@@ -651,8 +645,7 @@ class AxiomeImporter{
     private function axiome_manage_taxo($node, $famille, $classement_nom){
         $children_id = $famille->getElementsByTagName('element_classement_list')->item(0)->getElementsByTagName('element_classement_id');
 
-        if ($classement_nom == "portfolio"
-            || $classement_nom == "porfolio"){
+        if ($this->isPortfolio($classement_nom)){
             $taxo = $this->arborescence_famille;
             $nodeField = 'field_solution';
         }elseif ($classement_nom == "secteurs"){
@@ -668,8 +661,8 @@ class AxiomeImporter{
         $tidParent = array();
         foreach($children_id as $child){
             foreach($taxo as $key => $value){
-                $pattern = '/^port?folio\s*/i';
-                if(preg_match($pattern, $classement_nom)){
+                #$pattern = '/^port?folio\s*/i';
+                if($this->isPortfolio($classement_nom)){
                 /*if ($classement_nom == "portfolio"
                     || $classement_nom == "porfolio") {*/
                     if (in_array($child->nodeValue, $value['children']) && isset($value['tid'])) {
@@ -760,5 +753,16 @@ class AxiomeImporter{
             && !empty($notifications)){
             //rules_invoke_component('rules_debug_axiome_import',var_export($notifications, TRUE));
         }
+    }
+
+    private function isPortfolio($mot) {
+        $return = false;
+
+        $pattern = '/^port?folio\s*/i';
+        if(preg_match($pattern, $mot)) {
+            $return = true;
+        }
+
+        return $return;
     }
 }
