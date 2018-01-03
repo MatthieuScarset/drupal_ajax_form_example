@@ -274,9 +274,9 @@ function theme_boosted_preprocess_views_view(&$variables){
       if($view->current_display == 'page_catalogue')		{ //subhome produits
          if (isset($view->display_handler->options['arguments'])){
 
-             $current_query = \Drupal::request()->getQueryString();
-
-             if ($current_query != null ){
+             ##On check qu'il y a un paramètre "Segment" dans l'URL
+             $segmentParameter = \Drupal::request()->query->get('segment');
+             if ($segmentParameter != null ){
                  // j'affecte le view mode à subhome_distributeur
                  for ($i = 0 ; $i < count($variables['rows'][0]['#rows']); $i++) {
                      $variables['rows'][0]['#rows'][$i]['#view_mode'] = 'subhome_distributeur';

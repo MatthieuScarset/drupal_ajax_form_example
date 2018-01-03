@@ -799,6 +799,24 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
 }
 
 /**
+ * Suppression du cache pour les produits DVI lorsqu'on veut l'affichage subhome
+ * pour pouvoir changer l'URL. Si on ne le fait pas, le changement de view_mode par
+ * la fonction "theme_boosted_preprocess_views_view" ne fonctionne pas, car c'est caché
+ * @param array $build
+ * @param \Drupal\node\Entity\Node $entity
+ * @param $view_mode
+ */
+function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\Entity\Node $entity, $view_mode) {
+    if ($entity->bundle() == "product"
+        && DviHelper::isDVIProduct($entity)
+        && ($view_mode== "subhome" || $view_mode="subhome_distributeur")) {
+            $build["#cache"] = array();
+
+    }
+}
+
+
+/**
  * Implements hook_theme().
  */
 function oab_frontoffice_theme($existing, $type, $theme, $path) {
