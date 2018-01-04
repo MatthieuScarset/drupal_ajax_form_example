@@ -809,7 +809,7 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
 function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\Entity\Node $entity, $view_mode) {
     if ($entity->bundle() == "product"
         && DviHelper::isDVIProduct($entity)
-        && ($view_mode== "subhome" || $view_mode="subhome_distributeur")) {
+        && ($view_mode == "subhome" || $view_mode == "subhome_distributeur")) {
             $build["#cache"] = array();
 
     }
