@@ -60,6 +60,9 @@ article.product ul{
     margin-bottom: 0px !important;
     padding-bottom: 1rem;
 }
+article.product ul{
+    padding-left: 0;
+}
 article .field--type-text-long ul li,
 article .content .field--type-text-long ul li,
 article.product ul li{
@@ -68,7 +71,7 @@ article.product ul li{
 }
 article .field--type-text-long ul li:before,
 article .content .field--type-text-long ul li:before,
-article.product.full ul li:before{
+article .product ul li:before{
     content: "■";
     color: #FF7900;
     position: absolute;
@@ -77,7 +80,7 @@ article.product.full ul li:before{
 
 article .field--type-text-long ul.nav-tabs li:before,
 article .content .field--type-text-long ul.nav-tabs li:before,
-article.product.full ul.nav-tabs li:before{
+article .product ul.nav-tabs li:before{
     content: "";
 }
 
@@ -1546,7 +1549,6 @@ aside.right-column > .region {
 .region-content article.customer-story.full,
 .region-content article.blog-post.full,
 .region-content article.page-offices-map,
-.region-content div.officeMapBlock,
 aside .region.region-sidebar
 {
     margin-bottom: 2rem;
@@ -1746,9 +1748,5 @@ html.ua-mobile-ipad .four_columns .col-md-3{
 .page-node-type-document .document_field_image img{
     width:100%;
     height:auto;
-}
-
-.path-content-search .pager-nav .pagination .pager__item--previous a,
-.path-content-search .pager-nav .pagination .pager__item--next a{
-    width:auto;
+    margin-bottom: 10px;
 }
