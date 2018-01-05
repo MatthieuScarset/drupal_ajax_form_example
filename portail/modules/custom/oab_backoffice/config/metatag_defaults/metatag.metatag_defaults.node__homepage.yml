@@ -1,9 +1,9 @@
-uuid: d1583b25-2614-4912-96d0-98d7d2a9b60d
 langcode: en
 status: true
 dependencies: {  }
 id: node__homepage
 label: 'Content: Homepage'
 tags:
+  canonical_url: '[site:url]'
   description: '[node:field_meta_description]'
   title: '[node:field_meta_title] | [site:name]'
