@@ -150,9 +150,9 @@ function theme_obs_backoffice_preprocess_views_view_field(&$variables) {
 				$date = \Drupal\Core\Datetime\DrupalDateTime::createFromTimestamp($updateTimestamp[0]['value']);
 
 				if (isset($updateState[0]['target_id'])){
-					$variables['output'] = "Scheduled on ".$date." for ".$updateState[0]['target_id'];
+					$variables['output'] = t("Scheduled on")." ".$date." ".t("for")." ".t($updateState[0]['target_id']);
 				}else{
-					$variables['output'] = "Scheduled on ".$date;
+					$variables['output'] = t("Scheduled on")." ".$date;
 				}
 			}else{
 				$variables['output'] = '';
