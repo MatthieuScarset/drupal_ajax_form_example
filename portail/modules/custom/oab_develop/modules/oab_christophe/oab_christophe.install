@@ -333,6 +333,6 @@ function oab_christophe_update_8048() {
 /**
  *  RUBYPORTAILOBS-3186 - modification des subhomes pour avoir des parametres dans l'url
  */
-function oab_christophe_update_8050() {
-  include_once("updates/update_8050.inc");
+function oab_christophe_update_8051() {
+  include_once("updates/update_8051.inc");
 }
