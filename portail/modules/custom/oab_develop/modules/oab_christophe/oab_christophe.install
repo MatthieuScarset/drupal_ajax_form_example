@@ -337,3 +337,10 @@ function oab_christophe_update_8049() {
   oabt_YmlImport('core.entity_form_display.node.office.default.yml');
   oabt_YmlImport('views.view.offices_map_view.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3212 - traduction de la date de scheduled
+ */
+function oab_christophe_update_8050() {
+  include_once("updates/update_8050.inc");
+}
