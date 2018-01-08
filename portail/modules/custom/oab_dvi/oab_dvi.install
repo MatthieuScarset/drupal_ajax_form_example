@@ -218,3 +218,10 @@ function oab_dvi_update_8028() {
 function oab_dvi_update_8029() {
     include_once("updates/update_8029.inc");
 }
+
+/**
+ * Suppression de la subhome DVI Products
+ */
+function oab_dvi_update_8030() {
+    include_once("updates/update_8030.inc");
+}
