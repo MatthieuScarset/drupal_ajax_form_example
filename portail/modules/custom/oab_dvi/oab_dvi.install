@@ -211,3 +211,10 @@ function oab_dvi_update_8027() {
 function oab_dvi_update_8028() {
     include_once("updates/update_8028.inc");
 }
+
+/**
+ * Modification de l'url de la subhome distributeur
+ */
+function oab_dvi_update_8029() {
+    include_once("updates/update_8029.inc");
+}
