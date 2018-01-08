@@ -147,7 +147,7 @@ function theme_obs_backoffice_preprocess_views_view_field(&$variables) {
 			if ($mod->update_timestamp !== null){
 				$updateState = $mod->field_moderation_state->getValue();
 				$updateTimestamp = $mod->update_timestamp->getValue();
-				$date = \Drupal\Core\Datetime\DrupalDateTime::createFromTimestamp($updateTimestamp[0]['value']);
+				$date = \Drupal::service('date.formatter')->format($updateTimestamp[0]['value'], 'short');
 
 				if (isset($updateState[0]['target_id'])){
 					$variables['output'] = t("Scheduled on")." ".$date." ".t("for")." ".t($updateState[0]['target_id']);
