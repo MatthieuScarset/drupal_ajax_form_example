@@ -1850,6 +1850,11 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     margin-bottom: 10px;
 }
 
+.page-node-type-press-release .field--name-field-content.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .path-content-search .pager-nav .pagination .pager__item--previous a,
 .path-content-search .pager-nav .pagination .pager__item--next a{
     width:auto;
