@@ -1016,6 +1016,42 @@ function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal
 
 }
 
+/**
+ * Modification des metatags pour rediriger les contenus 'homepage" vers la home du site, et pas le noeud "homepage"
+ *
+ * @param array $attachments
+ */
+function oab_frontoffice_page_attachments_alter(array &$attachments)
+{
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+    if ($node->bundle() == 'homepage') {
+      if (isset($attachments["#attached"]['html_head_link'])) {
+        $attachments["#attached"]['html_head_link'] = __seek_alternate($attachments["#attached"]['html_head_link']);
+      }
+    }
+  }
+}
+
+/**
+ * Petite fonction recursive pour trouver l'element cherché dans la fonction précédente
+ * (C'est un tableau avec des sous tableaux, c'etait plus simple à faire en recursif)
+ * @param $tab
+ * @return array
+ */
+function __seek_alternate($tab) {
+  if (isset($tab['rel']) && $tab['rel'] == "alternate") {
+    $tab['href'] = Url::fromRoute('<front>')->toString();
+  } elseif (is_array($tab)) {
+    foreach ($tab as $key => $value) {
+      $tab[$key] = __seek_alternate($value);
+    }
+  }
+
+  return $tab;
+}
+
+
 /*******************************************************************************************************************/
 /*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/
 /*******************************************************************************************************************/
