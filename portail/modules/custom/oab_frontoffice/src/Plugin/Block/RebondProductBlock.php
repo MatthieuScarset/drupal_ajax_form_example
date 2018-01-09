@@ -53,14 +53,14 @@ class RebondProductBlock extends BlockBase {
           $axiome_data = $field_axiome_data;
 
           #oabt($axiome_data, true);
-           #$block['rebondProduct_']
+          #$block['rebondProduct_']
 
           /**
            * Ordre de priorité :
            *  1. Portail dédié
            *  2. Boutiques
            *  3. Espace client
-          */
+           */
           /*if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
             ['Attributes']['online_purchase_dedicated_portal'])) {
 
@@ -76,25 +76,26 @@ class RebondProductBlock extends BlockBase {
           }*/
 
           ##Changement pour la zone, on l'affiche toujours avec une URL par défaut si non dispo via Axiome
-            $eceSettings = \Drupal::config('oab.ece');
+          $eceSettings = \Drupal::config('oab.ece');
 
-            $block['rebondProduct']['type'] = 'espaceClient';
+          $block['rebondProduct']['type'] = 'espaceClient';
           $block['rebondProduct']['title'] = $eceSettings->get('title');
           $block['rebondProduct']['text']  = $eceSettings->get('intro');
           $block['rebondProduct']['connect_txt'] = $eceSettings->get('connect_txt');
-            $block['rebondProduct']['connect_link'] = $eceSettings->get('connect_link');
+          $block['rebondProduct']['connect_link'] = $eceSettings->get('connect_link');
           $block['rebondProduct']['create_txt'] = $eceSettings->get('create_txt');
           $block['rebondProduct']['create_link'] = $eceSettings->get('create_link');
-            $block['rebondProduct']['discover_txt'] = $eceSettings->get('discover_txt');
-            $block['rebondProduct']['discover_link'] = $eceSettings->get('discover_link');
+          $block['rebondProduct']['discover_txt'] = $eceSettings->get('discover_txt');
+          $block['rebondProduct']['discover_link'] = $eceSettings->get('discover_link');
 
           if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
-          ['Attributes']['online_purchase_customer_area']) && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
+              ['Attributes']['online_purchase_customer_area']) && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
             ['Attributes']['online_purchase_customer_area'])) {
             $block['rebondProduct']['connect_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_customer_area'];
-          } /*else {
-            $block['rebondProduct']['connect_link'] = t("https://dro.orange-business.com/authentification?TYPE=33554433&REALMOID=06-0000e733-54df-1266-8576-5e0e0a63d064&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-TPZ0eHv9wdQAe0KqXWVXK5B%2b8mUfc6au28lAfEL%2bvsCray2ghF0v8nhYk9lzcjpc&TARGET=-SM-https%3a%2f%2fmy--service--space.orange--business.com%2f&codeContexte=MSS");
-          }*/
+            $block['rebondProduct']['ece_display'] = 'yes';
+          } else {
+            $block['rebondProduct']['ece_display'] = 'no';
+          }
 
         }
       }
