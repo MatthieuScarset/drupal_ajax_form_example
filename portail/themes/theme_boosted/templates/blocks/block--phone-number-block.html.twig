@@ -47,8 +47,8 @@
 #}
 
 
+<span class="phone_number_block_title">{{ content.block_title }}</span>
 <section{{ attributes.addClass('block', 'clearfix', 'phonenumber') }}>
-
         {% block content %}
             {% if content is not null %}
                    <div class="numero" style="color: black; font-weight: bold; font-size: 2.8rem; padding: 0.3rem 0.5rem 0.5rem;"><a href="tel:{{ content }}">{{ content }}</a></div>

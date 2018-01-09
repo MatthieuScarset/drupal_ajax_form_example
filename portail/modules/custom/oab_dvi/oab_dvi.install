@@ -225,3 +225,9 @@ function oab_dvi_update_8029() {
 function oab_dvi_update_8030() {
     include_once("updates/update_8030.inc");
 }
+/**
+ * Ajout titre sur le block phone number
+ */
+function oab_dvi_update_8031() {
+    include_once("updates/update_8031.inc");
+}

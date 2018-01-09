@@ -19,3 +19,11 @@ block.settings.contact_bar_analyst_block:
     link_ecrire_text:
       type: label
       label: 'Texte du lien vers Nous écrire'
+
+block.settings.phone_number_block:
+  type: block_settings
+  label: 'Phone Number'
+  mapping:
+    block_title:
+      type: label
+      label: 'Block Title'

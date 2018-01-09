@@ -83,6 +83,9 @@
     padding-bottom: 2rem;
 }
 
+.phone_number_block_title {
+    font-weight: bold;
+}
 .phonenumber {
     display: block;
     border: solid 1px black;
