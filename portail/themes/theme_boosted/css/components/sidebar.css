@@ -82,3 +82,21 @@
     /*padding: 0px !important;*/
     padding-bottom: 2rem;
 }
+
+.phone_number_block_title {
+    font-weight: bold;
+}
+.phonenumber {
+    display: block;
+    border: solid 1px black;
+    margin-top: 10px;
+}
+
+.phonenumber .numero {
+    display: inline-block;
+    padding: 0;
+}
+
+.phonenumber .numero p {
+    margin: 0;
+}

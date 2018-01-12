@@ -26,6 +26,10 @@ dependencies:
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_test_showroom
+    - field.field.node.product.field_top_zone
+    - field.field.node.product.field_top_zone_background
+    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - node.type.product
   module:
@@ -33,6 +37,7 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
+    - paragraphs
     - path
     - text
     - workbench_moderation
@@ -41,6 +46,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_rebond
         - group_classify
         - group_seo
         - group_publish
@@ -81,7 +87,7 @@ third_party_settings:
         - path
         - field_metatags
       parent_name: group_onglets
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         id: ''
@@ -95,7 +101,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 7
+      weight: 8
       format_type: tab
       format_settings:
         id: ''
@@ -125,7 +131,7 @@ third_party_settings:
         - field_job_profile
         - field_market_segment
       parent_name: group_onglets
-      weight: 6
+      weight: 7
       format_type: tab
       format_settings:
         id: ''
@@ -134,13 +140,55 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
+    group_try_and_buy_block:
+      children:
+        - field_try_and_buy
+      parent_name: group_rebond
+      weight: 21
+      format_type: tab
+      format_settings:
+        label: 'Try and buy block'
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Try and buy block'
+    group_test_showroom_block:
+      children:
+        - field_test_showroom
+      parent_name: group_rebond
+      weight: 20
+      format_type: tab
+      format_settings:
+        label: 'Test Showroom Block'
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Test Showroom Block'
+    group_rebond:
+      children:
+        - group_test_showroom_block
+        - group_try_and_buy_block
+      parent_name: group_onglets
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Rebond
 id: node.product.default
 targetEntityType: node
 bundle: product
 mode: default
 content:
   field_content:
-    weight: 8
+    weight: 7
     settings:
       rows: 5
       placeholder: ''
@@ -170,7 +218,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 9
+    weight: 8
     settings:
       entity_browser: browser_file_modal
       field_widget_display: label
@@ -248,6 +296,18 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_test_showroom:
+    type: entity_reference_paragraphs
+    weight: 12
+    settings:
+      title: 'Test Showroom block'
+      title_plural: 'Test Showroom blocks'
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
   field_top_zone:
     weight: 5
     settings:
@@ -284,6 +344,20 @@ content:
     region: content
   field_visual:
     weight: 10
+  field_try_and_buy:
+    type: entity_reference_paragraphs
+    weight: 11
+    settings:
+      title: 'Try and buy block'
+      title_plural: 'Try and buy blocks'
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_visual:
+    weight: 9
     settings:
       entity_browser: browse_media_modal
       field_widget_display: label

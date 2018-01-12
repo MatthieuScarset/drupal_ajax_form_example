@@ -25,6 +25,7 @@ pm-enable -y oab_axiome
 pm-enable -y oab_backbones
 pm-enable -y views_autocomplete_api
 pm-enable -y multiple_fields_remove_button
+pm-enable -y oab_dvi
 updb
 cr
 #entity-updates

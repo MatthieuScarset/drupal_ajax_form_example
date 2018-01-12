@@ -46,43 +46,45 @@
  */
 #}
 
+{% if (content.rebondProduct.ece_display) == 'yes' %}
 
-<section{{ attributes.addClass('block', 'clearfix', 'rebond', 'rebond-product') }}>
-    <div class="form-group">
-    {% block content %}
+    <section{{ attributes.addClass('block', 'clearfix', 'rebond', 'rebond-product') }}>
+        <div class="form-group">
+            {% block content %}
 
-        {% if content.rebondProduct is not null %}
-           <article>
-                <div class="rebond-block-title">
-                    <h2>{{ content.rebondProduct.title }}</h2>
-                </div>
-                <div class="rebond-product-text">
-                    <p >
-                        {{ content.rebondProduct.text }}
-                    </p>
-                </div>
-               <div class="rebond-product-link">
-                    <a href="{{ content.rebondProduct.connect_link }}" target="_blank" class="rebond-link">
-                        {{ content.rebondProduct.connect_txt }}
-                    </a>
-                </div>
-               <div class="rebond-product-link-create">
-                   <a href="{{ content.rebondProduct.create_link }}" target="_blank" >
-                       {{ content.rebondProduct.create_txt }}
-                   </a>
-               </div>
-               <div class="rebond-product-link-create">
-                   <a href="{{ content.rebondProduct.discover_link }}" target="_blank" >
-                       {{ content.rebondProduct.discover_txt }}
-                   </a>
-               </div>
+                {% if content.rebondProduct is not null %}
+                    <article>
+                        <div class="rebond-block-title">
+                            <h2>{{ content.rebondProduct.title }}</h2>
+                        </div>
+                        <div class="rebond-product-text">
+                            <p >
+                                {{ content.rebondProduct.text }}
+                            </p>
+                        </div>
+                        <div class="rebond-product-link">
+                            <a href="{{ content.rebondProduct.connect_link }}" target="_blank" class="rebond-link">
+                                {{ content.rebondProduct.connect_txt }}
+                            </a>
+                        </div>
+                        <div class="rebond-product-link-create">
+                            <a href="{{ content.rebondProduct.create_link }}" target="_blank" >
+                                {{ content.rebondProduct.create_txt }}
+                            </a>
+                        </div>
+                        <div class="rebond-product-link-create">
+                            <a href="{{ content.rebondProduct.discover_link }}" target="_blank" >
+                                {{ content.rebondProduct.discover_txt }}
+                            </a>
+                        </div>
 
-           </article>
-        {% else %}
-            {{ content }}
-        {% endif %}
+                    </article>
+                {% else %}
+                    {{ content }}
+                {% endif %}
 
-    {% endblock %}
-    </div>
-</section>
+            {% endblock %}
+        </div>
+    </section>
 
+{% endif %}

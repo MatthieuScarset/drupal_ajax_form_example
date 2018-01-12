@@ -5,5 +5,7 @@ dependencies: {  }
 id: node__homepage
 label: 'Content: Homepage'
 tags:
+  canonical_url: '[site:url]'
   description: '[node:field_meta_description]'
   title: '[node:field_meta_title] | [site:name]'
+

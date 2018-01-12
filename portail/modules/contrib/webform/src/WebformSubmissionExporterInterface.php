@@ -69,7 +69,7 @@ interface WebformSubmissionExporterInterface {
    * @param array $export_options
    *   Associative array of exporter options.
    *
-   * @return \Drupal\webform\WebformExporterInterface
+   * @return \Drupal\webform\Plugin\WebformExporterInterface
    *   A results exporter.
    */
   public function setExporter(array $export_options = []);
@@ -77,7 +77,7 @@ interface WebformSubmissionExporterInterface {
   /**
    * Get the results exporter.
    *
-   * @return \Drupal\webform\WebformExporterInterface
+   * @return \Drupal\webform\Plugin\WebformExporterInterface
    *   A results exporter.
    */
   public function getExporter();
@@ -119,7 +119,7 @@ interface WebformSubmissionExporterInterface {
    * @return array
    *   An associative array of export options.
    */
-  public function getValuesFromInput(array $input);
+  public function getValuesFromInput(array $values);
 
   /**
    * Execute results exporter and write export to a temp file.

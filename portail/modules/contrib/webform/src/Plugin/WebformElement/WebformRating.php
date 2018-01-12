@@ -42,7 +42,7 @@ class WebformRating extends Range {
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     if (!isset($element['#step'])) {
       $element['#step'] = 1;
     }
@@ -97,6 +97,16 @@ class WebformRating extends Range {
   public function getItemFormats() {
     return parent::getItemFormats() + [
       'star' => $this->t('Star'),
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preview() {
+    return [
+      '#type' => $this->getTypeName(),
+      '#title' => $this->getPluginLabel(),
     ];
   }
 

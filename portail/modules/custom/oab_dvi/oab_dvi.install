@@ -16,3 +16,218 @@ function oab_dvi_update_8001() {
 function oab_dvi_update_8002() {
   include_once("updates/update_8002.inc");
 }
+
+/**
+ * Création du type de contenu Distributeurs
+ */
+function oab_dvi_update_8003() {
+    include_once("updates/update_8003.inc");
+}
+
+/**
+ * Création des champs Market segment et Department pour les partenaires
+ */
+
+function oab_dvi_update_8004() {
+  include_once("updates/update_8004.inc");
+}
+
+/**
+ * Création des subhomes DVI Products et Distributors, création du mode de rendu Subhome pour les Distributeurs,
+ * ajout du champ subhome pour le type de contenu distributeur
+ */
+function oab_dvi_update_8005() {
+    include_once("updates/update_8005.inc");
+}
+
+
+/**
+ * Création du webform DVI Contact Global
+ * See JIRA DVI-6
+ */
+function oab_dvi_update_8006() {
+  include_once("updates/update_8006.inc");
+}
+
+/**
+ * Ajout des Distributor dans la configuration Synomia pour la recherche + Meta data pour Distributor
+ */
+function oab_dvi_update_8007() {
+  include_once("updates/update_8007.inc");
+}
+
+/**
+ * Création du rôle DVI et ses permissions
+ */
+function oab_dvi_update_8008() {
+    include_once("updates/update_8008.inc");
+}
+
+/**
+ * MAJ Tous les Products : taggage market segment +50 et +250 salarié
+ */
+function oab_dvi_update_8009() {
+  include_once("updates/update_8009.inc");
+}
+
+/**
+ * Création du block Phone Number pour le Distributeur (sidebar)
+ */
+function oab_dvi_update_8010() {
+	include_once("updates/update_8010.inc");
+}
+/**
+ * Creation nouveau paragraph block rebond et champs pour le product
+ */
+function oab_dvi_update_8011() {
+  include_once("updates/update_8011.inc");
+}
+
+/**
+ * Nouveaux blocks Try & Buy & Test Showroom
+ */
+function oab_dvi_update_8012() {
+  include_once("updates/update_8012.inc");
+}
+
+
+/**
+ * MAJ Display VIEW du node distributeur
+ */
+function oab_dvi_update_8013()
+{
+    include_once("updates/update_8013.inc");
+}
+
+/**
+ * Création du formulaire "Contact Distributor"
+ */
+function oab_dvi_update_8014() {
+    include_once("updates/update_8014.inc");
+
+}
+
+
+/**
+ * MAJ SUBHOME
+ */
+function oab_dvi_update_8015() {
+    include_once("updates/update_8015.inc");
+}
+
+/**
+ * Création du webform DVI Becoming distributor
+ * See JIRA DVI-5
+ */
+function oab_dvi_update_8016() {
+    include_once("updates/update_8016.inc");
+}
+
+/**
+ * Création des termes Distributeur et term_id
+ */
+function oab_dvi_update_8017() {
+    include_once("updates/update_8017.inc");
+}
+
+/**
+ * Url alias
+ */
+function oab_dvi_update_8018() {
+    include_once("updates/update_8018.inc");
+}
+
+
+/**
+ * Reload des configs des subhome et du content type distributor
+ *  - Subhome > Suppression d'un filtre, ajout d'un tri
+ *  - Distributor > Ajout d'un wysiwyg
+ */
+function oab_dvi_update_8019() {
+    include_once("updates/update_8019.inc");
+}
+
+/**
+ * OBSDVI-29 - subhome distributeurs et produits DVI
+ */
+
+function oab_dvi_update_8020() {
+  include_once("updates/update_8020.inc");
+}
+
+/**
+ * Translations
+ */
+function oab_dvi_update_8021() {
+    include_once("updates/update_8021.inc");
+}
+
+/**
+ * Traduction des webforms
+ */
+function oab_dvi_update_8022() {
+  include_once("updates/update_8022.inc");
+}
+
+/**
+ * Traduction du block find distributor
+ */
+function oab_dvi_update_8023() {
+	include_once("updates/update_8023.inc");
+}
+
+/**
+ * Style d'image pour le logo
+ */
+function oab_dvi_update_8024() {
+  include_once("updates/update_8024.inc");
+}
+
+/**
+ * Renommage des terms de taxonomie pour les url des subhomes
+ */
+function oab_dvi_update_8025() {
+  include_once("updates/update_8025.inc");
+}
+
+
+/**
+ * Modification du mail Contact Distributeur DVI
+ */
+function oab_dvi_update_8026() {
+    include_once("updates/update_8026.inc");
+}
+
+/**
+ * Ajout traduction 'Retour au formulaire' sur le formulaire becoming DVI
+ */
+function oab_dvi_update_8027() {
+    include_once("updates/update_8027.inc");
+}
+
+/**
+ * View mode Subhome_distributeur pour les produits et fusion des subhomes Products et Product DVI
+ */
+function oab_dvi_update_8028() {
+    include_once("updates/update_8028.inc");
+}
+
+/**
+ * Modification de l'url de la subhome distributeur
+ */
+function oab_dvi_update_8029() {
+    include_once("updates/update_8029.inc");
+}
+
+/**
+ * Suppression de la subhome DVI Products
+ */
+function oab_dvi_update_8030() {
+    include_once("updates/update_8030.inc");
+}
+/**
+ * Ajout titre sur le block phone number
+ */
+function oab_dvi_update_8031() {
+    include_once("updates/update_8031.inc");
+}

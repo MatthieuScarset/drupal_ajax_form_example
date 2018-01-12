@@ -11,3 +11,7 @@ services:
       class: Drupal\oab_frontoffice\Twig\OabExtension
       tags:
         - { name: twig.extension }
+  oab_frontoffice.smart_redirection:
+      class: Drupal\oab_frontoffice\EventSubscriber\SmartRedirectionEvent
+      tags:
+         - { name: event_subscriber }

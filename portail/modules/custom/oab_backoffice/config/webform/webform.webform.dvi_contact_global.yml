@@ -1,0 +1,155 @@
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: dvi_contact_global
+title: 'DVI - Contact global'
+description: ''
+category: DVI
+elements: "'#attributes':\n  class:\n    - webform-dvi-contact-global\ndvi_contact_global_description:\n  '#type': processed_text\n  '#text': \"<p>Vous avez un projet, une question ? Vous êtes intéressé par une de nos solutions ? Merci de renseigner le fomulaire suivant, nous vous contacterons dans les plus brefs délais.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<hr />\\r\\n<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Phone\n  '#required': true\nsubject:\n  '#type': textfield\n  '#title': Subject\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha_dvi_global:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#attributes':\n    class:\n      - dvi-contact-global-submit-container\n  '#submit__attributes':\n    class:\n      - dvi-contact-global-submit\n"
+css: ''
+javascript: ''
+settings:
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: false
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_log: false
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_complete: true
+  wizard_complete_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  draft: none
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "<p dir=\"ltr\" id=\"docs-internal-guid-c7125d3d-0838-1fad-0318-79dbe0ed6fd7\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Merci pour votre demande de contact.<br />\r\n<br />\r\nNous avons bien re&ccedil;u votre message.</span><br class=\"kix-line-break\" />\r\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous le traiterons dans les d&eacute;lais les plus brefs.</span></p>\r\n\r\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Cordialement,</span></p>\r\n\r\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">La direction des Ventes Indirectes.</span></p>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+handlers:
+  email_demandeur:
+    id: email
+    label: 'Email demandeur'
+    handler_id: email_demandeur
+    status: true
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: contact.dvi@orange.com
+      from_options: {  }
+      from_name: 'DVI Orange'
+      subject: '[webform_submission:values:subject:value]'
+      body: "<p dir=\"ltr\" id=\"docs-internal-guid-c7125d3d-082d-47f1-13c1-40a511156d3a\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Bonjour,</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous avons bien re&ccedil;u votre message.</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous le traiterons dans les d&eacute;lais les plus brefs.</span></p>\n\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Cordialement,</span></p>\n\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">La direction des Ventes Indirectes.</span></p>"
+      excluded_elements:
+        first_name: first_name
+        last_name: last_name
+        company: company
+        e_mail: e_mail
+        phone: phone
+        subject: subject
+        message: message
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+  email_to_dvi:
+    id: email
+    label: 'Email to dvi'
+    handler_id: email_to_dvi
+    status: true
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: contact.dvi@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: '[webform_submission:values:e_mail:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:e_mail:value]'
+      subject: '[webform_submission:values:subject:value]'
+      body: "Soci&eacute;t&eacute; : [webform_submission:values:company]<br />\n<span>[webform_submission:values:last_name]</span> [webform_submission:values:first_name]<br />\nEmail : [webform_submission:values:e_mail]<br />\nContacter au num&eacute;ro : [webform_submission:values:phone]<br />\n<br />\nMessage :<br />\n[webform_submission:values:message]"
+      excluded_elements: {  }
+      html: true
+      attachments: false
+      debug: false
+      reply_to: ''
+      return_path: ''

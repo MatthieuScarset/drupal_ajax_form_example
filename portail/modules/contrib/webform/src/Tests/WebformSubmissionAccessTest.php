@@ -12,13 +12,6 @@ use Drupal\webform\Entity\Webform;
 class WebformSubmissionAccessTest extends WebformTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
-   */
-  public static $modules = ['webform'];
-
-  /**
    * {@inheritdoc}
    */
   public function setUp() {
@@ -85,14 +78,14 @@ class WebformSubmissionAccessTest extends WebformTestBase {
     $this->assertResponse(403);
 
     // Check all results access denied.
-    $this->drupalGet('/admin/structure/webform/results/manage');
+    $this->drupalGet('/admin/structure/webform/submissions/manage');
     $this->assertResponse(403);
 
     /**************************************************************************/
     // Any submission permissions.
     /**************************************************************************/
 
-    // Login as any user
+    // Login as any user.
     $this->drupalLogin($this->anyWebformSubmissionUser);
 
     // Check webform results access allowed.
@@ -106,7 +99,7 @@ class WebformSubmissionAccessTest extends WebformTestBase {
     $this->assertResponse(200);
 
     // Check all results access allowed.
-    $this->drupalGet('/admin/structure/webform/results/manage');
+    $this->drupalGet('/admin/structure/webform/submissions/manage');
     $this->assertResponse(200);
 
     /**************************************************************************/

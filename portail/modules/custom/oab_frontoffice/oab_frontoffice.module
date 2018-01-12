@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Database\Database;
+use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
@@ -284,7 +285,9 @@ function clean_exposed_filters_by_language($options, $txtAll){
  * Implements hook_views_query_alter().
  */
 function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query){
-  if ($view->id() == 'offices_map_view'){
+
+    ## CARTE
+    if ($view->id() == 'offices_map_view'){
     $language = \Drupal::languageManager()->getCurrentLanguage();
     $language_id = $language->getId();
 
@@ -304,6 +307,87 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
       }
     }
   }
+
+
+    ## Filtre sur la subhome distributeur
+    $displayObj = $view->getDisplay();
+    $displayId = $displayObj->display['id'];
+   if ( ($view->id() == 'subhomes' && ($displayId == 'page_distributor' || $displayId == 'page_products'))
+            || $view->id() == 'product_autocomplete') {
+
+        $terms_ids = DviHelper::getMSTaxoTermsIds();
+
+        if (count($terms_ids)>0) {
+           $conditions = new Drupal\Core\Database\Query\Condition('or');
+
+           $table_name = "node__field_market_segment";
+           $field_name = "field_market_segment_target_id";
+           $tables = array();
+           foreach ($terms_ids as $key => $term_id) {
+
+               $joinConfig = [
+                   'table' => $table_name,
+                   'left_field' => 'nid',
+                   'field' => 'entity_id',
+                   'extra' => [
+                       [
+                           'field' => 'deleted',
+                           'value' => 0,
+                           'numeric' => true
+                       ],
+                       [
+                           'left_field' => "langcode",
+                           'field' => "langcode",
+                       ]
+
+                   ],
+                   'left_table' => 'node_field_data',
+                   'type' => 'LEFT',
+                   'extra_operator' => 'AND',
+               ];
+
+
+               $join = new \Drupal\views\Plugin\views\join\Standard(
+                   $joinConfig,
+                   "standard",
+                   [
+                       'plugin_type' => "join",
+                       'id' => "standard",
+                       'class' => 'Drupal\views\Plugin\views\join\Standard',
+                       'provider' => 'views'
+                   ]
+               );
+
+               $join->extra = [
+                   [
+                       'field' => $field_name,
+                       'value' => $term_id,
+                       'numeric' => false
+                   ]
+               ];
+
+               $table_alias = $query->addTable(
+                   $table_name,
+                   "node_field_data",
+                   $join
+               );
+
+               if ($table_alias !== false && is_string($table_alias)) {
+                   $conditions->condition(
+                       "$table_alias.$field_name",
+                       $term_id,
+                       '='
+                   );
+               }
+
+           }
+
+           $query->addWhere(1, $conditions);
+
+       }
+    }
+
+
 }
 
 /**
@@ -584,6 +668,35 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       }
   }
 
+    //Subhome Distributors
+    if ($form['#id'] == 'views-exposed-form-subhomes-page-distributor') {
+        $solutions = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solution'
+        );
+        $form['field_solution_target_id']['#options'] = $solutions;
+
+        $departements = clean_exposed_filters_by_language(
+            $form['field_departments_target_id']['#options'],
+            'Departements'
+        );
+        $form['field_departments_target_id']['#options'] = $departements;
+
+    }
+
+
+    //Subhome Products DVI
+    if ($form['#id'] == 'views-exposed-form-subhomes-page-products') {
+        $solutions = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solution'
+        );
+        $form['field_solution_target_id']['#options'] = $solutions;
+    }
+
+
+
+
     // view Page thématique
     if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {
         $insight = clean_exposed_filters_by_language(
@@ -616,6 +729,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     }
 
 }
+
 
 function oab_frontoffice_views_post_render($view) {
     if ($view->id() !== 'VIEW_ID' && $view->getDisplay()->getPluginId() !== 'page') {
@@ -685,6 +799,24 @@ function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcr
 }
 
 /**
+ * Suppression du cache pour les produits DVI lorsqu'on veut l'affichage subhome
+ * pour pouvoir changer l'URL. Si on ne le fait pas, le changement de view_mode par
+ * la fonction "theme_boosted_preprocess_views_view" ne fonctionne pas, car c'est caché
+ * @param array $build
+ * @param \Drupal\node\Entity\Node $entity
+ * @param $view_mode
+ */
+function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\Entity\Node $entity, $view_mode) {
+    if ($entity->bundle() == "product"
+        && DviHelper::isDVIProduct($entity)
+        && ($view_mode == "subhome" || $view_mode == "subhome_distributeur")) {
+            $build["#cache"] = array();
+
+    }
+}
+
+
+/**
  * Implements hook_theme().
  */
 function oab_frontoffice_theme($existing, $type, $theme, $path) {
@@ -714,7 +846,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 				'text' => $pageTitle,
 				'url' => $og_url,
 				'hashtags' => '',
-				'via' => 'orange_business',
+				'via' => 'orangebusiness',
 				'related' => '',
 				'in-reply-to' => ''
 			]
@@ -810,12 +942,20 @@ function oab_frontoffice_mail_alter(&$message) {
 function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
-  foreach (array_keys($form['actions']) as $action) {
+    foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
           array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
         }
-      }
     }
+  } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
+
+      foreach (array_keys($form['actions']) as $action) {
+
+          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit' );
+          }
+      }
+  }
 }
 
 /**
@@ -853,6 +993,64 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
 
 
 }
+
+function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+        if ($node->bundle() == 'distributor') {
+            $field_distrib_email = $node->get('field_email_address');
+
+            $distribMail = "";
+            if(isset($field_distrib_email[0])) {
+                $value = $field_distrib_email[0]->getValue();
+                $distribMail = $value['value'];
+            }
+
+            $form_state->setValue('distributeur_email', $distribMail);
+            $form_state->setValue('distributeur_name', $node->getTitle());
+            $form_state->setValue('distributeur_nid', $node->id());
+        }
+
+    }
+
+}
+
+/**
+ * Modification des metatags pour rediriger les contenus 'homepage" vers la home du site, et pas le noeud "homepage"
+ *
+ * @param array $attachments
+ */
+function oab_frontoffice_page_attachments_alter(array &$attachments)
+{
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+    if ($node->bundle() == 'homepage') {
+      if (isset($attachments["#attached"]['html_head_link'])) {
+        $attachments["#attached"]['html_head_link'] = __seek_alternate($attachments["#attached"]['html_head_link']);
+      }
+    }
+  }
+}
+
+/**
+ * Petite fonction recursive pour trouver l'element cherché dans la fonction précédente
+ * (C'est un tableau avec des sous tableaux, c'etait plus simple à faire en recursif)
+ * @param $tab
+ * @return array
+ */
+function __seek_alternate($tab) {
+  if (isset($tab['rel']) && $tab['rel'] == "alternate") {
+    $tab['href'] = Url::fromRoute('<front>')->toString();
+  } elseif (is_array($tab)) {
+    foreach ($tab as $key => $value) {
+      $tab[$key] = __seek_alternate($value);
+    }
+  }
+
+  return $tab;
+}
+
 
 /*******************************************************************************************************************/
 /*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/

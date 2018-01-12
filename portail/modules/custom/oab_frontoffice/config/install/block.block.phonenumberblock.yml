@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: phonenumber
+theme: theme_boosted
+region: phone_number
+weight: -15
+provider: null
+plugin: null
+settings:
+  id: phone_number_block
+  label: 'Phone number Block'
+  provider: oab_frontoffice
+  label_display: '0'
+

@@ -3,7 +3,7 @@
 
 set :application, 'obs'
 set :repo_url, 'git@git-oab.si.fr.intraorange:obs-com/Sources.git'
-set :stages, fetch(:stages, []).push('dev', 'recette', 'integration', 'dvi')
+set :stages, fetch(:stages, []).push('dev', 'recette', 'recettefinale', 'integration', 'dvi', 'dvi_integration')
 set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
@@ -151,7 +151,8 @@ namespace :deploy do
 	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
 	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
 	 execute "drush cr --root=#{release_path}/portail"
-	 execute "ln -s /home/oab_web/drupal7 #{release_path}/portail/drupal7"
+	 execute "ln -sf /home/oab_web/drupal7 #{release_path}/portail/drupal7"
+	 execute "ln -sf /var/www/DVI/current/portail /var/www/current/portail/DVI"
     end
    end
 end

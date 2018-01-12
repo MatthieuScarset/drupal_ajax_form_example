@@ -3,7 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -23,20 +23,21 @@ class WebformSignature extends WebformElementBase {
    * {@inheritdoc}
    */
   public function getDefaultProperties() {
-    $default_properties = [
+    $properties = [
       // General settings.
       'description' => $this->t('Sign above'),
     ] + parent::getDefaultProperties();
-    unset($default_properties['disabled']);
-    return $default_properties;
+    unset($properties['disabled']);
+    return $properties;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     if (empty($element['#description'])) {
       $element['#description'] = $this->t('Sign above');
+      $element['#description_display'] = 'after';
     }
     parent::prepare($element, $webform_submission);
   }
@@ -137,8 +138,8 @@ class WebformSignature extends WebformElementBase {
       '#type' => 'radios',
       '#title' => $this->t('Signature format'),
       '#options' => [
-        'image' => $this->t('Image: The signature\'s <a href=":href">Data URI</a>.', [':href' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs']),
-        'status' => $this->t("Status: 'signed' or 'no signed'."),
+        'image' => $this->t('Image, the signature\'s <a href=":href">Data URI</a>.', [':href' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs']),
+        'status' => $this->t("Status, displays 'signed' or 'no signed'"),
       ],
       '#default_value' => $export_options['signature_format'],
     ];

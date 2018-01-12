@@ -25,6 +25,10 @@ dependencies:
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_test_showroom
+    - field.field.node.product.field_top_zone
+    - field.field.node.product.field_top_zone_background
+    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - node.type.product
   module:
@@ -139,4 +143,8 @@ hidden:
   field_top_zone: true
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
+  field_test_showroom: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_try_and_buy: true
   langcode: true

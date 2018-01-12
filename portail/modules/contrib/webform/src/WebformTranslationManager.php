@@ -5,6 +5,7 @@ namespace Drupal\webform;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformYaml;
@@ -31,9 +32,16 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
   /**
    * Webform element manager.
    *
-   * @var \Drupal\webform\WebformElementManagerInterface
+   * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
   protected $elementManager;
+
+  /**
+   * An array on translatable properties.
+   *
+   * @var array
+   */
+  protected $translatableProperties;
 
   /**
    * Constructs a WebformTranslationManager object.
@@ -42,7 +50,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    *   The language manager.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration object factory.
-   * @param \Drupal\webform\WebformElementManagerInterface $element_manager
+   * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
    *   The webform element manager.
    */
   public function __construct(LanguageManagerInterface $language_manager, ConfigFactoryInterface $config_factory, WebformElementManagerInterface $element_manager) {
@@ -54,7 +62,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
   /**
    * {@inheritdoc}
    */
-  public function getConfigElements(WebformInterface $webform, $langcode = NULL, $reset = FALSE) {
+  public function getElements(WebformInterface $webform, $langcode = NULL, $reset = FALSE) {
     // Note: Below code return the default languages elements for missing
     // translations.
     $config_override_language = $this->languageManager->getConfigOverrideLanguage();
@@ -91,27 +99,10 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   public function getBaseElements(WebformInterface $webform) {
     $default_langcode = $this->getOriginalLangcode($webform) ?: $this->languageManager->getDefaultLanguage()->getId();
-    $config_elements = $this->getConfigElements($webform, $default_langcode);
+    $config_elements = $this->getElements($webform, $default_langcode);
     $elements = WebformElementHelper::getFlattened($config_elements);
-    $translatable_properties = WebformArrayHelper::addPrefix($this->elementManager->getTranslatableProperties());
     foreach ($elements as $element_key => &$element) {
-      foreach ($element as $property_key => $property_value) {
-        $translatable_property_key = $property_key;
-        // If translatable property key is a sub element (ex: subelement__title)
-        // get the sub element's translatable property key.
-        if (preg_match('/^.*__(.*)$/', $translatable_property_key, $match)) {
-          $translatable_property_key = '#' . $match[1];
-        }
-
-        if (in_array($translatable_property_key, ['#options', '#answers']) && is_string($property_value)) {
-          // Unset options and answers that are webform option ids.
-          unset($element[$property_key]);
-        }
-        elseif (!isset($translatable_properties[$translatable_property_key])) {
-          // Unset none translatble properties.
-          unset($element[$property_key]);
-        }
-      }
+      $this->removeUnTranslatablePropertiesFromElement($element);
       if (empty($element)) {
         unset($elements[$element_key]);
       }
@@ -123,8 +114,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    * {@inheritdoc}
    */
   public function getSourceElements(WebformInterface $webform) {
-    $elements = $this->getBaseElements($webform);
-    return $elements;
+    return $this->getBaseElements($webform);
   }
 
   /**
@@ -132,7 +122,7 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    */
   public function getTranslationElements(WebformInterface $webform, $langcode) {
     $elements = $this->getSourceElements($webform);
-    $translation_elements = $this->getConfigElements($webform, $langcode);
+    $translation_elements = $this->getElements($webform, $langcode);
     if ($elements == $translation_elements) {
       return $elements;
     }
@@ -144,12 +134,66 @@ class WebformTranslationManager implements WebformTranslationManagerInterface {
    * {@inheritdoc}
    */
   public function getOriginalLangcode(WebformInterface $webform) {
-    // NOTE: Can't inject ConfigMapperInterface  because it requires that
+    // NOTE: Can't inject ConfigMapperInterface because it requires that
     // config_translation.module to be installed.
     /** @var \Drupal\config_translation\ConfigMapperInterface $mapper */
     $mapper = \Drupal::service('plugin.manager.config_translation.mapper')->createInstance('webform');
     $mapper->addConfigName('webform.webform.' . $webform->id());
     return $mapper->getLangcode();
+  }
+
+  /****************************************************************************/
+  // Translatable properties helpers.
+  /****************************************************************************/
+
+  /**
+   * Remove untranslatable properties form an element.
+   *
+   * @param array $element
+   *   An element.
+   */
+  protected function removeUnTranslatablePropertiesFromElement(array &$element) {
+    $translatable_properties = $this->getTranslatableProperies();
+
+    $element_type = (isset($element['#type'])) ? $element['#type'] : NULL;
+    foreach ($element as $property_key => $property_value) {
+      $translatable_property_key = $property_key;
+
+      // If translatable property key is a sub element (ex: subelement__title)
+      // get the sub element's translatable property key.
+      if (preg_match('/^.*__(.*)$/', $translatable_property_key, $match)) {
+        $translatable_property_key = '#' . $match[1];
+      }
+
+      if (in_array($translatable_property_key, ['#options', '#answers']) && is_string($property_value)) {
+        // Unset options and answers that are webform option ids.
+        unset($element[$property_key]);
+      }
+      elseif ($translatable_property_key === '#element' && $element_type === 'webform_composite') {
+        foreach ($element[$property_key] as &$composite_element_value) {
+          $this->removeUnTranslatablePropertiesFromElement($composite_element_value);
+        }
+      }
+      elseif (!isset($translatable_properties[$translatable_property_key])) {
+        // Unset none translatable properties.
+        unset($element[$property_key]);
+      }
+    }
+  }
+
+  /**
+   * Get translated properties from element manager.
+   *
+   * @return array
+   *   An array of translated properties prefixed with a hashes (#).
+   */
+  protected function getTranslatableProperies() {
+    if ($this->translatableProperties) {
+      return $this->translatableProperties;
+    }
+
+    $this->translatableProperties = WebformArrayHelper::addPrefix($this->elementManager->getTranslatableProperties());
+    return $this->translatableProperties;
   }
 
 }

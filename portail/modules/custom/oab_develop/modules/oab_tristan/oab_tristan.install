@@ -479,3 +479,10 @@ function oab_tristan_update_8061() {
 function oab_tristan_update_8062() {
     include_once("updates/update_8062.inc");
 }
+
+/**
+ * Reload de la config des Metatags par defaut de la homepage
+ */
+function oab_tristan_update_8063() {
+  oabt_YmlImport('metatag.metatag_defaults.node__homepage.yml');
+}

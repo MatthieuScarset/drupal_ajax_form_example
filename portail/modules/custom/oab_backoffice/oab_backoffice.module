@@ -175,7 +175,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		'node_region_form', 'node_region_edit_form',
 		'node_simple_page_form', 'node_simple_page_edit_form',
 		'node_country_form', 'node_country_edit_form',
-		'node_full_html_form', 'node_full_html_edit_form' ))) {
+		'node_full_html_form', 'node_full_html_edit_form',
+        'node_distributor_form', 'node_distributor_edit_form'))) {
 
 		$form['#attached']['library'][] = 'oab_backoffice/metadata';
 
@@ -307,6 +308,42 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
         $form['elements']['actions']['#submit__label'] = 'Отправить';
     }
+
+
+	//preselection des departements et segments de marché sur les PARTNERS
+	if (in_array($form_id, array( 'node_partner_form' )))
+	{
+		if(isset($form['field_departments'])){
+			//par défaut on sélectionne tous les départements
+			$form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
+		}
+		if(isset($form['field_market_segment'])){
+			//par défaut on sélectionne +50 et +250 salariés
+			$default_label = array();
+			$default_values = array();
+			if($current_language == "fr"){
+				$default_label = array('+ 50 salariés', '+ 250 salariés');
+			}
+			elseif ($current_language == "en"){
+				$default_label = array('+ 50 employees', '+ 250 employees');
+			}
+			if(!empty($default_label)){
+				foreach ($default_label as $label){
+					$query = \Drupal::entityQuery('taxonomy_term');
+					$query->condition('vid', 'market_segments');
+					$query->condition('name', $label);
+					$entity = $query->execute();
+
+					if(!empty($entity)) {
+						$default_values[] = array_pop($entity);
+					}
+				}
+				if(!empty($default_values)){
+					$form['field_market_segment']['widget']['#default_value']  = $default_values;
+				}
+			}
+		}
+	}
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
@@ -570,6 +607,17 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
       $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($node_type : $node_id)"));
     }
   }
+
+    if ($view->id() == 'product_autocomplete') {
+        foreach ($view->result as $i => $result) {
+            #On recupère les données nécessaires
+            $node_lang = $result->_entity->language()->getName();
+            $node_label =  $result->_entity->getTitle();
+            $langcode = strtoupper(substr($node_lang, 0, 2));
+            #On set la nouvelle valeur
+           $view->result[$i]->_entity->get('title')->setValue(array(0=>"$node_label ($langcode)"));
+        }
+    }
 }
 
 /**
