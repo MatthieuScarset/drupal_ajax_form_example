@@ -231,3 +231,10 @@ function oab_dvi_update_8030() {
 function oab_dvi_update_8031() {
     include_once("updates/update_8031.inc");
 }
+
+/**
+ * Rechargement de la vue subhome pour reinit la config sur PRP + Rechargement "home eclairage playlist" pour ajouter un filtre sur les contenus publiés
+ */
+function oab_dvi_update_8032() {
+    include_once("updates/update_8032.inc");
+}
