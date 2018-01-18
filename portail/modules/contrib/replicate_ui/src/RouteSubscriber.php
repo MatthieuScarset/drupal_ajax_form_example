@@ -43,31 +43,39 @@ class RouteSubscriber implements EventSubscriberInterface {
         $base_path = $entity_type->getLinkTemplate('canonical');
         $path = $base_path . '/replicate';
 
-        // Inherit admin route status from edit route, if exists.
-        $is_admin = FALSE;
-        $route_name = "entity.$entity_type_id.edit_form";
-        if ($edit_route = $collection->get($route_name)) {
-          $is_admin = (bool) $edit_route->getOption('_admin_route');
+        $options = [
+          'parameters' => [
+            $entity_type_id => [
+              'type' => 'entity:' . $entity_type_id,
+            ],
+          ],
+        ];
+
+        if ($entity_type_id == 'node') {
+          // We delegate the decision of using the admin theme to
+          // \Drupal\node\EventSubscriber\NodeAdminRouteSubscriber.
+          $options['_node_operation_route'] = TRUE;
+        }
+        else {
+          // Inherit admin route status from the edit route, if it exists.
+          $is_admin = FALSE;
+          $route_name = "entity.$entity_type_id.edit_form";
+          if ($edit_route = $collection->get($route_name)) {
+            $is_admin = (bool) $edit_route->getOption('_admin_route');
+          }
+          $options['_admin_route'] = $is_admin;
         }
 
-        $route = new Route(
-          $path,
-          [
-            '_entity_form' => "$entity_type_id.replicate",
-            'entity_type_id' => $entity_type_id,
-          ],
-          [
-            '_replicate_access' => 'TRUE',
-          ],
-          [
-            'parameters' => [
-              $entity_type_id => [
-                'type' => 'entity:' . $entity_type_id,
-              ],
-            ],
-            '_admin_route' => $is_admin,
-          ]
-        );
+        $defaults = [
+          '_entity_form' => "$entity_type_id.replicate",
+          'entity_type_id' => $entity_type_id,
+        ];
+
+        $requirements = [
+          '_replicate_access' => 'TRUE',
+        ];
+
+        $route = new Route($path, $defaults, $requirements, $options);
 
         $route_name = "entity.$entity_type_id.replicate";
         $collection->add($route_name, $route);

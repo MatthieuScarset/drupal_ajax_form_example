@@ -3,14 +3,13 @@
 namespace Drupal\webform\Tests\Element;
 
 use Drupal\webform\Entity\Webform;
-use Drupal\webform\Tests\WebformTestBase;
 
 /**
  * Tests for entity reference elements.
  *
  * @group Webform
  */
-class WebformElementEntityReferenceTest extends WebformTestBase {
+class WebformElementEntityReferenceTest extends WebformElementTestBase {
 
   /**
    * Modules to enable.
@@ -29,7 +28,7 @@ class WebformElementEntityReferenceTest extends WebformTestBase {
   /**
    * Test entity reference elements.
    */
-  public function testWebformElementEntityReferenceTest() {
+  public function testEntityReferenceTest() {
     $webform = Webform::load('test_element_entity_reference');
 
     // Check render entity_autocomplete.

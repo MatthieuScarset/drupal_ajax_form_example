@@ -11,9 +11,9 @@ use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformElementHelper;
 
 /**
- * Defines a class to validate webform elements.
+ * Webform elements validator.
  */
-class WebformEntityElementsValidator {
+class WebformEntityElementsValidator implements WebformEntityElementsValidatorInterface {
 
   use StringTranslationTrait;
 
@@ -53,13 +53,7 @@ class WebformEntityElementsValidator {
   protected $originalElements;
 
   /**
-   * Validate webform elements.
-   *
-   * @param \Drupal\webform\WebformInterface $webform
-   *   A webform.
-   *
-   * @return array|null
-   *   An array of error messages or NULL is the elements are valid.
+   * {@inheritdoc}
    */
   public function validate(WebformInterface $webform) {
     $this->webform = $webform;
@@ -215,18 +209,23 @@ class WebformEntityElementsValidator {
     $ignored_properties = WebformElementHelper::getIgnoredProperties($this->elements);
     if ($ignored_properties) {
       $messages = [];
-      foreach ($ignored_properties as $ignored_property) {
-        $line_numbers = $this->getLineNumbers('/^\s*(["\']?)' . preg_quote($ignored_property, '/') . '\1\s*:/');
-        $t_args = [
-          '%property' => $ignored_property,
-          '@line_number' => WebformArrayHelper::toString($line_numbers),
-        ];
-        $messages[] = $this->formatPlural(
-          count($line_numbers),
-          'Elements contain an unsupported %property property found on line @line_number.',
-          'Elements contain an unsupported %property property found on lines @line_number.',
-          $t_args
-        );
+      foreach ($ignored_properties as $ignored_property => $ignored_message) {
+        if ($ignored_property != $ignored_message) {
+          $messages[] = $ignored_message;
+        }
+        else {
+          $line_numbers = $this->getLineNumbers('/^\s*(["\']?)' . preg_quote($ignored_property, '/') . '\1\s*:/');
+          $t_args = [
+            '%property' => $ignored_property,
+            '@line_number' => WebformArrayHelper::toString($line_numbers),
+          ];
+          $messages[] = $this->formatPlural(
+            count($line_numbers),
+            'Elements contain an unsupported %property property found on line @line_number.',
+            'Elements contain an unsupported %property property found on lines @line_number.',
+            $t_args
+          );
+        }
       }
       return $messages;
     }
@@ -313,10 +312,10 @@ class WebformEntityElementsValidator {
     $elements = $this->webform->getElementsInitializedAndFlattened();
     $messages = [];
     foreach ($elements as $key => $element) {
-      /** @var \Drupal\webform\WebformElementManagerInterface $element_manager */
+      /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
       $element_manager = \Drupal::service('plugin.manager.webform.element');
       $plugin_id = $element_manager->getElementPluginId($element);
-      /** @var \Drupal\webform\WebformElementInterface $webform_element */
+      /** @var \Drupal\webform\Plugin\WebformElementInterface $webform_element */
       $webform_element = $element_manager->createInstance($plugin_id, $element);
 
       $t_args = [
@@ -343,8 +342,13 @@ class WebformEntityElementsValidator {
    * @see \Drupal\webform\Entity\Webform::getSubmissionForm()
    */
   protected function validateRendering() {
+    // Override Drupal's error and exception handler so that we can capture
+    // all rendering exceptions and display the captured error/exception
+    // message to the user.
+    // @see _webform_entity_element_validate_rendering_error_handler()
+    // @see _webform_entity_element_validate_rendering_exception_handler()
     set_error_handler('_webform_entity_element_validate_rendering_error_handler');
-
+    set_exception_handler('_webform_entity_element_validate_rendering_exception_handler');
     try {
       /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
       $entity_type_manager = \Drupal::service('entity_type.manager');
@@ -356,17 +360,24 @@ class WebformEntityElementsValidator {
         ->getStorage('webform_submission')
         ->create(['webform' => $this->webform]);
 
-      $form_object = $entity_type_manager->getFormObject('webform_submission', 'default');
+      $form_object = $entity_type_manager->getFormObject('webform_submission', 'add');
       $form_object->setEntity($webform_submission);
       $form_state = (new FormState())->setFormState([]);
       $form_builder->buildForm($form_object, $form_state);
       $message = NULL;
     }
+    // PHP 7 introduces Throwable, which covers both Error and
+    // Exception throwables.
+    // @see _drupal_exception_handler
+    catch (\Throwable $error) {
+      $message = $error->getMessage();
+    }
     catch (\Exception $exception) {
       $message = $exception->getMessage();
     }
-
-    set_error_handler('_drupal_error_handler');
+    // Restore  Drupal's error and exception handler.
+    restore_error_handler();
+    restore_exception_handler();
 
     if ($message) {
       $build = [

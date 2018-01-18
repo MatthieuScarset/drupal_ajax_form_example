@@ -8,12 +8,12 @@
  * - flexbox: Determines if Flexbox layout should be applied to the composite
  *   element.
  *
- * @see template_preprocess_webform_creditcard()
+ * @see template_preprocess_webform_composite_creditcard()
  *
  * @ingroup themeable
  */
 #}
-{{ attach_library('webform/webform.element.composite') }}
+{{ attach_library('webform/webform.composite') }}
 {% if flexbox %}
 
   {{  content.warning }}

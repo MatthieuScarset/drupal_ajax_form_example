@@ -12,7 +12,14 @@ class WebformAddress extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  public static function getCompositeElements() {
+  public function getInfo() {
+    return parent::getInfo() + ['#theme' => 'webform_composite_address'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getCompositeElements(array $element) {
     $elements = [];
     $elements['address'] = [
       '#type' => 'textfield',
@@ -30,6 +37,7 @@ class WebformAddress extends WebformCompositeBase {
       '#type' => 'select',
       '#title' => t('State/Province'),
       '#options' => 'state_province_names',
+      '#empty_option' => '',
     ];
     $elements['postal_code'] = [
       '#type' => 'textfield',
@@ -39,6 +47,7 @@ class WebformAddress extends WebformCompositeBase {
       '#type' => 'select',
       '#title' => t('Country'),
       '#options' => 'country_names',
+      '#empty_option' => '',
     ];
     return $elements;
   }

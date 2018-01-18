@@ -2,7 +2,6 @@
 
 namespace Drupal\webform\Tests\Element;
 
-use Drupal\webform\Tests\WebformTestBase;
 use Drupal\webform\Entity\Webform;
 
 /**
@@ -10,7 +9,7 @@ use Drupal\webform\Entity\Webform;
  *
  * @group Webform
  */
-class WebformElementMessageTest extends WebformTestBase {
+class WebformElementMessageTest extends WebformElementTestBase {
 
   /**
    * Webforms to load.
@@ -20,7 +19,7 @@ class WebformElementMessageTest extends WebformTestBase {
   protected static $testWebforms = ['test_element_message'];
 
   /**
-   * Tests building of custom elements.
+   * Tests message element.
    */
   public function testMessage() {
     $webform = Webform::load('test_element_message');

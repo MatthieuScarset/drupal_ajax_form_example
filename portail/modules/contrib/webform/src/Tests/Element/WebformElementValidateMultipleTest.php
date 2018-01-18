@@ -2,14 +2,12 @@
 
 namespace Drupal\webform\Tests\Element;
 
-use Drupal\webform\Tests\WebformTestBase;
-
 /**
  * Tests for webform validate multiple.
  *
  * @group Webform
  */
-class WebformElementValidateMultipleTest extends WebformTestBase {
+class WebformElementValidateMultipleTest extends WebformElementTestBase {
 
   /**
    * Webforms to load.
@@ -21,7 +19,7 @@ class WebformElementValidateMultipleTest extends WebformTestBase {
   /**
    * Tests element validate multiple.
    */
-  public function testElementValidateMultiple() {
+  public function testValidateMultiple() {
     $this->drupalGet('webform/test_element_validate_multiple');
 
     // Check that only three textfields are displayed.

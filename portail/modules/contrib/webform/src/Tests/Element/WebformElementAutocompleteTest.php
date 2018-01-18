@@ -2,14 +2,12 @@
 
 namespace Drupal\webform\Tests\Element;
 
-use Drupal\webform\Tests\WebformTestBase;
-
 /**
  * Tests for webform autocomplete element.
  *
  * @group Webform
  */
-class WebformElementAutocompleteTest extends WebformTestBase {
+class WebformElementAutocompleteTest extends WebformElementTestBase {
 
   /**
    * Webforms to load.
@@ -21,8 +19,10 @@ class WebformElementAutocompleteTest extends WebformTestBase {
   /**
    * Tests autocomplete element.
    */
-  public function testWebformElementAutocomplete() {
+  public function testAutocomplete() {
     global $base_path;
+
+    $this->drupalLogin($this->rootUser);
 
     /* Test #autocomplete property */
 
@@ -33,7 +33,7 @@ class WebformElementAutocompleteTest extends WebformTestBase {
 
     // Check routes data-drupal-selector.
     $this->drupalGet('webform/test_element_autocomplete');
-    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-items" class="form-autocomplete form-text" data-autocomplete-path="' . $base_path . 'webform/test_element_autocomplete/autocomplete/autocomplete_items" type="text" id="edit-autocomplete-items" name="autocomplete_items" value="" size="60" maxlength="255" />');
+    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-items" class="form-autocomplete form-text webform-autocomplete" data-autocomplete-path="' . $base_path . 'webform/test_element_autocomplete/autocomplete/autocomplete_items" type="text" id="edit-autocomplete-items" name="autocomplete_items" value="" size="60" maxlength="255" />');
 
     // Check #autocomplete_items partial match.
     $this->drupalGet('webform/test_element_autocomplete/autocomplete/autocomplete_items', ['query' => ['q' => 'United']]);
@@ -52,7 +52,7 @@ class WebformElementAutocompleteTest extends WebformTestBase {
     // Check autocomplete is not enabled until there is a submission.
     $this->drupalGet('webform/test_element_autocomplete');
     $this->assertNoRaw('<input data-drupal-selector="edit-autocomplete-existing" class="form-autocomplete form-text" data-autocomplete-path="' . $base_path . 'webform/test_element_autocomplete/autocomplete/autocomplete_existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" />');
-    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" class="form-text" />');
+    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" class="form-text webform-autocomplete" />');
 
     // Check #autocomplete_existing no match.
     $this->drupalGet('webform/test_element_autocomplete/autocomplete/autocomplete_existing', ['query' => ['q' => 'abc']]);
@@ -63,8 +63,8 @@ class WebformElementAutocompleteTest extends WebformTestBase {
 
     // Check #autocomplete_existing enabled now that there is submission.
     $this->drupalGet('webform/test_element_autocomplete');
-    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-existing" class="form-autocomplete form-text" data-autocomplete-path="' . $base_path . 'webform/test_element_autocomplete/autocomplete/autocomplete_existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" />');
-    $this->assertNoRaw('<input data-drupal-selector="edit-autocomplete-existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" class="form-text" />');
+    $this->assertRaw('<input data-drupal-selector="edit-autocomplete-existing" class="form-autocomplete form-text webform-autocomplete" data-autocomplete-path="' . $base_path . 'webform/test_element_autocomplete/autocomplete/autocomplete_existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" />');
+    $this->assertNoRaw('<input data-drupal-selector="edit-autocomplete-existing" type="text" id="edit-autocomplete-existing" name="autocomplete_existing" value="" size="60" maxlength="255" class="form-text webform-autocomplete" />');
 
     // Check #autocomplete_existing match.
     $this->drupalGet('webform/test_element_autocomplete/autocomplete/autocomplete_existing', ['query' => ['q' => 'abc']]);

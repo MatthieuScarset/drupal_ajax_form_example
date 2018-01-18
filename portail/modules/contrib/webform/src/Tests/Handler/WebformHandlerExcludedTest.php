@@ -14,10 +14,10 @@ class WebformHandlerExcludedTest extends WebformTestBase {
   /**
    * Test excluded handlers.
    */
-  function testExcludeHandlers() {
+  public function testExcludeHandlers() {
     $this->drupalLogin($this->rootUser);
 
-    /** @var \Drupal\webform\WebformHandlerManagerInterface $handler_manager */
+    /** @var \Drupal\webform\Plugin\WebformHandlerManagerInterface $handler_manager */
     $handler_manager = $this->container->get('plugin.manager.webform.handler');
 
     // Check add mail and handler plugin.
@@ -42,7 +42,7 @@ class WebformHandlerExcludedTest extends WebformTestBase {
     $this->assertResponse(403);
 
     // Exclude the email handler.
-    \Drupal::configFactory()->getEditable('webform.settings')->set('handler.excluded_handlers', ['broken' => 'broken', 'debug' => 'debug', 'email' => 'email', 'remote_post' => 'remote_post'])->save();
+    \Drupal::configFactory()->getEditable('webform.settings')->set('handler.excluded_handlers', ['action' => 'action', 'broken' => 'broken', 'debug' => 'debug', 'email' => 'email', 'remote_post' => 'remote_post', 'settings' => 'settings'])->save();
 
     // Check add mail and handler hidden.
     $this->drupalGet('admin/structure/webform/manage/contact/handlers');

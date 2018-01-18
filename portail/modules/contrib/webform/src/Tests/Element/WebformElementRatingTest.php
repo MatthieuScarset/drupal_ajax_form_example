@@ -2,14 +2,12 @@
 
 namespace Drupal\webform\Tests\Element;
 
-use Drupal\webform\Tests\WebformTestBase;
-
 /**
  * Tests for rating element.
  *
  * @group Webform
  */
-class WebformElementRatingTest extends WebformTestBase {
+class WebformElementRatingTest extends WebformElementTestBase {
 
   /**
    * Webforms to load.
@@ -21,7 +19,7 @@ class WebformElementRatingTest extends WebformTestBase {
   /**
    * Test rating element.
    */
-  public function testRatingElement() {
+  public function testRating() {
     $this->drupalGet('webform/test_element_rating');
 
     // Check basic rating display.

@@ -34,7 +34,7 @@ class WebformEmailConfirm extends FormElement {
         [$class, 'preRenderCompositeFormElement'],
       ],
       '#element_validate' => [[$class, 'validateWebformEmailConfirm']],
-      '#theme_wrappers' => ['container'],
+      '#theme_wrappers' => ['form_element'],
       '#required' => FALSE,
     ];
   }
@@ -99,11 +99,14 @@ class WebformEmailConfirm extends FormElement {
     // Don't require the main element.
     $element['#required'] = FALSE;
 
+    // Hide title and description from being display.
+    $element['#title_display'] = 'invisible';
+    $element['#description_display'] = 'invisible';
+
     // Remove properties that are being applied to the sub elements.
-    unset($element['#title']);
-    unset($element['#description']);
     unset($element['#maxlength']);
     unset($element['#attributes']);
+    unset($element['#description']);
     return $element;
   }
 
@@ -146,7 +149,7 @@ class WebformEmailConfirm extends FormElement {
     }
 
     // Set #title for other validation callbacks.
-    // @see \Drupal\webform\WebformElementBase::validateUnique
+    // @see \Drupal\webform\Plugin\WebformElementBase::validateUnique
     if (isset($element['mail_1']['#title'])) {
       $element['#title'] = $element['mail_1']['#title'];
     }

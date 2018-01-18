@@ -5,11 +5,12 @@ namespace Drupal\webform\Plugin\WebformElement;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element as RenderElement;
+use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\Element\WebformMapping as WebformMappingElement;
 use Drupal\webform\Entity\WebformOptions;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -33,9 +34,12 @@ class WebformMapping extends WebformElementBase {
   public function getDefaultProperties() {
     return [
       'title' => '',
-      // General settings.
-      'description' => '',
       'default_value' => [],
+      // Description/Help.
+      'help' => '',
+      'description' => '',
+      'more' => '',
+      'more_title' => '',
       // Form display.
       'title_display' => '',
       'description_display' => '',
@@ -45,6 +49,8 @@ class WebformMapping extends WebformElementBase {
       'required_error' => '',
       // Submission display.
       'format' => $this->getItemDefaultFormat(),
+      'format_html' => '',
+      'format_text' => '',
       // Mapping settings.
       'arrow' => '→',
       'source' => [],
@@ -83,7 +89,17 @@ class WebformMapping extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
+    parent::prepare($element, $webform_submission);
+    if (isset($element['#destination__description'])) {
+      $element['#destination__description'] = WebformHtmlEditor::checkMarkup($element['#destination__description']);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = $this->getValue($element, $webform_submission, $options);
 
     $element += [
@@ -156,13 +172,12 @@ class WebformMapping extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
-    $value = $this->getValue($element, $webform_submission, $options);
-
-    // Return empty value.
-    if ($value === '' || $value === NULL || (is_array($value) && empty($value))) {
+  protected function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    if ($this->hasValue($element, $webform_submission, $options)) {
       return '';
     }
+
+    $value = $this->getValue($element, $webform_submission, $options);
 
     $element += [
       '#destination' => [],
@@ -193,6 +208,24 @@ class WebformMapping extends WebformElementBase {
         return implode(PHP_EOL, $list);
 
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preview() {
+    return parent::preview() + [
+      '#source' => [
+        'one' => $this->t('One'),
+        'two' => $this->t('Two'),
+        'three' => $this->t('Three'),
+      ],
+      '#destination' => [
+        'four' => $this->t('Four'),
+        'five' => $this->t('Five'),
+        'six' => $this->t('Six'),
+      ],
+    ];
   }
 
   /**

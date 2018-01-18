@@ -3,14 +3,13 @@
 namespace Drupal\webform\Tests\Element;
 
 use Drupal\webform\Entity\Webform;
-use Drupal\webform\Tests\WebformTestBase;
 
 /**
  * Tests for webform validate minlength.
  *
  * @group Webform
  */
-class WebformElementValidateMinlengthTest extends WebformTestBase {
+class WebformElementValidateMinlengthTest extends WebformElementTestBase {
 
   /**
    * Webforms to load.
@@ -22,7 +21,7 @@ class WebformElementValidateMinlengthTest extends WebformTestBase {
   /**
    * Tests element validate minlength.
    */
-  public function testElementValidateMinlength() {
+  public function testValidateMinlength() {
     $webform = Webform::load('test_element_validate_minlength');
 
     // Check minlength validation.

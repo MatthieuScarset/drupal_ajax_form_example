@@ -26,6 +26,38 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
   /**
    * {@inheritdoc}
    */
+  public static function defaultSettings() {
+    return [
+      'default_data' => TRUE,
+    ] + parent::defaultSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+    $element = parent::settingsForm($form, $form_state);
+    $element['default_data'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Enable default submission data (YAML)'),
+      '#description' => t('If checked, site builders will be able to define default submission data (YAML)'),
+      '#default_value' => $this->getSetting('default_data'),
+    ];
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $summary = parent::settingsSummary();
+    $summary[] = t('Default submission data: @default_data', ['@default_data' => $this->getSetting('default_data') ? $this->t('Yes') : $this->t('No')]);
+    return $summary;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     if (!isset($items[$delta]->status)) {
       $items[$delta]->status = WebformInterface::STATUS_OPEN;
@@ -33,7 +65,12 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
 
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
+    // Get field name.
     $field_name = $items->getName();
+
+    // Get field input name from field parents, field name, and the delta.
+    $field_parents = array_merge($element['target_id']['#field_parents'], [$field_name, $delta]);
+    $field_input_name = (array_shift($field_parents)) . ('[' . implode('][', $field_parents) . ']');
 
     // Set element 'target_id' default properties.
     $element['target_id'] += [
@@ -59,6 +96,7 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
         WebformInterface::STATUS_CLOSED => $this->t('Closed'),
         WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled'),
       ],
+      '#options_display' => 'side_by_side',
       '#default_value' => $items[$delta]->status,
     ];
 
@@ -67,12 +105,9 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
       '#title' => $element['target_id']['#title'],
       '#title_display' => 'invisible',
       '#input' => FALSE,
-      '#description' => $this->t('If the open date/time is left blank, this webform will immediately be opened.') .
-        '<br/>' .
-        $this->t('If the close date/time is left blank, this webform will never be closed.'),
       '#states' => [
         'visible' => [
-          'input[name="' . $field_name . '[' . $delta . '][settings][status]"]' => ['value' => WebformInterface::STATUS_SCHEDULED],
+          'input[name="' . $field_input_name . '[settings][status]"]' => ['value' => WebformInterface::STATUS_SCHEDULED],
         ],
       ],
     ];
@@ -82,6 +117,11 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
       '#default_value' => $items[$delta]->open ? DrupalDateTime::createFromTimestamp(strtotime($items[$delta]->open)) : NULL,
       '#prefix' => '<div class="container-inline form-item">',
       '#suffix' => '</div>',
+      '#help' => FALSE,
+      '#description' => [
+        '#type' => 'webform_help',
+        '#help' => $this->t('If the open date/time is left blank, this form will immediately be opened.'),
+      ],
     ];
     $element['settings']['scheduled']['close'] = [
       '#type' => 'datetime',
@@ -89,19 +129,25 @@ class WebformEntityReferenceAutocompleteWidget extends EntityReferenceAutocomple
       '#default_value' => $items[$delta]->close ? DrupalDateTime::createFromTimestamp(strtotime($items[$delta]->close)) : NULL,
       '#prefix' => '<div class="container-inline form-item">',
       '#suffix' => '</div>',
+      '#help' => FALSE,
+      '#description' => [
+        '#type' => 'webform_help',
+        '#help' => $this->t('If the close date/time is left blank, this webform will never be closed.'),
+      ],
     ];
 
-    $element['settings']['default_data'] = [
-      '#type' => 'webform_codemirror',
-      '#mode' => 'yaml',
-      '#title' => $this->t('Default submission data (YAML)'),
-      '#description' => $this->t('Enter submission data as name and value pairs which will be used to prepopulate the selected webform. You may use tokens.'),
-      '#default_value' => $items[$delta]->default_data,
-    ];
-
-    /** @var \Drupal\webform\WebformTokenManagerInterface $token_manager */
-    $token_manager = \Drupal::service('webform.token_manager');
-    $element['settings']['token_tree_link'] = $token_manager->buildTreeLink();
+    if ($this->getSetting('default_data')) {
+      $element['settings']['default_data'] = [
+        '#type' => 'webform_codemirror',
+        '#mode' => 'yaml',
+        '#title' => $this->t('Default submission data (YAML)'),
+        '#description' => $this->t('Enter submission data as name and value pairs which will be used to prepopulate the selected webform. You may use tokens.'),
+        '#default_value' => $items[$delta]->default_data,
+      ];
+      /** @var \Drupal\webform\WebformTokenManagerInterface $token_manager */
+      $token_manager = \Drupal::service('webform.token_manager');
+      $element['settings']['token_tree_link'] = $token_manager->buildTreeLink();
+    }
 
     return $element;
   }

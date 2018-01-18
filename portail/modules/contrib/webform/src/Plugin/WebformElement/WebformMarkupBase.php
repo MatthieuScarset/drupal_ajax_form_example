@@ -3,13 +3,14 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementBase;
+use Drupal\webform\Plugin\WebformElementDisplayOnInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
  * Provides a base 'markup' element.
  */
-abstract class WebformMarkupBase extends WebformElementBase implements WebformDisplayOnInterface {
+abstract class WebformMarkupBase extends WebformElementBase implements WebformElementDisplayOnInterface {
 
   use WebformDisplayOnTrait;
 
@@ -24,7 +25,7 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformDi
    * {@inheritdoc}
    */
   public function isContainer(array $element) {
-    return TRUE;
+    return FALSE;
   }
 
   /**
@@ -38,14 +39,28 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformDi
   }
 
   /**
- * {@inheritdoc}
- */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission) {
+   * {@inheritdoc}
+   */
+  protected function getDefaultBaseProperties() {
+    $properties = parent::getDefaultBaseProperties();
+    unset($properties['prepopulate']);
+    return $properties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Hide element if it should not be displayed on 'form'.
     if (!$this->isDisplayOn($element, static::DISPLAY_ON_FORM)) {
       $element['#access'] = FALSE;
+    }
+
+    // Add form element wrapper.
+    if ($this->hasProperty('wrapper_attributes')) {
+      $element['#theme_wrappers'][] = 'form_element';
     }
   }
 
@@ -65,7 +80,7 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformDi
 
       // Since we are not passing this element to the
       // webform_container_base_html template we need to replace the default
-      // sub elements with the value (ie renderable sub elements).
+      // sub elements with the value (i.e. renderable sub elements).
       if (is_array($value)) {
         $element = $value + $element;
       }
@@ -93,7 +108,7 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformDi
 
       // Since we are not passing this element to the
       // webform_container_base_text template we need to replace the default
-      // sub elements with the value (ie renderable sub elements).
+      // sub elements with the value (i.e. renderable sub elements).
       if (is_array($value)) {
         $element = $value + $element;
       }

@@ -3,11 +3,11 @@
 namespace Drupal\webform\Form;
 
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\SubformState;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
-use Drupal\webform\WebformDialogTrait;
-use Drupal\webform\WebformHandlerInterface;
+use Drupal\webform\Plugin\WebformHandlerInterface;
+use Drupal\webform\Utility\WebformFormHelper;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 abstract class WebformHandlerFormBase extends FormBase {
 
-  use WebformDialogTrait;
+  use WebformDialogFormTrait;
 
   /**
    * The webform.
@@ -28,7 +28,7 @@ abstract class WebformHandlerFormBase extends FormBase {
   /**
    * The webform handler.
    *
-   * @var \Drupal\webform\WebformHandlerInterface
+   * @var \Drupal\webform\Plugin\WebformHandlerInterface
    */
   protected $webformHandler;
 
@@ -84,12 +84,22 @@ abstract class WebformHandlerFormBase extends FormBase {
       }
     }
 
+    // Add meta data to webform handler form.
+    // This information makes it a little easier to alter a handler's form.
+    $form['#webform_id'] = $this->webform->id();
+    $form['#webform_handler_id'] = $this->webformHandler->getHandlerId();
+    $form['#webform_handler_plugin_id'] = $this->webformHandler->getPluginId();
+
     $request = $this->getRequest();
 
     $form['description'] = [
-      '#markup' => $this->webformHandler->description(),
-      '#prefix' => '<p>',
-      '#suffix' => '</p>',
+      '#type' => 'container',
+      'text' => [
+        '#markup' => $this->webformHandler->description(),
+        '#prefix' => '<p>',
+        '#suffix' => '</p>',
+      ],
+      '#weight' => -20,
     ];
 
     $form['id'] = [
@@ -97,7 +107,38 @@ abstract class WebformHandlerFormBase extends FormBase {
       '#value' => $this->webformHandler->getPluginId(),
     ];
 
-    $form['status'] = [
+    $form['general'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('General settings'),
+      '#weight' => -10,
+    ];
+    $form['general']['label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Title'),
+      '#maxlength' => 255,
+      '#default_value' => $this->webformHandler->label(),
+      '#required' => TRUE,
+      '#attributes' => ['autofocus' => 'autofocus'],
+    ];
+    $form['general']['handler_id'] = [
+      '#type' => 'machine_name',
+      '#maxlength' => 64,
+      '#description' => $this->t('A unique name for this handler instance. Must be alpha-numeric and underscore separated.'),
+      '#default_value' => $this->webformHandler->getHandlerId() ?: $this->getUniqueMachineName($this->webformHandler),
+      '#required' => TRUE,
+      '#disabled' => $this->webformHandler->getHandlerId() ? TRUE : FALSE,
+      '#machine_name' => [
+        'source' => ['general', 'label'],
+        'exists' => [$this, 'exists'],
+      ],
+    ];
+
+    $form['advanced'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Advanced settings'),
+      '#weight' => -10,
+    ];
+    $form['advanced']['status'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable the %name handler.', ['%name' => $this->webformHandler->label()]),
       '#return_value' => TRUE,
@@ -106,28 +147,14 @@ abstract class WebformHandlerFormBase extends FormBase {
       '#disabled' => ($this->webformHandler->getPluginId() == 'broken'),
     ];
 
-    $form['label'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Title'),
-      '#maxlength' => 255,
-      '#default_value' => $this->webformHandler->label(),
-      '#required' => TRUE,
-      '#attributes' => ['autofocus' => 'autofocus'],
+    $form['#parents'] = [];
+    $form['settings'] = [
+      '#tree' => TRUE,
+      '#parents' => ['settings'],
     ];
+    $subform_state = SubformState::createForSubform($form['settings'], $form, $form_state);
+    $form['settings'] = $this->webformHandler->buildConfigurationForm($form['settings'], $subform_state);
 
-    $form['handler_id'] = [
-      '#type' => 'machine_name',
-      '#maxlength' => 64,
-      '#description' => $this->t('A unique name for this handler instance. Must be alpha-numeric and underscore separated.'),
-      '#default_value' => $this->webformHandler->getHandlerId() ?: $this->getUniqueMachineName($this->webformHandler),
-      '#required' => TRUE,
-      '#disabled' => $this->webformHandler->getHandlerId() ? TRUE : FALSE,
-      '#machine_name' => [
-        'exists' => [$this, 'exists'],
-      ],
-    ];
-
-    $form['settings'] = $this->webformHandler->buildConfigurationForm([], $form_state);
     // Get $form['settings']['#attributes']['novalidate'] and apply it to the
     // $form.
     // This allows handlers with hide/show logic to skip HTML5 validation.
@@ -136,6 +163,25 @@ abstract class WebformHandlerFormBase extends FormBase {
       $form['#attributes']['novalidate'] = 'novalidate';
     }
     $form['settings']['#tree'] = TRUE;
+
+    // Conditional logic.
+    if ($this->webformHandler->supportsConditions()) {
+      $form['conditional_logic'] = [
+        '#type' => 'fieldset',
+        '#title' => $this->t('Conditional logic'),
+      ];
+      $form['conditional_logic']['conditions'] = [
+        '#type' => 'webform_element_states',
+        '#state_options' => [
+          'enabled' => $this->t('Enabled'),
+          'disabled' => $this->t('Disabled'),
+        ],
+        '#selector_options' => $webform->getElementsSelectorOptions(),
+        '#selector_other' => FALSE,
+        '#multiple' => FALSE,
+        '#default_value' => $this->webformHandler->getConditions(),
+      ];
+    }
 
     // Check the URL for a weight, then the webform handler,
     // otherwise use default.
@@ -151,7 +197,28 @@ abstract class WebformHandlerFormBase extends FormBase {
       '#button_type' => 'primary',
     ];
 
-    return $this->buildFormDialog($form, $form_state);
+    // Build tabs.
+    $tabs = [
+      'conditions' => [
+        'title' => $this->t('Conditions'),
+        'elements' => [
+          'conditional_logic',
+        ],
+        'weight' => 10,
+      ],
+      'advanced' => [
+        'title' => $this->t('Advanced'),
+        'elements' => [
+          'advanced',
+          'additional',
+          'development',
+        ],
+        'weight' => 20,
+      ],
+    ];
+    $form = WebformFormHelper::buildTabs($form, $tabs);
+
+    return $this->buildDialogForm($form, $form_state);
   }
 
   /**
@@ -160,15 +227,14 @@ abstract class WebformHandlerFormBase extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // The webform handler configuration is stored in the 'settings' key in
     // the webform, pass that through for validation.
-    $settings = $form_state->getValue('settings') ?: [];
-    $handler_state = (new FormState())->setValues($settings);
-    $this->webformHandler->validateConfigurationForm($form, $handler_state);
+    $subform_state = SubformState::createForSubform($form['settings'], $form, $form_state);
+    $this->webformHandler->validateConfigurationForm($form, $subform_state);
 
     // Process handler state webform errors.
-    $this->processHandlerFormErrors($handler_state, $form_state);
+    $this->processHandlerFormErrors($subform_state, $form_state);
 
     // Update the original webform values.
-    $form_state->setValue('settings', $handler_state->getValues());
+    $form_state->setValue('settings', $subform_state->getValues());
   }
 
   /**
@@ -179,16 +245,23 @@ abstract class WebformHandlerFormBase extends FormBase {
 
     // The webform handler configuration is stored in the 'settings' key in
     // the webform, pass that through for submission.
-    $handler_data = (new FormState())->setValues($form_state->getValue('settings'));
+    $subform_state = SubformState::createForSubform($form['settings'], $form, $form_state);
+    $this->webformHandler->submitConfigurationForm($form, $subform_state);
 
-    $this->webformHandler->submitConfigurationForm($form, $handler_data);
     // Update the original webform values.
-    $form_state->setValue('settings', $handler_data->getValues());
+    $form_state->setValue('settings', $subform_state->getValues());
 
     $this->webformHandler->setHandlerId($form_state->getValue('handler_id'));
     $this->webformHandler->setLabel($form_state->getValue('label'));
     $this->webformHandler->setStatus($form_state->getValue('status'));
     $this->webformHandler->setWeight($form_state->getValue('weight'));
+    // Clear conditions if conditions or handler is disabled.
+    if (!$this->webformHandler->supportsConditions() || $this->webformHandler->isDisabled()) {
+      $this->webformHandler->setConditions([]);
+    }
+    else {
+      $this->webformHandler->setConditions($form_state->getValue('conditions'));
+    }
 
     if ($this instanceof WebformHandlerAddForm) {
       $this->webform->addWebformHandler($this->webformHandler);
@@ -199,20 +272,13 @@ abstract class WebformHandlerFormBase extends FormBase {
       drupal_set_message($this->t('The webform handler was successfully updated.'));
     }
 
-    $form_state->setRedirectUrl($this->getRedirectUrl());
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getRedirectUrl() {
-    return $this->webform->toUrl('handlers-form');
+    $form_state->setRedirectUrl($this->webform->toUrl('handlers', ['query' => ['update' => $this->webformHandler->getHandlerId()]]));
   }
 
   /**
    * Generates a unique machine name for a webform handler instance.
    *
-   * @param \Drupal\webform\WebformHandlerInterface $handler
+   * @param \Drupal\webform\Plugin\WebformHandlerInterface $handler
    *   The webform handler.
    *
    * @return string

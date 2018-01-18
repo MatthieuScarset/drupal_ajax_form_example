@@ -8,7 +8,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformDialogHelper;
-use Drupal\webform\WebformHandlerInterface;
+use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,6 +74,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
           $definition['category'],
           (isset($excluded_handlers[$plugin_id])) ? $this->t('Yes') : $this->t('No'),
           ($definition['cardinality'] == -1) ? $this->t('Unlimited') : $definition['cardinality'],
+          $definition['conditions'] ? $this->t('Yes') : $this->t('No'),
           $definition['submission'] ? $this->t('Required') : $this->t('Optional'),
           $definition['results'] ? $this->t('Processed') : $this->t('Ignored'),
           $definition['provider'],
@@ -83,9 +84,27 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         $rows[$plugin_id]['class'] = ['color-warning'];
       }
     }
-
     ksort($rows);
-    return [
+
+    $build = [];
+
+    // Settings
+    $build['settings'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Edit configuration'),
+      '#url' => Url::fromRoute('webform.config.handlers'),
+      '#attributes' => ['class' => ['button', 'button--small'], 'style' => 'float: right'],
+    ];
+
+    // Display info.
+    $build['info'] = [
+      '#markup' => $this->t('@total handlers', ['@total' => count($rows)]),
+      '#prefix' => '<p>',
+      '#suffix' => '</p>',
+    ];
+
+    // Handlers.
+    $build['webform_handlers'] = [
       '#type' => 'table',
       '#header' => [
         $this->t('ID'),
@@ -94,6 +113,7 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         $this->t('Category'),
         $this->t('Excluded'),
         $this->t('Cardinality'),
+        $this->t('Conditional'),
         $this->t('Database'),
         $this->t('Results'),
         $this->t('Provided by'),
@@ -101,6 +121,8 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       '#rows' => $rows,
       '#sticky' => TRUE,
     ];
+
+    return $build;
   }
 
   /**
@@ -141,15 +163,28 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         continue;
       }
 
+      $is_submission_required = ($definition['submission'] === WebformHandlerInterface::SUBMISSION_REQUIRED);
+      $is_results_disabled = $webform->getSetting('results_disabled');
+
       $row = [];
 
-      $row['title']['data'] = [
-        '#type' => 'inline_template',
-        '#template' => '<div class="webform-form-filter-text-source">{{ label }}</div>',
-        '#context' => [
-          'label' => $definition['label'],
-        ],
-      ];
+      if ($is_submission_required && $is_results_disabled) {
+        $row['title']['data'] = [
+          '#markup' => $definition['label'],
+          '#prefix' => '<div class="webform-form-filter-text-source">',
+          '#suffix' => '</div>',
+        ];
+      }
+      else {
+        $row['title']['data'] = [
+          '#type' => 'link',
+          '#title' => $definition['label'],
+          '#url' => Url::fromRoute('entity.webform.handler.add_form', ['webform' => $webform->id(), 'webform_handler' => $plugin_id]),
+          '#attributes' => WebformDialogHelper::getModalDialogAttributes(800),
+          '#prefix' => '<div class="webform-form-filter-text-source">',
+          '#suffix' => '</div>',
+        ];
+      }
 
       $row['description'] = [
         'data' => [
@@ -160,8 +195,6 @@ class WebformPluginHandlerController extends ControllerBase implements Container
       $row['category'] = $definition['category'];
 
       // Check submission required.
-      $is_submission_required = ($definition['submission'] === WebformHandlerInterface::SUBMISSION_REQUIRED);
-      $is_results_disabled = $webform->getSetting('results_disabled');
       if ($is_submission_required && $is_results_disabled) {
         $row['operations']['data'] = [
           '#type' => 'html_tag',
@@ -179,6 +212,8 @@ class WebformPluginHandlerController extends ControllerBase implements Container
         $row['operations']['data'] = [
           '#type' => 'operations',
           '#links' => $links,
+          '#prefix' => '<div class="webform-dropbutton">',
+          '#suffix' => '</div>',
         ];
       }
 
