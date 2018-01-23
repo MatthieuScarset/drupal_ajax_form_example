@@ -783,7 +783,11 @@ aside.right-column > .region{
 .item-related-content {
   padding: 0px 20px 40px 20px;
   width: 30%;
-  float: left;
+  float: none;
+    display: table-cell !important;
+    background-color: white;
+    background-clip: content-box;
+    vertical-align: top;
 }
 
 #slider_direct_access{
