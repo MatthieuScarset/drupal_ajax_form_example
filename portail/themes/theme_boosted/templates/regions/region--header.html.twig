@@ -103,6 +103,18 @@
           <div class="container-fluid-navbar">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="hidden-lg pull-right menu-xs" >
+
+                  <div class="menu-loupe-xs menu-mss-xs">
+                      <section id="block-righticonblock" class="contextual-region block clearfix">
+                          {% if (language == 'en') %}
+                              <a href="https://my-service-space.orange-business.com/MSSLoginForm/public/welcome-action.do" target="_self" title="My Service Space" alt="My Service Space" class="link-white"><i class="glyphicon icon icon-avatar"></i></a>
+                          {% endif %}
+                          {% if (language == 'fr') %}
+                              <a href="https://espaceclient.orange-business.com/group/ece2/home?codeContexte=eceDefault" target="_self" title="Espace Client Entreprise" alt="Espace Client Entreprise" class="link-white"><i class="glyphicon icon icon-avatar"></i></a>
+                          {% endif %}
+                      </section>
+                  </div>
+
                   <div class="menu-loupe-xs">
                       {{ elements.righticonblock }}
                   </div>

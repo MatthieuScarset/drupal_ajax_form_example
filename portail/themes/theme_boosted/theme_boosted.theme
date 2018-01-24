@@ -18,7 +18,6 @@ function theme_boosted_preprocess_html(&$variables) {
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
-
 }
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -222,6 +221,12 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
 }
+
+function theme_boosted_preprocess_region(&$variables) {
+    // Create the $content variable that templates expect.
+    $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+}
+
 
 function theme_boosted_preprocess_views_view(&$variables){
   $view = $variables['view'];
