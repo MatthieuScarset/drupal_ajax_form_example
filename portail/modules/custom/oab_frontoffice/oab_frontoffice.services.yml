@@ -15,3 +15,8 @@ services:
       class: Drupal\oab_frontoffice\EventSubscriber\SmartRedirectionEvent
       tags:
          - { name: event_subscriber }
+#  oab_frontoffice.event_subscriber:
+#      class: Drupal\oab_frontoffice\EventSubscriber\SubhomeUrlAlterEvent
+#      tags:
+#        - { name: event_subscriber }
+

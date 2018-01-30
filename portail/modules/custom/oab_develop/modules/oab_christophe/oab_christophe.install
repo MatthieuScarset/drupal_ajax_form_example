@@ -337,3 +337,17 @@ function oab_christophe_update_8049() {
   oabt_YmlImport('core.entity_form_display.node.office.default.yml');
   oabt_YmlImport('views.view.offices_map_view.yml');
 }
+
+/**
+ *  RUBYPORTAILOBS-3212 - traduction de la date de scheduled
+ */
+function oab_christophe_update_8050() {
+  include_once("updates/update_8050.inc");
+}
+
+/**
+ *  RUBYPORTAILOBS-3186 - modification des subhomes pour avoir des parametres dans l'url
+ */
+function oab_christophe_update_8051() {
+  include_once("updates/update_8051.inc");
+}
