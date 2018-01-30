@@ -238,3 +238,10 @@ function oab_dvi_update_8031() {
 function oab_dvi_update_8032() {
     include_once("updates/update_8032.inc");
 }
+
+/**
+ * Creation nouvelle taxonomie market segment dvi
+ */
+function oab_dvi_update_8033() {
+	include_once("updates/update_8033.inc");
+}
