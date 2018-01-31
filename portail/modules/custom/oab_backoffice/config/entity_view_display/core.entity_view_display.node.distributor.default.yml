@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.distributor.field_header_title
     - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
+    - field.field.node.distributor.field_market_segment_dvi
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
     - field.field.node.distributor.field_navigation_link
@@ -154,6 +155,7 @@ hidden:
   field_email_address: true
   field_highlight: true
   field_market_segment: true
+  field_market_segment_dvi: true
   field_meta_description: true
   field_meta_title: true
   field_phone_number: true

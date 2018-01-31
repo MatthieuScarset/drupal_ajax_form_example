@@ -12,7 +12,9 @@ dependencies:
     - field.field.node.distributor.field_display_title
     - field.field.node.distributor.field_email_address
     - field.field.node.distributor.field_header_title
+    - field.field.node.distributor.field_highlight
     - field.field.node.distributor.field_market_segment
+    - field.field.node.distributor.field_market_segment_dvi
     - field.field.node.distributor.field_meta_description
     - field.field.node.distributor.field_meta_title
     - field.field.node.distributor.field_navigation_link
@@ -93,6 +95,7 @@ third_party_settings:
         - field_solution
         - field_departments
         - field_subhome
+        - field_market_segment_dvi
       parent_name: group_onglets
       weight: 9
       format_type: tab
@@ -197,6 +200,12 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_market_segment_dvi:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_meta_description:
     weight: 7
     settings:
@@ -317,5 +326,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
 hidden:
+  field_highlight: true
   promote: true
   sticky: true
