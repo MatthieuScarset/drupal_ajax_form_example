@@ -3,7 +3,7 @@ namespace Drupal\oab_dvi;
 
 use Reflection;
 use ReflectionClass;
-
+use \Drupal\taxonomy\Entity\Term;
 
 abstract class DviHelper {
 
@@ -18,10 +18,10 @@ abstract class DviHelper {
      * Nom Term
      * Langue du term en 2 lettres
      */
-    const MS_U50_EMPLOYEES_EN = "- 50 employees";
+    /*const MS_U50_EMPLOYEES_EN = "- 50 employees";
     const MS_U50_EMPLOYEES_FR = "moins-50-salaries";
     const MS_PUBLIC_SECTOR_EN = "Public Sector";
-    const MS_PUBLIC_SECTOR_FR = "secteur-public";
+    const MS_PUBLIC_SECTOR_FR = "secteur-public";*/
 
 
 
@@ -33,6 +33,10 @@ abstract class DviHelper {
      * VARIABLES UTILES DANS DviHelper
      */
     private static $default_field_market_segment = 'field_market_segment';
+    private static $ms_vocabulary_name = 'market_segments_dvi';
+
+    ##Pour le terme de la taxo Subhome pour produits dvi
+    ## => Faire une fonction pour récuperer le tid dans la config, puis en récuperer la
 
 
 ################################
@@ -43,33 +47,51 @@ abstract class DviHelper {
      * Renvoie la liste des constantes définies
      * @return array liste des contraintes
      */
-    private static function getConstants() {
+    /*private static function getConstants() {
         $oClass = new ReflectionClass(__CLASS__);
         return $oClass->getConstants();
-    }
+    }*/
 
     /**
      * Retourne sous forme de tableau construit selon la langue, tous les termes de taxo de Market Segment
      * @return array [ LANG => [values], LANG => [$values] ]
      */
-    private static function getMS_all() {
+    public static function getMS_all() {
 
         $return = array();
-        foreach (self::getConstants() as $constName => $value) {
+        /*foreach (self::getConstants() as $constName => $value) {
             ##Je check si c'est des MarketSegment
             if (substr($constName, 0,2) == "MS") {
                 $return[substr($constName, strlen($constName)-2,strlen($constName))][] = $value;
             }
-        }
+        }*/
 
+        $query = \Drupal::entityQuery('taxonomy_term');
+        $query->condition('vid', "market_segments");
+        $entities = $query->execute();
+
+        $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($entities);
+
+
+        foreach ($terms as $term) {
+            $return[$term->get('langcode')][] = $term->get('name');
+        }
+        var_dump($return);
         return $return;
+
     }
 
+
+    private static function getProductDviSubhomeTid () {
+        $config = \Drupal::config('oab.subhomes');
+        return $config->get('product_dvi_term_tid');
+    }
 
 ################################
 ################################
 ################################
 ## PUBLICS FUNCTIONS
+
     /**
      * Renvoie les termes de taxo sous forme de tableau. Possibilité de trier/filtrer par langue
      * params :
