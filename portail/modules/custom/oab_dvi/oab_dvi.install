@@ -256,3 +256,10 @@ function oab_dvi_update_8033() {
 function oab_dvi_update_8034() {
 	include_once("updates/update_8034.inc");
 }
+/**
+ * Creation nouveau term de taxo subhome
+ */
+
+function oab_dvi_update_8035() {
+    include_once("updates/update_8035.inc");
+}
