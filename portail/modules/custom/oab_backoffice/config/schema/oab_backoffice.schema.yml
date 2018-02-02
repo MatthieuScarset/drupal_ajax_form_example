@@ -23,6 +23,9 @@ oab.subhomes:
     product_term_tid:
       type: label
       label: 'Product term id'
+    product_dvi_term_tid:
+      type: label
+      label: 'Product DVI term id'
     press_meta:
       type: label
       label: 'Press meta title'
