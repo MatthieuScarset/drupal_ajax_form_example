@@ -11,3 +11,8 @@
 
 oabt_YmlImport("views.view.product_autocomplete.yml");
 oabt_YmlImport("views.view.subhomes.yml");
+
+
+##Création du l'URL pour la page catalogue DVI
+\Drupal::service('path.alias_storage')->save("/subhome_catalogue_dvi", "/ventes-indirectes/produits");
+\Drupal::service('path.alias_storage')->save("/subhome_catalogue_dvi", "/ventes-indirectes/produits", "fr");
