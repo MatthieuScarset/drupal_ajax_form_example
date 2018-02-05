@@ -22,8 +22,12 @@ abstract class DviHelper {
     const MS_U50_EMPLOYEES_FR = "moins-50-salaries";
     const MS_PUBLIC_SECTOR_EN = "Public Sector";
     const MS_PUBLIC_SECTOR_FR = "secteur-public";
-
-
+    const SUBHOME_PRODUIT_DVI_TERM_EN = 'Products DVI';
+    const SUBHOME_PRODUIT_DVI_TERM_FR = 'Produits DVI';
+    const FIELD_SUBHOME_NAME = 'field_subhome';
+    const FIELD_DVI_MARKET_SEGMENT_NAME = 'field_market_segment_dvi';
+    const FIELD_IS_DVI_PRODUCT_NAME = 'field_is_dvi_product';
+    const DVI_PRODUCT_URL = 'ventes-indirectes';
 
 ################################
 ################################
@@ -32,7 +36,9 @@ abstract class DviHelper {
     /**
      * VARIABLES UTILES DANS DviHelper
      */
-    private static $default_field_market_segment = 'field_market_segment';
+    #private static $default_field_market_segment = 'field_market_segment';
+    private static $subhome_field_name = 'field_subhome';
+    private static $default_field_market_segment = 'field_market_segment_dvi';
 
 
 ################################
@@ -66,10 +72,18 @@ abstract class DviHelper {
     }
 
 
+    public static function getProductDviSubhomeTid () {
+        $config = \Drupal::config('oab.subhomes');
+        return $config->get('product_dvi_term_tid');
+    }
+
+
 ################################
 ################################
 ################################
 ## PUBLICS FUNCTIONS
+
+
     /**
      * Renvoie les termes de taxo sous forme de tableau. Possibilité de trier/filtrer par langue
      * params :
