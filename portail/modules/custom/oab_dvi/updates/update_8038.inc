@@ -7,7 +7,11 @@ $default_labels = array(
     'plus-50-salaries',
     'plus-250-salaries',
     'more-50-employees',
-    'more-250-employees'
+    'more-250-employees',
+    'moins-50-salaries',
+    'less-50-employees',
+    'secteur-public',
+    'public-sector'
 );
 $tids = array();
 foreach ($default_labels as $label)
@@ -42,5 +46,9 @@ foreach ($nodesProducts as $product) {
 
 }
 
-
+##Ensuite, suppression des termes
+$terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+foreach ($terms as $term) {
+    $term->delete();
+}
 
