@@ -25,9 +25,11 @@ dependencies:
     - field.field.node.product.field_start_date
     - field.field.node.product.field_sub_family
     - field.field.node.product.field_subhome
+    - field.field.node.product.field_test_showroom
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - field.field.node.product.moderation_state_update
     - node.type.product
@@ -36,6 +38,7 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
+    - paragraphs
     - path
     - text
     - workbench_moderation
@@ -141,7 +144,8 @@ third_party_settings:
         required_fields: true
       label: Classify
     group_try_and_buy_block:
-      children: {  }
+      children:
+        - field_try_and_buy
       parent_name: group_rebond
       weight: 21
       format_type: tab
@@ -154,7 +158,8 @@ third_party_settings:
         classes: ''
       label: 'Try and buy block'
     group_test_showroom_block:
-      children: {  }
+      children:
+        - field_test_showroom
       parent_name: group_rebond
       weight: 20
       format_type: tab
