@@ -256,3 +256,11 @@ function oab_dvi_update_8033() {
 function oab_dvi_update_8034() {
 	include_once("updates/update_8034.inc");
 }
+
+/**
+ * Update 8037 : rechargement de l'entite Produit pour ajouter un boolean "is DVI Product"
+ * + ajouts de trad pour des erreurs dans le formulaire du produit
+ */
+function oab_dvi_update_8037() {
+    include_once("updates/update_8037.inc");
+}

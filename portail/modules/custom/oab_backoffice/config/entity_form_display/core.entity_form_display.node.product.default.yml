@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
+    - field.field.node.product.field_is_dvi_product
     - field.field.node.product.field_job_profile
     - field.field.node.product.field_market_segment
     - field.field.node.product.field_market_segment_dvi
@@ -24,11 +25,9 @@ dependencies:
     - field.field.node.product.field_start_date
     - field.field.node.product.field_sub_family
     - field.field.node.product.field_subhome
-    - field.field.node.product.field_test_showroom
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
-    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - field.field.node.product.moderation_state_update
     - node.type.product
@@ -37,7 +36,6 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
-    - paragraphs
     - path
     - text
     - workbench_moderation
@@ -61,6 +59,7 @@ third_party_settings:
     group_write:
       children:
         - langcode
+        - field_is_dvi_product
         - title
         - field_highlight
         - field_top_zone
@@ -142,8 +141,7 @@ third_party_settings:
         required_fields: true
       label: Classify
     group_try_and_buy_block:
-      children:
-        - field_try_and_buy
+      children: {  }
       parent_name: group_rebond
       weight: 21
       format_type: tab
@@ -156,8 +154,7 @@ third_party_settings:
         classes: ''
       label: 'Try and buy block'
     group_test_showroom_block:
-      children:
-        - field_test_showroom
+      children: {  }
       parent_name: group_rebond
       weight: 20
       format_type: tab
@@ -189,7 +186,7 @@ bundle: product
 mode: default
 content:
   field_content:
-    weight: 7
+    weight: 9
     settings:
       rows: 5
       placeholder: ''
@@ -219,7 +216,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 8
+    weight: 10
     settings:
       entity_browser: browser_file_modal
       field_widget_display: label
@@ -232,7 +229,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_highlight:
-    weight: 4
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
@@ -244,6 +241,12 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_is_dvi_product:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_job_profile:
     weight: 37
@@ -316,7 +319,7 @@ content:
     third_party_settings: {  }
     region: content
   field_top_zone:
-    weight: 5
+    weight: 6
     settings:
       rows: 5
       placeholder: ''
@@ -325,7 +328,7 @@ content:
     region: content
   field_top_zone_background:
     type: entity_browser_entity_reference
-    weight: 6
+    weight: 7
     region: content
     settings:
       entity_browser: browse_media_modal
@@ -337,7 +340,7 @@ content:
       field_widget_display_settings: {  }
     third_party_settings: {  }
   field_top_zone_bg_mobile:
-    weight: 7
+    weight: 8
     settings:
       entity_browser: browse_media_modal
       field_widget_display: label
@@ -383,7 +386,7 @@ content:
     region: content
   title:
     type: string_textfield
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''
