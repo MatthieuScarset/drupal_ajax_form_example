@@ -258,6 +258,7 @@ function oab_dvi_update_8034() {
 }
 
 /**
+<<<<<<< HEAD
  * Creation nouveau term de taxo subhome
  */
 
@@ -273,6 +274,14 @@ function oab_dvi_update_8035() {
  * > Modification de la subhome produit pour ne plus prendre en compte les produits DVI
  * > Modification de la vue Product Autocomplete pour ne prendre en compte que les produits DVI
  */
-function oab_dvi_update_8036() {
+function oab_dvi_update_8036()
+{
     include_once("updates/update_8036.inc");
+}
+
+/** Update 8037 : rechargement de l'entite Produit pour ajouter un boolean "is DVI Product"
+ * + ajouts de trad pour des erreurs dans le formulaire du produit
+ */
+function oab_dvi_update_8037() {
+    include_once("updates/update_8037.inc");
 }
