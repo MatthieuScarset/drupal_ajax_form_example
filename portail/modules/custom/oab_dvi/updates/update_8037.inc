@@ -1,5 +1,9 @@
 <?php
 use \Drupal\locale\SourceString;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * Update 8037 : rechargement de l'entite Produit pour ajouter un boolean "is DVI Product"
  * + ajouts de trad pour des erreurs dans le formulaire du produit
@@ -27,11 +31,6 @@ if(empty($field)) {
 }
 loadConfigField('field/field', 'ield.field.node.product.field_is_dvi_product');
 loadConfigField('field/storage', 'field.storage.node.field_is_dvi_product');
-
-
-
-
-
 
 
 oabt_YmlImport('core.entity_view_display.node.product.default.yml');
