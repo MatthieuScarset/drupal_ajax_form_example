@@ -4,6 +4,36 @@ use \Drupal\locale\SourceString;
  * Update 8037 : rechargement de l'entite Produit pour ajouter un boolean "is DVI Product"
  * + ajouts de trad pour des erreurs dans le formulaire du produit
  */
+##Creation du nouveau field
+$field_storage = FieldStorageConfig::loadByName('node', 'field_is_dvi_product');
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_is_dvi_product',
+        'entity_type' => 'node',
+        'type' => 'boolean',
+    ))->save();
+}
+
+$field = FieldConfig::loadByName('node', 'product', 'field_is_dvi_product');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_is_dvi_product',
+        'entity_type' => 'node',
+        'bundle' => 'product',
+        'label' => 'DVI Product',
+        'required' => true,
+    );
+    FieldConfig::create($config_array)->save();
+}
+loadConfigField('field/field', 'ield.field.node.product.field_is_dvi_product');
+loadConfigField('field/storage', 'field.storage.node.field_is_dvi_product');
+
+
+
+
+
+
+
 oabt_YmlImport('core.entity_view_display.node.product.default.yml');
 oabt_YmlImport('core.entity_form_display.node.product.default.yml');
 
