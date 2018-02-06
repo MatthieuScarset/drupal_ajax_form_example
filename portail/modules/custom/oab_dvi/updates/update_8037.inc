@@ -29,9 +29,8 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-loadConfigField('field/field', 'ield.field.node.product.field_is_dvi_product');
-loadConfigField('field/storage', 'field.storage.node.field_is_dvi_product');
-
+oabt_YmlImport('field.field.node.product.field_is_dvi_product.yml');
+oabt_YmlImport('field.storage.node.field_is_dvi_product.yml');
 
 oabt_YmlImport('core.entity_view_display.node.product.default.yml');
 oabt_YmlImport('core.entity_form_display.node.product.default.yml');
