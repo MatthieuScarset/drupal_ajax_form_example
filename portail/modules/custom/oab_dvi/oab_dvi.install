@@ -258,7 +258,6 @@ function oab_dvi_update_8034() {
 }
 
 /**
-<<<<<<< HEAD
  * Creation nouveau term de taxo subhome
  */
 
