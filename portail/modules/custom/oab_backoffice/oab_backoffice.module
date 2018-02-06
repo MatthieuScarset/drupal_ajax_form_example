@@ -818,14 +818,9 @@ function oab_frontoffice_check_dvi_product_form_validate(array $form, Drupal\Cor
         ##Si on n'a pas trouvé la taxo Subhome Produit DVI, je fais remonter une erreur
         if (!$isTaggedDvi) {
 
-           $subomeValue = DviHelper::SUBHOME_PRODUIT_DVI_TERM_EN;
-           if ($langcode == "fr") {
-               $subomeValue = DviHelper::SUBHOME_PRODUIT_DVI_TERM_FR;
-           }
-
            ##On remonte l'erreur
            $form_state->setErrorByName(DviHelper::FIELD_SUBHOME_NAME,
-               t("Since you declare the product as DVI, you must select \"". $subomeValue ."\" as a subhome"));
+               t("Since you declare the product as DVI, you must select \"Products DVI\" as a subhome"));
         }
 
         ## 2. Il faut que l'utilisateur ait selectionné au moins un element dans Market Segment
