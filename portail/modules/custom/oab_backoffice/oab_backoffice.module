@@ -37,7 +37,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	$current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
 	$edit_form = false;
-
 	if (preg_match('@node_(.*)_edit_form@', $form_id)){
 		$current_user_language = $current_language;
 
@@ -345,6 +344,19 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 			}
 		}
 	}
+
+    ######## Gestion des produits DVI
+    if ($form_id === "node_product_form" || $form_id === "node_product_edit_form") {
+        ##A la creation d'un produit, je rajoute une fonction de vérification
+        ## pour ajouter des verifications spécifiques en fonction du choix de l'user
+        $form["#validate"][] = 'oab_frontoffice_check_dvi_product_form_validate';
+        $langcode = $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if ($langcode !== "en"  && $langcode != "fr" &&
+            isset($form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])) {
+            $form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME]['widget']['#type'] = "hidden";
+        }
+    }
+
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
@@ -740,25 +752,6 @@ function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConf
     "#58595b"     =>"Darker grey",
     "#333333"     => "Grey black",
   ];
-}
-
-/**
- * Modification des paramètres du formulaire de l'entité Produit
- * @param $form
- * @param FormStateInterface $form_state
- * @param $form_id
- */
-function oab_backoffice_form_node_product_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
-    ##A la creation d'un produit, je rajoute une fonction de vérification
-    ## pour ajouter des verifications spécifiques en fonction du choix de l'user
-    $form["#validate"][] = 'oab_frontoffice_check_dvi_product_form_validate';
-
-    $langcode = $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    if ($langcode !== "en"  && $langcode != "fr" &&
-        isset($form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])) {
-       $form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME]['widget']['#type'] = "hidden";
-    }
 }
 
 
