@@ -136,3 +136,37 @@ function theme_obs_backoffice_preprocess_maintenance_page(&$variables) {
   $variables['#attached']['library'][] = 'theme_obs_backoffice/maintenance-page';
 }
 
+function theme_obs_backoffice_preprocess_views_view_field(&$variables) {
+  if ($variables['field']->field == 'moderation_state_update'){
+    $result = $variables['row']->_entity;
+    if( $result !== null && isset($result->moderation_state_update)){
+      if (method_exists($result->get('moderation_state_update'), 'getValue')){
+        $moderationStateUpdate = $result->get('moderation_state_update')->getValue();
+        if (isset($moderationStateUpdate[0]['target_id'])) {
+          $mod = \Drupal\scheduled_updates\Entity\ScheduledUpdate::load($moderationStateUpdate[0]['target_id']);
+
+          if ($mod->update_timestamp !== null) {
+            $updateState = $mod->field_moderation_state->getValue();
+            $updateTimestamp = $mod->update_timestamp->getValue();
+            $date = \Drupal::service('date.formatter')
+              ->format($updateTimestamp[0]['value'], 'short');
+
+            if (isset($updateState[0]['target_id'])) {
+              $variables['output'] = t("Scheduled on") . " " . $date . " " . t("for") . " " . t($updateState[0]['target_id']);
+            } else {
+              $variables['output'] = t("Scheduled on") . " " . $date;
+            }
+          } else {
+            $variables['output'] = '';
+          }
+        }else{
+          $variables['output'] = '';
+        }
+      }else{
+        $variables['output'] = '';
+      }
+    }else{
+      $variables['output'] = '';
+    }
+  }
+}

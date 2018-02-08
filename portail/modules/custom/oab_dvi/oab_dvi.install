@@ -289,6 +289,14 @@ function oab_dvi_update_8037() {
  * Detaggage des produits qui avaient été taggué avec les Markets Segments spécifiques à DVI
  * + suppression de ces termes
  */
-function oab_dvi_update_8038() {
+function oab_dvi_update_8038()
+{
     include_once("updates/update_8038.inc");
+}
+
+/**
+ * Rechargement de la vue subhome pour les parametres d'url de la subhome produits DVI
+ */
+function oab_dvi_update_8039() {
+    include_once("updates/update_8039.inc");
 }
