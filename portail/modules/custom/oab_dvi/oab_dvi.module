@@ -47,12 +47,13 @@ function isDVIProduct($node){
 function oab_dvi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
 
 
-    if ($view->id() == "subhomes" && $display_id == "page_catalogue") {
+    if ($view->id() == "subhomes" && $display_id == "page_catalogue_dvi" ) {
         $request = $view->getRequest();
 
         $segmentParameter = $request->query->get('segment');
-        if (DviHelper::isMSTerm($segmentParameter)) {
-            $tid = DviHelper::getMSTaxoTermId($segmentParameter);
+        $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if (DviHelper::isMSTerm($segmentParameter, $current_language)) {
+            $tid = DviHelper::getMSTaxoTermId($segmentParameter, $current_language);
             $request->query->set('segment', $tid);
         }
     }
