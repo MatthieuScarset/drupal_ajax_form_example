@@ -165,7 +165,7 @@ abstract class DviHelper {
                 if (!empty($fieldValue)) {
                     //pour chaque tag on regarde s'il y en a un dvi
                     foreach ($fieldValue as $values){
-                        if(isset($values['target_id']) && ($values['target_id'] == $subhome_taxoTerm)){
+                        if(isset($values['target_id']) && ($values['target_id'] == self::getProductDviSubhomeTid())){
                             $isTaggedDvi = TRUE;
                         }
                     }
