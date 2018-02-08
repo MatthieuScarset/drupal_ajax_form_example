@@ -349,7 +349,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     if ($form_id === "node_product_form" || $form_id === "node_product_edit_form") {
         ##A la creation d'un produit, je rajoute une fonction de vérification
         ## pour ajouter des verifications spécifiques en fonction du choix de l'user
-        $form["#validate"][] = 'oab_frontoffice_check_dvi_product_form_validate';
+        $form["#validate"][] = 'oab_backoffice_check_dvi_product_form_validate';
         $langcode = $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         if ($langcode !== "en"  && $langcode != "fr" &&
             isset($form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])) {
@@ -764,74 +764,79 @@ function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConf
  * @param array $form
  * @param \Drupal\Core\Form\FormState $form_state
  */
-function oab_frontoffice_check_dvi_product_form_validate(array $form, Drupal\Core\Form\FormState &$form_state) {
+function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core\Form\FormState &$form_state) {
 
-    ##Je commence par recupérer les valeurs rentrées par l'user
-    $userValues = $form_state->getUserInput();
+  ##Je commence par recupérer les valeurs rentrées par l'user
+  $userValues = $form_state->getUserInput();
 
-    ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
-    if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
-       && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1" ) {
+  if (isset($userValues['langcode'][0]['value'])){
+    $content_language = $userValues['langcode'][0]['value'];
+  }
+  else{
+    $content_language = null;
+  }
 
-
-        #Petite gestion pour la langue, pour afficher le bon element....
-        $node = $form_state->getFormObject()->getEntity();
-        $langcode = $node->langcode->value;
-
-        ##Si la lang n'est pas fr ou en, je met un message d'erreur et je quitte
-        if ($langcode != "en" && $langcode != "fr") {
-            $form_state->setErrorByName(DviHelper::FIELD_IS_DVI_PRODUCT_NAME,
-                t("DVI product is not available in your language. Please check \"No\" at DVI Product to process"));
-                return;
-        }
+  ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
+  if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
+    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1" ) {
 
 
-        ## 1. Il faut que l'utilisateur ait selectionné la subhome "Produits DVI"
+    #Petite gestion pour la langue, pour afficher le bon element....
+    $node = $form_state->getFormObject()->getEntity();
+    $langcode = $node->langcode->value;
 
-        ##Je recupère les éléments selectionnés dans la taxo Subhome (false si le field n'existe pas..)
-        $field_taxoSubhome = isset($userValues[DviHelper::FIELD_SUBHOME_NAME])
-                ? $userValues[DviHelper::FIELD_SUBHOME_NAME]
-                : false;
-
-        $isTaggedDvi = false;                    ##Pour connaitre le résultat
-        $taxoSubhomeTid = DviHelper::getProductDviSubhomeTid();  ##Je recupère le tid de la taxo ProductDvi
-                    ##translation faite toute seule par la fonction
-
-        ##Je boucle sur tous les éléments selectionnés
-        if (is_array($field_taxoSubhome)) {
-           foreach ($field_taxoSubhome as $element) {
-
-               ##Si un des elements est taggué, je passe à true
-               if ($element == $taxoSubhomeTid) {
-                   $isTaggedDvi = true;
-               }
-           }
-        }
-
-        ##Si on n'a pas trouvé la taxo Subhome Produit DVI, je fais remonter une erreur
-        if (!$isTaggedDvi) {
-
-           ##On remonte l'erreur
-           $form_state->setErrorByName(DviHelper::FIELD_SUBHOME_NAME,
-               t("Since you declare the product as DVI, you must select \"Products DVI\" as a subhome"));
-        }
-
-        ## 2. Il faut que l'utilisateur ait selectionné au moins un element dans Market Segment
-
-        ##Je recupère la valeur rentrée pour la taxo DVI Market Segment
-        $field_mstaco = isset($userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME])
-           ? $userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME]
-           : false;
-
-        ##Si on ne recup pas d'array, ou si l'array est vide (ie. rien n'a ete selectionné)
-        ## je remonte un message d'erreur
-        if (!is_array($field_mstaco) || (is_array($field_mstaco) && count($field_mstaco) == 0)) {
-           $form_state->setErrorByName(DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME,
-               t("Since you declare the product as DVI, you need to select at least one element of the DVI Market Segment taxonomy"));
-        }
+    ##Si la lang n'est pas fr ou en, je met un message d'erreur et je quitte
+    if ($langcode != "en" && $langcode != "fr") {
+      $form_state->setErrorByName(DviHelper::FIELD_IS_DVI_PRODUCT_NAME,
+        t("DVI product is not available in your language. Please check \"No\" at DVI Product to process"));
+      return;
     }
 
 
+    ## 1. Il faut que l'utilisateur ait selectionné la subhome "Produits DVI"
+
+    ##Je recupère les éléments selectionnés dans la taxo Subhome (false si le field n'existe pas..)
+    $field_taxoSubhome = isset($userValues[DviHelper::FIELD_SUBHOME_NAME])
+      ? $userValues[DviHelper::FIELD_SUBHOME_NAME]
+      : false;
+
+    $isTaggedDvi = false;                    ##Pour connaitre le résultat
+    $taxoSubhomeTid = DviHelper::getProductDviSubhomeTid($content_language);  ##Je recupère le tid de la taxo ProductDvi
+    ##translation faite toute seule par la fonction
+
+    ##Je boucle sur tous les éléments selectionnés
+    if (is_array($field_taxoSubhome)) {
+      foreach ($field_taxoSubhome as $element) {
+
+        ##Si un des elements est taggué, je passe à true
+        if ($element == $taxoSubhomeTid) {
+          $isTaggedDvi = true;
+        }
+      }
+    }
+
+    ##Si on n'a pas trouvé la taxo Subhome Produit DVI, je fais remonter une erreur
+    if (!$isTaggedDvi) {
+
+      ##On remonte l'erreur
+      $form_state->setErrorByName(DviHelper::FIELD_SUBHOME_NAME,
+        t("Since you declare the product as DVI, you must select \"Products DVI\" as a subhome"));
+    }
+
+    ## 2. Il faut que l'utilisateur ait selectionné au moins un element dans Market Segment
+
+    ##Je recupère la valeur rentrée pour la taxo DVI Market Segment
+    $field_mstaco = isset($userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME])
+      ? $userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME]
+      : false;
+
+    ##Si on ne recup pas d'array, ou si l'array est vide (ie. rien n'a ete selectionné)
+    ## je remonte un message d'erreur
+    if (!is_array($field_mstaco) || (is_array($field_mstaco) && count($field_mstaco) == 0)) {
+      $form_state->setErrorByName(DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME,
+        t("Since you declare the product as DVI, you need to select at least one element of the DVI Market Segment taxonomy"));
+    }
+  }
 }
 
 
