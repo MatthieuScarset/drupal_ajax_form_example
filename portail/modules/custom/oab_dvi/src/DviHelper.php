@@ -43,9 +43,22 @@ abstract class DviHelper {
 ################################
 ## PRIVATE FUNCTIONS
 
-    private static function getProductDviSubhomeTid () {
+    public static function getProductDviSubhomeTid ($langcode = null) {
+      if (is_null($langcode)) $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      if ($langcode == \Drupal::languageManager()->getDefaultLanguage()->getId()) {
         $config = \Drupal::config('oab.subhomes');
         return $config->get('product_dvi_term_tid');
+      }
+      else{
+        $config = \Drupal::service('config.storage')->createCollection('language.'.$langcode);
+        $subhomes = $config->read('oab.subhomes');
+        if (isset($subhomes['product_dvi_term_tid'])) {
+          return $subhomes['product_dvi_term_tid'];
+        }
+        else{
+          return false;
+        }
+      }
     }
 
 ################################
