@@ -256,3 +256,11 @@ function oab_dvi_update_8033() {
 function oab_dvi_update_8034() {
 	include_once("updates/update_8034.inc");
 }
+
+/**
+ * Rechargement de la vue subhome pour les parametres d'url de la subhome produits DVI
+ */
+
+function oab_dvi_update_8039() {
+    include_once("updates/update_8039.inc");
+}
