@@ -82,7 +82,7 @@ function theme_boosted_preprocess_node(&$variables) {
 					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "Homepage";
 					break;
 				case 'distributor':
-					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "DVI fiche revendeur";
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "DVI fiche distributeur";
 					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
 					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'DVI';
 					break;
