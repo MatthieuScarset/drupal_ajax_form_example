@@ -1860,7 +1860,11 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     width:auto;
 }
 
-.block_distributor_logo img{
+
+.block_distributor_logo img {
     width: 100%;
     height: auto;
+}
+body.page-node-type-custom-page{
+    display: inline-block;
 }

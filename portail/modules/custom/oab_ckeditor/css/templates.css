@@ -187,6 +187,14 @@
   padding: 0px;
 }
 
+.node.custom-page.full .obs_template > .col-md-8 img,
+.node.custom-page.full .obs_template > .col-md-6 img,
+.node.custom-page.full .obs_template > .col-md-4 img,
+.node.custom-page.full .obs_template > .col-md-3 img,
+.node.custom-page.full .obs_template > .col-md-2 img{
+    max-width: 100%;
+}
+
 /**
     Mis en commentaire : Semble poser problème
     La suppression des paddings des 1ères et dernières colonnes augmente par
