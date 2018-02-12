@@ -47,7 +47,8 @@ function isDVIProduct($node){
 function oab_dvi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
 
 
-    if ($view->id() == "subhomes" && $display_id == "page_catalogue") {
+    if ($view->id() == "subhomes" &&
+        ($display_id == "page_catalogue" ||$display_id == "page_catalogue_dvi")  ) {
         $request = $view->getRequest();
 
         $segmentParameter = $request->query->get('segment');
