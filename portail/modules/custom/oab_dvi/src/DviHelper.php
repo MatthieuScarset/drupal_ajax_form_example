@@ -24,7 +24,11 @@ abstract class DviHelper {
     const MS_PUBLIC_SECTOR_FR = "secteur-public";*/
     const SUBHOME_PRODUIT_DVI_TERM_EN = 'Products DVI';
     const SUBHOME_PRODUIT_DVI_TERM_FR = 'Produits DVI';
-
+    const MS_PUBLIC_SECTOR_FR = "secteur-public";
+    const FIELD_SUBHOME_NAME = 'field_subhome';
+    const FIELD_DVI_MARKET_SEGMENT_NAME = 'field_market_segment_dvi';
+    const FIELD_IS_DVI_PRODUCT_NAME = 'field_is_dvi_product';
+    const DVI_PRODUCT_URL = 'ventes-indirectes';
 
 ################################
 ################################
@@ -60,6 +64,7 @@ abstract class DviHelper {
         }
       }
     }
+
 
 ################################
 ################################
