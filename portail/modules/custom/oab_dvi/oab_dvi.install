@@ -256,3 +256,11 @@ function oab_dvi_update_8033() {
 function oab_dvi_update_8034() {
 	include_once("updates/update_8034.inc");
 }
+
+
+/**
+ * Mise en place Breadcrumb pour Produits DVI => Completion de la taxo + ajout des trads dans views
+ */
+function oab_dvi_update_8040() {
+    include_once("updates/update_8040.inc");
+}
