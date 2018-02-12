@@ -200,8 +200,13 @@ abstract class DviHelper {
      * @param $term
      * @return bool
      */
-    public static function isMSTerm($term) {
-        $ms_terms = self::getMSTerms();
-        return in_array($term, $ms_terms);
+    public static function isMSTerm($term, $lang = 'en') {
+        $ms_terms = self::getMSTerms($lang);
+        $isMsTerm = false;
+        foreach ($ms_terms as $ms_term) {
+            if ($term == $ms_term->getName())
+                $isMsTerm = true;
+        }
+        return $isMsTerm;
     }
 }
