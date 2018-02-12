@@ -781,9 +781,15 @@ aside.right-column > .region{
 
 
 .item-related-content {
-  padding: 0px 20px 40px 20px;
-  width: 30%;
-  float: left;
+    padding: 0;
+    width: 30%;
+    float: none;
+    display: table-cell !important;
+    background-color: white;
+    border-right: 2rem solid black;
+    border-left: 2rem solid black;
+    border-bottom: 4rem solid black;
+    vertical-align: top;
 }
 
 #slider_direct_access{
