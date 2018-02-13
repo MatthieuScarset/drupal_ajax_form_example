@@ -520,7 +520,7 @@ class AxiomeImporter{
                                 'sticky'      => 0,
                                 'moderation_state' => 'draft',
                             ]);
-                            $node->save();
+                            //$node->save();
 
                             $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                             $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
@@ -606,7 +606,7 @@ class AxiomeImporter{
 			}
     }
 
-		private function axiome_add_market_segment($node){
+		private function axiome_add_market_segment(&$node){
 			$this->message .= "AXIOME ADD MARKET SEGMENT \n";
 			$default_labels = array(
 				"fr" => array('+ 50 salariés', '+ 250 salariés'),
@@ -637,12 +637,12 @@ class AxiomeImporter{
 
 			if(count($tidParent) > 0){
 				$node->set('field_market_segment', $tidParent);
-				$node->save();
+				//$node->save();
 			}
 		}
 
 
-    private function axiome_manage_taxo($node, $famille, $classement_nom){
+    private function axiome_manage_taxo(&$node, $famille, $classement_nom){
         $children_id = $famille->getElementsByTagName('element_classement_list')->item(0)->getElementsByTagName('element_classement_id');
 
         if ($this->isPortfolio($classement_nom)){
@@ -687,7 +687,7 @@ class AxiomeImporter{
 
         if(count($tidParent) > 0){
             $node->set($nodeField, $tidParent);
-            $node->save();
+            //$node->save();
         }
     }
 
