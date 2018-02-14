@@ -366,3 +366,10 @@ function oab_amel_update_8043() {
 function oab_amel_update_8044() {
     include_once("updates/update_8044.inc");
 }
+
+/**
+ *  Création des menu main navigation pour ES et PT
+ */
+function oab_amel_update_8047() {
+    include_once("updates/update_8047.inc");
+}
