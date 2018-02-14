@@ -487,3 +487,10 @@ function oab_tristan_update_8062() {
 function oab_tristan_update_8063() {
   oabt_YmlImport('metatag.metatag_defaults.node__homepage.yml');
 }
+
+/**
+ * Création des menus top navbar ES et PT
+ */
+function oab_tristan_update_8064() {
+    include_once("updates/update_8064.inc");
+}
