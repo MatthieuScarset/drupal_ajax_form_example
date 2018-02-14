@@ -30,3 +30,9 @@ if (\Drupal\system\Entity\Menu::load('main-navigation-pt') == null) {
         ])
         ->save();
 }
+
+oabt_YmlImport('block.block.mainnavigationpt.yml');
+
+
+oabt_YmlImport('block.block.mainnavigationes.yml');
+
