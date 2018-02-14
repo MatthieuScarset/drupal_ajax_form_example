@@ -520,7 +520,10 @@ class AxiomeImporter{
                                 'sticky'      => 0,
                                 'moderation_state' => 'draft',
                             ]);
-                            //$node->save();
+                            $node->save();
+                            /*$title_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($xpath_fiche->getAttribute('nom_offre_commerciale'));
+                            $product_term = ($language = 'fr') ? 'produits' : 'products';
+                            $node->url("/$product_term/$title_url");*/
 
                             $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                             $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
