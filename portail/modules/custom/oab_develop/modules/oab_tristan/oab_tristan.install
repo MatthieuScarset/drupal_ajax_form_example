@@ -494,3 +494,11 @@ function oab_tristan_update_8063() {
 function oab_tristan_update_8064() {
     include_once("updates/update_8064.inc");
 }
+
+
+/**
+ * Création des menus top right navbar et top right navbar footer (version mobile)
+ */
+function oab_tristan_update_8065() {
+    include('updates/update_8065.inc');
+}
