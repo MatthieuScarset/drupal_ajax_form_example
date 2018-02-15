@@ -1,8 +1,8 @@
-langcode: en
+langcode: pt-br
 status: true
 dependencies:
   config:
-    - system.menu.main-navigation-pt
+    - system.menu.main-navigation-br
   module:
     - language
     - system
@@ -13,10 +13,10 @@ theme: theme_boosted
 region: header
 weight: 0
 provider: null
-plugin: 'system_menu_block:main-navigation-pt'
+plugin: 'system_menu_block:main-navigation-br'
 settings:
-  id: 'system_menu_block:main-navigation-pt'
-  label: 'Main navigation PT'
+  id: 'system_menu_block:main-navigation-br'
+  label: 'Main navigation BR'
   provider: system
   label_display: '0'
   level: 1
@@ -25,7 +25,7 @@ visibility:
   language:
     id: language
     langcodes:
-      pt-pt: pt-pt
+      pt-br: pt-br
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'

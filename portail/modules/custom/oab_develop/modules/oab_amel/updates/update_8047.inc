@@ -18,20 +18,20 @@ if (\Drupal\system\Entity\Menu::load('main-navigation-es') == null) {
 
 /******** Création du MENU menu-main-navigation-pt ***********/
 
-if (\Drupal\system\Entity\Menu::load('main-navigation-pt') == null) {
+if (\Drupal\system\Entity\Menu::load('main-navigation-br') == null) {
 // Menu Navigation PT
     \Drupal::entityTypeManager()
         ->getStorage('menu')
         ->create([
-            'id' => 'main-navigation-pt',
-            'label' => 'Main navigation PT',
+            'id' => 'main-navigation-br',
+            'label' => 'Main navigation BR',
             'description' => 'PT Site section links',
-            'langcode'  => 'pt-pt'
+            'langcode'  => 'pt-br'
         ])
         ->save();
 }
 
-oabt_YmlImport('block.block.mainnavigationpt.yml');
+oabt_YmlImport('block.block.mainnavigationbr.yml');
 
 
 oabt_YmlImport('block.block.mainnavigationes.yml');
