@@ -487,3 +487,11 @@ function oab_tristan_update_8062() {
 function oab_tristan_update_8063() {
   oabt_YmlImport('metatag.metatag_defaults.node__homepage.yml');
 }
+
+
+/**
+ * Création des menus top right navbar et top right navbar footer (version mobile)
+ */
+function oab_tristan_update_8065() {
+    include('updates/update_8065.inc');
+}
