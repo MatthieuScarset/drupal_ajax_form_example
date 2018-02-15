@@ -1,7 +1,7 @@
 <?php
 
 $vid= 'subhomes';
-$languages = array('es','pt-pt');
+$languages = array('es','pt-br');
 $terms = array(
     array('name'=> 'Blogs', 'conf' => 'blog_term_tid', 'tid' => 0),
     array('name'=> 'Press', 'conf' => 'press_term_tid', 'tid' => 0),
