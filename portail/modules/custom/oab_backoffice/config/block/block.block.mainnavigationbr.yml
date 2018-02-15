@@ -8,7 +8,7 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: mainnavigationpt
+id: mainnavigationbr
 theme: theme_boosted
 region: header
 weight: 0
