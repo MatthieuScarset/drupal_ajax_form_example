@@ -12,3 +12,7 @@ if($portuguese == NULL) {
     $languagePortuguese = \Drupal\language\Entity\ConfigurableLanguage::createFromLangcode('pt-br');
     $languagePortuguese->save();
 }
+
+
+##Chargement des config pour l'url en /br au lieu de /pt-br
+oabt_YmlImport('language.negotiation.yml');
