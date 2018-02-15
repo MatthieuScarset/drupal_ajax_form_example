@@ -65,6 +65,12 @@
                 {% if elements.bottomfooterbarruen %}
                     {% set bottomfooterbar =  elements.bottomfooterbarruen %}
                 {% endif %}
+                {% if elements.bottomfooterbares %}
+                    {% set bottomfooterbar =  elements.bottomfooterbares %}
+                {% endif %}
+                {% if elements.bottomfooterbarbr %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarbr %}
+                {% endif %}
                 {% if bottomfooterbar["#markup"]|render|trim is empty %}
                     {% set classSupp = "hidden" %}
                 {% endif %}
