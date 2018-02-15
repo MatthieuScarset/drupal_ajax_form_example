@@ -134,29 +134,29 @@ $config_group->save(TRUE);
 
 ###################
 ## Creation du topnavbar PT
-if (\Drupal\system\Entity\Menu::load('top-navbar-pt') == null) {
+if (\Drupal\system\Entity\Menu::load('top-navbar-br') == null) {
 // Menu Corporate
     \Drupal::entityTypeManager()
         ->getStorage('menu')
         ->create([
-            'id' => 'top-navbar-pt',
-            'label' => 'Top navbar PT',
-            'description' => 'Sur-header PT',
-            'langcode'  => 'pt'
+            'id' => 'top-navbar-br',
+            'label' => 'Top navbar BR',
+            'description' => 'Sur-header BR',
+            'langcode'  => 'pt-br'
         ])
         ->save();
 }
 
-$config_group = $config_factory->getEditable('block.block.topnavbarpt');
+$config_group = $config_factory->getEditable('block.block.topnavbarbr');
 $config_group->setData(
     array (
-        'langcode' => 'fr',
+        'langcode' => 'pt-br',
         'status' => true,
         'dependencies' =>
             array (
                 'config' =>
                     array (
-                        0 => 'system.menu.top-navbar-pt',
+                        0 => 'system.menu.top-navbar-br',
                     ),
                 'module' =>
                     array (
@@ -168,16 +168,16 @@ $config_group->setData(
                         0 => 'theme_boosted',
                     ),
             ),
-        'id' => 'topnavbarpt',
+        'id' => 'topnavbarbr',
         'theme' => 'theme_boosted',
         'region' => 'header',
         'weight' => -28,
         'provider' => NULL,
-        'plugin' => 'system_menu_block:top-navbar-pt',
+        'plugin' => 'system_menu_block:top-navbar-br',
         'settings' =>
             array (
-                'id' => 'system_menu_block:top-navbar-pt',
-                'label' => 'Top navbar PT',
+                'id' => 'system_menu_block:top-navbar-br',
+                'label' => 'Top navbar BR',
                 'provider' => 'system',
                 'label_display' => '0',
                 'level' => 1,
@@ -190,7 +190,7 @@ $config_group->setData(
                         'id' => 'language',
                         'langcodes' =>
                             array (
-                                'pt-pt' => 'pt-pt',
+                                'pt-br' => 'pt-br',
                             ),
                         'negate' => false,
                         'context_mapping' =>
@@ -203,16 +203,16 @@ $config_group->setData(
 );
 $config_group->save(TRUE);
 
-$config_group = $config_factory->getEditable('block.block.topnavbarpt_2');
+$config_group = $config_factory->getEditable('block.block.topnavbarbr_2');
 $config_group->setData(
     array (
-        'langcode' => 'fr',
+        'langcode' => 'pt-br',
         'status' => true,
         'dependencies' =>
             array (
                 'config' =>
                     array (
-                        0 => 'system.menu.top-navbar-pt',
+                        0 => 'system.menu.top-navbar-br',
                     ),
                 'module' =>
                     array (
@@ -224,16 +224,16 @@ $config_group->setData(
                         0 => 'theme_boosted',
                     ),
             ),
-        'id' => 'topnavbarpt_2',
+        'id' => 'topnavbarbr_2',
         'theme' => 'theme_boosted',
         'region' => 'footer',
         'weight' => 0,
         'provider' => NULL,
-        'plugin' => 'system_menu_block:top-navbar-pt',
+        'plugin' => 'system_menu_block:top-navbar-br',
         'settings' =>
             array (
-                'id' => 'system_menu_block:top-navbar-pt',
-                'label' => 'Top navbar PT',
+                'id' => 'system_menu_block:top-navbar-br',
+                'label' => 'Top navbar BR',
                 'provider' => 'system',
                 'label_display' => '0',
                 'level' => 1,
@@ -246,7 +246,7 @@ $config_group->setData(
                         'id' => 'language',
                         'langcodes' =>
                             array (
-                                'pt-pt' => 'pt-pt',
+                                'pt-br' => 'pt-br',
                             ),
                         'negate' => false,
                         'context_mapping' =>
