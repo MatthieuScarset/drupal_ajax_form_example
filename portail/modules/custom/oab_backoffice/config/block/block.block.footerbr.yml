@@ -7,7 +7,7 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: footeres
+id: footerbr
 theme: theme_boosted
 region: footer
 weight: 0
