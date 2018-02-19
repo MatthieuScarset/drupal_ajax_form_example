@@ -102,12 +102,15 @@
             <div class="clearfix"></div>
             <div class="col-md-7 no-padding text-left title">
                 {{ content.field_header_title }}
-            </div><div class="clearfix"></div>
-            <div class="col-md-7 no-padding text-left title">
-                <a class="btn btn-default" href="{{ content.field_title_button_link.0["#url"] }}" >
-                    {{ content.field_title_btn_text.0["#context"].value }}
-                </a>
             </div>
+            {% if content.field_title_btn_text|render|trim is not empty %}
+                <div class="clearfix"></div>
+                <div class="col-md-7 no-padding text-left title">
+                    <a class="btn btn-default" href="{{ content.field_title_button_link.0["#url"] }}" >
+                        {{ content.field_title_btn_text.0["#context"].value }}
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
     {# IMAGE MOBILE#}
@@ -178,12 +181,14 @@
                 <div class="col-md-7 col-lg-5 no-padding text-left highlight-solution">
                     {{ content.field_solution_banner_highlight }}
                 </div>
-                <div class="clearfix"></div>
-                <div class="col-md-7 no-padding text-left title">
-                    <a class="btn btn-default" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" >
-                        {{ content.field_solution_banner_btn_text.0["#context"].value }}
-                    </a>
-                </div>
+                {% if content.field_solution_banner_btn_text|render|trim is not empty %}
+                    <div class="clearfix"></div>
+                    <div class="col-md-7 no-padding text-left title">
+                        <a class="btn btn-default" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" >
+                            {{ content.field_solution_banner_btn_text.0["#context"].value }}
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         {% set urlMobile = '' %}
