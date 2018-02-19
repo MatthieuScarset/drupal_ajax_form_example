@@ -23,7 +23,6 @@ $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('block.block.directaccessbarbr');
 $config_group->setData(
     array (
-        'uuid' => 'f966d64f-8bed-4044-8fdd-6aea9b884647',
         'langcode' => 'fr',
         'status' => true,
         'dependencies' =>
@@ -98,7 +97,6 @@ $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('block.block.directaccessbares');
 $config_group->setData(
     array (
-        'uuid' => 'f966d64f-8bed-4044-8fdd-6aea9b884647',
         'langcode' => 'fr',
         'status' => true,
         'dependencies' =>
