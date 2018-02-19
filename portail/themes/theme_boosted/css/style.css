@@ -432,10 +432,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     margin-top: 50px;
 }
-.solution-banner .title,
-.solution-banner .highlight-solution{
-    color: white;
-}
+
 .carousel-solution .left-zone .row:after,
 .carousel-solution .left-zone .row:before,
 .carousel-solution .right-zone .row:after,
@@ -1864,3 +1861,20 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     width: 100%;
     height: auto;
 }
+.solution-banner .btn.btn-default:hover,
+.banner-bg.top-banner .btn.btn-default:hover
+{
+    background-color: black;
+}
+.solution-banner .btn.btn-default:active,
+.banner-bg.top-banner .btn.btn-default:active
+{
+    background-color: #f16e00;
+}
+
+.solution-banner .btn.btn-default,
+.banner-bg.top-banner .btn.btn-default
+{
+    background-color: white;
+}
+
