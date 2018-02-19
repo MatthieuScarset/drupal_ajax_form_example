@@ -487,3 +487,12 @@ function oab_tristan_update_8062() {
 function oab_tristan_update_8063() {
   oabt_YmlImport('metatag.metatag_defaults.node__homepage.yml');
 }
+
+
+
+/**
+ * Ajout de boutons à la HomePage dans les partie Top Zone Banner et Solution Banner
+ */
+function oab_tristan_update_8068() {
+    include_once('updates/update_8068.inc');
+}
