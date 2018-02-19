@@ -34,7 +34,6 @@ $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('block.block.toprightnavbares');
 $config_group->setData(
     array (
-        'uuid' => '0ea0ca19-d78b-4d35-ab54-c0462cadfcd8',
         'langcode' => 'es',
         'status' => true,
         'dependencies' =>
@@ -94,7 +93,6 @@ $config_group->save(TRUE);
 $config_group = $config_factory->getEditable('block.block.toprightnavbarfooteres');
 $config_group->setData(
     array (
-        'uuid' => 'edf54396-c835-4c46-a404-d6371b9164d8',
         'langcode' => 'es',
         'status' => true,
         'dependencies' =>
