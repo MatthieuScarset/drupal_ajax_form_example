@@ -1,0 +1,47 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solution_banner_btn_link
+    - node.type.blog_post
+    - node.type.custom_page
+    - node.type.customer_story
+    - node.type.document
+    - node.type.full_html
+    - node.type.homepage
+    - node.type.magazine
+    - node.type.press_kit
+    - node.type.press_release
+    - node.type.product
+    - node.type.simple_page
+    - node.type.solution
+id: node.homepage.field_solution_banner_btn_link
+field_name: field_solution_banner_btn_link
+entity_type: node
+bundle: homepage
+label: 'Solution banner button link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      blog_post: blog_post
+      magazine: magazine
+      press_release: press_release
+      custom_page: custom_page
+      document: document
+      press_kit: press_kit
+      full_html: full_html
+      simple_page: simple_page
+      product: product
+      solution: solution
+      customer_story: customer_story
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: blog_post
+field_type: entity_reference
