@@ -1,32 +1,3 @@
-pm-enable -y roleassign
-pm-enable -y password_policy
-pm-enable -y password_policy_character_types
-pm-enable -y password_policy_characters
-pm-enable -y password_policy_history
-pm-enable -y password_policy_length
-pm-enable -y password_policy_username
-pm-enable -y oab_tibo
-pm-enable -y views_infinite_scroll
-pm-enable -y oab_user_access_rights
-pm-enable -y oab_entity_embed_link
-pm-enable -y oab_yassine
-pm-enable -y oab_migrate_content
-pm-enable -y oab_tristan
-pm-enable -y entity_reference_revisions
-pm-enable -y paragraphs
-pm-enable -y geolocation
-pm-enable -y oab_password_policy_alter
-pm-enable -y oab_offices_map
-pm-enable -y oab_synomia_search_flux
-pm-enable -y oab_synomia_search_engine
-pm-enable -y oab_will
-pm-enable -y oab_tealium
-pm-enable -y oab_axiome
-pm-enable -y oab_backbones
-pm-enable -y views_autocomplete_api
-pm-enable -y multiple_fields_remove_button
-pm-enable -y oab_dvi
-pm-enable -y oab_transliteration_filename
 updb
 cr
 #entity-updates
