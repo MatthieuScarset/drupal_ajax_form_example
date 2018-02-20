@@ -491,6 +491,7 @@ function oab_tristan_update_8063() {
 
 
 /**
+<<<<<<< HEAD
  * Création des menus top navbar ES et PT
  */
 function oab_tristan_update_8064() {
@@ -516,6 +517,14 @@ function oab_tristan_update_8066() {
 /**
  * Reload de la config des Metatags par defaut de la homepage
  */
-function oab_tristan_update_8067() {
-   include_once('updates/update_8067.inc');
+function oab_tristan_update_8067()
+{
+    include_once('updates/update_8067.inc');
+}
+
+/**
+ * Ajout de boutons à la HomePage dans les partie Top Zone Banner et Solution Banner
+ */
+function oab_tristan_update_8068() {
+    include_once('updates/update_8068.inc');
 }

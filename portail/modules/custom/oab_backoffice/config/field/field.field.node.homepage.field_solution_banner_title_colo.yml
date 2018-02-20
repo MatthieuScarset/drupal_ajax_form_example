@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solution_banner_title_colo
+    - node.type.homepage
+  module:
+    - options
+id: node.homepage.field_solution_banner_title_colo
+field_name: field_solution_banner_title_colo
+entity_type: node
+bundle: homepage
+label: 'Solution banner title color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string
