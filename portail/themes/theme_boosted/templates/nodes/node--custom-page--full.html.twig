@@ -66,14 +66,14 @@
  */
 #}
 {%
-set classes = [
-'node',
-node.bundle|clean_class,
-node.isPromoted() ? 'is-promoted',
-node.isSticky() ? 'is-sticky',
-not node.isPublished() ? 'is-unpublished',
-view_mode ? view_mode|clean_class,
-'clearfix',
+    set classes = [
+    'node',
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
 ]
 %}
 
@@ -81,79 +81,23 @@ view_mode ? view_mode|clean_class,
     {{ title_suffix }}
     {{ title_prefix }}
 
-    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
-    {% set fieldDocumentTheme %}
-        {{ content.theme_term }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldAuthor %}
-        {{ author_name }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set fieldOwner %}
-        {{ content.field_content_owner }}
-    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-
-<script type="application/ld+json">
+    <script type="application/ld+json">
     {
       "@context": "http://schema.org",
-      "@type": "DigitalDocument",
+      "@type": "WebPage",
       "headline" : "{{ node.label }}",
-      "genre" : "{{ fieldDocumentTheme|striptags|trim }}",
+      "genre" : "{{ fieldPage|striptags|trim }}",
       "creationDate": "{{ createdDate }}",
       "author": {
         "@type": "Person",
-        "name": "{{ fieldOwner|striptags|trim }}",
+        "name": "{{ fieldAuthor|striptags|trim }}",
       }
     }
     </script>
 
-
-<div class="content_info">
-    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
-</div>
-
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
-
-
-
-    <div{{ content_attributes.addClass('content', 'div-display-table', 'row') }}>
-        <div class="document_field_image div-display-cell col-md-3 col-xs-12">
-            {{ content.field_visual }}
-        </div>
-
-        <div class="div-display-table-cell col-md-9 col-xs-12">
-            {{ content|without('theme_term', 'field_image', 'field_document_type',
-            'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
-            'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
-            'field_start_date', 'field_end_date') }}
-        </div>
-
+    <div{{ content_attributes.addClass('content') }}>
+        {{ content }}
     </div>
-
-    {% set pardot_iframe = d_config('oab.pardot').get('iframe_url') %}
-    {% set filename = "" %}
-    {% set fullUrl = "" %}
-
-    {% for key, file in content.field_file  %}
-        {% if key == "#items" %}
-            {% set media = file.entity %}
-            {% set file_entity = media.field_image_file.entity %}
-            {% set inactiveClasse = "" %}
-            {% if media is not empty %}
-                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
-                    ~ '&fname=' ~ media.field_file.entity.filename.value
-                    ~ '&dwname=' ~ media.field_file.entity.filename.value
-                %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-
-    {% if (content.field_file['#language'] == 'en') or (content.field_file['#language'] == 'ru') %}
-    <div class="pardot-form" style="margin-top: 4rem;">
-        <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
-    </div>
-    {% elseif content.field_file['#language'] == 'fr' %}
-        {{ form_dlFile }}
-    {% endif %}
 
 </article>

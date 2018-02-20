@@ -14,6 +14,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 use Drupal\entity\Revision\RevisionableContentEntityBase;
 use Drupal\workbench_moderation\Entity\ModerationState;
+use \Drupal\oab_dvi\DviHelper;
 
 //include_once 'includes/mediatheque.inc';
 define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -36,7 +37,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	$current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
 	$edit_form = false;
-
 	if (preg_match('@node_(.*)_edit_form@', $form_id)){
 		$current_user_language = $current_language;
 
@@ -344,6 +344,19 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 			}
 		}
 	}
+
+    ######## Gestion des produits DVI
+    if ($form_id === "node_product_form" || $form_id === "node_product_edit_form") {
+        ##A la creation d'un produit, je rajoute une fonction de vérification
+        ## pour ajouter des verifications spécifiques en fonction du choix de l'user
+        $form["#validate"][] = 'oab_backoffice_check_dvi_product_form_validate';
+        $langcode = $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if ($langcode !== "en"  && $langcode != "fr" &&
+            isset($form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])) {
+            $form[DviHelper::FIELD_IS_DVI_PRODUCT_NAME]['widget']['#type'] = "hidden";
+        }
+    }
+
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
@@ -739,4 +752,138 @@ function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConf
     "#58595b"     =>"Darker grey",
     "#333333"     => "Grey black",
   ];
+}
+
+
+/**
+ * Ajout de vérification lors de la création d'un produit DVI
+ *  Si l'utilisateur à coché la case "Produit DVI", alors il faut :
+ *      - qu'il ait selectionné "Produits DVI" dans la taxo Subhome (rubrique)
+ *      - qu'il ait selectionné au moins un element dans la taxo Market Segment DVI
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormState $form_state
+ */
+function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+  ##Je commence par recupérer les valeurs rentrées par l'user
+  $userValues = $form_state->getUserInput();
+
+  if (isset($userValues['langcode'][0]['value'])){
+    $content_language = $userValues['langcode'][0]['value'];
+  }
+  else{
+    $content_language = null;
+  }
+
+  ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
+  if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
+    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1" ) {
+
+
+    #Petite gestion pour la langue, pour afficher le bon element....
+    $node = $form_state->getFormObject()->getEntity();
+    $langcode = $node->langcode->value;
+
+    ##Si la lang n'est pas fr ou en, je met un message d'erreur et je quitte
+    if ($langcode != "en" && $langcode != "fr") {
+      $form_state->setErrorByName(DviHelper::FIELD_IS_DVI_PRODUCT_NAME,
+        t("DVI product is not available in your language. Please check \"No\" at DVI Product to process"));
+      return;
+    }
+
+
+    ## 1. Il faut que l'utilisateur ait selectionné la subhome "Produits DVI"
+
+    ##Je recupère les éléments selectionnés dans la taxo Subhome (false si le field n'existe pas..)
+    $field_taxoSubhome = isset($userValues[DviHelper::FIELD_SUBHOME_NAME])
+      ? $userValues[DviHelper::FIELD_SUBHOME_NAME]
+      : false;
+
+    $isTaggedDvi = false;                    ##Pour connaitre le résultat
+    $taxoSubhomeTid = DviHelper::getProductDviSubhomeTid($content_language);  ##Je recupère le tid de la taxo ProductDvi
+    ##translation faite toute seule par la fonction
+
+    ##Je boucle sur tous les éléments selectionnés
+    if (is_array($field_taxoSubhome)) {
+      foreach ($field_taxoSubhome as $element) {
+
+        ##Si un des elements est taggué, je passe à true
+        if ($element == $taxoSubhomeTid) {
+          $isTaggedDvi = true;
+        }
+      }
+    }
+
+    ##Si on n'a pas trouvé la taxo Subhome Produit DVI, je fais remonter une erreur
+    if (!$isTaggedDvi) {
+
+      ##On remonte l'erreur
+      $form_state->setErrorByName(DviHelper::FIELD_SUBHOME_NAME,
+        t("Since you declare the product as DVI, you must select \"Products DVI\" as a subhome"));
+    }
+
+    ## 2. Il faut que l'utilisateur ait selectionné au moins un element dans Market Segment
+
+    ##Je recupère la valeur rentrée pour la taxo DVI Market Segment
+    $field_mstaco = isset($userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME])
+      ? $userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME]
+      : false;
+
+    ##Si on ne recup pas d'array, ou si l'array est vide (ie. rien n'a ete selectionné)
+    ## je remonte un message d'erreur
+    if (!is_array($field_mstaco) || (is_array($field_mstaco) && count($field_mstaco) == 0)) {
+      $form_state->setErrorByName(DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME,
+        t("Since you declare the product as DVI, you need to select at least one element of the DVI Market Segment taxonomy"));
+    }
+  }
+}
+
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ */
+function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
+
+    ##Modification de l'alias créé lors de la creation d'un produit DVI
+    ## (un produit DVI est un contenu de type produit, mais l'URL diffère)
+    if (isset($context['bundle']) && $context['bundle'] == 'product'
+        && isset($context['op']) && $context['op'] == "insert"
+        && isset($context['data']['node'])
+    ) {
+        ##Recuperation du produit
+        $node = $context['data']['node'];
+
+        ##je recupère la valeur contenue dans l'element IsDviProduct
+        $isDvi_array = $node->get(DviHelper::FIELD_IS_DVI_PRODUCT_NAME)->getValue();
+        if (is_array($isDvi_array) && count($isDvi_array) > 0 ) {
+            $isDvi_value = $isDvi_array[0]['value'];
+
+            #Si on a un produit DVI
+            if ($isDvi_value == "1") {
+
+                ##Je sépare l'alias pré-créé par le système
+                $alias_parts = explode('/', $alias);
+
+                ##Si le premier element du tableau est un string vide, je le supprime
+                ## (très probable que l'URL commence par "/" et dans ce cas, PHP ajoute un string vide au debut)
+                if (isset($alias_parts[0]) && $alias_parts[0] == "") {
+                    array_shift($alias_parts);
+                }
+
+                #j'ajoute en début la partie de l'URL spécifique à DVI
+                array_unshift($alias_parts, DviHelper::DVI_PRODUCT_URL);
+
+                ##En bouclant sur tous les éléments, je recrée l'alias
+                $newAlias = "";
+                foreach ($alias_parts as $part) {
+                    $newAlias .= "/$part";
+                }
+
+                ## Puis je set l'alias avec le mien
+                $alias = $newAlias;
+            }
+        }
+    }
+
 }

@@ -3,7 +3,7 @@ namespace Drupal\oab_dvi;
 
 use Reflection;
 use ReflectionClass;
-
+use \Drupal\taxonomy\Entity\Term;
 
 abstract class DviHelper {
 
@@ -18,12 +18,17 @@ abstract class DviHelper {
      * Nom Term
      * Langue du term en 2 lettres
      */
-    const MS_U50_EMPLOYEES_EN = "- 50 employees";
+    /*const MS_U50_EMPLOYEES_EN = "- 50 employees";
     const MS_U50_EMPLOYEES_FR = "moins-50-salaries";
     const MS_PUBLIC_SECTOR_EN = "Public Sector";
+    const MS_PUBLIC_SECTOR_FR = "secteur-public";*/
+    const SUBHOME_PRODUIT_DVI_TERM_EN = 'Products DVI';
+    const SUBHOME_PRODUIT_DVI_TERM_FR = 'Produits DVI';
     const MS_PUBLIC_SECTOR_FR = "secteur-public";
-
-
+    const FIELD_SUBHOME_NAME = 'field_subhome';
+    const FIELD_DVI_MARKET_SEGMENT_NAME = 'field_market_segment_dvi';
+    const FIELD_IS_DVI_PRODUCT_NAME = 'field_is_dvi_product';
+    const DVI_PRODUCT_URL = 'ventes-indirectes';
 
 ################################
 ################################
@@ -32,37 +37,32 @@ abstract class DviHelper {
     /**
      * VARIABLES UTILES DANS DviHelper
      */
-    private static $default_field_market_segment = 'field_market_segment';
+    private static $subhome_field_name = 'field_subhome';
+    private static $default_field_market_segment = 'field_market_segment_dvi';
+    private static $dvi_market_segment_vocabulary = 'market_segments_dvi';
 
 
 ################################
 ################################
 ################################
 ## PRIVATE FUNCTIONS
-    /**
-     * Renvoie la liste des constantes définies
-     * @return array liste des contraintes
-     */
-    private static function getConstants() {
-        $oClass = new ReflectionClass(__CLASS__);
-        return $oClass->getConstants();
-    }
 
-    /**
-     * Retourne sous forme de tableau construit selon la langue, tous les termes de taxo de Market Segment
-     * @return array [ LANG => [values], LANG => [$values] ]
-     */
-    private static function getMS_all() {
-
-        $return = array();
-        foreach (self::getConstants() as $constName => $value) {
-            ##Je check si c'est des MarketSegment
-            if (substr($constName, 0,2) == "MS") {
-                $return[substr($constName, strlen($constName)-2,strlen($constName))][] = $value;
-            }
+    public static function getProductDviSubhomeTid ($langcode = null) {
+      if (is_null($langcode)) $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      if ($langcode == \Drupal::languageManager()->getDefaultLanguage()->getId()) {
+        $config = \Drupal::config('oab.subhomes');
+        return $config->get('product_dvi_term_tid');
+      }
+      else{
+        $config = \Drupal::service('config.storage')->createCollection('language.'.$langcode);
+        $subhomes = $config->read('oab.subhomes');
+        if (isset($subhomes['product_dvi_term_tid'])) {
+          return $subhomes['product_dvi_term_tid'];
         }
-
-        return $return;
+        else{
+          return false;
+        }
+      }
     }
 
 
@@ -70,36 +70,16 @@ abstract class DviHelper {
 ################################
 ################################
 ## PUBLICS FUNCTIONS
+
     /**
-     * Renvoie les termes de taxo sous forme de tableau. Possibilité de trier/filtrer par langue
-     * params :
-     *      - lang : Renvoie les termes de la langue correspondante
-     *      - sort : Renvoie les termes triés par langue
-     * @param array $params
+     * Renvoie les termes de taxo sous forme de tableau. Possibilité de filtrer par langue
+     *   lang : Renvoie les termes de la langue correspondante, default => en, pour tous =>all
+     * @param array $lang
      * @return array|mixed
      */
-    public static function getMSTerms($params = array()) {
-        $terms = self::getMS_all();
-
-        $return = array();
-        ##Si on passe un langcode, on renvoie les éléments de la langue
-        if (isset($params['lang'])) {
-            $lang = strtoupper($params['lang']);
-            if (isset($terms[$lang]))
-                $return = $terms[$lang];
-
-         ## Si on passe un sort, on renvoie les elements triés par lang
-        } elseif (isset($params['sort']) && $params['sort'] == "lang") {
-            $return = $terms;
-
-        ##Sinon, je renvoie un tableau de tous les elements
-        } else {
-            foreach ($terms as $lang => $langTerms) {
-                $return = array_merge($return, $langTerms);
-            }
-        }
-
-        return $return;
+    public static function getMSTerms($lang = 'en') {
+        $terms = \Drupal\taxonomy\Entity\Term::loadMultiple(self::getMSTaxoTermsIds($lang));
+        return $terms;
     }
 
     /**
@@ -109,39 +89,19 @@ abstract class DviHelper {
      * @param null $lang
      * @return array
      */
-    public static function getMSTaxoTermsIds($lang = null) {
-        $return = array();
-        $params = array();
-        if ($lang !== null) {
-            $params["lang"] = $lang;
+    public static function getMSTaxoTermsIds($lang = 'en', $taxo_term = null) {
+
+        $query = \Drupal::entityQuery('taxonomy_term');
+        $query->condition('vid', self::$dvi_market_segment_vocabulary);
+        if ($lang !== 'all') {
+            $query->condition('langcode', $lang);
         }
-        $default_labels = self::getMSTerms($params);
-
-
-        foreach ($default_labels as $label) {
-
-            if (false !== $tid = self::getMSTaxoTermId($label, $lang)) {
-                $return[] = $tid;
-            }
-/*
-            $query = \Drupal::entityQuery('taxonomy_term');
-            $query->condition('vid', 'market_segments');
-            $query->condition('name', $label);
-            if ($lang !== null) {
-                $query->condition('langcode', $lang);
-            }
-            $entity = $query->execute();
-
-            if (!empty($entity)) {
-                $return[] = key($entity);
-            }*/
+        if ($taxo_term !== null) {
+            $query->condition('name', $taxo_term);
         }
+        $entities = $query->execute();
 
-        if (count($return) == 0 ) {
-            \Drupal::logger('DviHelper')->notice("Erreur avec les termes taxo Market Segment pour DVI : il semble qu'ils ne soient pas corrects - Aucune entité trouvée pour les termes fournis");
-        }
-
-        return $return;
+        return $entities;
     }
 
     /**
@@ -150,21 +110,8 @@ abstract class DviHelper {
      * @param null $lang
      * @return bool|int|null|string
      */
-    public static function getMSTaxoTermId($taxoTerm, $lang = null) {
-        $return = false;
-        $query = \Drupal::entityQuery('taxonomy_term');
-        $query->condition('vid', 'market_segments');
-        $query->condition('name', $taxoTerm);
-        if ($lang !== null) {
-            $query->condition('langcode', $lang);
-        }
-        $entity = $query->execute();
-
-        if (!empty($entity)) {
-            $return = key($entity);
-        }
-
-        return $return;
+    public static function getMSTaxoTermId($taxoTerm, $lang) {
+        return self::getMSTaxoTermsIds($lang, $taxoTerm);
     }
 
     /**
@@ -211,14 +158,41 @@ abstract class DviHelper {
      * @return bool
      */
     public static function isDVIProduct(\Drupal\node\Entity\Node $node){
-        $dvi_product = FALSE;
+        $is_dvi_product = FALSE;
         ## First, on check si le node est bien un produit
         if($node->type->entity->get('type') == "product"){
 
             ##Ensuite, on demande si on a un des terme de taxo de DVI
-            $dvi_product = self::hasMSTaxoTerm($node);
+            $hasMsTaxoTerm = self::hasMSTaxoTerm($node);
+
+            #je vérifie qu'il est tagué "produit DVI" pour la subhome
+            $isTaggedDvi = false;
+            $lang = $node->language()->getId();
+
+            $subhome_taxoTerm = "";
+            if ($lang == 'fr') {
+                $subhome_taxoTerm = self::SUBHOME_PRODUIT_DVI_TERM_FR;
+            } else {
+                $subhome_taxoTerm = self::SUBHOME_PRODUIT_DVI_TERM_EN;
+            }
+
+            $fieldName = self::$subhome_field_name;
+            if ( isset($node->$fieldName)) {
+                //récupération des tag market segment du produit
+                $fieldValue = $node->$fieldName->getValue();
+                if (!empty($fieldValue)) {
+                    //pour chaque tag on regarde s'il y en a un dvi
+                    foreach ($fieldValue as $values){
+                        if(isset($values['target_id']) && ($values['target_id'] == self::getProductDviSubhomeTid())){
+                            $isTaggedDvi = TRUE;
+                        }
+                    }
+                }
+            }
+
+            $is_dvi_product = ($hasMsTaxoTerm && $isTaggedDvi) ? true : false;
         }
-        return $dvi_product;
+        return $is_dvi_product;
     }
 
     /**
@@ -226,8 +200,13 @@ abstract class DviHelper {
      * @param $term
      * @return bool
      */
-    public static function isMSTerm($term) {
-        $ms_terms = self::getMSTerms();
-        return in_array($term, $ms_terms);
+    public static function isMSTerm($term, $lang = 'en') {
+        $ms_terms = self::getMSTerms($lang);
+        $isMsTerm = false;
+        foreach ($ms_terms as $ms_term) {
+            if ($term == $ms_term->getName())
+                $isMsTerm = true;
+        }
+        return $isMsTerm;
     }
 }

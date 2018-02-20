@@ -43,17 +43,3 @@ function isDVIProduct($node){
 	}
 	return $dvi_product;
 }
-
-function oab_dvi_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
-
-
-    if ($view->id() == "subhomes" && $display_id == "page_catalogue") {
-        $request = $view->getRequest();
-
-        $segmentParameter = $request->query->get('segment');
-        if (DviHelper::isMSTerm($segmentParameter)) {
-            $tid = DviHelper::getMSTaxoTermId($segmentParameter);
-            $request->query->set('segment', $tid);
-        }
-    }
-}
