@@ -123,28 +123,13 @@
     cursor: pointer;
 }
 
-#block-contactbarenstandard {
-    background-color: #333;
-    color: white;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-#block-contactbarrustandard {
-    background-color: #333;
-    color: white;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-#block-contactbarpress {
-    background-color: #333;
-    color: white;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-#block-contactbaranalyst {
+#block-contactbarenstandard,
+#block-contactbarrustandard,
+#block-contactbarbrstandard,
+#block-contactbaresstandard,
+#block-contactbarpress,
+#block-contactbaranalyst
+{
     background-color: #333;
     color: white;
     padding-left: 0;
@@ -173,7 +158,9 @@
 #block-contactbaranalyst.affix,
 #block-contactbarpress.affix,
 #block-contactbarrustandard.affix,
-#block-contactbarenstandard.affix ,
+#block-contactbarenstandard.affix,
+#block-contactbarbrstandard.affix,
+#block-contactbaresstandard.affix,
 #block-contactbar.affix{
     bottom: 0;
     height: auto;
@@ -188,6 +175,8 @@
 #block-contactbarpress.affix-bottom,
 #block-contactbarrustandard.affix-bottom,
 #block-contactbarenstandard.affix-bottom,
+#block-contactbarbrstandard.affix-bottom,
+#block-contactbaresstandard.affix-bottom,
 #block-contactbar.affix-bottom{
     width: 100%;
    /* position: relative;*/
