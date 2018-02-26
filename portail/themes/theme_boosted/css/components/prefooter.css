@@ -173,7 +173,8 @@
 #block-contactbaranalyst.affix,
 #block-contactbarpress.affix,
 #block-contactbarrustandard.affix,
-#block-contactbarenstandard.affix ,
+#block-contactbarenstandard.affix,
+#block-contactbardvi.affix,
 #block-contactbar.affix{
     bottom: 0;
     height: auto;
@@ -188,9 +189,18 @@
 #block-contactbarpress.affix-bottom,
 #block-contactbarrustandard.affix-bottom,
 #block-contactbarenstandard.affix-bottom,
+#block-contactbardvi.affix-bottom,
 #block-contactbar.affix-bottom{
     width: 100%;
    /* position: relative;*/
     z-index: 10;
    /* top: 0 !important;*/
+}
+
+
+#block-contactbardvi {
+    background-color: #333;
+    color: white;
+    padding-left: 0;
+    padding-right: 0;
 }
