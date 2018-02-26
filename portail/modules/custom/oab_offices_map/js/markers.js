@@ -111,7 +111,7 @@
             //
             for (var j=0; j< map.mapMarkers.length; j++){
                 if (currentMapMarker !=  map.mapMarkers[j]){
-                    // On remet l'icone par d�faut sur tous les markers
+                    // On remet l'icone par défaut sur tous les markers
                     var iconNormal = map.mapMarkers[j].icon.replace('-hover.png', '.png');
                     map.mapMarkers[j].setIcon(iconNormal);
                 }
