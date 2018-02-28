@@ -22,9 +22,9 @@ settings:
   label_display: '0'
   need_help: 'Besoin d''aide ?'
   link_partenaire: ''
-  link_partenaire_text: 'Devenir partenaire'
+  link_partenaire_text: 'Devenir distributeur'
   link_contact: ''
-  link_contact_text: 'Contact DVI'
+  link_contact_text: 'Nous contacter'
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
