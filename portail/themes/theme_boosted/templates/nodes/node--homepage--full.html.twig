@@ -105,8 +105,8 @@
             </div>
             {% if content.field_title_btn_text|render|trim is not empty %}
                 <div class="clearfix"></div>
-                <div class="col-md-7 no-padding text-left title">
-                    <a class="btn btn-default" href="{{ content.field_title_button_link.0["#url"] }}" >
+                <div class="col-md-7 no-padding text-left title title-btn">
+                    <a class="btn btn-default" href="{{ content.field_title_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '[Titre affiché]', '')" >
                         {{ content.field_title_btn_text.0["#context"].value }}
                     </a>
                 </div>
@@ -184,7 +184,7 @@
                 {% if content.field_solution_banner_btn_text|render|trim is not empty %}
                     <div class="clearfix"></div>
                     <div class="col-md-7 no-padding text-left title">
-                        <a class="btn btn-default" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" >
+                        <a class="btn btn-default" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '[Titre affiché]', '')" >
                             {{ content.field_solution_banner_btn_text.0["#context"].value }}
                         </a>
                     </div>

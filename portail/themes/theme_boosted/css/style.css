@@ -426,6 +426,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
     margin-top: 40px;
 }
+
+.section-title-top-zone .title-btn {
+    margin-top: 20px;
+}
+
 .section-title-top-zone .subhead-title{
     font-size: 2.4rem;
     line-height: 2.4rem;
