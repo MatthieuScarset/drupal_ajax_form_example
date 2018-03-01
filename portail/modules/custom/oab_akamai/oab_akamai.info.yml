@@ -1,0 +1,8 @@
+name: OAB Akamai
+description: 'functions for call Akamai API'
+type: module
+package: OAB
+version: VERSION
+core: '8.x'
+project: 'oab_akamai'
+datestamp: 1519745454

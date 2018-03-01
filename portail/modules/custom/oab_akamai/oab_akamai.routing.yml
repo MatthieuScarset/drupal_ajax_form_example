@@ -1,0 +1,8 @@
+#page d'administration par défaut
+oab_akamai.test:
+  path: 'admin/akamai_test'
+  defaults:
+    _controller: '\Drupal\oab_akamai\Controller\OabAkamaiController::test'
+    _title: 'Test API akamai'
+  requirements:
+    _permission: 'access content'

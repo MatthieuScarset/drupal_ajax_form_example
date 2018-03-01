@@ -1,0 +1,11 @@
+<?php
+
+function oab_akamai_install() {
+  drupal_set_installed_schema_version('oab_akamai', 8000);
+}
+
+/*
+function oab_akamai_update_8001() {
+  include_once("updates/update_8001.inc");
+}
+*/
