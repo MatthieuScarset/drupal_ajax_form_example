@@ -64,20 +64,10 @@ class OabOfficesMapPageController extends ControllerBase {
             elseif(($current_language == "es" && !empty($country_id) && $country_id =="es")
                 || ($current_language == "es" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
             {
-                // si l'url est /es/contacts ou /es/contacts?country=es => on redirige vers le bon id du pays Spain
-                $query = \Drupal::entityQuery('taxonomy_term');
-                $query->condition('vid', 'office_countries');
-                $query->condition('name', 'Spain');
-                $entity_countries = $query->execute();
-
-                if(!empty($entity_countries))
-                {
-                    $country_id = array_pop(array_values($entity_countries));
-                }
 
                 $query = \Drupal::entityQuery('taxonomy_term');
                 $query->condition('vid', 'regions');
-                $query->condition('name', 'Europe');
+                $query->condition('name', 'Latin America');
                 $entity_regions = $query->execute();
 
                 if(!empty($entity_regions))
