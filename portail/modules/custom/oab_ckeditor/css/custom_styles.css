@@ -99,6 +99,22 @@ p.highlight1{
     margin-bottom: 1rem;
 }
 
+p.axiometext {
+    font-size: 1.6rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: normal;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+}
+
+p.axiomedescription {
+    font-size: 1.6rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    font-weight: normal;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+}
+
 p.highlight1 + .titre4{
     margin-top: 2rem;
 }
