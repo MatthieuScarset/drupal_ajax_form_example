@@ -69,7 +69,7 @@ foreach ($new_menus as $menu_values)
 				'request_path' =>
 					array (
 						'id' => 'request_path',
-						'pages' => '/ventes-indirectes/*',
+						'pages' => '/ventes-indirectes*',
 						'negate' => false,
 						'context_mapping' =>
 							array (
@@ -123,7 +123,7 @@ $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('block.block.directaccessbarfr');
 $config_group->set('visibility.request_path', array (
 	'id' => 'request_path',
-	'pages' => '/ventes-indirectes/*',
+	'pages' => '/ventes-indirectes*',
 	'negate' => true,
 	'context_mapping' =>
 		array (
