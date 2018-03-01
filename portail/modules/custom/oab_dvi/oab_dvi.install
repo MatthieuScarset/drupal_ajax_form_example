@@ -307,3 +307,9 @@ function oab_dvi_update_8039() {
 function oab_dvi_update_8040() {
     include_once("updates/update_8040.inc");
 }
+/**
+ * Mise en place nouvelle direct access bar pour DVI
+ */
+function oab_dvi_update_8042() {
+    include_once("updates/update_8042.inc");
+}

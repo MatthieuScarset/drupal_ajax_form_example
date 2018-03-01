@@ -17,6 +17,14 @@ use Drupal\Core\Form\FormStateInterface;
  *
  */
 
+
+
+/******************* N'EST PLUS UTILISE ****************/
+/** remplacé par les menus direct access bar
+ * selon les langues et les blocs liés dans la config
+ * A supprimer et voir les impacts **/
+/*******************************************************/
+
 class DirectAccessBlock extends BlockBase {
 
     public function build(){
