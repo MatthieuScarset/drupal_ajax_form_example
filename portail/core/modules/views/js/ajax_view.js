@@ -114,5 +114,4 @@
       $(scrollTarget).animate({ scrollTop: offset.top - 10 }, 500);
     }
   };
-
 })(jQuery, Drupal, drupalSettings);
