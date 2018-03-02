@@ -1,3 +1,4 @@
+uuid: 64dd6551-d6a8-4e99-9e2e-9a288087c96f
 langcode: en
 status: true
 dependencies:
@@ -8,25 +9,24 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: contactbar
+id: contactbardvi
 theme: theme_boosted
 region: prefooter
-weight: -19
+weight: 0
 provider: null
-plugin: contact_bar_block
+plugin: contact_bar_dvi_block
 settings:
-  id: contact_bar_block
-  label: 'Contact Bar Axiome FR'
+  id: contact_bar_dvi_block
+  label: 'Contact Bar DVI'
   provider: oab_frontoffice
   label_display: '0'
-  content: ''
-  content_format: full_html
+  need_help: 'Besoin d''aide ?'
+  link_partenaire: ''
+  link_partenaire_text: 'Devenir distributeur'
+  link_contact: ''
+  link_contact_text: 'Nous contacter'
   context_mapping:
     node: '@node.node_route_context:node'
-  link_assistance: 'https://espaceclient.orange-business.com/web/ece2/assistance'
-  link_assistance_text: Assistance
-  link_ecrire: /fr/contact-commercial
-  link_ecrire_text: 'Nous écrire'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
@@ -45,5 +45,5 @@ visibility:
   request_path:
     id: request_path
     pages: '/ventes-indirectes/produits/*'
-    negate: true
+    negate: false
     context_mapping: {  }
