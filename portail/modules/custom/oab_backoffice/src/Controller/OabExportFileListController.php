@@ -17,14 +17,37 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OabExportFileListController extends ControllerBase
 {
+    private static $dir = "temporary://export_document";
+
+    public function setupBatch(Request $request) {
+        \Drupal::logger('export_file')->notice('Setup batch');
+         $originPath = $request->headers->get('referer');
+        $file_name = date('Ymd-His') . "-document-list-" . rand() . ".csv";
+        $batch = array(
+            'title' => t("Export document list"),
+            'operations'    => array(
+                array( '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList', array($file_name))
+            ),
+            'progress_message' => t('Exporting document list'),
+            'finished'      => '\Drupal\oab_backoffice\Controller\OabExportFileListController::returnFile'
+        );
+
+        batch_set($batch);
+
+        return batch_process($originPath);
+    }
+
+
     /** Méthode appelée quand on va voir le détail d'un import en BO
      */
-    public function exportFileList(Request $request) {
+    public static function exportFileList($file_name, &$context) {
 
+        \Drupal::logger('export_file')->notice('Debut export');
         ## Recuperation de la vue et du bon display view
         $view = \Drupal\views\Views::getView('document_list');
-        $view->setDisplay('document_list_export');
-
+        $view->setDisplay('document_list_page');
+        #$view->display_handler->options['pager']['type'] = 'none';
+        $view->preview();
         ## Tableau pour recuperer toutes les infos
         $ret = array();
 
@@ -32,8 +55,6 @@ class OabExportFileListController extends ControllerBase
         $ret[0] = array();
 
 
-
-        $view->preview();
         $fields = array(
             'relation'  => array(),
             'entity'    => array()
@@ -60,9 +81,9 @@ class OabExportFileListController extends ControllerBase
                     foreach ($values as $key => $value) {
                         if ($i == 0) {
                             $i++;
-                            $value_string .= $this->getValueFromValueArray($value);
+                            $value_string .= self::getValueFromValueArray($value);
                         } else {
-                            $value_string .= ", " . $this->getValueFromValueArray($value);
+                            $value_string .= ", " . self::getValueFromValueArray($value);
                         }
                     }
                 }
@@ -77,9 +98,9 @@ class OabExportFileListController extends ControllerBase
 
                         foreach ($values as $key => $value) {
                             if ($key == 0)
-                                $value_string .= $this->getValueFromValueArray($value);
+                                $value_string .= self::getValueFromValueArray($value);
                             else {
-                                $value_string .= ", " . $this->getValueFromValueArray($value);
+                                $value_string .= ", " . self::getValueFromValueArray($value);
                             }
                         }
                     }
@@ -90,11 +111,11 @@ class OabExportFileListController extends ControllerBase
             $ret[] = $row;
         }
         #kint($ret);
-        $dir = "temporary://export_document";
-        $path = "$dir/". date('Ymd-His') . "-document-list-" . rand() . ".csv";
 
-        if (!file_exists($dir)) {
-            mkdir($dir, 0770, TRUE);
+        $path = self::$dir."/$file_name";
+
+        if (!file_exists(self::$dir)) {
+            mkdir(self::$dir, 0770, TRUE);
         }
 
         $toWrite = "";
@@ -108,16 +129,39 @@ class OabExportFileListController extends ControllerBase
             echo "Erreur lors de la création du fichier de résultat";
             die();
         }
-        $headers = array(
+
+        $context["results"]['file'] = $file;
+        /*$headers = array(
             'Content-Type'     => 'text/csv',
             'Content-Disposition' => 'attachment; filename="'.$file->getFilename().'"'
-        );
+        );*/
         #$uri = new Uri($file->getFileUri());
 
-        return new BinaryFileResponse(drupal_realpath($file->getFileUri()), 200, $headers);
- }
 
-    private function getValueFromValueArray($valueArray) {
+    }
+
+
+    public static function returnFile($success, $results, $operations) {
+      /*  kint($results);
+        kint($success);
+        kint($operations);
+        die();*/
+      $fileName = $results['file']->getFilename();
+      $filePath = self::$dir . "/" ; $fileName;
+
+        $headers = array(
+            'Content-Type'     => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+            'Content-Length' => filesize($filePath),
+            'Content-Transfer-Encoding' => 'binary',
+            'Expires' => '0'
+        );
+        \Drupal::logger('export_file')->notice('return file');
+        return new BinaryFileResponse(drupal_realpath($results['file']->getFileUri()), 200, $headers);
+
+    }
+
+    private static function getValueFromValueArray($valueArray) {
         $ret = "";
 
         ##Gestion des Targetsid

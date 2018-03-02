@@ -41,7 +41,7 @@ oab.settings_ece:
 oab_backoffice.export_file_list:
   path: 'admin/obs_backoffice/dl-file-list'
   defaults:
-    _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList'
+    _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::setupBatch'
     _title: 'Export File list'
   requirements:
     _permission: 'administer site configuration'
