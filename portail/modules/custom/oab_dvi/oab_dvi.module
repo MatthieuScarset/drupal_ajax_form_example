@@ -43,3 +43,47 @@ function isDVIProduct($node){
 	}
 	return $dvi_product;
 }
+
+
+/**
+ * Alteration des form de views
+ * @param $form
+ * @param $form_state
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ */
+function oab_dvi_form_views_exposed_form_alter(&$form, &$form_state) {
+    $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if ($form['#id'] === 'views-exposed-form-subhomes-page-distributor') {
+
+        $query = \Drupal::entityQuery('node');
+        $query->condition('status', 1);
+        $query->condition('type', 'product');
+        $query->condition('field_is_dvi_product', 1);
+        $query->condition('langcode', $lang);
+        $entity_ids = $query->execute();
+
+        $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($entity_ids);
+
+        $options = array();
+        $options[""] = "Produits";
+        foreach ($nodes as $node) {
+            $options[$node->id()] = $node->label();
+        }
+
+        $formProducts = [
+            "#type"             => 'select',
+            '#options'          => $options,
+            "#size"             => NULL,
+            '#default_value'    => '',
+            '#validated'        => TRUE
+        ];
+        $form['product'] = $formProducts;
+    }
+
+
+
+    //Subhome Products DVI
+    if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue-dvi') {
+        $form['#attributes']['class'][] = "hidden";
+    }
+}
