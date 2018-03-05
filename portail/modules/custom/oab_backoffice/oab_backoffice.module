@@ -709,29 +709,33 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
 function oab_backoffice_cron() {
   ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
   #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-  #if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
+  if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
 
-    ##je recupère la date d'il y a un an
-    $date = new Datetime\DrupalDateTime('1 year ago',new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
-    $formatted = $date->format('U');    ## Format milliseconde
+      ##je recupère la date d'il y a un an
+      $date = new Datetime\DrupalDateTime('1 year ago', new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
+      $formatted = $date->format('U');    ## Format milliseconde
 
-    ##Query pour retrouver toutes les submissions antérieures à un an
-    $query = \Drupal::entityQuery('webform_submission')
-      ->condition('created', $formatted, '<');
-    $results = $query->execute();
+      ##Query pour retrouver toutes les submissions antérieures à un an
+      $query = \Drupal::entityQuery('webform_submission')
+          ->condition('created', $formatted, '<');
+      $results = $query->execute();
 
-    ##je load toutes les submissions trouvées
-    $storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
-    $webform_submissions = $storage->loadMultiple($results);
-    $nbSubmissions = count($webform_submissions);   ##Nb pour le log
+      ##je load toutes les submissions trouvées
+      $storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
+      $webform_submissions = $storage->loadMultiple($results);
+      $nbSubmissions = count($webform_submissions);   ##Nb pour le log
 
-    ##Suppression de toutes les entités trouvées
-    $storage->delete($webform_submissions);
+      ##Suppression de toutes les entités trouvées
+      $storage->delete($webform_submissions);
 
-    ## Petit message d'information au cas ou...
-   # \Drupal::logger('Cron Webform')->notice("$nbSubmissions résultats de webforms de plus d'un an ont été supprimés");
 
-  #}
+      #####################################
+      #####################################
+      # Suppression des elements du dossier d'export des listes de documents du site
+      \Drupal\oab_backoffice\Controller\OabExportFileListController::clearStorageDir();
+
+
+  }
 }
 
 /**
@@ -886,4 +890,19 @@ function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
         }
     }
 
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oab_backoffice_theme($existing, $type, $theme, $path) {
+    return [
+        'oab_export_file_list__ending_page'  => [
+            'variables' => [
+                "file_url"      => NULL,
+                "origin_url"    => NULL
+            ],
+            'template'  => 'OabExportFileList/oab-export-file-list--ending-page'
+        ],
+    ];
 }
