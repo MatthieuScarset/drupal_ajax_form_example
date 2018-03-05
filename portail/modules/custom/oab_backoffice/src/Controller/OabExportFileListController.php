@@ -149,8 +149,8 @@ class OabExportFileListController extends ControllerBase {
 
 
         ## Je check que le dossier existe
-        if (!file_exists($this->dir)) {
-            mkdir($this->dir, 0770, TRUE);
+        if (!file_exists(self::$dir)) {
+            mkdir(self::$dir, 0770, TRUE);
         }
 
         $toWrite = "";
@@ -158,7 +158,7 @@ class OabExportFileListController extends ControllerBase {
             $toWrite .= implode(";", $row);
             $toWrite .= "\r\n";
         }
-        $path = $this->dir."/$file_name";
+        $path = self::$dir."/$file_name";
 
         $file = file_unmanaged_save_data($toWrite, $path);
 
