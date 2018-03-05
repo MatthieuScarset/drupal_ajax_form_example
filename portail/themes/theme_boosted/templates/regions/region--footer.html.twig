@@ -92,6 +92,12 @@
                 {% if elements.topnavbarruen_2 %}
                     {% set topnavbar_2 =  elements.topnavbarruen_2 %}
                 {% endif %}
+                {% if elements.topnavbares_2 %}
+                    {% set topnavbar_2 =  elements.topnavbares_2 %}
+                {% endif %}
+                {% if elements.topnavbarbr_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarbr_2 %}
+                {% endif %}
                 {% if topnavbar_2["#markup"]|render|trim is empty %}
                     {% set classSupp_topnavbar = "hidden" %}
                 {% endif %}
