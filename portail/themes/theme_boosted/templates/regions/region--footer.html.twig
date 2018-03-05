@@ -123,6 +123,12 @@
                 {% if elements.toprightnavbarfooterruen %}
                     {% set toprightnavbar_footer =  elements.toprightnavbarfooterruen %}
                 {% endif %}
+                {% if elements.toprightnavbarfooteres %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooteres %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterbr %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterbr %}
+                {% endif %}
 
                 {% if toprightnavbar_footer["#markup"]|render|trim is empty %}
                     {% set classSupp_topnavbarfooter = "hidden" %}
