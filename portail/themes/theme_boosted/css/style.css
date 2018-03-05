@@ -421,21 +421,23 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .section-title-top-zone .title{
-    font-size: 5rem;
-    line-height: 5rem;
+    font-size: 4.5rem;
+    line-height: 4.5rem;
     font-weight: bold;
     margin-top: 40px;
 }
+
+.section-title-top-zone .title-btn {
+    margin-top: 20px;
+}
+
 .section-title-top-zone .subhead-title{
     font-size: 2.4rem;
     line-height: 2.4rem;
     font-weight: bold;
     margin-top: 50px;
 }
-.solution-banner .title,
-.solution-banner .highlight-solution{
-    color: white;
-}
+
 .carousel-solution .left-zone .row:after,
 .carousel-solution .left-zone .row:before,
 .carousel-solution .right-zone .row:after,
@@ -1865,6 +1867,25 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     width: 100%;
     height: auto;
 }
+
 body.page-node-type-custom-page{
     display: inline-block;
 }
+
+.solution-banner .btn.btn-default:hover,
+.banner-bg.top-banner .btn.btn-default:hover
+{
+    background-color: black;
+}
+.solution-banner .btn.btn-default:active,
+.banner-bg.top-banner .btn.btn-default:active
+{
+    background-color: #f16e00;
+}
+
+.solution-banner .btn.btn-default,
+.banner-bg.top-banner .btn.btn-default
+{
+    background-color: white;
+}
+
