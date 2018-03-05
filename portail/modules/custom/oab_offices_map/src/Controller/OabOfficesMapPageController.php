@@ -40,6 +40,7 @@ class OabOfficesMapPageController extends ControllerBase {
 			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
 			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
+
 			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
 				|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
 			{
@@ -47,11 +48,11 @@ class OabOfficesMapPageController extends ControllerBase {
 				$query = \Drupal::entityQuery('taxonomy_term');
 				$query->condition('vid', 'office_countries');
 				$query->condition('name', 'Russia');
-				$entity = $query->execute();
+                $entity_countries = $query->execute();
 
-				if(!empty($entity))
+				if(!empty($entity_countries))
 				{
-					$country_id = array_pop(array_values($entity));
+					$country_id = array_pop(array_values($entity_countries));
 				}
 				$current_route = \Drupal::routeMatch()->getRouteName();
 				$option = [
@@ -60,6 +61,58 @@ class OabOfficesMapPageController extends ControllerBase {
 				$url = Url::fromRoute($current_route, array(), $option);
 				return new RedirectResponse($url->toString());
 			}
+            elseif(($current_language == "es" && !empty($country_id) && $country_id =="es")
+                || ($current_language == "es" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
+            {
+
+                $query = \Drupal::entityQuery('taxonomy_term');
+                $query->condition('vid', 'regions');
+                $query->condition('name', 'Latin America');
+                $entity_regions = $query->execute();
+
+                if(!empty($entity_regions))
+                {
+                    $region_id = array_pop(array_values($entity_regions));
+                }
+
+                $current_route = \Drupal::routeMatch()->getRouteName();
+                $option = [
+                    'query' => array('region' => $region_id, 'country' => $country_id),
+                ];
+                $url = Url::fromRoute($current_route, array(), $option);
+                return new RedirectResponse($url->toString());
+            }
+            elseif(($current_language == "pt-br" && !empty($country_id) && $country_id =="pt-br")
+                || ($current_language == "pt-br" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
+            {
+                // si l'url est /br/contacts ou /br/contacts?country=br => on redirige vers le bon id du pays Brazil
+                $query = \Drupal::entityQuery('taxonomy_term');
+                $query->condition('vid', 'office_countries');
+                $query->condition('name', 'Brazil');
+                $entity_countries = $query->execute();
+
+                if(!empty($entity_countries))
+                {
+                    $country_id = array_pop(array_values($entity_countries));
+                }
+
+                $query = \Drupal::entityQuery('taxonomy_term');
+                $query->condition('vid', 'regions');
+                $query->condition('name', 'Latin America');
+                $entity_regions = $query->execute();
+
+                if(!empty($entity_regions))
+                {
+                    $region_id = array_pop(array_values($entity_regions));
+                }
+
+                $current_route = \Drupal::routeMatch()->getRouteName();
+                $option = [
+                    'query' => array('region' => $region_id, 'country' => $country_id),
+                ];
+                $url = Url::fromRoute($current_route, array(), $option);
+                return new RedirectResponse($url->toString());
+            }
 			else {
 				$officesMapView = Views::getView('offices_map_view');
 				$officesMapView->setDisplay('offices_map_block');
