@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: products_br
+label: 'products BR'
+type: 'canonical_entities:node'
+pattern: 'produto/[node:title]'
+selection_criteria:
+  50ca39d0-26cb-4c82-aea7-acbf20e18ccf:
+    id: node_type
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 50ca39d0-26cb-4c82-aea7-acbf20e18ccf
+  00f19a39-aeb9-4bd6-9ed8-cbcbfc3c87bb:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 00f19a39-aeb9-4bd6-9ed8-cbcbfc3c87bb
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -18,6 +18,21 @@ use Drupal\locale\SourceString;
 
 \Drupal::service('path.alias_storage')->save("/subhome_documents", "/mediateca", "pt-br");
 
+####### Ajout des patterns
+oabt_YmlImport('pathauto.pattern.blogs.yml');
+oabt_YmlImport('pathauto.pattern.case_study_br.yml');
+oabt_YmlImport('pathauto.pattern.case_study_es.yml');
+oabt_YmlImport('pathauto.pattern.magazine_br.yml');
+oabt_YmlImport('pathauto.pattern.magazine_es.yml');
+oabt_YmlImport('pathauto.pattern.press_br.yml');
+oabt_YmlImport('pathauto.pattern.press_es.yml');
+oabt_YmlImport('pathauto.pattern.products_br.yml');
+oabt_YmlImport('pathauto.pattern.products_es.yml');
+oabt_YmlImport('pathauto.pattern.solution_br.yml');
+oabt_YmlImport('pathauto.pattern.solution_es.yml');
+
+
+
 
 
 $translations = array(

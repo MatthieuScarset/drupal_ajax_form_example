@@ -1,0 +1,24 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: magazine_br
+label: 'magazine BR'
+type: 'canonical_entities:node'
+pattern: 'revista/[node:title]'
+selection_criteria:
+  ee3040a7-408d-4484-b046-74223f34ba9c:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: ee3040a7-408d-4484-b046-74223f34ba9c
+selection_logic: and
+weight: -5
+relationships:
+  'node:langcode:language':
+    label: Language
