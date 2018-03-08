@@ -35,26 +35,47 @@ class OabExportFileListController extends ControllerBase {
             }
         }
 
+        $view = \Drupal\views\Views::getView('document_list');
+        $view->get_total_rows = true;
+        $view->setDisplay('document_list_page');
+        $view->setExposedInput($params);        # Je set les paramètres recupérés dans l'URL pour
+        # mettre les memes filtres que la vue qui s'est affichée
+
+        ## Je supprime le pager pour recuperer tous les éléments
+        #$view->display_handler->options['pager']['type'] = 'none';
+        $view->execute();
+
         ##Création du nom unique du fichier final
         $file_name = date('Ymd-His') . "-document-list-" . rand() . ".csv";
+
+        $operations = array();
+        $first_row = 0;
+
+        $view->setItemsPerPage(100);
+
+        while ($first_row < $view->total_rows) {
+            $operations[] = array(
+                '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList',
+                array($first_row, $file_name, $params)
+            );
+
+            $first_row += 100;
+        }
 
 
         ##Setting up du batch
         $batch = array(
             'title' => t("Export document list"),
-            'operations'    => array(
-                array(
-                    '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList',
-                    array($params, $file_name)
-                )
-            ),
-            'progress_message' => t('Exporting document list'),
+            'operations'  => $operations,
+            'progress_message' => t('Processed @current out of @total.'),
         );
 
 
         ##j'enregistre l'URL d'origine (utilisée pour créer un lien de retour à la fin du batch)
         $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
         $tempstore->set('origin_url', $originPath);
+        $tempstore->set('file_path', self::$dir . "/" .$file_name);
+
 
         ## Lien de la page à afficher à la fin de la création du fichier
         $route = \Drupal::url('oab_backoffice.download_file_list');
@@ -67,19 +88,15 @@ class OabExportFileListController extends ControllerBase {
     /**
      * Méthode appelée quand on va voir le détail d'un import en BO
      */
-    public function exportFileList($params, $file_name, &$context) {
+    public function exportFileList($first_row, $file_name, $params, &$context) {
 
-        ## Recuperation de la vue et du bon display view
         $view = \Drupal\views\Views::getView('document_list');
+        $view->get_total_rows = true;
         $view->setDisplay('document_list_page');
-        $view->setExposedInput($params);        # Je set les paramètres recupérés dans l'URL pour
-                                                # mettre les memes filtres que la vue qui s'est affichée
-
-        ## Je supprime le pager pour recuperer tous les éléments
-        $view->display_handler->options['pager']['type'] = 'none';
-
+        $view->setItemsPerPage(100);
+        $view->setExposedInput($params);
+        $view->setOffset($first_row);
         $view->preview();
-
 
         ## Tableau pour recuperer toutes les infos
         $ret = array();
@@ -101,7 +118,7 @@ class OabExportFileListController extends ControllerBase {
             $ret[0][] = $field_data->options['label'];
         }
 
-        ##Boucle pour recueperer tous les résultats, et modif de l'affichag
+         ##Boucle pour recueperer tous les résultats, et modif de l'affichag
         # en fonction de chacun, grace à la méthode tout en bas
         $results = $view->result;
         foreach ($results as $result) {
@@ -160,35 +177,45 @@ class OabExportFileListController extends ControllerBase {
         }
         $path = self::$dir."/$file_name";
 
-        $file = file_unmanaged_save_data($toWrite, $path);
+        #$file = file_unmanaged_save_data($toWrite, $path);
+        $ret = file_put_contents($path, $toWrite, FILE_APPEND);
 
         #On remonte une erreur si le fichier ne se crée pas
-        if ($file === false) {
-            echo "Erreur lors de la création du fichier de résultat";
+        if ($ret === false) {
+            \Drupal::logger('ExportFile')->notice("Erreur lors de la creation du fichier");
             die();
         }
 
-        # Je sauvegarde l'uri du fichier
-        $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
-        $tempstore->set('file_path', $file);
+    }
 
 
+    public function endingBatch($file_name, $success, $results, $operations) {
+        if (file_exists(self::$dir . "/" .$file_name)) {
+
+        } else {
+            \Drupal::logger('ExportFile')->notice("le fichier d'export est introuvable");
+        }
     }
 
 
     public function endingPage(Request $request) {
 
-        ##Je recupère les deux données sauvées pour l'affichage
-        $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
-        $file_url = $tempstore->get('file_path');
-        $origin = $tempstore->get('origin_url');
-
-        ##S'il en manque une, j'affiche un message
-        if ($file_url === null || $origin === null) {
+        $referer = $request->headers->get('referer');
+        if ($referer === null) {
             throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
         }
-        $url = file_create_url($file_url);
 
+        ##Je recupère les deux données sauvées pour l'affichage
+        $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
+        $file_path = $tempstore->get('file_path');
+        $origin = $tempstore->get('origin_url');
+
+        if (!file_exists($file_path)) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Le fichier demandé n\'existe pas');
+        }
+
+
+        $url = file_create_url($file_path);
 
         ##J'affiche le résultat
         return [
