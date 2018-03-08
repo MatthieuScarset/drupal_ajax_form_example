@@ -71,6 +71,14 @@ class OabExportFileListController extends ControllerBase {
         );
 
 
+        #Je recupère le nom des colonnes pour la 1ere ligne du fichier
+        $col_name = array();
+        foreach ($view->field as $field_name => $field_data) {
+           $col_name[] = $field_data->options['label'];
+        }
+
+        $this->write_file(array($col_name), $file_name);
+
         ##j'enregistre l'URL d'origine (utilisée pour créer un lien de retour à la fin du batch)
         $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
         $tempstore->set('origin_url', $originPath);
@@ -101,9 +109,6 @@ class OabExportFileListController extends ControllerBase {
         ## Tableau pour recuperer toutes les infos
         $ret = array();
 
-        ##Titres dans la premiere row
-        $ret[0] = array();
-
         $fields = array(
             'relation'  => array(),
             'entity'    => array()
@@ -115,7 +120,6 @@ class OabExportFileListController extends ControllerBase {
             } else {
                 $fields['entity'][$field_name] = $field_data->field;
             }
-            $ret[0][] = $field_data->options['label'];
         }
 
          ##Boucle pour recueperer tous les résultats, et modif de l'affichag
@@ -170,7 +174,9 @@ class OabExportFileListController extends ControllerBase {
             mkdir(self::$dir, 0770, TRUE);
         }
 
-        $toWrite = "";
+
+        self::write_file($ret, $file_name);
+        /*$toWrite = "";
         foreach ($ret as $key => $row) {
             $toWrite .= implode(";", $row);
             $toWrite .= "\r\n";
@@ -184,7 +190,7 @@ class OabExportFileListController extends ControllerBase {
         if ($ret === false) {
             \Drupal::logger('ExportFile')->notice("Erreur lors de la creation du fichier");
             die();
-        }
+        }*/
 
     }
 
@@ -232,6 +238,27 @@ class OabExportFileListController extends ControllerBase {
     public static function clearStorageDir() {
 
     }
+
+
+
+    private static function write_file($tab, $file_name) {
+        $toWrite = "";
+        foreach ($tab as $key => $row) {
+            $toWrite .= implode(";", $row);
+            $toWrite .= "\r\n";
+        }
+        $path = self::$dir."/$file_name";
+
+        #$file = file_unmanaged_save_data($toWrite, $path);
+        $ret = file_put_contents($path, $toWrite, FILE_APPEND);
+
+        #On remonte une erreur si le fichier ne se crée pas
+        if ($ret === false) {
+            \Drupal::logger('ExportFile')->notice("Erreur lors de la creation du fichier");
+            die();
+        }
+    }
+
 
     private function getValueFromValueArray($valueArray) {
         $ret = "";
