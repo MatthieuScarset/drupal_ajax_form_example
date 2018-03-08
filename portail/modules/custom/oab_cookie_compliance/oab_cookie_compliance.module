@@ -1,0 +1,15 @@
+<?php
+
+
+function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
+    return [
+        'block__cookie_compliance_block' => [
+            'variables' => [
+                'message' => 'Default message',
+                'link_text' => 'Default link text',
+                'link_url'  => 'Default url'
+            ],
+            'template'  => 'block--cookie-compliance-block',
+        ],
+    ];
+}

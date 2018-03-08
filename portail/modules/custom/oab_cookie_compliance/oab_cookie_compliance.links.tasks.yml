@@ -1,0 +1,4 @@
+oab.cookie_compliance.tab:
+  route_name: oab.cookie_compliance.settings
+  title: OAB Cookie compliance settings
+  base_route: oab.cookie_compliance.settings

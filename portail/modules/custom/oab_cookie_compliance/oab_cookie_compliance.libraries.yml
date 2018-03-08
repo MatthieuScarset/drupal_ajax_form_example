@@ -1,0 +1,9 @@
+block-library:
+  version: 1.x
+  css:
+    theme:
+      css/cookie-compliance-style.css: {}
+  js:
+    js/cookie-compliance-script.js: {}
+  dependencies:
+    - core/jquery

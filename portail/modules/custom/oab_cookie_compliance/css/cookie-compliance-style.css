@@ -1,0 +1,25 @@
+.cookie-compliance-container {
+    color: white;
+    background-color: gray;
+    font-size: 1.3rem;
+}
+
+.cookie-compliance-container a {
+    color: #f16e00;
+}
+
+.cookie-compliance-container span.block-message {
+    display: block
+}
+
+#cookie-compliance-hide {
+    float: right;
+    font-weight: bold;
+}
+
+@media (max-width: 767px)  {
+    .cookie-compliance-content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
