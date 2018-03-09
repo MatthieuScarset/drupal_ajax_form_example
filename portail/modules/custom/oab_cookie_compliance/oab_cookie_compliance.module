@@ -2,14 +2,16 @@
 
 
 function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
-    return [
-        'block__cookie_compliance_block' => [
-            'variables' => [
+
+    $theme = array();
+    $theme['block__cookie_compliance_block'] = array(
+            'variables' => array(
                 'message' => 'Default message',
                 'link_text' => 'Default link text',
-                'link_url'  => 'Default url'
-            ],
+                'link_url'  => 'Default url',
+                'bla'   => "blu",
+            ),
             'template'  => 'block--cookie-compliance-block',
-        ],
-    ];
+    );
+    return $theme;
 }

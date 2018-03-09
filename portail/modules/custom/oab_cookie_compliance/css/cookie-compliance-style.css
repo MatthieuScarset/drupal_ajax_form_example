@@ -2,6 +2,8 @@
     color: white;
     background-color: gray;
     font-size: 1.3rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .cookie-compliance-container a {

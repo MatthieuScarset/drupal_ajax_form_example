@@ -1,13 +1,13 @@
-cookie_compliance.settings:
+oab.cookie_compliance:
   type: config_object
   label: 'Cookie compliance ddd'
   mapping:
     cookie_text:
-      type: label
+      type: text
       label: 'Block text'
     cookie_link_text:
       type: label
       label: 'Link text'
-    cookie_link:
+    cookie_url:
       type: label
       label: 'Link URL'

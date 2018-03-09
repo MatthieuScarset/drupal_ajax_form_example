@@ -11,6 +11,11 @@ jQuery(document).ready(function($) {
         }).done(function(data) {
             $("#cookie-compliance-block").hide();
             $("#cookie-compliance-block").html("");
+
+            return false;
+        }).fail(function() {
+
+            return false;
         })
         ;
 
