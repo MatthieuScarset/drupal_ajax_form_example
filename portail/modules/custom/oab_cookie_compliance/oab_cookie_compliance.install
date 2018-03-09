@@ -1,0 +1,5 @@
+<?php
+
+function oab_cookie_compliance_install() {
+    drupal_set_installed_schema_version('oab_cookie_compliance', 8000);
+}

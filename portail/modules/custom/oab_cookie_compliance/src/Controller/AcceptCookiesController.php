@@ -19,6 +19,8 @@ use Drupal\user\PrivateTempStoreFactory;
 
 class AcceptCookiesController extends ControllerBase {
     const COOKIE_NAME = 'drupal_oab_cookie-compliance';
+    const BLOCK_ID = 'cookie-compliance-block';
+
     const EXPIRATION_NB_MONTH = 13;
 
     public function process() {

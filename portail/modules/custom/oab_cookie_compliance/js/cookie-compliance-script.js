@@ -3,7 +3,18 @@
  */
 
 
-jQuery(document).ready(function($) {
+(function ($, Drupal, drupalSettings) {
+
+
+    //Au chargement de la page, je regarde si le cookie existe.
+    // S'il existe, je cache le block affiché (Au cas ou il ait été affiché alors que
+    // le cookie existe --- 2nde verif)
+
+
+    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name) !== -1) {
+        $('#' + drupalSettings.cookie_compliance.block_id).hide();
+    }
+
 
     $("#cookie-compliance-hide").click(function(){
         $.ajax({
@@ -23,4 +34,4 @@ jQuery(document).ready(function($) {
         // ie. -> Evite que le lien de la page ait un "#" à la fin après avoir cliqué sur ce bouton
         return false;
     });
-});
+})(window.jQuery, window.Drupal, drupalSettings);

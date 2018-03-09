@@ -29,7 +29,12 @@ class CookieComplianceBlock extends BlockBase {
                 '#message' => $config->get('cookie_text'),
                 '#link_text' => $config->get('cookie_link_text'),
                 '#link_url'  => $config->get('cookie_url'),
-
+                '#block_id'  => AcceptCookiesController::BLOCK_ID,
+                '#attached' => array(
+                    'library' => array(
+                        'oab_cookie_compliance/block-library',
+                    ),
+                )
             );
         }
 

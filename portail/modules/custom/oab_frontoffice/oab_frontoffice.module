@@ -85,11 +85,8 @@ function oab_frontoffice_preprocess_node(&$variables) {
 		}
 
     #J'enregistre mes urls et variables OG pour les avoir en JS
-    $variables['#attached'] = [
-      'drupalSettings' => [
-        'myLibrary' => getSocialBarParameters($node_title, $meta_description, $og_image)
-      ],
-    ];
+    $variables['#attached']['drupalSettings']['myLibrary'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+
   }
 }
 

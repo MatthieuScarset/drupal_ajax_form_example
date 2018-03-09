@@ -1,6 +1,10 @@
 <?php
 
+use Drupal\oab_cookie_compliance\Controller\AcceptCookiesController;
 
+/**
+ * J'ajoute mon propre thème à Drupal
+ */
 function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
 
     $theme = array();
@@ -14,4 +18,16 @@ function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
             'template'  => 'block--cookie-compliance-block',
     );
     return $theme;
+}
+
+
+/**
+ * J'ajoute une petite fonction drupal pour ajouter une variable JS
+ * pour faire une 2nde verif sur le bloc en JS en plus de celle dans le bloc
+ */
+function oab_cookie_compliance_preprocess_page(&$variables) {
+    $variables['#attached']['drupalSettings']['cookie_compliance']['cookie_name'] = AcceptCookiesController::COOKIE_NAME;
+    $variables['#attached']['drupalSettings']['cookie_compliance']['block_id'] = AcceptCookiesController::BLOCK_ID;
+    $variables['#attached']['library'][] = 'oab_cookie_compliance/block-library';
+
 }
