@@ -8,15 +8,17 @@ function oab_cookie_compliance_install() {
 
     #####
     # A l'installation, je set automatiquement les messages par défaut qui sont en confi
-    $config = \Drupal::config(CookieComplianceSettingsForm::CONFIG_NAME);
-
-    $txt = "By browsing this site you agree to use cookies. Cookies are tiny files stored in your web browser to make your on line experience better, establish statistics of visits and sharing on social networks.";
-
-    $config->set('cookie_text', $txt);
-    $config->set('cookie_link_text', 'More');
-    $config->set('cookie_url', '/en/cookies');
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->getEditable('oab.cookie_compliance');
+    $config->setData( array (
+        'cookie_text' => 'By browsing this site you agree to use cookies. Cookies are tiny files stored in your web browser to make your on line experience better, establish statistics of visits and sharing on social networks.',
+        'cookie_link_text' => 'More',
+        'cookie_url' => '/en/cookies',
+    ));
     $config->save();
 
+
+    
     ## French Version
     $collection = \Drupal::service('config.storage')->createCollection('language.fr');
     $collection->write('oab.cookie_compliance', array (
