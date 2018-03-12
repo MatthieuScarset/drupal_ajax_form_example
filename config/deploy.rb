@@ -3,7 +3,7 @@
 
 set :application, 'obs'
 set :repo_url, 'git@git-oab.si.fr.intraorange:obs-com/Sources.git'
-set :stages, fetch(:stages, []).push('dev', 'recette', 'recettefinale', 'integration', 'dvi', 'dvi_integration')
+set :stages, fetch(:stages, []).push('dev', 'test', 'integration')
 set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
