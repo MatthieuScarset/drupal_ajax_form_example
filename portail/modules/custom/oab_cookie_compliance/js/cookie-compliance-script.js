@@ -11,8 +11,8 @@
     // le cookie existe --- 2nde verif)
 
 
-    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name) !== -1) {
-        $('#' + drupalSettings.cookie_compliance.block_id).hide();
+    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name) === -1) {
+        $('#' + drupalSettings.cookie_compliance.block_id).removeClass('hidden');
     }
 
 
@@ -20,8 +20,8 @@
         $.ajax({
             url: "/admin/oab-cookie-compliance/accept-cookie"
         }).done(function(data) {
-            $("#cookie-compliance-block").hide();
-            $("#cookie-compliance-block").html("");
+            $('#' + drupalSettings.cookie_compliance.block_id).hide();
+            $('#' + drupalSettings.cookie_compliance.block_id).html("");
 
             return false;
         }).fail(function() {
