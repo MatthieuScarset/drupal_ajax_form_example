@@ -398,7 +398,7 @@ var shareClick = function(button){
     var config = "toolbar = no, location = no, directories = no, menubar = no, width = 560, height = 500";
 
     if(button === 'facebook'){
-        var link = share_links.facebook;
+        var link = drupalSettings.shareSettings.share_siteUrls.facebook;
         var popup_title = "Facebook share";
         window.open(link, popup_title, config);
     }else if(button === 'twitter' && sharebar_parameters.use_bitly === true){
@@ -406,7 +406,7 @@ var shareClick = function(button){
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
     }else if(button === 'twitter'){
-        var link = share_links.twitter;
+        var link = drupalSettings.shareSettings.share_siteUrls.twitter;
         var popup_title = "Twitter share";
         window.open(link, popup_title, config);
     }else if(button === 'googleplus'){
@@ -414,7 +414,7 @@ var shareClick = function(button){
         var popup_title = "Google Plus share";
         window.open(link, popup_title, config);
     }else if(button === 'linkedin'){
-        var link = share_links.linkedin;
+        var link = drupalSettings.shareSettings.share_siteUrls.linkedin;
         var popup_title = "LinkedIn share";
         window.open(link, popup_title, config);
         //shares.user += 1;

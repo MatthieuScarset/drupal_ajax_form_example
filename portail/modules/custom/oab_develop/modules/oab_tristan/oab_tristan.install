@@ -528,3 +528,12 @@ function oab_tristan_update_8067()
 function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
+
+
+/**
+ * Ajout des balises meta pour le partage sur fb, twitter, LIn
+ */
+function oab_tristan_update_8072() {
+    include_once('updates/update_8072.inc');
+}
+

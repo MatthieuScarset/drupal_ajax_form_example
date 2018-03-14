@@ -1,8 +1,8 @@
-uuid: 5e5ca55f-26fa-4b50-9cbb-6e0493d853c9
 langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_media_modal
     - field.field.node.full_html.field_blog_format
     - field.field.node.full_html.field_blog_thematic
     - field.field.node.full_html.field_content
@@ -20,10 +20,14 @@ dependencies:
     - field.field.node.full_html.field_region
     - field.field.node.full_html.field_start_date
     - field.field.node.full_html.field_subhome
+    - field.field.node.full_html.field_visual
+    - field.field.node.full_html.moderation_state_update
     - node.type.full_html
   module:
     - datetime
+    - entity_browser
     - field_group
+    - inline_entity_form
     - metatag
     - path
     - text
@@ -50,6 +54,7 @@ third_party_settings:
         - title
         - field_display_title
         - field_content
+        - field_visual
       parent_name: group_onglets
       weight: 20
       format_type: tab
@@ -82,6 +87,7 @@ third_party_settings:
     group_publish:
       children:
         - group_content_worthy_period
+        - moderation_state_update
       parent_name: group_onglets
       weight: 22
       format_type: tab
@@ -221,10 +227,38 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_visual:
+    weight: 6
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
   langcode:
     type: language_select
     weight: 2
-    settings: {  }
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  moderation_state_update:
+    type: inline_entity_form_complex
+    weight: 21
+    settings:
+      override_labels: true
+      label_singular: 'Moderation state update'
+      label_plural: 'Moderation state updates'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
     third_party_settings: {  }
     region: content
   path:
@@ -238,6 +272,13 @@ content:
     weight: 1
     settings:
       display_label: true
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
     third_party_settings: {  }
     region: content
   title:

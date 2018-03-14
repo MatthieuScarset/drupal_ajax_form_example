@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-id: node__industry
-label: 'Content: Industry'
+id: node__product
+label: 'Content: Product'
 tags:
   description: '[node:field_meta_description]'
   title: '[node:field_meta_title] | [site:name]'

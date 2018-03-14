@@ -85,11 +85,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
 		}
 
     #J'enregistre mes urls et variables OG pour les avoir en JS
-    $variables['#attached'] = [
-      'drupalSettings' => [
-        'myLibrary' => getSocialBarParameters($node_title, $meta_description, $og_image)
-      ],
-    ];
+    $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
   }
 }
 
@@ -801,12 +797,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 
 	#J'enregistre mes urls et variables OG pour les avoir en JS
 	$array_sharbar = array(
-		'share_siteUrls' => $siteUrls,
-		'og_locale' => $og_locale,
-		'og_title' => $pageTitle,
-		'og_desc' => $meta_description,
-		'og_url' => $og_url,
-		'og_image' => $og_image
+		'share_siteUrls' => $siteUrls
 	);
 	return $array_sharbar;
 }
