@@ -11,24 +11,14 @@
     // le cookie existe --- 2nde verif)
 
 
-    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name) === -1) {
+    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name_first_visit) > -1) {
         $('#' + drupalSettings.cookie_compliance.block_id).removeClass('hidden');
     }
 
 
     $("#cookie-compliance-hide").click(function(){
-        $.ajax({
-            url: "/admin/oab-cookie-compliance/accept-cookie"
-        }).done(function(data) {
-            $('#' + drupalSettings.cookie_compliance.block_id).hide();
-            $('#' + drupalSettings.cookie_compliance.block_id).html("");
-
-            return false;
-        }).fail(function() {
-
-            return false;
-        })
-        ;
+        $('#' + drupalSettings.cookie_compliance.block_id).hide();
+        $('#' + drupalSettings.cookie_compliance.block_id).html("");
 
         //Return false => Evite d'aller vers le lien ('#') mise dans le href de la balise a
         // ie. -> Evite que le lien de la page ait un "#" à la fin après avoir cliqué sur ce bouton

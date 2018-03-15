@@ -5,12 +5,3 @@ oab.cookie_compliance.settings:
     _title: 'Cookie compliance settings'
   requirements:
     _role: 'digital_admin+administrator'
-
-oab.cookie_compliance.ajax.accept_cookie:
-  path: '/admin/oab-cookie-compliance/accept-cookie'
-  defaults:
-    _controller: 'Drupal\oab_cookie_compliance\Controller\AcceptCookiesController::process'
-    _title: 'Accept cookies process'
-  requirements:
-    _permission: 'access content'
-
