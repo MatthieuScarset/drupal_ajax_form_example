@@ -42,7 +42,7 @@
 .icon-share {
   font-family: 'icon-orange' !important;
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -426,7 +426,13 @@
     background: none;
 }
 
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 6px;
+}
 
+.navbar-toggle{
+    padding: 2rem 0.9rem 1rem 1rem;
+}
 
 /*
 @media (min-width: 1300px) {
