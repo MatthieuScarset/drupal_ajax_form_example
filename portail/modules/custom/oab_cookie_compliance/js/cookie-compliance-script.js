@@ -11,7 +11,7 @@
     // le cookie existe --- 2nde verif)
 
 
-    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name_first_visit) > -1) {
+    if (document.cookie.indexOf(drupalSettings.cookie_compliance.cookie_name) === -1) {
         $('#' + drupalSettings.cookie_compliance.block_id).removeClass('hidden');
     }
 

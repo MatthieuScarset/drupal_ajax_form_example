@@ -4,7 +4,6 @@ namespace Drupal\oab_cookie_compliance\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\oab_cookie_compliance\Controller\AcceptCookiesController;
 use Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm;
 
 /**
@@ -28,11 +27,10 @@ class CookieComplianceBlock extends BlockBase {
     public function build(){
 
         $block = array();
-        if (!isset($_COOKIE[self::COOKIE_NAME]) ) {
+        if (!isset($_COOKIE[self::COOKIE_NAME]) && !isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT]) ) {
 
 
             setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', $this->getExpiration(), '/');
-            $this->setCookie();
 
             $config = \Drupal::config(CookieComplianceSettingsForm::CONFIG_NAME);
             $block = array (
@@ -49,9 +47,9 @@ class CookieComplianceBlock extends BlockBase {
             );
 
 
-        } else {
-            if (isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT]))
-                setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', -1, '/');
+        } elseif (isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT])) {
+            setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', -1, '/');
+            $this->setCookie();
 
         }
 
