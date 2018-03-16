@@ -528,3 +528,11 @@ function oab_tristan_update_8067()
 function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
+
+
+/**
+ * Rechargement de la config du form display des produits pour le visual subhome quyi était passé en hidden
+ */
+function oab_tristan_update_8073() {
+    oabt_YmlImport('core.entity_form_display.node.product.default.yml');
+}
