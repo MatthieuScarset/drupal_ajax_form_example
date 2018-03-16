@@ -49,12 +49,14 @@ class CookieComplianceBlock extends BlockBase {
 
         } elseif (isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT])) {
             setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', -1, '/');
-            $this->setCookie();
 
+            $this->setCookie();
         }
 
         $block['#cache'] = array(
             'max-age' => 0,
+            'contexts' => array("cookie"),
+            'tags'  => array("cookie")
         );
 
         \Drupal::service('page_cache_kill_switch')->trigger();
