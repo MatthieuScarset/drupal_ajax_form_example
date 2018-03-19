@@ -528,3 +528,11 @@ function oab_tristan_update_8067()
 function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
+
+/**
+ * Update du formulaire "contact commercial" pour lui ajouter un input hidden pour sauvegarder
+ * le nom du produit sur lequel était le visiteur
+ */
+function oab_tristan_update_8074() {
+    include_once('updates/update_8074.inc');
+}
