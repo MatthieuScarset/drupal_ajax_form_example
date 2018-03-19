@@ -19,18 +19,24 @@ use Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm;
 
 class CookieComplianceBlock extends BlockBase {
 
-    const COOKIE_NAME = 'drupal_oab_cookie-compliance';
+    const COOKIE_NAME =             'drupal_oab_cookie-compliance_hide-message';
     const COOKIE_NAME_FIRST_VISIT = 'drupal_oab_cookie-compliance_first-visit';
     const BLOCK_ID = 'cookie-compliance-block';
     const EXPIRATION_NB_MONTH = 13;
 
     public function build(){
 
+        if (!isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME])
+            && !isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT]) ) {
+            CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT);
+
+        } elseif (isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT])) {
+            CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT, -1);
+            CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME);
+        }
+
         $block = array();
         if (!isset($_COOKIE[self::COOKIE_NAME]) && !isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT]) ) {
-
-
-            setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', $this->getExpiration(), '/');
 
             $config = \Drupal::config(CookieComplianceSettingsForm::CONFIG_NAME);
             $block = array (
@@ -46,17 +52,10 @@ class CookieComplianceBlock extends BlockBase {
                 )
             );
 
-
-        } elseif (isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT])) {
-            setcookie(self::COOKIE_NAME_FIRST_VISIT, '0', -1, '/');
-
-            $this->setCookie();
         }
 
         $block['#cache'] = array(
-            'max-age' => 0,
-            'contexts' => array("cookie"),
-            'tags'  => array("cookie")
+            'max-age' => 0
         );
 
         \Drupal::service('page_cache_kill_switch')->trigger();
@@ -65,15 +64,23 @@ class CookieComplianceBlock extends BlockBase {
         return $block;
     }
 
+    public function getCacheMaxAge() {
+        return 0;
+    }
 
-    private function setCookie( $expTime =  null) {
+    public function getCacheTags() {
+        return ["cookie_compliance"];
+    }
+
+
+    public static function setCookie($cookieName, $expTime =  null) {
         if ($expTime === null)
             $expTime = self::getExpiration();
 
-        setcookie(self::COOKIE_NAME, '0', $expTime, '/');
+        setcookie($cookieName, '0', $expTime, '/');
     }
 
-    private function getExpiration() {
+    private static function getExpiration() {
         return date("U", strtotime('+' . self::EXPIRATION_NB_MONTH .' months'));
     }
 
