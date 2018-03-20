@@ -36,6 +36,7 @@
     margin: 0 !important;
 }
 #main_nav .logo img{
+    transition: all .1s ease-in-out;
     width: 140px;
 }
 
@@ -142,17 +143,17 @@
 }
 
 #main_nav.navbar-fixed .logo img {
-    transition-timing-function: ease-in-out;
+    transition: all .1s ease-in-out;
     width: 112px;
 }
 
 #main_nav.navbar-fixed .navbar-right {
-    transition-timing-function: ease-in-out;
+    transition: all .1s ease-in-out;
     margin-top: 10px;
 }
 
 #main_nav.navbar-fixed .nav > li > a {
-    transition-timing-function: ease-in-out;
+    transition: all .1s ease-in-out;
     padding-top: 23px;
 }
 
@@ -583,7 +584,7 @@
     }
 
     #main_nav .logo img {
-
+        transition: all .1s ease-in-out;
         width: 112px;
     }
     .subnav {
