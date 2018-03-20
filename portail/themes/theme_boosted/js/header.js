@@ -92,7 +92,6 @@
         });
 
         $(window).scroll(function () {
-
             moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone);
         });
 
@@ -185,12 +184,15 @@
              */
             localnav_offset = 0;
             if ($('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length) {
-                localnav_offset += menu_offset;
+                localnav_offset += $('#toolbar-bar').height();
+            }
+            if ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length) {
+                localnav_offset += $('#toolbar-item-administration-tray').height();
             }
             if (top_menu.length) {
                 localnav_offset +=  top_menu.outerHeight();
             }
-            if ($(window).scrollTop() > (top_zone_offset - localnav_offset)) {
+            if ($(window).scrollTop() > (top_zone_offset - 22)) {
                 local_nav.addClass('sticky-module');
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
