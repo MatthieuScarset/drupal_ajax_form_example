@@ -31,6 +31,8 @@ oabt_YmlImport('pathauto.pattern.products_br.yml');
 oabt_YmlImport('pathauto.pattern.products_es.yml');
 oabt_YmlImport('pathauto.pattern.solution_br.yml');
 oabt_YmlImport('pathauto.pattern.solution_es.yml');
+oabt_YmlImport('pathauto.pattern.document_br.yml');
+oabt_YmlImport('pathauto.pattern.document_es.yml');
 
 
 
