@@ -16,6 +16,7 @@ use Drupal\locale\SourceString;
 \Drupal::service('path.alias_storage')->save("/subhome_catalogue", "/producto", "es");
 \Drupal::service('path.alias_storage')->save("/subhome_catalogue", "/produto", "pt-br");
 
+\Drupal::service('path.alias_storage')->save("/subhome_documents", "/libreria", "es");
 \Drupal::service('path.alias_storage')->save("/subhome_documents", "/mediateca", "pt-br");
 
 ####### Ajout des patterns

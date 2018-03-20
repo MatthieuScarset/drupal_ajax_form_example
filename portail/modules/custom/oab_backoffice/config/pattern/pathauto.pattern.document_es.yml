@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: document_es
+label: 'document ES'
+type: 'canonical_entities:node'
+pattern: 'libreria/[node:title]'
+selection_criteria:
+  89eab06f-b99d-4860-9319-254cd916a35c:
+    id: node_type
+    bundles:
+      document: document
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 89eab06f-b99d-4860-9319-254cd916a35c
+  811e4af7-693a-48ee-b7be-1008d49c9423:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 811e4af7-693a-48ee-b7be-1008d49c9423
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language
