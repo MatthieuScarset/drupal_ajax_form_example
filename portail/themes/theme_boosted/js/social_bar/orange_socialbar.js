@@ -383,12 +383,12 @@ var getShortUrl = function(url){
 if(typeof sharebar_parameters !== "undefined"){
     var via = sharebar_parameters.twitter_site.substring(1, sharebar_parameters.twitter_site.length);
     var share_links = {
-        facebook: "https://www.facebook.com/sharer.php?u=" + drupalSettings.myLibrary.og_url,
-        twitter: "https://twitter.com/intent/tweet?text=" + "" + "&url=" + drupalSettings.myLibrary.og_url + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
-        twitter_short: "https://twitter.com/intent/tweet?text=" + '' + "&url=" + getShortUrl(drupalSettings.myLibrary.og_url) + "&via=" + via + "&lang=" + drupalSettings.myLibrary.og_locale.substring(0,2),
-        googleplus: "https://plus.google.com/share?url=" + drupalSettings.myLibrary.og_url + "&hl=" + drupalSettings.myLibrary.og_locale.substring(0,2),
-        linkedin: "https://www.linkedin.com/shareArticle?mini=true&url=" + drupalSettings.myLibrary.og_url,
-        pinterest: "https://pinterest.com/pin/create/button/?url=" + drupalSettings.myLibrary.og_url + "&media=" + drupalSettings.myLibrary.og_image + "&description=" + drupalSettings.myLibrary.og_title
+        facebook: drupalSettings.shareSettings.share_siteUrls.facebook,
+        twitter: drupalSettings.shareSettings.share_siteUrls.twitter,
+        twitter_short: drupalSettings.shareSettings.share_siteUrls.twitter,
+        googleplus: "https://plus.google.com/share?url=" + drupalSettings.shareSettings.og_url + "&hl=" + drupalSettings.shareSettings.og_locale.substring(0,2),
+        linkedin: drupalSettings.shareSettings.share_siteUrls.linkedin,
+        pinterest: "https://pinterest.com/pin/create/button/?url=" + drupalSettings.shareSettings.og_url + "&media=" + drupalSettings.shareSettings.og_image + "&description=" + drupalSettings.shareSettings.og_title
     };
 }
 

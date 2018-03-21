@@ -797,7 +797,11 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 
 	#J'enregistre mes urls et variables OG pour les avoir en JS
 	$array_sharbar = array(
-		'share_siteUrls' => $siteUrls
+		'share_siteUrls' => $siteUrls,
+        "og_url"    => $og_url,
+        "og_locale" => $og_locale,
+        "og_image"  => $og_image,
+        "og_title"  => $pageTitle
 	);
 	return $array_sharbar;
 }
