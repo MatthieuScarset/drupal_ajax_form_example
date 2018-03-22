@@ -20,9 +20,11 @@
     'region-' ~ region|clean_class,
   ]
 %}
-{#{{ kint(elements) }}#}
+
 {% if content %}
+
   <div{{ attributes.addClass(classes) }}>
+      {{ elements.cookiecomplianceblock }}
 
       {#Begin Top Navbar Menu#}
       <div class="hidden-xs ">
