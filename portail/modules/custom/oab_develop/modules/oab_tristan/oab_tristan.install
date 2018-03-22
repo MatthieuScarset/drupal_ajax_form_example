@@ -528,3 +528,10 @@ function oab_tristan_update_8067()
 function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
+
+/**
+ * Création d'une vue pour l'export des documents du site
+ */
+function oab_tristan_update_8069() {
+    oabt_YmlImport('views.view.document_list.yml');
+}
