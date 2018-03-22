@@ -357,6 +357,39 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
     }
 
+
+    /**
+     * Pour les formulaires "contact_commercial", on ajoute le titre du produit de la page
+     * sur laquelle on a cliqué sur le bouton pour accèder à ce formulaire
+     */
+    if (isset($form["#webform_id"]) && $form["#webform_id"] == "contact_commercial"
+        && $current_language == "fr") {
+
+        ##On recupère l'URL d'origine
+        $url = $_SERVER['HTTP_REFERER'];
+        if ($url !== null) {
+
+            ##On recupère l'alias
+            $path = preg_replace('/\//','',parse_url($url,PHP_URL_PATH),1);
+            $path = str_replace($current_language, '', $path);
+
+            ##On recupère le /node/xxx depuis l'alias
+            $org_path = \Drupal::service('path.alias_manager')
+                ->getPathByAlias("$path");
+
+            ##On recupère le nid qui est dans l'url
+            if(preg_match('/node\/(\d+)/', $org_path, $matches)) {
+
+                ##on load le noad
+                $node = \Drupal\node\Entity\Node::load($matches[1]);
+                if ($node !== null && $node->getType() == "product") {
+                    ##On set enfin la value, seulement pour les produits
+                    $form['elements']['origin_product_name']['#value'] = $node->getTitle();
+                }
+            }
+        }
+    }
+
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
