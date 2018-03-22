@@ -529,7 +529,6 @@ function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
 
-
 /**
  * Création d'une vue pour l'export des documents du site
  */
@@ -557,4 +556,12 @@ function oab_tristan_update_8072() {
  */
 function oab_tristan_update_8073() {
     oabt_YmlImport('core.entity_form_display.node.product.default.yml');
+}
+
+/**
+ * Update du formulaire "contact commercial" pour lui ajouter un input hidden pour sauvegarder
+ * le nom du produit sur lequel était le visiteur
+ */
+function oab_tristan_update_8074() {
+    include_once('updates/update_8074.inc');
 }
