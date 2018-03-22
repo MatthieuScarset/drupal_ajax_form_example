@@ -2,10 +2,7 @@
 
 namespace Drupal\replicate_ui\Form;
 
-use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
-use Drupal\Core\Entity\EntityManagerInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -33,8 +30,8 @@ class ReplicateConfirmForm extends ContentEntityConfirmFormBase {
    * @param \Drupal\replicate\Replicator $replicator
    *   The replicator.
    */
-  public function __construct(EntityManagerInterface $entity_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL, Replicator $replicator) {
-    parent::__construct($entity_manager);
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, Replicator $replicator) {
+    parent::__construct($entity_type_manager);
     $this->replicator = $replicator;
   }
 
@@ -43,9 +40,7 @@ class ReplicateConfirmForm extends ContentEntityConfirmFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager'),
-      $container->get('entity_type.bundle.info'),
-      $container->get('datetime.time'),
+      $container->get('entity_type.manager'),
       $container->get('replicate.replicator')
     );
   }

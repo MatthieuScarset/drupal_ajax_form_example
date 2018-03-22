@@ -97,19 +97,14 @@ without enabling the Memcache lock implementation can cause worse performance.
 Only change the following values if you're sure you know what you're doing,
 which requires reading the memcachie.inc code.
 
-The value passed to lock_acquire, defaults to '15':
-  $conf['memcache_stampede_semaphore'] = 15;
+The value passed to Drupal\Core\Lock\LockBackendInterface::wait(), defaults to 5:
+  $settings['memcache']['stampede_wait_time'] = 5;
 
-The value passed to lock_wait, defaults to 5:
-  $conf['memcache_stampede_wait_time'] = 5;
-
-The maximum number of calls to lock_wait() due to stampede protection during a
-single request, defaults to 3:
-  $conf['memcache_stampede_wait_limit'] = 3;
+The maximum number of calls to Drupal\Core\Lock\LockBackendInterface::wait() due
+to stampede protection during a single request, defaults to 3:
+  $settings['memcache']['stampede_wait_limit'] = 3;
 
 When adjusting these variables, be aware that:
- - there is unlikely to be a good use case for setting wait_time higher
-   than stampede_semaphore;
  - wait_time * wait_limit is designed to default to a number less than
    standard web server timeouts (i.e. 15 seconds vs. apache's default of
    30 seconds).
@@ -158,7 +153,68 @@ the default in this case but could be set using:
 
 ## LOCKS ##
 
-Locks have not yet been implemented using the memcache module.
+Memcache locks can be enabled through the services.yml file.
+
+  services:
+    # Replaces the default lock backend with a memcache implementation.
+    lock:
+      class: Drupal\Core\Lock\LockBackendInterface
+      factory: memcache.lock.factory:get
+
+    # Replaces the default persistent lock backend with a memcache implementation.
+    lock.persistent:
+      class: Drupal\Core\Lock\LockBackendInterface
+      factory: memcache.lock.factory:getPersistent
+
+## Cache Container on bootstrap ##
+By default Drupal starts the cache_container on the database, in order to override that you can use the following code on your settings.php file. Make sure that the $class_load->addPsr4 is poiting to the right location of memcache (on this case modules/contrib/memcache/src)
+
+$memcache_exists = class_exists('Memcache', FALSE);
+$memcached_exists = class_exists('Memcached', FALSE);
+if ($memcache_exists || $memcached_exists) {
+  $class_loader->addPsr4('Drupal\\memcache\\', 'modules/contrib/memcache/src');
+
+  // Define custom bootstrap container definition to use Memcache for cache.container.
+  $settings['bootstrap_container_definition'] = [
+    'parameters' => [],
+    'services' => [
+      'database' => [
+        'class' => 'Drupal\Core\Database\Connection',
+        'factory' => 'Drupal\Core\Database\Database::getConnection',
+        'arguments' => ['default'],
+      ],
+      'settings' => [
+        'class' => 'Drupal\Core\Site\Settings',
+        'factory' => 'Drupal\Core\Site\Settings::getInstance',
+      ],
+      'memcache.config' => [
+        'class' => 'Drupal\memcache\DrupalMemcacheConfig',
+        'arguments' => ['@settings'],
+      ],
+      'memcache.backend.cache.factory' => [
+        'class' => 'Drupal\memcache\DrupalMemcacheFactory',
+        'arguments' => ['@memcache.config']
+      ],
+      'memcache.backend.cache.container' => [
+        'class' => 'Drupal\memcache\DrupalMemcacheFactory',
+        'factory' => ['@memcache.backend.cache.factory', 'get'],
+        'arguments' => ['container'],
+      ],
+      'lock.container' => [
+        'class' => 'Drupal\memcache\Lock\MemcacheLockBackend',
+        'arguments' => ['container', '@memcache.backend.cache.container'],
+      ],
+      'cache_tags_provider.container' => [
+        'class' => 'Drupal\Core\Cache\DatabaseCacheTagsChecksum',
+        'arguments' => ['@database'],
+      ],
+      'cache.container' => [
+        'class' => 'Drupal\memcache\MemcacheBackend',
+        'arguments' => ['container', '@memcache.backend.cache.container', '@lock.container', '@memcache.config', '@cache_tags_provider.container'],
+      ],
+    ],
+  ];
+}
 
 ## TROUBLESHOOTING ##
 
@@ -225,3 +281,26 @@ Other options you could experiment with:
       reported that this can speed up the Binary protocol (see above). This
       tells the TCP stack to send packets immediately and without waiting for
       a full payload, reducing per-packet network latency (disabling "Nagling").
+
+It's possible to enable SASL authentication as documented here:
+  http://php.net/manual/en/memcached.setsaslauthdata.php
+  https://code.google.com/p/memcached/wiki/SASLHowto
+
+SASL authentication requires a memcached server with SASL support (version 1.4.3
+or greater built with --enable-sasl and started with the -S flag) and the PECL
+memcached client version 2.0.0 or greater also built with SASL support. Once
+these requirements are satisfied you can then enable SASL support in the Drupal
+memcache module by enabling the binary protocol and setting
+memcache_sasl_username and memcache_sasl_password in settings.php. For example:
+
+$settings['memcache']['sasl'] = [
+  'username' => 'user',
+  'password' => 'password',
+];
+
+// When using SASL, Memcached extension needs to be used
+// because Memcache extension doesn't support it.
+$settings['memcache']['extension'] = 'Memcached';
+$settings['memcache']['options'] = [
+  \Memcached::OPT_BINARY_PROTOCOL => TRUE,
+];
