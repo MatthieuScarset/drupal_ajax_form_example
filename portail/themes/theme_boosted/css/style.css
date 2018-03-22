@@ -1889,3 +1889,7 @@ body.page-node-type-custom-page{
     background-color: white;
 }
 
+
+.page-node-type-distributor #block-theme-boosted-page-title h1.page-header {
+    text-transform: uppercase;
+}
