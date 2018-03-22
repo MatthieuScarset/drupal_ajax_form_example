@@ -334,48 +334,40 @@
   Drupal.behaviors.myBehaviour = {
     attach: function (context, settings) {
       //On s'occupe de Facebook
-      if (settings.myLibrary.share_siteUrls.facebook.length) {
+      if (settings.shareSettings.share_siteUrls.facebook.length) {
         $("a.share-button-facebook").each(function() {
-          $(this).attr("href",settings.myLibrary.share_siteUrls.facebook );
+          $(this).attr("href",settings.shareSettings.share_siteUrls.facebook );
         });
       }
 
       //Maintenant de linkedin
-      if (settings.myLibrary.share_siteUrls.linkedin.length) {
+      if (settings.shareSettings.share_siteUrls.linkedin.length) {
         $("a.share-button-linkedin").each(function() {
-          $(this).attr("href",settings.myLibrary.share_siteUrls.linkedin );
+          $(this).attr("href",settings.shareSettings.share_siteUrls.linkedin );
         });
       }
 
       //Et enfin de twitter
-      if (settings.myLibrary.share_siteUrls.twitter.length) {
+      if (settings.shareSettings.share_siteUrls.twitter.length) {
         $("a.share-button-twitter").each(function() {
-          $(this).attr("href",settings.myLibrary.share_siteUrls.twitter );
+          $(this).attr("href",settings.shareSettings.share_siteUrls.twitter );
         });
       }
 
-
-  // balises OG
-        $('head meta[property="og:locale"]').attr("content", settings.myLibrary.og_locale );
-        $('head meta[property="og:title"]').attr("content", settings.myLibrary.og_title );
-        $('head meta[property="og:description"]').attr("content", settings.myLibrary.og_desc );
-        $('head meta[property="og:url"]').attr("content", settings.myLibrary.og_url );
-        $('head meta[property="og:image"]').attr("content", settings.myLibrary.og_image );
-
       // RSS
-        if (settings.myLibrary.share_siteUrls.rss_blogs.length) {
+        if (settings.shareSettings.share_siteUrls.rss_blogs.length) {
             $("a.share-button-rss-blogs").each(function() {
-                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_blogs );
+                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_blogs );
             });
         }
-        if (settings.myLibrary.share_siteUrls.rss_magazine.length) {
+        if (settings.shareSettings.share_siteUrls.rss_magazine.length) {
             $("a.share-button-rss-magazine").each(function() {
-                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_magazine );
+                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_magazine );
             });
         }
-        if (settings.myLibrary.share_siteUrls.rss_presse.length) {
+        if (settings.shareSettings.share_siteUrls.rss_presse.length) {
             $("a.share-button-rss-presse").each(function() {
-                $(this).attr("href",settings.myLibrary.share_siteUrls.rss_presse );
+                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_presse );
             });
         }
 
