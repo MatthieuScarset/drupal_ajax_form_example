@@ -1555,11 +1555,11 @@ aside.right-column > .region {
     margin-top: 10px;
 }
 
-.homepage-title-white {
+.homepage-title-white, .homepage-title-white-t {
     color: white;
 }
 
-.homepage-title-black {
+.homepage-title-black, .homepage-title-black-t {
     color: black;
 }
 
@@ -1872,6 +1872,14 @@ body.page-node-type-custom-page{
     display: inline-block;
 }
 
+.solution-banner .homepage-title-white .btn.btn-hp-title,
+.solution-banner .homepage-title-black .btn.btn-hp-title,
+.banner-bg.top-banner .homepage-title-white .btn.btn-hp-title,
+.banner-bg.top-banner .homepage-title-black .btn.btn-hp-title
+{
+    background-color: white;
+}
+
 .solution-banner .btn.btn-default:hover,
 .banner-bg.top-banner .btn.btn-default:hover
 {
@@ -1881,11 +1889,5 @@ body.page-node-type-custom-page{
 .banner-bg.top-banner .btn.btn-default:active
 {
     background-color: #f16e00;
-}
-
-.solution-banner .btn.btn-default,
-.banner-bg.top-banner .btn.btn-default
-{
-    background-color: white;
 }
 

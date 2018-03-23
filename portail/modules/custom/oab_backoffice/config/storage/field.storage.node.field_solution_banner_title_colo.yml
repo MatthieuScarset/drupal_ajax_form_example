@@ -9,14 +9,8 @@ field_name: field_solution_banner_title_colo
 entity_type: node
 type: list_string
 settings:
-  allowed_values:
-    -
-      value: white
-      label: White
-    -
-      value: black
-      label: Black
-  allowed_values_function: ''
+  allowed_values: {  }
+  allowed_values_function: oab_tristan_allowed_values_function
 module: options
 locked: false
 cardinality: 1
