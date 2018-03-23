@@ -75,3 +75,7 @@
 .oab-synomia-search-header-block-form .top-btn-search .glyphicon-search{
     font-size: 2.8rem !important;
 }
+
+.menu-loupe-xs .glyphicon.icon-avatar {
+    font-size: 3rem;
+}
