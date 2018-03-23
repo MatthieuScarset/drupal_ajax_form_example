@@ -174,7 +174,7 @@
 
         var top_zone_offset = 0;
         if(top_zone.length && top_zone.outerHeight() > 0){
-            top_zone_offset = $('#block-topzone').outerHeight();
+            top_zone_offset = top_zone.outerHeight();
         }
 
         // module local_nav
@@ -192,7 +192,7 @@
             if (top_menu.length) {
                 localnav_offset +=  top_menu.outerHeight();
             }
-            if ($(window).scrollTop() > (top_zone_offset - localnav_offset - $('#local_nav').outerHeight())) {
+            if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
                 local_nav.addClass('sticky-module');
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
