@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\replicate_ui\Functional;
 
-use Drupal\simpletest\BrowserTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Tests the replicate settings UI.
@@ -18,13 +18,13 @@ class ReplicateUISettingsTest extends BrowserTestBase {
 
   public function testSettings() {
     $this->drupalGet('/admin/config/content/replicate');
-    $this->assertEquals(403, $this->getSession()->getDriver()->getStatusCode());
+    $this->assertSession()->statusCodeEquals(403);
 
     $account = $this->drupalCreateUser(['administer site configuration']);
     $this->drupalLogin($account);
 
     $this->drupalGet('/admin/config/content/replicate');
-    $this->assertEquals(200, $this->getSession()->getDriver()->getStatusCode());
+    $this->assertSession()->statusCodeEquals(200);
 
     $this->submitForm(['entity_types[node]' => 'node'], 'Save configuration');
     $this->assertEquals(['node'], \Drupal::configFactory()->get('replicate_ui.settings')->get('entity_types'));

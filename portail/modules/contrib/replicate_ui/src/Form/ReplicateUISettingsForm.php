@@ -98,6 +98,8 @@ class ReplicateUISettingsForm extends ConfigFormBase {
     $this->config('replicate_ui.settings')
       ->set('entity_types', array_values(array_filter($form_state->getValue('entity_types'))))
       ->save();
+    // @todo This should be done through a config save subscriber and it should
+    // also invalidate the render/local tasks cache.
     $this->routerBuilder->setRebuildNeeded();
     Cache::invalidateTags(['entity_types', 'views_data']);
   }

@@ -7,9 +7,12 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\Discovery\ContainerDeriverInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ReplicateUILocalTasks extends DeriverBase implements ContainerDeriverInterface {
+
+  use StringTranslationTrait;
 
   /**
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -56,7 +59,7 @@ class ReplicateUILocalTasks extends DeriverBase implements ContainerDeriverInter
         $base_route_name = "entity.$entity_type_id.canonical";
         $this->derivatives[$replicate_route_name] = [
           'entity_type' => $entity_type_id,
-          'title' => 'Replicate',
+          'title' => $this->t('Replicate'),
           'route_name' => $replicate_route_name,
           'base_route' => $base_route_name,
         ] + $base_plugin_definition;
