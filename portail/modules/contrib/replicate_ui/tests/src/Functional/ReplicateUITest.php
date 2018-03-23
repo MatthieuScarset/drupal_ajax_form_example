@@ -5,20 +5,17 @@ namespace Drupal\Tests\replicate_ui\Functional;
 use Drupal\Core\Cache\Cache;
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\NodeType;
-use Drupal\simpletest\AssertContentTrait;
-use Drupal\simpletest\BlockCreationTrait;
-use Drupal\simpletest\BrowserTestBase;
+use Drupal\Tests\AssertHelperTrait;
+use Drupal\Tests\BrowserTestBase;
 
 /**
- * Tests the UI functionality
+ * Tests the UI functionality.
  *
  * @group replicate
  */
 class ReplicateUITest extends BrowserTestBase {
 
-  use BlockCreationTrait;
-
-  use AssertContentTrait;
+  use AssertHelperTrait;
 
   /**
    * {@inheritdoc}
@@ -41,7 +38,6 @@ class ReplicateUITest extends BrowserTestBase {
   protected function setUp() {
     parent::setUp();
 
-
     $this->user = $this->drupalCreateUser(['bypass node access', 'administer nodes', 'replicate entities']);
     $node_type = NodeType::create([
       'type' => 'page',
@@ -55,26 +51,26 @@ class ReplicateUITest extends BrowserTestBase {
 
     $this->placeBlock('local_tasks_block');
     $this->placeBlock('system_messages_block');
-    \Drupal::configFactory()->getEditable('replicate_ui.settings')->set('entity_types', ['node'])->save();
+    $this->config('replicate_ui.settings')->set('entity_types', ['node'])->save();
     \Drupal::service('router.builder')->rebuild();
     Cache::invalidateTags(['entity_types']);
   }
 
   public function testFunctionality() {
-    $result = $this->drupalGet($this->node->toUrl()->toString(TRUE)->getGeneratedUrl());
-    $this->assertFalse(strpos($result, 'Replicate'));
+    $this->drupalGet($this->node->toUrl());
+    $this->assertSession()->pageTextNotContains('Replicate');
 
     $this->drupalLogin($this->user);
-    $result = $this->drupalGet($this->node->toUrl()->toString(TRUE)->getGeneratedUrl());
-    $this->assertTrue(strpos($result, 'Replicate') !== FALSE);
-    $this->assertEquals(200, $this->getSession()->getDriver()->getStatusCode());
+    $this->drupalGet($this->node->toUrl());
+    $this->assertSession()->pageTextContains('Replicate');
+    $this->assertSession()->statusCodeEquals(200);
 
     $this->getSession()->getPage()->clickLink('Replicate');
-    $this->assertEquals(200, $this->getSession()->getDriver()->getStatusCode());
+    $this->assertSession()->statusCodeEquals(200);
 
     $this->getSession()->getPage()->pressButton('Replicate');
-    $result = $this->getSession()->getPage()->getContent();
-    $this->assertTrue(strpos($result, '<em class="placeholder">node</em> (<em class="placeholder">1</em>) has been replicated to id <em class="placeholder">2</em>!') !== FALSE);
+    $this->getSession()->getPage()->getContent();
+    $this->assertSession()->responseContains('<em class="placeholder">node</em> (<em class="placeholder">1</em>) has been replicated to id <em class="placeholder">2</em>!');
   }
 
 }

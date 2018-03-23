@@ -5,7 +5,6 @@ namespace Drupal\Tests\replicate_ui\Unit;
 use Drupal\Core\Entity\ContentEntityType;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RouteBuildEvent;
-use Drupal\replicate_ui\Form\ReplicateConfirmForm;
 use Drupal\replicate_ui\RouteSubscriber;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\Routing\Route;
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\RouteCollection;
 
 /**
  * @coversDefaultClass \Drupal\replicate_ui\RouteSubscriber
- * @group replicate_ui
+ * @group replicate
  */
 class RouteSubscriberTest extends UnitTestCase {
 
