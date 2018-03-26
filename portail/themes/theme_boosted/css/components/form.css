@@ -1,12 +1,12 @@
 .oab-synomia-search-header-block-form{
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 17px;
     position: relative;
 
 }
 
 .oab-synomia-search-header-block-form .top-block-search-form{
-    border: 2px solid #cccccc;
+    /*border: 2px solid #cccccc;*/
     height: 40px;
     line-height: 35px;
     vertical-align: middle;
@@ -41,6 +41,16 @@
     color: #ffffff;
     height: 30px;
     padding: 0;
+    border-bottom: 2px;
+    border-color:#cccccc;
+    border-style: solid;
+    width:170px;
+}
+
+@media (max-width: 1219px) {
+    .oab-synomia-search-header-block-form .top-block-search-form .container input.search-textfield {
+        width: 120px;
+    }
 }
 
 
@@ -58,13 +68,14 @@
 .oab-synomia-search-header-block-form .top-btn-search i,
 .oab-synomia-search-header-block-form .top-btn-search .search-link{
     position: absolute;
-    top: 4px !important;
-    right: 5px;
+    top: 1px !important;
+    right: -12px;
 }
 
-.oab-synomia-search-header-block-form .top-btn-search i{
-    margin : 0 !important;
-}
 .oab-synomia-search-header-block-form .top-btn-search .glyphicon-search{
-    font-size: 2rem !important;
+    font-size: 2.8rem !important;
+}
+
+.menu-loupe-xs .glyphicon.icon-avatar {
+    font-size: 3rem;
 }
