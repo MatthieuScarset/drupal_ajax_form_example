@@ -174,12 +174,25 @@
 
         var top_zone_offset = 0;
         if(top_zone.length && top_zone.outerHeight() > 0){
-            top_zone_offset = $('#block-topzone').outerHeight();
+            top_zone_offset = top_zone.outerHeight();
         }
 
         // module local_nav
         if (local_nav.length && local_nav.is(':visible')) {
-            if ($(window).scrollTop() > (top_zone_offset - localnav_offset)) {
+            /**
+             * Pour la local nav, je recalcule les tailles, parce que le header change de taille en mode sticky
+             */
+            localnav_offset = 0;
+            if ($('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length) {
+                localnav_offset += $('#toolbar-bar').height();
+            }
+            if ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length) {
+                localnav_offset += $('#toolbar-item-administration-tray').height();
+            }
+            if (top_menu.length) {
+                localnav_offset +=  top_menu.outerHeight();
+            }
+            if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
                 local_nav.addClass('sticky-module');
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
