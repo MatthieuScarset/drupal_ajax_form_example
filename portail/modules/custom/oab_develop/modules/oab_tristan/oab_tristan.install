@@ -530,6 +530,7 @@ function oab_tristan_update_8068() {
 }
 
 /**
+<<<<<<< HEAD
  * Création d'une vue pour l'export des documents du site
  */
 function oab_tristan_update_8069() {
@@ -562,6 +563,17 @@ function oab_tristan_update_8073() {
  * Update du formulaire "contact commercial" pour lui ajouter un input hidden pour sauvegarder
  * le nom du produit sur lequel était le visiteur
  */
-function oab_tristan_update_8074() {
+function oab_tristan_update_8074()
+{
     include_once('updates/update_8074.inc');
+}
+
+/**
+ * Rechargement de la config de la HP pour passer les key plutot
+ * que les values dans les select des couleurs des titres +
+ * modif de la liste des couleurs pour le titre des solutions
+ */
+function oab_tristan_update_8075() {
+    oabt_YmlImport('core.entity_view_display.node.homepage.full.yml');
+    oabt_YmlImport('field.storage.node.field_solution_banner_title_colo.yml');
 }

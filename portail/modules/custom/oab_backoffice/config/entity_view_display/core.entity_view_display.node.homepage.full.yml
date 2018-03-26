@@ -278,7 +278,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
   field_solution_banner_title_colo:
-    type: list_default
+    type: list_key
     weight: 31
     region: content
     label: hidden
@@ -318,7 +318,7 @@ content:
       link: true
     third_party_settings: {  }
   field_title_color:
-    type: list_default
+    type: list_key
     weight: 24
     region: content
     label: hidden
