@@ -9,12 +9,15 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\Entity;
 use Drupal\Core\File\FileSystem;
 use Drupal\node\Entity\Node;
+use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 use Drupal\taxonomy\Entity\Term;
 use Exception;
 use function PHPSTORM_META\type;
 use stdClass;
 
 class AxiomeImporter{
+
+    const CONFIG_VALUE_NAME = "sous_famille_values";
 
     private $fiches_jointent = array();
     private $arborescence_famille = array();
@@ -27,6 +30,9 @@ class AxiomeImporter{
     public $message = '';
     private $id_en_cours = '';
     private $nouvelleFiche = false;
+    private $nodes_sous_famille = [];
+    private $sous_famille_names = [];
+    private $reparseRef = false;
 
     function __construct(){
         $this->axiome_folder_root_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
@@ -185,13 +191,13 @@ class AxiomeImporter{
      * @return
      *   dom string
      */
-    private function axiome_validate_referentiel($folder, $file){
+    private function axiome_validate_referentiel($folder, $file, $validateSchema = true){
         if (is_file($folder.'/'.$file)){
             $referentiel_xsd = $folder.'/'.AXIOME_REFERENTIEL_SCHEMA;
 
             $dom = new DOMDocument("1.0");
             $dom->load($folder.'/'.$file);
-            if($dom->schemaValidate($referentiel_xsd)){
+            if($dom->schemaValidate($referentiel_xsd) || !$validateSchema ){
                 $this->axiome_notification[] = "referentiel XML valide";
                 return $dom;
             }else{
@@ -312,21 +318,33 @@ class AxiomeImporter{
                 }
             }
 
-            $this->message .=  "- Traitement des informations des fiches \n";
+
+            $this->message .= "- Traitement des informations des fiches \n";
             // informations sur les fiches
             $liste_fiches = $xpath->query("/referentiel/complements_ficheoffre/ficheoffre");
             foreach ($liste_fiches as $fiche) {
                 // On cherche les fiches à mettre à jour en fonction des dates dans le référentiel
                 $fiche_update_date = $fiche->getAttribute('datemaj');
                 $fiche_id = $fiche->getAttribute('id');
-
-                if ($fiche_update_date == $target_update_date) {
+                if ($fiche_update_date == $target_update_date || !$this->maj_referent) {
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
                 } // Ou si on a une archive pour cette fiche
                 elseif (isset($this->fiches_jointent[$fiche_id])) {
                     $this->axiome_recherche_fiche_existante($fiche_id, $fiche, $content_language);
                 }
             }
+
+            ##Sauvegarde des sous-familles en bdd
+            $config = \Drupal::configFactory()->getEditable(OabAxiomeSettingsForm::getConfigName());
+            $values = $config->get(self::CONFIG_VALUE_NAME);
+            if ($values === null)
+                $values = [];
+
+            foreach ($this->nodes_sous_famille as $node_id => $ss_famille_id ) {
+                if (isset($this->sous_famille_names[$ss_famille_id]))
+                    $values[$node_id] = $this->sous_famille_names[$ss_famille_id];
+            }
+            $config->set(self::CONFIG_VALUE_NAME, $values)->save();
         }
     }
 
@@ -366,6 +384,10 @@ class AxiomeImporter{
             foreach ($liste_sousfamille as $sousfamille) {
                 $sousfamille_id = $sousfamille->getAttribute('id');
                 array_push($taxo[$famille_id]['children'], $sousfamille_id);
+                if ($this->isPortfolio($nom_classement)
+                    && $sousfamille->getElementsByTagName('nom')->item(0) !== null) {
+                    $this->sous_famille_names[$sousfamille->getAttribute('id')] = $sousfamille->getElementsByTagName('nom')->item(0)->nodeValue;
+                }
             }
         }
         if ($this->isPortfolio($nom_classement)){
@@ -502,28 +524,31 @@ class AxiomeImporter{
                             $node->setChangedTime(time());
                             //$node->save(); -> Pas besoin, déjà save plus bas
                             $node->set('moderation_state', array('target_id' => 'needs_review'));
-                            $this->message .= "microtime ".time()."\n";
+                            $this->message .= "microtime " . time() . "\n";
 
                         } else {// Si c'est une nouvelle fiche
-                            $this->axiome_notification[] = "nouvelle fiche importée";
+                           if (!$this->reparseRef) {
+                               $this->axiome_notification[] = "nouvelle fiche importée";
 
-                            //creation du node
-                            // TODO : A completer
-                            $this->message .= "Création du NODE \n";
+                               //creation du node
+                               // TODO : A completer
+                               $this->message .= "Création du NODE \n";
 
-                            $node = Node::create([
-                                'type'        => 'product',
-                                'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
-                                'isNew'       => true,
-                                'langcode'    => $language,
-                                'promoted'    => 0,
-                                'sticky'      => 0,
-                                'moderation_state' => 'draft',
-                            ]);
-                            $node->save();
+                               $node = Node::create([
+                                   'type'        => 'product',
+                                   'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
+                                   'isNew'       => true,
+                                   'langcode'    => $language,
+                                   'promoted'    => 0,
+                                   'sticky'      => 0,
+                                   'moderation_state' => 'draft',
+                               ]);
+                               $node->save();
 
-                            $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
-                            $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
+                               $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
+                               $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
+
+                           }
 
                         }
 
@@ -535,12 +560,16 @@ class AxiomeImporter{
                             // création des familles
                             $this->axiome_fiche_remplissage_champs($node, $fiche_dir . '/' . $file_fiche);
                             $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
-
                             $node->save();
 
                         }
                     }
                 }
+            }
+        } elseif ($this->reparseRef) {
+            $node = Node::load($nid);
+            if ($node !== null) {
+                $this->axiome_fiche_recherche_famille($node, $xpath_fiche);
             }
         }
 
@@ -644,7 +673,6 @@ class AxiomeImporter{
 
     private function axiome_manage_taxo($node, $famille, $classement_nom){
         $children_id = $famille->getElementsByTagName('element_classement_list')->item(0)->getElementsByTagName('element_classement_id');
-
         if ($this->isPortfolio($classement_nom)){
             $taxo = $this->arborescence_famille;
             $nodeField = 'field_solution';
@@ -681,11 +709,14 @@ class AxiomeImporter{
                     }
                 }
             }
+            if($this->isPortfolio($classement_nom)){
+                $this->nodes_sous_famille[$node->id()] = $child->nodeValue;
+            }
         }
 
         $this->message .= "TID pour $classement_nom : ".implode(",", $tidParent)." \n";
 
-        if(count($tidParent) > 0){
+        if(count($tidParent) > 0 && !$this->reparseRef){
             $node->set($nodeField, $tidParent);
             $node->save();
         }
@@ -765,4 +796,21 @@ class AxiomeImporter{
 
         return $return;
     }
+
+    public function reparseReferentiels() {
+        $dir = $this->axiome_folder_root_path;
+        $this->reparseRef = true;
+        $message = "Debut\n";
+        $referentielFileNames = ['referentiel_France.xml', 'referentiel_International.xml'];
+        foreach ($referentielFileNames as $referentielFile) {
+            if ($dom = $this->axiome_validate_referentiel($dir, $referentielFile, false)) {
+                $message .= "Traitement $referentielFile\n";
+                // Traitement des référentiels et fiches
+                $this->axiome_parse_referentiel($dom);
+                $message .= "Traitement $referentielFile OK\n";
+            }
+        }
+        drupal_set_message("$message", 'status', true);
+    }
+
 }
