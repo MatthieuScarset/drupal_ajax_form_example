@@ -528,3 +528,12 @@ function oab_tristan_update_8067()
 function oab_tristan_update_8068() {
     include_once('updates/update_8068.inc');
 }
+
+
+
+/**
+ * Je relance la lecture du referentiel axiome pour sauvegarder les sous-familles
+ */
+function oab_tristan_8076() {
+    include_once('updates/update_8076.inc');
+}
