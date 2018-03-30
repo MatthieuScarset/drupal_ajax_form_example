@@ -1,0 +1,16 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+
+function oab_akamai_testDrushAkamai($form,FormStateInterface &$form_state) {
+    $url_to_test = $form_state->getValue('test_url');
+    $host = $form_state->getValue('test_host');
+
+    $akamaiCtrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+
+    $akamaiCtrl->flushAkamai($url_to_test);
+    $akamaiCtrl->flushVarnish($url_to_test, $host);
+    $akamaiCtrl->flushDrupalCache($url_to_test);
+
+}
