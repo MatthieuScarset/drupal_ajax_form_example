@@ -119,7 +119,8 @@ class OabAkamaiController extends ControllerBase
             drupal_set_message("Cache Akamaï vidé pour la page $page", 'status', true);
         } else {
             $msg = (isset($jsonRet['detail'])) ? ": " . $jsonRet['detail'] : "";
-            drupal_set_message("Erreur lors de l'appel à Akamaï pour la page $page $msg", 'error', true);
+            drupal_set_message("Erreur lors de l'appel à Akamaï pour la page $page $msg. Voir en log pour plus d'infos", 'error', true);
+            \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Akamaï avec le retour : $retValue");
         }
 
         curl_close($ch);
