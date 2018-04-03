@@ -71,7 +71,12 @@ class OabAkamaiController extends ControllerBase
 
 
     public function flushAkamai($page) {
-        $path = $this->schema . $this->akamai_baseUrl . $this->akamai_reqPath;
+
+        #Je supprime le prefixe "back." et "backoffice" pour vider le cache en prod
+        $page = str_replace("back.", '', $page);
+        $page = str_replace("backoffice.", '', $page);
+
+        $akamai_path = $this->schema . $this->akamai_baseUrl . $this->akamai_reqPath;
 
         $config_factory = \Drupal::configFactory();
         $configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
@@ -81,7 +86,8 @@ class OabAkamaiController extends ControllerBase
             $proxy_server = NULL;
         }
 
-        $body = '{"objects":["' . $page . '"]}';
+        #$body = '{"objects":["' . $page . '"]}';
+        $body = json_encode(array("objects" => [$page]), JSON_UNESCAPED_UNICODE);
         $auth = $this->akamai_getAuthorization($this->akamai_getTimestamp(), $body);
         $headers = array(
             'Authorization: ' . $auth,
@@ -90,33 +96,30 @@ class OabAkamaiController extends ControllerBase
         );
 
         $ch = curl_init();
-        var_dump($path);
-        curl_setopt($ch, CURLOPT_URL, $path);
+
+        curl_setopt($ch, CURLOPT_URL, $akamai_path);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_PROXY, $proxy_server);
         curl_setopt($ch, CURLOPT_SSLVERSION, 0);
         curl_setopt($ch, CURLOPT_SSLVERSION, false);
-        #curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 
-
-        var_dump($headers);
-
         $retValue = curl_exec($ch);
 
         # je laisse pour l'exemple si on repasse en returntransfert = true;
-        #$jsonRet = json_decode(strstr($retValue, '{'), true);
+        $jsonRet = json_decode(strstr($retValue, '{'), true);
 
-        $ret = false;
-        if ($retValue === true) {
+        if (isset($jsonRet['status']) && $jsonRet['status'] == 201) {
             $ret = true;
             drupal_set_message("Cache Akamaï vidé pour la page $page", 'status', true);
         } else {
-            drupal_set_message("Erreur lors de l'appel à Akamaï pour la page $page", 'error', true);
+            $msg = (isset($jsonRet['detail'])) ? ": " . $jsonRet['detail'] : "";
+            drupal_set_message("Erreur lors de l'appel à Akamaï pour la page $page $msg", 'error', true);
         }
 
         curl_close($ch);
@@ -124,6 +127,10 @@ class OabAkamaiController extends ControllerBase
   }
 
     public function flushVarnish($originUrl, $host) {
+
+        #Je supprime le prefixe "back." et "backoffice" pour vider le cache en prod
+        $host = str_replace("back.", '', $host);
+        $host = str_replace("backoffice.", '', $host);
 
         $originPath = str_replace($host, '', $originUrl);
 
@@ -151,6 +158,7 @@ class OabAkamaiController extends ControllerBase
 
         //Si le flush varnish a fonctionné, je fais aussi un flush drupal cache
         \Drupal::cache("page")->delete("$url");
+        drupal_set_message("Cache drupal vidé pour la page $url", 'status', true);
     }
 
     private function akamai_getAuthorization($timestamp, $data) {

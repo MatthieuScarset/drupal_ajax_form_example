@@ -41,6 +41,12 @@ class OabAkamaiForm extends ConfigFormBase
             '#title' => t('Akamai Settings'),
         );
 
+        $form['settings']['enable_hook'] = array(
+            '#type' => 'checkbox',
+            '#title' => $this->t('Activer le vidage des caches à la sauvegarde d\'un noeud'),
+            '#default_value' => $config->get('enable_hook'),
+        );
+
         $form['settings']['auth_prefixe'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Authentification prefixe'),
@@ -80,8 +86,8 @@ class OabAkamaiForm extends ConfigFormBase
 
         $form['test'] = array(
             '#type' => 'details',
-            '#title' => t('Essayer le flush Akamai cache'),
-            '#description'  => "Entrez un url pour tester le flush akamai",
+            '#title' => t('Tester les vidages de cache'),
+            '#description'  => "Entrez une url pour tester le flush akamai",
         );
 
         $form['test']['test_url'] = array(
@@ -110,6 +116,7 @@ class OabAkamaiForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state) {
         // Retrieve the configuration
         $this->config(self::getConfigName())
+            ->set('enable_hook', $form_state->getValue('enable_hook') )
             ->set('auth_prefixe', $form_state->getValue('auth_prefixe') . " ")
             ->set('req_path', $form_state->getValue('req_path') )
             ->set('base_url', $form_state->getValue('base_url') )
