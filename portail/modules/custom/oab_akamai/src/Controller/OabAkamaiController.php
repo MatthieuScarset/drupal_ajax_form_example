@@ -114,6 +114,7 @@ class OabAkamaiController extends ControllerBase
         # je laisse pour l'exemple si on repasse en returntransfert = true;
         $jsonRet = json_decode(strstr($retValue, '{'), true);
 
+        $ret = false;
         if (isset($jsonRet['status']) && $jsonRet['status'] == 201) {
             $ret = true;
             drupal_set_message("Cache Akamaï vidé pour la page $page", 'status', true);
