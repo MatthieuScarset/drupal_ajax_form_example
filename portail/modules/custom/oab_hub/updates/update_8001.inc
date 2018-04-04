@@ -18,6 +18,8 @@ if (!isset($vocabularies[$vid])) {
     ));
     $vocabulary->save();
 }
+oab_hub_ymlImport('taxonomy.vocabulary.hub.yml');
+oab_hub_ymlImport('language.content_settings.taxonomy_term.hub.yml');
 
 ###################################
 ## Ajout des fields au vocabulaire
