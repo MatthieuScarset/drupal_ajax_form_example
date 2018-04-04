@@ -126,6 +126,30 @@ if(empty($field)) {
 }
 oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_url.yml');
 
+## Suffixe des machines names
+$field_storage = FieldStorageConfig::loadByName('taxonomy_term','field_hub_machine_name_suffixe' );
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'id' => 'taxonomy_term.field_hub_machine_name_suffixe',
+        'field_name' => 'field_hub_machine_name_suffixe',
+        'entity_type' => 'taxonomy_term',
+        'type' => 'string',
+    ))->save();
+}
+oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_machine_name_suffixe.yml');
+
+$field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_machine_name_suffixe');
+if(empty($field)) {
+    $config_array = array(
+        'field_name' =>  'field_hub_machine_name_suffixe',
+        'entity_type' => 'taxonomy_term',
+        'bundle' => 'hub',
+        'label' => 'Suffixe des machine-names',
+        'required' => false,
+    );
+    FieldConfig::create($config_array)->save();
+}
+oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_machine_name_suffixe.yml');
 
 ## Load des entity displays views et form display views
 oab_hub_ymlImport('core.entity_form_display.taxonomy_term.hub.default.yml');
