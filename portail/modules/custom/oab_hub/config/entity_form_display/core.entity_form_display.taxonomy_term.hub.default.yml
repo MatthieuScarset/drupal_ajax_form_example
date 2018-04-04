@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.hub.field_hub_blocs
+    - field.field.taxonomy_term.hub.field_hub_menus
+    - field.field.taxonomy_term.hub.field_hub_subhomes
+    - field.field.taxonomy_term.hub.field_hub_url
+    - taxonomy.vocabulary.hub
+  module:
+    - text
+id: taxonomy_term.hub.default
+targetEntityType: taxonomy_term
+bundle: hub
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_hub_subhomes:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_url:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_hub_blocs: true
+  field_hub_menus: true
+  path: true

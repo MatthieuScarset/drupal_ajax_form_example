@@ -1,2 +1,25 @@
 <?php
 
+/**
+ * Pour le formulaire d'ajout d'une taxo Hub, je n'affiche que les subhomes de la langue en cours
+ */
+function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $tids = array_keys($form['field_hub_subhomes']['widget']['#options']);
+    $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+    foreach ($terms as $term) {
+        $lang = $term->language();
+        if ( $lang->getId() != $current_language ) {
+            unset($form['field_hub_subhomes']['widget']['#options'][$term->id()]);
+        }
+    }
+}
+
+
+/**
+ * Surcharge de la fonction oabt_YmlImport pour adapter au module
+ * (changement des variables par défaut pour éviter de les remettre à chaque fois)
+ */
+function oab_hub_ymlImport($file_name,$dir_name="/",$module_name="oab_hub") {
+    oabt_YmlImport($file_name,$dir_name,$module_name);
+}
