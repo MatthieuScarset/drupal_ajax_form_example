@@ -10,6 +10,7 @@ class OabHubController extends ControllerBase {
     const HUB_VOCABULARY_ID = "hub";
     const FIELD_MENUS_ID = 'field_hub_menus';
     const FIELD_SUBHOMES_ID = 'field_hub_subhomes';
+    const FIELD_MN_SUFFIXE_ID = 'field_hub_machine_name_suffixe';
 
     private static $menus = [
         'top_navbar' => "Top Navbar",
@@ -25,32 +26,39 @@ class OabHubController extends ControllerBase {
      */
     public static function createMenus(\Drupal\taxonomy\Entity\Term &$term) {
         $term_name = $term->label();
-        $machine_readable = strtolower($term_name);
-        $machine_readable = preg_replace('@[^a-z0-9_]+@','_',$machine_readable);
 
         $term_langcode = $term->language()->getId();
+        $machineName = self::getMachineName($term);
 
         $values = [];
         foreach (self::$menus as $menu_key => $menu_name) {
-            $menu_id = $menu_key . "_" . $machine_readable;
-            $menu_name = "$menu_name $term_name";
+            $menu_id = $menu_key . "_" . $machineName . "_" . $term_langcode;
+            $menu_name = "$menu_name $term_name $term_langcode";
 
             $menuObj = Menu::load($menu_id);
-            if(!isset($menuObj) || empty($menuObj)) {
-                $menuObj = Menu::create([
-                    'id' => $menu_id,
-                    'label' => $menu_name,
-                    'description' => $menu_name,
-                    'langcode' => $term_langcode,
-                    'status' => TRUE,
-                ]);
-                $save_ret = $menuObj->save();
-                if( $save_ret == SAVED_NEW || $save_ret == SAVED_UPDATED) {
-                    $values[] = $menu_id;
-                }
+            $i = 0;
+
+            ##Si le nom machine existe déjà pour un menu, déjà, c'est bizarre....
+            ## mais du coup, j'ajoute un chiffre que j'incrémente
+            while($menuObj !== null) {
+                $menu_id = $menu_key . "_" . $machineName . "_" . $term_langcode . "_$i";
+                $menuObj = Menu::load($menu_id);
+                $i++;
             }
+            $menuObj = Menu::create([
+                'id' => $menu_id,
+                'label' => $menu_name,
+                'description' => $menu_name,
+                'langcode' => $term_langcode,
+                'status' => TRUE,
+            ]);
+            $save_ret = $menuObj->save();
+            if ($save_ret == SAVED_NEW || $save_ret == SAVED_UPDATED) {
+                $values[] = $menu_id;
+            }
+
         }
-        $term->set(self::FIELD_MENUS_ID,$values );
+        $term->set(self::FIELD_MENUS_ID, $values);
         $term->save();
     }
 
@@ -61,12 +69,50 @@ class OabHubController extends ControllerBase {
     public static function deleteMenus(\Drupal\taxonomy\Entity\Term &$term) {
         $menus = $term->get(self::FIELD_MENUS_ID);
         foreach ($menus as $menu) {
-            $value = $menu->getValue();
-            $menu_id = $value['value'];
+            $menu_id = $menu->getString();
             $menuObj = Menu::load($menu_id);
             if(isset($menuObj) || !empty($menuObj)) {
                 $menuObj->delete();
             }
         }
     }
+
+    /**
+     * Si l'utilisateur n'a pas mis de suffixe pour les machines names, j'en crée un
+     * @param \Drupal\taxonomy\Entity\Term $term
+     */
+    public static function createMachineNameSuffixe(\Drupal\taxonomy\Entity\Term &$term) {
+        $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
+        if ($machineName_value->count() == 0) {
+            $term_name = $term->label();
+            $machine_readable = strtolower($term_name);
+            $machine_readable = preg_replace('@[^a-z0-9_]+@','_',$machine_readable);
+            $term->set(self::FIELD_MN_SUFFIXE_ID, $machine_readable);
+        }
+    }
+
+    /**
+     * @param $data \Drupal\taxonomy\Entity\Term or term id
+     * @return bool or term machine name
+     */
+    public static function getMachineName($data) {
+
+        ## Si le paramètre passé est un id, on load le term.
+        if (is_int($data)) {
+            $term = \Drupal\taxonomy\Entity\Term::load($data);
+        } else {
+            $term = $data;
+        }
+
+        $machineName = false;
+
+        ##je checke que le term passé en paramètre est bien un term de taxo
+        if (is_a($term,'\Drupal\taxonomy\Entity\Term' )) {
+            $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
+            $machineName = $machineName_value->first()->getString();
+        }
+
+        return $machineName;
+    }
+
 }
