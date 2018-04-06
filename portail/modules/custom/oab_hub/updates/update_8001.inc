@@ -153,4 +153,5 @@ oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_machine_name_suffixe.
 
 ## Load des entity displays views et form display views
 oab_hub_ymlImport('core.entity_form_display.taxonomy_term.hub.default.yml');
+oab_hub_ymlImport('core.entity_view_display.taxonomy_term.hub.default.yml');
 
