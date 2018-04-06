@@ -577,3 +577,12 @@ function oab_tristan_update_8075() {
     oabt_YmlImport('core.entity_view_display.node.homepage.full.yml');
     oabt_YmlImport('field.storage.node.field_solution_banner_title_colo.yml');
 }
+
+
+
+/**
+ * Je relance la lecture du referentiel axiome pour sauvegarder les sous-familles
+ */
+function oab_tristan_update_8076() {
+    include_once('updates/update_8076.inc');
+}
