@@ -8,10 +8,10 @@ id: taxonomy_term.hub.field_hub_machine_name_suffixe
 field_name: field_hub_machine_name_suffixe
 entity_type: taxonomy_term
 bundle: hub
-label: 'Suffixe des machine-names'
-description: 'Suffixe ajouté aux machine names utilisés pour créer les éléments du mini-site. Laisser vide pour utiliser un créé avec le nom du hub.'
+label: 'Machine name suffixe'
+description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -11,7 +11,7 @@ bundle: hub
 label: 'URL du hub'
 description: 'Prefixe aux URL du mini-site'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
