@@ -103,19 +103,18 @@ class OabAkamaiController extends ControllerBase
         curl_setopt($ch, CURLOPT_PROXY, $proxy_server);
         curl_setopt($ch, CURLOPT_SSLVERSION, 0);
         curl_setopt($ch, CURLOPT_SSLVERSION, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-
         $retValue = curl_exec($ch);
 
         # je laisse pour l'exemple si on repasse en returntransfert = true;
         $jsonRet = json_decode(strstr($retValue, '{'), true);
 
         $ret = false;
-        if (isset($jsonRet['status']) && $jsonRet['status'] == 201) {
+        if (isset($jsonRet['httpStatus']) && $jsonRet['httpStatus'] == 201) {
             $ret = true;
             drupal_set_message("Cache Akamaï vidé pour la page $page", 'status', true);
         } else {
