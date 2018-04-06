@@ -1,0 +1,22 @@
+#page d'administration par défaut
+oab_akamai.test:
+  path: 'admin/akamai_test'
+  defaults:
+    _controller: '\Drupal\oab_akamai\Controller\OabAkamaiController::testPage'
+    _title: 'Test API akamai'
+  requirements:
+    _permission: 'access content'
+oab_akamai.flush:
+  path: 'admin/flush-caches'
+  defaults:
+    _controller: '\Drupal\oab_akamai\Controller\OabAkamaiController::flushPage'
+    _title: 'Flush all caches'
+  requirements:
+    _permission: 'access content'
+oab_akamai.settings:
+  path: '/admin/structure/oab/settings/akamai'
+  defaults:
+    _form: '\Drupal\oab_akamai\Form\OabAkamaiForm'
+    _title: 'Akamai Settings'
+  requirements:
+    _permission: 'administer site configuration'
