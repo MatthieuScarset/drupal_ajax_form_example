@@ -54,10 +54,11 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
 /**
  * Lors de l'ajout d'une traduction à un taxo HUB, je fais comme pour la création d'un nouveau term
  */
-function oab_hub_taxonomy_term_translation_insert(\Drupal\taxonomy\Entity\Term $translation) {
+/*function oab_hub_taxonomy_term_translation_create(\Drupal\taxonomy\Entity\Term $translation) {
     if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
         //\Drupal::logger('oab_hub')->notice('Coucou c est moi');
-        //OabHubController::createMenus($translation);
+        kint($translation); die();
+        OabHubController::createMenus($translation);
         //OabHubController::createBlocks($term);
     }
 }
@@ -68,5 +69,5 @@ function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $
         //OabHubController::deleteBlocks($term);
     }
 }
-
+*/
 

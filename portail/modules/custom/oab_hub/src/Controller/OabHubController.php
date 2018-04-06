@@ -29,7 +29,6 @@ class OabHubController extends ControllerBase {
 
         $term_langcode = $term->language()->getId();
         $machineName = self::getMachineName($term);
-
         $values = [];
         foreach (self::$menus as $menu_key => $menu_name) {
             $menu_id = $menu_key . "_" . $machineName . "_" . $term_langcode;
@@ -42,8 +41,11 @@ class OabHubController extends ControllerBase {
             ## mais du coup, j'ajoute un chiffre que j'incrémente
             while($menuObj !== null) {
                 $menu_id = $menu_key . "_" . $machineName . "_" . $term_langcode . "_$i";
+                echo $menu_id;
                 $menuObj = Menu::load($menu_id);
                 $i++;
+                kint($menuObj);
+                if($i > 3) die("Je suis à plus de 3");
             }
             $menuObj = Menu::create([
                 'id' => $menu_id,
