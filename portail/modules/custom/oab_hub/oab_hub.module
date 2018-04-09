@@ -17,7 +17,6 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
     }
 }
 
-
 /**
  * Surcharge de la fonction oabt_YmlImport pour adapter au module
  * (changement des variables par défaut pour éviter de les remettre à chaque fois)
@@ -31,13 +30,18 @@ function oab_hub_ymlImport($file_name,$dir_name="/",$module_name="oab_hub") {
  * hook_ENTITY_TYPE_insert
  * Hook pour créer les menus/blocks à la création d'un taxo HUB
  */
-function oab_hub_taxonomy_term_insert(\Drupal\taxonomy\Entity\Term $term) {
+function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
+    /**
+     * Ajouter dans les if un test sur un paramètre ajouté dans l'array
+     * des infos du term dans l'update pour l'ajout du term "portail"
+     */
 
     ##on ne le fait que pour la création des termes pour le HUB
-    if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
-        OabHubController::createMachineNameSuffixe($term);
-        OabHubController::createMenus($term);
-        //OabHubController::createBlocks($term);
+    if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID &&
+        ( $term->isNew() || $term->isNewTranslation())) {
+            OabHubController::createMachineNameSuffixe($term);
+            OabHubController::createMenus($term);
+            //OabHubController::createBlocks($term);
     }
 }
 
@@ -46,28 +50,24 @@ function oab_hub_taxonomy_term_insert(\Drupal\taxonomy\Entity\Term $term) {
  */
 function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
     if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+
+        #Je boucle sur toutes les langues pour supprimer les menus associés
+        # aux traductions (le hook_translation_delete n'est pas appelé dans ce cas là)
+        $languages = $term->getTranslationLanguages(false);
+        foreach ( $languages as $langcode => $langinfo) {
+            OabHubController::deleteMenus($term->getTranslation($langcode));
+        }
         OabHubController::deleteMenus($term);
         //OabHubController::deleteBlocks($term);
     }
 }
 
 /**
- * Lors de l'ajout d'une traduction à un taxo HUB, je fais comme pour la création d'un nouveau term
+ * suppression des menus à la suppression de la trad d'un terme
  */
-/*function oab_hub_taxonomy_term_translation_create(\Drupal\taxonomy\Entity\Term $translation) {
-    if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
-        //\Drupal::logger('oab_hub')->notice('Coucou c est moi');
-        kint($translation); die();
-        OabHubController::createMenus($translation);
-        //OabHubController::createBlocks($term);
-    }
-}
-
 function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
     if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
         OabHubController::deleteMenus($translation);
         //OabHubController::deleteBlocks($term);
     }
 }
-*/
-

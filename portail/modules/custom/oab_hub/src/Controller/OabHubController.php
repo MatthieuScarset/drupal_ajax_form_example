@@ -44,7 +44,7 @@ class OabHubController extends ControllerBase {
                 echo $menu_id;
                 $menuObj = Menu::load($menu_id);
                 $i++;
-                kint($menuObj);
+                #kint($menuObj);
                 if($i > 3) die("Je suis à plus de 3");
             }
             $menuObj = Menu::create([
@@ -61,7 +61,7 @@ class OabHubController extends ControllerBase {
 
         }
         $term->set(self::FIELD_MENUS_ID, $values);
-        $term->save();
+        return $term;
     }
 
     /**
