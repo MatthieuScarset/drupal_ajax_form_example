@@ -2,6 +2,7 @@
 namespace Drupal\oab_hub\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Path\PathValidator;
 use Drupal\system\Entity\Menu;
 use Drupal\block\Entity\Block;
 
@@ -11,6 +12,7 @@ class OabHubController extends ControllerBase {
     const FIELD_MENUS_ID = 'field_hub_menus';
     const FIELD_SUBHOMES_ID = 'field_hub_subhomes';
     const FIELD_MN_SUFFIXE_ID = 'field_hub_machine_name_suffixe';
+    const FIELD_URL_ID = 'field_hub_url';
 
     private static $menus = [
         'top_navbar' => "Top Navbar",
@@ -41,7 +43,6 @@ class OabHubController extends ControllerBase {
             ## mais du coup, j'ajoute un chiffre que j'incrémente
             while($menuObj !== null) {
                 $menu_id = $menu_key . "_" . $machineName . "_" . $term_langcode . "_$i";
-                echo $menu_id;
                 $menuObj = Menu::load($menu_id);
                 $i++;
                 #kint($menuObj);
@@ -111,10 +112,20 @@ class OabHubController extends ControllerBase {
         ##je checke que le term passé en paramètre est bien un term de taxo
         if (is_a($term,'\Drupal\taxonomy\Entity\Term' )) {
             $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
-            $machineName = $machineName_value->first()->getString();
+            if($machineName_value->count() > 0) {
+                $machineName = $machineName_value->first()->getString();
+            }
         }
 
         return $machineName;
+    }
+
+    public static function checkUrl(\Drupal\taxonomy\Entity\Term &$term) {
+        $url = $term->get(self::FIELD_URL_ID);
+        if ($url->count() > 0 ) {
+            $cleanedUrl = \Drupal::service('pathauto.alias_cleaner')->cleanString($url->first()->getString());
+            $term->set(self::FIELD_URL_ID, $cleanedUrl);
+        }
     }
 
 }

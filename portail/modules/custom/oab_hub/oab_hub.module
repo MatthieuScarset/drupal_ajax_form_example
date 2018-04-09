@@ -15,6 +15,13 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
             unset($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options'][$term->id()]);
         }
     }
+
+    #Pour les modifs, je bloque le machine_name
+    $isNew = $form_state->getFormObject()->getEntity()->isNew();
+    $isNewTranslation = $form_state->getFormObject()->getEntity()->isNewTranslation();
+    if (!$isNew) {
+        $form[OabHubController::FIELD_MN_SUFFIXE_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
+    }
 }
 
 /**
@@ -41,6 +48,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
         ( $term->isNew() || $term->isNewTranslation())) {
             OabHubController::createMachineNameSuffixe($term);
             OabHubController::createMenus($term);
+            OabHubController::checkUrl($term);
             //OabHubController::createBlocks($term);
     }
 }
