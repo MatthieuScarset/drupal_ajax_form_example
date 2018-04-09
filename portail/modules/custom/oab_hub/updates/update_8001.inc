@@ -18,8 +18,8 @@ if (!isset($vocabularies[$vid])) {
     ));
     $vocabulary->save();
 }
-oab_hub_ymlImport('taxonomy.vocabulary.hub.yml');
-oab_hub_ymlImport('language.content_settings.taxonomy_term.hub.yml');
+oabt_YmlImport('taxonomy.vocabulary.hub.yml');
+oabt_YmlImport('language.content_settings.taxonomy_term.hub.yml');
 
 ###################################
 ## Ajout des fields au vocabulaire
@@ -34,7 +34,7 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
-oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_blocs.yml');
+oabt_YmlImport('field.storage.taxonomy_term.field_hub_blocs.yml');
 
 $field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_blocs');
 if(empty($field)) {
@@ -47,7 +47,7 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_blocs.yml');
+oabt_YmlImport('field.field.taxonomy_term.hub.field_hub_blocs.yml');
 
 
 ## Liste des menus
@@ -60,7 +60,7 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
-oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_menus.yml');
+oabt_YmlImport('field.storage.taxonomy_term.field_hub_menus.yml');
 
 $field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_menus');
 if(empty($field)) {
@@ -73,7 +73,7 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_menus.yml');
+oabt_YmlImport('field.field.taxonomy_term.hub.field_hub_menus.yml');
 
 ## liste des subhomes
 $field_storage = FieldStorageConfig::loadByName('taxonomy_term','field_hub_subhomes' );
@@ -85,7 +85,7 @@ if(empty($field_storage)) {
         'type' => 'entity_reference',
     ))->save();
 }
-oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_subhomes.yml');
+oabt_YmlImport('field.storage.taxonomy_term.field_hub_subhomes.yml');
 
 $field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_subhomes');
 if(empty($field)) {
@@ -98,7 +98,7 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_subhomes.yml');
+oabt_YmlImport('field.field.taxonomy_term.hub.field_hub_subhomes.yml');
 
 
 ## URL des contenus
@@ -111,7 +111,7 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
-oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_url.yml');
+oabt_YmlImport('field.storage.taxonomy_term.field_hub_url.yml');
 
 $field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_url');
 if(empty($field)) {
@@ -124,7 +124,7 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_url.yml');
+oabt_YmlImport('field.field.taxonomy_term.hub.field_hub_url.yml');
 
 ## Suffixe des machines names
 $field_storage = FieldStorageConfig::loadByName('taxonomy_term','field_hub_machine_name_suffixe' );
@@ -136,7 +136,7 @@ if(empty($field_storage)) {
         'type' => 'string',
     ))->save();
 }
-oab_hub_ymlImport('field.storage.taxonomy_term.field_hub_machine_name_suffixe.yml');
+oabt_YmlImport('field.storage.taxonomy_term.field_hub_machine_name_suffixe.yml');
 
 $field = FieldConfig::loadByName('taxonomy_term', 'hub', 'field_hub_machine_name_suffixe');
 if(empty($field)) {
@@ -149,9 +149,9 @@ if(empty($field)) {
     );
     FieldConfig::create($config_array)->save();
 }
-oab_hub_ymlImport('field.field.taxonomy_term.hub.field_hub_machine_name_suffixe.yml');
+oabt_YmlImport('field.field.taxonomy_term.hub.field_hub_machine_name_suffixe.yml');
 
 ## Load des entity displays views et form display views
-oab_hub_ymlImport('core.entity_form_display.taxonomy_term.hub.default.yml');
-oab_hub_ymlImport('core.entity_view_display.taxonomy_term.hub.default.yml');
+oabt_YmlImport('core.entity_form_display.taxonomy_term.hub.default.yml');
+oabt_YmlImport('core.entity_view_display.taxonomy_term.hub.default.yml');
 

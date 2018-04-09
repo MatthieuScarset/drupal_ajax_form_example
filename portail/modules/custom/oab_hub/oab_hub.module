@@ -25,15 +25,6 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
 }
 
 /**
- * Surcharge de la fonction oabt_YmlImport pour adapter au module
- * (changement des variables par défaut pour éviter de les remettre à chaque fois)
- */
-function oab_hub_ymlImport($file_name,$dir_name="/",$module_name="oab_hub") {
-    oabt_YmlImport($file_name,$dir_name,$module_name);
-}
-
-
-/**
  * hook_ENTITY_TYPE_insert
  * Hook pour créer les menus/blocks à la création d'un taxo HUB
  */
