@@ -1,0 +1,72 @@
+<?php
+
+use Drupal\oab_hub\Controller\OabHubController;
+
+/**
+ * Pour le formulaire d'ajout d'une taxo Hub, je n'affiche que les subhomes de la langue en cours
+ */
+function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $tids = array_keys($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options']);
+    $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+    foreach ($terms as $term) {
+        $lang = $term->language();
+        if ( $lang->getId() != $current_language ) {
+            unset($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options'][$term->id()]);
+        }
+    }
+
+    #Pour les modifs, je bloque le machine_name
+    $isNew = $form_state->getFormObject()->getEntity()->isNew();
+    $isNewTranslation = $form_state->getFormObject()->getEntity()->isNewTranslation();
+    if (!$isNew) {
+        $form[OabHubController::FIELD_MN_SUFFIXE_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
+    }
+}
+
+/**
+ * hook_ENTITY_TYPE_insert
+ * Hook pour créer les menus/blocks à la création d'un taxo HUB
+ */
+function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
+    /**
+     * Ajouter dans les if un test sur un paramètre ajouté dans l'array
+     * des infos du term dans l'update pour l'ajout du term "portail"
+     */
+
+    ##on ne le fait que pour la création des termes pour le HUB
+    if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID &&
+        ( $term->isNew() || $term->isNewTranslation())) {
+            OabHubController::createMachineNameSuffixe($term);
+            OabHubController::createMenus($term);
+            OabHubController::checkUrl($term);
+            //OabHubController::createBlocks($term);
+    }
+}
+
+/**
+ * suppression des menus à la suppression d'un terme
+ */
+function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
+    if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+
+        #Je boucle sur toutes les langues pour supprimer les menus associés
+        # aux traductions (le hook_translation_delete n'est pas appelé dans ce cas là)
+        $languages = $term->getTranslationLanguages(false);
+        foreach ( $languages as $langcode => $langinfo) {
+            OabHubController::deleteMenus($term->getTranslation($langcode));
+        }
+        OabHubController::deleteMenus($term);
+        //OabHubController::deleteBlocks($term);
+    }
+}
+
+/**
+ * suppression des menus à la suppression de la trad d'un terme
+ */
+function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
+    if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+        OabHubController::deleteMenus($translation);
+        //OabHubController::deleteBlocks($term);
+    }
+}
