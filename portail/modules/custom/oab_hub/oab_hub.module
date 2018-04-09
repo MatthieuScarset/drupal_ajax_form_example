@@ -52,12 +52,22 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
     if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
 
         #Je boucle sur toutes les langues pour supprimer les menus associés
-        # aux traductions
+        # aux traductions (le hook_translation_delete n'est pas appelé dans ce cas là)
         $languages = $term->getTranslationLanguages(false);
         foreach ( $languages as $langcode => $langinfo) {
             OabHubController::deleteMenus($term->getTranslation($langcode));
         }
         OabHubController::deleteMenus($term);
+        //OabHubController::deleteBlocks($term);
+    }
+}
+
+/**
+ * suppression des menus à la suppression de la trad d'un terme
+ */
+function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
+    if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+        OabHubController::deleteMenus($translation);
         //OabHubController::deleteBlocks($term);
     }
 }
