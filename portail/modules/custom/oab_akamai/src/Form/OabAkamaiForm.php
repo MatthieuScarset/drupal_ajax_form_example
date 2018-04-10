@@ -139,7 +139,7 @@ class OabAkamaiForm extends ConfigFormBase
             ->set('base_url', $form_state->getValue('base_url') )
             ->set('access_token', $form_state->getValue('access_token') )
             ->set('client_token', $form_state->getValue('client_token') )
-            ->set('client_secret', $form_state->getValue('client_secret') )
+            ->set('varnish_ip', $form_state->getValue('varnish_ip') )
             ->save();
 
         parent::submitForm($form, $form_state);
