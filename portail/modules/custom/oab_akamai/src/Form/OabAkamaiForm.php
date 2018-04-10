@@ -36,58 +36,75 @@ class OabAkamaiForm extends ConfigFormBase
     public function buildForm(array $form, FormStateInterface $form_state) {
         $config = $this->config(self::getConfigName());
 
-        $form['settings'] = array(
+        $form['global'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Global Settings'),
+        );
+
+        $form['global']['enable_hook'] = array(
+            '#type' => 'checkbox',
+            '#title' => $this->t('Activer le vidage des caches à la sauvegarde d\'un noeud'),
+            '#description'  => "Caches Akamai, Varnish et Drupal",
+            '#default_value' => $config->get('enable_hook'),
+        );
+
+        $form['akamai'] = array(
             '#type' => 'fieldset',
             '#title' => t('Akamai Settings'),
         );
 
-        $form['settings']['enable_hook'] = array(
-            '#type' => 'checkbox',
-            '#title' => $this->t('Activer le vidage des caches à la sauvegarde d\'un noeud'),
-            '#default_value' => $config->get('enable_hook'),
-        );
-
-        $form['settings']['auth_prefixe'] = array(
+        $form['akamai']['auth_prefixe'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Authentification prefixe'),
             '#default_value' => str_replace(' ', '', $config->get('auth_prefixe')),
         );
 
-        $form['settings']['base_url'] = array(
+        $form['akamai']['base_url'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Base URL'),
             '#default_value' => $config->get('base_url'),
             '#description'  => "URL de l'API akamai, sans le https://"
         );
 
-        $form['settings']['req_path'] = array(
+        $form['akamai']['req_path'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Requete path'),
             '#default_value' => $config->get('req_path')
         );
 
-        $form['settings']['access_token'] = array(
+        $form['akamai']['access_token'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Access Token'),
             '#default_value' => $config->get('access_token')
         );
 
-        $form['settings']['client_token'] = array(
+        $form['akamai']['client_token'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Client Token'),
             '#default_value' => $config->get('client_token')
         );
 
-        $form['settings']['client_secret'] = array(
+        $form['akamai']['client_secret'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Client Secrect'),
             '#default_value' => $config->get('client_secret')
         );
 
+        $form['varnish'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Varnish Settings'),
+        );
+
+        $form['varnish']['varnish_ip'] = array(
+            '#type' => 'textfield',
+            '#title' => $this->t('IP de Varnish (loadbalancer)'),
+            '#default_value' => $config->get('varnish_ip')
+        );
+
         $form['test'] = array(
             '#type' => 'details',
             '#title' => t('Tester les vidages de cache'),
-            '#description'  => "Entrez une url pour tester le flush akamai",
+            '#description'  => "Entrez une url pour tester les flushs Akamai, Varnish et Drupal",
         );
 
         $form['test']['test_url'] = array(

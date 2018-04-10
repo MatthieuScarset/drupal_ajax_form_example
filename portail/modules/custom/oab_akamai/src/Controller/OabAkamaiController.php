@@ -27,6 +27,7 @@ class OabAkamaiController extends ControllerBase
     private $akamai_clientSecret;
     private $akamai_clientToken;
     private $id = "mvymsutrt5rjsq2p";
+    private $varnish_ip;
 
     public function __construct() {
         $config = \Drupal::config(OabAkamaiForm::getConfigName());
@@ -36,6 +37,7 @@ class OabAkamaiController extends ControllerBase
         $this->akamai_accessToken = $config->get('access_token');
         $this->akamai_clientToken = $config->get('client_token');
         $this->akamai_clientSecret = $config->get('client_secret');
+        $this->varnish_ip = $config->get('varnish_ip');
     }
 
   /**
@@ -44,8 +46,8 @@ class OabAkamaiController extends ControllerBase
     public function testPage(Request $request){
         $page = "https://www.orange-business.com/fr/blogs/collaboration-en-toute-liberte";
         $this->flushAkamai($page);
-       $this->flushVarnish($page, "https://www.orange-business.com");
-       $this->flushDrupalCache($page);
+        $this->flushVarnish($page, "https://www.orange-business.com");
+        $this->flushDrupalCache($page);
     }
 
     public function flushPage(Request $request) {
@@ -135,7 +137,7 @@ class OabAkamaiController extends ControllerBase
 
         $originPath = str_replace($host, '', $originUrl);
 
-        $url = "https://10.200.1.66$originPath";
+        $url = "https://" . $this->varnish_ip . $originPath;
 
         $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
         $output = array();
