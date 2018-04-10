@@ -1,5 +1,5 @@
 name: OAB Akamai
-description: 'functions for call Akamai API'
+description: 'Varnish and Akamai cache functions'
 type: module
 package: OAB
 version: VERSION
