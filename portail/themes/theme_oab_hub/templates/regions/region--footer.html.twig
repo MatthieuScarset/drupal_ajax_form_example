@@ -1,0 +1,161 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ *
+ * @ingroup templates
+ */
+#}
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+  ]
+%}
+{% if content %}
+
+  <div class="container">
+        <div class="row">
+            <div class="o-footer">
+                {#Begin Footer Social Bar#}
+                <div class="container-fluid o-footer-top nopadding">
+
+                     <div class="row">
+                         <div class="col-md-12 nopadding">
+                              {{ elements.footersocialblock }}
+                         </div>
+                     </div>
+                </div>
+                <div class="container-fluid o-footer-top nopadding hidden-xs hidden-sm">
+
+                    {% if elements.footeren %}
+                        {{ elements.footeren }}
+                    {% endif %}
+                    {% if elements.footerfr %}
+                        {{ elements.footerfr }}
+                    {% endif %}
+                    {% if elements.footerru %}
+                        {{ elements.footerru }}
+                    {% endif %}
+                    {% if elements.footerruen %}
+                        {{ elements.footerruen }}
+                    {% endif %}
+                    {% if elements.footerbr %}
+                        {{ elements.footerbr }}
+                    {% endif %}
+                    {% if elements.footeres %}
+                        {{ elements.footeres }}
+                    {% endif %}
+                </div>
+
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en ru, y a pas de menu finalement...; #}
+                {% if elements.bottomfooterbaren %}
+                    {% set bottomfooterbar = elements.bottomfooterbaren %}
+                {% endif %}
+                {% if elements.bottomfooterbarfr %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarfr %}
+                {% endif %}
+
+                {% if elements.bottomfooterbarru %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarru %}
+                {% endif %}
+                {% if elements.bottomfooterbarruen %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarruen %}
+                {% endif %}
+                {% if elements.bottomfooterbares %}
+                    {% set bottomfooterbar =  elements.bottomfooterbares %}
+                {% endif %}
+                {% if elements.bottomfooterbarbr %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarbr %}
+                {% endif %}
+                {% if bottomfooterbar["#markup"]|render|trim is empty %}
+                    {% set classSupp = "hidden" %}
+                {% endif %}
+                 <div class="footer-div-border {{ classSupp }}">
+                    {{ bottomfooterbar }}
+                 </div>
+
+
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en en, y a pas de menu finalement...; #}
+                {% if elements.topnavbaren_2 %}
+                    {% set topnavbar_2 = elements.topnavbaren_2 %}
+                {% endif %}
+                {% if elements.topnavbarfr_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarfr_2 %}
+                {% endif %}
+
+                {% if elements.topnavbarru_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarru_2 %}
+                {% endif %}
+                {% if elements.topnavbarruen_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarruen_2 %}
+                {% endif %}
+                {% if elements.topnavbares_2 %}
+                    {% set topnavbar_2 =  elements.topnavbares_2 %}
+                {% endif %}
+                {% if elements.topnavbarbr_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarbr_2 %}
+                {% endif %}
+                {% if topnavbar_2["#markup"]|render|trim is empty %}
+                    {% set classSupp_topnavbar = "hidden" %}
+                {% endif %}
+                <div class="hidden-md hidden-lg container footer-div-border {{ classSupp_topnavbar }}">
+                    <div id="login_block" >
+                        {#Render the top navbar items#}
+                        {{ topnavbar_2 }}
+                    </div>
+
+                </div>
+                {# GESTION SI LE CONTENU EST VIDE  #}
+                {% set toprightnavbar_footer = 0 %}
+                {% if elements.toprightnavbarfooteren %}
+                    {% set toprightnavbar_footer = elements.toprightnavbarfooteren %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterfr %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterfr %}
+                {% endif %}
+
+                {% if elements.toprightnavbarfooterru %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterru %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterruen %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterruen %}
+                {% endif %}
+                {% if elements.toprightnavbarfooteres %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooteres %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterbr %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterbr %}
+                {% endif %}
+
+                {% if toprightnavbar_footer["#markup"]|render|trim is empty %}
+                    {% set classSupp_topnavbarfooter = "hidden" %}
+                {% endif %}
+
+                <div class="hidden-md hidden-lg container footer-div-border {{ classSupp_topnavbarfooter }}">
+
+                    <div id="rightnavbar_footerblock">
+
+                        {{ toprightnavbar_footer }}
+                    </div>
+
+                </div>
+                <div class="hidden-md hidden-lg container footer-div-border">
+                    <p >
+                        © Orange Business Services {{ "now"|date("Y") }}
+                    </p>
+                </div>
+          </div>
+
+       </div>
+</div>
+
+{% endif %}
