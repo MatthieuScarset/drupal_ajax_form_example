@@ -21,6 +21,7 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
     $isNewTranslation = $form_state->getFormObject()->getEntity()->isNewTranslation();
     if (!$isNew) {
         $form[OabHubController::FIELD_MN_SUFFIXE_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
+        $form[OabHubController::FIELD_URL_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
     }
 }
 
@@ -40,7 +41,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
             OabHubController::createMachineNameSuffixe($term);
             OabHubController::createMenus($term);
             OabHubController::checkUrl($term);
-            //OabHubController::createBlocks($term);
+            OabHubController::createBlocks($term);
     }
 }
 
@@ -55,9 +56,11 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
         $languages = $term->getTranslationLanguages(false);
         foreach ( $languages as $langcode => $langinfo) {
             OabHubController::deleteMenus($term->getTranslation($langcode));
+            OabHubController::deleteBlocks($term->getTranslation($langcode));
         }
         OabHubController::deleteMenus($term);
-        //OabHubController::deleteBlocks($term);
+        OabHubController::deleteBlocks($term);
+        OabHubController::deleteUrl($term);
     }
 }
 
@@ -67,6 +70,6 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
 function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
     if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
         OabHubController::deleteMenus($translation);
-        //OabHubController::deleteBlocks($term);
+        OabHubController::deleteBlocks($translation);
     }
 }
