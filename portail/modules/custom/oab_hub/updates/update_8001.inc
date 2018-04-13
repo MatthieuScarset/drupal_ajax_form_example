@@ -2,6 +2,12 @@
 
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
+use \Drupal\oab_hub\Controller\OabHubController;
+
+## Je set à vide la config des urls du hub pour qu'il save un tableau
+\Drupal::config(OabHubController::CONFIG_ID)
+    ->set(OabHubController::CONFIG_URL_LIST, array());
+
 
 /**
  * Création du vocabulaire "hub"

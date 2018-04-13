@@ -27,9 +27,9 @@ blocks-config:
       - language
       - system
     theme:
-      - theme_boosted
+      - theme_oab_hub
   id: autofill
-  theme: theme_boosted
+  theme: theme_oab_hub
   region: autofill
   weight: -13
   provider: null

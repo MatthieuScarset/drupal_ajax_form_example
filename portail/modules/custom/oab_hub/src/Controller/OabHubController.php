@@ -11,6 +11,8 @@ use Drupal\block\Entity\Block;
 class OabHubController extends ControllerBase {
 
     const HUB_VOCABULARY_ID = "hub";
+    const CONFIG_ID = "oab_hub.settings";
+    const CONFIG_URL_LIST = "url_list";
     const FIELD_MENUS_ID = 'field_hub_menus';
     const FIELD_BLOCS_ID = 'field_hub_blocs';
     const FIELD_SUBHOMES_ID = 'field_hub_subhomes';
@@ -64,6 +66,7 @@ class OabHubController extends ControllerBase {
             }
 
         }
+
         $term->set(self::FIELD_MENUS_ID, $values);
         return $term;
     }
@@ -84,17 +87,38 @@ class OabHubController extends ControllerBase {
     }
 
     /**
+     * A la suppression d'une terme, je supprime tous les blocks associés
+     * @param \Drupal\taxonomy\Entity\Term $term
+     */
+    public static function deleteBlocks(\Drupal\taxonomy\Entity\Term &$term) {
+        $blocks = $term->get(self::FIELD_BLOCS_ID);
+        foreach ($blocks as $block) {
+            $block_id = $block->getString();
+            $blockObj = Block::load($block_id);
+            if(isset($blockObj) || !empty($blockObj)) {
+                $blockObj->delete();
+            }
+        }
+    }
+
+    /**
      * Si l'utilisateur n'a pas mis de suffixe pour les machines names, j'en crée un
      * @param \Drupal\taxonomy\Entity\Term $term
      */
     public static function createMachineNameSuffixe(\Drupal\taxonomy\Entity\Term &$term) {
         $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
+
+        $term_name = "";
         if ($machineName_value->count() == 0) {
             $term_name = $term->label();
-            $machine_readable = strtolower($term_name);
-            $machine_readable = preg_replace('@[^a-z0-9_]+@','_',$machine_readable);
-            $term->set(self::FIELD_MN_SUFFIXE_ID, $machine_readable);
+        } else {
+            $term_name = $machineName_value->first()->getString();
         }
+
+        $machine_readable = strtolower($term_name);
+        $machine_readable = preg_replace('@[^a-z0-9_]+@','-',$machine_readable);
+        $machine_readable = str_replace('_', '-', $machine_readable);
+        $term->set(self::FIELD_MN_SUFFIXE_ID, $machine_readable);
     }
 
     /**
@@ -128,6 +152,35 @@ class OabHubController extends ControllerBase {
         if ($url->count() > 0 ) {
             $cleanedUrl = \Drupal::service('pathauto.alias_cleaner')->cleanString($url->first()->getString());
             $term->set(self::FIELD_URL_ID, $cleanedUrl);
+
+            #Quand je check l'URL, je la sauvegarde en bdd pour pouvoir y réacceder facilement
+            # lorsqu'on check les themes
+            $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
+            if(is_null($url_list) || empty($url_list) || !isset($url_list)) {
+                $url_list = [];
+            }
+            $url_list[] = $cleanedUrl;
+            $config_factory = \Drupal::configFactory();
+            $config_factory->getEditable(self::CONFIG_ID)
+                ->set(self::CONFIG_URL_LIST, $url_list)
+                ->save(true);
+
+        }
+    }
+
+    public static function deleteUrl(\Drupal\taxonomy\Entity\Term &$term) {
+        $url = $term->get(self::FIELD_URL_ID);
+        if ($url->count() > 0 ) {
+
+            $url->first()->getString();
+
+            $urls = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
+
+            unset($urls[array_search($url, $urls)]);
+            $config_factory = \Drupal::configFactory();
+            $config_factory->getEditable(self::CONFIG_ID)
+                ->set(self::CONFIG_URL_LIST, $urls)
+                ->save(true);
         }
     }
 
@@ -181,7 +234,6 @@ class OabHubController extends ControllerBase {
             $blocks[] = $block_id;
 
         }
-
         $term->set(self::FIELD_BLOCS_ID, $blocks);
     }
 
@@ -195,11 +247,10 @@ class OabHubController extends ControllerBase {
         $menus = $term->get(self::FIELD_MENUS_ID);
         $ret = false;
         foreach ($menus as $menu) {
-            if (stripos($menu->getString(), $block_id) == 0) {
+            if (stripos(str_replace('-', '_',$menu->getString()), $block_id) === 0) {
                 $ret = $menu->getString();
             }
         }
-
         return $ret;
     }
 
@@ -207,16 +258,20 @@ class OabHubController extends ControllerBase {
         $ret = "";
 
         if ($i === null) {
-            $ret = $elem_key . "_" . $machineName . "_" . $langcode;
+            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode ) );
+
+            $ret = $elem_key . "-" . $machineName . "-" . $langcode;
         } else {
-            $ret = $elem_key . "_" . $machineName . "_" . $langcode . "_" . $i;
+            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i ) );
+
+            $ret = $elem_key . "-" . $machineName . "-" . $langcode . "-" . $i;
         }
 
-        return $ret;
+        return str_replace('_', '-', $ret);
     }
 
     private static function generateBlockId($elem_key, $machineName, $langcode, $i = null) {
-        return str_replace('_', '', self::generateMenuId($elem_key, $machineName, $langcode, $i));
+        return str_replace('-', '', self::generateMenuId($elem_key, $machineName, $langcode, $i));
     }
 
 }
