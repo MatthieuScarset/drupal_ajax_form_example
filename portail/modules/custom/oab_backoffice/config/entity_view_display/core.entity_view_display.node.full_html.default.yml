@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.full_html.field_content
     - field.field.node.full_html.field_display_title
     - field.field.node.full_html.field_end_date
+    - field.field.node.full_html.field_hub
     - field.field.node.full_html.field_industry
     - field.field.node.full_html.field_insight
     - field.field.node.full_html.field_job_profile
@@ -52,6 +53,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_hub:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_industry:
     weight: 4

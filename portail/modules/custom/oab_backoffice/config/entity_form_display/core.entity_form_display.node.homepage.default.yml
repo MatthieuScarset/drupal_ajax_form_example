@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.homepage.field_corporate_title
     - field.field.node.homepage.field_expertise_title
     - field.field.node.homepage.field_header_title
+    - field.field.node.homepage.field_hub
     - field.field.node.homepage.field_infography
     - field.field.node.homepage.field_meta_description
     - field.field.node.homepage.field_meta_title
@@ -80,7 +81,7 @@ third_party_settings:
         - group_corporate_banner
         - group_seo
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: tabs
       format_settings:
         id: ''
@@ -232,7 +233,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -273,7 +274,7 @@ content:
     type: link_default
     region: content
   field_corporate_button_text:
-    weight: 35
+    weight: 36
     settings:
       size: 60
       placeholder: ''
@@ -297,7 +298,7 @@ content:
     type: image_image
     region: content
   field_corporate_menu_title:
-    weight: 36
+    weight: 37
     settings:
       size: 60
       placeholder: ''
@@ -327,6 +328,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_hub:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_infography:
     type: entity_reference_paragraphs
@@ -527,7 +534,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -535,21 +542,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 5
+    weight: 6
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 10
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 6
+    weight: 7
     region: content
     third_party_settings: {  }
   title:
@@ -562,12 +569,17 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 9
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_corporate_menu: true

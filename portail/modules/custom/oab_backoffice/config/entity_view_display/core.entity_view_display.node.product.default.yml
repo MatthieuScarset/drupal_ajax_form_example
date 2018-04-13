@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.product.field_end_date
     - field.field.node.product.field_file
     - field.field.node.product.field_highlight
+    - field.field.node.product.field_hub
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
@@ -24,9 +25,11 @@ dependencies:
     - field.field.node.product.field_start_date
     - field.field.node.product.field_sub_family
     - field.field.node.product.field_subhome
+    - field.field.node.product.field_test_showroom
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - field.field.node.product.moderation_state_update
     - node.type.product
@@ -71,6 +74,14 @@ content:
     region: content
   field_file:
     weight: 8
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_hub:
+    weight: 11
     label: hidden
     settings:
       link: true

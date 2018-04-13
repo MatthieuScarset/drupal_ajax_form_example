@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.document.field_end_date
     - field.field.node.document.field_file
     - field.field.node.document.field_highlight
+    - field.field.node.document.field_hub
     - field.field.node.document.field_industry
     - field.field.node.document.field_insight
     - field.field.node.document.field_job_profile
@@ -29,7 +30,6 @@ dependencies:
     - field.field.node.document.field_subhome
     - field.field.node.document.field_thematic
     - field.field.node.document.field_visual
-    - field.field.node.document.field_wysiwyg_rebond
     - field.field.node.document.moderation_state_update
     - node.type.document
   module:
@@ -89,6 +89,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_hub:
+    weight: 14
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_industry:
     weight: 5
