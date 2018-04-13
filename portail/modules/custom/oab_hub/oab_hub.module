@@ -69,6 +69,6 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
 function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
     if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
         OabHubController::deleteMenus($translation);
-        //OabHubController::deleteBlocks($term);
+        OabHubController::deleteBlocks($translation);
     }
 }
