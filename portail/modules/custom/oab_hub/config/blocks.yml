@@ -1,0 +1,56 @@
+blocks:
+  top_navbar:
+    name: "Top Navbar"
+    region: header
+  top_right_navbar:
+    name: "Top right Navbar"
+    region: header
+  top_right_footer_navbar:
+    name: "Top right footer Navbar"
+    region: footer
+  main_menu:
+    name: "Main menu"
+    region: header
+  direct_access:
+    name: "Direct Access"
+    region: prefooter
+  footer:
+    name: "Footer"
+    region: footer
+blocks-config:
+  langcode: autofill
+  status: true
+  dependencies:
+    config:
+      - autofill
+    module:
+      - language
+      - system
+    theme:
+      - theme_oab_hub
+  id: autofill
+  theme: theme_oab_hub
+  region: autofill
+  weight: -13
+  provider: null
+  plugin: autofill
+  settings:
+    id: autofill
+    label: autofill
+    provider: system
+    label_display: '0'
+    level: 1
+    depth: 0
+  visibility:
+    language:
+      id: language
+      langcodes:
+        autofill: autofill
+      negate: false
+      context_mapping:
+        language: '@language.current_language_context:language_interface'
+    request_path:
+      id: request_path
+      pages: autofill
+      negate: false
+      context_mapping: {  }
