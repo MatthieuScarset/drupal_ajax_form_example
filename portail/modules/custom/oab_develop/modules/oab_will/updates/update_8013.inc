@@ -1,14 +1,25 @@
 <?php
 use Symfony\Component\Yaml\Yaml;
-
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
 
 /**
  * RUBYPORTAILOBS-3310 [OC] champ HUB dans les types de contenu
  */
 
+
+$field_storage = FieldStorageConfig::loadByName('node', 'field_hub');
+
+if(empty($field_storage)) {
+    FieldStorageConfig::create(array(
+        'field_name' => 'field_hub',
+        'entity_type' => 'node',
+        'type' => 'entity_reference',
+    ))->save();
+}
 oabt_YmlImport('field.storage.node.field_hub.yml');
 
-$connection = \Drupal::database();
+/*$connection = \Drupal::database();
 $query_string = "CREATE TABLE IF NOT EXISTS `node__field_hub` (
 `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
   `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
@@ -34,7 +45,38 @@ $query_string = "CREATE TABLE IF NOT EXISTS `node_revision__field_hub` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_hub.';";
 $query = $connection->query($query_string);
 $result = $query->execute();
+*/
 
+
+$bundles = [
+    'blog_post',
+    'custom_page',
+    'customer_story',
+    'document',
+    'full_html',
+    'homepage',
+    'industry',
+    'magazine',
+    'product',
+    'profile',
+    'simple_page',
+    'solution'
+];
+
+foreach ($bundles as $bundle) {
+    $field = FieldConfig::loadByName('node', $bundle, 'field_hub');
+
+    if (empty($field)) {
+        $config_array = array(
+            'field_name' => 'field_hub',
+            'entity_type' => 'node',
+            'bundle' => $bundle,
+            'label' => 'hub',
+            'required' => FALSE,
+        );
+        FieldConfig::create($config_array)->save();
+    }
+}
 
 
 oabt_YmlImport('core.entity_form_display.node.blog_post.default.yml');
