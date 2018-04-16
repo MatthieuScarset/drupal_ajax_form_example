@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.blog_post.field_email_owner
     - field.field.node.blog_post.field_end_date
     - field.field.node.blog_post.field_highlight
+    - field.field.node.blog_post.field_hub
     - field.field.node.blog_post.field_industry
     - field.field.node.blog_post.field_insight
     - field.field.node.blog_post.field_job_profile
@@ -30,7 +31,6 @@ dependencies:
     - field.field.node.blog_post.field_subhome
     - field.field.node.blog_post.field_thematic
     - field.field.node.blog_post.field_visual
-    - field.field.node.blog_post.field_wysiwyg_rebond
     - field.field.node.blog_post.moderation_state_update
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post
@@ -76,6 +76,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_hub:
+    weight: 13
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_industry:
     weight: 8

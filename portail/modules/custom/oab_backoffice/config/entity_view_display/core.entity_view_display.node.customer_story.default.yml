@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.customer_story.field_end_date
     - field.field.node.customer_story.field_file
     - field.field.node.customer_story.field_highlight
+    - field.field.node.customer_story.field_hub
     - field.field.node.customer_story.field_industry
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_job_profile
@@ -27,7 +28,6 @@ dependencies:
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
-    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -79,6 +79,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_hub:
+    weight: 12
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_industry:
     weight: 6

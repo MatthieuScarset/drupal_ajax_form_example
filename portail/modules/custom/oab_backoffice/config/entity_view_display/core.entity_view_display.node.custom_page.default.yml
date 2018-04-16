@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.custom_page.field_content
     - field.field.node.custom_page.field_display_title
+    - field.field.node.custom_page.field_hub
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
@@ -24,6 +25,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_hub:
+    weight: 4
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_metatags:
     weight: 3
