@@ -80,14 +80,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_hub:
-    weight: 11
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_meta_description:
     weight: 4
     label: hidden
@@ -141,6 +133,7 @@ hidden:
   field_market_segment_dvi: true
   field_product: true
   field_region: true
+  field_hub: true
   field_solution: true
   field_start_date: true
   field_sub_family: true

@@ -54,14 +54,6 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_hub:
-    weight: 9
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_industry:
     weight: 4
     label: hidden
@@ -110,6 +102,7 @@ content:
 hidden:
   field_display_title: true
   field_end_date: true
+  field_hub: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true

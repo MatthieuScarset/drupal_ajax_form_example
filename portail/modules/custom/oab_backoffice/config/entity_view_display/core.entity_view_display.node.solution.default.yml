@@ -53,14 +53,6 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_hub:
-    weight: 10
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_industry:
     weight: 7
     label: hidden
@@ -133,6 +125,7 @@ hidden:
   field_end_date: true
   field_job_profile: true
   field_market_segment: true
+  field_hub: true
   field_start_date: true
   field_top_zone: true
   field_top_zone_background: true
