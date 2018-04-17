@@ -14,3 +14,10 @@ function oab_hub_update_dependencies() {
 function oab_hub_update_8001() {
     include('updates/update_8001.inc');
 }
+
+/**
+ * Rechargement des subhomes pour ajouter le filtre pour les hubs
+ */
+function oab_hub_update_8002() {
+    oabt_YmlImport('views.view.subhomes.yml');
+}
