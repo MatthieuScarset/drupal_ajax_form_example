@@ -77,14 +77,6 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_hub:
-    weight: 13
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_industry:
     weight: 8
     label: hidden
@@ -153,6 +145,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_hub: true
   field_blog_format: true
   field_blog_thematic: true
   field_content_owner: true

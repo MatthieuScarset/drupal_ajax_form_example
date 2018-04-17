@@ -34,14 +34,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_hub:
-    weight: 113
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_last_name:
     weight: 109
     label: hidden
@@ -81,3 +73,4 @@ content:
     third_party_settings: {  }
 hidden:
   langcode: true
+  field_hub: true

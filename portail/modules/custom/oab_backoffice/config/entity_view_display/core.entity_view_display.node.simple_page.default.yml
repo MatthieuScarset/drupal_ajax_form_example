@@ -71,14 +71,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_hub:
-    weight: 9
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_insight:
     weight: 8
     label: hidden
@@ -128,6 +120,7 @@ hidden:
   field_page_du_site_2: true
   field_rebond_document: true
   field_region: true
+  field_hub: true
   field_start_date: true
   field_subhome: true
   field_thematic: true
