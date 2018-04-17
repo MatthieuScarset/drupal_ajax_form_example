@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\oab_hub\Controller\OabHubController;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 /**
  * Pour le formulaire d'ajout d'une taxo Hub, je n'affiche que les subhomes de la langue en cours
@@ -72,4 +74,65 @@ function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $
         OabHubController::deleteMenus($translation);
         OabHubController::deleteBlocks($translation);
     }
+}
+
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\QueryPluginBase $query) {
+
+
+    ## Recuperation de tous les termes
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
+        ->loadTree(OabHubController::HUB_VOCABULARY_ID,0,1,TRUE);
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+    ##Je recupère et je découpe l'URL
+    $uri = \Drupal::request()->getRequestUri();
+    $uri_parts = explode('/', $uri);
+    if ($uri_parts[0] === "") {
+        array_shift($uri_parts);
+    }
+
+    if ($view->id() === "subhomes" && isset($uri_parts[1])) {
+
+        ## je recupère le term de l'URL
+        $pageTerm = false;
+        foreach ($terms as $term) {
+            $translated_term = $term->getTranslation($langcode);
+
+            ## Je teste sur l'URL de la trad du term pour l'affichage en cours
+            $term_url = $translated_term->get(OabHubController::FIELD_URL_ID)->first()->getString();
+            if ($uri_parts[1] === $term_url) {
+
+                ##Si je trouve une URl qui correspond, je recupère le term pour faire le filtre
+                $pageTerm = $term;
+            }
+
+        }
+
+        #Si on a trouvé un terme dont l'URL correspond à notre URl,
+        # on complete la query avec notre term
+        if ($pageTerm !== false) {
+            foreach ($query->where as $key_where => $where) {
+                foreach ($where['conditions'] as $key_condition => $condition) {
+                    if (isset($condition['field'])
+                        && $condition['field'] == "node__field_hub.field_hub_target_id") {
+                        unset($query->where[$key_where]['conditions'][$key_condition]);
+                    }
+                }
+            }
+
+            ##J'ajoute la condition pour filtrer sur notre taxo
+            $query->where[0]['conditions'][] = [
+                'field' => "node__field_hub.field_hub_target_id = :node__field_hub_field_hub_target_id",
+                'value' => [
+                    'node__field_hub_field_hub_target_id' => $term->id()
+                ],
+                'operator' => "formula"
+            ];
+        }
+    }
+
 }
