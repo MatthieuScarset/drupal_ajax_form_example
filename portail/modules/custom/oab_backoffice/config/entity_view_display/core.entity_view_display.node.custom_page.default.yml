@@ -26,14 +26,6 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_hub:
-    weight: 4
-    label: visually_hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_metatags:
     weight: 3
     label: hidden
@@ -53,6 +45,7 @@ content:
     third_party_settings: {  }
 hidden:
   field_display_title: true
+  field_hub: true
   field_meta_description: true
   field_meta_title: true
   langcode: true
