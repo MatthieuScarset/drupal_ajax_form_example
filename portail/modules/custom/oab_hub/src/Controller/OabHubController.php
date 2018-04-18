@@ -13,6 +13,7 @@ class OabHubController extends ControllerBase {
     const HUB_VOCABULARY_ID = "hub";
     const CONFIG_ID = "oab_hub.settings";
     const CONFIG_URL_LIST = "url_list";
+    const CONFIG_FORM_REMOVED_SUBHOMES_TIDS = "form_removed_subhome_tids";
     const FIELD_MENUS_ID = 'field_hub_menus';
     const FIELD_BLOCS_ID = 'field_hub_blocs';
     const FIELD_SUBHOMES_ID = 'field_hub_subhomes';
@@ -272,6 +273,57 @@ class OabHubController extends ControllerBase {
 
     private static function generateBlockId($elem_key, $machineName, $langcode, $i = null) {
         return str_replace('-', '', self::generateMenuId($elem_key, $machineName, $langcode, $i));
+    }
+
+
+    public static function createSubhomesUrl(\Drupal\taxonomy\Entity\Term &$term) {
+
+        $url_object = $term->get(self::FIELD_URL_ID);
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+        if ($url_object->count() > 0 ) {
+            $base_url = $url_object->first()->getString();
+
+            $subhomes = $term->get(self::FIELD_SUBHOMES_ID);
+
+            $subhomes_tid = [];
+            $i = 0;
+            while($i < $subhomes->count()) {
+
+                $subhome = $subhomes->get($i);
+                $elem_value = $subhome->getValue();
+
+                $subhomes_tid[] = $elem_value['target_id'];
+
+                $i++;
+            }
+
+            $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($subhomes_tid);
+
+            foreach ($terms as $term) {
+                $term_name = $term->getName();
+               $display = $term->get('field_related_display_view');
+               if($display->count() > 0) {
+                   $display_name = $display->first()->getString();
+                   $url = \Drupal\Core\Url::fromRoute("view.subhomes.$display_name");
+                   $alias = \Drupal::service('path.alias_manager')->getAliasByPath($url->toString());
+
+                   $alias_parts = explode('/',$alias);
+
+                   if (isset($alias_parts[0]) && $alias_parts[0] === "") {
+                       array_shift($alias_parts);
+                   }
+                   if (count($alias_parts)>1) {
+                       $subhome_url = $alias_parts[count($alias_parts)-1];
+                       \Drupal::service('path.alias_storage')->save($url->toString(), "/$base_url/$subhome_url", $langcode);
+                   } else {
+                       drupal_set_message("L'URL pour la subhome $term_name n'a pas pu être créée pour ce hub.", 'error', true);
+                   }
+               } else {
+                   drupal_set_message("L'URL pour la subhome $term_name n'a pas pu être créée pour ce hub.", 'error', true);
+               }
+            }
+        }
     }
 
 }

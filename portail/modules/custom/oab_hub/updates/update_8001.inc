@@ -4,15 +4,26 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 use \Drupal\oab_hub\Controller\OabHubController;
 
-## Je set à vide la config des urls du hub pour qu'il save un tableau
-$url_liste = \Drupal::config(OabHubController::CONFIG_ID)
-    ->get(OabHubController::CONFIG_URL_LIST);
+$config_factory = \Drupal::configFactory();
 
-if (empty($url_liste) || $url_liste === NULL) {
-    $config_factory->getEditable(OabHubController::CONFIG_ID)
-        ->set(OabHubController::CONFIG_URL_LIST, array())
-        ->save(true);
+
+$subhome_to_remove = [
+    ['name'=>'Products DVI'],
+    ['name'=>'Produits DVI'],
+    ['name'=>'Distributeurs'],
+    ['name'=>'Distributors']
+];
+$removed_tids = [];
+
+foreach ($subhome_to_remove as $properties) {
+    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    $term = reset($terms);
+    $removed_tids[] = $term->id();
 }
+$config_factory->getEditable(OabHubController::CONFIG_ID)
+    ->set(OabHubController::CONFIG_FORM_REMOVED_SUBHOMES_TIDS, $removed_tids)
+    ->save(true);
+
 
 /**
  * Création du vocabulaire "hub"

@@ -11,9 +11,13 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $tids = array_keys($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options']);
     $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+
+    $removedTids = \Drupal::config(OabHubController::CONFIG_ID)
+        ->get(OabHubController::CONFIG_FORM_REMOVED_SUBHOMES_TIDS);
+
     foreach ($terms as $term) {
         $lang = $term->language();
-        if ( $lang->getId() != $current_language ) {
+        if ( $lang->getId() != $current_language || in_array($term->id(), $removedTids)) {
             unset($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options'][$term->id()]);
         }
     }
@@ -44,6 +48,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
             OabHubController::createMenus($term);
             OabHubController::checkUrl($term);
             OabHubController::createBlocks($term);
+            OabHubController::createSubhomesUrl($term);
     }
 }
 
