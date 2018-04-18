@@ -6,6 +6,17 @@ use \Drupal\oab_hub\Controller\OabHubController;
 
 $config_factory = \Drupal::configFactory();
 
+## Je set à vide la config des urls du hub pour qu'il save un tableau
+$url_liste = \Drupal::config(OabHubController::CONFIG_ID)
+    ->get(OabHubController::CONFIG_URL_LIST);
+
+if (empty($url_liste) || $url_liste === NULL) {
+    $config_factory->getEditable(OabHubController::CONFIG_ID)
+        ->set(OabHubController::CONFIG_URL_LIST, array())
+        ->save(true);
+}
+
+
 
 $subhome_to_remove = [
     ['name'=>'Products DVI'],
