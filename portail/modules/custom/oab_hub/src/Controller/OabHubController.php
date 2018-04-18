@@ -9,6 +9,10 @@ use Drupal\block\Entity\Block;
 class OabHubController extends ControllerBase {
 
     const HUB_VOCABULARY_ID = "hub";
+
+    const CONFIG_ID = "oab_hub.settings";
+    const CONFIG_URL_LIST = "url_list";
+    const CONFIG_FORM_REMOVED_SUBHOMES_TIDS = "form_removed_subhome_tids";
     const FIELD_MENUS_ID = 'field_hub_menus';
     const FIELD_SUBHOMES_ID = 'field_hub_subhomes';
     const FIELD_MN_SUFFIXE_ID = 'field_hub_machine_name_suffixe';
