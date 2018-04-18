@@ -44,6 +44,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
             OabHubController::createMenus($term);
             OabHubController::checkUrl($term);
             OabHubController::createBlocks($term);
+            OabHubController::createSubhomesUrl($term);
     }
 }
 
