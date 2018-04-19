@@ -9,7 +9,7 @@
     </div>
 
     <div class="bg product_partners bg_white col col-md-12 col-xs-12 nopadding">
-        {% for partner in field_partners.Attributes.related_partners %}
+        {% for partner in field_partners.Attributes.related_partners.related_partner %}
             {% if partner.image.url_archive is not null %}
                 <div class="col col-md-3 col-xs-6 padding10Right bg-partner">
                     <div class="align-center img">
