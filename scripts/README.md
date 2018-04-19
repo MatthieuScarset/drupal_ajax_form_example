@@ -2,7 +2,8 @@
 
 Installation
 ------
-* Créer/ouvrir le fichier _.bash\_profile_ dans votre home.
+* Créer/ouvrir le fichier _.bash\_profile_ dans votre home. 
+* NB windows7 : en général C:\Users\CUID pour creer le fichier "touch .bashrc"
 * Copier et adapter la ligne ```source ~/LIEN/VERS/DOSSIER/RUBY/scripts/bash_profile_func.sh```
 * Relancer le git-bash pour la prise en compte du script.
 
