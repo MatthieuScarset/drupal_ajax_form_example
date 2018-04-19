@@ -54,7 +54,7 @@ abstract class ExposedFormPluginBase extends PluginBase implements CacheableDepe
       '#title' => $this->t('Disable AJAX form submit'),
       '#description' => $this->t('If disabled, then the exposed form will not be submitted with AJAX if the view is configured to "use ajax".'),
       '#default_value' => $this->options['disable_ajax_submit'],
-    ];
+     ];
 
     $form['reset_button'] = [
       '#type' => 'checkbox',
