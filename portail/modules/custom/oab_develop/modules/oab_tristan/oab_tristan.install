@@ -531,6 +531,9 @@ function oab_tristan_update_8068() {
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> updates
  * Création d'une vue pour l'export des documents du site
  */
 function oab_tristan_update_8069() {
@@ -579,10 +582,17 @@ function oab_tristan_update_8075() {
 }
 
 
-
 /**
  * Je relance la lecture du referentiel axiome pour sauvegarder les sous-familles
  */
 function oab_tristan_update_8076() {
     include_once('updates/update_8076.inc');
+
+}
+
+/**
+ * Modification du tri des subhomes : on tri par la date de modification et plus par celle de creation
+ */
+function oab_tristan_update_8077() {
+    oabt_YmlImport('views.view.subhomes.yml');
 }
