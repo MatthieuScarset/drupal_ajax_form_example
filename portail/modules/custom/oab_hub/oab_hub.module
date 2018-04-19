@@ -141,3 +141,96 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
     }
 
 }
+
+
+
+function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
+
+    if ((isset($context['module']) && $context['module'] === "node")
+        && (isset($context['op']) && $context['op'] == "insert")
+        && isset($context['data']['node'])
+    ) {
+        $hasPortail = false;
+
+        $original_alias = $alias;
+
+        /**
+         * Ajouter un if pour checker si le portail est selectionné ici
+         * c'est pour laisser l'alias de base qui pointe vers le portail
+         */
+
+        $hubs = $context['data']['node']->get(OabHubController::NODE_FIELD_HUB);
+        $langcode =  $context['data']['node']->language()->getId();
+        if($hubs->count() > 0) {
+            $i = 0;
+            while($i < $hubs->count()) {
+                $hub = $hubs->get($i);
+                $value = $hub->getValue();
+
+                #Recuperation du term selectionné et du prefixe d'url de ce term
+                $term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
+                $term_url = $term->get(OabHubController::FIELD_URL_ID);
+                $term_url = $term_url->first()->getString();
+
+                if (!$hasPortail && $i == 0 ) {
+                    $alias = "/" . $term_url . $original_alias;
+                } else {
+                    \Drupal::service('path.alias_storage')
+                        ->save($context['node']['source'], "/" . $term_url . $original_alias, $langcode);
+                }
+                $i++;
+            }
+        }
+    }
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function oab_hub_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+
+/*kint($entity->bundle()); kint($entity->getEntityTypeId()); kint($entity->getEntityType());
+    if ($entity->isNew()) {
+
+        kint($entity); die();
+    }
+    die();*/
+}
+/**
+ * Implements hook_entity_presave().
+ */
+/*function oab_hub_node_presave(Drupal\node\Entity\Node $entity) {
+kint($entity);
+    if ($entity->isNew()) {
+
+kint($entity->urlInfo());
+        if ($entity->hasField(OabHubController::NODE_FIELD_HUB)) {
+            $hubs = $entity->get(OabHubController::NODE_FIELD_HUB);
+
+            if ($hubs->count()>0) {
+                $i = 0;
+                while($i < $hubs->count()) {
+
+                    $hub = $hubs->get($i);
+                    $value = $hub->getValue();
+
+                    #Recuperation du term selectionné et du prefixe d'url de ce term
+                    $term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
+                    $term_url = $term->get(OabHubController::FIELD_URL_ID);
+                    $term_url = $term_url->first()->getString();
+
+
+
+
+                    $i++;
+                }
+            }
+        }
+
+
+    }
+    die();
+}
+*/
+
