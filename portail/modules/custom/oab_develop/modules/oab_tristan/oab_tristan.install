@@ -584,3 +584,11 @@ function oab_tristan_update_8075() {
 function oab_tristan_update_8076() {
     include_once('updates/update_8076.inc');
 }
+
+
+/**
+ * Modification du tri des subhomes : on tri par la date de modification et plus par celle de creation
+ */
+function oab_tristan_update_8077() {
+    oabt_YmlImport('views.view.subhomes.yml');
+}
