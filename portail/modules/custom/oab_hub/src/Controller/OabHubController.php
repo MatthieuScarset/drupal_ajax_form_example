@@ -305,6 +305,13 @@ class OabHubController extends ControllerBase {
                if($display->count() > 0) {
                    $display_name = $display->first()->getString();
                    $url = \Drupal\Core\Url::fromRoute("view.subhomes.$display_name");
+
+
+                   $view = \Drupal\views\Views::getView('subhomes');
+                   $view->setDisplay($display_name);
+                   $origin_url = $view->getPath();
+
+
                    $alias = \Drupal::service('path.alias_manager')->getAliasByPath($url->toString());
 
                    $alias_parts = explode('/',$alias);
@@ -313,8 +320,8 @@ class OabHubController extends ControllerBase {
                        array_shift($alias_parts);
                    }
                    if (count($alias_parts)>1) {
-                       $subhome_url = $alias_parts[count($alias_parts)-1];
-                       \Drupal::service('path.alias_storage')->save($url->toString(), "/$base_url/$subhome_url", $langcode);
+                        $subhome_url = $alias_parts[count($alias_parts)-1];
+                        \Drupal::service('path.alias_storage')->save("/". $origin_url, "/$base_url/$subhome_url", $langcode);
                    } else {
                        drupal_set_message("L'URL pour la subhome $term_name n'a pas pu être créée pour ce hub.", 'error', true);
                    }
