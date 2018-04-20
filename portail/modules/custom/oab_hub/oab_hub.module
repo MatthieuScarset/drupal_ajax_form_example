@@ -184,53 +184,42 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
     }
 }
 
+function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 
-/**
- * Implements hook_entity_presave().
- */
-function oab_hub_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    if ($entity->getEntityTypeId() === 'node'
+            && $entity->hasField(OabHubController::NODE_FIELD_HUB) ) {
 
-/*kint($entity->bundle()); kint($entity->getEntityTypeId()); kint($entity->getEntityType());
-    if ($entity->isNew()) {
-
-        kint($entity); die();
-    }
-    die();*/
-}
-/**
- * Implements hook_entity_presave().
- */
-/*function oab_hub_node_presave(Drupal\node\Entity\Node $entity) {
-kint($entity);
-    if ($entity->isNew()) {
-
-kint($entity->urlInfo());
-        if ($entity->hasField(OabHubController::NODE_FIELD_HUB)) {
-            $hubs = $entity->get(OabHubController::NODE_FIELD_HUB);
-
-            if ($hubs->count()>0) {
-                $i = 0;
-                while($i < $hubs->count()) {
-
-                    $hub = $hubs->get($i);
-                    $value = $hub->getValue();
-
-                    #Recuperation du term selectionné et du prefixe d'url de ce term
-                    $term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
-                    $term_url = $term->get(OabHubController::FIELD_URL_ID);
-                    $term_url = $term_url->first()->getString();
+        $newHubs = $entity->get(OabHubController::NODE_FIELD_HUB)->getValue();
 
 
+        $old_node = $entity->original;
+        $oldHubs = $old_node->get(OabHubController::NODE_FIELD_HUB)->getValue();
+
+        $newHubs_id = [];
+        $oldHubs_id = [];
+
+        $toRemove = [];
+        $toCreate = [];
 
 
-                    $i++;
-                }
-            }
+        foreach ($newHubs as $value) {
+            $newHubs_id[] = $value['target_id'];
         }
 
+        foreach ($oldHubs as $value) {
+            $oldHubs_id[] = $value['target_id'];
+        }
 
+        foreach ($newHubs_id as $id) {
+            if (!in_array($id, $oldHubs_id))
+                $toCreate[] = $id;
+        }
+
+        foreach ($oldHubs_id as $id) {
+            if (!in_array($id, $newHubs_id))
+                $toRemove[] = $id;
+        }
+
+        die();
     }
-    die();
 }
-*/
-
