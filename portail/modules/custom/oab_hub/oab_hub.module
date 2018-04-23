@@ -178,6 +178,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
                     \Drupal::service('path.alias_storage')
                         ->save($context['node']['source'], "/" . $term_url . $original_alias, $langcode);
                 }
+                oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
                 $i++;
             }
         }
@@ -186,40 +187,120 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
 
 function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 
+    /**
+     * Je ne le fais que les pour les nodes et si le node possède le
+     * field HUB/Taxo
+     */
     if ($entity->getEntityTypeId() === 'node'
             && $entity->hasField(OabHubController::NODE_FIELD_HUB) ) {
 
+        $langcode = $entity->language()->getId();
+
+        # Je recupère les hub ajoutés
         $newHubs = $entity->get(OabHubController::NODE_FIELD_HUB)->getValue();
 
-
+        # Je recupère les hubs avant la modif
         $old_node = $entity->original;
         $oldHubs = $old_node->get(OabHubController::NODE_FIELD_HUB)->getValue();
 
+
+        # Pour sauvegarder les ids des choix
         $newHubs_id = [];
         $oldHubs_id = [];
 
+        # Pour sauvegarder les URL à créer/supprimer
         $toRemove = [];
         $toCreate = [];
 
 
+        # je recupère tous les id des nouveaux hubs
         foreach ($newHubs as $value) {
             $newHubs_id[] = $value['target_id'];
         }
 
+        # Je recupère tous les ids des anciens hubs
         foreach ($oldHubs as $value) {
             $oldHubs_id[] = $value['target_id'];
         }
 
+        # Je recupère un alias pour ce node
+        $alias = \Drupal::service('path.alias_manager')->getAliasByPath("/node/" . $entity->id());
+
+        # je recupère les term des ancies hubs pour récuperer leurs URLs
+        $oldHubs_terms = \Drupal\taxonomy\Entity\Term::loadMultiple($oldHubs_id);
+
+
+        #Je recupère toutes les URL des hubs anciennement selectionnés
+        $oldUrls = [];
+        foreach ($oldHubs_terms as $term) {
+            $oldUrls[] = $term->get(OabHubController::FIELD_URL_ID)->first()->getString();
+        }
+
+        #Je recupère toutes les parties de l'alias recupéré
+        $alias_parts = explode('/', $alias);
+
+        # je boucle sur toutes les parties de l'alias
+        # et si je tombe sur une partie qui est une URL d'un des termes, je le supprime
+        # afin de recupere l'alias de base d'un node de ce type
+        foreach ($alias_parts as $key => $value) {
+            if (in_array($value, $oldUrls)) {
+                unset($alias_parts[$key]);
+            }
+        }
+        $alias = implode('/', array_values($alias_parts));
+
+
+        # Je recupère les nouveaux hubs (ceux qui sont dans new mais pas dans old)
+        # ils sont donc à créer
         foreach ($newHubs_id as $id) {
             if (!in_array($id, $oldHubs_id))
                 $toCreate[] = $id;
         }
 
+        # Je fais l'inverse pour ceux à supprimer
         foreach ($oldHubs_id as $id) {
             if (!in_array($id, $newHubs_id))
                 $toRemove[] = $id;
         }
 
-        die();
+        # Je crée les nouveaux Alias
+        foreach ($toCreate as $term_id) {
+            #Recuperation du term selectionné et du prefixe d'url de ce term
+            $term = \Drupal\taxonomy\Entity\Term::load($term_id);
+            $term_url = $term->get(OabHubController::FIELD_URL_ID);
+            $term_url = $term_url->first()->getString();
+            \Drupal::service('path.alias_storage')
+                ->save("/node/" . $entity->id(), "/" . $term_url . $alias, $langcode);
+            oab_hub_drupal_message('URL créée :', "/$langcode/$term_url" . $alias);
+        }
+
+        # Je supprime les anciens alias
+        foreach ($toRemove as $term_id) {
+            #Recuperation du term selectionné et du prefixe d'url de ce term
+            $term = \Drupal\taxonomy\Entity\Term::load($term_id);
+            $term_url = $term->get(OabHubController::FIELD_URL_ID);
+            $term_url = $term_url->first()->getString();
+           $ret = \Drupal::service('path.alias_storage')
+                ->delete(array(
+                            'alias' => "/" . $term_url . $alias,
+                            "langcode"  => $langcode));
+           if($ret) {
+               oab_hub_drupal_message("Alias supprimé ","/$langcode/$term_url" . $alias );
+           } else {
+               oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error" );
+           }
+        }
     }
+}
+
+/**
+ * Petite fonction pour essayer de mettre du texte en bold, mais ne fonctionne pas
+ * (le "!url" ne semble pas reconnu).
+ * Pour l'exemple, voir https://getlevelten.com/blog/kristin-brinner/drupal-set-message-cheatsheet-variables-links-and-formatting
+ */
+function oab_hub_drupal_message($msg, $url, $status = "status") {
+    drupal_set_message(
+        t("$msg $url",
+            array('!url' => '<strong>'.$url.'</strong>')),
+        $status, true);
 }
