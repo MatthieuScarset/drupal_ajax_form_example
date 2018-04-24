@@ -64,9 +64,12 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
         foreach ( $languages as $langcode => $langinfo) {
             OabHubController::deleteMenus($term->getTranslation($langcode));
             OabHubController::deleteBlocks($term->getTranslation($langcode));
+            OabHubController::deleteNodes($term->getTranslation($langcode));
+            OabHubController::deleteUrl($term->getTranslation($langcode));
         }
         OabHubController::deleteMenus($term);
         OabHubController::deleteBlocks($term);
+        OabHubController::deleteNodes($term);
         OabHubController::deleteUrl($term);
     }
 }
@@ -78,6 +81,8 @@ function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $
     if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
         OabHubController::deleteMenus($translation);
         OabHubController::deleteBlocks($translation);
+        OabHubController::deleteNodes($translation);
+        OabHubController::deleteUrl($translation);
     }
 }
 
