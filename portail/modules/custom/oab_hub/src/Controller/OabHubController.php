@@ -170,12 +170,41 @@ class OabHubController extends ControllerBase {
         }
     }
 
+    /**
+     * Suppression de tous les nodes qui sont juste pour ce hub, qui ne sont pas partagés
+     * Pour ceux partagés, leurs URLs sont supprimées par la fonction deleteUrl
+     */
+    public static function deleteNodes(\Drupal\taxonomy\Entity\Term &$term) {
+        $query = \Drupal::database()->select('taxonomy_index', 'ti');
+        $query->fields('ti', array('nid'));
+        $query->condition('ti.tid', $term->id());
+        $query->distinct(TRUE);
+        $result = $query->execute()->fetchCol();
+
+        $nodes = \Drupal\node\Entity\Node::loadMultiple($result);
+
+        foreach ($nodes as $node) {
+
+            ## Recuperation des hubs du nodes
+            $hubs = $node->get(self::NODE_FIELD_HUB);
+
+            ## S'il n'a qu'un seul hub, donc que c'est celui qu'on veut supprimer
+            ## on le supprime.
+            ## S'il en a plusieurs, on ne le supprime pas
+            if ($hubs->count() === 1) {
+                $node->delete();
+            }
+        }
+    }
+
     public static function deleteUrl(\Drupal\taxonomy\Entity\Term &$term) {
         $url = $term->get(self::FIELD_URL_ID);
         if ($url->count() > 0 ) {
 
-            $url->first()->getString();
+            $url = $url->first()->getString();
+            $term_langcode = $term->language()->getId();
 
+            # Suppression de l'URL du tableau des urls en conf
             $urls = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
 
             unset($urls[array_search($url, $urls)]);
@@ -183,6 +212,24 @@ class OabHubController extends ControllerBase {
             $config_factory->getEditable(self::CONFIG_ID)
                 ->set(self::CONFIG_URL_LIST, $urls)
                 ->save(true);
+
+
+            # Suppression des URLS créées pour les différents contenus
+            $connection = \Drupal::database();
+            $results = $connection->select('url_alias', 'u')
+                ->fields('u', ['source', 'alias', 'langcode'])
+                ->condition('langcode', $term_langcode)
+                ->condition('alias', "%$url%", 'LIKE')
+                ->execute()
+                ->fetchAll();
+
+            foreach ($results as $result) {
+                $ret = \Drupal::service('path.alias_storage')
+                    ->delete(array(
+                        'alias' => $result->alias,
+                        "langcode"  => $term_langcode));
+            }
+
         }
     }
 
