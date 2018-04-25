@@ -389,4 +389,34 @@ class OabHubController extends ControllerBase {
         }
     }
 
+    public static function getNodeUrl($nid) {
+        $url = \Drupal::request()->getRequestUri();
+
+
+        ##Je recupère toutes les parties de la route
+        $route_parts = explode('/',$url);
+
+        #Je supprime le 1er element qui est vide
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+            array_shift($route_parts);
+        }
+        $actualUrl = $route_parts[1];
+
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $connection = \Drupal::database();
+        $results = $connection->select('url_alias', 'u')
+            ->fields('u', ['source', 'alias', 'langcode'])
+            ->condition('langcode', $langcode)
+            ->condition('alias', "%$actualUrl%", 'LIKE')
+            ->condition('source', "%$nid%" , 'LIKE')
+            ->execute()
+            ->fetchAll();
+
+        if (count($results)>0) {
+            return $results[0]->alias;
+        } else {
+            return \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid");
+        }
+    }
+
 }
