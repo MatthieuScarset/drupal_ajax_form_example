@@ -162,7 +162,8 @@
 #block-contactbardvi.affix,
 #block-contactbarbrstandard.affix,
 #block-contactbaresstandard.affix,
-#block-contactbar.affix{
+#block-contactbar.affix,
+.block-contactbar.affix{
     bottom: 0;
     height: auto;
     width: 100%;
@@ -179,7 +180,8 @@
 #block-contactbardvi.affix-bottom,
 #block-contactbarbrstandard.affix-bottom,
 #block-contactbaresstandard.affix-bottom,
-#block-contactbar.affix-bottom{
+#block-contactbar.affix-bottom,
+.block-contactbar.affix {
     width: 100%;
    /* position: relative;*/
     z-index: 10;

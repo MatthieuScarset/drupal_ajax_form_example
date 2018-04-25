@@ -2,21 +2,31 @@ blocks:
   top_navbar:
     name: "Top Navbar"
     region: header
+    menu: true
   top_right_navbar:
     name: "Top right Navbar"
     region: header
+    menu: true
   top_right_footer_navbar:
     name: "Top right footer Navbar"
     region: footer
+    menu: true
   main_menu:
     name: "Main menu"
     region: header
+    menu: true
   direct_access:
     name: "Direct Access"
     region: prefooter
+    menu: true
   footer:
     name: "Footer"
     region: footer
+    menu: true
+  contact_bar_block_hub:
+    name: "Contact bar Hub"
+    region: prefooter
+    menu: false
 blocks-config:
   langcode: autofill
   status: true

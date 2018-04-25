@@ -250,7 +250,7 @@ class OabHubController extends ControllerBase {
             $conf = $config['blocks-config'];
 
             $menu_id = self::getMenuId($term, $base_id);
-            if ($menu_id === false) {
+            if ($menu_id === false && $block['menu']) {
                 throw new \Exception('Erreur lors de la création des blocks');
             }
             $block_id = self::generateBlockId($base_id, $machineName, $term_langcode);
@@ -264,15 +264,23 @@ class OabHubController extends ControllerBase {
                 $i++;
             }
 
+
             $conf["langcode"] = $term_langcode;
-            $conf["dependencies"]["config"] = array("system.menu.$menu_id");
             $conf["id"] = $block_id;
             $conf["region"] = $block["region"];
-            $conf["plugin"] = "system_menu_block:$menu_id";
-            $conf["settings"]["id"] = "system_menu_block:$menu_id";
             $conf["settings"]["label"] = $block["name"] . " $term_name $term_langcode";
             $conf["visibility"]["language"]["langcodes"] = array($term_langcode => $term_langcode);
             $conf["visibility"]["request_path"]["pages"] = "/$base_url/*";
+
+            if ($block['menu']) {
+                $conf["dependencies"]["config"] = array("system.menu.$menu_id");
+                $conf["plugin"] = "system_menu_block:$menu_id";
+                $conf["settings"]["id"] = "system_menu_block:$menu_id";
+            } else {
+                $conf["plugin"] = $base_id;
+                $conf["settings"]["id"] = $base_id;
+                unset($conf["dependencies"]["config"]);
+            }
 
             $conf_name = "block.block.$block_id";
 

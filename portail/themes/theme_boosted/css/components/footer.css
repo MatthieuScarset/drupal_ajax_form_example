@@ -40,7 +40,8 @@ span.icon-footer {
     padding: 20px 0;
 }
 
-#block-contactbar{
+#block-contactbar,
+.block-contactbar {
     background-color: #333;
     color: white;
 }
