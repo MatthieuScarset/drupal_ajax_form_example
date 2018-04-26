@@ -9,5 +9,5 @@ use Drupal\field\Entity\FieldConfig;
  * setting tac lite
  */
 
-oabt_YmlImport('user.role.hub_editor.yml');
+oabt_YmlImport('user.role.chief_editor_hub.yml');
 oabt_YmlImport('tac_lite.settings.yml');

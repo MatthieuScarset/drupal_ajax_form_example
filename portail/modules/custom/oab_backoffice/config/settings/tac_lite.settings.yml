@@ -32,7 +32,7 @@ tac_lite_grants_scheme_1:
     hub: {  }
   dvi:
     hub: {  }
-  hub_editor:
+  chief_editor_hub:
     hub: {  }
 tac_lite_config_scheme_2:
   name: 'update and delete'
@@ -61,5 +61,5 @@ tac_lite_grants_scheme_2:
     hub: {  }
   dvi:
     hub: {  }
-  hub_editor:
+  chief_editor_hub:
     hub: {  }
