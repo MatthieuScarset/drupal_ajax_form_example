@@ -1,8 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
-id: hub_editor
-label: 'hub editor'
+id: chief_editor_hub
+label: 'chief editor HUB'
 weight: 9
 is_admin: null
 permissions:
