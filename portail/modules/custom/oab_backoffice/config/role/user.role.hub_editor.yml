@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies: {  }
+id: hub_editor
+label: 'hub editor'
+weight: 9
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'create blog_post content'
+  - 'create custom_page content'
+  - 'create customer_story content'
+  - 'create document content'
+  - 'create full_html content'
+  - 'create homepage content'
+  - 'create industry content'
+  - 'create magazine content'
+  - 'create product content'
+  - 'create simple_page content'
+  - 'create solution content'
+  - 'view the administration theme'
