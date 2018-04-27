@@ -390,6 +390,31 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
     }
 
+
+    if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
+        'node_customer_story_form', 'node_customer_story_edit_form',
+        'node_custom_page_form', 'node_custom_page_edit_form',
+        'node_document_form', 'node_document_edit_form',
+        'node_full_html_form', 'node_full_html_edit_form',
+        'node_homepage_form', 'node_homepage_edit_form',
+        'node_magazine_form', 'node_magazine_edit_form',
+        'node_industry_form', 'node_industry_edit_form',
+        'node_product_form', 'node_product_edit_form',
+        'node_profile_form', 'node_profile_edit_form',
+        'node_simple_page_form', 'node_simple_page_edit_form',
+        'node_solution_form', 'node_solution_edit_form'))) {
+
+        $user_roles = \Drupal::currentUser()->getRoles();
+
+        if(count($user_roles)==2 &&
+            isset($user_roles[0]) && $user_roles[0] == "authenticated" &&
+            isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub" ) {
+            //rend le champ obligatoire
+            $form["field_hub"]["widget"]["#required"] = true;
+        }
+    }
+
+
 }
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
