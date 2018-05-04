@@ -309,3 +309,50 @@ function oab_hub_drupal_message($msg, $url, $status = "status") {
             array('!url' => '<strong>'.$url.'</strong>')),
         $status, true);
 }
+
+
+/**
+ * Hook des suggestions de theme pour les menus
+ * pour créer un template generique par type de menu
+ */
+function oab_hub_theme_suggestions_menu_alter(array &$suggestions, array $variables) {
+    $menus = OabHubController::getDefaultBlockName();
+
+    # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
+    $actifHub = OabHubController::getActifHub();
+
+
+    $menu_name = false;
+
+    foreach ($menus as $menu) {
+        if (strpos(str_replace('-', '_', $variables['menu_name']), $menu) !== false) {
+            $menu_name = $menu;
+        }
+
+    }
+
+    if ($menu_name !== false ) {
+        $suggestions[] = "menu__$menu_name";
+    }
+
+}
+
+/**
+ * Hook pour ajouter une classe à nos blocks
+ */
+function oab_hub_preprocess_block(&$variables) {
+
+    $menus = OabHubController::getDefaultBlockName();
+
+    # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
+    $actifHub = OabHubController::getActifHub();
+
+    if (isset($variables['elements']['#base_plugin_id']) && $variables['elements']['#base_plugin_id'] == "system_menu_block") {
+        foreach ($menus as $menu) {
+            if (strpos($variables['attributes']['id'], str_replace('_', '', $menu)) !== false) {
+                $variables['attributes']['class'][] = "hub_menu_$menu";
+            }
+        }
+    }
+
+}

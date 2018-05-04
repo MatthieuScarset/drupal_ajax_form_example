@@ -19,7 +19,7 @@ blocks:
     name: "Direct Access"
     region: prefooter
     menu: true
-  footer:
+  main_footer:
     name: "Footer"
     region: footer
     menu: true

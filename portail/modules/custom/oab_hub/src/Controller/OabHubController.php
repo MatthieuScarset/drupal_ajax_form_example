@@ -41,7 +41,7 @@ class OabHubController extends ControllerBase {
         $values = [];
         foreach (self::$elements as $menu_key => $menu_name) {
             $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode);
-            $menu_name = "$menu_name $term_name $term_langcode";
+            $menu_name = "$term_name $menu_name $term_langcode";
 
             $menuObj = Menu::load($menu_id);
             $i = 0;
@@ -294,10 +294,25 @@ class OabHubController extends ControllerBase {
         $term->set(self::FIELD_BLOCS_ID, $blocks);
     }
 
+    /**
+     * Retourne la config complète des blocks
+     */
     private static function getConfig() {
         $config_path = drupal_get_path('module', 'oab_hub') . '/config/blocks.yml';
         $data = Yaml::parse(file_get_contents($config_path));
         return $data;
+    }
+
+    /**
+     * Retourne les id des blocks et menus qui sont dans la config par défaut
+     */
+    public static function getDefaultBlockName() {
+        $conf = self::getConfig();
+        $ret = [];
+        foreach ($conf['blocks'] as $block_name => $block_config) {
+            $ret[] = $block_name;
+        }
+        return $ret;
     }
 
     private static function getMenuId(\Drupal\taxonomy\Entity\Term &$term, $block_id) {
@@ -387,6 +402,10 @@ class OabHubController extends ControllerBase {
                }
             }
         }
+    }
+
+    public static function getActifHub() {
+
     }
 
 }
