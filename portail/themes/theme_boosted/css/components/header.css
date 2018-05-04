@@ -169,7 +169,8 @@
     color: rgb(255,121,0);
 }
 
-#block-topnavbaren {
+#block-topnavbaren,
+.hub_menu_top_navbar {
     color: white;
     margin-top: 2rem !important;
     display: inline;
@@ -217,26 +218,32 @@
   color: white;
 }
 
-#block-socialshareblock{
+#block-socialshareblock,
+#block-theme-oab-hub-socialshareblock{
     width: 100%;
     padding: 0;
     z-index: 1;
 }
+#block-theme-oab-hub-socialshareblock #social-share,
 #block-socialshareblock #social-share{
   text-align: right;
 }
-#block-socialshareblock #social-share #sharebar{
+#block-socialshareblock #social-share #sharebar,
+#block-theme-oab-hub-socialshareblock #social-share #sharebar{
   padding-right: 10px;
 }
-#block-socialshareblock #social-share #counterlabel{
+#block-socialshareblock #social-share #counterlabel,
+#block-theme-oab-hub-socialshareblock #social-share #counterlabel{
   display: none;
 }
 
-#block-socialshareblock #social-share #sharebar a.visited{
+#block-socialshareblock #social-share #sharebar a.visited,
+#block-theme-oab-hub-socialshareblock #social-share #sharebar a.visited{
   background-color: white;
   border-color: black;
 }
-#block-socialshareblock #social-share #sharebar a.visited *{
+#block-socialshareblock #social-share #sharebar a.visited *,
+#block-theme-oab-hub-socialshareblock #social-share #sharebar a.visited *{
   fill: black;
 }
 
@@ -320,7 +327,8 @@
 
 
 /* barre de navigation en langue EN */
-.navbar-en {
+.navbar-en,
+.navbar_levels {
     margin-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -330,12 +338,15 @@
 }
 
 .navbar-en > li > a,
-.navbar-en > li:first-child > a{
+.navbar-en > li:first-child > a,
+.navbar_levels > li > a,
+.navbar_levels > li:first-child > a{
     margin: 0px;
     padding-left: 2rem;
 }
 
-.navbar-en > li {
+.navbar-en > li,
+.navbar_levels > li {
     float: none;
     margin-left: 10px;
 }
@@ -365,6 +376,7 @@
     border-color: black;
 }
 
+#block-theme-oab-hub-righticonblock,
 #block-righticonblock {
     margin-top: -22px;
 }
