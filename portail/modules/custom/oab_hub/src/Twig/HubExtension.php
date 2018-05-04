@@ -29,7 +29,7 @@ class HubExtension extends \Twig_Extension
     public function getFilters()
     {
         $filters = [
-            #new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
+            new \Twig_SimpleFilter('hub_getMenu', [$this, 'getMenu']),
         ];
 
         return $filters;
@@ -39,4 +39,15 @@ class HubExtension extends \Twig_Extension
     public function getHubUrl(\Drupal\node\Entity\Node $node) {
         return OabHubController::getNodeUrl($node->id());
     }
+
+    public function getMenu($elements, $menu_name) {
+        $ret = [];
+        foreach ($elements as $name => $element) {
+            if (strpos($name, $menu_name) !== false) {
+                $ret = $element;
+            }
+        }
+        return $ret;
+    }
+
 }
