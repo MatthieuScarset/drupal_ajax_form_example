@@ -7,10 +7,6 @@ blocks:
     name: "Top right Navbar"
     region: header
     menu: true
-  top_right_footer_navbar:
-    name: "Top right footer Navbar"
-    region: footer
-    menu: true
   main_menu:
     name: "Main menu"
     region: header

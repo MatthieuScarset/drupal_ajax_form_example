@@ -22,7 +22,8 @@ class HubExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('hub_getHubUrl', [$this, 'getHubUrl']),
+            new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getHubUrl']),
+            new \Twig_SimpleFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
         ];
     }
 
@@ -36,7 +37,7 @@ class HubExtension extends \Twig_Extension
     }
 
 
-    public function getHubUrl(\Drupal\node\Entity\Node $node) {
+    public function getNodeHubUrl(\Drupal\node\Entity\Node $node) {
         return OabHubController::getNodeUrl($node->id());
     }
 
@@ -50,4 +51,7 @@ class HubExtension extends \Twig_Extension
         return $ret;
     }
 
+    public function getBaseUrl(){
+        return OabHubController::getHubBaseUrl();
+    }
 }

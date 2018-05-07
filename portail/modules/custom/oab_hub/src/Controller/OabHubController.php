@@ -406,7 +406,31 @@ class OabHubController extends ControllerBase {
 
     //TODO faire une fonction pour recuperer le hub en fonction de l'URL
     public static function getActifHub() {
+        $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
+        if(is_null($url_list) || empty($url_list) || !isset($url_list)) {
+            $url_list = [];
+        }
 
+        #Path du noeud (sous la forme /node/id
+        $url = \Drupal::request()->getRequestUri();
+
+
+        ##Je recupère toutes les parties de la route
+        $route_parts = explode('/',$url);
+
+        #Je supprime le 1er element qui est vide
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+            array_shift($route_parts);
+        }
+        $hub_part = $route_parts[1];
+
+        $actif_hub = false;
+        foreach ($url_list as $hub => $url ) {
+            if ($url == $hub_part)
+                $actif_hub = $hub;
+        }
+
+        return $actif_hub;
     }
 
 
@@ -438,6 +462,43 @@ class OabHubController extends ControllerBase {
         } else {
             return \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid");
         }
+    }
+
+    public static function getHubBaseUrl($absolute = false) {
+        #Path du noeud (sous la forme /node/id
+        $url = \Drupal::request()->getRequestUri();
+
+
+        ##Je recupère toutes les parties de la route
+        $route_parts = explode('/',$url);
+
+        #Je supprime le 1er element qui est vide
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+            array_shift($route_parts);
+        }
+
+        $hub_url = $route_parts[1];
+        # Je recupère les URLS des hubs
+        $urls = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
+
+        $is_hub = false;
+        ##Je teste si on a bien recu un tableau, au cas ou...
+        if (is_array($urls)) {
+            #l'URL du hub est le 1er element du tableau
+            $is_hub = in_array($hub_url, $urls);
+        }
+
+        if (!$is_hub)
+            return false;
+
+        $host = "";
+        if ($absolute) {
+            $host = \Drupal::request()->getHost();
+        }
+
+        $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        return "$host/$langcode/$hub_url";
+
     }
 
 }
