@@ -27,10 +27,101 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 	'field_sub_family',
 	'field_subhome')));
 
+
+function _oab_webform_gdpr_validate(array &$form, FormStateInterface $form_state) {
+    if (preg_match('/^([A-Za-z0-9.]*)@orange.com$/',  $form_state->getValue('gdpr_spoc_security_email')) !== 1 ) {
+        $form_state->setErrorByName('gdpr_spoc_security_email', t("The SPOC Security email must be in '@orange.com'"));
+    }
+}
+
+function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+    if ($entity = $form_state->getFormObject()->getEntity()) {
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_owner', $form_state->getValue('gdpr_business_owner'));
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_spoc_security_email', $form_state->getValue('gdpr_spoc_security_email'));
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_expiration_date', $form_state->getValue('gdpr_expiration_date'));
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_form_published', $form_state->getValue('gdpr_form_published'));
+        $entity->save();
+    }
+}
+
 /**
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+    /**
+     * Pour la GDPR, hook des webform pour ajouter des éléments
+     */
+    if ($form_id == "webform_add_form" || $form_id == 'webform_settings_form') {
+        $entity = $form_state->getFormObject()->getEntity();
+        //kint($entity);
+        $form['gdpr_informations'] = [
+            '#type' => 'details',
+            '#title'    => t('GDPR Information'),
+            '#open' => true,
+        ];
+
+
+        $form['gdpr_informations']['gdpr_form_published'] = [
+            '#type' => 'checkbox',
+            '#title'    => t('Form published'),
+            '#default_value' => ($entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') !== null ) ? $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') : false,
+            '#access' => false,
+            "#disabled" => "disabled"
+        ];
+
+        $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
+        $current_user = Drupal::currentUser();
+        // j'affiche la checkbox si on est dans les settings du webform et l'utilisateur connecté est le "business owner" du formulaire en question
+        if ($form_id == 'webform_settings_form') {
+            $form['gdpr_informations']['gdpr_form_published']['#access'] = true;
+            if ( $business_owner !== null
+            && (
+                    $current_user->id() === 1
+                    || $current_user->id() === $business_owner->id()
+                )
+            ) {
+               $form['gdpr_informations']['gdpr_form_published']['#disabled'] = false;
+            }
+        }
+
+
+        $form['gdpr_informations']['gdpr_business_owner'] = [
+            '#type' => 'entity_autocomplete',
+            '#title'    => t('Business Owner'),
+            '#default_value' => \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner')),
+            '#target_type' => "user",
+            '#settings' => [
+                'match_operator'    => "CONTAINS"
+            ],
+            "#selection_settings"   => [
+                'include_anonymous' => false,
+            ],
+            '#required' => true,
+        ];
+
+        $form['gdpr_informations']['gdpr_spoc_security_email'] = [
+            '#type' => 'email',
+            '#title'    => t('SPOC Security email'),
+            "#default_value"    => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security_email'),
+            '#required' => true,
+            '#attributes'=> array(
+                'placeholder' => "spoc@orange.com"
+            )
+        ];
+
+        $form['gdpr_informations']['gdpr_expiration_date'] = [
+            '#type' => 'date',
+            '#title'    => t('Form expiration date'),
+            '#required' => true,
+            '#default_value'    => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date')
+        ];
+
+        $form['actions']['submit']['#submit'][] = '_oab_webform_gdpr_submit';
+        $form['#validate'][] = '_oab_webform_gdpr_validate';
+    }
+
 	//\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 	$languages = \Drupal::languageManager()->getLanguages();
