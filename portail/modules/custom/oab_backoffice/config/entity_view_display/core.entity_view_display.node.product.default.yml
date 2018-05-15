@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.product.field_end_date
     - field.field.node.product.field_file
     - field.field.node.product.field_highlight
+    - field.field.node.product.field_hub
+    - field.field.node.product.field_hub_portal
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
@@ -24,9 +26,11 @@ dependencies:
     - field.field.node.product.field_start_date
     - field.field.node.product.field_sub_family
     - field.field.node.product.field_subhome
+    - field.field.node.product.field_test_showroom
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
     - field.field.node.product.moderation_state_update
     - node.type.product
@@ -130,6 +134,8 @@ hidden:
   field_market_segment_dvi: true
   field_product: true
   field_region: true
+  field_hub: true
+  field_hub_portal: true
   field_solution: true
   field_start_date: true
   field_sub_family: true

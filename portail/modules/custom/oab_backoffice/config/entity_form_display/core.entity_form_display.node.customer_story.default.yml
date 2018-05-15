@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.customer_story.field_end_date
     - field.field.node.customer_story.field_file
     - field.field.node.customer_story.field_highlight
+    - field.field.node.customer_story.field_hub
+    - field.field.node.customer_story.field_hub_portal
     - field.field.node.customer_story.field_industry
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_job_profile
@@ -28,7 +30,6 @@ dependencies:
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
-    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -86,6 +87,8 @@ third_party_settings:
         - field_country
         - field_job_profile
         - field_insight
+        - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 21
       format_type: tab
@@ -146,7 +149,6 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
-        - field_wysiwyg_rebond
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
       weight: 22
@@ -235,6 +237,19 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_hub:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 55
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_industry:
     weight: 49
@@ -422,6 +437,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_market_segment: true

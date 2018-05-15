@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.magazine.field_email_owner
     - field.field.node.magazine.field_end_date
     - field.field.node.magazine.field_highlight
+    - field.field.node.magazine.field_hub
+    - field.field.node.magazine.field_hub_portal
     - field.field.node.magazine.field_industry
     - field.field.node.magazine.field_insight
     - field.field.node.magazine.field_job_profile
@@ -30,7 +32,6 @@ dependencies:
     - field.field.node.magazine.field_subhome
     - field.field.node.magazine.field_thematic
     - field.field.node.magazine.field_visual
-    - field.field.node.magazine.field_wysiwyg_rebond
     - field.field.node.magazine.moderation_state_update
     - node.type.magazine
   module:
@@ -72,6 +73,8 @@ third_party_settings:
         - field_insight
         - field_magazine_thematic
         - field_magazine_type
+        - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 9
       format_type: tab
@@ -84,13 +87,13 @@ third_party_settings:
       label: Classify
     group_publish:
       children:
+        - moderation_state_update
         - field_content_owner
         - field_email_owner
         - group_content_worthy_period
         - promote
         - path
         - field_metatags
-        - moderation_state_update
       parent_name: group_onglets
       weight: 12
       format_type: tab
@@ -121,7 +124,7 @@ third_party_settings:
         - field_start_date
         - field_end_date
       parent_name: group_publish
-      weight: 19
+      weight: 14
       format_type: fieldset
       format_settings:
         id: ''
@@ -148,7 +151,6 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
-        - field_wysiwyg_rebond
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
       weight: 10
@@ -180,7 +182,7 @@ content:
     type: text_textarea
     region: content
   field_content_owner:
-    weight: 17
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -195,7 +197,7 @@ content:
     type: boolean_checkbox
     region: content
   field_email_owner:
-    weight: 18
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -215,6 +217,19 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_hub:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 34
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_industry:
     weight: 27
@@ -263,13 +278,13 @@ content:
     type: string_textfield
     region: content
   field_metatags:
-    weight: 22
+    weight: 18
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
     region: content
   field_p_wysiwyg_rebond:
-    weight: 7
+    weight: 6
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -362,7 +377,7 @@ content:
     region: content
   moderation_state_update:
     type: inline_entity_form_complex
-    weight: 23
+    weight: 11
     settings:
       override_labels: true
       label_singular: 'Moderation state update'
@@ -375,13 +390,13 @@ content:
     region: content
   path:
     type: path
-    weight: 21
+    weight: 16
     settings: {  }
     third_party_settings: {  }
     region: content
   promote:
     type: boolean_checkbox
-    weight: 20
+    weight: 15
     settings:
       display_label: true
     third_party_settings: {  }
@@ -414,6 +429,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_blog_format: true
