@@ -6,6 +6,9 @@ label: 'chief editor HUB'
 weight: 9
 is_admin: null
 permissions:
+  - 'access browse_media_modal entity browser pages'
+  - 'access browse_medias_iframe entity browser pages'
+  - 'access browser_file_modal entity browser pages'
   - 'access content overview'
   - 'access files overview'
   - 'access media overview'
@@ -38,6 +41,7 @@ permissions:
   - 'use unpublished_to_draft transition'
   - 'view any unpublished content'
   - 'view latest version'
+  - 'view media'
   - 'view moderation states'
   - 'view own unpublished content'
   - 'view the administration theme'
