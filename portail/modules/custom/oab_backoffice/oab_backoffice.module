@@ -241,7 +241,6 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_data_delete_date', $expiration_date->format('Y-m-d'));
 
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_form_published', $form_state->getValue('gdpr_form_published'));
-        $entity->save();
     }
 }
 
