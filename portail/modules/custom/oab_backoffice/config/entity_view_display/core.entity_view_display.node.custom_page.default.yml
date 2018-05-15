@@ -5,6 +5,7 @@ dependencies:
     - field.field.node.custom_page.field_content
     - field.field.node.custom_page.field_display_title
     - field.field.node.custom_page.field_hub
+    - field.field.node.custom_page.field_hub_portal
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
@@ -46,6 +47,7 @@ content:
 hidden:
   field_display_title: true
   field_hub: true
+  field_hub_portal: true
   field_meta_description: true
   field_meta_title: true
   langcode: true

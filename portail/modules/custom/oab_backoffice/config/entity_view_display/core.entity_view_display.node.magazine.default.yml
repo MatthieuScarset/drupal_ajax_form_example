@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.magazine.field_end_date
     - field.field.node.magazine.field_highlight
     - field.field.node.magazine.field_hub
+    - field.field.node.magazine.field_hub_portal
     - field.field.node.magazine.field_industry
     - field.field.node.magazine.field_insight
     - field.field.node.magazine.field_job_profile
@@ -114,6 +115,7 @@ hidden:
   field_industry: true
   field_job_profile: true
   field_hub: true
+  field_hub_portal: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true

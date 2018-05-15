@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.simple_page.field_grouping_title
     - field.field.node.simple_page.field_highlight
     - field.field.node.simple_page.field_hub
+    - field.field.node.simple_page.field_hub_portal
     - field.field.node.simple_page.field_industry
     - field.field.node.simple_page.field_insight
     - field.field.node.simple_page.field_job_profile
@@ -89,6 +90,7 @@ third_party_settings:
         - field_job_profile
         - field_insight
         - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -242,6 +244,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 35
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_industry:
     weight: 27

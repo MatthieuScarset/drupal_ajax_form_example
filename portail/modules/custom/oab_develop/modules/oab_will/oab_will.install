@@ -120,3 +120,10 @@ function oab_will_update_8014(){
 function oab_will_update_8015(){
     include_once("updates/update_8015.inc");
 }
+
+/**
+ * RUBYPORTAILOBS-3309 [OC] gestion du partage portail / hub
+ */
+function oab_will_update_8016(){
+    include_once("updates/update_8016.inc");
+}
