@@ -125,47 +125,6 @@ function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Dru
     return $replacements;
 }
 
-
-function oab_backoffice_webform_update(Drupal\webform\Entity\Webform $webform) {
-    kint($webform); die();
-    $current_user = Drupal::currentUser();
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-    $old_webform  = $webform->original;
-
-    $isPublished = $webform->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
-    $old_isPublished = $old_webform->getThirdPartySetting('oab_gdpr','gdpr_form_published');
-
-    ## Si le webform vient d'etre publié et que ce n'est pas un admin qui vient de le publier
-    if ($isPublished
-        && $isPublished !== $old_isPublished
-        && !in_array('webform_admin', $current_user->getRoles())
-    ) {
-        $token_service = \Drupal::token();
-
-        $config = \Drupal::config('oab.gdpr_settings');
-
-        #mail to Everyone pour la validation
-        $mail_params = [
-            'subject'   => $token_service->replace($config->get('mail_validation_object'), ['webform' => $webform]),
-            'body'      => $token_service->replace($config->get('mail_validation_body'), ['webform' => $webform]),
-        ];
-        $mail_spoc = $webform->getThirdPartySetting('oab_gdpr','gdpr_spoc_security_email' );
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_publish_spoc_notice', $mail_spoc, $current_language, $mail_params);
-
-        $mail_creator = $current_user->getEmail();
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_publish_creator_notice', $mail_creator, $current_language, $mail_params);
-
-        $business_owner = \Drupal\user\Entity\User::load($webform->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        $mail_business_owner = $business_owner->getEmail();
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_publish_business_owner_notice', $mail_business_owner, $current_language, $mail_params);
-    }
-
-}
-
 /*
  * A la creation d'un webform, on envoie des emails
  */
