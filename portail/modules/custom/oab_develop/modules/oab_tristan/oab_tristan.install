@@ -596,3 +596,10 @@ function oab_tristan_update_8076() {
 function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+/**
+ * Ajout des mails des webforms en conf
+ */
+function oab_tristan_update_8078() {
+    include_once('updates/update_8078.inc');
+}
