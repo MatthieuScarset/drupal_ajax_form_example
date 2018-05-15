@@ -90,3 +90,4 @@ oabt_YmlImport('field.field.node.profile.field_hub_portal.yml');
 oabt_YmlImport('field.field.node.simple_page.field_hub_portal.yml');
 oabt_YmlImport('field.field.node.solution.field_hub_portal.yml');
 
+oabt_YmlImport('user.role.chief_editor_hub.yml');
