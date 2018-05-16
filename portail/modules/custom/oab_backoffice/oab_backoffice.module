@@ -28,6 +28,79 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 	'field_subhome')));
 
 
+/**
+ * Gestion des droits d'accès à un webform
+ */
+function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+   // kint($operation); kint($account);
+
+
+    /**
+     * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
+     * pour voir les soumissions et faire des modifs
+     */
+    if (in_array('webform_business_owner', $account->getRoles())) {
+        $form_bo = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
+        if ( ( $operation == "submission_view_any" || $operation == "update" )
+            && $form_bo !== null
+            && $form_bo->id() == $account->id()) {
+                return Drupal\Core\Access\AccessResult::allowed();
+        }
+    }
+
+
+    ## Submission page => page d'affichage du formulaire
+    if ($operation == "submission_page") {
+       $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+
+       //echo "is published : $is_published"; die();
+       ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
+       if ($is_published != 1 ) {
+
+           ## Si c'est un webform admin ou si c'est l'administrateur
+           if (in_array('webform_admin', $account->getRoles())
+               || $account->id() == 1) {
+               return Drupal\Core\Access\AccessResult::allowed();
+           }
+
+           ## S'il est business owner, il doit être le BO du form pour le voir
+            if (in_array('webform_business_owner', $account->getRoles())
+                && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner') == $account->id()
+            ) {
+                return Drupal\Core\Access\AccessResult::allowed();
+            }
+
+
+            ## S'il est SPOC Securité, il doit être le SPOC du form pour le voir
+           if (in_array('webform_spoc_securite', $account->getRoles())
+               && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security') == $account->id()
+           ) {
+               return Drupal\Core\Access\AccessResult::allowed();
+           }
+
+
+           ## S'il est webform manager, il doit etre le "owner" du form pour le voir
+           if (in_array('webform_manager', $account->getRoles())
+               && $entity->getOwnerId() == $account->id()
+           ) {
+               return Drupal\Core\Access\AccessResult::allowed();
+           }
+
+           # Si aucune condition n'est remplie, on interdit l'accès au webform
+           return Drupal\Core\Access\AccessResult::forbidden();
+       }
+    }
+
+    /* A garder pour afficher toutes les permissions des webforms
+     * if (in_array('webform_manager', $account->getRoles())) {
+        echo $entity->label() . " => " . $operation . " <br /> ";
+    }*/
+
+
+    return Drupal\Core\Access\AccessResult::neutral();
+
+}
+
 
 /*
 * implement hook_token_info()
@@ -61,9 +134,13 @@ function oab_backoffice_token_info(){
         'name' => t('Webform machine name'),
         'description' => t('Machine name of the webform')
     );
-    $tokens['pseudo-spoc'] = array(
+    $tokens['spoc-pseudo'] = array(
         'name' => t('Spoc security pseudo'),
         'description' => t('Spoc security pseudo')
+    );
+    $tokens['spoc-mail'] = array(
+        'name' => t('Spoc security mail'),
+        'description' => t('Spoc security mail')
     );
 
 
@@ -88,7 +165,11 @@ function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Dru
                 switch ($name) {
                     case 'business-owner-mail':
                         $business_owner = \Drupal\user\Entity\User::load($webform->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-                        $replacements[$original] = $business_owner->getEmail();
+                        if ($business_owner !== null) {
+                            $replacements[$original] = $business_owner->getEmail();
+                        } else {
+                            drupal_set_message(t("Le Business Owner n'a pas pu etre trouvé"), 'error', true);
+                        }
                         break;
                     case 'creator-pseudo':
                         $replacements[$original] = $webform->getOwner()->getDisplayName();
@@ -110,8 +191,21 @@ function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Dru
                     case 'form-id':
                         $replacements[$original] = $webform->id();
                         break;
-                    case 'pseudo-spoc':
-                        $replacements[$original] = "Pseudo SPOC";
+                    case 'spoc-pseudo':
+                        $spoc = \Drupal\user\Entity\User::load($webform->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
+                        if ($spoc !== null) {
+                            $replacements[$original] = $spoc->label();
+                        } else {
+                            drupal_set_message(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
+                        }
+                        break;
+                    case 'spoc-mail':
+                        $spoc = \Drupal\user\Entity\User::load($webform->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
+                        if ($spoc !== null) {
+                            $replacements[$original] = $spoc->getEmail();
+                        } else {
+                            drupal_set_message(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
+                        }
                         break;
                     case 'delete-data-date':
                         $date = new \DateTime($webform->getThirdPartySetting('oab_gdpr', 'gdpr_delete_data_date'));
@@ -132,7 +226,7 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
     $current_user = Drupal::currentUser();
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    //Lorsque le formulaire est crée par le webform admin, on n'envoie pas de mail
+    //Lorsque le formulaire est créé par le webform admin, on n'envoie pas de mail
     if (!in_array('webform_admin', $current_user->getRoles())) {
         $token_service = \Drupal::token();
 
@@ -142,13 +236,17 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
         \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]));
 
         #mail to SPOC Security
-        $mail_spoc_params = [
-            'subject'   => $token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]),
-            'body'      => $token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]),
-        ];
-        $mail_spoc = $entity->getThirdPartySetting('oab_gdpr','gdpr_spoc_security_email' );
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_spoc_notice', $mail_spoc, $current_language, $mail_spoc_params);
+        $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
+        if ($spoc_security !== null) {
+            $mail_spoc_params = [
+                'subject'   => $token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]),
+                'body'      => $token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]),
+            ];
+            \Drupal::service('plugin.manager.mail')
+                ->mail('oab_gdpr', 'mail_spoc_notice', $spoc_security->getEmail(), $current_language, $mail_spoc_params);
+        } else {
+            drupal_set_message(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
+        }
 
 
         # mail au createur du webform
@@ -163,25 +261,21 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
 
         # mail au business owner
         $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        $mail_business_owner = $business_owner->getEmail();
-        $mail_business_owner_params = [
-            'subject'   => $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $entity]),
-            'body'      => $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $entity])
-        ];
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_business_owner_notice', $mail_business_owner, $current_language, $mail_business_owner_params);
+        if ($business_owner !== null ) {
+            $mail_business_owner = $business_owner->getEmail();
+            $mail_business_owner_params = [
+                'subject'   => $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $entity]),
+                'body'      => $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $entity])
+            ];
+            \Drupal::service('plugin.manager.mail')
+                ->mail('oab_gdpr', 'mail_business_owner_notice', $mail_business_owner, $current_language, $mail_business_owner_params);
+        } else {
+            drupal_set_message(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
+        }
     }
 
 }
 
-/**
- * Fonction appelée à la validation de l'edition d'un webform pour vérifier l'email du business owner
- */
-function _oab_webform_gdpr_validate(array &$form, FormStateInterface $form_state) {
-    if (preg_match('/^([A-Za-z0-9.]*)@orange.com$/',  $form_state->getValue('gdpr_spoc_security_email')) !== 1 ) {
-        $form_state->setErrorByName('gdpr_spoc_security_email', t("The SPOC Security email must be in '@orange.com'"));
-    }
-}
 
 /**
  * Fonction appellée à la validation de l'edition d'un webform pour sauvegarder nos paramètres spécifiques à la GDPR
@@ -190,7 +284,7 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
 
     if ($entity = $form_state->getFormObject()->getEntity()) {
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_owner', $form_state->getValue('gdpr_business_owner'));
-        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_spoc_security_email', $form_state->getValue('gdpr_spoc_security_email'));
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_spoc_security', $form_state->getValue('gdpr_spoc_security'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_expiration_date', $form_state->getValue('gdpr_expiration_date'));
 
         # Creation de la date à laquelle les données seront supprimées. Si y a pas de valeur pour la date de fin du formulaire, ca crée à la date du jour
@@ -232,14 +326,25 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $current_user = Drupal::currentUser();
         // j'affiche la checkbox si on est dans les settings du webform et l'utilisateur connecté est le "business owner" du formulaire en question
         if ($form_id == 'webform_settings_form') {
+
+            ##Je n'affiche la publication que si on édite le formulaire, pas à la création
             $form['gdpr_informations']['gdpr_form_published']['#access'] = true;
-            if ( $business_owner !== null
-            && (
-                    $current_user->id() === 1
-                    || $current_user->id() === $business_owner->id()
+
+            ## Je le rend cliquable que si l'utilisateur courant est le business_owner
+            if (  $current_user->id() == 1
+                || ( $business_owner !== null
+                    && (
+                         in_array('webform_admin', $current_user->getRoles())
+                        ||  (
+                            in_array('webform_business_owner', $current_user->getRoles())
+                            && $current_user->id() === $business_owner->id()
+                        )
+                    )
                 )
             ) {
                $form['gdpr_informations']['gdpr_form_published']['#disabled'] = false;
+            } else {
+                kint($current_user);
             }
         }
 
@@ -254,29 +359,57 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             ],
             "#selection_settings"   => [
                 'include_anonymous' => false,
+                'filter' => [
+                    'role' => ['webform_business_owner'],
+                ],
             ],
             '#required' => true,
         ];
 
-        $form['gdpr_informations']['gdpr_spoc_security_email'] = [
-            '#type' => 'email',
-            '#title'    => t('SPOC Security email'),
-            "#default_value"    => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security_email'),
+        # Je donne les droits à l'admin de se selectionner
+        if ($current_user->id() == 1) {
+            $form['gdpr_informations']['gdpr_business_owner']["#selection_settings"]['filter']['role'][] = "administrator";
+        }
+
+
+        $form['gdpr_informations']['gdpr_spoc_security'] = [
+            '#type' => 'entity_autocomplete',
+            '#title'    => t('SPOC Security'),
+            "#default_value"    => \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security')),
             '#required' => true,
-            '#attributes'=> array(
-                'placeholder' => "spoc@orange.com"
-            )
+            '#target_type' => "user",
+            '#settings' => [
+                'match_operator'    => "CONTAINS"
+            ],
+            "#selection_settings"   => [
+                'include_anonymous' => false,
+                'filter' => [
+                    'role' => ['webform_spoc_securite'],
+                ],
+            ],
         ];
+        # Je donne les droits à l'admin de se selectionner
+        if ($current_user->id() == 1) {
+            $form['gdpr_informations']['gdpr_spoc_security']["#selection_settings"]['filter']['role'][] = "administrator";
+        }
+
 
         $form['gdpr_informations']['gdpr_expiration_date'] = [
             '#type' => 'date',
             '#title'    => t('Form expiration date'),
             '#default_value'    => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date')
         ];
+
+        if (in_array('webform_manager', $current_user->getRoles())) {
+            $form['gdpr_informations']['gdpr_expiration_date']['#required'] = true;
+        }
+
+
         //array_unshift($form['actions']['submit']['#submit'],'_oab_webform_gdpr_submit' );
 
-    $old_submit = $form['actions']['submit']['#submit'];
-    $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
+        ## Je place mon submit, pour éviter qu'il soit en dernière place, sinon ca crée des erreurs
+        $old_submit = $form['actions']['submit']['#submit'];
+        $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
             ["ne_pas_supprimer" => "_oab_webform_gdpr_submit"] +
             array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true) ;
 
@@ -663,6 +796,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
         if ($isPublished
             && $isPublished !== $old_isPublished
             && !in_array('webform_admin', $current_user->getRoles())
+            && $current_user->id() != 1      #Je ne le fait pas pour l'admin et les ebform_admin
         ) {
             $token_service = \Drupal::token();
 

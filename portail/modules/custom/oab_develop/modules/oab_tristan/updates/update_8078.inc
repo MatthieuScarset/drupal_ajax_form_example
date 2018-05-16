@@ -7,7 +7,7 @@ use Drupal\oab_backoffice\Form\OabSettingsGdprForm;
 
 
 $mail_spoc_object = "[orange-business.com][information] [gdpr:form-title] a été créé";
-$mail_spoc_body = "Bonjour [gdpr:pseudo-spoc],\r\nUn formulaire sur le portail orange-business.com vient d’être créé par [gdpr:creator-pseudo] ([gdpr:creator-mail]).\r\n<a href=\"[webform:url]\">Lien vers le formulaire</a>\r\nUn e-mail de validation avant publication vient d’être envoyé à [gdpr:business-owner-mail].\r\nToutefois, si vous notez une irrégularité, nous vous invitons à écrire au plus vite à <a href=\"mailto:digital.mec@orange.com\">digital.mec@orange.com</a>.\r\n\r\nCordialement,\r\nL’équipe Digitale orange-business.com";
+$mail_spoc_body = "Bonjour [gdpr:spoc-pseudo],\r\nUn formulaire sur le portail orange-business.com vient d’être créé par [gdpr:creator-pseudo] ([gdpr:creator-mail]).\r\n<a href=\"[webform:url]\">Lien vers le formulaire</a>\r\nUn e-mail de validation avant publication vient d’être envoyé à [gdpr:business-owner-mail].\r\nToutefois, si vous notez une irrégularité, nous vous invitons à écrire au plus vite à <a href=\"mailto:digital.mec@orange.com\">digital.mec@orange.com</a>.\r\n\r\nCordialement,\r\nL’équipe Digitale orange-business.com";
 
 $mail_creator_object = "[orange-business.com] [gdpr:form-title] a bien été créé";
 $mail_creator_body = "Bonjour,\r\nVotre formulaire « [gdpr:form-title] » a bien été enregistré. Un e-mail de demande de validation a été envoyé à [gdpr:business-owner-mail].\r\nLorsque ce dernier aura validé votre formulaire vous en serez averti et celui-ci sera immédiatement accessible en ligne via cette URL : [webform:url].\r\n\r\nCordialement,\r\nL’équipe Digitale orange-business.com";
