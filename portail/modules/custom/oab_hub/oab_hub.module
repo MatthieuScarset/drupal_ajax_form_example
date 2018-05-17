@@ -112,7 +112,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
         foreach ($terms as $term) {
             $translations = $term->getTranslationLanguages();
             if (isset($translations[$langcode])) {
-                $translated_term = $term->getTranslation('fr');
+                $translated_term = $term->getTranslation($langcode);
 
                 ## Je teste sur l'URL de la trad du term pour l'affichage en cours
                 $term_url = $translated_term->get(OabHubController::FIELD_URL_ID)->first()->getString();
