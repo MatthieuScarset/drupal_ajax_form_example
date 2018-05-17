@@ -110,15 +110,19 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
         ## je recupère le term de l'URL
         $pageTerm = false;
         foreach ($terms as $term) {
-            $translated_term = $term->getTranslation($langcode);
+            $translations = $term->getTranslationLanguages();
+            if (isset($translations[$langcode])) {
+                $translated_term = $term->getTranslation('fr');
 
-            ## Je teste sur l'URL de la trad du term pour l'affichage en cours
-            $term_url = $translated_term->get(OabHubController::FIELD_URL_ID)->first()->getString();
-            if ($uri_parts[1] === $term_url) {
+                ## Je teste sur l'URL de la trad du term pour l'affichage en cours
+                $term_url = $translated_term->get(OabHubController::FIELD_URL_ID)->first()->getString();
+                if ($uri_parts[1] === $term_url) {
 
-                ##Si je trouve une URl qui correspond, je recupère le term pour faire le filtre
-                $pageTerm = $term;
+                    ##Si je trouve une URl qui correspond, je recupère le term pour faire le filtre
+                    $pageTerm = $term;
+                }
             }
+
 
         }
 
