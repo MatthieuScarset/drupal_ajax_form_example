@@ -4,6 +4,7 @@
  * Control access to site content based on taxonomy, roles and users.
  */
 
+use Drupal\Core\Database\Query\Condition;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Url;
@@ -238,7 +239,7 @@ function tac_lite_query_term_access_alter(AlterableInterface $query) {
     }
   }
 
-  if ($term_visibility) {
+  /*if ($term_visibility) {
     // HELP: What is the proper way to find the alias of the primary table here?
     $primary_table = '';
     $t = $query->getTables();
@@ -255,5 +256,49 @@ function tac_lite_query_term_access_alter(AlterableInterface $query) {
     $or->condition($primary_table . '.tid', $tids, 'IN');
     $or->condition('tac_td.vid', $vids, 'NOT IN');
     $query->condition($or);
-  }
+  }*/
+    if ($term_visibility) {
+                // HELP: What is the proper way to find the alias of the primary table here?
+                //
+                $primary_table_alias = '';
+                $primary_table = '';
+                $t = $query->getTables();
+                foreach ($t as $key => $info) {
+                        if ((!$info['join type'] && $info['table'] != 'taxonomy_term_field_data') || $info['join type'] == 'INNER') {
+                               $primary_table = $info['table'];
+                                $primary_table_alias = $info['alias'];
+                            }
+        }
+       if ($primary_table != '') {
+                        $columns = [];
+                        $column_name = '';
+                        // Prevent query from finding terms the current user does
+                        // not have permission to see.
+                        switch ($primary_table) {
+                            case 'taxonomy_term_field_data':
+                                        $column_name = $primary_table_alias . '.tid';
+                                        break;
+                case 'taxonomy_term_data':
+                                        $table = $t[$primary_table_alias];
+                                        $columns = explode('__', $table['alias']);
+                                        $column = $columns[1];
+                                        $column_name = $primary_table_alias . '.' . $column . '_target_id';
+                                        break;
+                case 'taxonomy_term_hierarchy':
+                                        $column_name = $primary_table_alias . '.tid';
+                                        break;
+                default:
+                                        // Useful ?
+                                        return;
+                    break;
+            }
+
+//        $t = 'node__' . $column . '.' . $column . '_target_id';
+            $query->leftJoin('taxonomy_term_field_data', 'tac_td', $column_name . ' = tac_td.tid');
+            $or = new Condition('OR');
+            $or->condition($primary_table_alias . '.tid', $tids, 'IN');
+            $or->condition('tac_td.vid', $vids, 'NOT IN');
+            $query->condition($or);
+        }
+    }
 }
