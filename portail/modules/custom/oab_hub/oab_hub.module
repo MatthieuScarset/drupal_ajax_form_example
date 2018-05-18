@@ -92,7 +92,6 @@ function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $
  */
 function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\QueryPluginBase $query) {
 
-
     ## Recuperation de tous les termes
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
         ->loadTree(OabHubController::HUB_VOCABULARY_ID,0,1,TRUE);
@@ -135,6 +134,10 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
                         && $condition['field'] == "node__field_hub.field_hub_target_id") {
                         unset($query->where[$key_where]['conditions'][$key_condition]);
                     }
+                    if (isset($condition['field'])
+                        && $condition['field'] == "node__field_hub_portal.field_hub_portal_value") {
+                        unset($query->where[$key_where]['conditions'][$key_condition]);
+                    }
                 }
             }
 
@@ -146,10 +149,38 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
                 ],
                 'operator' => "formula"
             ];
+        }else{
+            #cas hub gestion du partage d élément sur les subhomes du portail
+            foreach ($query->where as $key_where => $where) {
+                foreach ($where['conditions'] as $key_condition => $condition) {
+                    if (isset($condition['field'])
+                        && $condition['field'] == "node__field_hub.field_hub_target_id") {
+                        unset($query->where[$key_where]['conditions'][$key_condition]);
+                    }
+                }
+            }
+            if($view->current_display <>"page_distributor") {
+                $query->where[] = array(
+                    'conditions' => array(
+                        array(
+                            'field' => 'node__field_hub.field_hub_target_id',
+                            'value' => NULL,
+                            'operator' => 'is',
+                        ),
+                        array(
+                            'field' => 'node__field_hub_portal.field_hub_portal_value',
+                            'value' => 1,
+                            'operator' => '=',
+                        )
+                    ),
+                    'type' => 'OR',
+                );
+            }
         }
     }
 
 }
+
 
 
 
