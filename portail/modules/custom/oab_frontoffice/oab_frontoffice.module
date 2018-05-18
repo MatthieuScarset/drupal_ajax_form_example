@@ -33,17 +33,17 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  */
 function oab_frontoffice_preprocess_node(&$variables) {
 
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $variables['langcode'] = $current_language;
 
   ##Pour les documents FR, j'ajoute un formulaire à la mano
   if ($variables['node']->bundle() == 'document') {
-    $currentLanguageCode = \Drupal::languageManager()
-      ->getCurrentLanguage()
-      ->getId();
+
 
     ##Je charge le webform juste pour les contenus fr
-    if($currentLanguageCode == 'fr') {
+    if($current_language == 'fr') {
       $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
-      $form_output = \Drupal::entityManager()
+      $form_output = \Drupal::entityTypeManager()
         ->getViewBuilder('webform')
         ->view($form);
       $variables['form_dlFile'] = $form_output;
