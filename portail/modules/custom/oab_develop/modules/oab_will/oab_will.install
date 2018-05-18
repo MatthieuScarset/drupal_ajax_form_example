@@ -130,3 +130,6 @@ function oab_will_update_8016(){
 function oab_will_update_8017(){
     include_once("updates/update_8017.inc");
 }
+function oab_will_update_8018(){
+    include_once("updates/update_8018.inc");
+}
