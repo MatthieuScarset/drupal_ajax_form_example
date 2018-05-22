@@ -41,7 +41,7 @@ oab.settings_ece:
 oab.gdpr_settings:
   path: '/admin/structure/oab/settings/gdpr'
   defaults:
-    _form: '\Drupal\oab_backoffice\Form\oabSettingsGdprForm'
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsGdprForm'
     _title: 'GDPR/Webform settings'
   requirements:
     _permission: 'administer site configuration'
