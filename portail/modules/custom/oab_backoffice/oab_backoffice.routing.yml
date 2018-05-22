@@ -37,6 +37,15 @@ oab.settings_ece:
     _title: 'ECE settings'
   requirements:
     _permission: 'administer site configuration'
+
+oab.gdpr_settings:
+  path: '/admin/structure/oab/settings/gdpr'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\oabSettingsGdprForm'
+    _title: 'GDPR/Webform settings'
+  requirements:
+    _permission: 'administer site configuration'
+
 #page d'administration par défaut
 oab_backoffice.export_file_list:
   path: 'admin/obs_backoffice/dl-file-list'
