@@ -86,7 +86,7 @@ class OabAkamaiForm extends ConfigFormBase
 
         $form['akamai']['client_secret'] = array(
             '#type' => 'textfield',
-            '#title' => $this->t('Client Secrect'),
+            '#title' => $this->t('Client Secret'),
             '#default_value' => $config->get('client_secret')
         );
 

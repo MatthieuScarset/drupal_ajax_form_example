@@ -28,7 +28,11 @@ function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
 
         # On recupère l'URL du noeud et le host du site
         $node_url = $node->toUrl()->setAbsolute()->toString();
-        $host = \Drupal::request()->getHost();
+
+        $host = "https://".\Drupal::request()->getHost();
+
+        $node_url = str_replace("back.", '', $node_url);
+        $node_url = str_replace("backoffice.", '', $node_url);
 
 
         $akamaiCtrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
@@ -37,5 +41,18 @@ function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
         $akamaiCtrl->flushVarnish($node_url, $host);
         $akamaiCtrl->flushDrupalCache($node_url);
 
+    }
+}
+
+function oab_akamai_form_alter(&$form, FormStateInterface $form_state) {
+    if ($form['#form_id'] == 'oab_akamai_manual_flush') {
+        foreach (array_keys($form['actions']) as $action) {
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+                $form['actions'][$action]['#submit'][] = 'oab_akamai_testDrushAkamai';
+            }
+        }
+
+
+        $form['actions']['submit']['#value'] = "Vider les caches";
     }
 }

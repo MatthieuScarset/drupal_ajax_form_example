@@ -20,3 +20,10 @@ oab_akamai.settings:
     _title: 'Akamai Settings'
   requirements:
     _permission: 'administer site configuration'
+oab_akamai.manual_flush:
+  path: '/admin/akamai/manual'
+  defaults:
+    _form: '\Drupal\oab_akamai\Form\OabAkamaiManualFlushForm'
+    _title: 'Akamai Manual flush'
+  requirements:
+    _custom_access: '\Drupal\oab_akamai\Form\OabAkamaiManualFlushForm::access'
