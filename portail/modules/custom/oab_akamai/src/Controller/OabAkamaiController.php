@@ -139,19 +139,41 @@ class OabAkamaiController extends ControllerBase
 
         $url = "https://" . $this->varnish_ip . $originPath;
 
-        $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
-        $output = array();
-        $returnStatus = null;
+       // $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
+        $headers = array(
+            'Host: : www.orange-business.com',
+            'via: akamai',
+        );
 
-        exec($cmd, $output, $returnStatus);
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'BAN');
+        curl_setopt($ch, CURLOPT_SSLVERSION, 0);
+        curl_setopt($ch, CURLOPT_SSLVERSION, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        //curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $retValue = curl_exec($ch);
+
 
         $ret = false;
-        if ($returnStatus !== null && $returnStatus > 0) {
-            drupal_set_message("Erreur pour vider le cache de la page $originPath. Code d'erreur cURL : $returnStatus", 'error', true );
+        if ($retValue === false && curl_errno($ch) !== 0) {
+            $err = curl_error($ch);
+            $err .= ' (' . curl_errno($ch) . " : " . curl_strerror(curl_errno($ch)) . ")";
+            drupal_set_message("Erreur lors de l'appel à Varnish pour la page $url. Voir en log pour plus d'infos", 'error', true);
+            \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Varnish pour la page $url avec le retour : $err");
         } else {
             $ret = true;
-            drupal_set_message("Le cache varnish a été vidé pour la page $originUrl", 'status', true );
+            drupal_set_message("Cache Varnish vidé pour la page $url", 'status', true);
         }
+
+        curl_close($ch);
 
         return $ret;
     }
