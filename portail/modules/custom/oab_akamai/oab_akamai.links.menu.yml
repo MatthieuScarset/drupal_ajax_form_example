@@ -1,0 +1,6 @@
+oab_akamai.settings:
+  title: Akamai settings
+  route_name: oab_akamai.settings
+  parent: oab.settings
+  description: 'Configure oab Akamai settings'
+  weight: -20
