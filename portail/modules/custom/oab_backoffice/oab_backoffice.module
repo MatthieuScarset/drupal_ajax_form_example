@@ -28,13 +28,34 @@ define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 	'field_subhome')));
 
 
+function oab_backoffice_mail($key, &$message, $params) {
+    $token_service = \Drupal::token();
+    $config = \Drupal::config('oab.gdpr_settings');
+
+    switch ($key) {
+        case 'gdpr_spoc_notice':
+            $message['subject'] = $token_service->replace($config->get('mail_spoc_object'), ['webform' => $params['webform']]);
+            $message['body'] = $token_service->replace($config->get('mail_spoc_body'), ['webform' => $params['webform']]);
+            break;
+        case 'gdpr_creator_notice':
+            $message['subject'] = $token_service->replace($config->get('mail_creator_object'), ['webform' => $params['webform']]);
+            $message['body'] = $token_service->replace($config->get('mail_creator_body'), ['webform' => $params['webform']]);
+            break;
+        case 'gdpr_business_owner_notice':
+            $message['subject'] = $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $params['webform']]);
+            $message['body'] = $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $params['webform']]);
+            break;
+        case 'gdpr_publish_notice':
+            $message['subject']  = $token_service->replace($config->get('mail_validation_object'), ['webform' => $params['webform']]);
+            $message['body']  = $token_service->replace($config->get('mail_validation_body'), ['webform' => $params['webform']]);
+            break;
+    }
+}
+
 /**
  * Gestion des droits d'accès à un webform
  */
 function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
-   // kint($operation); kint($account);
-
-
     /**
      * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
      * pour voir les soumissions et faire des modifs
@@ -232,43 +253,29 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
 
         $config = \Drupal::config('oab.gdpr_settings');
 
-        \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]));
-        \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]));
+        /*\Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]));
+        \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]));*/
 
         #mail to SPOC Security
         $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
         if ($spoc_security !== null) {
-            $mail_spoc_params = [
-                'subject'   => $token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]),
-                'body'      => $token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]),
-            ];
             \Drupal::service('plugin.manager.mail')
-                ->mail('oab_gdpr', 'mail_spoc_notice', $spoc_security->getEmail(), $current_language, $mail_spoc_params);
+                ->mail('oab_backoffice', 'gdpr_spoc_notice', $spoc_security->getEmail(), $current_language, array('webform'=> $entity));
         } else {
             drupal_set_message(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
         }
 
-
         # mail au createur du webform
-        $mail_creator_params = [
-            'subject'   => $token_service->replace($config->get('mail_creator_object'), ['webform' => $entity]),
-            'body'      => $token_service->replace($config->get('mail_creator_body'), ['webform' => $entity])
-        ];
         $mail_creator = $current_user->getEmail();
         \Drupal::service('plugin.manager.mail')
-            ->mail('oab_gdpr', 'mail_creator_notice', $mail_creator, $current_language, $mail_creator_params);
-
+            ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language,  array('webform'=> $entity));
 
         # mail au business owner
         $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
         if ($business_owner !== null ) {
             $mail_business_owner = $business_owner->getEmail();
-            $mail_business_owner_params = [
-                'subject'   => $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $entity]),
-                'body'      => $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $entity])
-            ];
             \Drupal::service('plugin.manager.mail')
-                ->mail('oab_gdpr', 'mail_business_owner_notice', $mail_business_owner, $current_language, $mail_business_owner_params);
+                ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language,  array('webform'=> $entity));
         } else {
             drupal_set_message(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
         }
@@ -307,7 +314,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
      */
     if ($form_id == "webform_add_form" || $form_id == 'webform_settings_form') {
         $entity = $form_state->getFormObject()->getEntity();
-        //kint($entity);
+
         $form['gdpr_informations'] = [
             '#type' => 'details',
             '#title'    => t('GDPR Information'),
@@ -343,8 +350,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
                 )
             ) {
                $form['gdpr_informations']['gdpr_form_published']['#disabled'] = false;
-            } else {
-                kint($current_user);
             }
         }
 
@@ -798,27 +803,25 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             && !in_array('webform_admin', $current_user->getRoles())
             && $current_user->id() != 1      #Je ne le fait pas pour l'admin et les ebform_admin
         ) {
-            $token_service = \Drupal::token();
-
-            $config = \Drupal::config('oab.gdpr_settings');
-
             #mail to Everyone pour la validation
-            $mail_params = [
-                'subject'   => $token_service->replace($config->get('mail_validation_object'), ['webform' => $entity]),
-                'body'      => $token_service->replace($config->get('mail_validation_body'), ['webform' => $entity]),
-            ];
-            $mail_spoc = $entity->getThirdPartySetting('oab_gdpr','gdpr_spoc_security_email' );
-            \Drupal::service('plugin.manager.mail')
-                ->mail('oab_gdpr', 'mail_publish_spoc_notice', $mail_spoc, $current_language, $mail_params);
+            $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
+            if ($spoc !== null ) {
+                $mail_spoc = $spoc->getEmail();
+                \Drupal::service('plugin.manager.mail')
+                    ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_spoc, $current_language, array('webform' => $entity));
+            }
 
-            $mail_creator = $current_user->getEmail();
+            $mail_creator = $entity->getOwner()->getEmail();
             \Drupal::service('plugin.manager.mail')
-                ->mail('oab_gdpr', 'mail_publish_creator_notice', $mail_creator, $current_language, $mail_params);
+                ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_creator, $current_language, array('webform'=> $entity));
 
             $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-            $mail_business_owner = $business_owner->getEmail();
-            \Drupal::service('plugin.manager.mail')
-                ->mail('oab_gdpr', 'mail_publish_business_owner_notice', $mail_business_owner, $current_language, $mail_params);
+            if ($business_owner !== null) {
+                $mail_business_owner = $business_owner->getEmail();
+                \Drupal::service('plugin.manager.mail')
+                    ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_business_owner, $current_language, array('webform'=> $entity));
+            }
+
         }
     }
 
