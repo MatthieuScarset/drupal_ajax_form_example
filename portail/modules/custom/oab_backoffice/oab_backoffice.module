@@ -35,19 +35,19 @@ function oab_backoffice_mail($key, &$message, $params) {
     switch ($key) {
         case 'gdpr_spoc_notice':
             $message['subject'] = $token_service->replace($config->get('mail_spoc_object'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_spoc_body'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_spoc_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_creator_notice':
             $message['subject'] = $token_service->replace($config->get('mail_creator_object'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_creator_body'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_creator_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_business_owner_notice':
-            $message['subject'] = $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $params['webform']]);
+            $message['subject'] = $token_service->replace($config->get('mail_business_owner_object'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_publish_notice':
             $message['subject']  = $token_service->replace($config->get('mail_validation_object'), ['webform' => $params['webform']]);
-            $message['body']  = $token_service->replace($config->get('mail_validation_body'), ['webform' => $params['webform']]);
+            $message['body'][]  = $token_service->replace($config->get('mail_validation_body'), ['webform' => $params['webform']]);
             break;
     }
 }
