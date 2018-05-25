@@ -485,7 +485,12 @@
         });
 
     });
-
+    $.ajaxSetup({
+        timeout:15000
+    });
+    $( document ).ajaxError(function() {
+        console.log( "ajaxError : timeout" );
+    });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
