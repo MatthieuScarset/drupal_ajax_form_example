@@ -35,27 +35,51 @@ function oab_backoffice_mail($key, &$message, $params) {
     switch ($key) {
         case 'gdpr_spoc_notice':
             $message['subject'] = $token_service->replace($config->get('mail_spoc_object'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_spoc_body'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_spoc_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_creator_notice':
             $message['subject'] = $token_service->replace($config->get('mail_creator_object'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_creator_body'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_creator_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_business_owner_notice':
-            $message['subject'] = $token_service->replace($config->get('mail_business_owner_subject'), ['webform' => $params['webform']]);
-            $message['body'] = $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $params['webform']]);
+            $message['subject'] = $token_service->replace($config->get('mail_business_owner_object'), ['webform' => $params['webform']]);
+            $message['body'][] = $token_service->replace($config->get('mail_business_owner_body'), ['webform' => $params['webform']]);
             break;
         case 'gdpr_publish_notice':
             $message['subject']  = $token_service->replace($config->get('mail_validation_object'), ['webform' => $params['webform']]);
-            $message['body']  = $token_service->replace($config->get('mail_validation_body'), ['webform' => $params['webform']]);
+            $message['body'][]  = $token_service->replace($config->get('mail_validation_body'), ['webform' => $params['webform']]);
             break;
     }
+}
+
+
+function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+
+   if ($entity->getType() == 'webform' && $operation == 'view') {
+        $webform_value = $entity->get('webform')->first()->getValue();
+        $webform_machine_name = $webform_value['target_id'];
+        $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
+        if ($webform_entity != null && $webform_entity instanceof Drupal\webform\Entity\Webform) {
+            return _is_webform_authorized($webform_entity, $operation, $account);
+        }
+
+   }
+
+    return Drupal\Core\Access\AccessResult::neutral();
 }
 
 /**
  * Gestion des droits d'accès à un webform
  */
 function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+    return _is_webform_authorized($entity, $operation, $account);
+}
+
+
+/**
+ * Je regroupe tout dans une fonction perso, parce que je m'en sers dans plusieurs hook_access
+ */
+function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
     /**
      * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
      * pour voir les soumissions et faire des modifs
@@ -65,51 +89,21 @@ function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $o
         if ( ( $operation == "submission_view_any" || $operation == "update" )
             && $form_bo !== null
             && $form_bo->id() == $account->id()) {
-                return Drupal\Core\Access\AccessResult::allowed();
+            return Drupal\Core\Access\AccessResult::allowed();
         }
     }
 
-
     ## Submission page => page d'affichage du formulaire
-    if ($operation == "submission_page") {
-       $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+    if ($operation == "submission_page" || $operation == "view") {
 
-       //echo "is published : $is_published"; die();
-       ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
-       if ($is_published != 1 ) {
-
-           ## Si c'est un webform admin ou si c'est l'administrateur
-           if (in_array('webform_admin', $account->getRoles())
-               || $account->id() == 1) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-           ## S'il est business owner, il doit être le BO du form pour le voir
-            if (in_array('webform_business_owner', $account->getRoles())
-                && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner') == $account->id()
-            ) {
-                return Drupal\Core\Access\AccessResult::allowed();
-            }
-
-
-            ## S'il est SPOC Securité, il doit être le SPOC du form pour le voir
-           if (in_array('webform_spoc_securite', $account->getRoles())
-               && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security') == $account->id()
-           ) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-
-           ## S'il est webform manager, il doit etre le "owner" du form pour le voir
-           if (in_array('webform_manager', $account->getRoles())
-               && $entity->getOwnerId() == $account->id()
-           ) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-           # Si aucune condition n'est remplie, on interdit l'accès au webform
-           return Drupal\Core\Access\AccessResult::forbidden();
-       }
+        $allowed = _check_authorized_view($entity, $account);
+        if ($allowed) {
+            return Drupal\Core\Access\AccessResult::allowed();
+        } elseif( $allowed == false) {
+            return Drupal\Core\Access\AccessResult::forbidden();
+        } elseif ($allowed == null) {
+            return Drupal\Core\Access\AccessResult::neutral();
+        }
     }
 
     /* A garder pour afficher toutes les permissions des webforms
@@ -119,9 +113,52 @@ function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $o
 
 
     return Drupal\Core\Access\AccessResult::neutral();
-
 }
 
+
+function _check_authorized_view($entity, $account) {
+    $ret = false;
+    $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+
+    //echo "is published : $is_published"; die();
+    ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
+    if ($is_published != 1 ) {
+
+        ## Si c'est un webform admin ou si c'est l'administrateur
+        if (in_array('webform_admin', $account->getRoles())
+            || $account->id() == 1) {
+            $ret = true;
+        }
+
+        ## S'il est business owner, il doit être le BO du form pour le voir
+        if (in_array('webform_business_owner', $account->getRoles())
+            && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner') == $account->id()
+        ) {
+            $ret = true;
+        }
+
+
+        ## S'il est SPOC Securité, il doit être le SPOC du form pour le voir
+        if (in_array('webform_spoc_securite', $account->getRoles())
+            && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security') == $account->id()
+        ) {
+            $ret = true;
+        }
+
+
+        ## S'il est webform manager, il doit etre le "owner" du form pour le voir
+        if (in_array('webform_manager', $account->getRoles())
+            && $entity->getOwnerId() == $account->id()
+        ) {
+            $ret = true;
+        }
+
+        # Si aucune condition n'est remplie, on interdit l'accès au webform
+        return $ret;
+    }
+
+    return null;
+}
 
 /*
 * implement hook_token_info()
@@ -309,6 +346,37 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+
+    if ($form_id == "node_webform_form") {
+        $options = $form['webform']['widget'][0]['target_id']["#options"];
+
+        $ret = [];
+        $current_user = Drupal::currentUser();
+        foreach ($options as $machine_name => $name) {
+            if (is_array($name)) {
+                $ret[$machine_name] = [];
+
+                foreach($name as $key => $value) {
+                    $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($key);
+                    if (_check_authorized_view($webform, $current_user)) {
+                        $ret[$machine_name][$key] = $value;
+                    }
+                }
+
+                if (count($ret[$machine_name]) == 0) {
+                    unset($ret[$machine_name]);
+                }
+            } else {
+                $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($machine_name);
+                if (_check_authorized_view($webform, $current_user)) {
+                    $ret[$machine_name] = $name;
+                }
+            }
+        }
+
+        $form['webform']['widget'][0]['target_id']["#options"] = $ret;
+    }
 
     /**
      * Pour la GDPR, hook des webform pour ajouter des éléments
