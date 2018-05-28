@@ -22,7 +22,7 @@ class HubExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getHubUrl']),
+            new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
             new \Twig_SimpleFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
         ];
     }
