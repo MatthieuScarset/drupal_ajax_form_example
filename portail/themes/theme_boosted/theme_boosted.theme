@@ -19,6 +19,16 @@ function theme_boosted_preprocess_html(&$variables) {
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
+
+    //RUBYPORTAILOBS-3317
+    //gestion des canonical url pour les contenu hub
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if(isset($node) && $node<>""){
+        $nid = $node->id();
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
+    }
+
 }
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
