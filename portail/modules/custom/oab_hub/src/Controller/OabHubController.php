@@ -422,12 +422,16 @@ class OabHubController extends ControllerBase {
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
             array_shift($route_parts);
         }
-        $hub_part = $route_parts[1];
 
         $actif_hub = false;
-        foreach ($url_list as $hub => $url ) {
-            if ($url == $hub_part)
-                $actif_hub = $hub;
+
+        if (isset($route_parts[1])) {
+            $hub_part = $route_parts[1];
+
+            foreach ($url_list as $hub => $url ) {
+                if ($url == $hub_part)
+                    $actif_hub = $hub;
+            }
         }
 
         return $actif_hub;
