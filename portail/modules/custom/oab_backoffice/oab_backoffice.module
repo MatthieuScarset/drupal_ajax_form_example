@@ -93,6 +93,17 @@ function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operatio
         }
     }
 
+    ##Pour l'accès aux données et à leur telechargement
+    if ($operation == "submission_view_any" && in_array('webform_business_analyst', $account->getRoles())) {
+        ##Je recupère la liste des business analysts du formulaire pour checker que les utilisateurs en font partis
+        $oab_gdpr_settings = $entity->getThirdPartySettings('oab_gdpr', 'gdpr_business_analysts');
+        if (array_key_exists($account->id(), $oab_gdpr_settings['gdpr_business_analysts'])) {
+            return Drupal\Core\Access\AccessResult::allowed();
+        }
+
+    }
+
+
     ## Submission page => page d'affichage du formulaire
     if ($operation == "submission_page" || $operation == "view") {
 
@@ -330,6 +341,7 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_owner', $form_state->getValue('gdpr_business_owner'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_spoc_security', $form_state->getValue('gdpr_spoc_security'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_expiration_date', $form_state->getValue('gdpr_expiration_date'));
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_analysts', $form_state->getValue('gdpr_business_analysts'));
 
         # Creation de la date à laquelle les données seront supprimées. Si y a pas de valeur pour la date de fin du formulaire, ca crée à la date du jour
         $expiration_date = new \DateTime($form_state->getValue('gdpr_expiration_date'));
@@ -341,6 +353,27 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
     }
 }
 
+
+/**
+ * Liste des utilisateurs ayant le role Business Analyst
+ */
+function _business_analysts_list() {
+    $query = db_select('users', 'u');
+    $query->fields('u', array('uid'));
+    $query->innerJoin('user__roles', 'r', 'r.entity_id = u.uid');
+    $query->join('users_field_data', 'd', 'u.uid = d.uid');
+    $query->condition('r.roles_target_id', 'webform_business_analyst');
+    $query->fields('d', array('name'));
+    $query->orderBy('d.name');
+
+    $result = $query->execute();
+
+    $users = array();
+    foreach ($result as $user) {
+        $users[$user->uid] = $user->name;
+    }
+    return $users;
+}
 
 /**
  * Implements hook_form_alter().
@@ -440,6 +473,17 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             '#required' => true,
         ];
 
+
+        $form['gdpr_informations']['gdpr_business_analysts'] = [
+            '#type' => 'select',
+            '#multiple' => true,
+            '#title'    => t('Business Analysts'),
+            '#options' => _business_analysts_list(),
+            '#size' => 10,
+            '#description' => "Utilisez ctrl+click pour selectionner plusieurs utilisateurs",
+            "#default_value"  => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts')
+        ];
+kint($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts'));
         # Je donne les droits à l'admin de se selectionner
         if ($current_user->id() == 1) {
             $form['gdpr_informations']['gdpr_business_owner']["#selection_settings"]['filter']['role'][] = "administrator";
@@ -485,7 +529,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $old_submit = $form['actions']['submit']['#submit'];
         $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
             ["ne_pas_supprimer" => "_oab_webform_gdpr_submit"] +
-            array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true) ;
+            array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
 
         $form['actions']['submit']['#submit'] = array_values($submit);
         $form['#validate'][] = '_oab_webform_gdpr_validate';

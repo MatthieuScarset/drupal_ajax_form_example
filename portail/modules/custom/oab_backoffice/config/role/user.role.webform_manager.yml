@@ -6,7 +6,7 @@ label: 'Webform Manager'
 weight: -1
 is_admin: null
 permissions:
-  - 'access kint'
+  - 'access administration pages'
   - 'access shortcuts'
   - 'access toolbar'
   - 'access webform overview'
