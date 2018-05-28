@@ -29,12 +29,15 @@ class OabHubThemeNegotiator implements ThemeNegotiatorInterface {
 
         # Je recupère les URLS des hubs
         $urls = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
-
-       ##Je teste si on a bien recu un tableau, au cas ou...
-        if (is_array($urls)) {
-            #l'URL du hub est le 1er element du tableau
-            $applies = in_array($route_parts[1], $urls);
+    
+        if (isset($route_parts[1])) {
+            ##Je teste si on a bien recu un tableau, au cas ou...
+            if (is_array($urls)) {
+                #l'URL du hub est le 1er element du tableau
+                $applies = in_array($route_parts[1], $urls);
+            }
         }
+
 
         // Use this theme negotiator.
         return $applies;
