@@ -16,6 +16,9 @@ function theme_boosted_preprocess_html(&$variables) {
 
   $c = \Drupal::config("oab.version");
   $version = $c->get('value');
+  if(!isset($config['header_env'])){
+    $config['header_env'] = "";
+  }
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
