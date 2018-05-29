@@ -56,3 +56,7 @@
 .embedded-entity.align-right{
     margin-left: 10px;
 }
+
+#edit-field-hub-portal-wrapper{
+    clear:left;
+}
