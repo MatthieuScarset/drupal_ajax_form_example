@@ -39,32 +39,37 @@ class OabHubController extends ControllerBase {
         $term_langcode = $term->language()->getId();
         $machineName = self::getMachineName($term);
         $values = [];
-        foreach (self::$elements as $menu_key => $menu_name) {
-            $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode);
-            $menu_name = "$term_name $menu_name $term_langcode";
 
-            $menuObj = Menu::load($menu_id);
-            $i = 0;
+        $default_config = self::getConfig();
 
-            ##Si le nom machine existe déjà pour un menu, déjà, c'est bizarre....
-            ## mais du coup, j'ajoute un chiffre que j'incrémente
-            while($menuObj !== null) {
-                $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode, $i);
+        foreach ($default_config['blocks'] as $menu_key => $menu_infos) {
+            if ($menu_infos['menu']) {
+                $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode);
+                $menu_name = "$term_name " . $menu_infos['name'] . " $term_langcode";
+
                 $menuObj = Menu::load($menu_id);
-                $i++;
-                #kint($menuObj);
-                #if($i > 3) die("Je suis à plus de 3");
-            }
-            $menuObj = Menu::create([
-                'id' => $menu_id,
-                'label' => $menu_name,
-                'description' => $menu_name,
-                'langcode' => $term_langcode,
-                'status' => TRUE,
-            ]);
-            $save_ret = $menuObj->save();
-            if ($save_ret == SAVED_NEW || $save_ret == SAVED_UPDATED) {
-                $values[] = $menu_id;
+                $i = 0;
+
+                ##Si le nom machine existe déjà pour un menu, déjà, c'est bizarre....
+                ## mais du coup, j'ajoute un chiffre que j'incrémente
+                while($menuObj !== null) {
+                    $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode, $i);
+                    $menuObj = Menu::load($menu_id);
+                    $i++;
+                    #kint($menuObj);
+                    #if($i > 3) die("Je suis à plus de 3");
+                }
+                $menuObj = Menu::create([
+                    'id' => $menu_id,
+                    'label' => $menu_name,
+                    'description' => $menu_name,
+                    'langcode' => $term_langcode,
+                    'status' => TRUE,
+                ]);
+                $save_ret = $menuObj->save();
+                if ($save_ret == SAVED_NEW || $save_ret == SAVED_UPDATED) {
+                    $values[] = $menu_id;
+                }
             }
 
         }
@@ -331,11 +336,9 @@ class OabHubController extends ControllerBase {
 
         if ($i === null) {
             $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode ) );
-
             $ret = $elem_key . "-" . $machineName . "-" . $langcode;
         } else {
             $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i ) );
-
             $ret = $elem_key . "-" . $machineName . "-" . $langcode . "-" . $i;
         }
 
