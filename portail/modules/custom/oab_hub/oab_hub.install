@@ -21,3 +21,10 @@ function oab_hub_update_8001() {
 function oab_hub_update_8002() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+/**
+ * MAJ des droits du Chief Editor Hub
+ */
+function oab_hub_update_8003() {
+    oabt_YmlImport('user.role.chief_editor_hub.yml');
+}
