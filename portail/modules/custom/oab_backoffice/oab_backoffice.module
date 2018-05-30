@@ -56,12 +56,14 @@ function oab_backoffice_mail($key, &$message, $params) {
 function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
 
    if ($entity->getType() == 'webform' && $operation == 'view') {
-        $webform_value = $entity->get('webform')->first()->getValue();
-        $webform_machine_name = $webform_value['target_id'];
-        $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
-        if ($webform_entity != null && $webform_entity instanceof Drupal\webform\Entity\Webform) {
-            return _is_webform_authorized($webform_entity, $operation, $account);
-        }
+       if ($entity->get('webform')->count() > 0 ) {
+           $webform_value = $entity->get('webform')->first()->getValue();
+           $webform_machine_name = $webform_value['target_id'];
+           $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
+           if ($webform_entity != null && $webform_entity instanceof Drupal\webform\Entity\Webform) {
+               return _is_webform_authorized($webform_entity, $operation, $account);
+           }
+       }
 
    }
 
