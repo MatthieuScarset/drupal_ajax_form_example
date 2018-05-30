@@ -6,6 +6,7 @@ label: 'chief editor HUB'
 weight: 9
 is_admin: null
 permissions:
+  - 'access administration pages'
   - 'access browse_media_modal entity browser pages'
   - 'access browse_medias_iframe entity browser pages'
   - 'access browser_file_modal entity browser pages'
@@ -14,6 +15,7 @@ permissions:
   - 'access media overview'
   - 'access toolbar'
   - 'access user profiles'
+  - 'administer menu'
   - 'create blog_post content'
   - 'create custom_page content'
   - 'create customer_story content'
