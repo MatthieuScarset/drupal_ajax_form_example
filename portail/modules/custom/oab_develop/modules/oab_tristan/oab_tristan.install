@@ -606,3 +606,10 @@ function oab_tristan_update_8078() {
 function oab_tristan_update_8079() {
     include_once('updates/update_8079.inc');
 }
+
+/**
+ * Création d'un role Webform business Analyst
+ */
+function oab_tristan_update_8080() {
+    include_once('updates/update_8080.inc');
+}

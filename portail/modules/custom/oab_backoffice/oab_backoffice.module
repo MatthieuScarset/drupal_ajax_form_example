@@ -52,10 +52,36 @@ function oab_backoffice_mail($key, &$message, $params) {
     }
 }
 
+
+function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+
+   if ($entity->getType() == 'webform' && $operation == 'view') {
+       if ($entity->get('webform')->count() > 0 ) {
+           $webform_value = $entity->get('webform')->first()->getValue();
+           $webform_machine_name = $webform_value['target_id'];
+           $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
+           if ($webform_entity != null && $webform_entity instanceof Drupal\webform\Entity\Webform) {
+               return _is_webform_authorized($webform_entity, $operation, $account);
+           }
+       }
+
+   }
+
+    return Drupal\Core\Access\AccessResult::neutral();
+}
+
 /**
  * Gestion des droits d'accès à un webform
  */
 function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+    return _is_webform_authorized($entity, $operation, $account);
+}
+
+
+/**
+ * Je regroupe tout dans une fonction perso, parce que je m'en sers dans plusieurs hook_access
+ */
+function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
     /**
      * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
      * pour voir les soumissions et faire des modifs
@@ -65,51 +91,33 @@ function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $o
         if ( ( $operation == "submission_view_any" || $operation == "update" )
             && $form_bo !== null
             && $form_bo->id() == $account->id()) {
-                return Drupal\Core\Access\AccessResult::allowed();
+            return Drupal\Core\Access\AccessResult::allowed();
         }
+    }
+
+    ##Pour l'accès aux données et à leur telechargement
+    if ($operation == "submission_view_any" && in_array('webform_business_analyst', $account->getRoles())) {
+        ##Je recupère la liste des business analysts du formulaire pour checker que les utilisateurs en font partis
+        $business_analaysts_list = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts');
+
+        if (array_key_exists($account->id(), $business_analaysts_list)) {
+            return Drupal\Core\Access\AccessResult::allowed();
+        }
+
     }
 
 
     ## Submission page => page d'affichage du formulaire
-    if ($operation == "submission_page") {
-       $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+    if ($operation == "submission_page" || $operation == "view") {
 
-       //echo "is published : $is_published"; die();
-       ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
-       if ($is_published != 1 ) {
-
-           ## Si c'est un webform admin ou si c'est l'administrateur
-           if (in_array('webform_admin', $account->getRoles())
-               || $account->id() == 1) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-           ## S'il est business owner, il doit être le BO du form pour le voir
-            if (in_array('webform_business_owner', $account->getRoles())
-                && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner') == $account->id()
-            ) {
-                return Drupal\Core\Access\AccessResult::allowed();
-            }
-
-
-            ## S'il est SPOC Securité, il doit être le SPOC du form pour le voir
-           if (in_array('webform_spoc_securite', $account->getRoles())
-               && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security') == $account->id()
-           ) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-
-           ## S'il est webform manager, il doit etre le "owner" du form pour le voir
-           if (in_array('webform_manager', $account->getRoles())
-               && $entity->getOwnerId() == $account->id()
-           ) {
-               return Drupal\Core\Access\AccessResult::allowed();
-           }
-
-           # Si aucune condition n'est remplie, on interdit l'accès au webform
-           return Drupal\Core\Access\AccessResult::forbidden();
-       }
+        $allowed = _check_authorized_view($entity, $account);
+        if ($allowed) {
+            return Drupal\Core\Access\AccessResult::allowed();
+        } elseif( $allowed == false) {
+            return Drupal\Core\Access\AccessResult::forbidden();
+        } elseif ($allowed == null) {
+            return Drupal\Core\Access\AccessResult::neutral();
+        }
     }
 
     /* A garder pour afficher toutes les permissions des webforms
@@ -119,9 +127,52 @@ function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $o
 
 
     return Drupal\Core\Access\AccessResult::neutral();
-
 }
 
+
+function _check_authorized_view($entity, $account) {
+    $ret = false;
+    $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+
+    //echo "is published : $is_published"; die();
+    ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
+    if ($is_published != 1 ) {
+
+        ## Si c'est un webform admin ou si c'est l'administrateur
+        if (in_array('webform_admin', $account->getRoles())
+            || $account->id() == 1) {
+            $ret = true;
+        }
+
+        ## S'il est business owner, il doit être le BO du form pour le voir
+        if (in_array('webform_business_owner', $account->getRoles())
+            && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner') == $account->id()
+        ) {
+            $ret = true;
+        }
+
+
+        ## S'il est SPOC Securité, il doit être le SPOC du form pour le voir
+        if (in_array('webform_spoc_securite', $account->getRoles())
+            && $entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security') == $account->id()
+        ) {
+            $ret = true;
+        }
+
+
+        ## S'il est webform manager, il doit etre le "owner" du form pour le voir
+        if (in_array('webform_manager', $account->getRoles())
+            && $entity->getOwnerId() == $account->id()
+        ) {
+            $ret = true;
+        }
+
+        # Si aucune condition n'est remplie, on interdit l'accès au webform
+        return $ret;
+    }
+
+    return null;
+}
 
 /*
 * implement hook_token_info()
@@ -249,12 +300,6 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
 
     //Lorsque le formulaire est créé par le webform admin, on n'envoie pas de mail
     if (!in_array('webform_admin', $current_user->getRoles())) {
-        $token_service = \Drupal::token();
-
-        $config = \Drupal::config('oab.gdpr_settings');
-
-        /*\Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]));
-        \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]));*/
 
         #mail to SPOC Security
         $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
@@ -293,21 +338,67 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_owner', $form_state->getValue('gdpr_business_owner'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_spoc_security', $form_state->getValue('gdpr_spoc_security'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_expiration_date', $form_state->getValue('gdpr_expiration_date'));
-
-        # Creation de la date à laquelle les données seront supprimées. Si y a pas de valeur pour la date de fin du formulaire, ca crée à la date du jour
-        $expiration_date = new \DateTime($form_state->getValue('gdpr_expiration_date'));
-        $expiration_date->add(new \DateInterval('P6M'));
-
-        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_data_delete_date', $expiration_date->format('Y-m-d'));
-
+        $entity->setThirdPartySetting('oab_gdpr', 'gdpr_business_analysts', $form_state->getValue('gdpr_business_analysts'));
         $entity->setThirdPartySetting('oab_gdpr', 'gdpr_form_published', $form_state->getValue('gdpr_form_published'));
     }
+}
+
+/**
+ * Liste des utilisateurs ayant le role Business Analyst
+ */
+function _business_analysts_list() {
+    $query = \Drupal::database()->select('users', 'u');
+    $query->fields('u', array('uid'));
+    $query->innerJoin('user__roles', 'r', 'r.entity_id = u.uid');
+    $query->join('users_field_data', 'd', 'u.uid = d.uid');
+    $query->condition('r.roles_target_id', 'webform_business_analyst');
+    $query->fields('d', array('name'));
+    $query->orderBy('d.name');
+
+    $result = $query->execute();
+
+    $users = array();
+    foreach ($result as $user) {
+        $users[$user->uid] = $user->name;
+    }
+    return $users;
 }
 
 /**
  * Implements hook_form_alter().
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+
+    if ($form_id == "node_webform_form") {
+        $options = $form['webform']['widget'][0]['target_id']["#options"];
+
+        $ret = [];
+        $current_user = Drupal::currentUser();
+        foreach ($options as $machine_name => $name) {
+            if (is_array($name)) {
+                $ret[$machine_name] = [];
+
+                foreach($name as $key => $value) {
+                    $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($key);
+                    if (_check_authorized_view($webform, $current_user)) {
+                        $ret[$machine_name][$key] = $value;
+                    }
+                }
+
+                if (count($ret[$machine_name]) == 0) {
+                    unset($ret[$machine_name]);
+                }
+            } else {
+                $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($machine_name);
+                if (_check_authorized_view($webform, $current_user)) {
+                    $ret[$machine_name] = $name;
+                }
+            }
+        }
+
+        $form['webform']['widget'][0]['target_id']["#options"] = $ret;
+    }
 
     /**
      * Pour la GDPR, hook des webform pour ajouter des éléments
@@ -371,6 +462,16 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             '#required' => true,
         ];
 
+
+        $form['gdpr_informations']['gdpr_business_analysts'] = [
+            '#type' => 'select',
+            '#multiple' => true,
+            '#title'    => t('Business Analysts'),
+            '#options' => _business_analysts_list(),
+            '#description' => "Utilisez ctrl+click pour selectionner plusieurs utilisateurs",
+            "#default_value"  => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts')
+        ];
+        
         # Je donne les droits à l'admin de se selectionner
         if ($current_user->id() == 1) {
             $form['gdpr_informations']['gdpr_business_owner']["#selection_settings"]['filter']['role'][] = "administrator";
@@ -416,7 +517,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $old_submit = $form['actions']['submit']['#submit'];
         $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
             ["ne_pas_supprimer" => "_oab_webform_gdpr_submit"] +
-            array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true) ;
+            array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
 
         $form['actions']['submit']['#submit'] = array_values($submit);
         $form['#validate'][] = '_oab_webform_gdpr_validate';
@@ -1175,33 +1276,93 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
 function oab_backoffice_cron() {
   ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
   #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-  if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
-
-      ##je recupère la date d'il y a un an
-      $date = new Datetime\DrupalDateTime('1 year ago', new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
-      $formatted = $date->format('U');    ## Format milliseconde
-
-      ##Query pour retrouver toutes les submissions antérieures à un an
-      $query = \Drupal::entityQuery('webform_submission')
-          ->condition('created', $formatted, '<');
-      $results = $query->execute();
-
-      ##je load toutes les submissions trouvées
-      $storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
-      $webform_submissions = $storage->loadMultiple($results);
-      $nbSubmissions = count($webform_submissions);   ##Nb pour le log
-
-      ##Suppression de toutes les entités trouvées
-      $storage->delete($webform_submissions);
+    if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
 
 
-      #####################################
-      #####################################
-      # Suppression des elements du dossier d'export des listes de documents du site
-      \Drupal\oab_backoffice\Controller\OabExportFileListController::clearStorageDir();
+        ## Je recupère tous les webforms existants et je boucle sur chacun d'entre eux,
+        ## les règles de suppression dépendant des éléments du webform
+        # => Si une date d'expiration a été définie, toutes les données sont supprimées 6 mois après la date d'expiration du formulaire
+        # => Si non définie, les données sont supprimées 6 mois après leur soumission
+
+        $webform_query =  \Drupal::entityQuery('webform');
+        $webforms = $webform_query->execute();
+
+        foreach ($webforms as $webform_id => $webform_data) {
+
+            $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_id);
+
+            if ($webform_entity !== null) {
+
+                $expire_date = $webform_entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date');
+
+                if ($expire_date == null || $expire_date == ""){
+                    ## SI le formulaire n'a pas de date d'expiration, je supprime toutes les soumissions qui ont plus de 6 mois
+                    ## (soit gdpr_expiration_date n'existe pas, soit il est setté avec un string vide (résultat du form sans donnée)
+
+                    ##je recupère la date d'il y a 6 mois
+                    $date = new Datetime\DrupalDateTime('6 month ago', new \DateTimezone(DATETIME_STORAGE_TIMEZONE));
+                    $formatted = $date->format('U');    ## Format milliseconde
+
+                    ##Query pour retrouver toutes les submissions antérieures à un an
+                    $query = \Drupal::entityQuery('webform_submission')
+                        ->condition('created', $formatted, '<')
+                        ->condition('webform_id', $webform_id, '=');
+                    $results = $query->execute();
+
+                    ##je load toutes les submissions trouvées
+                    $storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
+                    $webform_submissions = $storage->loadMultiple($results);
+
+                    ##Suppression de toutes les entités trouvées
+                    $storage->delete($webform_submissions);
+
+                } else {
+
+                    ## S'il a une date d'expiration, je regarde si on est 6 mois après la date d'expiration
+                    ## si c'est le cas, je supprime TOUTES les données
+
+                    ## Je recrée l'objet date de la date de suppression que je set 6 mois
+                    $expire_date = new \DateTime($webform_entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date'));
+                    $expire_date->add(new \DateInterval('P6M'));
+
+                    ## Today
+                    $today = new \DateTime('now');
+
+                    ## Je compare les 2 dates. Si today est avant la date de suppression,
+                    $diff = $today->diff($expire_date);
 
 
-  }
+                    ## Si invert est à un, c'est qu'on est en négatif, et il faut supprimer les données
+                    if ($diff->invert == 1) {
+
+                        ## Dans ce cas là, je supprime toutes les données du formulaire en question
+                        $query = \Drupal::entityQuery('webform_submission')
+                            ->condition('webform_id', $webform_id, '=');
+                        $results = $query->execute();
+
+                        ##je load toutes les submissions trouvées
+                        $storage = \Drupal::entityTypeManager()->getStorage('webform_submission')->loadMultiple($results);
+                        $webform_submissions = $storage->loadMultiple($results);
+
+                        ##Suppression de toutes les entités trouvées
+                        $storage->delete($webform_submissions);
+                    }
+
+                }
+            }
+
+        }
+
+
+
+
+        #####################################
+        #####################################
+        # Suppression des elements du dossier d'export des listes de documents du site
+        \Drupal\oab_backoffice\Controller\OabExportFileListController::clearStorageDir();
+
+
+    }
 }
 
 /**
