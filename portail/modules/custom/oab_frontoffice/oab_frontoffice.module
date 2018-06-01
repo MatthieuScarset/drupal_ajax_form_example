@@ -397,6 +397,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
          $form['actions']['submit']['#value'] = "Filtrer";
       } elseif ($current_language == 'ru') {
         $form['actions']['submit']['#value'] = "Найти";
+      } elseif ($current_language == 'es') {
+          $form['actions']['submit']['#value'] = "Aplicar";
+      } elseif ($current_language == 'pt-br') {
+          $form['actions']['submit']['#value'] = "Aplique";
       }
     }
 
@@ -601,6 +605,20 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             unset($form['field_region_target_id']);
         }
     }
+
+  /**
+   * je cache le bouton "Apply" s'il n'y a plus de filtre
+   */
+  $hasFilters = false;
+  foreach ($form["#info"] as $filter_name => $filter_infos) {
+      if (isset($form[$filter_infos['value']])) {
+          $hasFilters = true;
+      }
+  }
+
+  if (!$hasFilters) {
+      $form['actions']['submit']['#attributes']['class'][] = 'hidden';
+  }
 
 }
 
