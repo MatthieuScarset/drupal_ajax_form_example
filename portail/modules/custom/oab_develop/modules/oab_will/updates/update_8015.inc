@@ -8,4 +8,5 @@ use Symfony\Component\Yaml\Yaml;
 
 
 oabt_YmlImport('user.role.chief_editor_hub.yml');
+oabt_YmlImport('user.role.digital_admin.yml');
 
