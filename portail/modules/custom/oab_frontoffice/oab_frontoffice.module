@@ -641,6 +641,12 @@ function oab_frontoffice_views_post_render($view) {
             if($current_language == "ru") {
                 $collection = 'language.ru';
             }
+            if($current_language == "es") {
+                $collection = 'language.es';
+            }
+            if($current_language == "pt-br") {
+                $collection = 'language.pt-br';
+            }
             $sth = $connection->select('config', 'c')
                 ->fields('c', array('data'))
                 ->condition('name', 'oab.subhomes')

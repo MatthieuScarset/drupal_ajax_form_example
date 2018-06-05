@@ -144,6 +144,7 @@ $conf_es = array (
                         array (
                             'title' => 'Producto',
                         ),
+                    'display_title' => 'Producto',
                 ),
             'page_customer' =>
                 array (
@@ -151,6 +152,7 @@ $conf_es = array (
                         array (
                             'title' => 'Nuestros clientes',
                         ),
+                    'display_title' => 'Nuestros clientes',
                 ),
             'page_document' =>
                 array (
@@ -158,6 +160,7 @@ $conf_es = array (
                         array (
                             'title' => 'Libreria',
                         ),
+                    'display_title' => 'Libreria',
                 ),
             'page_distributor' =>
                 array (
@@ -165,6 +168,7 @@ $conf_es = array (
                         array (
                             'title' => 'Distribuidores',
                         ),
+                    'display_title' => 'Distribuidores',
                 ),
             'page_magazine' =>
                 array (
@@ -172,6 +176,7 @@ $conf_es = array (
                         array (
                             'title' => 'Revista',
                         ),
+                    'display_title' => 'Revista',
                 ),
             'page_partners' =>
                 array (
@@ -179,13 +184,18 @@ $conf_es = array (
                         array (
                             'title' => 'Socios de negocio',
                         ),
+                    'display_title' => 'Socios de negocio',
+                ),
+            'page_press' =>
+                array (
+                    'display_title' => 'Prensa',
                 ),
         ),
 );
 $collection = \Drupal::service('config.storage')->createCollection('language.es');
 $collection->write('views.view.subhomes', $conf_es);
 
-$conf_br = array (
+$conf_br =array (
     'display' =>
         array (
             'default' =>
@@ -208,6 +218,7 @@ $conf_br = array (
                         array (
                             'title' => 'Produto',
                         ),
+                    'display_title' => 'Produto',
                 ),
             'page_customer' =>
                 array (
@@ -215,6 +226,7 @@ $conf_br = array (
                         array (
                             'title' => 'Nossos Clientes',
                         ),
+                    'display_title' => 'Nossos Clientes',
                 ),
             'page_distributor' =>
                 array (
@@ -222,6 +234,7 @@ $conf_br = array (
                         array (
                             'title' => 'Distribuidores',
                         ),
+                    'display_title' => 'Distribuidores',
                 ),
             'page_document' =>
                 array (
@@ -229,13 +242,15 @@ $conf_br = array (
                         array (
                             'title' => 'Mediateca',
                         ),
+                    'display_title' => 'Mediateca',
                 ),
             'page_magazine' =>
                 array (
                     'display_options' =>
                         array (
-                            'title' => 'Rrevista',
+                            'title' => 'Revista',
                         ),
+                    'display_title' => 'Revista',
                 ),
             'page_partners' =>
                 array (
@@ -243,6 +258,11 @@ $conf_br = array (
                         array (
                             'title' => 'Parceiros',
                         ),
+                    'display_title' => 'Parceiros',
+                ),
+            'page_press' =>
+                array (
+                    'display_title' => 'Imprensa',
                 ),
         ),
 );
