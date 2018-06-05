@@ -591,3 +591,11 @@ function oab_tristan_update_8076() {
 function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+
+/**
+ * ajout de trads pour les sites ES et PT-BR
+ */
+function oab_tristan_update_8081() {
+   include_once('updates/update_8081.inc');
+}

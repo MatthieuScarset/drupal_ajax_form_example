@@ -43,3 +43,208 @@ foreach ($translations_LMNcontext AS $translation) {
         ))->save();
     }
 }
+
+
+## Rechargement des trads FR/ES/BR pour les subhomes
+
+$conf_fr = array (
+    'display' =>
+        array (
+            'page_press' =>
+                array (
+                    'display_title' => 'Presse',
+                ),
+            'page_catalogue' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Produits',
+                        ),
+                    'display_title' => 'Produits',
+                ),
+            'page_customer' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Témoignage client',
+                        ),
+                    'display_title' => 'Témoignage client',
+                ),
+            'page_document' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Médiathèque',
+                        ),
+                    'display_title' => 'Médiathèque',
+                ),
+            'page_partners' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Partenaires',
+                        ),
+                    'display_title' => 'Partenaires',
+                ),
+            'default' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Presse',
+                            'exposed_form' =>
+                                array (
+                                    'options' =>
+                                        array (
+                                            'submit_button' => 'Filtrer',
+                                        ),
+                                ),
+                        ),
+                ),
+            'page_catalogue_dvi' =>
+                array (
+                    'display_title' => 'Produits DVI',
+                    'display_options' =>
+                        array (
+                            'title' => 'Produits DVI',
+                        ),
+                ),
+            'page_distributor' =>
+                array (
+                    'display_title' => 'Distributeurs',
+                    'display_options' =>
+                        array (
+                            'title' => 'Distributeurs',
+                        ),
+                ),
+        ),
+);
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('views.view.subhomes', $conf_fr);
+
+$conf_es = array (
+    'display' =>
+        array (
+            'default' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'exposed_form' =>
+                                array (
+                                    'options' =>
+                                        array (
+                                            'submit_button' => 'Aplicar',
+                                        ),
+                                ),
+                            'title' => 'Prensa',
+                        ),
+                ),
+            'page_catalogue' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Producto',
+                        ),
+                ),
+            'page_customer' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Nuestros clientes',
+                        ),
+                ),
+            'page_document' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Libreria',
+                        ),
+                ),
+            'page_distributor' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Distribuidores',
+                        ),
+                ),
+            'page_magazine' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Revista',
+                        ),
+                ),
+            'page_partners' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Socios de negocio',
+                        ),
+                ),
+        ),
+);
+$collection = \Drupal::service('config.storage')->createCollection('language.es');
+$collection->write('views.view.subhomes', $conf_es);
+
+$conf_br = array (
+    'display' =>
+        array (
+            'default' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Imprensa',
+                            'exposed_form' =>
+                                array (
+                                    'options' =>
+                                        array (
+                                            'submit_button' => 'Aplique',
+                                        ),
+                                ),
+                        ),
+                ),
+            'page_catalogue' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Produto',
+                        ),
+                ),
+            'page_customer' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Nossos Clientes',
+                        ),
+                ),
+            'page_distributor' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Distribuidores',
+                        ),
+                ),
+            'page_document' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Mediateca',
+                        ),
+                ),
+            'page_magazine' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Rrevista',
+                        ),
+                ),
+            'page_partners' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'title' => 'Parceiros',
+                        ),
+                ),
+        ),
+);
+$collection = \Drupal::service('config.storage')->createCollection('language.pt-br');
+$collection->write('views.view.subhomes', $conf_br);

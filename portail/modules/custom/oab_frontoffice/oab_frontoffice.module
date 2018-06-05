@@ -392,7 +392,7 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-    if ( isset($form['actions']['submit']['#value']) ) {
+    /*if ( isset($form['actions']['submit']['#value']) ) {
       if ($current_language == 'fr') {
          $form['actions']['submit']['#value'] = "Filtrer";
       } elseif ($current_language == 'ru') {
@@ -402,7 +402,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       } elseif ($current_language == 'pt-br') {
           $form['actions']['submit']['#value'] = "Aplique";
       }
-    }
+    }*/
 
     foreach ($form AS $key => $value){
       if (isset($value['#type'])
