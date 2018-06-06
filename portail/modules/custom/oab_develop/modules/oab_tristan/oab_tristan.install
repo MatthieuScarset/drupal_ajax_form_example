@@ -591,3 +591,11 @@ function oab_tristan_update_8076() {
 function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+
+/**
+ * Rechargement de la vue subhome pour modification des tris
+ */
+function oab_tristan_update_8082() {
+    oabt_YmlImport('views.view.subhomes.yml');
+}
