@@ -66,13 +66,15 @@
     var that = this;
     this.exposedFormAjax = [];
 
-    $('input[type=submit], input[type=image]', this.$exposed_form).not('[data-drupal-selector=edit-reset]').each(function (index) {
-      var selfSettings = $.extend({}, that.element_settings, {
-        base: $(this).attr('id'),
-        element: this
-      });
-      that.exposedFormAjax[index] = Drupal.ajax(selfSettings);
-    });
+      if (!this.$exposed_form.is('[data-views-ajax-submit-disabled]')) {
+          $('input[type=submit], input[type=image]', this.$exposed_form).not('[data-drupal-selector=edit-reset]').each(function (index) {
+              var selfSettings = $.extend({}, that.element_settings, {
+                  base: $(this).attr('id'),
+                  element: this
+              });
+              that.exposedFormAjax[index] = Drupal.ajax(selfSettings);
+        });
+    }
   };
 
   Drupal.views.ajaxView.prototype.filterNestedViews = function () {
