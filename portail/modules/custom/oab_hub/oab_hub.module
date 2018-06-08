@@ -358,6 +358,9 @@ function oab_hub_theme_suggestions_menu_alter(array &$suggestions, array $variab
 
 
     $menu_name = false;
+    if(!isset($variables['menu_name'])){
+        $variables['menu_name'] = "";
+    }
 
     foreach ($menus as $menu) {
         if (strpos(str_replace('-', '_', $variables['menu_name']), $menu) !== false) {

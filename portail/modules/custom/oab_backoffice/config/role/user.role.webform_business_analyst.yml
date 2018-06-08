@@ -1,0 +1,12 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: webform_business_analyst
+label: 'Webform Business Analyst'
+weight: 10
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access toolbar'
+  - 'access webform overview'
+  - 'view the administration theme'

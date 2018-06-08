@@ -10,10 +10,6 @@ function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
     $theme = array();
     $theme['block__cookie_compliance_block'] = array(
             'variables' => array(
-                'message' => 'Default message',
-                'link_text' => 'Default link text',
-                'link_url'  => 'Default url',
-                'bla'   => "blu",
             ),
             'template'  => 'block--cookie-compliance-block',
     );
@@ -27,8 +23,8 @@ function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
  */
 function oab_cookie_compliance_preprocess_page(&$variables) {
     $variables['#attached']['drupalSettings']['cookie_compliance']['cookie_name'] = CookieComplianceBlock::COOKIE_NAME;
-    $variables['#attached']['drupalSettings']['cookie_compliance']['cookie_name_first_visit'] = CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT;
     $variables['#attached']['drupalSettings']['cookie_compliance']['block_id'] = CookieComplianceBlock::BLOCK_ID;
+    $variables['#attached']['drupalSettings']['cookie_compliance']['expiration_nb_month'] = CookieComplianceBlock::EXPIRATION_NB_MONTH;
     $variables['#attached']['library'][] = 'oab_cookie_compliance/block-library';
 
 }

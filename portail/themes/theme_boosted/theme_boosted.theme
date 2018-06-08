@@ -16,9 +16,22 @@ function theme_boosted_preprocess_html(&$variables) {
 
   $c = \Drupal::config("oab.version");
   $version = $c->get('value');
+  if(!isset($config['header_env'])){
+    $config['header_env'] = "";
+  }
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
+
+    //RUBYPORTAILOBS-3317
+    //gestion des canonical url pour les contenu hub
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if(isset($node) && $node<>""){
+        $nid = $node->id();
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
+    }
+
 }
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -44,25 +57,27 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
         $suggestions[]='form_element__subhomes';
     }
+    if (isset($variables['element']['#webform'])) {
+      if ( $variables['element']['#webform'] === 'telechargement_documents'
+        && $variables['element']['#type'] != "checkbox") {
+        $suggestions[] = 'form_element__telechargement_documents';
+      }
 
-  if ( $variables['element']['#webform'] === 'telechargement_documents'
-    && $variables['element']['#type'] != "checkbox") {
-    $suggestions[] = 'form_element__telechargement_documents';
-  }
-
-  if ( $variables['element']['#webform'] === 'dvi_contact_global'
-    && $variables['element']['#type'] != "checkbox"
-    && $variables['element']['#type'] != "processed_text") {
-    $suggestions[] = 'form_element__dvi_contact_global';
-    $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
-  }
-
-    if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
+      if ( $variables['element']['#webform'] === 'dvi_contact_global'
         && $variables['element']['#type'] != "checkbox"
         && $variables['element']['#type'] != "processed_text") {
-        $suggestions[] = 'form_element__dvi_becoming_distributor';
-        $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
-    }
+        $suggestions[] = 'form_element__dvi_contact_global';
+        $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
+      }
+
+
+      if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
+          && $variables['element']['#type'] != "checkbox"
+          && $variables['element']['#type'] != "processed_text") {
+          $suggestions[] = 'form_element__dvi_becoming_distributor';
+          $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
+      }
+  }
 
 }
 

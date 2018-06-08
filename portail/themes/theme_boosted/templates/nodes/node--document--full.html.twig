@@ -65,6 +65,7 @@
  *   in different view modes.
  */
 #}
+
 {%
 set classes = [
 'node',
@@ -148,12 +149,12 @@ view_mode ? view_mode|clean_class,
         {% endif %}
     {% endfor %}
 
-    {% if (content.field_file['#language'] == 'en') or (content.field_file['#language'] == 'ru') %}
-    <div class="pardot-form" style="margin-top: 4rem;">
-        <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
-    </div>
-    {% elseif content.field_file['#language'] == 'fr' %}
-        {{ form_dlFile }}
-    {% endif %}
 
+    {% if langcode == 'fr' %}
+        {{ form_dlFile }}
+    {% else %}
+        <div class="pardot-form" style="margin-top: 4rem;">
+            <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
+        </div>
+    {% endif %}
 </article>

@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.homepage.field_expertise_title
     - field.field.node.homepage.field_header_title
     - field.field.node.homepage.field_hub
+    - field.field.node.homepage.field_hub_portal
     - field.field.node.homepage.field_infography
     - field.field.node.homepage.field_meta_description
     - field.field.node.homepage.field_meta_title
@@ -331,6 +332,12 @@ content:
     region: content
   field_hub:
     weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_buttons

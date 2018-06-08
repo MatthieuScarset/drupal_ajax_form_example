@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -241,10 +242,10 @@ display:
           entity_field: langcode
           plugin_id: language
       sorts:
-        changed:
-          id: changed
+        created:
+          id: created
           table: node_field_data
-          field: changed
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
@@ -254,7 +255,7 @@ display:
             label: ''
           granularity: second
           entity_type: node
-          entity_field: changed
+          entity_field: created
           plugin_id: date
         nid:
           id: nid
@@ -269,6 +270,18 @@ display:
             label: ''
           entity_type: node
           entity_field: nid
+          plugin_id: standard
+        field_hub_portal_value:
+          id: field_hub_portal_value
+          table: node__field_hub_portal
+          field: field_hub_portal_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
           plugin_id: standard
       title: Press
       header: {  }
@@ -343,6 +356,7 @@ display:
         title: false
         header: true
         relationships: false
+        sorts: true
       filters:
         status:
           value: '1'
@@ -559,6 +573,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -651,6 +666,7 @@ display:
         filter_groups: false
         title: false
         relationships: false
+        sorts: false
       filters:
         status:
           id: status
@@ -941,6 +957,48 @@ display:
           admin_label: 'field_job_profile: Taxonomy term'
           required: false
           plugin_id: standard
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: standard
+        field_hub_portal_value:
+          id: field_hub_portal_value
+          table: node__field_hub_portal
+          field: field_hub_portal_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1005,6 +1063,7 @@ display:
         filter_groups: false
         title: false
         relationships: false
+        sorts: false
       filters:
         status:
           id: status
@@ -1188,6 +1247,48 @@ display:
           admin_label: 'field_market_segment_dvi: Taxonomy term'
           required: false
           plugin_id: standard
+      sorts:
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          entity_type: node
+          entity_field: changed
+          plugin_id: date
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: node
+          entity_field: nid
+          plugin_id: standard
+        field_hub_portal_value:
+          id: field_hub_portal_value
+          table: node__field_hub_portal
+          field: field_hub_portal_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1195,6 +1296,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -1467,6 +1569,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2069,6 +2172,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2341,6 +2445,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2615,6 +2720,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
@@ -2976,6 +3082,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }

@@ -1,0 +1,13 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: webform_business_owner
+label: 'Webform Business Owner'
+weight: 0
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access webform overview'
+  - 'view the administration theme'

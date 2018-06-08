@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.product.field_file
     - field.field.node.product.field_highlight
     - field.field.node.product.field_hub
+    - field.field.node.product.field_hub_portal
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
@@ -134,6 +135,7 @@ hidden:
   field_product: true
   field_region: true
   field_hub: true
+  field_hub_portal: true
   field_solution: true
   field_start_date: true
   field_sub_family: true
