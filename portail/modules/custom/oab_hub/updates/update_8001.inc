@@ -29,7 +29,10 @@ $removed_tids = [];
 foreach ($subhome_to_remove as $properties) {
     $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
     $term = reset($terms);
-    $removed_tids[] = $term->id();
+    if ($term !== false && $term !== null) {
+        $removed_tids[] = $term->id();
+    }
+
 }
 $config_factory->getEditable(OabHubController::CONFIG_ID)
     ->set(OabHubController::CONFIG_FORM_REMOVED_SUBHOMES_TIDS, $removed_tids)
