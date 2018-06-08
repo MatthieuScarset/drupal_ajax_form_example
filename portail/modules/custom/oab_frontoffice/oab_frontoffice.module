@@ -395,13 +395,17 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-    if ( isset($form['actions']['submit']['#value']) ) {
+    /*if ( isset($form['actions']['submit']['#value']) ) {
       if ($current_language == 'fr') {
          $form['actions']['submit']['#value'] = "Filtrer";
       } elseif ($current_language == 'ru') {
         $form['actions']['submit']['#value'] = "Найти";
+      } elseif ($current_language == 'es') {
+          $form['actions']['submit']['#value'] = "Aplicar";
+      } elseif ($current_language == 'pt-br') {
+          $form['actions']['submit']['#value'] = "Aplique";
       }
-    }
+    }*/
 
     foreach ($form AS $key => $value){
       if (isset($value['#type'])
@@ -605,6 +609,20 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         }
     }
 
+  /**
+   * je cache le bouton "Apply" s'il n'y a plus de filtre
+   */
+  $hasFilters = false;
+  foreach ($form["#info"] as $filter_name => $filter_infos) {
+      if (isset($form[$filter_infos['value']])) {
+          $hasFilters = true;
+      }
+  }
+
+  if (!$hasFilters) {
+      $form['actions']['submit']['#attributes']['class'][] = 'hidden';
+  }
+
 }
 
 
@@ -625,6 +643,12 @@ function oab_frontoffice_views_post_render($view) {
             }
             if($current_language == "ru") {
                 $collection = 'language.ru';
+            }
+            if($current_language == "es") {
+                $collection = 'language.es';
+            }
+            if($current_language == "pt-br") {
+                $collection = 'language.pt-br';
             }
             $sth = $connection->select('config', 'c')
                 ->fields('c', array('data'))
