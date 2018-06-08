@@ -283,6 +283,9 @@ function tac_lite_query_term_access_alter(AlterableInterface $query) {
                                         $columns = explode('__', $table['alias']);
                                         $column = $columns[1];
                                         $column_name = $primary_table_alias . '.' . $column . '_target_id';
+                                        if ($column == ""){
+                                            $column_name = $primary_table_alias . '.tid';
+                                        }
                                         break;
                 case 'taxonomy_term_hierarchy':
                                         $column_name = $primary_table_alias . '.tid';

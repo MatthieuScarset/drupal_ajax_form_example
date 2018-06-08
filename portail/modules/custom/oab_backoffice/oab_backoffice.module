@@ -343,6 +343,7 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
     }
 }
 
+
 /**
  * Liste des utilisateurs ayant le role Business Analyst
  */
@@ -522,6 +523,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $form['actions']['submit']['#submit'] = array_values($submit);
         $form['#validate'][] = '_oab_webform_gdpr_validate';
     }
+
+
 
 	//\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -904,11 +907,13 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             //rend le champ obligatoire
             $form["field_hub"]["widget"]["#required"] = true;
             $form["field_hub_portal"]['#disabled'] = true;
+
         }
     }
 
 
 }
+
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
 
@@ -919,10 +924,10 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
         $current_user = Drupal::currentUser();
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-        $old_webform  = $entity->original;
+        $old_webform = $entity->original;
 
         $isPublished = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
-        $old_isPublished = $old_webform->getThirdPartySetting('oab_gdpr','gdpr_form_published');
+        $old_isPublished = $old_webform->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
 
         ## Si le webform vient d'etre publié et que ce n'est pas un admin qui vient de le publier
         if ($isPublished
@@ -931,6 +936,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             && $current_user->id() != 1      #Je ne le fait pas pour l'admin et les ebform_admin
         ) {
             #mail to Everyone pour la validation
+
             $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
             if ($spoc !== null ) {
                 $mail_spoc = $spoc->getEmail();
@@ -951,7 +957,6 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
 
         }
     }
-
 
     /** @var \Drupal\file\Entity\File $entity */
     if ($entity instanceof Drupal\file\Entity\File) {
