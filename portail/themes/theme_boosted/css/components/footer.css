@@ -40,7 +40,8 @@ span.icon-footer {
     padding: 20px 0;
 }
 
-#block-contactbar{
+#block-contactbar,
+.block-contactbar {
     background-color: #333;
     color: white;
 }
@@ -82,7 +83,8 @@ span.icon-footer {
 }
 
 @media (max-width: 767px ) {
-    #block-footersocialblock .followbar div.content {
+    #block-footersocialblock .followbar div.content,
+    #block-theme-oab-hub-footersocialblock .followbar div.content {
         display: block !important;
         width: 100% !important;
         max-width: none !important;

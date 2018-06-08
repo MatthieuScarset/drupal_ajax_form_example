@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.customer_story.field_end_date
     - field.field.node.customer_story.field_file
     - field.field.node.customer_story.field_highlight
+    - field.field.node.customer_story.field_hub
     - field.field.node.customer_story.field_industry
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_job_profile
@@ -27,7 +28,6 @@ dependencies:
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
-    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -134,6 +134,7 @@ hidden:
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
+  field_hub: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true

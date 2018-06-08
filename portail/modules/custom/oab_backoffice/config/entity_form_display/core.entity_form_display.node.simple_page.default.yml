@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.simple_page.field_end_date
     - field.field.node.simple_page.field_grouping_title
     - field.field.node.simple_page.field_highlight
+    - field.field.node.simple_page.field_hub
     - field.field.node.simple_page.field_industry
     - field.field.node.simple_page.field_insight
     - field.field.node.simple_page.field_job_profile
@@ -29,7 +30,6 @@ dependencies:
     - field.field.node.simple_page.field_subhome
     - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
-    - field.field.node.simple_page.field_wysiwyg_rebond
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
   module:
@@ -88,6 +88,7 @@ third_party_settings:
         - field_region
         - field_job_profile
         - field_insight
+        - field_hub
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -100,13 +101,13 @@ third_party_settings:
       label: Classify
     group_publish:
       children:
+        - moderation_state_update
         - field_content_owner
         - field_email_owner
         - group_content_worthy_period
         - promote
         - path
         - field_metatags
-        - moderation_state_update
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -149,7 +150,6 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
-        - field_wysiwyg_rebond
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
       weight: 5
@@ -236,6 +236,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_hub:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_industry:
     weight: 27
@@ -370,7 +376,7 @@ content:
     region: content
   moderation_state_update:
     type: inline_entity_form_complex
-    weight: 19
+    weight: 11
     settings:
       override_labels: true
       label_singular: 'Moderation state update'
@@ -417,6 +423,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_market_segment: true
