@@ -44,7 +44,7 @@ oab.gdpr_settings:
     _form: '\Drupal\oab_backoffice\Form\OabSettingsGdprForm'
     _title: 'GDPR/Webform settings'
   requirements:
-    _permission: 'administer site configuration'
+    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
 
 #page d'administration par défaut
 oab_backoffice.export_file_list:
