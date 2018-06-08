@@ -30,6 +30,14 @@ oab.general_settings:
   requirements:
     _permission: 'administer site configuration'
 
+oab.specific_access_settings:
+  path: '/admin/structure/oab/settings/specific-access'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm'
+    _title: 'Specific access settings'
+  requirements:
+    _permission: 'administer site configuration'
+
 oab.settings_ece:
   path: '/admin/structure/oab/settings/ece'
   defaults:
@@ -37,6 +45,7 @@ oab.settings_ece:
     _title: 'ECE settings'
   requirements:
     _permission: 'administer site configuration'
+
 #page d'administration par défaut
 oab_backoffice.export_file_list:
   path: 'admin/obs_backoffice/dl-file-list'
@@ -44,11 +53,11 @@ oab_backoffice.export_file_list:
     _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::runBatch'
     _title: 'Export File list'
   requirements:
-    _permission: 'administer site configuration'
+    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
 oab_backoffice.download_file_list:
   path: 'admin/obs_backoffice/dl-file-list/download'
   defaults:
     _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::endingPage'
     _title: 'Export File list'
   requirements:
-    _permission: 'administer site configuration'
+    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
