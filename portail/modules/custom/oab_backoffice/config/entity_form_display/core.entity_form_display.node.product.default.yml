@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.product.field_end_date
     - field.field.node.product.field_file
     - field.field.node.product.field_highlight
+    - field.field.node.product.field_hub
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
@@ -133,6 +134,7 @@ third_party_settings:
         - field_job_profile
         - field_market_segment
         - field_market_segment_dvi
+        - field_hub
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -240,6 +242,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_hub:
+    weight: 40
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_industry:
     weight: 36
@@ -424,6 +432,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

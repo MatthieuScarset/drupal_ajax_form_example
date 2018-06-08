@@ -7,6 +7,7 @@
 
 
 .page-node-type-homepage #block-socialshareblock,
+.page-node-type-homepage #block-theme-oab-hub-socialshareblock,
 .page-node-type-homepage-eclairage #block-socialshareblock {
     max-width: none;
 }

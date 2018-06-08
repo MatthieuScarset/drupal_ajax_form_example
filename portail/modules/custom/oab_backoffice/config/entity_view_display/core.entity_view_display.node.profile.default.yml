@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.node.profile.body
     - field.field.node.profile.field_first_name
+    - field.field.node.profile.field_hub
     - field.field.node.profile.field_last_name
     - field.field.node.profile.field_metatags
     - field.field.node.profile.field_social_account
@@ -67,8 +68,9 @@ content:
     region: content
   links:
     weight: 100
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   langcode: true
+  field_hub: true

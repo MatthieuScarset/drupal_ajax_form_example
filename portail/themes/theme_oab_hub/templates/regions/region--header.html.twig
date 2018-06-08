@@ -1,0 +1,120 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ *
+ * @ingroup templates
+ */
+#}
+{%
+    set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+]
+%}
+
+{% if content %}
+
+  <div{{ attributes.addClass(classes) }}>
+      {{ elements.cookiecomplianceblock }}
+
+      {#Begin Top Navbar Menu#}
+    <div class="hidden-xs ">
+      <div id="navtop">
+        <nav id="top_navbar" class="navbar navbar-default container">
+          <div class="container">
+            <div class="navbar-header hidden">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-navbar-collapse">
+                <span class="sr-only">Menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="top-navbar-collapse" class="collapse navbar-collapse">
+              <div class="hidden-lg hidden-md nav navbar-nav nav-menu">
+                  {#TODO : insert here a divider to separate sections#}
+                  {#Render the main mega menu items in the top navbar #}
+                  {#only to display them when collapsed #}
+                  {{ elements|hub_getMenu('mainmenu')  }}
+
+              </div>
+
+              <div id="login_block" class="nav navbar-nav">
+                  {#Render the top navbar items#}
+                  {{ elements|hub_getMenu('topnavbar')  }}
+
+              </div>
+
+              <div class="nav navbar-nav navbar-right">
+                  {#TODO : insert here a divider to separate sections#}
+                  {#Render the top account items on the right#}
+                  {{ elements|hub_getMenu('toprightnavbar')  }}
+
+              </div>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+      </div>
+    </div>
+      {#End Top navbar#}
+
+      {#Begin Main Mega Menu#}
+      {#<nav id="main_nav" class="navbar subnav navbar-inverse mega-menu navbar-fixed-top" role="navigation">#}
+    <nav id="main_nav" class="navbar subnav mega-menu" role="navigation">
+      <div class="container-fluid-navbar">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="hidden-lg pull-right menu-xs" >
+
+          <div class="menu-loupe-xs menu-mss-xs">
+            <section id="block-righticonblock" class="contextual-region block clearfix">
+                {% if (language == 'en') %}
+                  <a href="https://my-service-space.orange-business.com/MSSLoginForm/public/welcome-action.do" target="_self" title="My Service Space" alt="My Service Space" class="link-white"><i class="glyphicon icon icon-avatar"></i></a>
+                {% endif %}
+                {% if (language == 'fr') %}
+                  <a href="https://espaceclient.orange-business.com/group/ece2/home?codeContexte=eceDefault" target="_self" title="Espace Client Entreprise" alt="Espace Client Entreprise" class="link-white"><i class="glyphicon icon icon-avatar"></i></a>
+                {% endif %}
+            </section>
+          </div>
+
+          <button type="button" class="sandwich-button navbar-toggle " data-toggle="collapse" data-target="#navbar-collapse-mega">
+            <i class="fa fa-times close-env-info" aria-hidden="true"></i>
+            <span class="sr-only">Menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-header logo">
+            {% if elements.theme_oab_hub_branding %}
+                {{ elements.theme_oab_hub_branding }}
+            {% endif %}
+        </div>
+
+
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-inverse" id="navbar-collapse-mega">
+            {#Render the main mega menu items in the top navbar #}
+
+          <div class="nav navbar-nav nav-menu">
+              {{ elements|hub_getMenu('mainmenu')  }}
+          </div>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+      {#End Main Mega Menu#}
+
+  </div>
+{% endif %}

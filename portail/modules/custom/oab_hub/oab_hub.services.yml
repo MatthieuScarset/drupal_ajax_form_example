@@ -1,0 +1,13 @@
+services:
+  oab_hub.theme_negotiator:
+    class: Drupal\oab_hub\Theme\OabHubThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 10 }
+  oab_hub.theme_negotiator_tac_lite:
+    class: Drupal\oab_hub\Theme\OabHubTacLiteThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 10 }
+  oab_hub.twig.hubExtension:
+     class: Drupal\oab_hub\Twig\HubExtension
+     tags:
+        - { name: twig.extension }

@@ -1,0 +1,33 @@
+# core: 8.x
+type: theme
+base theme: theme_boosted
+
+name: 'Theme OAB Hub'
+description: 'Sous-theme d orange Boosted utilisé pour les hub'
+package: 'Theme OAB Hub'
+
+regions:
+  header: 'Header'
+  top_zone: 'Top Zone'
+  pre_content: 'Pre Content'
+  content: 'Content'
+  sidebar: 'Side Bar'
+  prefooter: 'Pre Footer'
+  footer: 'Footer'
+
+libraries:
+  - 'theme_oab_hub/global-styling'
+
+# The following are dynamic library overrides based on certain critera,
+# usually a theme setting.
+#
+# @see \Drupal\boosted\Plugin\Alter\LibraryInfo::alter()
+#
+#  core/drupal.dialog: boosted/drupal.dialog
+#  core/drupal.dialog.ajax: boosted/drupal.dialog.ajax
+
+# Information added by Drupal.org packaging script on 2015-12-19
+version: '8.0.0'
+core: '8.x'
+project: 'theme_oab_hub'
+datestamp: 1450531741
