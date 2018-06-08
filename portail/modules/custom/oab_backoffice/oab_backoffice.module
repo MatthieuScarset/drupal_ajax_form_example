@@ -98,8 +98,9 @@ function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operatio
     ##Pour l'accès aux données et à leur telechargement
     if ($operation == "submission_view_any" && in_array('webform_business_analyst', $account->getRoles())) {
         ##Je recupère la liste des business analysts du formulaire pour checker que les utilisateurs en font partis
-        $oab_gdpr_settings = $entity->getThirdPartySettings('oab_gdpr', 'gdpr_business_analysts');
-        if (array_key_exists($account->id(), $oab_gdpr_settings['gdpr_business_analysts'])) {
+        $business_analaysts_list = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts');
+
+        if (array_key_exists($account->id(), $business_analaysts_list)) {
             return Drupal\Core\Access\AccessResult::allowed();
         }
 
@@ -299,12 +300,6 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
 
     //Lorsque le formulaire est créé par le webform admin, on n'envoie pas de mail
     if (!in_array('webform_admin', $current_user->getRoles())) {
-        $token_service = \Drupal::token();
-
-        $config = \Drupal::config('oab.gdpr_settings');
-
-        /*\Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_object'), ['webform' => $entity]));
-        \Drupal::logger('oab_gdpr')->notice($token_service->replace($config->get('mail_spoc_body'), ['webform' => $entity]));*/
 
         #mail to SPOC Security
         $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
@@ -353,7 +348,7 @@ function _oab_webform_gdpr_submit(&$form, \Drupal\Core\Form\FormStateInterface $
  * Liste des utilisateurs ayant le role Business Analyst
  */
 function _business_analysts_list() {
-    $query = db_select('users', 'u');
+    $query = \Drupal::database()->select('users', 'u');
     $query->fields('u', array('uid'));
     $query->innerJoin('user__roles', 'r', 'r.entity_id = u.uid');
     $query->join('users_field_data', 'd', 'u.uid = d.uid');
@@ -474,7 +469,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             '#multiple' => true,
             '#title'    => t('Business Analysts'),
             '#options' => _business_analysts_list(),
-            '#size' => 10,
             '#description' => "Utilisez ctrl+click pour selectionner plusieurs utilisateurs",
             "#default_value"  => $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts')
         ];
@@ -1330,7 +1324,7 @@ function oab_backoffice_cron() {
 
             if ($webform_entity !== null) {
 
-                $expire_date = $webform_entity->getThirdPartySettings('oab_gdpr', 'gdpr_expiration_date');
+                $expire_date = $webform_entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date');
 
                 if ($expire_date == null || $expire_date == ""){
                     ## SI le formulaire n'a pas de date d'expiration, je supprime toutes les soumissions qui ont plus de 6 mois
