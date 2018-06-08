@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.industry.field_end_date
     - field.field.node.industry.field_highlight
     - field.field.node.industry.field_hub
+    - field.field.node.industry.field_hub_portal
     - field.field.node.industry.field_local_nav
     - field.field.node.industry.field_meta_description
     - field.field.node.industry.field_meta_title
@@ -132,6 +133,7 @@ hidden:
   field_email_owner: true
   field_end_date: true
   field_hub: true
+  field_hub_portal: true
   field_market_segment: true
   field_start_date: true
   field_top_zone: true

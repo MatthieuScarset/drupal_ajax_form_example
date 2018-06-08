@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.full_html.field_display_title
     - field.field.node.full_html.field_end_date
     - field.field.node.full_html.field_hub
+    - field.field.node.full_html.field_hub_portal
     - field.field.node.full_html.field_industry
     - field.field.node.full_html.field_insight
     - field.field.node.full_html.field_job_profile
@@ -103,6 +104,7 @@ hidden:
   field_display_title: true
   field_end_date: true
   field_hub: true
+  field_hub_portal: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true

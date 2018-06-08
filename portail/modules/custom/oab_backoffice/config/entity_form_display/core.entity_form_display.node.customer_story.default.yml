@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.customer_story.field_file
     - field.field.node.customer_story.field_highlight
     - field.field.node.customer_story.field_hub
+    - field.field.node.customer_story.field_hub_portal
     - field.field.node.customer_story.field_industry
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_job_profile
@@ -29,6 +30,7 @@ dependencies:
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
+    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -87,6 +89,7 @@ third_party_settings:
         - field_job_profile
         - field_insight
         - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 21
       format_type: tab
@@ -241,6 +244,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 55
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_industry:
     weight: 49
