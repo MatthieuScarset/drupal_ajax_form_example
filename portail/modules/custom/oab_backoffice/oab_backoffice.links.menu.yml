@@ -26,6 +26,7 @@ oab.general_settings:
   description: 'Configure general site settings'
   weight: -20
 
+
 oab.gdpr_settings:
   title: GDPR/Webform settings
   route_name: oab.gdpr_settings
@@ -33,9 +34,23 @@ oab.gdpr_settings:
   description: 'Configure GDPR/Webforms settings'
   weight: -20
 
+oab.specific_access_settings:
+  title: Specific access settings
+  route_name: oab.specific_access_settings
+  parent: oab.settings
+  description: 'Manage specific access to admin pages'
+  weight: -20
+
 oab.settings_ece:
   title: ECE settings
   route_name: oab.settings_ece
   parent: oab.settings
   description: 'Configure oab ECE settings'
+  weight: -20
+
+oab.export_file_list:
+  title: Export File list
+  route_name: oab_backoffice.export_file_list
+  parent: oab.settings
+  description: 'Export File list'
   weight: -20
