@@ -44,11 +44,11 @@ oab_backoffice.export_file_list:
     _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::runBatch'
     _title: 'Export File list'
   requirements:
-    _permission: 'administer site configuration'
+    _role: 'administrator+digital_admin'
 oab_backoffice.download_file_list:
   path: 'admin/obs_backoffice/dl-file-list/download'
   defaults:
     _controller: '\Drupal\oab_backoffice\Controller\OabExportFileListController::endingPage'
     _title: 'Export File list'
   requirements:
-    _permission: 'administer site configuration'
+    _role: 'administrator+digital_admin'
