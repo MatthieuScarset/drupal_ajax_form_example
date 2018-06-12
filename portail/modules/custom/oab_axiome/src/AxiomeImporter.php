@@ -501,7 +501,7 @@ class AxiomeImporter{
                             $node = Node::load($nid);
                             $node->setChangedTime(time());
                             //$node->save(); -> Pas besoin, déjà save plus bas
-                            $node->set('moderation_state', array('target_id' => 'needs_review'));
+                            //$node->set('moderation_state', array('target_id' => 'needs_review'));
                             $this->message .= "microtime ".time()."\n";
 
                         } else {// Si c'est une nouvelle fiche
@@ -518,7 +518,7 @@ class AxiomeImporter{
                                 'langcode'    => $language,
                                 'promoted'    => 0,
                                 'sticky'      => 0,
-                                'moderation_state' => 'draft',
+                                'moderation_state' => 'published',
                             ]);
                             $node->save();
                             /*$title_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($xpath_fiche->getAttribute('nom_offre_commerciale'));
