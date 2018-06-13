@@ -20,6 +20,7 @@ class OabHubController extends ControllerBase {
     const FIELD_MN_SUFFIXE_ID = 'field_hub_machine_name_suffixe';
     const FIELD_URL_ID = 'field_hub_url';
     const NODE_FIELD_HUB = 'field_hub';
+    const NODE_FIELD_SHARE_ON_PORTAL = 'field_hub_portal';
 
     private static $elements = [
         'top_navbar' => "Top Navbar",

@@ -198,6 +198,15 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
          * Ajouter un if pour checker si le portail est selectionné ici
          * c'est pour laisser l'alias de base qui pointe vers le portail
          */
+        $on_portail = $context['data']['node']->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL);
+        if ($on_portail !== null) {
+            //kint($on_portail->first()->getValue()); die();
+            $on_portail_value = $on_portail->first()->getValue();
+            if ($on_portail_value['value'] == 1) {
+                $hasPortail = true;
+                oab_hub_drupal_message('URL créée : ', "$alias");
+            }
+        }
 
         $hubs = $context['data']['node']->get(OabHubController::NODE_FIELD_HUB);
         $langcode =  $context['data']['node']->language()->getId();
@@ -216,7 +225,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
                     $alias = "/" . $term_url . $original_alias;
                 } else {
                     \Drupal::service('path.alias_storage')
-                        ->save($context['node']['source'], "/" . $term_url . $original_alias, $langcode);
+                        ->save($context['source'], "/" . $term_url . $original_alias, $langcode);
                 }
                 oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
                 $i++;
