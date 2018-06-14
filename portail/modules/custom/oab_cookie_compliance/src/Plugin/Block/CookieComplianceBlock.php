@@ -19,40 +19,34 @@ use Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm;
 
 class CookieComplianceBlock extends BlockBase {
 
-    const COOKIE_NAME =             'drupal_oab_cookie-compliance_hide-message';
-    const COOKIE_NAME_FIRST_VISIT = 'drupal_oab_cookie-compliance_first-visit';
-    const BLOCK_ID = 'cookie-compliance-block';
-    const EXPIRATION_NB_MONTH = 13;
+    const COOKIE_NAME               = 'drupal_oab_cookie-compliance_hide-message';
+    const BLOCK_ID                  = 'cookie-compliance-block';
+    const EXPIRATION_NB_MONTH       = 13;
 
     public function build(){
 
-        if (!isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME])
+        /*if (!isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME])
             && !isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT]) ) {
             CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT);
 
         } elseif (isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT])) {
             CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT, -1);
             CookieComplianceBlock::setCookie(CookieComplianceBlock::COOKIE_NAME);
-        }
+        }*/
 
-        $block = array();
-        if (!isset($_COOKIE[self::COOKIE_NAME]) && !isset($_COOKIE[self::COOKIE_NAME_FIRST_VISIT]) ) {
-
-            $config = \Drupal::config(CookieComplianceSettingsForm::CONFIG_NAME);
-            $block = array (
-                '#theme' => 'block__cookie_compliance_block',
-                '#message' => $config->get('cookie_text'),
-                '#link_text' => $config->get('cookie_link_text'),
-                '#link_url'  => $config->get('cookie_url'),
-                '#block_id'  => self::BLOCK_ID,
-                '#attached' => array(
-                    'library' => array(
-                        'oab_cookie_compliance/block-library',
-                    ),
-                )
-            );
-
-        }
+        $config = \Drupal::config(CookieComplianceSettingsForm::CONFIG_NAME);
+        $block = array (
+            '#theme' => 'block__cookie_compliance_block',
+            '#message' => $config->get('cookie_text'),
+            '#link_text' => $config->get('cookie_link_text'),
+            '#link_url'  => $config->get('cookie_url'),
+            '#block_id'  => self::BLOCK_ID,
+            '#attached' => array(
+                'library' => array(
+                    'oab_cookie_compliance/block-library',
+                ),
+            )
+        );
 
         $block['#cache'] = array(
             'max-age' => 0
@@ -73,7 +67,7 @@ class CookieComplianceBlock extends BlockBase {
     }
 
 
-    public static function setCookie($cookieName, $expTime =  null) {
+    /*public static function setCookie($cookieName, $expTime =  null) {
         if ($expTime === null)
             $expTime = self::getExpiration();
 
@@ -82,6 +76,6 @@ class CookieComplianceBlock extends BlockBase {
 
     private static function getExpiration() {
         return date("U", strtotime('+' . self::EXPIRATION_NB_MONTH .' months'));
-    }
+    }*/
 
 }

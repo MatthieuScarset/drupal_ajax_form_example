@@ -5,6 +5,8 @@ namespace Drupal\oab_axiome\Controller;
 
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\oab_axiome\AxiomeImporter;
+use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 
 
 class OabAxiomeController extends ControllerBase
@@ -26,5 +28,17 @@ class OabAxiomeController extends ControllerBase
     return $build;
 
 
+  }
+
+
+  public static function getSousFamille($nid) {
+      $config = \Drupal::config(OabAxiomeSettingsForm::getConfigName());
+      $values = $config->get(AxiomeImporter::CONFIG_VALUE_NAME);
+
+      $ret = false;
+      if (isset($values[$nid]))
+          $ret = $values[$nid];
+
+      return $ret;
   }
 }

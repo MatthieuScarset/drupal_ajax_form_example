@@ -12,6 +12,8 @@ dependencies:
     - field.field.node.blog_post.field_email_owner
     - field.field.node.blog_post.field_end_date
     - field.field.node.blog_post.field_highlight
+    - field.field.node.blog_post.field_hub
+    - field.field.node.blog_post.field_hub_portal
     - field.field.node.blog_post.field_industry
     - field.field.node.blog_post.field_insight
     - field.field.node.blog_post.field_job_profile
@@ -30,7 +32,6 @@ dependencies:
     - field.field.node.blog_post.field_subhome
     - field.field.node.blog_post.field_thematic
     - field.field.node.blog_post.field_visual
-    - field.field.node.blog_post.field_wysiwyg_rebond
     - field.field.node.blog_post.moderation_state_update
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post
@@ -90,6 +91,8 @@ third_party_settings:
         - field_blog_thematic
         - field_blog_format
         - field_insight
+        - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 5
       format_type: tab
@@ -248,6 +251,19 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
+  field_hub:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 34
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_industry:
     weight: 27
     settings: {  }
@@ -377,7 +393,7 @@ content:
     region: content
   moderation_state_update:
     type: inline_entity_form_complex
-    weight: 13
+    weight: 11
     settings:
       override_labels: true
       label_singular: 'Moderation state update'
@@ -442,6 +458,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_market_segment: true

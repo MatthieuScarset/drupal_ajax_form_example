@@ -530,6 +530,10 @@ function oab_tristan_update_8068() {
 }
 
 /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> updates
  * Création d'une vue pour l'export des documents du site
  */
 function oab_tristan_update_8069() {
@@ -577,17 +581,62 @@ function oab_tristan_update_8075() {
     oabt_YmlImport('field.storage.node.field_solution_banner_title_colo.yml');
 }
 
+
 /**
  * Je relance la lecture du referentiel axiome pour sauvegarder les sous-familles
  */
 function oab_tristan_update_8076() {
     include_once('updates/update_8076.inc');
-}
 
+}
 
 /**
  * Modification du tri des subhomes : on tri par la date de modification et plus par celle de creation
  */
 function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
+}
+
+
+/**
+ * Ajout des mails des webforms en conf
+ */
+function oab_tristan_update_8078() {
+    include_once('updates/update_8078.inc');
+}
+
+/**
+ * Création des droits des webforms
+ */
+function oab_tristan_update_8079() {
+    include_once('updates/update_8079.inc');
+}
+
+/**
+ * Création d'un role Webform business Analyst
+ */
+function oab_tristan_update_8080()
+{
+    include_once('updates/update_8080.inc');
+}
+
+/**
+ * ajout de trads pour les sites ES et PT-BR
+ */
+function oab_tristan_update_8081()
+{
+    include_once('updates/update_8081.inc');
+}
+/*
+ * Rechargement de la vue subhome pour modification des tris
+ */
+function oab_tristan_update_8082() {
+    oabt_YmlImport('views.view.subhomes.yml');
+}
+
+/**
+ * Rechargement de la vue Document List pour MAJ des droits d'accès
+ */
+function oab_tristan_update_8083() {
+    oabt_YmlImport('views.view.document_list.yml');
 }

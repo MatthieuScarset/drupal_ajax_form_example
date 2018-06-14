@@ -11,6 +11,8 @@ dependencies:
     - field.field.node.simple_page.field_end_date
     - field.field.node.simple_page.field_grouping_title
     - field.field.node.simple_page.field_highlight
+    - field.field.node.simple_page.field_hub
+    - field.field.node.simple_page.field_hub_portal
     - field.field.node.simple_page.field_industry
     - field.field.node.simple_page.field_insight
     - field.field.node.simple_page.field_job_profile
@@ -28,7 +30,6 @@ dependencies:
     - field.field.node.simple_page.field_subhome
     - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
-    - field.field.node.simple_page.field_wysiwyg_rebond
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
   module:
@@ -120,6 +121,8 @@ hidden:
   field_page_du_site_2: true
   field_rebond_document: true
   field_region: true
+  field_hub: true
+  field_hub_portal: true
   field_start_date: true
   field_subhome: true
   field_thematic: true

@@ -1,0 +1,24 @@
+<?php
+
+use Drupal\oab_akamai\Form\OabAkamaiForm;
+
+function oab_akamai_install() {
+  drupal_set_installed_schema_version('oab_akamai', 8000);
+    // Set the site name.
+    \Drupal::configFactory()->getEditable(OabAkamaiForm::getConfigName())
+        ->set('enable_hook', 0 )
+        ->set('auth_prefixe', "EG1-HMAC-SHA256 ")
+        ->set('base_url', "akab-lgsc3ap2lfgdhc65-gnbwwdu5i4yvnlfx.purge.akamaiapis.net" )
+        ->set('req_path', "/ccu/v3/delete/url/production" )
+        ->set('access_token', "akab-zcn5oqfkvcbrs52g-mu6txykkxrrhm5im")
+        ->set('client_token', "akab-3eq5kc5srq6rtq6n-sfxlqqrosopuhfyp" )
+        ->set('client_secret', "9nGqXelX88v/1/J0TDo6dOLJst3u8C0qo+pkp4p4WF0=" )
+        ->set('varnish_ip', "10.200.2.195" )
+        ->save();
+}
+
+/*
+function oab_akamai_update_8001() {
+  include_once("updates/update_8001.inc");
+}
+*/

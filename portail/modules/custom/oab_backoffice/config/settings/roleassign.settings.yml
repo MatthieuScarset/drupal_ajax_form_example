@@ -1,0 +1,15 @@
+roleassign_roles:
+  chief_editor: chief_editor
+  digital_admin: digital_admin
+  contributor: contributor
+  webform_manager: webform_manager
+  webform_business_owner: webform_business_owner
+  webform_admin: webform_admin
+  webform_spoc_securite: webform_spoc_securite
+  chief_editor_hub: chief_editor_hub
+  webform_business_analyst: webform_business_analyst
+  administrator: '0'
+  fh_backbones: '0'
+  dvi: '0'
+_core:
+  default_config_hash: iKucdYPrf1EPMz6Y3s71EADiRcAiwoLTIw9_JoxH-Jg

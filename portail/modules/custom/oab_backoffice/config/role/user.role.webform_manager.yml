@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies: {  }
+id: webform_manager
+label: 'Webform Manager'
+weight: -1
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access webform overview'
+  - 'administer nodes'
+  - 'create webform'
+  - 'create webform content'
+  - 'delete all revisions'
+  - 'delete own webform'
+  - 'delete own webform content'
+  - 'delete webform revisions'
+  - 'delete webform submissions own node'
+  - 'edit own webform'
+  - 'edit own webform content'
+  - 'edit webform submissions own node'
+  - 'revert all revisions'
+  - 'revert webform revisions'
+  - 'use text format full_html'
+  - 'view all revisions'
+  - 'view own webform submission'
+  - 'view the administration theme'
+  - 'view webform revisions'
+  - 'view webform submissions own node'

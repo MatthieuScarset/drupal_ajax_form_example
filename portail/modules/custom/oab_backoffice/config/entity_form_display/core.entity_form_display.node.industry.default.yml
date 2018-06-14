@@ -1,4 +1,3 @@
-uuid: 85031f3a-be20-43bc-bbe6-447651a7b1c3
 langcode: en
 status: true
 dependencies:
@@ -10,6 +9,8 @@ dependencies:
     - field.field.node.industry.field_email_owner
     - field.field.node.industry.field_end_date
     - field.field.node.industry.field_highlight
+    - field.field.node.industry.field_hub
+    - field.field.node.industry.field_hub_portal
     - field.field.node.industry.field_local_nav
     - field.field.node.industry.field_meta_description
     - field.field.node.industry.field_meta_title
@@ -19,11 +20,13 @@ dependencies:
     - field.field.node.industry.field_top_zone_background
     - field.field.node.industry.field_top_zone_bg_mobile
     - field.field.node.industry.field_visual
+    - field.field.node.industry.moderation_state_update
     - node.type.industry
   module:
     - datetime
     - entity_browser
     - field_group
+    - inline_entity_form
     - paragraphs
     - path
     - text
@@ -68,7 +71,9 @@ third_party_settings:
         required_fields: true
       label: Write
     group_classify:
-      children: {  }
+      children:
+        - field_hub
+        - field_hub_portal
       parent_name: group_onglets
       weight: 18
       format_type: tab
@@ -115,7 +120,7 @@ third_party_settings:
         - field_start_date
         - field_end_date
       parent_name: group_publish
-      weight: 12
+      weight: 13
       format_type: fieldset
       format_settings:
         id: ''
@@ -159,7 +164,7 @@ content:
     region: content
   field_email_owner:
     type: string_textfield
-    weight: 11
+    weight: 12
     region: content
     settings:
       size: 60
@@ -178,6 +183,19 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_hub:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 16
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_industry:
     weight: 27
@@ -308,9 +326,22 @@ content:
       include_locked: true
     third_party_settings: {  }
     region: content
+  moderation_state_update:
+    type: inline_entity_form_complex
+    weight: 11
+    settings:
+      override_labels: true
+      label_singular: 'Moderation state update'
+      label_plural: 'Moderation state updates'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
+    third_party_settings: {  }
+    region: content
   path:
     type: path
-    weight: 14
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -318,7 +349,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 14
     third_party_settings: {  }
     region: content
   status:
@@ -344,6 +375,11 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   sticky: true
