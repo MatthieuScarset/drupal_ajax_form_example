@@ -1067,3 +1067,27 @@ function getRegions(){
     $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
   }
 }*/
+
+/**
+ * Pour retrouver tous les Alias d'un node
+ * @param $nid
+ * @return array
+ */
+function oab_getAllPathFromNID($nid, $langcode = null) {
+    $query = Database::getConnection()->select('url_alias', 'u');
+
+    $query->fields('u', ['alias']);
+    $query->condition('source', '/node/' . $nid);
+
+    if ($langcode !== null)
+        $query->condition('langcode', $langcode);
+
+    $result = $query->execute();
+    $data = $result->fetchAll();
+
+    $ret = [];
+    foreach ($data as $row) {
+        $ret[] = ($langcode !== null) ?  "/$langcode" . $row->alias : $row->alias;
+    }
+    return $ret;
+}
