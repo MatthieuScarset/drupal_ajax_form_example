@@ -9,6 +9,9 @@ use Drupal\Core\Url;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\oab_hub\Controller\OabHubController;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
 
 class NodeSourcePathEvent implements EventSubscriberInterface {
 
@@ -29,16 +32,14 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      *
      * redirect source node url to languaged alias
      */
-    public function onRequest(GetResponseEvent $event)
-    {
-
+    public function onRequest(GetResponseEvent $event) {
         $request = $event->getRequest();
 
         if (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
-        || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException"){
+            || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException") {
+
             $code = $request->attributes->get('exception')->getStatusCode();
-            if (!in_array($code, array(403, 404)))
-            {
+            if (!in_array($code, array(403, 404))) {
                 $attr = $event->getRequest()->attributes;
                 $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
 
@@ -61,10 +62,11 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                         }
 
                         $options = [
-                          'language'  => $node_language,
-                          'query'     => $request->query->all()
+                            'language' => $node_language,
+                            'query' => $request->query->all()
                         ];
-                        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()],$options);$new_url = $url->toString();
+                        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], $options);
+                        $new_url = $url->toString();
                         $current_uri = $_SERVER['REQUEST_URI'];
 
                         if ($new_url != ''
@@ -76,11 +78,12 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     }
                 }
             }
-        }else{
+        } else {
             //page existante avec un acces granted mais pas d'alias
             $attr = $event->getRequest()->attributes;
             $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
-          
+
+
             if (NULL !== $attr
                 && NULL !== $attr->get('node')
                 && $attr->get('_controller') == '\Drupal\node\Controller\NodeViewController::view'
@@ -99,15 +102,22 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                         $node_language = \Drupal::languageManager()->getCurrentLanguage();
                     }
                     $options = [
-                      'language'  => $node_language,
-                      'query'     => $request->query->all()
+                        'language' => $node_language,
+                        'query' => $request->query->all()
                     ];
-                    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()],$options);
+                    $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], $options);
                     $new_url = $url->toString();
                     $current_uri = $_SERVER['REQUEST_URI'];
 
+
+                    ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
+                    ## et je teste s'ils existent dans la liste
+                    $pathList = oab_getAllPathFromNID($node->id(), $node_langId);
+
+
                     if ($new_url != ''
                         && $new_url !== $current_uri
+                        && !in_array($current_uri, $pathList)
                     ) {
                         $response = new RedirectResponse($new_url, 301);
                         $event->setResponse($response);
@@ -116,4 +126,6 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
             }
         }
     }
+
+
 }
