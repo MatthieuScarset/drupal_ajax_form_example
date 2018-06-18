@@ -125,34 +125,7 @@ class RouteNormalizerRequestSubscriber implements EventSubscriberInterface {
       $original_uri = urldecode($original_uri);
       $redirect_uri = urldecode($redirect_uri);
 
-
-      ## Petit hack pour le hub, je test si ca fait partie d'un des alias du node actuel
-      $hack_positif = true;
-        $attr = $event->getRequest()->attributes;
-        $is_front_page = \Drupal::service('path.matcher')->isFrontPage();
-
-        ## Recuperation du node et qques vérifications pour éviter les erreurs
-        if (NULL !== $attr
-            && NULL !== $attr->get('node')
-            && $attr->get('_controller') == '\Drupal\node\Controller\NodeViewController::view'
-            && !$is_front_page
-        ) {
-            $node = $attr->get('node');
-
-            if (is_object($node)
-                && get_class($node) === 'Drupal\node\Entity\Node'
-            ) {
-                $node_langId = $node->language()->getId();
-                $pathList = oab_getAllPathFromNID($node->id(), $node_langId);
-
-                ## Je vérifie que l'URL fait partie de la liste des alias du node
-                if (!in_array($request->getRequestUri(), $pathList)) {
-                    $hack_positif = false;
-                }
-            }
-        }
-
-      if ($redirect_uri != $original_uri && !$hack_positif) {
+      if ($redirect_uri != $original_uri) {
         $response = new TrustedRedirectResponse($redirect_uri, $this->config->get('default_status_code'));
         $response->headers->set('X-Drupal-Route-Normalizer', 1);
         $event->setResponse($response);
