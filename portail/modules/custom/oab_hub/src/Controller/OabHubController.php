@@ -559,7 +559,15 @@ class OabHubController extends ControllerBase {
             }
         }else{
             //context hub
-            $new_url = $url_cible;
+            if($route_parts[1]<>$route_parts_cible[1]){
+                //oabt($route_parts[1]);
+                //oabt($route_parts_cible[1]);
+                $route_parts_cible[1] == $route_parts[1];
+                $new_url = "/" . implode("/",$route_parts_cible);
+            }else{
+                $new_url = $url_cible;
+            }
+
         }
 
         return $new_url;
