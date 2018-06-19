@@ -531,7 +531,11 @@ class OabHubController extends ControllerBase {
             $is_hub_curr = in_array($part_url, $urls_hub);
         }
 
-        $route_parts_cible = explode('/',$url_cible->toString());
+        if(is_object($url_cible)){
+            $route_parts_cible = explode('/',$url_cible->toString());
+        }else{
+            $route_parts_cible = explode('/',$url_cible);
+        }
         if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0 ) {
             array_shift($route_parts_cible);
         }
