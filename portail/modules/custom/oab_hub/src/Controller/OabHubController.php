@@ -263,10 +263,10 @@ class OabHubController extends ControllerBase {
 
             ##test de l'existance d'un block
             $i = 0;
-            $test_block = \Drupal\block_content\Entity\BlockContent::load($block_id);
+            $test_block = Block::load($block_id);
             while($test_block !== null) {
-                $block_id = self::generateMenuId($base_id, $machineName, $term_langcode, $i);
-                $test_block = \Drupal\block_content\Entity\BlockContent::load($block_id);
+                $block_id = self::generateBlockId($base_id, $machineName, $term_langcode, $i);
+                $test_block = Block::load($block_id);
                 $i++;
             }
 
