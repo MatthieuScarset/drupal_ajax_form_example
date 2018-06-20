@@ -236,7 +236,14 @@ class OabExportFileListController extends ControllerBase {
      * Suppression de tous les fichiers du dossier de sauvegarde
      */
     public static function clearStorageDir() {
-
+        if ($dir = opendir(self::$dir)) {
+            while (false !== ($entry = readdir($dir))) {
+                if ($entry != "." && $entry != "..") {
+                    unlink(self::$dir . "/" . $entry);
+                }
+            }
+            closedir($dir);
+        }
     }
 
 
