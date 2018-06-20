@@ -542,7 +542,7 @@ class AxiomeImporter{
                                    'langcode'    => $language,
                                    'promoted'    => 0,
                                    'sticky'      => 0,
-                                   'moderation_state' => 'draft',
+                                   'moderation_state' => 'published',
                                ]);
                                $node->save();
 
