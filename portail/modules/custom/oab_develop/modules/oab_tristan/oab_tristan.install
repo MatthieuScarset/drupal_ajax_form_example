@@ -591,3 +591,10 @@ function oab_tristan_update_8076() {
 function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+/**
+ * Création de la subhome Analysts
+ */
+function oab_tristan_update_8084() {
+    include_once('updates/update_8084.inc');
+}
