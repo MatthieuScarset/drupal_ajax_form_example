@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Drupal\user\PrivateTempStoreFactory;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OabExportFileListController extends ControllerBase {
     private static $dir = "public://export_document";
+    private static $log_name = "ExportFile";
 
     public function runBatch(Request $request) {
 
@@ -34,6 +36,19 @@ class OabExportFileListController extends ControllerBase {
                 }
             }
         }
+
+        ## Si le dossier n'existe pas, je tente de le créer
+        if (!file_exists(self::$dir)) {
+            try {
+                mkdir(self::$dir, 0775);
+            } catch (\exception $e) {
+                drupal_set_message("Erreur lors de la création du dossier d'export. Voir en log pour plus d'informations", 'error', true);
+                \Drupal::logger(self::$log_name)->notice("Erreur lors de la création du dossier d'export avec le message : " . $e->getMessage());
+                $response = new RedirectResponse($originPath);
+                $response->send();
+            }
+        }
+
 
         $view = \Drupal\views\Views::getView('document_list');
         $view->get_total_rows = true;
@@ -77,7 +92,13 @@ class OabExportFileListController extends ControllerBase {
            $col_name[] = $field_data->options['label'];
         }
 
-        $this->write_file(array($col_name), $file_name);
+        ## On remonte une erreur si on n'arrive pas à écrire le fichier
+        if (false === $this->write_file(array($col_name), $file_name)) {
+            \Drupal::logger(self::$log_name)->notice("Erreur lors de la creation du fichier");
+            drupal_set_message("Erreur lors de la creation du fichier", 'error', true);
+            $response = new RedirectResponse($originPath);
+            $response->send();
+        }
 
         ##j'enregistre l'URL d'origine (utilisée pour créer un lien de retour à la fin du batch)
         $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
@@ -166,31 +187,19 @@ class OabExportFileListController extends ControllerBase {
             }
             $ret[] = $row;
         }
-        #kint($ret);
 
 
-        ## Je check que le dossier existe
-        if (!file_exists(self::$dir)) {
-            mkdir(self::$dir, 0770, TRUE);
+        $success = self::write_file($ret, $file_name);
+        #On remonte une erreur si le fichier n'est pas ecrit
+        if ($success === false) {
+            \Drupal::logger(self::$log_name)->notice("Erreur lors de la creation du fichier");
+            drupal_set_message("Erreur lors de la creation du fichier", 'error', true);
+
+            $context['results'][] = 'Erreur lors de la creation du fichier';
+            $context['finished'] = 1.0;
+
         }
 
-
-        self::write_file($ret, $file_name);
-        /*$toWrite = "";
-        foreach ($ret as $key => $row) {
-            $toWrite .= implode(";", $row);
-            $toWrite .= "\r\n";
-        }
-        $path = self::$dir."/$file_name";
-
-        #$file = file_unmanaged_save_data($toWrite, $path);
-        $ret = file_put_contents($path, $toWrite, FILE_APPEND);
-
-        #On remonte une erreur si le fichier ne se crée pas
-        if ($ret === false) {
-            \Drupal::logger('ExportFile')->notice("Erreur lors de la creation du fichier");
-            die();
-        }*/
 
     }
 
@@ -199,7 +208,7 @@ class OabExportFileListController extends ControllerBase {
         if (file_exists(self::$dir . "/" .$file_name)) {
 
         } else {
-            \Drupal::logger('ExportFile')->notice("le fichier d'export est introuvable");
+            \Drupal::logger(self::$log_name)->notice("le fichier d'export est introuvable");
         }
     }
 
@@ -256,13 +265,9 @@ class OabExportFileListController extends ControllerBase {
         }
         $path = self::$dir."/$file_name";
         #$file = file_unmanaged_save_data($toWrite, $path);
-        $ret = file_put_contents($path, $toWrite, FILE_APPEND);
+        return file_put_contents($path, $toWrite, FILE_APPEND);
 
-        #On remonte une erreur si le fichier ne se crée pas
-        if ($ret === false) {
-            \Drupal::logger('ExportFile')->notice("Erreur lors de la creation du fichier");
-            die();
-        }
+
     }
 
 
