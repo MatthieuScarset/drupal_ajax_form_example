@@ -246,29 +246,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	  }
 	*/
 
-	if ($form_id == 'user_register_form'
-		|| $form_id == 'user_form'){
-		if (isset($form['account']['roles']['#options'])
-			&& is_array($form['account']['roles']['#options'])){
-			$roles_option = $form['account']['roles']['#options'];
-			foreach($roles_option AS $key => $value){
-				if ($key != 'authenticated') {
-					if (!\Drupal::currentUser()->hasPermission('assign ' . $key . ' role')) {
-						if (in_array($key, $form['account']['roles']['#default_value'])) {
-							$form['account']['roles'][$key] = array(
-								'#default_value' => TRUE,
-								'#disabled' => TRUE
-							);
-						}
-						else {
-							unset($form['account']['roles']['#options'][$key]);
-						}
-					}
-				}
-			}
-		}
-	}
-
 	// Ajout de champ dans les menus
 	if($form_id == 'menu_link_content_menu_link_content_form') {
 		$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
