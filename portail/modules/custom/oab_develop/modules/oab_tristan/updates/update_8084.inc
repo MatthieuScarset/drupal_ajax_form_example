@@ -147,5 +147,5 @@ $collection->write('views.view.subhomes', $trad_fr);
 
 ###########################################################
 ## Ajout des URL
-\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/what-analysts-are-saying");
-\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/ce-que-les-analystes-disent-de-nous", "fr");
+\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/analysts");
+\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/analystes", "fr");
