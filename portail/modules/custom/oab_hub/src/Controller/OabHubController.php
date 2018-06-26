@@ -509,4 +509,58 @@ class OabHubController extends ControllerBase {
 
     }
 
+    public static function getHubSubhomeUrl($url_cible){
+
+        # Je recupère les URLS des hubs
+        $urls_hub = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
+
+
+        $cur_url = \Drupal::request()->getRequestUri();
+        ##Je recupère toutes les parties de la route
+        $route_parts = explode('/',$cur_url);
+        #Je supprime le 1er element qui est vide
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+            array_shift($route_parts);
+        }
+        $part_url = $route_parts[1];
+
+        $is_hub_curr = false;
+        ##Je teste si on a bien recu un tableau, au cas ou...
+        if (is_array($urls_hub)) {
+            #l'URL du hub est le 1er element du tableau
+            $is_hub_curr = in_array($part_url, $urls_hub);
+        }
+
+        $route_parts_cible = explode('/',$url_cible->toString());
+        if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0 ) {
+            array_shift($route_parts_cible);
+        }
+        $part_url_cible = $route_parts_cible[1];
+        $is_hub_cible = false;
+        ##Je teste si on a bien recu un tableau, au cas ou...
+        if (is_array($urls_hub)) {
+            #l'URL du hub est le 1er element du tableau
+            $is_hub_cible = in_array($part_url_cible, $urls_hub);
+        }
+
+        if (!$is_hub_curr){
+            //pas de contexte hub on envois une adresse normale
+            if (!$is_hub_cible){
+                //hos context hub , cible hors context hub => ok
+                $new_url = $url_cible;
+            }else{
+                //hos context hub , cible context hub => on retravail la cible
+                unset($route_parts_cible[1]);
+                $new_url = "/" . implode("/",$route_parts_cible);
+            }
+        }else{
+            //context hub
+            $new_url = $url_cible;
+        }
+
+        return $new_url;
+    }
+
+
+
 }

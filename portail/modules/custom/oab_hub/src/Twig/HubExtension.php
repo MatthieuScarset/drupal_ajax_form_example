@@ -24,6 +24,7 @@ class HubExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
             new \Twig_SimpleFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
+            new \Twig_SimpleFunction('hub_getHubSubhomeUrl', [$this, 'getHubSubhomeUrl']),
         ];
     }
 
@@ -53,5 +54,9 @@ class HubExtension extends \Twig_Extension
 
     public function getBaseUrl(){
         return OabHubController::getHubBaseUrl();
+    }
+
+    public function getHubSubhomeUrl($url){
+        return OabHubController::getHubSubhomeUrl($url);
     }
 }
