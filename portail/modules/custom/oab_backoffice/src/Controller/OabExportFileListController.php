@@ -264,7 +264,6 @@ class OabExportFileListController extends ControllerBase {
             $toWrite .= "\r\n";
         }
         $path = self::$dir."/$file_name";
-
         #$file = file_unmanaged_save_data($toWrite, $path);
         return file_put_contents($path, $toWrite, FILE_APPEND);
 
@@ -272,7 +271,7 @@ class OabExportFileListController extends ControllerBase {
     }
 
 
-    private function getValueFromValueArray($valueArray) {
+    private static function getValueFromValueArray($valueArray) {
         $ret = "";
 
         ##Gestion des Targetsid

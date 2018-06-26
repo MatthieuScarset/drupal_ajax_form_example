@@ -12,6 +12,7 @@ dependencies:
     - node.type.press_kit
     - node.type.press_release
     - user.role.administrator
+    - user.role.digital_admin
   module:
     - file
     - media_entity
@@ -37,6 +38,7 @@ display:
         options:
           role:
             administrator: administrator
+            digital_admin: digital_admin
       cache:
         type: tag
         options: {  }
@@ -1291,7 +1293,7 @@ display:
         operator: AND
         groups: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1337,7 +1339,7 @@ display:
             offset_label: Offset
           quantity: 9
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
