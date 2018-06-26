@@ -198,6 +198,15 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
          * Ajouter un if pour checker si le portail est selectionné ici
          * c'est pour laisser l'alias de base qui pointe vers le portail
          */
+        $on_portail = $context['data']['node']->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL);
+        if ($on_portail !== null) {
+            //kint($on_portail->first()->getValue()); die();
+            $on_portail_value = $on_portail->first()->getValue();
+            if ($on_portail_value['value'] == 1) {
+                $hasPortail = true;
+                oab_hub_drupal_message('URL créée : ', "$alias");
+            }
+        }
 
         $hubs = $context['data']['node']->get(OabHubController::NODE_FIELD_HUB);
         $langcode =  $context['data']['node']->language()->getId();
@@ -216,7 +225,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
                     $alias = "/" . $term_url . $original_alias;
                 } else {
                     \Drupal::service('path.alias_storage')
-                        ->save($context['node']['source'], "/" . $term_url . $original_alias, $langcode);
+                        ->save($context['source'], "/" . $term_url . $original_alias, $langcode);
                 }
                 oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
                 $i++;
@@ -330,6 +339,39 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
                oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error" );
            }
         }
+
+
+
+
+        ## Gestion de l'Alias inital (pour le portail)
+        $on_portal = $entity->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue();
+        $old_on_portal = $old_node->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue();
+
+        ## Petits garde fous, et on ne fait que si la valeur a changé
+        if ( (isset($on_portal['value']) && isset($old_on_portal['value']))
+            && $on_portal['value'] != $old_on_portal['value']
+        ) {
+            ## Si on ajoute "portail" je crée l'alias
+            if ($on_portal['value'] == 1) {
+                \Drupal::service('path.alias_storage')
+                    ->save("/node/" . $entity->id(), $alias, $langcode);
+                oab_hub_drupal_message('URL créée :', "/$langcode" . $alias);
+            } else {
+                ## sinon, je le supprime
+                $ret = \Drupal::service('path.alias_storage')
+                    ->delete(array(
+                        'alias' => $alias,
+                        "langcode"  => $langcode));
+                if($ret) {
+                    oab_hub_drupal_message("Alias supprimé ","/$langcode" . $alias );
+                } else {
+                    oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error" );
+                }
+            }
+
+
+        }
+
     }
 }
 
@@ -341,8 +383,8 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 function oab_hub_drupal_message($msg, $url, $status = "status") {
     drupal_set_message(
         t("$msg $url",
-            array('!url' => '<strong>'.$url.'</strong>')),
-        $status, true);
+           // array('!url' => '<strong>'.$url.'</strong>'))
+        array()), $status, true);
 }
 
 

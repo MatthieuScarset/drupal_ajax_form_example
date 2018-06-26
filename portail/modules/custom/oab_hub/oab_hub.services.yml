@@ -11,3 +11,7 @@ services:
      class: Drupal\oab_hub\Twig\HubExtension
      tags:
         - { name: twig.extension }
+  oab_hub.event_subscriber:
+    class: Drupal\oab_hub\EventSubscriber\DisableRedirectIfMultiAliasEvent
+    tags:
+      - { name: event_subscriber }
