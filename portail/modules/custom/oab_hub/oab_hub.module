@@ -344,8 +344,12 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 
 
         ## Gestion de l'Alias inital (pour le portail)
-        $on_portal = $entity->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue();
-        $old_on_portal = $old_node->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue();
+        $on_portal = $entity->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->count() > 0 ?
+                $entity->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue() :
+                array();
+        $old_on_portal = $old_node->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->count() > 0 ?
+            $old_node->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)->first()->getValue():
+            array();
 
         ## Petits garde fous, et on ne fait que si la valeur a changé
         if ( (isset($on_portal['value']) && isset($old_on_portal['value']))
