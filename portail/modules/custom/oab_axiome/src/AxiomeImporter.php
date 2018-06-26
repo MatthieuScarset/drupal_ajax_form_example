@@ -523,8 +523,8 @@ class AxiomeImporter{
                             $node = Node::load($nid);
                             $node->setChangedTime(time());
                             //$node->save(); -> Pas besoin, déjà save plus bas
-                            $node->set('moderation_state', array('target_id' => 'needs_review'));
-                            $this->message .= "microtime " . time() . "\n";
+                            //$node->set('moderation_state', array('target_id' => 'needs_review'));
+                            $this->message .= "microtime ".time()."\n";
 
                         } else {// Si c'est une nouvelle fiche
 
@@ -535,16 +535,19 @@ class AxiomeImporter{
                                // TODO : A completer
                                $this->message .= "Création du NODE \n";
 
-                               $node = Node::create([
-                                   'type'        => 'product',
-                                   'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
-                                   'isNew'       => true,
-                                   'langcode'    => $language,
-                                   'promoted'    => 0,
-                                   'sticky'      => 0,
-                                   'moderation_state' => 'draft',
-                               ]);
-                               $node->save();
+                            $node = Node::create([
+                                'type'        => 'product',
+                                'title'       => $xpath_fiche->getAttribute('nom_offre_commerciale'),
+                                'isNew'       => true,
+                                'langcode'    => $language,
+                                'promoted'    => 0,
+                                'sticky'      => 0,
+                                'moderation_state' => 'published',
+                            ]);
+                            $node->save();
+                            /*$title_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($xpath_fiche->getAttribute('nom_offre_commerciale'));
+                            $product_term = ($language = 'fr') ? 'produits' : 'products';
+                            $node->url("/$product_term/$title_url");*/
 
                                $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                                $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );
