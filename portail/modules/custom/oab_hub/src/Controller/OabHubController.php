@@ -522,7 +522,11 @@ class OabHubController extends ControllerBase {
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
             array_shift($route_parts);
         }
-        $part_url = $route_parts[1];
+        if(count($route_parts)>2){
+            $part_url = $route_parts[1];
+        }else{
+            $part_url = "";
+        }
 
         $is_hub_curr = false;
         ##Je teste si on a bien recu un tableau, au cas ou...
