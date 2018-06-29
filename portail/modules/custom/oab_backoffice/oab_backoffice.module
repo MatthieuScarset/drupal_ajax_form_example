@@ -134,6 +134,12 @@ function _check_authorized_view($entity, $account) {
     $ret = false;
     $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
 
+    //petite porte dérobée pour les formulaires qui n'ont
+    // pas encore été validée, afin qu'ils restent affichés
+    if ($is_published == null) {
+        return true;
+    }
+
     //echo "is published : $is_published"; die();
     ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
     if ($is_published != 1 ) {
