@@ -169,9 +169,12 @@ function _check_authorized_view($entity, $account) {
 
         # Si aucune condition n'est remplie, on interdit l'accès au webform
         return $ret;
+    } else {
+        // Je retourne true si le formulaire est publié
+        return true;
     }
 
-    return null;
+    //return null;
 }
 
 /*
