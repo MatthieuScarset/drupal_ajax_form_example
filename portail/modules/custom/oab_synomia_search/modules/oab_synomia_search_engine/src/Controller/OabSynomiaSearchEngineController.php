@@ -180,7 +180,6 @@ class OabSynomiaSearchEngineController extends ControllerBase
 			else {
 				$path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
-			echo $path; die();
 
 			//on récupère le nb de résultats par page
 			$config_factory = \Drupal::configFactory();
