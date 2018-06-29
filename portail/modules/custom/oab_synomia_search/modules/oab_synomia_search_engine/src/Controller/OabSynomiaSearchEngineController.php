@@ -174,12 +174,13 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
-			if ($current_language == 'ru') {
+			if ($current_language == 'ru' || $current_language == 'es' ||$current_language == 'pt-br') {
 				$path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
 			else {
 				$path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
+			echo $path; die();
 
 			//on récupère le nb de résultats par page
 			$config_factory = \Drupal::configFactory();
