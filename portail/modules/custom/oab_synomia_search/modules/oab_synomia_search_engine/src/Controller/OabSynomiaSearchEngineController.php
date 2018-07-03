@@ -44,7 +44,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						$page = pager_default_initialize($response->nbResultsTotal, 10);
 					}
 					$resultLabel = '';
-					if ($current_language != 'ru') {
+					if ($current_language != 'ru' && $current_language != 'es' && $current_language != 'pt-br') {
 						if (count($response->nbResultsTotal) == 1) {
 							$resultLabel = $response->nbResultsTotal . ' ' . t('result') . ' ' . t('for');
 						}
@@ -174,7 +174,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
-			if ($current_language == 'ru') {
+			if ($current_language == 'ru' || $current_language == 'es' ||$current_language == 'pt-br') {
 				$path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
 			else {

@@ -30,6 +30,7 @@ dependencies:
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
+    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:

@@ -134,8 +134,7 @@ function _check_authorized_view($entity, $account) {
     $ret = false;
     $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
 
-    //petite porte dérobée pour les formulaires qui n'ont
-    // pas encore été validée, afin qu'ils restent affichés
+    // Petit hack pour les contenus qui n'ont pas encore leurs réglages GDPR
     if ($is_published == null) {
         return true;
     }
@@ -176,11 +175,10 @@ function _check_authorized_view($entity, $account) {
         # Si aucune condition n'est remplie, on interdit l'accès au webform
         return $ret;
     } else {
-        // Je retourne true si le formulaire est publié
+        // SI le webform est publié, on return true;
         return true;
     }
 
-    //return null;
 }
 
 /*

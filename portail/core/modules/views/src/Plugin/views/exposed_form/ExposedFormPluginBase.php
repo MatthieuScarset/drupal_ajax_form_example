@@ -54,7 +54,7 @@ abstract class ExposedFormPluginBase extends PluginBase implements CacheableDepe
       '#title' => $this->t('Disable AJAX form submit'),
       '#description' => $this->t('If disabled, then the exposed form will not be submitted with AJAX if the view is configured to "use ajax".'),
       '#default_value' => $this->options['disable_ajax_submit'],
-     ];
+    ];
 
     $form['reset_button'] = [
       '#type' => 'checkbox',
@@ -215,7 +215,7 @@ abstract class ExposedFormPluginBase extends PluginBase implements CacheableDepe
     // Set attribute to disable AJAX form submit.
     // See ajax_views.js::Drupal.views.ajaxView.prototype.attachExposedFormAjax.
     if (!empty($this->options['disable_ajax_submit'])) {
-      $form['#attributes']['data-views-ajax-submit-disabled'] = TRUE;
+          $form['#attributes']['data-views-ajax-submit-disabled'] = TRUE;
     }
 
     // Check if there is exposed sorts for this view

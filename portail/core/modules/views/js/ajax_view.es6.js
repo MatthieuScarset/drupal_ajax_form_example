@@ -111,13 +111,15 @@
     this.exposedFormAjax = [];
     // Exclude the reset buttons so no AJAX behaviours are bound. Many things
     // break during the form reset phase if using AJAX.
-    $('input[type=submit], input[type=image]', this.$exposed_form).not('[data-drupal-selector=edit-reset]').each(function (index) {
-      const selfSettings = $.extend({}, that.element_settings, {
-        base: $(this).attr('id'),
-        element: this,
-      });
-      that.exposedFormAjax[index] = Drupal.ajax(selfSettings);
-    });
+     if (!this.$exposed_form.is('[data-views-ajax-submit-disabled]')) {
+         $('input[type=submit], input[type=image]', this.$exposed_form).not('[data-drupal-selector=edit-reset]').each(function (index) {
+             const selfSettings = $.extend({}, that.element_settings, {
+                 base: $(this).attr('id'),
+                 element: this,
+             });
+             that.exposedFormAjax[index] = Drupal.ajax(selfSettings);
+         });
+     }
   };
 
   /**

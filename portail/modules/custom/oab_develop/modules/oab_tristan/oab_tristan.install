@@ -592,7 +592,6 @@ function oab_tristan_update_8077() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
 
-
 /**
  * Ajout des mails des webforms en conf
  */
@@ -618,10 +617,11 @@ function oab_tristan_update_8080()
 /**
  * ajout de trads pour les sites ES et PT-BR
  */
-function oab_tristan_update_8081()
-{
-    include_once('updates/update_8081.inc');
+function oab_tristan_update_8081() {
+   include_once('updates/update_8081.inc');
 }
+
+
 /*
  * Rechargement de la vue subhome pour modification des tris
  */
