@@ -174,7 +174,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 		if(!empty($urlSynomia))
 		{
 			$path = $urlSynomia;
-			if ($current_language == 'ru' || $current_language == 'es' ||$current_language == 'pt-br') {
+			if ($current_language == 'ru') {
 				$path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sortBy;
 			}
 			else {
