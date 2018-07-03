@@ -76,6 +76,9 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		$base_url = \Drupal::request()->getSchemeAndHttpHost();
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+		//Récuperation des préfixes (parce que celui de pt-br est br)
+        $prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
+
 		$xml_feed = '';
 		// Création du flux XML
 		$xml_feed .= '<?xml version=\'1.0\' encoding=\'utf-8\'?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -91,8 +94,10 @@ class OabSynomiaSearchFluxController extends ControllerBase
 			$results_deleted = $query->execute()->fetchAll();
 
 			foreach ($results_deleted as $deleted) {
+			    $prefixe = (isset($prefixes[$current_language])) ? $prefixes[$current_language] : $current_language;
+
 				$xml_feed .= '<url>
-					<loc><![CDATA[' . $base_url . '/' . $current_language . $deleted->url . ']]></loc>
+					<loc><![CDATA[' . $base_url . '/' . $prefixe . $deleted->url . ']]></loc>
 					<lastmod><![CDATA[' . date("Y-m-d H:i", $deleted->deleted) . ']]></lastmod>
 					<changefreq>daily</changefreq>
     			<priority>1</priority>
@@ -118,22 +123,16 @@ class OabSynomiaSearchFluxController extends ControllerBase
 			foreach ($results_nodes as $node) {
 				$alias = \Drupal::service('path.alias_manager')
 					->getAliasByPath('/node/' . $node->nid, $node->langcode);
-				if ($node->language == 'und') {
-					$xml_feed .= '<url>
-							<loc><![CDATA[' . $base_url . '/' . $current_language . $alias . ']]></loc>
-							<lastmod><![CDATA[' . date("Y-m-d H:i", $node->changed) . ']]></lastmod>
-							<changefreq>daily</changefreq>
-							<priority>1</priority>
-						</url>';
-				}
-				else {
-					$xml_feed .= '<url>
-							<loc><![CDATA[' . $base_url . '/' . $node->langcode . $alias . ']]></loc>
-							<lastmod><![CDATA[' . date("Y-m-d H:i", $node->changed) . ']]></lastmod>
-							<changefreq>daily</changefreq>
-							<priority>1</priority>
-						</url>';
-				}
+
+                $prefixe = (isset($prefixes[$current_language])) ? $prefixes[$current_language] : $current_language;
+
+				$xml_feed .= '<url>
+                        <loc><![CDATA[' . $base_url . '/' . $prefixe . $alias . ']]></loc>
+                        <lastmod><![CDATA[' . date("Y-m-d H:i", $node->changed) . ']]></lastmod>
+                        <changefreq>daily</changefreq>
+                        <priority>1</priority>
+                    </url>';
+
 			}
 		}
 		$xml_feed .= '</urlset>';
