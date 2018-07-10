@@ -33,12 +33,13 @@ function oab_frontoffice_theme_suggestions_alter(array &$suggestions, array $var
     if( $actual_route === "view.subhomes.page_analysts"
         && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
         && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
-            //Si on fait l'affichage d'un node en mode "subhome"
+        //Si on fait l'affichage d'un node en mode "subhome"
     ) {
         $suggestions = ['node__analysts__subhome'];
     }
 
 }
+
 
 function oab_frontoffice_preprocess_menu(&$variables) {
   if (isset($variables['items'])
@@ -325,10 +326,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
   subhomes_views_exposed_form($form);
 
-    // Subhome Analysts
-    if ($form['#id'] == 'views-exposed-form-subhomes-page-analysts') {
-       // Nothing to do for the moment
-    }
 
     // view Page thématique
     if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {

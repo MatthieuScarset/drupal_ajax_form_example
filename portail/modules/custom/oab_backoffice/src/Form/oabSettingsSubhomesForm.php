@@ -139,7 +139,7 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
           '#default_value' => $config->get('analysts_meta'),
       );
 
-    return parent::buildForm($form, $form_state);
+      return parent::buildForm($form, $form_state);
   }
 
   /**
@@ -166,7 +166,7 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
         ->set('magazine_meta', $form_state->getValue('magazine_meta'))
         ->set('product_meta', $form_state->getValue('product_meta'))
         ->set('analysts_meta', $form_state->getValue('analysts_meta'))
-      ->save();
+        ->save();
 
     parent::submitForm($form, $form_state);
   }
