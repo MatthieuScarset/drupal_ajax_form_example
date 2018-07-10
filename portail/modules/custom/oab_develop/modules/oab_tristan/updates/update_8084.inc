@@ -9,8 +9,18 @@
 ## First, création des termes de taxonomie
 $terms = array(
     //en
-    array("language" => "en", "name" => "Analysts", "variable" => "analysts_term_tid"),
-    array("language" => "fr", "name" => "Analystes", "variable" => "analysts_term_tid"),
+    array(
+        "language" => "en",
+        "name" => "Analysts",
+        "variable" => "analysts_term_tid",
+        'description' => "<p>Find out what analysts are saying about Orange Business Services, from our regional and global capabilities to how we fare in independent customer service evaluations.</p>"
+    ),
+    array(
+        "language" => "fr",
+        "name" => "Analystes",
+        "variable" => "analysts_term_tid",
+        "description" => "<p>Retrouvez ici ce que les analystes disent d'Orange Business Services, depuis nos potentiels régional et global jusqu'à notre positionnement dans les évaluations de services consommateurs indépendants.</p>"
+    )
 );
 $tids = array();
 
@@ -31,6 +41,7 @@ foreach ($terms as &$term) {
             'vid' => "subhomes",
             'name' => $term['name'],
             'langcode' => $term['language'],
+            'description'   => $term['description']
         ]);
         $entity->set('field_related_display_view', 'page_analysts');
         $entity->save();
@@ -147,5 +158,5 @@ $collection->write('views.view.subhomes', $trad_fr);
 
 ###########################################################
 ## Ajout des URL
-\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/analysts");
+\Drupal::service('path.alias_storage')->save("/subhome_analysts", "/analysts", "en");
 \Drupal::service('path.alias_storage')->save("/subhome_analysts", "/analystes", "fr");
