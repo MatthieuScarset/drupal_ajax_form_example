@@ -478,7 +478,7 @@ function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface 
 
     foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
+          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit');
         }
     }
   } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
@@ -486,7 +486,7 @@ function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface 
       foreach (array_keys($form['actions']) as $action) {
 
           if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit' );
+              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit');
           }
       }
   }

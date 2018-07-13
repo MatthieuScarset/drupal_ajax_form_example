@@ -77,7 +77,7 @@ class OabExtension extends \Twig_Extension {
     if ($stop)
       die();
   }*/
-  function kint_t($array, $stop = false) {
+  public function kint_t($array, $stop = false) {
     $moduleHandler = \Drupal::service('module_handler');
     if($moduleHandler->moduleExists('kint')) {
       kint($array);
@@ -87,7 +87,7 @@ class OabExtension extends \Twig_Extension {
     }
   }
 
-  function d_config($config){
+  public function d_config($config){
     return \Drupal::config($config);
   }
 
@@ -98,7 +98,7 @@ class OabExtension extends \Twig_Extension {
    * @param int $precision
    * @return string
    */
-  function format_bytes($bytes, $precision = 2)
+  public function format_bytes($bytes, $precision = 2)
   {
     $units = array('B', 'KB', 'MB', 'GB', 'TB');
     $bytes = max($bytes, 0);
@@ -116,7 +116,7 @@ class OabExtension extends \Twig_Extension {
    * @param $filename
    * @return string
    */
-  function file_format ($filename) {
+  public function file_format ($filename) {
 
     ##Je recupère toutes les parties du fichier, séparées par un "."
     $fileParts = explode(".", $filename);
@@ -147,6 +147,7 @@ class OabExtension extends \Twig_Extension {
     if ($image_style = ImageStyle::load($style)) {
       return file_url_transform_relative($image_style->buildUrl($path));
     }
+    return "";
   }
 
     /**
@@ -192,7 +193,7 @@ class OabExtension extends \Twig_Extension {
    * @return string
    */
   public function rawurlencode($url) {
-    return rawurlencode($url );
+    return rawurlencode($url);
   }
 
   /**
@@ -201,7 +202,7 @@ class OabExtension extends \Twig_Extension {
    * @param $node
    * @return mixed
    */
-  function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
+  public function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
 
   	$options = array('absolute' => TRUE);
   	if($defaultLanguage) {

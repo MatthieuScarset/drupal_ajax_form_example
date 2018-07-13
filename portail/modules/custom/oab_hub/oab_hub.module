@@ -221,7 +221,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
                 $term_url = $term->get(OabHubController::FIELD_URL_ID);
                 $term_url = $term_url->first()->getString();
 
-                if (!$hasPortail && $i == 0 ) {
+                if (!$hasPortail && $i == 0) {
                     $alias = "/" . $term_url . $original_alias;
                 } else {
                     \Drupal::service('path.alias_storage')
@@ -241,7 +241,7 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
      * field HUB/Taxo
      */
     if ($entity->getEntityTypeId() === 'node'
-            && $entity->hasField(OabHubController::NODE_FIELD_HUB) ) {
+            && $entity->hasField(OabHubController::NODE_FIELD_HUB)) {
 
         $langcode = $entity->language()->getId();
 
@@ -334,9 +334,9 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
                             'alias' => "/" . $term_url . $alias,
                             "langcode"  => $langcode));
            if($ret) {
-               oab_hub_drupal_message("Alias supprimé ","/$langcode/$term_url" . $alias );
+               oab_hub_drupal_message("Alias supprimé ","/$langcode/$term_url" . $alias);
            } else {
-               oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error" );
+               oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error");
            }
         }
 
@@ -367,9 +367,9 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
                         'alias' => $alias,
                         "langcode"  => $langcode));
                 if($ret) {
-                    oab_hub_drupal_message("Alias supprimé ","/$langcode" . $alias );
+                    oab_hub_drupal_message("Alias supprimé ","/$langcode" . $alias);
                 } else {
-                    oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error" );
+                    oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error");
                 }
             }
 
@@ -415,7 +415,7 @@ function oab_hub_theme_suggestions_menu_alter(array &$suggestions, array $variab
 
     }
 
-    if ($menu_name !== false ) {
+    if ($menu_name !== false) {
         $suggestions[] = "menu__$menu_name";
     }
 

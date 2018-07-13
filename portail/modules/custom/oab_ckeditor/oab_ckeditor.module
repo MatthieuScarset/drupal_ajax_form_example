@@ -70,7 +70,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
             'description' => t('1 column template'),
             'html'        => file_get_contents('templates/1_column.html.twig', FILE_USE_INCLUDE_PATH),
             'image'       => '1_column.gif',
-        );
+       );
         $data[1] = array(
             'title'       => t('2 columns'),
             'description' => t('2 columns template'),

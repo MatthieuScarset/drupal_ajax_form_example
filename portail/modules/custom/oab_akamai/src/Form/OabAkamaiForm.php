@@ -8,8 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class OabAkamaiForm extends ConfigFormBase
-{
+class OabAkamaiForm extends ConfigFormBase {
     public static function getConfigName() {
         return 'oab.akamai_settings';
     }
@@ -24,7 +23,8 @@ class OabAkamaiForm extends ConfigFormBase
     /**
      * {@inheritdoc}
      */
-    protected function getEditableConfigNames() {
+    protected function getEditableConfigNames()
+    {
         return [
             self::getConfigName(),
         ];
@@ -133,13 +133,13 @@ class OabAkamaiForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state) {
         // Retrieve the configuration
         $this->config(self::getConfigName())
-            ->set('enable_hook', $form_state->getValue('enable_hook') )
+            ->set('enable_hook', $form_state->getValue('enable_hook'))
             ->set('auth_prefixe', $form_state->getValue('auth_prefixe') . " ")
-            ->set('req_path', $form_state->getValue('req_path') )
-            ->set('base_url', $form_state->getValue('base_url') )
-            ->set('access_token', $form_state->getValue('access_token') )
-            ->set('client_token', $form_state->getValue('client_token') )
-            ->set('varnish_ip', $form_state->getValue('varnish_ip') )
+            ->set('req_path', $form_state->getValue('req_path'))
+            ->set('base_url', $form_state->getValue('base_url'))
+            ->set('access_token', $form_state->getValue('access_token'))
+            ->set('client_token', $form_state->getValue('client_token'))
+            ->set('varnish_ip', $form_state->getValue('varnish_ip'))
             ->save();
 
         parent::submitForm($form, $form_state);

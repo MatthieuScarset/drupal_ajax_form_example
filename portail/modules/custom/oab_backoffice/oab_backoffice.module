@@ -8,6 +8,7 @@ use Drupal\Core\Database\Database;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Entity\EntityInterface;
 use \Drupal\file\Entity\File;
+use Drupal\Core\Datetime;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
@@ -91,6 +92,27 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
     gdpr_hook_webform_insert($entity);
 }
 
+
+/**
+ * Liste des utilisateurs ayant le role Business Analyst
+ */
+function _business_analysts_list() {
+    $query = \Drupal::database()->select('users', 'u');
+    $query->fields('u', array('uid'));
+    $query->innerJoin('user__roles', 'r', 'r.entity_id = u.uid');
+    $query->join('users_field_data', 'd', 'u.uid = d.uid');
+    $query->condition('r.roles_target_id', 'webform_business_analyst');
+    $query->fields('d', array('name'));
+    $query->orderBy('d.name');
+
+    $result = $query->execute();
+
+    $users = array();
+    foreach ($result as $user) {
+        $users[$user->uid] = $user->name;
+    }
+    return $users;
+}
 
 /**
  * Implements hook_form_alter().
@@ -408,7 +430,7 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
 
           if (isset($result->workbench_revision_tracker_revision_id)
             && $result->workbench_revision_tracker_revision_id != 0
-            && $result->workbench_revision_tracker_revision_id !== null ) {
+            && $result->workbench_revision_tracker_revision_id !== null) {
 
             #kint($result->workbench_revision_tracker_revision_id);
 
@@ -505,7 +527,7 @@ function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core
 
   ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
   if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
-    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1" ) {
+    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1") {
 
 
     #Petite gestion pour la langue, pour afficher le bon element....
@@ -583,7 +605,7 @@ function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
 
         ##je recupère la valeur contenue dans l'element IsDviProduct
         $isDvi_array = $node->get(DviHelper::FIELD_IS_DVI_PRODUCT_NAME)->getValue();
-        if (is_array($isDvi_array) && count($isDvi_array) > 0 ) {
+        if (is_array($isDvi_array) && count($isDvi_array) > 0) {
             $isDvi_value = $isDvi_array[0]['value'];
 
             #Si on a un produit DVI

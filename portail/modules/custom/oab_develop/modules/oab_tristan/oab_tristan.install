@@ -503,7 +503,7 @@ function oab_tristan_update_8064() {
  */
 function oab_tristan_update_8065()
 {
-    include('updates/update_8065.inc');
+    include_once('updates/update_8065.inc');
 }
 
 /**

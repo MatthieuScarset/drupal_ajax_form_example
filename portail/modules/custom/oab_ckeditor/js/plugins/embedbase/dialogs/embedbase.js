@@ -48,7 +48,7 @@ CKEDITOR.dialog.add( 'embedBase', function( editor ) {
 					errorCallback: function( messageTypeOrMessage ) {
 						that.getContentElement( 'info', 'url' ).select();
 
-						alert( that.widget.getErrorMessage( messageTypeOrMessage, url, 'Given' ) );
+						flash_message( that.widget.getErrorMessage( messageTypeOrMessage, url, 'Given' ) );
 
 						unlock();
 					}

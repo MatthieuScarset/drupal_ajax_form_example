@@ -72,4 +72,4 @@ CKEDITOR.plugins.setLang( 'colorbutton', 'hu', {
 	more: 'További színek...',
 	panelTitle: 'Színek',
 	textColorTitle: 'Betűszín'
-} );
+});

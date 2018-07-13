@@ -12,7 +12,7 @@ function oab_hub_update_dependencies() {
  * Création du vocabulaire "Hub"
  */
 function oab_hub_update_8001() {
-    include('updates/update_8001.inc');
+    include_once('updates/update_8001.inc');
 }
 
 /**

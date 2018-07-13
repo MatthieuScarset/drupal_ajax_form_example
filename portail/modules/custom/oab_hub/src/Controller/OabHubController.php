@@ -145,7 +145,7 @@ class OabHubController extends ControllerBase {
         $machineName = false;
 
         ##je checke que le term passé en paramètre est bien un term de taxo
-        if (is_a($term,'\Drupal\taxonomy\Entity\Term' )) {
+        if (is_a($term,'\Drupal\taxonomy\Entity\Term')) {
             $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
             if($machineName_value->count() > 0) {
                 $machineName = $machineName_value->first()->getString();
@@ -157,7 +157,7 @@ class OabHubController extends ControllerBase {
 
     public static function checkUrl(\Drupal\taxonomy\Entity\Term &$term) {
         $url = $term->get(self::FIELD_URL_ID);
-        if ($url->count() > 0 ) {
+        if ($url->count() > 0) {
             $cleanedUrl = \Drupal::service('pathauto.alias_cleaner')->cleanString($url->first()->getString());
             $term->set(self::FIELD_URL_ID, $cleanedUrl);
 
@@ -205,7 +205,7 @@ class OabHubController extends ControllerBase {
 
     public static function deleteUrl(\Drupal\taxonomy\Entity\Term &$term) {
         $url = $term->get(self::FIELD_URL_ID);
-        if ($url->count() > 0 ) {
+        if ($url->count() > 0) {
 
             $url = $url->first()->getString();
             $term_langcode = $term->language()->getId();
@@ -336,10 +336,10 @@ class OabHubController extends ControllerBase {
         $ret = "";
 
         if ($i === null) {
-            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode ) );
+            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode));
             $ret = $elem_key . "-" . $machineName . "-" . $langcode;
         } else {
-            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i ) );
+            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i));
             $ret = $elem_key . "-" . $machineName . "-" . $langcode . "-" . $i;
         }
 
@@ -356,7 +356,7 @@ class OabHubController extends ControllerBase {
         $url_object = $term->get(self::FIELD_URL_ID);
         $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-        if ($url_object->count() > 0 ) {
+        if ($url_object->count() > 0) {
             $base_url = $url_object->first()->getString();
 
             $subhomes = $term->get(self::FIELD_SUBHOMES_ID);
@@ -423,7 +423,7 @@ class OabHubController extends ControllerBase {
         $route_parts = explode('/',$url);
 
         #Je supprime le 1er element qui est vide
-        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
 
@@ -432,7 +432,7 @@ class OabHubController extends ControllerBase {
         if (isset($route_parts[1])) {
             $hub_part = $route_parts[1];
 
-            foreach ($url_list as $hub => $url ) {
+            foreach ($url_list as $hub => $url) {
                 if ($url == $hub_part)
                     $actif_hub = $hub;
             }
@@ -450,7 +450,7 @@ class OabHubController extends ControllerBase {
         $route_parts = explode('/',$url);
 
         #Je supprime le 1er element qui est vide
-        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
         $actualUrl = $route_parts[1];
@@ -481,7 +481,7 @@ class OabHubController extends ControllerBase {
         $route_parts = explode('/',$url);
 
         #Je supprime le 1er element qui est vide
-        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
 
@@ -519,7 +519,7 @@ class OabHubController extends ControllerBase {
         ##Je recupère toutes les parties de la route
         $route_parts = explode('/',$cur_url);
         #Je supprime le 1er element qui est vide
-        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
         if(count($route_parts)>2){
@@ -540,7 +540,7 @@ class OabHubController extends ControllerBase {
         }else{
             $route_parts_cible = explode('/',$url_cible);
         }
-        if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0 ) {
+        if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0) {
             array_shift($route_parts_cible);
         }
         $part_url_cible = $route_parts_cible[1];

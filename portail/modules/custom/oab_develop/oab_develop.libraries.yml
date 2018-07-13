@@ -1,0 +1,9 @@
+oab_develop.global:
+  version: VERSION
+  js:
+    js/oab_develop.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
