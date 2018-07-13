@@ -5,7 +5,7 @@ use Drupal\locale\SourceString;
 
 class OAB_Trace{
 
-  static function debug($elem, $message=""){
+  public static function debug($elem, $message=""){
     echo '<pre>';
     if($message<>""){
       echo $message.'<br>';
@@ -13,7 +13,7 @@ class OAB_Trace{
     print_r($elem);
     echo '</pre>';
   }
-  static function lock($elem){
+  public static function lock($elem){
     self::debug($elem);
     die();
   }
@@ -96,7 +96,7 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
 
 	// enable translation
 	$service = \Drupal::service('content_translation.manager');
-	$service->setEnabled('taxonomy_term',$vid, true );
+	$service->setEnabled('taxonomy_term',$vid, true);
 
 	$config_factory = \Drupal::configFactory();
 	$config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);

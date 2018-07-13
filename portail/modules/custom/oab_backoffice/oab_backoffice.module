@@ -56,7 +56,7 @@ function oab_backoffice_mail($key, &$message, $params) {
 function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
 
    if ($entity->getType() == 'webform' && $operation == 'view') {
-       if ($entity->get('webform')->count() > 0 ) {
+       if ($entity->get('webform')->count() > 0) {
            $webform_value = $entity->get('webform')->first()->getValue();
            $webform_machine_name = $webform_value['target_id'];
            $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
@@ -88,7 +88,7 @@ function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operatio
      */
     if (in_array('webform_business_owner', $account->getRoles())) {
         $form_bo = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        if ( ( $operation == "submission_view_any" || $operation == "update" )
+        if ( ( $operation == "submission_view_any" || $operation == "update")
             && $form_bo !== null
             && $form_bo->id() == $account->id()) {
             return Drupal\Core\Access\AccessResult::allowed();
@@ -141,7 +141,7 @@ function _check_authorized_view($entity, $account) {
 
     //echo "is published : $is_published"; die();
     ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
-    if ($is_published != 1 ) {
+    if ($is_published != 1) {
 
         ## Si c'est un webform admin ou si c'est l'administrateur
         if (in_array('webform_admin', $account->getRoles())
@@ -324,7 +324,7 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
 
         # mail au business owner
         $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        if ($business_owner !== null ) {
+        if ($business_owner !== null) {
             $mail_business_owner = $business_owner->getEmail();
             \Drupal::service('plugin.manager.mail')
                 ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language,  array('webform'=> $entity));
@@ -423,7 +423,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $form['gdpr_informations']['gdpr_form_published'] = [
             '#type' => 'checkbox',
             '#title'    => t('Form published'),
-            '#default_value' => ($entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') !== null ) ? $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') : false,
+            '#default_value' => ($entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') !== null) ? $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') : false,
             '#access' => false,
             "#disabled" => "disabled"
         ];
@@ -519,7 +519,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         }
 
 
-        //array_unshift($form['actions']['submit']['#submit'],'_oab_webform_gdpr_submit' );
+        //array_unshift($form['actions']['submit']['#submit'],'_oab_webform_gdpr_submit');
 
         ## Je place mon submit, pour éviter qu'il soit en dernière place, sinon ca crée des erreurs
         $old_submit = $form['actions']['submit']['#submit'];
@@ -790,7 +790,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 
 	//preselection des departements et segments de marché sur les PARTNERS
-	if (in_array($form_id, array( 'node_partner_form' )))
+	if (in_array($form_id, array( 'node_partner_form')))
 	{
 		if(isset($form['field_departments'])){
 			//par défaut on sélectionne tous les départements
@@ -887,7 +887,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
         if(count($user_roles)==2 &&
             isset($user_roles[0]) && $user_roles[0] == "authenticated" &&
-            isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub" ) {
+            isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub") {
             //rend le champ obligatoire
             $form["field_hub"]["widget"]["#required"] = true;
             $form["field_hub_portal"]['#disabled'] = true;
@@ -922,7 +922,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             #mail to Everyone pour la validation
 
             $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
-            if ($spoc !== null ) {
+            if ($spoc !== null) {
                 $mail_spoc = $spoc->getEmail();
                 \Drupal::service('plugin.manager.mail')
                     ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_spoc, $current_language, array('webform' => $entity));
@@ -1239,7 +1239,7 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
 
           if (isset($result->workbench_revision_tracker_revision_id)
             && $result->workbench_revision_tracker_revision_id != 0
-            && $result->workbench_revision_tracker_revision_id !== null ) {
+            && $result->workbench_revision_tracker_revision_id !== null) {
 
             #kint($result->workbench_revision_tracker_revision_id);
 
@@ -1424,7 +1424,7 @@ function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core
 
   ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
   if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
-    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1" ) {
+    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1") {
 
 
     #Petite gestion pour la langue, pour afficher le bon element....
@@ -1502,7 +1502,7 @@ function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
 
         ##je recupère la valeur contenue dans l'element IsDviProduct
         $isDvi_array = $node->get(DviHelper::FIELD_IS_DVI_PRODUCT_NAME)->getValue();
-        if (is_array($isDvi_array) && count($isDvi_array) > 0 ) {
+        if (is_array($isDvi_array) && count($isDvi_array) > 0) {
             $isDvi_value = $isDvi_array[0]['value'];
 
             #Si on a un produit DVI

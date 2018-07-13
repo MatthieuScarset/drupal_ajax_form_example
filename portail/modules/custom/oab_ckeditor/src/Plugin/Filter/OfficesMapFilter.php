@@ -83,7 +83,7 @@ class OfficesMapFilter extends FilterBase {
 		return $result;
 	}
 
-	function render_offices_map_block($chaineARemplacer) {
+	public function render_offices_map_block($chaineARemplacer) {
 		$newText = "";
 		$chaine_json = str_replace("||", "", $chaineARemplacer);
 		$tag_info = json_decode($chaine_json);

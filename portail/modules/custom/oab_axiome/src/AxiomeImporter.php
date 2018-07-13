@@ -34,7 +34,7 @@ class AxiomeImporter{
     private $sous_famille_names = [];
     private $reparseRef = false;
 
-    function __construct(){
+    public function __construct(){
         $this->axiome_folder_root_path =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
         $this->axiome_folder_path =  $this->axiome_folder_root_path . '/import';
         $this->message = "== STEP 1 : Contruct ==\nAxiome_folder_path = $this->axiome_folder_path \n";

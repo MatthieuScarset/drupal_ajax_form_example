@@ -1,17 +1,17 @@
 <?php
 
-include 'correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
-include 'correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
-include 'correspondances/categoriesMagazineD7_to_MagazineFormatD8.inc';
-include 'correspondances/formatDocumentD7_to_formatDocumentD8.inc';
-include 'correspondances/industriesD7_to_industriesD8.inc';
-include 'correspondances/regionsD7_to_regionsD8.inc';
-include 'correspondances/solutionsD7_to_DocumentThematicD8.inc';
-include 'correspondances/solutionsD7_to_MagazineThematicD8.inc';
-include 'correspondances/solutionsD7_to_solutionsD8.inc';
-include 'correspondances/solutionsD7_to_thematicD8.inc';
-include 'correspondances/press_formats.inc';
-include 'correspondances/subhomes.inc';
+include_once 'correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
+include_once 'correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
+include_once 'correspondances/categoriesMagazineD7_to_MagazineFormatD8.inc';
+include_once 'correspondances/formatDocumentD7_to_formatDocumentD8.inc';
+include_once 'correspondances/industriesD7_to_industriesD8.inc';
+include_once 'correspondances/regionsD7_to_regionsD8.inc';
+include_once 'correspondances/solutionsD7_to_DocumentThematicD8.inc';
+include_once 'correspondances/solutionsD7_to_MagazineThematicD8.inc';
+include_once 'correspondances/solutionsD7_to_solutionsD8.inc';
+include_once 'correspondances/solutionsD7_to_thematicD8.inc';
+include_once 'correspondances/press_formats.inc';
+include_once 'correspondances/subhomes.inc';
 
 
 /** Définit l'ordre des updates par rapport aux autres modules

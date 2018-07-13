@@ -47,7 +47,7 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
           "RTD" => $columns[RTD],
           "JITTER" => $columns[JITTER_AB],
           "PLR" => $columns[PLR_AB]);
-        $bbImportDataObj->saveDataLine($month, $columns[SID_A], $columns[SID_B], $dataArrayAtoB );
+        $bbImportDataObj->saveDataLine($month, $columns[SID_A], $columns[SID_B], $dataArrayAtoB);
 
         $dataArrayBtoA = array(
           "date" => $month,
@@ -59,7 +59,7 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context){
           "JITTER" => $columns[JITTER_BA],
           "PLR" => $columns[PLR_BA]
         );
-        $bbImportDataObj->saveDataLine($month, $columns[SID_B], $columns[SID_A], $dataArrayBtoA );
+        $bbImportDataObj->saveDataLine($month, $columns[SID_B], $columns[SID_A], $dataArrayBtoA);
 
         $title = $shadowSites[$columns[SID_A]]["site_label"] .
           " to ".
