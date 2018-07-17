@@ -1,4 +1,0 @@
-oab_axiome.admin_content.global_settings:
-  title: Global settings
-  route_name: oab_axiome.main_page
-  base_route: oab_axiome.main_page

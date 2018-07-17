@@ -15,6 +15,7 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\media_entity\Entity\Media;
 
+
 class AxiomeContentImporter {
 
 	public static function parseContent(&$node, $fiche, $language, &$messages){
@@ -38,7 +39,7 @@ class AxiomeContentImporter {
 
 		$dom = Html::load($content);
 
-		self::replaceLeftBlock($dom, $bannerData, $node);
+		self::replaceLeftBlock($dom, $bannerData);
 		self::replaceCenterBlock($dom, $bannerData);
 		self::replaceRightBlock($dom, $bannerData);
 
@@ -75,67 +76,20 @@ class AxiomeContentImporter {
         //$node->save();
 	}
 
-	private static function replaceLeftBlock(&$dom, $bannerData, $node){
-		$cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
+    /**
+     * @param $dom
+     * @param $bannerData
+     */
+    private static function replaceLeftBlock(&$dom, $bannerData){
+        $cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
         $fontColor = $bannerData['font_color'];
-		//$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        switch($cssClassLeftBlock){
-            case 'icon-frame-connectivity':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Connectivity';
-                }else{
-                    $titleLeftBlock = 'Connectivité';
-                }
-                break;
-            case 'icon-frame-teamwork':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Teamwork';
-                }else{
-                    $titleLeftBlock = 'Équipes';
-                }
-                break;
-            case 'icon-frame-my-customers':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Customers';
-                }else{
-                    $titleLeftBlock = 'Clients ';
-                }
-                break;
-            case 'icon-frame-performance':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Flexibility';
-                }else{
-                    $titleLeftBlock = 'Flexibilité';
-                }
-                break;
-            case 'icon-frame-security':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Security';
-                }else{
-                    $titleLeftBlock = 'Sécurité';
-                }
-                break;
-            case 'icon-frame-care':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Service';
-                }else{
-                    $titleLeftBlock = 'Service';
-                }
-                break;
-            case 'icon-frame-tech':
-                if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Industry';
-                }else{
-                    $titleLeftBlock = 'Métier';
-                }
-                break;
-            default:
-                $titleLeftBlock = '';
-                break;
-        }
+        //$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-		// change class name
+        $ClassLeftBlock = str_replace("-","_",$cssClassLeftBlock);
+        $titleLeftBlock = \Drupal::config('oab.axiome')->get($ClassLeftBlock);
+
+        // change class name
 		$nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
 		foreach($nodes as $el) {
 			$el->removeAttribute('class');
