@@ -44,7 +44,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
 						$page = pager_default_initialize($response->nbResultsTotal, 10);
 					}
 					$resultLabel = '';
-					if ($current_language != 'ru' && $current_language != 'es' && $current_language != 'pt-br') {
+					if ($current_language != 'ru') {
 						if (count($response->nbResultsTotal) == 1) {
 							$resultLabel = $response->nbResultsTotal . ' ' . t('result') . ' ' . t('for');
 						}

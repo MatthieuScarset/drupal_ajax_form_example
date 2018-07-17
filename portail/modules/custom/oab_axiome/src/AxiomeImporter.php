@@ -527,7 +527,6 @@ class AxiomeImporter{
                             $this->message .= "microtime " . time() . "\n";
 
                         } else {// Si c'est une nouvelle fiche
-
                            if (!$this->reparseRef) {
                                $this->axiome_notification[] = "nouvelle fiche importée";
 
@@ -545,9 +544,7 @@ class AxiomeImporter{
                                 'moderation_state' => 'published',
                             ]);
                             $node->save();
-                            /*$title_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($xpath_fiche->getAttribute('nom_offre_commerciale'));
-                            $product_term = ($language = 'fr') ? 'produits' : 'products';
-                            $node->url("/$product_term/$title_url");*/
+
 
                                $node->set('field_id_fiche', $xpath_fiche->getAttribute('id') );
                                $node->set('field_id_offre', $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id') );

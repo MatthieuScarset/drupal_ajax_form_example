@@ -57,18 +57,6 @@
     {% block content %}
         {# affiche le contenu saisi dans le back office: #}
 
-        <div id="contactbar-container-light" class="container expandContactBar" role="button">
-            <div class="col-md-6 nopadding" >
-
-            </div>
-            <div class="col-md-3 col-sm-10 col-xs-10 nopadding" style="text-align: right;">
-                <span class="text-needhelp"> {{ "Contact us"|t }} </span>
-            </div>
-            <div class="col-md-3 col-sm-2 col-xs-2 nopadding" style="text-align: right;">
-                <div class="glyphicon glyphicon-triangle-bottom" role="button"></div>
-            </div>
-        </div>
-
         <div id="contactbar-container-standard" class="container hidden">
             <div class="row">
                 <div class="col-md-3 nopadding iconblock">
@@ -82,9 +70,6 @@
                         <span class="icon icon-email solaris-contactbar hidden-sm hidden-xs"></span>
                         <div class="link-contactbar"><span class="textlink-contactbar">{{ content.link_ecrire_text }}</span></div>
                     </a>
-                </div>
-                <div class="col-md-3 col-sm-2 col-xs-2 nopadding arrow-contactbar" style="text-align: right;">
-                    <div class="glyphicon glyphicon-triangle-top textlink-contactbar collapseContactBar" role="button"></div>
                 </div>
             </div>
             <div class="clear"></div>
