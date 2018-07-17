@@ -92,21 +92,21 @@ class AxiomeContentImporter {
                 if($node->language()->getId() == 'en'){
                     $titleLeftBlock = 'Teamwork';
                 }else{
-                    $titleLeftBlock = 'Équipe';
+                    $titleLeftBlock = 'Équipes';
                 }
                 break;
             case 'icon-frame-my-customers':
                 if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'My customers';
+                    $titleLeftBlock = 'Customers';
                 }else{
-                    $titleLeftBlock = 'Mes clients ';
+                    $titleLeftBlock = 'Clients ';
                 }
                 break;
             case 'icon-frame-performance':
                 if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Performance';
+                    $titleLeftBlock = 'Flexibility';
                 }else{
-                    $titleLeftBlock = 'Performance';
+                    $titleLeftBlock = 'Flexibilité';
                 }
                 break;
             case 'icon-frame-security':
@@ -118,16 +118,16 @@ class AxiomeContentImporter {
                 break;
             case 'icon-frame-care':
                 if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Care';
+                    $titleLeftBlock = 'Service';
                 }else{
                     $titleLeftBlock = 'Service';
                 }
                 break;
             case 'icon-frame-tech':
                 if($node->language()->getId() == 'en'){
-                    $titleLeftBlock = 'Tech';
+                    $titleLeftBlock = 'Industry';
                 }else{
-                    $titleLeftBlock = 'Tech';
+                    $titleLeftBlock = 'Métier';
                 }
                 break;
             default:
