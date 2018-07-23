@@ -1,4 +1,4 @@
-axiome_enable_cron: 0
+axiome_enable_cron: 1
 icon_frame_connectivity: Connectivity
 icon_frame_teamwork: Teamwork
 icon_frame_my_customers: Customers

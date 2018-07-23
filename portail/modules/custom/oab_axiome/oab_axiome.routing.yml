@@ -7,7 +7,7 @@ oab.main_page:
   requirements:
     _permission: 'access content'
 
-oab.settings_axiome:
+oab.axiome_settings:
   path: '/admin/structure/oab/settings/axiome'
   defaults:
     _form: '\Drupal\oab_axiome\Form\OabAxiomeSettingsForm'

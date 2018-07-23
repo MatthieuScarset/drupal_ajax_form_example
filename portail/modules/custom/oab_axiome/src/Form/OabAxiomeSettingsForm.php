@@ -22,7 +22,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.axiome',
+      'oab.axiome_settings',
     ];
   }
 
@@ -30,7 +30,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.axiome');
+    $config = $this->config('oab.axiome_settings');
 
     $form['axiome_enable_cron'] = array(
       '#type' => 'checkbox',

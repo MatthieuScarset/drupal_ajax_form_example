@@ -1,7 +1,7 @@
 
-oab.settings_axiome:
+oab.axiome_settings:
   title: Axiome settings
-  route_name: oab.settings_axiome
+  route_name: oab.axiome_settings
   parent: oab.settings
   description: 'Configure oab Axiome settings'
   weight: -20
