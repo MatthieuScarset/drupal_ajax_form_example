@@ -1,4 +1,4 @@
-oab.axiome_settings_tab:
-  route_name: oab.axiome_settings
+oab.settings_axiome_tab:
+  route_name: oab.settings_axiome
   title: Settings
-  base_route: oab.axiome_settings
+  base_route: oab.settings_axiome

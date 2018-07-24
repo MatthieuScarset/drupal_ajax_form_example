@@ -87,7 +87,7 @@ class AxiomeContentImporter {
         //$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
         $ClassLeftBlock = str_replace("-","_",$cssClassLeftBlock);
-        $titleLeftBlock = \Drupal::config('oab.axiome')->get($ClassLeftBlock);
+        $titleLeftBlock = \Drupal::config('oab.settings_axiome')->get($ClassLeftBlock);
 
         // change class name
 		$nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
