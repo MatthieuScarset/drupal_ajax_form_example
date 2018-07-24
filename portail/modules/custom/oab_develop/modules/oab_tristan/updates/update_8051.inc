@@ -6,7 +6,7 @@
 use Drupal\locale\SourceString;
 
 ##Config par défaut (desactivé)
-oabt_YmlImport('oab.axiome_settings.yml');
+oabt_YmlImport('oab.axiome.yml');
 
 ##Ajout de la trad
 $translations = array(

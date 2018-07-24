@@ -14,7 +14,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'oab_admin_axiome_settings';
+    return 'oab_admin_settings_axiome';
   }
 
   /**
@@ -25,6 +25,11 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
       'oab.axiome',
     ];
   }
+
+  public static function getConfigName(){
+      return 'oab.axiome';
+  }
+
 
   /**
    * {@inheritdoc}

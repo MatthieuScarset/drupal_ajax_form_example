@@ -1,5 +1,5 @@
 #page d'administration par défaut
-oab.main_page:
+oab.axiome:
   path: 'admin/obs_backoffice/axiome'
   defaults:
     _controller: '\Drupal\oab_axiome\Controller\OabAxiomeController::test'
