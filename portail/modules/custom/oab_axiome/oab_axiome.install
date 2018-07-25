@@ -5,8 +5,8 @@
  * Implements hook_install().
  */
 function oab_axiome_install() {
-  //drupal_set_installed_schema_version('oab_axiome', 8000);
-   // variable_set('revision_auto_draft', array('none'));
+  drupal_set_installed_schema_version('oab_axiome', 8000);
+  // variable_set('revision_auto_draft', array('none'));
 
   oabt_YmlImport('oab.axiome.yml');
 
@@ -24,4 +24,20 @@ function oab_axiome_install() {
 
 function oab_axiome_uninstall() {
     drupal_install_schema('oab_axiome');
+}
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_axiome_update_dependencies() {
+    $dependencies = array();
+	return $dependencies;
+}
+
+/**
+ * RUBYPORTAILOBS-3368 paramétrage axiome
+ */
+
+function oab_axiome_update_8001() {
+  include_once("updates/update_8001.inc");
 }
