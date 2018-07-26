@@ -315,10 +315,11 @@ function oab_dvi_update_8041() {
     include_once("updates/update_8041.inc");
 }
 
+
 /**
- * Mise en place nouvelle direct access bar pour DVI
+ * RUBYPORTAILOBS-3370 [DVI] Subhome Distributeurs
  */
-function oab_dvi_update_8042()
+function oab_dvi_update_8043()
 {
-    include_once("updates/update_8042.inc");
+    include_once("updates/update_8043.inc");
 }

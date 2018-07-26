@@ -53,6 +53,8 @@ function isDVIProduct($node){
  */
 function oab_dvi_form_views_exposed_form_alter(&$form, &$form_state) {
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    /*
+     * suppression du filtre produits
     if ($form['#id'] === 'views-exposed-form-subhomes-page-distributor') {
 
         $query = \Drupal::entityQuery('node');
@@ -79,7 +81,7 @@ function oab_dvi_form_views_exposed_form_alter(&$form, &$form_state) {
         ];
         $form['product'] = $formProducts;
     }
-
+    */
 
 
     //Subhome Products DVI
