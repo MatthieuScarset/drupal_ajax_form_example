@@ -274,33 +274,30 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
     $current_user = Drupal::currentUser();
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    //Lorsque le formulaire est créé par le webform admin, on n'envoie pas de mail
-    if (!in_array('webform_admin', $current_user->getRoles())) {
-
-        #mail to SPOC Security
-        $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
-        if ($spoc_security !== null) {
-            \Drupal::service('plugin.manager.mail')
-                ->mail('oab_backoffice', 'gdpr_spoc_notice', $spoc_security->getEmail(), $current_language, array('webform'=> $entity));
-        } else {
-            drupal_set_message(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
-        }
-
-        # mail au createur du webform
-        $mail_creator = $current_user->getEmail();
+    #mail to SPOC Security
+    $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
+    if ($spoc_security !== null) {
         \Drupal::service('plugin.manager.mail')
-            ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language,  array('webform'=> $entity));
-
-        # mail au business owner
-        $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        if ($business_owner !== null ) {
-            $mail_business_owner = $business_owner->getEmail();
-            \Drupal::service('plugin.manager.mail')
-                ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language,  array('webform'=> $entity));
-        } else {
-            drupal_set_message(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
-        }
+            ->mail('oab_backoffice', 'gdpr_spoc_notice', $spoc_security->getEmail(), $current_language, array('webform'=> $entity));
+    } else {
+        drupal_set_message(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
     }
+
+    # mail au createur du webform
+    $mail_creator = $current_user->getEmail();
+    \Drupal::service('plugin.manager.mail')
+        ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language,  array('webform'=> $entity));
+
+    # mail au business owner
+    $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
+    if ($business_owner !== null ) {
+        $mail_business_owner = $business_owner->getEmail();
+        \Drupal::service('plugin.manager.mail')
+            ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language,  array('webform'=> $entity));
+    } else {
+        drupal_set_message(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
+    }
+
 }
 
 /**
@@ -515,8 +512,7 @@ function gdpr_hook_entity_update($entity) {
         ## Si le webform vient d'etre publié et que ce n'est pas un admin qui vient de le publier
         if ($isPublished
             && $isPublished !== $old_isPublished
-            && !in_array('webform_admin', $current_user->getRoles())
-            && $current_user->id() != 1      #Je ne le fait pas pour l'admin et les ebform_admin
+            && $current_user->id() != 1      #Je ne le fait pas pour l'admin
         ) {
             #mail to Everyone pour la validation
 
