@@ -635,34 +635,7 @@ function oab_frontoffice_views_post_render($view) {
     if ($view->id() == 'subhomes') {
         if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)){
             // on recupere les valeurs dans oab.subhomes
-
-            //$connection = Database::getConnection();
-            $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-            $collection = '';
-            if($current_language == "fr") {
-                $collection = 'language.fr';
-            }
-            if($current_language == "ru") {
-                $collection = 'language.ru';
-            }
-            if($current_language == "es") {
-                $collection = 'language.es';
-            }
-            if($current_language == "pt-br") {
-                $collection = 'language.pt-br';
-            }
-            /*
-            $sth = $connection->select('config', 'c')
-                ->fields('c', array('data'))
-                ->condition('name', 'oab.subhomes')
-                ->condition('collection', $collection);
-            $data = $sth->execute();
-            $results = $data->fetchAll(\PDO::FETCH_OBJ);
-            */
-
-            $config_factory = \Drupal::configFactory();
-            $data = $config_factory->getEditable('oab.subhomes');
-
+            $data =\Drupal::config('oab.subhomes');
             if(count($data) > 0) {
                 switch ($view->current_display) {
                     case 'page_press':
