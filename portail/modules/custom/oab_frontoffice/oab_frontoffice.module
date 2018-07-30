@@ -370,57 +370,36 @@ function oab_frontoffice_views_post_render($view) {
     if ($view->id() == 'subhomes') {
         if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)){
             // on recupere les valeurs dans oab.subhomes
-            $connection = Database::getConnection();
-            $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-            $collection = '';
-            if($current_language == "fr") {
-                $collection = 'language.fr';
-            }
-            if($current_language == "ru") {
-                $collection = 'language.ru';
-            }
-            if($current_language == "es") {
-                $collection = 'language.es';
-            }
-            if($current_language == "pt-br") {
-                $collection = 'language.pt-br';
-            }
-            $sth = $connection->select('config', 'c')
-                ->fields('c', array('data'))
-                ->condition('name', 'oab.subhomes')
-                ->condition('collection', $collection);
-            $data = $sth->execute();
-            $results = $data->fetchAll(\PDO::FETCH_OBJ);
-            if(count($results) > 0) {
-                $data = unserialize($results[0]->data);
+            $data =\Drupal::config('oab.subhomes');
+            if(count($data) > 0) {
                 switch ($view->current_display) {
                     case 'page_press':
-                        $route->setDefault('_title', $data['press_meta']);
-                        $view->setTitle($data['press_meta']);
+                        $route->setDefault('_title', $data->get('press_meta'));
+                        $view->setTitle($data->get('press_meta'));
                         break;
                     case 'page_partners':
-                        $route->setDefault('_title', $data['partner_meta']);
-                        $view->setTitle($data['partner_meta']);
+                        $route->setDefault('_title', $data->get('partner_meta'));
+                        $view->setTitle($data->get('partner_meta'));
                         break;
                     case 'page_customer':
-                        $route->setDefault('_title', $data['customer_meta']);
-                        $view->setTitle($data['customer_meta']);
+                        $route->setDefault('_title', $data->get('customer_meta'));
+                        $view->setTitle($data->get('customer_meta'));
                         break;
                     case 'page_document':
-                        $route->setDefault('_title', $data['library_meta']);
-                        $view->setTitle($data['library_meta']);
+                        $route->setDefault('_title', $data->get('library_meta'));
+                        $view->setTitle($data->get('library_meta'));
                         break;
                     case 'page_blog':
-                        $route->setDefault('_title', $data['blog_meta']);
-                        $view->setTitle($data['blog_meta']);
+                        $route->setDefault('_title', $data->get('blog_meta'));
+                        $view->setTitle($data->get('blog_meta'));
                         break;
                     case 'page_magazine':
-                        $route->setDefault('_title', $data['magazine_meta']);
-                        $view->setTitle($data['magazine_meta']);
+                        $route->setDefault('_title', $data->get('magazine_meta'));
+                        $view->setTitle($data->get('magazine_meta'));
                         break;
                     case 'page_catalogue':
-                        $route->setDefault('_title', $data['product_meta']);
-                        $view->setTitle($data['product_meta']);
+                        $route->setDefault('_title', $data->get('product_meta'));
+                        $view->setTitle($data->get('product_meta'));
                         break;
                 }
             }
