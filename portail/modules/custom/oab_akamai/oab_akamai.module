@@ -3,15 +3,15 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_akamai\Form\OabAkamaiForm;
 
-function oab_akamai_testDrushAkamai($form,FormStateInterface &$form_state) {
+function oab_akamai_testDrushAkamai($form, FormStateInterface &$form_state) {
     $url_to_test = $form_state->getValue('test_url');
     $host = $form_state->getValue('test_host');
 
-    $akamaiCtrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+    $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
 
-    $akamaiCtrl->flushAkamai($url_to_test);
-    $akamaiCtrl->flushVarnish($url_to_test, $host);
-    $akamaiCtrl->flushDrupalCache($url_to_test);
+    $akamai_ctrl->flushAkamai($url_to_test);
+    $akamai_ctrl->flushVarnish($url_to_test, $host);
+    $akamai_ctrl->flushDrupalCache($url_to_test);
 
 }
 
@@ -35,11 +35,11 @@ function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
         $node_url = str_replace("backoffice.", '', $node_url);
 
 
-        $akamaiCtrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+        $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
 
-        $akamaiCtrl->flushAkamai($node_url);
-        $akamaiCtrl->flushVarnish($node_url, $host);
-        $akamaiCtrl->flushDrupalCache($node_url);
+        $akamai_ctrl->flushAkamai($node_url);
+        $akamai_ctrl->flushVarnish($node_url, $host);
+        $akamai_ctrl->flushDrupalCache($node_url);
 
     }
 }
