@@ -20,30 +20,30 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class OabAkamaiController extends ControllerBase
 {
     private $schema = "https://";
-    private $akamai_authPrefixe;
-    private $akamai_baseUrl;
-    private $akamai_reqPath;
-    private $akamai_accessToken;
-    private $akamai_clientSecret;
-    private $akamai_clientToken;
+    private $authPrefixe;
+    private $baseUrl;
+    private $reqPath;
+    private $accessToken;
+    private $clientSecret;
+    private $clientToken;
     private $id = "mvymsutrt5rjsq2p";
-    private $varnish_ip;
+    private $varnishIp;
 
     public function __construct() {
         $config = \Drupal::config(OabAkamaiForm::getConfigName());
-        $this->akamai_authPrefixe = $config->get('auth_prefixe');
-        $this->akamai_baseUrl = $config->get('base_url');
-        $this->akamai_reqPath = $config->get('req_path');
-        $this->akamai_accessToken = $config->get('access_token');
-        $this->akamai_clientToken = $config->get('client_token');
-        $this->akamai_clientSecret = $config->get('client_secret');
-        $this->varnish_ip = $config->get('varnish_ip');
+        $this->authPrefixe = $config->get('auth_prefixe');
+        $this->baseUrl = $config->get('base_url');
+        $this->reqPath = $config->get('req_path');
+        $this->accessToken = $config->get('access_token');
+        $this->clientToken = $config->get('client_token');
+        $this->clientSecret = $config->get('client_secret');
+        $this->varnishIp = $config->get('varnish_ip');
     }
 
   /**
    * Méthode appelée quand on va voir le détail d'un import en BO
    */
-    public function testPage(Request $request){
+    public function testPage(Request $request) {
         $page = "https://www.orange-business.com/fr/blogs/collaboration-en-toute-liberte";
         $this->flushAkamai($page);
         $this->flushVarnish($page, "https://www.orange-business.com");
@@ -51,24 +51,26 @@ class OabAkamaiController extends ControllerBase
     }
 
     public function flushPage(Request $request) {
-        $originUrl = $request->headers->get('referer');
+        $origin_url = $request->headers->get('referer');
 
         #Je supprime le prefixe "back." et "backoffice" pour vider le cache en prod
-        $originUrl = str_replace("back.", '', $originUrl);
-        $originUrl = str_replace("backoffice.", '', $originUrl);
+        $origin_url = str_replace("back.", '', $origin_url);
+        $origin_url = str_replace("backoffice.", '', $origin_url);
 
-        if ($originUrl === null) {
-            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException("Vous ne pouvez pas utiliser cette page sans page d'origine");
+        if ($origin_url === null) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
+                "Vous ne pouvez pas utiliser cette page sans page d'origine"
+            );
         }
 
         $host = "https://".$request->headers->get('host');
 
-        $this->flushAkamai($originUrl);
-        $this->flushVarnish($originUrl, $host);
-        $this->flushDrupalCache($originUrl);
+        $this->flushAkamai($origin_url);
+        $this->flushVarnish($origin_url, $host);
+        $this->flushDrupalCache($origin_url);
 
         ##je fais toujours retourner vers la page d'origine
-        return new RedirectResponse($originUrl);
+        return new RedirectResponse($origin_url);
     }
 
 
@@ -78,12 +80,12 @@ class OabAkamaiController extends ControllerBase
         $page = str_replace("back.", '', $page);
         $page = str_replace("backoffice.", '', $page);
 
-        $akamai_path = $this->schema . $this->akamai_baseUrl . $this->akamai_reqPath;
+        $akamai_path = $this->schema . $this->baseUrl . $this->reqPath;
 
         $config_factory = \Drupal::configFactory();
-        $configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
-        if(!empty($config) && !empty($configProxy->get('proxy_server')) && !empty($configProxy->get('proxy_port')))	{
-            $proxy_server = $configProxy->get('proxy_server').':'.$configProxy->get('proxy_port');
+        $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
+        if (!empty($config) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
+            $proxy_server = $config_proxy->get('proxy_server').':'.$config_proxy->get('proxy_port');
         } else {
             $proxy_server = NULL;
         }
@@ -110,34 +112,34 @@ class OabAkamaiController extends ControllerBase
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-        $retValue = curl_exec($ch);
+        $ret_value = curl_exec($ch);
 
         # je laisse pour l'exemple si on repasse en returntransfert = true;
-        $jsonRet = json_decode(strstr($retValue, '{'), true);
+        $json_ret = json_decode(strstr($ret_value, '{'), true);
 
         $ret = false;
-        if (isset($jsonRet['httpStatus']) && $jsonRet['httpStatus'] == 201) {
+        if (isset($json_ret['httpStatus']) && $json_ret['httpStatus'] == 201) {
             $ret = true;
             drupal_set_message("Cache Akamaï vidé pour la page $page", 'status', true);
         } else {
-            $msg = (isset($jsonRet['detail'])) ? ": " . $jsonRet['detail'] : "";
+            $msg = (isset($json_ret['detail'])) ? ": " . $json_ret['detail'] : "";
             drupal_set_message("Erreur lors de l'appel à Akamaï pour la page $page $msg. Voir en log pour plus d'infos", 'error', true);
-            \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Akamaï avec le retour : $retValue");
+            \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Akamaï avec le retour : $ret_value");
         }
 
         curl_close($ch);
         return $ret;
   }
 
-    public function flushVarnish($originUrl, $host) {
+    public function flushVarnish($origin_url, $host) {
 
         #Je supprime le prefixe "back." et "backoffice" pour vider le cache en prod
         $host = str_replace("back.", '', $host);
         $host = str_replace("backoffice.", '', $host);
 
-        $originPath = str_replace($host, '', $originUrl);
+        $origin_path = str_replace($host, '', $origin_url);
 
-        $url = "https://" . $this->varnish_ip . $originPath;
+        $url = "https://" . $this->varnishIp . $origin_path;
 
        // $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
         $headers = array(
@@ -159,11 +161,11 @@ class OabAkamaiController extends ControllerBase
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $retValue = curl_exec($ch);
+        $ret_value = curl_exec($ch);
 
 
         $ret = false;
-        if ($retValue === false && curl_errno($ch) !== 0) {
+        if ($ret_value === false && curl_errno($ch) !== 0) {
             $err = curl_error($ch);
             $err .= ' (' . curl_errno($ch) . " : " . curl_strerror(curl_errno($ch)) . ")";
             drupal_set_message("Erreur lors de l'appel à Varnish pour la page $url. Voir en log pour plus d'infos", 'error', true);
@@ -189,13 +191,13 @@ class OabAkamaiController extends ControllerBase
     private function akamai_getAuthorization($timestamp, $data) {
         $nonce = $this->akamai_guidv4();
 
-        $signatureData = $this->akamai_generateSignatureData('POST',$this->akamai_baseUrl,$this->akamai_reqPath,$data, $timestamp, $nonce);
-        $signingKey = $this->akamai_generateHash($this->akamai_clientSecret,$timestamp);
-        $signature = $this->akamai_generateHash($signingKey,$signatureData);
+        $signature_data = $this->akamai_generateSignatureData('POST', $this->baseUrl, $this->reqPath, $data, $timestamp, $nonce);
+        $signing_key = $this->akamai_generateHash($this->clientSecret, $timestamp);
+        $signature = $this->akamai_generateHash($signing_key, $signature_data);
 
-        $authorization = $this->akamai_authPrefixe
-            . "client_token=" . $this->akamai_clientToken . ";"
-            . "access_token=" . $this->akamai_accessToken . ";"
+        $authorization = $this->authPrefixe
+            . "client_token=" . $this->clientToken . ";"
+            . "access_token=" . $this->accessToken . ";"
             . "timestamp=" . $timestamp . ";"
             . "nonce=" . $nonce . ";"
             . "signature=" . $signature;
@@ -205,7 +207,7 @@ class OabAkamaiController extends ControllerBase
 
   private function akamai_generateHash($key, $data, $rawoutput = true) {
       $s = hash_hmac('sha256', $data, $key, $rawoutput);
-      $b = str_replace('==', '=',base64_encode($s));
+      $b = str_replace('==', '=', base64_encode($s));
       $c = substr($b, 0, strlen($b) / 2);
       $c .= "=";
 
@@ -214,8 +216,9 @@ class OabAkamaiController extends ControllerBase
   }
 
     private function akamai_guidv4() {
-        if (function_exists('com_create_guid') === true)
+        if (function_exists('com_create_guid') === true) {
             return trim(com_create_guid(), '{}');
+        }
 
         $data = openssl_random_pseudo_bytes(16);
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 0100
@@ -225,31 +228,31 @@ class OabAkamaiController extends ControllerBase
     }
 
     // Generate Akamai signature Data
-    private function akamai_generateSignatureData($reqType, $baseURL, $reqPath, $data, $timestamp, $nonce) {
-        if (($reqType == "POST") || ($reqType == "PUT")) {
-            $signatureData = $reqType . "\t"
+    private function akamai_generateSignatureData($req_type, $base_url, $req_path, $data, $timestamp, $nonce) {
+        if (($req_type == "POST") || ($req_type == "PUT")) {
+            $signature_data = $req_type . "\t"
                 . "https" . "\t"
-                . $baseURL . "\t"
-                . $reqPath . "\t"
+                . $base_url . "\t"
+                . $req_path . "\t"
                 . "\t" . base64_encode(hash("sha256", $data, true)) . "\t"
-                . $this->akamai_authPrefixe
-                . "client_token=" . $this->akamai_clientToken . ";"
-                . "access_token=" . $this->akamai_accessToken . ";"
+                . $this->authPrefixe
+                . "client_token=" . $this->clientToken . ";"
+                . "access_token=" . $this->accessToken . ";"
                 . "timestamp=" . $timestamp . ";"
                 . "nonce=" . $nonce . ";";
-            return $signatureData;
+            return $signature_data;
         } else {
-            $signatureData = $reqType . "\t"
+            $signature_data = $req_type . "\t"
                 . "https" . "\t"
-                . $baseURL . "\t"
-                . $reqPath . "\t" . "\t" . "\t"
-                . $this->akamai_authPrefixe
-                . "client_token=" . $this->akamai_clientToken . ";"
-                . "access_token=" . $this->akamai_accessToken . ";"
+                . $base_url . "\t"
+                . $req_path . "\t" . "\t" . "\t"
+                . $this->authPrefixe
+                . "client_token=" . $this->clientToken . ";"
+                . "access_token=" . $this->accessToken . ";"
                 . "timestamp=" . $timestamp . ";"
                 . "nonce=" . $nonce . ";";
 
-            return $signatureData;
+            return $signature_data;
         }
     }
 
