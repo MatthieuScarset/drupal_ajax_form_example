@@ -72,4 +72,4 @@ CKEDITOR.plugins.setLang( 'colorbutton', 'mk', {
 	more: 'More Colors...', // MISSING
 	panelTitle: 'Colors',
 	textColorTitle: 'Text Color' // MISSING
-} );
+});

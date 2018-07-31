@@ -72,4 +72,4 @@ CKEDITOR.plugins.setLang( 'colorbutton', 'pl', {
 	more: 'Więcej kolorów...',
 	panelTitle: 'Kolory',
 	textColorTitle: 'Kolor tekstu'
-} );
+});

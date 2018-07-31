@@ -112,7 +112,7 @@ class SynomiaSearchResponse {
 	 * @param unknown $dom
 	 * @return Ambigous <multitype:multitype: , multitype:NULL >
 	 */
-	function getResultsClustersArray($dom)
+    public function getResultsClustersArray($dom)
 	{
 		$cluster = $dom->getElementsByTagName("cluster");
 		if(isset($cluster))

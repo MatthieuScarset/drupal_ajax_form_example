@@ -20,28 +20,28 @@ class FontAwesome extends PluginBase implements CKEditorPluginInterface, CKEdito
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
-  function getDependencies(Editor $editor)
+  public function getDependencies(Editor $editor)
   {
     return array();
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getLibraries().
    */
-  function getLibraries(Editor $editor)
+  public function getLibraries(Editor $editor)
   {
     return array();
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::isInternal().
    */
-  function isInternal()
+  public function isInternal()
   {
     return false;
   }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getFile().
    */
-  function getFile()
+  public function getFile()
   {
     $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/fontawesome/plugin.js';
     return $plugin;

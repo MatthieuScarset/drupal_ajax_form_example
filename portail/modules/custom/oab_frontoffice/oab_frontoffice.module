@@ -269,8 +269,8 @@ function clean_exposed_filters_by_language($options, $txtAll){
 			$term = \Drupal\taxonomy\Entity\Term::load($key);
 			if(isset($term) && $term != null) {
 				$lang = $term->language();
-				if ( $lang->getId() != $current_language ) {
-					unset( $options[ $key ] );
+				if ( $lang->getId() != $current_language) {
+					unset( $options[ $key ]);
 				}
 			}
 		}else{
@@ -395,7 +395,7 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-    /*if ( isset($form['actions']['submit']['#value']) ) {
+    /*if ( isset($form['actions']['submit']['#value'])) {
       if ($current_language == 'fr') {
          $form['actions']['submit']['#value'] = "Filtrer";
       } elseif ($current_language == 'ru') {
@@ -479,11 +479,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     }
 
     // HACK POUR LA SORTIE
-    if($current_language == 'fr' ){
+    if($current_language == 'fr'){
         // on supprime "eBook"
         unset($form['field_document_type_target_id']['#options']['E-book']);
     }
-    if($current_language == 'en' ){
+    if($current_language == 'en'){
         // on supprime "position paper"
         unset($form['field_document_type_target_id']['#options']['Position paper']);
     }
@@ -499,7 +499,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     }
 
     //Suppression de filtres pour le russe
-    if($current_language == 'ru' ){
+    if($current_language == 'ru'){
       unset($form['press_formats']);
     }
   }
@@ -523,7 +523,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       unset($form['jobs_profiles']);
     }
     // HACK POUR LA SORTIE
-    if($current_language == 'fr' ){
+    if($current_language == 'fr'){
       // on supprime "ressources et énergie" et "transport"
         unset($form['industries']['#options']["ressources et énergie"]);
         unset($form['industries']['#options']["transport"]);
@@ -542,12 +542,12 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     }
 
     // HACK POUR LA SORTIE
-    if($current_language == 'fr' ){
+    if($current_language == 'fr'){
         // on supprime "ressources et énergie" et "transport"
         unset($form['industries']['#options']["ressources et énergie"]);
         unset($form['industries']['#options']["transport"]);
     }
-    if($current_language == 'ru' ){
+    if($current_language == 'ru'){
         unset($form['industries']);
     }
   }
@@ -844,7 +844,7 @@ function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface 
 
     foreach (array_keys($form['actions']) as $action) {
         if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit' );
+          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit');
         }
     }
   } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
@@ -852,7 +852,7 @@ function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface 
       foreach (array_keys($form['actions']) as $action) {
 
           if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit' );
+              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit');
           }
       }
   }
@@ -1082,7 +1082,7 @@ function getRegions(){
 	foreach ($results as $region){
 		if(!array_key_exists($region->region_tid, $table_regions)
 			&& !empty($region->region_tid)
-			&& $region->region_langcode == $current_language ){
+			&& $region->region_langcode == $current_language){
 			$table_regions[$region->region_tid] = $region->region_name;
 		}
 	}

@@ -491,7 +491,6 @@ function oab_tristan_update_8063() {
 
 
 /**
-<<<<<<< HEAD
  * Création des menus top navbar ES et PT
  */
 function oab_tristan_update_8064() {
@@ -504,7 +503,7 @@ function oab_tristan_update_8064() {
  */
 function oab_tristan_update_8065()
 {
-    include('updates/update_8065.inc');
+    include_once('updates/update_8065.inc');
 }
 
 /**
@@ -530,10 +529,6 @@ function oab_tristan_update_8068() {
 }
 
 /**
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> updates
  * Création d'une vue pour l'export des documents du site
  */
 function oab_tristan_update_8069() {
