@@ -4,9 +4,9 @@ namespace Drupal\oab_axiome\Entity;
 
 
 abstract class AxiomeParseErrorEnum extends AxiomeBaseEnum {
-  const MissingAttribute = 'The attribute %key is missing, the import can not be completed.';
-  const MissingKey = 'The key %key is missing, the import can not be completed.';
-  const MissingFile = 'The file %key is missing, the import can not be completed.';
+  const MISSING_ATTRIBUTE = 'The attribute %key is missing, the import can not be completed.';
+  const MISSING_KEY = 'The key %key is missing, the import can not be completed.';
+  const MISSING_FILE = 'The file %key is missing, the import can not be completed.';
 
 }
 
@@ -26,7 +26,7 @@ class AxiomeParseError {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    *
    */
-  public static function getMessage($key, $values = array()){
+  public static function getMessage($key, $values = array()) {
     return t(AxiomeParseErrorEnum::getValue($key), $values);
   }
 }
