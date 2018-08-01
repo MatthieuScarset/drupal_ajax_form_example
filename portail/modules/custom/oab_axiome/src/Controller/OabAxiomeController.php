@@ -20,7 +20,7 @@ class OabAxiomeController extends ControllerBase
     $axiome_importer->axiome_search_archive($axiome_importer->axiomeFolderRootPath);
 
     $t2 = microtime();
-    echo nl2br ($axiome_importer->message);
+    echo nl2br($axiome_importer->message);
     $build = array(
       '#type' => 'markup',
       '#markup' => t('Traitement réalisé en '.(($t2-$t1)).'s !'),
@@ -36,8 +36,9 @@ class OabAxiomeController extends ControllerBase
       $values = $config->get(AxiomeImporter::CONFIG_VALUE_NAME);
 
       $ret = false;
-      if (isset($values[$nid]))
+      if (isset($values[$nid])) {
           $ret = $values[$nid];
+      }
 
       return $ret;
   }
