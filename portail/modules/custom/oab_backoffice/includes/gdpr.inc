@@ -17,7 +17,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
      */
     if (in_array('webform_business_owner', $account->getRoles())) {
         $form_bo = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-        if ( ( $operation == "submission_view_any" || $operation == "update" )
+        if (($operation == "submission_view_any" || $operation == "update")
             && $form_bo !== null
             && $form_bo->id() == $account->id()) {
             return Drupal\Core\Access\AccessResult::allowed();
@@ -41,7 +41,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         $allowed = gdpr_check_authorized_view($entity, $account);
         if ($allowed) {
             return Drupal\Core\Access\AccessResult::allowed();
-        } elseif( $allowed == false) {
+        } elseif ( $allowed == false) {
             return Drupal\Core\Access\AccessResult::forbidden();
         } elseif ($allowed == null) {
             return Drupal\Core\Access\AccessResult::neutral();
@@ -69,7 +69,7 @@ function gdpr_check_authorized_view($entity, $account) {
 
     //echo "is published : $is_published"; die();
     ##Je fais les accès au formulaire en spécifique si le formulaire n'est pas publié
-    if ($is_published != 1 ) {
+    if ($is_published != 1) {
 
         ## Si c'est un webform admin ou si c'est l'administrateur
         if (in_array('webform_admin', $account->getRoles())
@@ -114,7 +114,7 @@ function gdpr_check_authorized_view($entity, $account) {
  */
 function gdpr_hook_node_acces(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
     if ($entity->getType() == 'webform' && $operation == 'view') {
-        if ($entity->get('webform')->count() > 0 ) {
+        if ($entity->get('webform')->count() > 0) {
             $webform_value = $entity->get('webform')->first()->getValue();
             $webform_machine_name = $webform_value['target_id'];
             $webform_entity = \Drupal::entityTypeManager()->getStorage('webform')->load($webform_machine_name);
@@ -286,14 +286,14 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
     # mail au createur du webform
     $mail_creator = $current_user->getEmail();
     \Drupal::service('plugin.manager.mail')
-        ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language,  array('webform'=> $entity));
+        ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language, array('webform'=> $entity));
 
     # mail au business owner
     $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
-    if ($business_owner !== null ) {
+    if ($business_owner !== null) {
         $mail_business_owner = $business_owner->getEmail();
         \Drupal::service('plugin.manager.mail')
-            ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language,  array('webform'=> $entity));
+            ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language, array('webform'=> $entity));
     } else {
         drupal_set_message(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
     }
@@ -351,7 +351,7 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
             if (is_array($name)) {
                 $ret[$machine_name] = [];
 
-                foreach($name as $key => $value) {
+                foreach ($name as $key => $value) {
                     $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($key);
                     if (gdpr_check_authorized_view($webform, $current_user)) {
                         $ret[$machine_name][$key] = $value;
@@ -387,21 +387,24 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
         $form['gdpr_informations']['gdpr_form_published'] = [
             '#type' => 'checkbox',
             '#title'    => t('Form published'),
-            '#default_value' => ($entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') !== null ) ? $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') : false,
+            '#default_value' => ($entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published') !== null)
+                    ? $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published')
+                    : false,
             '#access' => false,
             "#disabled" => "disabled"
         ];
 
         $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
         $current_user = Drupal::currentUser();
-        // j'affiche la checkbox si on est dans les settings du webform et l'utilisateur connecté est le "business owner" du formulaire en question
+        // j'affiche la checkbox si on est dans les settings du webform
+        // et l'utilisateur connecté est le "business owner" du formulaire en question
         if ($form_id == 'webform_settings_form') {
 
             ##Je n'affiche la publication que si on édite le formulaire, pas à la création
             $form['gdpr_informations']['gdpr_form_published']['#access'] = true;
 
             ## Je le rend cliquable que si l'utilisateur courant est le business_owner
-            if (  $current_user->id() == 1
+            if ($current_user->id() == 1
                 || ( $business_owner !== null
                     && (
                         in_array('webform_admin', $current_user->getRoles())
@@ -506,18 +509,18 @@ function gdpr_hook_entity_update($entity) {
 
         $old_webform = $entity->original;
 
-        $isPublished = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
-        $old_isPublished = $old_webform->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+        $is_published = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
+        $old_is_published = $old_webform->getThirdPartySetting('oab_gdpr', 'gdpr_form_published');
 
         ## Si le webform vient d'etre publié et que ce n'est pas un admin qui vient de le publier
-        if ($isPublished
-            && $isPublished !== $old_isPublished
+        if ($is_published
+            && $is_published !== $old_is_published
             && $current_user->id() != 1      #Je ne le fait pas pour l'admin
         ) {
             #mail to Everyone pour la validation
 
             $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
-            if ($spoc !== null ) {
+            if ($spoc !== null) {
                 $mail_spoc = $spoc->getEmail();
                 \Drupal::service('plugin.manager.mail')
                     ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_spoc, $current_language, array('webform' => $entity));
@@ -544,7 +547,7 @@ function gdpr_hook_entity_update($entity) {
 function gdpr_hook_cron() {
     ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
     #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-    if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
+    if (date('G', \Drupal::time()->getCurrentTime()) == 2) {
 
 
         ## Je recupère tous les webforms existants et je boucle sur chacun d'entre eux,
@@ -563,7 +566,7 @@ function gdpr_hook_cron() {
 
                 $expire_date = $webform_entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date');
 
-                if ($expire_date == null || $expire_date == ""){
+                if ($expire_date == null || $expire_date == "") {
                     ## SI le formulaire n'a pas de date d'expiration, je supprime toutes les soumissions qui ont plus de 6 mois
                     ## (soit gdpr_expiration_date n'existe pas, soit il est setté avec un string vide (résultat du form sans donnée)
 
