@@ -29,7 +29,7 @@ use Drupal\node\Entity\Node;
 
 class TryAndBuyBlock  extends BlockBase {
 
-	public function build(){
+	public function build() {
 		$block = array();
 		$blockEmpty = true;
 		// récupération du contexte
@@ -40,14 +40,14 @@ class TryAndBuyBlock  extends BlockBase {
 		$node = Node::load($nid);
 		$type = $node->getType();
 
-		if($type == 'product'){
+		if ($type == 'product') {
 			/**
 			 * Préparation du code à venir pour Axiome : par la suite les information pourront venir d'Axiome, il faudra alors modifier ce block pour afficher les infos d'Axiome
 			 */
 			/*
 			if ($node->hasField('field_axiome_data')) {
 				$field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
-				if(is_array($field_axiome_data) && count($field_axiome_data) > 0) {
+				if (is_array($field_axiome_data) && count($field_axiome_data) > 0) {
 					$axiome_data = $field_axiome_data;
 					$blockEmpty = FALSE;
 				}
@@ -55,7 +55,7 @@ class TryAndBuyBlock  extends BlockBase {
 			* FIN traitement des données Axiome
 			*/
 			//var_dump($blockEmpty) ; die();
-			if($blockEmpty){
+			if ($blockEmpty) {
 				if ($node->hasField('field_try_and_buy')) {
 					$field_data = $node->get('field_try_and_buy');
 					foreach ($field_data as $data) {
@@ -65,7 +65,7 @@ class TryAndBuyBlock  extends BlockBase {
 				}
 			}
 		}
-		if(!$blockEmpty){
+		if (!$blockEmpty) {
 			return $block;
 		}
 		else

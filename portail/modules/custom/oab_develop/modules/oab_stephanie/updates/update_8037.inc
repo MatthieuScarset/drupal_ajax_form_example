@@ -7,7 +7,7 @@ $query->condition('langcode', 'en');
 $query->condition('name', 'Russia');
 $entity = $query->execute();
 
-if(!isset($entity) || empty($entity))
+if (!isset($entity) || empty($entity))
 {
 	//s'il n'existe pas on le crée
 	$newTerm = \Drupal\taxonomy\Entity\Term::create([

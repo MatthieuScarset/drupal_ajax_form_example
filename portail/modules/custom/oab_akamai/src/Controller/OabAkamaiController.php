@@ -43,7 +43,7 @@ class OabAkamaiController extends ControllerBase
   /**
    * Méthode appelée quand on va voir le détail d'un import en BO
    */
-    public function testPage(Request $request){
+    public function testPage(Request $request) {
         $page = "https://www.orange-business.com/fr/blogs/collaboration-en-toute-liberte";
         $this->flushAkamai($page);
         $this->flushVarnish($page, "https://www.orange-business.com");
@@ -82,7 +82,7 @@ class OabAkamaiController extends ControllerBase
 
         $config_factory = \Drupal::configFactory();
         $configProxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
-        if(!empty($config) && !empty($configProxy->get('proxy_server')) && !empty($configProxy->get('proxy_port')))	{
+        if (!empty($config) && !empty($configProxy->get('proxy_server')) && !empty($configProxy->get('proxy_port')))	{
             $proxy_server = $configProxy->get('proxy_server').':'.$configProxy->get('proxy_port');
         } else {
             $proxy_server = NULL;

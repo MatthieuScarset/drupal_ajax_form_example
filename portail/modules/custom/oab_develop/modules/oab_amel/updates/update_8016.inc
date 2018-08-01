@@ -6,7 +6,7 @@
 
 $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::load('products');
 
-    if (!isset($vocabularies)){
+    if (!isset($vocabularies)) {
         $vocab = \Drupal\taxonomy\Entity\Vocabulary::create(array(
             'vid' => 'products',
             'name' => 'Products'

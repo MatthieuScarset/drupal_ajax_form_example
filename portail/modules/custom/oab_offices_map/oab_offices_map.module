@@ -1,6 +1,6 @@
 <?php
 
-function oab_offices_map_theme(){
+function oab_offices_map_theme() {
 	$theme = array();
 	$theme['offices_map_page'] = array(
 		'variables' => array(

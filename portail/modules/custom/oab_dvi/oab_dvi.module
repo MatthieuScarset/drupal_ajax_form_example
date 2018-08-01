@@ -3,8 +3,8 @@
 use \Drupal\views\ViewExecutable;
 use \Drupal\oab_dvi\DviHelper;
 
-function isDVIProduct($node){
-	if($node->type->entity->get('type') == "product"){
+function isDVIProduct($node) {
+	if ($node->type->entity->get('type') == "product") {
 		//initialisation des tid DVI
 		$default_labels = array(
 			"fr" => array('- 50 salariés', 'Secteur Public'),
@@ -33,8 +33,8 @@ function isDVIProduct($node){
 			$field_market_segment = $node->field_market_segment->getValue();
 			if (!empty($field_market_segment) && count($field_market_segment)>0) {
 				//pour chaque tag on regarde s'il y en a un dvi
-				foreach ($field_market_segment as $values){
-					if(in_array($values['target_id'], $default_values[$node->language()->getId()])){
+				foreach ($field_market_segment as $values) {
+					if (in_array($values['target_id'], $default_values[$node->language()->getId()])) {
 						$dvi_product = TRUE;
 					}
 				}

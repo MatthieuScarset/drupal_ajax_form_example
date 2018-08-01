@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 ##Creation du nouveau field
 $field_storage = FieldStorageConfig::loadByName('node', 'field_is_dvi_product');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_is_dvi_product',
         'entity_type' => 'node',
@@ -19,7 +19,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_is_dvi_product');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_is_dvi_product',
         'entity_type' => 'node',

@@ -41,7 +41,7 @@ if (isset($modules['easy_breadcrumb'])) {
 ## Ajout du nouveau field pour les terms des subhomes
 
 $field_storage = FieldStorageConfig::loadByName('taxonomy_term', 'field_related_display_view');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_related_display_view',
     'entity_type' => 'taxonomy_term',
@@ -50,7 +50,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('taxonomy_term', 'subhomes', 'field_related_display_view');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' =>  'field_related_display_view',
     'entity_type' => 'taxonomy_term',

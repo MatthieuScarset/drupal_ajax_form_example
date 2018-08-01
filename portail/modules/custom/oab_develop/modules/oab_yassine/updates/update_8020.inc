@@ -235,7 +235,7 @@ $items = array(
 	'397' => 'Europe',
 );
 
-foreach($items as $nid => $title) {
+foreach ($items as $nid => $title) {
 	$menu_link = MenuLinkContent::create([
 		'title' => $title,
 		'link' => ['uri' => 'internal://taxonomy/term/' . $nid],
@@ -251,7 +251,7 @@ foreach($items as $nid => $title) {
 // ------------------------------
 
 /*$paragraphStorage = ParagraphsType::load('homepage_banner_experience');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
 	$paragraphType = ParagraphsType::create([
 		'id' => 'homepage_banner_experience',
 		'label' => 'Homepage Banner Expertise',
@@ -282,7 +282,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 /* $paragraphStorage = ParagraphsType::load('homepage_banner_item');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
 	$paragraphType = ParagraphsType::create([
 		'id' => 'homepage_banner_item',
 		'label' => 'Homepage Solution Banner Item',
@@ -314,7 +314,7 @@ $config_group->save(TRUE);
 // Paragraphs homepage_news
 
 /*$paragraphStorage = ParagraphsType::load('homepage_news');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
 	$paragraphType = ParagraphsType::create([
 		'id' => 'homepage_news',
 		'label' => 'Highlight on top (max. 3)',
@@ -344,7 +344,7 @@ $config_group->save(TRUE);
 
 // Paragraphs infography_partner
 /*$paragraphStorage = ParagraphsType::load('infography_partner');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
 	$paragraphType = ParagraphsType::create([
 		'id' => 'infography_partner',
 		'label' => 'Infography partner (max. 5)',

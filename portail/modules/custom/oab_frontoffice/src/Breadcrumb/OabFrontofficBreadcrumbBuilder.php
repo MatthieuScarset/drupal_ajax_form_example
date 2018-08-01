@@ -61,7 +61,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 		$breadcrumb->addCacheContexts(["url"]);
 
 		# By adding "cache tags" for this specific node, the cache is invalidated when the node is edited.
-		if(isset($node->nid->value) && !empty($node->nid->value)){
+		if (isset($node->nid->value) && !empty($node->nid->value)) {
 			$breadcrumb->addCacheTags(["node:{$node->nid->value}"]);
 		}
 

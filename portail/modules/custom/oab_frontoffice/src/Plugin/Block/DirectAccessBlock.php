@@ -27,7 +27,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class DirectAccessBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
         $direct_access_custom_text = isset($config['direct_access_custom_text']) ? $config['direct_access_custom_text'] : '';
         return array(

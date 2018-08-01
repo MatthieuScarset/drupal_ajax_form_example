@@ -24,7 +24,7 @@ $nids= \Drupal::entityQuery('node')
 
 $nodesOffices = \Drupal\node\Entity\Node::loadMultiple($nids);
 foreach ($nodesOffices as $office) {
-	if($office->language()->getId() == 'und') {
+	if ($office->language()->getId() == 'und') {
 		$office->set('langcode', 'en');
 		$office->save();
 	}
@@ -106,16 +106,16 @@ $tidCountries = \Drupal::entityQuery('taxonomy_term')
 	->execute();
 $controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
 $termsCountries = $controller->loadMultiple($tidCountries);
-foreach($termsCountries as $termObj) {
+foreach ($termsCountries as $termObj) {
 	if (!empty($termObj)) {
 		//on passe le terme en version EN
-		if($termObj->language()->getId() == 'und') {
+		if ($termObj->language()->getId() == 'und') {
 			$termObj->set('langcode', 'en');
 			$termObj->save();
 		}
-		if(!$termObj->hasTranslation('ru')){
+		if (!$termObj->hasTranslation('ru')) {
 			$termArray = $termObj->toArray();
-			if(isset($countriesTrad[$termObj->label()]))
+			if (isset($countriesTrad[$termObj->label()]))
 			{
 				$termArray['name'] = $countriesTrad[$termObj->label()];
 			}
@@ -126,7 +126,7 @@ foreach($termsCountries as $termObj) {
 
 
 $role = \Drupal\user\Entity\Role::load('digital_admin');
-if(!empty($role)) {
+if (!empty($role)) {
 	//affectation de la permission
 	$permissions = $role->getPermissions();
 	if (!in_array('translate office node', $permissions)) {

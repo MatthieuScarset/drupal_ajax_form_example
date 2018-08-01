@@ -85,8 +85,8 @@ class BlogPostProfile extends SqlBase {
 
       $profile_results = $profile->execute()->fetchAll();
 
-      if (is_array($profile_results)){
-        foreach ($profile_results AS $profile_result){
+      if (is_array($profile_results)) {
+        foreach ($profile_results AS $profile_result) {
           foreach ($value AS $field) {
             // On vérifie si on a affaire à un objet ou à un tableau
             if (is_object($profile_result) && isset($profile_result->$field)) {
@@ -117,7 +117,7 @@ class BlogPostProfile extends SqlBase {
       }
     }
 		// compte twitter
-    if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')){
+    if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')) {
 			$row->setSourceProperty('field_social_account', substr($field_twitter_account, 0, 255));
     }
 
@@ -138,15 +138,15 @@ class BlogPostProfile extends SqlBase {
 
     $images_results = $images_query->execute()->fetchAll();
 
-    if (is_array($images_results)){
+    if (is_array($images_results)) {
       $images = array();
-      foreach ($images_results AS $images_result){
+      foreach ($images_results AS $images_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($images_result) && isset($images_result->mid)){
+        if (is_object($images_result) && isset($images_result->mid)) {
           $images[] = $images_result->mid;
         }
-        elseif (is_array($images_result) && isset($images_result['mid'])){
+        elseif (is_array($images_result) && isset($images_result['mid'])) {
           $images[] = $images_result['mid'];
         }
       }
@@ -161,7 +161,7 @@ class BlogPostProfile extends SqlBase {
 
     $path_results = $path_query->execute()->fetchObject();
 
-    if (is_object($path_results)){
+    if (is_object($path_results)) {
       $row->setSourceProperty('path', '/' . $path_results->alias);
     }
 

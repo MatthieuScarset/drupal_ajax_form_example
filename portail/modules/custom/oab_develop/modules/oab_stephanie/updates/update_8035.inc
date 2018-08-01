@@ -12,7 +12,7 @@ if (!isset($vocabularies['office_countries']) ) {
 
 //Champ STREET
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_street');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_street',
 		'entity_type' => 'node',
@@ -28,7 +28,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_street');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_street',
 		'entity_type' => 'node',
@@ -47,7 +47,7 @@ if(empty($field)) {
 
 //Champ ADDITIONNAL
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_additionnal');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_additionnal',
 		'entity_type' => 'node',
@@ -63,7 +63,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_additionnal');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_additionnal',
 		'entity_type' => 'node',
@@ -81,7 +81,7 @@ if(empty($field)) {
 
 //Champ CITY
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_city');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_city',
 		'entity_type' => 'node',
@@ -97,7 +97,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_city');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_city',
 		'entity_type' => 'node',
@@ -116,7 +116,7 @@ if(empty($field)) {
 
 //Champ POSTAL CODE
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_postal_code');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_postal_code',
 		'entity_type' => 'node',
@@ -132,7 +132,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_postal_code');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_postal_code',
 		'entity_type' => 'node',
@@ -151,7 +151,7 @@ if(empty($field)) {
 
 //Champ PHONE NUMBER
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_phone_number');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_phone_number',
 		'entity_type' => 'node',
@@ -167,7 +167,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_phone_number');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_phone_number',
 		'entity_type' => 'node',
@@ -185,7 +185,7 @@ if(empty($field)) {
 
 //Champ PHONE NUMBER
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_email_address');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_email_address',
 		'entity_type' => 'node',
@@ -201,7 +201,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_email_address');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_email_address',
 		'entity_type' => 'node',
@@ -220,7 +220,7 @@ if(empty($field)) {
 
 //Champ COUNTRY
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_office_country');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -248,7 +248,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_office_country');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (
@@ -291,7 +291,7 @@ if(empty($field)) {
 
 //Champ LOCATION
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_office_location');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -320,7 +320,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_office_location');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (
@@ -356,7 +356,7 @@ if(empty($field)) {
 
 //Champ REGION
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_region');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -386,7 +386,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'office', 'field_region');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (

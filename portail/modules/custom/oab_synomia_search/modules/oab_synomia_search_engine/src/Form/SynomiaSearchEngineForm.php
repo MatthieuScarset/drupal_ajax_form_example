@@ -55,7 +55,7 @@ class SynomiaSearchEngineForm extends FormBase {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function submitForm(array &$form, FormStateInterface $form_state){
+	public function submitForm(array &$form, FormStateInterface $form_state) {
 		$input = &$form_state->getUserInput();
 		$option = [
 			'query' => array('mot' => $input["mot"]),

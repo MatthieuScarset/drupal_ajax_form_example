@@ -152,7 +152,7 @@ class OabExportFileListController extends ControllerBase {
             $relationships = $result->_relationship_entities;
             foreach ($fields['entity'] as $field_name => $field_real_name) {
                 $value_string = "";
-                if ($entity->hasField($field_real_name)){
+                if ($entity->hasField($field_real_name)) {
                     $values = $entity->get($field_real_name)->getValue();
                     $i = 0;
                     foreach ($values as $key => $value) {
@@ -169,7 +169,7 @@ class OabExportFileListController extends ControllerBase {
             foreach ($fields['relation'] as $field_name => $field_real_name) {
                 foreach ($relationships as $relationship) {
                     $value_string = "";
-                    if ($relationship->hasField($field_real_name)){
+                    if ($relationship->hasField($field_real_name)) {
                         $values = $relationship->get($field_real_name)->getValue();
 
 

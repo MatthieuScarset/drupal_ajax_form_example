@@ -26,7 +26,7 @@ use Drupal\node\Entity\Node;
 
 class DviContactDistributorBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $block = array();
 
 
@@ -40,7 +40,7 @@ class DviContactDistributorBlock extends BlockBase {
         $node = Node::load($nid);
         $type = $node->getType();
 
-        if($type == 'distributor'){
+        if ($type == 'distributor') {
             $form = \Drupal\webform\Entity\Webform::load('dvi_contact_distributor');
             $block["form"] = \Drupal::service('entity_type.manager')
                 ->getViewBuilder('webform')

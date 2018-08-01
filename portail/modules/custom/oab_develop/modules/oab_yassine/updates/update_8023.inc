@@ -19,7 +19,7 @@ $label = "Top zone background for mobile";
 
 ##Création du field et du field storage
 $field_storage = FieldStorageConfig::loadByName('node', $fieldName);
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => $fieldName,
 		'entity_type' => 'node',
@@ -28,7 +28,7 @@ if(empty($field_storage)) {
 }
 foreach ($contentTypes as $contentType) {
 	$field = FieldConfig::loadByName('node', $contentType, $fieldName);
-	if(empty($field)) {
+	if (empty($field)) {
 		$config_array = array(
 			'field_name' =>  $fieldName,
 			'entity_type' => 'node',
@@ -59,7 +59,7 @@ $label = "Image Mobile";
 
 ##Création du field et du field storage
 $field_storage = FieldStorageConfig::loadByName('node', $fieldName);
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => $fieldName,
 		'entity_type' => 'node',
@@ -68,7 +68,7 @@ if(empty($field_storage)) {
 }
 foreach ($contentTypes as $contentType) {
 	$field = FieldConfig::loadByName('node', $contentType, $fieldName);
-	if(empty($field)) {
+	if (empty($field)) {
 		$config_array = array(
 			'field_name' =>  $fieldName,
 			'entity_type' => 'node',
@@ -86,7 +86,7 @@ $label = "Image Mobile";
 
 ##Création du field et du field storage
 $field_storage = FieldStorageConfig::loadByName('node', $fieldName);
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => $fieldName,
 		'entity_type' => 'node',
@@ -95,7 +95,7 @@ if(empty($field_storage)) {
 }
 foreach ($contentTypes as $contentType) {
 	$field = FieldConfig::loadByName('node', $contentType, $fieldName);
-	if(empty($field)) {
+	if (empty($field)) {
 		$config_array = array(
 			'field_name' =>  $fieldName,
 			'entity_type' => 'node',

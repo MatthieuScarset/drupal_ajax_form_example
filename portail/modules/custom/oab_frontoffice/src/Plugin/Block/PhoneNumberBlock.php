@@ -26,7 +26,7 @@ use Drupal\node\Entity\Node;
 
 class PhoneNumberBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $block = array();
 				$config = $this->getConfiguration();
         // récupération du contexte
@@ -42,7 +42,7 @@ class PhoneNumberBlock extends BlockBase {
         $block['#type'] = 'markup';
         $block['#markup'] = '';
         $content = '';
-        if(isset($phone_number[0]['value'])){
+        if (isset($phone_number[0]['value'])) {
             //$content = check_markup($phone_number[0]['value'], 'full_html', '', []);
             $content = $phone_number[0]['value'];
         }

@@ -43,10 +43,10 @@ $new_menus = array(
 	),
 );
 
-foreach ($new_menus as $menu_values){
+foreach ($new_menus as $menu_values) {
 
 	$menuObj = Menu::load($menu_values['menu_id']);
-	if(!isset($menuObj) || empty($menuObj))
+	if (!isset($menuObj) || empty($menuObj))
 	{
 		$menuObj = Menu::create([
 			'id' => $menu_values['menu_id'],
@@ -60,7 +60,7 @@ foreach ($new_menus as $menu_values){
 	}
 
 	$blockObj = Block::load($menu_values['block_id']);
-	if(!isset($blockObj) || empty($blockObj))
+	if (!isset($blockObj) || empty($blockObj))
 	{
 		$blockObj = Block::create([
 			'langcode' => $menu_values['langcode'],

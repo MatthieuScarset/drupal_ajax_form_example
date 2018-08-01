@@ -257,7 +257,7 @@ $labels = [
 
 foreach ( $labels as $fieldName => $label ) {
   $field_storage = FieldStorageConfig::loadByName('node', $fieldName);
-  if(empty($field_storage)) {
+  if (empty($field_storage)) {
     FieldStorageConfig::create(array(
       'field_name' => $fieldName,
       'entity_type' => 'node',
@@ -266,7 +266,7 @@ foreach ( $labels as $fieldName => $label ) {
   }
   foreach ($contentTypes as $contentType) {
     $field = FieldConfig::loadByName('node', $contentType, $fieldName);
-    if(empty($field)) {
+    if (empty($field)) {
       $config_array = array(
         'field_name' =>  $fieldName,
         'entity_type' => 'node',

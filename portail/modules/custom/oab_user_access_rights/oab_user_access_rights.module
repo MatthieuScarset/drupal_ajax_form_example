@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements hook_entity_access().
  */
-function oab_user_access_rights_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account){
+function oab_user_access_rights_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
   $entity_class = get_class($entity);
   if (in_array($entity_class, array('Drupal\taxonomy\Entity\Term', 'Drupal\node\Entity\Node'))
     && in_array($operation, array('delete', 'update'))) {
@@ -34,38 +34,38 @@ function oab_user_access_rights_entity_access(\Drupal\Core\Entity\EntityInterfac
 /**
  * Implements hook_form_alter().
  */
-function oab_user_access_rights_form_alter(&$form, FormStateInterface $form_state, $form_id){
+function oab_user_access_rights_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if (preg_match('@node_(.*)_form@', $form_id)) {
     if (isset($form['langcode']['widget'])) {
       $form['langcode']['widget']['#after_build'][] = '_oab_language_selection_form_alter';
     }
   }
 
-  if (preg_match('@node_(.*)_edit_form@', $form_id)){
+  if (preg_match('@node_(.*)_edit_form@', $form_id)) {
     $form['langcode']['#disabled'] = true;
   }
 }
 
 function _oab_language_selection_form_alter($form, FormStateInterface $form_state) {
-  if (isset($form[0]['value']['#options'])){
+  if (isset($form[0]['value']['#options'])) {
     $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-    if ($current_user->hasField('field_access_language')){
+    if ($current_user->hasField('field_access_language')) {
       $user_access_languages = $current_user->get('field_access_language')->getValue();
-      if(!empty($user_access_languages)){
+      if (!empty($user_access_languages)) {
         $new_options = array();
-        foreach ($user_access_languages AS $access_language){
+        foreach ($user_access_languages AS $access_language) {
           if (isset($access_language['target_id'])
-          && isset($form[0]['value']['#options'][$access_language['target_id']])){
+          && isset($form[0]['value']['#options'][$access_language['target_id']])) {
             $new_options[$access_language['target_id']] = $form[0]['value']['#options'][$access_language['target_id']];
           }
         }
-        if (!empty($new_options)){
+        if (!empty($new_options)) {
           $old_options = $form[0]['value']['#options'];
           $form[0]['value']['#options'] = $new_options;
-          if (isset($old_options['und'])){
+          if (isset($old_options['und'])) {
             $form[0]['value']['#options']['und'] = $old_options['und'];
           }
-          if (isset($old_options['zxx'])){
+          if (isset($old_options['zxx'])) {
             $form[0]['value']['#options']['zxx'] = $old_options['zxx'];
           }
         }
@@ -78,7 +78,7 @@ function _oab_language_selection_form_alter($form, FormStateInterface $form_stat
 /**
  * Implements hook_field_widget_WIDGET_TYPE_form_alter().
  */
-function oab_user_access_rights_field_widget_options_select_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context){
+function oab_user_access_rights_field_widget_options_select_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
   if (isset($context['items'])
   && method_exists($context['items'], 'getFieldDefinition')) {
     $field_definition = $context['items']->getFieldDefinition();
@@ -131,20 +131,20 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
                   $new_select_options[$term_language_upper][$key] = $value;
 
                   if (isset($context['form']['#attributes']['class'])
-                  && is_array($context['form']['#attributes']['class'])){
+                  && is_array($context['form']['#attributes']['class'])) {
 
-                    foreach($context['form']['#attributes']['class'] AS $value){
-                      if (preg_match('@node-(.*)-edit-form@', $value)){
+                    foreach ($context['form']['#attributes']['class'] AS $value) {
+                      if (preg_match('@node-(.*)-edit-form@', $value)) {
                         $edit_form = true;
                       }
                     }
                   }
                 }
 
-                if ($edit_form){
+                if ($edit_form) {
                   $node = \Drupal::routeMatch()->getParameter('node');
                   if (isset($node) && is_object($node)) {
-                    if ($term_language !== $node->language()->getId()){
+                    if ($term_language !== $node->language()->getId()) {
                       unset($new_select_options[$term_language_upper][$key]);
                     }
                   }
@@ -164,15 +164,15 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
           }
 
           $new_select_options_flatten = array();
-          foreach($new_select_options AS $key => $value){
-            if (is_array($value)){
-              foreach($value AS $tid => $term){
+          foreach ($new_select_options AS $key => $value) {
+            if (is_array($value)) {
+              foreach ($value AS $tid => $term) {
                 $new_select_options_flatten[$tid] = $term;
               }
             }
           }
 
-          if (!empty($new_select_options_flatten)){
+          if (!empty($new_select_options_flatten)) {
             $element['#options'] = $new_select_options_flatten;
           }
           else{

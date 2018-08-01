@@ -9,7 +9,7 @@ use Drupal\field\Entity\FieldConfig;
 
 // CREATION DU FIELD ID FICHE
 $field_storage = FieldStorageConfig::loadByName('node', 'field_id_fiche');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_id_fiche',
         'entity_type' => 'node',
@@ -18,7 +18,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_id_fiche');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_id_fiche',
         'entity_type' => 'node',
@@ -31,7 +31,7 @@ if(empty($field)) {
 
 // CREATION DU FIELD ID OFFRE
 $field_storage = FieldStorageConfig::loadByName('node', 'field_id_offre');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_id_offre',
         'entity_type' => 'node',
@@ -40,7 +40,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_id_offre');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_id_offre',
         'entity_type' => 'node',
@@ -55,7 +55,7 @@ if(empty($field)) {
 // CREATION DU FIELD HIGHLIGHT
 
 $field = FieldConfig::loadByName('node', 'product', 'field_highlight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_highlight',
         'entity_type' => 'node',

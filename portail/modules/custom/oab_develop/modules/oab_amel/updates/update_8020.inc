@@ -4,7 +4,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_meta_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_meta_title',
         'entity_type' => 'node',
@@ -13,7 +13,7 @@ if(empty($field_storage)) {
 }
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_meta_description');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_meta_description',
         'entity_type' => 'node',
@@ -22,7 +22,7 @@ if(empty($field_storage)) {
 }
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_display_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_display_title',
         'entity_type' => 'node',
@@ -32,7 +32,7 @@ if(empty($field_storage)) {
 
 
 $field = FieldConfig::loadByName('node', 'industry', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -44,7 +44,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'solution', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -56,7 +56,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'region', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -68,7 +68,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'country', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -80,7 +80,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'industry', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -92,7 +92,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'solution', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -104,7 +104,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'region', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -116,7 +116,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'country', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -128,7 +128,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'industry', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',
@@ -140,7 +140,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'solution', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',
@@ -152,7 +152,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'region', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',
@@ -164,7 +164,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'country', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',

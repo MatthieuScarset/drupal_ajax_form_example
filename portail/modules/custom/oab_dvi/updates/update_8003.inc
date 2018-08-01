@@ -5,7 +5,7 @@ use Drupal\node\Entity\NodeType;
 
 ##Création type de contenu Distributeur
 $nodeStorage = NodeType::load('distributor');
-if(empty($nodeStorage)) {
+if (empty($nodeStorage)) {
   $nodeType = NodeType::create([
     'name' => 'Distributor',
     'type' => 'distributor',
@@ -53,7 +53,7 @@ $collection->write('node.type.distributor', array (
 
 ##Création du field et du field storage
 $field_storage = FieldStorageConfig::loadByName('node', 'field_certification_obs');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_certification_obs',
     'entity_type' => 'node',
@@ -63,7 +63,7 @@ if(empty($field_storage)) {
 oabt_YmlImport("field.storage.node.field_certification_obs.yml");
 
 $field = FieldConfig::loadByName('node', 'distributor', 'field_certification_obs');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_certification_obs',
     'entity_type' => 'node',
@@ -82,7 +82,7 @@ oabt_YmlImport("field.field.node.distributor.field_certification_obs.yml");
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_departments');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_departments',
     'entity_type' => 'node',
@@ -92,7 +92,7 @@ if(empty($field_storage)) {
 oabt_YmlImport("field.storage.node.field_departments.yml");
 
 $field = FieldConfig::loadByName('node', 'distributor', 'field_departments');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_departments',
     'entity_type' => 'node',
@@ -107,7 +107,7 @@ oabt_YmlImport("field.field.node.distributor.field_departments.yml");
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_products');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_products',
     'entity_type' => 'node',
@@ -117,7 +117,7 @@ if(empty($field_storage)) {
 oabt_YmlImport("field.storage.node.field_products.yml");
 
 $field = FieldConfig::loadByName('node', 'distributor', 'field_products');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_products',
     'entity_type' => 'node',

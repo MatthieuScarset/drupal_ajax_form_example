@@ -4,7 +4,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_local_nav');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_local_nav',
 		'entity_type' => 'node',
@@ -13,7 +13,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'solution', 'field_local_nav');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_local_nav',
 		'entity_type' => 'node',
@@ -33,7 +33,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'industry', 'field_local_nav');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_local_nav',
 		'entity_type' => 'node',
@@ -53,7 +53,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'country', 'field_local_nav');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_local_nav',
 		'entity_type' => 'node',
@@ -73,7 +73,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('node', 'region', 'field_local_nav');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_local_nav',
 		'entity_type' => 'node',

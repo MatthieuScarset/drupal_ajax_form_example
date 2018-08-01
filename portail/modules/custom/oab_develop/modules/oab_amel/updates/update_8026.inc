@@ -16,7 +16,7 @@ use Drupal\paragraphs\Entity\ParagraphsType;
 echo('Création  des paragraphes');
 // création du bundle de paragraph paragraphs.paragraphs_type.home_banner
 $paragraphStorage = ParagraphsType::load('home_banner');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'home_banner',
         'label' => 'Home Banner',
@@ -38,7 +38,7 @@ if(empty($paragraphStorage)) {
 //field_text_color
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_title',
         'entity_type' => 'paragraph',
@@ -82,7 +82,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_big_image_desktop_');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_big_image_desktop_',
         'entity_type' => 'paragraph',
@@ -136,7 +136,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_date');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_date',
         'entity_type' => 'paragraph',
@@ -178,7 +178,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_function');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_function',
         'entity_type' => 'paragraph',
@@ -221,7 +221,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_image_mobile');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_image_mobile',
         'entity_type' => 'paragraph',
@@ -275,7 +275,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_link',
         'entity_type' => 'paragraph',
@@ -318,7 +318,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_little_image_desktop');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_little_image_desktop',
         'entity_type' => 'paragraph',
@@ -372,7 +372,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_name');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_name',
         'entity_type' => 'paragraph',
@@ -415,7 +415,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_text_color');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_text_color',
         'entity_type' => 'paragraph',
@@ -482,7 +482,7 @@ $config_group->save(TRUE);
 //field_text_color
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
@@ -526,7 +526,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_big_image_desktop_');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_big_image_desktop_',
         'entity_type' => 'paragraph',
@@ -595,7 +595,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_date');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_date',
         'entity_type' => 'paragraph',
@@ -648,7 +648,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_function');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_function',
         'entity_type' => 'paragraph',
@@ -692,7 +692,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_image_mobile');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_image_mobile',
         'entity_type' => 'paragraph',
@@ -762,7 +762,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_link',
         'entity_type' => 'paragraph',
@@ -806,7 +806,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_little_image_desktop');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_little_image_desktop',
         'entity_type' => 'paragraph',
@@ -876,7 +876,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_name');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_name',
         'entity_type' => 'paragraph',
@@ -920,7 +920,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('paragraph', 'home_banner', 'field_text_color');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_text_color',
         'entity_type' => 'paragraph',
@@ -1318,7 +1318,7 @@ $config_group->save(true);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_banner');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_home_banner',
         'entity_type' => 'node',
@@ -1345,7 +1345,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_banner');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_home_banner',
         'entity_type' => 'node',
@@ -1388,7 +1388,7 @@ if(empty($field)) {
 /********* Paragraph storage **********/
 // création du bundle de paragraph paragraphs.paragraphs_type.home_column_section
 $paragraphStorage = ParagraphsType::load('home_column_section');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'home_column_section',
         'label' => 'Home column section',
@@ -1399,7 +1399,7 @@ if(empty($paragraphStorage)) {
 
 /********* Field storage in paragraph **********/
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'dependencies' =>
             array (
@@ -1473,7 +1473,7 @@ $config_group->save(TRUE);
 
 //field_image
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_image');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_image',
         'entity_type' => 'paragraph',
@@ -1529,7 +1529,7 @@ $config_group->save(TRUE);
 
 //field_link_title
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_link_title',
         'entity_type' => 'paragraph',
@@ -1573,7 +1573,7 @@ $config_group->save(TRUE);
 
 //field_image
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_image');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_image',
         'entity_type' => 'paragraph',
@@ -1643,7 +1643,7 @@ $config_group->save(TRUE);
 //field_link
 
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_link',
         'entity_type' => 'paragraph',
@@ -1691,7 +1691,7 @@ $config_group->save(TRUE);
 //field_link_title
 
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_link_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_link_title',
         'entity_type' => 'paragraph',
@@ -1742,7 +1742,7 @@ $config_group->save(TRUE);
 
 //field_name
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_name');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_name',
         'entity_type' => 'paragraph',
@@ -1789,7 +1789,7 @@ $config_group->save(TRUE);
 
 //field_title
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
@@ -1835,7 +1835,7 @@ $config_group->save(TRUE);
 
 //field_function
 $field = FieldConfig::loadByName('paragraph', 'home_column_section', 'field_function');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_function',
         'entity_type' => 'paragraph',
@@ -2123,7 +2123,7 @@ $config_group->save(true);
 /********* Paragraphe storage **********/
 // création du bundle de paragraph paragraphs.paragraphs_type.home_column
 $paragraphStorage = ParagraphsType::load('home_column');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'home_column',
         'label' => 'Home Column',
@@ -2138,7 +2138,7 @@ if(empty($paragraphStorage)) {
 // création des champs pour le paragraph paragraphs.paragraphs_type.home_column
 /****** storage ******/
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_solaris_icon');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_solaris_icon',
         'entity_type' => 'paragraph',
@@ -2151,7 +2151,7 @@ if(empty($field_storage)) {
 }
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_column_section');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_column_section',
         'entity_type' => 'paragraph',
@@ -2166,7 +2166,7 @@ if(empty($field_storage)) {
 /********* Instances of fields **********/
 
 $field = FieldConfig::loadByName('paragraph', 'home_column', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' => 'field_title',
         'entity_type' => 'paragraph',
@@ -2180,7 +2180,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('paragraph', 'home_column', 'field_solaris_icon');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' => 'field_solaris_icon',
         'entity_type' => 'paragraph',
@@ -2218,7 +2218,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('paragraph', 'home_column', 'field_column_section');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' => 'field_column_section',
         'entity_type' => 'paragraph',
@@ -2505,7 +2505,7 @@ $config_group->save(true);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_columns');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'dependencies' =>
             array (
@@ -2532,7 +2532,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_columns');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'dependencies' =>
             array (
@@ -2601,7 +2601,7 @@ if(empty($field)) {
 /********* Paragraph storage **********/
 // création du bundle de paragraph playlist
 $paragraphStorage = ParagraphsType::load('home_playlist');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'home_playlist',
         'label' => 'Home Playlist',
@@ -2613,7 +2613,7 @@ if(empty($paragraphStorage)) {
 /********* Fields storage in paragraph **********/
 //field_link_button
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link_button');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_link_button',
         'entity_type' => 'paragraph',
@@ -2626,7 +2626,7 @@ if(empty($field_storage)) {
 }
 //field_playlist_taxonomy_term
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_playlist_taxonomy_term');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_playlist_taxonomy_term',
         'entity_type' => 'paragraph',
@@ -2644,7 +2644,7 @@ if(empty($field_storage)) {
 /********* Instances of fields **********/
 //field_link_button
 $field = FieldConfig::loadByName('paragraph', 'home_playlist', 'field_link_button');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_link_button',
         'entity_type' => 'paragraph',
@@ -2663,7 +2663,7 @@ if(empty($field)) {
 
 //field_playlist_taxonomy_term
 $field = FieldConfig::loadByName('paragraph', 'home_playlist', 'field_playlist_taxonomy_term');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'dependencies' =>
             array (
@@ -2705,7 +2705,7 @@ if(empty($field)) {
 
 //field_title
 $field = FieldConfig::loadByName('paragraph', 'home_playlist', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' => 'field_title',
         'entity_type' => 'paragraph',
@@ -2888,7 +2888,7 @@ $config_group->save(true);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_playlist');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'dependencies' =>
             array (
@@ -2914,7 +2914,7 @@ if(empty($field_storage)) {
 
 $config_group->save(TRUE);
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_home_playlist');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'dependencies' =>
             array (
@@ -2983,7 +2983,7 @@ if(empty($field)) {
 /********* Paragraph storage **********/
 
 $paragraphStorage = ParagraphsType::load('home_thematic_columns');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'home_thematic_columns',
         'label' => 'Home Thematic Columns',
@@ -3002,7 +3002,7 @@ if(empty($paragraphStorage)) {
 //field_title
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_highlight');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_highlight',
         'entity_type' => 'paragraph',
@@ -3047,7 +3047,7 @@ $config_group->save(TRUE);
 
 //field_highlight
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_highlight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_highlight',
         'entity_type' => 'paragraph',
@@ -3093,7 +3093,7 @@ $config_group->save(TRUE);
 
 //field_date
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_date');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_date',
         'entity_type' => 'paragraph',
@@ -3147,7 +3147,7 @@ $config_group->save(TRUE);
 
 //field_function
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_function');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_function',
         'entity_type' => 'paragraph',
@@ -3192,7 +3192,7 @@ $config_group->save(TRUE);
 
 //field_image
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_image');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_image',
         'entity_type' => 'paragraph',
@@ -3275,7 +3275,7 @@ $config_group->save(TRUE);
 
 //field_link
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_link',
         'entity_type' => 'paragraph',
@@ -3320,7 +3320,7 @@ $config_group->save(TRUE);
 
 //field_name
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_name');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_name',
         'entity_type' => 'paragraph',
@@ -3367,7 +3367,7 @@ $config_group->save(TRUE);
 
 //field_title
 $field = FieldConfig::loadByName('paragraph', 'home_thematic_columns', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_title',
         'entity_type' => 'paragraph',
@@ -3700,7 +3700,7 @@ $config_group->save(true);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_home_thematic_columns');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_home_thematic_columns',
         'entity_type' => 'node',
@@ -3743,7 +3743,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_home_thematic_columns');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_home_thematic_columns',
         'entity_type' => 'node',
@@ -3928,7 +3928,7 @@ $config_group->save(true);
 
 //field_menu_title NEW
 $field_storage = FieldStorageConfig::loadByName('node', 'field_menu_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_menu_title',
         'entity_type' => 'node',
@@ -3978,7 +3978,7 @@ $config_group->save(TRUE);
 
 //field_menu_title
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_menu_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_menu_title',
         'entity_type' => 'node',
@@ -4026,7 +4026,7 @@ $config_group->save(TRUE);
 
 //field_display_title
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',
@@ -4039,7 +4039,7 @@ if(empty($field)) {
 
 //field_meta_description
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -4051,7 +4051,7 @@ if(empty($field)) {
 }
 //field_meta_title
 $field = FieldConfig::loadByName('node', 'homepage_eclairage', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -4558,7 +4558,7 @@ $config_group->save(true);
 //field_text_zone_link
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_date');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_date',
         'entity_type' => 'node',
@@ -4601,7 +4601,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_name');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_name',
         'entity_type' => 'node',
@@ -4645,7 +4645,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_text_color');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_text_color',
         'entity_type' => 'node',
@@ -4701,7 +4701,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_banner_image_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_banner_image_title',
         'entity_type' => 'node',
@@ -4745,7 +4745,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_banner_link');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_banner_link',
         'entity_type' => 'node',
@@ -4787,7 +4787,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_grouping_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_grouping_title',
         'entity_type' => 'node',
@@ -4831,7 +4831,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_mobile_image');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_mobile_image',
         'entity_type' => 'node',
@@ -4885,7 +4885,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_desktop_image');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_desktop_image',
         'entity_type' => 'node',
@@ -4939,7 +4939,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_navigation_link');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_navigation_link',
         'entity_type' => 'node',
@@ -4980,7 +4980,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_funct');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_funct',
         'entity_type' => 'node',
@@ -5023,7 +5023,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_text_zone');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_text_zone',
         'entity_type' => 'node',
@@ -5065,7 +5065,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_text_zone_link');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_text_zone_link',
         'entity_type' => 'node',
@@ -5124,7 +5124,7 @@ $config_group->save(TRUE);
 //field_text_zone_link
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_banner_image_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_banner_image_title',
         'entity_type' => 'node',
@@ -5168,7 +5168,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_zone');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_text_zone',
         'entity_type' => 'node',
@@ -5216,7 +5216,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_color');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_text_color',
         'entity_type' => 'node',
@@ -5269,7 +5269,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_navigation_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_navigation_link',
         'entity_type' => 'node',
@@ -5320,7 +5320,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_name');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_name',
         'entity_type' => 'node',
@@ -5364,7 +5364,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_mobile_image');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_mobile_image',
         'entity_type' => 'node',
@@ -5434,7 +5434,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_title',
         'entity_type' => 'node',
@@ -5478,7 +5478,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_meta_description',
         'entity_type' => 'node',
@@ -5522,7 +5522,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_grouping_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_grouping_title',
         'entity_type' => 'node',
@@ -5567,7 +5567,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_funct');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_funct',
         'entity_type' => 'node',
@@ -5611,7 +5611,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_desktop_image');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_desktop_image',
         'entity_type' => 'node',
@@ -5680,7 +5680,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_date');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_date',
         'entity_type' => 'node',
@@ -5733,7 +5733,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_banner_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_banner_link',
         'entity_type' => 'node',
@@ -5783,7 +5783,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_text_zone_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_text_zone_link',
         'entity_type' => 'node',
@@ -5833,7 +5833,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'hp_eclairage_thematique', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_display_title',
         'entity_type' => 'node',

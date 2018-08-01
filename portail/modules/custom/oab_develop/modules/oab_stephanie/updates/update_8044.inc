@@ -2,7 +2,7 @@
 
 //Champ field_linked_content
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', 'field_linked_content');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_linked_content',
 		'entity_type' => 'taxonomy_term',
@@ -21,7 +21,7 @@ if(empty($field_storage)) {
 
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('taxonomy_term', 'regions', 'field_linked_content');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_linked_content',
 		'entity_type' => 'taxonomy_term',

@@ -110,7 +110,7 @@ class PressKitFile extends SqlBase {
     $fileFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
 
-    foreach ($fileFolders AS $folder){
+    foreach ($fileFolders AS $folder) {
       $folderName = 'public://'.$folder;
       file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
     }

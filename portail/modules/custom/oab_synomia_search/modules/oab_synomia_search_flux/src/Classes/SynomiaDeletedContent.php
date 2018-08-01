@@ -16,76 +16,76 @@ class SynomiaDeletedContent {
 	/** Get le NID
 	 * @return mixed
 	 */
-	public function getNid(){
+	public function getNid() {
 		return $this->nid;
 	}
 
 	/** Set NID
 	 * @param $newNid
 	 */
-	public function setNid($newNid){
+	public function setNid($newNid) {
 		$this->nid = $newNid;
 	}
 
 	/** Get ContentType
 	 * @return mixed
 	 */
-	public function getContentType(){
+	public function getContentType() {
 		return $this->content_type;
 	}
 
 	/** Set ContentType
 	 * @param $newContentType
 	 */
-	public function setContentType($newContentType){
+	public function setContentType($newContentType) {
 		$this->content_type = $newContentType;
 	}
 
 	/** Get URL
 	 * @return mixed
 	 */
-	public function getUrl(){
+	public function getUrl() {
 		return $this->url;
 	}
 
 	/** Set Url
 	 * @param $newUrl
 	 */
-	public function setUrl($newUrl){
+	public function setUrl($newUrl) {
 		$this->url = $newUrl;
 	}
 
 	/** Get language
 	 * @return mixed
 	 */
-	public function getLanguage(){
+	public function getLanguage() {
 		return $this->language;
 	}
 
 	/** Set language
 	 * @param $newNid
 	 */
-	public function setLanguage($newLanguage){
+	public function setLanguage($newLanguage) {
 		$this->language = $newLanguage;
 	}
 
 	/** Get deleted
 	 * @return mixed
 	 */
-	public function getDeleted(){
+	public function getDeleted() {
 		return $this->deleted;
 	}
 
 	/** Set Deleted
 	 * @param $newDeleted
 	 */
-	public function setDeleted($newDeleted){
+	public function setDeleted($newDeleted) {
 		$this->deleted = $newDeleted;
 	}
 
 
-	public function save(){
-		if(!empty($this->nid)
+	public function save() {
+		if (!empty($this->nid)
 			&& !empty($this->content_type)
 			&&!empty($this->url)
 			&& !empty($this->language)
@@ -104,8 +104,8 @@ class SynomiaDeletedContent {
 		}
 	}
 
-	public function delete(){
-		if(!empty($this->nid)
+	public function delete() {
+		if (!empty($this->nid)
 			&& !empty($this->content_type)
 			&& !empty($this->language))
 		{

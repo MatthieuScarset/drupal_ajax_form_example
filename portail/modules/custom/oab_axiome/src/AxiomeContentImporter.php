@@ -17,7 +17,7 @@ use Drupal\media_entity\Entity\Media;
 
 class AxiomeContentImporter {
 
-	public static function parseContent(&$node, $fiche, $language, &$messages){
+	public static function parseContent(&$node, $fiche, $language, &$messages) {
 		$s = file_get_contents($fiche);
 		$data = (array) simplexml_load_string($s, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -48,7 +48,7 @@ class AxiomeContentImporter {
 		$node->field_top_zone->format = 'full_html';
 
 		//TOP Zone Background
-        if (!empty($bannerData['background_image']['url_archive']) && is_string($bannerData['background_image']['url_archive'])){
+        if (!empty($bannerData['background_image']['url_archive']) && is_string($bannerData['background_image']['url_archive'])) {
             $urlBackground = $idOffre.$bannerData['background_image']['url_archive'];
 			$urlBackground = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlBackground;
 			$image_media_id = self::createTopZoneBackgroundMedia($node, $urlBackground, $bannerData['background_image'], $language);
@@ -57,7 +57,7 @@ class AxiomeContentImporter {
 		}
 
         // Creation image catalog
-        if (!empty($bannerData['catalog_image']['url_archive']) && is_string($bannerData['catalog_image']['url_archive'])){
+        if (!empty($bannerData['catalog_image']['url_archive']) && is_string($bannerData['catalog_image']['url_archive'])) {
             $urlCatalog = $idOffre.$bannerData['catalog_image']['url_archive'];
             $urlCatalog = 'public://'.AXIOME_FOLDER.'/fiches/'.$urlCatalog;
             $image_media_id = self::createCatalogMedia($node, $urlCatalog, $bannerData['catalog_image'], $language);
@@ -66,7 +66,7 @@ class AxiomeContentImporter {
         }
 
         // changement du title du noeud par le h1_title present dans la fiche XML
-        if(!empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])
+        if (!empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])
         && is_string($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])) {
             $messages .= 'CHANGEMENT DE TITRE pour '.$node->id().' :'.$axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']."\n";
             $node->setTitle($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title']);
@@ -75,58 +75,58 @@ class AxiomeContentImporter {
         //$node->save();
 	}
 
-	private static function replaceLeftBlock(&$dom, $bannerData, $node){
+	private static function replaceLeftBlock(&$dom, $bannerData, $node) {
 		$cssClassLeftBlock =  $bannerData['orange_theme']['boosted_css_name'];
         $fontColor = $bannerData['font_color'];
 		//$titleLeftBlock = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        switch($cssClassLeftBlock){
+        switch($cssClassLeftBlock) {
             case 'icon-frame-connectivity':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Connectivity';
-                }else{
+                } else {
                     $titleLeftBlock = 'Connectivité';
                 }
                 break;
             case 'icon-frame-teamwork':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Teamwork';
-                }else{
+                } else {
                     $titleLeftBlock = 'Équipes';
                 }
                 break;
             case 'icon-frame-my-customers':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Customers';
-                }else{
+                } else {
                     $titleLeftBlock = 'Clients ';
                 }
                 break;
             case 'icon-frame-performance':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Flexibility';
-                }else{
+                } else {
                     $titleLeftBlock = 'Flexibilité';
                 }
                 break;
             case 'icon-frame-security':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Security';
-                }else{
+                } else {
                     $titleLeftBlock = 'Sécurité';
                 }
                 break;
             case 'icon-frame-care':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Service';
-                }else{
+                } else {
                     $titleLeftBlock = 'Service';
                 }
                 break;
             case 'icon-frame-tech':
-                if($node->language()->getId() == 'en'){
+                if ($node->language()->getId() == 'en') {
                     $titleLeftBlock = 'Industry';
-                }else{
+                } else {
                     $titleLeftBlock = 'Métier';
                 }
                 break;
@@ -137,39 +137,39 @@ class AxiomeContentImporter {
 
 		// change class name
 		$nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
-		foreach($nodes as $el) {
+		foreach ($nodes as $el) {
 			$el->removeAttribute('class');
 			$el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassLeftBlock);
 		}
 
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'frame', 'span');
-		foreach($nodesSpan as $el) {
+		foreach ($nodesSpan as $el) {
 			$el->textContent = $titleLeftBlock;
             $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
 
-	private static function replaceCenterBlock(&$dom, $bannerData){
+	private static function replaceCenterBlock(&$dom, $bannerData) {
 		$titleCenter = $bannerData['insight'];
         $fontColor = $bannerData['font_color'];
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'titre3');
-		foreach($nodesSpan as $el) {
+		foreach ($nodesSpan as $el) {
 			$el->textContent = $titleCenter;
             $el->setAttribute('style', 'color: '.$fontColor);
 		}
 
 	}
 
-	private static function replaceRightBlock(&$dom, $bannerData){
+	private static function replaceRightBlock(&$dom, $bannerData) {
 		$cssClassRightBlock =  $bannerData['pop_out_color']['boosted_css_name'];
 		$titleRightBlock = $bannerData['offre_name'];
 		$popoutColor = $bannerData['pop_out_color']['color'];
 		// change class name
 		$nodes = self::getNodesByClass($dom, 'icon-popout-connectivity');
-		foreach($nodes as $el) {
+		foreach ($nodes as $el) {
             $el->removeAttribute('class');
             $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$cssClassRightBlock);
             $el->setAttribute('style', 'color: '.$popoutColor.' !important');
@@ -177,24 +177,24 @@ class AxiomeContentImporter {
 
 		// change title
 		$nodesSpan = self::getNodesByClass($dom, 'popout', 'span');
-		foreach($nodesSpan as $el) {
+		foreach ($nodesSpan as $el) {
 			$el->textContent = $titleRightBlock;
 			// hack pour mettre en blanc qd le fond est noir
-			if($popoutColor == '#000000'){
+			if ($popoutColor == '#000000') {
                 $el->setAttribute('style', 'color: #FFF !important');
             }
 		}
 
 	}
 
-	private static function getNodesByClass($dom, $classname, $element = "*"){
+	private static function getNodesByClass($dom, $classname, $element = "*") {
 		$finder = new DomXPath($dom);
 		$nodes = $finder->query("//".$element."[contains(@class, '$classname')]");
 
 		return $nodes;
 	}
 
-	private static function createTopZoneBackgroundMedia(&$node, $url, $data, $language){
+	private static function createTopZoneBackgroundMedia(&$node, $url, $data, $language) {
 
 		$imageId = null;
 		$styleTopZone = ImageStyle::load('top_zone');
@@ -222,9 +222,9 @@ class AxiomeContentImporter {
 		$destination = $styleThumbnail->buildUri($url);
 		$styleThumbnail->createDerivative($original_image, $destination);
 
-		if(empty($data['balise_alt'])){
+		if (empty($data['balise_alt'])) {
             $balise_alt = "";
-        }else{
+        } else {
             $balise_alt = $data['balise_alt'];
         }
 
@@ -245,7 +245,7 @@ class AxiomeContentImporter {
 		return $image_media->id();
 	}
 
-    private static function createCatalogMedia(&$node, $url, $data, $language){
+    private static function createCatalogMedia(&$node, $url, $data, $language) {
 
         $imageId = null;
         $styleTopZone = ImageStyle::load('subhome');
@@ -273,9 +273,9 @@ class AxiomeContentImporter {
         $destination = $styleThumbnail->buildUri($url);
         $styleThumbnail->createDerivative($original_image, $destination);
 
-        if(empty($data['balise_alt'])){
+        if (empty($data['balise_alt'])) {
             $balise_alt = "";
-        }else{
+        } else {
             $balise_alt = $data['balise_alt'];
         }
 
@@ -295,33 +295,33 @@ class AxiomeContentImporter {
         return $image_media->id();
     }
 
-	public static function isValidContent($axiomeData, &$message){
+	public static function isValidContent($axiomeData, &$message) {
 		$isValid = true;
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['h1_title'])) {
 			$message .= "\t WARNING : missing `ruby_zone_header.h1_title`\n";
 			$isValid = true;
 		}
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['summary'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['summary'])) {
 			$message .= "\t WARNING : missing `ruby_zone_header.summary`\n";
 			$isValid = true;
 		}
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['image']['url_archive'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['image']['url_archive'])) {
 			$message .= "\t WARNING : missing `ruby_zone_header.url_archive`\n";
 			$isValid = true;
 		}
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['image']['balise_alt'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_header']['Attributes']['image']['balise_alt'])) {
 			$message .= "\t WARNING : missing `ruby_zone_header.balise_alt`\n";
 			$isValid = true;
 		}
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_detailed_contents'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_detailed_contents'])) {
 			$message .= "\t WARNING : missing `ruby_zone_detailed_contents` \n";
 			$isValid = false;
 		}
-		if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive'])){
+		if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive'])) {
 			$message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
 			$isValid = false;
 		}
-        if(empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['catalog_image']['url_archive'])){
+        if (empty($axiomeData['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['catalog_image']['url_archive'])) {
             $message .= "\t WARNING : missing `ruby_zone_banner.catalog_image.url_archive` \n";
             $isValid = false;
         }

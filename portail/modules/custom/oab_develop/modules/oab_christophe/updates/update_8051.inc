@@ -17,8 +17,8 @@ $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
 $saved_values = array();
 
 if (is_array($nodes)
-&& !empty($nodes)){
-  foreach ($nodes AS $node){
+&& !empty($nodes)) {
+  foreach ($nodes AS $node) {
     $field_partner_type = $node->get('field_partner_type');
     $saved_values[$node->id()] = $field_partner_type->getValue();
   }
@@ -49,7 +49,7 @@ $config_group = $config_factory->getEditable('core.entity_view_display.node.part
 $partner_view_display_teaser = $config_group->getRawData();
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_partner_type');
-if (!empty($field_storage)){
+if (!empty($field_storage)) {
   $field_storage->delete();
 
   FieldStorageConfig::create(array(
@@ -84,7 +84,7 @@ if (!empty($field_storage)){
 }
 
 $field = FieldConfig::loadByName('node', 'partner', 'field_partner_type');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'langcode' => 'en',
     'status' => true,
@@ -163,8 +163,8 @@ $config_group->save();
 
 
 if (is_array($nodes)
-  && !empty($nodes)){
-  foreach ($nodes AS $node){
+  && !empty($nodes)) {
+  foreach ($nodes AS $node) {
     $node->set('field_partner_type', $saved_values[$node->id()]);
     $node->save();
   }

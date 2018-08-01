@@ -113,7 +113,7 @@ function _is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operatio
         $allowed = _check_authorized_view($entity, $account);
         if ($allowed) {
             return Drupal\Core\Access\AccessResult::allowed();
-        } elseif( $allowed == false) {
+        } elseif ( $allowed == false) {
             return Drupal\Core\Access\AccessResult::forbidden();
         } elseif ($allowed == null) {
             return Drupal\Core\Access\AccessResult::neutral();
@@ -184,7 +184,7 @@ function _check_authorized_view($entity, $account) {
 /*
 * implement hook_token_info()
 */
-function oab_backoffice_token_info(){
+function oab_backoffice_token_info() {
     $types['gdpr'] = array(
         'name' => t('GDPR tokens'),
         'description' => t('Token designed for webform mails')
@@ -234,12 +234,12 @@ function oab_backoffice_token_info(){
 /*
 * implement hook_token()
 */
-function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata){
+function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
     $replacements = array();
 
     if (isset($data['webform'])) {
         $webform = $data['webform'];
-        if($type == 'gdpr') {
+        if ($type == 'gdpr') {
             foreach ($tokens as $name => $original) {
                 switch ($name) {
                     case 'business-owner-mail':
@@ -387,7 +387,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
             if (is_array($name)) {
                 $ret[$machine_name] = [];
 
-                foreach($name as $key => $value) {
+                foreach ($name as $key => $value) {
                     $webform = \Drupal::entityTypeManager()->getStorage('webform')->load($key);
                     if (_check_authorized_view($webform, $current_user)) {
                         $ret[$machine_name][$key] = $value;
@@ -539,7 +539,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	$current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
 	$edit_form = false;
-	if (preg_match('@node_(.*)_edit_form@', $form_id)){
+	if (preg_match('@node_(.*)_edit_form@', $form_id)) {
 		$current_user_language = $current_language;
 
 		if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -552,15 +552,15 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	}
 
 	// formulaire replicate
-  if (preg_match('@node_(.*)_replicate_form@', $form_id)){
+  if (preg_match('@node_(.*)_replicate_form@', $form_id)) {
     $form['#attributes']['class'][] = "replicate-form";
   }
   
 	// on checke les langues auxquelles l utilisateur a droit
-	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
+	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)) {
 		$user = \Drupal::currentUser();
 		$userId = $user->id();
-		if(!in_array('administrator', $user->getRoles())) {
+		if (!in_array('administrator', $user->getRoles())) {
 			$node = \Drupal::routeMatch()->getParameter('node');
 			$node_language = $node->language();
 			$node_langcode = $node_language->getId();
@@ -608,13 +608,13 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	}*/
 
 	// page de liste des taxonomies
-	if ($form_id == 'taxonomy_overview_terms'){
-		if (isset($form['terms'])){
-			foreach ($form['terms'] AS $key => $value){
-				if (preg_match('@^tid:@', $key)){
+	if ($form_id == 'taxonomy_overview_terms') {
+		if (isset($form['terms'])) {
+			foreach ($form['terms'] AS $key => $value) {
+				if (preg_match('@^tid:@', $key)) {
 					if (isset($form['terms'][$key]['term']['#title'])
 						&& isset($form['terms'][$key]['#term'])
-						&& is_object($form['terms'][$key]['#term'])){
+						&& is_object($form['terms'][$key]['#term'])) {
 						$term_language = $form['terms'][$key]['#term']->language()->getId();
 						$form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
 					}
@@ -624,23 +624,23 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	}
 
 	// filtres exposés de views
-	if ($form_id == 'views_exposed_form'){
-		if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media'){
+	if ($form_id == 'views_exposed_form') {
+		if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media') {
 			$form['field_tags_target_id']['#size'] = 30;
 		}
 	}
 
 	if ($form_id == 'node_profile_form'
-		|| $form_id == 'node_profile_edit_form'){
+		|| $form_id == 'node_profile_edit_form') {
 		$form['field_social_accounts']['#cardinality_multiple'] = false;
 
 		if (isset($form['field_social_accounts']['widget'])
-			&& is_array($form['field_social_accounts']['widget'])){
+			&& is_array($form['field_social_accounts']['widget'])) {
 			$form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
 
-			foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
+			foreach ($form['field_social_accounts']['widget'] AS $key => &$value) {
 				if (isset($value['value']['#title'])) {
-					switch ($key){
+					switch ($key) {
 						case '0':
 							$value['value']['#title'] = t('Twitter account');
 							break;
@@ -656,7 +656,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 					}
 					$value['value']['#title_display'] = 'before';
 				}
-				if (isset($value['_weight'])){
+				if (isset($value['_weight'])) {
 					$value['_weight']['#access'] = false;
 				}
 			}
@@ -691,7 +691,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 
 		// disposition des taxonomies
-		if(isset($form['#fieldgroups']['group_classer'])){
+		if (isset($form['#fieldgroups']['group_classer'])) {
 			foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
 				if (isset($form[$field])) {
 					$form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
@@ -700,7 +700,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 			}
 		}
 
-		if(isset($form['#fieldgroups']['group_taxonomie']->children)){
+		if (isset($form['#fieldgroups']['group_taxonomie']->children)) {
 			$last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
 			$form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
 		}
@@ -710,7 +710,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 		//on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
 		$roles = \Drupal::currentUser()->getRoles();
-		if(!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
+		if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
 		{
 			$form['field_metatags']['#access'] = false;
 		}
@@ -740,7 +740,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	  }
 
 	  //pour la médiathèque : sélection des images dans la liste
-	  if($form_id == 'entity_browser_browse_medias_iframe_form'
+	  if ($form_id == 'entity_browser_browse_medias_iframe_form'
 		|| $form_id =='entity_browser_browse_media_modal_form'
 		|| $form_id =='entity_browser_browser_file_modal_form')
 	  {
@@ -749,7 +749,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	*/
 
 	// Ajout de champ dans les menus
-	if($form_id == 'menu_link_content_menu_link_content_form') {
+	if ($form_id == 'menu_link_content_menu_link_content_form') {
 		$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
 		$linkOptions = $menuLinkEntity->link->first()->options;
 		$linkTarget = !empty($linkOptions['target']) ? true : false;
@@ -784,7 +784,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	}
 
     // langue RU pour les webforms
-    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
+    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru') {
         $form['elements']['actions']['#submit__label'] = 'Отправить';
     }
 
@@ -792,32 +792,32 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 	//preselection des departements et segments de marché sur les PARTNERS
 	if (in_array($form_id, array( 'node_partner_form')))
 	{
-		if(isset($form['field_departments'])){
+		if (isset($form['field_departments'])) {
 			//par défaut on sélectionne tous les départements
 			$form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
 		}
-		if(isset($form['field_market_segment'])){
+		if (isset($form['field_market_segment'])) {
 			//par défaut on sélectionne +50 et +250 salariés
 			$default_label = array();
 			$default_values = array();
-			if($current_language == "fr"){
+			if ($current_language == "fr") {
 				$default_label = array('+ 50 salariés', '+ 250 salariés');
 			}
-			elseif ($current_language == "en"){
+			elseif ($current_language == "en") {
 				$default_label = array('+ 50 employees', '+ 250 employees');
 			}
-			if(!empty($default_label)){
-				foreach ($default_label as $label){
+			if (!empty($default_label)) {
+				foreach ($default_label as $label) {
 					$query = \Drupal::entityQuery('taxonomy_term');
 					$query->condition('vid', 'market_segments');
 					$query->condition('name', $label);
 					$entity = $query->execute();
 
-					if(!empty($entity)) {
+					if (!empty($entity)) {
 						$default_values[] = array_pop($entity);
 					}
 				}
-				if(!empty($default_values)){
+				if (!empty($default_values)) {
 					$form['field_market_segment']['widget']['#default_value']  = $default_values;
 				}
 			}
@@ -857,7 +857,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
                 ->getPathByAlias("$path");
 
             ##On recupère le nid qui est dans l'url
-            if(preg_match('/node\/(\d+)/', $org_path, $matches)) {
+            if (preg_match('/node\/(\d+)/', $org_path, $matches)) {
 
                 ##on load le noad
                 $node = \Drupal\node\Entity\Node::load($matches[1]);
@@ -885,7 +885,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
         $user_roles = \Drupal::currentUser()->getRoles();
 
-        if(count($user_roles)==2 &&
+        if (count($user_roles)==2 &&
             isset($user_roles[0]) && $user_roles[0] == "authenticated" &&
             isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub") {
             //rend le champ obligatoire
@@ -968,7 +968,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
                 'top_zone_big'
                 );
             foreach ($styles as $style) {
-                if(in_array($style->id(), $tabRefresh)){
+                if (in_array($style->id(), $tabRefresh)) {
                     $destination = $style->buildUri($image_uri);
                     $style->createDerivative($image_uri, $destination);
                 }
@@ -977,7 +977,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
     }
 }
 
-function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state){
+function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state) {
 	$values = $form_state->getValues();
 	$link_target = array();
 	$link_icon = array();
@@ -1055,13 +1055,13 @@ function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
 }
 
 
-function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
-	if (isset($data['tabs'][0]) && is_array($data['tabs'][0])){
-		foreach ($data['tabs'][0] AS $key => $value){
-			if (isset($value['#link']['url'])){
+function oab_backoffice_menu_local_tasks_alter(&$data, $route_name) {
+	if (isset($data['tabs'][0]) && is_array($data['tabs'][0])) {
+		foreach ($data['tabs'][0] AS $key => $value) {
+			if (isset($value['#link']['url'])) {
 				$local_task_link_url = $value['#link']['url'];
 				$routeName = $local_task_link_url->getRouteName();
-				switch ($routeName){
+				switch ($routeName) {
 					case 'system.admin_content':
 						$data['tabs'][0][$key]['#weight'] = 0;
 						break;
@@ -1085,7 +1085,7 @@ function oab_backoffice_menu_local_tasks_alter(&$data, $route_name){
 
 
 
-function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state){
+function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state) {
 	$buildInfo = $form_state->getBuildInfo();
 	$menuLinkContentForm = $buildInfo['callback_object'];
 	return $menuLinkContentForm->getEntity();
@@ -1103,7 +1103,7 @@ function oab_backoffice_config_schema_info_alter(&$definitions) {
 function oab_backoffice_library_info_alter(&$libraries, $extension) {
 	if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
 		$jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
-		if (isset($jira_url['jira_report_code'])){
+		if (isset($jira_url['jira_report_code'])) {
 			$libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
 		}
 	}
@@ -1117,7 +1117,7 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
 
   $node = \Drupal::routeMatch();
   $user = \Drupal::currentUser();
-  if($node->getRouteName() == 'comment.admin' && $query->hasTag('entity_query_comment') && in_array("blogger", $user->getRoles())) {
+  if ($node->getRouteName() == 'comment.admin' && $query->hasTag('entity_query_comment') && in_array("blogger", $user->getRoles())) {
     $query->condition('comment_field_data.uid', $user->id());
   }
 
@@ -1130,10 +1130,10 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  * @param $form_id
  */
-function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 	//Pour ajouter le / après l'url et avant le champ source de la redirection
 	// RUBYPORTAILOBS-2753 "Ajout d'un / avant le champs path dans les redirections"
-	if(isset($form['redirect_source']['widget'][0]['path']['#field_prefix']))
+	if (isset($form['redirect_source']['widget'][0]['path']['#field_prefix']))
 	{
 		$form['redirect_source']['widget'][0]['path']['#field_prefix'] = $form['redirect_source']['widget'][0]['path']['#field_prefix'].'/';
 	}
@@ -1224,12 +1224,12 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
       foreach ($view->result as $i => $result) {
             # On recupère les données nécessaires
          $node_type = $result->_entity->get('type')->entity->id();
-          if($node_type == 'product'){
+          if ($node_type == 'product') {
             $node_label =  $result->_entity->getTitle();
             $node_axiome_data =  $result->_entity->get('field_axiome_data')->getValue();
-            if(isset($node_axiome_data[0]['value'])){
+            if (isset($node_axiome_data[0]['value'])) {
               $data = unserialize($node_axiome_data[0]['value']);
-              if(isset($data['Attributes']['nom_offre_commerciale']) && $data['Attributes']['nom_offre_commerciale'] != ''){
+              if (isset($data['Attributes']['nom_offre_commerciale']) && $data['Attributes']['nom_offre_commerciale'] != '') {
                 $offre_commerciale = $data['Attributes']['nom_offre_commerciale'];
                 # On set la nouvelle valeur
                 $view->result[$i]->_entity->get('title')->setValue(array(0=>"$offre_commerciale ($node_label)"));
@@ -1291,7 +1291,7 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
 function oab_backoffice_cron() {
   ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
   #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-    if( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
+    if ( date('G',  \Drupal::time()->getCurrentTime()) == 2) {
 
 
         ## Je recupère tous les webforms existants et je boucle sur chacun d'entre eux,
@@ -1310,7 +1310,7 @@ function oab_backoffice_cron() {
 
                 $expire_date = $webform_entity->getThirdPartySetting('oab_gdpr', 'gdpr_expiration_date');
 
-                if ($expire_date == null || $expire_date == ""){
+                if ($expire_date == null || $expire_date == "") {
                     ## SI le formulaire n'a pas de date d'expiration, je supprime toutes les soumissions qui ont plus de 6 mois
                     ## (soit gdpr_expiration_date n'existe pas, soit il est setté avec un string vide (résultat du form sans donnée)
 
@@ -1415,7 +1415,7 @@ function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core
   ##Je commence par recupérer les valeurs rentrées par l'user
   $userValues = $form_state->getUserInput();
 
-  if (isset($userValues['langcode'][0]['value'])){
+  if (isset($userValues['langcode'][0]['value'])) {
     $content_language = $userValues['langcode'][0]['value'];
   }
   else{

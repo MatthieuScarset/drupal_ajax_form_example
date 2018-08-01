@@ -47,7 +47,7 @@ class NodeHierarchySelection extends NodeSelection {
           $query = \Drupal::entityQuery('node');
           $query->condition('type', $bundle);
           $entity_ids = $query->execute();
-          if ($nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($entity_ids)){
+          if ($nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($entity_ids)) {
             foreach ($nodes as $node) {
               $options[$bundle][$node->id()] = str_repeat('-', 1) . Html::escape($this->entityManager->getTranslationFromContext($node->getTitle()));
             }

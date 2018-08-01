@@ -29,7 +29,7 @@ use Drupal\image\Entity\ImageStyle;
 
 class RelatedContentBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     $content = "";
     $block = array();
     // récupération du contexte

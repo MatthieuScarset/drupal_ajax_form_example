@@ -33,113 +33,113 @@ function oab_will_update_8002() {
 /**
  * RUBYPORTAILOBS-2703 insertion de trad Submit RU et FR
 */
-function oab_will_update_8003(){
+function oab_will_update_8003() {
     include_once("updates/update_8003.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3030 changement de format de field profile.visual
  */
-function oab_will_update_8004(){
+function oab_will_update_8004() {
     include_once("updates/update_8004.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3034 Remplacement favicon drupal8
  */
-function oab_will_update_8005(){
+function oab_will_update_8005() {
     include_once("updates/update_8005.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3142 mise a jour des droits digital admin
  */
-function oab_will_update_8006(){
+function oab_will_update_8006() {
     include_once("updates/update_8006.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3177 mise a jour des images styles
  */
-function oab_will_update_8007(){
+function oab_will_update_8007() {
     include_once("updates/update_8007.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3195 traduction du pager du moteur de recherche
  */
-function oab_will_update_8008(){
+function oab_will_update_8008() {
     include_once("updates/update_8008.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3181 gestion autocomplete de la view content pour les blogger
  */
-function oab_will_update_8009(){
+function oab_will_update_8009() {
     include_once("updates/update_8009.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3181 gestion autocomplete de la view content pour les blogger
  */
-function oab_will_update_8010(){
+function oab_will_update_8010() {
     include_once("updates/update_8010.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3215 gestion des images avec texte illisible
  */
-function oab_will_update_8011(){
+function oab_will_update_8011() {
     include_once("updates/update_8011.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3219 unicité sur les pages subhome
  */
-function oab_will_update_8012(){
+function oab_will_update_8012() {
     include_once("updates/update_8012.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3310 [OC] champ HUB dans les types de contenu
  */
-function oab_will_update_8013(){
+function oab_will_update_8013() {
     include_once("updates/update_8013.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3310 [OC] gestion tac lite
  */
-function oab_will_update_8014(){
+function oab_will_update_8014() {
     include_once("updates/update_8014.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3310 [OC] modification des droits
  */
-function oab_will_update_8015(){
+function oab_will_update_8015() {
     include_once("updates/update_8015.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3309 [OC] gestion du partage portail / hub
  */
-function oab_will_update_8016(){
+function oab_will_update_8016() {
     include_once("updates/update_8016.inc");
 }
-function oab_will_update_8017(){
+function oab_will_update_8017() {
     include_once("updates/update_8017.inc");
 }
-function oab_will_update_8018(){
+function oab_will_update_8018() {
     include_once("updates/update_8018.inc");
 }
-function oab_will_update_8019(){
+function oab_will_update_8019() {
     include_once("updates/update_8019.inc");
 }
 
 /**
  * RUBYPORTAILOBS-3349 correctif hub partagé sur le portail pour les contenu suhome en single checkbox
  */
- function oab_will_update_8020(){
+ function oab_will_update_8020() {
      include_once("updates/update_8020.inc");
  }

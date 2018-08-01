@@ -26,12 +26,12 @@ function oab_migrate_content_update_dependencies() {
  */
 function oab_migrate_content_uninstall() {
   $migrate_groups = \Drupal\migrate_plus\Entity\MigrationGroup::loadMultiple();
-  foreach ($migrate_groups AS $migrate_group){
+  foreach ($migrate_groups AS $migrate_group) {
     $migrate_group->delete();
   }
 }
 
-function oab_migrate_content_install(){
+function oab_migrate_content_install() {
 
 	drupal_set_installed_schema_version('oab_migrate_content', 8000);
 

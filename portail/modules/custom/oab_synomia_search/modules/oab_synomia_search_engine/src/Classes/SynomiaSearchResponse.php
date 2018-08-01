@@ -21,11 +21,11 @@ class SynomiaSearchResponse {
 	PUBLIC $pager = null;
 	public $searchMode = '';
 
-	public function __construct(){
+	public function __construct() {
 
 	}
-	public function readXML($fluxXML, $rubrique){
-		if(!empty($fluxXML))
+	public function readXML($fluxXML, $rubrique) {
+		if (!empty($fluxXML))
 		{
 			$dom = new \DOMDocument();
 			$dom->loadXML($fluxXML);
@@ -37,13 +37,13 @@ class SynomiaSearchResponse {
 			$this->getFacetsFromXml($dom);
 
 			//corrections éventuelles
-			if(isset($xmlResult->corrections) && isset($xmlResult->corrections->correction))
+			if (isset($xmlResult->corrections) && isset($xmlResult->corrections->correction))
 			{
 				$this->corrections = $xmlResult->corrections->correction;
 			}
 
 			//degradations de requete, uniquement si pas de résultats
-			if(isset($xmlResult->degradations) && $xmlResult->estimatedTotalResultsCount == 0)
+			if (isset($xmlResult->degradations) && $xmlResult->estimatedTotalResultsCount == 0)
 			{
 				$this->getDegradationsFromXML($dom);
 			}
@@ -52,7 +52,7 @@ class SynomiaSearchResponse {
 			$this->nbResultsTotal = $xmlResult->estimatedTotalResultsCount;
 
 			//resultats
-			if(isset($xmlResult->cluster) || empty($rubrique))
+			if (isset($xmlResult->cluster) || empty($rubrique))
 			{
 				$this->searchMode = "global";
 				$this->getResultsClustersArray($dom);
@@ -66,7 +66,7 @@ class SynomiaSearchResponse {
 				//Pager
 				$config_factory = \Drupal::configFactory();
 				$config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
-				if(!empty($config) && !empty($config->get('nb_results_per_page')))
+				if (!empty($config) && !empty($config->get('nb_results_per_page')))
 				{
 					$nbResultsPerPage = $config->get('nb_results_per_page');
 				}
@@ -89,7 +89,7 @@ class SynomiaSearchResponse {
 	private function getResultsSimpleArray($xmlResult, $type)
 	{
 		$clusterArray = array();
-		if( $type != "#SYNAUTRE#") {
+		if ( $type != "#SYNAUTRE#") {
 			$clusterArray['typeId'] = $type;
 			$clusterArray['typeName'] = $this->getTypeLabel($type);
 			$clusterArray['nbResults'] = $this->nbResultsTotal;
@@ -115,17 +115,17 @@ class SynomiaSearchResponse {
     public function getResultsClustersArray($dom)
 	{
 		$cluster = $dom->getElementsByTagName("cluster");
-		if(isset($cluster))
+		if (isset($cluster))
 		{
 			$clusterArray = array();
 			$cluster = $cluster->item(0);
-			if(isset($cluster))
+			if (isset($cluster))
 			{
 				$aspects = $cluster->getElementsByTagName("aspect");
 				foreach ($aspects as $aspect)
 				{
 					$type = $aspect->getAttribute('value');
-					if( $type != "#SYNAUTRE#") {
+					if ( $type != "#SYNAUTRE#") {
 						$clusterArray['typeId'] = $type;
 						$clusterArray['typeName'] = $this->getTypeLabel($type);
 						$clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
@@ -164,18 +164,18 @@ class SynomiaSearchResponse {
 	 * Lit le XML pour en déduire le tableau des facettes avec facet id => nb resultats
 	 * @param unknown $flux
 	 */
-	private function getFacetsFromXml($dom){
+	private function getFacetsFromXml($dom) {
 		//oabt($dom, true);
 		$facetsTag = $dom->getElementsByTagName("facets");
-		if(isset($facetsTag))
+		if (isset($facetsTag))
 		{
 			$facetsTag = $facetsTag->item(0);
-			if(isset($facetsTag))
+			if (isset($facetsTag))
 			{
 				$facets = $facetsTag->getElementsByTagName("aspect");
-				foreach($facets as $facet)
+				foreach ($facets as $facet)
 				{
-					if( $facet->firstChild->nodeValue != "#SYNAUTRE#"){
+					if ( $facet->firstChild->nodeValue != "#SYNAUTRE#") {
 						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ','_',$facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
 					}
 				}
@@ -188,15 +188,15 @@ class SynomiaSearchResponse {
 	 * Lit le XML pour en déduire les dégradations de requête
 	 * @param unknown $flux
 	 */
-	private function getDegradationsFromXML($dom){
+	private function getDegradationsFromXML($dom) {
 		$degradationsTag = $dom->getElementsByTagName("degradations");
-		if(isset($degradationsTag))
+		if (isset($degradationsTag))
 		{
 			$degradationsTag = $degradationsTag->item(0);
-			if(isset($degradationsTag))
+			if (isset($degradationsTag))
 			{
 				$degradations = $degradationsTag->getElementsByTagName("degradation");
-				foreach($degradations as $degradation)
+				foreach ($degradations as $degradation)
 				{
 					$this->degradations[$degradation->getAttribute('combi')] = $degradation->nodeValue;
 				}
@@ -207,9 +207,9 @@ class SynomiaSearchResponse {
 	/** Retourne le libellé du Type passé en paramètre
 	 * @param $type_id
 	 */
-	private function getTypeLabel($type_id){
+	private function getTypeLabel($type_id) {
 		$typeName = "";
-		switch ($type_id){
+		switch ($type_id) {
 			case 'full_html':
 				$typeName = 'Content';
 				break;
@@ -218,7 +218,7 @@ class SynomiaSearchResponse {
 				break;
 			default:
 				$typeObject = NodeType::load($type_id);
-				if(isset($typeObject) && !empty($typeObject))
+				if (isset($typeObject) && !empty($typeObject))
 				{
 					$typeName = $typeObject->label();
 				}

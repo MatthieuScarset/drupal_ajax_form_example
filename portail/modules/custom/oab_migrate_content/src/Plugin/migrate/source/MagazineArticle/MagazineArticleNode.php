@@ -84,19 +84,19 @@ class MagazineArticleNode extends SqlBase {
 
 		$catcher_results = $catcher_query->execute()->fetchAll();
 
-		if (is_array($catcher_results)){
-			foreach ($catcher_results AS $catcher_result){
+		if (is_array($catcher_results)) {
+			foreach ($catcher_results AS $catcher_result) {
 
 				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
 					$meta_description = $catcher_result->field_txt_catcher_value;
 				}
-				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
 					$meta_description = $catcher_result['field_txt_catcher_value'];
 				}
 			}
 		}
-		if(isset($meta_description) && !empty($meta_description))
+		if (isset($meta_description) && !empty($meta_description))
 		{
 			$row->setSourceProperty('highlight_field', $meta_description) ;
 			$meta_description_short = mb_substr($meta_description,0, 155);
@@ -105,7 +105,7 @@ class MagazineArticleNode extends SqlBase {
 
 		//Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
-		if(isset($subhomes['magazine'][$row->getSourceProperty('language')])
+		if (isset($subhomes['magazine'][$row->getSourceProperty('language')])
 			&& isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
 			&& !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
 		{
@@ -120,17 +120,17 @@ class MagazineArticleNode extends SqlBase {
 
     $body_results = $body_query->execute()->fetchAll();
 
-    if (is_array($body_results)){
-      foreach ($body_results AS $body_result){
+    if (is_array($body_results)) {
+      foreach ($body_results AS $body_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($body_result) && isset($body_result->body_value)){
+        if (is_object($body_result) && isset($body_result->body_value)) {
           $body_value = $body_result->body_value;
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
-        elseif (is_array($body_result) && isset($body_result['body_value'])){
+        elseif (is_array($body_result) && isset($body_result['body_value'])) {
           $body_value = $body_result['body_value'];
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
@@ -150,7 +150,7 @@ class MagazineArticleNode extends SqlBase {
 			'field_taxo_industrie_tid',
 			$row->getSourceProperty('nid'),
 			'content_magazine_article');
-		if(count($industries) > 0){
+		if (count($industries) > 0) {
 			$row->setSourceProperty('industries', $industries);
 		}
 
@@ -160,7 +160,7 @@ class MagazineArticleNode extends SqlBase {
 			'field_taxo_solution_tid',
 			$row->getSourceProperty('nid'),
 			'content_magazine_article');
-		if(count($thematics) > 0){
+		if (count($thematics) > 0) {
 			$row->setSourceProperty('thematics', $thematics);
 		}
 	//theme mag
@@ -169,7 +169,7 @@ class MagazineArticleNode extends SqlBase {
 			'field_taxo_solution_tid',
 			$row->getSourceProperty('nid'),
 			'content_magazine_article');
-		if(count($mag_theme) > 0){
+		if (count($mag_theme) > 0) {
 			$row->setSourceProperty('magazine_thematics', $mag_theme);
 		}
 //format mag
@@ -178,7 +178,7 @@ class MagazineArticleNode extends SqlBase {
 			'field_taxo_magazine_tid',
 			$row->getSourceProperty('nid'),
 			'content_magazine_article');
-		if(count($mag_format) > 0){
+		if (count($mag_format) > 0) {
 			$row->setSourceProperty('magazine_types', $mag_format);
 		}
 
@@ -189,7 +189,7 @@ class MagazineArticleNode extends SqlBase {
 			'field_taxo_area_tid',
 			$row->getSourceProperty('nid'),
 			'content_magazine_article');
-		if(count($regions) > 0){
+		if (count($regions) > 0) {
 			$row->setSourceProperty('regions', $regions);
 		}
 
@@ -206,15 +206,15 @@ class MagazineArticleNode extends SqlBase {
 
     $images_results = $images_query->execute()->fetchAll();
 
-    if (is_array($images_results)){
+    if (is_array($images_results)) {
       $images = array();
-      foreach ($images_results AS $images_result){
+      foreach ($images_results AS $images_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($images_result) && isset($images_result->mid)){
+        if (is_object($images_result) && isset($images_result->mid)) {
           $images[] = $images_result->mid;
         }
-        elseif (is_array($images_result) && isset($images_result['mid'])){
+        elseif (is_array($images_result) && isset($images_result['mid'])) {
           $images[] = $images_result['mid'];
         }
       }
@@ -229,14 +229,14 @@ class MagazineArticleNode extends SqlBase {
 
     $workflow_results = $workflow_query->execute()->fetchAll();
 
-    if (is_array($workflow_results)){
-      foreach ($workflow_results AS $workflow_result){
+    if (is_array($workflow_results)) {
+      foreach ($workflow_results AS $workflow_result) {
         $sid = '';
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($workflow_result) && isset($workflow_result->sid)){
+        if (is_object($workflow_result) && isset($workflow_result->sid)) {
           $sid = $workflow_result->sid;
         }
-        elseif (is_array($workflow_result) && isset($workflow_result['sid'])){
+        elseif (is_array($workflow_result) && isset($workflow_result['sid'])) {
           $sid = $workflow_result['sid'];
         }
 
@@ -253,7 +253,7 @@ class MagazineArticleNode extends SqlBase {
 
     $path_results = $path_query->execute()->fetchObject();
 
-    if (is_object($path_results)){
+    if (is_object($path_results)) {
 			$row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 

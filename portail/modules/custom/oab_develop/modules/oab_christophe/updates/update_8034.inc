@@ -6,13 +6,13 @@ use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_link');
-if(!empty($field)) {
+if (!empty($field)) {
   $field->delete();
 }
 
 // création des champs pour le paragraph
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_reallink');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_reallink',
     'entity_type' => 'paragraph',
@@ -24,7 +24,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_reallink');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_reallink',
     'entity_type' => 'paragraph',

@@ -26,7 +26,7 @@ class AxiomeParseError {
    * @return \Drupal\Core\StringTranslation\TranslatableMarkup
    *
    */
-  public static function getMessage($key, $values = array()){
+  public static function getMessage($key, $values = array()) {
     return t(AxiomeParseErrorEnum::getValue($key), $values);
   }
 }

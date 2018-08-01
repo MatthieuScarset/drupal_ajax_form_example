@@ -41,7 +41,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
 
     ##Je charge le webform juste pour les contenus fr
-    if($current_language == 'fr') {
+    if ($current_language == 'fr') {
       $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
       $form_output = \Drupal::entityTypeManager()
         ->getViewBuilder('webform')
@@ -67,18 +67,18 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     $meta_description = "";
     ##Je recupère le field_meta_description s'il existe
-    if ($node->hasField('field_meta_decription')){
+    if ($node->hasField('field_meta_decription')) {
       $meta_description = $node->get('field_meta_description')->getValue();
     }
 
     $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
 
 		$og_image = $file = "";
-		if ($node->hasField('field_visual')){
+		if ($node->hasField('field_visual')) {
 				$file = $node->get('field_visual')->getValue();
-				if(!empty($file[0]['target_id']) && $file[0]['target_id'] != null){
+				if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
 						$file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-						if($file instanceof \Drupal\file\Entity\File){
+						if ($file instanceof \Drupal\file\Entity\File) {
 							$og_image = $file->url();
 						}
 				}
@@ -98,24 +98,24 @@ function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menuLinkCon
   return $entity;
 }
 
-function oab_frontoffice_link_alter(&$variables){
+function oab_frontoffice_link_alter(&$variables) {
   $languages = \Drupal::languageManager()->getLanguages();
 
-  if (isset($variables['url'])){
+  if (isset($variables['url'])) {
     try{
       $uri = $variables['url']->getUri();
 
-      foreach($languages AS $key => $value) {
+      foreach ($languages AS $key => $value) {
         $langcode = $value->getId();
 
-        if ($uri === 'base:<front_' . $langcode . '>'){
+        if ($uri === 'base:<front_' . $langcode . '>') {
           $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
           $variables['options']['language'] = $value;
           $variables['url'] = $new_url;
         }
       }
     }
-    catch(\UnexpectedValueException $e){
+    catch(\UnexpectedValueException $e) {
 
     }
   }
@@ -262,18 +262,18 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
  * cleane les options du menu déroulant des filtres exposés
  * @param $options du tableau
  */
-function clean_exposed_filters_by_language($options, $txtAll){
+function clean_exposed_filters_by_language($options, $txtAll) {
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	foreach($options as $key=>$value){
-		if($key != 'All'){
+	foreach ($options as $key=>$value) {
+		if ($key != 'All') {
 			$term = \Drupal\taxonomy\Entity\Term::load($key);
-			if(isset($term) && $term != null) {
+			if (isset($term) && $term != null) {
 				$lang = $term->language();
 				if ( $lang->getId() != $current_language) {
 					unset( $options[ $key ]);
 				}
 			}
-		}else{
+		} else {
 			$options['All'] = t($txtAll);
 		}
 	}
@@ -283,10 +283,10 @@ function clean_exposed_filters_by_language($options, $txtAll){
 /**
  * Implements hook_views_query_alter().
  */
-function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query){
+function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
 
     ## CARTE
-    if ($view->id() == 'offices_map_view'){
+    if ($view->id() == 'offices_map_view') {
     $language = \Drupal::languageManager()->getCurrentLanguage();
     $language_id = $language->getId();
 
@@ -294,13 +294,13 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
     // On enlève le "order by sticky" dans ce cas là
     // On doit faire ça à cause du fonctionnement de la view et des traductions
     // le sticky doit être enregistré au niveau du contenu principal, pas dans ses traductions
-    if(isset($query->orderby)
-    && !empty($query->orderby)){
-      foreach ($query->orderby AS $key=>$value){
+    if (isset($query->orderby)
+    && !empty($query->orderby)) {
+      foreach ($query->orderby AS $key=>$value) {
         if (is_array($value)
         && isset($value['field'])
         && $value['field'] == "node_field_data_sticky"
-          && $language_id != "ru"){
+          && $language_id != "ru") {
           unset($query->orderby[$key]);
         }
       }
@@ -407,19 +407,19 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       }
     }*/
 
-    foreach ($form AS $key => $value){
+    foreach ($form AS $key => $value) {
       if (isset($value['#type'])
-      && $value['#type'] == "textfield"){
+      && $value['#type'] == "textfield") {
         $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
-        if (is_object($vocabulary)){
+        if (is_object($vocabulary)) {
           $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties([
             'vid' => $key,
             'langcode' => $current_language
           ]);
           if (is_array($terms)
-          && !empty($terms)){
+          && !empty($terms)) {
             $options = array('All' => t($vocabulary->get('name')));
-            foreach ($terms AS $term){
+            foreach ($terms AS $term) {
               $term_name = $term->getName();
               $options[$term_name] = $term_name;
             }
@@ -439,51 +439,51 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   // subhome blogs
   if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
-    if (isset($form['blog_thematics'])){
+    if (isset($form['blog_thematics'])) {
       $form['blog_thematics']['#options']['All'] = t('Thematic');
     }
-    if (isset($form['blog_formats'])){
+    if (isset($form['blog_formats'])) {
       $form['blog_formats']['#options']['All'] = t('Type');
     }
 
     // HACK POUR LA SORTIE
-    if($current_language == 'en'
-    || $current_language == 'ru'){
+    if ($current_language == 'en'
+    || $current_language == 'ru') {
         unset($form['blog_formats']);
     }
   }
 
   // subhome magazine
   if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
-    if (isset($form['magazine_thematics'])){
+    if (isset($form['magazine_thematics'])) {
       $form['magazine_thematics']['#options']['All'] = t('Thematic');
     }
-    if (isset($form['magazine_types'])){
+    if (isset($form['magazine_types'])) {
       $form['magazine_types']['#options']['All'] = t('Type');
     }
 
     //Suppression ees filtres format, metier et industry pour la subhome RU
-    if($current_language == 'en'
-    || $current_language == 'ru'){
+    if ($current_language == 'en'
+    || $current_language == 'ru') {
       unset($form['magazine_types']);
     }
   }
 
   // subhome mediatheque
   if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
-    if (isset($form['document_thematics'])){
+    if (isset($form['document_thematics'])) {
       $form['document_thematics']['#options']['All'] = t('Thematic');
     }
-    if (isset($form['document_types'])){
+    if (isset($form['document_types'])) {
       $form['document_types']['#options']['All'] = t('Type');
     }
 
     // HACK POUR LA SORTIE
-    if($current_language == 'fr'){
+    if ($current_language == 'fr') {
         // on supprime "eBook"
         unset($form['field_document_type_target_id']['#options']['E-book']);
     }
-    if($current_language == 'en'){
+    if ($current_language == 'en') {
         // on supprime "position paper"
         unset($form['field_document_type_target_id']['#options']['Position paper']);
     }
@@ -491,39 +491,39 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
   // subhome presse
   if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-    if (isset($form['solutions'])){
+    if (isset($form['solutions'])) {
       $form['solutions']['#options']['All'] = t('Solution');
     }
-    if (isset($form['press_formats'])){
+    if (isset($form['press_formats'])) {
       $form['press_formats']['#options']['All'] = t('Type');
     }
 
     //Suppression de filtres pour le russe
-    if($current_language == 'ru'){
+    if ($current_language == 'ru') {
       unset($form['press_formats']);
     }
   }
 
   // subhome produits
   if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
-    if (isset($form['solutions'])){
+    if (isset($form['solutions'])) {
       $form['solutions']['#options']['All'] = t('Solution');
     }
-    if (isset($form['industries'])){
+    if (isset($form['industries'])) {
       $form['industries']['#options']['All'] = t('Industry');
     }
-    if (isset($form['jobs_profiles'])){
+    if (isset($form['jobs_profiles'])) {
       $form['jobs_profiles']['#options']['All'] = t('Profession');
     }
 
     //Suppression de filtres pour le russe
-    if($current_language == 'ru'
-    || $current_language == 'en'){
+    if ($current_language == 'ru'
+    || $current_language == 'en') {
       unset($form['industries']);
       unset($form['jobs_profiles']);
     }
     // HACK POUR LA SORTIE
-    if($current_language == 'fr'){
+    if ($current_language == 'fr') {
       // on supprime "ressources et énergie" et "transport"
         unset($form['industries']['#options']["ressources et énergie"]);
         unset($form['industries']['#options']["transport"]);
@@ -531,32 +531,32 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   }
   // subhome temoignages
   if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
-    if (isset($form['solutions'])){
+    if (isset($form['solutions'])) {
       $form['solutions']['#options']['All'] = t('Solution');
     }
-    if (isset($form['industries'])){
+    if (isset($form['industries'])) {
       $form['industries']['#options']['All'] = t('Industry');
     }
-    if (isset($form['jobs_profiles'])){
+    if (isset($form['jobs_profiles'])) {
       $form['jobs_profiles']['#options']['All'] = t('Profession');
     }
 
     // HACK POUR LA SORTIE
-    if($current_language == 'fr'){
+    if ($current_language == 'fr') {
         // on supprime "ressources et énergie" et "transport"
         unset($form['industries']['#options']["ressources et énergie"]);
         unset($form['industries']['#options']["transport"]);
     }
-    if($current_language == 'ru'){
+    if ($current_language == 'ru') {
         unset($form['industries']);
     }
   }
   // subhome partenaires
   if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
-    if (isset($form['solutions'])){
+    if (isset($form['solutions'])) {
       $form['solutions']['#options']['All'] = t('Solution');
     }
-    if (isset($form['partners_types'])){
+    if (isset($form['partners_types'])) {
       $form['partners_types']['#options']['All'] = t('Category');
     }
   }
@@ -604,7 +604,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         );
         $form['field_region_target_id']['#options'] = $region;
 
-        if($current_language != 'en'){
+        if ($current_language != 'en') {
             unset($form['field_region_target_id']);
         }
     }
@@ -633,21 +633,21 @@ function oab_frontoffice_views_post_render($view) {
     $request = \Drupal::request();
 
     if ($view->id() == 'subhomes') {
-        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)){
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
             // on recupere les valeurs dans oab.subhomes
             $connection = Database::getConnection();
             $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
             $collection = '';
-            if($current_language == "fr") {
+            if ($current_language == "fr") {
                 $collection = 'language.fr';
             }
-            if($current_language == "ru") {
+            if ($current_language == "ru") {
                 $collection = 'language.ru';
             }
-            if($current_language == "es") {
+            if ($current_language == "es") {
                 $collection = 'language.es';
             }
-            if($current_language == "pt-br") {
+            if ($current_language == "pt-br") {
                 $collection = 'language.pt-br';
             }
             $sth = $connection->select('config', 'c')
@@ -656,7 +656,7 @@ function oab_frontoffice_views_post_render($view) {
                 ->condition('collection', $collection);
             $data = $sth->execute();
             $results = $data->fetchAll(\PDO::FETCH_OBJ);
-            if(count($results) > 0) {
+            if (count($results) > 0) {
                 $data = unserialize($results[0]->data);
                 switch ($view->current_display) {
                     case 'page_press':
@@ -799,14 +799,14 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 				$paramsString .= $paramName . "=" . rawurlencode($value) . "&";
 		}
 		$siteUrls[$site] = $data['url'];
-		if($paramsString != "") {
+		if ($paramsString != "") {
 			$siteUrls[$site] .= "?"
 				. rtrim($paramsString, "&");
 		}
 	}
 
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	switch($current_language){
+	switch($current_language) {
 		case 'fr':
 			$og_locale = 'fr_FR';
 			break;
@@ -834,7 +834,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image)
 }
 
 function oab_frontoffice_mail_alter(&$message) {
-    for($i = 0; $i < count($message["body"]); $i++){
+    for($i = 0; $i < count($message["body"]); $i++) {
         $message["body"][$i] = str_replace("http://", "https://", $message["body"][$i]);
     }
 }
@@ -902,7 +902,7 @@ function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal
             $field_distrib_email = $node->get('field_email_address');
 
             $distribMail = "";
-            if(isset($field_distrib_email[0])) {
+            if (isset($field_distrib_email[0])) {
                 $value = $field_distrib_email[0]->getValue();
                 $distribMail = $value['value'];
             }
@@ -961,7 +961,7 @@ function __seek_alternate($tab) {
  * Méthode qui renvoie le tableau des pays pour remplir le filtre Pays en JS
  * @return array
  */
-function getCountriesForJS(){
+function getCountriesForJS() {
 	$keys = array();
 	$query = Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
@@ -977,15 +977,15 @@ function getCountriesForJS(){
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 	$table_countries = array();
 	$table_countries['all'] = t('Country');
-	foreach ($results as $country){
-		if(!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language){
+	foreach ($results as $country) {
+		if (!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
 			$keys[] = $country->country_tid;
 			$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
 		}
 	}
 	//pour ceux qui n'ont pas de traduction, on prend le libellé sans restriction de langue
-	foreach ($results as $country){
-		if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
+	foreach ($results as $country) {
+		if (!in_array($country->country_tid, $keys) && !empty($country->country_tid)) {
 			$keys[] = $country->country_tid;
 			$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
 		}
@@ -1062,7 +1062,7 @@ function getCountries() {
  * Méthode qui renvoie le tableau de régions (termes de taxo region) [region id] => region name
  * @return array
  */
-function getRegions(){
+function getRegions() {
 	$query = Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
 	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
@@ -1079,17 +1079,17 @@ function getRegions(){
 
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-	foreach ($results as $region){
-		if(!array_key_exists($region->region_tid, $table_regions)
+	foreach ($results as $region) {
+		if (!array_key_exists($region->region_tid, $table_regions)
 			&& !empty($region->region_tid)
-			&& $region->region_langcode == $current_language){
+			&& $region->region_langcode == $current_language) {
 			$table_regions[$region->region_tid] = $region->region_name;
 		}
 	}
 	return $table_regions;
 }
 
-/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
+/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view) {
   if (isset($view) && ($view->storage->id() == 'subhomes')) {
     $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
   }

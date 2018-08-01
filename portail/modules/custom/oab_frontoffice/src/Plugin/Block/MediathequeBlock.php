@@ -23,7 +23,7 @@ use Drupal\image\Entity\ImageStyle;
 
 class MediathequeBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
 
     /*
      * J'ai enlevé les trad car s'affiche seulement sur des contenus FR pour l'instant

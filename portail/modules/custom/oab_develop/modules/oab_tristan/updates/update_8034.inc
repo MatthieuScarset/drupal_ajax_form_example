@@ -150,7 +150,7 @@ $termes = array(
 
 foreach ($termes as $term => $trad) {
   $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
-  foreach($termsArray as $foundterm) {
+  foreach ($termsArray as $foundterm) {
     if (!empty($foundterm) && !$foundterm->hasTranslation('ru')) {
       $entity_array = $foundterm->toArray();
       $translated_fields = [];

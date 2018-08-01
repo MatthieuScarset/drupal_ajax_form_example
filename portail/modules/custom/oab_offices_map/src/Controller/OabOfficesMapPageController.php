@@ -23,14 +23,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OabOfficesMapPageController extends ControllerBase {
 
-	public function getPageTitle(){
+	public function getPageTitle() {
 		return t("Our local offices");
 	}
 
 	public function viewPage(Request $request) {
 
 		$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-		if($current_language == "fr")
+		if ($current_language == "fr")
 		{
 			//on lance une 404
 			throw new NotFoundHttpException();
@@ -41,7 +41,7 @@ class OabOfficesMapPageController extends ControllerBase {
 			$region_id = (!empty($parameters) && isset($parameters['region']) && $parameters['region'] != 'All') ? $parameters['region'] : 'all';
 			$country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 
-			if(($current_language == "ru" && !empty($country_id) && $country_id =="ru")
+			if (($current_language == "ru" && !empty($country_id) && $country_id =="ru")
 				|| ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
 			{
 				// si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
@@ -50,7 +50,7 @@ class OabOfficesMapPageController extends ControllerBase {
 				$query->condition('name', 'Russia');
                 $entity_countries = $query->execute();
 
-				if(!empty($entity_countries))
+				if (!empty($entity_countries))
 				{
 					$country_id = array_pop(array_values($entity_countries));
 				}
@@ -61,7 +61,7 @@ class OabOfficesMapPageController extends ControllerBase {
 				$url = Url::fromRoute($current_route, array(), $option);
 				return new RedirectResponse($url->toString());
 			}
-            elseif(($current_language == "es" && !empty($country_id) && $country_id =="es")
+            elseif (($current_language == "es" && !empty($country_id) && $country_id =="es")
                 || ($current_language == "es" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
             {
 
@@ -70,7 +70,7 @@ class OabOfficesMapPageController extends ControllerBase {
                 $query->condition('name', 'Latin America');
                 $entity_regions = $query->execute();
 
-                if(!empty($entity_regions))
+                if (!empty($entity_regions))
                 {
                     $region_id = array_pop(array_values($entity_regions));
                 }
@@ -82,7 +82,7 @@ class OabOfficesMapPageController extends ControllerBase {
                 $url = Url::fromRoute($current_route, array(), $option);
                 return new RedirectResponse($url->toString());
             }
-            elseif(($current_language == "pt-br" && !empty($country_id) && $country_id =="pt-br")
+            elseif (($current_language == "pt-br" && !empty($country_id) && $country_id =="pt-br")
                 || ($current_language == "pt-br" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
             {
                 // si l'url est /br/contacts ou /br/contacts?country=br => on redirige vers le bon id du pays Brazil
@@ -91,7 +91,7 @@ class OabOfficesMapPageController extends ControllerBase {
                 $query->condition('name', 'Brazil');
                 $entity_countries = $query->execute();
 
-                if(!empty($entity_countries))
+                if (!empty($entity_countries))
                 {
                     $country_id = array_pop(array_values($entity_countries));
                 }
@@ -101,7 +101,7 @@ class OabOfficesMapPageController extends ControllerBase {
                 $query->condition('name', 'Latin America');
                 $entity_regions = $query->execute();
 
-                if(!empty($entity_regions))
+                if (!empty($entity_regions))
                 {
                     $region_id = array_pop(array_values($entity_regions));
                 }

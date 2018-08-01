@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 
-	public static function getConfigName(){
+	public static function getConfigName() {
 		return 'oab.synomia.searchSettings';
 	}
   /**
@@ -68,7 +68,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
     // Retrieve the configuration
     $config = $this->config($this->getConfigName());
 		$languages = \Drupal::languageManager()->getLanguages();
-		foreach ($languages as $language){
+		foreach ($languages as $language) {
 			\Drupal::state()->set('url_synomia_'.$language->getId(), $form_state->getValue('url_synomia_'.$language->getId()));
 			$config->set('order_content_types_'.$language->getId(), $form_state->getValue('order_content_types_'.$language->getId()));
 		}

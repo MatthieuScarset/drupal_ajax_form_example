@@ -43,7 +43,7 @@ foreach ($terms as &$term)
   $query->condition('name', $term['name']);
   $entity = $query->execute();
 
-  if(!isset($entity) || empty($entity))
+  if (!isset($entity) || empty($entity))
   {
     //s'il n'existe pas on le crée
     $entity = \Drupal\taxonomy\Entity\Term::create([

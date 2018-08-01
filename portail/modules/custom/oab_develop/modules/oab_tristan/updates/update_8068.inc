@@ -17,7 +17,7 @@ use Drupal\field\Entity\FieldConfig;
 ## HOMEPAGE TITLE
 ##Texte bouton
 $field_storage = FieldStorageConfig::loadByName('node','field_title_btn_text' );
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_title_btn_text',
         'entity_type' => 'node',
@@ -27,7 +27,7 @@ if(empty($field_storage)) {
 oabt_YmlImport('field.storage.node.field_title_btn_text.yml');
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_title_btn_text');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_title_btn_text',
         'entity_type' => 'node',
@@ -41,7 +41,7 @@ oabt_YmlImport('field.field.node.homepage.field_title_btn_text.yml');
 
 #lien du bouton
 $field_storage = FieldStorageConfig::loadByName('node','field_title_button_link' );
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_title_button_link',
         'entity_type' => 'node',
@@ -51,7 +51,7 @@ if(empty($field_storage)) {
 oabt_YmlImport('field.storage.node.field_title_button_link.yml');
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_title_button_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_title_button_link',
         'entity_type' => 'node',
@@ -68,7 +68,7 @@ oabt_YmlImport('field.field.node.homepage.field_title_button_link.yml');
 ## HOMEPAGE SOLUTION BANNER
 ##Texte bouton
 $field_storage = FieldStorageConfig::loadByName('node','field_solution_banner_btn_text' );
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_solution_banner_btn_text',
         'entity_type' => 'node',
@@ -78,7 +78,7 @@ if(empty($field_storage)) {
 oabt_YmlImport('field.storage.node.field_solution_banner_btn_text.yml');
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_solution_banner_btn_text');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_solution_banner_btn_text',
         'entity_type' => 'node',
@@ -92,7 +92,7 @@ oabt_YmlImport('field.field.node.homepage.field_solution_banner_btn_text.yml');
 
 ##Lien du bouton
 $field_storage = FieldStorageConfig::loadByName('node','field_solution_banner_btn_link' );
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_solution_banner_btn_link',
         'entity_type' => 'node',
@@ -102,7 +102,7 @@ if(empty($field_storage)) {
 oabt_YmlImport('field.storage.node.field_solution_banner_btn_link.yml');
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_solution_banner_btn_link');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_solution_banner_btn_link',
         'entity_type' => 'node',
@@ -116,7 +116,7 @@ oabt_YmlImport('field.field.node.homepage.field_solution_banner_btn_link.yml');
 
 ##Couleur du titre de la banniere
 $field_storage = FieldStorageConfig::loadByName('node','field_solution_banner_title_colo' );
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_solution_banner_title_colo',
         'entity_type' => 'node',
@@ -126,7 +126,7 @@ if(empty($field_storage)) {
 oabt_YmlImport('field.storage.node.field_solution_banner_title_colo.yml');
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_solution_banner_title_colo');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_solution_banner_title_colo',
         'entity_type' => 'node',

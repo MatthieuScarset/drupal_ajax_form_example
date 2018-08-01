@@ -10,7 +10,7 @@ use Drupal\field\Entity\FieldConfig;
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_hub_portal');
 
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_hub_portal',
         'entity_type' => 'node',

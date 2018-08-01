@@ -7,7 +7,7 @@ function oab_user_access_rights_install() {
    * 1. création du champ "field_access_language"
    */
   $new_field = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_access_language');
-  if(empty($new_field) || $new_field == null) {
+  if (empty($new_field) || $new_field == null) {
     $new_field = array(
       'langcode' => 'fr',
       'status' => true,
@@ -45,7 +45,7 @@ function oab_user_access_rights_install() {
    * 2. Création de l'instance du champ pour user
    */
   $instance = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_access_language');
-  if(empty($instance) || $instance == null) {
+  if (empty($instance) || $instance == null) {
     $instance = array(
       'langcode' => 'fr',
       'status' => true,

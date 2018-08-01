@@ -6,7 +6,7 @@ use Drupal\Core\Entity\Entity\EntityFormDisplay;
 
 // création du bundle de paragraph
 $paragraphStorage = ParagraphsType::load('related_content');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
   $paragraphType = ParagraphsType::create([
     'id' => 'related_content',
     'label' => 'related content',
@@ -18,7 +18,7 @@ if(empty($paragraphStorage)) {
 // création des champs pour le paragraph
 /****** storage ******/
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_title');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_title',
     'entity_type' => 'paragraph',
@@ -29,7 +29,7 @@ if(empty($field_storage)) {
   ))->save();
 }
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_catcher');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_catcher',
     'entity_type' => 'paragraph',
@@ -40,7 +40,7 @@ if(empty($field_storage)) {
   ))->save();
 }
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_link');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_link',
     'entity_type' => 'paragraph',
@@ -51,7 +51,7 @@ if(empty($field_storage)) {
   ))->save();
 }
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_visual');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_visual',
     'entity_type' => 'paragraph',
@@ -63,7 +63,7 @@ if(empty($field_storage)) {
   ))->save();
 }
 $field_storage = FieldStorageConfig::loadByName('node', 'field_related_content');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_related_content',
     'entity_type' => 'node',
@@ -80,7 +80,7 @@ if(empty($field_storage)) {
 
 /****** instances ******/
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_title',
     'entity_type' => 'paragraph',
@@ -95,7 +95,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_catcher');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_catcher',
     'entity_type' => 'paragraph',
@@ -110,7 +110,7 @@ if(empty($field)) {
 }
 
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_link');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_link',
     'entity_type' => 'paragraph',
@@ -129,7 +129,7 @@ if(empty($field)) {
   FieldConfig::create($config_array)->save();
 }
 $field = FieldConfig::loadByName('paragraph', 'related_content', 'field_visual');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_visual',
     'entity_type' => 'paragraph',

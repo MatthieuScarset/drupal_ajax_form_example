@@ -38,7 +38,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
     return $events;
   }
 
-	public function swtchUserToAdmin(MigrateImportEvent $migrate_row){
+	public function swtchUserToAdmin(MigrateImportEvent $migrate_row) {
 		// On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
 		$accountSwitcher = \Drupal::service('account_switcher');
 		// switch to the admin user
@@ -67,11 +67,11 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
     $migrate_dest_values = $row->getDestination();
 
     if (isset($migrate_src_values['plugin'])
-    && $migrate_src_values['plugin'] == 'blogpost_profile'){
+    && $migrate_src_values['plugin'] == 'blogpost_profile') {
       $entity = \Drupal\node\Entity\Node::load($nid);
 
       $body = $migrate_src_values['field_txt_biography_fr'];
-      if(empty($body)){
+      if (empty($body)) {
       	$body = $migrate_src_values['field_txt_catcher'];
 			}
       $values = array(
@@ -88,7 +88,7 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
         'field_image' => $migrate_dest_values['field_image'],
       );
 
-      if ($entity->hasTranslation('fr')){
+      if ($entity->hasTranslation('fr')) {
         $entity->removeTranslation('fr');
       }
 

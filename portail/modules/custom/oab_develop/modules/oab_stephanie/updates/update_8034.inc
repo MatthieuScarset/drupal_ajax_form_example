@@ -4,7 +4,7 @@
  * Ajout du type de commentaire Comment Blog
  */
 $new_type = \Drupal\comment\Entity\CommentType::load('comment_blog');
-if(empty($new_type)) {
+if (empty($new_type)) {
 	$new_type = \Drupal\comment\Entity\CommentType::create(array(
 		'id' => 'comment_blog',
 		'label' => 'Blogs Comments',
@@ -14,7 +14,7 @@ if(empty($new_type)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('comment', 'comment_blog', 'comment_body');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'comment_body',
 		'entity_type' => 'comment',
@@ -154,7 +154,7 @@ $config_comment->save(TRUE);
  * Ajout du champ commentaires au type de contenu Blogpost
  */
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_comments');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_comments',
 		'entity_type' => 'node',
@@ -169,7 +169,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'blog_post', 'field_comments');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_comments',
 		'entity_type' => 'node',

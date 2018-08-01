@@ -2,7 +2,7 @@
 /* Création du nouveau champ pour les données d'axiome */
 
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_axiome_data');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_axiome_data',
 		'entity_type' => 'node',

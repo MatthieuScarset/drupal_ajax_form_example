@@ -4,7 +4,7 @@ use \Drupal\paragraphs\Entity\ParagraphsType;
 
 // création du bundle de paragraph
 $paragraphStorage = ParagraphsType::load('paragraph_block_rebond');
-if(empty($paragraphStorage)) {
+if (empty($paragraphStorage)) {
 	$paragraphType = ParagraphsType::create([
 		'id' => 'paragraph_block_rebond',
 		'label' => 'Paragraph block rebond',
@@ -15,7 +15,7 @@ if(empty($paragraphStorage)) {
 
 //STORAGE du champ description pour le paragraph
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('paragraph', 'field_description');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -48,7 +48,7 @@ if(empty($field_storage)) {
 /* INSTANCES DES CHAMPS POUR LE PARAGRAPHE */
 //Title
 $field = FieldConfig::loadByName('paragraph', 'paragraph_block_rebond', 'field_title');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_title',
 		'entity_type' => 'paragraph',
@@ -63,7 +63,7 @@ if(empty($field)) {
 }
 //Link
 $field = FieldConfig::loadByName('paragraph', 'paragraph_block_rebond', 'field_link_button');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_link_button',
 		'entity_type' => 'paragraph',
@@ -83,7 +83,7 @@ if(empty($field)) {
 }
 //Link
 $field = \Drupal\field\Entity\FieldConfig::loadByName('paragraph', 'paragraph_block_rebond', 'field_description');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_description',
 		'entity_type' => 'paragraph',
@@ -106,7 +106,7 @@ if(empty($field)) {
 
 //STORAGE du champ paragraph Try and buy
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_try_and_buy');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -138,7 +138,7 @@ if(empty($field_storage)) {
 
 //STORAGE du champ paragraph Test showroom
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_test_showroom');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -172,7 +172,7 @@ if(empty($field_storage)) {
 /* INSTANCES DES CHAMPS POUR LE PRODUCT */
 //Try and buy
 $field = FieldConfig::loadByName('node', 'paragraph_block_rebond', 'field_try_and_buy');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_try_and_buy',
 		'entity_type' => 'node',
@@ -206,7 +206,7 @@ if(empty($field)) {
 }
 //Try and buy
 $field = FieldConfig::loadByName('node', 'paragraph_block_rebond', 'field_test_showroom');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_test_showroom',
 		'entity_type' => 'node',

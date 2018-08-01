@@ -4,7 +4,7 @@
 
 
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_social_account');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_social_account',
 		'entity_type' => 'node',

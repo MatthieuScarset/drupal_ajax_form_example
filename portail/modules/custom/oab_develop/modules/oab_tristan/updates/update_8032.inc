@@ -49,7 +49,7 @@ foreach ($vocaList as $voca => $languageList) {
       ##on cherche l'Objet
       $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
       ##Je supprime les termes trouvés
-      foreach ($termsArray as $termObject){
+      foreach ($termsArray as $termObject) {
         $termObject->delete();
       }
     }

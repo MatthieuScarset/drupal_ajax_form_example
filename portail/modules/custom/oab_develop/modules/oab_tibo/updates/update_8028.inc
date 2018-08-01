@@ -36,7 +36,7 @@ $sth = $connection->select('config', 'c')
     ->condition('collection', 'language.fr');
 $data = $sth->execute();
 $results = $data->fetchAll(\PDO::FETCH_OBJ);
-if(count($results) > 0){
+if (count($results) > 0) {
     $olddata = unserialize($results[0]->data);
     $collection = \Drupal::service('config.storage')->createCollection('language.fr');
     $collection->write('oab.subhomes', array (
@@ -65,7 +65,7 @@ $sth = $connection->select('config', 'c')
     ->condition('collection', 'language.ru');
 $data = $sth->execute();
 $results = $data->fetchAll(\PDO::FETCH_OBJ);
-if(count($results) > 0){
+if (count($results) > 0) {
     $olddata = unserialize($results[0]->data);
     $collection = \Drupal::service('config.storage')->createCollection('language.ru');
     $collection->write('oab.subhomes', array (

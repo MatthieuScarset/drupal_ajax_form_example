@@ -25,7 +25,7 @@ use Drupal\node\Entity\Node;
 
 class ZoneRebondWysiwygBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     $block = array();
     // récupération du contexte
     $node_ctxt = $this->getContextValue('node');

@@ -2,7 +2,7 @@
 
 //Champs Market segment DVI : STORAGE
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_market_segment_dvi');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'langcode' => 'en',
 		'status' => true,
@@ -37,7 +37,7 @@ if(empty($field_storage)) {
 
 //Champ sur PRODUCT
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'product', 'field_market_segment_dvi');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'langcode' => 'en',
 		'status' => true,
@@ -87,7 +87,7 @@ if(empty($field)) {
 }
 //Champ sur DISTRIBUTOR
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'distributor', 'field_market_segment_dvi');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'langcode' => 'en',
 		'status' => true,

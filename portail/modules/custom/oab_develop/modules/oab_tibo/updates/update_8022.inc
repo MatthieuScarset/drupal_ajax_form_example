@@ -12,9 +12,9 @@ $permissionsToAdd = array(
 );
 
 $role = \Drupal\user\Entity\Role::load('chief_editor');
-if(!empty($role)) {
+if (!empty($role)) {
     $permissions = $role->getPermissions();
-    foreach($permissionsToAdd as $p){
+    foreach ($permissionsToAdd as $p) {
         if (!in_array($p, $permissions)) {
             $role->grantPermission($p);
             $role->save();
@@ -24,9 +24,9 @@ if(!empty($role)) {
 }
 
 $role = \Drupal\user\Entity\Role::load('digital_admin');
-if(!empty($role)) {
+if (!empty($role)) {
     $permissions = $role->getPermissions();
-    foreach($permissionsToAdd as $p){
+    foreach ($permissionsToAdd as $p) {
         if (!in_array($p, $permissions)) {
             $role->grantPermission($p);
             $role->save();

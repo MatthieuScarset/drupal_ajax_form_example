@@ -1,6 +1,6 @@
 <?php
 
-function oab_synomia_search_engine_theme(){
+function oab_synomia_search_engine_theme() {
 	$theme = array();
 	$theme['synomia_search_results_page'] = array(
 		'variables' => array(

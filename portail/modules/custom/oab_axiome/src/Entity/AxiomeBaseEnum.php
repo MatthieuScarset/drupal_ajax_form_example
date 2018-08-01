@@ -20,7 +20,7 @@ class AxiomeBaseEnum {
   public static function getValue($name, $strict = false) {
     $constants = self::getConstants();
 
-    if (array_key_exists($name, $constants)){
+    if (array_key_exists($name, $constants)) {
       return $constants[$name];
     }
 
