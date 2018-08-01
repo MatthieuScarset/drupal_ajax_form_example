@@ -16,7 +16,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     $current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
     $edit_form = false;
-    if (preg_match('@node_(.*)_edit_form@', $form_id)){
+    if (preg_match('@node_(.*)_edit_form@', $form_id)) {
         $current_user_language = $current_language;
 
         if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -29,34 +29,34 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     }
 
     // formulaire replicate
-    if (preg_match('@node_(.*)_replicate_form@', $form_id)){
+    if (preg_match('@node_(.*)_replicate_form@', $form_id)) {
         $form['#attributes']['class'][] = "replicate-form";
     }
 
     // on checke les langues auxquelles l utilisateur a droit
-    if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)){
+    if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)) {
         $user = \Drupal::currentUser();
-        $userId = $user->id();
-        if(!in_array('administrator', $user->getRoles())) {
+        $user_id = $user->id();
+        if (!in_array('administrator', $user->getRoles())) {
             $node = \Drupal::routeMatch()->getParameter('node');
             $node_language = $node->language();
             $node_langcode = $node_language->getId();
             $connection = Database::getConnection();
             $sth = $connection->select('user__field_access_language', 'f')
                 ->fields('f', array('field_access_language_target_id'))
-                ->condition('f.entity_id', $userId, '=');
+                ->condition('f.entity_id', $user_id, '=');
             $data = $sth->execute();
             $results = $data->fetchAll(\PDO::FETCH_OBJ);
-            $canEdit = false;
+            $can_edit = false;
             if (count($results) != 0) {
                 foreach ($results as $r) {
                     if ($r->field_access_language_target_id == $node_langcode) {
-                        $canEdit = true;
+                        $can_edit = true;
                         break;
                     }
                 }
             }
-            if ($canEdit !== true) {
+            if ($can_edit !== true) {
                 drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
                 $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
                 $response->send();
@@ -68,13 +68,13 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
 
     // page de liste des taxonomies
-    if ($form_id == 'taxonomy_overview_terms'){
-        if (isset($form['terms'])){
-            foreach ($form['terms'] AS $key => $value){
-                if (preg_match('@^tid:@', $key)){
+    if ($form_id == 'taxonomy_overview_terms') {
+        if (isset($form['terms'])) {
+            foreach ($form['terms'] AS $key => $value) {
+                if (preg_match('@^tid:@', $key)) {
                     if (isset($form['terms'][$key]['term']['#title'])
                         && isset($form['terms'][$key]['#term'])
-                        && is_object($form['terms'][$key]['#term'])){
+                        && is_object($form['terms'][$key]['#term'])) {
                         $term_language = $form['terms'][$key]['#term']->language()->getId();
                         $form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
                     }
@@ -84,23 +84,23 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     }
 
     // filtres exposés de views
-    if ($form_id == 'views_exposed_form'){
-        if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media'){
+    if ($form_id == 'views_exposed_form') {
+        if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media') {
             $form['field_tags_target_id']['#size'] = 30;
         }
     }
 
     if ($form_id == 'node_profile_form'
-        || $form_id == 'node_profile_edit_form'){
+        || $form_id == 'node_profile_edit_form') {
         $form['field_social_accounts']['#cardinality_multiple'] = false;
 
         if (isset($form['field_social_accounts']['widget'])
-            && is_array($form['field_social_accounts']['widget'])){
+            && is_array($form['field_social_accounts']['widget'])) {
             $form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
 
-            foreach ($form['field_social_accounts']['widget'] AS $key => &$value){
+            foreach ($form['field_social_accounts']['widget'] AS $key => &$value) {
                 if (isset($value['value']['#title'])) {
-                    switch ($key){
+                    switch ($key) {
                         case '0':
                             $value['value']['#title'] = t('Twitter account');
                             break;
@@ -116,7 +116,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
                     }
                     $value['value']['#title_display'] = 'before';
                 }
-                if (isset($value['_weight'])){
+                if (isset($value['_weight'])) {
                     $value['_weight']['#access'] = false;
                 }
             }
@@ -124,7 +124,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     }
 
 
-    if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
+    if (in_array($form_id, array('node_blog_post_form', 'node_blog_post_edit_form',
         'node_customer_story_form', 'node_customer_story_edit_form',
         'node_document_form', 'node_document_edit_form',
         'node_magazine_form', 'node_magazine_edit_form',
@@ -151,7 +151,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         }
 
         // disposition des taxonomies
-        if(isset($form['#fieldgroups']['group_classer'])){
+        if (isset($form['#fieldgroups']['group_classer'])) {
             foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
                 if (isset($form[$field])) {
                     $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
@@ -160,7 +160,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             }
         }
 
-        if(isset($form['#fieldgroups']['group_taxonomie']->children)){
+        if (isset($form['#fieldgroups']['group_taxonomie']->children)) {
             $last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
             $form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
         }
@@ -170,26 +170,25 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
         //on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
         $roles = \Drupal::currentUser()->getRoles();
-        if(!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
-        {
+        if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles)) {
             $form['field_metatags']['#access'] = false;
         }
     }
 
 
     // Ajout de champ dans les menus
-    if($form_id == 'menu_link_content_menu_link_content_form') {
-        $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
-        $linkOptions = $menuLinkEntity->link->first()->options;
-        $linkTarget = !empty($linkOptions['target']) ? true : false;
-        $linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
-        $linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
+    if ($form_id == 'menu_link_content_menu_link_content_form') {
+        $menu_link_entity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+        $link_options = $menu_link_entity->link->first()->options;
+        $link_target = !empty($link_options['target']) ? true : false;
+        $link_icon = !empty($link_options['icon']) ? $link_options['icon']: array();
+        $link_classtag = !empty($link_options['classtag']) ? $link_options['classtag']: array();
 
         $form['link_target'] = array(
             '#type' => 'checkbox',
             '#title' => t('Open in a new window'),
             '#description' => t('check to open the link in a new window'),
-            '#default_value' => $linkTarget,
+            '#default_value' => $link_target,
             '#weight' => -2
         );
 
@@ -197,7 +196,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             '#type' => 'textfield',
             '#title' => t('Font Awesome Icon'),
             '#description' => t('type your icon class code'),
-            '#default_value' => $linkIcon,
+            '#default_value' => $link_icon,
             '#weight' => -3
         );
 
@@ -205,7 +204,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             '#type' => 'textfield',
             '#title' => t('Link Tag Class'),
             '#description' => t('type your link tag class'),
-            '#default_value' => $linkClasstag,
+            '#default_value' => $link_classtag,
             '#weight' => -4
         );
 
@@ -213,40 +212,40 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     }
 
     // langue RU pour les webforms
-    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru'){
+    if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru') {
         $form['elements']['actions']['#submit__label'] = 'Отправить';
     }
 
 
     //preselection des departements et segments de marché sur les PARTNERS
-    if (in_array($form_id, array( 'node_partner_form' )))
+    if (in_array($form_id, array('node_partner_form' )))
     {
-        if(isset($form['field_departments'])){
+        if (isset($form['field_departments'])) {
             //par défaut on sélectionne tous les départements
             $form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
         }
-        if(isset($form['field_market_segment'])){
+        if (isset($form['field_market_segment'])) {
             //par défaut on sélectionne +50 et +250 salariés
             $default_label = array();
             $default_values = array();
-            if($current_language == "fr"){
+            if ($current_language == "fr") {
                 $default_label = array('+ 50 salariés', '+ 250 salariés');
             }
-            elseif ($current_language == "en"){
+            elseif ($current_language == "en") {
                 $default_label = array('+ 50 employees', '+ 250 employees');
             }
-            if(!empty($default_label)){
-                foreach ($default_label as $label){
+            if (!empty($default_label)) {
+                foreach ($default_label as $label) {
                     $query = \Drupal::entityQuery('taxonomy_term');
                     $query->condition('vid', 'market_segments');
                     $query->condition('name', $label);
                     $entity = $query->execute();
 
-                    if(!empty($entity)) {
+                    if (!empty($entity)) {
                         $default_values[] = array_pop($entity);
                     }
                 }
-                if(!empty($default_values)){
+                if (!empty($default_values)) {
                     $form['field_market_segment']['widget']['#default_value']  = $default_values;
                 }
             }
@@ -278,7 +277,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if ($url !== null) {
 
             ##On recupère l'alias
-            $path = preg_replace('/\//','',parse_url($url,PHP_URL_PATH),1);
+            $path = preg_replace('/\//', '',parse_url($url, PHP_URL_PATH),1);
             $path = str_replace($current_language, '', $path);
 
             ##On recupère le /node/xxx depuis l'alias
@@ -286,7 +285,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
                 ->getPathByAlias("$path");
 
             ##On recupère le nid qui est dans l'url
-            if(preg_match('/node\/(\d+)/', $org_path, $matches)) {
+            if (preg_match('/node\/(\d+)/', $org_path, $matches)) {
 
                 ##on load le noad
                 $node = \Drupal\node\Entity\Node::load($matches[1]);
@@ -299,7 +298,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
     }
 
 
-    if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
+    if (in_array($form_id, array('node_blog_post_form', 'node_blog_post_edit_form',
         'node_customer_story_form', 'node_customer_story_edit_form',
         'node_custom_page_form', 'node_custom_page_edit_form',
         'node_document_form', 'node_document_edit_form',
@@ -314,9 +313,9 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
         $user_roles = \Drupal::currentUser()->getRoles();
 
-        if(count($user_roles)==2 &&
+        if (count($user_roles)==2 &&
             isset($user_roles[0]) && $user_roles[0] == "authenticated" &&
-            isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub" ) {
+            isset($user_roles[1]) && $user_roles[1] == "chief_editor_hub") {
             //rend le champ obligatoire
             $form["field_hub"]["widget"]["#required"] = true;
             $form["field_hub_portal"]['#disabled'] = true;
