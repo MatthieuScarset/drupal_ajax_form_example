@@ -27,17 +27,17 @@ class OfficesMapFilter extends FilterBase {
 	private $country_id = "";
 	private $boolParamsUrl = false;
 
-	public function process($text, $langcode){
+	public function process($text, $langcode) {
 		//on regarde d'abord s'il y a des paramètres dans l'url
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-		if(!empty($parameters) && isset($parameters['region'])){
+		if (!empty($parameters) && isset($parameters['region'])) {
 			$this->boolParamsUrl = true;
 			$this->region_id = $parameters['region'];
 		}
 		else{
 			$this->region_id = 'all';
 		}
-		if(!empty($parameters) && isset($parameters['country'])){
+		if (!empty($parameters) && isset($parameters['country'])) {
 			$this->country_id = $parameters['country'];
 			$this->boolParamsUrl = true;
 		}
@@ -54,7 +54,7 @@ class OfficesMapFilter extends FilterBase {
 			$chaineTrouvee = $searchResults[0];
 			//on teste s'il y a plusieurs maps dans un résultat
 			$count = mb_substr_count($chaineTrouvee, "}||");
-			if($count > 1)
+			if ($count > 1)
 			{
 				$pos = strpos($chaineTrouvee, "}||" ); //on cherche la premiere fin
 				$sousChaine = substr($chaineTrouvee, 0, $pos+2);
@@ -88,14 +88,14 @@ class OfficesMapFilter extends FilterBase {
 		$chaine_json = str_replace("||", "", $chaineARemplacer);
 		$tag_info = json_decode($chaine_json);
 
-		if(isset($tag_info->block_id) && $tag_info->block_id == "offices_map_block"){
+		if (isset($tag_info->block_id) && $tag_info->block_id == "offices_map_block") {
 
 			$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-			if(!$this->boolParamsUrl && !empty($tag_info->region_id)){
+			if (!$this->boolParamsUrl && !empty($tag_info->region_id)) {
 				$this->region_id = $tag_info->region_id;
 			}
 
-			if(!$this->boolParamsUrl && !empty($tag_info->country_id)){
+			if (!$this->boolParamsUrl && !empty($tag_info->country_id)) {
 				$this->country_id = $tag_info->country_id;
 			}
 			$regionsCountriesForm = \Drupal::formBuilder()

@@ -16,27 +16,27 @@ define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);
 define('TIMESTAMP_MIGRATION_VALUE', 1502056799 );
 define('TIMESTAMP_MIGRATION_OPERATOR', '>' );
 
-function oab_migrate_workflow_sid_correspondance($old_sid){
+function oab_migrate_workflow_sid_correspondance($old_sid) {
   $workflow_state = NULL;
-  if (is_int($old_sid)){
+  if (is_int($old_sid)) {
     // creation
-    if (in_array($old_sid, array(7, 21, 26, 32, 35, 38, 41, 51, 55))){
+    if (in_array($old_sid, array(7, 21, 26, 32, 35, 38, 41, 51, 55))) {
       $workflow_state = 'draft';
     }
     // draft
-    if (in_array($old_sid, array(9, 27, 33, 36, 39, 42, 52, 56))){
+    if (in_array($old_sid, array(9, 27, 33, 36, 39, 42, 52, 56))) {
       $workflow_state = 'draft';
     }
     // needs review
-    elseif (in_array($old_sid, array(8, 24))){
+    elseif (in_array($old_sid, array(8, 24))) {
       $workflow_state = 'needs_review';
     }
     // unpublished
-    elseif (in_array($old_sid, array(10, 44, 45, 46, 47, 48, 49, 50, 54, 58))){
+    elseif (in_array($old_sid, array(10, 44, 45, 46, 47, 48, 49, 50, 54, 58))) {
       $workflow_state = 'unpublished';
     }
     // published
-    elseif (in_array($old_sid, array(11, 25, 28, 34, 37, 40, 43, 53, 57))){
+    elseif (in_array($old_sid, array(11, 25, 28, 34, 37, 40, 43, 53, 57))) {
       $workflow_state = 'published';
     }
   }
@@ -58,7 +58,7 @@ function oab_migrate_wysiwyg_images($content, $nidD7)
   {
   	$chaineTrouvee = $searchResults[0];
   	//on teste s'il y a plusieurs images dans un résultat
-  	if(mb_substr_count($chaineTrouvee, "]]") > 1)
+  	if (mb_substr_count($chaineTrouvee, "]]") > 1)
   	{
   		$pos = strpos($chaineTrouvee, "]]" ); //on cherche la premiere fin
   		$sousChaine = substr($chaineTrouvee, 0, $pos+2);
@@ -190,7 +190,7 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7,
 	$dbD7 = \Drupal\Core\Database\Database::getConnection();
 	$new_values = array();
 	$tableau_correspondance = \Drupal::state()->get($name_tab_state);
-	if(count($tableau_correspondance) > 0) {
+	if (count($tableau_correspondance) > 0) {
 		$query = $dbD7->select($table_D7, 'i');
 		$query->join('taxonomy_term_data', 't', 't.tid = i.'.$field_D7);
 		$query->fields('t', ['tid'])
@@ -199,14 +199,14 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7,
 
 		$results = $query->execute()->fetchAll();
 
-		if (is_array($results)){
-			foreach ($results AS $result){
+		if (is_array($results)) {
+			foreach ($results AS $result) {
 				$tid_D7 = '';
 				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($result) && isset($result->tid)){
+				if (is_object($result) && isset($result->tid)) {
 					$tid_D7 = $result->tid;
 				}
-				elseif (is_array($result) && isset($result['tid'])){
+				elseif (is_array($result) && isset($result['tid'])) {
 					$tid_D7 = $result['tid'];
 				}
 				if (isset($tableau_correspondance[$tid_D7]) && isset($tableau_correspondance[$tid_D7]['tid_D8'])) {
@@ -239,7 +239,7 @@ function get_country_term($code, $name)
 	$query->fields('t', array('tid'));
 	$entity = $query->execute()->fetchObject();
 
-	if(isset($entity) && isset($entity->tid)) {
+	if (isset($entity) && isset($entity->tid)) {
 		return $entity->tid;
 	}
 	else{

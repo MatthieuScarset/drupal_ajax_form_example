@@ -5,15 +5,15 @@ use Drupal\locale\SourceString;
 
 class OAB_Trace{
 
-  public static function debug($elem, $message=""){
+  public static function debug($elem, $message="") {
     echo '<pre>';
-    if($message<>""){
+    if ($message<>"") {
       echo $message.'<br>';
     }
     print_r($elem);
     echo '</pre>';
   }
-  public static function lock($elem){
+  public static function lock($elem) {
     self::debug($elem);
     die();
   }
@@ -23,25 +23,25 @@ class OAB_Trace{
 /**
  * fonction de raccourci oabt
  */
-function oabt($elem, $lock=false, $message=""){
-  if($lock){
+function oabt($elem, $lock=false, $message="") {
+  if ($lock) {
     OAB_Trace::lock($elem);
-  }else{
+  } else {
     OAB_Trace::debug($elem,$message);
   }
 }
 
-function taxonomy_rename_taxo($old, $new, $vid, $lang){
+function taxonomy_rename_taxo($old, $new, $vid, $lang) {
 	$query = \Drupal::entityQuery('taxonomy_term');
 	$query->condition('vid', $vid);
 	$query->condition('langcode', $lang);
 	$query->condition('name', $old);
 	$entity = $query->execute();
-	if(isset($entity) && !empty($entity)) {
-		foreach ($entity as $tid => $value){
+	if (isset($entity) && !empty($entity)) {
+		foreach ($entity as $tid => $value) {
 			$tidRename = $tid;
 		}
-	}else{
+	} else {
 		// creation du terme
 		$entity = \Drupal\taxonomy\Entity\Term::create([
 			'vid' => $vid,
@@ -51,7 +51,7 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang){
 		$entity->save();
 		$tidRename = $entity->id();
 	}
-	if(isset($tidRename)){
+	if (isset($tidRename)) {
 		$connection = \Drupal\Core\Database\Database::getConnection();
 		$query = $connection->update('taxonomy_term_field_data');
 		$query->fields([
@@ -62,21 +62,21 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang){
 	}
 }
 
-function taxonomy_delete_taxo($name, $vid, $lang){
+function taxonomy_delete_taxo($name, $vid, $lang) {
 	$query = \Drupal::entityQuery('taxonomy_term');
 	$query->condition('vid', $vid);
 	$query->condition('langcode', $lang);
 	$query->condition('name', $name);
 	$tids = $query->execute();
 
-	if (!empty($tids)){
+	if (!empty($tids)) {
 		$controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
 		$entities = $controller->loadMultiple($tids);
 		$controller->delete($entities);
 	}
 }
 
-function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
+function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
 //	$query = \Drupal::entityQuery('config');
 //	$query->condition('name', "taxonomy.vocabulary.".$vid);
 //	$entity = $query->execute();
@@ -110,7 +110,7 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang){
 		$config_group->save(TRUE);
 
 
-	if($lang != 'en'){
+	if ($lang != 'en') {
 		$vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
 		$vocaConfig->set('name', $nameVoca);
 		$vocaConfig->save();
@@ -132,21 +132,21 @@ function isValidDate($date, $format)
 /**
  * Creation d'un field en bdd
  */
-function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()){
+function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
 	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if(empty($field_storage)) {
+	if (empty($field_storage)) {
 		\Drupal\field\Entity\FieldStorageConfig::create(array(
 			'field_name' => $field_name,
 			'entity_type' => $entity_type_id,
 			'type' => $type,
 		))->save();
-	}else{
+	} else {
 		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
 	}
 
 	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if(empty($field)) {
+	if (empty($field)) {
 		$config_array = array(
 			'field_name' =>  $field_name,
 			'entity_type' => $entity_type_id,
@@ -154,11 +154,11 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
 			'label' => $label,
 			'required' => $required,
 		);
-		if(!empty($other_config)){
+		if (!empty($other_config)) {
 			$config_array = array_merge($config_array, $other_config);
 		}
 		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	}else{
+	} else {
 		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
 	}
 }
@@ -166,22 +166,22 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
 /**
  * Creation d'un field en bdd
  */
-function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()){
+function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
 	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if(empty($field_storage)) {
+	if (empty($field_storage)) {
 		\Drupal\field\Entity\FieldStorageConfig::create(array(
 			'field_name' => $field_name,
 			'entity_type' => $entity_type_id,
 			'type' => $type,
 			'settings' => array('target_type' => $target)
 		))->save();
-	}else{
+	} else {
 		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
 	}
 
 	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if(empty($field)) {
+	if (empty($field)) {
 		$config_array = array(
 			'field_name' =>  $field_name,
 			'entity_type' => $entity_type_id,
@@ -190,16 +190,16 @@ function createFieldReference($field_name, $bundle,  $label, $target, $type = 't
 			'required' => $required,
 			''
 		);
-		if(!empty($other_config)){
+		if (!empty($other_config)) {
 			$config_array = array_merge($config_array, $other_config);
 		}
 		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	}else{
+	} else {
 		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
 	}
 }
 
-function loadConfigField($folder, $key){
+function loadConfigField($folder, $key) {
     $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/'.$folder.'/'.$key.'.yml';
     $data = Yaml::parse($config_path);
     \Drupal::configFactory()->getEditable($key)->setData($data)->save(TRUE);
@@ -254,7 +254,7 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
 
   $file_name_lessext =  substr($file_name,0,-4);
 
-  if($dir_name=="/"){
+  if ($dir_name=="/") {
     $tab_file_name_lessext = explode('.',$file_name);
     $dir_name .= $tab_file_name_lessext[1]."/";
   }
@@ -317,12 +317,12 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
   return true;
 }
 
-function oabt_taxoAddDescription($termId, $text){
+function oabt_taxoAddDescription($termId, $text) {
     $query = \Drupal::entityQuery('taxonomy_term');
     $query->condition('tid', $termId);
     $entity = $query->execute();
-    if(isset($entity)) {
-        foreach($entity as $tid) {
+    if (isset($entity)) {
+        foreach ($entity as $tid) {
             // on update le champ description
             $termUpdate = \Drupal\taxonomy\Entity\Term::load($tid);
             $termUpdate->set('description', $text);

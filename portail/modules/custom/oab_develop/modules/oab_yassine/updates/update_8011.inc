@@ -3,7 +3,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_email_owner');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_email_owner',
 		'entity_type' => 'node',
@@ -12,7 +12,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_email_owner');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_email_owner',
 		'entity_type' => 'node',
@@ -24,7 +24,7 @@ if(empty($field)) {
 }
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_content_owner');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_content_owner',
 		'entity_type' => 'node',
@@ -33,7 +33,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_content_owner');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_content_owner',
 		'entity_type' => 'node',

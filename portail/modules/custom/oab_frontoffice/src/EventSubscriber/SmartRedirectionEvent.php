@@ -43,12 +43,12 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
 
     #On vérifie le code de retour (S'il existe, et si 404 ou 403)
     if (method_exists($event->getException(), "getStatusCode")
-      && $event->getException()->getStatusCode() == 404){
+      && $event->getException()->getStatusCode() == 404) {
 
       ########################
       ## CAS DES 404
       $requestUrl = $event->getRequest()->getRequestUri();        #Recuperation de l'URL
-      if(substr ( $requestUrl , 0, 1) == "/") {      #Si l'URL commence par /, je le supprime (pour le découpage)
+      if (substr ( $requestUrl , 0, 1) == "/") {      #Si l'URL commence par /, je le supprime (pour le découpage)
         $requestUrl =  substr($requestUrl , 1);
       }
       $urlParts = explode("/", $requestUrl);             #Découpage de l'URL, via le /
@@ -66,10 +66,10 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
       }
 
     } elseif (method_exists($event->getException(), "getStatusCode")
-      && $event->getException()->getStatusCode() == 403){
+      && $event->getException()->getStatusCode() == 403) {
       ########################
       ## CAS DES 403
-      if(\Drupal::currentUser()->isAnonymous()){
+      if (\Drupal::currentUser()->isAnonymous()) {
         # Si user n'est pas loggué, on redirige vers la home
         $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
         $event->setResponse($response);

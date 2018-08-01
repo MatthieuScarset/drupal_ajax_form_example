@@ -25,7 +25,7 @@ use Drupal\node\Entity\Node;
 
 class ContactBarBrStandardBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         //$block = array();
         //$block['#markup'] = $this->configuration['content'];
         //$block['#format'] = $this->configuration['content_format'];

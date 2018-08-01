@@ -25,7 +25,7 @@ use Drupal\node\Entity\Node;
 
 class ContactBarAnalystBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
 
         $link_ecrire = isset($config['link_ecrire']) ? $config['link_ecrire'] : '';

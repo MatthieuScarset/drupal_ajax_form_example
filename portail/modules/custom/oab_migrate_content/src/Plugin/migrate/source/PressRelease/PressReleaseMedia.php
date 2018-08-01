@@ -80,15 +80,15 @@ class PressReleaseMedia extends SqlBase {
 
     $file_results = $file_query->execute()->fetchAll();
 
-    if (is_array($file_results)){
-      foreach ($file_results AS $file_result){
+    if (is_array($file_results)) {
+      foreach ($file_results AS $file_result) {
         // On vérifie si on a affaire à un objet ou à un tableau
         $file_info = [];
-        if (is_object($file_result)){
+        if (is_object($file_result)) {
           $file_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('file_info', $file_info);
         }
-        elseif (is_array($file_result)){
+        elseif (is_array($file_result)) {
           $file_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('file_info', $file_info);
         }

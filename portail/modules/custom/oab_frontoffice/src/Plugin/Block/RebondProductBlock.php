@@ -26,7 +26,7 @@ use Drupal\node\Entity\Node;
 
 class RebondProductBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     $block = array();
 
     $block['#markup'] = $this->configuration['content'];
@@ -41,13 +41,13 @@ class RebondProductBlock extends BlockBase {
     $node = Node::load($nid);
     $type = $node->getType();
 
-    if($type == 'product'){
+    if ($type == 'product') {
 
       if ($node->hasField('field_axiome_data')) {
 
         //on deserialise les données à passer au template
         $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
-        if(count($field_axiome_data) > 0)
+        if (count($field_axiome_data) > 0)
         {
 
           $axiome_data = $field_axiome_data;

@@ -8,7 +8,7 @@ $config_factory = \Drupal::configFactory();
 
 ############################
 $field_storage = FieldStorageConfig::loadByName('node', 'field_title_color');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   $field_storage = FieldStorageConfig::create(array(
     'field_name' => 'field_title_color',
     'entity_type' => 'node',
@@ -29,7 +29,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_title_color');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' => 'field_title_color',
     'entity_type' => 'node',
@@ -63,7 +63,7 @@ loadConfigField('field/storage', 'field.storage.node.field_title_color');
 
 #PARTNERS BUTTON TEXT
 $field_storage = FieldStorageConfig::loadByName('node', 'field_partners_button_text');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_partners_button_text',
     'entity_type' => 'node',
@@ -72,7 +72,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_partners_button_text');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' =>  'field_partners_button_text',
     'entity_type' => 'node',
@@ -88,7 +88,7 @@ loadConfigField('field/storage', 'field.storage.node.field_partners_button_text'
 
 #CORPORATE BUTTON TEXT
 $field_storage = FieldStorageConfig::loadByName('node', 'field_corporate_button_text');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
   FieldStorageConfig::create(array(
     'field_name' => 'field_corporate_button_text',
     'entity_type' => 'node',
@@ -97,7 +97,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'homepage', 'field_corporate_button_text');
-if(empty($field)) {
+if (empty($field)) {
   $config_array = array(
     'field_name' =>  'field_corporate_button_text',
     'entity_type' => 'node',

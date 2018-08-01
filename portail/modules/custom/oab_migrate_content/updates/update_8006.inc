@@ -253,7 +253,7 @@ $config_group->save(TRUE);
 //document
 $config_factory = \Drupal::configFactory();
 $config_group = $config_factory->getEditable('migrate_plus.migration.document_term');
-if(!empty($config_group)){
+if (!empty($config_group)) {
 	$config_group->delete();
 }
 

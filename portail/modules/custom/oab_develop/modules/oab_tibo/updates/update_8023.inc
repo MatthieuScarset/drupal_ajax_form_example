@@ -5,7 +5,7 @@ $tids = \Drupal::entityQuery('taxonomy_term')
     ->condition('vid', 'products')
     ->execute();
 
-if(count($tids) > 0){
+if (count($tids) > 0) {
     $controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     $entities = $controller->loadMultiple($tids);
     $controller->delete($entities);
@@ -20,7 +20,7 @@ $tids = \Drupal::entityQuery('taxonomy_term')
     ->condition('vid', 'sub_families')
     ->execute();
 
-if(count($tids) > 0){
+if (count($tids) > 0) {
     $controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     $entities = $controller->loadMultiple($tids);
     $controller->delete($entities);

@@ -25,7 +25,7 @@ use Drupal\node\Entity\Node;
 
 class ContactBarStandardBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
 
         $link_assistance = isset($config['link_assistance']) ? $config['link_assistance'] : '';

@@ -58,7 +58,7 @@ class OabHubController extends ControllerBase {
                     $menuObj = Menu::load($menu_id);
                     $i++;
                     #kint($menuObj);
-                    #if($i > 3) die("Je suis à plus de 3");
+                    #if ($i > 3) die("Je suis à plus de 3");
                 }
                 $menuObj = Menu::create([
                     'id' => $menu_id,
@@ -88,7 +88,7 @@ class OabHubController extends ControllerBase {
         foreach ($menus as $menu) {
             $menu_id = $menu->getString();
             $menuObj = Menu::load($menu_id);
-            if(isset($menuObj) || !empty($menuObj)) {
+            if (isset($menuObj) || !empty($menuObj)) {
                 $menuObj->delete();
             }
         }
@@ -103,7 +103,7 @@ class OabHubController extends ControllerBase {
         foreach ($blocks as $block) {
             $block_id = $block->getString();
             $blockObj = Block::load($block_id);
-            if(isset($blockObj) || !empty($blockObj)) {
+            if (isset($blockObj) || !empty($blockObj)) {
                 $blockObj->delete();
             }
         }
@@ -147,7 +147,7 @@ class OabHubController extends ControllerBase {
         ##je checke que le term passé en paramètre est bien un term de taxo
         if (is_a($term,'\Drupal\taxonomy\Entity\Term')) {
             $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
-            if($machineName_value->count() > 0) {
+            if ($machineName_value->count() > 0) {
                 $machineName = $machineName_value->first()->getString();
             }
         }
@@ -164,7 +164,7 @@ class OabHubController extends ControllerBase {
             #Quand je check l'URL, je la sauvegarde en bdd pour pouvoir y réacceder facilement
             # lorsqu'on check les themes
             $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
-            if(is_null($url_list) || empty($url_list) || !isset($url_list)) {
+            if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
                 $url_list = [];
             }
             $url_list[] = $cleanedUrl;
@@ -378,7 +378,7 @@ class OabHubController extends ControllerBase {
             foreach ($terms as $term) {
                 $term_name = $term->getName();
                $display = $term->get('field_related_display_view');
-               if($display->count() > 0) {
+               if ($display->count() > 0) {
                    $display_name = $display->first()->getString();
                    $url = \Drupal\Core\Url::fromRoute("view.subhomes.$display_name");
 
@@ -411,7 +411,7 @@ class OabHubController extends ControllerBase {
     //TODO faire une fonction pour recuperer le hub en fonction de l'URL
     public static function getActifHub() {
         $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
-        if(is_null($url_list) || empty($url_list) || !isset($url_list)) {
+        if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
             $url_list = [];
         }
 
@@ -509,7 +509,7 @@ class OabHubController extends ControllerBase {
 
     }
 
-    public static function getHubSubhomeUrl($url_cible){
+    public static function getHubSubhomeUrl($url_cible) {
 
         # Je recupère les URLS des hubs
         $urls_hub = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
@@ -522,9 +522,9 @@ class OabHubController extends ControllerBase {
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
-        if(count($route_parts)>2){
+        if (count($route_parts)>2) {
             $part_url = $route_parts[1];
-        }else{
+        } else {
             $part_url = "";
         }
 
@@ -535,9 +535,9 @@ class OabHubController extends ControllerBase {
             $is_hub_curr = in_array($part_url, $urls_hub);
         }
 
-        if(is_object($url_cible)){
+        if (is_object($url_cible)) {
             $route_parts_cible = explode('/',$url_cible->toString());
-        }else{
+        } else {
             $route_parts_cible = explode('/',$url_cible);
         }
         if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0) {
@@ -551,22 +551,22 @@ class OabHubController extends ControllerBase {
             $is_hub_cible = in_array($part_url_cible, $urls_hub);
         }
 
-        if (!$is_hub_curr){
+        if (!$is_hub_curr) {
             //pas de contexte hub on envois une adresse normale
-            if (!$is_hub_cible){
+            if (!$is_hub_cible) {
                 //hos context hub , cible hors context hub => ok
                 $new_url = $url_cible;
-            }else{
+            } else {
                 //hos context hub , cible context hub => on retravail la cible
                 unset($route_parts_cible[1]);
                 $new_url = "/" . implode("/",$route_parts_cible);
             }
-        }else{
+        } else {
             //context hub
-            if($route_parts[1]<>$route_parts_cible[1]){
+            if ($route_parts[1]<>$route_parts_cible[1]) {
                 $route_parts_cible[1] = $route_parts[1];
                 $new_url = "/" . implode("/",$route_parts_cible);
-            }else{
+            } else {
                 $new_url = $url_cible;
             }
         }

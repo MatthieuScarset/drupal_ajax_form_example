@@ -9,7 +9,7 @@ use Drupal\field\Entity\FieldConfig;
 //========================== BLOG POST ==========================//
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_insight');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_insight',
         'entity_type' => 'node',
@@ -18,7 +18,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'blog_post', 'field_insight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_insight',
         'entity_type' => 'node',
@@ -927,7 +927,7 @@ $config_group->save(TRUE);
 //========================== DOCUMENT ==========================//
 
 $field = FieldConfig::loadByName('node', 'document', 'field_insight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_insight',
         'entity_type' => 'node',
@@ -994,7 +994,7 @@ $collection->write('field.field.node.document.field_insight', array (
 ));
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_document_thematic');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_document_thematic',
         'entity_type' => 'node',
@@ -1039,7 +1039,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'document', 'field_document_thematic');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_document_thematic',
         'entity_type' => 'node',
@@ -1110,7 +1110,7 @@ $collection->write('field.field.node.document.field_document_thematic', array (
 // ***** FIELD_DOCUMENT_TYPE
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_document_type');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_document_type',
         'entity_type' => 'node',
@@ -1155,7 +1155,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'document', 'field_document_type');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_document_type',
         'entity_type' => 'node',
@@ -2026,7 +2026,7 @@ $config_group->save(TRUE);
 // ***** FIELD_GEOGRAPHIC
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_geographic');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_geographic',
         'entity_type' => 'node',
@@ -2071,7 +2071,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'partner', 'field_geographic');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_geographic',
         'entity_type' => 'node',
@@ -2807,7 +2807,7 @@ $config_group->save(TRUE);
 
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_country');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_country',
         'entity_type' => 'node',
@@ -2815,7 +2815,7 @@ if(empty($field_storage)) {
     ))->save();
 }
 $field = FieldConfig::loadByName('node', 'customer_story', 'field_country');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_country',
         'entity_type' => 'node',
@@ -3588,7 +3588,7 @@ $config_group->save(TRUE);
 // **** FIELD_PRESS_TYPE
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_press_type');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_press_type',
         'entity_type' => 'node',
@@ -3633,7 +3633,7 @@ $config_group->setData(
 $config_group->save(TRUE);
 
 $field = FieldConfig::loadByName('node', 'press_release', 'field_press_type');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_press_type',
         'entity_type' => 'node',
@@ -4466,7 +4466,7 @@ $config_group->save(TRUE);
 //========================== PRESS KIT ==========================//
 
 $field = FieldConfig::loadByName('node', 'press_kit', 'field_press_type');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_press_type',
         'entity_type' => 'node',
@@ -5241,7 +5241,7 @@ $config_group->save(TRUE);
 // ******* field_magazine_thematic
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_magazine_thematic');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_magazine_thematic',
         'entity_type' => 'node',
@@ -5287,7 +5287,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'magazine', 'field_magazine_thematic');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_magazine_thematic',
         'entity_type' => 'node',
@@ -5356,7 +5356,7 @@ $collection->write('field.field.node.magazine.field_magazine_thematic', array (
 // ******* field_magazine_type
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_magazine_type');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_magazine_type',
         'entity_type' => 'node',
@@ -5402,7 +5402,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'magazine', 'field_magazine_type');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_magazine_type',
         'entity_type' => 'node',
@@ -5470,7 +5470,7 @@ $collection->write('field.field.node.magazine.field_magazine_type', array (
 
 
 $field = FieldConfig::loadByName('node', 'magazine', 'field_insight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_insight',
         'entity_type' => 'node',

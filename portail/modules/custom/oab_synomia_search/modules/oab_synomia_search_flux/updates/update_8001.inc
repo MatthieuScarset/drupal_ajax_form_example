@@ -1,7 +1,7 @@
 <?php
 
 $role = \Drupal\user\Entity\Role::load('digital_admin');
-if(!empty($role)) {
+if (!empty($role)) {
 	//affectation de la permission
 	$permissions = $role->getPermissions();
 	if (!in_array('oab_synomia_administer', $permissions)) {

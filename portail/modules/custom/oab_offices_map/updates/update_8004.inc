@@ -16,7 +16,7 @@ $termes = array(
 
 foreach ($termes as $term => $trad) {
     $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
-    foreach($termsArray as $foundterm) {
+    foreach ($termsArray as $foundterm) {
         if (!empty($foundterm) && !$foundterm->hasTranslation('es')) {
             $entity_array = $foundterm->toArray();
             $translated_fields = [];
@@ -29,7 +29,7 @@ foreach ($termes as $term => $trad) {
 
 foreach ($termes as $term => $trad) {
     $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
-    foreach($termsArray as $foundterm) {
+    foreach ($termsArray as $foundterm) {
         if (!empty($foundterm) && !$foundterm->hasTranslation('pt-br')) {
             $entity_array = $foundterm->toArray();
             $translated_fields = [];

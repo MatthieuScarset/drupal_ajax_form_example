@@ -2,7 +2,7 @@
 
 //Champs Department
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_departments');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'dependencies' =>
 			array (
@@ -30,7 +30,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'partner', 'field_departments');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (
@@ -75,7 +75,7 @@ if(empty($field)) {
 
 //Champ Market Segment
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'partner', 'field_market_segment');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'dependencies' =>
 			array (

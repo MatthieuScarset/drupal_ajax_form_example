@@ -28,10 +28,10 @@ $nids= \Drupal::entityQuery('node')
 
 $nodesProducts = \Drupal\node\Entity\Node::loadMultiple($nids);
 foreach ($nodesProducts as $product) {
-			if(!empty($default_values[$product->language()->getId()]) ){
+			if (!empty($default_values[$product->language()->getId()]) ) {
 				$segments = $product->get('field_market_segment')->getValue();
-				foreach ($default_values[$product->language()->getId()] as $newValue){
-					if(!in_array(array( "target_id" => $newValue), $segments)){
+				foreach ($default_values[$product->language()->getId()] as $newValue) {
+					if (!in_array(array( "target_id" => $newValue), $segments)) {
 						array_push($segments, $newValue);
 					}
 				}

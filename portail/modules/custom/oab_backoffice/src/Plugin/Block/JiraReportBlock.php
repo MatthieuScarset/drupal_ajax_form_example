@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class JiraReportBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     $config = $this->getConfiguration();
     $jira_report_code = isset($config['jira_report_code']) ? $config['jira_report_code'] : '';
 

@@ -2,7 +2,7 @@
 
 //Champs Content
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'moderation_state_update');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,

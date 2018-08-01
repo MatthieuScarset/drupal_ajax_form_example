@@ -110,7 +110,7 @@ class DocumentImage extends SqlBase {
   public function prepareRow(Row $row) {
     $imageFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
-    foreach ($imageFolders AS $folder){
+    foreach ($imageFolders AS $folder) {
       $folderName = 'public://'.$folder;
       file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
     }
@@ -145,16 +145,16 @@ class DocumentImage extends SqlBase {
 
     $image_results = $image_query->execute()->fetchAll();
 
-    if (is_array($image_results)){
-      foreach ($image_results AS $image_result){
+    if (is_array($image_results)) {
+      foreach ($image_results AS $image_result) {
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($image_result)){
+        if (is_object($image_result)) {
           $row->setSourceProperty('alt', $image_result->field_image_alt);
           $row->setSourceProperty('title', $image_result->field_image_title);
           $row->setSourceProperty('width', $image_result->field_image_width);
           $row->setSourceProperty('height', $image_result->field_image_height);
         }
-        elseif (is_array($image_result)){
+        elseif (is_array($image_result)) {
           $row->setSourceProperty('alt', $image_result['field_image_alt']);
           $row->setSourceProperty('title', $image_result['field_image_title']);
           $row->setSourceProperty('width', $image_result['field_image_width']);

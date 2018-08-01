@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class SocialShareBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
         $social_share_custom_text = isset($config['social_share_custom_text']) ? $config['social_share_custom_text'] : '';
         return array(

@@ -138,8 +138,8 @@ abstract class DviHelper {
             $fieldValue = $node->$fieldName->getValue();
             if (!empty($fieldValue)) {
                 //pour chaque tag on regarde s'il y en a un dvi
-                foreach ($fieldValue as $values){
-                    if(isset($values['target_id']) && in_array($values['target_id'], $ms_termsIds)){
+                foreach ($fieldValue as $values) {
+                    if (isset($values['target_id']) && in_array($values['target_id'], $ms_termsIds)) {
                         $return = TRUE;
                     }
                 }
@@ -157,10 +157,10 @@ abstract class DviHelper {
      * @param string $fieldName
      * @return bool
      */
-    public static function isDVIProduct(\Drupal\node\Entity\Node $node){
+    public static function isDVIProduct(\Drupal\node\Entity\Node $node) {
         $is_dvi_product = FALSE;
         ## First, on check si le node est bien un produit
-        if($node->type->entity->get('type') == "product"){
+        if ($node->type->entity->get('type') == "product") {
 
             ##Ensuite, on demande si on a un des terme de taxo de DVI
             $hasMsTaxoTerm = self::hasMSTaxoTerm($node);
@@ -182,8 +182,8 @@ abstract class DviHelper {
                 $fieldValue = $node->$fieldName->getValue();
                 if (!empty($fieldValue)) {
                     //pour chaque tag on regarde s'il y en a un dvi
-                    foreach ($fieldValue as $values){
-                        if(isset($values['target_id']) && ($values['target_id'] == self::getProductDviSubhomeTid())){
+                    foreach ($fieldValue as $values) {
+                        if (isset($values['target_id']) && ($values['target_id'] == self::getProductDviSubhomeTid())) {
                             $isTaggedDvi = TRUE;
                         }
                     }

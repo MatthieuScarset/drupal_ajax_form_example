@@ -8,7 +8,7 @@ $query->condition('source', "/contacts");
 $query->condition('langcode', 'en');
 $entity = $query->execute()->fetchObject();
 
-if(!isset($entity) || empty($entity))
+if (!isset($entity) || empty($entity))
 {
 	\Drupal::service('path.alias_storage')->save("/contacts" , "/where-we-are" , "en");
 }

@@ -2536,7 +2536,7 @@ $config_group->delete();
 
 
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_region');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_region',
 		'entity_type' => 'node',
@@ -2544,7 +2544,7 @@ if(empty($field_storage)) {
 	))->save();
 }
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'country', 'field_region');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_region',
 		'entity_type' => 'node',

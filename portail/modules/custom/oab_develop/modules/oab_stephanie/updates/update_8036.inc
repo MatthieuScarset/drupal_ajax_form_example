@@ -12,7 +12,7 @@ if (!isset($vocabularies['office_countries']) ) {
 
 //Champ COUNTRY CODE
 $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', 'field_country_code');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	\Drupal\field\Entity\FieldStorageConfig::create(array(
 		'field_name' => 'field_country_code',
 		'entity_type' => 'taxonomy_term',
@@ -28,7 +28,7 @@ if(empty($field_storage)) {
 }
 
 $field = \Drupal\field\Entity\FieldConfig::loadByName('taxonomy_term', 'office_countries', 'field_country_code');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' => 'field_country_code',
 		'entity_type' => 'taxonomy_term',

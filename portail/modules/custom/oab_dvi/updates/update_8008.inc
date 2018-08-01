@@ -3,7 +3,7 @@
 
 //1. création du rôle DVI
 $role = \Drupal\user\Entity\Role::load('dvi');
-if(empty($role))
+if (empty($role))
 {
 	$role = \Drupal\user\Entity\Role::create(array('id' => 'dvi', 'label' => 'DVI', 'langcode' => 'en'));
 	$role->save();
@@ -75,8 +75,8 @@ $permissionsToAdd = array('access administration pages',
 	'view scheduled update entities',
 	'view the administration theme');
 $permissions = $role->getPermissions();
-foreach ($permissionsToAdd as $permToAdd){
-	if(!in_array($permToAdd, $permissions))
+foreach ($permissionsToAdd as $permToAdd) {
+	if (!in_array($permToAdd, $permissions))
 	{
 		$role->grantPermission($permToAdd);
 	}

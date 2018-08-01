@@ -29,7 +29,7 @@ use Drupal\image\Entity\ImageStyle;
 
 class LocalNavBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     $block = array();
     // récupération du contexte
     $node_ctxt = $this->getContextValue('node');
@@ -44,7 +44,7 @@ class LocalNavBlock extends BlockBase {
     $block['#type'] = 'markup';
     $block['#markup'] = '';
     $content = '';
-    if(isset($localnav[0]['value'])){
+    if (isset($localnav[0]['value'])) {
       $content = check_markup($localnav[0]['value'], 'full_html', '', []);
     }
     $block['#markup'] = $content;

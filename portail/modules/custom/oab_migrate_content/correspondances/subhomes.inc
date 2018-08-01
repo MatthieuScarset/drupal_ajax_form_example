@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_subhomes(){
+function get_correspondances_subhomes() {
 	$subhomes = array(
 		'blogs' => array(
 			'fr' => array('label' => 'Blogs', 'tid_D8' => ''),

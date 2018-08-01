@@ -79,7 +79,7 @@ class OabExtension extends \Twig_Extension {
   }*/
   public function kint_t($array, $stop = false) {
     $moduleHandler = \Drupal::service('module_handler');
-    if($moduleHandler->moduleExists('kint')) {
+    if ($moduleHandler->moduleExists('kint')) {
       kint($array);
 
       if ($stop)
@@ -87,7 +87,7 @@ class OabExtension extends \Twig_Extension {
     }
   }
 
-  public function d_config($config){
+  public function d_config($config) {
     return \Drupal::config($config);
   }
 
@@ -205,7 +205,7 @@ class OabExtension extends \Twig_Extension {
   public function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
 
   	$options = array('absolute' => TRUE);
-  	if($defaultLanguage) {
+  	if ($defaultLanguage) {
 			$node = \Drupal\node\Entity\Node::load($nid);
 			$options['language'] = $node->language();
 		}
@@ -251,9 +251,9 @@ class OabExtension extends \Twig_Extension {
      */
     public function is_empty_field($field) {
     		$empty = true;
-        if (!is_null($field)){
-        	foreach ($field as $key => $value){
-        		if ($key[0] != "#"){
+        if (!is_null($field)) {
+        	foreach ($field as $key => $value) {
+        		if ($key[0] != "#") {
 							$empty = false;
 						}
 					}
@@ -299,16 +299,16 @@ class OabExtension extends \Twig_Extension {
   public static function formatDate($date, $format) {
     if ($date_format = \DateTime::createFromFormat('Y-m-d', $date)) {
       $timestmap = strtotime($date);
-    }elseif (is_a($date, 'Drupal\Core\Datetime\DrupalDateTime') || is_a($date, 'DateTime')){
+    }elseif (is_a($date, 'Drupal\Core\Datetime\DrupalDateTime') || is_a($date, 'DateTime')) {
       $timestmap = $date->getTimestamp();
-    }else{
+    } else {
       $timestmap = $date;
     }
 
     return \Drupal::service('date.formatter')->format($timestmap, "Node created date", $format);
   }
 
-  public function linkAxiome($content){
+  public function linkAxiome($content) {
     $content = str_replace("<link", "<a", $content);
     $content = str_replace("</link>", "</a>", $content);
     return $content;

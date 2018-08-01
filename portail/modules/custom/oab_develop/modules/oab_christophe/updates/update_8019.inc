@@ -24,7 +24,7 @@ foreach ($terms as &$term)
   $query->condition('name', $term['name']);
   $entity = $query->execute();
 
-  if(!isset($entity) || empty($entity))
+  if (!isset($entity) || empty($entity))
   {
     //s'il n'existe pas on le crée
     $entity = \Drupal\taxonomy\Entity\Term::create([
@@ -39,7 +39,7 @@ foreach ($terms as &$term)
   else{
     $term_id = key($entity);
   }
-  switch($term['language']){
+  switch($term['language']) {
     case "ru":
       $RUConfig[$term['variable']] = $term_id;
       break;

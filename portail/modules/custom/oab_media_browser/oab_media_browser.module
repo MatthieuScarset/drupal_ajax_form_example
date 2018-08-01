@@ -71,7 +71,7 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
 			}
 		}
 		else if ($form['#form_id'] == 'media_image_form'
-			|| $form['#form_id'] == 'media_image_edit_form'){
+			|| $form['#form_id'] == 'media_image_edit_form') {
 			$entity = $form_state->getFormObject()->getEntity();
 			$entity_status = $entity->isPublished();
 
@@ -89,7 +89,7 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
 				'#group' => 'status_information',
 			];
 		}
-		else if($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
+		else if ($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
 			|| $form['#form_id'] =='entity_browser_browse_media_modal_form'
 			|| $form['#form_id'] =='entity_browser_browser_file_modal_form')
 		{
@@ -98,9 +98,9 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
 	}
 }
 
-function oab_media_browser_inline_entity_form_entity_form_alter(&$entity_form, &$form_state){
+function oab_media_browser_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
 	if ($entity_form['#type'] == 'inline_entity_form'
-		&& $entity_form['#entity_type'] == 'media'){
+		&& $entity_form['#entity_type'] == 'media') {
 		$entity = $entity_form['#entity'];
 		$entity_status = $entity->isPublished();
 
@@ -133,9 +133,9 @@ function oab_media_browser_inline_entity_form_entity_form_alter(&$entity_form, &
 	}
 }
 
-function oab_media_browser_entity_modal_submit(array &$entity_form, FormStateInterface $form_state){
+function oab_media_browser_entity_modal_submit(array &$entity_form, FormStateInterface $form_state) {
 	if ($entity_form['#type'] == 'inline_entity_form'
-		&& $entity_form['#entity_type'] == 'media'){
+		&& $entity_form['#entity_type'] == 'media') {
 		$entity_form['#entity']->setPublished($form_state->getValue('status'));
 	}
 }

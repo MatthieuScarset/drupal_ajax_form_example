@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class NewsletterBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
 
     $form = \Drupal::formBuilder()->getForm('Drupal\oab_frontoffice\Form\NewsletterForm');
 

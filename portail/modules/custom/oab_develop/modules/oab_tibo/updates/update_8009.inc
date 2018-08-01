@@ -4,7 +4,7 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_top_zone_background');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_top_zone_background',
 		'entity_type' => 'node',
@@ -13,7 +13,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_top_zone_background');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_top_zone_background',
 		'entity_type' => 'node',

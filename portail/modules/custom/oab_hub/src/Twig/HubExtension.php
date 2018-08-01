@@ -52,11 +52,11 @@ class HubExtension extends \Twig_Extension
         return $ret;
     }
 
-    public function getBaseUrl(){
+    public function getBaseUrl() {
         return OabHubController::getHubBaseUrl();
     }
 
-    public function getHubSubhomeUrl($url){
+    public function getHubSubhomeUrl($url) {
         return OabHubController::getHubSubhomeUrl($url);
     }
 }

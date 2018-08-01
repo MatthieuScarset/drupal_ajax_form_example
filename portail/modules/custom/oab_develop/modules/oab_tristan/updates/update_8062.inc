@@ -6,7 +6,7 @@ use Drupal\paragraphs\Entity\ParagraphsType;
 
 ##Création du paragraph type
 $paragraphType = ParagraphsType::load('rebond_wysiwyg');
-if(empty($paragraphType)) {
+if (empty($paragraphType)) {
     $paragraphType = ParagraphsType::create([
         'id' => 'rebond_wysiwyg',
         'label' => 'Rebond wysiwyg',
@@ -18,7 +18,7 @@ oabt_YmlImport("paragraphs.paragraphs_type.rebond_wysiwyg.yml");
 
 
 $field_storage = FieldStorageConfig::loadByName('paragraph', 'field_p_wysiwyg_rebond_color');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_p_wysiwyg_rebond_color',
         'entity_type' => 'paragraph',
@@ -34,7 +34,7 @@ oabt_YmlImport("core.entity_form_display.paragraph.rebond_wysiwyg.default.yml");
 
 ###Création du field storage du field pour les node content
 $field_storage = FieldStorageConfig::loadByName('node', 'field_p_wysiwyg_rebond');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'langcode' => 'en',
         'status' => true,

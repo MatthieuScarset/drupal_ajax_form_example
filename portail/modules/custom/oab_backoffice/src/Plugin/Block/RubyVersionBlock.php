@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class RubyVersionBlock extends BlockBase {
 
-  public function build(){
+  public function build() {
     global $config;
 
     $c = $this->getConfiguration();

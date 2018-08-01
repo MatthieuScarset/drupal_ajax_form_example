@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  * Configure example settings for this site.
  */
 class OabSettingsGdprForm extends ConfigFormBase {
-    public static function getConfigName(){
+    public static function getConfigName() {
         return 'oab.gdpr_settings';
     }
     /**

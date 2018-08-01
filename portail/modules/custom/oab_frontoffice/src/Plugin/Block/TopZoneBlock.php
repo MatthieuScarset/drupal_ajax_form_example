@@ -29,7 +29,7 @@ use Drupal\image\Entity\ImageStyle;
 
 class TopZoneBlock extends BlockBase {
 
-	public function build(){
+	public function build() {
 		$block = array();
 		// récupération du contexte
 		$node_ctxt = $this->getContextValue('node');
@@ -53,35 +53,35 @@ class TopZoneBlock extends BlockBase {
 		$contentDesktop = '';
 		$contentMobile = '';
 
-		if(isset($top_zone[0]['value'])){
+		if (isset($top_zone[0]['value'])) {
 			$contentTop = check_markup($top_zone[0]['value'], 'full_html', '', []);
 		}
-		if(isset($top_zone_background[0]['target_id'])){
+		if (isset($top_zone_background[0]['target_id'])) {
 			$entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
 
 			$url = '';
-			if (!is_null($entity)){
+			if (!is_null($entity)) {
 				$uri = $entity->getType()->thumbnail($entity);
 				$type = $node->getType();
-				if($type == 'product'){
+				if ($type == 'product') {
 					$img_style = 'top_zone';
-				}else{
+				} else {
 					$img_style = 'top_zone_big';
 				}
 				$url = ImageStyle::load($img_style)->buildUrl($uri);
 				$url = file_url_transform_relative($url);
 			}
 			$classHiddenXs = "";
-			if(isset($top_zone_background_mobile[0]['target_id'])){
+			if (isset($top_zone_background_mobile[0]['target_id'])) {
 				$classHiddenXs = 'class="hidden-xs"';
 			}
 			$contentDesktop = check_markup('<div id="topzonebg"  '.$classHiddenXs.' style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
 			$content = $contentDesktop;
 		}
-		if(isset($top_zone_background_mobile[0]['target_id'])){
+		if (isset($top_zone_background_mobile[0]['target_id'])) {
 			$entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background_mobile[0]['target_id']);
 			$url = '';
-			if (!is_null($entity)){
+			if (!is_null($entity)) {
 				$uri = $entity->getType()->thumbnail($entity);
 				$img_style = 'max_650';
 				$url = ImageStyle::load($img_style)->buildUrl($uri);

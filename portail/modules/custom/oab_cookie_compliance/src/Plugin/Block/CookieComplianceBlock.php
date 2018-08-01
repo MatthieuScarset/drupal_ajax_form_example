@@ -23,7 +23,7 @@ class CookieComplianceBlock extends BlockBase {
     const BLOCK_ID                  = 'cookie-compliance-block';
     const EXPIRATION_NB_MONTH       = 13;
 
-    public function build(){
+    public function build() {
 
         /*if (!isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME])
             && !isset($_COOKIE[CookieComplianceBlock::COOKIE_NAME_FIRST_VISIT]) ) {

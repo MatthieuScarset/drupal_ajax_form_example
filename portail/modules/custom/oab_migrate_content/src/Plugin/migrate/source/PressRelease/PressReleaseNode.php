@@ -90,19 +90,19 @@ class PressReleaseNode extends SqlBase {
 
 		$catcher_results = $catcher_query->execute()->fetchAll();
 
-		if (is_array($catcher_results)){
-			foreach ($catcher_results AS $catcher_result){
+		if (is_array($catcher_results)) {
+			foreach ($catcher_results AS $catcher_result) {
 
 				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)){
+				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
 					$meta_description = $catcher_result->field_txt_catcher_value;
 				}
-				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])){
+				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
 					$meta_description = $catcher_result['field_txt_catcher_value'];
 				}
 			}
 		}
-		if(isset($meta_description) && !empty($meta_description))
+		if (isset($meta_description) && !empty($meta_description))
 		{
 			$row->setSourceProperty('highlight_field', $meta_description) ;
 			$meta_description_short = mb_substr($meta_description,0, 155);
@@ -111,7 +111,7 @@ class PressReleaseNode extends SqlBase {
 
     //Taxonomie de la Subhome
 		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
-		if(isset($subhomes['press'][$row->getSourceProperty('language')])
+		if (isset($subhomes['press'][$row->getSourceProperty('language')])
 			&& isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
 			&& !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
 		{
@@ -127,14 +127,14 @@ class PressReleaseNode extends SqlBase {
 
     $country_results = $country_query->execute()->fetchAll();
 
-    if (is_array($country_results)){
-      foreach ($country_results AS $country_result){
+    if (is_array($country_results)) {
+      foreach ($country_results AS $country_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($country_result) && isset($country_result->field_txt_country_value)){
+        if (is_object($country_result) && isset($country_result->field_txt_country_value)) {
           $row->setSourceProperty('country', $country_result->field_txt_country_value);
         }
-        elseif (is_array($country_result) && isset($country_result['field_txt_country_value'])){
+        elseif (is_array($country_result) && isset($country_result['field_txt_country_value'])) {
           $row->setSourceProperty('country', $country_result['field_txt_country_value']);
         }
       }
@@ -148,14 +148,14 @@ class PressReleaseNode extends SqlBase {
 
     $city_results = $city_query->execute()->fetchAll();
 
-    if (is_array($city_results)){
-      foreach ($city_results AS $city_result){
+    if (is_array($city_results)) {
+      foreach ($city_results AS $city_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($city_result) && isset($city_result->field_location_value)){
+        if (is_object($city_result) && isset($city_result->field_location_value)) {
           $row->setSourceProperty('city', $city_result->field_location_value);
         }
-        elseif (is_array($city_result) && isset($city_result['field_location_value'])){
+        elseif (is_array($city_result) && isset($city_result['field_location_value'])) {
           $row->setSourceProperty('city', $city_result['field_location_value']);
         }
       }
@@ -170,17 +170,17 @@ class PressReleaseNode extends SqlBase {
 
     $body_results = $body_query->execute()->fetchAll();
 
-    if (is_array($body_results)){
-      foreach ($body_results AS $body_result){
+    if (is_array($body_results)) {
+      foreach ($body_results AS $body_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($body_result) && isset($body_result->body_value)){
+        if (is_object($body_result) && isset($body_result->body_value)) {
           $body_value = $body_result->body_value;
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
           $row->setSourceProperty('content_field', $body_value);
         }
-        elseif (is_array($body_result) && isset($body_result['body_value'])){
+        elseif (is_array($body_result) && isset($body_result['body_value'])) {
           $body_value = $body_result['body_value'];
           $body_value = preg_replace(array('@<br>\r\n@', '@<br>\n\r@', '@<br>\n@', '@<br>\r@'), '<br>', $body_value);
           $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
@@ -200,7 +200,7 @@ class PressReleaseNode extends SqlBase {
 			'field_taxo_industrie_tid',
 			$row->getSourceProperty('nid'),
 			'content_press_release');
-		if(count($industries) > 0){
+		if (count($industries) > 0) {
 			$row->setSourceProperty('industries', $industries);
 		}
 
@@ -210,7 +210,7 @@ class PressReleaseNode extends SqlBase {
 			'field_taxo_solution_tid',
 			$row->getSourceProperty('nid'),
 			'content_press_release');
-		if(count($solutions) > 0){
+		if (count($solutions) > 0) {
 			$row->setSourceProperty('solutions', $solutions);
 		}
 
@@ -220,7 +220,7 @@ class PressReleaseNode extends SqlBase {
 			'field_taxo_solution_tid',
 			$row->getSourceProperty('nid'),
 			'content_press_release');
-		if(count($solutions) > 0){
+		if (count($solutions) > 0) {
 			$row->setSourceProperty('thematics', $solutions);
 		}
 
@@ -230,13 +230,13 @@ class PressReleaseNode extends SqlBase {
 			'field_taxo_area_tid',
 			$row->getSourceProperty('nid'),
 			'content_press_release');
-		if(count($regions) > 0){
+		if (count($regions) > 0) {
 			$row->setSourceProperty('regions', $regions);
 		}
 
 		//PRESS FORMAT
 		$formats = \Drupal::state()->get('press_format_for_migration');
-		if(isset($formats['press_release'][$row->getSourceProperty('language')])
+		if (isset($formats['press_release'][$row->getSourceProperty('language')])
 			&& isset($formats['press_release'][$row->getSourceProperty('language')]['tid_D8'])
 			&& !empty($formats['press_release'][$row->getSourceProperty('language')]['tid_D8']))
 		{
@@ -254,15 +254,15 @@ class PressReleaseNode extends SqlBase {
 
     $files_results = $files_query->execute()->fetchAll();
 
-    if (is_array($files_results)){
+    if (is_array($files_results)) {
       $files = array();
-      foreach ($files_results AS $files_result){
+      foreach ($files_results AS $files_result) {
 
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($files_result) && isset($files_result->mid)){
+        if (is_object($files_result) && isset($files_result->mid)) {
           $files[] = $files_result->mid;
         }
-        elseif (is_array($files_result) && isset($files_result['mid'])){
+        elseif (is_array($files_result) && isset($files_result['mid'])) {
           $files[] = $files_result['mid'];
         }
       }
@@ -279,13 +279,13 @@ class PressReleaseNode extends SqlBase {
 
     if (is_array($workflow_results))
     {
-      foreach ($workflow_results AS $workflow_result){
+      foreach ($workflow_results AS $workflow_result) {
         $sid = '';
         // On vérifie si on a affaire à un objet ou à un tableau
-        if (is_object($workflow_result) && isset($workflow_result->sid)){
+        if (is_object($workflow_result) && isset($workflow_result->sid)) {
           $sid = $workflow_result->sid;
         }
-        elseif (is_array($workflow_result) && isset($workflow_result['sid'])){
+        elseif (is_array($workflow_result) && isset($workflow_result['sid'])) {
           $sid = $workflow_result['sid'];
         }
 
@@ -303,7 +303,7 @@ class PressReleaseNode extends SqlBase {
 
     $path_results = $path_query->execute()->fetchObject();
 
-    if (is_object($path_results)){
+    if (is_object($path_results)) {
 			$row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 

@@ -4,18 +4,18 @@ use Drupal\Core\Database\Database;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
-function renameTaxo($old, $new, $vid, $lang){
+function renameTaxo($old, $new, $vid, $lang) {
 	$query = \Drupal::entityQuery('taxonomy_term');
 	$query->condition('vid', $vid);
 	$query->condition('langcode', $lang);
 	$query->condition('name', $old);
 	$entity = $query->execute();
-	if(isset($entity)) {
-		foreach ($entity as $tid => $value){
+	if (isset($entity)) {
+		foreach ($entity as $tid => $value) {
 			$tidRename = $tid;
 		}
 	}
-	if(isset($tidRename)){
+	if (isset($tidRename)) {
 		$connection = Database::getConnection();
 		$query = $connection->update('taxonomy_term_field_data');
 		$query->fields([
@@ -57,7 +57,7 @@ $vid_to_add = array(
 	'blog_formats' => 'Blog formats',
 	);
 $vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
-foreach ($vid_to_add as $vid => $name){
+foreach ($vid_to_add as $vid => $name) {
 	if (!isset($vocabularies[$vid]) ) {
 		$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
 			'vid' => $vid,
@@ -100,7 +100,7 @@ foreach ($terms as $term) {
 	$query->condition('name', $term['name']);
 	$entity = $query->execute();
 
-	if(!isset($entity) || empty($entity)) {
+	if (!isset($entity) || empty($entity)) {
 		//s'il n'existe pas on le crée
 		$newTerm = \Drupal\taxonomy\Entity\Term::create([
 			'vid' => $term['vid'],
@@ -116,7 +116,7 @@ foreach ($terms as $term) {
  * création des champ field_blog_thematic et field_blog_format pour les taxonomies
  */
 $field_storage = FieldStorageConfig::loadByName('node', 'field_blog_thematic');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_blog_thematic',
 		'entity_type' => 'node',
@@ -125,7 +125,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'blog_post', 'field_blog_thematic');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_blog_thematic',
 		'entity_type' => 'node',
@@ -137,7 +137,7 @@ if(empty($field)) {
 }
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_blog_format');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
 	FieldStorageConfig::create(array(
 		'field_name' => 'field_blog_format',
 		'entity_type' => 'node',
@@ -146,7 +146,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'blog_post', 'field_blog_format');
-if(empty($field)) {
+if (empty($field)) {
 	$config_array = array(
 		'field_name' =>  'field_blog_format',
 		'entity_type' => 'node',

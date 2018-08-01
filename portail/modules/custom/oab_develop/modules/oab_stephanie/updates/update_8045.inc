@@ -11,7 +11,7 @@ $termes = array(
 
 foreach ($termes as $term => $contentTitle) {
 	$termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
-	foreach($termsArray as $foundterm) {
+	foreach ($termsArray as $foundterm) {
 		if (!empty($foundterm)) {
 
 			$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
@@ -21,8 +21,8 @@ foreach ($termes as $term => $contentTitle) {
 			$query->addField('n', 'nid', 'nid');
 			$results =	$query->execute()->fetchAll();
 
-			foreach ($results as $row){
-				if(!empty($row)) {
+			foreach ($results as $row) {
+				if (!empty($row)) {
 					$foundterm->field_linked_content = $row->nid;
 					$foundterm->save();
 				}

@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class RightIconBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
 			$form = NULL;
 			if (\Drupal::moduleHandler()->moduleExists('oab_synomia_search_engine')) {
                 $render = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchHeaderBlockForm');

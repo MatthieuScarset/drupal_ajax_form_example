@@ -26,7 +26,7 @@ class MapRegionsCountriesForm extends FormBase {
 	 */
 	public function buildForm(array $form, FormStateInterface $form_state) {
 		$arguments = $form_state->getBuildInfo()['args'];
-		if(count($arguments) > 0){
+		if (count($arguments) > 0) {
 			//oabt($arguments);
 			$selectedRegion = (isset($arguments[0]['region_id']) && !empty($arguments[0]['region_id'])) ? $arguments[0]['region_id'] : 'all';
 			$selectedCountry = (isset($arguments[0]['country_id']) && !empty($arguments[0]['country_id'])) ?$arguments[0]['country_id'] : 'all';
@@ -64,7 +64,7 @@ class MapRegionsCountriesForm extends FormBase {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function submitForm(array &$form, FormStateInterface $form_state){
+	public function submitForm(array &$form, FormStateInterface $form_state) {
 		$current_route = \Drupal::routeMatch()->getRouteName();
 		$routeParameters = array();
 		if ($current_route == 'entity.node.canonical') {

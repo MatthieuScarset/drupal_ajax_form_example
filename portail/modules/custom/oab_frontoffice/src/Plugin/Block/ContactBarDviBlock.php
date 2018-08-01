@@ -25,7 +25,7 @@ use Drupal\node\Entity\Node;
 
 class ContactBarDviBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
 
         $need_help = isset($config['need_help']) ? $config['need_help'] : 'Besoin d\'aide';

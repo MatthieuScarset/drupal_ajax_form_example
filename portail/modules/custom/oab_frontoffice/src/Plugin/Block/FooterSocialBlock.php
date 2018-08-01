@@ -19,7 +19,7 @@ use Drupal\Core\Form\FormStateInterface;
 
 class FooterSocialBlock extends BlockBase {
 
-    public function build(){
+    public function build() {
         $config = $this->getConfiguration();
         $footer_social_custom_text = isset($config['footer_social_custom_text']) ? $config['footer_social_custom_text'] : '';
         return array(

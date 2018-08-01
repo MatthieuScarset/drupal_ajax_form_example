@@ -1,6 +1,6 @@
 <?php
 $role = \Drupal\user\Entity\Role::load('contributor');
-if(!empty($role)) {
+if (!empty($role)) {
 	//affectation de la permission
 	$permissions = $role->getPermissions();
 	if (!in_array('create url aliases', $permissions)) {

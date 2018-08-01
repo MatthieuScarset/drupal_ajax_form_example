@@ -27,7 +27,7 @@ $config_group->save(true);
 
 echo('Création  des NODE homepage_eclairage et hp_eclairage_thematique \n');
 $nodeStorage = NodeType::load('homepage_eclairage');
-if(empty($nodeStorage)) {
+if (empty($nodeStorage)) {
     $nodeType = NodeType::create([
         'name' => 'Homepage Eclairage',
         'type' => 'homepage_eclairage',
@@ -76,7 +76,7 @@ $config_group->setData(
 $config_group->save(true);
 
 $nodeStorage = NodeType::load('hp_eclairage_thematique');
-if(empty($nodeStorage)) {
+if (empty($nodeStorage)) {
     $nodeType = NodeType::create([
         'name' => 'Homepage Eclairage Thématique',
         'type' => 'hp_eclairage_thematique',

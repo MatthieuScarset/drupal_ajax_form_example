@@ -73,7 +73,7 @@ class FindDistributorBlock  extends BlockBase {
 		$this->setConfigurationValue('button_label', $form_state->getValue('button_label'));
 	}
 
-	public function build(){
+	public function build() {
 		$showBlock = FALSE;
 		$config = $this->getConfiguration();
 		$block = array();
@@ -86,7 +86,7 @@ class FindDistributorBlock  extends BlockBase {
 		$node = Node::load($nid);
 		$type = $node->getType();
 
-		if($type == 'product'){
+		if ($type == 'product') {
 
 
 			$query = Database::getConnection()->select('node__field_products', 'np');
@@ -96,7 +96,7 @@ class FindDistributorBlock  extends BlockBase {
 			$query->condition('n.status', 1, '=');
 			$count =	$query->countQuery()->execute()->fetchField();
 
-			if($count > 0){
+			if ($count > 0) {
 				$block = array(
 					'title' => isset($config['title']) ? t($config['title']) : '',
 					'text' => isset($config['description']) ? t($config['description']) : '',
@@ -109,7 +109,7 @@ class FindDistributorBlock  extends BlockBase {
 
 		}
 
-		if($showBlock){
+		if ($showBlock) {
 			return $block;
 		}
 		else

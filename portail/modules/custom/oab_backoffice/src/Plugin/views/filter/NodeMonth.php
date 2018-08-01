@@ -48,10 +48,10 @@ class NodeMonth extends Date  {
      */
     public function query() {
       /*$selected_date = mktime(0,0,0,$this->value['value'],1);
-      if(!empty($selected_date ) ) {
+      if (!empty($selected_date ) ) {
           $this->query->addWhereExpression(0, "node_field_data.created > $selected_date");
       }*/
-	    if(!empty($this->value['value']) && $this->value['value'] != 'All') {
+	    if (!empty($this->value['value']) && $this->value['value'] != 'All') {
 		    $month = $this->value['value'];
 		    $this->query->addWhereExpression(0, "MONTH(FROM_UNIXTIME(node_field_data.created)) = $month");
 	    }

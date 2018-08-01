@@ -12,7 +12,7 @@ $sth = $connection->select('file_managed', 'f')
 $data = $sth->execute();
 $results = $data->fetchAll(\PDO::FETCH_OBJ);
 
-if(count($results) == 0){
+if (count($results) == 0) {
 	// on créé le fichier dans Drupal
 	$filesystem = \Drupal::service('file_system');
 	$pathImg = drupal_get_path('module', 'oab_tibo').'/images/'.$fichierImg;

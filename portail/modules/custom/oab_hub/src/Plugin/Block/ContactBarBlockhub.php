@@ -24,7 +24,7 @@ use Drupal\node\Entity\Node;
 
 class ContactBarBlockHub extends BlockBase {
 
-  public function build(){
+  public function build() {
 
       $config = $this->getConfiguration();
 

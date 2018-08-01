@@ -92,15 +92,15 @@ class BlogPostProfileMedia extends SqlBase {
 
     $image_results = $image_query->execute()->fetchAll();
 
-    if (is_array($image_results)){
-      foreach ($image_results AS $image_result){
+    if (is_array($image_results)) {
+      foreach ($image_results AS $image_result) {
         // On vérifie si on a affaire à un objet ou à un tableau
         $image_info = [];
-        if (is_object($image_result)){
+        if (is_object($image_result)) {
           $image_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('image_info', $image_info);
         }
-        elseif (is_array($image_result)){
+        elseif (is_array($image_result)) {
           $image_info[] = $row->getSourceProperty('mid');
           $row->setSourceProperty('image_info', $image_info);
         }

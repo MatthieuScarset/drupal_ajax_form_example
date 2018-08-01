@@ -196,7 +196,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
     }
 }
 
- function getAllCountriesForJSOptions(){
+ function getAllCountriesForJSOptions() {
 	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
 	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
@@ -208,15 +208,15 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
 	$results =	$query->execute()->fetchAll();
 	$table_countries = array();
 	$table_countries[] = array(t('All'), 'all');
-	foreach ($results as $country){
-		if(!in_array(array( $country->country_name,$country->country_tid), $table_countries) && !empty($country->country_tid)){
+	foreach ($results as $country) {
+		if (!in_array(array( $country->country_name,$country->country_tid), $table_countries) && !empty($country->country_tid)) {
 			$table_countries[] = array( $country->country_name,$country->country_tid) ;
 		}
 	}
 	return $table_countries;
 }
 
- function getAllRegionsForJSOptions(){
+ function getAllRegionsForJSOptions() {
 	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
 	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
 	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
@@ -230,10 +230,10 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
 	$table_regions = array();
 	$table_regions[] = array(t('All'), 'all');
 	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	foreach ($results as $region){
-		if(!in_array(array($region->region_name, $region->region_tid), $table_regions)
+	foreach ($results as $region) {
+		if (!in_array(array($region->region_name, $region->region_tid), $table_regions)
 			&& !empty($region->region_tid)
-			&& $region->region_langcode == $current_language ){
+			&& $region->region_langcode == $current_language ) {
 			$table_regions[] = array($region->region_name, $region->region_tid);
 		}
 	}

@@ -85,8 +85,8 @@ class OfficeNode extends SqlBase {
 
     $address_results = $address_query->execute()->fetchObject();
 
-    if (is_object($address_results)){
-      foreach ($address_results AS $key => $value){
+    if (is_object($address_results)) {
+      foreach ($address_results AS $key => $value) {
           $row->setSourceProperty($key, $value);
       }
     }
@@ -99,19 +99,19 @@ class OfficeNode extends SqlBase {
 		$email_results = $email_query->execute()->fetchAll();
 		$email_value = "";
 
-		if (is_array($email_results)){
-			foreach ($email_results AS $email){
+		if (is_array($email_results)) {
+			foreach ($email_results AS $email) {
 
 				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($email) && isset($email->email)){
+				if (is_object($email) && isset($email->email)) {
 					$email_value = $email->email;
 				}
-				elseif (is_array($email) && isset($email['email'])){
+				elseif (is_array($email) && isset($email['email'])) {
 					$email_value = $email['email'];
 				}
 			}
 		}
-		if(isset($email_value) && !empty($email_value))
+		if (isset($email_value) && !empty($email_value))
 		{
 			$row->setSourceProperty('email_address', $email_value) ;
 		}
@@ -124,19 +124,19 @@ class OfficeNode extends SqlBase {
 		$phone_results = $phone_query->execute()->fetchAll();
 		$phone_value = "";
 
-		if (is_array($phone_results)){
-			foreach ($phone_results AS $phone_result){
+		if (is_array($phone_results)) {
+			foreach ($phone_results AS $phone_result) {
 
 				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($phone_result) && isset($phone_result->phone)){
+				if (is_object($phone_result) && isset($phone_result->phone)) {
 					$phone_value = $phone_result->phone;
 				}
-				elseif (is_array($phone_result) && isset($phone_result['phone'])){
+				elseif (is_array($phone_result) && isset($phone_result['phone'])) {
 					$phone_value = $phone_result['phone'];
 				}
 			}
 		}
-		if(isset($phone_value) && !empty($phone_value))
+		if (isset($phone_value) && !empty($phone_value))
 		{
 			$row->setSourceProperty('phone_number', $phone_value) ;
 		}
@@ -147,7 +147,7 @@ class OfficeNode extends SqlBase {
 			'field_taxo_area_tid',
 			$row->getSourceProperty('nid'),
 			'content_presence_worldwide');
-		if(count($regions) > 0){
+		if (count($regions) > 0) {
 
 			$row->setSourceProperty('regions', $regions);
 		}
@@ -162,9 +162,9 @@ class OfficeNode extends SqlBase {
 
 		$country_result = $country_query->execute()->fetchObject();
 
-		if (is_object($country_result) && isset($country_result->code)){
+		if (is_object($country_result) && isset($country_result->code)) {
 			$tidCountry = get_country_term($country_result->code, $country_result->name);
-			if(isset($tidCountry)){
+			if (isset($tidCountry)) {
 				$row->setSourceProperty('country', $tidCountry);
 			}
 		}

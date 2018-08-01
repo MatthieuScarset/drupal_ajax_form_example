@@ -4,7 +4,7 @@ use \Drupal\node\Entity\NodeType;
  * Création type de contenu Custom page
  * */
 $nodeStorage = NodeType::load('custom_page');
-if(empty($nodeStorage)) {
+if (empty($nodeStorage)) {
     $nodeType = NodeType::create([
         'langcode' => 'en',
         'status' => true,
@@ -63,7 +63,7 @@ $collection->write('node.type.custom_page', array (
 
 //Champs Content
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'field_content');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,
@@ -101,7 +101,7 @@ if(empty($field)) {
 
 //Champs Display title
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'field_display_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,
@@ -141,7 +141,7 @@ if(empty($field)) {
 
 //Champs Meta title
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'field_meta_title');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,
@@ -175,7 +175,7 @@ if(empty($field)) {
 
 //Champs Meta description
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'field_meta_description');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,
@@ -209,7 +209,7 @@ if(empty($field)) {
 
 //Champs Metatags
 $field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'custom_page', 'field_metatags');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'langcode' => 'en',
         'status' => true,

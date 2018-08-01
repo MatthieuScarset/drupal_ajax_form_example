@@ -9,7 +9,7 @@ use Drupal\field\Entity\FieldConfig;
 //========================== PRODUCT AXIOME ==========================//
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_market_segment');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_market_segment',
         'entity_type' => 'node',
@@ -18,7 +18,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'product', 'field_market_segment');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_market_segment',
         'entity_type' => 'node',
@@ -930,7 +930,7 @@ $config_group->save(TRUE);
 //========================== SIMPLE PAGE ==========================//
 
 $field_storage = FieldStorageConfig::loadByName('node', 'field_blog_thematic');
-if(empty($field_storage)) {
+if (empty($field_storage)) {
     FieldStorageConfig::create(array(
         'field_name' => 'field_blog_thematic',
         'entity_type' => 'node',
@@ -939,7 +939,7 @@ if(empty($field_storage)) {
 }
 
 $field = FieldConfig::loadByName('node', 'simple_page', 'field_blog_thematic');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_blog_thematic',
         'entity_type' => 'node',
@@ -1043,7 +1043,7 @@ $config_group->save(TRUE);
 
 
 $field = FieldConfig::loadByName('node', 'simple_page', 'field_blog_format');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_blog_format',
         'entity_type' => 'node',
@@ -1810,7 +1810,7 @@ $config_group->save(TRUE);
 // Création des champs taxonomies
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_industry');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_industry',
         'entity_type' => 'node',
@@ -1877,7 +1877,7 @@ $collection->write('field.field.node.full_html.field_industry', array (
 ));
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_insight');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_insight',
         'entity_type' => 'node',
@@ -1945,7 +1945,7 @@ $collection->write('field.field.node.full_html.field_insight', array (
 
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_job_profile');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_job_profile',
         'entity_type' => 'node',
@@ -2013,7 +2013,7 @@ $collection->write('field.field.node.full_html.field_job_profile', array (
 
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_region');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_region',
         'entity_type' => 'node',
@@ -2079,7 +2079,7 @@ $collection->write('field.field.node.full_html.field_region', array (
 ));
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_subhome');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_subhome',
         'entity_type' => 'node',
@@ -2147,7 +2147,7 @@ $collection->write('field.field.node.full_html.field_subhome', array (
 
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_blog_thematic');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_blog_thematic',
         'entity_type' => 'node',
@@ -2216,7 +2216,7 @@ $collection->write('field.field.node.full_html.field_blog_thematic', array (
 
 
 $field = FieldConfig::loadByName('node', 'full_html', 'field_blog_format');
-if(empty($field)) {
+if (empty($field)) {
     $config_array = array(
         'field_name' =>  'field_blog_format',
         'entity_type' => 'node',
