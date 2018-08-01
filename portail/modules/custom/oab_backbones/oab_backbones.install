@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 
@@ -34,11 +34,10 @@ function oab_backbones_update_8004() {
 	include_once("updates/update_8004.inc");
 }
 
-function oab_backbones_uninstall(){
+function oab_backbones_uninstall() {
   //1. suppression du rôle
   $role = \Drupal\user\Entity\Role::load('fh_backbones');
-  if(!empty($role))
-  {
+  if (!empty($role)) {
     $role->delete();
     drupal_set_message("Rôle supprimé", 'status');
   }
@@ -187,6 +186,3 @@ function oab_backbones_schema() {
 
   return $schema;
 }
-
-
-

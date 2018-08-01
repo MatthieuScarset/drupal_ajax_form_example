@@ -1,5 +1,5 @@
 <p>
-    <a href='{{  path('oab_backbones.view_front_page', {}) }}'>Front office</a>
+    <a href='{{ path('oab_backbones.view_front_page', {}) }}'>Front office</a>
 </p>
 <fieldset name="summary">
     <legend>
@@ -8,11 +8,11 @@
     <br/>
     <table>
         <thead>
-            <tr>
-                <th>{% trans %}Date{% endtrans %}</th>
-                <th>{% trans %}Status{% endtrans %}</th>
-                <th>{% trans %}Comments{% endtrans %}</th>
-            </tr>
+        <tr>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>{% trans %}Status{% endtrans %}</th>
+            <th>{% trans %}Comments{% endtrans %}</th>
+        </tr>
         </thead>
         <tbody>
         {% for import in lastsImports %}
@@ -30,7 +30,7 @@
     <legend>
         <span class="fieldset-legend">{% trans %}Documentation{% endtrans %}</span>
     </legend>
-    <a href="{{ documentation }}" >Documentation</a>
+    <a href="{{ documentation }}">Documentation</a>
 </fieldset>
 
 <div class='menu_filter_shadowsite'>
