@@ -1,19 +1,21 @@
 <article class="backbones-performance-front">
-<div class='filter_month'>{% trans %}Monthly data{% endtrans %}</div>
-<div class='menu_filter_month'>
-    <!-- méthode des espaces html entre les li pour éviter les espaces entre les element html au rendu du navigateur des li (display inline-block)-->
-    <ul class="nav" role="tablist"><!--
+    <div class='filter_month'>{% trans %}Monthly data{% endtrans %}</div>
+    <div class='menu_filter_month'>
+        <!-- méthode des espaces html entre les li pour éviter les espaces entre les element html au rendu du navigateur des li (display inline-block)-->
+        <ul class="nav" role="tablist"><!--
         {% for key, month in monthsImport %}
             {% if currentImportDate ==  key %}
-            --><li class="onglet active">
-            {% else %}
-            --><li class="onglet">
-            {% endif %}
-                <a class="" href="{{  path('oab_backbones.view_front_page', {'date_import': key}) }}"> {{ month }} </a>
+            -->
+            <li class="onglet active">
+                {% else %}
+                -->
+            <li class="onglet">
+                {% endif %}
+                <a class="" href="{{ path('oab_backbones.view_front_page', {'date_import': key}) }}"> {{ month }} </a>
             </li><!--
         {% endfor %}
     --></ul>
-</div>
+    </div>
 
     <div class='filter_shadowsite col col-md-12 col-sm-12'>
         {{ intro }}
@@ -28,28 +30,28 @@
 
 <div class='data_zone_bbp  col col-md-12 col-sm-12'>
     {% for perfData in performanceDatas %}
-    <div class=' col col-md-6 col-sm-12'>
-        <table class='table'>
-            <thead>
-            <tr class="header_col">
-                <th id="city"></th>
-                <th id="rtd">RTD<span>ms</span></th>
-                <th id="plr">PLR<span>%</span></th>
-                <th id="jitter">Jitter<span>ms</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for data in perfData %}
-            <tr>
-                <td headers="city" class="td_label">{{ data.label|raw }}</td>
-                <td headers="rtd" class="td_data">{{ data.RTD|raw }}</td>
-                <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
-                <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <div class=' col col-md-6 col-sm-12'>
+            <table class='table'>
+                <thead>
+                <tr class="header_col">
+                    <th id="city"></th>
+                    <th id="rtd">RTD<span>ms</span></th>
+                    <th id="plr">PLR<span>%</span></th>
+                    <th id="jitter">Jitter<span>ms</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in perfData %}
+                    <tr>
+                        <td headers="city" class="td_label">{{ data.label|raw }}</td>
+                        <td headers="rtd" class="td_data">{{ data.RTD|raw }}</td>
+                        <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
+                        <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endfor %}
     <div class='clear'></div>
 </div>

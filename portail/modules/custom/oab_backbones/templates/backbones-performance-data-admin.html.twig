@@ -3,7 +3,8 @@
     This page allows us to display performance data for a particular month in order to validate them.
 </p>
 <p>
-    Please use <a href='{{  path('oab_backbones.performance_data', {}) }}'>this link</a> to change the validation status and comment the data.
+    Please use <a href='{{ path('oab_backbones.performance_data', {}) }}'>this link</a> to change the validation status
+    and comment the data.
 </p>
 <div class='filter_shadowsite'>
     {{ intro }}
@@ -16,28 +17,28 @@
 
 <div class='data_zone_bbp'>
     {% for perfData in performanceDatas %}
-    <div class='data_zone_bbp_1'>
-        <table summary="">
-            <thead>
-            <tr class="header_col">
-                <th id="city"></th>
-                <th id="rtd">RTD <span>(ms)</span></th>
-                <th id="plr">PLR <span>(%)</span></th>
-                <th id="jitter">Jitter <span>(ms)</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for data in perfData %}
-            <tr>
-                <td headers="city" class="td_label">{{ data.label|raw }}</td>
-                <td headers="rtd" class="td_data">{{ data.RTD|raw }}</td>
-                <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
-                <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        <div class='data_zone_bbp_1'>
+            <table summary="">
+                <thead>
+                <tr class="header_col">
+                    <th id="city"></th>
+                    <th id="rtd">RTD <span>(ms)</span></th>
+                    <th id="plr">PLR <span>(%)</span></th>
+                    <th id="jitter">Jitter <span>(ms)</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in perfData %}
+                    <tr>
+                        <td headers="city" class="td_label">{{ data.label|raw }}</td>
+                        <td headers="rtd" class="td_data">{{ data.RTD|raw }}</td>
+                        <td headers="plr" class="td_data">{{ data.PLR|raw }}</td>
+                        <td headers="jitter" class="td_data">{{ data.JITTER|raw }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% endfor %}
     <div class='clear'></div>
 </div>

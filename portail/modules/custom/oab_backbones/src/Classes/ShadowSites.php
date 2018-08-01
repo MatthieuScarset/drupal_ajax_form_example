@@ -16,155 +16,151 @@ use Drupal\Core\Database\Database;
  */
 class ShadowSites
 {
-  public static $TABLE_NAME = 'oab_backbones_shadowsites';
+    public static $TABLE_NAME = 'oab_backbones_shadowsites';
 
-  public function getHeaderTable(){
-    $header = array(
-      'sid' => array('field' => 'sid', 'data' => t('code'), 'sort'=> 'asc'),
-      'probe_name' => array('field' => 'probe_name', 'data' => t('probe name'), 'sort'=> 'asc'),
-      'site_label' => array('field' => 'site_label', 'data' => t('site label'), 'sort'=> 'asc')
-    );
-    return $header;
-  }
-
-  /** Méthode appelée par le BO, onglet Shadow Sites pour avoir la grille modifiable :
-   *      on prend TOUS les sites
-   */
-  public function getShadowSitesTable()
-  {
-    $shadowSites = array();
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
+    public function getHeaderTable()
     {
-      $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
-        ->orderBy('used', 'DESC')
-        ->extend('Drupal\Core\Database\Query\TableSortExtender');
-      $shadowSites = $query->fields('obs')
-        ->orderByHeader($this->getHeaderTable())
-        ->execute();
+        $header = array(
+            'sid' => array('field' => 'sid', 'data' => t('code'), 'sort' => 'asc'),
+            'probe_name' => array('field' => 'probe_name', 'data' => t('probe name'), 'sort' => 'asc'),
+            'site_label' => array('field' => 'site_label', 'data' => t('site label'), 'sort' => 'asc')
+        );
+        return $header;
     }
-    return $shadowSites;
-  }
 
-  /**
-   * Méthode appelée pour avoir un array avec toutes les données prise dans la BDD
-   */
-  public function getShadowSitesArrayFromDB(){
-    $shadowSites = array();
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
+    /** Méthode appelée par le BO, onglet Shadow Sites pour avoir la grille modifiable :
+     *      on prend TOUS les sites
+     */
+    public function getShadowSitesTable()
     {
-      $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
-        ->fields('obs')
-        ->orderBy('sid', 'DESC');
-      $results = $query->execute()->fetchAll();
-
-      if (is_array($results) && count($results) > 0) {
-        foreach ($results as $site)
-        {
-          $shadowSites[$site->sid] = $site->probe_name;
+        $shadowSites = array();
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
+                ->orderBy('used', 'DESC')
+                ->extend('Drupal\Core\Database\Query\TableSortExtender');
+            $shadowSites = $query->fields('obs')
+                ->orderByHeader($this->getHeaderTable())
+                ->execute();
         }
-      }
+        return $shadowSites;
     }
-    return $shadowSites;
-  }
 
-  /**
-   * Méthode permettant de sauvegarder un shadow Site en BDD lors de l'IMPORT donc uniquement SID et probe_name
-   */
-  public function saveShadowSitesInDB($ss_to_update){
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
+    /**
+     * Méthode appelée pour avoir un array avec toutes les données prise dans la BDD
+     */
+    public function getShadowSitesArrayFromDB()
     {
-      foreach ($ss_to_update as $key => $name)
-      {
-        $query = Database::getConnection()->merge($this::$TABLE_NAME)
-                                          ->key(array('sid' => $key))
-                                          ->insertFields(array(
-                                            'sid' => $key,
-                                            'probe_name' => $name
-                                          ))
-                                          ->updateFields(array(
-                                            'probe_name' => $name
-                                          ))
-                                          ->execute();
-      }
-    }
-  }
+        $shadowSites = array();
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
+                ->fields('obs')
+                ->orderBy('sid', 'DESC');
+            $results = $query->execute()->fetchAll();
 
-  /** Méthode qui supprime des shadow sites avec les id en paramètre */
-  public function deleteShadowSitesInDB($ss_to_delete){
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
-    {
-        $query = Database::getConnection()->delete($this::$TABLE_NAME)
-          ->condition('sid', $ss_to_delete, 'IN')
-          ->execute();
-
-    }
-  }
-
-  /** méthode qui réinitialise la valeur used à 0 pour TOUS les shadow sites */
-  public function reinitUsedValuesForAllSites(){
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
-    {
-      $query = Database::getConnection()->update($this::$TABLE_NAME)
-        ->fields(['used' => 0])
-        ->execute();
-    }
-  }
-
-  /** Méthode qui sauvegarde les valeurs used et site_label pour un site (formualire BO) */
-  public function updateShadowSiteInDB($sid, $used, $siteLabel){
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
-    {
-      $query = Database::getConnection()->update($this::$TABLE_NAME)
-        ->fields(['used' => $used, 'site_label' => $siteLabel])
-        ->condition('sid', $sid, '=')
-        ->execute();
-    }
-  }
-
-  /** Méthode qui retourne un tableau (key=sid) de tous les sites où used =1 */
-  public function getAllInformationsForUsedShadowSites(){
-    $shadowSites = array();
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
-    {
-      $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
-        ->fields('obs')
-        ->condition('obs.used', 1, '=')
-        ->orderBy('sid', 'DESC');
-      $results = $query->execute()->fetchAll();
-
-      if (is_array($results) && count($results) > 0) {
-        foreach ($results as $site)
-        {
-          $shadowSites[$site->sid] = array (
-            "sid" 			=> $site->sid,
-            "probe_name" 	=> $site->probe_name,
-            "site_label" 	=> $site->site_label,
-            "used" 			=> $site->used,
-          );
+            if (is_array($results) && count($results) > 0) {
+                foreach ($results as $site) {
+                    $shadowSites[$site->sid] = $site->probe_name;
+                }
+            }
         }
-      }
+        return $shadowSites;
     }
-    return $shadowSites;
-  }
 
-  /** Méthode appelée par le formulaire de sélection d'un site source (BO et FO) parmis les sites USED */
-  public function getUsedShadowSitesForSelector(){
-    $shadowSites = array();
-    if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME))
+    /**
+     * Méthode permettant de sauvegarder un shadow Site en BDD lors de l'IMPORT donc uniquement SID et probe_name
+     */
+    public function saveShadowSitesInDB($ss_to_update)
     {
-      $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
-        ->fields('obs')
-        ->condition('obs.used', 1, '=')
-        ->orderBy('obs.site_label', 'ASC');
-      $results = $query->execute()->fetchAll();
-
-      if (is_array($results) && count($results) > 0) {
-        foreach ($results as $site)
-        {
-          $shadowSites[$site->sid] = $site->site_label;
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            foreach ($ss_to_update as $key => $name) {
+                $query = Database::getConnection()->merge($this::$TABLE_NAME)
+                    ->key(array('sid' => $key))
+                    ->insertFields(array(
+                        'sid' => $key,
+                        'probe_name' => $name
+                    ))
+                    ->updateFields(array(
+                        'probe_name' => $name
+                    ))
+                    ->execute();
+            }
         }
-      }
     }
-    return $shadowSites;
-  }
+
+    /** Méthode qui supprime des shadow sites avec les id en paramètre */
+    public function deleteShadowSitesInDB($ss_to_delete)
+    {
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->delete($this::$TABLE_NAME)
+                ->condition('sid', $ss_to_delete, 'IN')
+                ->execute();
+
+        }
+    }
+
+    /** méthode qui réinitialise la valeur used à 0 pour TOUS les shadow sites */
+    public function reinitUsedValuesForAllSites()
+    {
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->update($this::$TABLE_NAME)
+                ->fields(['used' => 0])
+                ->execute();
+        }
+    }
+
+    /** Méthode qui sauvegarde les valeurs used et site_label pour un site (formualire BO) */
+    public function updateShadowSiteInDB($sid, $used, $siteLabel)
+    {
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->update($this::$TABLE_NAME)
+                ->fields(['used' => $used, 'site_label' => $siteLabel])
+                ->condition('sid', $sid, '=')
+                ->execute();
+        }
+    }
+
+    /** Méthode qui retourne un tableau (key=sid) de tous les sites où used =1 */
+    public function getAllInformationsForUsedShadowSites()
+    {
+        $shadowSites = array();
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
+                ->fields('obs')
+                ->condition('obs.used', 1, '=')
+                ->orderBy('sid', 'DESC');
+            $results = $query->execute()->fetchAll();
+
+            if (is_array($results) && count($results) > 0) {
+                foreach ($results as $site) {
+                    $shadowSites[$site->sid] = array(
+                        "sid" => $site->sid,
+                        "probe_name" => $site->probe_name,
+                        "site_label" => $site->site_label,
+                        "used" => $site->used,
+                    );
+                }
+            }
+        }
+        return $shadowSites;
+    }
+
+    /** Méthode appelée par le formulaire de sélection d'un site source (BO et FO) parmis les sites USED */
+    public function getUsedShadowSitesForSelector()
+    {
+        $shadowSites = array();
+        if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
+            $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
+                ->fields('obs')
+                ->condition('obs.used', 1, '=')
+                ->orderBy('obs.site_label', 'ASC');
+            $results = $query->execute()->fetchAll();
+
+            if (is_array($results) && count($results) > 0) {
+                foreach ($results as $site) {
+                    $shadowSites[$site->sid] = $site->site_label;
+                }
+            }
+        }
+        return $shadowSites;
+    }
 }
