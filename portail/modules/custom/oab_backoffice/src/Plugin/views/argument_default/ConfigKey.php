@@ -52,7 +52,9 @@ class ConfigKey extends ArgumentDefaultPluginBase implements CacheableDependency
    */
   public function getArgument() {
     $variable = \Drupal::config($this->options['config_name'])->get($this->options['config_key']);
-    if (is_null($variable)) $variable = 0;
+    if (is_null($variable)) {
+        $variable = 0;
+    }
     return $variable;
   }
 

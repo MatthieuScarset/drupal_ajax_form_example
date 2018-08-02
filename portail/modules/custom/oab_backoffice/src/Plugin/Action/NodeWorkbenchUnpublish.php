@@ -30,9 +30,9 @@ class NodeWorkbenchUnpublish extends ActionBase {
    */
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
     $result = $object->access('update', $account, TRUE)
-      ->andif (AccessResult::allowedIfHasPermission($account, 'use draft_draft transition'))
-      ->andif (AccessResult::allowedIfHasPermission($account, 'use published_draft transition'))
-      ->andif (AccessResult::allowedIfHasPermission($account, 'use needs_review_draft transition'));
+      ->andif(AccessResult::allowedIfHasPermission($account, 'use draft_draft transition'))
+      ->andif(AccessResult::allowedIfHasPermission($account, 'use published_draft transition'))
+      ->andif(AccessResult::allowedIfHasPermission($account, 'use needs_review_draft transition'));
 
     return $return_as_object ? $result : $result->isAllowed();
   }

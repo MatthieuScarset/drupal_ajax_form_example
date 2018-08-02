@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class oabSettingsPardotForm extends ConfigFormBase {
+class OabSettingsPardotForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */

@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class oabSettingsSubhomesForm extends ConfigFormBase {
+class OabSettingsSubhomesForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */

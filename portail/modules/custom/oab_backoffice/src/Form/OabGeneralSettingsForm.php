@@ -9,9 +9,9 @@ use Drupal\Core\Form\FormStateInterface;
  * Configure example settings for this site.
  */
 class OabGeneralSettingsForm extends ConfigFormBase {
-	public static function getConfigName() {
-		return 'oab.general_settings';
-	}
+    public static function getConfigName() {
+        return 'oab.general_settings';
+    }
   /**
    * {@inheritdoc}
    */
