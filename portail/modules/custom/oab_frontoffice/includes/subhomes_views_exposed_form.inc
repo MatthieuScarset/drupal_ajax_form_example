@@ -8,19 +8,19 @@ function subhomes_views_exposed_form(&$form) {
 
 
     if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-        foreach ($form AS $key => $value){
+        foreach ($form AS $key => $value) {
             if (isset($value['#type'])
-                && $value['#type'] == "textfield"){
+                && $value['#type'] == "textfield") {
                 $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
-                if (is_object($vocabulary)){
+                if (is_object($vocabulary)) {
                     $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties([
                         'vid' => $key,
                         'langcode' => $current_language
                     ]);
                     if (is_array($terms)
-                        && !empty($terms)){
+                        && !empty($terms)) {
                         $options = array('All' => t($vocabulary->get('name')));
-                        foreach ($terms AS $term){
+                        foreach ($terms AS $term) {
                             $term_name = $term->getName();
                             $options[$term_name] = $term_name;
                         }
@@ -41,65 +41,65 @@ function subhomes_views_exposed_form(&$form) {
         /**
          * je cache le bouton "Apply" s'il n'y a plus de filtre
          */
-        $hasFilters = false;
+        $has_filters = false;
         foreach ($form["#info"] as $filter_name => $filter_infos) {
             if (isset($form[$filter_infos['value']])) {
-                $hasFilters = true;
+                $has_filters = true;
             }
         }
 
-        if (!$hasFilters) {
+        if (!$has_filters) {
             $form['actions']['submit']['#attributes']['class'][] = 'hidden';
         }
     }
 
     // subhome blogs
     if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
-        if (isset($form['blog_thematics'])){
+        if (isset($form['blog_thematics'])) {
             $form['blog_thematics']['#options']['All'] = t('Thematic');
         }
-        if (isset($form['blog_formats'])){
+        if (isset($form['blog_formats'])) {
             $form['blog_formats']['#options']['All'] = t('Type');
         }
 
         // HACK POUR LA SORTIE
-        if($current_language == 'en'
-            || $current_language == 'ru'){
+        if ($current_language == 'en'
+            || $current_language == 'ru') {
             unset($form['blog_formats']);
         }
     }
 
     // subhome magazine
     if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
-        if (isset($form['magazine_thematics'])){
+        if (isset($form['magazine_thematics'])) {
             $form['magazine_thematics']['#options']['All'] = t('Thematic');
         }
-        if (isset($form['magazine_types'])){
+        if (isset($form['magazine_types'])) {
             $form['magazine_types']['#options']['All'] = t('Type');
         }
 
         //Suppression ees filtres format, metier et industry pour la subhome RU
-        if($current_language == 'en'
-            || $current_language == 'ru'){
+        if ($current_language == 'en'
+            || $current_language == 'ru') {
             unset($form['magazine_types']);
         }
     }
 
     // subhome mediatheque
     if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
-        if (isset($form['document_thematics'])){
+        if (isset($form['document_thematics'])) {
             $form['document_thematics']['#options']['All'] = t('Thematic');
         }
-        if (isset($form['document_types'])){
+        if (isset($form['document_types'])) {
             $form['document_types']['#options']['All'] = t('Type');
         }
 
         // HACK POUR LA SORTIE
-        if($current_language == 'fr' ){
+        if ($current_language == 'fr') {
             // on supprime "eBook"
             unset($form['field_document_type_target_id']['#options']['E-book']);
         }
-        if($current_language == 'en' ){
+        if ($current_language == 'en') {
             // on supprime "position paper"
             unset($form['field_document_type_target_id']['#options']['Position paper']);
         }
@@ -107,39 +107,39 @@ function subhomes_views_exposed_form(&$form) {
 
     // subhome presse
     if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-        if (isset($form['solutions'])){
+        if (isset($form['solutions'])) {
             $form['solutions']['#options']['All'] = t('Solution');
         }
-        if (isset($form['press_formats'])){
+        if (isset($form['press_formats'])) {
             $form['press_formats']['#options']['All'] = t('Type');
         }
 
         //Suppression de filtres pour le russe
-        if($current_language == 'ru' ){
+        if ($current_language == 'ru') {
             unset($form['press_formats']);
         }
     }
 
     // subhome produits
     if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
-        if (isset($form['solutions'])){
+        if (isset($form['solutions'])) {
             $form['solutions']['#options']['All'] = t('Solution');
         }
-        if (isset($form['industries'])){
+        if (isset($form['industries'])) {
             $form['industries']['#options']['All'] = t('Industry');
         }
-        if (isset($form['jobs_profiles'])){
+        if (isset($form['jobs_profiles'])) {
             $form['jobs_profiles']['#options']['All'] = t('Profession');
         }
 
         //Suppression de filtres pour le russe
-        if($current_language == 'ru'
-            || $current_language == 'en'){
+        if ($current_language == 'ru'
+            || $current_language == 'en') {
             unset($form['industries']);
             unset($form['jobs_profiles']);
         }
         // HACK POUR LA SORTIE
-        if($current_language == 'fr' ){
+        if ($current_language == 'fr') {
             // on supprime "ressources et énergie" et "transport"
             unset($form['industries']['#options']["ressources et énergie"]);
             unset($form['industries']['#options']["transport"]);
@@ -148,33 +148,33 @@ function subhomes_views_exposed_form(&$form) {
 
     // subhome temoignages
     if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
-        if (isset($form['solutions'])){
+        if (isset($form['solutions'])) {
             $form['solutions']['#options']['All'] = t('Solution');
         }
-        if (isset($form['industries'])){
+        if (isset($form['industries'])) {
             $form['industries']['#options']['All'] = t('Industry');
         }
-        if (isset($form['jobs_profiles'])){
+        if (isset($form['jobs_profiles'])) {
             $form['jobs_profiles']['#options']['All'] = t('Profession');
         }
 
         // HACK POUR LA SORTIE
-        if($current_language == 'fr' ){
+        if ($current_language == 'fr') {
             // on supprime "ressources et énergie" et "transport"
             unset($form['industries']['#options']["ressources et énergie"]);
             unset($form['industries']['#options']["transport"]);
         }
-        if($current_language == 'ru' ){
+        if ($current_language == 'ru') {
             unset($form['industries']);
         }
     }
 
     // subhome partenaires
     if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
-        if (isset($form['solutions'])){
+        if (isset($form['solutions'])) {
             $form['solutions']['#options']['All'] = t('Solution');
         }
-        if (isset($form['partners_types'])){
+        if (isset($form['partners_types'])) {
             $form['partners_types']['#options']['All'] = t('Category');
         }
     }
