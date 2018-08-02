@@ -15,7 +15,6 @@ use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\media_entity\Entity\Media;
 
-
 class AxiomeContentImporter {
 
     public static function parseContent(&$node, $fiche, $language, &$messages) {
@@ -79,7 +78,7 @@ class AxiomeContentImporter {
 
     /**
      * @param $dom
-     * @param $bannerData
+     * @param $banner_data
      */
     private static function replaceLeftBlock(&$dom, $banner_data, $node) {
         $css_class_left_block =  $banner_data['orange_theme']['boosted_css_name'];
@@ -117,7 +116,7 @@ class AxiomeContentImporter {
 
     }
 
-    private static function replaceRightBlock(&$dom, $banner_data){
+    private static function replaceRightBlock(&$dom, $banner_data) {
         $css_class_right_block =  $banner_data['pop_out_color']['boosted_css_name'];
         $title_right_block = $banner_data['offre_name'];
         $popout_color = $banner_data['pop_out_color']['color'];
@@ -273,7 +272,7 @@ class AxiomeContentImporter {
         }
         if (empty(
             $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive']
-        )){
+        )) {
             $message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
             $is_valid = false;
         }

@@ -632,7 +632,8 @@ function oab_tristan_update_8082() {
 /**
  * Rechargement de la vue Document List pour MAJ des droits d'accès
  */
-function oab_tristan_update_8083() {
+function oab_tristan_update_8083()
+{
     oabt_YmlImport('views.view.document_list.yml');
 }
 

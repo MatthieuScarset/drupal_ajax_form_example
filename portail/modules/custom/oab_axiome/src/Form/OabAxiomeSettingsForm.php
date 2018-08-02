@@ -9,9 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  * Configure example settings for this site.
  */
 class OabAxiomeSettingsForm extends ConfigFormBase {
-  public static function getConfigName() {
-    return 'oab.axiome_settings';
-  }
+
   /**
    * {@inheritdoc}
    */
@@ -27,6 +25,11 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
       'oab.axiome',
     ];
   }
+
+  public static function getConfigName() {
+      return 'oab.axiome';
+  }
+
 
   /**
    * {@inheritdoc}
