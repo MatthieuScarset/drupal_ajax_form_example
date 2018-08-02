@@ -6,39 +6,40 @@ use Drupal\editor\Entity\Editor;
  * Implements hook_editor_js_settings_alter(array &$settings)
  */
 function oab_ckeditor_editor_js_settings_alter(array &$settings) {
-	$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
-	$current_path = \Drupal::service('path.current')->getPath();
-	$args = explode('/', $current_path);
-	if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
-		if ($args['2'] == "add") {
-			$nodetype = $args['3'];
-		}
-		else {
-			if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
-				$nodetype = $noeud->getType();
-			}
-		}
-		if (isset($nodetype) && !empty($nodetype)) {
-			if ($nodetype == 'region') {
-				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
-			}
-			elseif ($nodetype == 'country') {
-				$config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
-			}
-		}
-		$settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
-		$settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+    $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
+    $current_path = \Drupal::service('path.current')->getPath();
+    $args = explode('/', $current_path);
+    if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
+        if ($args['2'] == "add") {
+            $nodetype = $args['3'];
+        }
+        else {
+            if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
+                $nodetype = $noeud->getType();
+            }
+        }
+        if (isset($nodetype) && !empty($nodetype)) {
+            if ($nodetype == 'region') {
+                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
+            }
+            elseif ($nodetype == 'country') {
+                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
+            }
+        }
+        $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
+        $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
+            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
-		$settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
-	}
+        $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
+            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+    }
 }
 
 
 /**
  * Implements hook_page_attachments(array &$page)
  */
-function oab_ckeditor_page_attachments(array &$page)
-{
+function oab_ckeditor_page_attachments(array &$page) {
     //inclure le fichier de style pour les templates
     $page['#attached']['library'][] = 'oab_ckeditor/oab_ckeditor.templates';
 }
@@ -46,8 +47,7 @@ function oab_ckeditor_page_attachments(array &$page)
 /**
  * Implements hook_ckeditor_css_alter(array &$css, Editor $editor)
  */
-function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor)
-{
+function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
     $css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/templates.css';
     //$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/bootstrap.css';
 }
@@ -55,8 +55,7 @@ function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor)
 /**
  * Implements hook_page_attachments_alter(array &$attachments)
  */
-function oab_ckeditor_page_attachments_alter(array &$attachments)
-{
+function oab_ckeditor_page_attachments_alter(array &$attachments) {
 
     $current_uri = \Drupal::request()->getRequestUri();
     //si en ajout de node ou edit node
@@ -176,66 +175,66 @@ function oab_ckeditor_page_attachments_alter(array &$attachments)
 
         $attachments['#attached']['drupalSettings']['oab_templates'] = $data;
         // Chargement des modules depuis le fichier templating/components.json
-        $jsonFile = file_get_contents('js/plugins/templating/components.json', FILE_USE_INCLUDE_PATH);
-        
-        $componentsList = json_decode($jsonFile);
+        $json_file = file_get_contents('js/plugins/templating/components.json', FILE_USE_INCLUDE_PATH);
 
-        foreach ($componentsList as $component) {
+        $component_list = json_decode($json_file);
+
+        foreach ($component_list as $component) {
             foreach ($component->items as $item) {
                 $html       = file_get_contents('js/plugins/templating/' . $item->file, FILE_USE_INCLUDE_PATH);
                 $item->file = $html;
             }
         }
 
-        $attachments['#attached']['drupalSettings']['oab_templating_components'] = $componentsList;
+        $attachments['#attached']['drupalSettings']['oab_templating_components'] = $component_list;
 
         // regions et pays pour le plugin offices_map
-				$attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
-				$attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
-				$attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
+                $attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
+                $attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
+                $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
     }
 }
 
  function getAllCountriesForJSOptions() {
-	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('oc', 'tid', 'country_tid');
-	$query->addField('oc', 'name', 'country_name');
-	$query->orderBy('oc.name');
-	$results =	$query->execute()->fetchAll();
-	$table_countries = array();
-	$table_countries[] = array(t('All'), 'all');
-	foreach ($results as $country) {
-		if (!in_array(array( $country->country_name,$country->country_tid), $table_countries) && !empty($country->country_tid)) {
-			$table_countries[] = array( $country->country_name,$country->country_tid) ;
-		}
-	}
-	return $table_countries;
+    $query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+    $query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
+    $query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
+    $query->condition('n.type', 'office', '=');
+    $query->condition('n.status', 1, '=');
+    $query->addField('oc', 'tid', 'country_tid');
+    $query->addField('oc', 'name', 'country_name');
+    $query->orderBy('oc.name');
+    $results =	$query->execute()->fetchAll();
+    $table_countries = array();
+    $table_countries[] = array(t('All'), 'all');
+    foreach ($results as $country) {
+        if (!in_array(array($country->country_name,$country->country_tid), $table_countries) && !empty($country->country_tid)) {
+            $table_countries[] = array($country->country_name,$country->country_tid) ;
+        }
+    }
+    return $table_countries;
 }
 
  function getAllRegionsForJSOptions() {
-	$query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('t', 'tid', 'region_tid');
-	$query->addField('t', 'name', 'region_name');
-	$query->addField('t', 'langcode', 'region_langcode');
-	$query->orderBy('t.name');
-	$results =	$query->execute()->fetchAll();
-	$table_regions = array();
-	$table_regions[] = array(t('All'), 'all');
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	foreach ($results as $region) {
-		if (!in_array(array($region->region_name, $region->region_tid), $table_regions)
-			&& !empty($region->region_tid)
-			&& $region->region_langcode == $current_language ) {
-			$table_regions[] = array($region->region_name, $region->region_tid);
-		}
-	}
-	return $table_regions;
+    $query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+    $query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
+    $query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
+    $query->condition('n.type', 'office', '=');
+    $query->condition('n.status', 1, '=');
+    $query->addField('t', 'tid', 'region_tid');
+    $query->addField('t', 'name', 'region_name');
+    $query->addField('t', 'langcode', 'region_langcode');
+    $query->orderBy('t.name');
+    $results =	$query->execute()->fetchAll();
+    $table_regions = array();
+    $table_regions[] = array(t('All'), 'all');
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    foreach ($results as $region) {
+        if (!in_array(array($region->region_name, $region->region_tid), $table_regions)
+            && !empty($region->region_tid)
+            && $region->region_langcode == $current_language) {
+            $table_regions[] = array($region->region_name, $region->region_tid);
+        }
+    }
+    return $table_regions;
 }
