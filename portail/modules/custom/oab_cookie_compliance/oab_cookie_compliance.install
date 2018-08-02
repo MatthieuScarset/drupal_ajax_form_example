@@ -11,7 +11,9 @@ function oab_cookie_compliance_install() {
     $config_factory = \Drupal::configFactory();
     $config = $config_factory->getEditable('oab.cookie_compliance');
     $config->setData( array (
-        'cookie_text' => 'By browsing this site you agree to use cookies. Cookies are tiny files stored in your web browser to make your on line experience better, establish statistics of visits and sharing on social networks.',
+        'cookie_text' => 'By browsing this site you agree to use cookies.'
+            . 'Cookies are tiny files stored in your web browser to make your on line experience better, '
+            . 'establish statistics of visits and sharing on social networks.',
         'cookie_link_text' => 'More',
         'cookie_url' => '/en/cookies',
     ));
@@ -22,7 +24,8 @@ function oab_cookie_compliance_install() {
     ## French Version
     $collection = \Drupal::service('config.storage')->createCollection('language.fr');
     $collection->write('oab.cookie_compliance', array (
-        'cookie_text' => 'En poursuivant votre navigation sur ce site, sans modifier le paramétrage de vos cookies, vous acceptez l’utilisation de cookies nous permettant de réaliser des statistiques de visite.',
+        'cookie_text' => 'En poursuivant votre navigation sur ce site, sans modifier le paramétrage de vos cookies, '
+            . 'vous acceptez l’utilisation de cookies nous permettant de réaliser des statistiques de visite.',
         'cookie_link_text' => 'En savoir plus',
         'cookie_url' => '/fr/les-cookies',
     ));
@@ -30,21 +33,25 @@ function oab_cookie_compliance_install() {
     ## Russian Version
     $collection = \Drupal::service('config.storage')->createCollection('language.ru');
     $collection->write('oab.cookie_compliance', array (
-        'cookie_text' => 'Данный сайт использует файлы cookie для обеспечения его комфортного использования. Вы можете изменить ваши настройки для файлов cookie в любое время. Просматривая данный сайт, вы соглашаетесь на их  использование.',
+        'cookie_text' => 'Данный сайт использует файлы cookie для обеспечения его комфортного использования. '
+            . 'Вы можете изменить ваши настройки для файлов cookie в любое время. '
+            . 'Просматривая данный сайт, вы соглашаетесь на их  использование.',
         'cookie_link_text' => 'Политика обработки персональных данных',
     ));
 
     ## Spanish Version
     $collection = \Drupal::service('config.storage')->createCollection('language.es');
     $collection->write('oab.cookie_compliance', array (
-        'cookie_text' => 'Solicitamos su permiso para obtener datos estadísticos de su navegación en esta web. Si continúa navegando consideramos que acepta el uso de cookies.',
+        'cookie_text' => 'Solicitamos su permiso para obtener datos estadísticos de su navegación en esta web. '
+            . 'Si continúa navegando consideramos que acepta el uso de cookies.',
         'cookie_link_text' => 'más información',
     ));
 
     ## Brazilian Version
     $collection = \Drupal::service('config.storage')->createCollection('language.pt-br');
     $collection->write('oab.cookie_compliance', array (
-        'cookie_text' => 'Este site usa cookies para melhorar a experiência de navegação. Pode alterar as suas definições de cookies a qualquer altura. Ao navegar no site estará a consentir a sua utilização.',
+        'cookie_text' => 'Este site usa cookies para melhorar a experiência de navegação. '
+            . 'Pode alterar as suas definições de cookies a qualquer altura. Ao navegar no site estará a consentir a sua utilização.',
         'cookie_link_text' => 'mais informações',
     ));
 
