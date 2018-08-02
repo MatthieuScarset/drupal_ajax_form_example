@@ -198,5 +198,27 @@ function subhomes_views_exposed_form(&$form) {
     // Subhome Analysts
     if ($form['#id'] == 'views-exposed-form-subhomes-page-analysts') {
         // Nothing to do for the moment
+        $form['solutions']['#options'] = clean_exposed_filters_by_language(
+            $form['solutions']['#options'],
+            t('Solution')->render()
+        );
+
+        //Je supprime les filtres regions et année en francais
+        if ($current_language == 'fr') {
+            unset($form['region']);
+            unset($form['year']);
+        } else {
+            // Regions
+            $form['region']['#options'] = clean_exposed_filters_by_language(
+                $form['region']['#options'],
+                t('Region')->render()
+            );
+
+            // Années
+            $form['year']['#options'] = clean_exposed_filters_by_language(
+                $form['year']['#options'],
+                t('Year')->render()
+            );
+        }
     }
 }
