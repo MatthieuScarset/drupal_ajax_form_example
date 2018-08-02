@@ -18,7 +18,7 @@ define('AXIOME_TAXO_METIERS', 'jobs_profiles');
 function oab_axiome_cron() {
 
   #Je recupère la config pour savoir si le cron axiome est actif
-  $cronActif = \Drupal::config('oab.axiome_settings')->get('axiome_enable_cron');
+  $cronActif = \Drupal::config('oab.settings_axiome')->get('axiome_enable_cron');
 
   //Si oui, je lance l'import ; si non, rien ne se passe.
   if ($cronActif) {

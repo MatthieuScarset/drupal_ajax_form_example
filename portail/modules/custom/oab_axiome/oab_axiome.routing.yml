@@ -1,5 +1,5 @@
 #page d'administration par défaut
-oab_axiome.main_page:
+oab.axiome:
   path: 'admin/obs_backoffice/axiome'
   defaults:
     _controller: '\Drupal\oab_axiome\Controller\OabAxiomeController::test'
@@ -7,7 +7,7 @@ oab_axiome.main_page:
   requirements:
     _permission: 'access content'
 
-oab.axiome_settings:
+oab.settings_axiome:
   path: '/admin/structure/oab/settings/axiome'
   defaults:
     _form: '\Drupal\oab_axiome\Form\OabAxiomeSettingsForm'
