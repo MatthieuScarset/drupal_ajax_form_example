@@ -49,10 +49,10 @@ class NodeYear extends Date {
     public function query() {
 
         if (!empty($this->value['value']) && $this->value['value'] != 'All') {
-        	$timestamp_begin = mktime(0,0,0,1,1, $this->value['value']);
-        	$timestamp_finish = mktime(0,0,0,12,31, $this->value['value']);
+            $timestamp_begin = mktime(0, 0, 0, 1, 1, $this->value['value']);
+            $timestamp_finish = mktime(0, 0, 0, 12, 31, $this->value['value']);
             $this->query->addWhereExpression(0, "node_field_data.created >= $timestamp_begin");
-	        $this->query->addWhereExpression(1, "node_field_data.created <= $timestamp_finish");
+            $this->query->addWhereExpression(1, "node_field_data.created <= $timestamp_finish");
         }
     }
 
@@ -72,12 +72,12 @@ class NodeYear extends Date {
      */
     public function generateOptions() {
         // Array keys are used to compare with the table field values.
-	    $currentYear = date('Y');
+        $current_tear = date('Y');
         $years = array();
-        for($i = $currentYear; $i >= 2012 ; $i--) {
-	        $years[$i] = $i;
+        for ($i = $current_tear; $i >= 2012 ; $i--) {
+            $years[$i] = $i;
         }
-	    return $years;
+        return $years;
     }
 
 }

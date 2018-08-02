@@ -17,15 +17,15 @@ use Drupal\workbench_moderation\Entity\ModerationState;
 use \Drupal\oab_dvi\DviHelper;
 
 //include_once 'includes/mediatheque.inc';
-define ('CONTENT_TAXO_FIELDS', serialize(array('field_region',
-	'field_job_profile',
-	'field_market_segment',
-	'field_industry',
-	'field_solution',
-	'field_partner_type',
-	'field_document_type',
-	'field_sub_family',
-	'field_subhome')));
+define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
+    'field_job_profile',
+    'field_market_segment',
+    'field_industry',
+    'field_solution',
+    'field_partner_type',
+    'field_document_type',
+    'field_sub_family',
+    'field_subhome')));
 
 
 function oab_backoffice_mail($key, &$message, $params) {
@@ -533,255 +533,255 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 
 
-	//\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	$languages = \Drupal::languageManager()->getLanguages();
-	$current_user_language = Drupal::currentUser()->getPreferredLangcode();
+    //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $languages = \Drupal::languageManager()->getLanguages();
+    $current_user_language = Drupal::currentUser()->getPreferredLangcode();
 
-	$edit_form = false;
-	if (preg_match('@node_(.*)_edit_form@', $form_id)) {
-		$current_user_language = $current_language;
+    $edit_form = false;
+    if (preg_match('@node_(.*)_edit_form@', $form_id)) {
+        $current_user_language = $current_language;
 
-		if ($node = \Drupal::routeMatch()->getParameter('node')) {
-			$node_language = $node->language();
-			$node_langcode = $node_language->getId();
+        if ($node = \Drupal::routeMatch()->getParameter('node')) {
+            $node_language = $node->language();
+            $node_langcode = $node_language->getId();
 
-			$current_user_language = $node_langcode;
-		}
-		$edit_form = true;
-	}
+            $current_user_language = $node_langcode;
+        }
+        $edit_form = true;
+    }
 
-	// formulaire replicate
+    // formulaire replicate
   if (preg_match('@node_(.*)_replicate_form@', $form_id)) {
     $form['#attributes']['class'][] = "replicate-form";
   }
   
-	// on checke les langues auxquelles l utilisateur a droit
-	if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)) {
-		$user = \Drupal::currentUser();
-		$userId = $user->id();
-		if (!in_array('administrator', $user->getRoles())) {
-			$node = \Drupal::routeMatch()->getParameter('node');
-			$node_language = $node->language();
-			$node_langcode = $node_language->getId();
-			$connection = Database::getConnection();
-			$sth = $connection->select('user__field_access_language', 'f')
-				->fields('f', array('field_access_language_target_id'))
-				->condition('f.entity_id', $userId, '=');
-			$data = $sth->execute();
-			$results = $data->fetchAll(\PDO::FETCH_OBJ);
-			$canEdit = false;
-			if (count($results) != 0) {
-				foreach ($results as $r) {
-					if ($r->field_access_language_target_id == $node_langcode) {
-						$canEdit = true;
-						break;
-					}
-				}
-			}
-			if ($canEdit !== true) {
-				drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
-				$response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
-				$response->send();
-				exit();
-			}
-		}
-	}
+    // on checke les langues auxquelles l utilisateur a droit
+    if (preg_match('@node_(.*)_edit_form@', $form_id) || preg_match('@node_(.*)_delete_form@', $form_id)) {
+        $user = \Drupal::currentUser();
+        $userId = $user->id();
+        if (!in_array('administrator', $user->getRoles())) {
+            $node = \Drupal::routeMatch()->getParameter('node');
+            $node_language = $node->language();
+            $node_langcode = $node_language->getId();
+            $connection = Database::getConnection();
+            $sth = $connection->select('user__field_access_language', 'f')
+                ->fields('f', array('field_access_language_target_id'))
+                ->condition('f.entity_id', $userId, '=');
+            $data = $sth->execute();
+            $results = $data->fetchAll(\PDO::FETCH_OBJ);
+            $canEdit = false;
+            if (count($results) != 0) {
+                foreach ($results as $r) {
+                    if ($r->field_access_language_target_id == $node_langcode) {
+                        $canEdit = true;
+                        break;
+                    }
+                }
+            }
+            if ($canEdit !== true) {
+                drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
+                $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
+                $response->send();
+                exit();
+            }
+        }
+    }
 
-	// gestion de la taxonomie
-	// affichage de la langue
-	/*if (defined('CONTENT_TAXO_FIELDS')) {
-		$CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
-		foreach ($CONTENT_TAXO_FIELDS AS $field) {
-			if (isset($form[$field]['widget']['#options'])) {
-				$new_select_options = array();
-				foreach ($form[$field]['widget']['#options'] AS $key => $value) {
-					if (is_int($key)) {
-						$term = \Drupal\taxonomy\Entity\Term::load($key);
-						$value .= ' (' . strtoupper($term->language()->getId()) . ')';
-						$new_select_options[$key] = $value;
-					}
-				}
-				$form[$field]['widget']['#options'] = $new_select_options;
-			}
-		}
-	}*/
+    // gestion de la taxonomie
+    // affichage de la langue
+    /*if (defined('CONTENT_TAXO_FIELDS')) {
+        $CONTENT_TAXO_FIELDS = unserialize(CONTENT_TAXO_FIELDS);
+        foreach ($CONTENT_TAXO_FIELDS AS $field) {
+            if (isset($form[$field]['widget']['#options'])) {
+                $new_select_options = array();
+                foreach ($form[$field]['widget']['#options'] AS $key => $value) {
+                    if (is_int($key)) {
+                        $term = \Drupal\taxonomy\Entity\Term::load($key);
+                        $value .= ' (' . strtoupper($term->language()->getId()) . ')';
+                        $new_select_options[$key] = $value;
+                    }
+                }
+                $form[$field]['widget']['#options'] = $new_select_options;
+            }
+        }
+    }*/
 
-	// page de liste des taxonomies
-	if ($form_id == 'taxonomy_overview_terms') {
-		if (isset($form['terms'])) {
-			foreach ($form['terms'] AS $key => $value) {
-				if (preg_match('@^tid:@', $key)) {
-					if (isset($form['terms'][$key]['term']['#title'])
-						&& isset($form['terms'][$key]['#term'])
-						&& is_object($form['terms'][$key]['#term'])) {
-						$term_language = $form['terms'][$key]['#term']->language()->getId();
-						$form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
-					}
-				}
-			}
-		}
-	}
+    // page de liste des taxonomies
+    if ($form_id == 'taxonomy_overview_terms') {
+        if (isset($form['terms'])) {
+            foreach ($form['terms'] AS $key => $value) {
+                if (preg_match('@^tid:@', $key)) {
+                    if (isset($form['terms'][$key]['term']['#title'])
+                        && isset($form['terms'][$key]['#term'])
+                        && is_object($form['terms'][$key]['#term'])) {
+                        $term_language = $form['terms'][$key]['#term']->language()->getId();
+                        $form['terms'][$key]['term']['#title'] .= ' (' . strtoupper($term_language) . ')';
+                    }
+                }
+            }
+        }
+    }
 
-	// filtres exposés de views
-	if ($form_id == 'views_exposed_form') {
-		if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media') {
-			$form['field_tags_target_id']['#size'] = 30;
-		}
-	}
+    // filtres exposés de views
+    if ($form_id == 'views_exposed_form') {
+        if ($form['#id'] == 'views-exposed-form-medias-entity-browser-entity-browser-media') {
+            $form['field_tags_target_id']['#size'] = 30;
+        }
+    }
 
-	if ($form_id == 'node_profile_form'
-		|| $form_id == 'node_profile_edit_form') {
-		$form['field_social_accounts']['#cardinality_multiple'] = false;
+    if ($form_id == 'node_profile_form'
+        || $form_id == 'node_profile_edit_form') {
+        $form['field_social_accounts']['#cardinality_multiple'] = false;
 
-		if (isset($form['field_social_accounts']['widget'])
-			&& is_array($form['field_social_accounts']['widget'])) {
-			$form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
+        if (isset($form['field_social_accounts']['widget'])
+            && is_array($form['field_social_accounts']['widget'])) {
+            $form['field_social_accounts']['widget']['#cardinality_multiple'] = false;
 
-			foreach ($form['field_social_accounts']['widget'] AS $key => &$value) {
-				if (isset($value['value']['#title'])) {
-					switch ($key) {
-						case '0':
-							$value['value']['#title'] = t('Twitter account');
-							break;
-						case '1':
-							$value['value']['#title'] = t('LinkedIn account');
-							break;
-						case '2':
-							$value['value']['#title'] = t('Viadeo account');
-							break;
-						case '3':
-							$value['value']['#title'] = t('Google + account');
-							break;
-					}
-					$value['value']['#title_display'] = 'before';
-				}
-				if (isset($value['_weight'])) {
-					$value['_weight']['#access'] = false;
-				}
-			}
-		}
-	}
+            foreach ($form['field_social_accounts']['widget'] AS $key => &$value) {
+                if (isset($value['value']['#title'])) {
+                    switch ($key) {
+                        case '0':
+                            $value['value']['#title'] = t('Twitter account');
+                            break;
+                        case '1':
+                            $value['value']['#title'] = t('LinkedIn account');
+                            break;
+                        case '2':
+                            $value['value']['#title'] = t('Viadeo account');
+                            break;
+                        case '3':
+                            $value['value']['#title'] = t('Google + account');
+                            break;
+                    }
+                    $value['value']['#title_display'] = 'before';
+                }
+                if (isset($value['_weight'])) {
+                    $value['_weight']['#access'] = false;
+                }
+            }
+        }
+    }
 
 
-	if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
-		'node_customer_story_form', 'node_customer_story_edit_form',
-		'node_document_form', 'node_document_edit_form',
-		'node_magazine_form', 'node_magazine_edit_form',
-		'node_press_kit_form', 'node_press_kit_edit_form',
-		'node_press_release_form', 'node_press_release_edit_form',
-		'node_industry_form', 'node_industry_edit_form',
-		'node_solution_form', 'node_solution_edit_form',
-		'node_product_form', 'node_product_edit_form',
-		'node_partner_form', 'node_partner_edit_form',
-		'node_region_form', 'node_region_edit_form',
-		'node_simple_page_form', 'node_simple_page_edit_form',
-		'node_country_form', 'node_country_edit_form',
-		'node_full_html_form', 'node_full_html_edit_form',
+    if (in_array($form_id, array( 'node_blog_post_form', 'node_blog_post_edit_form',
+        'node_customer_story_form', 'node_customer_story_edit_form',
+        'node_document_form', 'node_document_edit_form',
+        'node_magazine_form', 'node_magazine_edit_form',
+        'node_press_kit_form', 'node_press_kit_edit_form',
+        'node_press_release_form', 'node_press_release_edit_form',
+        'node_industry_form', 'node_industry_edit_form',
+        'node_solution_form', 'node_solution_edit_form',
+        'node_product_form', 'node_product_edit_form',
+        'node_partner_form', 'node_partner_edit_form',
+        'node_region_form', 'node_region_edit_form',
+        'node_simple_page_form', 'node_simple_page_edit_form',
+        'node_country_form', 'node_country_edit_form',
+        'node_full_html_form', 'node_full_html_edit_form',
         'node_distributor_form', 'node_distributor_edit_form'))) {
 
-		$form['#attached']['library'][] = 'oab_backoffice/metadata';
+        $form['#attached']['library'][] = 'oab_backoffice/metadata';
 
-		// positionnement des champs dates
-		if (isset($form['field_start_date'])
-			&& isset($form['field_end_date'])
-		) {
-			$form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-			$form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
-		}
+        // positionnement des champs dates
+        if (isset($form['field_start_date'])
+            && isset($form['field_end_date'])
+        ) {
+            $form['field_start_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+            $form['field_end_date']['#attributes']['style'] = 'float: left; margin-right: 30px;';
+        }
 
-		// disposition des taxonomies
-		if (isset($form['#fieldgroups']['group_classer'])) {
-			foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
-				if (isset($form[$field])) {
-					$form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
-					$form[$field]['widget']['#size'] = 15;
-				}
-			}
-		}
+        // disposition des taxonomies
+        if (isset($form['#fieldgroups']['group_classer'])) {
+            foreach ($form['#fieldgroups']['group_classer']->children AS $field) {
+                if (isset($form[$field])) {
+                    $form[$field]['#attributes']['style'] = "float: left; margin-right: 50px;";
+                    $form[$field]['widget']['#size'] = 15;
+                }
+            }
+        }
 
-		if (isset($form['#fieldgroups']['group_taxonomie']->children)) {
-			$last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
-			$form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
-		}
+        if (isset($form['#fieldgroups']['group_taxonomie']->children)) {
+            $last_taxonomie = end($form['#fieldgroups']['group_taxonomie']->children);
+            $form[$last_taxonomie]['#suffix'] = '<div class="clearfix"></div>';
+        }
 
         // Disable browser HTML5 validation
         $form['#attributes']['novalidate'] = 'novalidate';
 
-		//on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
-		$roles = \Drupal::currentUser()->getRoles();
-		if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
-		{
-			$form['field_metatags']['#access'] = false;
-		}
-	}
+        //on cache la partie avancée metatags pour les utilisateurs sauf digital admin et admin
+        $roles = \Drupal::currentUser()->getRoles();
+        if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles))
+        {
+            $form['field_metatags']['#access'] = false;
+        }
+    }
 
 
 
-	/*
-		// valeur par défaut pour le champ "display_title"
-		// dans le cas d'une edition et que la valeur n'existe pas encore
-		if ($form_id == 'node_container_edit_form') {
-		  if ($node = \Drupal::routeMatch()->getParameter('node')) {
-			$content_type = $node->bundle();
-			$definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
-			if (isset($definitions)
-			  && array_key_exists('field_display_title', $definitions)
-			) {
-			  if ($display_title = $node->get('field_display_title')->getValue()) {
-				if (!isset($display_title[0]['value'])) {
-				  $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
-				}
-			  }
-			}
-		  }
+    /*
+        // valeur par défaut pour le champ "display_title"
+        // dans le cas d'une edition et que la valeur n'existe pas encore
+        if ($form_id == 'node_container_edit_form') {
+          if ($node = \Drupal::routeMatch()->getParameter('node')) {
+            $content_type = $node->bundle();
+            $definitions = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', $content_type);
+            if (isset($definitions)
+              && array_key_exists('field_display_title', $definitions)
+            ) {
+              if ($display_title = $node->get('field_display_title')->getValue()) {
+                if (!isset($display_title[0]['value'])) {
+                  $form['field_display_title']['widget']['value']['#default_value'] = TRUE;
+                }
+              }
+            }
+          }
 
-		}
-	  }
+        }
+      }
 
-	  //pour la médiathèque : sélection des images dans la liste
-	  if ($form_id == 'entity_browser_browse_medias_iframe_form'
-		|| $form_id =='entity_browser_browse_media_modal_form'
-		|| $form_id =='entity_browser_browser_file_modal_form')
-	  {
-		$form['#attached']['library'][] = 'oab_backoffice/mediatheque';
-	  }
-	*/
+      //pour la médiathèque : sélection des images dans la liste
+      if ($form_id == 'entity_browser_browse_medias_iframe_form'
+        || $form_id =='entity_browser_browse_media_modal_form'
+        || $form_id =='entity_browser_browser_file_modal_form')
+      {
+        $form['#attached']['library'][] = 'oab_backoffice/mediatheque';
+      }
+    */
 
-	// Ajout de champ dans les menus
-	if ($form_id == 'menu_link_content_menu_link_content_form') {
-		$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
-		$linkOptions = $menuLinkEntity->link->first()->options;
-		$linkTarget = !empty($linkOptions['target']) ? true : false;
-		$linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
-		$linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
+    // Ajout de champ dans les menus
+    if ($form_id == 'menu_link_content_menu_link_content_form') {
+        $menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+        $linkOptions = $menuLinkEntity->link->first()->options;
+        $linkTarget = !empty($linkOptions['target']) ? true : false;
+        $linkIcon = !empty($linkOptions['icon']) ? $linkOptions['icon']: array();
+        $linkClasstag = !empty($linkOptions['classtag']) ? $linkOptions['classtag']: array();
 
-		$form['link_target'] = array(
-			'#type' => 'checkbox',
-			'#title' => t('Open in a new window'),
-			'#description' => t('check to open the link in a new window'),
-			'#default_value' => $linkTarget,
-			'#weight' => -2
-		);
+        $form['link_target'] = array(
+            '#type' => 'checkbox',
+            '#title' => t('Open in a new window'),
+            '#description' => t('check to open the link in a new window'),
+            '#default_value' => $linkTarget,
+            '#weight' => -2
+        );
 
-		$form['link_icon'] = array(
-			'#type' => 'textfield',
-			'#title' => t('Font Awesome Icon'),
-			'#description' => t('type your icon class code'),
-			'#default_value' => $linkIcon,
-			'#weight' => -3
-		);
+        $form['link_icon'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Font Awesome Icon'),
+            '#description' => t('type your icon class code'),
+            '#default_value' => $linkIcon,
+            '#weight' => -3
+        );
 
-		$form['link_classtag'] = array(
-			'#type' => 'textfield',
-			'#title' => t('Link Tag Class'),
-			'#description' => t('type your link tag class'),
-			'#default_value' => $linkClasstag,
-			'#weight' => -4
-		);
+        $form['link_classtag'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Link Tag Class'),
+            '#description' => t('type your link tag class'),
+            '#default_value' => $linkClasstag,
+            '#weight' => -4
+        );
 
-		$form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
-	}
+        $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
+    }
 
     // langue RU pour les webforms
     if (preg_match('@webform_submission_(.*)_form@', $form_id) && $current_language == 'ru') {
@@ -789,40 +789,40 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     }
 
 
-	//preselection des departements et segments de marché sur les PARTNERS
-	if (in_array($form_id, array( 'node_partner_form')))
-	{
-		if (isset($form['field_departments'])) {
-			//par défaut on sélectionne tous les départements
-			$form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
-		}
-		if (isset($form['field_market_segment'])) {
-			//par défaut on sélectionne +50 et +250 salariés
-			$default_label = array();
-			$default_values = array();
-			if ($current_language == "fr") {
-				$default_label = array('+ 50 salariés', '+ 250 salariés');
-			}
-			elseif ($current_language == "en") {
-				$default_label = array('+ 50 employees', '+ 250 employees');
-			}
-			if (!empty($default_label)) {
-				foreach ($default_label as $label) {
-					$query = \Drupal::entityQuery('taxonomy_term');
-					$query->condition('vid', 'market_segments');
-					$query->condition('name', $label);
-					$entity = $query->execute();
+    //preselection des departements et segments de marché sur les PARTNERS
+    if (in_array($form_id, array( 'node_partner_form')))
+    {
+        if (isset($form['field_departments'])) {
+            //par défaut on sélectionne tous les départements
+            $form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
+        }
+        if (isset($form['field_market_segment'])) {
+            //par défaut on sélectionne +50 et +250 salariés
+            $default_label = array();
+            $default_values = array();
+            if ($current_language == "fr") {
+                $default_label = array('+ 50 salariés', '+ 250 salariés');
+            }
+            elseif ($current_language == "en") {
+                $default_label = array('+ 50 employees', '+ 250 employees');
+            }
+            if (!empty($default_label)) {
+                foreach ($default_label as $label) {
+                    $query = \Drupal::entityQuery('taxonomy_term');
+                    $query->condition('vid', 'market_segments');
+                    $query->condition('name', $label);
+                    $entity = $query->execute();
 
-					if (!empty($entity)) {
-						$default_values[] = array_pop($entity);
-					}
-				}
-				if (!empty($default_values)) {
-					$form['field_market_segment']['widget']['#default_value']  = $default_values;
-				}
-			}
-		}
-	}
+                    if (!empty($entity)) {
+                        $default_values[] = array_pop($entity);
+                    }
+                }
+                if (!empty($default_values)) {
+                    $form['field_market_segment']['widget']['#default_value']  = $default_values;
+                }
+            }
+        }
+    }
 
     ######## Gestion des produits DVI
     if ($form_id === "node_product_form" || $form_id === "node_product_edit_form") {
@@ -954,7 +954,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             // on regénère les styles
             $styles = ImageStyle::loadMultiple();
             /** @var \Drupal\image\Entity\ImageStyle $style */
-            $tabRefresh = array(
+            $tab_refresh = array(
                 'file_entity_browser_thumbnail',
                 'homepage_expertise',
                 'homepage_solution_banner',
@@ -968,7 +968,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
                 'top_zone_big'
                 );
             foreach ($styles as $style) {
-                if (in_array($style->id(), $tabRefresh)) {
+                if (in_array($style->id(), $tab_refresh)) {
                     $destination = $style->buildUri($image_uri);
                     $style->createDerivative($image_uri, $destination);
                 }
@@ -978,122 +978,122 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
 }
 
 function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state) {
-	$values = $form_state->getValues();
-	$link_target = array();
-	$link_icon = array();
-	$link_classtag = array();
+    $values = $form_state->getValues();
+    $link_target = array();
+    $link_icon = array();
+    $link_classtag = array();
 
-	if (isset($values['link_target'])
-		&& !empty($values['link_target'])) {
-		$link_target = trim($values['link_target']);
-	}
+    if (isset($values['link_target'])
+        && !empty($values['link_target'])) {
+        $link_target = trim($values['link_target']);
+    }
 
-	if (isset($values['link_icon'])
-		&& !empty($values['link_icon'])) {
-		$link_icon = trim($values['link_icon']);
-	}
+    if (isset($values['link_icon'])
+        && !empty($values['link_icon'])) {
+        $link_icon = trim($values['link_icon']);
+    }
 
-	if (isset($values['link_classtag'])
-		&& !empty($values['link_classtag'])) {
-		$link_classtag = trim($values['link_classtag']);
-	}
+    if (isset($values['link_classtag'])
+        && !empty($values['link_classtag'])) {
+        $link_classtag = trim($values['link_classtag']);
+    }
 
-	$menuLinkEntity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
-	$options = $menuLinkEntity->link->first()->options;
+    $menu_link_entity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
+    $options = $menu_link_entity->link->first()->options;
 
-	$changed = FALSE;
-	if (empty($link_target)) {
-		if (!empty($options['target'])) {
-			unset($options['target']);
-			$changed = TRUE;
-		}
-	}
-	else {
-		$options['target'] = $link_target ? '_blank' : '_self' ;
-		$changed = TRUE;
-	}
+    $changed = FALSE;
+    if (empty($link_target)) {
+        if (!empty($options['target'])) {
+            unset($options['target']);
+            $changed = TRUE;
+        }
+    }
+    else {
+        $options['target'] = $link_target ? '_blank' : '_self' ;
+        $changed = TRUE;
+    }
 
-	if (empty($link_icon)) {
-		if (!empty($options['icon'])) {
-			unset($options['icon']);
-			$changed = TRUE;
-		}
-	}
-	else {
-		$options['icon'] = $link_icon ;
-		$changed = TRUE;
-	}
+    if (empty($link_icon)) {
+        if (!empty($options['icon'])) {
+            unset($options['icon']);
+            $changed = TRUE;
+        }
+    }
+    else {
+        $options['icon'] = $link_icon ;
+        $changed = TRUE;
+    }
 
-	if (empty($link_classtag)) {
-		if (!empty($options['classtag'])) {
-			unset($options['classtag']);
-			$changed = TRUE;
-		}
-	}
-	else {
-		$options['classtag'] = $link_classtag ;
-		$changed = TRUE;
-	}
+    if (empty($link_classtag)) {
+        if (!empty($options['classtag'])) {
+            unset($options['classtag']);
+            $changed = TRUE;
+        }
+    }
+    else {
+        $options['classtag'] = $link_classtag ;
+        $changed = TRUE;
+    }
 
-	if ($changed) {
-		$menuLinkEntity->link->first()->options = $options;
-		$menuLinkEntity->save();
-	}
+    if ($changed) {
+        $menu_link_entity->link->first()->options = $options;
+        $menu_link_entity->save();
+    }
 }
 
 
 function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
-	$css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
+    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
 }
 
 
 function oab_backoffice_menu_local_tasks_alter(&$data, $route_name) {
-	if (isset($data['tabs'][0]) && is_array($data['tabs'][0])) {
-		foreach ($data['tabs'][0] AS $key => $value) {
-			if (isset($value['#link']['url'])) {
-				$local_task_link_url = $value['#link']['url'];
-				$routeName = $local_task_link_url->getRouteName();
-				switch ($routeName) {
-					case 'system.admin_content':
-						$data['tabs'][0][$key]['#weight'] = 0;
-						break;
-					case 'view.dashboard.page_1':
-						$data['tabs'][0][$key]['#weight'] = 1;
-						break;
-					case 'view.media.media_page_list':
-						$data['tabs'][0][$key]['#weight'] = 2;
-						break;
-					case 'view.files.page_1':
-						$data['tabs'][0][$key]['#weight'] = 3;
-						break;
-					case 'comment.admin':
-						$data['tabs'][0][$key]['#weight'] = 4;
-						break;
-				}
-			}
-		}
-	}
+    if (isset($data['tabs'][0]) && is_array($data['tabs'][0])) {
+        foreach ($data['tabs'][0] AS $key => $value) {
+            if (isset($value['#link']['url'])) {
+                $local_task_link_url = $value['#link']['url'];
+                $route_name = $local_task_link_url->getRouteName();
+                switch ($route_name) {
+                    case 'system.admin_content':
+                        $data['tabs'][0][$key]['#weight'] = 0;
+                        break;
+                    case 'view.dashboard.page_1':
+                        $data['tabs'][0][$key]['#weight'] = 1;
+                        break;
+                    case 'view.media.media_page_list':
+                        $data['tabs'][0][$key]['#weight'] = 2;
+                        break;
+                    case 'view.files.page_1':
+                        $data['tabs'][0][$key]['#weight'] = 3;
+                        break;
+                    case 'comment.admin':
+                        $data['tabs'][0][$key]['#weight'] = 4;
+                        break;
+                }
+            }
+        }
+    }
 }
 
 
 
 function _oab_backoffice_get_menu_link_entity_from_form_state(FormStateInterface $form_state) {
-	$buildInfo = $form_state->getBuildInfo();
-	$menuLinkContentForm = $buildInfo['callback_object'];
-	return $menuLinkContentForm->getEntity();
+    $build_info = $form_state->getBuildInfo();
+    $menu_link_content_form = $build_info['callback_object'];
+    return $menu_link_content_form->getEntity();
 }
 
 // ajout du type de rendu des champs "path" pour la traduction
 function oab_backoffice_config_schema_info_alter(&$definitions) {
-	$definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
+    $definitions['path']['form_element_class'] = '\Drupal\config_translation\FormElement\Textfield';
 }
 
 
@@ -1101,12 +1101,12 @@ function oab_backoffice_config_schema_info_alter(&$definitions) {
  * Implements hook_library_info_alter().
  */
 function oab_backoffice_library_info_alter(&$libraries, $extension) {
-	if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
-		$jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
-		if (isset($jira_url['jira_report_code'])) {
-			$libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
-		}
-	}
+    if ($extension == 'oab_backoffice' && isset($libraries['jira'])) {
+        $jira_url = \Drupal::config('block.block.jirareportblock')->get('settings');
+        if (isset($jira_url['jira_report_code'])) {
+            $libraries['jira']['js'] = [$jira_url['jira_report_code'] => array('external' => true)];
+        }
+    }
 }
 
 
@@ -1131,19 +1131,18 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
  * @param $form_id
  */
 function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-	//Pour ajouter le / après l'url et avant le champ source de la redirection
-	// RUBYPORTAILOBS-2753 "Ajout d'un / avant le champs path dans les redirections"
-	if (isset($form['redirect_source']['widget'][0]['path']['#field_prefix']))
-	{
-		$form['redirect_source']['widget'][0]['path']['#field_prefix'] = $form['redirect_source']['widget'][0]['path']['#field_prefix'].'/';
-	}
+    //Pour ajouter le / après l'url et avant le champ source de la redirection
+    // RUBYPORTAILOBS-2753 "Ajout d'un / avant le champs path dans les redirections"
+    if (isset($form['redirect_source']['widget'][0]['path']['#field_prefix'])) {
+        $form['redirect_source']['widget'][0]['path']['#field_prefix'] = $form['redirect_source']['widget'][0]['path']['#field_prefix'].'/';
+    }
 }
 
 
 function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
-	if (isset($build['#attributes']['data-align']) && $build['#attributes']['data-align'] == 'center') {
-		$build['#attributes']['class'][] = 'text-align-center';
-	}
+    if (isset($build['#attributes']['data-align']) && $build['#attributes']['data-align'] == 'center') {
+        $build['#attributes']['class'][] = 'text-align-center';
+    }
 }
 
 
@@ -1152,32 +1151,32 @@ function oab_backoffice_entity_embed_alter(&$build, $entity, &$context) {
  * Implements hook_views_data_alter().
  */
 function oab_backoffice_views_data_alter(array &$data) {
-	/*$data['node']['node_month'] = array(
-		'title' => t('Node month'),
-		'field' => array(
-			'title' => t('Node month'),
-			'help' => t('Flags a specific node month.'),
-			'id' => 'node_month',
-		),
-	);*/
-	$data['node_field_data']['node_month'] = array(
-		'title' => t('Node Month filter'),
-		'filter' => array(
-			'title' => t('Node month filter'),
-			'help' => t('Provides a custom filter for nodes by the month of creation.'),
-			'field' => 'created',
-			'id' => 'node_month'
-		),
-	);
-	$data['node_field_data']['node_year'] = array(
-		'title' => t('Node Year filter'),
-		'filter' => array(
-			'title' => t('Node year filter'),
-			'help' => t('Provides a custom filter for nodes by the year of creation.'),
-			'field' => 'created',
-			'id' => 'node_year'
-		),
-	);
+    /*$data['node']['node_month'] = array(
+        'title' => t('Node month'),
+        'field' => array(
+            'title' => t('Node month'),
+            'help' => t('Flags a specific node month.'),
+            'id' => 'node_month',
+        ),
+    );*/
+    $data['node_field_data']['node_month'] = array(
+        'title' => t('Node Month filter'),
+        'filter' => array(
+            'title' => t('Node month filter'),
+            'help' => t('Provides a custom filter for nodes by the month of creation.'),
+            'field' => 'created',
+            'id' => 'node_month'
+        ),
+    );
+    $data['node_field_data']['node_year'] = array(
+        'title' => t('Node Year filter'),
+        'filter' => array(
+            'title' => t('Node year filter'),
+            'help' => t('Provides a custom filter for nodes by the year of creation.'),
+            'field' => 'created',
+            'id' => 'node_year'
+        ),
+    );
 }
 
 
@@ -1243,11 +1242,11 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
 
             #kint($result->workbench_revision_tracker_revision_id);
 
-            $maRevision = node_revision_load($result->workbench_revision_tracker_revision_id);
-            $moderationState = $maRevision->get('moderation_state')->getValue();
+            $ma_revision = node_revision_load($result->workbench_revision_tracker_revision_id);
+            $moderation_state = $ma_revision->get('moderation_state')->getValue();
             #Obligé de load le ModerationState complet, il n'y est pas dans l'objet de la revision.....
-            $moderationStateObject = ModerationState::load( $moderationState[0]['target_id']);
-            $result->workbench_revision_tracker_revision_id = $moderationStateObject->get('label');
+            $moderation_state_object = ModerationState::load( $moderation_state[0]['target_id']);
+            $result->workbench_revision_tracker_revision_id = $moderation_state_object->get('label');
 
           }
       }
@@ -1383,7 +1382,8 @@ function oab_backoffice_cron() {
 /**
  * fonction qui retournent les valeurs disponibles pour le choix de la couleur du block Rebond Wysiwyg
  */
-function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(
+    FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = TRUE) {
   return [
     "#f60"        => "Orange",
     "#fff"        => "White",
@@ -1413,18 +1413,17 @@ function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(FieldStorageConf
 function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core\Form\FormState &$form_state) {
 
   ##Je commence par recupérer les valeurs rentrées par l'user
-  $userValues = $form_state->getUserInput();
+  $user_values = $form_state->getUserInput();
 
-  if (isset($userValues['langcode'][0]['value'])) {
-    $content_language = $userValues['langcode'][0]['value'];
-  }
-  else{
+  if (isset($user_values['langcode'][0]['value'])) {
+    $content_language = $user_values['langcode'][0]['value'];
+  } else {
     $content_language = null;
   }
 
   ## Si l'utilisateur a coché "Produit DVI", on effectue des vérifications supplémentaires
-  if (isset($userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
-    && $userValues[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1") {
+  if (isset($user_values[DviHelper::FIELD_IS_DVI_PRODUCT_NAME])
+    && $user_values[DviHelper::FIELD_IS_DVI_PRODUCT_NAME] == "1") {
 
 
     #Petite gestion pour la langue, pour afficher le bon element....
@@ -1442,27 +1441,27 @@ function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core
     ## 1. Il faut que l'utilisateur ait selectionné la subhome "Produits DVI"
 
     ##Je recupère les éléments selectionnés dans la taxo Subhome (false si le field n'existe pas..)
-    $field_taxoSubhome = isset($userValues[DviHelper::FIELD_SUBHOME_NAME])
-      ? $userValues[DviHelper::FIELD_SUBHOME_NAME]
+    $field_taxo_subhome = isset($user_values[DviHelper::FIELD_SUBHOME_NAME])
+      ? $user_values[DviHelper::FIELD_SUBHOME_NAME]
       : false;
 
-    $isTaggedDvi = false;                    ##Pour connaitre le résultat
-    $taxoSubhomeTid = DviHelper::getProductDviSubhomeTid($content_language);  ##Je recupère le tid de la taxo ProductDvi
+    $is_tagged_dvi = false;                    ##Pour connaitre le résultat
+    $taxo_subhome_tid = DviHelper::getProductDviSubhomeTid($content_language);  ##Je recupère le tid de la taxo ProductDvi
     ##translation faite toute seule par la fonction
 
     ##Je boucle sur tous les éléments selectionnés
-    if (is_array($field_taxoSubhome)) {
-      foreach ($field_taxoSubhome as $element) {
+    if (is_array($field_taxo_subhome)) {
+      foreach ($field_taxo_subhome as $element) {
 
         ##Si un des elements est taggué, je passe à true
-        if ($element == $taxoSubhomeTid) {
-          $isTaggedDvi = true;
+        if ($element == $taxo_subhome_tid) {
+          $is_tagged_dvi = true;
         }
       }
     }
 
     ##Si on n'a pas trouvé la taxo Subhome Produit DVI, je fais remonter une erreur
-    if (!$isTaggedDvi) {
+    if (!$is_tagged_dvi) {
 
       ##On remonte l'erreur
       $form_state->setErrorByName(DviHelper::FIELD_SUBHOME_NAME,
@@ -1472,8 +1471,8 @@ function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core
     ## 2. Il faut que l'utilisateur ait selectionné au moins un element dans Market Segment
 
     ##Je recupère la valeur rentrée pour la taxo DVI Market Segment
-    $field_mstaco = isset($userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME])
-      ? $userValues[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME]
+    $field_mstaco = isset($user_values[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME])
+      ? $user_values[DviHelper::FIELD_DVI_MARKET_SEGMENT_NAME]
       : false;
 
     ##Si on ne recup pas d'array, ou si l'array est vide (ie. rien n'a ete selectionné)
@@ -1501,12 +1500,12 @@ function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
         $node = $context['data']['node'];
 
         ##je recupère la valeur contenue dans l'element IsDviProduct
-        $isDvi_array = $node->get(DviHelper::FIELD_IS_DVI_PRODUCT_NAME)->getValue();
-        if (is_array($isDvi_array) && count($isDvi_array) > 0) {
-            $isDvi_value = $isDvi_array[0]['value'];
+        $is_dvi_array = $node->get(DviHelper::FIELD_IS_DVI_PRODUCT_NAME)->getValue();
+        if (is_array($is_dvi_array) && count($is_dvi_array) > 0) {
+            $is_dvi_value = $is_dvi_array[0]['value'];
 
             #Si on a un produit DVI
-            if ($isDvi_value == "1") {
+            if ($is_dvi_value == "1") {
 
                 ##Je sépare l'alias pré-créé par le système
                 $alias_parts = explode('/', $alias);
@@ -1521,13 +1520,13 @@ function oab_backoffice_pathauto_alias_alter(&$alias, array &$context) {
                 array_unshift($alias_parts, DviHelper::DVI_PRODUCT_URL);
 
                 ##En bouclant sur tous les éléments, je recrée l'alias
-                $newAlias = "";
+                $new_alias = "";
                 foreach ($alias_parts as $part) {
-                    $newAlias .= "/$part";
+                    $new_alias .= "/$part";
                 }
 
                 ## Puis je set l'alias avec le mien
-                $alias = $newAlias;
+                $alias = $new_alias;
             }
         }
     }
