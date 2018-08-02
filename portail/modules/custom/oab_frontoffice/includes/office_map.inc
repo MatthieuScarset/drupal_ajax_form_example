@@ -11,7 +11,7 @@ use Drupal\Core\Database\Database;
  * Méthode qui renvoie le tableau des pays pour remplir le filtre Pays en JS
  * @return array
  */
-function getCountriesForJS(){
+function getCountriesForJS() {
     $keys = array();
     $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
@@ -27,15 +27,15 @@ function getCountriesForJS(){
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $table_countries = array();
     $table_countries['all'] = t('Country');
-    foreach ($results as $country){
-        if(!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language){
+    foreach ($results as $country) {
+        if (!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
             $keys[] = $country->country_tid;
             $table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
         }
     }
     //pour ceux qui n'ont pas de traduction, on prend le libellé sans restriction de langue
-    foreach ($results as $country){
-        if(!in_array($country->country_tid, $keys) && !empty($country->country_tid)){
+    foreach ($results as $country) {
+        if (!in_array($country->country_tid, $keys) && !empty($country->country_tid)) {
             $keys[] = $country->country_tid;
             $table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
         }
@@ -95,7 +95,9 @@ function getCountries() {
     $table_countries['all'] = t('Country');
 
     foreach ($results as $country) {
-        if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
+        if (!array_key_exists($country->country_tid, $table_countries)
+            && !empty($country->country_tid)
+            && $country->country_langcode == $current_language) {
             $table_countries[$country->country_tid] = $country->country_name;
         }
     }
@@ -112,7 +114,7 @@ function getCountries() {
  * Méthode qui renvoie le tableau de régions (termes de taxo region) [region id] => region name
  * @return array
  */
-function getRegions(){
+function getRegions() {
     $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
     $query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
@@ -129,10 +131,10 @@ function getRegions(){
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    foreach ($results as $region){
-        if(!array_key_exists($region->region_tid, $table_regions)
+    foreach ($results as $region) {
+        if (!array_key_exists($region->region_tid, $table_regions)
             && !empty($region->region_tid)
-            && $region->region_langcode == $current_language ){
+            && $region->region_langcode == $current_language ) {
             $table_regions[$region->region_tid] = $region->region_name;
         }
     }

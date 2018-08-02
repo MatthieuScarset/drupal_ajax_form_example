@@ -12,37 +12,37 @@ use Drupal\Core\Database\Database;
  * cleane les options du menu déroulant des filtres exposés
  * @param $options du tableau
  */
-function clean_exposed_filters_by_language($options, $txtAll) {
+function clean_exposed_filters_by_language($options, $txt_all) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    foreach($options as $key=>$value){
-        if($key != 'All'){
+    foreach ($options as $key => $value) {
+        if ($key != 'All') {
             $term = \Drupal\taxonomy\Entity\Term::load($key);
-            if(isset($term) && $term != null) {
+            if (isset($term) && $term != null) {
                 $lang = $term->language();
-                if ( $lang->getId() != $current_language ) {
+                if ($lang->getId() != $current_language) {
                     unset( $options[ $key ] );
                 }
             }
-        }else{
-            $options['All'] = t($txtAll);
+        } else {
+            $options['All'] = t($txt_all);
         }
     }
     return $options;
 }
 
 
-function getSocialBarParameters($pageTitle, $meta_description, $og_image) {
+function getSocialBarParameters($page_title, $meta_description, $og_image) {
     global $base_root;
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $og_url = $base_root . \Drupal::request()->getRequestUri();
 
     ##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
     ## pour chaque site
-    $siteData = [
+    $site_data = [
         'twitter' => [
             'url' => "http://www.twitter.com/intent/tweet",
             'params' => [
-                'text' => $pageTitle,
+                'text' => $page_title,
                 'url' => $og_url,
                 'hashtags' => '',
                 'via' => 'orangebusiness',
@@ -61,7 +61,7 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image) {
             'params' => [
                 'mini' => 'true',
                 'url' => $og_url,
-                'title' => $pageTitle,
+                'title' => $page_title,
                 'summary' => $meta_description,
                 'source' => $og_url
             ]
@@ -87,24 +87,25 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image) {
     ];
 
     ##Pour enregistrer les adresses recomposées
-    $siteUrls = [];
+    $site_urls = [];
 
     ##je recompose les URLs share
-    foreach ($siteData as $site => $data) {
-        $paramsString = "";
+    foreach ($site_data as $site => $data) {
+        $params_string = "";
         foreach ($data['params'] as $paramName => $value) {
-            if (is_string($value) && strlen($value)>0)
-                $paramsString .= $paramName . "=" . rawurlencode($value) . "&";
+            if (is_string($value) && strlen($value)>0) {
+                $params_string .= $paramName . "=" . rawurlencode($value) . "&";
+            }
         }
-        $siteUrls[$site] = $data['url'];
-        if($paramsString != "") {
-            $siteUrls[$site] .= "?"
-                . rtrim($paramsString, "&");
+        $site_urls[$site] = $data['url'];
+        if ($params_string != "") {
+            $site_urls[$site] .= "?"
+                . rtrim($params_string, "&");
         }
     }
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    switch($current_language){
+    switch ($current_language) {
         case 'fr':
             $og_locale = 'fr_FR';
             break;
@@ -122,11 +123,11 @@ function getSocialBarParameters($pageTitle, $meta_description, $og_image) {
 
     #J'enregistre mes urls et variables OG pour les avoir en JS
     $array_sharbar = array(
-        'share_siteUrls' => $siteUrls,
+        'share_siteUrls' => $site_urls,
         "og_url"    => $og_url,
         "og_locale" => $og_locale,
         "og_image"  => $og_image,
-        "og_title"  => $pageTitle
+        "og_title"  => $page_title
     );
     return $array_sharbar;
 }
@@ -142,8 +143,9 @@ function oab_getAllPathFromNID($nid, $langcode = null) {
     $query->fields('u', ['alias']);
     $query->condition('source', '/node/' . $nid);
 
-    if ($langcode !== null)
+    if ($langcode !== null) {
         $query->condition('langcode', $langcode);
+    }
 
     $result = $query->execute();
     $data = $result->fetchAll();
