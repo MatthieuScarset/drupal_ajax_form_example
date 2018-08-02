@@ -11,6 +11,14 @@ use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
+// Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
+module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
+
+// Regroupement des METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA)
+module_load_include('inc', 'oab_frontoffice', 'includes/office_map');
+
+// Mise dans un fichier a part des filtres des subhomes
+module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_form');
 
 function oab_frontoffice_preprocess_menu(&$variables) {
   if (isset($variables['items'])
@@ -259,28 +267,6 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 
 
 /**
- * cleane les options du menu déroulant des filtres exposés
- * @param $options du tableau
- */
-function clean_exposed_filters_by_language($options, $txtAll) {
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	foreach ($options as $key=>$value) {
-		if ($key != 'All') {
-			$term = \Drupal\taxonomy\Entity\Term::load($key);
-			if (isset($term) && $term != null) {
-				$lang = $term->language();
-				if ( $lang->getId() != $current_language) {
-					unset( $options[ $key ]);
-				}
-			}
-		} else {
-			$options['All'] = t($txtAll);
-		}
-	}
-	return $options;
-}
-
-/**
  * Implements hook_views_query_alter().
  */
 function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
@@ -307,86 +293,6 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
     }
   }
 
-/*
-    ## Filtre sur la subhome distributeur
-    $displayObj = $view->getDisplay();
-    $displayId = $displayObj->display['id'];
-   if ( ($view->id() == 'subhomes' && ($displayId == 'page_distributor' || $displayId == 'page_products'))
-            || $view->id() == 'product_autocomplete') {
-
-        $terms_ids = DviHelper::getMSTaxoTermsIds();
-
-        if (count($terms_ids)>0) {
-           $conditions = new Drupal\Core\Database\Query\Condition('or');
-
-           $table_name = "node__field_market_segment";
-           $field_name = "field_market_segment_target_id";
-           $tables = array();
-           foreach ($terms_ids as $key => $term_id) {
-
-               $joinConfig = [
-                   'table' => $table_name,
-                   'left_field' => 'nid',
-                   'field' => 'entity_id',
-                   'extra' => [
-                       [
-                           'field' => 'deleted',
-                           'value' => 0,
-                           'numeric' => true
-                       ],
-                       [
-                           'left_field' => "langcode",
-                           'field' => "langcode",
-                       ]
-
-                   ],
-                   'left_table' => 'node_field_data',
-                   'type' => 'LEFT',
-                   'extra_operator' => 'AND',
-               ];
-
-
-               $join = new \Drupal\views\Plugin\views\join\Standard(
-                   $joinConfig,
-                   "standard",
-                   [
-                       'plugin_type' => "join",
-                       'id' => "standard",
-                       'class' => 'Drupal\views\Plugin\views\join\Standard',
-                       'provider' => 'views'
-                   ]
-               );
-
-               $join->extra = [
-                   [
-                       'field' => $field_name,
-                       'value' => $term_id,
-                       'numeric' => false
-                   ]
-               ];
-
-               $table_alias = $query->addTable(
-                   $table_name,
-                   "node_field_data",
-                   $join
-               );
-
-               if ($table_alias !== false && is_string($table_alias)) {
-                   $conditions->condition(
-                       "$table_alias.$field_name",
-                       $term_id,
-                       '='
-                   );
-               }
-
-           }
-
-           $query->addWhere(1, $conditions);
-
-       }
-    }
-*/
-
 }
 
 /**
@@ -394,188 +300,10 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
  */
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-    /*if ( isset($form['actions']['submit']['#value'])) {
-      if ($current_language == 'fr') {
-         $form['actions']['submit']['#value'] = "Filtrer";
-      } elseif ($current_language == 'ru') {
-        $form['actions']['submit']['#value'] = "Найти";
-      } elseif ($current_language == 'es') {
-          $form['actions']['submit']['#value'] = "Aplicar";
-      } elseif ($current_language == 'pt-br') {
-          $form['actions']['submit']['#value'] = "Aplique";
-      }
-    }*/
 
-    foreach ($form AS $key => $value) {
-      if (isset($value['#type'])
-      && $value['#type'] == "textfield") {
-        $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
-        if (is_object($vocabulary)) {
-          $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties([
-            'vid' => $key,
-            'langcode' => $current_language
-          ]);
-          if (is_array($terms)
-          && !empty($terms)) {
-            $options = array('All' => t($vocabulary->get('name')));
-            foreach ($terms AS $term) {
-              $term_name = $term->getName();
-              $options[$term_name] = $term_name;
-            }
-            $form[$key]['#type'] = "select";
-            $form[$key]['#options'] = $options;
-            $form[$key]['#default_value'] = 'All';
-            $form[$key]['#validated'] = TRUE;
-            $form[$key]['#size'] = null;
-          }
-          else{
-            unset($form[$key]);
-          }
-        }
-      }
-    }
-  }
 
-  // subhome blogs
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-blog') {
-    if (isset($form['blog_thematics'])) {
-      $form['blog_thematics']['#options']['All'] = t('Thematic');
-    }
-    if (isset($form['blog_formats'])) {
-      $form['blog_formats']['#options']['All'] = t('Type');
-    }
-
-    // HACK POUR LA SORTIE
-    if ($current_language == 'en'
-    || $current_language == 'ru') {
-        unset($form['blog_formats']);
-    }
-  }
-
-  // subhome magazine
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-magazine') {
-    if (isset($form['magazine_thematics'])) {
-      $form['magazine_thematics']['#options']['All'] = t('Thematic');
-    }
-    if (isset($form['magazine_types'])) {
-      $form['magazine_types']['#options']['All'] = t('Type');
-    }
-
-    //Suppression ees filtres format, metier et industry pour la subhome RU
-    if ($current_language == 'en'
-    || $current_language == 'ru') {
-      unset($form['magazine_types']);
-    }
-  }
-
-  // subhome mediatheque
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-document') {
-    if (isset($form['document_thematics'])) {
-      $form['document_thematics']['#options']['All'] = t('Thematic');
-    }
-    if (isset($form['document_types'])) {
-      $form['document_types']['#options']['All'] = t('Type');
-    }
-
-    // HACK POUR LA SORTIE
-    if ($current_language == 'fr') {
-        // on supprime "eBook"
-        unset($form['field_document_type_target_id']['#options']['E-book']);
-    }
-    if ($current_language == 'en') {
-        // on supprime "position paper"
-        unset($form['field_document_type_target_id']['#options']['Position paper']);
-    }
-  }
-
-  // subhome presse
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-    if (isset($form['solutions'])) {
-      $form['solutions']['#options']['All'] = t('Solution');
-    }
-    if (isset($form['press_formats'])) {
-      $form['press_formats']['#options']['All'] = t('Type');
-    }
-
-    //Suppression de filtres pour le russe
-    if ($current_language == 'ru') {
-      unset($form['press_formats']);
-    }
-  }
-
-  // subhome produits
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-catalogue') {
-    if (isset($form['solutions'])) {
-      $form['solutions']['#options']['All'] = t('Solution');
-    }
-    if (isset($form['industries'])) {
-      $form['industries']['#options']['All'] = t('Industry');
-    }
-    if (isset($form['jobs_profiles'])) {
-      $form['jobs_profiles']['#options']['All'] = t('Profession');
-    }
-
-    //Suppression de filtres pour le russe
-    if ($current_language == 'ru'
-    || $current_language == 'en') {
-      unset($form['industries']);
-      unset($form['jobs_profiles']);
-    }
-    // HACK POUR LA SORTIE
-    if ($current_language == 'fr') {
-      // on supprime "ressources et énergie" et "transport"
-        unset($form['industries']['#options']["ressources et énergie"]);
-        unset($form['industries']['#options']["transport"]);
-    }
-  }
-  // subhome temoignages
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-customer') {
-    if (isset($form['solutions'])) {
-      $form['solutions']['#options']['All'] = t('Solution');
-    }
-    if (isset($form['industries'])) {
-      $form['industries']['#options']['All'] = t('Industry');
-    }
-    if (isset($form['jobs_profiles'])) {
-      $form['jobs_profiles']['#options']['All'] = t('Profession');
-    }
-
-    // HACK POUR LA SORTIE
-    if ($current_language == 'fr') {
-        // on supprime "ressources et énergie" et "transport"
-        unset($form['industries']['#options']["ressources et énergie"]);
-        unset($form['industries']['#options']["transport"]);
-    }
-    if ($current_language == 'ru') {
-        unset($form['industries']);
-    }
-  }
-  // subhome partenaires
-  if ($form['#id'] == 'views-exposed-form-subhomes-page-partners') {
-    if (isset($form['solutions'])) {
-      $form['solutions']['#options']['All'] = t('Solution');
-    }
-    if (isset($form['partners_types'])) {
-      $form['partners_types']['#options']['All'] = t('Category');
-    }
-  }
-
-    //Subhome Distributors
-    if ($form['#id'] == 'views-exposed-form-subhomes-page-distributor') {
-        $solutions = clean_exposed_filters_by_language(
-            $form['field_solution_target_id']['#options'],
-            'Solution'
-        );
-        $form['field_solution_target_id']['#options'] = $solutions;
-
-        $departements = clean_exposed_filters_by_language(
-            $form['field_departments_target_id']['#options'],
-            'Departements'
-        );
-        $form['field_departments_target_id']['#options'] = $departements;
-
-    }
+  // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
+  subhomes_views_exposed_form($form);
 
 
     // view Page thématique
@@ -608,20 +336,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             unset($form['field_region_target_id']);
         }
     }
-
-  /**
-   * je cache le bouton "Apply" s'il n'y a plus de filtre
-   */
-  $hasFilters = false;
-  foreach ($form["#info"] as $filter_name => $filter_infos) {
-      if (isset($form[$filter_infos['value']])) {
-          $hasFilters = true;
-      }
-  }
-
-  if (!$hasFilters) {
-      $form['actions']['submit']['#attributes']['class'][] = 'hidden';
-  }
 
 }
 
@@ -731,107 +445,6 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
 	return $theme;
 }
 
-
-function getSocialBarParameters($pageTitle, $meta_description, $og_image)
-{
-	global $base_root;
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	$og_url = $base_root . \Drupal::request()->getRequestUri();
-
-	##Je fais un tableau de toutes mes données nécessaires pour la création des urls "share"
-	## pour chaque site
-	$siteData = [
-		'twitter' => [
-			'url' => "http://www.twitter.com/intent/tweet",
-			'params' => [
-				'text' => $pageTitle,
-				'url' => $og_url,
-				'hashtags' => '',
-				'via' => 'orangebusiness',
-				'related' => '',
-				'in-reply-to' => ''
-			]
-		],
-		'facebook' => [
-			'url' => "https://www.facebook.com/sharer/sharer.php",
-			"params" => [
-				'u' => $og_url
-			]
-		],
-		'linkedin' => [
-			'url' => "https://www.linkedin.com/shareArticle",
-			'params' => [
-				'mini' => 'true',
-				'url' => $og_url,
-				'title' => $pageTitle,
-				'summary' => $meta_description,
-				'source' => $og_url
-			]
-		],
-		'rss_blogs' => [
-			'url' => "/".$current_language."/blogs/rss.xml",
-			'params' => []
-		],
-		'rss_magazine' => [
-			'url' => "/".$current_language."/magazine/rss.xml",
-			'params' => []
-		],
-		'rss_presse' => [
-			'url' => "/".$current_language."/press/feed_rss.xml",
-			'params' => []
-		],
-	];
-
-	## Pour traiter les mails plus tard
-	$mail = [
-		'subject' => 'Viens voir sur Orange-Business.com',
-		'body' => '<html><body><h1>Coucou c\'est un test</body></html>'
-	];
-
-	##Pour enregistrer les adresses recomposées
-	$siteUrls = [];
-
-	##je recompose les URLs share
-	foreach ($siteData as $site => $data) {
-		$paramsString = "";
-		foreach ($data['params'] as $paramName => $value) {
-			if (is_string($value) && strlen($value)>0)
-				$paramsString .= $paramName . "=" . rawurlencode($value) . "&";
-		}
-		$siteUrls[$site] = $data['url'];
-		if ($paramsString != "") {
-			$siteUrls[$site] .= "?"
-				. rtrim($paramsString, "&");
-		}
-	}
-
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	switch($current_language) {
-		case 'fr':
-			$og_locale = 'fr_FR';
-			break;
-		case 'en':
-		case 'ru-en':
-			$og_locale = 'en_US';
-			break;
-		case 'ru':
-			$og_locale = 'ru_RU';
-			break;
-		default:
-			$og_locale = 'fr_FR';
-			break;
-	}
-
-	#J'enregistre mes urls et variables OG pour les avoir en JS
-	$array_sharbar = array(
-		'share_siteUrls' => $siteUrls,
-        "og_url"    => $og_url,
-        "og_locale" => $og_locale,
-        "og_image"  => $og_image,
-        "og_title"  => $pageTitle
-	);
-	return $array_sharbar;
-}
 
 function oab_frontoffice_mail_alter(&$message) {
     for($i = 0; $i < count($message["body"]); $i++) {
@@ -952,169 +565,10 @@ function __seek_alternate($tab) {
 }
 
 
-/*******************************************************************************************************************/
-/*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/
-/*******************************************************************************************************************/
-
-
-/**
- * Méthode qui renvoie le tableau des pays pour remplir le filtre Pays en JS
- * @return array
- */
-function getCountriesForJS() {
-	$keys = array();
-	$query = Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('oc', 'tid', 'country_tid');
-	$query->addField('oc', 'name', 'country_name');
-	$query->addField('oc', 'langcode', 'country_langcode');
-	$query->orderBy('oc.name');
-	$results =	$query->execute()->fetchAll();
-
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	$table_countries = array();
-	$table_countries['all'] = t('Country');
-	foreach ($results as $country) {
-		if (!in_array($country->country_tid, $keys) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
-			$keys[] = $country->country_tid;
-			$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
-		}
-	}
-	//pour ceux qui n'ont pas de traduction, on prend le libellé sans restriction de langue
-	foreach ($results as $country) {
-		if (!in_array($country->country_tid, $keys) && !empty($country->country_tid)) {
-			$keys[] = $country->country_tid;
-			$table_countries[] = array('id' => $country->country_tid, "name" => $country->country_name);
-		}
-	}
-	return $table_countries;
-}
-
-/**
- * Méthode qui renvoie le tableau d'association [country id] => region_id
- * @return array
- */
-function getArrayRegionsCountries() {
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-	$query = Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-	$query->leftjoin('taxonomy_term__field_country_code', 'occ', 'occ.entity_id = c.field_office_country_target_id');
-	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('t', 'tid', 'region_tid');
-	$query->addField('t', 'name', 'region_name');
-	$query->addField('oc', 'tid', 'country_tid');
-	$query->addField('oc', 'name', 'country_name');
-	$query->addField('oc', 'langcode', 'country_langcode');
-	$query->addField('occ', 'field_country_code_value', 'country_code');
-	$results = $query->execute()->fetchAll();
-	//tableau [pays id] => region id
-	$table_country_region = array();
-	foreach ($results as $rowCountryRegion) {
-		$table_country_region[$rowCountryRegion->country_tid] = $rowCountryRegion->region_tid;
-	}
-
-	return $table_country_region;
-}
-
-/**
- * Méthode qui renvoie le tableau de pays (termes de taxo offices countrie) [country id] => country name
- * @return array
- */
-function getCountries() {
-	$query = Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('oc', 'tid', 'country_tid');
-	$query->addField('oc', 'name', 'country_name');
-	$query->addField('oc', 'langcode', 'country_langcode');
-	$query->orderBy('oc.name');
-	$results = $query->execute()->fetchAll();
-
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-	$table_countries = array();
-	$table_countries['all'] = t('Country');
-
-	foreach ($results as $country) {
-		if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid) && $country->country_langcode == $current_language) {
-			$table_countries[$country->country_tid] = $country->country_name;
-		}
-	}
-
-	foreach ($results as $country) {
-		if (!array_key_exists($country->country_tid, $table_countries) && !empty($country->country_tid)) {
-			$table_countries[$country->country_tid] = $country->country_name;
-		}
-	}
-	return $table_countries;
-}
-
-/**
- * Méthode qui renvoie le tableau de régions (termes de taxo region) [region id] => region name
- * @return array
- */
-function getRegions() {
-	$query = Database::getConnection()->select('node_field_data', 'n');
-	$query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
-	$query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
-	$query->condition('n.type', 'office', '=');
-	$query->condition('n.status', 1, '=');
-	$query->addField('t', 'tid', 'region_tid');
-	$query->addField('t', 'name', 'region_name');
-	$query->addField('t', 'langcode', 'region_langcode');
-	$query->orderBy('t.name');
-	$results =	$query->execute()->fetchAll();
-
-	$table_regions = array();
-	$table_regions['all'] = t('Region');
-
-	$current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-	foreach ($results as $region) {
-		if (!array_key_exists($region->region_tid, $table_regions)
-			&& !empty($region->region_tid)
-			&& $region->region_langcode == $current_language) {
-			$table_regions[$region->region_tid] = $region->region_name;
-		}
-	}
-	return $table_regions;
-}
-
-/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view) {
+/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
   if (isset($view) && ($view->storage->id() == 'subhomes')) {
     $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
   }
 }*/
 
-/**
- * Pour retrouver tous les Alias d'un node
- * @param $nid
- * @return array
- */
-function oab_getAllPathFromNID($nid, $langcode = null) {
-    $query = Database::getConnection()->select('url_alias', 'u');
 
-    $query->fields('u', ['alias']);
-    $query->condition('source', '/node/' . $nid);
-
-    if ($langcode !== null)
-        $query->condition('langcode', $langcode);
-
-    $result = $query->execute();
-    $data = $result->fetchAll();
-
-    $ret = [];
-    foreach ($data as $row) {
-        $ret[] = ($langcode !== null) ?  "/$langcode" . $row->alias : $row->alias;
-    }
-    return $ret;
-}
