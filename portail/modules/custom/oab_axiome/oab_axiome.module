@@ -18,12 +18,12 @@ define('AXIOME_TAXO_METIERS', 'jobs_profiles');
 function oab_axiome_cron() {
 
   #Je recupère la config pour savoir si le cron axiome est actif
-  $cronActif = \Drupal::config('oab.settings_axiome')->get('axiome_enable_cron');
+  $cron_actif = \Drupal::config('oab.axiome_settings')->get('axiome_enable_cron');
 
   //Si oui, je lance l'import ; si non, rien ne se passe.
-  if ($cronActif) {
+  if ($cron_actif) {
     $axiome_importer = new AxiomeImporter();
-    $axiome_importer->axiome_search_archive($axiome_importer->axiome_folder_root_path);
+    $axiome_importer->axiome_search_archive($axiome_importer->axiomeFolderRootPath);
   }
 
 }
@@ -34,7 +34,7 @@ function oab_axiome_cron() {
 function oab_axiome_form_alter(&$form, &$form_state, $form_id) {
     global $user,$base_path;
 
-    switch($form_id) {
+    switch ($form_id) {
         case "axiome_node_form":
             //note les champ subtile et txt_catcher sont caché en css dans le theme obs_backoffice
 

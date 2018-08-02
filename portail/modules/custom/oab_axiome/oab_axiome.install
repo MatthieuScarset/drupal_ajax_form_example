@@ -5,8 +5,8 @@
  * Implements hook_install().
  */
 function oab_axiome_install() {
-  drupal_set_installed_schema_version('oab_axiome', 8000);
-  // variable_set('revision_auto_draft', array('none'));
+   // drupal_set_installed_schema_version('oab_axiome', 8000);
+   // variable_set('revision_auto_draft', array('none'));
 
   oabt_YmlImport('oab.axiome.yml');
 
@@ -15,8 +15,7 @@ function oab_axiome_install() {
   if (!file_exists($folder)) {
     if (mkdir($folder, 0777, true)) {
       return $folder;
-    }
-    else{
+    } else {
       $this->axiome_notification[] = "ERREUR | impossible de créer le dossier \"".$folder."\"";
     }
   }
