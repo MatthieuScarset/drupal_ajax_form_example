@@ -23,7 +23,7 @@
         {% if menu_level == 0 %}
             <ul{{ attributes.addClass('menu', 'nav', 'navbar-nav') }}>
         {% else %}
-            <ul{{ attributes.addClass('dropdown-menu') }}>
+            <ul{{ attributes.addClass('dropdown-menu', 'navbar_levels') }}>
         {% endif %}
         {% for item in items %}
             {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
