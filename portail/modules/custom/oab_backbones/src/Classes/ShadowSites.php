@@ -33,16 +33,16 @@ class ShadowSites
      */
     public function getShadowSitesTable()
     {
-        $shadowSites = array();
+        $shadow_sites = array();
         if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
             $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
                 ->orderBy('used', 'DESC')
                 ->extend('Drupal\Core\Database\Query\TableSortExtender');
-            $shadowSites = $query->fields('obs')
+            $shadow_sites = $query->fields('obs')
                 ->orderByHeader($this->getHeaderTable())
                 ->execute();
         }
-        return $shadowSites;
+        return $shadow_sites;
     }
 
     /**
@@ -50,7 +50,7 @@ class ShadowSites
      */
     public function getShadowSitesArrayFromDB()
     {
-        $shadowSites = array();
+        $shadow_sites = array();
         if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
             $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
                 ->fields('obs')
@@ -59,11 +59,11 @@ class ShadowSites
 
             if (is_array($results) && count($results) > 0) {
                 foreach ($results as $site) {
-                    $shadowSites[$site->sid] = $site->probe_name;
+                    $shadow_sites[$site->sid] = $site->probe_name;
                 }
             }
         }
-        return $shadowSites;
+        return $shadow_sites;
     }
 
     /**
@@ -122,7 +122,7 @@ class ShadowSites
     /** Méthode qui retourne un tableau (key=sid) de tous les sites où used =1 */
     public function getAllInformationsForUsedShadowSites()
     {
-        $shadowSites = array();
+        $shadow_sites = array();
         if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
             $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
                 ->fields('obs')
@@ -132,7 +132,7 @@ class ShadowSites
 
             if (is_array($results) && count($results) > 0) {
                 foreach ($results as $site) {
-                    $shadowSites[$site->sid] = array(
+                    $shadow_sites[$site->sid] = array(
                         "sid" => $site->sid,
                         "probe_name" => $site->probe_name,
                         "site_label" => $site->site_label,
@@ -141,13 +141,13 @@ class ShadowSites
                 }
             }
         }
-        return $shadowSites;
+        return $shadow_sites;
     }
 
     /** Méthode appelée par le formulaire de sélection d'un site source (BO et FO) parmis les sites USED */
     public function getUsedShadowSitesForSelector()
     {
-        $shadowSites = array();
+        $shadow_sites = array();
         if (Database::getConnection()->schema()->tableExists($this::$TABLE_NAME)) {
             $query = Database::getConnection()->select($this::$TABLE_NAME, 'obs')
                 ->fields('obs')
@@ -157,10 +157,10 @@ class ShadowSites
 
             if (is_array($results) && count($results) > 0) {
                 foreach ($results as $site) {
-                    $shadowSites[$site->sid] = $site->site_label;
+                    $shadow_sites[$site->sid] = $site->site_label;
                 }
             }
         }
-        return $shadowSites;
+        return $shadow_sites;
     }
 }

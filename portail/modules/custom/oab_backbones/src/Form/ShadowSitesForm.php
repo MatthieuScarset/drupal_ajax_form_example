@@ -110,14 +110,14 @@ class ShadowSitesForm extends FormBase
             '#submit' => array('::saveSitesValuesHandler')
         );
 
-        $shadowSitesObject = new ShadowSites();
-        $shadowSitesTable = $shadowSitesObject->getShadowSitesTable();
+        $shadow_sites_object = new ShadowSites();
+        $shadow_sitesTable = $shadow_sites_object->getShadowSitesTable();
 
         $options = array();
         $used_values = array();
 
         // Parcours des sites
-        foreach ($shadowSitesTable AS $shadowSite) {
+        foreach ($shadow_sitesTable AS $shadowSite) {
 
             if ($shadowSite->used == 1) {
                 $used_values[$shadowSite->sid] = 1;
@@ -142,7 +142,7 @@ class ShadowSitesForm extends FormBase
         // On crée le tableau de selection
         $form['management']['sid'] = array(
             '#type' => 'tableselect',
-            '#header' => $shadowSitesObject->getHeaderTable(),
+            '#header' => $shadow_sites_object->getHeaderTable(),
             '#options' => $options,
             '#empty' => $this->t('No content available.'),
             '#value' => $used_values,
@@ -208,8 +208,8 @@ class ShadowSitesForm extends FormBase
      */
     public function saveSitesValuesHandler(array &$form, FormStateInterface $form_state)
     {
-        $shadowSitesObject = new ShadowSites();
-        $shadowSitesObject->reinitUsedValuesForAllSites();
+        $shadow_sites_object = new ShadowSites();
+        $shadow_sites_object->reinitUsedValuesForAllSites();
 
         $input = &$form_state->getUserInput();
         // On parse les résultats
@@ -217,7 +217,7 @@ class ShadowSitesForm extends FormBase
             if (isset($value) && $value <> "") {
                 if (isset($input["site_label_" . $value])
                     && $input["site_label_" . $value] <> "") {
-                    $shadowSitesObject->updateShadowSiteInDB($value, 1, trim($input["site_label_" . $value]));
+                    $shadow_sites_object->updateShadowSiteInDB($value, 1, trim($input["site_label_" . $value]));
                 }
             }
         }

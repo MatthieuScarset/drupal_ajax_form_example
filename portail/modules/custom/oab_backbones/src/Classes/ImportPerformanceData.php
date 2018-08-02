@@ -56,7 +56,7 @@ class ImportPerformanceData
     {
         //récupération des shadows sites actifs
         $ssObj = new ShadowSites();
-        $shadowSites = $ssObj->getAllInformationsForUsedShadowSites();
+        $shadow_sites = $ssObj->getAllInformationsForUsedShadowSites();
 
         $batch_op = array();
         $numLines = 0;
@@ -66,10 +66,10 @@ class ImportPerformanceData
             $columns = explode(",", $row);
 
             if (isset($columns[SID_A]) && $columns[SID_A] <> ""
-                && isset($shadowSites[$columns[SID_A]]) && $shadowSites[$columns[SID_A]] <> ""
+                && isset($shadow_sites[$columns[SID_A]]) && $shadow_sites[$columns[SID_A]] <> ""
                 && isset($columns[SID_B]) && $columns[SID_B] <> ""
-                && isset($shadowSites[$columns[SID_B]]) && $shadowSites[$columns[SID_B]] <> "") {
-                $batch_op[] = array('oab_backbones_import_batch', array($columns, $shadowSites, $date));
+                && isset($shadow_sites[$columns[SID_B]]) && $shadow_sites[$columns[SID_B]] <> "") {
+                $batch_op[] = array('oab_backbones_import_batch', array($columns, $shadow_sites, $date));
             }
         }
 

@@ -14,8 +14,7 @@
  * Méthode executée pour chaque ligne du fichier d'import Performance Data
  *
  */
-function oab_backbones_import_batch($columns, $shadowSites, $month, &$context)
-{
+function oab_backbones_import_batch($columns, $shadow_sites, $month, &$context) {
     if (isset($columns["FINISH"])
         && $columns["FINISH"] == "FINISH") {
         oab_backbones_import_batch_finished($context['success'], $context['results'], $context['operations']);
@@ -37,38 +36,38 @@ function oab_backbones_import_batch($columns, $shadowSites, $month, &$context)
                 || $context['results']['data'][$columns[SID_A]][$columns[SID_B]] == "") {
                 \Drupal::logger('oab_backbones')->notice('traitement de : ' . $columns[SID_A] . ' -> ' . $columns[SID_B] . ' : ' . $context['results']['data'][$columns[SID_A]][$columns[SID_B]]);
                 $context['results']['data'][$columns[SID_A]][$columns[SID_B]] = 1;
-                $bbImportDataObj = new \Drupal\oab_backbones\Classes\BackbonesImportData();
+                $bb_import_data_obj = new \Drupal\oab_backbones\Classes\BackbonesImportData();
 
-                $dataArrayAtoB = array(
+                $data_array_atob = array(
                     "date" => $month,
                     "source_site" => $columns[SID_A],
-                    "source_label" => $shadowSites[$columns[SID_A]]["site_label"],
+                    "source_label" => $shadow_sites[$columns[SID_A]]["site_label"],
                     "destination_site" => $columns[SID_B],
-                    "destination_label" => $shadowSites[$columns[SID_B]]["site_label"],
+                    "destination_label" => $shadow_sites[$columns[SID_B]]["site_label"],
                     "RTD" => $columns[RTD],
                     "JITTER" => $columns[JITTER_AB],
                     "PLR" => $columns[PLR_AB]);
-                $bbImportDataObj->saveDataLine($month, $columns[SID_A], $columns[SID_B], $dataArrayAtoB);
+                $bb_import_data_obj->saveDataLine($month, $columns[SID_A], $columns[SID_B], $data_array_atob);
 
-                $dataArrayBtoA = array(
+                $data_array_btoa = array(
                     "date" => $month,
                     "source_site" => $columns[SID_B],
-                    "source_label" => $shadowSites[$columns[SID_B]]["site_label"],
+                    "source_label" => $shadow_sites[$columns[SID_B]]["site_label"],
                     "destination_site" => $columns[SID_A],
-                    "destination_label" => $shadowSites[$columns[SID_A]]["site_label"],
+                    "destination_label" => $shadow_sites[$columns[SID_A]]["site_label"],
                     "RTD" => $columns[RTD],
                     "JITTER" => $columns[JITTER_BA],
                     "PLR" => $columns[PLR_BA]
                 );
-                $bbImportDataObj->saveDataLine($month, $columns[SID_B], $columns[SID_A], $dataArrayBtoA);
+                $bb_import_data_obj->saveDataLine($month, $columns[SID_B], $columns[SID_A], $data_array_btoa);
 
-                $title = $shadowSites[$columns[SID_A]]["site_label"] .
+                $title = $shadow_sites[$columns[SID_A]]["site_label"] .
                     " to " .
-                    $shadowSites[$columns[SID_B]]["site_label"] .
+                    $shadow_sites[$columns[SID_B]]["site_label"] .
                     " and " .
-                    $shadowSites[$columns[SID_B]]["site_label"] .
+                    $shadow_sites[$columns[SID_B]]["site_label"] .
                     " to " .
-                    $shadowSites[$columns[SID_A]]["site_label"];
+                    $shadow_sites[$columns[SID_A]]["site_label"];
                 $context['results']['title'][] = $title;
                 $context['message'] = $title;
             } else {

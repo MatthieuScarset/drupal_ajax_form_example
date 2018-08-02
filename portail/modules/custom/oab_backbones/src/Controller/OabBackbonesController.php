@@ -35,8 +35,8 @@ class OabBackbonesController extends ControllerBase
         }
 
         //récupération des datas
-        $bbImportDataObj = new BackbonesImportData();
-        $data = $bbImportDataObj->getDatasForSiteAndDate($date_import, $site_sid);
+        $bb_import_data_obj = new BackbonesImportData();
+        $data = $bb_import_data_obj->getDatasForSiteAndDate($date_import, $site_sid);
 
         //construction des tableaux pour le rendu (résultats sur 2 tableaux)
         $tabs = array();
@@ -85,8 +85,8 @@ class OabBackbonesController extends ControllerBase
             }
 
             //récupération des datas
-            $bbImportDataObj = new BackbonesImportData();
-            $data = $bbImportDataObj->getDatasForSiteAndDate($date_import, $site_sid);
+            $bb_import_data_obj = new BackbonesImportData();
+            $data = $bb_import_data_obj->getDatasForSiteAndDate($date_import, $site_sid);
             $comment = $bbImportObj->getCommentForImport($date_import);
 
             //construction des tableaux pour le rendu (résultats sur 2 tableaux)
@@ -143,10 +143,10 @@ class OabBackbonesController extends ControllerBase
     public function viewTopTenAdmin(Request $request, $date_import)
     {
         //récupération des datas
-        $bbImportDataObj = new BackbonesImportData();
-        $returnRTD = $bbImportDataObj->getTopTenDataForRTD($date_import);
-        $dataPLR = $bbImportDataObj->getTopTenDataForPLR($date_import);
-        $dataJITTER = $bbImportDataObj->getTopTenDataForJITTER($date_import);
+        $bb_import_data_obj = new BackbonesImportData();
+        $returnRTD = $bb_import_data_obj->getTopTenDataForRTD($date_import);
+        $dataPLR = $bb_import_data_obj->getTopTenDataForPLR($date_import);
+        $dataJITTER = $bb_import_data_obj->getTopTenDataForJITTER($date_import);
 
         //construction des tableaux pour le rendu (résultats sur 2 tableaux)
         $lastimport = $returnRTD["lastimport"];
