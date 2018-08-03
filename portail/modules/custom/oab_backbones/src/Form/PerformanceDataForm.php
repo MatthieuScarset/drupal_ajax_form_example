@@ -24,8 +24,7 @@ class PerformanceDataForm extends FormBase
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId()
-    {
+    public function getFormId() {
         return 'oab_backbones_performance_data_form';
     }
 
@@ -40,8 +39,7 @@ class PerformanceDataForm extends FormBase
      * @return array
      *   The form structure.
      */
-    public function buildForm(array $form, FormStateInterface $form_state)
-    {
+    public function buildForm(array $form, FormStateInterface $form_state) {
         // lien vers le FO
         $form['link_fontoffice'] = array(
             '#weight' => -50,
@@ -96,9 +94,9 @@ class PerformanceDataForm extends FormBase
             '#collapsed' => FALSE,
         );
 
-        $biObj = new BackbonesImport();
-        $imports = $biObj->getBackbonesImportTable();
-        $header = $biObj->getHeaderTable();
+        $bi_obj = new BackbonesImport();
+        $imports = $bi_obj->getBackbonesImportTable();
+        $header = $bi_obj->getHeaderTable();
 
         $options = array();
         $keys = array();
@@ -193,15 +191,13 @@ class PerformanceDataForm extends FormBase
      * @param \Drupal\Core\Form\FormStateInterface $form_state
      *   The current state of the form.
      */
-    public function submitForm(array &$form, FormStateInterface $form_state)
-    {
+    public function submitForm(array &$form, FormStateInterface $form_state) {
     }
 
 
     /** Validation du fichier avant l'import et recopie avec le bon nom
      */
-    public function validateImportHandler(array &$form, FormStateInterface $form_state)
-    {
+    public function validateImportHandler(array &$form, FormStateInterface $form_state) {
         $fs = \Drupal::service('file_system');
         if (!is_dir(ImportPerformanceData::$IMPORT_DIRECTORY)) {
             $fs->mkdir(ImportPerformanceData::$IMPORT_DIRECTORY, NULL, TRUE);
@@ -237,22 +233,20 @@ class PerformanceDataForm extends FormBase
 
     /** Méthode appelée lorsqu'on clique sur le bouton Importer
      */
-    public function executeImportHandler(array &$form, FormStateInterface $form_state)
-    {
+    public function executeImportHandler(array &$form, FormStateInterface $form_state) {
         $input = &$form_state->getUserInput();
-        $importPerfData = new ImportPerformanceData();
-        $importPerfData->executeImport($input['month']);
+        $import_perf_data = new ImportPerformanceData();
+        $import_perf_data->executeImport($input['month']);
     }
 
     /** Méthode appelée pour enregistrer les données saisies (status + commentaire)
      */
-    public function executeValidateHandler(array &$form, FormStateInterface $form_state)
-    {
+    public function executeValidateHandler(array &$form, FormStateInterface $form_state) {
         $input = &$form_state->getUserInput();
-        $bbObj = new BackbonesImport();
+        $bb_obj = new BackbonesImport();
         foreach ($input['months'] as $month => $value) {
             if (isset($input['status_' . $month]) && isset($input['comment_' . $month])) {
-                $bbObj->updateImportInDB($month, $input['status_' . $month], $input['comment_' . $month]);
+                $bb_obj->updateImportInDB($month, $input['status_' . $month], $input['comment_' . $month]);
             }
         }
     }

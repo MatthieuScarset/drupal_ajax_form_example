@@ -24,8 +24,7 @@ class FilterPerformanceDataForm extends FormBase
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId()
-    {
+    public function getFormId() {
         return 'oab_backbones_filter_performance_data_form';
     }
 
@@ -40,15 +39,14 @@ class FilterPerformanceDataForm extends FormBase
      * @return array
      *   The form structure.
      */
-    public function buildForm(array $form, FormStateInterface $form_state)
-    {
-        $ssObj = new ShadowSites();
-        $options = $ssObj->getUsedShadowSitesForSelector();
+    public function buildForm(array $form, FormStateInterface $form_state) {
+        $ss_obj = new ShadowSites();
+        $options = $ss_obj->getUsedShadowSitesForSelector();
         if (count($options) > 0) {
 
-            $selectedSite = \Drupal::routeMatch()->getParameter('site_sid');
-            if (!isset($selectedSite) || empty($selectedSite)) {
-                $selectedSite = array_keys($options)[0];
+            $selected_site = \Drupal::routeMatch()->getParameter('site_sid');
+            if (!isset($selected_site) || empty($selected_site)) {
+                $selected_site = array_keys($options)[0];
             }
             // File
             $form['shadowSites_label'] = array(
@@ -62,7 +60,7 @@ class FilterPerformanceDataForm extends FormBase
                 '#multiple_toggle' => '1',
                 '#type' => 'select',
                 '#options' => $options,
-                '#default_value' => $selectedSite,
+                '#default_value' => $selected_site,
                 '#title' => ""/*,
         "#prefix" => "<div class=\"form-item-shadowsites-select-item\">",
         "#suffix" => "</div>"*/
@@ -87,16 +85,15 @@ class FilterPerformanceDataForm extends FormBase
      * @param \Drupal\Core\Form\FormStateInterface $form_state
      *   The current state of the form.
      */
-    public function submitForm(array &$form, FormStateInterface $form_state)
-    {
+    public function submitForm(array &$form, FormStateInterface $form_state) {
         $current_route = \Drupal::routeMatch()->getRouteName();
         $date_import = \Drupal::routeMatch()->getParameter('date_import');
         //s'il n'y a pas de date dans la route précédente on prend le dernier import validé
         if ($date_import == '') {
-            $bbImportObj = new BackbonesImport();
-            $monthsImport = $bbImportObj->getLastImportsForSelection();
-            if (count($monthsImport) > 0) {//get sur le dernier import connu
-                $date_import = array_keys($monthsImport)[0];
+            $bb_import_obj = new BackbonesImport();
+            $months_import = $bb_import_obj->getLastImportsForSelection();
+            if (count($months_import) > 0) {//get sur le dernier import connu
+                $date_import = array_keys($months_import)[0];
             }
         }
         $input = &$form_state->getUserInput();

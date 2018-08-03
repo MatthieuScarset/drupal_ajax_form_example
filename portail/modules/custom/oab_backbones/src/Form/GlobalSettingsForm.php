@@ -23,8 +23,7 @@ class GlobalSettingsForm extends FormBase
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId()
-    {
+    public function getFormId() {
         return 'oab_backbones_global_settings_form';
     }
 
@@ -39,8 +38,7 @@ class GlobalSettingsForm extends FormBase
      * @return array
      *   The form structure.
      */
-    public function buildForm(array $form, FormStateInterface $form_state)
-    {
+    public function buildForm(array $form, FormStateInterface $form_state) {
         /** variables nid + texte du FO */
         $form['variables'] = array(
             '#type' => 'fieldset',
@@ -101,8 +99,7 @@ class GlobalSettingsForm extends FormBase
      * @param \Drupal\Core\Form\FormStateInterface $form_state
      *   The current state of the form.
      */
-    public function submitForm(array &$form, FormStateInterface $form_state)
-    {
+    public function submitForm(array &$form, FormStateInterface $form_state) {
         $input = &$form_state->getUserInput();
 
         \Drupal::configFactory()->getEditable('oab_backbones.settings')

@@ -14,13 +14,12 @@ namespace Drupal\oab_backbones\Classes;
  */
 class ImportShadowSites
 {
-    public static $IMPORT_DIRECTORY = 'public://backbones/sites/';
+    const IMPORT_DIRECTORY = 'public://backbones/sites/';
 
-    public function executeImport($filename)
-    {
-        $fileNameComplete = $this::$IMPORT_DIRECTORY . $filename;
-        if (file_exists($fileNameComplete) && filesize($fileNameComplete) > 0) {
-            $lines = gzfile($fileNameComplete);
+    public function executeImport($filename) {
+        $file_name_complete = $this::IMPORT_DIRECTORY . $filename;
+        if (file_exists($file_name_complete) && filesize($file_name_complete) > 0) {
+            $lines = gzfile($file_name_complete);
             if (count($lines) > 100) {
                 // Suppression de la ligne header
                 unset($lines[0]);
@@ -34,20 +33,20 @@ class ImportShadowSites
                 }
 
                 //récupération des sites en BDD
-                $shadowsSites = new ShadowSites();
-                $ss_in_db = $shadowsSites->getShadowSitesArrayFromDB();
+                $shadows_sites = new ShadowSites();
+                $ss_in_db = $shadows_sites->getShadowSitesArrayFromDB();
 
                 //Comparaison entre le fichier et la BDD : retourne les shadow sites à ajouter par le fichier
                 $ss_to_update = array_diff($ss_in_file, $ss_in_db);
 
                 if (count($ss_to_update) > 0) {
-                    $shadowsSites->saveShadowSitesInDB($ss_to_update);
+                    $shadows_sites->saveShadowSitesInDB($ss_to_update);
                 }
                 //Comparaison entre la BDD et le fichier pour les sites à supprimer
                 $ss_to_delete = array_keys(array_diff_key($ss_in_db, $ss_in_file));
 
                 if (count($ss_to_delete) > 0) {
-                    $shadowsSites->deleteShadowSitesInDB($ss_to_delete);
+                    $shadows_sites->deleteShadowSitesInDB($ss_to_delete);
                 }
                 //mise à jour de la variable de date du dernier import shadows_sites
                 $timestamp = time();
