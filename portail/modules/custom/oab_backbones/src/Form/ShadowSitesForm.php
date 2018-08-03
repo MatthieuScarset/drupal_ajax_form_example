@@ -24,8 +24,7 @@ class ShadowSitesForm extends FormBase
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId()
-    {
+    public function getFormId() {
         return 'oab_backbones_shadow_sites_form';
     }
 
@@ -40,8 +39,7 @@ class ShadowSitesForm extends FormBase
      * @return array
      *   The form structure.
      */
-    public function buildForm(array $form, FormStateInterface $form_state)
-    {
+    public function buildForm(array $form, FormStateInterface $form_state) {
         // lient vers le FO
         $form['link_fontoffice'] = array(
             '#weight' => -50,
@@ -85,7 +83,8 @@ class ShadowSitesForm extends FormBase
         $form['import']['last_import'] = array(
             '#type' => 'item',
             '#title' => $this->t('Last import'),
-            '#markup' => \Drupal::state()->get('bbp_last_import_ss') ? date('m/d/Y H:i:s', \Drupal::state()->get('bbp_last_import_ss')) : $this->t('No import executed'),
+            '#markup' => \Drupal::state()->get('bbp_last_import_ss') ? date('m/d/Y H:i:s',
+                \Drupal::state()->get('bbp_last_import_ss')) : $this->t('No import executed'),
             '#weight' => 0
         );
 
@@ -110,14 +109,14 @@ class ShadowSitesForm extends FormBase
             '#submit' => array('::saveSitesValuesHandler')
         );
 
-        $shadowSitesObject = new ShadowSites();
-        $shadowSitesTable = $shadowSitesObject->getShadowSitesTable();
+        $shadow_sites_object = new ShadowSites();
+        $shadow_sitesTable = $shadow_sites_object->getShadowSitesTable();
 
         $options = array();
         $used_values = array();
 
         // Parcours des sites
-        foreach ($shadowSitesTable AS $shadowSite) {
+        foreach ($shadow_sitesTable AS $shadowSite) {
 
             if ($shadowSite->used == 1) {
                 $used_values[$shadowSite->sid] = 1;
@@ -142,7 +141,7 @@ class ShadowSitesForm extends FormBase
         // On crée le tableau de selection
         $form['management']['sid'] = array(
             '#type' => 'tableselect',
-            '#header' => $shadowSitesObject->getHeaderTable(),
+            '#header' => $shadow_sites_object->getHeaderTable(),
             '#options' => $options,
             '#empty' => $this->t('No content available.'),
             '#value' => $used_values,
@@ -171,18 +170,17 @@ class ShadowSitesForm extends FormBase
      * @param \Drupal\Core\Form\FormStateInterface $form_state
      *   The current state of the form.
      */
-    public function submitForm(array &$form, FormStateInterface $form_state)
-    {
+    public function submitForm(array &$form, FormStateInterface $form_state) {
         //ne fait rien ici puisque 2 handler différents selon les boutons
     }
 
-    public function validateImportHandler(array &$form, FormStateInterface $form_state)
-    {
+    public function validateImportHandler(array &$form, FormStateInterface $form_state) {
         if (!is_dir(ImportShadowSites::$IMPORT_DIRECTORY)) {
             $fs = \Drupal::service('file_system');
             $fs->mkdir(ImportShadowSites::$IMPORT_DIRECTORY, NULL, TRUE);
         }
-        $file = file_save_upload('file', array('file_validate_extensions' => ''), ImportShadowSites::$IMPORT_DIRECTORY, null, FILE_EXISTS_REPLACE);
+        $file = file_save_upload('file', array('file_validate_extensions' => ''),
+            ImportShadowSites::$IMPORT_DIRECTORY, null, FILE_EXISTS_REPLACE);
         // If the file passed validation:
         if (!$file[0]) {
             $form_state->setErrorByName('file', t('No file was uploaded.'));
@@ -196,8 +194,7 @@ class ShadowSitesForm extends FormBase
 
     /** Méthode appelée lorsqu'on clique sur le bouton Importer
      */
-    public function executeImportHandler(array &$form, FormStateInterface $form_state)
-    {
+    public function executeImportHandler(array &$form, FormStateInterface $form_state) {
         $input = &$form_state->getUserInput();
         $import = new ImportShadowSites();
         $import->executeImport($input['filename']);
@@ -206,10 +203,9 @@ class ShadowSitesForm extends FormBase
 
     /** Méthode appelée lorsqu'on clique sur les bouton Enregistrer
      */
-    public function saveSitesValuesHandler(array &$form, FormStateInterface $form_state)
-    {
-        $shadowSitesObject = new ShadowSites();
-        $shadowSitesObject->reinitUsedValuesForAllSites();
+    public function saveSitesValuesHandler(array &$form, FormStateInterface $form_state) {
+        $shadow_sites_object = new ShadowSites();
+        $shadow_sites_object->reinitUsedValuesForAllSites();
 
         $input = &$form_state->getUserInput();
         // On parse les résultats
@@ -217,7 +213,7 @@ class ShadowSitesForm extends FormBase
             if (isset($value) && $value <> "") {
                 if (isset($input["site_label_" . $value])
                     && $input["site_label_" . $value] <> "") {
-                    $shadowSitesObject->updateShadowSiteInDB($value, 1, trim($input["site_label_" . $value]));
+                    $shadow_sites_object->updateShadowSiteInDB($value, 1, trim($input["site_label_" . $value]));
                 }
             }
         }

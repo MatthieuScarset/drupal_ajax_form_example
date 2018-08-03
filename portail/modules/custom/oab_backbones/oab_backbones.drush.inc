@@ -4,8 +4,7 @@
  * Implements hook_drush_command().
  * Méthode permettant d'importer les données de D7
  */
-function oab_backbones_drush_command()
-{
+function oab_backbones_drush_command() {
     $items = array();
     $items['backbones-import'] = [
         'description' => 'Import Backbones data from D7 to D8',
@@ -18,8 +17,7 @@ function oab_backbones_drush_command()
 /**
  * Méthode appelée par Drush lorsqu'on lance drush backbones-import
  */
-function drush_oab_backbones_backbones_import()
-{
+function drush_oab_backbones_backbones_import() {
 
     drush_print('DEBUT backbones import.');
     /***********************/
@@ -40,13 +38,13 @@ function drush_oab_backbones_backbones_import()
     drush_print('Récupération de l\'historique des imports sur D7...');
     $query_imports = $db_d7->select('obs_backbones_import', 'i')
         ->fields('i');
-    $resultsImports = $query_imports->execute()->fetchAll();
+    $results_imports = $query_imports->execute()->fetchAll();
 
     //3. Imports DATA
     drush_print('Récupération des données d\'imports sur D7...');
     $query_imports_data = $db_d7->select('obs_backbones_import_data', 'id')
         ->fields('id');
-    $resultsImportsData = $query_imports_data->execute()->fetchAll();
+    $results_imports_data = $query_imports_data->execute()->fetchAll();
 
     /***********************/
     /*** Connexion à D8 ****/
@@ -76,7 +74,7 @@ function drush_oab_backbones_backbones_import()
 
     //2. Import des "Imports"
     drush_print('Enregistrement de l\'historique des imports sur D8...');
-    foreach ($resultsImports as $import) {
+    foreach ($results_imports as $import) {
         $query = \Drupal\Core\Database\Database::getConnection()->merge('oab_backbones_import')
             ->key(array('date' => $import->date))
             ->insertFields(array(
@@ -93,7 +91,7 @@ function drush_oab_backbones_backbones_import()
 
     //3. Import des datas des "Imports"
     drush_print('Enregistrement des données d\'imports sur D8...');
-    foreach ($resultsImportsData as $data) {
+    foreach ($results_imports_data as $data) {
         $query = \Drupal\Core\Database\Database::getConnection()->merge('oab_backbones_import_data')
             ->key(array('date' => $data->date,
                 'source_site' => $data->source_site,

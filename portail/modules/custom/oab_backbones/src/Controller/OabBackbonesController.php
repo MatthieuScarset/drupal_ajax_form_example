@@ -23,8 +23,7 @@ class OabBackbonesController extends ControllerBase
 {
     /** Méthode appelée quand on va voir le détail d'un import en BO
      */
-    public function viewDataImportAdmin(Request $request, $date_import, $site_sid)
-    {
+    public function viewDataImportAdmin(Request $request, $date_import, $site_sid) {
 
         //Récupération du formulaire
         $form = \Drupal::formBuilder()->getForm(FilterPerformanceDataForm::class);
@@ -35,8 +34,8 @@ class OabBackbonesController extends ControllerBase
         }
 
         //récupération des datas
-        $bbImportDataObj = new BackbonesImportData();
-        $data = $bbImportDataObj->getDatasForSiteAndDate($date_import, $site_sid);
+        $bb_import_data_obj = new BackbonesImportData();
+        $data = $bb_import_data_obj->getDatasForSiteAndDate($date_import, $site_sid);
 
         //construction des tableaux pour le rendu (résultats sur 2 tableaux)
         $tabs = array();
@@ -62,8 +61,7 @@ class OabBackbonesController extends ControllerBase
     }
 
     /** Méthode appelée par la partie FO pour afficher toutes les données */
-    public function viewFrontPage(Request $request, $date_import, $site_sid)
-    {
+    public function viewFrontPage(Request $request, $date_import, $site_sid) {
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         if ($current_language != "en") {
             //on lance une 404
@@ -72,11 +70,11 @@ class OabBackbonesController extends ControllerBase
             //Récupération du formulaire
             $form = \Drupal::formBuilder()->getForm(FilterPerformanceDataForm::class);
 
-            $bbImportObj = new BackbonesImport();
-            $monthsImport = $bbImportObj->getLastImportsForSelection();
-            if ($date_import == '' && count($monthsImport) > 0) {
+            $bb_import_obj = new BackbonesImport();
+            $months_import = $bb_import_obj->getLastImportsForSelection();
+            if ($date_import == '' && count($months_import) > 0) {
                 //get sur le dernier import connu
-                $date_import = array_keys($monthsImport)[0];
+                $date_import = array_keys($months_import)[0];
             }
 
             //pas de sid dans l'URL on prend la premiere valeur du formulaire
@@ -85,9 +83,9 @@ class OabBackbonesController extends ControllerBase
             }
 
             //récupération des datas
-            $bbImportDataObj = new BackbonesImportData();
-            $data = $bbImportDataObj->getDatasForSiteAndDate($date_import, $site_sid);
-            $comment = $bbImportObj->getCommentForImport($date_import);
+            $bb_import_data_obj = new BackbonesImportData();
+            $data = $bb_import_data_obj->getDatasForSiteAndDate($date_import, $site_sid);
+            $comment = $bb_import_obj->getCommentForImport($date_import);
 
             //construction des tableaux pour le rendu (résultats sur 2 tableaux)
             $tabs = array();
@@ -101,7 +99,7 @@ class OabBackbonesController extends ControllerBase
 
             return array(
                 '#intro' => \Drupal::config('oab_backbones.settings')->get('bbp_front_text'),
-                '#monthsImport' => $monthsImport,
+                '#monthsImport' => $months_import,
                 '#performanceDatas' => $tabs,
                 '#filterForm' => $form,
                 '#currentImportDate' => $date_import,
@@ -117,20 +115,19 @@ class OabBackbonesController extends ControllerBase
     }
 
     /** Méthode appelée pour l'onglet Global Settings de la partie BO */
-    public function viewGlobalSettings(Request $request)
-    {
+    public function viewGlobalSettings(Request $request) {
 
-        $biObj = new BackbonesImport();
-        $imports = $biObj->getBackbonesImportTable()->fetchAll();
+        $bi_obj = new BackbonesImport();
+        $imports = $bi_obj->getBackbonesImportTable()->fetchAll();
 
         //documentation
-        $pathDoc = file_create_url(drupal_get_path('module', 'oab_backbones') . '/BackbonesNotice.pdf');
+        $path_doc = file_create_url(drupal_get_path('module', 'oab_backbones') . '/BackbonesNotice.pdf');
         //Récupération du formulaire
         $form = \Drupal::formBuilder()->getForm(GlobalSettingsForm::class);
 
         return array(
             '#lastsImports' => $imports,
-            '#documentation' => $pathDoc,
+            '#documentation' => $path_doc,
             '#variablesForm' => $form,
             '#theme' => 'backbones_global_settings'
         );
@@ -140,50 +137,49 @@ class OabBackbonesController extends ControllerBase
     /**
      * Méthode appelée quand on va sur la page See top ten d'un import
      */
-    public function viewTopTenAdmin(Request $request, $date_import)
-    {
+    public function viewTopTenAdmin(Request $request, $date_import) {
         //récupération des datas
-        $bbImportDataObj = new BackbonesImportData();
-        $returnRTD = $bbImportDataObj->getTopTenDataForRTD($date_import);
-        $dataPLR = $bbImportDataObj->getTopTenDataForPLR($date_import);
-        $dataJITTER = $bbImportDataObj->getTopTenDataForJITTER($date_import);
+        $bb_import_data_obj = new BackbonesImportData();
+        $return_rtd = $bb_import_data_obj->getTopTenDataForRTD($date_import);
+        $data_plr = $bb_import_data_obj->getTopTenDataForPLR($date_import);
+        $data_jitter = $bb_import_data_obj->getTopTenDataForJITTER($date_import);
 
         //construction des tableaux pour le rendu (résultats sur 2 tableaux)
-        $lastimport = $returnRTD["lastimport"];
-        $dataRTD = $returnRTD["data"];
-        $tabsRTD = array();
-        for ($i = 0; $i < count($dataRTD); $i++) {
-            if ($i < count($dataRTD) / 2) {
-                $tabsRTD[0][] = $dataRTD[$i];
+        $last_import = $return_rtd["lastimport"];
+        $data_rtd = $return_rtd["data"];
+        $tabs_rtd = array();
+        for ($i = 0; $i < count($data_rtd); $i++) {
+            if ($i < count($data_rtd) / 2) {
+                $tabs_rtd[0][] = $data_rtd[$i];
             } else {
-                $tabsRTD[1][] = $dataRTD[$i];
+                $tabs_rtd[1][] = $data_rtd[$i];
             }
         }
 
-        $tabsPLR = array();
-        for ($i = 0; $i < count($dataPLR); $i++) {
-            if ($i < count($dataPLR) / 2) {
-                $tabsPLR[0][] = $dataPLR[$i];
+        $tabs_plr = array();
+        for ($i = 0; $i < count($data_plr); $i++) {
+            if ($i < count($data_plr) / 2) {
+                $tabs_plr[0][] = $data_plr[$i];
             } else {
-                $tabsPLR[1][] = $dataPLR[$i];
+                $tabs_plr[1][] = $data_plr[$i];
             }
         }
 
-        $tabsJITTER = array();
-        for ($i = 0; $i < count($dataJITTER); $i++) {
-            if ($i < count($dataJITTER) / 2) {
-                $tabsJITTER[0][] = $dataJITTER[$i];
+        $tabs_jitter = array();
+        for ($i = 0; $i < count($data_jitter); $i++) {
+            if ($i < count($data_jitter) / 2) {
+                $tabs_jitter[0][] = $data_jitter[$i];
             } else {
-                $tabsJITTER[1][] = $dataJITTER[$i];
+                $tabs_jitter[1][] = $data_jitter[$i];
             }
         }
 
         return array(
             '#actualimport' => substr($date_import, 4, 2) . '/' . substr($date_import, 0, 4),
-            '#lastimport' => substr($lastimport, 4, 2) . '/' . substr($lastimport, 0, 4),
-            '#dataRTD' => $tabsRTD,
-            '#dataPLR' => $tabsPLR,
-            '#dataJITTER' => $tabsJITTER,
+            '#lastimport' => substr($last_import, 4, 2) . '/' . substr($last_import, 0, 4),
+            '#dataRTD' => $tabs_rtd,
+            '#dataPLR' => $tabs_plr,
+            '#dataJITTER' => $tabs_jitter,
             '#theme' => 'backbones_top_ten_data_admin',
             '#attached' => array(
                 'library' => array(
