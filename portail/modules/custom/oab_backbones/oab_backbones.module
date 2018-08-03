@@ -10,15 +10,13 @@ define('JITTER_BA', 20);
 define('PLR_AB', 22);
 define('PLR_BA', 24);
 
-function oab_backbones_theme_registry_alter(&$theme_registry)
-{
+function oab_backbones_theme_registry_alter(&$theme_registry) {
 }
 
 /**
  * Définition des templates custom utilisés et les variables associées
  */
-function oab_backbones_theme($existing, $type, $theme, $path)
-{
+function oab_backbones_theme($existing, $type, $theme, $path) {
 
     return array(
         'backbones_performance_data_admin' =>
