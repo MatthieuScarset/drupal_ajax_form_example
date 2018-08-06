@@ -52,7 +52,7 @@ oab.gdpr_settings:
     _form: '\Drupal\oab_backoffice\Form\OabSettingsGdprForm'
     _title: 'GDPR/Webform settings'
   requirements:
-    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
+    _custom_access: \Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm::access
 
 
 #page d'administration par défaut
