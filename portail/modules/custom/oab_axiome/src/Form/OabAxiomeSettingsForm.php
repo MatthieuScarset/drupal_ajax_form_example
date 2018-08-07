@@ -64,13 +64,13 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
     $form['archive_management']['download_archive'] = array(
       '#type' => 'submit',
       '#value' => $this->t("Download the selected archive"),
-      '#submit' => array(array($this, 'download_archive'))
+      '#submit' => array(array($this, 'downloadArchive'))
     );
 
     $form['archive_management']['reimport_archive'] = array(
       '#type' => 'submit',
       '#value' => $this->t("Reimport the selected archive"),
-      '#submit' => array(array($this, 'reimport_archive'))
+      '#submit' => array(array($this, 'reimportArchive'))
     );
 
 
@@ -90,18 +90,26 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
   }
 
 
-  public function reimport_archive(&$form, FormStateInterface $form_state) {
+    /**
+     * Déplace l'archive selectionner pour repasser l'import Axiome
+     */
+  public function reimportArchive(&$form, FormStateInterface $form_state) {
 
+      // Je recupère le nom de l'archive
       $archive = $form_state->getValue('select_archive');
 
+      // Je recrée les paths
       $archive_path = $this->getAxiomeSaveDir() . "/$archive";
       $new_path = \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . "/$archive");
 
+
+      // Si le fichier n'existe pas, je met une erreur (mais Drupal devrait avoir coupé avant si le fichier n'existe pas)
       if (!file_exists($archive_path)) {
           drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
           return;
       }
 
+      //Je déplace le fichier et j'affiche un message de succès ou d'erreur
       if (!rename($archive_path, $new_path)) {
           drupal_set_message($this->t("Moving archive failed."), 'error');
       } else {
@@ -111,18 +119,24 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
   }
 
 
-    public function download_archive(&$form, FormStateInterface $form_state) {
+    /**
+     * Permet de télécharger l'archive sélectionnée
+     */
+    public function downloadArchive(&$form, FormStateInterface $form_state) {
 
+        // Je recupère l'archive selectionnée
         $archive = $form_state->getValue('select_archive');
 
+        // Recreation du path
         $archive_path = $this->getAxiomeSaveDir() . "/$archive";
 
-
+        //Petit check si le fichier existe
         if (!file_exists($archive_path)) {
             drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
             return;
         }
 
+        // Je crée une nouvelle reponse à renvoyer à l'utilisateur avec le fichier
         $response = new BinaryFileResponse($archive_path);
 
         $response->setContentDisposition(
@@ -135,15 +149,16 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
 
     /**
-     * @param string $lang
-     * @param int $size
-     * @return array
+     * Renvoie la liste des archives présentes dans le dossier sauvegarde pour une langue donnée (int ou fr)
      */
     private function getArchiveListe($lang = 'int', $size = 10) {
         $dir_path = $this->getAxiomeSaveDir();
 
         $ret = [];
+
+        // Ouverture du dossier sauvegarde
         if ($dir = opendir($dir_path)) {
+            // Je lis les entrées tant qu'on a pas atteint le nbre d'occurrences passé en param
             while (false !== ($entry = readdir($dir)) && count($ret) < $size ) {
                 $regex = "/ruby_".$lang."_\d{8}-\d{2}-\d{2}-\d{2}-\d{2}[.]zip/";
                 if (preg_match($regex, $entry)) {
@@ -158,6 +173,9 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
     }
 
 
+    /**
+     * Pour recuperer facilement le dossier de sauvegarde
+     */
     private function getAxiomeSaveDir() {
         return \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . '/' . AXIOME_SAVE_FOLDER);
     }
