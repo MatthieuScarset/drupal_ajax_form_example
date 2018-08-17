@@ -5,6 +5,8 @@ namespace Drupal\oab_subhomes;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Link;
+use Drupal\oab_subhomes\Entity\SubhomeEntityType;
+use Drupal\oab_subhomes\Entity\SubhomeEntity;
 
 /**
  * Defines a class to build a listing of Subhome entity entities.
@@ -21,7 +23,7 @@ class SubhomeEntityListBuilder extends EntityListBuilder {
         $header['id'] = $this->t('Subhome entity ID');
         $header['name'] = $this->t('Name');
         $header['entity_type'] = $this->t('Entity type');
-        $header['subhome'] = $this->t('Subhome');
+        $header['subhome'] = $this->t('Taxo Subhome');
         $header['created'] = $this->t('Created');
         $header['modified'] = $this->t('Modified');
         return $header + parent::buildHeader();
@@ -38,7 +40,12 @@ class SubhomeEntityListBuilder extends EntityListBuilder {
           'entity.subhome_entity.edit_form',
           ['subhome_entity' => $entity->id()]
         );
-        $row['entity_type'] = $entity->bundle();
+
+        $entity_type = SubhomeEntityType::load($entity->bundle());
+
+        $row['entity_type'] = $entity_type !== null
+                    ? $entity_type->label()
+                    : $entity->bundle();
         $row['subhome'] = $entity->getSubhome()->getName();
 
         $row['created'] = Date('d/m/Y H:i:s', $entity->getCreatedTime());
