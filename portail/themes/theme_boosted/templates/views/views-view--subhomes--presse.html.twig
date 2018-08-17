@@ -1,0 +1,103 @@
+{#
+/**
+ * @file
+ * Default theme implementation for main view template.
+ *
+ * Available variables:
+ * - attributes: Remaining HTML attributes for the element.
+ * - css_name: A css-safe version of the view name.
+ * - css_class: The user-specified classes names, if any.
+ * - header: The optional header.
+ * - footer: The optional footer.
+ * - rows: The results of the view query, if any.
+ * - empty: The content to display if there are no rows.
+ * - pager: The optional pager next/prev links to display.
+ * - exposed: Exposed widget form/info to display.
+ * - feed_icons: Optional feed icons to display.
+ * - more: An optional link to the next page of results.
+ * - title: Title of the view, only used when displaying in the admin preview.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the view title.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the view title.
+ * - attachment_before: An optional attachment view to be displayed before the
+ *   view content.
+ * - attachment_after: An optional attachment view to be displayed after the
+ *   view content.
+ * - dom_id: Unique id for every view being printed to give unique class for
+ *   Javascript.
+ *
+ * @see template_preprocess_views_view()
+ *
+ * @ingroup templates
+ */
+#}
+
+{% if (subhome_entity) %}
+    {% set subhome_title = subhome_entity.get('title').value %}
+    {% set subhome_description = subhome_entity.get('description').value %}
+{% endif %}
+
+
+
+{%
+    set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-id-' ~ id,
+    'view-display-id-' ~ display_id,
+    dom_id ? 'js-view-dom-id-' ~ dom_id,
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+    <div class="row subhome-header">
+        {% if subhome_title %}
+           <div style="display: inline-block; border-right: 4px solid grey; padding: 2rem; height: 100%">
+               <h1 >{{ subhome_title}}</h1>
+           </div>
+        {% endif %}
+        {% if subhome_description %}
+            <div style="display: inline-block" >
+                {{ subhome_description }}
+            </div>
+        {% endif %}
+    </div>
+
+    {#
+        METTRE ICI LE CARROUSSEL
+    $#}
+
+    <div class="row">
+        <div class="col-sm-8">
+            {# Contenu principal #}
+
+            {% if exposed %}
+                <div class="view-filters form-group">
+                    {{ exposed }}
+                </div>
+            {% endif %}
+
+            {% if rows %}
+                <div class="view-content">
+                    {{ rows }}
+                </div>
+            {% elseif empty %}
+                <div class="view-empty">
+                    {{ empty }}
+                </div>
+            {% endif %}
+
+            {% if pager %}
+                {{ pager }}
+            {% endif %}
+        </div>
+        <div class="col-sm-4">
+            {# blocks du coté #}
+        </div>
+    </div>
+    {#{% if attachment_before %}
+        <div class="attachment attachment-before">
+            {{ attachment_before }}
+        </div>
+    {% endif %}#}
+</div>

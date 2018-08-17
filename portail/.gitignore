@@ -34,3 +34,4 @@ sites/simpletest
 
 # Ignore SimpleTest multi-site environment.
 # simpletest
+vendor/drupal
