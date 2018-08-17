@@ -118,6 +118,14 @@ function subhomes_views_exposed_form(&$form) {
         if ($current_language == 'ru') {
             unset($form['press_formats']);
         }
+
+        if (isset($form['created']['min']) && isset($form['created']['max'])) {
+            $form['created']['min']['#type'] = "date";
+            $form['created']['min']['#default_value'] = Date('Y-m-d', strtotime(" -6 months"));
+
+            $form['created']['max']['#type'] = "date";
+            $form['created']['max']['#default_value'] = Date('Y-m-d');;
+        }
     }
 
     // subhome produits
