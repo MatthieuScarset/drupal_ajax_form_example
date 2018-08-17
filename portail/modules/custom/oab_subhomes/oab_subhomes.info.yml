@@ -1,0 +1,8 @@
+name: 'OAB Subhomes'
+type: module
+description: 'Module for subhomes entity generation'
+core: 8.x
+package: OAB
+
+configure: oab.settings
+project: 'oab_subhomes'

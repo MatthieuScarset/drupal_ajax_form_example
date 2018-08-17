@@ -6,6 +6,7 @@ use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\Core\Template\Attribute;
 use Drupal\oab_dvi\DviHelper;
+use Drupal\oab_subhomes\Entity\SubhomeEntity;
 
 /**
  * Implements hook_preprocess_HOOK() for HTML document templates.
@@ -236,6 +237,38 @@ function theme_boosted_preprocess_page(&$variables) {
 	}elseif($route_name == 'user.pass'){
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
+
+	// Si on est dans une subhome
+	if (strpos($route_name, 'view.subhomes') !== false) {
+	    ## Si on est dans une vue, je charge la vue
+        $route_parts = explode('.', $route_name);
+
+        $view_id = $route_parts[1];
+        $display_id = $route_parts[2];
+
+        $view = \Drupal\views\Entity\View::load($view_id);
+        if ($view !== null) {
+            /** @var \Drupal\views\ViewExecutable $view_executable */
+            $view_executable = $view->getExecutable();
+            $view_executable->setDisplay($display_id);
+            $view_executable->preview();
+            if (isset($view_executable->argument['field_subhome_target_id'])) {
+
+                $sid = $view_executable->argument['field_subhome_target_id']->value;
+                $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+                // Si on a une entité pour cette vue, je change le mode d'affichage de la page
+                // pour le passer en container-fluid, ie. avoir la page complète sans bordure
+                // et je cache le titre de la page
+                if ($entity !== null) {
+                    $variables['page']['containerClass'] = 'container-fluid';
+                    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+                }
+
+            }
+        }
+    }
+
 }
 
 function theme_boosted_preprocess_region(&$variables) {
@@ -245,6 +278,8 @@ function theme_boosted_preprocess_region(&$variables) {
 
 
 function theme_boosted_preprocess_views_view(&$variables){
+
+    /** @var Drupal\views\ViewExecutable $view */
   $view = $variables['view'];
   $id = $view->storage->id();
 
@@ -282,6 +317,23 @@ function theme_boosted_preprocess_views_view(&$variables){
         }
       }
     }
+
+    /*
+     * Nouvelle gestion des subhomes
+     * Je passe en variable l'entité subhome correspondante
+     */
+    if (isset($view->argument['field_subhome_target_id'])) {
+
+        $sid = $view->argument['field_subhome_target_id']->value;
+        $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+        // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+        if ($entity !== null) {
+            $variables[SubhomeEntity::TWIG_VAR_NAME] = $entity;
+        }
+    }
+
+
   }
   elseif ($id == 'offices_map_view'){
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
