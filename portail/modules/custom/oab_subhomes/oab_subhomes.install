@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * MAJ de la view subhomes
+ */
+function oab_subhomes_update_8001() {
+    oabt_YmlImport('views.view.subhomes.yml');
+}
