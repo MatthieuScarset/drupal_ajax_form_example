@@ -261,7 +261,6 @@ function theme_boosted_preprocess_page(&$variables) {
                 // pour le passer en container-fluid, ie. avoir la page complète sans bordure
                 // et je cache le titre de la page
                 if ($entity !== null) {
-                    $variables['page']['containerClass'] = 'container-fluid';
                     $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
                 }
 
