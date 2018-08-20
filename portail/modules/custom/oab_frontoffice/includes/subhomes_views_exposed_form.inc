@@ -107,11 +107,8 @@ function subhomes_views_exposed_form(&$form) {
 
     // subhome presse
     if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-        if (isset($form['solutions'])) {
-            $form['solutions']['#options']['All'] = t('Solution');
-        }
-        if (isset($form['press_formats'])) {
-            $form['press_formats']['#options']['All'] = t('Type');
+        if (isset($form['field_solution_target_id'])) {
+            $form['field_solution_target_id']['#options']['All'] = t('Solution');
         }
 
         //Suppression de filtres pour le russe
@@ -121,10 +118,7 @@ function subhomes_views_exposed_form(&$form) {
 
         if (isset($form['created']['min']) && isset($form['created']['max'])) {
             $form['created']['min']['#type'] = "date";
-            $form['created']['min']['#default_value'] = Date('Y-m-d', strtotime(" -6 months"));
-
             $form['created']['max']['#type'] = "date";
-            $form['created']['max']['#default_value'] = Date('Y-m-d');;
         }
     }
 
