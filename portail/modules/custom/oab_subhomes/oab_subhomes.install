@@ -3,6 +3,14 @@
 /**
  * MAJ de la view subhomes
  */
-function oab_subhomes_update_8001() {
+function oab_subhomes_update_8001()
+{
     oabt_YmlImport('views.view.subhomes.yml');
+}
+
+/**
+ * Création des fields + display form de l'entité Presse
+ */
+function oab_subhomes_update_8002() {
+    include_once('updates/update_8002.inc');
 }

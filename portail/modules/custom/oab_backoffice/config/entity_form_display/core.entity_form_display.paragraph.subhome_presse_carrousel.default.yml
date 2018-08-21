@@ -1,0 +1,87 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.paragraph.subhome_presse_carrousel.field_accroche
+    - field.field.paragraph.subhome_presse_carrousel.field_button
+    - field.field.paragraph.subhome_presse_carrousel.field_title
+    - field.field.paragraph.subhome_presse_carrousel.field_visual
+    - paragraphs.paragraphs_type.subhome_presse_carrousel
+  module:
+    - entity_browser
+    - field_group
+    - paragraphs
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_button:
+      children:
+        - field_button
+      parent_name: ''
+      weight: 4
+      format_type: fieldset
+      format_settings:
+        label: Button
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: Button
+id: paragraph.subhome_presse_carrousel.default
+targetEntityType: paragraph
+bundle: subhome_presse_carrousel
+mode: default
+content:
+  field_accroche:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_button:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_visual:
+    weight: 3
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

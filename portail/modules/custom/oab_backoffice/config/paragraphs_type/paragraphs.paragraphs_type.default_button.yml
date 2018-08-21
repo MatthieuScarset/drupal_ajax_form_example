@@ -1,0 +1,8 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: default_button
+label: 'Default button'
+icon_uuid: null
+description: 'Paragraph pour les boutons par défaut du site'
+behavior_plugins: {  }
