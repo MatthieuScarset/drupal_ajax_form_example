@@ -78,3 +78,25 @@ function oab_subhomes_theme_suggestions_views_view_alter(array &$suggestions, ar
         }
     }
 }
+
+
+function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
+                                                         $cacheable) {
+    $allowedValues = array (
+        "black-on-orange"   => "Black on Orange",
+        "white-on-orange"   => "White on Orange",
+        "orange-on-white"   => "Orange on White",
+        "black-on-white"    => "Black on White",
+        "grey-on-white"     => "Grey on White",
+        "orange-on-black"   => "Orange on Black",
+        "white-on-black"    => "White on Black",
+        "grey-on-black"     => "Grey on Black",
+        "white-on-obs-grey"  => "White on OBS Grey",
+        "black-on-yellow"   => "Black on Yellow",
+        "black-on-blue"     => "Black on Blue",
+        "black-on-green"    => "Black on Green",
+        "black-on-purple"   => "Black on purple",
+        "black-on-pink"     => "Black on pink"
+    );
+    return $allowedValues;
+}

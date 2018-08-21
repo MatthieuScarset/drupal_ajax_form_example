@@ -1894,3 +1894,75 @@ body.page-node-type-custom-page{
 .page-node-type-distributor #block-theme-boosted-page-title h1.page-header {
     text-transform: uppercase;
 }
+
+
+.black-on-orange {
+    background-color: #FF7900;
+    color: #000000;
+}
+
+.white-on-orange {
+    background-color: #ff7900;
+    color: #FFF;
+}
+
+.orange-on-white {
+    background-color: #FFF;
+    color: #ff7900;
+}
+
+.black-on-white {
+    background-color: #FFF;
+    color: #000;
+}
+
+.grey-on-white {
+    background-color: #FFF;
+    color: #666666;
+}
+
+.orange-on-black {
+    background-color: #000;
+    color: #ff7900;
+}
+
+.white-on-black {
+    background-color: #000;
+    color: #FFF;
+}
+
+.grey-on-black {
+    background-color: #000;
+    color: #999999
+}
+
+.white-on-obs-grey {
+    background-color: #595959;
+    color: #FFF
+}
+
+.black-on-yellow {
+    background-color: #FFD200;
+    color: #000;
+}
+
+.black-on-blue {
+    background-color: #4BB4E6;
+    color: #000;
+}
+
+.black-on-green {
+    background-color: #50BE87;
+    color: #000;
+}
+
+.black-on-purple {
+    background-color: #A885D8;
+    color: #000;
+}
+
+.black-on-pink {
+    background-color: #FFB4E6;
+    color: #000;
+}
+

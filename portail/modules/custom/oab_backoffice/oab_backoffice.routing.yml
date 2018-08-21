@@ -9,7 +9,7 @@ oab.settings:
 oab.settings_subhomes:
   path: '/admin/structure/oab/settings/subhomes'
   defaults:
-    _form: '\Drupal\oab_backoffice\Form\oabSettingsSubhomesForm'
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsSubhomesForm'
     _title: 'Subhomes settings'
   requirements:
     _permission: 'administer site configuration'
@@ -17,7 +17,7 @@ oab.settings_subhomes:
 oab.settings_pardot:
   path: '/admin/structure/oab/settings/pardot'
   defaults:
-    _form: '\Drupal\oab_backoffice\Form\oabSettingsPardotForm'
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsPardotForm'
     _title: 'Pardot settings'
   requirements:
     _permission: 'administer site configuration'
@@ -33,7 +33,7 @@ oab.general_settings:
 oab.specific_access_settings:
   path: '/admin/structure/oab/settings/specific-access'
   defaults:
-    _form: '\Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm'
+    _form: '\Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm'
     _title: 'Specific access settings'
   requirements:
     _permission: 'administer site configuration'
@@ -41,7 +41,7 @@ oab.specific_access_settings:
 oab.settings_ece:
   path: '/admin/structure/oab/settings/ece'
   defaults:
-    _form: '\Drupal\oab_backoffice\Form\oabSettingsEceForm'
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsEceForm'
     _title: 'ECE settings'
   requirements:
     _permission: 'administer site configuration'
@@ -52,7 +52,7 @@ oab.gdpr_settings:
     _form: '\Drupal\oab_backoffice\Form\OabSettingsGdprForm'
     _title: 'GDPR/Webform settings'
   requirements:
-    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
+    _custom_access: \Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm::access
 
 
 #page d'administration par défaut

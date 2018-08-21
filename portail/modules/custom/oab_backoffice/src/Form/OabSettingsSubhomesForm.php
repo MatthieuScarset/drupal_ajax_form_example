@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class oabSettingsSubhomesForm extends ConfigFormBase {
+class OabSettingsSubhomesForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
@@ -85,6 +85,12 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
           '#default_value' => $config->get('distributor_term_tid'),
       );
 
+      $form['analysts_term_tid'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Analysts term ID'),
+          '#default_value' => $config->get('analysts_term_tid'),
+      );
+
       $form['press_meta'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('Meta Title for Press subhome'),
@@ -127,7 +133,13 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
           '#default_value' => $config->get('product_meta'),
       );
 
-    return parent::buildForm($form, $form_state);
+      $form['analysts_meta'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Meta Title for Analysts subhome'),
+          '#default_value' => $config->get('analysts_meta'),
+      );
+
+      return parent::buildForm($form, $form_state);
   }
 
   /**
@@ -145,6 +157,7 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
       ->set('product_term_tid', $form_state->getValue('product_term_tid'))
         ->set('product_dvi_term_tid', $form_state->getValue('product_dvi_term_tid'))
         ->set('distributor_term_tid', $form_state->getValue('distributor_term_tid'))
+        ->set('analysts_term_tid', $form_state->getValue('analysts_term_tid'))
         ->set('press_meta', $form_state->getValue('press_meta'))
         ->set('partner_meta', $form_state->getValue('partner_meta'))
         ->set('customer_meta', $form_state->getValue('customer_meta'))
@@ -152,7 +165,8 @@ class oabSettingsSubhomesForm extends ConfigFormBase {
         ->set('blog_meta', $form_state->getValue('blog_meta'))
         ->set('magazine_meta', $form_state->getValue('magazine_meta'))
         ->set('product_meta', $form_state->getValue('product_meta'))
-      ->save();
+        ->set('analysts_meta', $form_state->getValue('analysts_meta'))
+        ->save();
 
     parent::submitForm($form, $form_state);
   }

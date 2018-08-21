@@ -1,7 +1,7 @@
 <?php
 namespace Drupal\oab_backoffice\Controller;
 
-define('SESSION_NAME','oab_backoffice.export_file_download' );
+define('SESSION_NAME', 'oab_backoffice.export_file_download');
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\StackMiddleware\Session;
@@ -17,18 +17,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OabExportFileListController extends ControllerBase {
     private static $dir = "public://export_document";
-    private static $log_name = "ExportFile";
+    private static $logName = "ExportFile";
 
     public function runBatch(Request $request) {
 
-        $originPath = $request->headers->get('referer');
+        $origin_path = $request->headers->get('referer');
 
         ##Je tente de regarder s'il y a des paramètres dans l'URL
         # ie. si des filtres ont été ajoutés à la vue
         $params = [];
-        $originPath_parts = explode("?", $originPath);
-        if (count($originPath_parts) > 1) {
-            $parameters = explode("&", $originPath_parts[1]);
+        $origin_path_parts = explode("?", $origin_path);
+        if (count($origin_path_parts) > 1) {
+            $parameters = explode("&", $origin_path_parts[1]);
             foreach ($parameters as $param_string) {
                 $param = explode("=", $param_string);
                 if (isset($param[0]) && isset($param[1])) {
@@ -43,8 +43,9 @@ class OabExportFileListController extends ControllerBase {
                 mkdir(self::$dir, 0775);
             } catch (\exception $e) {
                 drupal_set_message("Erreur lors de la création du dossier d'export. Voir en log pour plus d'informations", 'error', true);
-                \Drupal::logger(self::$log_name)->notice("Erreur lors de la création du dossier d'export avec le message : " . $e->getMessage());
-                $response = new RedirectResponse($originPath);
+                \Drupal::logger(self::$logName)
+                    ->notice("Erreur lors de la création du dossier d'export avec le message : " . $e->getMessage());
+                $response = new RedirectResponse($origin_path);
                 $response->send();
             }
         }
@@ -94,15 +95,15 @@ class OabExportFileListController extends ControllerBase {
 
         ## On remonte une erreur si on n'arrive pas à écrire le fichier
         if (false === $this->write_file(array($col_name), $file_name)) {
-            \Drupal::logger(self::$log_name)->notice("Erreur lors de la creation du fichier");
+            \Drupal::logger(self::$logName)->notice("Erreur lors de la creation du fichier");
             drupal_set_message("Erreur lors de la creation du fichier", 'error', true);
-            $response = new RedirectResponse($originPath);
+            $response = new RedirectResponse($origin_path);
             $response->send();
         }
 
         ##j'enregistre l'URL d'origine (utilisée pour créer un lien de retour à la fin du batch)
         $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
-        $tempstore->set('origin_url', $originPath);
+        $tempstore->set('origin_url', $origin_path);
         $tempstore->set('file_path', self::$dir . "/" .$file_name);
 
 
@@ -174,9 +175,9 @@ class OabExportFileListController extends ControllerBase {
 
 
                         foreach ($values as $key => $value) {
-                            if ($key == 0)
+                            if ($key == 0) {
                                 $value_string .= self::getValueFromValueArray($value);
-                            else {
+                            } else {
                                 $value_string .= ", " . self::getValueFromValueArray($value);
                             }
                         }
@@ -192,7 +193,7 @@ class OabExportFileListController extends ControllerBase {
         $success = self::write_file($ret, $file_name);
         #On remonte une erreur si le fichier n'est pas ecrit
         if ($success === false) {
-            \Drupal::logger(self::$log_name)->notice("Erreur lors de la creation du fichier");
+            \Drupal::logger(self::$logName)->notice("Erreur lors de la creation du fichier");
             drupal_set_message("Erreur lors de la creation du fichier", 'error', true);
 
             $context['results'][] = 'Erreur lors de la creation du fichier';
@@ -208,7 +209,7 @@ class OabExportFileListController extends ControllerBase {
         if (file_exists(self::$dir . "/" .$file_name)) {
 
         } else {
-            \Drupal::logger(self::$log_name)->notice("le fichier d'export est introuvable");
+            \Drupal::logger(self::$logName)->notice("le fichier d'export est introuvable");
         }
     }
 
@@ -258,30 +259,30 @@ class OabExportFileListController extends ControllerBase {
 
 
     private static function write_file($tab, $file_name) {
-        $toWrite = "";
+        $to_write = "";
         foreach ($tab as $key => $row) {
-            $toWrite .= implode(";", $row);
-            $toWrite .= "\r\n";
+            $to_write .= implode(";", $row);
+            $to_write .= "\r\n";
         }
         $path = self::$dir."/$file_name";
-        #$file = file_unmanaged_save_data($toWrite, $path);
-        return file_put_contents($path, $toWrite, FILE_APPEND);
+        #$file = file_unmanaged_save_data($to_write, $path);
+        return file_put_contents($path, $to_write, FILE_APPEND);
 
 
     }
 
 
-    private static function getValueFromValueArray($valueArray) {
+    private static function getValueFromValueArray($value_array) {
         $ret = "";
 
         ##Gestion des Targetsid
-        if (isset($valueArray['target_id'])) {
-            $target_id = intval($valueArray['target_id']);
-            if ($target_id == 0 ) {
-                return $valueArray['target_id'];
+        if (isset($value_array['target_id'])) {
+            $target_id = intval($value_array['target_id']);
+            if ($target_id == 0) {
+                return $value_array['target_id'];
             }
             $entity = \Drupal\taxonomy\Entity\Term::load($target_id);
-            if (!is_null($entity) and is_a($entity,'Drupal\taxonomy\Entity\Term' )) {
+            if (!is_null($entity) and is_a($entity, 'Drupal\taxonomy\Entity\Term')) {
                 return $entity->getName();
             }
 
@@ -293,17 +294,17 @@ class OabExportFileListController extends ControllerBase {
         }
 
         ##Cas des "value"
-        if (isset($valueArray['value'])) {
+        if (isset($value_array['value'])) {
 
             # Cas d'un timestamp
-            if (strlen($valueArray['value']) == 10) {
-                $date = date('d/m/Y H:i:s', $valueArray['value']);
+            if (strlen($value_array['value']) == 10) {
+                $date = date('d/m/Y H:i:s', $value_array['value']);
                 if ($date !== false) {
                     return $date;
                 }
             }
 
-            return $valueArray['value'];
+            return $value_array['value'];
         }
 
         return $ret;

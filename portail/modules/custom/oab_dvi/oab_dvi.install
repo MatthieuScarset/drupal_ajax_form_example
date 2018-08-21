@@ -1,12 +1,20 @@
-<?php 
+<?php
 
 function oab_dvi_install() {
   drupal_set_installed_schema_version('oab_dvi', 8000);
 }
 
 function oab_dvi_update_dependencies() {
-	$dependencies['oab_dvi'][8033] = array('oab_amel' => 8044, 'oab_christophe' => 8051, 'oab_stephanie' => 8048, 'oab_tibo' => 8035, 'oab_yassine' => 8023, 'oab_tristan' => 8062, 'oab_will' => 8011	);
-	return $dependencies;
+    $dependencies['oab_dvi'][8033] = array(
+        'oab_amel' => 8044,
+        'oab_christophe' => 8051,
+        'oab_stephanie' => 8048,
+        'oab_tibo' => 8035,
+        'oab_yassine' => 8023,
+        'oab_tristan' => 8062,
+        'oab_will' => 8011
+    );
+    return $dependencies;
 }
 /**
  * Création des termes pour DVI segment de marché
@@ -78,7 +86,7 @@ function oab_dvi_update_8009() {
  * Création du block Phone Number pour le Distributeur (sidebar)
  */
 function oab_dvi_update_8010() {
-	include_once("updates/update_8010.inc");
+    include_once("updates/update_8010.inc");
 }
 /**
  * Creation nouveau paragraph block rebond et champs pour le product
@@ -177,7 +185,7 @@ function oab_dvi_update_8022() {
  * Traduction du block find distributor
  */
 function oab_dvi_update_8023() {
-	include_once("updates/update_8023.inc");
+    include_once("updates/update_8023.inc");
 }
 
 /**
@@ -237,7 +245,8 @@ function oab_dvi_update_8031() {
 }
 
 /**
- * Rechargement de la vue subhome pour reinit la config sur PRP + Rechargement "home eclairage playlist" pour ajouter un filtre sur les contenus publiés
+ * Rechargement de la vue subhome pour reinit la config sur PRP
+ * + Rechargement "home eclairage playlist" pour ajouter un filtre sur les contenus publiés
  */
 function oab_dvi_update_8032() {
     include_once("updates/update_8032.inc");
@@ -247,14 +256,14 @@ function oab_dvi_update_8032() {
  * Creation nouvelle taxonomie market segment dvi
  */
 function oab_dvi_update_8033() {
-	include_once("updates/update_8033.inc");
+    include_once("updates/update_8033.inc");
 }
 /**
  * Creation nouveau champ pour market segment dvi sur product et distributor
  */
 
 function oab_dvi_update_8034() {
-	include_once("updates/update_8034.inc");
+    include_once("updates/update_8034.inc");
 }
 
 /**
@@ -315,10 +324,11 @@ function oab_dvi_update_8041() {
     include_once("updates/update_8041.inc");
 }
 
+
 /**
- * Mise en place nouvelle direct access bar pour DVI
+ * RUBYPORTAILOBS-3370 [DVI] Subhome Distributeurs
  */
-function oab_dvi_update_8042()
+function oab_dvi_update_8043()
 {
-    include_once("updates/update_8042.inc");
+    include_once("updates/update_8043.inc");
 }

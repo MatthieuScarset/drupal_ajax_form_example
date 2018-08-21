@@ -1,1 +1,5 @@
 <?php
+
+/**
+ * Implements module synomia_search for obs
+ */

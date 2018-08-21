@@ -37,9 +37,9 @@ abstract class DviHelper {
     /**
      * VARIABLES UTILES DANS DviHelper
      */
-    private static $subhome_field_name = 'field_subhome';
-    private static $default_field_market_segment = 'field_market_segment_dvi';
-    private static $dvi_market_segment_vocabulary = 'market_segments_dvi';
+    private static $subhomeFieldName = 'field_subhome';
+    private static $defaultFieldMarketSegment = 'field_market_segment_dvi';
+    private static $dviMarketSegmentVocabulary = 'market_segments_dvi';
 
 
 ################################
@@ -47,19 +47,19 @@ abstract class DviHelper {
 ################################
 ## PRIVATE FUNCTIONS
 
-    public static function getProductDviSubhomeTid ($langcode = null) {
-      if (is_null($langcode)) $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    public static function getProductDviSubhomeTid($langcode = null) {
+      if (is_null($langcode)) {
+          $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      }
       if ($langcode == \Drupal::languageManager()->getDefaultLanguage()->getId()) {
         $config = \Drupal::config('oab.subhomes');
         return $config->get('product_dvi_term_tid');
-      }
-      else{
+      } else{
         $config = \Drupal::service('config.storage')->createCollection('language.'.$langcode);
         $subhomes = $config->read('oab.subhomes');
         if (isset($subhomes['product_dvi_term_tid'])) {
           return $subhomes['product_dvi_term_tid'];
-        }
-        else{
+        } else{
           return false;
         }
       }
@@ -92,7 +92,7 @@ abstract class DviHelper {
     public static function getMSTaxoTermsIds($lang = 'en', $taxo_term = null) {
 
         $query = \Drupal::entityQuery('taxonomy_term');
-        $query->condition('vid', self::$dvi_market_segment_vocabulary);
+        $query->condition('vid', self::$dviMarketSegmentVocabulary);
         if ($lang !== 'all') {
             $query->condition('langcode', $lang);
         }
@@ -106,40 +106,40 @@ abstract class DviHelper {
 
     /**
      * Renvoie l'id du term passé en paramètre
-     * @param $taxoTerm
+     * @param $taxo_term
      * @param null $lang
      * @return bool|int|null|string
      */
-    public static function getMSTaxoTermId($taxoTerm, $lang) {
-        return self::getMSTaxoTermsIds($lang, $taxoTerm);
+    public static function getMSTaxoTermId($taxo_term, $lang) {
+        return self::getMSTaxoTermsIds($lang, $taxo_term);
     }
 
     /**
      * Dit si le node passé en paramètre possède un terme de MS spécifique à DVI
      * @param \Drupal\node\Entity\Node $node
-     * @param null $fieldName
+     * @param null $field_name
      * @return bool
      */
-    public static function hasMSTaxoTerm(\Drupal\node\Entity\Node $node, $fieldName = null) {
+    public static function hasMSTaxoTerm(\Drupal\node\Entity\Node $node, $field_name = null) {
         $return = false;
 
         ##Je peux pas attribuer une valeur par défaut issue d'une variable
         ##Du coup, j'init par défaut à false, et si c'est false, je set avec la valeur par défaut
-        if ($fieldName == null) {
-            $fieldName = self::$default_field_market_segment;
+        if ($field_name == null) {
+            $field_name = self::$defaultFieldMarketSegment;
         }
 
         $lang = $node->language()->getId();
-        $ms_termsIds = self::getMSTaxoTermsIds($lang);
+        $ms_terms_ids = self::getMSTaxoTermsIds($lang);
 
         //on regarde le produit
-        if ( isset($node->$fieldName)) {
+        if ( isset($node->$field_name)) {
             //récupération des tag market segment du produit
-            $fieldValue = $node->$fieldName->getValue();
+            $fieldValue = $node->$field_name->getValue();
             if (!empty($fieldValue)) {
                 //pour chaque tag on regarde s'il y en a un dvi
                 foreach ($fieldValue as $values) {
-                    if (isset($values['target_id']) && in_array($values['target_id'], $ms_termsIds)) {
+                    if (isset($values['target_id']) && in_array($values['target_id'], $ms_terms_ids)) {
                         $return = TRUE;
                     }
                 }
@@ -163,34 +163,34 @@ abstract class DviHelper {
         if ($node->type->entity->get('type') == "product") {
 
             ##Ensuite, on demande si on a un des terme de taxo de DVI
-            $hasMsTaxoTerm = self::hasMSTaxoTerm($node);
+            $has_ms_taxo_term = self::hasMSTaxoTerm($node);
 
             #je vérifie qu'il est tagué "produit DVI" pour la subhome
-            $isTaggedDvi = false;
+            $is_tagged_dvi = false;
             $lang = $node->language()->getId();
 
-            $subhome_taxoTerm = "";
+            $subhome_taxo_term = "";
             if ($lang == 'fr') {
-                $subhome_taxoTerm = self::SUBHOME_PRODUIT_DVI_TERM_FR;
+                $subhome_taxo_term = self::SUBHOME_PRODUIT_DVI_TERM_FR;
             } else {
-                $subhome_taxoTerm = self::SUBHOME_PRODUIT_DVI_TERM_EN;
+                $subhome_taxo_term = self::SUBHOME_PRODUIT_DVI_TERM_EN;
             }
 
-            $fieldName = self::$subhome_field_name;
-            if ( isset($node->$fieldName)) {
+            $field_name = self::$subhomeFieldName;
+            if (isset($node->$field_name)) {
                 //récupération des tag market segment du produit
-                $fieldValue = $node->$fieldName->getValue();
-                if (!empty($fieldValue)) {
+                $field_value = $node->$field_name->getValue();
+                if (!empty($field_value)) {
                     //pour chaque tag on regarde s'il y en a un dvi
-                    foreach ($fieldValue as $values) {
+                    foreach ($field_value as $values) {
                         if (isset($values['target_id']) && ($values['target_id'] == self::getProductDviSubhomeTid())) {
-                            $isTaggedDvi = TRUE;
+                            $is_tagged_dvi = TRUE;
                         }
                     }
                 }
             }
 
-            $is_dvi_product = ($hasMsTaxoTerm && $isTaggedDvi) ? true : false;
+            $is_dvi_product = ($has_ms_taxo_term && $is_tagged_dvi) ? true : false;
         }
         return $is_dvi_product;
     }
@@ -202,11 +202,12 @@ abstract class DviHelper {
      */
     public static function isMSTerm($term, $lang = 'en') {
         $ms_terms = self::getMSTerms($lang);
-        $isMsTerm = false;
+        $is_ms_term = false;
         foreach ($ms_terms as $ms_term) {
-            if ($term == $ms_term->getName())
-                $isMsTerm = true;
+            if ($term == $ms_term->getName()) {
+                $is_ms_term = true;
+            }
         }
-        return $isMsTerm;
+        return $is_ms_term;
     }
 }

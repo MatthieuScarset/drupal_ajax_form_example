@@ -1,0 +1,5 @@
+oab.settings_axiome:
+  title: 'axiome Settings'
+  base_route_name: oab.settings_axiome
+  names:
+    - oab.axiome

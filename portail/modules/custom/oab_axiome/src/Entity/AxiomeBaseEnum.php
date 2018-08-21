@@ -9,12 +9,12 @@ class AxiomeBaseEnum {
     if (self::$constCacheArray == NULL) {
       self::$constCacheArray = [];
     }
-    $calledClass = get_called_class();
-    if (!array_key_exists($calledClass, self::$constCacheArray)) {
-      $reflect = new \ReflectionClass($calledClass);
-      self::$constCacheArray[$calledClass] = $reflect->getConstants();
+    $called_class = get_called_class();
+    if (!array_key_exists($called_class, self::$constCacheArray)) {
+      $reflect = new \ReflectionClass($called_class);
+      self::$constCacheArray[$called_class] = $reflect->getConstants();
     }
-    return self::$constCacheArray[$calledClass];
+    return self::$constCacheArray[$called_class];
   }
 
   public static function getValue($name, $strict = false) {

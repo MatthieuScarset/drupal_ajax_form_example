@@ -26,6 +26,9 @@ oab.subhomes:
     product_dvi_term_tid:
       type: label
       label: 'Product DVI term id'
+    analysts_term_tid:
+      type: label
+      label: 'Analysts term id'
     press_meta:
       type: label
       label: 'Press meta title'
@@ -47,6 +50,9 @@ oab.subhomes:
     product_meta:
       type: label
       label: 'Product meta title'
+    analysts_meta:
+      type: label
+      label: 'Analysts meta title'
     distributor_term_tid:
       type: label
       label: 'Distributor term id'

@@ -13,8 +13,7 @@
     font-weight: bold;
     margin-top: 0;
 }
-#top-navbar-collapse a:hover,
-#top-navbar-collapse a:focus{
+#top-navbar-collapse a:hover{
     color: rgb(255,121, 0);
 }
 #navtop .navbar-nav{
@@ -162,9 +161,7 @@
     font-weight: bold;
 }
 
-#block-topnavbarmenu .navbar-nav > li > a:focus,
 #block-topnavbarmenu .navbar-nav > li > a:hover,
-#block-topnavbaren .navbar-nav > li > a:focus,
 #block-topnavbaren .navbar-nav > li > a:hover {
     color: rgb(255,121,0);
 }
@@ -588,9 +585,6 @@
         margin-left: 0;
     }
 
-    .textlink-contactbar {
-        margin-top: -15px;
-    }
     #main_nav .navbar-nav {
         overflow: hidden;
     }
