@@ -50,14 +50,14 @@
 ]
 %}
 <div{{ attributes.addClass(classes) }}>
-    <div class="row subhome-header">
+    <div class="subhome-header" style="display: table; ">
         {% if subhome_title %}
-           <div style="display: inline-block; border-right: 4px solid grey; padding: 2rem; height: 100%">
+           <div class="subhome-title">
                <h1 >{{ subhome_title}}</h1>
            </div>
         {% endif %}
         {% if subhome_description %}
-            <div style="display: inline-block" >
+            <div class="subhome-description" >
                 {{ subhome_description }}
             </div>
         {% endif %}

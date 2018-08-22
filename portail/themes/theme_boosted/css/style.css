@@ -1902,13 +1902,13 @@ body.page-node-type-custom-page{
 }
 
 .white-on-orange {
-    background-color: #ff7900;
+    background-color: #f16E00;
     color: #FFF;
 }
 
 .orange-on-white {
     background-color: #FFF;
-    color: #ff7900;
+    color: #f16E00;
 }
 
 .black-on-white {
@@ -1966,3 +1966,31 @@ body.page-node-type-custom-page{
     color: #000;
 }
 
+
+.subhome-header {
+   display: table-cell;
+    margin-bottom: 2rem;
+}
+
+.subhome-header div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.subhome-header div.subhome-title {
+    height: 100%;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.subhome-header div.subhome-title h1 {
+    font-size: 3.4rem;
+    padding: 0;
+    margin: 0;
+    padding-right: 1rem;
+    border-right: 4px solid #F16E00;
+}
+
+.subhome-header div.subhome-description {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+}
