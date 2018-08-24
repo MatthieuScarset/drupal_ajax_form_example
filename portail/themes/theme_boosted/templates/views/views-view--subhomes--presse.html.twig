@@ -33,13 +33,6 @@
  */
 #}
 
-{% if (subhome_entity) %}
-    {% set subhome_title = subhome_entity.get('title').value %}
-    {% set subhome_description = subhome_entity.get('description').value %}
-{% endif %}
-
-
-
 {%
     set classes = [
     'view',
@@ -51,22 +44,21 @@
 %}
 <div{{ attributes.addClass(classes) }}>
     <div class="subhome-header" style="display: table; ">
-        {% if subhome_title %}
            <div class="subhome-title">
-               <h1 >{{ subhome_title}}</h1>
+               <h1 >{{ subhome_entity.title}}</h1>
            </div>
-        {% endif %}
-        {% if subhome_description %}
             <div class="subhome-description" >
-                {{ subhome_description }}
+                {{ subhome_entity.description }}
             </div>
-        {% endif %}
     </div>
-
     {#
         METTRE ICI LE CARROUSSEL
     $#}
+    <div class="row">
+        <!-- Indicators -->
+        {{ subhome_entity.field_carrousel }}
 
+    </div>
     <div class="row">
         <div class="col-sm-8">
             {# Contenu principal #}

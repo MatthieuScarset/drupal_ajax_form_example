@@ -1966,6 +1966,111 @@ body.page-node-type-custom-page{
     color: #000;
 }
 
+.paragraph--default-button .btn.btn-txt-white-bg-black {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-transparent {
+    color: white;
+    border-color: white;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-transparent {
+    color: black;
+    border-color: black;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-black:hover,
+.paragraph--default-button .btn.btn-txt-white-bg-transparent:hover {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white:hover,
+.paragraph--default-button .btn.btn-txt-black-bg-transparent:hover {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.field--name-field-carrousel {
+
+}
+
+.field--name-field-carrousel .carousel-caption {
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    padding-left: 10rem;
+    padding-right: 40rem;
+    text-align: left;
+}
+
+.field--name-field-carrousel .carousel-caption h3 {
+    font-size: 2.4rem;
+}
+
+.field--name-field-carrousel .carousel-caption a {
+    font-size: 1.6rem;
+}
+
+.field--name-field-carrousel .carousel-indicators {
+    bottom: 0;
+}
+
+.field--name-field-carrousel .carousel .carousel-control {
+    background: none;
+    opacity: 1;
+    color: white;
+}
+.field--name-field-carrousel .carousel .carousel-control .glyphicon {
+    color: white;
+    font-size: 2rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control .glyphicon:hover {
+    color: #F16E00;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li {
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li.active {
+    height: 1.4rem;
+    width: 1.4rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.left:focus,
+.field--name-field-carrousel .carousel .carousel-control.left:hover,
+.field--name-field-carrousel .carousel .carousel-control.right:focus,
+.field--name-field-carrousel .carousel .carousel-control.right:hover {
+    width: 6rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
 
 .subhome-header {
    display: table-cell;
@@ -1979,7 +2084,7 @@ body.page-node-type-custom-page{
 
 .subhome-header div.subhome-title {
     height: 100%;
-    padding: 1rem 0 1rem 1rem;
+    padding: 1rem 0;
 }
 
 .subhome-header div.subhome-title h1 {
@@ -1993,4 +2098,9 @@ body.page-node-type-custom-page{
 .subhome-header div.subhome-description {
     font-size: 1.6rem;
     padding-left: 1rem;
+}
+
+.view-subhomes .field--name-field-carrousel {
+    margin-left: -40px;
+    margin-right: -40px; /* Pour contrebalencer les margin/paddings des row */
 }

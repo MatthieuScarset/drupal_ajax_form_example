@@ -30,11 +30,21 @@ function oab_subhomes_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_theme().
  */
 function oab_subhomes_theme($existing, $type, $theme, $path) {
+
     $theme = [];
     $theme['subhome_entity'] = [
         'render element' => 'elements',
-        'file' => 'subhome_entity.page.inc',
+        'path' => drupal_get_path('theme', 'theme_boosted') . '/templates/subhome_entity',
+        'theme path'    => drupal_get_path('theme', 'theme_boosted') ,
         'template' => 'subhome_entity',
+        'type'  => 'module',
+    ];
+    $theme['paragraph'] = [
+        'render element' => 'elements',
+        'path' => drupal_get_path('theme', 'theme_boosted') . '/templates/paragraphs',
+        'theme path'    => drupal_get_path('theme', 'theme_boosted') ,
+        'template' => 'paragraph',
+        'type'  => 'module',
     ];
     $theme['subhome_entity_content_add_list'] = [
         'render element' => 'content',
@@ -43,6 +53,15 @@ function oab_subhomes_theme($existing, $type, $theme, $path) {
     ];
     return $theme;
 }
+
+function oab_subhomes_preprocess_subhome_entity(&$variables) {
+  /** @var Drupal\oab_subhomes\Entity\SubhomeEntity $subhome_entity */
+    $subhome_entity = $variables['elements']['#subhome_entity'];
+    foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
+        $variables['content'][$key] = $variables['elements'][$key];
+    }
+}
+
 
 /**
 * Implements hook_theme_suggestions_HOOK().
@@ -99,6 +118,17 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
         "black-on-green"    => "Black on Green",
         "black-on-purple"   => "Black on purple",
         "black-on-pink"     => "Black on pink"
+    );
+    return $allowedValues;
+}
+
+function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
+                                     $cacheable) {
+    $allowedValues = array (
+        "btn-txt-white-bg-black"   => "Texte blanc, fond noir",
+        "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
+        "btn-txt-black-bg-white"   => "Texte noir, fond blanc",
+        "btn-txt-black-bg-transparent"    => "Texte noir, fond transparent",
     );
     return $allowedValues;
 }

@@ -181,7 +181,7 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page erreur';
 		$variables['#attached']['drupalSettings']['tealium']['erreur_code'] = $code;
 		$url = "";
-		$url  = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$url = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
 		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
 
@@ -276,7 +276,7 @@ function theme_boosted_preprocess_region(&$variables) {
 }
 
 
-function theme_boosted_preprocess_views_view(&$variables){
+function theme_boosted_preprocess_views_view(&$variables) {
 
     /** @var Drupal\views\ViewExecutable $view */
   $view = $variables['view'];
@@ -328,13 +328,20 @@ function theme_boosted_preprocess_views_view(&$variables){
 
         // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
         if ($entity !== null) {
-            $variables[SubhomeEntity::TWIG_VAR_NAME] = $entity;
+
+            /** @var Drupal\Core\Field\FieldItemInterface $field */
+            foreach($entity->getFields() as $field) {
+
+                $variables[SubhomeEntity::TWIG_VAR_NAME][$field->getName()] =
+                    render($field->view('default'));
+            }
+
         }
     }
 
 
   }
-  elseif ($id == 'offices_map_view'){
+  elseif ($id == 'offices_map_view') {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
   	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
   		//kint($variables['rows']);
@@ -342,7 +349,7 @@ function theme_boosted_preprocess_views_view(&$variables){
     }
   }
 
-  if ($id == 'subhomes'){
+  if ($id == 'subhomes') {
       if($view->current_display == 'page_catalogue_dvi')		{ //subhome produits DVI
           // j'affecte le view mode à subhome_distributeur
           for ($i = 0 ; $i < count($variables['rows'][0]['#rows']); $i++) {
@@ -353,7 +360,7 @@ function theme_boosted_preprocess_views_view(&$variables){
 }
 
 
-function theme_boosted_preprocess_views_view_list(&$variables){
+function theme_boosted_preprocess_views_view_list(&$variables) {
   $view = $variables['view'];
   $id = $view->storage->id();
 	if ($id == 'offices_map_view'){
@@ -533,4 +540,3 @@ function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $
 	}
 }
 
-?>
