@@ -1,8 +1,9 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
   config:
-    - entity_browser.browser.browser_file_modal
+    - entity_browser.browser.browse_media_modal
     - field.field.subhome_entity.presse.field_carrousel
     - field.field.subhome_entity.presse.field_corporate_aplat
     - field.field.subhome_entity.presse.field_corporate_title
@@ -190,7 +191,7 @@ content:
   field_team_visual:
     weight: 11
     settings:
-      entity_browser: browser_file_modal
+      entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
