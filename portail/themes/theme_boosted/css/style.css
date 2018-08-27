@@ -2095,6 +2095,16 @@ body.page-node-type-custom-page{
     border-right: 4px solid #F16E00;
 }
 
+@media (max-width: 760px) {
+    .subhome-header div.subhome-title h1 {
+        border-right: none;
+    }
+
+    .subhome-header div {
+        display: block;
+    }
+}
+
 .subhome-header div.subhome-description {
     font-size: 1.6rem;
     padding-left: 1rem;
