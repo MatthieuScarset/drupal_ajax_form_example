@@ -5,7 +5,7 @@ entity.subhome_entity.collection:
   route_name: entity.subhome_entity.collection
   description: 'List Subhome entity entities'
   parent: entity.subhome_entity_type.collection
-  weight: 100
+  weight: -10
 
 
 # Subhome entity type menu items definition
