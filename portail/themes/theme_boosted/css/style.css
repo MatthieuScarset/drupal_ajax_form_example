@@ -121,6 +121,7 @@ article .product ul.nav-tabs li:before{
 
 #views-exposed-form-subhomes-page-press{
     background-color: #FFFFFF;
+    padding-bottom: 0;
 }
 
 .view-subhomes .display-subhomes-press{
@@ -145,6 +146,11 @@ article .product ul.nav-tabs li:before{
 .link-subhomes:hover > .display-subhomes-press {
     color: #F16E00 !important;
 }
+
+.view-subhomes .display-subhomes-press .label-subhome {
+    margin-top: 0;
+}
+
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
