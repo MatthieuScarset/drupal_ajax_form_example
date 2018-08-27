@@ -331,8 +331,8 @@ function theme_boosted_preprocess_views_view(&$variables) {
 
             /** @var Drupal\Core\Field\FieldItemInterface $field */
             foreach($entity->getFields() as $field) {
-
-                $variables[SubhomeEntity::TWIG_VAR_NAME][$field->getName()] =
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['render'][$field->getName()] =
                     render($field->view('default'));
             }
 
