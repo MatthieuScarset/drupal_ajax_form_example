@@ -108,7 +108,7 @@ function subhomes_views_exposed_form(&$form) {
     // subhome presse
     if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
         if (isset($form['field_solution_target_id'])) {
-            $form['field_solution_target_id']['#options']['All'] = t('Solution');
+            $form['field_solution_target_id']['#options']['All'] = t('Thematic');
         }
 
         //Suppression de filtres pour le russe

@@ -114,6 +114,38 @@ article .product ul.nav-tabs li:before{
     overflow: hidden;
 }
 
+/* Modif nouvelle gestion subbhome type press */
+.path-subhome-press .view-subhomes .form-group{
+    margin-bottom: 0;
+}
+
+#views-exposed-form-subhomes-page-press{
+    background-color: #FFFFFF;
+}
+
+.view-subhomes .display-subhomes-press{
+    min-height: 0;
+    padding-bottom: 0;
+}
+
+.view-subhomes .display-subhomes-press .txt{
+    margin-top:0;
+}
+
+.view-subhomes .display-subhomes-press .txt span {
+    font-size: 1.4rem;
+}
+
+.view-subhomes .display-subhomes-press .encart-image{
+    max-height:95px;
+    max-width: 175px;
+
+}
+
+.link-subhomes:hover > .display-subhomes-press {
+    color: #F16E00 !important;
+}
+
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
     .display-subhomes .encart-image{
