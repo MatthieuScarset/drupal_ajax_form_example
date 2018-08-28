@@ -132,3 +132,50 @@ function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition
     );
     return $allowedValues;
 }
+
+function oab_subhomes_preprocess_views_view(&$variables) {
+
+    /** @var Drupal\views\ViewExecutable $view */
+    $view = $variables['view'];
+    $id = $view->storage->id();
+
+    if ($id == 'subhomes') {
+
+        /*
+         * Nouvelle gestion des subhomes
+         * Je passe en variable l'entité subhome correspondante
+         */
+        if (isset($view->argument['field_subhome_target_id'])) {
+
+            $sid = $view->argument['field_subhome_target_id']->value;
+            $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+            // Si on a trouvé une entité pour la subhome et qu'elle est de type presse, je load les press_kits de la langue
+            if ($entity !== null && $entity->bundle() === 'presse') {
+                /** @var Drupal\node\Entity\Node[] $entities */
+                /*$entities = \Drupal::entityTypeManager()->getStorage('node')
+                    ->loadByProperties([
+                        'type'=> 'press_kit',
+                        'langcode' => $entity->language()->getId(),
+                        'status' => true
+                    ]);*/
+
+                $query = \Drupal::entityQuery('node')
+                    ->condition('status', 1)
+                    ->condition('type', 'press_kit')
+                    ->condition('langcode', $entity->language()->getId())
+                    ->sort('changed' , 'DESC');
+
+                $nids = $query->execute();
+                $entities = \Drupal::entityTypeManager()->getStorage('node')
+                    ->loadMultiple($nids);
+
+                $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+                foreach ($entities as $entity ) {
+                    $variables[SubhomeEntity::TWIG_VAR_NAME]['press_kit'][] =
+                        render($view_builder->view($entity, 'subhome'));
+                }
+            }
+        }
+    }
+}

@@ -2131,10 +2131,69 @@ body.page-node-type-custom-page{
     color: inherit;
 }
 
-.block-corporate.black-on-orange a:hover {
+.black-on-orange a:hover {
     color: white;
 }
 
-.block-corporate.white-on-orange a:hover {
+.white-on-orange a:hover {
     color: black;
+}
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+
+#carousel-press-kit.carousel .carousel-control.left:focus,
+#carousel-press-kit.carousel .carousel-control.left:hover,
+#carousel-press-kit.carousel .carousel-control.right:focus,
+#carousel-press-kit.carousel .carousel-control.right:hover {
+    width: 3rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
 }

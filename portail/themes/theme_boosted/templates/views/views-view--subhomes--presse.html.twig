@@ -89,7 +89,29 @@
 
                 {# Press kit#}
                 <div class="col-sm-8 col-xs-12">
+                    <div id="carousel-press-kit" class="carousel slide" data-interval="false" data-ride="carousel">
 
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            {% for key, press_kit in subhome_entity.press_kit %}
+                                <div class="item {% if key == 0 %}active{% endif %}">
+                                    <div class="carousel-caption">
+                                        {{ press_kit }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-press-kit" role="button" data-slide="prev">
+                            <span class="glyphicon icon-arrow-previous" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-press-kit" role="button" data-slide="next">
+                            <span class="glyphicon icon-arrow-next" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
                 </div>
 
                 {# Press kit#}
