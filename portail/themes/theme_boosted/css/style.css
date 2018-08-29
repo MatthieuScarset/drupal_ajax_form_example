@@ -2223,7 +2223,8 @@ body.page-node-type-custom-page{
 
 .block-team img {
     max-height: 190px;
-    width: auto;
+    width: 100%;
+    height: auto;
 }
 
 .block-team .block-team-info {
