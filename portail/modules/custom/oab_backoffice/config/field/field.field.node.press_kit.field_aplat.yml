@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_aplat
+    - node.type.press_kit
+  module:
+    - options
+id: node.press_kit.field_aplat
+field_name: field_aplat
+entity_type: node
+bundle: press_kit
+label: Aplat
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: black-on-orange
+default_value_callback: ''
+settings: {  }
+field_type: list_string
