@@ -151,6 +151,15 @@ article .product ul.nav-tabs li:before{
     margin-top: 0;
 }
 
+.view-display-id-page_press .view-content{
+    border-bottom: #8F8C87 1px solid;
+}
+
+.view-display-id-page_press .subhomes-filterbar-background{
+    padding:0;
+    margin:0;
+}
+
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
