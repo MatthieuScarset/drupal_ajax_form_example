@@ -2037,6 +2037,28 @@ body.page-node-type-custom-page{
     background: transparent !important;
 }
 
+.paragraph--default-button .btn.btn-txt-black-bg-orange {
+    color: black;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-orange:hover {
+    color: #F16E00;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-orange {
+    color: white;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+.paragraph--default-button .btn.btn-txt-white-bg-orange:hover {
+    color: #F16E00;
+    background-color: white;
+}
+
+
 .paragraph--default-button .btn.btn-txt-white-bg-black:hover,
 .paragraph--default-button .btn.btn-txt-white-bg-transparent:hover {
     color: black;
@@ -2078,6 +2100,7 @@ body.page-node-type-custom-page{
 
 .field--name-field-carrousel .carousel-indicators {
     bottom: 0;
+    z-index: 5;
 }
 
 .field--name-field-carrousel .carousel .carousel-control {
@@ -2243,4 +2266,26 @@ body.page-node-type-custom-page{
 #carousel-press-kit .elem-press-kit .file-info {
     font-size: 1.6rem;
     font-weight: bold;
+}
+
+.block-team img {
+    max-height: 190px;
+    width: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
 }
