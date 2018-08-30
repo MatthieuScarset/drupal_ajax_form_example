@@ -138,8 +138,44 @@
             </div>
         </div>
         {# Barre 1/3 du coté - blocks du coté#}
-        <div class="col-sm-4 col-xs-12">
-            {{ drupal_entity('block', "mediatheque", check_access=false) }}
+        <div class="col-sm-12 col-md-4 col-xs-12">
+            {# Block Notre équipe #}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    {% set img_uri = "" %}
+                    {% for key, image in subhome_entity.fields.field_team_visual  %}
+                        {%if image.entity %}
+                            {% set media = image.entity %}
+                            {% set file = media.field_image.entity %}
+                            {% set img_uri = file_url(file.uri.value) %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="block-team" >
+                        <img src="{{ img_uri }}">
+                        <div class="block-team-info">
+                            <h3>{{ subhome_entity.fields.field_team_title.0.value }}</h3>
+                            {{ subhome_entity.render.field_team_button }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {# Block médiatheque #}
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    {{ drupal_entity('block', "mediatheque", check_access=false) }}
+                </div>
+            </div>
+
+            {# Formulaire de contact #}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 ">
+                    <div class="block-webform">
+                        {{ drupal_entity('webform', 'formulaire_de_contact_presse') }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {#{% if attachment_before %}

@@ -2244,3 +2244,49 @@ body.page-node-type-custom-page{
     font-size: 1.6rem;
     font-weight: bold;
 }
+
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #595959;
+    padding: 1rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform #form-item-utilisation-des-donnees p.description.help-block {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
