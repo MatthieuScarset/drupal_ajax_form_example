@@ -1,0 +1,139 @@
+langcode: fr
+status: open
+dependencies:
+  module:
+    - oab_gdpr
+third_party_settings:
+  oab_gdpr:
+    gdpr_business_owner: '1'
+    gdpr_spoc_security: '1'
+    gdpr_expiration_date: ''
+    gdpr_business_analysts: {  }
+    gdpr_form_published: 0
+open: null
+close: null
+uid: 1
+template: false
+id: formulaire_de_contact_presse
+title: 'Formulaire de contact Presse'
+description: ''
+category: ''
+elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>Abonnez-vous à nos publications</p>\\r\\n\"\n  '#format': full_html\nnom_et_prenom:\n  '#type': textfield\n  '#title': 'Nom et prénom'\n  '#title_display': invisible\n  '#placeholder': 'Nom et prénom*'\n  '#required': true\nmedia:\n  '#type': textfield\n  '#title': Média\n  '#title_display': invisible\n  '#placeholder': 'Média*'\n  '#required': true\nvotre_email:\n  '#type': email\n  '#title': 'Votre email'\n  '#title_display': invisible\n  '#placeholder': 'Votre email*'\n  '#required': true\nutilisation_des_donnees:\n  '#type': checkbox\n  '#title': 'utilisation des donnees'\n  '#description': \"<p>J'accepte explicitement l'utilisation de mes données personnelles à l'usage exclusif du traitement de ma demande soumise via ce formulaire.</p>\\n\"\n  '#title_display': invisible\n  '#description_display': after\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer\n  '#submit__attributes':\n    class:\n      - btn-grey\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: false
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_login: false
+  form_login_message: ''
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  submission_login: false
+  submission_login_message: ''
+  submission_exception_message: ''
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "<p style=\"font-size: 2rem;\"><strong>Votre demande est enregistrée</strong></p>\r\n\r\n<p style=\"font-size: 1.6rem;\">Un e-mail de confirmation vous a été envoyé à l'adresse que vous avez fournie.</p>\r\n\r\n<p style=\"font-size: 1.6rem;\">Votre inscription sera active lorsque vous aurez cliqué sur le lien inclus dans cet e-mail et confirmé.</p>\r\n"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
