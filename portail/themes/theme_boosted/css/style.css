@@ -2269,7 +2269,7 @@ body.page-node-type-custom-page{
 }
 
 .block-webform {
-    border: 3px solid #595959;
+    border: 3px solid #DDDDDD;
     padding: 1rem;
 }
 
@@ -2285,8 +2285,33 @@ body.page-node-type-custom-page{
     height: auto;
 }
 
-.block-webform #form-item-utilisation-des-donnees p.description.help-block {
+.block-webform .form-item-utilisation-des-donnees p {
     display: inline-block;
     width: 90%;
     font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem
 }
