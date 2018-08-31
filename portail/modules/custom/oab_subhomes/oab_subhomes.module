@@ -129,6 +129,8 @@ function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition
         "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
         "btn-txt-black-bg-white"   => "Texte noir, fond blanc",
         "btn-txt-black-bg-transparent"    => "Texte noir, fond transparent",
+        "btn-txt-white-bg-orange"   => "Texte blanc, fond orange",
+        "btn-txt-black-bg-orange"   => "Texte noir, fond orange"
     );
     return $allowedValues;
 }
