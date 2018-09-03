@@ -7,6 +7,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Path\PathValidator;
 use Drupal\system\Entity\Menu;
 use Drupal\block\Entity\Block;
+use Drupal\Core\Url;
 
 class OabHubController extends ControllerBase {
 
@@ -543,6 +544,13 @@ class OabHubController extends ControllerBase {
         if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0) {
             array_shift($route_parts_cible);
         }
+
+        // Si je cherche la home, je renvoie avant.
+        if (!isset($route_parts_cible[1])) {
+            return $url_cible;
+        }
+
+
         $part_url_cible = $route_parts_cible[1];
         $is_hub_cible = false;
         ##Je teste si on a bien recu un tableau, au cas ou...
@@ -570,6 +578,11 @@ class OabHubController extends ControllerBase {
                 $new_url = $url_cible;
             }
         }
+
+        if (!is_object($new_url)) {
+           $new_url = 'internal:/' . $new_url;
+        }
+
         return $new_url;
     }
 
