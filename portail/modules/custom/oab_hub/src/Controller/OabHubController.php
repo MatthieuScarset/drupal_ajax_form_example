@@ -277,7 +277,7 @@ class OabHubController extends ControllerBase {
             $conf["region"] = $block["region"];
             $conf["settings"]["label"] = $block["name"] . " $term_name $term_langcode";
             $conf["visibility"]["language"]["langcodes"] = array($term_langcode => $term_langcode);
-            $conf["visibility"]["request_path"]["pages"] = "/$base_url/*";
+            $conf["visibility"]["request_path"]["pages"] = "/$base_url*";
 
             if ($block['menu']) {
                 $conf["dependencies"]["config"] = array("system.menu.$menu_id");
