@@ -11,7 +11,7 @@ use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 use Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OabSynomiaSearchEngineController extends ControllerBase
 {
