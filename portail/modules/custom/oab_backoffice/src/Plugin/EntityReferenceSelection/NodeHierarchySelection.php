@@ -33,7 +33,7 @@ class NodeHierarchySelection extends NodeSelection {
   public function getReferenceableEntities($match = NULL, $match_operator = 'CONTAINS', $limit = 0) {
     // Get the base options list from the normal handler. We will filter later.
     if ($match || $limit) {
-      $options = parent::getReferenceableEntities($match , $match_operator, $limit);
+      $options = parent::getReferenceableEntities($match, $match_operator, $limit);
     }
     else {
       $options = array();
@@ -49,7 +49,8 @@ class NodeHierarchySelection extends NodeSelection {
           $entity_ids = $query->execute();
           if ($nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($entity_ids)) {
             foreach ($nodes as $node) {
-              $options[$bundle][$node->id()] = str_repeat('-', 1) . Html::escape($this->entityManager->getTranslationFromContext($node->getTitle()));
+              $options[$bundle][$node->id()] = str_repeat('-', 1)
+                  . Html::escape($this->entityManager->getTranslationFromContext($node->getTitle()));
             }
           }
         }
