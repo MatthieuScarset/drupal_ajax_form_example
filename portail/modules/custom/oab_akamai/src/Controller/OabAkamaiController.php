@@ -141,7 +141,7 @@ class OabAkamaiController extends ControllerBase
 
        // $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
         $headers = array(
-            'Host: : www.orange-business.com',
+            'Host: www.orange-business.com',
             'via: akamai',
         );
 
