@@ -44,6 +44,10 @@
     {% set keyFigure = content.field_key_figures.0["#markup"]|number_format(0,',', ' ') %}
 {% elseif lang == 'ru' %}
     {% set keyFigure = content.field_key_figures.0["#markup"]|number_format(0,',', '') %}
+{% elseif lang == 'es' %}
+    {% set keyFigure = content.field_key_figures.0["#markup"]|number_format(0,',', '.') %}
+{% elseif lang == 'pt-br' %}
+    {% set keyFigure = content.field_key_figures.0["#markup"]|number_format(0,',', '.') %}
 {% else %}
     {% set keyFigure = content.field_key_figures.0["#markup"]|number_format(0,'.',',') %}
 {% endif %}
