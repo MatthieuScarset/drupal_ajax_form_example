@@ -38,7 +38,7 @@ class AxiomeContentImporter {
 
         $dom = Html::load($content);
 
-        self::replaceLeftBlock($dom, $banner_data, $node);
+        self::replaceLeftBlock($dom, $banner_data);
         self::replaceCenterBlock($dom, $banner_data);
         self::replaceRightBlock($dom, $banner_data);
 
@@ -76,65 +76,13 @@ class AxiomeContentImporter {
         //$node->save();
     }
 
-    private static function replaceLeftBlock(&$dom, $banner_data, $node) {
+    private static function replaceLeftBlock(&$dom, $banner_data) {
         $css_class_left_block =  $banner_data['orange_theme']['boosted_css_name'];
         $font_color = $banner_data['font_color'];
         //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        switch($css_class_left_block) {
-            case 'icon-frame-connectivity':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Connectivity';
-                } else {
-                    $title_left_block = 'Connectivité';
-                }
-                break;
-            case 'icon-frame-teamwork':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Teamwork';
-                } else {
-                    $title_left_block = 'Équipes';
-                }
-                break;
-            case 'icon-frame-my-customers':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Customers';
-                } else {
-                    $title_left_block = 'Clients ';
-                }
-                break;
-            case 'icon-frame-performance':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Flexibility';
-                } else {
-                    $title_left_block = 'Flexibilité';
-                }
-                break;
-            case 'icon-frame-security':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Security';
-                } else {
-                    $title_left_block = 'Sécurité';
-                }
-                break;
-            case 'icon-frame-care':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Service';
-                } else {
-                    $title_left_block = 'Service';
-                }
-                break;
-            case 'icon-frame-tech':
-                if ($node->language()->getId() == 'en') {
-                    $title_left_block = 'Industry';
-                } else {
-                    $title_left_block = 'Métier';
-                }
-                break;
-            default:
-                $title_left_block = '';
-                break;
-        }
+        $class_left_block = str_replace("-","_",$css_class_left_block);
+        $title_left_block = \Drupal::config('oab.settings_axiome')->get($class_left_block);
 
         // change class name
         $nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');

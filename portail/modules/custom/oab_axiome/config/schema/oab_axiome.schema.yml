@@ -1,0 +1,29 @@
+oab.axiome:
+  type: config_object
+  label: 'Axiome'
+  mapping:
+    axiome_enable_cron:
+      type: label
+      label: 'Enable axiome cron'
+    icon_frame_connectivity:
+      type: label
+      label: 'icon-frame-connectivity'
+    icon_frame_teamwork:
+      type: label
+      label: 'icon-frame-teamwork'
+    icon_frame_my_customers:
+      type: label
+      label: 'icon-frame-my-customers'
+    icon_frame_performance:
+      type: label
+      label: 'icon-frame-performance'
+    icon_frame_security:
+      type: label
+      label: 'icon-frame-security'
+    icon_frame_care:
+      type: label
+      label: 'icon-frame-care'
+    icon_frame_tech:
+      type: label
+      label: 'icon-frame-tech'
+
