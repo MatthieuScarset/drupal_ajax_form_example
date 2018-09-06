@@ -18,21 +18,21 @@ class OabHubThemeNegotiator implements ThemeNegotiatorInterface {
         #Path du noeud (sous la forme /node/id
         $url = \Drupal::request()->getRequestUri();
 
-        if (strpos($url, '?') !== false) { 
+        if (strpos($url, '?') !== false) {
             $url = substr($url, 0, strpos($url, '?'));
         }
 
         ##Je recupère toutes les parties de la route
-        $route_parts = explode('/',$url);
+        $route_parts = explode('/', $url);
 
         #Je supprime le 1er element qui est vide
-        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0 ) {
+        if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
 
         # Je recupère les URLS des hubs
         $urls = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
-    
+
         if (isset($route_parts[1])) {
             ##Je teste si on a bien recu un tableau, au cas ou...
             if (is_array($urls)) {

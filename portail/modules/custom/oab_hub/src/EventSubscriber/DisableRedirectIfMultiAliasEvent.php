@@ -47,10 +47,10 @@ class DisableRedirectIfMultiAliasEvent implements EventSubscriberInterface {
             if (is_object($node)
                 && get_class($node) === 'Drupal\node\Entity\Node'
             ) {
-                $node_langId = $node->language()->getId();
-                $pathList = oab_getAllPathFromNID($node->id(), $node_langId);
+                $node_lang_id = $node->language()->getId();
+                $path_list = oab_getAllPathFromNID($node->id(), $node_lang_id);
                 ## Je vérifie que l'URL fait partie de la liste des alias du node
-                if (in_array($request->getRequestUri(), $pathList)) {
+                if (in_array($request->getRequestUri(), $path_list)) {
                     $request->attributes->set('_disable_route_normalizer', true);
                 }
             }
