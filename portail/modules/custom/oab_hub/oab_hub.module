@@ -12,20 +12,20 @@ function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\For
     $tids = array_keys($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options']);
     $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
 
-    $removedTids = \Drupal::config(OabHubController::CONFIG_ID)
+    $removed_tids = \Drupal::config(OabHubController::CONFIG_ID)
         ->get(OabHubController::CONFIG_FORM_REMOVED_SUBHOMES_TIDS);
 
     foreach ($terms as $term) {
         $lang = $term->language();
-        if ( $lang->getId() != $current_language || in_array($term->id(), $removedTids)) {
+        if ($lang->getId() != $current_language || in_array($term->id(), $removed_tids)) {
             unset($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options'][$term->id()]);
         }
     }
 
     #Pour les modifs, je bloque le machine_name
-    $isNew = $form_state->getFormObject()->getEntity()->isNew();
-    $isNewTranslation = $form_state->getFormObject()->getEntity()->isNewTranslation();
-    if (!$isNew) {
+    $is_new = $form_state->getFormObject()->getEntity()->isNew();
+    $is_new_translation = $form_state->getFormObject()->getEntity()->isNewTranslation();
+    if (!$is_new) {
         $form[OabHubController::FIELD_MN_SUFFIXE_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
         $form[OabHubController::FIELD_URL_ID]['widget'][0]['value']['#attributes']['disabled'] = 'disabled';
     }
@@ -43,7 +43,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
 
     ##on ne le fait que pour la création des termes pour le HUB
     if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID &&
-        ( $term->isNew() || $term->isNewTranslation())) {
+        ($term->isNew() || $term->isNewTranslation())) {
             OabHubController::createMachineNameSuffixe($term);
             OabHubController::createMenus($term);
             OabHubController::checkUrl($term);
@@ -55,13 +55,13 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
 /**
  * suppression des menus à la suppression d'un terme
  */
-function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term)  {
+function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term) {
     if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
 
         #Je boucle sur toutes les langues pour supprimer les menus associés
         # aux traductions (le hook_translation_delete n'est pas appelé dans ce cas là)
         $languages = $term->getTranslationLanguages(false);
-        foreach ( $languages as $langcode => $langinfo) {
+        foreach ($languages as $langcode => $langinfo) {
             OabHubController::deleteMenus($term->getTranslation($langcode));
             OabHubController::deleteBlocks($term->getTranslation($langcode));
             OabHubController::deleteNodes($term->getTranslation($langcode));
@@ -94,7 +94,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
 
     ## Recuperation de tous les termes
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')
-        ->loadTree(OabHubController::HUB_VOCABULARY_ID,0,1,TRUE);
+        ->loadTree(OabHubController::HUB_VOCABULARY_ID, 0, 1, TRUE);
     $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     ##Je recupère et je découpe l'URL
@@ -107,7 +107,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
     if ($view->id() === "subhomes" && isset($uri_parts[1])) {
 
         ## je recupère le term de l'URL
-        $pageTerm = false;
+        $page_term = false;
         foreach ($terms as $term) {
             $translations = $term->getTranslationLanguages();
             if (isset($translations[$langcode])) {
@@ -118,7 +118,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
                 if ($uri_parts[1] === $term_url) {
 
                     ##Si je trouve une URl qui correspond, je recupère le term pour faire le filtre
-                    $pageTerm = $term;
+                    $page_term = $term;
                 }
             }
 
@@ -127,7 +127,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
 
         #Si on a trouvé un terme dont l'URL correspond à notre URl,
         # on complete la query avec notre term
-        if ($pageTerm !== false) {
+        if ($page_term !== false) {
             foreach ($query->where as $key_where => $where) {
                 foreach ($where['conditions'] as $key_condition => $condition) {
                     if (isset($condition['field'])
@@ -190,7 +190,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
         && (isset($context['op']) && $context['op'] == "insert")
         && isset($context['data']['node'])
     ) {
-        $hasPortail = false;
+        $has_portail = false;
 
         $original_alias = $alias;
 
@@ -203,7 +203,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
             //kint($on_portail->first()->getValue()); die();
             $on_portail_value = $on_portail->first()->getValue();
             if ($on_portail_value['value'] == 1) {
-                $hasPortail = true;
+                $has_portail = true;
                 oab_hub_drupal_message('URL créée : ', "$alias");
             }
         }
@@ -212,7 +212,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
         $langcode =  $context['data']['node']->language()->getId();
         if ($hubs->count() > 0) {
             $i = 0;
-            while($i < $hubs->count()) {
+            while ($i < $hubs->count()) {
                 $hub = $hubs->get($i);
                 $value = $hub->getValue();
 
@@ -221,7 +221,7 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
                 $term_url = $term->get(OabHubController::FIELD_URL_ID);
                 $term_url = $term_url->first()->getString();
 
-                if (!$hasPortail && $i == 0) {
+                if (!$has_portail && $i == 0) {
                     $alias = "/" . $term_url . $original_alias;
                 } else {
                     \Drupal::service('path.alias_storage')
@@ -246,43 +246,43 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
         $langcode = $entity->language()->getId();
 
         # Je recupère les hub ajoutés
-        $newHubs = $entity->get(OabHubController::NODE_FIELD_HUB)->getValue();
+        $new_hubs = $entity->get(OabHubController::NODE_FIELD_HUB)->getValue();
 
         # Je recupère les hubs avant la modif
         $old_node = $entity->original;
-        $oldHubs = $old_node->get(OabHubController::NODE_FIELD_HUB)->getValue();
+        $old_hubs = $old_node->get(OabHubController::NODE_FIELD_HUB)->getValue();
 
 
         # Pour sauvegarder les ids des choix
-        $newHubs_id = [];
-        $oldHubs_id = [];
+        $new_hubs_id = [];
+        $old_hubs_id = [];
 
         # Pour sauvegarder les URL à créer/supprimer
-        $toRemove = [];
-        $toCreate = [];
+        $to_remove = [];
+        $to_create = [];
 
 
         # je recupère tous les id des nouveaux hubs
-        foreach ($newHubs as $value) {
-            $newHubs_id[] = $value['target_id'];
+        foreach ($new_hubs as $value) {
+            $new_hubs_id[] = $value['target_id'];
         }
 
         # Je recupère tous les ids des anciens hubs
-        foreach ($oldHubs as $value) {
-            $oldHubs_id[] = $value['target_id'];
+        foreach ($old_hubs as $value) {
+            $old_hubs_id[] = $value['target_id'];
         }
 
         # Je recupère un alias pour ce node
         $alias = \Drupal::service('path.alias_manager')->getAliasByPath("/node/" . $entity->id());
 
         # je recupère les term des ancies hubs pour récuperer leurs URLs
-        $oldHubs_terms = \Drupal\taxonomy\Entity\Term::loadMultiple($oldHubs_id);
+        $old_hubs_terms = \Drupal\taxonomy\Entity\Term::loadMultiple($old_hubs_id);
 
 
         #Je recupère toutes les URL des hubs anciennement selectionnés
-        $oldUrls = [];
-        foreach ($oldHubs_terms as $term) {
-            $oldUrls[] = $term->get(OabHubController::FIELD_URL_ID)->first()->getString();
+        $old_urls = [];
+        foreach ($old_hubs_terms as $term) {
+            $old_urls[] = $term->get(OabHubController::FIELD_URL_ID)->first()->getString();
         }
 
         #Je recupère toutes les parties de l'alias recupéré
@@ -292,7 +292,7 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
         # et si je tombe sur une partie qui est une URL d'un des termes, je le supprime
         # afin de recupere l'alias de base d'un node de ce type
         foreach ($alias_parts as $key => $value) {
-            if (in_array($value, $oldUrls)) {
+            if (in_array($value, $old_urls)) {
                 unset($alias_parts[$key]);
             }
         }
@@ -301,19 +301,21 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
 
         # Je recupère les nouveaux hubs (ceux qui sont dans new mais pas dans old)
         # ils sont donc à créer
-        foreach ($newHubs_id as $id) {
-            if (!in_array($id, $oldHubs_id))
-                $toCreate[] = $id;
+        foreach ($new_hubs_id as $id) {
+            if (!in_array($id, $old_hubs_id)) {
+                $to_create[] = $id;
+            }
         }
 
         # Je fais l'inverse pour ceux à supprimer
-        foreach ($oldHubs_id as $id) {
-            if (!in_array($id, $newHubs_id))
-                $toRemove[] = $id;
+        foreach ($old_hubs_id as $id) {
+            if (!in_array($id, $new_hubs_id)) {
+                $to_remove[] = $id;
+            }
         }
 
         # Je crée les nouveaux Alias
-        foreach ($toCreate as $term_id) {
+        foreach ($to_create as $term_id) {
             #Recuperation du term selectionné et du prefixe d'url de ce term
             $term = \Drupal\taxonomy\Entity\Term::load($term_id);
             $term_url = $term->get(OabHubController::FIELD_URL_ID);
@@ -324,7 +326,7 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
         }
 
         # Je supprime les anciens alias
-        foreach ($toRemove as $term_id) {
+        foreach ($to_remove as $term_id) {
             #Recuperation du term selectionné et du prefixe d'url de ce term
             $term = \Drupal\taxonomy\Entity\Term::load($term_id);
             $term_url = $term->get(OabHubController::FIELD_URL_ID);
@@ -334,9 +336,9 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
                             'alias' => "/" . $term_url . $alias,
                             "langcode"  => $langcode));
            if ($ret) {
-               oab_hub_drupal_message("Alias supprimé ","/$langcode/$term_url" . $alias);
+               oab_hub_drupal_message("Alias supprimé ", "/$langcode/$term_url" . $alias);
            } else {
-               oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error");
+               oab_hub_drupal_message("Erreur lors de la suppression de l'alias ", "/$langcode/$term_url" . $alias, "error");
            }
         }
 
@@ -352,7 +354,7 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
             array();
 
         ## Petits garde fous, et on ne fait que si la valeur a changé
-        if ( (isset($on_portal['value']) && isset($old_on_portal['value']))
+        if ((isset($on_portal['value']) && isset($old_on_portal['value']))
             && $on_portal['value'] != $old_on_portal['value']
         ) {
             ## Si on ajoute "portail" je crée l'alias
@@ -367,9 +369,9 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
                         'alias' => $alias,
                         "langcode"  => $langcode));
                 if ($ret) {
-                    oab_hub_drupal_message("Alias supprimé ","/$langcode" . $alias);
+                    oab_hub_drupal_message("Alias supprimé ", "/$langcode" . $alias);
                 } else {
-                    oab_hub_drupal_message("Erreur lors de la suppression de l'alias ","/$langcode/$term_url" . $alias, "error");
+                    oab_hub_drupal_message("Erreur lors de la suppression de l'alias ", "/$langcode/$term_url" . $alias, "error");
                 }
             }
 
@@ -400,7 +402,7 @@ function oab_hub_theme_suggestions_menu_alter(array &$suggestions, array $variab
     $menus = OabHubController::getDefaultBlockName();
 
     # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
-    $actifHub = OabHubController::getActifHub();
+    $actif_hub = OabHubController::getActifHub();
 
 
     $menu_name = false;
@@ -429,7 +431,7 @@ function oab_hub_preprocess_block(&$variables) {
     $menus = OabHubController::getDefaultBlockName();
 
     # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
-    $actifHub = OabHubController::getActifHub();
+    $actif_hub = OabHubController::getActifHub();
 
     if (isset($variables['elements']['#base_plugin_id']) && $variables['elements']['#base_plugin_id'] == "system_menu_block") {
         foreach ($menus as $menu) {

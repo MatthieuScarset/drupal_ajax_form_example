@@ -38,7 +38,8 @@ class AxiomeContentImporter {
 
         $dom = Html::load($content);
 
-        self::replaceLeftBlock($dom, $banner_data, $node);
+
+        self::replaceLeftBlock($dom, $banner_data);
         self::replaceCenterBlock($dom, $banner_data);
         self::replaceRightBlock($dom, $banner_data);
 
@@ -78,19 +79,20 @@ class AxiomeContentImporter {
 
     /**
      * @param $dom
-     * @param $banner_data
+     * @param $bannerData
      */
-    private static function replaceLeftBlock(&$dom, $banner_data, $node) {
+    private static function replaceLeftBlock(&$dom, $banner_data) {
         $css_class_left_block =  $banner_data['orange_theme']['boosted_css_name'];
         $font_color = $banner_data['font_color'];
         //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        $css_class_left_block = str_replace("-","_",$css_class_left_block);
-        $title_left_block = \Drupal::config('oab.settings_axiome')->get($css_class_left_block);
+
+        $class_left_block = str_replace("-","_",$css_class_left_block);
+        $title_left_block = \Drupal::config('oab.settings_axiome')->get($class_left_block);
 
         // change class name
         $nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
-        foreach($nodes as $el) {
+        foreach ($nodes as $el) {
             $el->removeAttribute('class');
             $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$css_class_left_block);
         }
@@ -109,7 +111,7 @@ class AxiomeContentImporter {
         $font_color = $banner_data['font_color'];
         // change title
         $nodes_span = self::getNodesByClass($dom, 'titre3');
-        foreach($nodes_span as $el) {
+        foreach ($nodes_span as $el) {
             $el->textContent = $title_center;
             $el->setAttribute('style', 'color: '.$font_color);
         }
