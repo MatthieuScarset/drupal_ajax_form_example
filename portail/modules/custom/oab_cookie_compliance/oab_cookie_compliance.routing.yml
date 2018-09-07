@@ -4,4 +4,4 @@ oab.cookie_compliance.settings:
     _form: '\Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm'
     _title: 'Cookie compliance settings'
   requirements:
-    _custom_access: \Drupal\oab_backoffice\Form\oabSettingSpecificAccessForm::access
+    _custom_access: \Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm::access

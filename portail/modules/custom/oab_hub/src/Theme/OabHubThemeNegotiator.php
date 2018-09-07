@@ -18,6 +18,9 @@ class OabHubThemeNegotiator implements ThemeNegotiatorInterface {
         #Path du noeud (sous la forme /node/id
         $url = \Drupal::request()->getRequestUri();
 
+        if (strpos($url, '?') !== false) { 
+            $url = substr($url, 0, strpos($url, '?'));
+        }
 
         ##Je recupère toutes les parties de la route
         $route_parts = explode('/',$url);

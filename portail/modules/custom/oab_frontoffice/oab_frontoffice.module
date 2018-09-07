@@ -301,7 +301,7 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
         // On enlève le "order by sticky" dans ce cas là
         // On doit faire ça à cause du fonctionnement de la view et des traductions
         // le sticky doit être enregistré au niveau du contenu principal, pas dans ses traductions
-        if(isset($query->orderby)
+        if (isset($query->orderby)
         && !empty($query->orderby)) {
               foreach ($query->orderby AS $key=>$value) {
                 if (is_array($value)
@@ -565,7 +565,7 @@ function __seek_alternate($tab) {
 }
 
 
-/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view) {
+/*function oab_frontoffice_views_pre_render(\Drupal\views\ViewExecutable $view){
   if (isset($view) && ($view->storage->id() == 'subhomes')) {
     $view->element['#attached']['library'][] = 'oab_frontoffice/views-ajax-url';
   }
