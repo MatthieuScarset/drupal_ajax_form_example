@@ -467,11 +467,15 @@ class OabHubController extends ControllerBase {
             ->execute()
             ->fetchAll();
 
+        $ret = "";
         if (count($results)>0) {
-            return $results[0]->alias;
+            $ret = "/" . $results[0]->langcode . $results[0]->alias;
         } else {
-            return \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid");
+            $alias = \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid", $langcode);
+            $ret = "/" . $langcode . $alias ;
         }
+
+        return $ret;
     }
 
     public static function getHubBaseUrl($absolute = false) {
