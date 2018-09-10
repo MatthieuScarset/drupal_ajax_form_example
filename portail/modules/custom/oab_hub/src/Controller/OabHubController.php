@@ -512,6 +512,15 @@ class OabHubController extends ControllerBase {
 
     public static function getHubSubhomeUrl($url_cible) {
 
+        $url_to_test = $url_cible;
+        if (is_object($url_to_test) && method_exists($url_to_test, 'toString')) {
+            $url_to_test = $url_cible->toString();
+        }
+
+        if (\Drupal\Component\Utility\UrlHelper::isExternal($url_to_test)) {
+            return $url_cible;
+        }
+
         # Je recupère les URLS des hubs
         $urls_hub = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
 
@@ -580,7 +589,7 @@ class OabHubController extends ControllerBase {
         }
 
         if (!is_object($new_url)) {
-           $new_url = 'internal:/' . $new_url;
+            $new_url = 'internal:' . $new_url;
         }
 
         return $new_url;
