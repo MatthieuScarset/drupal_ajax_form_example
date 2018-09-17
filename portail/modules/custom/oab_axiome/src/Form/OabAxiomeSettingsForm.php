@@ -22,7 +22,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.axiome',
+      self::getConfigName(),
     ];
   }
 
@@ -35,7 +35,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.axiome');
+    $config = $this->config(self::getConfigName());
 
     $form['axiome_enable_cron'] = array(
       '#type' => 'checkbox',
@@ -93,7 +93,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.axiome')
+    $this->config(self::getConfigName())
       ->set('axiome_enable_cron', $form_state->getValue('axiome_enable_cron'))
       ->set('icon_frame_connectivity', $form_state->getValue('icon_frame_connectivity'))
       ->set('icon_frame_teamwork', $form_state->getValue('icon_frame_teamwork'))
