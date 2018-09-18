@@ -98,7 +98,23 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
     $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     ##Je recupère et je découpe l'URL
-    $uri = \Drupal::request()->getRequestUri();
+    $uri = "";
+
+    if (!\Drupal::request()->isXmlHttpRequest()) {
+        //SI on n'est pas dans une requête AJAX, c'est simple
+        $uri = \Drupal::request()->getRequestUri();
+    } else {
+        // Sinon, je recupère le referer pour avoir le hub d'origine
+        // (Cas des boutons "voir plus"
+        $referer = \Drupal::request()->headers->get('referer');
+        if (strlen($referer) > 0 ) {
+            $site_url = \Drupal::request()->getSchemeAndHttpHost();
+            if (strpos($referer, $site_url) !== false) {
+                $uri = substr($referer, strlen($site_url));
+            }
+        }
+    }
+
     $uri_parts = explode('/', $uri);
     if ($uri_parts[0] === "") {
         array_shift($uri_parts);
