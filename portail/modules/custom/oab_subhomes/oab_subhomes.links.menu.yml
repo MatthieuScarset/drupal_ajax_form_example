@@ -4,8 +4,8 @@ entity.subhome_entity.collection:
   title: 'Subhomes List'
   route_name: entity.subhome_entity.collection
   description: 'List Subhome entity entities'
-  parent: entity.subhome_entity_type.collection
-  weight: -10
+  parent: system.admin_content
+  weight: 100
 
 
 # Subhome entity type menu items definition
