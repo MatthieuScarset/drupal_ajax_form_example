@@ -9,6 +9,9 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * Implements hook_help().
@@ -180,4 +183,21 @@ function oab_subhomes_preprocess_views_view(&$variables) {
             }
         }
     }
+}
+
+
+/**
+ * HOOK_ENTITY_ACCESS
+ *
+ * Problèmes de droits pour les paragraphes utilisés dans la refonte de la subhome press. Je donne l'accès pour les voir
+ */
+function oab_subhomes_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+    if ($entity->getEntityTypeId() == 'paragraph'
+        && ($entity->bundle() === 'subhome_presse_carrousel' || $entity->bundle() === 'default_button')
+        && $operation == 'view'
+    ) {
+        return AccessResult::allowed();
+    }
+
+    return AccessResult::neutral();
 }
