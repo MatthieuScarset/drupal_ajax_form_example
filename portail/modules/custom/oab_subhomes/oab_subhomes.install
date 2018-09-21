@@ -4,7 +4,7 @@
 /** Définit l'ordre des updates par rapport aux autres modules
  * @return mixed
  */
-function oab_tristan_update_dependencies() {
+function oab_subhomes_update_dependencies() {
 
     $dependencies['oab_subhomes'][8001] = array('oab_tristan' => 8085);
 
