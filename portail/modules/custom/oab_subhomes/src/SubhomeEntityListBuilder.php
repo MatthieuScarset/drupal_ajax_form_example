@@ -22,6 +22,7 @@ class SubhomeEntityListBuilder extends EntityListBuilder {
     public function buildHeader() {
         $header['id'] = $this->t('Subhome entity ID');
         $header['name'] = $this->t('Name');
+        $header['language'] = $this->t('Language');
         $header['entity_type'] = $this->t('Entity type');
         $header['subhome'] = $this->t('Taxo Subhome');
         $header['created'] = $this->t('Created');
@@ -41,12 +42,20 @@ class SubhomeEntityListBuilder extends EntityListBuilder {
           ['subhome_entity' => $entity->id()]
         );
 
+        $row['language'] = $entity->language()->getName();
         $entity_type = SubhomeEntityType::load($entity->bundle());
 
         $row['entity_type'] = $entity_type !== null
                     ? $entity_type->label()
                     : $entity->bundle();
-        $row['subhome'] = $entity->getSubhome()->getName();
+
+
+        $voca = \Drupal\taxonomy\Entity\Vocabulary::load($entity->getSubhome()->getVocabularyId());
+        $voca_name = "";
+        if ($voca !== null) {
+            $voca_name = $voca->label() . '\\' ;
+        }
+        $row['subhome'] = $voca_name . $entity->getSubhome()->getName();
 
         $row['created'] = Date('d/m/Y H:i:s', $entity->getCreatedTime());
         $row['modified'] = Date('d/m/Y H:i:s', $entity->getChangedTime());
