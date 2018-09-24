@@ -201,3 +201,59 @@ function oab_subhomes_entity_access(EntityInterface $entity, $operation, Account
 
     return AccessResult::neutral();
 }
+
+function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+    if ($form_id == "subhome_entity_presse_edit_form") {
+        $user = \Drupal::currentUser();
+
+        // Pour les non admin, je bloque la partie "Config" de la subhome entity
+        if ($user->id() !== 1) {
+            if (isset($form['#fieldgroups']['group_config']) && isset($form['#group_children'])) {
+                foreach ($form['#group_children'] as $field => $group) {
+                    if ($group == 'group_config') {
+                        $form[$field]['#disabled'] = true;
+                    }
+                }
+            }
+        }
+
+        // Ajout du validate pour le field visual et l'aplat de la partie Corporate
+        $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
+
+    }
+
+    // Je fais la même chose pour les fields de l'entité Dossier de presse
+    if ($form_id == 'node_press_kit_form' || $form_id == 'node_press_kit_edit_form' ) {
+        $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
+    }
+}
+
+
+function oab_subhomes_check_visual_aplat($form, Drupal\Core\Form\FormState &$form_state) {
+
+    if ($form['#form_id'] === 'subhome_entity_presse_edit_form') {
+        $field_aplat = $form_state->getValue('field_corporate_aplat');
+        $field_visuel = $form_state->getValue('field_corporate_visuel');
+    } elseif ($form['#form_id'] == 'node_press_kit_form' || $form['#form_id'] == 'node_press_kit_edit_form') {
+        $field_aplat = $form_state->getValue('field_aplat');
+        $field_visuel = $form_state->getValue('field_visual');
+    } else {
+        return;
+    }
+
+    // Trop de conditions pour le field visual, je le met dans une variable
+    $field_visual_is_empty = false;
+    if ($field_visuel === null || count($field_visuel) == 0) {
+        $field_visual_is_empty = true;
+    }
+    if (isset($field_visuel['target_id']) && strlen($field_visuel['target_id']) == 0) {
+        $field_visual_is_empty = true;
+    }
+
+    // Petit check pour les visual et aplat : au moins l'un des deux doit être remplis
+    if ($field_visual_is_empty
+        && ($field_aplat === null || count($field_aplat) == 0)) {
+        $form_state->setErrorByName('group_corporate', t('Either Aplat or Visual in Corporate Group should be set'));
+    }
+}
