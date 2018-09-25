@@ -8,7 +8,8 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
+class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
+{
   /**
    * {@inheritdoc}
    */
@@ -20,9 +21,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return [
-      'oab.synomia.contentTypes',
-    ];
+    return ['oab.synomia.contentTypes',];
   }
 
   /**

@@ -25,18 +25,13 @@ class OabSynomiaSearchFluxController extends ControllerBase
 
 		$response = new Response();
 		$parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
-		if (empty($parameters))
-		{
+		if (empty($parameters)) {
 			$response->setContent($this->getSitemapSynomiaSimple());
-		}
-		elseif (isset($parameters['startDate']) && isset($parameters['endDate']))
-		{
-			if (isValidDate($parameters['startDate'],'Ymd') && isValidDate($parameters['endDate'],'Ymd'))
-			{
+		} elseif (isset($parameters['startDate']) && isset($parameters['endDate'])) {
+			if (isValidDate($parameters['startDate'],'Ymd') && isValidDate($parameters['endDate'],'Ymd')) {
 				$response->setContent($this->getSitemapSynomiaByDates($parameters['startDate'], $parameters['endDate']));
 			}
-		}
-		else{
+		} else {
 			throw new NotFoundHttpException();
 		}
 		$response->headers->set('Content-Type','text/xml');
@@ -44,8 +39,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
   }
 
 
-	private function getSitemapSynomiaSimple()
-	{
+	private function getSitemapSynomiaSimple() {
 		//calcul de l'intervalle de temps à prendre en compte :
 		// 1. on prend les contenus qui ont été modifiés il y a au moins 12h (pour que le cache Akamai soit rafraichi) :
 		$timeFin = strtotime("-12 hours", time());
@@ -57,8 +51,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		return $xml_feed;
 	}
 
-  private function getSitemapSynomiaByDates($debut, $fin)
-	{
+  private function getSitemapSynomiaByDates($debut, $fin) {
 		$startDate = \DateTime::createFromFormat('Ymd H:i:s', $debut.'00:00:00');
 		$timeDebut = $startDate->getTimestamp();
 
@@ -69,8 +62,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		return $xml_feed;
 	}
 
-	private function get_sitemap_synomia_by_dates($timeDebut, $timeFin)
-	{
+	private function get_sitemap_synomia_by_dates($timeDebut, $timeFin) {
 		$contentTypes = $this->getContentTypeToIndex();
 		$startCreationDateLimit = $this->getCreationDateLimit();
 		$base_url = \Drupal::request()->getSchemeAndHttpHost();
@@ -143,7 +135,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 	 * @return array
 	 */
 	private function getContentTypeToIndex() {
-  	$types = array();
+  	    $types = array();
 		$config_factory = \Drupal::configFactory();
 		//on récupère la configuration oab.synomia.contentTypes
 		$config = $config_factory->get('oab.synomia.contentTypes');
@@ -151,8 +143,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		$contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
 		foreach ($contentTypes as $contentType) {
 			$value = $config->get($contentType->id());
-			if (isset($value) && $value == "1")
-			{
+			if (isset($value) && $value == "1") {
 				$types[] = $contentType->id();
 			}
 		}
@@ -168,11 +159,9 @@ class OabSynomiaSearchFluxController extends ControllerBase
 		//on récupère la configuration oab.synomia.contentTypes
 		$config = $config_factory->get('oab.synomia.contentTypes');
 		$date = $config->get('creationDateLimit');
-		if (isset($date) && !empty($date))
-		{
+		if (isset($date) && !empty($date)) {
 			$timestamp = strtotime($date);
-		}
-		else{
+		} else {
 			$timestamp = strtotime('2015-01-01');
 		}
 		//oabt($timestamp, true);

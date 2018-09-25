@@ -10,7 +10,8 @@ namespace Drupal\oab_synomia_search_engine\Classes;
 use Drupal\node\Entity\NodeType;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 
-class SynomiaSearchResponse {
+class SynomiaSearchResponse
+{
 
 	public $facets = array();
 	public $degradations = array();
@@ -23,10 +24,10 @@ class SynomiaSearchResponse {
 
 	public function __construct() {
 
-	}
+    }
+
 	public function readXML($fluxXML, $rubrique) {
-		if (!empty($fluxXML))
-		{
+		if (!empty($fluxXML)) {
 			$dom = new \DOMDocument();
 			$dom->loadXML($fluxXML);
 
@@ -37,14 +38,12 @@ class SynomiaSearchResponse {
 			$this->getFacetsFromXml($dom);
 
 			//corrections éventuelles
-			if (isset($xmlResult->corrections) && isset($xmlResult->corrections->correction))
-			{
+			if (isset($xmlResult->corrections) && isset($xmlResult->corrections->correction)) {
 				$this->corrections = $xmlResult->corrections->correction;
 			}
 
 			//degradations de requete, uniquement si pas de résultats
-			if (isset($xmlResult->degradations) && $xmlResult->estimatedTotalResultsCount == 0)
-			{
+			if (isset($xmlResult->degradations) && $xmlResult->estimatedTotalResultsCount == 0) {
 				$this->getDegradationsFromXML($dom);
 			}
 
@@ -52,13 +51,10 @@ class SynomiaSearchResponse {
 			$this->nbResultsTotal = $xmlResult->estimatedTotalResultsCount;
 
 			//resultats
-			if (isset($xmlResult->cluster) || empty($rubrique))
-			{
+			if (isset($xmlResult->cluster) || empty($rubrique)) {
 				$this->searchMode = "global";
 				$this->getResultsClustersArray($dom);
-			}
-			else
-			{
+			} else {
 				//filtré sur une rubrique particuliere
 				$this->searchMode = "rubrique";
 				$this->getResultsSimpleArray($xmlResult, $rubrique);
@@ -66,18 +62,15 @@ class SynomiaSearchResponse {
 				//Pager
 				$config_factory = \Drupal::configFactory();
 				$config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
-				if (!empty($config) && !empty($config->get('nb_results_per_page')))
-				{
+				if (!empty($config) && !empty($config->get('nb_results_per_page'))) {
 					$nbResultsPerPage = $config->get('nb_results_per_page');
-				}
-				else{
+				} else {
 					$nbResultsPerPage = 10; // 10 par défaut si aucune configuration
 				}
 
 				$this->current_page = pager_default_initialize($xmlResult->estimatedTotalResultsCount, $nbResultsPerPage);
 				//$this->pager = theme('pager');
 			}
-
 		}
 	}
 
@@ -86,8 +79,7 @@ class SynomiaSearchResponse {
 	 * @param unknown $dom
 	 * @return Ambigous <multitype:multitype: , multitype:NULL >
 	 */
-	private function getResultsSimpleArray($xmlResult, $type)
-	{
+	private function getResultsSimpleArray($xmlResult, $type) {
 		$clusterArray = array();
 		if ( $type != "#SYNAUTRE#") {
 			$clusterArray['typeId'] = $type;
@@ -112,18 +104,14 @@ class SynomiaSearchResponse {
 	 * @param unknown $dom
 	 * @return Ambigous <multitype:multitype: , multitype:NULL >
 	 */
-    public function getResultsClustersArray($dom)
-	{
+    public function getResultsClustersArray($dom) {
 		$cluster = $dom->getElementsByTagName("cluster");
-		if (isset($cluster))
-		{
+		if (isset($cluster)) {
 			$clusterArray = array();
 			$cluster = $cluster->item(0);
-			if (isset($cluster))
-			{
+			if (isset($cluster)) {
 				$aspects = $cluster->getElementsByTagName("aspect");
-				foreach ($aspects as $aspect)
-				{
+				foreach ($aspects as $aspect) {
 					$type = $aspect->getAttribute('value');
 					if ( $type != "#SYNAUTRE#") {
 						$clusterArray['typeId'] = $type;
@@ -167,14 +155,11 @@ class SynomiaSearchResponse {
 	private function getFacetsFromXml($dom) {
 		//oabt($dom, true);
 		$facetsTag = $dom->getElementsByTagName("facets");
-		if (isset($facetsTag))
-		{
+		if (isset($facetsTag)) {
 			$facetsTag = $facetsTag->item(0);
-			if (isset($facetsTag))
-			{
+			if (isset($facetsTag)) {
 				$facets = $facetsTag->getElementsByTagName("aspect");
-				foreach ($facets as $facet)
-				{
+				foreach ($facets as $facet) {
 					if ( $facet->firstChild->nodeValue != "#SYNAUTRE#") {
 						$this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ','_',$facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
 					}
@@ -190,14 +175,11 @@ class SynomiaSearchResponse {
 	 */
 	private function getDegradationsFromXML($dom) {
 		$degradationsTag = $dom->getElementsByTagName("degradations");
-		if (isset($degradationsTag))
-		{
+		if (isset($degradationsTag)) {
 			$degradationsTag = $degradationsTag->item(0);
-			if (isset($degradationsTag))
-			{
+			if (isset($degradationsTag)) {
 				$degradations = $degradationsTag->getElementsByTagName("degradation");
-				foreach ($degradations as $degradation)
-				{
+				foreach ($degradations as $degradation) {
 					$this->degradations[$degradation->getAttribute('combi')] = $degradation->nodeValue;
 				}
 			}
@@ -218,8 +200,7 @@ class SynomiaSearchResponse {
 				break;
 			default:
 				$typeObject = NodeType::load($type_id);
-				if (isset($typeObject) && !empty($typeObject))
-				{
+				if (isset($typeObject) && !empty($typeObject)) {
 					$typeName = $typeObject->label();
 				}
 
