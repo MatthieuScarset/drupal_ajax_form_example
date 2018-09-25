@@ -23,8 +23,7 @@ class OabAkamaiForm extends ConfigFormBase {
     /**
      * {@inheritdoc}
      */
-    protected function getEditableConfigNames()
-    {
+    protected function getEditableConfigNames() {
         return [
             self::getConfigName(),
         ];

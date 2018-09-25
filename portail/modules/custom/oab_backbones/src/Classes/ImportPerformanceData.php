@@ -32,9 +32,9 @@ class ImportPerformanceData
                 $zip->extract($path_to_folder);
 
                 $bb_import = new BackbonesImport();
-                $bb_importData = new BackbonesImportData();
+                $bb_importdata = new BackbonesImportData();
                 $bb_import->saveNewImport($month);
-                $bb_importData->deleteAllDataForDates($month);
+                $bb_importdata->deleteAllDataForDates($month);
 
                 $path_file_csv_final = $path_to_folder . '/' . $this::FINAL_FILENAME . $month . ".csv";
                 $this->importLines($path_file_csv_final, $month);

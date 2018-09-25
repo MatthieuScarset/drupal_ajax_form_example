@@ -39,7 +39,6 @@ class AxiomeContentImporter {
 
         $dom = Html::load($content);
 
-
         self::replaceLeftBlock($dom, $banner_data);
         self::replaceCenterBlock($dom, $banner_data);
         self::replaceRightBlock($dom, $banner_data);
@@ -275,7 +274,7 @@ class AxiomeContentImporter {
         }
         if (empty(
             $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive']
-        )) {
+        )){
             $message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
             $is_valid = false;
         }
