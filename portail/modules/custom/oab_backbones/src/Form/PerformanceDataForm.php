@@ -17,7 +17,6 @@ use Drupal\oab_backbones\Classes\ImportPerformanceData;
 class PerformanceDataForm extends FormBase
 {
 
-
     /**
      * Returns a unique string identifying the form.
      *

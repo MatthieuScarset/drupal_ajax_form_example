@@ -218,8 +218,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
 
     //preselection des departements et segments de marché sur les PARTNERS
-    if (in_array($form_id, array('node_partner_form' )))
-    {
+    if (in_array($form_id, array('node_partner_form' ))) {
         if (isset($form['field_departments'])) {
             //par défaut on sélectionne tous les départements
             $form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);

@@ -15,8 +15,8 @@ use Exception;
 use function PHPSTORM_META\type;
 use stdClass;
 
-class AxiomeImporter{
-
+class AxiomeImporter
+{
     const CONFIG_VALUE_NAME = "sous_famille_values";
 
     private $fichesJointent = array();

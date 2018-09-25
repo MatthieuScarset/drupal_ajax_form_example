@@ -93,8 +93,7 @@ function oab_backbones_import_batch($columns, $shadow_sites, $month, &$context) 
 /**
  * Méthode appelée à la fin des batchs
  */
-function oab_backbones_import_batch_finished($success, $results, $operations)
-{
+function oab_backbones_import_batch_finished($success, $results, $operations) {
     if ($success) {
         $message = \Drupal::translation()->formatPlural(count($results['title']), 'One performance data processed.',
             '@count performance data processed.');
