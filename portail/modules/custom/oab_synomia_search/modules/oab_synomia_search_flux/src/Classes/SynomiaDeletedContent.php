@@ -5,7 +5,8 @@ namespace Drupal\oab_synomia_search_flux\Classes;
 use Drupal\Core\Database\Database;
 
 
-class SynomiaDeletedContent {
+class SynomiaDeletedContent
+{
 
 	private $nid;
 	private $content_type;
@@ -89,8 +90,7 @@ class SynomiaDeletedContent {
 			&& !empty($this->content_type)
 			&&!empty($this->url)
 			&& !empty($this->language)
-			&& !empty($this->deleted))
-		{
+			&& !empty($this->deleted)) {
 			$query = Database::getConnection()->merge('synomia_deleted_content')
 				->key(array('nid' => $this->nid))
 				->fields(array(
@@ -107,8 +107,7 @@ class SynomiaDeletedContent {
 	public function delete() {
 		if (!empty($this->nid)
 			&& !empty($this->content_type)
-			&& !empty($this->language))
-		{
+			&& !empty($this->language)) {
 			$query = Database::getConnection()->delete('synomia_deleted_content')
 				->condition('nid',$this->nid,'=')
 				->condition('content_type',$this->content_type,'=')

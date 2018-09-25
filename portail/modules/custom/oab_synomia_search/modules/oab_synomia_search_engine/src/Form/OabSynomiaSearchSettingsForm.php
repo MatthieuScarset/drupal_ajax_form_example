@@ -8,7 +8,8 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class OabSynomiaSearchSettingsForm extends ConfigFormBase {
+class OabSynomiaSearchSettingsForm extends ConfigFormBase
+{
 
 	public static function getConfigName() {
 		return 'oab.synomia.searchSettings';
@@ -34,8 +35,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 		$config = $this->config($this->getConfigName());
 		$languages = \Drupal::languageManager()->getLanguages();
 		//urls synomia selon les langue pour l'appel du flux de recherche
-		foreach ($languages as $language)
-		{
+		foreach ($languages as $language) {
 			$form['url_synomia_'.$language->getId()] = array(
 				'#type' => 'textfield',
 				'#title' => 'URL Synomia for '.$language->getName(),
@@ -49,8 +49,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase {
 			'#default_value' => $config->get('nb_results_per_page'),
 		);
 		//ordre des tyoes de contenus
-		foreach ($languages as $language)
-		{
+		foreach ($languages as $language) {
 			$form['order_content_types_'.$language->getId()] = array(
 				'#type' => 'textarea',
 				'#size' => '200',
