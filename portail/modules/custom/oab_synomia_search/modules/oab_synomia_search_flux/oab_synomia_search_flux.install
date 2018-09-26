@@ -54,7 +54,7 @@ function oab_synomia_search_flux_schema() {
  * @return mixed
  */
 function oab_synomia_search_flux_update_dependencies() {
-	/*$dependencies['oab_synomia_search_flux'][8001] = array('' => );
+	/*$dependencies['oab_synomia_search_flux'][8001] = array('' =>);
 	return $dependencies;*/
 }
 
