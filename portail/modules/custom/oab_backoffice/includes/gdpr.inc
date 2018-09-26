@@ -41,7 +41,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         $allowed = gdpr_check_authorized_view($entity, $account);
         if ($allowed) {
             return Drupal\Core\Access\AccessResult::allowed();
-        } elseif ( $allowed == false) {
+        } elseif ($allowed == false) {
             return Drupal\Core\Access\AccessResult::forbidden();
         } elseif ($allowed == null) {
             return Drupal\Core\Access\AccessResult::neutral();
@@ -405,8 +405,7 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
 
             ## Je le rend cliquable que si l'utilisateur courant est le business_owner
             if ($current_user->id() == 1
-                || ( $business_owner !== null
-                    && (
+                || ($business_owner !== null && (
                         in_array('webform_admin', $current_user->getRoles())
                         ||  (
                             in_array('webform_business_owner', $current_user->getRoles())

@@ -218,7 +218,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
 
     //preselection des departements et segments de marché sur les PARTNERS
-    if (in_array($form_id, array('node_partner_form' ))) {
+    if (in_array($form_id, array('node_partner_form'))) {
         if (isset($form['field_departments'])) {
             //par défaut on sélectionne tous les départements
             $form['field_departments']['widget']['#default_value']  = array_keys($form['field_departments']['widget']['#options']);
@@ -276,7 +276,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if ($url !== null) {
 
             ##On recupère l'alias
-            $path = preg_replace('/\//', '',parse_url($url, PHP_URL_PATH),1);
+            $path = preg_replace('/\//', '', parse_url($url, PHP_URL_PATH),1);
             $path = str_replace($current_language, '', $path);
 
             ##On recupère le /node/xxx depuis l'alias
