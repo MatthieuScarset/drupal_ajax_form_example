@@ -11,7 +11,7 @@ function oab_will_install() {
  */
 function oab_will_update_dependencies() {
     $dependencies = array();
-	return $dependencies;
+    return $dependencies;
 }
 
 /**

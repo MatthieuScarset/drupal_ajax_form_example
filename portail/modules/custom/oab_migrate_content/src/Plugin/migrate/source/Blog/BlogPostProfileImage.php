@@ -63,7 +63,7 @@ class BlogPostProfileImage extends SqlBase {
     ->condition('fi.entity_type', 'profile2')
     ->condition('fi.bundle', 'main')
     ->condition('ur.rid', 4, '=')
-	//		->condition('ur.rid', 99999, '=')
+    //        ->condition('ur.rid', 99999, '=')
     ->orderBy('f.fid', 'DESC');
 
     return $query;

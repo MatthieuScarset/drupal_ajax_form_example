@@ -14,41 +14,41 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 class SynomiaSearchHeaderBlockForm extends FormBase {
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getFormId() {
-		return 'oab_synomia_search_header_block_form';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormId() {
+        return 'oab_synomia_search_header_block_form';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function buildForm(array $form, FormStateInterface $form_state) {
-		$form['mot'] = array(
-			'#type' => 'textfield',
-			'#name' => 'mot',
-			'#attributes'=> ['class'=>['search-textfield']],
-			'#size' => 15,
-		);
-		$form['submit'] = [
-			'#type' => 'submit',
-			'#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
-			'#attributes'=> ['class'=>['search-link'], 'onmousedown' => 'utag_link(utag_data.titre_page, \'Menu\', \'Rechercher\', \'\');return true;'],
-			'#suffix' => '</div>',
-		];
-		return $form;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(array $form, FormStateInterface $form_state) {
+        $form['mot'] = array(
+            '#type' => 'textfield',
+            '#name' => 'mot',
+            '#attributes'=> ['class'=>['search-textfield']],
+            '#size' => 15,
+        );
+        $form['submit'] = [
+            '#type' => 'submit',
+            '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
+            '#attributes'=> ['class'=>['search-link'], 'onmousedown' => 'utag_link(utag_data.titre_page, \'Menu\', \'Rechercher\', \'\');return true;'],
+            '#suffix' => '</div>',
+        ];
+        return $form;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function submitForm(array &$form, FormStateInterface $form_state) {
-		$input = &$form_state->getUserInput();
-		$option = [
-			'query' => array('mot' => $input["mot"]),
-		];
-		$url = Url::fromRoute('oab_synomia_search_engine.engine_url', array(), $option);
-		$form_state->setRedirectUrl($url);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function submitForm(array &$form, FormStateInterface $form_state) {
+        $input = &$form_state->getUserInput();
+        $option = [
+            'query' => array('mot' => $input["mot"]),
+        ];
+        $url = Url::fromRoute('oab_synomia_search_engine.engine_url', array(), $option);
+        $form_state->setRedirectUrl($url);
+    }
 }

@@ -33,7 +33,7 @@ class PressReleaseNode extends SqlBase {
     $query = $this->select('node', 'n')
     ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
     ->condition('n.type', 'content_press_release', '=');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     //->range(0, 10);
 
     return $query;
@@ -54,7 +54,7 @@ class PressReleaseNode extends SqlBase {
       'city' => $this->t('city'),
       'solutions' => $this->t('solutions'),
       'industries' => $this->t('industries'),
-			'status' => $this->t('status'),
+            'status' => $this->t('status'),
     ];
 
     return $fields;
@@ -76,47 +76,47 @@ class PressReleaseNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-		//META TITRE
-		$title = $row->getSourceProperty('title');
-		$title = mb_substr($title,0, 55);
-		$row->setSourceProperty('meta_title', $title) ;
+        //META TITRE
+        $title = $row->getSourceProperty('title');
+        $title = mb_substr($title,0, 55);
+        $row->setSourceProperty('meta_title', $title) ;
 
-		//META DESCRIPTION - récupération de la short description (txt_catcher)
-		$meta_description = "";
-		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
-		$catcher_query->fields('c', ['field_txt_catcher_value'])
-			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
-			->condition('c.bundle', 'content_press_release', '=');
+        //META DESCRIPTION - récupération de la short description (txt_catcher)
+        $meta_description = "";
+        $catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+        $catcher_query->fields('c', ['field_txt_catcher_value'])
+            ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+            ->condition('c.bundle', 'content_press_release', '=');
 
-		$catcher_results = $catcher_query->execute()->fetchAll();
+        $catcher_results = $catcher_query->execute()->fetchAll();
 
-		if (is_array($catcher_results)) {
-			foreach ($catcher_results AS $catcher_result) {
+        if (is_array($catcher_results)) {
+            foreach ($catcher_results AS $catcher_result) {
 
-				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
-					$meta_description = $catcher_result->field_txt_catcher_value;
-				}
-				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
-					$meta_description = $catcher_result['field_txt_catcher_value'];
-				}
-			}
-		}
-		if (isset($meta_description) && !empty($meta_description))
-		{
-			$row->setSourceProperty('highlight_field', $meta_description) ;
-			$meta_description_short = mb_substr($meta_description,0, 155);
-			$row->setSourceProperty('meta_description', $meta_description_short) ;
-		}
+                // On vérifie si on a affaire à un objet ou à un tableau
+                if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
+                    $meta_description = $catcher_result->field_txt_catcher_value;
+                }
+                elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
+                    $meta_description = $catcher_result['field_txt_catcher_value'];
+                }
+            }
+        }
+        if (isset($meta_description) && !empty($meta_description))
+        {
+            $row->setSourceProperty('highlight_field', $meta_description) ;
+            $meta_description_short = mb_substr($meta_description,0, 155);
+            $row->setSourceProperty('meta_description', $meta_description_short) ;
+        }
 
     //Taxonomie de la Subhome
-		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
-		if (isset($subhomes['press'][$row->getSourceProperty('language')])
-			&& isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
-			&& !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
-		{
-			$row->setSourceProperty('subhomes', $subhomes['press'][$row->getSourceProperty('language')]['tid_D8']);
-		}
+        $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+        if (isset($subhomes['press'][$row->getSourceProperty('language')])
+            && isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
+            && !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
+        {
+            $row->setSourceProperty('subhomes', $subhomes['press'][$row->getSourceProperty('language')]['tid_D8']);
+        }
 
 
     // récupération de Country
@@ -194,54 +194,54 @@ class PressReleaseNode extends SqlBase {
      * Récupération des TAGS
      */
 
-		// récupération du tag "industries"
-		$industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
-			'field_data_field_taxo_industrie',
-			'field_taxo_industrie_tid',
-			$row->getSourceProperty('nid'),
-			'content_press_release');
-		if (count($industries) > 0) {
-			$row->setSourceProperty('industries', $industries);
-		}
+        // récupération du tag "industries"
+        $industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
+            'field_data_field_taxo_industrie',
+            'field_taxo_industrie_tid',
+            $row->getSourceProperty('nid'),
+            'content_press_release');
+        if (count($industries) > 0) {
+            $row->setSourceProperty('industries', $industries);
+        }
 
-		// récupération du tag "solution"
-		$solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution',
-			'field_data_field_taxo_solution',
-			'field_taxo_solution_tid',
-			$row->getSourceProperty('nid'),
-			'content_press_release');
-		if (count($solutions) > 0) {
-			$row->setSourceProperty('solutions', $solutions);
-		}
+        // récupération du tag "solution"
+        $solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution',
+            'field_data_field_taxo_solution',
+            'field_taxo_solution_tid',
+            $row->getSourceProperty('nid'),
+            'content_press_release');
+        if (count($solutions) > 0) {
+            $row->setSourceProperty('solutions', $solutions);
+        }
 
-		// récupération du tag "solution"
-		$solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
-			'field_data_field_taxo_solution',
-			'field_taxo_solution_tid',
-			$row->getSourceProperty('nid'),
-			'content_press_release');
-		if (count($solutions) > 0) {
-			$row->setSourceProperty('thematics', $solutions);
-		}
+        // récupération du tag "solution"
+        $solutions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
+            'field_data_field_taxo_solution',
+            'field_taxo_solution_tid',
+            $row->getSourceProperty('nid'),
+            'content_press_release');
+        if (count($solutions) > 0) {
+            $row->setSourceProperty('thematics', $solutions);
+        }
 
-		// récupération du tag "area"
-		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
-			'field_data_field_taxo_area',
-			'field_taxo_area_tid',
-			$row->getSourceProperty('nid'),
-			'content_press_release');
-		if (count($regions) > 0) {
-			$row->setSourceProperty('regions', $regions);
-		}
+        // récupération du tag "area"
+        $regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+            'field_data_field_taxo_area',
+            'field_taxo_area_tid',
+            $row->getSourceProperty('nid'),
+            'content_press_release');
+        if (count($regions) > 0) {
+            $row->setSourceProperty('regions', $regions);
+        }
 
-		//PRESS FORMAT
-		$formats = \Drupal::state()->get('press_format_for_migration');
-		if (isset($formats['press_release'][$row->getSourceProperty('language')])
-			&& isset($formats['press_release'][$row->getSourceProperty('language')]['tid_D8'])
-			&& !empty($formats['press_release'][$row->getSourceProperty('language')]['tid_D8']))
-		{
-			$row->setSourceProperty('press_types', $formats['press_release'][$row->getSourceProperty('language')]['tid_D8']);
-		}
+        //PRESS FORMAT
+        $formats = \Drupal::state()->get('press_format_for_migration');
+        if (isset($formats['press_release'][$row->getSourceProperty('language')])
+            && isset($formats['press_release'][$row->getSourceProperty('language')]['tid_D8'])
+            && !empty($formats['press_release'][$row->getSourceProperty('language')]['tid_D8']))
+        {
+            $row->setSourceProperty('press_types', $formats['press_release'][$row->getSourceProperty('language')]['tid_D8']);
+        }
 
     // récupération des fichiers
     $files_query = $this->select('field_data_field_file_upl', 'fi');
@@ -304,7 +304,7 @@ class PressReleaseNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-			$row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

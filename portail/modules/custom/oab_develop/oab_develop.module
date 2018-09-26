@@ -104,17 +104,17 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
     $config_group->set("default_langcode", "current_interface");
     $config_group->save(TRUE);
 
-	// update default name in english
-		$config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
-		$config_group->set("name", $defaultName);
-		$config_group->save(TRUE);
+    // update default name in english
+        $config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
+        $config_group->set("name", $defaultName);
+        $config_group->save(TRUE);
 
 
-	if ($lang != 'en') {
-		$vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
-		$vocaConfig->set('name', $nameVoca);
-		$vocaConfig->save();
-	}
+    if ($lang != 'en') {
+        $vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
+        $vocaConfig->set('name', $nameVoca);
+        $vocaConfig->save();
+    }
 }
 
 /** Permet de tester une chaine de caractère date par rapport au format attendu
@@ -124,8 +124,8 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
  */
 function isValidDate($date, $format)
 {
-	$d = DateTime::createFromFormat($format, $date);
-	return $d && $d->format($format) == $date;
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
 
 
@@ -134,33 +134,33 @@ function isValidDate($date, $format)
  */
 function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
-	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if (empty($field_storage)) {
-		\Drupal\field\Entity\FieldStorageConfig::create(array(
-			'field_name' => $field_name,
-			'entity_type' => $entity_type_id,
-			'type' => $type,
-		))->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
-	}
+    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    if (empty($field_storage)) {
+        \Drupal\field\Entity\FieldStorageConfig::create(array(
+            'field_name' => $field_name,
+            'entity_type' => $entity_type_id,
+            'type' => $type,
+        ))->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+    }
 
-	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if (empty($field)) {
-		$config_array = array(
-			'field_name' =>  $field_name,
-			'entity_type' => $entity_type_id,
-			'bundle' => $bundle,
-			'label' => $label,
-			'required' => $required,
-		);
-		if (!empty($other_config)) {
-			$config_array = array_merge($config_array, $other_config);
-		}
-		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
-	}
+    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    if (empty($field)) {
+        $config_array = array(
+            'field_name' =>  $field_name,
+            'entity_type' => $entity_type_id,
+            'bundle' => $bundle,
+            'label' => $label,
+            'required' => $required,
+        );
+        if (!empty($other_config)) {
+            $config_array = array_merge($config_array, $other_config);
+        }
+        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+    }
 }
 
 /**
@@ -168,35 +168,35 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
  */
 function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
-	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if (empty($field_storage)) {
-		\Drupal\field\Entity\FieldStorageConfig::create(array(
-			'field_name' => $field_name,
-			'entity_type' => $entity_type_id,
-			'type' => $type,
-			'settings' => array('target_type' => $target)
-		))->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
-	}
+    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    if (empty($field_storage)) {
+        \Drupal\field\Entity\FieldStorageConfig::create(array(
+            'field_name' => $field_name,
+            'entity_type' => $entity_type_id,
+            'type' => $type,
+            'settings' => array('target_type' => $target)
+        ))->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+    }
 
-	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if (empty($field)) {
-		$config_array = array(
-			'field_name' =>  $field_name,
-			'entity_type' => $entity_type_id,
-			'bundle' => $bundle,
-			'label' => $label,
-			'required' => $required,
-			''
-		);
-		if (!empty($other_config)) {
-			$config_array = array_merge($config_array, $other_config);
-		}
-		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
-	}
+    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    if (empty($field)) {
+        $config_array = array(
+            'field_name' =>  $field_name,
+            'entity_type' => $entity_type_id,
+            'bundle' => $bundle,
+            'label' => $label,
+            'required' => $required,
+            ''
+        );
+        if (!empty($other_config)) {
+            $config_array = array_merge($config_array, $other_config);
+        }
+        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+    }
 }
 
 function loadConfigField($folder, $key) {
