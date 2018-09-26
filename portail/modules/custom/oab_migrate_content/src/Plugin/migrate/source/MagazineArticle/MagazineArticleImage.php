@@ -60,7 +60,7 @@ class MagazineArticleImage extends SqlBase {
     ->distinct(TRUE)
     ->condition('n.type', 'content_magazine_article')
     ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
 
     return $query;

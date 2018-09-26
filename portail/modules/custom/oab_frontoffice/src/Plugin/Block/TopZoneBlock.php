@@ -29,90 +29,90 @@ use Drupal\image\Entity\ImageStyle;
 
 class TopZoneBlock extends BlockBase {
 
-	public function build() {
-		$block = array();
-		// récupération du contexte
-		$node_ctxt = $this->getContextValue('node');
-		$nid_fld = $node_ctxt->nid->getValue();
-		$nid = $nid_fld[0]['value'];
-		// chargement du noeud et de la valeur top zone
-		$node = Node::load($nid);
-		if ($node->hasField('field_top_zone')) {
-			$top_zone = $node->get('field_top_zone')->getValue();
-		}
-		if ($node->hasField('field_top_zone_background')) {
-			$top_zone_background = $node->get('field_top_zone_background')->getValue();
-		}
-		if ($node->hasField('field_top_zone_bg_mobile')) {
-			$top_zone_background_mobile = $node->get('field_top_zone_bg_mobile')->getValue();
-		}
-		$block['#type'] = 'markup';
-		$block['#markup'] = '';
-		$content = '';
-		$contentTop = '';
-		$contentDesktop = '';
-		$contentMobile = '';
+    public function build() {
+        $block = array();
+        // récupération du contexte
+        $node_ctxt = $this->getContextValue('node');
+        $nid_fld = $node_ctxt->nid->getValue();
+        $nid = $nid_fld[0]['value'];
+        // chargement du noeud et de la valeur top zone
+        $node = Node::load($nid);
+        if ($node->hasField('field_top_zone')) {
+            $top_zone = $node->get('field_top_zone')->getValue();
+        }
+        if ($node->hasField('field_top_zone_background')) {
+            $top_zone_background = $node->get('field_top_zone_background')->getValue();
+        }
+        if ($node->hasField('field_top_zone_bg_mobile')) {
+            $top_zone_background_mobile = $node->get('field_top_zone_bg_mobile')->getValue();
+        }
+        $block['#type'] = 'markup';
+        $block['#markup'] = '';
+        $content = '';
+        $contentTop = '';
+        $contentDesktop = '';
+        $contentMobile = '';
 
-		if (isset($top_zone[0]['value'])) {
-			$contentTop = check_markup($top_zone[0]['value'], 'full_html', '', []);
-		}
-		if (isset($top_zone_background[0]['target_id'])) {
-			$entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
+        if (isset($top_zone[0]['value'])) {
+            $contentTop = check_markup($top_zone[0]['value'], 'full_html', '', []);
+        }
+        if (isset($top_zone_background[0]['target_id'])) {
+            $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
 
-			$url = '';
-			if (!is_null($entity)) {
-				$uri = $entity->getType()->thumbnail($entity);
-				$type = $node->getType();
-				if ($type == 'product') {
-					$img_style = 'top_zone';
-				} else {
-					$img_style = 'top_zone_big';
-				}
-				$url = ImageStyle::load($img_style)->buildUrl($uri);
-				$url = file_url_transform_relative($url);
-			}
-			$classHiddenXs = "";
-			if (isset($top_zone_background_mobile[0]['target_id'])) {
-				$classHiddenXs = 'class="hidden-xs"';
-			}
-			$contentDesktop = check_markup('<div id="topzonebg"  '.$classHiddenXs.' style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
-			$content = $contentDesktop;
-		}
-		if (isset($top_zone_background_mobile[0]['target_id'])) {
-			$entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background_mobile[0]['target_id']);
-			$url = '';
-			if (!is_null($entity)) {
-				$uri = $entity->getType()->thumbnail($entity);
-				$img_style = 'max_650';
-				$url = ImageStyle::load($img_style)->buildUrl($uri);
-				$url = file_url_transform_relative($url);
-			}
-			$contentMobile = check_markup('<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
-			$content = check_markup($contentDesktop . $contentMobile, 'full_html', '', []) ;
-		}
-		$block['#markup'] = $content;
-		return $block;
-	}
+            $url = '';
+            if (!is_null($entity)) {
+                $uri = $entity->getType()->thumbnail($entity);
+                $type = $node->getType();
+                if ($type == 'product') {
+                    $img_style = 'top_zone';
+                } else {
+                    $img_style = 'top_zone_big';
+                }
+                $url = ImageStyle::load($img_style)->buildUrl($uri);
+                $url = file_url_transform_relative($url);
+            }
+            $classHiddenXs = "";
+            if (isset($top_zone_background_mobile[0]['target_id'])) {
+                $classHiddenXs = 'class="hidden-xs"';
+            }
+            $contentDesktop = check_markup('<div id="topzonebg"  '.$classHiddenXs.' style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
+            $content = $contentDesktop;
+        }
+        if (isset($top_zone_background_mobile[0]['target_id'])) {
+            $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background_mobile[0]['target_id']);
+            $url = '';
+            if (!is_null($entity)) {
+                $uri = $entity->getType()->thumbnail($entity);
+                $img_style = 'max_650';
+                $url = ImageStyle::load($img_style)->buildUrl($uri);
+                $url = file_url_transform_relative($url);
+            }
+            $contentMobile = check_markup('<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
+            $content = check_markup($contentDesktop . $contentMobile, 'full_html', '', []) ;
+        }
+        $block['#markup'] = $content;
+        return $block;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function blockForm($form, FormStateInterface $form_state) {
-		$form = parent::blockForm($form, $form_state);
-		return $form;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function blockForm($form, FormStateInterface $form_state) {
+        $form = parent::blockForm($form, $form_state);
+        return $form;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function blockValidate($form, FormStateInterface $form_state) {
+    /**
+     * {@inheritdoc}
+     */
+    public function blockValidate($form, FormStateInterface $form_state) {
 
-	}
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function blockSubmit($form, FormStateInterface $form_state) {
+    /**
+     * {@inheritdoc}
+     */
+    public function blockSubmit($form, FormStateInterface $form_state) {
 
-	}
+    }
 }

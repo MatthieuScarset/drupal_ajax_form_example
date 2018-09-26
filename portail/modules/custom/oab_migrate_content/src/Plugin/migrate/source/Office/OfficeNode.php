@@ -36,7 +36,7 @@ class OfficeNode extends SqlBase {
      * below.
      */
     $query = $this->select('node', 'n')
-			->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
+            ->fields('n', ['nid', 'title', 'language', 'created', 'changed', 'status'])
     ->condition('n.type', 'content_presence_worldwide', '=');
     return $query;
   }
@@ -91,83 +91,83 @@ class OfficeNode extends SqlBase {
       }
     }
 
-		// récupération de l'email
-		$email_query = $this->select('location_instance', 'li');
-		$email_query->join('location_email', 'l', 'l.lid = li.lid');
-		$email_query->fields('l', ['email'])
-			->condition('li.nid', $row->getSourceProperty('nid'), '=');
-		$email_results = $email_query->execute()->fetchAll();
-		$email_value = "";
+        // récupération de l'email
+        $email_query = $this->select('location_instance', 'li');
+        $email_query->join('location_email', 'l', 'l.lid = li.lid');
+        $email_query->fields('l', ['email'])
+            ->condition('li.nid', $row->getSourceProperty('nid'), '=');
+        $email_results = $email_query->execute()->fetchAll();
+        $email_value = "";
 
-		if (is_array($email_results)) {
-			foreach ($email_results AS $email) {
+        if (is_array($email_results)) {
+            foreach ($email_results AS $email) {
 
-				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($email) && isset($email->email)) {
-					$email_value = $email->email;
-				}
-				elseif (is_array($email) && isset($email['email'])) {
-					$email_value = $email['email'];
-				}
-			}
-		}
-		if (isset($email_value) && !empty($email_value))
-		{
-			$row->setSourceProperty('email_address', $email_value) ;
-		}
+                // On vérifie si on a affaire à un objet ou à un tableau
+                if (is_object($email) && isset($email->email)) {
+                    $email_value = $email->email;
+                }
+                elseif (is_array($email) && isset($email['email'])) {
+                    $email_value = $email['email'];
+                }
+            }
+        }
+        if (isset($email_value) && !empty($email_value))
+        {
+            $row->setSourceProperty('email_address', $email_value) ;
+        }
 
-		// récupération du num de telephone
-		$phone_query = $this->select('location_instance', 'li');
-		$phone_query->join('location_phone', 'l', 'l.lid = li.lid');
-		$phone_query->fields('l', ['phone'])
-			->condition('li.nid', $row->getSourceProperty('nid'), '=');
-		$phone_results = $phone_query->execute()->fetchAll();
-		$phone_value = "";
+        // récupération du num de telephone
+        $phone_query = $this->select('location_instance', 'li');
+        $phone_query->join('location_phone', 'l', 'l.lid = li.lid');
+        $phone_query->fields('l', ['phone'])
+            ->condition('li.nid', $row->getSourceProperty('nid'), '=');
+        $phone_results = $phone_query->execute()->fetchAll();
+        $phone_value = "";
 
-		if (is_array($phone_results)) {
-			foreach ($phone_results AS $phone_result) {
+        if (is_array($phone_results)) {
+            foreach ($phone_results AS $phone_result) {
 
-				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($phone_result) && isset($phone_result->phone)) {
-					$phone_value = $phone_result->phone;
-				}
-				elseif (is_array($phone_result) && isset($phone_result['phone'])) {
-					$phone_value = $phone_result['phone'];
-				}
-			}
-		}
-		if (isset($phone_value) && !empty($phone_value))
-		{
-			$row->setSourceProperty('phone_number', $phone_value) ;
-		}
+                // On vérifie si on a affaire à un objet ou à un tableau
+                if (is_object($phone_result) && isset($phone_result->phone)) {
+                    $phone_value = $phone_result->phone;
+                }
+                elseif (is_array($phone_result) && isset($phone_result['phone'])) {
+                    $phone_value = $phone_result['phone'];
+                }
+            }
+        }
+        if (isset($phone_value) && !empty($phone_value))
+        {
+            $row->setSourceProperty('phone_number', $phone_value) ;
+        }
 
-		// taxonomie region
-		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
-			'field_data_field_taxo_area',
-			'field_taxo_area_tid',
-			$row->getSourceProperty('nid'),
-			'content_presence_worldwide');
-		if (count($regions) > 0) {
+        // taxonomie region
+        $regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+            'field_data_field_taxo_area',
+            'field_taxo_area_tid',
+            $row->getSourceProperty('nid'),
+            'content_presence_worldwide');
+        if (count($regions) > 0) {
 
-			$row->setSourceProperty('regions', $regions);
-		}
+            $row->setSourceProperty('regions', $regions);
+        }
 
 
-		// récupération du pays
-		$country_query = $this->select('location_instance', 'li');
-		$country_query->join('location', 'l', 'l.lid = li.lid');
-		$country_query->join('location_country', 'c', 'l.country = c.code');
-		$country_query->fields('c', ['code', 'name'])
-			->condition('li.nid', $row->getSourceProperty('nid'), '=');
+        // récupération du pays
+        $country_query = $this->select('location_instance', 'li');
+        $country_query->join('location', 'l', 'l.lid = li.lid');
+        $country_query->join('location_country', 'c', 'l.country = c.code');
+        $country_query->fields('c', ['code', 'name'])
+            ->condition('li.nid', $row->getSourceProperty('nid'), '=');
 
-		$country_result = $country_query->execute()->fetchObject();
+        $country_result = $country_query->execute()->fetchObject();
 
-		if (is_object($country_result) && isset($country_result->code)) {
-			$tidCountry = get_country_term($country_result->code, $country_result->name);
-			if (isset($tidCountry)) {
-				$row->setSourceProperty('country', $tidCountry);
-			}
-		}
+        if (is_object($country_result) && isset($country_result->code)) {
+            $tidCountry = get_country_term($country_result->code, $country_result->name);
+            if (isset($tidCountry)) {
+                $row->setSourceProperty('country', $tidCountry);
+            }
+        }
 
     $row->setSourceProperty('path', '/' . $row->getSourceProperty('title'));
 

@@ -102,16 +102,16 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
 
-		$og_image = $file = "";
-		if ($node->hasField('field_visual')) {
-				$file = $node->get('field_visual')->getValue();
-				if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
-						$file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-						if ($file instanceof \Drupal\file\Entity\File) {
-							$og_image = $file->url();
-						}
-				}
-		}
+        $og_image = $file = "";
+        if ($node->hasField('field_visual')) {
+                $file = $node->get('field_visual')->getValue();
+                if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
+                        $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+                        if ($file instanceof \Drupal\file\Entity\File) {
+                            $og_image = $file->url();
+                        }
+                }
+        }
 
     #J'enregistre mes urls et variables OG pour les avoir en JS
     $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
@@ -435,14 +435,14 @@ function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\E
  * Implements hook_theme().
  */
 function oab_frontoffice_theme($existing, $type, $theme, $path) {
-	$theme = array();
-	$theme['custom-righticonblock'] = array(
-		'variables' => array(
-			'synomiaSearchForm' => array(),
-		),
-		'template' => 'block--righticonblock-custom'
-	);
-	return $theme;
+    $theme = array();
+    $theme['custom-righticonblock'] = array(
+        'variables' => array(
+            'synomiaSearchForm' => array(),
+        ),
+        'template' => 'block--righticonblock-custom'
+    );
+    return $theme;
 }
 
 

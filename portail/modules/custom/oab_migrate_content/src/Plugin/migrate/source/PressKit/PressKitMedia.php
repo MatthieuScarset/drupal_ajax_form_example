@@ -37,7 +37,7 @@ class PressKitMedia extends SqlBase {
     ->distinct(TRUE);
     $field1_alias = $query->addField('m', 'fid', 'mid');
     $query->condition('n.type', 'press_kit');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
     return $query;
   }

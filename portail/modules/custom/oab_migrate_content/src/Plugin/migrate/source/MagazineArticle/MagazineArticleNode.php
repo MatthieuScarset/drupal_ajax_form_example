@@ -34,7 +34,7 @@ class MagazineArticleNode extends SqlBase {
       ->condition('n.type', 'content_magazine_article', '=')
       ->condition('n.changed', MAGAZINE_ARTICLE_SELECT_DATE, '>');
     //  ->condition('n.nid', array(4633, 4636, 4638, 4639, 4661, 4662), 'IN');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     return $query;
   }
 
@@ -48,7 +48,7 @@ class MagazineArticleNode extends SqlBase {
       'language' => $this->t('language'),
       'body' => $this->t('body'),
       'image' => $this->t('image'),
-			'status' => $this->t('status'),
+            'status' => $this->t('status'),
     ];
 
     return $fields;
@@ -70,47 +70,47 @@ class MagazineArticleNode extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-		//META TITRE
-		$title = $row->getSourceProperty('title');
-		$title = mb_substr($title,0, 55);
-		$row->setSourceProperty('meta_title', $title) ;
+        //META TITRE
+        $title = $row->getSourceProperty('title');
+        $title = mb_substr($title,0, 55);
+        $row->setSourceProperty('meta_title', $title) ;
 
-		//META DESCRIPTION - récupération de la short description (txt_catcher)
-		$meta_description = "";
-		$catcher_query = $this->select('field_data_field_txt_catcher', 'c');
-		$catcher_query->fields('c', ['field_txt_catcher_value'])
-			->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
-			->condition('c.bundle', 'content_magazine_article', '=');
+        //META DESCRIPTION - récupération de la short description (txt_catcher)
+        $meta_description = "";
+        $catcher_query = $this->select('field_data_field_txt_catcher', 'c');
+        $catcher_query->fields('c', ['field_txt_catcher_value'])
+            ->condition('c.entity_id', $row->getSourceProperty('nid'), '=')
+            ->condition('c.bundle', 'content_magazine_article', '=');
 
-		$catcher_results = $catcher_query->execute()->fetchAll();
+        $catcher_results = $catcher_query->execute()->fetchAll();
 
-		if (is_array($catcher_results)) {
-			foreach ($catcher_results AS $catcher_result) {
+        if (is_array($catcher_results)) {
+            foreach ($catcher_results AS $catcher_result) {
 
-				// On vérifie si on a affaire à un objet ou à un tableau
-				if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
-					$meta_description = $catcher_result->field_txt_catcher_value;
-				}
-				elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
-					$meta_description = $catcher_result['field_txt_catcher_value'];
-				}
-			}
-		}
-		if (isset($meta_description) && !empty($meta_description))
-		{
-			$row->setSourceProperty('highlight_field', $meta_description) ;
-			$meta_description_short = mb_substr($meta_description,0, 155);
-			$row->setSourceProperty('meta_description', $meta_description_short) ;
-		}
+                // On vérifie si on a affaire à un objet ou à un tableau
+                if (is_object($catcher_result) && isset($catcher_result->field_txt_catcher_value)) {
+                    $meta_description = $catcher_result->field_txt_catcher_value;
+                }
+                elseif (is_array($catcher_result) && isset($catcher_result['field_txt_catcher_value'])) {
+                    $meta_description = $catcher_result['field_txt_catcher_value'];
+                }
+            }
+        }
+        if (isset($meta_description) && !empty($meta_description))
+        {
+            $row->setSourceProperty('highlight_field', $meta_description) ;
+            $meta_description_short = mb_substr($meta_description,0, 155);
+            $row->setSourceProperty('meta_description', $meta_description_short) ;
+        }
 
-		//Taxonomie de la Subhome
-		$subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
-		if (isset($subhomes['magazine'][$row->getSourceProperty('language')])
-			&& isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
-			&& !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
-		{
-			$row->setSourceProperty('subhomes', $subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']);
-		}
+        //Taxonomie de la Subhome
+        $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
+        if (isset($subhomes['magazine'][$row->getSourceProperty('language')])
+            && isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
+            && !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
+        {
+            $row->setSourceProperty('subhomes', $subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']);
+        }
 
     // récupération du BODY
     $body_query = $this->select('field_data_body', 'b');
@@ -144,54 +144,54 @@ class MagazineArticleNode extends SqlBase {
      * récupération des tags
      */
 
-		// récupération du tag "industries"
-		$industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
-			'field_data_field_taxo_industrie',
-			'field_taxo_industrie_tid',
-			$row->getSourceProperty('nid'),
-			'content_magazine_article');
-		if (count($industries) > 0) {
-			$row->setSourceProperty('industries', $industries);
-		}
+        // récupération du tag "industries"
+        $industries = get_correspondance_tid_D7_tid_D8('correspondence_taxo_industry',
+            'field_data_field_taxo_industrie',
+            'field_taxo_industrie_tid',
+            $row->getSourceProperty('nid'),
+            'content_magazine_article');
+        if (count($industries) > 0) {
+            $row->setSourceProperty('industries', $industries);
+        }
 
     // récupération du tag "solution"
-		$thematics = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
-			'field_data_field_taxo_solution',
-			'field_taxo_solution_tid',
-			$row->getSourceProperty('nid'),
-			'content_magazine_article');
-		if (count($thematics) > 0) {
-			$row->setSourceProperty('thematics', $thematics);
-		}
-	//theme mag
-		$mag_theme = get_correspondance_tid_D7_tid_D8('correspondence_solution_to_theme_mag',
-			'field_data_field_taxo_solution',
-			'field_taxo_solution_tid',
-			$row->getSourceProperty('nid'),
-			'content_magazine_article');
-		if (count($mag_theme) > 0) {
-			$row->setSourceProperty('magazine_thematics', $mag_theme);
-		}
+        $thematics = get_correspondance_tid_D7_tid_D8('correspondence_taxo_solution_to_thematic',
+            'field_data_field_taxo_solution',
+            'field_taxo_solution_tid',
+            $row->getSourceProperty('nid'),
+            'content_magazine_article');
+        if (count($thematics) > 0) {
+            $row->setSourceProperty('thematics', $thematics);
+        }
+    //theme mag
+        $mag_theme = get_correspondance_tid_D7_tid_D8('correspondence_solution_to_theme_mag',
+            'field_data_field_taxo_solution',
+            'field_taxo_solution_tid',
+            $row->getSourceProperty('nid'),
+            'content_magazine_article');
+        if (count($mag_theme) > 0) {
+            $row->setSourceProperty('magazine_thematics', $mag_theme);
+        }
 //format mag
-		$mag_format = get_correspondance_tid_D7_tid_D8('correspondence_cat_mag_to_format_mag',
-			'field_data_field_taxo_magazine',
-			'field_taxo_magazine_tid',
-			$row->getSourceProperty('nid'),
-			'content_magazine_article');
-		if (count($mag_format) > 0) {
-			$row->setSourceProperty('magazine_types', $mag_format);
-		}
+        $mag_format = get_correspondance_tid_D7_tid_D8('correspondence_cat_mag_to_format_mag',
+            'field_data_field_taxo_magazine',
+            'field_taxo_magazine_tid',
+            $row->getSourceProperty('nid'),
+            'content_magazine_article');
+        if (count($mag_format) > 0) {
+            $row->setSourceProperty('magazine_types', $mag_format);
+        }
 
 
-		// récupération du tag "area"
-		$regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
-			'field_data_field_taxo_area',
-			'field_taxo_area_tid',
-			$row->getSourceProperty('nid'),
-			'content_magazine_article');
-		if (count($regions) > 0) {
-			$row->setSourceProperty('regions', $regions);
-		}
+        // récupération du tag "area"
+        $regions = get_correspondance_tid_D7_tid_D8('correspondence_taxo_region',
+            'field_data_field_taxo_area',
+            'field_taxo_area_tid',
+            $row->getSourceProperty('nid'),
+            'content_magazine_article');
+        if (count($regions) > 0) {
+            $row->setSourceProperty('regions', $regions);
+        }
 
 
 
@@ -254,7 +254,7 @@ class MagazineArticleNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-			$row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

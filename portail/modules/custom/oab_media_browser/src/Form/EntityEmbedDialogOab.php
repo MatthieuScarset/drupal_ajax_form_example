@@ -539,301 +539,301 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
             if (!$entity->access('view')) {
                 $form_state->setError($element, $this->t('Unable to access @type entity @id.', array('@type' => $entity_type, '@id' => $id)));
             }
-    		else {
-				if ($uuid = $entity->uuid()) {
-					$form_state->setValueForElement($form['attributes']['data-entity-uuid'], $uuid);
-				}
-				else {
-					$form_state->setError($element, $this->t('Cannot embed @type entity @id because it does not have a UUID.', array('@type' => $entity_type, '@id' => $id)));
-				}
+            else {
+                if ($uuid = $entity->uuid()) {
+                    $form_state->setValueForElement($form['attributes']['data-entity-uuid'], $uuid);
+                }
+                else {
+                    $form_state->setError($element, $this->t('Cannot embed @type entity @id because it does not have a UUID.', array('@type' => $entity_type, '@id' => $id)));
+                }
 
-				// Ensure that at least one Entity Embed Display plugin is present
-				// before proceeding to the next step. Raise an error otherwise.
-				$embed_button = $form_state->get('embed_button');
-				$display_plugin_options = $this->getDisplayPluginOptions($embed_button, $entity);
-				// If no plugin is available after taking the intersection, raise error.
-				// Also log an exception.
-				if (empty($display_plugin_options)) {
-					$form_state->setError($element, $this->t('No display options available for the selected entity. Please select another entity.'));
-					$this->logger('entity_embed')->warning('No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one Entity Embed Display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $entity->id(), '@button' => $embed_button->id()));
-				}
-			}
-		}
-		else {
-			$form_state->setError($element, $this->t('Unable to load @type entity @id.', array('@type' => $entity_type, '@id' => $id)));
-		}
-	}
+                // Ensure that at least one Entity Embed Display plugin is present
+                // before proceeding to the next step. Raise an error otherwise.
+                $embed_button = $form_state->get('embed_button');
+                $display_plugin_options = $this->getDisplayPluginOptions($embed_button, $entity);
+                // If no plugin is available after taking the intersection, raise error.
+                // Also log an exception.
+                if (empty($display_plugin_options)) {
+                    $form_state->setError($element, $this->t('No display options available for the selected entity. Please select another entity.'));
+                    $this->logger('entity_embed')->warning('No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one Entity Embed Display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $entity->id(), '@button' => $embed_button->id()));
+                }
+            }
+        }
+        else {
+            $form_state->setError($element, $this->t('Unable to load @type entity @id.', array('@type' => $entity_type, '@id' => $id)));
+        }
+    }
 
-	/**
-	 * Form validation handler for the entity embedding step.
-	 *
-	 * @param array $form
-	 *   An associative array containing the structure of the form.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The current state of the form.
-	 */
-	public function validateEmbedStep(array $form, FormStateInterface $form_state) {
-		// Validate configuration forms for the Entity Embed Display plugin used.
-		$entity_element = $form_state->getValue('attributes');
-		$entity = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
-			->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
-		$entity = current($entity) ?: NULL;
-		$plugin_id = $entity_element['data-entity-embed-display'];
-		$plugin_settings = !empty($entity_element['data-entity-embed-display-settings']) ? $entity_element['data-entity-embed-display-settings'] : array();
-		$display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $plugin_settings);
-		$display->setContextValue('entity', $entity);
-		$display->setAttributes($entity_element);
-		$display->validateConfigurationForm($form, $form_state);
-	}
+    /**
+     * Form validation handler for the entity embedding step.
+     *
+     * @param array $form
+     *   An associative array containing the structure of the form.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The current state of the form.
+     */
+    public function validateEmbedStep(array $form, FormStateInterface $form_state) {
+        // Validate configuration forms for the Entity Embed Display plugin used.
+        $entity_element = $form_state->getValue('attributes');
+        $entity = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
+            ->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
+        $entity = current($entity) ?: NULL;
+        $plugin_id = $entity_element['data-entity-embed-display'];
+        $plugin_settings = !empty($entity_element['data-entity-embed-display-settings']) ? $entity_element['data-entity-embed-display-settings'] : array();
+        $display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $plugin_settings);
+        $display->setContextValue('entity', $entity);
+        $display->setAttributes($entity_element);
+        $display->validateConfigurationForm($form, $form_state);
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function submitForm(array &$form, FormStateInterface $form_state) {}
+    /**
+     * {@inheritdoc}
+     */
+    public function submitForm(array &$form, FormStateInterface $form_state) {}
 
-	/**
-	 * Form submission handler to update the plugin configuration form.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 */
-	public function updatePluginConfigurationForm(array &$form, FormStateInterface $form_state) {
-		return $form['attributes']['data-entity-embed-display-settings'];
-	}
+    /**
+     * Form submission handler to update the plugin configuration form.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     */
+    public function updatePluginConfigurationForm(array &$form, FormStateInterface $form_state) {
+        return $form['attributes']['data-entity-embed-display-settings'];
+    }
 
-	/**
-	 * Form submission handler to to another step of the form.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitStep(array &$form, FormStateInterface $form_state, $step) {
-		$response = new AjaxResponse();
+    /**
+     * Form submission handler to to another step of the form.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitStep(array &$form, FormStateInterface $form_state, $step) {
+        $response = new AjaxResponse();
 
-		$form_state->set('step', $step);
-		$form_state->setRebuild(TRUE);
-		$rebuild_form = $this->formBuilder->rebuildForm('entity_embed_dialog', $form_state, $form);
-		unset($rebuild_form['#prefix'], $rebuild_form['#suffix']);
-		$response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $rebuild_form));
-		$response->addCommand(new SetDialogTitleCommand('', $rebuild_form['#title']));
+        $form_state->set('step', $step);
+        $form_state->setRebuild(TRUE);
+        $rebuild_form = $this->formBuilder->rebuildForm('entity_embed_dialog', $form_state, $form);
+        unset($rebuild_form['#prefix'], $rebuild_form['#suffix']);
+        $response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $rebuild_form));
+        $response->addCommand(new SetDialogTitleCommand('', $rebuild_form['#title']));
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * Form submission handler for the entity selection step.
-	 *
-	 * On success will send the user to the next step of the form to select the
-	 * embed display settings. On form errors, this will rebuild the form and
-	 * display the error messages.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitSelectStep(array &$form, FormStateInterface $form_state) {
-		$response = new AjaxResponse();
+    /**
+     * Form submission handler for the entity selection step.
+     *
+     * On success will send the user to the next step of the form to select the
+     * embed display settings. On form errors, this will rebuild the form and
+     * display the error messages.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitSelectStep(array &$form, FormStateInterface $form_state) {
+        $response = new AjaxResponse();
 
-		// Display errors in form, if any.
-		if ($form_state->hasAnyErrors()) {
-			unset($form['#prefix'], $form['#suffix']);
-			$form['status_messages'] = array(
-				'#type' => 'status_messages',
-				'#weight' => -10,
-			);
-			$response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $form));
-		}
-		else {
-			$form_state->set('step', !empty($this->entityBrowserSettings['display_review']) ? 'review' : 'embed');
-			$form_state->setRebuild(TRUE);
-			$rebuild_form = $this->formBuilder->rebuildForm('entity_embed_dialog', $form_state, $form);
-			unset($rebuild_form['#prefix'], $rebuild_form['#suffix']);
-			$response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $rebuild_form));
-			$response->addCommand(new SetDialogTitleCommand('', $rebuild_form['#title']));
-		}
+        // Display errors in form, if any.
+        if ($form_state->hasAnyErrors()) {
+            unset($form['#prefix'], $form['#suffix']);
+            $form['status_messages'] = array(
+                '#type' => 'status_messages',
+                '#weight' => -10,
+            );
+            $response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $form));
+        }
+        else {
+            $form_state->set('step', !empty($this->entityBrowserSettings['display_review']) ? 'review' : 'embed');
+            $form_state->setRebuild(TRUE);
+            $rebuild_form = $this->formBuilder->rebuildForm('entity_embed_dialog', $form_state, $form);
+            unset($rebuild_form['#prefix'], $rebuild_form['#suffix']);
+            $response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $rebuild_form));
+            $response->addCommand(new SetDialogTitleCommand('', $rebuild_form['#title']));
+        }
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * Submit and show select step after submit.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitAndShowSelect(array &$form, FormStateInterface $form_state) {
-		return $this->submitStep($form, $form_state, 'select');
-	}
+    /**
+     * Submit and show select step after submit.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitAndShowSelect(array &$form, FormStateInterface $form_state) {
+        return $this->submitStep($form, $form_state, 'select');
+    }
 
-	/**
-	 * Submit and show review step after submit.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitAndShowReview(array &$form, FormStateInterface $form_state) {
-		return $this->submitStep($form, $form_state, 'review');
-	}
+    /**
+     * Submit and show review step after submit.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitAndShowReview(array &$form, FormStateInterface $form_state) {
+        return $this->submitStep($form, $form_state, 'review');
+    }
 
-	/**
-	 * Submit and show embed step after submit.
-	 *
-	 * @param array $form
-	 *   The form array.
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 *   The form state.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitAndShowEmbed(array $form, FormStateInterface $form_state) {
-		return $this->submitStep($form, $form_state, 'embed');
-	}
+    /**
+     * Submit and show embed step after submit.
+     *
+     * @param array $form
+     *   The form array.
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     *   The form state.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitAndShowEmbed(array $form, FormStateInterface $form_state) {
+        return $this->submitStep($form, $form_state, 'embed');
+    }
 
-	/**
-	 * Form submission handler for the entity embedding step.
-	 *
-	 * On success this will submit the command to save the embedded entity with
-	 * the configured display settings to the WYSIWYG element, and then close the
-	 * modal dialog. On form errors, this will rebuild the form and display the
-	 * error messages.
-	 *
-	 * @param array $form
-	 *   An associative array containing the structure of the form.
-	 * @param FormStateInterface $form_state
-	 *   An associative array containing the current state of the form.
-	 *
-	 * @return \Drupal\Core\Ajax\AjaxResponse
-	 *   The ajax response.
-	 */
-	public function submitEmbedStep(array &$form, FormStateInterface $form_state) {
-		$response = new AjaxResponse();
+    /**
+     * Form submission handler for the entity embedding step.
+     *
+     * On success this will submit the command to save the embedded entity with
+     * the configured display settings to the WYSIWYG element, and then close the
+     * modal dialog. On form errors, this will rebuild the form and display the
+     * error messages.
+     *
+     * @param array $form
+     *   An associative array containing the structure of the form.
+     * @param FormStateInterface $form_state
+     *   An associative array containing the current state of the form.
+     *
+     * @return \Drupal\Core\Ajax\AjaxResponse
+     *   The ajax response.
+     */
+    public function submitEmbedStep(array &$form, FormStateInterface $form_state) {
+        $response = new AjaxResponse();
 
-		// Submit configuration form the selected Entity Embed Display plugin.
-		$entity_element = $form_state->getValue('attributes');
-		$entity = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
-			->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
-		$entity = current($entity);
-		$plugin_id = $entity_element['data-entity-embed-display'];
-		$plugin_settings = !empty($entity_element['data-entity-embed-display-settings']) ? $entity_element['data-entity-embed-display-settings'] : array();
-		$display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $plugin_settings);
-		$display->setContextValue('entity', $entity);
-		$display->setAttributes($entity_element);
-		$display->submitConfigurationForm($form, $form_state);
+        // Submit configuration form the selected Entity Embed Display plugin.
+        $entity_element = $form_state->getValue('attributes');
+        $entity = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
+            ->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
+        $entity = current($entity);
+        $plugin_id = $entity_element['data-entity-embed-display'];
+        $plugin_settings = !empty($entity_element['data-entity-embed-display-settings']) ? $entity_element['data-entity-embed-display-settings'] : array();
+        $display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $plugin_settings);
+        $display->setContextValue('entity', $entity);
+        $display->setAttributes($entity_element);
+        $display->submitConfigurationForm($form, $form_state);
 
-		$values = $form_state->getValues();
-		// Display errors in form, if any.
-		if ($form_state->hasAnyErrors()) {
-			unset($form['#prefix'], $form['#suffix']);
-			$form['status_messages'] = array(
-				'#type' => 'status_messages',
-				'#weight' => -10,
-			);
-			$response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $form));
-		}
-		else {
-			// Serialize entity embed settings to JSON string.
-			if (!empty($values['attributes']['data-entity-embed-display-settings'])) {
-				$values['attributes']['data-entity-embed-display-settings'] = Json::encode($values['attributes']['data-entity-embed-display-settings']);
-			}
+        $values = $form_state->getValues();
+        // Display errors in form, if any.
+        if ($form_state->hasAnyErrors()) {
+            unset($form['#prefix'], $form['#suffix']);
+            $form['status_messages'] = array(
+                '#type' => 'status_messages',
+                '#weight' => -10,
+            );
+            $response->addCommand(new HtmlCommand('#entity-embed-dialog-form', $form));
+        }
+        else {
+            // Serialize entity embed settings to JSON string.
+            if (!empty($values['attributes']['data-entity-embed-display-settings'])) {
+                $values['attributes']['data-entity-embed-display-settings'] = Json::encode($values['attributes']['data-entity-embed-display-settings']);
+            }
 
-			// Filter out empty attributes.
-			$values['attributes'] = array_filter($values['attributes'], function($value) {
-				return (bool) Unicode::strlen((string) $value);
-			});
+            // Filter out empty attributes.
+            $values['attributes'] = array_filter($values['attributes'], function($value) {
+                return (bool) Unicode::strlen((string) $value);
+            });
 
-			// Allow other modules to alter the values before getting submitted to the WYSIWYG.
-			$this->moduleHandler->alter('entity_embed_values', $values, $entity, $display, $form_state);
+            // Allow other modules to alter the values before getting submitted to the WYSIWYG.
+            $this->moduleHandler->alter('entity_embed_values', $values, $entity, $display, $form_state);
 
-			$response->addCommand(new EditorDialogSave($values));
-			$response->addCommand(new CloseModalDialogCommand());
-		}
+            $response->addCommand(new EditorDialogSave($values));
+            $response->addCommand(new CloseModalDialogCommand());
+        }
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * Form element validation handler; Escapes the value an element.
-	 *
-	 * This should be used for any element in the embed form which may contain
-	 * HTML that should be serialized as an attribute element on the embed.
-	 */
-	public static function escapeValue($element, FormStateInterface $form_state) {
-		if ($value = trim($element['#value'])) {
-			$form_state->setValueForElement($element, Html::escape($value));
-		}
-	}
+    /**
+     * Form element validation handler; Escapes the value an element.
+     *
+     * This should be used for any element in the embed form which may contain
+     * HTML that should be serialized as an attribute element on the embed.
+     */
+    public static function escapeValue($element, FormStateInterface $form_state) {
+        if ($value = trim($element['#value'])) {
+            $form_state->setValueForElement($element, Html::escape($value));
+        }
+    }
 
-	/**
-	 * Returns the allowed Entity Embed Display plugins given an embed button and
-	 * an entity.
-	 *
-	 * @param \Drupal\embed\EmbedButtonInterface $embed_button
-	 *   The embed button.
-	 * @param \Drupal\Core\Entity\EntityInterface $entity
-	 *   The entity.
-	 *
-	 * @return array
-	 *   List of allowed Entity Embed Display plugins.
-	 */
-	public function getDisplayPluginOptions(EmbedButtonInterface $embed_button, EntityInterface $entity) {
-		$plugins = $this->entityEmbedDisplayManager->getDefinitionOptionsForEntity($entity);
+    /**
+     * Returns the allowed Entity Embed Display plugins given an embed button and
+     * an entity.
+     *
+     * @param \Drupal\embed\EmbedButtonInterface $embed_button
+     *   The embed button.
+     * @param \Drupal\Core\Entity\EntityInterface $entity
+     *   The entity.
+     *
+     * @return array
+     *   List of allowed Entity Embed Display plugins.
+     */
+    public function getDisplayPluginOptions(EmbedButtonInterface $embed_button, EntityInterface $entity) {
+        $plugins = $this->entityEmbedDisplayManager->getDefinitionOptionsForEntity($entity);
 
-		if ($allowed_plugins = $embed_button->getTypeSetting('display_plugins')) {
-			$plugins = array_intersect_key($plugins, array_flip($allowed_plugins));
-		}
+        if ($allowed_plugins = $embed_button->getTypeSetting('display_plugins')) {
+            $plugins = array_intersect_key($plugins, array_flip($allowed_plugins));
+        }
 
-		natsort($plugins);
-		return $plugins;
-	}
+        natsort($plugins);
+        return $plugins;
+    }
 
-	/**
-	 * Registers JS callback that gets entities from entity browser and updates
-	 * form values accordingly.
-	 */
-	public function registerJSCallback(RegisterJSCallbacks $event) {
-		if ($event->getBrowserID() == $this->entityBrowser->id()) {
-			$event->registerCallback('Drupal.entityEmbedDialog.selectionCompleted');
-		}
-	}
+    /**
+     * Registers JS callback that gets entities from entity browser and updates
+     * form values accordingly.
+     */
+    public function registerJSCallback(RegisterJSCallbacks $event) {
+        if ($event->getBrowserID() == $this->entityBrowser->id()) {
+            $event->registerCallback('Drupal.entityEmbedDialog.selectionCompleted');
+        }
+    }
 
-	/**
-	 * Load the current entity browser and its settings from the form state.
-	 *
-	 * @param \Drupal\Core\Form\FormStateInterface $form_state
-	 */
-	protected function loadEntityBrowser(FormStateInterface $form_state) {
-		$this->entityBrowser = NULL;
-		$this->entityBrowserSettings = [];
+    /**
+     * Load the current entity browser and its settings from the form state.
+     *
+     * @param \Drupal\Core\Form\FormStateInterface $form_state
+     */
+    protected function loadEntityBrowser(FormStateInterface $form_state) {
+        $this->entityBrowser = NULL;
+        $this->entityBrowserSettings = [];
 
-		/** @var \Drupal\embed\EmbedButtonInterface $embed_button */
-		$embed_button = $form_state->get('embed_button');
+        /** @var \Drupal\embed\EmbedButtonInterface $embed_button */
+        $embed_button = $form_state->get('embed_button');
 
-		if ($embed_button && $entity_browser_id = $embed_button->getTypePlugin()->getConfigurationValue('entity_browser')) {
-			$this->entityBrowser = $this->entityTypeManager->getStorage('entity_browser')->load($entity_browser_id);
-			$this->entityBrowserSettings = $embed_button->getTypePlugin()->getConfigurationValue('entity_browser_settings');
-		}
-	}
+        if ($embed_button && $entity_browser_id = $embed_button->getTypePlugin()->getConfigurationValue('entity_browser')) {
+            $this->entityBrowser = $this->entityTypeManager->getStorage('entity_browser')->load($entity_browser_id);
+            $this->entityBrowserSettings = $embed_button->getTypePlugin()->getConfigurationValue('entity_browser_settings');
+        }
+    }
 
 }

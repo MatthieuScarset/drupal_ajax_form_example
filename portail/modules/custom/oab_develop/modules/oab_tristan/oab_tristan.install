@@ -10,11 +10,11 @@ function oab_tristan_install() {
  */
 function oab_tristan_update_dependencies() {
 
-  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024	);
-  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012	);
-  $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020	);
-  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031	);
-  $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023	);
+  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024    );
+  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012    );
+  $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020    );
+  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031    );
+  $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023    );
 
   return $dependencies;
 }

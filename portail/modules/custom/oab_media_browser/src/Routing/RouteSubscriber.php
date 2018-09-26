@@ -19,7 +19,7 @@ class RouteSubscriber extends RouteSubscriberBase {
    * {@inheritdoc}
    */
   protected function alterRoutes(RouteCollection $collection) {
-  	if ($route = $collection->get('entity_embed.dialog')) {
+      if ($route = $collection->get('entity_embed.dialog')) {
       $route->setDefault('_form', '\Drupal\oab_media_browser\Form\EntityEmbedDialogOab');
     }
   }

@@ -204,12 +204,12 @@ class OabExtension extends \Twig_Extension {
    */
   public function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
 
-  	$options = array('absolute' => TRUE);
-  	if ($defaultLanguage) {
-			$node = \Drupal\node\Entity\Node::load($nid);
-			$options['language'] = $node->language();
-		}
-		$url = Url::fromRoute($type, array('node' => $nid), $options);
+      $options = array('absolute' => TRUE);
+      if ($defaultLanguage) {
+            $node = \Drupal\node\Entity\Node::load($nid);
+            $options['language'] = $node->language();
+        }
+        $url = Url::fromRoute($type, array('node' => $nid), $options);
     return $url->toString();
   }
 
@@ -245,19 +245,19 @@ class OabExtension extends \Twig_Extension {
      *
      * @param Object $field
      *   The field.
-		 *
+         *
      * @return boolean
      *   A render array for the menu.
      */
     public function is_empty_field($field) {
-    		$empty = true;
+            $empty = true;
         if (!is_null($field)) {
-        	foreach ($field as $key => $value) {
-        		if ($key[0] != "#") {
-							$empty = false;
-						}
-					}
-				}
+            foreach ($field as $key => $value) {
+                if ($key[0] != "#") {
+                            $empty = false;
+                        }
+                    }
+                }
         return $empty;
     }
 
