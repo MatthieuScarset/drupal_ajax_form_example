@@ -416,7 +416,7 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
             $ma_revision = node_revision_load($result->workbench_revision_tracker_revision_id);
             $moderation_state = $ma_revision->get('moderation_state')->getValue();
             #Obligé de load le ModerationState complet, il n'y est pas dans l'objet de la revision.....
-            $moderation_state_object = ModerationState::load( $moderation_state[0]['target_id']);
+            $moderation_state_object = ModerationState::load($moderation_state[0]['target_id']);
             $result->workbench_revision_tracker_revision_id = $moderation_state_object->get('label');
 
           }
