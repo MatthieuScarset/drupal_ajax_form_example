@@ -28,7 +28,7 @@ class PhoneNumberBlock extends BlockBase {
 
     public function build() {
         $block = array();
-				$config = $this->getConfiguration();
+                $config = $this->getConfiguration();
         // récupération du contexte
         $node_ctxt = $this->getContextValue('node');
         $nid_fld = $node_ctxt->nid->getValue();
@@ -59,12 +59,12 @@ class PhoneNumberBlock extends BlockBase {
     public function blockForm($form, FormStateInterface $form_state) {
         $form = parent::blockForm($form, $form_state);
 
-				$form['block_title'] = [
-					'#title' => $this->t('Block Title'),
-					'#type' => 'textfield',
-					'#default_value' => isset($this->configuration['block_title']) ? $this->configuration['block_title'] : 'To contact him by phone',
-					'#required' => true,
-				];
+                $form['block_title'] = [
+                    '#title' => $this->t('Block Title'),
+                    '#type' => 'textfield',
+                    '#default_value' => isset($this->configuration['block_title']) ? $this->configuration['block_title'] : 'To contact him by phone',
+                    '#required' => true,
+                ];
         $form['content'] = array(
             '#type' => 'text_format',
             '#title' => t('Phone number content'),
@@ -89,6 +89,6 @@ class PhoneNumberBlock extends BlockBase {
         $content = $form_state->getValue('content');
         $this->configuration['content'] = $content['value'];
         $this->configuration['content_format'] = $content['format'];
-			$this->configuration['block_title'] = $form_state->getValue('block_title');
+            $this->configuration['block_title'] = $form_state->getValue('block_title');
     }
 }

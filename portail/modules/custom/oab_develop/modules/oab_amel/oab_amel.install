@@ -10,28 +10,28 @@ function oab_amel_install() {
  * @return mixed
  */
 function oab_amel_update_dependencies() {
-	$dependencies['oab_amel'][8001] = array('oab_christophe' => 8008	);
-	$dependencies['oab_amel'][8002] = array('oab_christophe' => 8010	);
-	//$dependencies['oab_amel'][8003] = array('oab_amel' => 8002	);
-	$dependencies['oab_amel'][8004] = array('oab_stephanie' => 8012	);
-/*	$dependencies['oab_amel'][8005] = array('oab_amel' => 8004	);
-	$dependencies['oab_amel'][8006] = array('oab_amel' => 8005	);
-	$dependencies['oab_amel'][8007] = array('oab_amel' => 8006	);*/
-	$dependencies['oab_amel'][8008] = array('oab_tibo' => 8007	);/*
-	$dependencies['oab_amel'][8009] = array('oab_amel' => 8008	);*/
-	$dependencies['oab_amel'][8010] = array('oab_stephanie' => 8021	);
-	$dependencies['oab_amel'][8011] = array('oab_christophe' => 8011	);
-	$dependencies['oab_amel'][8012] = array('oab_christophe' => 8015	);
-	$dependencies['oab_amel'][8013] = array('oab_christophe' => 8018	);
-	$dependencies['oab_amel'][8014] = array('oab_amel' => 8013	);
-    $dependencies['oab_amel'][8015] = array('oab_amel' => 8014	);
-    $dependencies['oab_amel'][8016] = array('oab_christophe' => 8020 );
-    $dependencies['oab_amel'][8017] = array('oab_christophe' => 8021, 'oab_tibo' => 8013 );
-    $dependencies['oab_amel'][8018] = array('oab_christophe' => 8025 );
-    $dependencies['oab_amel'][8019] = array('oab_yassine' => 8006 );
-    $dependencies['oab_amel'][8020] = array('oab_yassine' => 8009, 'oab_tristan' => 8003 );
-    $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004 );
-    $dependencies['oab_amel'][8023] = array('oab_christophe' => 8027, 'oab_yassine' => 8014 );
+    $dependencies['oab_amel'][8001] = array('oab_christophe' => 8008);
+    $dependencies['oab_amel'][8002] = array('oab_christophe' => 8010);
+    //$dependencies['oab_amel'][8003] = array('oab_amel' => 8002);
+    $dependencies['oab_amel'][8004] = array('oab_stephanie' => 8012);
+/*    $dependencies['oab_amel'][8005] = array('oab_amel' => 8004);
+    $dependencies['oab_amel'][8006] = array('oab_amel' => 8005);
+    $dependencies['oab_amel'][8007] = array('oab_amel' => 8006);*/
+    $dependencies['oab_amel'][8008] = array('oab_tibo' => 8007);/*
+    $dependencies['oab_amel'][8009] = array('oab_amel' => 8008);*/
+    $dependencies['oab_amel'][8010] = array('oab_stephanie' => 8021);
+    $dependencies['oab_amel'][8011] = array('oab_christophe' => 8011);
+    $dependencies['oab_amel'][8012] = array('oab_christophe' => 8015);
+    $dependencies['oab_amel'][8013] = array('oab_christophe' => 8018);
+    $dependencies['oab_amel'][8014] = array('oab_amel' => 8013);
+    $dependencies['oab_amel'][8015] = array('oab_amel' => 8014);
+    $dependencies['oab_amel'][8016] = array('oab_christophe' => 8020);
+    $dependencies['oab_amel'][8017] = array('oab_christophe' => 8021, 'oab_tibo' => 8013);
+    $dependencies['oab_amel'][8018] = array('oab_christophe' => 8025);
+    $dependencies['oab_amel'][8019] = array('oab_yassine' => 8006);
+    $dependencies['oab_amel'][8020] = array('oab_yassine' => 8009, 'oab_tristan' => 8003);
+    $dependencies['oab_amel'][8021] = array('oab_yassine' => 8011, 'oab_tristan' => 8004);
+    $dependencies['oab_amel'][8023] = array('oab_christophe' => 8027, 'oab_yassine' => 8014);
     $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
     $dependencies['oab_amel'][8023] = array('oab_stephanie' => 8034);
     $dependencies['oab_amel'][8025] = array('oab_christophe' => 8032);

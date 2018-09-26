@@ -777,7 +777,7 @@ class AxiomeImporter
      * Send the axiome notification
      *
      * @param $notifications
-     *	The notification array
+     *    The notification array
      */
     private function axiome_send_notifications($notifications = array()) {
         if (is_array($notifications)

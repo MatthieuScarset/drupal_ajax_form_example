@@ -29,7 +29,7 @@ use Drupal\node\Entity\Node;
 
 class TryAndBuyBlock  extends BlockBase {
 
-	public function build() {
+    public function build() {
 		$block = array();
 		$blockEmpty = true;
 		// récupération du contexte

@@ -5,7 +5,7 @@
  */
 function oab_synomia_search_flux_node_predelete(\Drupal\node\Entity\Node $node) {
 
-	$base_url = \Drupal::request()->getSchemeAndHttpHost();
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
 	if (!empty($node)) {
 		//lors de la suppression d'un node, on enregistre l'url et l'id du node supprimé pour le transmettre au sitemap Synomia
 		$deleted_content = new \Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent();
