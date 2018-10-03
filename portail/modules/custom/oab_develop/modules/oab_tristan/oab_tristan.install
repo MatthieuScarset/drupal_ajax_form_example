@@ -632,7 +632,8 @@ function oab_tristan_update_8082() {
 /**
  * Rechargement de la vue Document List pour MAJ des droits d'accès
  */
-function oab_tristan_update_8083() {
+function oab_tristan_update_8083()
+{
     oabt_YmlImport('views.view.document_list.yml');
 }
 
@@ -641,4 +642,11 @@ function oab_tristan_update_8083() {
  */
 function oab_tristan_update_8084() {
     include_once('updates/update_8084.inc');
+}
+
+/**
+ * Création d'une subhome entity type Presse et des entités Presse FR et EN
+ */
+function oab_tristan_update_8085() {
+    include_once('updates/update_8085.inc');
 }

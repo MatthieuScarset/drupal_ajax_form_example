@@ -1,0 +1,11 @@
+entity.subhome_entity.add_form:
+  route_name: entity.subhome_entity.add_page
+  title: 'Add Subhome entity'
+  appears_on:
+    - entity.subhome_entity.collection
+entity.subhome_entity_type.add_form:
+  route_name: entity.subhome_entity_type.add_form
+  title: 'Add Subhome entity type'
+  appears_on:
+    - entity.subhome_entity_type.collection
+

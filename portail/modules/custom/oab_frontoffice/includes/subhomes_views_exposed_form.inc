@@ -215,12 +215,10 @@ function subhomes_views_exposed_form(&$form) {
             unset($form['year']);
         } else {
             // Regions
-            if(isset($form['region']['#options']) && count($form['region']['#options'])>0){
-                $form['region']['#options'] = clean_exposed_filters_by_language(
-                    $form['region']['#options'],
-                    t('Region')->render()
-                );
-            }
+            $form['region']['#options'] = clean_exposed_filters_by_language(
+                $form['region']['#options'],
+                t('Region')->render()
+            );
 
             // Années
             $form['year']['#options'] = clean_exposed_filters_by_language(

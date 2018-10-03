@@ -1,0 +1,49 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.subhome_presse_carrousel.field_accroche
+    - field.field.paragraph.subhome_presse_carrousel.field_button
+    - field.field.paragraph.subhome_presse_carrousel.field_title
+    - field.field.paragraph.subhome_presse_carrousel.field_visual
+    - paragraphs.paragraphs_type.subhome_presse_carrousel
+  module:
+    - entity_reference_revisions
+id: paragraph.subhome_presse_carrousel.default
+targetEntityType: paragraph
+bundle: subhome_presse_carrousel
+mode: default
+content:
+  field_accroche:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_button:
+    type: entity_reference_revisions_entity_view
+    weight: 6
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_visual:
+    weight: 5
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

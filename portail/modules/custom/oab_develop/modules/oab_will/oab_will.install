@@ -147,6 +147,6 @@ function oab_will_update_8019() {
 /**
  * RUBYPORTAILOBS-3361  [RSS] Flux Blogs / Magazines
  */
- function oab_will_update_8021(){
+ function oab_will_update_8021() {
      include_once("updates/update_8021.inc");
  }

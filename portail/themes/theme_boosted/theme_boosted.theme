@@ -6,6 +6,7 @@ use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\Core\Template\Attribute;
 use Drupal\oab_dvi\DviHelper;
+use Drupal\oab_subhomes\Entity\SubhomeEntity;
 
 /**
  * Implements hook_preprocess_HOOK() for HTML document templates.
@@ -180,7 +181,7 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page erreur';
 		$variables['#attached']['drupalSettings']['tealium']['erreur_code'] = $code;
 		$url = "";
-		$url  = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$url = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
 		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
 
@@ -236,6 +237,37 @@ function theme_boosted_preprocess_page(&$variables) {
 	}elseif($route_name == 'user.pass'){
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
+
+	// Si on est dans une subhome
+	if (strpos($route_name, 'view.subhomes') !== false) {
+	    ## Si on est dans une vue, je charge la vue
+        $route_parts = explode('.', $route_name);
+
+        $view_id = $route_parts[1];
+        $display_id = $route_parts[2];
+
+        $view = \Drupal\views\Entity\View::load($view_id);
+        if ($view !== null) {
+            /** @var \Drupal\views\ViewExecutable $view_executable */
+            $view_executable = $view->getExecutable();
+            $view_executable->setDisplay($display_id);
+            $view_executable->preview();
+            if (isset($view_executable->argument['field_subhome_target_id'])) {
+
+                $sid = $view_executable->argument['field_subhome_target_id']->value;
+                $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+                // Si on a une entité pour cette vue, je change le mode d'affichage de la page
+                // pour le passer en container-fluid, ie. avoir la page complète sans bordure
+                // et je cache le titre de la page
+                if ($entity !== null) {
+                    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+                }
+
+            }
+        }
+    }
+
 }
 
 function theme_boosted_preprocess_region(&$variables) {
@@ -244,7 +276,9 @@ function theme_boosted_preprocess_region(&$variables) {
 }
 
 
-function theme_boosted_preprocess_views_view(&$variables){
+function theme_boosted_preprocess_views_view(&$variables) {
+
+    /** @var Drupal\views\ViewExecutable $view */
   $view = $variables['view'];
   $id = $view->storage->id();
 
@@ -282,8 +316,32 @@ function theme_boosted_preprocess_views_view(&$variables){
         }
       }
     }
+
+    /*
+     * Nouvelle gestion des subhomes
+     * Je passe en variable l'entité subhome correspondante
+     */
+    if (isset($view->argument['field_subhome_target_id'])) {
+
+        $sid = $view->argument['field_subhome_target_id']->value;
+        $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+        // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+        if ($entity !== null) {
+
+            /** @var Drupal\Core\Field\FieldItemInterface $field */
+            foreach($entity->getFields() as $field) {
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['render'][$field->getName()] =
+                    render($field->view('default'));
+            }
+
+        }
+    }
+
+
   }
-  elseif ($id == 'offices_map_view'){
+  elseif ($id == 'offices_map_view') {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
   	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
   		//kint($variables['rows']);
@@ -291,7 +349,7 @@ function theme_boosted_preprocess_views_view(&$variables){
     }
   }
 
-  if ($id == 'subhomes'){
+  if ($id == 'subhomes') {
       if($view->current_display == 'page_catalogue_dvi')		{ //subhome produits DVI
           // j'affecte le view mode à subhome_distributeur
           for ($i = 0 ; $i < count($variables['rows'][0]['#rows']); $i++) {
@@ -302,7 +360,7 @@ function theme_boosted_preprocess_views_view(&$variables){
 }
 
 
-function theme_boosted_preprocess_views_view_list(&$variables){
+function theme_boosted_preprocess_views_view_list(&$variables) {
   $view = $variables['view'];
   $id = $view->storage->id();
 	if ($id == 'offices_map_view'){
@@ -482,4 +540,3 @@ function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $
 	}
 }
 
-?>
