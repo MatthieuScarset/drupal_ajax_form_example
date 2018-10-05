@@ -215,6 +215,9 @@ function subhomes_views_exposed_form(&$form) {
             unset($form['year']);
         } else {
             // Regions
+            if (!isset($form['region']) || !isset($form['region']['#options'])){
+                $form['region']['#options'] = array();
+            }
             $form['region']['#options'] = clean_exposed_filters_by_language(
                 $form['region']['#options'],
                 t('Region')->render()
