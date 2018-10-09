@@ -197,12 +197,6 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_industry:
-    weight: 27
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_job_profile:
     weight: 33
     settings: {  }
