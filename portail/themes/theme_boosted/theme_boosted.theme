@@ -53,7 +53,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
     $current_route_match = \Drupal::getContainer()->get('current_route_match');
     $route_match = $current_route_match->getRouteName();
+
     if((preg_match('/^view.subhomes/', $route_match)
+        || preg_match('/^view.subhome_archive/', $route_match)
         || $route_match == 'views.ajax')
 			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
         $suggestions[]='form_element__subhomes';
@@ -79,6 +81,33 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
           $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
       }
   }
+
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if(preg_match('/^view.subhome_archive/', $route_match)) {
+        $suggestions[] = 'views_view_grid__subhome_archive';
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+    /** @var Drupal\views\ViewExecutable $view */
+    $view = $variables['view'];
+
+    if($view->id() ===  'subhome_archive') {
+        $suggestions[] = 'views_view_fields__subhome_archive__' . $view->current_display;
+    }
 
 }
 
