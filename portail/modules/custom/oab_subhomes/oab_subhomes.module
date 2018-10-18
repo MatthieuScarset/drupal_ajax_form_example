@@ -87,15 +87,16 @@ function oab_subhomes_theme_suggestions_views_view_alter(array &$suggestions, ar
 
     if (isset($variables['view'])) {
         $view = $variables['view'];
-        if ($view->id() == 'subhomes' && isset($view->argument['field_subhome_target_id'])) {
+        if (($view->id() == 'subhomes' || $view->id() == 'subhome_archive') && isset($view->argument['field_subhome_target_id'])) {
 
             $sid = $view->argument['field_subhome_target_id']->value;
             $entity = SubhomeEntity::loadBySubhomeId($sid);
 
             // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
             if ($entity !== null) {
-                $suggestions[] = 'views_view__subhomes__' . $entity->bundle();
+                $suggestions[] = 'views_view__' . $view->id() . '__' . $entity->bundle();
             }
+
         }
     }
 }
