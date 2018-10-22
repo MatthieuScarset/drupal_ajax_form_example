@@ -155,5 +155,5 @@ function oab_will_update_8019() {
  *     RUBYPORTAILOBS-3417 Reprise des pager sur les views subhomes
  */
 function oab_will_update_8024() {
-    oabt_YmlImport('views.view.subhomes.yml');
+    include_once("updates/update_8024.inc");
 }
