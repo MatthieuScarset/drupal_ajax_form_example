@@ -177,8 +177,9 @@ function oab_subhomes_preprocess_views_view(&$variables) {
 
                 $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
                 foreach ($entities as $entity ) {
+                    $builded_entity = $view_builder->view($entity, 'subhome');
                     $variables[SubhomeEntity::TWIG_VAR_NAME]['press_kit'][] =
-                        render($view_builder->view($entity, 'subhome'));
+                        render($builded_entity);
                 }
             }
         }
