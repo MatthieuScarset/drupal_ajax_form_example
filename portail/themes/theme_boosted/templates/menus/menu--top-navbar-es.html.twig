@@ -23,18 +23,16 @@
     {% if menu_level == 0 %}
 <ul{{ attributes.addClass('menu', 'nav', 'navbar-nav') }}>
     {% else %}
-    <ul{{ attributes.addClass('dropdown-menu','menu_levels') }}>
+    <ul{{ attributes.addClass('dropdown-menu','navbar_levels') }}>
         {% endif %}
         {% for item in items %}
             {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
-            {% set link_icon = item.url.options.icon %}
-            {% set link_classtag = item.url.options.classtag %}
             {% if menu_level == 0 and item.is_expanded %}
             <li{{ item.attributes.addClass('expanded', 'dropdown') }}>
                 <a href="{{ item.url }}" class="dropdown-toggle" data-toggle="dropdown" target="{{ link_target }}"
-                   onmousedown="utag_link(utag_data.titre_page, 'Header', '{{ item.title }}', '');"><span class="{{ link_icon }}"></span>{{ item.title }} <span class="caret"></span></a>
+                   onmousedown="utag_link(utag_data.titre_page, 'Header', '{{ item.title }}', '');">{{ item.title }} <span class="caret"></span></a>
             {% else %}
-                <li class="{{ link_classtag }} pull-left">{{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Header\', \'' ~ item.title ~ '\', \'\');'}) }}
+                <li>{{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Header\', \'' ~ item.title ~ '\', \'\');'}) }}
             {% endif %}
             {% if item.below %}
                 {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
@@ -43,4 +41,4 @@
         {% endfor %}
     </ul>
     {% endif %}
-{% endmacro %}
+    {% endmacro %}
