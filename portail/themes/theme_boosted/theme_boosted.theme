@@ -54,7 +54,9 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
     $current_route_match = \Drupal::getContainer()->get('current_route_match');
     $route_match = $current_route_match->getRouteName();
+
     if((preg_match('/^view.subhomes/', $route_match)
+        || preg_match('/^view.subhome_archive/', $route_match)
         || $route_match == 'views.ajax')
 			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
         $suggestions[]='form_element__subhomes';
@@ -80,6 +82,33 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
           $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
       }
   }
+
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if(preg_match('/^view.subhome_archive/', $route_match)) {
+        $suggestions[] = 'views_view_grid__subhome_archive';
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+    /** @var Drupal\views\ViewExecutable $view */
+    $view = $variables['view'];
+
+    if($view->id() ===  'subhome_archive') {
+        $suggestions[] = 'views_view_fields__subhome_archive__' . $view->current_display;
+    }
 
 }
 
@@ -239,8 +268,8 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
 
-	// Si on est dans une subhome
-	if (strpos($route_name, 'view.subhomes') !== false) {
+	// Si on est dans une subhome || subhomes_archive
+	if (strpos($route_name, 'view.subhomes') !== false || strpos($route_name, 'view.subhome_archive') !== false ) {
 	    ## Si on est dans une vue, je charge la vue
         $route_parts = explode('.', $route_name);
 
@@ -283,7 +312,7 @@ function theme_boosted_preprocess_views_view(&$variables) {
   $view = $variables['view'];
   $id = $view->storage->id();
 
-  if ($id == 'subhomes'){
+  if ($id == 'subhomes' || $id == 'subhome_archive'){
   	if($view->current_display == 'page_distributor')		{//subhome distributors  dvi
 			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage revendeurs';
 			$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
