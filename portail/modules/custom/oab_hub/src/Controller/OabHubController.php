@@ -39,36 +39,36 @@ class OabHubController extends ControllerBase {
         $term_name = $term->label();
 
         $term_langcode = $term->language()->getId();
-        $machineName = self::getMachineName($term);
+        $machine_name = self::getMachineName($term);
         $values = [];
 
         $default_config = self::getConfig();
 
         foreach ($default_config['blocks'] as $menu_key => $menu_infos) {
             if ($menu_infos['menu']) {
-                $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode);
+                $menu_id = self::generateMenuId($menu_key, $machine_name, $term_langcode);
                 $menu_name = "$term_name " . $menu_infos['name'] . " $term_langcode";
 
-                $menuObj = Menu::load($menu_id);
+                $menu_bj = Menu::load($menu_id);
                 $i = 0;
 
                 ##Si le nom machine existe déjà pour un menu, déjà, c'est bizarre....
                 ## mais du coup, j'ajoute un chiffre que j'incrémente
-                while($menuObj !== null) {
-                    $menu_id = self::generateMenuId($menu_key, $machineName, $term_langcode, $i);
-                    $menuObj = Menu::load($menu_id);
+                while ($menu_bj !== null) {
+                    $menu_id = self::generateMenuId($menu_key, $machine_name, $term_langcode, $i);
+                    $menu_bj = Menu::load($menu_id);
                     $i++;
                     #kint($menuObj);
                     #if ($i > 3) die("Je suis à plus de 3");
                 }
-                $menuObj = Menu::create([
+                $menu_bj = Menu::create([
                     'id' => $menu_id,
                     'label' => $menu_name,
                     'description' => $menu_name,
                     'langcode' => $term_langcode,
                     'status' => TRUE,
                 ]);
-                $save_ret = $menuObj->save();
+                $save_ret = $menu_bj->save();
                 if ($save_ret == SAVED_NEW || $save_ret == SAVED_UPDATED) {
                     $values[] = $menu_id;
                 }
@@ -88,9 +88,9 @@ class OabHubController extends ControllerBase {
         $menus = $term->get(self::FIELD_MENUS_ID);
         foreach ($menus as $menu) {
             $menu_id = $menu->getString();
-            $menuObj = Menu::load($menu_id);
-            if (isset($menuObj) || !empty($menuObj)) {
-                $menuObj->delete();
+            $menu_obj = Menu::load($menu_id);
+            if (isset($menu_obj) || !empty($menu_obj)) {
+                $menu_obj->delete();
             }
         }
     }
@@ -103,9 +103,9 @@ class OabHubController extends ControllerBase {
         $blocks = $term->get(self::FIELD_BLOCS_ID);
         foreach ($blocks as $block) {
             $block_id = $block->getString();
-            $blockObj = Block::load($block_id);
-            if (isset($blockObj) || !empty($blockObj)) {
-                $blockObj->delete();
+            $block_obj = Block::load($block_id);
+            if (isset($block_obj) || !empty($block_obj)) {
+                $block_obj->delete();
             }
         }
     }
@@ -115,17 +115,17 @@ class OabHubController extends ControllerBase {
      * @param \Drupal\taxonomy\Entity\Term $term
      */
     public static function createMachineNameSuffixe(\Drupal\taxonomy\Entity\Term &$term) {
-        $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
+        $machine_name_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
 
         $term_name = "";
-        if ($machineName_value->count() == 0) {
+        if ($machine_name_value->count() == 0) {
             $term_name = $term->label();
         } else {
-            $term_name = $machineName_value->first()->getString();
+            $term_name = $machine_name_value->first()->getString();
         }
 
         $machine_readable = strtolower($term_name);
-        $machine_readable = preg_replace('@[^a-z0-9_]+@','-',$machine_readable);
+        $machine_readable = preg_replace('@[^a-z0-9_]+@', '-',$machine_readable);
         $machine_readable = str_replace('_', '-', $machine_readable);
         $term->set(self::FIELD_MN_SUFFIXE_ID, $machine_readable);
     }
@@ -143,24 +143,24 @@ class OabHubController extends ControllerBase {
             $term = $data;
         }
 
-        $machineName = false;
+        $machine_name = false;
 
         ##je checke que le term passé en paramètre est bien un term de taxo
         if (is_a($term,'\Drupal\taxonomy\Entity\Term')) {
-            $machineName_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
-            if ($machineName_value->count() > 0) {
-                $machineName = $machineName_value->first()->getString();
+            $machine_name_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
+            if ($machine_name_value->count() > 0) {
+                $machine_name = $machine_name_value->first()->getString();
             }
         }
 
-        return $machineName;
+        return $machine_name;
     }
 
     public static function checkUrl(\Drupal\taxonomy\Entity\Term &$term) {
         $url = $term->get(self::FIELD_URL_ID);
         if ($url->count() > 0) {
-            $cleanedUrl = \Drupal::service('pathauto.alias_cleaner')->cleanString($url->first()->getString());
-            $term->set(self::FIELD_URL_ID, $cleanedUrl);
+            $cleaned_url = \Drupal::service('pathauto.alias_cleaner')->cleanString($url->first()->getString());
+            $term->set(self::FIELD_URL_ID, $cleaned_url);
 
             #Quand je check l'URL, je la sauvegarde en bdd pour pouvoir y réacceder facilement
             # lorsqu'on check les themes
@@ -168,7 +168,7 @@ class OabHubController extends ControllerBase {
             if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
                 $url_list = [];
             }
-            $url_list[] = $cleanedUrl;
+            $url_list[] = $cleaned_url;
             $config_factory = \Drupal::configFactory();
             $config_factory->getEditable(self::CONFIG_ID)
                 ->set(self::CONFIG_URL_LIST, $url_list)
@@ -244,7 +244,7 @@ class OabHubController extends ControllerBase {
         $menus = $term->get(self::FIELD_MENUS_ID);
         $config = self::getConfig();
         $term_langcode = $term->language()->getId();
-        $machineName = self::getMachineName($term);
+        $machine_name = self::getMachineName($term);
         $term_name = $term->label();
         $base_url = $term->get(self::FIELD_URL_ID)->first()->getString();
 
@@ -260,13 +260,13 @@ class OabHubController extends ControllerBase {
             if ($menu_id === false && $block['menu']) {
                 throw new \Exception('Erreur lors de la création des blocks');
             }
-            $block_id = self::generateBlockId($base_id, $machineName, $term_langcode);
+            $block_id = self::generateBlockId($base_id, $machine_name, $term_langcode);
 
             ##test de l'existance d'un block
             $i = 0;
             $test_block = Block::load($block_id);
-            while($test_block !== null) {
-                $block_id = self::generateBlockId($base_id, $machineName, $term_langcode, $i);
+            while ($test_block !== null) {
+                $block_id = self::generateBlockId($base_id, $machine_name, $term_langcode, $i);
                 $test_block = Block::load($block_id);
                 $i++;
             }
@@ -326,29 +326,29 @@ class OabHubController extends ControllerBase {
         $menus = $term->get(self::FIELD_MENUS_ID);
         $ret = false;
         foreach ($menus as $menu) {
-            if (stripos(str_replace('-', '_',$menu->getString()), $block_id) === 0) {
+            if (stripos(str_replace('-', '_', $menu->getString()), $block_id) === 0) {
                 $ret = $menu->getString();
             }
         }
         return $ret;
     }
 
-    private static function generateMenuId($elem_key, $machineName, $langcode, $i = null) {
+    private static function generateMenuId($elem_key, $machine_name, $langcode, $i = null) {
         $ret = "";
 
         if ($i === null) {
-            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode));
-            $ret = $elem_key . "-" . $machineName . "-" . $langcode;
+            $machine_name = substr($machine_name, 0, 27 - strlen($elem_key . "-" ."-" . $langcode));
+            $ret = $elem_key . "-" . $machine_name . "-" . $langcode;
         } else {
-            $machineName = substr($machineName, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i));
-            $ret = $elem_key . "-" . $machineName . "-" . $langcode . "-" . $i;
+            $machine_name = substr($machine_name, 0, 27 - strlen($elem_key . "-" ."-" . $langcode. "-" . $i));
+            $ret = $elem_key . "-" . $machine_name . "-" . $langcode . "-" . $i;
         }
 
         return str_replace('_', '-', $ret);
     }
 
-    private static function generateBlockId($elem_key, $machineName, $langcode, $i = null) {
-        return str_replace('-', '', self::generateMenuId($elem_key, $machineName, $langcode, $i));
+    private static function generateBlockId($elem_key, $machine_name, $langcode, $i = null) {
+        return str_replace('-', '', self::generateMenuId($elem_key, $machine_name, $langcode, $i));
     }
 
 
@@ -364,7 +364,7 @@ class OabHubController extends ControllerBase {
 
             $subhomes_tid = [];
             $i = 0;
-            while($i < $subhomes->count()) {
+            while ($i < $subhomes->count()) {
 
                 $subhome = $subhomes->get($i);
                 $elem_value = $subhome->getValue();
@@ -391,7 +391,7 @@ class OabHubController extends ControllerBase {
 
                    $alias = \Drupal::service('path.alias_manager')->getAliasByPath($url->toString());
 
-                   $alias_parts = explode('/',$alias);
+                   $alias_parts = explode('/', $alias);
 
                    if (isset($alias_parts[0]) && $alias_parts[0] === "") {
                        array_shift($alias_parts);
@@ -421,7 +421,7 @@ class OabHubController extends ControllerBase {
 
 
         ##Je recupère toutes les parties de la route
-        $route_parts = explode('/',$url);
+        $route_parts = explode('/', $url);
 
         #Je supprime le 1er element qui est vide
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
@@ -434,8 +434,9 @@ class OabHubController extends ControllerBase {
             $hub_part = $route_parts[1];
 
             foreach ($url_list as $hub => $url) {
-                if ($url == $hub_part)
+                if ($url == $hub_part) {
                     $actif_hub = $hub;
+                }
             }
         }
 
@@ -448,21 +449,21 @@ class OabHubController extends ControllerBase {
 
 
         ##Je recupère toutes les parties de la route
-        $route_parts = explode('/',$url);
+        $route_parts = explode('/', $url);
 
         #Je supprime le 1er element qui est vide
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
         }
-        $actualUrl = $route_parts[1];
+        $actual_url = $route_parts[1];
 
         $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
         $connection = \Drupal::database();
         $results = $connection->select('url_alias', 'u')
             ->fields('u', ['source', 'alias', 'langcode'])
             ->condition('langcode', $langcode)
-            ->condition('alias', "%$actualUrl%", 'LIKE')
-            ->condition('source', "%$nid%" , 'LIKE')
+            ->condition('alias', "%$actual_url%", 'LIKE')
+            ->condition('source', "%$nid%", 'LIKE')
             ->execute()
             ->fetchAll();
 
@@ -479,7 +480,7 @@ class OabHubController extends ControllerBase {
 
 
         ##Je recupère toutes les parties de la route
-        $route_parts = explode('/',$url);
+        $route_parts = explode('/', $url);
 
         #Je supprime le 1er element qui est vide
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
@@ -497,8 +498,9 @@ class OabHubController extends ControllerBase {
             $is_hub = in_array($hub_url, $urls);
         }
 
-        if (!$is_hub)
+        if (!$is_hub) {
             return false;
+        }
 
         $host = "";
         if ($absolute) {
@@ -518,7 +520,7 @@ class OabHubController extends ControllerBase {
 
         $cur_url = \Drupal::request()->getRequestUri();
         ##Je recupère toutes les parties de la route
-        $route_parts = explode('/',$cur_url);
+        $route_parts = explode('/', $cur_url);
         #Je supprime le 1er element qui est vide
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
             array_shift($route_parts);
@@ -537,9 +539,9 @@ class OabHubController extends ControllerBase {
         }
 
         if (is_object($url_cible)) {
-            $route_parts_cible = explode('/',$url_cible->toString());
+            $route_parts_cible = explode('/', $url_cible->toString());
         } else {
-            $route_parts_cible = explode('/',$url_cible);
+            $route_parts_cible = explode('/', $url_cible);
         }
         if (isset($route_parts_cible[0]) && strlen($route_parts_cible[0]) == 0) {
             array_shift($route_parts_cible);
@@ -567,13 +569,13 @@ class OabHubController extends ControllerBase {
             } else {
                 //hos context hub , cible context hub => on retravail la cible
                 unset($route_parts_cible[1]);
-                $new_url = "/" . implode("/",$route_parts_cible);
+                $new_url = "/" . implode("/", $route_parts_cible);
             }
         } else {
             //context hub
             if ($route_parts[1]<>$route_parts_cible[1]) {
                 $route_parts_cible[1] = $route_parts[1];
-                $new_url = "/" . implode("/",$route_parts_cible);
+                $new_url = "/" . implode("/", $route_parts_cible);
             } else {
                 $new_url = $url_cible;
             }
@@ -585,7 +587,5 @@ class OabHubController extends ControllerBase {
 
         return $new_url;
     }
-
-
 
 }

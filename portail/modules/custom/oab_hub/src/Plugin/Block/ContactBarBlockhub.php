@@ -65,15 +65,20 @@ class ContactBarBlockHub extends BlockBase {
       $form['assistance']['link_assistance_text'] = [
           '#title' => $this->t('Texte du lien vers l\'espace assistance'),
           '#type' => 'textfield',
-          '#default_value' => isset($this->configuration['link_assistance_text']) ? $this->configuration['link_assistance_text'] : 'Assistance',
+          '#default_value' => isset($this->configuration['link_assistance_text'])
+              ? $this->configuration['link_assistance_text']
+              : 'Assistance',
           '#required' => false,
       ];
 
       $form['assistance']['assistance_icon'] = [
           '#title' => $this->t('Icone'),
           '#type' => 'textfield',
-          '#description'    => "Mettre la classe de l'icone (ex: 'glyphicon glyphicon-question-sign'). Voir sur http://boosted.orange.com/docs/3.3/components/#glyphicons",
-          '#default_value' => isset($this->configuration['assistance_icon']) ? $this->configuration['assistance_icon'] : '',
+          '#description'    => "Mettre la classe de l'icone (ex: 'glyphicon glyphicon-question-sign')."
+                                ." Voir sur http://boosted.orange.com/docs/3.3/components/#glyphicons",
+          '#default_value' => isset($this->configuration['assistance_icon'])
+              ? $this->configuration['assistance_icon']
+              : '',
           '#required' => false,
       ];
 
@@ -120,7 +125,8 @@ class ContactBarBlockHub extends BlockBase {
       $form['ecrire']['ecrire_icon'] = [
           '#title' => $this->t('Icone'),
           '#type' => 'textfield',
-          '#description'    => "Mettre la classe de l'icone (ex: 'glyphicon glyphicon-question-sign'). Voir sur http://boosted.orange.com/docs/3.3/components/#glyphicons",
+          '#description'    => "Mettre la classe de l'icone (ex: 'glyphicon glyphicon-question-sign')."
+                                . " Voir sur http://boosted.orange.com/docs/3.3/components/#glyphicons",
           '#default_value' => isset($this->configuration['ecrire_icon']) ? $this->configuration['ecrire_icon'] : '',
           '#required' => false,
       ];
