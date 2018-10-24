@@ -11,6 +11,8 @@ use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
+use Symfony\Component\HttpFoundation\Request;
+
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
 module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
 
@@ -26,11 +28,12 @@ module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_f
  */
 function oab_frontoffice_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
 
-    $actual_route = \Drupal::routeMatch()->getRouteName();
+    $actual_route = \Drupal::routeMatch();
+    $actual_route_name = $actual_route->getRouteName();
 
     ## Si on est dans la subhome Analystes
     ## et qu'on veut afficher un node (qui est donc en mode d'affichage Subhome)
-    if( $actual_route === "view.subhomes.page_analysts"
+    if( $actual_route_name === "view.subhomes.page_analysts"
         && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
         && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
         //Si on fait l'affichage d'un node en mode "subhome"
@@ -38,21 +41,40 @@ function oab_frontoffice_theme_suggestions_alter(array &$suggestions, array $var
         $suggestions = ['node__analysts__subhome'];
     }
 
+    if ($actual_route_name === "views.ajax" && $variables['theme_hook_original'] == "node"
+        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+    ){
+        // Getting the referer.
+        $request = \Drupal::request();
+        $referer = $request->headers->get('referer');
+        // Getting the base url.
+        $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
+        // Getting the alias or the relative path.
+        $alias = substr($referer, strlen($base_url));
+        $url_object = \Drupal::service('path.validator')->getUrlIfValid($alias);
+        // Gettin route name from referer
+        $referer_route_name = $url_object->getRouteName();
+
+        if($referer_route_name=="view.subhomes.page_analysts"){
+            $suggestions = ['node__analysts__subhome'];
+        }
+
+    }
 }
 
 
 function oab_frontoffice_preprocess_menu(&$variables) {
-  if (isset($variables['items'])
-    && is_array($variables['items'])) {
-    foreach ($variables['items'] as &$item) {
-      $menuLinkEntity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
-      if (!empty($menuLinkEntity)) {
-        if (!empty($menuLinkEntity->link->first()->options['target'])) {
-          $item['url']->setOption('target', $menuLinkEntity->link->first()->options['target']);
+    if (isset($variables['items'])
+        && is_array($variables['items'])) {
+        foreach ($variables['items'] as &$item) {
+            $menuLinkEntity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
+            if (!empty($menuLinkEntity)) {
+                if (!empty($menuLinkEntity->link->first()->options['target'])) {
+                    $item['url']->setOption('target', $menuLinkEntity->link->first()->options['target']);
+                }
+            }
         }
-      }
     }
-  }
 }
 
 
@@ -65,89 +87,89 @@ function oab_frontoffice_preprocess_node(&$variables) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $variables['langcode'] = $current_language;
 
-  ##Pour les documents FR, j'ajoute un formulaire à la mano
-  if ($variables['node']->bundle() == 'document') {
+    ##Pour les documents FR, j'ajoute un formulaire à la mano
+    if ($variables['node']->bundle() == 'document') {
 
 
-    ##Je charge le webform juste pour les contenus fr
-    if ($current_language == 'fr') {
-      $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
-      $form_output = \Drupal::entityTypeManager()
-        ->getViewBuilder('webform')
-        ->view($form);
-      $variables['form_dlFile'] = $form_output;
+        ##Je charge le webform juste pour les contenus fr
+        if ($current_language == 'fr') {
+            $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
+            $form_output = \Drupal::entityTypeManager()
+                ->getViewBuilder('webform')
+                ->view($form);
+            $variables['form_dlFile'] = $form_output;
+
+        }
 
     }
 
-  }
 
 
+    if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
-  if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
+        ##Collecte de toutes les données nécessaires
 
-    ##Collecte de toutes les données nécessaires
+        #Je recupère le nid puis je charge le node associé
+        $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
+        $node = \Drupal\node\Entity\Node::load($nid);
 
-    #Je recupère le nid puis je charge le node associé
-    $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
-    $node = \Drupal\node\Entity\Node::load($nid);
+        if (is_null($node) || $node === false)
+            return;
 
-    if (is_null($node) || $node === false)
-      return;
+        $meta_description = "";
+        ##Je recupère le field_meta_description s'il existe
+        if ($node->hasField('field_meta_decription')) {
+            $meta_description = $node->get('field_meta_description')->getValue();
+        }
 
-    $meta_description = "";
-    ##Je recupère le field_meta_description s'il existe
-    if ($node->hasField('field_meta_decription')) {
-      $meta_description = $node->get('field_meta_description')->getValue();
+        $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
+
+        $og_image = $file = "";
+        if ($node->hasField('field_visual')) {
+            $file = $node->get('field_visual')->getValue();
+            if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
+                $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+                if ($file instanceof \Drupal\file\Entity\File) {
+                    $og_image = $file->url();
+                }
+            }
+        }
+
+        #J'enregistre mes urls et variables OG pour les avoir en JS
+        $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
     }
-
-    $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
-
-		$og_image = $file = "";
-		if ($node->hasField('field_visual')) {
-				$file = $node->get('field_visual')->getValue();
-				if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
-						$file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-						if ($file instanceof \Drupal\file\Entity\File) {
-							$og_image = $file->url();
-						}
-				}
-		}
-
-    #J'enregistre mes urls et variables OG pour les avoir en JS
-    $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
-  }
 }
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menuLinkContentPlugin) {
-  $entity = NULL;
-  if ($menuLinkContentPlugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
-    list($entity_type, $uuid) = explode(':', $menuLinkContentPlugin->getPluginId(), 2);
-    $entity = \Drupal::entityManager()->loadEntityByUuid($entity_type, $uuid);
-  }
-  return $entity;
+    $entity = NULL;
+    if ($menuLinkContentPlugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
+        list($entity_type, $uuid) = explode(':', $menuLinkContentPlugin->getPluginId(), 2);
+        $entity = \Drupal::entityManager()->loadEntityByUuid($entity_type, $uuid);
+    }
+    return $entity;
 }
 
 function oab_frontoffice_link_alter(&$variables) {
-  $languages = \Drupal::languageManager()->getLanguages();
+    $languages = \Drupal::languageManager()->getLanguages();
 
-  if (isset($variables['url'])) {
-    try{
-      $uri = $variables['url']->getUri();
+    if (isset($variables['url'])) {
+        try{
+            $uri = $variables['url']->getUri();
 
-      foreach ($languages AS $key => $value) {
-        $langcode = $value->getId();
+            foreach ($languages AS $key => $value) {
+                $langcode = $value->getId();
 
-        if ($uri === 'base:<front_' . $langcode . '>') {
-          $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
-          $variables['options']['language'] = $value;
-          $variables['url'] = $new_url;
+                if ($uri === 'base:<front_' . $langcode . '>') {
+                    $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
+                    $variables['options']['language'] = $value;
+                    $variables['url'] = $new_url;
+                }
+            }
         }
-      }
-    }
-    catch(\UnexpectedValueException $e) {
+        catch(\UnexpectedValueException $e) {
 
+        }
     }
-  }
 }
 
 
@@ -158,39 +180,39 @@ function oab_frontoffice_link_alter(&$variables) {
  * @param EntityViewDisplayInterface $display
  */
 function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
-  // Cheking view_mode for node.
-  if ($entity->getEntityType()->id() == 'node') {
-    if (!empty($build['#attached']['html_head_link'])) {
-      _remove_header_links($build);
+    // Cheking view_mode for node.
+    if ($entity->getEntityType()->id() == 'node') {
+        if (!empty($build['#attached']['html_head_link'])) {
+            _remove_header_links($build);
+        }
     }
-  }
 }
 
 function _remove_header_links(array &$attachments) {
-  // Cheking html_head on attached tags in head.
-  if (!isset($attachments['#attached']['html_head_link'])) {
-    return;
-  }
-
-  // Array to unset.
-  $unset_html_head_link = [
-    'shortlink',
-    'delete-form',
-    'edit-form',
-    'version-history',
-    'revision',
-    'display',
-    'drupal:content-translation-overview',
-    'drupal:content-translation-add',
-    'drupal:content-translation-edit',
-    'drupal:content-translation-delete',
-  ];
-  // Unset loop.
-  foreach ($attachments['#attached']['html_head_link'] as $key => $value) {
-    if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
-      unset($attachments['#attached']['html_head_link'][$key]);
+    // Cheking html_head on attached tags in head.
+    if (!isset($attachments['#attached']['html_head_link'])) {
+        return;
     }
-  }
+
+    // Array to unset.
+    $unset_html_head_link = [
+        'shortlink',
+        'delete-form',
+        'edit-form',
+        'version-history',
+        'revision',
+        'display',
+        'drupal:content-translation-overview',
+        'drupal:content-translation-add',
+        'drupal:content-translation-edit',
+        'drupal:content-translation-delete',
+    ];
+    // Unset loop.
+    foreach ($attachments['#attached']['html_head_link'] as $key => $value) {
+        if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
+            unset($attachments['#attached']['html_head_link'][$key]);
+        }
+    }
 }
 
 function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display)
@@ -265,14 +287,14 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 
             //first paragraph
             $firstParagraph = $entity->field_home_banner[0]->entity;
-                // Access the paragraph entity like this:
+            // Access the paragraph entity like this:
 
-           //oabt($firstParagraph->get('field_title')->getValue(), false);
+            //oabt($firstParagraph->get('field_title')->getValue(), false);
 
 
-           // $paragraphHomeBannerFirst = $entity->node.field_home_banner ;
-           // $paragraph = Paragraph::load($paragraphHomeBannerFirst);
-           // $field_title = $paragraph->field_title->value;
+            // $paragraphHomeBannerFirst = $entity->node.field_home_banner ;
+            // $paragraph = Paragraph::load($paragraphHomeBannerFirst);
+            // $field_title = $paragraph->field_title->value;
             //oabt($field_title, true);
 
             $build['firstbanner_homepage_eclairage'] = $firstParagraph->get('field_title')->getValue();
@@ -302,17 +324,17 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
         // On doit faire ça à cause du fonctionnement de la view et des traductions
         // le sticky doit être enregistré au niveau du contenu principal, pas dans ses traductions
         if (isset($query->orderby)
-        && !empty($query->orderby)) {
-              foreach ($query->orderby AS $key=>$value) {
+            && !empty($query->orderby)) {
+            foreach ($query->orderby AS $key=>$value) {
                 if (is_array($value)
-                && isset($value['field'])
-                && $value['field'] == "node_field_data_sticky"
-                  && $language_id != "ru") {
-                  unset($query->orderby[$key]);
+                    && isset($value['field'])
+                    && $value['field'] == "node_field_data_sticky"
+                    && $language_id != "ru") {
+                    unset($query->orderby[$key]);
                 }
-              }
+            }
         }
-  }
+    }
 
 }
 
@@ -320,11 +342,11 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
  * Implements hook_form_views_exposed_form_alter().
  */
 function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
-  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
 
-  // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
-  subhomes_views_exposed_form($form);
+    // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
+    subhomes_views_exposed_form($form);
 
 
     // view Page thématique
@@ -408,9 +430,9 @@ function oab_frontoffice_views_post_render($view) {
 }
 
 function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
-  if ($route_match && $node = $route_match->getParameter('node')) {
-    $breadcrumb->addCacheableDependency($node);
-  }
+    if ($route_match && $node = $route_match->getParameter('node')) {
+        $breadcrumb->addCacheableDependency($node);
+    }
 }
 
 /**
@@ -425,7 +447,7 @@ function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\E
     if ($entity->bundle() == "product"
         && DviHelper::isDVIProduct($entity)
         && ($view_mode == "subhome" || $view_mode == "subhome_distributeur")) {
-            $build["#cache"] = array();
+        $build["#cache"] = array();
 
     }
 }
@@ -435,14 +457,14 @@ function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\E
  * Implements hook_theme().
  */
 function oab_frontoffice_theme($existing, $type, $theme, $path) {
-	$theme = array();
-	$theme['custom-righticonblock'] = array(
-		'variables' => array(
-			'synomiaSearchForm' => array(),
-		),
-		'template' => 'block--righticonblock-custom'
-	);
-	return $theme;
+    $theme = array();
+    $theme['custom-righticonblock'] = array(
+        'variables' => array(
+            'synomiaSearchForm' => array(),
+        ),
+        'template' => 'block--righticonblock-custom'
+    );
+    return $theme;
 }
 
 
@@ -453,22 +475,22 @@ function oab_frontoffice_mail_alter(&$message) {
 }
 
 function oab_frontoffice_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
+    if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
-    foreach (array_keys($form['actions']) as $action) {
-        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-          array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit');
+        foreach (array_keys($form['actions']) as $action) {
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+                array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_telechargement_documents_form_submit');
+            }
+        }
+    } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
+
+        foreach (array_keys($form['actions']) as $action) {
+
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+                array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit');
+            }
         }
     }
-  } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
-
-      foreach (array_keys($form['actions']) as $action) {
-
-          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-              array_unshift($form['actions'][$action]['#submit'],'oab_frontoffice_dvi_contact_distributor_form_submit');
-          }
-      }
-  }
 }
 
 /**
@@ -487,21 +509,21 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
     $node = \Drupal::routeMatch()->getParameter('node');
     if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
 
-      ##Je tente de récuper le field_file du node d'origine
-      if (NULL !== $field_file = $node->get('field_file')) {
+        ##Je tente de récuper le field_file du node d'origine
+        if (NULL !== $field_file = $node->get('field_file')) {
 
-        ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
-        $field_value = $field_file->getValue();
-        $media = \Drupal\media_entity\Entity\Media::load($field_value[0]['target_id']);
+            ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
+            $field_value = $field_file->getValue();
+            $media = \Drupal\media_entity\Entity\Media::load($field_value[0]['target_id']);
 
-        ##On load le file contenu dans l'entity media
-        $file_value = $media->get('field_file')->getValue();
-        $file_id = $file_value[0]['target_id'];
-        $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
-          ->getFileUri());
-        ##je remplace la valeur d'url_du_fichier par l'url générée
-        $form_state->setValue('url_du_fichier', $file_url);
-      }
+            ##On load le file contenu dans l'entity media
+            $file_value = $media->get('field_file')->getValue();
+            $file_id = $file_value[0]['target_id'];
+            $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
+                ->getFileUri());
+            ##je remplace la valeur d'url_du_fichier par l'url générée
+            $form_state->setValue('url_du_fichier', $file_url);
+        }
     }
 
 
@@ -536,14 +558,14 @@ function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal
  */
 function oab_frontoffice_page_attachments_alter(array &$attachments)
 {
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
-    if ($node->bundle() == 'homepage') {
-      if (isset($attachments["#attached"]['html_head_link'])) {
-        $attachments["#attached"]['html_head_link'] = __seek_alternate($attachments["#attached"]['html_head_link']);
-      }
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+        if ($node->bundle() == 'homepage') {
+            if (isset($attachments["#attached"]['html_head_link'])) {
+                $attachments["#attached"]['html_head_link'] = __seek_alternate($attachments["#attached"]['html_head_link']);
+            }
+        }
     }
-  }
 }
 
 /**
@@ -553,15 +575,15 @@ function oab_frontoffice_page_attachments_alter(array &$attachments)
  * @return array
  */
 function __seek_alternate($tab) {
-  if (isset($tab['rel']) && $tab['rel'] == "alternate") {
-    $tab['href'] = Url::fromRoute('<front>')->toString();
-  } elseif (is_array($tab)) {
-    foreach ($tab as $key => $value) {
-      $tab[$key] = __seek_alternate($value);
+    if (isset($tab['rel']) && $tab['rel'] == "alternate") {
+        $tab['href'] = Url::fromRoute('<front>')->toString();
+    } elseif (is_array($tab)) {
+        foreach ($tab as $key => $value) {
+            $tab[$key] = __seek_alternate($value);
+        }
     }
-  }
 
-  return $tab;
+    return $tab;
 }
 
 
