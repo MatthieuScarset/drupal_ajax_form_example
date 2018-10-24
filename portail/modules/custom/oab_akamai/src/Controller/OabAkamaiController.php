@@ -185,6 +185,7 @@ class OabAkamaiController extends ControllerBase
 
         //Si le flush varnish a fonctionné, je fais aussi un flush drupal cache
         \Drupal::cache("page")->delete("$url");
+        \Drupal::service("router.builder")->rebuild();
         drupal_set_message("Cache drupal vidé pour la page $url", 'status', true);
     }
 
