@@ -102,14 +102,6 @@ content:
       link: ''
     third_party_settings: {  }
     region: content
-  field_solution:
-    type: entity_reference_label
-    weight: 4
-    region: content
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
   links:
     weight: 1
     region: content

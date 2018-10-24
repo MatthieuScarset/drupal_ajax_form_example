@@ -257,12 +257,6 @@ content:
       default_paragraph_type: related_content
     third_party_settings: {  }
     region: content
-  field_solution:
-    weight: 15
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_start_date:
     weight: 10
     settings: {  }
