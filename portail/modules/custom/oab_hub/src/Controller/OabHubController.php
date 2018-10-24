@@ -583,6 +583,7 @@ class OabHubController extends ControllerBase {
 
         if (!is_object($new_url)) {
            $new_url = 'internal:/' . $new_url;
+           $new_url =  str_replace("/index.php",'', $new_url);
         }
 
         return $new_url;
