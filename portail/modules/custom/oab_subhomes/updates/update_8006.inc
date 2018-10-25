@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Création de la view subhome archive
+ */
 $view = \Drupal\views\Entity\View::load('subhome_archive');
 
 if ($view === null) {
@@ -17,3 +19,5 @@ if ($view === null) {
 
 oabt_YmlImport('views.view.subhome_archive.yml');
 
+\Drupal::service('path.alias_storage')->save("/subhome-archive-press", "/presse/archives", "fr");
+\Drupal::service('path.alias_storage')->save("/subhome-archive-press", "/press/archives", "en");
