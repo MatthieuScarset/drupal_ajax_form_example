@@ -369,7 +369,7 @@
                 {{ oab_drupal_view('homepage_partner', 'block_1') }}
                 <div class="col-md-12 text-right no-padding no-margin">
                     <a class="btn btn-homepage btn-homepage-partners"
-                       href="{{ url(hub_getHubSubhomeUrl(path('view.subhomes.page_partners'))) }}"
+                       href="{{ hub_getHubSubhomeUrl(url('view.subhomes.page_partners')) }}"
                        onmousedown="utag_link('Homepage', 'Partenaires', '{{ content.field_partners_button_text.0["#context"].value|raw }}', '')">
                         {{ content.field_partners_button_text.0["#context"].value }}
                     </a>
