@@ -3152,7 +3152,7 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        pager: false
+        pager: true
         use_ajax: false
         style: false
         row: false
@@ -3210,6 +3210,182 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_press_type
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_1_op
+            label: Format
+            description: ''
+            use_operator: false
+            operator: name_1_op
+            identifier: press_formats
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+              fh_backbones: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: Solution
+            description: ''
+            use_operator: false
+            operator: name_op
+            identifier: solutions
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+              fh_backbones: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        node_year:
+          id: node_year
+          table: node_field_data
+          field: node_year
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '0'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: node_year_op
+            label: 'By year'
+            description: ''
+            use_operator: false
+            operator: node_year_op
+            identifier: field_year_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: node_year
+        node_month:
+          id: node_month
+          table: node_field_data
+          field: node_month
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '01'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: node_month_op
+            label: 'By month'
+            description: ''
+            use_operator: false
+            operator: node_month_op
+            identifier: field_month_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: node_month
         field_hub_target_id:
           id: field_hub_target_id
           table: node__field_hub
@@ -3253,120 +3429,6 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_solution_target_id_op
-            label: Solution
-            description: ''
-            use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
-              chief_editor_hub: '0'
-              webform_business_analyst: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: between
-          value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
-          group: 1
-          exposed: true
-          expose:
-            operator_id: created_op
-            label: 'Authored on'
-            description: ''
-            use_operator: false
-            operator: created_op
-            identifier: created
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
-              chief_editor_hub: '0'
-              webform_business_analyst: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: created
-          plugin_id: date
       filter_groups:
         operator: AND
         groups:
@@ -3396,11 +3458,11 @@ display:
         type: grid
         options:
           uses_fields: false
-          columns: 1
+          columns: 4
           automatic_width: false
           alignment: horizontal
           col_class_default: true
-          col_class_custom: 'col-xs-12 col-md-12'
+          col_class_custom: 'col-xs-12 col-md-3'
           row_class_default: true
           row_class_custom: ''
       row:
@@ -3408,17 +3470,13 @@ display:
         options:
           relationship: none
           view_mode: subhome
-      pager:
-        type: some
-        options:
-          items_per_page: 4
-          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions
