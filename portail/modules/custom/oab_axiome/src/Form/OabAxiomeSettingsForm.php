@@ -50,43 +50,43 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('axiome_enable_cron'),
     );
 
-    $form['axiome_settings']['icon_frame_connectivity'] = array(
+    $form['icon_frame_connectivity'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-connectivity'),
       '#default_value' => $config->get('icon_frame_connectivity'),
     );
 
-    $form['axiome_settings']['icon_frame_teamwork'] = array(
+    $form['icon_frame_teamwork'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-teamwork'),
       '#default_value' => $config->get('icon_frame_teamwork'),
     );
 
-    $form['axiome_settings']['icon_frame_my_customers'] = array(
+    $form['icon_frame_my_customers'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-my-customers'),
       '#default_value' => $config->get('icon_frame_my_customers'),
     );
 
-    $form['axiome_settings']['icon_frame_performance'] = array(
+    $form['icon_frame_performance'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-performance'),
       '#default_value' => $config->get('icon_frame_performance'),
     );
 
-    $form['axiome_settings']['icon_frame_security'] = array(
+    $form['icon_frame_security'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-security'),
       '#default_value' => $config->get('icon_frame_security'),
     );
 
-    $form['axiome_settings']['icon_frame_care'] = array(
+    $form['icon_frame_care'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-care'),
       '#default_value' => $config->get('icon_frame_care'),
     );
 
-    $form['axiome_settings']['icon_frame_tech'] = array(
+    $form['icon_frame_tech'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('icon-frame-tech'),
       '#default_value' => $config->get('icon_frame_tech'),
