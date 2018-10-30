@@ -134,7 +134,15 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
 							##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
 							$breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
-							$breadcrumb->addLink(Link::createFromRoute($displayName, $routeName));
+
+
+							$url = \Drupal\oab_hub\Controller\OabHubController::getHubSubhomeUrl(\Drupal\Core\Url::fromRoute($routeName));
+
+							if (is_string($url)) {
+							    $url = \Drupal\Core\Url::fromUri($url);
+                            }
+
+							$breadcrumb->addLink(Link::fromTextAndUrl($displayName, $url));
 						}
 					}
 				}

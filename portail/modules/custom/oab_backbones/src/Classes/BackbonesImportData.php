@@ -45,8 +45,8 @@ class BackbonesImportData
         $datas = array();
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'd');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
             $results = $query->fields('d')
                 ->condition('d.date', $date, '=')
                 ->condition('d.source_site', $site)
@@ -80,8 +80,8 @@ class BackbonesImportData
         $last_import = $bb_import->getLastImportBeforeDate($date);
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'd1');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss1', 'd1.destination_site = ss1.sid');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss2', 'd1.source_site = ss2.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss1', 'd1.destination_site = ss1.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss2', 'd1.source_site = ss2.sid');
             $query->join($this::TABLE_NAME, 'd2', 'd1.source_site = d2.source_site AND d1.destination_site = d2.destination_site');
             $query->addExpression('d2.RTD - d1.RTD', 'delta');
             $query->fields('d1', array('date', 'source_label', 'destination_label', 'RTD'));
@@ -118,8 +118,8 @@ class BackbonesImportData
         $data = array();
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'd');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
             $results = $query->fields('d')
                 ->condition('d.date', $date, '=')
                 ->condition('ss1.used', 1)
@@ -147,8 +147,8 @@ class BackbonesImportData
         $data = array();
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'd');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
-            $query->join(ShadowSites::$TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss1', 'd.destination_site = ss1.sid');
+            $query->join(ShadowSites::TABLE_NAME, 'ss2', 'd.source_site = ss2.sid');
             $results = $query->fields('d')
                 ->condition('d.date', $date, '=')
                 ->condition('ss1.used', 1)

@@ -467,11 +467,15 @@ class OabHubController extends ControllerBase {
             ->execute()
             ->fetchAll();
 
+        $ret = "";
         if (count($results)>0) {
-            return $results[0]->alias;
+            $ret = "/" . $results[0]->langcode . $results[0]->alias;
         } else {
-            return \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid");
+            $alias = \Drupal::service('path.alias_manager')->getAliasByPath("/node/$nid", $langcode);
+            $ret = "/" . $langcode . $alias ;
         }
+
+        return $ret;
     }
 
     public static function getHubBaseUrl($absolute = false) {
@@ -513,6 +517,15 @@ class OabHubController extends ControllerBase {
     }
 
     public static function getHubSubhomeUrl($url_cible) {
+
+        $url_to_test = $url_cible;
+        if (is_object($url_to_test) && method_exists($url_to_test, 'toString')) {
+            $url_to_test = $url_cible->toString();
+        }
+
+        if (\Drupal\Component\Utility\UrlHelper::isExternal($url_to_test)) {
+            return $url_cible;
+        }
 
         # Je recupère les URLS des hubs
         $urls_hub = \Drupal::config(OabHubController::CONFIG_ID)->get(OabHubController::CONFIG_URL_LIST);
