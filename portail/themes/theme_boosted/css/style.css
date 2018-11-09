@@ -119,6 +119,9 @@ article .product ul.nav-tabs li:before{
     margin-bottom: 0;
 }
 
+.path-subhome-press .block-mediatheque{
+    margin: 2rem 0;
+}
 #views-exposed-form-subhomes-page-press{
     background-color: #FFFFFF;
     padding-bottom: 0;
@@ -619,15 +622,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 /*.solution-homepage .carousel-solution .left-zone{*/
-    /*margin-right: 10px;*/
+/*margin-right: 10px;*/
 /*}*/
 /*.solution-homepage .carousel-solution .right-zone{*/
-    /*margin-left: 10px;*/
+/*margin-left: 10px;*/
 /*}*/
 /*.solution-homepage .carousel-solution .left-zone .row,*/
 /*.solution-homepage .carousel-solution .right-zone .row{*/
-    /*background-color: white;*/
-    /*margin-left: 0px;*/
+/*background-color: white;*/
+/*margin-left: 0px;*/
 /*}*/
 .title-solution-banner .title{
     font-size: 2.5rem;
@@ -644,12 +647,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
- .carousel-solution .content .text-content{
-     font-size: 1.6rem;
-     margin-bottom: 2rem;
-     font-family: HelvNeueOrange, Arial, sans-serif;
-     line-height: 2rem;
- }
+.carousel-solution .content .text-content{
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    line-height: 2rem;
+}
 
 .homepage-banner{
     background-color: white;
@@ -977,7 +980,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
-       display: block!important;
+        display: block!important;
     }
 }
 @media (max-width: 767px) {
@@ -997,8 +1000,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .sandwich-button {
-         margin-top: 0 !important;
-     }
+        margin-top: 0 !important;
+    }
 
     .menu-loupe-xs {
         display: inline-block;
@@ -1279,7 +1282,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-top: 2rem;
     }
     .block-card img {
-       /* max-width:312px; */
+        /* max-width:312px; */
     }
 }
 
@@ -1568,8 +1571,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .block-mediatheque {
-   background-color: #DDDDDD;
-    display: inline-block;
+    background-color: #DDDDDD;
+    display: block;
 }
 
 .block-mediatheque p {
@@ -1775,7 +1778,7 @@ article.product .highlight1{
 #block-topnavbaren-2 li.lien-site-groupe-orange a,
 #block-topnavbarfr-2 li.lien-site-groupe-orange a,
 #block-topnavbarru-2 li.lien-site-groupe-orange a {
-   color: #F16E00;
+    color: #F16E00;
 }
 
 /* cas spécifique ipad */
@@ -2086,7 +2089,7 @@ body.page-node-type-custom-page{
     background-color: rgba(0,0,0,0.6);
     color: white;
     padding-left: 10rem;
-    padding-right: 40rem;
+    padding-right: 10rem;
     text-align: left;
 }
 
@@ -2143,7 +2146,7 @@ body.page-node-type-custom-page{
 }
 
 .subhome-header {
-   display: table-cell;
+    display: table-cell;
     margin-bottom: 2rem;
 }
 
@@ -2181,8 +2184,19 @@ body.page-node-type-custom-page{
 }
 
 .view-subhomes .field--name-field-carrousel {
-    margin-left: -40px;
-    margin-right: -40px; /* Pour contrebalencer les margin/paddings des row */
+    margin-left: -2.857em;
+    margin-right: -2.857em; /* Pour contrebalencer les margin/paddings des row */
+}
+
+@media (max-width: 767px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: 0;
+        margin-right: 0; /* Pour contrebalencer les margin/paddings des row */
+    }
+}
+
+.subhome-entity-bottom-blocks {
+    margin: 30px 0;
 }
 
 .subhome-entity-bottom-blocks div {
