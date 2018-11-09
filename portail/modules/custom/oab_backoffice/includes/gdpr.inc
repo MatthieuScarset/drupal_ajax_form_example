@@ -514,9 +514,8 @@ function gdpr_hook_entity_update($entity) {
         ## Si le webform vient d'etre publié et que ce n'est pas un admin qui vient de le publier
         if ($is_published
             && $is_published !== $old_is_published
-            && $current_user->id() != 1      #Je ne le fait pas pour l'admin
+            && $current_user->id() != 1     #Je ne le fait pas pour l'admin)
         ) {
-            #mail to Everyone pour la validation
 
             $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_spoc_security'));
             if ($spoc !== null) {
@@ -527,13 +526,41 @@ function gdpr_hook_entity_update($entity) {
 
             $mail_creator = $entity->getOwner()->getEmail();
             \Drupal::service('plugin.manager.mail')
-                ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_creator, $current_language, array('webform'=> $entity));
+                ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_creator, $current_language, array('webform' => $entity));
 
             $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
             if ($business_owner !== null) {
                 $mail_business_owner = $business_owner->getEmail();
                 \Drupal::service('plugin.manager.mail')
-                    ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_business_owner, $current_language, array('webform'=> $entity));
+                    ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_business_owner, $current_language, array('webform' => $entity));
+            }
+
+        }
+
+        if ($is_published) {
+
+            /////////////////////////////////////////////////////
+            //Vidage des caches des contenus possedant ce webform
+            $webform_id = $entity->id();
+
+            //Recuperation de tous les contents type "Webform" ayant le formulaire
+            $query = \Drupal::entityQuery('node');
+            $query->condition('type', 'webform');
+            $query->condition('webform', $webform_id);
+            $result = $query->execute();
+
+            $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+            $host = "https://".\Drupal::request()->getHost();
+
+            foreach ($result as $value) {
+                $node_url =  Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $value])->setAbsolute()->toString();
+
+                $node_url = str_replace("back.", '', $node_url);
+                $node_url = str_replace("backoffice.", '', $node_url);
+
+                $akamai_ctrl->flushAkamai($node_url);
+                $akamai_ctrl->flushVarnish($node_url, $host);
+                $akamai_ctrl->flushDrupalCache($node_url);
             }
 
         }
