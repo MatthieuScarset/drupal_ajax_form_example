@@ -114,6 +114,53 @@ article .product ul.nav-tabs li:before{
     overflow: hidden;
 }
 
+/* Modif nouvelle gestion subbhome type press */
+.path-subhome-press .view-subhomes .form-group{
+    margin-bottom: 0;
+}
+
+#views-exposed-form-subhomes-page-press{
+    background-color: #FFFFFF;
+    padding-bottom: 0;
+}
+
+.view-subhomes .display-subhomes-press{
+    min-height: 0;
+    padding-bottom: 0;
+}
+
+.view-subhomes .display-subhomes-press .txt{
+    margin-top:0;
+}
+
+.view-subhomes .display-subhomes-press .txt span {
+    font-size: 1.4rem;
+}
+
+.view-subhomes .display-subhomes-press .encart-image{
+    max-height:95px;
+    max-width: 175px;
+
+}
+
+.link-subhomes:hover > .display-subhomes-press {
+    color: #F16E00 !important;
+}
+
+.view-subhomes .display-subhomes-press .label-subhome {
+    margin-top: 0;
+}
+
+.view-display-id-page_press .view-content{
+    border-bottom: #8F8C87 1px solid;
+}
+
+.view-display-id-page_press .subhomes-filterbar-background{
+    padding:0;
+    margin:0;
+}
+
+
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
     .display-subhomes .encart-image{
@@ -1893,4 +1940,401 @@ body.page-node-type-custom-page{
 
 .page-node-type-distributor #block-theme-boosted-page-title h1.page-header {
     text-transform: uppercase;
+}
+
+
+.black-on-orange {
+    background-color: #FF7900;
+    color: #000000;
+}
+
+.white-on-orange {
+    background-color: #f16E00;
+    color: #FFF;
+}
+
+.orange-on-white {
+    background-color: #FFF;
+    color: #f16E00;
+}
+
+.black-on-white {
+    background-color: #FFF;
+    color: #000;
+}
+
+.grey-on-white {
+    background-color: #FFF;
+    color: #666666;
+}
+
+.orange-on-black {
+    background-color: #000;
+    color: #ff7900;
+}
+
+.white-on-black {
+    background-color: #000;
+    color: #FFF;
+}
+
+.grey-on-black {
+    background-color: #000;
+    color: #999999
+}
+
+.white-on-obs-grey {
+    background-color: #595959;
+    color: #FFF
+}
+
+.black-on-yellow {
+    background-color: #FFD200;
+    color: #000;
+}
+
+.black-on-blue {
+    background-color: #4BB4E6;
+    color: #000;
+}
+
+.black-on-green {
+    background-color: #50BE87;
+    color: #000;
+}
+
+.black-on-purple {
+    background-color: #A885D8;
+    color: #000;
+}
+
+.black-on-pink {
+    background-color: #FFB4E6;
+    color: #000;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-black {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-transparent {
+    color: white;
+    border-color: white;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-transparent {
+    color: black;
+    border-color: black;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-orange {
+    color: black;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-orange:hover {
+    color: #F16E00;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-orange {
+    color: white;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+.paragraph--default-button .btn.btn-txt-white-bg-orange:hover {
+    color: #F16E00;
+    background-color: white;
+}
+
+
+.paragraph--default-button .btn.btn-txt-white-bg-black:hover,
+.paragraph--default-button .btn.btn-txt-white-bg-transparent:hover {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white:hover,
+.paragraph--default-button .btn.btn-txt-black-bg-transparent:hover {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.field--name-field-carrousel {
+
+}
+
+.field--name-field-carrousel .carousel-caption {
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    padding-left: 10rem;
+    padding-right: 40rem;
+    text-align: left;
+}
+
+.field--name-field-carrousel .carousel-caption h3 {
+    font-size: 2.4rem;
+}
+
+.field--name-field-carrousel .carousel-caption a {
+    font-size: 1.6rem;
+}
+
+.field--name-field-carrousel .carousel-indicators {
+    bottom: 0;
+    z-index: 5;
+}
+
+.field--name-field-carrousel .carousel .carousel-control {
+    background: none;
+    opacity: 1;
+    color: white;
+}
+.field--name-field-carrousel .carousel .carousel-control .glyphicon {
+    color: white;
+    font-size: 2rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control .glyphicon:hover {
+    color: #F16E00;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li {
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li.active {
+    height: 1.4rem;
+    width: 1.4rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.left:focus,
+.field--name-field-carrousel .carousel .carousel-control.left:hover,
+.field--name-field-carrousel .carousel .carousel-control.right:focus,
+.field--name-field-carrousel .carousel .carousel-control.right:hover {
+    width: 6rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+.subhome-header {
+   display: table-cell;
+    margin-bottom: 2rem;
+}
+
+.subhome-header div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.subhome-header div.subhome-title {
+    height: 100%;
+    padding: 1rem 0;
+}
+
+.subhome-header div.subhome-title h1 {
+    font-size: 3.4rem;
+    padding: 0;
+    margin: 0;
+    padding-right: 1rem;
+    border-right: 4px solid #F16E00;
+}
+
+@media (max-width: 760px) {
+    .subhome-header div.subhome-title h1 {
+        border-right: none;
+    }
+
+    .subhome-header div {
+        display: block;
+    }
+}
+
+.subhome-header div.subhome-description {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+}
+
+.view-subhomes .field--name-field-carrousel {
+    margin-left: -40px;
+    margin-right: -40px; /* Pour contrebalencer les margin/paddings des row */
+}
+
+.subhome-entity-bottom-blocks div {
+    height: 165px;
+}
+
+.block-corporate {
+    padding: 45px 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.block-corporate a {
+    color: inherit;
+}
+
+.black-on-orange a:hover {
+    color: white;
+}
+
+.white-on-orange a:hover {
+    color: black;
+}
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+
+#carousel-press-kit.carousel .carousel-control.left:focus,
+#carousel-press-kit.carousel .carousel-control.left:hover,
+#carousel-press-kit.carousel .carousel-control.right:focus,
+#carousel-press-kit.carousel .carousel-control.right:hover {
+    width: 3rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #DDDDDD;
+    padding: 1rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform .form-item-utilisation-des-donnees p {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem
 }

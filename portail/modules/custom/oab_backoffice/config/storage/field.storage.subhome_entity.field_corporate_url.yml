@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - link
+    - oab_subhomes
+id: subhome_entity.field_corporate_url
+field_name: field_corporate_url
+entity_type: subhome_entity
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

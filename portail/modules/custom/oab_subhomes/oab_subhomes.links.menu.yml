@@ -1,0 +1,17 @@
+
+# Subhome entity menu items definition
+entity.subhome_entity.collection:
+  title: 'Subhomes List'
+  route_name: entity.subhome_entity.collection
+  description: 'List Subhome entity entities'
+  parent: system.admin_content
+  weight: 100
+
+
+# Subhome entity type menu items definition
+entity.subhome_entity_type.collection:
+  title: 'Subhomes Type'
+  route_name: entity.subhome_entity_type.collection
+  description: 'List Subhome entity type (bundles)'
+  parent: system.admin_structure
+  weight: 99
