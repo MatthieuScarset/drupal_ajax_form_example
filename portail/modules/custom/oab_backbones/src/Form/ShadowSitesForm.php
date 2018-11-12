@@ -175,12 +175,12 @@ class ShadowSitesForm extends FormBase
     }
 
     public function validateImportHandler(array &$form, FormStateInterface $form_state) {
-        if (!is_dir(ImportShadowSites::$IMPORT_DIRECTORY)) {
+        if (!is_dir(ImportShadowSites::IMPORT_DIRECTORY)) {
             $fs = \Drupal::service('file_system');
-            $fs->mkdir(ImportShadowSites::$IMPORT_DIRECTORY, NULL, TRUE);
+            $fs->mkdir(ImportShadowSites::IMPORT_DIRECTORY, NULL, TRUE);
         }
         $file = file_save_upload('file', array('file_validate_extensions' => ''),
-            ImportShadowSites::$IMPORT_DIRECTORY, null, FILE_EXISTS_REPLACE);
+            ImportShadowSites::IMPORT_DIRECTORY, null, FILE_EXISTS_REPLACE);
         // If the file passed validation:
         if (!$file[0]) {
             $form_state->setErrorByName('file', t('No file was uploaded.'));
