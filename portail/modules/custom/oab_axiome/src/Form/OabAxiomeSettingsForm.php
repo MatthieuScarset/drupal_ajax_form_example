@@ -28,7 +28,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
     ];
   }
 
-  public static function getConfigName() {
+  public static function getConfigName(){
       return 'oab.axiome';
   }
 
