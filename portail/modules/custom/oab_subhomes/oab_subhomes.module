@@ -139,22 +139,6 @@ function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition
     return $allowedValues;
 }
 
-/**
- * HOOK_ENTITY_ACCESS
- *
- * Problèmes de droits pour les paragraphes utilisés dans la refonte de la subhome press. Je donne l'accès pour les voir
- */
-function oab_subhomes_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
-    if ($entity->getEntityTypeId() == 'paragraph'
-        && ($entity->bundle() === 'subhome_presse_carrousel' || $entity->bundle() === 'default_button')
-        && $operation == 'view'
-    ) {
-        return AccessResult::allowed();
-    }
-
-    return AccessResult::neutral();
-}
-
 
 function oab_subhomes_preprocess_views_view(&$variables) {
 
