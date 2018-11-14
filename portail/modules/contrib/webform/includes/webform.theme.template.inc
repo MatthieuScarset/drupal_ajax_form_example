@@ -5,6 +5,7 @@
  * Preprocessors and helper functions to make theming easier.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Markup;
@@ -15,6 +16,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\webform\Element\WebformCodeMirror;
 use Drupal\webform\Element\WebformHtmlEditor;
 use Drupal\webform\WebformMessageManagerInterface;
+use Drupal\webform\WebformSubmissionInterface;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -61,7 +63,7 @@ function template_preprocess_webform_help(array &$variables) {
           '#type' => 'link',
           '#title' => t('Watch video'),
           '#url' => Url::fromRoute('webform.help.video', ['id' => str_replace('_', '-', $video_info['id'])]),
-          '#attributes' => WebformDialogHelper::getModalDialogAttributes(1000, $classes),
+          '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_WIDE, $classes),
           '#prefix' => ' ',
         ];
         break;
@@ -169,7 +171,7 @@ function template_preprocess_webform_confirmation(array &$variables) {
   }
 
   // Set message.
-  $variables['message'] = $message_manager->build(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION);
+  $variables['message'] = $message_manager->build(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION_MESSAGE);
 
   // Set attributes.
   $variables['attributes'] = new Attribute($settings['confirmation_attributes']);
@@ -196,6 +198,7 @@ function template_preprocess_webform_confirmation(array &$variables) {
 
   // Set back_url.
   if ($source_entity && $source_entity->hasLinkTemplate('canonical')) {
+    $source_entity = \Drupal::service('entity.repository')->getTranslationFromContext($source_entity);
     $variables['back_url'] = $source_entity->toUrl('canonical', $options)->toString();
   }
   elseif ($webform_submission) {
@@ -231,6 +234,11 @@ function template_preprocess_webform_submission_navigation(array &$variables) {
 
   /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
   $webform_submission = $variables['webform_submission'];
+  $webform = $webform_submission->getWebform();
+
+  // Webform id and title for context.
+  $variables['webform_id'] = $webform->id();
+  $variables['webform_title'] = $webform->label();
 
   // Get the route name, parameters, and source entity for the current page.
   // This ensures that the user stays within their current context as they are
@@ -276,8 +284,9 @@ function template_preprocess_webform_submission_navigation(array &$variables) {
 function template_preprocess_webform_submission(array &$variables) {
   $variables['view_mode'] = $variables['elements']['#view_mode'];
   $variables['webform_submission'] = $variables['elements']['#webform_submission'];
-  $variables['webform'] = $variables['elements']['#webform_submission']->getWebform();
-
+  if ($variables['webform_submission'] instanceof WebformSubmissionInterface) {
+    $variables['webform'] = $variables['webform_submission']->getWebform();
+  }
 }
 
 /**
@@ -294,7 +303,6 @@ function template_preprocess_webform_submission_information(array &$variables) {
   $webform_submission = $variables['webform_submission'];
   $webform = $webform_submission->getWebform();
 
-  $variables['webform_id'] = $webform->id();
   $variables['serial'] = $webform_submission->serial();
   $variables['sid'] = $webform_submission->id();
   $variables['uuid'] = $webform_submission->uuid();
@@ -307,6 +315,7 @@ function template_preprocess_webform_submission_information(array &$variables) {
   $variables['completed'] = WebformDateHelper::format($webform_submission->getCompletedTime());
   $variables['changed'] = WebformDateHelper::format($webform_submission->getChangedTime());
   $variables['sticky'] = $webform_submission->isSticky() ? t('Yes') : '';
+  $variables['locked'] = $webform_submission->isLocked() ? t('Yes') : '';
   $variables['notes'] = $webform_submission->getNotes();
 
   // @see \Drupal\Core\Field\Plugin\Field\FieldFormatter\LanguageFormatter::viewValue()
@@ -342,6 +351,22 @@ function template_preprocess_webform_submission_information(array &$variables) {
     ) {
       $variables['submissions_view'] = TRUE;
     }
+  }
+
+  if ($webform_submission->access('delete')) {
+    /** @var \Drupal\webform\WebformRequestInterface $request_handler */
+    $request_handler = \Drupal::service('webform.request');
+    $base_route_name = (strpos(\Drupal::routeMatch()->getRouteName(), 'webform.user.submission') !== FALSE) ? 'webform.user.submission.delete' : 'webform_submission.delete_form';
+    $url = $request_handler->getUrl($webform_submission, $source_entity, $base_route_name);
+
+    $variables['delete'] = [
+      '#type' => 'link',
+      '#title' => t('Delete submission'),
+      '#url' => $url,
+      '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, ['button', 'button--danger']),
+    ];
+
+    WebformDialogHelper::attachLibraries($variables['delete']);
   }
 }
 
@@ -471,8 +496,8 @@ function _template_progress_webform_set_title(array &$variables, $strip_tags = F
  *   - current_page: The current wizard page.
  */
 function template_preprocess_webform_progress(array &$variables) {
-  /** @var \Drupal\webform\WebformLibrariesManagerInterface $libaries_manager */
-  $libaries_manager = \Drupal::service('webform.libraries_manager');
+  /** @var \Drupal\webform\WebformLibrariesManagerInterface $libraries_manager */
+  $libraries_manager = \Drupal::service('webform.libraries_manager');
 
   /** @var \Drupal\webform\WebformInterface $webform */
   $webform = $variables['webform'];
@@ -489,7 +514,7 @@ function template_preprocess_webform_progress(array &$variables) {
 
   if ($webform->getSetting('wizard_progress_bar')) {
     $variables['bar'] = [
-      '#theme' => ($libaries_manager->isIncluded('progress-tracker')) ? 'webform_progress_tracker' : 'webform_progress_bar',
+      '#theme' => ($libraries_manager->isIncluded('progress-tracker')) ? 'webform_progress_tracker' : 'webform_progress_bar',
       '#webform' => $webform,
       '#current_page' => $current_page,
       '#operation' => $operation,
@@ -556,8 +581,11 @@ function _template_preprocess_webform_progress(array &$variables) {
 
   // Reset the pages variable.
   $variables['progress'] = [];
-  foreach ($pages as $page) {
-    $variables['progress'][] = (isset($page['#title'])) ? $page['#title'] : '';
+  foreach ($pages as $key => $page) {
+    $variables['progress'][] = [
+      'name' => $key,
+      'title' => (isset($page['#title'])) ? $page['#title'] : '',
+    ];
   }
 }
 
@@ -720,19 +748,6 @@ function template_preprocess_webform_composite_contact(array &$variables) {
 }
 
 /**
- * Prepares variables for creditcard composite element templates.
- *
- * Default template: webform-element-creditcard.html.twig.
- *
- * @param array $variables
- *   An associative array containing:
- *   - element: An associative array containing the properties of the element.
- */
-function template_preprocess_webform_composite_creditcard(array &$variables) {
-  _template_preprocess_webform_composite($variables);
-}
-
-/**
  * Prepares variables for link composite element templates.
  *
  * Default template: webform-element-link.html.twig.
@@ -797,19 +812,24 @@ function template_preprocess_webform_composite_telephone(array &$variables) {
  *   An associative array containing the following key:
  *   - element: The webform element.
  *   - help: The help content.
+ *   - attributes: The help attributes.
  */
 function template_preprocess_webform_element_help(array &$variables) {
-  $variables['help_icon'] = [
-    '#type' => 'link',
-    '#title' => '?',
-    '#url' => Url::fromRoute('<none>', [], ['fragment' => 'help']),
-    '#attributes' => [
-      'title' => $variables['help'],
-      // Add 'data-webform-help' attribute which support HTML markup.
-      'data-webform-help' => WebformHtmlEditor::stripTags($variables['help']),
-      'class' => ['webform-element-help'],
-    ],
-  ];
+  $attributes = (isset($variables['attributes'])) ? $variables['attributes'] : [];
+  $attributes['class'][] = 'webform-element-help';
+  $attributes['role'] = 'tooltip';
+  $attributes['tabindex'] = '0';
+
+  $content = (is_array($variables['help'])) ? \Drupal::service('renderer')->render($variables['help']) : $variables['help'];
+
+  $help = '';
+  if (!empty($variables['help_title'])) {
+    $help .= '<div class="webform-element-help--title">' . WebformHtmlEditor::stripTags($variables['help_title']) . '</div>';
+  }
+  $help .= '<div class="webform-element-help--content">' . WebformHtmlEditor::stripTags($content) . '</div>';
+  $attributes['data-webform-help'] = $help;
+
+  $variables['attributes'] = new Attribute($attributes);
 }
 
 /**
@@ -834,6 +854,11 @@ function template_preprocess_webform_element_more(array &$variables) {
   }
 
   $variables['attributes'] = new Attribute($variables['attributes']);
+
+  // Make sure there is a unique id.
+  if (empty($variables['id'])) {
+    $variables['id'] = Html::getUniqueId('webform-element-more');
+  }
 }
 
 /**
@@ -934,8 +959,18 @@ function template_preprocess_webform_element_image_file(array &$variables) {
     }
     $variables['image'] += [
       '#uri' => $uri,
-      '#attributes' => ['class' => ['webform-image-file'], 'alt' => $file->getFilename()],
+      '#attributes' => [
+        'class' => ['webform-image-file'],
+        'alt' => $file->getFilename(),
+        'title' => $file->getFilename(),
+      ],
     ];
+
+    // For the Results table always display the file name as a tooltip.
+    if (strpos(\Drupal::routeMatch()->getRouteName(), 'webform.results_submissions') !== FALSE) {
+      $variables['attached']['library'][] = 'webform/webform.tooltip';
+      $variables['image']['#attributes']['class'][] = 'js-webform-tooltip-link';
+    }
 
     // Wrap 'image' in a link/modal.
     if ($format && $format != 'image') {

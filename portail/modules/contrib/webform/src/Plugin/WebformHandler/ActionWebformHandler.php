@@ -25,6 +25,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
  *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
  *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_OPTIONAL,
+ *   tokens = TRUE,
  * )
  */
 class ActionWebformHandler extends WebformHandlerBase {
@@ -65,7 +66,7 @@ class ActionWebformHandler extends WebformHandlerBase {
    */
   public function getSummary() {
     $configuration = $this->getConfiguration();
-    $this->configuration = $configuration['settings'];
+    $settings = $configuration['settings'];
 
     // Get state labels.
     $states = [
@@ -73,8 +74,9 @@ class ActionWebformHandler extends WebformHandlerBase {
       WebformSubmissionInterface::STATE_CONVERTED => $this->t('Converted'),
       WebformSubmissionInterface::STATE_COMPLETED => $this->t('Completed'),
       WebformSubmissionInterface::STATE_UPDATED => $this->t('Updated'),
+      WebformSubmissionInterface::STATE_LOCKED => $this->t('Locked'),
     ];
-    $this->configuration['states'] = array_intersect_key($states, array_combine($this->configuration['states'], $this->configuration['states']));
+    $settings['states'] = array_intersect_key($states, array_combine($settings['states'], $settings['states']));
 
     // Get message type.
     $message_types = [
@@ -83,15 +85,15 @@ class ActionWebformHandler extends WebformHandlerBase {
       'warning' => t('Warning'),
       'info' => t('Info'),
     ];
-    $this->configuration['message'] = $this->configuration['message'] ? WebformHtmlEditor::checkMarkup($this->configuration['message']) : NULL;
-    $this->configuration['message_type'] = $message_types[$this->configuration['message_type']];
+    $settings['message'] = $settings['message'] ? WebformHtmlEditor::checkMarkup($settings['message']) : NULL;
+    $settings['message_type'] = $message_types[$settings['message_type']];
 
     // Get data element keys.
-    $data = Yaml::decode($this->configuration['data']) ?: [];
-    $this->configuration['data'] = array_keys($data);
+    $data = Yaml::decode($settings['data']) ?: [];
+    $settings['data'] = array_keys($data);
 
     return [
-      '#settings' => $this->configuration,
+      '#settings' => $settings,
     ] + parent::getSummary();
   }
 
@@ -103,6 +105,7 @@ class ActionWebformHandler extends WebformHandlerBase {
       'states' => [WebformSubmissionInterface::STATE_COMPLETED],
       'notes' => '',
       'sticky' => NULL,
+      'locked' => NULL,
       'data' => '',
       'message' => '',
       'message_type' => 'status',
@@ -124,10 +127,10 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Execute'),
       '#options' => [
-        WebformSubmissionInterface::STATE_DRAFT => $this->t('...when <b>draft</b> is saved.'),
-        WebformSubmissionInterface::STATE_CONVERTED => $this->t('...when anonymous submission is <b>converted</b> to authenticated.'),
-        WebformSubmissionInterface::STATE_COMPLETED => $this->t('...when submission is <b>completed</b>.'),
-        WebformSubmissionInterface::STATE_UPDATED => $this->t('...when submission is <b>updated</b>.'),
+        WebformSubmissionInterface::STATE_DRAFT => $this->t('…when <b>draft</b> is saved.'),
+        WebformSubmissionInterface::STATE_CONVERTED => $this->t('…when anonymous submission is <b>converted</b> to authenticated.'),
+        WebformSubmissionInterface::STATE_COMPLETED => $this->t('…when submission is <b>completed</b>.'),
+        WebformSubmissionInterface::STATE_UPDATED => $this->t('…when submission is <b>updated</b>.'),
       ],
       '#required' => TRUE,
       '#access' => $results_disabled ? FALSE : TRUE,
@@ -141,12 +144,24 @@ class ActionWebformHandler extends WebformHandlerBase {
     $form['actions']['sticky'] = [
       '#type' => 'select',
       '#title' => $this->t('Change status'),
+      '#empty_option' => $this->t('- None -'),
       '#options' => [
-        '' => '',
         '1' => $this->t('Flag/Star'),
         '0' => $this->t('Unflag/Unstar'),
       ],
       '#default_value' => ($this->configuration['sticky'] === NULL) ? '' : ($this->configuration['sticky'] ? '1' : '0'),
+    ];
+    $form['actions']['locked'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Change lock'),
+      '#description' => $this->t('Webform submissions can only be unlocked programatically.'),
+      '#empty_option' => $this->t('- None -'),
+      '#options' => [
+        '' => '',
+        '1' => $this->t('Lock'),
+        '0' => $this->t('Unlock'),
+      ],
+      '#default_value' => ($this->configuration['locked'] === NULL) ? '' : ($this->configuration['locked'] ? '1' : '0'),
     ];
     $form['actions']['notes'] = [
       '#type' => 'webform_codemirror',
@@ -194,7 +209,7 @@ class ActionWebformHandler extends WebformHandlerBase {
         '#rows' => $elements_rows,
       ],
     ];
-    $form['actions']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['actions']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Development.
     $form['development'] = [
@@ -208,6 +223,8 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#return_value' => TRUE,
       '#default_value' => $this->configuration['debug'],
     ];
+
+    $this->tokenManager->elementValidate($form);
 
     return $this->setSettingsParentsRecursively($form);
   }
@@ -235,13 +252,16 @@ class ActionWebformHandler extends WebformHandlerBase {
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     parent::submitConfigurationForm($form, $form_state);
-    parent::applyFormStateToConfiguration($form_state);
+    $this->applyFormStateToConfiguration($form_state);
 
     // Cleanup states.
     $this->configuration['states'] = array_values(array_filter($this->configuration['states']));
 
     // Cleanup sticky.
     $this->configuration['sticky'] = ($this->configuration['sticky'] === '') ? NULL : (bool) $this->configuration['sticky'];
+
+    // Cleanup locked.
+    $this->configuration['locked'] = ($this->configuration['locked'] === '') ? NULL : (bool) $this->configuration['locked'];
 
     // Cast debug.
     $this->configuration['debug'] = (bool) $this->configuration['debug'];
@@ -273,6 +293,11 @@ class ActionWebformHandler extends WebformHandlerBase {
       $webform_submission->setSticky($this->configuration['sticky']);
     }
 
+    // Set locked.
+    if ($this->configuration['locked'] !== NULL) {
+      $webform_submission->setLocked($this->configuration['locked']);
+    }
+
     // Append notes.
     if ($this->configuration['notes']) {
       $notes = rtrim($webform_submission->getNotes());
@@ -295,7 +320,7 @@ class ActionWebformHandler extends WebformHandlerBase {
         $this->tokenManager->replace($this->configuration['message'], $webform_submission)
       );
       $message_type = $this->configuration['message_type'];
-      drupal_set_message(\Drupal::service('renderer')->render($message), $message_type);
+      $this->messenger()->addMessage(\Drupal::service('renderer')->renderPlain($message), $message_type);
     }
 
     // Resave the webform submission without trigger any hooks or handlers.
@@ -337,6 +362,13 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
     ];
 
+    $build['locked'] = [
+      '#type' => 'item',
+      '#title' => $this->t('Lock'),
+      '#markup' => ($this->configuration['locked'] === NULL) ? '' : ($this->configuration['locked'] ? $this->t('Locked') : $this->t('Unlocked')),
+      '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
+    ];
+
     $build['notes'] = [
       '#type' => 'item',
       '#title' => $this->t('Notes'),
@@ -365,7 +397,7 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
     ];
 
-    drupal_set_message(\Drupal::service('renderer')->renderPlain($build), 'warning', TRUE);
+    $this->messenger()->addWarning(\Drupal::service('renderer')->renderPlain($build), TRUE);
   }
 
 }

@@ -40,9 +40,35 @@ interface WebformTokenManagerInterface {
    *
    * @param array $token_types
    *   An array containing token types that should be shown in the tree.
+   *
+   * @return array
+   *   A render array containing a token tree link.
+   */
+  public function buildTreeLink(array $token_types = ['webform', 'webform_submission']);
+
+  /**
+   * Build token tree element if token.module is installed.
+   *
+   * @param array $token_types
+   *   An array containing token types that should be shown in the tree.
    * @param string $description
    *   (optional) Description to appear after the token tree link.
+   *
+   * @return array
+   *   A render array containing a token tree link wrapped in a div.
    */
-  public function buildTreeLink(array $token_types = ['webform', 'webform_submission'], $description = NULL);
+  public function buildTreeElement(array $token_types = ['webform', 'webform_submission'], $description = NULL);
+
+  /**
+   * Validate form that should have tokens in it.
+   *
+   * @param array $form
+   *   A form.
+   * @param array $token_types
+   *   An array containing token types that should be validated.
+   *
+   * @see token_element_validate()
+   */
+  public function elementValidate(array &$form, array $token_types = ['webform', 'webform_submission', 'webform_handler']);
 
 }

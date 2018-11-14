@@ -22,27 +22,24 @@ class WebformHandlerEmailBasicTest extends WebformTestBase {
   protected static $testWebforms = ['test_handler_email'];
 
   /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-
-    // Create users.
-    $this->createUsers();
-  }
-
-  /**
    * Test basic email handler.
    */
   public function testBasicEmailHandler() {
+    $admin_user = $this->drupalCreateUser([
+      'administer webform',
+    ]);
+
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = Webform::load('test_handler_email');
+
+    /**************************************************************************/
 
     // Create a submission using the test webform's default values.
     $this->postSubmission($webform);
 
     // Check sending a basic email via a submission.
     $sent_email = $this->getLastEmail();
+    $this->assertEqual($sent_email['key'], 'test_handler_email_email');
     $this->assertEqual($sent_email['reply-to'], "John Smith <from@example.com>");
     $this->assertContains($sent_email['body'], 'Submitted by: Anonymous');
     $this->assertContains($sent_email['body'], 'First name: John');
@@ -64,7 +61,7 @@ class WebformHandlerEmailBasicTest extends WebformTestBase {
     $webform->setSetting('results_disabled', FALSE)->save();
 
     // Check sending a custom email using tokens.
-    $this->drupalLogin($this->adminWebformUser);
+    $this->drupalLogin($admin_user);
     $body = implode(PHP_EOL, [
       'full name: [webform_submission:values:first_name] [webform_submission:values:last_name]',
       'uuid: [webform_submission:uuid]',
@@ -89,7 +86,7 @@ class WebformHandlerEmailBasicTest extends WebformTestBase {
     $this->assertContains($sent_email['body'], 'sid: ' . $sid);
     $this->assertContains($sent_email['body'], 'date: ' . \Drupal::service('date.formatter')->format($webform_submission->created->value, 'medium'));
     $this->assertContains($sent_email['body'], 'ip-address: ' . $webform_submission->remote_addr->value);
-    $this->assertContains($sent_email['body'], 'user: ' . $this->adminWebformUser->label());
+    $this->assertContains($sent_email['body'], 'user: ' . $admin_user->label());
     $this->assertContains($sent_email['body'], "url:");
     $this->assertContains($sent_email['body'], $webform_submission->toUrl('canonical', ['absolute' => TRUE])->toString());
     $this->assertContains($sent_email['body'], "edit-url:");
@@ -99,25 +96,51 @@ class WebformHandlerEmailBasicTest extends WebformTestBase {
     // Create a submission using HTML is subject and message.
     $edit = [
       'settings[subject][select]' => '[webform_submission:values:subject:raw]',
-      'settings[body]' => '[webform_submission:values:message:value]',
+      'settings[body]' => '_other_',
+      'settings[body_custom_text]' => '[webform_submission:values][webform_submission:values:message:value]',
     ];
     $this->drupalPostForm('admin/structure/webform/manage/test_handler_email/handlers/email/edit', $edit, t('Save'));
 
-    // Check special characters.
+    // Check special characters in message value.
     $edit = [
       'first_name' => '"<first_name>"',
       'last_name' => '"<last_name>"',
       // Drupal strip_tags() from mail subject.
       // @see \Drupal\Core\Mail\MailManager::doMail
       // @see http://cgit.drupalcode.org/drupal/tree/core/lib/Drupal/Core/Mail/MailManager.php#n285
-      'subject' => 'This has <removed>"special" \'characters\'',
-      'message' => 'This has <not_removed>"special" \'characters\'',
+      'subject' => 'This has <removed> & "special" \'characters\'',
+      'message' => 'This has <not_removed> & "special" \'characters\'',
     ];
     $this->postSubmission($webform, $edit);
     $sent_email = $this->getLastEmail();
     $this->assertEqual($sent_email['reply-to'], '"first_name" "last_name" <from@example.com>');
-    $this->assertEqual($sent_email['subject'], 'This has "special" \'characters\'');
-    $this->assertEqual($sent_email['body'], 'This has <not_removed>"special" \'characters\'' . PHP_EOL);
+    $this->assertEqual($sent_email['subject'], 'This has  & "special" \'characters\'');
+    // NOTE:
+    // Drupal's PhpMail::format function calls
+    // MailFormatHelper::htmlToText which strips out all unrecognized HTML tags.
+    // @see \Drupal\Core\Mail\Plugin\Mail\PhpMail
+    //
+    // The Webform module provides its own Mail handler which does
+    // convert and strip HTML tags.
+    // @see \Drupal\webform\Plugin\Mail\WebformPhpMail
+    $this->assertEqual($sent_email['body'], 'First name: ""
+Last name: ""
+Email: from@example.com
+Subject: This has  & "special" \'characters\'
+Message:
+This has  & "special" \'characters\'
+
+This has  & "special" \'characters\'
+');
+    // Instead we are going to check params body.
+    $this->assertEqual($sent_email['params']['body'], 'First name: "<first_name>"
+Last name: "<last_name>"
+Email: from@example.com
+Subject: This has <removed> & "special" \'characters\'
+Message:
+This has <not_removed> & "special" \'characters\'
+
+This has <not_removed> & "special" \'characters\'');
   }
 
 }
