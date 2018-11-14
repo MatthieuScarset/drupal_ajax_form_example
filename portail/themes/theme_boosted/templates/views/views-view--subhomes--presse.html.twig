@@ -83,6 +83,12 @@
                 {% if pager %}
                     {{ pager }}
                 {% endif %}
+
+                {% if rows %}
+                    <div class="archives_link paragraph--default-button">
+                        <a href="/archives" class="rebond-link">{{ 'Archives'|trans }}</a>
+                    </div>
+                {% endif %}
             </div>
 
             {# Blocks du bas (press-kits + Coroporate#}
@@ -116,7 +122,7 @@
                 </div>
 
                 {# corporate#}
-                <div class="col-sm-4 col-xs-12 block-corporate">
+                <div class="col-sm-4 col-xs-12">
                     {# si j'ai un visual, je le met en bg, sinon c'est l'aplat qui est mis #}
                     {% if subhome_entity.fields.field_corporate_visual | length > 0 %}
                     {% set img_uri = "" %}
