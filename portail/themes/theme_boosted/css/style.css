@@ -151,11 +151,13 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes-press .label-subhome {
-    margin-top: 0;
+    margin-top: 1.4rem;
 }
 
-.view-display-id-page_press .view-content{
+.view-display-id-page_press .subhome-view-press .archives_link{
     border-bottom: #8F8C87 1px solid;
+    text-align: right;
+    padding: 0 0.714em 2.143em 0;
 }
 
 .view-display-id-page_press .subhomes-filterbar-background{
@@ -2196,7 +2198,7 @@ body.page-node-type-custom-page{
 }
 
 .subhome-entity-bottom-blocks {
-    margin: 30px 0;
+    margin: 2.143em 0;
 }
 
 .subhome-entity-bottom-blocks div {
@@ -2204,7 +2206,7 @@ body.page-node-type-custom-page{
 }
 
 .block-corporate {
-    padding: 45px 2rem;
+    padding: 2.250em 2rem;
     font-size: 2rem;
     line-height: 2rem;
     font-weight: bold;

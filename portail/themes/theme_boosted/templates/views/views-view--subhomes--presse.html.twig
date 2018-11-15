@@ -83,6 +83,12 @@
                 {% if pager %}
                     {{ pager }}
                 {% endif %}
+
+                {% if rows %}
+                    <div class="archives_link paragraph--default-button">
+                        <a href="{{ path('view.subhome_archive.press') }}" class="rebond-link">{{ 'Archives'|t }}</a>
+                    </div>
+                {% endif %}
             </div>
 
             {# Blocks du bas (press-kits + Coroporate#}
@@ -131,9 +137,9 @@
                     {% else %}
                         <div class="block-corporate {{ subhome_entity.fields.field_corporate_aplat.0.value }}">
                     {% endif %}
-                        <a href="{{ subhome_entity.fields.field_corporate_url.0.getUrl() }}">
-                            {{ subhome_entity.fields.field_corporate_title.0.value }}
-                        </a>
+                    <a href="{{ subhome_entity.fields.field_corporate_url.0.getUrl() }}">
+                        {{ subhome_entity.fields.field_corporate_title.0.value }}
+                    </a>
                     </div>
                 </div>
             </div>
@@ -173,7 +179,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 ">
                     <div class="block-webform">
-                        {{ drupal_entity('webform', 'formulaire_de_contact_presse') }}
+                        {{ drupal_entity('webform', 'formulaire_de_contact_presse',null,null,false) }}
                     </div>
                 </div>
             </div>

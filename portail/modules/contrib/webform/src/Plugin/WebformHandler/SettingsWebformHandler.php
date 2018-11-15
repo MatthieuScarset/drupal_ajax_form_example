@@ -27,6 +27,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   cardinality = \Drupal\webform\Plugin\WebformHandlerInterface::CARDINALITY_UNLIMITED,
  *   results = \Drupal\webform\Plugin\WebformHandlerInterface::RESULTS_PROCESSED,
  *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_OPTIONAL,
+ *   tokens = TRUE,
  * )
  */
 class SettingsWebformHandler extends WebformHandlerBase {
@@ -75,16 +76,20 @@ class SettingsWebformHandler extends WebformHandlerBase {
    * {@inheritdoc}
    */
   public function getSummary() {
+    $configuration = $this->getConfiguration();
+    $settings = $configuration['settings'];
+
     $setting_definitions = $this->getSettingsDefinitions();
-    $settings = $this->getSettingsOverride();
-    foreach ($settings as $name => $value) {
-      $settings[$name] = [
+    $setting_override = $this->getSettingsOverride();
+    foreach ($setting_override as $name => $value) {
+      $settings['settings'][$name] = [
         'title' => $setting_definitions[$name]['label'],
         'value' => $value,
       ];
     }
+
     return [
-      '#settings' => $this->configuration + ['settings' => $settings],
+      '#settings' => $settings,
     ] + parent::getSummary();
   }
 
@@ -125,7 +130,7 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#description' => $this->t('A message to be displayed on the preview page.'),
       '#default_value' => $this->configuration['preview_message'],
     ];
-    $form['preview_settings']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['preview_settings']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Confirmation settings.
     $confirmation_type = $this->getWebform()->getSetting('confirmation_type');
@@ -159,7 +164,7 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#default_value' => $this->configuration['confirmation_message'],
       '#access' => !empty($this->configuration['confirmation_message']) || $has_confirmation_message,
     ];
-    $form['confirmation_settings']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['confirmation_settings']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Custom settings.
     $custom_settings = $this->configuration;
@@ -177,7 +182,6 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#description' => $this->t('Enter the setting name and value as YAML.'),
       '#default_value' => $custom_settings,
       '#parents' => ['settings', 'custom'],
-      '#access' => $has_confirmation_title,
     ];
 
     // Custom settings definitions.
@@ -222,6 +226,8 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#default_value' => $this->configuration['debug'],
     ];
 
+    $this->tokenManager->elementValidate($form);
+
     return $this->setSettingsParentsRecursively($form);
   }
 
@@ -247,10 +253,10 @@ class SettingsWebformHandler extends WebformHandlerBase {
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     // Completely reset configuration so that custom configuration will always
     // be reset.
-    $this->configuration = [];
+    $this->configuration = $this->defaultConfiguration();
 
     parent::submitConfigurationForm($form, $form_state);
-    parent::applyFormStateToConfiguration($form_state);
+    $this->applyFormStateToConfiguration($form_state);
 
     // Remove all empty strings from preview and confirmation settings.
     $this->configuration = array_filter($this->configuration);
@@ -266,20 +272,58 @@ class SettingsWebformHandler extends WebformHandlerBase {
    * {@inheritdoc}
    */
   public function overrideSettings(array &$settings, WebformSubmissionInterface $webform_submission) {
-    $settings_override = $this->getSettingsOverride();
+    $settings_override = $this->getSubmissionSettingsOverride($webform_submission);
     foreach ($settings_override as $name => $value) {
       $settings[$name] = $value;
     }
 
-    $this->displayDebug();
+    $this->displayDebug($webform_submission);
   }
+
+  /****************************************************************************/
+  // Debug handlers.
+  /****************************************************************************/
 
   /**
    * Display debugging information about the current action.
    */
-  protected function displayDebug() {
+  protected function displayDebug(WebformSubmissionInterface $webform_submission) {
     if (!$this->configuration['debug']) {
       return;
+    }
+
+    $settings_definitions = $this->getSettingsDefinitions();
+    $settings_override = $this->getSettingsOverride();
+    $submission_settings_override = $this->getSubmissionSettingsOverride($webform_submission);
+
+    // Set header.
+    $header = [
+      'name' => $this->t('Name'),
+      'label' => [
+        'data' => $this->t('Label'),
+        'class' => [RESPONSIVE_PRIORITY_LOW],
+      ],
+      'type' => [
+        'data' => $this->t('Type'),
+        'class' => [RESPONSIVE_PRIORITY_LOW],
+      ],
+      'setting' => [
+        'data' => $this->t('Setting Value'),
+        'class' => [RESPONSIVE_PRIORITY_MEDIUM],
+      ],
+      'submission' => $this->t('Submission Value'),
+    ];
+
+    // Set rows.
+    $rows = [];
+    foreach ($settings_override as $name => $value) {
+      $rows[] = [
+        'name' => ['data' => ['#markup' => '<b>' . $name . '</b>']],
+        'label' => $settings_definitions[$name]['label'],
+        'type' => $settings_definitions[$name]['type'],
+        'setting' => $settings_override[$name],
+        'submission' => $submission_settings_override[$name],
+      ];
     }
 
     $build = [
@@ -287,18 +331,17 @@ class SettingsWebformHandler extends WebformHandlerBase {
       '#title' => $this->t('Debug: Settings: @title', ['@title' => $this->label()]),
       '#open' => TRUE,
     ];
-    $settings_override = $this->getSettingsOverride();
-    foreach ($settings_override as $name => $value) {
-      $build[$name] = [
-        '#type' => 'item',
-        '#title' => $name,
-        '#markup' => $value,
-        '#wrapper_attributes' => ['class' => ['container-inline'], 'style' => 'margin: 0'],
-      ];
-    }
-
-    drupal_set_message(\Drupal::service('renderer')->renderPlain($build), 'warning', FALSE);
+    $build['table'] = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+    ];
+    $this->messenger()->addWarning(\Drupal::service('renderer')->renderPlain($build));
   }
+
+  /****************************************************************************/
+  // Settings helpers.
+  /****************************************************************************/
 
   /**
    * Get webform setting definitions.
@@ -327,6 +370,36 @@ class SettingsWebformHandler extends WebformHandlerBase {
       }
     }
     return $settings;
+  }
+
+  /**
+   * Get webform submission's overridden settings.
+   *
+   * Replaces submissions token values and cast booleans and integers.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   *
+   * @return array
+   *   An associative array containing overridden settings.
+   */
+  protected function getSubmissionSettingsOverride(WebformSubmissionInterface $webform_submission) {
+    $settings_definitions = $this->getSettingsDefinitions();
+    $settings_override = $this->getSettingsOverride();
+    foreach ($settings_override as $name => $value) {
+      if (!isset($settings_definitions[$name])) {
+        continue;
+      }
+
+      // Replace token value and cast booleans and integers.
+      $type = $settings_definitions[$name]['type'];
+      if (in_array($type, ['boolean', 'integer'])) {
+        $value = $this->tokenManager->replace($value, $webform_submission);
+        settype($value, $type);
+        $settings_override[$name] = $value;
+      }
+    }
+    return $settings_override;
   }
 
 }

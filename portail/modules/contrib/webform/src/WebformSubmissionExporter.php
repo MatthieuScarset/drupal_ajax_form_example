@@ -256,13 +256,21 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       'range_latest' => '',
       'range_start' => '',
       'range_end' => '',
+      'order' => 'asc',
       'state' => 'all',
+      'locked' => '',
       'sticky' => '',
       'download' => TRUE,
       'files' => FALSE,
     ];
 
-    // Append element handler default options.
+    // Append webform exporter default options.
+    $exporter_plugins = $this->exporterManager->getInstances();
+    foreach ($exporter_plugins as $element_type => $element_plugin) {
+      $this->defaultOptions += $element_plugin->defaultConfiguration();
+    }
+
+    // Append webform element default options.
     $element_types = $this->getWebformElementTypes();
     $element_plugins = $this->elementManager->getInstances();
     foreach ($element_plugins as $element_type => $element_plugin) {
@@ -302,6 +310,10 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
       }
     }
 
+    $form['export'] = [
+      '#type' => 'container',
+      '#attributes' => ['data-webform-states-no-clear' => TRUE],
+    ];
     $form['export']['format'] = [
       '#type' => 'details',
       '#title' => $this->t('Format options'),
@@ -564,7 +576,21 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
           '#default_value' => $export_options['range_end'],
         ];
     }
-
+    $form['export']['download']['order'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Order'),
+      '#description' => $this->t('Order submissions by ascending (oldest first) or descending (newest first).'),
+      '#options' => [
+        'asc' => $this->t('Sort ascending'),
+        'desc' => $this->t('Sort descending'),
+      ],
+      '#default_value' => $export_options['order'],
+      '#states' => [
+        'visible' => [
+          ':input[name="range_type"]' => ['!value' => 'latest'],
+        ],
+      ],
+    ];
     $form['export']['download']['sticky'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Starred/flagged submissions'),
@@ -777,15 +803,18 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
     if ($export_options['range_type'] == 'latest' && $export_options['range_latest']) {
       // Clone the query and use it to get latest sid starting sid.
       $latest_query = clone $query;
+      $latest_query->sort('created', 'DESC');
       $latest_query->sort('sid', 'DESC');
       $latest_query->range(0, (int) $export_options['range_latest']);
       if ($latest_query_entity_ids = $latest_query->execute()) {
         $query->condition('sid', end($latest_query_entity_ids), '>=');
       }
     }
-
-    // Sort by sid with the oldest one first.
-    $query->sort('sid', 'ASC');
+    else {
+      // Sort by created and sid in ASC or DESC order.
+      $query->sort('created', isset($export_options['order']) ? $export_options['order'] : 'ASC');
+      $query->sort('sid', isset($export_options['order']) ? $export_options['order'] : 'ASC');
+    }
 
     return $query;
   }
@@ -849,7 +878,7 @@ class WebformSubmissionExporter implements WebformSubmissionExporterInterface {
    * {@inheritdoc}
    */
   public function getFileTempDirectory() {
-    return file_directory_temp();
+    return $this->configFactory->get('webform.settings')->get('export.temp_directory') ?: file_directory_temp();
   }
 
   /**

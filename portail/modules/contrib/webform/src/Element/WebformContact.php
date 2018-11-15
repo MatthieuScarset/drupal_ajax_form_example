@@ -53,17 +53,15 @@ class WebformContact extends WebformCompositeBase {
       '#type' => 'select',
       '#title' => t('State/Province'),
       '#options' => 'state_province_names',
-      '#empty_option' => '',
     ];
     $elements['postal_code'] = [
       '#type' => 'textfield',
-      '#title' => t('Zip/Postal Code'),
+      '#title' => t('ZIP/Postal Code'),
     ];
     $elements['country'] = [
       '#type' => 'select',
       '#title' => t('Country'),
       '#options' => 'country_names',
-      '#empty_option' => '',
     ];
     return $elements;
   }
