@@ -76,78 +76,44 @@
                     {{ pager }}
                 {% endif %}
             </div>
-
-            {# Blocks du bas (press-kits + Coroporate#}
-                <div class="row subhome-entity-bottom-blocks">
-                    {# Press kit#}
-                    <div class="col-sm-8 col-xs-12">
-                        <div id="carousel-press-kit" class="carousel slide" data-interval="false" data-ride="carousel">
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                {% for key, press_kit in subhome_entity.press_kit %}
-                                    <div class="item {% if key == 0 %}active{% endif %}">
-                                        <div class="carousel-caption">
-                                            {{ press_kit }}
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    {# Press kit#}
-                    <div class="col-sm-4 col-xs-12">
-                            {# si j'ai un visual, je le met en bg, sinon c'est l'aplat qui est mis #}
-                            {% if subhome_entity.fields.field_corporate_visual | length > 0 %}
-                            {% set img_uri = "" %}
-                            {% for key, image in subhome_entity.fields.field_corporate_visual  %}
-                                {%if image.entity %}
-                                    {% set media = image.entity %}
-                                    {% set file = media.field_image.entity %}
-                                    {% set img_uri = file_url(file.uri.value) %}
-                                {% endif %}
-                            {% endfor %}
-                            {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            {# Barre 1/3 du coté - blocks du coté#}
-            <div class="col-sm-12 col-md-4 col-xs-12">
-                {# Block Notre équipe #}
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                        {% set img_uri = "" %}
-                        {% for key, image in subhome_entity.fields.field_team_visual  %}
-                            {%if image.entity %}
-                                {% set media = image.entity %}
-                                {% set file = media.field_image.entity %}
-                                {% set img_uri = file_url(file.uri.value) %}
-                            {% endif %}
-                        {% endfor %}
-                        <div class="block-team" >
-                            <img src="{{ img_uri }}">
-                            <div class="block-team-info">
-                                <h3>{{ subhome_entity.fields.field_team_title.0.value }}</h3>
-                                {{ subhome_entity.render.field_team_button }}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                {# Block médiatheque #}
-                <div class="row">
-                    <div class="col-sm-12 col-xs-12">
-                        {{ drupal_entity('block', "mediatheque", check_access=false) }}
-                    </div>
-                </div>
-
-            </div>
         </div>
-        {#{% if attachment_before %}
-            <div class="attachment attachment-before">
-                {{ attachment_before }}
+
+        {# Barre 1/3 du coté - blocks du coté#}
+        <div class="col-sm-12 col-md-4 col-xs-12">
+            {# Block Notre équipe #}
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    {% set img_uri = "" %}
+                    {% for key, image in subhome_entity.fields.field_team_visual  %}
+                        {%if image.entity %}
+                            {% set media = image.entity %}
+                            {% set file = media.field_image.entity %}
+                            {% set img_uri = file_url(file.uri.value) %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="block-team" >
+                        <img src="{{ img_uri }}">
+                        <div class="block-team-info">
+                            <h3>{{ subhome_entity.fields.field_team_title.0.value }}</h3>
+                            {{ subhome_entity.render.field_team_button }}
+                        </div>
+
+                    </div>
+                </div>
             </div>
-        {% endif %}#}
+
+            {# Block médiatheque #}
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    {{ drupal_entity('block', "mediatheque", check_access=false) }}
+                </div>
+            </div>
+
+        </div>
     </div>
+    {#{% if attachment_before %}
+        <div class="attachment attachment-before">
+            {{ attachment_before }}
+        </div>
+    {% endif %}#}
+</div>

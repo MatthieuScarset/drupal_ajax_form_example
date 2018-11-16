@@ -130,6 +130,10 @@ article .product ul.nav-tabs li:before{
     padding-bottom: 0;
 }
 
+#views-exposed-form-subhomes-page-press input[type="date"].form-control{
+    line-height: 2rem;
+}
+
 .view-subhomes .display-subhomes-press{
     min-height: 0;
     padding-bottom: 0;
