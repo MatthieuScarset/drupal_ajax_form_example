@@ -230,4 +230,19 @@ function subhomes_views_exposed_form(&$form) {
             );
         }
     }
+
+    if ($form['#id'] == 'views-exposed-form-subhome-archive-press') {
+        //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
+
+        $form['field_solution_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solutions'
+        );
+
+        $form['node_year']['#options']['All'] = t('Year');
+        $form['node_month']['#options']['All'] = t('Month');
+
+    }
+
+
 }
