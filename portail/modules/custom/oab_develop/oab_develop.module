@@ -3,6 +3,8 @@
 use Symfony\Component\Yaml\Yaml;
 use Drupal\locale\SourceString;
 
+define ('LOG_DIR', 'public://log/');
+
 class OAB_Trace{
 
   public static function debug($elem, $message="") {
@@ -32,89 +34,89 @@ function oabt($elem, $lock=false, $message="") {
 }
 
 function taxonomy_rename_taxo($old, $new, $vid, $lang) {
-	$query = \Drupal::entityQuery('taxonomy_term');
-	$query->condition('vid', $vid);
-	$query->condition('langcode', $lang);
-	$query->condition('name', $old);
-	$entity = $query->execute();
-	if (isset($entity) && !empty($entity)) {
-		foreach ($entity as $tid => $value) {
-			$tidRename = $tid;
-		}
-	} else {
-		// creation du terme
-		$entity = \Drupal\taxonomy\Entity\Term::create([
-			'vid' => $vid,
-			'name' => $new,
-			'langcode' => $lang,
-		]);
-		$entity->save();
-		$tidRename = $entity->id();
-	}
-	if (isset($tidRename)) {
-		$connection = \Drupal\Core\Database\Database::getConnection();
-		$query = $connection->update('taxonomy_term_field_data');
-		$query->fields([
-			'name' => $new,
-		]);
-		$query->condition('tid',$tidRename);
-		$query->execute();
-	}
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('vid', $vid);
+    $query->condition('langcode', $lang);
+    $query->condition('name', $old);
+    $entity = $query->execute();
+    if (isset($entity) && !empty($entity)) {
+        foreach ($entity as $tid => $value) {
+            $tidRename = $tid;
+        }
+    } else {
+        // creation du terme
+        $entity = \Drupal\taxonomy\Entity\Term::create([
+            'vid' => $vid,
+            'name' => $new,
+            'langcode' => $lang,
+        ]);
+        $entity->save();
+        $tidRename = $entity->id();
+    }
+    if (isset($tidRename)) {
+        $connection = \Drupal\Core\Database\Database::getConnection();
+        $query = $connection->update('taxonomy_term_field_data');
+        $query->fields([
+            'name' => $new,
+        ]);
+        $query->condition('tid',$tidRename);
+        $query->execute();
+    }
 }
 
 function taxonomy_delete_taxo($name, $vid, $lang) {
-	$query = \Drupal::entityQuery('taxonomy_term');
-	$query->condition('vid', $vid);
-	$query->condition('langcode', $lang);
-	$query->condition('name', $name);
-	$tids = $query->execute();
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('vid', $vid);
+    $query->condition('langcode', $lang);
+    $query->condition('name', $name);
+    $tids = $query->execute();
 
-	if (!empty($tids)) {
-		$controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
-		$entities = $controller->loadMultiple($tids);
-		$controller->delete($entities);
-	}
+    if (!empty($tids)) {
+        $controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+        $entities = $controller->loadMultiple($tids);
+        $controller->delete($entities);
+    }
 }
 
 function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
-//	$query = \Drupal::entityQuery('config');
-//	$query->condition('name', "taxonomy.vocabulary.".$vid);
-//	$entity = $query->execute();
+//    $query = \Drupal::entityQuery('config');
+//    $query->condition('name', "taxonomy.vocabulary.".$vid);
+//    $entity = $query->execute();
 
-	$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
-	if (!isset($vocabulary)) {
+    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
+    if (!isset($vocabulary)) {
 
-		// create vocabulary
-		$vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
-			'vid' => $vid,
-			'description' => '',
-			'content_translation' => true,
-			'name' => $defaultName,
-		));
-		$vocabulary->save();
-	}
+        // create vocabulary
+        $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+            'vid' => $vid,
+            'description' => '',
+            'content_translation' => true,
+            'name' => $defaultName,
+        ));
+        $vocabulary->save();
+    }
 
-	// enable translation
-	$service = \Drupal::service('content_translation.manager');
-	$service->setEnabled('taxonomy_term',$vid, true);
+    // enable translation
+    $service = \Drupal::service('content_translation.manager');
+    $service->setEnabled('taxonomy_term',$vid, true);
 
-	$config_factory = \Drupal::configFactory();
-	$config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);
-	$config_group->set("language_alterable", true);
-	$config_group->set("default_langcode", "current_interface");
-	$config_group->save(TRUE);
+    $config_factory = \Drupal::configFactory();
+    $config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);
+    $config_group->set("language_alterable", true);
+    $config_group->set("default_langcode", "current_interface");
+    $config_group->save(TRUE);
 
-	// update default name in english
-		$config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
-		$config_group->set("name", $defaultName);
-		$config_group->save(TRUE);
+    // update default name in english
+        $config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
+        $config_group->set("name", $defaultName);
+        $config_group->save(TRUE);
 
 
-	if ($lang != 'en') {
-		$vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
-		$vocaConfig->set('name', $nameVoca);
-		$vocaConfig->save();
-	}
+    if ($lang != 'en') {
+        $vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
+        $vocaConfig->set('name', $nameVoca);
+        $vocaConfig->save();
+    }
 }
 
 /** Permet de tester une chaine de caractère date par rapport au format attendu
@@ -124,8 +126,8 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
  */
 function isValidDate($date, $format)
 {
-	$d = DateTime::createFromFormat($format, $date);
-	return $d && $d->format($format) == $date;
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
 }
 
 
@@ -134,33 +136,33 @@ function isValidDate($date, $format)
  */
 function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
-	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if (empty($field_storage)) {
-		\Drupal\field\Entity\FieldStorageConfig::create(array(
-			'field_name' => $field_name,
-			'entity_type' => $entity_type_id,
-			'type' => $type,
-		))->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
-	}
+    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    if (empty($field_storage)) {
+        \Drupal\field\Entity\FieldStorageConfig::create(array(
+            'field_name' => $field_name,
+            'entity_type' => $entity_type_id,
+            'type' => $type,
+        ))->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+    }
 
-	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if (empty($field)) {
-		$config_array = array(
-			'field_name' =>  $field_name,
-			'entity_type' => $entity_type_id,
-			'bundle' => $bundle,
-			'label' => $label,
-			'required' => $required,
-		);
-		if (!empty($other_config)) {
-			$config_array = array_merge($config_array, $other_config);
-		}
-		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
-	}
+    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    if (empty($field)) {
+        $config_array = array(
+            'field_name' =>  $field_name,
+            'entity_type' => $entity_type_id,
+            'bundle' => $bundle,
+            'label' => $label,
+            'required' => $required,
+        );
+        if (!empty($other_config)) {
+            $config_array = array_merge($config_array, $other_config);
+        }
+        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+    }
 }
 
 /**
@@ -168,35 +170,35 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
  */
 function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
-	$field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
-	if (empty($field_storage)) {
-		\Drupal\field\Entity\FieldStorageConfig::create(array(
-			'field_name' => $field_name,
-			'entity_type' => $entity_type_id,
-			'type' => $type,
-			'settings' => array('target_type' => $target)
-		))->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle');
-	}
+    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    if (empty($field_storage)) {
+        \Drupal\field\Entity\FieldStorageConfig::create(array(
+            'field_name' => $field_name,
+            'entity_type' => $entity_type_id,
+            'type' => $type,
+            'settings' => array('target_type' => $target)
+        ))->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle');
+    }
 
-	$field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
-	if (empty($field)) {
-		$config_array = array(
-			'field_name' =>  $field_name,
-			'entity_type' => $entity_type_id,
-			'bundle' => $bundle,
-			'label' => $label,
-			'required' => $required,
-			''
-		);
-		if (!empty($other_config)) {
-			$config_array = array_merge($config_array, $other_config);
-		}
-		\Drupal\field\Entity\FieldConfig::create($config_array)->save();
-	} else {
-		drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
-	}
+    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    if (empty($field)) {
+        $config_array = array(
+            'field_name' =>  $field_name,
+            'entity_type' => $entity_type_id,
+            'bundle' => $bundle,
+            'label' => $label,
+            'required' => $required,
+            ''
+        );
+        if (!empty($other_config)) {
+            $config_array = array_merge($config_array, $other_config);
+        }
+        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+    } else {
+        drupal_set_message('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
+    }
 }
 
 function loadConfigField($folder, $key) {
@@ -263,57 +265,6 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
   $data = Yaml::parse(file_get_contents($config_path));
   \Drupal::configFactory()->getEditable($file_name_lessext)->setData($data)->save(TRUE);
 
-  /*
-
-  field.storage.node.field_phone_number.yml
-
-  uuid: 0358c006-2a4c-4163-aaa1-c42e2c8f8fde
-  langcode: en
-  status: true
-  dependencies:
-    module:
-      - node
-  id: node.field_phone_number
-  field_name: field_phone_number
-  entity_type: node
-  type: string
-  settings:
-    max_length: 255
-    is_ascii: false
-    case_sensitive: false
-  module: core
-  locked: false
-  cardinality: 1
-  translatable: false
-  indexes: {  }
-  persist_with_no_fields: false
-  custom_storage: false
-
-  CREATE TABLE `node__field_phone_number` (
-    `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
-    `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
-    `entity_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity id this data is attached to',
-    `revision_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity revision id this data is attached to',
-    `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
-    `delta` int(10) UNSIGNED NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
-    `field_phone_number_value` varchar(255) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_phone_number.';
-
-  CREATE TABLE `node_revision__field_phone_number` (
-    `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
-    `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
-    `entity_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity id this data is attached to',
-    `revision_id` int(10) UNSIGNED NOT NULL COMMENT 'The entity revision id this data is attached to',
-    `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
-    `delta` int(10) UNSIGNED NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
-    `field_phone_number_value` varchar(255) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_phone_number.';
-
-
-  */
-
-
-
   return true;
 }
 
@@ -331,3 +282,62 @@ function oabt_taxoAddDescription($termId, $text) {
     }
 }
 
+
+/**
+ * fonction de tracelog en fichier
+ */
+function oabt_tracelog($module, $message, $dirpath="oabt"){
+
+    $dir = \Drupal::service('file_system')->realpath(LOG_DIR);
+    if (!file_exists($dir)) {
+        mkdir($dir);
+    }
+
+    $dir = \Drupal::service('file_system')->realpath(LOG_DIR . $dirpath);
+    if (!file_exists($dir)) {
+        mkdir($dir);
+    }
+    $file = date("Y_m_d")."_log.txt";
+    $fp = fopen($dir."/".$file, 'a');
+
+    fputs($fp, date("Y/m/d H:i ") . utf8_encode($module . ' | ' . $message) . PHP_EOL);
+    fclose($fp);
+}
+
+/**
+ * On check le dosier de log et on envoie par mail les fichier qui y sont présents, puis on supprime tout
+ */
+function oab_develop_cron() {
+    $dir = \Drupal::service('file_system')->realpath(LOG_DIR . 'oabt');
+
+    if (file_exists($dir)) {
+        $files = array_diff(scandir($dir), array('..', '.'));
+
+        if (count($files) > 0 ) {
+            // Liste des destinataires en conf
+            $mails = Drupal::config(\Drupal\oab_backoffice\Form\OabGeneralSettingsForm::getConfigName())->get('oabt_logs.mails_destinataires');
+
+            // Préparation des fichiers
+            $erreurs = "";
+            foreach ($files as $file_name) {
+                $erreurs .= file_get_contents($dir . '/' . $file_name);
+                file_unmanaged_delete($dir . '/' . $file_name);
+            }
+
+            $params['subject'] = "Notifications d'erreurs sur orange-business.com";
+            $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) . "<br />Cordialement,<br />L'equipe ruby";
+            \Drupal::service('plugin.manager.mail')->mail('oab_develop', 'mail_log', $mails, 'fr', $params);
+        }
+    }
+}
+
+function oab_develop_mail($key, &$message, $params) {
+    switch ($key) {
+        case 'mail_log':
+            $message['send'] = true;
+
+            $message['subject'] = $params['subject'];
+            $message['body'] = array($params['body']);
+            break;
+    }
+}

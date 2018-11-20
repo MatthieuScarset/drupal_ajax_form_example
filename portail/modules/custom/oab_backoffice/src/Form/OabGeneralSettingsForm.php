@@ -46,6 +46,20 @@ class OabGeneralSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('proxy_port'),
     );
 
+      $form['oabt_logs'] = array(
+          '#type' => 'details',
+          '#open' => true,
+          '#title' => t('Config oabt_logs'),
+          '#description'    => t("Configuration des logs spécifiques oabt"),
+      );
+
+      $form['oabt_logs']['oabt_logs_mails_destinataires'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Liste destinataires'),
+          '#description' => "Separez les mails par une virgule et un espace",
+          '#default_value' => $config->get('oabt_logs.mails_destinataires'),
+      );
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -57,6 +71,7 @@ class OabGeneralSettingsForm extends ConfigFormBase {
     $this->config($this->getConfigName())
       ->set('proxy_server', $form_state->getValue('proxy_server'))
       ->set('proxy_port', $form_state->getValue('proxy_port'))
+      ->set('oabt_logs.mails_destinataires', $form_state->getValue('oabt_logs_mails_destinataires'))
       ->save();
 
     parent::submitForm($form, $form_state);
