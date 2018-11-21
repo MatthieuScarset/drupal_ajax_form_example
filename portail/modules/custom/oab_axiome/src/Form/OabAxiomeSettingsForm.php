@@ -207,7 +207,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
         $ret = [];
 
-        $regex = "/ruby_" . $lang . "_\d{8}-\d{2}-\d{2}-\d{2}-\d{2}[.]zip/";
+        $regex = "/ruby_" . $lang . "_\d{8}(-\d{1,2}){4}[.]zip/";
 
         // Ouverture du dossier sauvegarde
         if ($dir = opendir($dir_path)) {
