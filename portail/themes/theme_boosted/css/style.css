@@ -2236,8 +2236,9 @@ body.page-node-type-custom-page{
 }
 
 
-.col-sm #edit-field-solution-target-id,
-.col-md #edit-field-solution-target-id{
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
     display:block;
     margin-bottom: 1rem;
 }
