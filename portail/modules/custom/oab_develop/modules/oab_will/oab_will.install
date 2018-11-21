@@ -171,3 +171,10 @@ function oab_will_update_8023(){
 function oab_will_update_8024() {
     include_once("updates/update_8024.inc");
 }
+
+/**
+ *         RUBYPORTAILOBS-3441 [SUB-PRESS] modification des views en figeant les type de contenu
+ */
+function oab_will_update_8025() {
+    include_once("updates/update_8025.inc");
+}
