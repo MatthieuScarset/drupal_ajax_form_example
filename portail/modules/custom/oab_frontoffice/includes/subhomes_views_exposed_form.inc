@@ -122,7 +122,12 @@ function subhomes_views_exposed_form(&$form) {
 
         if (isset($form['created']['min']) && isset($form['created']['max'])) {
             $form['created']['min']['#type'] = "date";
+            $form['created']['min']['#size'] = "10";
+
             $form['created']['max']['#type'] = "date";
+            $form['created']['max']['#size'] = "10";
+
+
         }
     }
 

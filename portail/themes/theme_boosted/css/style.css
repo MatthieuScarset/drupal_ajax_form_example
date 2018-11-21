@@ -171,6 +171,11 @@ article .product ul.nav-tabs li:before{
     margin:0;
 }
 
+.ua-chrome .path-subhome-press .views-exposed-form #edit-created-min,
+.ua-chrome .path-subhome-press .views-exposed-form #edit-created-max{
+    max-width:160px;
+}
+
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -528,13 +533,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-right: 0px !important;
         padding-left: 0px! important;
     }
-
-    .view-subhomes .subhomes-filterbar select{
-        max-width:18%;
-    }
 }
-
-
 
 .section-title-corporate {
     padding-left: 20px !important;
@@ -2118,6 +2117,7 @@ body.page-node-type-custom-page{
     background: none;
     opacity: 1;
     color: white;
+    z-index: 10;
 }
 .field--name-field-carrousel .carousel .carousel-control .glyphicon {
     color: white;
@@ -2231,6 +2231,24 @@ body.page-node-type-custom-page{
     color: black;
 }
 
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 200%;
+    margin-left: -652px;
+}
+
+
+.col-sm #edit-field-solution-target-id,
+.col-md #edit-field-solution-target-id{
+    display:block;
+    margin-bottom: 1rem;
+}
+
+
 #carousel-press-kit .carousel-caption {
     right: 0;
     left: 0;
@@ -2258,6 +2276,7 @@ body.page-node-type-custom-page{
 #carousel-press-kit.carousel .carousel-control.right:hover {
     width: 3rem;
 }
+
 .field--name-field-carrousel .carousel .carousel-control.left {
     padding-left: 3rem;
 }
@@ -2316,6 +2335,7 @@ body.page-node-type-custom-page{
 .block-webform {
     border: 3px solid #DDDDDD;
     padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 .block-webform input {

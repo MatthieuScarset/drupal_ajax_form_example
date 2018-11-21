@@ -1,7 +1,7 @@
 (function ($, Drupal, window, document, undefined) {
 	$(document).ready(function() {		
 		$('.page-synomia-search-results .filters_title').click(function() {
-			if ($("body.mobile-version").length){	
+			if ($("body.col-xs").length || $("body.col-md").length){
 				var clicked = $(this);				
 				var filtersDiv = $('.page-synomia-search-results .block-facetapi .item-list');
 				if(!filtersDiv.is(":visible")){
