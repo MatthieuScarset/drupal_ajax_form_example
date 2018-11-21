@@ -171,8 +171,7 @@ article .product ul.nav-tabs li:before{
     margin:0;
 }
 
-.ua-chrome .path-subhome-press .views-exposed-form #edit-created-min,
-.ua-chrome .path-subhome-press .views-exposed-form #edit-created-max{
+.ua-chrome .path-subhome-press .views-exposed-form .form-date{
     max-width:160px;
 }
 
@@ -2132,11 +2131,6 @@ body.page-node-type-custom-page{
     height: 1.2rem;
     width: 1.2rem;
     border-radius: 1rem;
-}
-
-.field--name-field-carrousel .carousel .carousel-indicators li.active {
-    height: 1.4rem;
-    width: 1.4rem;
 }
 
 .field--name-field-carrousel .carousel .carousel-control.left:focus,
