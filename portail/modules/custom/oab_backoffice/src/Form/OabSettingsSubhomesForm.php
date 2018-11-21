@@ -9,6 +9,11 @@ use Drupal\Core\Form\FormStateInterface;
  * Configure example settings for this site.
  */
 class OabSettingsSubhomesForm extends ConfigFormBase {
+
+    public static function getConfigName() {
+        return 'oab.subhomes';
+    }
+
   /**
    * {@inheritdoc}
    */
@@ -21,7 +26,7 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.subhomes',
+      self::getConfigName(),
     ];
   }
 
@@ -29,7 +34,7 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.subhomes');
+    $config = $this->config(self::getConfigName());
 
     $form['press_term_tid'] = array(
       '#type' => 'textfield',

@@ -332,6 +332,12 @@ class AxiomeImporter
                 }
             }
 
+            // S'il reste des fiches jointent non analysées, je le log
+            if (count($this->fichesJointent) > 0) {
+                $fiche_liste = implode(", ", array_keys($this->fichesJointent));
+                oabt_tracelog("oab_axiome", "Les fiches jointes suivantes n'ont pas été analysées : $fiche_liste");
+            }
+
             ##Sauvegarde des sous-familles en bdd
             $config = \Drupal::configFactory()->getEditable(OabAxiomeSettingsForm::getConfigName());
             $values = $config->get(self::CONFIG_VALUE_NAME);
@@ -550,6 +556,24 @@ class AxiomeImporter
                                 $node->set('field_id_fiche', $xpath_fiche->getAttribute('id'));
                                 $node->set('field_id_offre',
                                     $xpath_fiche->getElementsByTagName('offre_commerciale')->item(0)->getAttribute('id'));
+
+                                // Auto-tag dans la subhome produits/catalogue
+                                $storage = \Drupal::service('config.storage');
+                                if ($language != 'en') {
+                                    $storage = $storage->createCollection('language.' . $language);
+                                }
+
+                                $conf = $storage->read('oab.subhomes');
+
+                                if ($conf !== false && isset($conf['product_term_tid'])) {
+                                    $tid = $conf['product_term_tid'];
+                                    $term = \Drupal\taxonomy\Entity\Term::load($tid);
+                                    $node->set('field_subhome', $term);
+                                } else {
+                                    $message = "La fiche " . $xpath_fiche->getAttribute('nom_offre_commerciale') . "($language, " .
+                                        $node->id() . ") n'a pas été tagguée dans la subhome. " . $node->url();
+                                    oabt_tracelog('oab_axiome', $message);
+                                }
 
                             }
 
