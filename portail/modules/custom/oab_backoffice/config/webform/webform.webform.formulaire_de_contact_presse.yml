@@ -9,7 +9,7 @@ third_party_settings:
     gdpr_spoc_security: '1'
     gdpr_expiration_date: ''
     gdpr_business_analysts: {  }
-    gdpr_form_published: 0
+    gdpr_form_published: 1
 open: null
 close: null
 uid: 1
@@ -136,4 +136,36 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
+handlers:
+  email:
+    id: email
+    label: Email
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: default
+      from_options: {  }
+      from_name: default
+      subject: 'Orange-business.com : Abonnement à nos publications'
+      body: "<p>Bonjour, Votre abonnement à nos publications a bien été pris en compte et vous en remercions. Nous restons à votre écoute pour toute question à <a href=\"mailto:contact@orange-business.com\">contact@orange-business.com</a><br />\r\nA très bientôt,<br />\r\nL’équipe Presse Orange Business Services</p>\r\n"
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
