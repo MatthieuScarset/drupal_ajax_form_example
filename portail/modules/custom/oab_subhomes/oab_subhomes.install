@@ -6,3 +6,11 @@
 function oab_subhomes_update_8001() {
     oabt_YmlImport('views.view.subhomes.yml');
 }
+
+
+/**
+ * Maj de la vue pour ajouter un message en cas d'absence de résultats + ajout de la trad
+ */
+function oab_subhomes_update_8007() {
+    include_once("updates/update_8007.inc");
+}
