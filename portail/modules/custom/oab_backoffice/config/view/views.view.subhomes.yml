@@ -3159,6 +3159,7 @@ display:
         row: false
         relationships: false
         header: false
+        empty: false
       filters:
         status:
           value: '1'
@@ -3454,6 +3455,20 @@ display:
         options:
           items_per_page: 4
           offset: 0
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No items match your query. Please modify the selected request.'
+            format: full_html
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
