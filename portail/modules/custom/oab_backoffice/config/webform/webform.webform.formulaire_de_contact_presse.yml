@@ -9,7 +9,7 @@ third_party_settings:
     gdpr_spoc_security: '1'
     gdpr_expiration_date: ''
     gdpr_business_analysts: {  }
-    gdpr_form_published: 0
+    gdpr_form_published: 1
 open: null
 close: null
 uid: 1
