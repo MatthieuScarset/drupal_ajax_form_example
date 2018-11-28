@@ -2197,6 +2197,10 @@ body.page-node-type-custom-page{
     color: inherit;
 }
 
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
 #carousel-press-kit .elem-press-kit .file-info {
     font-size: 1.6rem;
     font-weight: bold;
