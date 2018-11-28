@@ -119,8 +119,8 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
         "black-on-yellow"   => "Black on Yellow",
         "black-on-blue"     => "Black on Blue",
         "black-on-green"    => "Black on Green",
-        "black-on-purple"   => "Black on purple",
-        "black-on-pink"     => "Black on pink"
+        "black-on-purple"   => "Black on Purple",
+        "black-on-pink"     => "Black on Pink"
     );
     return $allowedValues;
 }

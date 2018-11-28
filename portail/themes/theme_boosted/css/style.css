@@ -1945,72 +1945,72 @@ body.page-node-type-custom-page{
 
 .black-on-orange {
     background-color: #FF7900;
-    color: #000000;
+    color: #000000 !important;
 }
 
 .white-on-orange {
     background-color: #f16E00;
-    color: #FFF;
+    color: #FFF !important;
 }
 
 .orange-on-white {
     background-color: #FFF;
-    color: #f16E00;
+    color: #f16E00 !important;
 }
 
 .black-on-white {
     background-color: #FFF;
-    color: #000;
+    color: #000 !important;
 }
 
 .grey-on-white {
     background-color: #FFF;
-    color: #666666;
+    color: #666666 !important;
 }
 
 .orange-on-black {
     background-color: #000;
-    color: #ff7900;
+    color: #ff7900 !important;
 }
 
 .white-on-black {
     background-color: #000;
-    color: #FFF;
+    color: #FFF !important;
 }
 
 .grey-on-black {
     background-color: #000;
-    color: #999999
+    color: #999999 !important;
 }
 
 .white-on-obs-grey {
     background-color: #595959;
-    color: #FFF
+    color: #FFF !important;
 }
 
 .black-on-yellow {
     background-color: #FFD200;
-    color: #000;
+    color: #000 !important;
 }
 
 .black-on-blue {
     background-color: #4BB4E6;
-    color: #000;
+    color: #000 !important;
 }
 
 .black-on-green {
     background-color: #50BE87;
-    color: #000;
+    color: #000 !important;
 }
 
 .black-on-purple {
     background-color: #A885D8;
-    color: #000;
+    color: #000 !important;
 }
 
 .black-on-pink {
     background-color: #FFB4E6;
-    color: #000;
+    color: #000 !important;
 }
 
 .paragraph--default-button .btn.btn-txt-white-bg-black {
@@ -2195,6 +2195,7 @@ body.page-node-type-custom-page{
     line-height: 2rem;
     font-weight: bold;
     overflow: hidden;
+    color: white;
 }
 
 .block-corporate a {
@@ -2218,6 +2219,7 @@ body.page-node-type-custom-page{
 
 #carousel-press-kit .elem-press-kit {
     padding: 45px 5rem;
+    color: white;
 }
 
 #carousel-press-kit .carousel-control {
@@ -2261,6 +2263,8 @@ body.page-node-type-custom-page{
     font-weight: bold;
     margin: 0;
     padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
 }
 
 #carousel-press-kit .elem-press-kit .file-info {

@@ -115,7 +115,7 @@ parce que c'est enregistré dans un array) #}{#
 
 {% if (content.field_visual['#items']|length > 0) %}
     {% set img_uri = "" %}
-    {% for key, image in subhome_entity.fields.field_corporate_visual  %}
+    {% for key, image in content.field_visual  %}
         {%if image.entity %}
             {% set media = image.entity %}
             {% set file = media.field_image.entity %}
