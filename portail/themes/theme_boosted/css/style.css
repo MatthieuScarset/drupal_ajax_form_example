@@ -2197,7 +2197,7 @@ body.page-node-type-custom-page{
     color: inherit;
 }
 
-#carousel-press-kit .elem-press-kit a {
+#carousel-press-kit .elem-press-kit a, #carousel-press-kit .elem-press-kit a:hover {
     color: inherit;
 }
 
