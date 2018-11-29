@@ -646,6 +646,6 @@ function oab_tristan_update_8084() {
 /**
  * Ajout de colonnes dans la vue Document List
  */
-function oab_tristan_update_8085() {
+function oab_tristan_update_8086() {
     oabt_YmlImport('views.view.document_list.yml');
 }
