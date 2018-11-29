@@ -2203,11 +2203,11 @@ body.page-node-type-custom-page{
 }
 
 .black-on-orange a:hover {
-    color: white;
+    color: white !important;
 }
 
 .white-on-orange a:hover {
-    color: black;
+    color: black !important;
 }
 
 #carousel-press-kit .carousel-caption {
@@ -2267,7 +2267,7 @@ body.page-node-type-custom-page{
     color: inherit;
 }
 
-#carousel-press-kit .elem-press-kit a, #carousel-press-kit .elem-press-kit a:hover {
+#carousel-press-kit .elem-press-kit a {
     color: inherit;
 }
 
