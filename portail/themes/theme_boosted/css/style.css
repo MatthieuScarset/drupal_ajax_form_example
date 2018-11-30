@@ -2336,10 +2336,11 @@ body.page-node-type-custom-page{
 .block-webform #edit-processed-text {
     font-size: 2rem;
     font-weight: bold;
-    padding-bottom: 1rem
+    padding-bottom: 1rem;
 
+}
 
- .view-subhome-archive .view-empty {
+.view-subhome-archive .view-empty {
      margin-top: 3.5rem;
- }
+
 }
