@@ -83,6 +83,13 @@
                 {% if pager %}
                     {{ pager }}
                 {% endif %}
+
+                {% if rows %}
+                    <div class="archives_link paragraph--default-button">
+                        <a href="{{ path('view.subhome_archive.archive_press') }}" class="rebond-link btn btn-txt-white-bg-black">{{
+                            'Archives'|t }}</a>
+                    </div>
+                {% endif %}
             </div>
             {# Blocks du bas (press-kits + Coroporate#}
             <div class="row subhome-entity-bottom-blocks">

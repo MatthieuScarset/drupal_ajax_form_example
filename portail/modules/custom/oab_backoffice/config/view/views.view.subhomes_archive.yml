@@ -2,13 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-  - taxonomy.vocabulary.solutions
+    - node.type.press_release
+    - taxonomy.vocabulary.solutions
   module:
-  - node
-  - oab_backoffice
-  - taxonomy
-  - user
-id: subhome_archive
+    - node
+    - oab_backoffice
+    - taxonomy
+    - user
+id: subhomes_archive
 label: 'Subhome Archive'
 module: views
 description: ''
@@ -74,10 +75,10 @@ display:
         type: grid
         options:
           grouping:
-          -
-            field: created
-            rendered: true
-            rendered_strip: false
+            -
+              field: created
+              rendered: true
+              rendered_strip: false
           columns: 1
           automatic_width: true
           alignment: horizontal
@@ -438,6 +439,46 @@ display:
             group_items: {  }
           entity_type: node
           plugin_id: node_month
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            press_release: press_release
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
       sorts:
         created:
           id: created
@@ -457,7 +498,20 @@ display:
       title: 'Archive press'
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No items match your query Please modify the selected request.'
+            format: full_html
+          plugin_id: text
       relationships: {  }
       arguments:
         field_subhome_target_id:
@@ -500,17 +554,17 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user
-      - 'user.node_grants:view'
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags: {  }
-  press:
+  archive_press:
     display_plugin: page
-    id: press
+    id: archive_press
     display_title: Press
     position: 1
     display_options:
@@ -520,11 +574,11 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user
-      - 'user.node_grants:view'
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags: {  }
