@@ -2,15 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-  - taxonomy.vocabulary.solutions
     - node.type.press_release
     - taxonomy.vocabulary.solutions
   module:
-  - node
-  - oab_backoffice
-  - taxonomy
-  - user
-id: subhome_archive
+    - node
+    - oab_backoffice
+    - taxonomy
+    - user
+id: subhomes_archive
 label: 'Subhome Archive'
 module: views
 description: ''
@@ -499,7 +498,20 @@ display:
       title: 'Archive press'
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No items match your query Please modify the selected request.'
+            format: full_html
+          plugin_id: text
       relationships: {  }
       arguments:
         field_subhome_target_id:
@@ -542,17 +554,17 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user
-      - 'user.node_grants:view'
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags: {  }
-  press:
+  archive_press:
     display_plugin: page
-    id: press
+    id: archive_press
     display_title: Press
     position: 1
     display_options:
@@ -562,11 +574,11 @@ display:
     cache_metadata:
       max-age: -1
       contexts:
-      - 'languages:language_content'
-      - 'languages:language_interface'
-      - url
-      - url.query_args
-      - user
-      - 'user.node_grants:view'
-      - user.permissions
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
       tags: {  }
