@@ -2153,6 +2153,96 @@ body.page-node-type-custom-page{
     padding-right: 3rem;
 }
 
+
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 200%;
+    margin-left: -326px;
+}
+
+
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
+    display:block;
+    margin-bottom: 1rem;
+}
+
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+    color: white;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+@media (max-width: 760px) {
+    .field--name-field-carrousel .carousel .carousel-control {
+        width: 3rem;
+    }
+
+    .field--name-field-carrousel .carousel-caption {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.left {
+        padding-left: 0;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.right {
+        padding-right: 0;
+    }
+}
+
 .subhome-header {
     display: table-cell;
     margin-bottom: 2rem;
@@ -2198,8 +2288,16 @@ body.page-node-type-custom-page{
 
 @media (max-width: 767px) {
     .view-subhomes .field--name-field-carrousel {
-        margin-left: 0;
-        margin-right: 0; /* Pour contrebalencer les margin/paddings des row */
+        margin-left: -3px;
+        margin-right: -3px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 6px);
+    }
+}
+@media (max-width: 480px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: -8px;
+        margin-right: -8px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 16px);
     }
 }
 
@@ -2250,72 +2348,11 @@ body.page-node-type-custom-page{
     margin-bottom: 1rem;
 }
 
-
-#carousel-press-kit .carousel-caption {
-    right: 0;
-    left: 0;
-    text-align: left;
-    text-shadow: none;
-}
-
-#carousel-press-kit .elem-press-kit {
-    padding: 45px 5rem;
-    color: white;
-}
-
-#carousel-press-kit .carousel-control {
-    background-color: black;
-    opacity: 1;
-    width: 3rem;
-    height: 3rem;
-    padding-top: 0.25rem;
-    bottom: calc(50% - 1.5rem);
-}
-
-
 #carousel-press-kit.carousel .carousel-control.left:focus,
 #carousel-press-kit.carousel .carousel-control.left:hover,
 #carousel-press-kit.carousel .carousel-control.right:focus,
 #carousel-press-kit.carousel .carousel-control.right:hover {
     width: 3rem;
-}
-
-.field--name-field-carrousel .carousel .carousel-control.left {
-    padding-left: 3rem;
-}
-
-.field--name-field-carrousel .carousel .carousel-control.right {
-    padding-right: 3rem;
-}
-
-#carousel-press-kit  {
-    font-size: 1.6rem;
-}
-
-#carousel-press-kit .carousel-control .glyphicon {
-    color: #FFFFFF;
-}
-
-#carousel-press-kit .carousel-control:hover .glyphicon {
-    color: #f16e00;
-}
-
-#carousel-press-kit .elem-press-kit h3 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    margin-bottom: 1.5rem;
-    color: inherit;
-}
-
-#carousel-press-kit .elem-press-kit a {
-    color: inherit;
-}
-
-#carousel-press-kit .elem-press-kit .file-info {
-    font-size: 1.6rem;
-    font-weight: bold;
 }
 
 .block-team img {
