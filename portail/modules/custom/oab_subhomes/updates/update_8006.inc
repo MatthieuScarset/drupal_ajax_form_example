@@ -6,8 +6,8 @@
 
 ## suppression de l'ancienne vue (possiblement créées sur dev et certains environnements)
 $old_view = \Drupal\views\Entity\View::load('subhome_archive');
-if ($old_view === null) {
-    $view->delete();
+if ($old_view !== null) {
+    $old_view->delete();
 }
 
 
@@ -28,6 +28,44 @@ if ($view === null) {
 }
 
 oabt_YmlImport('views.view.subhomes_archive.yml');
+
+
+
+
+$trad = array (
+    'display' =>
+        array (
+            'default' =>
+                array (
+                    'display_options' =>
+                        array (
+                            'exposed_form' =>
+                                array (
+                                    'options' =>
+                                        array (
+                                            'submit_button' => 'Filtrer',
+                                        ),
+                                ),
+                            'empty' =>
+                                array (
+                                    'area' =>
+                                        array (
+                                            'content' =>
+                                                array (
+                                                    'value' => 'a',
+                                                    'format' => 'full_html',
+                                                ),
+                                        ),
+                                ),
+                        ),
+                ),
+        ),
+);
+
+$collection = \Drupal::service('config.storage')->createCollection('language.fr');
+$collection->write('views.view.subhomes_archive', $trad);
+
+
 
 \Drupal::service('path.alias_storage')->save("/subhome-archive-press", "/presse/archives", "fr");
 \Drupal::service('path.alias_storage')->save("/subhome-archive-press", "/press/archives", "en");

@@ -228,7 +228,7 @@ function subhomes_views_exposed_form(&$form) {
         }
     }
 
-    if ($form['#id'] == 'views-exposed-form-subhome-archive-press') {
+    if ($form['#id'] == 'views-exposed-form-subhomes-archive-archive-press') {
         //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
 
         $form['field_solution_target_id']['#options'] = clean_exposed_filters_by_language(
