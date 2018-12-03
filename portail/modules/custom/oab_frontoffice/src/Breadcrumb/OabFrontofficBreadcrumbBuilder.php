@@ -68,7 +68,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
         ## Si la page est une subhome,
         ## on affiche le nom de la subhome, sans lien
-        if (preg_match('/^view.subhome/', $route_name) && isset($parameters['view_id']) && isset($parameters['display_id'])) {
+        if (preg_match('/^view.subhomes/', $route_name) && isset($parameters['view_id']) && isset($parameters['display_id'])) {
 
             ##On commence par afficher la racine du fil d'ariane
             $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
@@ -84,11 +84,11 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             $displayName = ucfirst($displayObj->display['display_title']);
 
 
-            if ($parameters['view_id'] == "subhomes") {
+            if ($parameters['view_id'] === "subhomes") {
                 ##On ajoute un lien vide au fil d'ariane
 
                 $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
-            } else {
+            } else {  ## Subhome archive
 
                 ##On ajoute un lien vide au fil d'ariane
 
