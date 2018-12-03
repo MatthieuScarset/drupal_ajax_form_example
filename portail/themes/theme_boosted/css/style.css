@@ -2330,24 +2330,6 @@ body.page-node-type-custom-page{
     color: black !important;
 }
 
-.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
-    max-width: inherit;
-    margin-left: -652px;
-}
-
-.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
-    max-width: 200%;
-    margin-left: -652px;
-}
-
-
-.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
-.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
-.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
-    display:block;
-    margin-bottom: 1rem;
-}
-
 #carousel-press-kit.carousel .carousel-control.left:focus,
 #carousel-press-kit.carousel .carousel-control.left:hover,
 #carousel-press-kit.carousel .carousel-control.right:focus,
