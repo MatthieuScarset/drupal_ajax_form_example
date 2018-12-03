@@ -139,7 +139,8 @@ article .product ul.nav-tabs li:before{
     padding-bottom: 0;
 }
 
-.view-subhomes .display-subhomes-press .txt{
+.view-subhomes .display-subhomes-press .txt,
+.view-subhomes-archive .display-subhomes-press .txt {
     margin-top:0;
 }
 
