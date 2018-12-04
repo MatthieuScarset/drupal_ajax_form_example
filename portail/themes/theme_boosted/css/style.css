@@ -2143,6 +2143,96 @@ body.page-node-type-custom-page{
     padding-right: 3rem;
 }
 
+
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 300%;
+    margin-left: -326px;
+}
+
+
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
+    display:block;
+    margin-bottom: 1rem;
+}
+
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+    color: white;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+@media (max-width: 760px) {
+    .field--name-field-carrousel .carousel .carousel-control {
+        width: 3rem;
+    }
+
+    .field--name-field-carrousel .carousel-caption {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.left {
+        padding-left: 0;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.right {
+        padding-right: 0;
+    }
+}
+
 .subhome-header {
    display: table-cell;
     margin-bottom: 2rem;
@@ -2182,8 +2272,130 @@ body.page-node-type-custom-page{
 }
 
 .view-subhomes .field--name-field-carrousel {
-    margin-left: -40px;
-    margin-right: -40px; /* Pour contrebalencer les margin/paddings des row */
+    margin-left: -2.857em;
+    margin-right: -2.857em; /* Pour contrebalencer les margin/paddings des row */
+}
+
+
+@media (max-width: 767px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: -3px;
+        margin-right: -3px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 6px);
+    }
+}
+@media (max-width: 480px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: -8px;
+        margin-right: -8px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 16px);
+    }
+}
+
+.subhome-entity-bottom-blocks {
+    margin: 2.143em 0;
+}
+
+.subhome-entity-bottom-blocks div {
+    height: 165px;
+}
+
+.block-corporate {
+    padding: 2.250em 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+}
+
+.block-corporate a {
+    color: inherit;
+}
+
+.black-on-orange a:hover {
+    color: white !important;
+}
+
+.white-on-orange a:hover {
+    color: black !important;
+}
+
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #DDDDDD;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform .form-item-utilisation-des-donnees p {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+
+}
+
+.view-subhomes-archive .view-empty {
+     margin-top: 3.5rem;
 }
 
 .subhome-entity-bottom-blocks div {
