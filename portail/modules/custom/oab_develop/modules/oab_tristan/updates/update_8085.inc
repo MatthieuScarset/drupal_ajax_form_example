@@ -26,7 +26,7 @@ if (is_array($terms_fr) && count($terms_fr) > 0 ) {
         'name'         => "Presse FR",
         'langcode'      => 'fr',
         'title'         => 'Espace Presse',
-        'description'   => "Coucou c'est nous :) ",
+        'description'   => "Retrouvez sur cette page les dossiers, les communiqués de presse ainsi que toutes les informations relatives à l'actualité d'Orange Business Services.",
         'subhome_id'    => $sid
     ]);
     $entity->save();
@@ -49,7 +49,7 @@ if (is_array($terms_en) && count($terms_en) > 0 ) {
             'name' => "Presse EN",
             'langcode' => 'en',
             'title' => 'Press',
-            'description' => "What's up guys ?????",
+            'description' => "Here you’ll find press releases and other news and information about Orange Business Services.",
             'subhome_id' => $sid
         ]);
         $entity->save();
