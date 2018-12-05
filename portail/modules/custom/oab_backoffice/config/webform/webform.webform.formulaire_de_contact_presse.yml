@@ -24,7 +24,7 @@ elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>Abonnez-v
 css: ''
 javascript: ''
 settings:
-  ajax: false
+  ajax: true
   ajax_scroll_top: form
   page: false
   page_submit_path: ''
