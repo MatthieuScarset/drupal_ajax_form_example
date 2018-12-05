@@ -516,7 +516,7 @@ class OabHubController extends ControllerBase {
 
     }
 
-    public static function getHubSubhomeUrl($url_cible) {
+    public static function getHubSubhomeUrl($url_cible, $add_internal = true) {
 
         $url_to_test = $url_cible;
         if (is_object($url_to_test) && method_exists($url_to_test, 'toString')) {
@@ -594,7 +594,11 @@ class OabHubController extends ControllerBase {
             }
         }
 
-        if (!is_object($new_url)) {
+        if (!is_object($new_url) && $add_internal) {
+            if (strpos($new_url, '/') == 0) {
+                $new_url = substr($new_url,1);
+            }
+
            $new_url = 'internal:/' . $new_url;
            $new_url =  str_replace("/index.php",'', $new_url);
         }
