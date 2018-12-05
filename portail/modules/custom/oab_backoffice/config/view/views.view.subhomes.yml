@@ -330,7 +330,7 @@ display:
           not: false
           plugin_id: numeric
       display_extenders: {  }
-      use_ajax: true
+      use_ajax: false
       group_by: true
     cache_metadata:
       max-age: -1
@@ -3154,7 +3154,7 @@ display:
         filters: false
         filter_groups: false
         pager: false
-        use_ajax: false
+        use_ajax: true
         style: false
         row: false
         relationships: false
@@ -3413,7 +3413,6 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: true
       relationships:
         field_solution:
           id: field_solution
@@ -3531,7 +3530,7 @@ display:
         filters: false
         filter_groups: false
         pager: true
-        use_ajax: false
+        use_ajax: true
         style: false
         row: false
         relationships: false
@@ -3812,7 +3811,6 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: true
       relationships:
         field_solution:
           id: field_solution
