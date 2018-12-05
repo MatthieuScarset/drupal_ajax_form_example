@@ -11,3 +11,17 @@ $config_fr["display"]["page_press"]["display_options"]["empty"]["area"]["content
 );
 
 $collection->write('views.view.subhomes', $config_fr);
+
+
+## Ajout des nouveaux alias RU/ES/BR
+
+/** @var Drupal\Core\Path\AliasStorage $alias_storage */
+$alias_storage = \Drupal::service('path.alias_storage');
+
+$alias_storage->delete(['source' => '/subhome_press', 'langcode' => 'ru' ]);
+$alias_storage->delete(['source' => '/subhome_press', 'langcode' => 'es' ]);
+$alias_storage->delete(['source' => '/subhome_press', 'langcode' => 'br' ]);
+
+$alias_storage->save("/subhome_press_old", "/presse", "ru");
+$alias_storage->save("/subhome_press_old", "/prensa", "es");
+$alias_storage->save("/subhome_press_old", "/imprensa", "br");
