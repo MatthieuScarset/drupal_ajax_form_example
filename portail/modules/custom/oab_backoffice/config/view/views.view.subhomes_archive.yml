@@ -53,7 +53,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 6
+          items_per_page: 12
           offset: 0
           id: 0
           total_pages: null
@@ -551,6 +551,7 @@ display:
           not: false
           plugin_id: numeric
       display_extenders: {  }
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
