@@ -199,14 +199,14 @@ class PerformanceDataForm extends FormBase
      */
     public function validateImportHandler(array &$form, FormStateInterface $form_state) {
         $fs = \Drupal::service('file_system');
-        if (!is_dir(ImportPerformanceData::$IMPORT_DIRECTORY)) {
-            $fs->mkdir(ImportPerformanceData::$IMPORT_DIRECTORY, NULL, TRUE);
+        if (!is_dir(ImportPerformanceData::IMPORT_DIRECTORY)) {
+            $fs->mkdir(ImportPerformanceData::IMPORT_DIRECTORY, NULL, TRUE);
         }
-        if (!is_dir(ImportPerformanceData::$IMPORT_TMP_DIRECTORY)) {
-            $fs->mkdir(ImportPerformanceData::$IMPORT_TMP_DIRECTORY, NULL, TRUE);
+        if (!is_dir(ImportPerformanceData::IMPORT_TMP_DIRECTORY)) {
+            $fs->mkdir(ImportPerformanceData::IMPORT_TMP_DIRECTORY, NULL, TRUE);
         }
         $file = file_save_upload('file', array('file_validate_extensions' => ''),
-            ImportPerformanceData::$IMPORT_TMP_DIRECTORY, null,
+            ImportPerformanceData::IMPORT_TMP_DIRECTORY, null,
             FILE_EXISTS_REPLACE);
         // If the file passed validation:
         if (!$file[0]) {
@@ -216,7 +216,7 @@ class PerformanceDataForm extends FormBase
             // openstat_backbone_path_performance_1.0_usa_mYYYYmm.csv.zip
             if (preg_match('/openstat_backbone_path_performance_1\.0_usa_m([0-9]{6})/', $filename, $matches)) {
                 // Move the file into the Drupal file system.
-                if (file_unmanaged_move($file[0]->getFileUri(), ImportPerformanceData::$IMPORT_DIRECTORY . 'DATA_' . $matches[1] . '.csv.zip', FILE_EXISTS_REPLACE)) {
+                if (file_unmanaged_move($file[0]->getFileUri(), ImportPerformanceData::IMPORT_DIRECTORY . 'DATA_' . $matches[1] . '.csv.zip', FILE_EXISTS_REPLACE)) {
                     // Save the file for use in the submit handler.
                     $input = &$form_state->getUserInput();
                     $input["month"] = $matches[1];
