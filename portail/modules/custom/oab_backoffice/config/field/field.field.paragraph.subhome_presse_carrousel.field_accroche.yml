@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.subhome_presse_carrousel
+id: paragraph.subhome_presse_carrousel.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: subhome_presse_carrousel
+label: Accroche
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

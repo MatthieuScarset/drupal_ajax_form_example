@@ -8,6 +8,7 @@ use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\AdminContext;
+use Drupal\oab_hub\Controller\OabHubController;
 
 class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 	/**
@@ -65,25 +66,41 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 			$breadcrumb->addCacheTags(["node:{$node->nid->value}"]);
 		}
 
-
-		## Si la page est une subhome,
-		## on affiche le nom de la subhome, sans lien
-		if (preg_match('/^view.subhomes/', $route_name)) {
+        ## Si la page est une subhome,
+        ## on affiche le nom de la subhome, sans lien
+        if (preg_match('/^view.subhomes/', $route_name) && isset($parameters['view_id']) && isset($parameters['display_id'])) {
 
 			##On commence par afficher la racine du fil d'ariane
 			$breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
 
-			##On recupère la display view correspondante
-			$view = \Drupal\views\Views::getView('subhomes' );
-			$view->setDisplay($parameters['display_id']);
-			$displayObj = $view->getDisplay();
+            $subhome_display = str_replace('archive_', 'page_', $parameters['display_id']);
+
+            ##On recupère la display view correspondante
+            $view = \Drupal\views\Views::getView('subhomes');
+            $view->setDisplay($subhome_display);
+            $displayObj = $view->getDisplay();
 
 			#Et on en recupère son titre pour l'affichage
 			$displayName = ucfirst($displayObj->display['display_title']);
 
-			##On ajoute un lien vide au fil d'ariane
-			$breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
-		} else {
+
+            if ($parameters['view_id'] === "subhomes") {
+                ##On ajoute un lien vide au fil d'ariane
+
+                $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
+            } else {  ## Subhome archive
+
+                ##On ajoute un lien vide au fil d'ariane
+
+                $link = Link::createFromRoute($displayName, "view.subhomes." . $subhome_display );
+                $link->setUrl(Drupal\Core\Url::fromUri(OabHubController::getHubSubhomeUrl($link->getUrl()->toString())));
+
+                $breadcrumb->addLink($link);
+                $breadcrumb->addLink(Link::createFromRoute("Archives", '<none>' ));
+            }
+
+
+        } else {
 
 			#Liste des types de contenu pour cette config du fil d'ariane
 			$contentTypes = ["blog_post","customer_story", "document", "magazine",

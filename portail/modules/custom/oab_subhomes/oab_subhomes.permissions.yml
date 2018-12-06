@@ -1,0 +1,19 @@
+add subhome entity entities:
+  title: 'Create new Subhome entity entities'
+
+administer subhome entity entities:
+  title: 'Administer Subhome entity entities'
+  description: 'Allow to access the administration form to configure Subhome entity entities.'
+  restrict access: true
+
+delete subhome entity entities:
+  title: 'Delete Subhome entity entities'
+
+edit subhome entity entities:
+  title: 'Edit Subhome entity entities'
+
+view published subhome entity entities:
+  title: 'View published Subhome entity entities'
+
+view unpublished subhome entity entities:
+  title: 'View unpublished Subhome entity entities'

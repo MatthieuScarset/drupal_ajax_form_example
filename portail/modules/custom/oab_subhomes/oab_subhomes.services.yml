@@ -1,0 +1,5 @@
+services:
+  oab_hub.theme_negotiator_tac_lite:
+    class: Drupal\oab_subhomes\Theme\SubhomeEntityThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 10 }

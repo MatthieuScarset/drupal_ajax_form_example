@@ -114,6 +114,54 @@ article .product ul.nav-tabs li:before{
     overflow: hidden;
 }
 
+/* Modif nouvelle gestion subbhome type press */
+.path-subhome-press .view-subhomes .form-group{
+    margin-bottom: 0;
+}
+
+#views-exposed-form-subhomes-page-press{
+    background-color: #FFFFFF;
+    padding-bottom: 0;
+}
+
+.view-subhomes .display-subhomes-press{
+    min-height: 0;
+    padding-bottom: 0;
+}
+
+.view-subhomes .display-subhomes-press .txt,
+.view-subhomes-archive .display-subhomes-press .txt {
+    margin-top:0;
+}
+
+.view-subhomes .display-subhomes-press .txt span {
+    font-size: 1.4rem;
+}
+
+.view-subhomes .display-subhomes-press .encart-image{
+    max-height:95px;
+    max-width: 175px;
+
+}
+
+.link-subhomes:hover > .display-subhomes-press {
+    color: #F16E00 !important;
+}
+
+.view-subhomes .display-subhomes-press .label-subhome {
+    margin-top: 0;
+}
+
+.view-display-id-page_press .view-content{
+    border-bottom: #8F8C87 1px solid;
+}
+
+.view-display-id-page_press .subhomes-filterbar-background{
+    padding:0;
+    margin:0;
+}
+
+
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
     .display-subhomes .encart-image{
@@ -351,6 +399,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .view-subhomes .views-row .views-col {
     padding: 0;
 }
+
+.view-subhomes .view-empty {
+    margin-top: 2rem;
+}
+
 
 .block-card-container{
     margin: auto;
@@ -1893,4 +1946,626 @@ body.page-node-type-custom-page{
 
 .page-node-type-distributor #block-theme-boosted-page-title h1.page-header {
     text-transform: uppercase;
+}
+
+
+.black-on-orange {
+    background-color: #FF7900;
+    color: #000000 !important;
+}
+
+.white-on-orange {
+    background-color: #f16E00;
+    color: #FFF !important;
+}
+
+.orange-on-white {
+    background-color: #FFF;
+    color: #f16E00 !important;
+}
+
+.black-on-white {
+    background-color: #FFF;
+    color: #000 !important;
+}
+
+.grey-on-white {
+    background-color: #FFF;
+    color: #666666 !important;
+}
+
+.orange-on-black {
+    background-color: #000;
+    color: #ff7900 !important;
+}
+
+.white-on-black {
+    background-color: #000;
+    color: #FFF !important;
+}
+
+.grey-on-black {
+    background-color: #000;
+    color: #999999 !important;
+}
+
+.white-on-obs-grey {
+    background-color: #595959;
+    color: #FFF !important;
+}
+
+.black-on-yellow {
+    background-color: #FFD200;
+    color: #000 !important;
+}
+
+.black-on-blue {
+    background-color: #4BB4E6;
+    color: #000 !important;
+}
+
+.black-on-green {
+    background-color: #50BE87;
+    color: #000 !important;
+}
+
+.black-on-purple {
+    background-color: #A885D8;
+    color: #000 !important;
+}
+
+.black-on-pink {
+    background-color: #FFB4E6;
+    color: #000 !important;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-black {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-transparent {
+    color: white;
+    border-color: white;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-transparent {
+    color: black;
+    border-color: black;
+    background: transparent !important;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-orange {
+    color: black;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-orange:hover {
+    color: #F16E00;
+    background-color: black;
+}
+
+.paragraph--default-button .btn.btn-txt-white-bg-orange {
+    color: white;
+    border-color: #F16E00;
+    background-color: #F16E00;
+}
+.paragraph--default-button .btn.btn-txt-white-bg-orange:hover {
+    color: #F16E00;
+    background-color: white;
+}
+
+
+.paragraph--default-button .btn.btn-txt-white-bg-black:hover,
+.paragraph--default-button .btn.btn-txt-white-bg-transparent:hover {
+    color: black;
+    border-color: black;
+    background-color: white;
+}
+
+.paragraph--default-button .btn.btn-txt-black-bg-white:hover,
+.paragraph--default-button .btn.btn-txt-black-bg-transparent:hover {
+    color: white;
+    border-color: white;
+    background-color: black;
+}
+
+.field--name-field-carrousel {
+
+}
+
+.field--name-field-carrousel .carousel-caption {
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    padding-left: 10rem;
+    padding-right: 40rem;
+    text-align: left;
+}
+
+.field--name-field-carrousel .carousel-caption h3 {
+    font-size: 2.4rem;
+}
+
+.field--name-field-carrousel .carousel-caption a {
+    font-size: 1.6rem;
+}
+
+.field--name-field-carrousel .carousel-indicators {
+    bottom: 0;
+    z-index: 5;
+}
+
+.field--name-field-carrousel .carousel .carousel-control {
+    background: none;
+    opacity: 1;
+    color: white;
+}
+.field--name-field-carrousel .carousel .carousel-control .glyphicon {
+    color: white;
+    font-size: 2rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control .glyphicon:hover {
+    color: #F16E00;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li {
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 1rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-indicators li.active {
+    height: 1.4rem;
+    width: 1.4rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.left:focus,
+.field--name-field-carrousel .carousel .carousel-control.left:hover,
+.field--name-field-carrousel .carousel .carousel-control.right:focus,
+.field--name-field-carrousel .carousel .carousel-control.right:hover {
+    width: 6rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 300%;
+    margin-left: -326px;
+}
+
+
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
+    display:block;
+    margin-bottom: 1rem;
+}
+
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+    color: white;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+@media (max-width: 760px) {
+    .field--name-field-carrousel .carousel .carousel-control {
+        width: 3rem;
+    }
+
+    .field--name-field-carrousel .carousel-caption {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.left {
+        padding-left: 0;
+    }
+
+    .field--name-field-carrousel .carousel .carousel-control.right {
+        padding-right: 0;
+    }
+}
+
+.subhome-header {
+   display: table-cell;
+    margin-bottom: 2rem;
+}
+
+.subhome-header div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.subhome-header div.subhome-title {
+    height: 100%;
+    padding: 1rem 0;
+}
+
+.subhome-header div.subhome-title h1 {
+    font-size: 3.4rem;
+    padding: 0;
+    margin: 0;
+    padding-right: 1rem;
+    border-right: 4px solid #F16E00;
+}
+
+@media (max-width: 760px) {
+    .subhome-header div.subhome-title h1 {
+        border-right: none;
+    }
+
+    .subhome-header div {
+        display: block;
+    }
+}
+
+.subhome-header div.subhome-description {
+    font-size: 1.6rem;
+    padding-left: 1rem;
+}
+
+.view-subhomes .field--name-field-carrousel {
+    margin-left: -2.857em;
+    margin-right: -2.857em; /* Pour contrebalencer les margin/paddings des row */
+}
+
+
+@media (max-width: 767px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: -3px;
+        margin-right: -3px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 6px);
+    }
+}
+@media (max-width: 480px) {
+    .view-subhomes .field--name-field-carrousel {
+        margin-left: -8px;
+        margin-right: -8px; /* Pour contrebalencer les margin/paddings des row */
+        width: calc(100% + 16px);
+    }
+}
+
+.subhome-entity-bottom-blocks {
+    margin: 2.143em 0;
+}
+
+.subhome-entity-bottom-blocks div {
+    height: 165px;
+}
+
+.block-corporate {
+    padding: 2.250em 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+}
+
+.block-corporate a {
+    color: inherit;
+}
+
+.black-on-orange a:hover {
+    color: white !important;
+}
+
+.white-on-orange a:hover {
+    color: black !important;
+}
+
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #DDDDDD;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform .form-item-utilisation-des-donnees p {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+
+}
+
+.view-subhomes-archive .view-empty {
+     margin-top: 3.5rem;
+}
+
+.subhome-entity-bottom-blocks div {
+    height: 165px;
+}
+
+.block-corporate {
+    padding: 45px 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+}
+
+.block-corporate a {
+    color: inherit;
+}
+
+.black-on-orange a:hover {
+    color: white !important;
+}
+
+.white-on-orange a:hover {
+    color: black !important;
+}
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+    color: white;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+
+#carousel-press-kit.carousel .carousel-control.left:focus,
+#carousel-press-kit.carousel .carousel-control.left:hover,
+#carousel-press-kit.carousel .carousel-control.right:focus,
+#carousel-press-kit.carousel .carousel-control.right:hover {
+    width: 3rem;
+}
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #DDDDDD;
+    padding: 1rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform .form-item-utilisation-des-donnees p {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+
+}
+
+.view-subhomes-archive .view-empty {
+     margin-top: 3.5rem;
 }

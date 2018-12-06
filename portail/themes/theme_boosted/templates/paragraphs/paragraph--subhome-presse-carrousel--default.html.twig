@@ -1,0 +1,19 @@
+
+{% block paragraph %}
+    {% set img_uri = "" %}
+    {% for key, image in paragraph.field_visual  %}
+        {%if image.entity %}
+            {% set media = image.entity %}
+            {% set file = media.field_image.entity %}
+            {% set img_uri = file_url(file.uri.value) %}
+        {% endif %}
+    {% endfor %}
+ {% block content %}
+     <img src="{{ img_uri }}" >
+     <div class="carousel-caption" >
+         <h3 style="color: white">{{ paragraph.field_title[0].value }}</h3>
+         <p>{{  paragraph.field_accroche[0].value }}</p>
+         {{ content.field_button }}
+     </div>
+ {% endblock %}
+{% endblock paragraph %}

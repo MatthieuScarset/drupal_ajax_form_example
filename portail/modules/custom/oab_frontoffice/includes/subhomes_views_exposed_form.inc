@@ -107,16 +107,22 @@ function subhomes_views_exposed_form(&$form) {
 
     // subhome presse
     if ($form['#id'] == 'views-exposed-form-subhomes-page-press') {
-        if (isset($form['solutions'])) {
-            $form['solutions']['#options']['All'] = t('Solution');
-        }
-        if (isset($form['press_formats'])) {
-            $form['press_formats']['#options']['All'] = t('Type');
+        if (isset($form['field_solution_target_id'])) {
+            $solutions = clean_exposed_filters_by_language(
+                $form['field_solution_target_id']['#options'],
+                'Solution'
+            );
+            $form['field_solution_target_id']['#options'] = $solutions;
         }
 
         //Suppression de filtres pour le russe
         if ($current_language == 'ru') {
             unset($form['press_formats']);
+        }
+
+        if (isset($form['created']['min']) && isset($form['created']['max'])) {
+            $form['created']['min']['#type'] = "date";
+            $form['created']['max']['#type'] = "date";
         }
     }
 
@@ -224,4 +230,19 @@ function subhomes_views_exposed_form(&$form) {
             );
         }
     }
+
+    if ($form['#id'] == 'views-exposed-form-subhomes-archive-archive-press') {
+        //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
+
+        $form['field_solution_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_solution_target_id']['#options'],
+            'Solutions'
+        );
+
+        $form['node_year']['#options']['All'] = t('Year');
+        $form['node_month']['#options']['All'] = t('Month');
+
+    }
+
+
 }
