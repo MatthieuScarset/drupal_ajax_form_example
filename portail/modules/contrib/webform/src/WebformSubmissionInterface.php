@@ -2,6 +2,7 @@
 
 namespace Drupal\webform;
 
+use Drupal\Core\Session\AccountInterface;
 use Drupal\user\EntityOwnerInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\user\UserInterface;
@@ -25,6 +26,11 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
    * Return status for submission that has been completed.
    */
   const STATE_COMPLETED = 'completed';
+
+  /**
+   * Return status for submission that has been locked.
+   */
+  const STATE_LOCKED = 'locked';
 
   /**
    * Return status for submission that has been updated.
@@ -140,6 +146,24 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
   public function setSticky($sticky);
 
   /**
+   * Get the submission's locked status.
+   *
+   * @return string
+   *   The submission's lock status.
+   */
+  public function isLocked();
+
+  /**
+   * Sets the submission's locked flag.
+   *
+   * @param bool $locked
+   *   The submission's locked flag.
+   *
+   * @return $this
+   */
+  public function setLocked($locked);
+
+  /**
    * Gets the remote IP address of the submission.
    *
    * @return string
@@ -215,6 +239,17 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
    *   TRUE if the submission is sticky.
    */
   public function isSticky();
+
+  /**
+   * Test whether the provided account is owner of this webform submission.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Account whose ownership to test.
+   *
+   * @return bool
+   *   Whether the provided account is owner of this webform submission.
+   */
+  public function isOwner(AccountInterface $account);
 
   /**
    * Checks submission notes.
@@ -311,10 +346,13 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
   /**
    * Gets the webform submission's source entity.
    *
+   * @param bool $translate
+   *   (optional) If TRUE the source entity will be translated.
+   *
    * @return \Drupal\Core\Entity\EntityInterface|null
    *   The entity that this webform submission was created from.
    */
-  public function getSourceEntity();
+  public function getSourceEntity($translate = FALSE);
 
   /**
    * Gets the webform submission's source URL.
@@ -328,7 +366,7 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
    * Gets the webform submission's secure tokenized URL.
    *
    * @return \Drupal\Core\Url
-   *   The the webform submission's secure tokenized URL.
+   *   The webform submission's secure tokenized URL.
    */
   public function getTokenUrl();
 
@@ -349,7 +387,7 @@ interface WebformSubmissionInterface extends ContentEntityInterface, EntityOwner
   public function invokeWebformElements($method);
 
   /**
-   * Convert anonymous submission to authenicated.
+   * Convert anonymous submission to authenticated.
    *
    * @param \Drupal\user\UserInterface $account
    *   An authenticated user account.

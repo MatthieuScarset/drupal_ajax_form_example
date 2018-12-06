@@ -3,6 +3,7 @@
 namespace Drupal\webform\Entity;
 
 use Drupal\Component\Render\PlainTextOutput;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -10,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
@@ -55,9 +57,9 @@ use Drupal\webform\WebformSubmissionInterface;
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}",
+ *     "access-denied" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/access-denied",
  *     "table" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/table",
  *     "text" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/text",
- *     "yaml" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/yaml",
  *     "yaml" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/yaml",
  *     "edit-form" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/edit",
  *     "notes-form" = "/admin/structure/webform/manage/{webform}/submission/{webform_submission}/notes",
@@ -98,7 +100,7 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
   protected $originalData = [];
 
   /**
-   * Flag to indicated is submission is being converted from anonymous to authenticated.
+   * Flag to indicated if submission is being converted from anonymous to authenticated.
    *
    * @var bool
    */
@@ -185,12 +187,17 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
 
     // Can't use entity reference without a target type because it defaults to
     // an integer which limits reference to only content entities (and not
-    // config entities like Views, Panels, etc...).
+    // config entities like Views, Panels, etc…).
     // @see \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem::propertyDefinitions()
     $fields['entity_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Submitted to: Entity ID'))
       ->setDescription(t('The ID of the entity of which this webform submission was submitted from.'))
       ->setSetting('max_length', 255);
+
+    $fields['locked'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Locked'))
+      ->setDescription(t('A flag that indicates a locked webform submission.'))
+      ->setDefaultValue(FALSE);
 
     $fields['sticky'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Sticky'))
@@ -296,6 +303,14 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    */
   public function setSticky($sticky) {
     $this->set('sticky', $sticky);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setLocked($locked) {
+    $this->set('locked', $locked);
     return $this;
   }
 
@@ -408,11 +423,20 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
   /**
    * {@inheritdoc}
    */
-  public function getSourceEntity() {
+  public function getSourceEntity($translate = FALSE) {
     if ($this->entity_type->value && $this->entity_id->value) {
       $entity_type = $this->entity_type->value;
       $entity_id = $this->entity_id->value;
-      return $this->entityTypeManager()->getStorage($entity_type)->load($entity_id);
+      $source_entity = $this->entityTypeManager()->getStorage($entity_type)->load($entity_id);
+
+      // If translated is set, get the translated source entity.
+      if ($translate && $source_entity instanceof ContentEntityInterface) {
+        $langcode = $this->language()->getId();
+        if ($source_entity->hasTranslation($langcode)) {
+          $source_entity = $source_entity->getTranslation($langcode);
+        }
+      }
+      return $source_entity;
     }
     else {
       return NULL;
@@ -439,8 +463,10 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
    * {@inheritdoc}
    */
   public function getTokenUrl() {
-    return $this->getSourceUrl()
-      ->setOption('query', ['token' => $this->token->value]);
+    $uri = $this->getSourceUrl();
+    $options = $uri->getOptions();
+    $options['query']['token'] = $this->getToken();
+    return $uri->setOptions($options);
   }
 
   /**
@@ -519,8 +545,27 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
   /**
    * {@inheritdoc}
    */
+  public function isLocked() {
+    return $this->get('locked')->value ? TRUE : FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isSticky() {
     return (bool) $this->get('sticky')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isOwner(AccountInterface $account) {
+    if ($account->isAnonymous()) {
+      return !empty($_SESSION['webform_submissions']) && isset($_SESSION['webform_submissions'][$this->id()]);
+    }
+    else {
+      return $account->id() === $this->getOwnerId();
+    }
   }
 
   /**
@@ -542,6 +587,9 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
     }
     elseif ($this->isDraft()) {
       return self::STATE_DRAFT;
+    }
+    elseif ($this->isLocked()) {
+      return self::STATE_LOCKED;
     }
     elseif ($this->completed->value == $this->changed->value) {
       return self::STATE_COMPLETED;
@@ -579,9 +627,10 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
     $duplicate->set('changed', NULL);
     $duplicate->set('completed', NULL);
 
-    // Clear admin notes and sticky.
+    // Clear admin notes, sticky, and locked.
     $duplicate->set('notes', '');
     $duplicate->set('sticky', FALSE);
+    $duplicate->set('locked', FALSE);
 
     return $duplicate;
   }
@@ -601,7 +650,7 @@ class WebformSubmission extends ContentEntityBase implements WebformSubmissionIn
 
     // Get temporary webform entity and store it in the static
     // WebformSubmission::$webform property.
-    // This could be reworked to use \Drupal\user\PrivateTempStoreFactory
+    // This could be reworked to use \Drupal\Core\TempStore\PrivateTempStoreFactory
     // but it might be overkill since we are just using this to validate
     // that a webform's elements can be rendered.
     // @see \Drupal\webform\WebformEntityElementsValidator::validateRendering()

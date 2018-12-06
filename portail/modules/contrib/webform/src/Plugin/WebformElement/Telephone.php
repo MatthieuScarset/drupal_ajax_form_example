@@ -25,6 +25,7 @@ class Telephone extends TextBase {
    */
   public function getDefaultProperties() {
     return [
+      'input_hide' => FALSE,
       'multiple' => FALSE,
       'international' => FALSE,
       'international_initial_country' => '',
@@ -66,7 +67,7 @@ class Telephone extends TextBase {
     $form['telephone']['international_initial_country'] = [
       '#title' => $this->t('Initial country'),
       '#type' => 'select',
-      '#empty_option' => '',
+      '#empty_option' => $this->t('- None -'),
       '#options' => [
         'auto' => $this->t('Auto detect'),
       ] + CountryManager::getStandardList(),
@@ -95,17 +96,6 @@ class Telephone extends TextBase {
     $format = $this->getItemFormat($element);
     switch ($format) {
       case 'link':
-        /**********************************************************************/
-        // Issue #2484693: Telephone Link field formatter breaks Drupal with 5
-        // digits or less in the number
-        // return [
-        //   '#type' => 'link',
-        //   '#title' => $value,
-        //   '#url' => \Drupal::pathValidator()->getUrlIfValid('tel:' . $value),
-        // ];
-        // Workaround: Manually build a static HTML link.
-        /**********************************************************************/
-
         $t_args = [':tel' => 'tel:' . $value, '@tel' => $value];
         return t('<a href=":tel">@tel</a>', $t_args);
 

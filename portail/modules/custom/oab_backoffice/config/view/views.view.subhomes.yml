@@ -3153,8 +3153,8 @@ display:
         arguments: false
         filters: false
         filter_groups: false
-        pager: false
-        use_ajax: true
+        pager: true
+        use_ajax: false
         style: false
         row: false
         relationships: false
@@ -3212,30 +3212,36 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_hub_target_id:
-          id: field_hub_target_id
-          table: node__field_hub
-          field: field_hub_target_id
-          relationship: none
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_press_type
           group_type: group
           admin_label: ''
-          operator: empty
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
-          exposed: false
+          exposed: true
           expose:
-            operator_id: ''
-            label: ''
+            operator_id: name_1_op
+            label: Format
             description: ''
             use_operator: false
-            operator: ''
-            identifier: ''
+            operator: name_1_op
+            identifier: press_formats
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
+              fh_backbones: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -3248,31 +3254,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: textfield
-          limit: true
-          vid: hub
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_solution_target_id_op
+            operator_id: name_op
             label: Solution
             description: ''
             use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
+            operator: name_op
+            identifier: solutions
             required: false
             remember: false
             multiple: false
@@ -3282,16 +3284,9 @@ display:
               administrator: '0'
               chief_editor: '0'
               digital_admin: '0'
+              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
-              dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
-              chief_editor_hub: '0'
-              webform_business_analyst: '0'
-            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -3304,35 +3299,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        created:
-          id: created
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        node_year:
+          id: node_year
           table: node_field_data
-          field: created
+          field: node_year
           relationship: none
           group_type: group
           admin_label: ''
-          operator: between
-          value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
+          operator: '='
+          value: '0'
           group: 1
           exposed: true
           expose:
-            operator_id: created_op
-            label: 'Authored on'
+            operator_id: node_year_op
+            label: 'By year'
             description: ''
             use_operator: false
-            operator: created_op
-            identifier: created
+            operator: node_year_op
+            identifier: field_year_target_id
             required: false
             remember: false
             multiple: false
@@ -3342,18 +3329,51 @@ display:
               administrator: '0'
               chief_editor: '0'
               digital_admin: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
               webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
-              chief_editor_hub: '0'
-              webform_business_analyst: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
+              contributor: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: node_year
+        node_month:
+          id: node_month
+          table: node_field_data
+          field: node_month
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '01'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: node_month_op
+            label: 'By month'
+            description: ''
+            use_operator: false
+            operator: node_month_op
+            identifier: field_month_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              webform_manager: '0'
+              contributor: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -3837,6 +3857,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions

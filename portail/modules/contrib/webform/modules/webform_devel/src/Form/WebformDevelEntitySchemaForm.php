@@ -66,7 +66,7 @@ class WebformDevelEntitySchemaForm extends EntityForm {
 
       foreach ($element as $key => $value) {
         if ($key === 'options') {
-          $value = implode('; ', array_slice($value, 0, 12)) . (count($value) > 12 ? '; ...' : '');
+          $value = implode('; ', array_slice($value, 0, 12)) . (count($value) > 12 ? '; …' : '');
         }
         $rows[$element_key][$key] = ['#markup' => $value];
       }
@@ -88,13 +88,13 @@ class WebformDevelEntitySchemaForm extends EntityForm {
             '#type' => 'link',
             '#title' => $element_key,
             '#url' => $element_url,
-            '#attributes' => WebformDialogHelper::getModalDialogAttributes(800),
+            '#attributes' => WebformDialogHelper::getModalDialogAttributes(),
           ];
           $rows[$element_key]['operations'] = [
             '#type' => 'link',
             '#title' => $this->t('Edit'),
             '#url' => $element_url,
-            '#attributes' => WebformDialogHelper::getModalDialogAttributes(800, ['button', 'button--small']),
+            '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NORMAL, ['button', 'button--small']),
           ];
         }
         else {

@@ -119,9 +119,19 @@ article .product ul.nav-tabs li:before{
     margin-bottom: 0;
 }
 
-#views-exposed-form-subhomes-page-press{
+.path-subhome-press .block-mediatheque,
+.path-subhome-archive-press .block-mediatheque{
+    margin: 2rem 0;
+}
+
+#views-exposed-form-subhomes-page-press,
+#views-exposed-form-subhome-archive-press{
     background-color: #FFFFFF;
     padding-bottom: 0;
+}
+
+#views-exposed-form-subhomes-page-press input[type="date"].form-control{
+    line-height: 2rem;
 }
 
 .view-subhomes .display-subhomes-press{
@@ -141,7 +151,6 @@ article .product ul.nav-tabs li:before{
 .view-subhomes .display-subhomes-press .encart-image{
     max-height:95px;
     max-width: 175px;
-
 }
 
 .link-subhomes:hover > .display-subhomes-press {
@@ -149,16 +158,22 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes-press .label-subhome {
-    margin-top: 0;
+    margin-top: 1.4rem;
 }
 
-.view-display-id-page_press .view-content{
+.view-display-id-page_press .subhome-view-press .archives_link{
     border-bottom: #8F8C87 1px solid;
+    text-align: right;
+    padding: 0 0.714em 2.143em 0;
 }
 
 .view-display-id-page_press .subhomes-filterbar-background{
     padding:0;
     margin:0;
+}
+
+.ua-chrome .path-subhome-press .views-exposed-form .form-date{
+    max-width:160px;
 }
 
 
@@ -523,13 +538,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-right: 0px !important;
         padding-left: 0px! important;
     }
-
-    .view-subhomes .subhomes-filterbar select{
-        max-width:18%;
-    }
 }
-
-
 
 .section-title-corporate {
     padding-left: 20px !important;
@@ -625,15 +634,15 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 /*.solution-homepage .carousel-solution .left-zone{*/
-    /*margin-right: 10px;*/
+/*margin-right: 10px;*/
 /*}*/
 /*.solution-homepage .carousel-solution .right-zone{*/
-    /*margin-left: 10px;*/
+/*margin-left: 10px;*/
 /*}*/
 /*.solution-homepage .carousel-solution .left-zone .row,*/
 /*.solution-homepage .carousel-solution .right-zone .row{*/
-    /*background-color: white;*/
-    /*margin-left: 0px;*/
+/*background-color: white;*/
+/*margin-left: 0px;*/
 /*}*/
 .title-solution-banner .title{
     font-size: 2.5rem;
@@ -650,12 +659,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
- .carousel-solution .content .text-content{
-     font-size: 1.6rem;
-     margin-bottom: 2rem;
-     font-family: HelvNeueOrange, Arial, sans-serif;
-     line-height: 2rem;
- }
+.carousel-solution .content .text-content{
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    font-family: HelvNeueOrange, Arial, sans-serif;
+    line-height: 2rem;
+}
 
 .homepage-banner{
     background-color: white;
@@ -983,7 +992,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 @media screen and (min-width: 768px) {
     #tab-expertise-banner {
-       display: block!important;
+        display: block!important;
     }
 }
 @media (max-width: 767px) {
@@ -1003,8 +1012,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .sandwich-button {
-         margin-top: 0 !important;
-     }
+        margin-top: 0 !important;
+    }
 
     .menu-loupe-xs {
         display: inline-block;
@@ -1285,7 +1294,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-top: 2rem;
     }
     .block-card img {
-       /* max-width:312px; */
+        /* max-width:312px; */
     }
 }
 
@@ -1574,8 +1583,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .block-mediatheque {
-   background-color: #DDDDDD;
-    display: inline-block;
+    background-color: #DDDDDD;
+    display: block;
 }
 
 .block-mediatheque p {
@@ -1781,7 +1790,7 @@ article.product .highlight1{
 #block-topnavbaren-2 li.lien-site-groupe-orange a,
 #block-topnavbarfr-2 li.lien-site-groupe-orange a,
 #block-topnavbarru-2 li.lien-site-groupe-orange a {
-   color: #F16E00;
+    color: #F16E00;
 }
 
 /* cas spécifique ipad */
@@ -2092,7 +2101,7 @@ body.page-node-type-custom-page{
     background-color: rgba(0,0,0,0.6);
     color: white;
     padding-left: 10rem;
-    padding-right: 40rem;
+    padding-right: 10rem;
     text-align: left;
 }
 
@@ -2113,6 +2122,7 @@ body.page-node-type-custom-page{
     background: none;
     opacity: 1;
     color: white;
+    z-index: 10;
 }
 .field--name-field-carrousel .carousel .carousel-control .glyphicon {
     color: white;
@@ -2127,11 +2137,6 @@ body.page-node-type-custom-page{
     height: 1.2rem;
     width: 1.2rem;
     border-radius: 1rem;
-}
-
-.field--name-field-carrousel .carousel .carousel-indicators li.active {
-    height: 1.4rem;
-    width: 1.4rem;
 }
 
 .field--name-field-carrousel .carousel .carousel-control.left:focus,
@@ -2239,7 +2244,7 @@ body.page-node-type-custom-page{
 }
 
 .subhome-header {
-   display: table-cell;
+    display: table-cell;
     margin-bottom: 2rem;
 }
 
@@ -2408,7 +2413,7 @@ body.page-node-type-custom-page{
 }
 
 .block-corporate {
-    padding: 45px 2rem;
+    padding: 2.250em 2rem;
     font-size: 2rem;
     line-height: 2rem;
     font-weight: bold;
@@ -2427,6 +2432,25 @@ body.page-node-type-custom-page{
 .white-on-orange a:hover {
     color: black !important;
 }
+
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 200%;
+    margin-left: -652px;
+}
+
+
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
+    display:block;
+    margin-bottom: 1rem;
+}
+
 
 #carousel-press-kit .carousel-caption {
     right: 0;
@@ -2456,6 +2480,7 @@ body.page-node-type-custom-page{
 #carousel-press-kit.carousel .carousel-control.right:hover {
     width: 3rem;
 }
+
 .field--name-field-carrousel .carousel .carousel-control.left {
     padding-left: 3rem;
 }
@@ -2520,6 +2545,7 @@ body.page-node-type-custom-page{
 .block-webform {
     border: 3px solid #DDDDDD;
     padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 .block-webform input {

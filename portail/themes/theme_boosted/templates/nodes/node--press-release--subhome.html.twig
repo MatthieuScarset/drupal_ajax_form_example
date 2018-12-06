@@ -80,14 +80,20 @@
 <a href="{{ url }}" class="link-subhomes">
     <div class="display-subhomes display-subhomes-press">
         <div class="encart-image col-lg-3 col-xs-3">
+            {% set hasImage = false %}
             {% for key, image in content.field_visual  %}
                 {% set media = image.entity %}
                 {% set file = media.field_image.entity %}
                 {% set uri = file.uri.value %}
                 {% if uri is not null and media.name.value is not null %}
+                    {% set hasImage = true %}
                     <img src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
                 {% endif %}
             {% endfor %}
+
+            {% if hasImage == false %}
+                <img class="default-image" src="/{{ base_path ~ directory }}/images/subhome_default_press.jpg" alt="" />
+            {% endif %}
         </div>
         <div class="txt col-lg-9 col-xs-9">
             <span class="date-subhome">{{ day }} {{ month }} {{ year }}</span>
