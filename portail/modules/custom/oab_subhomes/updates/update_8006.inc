@@ -52,7 +52,7 @@ $trad = array (
                                         array (
                                             'content' =>
                                                 array (
-                                                    'value' => 'a',
+                                                    'value' => '<p>Aucun élément ne correspond à votre requête. Veuillez élargir votre recherche.</p>it ',
                                                     'format' => 'full_html',
                                                 ),
                                         ),
