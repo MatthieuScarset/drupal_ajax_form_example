@@ -33,7 +33,7 @@ class BlogPostProfile extends SqlBase {
     $query->join('users_roles', 'ur', 'ur.uid = u.uid');
     $query->fields('u', ['uid', 'created'])
     ->condition('ur.rid', 4, '=')
-	//		->condition('ur.rid', 99999, '=')
+    //        ->condition('ur.rid', 99999, '=')
     ->condition('u.uid', 1, '!=');
     return $query;
   }
@@ -95,7 +95,7 @@ class BlogPostProfile extends SqlBase {
             elseif (is_array($profile_result) && isset($profile_result[$field])) {
               $row->setSourceProperty($key, $profile_result[$field]);
             }
-						// utilisation du first name et last name pour faire le titre du node
+                        // utilisation du first name et last name pour faire le titre du node
             if ($key == 'field_first_name') {
               if (is_object($profile_result) && isset($profile_result->$field)) {
                 $title .= trim($profile_result->field_first_name_value) . ' ';
@@ -116,9 +116,9 @@ class BlogPostProfile extends SqlBase {
         }
       }
     }
-		// compte twitter
+        // compte twitter
     if ($field_twitter_account = $row->getSourceProperty('field_twitter_account')) {
-			$row->setSourceProperty('field_social_account', substr($field_twitter_account, 0, 255));
+            $row->setSourceProperty('field_social_account', substr($field_twitter_account, 0, 255));
     }
 
     //titre du node

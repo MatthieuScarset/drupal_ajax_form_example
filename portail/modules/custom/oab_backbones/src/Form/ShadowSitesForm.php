@@ -110,13 +110,13 @@ class ShadowSitesForm extends FormBase
         );
 
         $shadow_sites_object = new ShadowSites();
-        $shadow_sitesTable = $shadow_sites_object->getShadowSitesTable();
+        $shadow_sitestable = $shadow_sites_object->getShadowSitesTable();
 
         $options = array();
         $used_values = array();
 
         // Parcours des sites
-        foreach ($shadow_sitesTable AS $shadowSite) {
+        foreach ($shadow_sitestable AS $shadowSite) {
 
             if ($shadowSite->used == 1) {
                 $used_values[$shadowSite->sid] = 1;

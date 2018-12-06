@@ -15,8 +15,8 @@ use Exception;
 use function PHPSTORM_META\type;
 use stdClass;
 
-class AxiomeImporter{
-
+class AxiomeImporter
+{
     const CONFIG_VALUE_NAME = "sous_famille_values";
 
     private $fichesJointent = array();
@@ -305,8 +305,8 @@ class AxiomeImporter{
             foreach ($liste_classements as $classements) {
                 $nom_classement = strtolower(trim(
                     $classements->getElementsByTagName('Attributes')
-                            ->item(0)->getElementsByTagName('identifiant')
-                            ->item(0)->nodeValue));
+                        ->item(0)->getElementsByTagName('identifiant')
+                        ->item(0)->nodeValue));
 
                 if ($this->isPortfolio($nom_classement)
                     || $nom_classement == 'secteurs'
@@ -438,12 +438,12 @@ class AxiomeImporter{
             // Si c'est une nouvelle fiche
             if (!is_object($results) || !isset($results->nid)) {
                 $this->message .=  "Fiche nouvelle => insert \n";
-                                $this->nouvelleFiche = true;
+                $this->nouvelleFiche = true;
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, FALSE);
             } // Si c'est une fiche existante
             else {
                 $this->message .=  "Fiche existante => update \n";
-                            $this->nouvelleFiche = false;
+                $this->nouvelleFiche = false;
                 $this->axiome_traitement_fiche($xpath_fiche, $content_language, $results->nid);
             }
 
@@ -659,39 +659,39 @@ class AxiomeImporter{
         }
     }
 
-        private function axiome_add_market_segment($node) {
-            $this->message .= "AXIOME ADD MARKET SEGMENT \n";
-            $default_labels = array(
-                "fr" => array('+ 50 salariés', '+ 250 salariés'),
-                "en" => array('+ 50 employees', '+ 250 employees')
-            );
-            $default_values = array();
-            foreach ($default_labels as $lang => $labels) {
-                $default_values[$lang] = array();
-                foreach ($labels as $label) {
-                    $query = \Drupal::entityQuery('taxonomy_term');
-                    $query->condition('vid', 'market_segments');
-                    $query->condition('name', $label);
-                    $query->condition('langcode', $lang);
-                    $entity = $query->execute();
+    private function axiome_add_market_segment($node) {
+        $this->message .= "AXIOME ADD MARKET SEGMENT \n";
+        $default_labels = array(
+            "fr" => array('+ 50 salariés', '+ 250 salariés'),
+            "en" => array('+ 50 employees', '+ 250 employees')
+        );
+        $default_values = array();
+        foreach ($default_labels as $lang => $labels) {
+            $default_values[$lang] = array();
+            foreach ($labels as $label) {
+                $query = \Drupal::entityQuery('taxonomy_term');
+                $query->condition('vid', 'market_segments');
+                $query->condition('name', $label);
+                $query->condition('langcode', $lang);
+                $entity = $query->execute();
 
-                    if (!empty($entity)) {
-                        $default_values[$lang][] = array_pop($entity);
-                    }
+                if (!empty($entity)) {
+                    $default_values[$lang][] = array_pop($entity);
                 }
             }
-            $tid_parent = array();
-            foreach ($default_values[$node->language()->getId()] as $newValue) {
-                array_push($tid_parent, $newValue);
-            }
-
-            $this->message .= "TID pour market_segments : ".implode(",", $tid_parent)." \n";
-
-            if (count($tid_parent) > 0) {
-                $node->set('field_market_segment', $tid_parent);
-                $node->save();
-            }
         }
+        $tid_parent = array();
+        foreach ($default_values[$node->language()->getId()] as $newValue) {
+            array_push($tid_parent, $newValue);
+        }
+
+        $this->message .= "TID pour market_segments : ".implode(",", $tid_parent)." \n";
+
+        if (count($tid_parent) > 0) {
+            $node->set('field_market_segment', $tid_parent);
+            $node->save();
+        }
+    }
 
 
     private function axiome_manage_taxo($node, $famille, $classement_nom) {
@@ -714,8 +714,8 @@ class AxiomeImporter{
             foreach ($taxo as $key => $value) {
                 #$pattern = '/^port?folio\s*/i';
                 if ($this->isPortfolio($classement_nom)) {
-                /*if ($classement_nom == "portfolio"
-                    || $classement_nom == "porfolio") {*/
+                    /*if ($classement_nom == "portfolio"
+                        || $classement_nom == "porfolio") {*/
                     if (in_array($child->nodeValue, $value['children']) && isset($value['tid'])) {
                         array_push($tid_parent, $value['tid']);
                     }
@@ -801,7 +801,7 @@ class AxiomeImporter{
      * Send the axiome notification
      *
      * @param $notifications
-     *	The notification array
+     *    The notification array
      */
     private function axiome_send_notifications($notifications = array()) {
         if (is_array($notifications)

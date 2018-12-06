@@ -8,7 +8,8 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
+class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
+{
   /**
    * {@inheritdoc}
    */
@@ -20,9 +21,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return [
-      'oab.synomia.contentTypes',
-    ];
+    return ['oab.synomia.contentTypes',];
   }
 
   /**
@@ -30,24 +29,24 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-		$config = $this->config('oab.synomia.contentTypes');
-		$contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
-		$form['label'] = array(
-			'#type' => 'label',
-			'#title' => 'Select the types of content you want to index by Synomia search',
-		);
-		foreach ($contentTypes as $contentType) {
-			$form[$contentType->id()] = array(
-				'#type' => 'checkbox',
-				'#title' => $contentType->label(),
-				'#default_value' => $config->get($contentType->id()),
-			);
-		}
-		$form['creationDateLimit'] = array(
-			'#type' => 'date',
-			'#title' => "Creation date limit",
-			'#default_value' => $config->get('creationDateLimit'),
-		);
+        $config = $this->config('oab.synomia.contentTypes');
+        $contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
+        $form['label'] = array(
+            '#type' => 'label',
+            '#title' => 'Select the types of content you want to index by Synomia search',
+        );
+        foreach ($contentTypes as $contentType) {
+            $form[$contentType->id()] = array(
+                '#type' => 'checkbox',
+                '#title' => $contentType->label(),
+                '#default_value' => $config->get($contentType->id()),
+            );
+        }
+        $form['creationDateLimit'] = array(
+            '#type' => 'date',
+            '#title' => "Creation date limit",
+            '#default_value' => $config->get('creationDateLimit'),
+        );
     return parent::buildForm($form, $form_state);
   }
 
@@ -57,13 +56,13 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
     $config = $this->config('oab.synomia.contentTypes');
-		$contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
-		foreach ($contentTypes as $contentType) {
-			$config->set($contentType->id(), $form_state->getValue($contentType->id()));
-		}
+        $contentTypes = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
+        foreach ($contentTypes as $contentType) {
+            $config->set($contentType->id(), $form_state->getValue($contentType->id()));
+        }
 
-		$config->set('creationDateLimit', $form_state->getValue('creationDateLimit'));
-		$config->save();
+        $config->set('creationDateLimit', $form_state->getValue('creationDateLimit'));
+        $config->save();
     parent::submitForm($form, $form_state);
   }
 }

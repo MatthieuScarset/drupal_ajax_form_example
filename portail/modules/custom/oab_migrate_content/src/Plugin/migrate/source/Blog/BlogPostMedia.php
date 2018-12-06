@@ -41,7 +41,7 @@ class BlogPostMedia extends SqlBase {
     $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
 
-		return $query;
+        return $query;
   }
 
   /**
@@ -77,7 +77,7 @@ class BlogPostMedia extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-		$row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
+        $row->setSourceProperty('image_info', $row->getSourceProperty('mid'));
 
     // récupération de la balise alt et title
     $image_query = $this->select('field_data_field_image', 'fi');

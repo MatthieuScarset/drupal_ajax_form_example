@@ -1,7 +1,7 @@
 <?php
 
 function oab_synomia_search_engine_install() {
-	drupal_set_installed_schema_version('oab_synomia_search_engine', 8000);
+    drupal_set_installed_schema_version('oab_synomia_search_engine', 8000);
 }
 
 
@@ -9,19 +9,19 @@ function oab_synomia_search_engine_install() {
  * Traduction d'interface pour Synomia
  */
 function oab_synomia_search_engine_update_8001() {
-	include_once("updates/update_8001.inc");
+    include_once("updates/update_8001.inc");
 }
 /**
  * Traduction d'interface pour Synomia
  */
 function oab_synomia_search_engine_update_8002() {
-	include_once("updates/update_8002.inc");
+    include_once("updates/update_8002.inc");
 }
 /**
  * Traduction d'interface pour Synomia
  */
 function oab_synomia_search_engine_update_8003() {
-	include_once("updates/update_8003.inc");
+    include_once("updates/update_8003.inc");
 }
 
 
@@ -30,5 +30,5 @@ function oab_synomia_search_engine_update_8003() {
  * Initialisation de l'ordre d'affichage des types de contenus
  */
 function oab_synomia_search_engine_update_8004() {
-	include_once("updates/update_8004.inc");
+    include_once("updates/update_8004.inc");
 }

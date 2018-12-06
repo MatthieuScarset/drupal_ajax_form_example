@@ -30,7 +30,7 @@ function oab_axiome_uninstall() {
  */
 function oab_axiome_update_dependencies() {
     $dependencies = array();
-	return $dependencies;
+    return $dependencies;
 }
 
 /**

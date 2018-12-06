@@ -10,156 +10,156 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_help().
  */
 function oab_media_browser_help($route_name, RouteMatchInterface $route_match) {
-	switch ($route_name) {
-		// Main module help for the oab_media_browser module.
-		case 'help.page.oab_media_browser':
-			$output = '';
-			$output .= '<h3>' . t('About') . '</h3>';
-			$output .= '<p>' . t('Provides an entity browser for files.') . '</p>';
-			return $output;
+    switch ($route_name) {
+        // Main module help for the oab_media_browser module.
+        case 'help.page.oab_media_browser':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Provides an entity browser for files.') . '</p>';
+            return $output;
 
-		default:
-	}
+        default:
+    }
 }
 
 /**
  * Implements hook_form_alter().
  */
 function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
-	if (isset($form['#form_id'])) {
-		if ($form['#form_id'] == 'entity_browser_browse_files_iframe_form') {
-			// Attach our library.
-			$form['#attached']['library'][] = 'oab_media_browser/view';
+    if (isset($form['#form_id'])) {
+        if ($form['#form_id'] == 'entity_browser_browse_files_iframe_form') {
+            // Attach our library.
+            $form['#attached']['library'][] = 'oab_media_browser/view';
 
-			// Style the submit button.
-			$form['actions']['submit']['#value'] = t('Select Files');
-			$form['actions']['submit']['#attributes']['class'][] = 'button--primary';
-			$form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';
+            // Style the submit button.
+            $form['actions']['submit']['#value'] = t('Select Files');
+            $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
+            $form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';
 
-			// Wrap actions so we can float them at the bottom of the browser.
-			$form['actions_wrap'] = [
-				'#type' => 'container',
-				'#attributes' => [
-					'class' => 'file-browser-actions',
-				],
-				0 => $form['actions'],
-			];
-			unset($form['actions']);
-		}
-		else if ($form['#form_id'] == 'entity_embed_dialog' && $embed_button = $form_state->get('embed_button')) {
-			// Check that we're using oab_media_browser.
-			if ($embed_button->getTypePlugin()->getConfigurationValue('entity_browser') == 'browse_files_iframe') {
-				// Override the first step of the form, if we're using oab_media_browser.
-				if ($form['actions']['save_modal']['#ajax']['callback'] == '::submitSelectStep') {
-					// Add a library which handles our special "Select Files" button.
-					$form['#attached']['library'][] = 'oab_media_browser/entity_embed';
+            // Wrap actions so we can float them at the bottom of the browser.
+            $form['actions_wrap'] = [
+                '#type' => 'container',
+                '#attributes' => [
+                    'class' => 'file-browser-actions',
+                ],
+                0 => $form['actions'],
+            ];
+            unset($form['actions']);
+        }
+        else if ($form['#form_id'] == 'entity_embed_dialog' && $embed_button = $form_state->get('embed_button')) {
+            // Check that we're using oab_media_browser.
+            if ($embed_button->getTypePlugin()->getConfigurationValue('entity_browser') == 'browse_files_iframe') {
+                // Override the first step of the form, if we're using oab_media_browser.
+                if ($form['actions']['save_modal']['#ajax']['callback'] == '::submitSelectStep') {
+                    // Add a library which handles our special "Select Files" button.
+                    $form['#attached']['library'][] = 'oab_media_browser/entity_embed';
 
-					// Visually hide the "Next" button.
-					$form['actions']['save_modal']['#attributes']['class'][] = 'visually-hidden';
-					$form['actions']['save_modal']['#weight'] = 1;
+                    // Visually hide the "Next" button.
+                    $form['actions']['save_modal']['#attributes']['class'][] = 'visually-hidden';
+                    $form['actions']['save_modal']['#weight'] = 1;
 
-					// Add a button that matches our normal UX, which clicks the hidden button
-					// within the modal's iFrame.
-					$form['actions']['save_modal_alt'] = [
-						'#type' => 'submit',
-						'#value' => t('Select Files'),
-						'#attributes' => ['class' => ['entity-browser-modal-submit']],
-						'#button_type' => 'primary',
-						'#weight' => 0,
-					];
-				}
-			}
-		}
-		else if ($form['#form_id'] == 'media_image_form'
-			|| $form['#form_id'] == 'media_image_edit_form') {
-			$entity = $form_state->getFormObject()->getEntity();
-			$entity_status = $entity->isPublished();
+                    // Add a button that matches our normal UX, which clicks the hidden button
+                    // within the modal's iFrame.
+                    $form['actions']['save_modal_alt'] = [
+                        '#type' => 'submit',
+                        '#value' => t('Select Files'),
+                        '#attributes' => ['class' => ['entity-browser-modal-submit']],
+                        '#button_type' => 'primary',
+                        '#weight' => 0,
+                    ];
+                }
+            }
+        }
+        else if ($form['#form_id'] == 'media_image_form'
+            || $form['#form_id'] == 'media_image_edit_form') {
+            $entity = $form_state->getFormObject()->getEntity();
+            $entity_status = $entity->isPublished();
 
-			$form['status_information'] = array(
-				'#type' => 'details',
-				'#group' => 'advanced',
-				'#title' => t('publishing information'),
-			);
-			$form['status'] = [
-				'#type' => 'checkbox',
-				'#title' => t('published'),
-				'#value' => $entity_status,
-				'#default_value' => 1,
-				'#weight' => 80,
-				'#group' => 'status_information',
-			];
-		}
-		else if ($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
-			|| $form['#form_id'] =='entity_browser_browse_media_modal_form'
-			|| $form['#form_id'] =='entity_browser_browser_file_modal_form')
-		{
-			$form['#attached']['library'][] = 'oab_media_browser/mediatheque';
-		}
-	}
+            $form['status_information'] = array(
+                '#type' => 'details',
+                '#group' => 'advanced',
+                '#title' => t('publishing information'),
+            );
+            $form['status'] = [
+                '#type' => 'checkbox',
+                '#title' => t('published'),
+                '#value' => $entity_status,
+                '#default_value' => 1,
+                '#weight' => 80,
+                '#group' => 'status_information',
+            ];
+        }
+        else if ($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
+            || $form['#form_id'] =='entity_browser_browse_media_modal_form'
+            || $form['#form_id'] =='entity_browser_browser_file_modal_form')
+        {
+            $form['#attached']['library'][] = 'oab_media_browser/mediatheque';
+        }
+    }
 }
 
 function oab_media_browser_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
-	if ($entity_form['#type'] == 'inline_entity_form'
-		&& $entity_form['#entity_type'] == 'media') {
-		$entity = $entity_form['#entity'];
-		$entity_status = $entity->isPublished();
+    if ($entity_form['#type'] == 'inline_entity_form'
+        && $entity_form['#entity_type'] == 'media') {
+        $entity = $entity_form['#entity'];
+        $entity_status = $entity->isPublished();
 
-		$entity_form['status_information'] = array(
-			'#type' => 'details',
-			'#group' => 'advanced',
-			'#title' => t('publishing information'),
-		);
-		$entity_form['status'] = [
-			'#type' => 'checkbox',
-			'#title' => t('published'),
-			'#default_value' => 1,
-			'#weight' => 80,
-			'#group' => 'status_information',
-		];
+        $entity_form['status_information'] = array(
+            '#type' => 'details',
+            '#group' => 'advanced',
+            '#title' => t('publishing information'),
+        );
+        $entity_form['status'] = [
+            '#type' => 'checkbox',
+            '#title' => t('published'),
+            '#default_value' => 1,
+            '#weight' => 80,
+            '#group' => 'status_information',
+        ];
 
-		// amélioration : sauvegarder le media en ajax et passer sur l'onglet de liste
-		$entity_form['actions'] = [
-			'#weight' => 100
-		];
-		$entity_form['actions']['save'] = [
-			'#type' => 'submit',
-			'#value' => t('save media'),
-			'#attributes' => ['class' => ['entity-browser-modal-submit']],
-			'#button_type' => 'primary',
-			'#weight' => 0
-		];
+        // amélioration : sauvegarder le media en ajax et passer sur l'onglet de liste
+        $entity_form['actions'] = [
+            '#weight' => 100
+        ];
+        $entity_form['actions']['save'] = [
+            '#type' => 'submit',
+            '#value' => t('save media'),
+            '#attributes' => ['class' => ['entity-browser-modal-submit']],
+            '#button_type' => 'primary',
+            '#weight' => 0
+        ];
 
-		array_unshift($entity_form['#ief_element_submit'], 'oab_media_browser_entity_modal_submit');
-	}
+        array_unshift($entity_form['#ief_element_submit'], 'oab_media_browser_entity_modal_submit');
+    }
 }
 
 function oab_media_browser_entity_modal_submit(array &$entity_form, FormStateInterface $form_state) {
-	if ($entity_form['#type'] == 'inline_entity_form'
-		&& $entity_form['#entity_type'] == 'media') {
-		$entity_form['#entity']->setPublished($form_state->getValue('status'));
-	}
+    if ($entity_form['#type'] == 'inline_entity_form'
+        && $entity_form['#entity_type'] == 'media') {
+        $entity_form['#entity']->setPublished($form_state->getValue('status'));
+    }
 }
 
 /**
  * Implements hook_preprocess_details().
  */
 function oab_media_browser_preprocess_details(&$variables) {
-	if (isset($variables['element']['#id'])
-		&& $variables['element']['#id'] == 'edit-field-file-browser-reference') {
-		$variables['#attached']['library'][] = 'oab_media_browser/iframe';
-	}
+    if (isset($variables['element']['#id'])
+        && $variables['element']['#id'] == 'edit-field-file-browser-reference') {
+        $variables['#attached']['library'][] = 'oab_media_browser/iframe';
+    }
 }
 
 /**
  * Implements hook_library_info_alter().
  */
 function oab_media_browser_library_info_alter(&$libraries, $extension) {
-	// Optionally use the Libraries module to determine our library paths.
-	if ($extension == 'oab_media_browser' && \Drupal::moduleHandler()->moduleExists('libraries')) {
-		$imagesloaded_path = libraries_get_path('imagesloaded') . '/imagesloaded.pkgd.min.js';
-		$masonry_path = libraries_get_path('masonry') . '/dist/masonry.pkgd.min.js';
+    // Optionally use the Libraries module to determine our library paths.
+    if ($extension == 'oab_media_browser' && \Drupal::moduleHandler()->moduleExists('libraries')) {
+        $imagesloaded_path = libraries_get_path('imagesloaded') . '/imagesloaded.pkgd.min.js';
+        $masonry_path = libraries_get_path('masonry') . '/dist/masonry.pkgd.min.js';
 
-		$libraries['imagesloaded']['js'] = ['/' . $imagesloaded_path => ['minified' => 'true']];
-		$libraries['masonry']['js'] = ['/' . $masonry_path => ['minified' => 'true']];
-	}
+        $libraries['imagesloaded']['js'] = ['/' . $imagesloaded_path => ['minified' => 'true']];
+        $libraries['masonry']['js'] = ['/' . $masonry_path => ['minified' => 'true']];
+    }
 }

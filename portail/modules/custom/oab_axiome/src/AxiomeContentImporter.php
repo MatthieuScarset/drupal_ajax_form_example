@@ -82,7 +82,7 @@ class AxiomeContentImporter {
         $font_color = $banner_data['font_color'];
         //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        $class_left_block = str_replace("-","_",$css_class_left_block);
+        $class_left_block = str_replace("-", "_", $css_class_left_block);
         $title_left_block = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get($class_left_block);
 
         // change class name
@@ -267,9 +267,7 @@ class AxiomeContentImporter {
             $message .= "\t WARNING : missing `ruby_zone_detailed_contents` \n";
             $is_valid = false;
         }
-        if (empty(
-            $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive']
-        )){
+        if (empty($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive'])) {
             $message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
             $is_valid = false;
         }

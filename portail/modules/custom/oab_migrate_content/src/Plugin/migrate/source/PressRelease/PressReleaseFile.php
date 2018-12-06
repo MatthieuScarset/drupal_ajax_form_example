@@ -59,7 +59,7 @@ class PressReleaseFile extends SqlBase {
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->distinct(TRUE)
     ->condition('n.type', 'content_press_release');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     //->range(0, 10);
 
     return $query;

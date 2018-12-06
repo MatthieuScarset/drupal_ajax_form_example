@@ -62,9 +62,9 @@ class BlogPostImage extends SqlBase {
     //->condition('ff.field_folder_tid', 33, '=') // tid of the blog folder
     //->condition('f.fid', 1757)
     ->condition('n.type', 'blog_post');
-		//$query->condition('n.nid', array(1887,12968), 'IN');
-	//	$query ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        //$query->condition('n.nid', array(1887,12968), 'IN');
+    //    $query ->condition('n.changed', BLOGPOST_SELECT_DATE, '>');
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
 
 
     return $query;

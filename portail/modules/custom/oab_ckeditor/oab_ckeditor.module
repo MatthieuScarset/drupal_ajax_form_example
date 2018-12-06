@@ -204,7 +204,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
     $query->addField('oc', 'tid', 'country_tid');
     $query->addField('oc', 'name', 'country_name');
     $query->orderBy('oc.name');
-    $results =	$query->execute()->fetchAll();
+    $results =    $query->execute()->fetchAll();
     $table_countries = array();
     $table_countries[] = array(t('All'), 'all');
     foreach ($results as $country) {
@@ -225,7 +225,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
     $query->addField('t', 'name', 'region_name');
     $query->addField('t', 'langcode', 'region_langcode');
     $query->orderBy('t.name');
-    $results =	$query->execute()->fetchAll();
+    $results =    $query->execute()->fetchAll();
     $table_regions = array();
     $table_regions[] = array(t('All'), 'all');
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();

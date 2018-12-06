@@ -18,8 +18,7 @@ class BackbonesImport
 {
     const TABLE_NAME = 'oab_backbones_import';
 
-    public function getHeaderTable()
-    {
+    public function getHeaderTable() {
         $header = array(
             'date' => array('data' => t('Date'), 'field' => 'date', 'sort' => 'desc'),
             'top_ten' => array('data' => t('Top Ten'), 'field' => 'top_ten'),
@@ -30,8 +29,7 @@ class BackbonesImport
     }
 
     /** Méthode qui retourne le tableau des derniers imports pour le BO */
-    public function getBackbonesImportTable()
-    {
+    public function getBackbonesImportTable() {
         $imports = array();
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'i')
@@ -45,8 +43,7 @@ class BackbonesImport
     }
 
     /** Crée ou met à jour un import */
-    public function saveNewImport($date)
-    {
+    public function saveNewImport($date) {
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->merge($this::TABLE_NAME)
                 ->key(array('date' => $date))
@@ -62,8 +59,7 @@ class BackbonesImport
     }
 
     /** Fait une mise à jour de l'import en BDD (status + commentaire) */
-    public function updateImportInDB($date, $status, $comment)
-    {
+    public function updateImportInDB($date, $status, $comment) {
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->update($this::TABLE_NAME)
                 ->fields(['status' => $status, 'comment' => $comment])
@@ -73,8 +69,7 @@ class BackbonesImport
     }
 
     /** Retourne les 4 dates des derniers imports */
-    public function getLastImportsForSelection()
-    {
+    public function getLastImportsForSelection() {
         $imports = array();
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'i');
@@ -94,8 +89,7 @@ class BackbonesImport
     }
 
     /** Retourne le commentaire saisi pour un import */
-    public function getCommentForImport($date)
-    {
+    public function getCommentForImport($date) {
         $comment = "";
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'i');
@@ -114,8 +108,7 @@ class BackbonesImport
 
 
     /** Retourne le dernier import validé avant celui passé en paramètre */
-    public function getLastImportBeforeDate($date)
-    {
+    public function getLastImportBeforeDate($date) {
         $date_import = "";
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             $query = Database::getConnection()->select($this::TABLE_NAME, 'i');

@@ -59,8 +59,8 @@ class DocumentImage extends SqlBase {
     $query->fields('f', ['fid', 'filename', 'uri', 'filemime', 'filesize', 'status', 'timestamp'])
     ->distinct(TRUE)
     ->condition('n.type', 'content_document_type');
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
-		$query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
+        $query->condition('n.changed', TIMESTAMP_MIGRATION_VALUE, TIMESTAMP_MIGRATION_OPERATOR);
     //->range(0, 10);
     return $query;
   }

@@ -9,12 +9,12 @@ function oab_yassine_install() {
  * @return mixed
  */
 function oab_yassine_update_dependencies() {
-  $dependencies['oab_yassine'][8001] = array('oab_christophe' => 8020	);
-  $dependencies['oab_yassine'][8004] = array('oab_amel' => 8015	);
-  $dependencies['oab_yassine'][8005] = array('oab_tibo' => 8012	);
-  $dependencies['oab_yassine'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024	);
-	$dependencies['oab_yassine'][8009] = array('oab_amel' => 8019	);
-	$dependencies['oab_yassine'][8009] = array('oab_amel' => 8019	);
+  $dependencies['oab_yassine'][8001] = array('oab_christophe' => 8020);
+  $dependencies['oab_yassine'][8004] = array('oab_amel' => 8015    );
+  $dependencies['oab_yassine'][8005] = array('oab_tibo' => 8012    );
+  $dependencies['oab_yassine'][8006] = array('oab_amel' => 8017, 'oab_christophe' => 8024    );
+    $dependencies['oab_yassine'][8009] = array('oab_amel' => 8019    );
+    $dependencies['oab_yassine'][8009] = array('oab_amel' => 8019    );
 
 
   return $dependencies;
@@ -73,33 +73,33 @@ function oab_yassine_update_8007() {
  *  Traduction type de contenu
  */
 function oab_yassine_update_8008() {
-	include_once("updates/update_8008.inc");
+    include_once("updates/update_8008.inc");
 }
 
 /**
  *  Ajout d'exemple local nav
  */
 function oab_yassine_update_8009() {
-	include_once("updates/update_8009.inc");
+    include_once("updates/update_8009.inc");
 }
 
 /**
  *  Template document (config visual ornement)
  */
 function oab_yassine_update_8010() {
-	include_once("updates/update_8010.inc");
+    include_once("updates/update_8010.inc");
 }
 /**
  *  Correction Fields manquants sur product
  */
 function oab_yassine_update_8011() {
-	include_once("updates/update_8011.inc");
+    include_once("updates/update_8011.inc");
 }
 /**
  *  Suppression field_industry dans les PWP
  */
 function oab_yassine_update_8012() {
-	include_once("updates/update_8012.inc");
+    include_once("updates/update_8012.inc");
 }
 
 
@@ -107,59 +107,59 @@ function oab_yassine_update_8012() {
  *  Traduction des fields content_owner et email_owner des fiches produits
  */
 function oab_yassine_update_8013() {
-	include_once("updates/update_8013.inc");
+    include_once("updates/update_8013.inc");
 }
 
 /**
  *  Traduction et ajout de taxo
  */
 function oab_yassine_update_8014() {
-	include_once("updates/update_8014.inc");
+    include_once("updates/update_8014.inc");
 }
 
 /**
  *  Ajout de terme
  */
 function oab_yassine_update_8015() {
-	include_once("updates/update_8015.inc");
+    include_once("updates/update_8015.inc");
 }
 
 /**
  *  Ajout de terme RU
  */
 function oab_yassine_update_8016() {
-	include_once("updates/update_8016.inc");
+    include_once("updates/update_8016.inc");
 }
 
 /**
  *  Update des termes en trop
  */
 function oab_yassine_update_8017() {
-	include_once("updates/update_8017.inc");
+    include_once("updates/update_8017.inc");
 }
 
 /**
  *  Update des termes
  */
 function oab_yassine_update_8018() {
-	include_once("updates/update_8018.inc");
+    include_once("updates/update_8018.inc");
 }
 /**
  *  Update des termes Press
  */
 function oab_yassine_update_8019() {
-	include_once("updates/update_8019.inc");
+    include_once("updates/update_8019.inc");
 }/**
  *  Creation de la homepage
  */
 function oab_yassine_update_8020() {
-	include_once("updates/update_8020.inc");
+    include_once("updates/update_8020.inc");
 }
 /**
  *  Ajout de la contact bar sur regions et countries
  */
 function oab_yassine_update_8021() {
-	include_once("updates/update_8021.inc");
+    include_once("updates/update_8021.inc");
 }
 
 /**
@@ -173,5 +173,5 @@ function oab_yassine_update_8022() {
  *  Ajout du field top_zone mobile
  */
 function oab_yassine_update_8023() {
-	include_once("updates/update_8023.inc");
+    include_once("updates/update_8023.inc");
 }
