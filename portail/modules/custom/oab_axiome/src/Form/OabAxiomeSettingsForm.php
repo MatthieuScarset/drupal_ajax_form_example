@@ -207,17 +207,24 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
         $ret = [];
 
+        $regex = "/ruby_" . $lang . "_\d{8}(-\d{1,2}){4}[.]zip/";
+
         // Ouverture du dossier sauvegarde
         if ($dir = opendir($dir_path)) {
-            // Je lis les entrées tant qu'on a pas atteint le nbre d'occurrences passé en param
-            while (false !== ($entry = readdir($dir)) && count($ret) < $size ) {
-                $regex = "/ruby_".$lang."_\d{8}-\d{2}-\d{2}-\d{2}-\d{2}[.]zip/";
-                if (preg_match($regex, $entry)) {
-                    $ret[$entry] = $entry;
-                }
-            }
+            $tmp_list = []; //tmp pour trier les fichiers par date
 
+            // Je lis les entrées tant qu'on a pas atteint le nbre d'occurrences passé en param
+            while (false !== ($entry = readdir($dir))) {
+
+                if (preg_match($regex, $entry)) {
+                    $tmp_list[$entry] = $entry;
+                }
+
+            }
             closedir($dir);
+
+            krsort($tmp_list);
+            $ret = array_slice($tmp_list, 0, $size);
         }
 
         return $ret;
