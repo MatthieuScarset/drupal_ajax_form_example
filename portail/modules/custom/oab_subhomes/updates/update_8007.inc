@@ -1,6 +1,7 @@
 <?php
 
 oabt_YmlImport('views.view.subhomes.yml');
+oabt_YmlImport('views.view.subhomes_archive.yml');
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
 $config_fr = $collection->read('views.view.subhomes');
