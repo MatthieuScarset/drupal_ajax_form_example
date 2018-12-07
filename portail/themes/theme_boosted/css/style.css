@@ -119,7 +119,8 @@ article .product ul.nav-tabs li:before{
     margin-bottom: 0;
 }
 
-#views-exposed-form-subhomes-page-press{
+#views-exposed-form-subhomes-page-press,
+#views-exposed-form-subhomes-archive-archive-press {
     background-color: #FFFFFF;
     padding-bottom: 0;
 }
