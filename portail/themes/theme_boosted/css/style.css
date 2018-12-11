@@ -1896,10 +1896,28 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     color:#e74c3c;
 }
 
-.webform-dvi-contact-distributor .container {
-    margin-top: 1.5rem;
+.webform-dvi-contact-distributor .container,
+.webform-dvi-contact-distributor .container .row {
+    margin:0;
+    padding:0;
 }
 
+.webform-dvi-contact-distributor .captcha {
+    margin-left: 1rem;
+}
+
+.webform-dvi-contact-distributor .webform-button--submit {
+    margin-left: 1rem;
+}
+
+.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input,
+.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input[type="text"],
+.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input[type="tel"],
+.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input,
+.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input[type="text"],
+.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input[type="tel"] {
+    padding-right: 36px!important;
+}
 
 .embedded-entity.align-left{
     margin-right: 10px;
