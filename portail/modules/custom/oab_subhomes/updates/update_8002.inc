@@ -133,8 +133,8 @@ $fields = [
         'type'  => 'entity_reference_revisions'
     ],
     [
-        'field_name'    => 'field_team_button',
-        'type'  => 'entity_reference_revisions'
+        'field_name' => 'field_afficher_bloc_notre_equipe',
+        'type'  => 'boolean'
     ]
 ];
 
