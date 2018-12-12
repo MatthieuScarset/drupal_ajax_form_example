@@ -1,7 +1,9 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.subhome_entity.presse.field_afficher_bloc_notre_equipe
     - field.field.subhome_entity.presse.field_carrousel
     - field.field.subhome_entity.presse.field_corporate_aplat
     - field.field.subhome_entity.presse.field_corporate_title
@@ -27,6 +29,16 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
+  field_afficher_bloc_notre_equipe:
+    weight: 10
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
   field_carrousel:
     type: entity_reference_revisions_entity_view
     weight: 2

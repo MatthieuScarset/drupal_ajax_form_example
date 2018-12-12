@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.subhome_entity.presse.field_afficher_bloc_notre_equipe
     - field.field.subhome_entity.presse.field_carrousel
     - field.field.subhome_entity.presse.field_corporate_aplat
     - field.field.subhome_entity.presse.field_corporate_title
@@ -80,9 +81,8 @@ third_party_settings:
       label: Corporate
     group_team:
       children:
-        - field_team_title
-        - field_team_visual
-        - field_team_button
+        - field_afficher_bloc_notre_equipe
+        - group_team_details
       parent_name: group_onglets
       weight: 24
       format_type: tab
@@ -107,6 +107,21 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Config
+    group_team_details:
+      children:
+        - field_team_title
+        - field_team_visual
+        - field_team_button
+      parent_name: group_team
+      weight: 26
+      format_type: details
+      format_settings:
+        label: Details
+        open: true
+        id: group_team_details
+        classes: ''
+        required_fields: false
+      label: Details
 id: subhome_entity.presse.default
 targetEntityType: subhome_entity
 bundle: presse
@@ -120,6 +135,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_afficher_bloc_notre_equipe:
+    weight: 25
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_carrousel:
     type: entity_reference_paragraphs
     weight: 4
@@ -170,7 +192,7 @@ content:
     region: content
   field_team_button:
     type: entity_reference_paragraphs
-    weight: 12
+    weight: 29
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -181,7 +203,7 @@ content:
     third_party_settings: {  }
     region: content
   field_team_title:
-    weight: 10
+    weight: 27
     settings:
       size: 60
       placeholder: ''
@@ -189,7 +211,7 @@ content:
     type: string_textfield
     region: content
   field_team_visual:
-    weight: 11
+    weight: 28
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
