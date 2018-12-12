@@ -119,6 +119,20 @@ article .product ul.nav-tabs li:before{
     margin-bottom: 0;
 }
 
+.path-subhome-press .subhome-press-colonne-blocks > .row,
+.path-subhome-archive-press .subhome-press-colonne-blocks > .row{
+    margin-bottom: 2rem;
+}
+
+.path-subhome-press .block-mediatheque,
+.path-subhome-archive-press .block-mediatheque{
+    margin: 0;
+}
+
+#views-exposed-form-subhomes-archive-archive-press {
+    padding-top: 0;
+}
+
 #views-exposed-form-subhomes-page-press,
 #views-exposed-form-subhomes-archive-archive-press {
     background-color: #FFFFFF;

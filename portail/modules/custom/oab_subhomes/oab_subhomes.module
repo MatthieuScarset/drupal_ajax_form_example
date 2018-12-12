@@ -208,7 +208,7 @@ function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
         $user = \Drupal::currentUser();
 
         // Pour les non admin, je bloque la partie "Config" de la subhome entity
-        if ($user->id() !== 1) {
+        if ($user->id() != 1) {
             if (isset($form['#fieldgroups']['group_config']) && isset($form['#group_children'])) {
                 foreach ($form['#group_children'] as $field => $group) {
                     if ($group == 'group_config') {
@@ -220,7 +220,7 @@ function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
 
         // Ajout du validate pour le field visual et l'aplat de la partie Corporate
         $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
-
+        array_unshift($form['#validate'], 'oab_subhomes_check_group_team');
     }
 
     // Je fais la même chose pour les fields de l'entité Dossier de presse
@@ -230,7 +230,20 @@ function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
 }
 
 
-function oab_subhomes_check_visual_aplat($form, Drupal\Core\Form\FormState &$form_state) {
+function oab_subhomes_check_group_team(&$form, Drupal\Core\Form\FormState &$form_state) {
+
+    $afficher_equipe = $form_state->getValue('field_afficher_bloc_notre_equipe');
+
+    if (isset($afficher_equipe['value']) && $afficher_equipe['value'] == 1) {
+        foreach ($form['#fieldgroups']['group_team_details']->children as $field) {
+            $form[$field]["#required"] = true;
+        }
+    }
+
+
+}
+
+function oab_subhomes_check_visual_aplat ($form, Drupal\Core\Form\FormState &$form_state) {
 
     if ($form['#form_id'] === 'subhome_entity_presse_edit_form') {
         $field_aplat = $form_state->getValue('field_corporate_aplat');
