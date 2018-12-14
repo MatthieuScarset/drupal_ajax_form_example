@@ -1,6 +1,6 @@
 <?php
 
-function oab_subomes_install() {
+function oab_subhomes_install() {
     drupal_set_installed_schema_version('oab_subhomes', 8000);
 }
 
