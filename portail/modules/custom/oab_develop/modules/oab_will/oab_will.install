@@ -171,3 +171,11 @@ function oab_will_update_8023(){
 function oab_will_update_8024() {
     include_once("updates/update_8024.inc");
 }
+
+
+/**
+ *         RUBYPORTAILOBS-3445 [SUB-PRESS] modification de views pour simplification
+ */
+function oab_will_update_8027() {
+    include_once("updates/update_8027.inc");
+}
