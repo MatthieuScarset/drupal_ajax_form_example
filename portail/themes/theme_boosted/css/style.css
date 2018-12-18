@@ -342,10 +342,16 @@ article .product ul.nav-tabs li:before{
     border-top: 3px solid #ededed;
 }
 
+.path-subhome-press .link-subhomes:hover > .display-subhomes {
+    background-color: #FFF;
+    color: #000;
+}
+
 .link-subhomes:hover > .display-subhomes{
     background-color: #F16e00;
     color: #fff;
 }
+
 .link-subhomes:hover > .display-subhomes > .encart{
     background-color: #F16e00;
     color: #fff;
