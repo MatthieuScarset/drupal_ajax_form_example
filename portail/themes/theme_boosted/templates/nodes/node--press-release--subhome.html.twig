@@ -78,21 +78,32 @@
 {% endif %}
 
 <a href="{{ url }}" class="link-subhomes">
-<div class="display-subhomes">
-    <div class="encart col-lg-12">
-        <div class="bigKey col-lg-5"><span>{{ day }}</span></div>
-        <div class="lowKey col-lg-7"><span>
-            {{ month }}<br/>{{ year }}</span>
+    <div class="display-subhomes display-subhomes-press">
+        <div class="encart-image col-lg-3 col-xs-3">
+            {% set hasImage = false %}
+            {% for key, image in content.field_visual  %}
+                {% set media = image.entity %}
+                {% set file = media.field_image.entity %}
+                {% set uri = file.uri.value %}
+                {% if uri is not null and media.name.value is not null %}
+                    {% set hasImage = true %}
+                    <img src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
+                {% endif %}
+            {% endfor %}
+
+            {% if hasImage == false %}
+                <img class="default-image" src="/{{ base_path ~ directory }}/images/subhome_default_press.jpg" alt="" />
+            {% endif %}
         </div>
+        <div class="txt col-lg-9 col-xs-9">
+            <span class="date-subhome">{{ day }} {{ month }} {{ year }}</span>
+            <span> -  {{ 'Press release'|trans }}</span>
+            <div class="label-subhome">
+                <span>{{ label }}</span>
+            </div>
+        </div>
+        <div style="clear:both"></div>
     </div>
-    {# Pour faire la marge du trait identique aux autres blocs,
-    je suis obligé de la mettre dans un col-lg-12 aussi #}
-    <div class="col-lg-12">
-        <div class="border col-lg-12"></div>
-    </div>
-    <div class="txt col-lg-12">
-        <span>{{ 'Press release'|trans }}</span>
-        <div>{{ label }}</div>
-    </div>
-</div>
 </a>
+
+
