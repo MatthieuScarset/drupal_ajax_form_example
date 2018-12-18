@@ -341,6 +341,7 @@ article .product ul.nav-tabs li:before{
     border-top: 3px solid #ededed;
 }
 
+.path-subhome-archive-press .link-subhomes:hover > .display-subhomes,
 .path-subhome-press .link-subhomes:hover > .display-subhomes {
     background-color: #FFF;
     color: #F16e00;
