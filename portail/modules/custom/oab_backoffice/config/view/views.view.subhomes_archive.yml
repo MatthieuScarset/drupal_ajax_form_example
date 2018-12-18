@@ -72,20 +72,15 @@ display:
             offset_label: Offset
           quantity: 4
       style:
-        type: grid
+        type: default
         options:
           grouping:
             -
               field: created
               rendered: true
               rendered_strip: false
-          columns: 1
-          automatic_width: true
-          alignment: horizontal
-          col_class_default: true
-          col_class_custom: 'col-xs-12 col-md-12'
-          row_class_default: true
-          row_class_custom: ''
+          row_class: ''
+          default_row_class: true
       row:
         type: fields
         options:
