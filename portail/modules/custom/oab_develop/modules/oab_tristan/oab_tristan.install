@@ -15,6 +15,7 @@ function oab_tristan_update_dependencies() {
   $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020    );
   $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031    );
   $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023    );
+  $dependencies['oab_tristan'][8085] = array('oab_subhomes' => 8002);
 
   return $dependencies;
 }

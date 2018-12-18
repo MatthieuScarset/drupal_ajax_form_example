@@ -8,8 +8,8 @@ function oab_subhomes_install() {
  * @return mixed
  */
 function oab_subhomes_update_dependencies() {
-
-    $dependencies['oab_subhomes'][8001] = array('oab_tristan' => 8085);
+    $dependencies = array();
+    //$dependencies['oab_subhomes'][8001] = array('oab_tristan' => 8085);
 
     return $dependencies;
 }
