@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.custom_page.field_display_title
     - field.field.node.custom_page.field_hub
     - field.field.node.custom_page.field_hub_portal
+    - field.field.node.custom_page.field_insight
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
@@ -24,6 +25,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_classify
         - group_seo
         - group_publish
       parent_name: ''
@@ -40,8 +42,6 @@ third_party_settings:
         - title
         - field_display_title
         - field_content
-        - field_hub
-        - field_hub_portal
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -57,7 +57,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         id: ''
@@ -70,7 +70,7 @@ third_party_settings:
       children:
         - moderation_state_update
       parent_name: group_onglets
-      weight: 9
+      weight: 10
       format_type: tab
       format_settings:
         id: ''
@@ -79,6 +79,21 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publish
+    group_classify:
+      children:
+        - field_insight
+        - field_hub
+        - field_hub_portal
+      parent_name: group_onglets
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
 id: node.custom_page.default
 targetEntityType: node
 bundle: custom_page
@@ -106,20 +121,26 @@ content:
     type: boolean_checkbox
     region: content
   field_hub:
-    weight: 5
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 34
+    weight: 53
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_insight:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_meta_description:
-    weight: 13
+    weight: 53
     settings:
       size: 60
       placeholder: ''
@@ -127,7 +148,7 @@ content:
     type: string_textfield
     region: content
   field_meta_title:
-    weight: 12
+    weight: 52
     settings:
       size: 60
       placeholder: ''

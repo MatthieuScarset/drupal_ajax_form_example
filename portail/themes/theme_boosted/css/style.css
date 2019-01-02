@@ -139,11 +139,6 @@ article .product ul.nav-tabs li:before{
     padding-bottom: 0;
 }
 
-#views-exposed-form-subhomes-page-press .form-item{
-    display: inline-block;
-    margin-bottom: 2rem;
-}
-
 #views-exposed-form-subhomes-page-press input[type="date"].form-control{
     line-height: 2rem;
 }
@@ -151,7 +146,6 @@ article .product ul.nav-tabs li:before{
 .view-subhomes .display-subhomes-press{
     min-height: 0;
     padding-bottom: 0;
-    margin: 2rem 2rem 0 0;
 }
 
 .view-subhomes .display-subhomes-press .txt,
@@ -164,19 +158,13 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes-press .encart-image{
+    max-height:95px;
     max-width: 175px;
-    height: auto;
-    background-color: #FFFFFF;
 }
 
-.link-subhomes > .display-subhomes-press {
-    background-color: #FFFFFF;
+.link-subhomes:hover > .display-subhomes-press {
+    color: #F16E00 !important;
 }
-
-.link-subhomes > .display-subhomes-press .txt div{
-    margin-bottom: 0;
-}
-
 
 .view-subhomes .display-subhomes-press .label-subhome {
     margin-top: 1.4rem;
@@ -196,6 +184,7 @@ article .product ul.nav-tabs li:before{
 .ua-chrome .path-subhome-press .views-exposed-form .form-date{
     max-width:160px;
 }
+
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -342,17 +331,10 @@ article .product ul.nav-tabs li:before{
     border-top: 3px solid #ededed;
 }
 
-.path-subhome-archive-press .link-subhomes:hover > .display-subhomes,
-.path-subhome-press .link-subhomes:hover > .display-subhomes {
-    background-color: #FFF;
-    color: #F16e00;
-}
-
 .link-subhomes:hover > .display-subhomes{
     background-color: #F16e00;
     color: #fff;
 }
-
 .link-subhomes:hover > .display-subhomes > .encart{
     background-color: #F16e00;
     color: #fff;
@@ -1310,13 +1292,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .view-subhomes .views-exposed-form .form-submit {
         margin-top: 2rem;
     }
-    .view-display-id-page_press .views-exposed-form .form-submit {
-        margin-top: 0;
-        margin-bottom: 2rem;
-    }
-
-
-
     .block-card img {
         /* max-width:312px; */
     }
@@ -1920,28 +1895,10 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     color:#e74c3c;
 }
 
-.webform-dvi-contact-distributor .container,
-.webform-dvi-contact-distributor .container .row {
-    margin:0;
-    padding:0;
+.webform-dvi-contact-distributor .container {
+    margin-top: 1.5rem;
 }
 
-.webform-dvi-contact-distributor .captcha {
-    margin-left: 1rem;
-}
-
-.webform-dvi-contact-distributor .webform-button--submit {
-    margin-left: 1rem;
-}
-
-.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input,
-.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input[type="text"],
-.webform-dvi-contact-distributor .intl-tel-input.allow-dropdown input[type="tel"],
-.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input,
-.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input[type="text"],
-.webform-dvi-contact-distributor .intl-tel-input.separate-dial-code input[type="tel"] {
-    padding-right: 36px!important;
-}
 
 .embedded-entity.align-left{
     margin-right: 10px;
@@ -2328,6 +2285,7 @@ body.page-node-type-custom-page{
     margin-right: -2.857em; /* Pour contrebalencer les margin/paddings des row */
 }
 
+
 @media (max-width: 767px) {
     .view-subhomes .field--name-field-carrousel {
         margin-left: -3px;
@@ -2372,11 +2330,192 @@ body.page-node-type-custom-page{
     color: black !important;
 }
 
+.block-team img {
+    max-height: 190px;
+    width: 100%;
+    height: auto;
+}
+
+.block-team .block-team-info {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    padding: 2rem;
+}
+
+.block-team .paragraph--default-button {
+    position: absolute;
+    bottom: 10px;
+}
+
+.block-team h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.block-webform {
+    border: 3px solid #DDDDDD;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.block-webform input {
+    margin-bottom: 10px;
+}
+
+.block-webform .form-item-utilisation-des-donnees input.form-checkbox {
+    display: inline;
+    width: 8%;
+    vertical-align: top;
+    margin-top: 6px;
+    height: auto;
+}
+
+.block-webform .form-item-utilisation-des-donnees p {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.1rem;
+}
+
+.block-webform .form-item-utilisation-des-donnees p:empty,
+.block-webform .form-item-utilisation-des-donnees p.description.help-block{
+    display: none;
+}
+
+.block-webform input {
+    font-size: 1.6rem;
+}
+
+.block-webform .btn-grey {
+    background-color: #595959;
+    border-color: #595959;
+    color: white;
+}
+
+.block-webform .form-actions {
+    text-align: right;
+}
+
+.block-webform #edit-processed-text {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+
+}
+
+.view-subhomes-archive .view-empty {
+     margin-top: 3.5rem;
+}
+
+.subhome-entity-bottom-blocks div {
+    height: 165px;
+}
+
+.block-corporate {
+    padding: 2.250em 2rem;
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+}
+
+.block-corporate a {
+    color: inherit;
+}
+
+.black-on-orange a:hover {
+    color: white !important;
+}
+
+.white-on-orange a:hover {
+    color: black !important;
+}
+
+.col-xxs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: inherit;
+    margin-left: -652px;
+}
+
+.col-xs .field--name-field-carrousel .carousel-inner > .item > img {
+    max-width: 200%;
+    margin-left: -652px;
+}
+
+
+.col-xs .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-sm .path-subhome-press .form-item-field-solution-target-id .form-select,
+.col-md .path-subhome-press .form-item-field-solution-target-id .form-select{
+    display:block;
+    margin-bottom: 1rem;
+}
+
+
+#carousel-press-kit .carousel-caption {
+    right: 0;
+    left: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+#carousel-press-kit .elem-press-kit {
+    padding: 45px 5rem;
+    color: white;
+}
+
+#carousel-press-kit .carousel-control {
+    background-color: black;
+    opacity: 1;
+    width: 3rem;
+    height: 3rem;
+    padding-top: 0.25rem;
+    bottom: calc(50% - 1.5rem);
+}
+
+
 #carousel-press-kit.carousel .carousel-control.left:focus,
 #carousel-press-kit.carousel .carousel-control.left:hover,
 #carousel-press-kit.carousel .carousel-control.right:focus,
 #carousel-press-kit.carousel .carousel-control.right:hover {
     width: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.left {
+    padding-left: 3rem;
+}
+
+.field--name-field-carrousel .carousel .carousel-control.right {
+    padding-right: 3rem;
+}
+
+#carousel-press-kit  {
+    font-size: 1.6rem;
+}
+
+#carousel-press-kit .carousel-control .glyphicon {
+    color: #FFFFFF;
+}
+
+#carousel-press-kit .carousel-control:hover .glyphicon {
+    color: #f16e00;
+}
+
+#carousel-press-kit .elem-press-kit h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit a {
+    color: inherit;
+}
+
+#carousel-press-kit .elem-press-kit .file-info {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
 .block-team img {

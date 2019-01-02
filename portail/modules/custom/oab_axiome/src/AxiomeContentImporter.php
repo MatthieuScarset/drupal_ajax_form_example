@@ -86,8 +86,7 @@ class AxiomeContentImporter {
         $font_color = $banner_data['font_color'];
         //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-
-        $class_left_block = str_replace("-","_",$css_class_left_block);
+        $class_left_block = str_replace("-", "_", $css_class_left_block);
         $title_left_block = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get($class_left_block);
 
         // change class name

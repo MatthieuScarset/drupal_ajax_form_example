@@ -9,7 +9,7 @@ dependencies:
     - oab_backoffice
     - taxonomy
     - user
-id: subhomes_archive
+id: subhome_archive
 label: 'Subhome Archive'
 module: views
 description: ''
@@ -53,7 +53,7 @@ display:
       pager:
         type: full
         options:
-          items_per_page: 12
+          items_per_page: 6
           offset: 0
           id: 0
           total_pages: null
@@ -72,15 +72,13 @@ display:
             offset_label: Offset
           quantity: 4
       style:
-        type: default
+        type: grid
         options:
           grouping:
             -
               field: created
               rendered: true
               rendered_strip: false
-          row_class: ''
-          default_row_class: true
           columns: 1
           automatic_width: true
           alignment: horizontal
@@ -500,20 +498,7 @@ display:
       title: 'Archive press'
       header: {  }
       footer: {  }
-      empty:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: 'No items match your query Please modify the selected request.'
-            format: full_html
-          plugin_id: text
+      empty: {  }
       relationships: {  }
       arguments:
         field_subhome_target_id:
@@ -553,7 +538,6 @@ display:
           not: false
           plugin_id: numeric
       display_extenders: {  }
-      use_ajax: false
     cache_metadata:
       max-age: -1
       contexts:
@@ -565,9 +549,9 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  archive_press:
+  press:
     display_plugin: page
-    id: archive_press
+    id: press
     display_title: Press
     position: 1
     display_options:
