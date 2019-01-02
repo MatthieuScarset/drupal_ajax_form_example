@@ -196,9 +196,21 @@
 
   });
 
+  var vg = $("#grid-content").vgrid({
+    easing: "easeOutQuint",
+    useLoadImageEvent: true,
+    time: 400,
+    delay: 20,
+    fadeIn: {
+      time: 500,
+      delay: 50,
+      wait: 500
+    }
+  });
 
-  $(window).on('load', function(){
+  $(window).on('load', function(e){
     manageSmallImageInTemplates();
+    vg.vgrefresh();
   });
 
 
@@ -382,6 +394,7 @@
       $('.icon-share[data-target="#social-share"]').click();
     }
   });
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
