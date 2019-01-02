@@ -112,10 +112,10 @@ hidden:
   field_display_title: true
   field_email_owner: true
   field_end_date: true
-  field_industry: true
-  field_job_profile: true
   field_hub: true
   field_hub_portal: true
+  field_industry: true
+  field_job_profile: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true

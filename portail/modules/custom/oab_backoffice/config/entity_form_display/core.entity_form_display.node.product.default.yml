@@ -4,6 +4,7 @@ dependencies:
   config:
     - entity_browser.browser.browse_media_modal
     - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_blog_thematic
     - field.field.node.product.field_content
     - field.field.node.product.field_content_owner
     - field.field.node.product.field_email_owner
@@ -132,6 +133,7 @@ third_party_settings:
       children:
         - field_subhome
         - field_insight
+        - field_blog_thematic
         - field_solution
         - field_industry
         - field_job_profile
@@ -196,6 +198,12 @@ targetEntityType: node
 bundle: product
 mode: default
 content:
+  field_blog_thematic:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_content:
     weight: 9
     settings:
@@ -248,20 +256,20 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 41
+    weight: 42
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 42
+    weight: 43
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 37
+    weight: 38
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -279,20 +287,20 @@ content:
     type: options_buttons
     region: content
   field_job_profile:
-    weight: 38
+    weight: 39
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_market_segment:
-    weight: 39
+    weight: 40
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_market_segment_dvi:
     type: options_select
-    weight: 40
+    weight: 41
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -319,7 +327,7 @@ content:
     type: metatag_firehose
     region: content
   field_solution:
-    weight: 36
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_select

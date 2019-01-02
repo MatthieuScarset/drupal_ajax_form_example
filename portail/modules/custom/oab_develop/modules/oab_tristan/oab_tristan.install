@@ -664,3 +664,11 @@ function oab_tristan_update_8086() {
 function oab_tristan_update_8087() {
     include_once('updates/update_8087.inc');
 }
+
+/**
+ * Mise à jour de la taxo Thématique
+ */
+function oab_tristan_update_8088() {
+    include_once('updates/update_8088.inc');
+}
+

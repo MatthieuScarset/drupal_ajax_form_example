@@ -29,7 +29,6 @@ dependencies:
     - field.field.node.simple_page.field_solution
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
-    - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
@@ -82,13 +81,13 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
+        - field_insight
+        - field_blog_thematic
         - field_industry
         - field_blog_format
-        - field_blog_thematic
         - field_solution
         - field_region
         - field_job_profile
-        - field_insight
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -175,13 +174,13 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_blog_format:
-    weight: 28
+    weight: 30
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_blog_thematic:
-    weight: 29
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -253,19 +252,19 @@ content:
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 27
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_insight:
-    weight: 33
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_job_profile:
-    weight: 32
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -332,13 +331,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 31
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 30
+    weight: 31
     settings: {  }
     third_party_settings: {  }
     type: options_select

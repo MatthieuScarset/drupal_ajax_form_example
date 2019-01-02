@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.customer_story.field_blog_thematic
     - field.field.node.customer_story.field_content
     - field.field.node.customer_story.field_content_owner
     - field.field.node.customer_story.field_country
@@ -28,9 +29,7 @@ dependencies:
     - field.field.node.customer_story.field_solution
     - field.field.node.customer_story.field_start_date
     - field.field.node.customer_story.field_subhome
-    - field.field.node.customer_story.field_thematic
     - field.field.node.customer_story.field_visual
-    - field.field.node.customer_story.field_wysiwyg_rebond
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -82,12 +81,13 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
+        - field_insight
+        - field_blog_thematic
         - field_solution
         - field_industry
         - field_region
         - field_country
         - field_job_profile
-        - field_insight
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -172,6 +172,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_blog_thematic:
+    weight: 49
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_content:
     weight: 8
     settings:
@@ -189,7 +195,7 @@ content:
     type: string_textfield
     region: content
   field_country:
-    weight: 51
+    weight: 53
     settings:
       size: 60
       placeholder: ''
@@ -240,32 +246,32 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 54
+    weight: 55
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 55
+    weight: 56
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 49
+    weight: 51
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_insight:
-    weight: 53
+    weight: 48
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_job_profile:
-    weight: 52
+    weight: 54
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -332,13 +338,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 50
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 48
+    weight: 50
     settings: {  }
     third_party_settings: {  }
     type: options_select

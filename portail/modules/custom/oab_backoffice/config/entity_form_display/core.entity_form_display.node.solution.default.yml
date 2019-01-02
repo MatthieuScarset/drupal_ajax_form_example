@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.solution.field_blog_thematic
     - field.field.node.solution.field_content
     - field.field.node.solution.field_content_owner
     - field.field.node.solution.field_display_title
@@ -74,6 +75,7 @@ third_party_settings:
     group_classify:
       children:
         - field_insight
+        - field_blog_thematic
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -141,6 +143,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_blog_thematic:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_content:
     weight: 11
     settings:
@@ -187,13 +195,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 16
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 17
+    weight: 18
     settings:
       display_label: true
     third_party_settings: {  }

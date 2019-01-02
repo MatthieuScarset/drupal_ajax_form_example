@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.press_release.field_blog_thematic
     - field.field.node.press_release.field_city
     - field.field.node.press_release.field_content
     - field.field.node.press_release.field_content_owner
@@ -139,6 +140,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_blog_thematic: true
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
