@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.press_release.field_file
     - field.field.node.press_release.field_highlight
     - field.field.node.press_release.field_industry
+    - field.field.node.press_release.field_insight
     - field.field.node.press_release.field_job_profile
     - field.field.node.press_release.field_market_segment
     - field.field.node.press_release.field_meta_description
@@ -27,9 +28,7 @@ dependencies:
     - field.field.node.press_release.field_solution
     - field.field.node.press_release.field_start_date
     - field.field.node.press_release.field_subhome
-    - field.field.node.press_release.field_thematic
     - field.field.node.press_release.field_visual
-    - field.field.node.press_release.field_wysiwyg_rebond
     - field.field.node.press_release.moderation_state_update
     - node.type.press_release
   module:
@@ -83,6 +82,7 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
+        - field_insight
         - field_solution
         - field_press_type
         - field_industry
@@ -112,13 +112,13 @@ third_party_settings:
       label: 'Content worthy period'
     group_publish:
       children:
+        - moderation_state_update
         - field_content_owner
         - field_email_owner
         - group_content_worthy_period
         - promote
         - field_metatags
         - path
-        - moderation_state_update
       parent_name: group_onglets
       weight: 24
       format_type: tab
@@ -148,7 +148,6 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
-        - field_wysiwyg_rebond
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
       weight: 22
@@ -247,7 +246,13 @@ content:
     type: string_textarea
     region: content
   field_industry:
-    weight: 51
+    weight: 52
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
+    weight: 49
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -305,7 +310,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_press_type:
-    weight: 50
+    weight: 51
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -320,13 +325,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 52
+    weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 49
+    weight: 50
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -374,7 +379,7 @@ content:
     region: content
   moderation_state_update:
     type: inline_entity_form_complex
-    weight: 41
+    weight: 11
     settings:
       override_labels: true
       label_singular: 'Moderation state update'
@@ -422,8 +427,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_job_profile: true
   field_market_segment: true
-  field_thematic: true
   sticky: true

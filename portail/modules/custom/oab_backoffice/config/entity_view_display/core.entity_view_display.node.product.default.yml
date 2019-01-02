@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.product.field_id_fiche
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
+    - field.field.node.product.field_insight
     - field.field.node.product.field_is_dvi_product
     - field.field.node.product.field_job_profile
     - field.field.node.product.field_market_segment
@@ -125,17 +126,18 @@ content:
 hidden:
   field_end_date: true
   field_highlight: true
+  field_hub: true
+  field_hub_portal: true
   field_id_fiche: true
   field_id_offre: true
   field_industry: true
+  field_insight: true
   field_is_dvi_product: true
   field_job_profile: true
   field_market_segment: true
   field_market_segment_dvi: true
   field_product: true
   field_region: true
-  field_hub: true
-  field_hub_portal: true
   field_solution: true
   field_start_date: true
   field_sub_family: true

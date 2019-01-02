@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.press_kit.field_file
     - field.field.node.press_kit.field_highlight
     - field.field.node.press_kit.field_industry
+    - field.field.node.press_kit.field_insight
     - field.field.node.press_kit.field_job_profile
     - field.field.node.press_kit.field_market_segment
     - field.field.node.press_kit.field_meta_description
@@ -21,7 +22,6 @@ dependencies:
     - field.field.node.press_kit.field_solution
     - field.field.node.press_kit.field_start_date
     - field.field.node.press_kit.field_subhome
-    - field.field.node.press_kit.field_thematic
     - field.field.node.press_kit.field_visual
     - field.field.node.press_kit.moderation_state_update
     - node.type.press_kit
@@ -99,6 +99,7 @@ hidden:
   field_display_title: true
   field_email_owner: true
   field_industry: true
+  field_insight: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -107,7 +108,6 @@ hidden:
   field_region: true
   field_solution: true
   field_subhome: true
-  field_thematic: true
   field_visual: true
   langcode: true
   moderation_state_update: true
