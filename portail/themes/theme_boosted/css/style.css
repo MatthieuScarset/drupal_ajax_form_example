@@ -2594,3 +2594,11 @@ body.page-node-type-custom-page{
 .view-subhomes-archive .view-empty {
      margin-top: 3.5rem;
 }
+
+.view-business-insight .view-content{
+    margin: 0 -30px;
+}
+
+.view-business-insight .view-content .views-row{
+    width: 325px;
+}
