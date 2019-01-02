@@ -642,17 +642,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 7px;
 }
 
-/*.solution-homepage .carousel-solution .left-zone{*/
-/*margin-right: 10px;*/
-/*}*/
-/*.solution-homepage .carousel-solution .right-zone{*/
-/*margin-left: 10px;*/
-/*}*/
-/*.solution-homepage .carousel-solution .left-zone .row,*/
-/*.solution-homepage .carousel-solution .right-zone .row{*/
-/*background-color: white;*/
-/*margin-left: 0px;*/
-/*}*/
+
 .title-solution-banner .title{
     font-size: 2.5rem;
     font-weight: bold;
@@ -2603,4 +2593,12 @@ body.page-node-type-custom-page{
 
 .view-subhomes-archive .view-empty {
      margin-top: 3.5rem;
+}
+
+.view-business-insight .view-content{
+    margin: 0 -30px;
+}
+
+.view-business-insight .view-content .views-row{
+    width: 325px;
 }
