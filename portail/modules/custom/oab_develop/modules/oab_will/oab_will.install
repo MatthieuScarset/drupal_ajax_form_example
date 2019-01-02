@@ -186,10 +186,16 @@ function oab_will_update_8026() {
     include_once("updates/update_8026.inc");
 }
 
-
 /**
  *         RUBYPORTAILOBS-3445 [SUB-PRESS] modification de views pour simplification
  */
 function oab_will_update_8027() {
     include_once("updates/update_8027.inc");
+}
+
+/**
+ *             RUBYPORTAILOBS-3430 [B-Insight] Création de la vue Business Insight
+ */
+function oab_will_update_8028() {
+    include_once("updates/update_8028.inc");
 }
