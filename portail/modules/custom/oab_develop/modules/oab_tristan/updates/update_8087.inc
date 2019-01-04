@@ -35,7 +35,12 @@ foreach ($new_terms as $base_term => $trads) {
     $term->save();
 
     foreach ( $trads as $lang => $value) {
-        $term->addTranslation($lang, array('name' => $value))->save();
+       $term_translated = Drupal\taxonomy\Entity\Term::create([
+            'vid' => $vid,
+            'name' => $value,
+            'langcode' => $lang
+        ]);
+        $term_translated->save();
     }
 
 }
