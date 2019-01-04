@@ -192,7 +192,7 @@
         paginationType: 'bullets',
       });
 
-      var vg = $(".view-business-insight .view-content").vgrid({
+      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
         easing: "easeOutQuint",
         useLoadImageEvent: true,
         time: 400,
@@ -389,6 +389,25 @@
       && !$(e.target).is('path')
       && $('#social-share').hasClass('in')) {
       $('.icon-share[data-target="#social-share"]').click();
+    }
+  });
+
+
+
+  jQuery(document).ajaxComplete(function(event, xhr, settings) {
+    // see if it is from our view
+    if (settings.data.indexOf( "view_name=business_insight") != -1) {
+        var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+            easing: "easeOutQuint",
+            useLoadImageEvent: true,
+            time: 400,
+            delay: 20,
+            fadeIn: {
+                time: 500,
+                delay: 50,
+                wait: 500
+            }
+        });
     }
   });
 

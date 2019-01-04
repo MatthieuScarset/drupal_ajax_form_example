@@ -2600,5 +2600,6 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content .views-row{
-    width: 325px;
+    width: 295px;
+    padding:20px;
 }
