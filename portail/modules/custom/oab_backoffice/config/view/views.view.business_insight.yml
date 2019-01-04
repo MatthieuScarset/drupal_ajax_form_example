@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.related_content
+    - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.thematic
   module:
     - node
@@ -137,6 +138,89 @@ display:
           expose:
             operator: ''
           group: 1
+        langcode:
+          id: langcode
+          table: node
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+        field_hub_target_id:
+          id: field_hub_target_id
+          table: node__field_hub
+          field: field_hub_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: hub
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
         field_insight_target_id:
           id: field_insight_target_id
           table: node__field_insight
@@ -144,7 +228,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: 'not empty'
+          operator: or
           value: {  }
           group: 1
           exposed: true
@@ -216,11 +300,24 @@ display:
       header: {  }
       footer: {  }
       empty: {  }
-      relationships: {  }
+      relationships:
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
+          required: true
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
       use_ajax: true
       group_by: true
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
