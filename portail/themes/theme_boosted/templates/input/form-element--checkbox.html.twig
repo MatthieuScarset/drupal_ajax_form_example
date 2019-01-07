@@ -105,9 +105,9 @@
                     {% endif %}
 
                     {% if description_display in ['after', 'invisible'] and description.content %}
-                        <p  {{ description.attributes.addClass(description_classes) }}>
+                        <span  {{ description.attributes.addClass(description_classes) }} >
                             {{ description.content }}
-                        </p>
+                        </span>
 
                     {% endif %}
                 </div>

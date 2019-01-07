@@ -25,6 +25,13 @@
     padding-left: 0;
 }
 
+.form-element.checkbox .checkbox-elements input[type="checkbox"] {
+    position: initial;
+    margin-left: 0;
+}
+.form-element.checkbox .checkbox-elements .help-block {
+    margin-top: 0;
+}
 
 .oab-synomia-search-header-block-form{
     display: inline-block;
