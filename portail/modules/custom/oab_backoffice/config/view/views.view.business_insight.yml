@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.related_content
+    - core.entity_view_mode.node.tile
     - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.thematic
   module:
@@ -77,7 +77,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: related_content
+          view_mode: tile
       fields:
         title:
           id: title
@@ -241,7 +241,7 @@ display:
             identifier: field_insight_target_id
             required: false
             remember: false
-            multiple: true
+            multiple: false
             remember_roles:
               authenticated: authenticated
               webform_manager: '0'

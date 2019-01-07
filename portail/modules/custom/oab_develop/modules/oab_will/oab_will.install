@@ -199,3 +199,10 @@ function oab_will_update_8027() {
 function oab_will_update_8028() {
     include_once("updates/update_8028.inc");
 }
+
+/**
+ *         RUBYPORTAILOBS-3433 [B-Insight] Création des templates des contenus
+ */
+function oab_will_update_8029() {
+    include_once("updates/update_8029.inc");
+}
