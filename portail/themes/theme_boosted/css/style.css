@@ -1768,11 +1768,31 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     padding-right: 0;
 }
 .webform-dl-document .webform-dl-document-form-element,
-.webform-dvi-contact-global .webform-dvi-contact-global-form-element,
-.webform-dvi-becoming-distributor .webform-dvi-becoming-distributor-form-element {
+.webform-dvi-contact-global .webform-dvi-contact-global-form-element {
     margin-top: 15px;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.webform-dvi-contact-distributor .container,
+.webform-dvi-contact-distributor .container .row,
+.webform-dvi-becoming-distributor .container,
+.webform-dvi-becoming-distributor .container .row,
+.webform-dvi-becoming-distributor .container .row .col-sm-12 {
+    margin:0;
+    padding:0;
+}
+
+.webform-dvi-becoming-distributor .webform-dvi-becoming-distributor-form-element,
+.webform-dvi-becoming-distributor .form-element.checkbox{
+    margin-top: 15px;
+    padding-left: 3rem;
+    padding-right: 0;
+}
+
+.webform-dvi-becoming-distributor > .form-type-processed-text {
+    padding-left: 3rem;
+    padding-right: 0;
 }
 
 .webform-dl-document .container:not(.webform-dl-document-form-element) {
@@ -1834,17 +1854,13 @@ html.ua-mobile-ipad .four_columns .col-md-3{
     color:#e74c3c;
 }
 
-.webform-dvi-contact-distributor .container,
-.webform-dvi-contact-distributor .container .row {
-    margin:0;
-    padding:0;
-}
-
-.webform-dvi-contact-distributor .captcha {
+.webform-dvi-contact-distributor .captcha,
+.webform-dvi-becoming-distributor .captcha {
     margin-left: 1rem;
 }
 
-.webform-dvi-contact-distributor .webform-button--submit {
+.webform-dvi-contact-distributor .webform-button--submit,
+.webform-dvi-becoming-distributor .webform-button--submit {
     margin-left: 1rem;
 }
 

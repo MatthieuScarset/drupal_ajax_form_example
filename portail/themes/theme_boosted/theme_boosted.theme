@@ -52,8 +52,6 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
 
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
 
-    $suggestions[] = 'form_element__' . $variables['element']['#type'];
-
     $current_route_match = \Drupal::getContainer()->get('current_route_match');
     $route_match = $current_route_match->getRouteName();
     if((preg_match('/^view.subhomes/', $route_match)
@@ -62,30 +60,10 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
         $suggestions[]='form_element__subhomes';
     }
     if (isset($variables['element']['#webform'])) {
-      if ( $variables['element']['#webform'] === 'telechargement_documents'
-        && $variables['element']['#type'] != "checkbox") {
-        $suggestions[] = 'form_element__telechargement_documents';
-      }
-
-      if ( $variables['element']['#webform'] === 'dvi_contact_global'
-        && $variables['element']['#type'] != "checkbox"
-        && $variables['element']['#type'] != "processed_text") {
-        $suggestions[] = 'form_element__dvi_contact_global';
-        $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
-      }
-
-
-      if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
-          && $variables['element']['#type'] != "checkbox"
-          && $variables['element']['#type'] != "processed_text") {
-          $suggestions[] = 'form_element__dvi_becoming_distributor';
-          $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
-      }
-
-      $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
-
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'];
+        $suggestions[] = 'form_element__' . $variables['element']['#type'];
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
     }
-
 
 }
 
