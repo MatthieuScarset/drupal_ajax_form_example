@@ -261,10 +261,5 @@ function subhomes_views_exposed_form(&$form) {
             $form['field_insight_type_target_id']['#options'],
             t('See all')
         );
-
-
     }
-
-
-
 }
