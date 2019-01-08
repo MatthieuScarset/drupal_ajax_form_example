@@ -187,7 +187,7 @@ function oab_will_update_8026() {
 }
 
 /**
- *             RUBYPORTAILOBS-3450 creation taxonomy inside_type
+ *         RUBYPORTAILOBS-3450 creation taxonomy insight_type
  */
 function oab_will_update_8030() {
     include_once("updates/update_8030.inc");
