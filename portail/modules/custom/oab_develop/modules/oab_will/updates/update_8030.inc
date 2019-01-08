@@ -51,7 +51,7 @@ foreach ($contentTypes as $contentType) {
     if (empty($field)) {
         $config_array = array(
             'field_name' =>  $fieldName,
-            'entity_type' => 'node',
+            'entity_type' => 'taxonomy_term',
             'bundle' => $contentType,
             'label' => $label,
             'required' => false,
