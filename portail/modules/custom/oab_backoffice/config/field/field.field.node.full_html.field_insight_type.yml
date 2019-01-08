@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_insight_type
+    - node.type.full_html
+id: node.full_html.field_insight_type
+field_name: field_insight_type
+entity_type: node
+bundle: full_html
+label: 'Insight type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings: {  }
+field_type: entity_reference

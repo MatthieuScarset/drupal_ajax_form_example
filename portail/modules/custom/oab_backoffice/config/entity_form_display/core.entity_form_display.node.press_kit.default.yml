@@ -12,6 +12,8 @@ dependencies:
     - field.field.node.press_kit.field_file
     - field.field.node.press_kit.field_highlight
     - field.field.node.press_kit.field_industry
+    - field.field.node.press_kit.field_insight
+    - field.field.node.press_kit.field_insight_type
     - field.field.node.press_kit.field_job_profile
     - field.field.node.press_kit.field_market_segment
     - field.field.node.press_kit.field_meta_description
@@ -22,7 +24,6 @@ dependencies:
     - field.field.node.press_kit.field_solution
     - field.field.node.press_kit.field_start_date
     - field.field.node.press_kit.field_subhome
-    - field.field.node.press_kit.field_thematic
     - field.field.node.press_kit.field_visual
     - field.field.node.press_kit.moderation_state_update
     - node.type.press_kit
@@ -74,6 +75,8 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
+        - field_insight
+        - field_insight_type
         - field_industry
         - field_solution
         - field_press_type
@@ -210,11 +213,23 @@ content:
     type: string_textarea
     region: content
   field_industry:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
     weight: 49
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_meta_description:
     weight: 25
     settings:
@@ -238,19 +253,19 @@ content:
     type: metatag_firehose
     region: content
   field_press_type:
-    weight: 51
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_region:
     weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_region:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_solution:
-    weight: 50
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -346,5 +361,4 @@ content:
 hidden:
   field_job_profile: true
   field_market_segment: true
-  field_thematic: true
   sticky: true

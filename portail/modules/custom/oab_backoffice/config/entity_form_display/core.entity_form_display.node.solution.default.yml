@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.solution.field_hub
     - field.field.node.solution.field_hub_portal
     - field.field.node.solution.field_insight
+    - field.field.node.solution.field_insight_type
     - field.field.node.solution.field_local_nav
     - field.field.node.solution.field_meta_description
     - field.field.node.solution.field_meta_title
@@ -74,6 +75,7 @@ third_party_settings:
     group_classify:
       children:
         - field_insight
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -187,13 +189,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 16
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 17
+    weight: 18
     settings:
       display_label: true
     third_party_settings: {  }
@@ -211,6 +213,12 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
     weight: 18
     settings: {  }
