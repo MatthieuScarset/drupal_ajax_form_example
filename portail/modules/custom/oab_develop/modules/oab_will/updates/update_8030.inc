@@ -63,3 +63,26 @@ foreach ($contentTypes as $contentType) {
 }
 
 
+$new_terms = [
+    "Blogs" => ['fr' => "Blogs"],
+    "Debates" => ['fr' => "Débats"],
+    "News" => ['fr' => "Atualités"],
+    "Customers stories" => ['fr' => "Témoignages"],
+    "Report" => ['fr' => "Dossier"]
+];
+
+foreach ($new_terms as $base_term => $trads) {
+    /** @var Drupal\taxonomy\Entity\Term $term */
+    $term = Drupal\taxonomy\Entity\Term::create([
+        'vid' => 'insight_type',
+        'name' => $base_term,
+        'langcode' => 'en'
+    ]);
+    $term->save();
+    $term = Drupal\taxonomy\Entity\Term::create([
+        'vid' => 'insight_type',
+        'name' => $trads['fr'],
+        'langcode' => 'fr'
+    ]);
+    $term->save();
+}

@@ -249,5 +249,17 @@ function subhomes_views_exposed_form(&$form) {
 
     }
 
+    if ($form['#id'] == 'views-exposed-form-business-insight') {
+        //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
 
+        $form['field_insight_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_insight_target_id']['#options'],
+            t('All thematics')
+        );
+
+        $form['field_insight_type_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_insight_type_target_id']['#options'],
+            t('See all')
+        );
+    }
 }
