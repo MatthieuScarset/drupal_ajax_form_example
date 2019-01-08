@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.tile
     - taxonomy.vocabulary.hub
+    - taxonomy.vocabulary.insight_type
     - taxonomy.vocabulary.thematic
   module:
     - node
@@ -234,7 +235,7 @@ display:
           exposed: true
           expose:
             operator_id: field_insight_target_id_op
-            label: ''
+            label: 'Vision Business for'
             description: ''
             use_operator: false
             operator: field_insight_target_id_op
@@ -280,6 +281,62 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        field_insight_type_target_id:
+          id: field_insight_type_target_id
+          table: node__field_insight_type
+          field: field_insight_type_target_id
+          relationship: reverse__node__field_insight_type
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_insight_type_target_id_op
+            label: 'Filter by'
+            description: ''
+            use_operator: false
+            operator: field_insight_type_target_id_op
+            identifier: field_insight_type_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          type: select
+          limit: true
+          vid: insight_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts:
         created:
           id: created
@@ -310,6 +367,16 @@ display:
           admin_label: 'field_insight: Taxonomy term'
           required: true
           plugin_id: standard
+        reverse__node__field_insight_type:
+          id: reverse__node__field_insight_type
+          table: taxonomy_term_field_data
+          field: reverse__node__field_insight_type
+          relationship: field_insight
+          group_type: group
+          admin_label: field_insight_type
+          required: true
+          entity_type: taxonomy_term
+          plugin_id: entity_reverse
       arguments: {  }
       display_extenders: {  }
       use_ajax: true
