@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.blog_post.field_hub_portal
     - field.field.node.blog_post.field_industry
     - field.field.node.blog_post.field_insight
+    - field.field.node.blog_post.field_insight_type
     - field.field.node.blog_post.field_job_profile
     - field.field.node.blog_post.field_market_segment
     - field.field.node.blog_post.field_meta_description
@@ -30,9 +31,7 @@ dependencies:
     - field.field.node.blog_post.field_solution
     - field.field.node.blog_post.field_start_date
     - field.field.node.blog_post.field_subhome
-    - field.field.node.blog_post.field_thematic
     - field.field.node.blog_post.field_visual
-    - field.field.node.blog_post.field_wysiwyg_rebond
     - field.field.node.blog_post.moderation_state_update
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post
@@ -92,6 +91,7 @@ third_party_settings:
         - field_blog_thematic
         - field_blog_format
         - field_insight
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -253,13 +253,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 33
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 34
+    weight: 35
     settings:
       display_label: true
     third_party_settings: {  }
@@ -271,12 +271,27 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_inside_type:
+    weight: 51
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_insight:
     weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
     weight: 29
     settings: {  }
