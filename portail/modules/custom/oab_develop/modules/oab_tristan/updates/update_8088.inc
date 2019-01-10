@@ -126,41 +126,27 @@ function processUpdateWithSandbox_8088(&$sandbox) {
         $terms_to_set = [];
 
 
-        if ($node->bundle() != 'document') {
-            $field_blog_thematic = $node->get('field_blog_thematic')->getValue();
+        $field_name = ($node->bundle() == 'document') ? 'field_document_thematic' : 'field_blog_thematic' ;
 
-            foreach ($field_blog_thematic as $value) {
-                $term_blog_thematic = Term::load($value['target_id']);
+        $field_value = $node->get($field_name)->getValue();
 
-                $term_name = $term_blog_thematic->getName();
-                if($term_name == 'Cloud Computing') {
-                    $term_name = 'Cloud';
-                }
+        foreach ($field_value as $value) {
+            $term_thematic = Term::load($value['target_id']);
 
-                $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term_name, 'vid' => $insight_vid]);
-                $term = reset($terms);
+            $term_name = $term_thematic->getName();
 
-                if ($term !== null && $term !== false) {
-                    $terms_to_set[] = $term;
-                }
+            // Cloud est appelé Cloud Computing dans le voca blog thematic
+            if($term_name == 'Cloud Computing') {
+                $term_name = 'Cloud';
             }
-        } else {
-            $field_doc_thematic = $node->get('field_document_thematic')->getValue();
 
-            foreach ($field_doc_thematic as $value) {
-                $term_doc_thematic = Term::load($value['target_id']);
+            $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term_name, 'vid' => $insight_vid]);
+            $new_term = reset($terms);
 
-                $term_name = $term_doc_thematic->getName();
-
-                $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term_name, 'vid' => $insight_vid]);
-                $term = reset($terms);
-
-                if ($term !== null && $term !== false) {
-                    $terms_to_set[] = $term;
-                }
+            if ($new_term !== null && $new_term !== false) {
+                $terms_to_set[] = $new_term;
             }
         }
-
 
 
         if ($node->hasField('field_insight')) {
