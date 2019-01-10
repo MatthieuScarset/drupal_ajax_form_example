@@ -333,13 +333,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 54
+    weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 51
+    weight: 50
     settings: {  }
     third_party_settings: {  }
     type: options_select

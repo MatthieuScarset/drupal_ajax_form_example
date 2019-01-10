@@ -30,6 +30,7 @@ dependencies:
     - field.field.node.simple_page.field_solution
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
+    - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
