@@ -668,7 +668,8 @@ function oab_tristan_update_8087() {
 /**
  * Mise à jour de la taxo Thématique
  */
-function oab_tristan_update_8088() {
+function oab_tristan_update_8088(&$sandbox) {
     include_once('updates/update_8088.inc');
+    processUpdateWithSandbox_8088($sandbox);
 }
 
