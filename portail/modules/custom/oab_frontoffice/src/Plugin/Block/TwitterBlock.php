@@ -230,7 +230,8 @@ class TwitterBlock extends BlockBase {
 
             \Drupal::logger('twitter_api')->error($errors_message);
         } elseif ( !is_array($json_ret)) {
-            $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | " . $result;
+            $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | " . $result . ' | ' . json_encode
+                (curl_getinfo($ch));
             \Drupal::logger('twitter_api')->error($error_message);
         }
 
