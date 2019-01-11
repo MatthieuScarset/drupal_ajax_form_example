@@ -26,7 +26,7 @@ class TwitterBlock extends BlockBase {
     const NB_TWEET      = 'nb_tweet';
     const TAILLE_TWEET  = 'taille_tweet';
 
-    const CACHE_BIN                 = 'default';
+    const CACHE_BIN                 = 'twitter_api';
     const CACHE_BEARER_CID          = 'twitter_oauth_bearer';
     const CACHE_OEMBED_TWEET_CID    = 'twitter_oembed_tweet';
     const LOGGER_CHANNEL            = 'twitter_api';
@@ -214,7 +214,9 @@ class TwitterBlock extends BlockBase {
     private function getBearer() {
         $ret = null;
 
-        $cachedData = \Drupal::cache()->get(self::CACHE_BEARER_CID);
+        $cid = self::CACHE_BEARER_CID . '_' . $this->getConf(self::API_KEY);
+
+        $cachedData = \Drupal::cache()->get($cid);
         if ($cachedData !== false && isset($cachedData->data)) {
             $ret = $cachedData->data;
         } else {
@@ -223,7 +225,7 @@ class TwitterBlock extends BlockBase {
             $expiration = new \DateTime();
             $expiration->add(new \DateInterval("PT12H"));
 
-            \Drupal::cache(self::CACHE_BIN)->set(self::CACHE_BEARER_CID, $bearer, $expiration->getTimestamp());
+            \Drupal::cache(self::CACHE_BIN)->set($cid, $bearer, $expiration->getTimestamp());
 
             $ret = $bearer;
         }
