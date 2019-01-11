@@ -2643,3 +2643,14 @@ body.page-node-type-custom-page{
     width: 295px;
     padding:20px;
 }
+
+#twitter-block-carousel .carousel-indicators li {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 100%;
+}
+
+#twitter-block-carousel .carousel-indicators li.active,
+#twitter-block-carousel .carousel-indicators li:hover {
+    background-color: #2b7bb9;
+}
