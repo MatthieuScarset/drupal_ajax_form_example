@@ -26,8 +26,10 @@ class TwitterBlock extends BlockBase {
     const NB_TWEET      = 'nb_tweet';
     const TAILLE_TWEET  = 'taille_tweet';
 
-    const CACHE_BIN         = 'default';
-    const CACHE_BEARER_CID  = 'twitter_oauth_bearer';
+    const CACHE_BIN                 = 'default';
+    const CACHE_BEARER_CID          = 'twitter_oauth_bearer';
+    const CACHE_OEMBED_TWEET_CID    = 'twitter_oembed_tweet';
+    const LOGGER_CHANNEL            = 'twitter_api';
 
     private $url_oauth      = 'https://api.twitter.com/oauth2/token';
     private $url_timeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
@@ -37,8 +39,7 @@ class TwitterBlock extends BlockBase {
 
         $timeline = $this->getTimeline();
         $tweets = $this->getEmbededTweets($timeline);
-        return array("tweets" => $tweets);
-        //return array('tweets' => $tweets);
+        return (count($tweets) > 0) ? array("tweets" => $tweets) : array();
     }
 
     /**
@@ -107,7 +108,6 @@ class TwitterBlock extends BlockBase {
 
     private function getEmbededTweets($tweets) {
         $ret = array();
-
         foreach ($tweets as $tweet) {
             if (isset($tweet['id'])) {
                 $ret[] = $this->getEmbededTweet($tweet['id']);
@@ -118,6 +118,27 @@ class TwitterBlock extends BlockBase {
     }
 
     private function getEmbededTweet($tweet_id) {
+        $cache_name = self::CACHE_OEMBED_TWEET_CID . '_' . $tweet_id;
+        $cache = \Drupal::cache(self::CACHE_BIN)->get($cache_name);
+
+        $ret = null;
+        if ($cache !== false && isset($cachedData->data)) {
+            $ret = $cache->data;
+        } else {
+            $tweet = $this->requestForEmbededTweet($tweet_id);
+
+            $expiration = new \DateTime();
+            $expiration->add(new \DateInterval("PT12H"));
+
+            \Drupal::cache(self::CACHE_BIN)->set($cache_name, $tweet, $expiration->getTimestamp());
+
+            $ret = $tweet;
+        }
+
+        return $ret;
+    }
+
+    private function requestForEmbededTweet($tweet_id) {
         $data = [
             'url' => $this->generateTweetUrl($tweet_id),
             'hide_thread' => true,
@@ -142,29 +163,52 @@ class TwitterBlock extends BlockBase {
         return 'https://twitter.com/' . $this->getConf(self::USER_PROFILE) . '/status/' . $tweet_id;
     }
 
-    private function getTimeline() {
-        $nb_tweet = $this->getConf(self::NB_TWEET);
+    private function getTimeline($nbTweetRequested = null) {
+        $nb_tweet_wanted = $this->getConf(self::NB_TWEET);
+
+        if ($nbTweetRequested === null) {
+            $nbTweetRequested = $nb_tweet_wanted;
+        }
 
         $data = [
             'screen_name'       => $this->getConf(self::USER_PROFILE),
-            'count'             => (int) $nb_tweet + ($nb_tweet > 20 ? $nb_tweet * 25 / 100 : 5),
+            // J'augmente le count pour éviter de faire trop de requetes
+            'count'             => (int) $nbTweetRequested + ($nbTweetRequested > 20 ? $nbTweetRequested * 25 / 100 : 5),
             'trim_user'         => false,
             'include_rts'       => false,
             'exclude_replies'   => true
         ];
 
-        $headers = [
-            'Authorization: Bearer ' . $this->getBearer(),
-            'Content-Type: application/x-www-form-urlencoded'
-        ];
+        $ret = null;
+        if (null !== ($bearer = $this->getBearer())) {
+            $headers = [
+                'Authorization: Bearer ' . $bearer,
+                'Content-Type: application/x-www-form-urlencoded'
+            ];
 
-        $url = $this->url_timeline . "?" . http_build_query($data);
-        $ch = $this->getCurl($url);
+            $url = $this->url_timeline . "?" . http_build_query($data);
+            $ch = $this->getCurl($url);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-        $json_ret = $this->execCurl($ch);
-        return array_slice($json_ret, 0, $nb_tweet);
+            $json_ret = $this->execCurl($ch);
+
+            // On check toujours par rapport au nombre de tweets voulu dans la conf
+            // et pas au nb tweet passé en param
+            // Twitter ne renvoie pas les Retweets, parce que demandé, mais les comptes quand mêmes dans son nb tweets
+            // donc on recoie moins de tweet que demandé
+            if (count($json_ret) < $nb_tweet_wanted) {
+                $json_ret = $this->getTimeline($nbTweetRequested + 5);
+            }
+
+            // On retourne le nombre de tweets voulu, et non celui requeté
+            $ret = array_slice($json_ret, 0, $nb_tweet_wanted);
+
+        } else {
+            \Drupal::logger(self::LOGGER_CHANNEL)->error('Bearer null, Authentification à l\'API Twitter impossible.');
+        }
+
+        return $ret;
     }
 
     private function getBearer() {
@@ -185,7 +229,6 @@ class TwitterBlock extends BlockBase {
         }
 
         return $ret;
-
     }
 
     private function requestForBearer() {
@@ -228,12 +271,12 @@ class TwitterBlock extends BlockBase {
                 $errors_message .= $key . ' : ' . $error['code'] . " => " . $error['message'] . ' | ';
             }
 
-            \Drupal::logger('twitter_api')->error($errors_message);
+            \Drupal::logger(self::LOGGER_CHANNEL)->error($errors_message);
         } elseif ( !is_array($json_ret) || curl_errno($ch) > 0 ) {
             $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | "
                     . curl_errno($ch) . ' => ' . curl_error($ch) .  ' | '
                     . $result . ' | ' . json_encode(curl_getinfo($ch));
-            \Drupal::logger('twitter_api')->error($error_message);
+            \Drupal::logger(self::LOGGER_CHANNEL)->error($error_message);
         }
 
         return $json_ret;
