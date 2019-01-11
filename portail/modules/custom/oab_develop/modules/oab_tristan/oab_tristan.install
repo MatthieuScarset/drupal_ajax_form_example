@@ -657,3 +657,11 @@ function oab_tristan_update_8085() {
 function oab_tristan_update_8086() {
     oabt_YmlImport('views.view.document_list.yml');
 }
+
+/**
+ * Ajout du block twitter
+ */
+function oab_tristan_update_8089() {
+    oabt_YmlImport('block.block.twitterblock.yml');
+}
+
