@@ -179,7 +179,7 @@ class TwitterBlock extends BlockBase {
             'exclude_replies'   => true
         ];
 
-        $ret = null;
+        $ret = array();
         if (null !== ($bearer = $this->getBearer())) {
             $headers = [
                 'Authorization: Bearer ' . $bearer,
@@ -245,6 +245,7 @@ class TwitterBlock extends BlockBase {
 
         $json_ret = $this->execCurl($ch);
 
+        $ret = null;
         if (is_array($json_ret) && isset($json_ret['access_token'])) {
             $ret = $json_ret['access_token'];
         }
@@ -288,7 +289,7 @@ class TwitterBlock extends BlockBase {
 
         $config_factory = \Drupal::configFactory();
         $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
-        if (!empty($config) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
+        if (!empty($config_proxy) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
             $proxy_server = $config_proxy->get('proxy_server').':'.$config_proxy->get('proxy_port');
         } else {
             $proxy_server = NULL;
