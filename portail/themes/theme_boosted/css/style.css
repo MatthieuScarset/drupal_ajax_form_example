@@ -2635,15 +2635,6 @@ body.page-node-type-custom-page{
      margin-top: 3.5rem;
 }
 
-.view-business-insight .view-content{
-    margin: 0 -30px;
-}
-
-.view-business-insight .view-content .views-row{
-    width: 295px;
-    padding:20px;
-}
-
 #twitter-block-carousel .carousel-indicators li {
     width: 1.4rem;
     height: 1.4rem;
@@ -2653,4 +2644,29 @@ body.page-node-type-custom-page{
 #twitter-block-carousel .carousel-indicators li.active,
 #twitter-block-carousel .carousel-indicators li:hover {
     background-color: #2b7bb9;
+}
+
+
+.path-business-insight .main-container{
+    width:100%;
+    max-width:100%;
+    padding: 0;
+}
+
+.view-business-insight .view-content{
+    margin: 0 -30px;
+}
+
+.view-business-insight .view-content .views-row{
+    width: 316px;
+    padding:20px;
+}
+
+.view-business-insight .view-content .views-row .encart-image{
+    text-align: center;
+}
+
+.view-business-insight .view-content .views-row img{
+    max-width: 100%;
+    max-height: 316px;
 }
