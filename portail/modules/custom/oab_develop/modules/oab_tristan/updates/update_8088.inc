@@ -3,6 +3,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\oab_akamai\Form\OabAkamaiForm;
 
 /**
  * @param $sandbox : XXXXX
@@ -13,6 +14,8 @@ use Drupal\taxonomy\Entity\Term;
  * Commentaire de fonction a ajouter par Tristan
  */
 function processUpdateWithSandbox_8088(&$sandbox) {
+
+    $nodes_type = ['blog_post', 'full_html', 'page_simple', 'document', 'magazine'];
 
     // Lors du premier passage du batch, initialisation des variables + création du field et MAJ des termes
     $insight_vid = "thematic";
@@ -84,13 +87,18 @@ function processUpdateWithSandbox_8088(&$sandbox) {
             }
         }
 
+        // Rechargement de la vue subhome pour remplacer tous les filtres "Thematic" par un filtre qui pointe
+        // sur le nouveau field
+        oabt_YmlImport('views.view.subhomes.yml');
+
         // Pour Blog, Page Full HTML et Page Simple, je transfère les données du field field_blog_thematic au field
         $query = \Drupal::entityQuery('node')
-            ->condition('type', ['blog_post', 'full_html', 'page_simple', 'document'], 'IN');
+            ->condition('type', $nodes_type, 'IN');
         $query->condition(
             $query->orConditionGroup()
                 ->exists('field_blog_thematic')
                 ->exists('field_document_thematic')
+                ->exists('field_magazine_thematic')
         );
         $nids = $query->execute();
 
@@ -98,82 +106,97 @@ function processUpdateWithSandbox_8088(&$sandbox) {
         $sandbox['current'] = 0;
         $sandbox['last_nid'] = 0;
         \Drupal::messenger()->addStatus($sandbox['total'] . ' nodes to process.');
-    }
 
-    $nodes_per_batch = 100;
+    } else {
 
-    // Pour Blog, Page Full HTML et Page Simple, je transfère les données du field field_blog_thematic au field
-    $query = \Drupal::entityQuery('node')
-        ->condition('type', ['blog_post', 'full_html', 'page_simple', 'document'], 'IN');
-    $query->condition($query->orConditionGroup()
-        ->exists('field_blog_thematic')
-        ->exists('field_document_thematic'));
-    $query->range(0, $nodes_per_batch);
-    $query->sort('nid', 'ASC');
-    $query->condition('nid', isset($sandbox['last_nid']) ? $sandbox['last_nid'] : 0, '>');
+        $nodes_per_batch = 100;
 
-    $ids = $query->execute();
-    $nodes = Node::loadMultiple($ids);
-    $count = 0;
+        // Pour Blog, Page Full HTML et Page Simple, je transfère les données du field field_blog_thematic au field
+        $query = \Drupal::entityQuery('node')->condition('type', $nodes_type, 'IN');
+        $query->condition(
+            $query->orConditionGroup()
+                ->exists('field_blog_thematic')
+                ->exists('field_document_thematic')
+                ->exists('field_magazine_thematic')
+        );
+        $query->range(0, $nodes_per_batch);
+        $query->sort('nid', 'ASC');
+        $query->condition('nid', isset($sandbox['last_nid']) ? $sandbox['last_nid'] : 0, '>');
 
-    $toUpdate = [];
+        $ids = $query->execute();
+        $nodes = Node::loadMultiple($ids);
+        $count = 0;
 
-    /** @var Node $node */
-    foreach ($nodes as $node) {
+        $toUpdate = [];
 
-        //$node = Node::load($id);
+        /** @var Node $node */
+        foreach ($nodes as $node) {
 
-        $terms_to_set = [];
+            //$node = Node::load($id);
+
+            $terms_to_set = [];
 
 
-        $field_name = ($node->bundle() == 'document') ? 'field_document_thematic' : 'field_blog_thematic' ;
-
-        $field_value = $node->get($field_name)->getValue();
-
-        foreach ($field_value as $value) {
-            $term_thematic = Term::load($value['target_id']);
-
-            $term_name = $term_thematic->getName();
-
-            // Cloud est appelé Cloud Computing dans le voca blog thematic
-            if($term_name == 'Cloud Computing') {
-                $term_name = 'Cloud';
+            $field_name = "";
+            switch ($node->bundle()) {
+                case 'document':
+                    $field_name = 'field_document_thematic';
+                    break;
+                case 'magazine':
+                    $field_name = 'field_magazine_thematic';
+                    break;
+                default:
+                    $field_name = 'field_blog_thematic';
+                    break;
             }
 
-            $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term_name, 'vid' => $insight_vid]);
-            $new_term = reset($terms);
+            $field_value = $node->get($field_name)->getValue();
 
-            if ($new_term !== null && $new_term !== false) {
-                $terms_to_set[] = $new_term;
+            foreach ($field_value as $value) {
+                $term_thematic = Term::load($value['target_id']);
+
+                $term_name = $term_thematic->getName();
+
+                // Cloud est appelé Cloud Computing dans le voca blog thematic
+                if ($term_name == 'Cloud Computing') {
+                    $term_name = 'Cloud';
+                }
+
+                $terms = \Drupal::entityTypeManager()
+                    ->getStorage('taxonomy_term')
+                    ->loadByProperties(['name' => $term_name, 'vid' => $insight_vid]);
+                $new_term = reset($terms);
+
+                if ($new_term !== null && $new_term !== false) {
+                    $terms_to_set[] = $new_term;
+                }
             }
+
+
+            if ($node->hasField('field_insight')) {
+                /* Pour garder la date de MAJ initiale ;) */
+                $toUpdate[] = ['nid' => $node->id(), 'changed' => $node->getChangedTime()];
+
+                $node->set('field_insight', $terms_to_set);
+                $node->save();
+
+                $count++;
+            }
+            $sandbox['current']++;
+            $sandbox['last_nid'] = $node->id();
+
         }
 
-
-        if ($node->hasField('field_insight')) {
-            /* Pour garder la date de MAJ initiale ;) */
-            $toUpdate[] = ['nid' => $node->id(), 'changed' => $node->getChangedTime()];
-
-            $node->set('field_insight', $terms_to_set);
-            $node->save();
-
-            $count++;
+        // A la fin, j'update les dates de MAJ des contenus pour garder l'initiale (pour eviter que l'ordre dans les subhomes soient modifiés
+        // et que ca remonte d'anciens contenus)
+        foreach ($toUpdate as $row) {
+            $connection = \Drupal::database();
+            $connection->update('node_field_data')
+                ->fields(['changed' => $row['changed']])
+                ->condition('nid', $row['nid'])->execute();
         }
-        $sandbox['current']++;
-        $sandbox['last_nid'] = $node->id();
 
     }
-
-    // A la fin, j'update les dates de MAJ des contenus pour garder l'initiale (pour eviter que l'ordre dans les subhomes soient modifiés
-    // et que ca remonte d'anciens contenus)
-    foreach ($toUpdate as $row) {
-        $connection = \Drupal::database();
-        $connection->update('node_field_data')
-            ->fields(['changed' => $row['changed']])
-            ->condition('nid', $row['nid'])
-            ->execute();
-    }
-
-
     if ($sandbox['total'] == 0) {
         $sandbox['#finished'] = 1;
     } else {
