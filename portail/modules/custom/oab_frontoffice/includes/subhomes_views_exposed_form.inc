@@ -6,7 +6,6 @@
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-
     if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
         foreach ($form AS $key => $value) {
             if (isset($value['#type'])
@@ -51,6 +50,14 @@ function subhomes_views_exposed_form(&$form) {
         if (!$has_filters) {
             $form['actions']['submit']['#attributes']['class'][] = 'hidden';
         }
+    }
+
+    // Pour tous les contenus avec le filtre thématic/ field_insight
+    if (isset($form['field_insight'])) {
+        $form['field_insight']['#options'] = clean_exposed_filters_by_language(
+            $form['field_insight']['#options'],
+            'Thematic'
+        );;
     }
 
     // subhome blogs
