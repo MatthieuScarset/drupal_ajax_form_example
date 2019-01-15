@@ -2604,3 +2604,18 @@ body.page-node-type-custom-page{
 .view-subhomes-archive .view-empty {
      margin-top: 3.5rem;
 }
+
+.path-business-insight .main-container{
+    width:100%;
+    max-width:100%;
+    padding: 0;
+}
+
+.view-business-insight .view-content{
+    margin: 0 -30px;
+}
+
+.view-business-insight .view-content .views-row{
+    width: 295px;
+    padding:20px;
+}

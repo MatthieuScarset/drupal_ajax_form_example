@@ -145,60 +145,69 @@
   }
 
 
-    $(document).ready(function () {
-        image_resize_width();
-        obs_template_height();
-        //resizeIframeAuto('iframePardot');
+  $(document).ready(function () {
+    image_resize_width();
+    obs_template_height();
+    //resizeIframeAuto('iframePardot');
 
     $( ".close-env-info" ).click(function(){
-        if ($('.env-info').is(":visible")){
-            $('.environnement-info').hide();
-        }
+      if ($('.env-info').is(":visible")){
+        $('.environnement-info').hide();
+      }
     });
 
-
-      //initialize swiper when document ready
-      var mySwiperHomepage = new Swiper ('.swiper-container', {
-          // Optional parameters
-          direction: 'horizontal',
-          loop: true,
-          pagination : '.swiper-pagination',
-          paginationType: 'bullets',
-          // Responsive breakpoints
-          breakpoints: {
-              // when window width is <= 320px
-              320: {
-                  slidesPerView: 1,
-                  spaceBetween: 10
-              },
-              // when window width is <= 480px
-              480: {
-                  slidesPerView: 1,
-                  spaceBetween: 20
-              },
-              // when window width is <= 640px
-              768: {
-                  slidesPerView: 3,
-                  spaceBetween: 30
-              }
+    //initialize swiper when document ready
+    var mySwiperHomepage = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+        loop: true,
+        pagination : '.swiper-pagination',
+        paginationType: 'bullets',
+        // Responsive breakpoints
+        breakpoints: {
+          // when window width is <= 320px
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          // when window width is <= 480px
+          480: {
+              slidesPerView: 1,
+              spaceBetween: 20
+          },
+          // when window width is <= 640px
+          768: {
+              slidesPerView: 3,
+              spaceBetween: 30
           }
-
+        }
       });
 
       //initialize swiper when document ready
       var mySwiperThematic = new Swiper ('.swiper-container-columns', {
-          // Optional parameters
-          direction: 'horizontal',
-          loop: true,
-          pagination : '.swiper-pagination',
-          paginationType: 'bullets',
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+        pagination : '.swiper-pagination',
+        paginationType: 'bullets',
       });
 
+      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+        easing: "easeOutQuint",
+        useLoadImageEvent: true,
+        time: 400,
+        delay: 20,
+        fadeIn: {
+          time: 500,
+          delay: 50,
+          wait: 500
+        }
+      });
   });
 
-
-  $(window).on('load', function(){
+  $(window).on('load', function(e){
     manageSmallImageInTemplates();
+    vg.vgrefresh();
   });
 
 
@@ -382,6 +391,26 @@
       $('.icon-share[data-target="#social-share"]').click();
     }
   });
+
+
+
+  jQuery(document).ajaxComplete(function(event, xhr, settings) {
+    // see if it is from our view
+    if (settings.data.indexOf( "view_name=business_insight") != -1) {
+        var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+            easing: "easeOutQuint",
+            useLoadImageEvent: true,
+            time: 400,
+            delay: 20,
+            fadeIn: {
+                time: 500,
+                delay: 50,
+                wait: 500
+            }
+        });
+    }
+  });
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
