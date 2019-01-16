@@ -35,12 +35,21 @@ function theme_boosted_preprocess_html(&$variables) {
         $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
     }
 }
+
+function theme_boosted_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    if (isset($variables['view'])) {
+        $view = $variables['view'];
+        $suggestions[] = $hook . '__' . $view->id();
+        $suggestions[] = $hook . '__' . $view->id() . '__' . $view->current_display;
+    }
+}
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $variables) {
     $suggestions[] = 'form__' . $variables['element']['#form_id'];
-  return $suggestions;
+    return $suggestions;
 }
 
 /**
@@ -50,6 +59,67 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
 function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
 
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if(preg_match('/^view.subhomes_archive/', $route_match)) {
+        $suggestions[] = 'views_view_grid__subhomes_archive';
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+    /** @var Drupal\views\ViewExecutable $view */
+    $view = $variables['view'];
+
+    if($view->id() ===  'subhomes_archive') {
+        $suggestions[] = 'views_view_fields__' . $view->id() . '__' . $view->current_display;
+    }
+
+}
+
+function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array $variables){
+
+}
+
+function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+    /**
+     * Homepage Eclairage View Grid Twig Template Suggestions
+     */
+    // Firstly check it's a view
+    if($hook === 'views_view') {
+        // Check if it's the 'home_eclairage_playlist' view
+        if($variables['view']->id() === 'home_eclairage_playlist') {
+            if($hook === 'views_view_grid') {
+
+                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+            }
+        }
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $content_type = $node->bundle();
+        if($content_type == 'custom_page') {
+            $suggestions[] = 'page__' . $content_type;
+        }
+    }
+}
+
 
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
     $current_route_match = \Drupal::getContainer()->get('current_route_match');
@@ -82,37 +152,6 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
           $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
       }
   }
-
-}
-
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
-    $current_route_match = \Drupal::getContainer()->get('current_route_match');
-    $route_match = $current_route_match->getRouteName();
-
-    if(preg_match('/^view.subhomes_archive/', $route_match)) {
-        $suggestions[] = 'views_view_grid__subhomes_archive';
-    }
-
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
-    /** @var Drupal\views\ViewExecutable $view */
-    $view = $variables['view'];
-
-    if($view->id() ===  'subhomes_archive') {
-        $suggestions[] = 'views_view_fields__' . $view->id() . '__' . $view->current_display;
-    }
-
-}
-
-function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array $variables){
 
 }
 
@@ -540,35 +579,3 @@ function get_image_uri($entity, $fieldName){
     }
   return $image_uri;
 }
-
-
-function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
-
-    /**
-     * Homepage Eclairage View Grid Twig Template Suggestions
-     */
-    // Firstly check it's a view
-    if($hook === 'views_view') {
-        // Check if it's the 'home_eclairage_playlist' view
-        if($variables['view']->id() === 'home_eclairage_playlist') {
-            if($hook === 'views_view_grid') {
-
-                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
-            }
-        }
-    }
-
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-	if ($node = \Drupal::routeMatch()->getParameter('node')) {
-		$content_type = $node->bundle();
-		if($content_type == 'custom_page') {
-			$suggestions[] = 'page__' . $content_type;
-		}
-	}
-}
-
