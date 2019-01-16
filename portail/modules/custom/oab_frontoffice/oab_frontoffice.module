@@ -60,6 +60,9 @@ function oab_frontoffice_theme_suggestions_alter(array &$suggestions, array $var
         }
 
     }
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
 }
 
 
@@ -390,8 +393,12 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         $form['field_insight_type_target_id']['#options'] = clean_exposed_filters_by_language(
             $form['field_insight_type_target_id']['#options'],'See all'
         );
-    }
 
+        if (isset($form['field_insight_type_target_id']['#type'])
+            && $form['field_insight_type_target_id']['#type'] == "select") {
+            $form['field_insight_type_target_id']['#type'] = "radios";
+        }
+    }
 
 }
 

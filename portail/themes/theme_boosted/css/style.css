@@ -2670,3 +2670,28 @@ body.page-node-type-custom-page{
     max-width: 100%;
     max-height: 316px;
 }
+
+.fieldset-field-insight-type .fieldset-legend {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.fieldset-field-insight-type .fieldset-wrapper {
+    display: inline-block;
+}
+
+.fieldset-field-insight-type .btn {
+    margin-right: 0;
+    margin-left: 1.5rem;
+    font-weight: bold;
+}
+
+.fieldset-field-insight-type .btn,
+.fieldset-field-insight-type .btn.btn-primary {
+    padding: .3rem 1.8rem .5rem 1.8rem
+}
+
+.fieldset-field-insight-type .btn.btn-primary {
+    border-color: #f16e00;
+}
