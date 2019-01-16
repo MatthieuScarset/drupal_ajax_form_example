@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
     - field.field.node.product.field_insight
+    - field.field.node.product.field_insight_type
     - field.field.node.product.field_is_dvi_product
     - field.field.node.product.field_job_profile
     - field.field.node.product.field_market_segment
@@ -43,16 +44,33 @@ targetEntityType: node
 bundle: product
 mode: tile
 content:
-  field_visual:
+  field_insight:
+    type: entity_reference_label
     weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_insight_type:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_visual:
+    weight: 0
     label: hidden
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   links:
-    weight: 0
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -69,7 +87,6 @@ hidden:
   field_id_fiche: true
   field_id_offre: true
   field_industry: true
-  field_insight: true
   field_is_dvi_product: true
   field_job_profile: true
   field_market_segment: true
