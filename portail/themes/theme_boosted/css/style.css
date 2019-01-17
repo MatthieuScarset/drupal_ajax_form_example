@@ -2702,10 +2702,20 @@ body.page-node-type-custom-page{
     font-weight: normal;
 }
 
+.business-insight-field-insight select option {
+    color: initial;
+    font-size: initial;
+    margin: 0;
+    padding: 0;
+}
+
 .business-insight-field-insight label {
     margin-right: 1rem;
 }
 
+.business-insight-field-insight select.form-control::-ms-expand {
+    display: none;
+}
 
 .business-insight-field-insight select.form-control {
     vertical-align: top;
@@ -2715,6 +2725,43 @@ body.page-node-type-custom-page{
     border-bottom: 2px solid grey;
     background-color: transparent;
     padding: 0;
-    margin-top: 5px;
+    padding-right: 60px;
+    margin-top: 0;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+
+    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
+    background-image:
+            linear-gradient(45deg, transparent 50%, #f16e00 50%),
+            linear-gradient(135deg, #f16e00 50%, transparent 50%),
+            linear-gradient(to right, transparent, transparent);
+    background-position:
+            calc(100% - 30px) .55em,
+            calc(100% - 10px) .55em,
+            calc(100% - .5em) 0.5em;
+    background-size:
+            20px 20px,
+            20px 20px,
+            1px 1.5em;
+    background-repeat: no-repeat;
 
 }
+
+.business-insight-field-insight select.form-control:focus {
+    background-image:
+            linear-gradient(45deg, transparent 50%, #f16e00 50%),
+            linear-gradient(135deg, #f16e00 50%, transparent 50%),
+            linear-gradient(to right, transparent, transparent);
+    background-position:
+            calc(100% - 30px) .55em,
+            calc(100% - 10px) .55em,
+            calc(100% - .5em) 0.5em;
+    background-size:
+            20px 20px,
+            20px 20px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+    outline: 0;
+}
+
+
