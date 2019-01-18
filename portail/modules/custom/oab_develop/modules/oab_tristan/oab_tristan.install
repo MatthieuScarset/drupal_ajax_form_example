@@ -673,11 +673,11 @@ function oab_tristan_update_8088(&$sandbox) {
     processUpdateWithSandbox_8088($sandbox);
 }
 
+
 /**
  * Ajout du block twitter
  */
 function oab_tristan_update_8089() {
     oabt_YmlImport('block.block.twitterblock.yml');
-
 }
 
