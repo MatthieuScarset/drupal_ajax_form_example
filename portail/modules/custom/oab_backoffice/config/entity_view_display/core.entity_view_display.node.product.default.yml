@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_blog_thematic
     - field.field.node.product.field_content
     - field.field.node.product.field_content_owner
     - field.field.node.product.field_email_owner
@@ -124,6 +125,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_blog_thematic: true
   field_end_date: true
   field_highlight: true
   field_hub: true

@@ -1,0 +1,24 @@
+uuid: 085e37ed-e9c2-459e-b7de-3c713e5c808f
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: twitterblock
+theme: theme_boosted
+region: sidebar
+weight: 0
+provider: null
+plugin: twitter_block
+settings:
+  id: twitter_block
+  label: 'Twitter Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  api_key: oXg023ZTcmZEgTWIZznLA
+  api_secret: edel3bkuGUzkwsdc4IsAg4Ujt3dVlc5paEkKm8gXA
+  user_profile: orangebusiness
+  nb_tweet: '5'
+visibility: {  }

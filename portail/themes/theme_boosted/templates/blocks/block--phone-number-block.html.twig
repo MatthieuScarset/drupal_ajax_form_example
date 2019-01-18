@@ -47,18 +47,22 @@
 #}
 
 
-<span class="phone_number_block_title">{{ content.block_title }}</span>
-<section{{ attributes.addClass('block', 'clearfix', 'phonenumber') }}>
-        {% block content %}
-            {% if content is not null %}
-                   <div class="numero" style="color: black; font-weight: bold; font-size: 2.8rem; padding: 0.3rem 0.5rem 0.5rem;"><a href="tel:{{ content }}">{{ content }}</a></div>
-                    <div class="text text-align-left" style="display: inline-block;color: white; background-color: black; font-size: 1.2rem; padding: 0.7rem 1rem 0.7rem 2rem; position: relative; float: right; margin-right: 1rem;">
-                        <span class="glyphicon glyphicon-play" style="color: white; display: inline-block; position: absolute; left: -1rem; top: 1rem; font-size: 3rem;"></span>
-                        Service & appel <br/> gratuits
-                    </div>
-        {% endif %}
 
-        {% endblock %}
+<section{{ attributes.addClass('block', 'clearfix', 'phonenumber') }}>
+    <span class="phone_number_block_title">{{ content.block_title }}</span>
+    {% block content %}
+        {% if content is not null %}
+            <div class="block-content">
+                <div class="numero" style=""><a href="tel:{{ content }}">{{ content }}</a></div>
+                <div class="text text-align-left" style="">
+                    <span class="glyphicon glyphicon-play" style=""></span>
+                    Service & appel <br/> gratuits
+                </div>
+            </div>
+
+    {% endif %}
+
+    {% endblock %}
 
 </section>
 

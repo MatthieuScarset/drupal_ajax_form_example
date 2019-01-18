@@ -35,12 +35,21 @@ function theme_boosted_preprocess_html(&$variables) {
         $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
     }
 }
+
+function theme_boosted_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    if (isset($variables['view'])) {
+        $view = $variables['view'];
+        $suggestions[] = $hook . '__' . $view->id();
+        $suggestions[] = $hook . '__' . $view->id() . '__' . $view->current_display;
+    }
+}
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $variables) {
     $suggestions[] = 'form__' . $variables['element']['#form_id'];
-  return $suggestions;
+    return $suggestions;
 }
 
 /**
@@ -48,40 +57,6 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
  */
 
 function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-
-}
-
-function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
-    $current_route_match = \Drupal::getContainer()->get('current_route_match');
-    $route_match = $current_route_match->getRouteName();
-
-    if((preg_match('/^view.subhomes/', $route_match)
-        || preg_match('/^view.subhomes_archive/', $route_match)
-        || $route_match == 'views.ajax')
-			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
-        $suggestions[]='form_element__subhomes';
-    }
-    if (isset($variables['element']['#webform'])) {
-      if ( $variables['element']['#webform'] === 'telechargement_documents'
-        && $variables['element']['#type'] != "checkbox") {
-        $suggestions[] = 'form_element__telechargement_documents';
-      }
-
-      if ( $variables['element']['#webform'] === 'dvi_contact_global'
-        && $variables['element']['#type'] != "checkbox"
-        && $variables['element']['#type'] != "processed_text") {
-        $suggestions[] = 'form_element__dvi_contact_global';
-        $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
-      }
-
-
-      if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
-          && $variables['element']['#type'] != "checkbox"
-          && $variables['element']['#type'] != "processed_text") {
-          $suggestions[] = 'form_element__dvi_becoming_distributor';
-          $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
-      }
-  }
 
 }
 
@@ -113,6 +88,63 @@ function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggest
 }
 
 function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array $variables){
+
+}
+
+function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+    /**
+     * Homepage Eclairage View Grid Twig Template Suggestions
+     */
+    // Firstly check it's a view
+    if($hook === 'views_view') {
+        // Check if it's the 'home_eclairage_playlist' view
+        if($variables['view']->id() === 'home_eclairage_playlist') {
+            if($hook === 'views_view_grid') {
+
+                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+            }
+        }
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $content_type = $node->bundle();
+        if($content_type == 'custom_page') {
+            $suggestions[] = 'page__' . $content_type;
+        }
+    }
+}
+
+
+function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook){
+
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if((preg_match('/^view.subhomes/', $route_match)
+        || preg_match('/^view.subhomes_archive/', $route_match)
+        || $route_match == 'views.ajax')
+			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
+        $suggestions[]='form_element__subhomes';
+    }
+    if (isset($variables['element']['#webform'])) {
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'];
+        $suggestions[] = 'form_element__' . $variables['element']['#type'];
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'field_insight_target_id') {
+        $suggestions[] = 'form_element__field_insight__business_insight';
+    }
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
 
 }
 
@@ -540,35 +572,3 @@ function get_image_uri($entity, $fieldName){
     }
   return $image_uri;
 }
-
-
-function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
-
-    /**
-     * Homepage Eclairage View Grid Twig Template Suggestions
-     */
-    // Firstly check it's a view
-    if($hook === 'views_view') {
-        // Check if it's the 'home_eclairage_playlist' view
-        if($variables['view']->id() === 'home_eclairage_playlist') {
-            if($hook === 'views_view_grid') {
-
-                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
-            }
-        }
-    }
-
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-	if ($node = \Drupal::routeMatch()->getParameter('node')) {
-		$content_type = $node->bundle();
-		if($content_type == 'custom_page') {
-			$suggestions[] = 'page__' . $content_type;
-		}
-	}
-}
-

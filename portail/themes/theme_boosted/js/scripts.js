@@ -392,8 +392,6 @@
     }
   });
 
-
-
   jQuery(document).ajaxComplete(function(event, xhr, settings) {
     // see if it is from our view
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
@@ -411,6 +409,11 @@
     }
   });
 
+  $('button.btn-field-insight-type').on('click', function() {
+        let input_id = $(this).attr('data-input');
+        $('input#' + input_id).prop( "checked", true );
+  });
+  
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

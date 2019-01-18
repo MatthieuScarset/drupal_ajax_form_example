@@ -77,6 +77,10 @@ class AxiomeContentImporter {
         //$node->save();
     }
 
+    /**
+     * @param $dom
+     * @param $bannerData
+     */
     private static function replaceLeftBlock(&$dom, $banner_data) {
         $css_class_left_block =  $banner_data['orange_theme']['boosted_css_name'];
         $font_color = $banner_data['font_color'];

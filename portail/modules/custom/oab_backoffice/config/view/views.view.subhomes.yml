@@ -787,11 +787,11 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        name:
-          id: name
+        name_1:
+          id: name_1
           table: taxonomy_term_field_data
           field: name
-          relationship: field_blog_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -799,24 +799,31 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
+            operator_id: name_1_op
             label: Thematic
             description: ''
             use_operator: false
-            operator: name_op
-            identifier: blog_thematics
+            operator: name_1_op
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -926,15 +933,6 @@ display:
           1: AND
       title: Blog
       relationships:
-        field_blog_thematic:
-          id: field_blog_thematic
-          table: node__field_blog_thematic
-          field: field_blog_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_blog_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_blog_format:
           id: field_blog_format
           table: node__field_blog_format
@@ -942,6 +940,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_blog_format: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
@@ -2390,7 +2397,7 @@ display:
           id: name
           table: taxonomy_term_field_data
           field: name
-          relationship: field_document_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -2403,19 +2410,26 @@ display:
             description: ''
             use_operator: false
             operator: name_op
-            identifier: document_thematics
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2525,15 +2539,6 @@ display:
           1: AND
       title: Documents
       relationships:
-        field_document_thematic:
-          id: field_document_thematic
-          table: node__field_document_thematic
-          field: field_document_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_document_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_document_type:
           id: field_document_type
           table: node__field_document_type
@@ -2541,6 +2546,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_document_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
@@ -2663,7 +2677,7 @@ display:
           id: name
           table: taxonomy_term_field_data
           field: name
-          relationship: field_magazine_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -2676,19 +2690,26 @@ display:
             description: ''
             use_operator: false
             operator: name_op
-            identifier: magazine_thematics
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2798,15 +2819,6 @@ display:
           1: AND
       title: Magazine
       relationships:
-        field_magazine_thematic:
-          id: field_magazine_thematic
-          table: node__field_magazine_thematic
-          field: field_magazine_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_magazine_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_magazine_type:
           id: field_magazine_type
           table: node__field_magazine_type
@@ -2814,6 +2826,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_magazine_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
