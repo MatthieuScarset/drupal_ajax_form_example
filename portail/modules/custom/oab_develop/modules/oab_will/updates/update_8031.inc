@@ -1,5 +1,8 @@
 <?php
-c
+use Symfony\Component\Yaml\Yaml;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
 /**
  *             RUBYPORTAILOBS-3450 creation taxonomy insight_type
  */
