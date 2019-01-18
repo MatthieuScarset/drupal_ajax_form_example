@@ -82,28 +82,6 @@ function oab_subhomes_theme_suggestions_subhome_entity(array $variables) {
     return $suggestions;
 }
 
-function oab_subhomes_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
-    /**
-     * @var Drupal\views\ViewExecutable $view
-     * @var SubhomeEntity $entity
-     */
-
-    if (isset($variables['view'])) {
-        $view = $variables['view'];
-        if (preg_match('/^subhomes/', $view->id()) && isset ($view->argument['field_subhome_target_id'])) {
-
-            $sid = $view->argument['field_subhome_target_id']->value;
-            $entity = SubhomeEntity::loadBySubhomeId($sid);
-
-            // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
-            if ($entity !== null) {
-                $suggestions[] = 'views_view__' . $view->id() . '__' . $entity->bundle();
-            }
-
-        }
-    }
-}
-
 
 function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
                                                          $cacheable) {
