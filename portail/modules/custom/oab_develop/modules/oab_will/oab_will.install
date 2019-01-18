@@ -185,3 +185,10 @@ function oab_will_update_8025() {
 function oab_will_update_8026() {
     include_once("updates/update_8026.inc");
 }
+
+/**
+ *             RUBYPORTAILOBS-3430 [B-Insight] Création de la vue Business Insight
+ */
+function oab_will_update_8028() {
+    include_once("updates/update_8028.inc");
+}
