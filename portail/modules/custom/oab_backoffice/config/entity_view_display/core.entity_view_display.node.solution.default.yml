@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.solution.field_blog_thematic
     - field.field.node.solution.field_content
     - field.field.node.solution.field_content_owner
     - field.field.node.solution.field_display_title
@@ -31,6 +32,14 @@ targetEntityType: node
 bundle: solution
 mode: default
 content:
+  field_blog_thematic:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_content:
     weight: 3
     label: hidden

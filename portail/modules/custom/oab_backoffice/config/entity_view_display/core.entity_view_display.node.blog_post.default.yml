@@ -146,13 +146,13 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_hub: true
-  field_hub_portal: true
   field_blog_format: true
   field_blog_thematic: true
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
+  field_hub: true
+  field_hub_portal: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true

@@ -4,6 +4,7 @@ dependencies:
   config:
     - entity_browser.browser.browse_media_modal
     - field.field.node.press_kit.field_aplat
+    - field.field.node.press_kit.field_blog_thematic
     - field.field.node.press_kit.field_content
     - field.field.node.press_kit.field_content_owner
     - field.field.node.press_kit.field_display_title
@@ -75,6 +76,7 @@ third_party_settings:
       children:
         - field_subhome
         - field_insight
+        - field_blog_thematic
         - field_industry
         - field_solution
         - field_press_type
@@ -151,6 +153,12 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_blog_thematic:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_content:
     weight: 25
     settings:
@@ -211,7 +219,7 @@ content:
     type: string_textarea
     region: content
   field_industry:
-    weight: 50
+    weight: 51
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -245,19 +253,19 @@ content:
     type: metatag_firehose
     region: content
   field_press_type:
-    weight: 52
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_region:
     weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_region:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_solution:
-    weight: 51
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_select

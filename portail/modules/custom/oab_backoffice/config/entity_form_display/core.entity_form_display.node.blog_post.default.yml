@@ -32,7 +32,6 @@ dependencies:
     - field.field.node.blog_post.field_subhome
     - field.field.node.blog_post.field_thematic
     - field.field.node.blog_post.field_visual
-    - field.field.node.blog_post.field_wysiwyg_rebond
     - field.field.node.blog_post.moderation_state_update
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post

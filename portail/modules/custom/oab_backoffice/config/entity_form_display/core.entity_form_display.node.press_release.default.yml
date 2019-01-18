@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.press_release.field_blog_thematic
     - field.field.node.press_release.field_city
     - field.field.node.press_release.field_content
     - field.field.node.press_release.field_content_owner
@@ -83,6 +84,7 @@ third_party_settings:
       children:
         - field_subhome
         - field_insight
+        - field_blog_thematic
         - field_solution
         - field_press_type
         - field_industry
@@ -170,6 +172,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_blog_thematic:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_city:
     weight: 9
     settings:
@@ -246,7 +254,7 @@ content:
     type: string_textarea
     region: content
   field_industry:
-    weight: 52
+    weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -310,7 +318,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_press_type:
-    weight: 51
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -325,13 +333,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 53
+    weight: 54
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 50
+    weight: 51
     settings: {  }
     third_party_settings: {  }
     type: options_select
