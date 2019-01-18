@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.simple_page.field_hub_portal
     - field.field.node.simple_page.field_industry
     - field.field.node.simple_page.field_insight
+    - field.field.node.simple_page.field_insight_type
     - field.field.node.simple_page.field_job_profile
     - field.field.node.simple_page.field_market_segment
     - field.field.node.simple_page.field_meta_description
@@ -29,6 +30,7 @@ dependencies:
     - field.field.node.simple_page.field_solution
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
+    - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
@@ -81,13 +83,14 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
-        - field_insight
-        - field_blog_thematic
         - field_industry
         - field_blog_format
+        - field_blog_thematic
         - field_solution
         - field_region
         - field_job_profile
+        - field_insight
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -174,13 +177,13 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_blog_format:
-    weight: 30
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_blog_thematic:
-    weight: 28
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -239,32 +242,38 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 34
+    weight: 35
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 35
+    weight: 36
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 29
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_insight:
     weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
-  field_job_profile:
+  field_insight:
     weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight_type:
+    type: options_select
+    weight: 34
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_job_profile:
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -331,13 +340,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 32
+    weight: 31
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 31
+    weight: 30
     settings: {  }
     third_party_settings: {  }
     type: options_select

@@ -147,9 +147,9 @@ function oab_will_update_8019() {
 /**
  * RUBYPORTAILOBS-3361  [RSS] Flux Blogs / Magazines
  */
- function oab_will_update_8021() {
-     include_once("updates/update_8021.inc");
- }
+function oab_will_update_8021() {
+    include_once("updates/update_8021.inc");
+}
 
 /**
  *     RUBYPORTAILOBS-3415  image sur la view analysts
@@ -184,4 +184,36 @@ function oab_will_update_8025() {
  */
 function oab_will_update_8026() {
     include_once("updates/update_8026.inc");
+}
+
+/**
+ *         RUBYPORTAILOBS-3445 [SUB-PRESS] modification de views pour simplification
+ */
+function oab_will_update_8027() {
+    include_once("updates/update_8027.inc");
+}
+
+/**
+ *             RUBYPORTAILOBS-3430 [B-Insight] Création de la vue Business Insight
+ */
+function oab_will_update_8028() {
+    include_once("updates/update_8028.inc");
+}
+
+/**
+ *         RUBYPORTAILOBS-3433 [B-Insight] Création des templates des contenus
+ */
+function oab_will_update_8029() {
+    include_once("updates/update_8029.inc");
+}
+
+/**
+ *         RUBYPORTAILOBS-3450 creation taxonomy insight_type
+ */
+function oab_will_update_8030() {
+    include_once("updates/update_8030.inc");
+}
+
+function oab_will_update_8031() {
+    include_once("updates/update_8031.inc");
 }

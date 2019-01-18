@@ -2,18 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.custom_page.field_blog_thematic
     - field.field.node.custom_page.field_content
     - field.field.node.custom_page.field_display_title
     - field.field.node.custom_page.field_hub
     - field.field.node.custom_page.field_hub_portal
     - field.field.node.custom_page.field_insight
+    - field.field.node.custom_page.field_insight_type
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_visual
     - field.field.node.custom_page.moderation_state_update
     - node.type.custom_page
   module:
+    - entity_browser
     - entity_browser_entity_form
     - field_group
     - inline_entity_form
@@ -43,6 +45,7 @@ third_party_settings:
         - title
         - field_display_title
         - field_content
+        - field_visual
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -83,7 +86,7 @@ third_party_settings:
     group_classify:
       children:
         - field_insight
-        - field_blog_thematic
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -107,12 +110,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_blog_thematic:
-    weight: 52
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_content:
     weight: 4
     settings:
@@ -147,8 +144,14 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 52
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_meta_description:
-    weight: 53
+    weight: 54
     settings:
       size: 60
       placeholder: ''
@@ -168,6 +171,19 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
+    region: content
+  field_visual:
+    weight: 5
+    settings:
+      entity_browser: null
+      open: false
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_display_settings: {  }
+      selection_mode: selection_append
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   langcode:
     type: language_select

@@ -126,32 +126,17 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
     return $allowedValues;
 }
 
-function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
+                                     $cacheable) {
     $allowedValues = array (
         "btn-txt-white-bg-black"   => "Texte blanc, fond noir",
         "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
         "btn-txt-black-bg-white"   => "Texte noir, fond blanc",
         "btn-txt-black-bg-transparent"    => "Texte noir, fond transparent",
-        "btn-txt-black-bg-orange"    => "Texte noir, fond orange",
-        "btn-txt-white-bg-orange"    => "Texte blanc, fond orange",
+        "btn-txt-white-bg-orange"   => "Texte blanc, fond orange",
+        "btn-txt-black-bg-orange"   => "Texte noir, fond orange"
     );
     return $allowedValues;
-}
-
-/**
- * HOOK_ENTITY_ACCESS
- *
- * Problèmes de droits pour les paragraphes utilisés dans la refonte de la subhome press. Je donne l'accès pour les voir
- */
-function oab_subhomes_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
-    if ($entity->getEntityTypeId() == 'paragraph'
-        && ($entity->bundle() === 'subhome_presse_carrousel' || $entity->bundle() === 'default_button')
-        && $operation == 'view'
-    ) {
-        return AccessResult::allowed();
-    }
-
-    return AccessResult::neutral();
 }
 
 
@@ -201,6 +186,23 @@ function oab_subhomes_preprocess_views_view(&$variables) {
             }
         }
     }
+}
+
+
+/**
+ * HOOK_ENTITY_ACCESS
+ *
+ * Problèmes de droits pour les paragraphes utilisés dans la refonte de la subhome press. Je donne l'accès pour les voir
+ */
+function oab_subhomes_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+    if ($entity->getEntityTypeId() == 'paragraph'
+        && ($entity->bundle() === 'subhome_presse_carrousel' || $entity->bundle() === 'default_button')
+        && $operation == 'view'
+    ) {
+        return AccessResult::allowed();
+    }
+
+    return AccessResult::neutral();
 }
 
 function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {

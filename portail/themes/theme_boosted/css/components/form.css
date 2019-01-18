@@ -1,3 +1,38 @@
+.form-control.form-checkbox,
+.form-control.form-radio {
+    margin-right: 1rem;
+    display: initial;
+    width: initial;
+    height: initial;
+}
+
+.form-element.checkbox .checkbox-elements,
+.form-element.radio .radio-elements {
+    display: flex;
+    align-items: flex-start
+}
+
+.form-element.radio {
+    margin-bottom: 0;
+}
+
+.form-element.checkbox label {
+    font-weight: bold;
+    padding-left: 0;
+}
+
+.form-element.radio label {
+    padding-left: 0;
+}
+
+.form-element.checkbox .checkbox-elements input[type="checkbox"] {
+    position: initial;
+    margin-left: 0;
+}
+.form-element.checkbox .checkbox-elements .help-block {
+    margin-top: 0;
+}
+
 .oab-synomia-search-header-block-form{
     display: inline-block;
     margin-top: 17px;

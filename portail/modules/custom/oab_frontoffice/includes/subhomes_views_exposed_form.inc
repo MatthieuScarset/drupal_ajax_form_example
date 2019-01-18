@@ -256,5 +256,4 @@ function subhomes_views_exposed_form(&$form) {
 
     }
 
-
 }

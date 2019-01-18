@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
-    - field.field.node.industry.field_blog_thematic
     - field.field.node.industry.field_content
     - field.field.node.industry.field_content_owner
     - field.field.node.industry.field_display_title
@@ -13,6 +12,7 @@ dependencies:
     - field.field.node.industry.field_hub
     - field.field.node.industry.field_hub_portal
     - field.field.node.industry.field_insight
+    - field.field.node.industry.field_insight_type
     - field.field.node.industry.field_local_nav
     - field.field.node.industry.field_meta_description
     - field.field.node.industry.field_meta_title
@@ -75,7 +75,7 @@ third_party_settings:
     group_classify:
       children:
         - field_insight
-        - field_blog_thematic
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -143,12 +143,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_blog_thematic:
-    weight: 12
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_content:
     weight: 11
     settings:
@@ -207,18 +201,18 @@ content:
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
-  field_industry:
-    weight: 27
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight:
     weight: 11
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
     weight: 33
     settings: {  }

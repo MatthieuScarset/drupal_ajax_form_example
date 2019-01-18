@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.industry.field_blog_thematic
     - field.field.node.industry.field_content
     - field.field.node.industry.field_content_owner
     - field.field.node.industry.field_display_title
@@ -56,8 +55,8 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_industry:
-    weight: 3
+  field_insight:
+    weight: 14
     label: hidden
     settings:
       link: true
@@ -131,13 +130,11 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_blog_thematic: true
   field_content_owner: true
   field_email_owner: true
   field_end_date: true
   field_hub: true
   field_hub_portal: true
-  field_insight: true
   field_market_segment: true
   field_start_date: true
   field_top_zone: true

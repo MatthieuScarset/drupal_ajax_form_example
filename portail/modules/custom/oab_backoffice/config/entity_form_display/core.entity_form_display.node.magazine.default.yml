@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.magazine.field_hub_portal
     - field.field.node.magazine.field_industry
     - field.field.node.magazine.field_insight
+    - field.field.node.magazine.field_insight_type
     - field.field.node.magazine.field_job_profile
     - field.field.node.magazine.field_magazine_thematic
     - field.field.node.magazine.field_magazine_type
@@ -66,11 +67,12 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
-        - field_insight
-        - field_magazine_thematic
         - field_industry
         - field_job_profile
         - field_region
+        - field_insight
+        - field_insight_type
+        - field_magazine_thematic
         - field_magazine_type
         - field_hub
         - field_hub_portal
@@ -218,44 +220,50 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 33
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 34
+    weight: 35
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 29
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_insight:
     weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight_type:
+    type: options_select
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
     type: options_select
-    weight: 30
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     region: content
   field_magazine_thematic:
-    weight: 28
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_magazine_type:
-    weight: 32
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -329,7 +337,7 @@ content:
     third_party_settings: {  }
   field_region:
     type: options_select
-    weight: 31
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     region: content

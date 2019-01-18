@@ -3,7 +3,6 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
-    - field.field.node.customer_story.field_blog_thematic
     - field.field.node.customer_story.field_content
     - field.field.node.customer_story.field_content_owner
     - field.field.node.customer_story.field_country
@@ -16,6 +15,7 @@ dependencies:
     - field.field.node.customer_story.field_hub_portal
     - field.field.node.customer_story.field_industry
     - field.field.node.customer_story.field_insight
+    - field.field.node.customer_story.field_insight_type
     - field.field.node.customer_story.field_job_profile
     - field.field.node.customer_story.field_market_segment
     - field.field.node.customer_story.field_meta_description
@@ -81,13 +81,13 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
-        - field_insight
-        - field_blog_thematic
         - field_solution
         - field_industry
         - field_region
         - field_country
         - field_job_profile
+        - field_insight
+        - field_insight_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -172,12 +172,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_blog_thematic:
-    weight: 49
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_content:
     weight: 8
     settings:
@@ -195,7 +189,7 @@ content:
     type: string_textfield
     region: content
   field_country:
-    weight: 53
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -246,32 +240,38 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 55
+    weight: 9
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 56
+    weight: 10
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 51
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_insight:
-    weight: 48
+    weight: 7
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
-    weight: 54
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -338,13 +338,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_region:
-    weight: 52
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_solution:
-    weight: 50
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -356,7 +356,7 @@ content:
     type: datetime_default
     region: content
   field_subhome:
-    weight: 47
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select
