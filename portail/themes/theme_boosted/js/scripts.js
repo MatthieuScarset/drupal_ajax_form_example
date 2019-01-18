@@ -383,5 +383,33 @@
     }
   });
 
+  jQuery(document).ajaxComplete(function(event, xhr, settings) {
+    // see if it is from our view
+    if (settings.data.indexOf( "view_name=business_insight") != -1) {
+        var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+            easing: "easeOutQuint",
+            useLoadImageEvent: true,
+            time: 400,
+            delay: 20,
+            fadeIn: {
+                time: 500,
+                delay: 50,
+                wait: 500
+            }
+        });
+    }
+  });
+
+    $(document).on("click", "div.btn-field-insight-type", function() {
+        let input_id = $(this).attr('data-input');
+        $('input#' + input_id).prop( "checked", true );
+       $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+  });
+
+    $(document).on("change", "select[name='field_insight_target_id']", function() {
+     //   $('select#edit-field-insight-target-id').on('change', function() {
+     $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
