@@ -400,10 +400,16 @@
     }
   });
 
-  $('button.btn-field-insight-type').on('click', function() {
+    $(document).on("click", "div.btn-field-insight-type", function() {
         let input_id = $(this).attr('data-input');
         $('input#' + input_id).prop( "checked", true );
+       $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
   });
-  
+
+    $(document).on("change", "select[name='field_insight_target_id']", function() {
+     //   $('select#edit-field-insight-target-id').on('change', function() {
+     $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

@@ -2636,6 +2636,10 @@ body.page-node-type-custom-page{
     font-weight: normal;
 }
 
+div.business-insight-field-insight {
+    margin-bottom: 3rem;
+}
+
 .business-insight-field-insight select option {
     color: initial;
     font-size: initial;
@@ -2696,4 +2700,8 @@ body.page-node-type-custom-page{
             1px 1.5em;
     background-repeat: no-repeat;
     outline: 0;
+}
+
+form#views-exposed-form-business-insight-business-insight-page input[type="submit"]{
+    display: none;
 }

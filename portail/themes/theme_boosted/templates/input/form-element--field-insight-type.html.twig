@@ -74,5 +74,5 @@
     {% if element['#attributes'].checked == 'checked' %}
         {% set button_class = 'btn-primary' %}
     {% endif %}
-    <button class="btn {{ button_class }} btn-field-insight-type" data-input="{{ element['#attributes'].id }}">{{ label }}</button>
+    <div class="btn {{ button_class }} btn-field-insight-type" data-input="{{ element['#attributes'].id }}">{{ label }}</div>
 </div>
