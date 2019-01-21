@@ -361,13 +361,16 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
 
-	// Si on est dans une subhome || subhomes_archive
-    if (preg_match('/^view.subhomes/', $route_name)) {
-	    ## Si on est dans une vue, je charge la vue
+    // Si on est dans une subhome || subhomes_archive
+    if (preg_match('/^view.subhomes/', $route_name)
+        || preg_match('/^view.business_insight/', $route_name)) {
+        ## Si on est dans une vue, je charge la vue
         $route_parts = explode('.', $route_name);
 
         $view_id = $route_parts[1];
         $display_id = $route_parts[2];
+
+        $hide_title_block = false;
 
         $view = \Drupal\views\Entity\View::load($view_id);
         if ($view !== null) {
@@ -384,10 +387,16 @@ function theme_boosted_preprocess_page(&$variables) {
                 // pour le passer en container-fluid, ie. avoir la page complète sans bordure
                 // et je cache le titre de la page
                 if ($entity !== null) {
-                    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+                    $hide_title_block = true;
                 }
 
+            } elseif ($view->id() == 'business_insight') {
+                $hide_title_block = true;
             }
+        }
+
+        if ($hide_title_block) {
+            $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
         }
     }
 
