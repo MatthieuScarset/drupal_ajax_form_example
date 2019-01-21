@@ -70,6 +70,10 @@ function theme_boosted_theme_suggestions_alter(array &$suggestions, array $varia
 
     }
 
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+
     if (isset($variables['view'])) {
         $view = $variables['view'];
         $suggestions[] = $hook . '__' . $view->id();
@@ -91,9 +95,6 @@ function theme_boosted_theme_suggestions_alter(array &$suggestions, array $varia
 
         }
 
-    }
-    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
-        $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
 
@@ -201,6 +202,10 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
 
     if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'field_insight_target_id') {
         $suggestions[] = 'form_element__field_insight__business_insight';
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
 
