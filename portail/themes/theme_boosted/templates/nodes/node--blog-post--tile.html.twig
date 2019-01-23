@@ -68,6 +68,18 @@
 
 <div class="tile tile_{{ node.field_insight_type.entity.name.value }}">
 
+    <a href="{{ url }}" class="">
+        <div class="encart encart-image">
+            {% for key, image in content.field_visual  %}
+
+
+                {% if image.entity.field_image.entity.uri.value is not null and image.entity.name.value is not null %}
+                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('subhome') }}" alt="{{ image.entity.name.value }}" />
+                {% endif %}
+            {% endfor %}
+        </div>
+    </a>
+
     <div class="tags col-lg-12">
         <span class="field_insight">{{ content.field_insight }}</span>
         <span class="field_insight_type">#{{ node.field_insight_type.entity.name.value }}</span>
@@ -77,23 +89,18 @@
         <div class="title_node col-lg-12">{{ label }}</div>
     </a>
 
-    <a href="{{ url }}" class="">
-        <div class="encart encart-image">
-            {% for key, image in content.field_visual  %}
-                {% set media = image.entity %}
-                {% set file = media.field_image.entity %}
-                {% set uri = file.uri.value %}
-                {% if uri is not null and media.name.value is not null %}
-                    <img src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
+    <div class="profile col-lg-12">
+        {% for p in content.field_profile %}
+            {% set profile = p.entity %}
+            {% for key, image in profile.field_visual  %}
+                {% if image.entity.field_image.entity.uri.value is not null and image.entity.name.value is not null %}
+                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('subhome') }}" alt="{{ image.entity.name.value }}" />
                 {% endif %}
             {% endfor %}
-        </div>
-    </a>
-
-    {% if node.field_insight_type.entity.name.value == "Report" %}
-        <a href="{{ url }}" class="report_link btn btn-default btn-txt-black-bg-transparent">
-            {{ "Read the Report"|trans }}
-        </a>
-    {% endif %}
+            {% if profile.label is not null %}
+                <span>{{ profile.label }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
 
 </div>
