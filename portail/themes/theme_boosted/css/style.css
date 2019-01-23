@@ -2766,8 +2766,8 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding:0 0 10px 0;
 }
 
-.view-business-insight .view-content .views-row .field_insight,
-.view-business-insight .view-content .views-row .field_insight_type{
+.view-business-insight .view-content .views-row .tile .field_insight,
+.view-business-insight .view-content .views-row .tile .field_insight_type{
     display: inline-block;
 }
 
@@ -2777,6 +2777,22 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding-bottom: 2rem;
 }
 
+.view-business-insight .view-content .views-row .tile .title_node{
+    font-size: 2.5rem;
+    line-height: 2rem;
+    padding: 1rem;
+}
+
+.view-business-insight .view-content .views-row .tile .profile{
+    margin: 1rem 0;
+}
+
+.view-business-insight .view-content .views-row .tile .profile img{
+    background-color: #000000;
+    border-radius: 100%;
+    width:50px;
+}
+
 .view-business-insight .view-content .views-row .tile .field--name-field-insight .field--item{
     color: #FFFFFF;
     background-color: #000000;
@@ -2784,4 +2800,6 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding:5px;
 }
 
-
+.view-business-insight .view-content .views-row .tile .report_link{
+    margin-left: 2rem;
+}
