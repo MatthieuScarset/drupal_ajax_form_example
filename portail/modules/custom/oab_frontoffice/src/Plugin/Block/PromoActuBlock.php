@@ -48,21 +48,20 @@ class PromoActuBlock extends BlockBase {
 
                 //on deserialise les données à passer au template
                 $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
-                if (count($field_axiome_data) > 0)
-                {
+                if (count($field_axiome_data) > 0) {
 
-                    if ( isset($field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'])) {
-                      $zoneSeeMoreAttr = $field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'];
+                    if (isset($field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'])) {
+                      $zone_see_more_attr = $field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'];
 
-                      if (isset($zoneSeeMoreAttr['free_test_title']) && is_string($zoneSeeMoreAttr['free_test_title'])
-                        && isset($zoneSeeMoreAttr['free_test_text']) && is_string($zoneSeeMoreAttr['free_test_text'])
-                        && isset($zoneSeeMoreAttr['free_test_link_text']) && is_string($zoneSeeMoreAttr['free_test_link_text'])
-                        && isset($zoneSeeMoreAttr['free_test_url']) && is_string($zoneSeeMoreAttr['free_test_url'])
+                      if (isset($zone_see_more_attr['free_test_title']) && is_string($zone_see_more_attr['free_test_title'])
+                        && isset($zone_see_more_attr['free_test_text']) && is_string($zone_see_more_attr['free_test_text'])
+                        && isset($zone_see_more_attr['free_test_link_text']) && is_string($zone_see_more_attr['free_test_link_text'])
+                        && isset($zone_see_more_attr['free_test_url']) && is_string($zone_see_more_attr['free_test_url'])
                       ) {
-                          $block['titre_promoactu'] = $zoneSeeMoreAttr['free_test_title'];
-                          $block['texte_promoactu'] = $zoneSeeMoreAttr['free_test_text'];
-                          $block['textelien_promoactu'] = $zoneSeeMoreAttr['free_test_link_text'];
-                          $block['url_promoactu'] = $zoneSeeMoreAttr['free_test_url'];
+                          $block['titre_promoactu'] = $zone_see_more_attr['free_test_title'];
+                          $block['texte_promoactu'] = $zone_see_more_attr['free_test_text'];
+                          $block['textelien_promoactu'] = $zone_see_more_attr['free_test_link_text'];
+                          $block['url_promoactu'] = $zone_see_more_attr['free_test_url'];
                       }
 
                     }

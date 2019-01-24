@@ -20,8 +20,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      *
      * Publish the Event.
      */
-    public static function getSubscribedEvents()
-    {
+    public static function getSubscribedEvents() {
         $events[KernelEvents::REQUEST][] = ['onRequest'];
 
         return $events;
@@ -54,10 +53,10 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                         && get_class($node) === 'Drupal\node\Entity\Node'
                     ) {
                         $node_language = $node->language();
-                        $node_langId = $node_language->getId();
+                        $node_lang_id = $node_language->getId();
 
                         // if language is undefined, we load the current language page
-                        if ($node_langId == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
+                        if ($node_lang_id == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
                             $node_language = \Drupal::languageManager()->getCurrentLanguage();
                         }
 
@@ -95,10 +94,10 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     && get_class($node) === 'Drupal\node\Entity\Node'
                 ) {
                     $node_language = $node->language();
-                    $node_langId = $node_language->getId();
+                    $node_lang_id = $node_language->getId();
 
                     // if language is undefined, we load the current language page
-                    if ($node_langId == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
+                    if ($node_lang_id == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
                         $node_language = \Drupal::languageManager()->getCurrentLanguage();
                     }
                     $options = [
@@ -112,12 +111,12 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
 
                     ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
                     ## et je teste s'ils existent dans la liste
-                    $pathList = oab_getAllPathFromNID($node->id(), $node_langId);
+                    $path_list = oab_getAllPathFromNID($node->id(), $node_lang_id);
 
 
                     if ($new_url != ''
                         && $new_url !== $current_uri
-                        && !in_array($current_uri, $pathList)
+                        && !in_array($current_uri, $path_list)
                     ) {
                         $response = new RedirectResponse($new_url, 301);
                         $event->setResponse($response);

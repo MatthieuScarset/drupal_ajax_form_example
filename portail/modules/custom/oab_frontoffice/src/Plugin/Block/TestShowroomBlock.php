@@ -31,7 +31,7 @@ class TestShowroomBlock  extends BlockBase {
 
     public function build() {
         $block = array();
-        $blockEmpty = true;
+        $block_empty = true;
         // récupération du contexte
         $node_context = $this->getContextValue('node');
         $nid_field = $node_context->nid->getValue();
@@ -55,20 +55,20 @@ class TestShowroomBlock  extends BlockBase {
             * FIN traitement des données Axiome
             */
             //var_dump($blockEmpty) ; die();
-            if ($blockEmpty) {
+            if ($block_empty) {
                 if ($node->hasField('field_test_showroom')) {
                     $field_data = $node->get('field_test_showroom');
                     foreach ($field_data as $data) {
                         $block[] = $data->view();
-                        $blockEmpty = FALSE;
+                        $block_empty = FALSE;
                     }
                 }
             }
         }
-        if (!$blockEmpty) {
+        if (!$block_empty) {
             return $block;
-        }
-        else
+        } else {
             return NULL;
+        }
     }
 }
