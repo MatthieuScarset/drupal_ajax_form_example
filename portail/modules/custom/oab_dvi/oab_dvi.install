@@ -106,8 +106,7 @@ function oab_dvi_update_8012() {
 /**
  * MAJ Display VIEW du node distributeur
  */
-function oab_dvi_update_8013()
-{
+function oab_dvi_update_8013() {
     include_once("updates/update_8013.inc");
 }
 
@@ -282,8 +281,7 @@ function oab_dvi_update_8035() {
  * > Modification de la subhome produit pour ne plus prendre en compte les produits DVI
  * > Modification de la vue Product Autocomplete pour ne prendre en compte que les produits DVI
  */
-function oab_dvi_update_8036()
-{
+function oab_dvi_update_8036() {
     include_once("updates/update_8036.inc");
 }
 
@@ -298,8 +296,7 @@ function oab_dvi_update_8037() {
  * Detaggage des produits qui avaient été taggué avec les Markets Segments spécifiques à DVI
  * + suppression de ces termes
  */
-function oab_dvi_update_8038()
-{
+function oab_dvi_update_8038() {
     include_once("updates/update_8038.inc");
 }
 
@@ -328,7 +325,6 @@ function oab_dvi_update_8041() {
 /**
  * RUBYPORTAILOBS-3370 [DVI] Subhome Distributeurs
  */
-function oab_dvi_update_8043()
-{
+function oab_dvi_update_8043() {
     include_once("updates/update_8043.inc");
 }
