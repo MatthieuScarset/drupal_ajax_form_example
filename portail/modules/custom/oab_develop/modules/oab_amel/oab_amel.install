@@ -40,7 +40,7 @@ function oab_amel_update_dependencies() {
 }
 
 /**
- *  Création du block "DirectAccessBlock" pour les accès directs (barre bleue sur le footer) 
+ *  Création du block "DirectAccessBlock" pour les accès directs (barre bleue sur le footer)
  */
 
 function oab_amel_update_8001() {
@@ -377,8 +377,7 @@ function oab_amel_update_8045() {
 /**
  *  Création des termes de taxonomies Subhomes pour ES et PT
  */
-function oab_amel_update_8046()
-{
+function oab_amel_update_8046() {
     include_once("updates/update_8046.inc");
 }
 
@@ -406,8 +405,7 @@ function oab_amel_update_8049() {
 /**
  *  Création blocks produits DVI
  */
-function oab_amel_update_8050()
-{
+function oab_amel_update_8050() {
     include_once("updates/update_8050.inc");
 }
 

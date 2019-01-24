@@ -10,11 +10,11 @@ function oab_tristan_install() {
  */
 function oab_tristan_update_dependencies() {
 
-  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024    );
-  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012    );
-  $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020    );
-  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031    );
-  $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023    );
+  $dependencies['oab_tristan'][8016] = array('oab_amel' => 8024);
+  $dependencies['oab_tristan'][8017] = array('oab_yassine' => 8012);
+  $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020);
+  $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031);
+  $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023);
  // $dependencies['oab_tristan'][8085] = array('oab_subhomes' => 8002);
 
   return $dependencies;
@@ -470,8 +470,7 @@ function oab_tristan_update_8060() {
  * Ajout d'un bloc de mentions legales au formulaire de dl de documents
  */
 
-function oab_tristan_update_8061()
-{
+function oab_tristan_update_8061() {
     include_once("updates/update_8061.inc");
 }
 
@@ -502,8 +501,7 @@ function oab_tristan_update_8064() {
 /**
  * Création des menus top right navbar et top right navbar footer (version mobile)
  */
-function oab_tristan_update_8065()
-{
+function oab_tristan_update_8065() {
     include_once('updates/update_8065.inc');
 }
 
@@ -517,8 +515,7 @@ function oab_tristan_update_8066() {
 /**
  * Reload de la config des Metatags par defaut de la homepage
  */
-function oab_tristan_update_8067()
-{
+function oab_tristan_update_8067() {
     include_once('updates/update_8067.inc');
 }
 
@@ -562,8 +559,7 @@ function oab_tristan_update_8073() {
  * Update du formulaire "contact commercial" pour lui ajouter un input hidden pour sauvegarder
  * le nom du produit sur lequel était le visiteur
  */
-function oab_tristan_update_8074()
-{
+function oab_tristan_update_8074() {
     include_once('updates/update_8074.inc');
 }
 

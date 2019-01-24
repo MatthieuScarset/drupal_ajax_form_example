@@ -3,7 +3,7 @@
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\field\Entity\FieldStorageConfig;
 
-function oab_tristan_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+function oab_tristan_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable = true) {
   $allowedValues = array (
     "white"  => "White title & White button's background",
     "white-t"  => "White title & Transparent button's background",
