@@ -31,9 +31,9 @@ class TwitterBlock extends BlockBase {
     const CACHE_OEMBED_TWEET_CID    = 'twitter_oembed_tweet';
     const LOGGER_CHANNEL            = 'twitter_api';
 
-    private $url_oauth      = 'https://api.twitter.com/oauth2/token';
-    private $url_timeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-    private $url_oembed     = 'https://publish.twitter.com/oembed';
+    private $urlOauth      = 'https://api.twitter.com/oauth2/token';
+    private $urlTimeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+    private $urlOembed     = 'https://publish.twitter.com/oembed';
 
     public function build() {
 
@@ -146,7 +146,7 @@ class TwitterBlock extends BlockBase {
             'maxwidth' => $this->getConf(self::TAILLE_TWEET)
         ];
 
-        $url = $this->url_oembed . '?' . http_build_query($data);
+        $url = $this->urlOembed . '?' . http_build_query($data);
         $ch = $this->getCurl($url);
 
         $ret = null;
@@ -163,17 +163,17 @@ class TwitterBlock extends BlockBase {
         return 'https://twitter.com/' . $this->getConf(self::USER_PROFILE) . '/status/' . $tweet_id;
     }
 
-    private function getTimeline($nbTweetRequested = null) {
+    private function getTimeline($nb_tweet_requested = null) {
         $nb_tweet_wanted = $this->getConf(self::NB_TWEET);
 
-        if ($nbTweetRequested === null) {
-            $nbTweetRequested = $nb_tweet_wanted;
+        if ($nb_tweet_requested === null) {
+            $nb_tweet_requested = $nb_tweet_wanted;
         }
 
         $data = [
             'screen_name'       => $this->getConf(self::USER_PROFILE),
             // J'augmente le count pour éviter de faire trop de requetes
-            'count'             => (int) $nbTweetRequested + ($nbTweetRequested > 20 ? $nbTweetRequested * 25 / 100 : 5),
+            'count'             => (int) $nb_tweet_requested + ($nb_tweet_requested > 20 ? $nb_tweet_requested * 25 / 100 : 5),
             'trim_user'         => false,
             'include_rts'       => false,
             'exclude_replies'   => true
@@ -186,7 +186,7 @@ class TwitterBlock extends BlockBase {
                 'Content-Type: application/x-www-form-urlencoded'
             ];
 
-            $url = $this->url_timeline . "?" . http_build_query($data);
+            $url = $this->urlTimeline . "?" . http_build_query($data);
             $ch = $this->getCurl($url);
 
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -198,7 +198,7 @@ class TwitterBlock extends BlockBase {
             // Twitter ne renvoie pas les Retweets, parce que demandé, mais les comptes quand mêmes dans son nb tweets
             // donc on recoie moins de tweet que demandé
             if (count($json_ret) < $nb_tweet_wanted) {
-                $json_ret = $this->getTimeline($nbTweetRequested + 5);
+                $json_ret = $this->getTimeline($nb_tweet_requested + 5);
             }
 
             // On retourne le nombre de tweets voulu, et non celui requeté
@@ -216,9 +216,9 @@ class TwitterBlock extends BlockBase {
 
         $cid = self::CACHE_BEARER_CID . '_' . $this->getConf(self::API_KEY);
 
-        $cachedData = \Drupal::cache()->get($cid);
-        if ($cachedData !== false && isset($cachedData->data)) {
-            $ret = $cachedData->data;
+        $cached_data = \Drupal::cache()->get($cid);
+        if ($cached_data !== false && isset($cached_data->data)) {
+            $ret = $cached_data->data;
         } else {
             $bearer = $this->requestForBearer();
 
@@ -234,12 +234,12 @@ class TwitterBlock extends BlockBase {
     }
 
     private function requestForBearer() {
-        $apiKey = $this->getConf(self::API_KEY);
-        $apiSecret = $this->getConf(self::API_SECRET);
+        $api_key = $this->getConf(self::API_KEY);
+        $api_secret = $this->getConf(self::API_SECRET);
 
-        $ch = $this->getCurl($this->url_oauth);
+        $ch = $this->getCurl($this->urlOauth);
 
-        curl_setopt($ch, CURLOPT_USERPWD, $apiKey . ":" . $apiSecret);
+        curl_setopt($ch, CURLOPT_USERPWD, $api_key . ":" . $api_secret);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array('grant_type' => 'client_credentials'));
 
@@ -275,7 +275,7 @@ class TwitterBlock extends BlockBase {
             }
 
             \Drupal::logger(self::LOGGER_CHANNEL)->error($errors_message);
-        } elseif ( !is_array($json_ret) || curl_errno($ch) > 0 ) {
+        } elseif (!is_array($json_ret) || curl_errno($ch) > 0 ) {
             $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | "
                     . curl_errno($ch) . ' => ' . curl_error($ch) .  ' | '
                     . $result . ' | ' . json_encode(curl_getinfo($ch));
