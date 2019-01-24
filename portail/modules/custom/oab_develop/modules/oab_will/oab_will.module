@@ -42,7 +42,7 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
      }
   }
 
-    if ($form_id=="views_exposed_form" ) {
+    if ($form_id=="views_exposed_form") {
         switch ($form['#id']) {
             case "views-exposed-form-content-page-1":
 

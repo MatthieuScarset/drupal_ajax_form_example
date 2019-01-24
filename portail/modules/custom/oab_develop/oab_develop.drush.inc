@@ -23,7 +23,7 @@ function drush_oab_develop_oab_updb() {
     $num_lines = 0;
     $fp = fopen($file_commands, 'r');
     while ($row = fgets($fp)) {
-      if (!empty($row) && substr($row, 0, 1 ) != '#') {
+      if (!empty($row) && substr($row, 0, 1) != '#') {
         drush_print('- ' . $row);
         drush_invoke_process('@self', $row);
       }

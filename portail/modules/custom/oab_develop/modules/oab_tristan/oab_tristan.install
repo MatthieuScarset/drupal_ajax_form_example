@@ -536,8 +536,7 @@ function oab_tristan_update_8069() {
 /**
  * Ajout du block pour le message d'information sur les cookiess
  */
-function oab_tristan_update_8071()
-{
+function oab_tristan_update_8071() {
     include_once('updates/update_8071.inc');
 }
 
@@ -606,8 +605,7 @@ function oab_tristan_update_8079() {
 /**
  * Création d'un role Webform business Analyst
  */
-function oab_tristan_update_8080()
-{
+function oab_tristan_update_8080() {
     include_once('updates/update_8080.inc');
 }
 

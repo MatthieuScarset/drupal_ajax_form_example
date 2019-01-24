@@ -113,7 +113,7 @@ function taxonomy_rename_vocab($name_voca, $default_name, $vid, $lang) {
 
 
     if ($lang != 'en') {
-        $voca_config = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
+        $voca_config = \Drupal::languageManager()->getLanguageConfigOverride($lang, 'taxonomy.vocabulary.'.$vid);
         $voca_config->set('name', $name_voca);
         $voca_config->save();
     }
