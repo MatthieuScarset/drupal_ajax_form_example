@@ -2769,12 +2769,12 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .view-business-insight .view-content .views-row .tile .title_node{
     font-size: 2.5rem;
-    line-height: 2rem;
+    line-height: 2.5rem;
     padding: 1rem;
 }
 
 .view-business-insight .view-content .views-row .tile .profile{
-    margin: 1rem 0;
+    margin: 2rem 0 1rem;
 }
 
 .view-business-insight .view-content .views-row .tile .profile img{
