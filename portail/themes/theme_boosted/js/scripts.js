@@ -213,7 +213,6 @@
   $(window).on('load', function(e){
     manageSmallImageInTemplates();
     //vg.vgrefresh();
-    tile_format();
   });
 
 
