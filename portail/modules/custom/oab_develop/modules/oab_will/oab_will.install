@@ -147,9 +147,9 @@ function oab_will_update_8019() {
 /**
  * RUBYPORTAILOBS-3361  [RSS] Flux Blogs / Magazines
  */
-function oab_will_update_8021() {
-    include_once("updates/update_8021.inc");
-}
+ function oab_will_update_8021() {
+     include_once("updates/update_8021.inc");
+ }
 
 /**
  *     RUBYPORTAILOBS-3415  image sur la view analysts
@@ -216,4 +216,12 @@ function oab_will_update_8030() {
 
 function oab_will_update_8031() {
     include_once("updates/update_8031.inc");
+}
+
+
+/**
+ *             RUBYPORTAILOBS-3460 [B-Insight] Ordre des tuiles
+ */
+function oab_will_update_8032() {
+    include_once("updates/update_8032.inc");
 }
