@@ -10,6 +10,7 @@
         image_resize_width();
         obs_template_height();
         changeHeightSubhome();
+        tile_format();
     });
 
     function image_resize_width(){
@@ -144,10 +145,25 @@
     });
   }
 
+  function tile_format(){
+      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+          easing: "easeOutQuint",
+          useLoadImageEvent: true,
+          time: 400,
+          delay: 20,
+          fadeIn: {
+              time: 500,
+              delay: 50,
+              wait: 500
+          }
+      });
+  }
 
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
+    tile_format();
+    showhideFilters();
     //resizeIframeAuto('iframePardot');
 
     $( ".close-env-info" ).click(function(){
@@ -192,22 +208,12 @@
         paginationType: 'bullets',
       });
 
-      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-        easing: "easeOutQuint",
-        useLoadImageEvent: true,
-        time: 400,
-        delay: 20,
-        fadeIn: {
-          time: 500,
-          delay: 50,
-          wait: 500
-        }
-      });
   });
 
   $(window).on('load', function(e){
     manageSmallImageInTemplates();
-    vg.vgrefresh();
+    //vg.vgrefresh();
+    tile_format();
   });
 
 
@@ -256,13 +262,6 @@
   $(window).scroll(function(){
     showhideFilters();
   });
-
-  //Pour savoir si j'affiche la flèche au chargement de la page
-  // (Quand on refresh, la page garde sa position.. Donc le scroll ne fonctionne pas)
-  $(document).ready(function () {
-    showhideFilters();
-  });
-
 
   //Pour re-afficher les filtres en appuyant sur la flèche...
   $(document).on("click", '#link-back-to-filter', function(event) {
@@ -397,17 +396,7 @@
   jQuery(document).ajaxComplete(function(event, xhr, settings) {
     // see if it is from our view
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
-        var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-            easing: "easeOutQuint",
-            useLoadImageEvent: true,
-            time: 400,
-            delay: 20,
-            fadeIn: {
-                time: 500,
-                delay: 50,
-                wait: 500
-            }
-        });
+        tile_format();
     }
   });
 
