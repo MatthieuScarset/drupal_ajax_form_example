@@ -43,7 +43,7 @@ $collection->write('views.view.business_insight', $trad_fr);
 
 $storage = \Drupal::service('locale.storage');
 $translations = [
-    "All thematics " => "toutes nos thématiques",
+    "All thematics" => "toutes nos thématiques",
     "See all" => "Tout voir"
 ];
 
