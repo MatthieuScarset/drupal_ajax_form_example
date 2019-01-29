@@ -681,3 +681,9 @@ function oab_tristan_update_8089() {
     oabt_YmlImport('block.block.twitterblock.yml');
 }
 
+/**
+ * Ajout des traductions
+ */
+function oab_tristan_update_8090() {
+    include_once('updates/update_8090.inc');
+}
