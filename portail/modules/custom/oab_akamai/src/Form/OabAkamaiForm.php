@@ -108,9 +108,11 @@ class OabAkamaiForm extends ConfigFormBase {
 
         $form['test']['test_url'] = array(
             '#type' => 'textfield',
-            '#title' => t("URL")
+            '#title' => t("URL"),
+            '#maxlength' => 2083,
+            '#size' => 2083
         );
-
+        
         $form['test']['test_host'] = array(
             '#type' => 'textfield',
             '#title' => t("Host"),
