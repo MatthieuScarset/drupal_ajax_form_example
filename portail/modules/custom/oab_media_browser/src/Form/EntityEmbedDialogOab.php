@@ -555,7 +555,7 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
                 // Also log an exception.
                 if (empty($display_plugin_options)) {
                     $form_state->setError($element, $this->t('No display options available for the selected entity. Please select another entity.'));
-                    $this->logger('entity_embed')->warning('No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one Entity Embed Display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $entity->id(), '@button' => $embed_button->id()));
+                    $this->logger('oab_entity_embed')->warning('No display options available for "@type:" entity "@id" while embedding using button "@button". Please ensure that at least one Entity Embed Display plugin is allowed for this embed button which is available for this entity.', array('@type' => $entity_type, '@id' => $entity->id(), '@button' => $embed_button->id()));
                 }
             }
         }

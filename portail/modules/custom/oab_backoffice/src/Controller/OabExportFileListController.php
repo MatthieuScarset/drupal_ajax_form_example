@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OabExportFileListController extends ControllerBase {
     private static $dir = "public://export_document";
-    private static $logName = "ExportFile";
+    private static $logName = "oab_export_file";
 
     public function runBatch(Request $request) {
 

@@ -1,0 +1,5 @@
+services:
+  oab_develop.oab_logger:
+    class: Drupal\oab_develop\Logger\OabLogger
+    tags:
+      - { name: logger }
