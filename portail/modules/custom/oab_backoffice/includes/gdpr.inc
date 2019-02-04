@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Datetime;
+use Drupal\oab_akamai\Form\OabAkamaiForm;
 
 
 /**
@@ -539,30 +540,37 @@ function gdpr_hook_entity_update($entity) {
 
         if ($is_published) {
 
-            /////////////////////////////////////////////////////
-            //Vidage des caches des contenus possedant ce webform
-            $webform_id = $entity->id();
+            // Suppression des caches des nodes avec le formulaire qui vient d'être sauvegardé,
+            //si le vidage des cages à la sauvegarde d'un noeud est activé
 
-            //Recuperation de tous les contents type "Webform" ayant le formulaire
-            $query = \Drupal::entityQuery('node');
-            $query->condition('type', 'webform');
-            $query->condition('webform', $webform_id);
-            $result = $query->execute();
+            $config = \Drupal::config(OabAkamaiForm::getConfigName());
+            $hook_enabled = $config->get('enable_hook');
 
-            $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
-            $host = "https://".\Drupal::request()->getHost();
+            if ($hook_enabled) {
+                /////////////////////////////////////////////////////
+                //Vidage des caches des contenus possedant ce webform
+                $webform_id = $entity->id();
 
-            foreach ($result as $value) {
-                $node_url =  Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $value])->setAbsolute()->toString();
+                //Recuperation de tous les contents type "Webform" ayant le formulaire
+                $query = \Drupal::entityQuery('node');
+                $query->condition('type', 'webform');
+                $query->condition('webform', $webform_id);
+                $result = $query->execute();
 
-                $node_url = str_replace("back.", '', $node_url);
-                $node_url = str_replace("backoffice.", '', $node_url);
+                $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+                $host = "https://" . \Drupal::request()->getHost();
 
-                $akamai_ctrl->flushAkamai($node_url);
-                $akamai_ctrl->flushVarnish($node_url, $host);
-                $akamai_ctrl->flushDrupalCache($node_url);
+                foreach ($result as $value) {
+                    $node_url = Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $value])->setAbsolute()->toString();
+
+                    $node_url = str_replace("back.", '', $node_url);
+                    $node_url = str_replace("backoffice.", '', $node_url);
+
+                    $akamai_ctrl->flushAkamai($node_url);
+                    $akamai_ctrl->flushVarnish($node_url, $host);
+                    $akamai_ctrl->flushDrupalCache($node_url);
+                }
             }
-
         }
     }
 }
