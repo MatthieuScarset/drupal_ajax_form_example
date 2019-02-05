@@ -1,19 +1,31 @@
 <?php
 namespace Drupal\oab_develop\Logger;
 
+use Drupal\Core\Logger\LogMessageParserInterface;
 use Drupal\Core\Logger\RfcLoggerTrait;
 use Drupal\Core\Logger\RfcLogLevel;
+use Drupal\oab_develop\Form\OabLogSettingsForm;
 use Psr\Log\LoggerInterface;
-use \Drupal\oab_develop\Form\OabLogSettingsForm;
 
 class OabLogger implements LoggerInterface {
     use RfcLoggerTrait;
 
     /**
+     * The message's placeholders parser.
+     *
+     * @var \Drupal\Core\Logger\LogMessageParserInterface
+     */
+    protected $parser;
+
+    public function __construct(LogMessageParserInterface $parser) {
+        $this->parser = $parser;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function log($level, $message, array $context = array()) {
-        $rfcLevels = RfcLogLevel::getLevels();
+        $rfcLevels = $this->getLevels();
         $channel = isset($context['channel'])? $context['channel']: '';
 
         $logger_settings = \Drupal::config(OabLogSettingsForm::getConfigName());
@@ -28,9 +40,23 @@ class OabLogger implements LoggerInterface {
                 substr($channel, 0, 4) === "oab_"
                 || in_array($level, array_keys($authorized_levels)))) {
 
+            //Suppression de la backtrace pour ne pas allourdir le fichier
+            unset($context['backtrace']);
+            if (isset($context['@backtrace_string'])) {
+                $context['@backtrace_string'] = '';
+            }
+
+            $message_placeholders = $this->parser->parseMessagePlaceholders($message, $context);
+            $rendered_msg = strip_tags(t($message, $message_placeholders)->render());
+
             $stringifiedLevel = isset($rfcLevels[$level]) ? $rfcLevels[$level] : $level;
-            $new_message = "$stringifiedLevel : $message";
-            oabt_tracelog($channel, $new_message);
+
+            //Si je n'ai pas le type de log au début, je l'ajoute
+            if(substr($rendered_msg, 0, strlen($level)) !== $level) {
+                $rendered_msg = "$stringifiedLevel : $rendered_msg";
+            }
+
+            oabt_tracelog($channel, $rendered_msg);
         }
     }
 
