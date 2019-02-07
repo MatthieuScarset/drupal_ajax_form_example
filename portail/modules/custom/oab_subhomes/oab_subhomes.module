@@ -223,7 +223,7 @@ function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
         $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
         array_unshift($form['#validate'], 'oab_subhomes_check_group_team');
 
-        $form['#fieldgroups']['group_team_details']->format_settings['description'] = "Tous les champs doivent être renseignés";
+        $form['#fieldgroups']['group_team_details']->format_settings['description'] = t("Every field should be fulfilled");
         $form['#submit'][] = 'oab_subhomes_clear_team';
     }
 
