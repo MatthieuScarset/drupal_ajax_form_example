@@ -25,14 +25,14 @@ class OabLogger implements LoggerInterface {
      * {@inheritdoc}
      */
     public function log($level, $message, array $context = array()) {
-        $rfcLevels = $this->getLevels();
+        $rfc_levels = $this->getLevels();
         $channel = isset($context['channel'])? $context['channel']: '';
 
         $logger_settings = \Drupal::config(OabLogSettingsForm::getConfigName());
         $is_activated = $logger_settings->get(OabLogSettingsForm::OAB_LOG_ACTIF);
         $authorized_levels = $logger_settings->get(OabLogSettingsForm::LISTE_LEVELS);
 
-        if(!is_array($authorized_levels)) {
+        if (!is_array($authorized_levels)) {
             $authorized_levels = [];
         }
 
@@ -49,11 +49,11 @@ class OabLogger implements LoggerInterface {
             $message_placeholders = $this->parser->parseMessagePlaceholders($message, $context);
             $rendered_msg = strip_tags(t($message, $message_placeholders)->render());
 
-            $stringifiedLevel = isset($rfcLevels[$level]) ? $rfcLevels[$level] : $level;
+            $stringified_level = isset($rfc_levels[$level]) ? $rfc_levels[$level] : $level;
 
             //Si je n'ai pas le type de log au début, je l'ajoute
-            if(substr($rendered_msg, 0, strlen($level)) !== $level) {
-                $rendered_msg = "$stringifiedLevel : $rendered_msg";
+            if (substr($rendered_msg, 0, strlen($level)) !== $level) {
+                $rendered_msg = "$stringified_level : $rendered_msg";
             }
 
             oabt_tracelog($channel, $rendered_msg);
