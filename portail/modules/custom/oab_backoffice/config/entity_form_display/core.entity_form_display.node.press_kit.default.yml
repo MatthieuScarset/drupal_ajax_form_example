@@ -12,6 +12,8 @@ dependencies:
     - field.field.node.press_kit.field_file
     - field.field.node.press_kit.field_highlight
     - field.field.node.press_kit.field_industry
+    - field.field.node.press_kit.field_insight
+    - field.field.node.press_kit.field_insight_type
     - field.field.node.press_kit.field_job_profile
     - field.field.node.press_kit.field_market_segment
     - field.field.node.press_kit.field_meta_description
@@ -22,8 +24,8 @@ dependencies:
     - field.field.node.press_kit.field_solution
     - field.field.node.press_kit.field_start_date
     - field.field.node.press_kit.field_subhome
-    - field.field.node.press_kit.field_thematic
     - field.field.node.press_kit.field_visual
+    - field.field.node.press_kit.field_visual_tile
     - field.field.node.press_kit.moderation_state_update
     - node.type.press_kit
   module:
@@ -59,6 +61,7 @@ third_party_settings:
         - field_highlight
         - field_content
         - field_visual
+        - field_visual_tile
         - field_aplat
         - field_file
       parent_name: group_onglets
@@ -74,6 +77,8 @@ third_party_settings:
     group_classify:
       children:
         - field_subhome
+        - field_insight
+        - field_insight_type
         - field_industry
         - field_solution
         - field_press_type
@@ -145,7 +150,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_aplat:
-    weight: 27
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -188,7 +193,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 28
+    weight: 29
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -210,11 +215,23 @@ content:
     type: string_textarea
     region: content
   field_industry:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
     weight: 49
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_meta_description:
     weight: 25
     settings:
@@ -238,19 +255,19 @@ content:
     type: metatag_firehose
     region: content
   field_press_type:
-    weight: 51
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
-  field_region:
     weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_region:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_solution:
-    weight: 50
+    weight: 52
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -269,6 +286,20 @@ content:
     region: content
   field_visual:
     weight: 26
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 27
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -346,5 +377,4 @@ content:
 hidden:
   field_job_profile: true
   field_market_segment: true
-  field_thematic: true
   sticky: true

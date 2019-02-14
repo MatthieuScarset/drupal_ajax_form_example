@@ -2,16 +2,22 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browser_file_modal
     - field.field.node.custom_page.field_content
     - field.field.node.custom_page.field_display_title
     - field.field.node.custom_page.field_hub
     - field.field.node.custom_page.field_hub_portal
+    - field.field.node.custom_page.field_insight
+    - field.field.node.custom_page.field_insight_type
     - field.field.node.custom_page.field_meta_description
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.field_visual
+    - field.field.node.custom_page.field_visual_tile
     - field.field.node.custom_page.moderation_state_update
     - node.type.custom_page
   module:
+    - entity_browser
     - entity_browser_entity_form
     - field_group
     - inline_entity_form
@@ -24,6 +30,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_classify
         - group_seo
         - group_publish
       parent_name: ''
@@ -40,8 +47,8 @@ third_party_settings:
         - title
         - field_display_title
         - field_content
-        - field_hub
-        - field_hub_portal
+        - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -57,7 +64,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         id: ''
@@ -70,7 +77,7 @@ third_party_settings:
       children:
         - moderation_state_update
       parent_name: group_onglets
-      weight: 9
+      weight: 10
       format_type: tab
       format_settings:
         id: ''
@@ -79,6 +86,22 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publish
+    group_classify:
+      children:
+        - field_insight
+        - field_insight_type
+        - field_hub
+        - field_hub_portal
+      parent_name: group_onglets
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
 id: node.custom_page.default
 targetEntityType: node
 bundle: custom_page
@@ -106,20 +129,32 @@ content:
     type: boolean_checkbox
     region: content
   field_hub:
-    weight: 5
+    weight: 53
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 34
+    weight: 54
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
+  field_insight:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight_type:
+    type: options_select
+    weight: 52
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_meta_description:
-    weight: 13
+    weight: 54
     settings:
       size: 60
       placeholder: ''
@@ -127,7 +162,7 @@ content:
     type: string_textfield
     region: content
   field_meta_title:
-    weight: 12
+    weight: 52
     settings:
       size: 60
       placeholder: ''
@@ -139,6 +174,33 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
+    region: content
+  field_visual:
+    weight: 5
+    settings:
+      entity_browser: browser_file_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 6
+    settings:
+      entity_browser: browser_file_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   langcode:
     type: language_select
