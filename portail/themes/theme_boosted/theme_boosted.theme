@@ -27,7 +27,7 @@ function theme_boosted_preprocess_html(&$variables) {
     //RUBYPORTAILOBS-3317
     //gestion des canonical url pour les contenu hub
     $node = \Drupal::routeMatch()->getParameter('node');
-    if(isset($node) && $node<>""){
+    if(isset($node) && $node<>"" && is_object($node)){
         $nid = $node->id();
         $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
@@ -565,10 +565,12 @@ function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $
  */
 function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
 	if ($node = \Drupal::routeMatch()->getParameter('node')) {
-		$content_type = $node->bundle();
-		if($content_type == 'custom_page') {
-			$suggestions[] = 'page__' . $content_type;
-		}
+	    if (is_object($node)) {
+            $content_type = $node->bundle();
+            if ($content_type == 'custom_page') {
+                $suggestions[] = 'page__' . $content_type;
+            }
+        }
 	}
 }
 
