@@ -13,8 +13,8 @@ define('MAGAZINE_ARTICLE_SELECT_DATE', 1388530800);
 define('MAGAZINE_INTERVIEW_SELECT_DATE', 1388530800);
 
 //Date de la migration => 6/8/2017 à 23:59:59
-define('TIMESTAMP_MIGRATION_VALUE', 1502056799 );
-define('TIMESTAMP_MIGRATION_OPERATOR', '>' );
+define('TIMESTAMP_MIGRATION_VALUE', 1502056799);
+define('TIMESTAMP_MIGRATION_OPERATOR', '>');
 
 function oab_migrate_workflow_sid_correspondance($old_sid) {
   $workflow_state = NULL;
@@ -46,68 +46,64 @@ function oab_migrate_workflow_sid_correspondance($old_sid) {
 /** Permet de migrer les images contenues dans un body de wysiwyg
  * @param $content
  */
-function oab_migrate_wysiwyg_images($content, $nidD7)
-{
+function oab_migrate_wysiwyg_images($content, $nidd7){
   //$content = $content_field->value;
   //Pattern de recherche pour une image dans un WYSIWYG
     $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
-  $searchResults = array();
+  $search_results = array();
   $error = false;
   //Recherche du pattern
-  while(preg_match($pattern, $content, $searchResults) && !$error)
-  {
-      $chaineTrouvee = $searchResults[0];
+  while (preg_match($pattern, $content, $search_results) && !$error) {
+      $chaine_trouvee = $search_results[0];
       //on teste s'il y a plusieurs images dans un résultat
-      if (mb_substr_count($chaineTrouvee, "]]") > 1)
-      {
-          $pos = strpos($chaineTrouvee, "]]" ); //on cherche la premiere fin
-          $sousChaine = substr($chaineTrouvee, 0, $pos+2);
-            $sousChaineRemplacee = migrate_file_in_string($sousChaine, $nidD7, $error);
-            $content = str_replace($sousChaine, $sousChaineRemplacee, $content);
+      if (mb_substr_count($chaine_trouvee, "]]") > 1) {
+          $pos = strpos($chaine_trouvee, "]]"); //on cherche la premiere fin
+          $sous_chaine = substr($chaine_trouvee, 0, $pos+2);
+            $sous_chaine_remplacee = migrate_file_in_string($sous_chaine, $nidd7, $error);
+            $content = str_replace($sous_chaine, $sous_chaine_remplacee, $content);
 
         }
         else {
           //il n'y a qu'une image a remplacer
-            $newChaine = migrate_file_in_string($chaineTrouvee, $nidD7, $error);
-            $content = str_replace($searchResults[0], $newChaine, $content);
+            $new_chaine = migrate_file_in_string($chaine_trouvee, $nidd7, $error);
+            $content = str_replace($search_results[0], $new_chaine, $content);
         }
   }
 
   return $content;
 }
 
-function migrate_file_in_string($chaineARemplacer, $nidD7, &$error) {
+function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
     $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
-    $searchResults = array();
-    while (preg_match($pattern, $chaineARemplacer, $searchResults) && !$error)
-    {
+    $search_results = array();
+    while (preg_match($pattern, $chaine_a_remplacer, $search_results) && !$error) {
             //Au moins une image a été trouvée dans le WYSIWYG, on a son fid
-            $fidD7 = end($searchResults);
+            $fidd7 = end($search_results);
             //on recupere le alt de l'image
             $alt_img = "";
-            if (isset($searchResults[0])) {
-                $patternAlt = '/"alt":"([^"]*)"/i';
-                $resultsAlt = array();
-                $errorAlt = FALSE;
-                if (preg_match($patternAlt, $searchResults[0], $resultsAlt)) {
-                    $alt_img = end($resultsAlt);
+            if (isset($search_results[0])) {
+                $pattern_alt = '/"alt":"([^"]*)"/i';
+                $results_alt = array();
+                $error_alt = FALSE;
+                if (preg_match($pattern_alt, $search_results[0], $results_alt)) {
+                    $alt_img = end($results_alt);
                     //var_dump($resultsAlt);
                 }
             }
 
             //Récupération des informations du file D7
             \Drupal\Core\Database\Database::setActiveConnection('drupal7');
-            $dbD7 = \Drupal\Core\Database\Database::getConnection();
+            $dbd7 = \Drupal\Core\Database\Database::getConnection();
 
             //requete sur le fichier D7
-            $file_query = $dbD7->select('file_managed', 'f');
+            $file_query = $dbd7->select('file_managed', 'f');
             $file_query->fields('f')
-                ->condition('f.fid', $fidD7, '=');
+                ->condition('f.fid', $fidd7, '=');
             $file_results = $file_query->execute()->fetchObject();
 
             //on remet la connexion D8
             \Drupal\Core\Database\Database::setActiveConnection();
-            $dbD8 = \Drupal\Core\Database\Database::getConnection();
+            $dbd8 = \Drupal\Core\Database\Database::getConnection();
 
             if (is_object($file_results)) {
                 if (isset($file_results->uri)) {
@@ -119,14 +115,14 @@ function migrate_file_in_string($chaineARemplacer, $nidD7, &$error) {
                         $file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
 
                         //on recherche si le media existe déjà
-                        $media_query = $dbD8->select('media', 'm');
+                        $media_query = $dbd8->select('media', 'm');
                         $media_query->join('media__field_image', 'mfi', 'mfi.entity_id = m.mid');
                         $media_query->fields('m')
                             ->condition('mfi.field_image_target_id', $file->id(), '=');
                         $media_results = $media_query->execute()->fetchObject();
 
                         if (!empty($media_results) && is_object($media_results)) {
-                            $newUUID = $media_results->uuid;
+                            $new_uuid = $media_results->uuid;
                             $media = Media::load($media_results->mid);
                             $media->set('field_image', array(
                                 'target_id' => $file->id(),
@@ -150,69 +146,68 @@ function migrate_file_in_string($chaineARemplacer, $nidD7, &$error) {
                                 'title' => $alt_img
                             ));
                             $media->save();
-                            $newUUID = $media->uuid();
+                            $new_uuid = $media->uuid();
                         }
 
                         //creation de la nouvelle syntaxe pour l'image avec l'uuid
-                        $syntaxD8 = '<drupal-entity data-embed-button="media_browser" data-entity-embed-display="entity_reference:entity_reference_entity_view" data-entity-embed-settings="{&quot;view_mode&quot;:&quot;default&quot;}" data-entity-type="media" data-entity-uuid="' . $newUUID . '"></drupal-entity>';
+                        $syntax_d8 = '<drupal-entity data-embed-button="media_browser" data-entity-embed-display="entity_reference:entity_reference_entity_view" data-entity-embed-settings="{&quot;view_mode&quot;:&quot;default&quot;}" data-entity-type="media" data-entity-uuid="' . $new_uuid . '"></drupal-entity>';
 
                         //on remplace l'ancienne syntaxe par la nouvelle
-                        $chaineARemplacer = str_replace($searchResults[0], $syntaxD8, $chaineARemplacer);
+                        $chaine_a_remplacer = str_replace($search_results[0], $syntax_d8, $chaine_a_remplacer);
                     }
                     else {
                         $error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
                         //l'image n'existe pas
                         \Drupal::logger('oab_migrate_content')
-                            ->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : " . $saved_path);
+                            ->notice(" ***** ERREUR ***** Migration du Node " . $nidd7 . " (nid D7) --- Une ou plusieurs images n'existent PAS. Ex : " . $saved_path);
                     }
                 }
                 else {
                     $error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
                     //l'image n'existe pas
                     \Drupal::logger('oab_migrate_content')
-                        ->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
+                        ->notice(" ***** ERREUR ***** Migration du Node " . $nidd7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
                 }
             }
             else {
                 $error = TRUE; //en cas d'erreur on s'arret sinon boucle infinie
                 //l'image n'existe pas
                 \Drupal::logger('oab_migrate_content')
-                    ->notice(" ***** ERREUR ***** Migration du Node " . $nidD7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
+                    ->notice(" ***** ERREUR ***** Migration du Node " . $nidd7 . " (nid D7) --- Une ou plusieurs images n'existent PAS.");
             }
     }
-    return $chaineARemplacer;
+    return $chaine_a_remplacer;
 }
 
 
-function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7, $nid_D7, $bundle_D7)
-{
+function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_d7, $field_d7, $nid_d7, $bundle_d7){
     \Drupal\Core\Database\Database::setActiveConnection('drupal7');
-    $dbD7 = \Drupal\Core\Database\Database::getConnection();
+    $dbd7 = \Drupal\Core\Database\Database::getConnection();
     $new_values = array();
     $tableau_correspondance = \Drupal::state()->get($name_tab_state);
     if (count($tableau_correspondance) > 0) {
-        $query = $dbD7->select($table_D7, 'i');
-        $query->join('taxonomy_term_data', 't', 't.tid = i.'.$field_D7);
+        $query = $dbd7->select($table_d7, 'i');
+        $query->join('taxonomy_term_data', 't', 't.tid = i.'.$field_d7);
         $query->fields('t', ['tid'])
-            ->condition('i.entity_id', $nid_D7, '=')
-            ->condition('i.bundle', $bundle_D7, '=');
+            ->condition('i.entity_id', $nid_d7, '=')
+            ->condition('i.bundle', $bundle_d7, '=');
 
         $results = $query->execute()->fetchAll();
 
         if (is_array($results)) {
             foreach ($results AS $result) {
-                $tid_D7 = '';
+                $tid_d7 = '';
                 // On vérifie si on a affaire à un objet ou à un tableau
                 if (is_object($result) && isset($result->tid)) {
-                    $tid_D7 = $result->tid;
+                    $tid_d7 = $result->tid;
                 }
                 elseif (is_array($result) && isset($result['tid'])) {
-                    $tid_D7 = $result['tid'];
+                    $tid_d7 = $result['tid'];
                 }
-                if (isset($tableau_correspondance[$tid_D7]) && isset($tableau_correspondance[$tid_D7]['tid_D8'])) {
+                if (isset($tableau_correspondance[$tid_d7]) && isset($tableau_correspondance[$tid_d7]['tid_D8'])) {
                     //prendre le tid D8
-                    if (isset($tableau_correspondance[$tid_D7]['tid_D8']) && !empty($tableau_correspondance[$tid_D7]['tid_D8']) && $tableau_correspondance[$tid_D7]['tid_D8'] != "") {
-                        $new_values[] = $tableau_correspondance[$tid_D7]['tid_D8'];
+                    if (isset($tableau_correspondance[$tid_d7]['tid_D8']) && !empty($tableau_correspondance[$tid_d7]['tid_D8']) && $tableau_correspondance[$tid_d7]['tid_D8'] != "") {
+                        $new_values[] = $tableau_correspondance[$tid_d7]['tid_D8'];
                     }
                 }
             }
@@ -223,14 +218,13 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_D7, $field_D7,
     return $new_values;
 }
 
-function get_country_term($code, $name)
-{
+function get_country_term($code, $name) {
     //on remet la connexion D8
     \Drupal\Core\Database\Database::setActiveConnection();
-    $dbD8 = \Drupal\Core\Database\Database::getConnection();
+    $dbd8 = \Drupal\Core\Database\Database::getConnection();
 
     //vérification de l'existance du terme et création
-    $query = $dbD8->select('taxonomy_term_field_data', 't');
+    $query = $dbd8->select('taxonomy_term_field_data', 't');
     $query->leftJoin('taxonomy_term__field_country_code', 'c', 'c.entity_id = t.tid');
     $query->condition('t.vid', 'office_countries');
     $query->condition('t.langcode', 'und');
@@ -242,16 +236,16 @@ function get_country_term($code, $name)
     if (isset($entity) && isset($entity->tid)) {
         return $entity->tid;
     }
-    else{
+    else {
         //s'il n'existe pas on le crée
-        $newTerm = \Drupal\taxonomy\Entity\Term::create([
+        $new_term = \Drupal\taxonomy\Entity\Term::create([
             'vid' => 'office_countries',
             'langcode' => 'und',
             'name' => $name,
             'field_country_code' => $code,
         ]);
-        $newTerm->save();
-        return $newTerm->id();
+        $new_term->save();
+        return $new_term->id();
     }
 
     //on remet la connexion D7
