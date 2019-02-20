@@ -25,6 +25,10 @@
     border-right: 1px solid black;
 }
 
+.border-right-direct-bar {
+    border-right: 1px solid #bbb;
+}
+
 #slider_direct_access .item-direct-access:last-child .border-right {
     border-right: none;
 }

@@ -170,6 +170,11 @@
     color: #fff;
 }
 
+.bg-direct-bar {
+    background-color: #ddd;
+    color: #000;
+}
+
 .bg_blue {
     background-color: #4bb4e6;
 }
