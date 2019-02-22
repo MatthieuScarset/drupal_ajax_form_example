@@ -687,3 +687,12 @@ nav .menu.navbar-nav a:active,
 nav .menu.navbar-nav a:focus {
     outline: none;
 }
+
+
+.navbar-header.logo .logo.navbar-btn {
+    margin-top: 0;
+}
+
+#top_navbar .navbar-nav > li:first-child {
+    margin-left: 0;
+}
