@@ -14,3 +14,9 @@ function oab_eddy_update_dependencies() {
     return $dependencies;
 }
 
+/**
+ *  Création taxo analyste + ajout aux simples pages
+ */
+function oab_eddy_update_8001() {
+    include_once("updates/update_8001.inc");
+}
