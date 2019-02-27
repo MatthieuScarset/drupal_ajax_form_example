@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.document.field_content
     - field.field.node.document.field_content_owner
     - field.field.node.document.field_display_title
+    - field.field.node.document.field_document_language
     - field.field.node.document.field_document_thematic
     - field.field.node.document.field_document_type
     - field.field.node.document.field_email_owner
@@ -153,10 +154,11 @@ content:
 hidden:
   field_blog_thematic: true
   field_content_owner: true
+  field_display_title: true
+  field_document_language: true
+  field_email_owner: true
   field_hub: true
   field_hub_portal: true
-  field_display_title: true
-  field_email_owner: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true

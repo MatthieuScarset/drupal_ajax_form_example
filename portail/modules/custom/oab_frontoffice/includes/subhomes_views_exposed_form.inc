@@ -94,6 +94,10 @@ function subhomes_views_exposed_form(&$form) {
             $form['document_types']['#options']['All'] = t('Type');
         }
 
+        if (isset($form['document_language'])) {
+            $form['document_language']['#options']['All'] = t('Document language');
+        }
+
         // HACK POUR LA SORTIE
         if ($current_language == 'fr') {
             // on supprime "eBook"
@@ -102,7 +106,10 @@ function subhomes_views_exposed_form(&$form) {
         if ($current_language == 'en') {
             // on supprime "position paper"
             unset($form['field_document_type_target_id']['#options']['Position paper']);
+        } else {
+            unset($form['document_language']);
         }
+
     }
 
     // subhome presse
