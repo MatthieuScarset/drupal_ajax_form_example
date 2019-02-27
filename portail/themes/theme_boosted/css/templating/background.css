@@ -345,6 +345,10 @@ _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
     font-weight: bold;
 }
 
+.page-business-insight .region.region-content {
+    background-color: #ededed;
+}
+
 @media (max-width: 480px) {
     .product_modules.bg_white {
        /* background-color: #ddd;*/
