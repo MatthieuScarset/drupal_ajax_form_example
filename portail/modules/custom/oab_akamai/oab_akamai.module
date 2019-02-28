@@ -29,7 +29,7 @@ function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
         # On recupère l'URL du noeud et le host du site
         $node_url = $node->toUrl()->setAbsolute()->toString();
 
-        $host = "https://".\Drupal::request()->getHost();
+        $host = \Drupal::request()->getSchemeAndHttpHost();
 
         $node_url = str_replace("back.", '', $node_url);
         $node_url = str_replace("backoffice.", '', $node_url);
