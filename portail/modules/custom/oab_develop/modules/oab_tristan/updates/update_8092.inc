@@ -29,7 +29,7 @@ $terms_name = ['English', 'Chinese'];
 foreach ($terms_name as $term_name) {
     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
         'vid' => $voca_id,
-        'name' => $term
+        'name' => $term_name
     ]);
 
     if (count($term) === 0) {
@@ -41,7 +41,6 @@ foreach ($terms_name as $term_name) {
         $term->save();
     }
 }
-
 
 
 ## Création du field
