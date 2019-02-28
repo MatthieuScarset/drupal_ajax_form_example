@@ -26,7 +26,7 @@ oabt_YmlImport('taxonomy.vocabulary.document_language.yml');
 
 ## Ajout des termes
 $terms_name = ['English', 'Chinese'];
-foreach ($terms as $term_name) {
+foreach ($terms_name as $term_name) {
     $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties([
         'vid' => $voca_id,
         'name' => $term
@@ -72,3 +72,7 @@ oabt_YmlImport('field.field.node.document.field_document_language.yml');
 
 oabt_YmlImport('core.entity_view_display.node.document.default.yml');
 oabt_YmlImport('core.entity_form_display.node.document.default.yml');
+
+
+
+oabt_YmlImport('views.view.subhomes.yml');
