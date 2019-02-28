@@ -5,10 +5,8 @@ dependencies:
     - core.entity_view_mode.node.subhome
     - node.type.distributor
     - node.type.press_release
-    - taxonomy.vocabulary.analyst
     - taxonomy.vocabulary.departments
     - taxonomy.vocabulary.hub
-    - taxonomy.vocabulary.regions
     - taxonomy.vocabulary.solutions
   module:
     - node
@@ -449,23 +447,23 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        tid:
-          id: tid
+        name:
+          id: name
           table: taxonomy_term_field_data
-          field: tid
+          field: name
           relationship: field_analysts
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_op
+            operator_id: name_op
             label: Analyst
             description: ''
             use_operator: false
-            operator: tid_op
+            operator: name_op
             identifier: analyst
             required: false
             remember: false
@@ -485,7 +483,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -498,32 +496,26 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: analyst
-          hierarchy: false
-          error_message: true
           entity_type: taxonomy_term
-          entity_field: tid
-          plugin_id: taxonomy_index_tid
-        tid_1:
-          id: tid_1
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
           table: taxonomy_term_field_data
-          field: tid
+          field: name
           relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_1_op
+            operator_id: name_1_op
             label: Solution
             description: ''
             use_operator: false
-            operator: tid_1_op
+            operator: name_1_op
             identifier: solutions
             required: false
             remember: false
@@ -543,7 +535,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -556,33 +548,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
           entity_type: taxonomy_term
-          entity_field: tid
-          plugin_id: taxonomy_index_tid
-        tid_2:
-          id: tid_2
+          entity_field: name
+          plugin_id: string
+        name_2:
+          id: name_2
           table: taxonomy_term_field_data
-          field: tid
+          field: name
           relationship: field_region
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: tid_2_op
-            label: Analysts
+            operator_id: name_2_op
+            label: Region
             description: ''
             use_operator: false
-            operator: tid_2_op
-            identifier: region
+            operator: name_2_op
+            identifier: regions
             required: false
             remember: false
             multiple: false
@@ -601,7 +587,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -614,15 +600,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: regions
-          hierarchy: false
-          error_message: true
           entity_type: taxonomy_term
-          entity_field: tid
-          plugin_id: taxonomy_index_tid
+          entity_field: name
+          plugin_id: string
         node_year:
           id: node_year
           table: node_field_data
@@ -2614,6 +2594,58 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_document_language
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_2_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: name_2_op
+            identifier: document_language
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
@@ -2636,6 +2668,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_insight: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_document_language:
+          id: field_document_language
+          table: node__field_document_language
+          field: field_document_language
+          relationship: none
+          group_type: group
+          admin_label: 'field_document_language: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:

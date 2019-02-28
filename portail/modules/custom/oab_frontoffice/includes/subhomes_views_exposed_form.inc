@@ -13,10 +13,16 @@ function subhomes_views_exposed_form(&$form) {
                 && $value['#type'] == "textfield") {
                 $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
                 if (is_object($vocabulary)) {
-                    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties([
-                        'vid' => $key,
-                        'langcode' => $current_language
-                    ]);
+
+                    $properties = [
+                        "vid" => $key
+                    ];
+
+                    if ($key !== 'analyst') {
+                        $properties['langcode'] = $current_language;
+                    }
+
+                    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
                     if (is_array($terms)
                         && !empty($terms)) {
                         $options = array('All' => t($vocabulary->get('name')));
