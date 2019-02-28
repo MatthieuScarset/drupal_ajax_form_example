@@ -2638,6 +2638,10 @@ body.page-node-type-custom-page{
     max-height: 316px;
 }
 
+.view-business-insight .view-content .tile.tile_Blogs .tags {
+   padding-top: 10px;
+}
+
 .fieldset-field-insight-type .fieldset-legend {
     display: inline-block;
     font-weight: bold;
