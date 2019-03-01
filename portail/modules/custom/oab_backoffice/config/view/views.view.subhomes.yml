@@ -5,7 +5,6 @@ dependencies:
     - core.entity_view_mode.node.subhome
     - node.type.distributor
     - node.type.press_release
-    - taxonomy.vocabulary.departments
     - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.solutions
   module:
@@ -451,7 +450,7 @@ display:
           id: name
           table: taxonomy_term_field_data
           field: name
-          relationship: field_solution
+          relationship: field_analysts
           group_type: group
           admin_label: ''
           operator: '='
@@ -460,27 +459,27 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: Solutions
+            label: Analyst
             description: ''
             use_operator: false
             operator: name_op
-            identifier: solutions
+            identifier: analyst
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
               contributor: '0'
               fh_backbones: '0'
               dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
             placeholder: ''
@@ -503,7 +502,7 @@ display:
           id: name_1
           table: taxonomy_term_field_data
           field: name
-          relationship: field_region
+          relationship: field_solution
           group_type: group
           admin_label: ''
           operator: '='
@@ -512,27 +511,79 @@ display:
           exposed: true
           expose:
             operator_id: name_1_op
-            label: region
+            label: Solution
             description: ''
             use_operator: false
             operator: name_1_op
+            identifier: solutions
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_region
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_2_op
+            label: Region
+            description: ''
+            use_operator: false
+            operator: name_2_op
             identifier: regions
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
               contributor: '0'
               fh_backbones: '0'
               dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
             placeholder: ''
@@ -669,6 +720,15 @@ display:
           admin_label: 'field_region: Taxonomy term'
           required: false
           plugin_id: standard
+        field_analysts:
+          id: field_analysts
+          table: node__field_analysts
+          field: field_analysts
+          relationship: none
+          group_type: group
+          admin_label: 'field_analysts: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -787,11 +847,11 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        name:
-          id: name
+        name_1:
+          id: name_1
           table: taxonomy_term_field_data
           field: name
-          relationship: field_blog_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -799,24 +859,31 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
+            operator_id: name_1_op
             label: Thematic
             description: ''
             use_operator: false
-            operator: name_op
-            identifier: blog_thematics
+            operator: name_1_op
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -926,15 +993,6 @@ display:
           1: AND
       title: Blog
       relationships:
-        field_blog_thematic:
-          id: field_blog_thematic
-          table: node__field_blog_thematic
-          field: field_blog_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_blog_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_blog_format:
           id: field_blog_format
           table: node__field_blog_format
@@ -942,6 +1000,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_blog_format: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
@@ -2057,56 +2124,6 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
-        field_departments_target_id:
-          id: field_departments_target_id
-          table: node__field_departments
-          field: field_departments_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_departments_target_id_op
-            label: 'By departments'
-            description: ''
-            use_operator: false
-            operator: field_departments_target_id_op
-            identifier: field_departments_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-              fh_backbones: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: departments
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
         type:
           id: type
           table: node_field_data
@@ -2147,6 +2164,58 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_departments
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: 'By departments'
+            description: ''
+            use_operator: false
+            operator: name_op
+            identifier: departments
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
         field_products_target_id:
           id: field_products_target_id
           table: node__field_products
@@ -2242,7 +2311,16 @@ display:
         groups:
           1: AND
       title: Distributors
-      relationships: {  }
+      relationships:
+        field_departments:
+          id: field_departments
+          table: node__field_departments
+          field: field_departments
+          relationship: none
+          group_type: group
+          admin_label: 'field_departments: Taxonomy term'
+          required: false
+          plugin_id: standard
       sorts:
         field_certification_obs_value:
           id: field_certification_obs_value
@@ -2390,7 +2468,7 @@ display:
           id: name
           table: taxonomy_term_field_data
           field: name
-          relationship: field_document_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -2403,19 +2481,26 @@ display:
             description: ''
             use_operator: false
             operator: name_op
-            identifier: document_thematics
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2519,21 +2604,64 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_document_language
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_2_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: name_2_op
+            identifier: document_language
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       title: Documents
       relationships:
-        field_document_thematic:
-          id: field_document_thematic
-          table: node__field_document_thematic
-          field: field_document_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_document_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_document_type:
           id: field_document_type
           table: node__field_document_type
@@ -2541,6 +2669,24 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_document_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_document_language:
+          id: field_document_language
+          table: node__field_document_language
+          field: field_document_language
+          relationship: none
+          group_type: group
+          admin_label: 'field_document_language: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
@@ -2663,7 +2809,7 @@ display:
           id: name
           table: taxonomy_term_field_data
           field: name
-          relationship: field_magazine_thematic
+          relationship: field_insight
           group_type: group
           admin_label: ''
           operator: '='
@@ -2676,19 +2822,26 @@ display:
             description: ''
             use_operator: false
             operator: name_op
-            identifier: magazine_thematics
+            identifier: thematic
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
-              webform_manager: '0'
               contributor: '0'
               fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2798,15 +2951,6 @@ display:
           1: AND
       title: Magazine
       relationships:
-        field_magazine_thematic:
-          id: field_magazine_thematic
-          table: node__field_magazine_thematic
-          field: field_magazine_thematic
-          relationship: none
-          group_type: group
-          admin_label: 'field_magazine_thematic: Taxonomy term'
-          required: false
-          plugin_id: standard
         field_magazine_type:
           id: field_magazine_type
           table: node__field_magazine_type
@@ -2814,6 +2958,15 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_magazine_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_insight:
+          id: field_insight
+          table: node__field_insight
+          field: field_insight
+          relationship: none
+          group_type: group
+          admin_label: 'field_insight: Taxonomy term'
           required: false
           plugin_id: standard
     cache_metadata:
@@ -3255,43 +3408,43 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        field_solution_target_id:
-          id: field_solution_target_id
-          table: node__field_solution
-          field: field_solution_target_id
-          relationship: none
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
           group_type: group
           admin_label: ''
-          operator: or
-          value: {  }
+          operator: '='
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_solution_target_id_op
+            operator_id: name_op
             label: Solution
             description: ''
             use_operator: false
-            operator: field_solution_target_id_op
-            identifier: field_solution_target_id
+            operator: name_op
+            identifier: solutions
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
               contributor: '0'
               fh_backbones: '0'
               dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            reduce: false
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -3304,13 +3457,9 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: solutions
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
         created:
           id: created
           table: node_field_data

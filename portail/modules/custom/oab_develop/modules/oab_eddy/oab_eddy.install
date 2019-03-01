@@ -14,3 +14,6 @@ function oab_eddy_update_dependencies() {
     return $dependencies;
 }
 
+function oab_eddy_update_8002() {
+    include_once("updates/update_8002.inc");
+}
