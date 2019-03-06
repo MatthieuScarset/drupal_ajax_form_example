@@ -2669,7 +2669,8 @@ body.page-node-type-custom-page{
 }
 
 div.business-insight-field-insight {
-    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .business-insight-field-insight select option {
