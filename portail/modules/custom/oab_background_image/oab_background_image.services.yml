@@ -1,0 +1,11 @@
+services:
+  oab_background_image.bg_image_management:
+    class: Drupal\oab_background_image\Services\BgImageManagement
+  oab_background_image.entity_get_field:
+    class: Drupal\oab_background_image\Services\EntityGetField
+  cache.oab_background_image:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+        - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [oab_background_image]

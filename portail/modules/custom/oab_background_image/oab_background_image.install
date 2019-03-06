@@ -1,0 +1,19 @@
+<?php
+
+function oab_background_image_install() {
+    drupal_set_installed_schema_version('oab_background_image', 8000);
+    module_set_weight("oab_will",30);
+
+    // Création du type de contenu et des fields nécessaires
+    include('updates/install.inc');
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_background_image_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}
+

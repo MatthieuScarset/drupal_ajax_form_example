@@ -1,0 +1,137 @@
+<?php
+
+define("BACKGROUND_FIELD_VISIBILITY", 'field_visibility');
+
+function oab_background_image_media_insert(Drupal\media_entity\Entity\Media $entity) {
+    if ($entity->bundle() !== 'background') {
+        return;
+    }
+
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
+    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+
+
+    if ($entity->isPublished()) {
+        $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
+
+        foreach (_oab_background_image_get_urls($field_value) as $url) {
+            $bgCacheService->add($url, $entity);
+        }
+    }
+}
+
+function oab_background_image_media_update(Drupal\media_entity\Entity\Media $entity) {
+
+    if ($entity->bundle() !== 'background') {
+        return;
+    }
+
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
+    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+
+    if ($entity->isPublished()) {
+
+        // First on delete toutes les anciennes URLs pour le cas d'une modif
+        if (isset($entity->original)) {
+
+            $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity->original, BACKGROUND_FIELD_VISIBILITY);
+
+            if (isset($field_value['value'])) {
+                $value = $field_value['value'];
+                $urls = explode("\r\n", $value);
+
+                foreach ($urls as $url) {
+                    $bgCacheService->remove($url);
+                }
+            }
+        }
+
+        // Then on remet toutes les URLs
+        /** @var Drupal\Core\Field\FieldItemList $field_visibility */
+        $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
+
+        foreach (_oab_background_image_get_urls($field_value) as $url) {
+            $bgCacheService->add($url, $entity);
+        }
+
+
+    } elseif (isset($entity->original)) {
+        /** @var Drupal\media_entity\Entity\Media $original */
+        $original = $entity->original;
+
+        // Si l'ancien était publié, on supp pour toutes les URLs
+        if ($original->isPublished()) {
+            $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
+            foreach (_oab_background_image_get_urls($field_value) as $url) {
+                $bgCacheService->remove($url);
+            }
+        }
+
+    }
+}
+
+
+/**
+ * Implements hook_entity_predelete().
+ */
+function oab_background_image_media_delete(Drupal\media_entity\Entity\Media $entity) {
+
+    if ($entity->bundle() !== 'background') {
+        return;
+    }
+
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
+    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+
+    /** @var Drupal\media_entity\Entity\Media $original */
+    $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
+
+    foreach (_oab_background_image_get_urls($field_value) as $url) {
+        $bgCacheService->remove($url);
+    }
+}
+
+
+
+function oab_background_image_preprocess_html(&$variables) {
+    $path = \Drupal::request()->getPathInfo();
+
+    /** @var Drupal\media_entity\Entity\Media $background */
+    $background = \Drupal::service('oab_background_image.bg_image_management')->get($path);
+
+    if ($background !== null && $background->isPublished() && isset($background->field_image->entity)) {
+        $file_url = file_url_transform_relative(file_create_url($background->field_image->entity->getFileUri()));
+
+        if ($file_url !== false) {
+            if (!isset($variables['attributes']['style'])) {
+                $variables['attributes']['style'] = "";
+            }
+
+            if (!isset($variables['attributes']['class'])) {
+                $variables['attributes']['class'] = "";
+            }
+            $variables['attributes']['class'] .= " oab_background_image ";
+            $variables['attributes']['style'] .= "; background-image: url('". $file_url ."'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover";
+
+        }
+    }
+}
+
+
+/**
+ * Implements hook_rebuild().
+ */
+function oab_background_image_rebuild() {
+    \Drupal::service('oab_background_image.bg_image_management')->rebuild();
+}
+
+
+
+function _oab_background_image_get_urls($field_value) {
+    $ret = [];
+    if (isset($field_value['value'])) {
+        $ret = explode("\r\n", $field_value['value']);
+    }
+
+    return $ret;
+}
