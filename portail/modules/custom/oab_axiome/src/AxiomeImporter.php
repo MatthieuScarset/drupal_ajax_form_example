@@ -48,7 +48,6 @@ class AxiomeImporter
      */
     public function axiome_search_archive($folder) {
         $count = 0;
-
         // Scan du dossier "axiome/import"
         $this->message .= "== STEP 2 : axiome_search_archive ".$folder."==\n";
         $this->axiome_create_dir($folder);
@@ -56,7 +55,6 @@ class AxiomeImporter
             $files = scandir($folder);
             if (!empty($files)) {
                 foreach ($files AS $file) {
-
                     if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip') {
                         $this->message .= "ZipFile found = $file \n";
 
@@ -66,7 +64,6 @@ class AxiomeImporter
                             $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
 
                             $this->axiomeNotification[] = "file : ".$file;
-
                             if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')) {
                                 $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER."\n" ;
                                 file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
@@ -75,10 +72,9 @@ class AxiomeImporter
                                 $folder_import = $folder.'/import';
 
                                 $this->message .= "folder_import = $folder_import \n";
-                                $files = scandir($folder_import);
+                                $subfiles = scandir($folder_import);
 
-
-                                foreach ($files AS $file) {
+                                foreach ($subfiles AS $file) {
 
                                     if (is_file($folder_import.'/'.$file)
                                         && substr($file, -4) == '.zip'
@@ -140,6 +136,7 @@ class AxiomeImporter
      */
     private function axiome_create_dir($folder) {
         if (!file_exists($folder)) {
+
             if (mkdir($folder, 0777, true)) {
                 return $folder;
             } else {
@@ -162,7 +159,6 @@ class AxiomeImporter
      */
     private function axiome_unzip($file, $destination) {
         $this->axiome_create_dir($destination);
-
         if (is_dir($destination)) {
             $cwd = getcwd();
             chdir($destination);
