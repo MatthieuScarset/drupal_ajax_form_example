@@ -483,3 +483,11 @@ _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
         font-size: 2rem;
     }
 }
+
+.oab_background_image .view-business-insight .view-content {
+    margin: 0;
+    background-color: transparent;
+}
+.oab_background_image .page-business-insight .region.region-content {
+    background-color: transparent;
+}
