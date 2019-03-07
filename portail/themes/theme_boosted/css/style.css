@@ -2844,3 +2844,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     }
 }
 
+.oab_background_image .view-business-insight .view-filters {
+    background-color: #ededed;
+    padding-bottom: 2rem;
+}
