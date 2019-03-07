@@ -27,3 +27,17 @@ block.settings.phone_number_block:
     block_title:
       type: label
       label: 'Block Title'
+
+block.settings.mediatheque_block:
+  type: block_settings
+  label: 'Mediatheque'
+  mapping:
+    mediatheque_text:
+      type: label
+      label: 'Text'
+    mediatheque_link:
+      type: label
+      label: 'Link'
+    mediatheque_link_text:
+      type: label
+      label: 'Link text'
