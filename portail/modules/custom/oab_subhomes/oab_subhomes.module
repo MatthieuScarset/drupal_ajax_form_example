@@ -202,25 +202,51 @@ function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $f
         // Ajout du validate pour le field visual et l'aplat de la partie Corporate
         $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
         array_unshift($form['#validate'], 'oab_subhomes_check_group_team');
+
+        $form['#fieldgroups']['group_team_details']->format_settings['description'] = t("Every field should be fulfilled");
+        $form['#submit'][] = 'oab_subhomes_clear_team';
     }
 
     // Je fais la même chose pour les fields de l'entité Dossier de presse
-    if ($form_id == 'node_press_kit_form' || $form_id == 'node_press_kit_edit_form' ) {
+    if ($form_id == 'node_press_kit_form' || $form_id == 'node_press_kit_edit_form') {
         $form['#validate'][] = 'oab_subhomes_check_visual_aplat';
     }
 }
 
-
 function oab_subhomes_check_group_team(&$form, Drupal\Core\Form\FormState &$form_state) {
 
-    $afficher_equipe = $form_state->getValue('field_afficher_bloc_notre_equipe');
+    if ($form_state->isSubmitted()) {
+        $afficher_equipe = $form_state->getValue('field_afficher_bloc_notre_equipe');
+        if (isset($afficher_equipe['value']) && $afficher_equipe['value'] == 1) {
 
-    if (isset($afficher_equipe['value']) && $afficher_equipe['value'] == 1) {
-        foreach ($form['#fieldgroups']['group_team_details']->children as $field) {
-            $form[$field]["#required"] = true;
+            foreach ($form['#fieldgroups']['group_team_details']->children as $field) {
+
+                $has_value = false;
+                if ($form_state->hasValue($field)) {
+                    $value = $form_state->getValue($field);
+                    $value = isset($value[0]) ? $value[0] : $value;
+
+                    if (isset($value['value']) && strlen($value['value']) > 0) {
+                        $has_value = true;
+                    }
+
+                    if (isset($value['target_id']) && strlen($value['target_id']) > 0) {
+                        $has_value = true;
+                    }
+
+                    if (isset($value['subform']) && is_array($value['subform'])) {
+                        $has_value = true;
+                    }
+                }
+                if (!$has_value) {
+                    $form_state->setErrorByName($field, t('The field @field in the @group tab is required', array(
+                       '@field' => isset($form[$field]['widget']['#title']) ? $form[$field]['widget']['#title'] : $field,
+                       '@group' => $form['#fieldgroups']['group_team']->label
+                    )));
+                }
+            }
         }
     }
-
 
 }
 
