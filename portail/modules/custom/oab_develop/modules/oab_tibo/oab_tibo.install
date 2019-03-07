@@ -20,7 +20,7 @@ function oab_tibo_update_dependencies() {
     $dependencies['oab_tibo'][8009] = array('oab_amel' => 8008);
     $dependencies['oab_tibo'][8008] = array('oab_amel' => 8011);
     $dependencies['oab_tibo'][8010] = array('oab_amel' => 8015);
-  $dependencies['oab_tibo'][8009] = array('oab_stephanie' => 8030);
+    $dependencies['oab_tibo'][8009] = array('oab_stephanie' => 8030);
     $dependencies['oab_tibo'][8016] = array('oab_christophe' => 8023);
     $dependencies['oab_tibo'][8021] = array('oab_tristan' => 8022);
     $dependencies['oab_tibo'][8028] = array('oab_tristan' => 8038);
@@ -94,7 +94,7 @@ function oab_tibo_update_8009() {
  * ajustement topzone
  */
 function oab_tibo_update_8010() {
-    include_once( "updates/update_8010.inc");
+    include_once("updates/update_8010.inc");
 }
 
 /**

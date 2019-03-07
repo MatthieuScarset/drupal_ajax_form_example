@@ -11,8 +11,7 @@ function isDVIProduct($node) {
             "en" => array('- 50 employees', 'Public Sector')
         );
         $default_values = array();
-        foreach ($default_labels as $lang => $labels)
-        {
+        foreach ($default_labels as $lang => $labels) {
             $default_values[$lang] = array();
             foreach ($labels as $label) {
                 $query = \Drupal::entityQuery('taxonomy_term');

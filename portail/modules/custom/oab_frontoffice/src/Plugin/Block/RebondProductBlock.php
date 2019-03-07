@@ -47,8 +47,7 @@ class RebondProductBlock extends BlockBase {
 
         //on deserialise les données à passer au template
         $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
-        if (count($field_axiome_data) > 0)
-        {
+        if (count($field_axiome_data) > 0) {
 
           $axiome_data = $field_axiome_data;
 
@@ -76,17 +75,17 @@ class RebondProductBlock extends BlockBase {
           }*/
 
           ##Changement pour la zone, on l'affiche toujours avec une URL par défaut si non dispo via Axiome
-          $eceSettings = \Drupal::config('oab.ece');
+          $ece_settings = \Drupal::config('oab.ece');
 
           $block['rebondProduct']['type'] = 'espaceClient';
-          $block['rebondProduct']['title'] = $eceSettings->get('title');
-          $block['rebondProduct']['text']  = $eceSettings->get('intro');
-          $block['rebondProduct']['connect_txt'] = $eceSettings->get('connect_txt');
-          $block['rebondProduct']['connect_link'] = $eceSettings->get('connect_link');
-          $block['rebondProduct']['create_txt'] = $eceSettings->get('create_txt');
-          $block['rebondProduct']['create_link'] = $eceSettings->get('create_link');
-          $block['rebondProduct']['discover_txt'] = $eceSettings->get('discover_txt');
-          $block['rebondProduct']['discover_link'] = $eceSettings->get('discover_link');
+          $block['rebondProduct']['title'] = $ece_settings->get('title');
+          $block['rebondProduct']['text']  = $ece_settings->get('intro');
+          $block['rebondProduct']['connect_txt'] = $ece_settings->get('connect_txt');
+          $block['rebondProduct']['connect_link'] = $ece_settings->get('connect_link');
+          $block['rebondProduct']['create_txt'] = $ece_settings->get('create_txt');
+          $block['rebondProduct']['create_link'] = $ece_settings->get('create_link');
+          $block['rebondProduct']['discover_txt'] = $ece_settings->get('discover_txt');
+          $block['rebondProduct']['discover_link'] = $ece_settings->get('discover_link');
 
           if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
               ['Attributes']['online_purchase_customer_area']) && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']

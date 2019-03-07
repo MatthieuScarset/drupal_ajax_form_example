@@ -49,15 +49,15 @@ class TopZoneBlock extends BlockBase {
         $block['#type'] = 'markup';
         $block['#markup'] = '';
         $content = '';
-        $contentTop = '';
-        $contentDesktop = '';
-        $contentMobile = '';
+        $content_top = '';
+        $content_desktop = '';
+        $content_mobile = '';
 
         if (isset($top_zone[0]['value'])) {
-            $contentTop = check_markup($top_zone[0]['value'], 'full_html', '', []);
+            $content_top = check_markup($top_zone[0]['value'], 'full_html', '', []);
         }
         if (isset($top_zone_background[0]['target_id'])) {
-            $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background[0]['target_id']);
+            $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background[0]['target_id']);
 
             $url = '';
             if (!is_null($entity)) {
@@ -71,12 +71,12 @@ class TopZoneBlock extends BlockBase {
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
                 $url = file_url_transform_relative($url);
             }
-            $classHiddenXs = "";
+            $class_hidden_xs = "";
             if (isset($top_zone_background_mobile[0]['target_id'])) {
-                $classHiddenXs = 'class="hidden-xs"';
+                $class_hidden_xs = 'class="hidden-xs"';
             }
-            $contentDesktop = check_markup('<div id="topzonebg"  '.$classHiddenXs.' style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
-            $content = $contentDesktop;
+            $content_desktop = check_markup('<div id="topzonebg"  '.$class_hidden_xs.' style="background:url('.$url.') top center no-repeat">'.$content_top.'</div>', 'full_html', '', []);
+            $content = $content_desktop;
         }
         if (isset($top_zone_background_mobile[0]['target_id'])) {
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load( (int) $top_zone_background_mobile[0]['target_id']);
@@ -87,8 +87,8 @@ class TopZoneBlock extends BlockBase {
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
                 $url = file_url_transform_relative($url);
             }
-            $contentMobile = check_markup('<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$contentTop.'</div>', 'full_html', '', []);
-            $content = check_markup($contentDesktop . $contentMobile, 'full_html', '', []) ;
+            $content_mobile = check_markup('<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$content_top.'</div>', 'full_html', '', []);
+            $content = check_markup($content_desktop . $content_mobile, 'full_html', '', []) ;
         }
         $block['#markup'] = $content;
         return $block;

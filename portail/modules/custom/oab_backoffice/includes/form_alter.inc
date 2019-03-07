@@ -276,7 +276,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if ($url !== null) {
 
             ##On recupère l'alias
-            $path = preg_replace('/\//', '', parse_url($url, PHP_URL_PATH),1);
+            $path = preg_replace('/\//', '', parse_url($url, PHP_URL_PATH), 1);
             $path = str_replace($current_language, '', $path);
 
             ##On recupère le /node/xxx depuis l'alias

@@ -3,7 +3,7 @@
 use Symfony\Component\Yaml\Yaml;
 use Drupal\locale\SourceString;
 
-define ('LOG_DIR', 'public://log/');
+define('LOG_DIR', 'public://log/');
 
 class OAB_Trace{
 
@@ -29,7 +29,7 @@ function oabt($elem, $lock=false, $message="") {
   if ($lock) {
     OAB_Trace::lock($elem);
   } else {
-    OAB_Trace::debug($elem,$message);
+    OAB_Trace::debug($elem, $message);
   }
 }
 
@@ -41,7 +41,7 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang) {
     $entity = $query->execute();
     if (isset($entity) && !empty($entity)) {
         foreach ($entity as $tid => $value) {
-            $tidRename = $tid;
+            $tid_rename = $tid;
         }
     } else {
         // creation du terme
@@ -51,15 +51,15 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang) {
             'langcode' => $lang,
         ]);
         $entity->save();
-        $tidRename = $entity->id();
+        $tid_rename = $entity->id();
     }
-    if (isset($tidRename)) {
+    if (isset($tid_rename)) {
         $connection = \Drupal\Core\Database\Database::getConnection();
         $query = $connection->update('taxonomy_term_field_data');
         $query->fields([
             'name' => $new,
         ]);
-        $query->condition('tid',$tidRename);
+        $query->condition('tid', $tid_rename);
         $query->execute();
     }
 }
@@ -78,7 +78,7 @@ function taxonomy_delete_taxo($name, $vid, $lang) {
     }
 }
 
-function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
+function taxonomy_rename_vocab($name_voca, $default_name, $vid, $lang) {
 //    $query = \Drupal::entityQuery('config');
 //    $query->condition('name', "taxonomy.vocabulary.".$vid);
 //    $entity = $query->execute();
@@ -91,14 +91,14 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
             'vid' => $vid,
             'description' => '',
             'content_translation' => true,
-            'name' => $defaultName,
+            'name' => $default_name,
         ));
         $vocabulary->save();
     }
 
     // enable translation
     $service = \Drupal::service('content_translation.manager');
-    $service->setEnabled('taxonomy_term',$vid, true);
+    $service->setEnabled('taxonomy_term', $vid, true);
 
     $config_factory = \Drupal::configFactory();
     $config_group = $config_factory->getEditable('language.content_settings.taxonomy_term.'.$vid);
@@ -108,14 +108,14 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
 
     // update default name in english
         $config_group = $config_factory->getEditable('taxonomy.vocabulary.'.$vid);
-        $config_group->set("name", $defaultName);
+        $config_group->set("name", $default_name);
         $config_group->save(TRUE);
 
 
     if ($lang != 'en') {
-        $vocaConfig = \Drupal::languageManager()->getLanguageConfigOverride($lang,'taxonomy.vocabulary.'.$vid);
-        $vocaConfig->set('name', $nameVoca);
-        $vocaConfig->save();
+        $voca_config = \Drupal::languageManager()->getLanguageConfigOverride($lang, 'taxonomy.vocabulary.'.$vid);
+        $voca_config->set('name', $name_voca);
+        $voca_config->save();
     }
 }
 
@@ -124,8 +124,7 @@ function taxonomy_rename_vocab($nameVoca, $defaultName, $vid, $lang) {
  * @param $format format de la chaine attendu
  * @return bool
  */
-function isValidDate($date, $format)
-{
+function isValidDate($date, $format) {
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) == $date;
 }
@@ -134,7 +133,7 @@ function isValidDate($date, $format)
 /**
  * Creation d'un field en bdd
  */
-function createField($field_name, $bundle,  $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
+function createField($field_name, $bundle, $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
     $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
@@ -168,7 +167,7 @@ function createField($field_name, $bundle,  $label, $type = 'text_long', $requir
 /**
  * Creation d'un field en bdd
  */
-function createFieldReference($field_name, $bundle,  $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
+function createFieldReference($field_name, $bundle, $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
     $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
@@ -214,7 +213,7 @@ function loadConfigField($folder, $key) {
  * @return bool
  */
 
-function oabt_TranslationImport($source_import,$language_import,$translation_import) {
+function oabt_TranslationImport($source_import, $language_import, $translation_import) {
   // traductions
   $translations = array(
     array(
@@ -251,13 +250,12 @@ function oabt_TranslationImport($source_import,$language_import,$translation_imp
  * @param $module_name module cible du fichier yml sous forme string
  * @return bool
  */
-function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
-{
+function oabt_YmlImport($file_name, $dir_name="/", $module_name="oab_backoffice") {
 
-  $file_name_lessext =  substr($file_name,0,-4);
+  $file_name_lessext =  substr($file_name, 0, -4);
 
   if ($dir_name=="/") {
-    $tab_file_name_lessext = explode('.',$file_name);
+    $tab_file_name_lessext = explode('.', $file_name);
     $dir_name .= $tab_file_name_lessext[1]."/";
   }
 
@@ -268,16 +266,16 @@ function oabt_YmlImport($file_name,$dir_name="/",$module_name="oab_backoffice")
   return true;
 }
 
-function oabt_taxoAddDescription($termId, $text) {
+function oabt_taxoAddDescription($term_id, $text) {
     $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('tid', $termId);
+    $query->condition('tid', $term_id);
     $entity = $query->execute();
     if (isset($entity)) {
         foreach ($entity as $tid) {
             // on update le champ description
-            $termUpdate = \Drupal\taxonomy\Entity\Term::load($tid);
-            $termUpdate->set('description', $text);
-            $termUpdate->save();
+            $term_update = \Drupal\taxonomy\Entity\Term::load($tid);
+            $term_update->set('description', $text);
+            $term_update->save();
         }
     }
 }
@@ -286,7 +284,7 @@ function oabt_taxoAddDescription($termId, $text) {
 /**
  * fonction de tracelog en fichier
  */
-function oabt_tracelog($module, $message, $dirpath="oabt"){
+function oabt_tracelog($module, $message, $dirpath="oabt") {
 
     $dir = \Drupal::service('file_system')->realpath(LOG_DIR);
     if (!file_exists($dir)) {
@@ -313,7 +311,7 @@ function oab_develop_cron() {
     if (file_exists($dir)) {
         $files = array_diff(scandir($dir), array('..', '.'));
 
-        if (count($files) > 0 ) {
+        if (count($files) > 0) {
             // Liste des destinataires en conf
             $mails = Drupal::config(\Drupal\oab_backoffice\Form\OabGeneralSettingsForm::getConfigName())->get('oabt_logs.mails_destinataires');
 

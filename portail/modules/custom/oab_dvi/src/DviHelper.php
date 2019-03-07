@@ -54,12 +54,12 @@ abstract class DviHelper {
       if ($langcode == \Drupal::languageManager()->getDefaultLanguage()->getId()) {
         $config = \Drupal::config('oab.subhomes');
         return $config->get('product_dvi_term_tid');
-      } else{
+      } else {
         $config = \Drupal::service('config.storage')->createCollection('language.'.$langcode);
         $subhomes = $config->read('oab.subhomes');
         if (isset($subhomes['product_dvi_term_tid'])) {
           return $subhomes['product_dvi_term_tid'];
-        } else{
+        } else {
           return false;
         }
       }
@@ -133,12 +133,12 @@ abstract class DviHelper {
         $ms_terms_ids = self::getMSTaxoTermsIds($lang);
 
         //on regarde le produit
-        if ( isset($node->$field_name)) {
+        if (isset($node->$field_name)) {
             //récupération des tag market segment du produit
-            $fieldValue = $node->$field_name->getValue();
-            if (!empty($fieldValue)) {
+            $field_value = $node->$field_name->getValue();
+            if (!empty($field_value)) {
                 //pour chaque tag on regarde s'il y en a un dvi
-                foreach ($fieldValue as $values) {
+                foreach ($field_value as $values) {
                     if (isset($values['target_id']) && in_array($values['target_id'], $ms_terms_ids)) {
                         $return = TRUE;
                     }
