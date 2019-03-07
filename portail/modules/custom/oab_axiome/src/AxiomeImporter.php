@@ -74,21 +74,19 @@ class AxiomeImporter
                                 $this->message .= "folder_import = $folder_import \n";
                                 $subfiles = scandir($folder_import);
 
-                                foreach ($subfiles AS $file) {
+                                foreach ($subfiles AS $subfile) {
+                                    if (is_file($folder_import.'/'.$subfile)
+                                        && substr($subfile, -4) == '.zip'
+                                        && substr($subfile, 0, 11) == 'referentiel') {
+                                        $this->message .= "Will handle file $subfile \n";
+                                        $this->axiomeNotification[] = "referentiel : ".$subfile;
 
-                                    if (is_file($folder_import.'/'.$file)
-                                        && substr($file, -4) == '.zip'
-                                        && substr($file, 0, 11) == 'referentiel') {
-                                        $this->message .= "Will handle file $file \n";
-                                        $this->axiomeNotification[] = "referentiel : ".$file;
-
-                                        if ($this->axiome_unzip($folder_import.'/'.$file, $folder_import)) {
-
-                                            $this->message .= "Unzip file $file OK \n";
-                                            file_unmanaged_delete($folder_import.'/'.$file);
+                                        if ($this->axiome_unzip($folder_import.'/'.$subfile, $folder_import)) {
+                                            $this->message .= "Unzip file $subfile OK \n";
+                                            file_unmanaged_delete($folder_import.'/'.$subfile);
 
                                             // Recherche du fichier référentiel XML
-                                            preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
+                                            preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $subfile, $matches);
 
                                             if ($matches && isset($matches[1])) {
                                                 $referentiel_file = "referentiel_" . $matches[1] . ".xml";
