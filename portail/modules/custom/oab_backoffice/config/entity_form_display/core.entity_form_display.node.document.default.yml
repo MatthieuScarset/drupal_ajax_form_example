@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,7 @@ dependencies:
     - field.field.node.document.field_content
     - field.field.node.document.field_content_owner
     - field.field.node.document.field_display_title
+    - field.field.node.document.field_document_language
     - field.field.node.document.field_document_thematic
     - field.field.node.document.field_document_type
     - field.field.node.document.field_email_owner
@@ -69,6 +71,7 @@ third_party_settings:
         - field_highlight
         - field_visual
         - field_file
+        - field_document_language
         - field_content
       parent_name: group_onglets
       weight: 20
@@ -176,7 +179,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
-    weight: 10
+    weight: 9
     settings:
       rows: 5
       placeholder: ''
@@ -197,6 +200,12 @@ content:
       display_label: false
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
+  field_document_language:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_document_thematic:
     weight: 53
@@ -225,7 +234,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 9
+    weight: 7
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -239,7 +248,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_highlight:
-    weight: 6
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
@@ -363,7 +372,7 @@ content:
     type: options_select
     region: content
   field_visual:
-    weight: 8
+    weight: 6
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity

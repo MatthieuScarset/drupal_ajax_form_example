@@ -173,6 +173,14 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles)) {
             $form['field_metatags']['#access'] = false;
         }
+
+        // Spécific Document : je cache la langue du document pour les contenus qui sont pas en Anglais
+        if (isset($form['field_document_language'])) {
+            if ($current_language !== "en") {
+                unset($form['field_document_language']);
+            }
+        }
+
     }
 
 

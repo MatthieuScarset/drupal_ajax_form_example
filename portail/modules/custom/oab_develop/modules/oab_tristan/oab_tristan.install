@@ -653,7 +653,6 @@ function oab_tristan_update_8086() {
 }
 
 /**
-<<<<<<< HEAD
  * Mise à jour des taxos Insight => Suppression de l'ancien field inutilisé, mise en place du field utilisé dans tous les types de contenus
  */
 function oab_tristan_update_8087() {
@@ -689,3 +688,13 @@ function oab_tristan_update_8090() {
 function oab_tristan_update_8091() {
     include_once('updates/update_8091.inc');
 }
+
+
+
+/**
+ * Ajout d'une taxo Document Language et d'un field dédié dans les documents pour choisir la langue
+ */
+function oab_tristan_update_8092() {
+    include_once('updates/update_8092.inc');
+}
+
