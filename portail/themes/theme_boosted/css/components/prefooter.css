@@ -25,6 +25,10 @@
     border-right: 1px solid black;
 }
 
+.div_direct_access.border-right {
+    border-right-color: #bbb;
+}
+
 #slider_direct_access .item-direct-access:last-child .border-right {
     border-right: none;
 }
