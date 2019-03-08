@@ -35,6 +35,7 @@ dependencies:
     - field.field.node.product.field_top_zone_bg_mobile
     - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
+    - field.field.node.product.field_visual_tile
     - field.field.node.product.moderation_state_update
     - node.type.product
   module:
@@ -60,15 +61,15 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-  field_visual:
+  field_visual_tile:
+    type: entity_reference_entity_view
     weight: 0
+    region: content
     label: hidden
     settings:
       link: true
       view_mode: default
     third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   links:
     weight: 3
     region: content
@@ -105,6 +106,7 @@ hidden:
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
   field_try_and_buy: true
+  field_visual: true
   langcode: true
   moderation_state_update: true
   workbench_moderation_control: true

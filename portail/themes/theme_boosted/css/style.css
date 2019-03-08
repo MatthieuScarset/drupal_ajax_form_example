@@ -2615,12 +2615,13 @@ body.page-node-type-custom-page{
     padding: 0;
 }
 
+
 .view-business-insight .form-group{
     margin-bottom: 0;
 }
 
 .view-business-insight .view-content{
-    margin: 0;
+    margin: 0 -30px;
     background-color: #ededed;
 }
 
@@ -2639,7 +2640,7 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content .tile.tile_Blogs .tags {
-   padding-top: 10px;
+    padding-top: 10px;
 }
 
 .fieldset-field-insight-type .fieldset-legend {
@@ -2651,6 +2652,7 @@ body.page-node-type-custom-page{
 .fieldset-field-insight-type .fieldset-wrapper {
     display: inline-block;
 }
+
 .fieldset-field-insight-type .btn {
     margin-right: 0;
     margin-left: 1.5rem;
@@ -2692,12 +2694,8 @@ body.page-node-type-custom-page{
 }
 
 div.business-insight-field-insight {
-    margin-bottom: 3rem;
-}
-
-.business-insight-field-insight div {
-    padding-left: 0;
-    margin-left: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .business-insight-field-insight select option {
@@ -2724,7 +2722,7 @@ div.business-insight-field-insight {
     background-color: transparent;
     padding: 0;
     padding-right: 60px;
-    margin-top: 5px;
+    margin-top: 0;
     -moz-appearance:none;
     -webkit-appearance: none;
 

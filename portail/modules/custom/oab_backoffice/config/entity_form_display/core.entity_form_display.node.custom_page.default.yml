@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browser_file_modal
     - field.field.node.custom_page.field_content
     - field.field.node.custom_page.field_display_title
     - field.field.node.custom_page.field_hub
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.custom_page.field_meta_title
     - field.field.node.custom_page.field_metatags
     - field.field.node.custom_page.field_visual
+    - field.field.node.custom_page.field_visual_tile
     - field.field.node.custom_page.moderation_state_update
     - node.type.custom_page
   module:
@@ -46,6 +48,7 @@ third_party_settings:
         - field_display_title
         - field_content
         - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 7
       format_type: tab
@@ -175,13 +178,27 @@ content:
   field_visual:
     weight: 5
     settings:
-      entity_browser: null
-      open: false
+      entity_browser: browser_file_modal
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
-      field_widget_display_settings: {  }
       selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 6
+    settings:
+      entity_browser: browser_file_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content

@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.press_release.field_highlight
     - field.field.node.press_release.field_industry
     - field.field.node.press_release.field_insight
+    - field.field.node.press_release.field_insight_type
     - field.field.node.press_release.field_job_profile
     - field.field.node.press_release.field_market_segment
     - field.field.node.press_release.field_meta_description
@@ -29,6 +30,7 @@ dependencies:
     - field.field.node.press_release.field_start_date
     - field.field.node.press_release.field_subhome
     - field.field.node.press_release.field_visual
+    - field.field.node.press_release.field_visual_tile
     - field.field.node.press_release.moderation_state_update
     - node.type.press_release
   module:
@@ -129,6 +131,14 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_visual_tile:
+    weight: 13
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   links:
     weight: 1
     region: content
@@ -145,6 +155,7 @@ hidden:
   field_display_title: true
   field_email_owner: true
   field_insight: true
+  field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true

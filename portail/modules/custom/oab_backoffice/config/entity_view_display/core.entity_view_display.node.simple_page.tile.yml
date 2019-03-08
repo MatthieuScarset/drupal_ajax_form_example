@@ -31,6 +31,7 @@ dependencies:
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
     - field.field.node.simple_page.field_visual
+    - field.field.node.simple_page.field_visual_tile
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
   module:
@@ -56,7 +57,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-  field_visual:
+  field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
     region: content
@@ -97,6 +98,7 @@ hidden:
   field_start_date: true
   field_subhome: true
   field_thematic: true
+  field_visual: true
   field_wysiwyg_rebond: true
   langcode: true
   moderation_state_update: true

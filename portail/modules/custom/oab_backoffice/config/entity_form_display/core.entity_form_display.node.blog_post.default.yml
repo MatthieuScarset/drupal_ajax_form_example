@@ -32,6 +32,7 @@ dependencies:
     - field.field.node.blog_post.field_start_date
     - field.field.node.blog_post.field_subhome
     - field.field.node.blog_post.field_visual
+    - field.field.node.blog_post.field_visual_tile
     - field.field.node.blog_post.moderation_state_update
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post
@@ -72,6 +73,7 @@ third_party_settings:
         - field_profile
         - field_content
         - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -208,7 +210,7 @@ content:
     type: comment_default
     region: content
   field_content:
-    weight: 8
+    weight: 6
     settings:
       rows: 5
       placeholder: ''
@@ -245,7 +247,7 @@ content:
     type: datetime_default
     region: content
   field_highlight:
-    weight: 5
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
@@ -270,15 +272,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
-    region: content
-  field_inside_type:
-    weight: 51
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_insight:
     weight: 32
@@ -351,7 +344,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_profile:
-    weight: 7
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -388,7 +381,7 @@ content:
     region: content
   field_visual:
     type: entity_browser_entity_reference
-    weight: 9
+    weight: 7
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -399,6 +392,20 @@ content:
         view_mode: default
       open: false
     third_party_settings: {  }
+    region: content
+  field_visual_tile:
+    weight: 8
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   langcode:
     type: language_select

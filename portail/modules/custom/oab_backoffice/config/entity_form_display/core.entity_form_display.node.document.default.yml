@@ -1,4 +1,3 @@
-uuid: null
 langcode: en
 status: true
 dependencies:
@@ -34,6 +33,7 @@ dependencies:
     - field.field.node.document.field_start_date
     - field.field.node.document.field_subhome
     - field.field.node.document.field_visual
+    - field.field.node.document.field_visual_tile
     - field.field.node.document.moderation_state_update
     - node.type.document
   module:
@@ -70,6 +70,7 @@ third_party_settings:
         - field_display_title
         - field_highlight
         - field_visual
+        - field_visual_tile
         - field_file
         - field_document_language
         - field_content
@@ -234,7 +235,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 7
+    weight: 8
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -373,6 +374,20 @@ content:
     region: content
   field_visual:
     weight: 6
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 7
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity

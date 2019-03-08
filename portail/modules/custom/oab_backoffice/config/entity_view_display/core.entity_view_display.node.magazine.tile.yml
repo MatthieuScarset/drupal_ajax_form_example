@@ -32,6 +32,7 @@ dependencies:
     - field.field.node.magazine.field_start_date
     - field.field.node.magazine.field_subhome
     - field.field.node.magazine.field_visual
+    - field.field.node.magazine.field_visual_tile
     - field.field.node.magazine.moderation_state_update
     - node.type.magazine
   module:
@@ -65,7 +66,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_visual:
+  field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
     region: content
@@ -107,6 +108,7 @@ hidden:
   field_start_date: true
   field_subhome: true
   field_thematic: true
+  field_visual: true
   field_wysiwyg_rebond: true
   langcode: true
   moderation_state_update: true

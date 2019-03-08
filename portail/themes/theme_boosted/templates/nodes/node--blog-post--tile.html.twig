@@ -70,11 +70,11 @@
 
     <a href="{{ url }}" class="">
         <div class="encart encart-image">
-            {% for key, image in content.field_visual  %}
+            {% for key, image in content.field_visual_tile  %}
 
 
                 {% if image.entity.field_image.entity.uri.value is not null and image.entity.name.value is not null %}
-                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('subhome') }}" alt="{{ image.entity.name.value }}" />
+                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('max_650') }}" alt="{{ image.entity.name.value }}" />
                 {% endif %}
             {% endfor %}
         </div>

@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.press_kit.field_start_date
     - field.field.node.press_kit.field_subhome
     - field.field.node.press_kit.field_visual
+    - field.field.node.press_kit.field_visual_tile
     - field.field.node.press_kit.moderation_state_update
     - node.type.press_kit
   module:
@@ -60,6 +61,7 @@ third_party_settings:
         - field_highlight
         - field_content
         - field_visual
+        - field_visual_tile
         - field_aplat
         - field_file
       parent_name: group_onglets
@@ -148,7 +150,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_aplat:
-    weight: 27
+    weight: 28
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -191,7 +193,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 28
+    weight: 29
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -284,6 +286,20 @@ content:
     region: content
   field_visual:
     weight: 26
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 27
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity

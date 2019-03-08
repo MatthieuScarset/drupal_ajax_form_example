@@ -225,3 +225,10 @@ function oab_will_update_8031() {
 function oab_will_update_8032() {
     include_once("updates/update_8032.inc");
 }
+
+/**
+ *             RUBYPORTAILOBS-3465 [B-Insight] Création d'un nouveau champ visuel
+ */
+function oab_will_update_8033() {
+    include_once("updates/update_8033.inc");
+}
