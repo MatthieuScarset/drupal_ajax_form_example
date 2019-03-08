@@ -646,7 +646,7 @@ function gdpr_hook_cron() {
                         $results = $query->execute();
 
                         ##je load toutes les submissions trouvées
-                        $storage = \Drupal::entityTypeManager()->getStorage('webform_submission')->loadMultiple($results);
+                        $storage = \Drupal::entityTypeManager()->getStorage('webform_submission');
                         $webform_submissions = $storage->loadMultiple($results);
 
                         ##Suppression de toutes les entités trouvées
