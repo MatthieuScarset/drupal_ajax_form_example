@@ -2658,8 +2658,9 @@ body.page-node-type-custom-page{
     margin-left: 1.5rem;
 }
 
-.fieldset-field-insight-type .btn label{
+.fieldset-field-insight-type .btn label.control-label {
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .fieldset-field-insight-type .btn,
