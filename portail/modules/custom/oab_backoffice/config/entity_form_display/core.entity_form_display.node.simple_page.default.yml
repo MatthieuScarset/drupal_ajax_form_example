@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.simple_page.field_analysts
     - field.field.node.simple_page.field_blog_format
     - field.field.node.simple_page.field_blog_thematic
     - field.field.node.simple_page.field_content
@@ -89,6 +90,7 @@ third_party_settings:
         - field_blog_thematic
         - field_solution
         - field_region
+        - field_analysts
         - field_job_profile
         - field_insight
         - field_insight_type
@@ -177,6 +179,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_analysts:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_blog_format:
     weight: 28
     settings: {  }
@@ -243,13 +251,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 35
+    weight: 36
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 36
+    weight: 37
     settings:
       display_label: true
     third_party_settings: {  }
@@ -262,19 +270,19 @@ content:
     type: options_select
     region: content
   field_insight:
-    weight: 33
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_insight_type:
     type: options_select
-    weight: 34
+    weight: 35
     region: content
     settings: {  }
     third_party_settings: {  }
   field_job_profile:
-    weight: 32
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select

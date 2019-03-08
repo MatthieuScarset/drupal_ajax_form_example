@@ -12,10 +12,16 @@ function subhomes_views_exposed_form(&$form) {
                 && $value['#type'] == "textfield") {
                 $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
                 if (is_object($vocabulary)) {
-                    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties([
-                        'vid' => $key,
-                        'langcode' => $current_language
-                    ]);
+
+                    $properties = [
+                        "vid" => $key
+                    ];
+
+                    if ($key !== 'analyst') {
+                        $properties['langcode'] = $current_language;
+                    }
+
+                    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
                     if (is_array($terms)
                         && !empty($terms)) {
                         $options = array('All' => t($vocabulary->get('name')));
@@ -229,11 +235,12 @@ function subhomes_views_exposed_form(&$form) {
         );
 
         //Je supprime les filtres regions et année en francais
-        if ($current_language == 'fr') {
+        /*if ($current_language == 'fr') {
             unset($form['region']);
             unset($form['year']);
-        } else {
+        } else { */
             // Regions
+
             if (!isset($form['region']) || !isset($form['region']['#options'])){
                 $form['region']['#options'] = array();
             }
@@ -247,7 +254,10 @@ function subhomes_views_exposed_form(&$form) {
                 $form['year']['#options'],
                 t('Year')->render()
             );
-        }
+            // Analyst
+            $form['analyst']['#options']['All'] = t('Analyst');
+
+        //}
     }
 
     if ($form['#id'] == 'views-exposed-form-subhomes-archive-archive-press') {
@@ -260,7 +270,6 @@ function subhomes_views_exposed_form(&$form) {
 
         $form['node_year']['#options']['All'] = t('Year');
         $form['node_month']['#options']['All'] = t('Month');
-
     }
 
 }
