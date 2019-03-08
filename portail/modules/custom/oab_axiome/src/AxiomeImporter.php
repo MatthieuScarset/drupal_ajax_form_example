@@ -48,7 +48,6 @@ class AxiomeImporter
      */
     public function axiome_search_archive($folder) {
         $count = 0;
-
         // Scan du dossier "axiome/import"
         $this->message .= "== STEP 2 : axiome_search_archive ".$folder."==\n";
         $this->axiome_create_dir($folder);
@@ -56,7 +55,6 @@ class AxiomeImporter
             $files = scandir($folder);
             if (!empty($files)) {
                 foreach ($files AS $file) {
-
                     if (is_file($folder.'/'.$file) && substr($file, -4) == '.zip') {
                         $this->message .= "ZipFile found = $file \n";
 
@@ -66,7 +64,6 @@ class AxiomeImporter
                             $this->axiome_create_dir($folder . '/' . AXIOME_SAVE_FOLDER);
 
                             $this->axiomeNotification[] = "file : ".$file;
-
                             if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')) {
                                 $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER."\n" ;
                                 file_unmanaged_move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, FILE_EXISTS_REPLACE);
@@ -75,24 +72,21 @@ class AxiomeImporter
                                 $folder_import = $folder.'/import';
 
                                 $this->message .= "folder_import = $folder_import \n";
-                                $files = scandir($folder_import);
+                                $subfiles = scandir($folder_import);
 
+                                foreach ($subfiles AS $subfile) {
+                                    if (is_file($folder_import.'/'.$subfile)
+                                        && substr($subfile, -4) == '.zip'
+                                        && substr($subfile, 0, 11) == 'referentiel') {
+                                        $this->message .= "Will handle file $subfile \n";
+                                        $this->axiomeNotification[] = "referentiel : ".$subfile;
 
-                                foreach ($files AS $file) {
-
-                                    if (is_file($folder_import.'/'.$file)
-                                        && substr($file, -4) == '.zip'
-                                        && substr($file, 0, 11) == 'referentiel') {
-                                        $this->message .= "Will handle file $file \n";
-                                        $this->axiomeNotification[] = "referentiel : ".$file;
-
-                                        if ($this->axiome_unzip($folder_import.'/'.$file, $folder_import)) {
-
-                                            $this->message .= "Unzip file $file OK \n";
-                                            file_unmanaged_delete($folder_import.'/'.$file);
+                                        if ($this->axiome_unzip($folder_import.'/'.$subfile, $folder_import)) {
+                                            $this->message .= "Unzip file $subfile OK \n";
+                                            file_unmanaged_delete($folder_import.'/'.$subfile);
 
                                             // Recherche du fichier référentiel XML
-                                            preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $file, $matches);
+                                            preg_match("@[a-z_]*_([A-Za-z]*)_[-0-9]*@", $subfile, $matches);
 
                                             if ($matches && isset($matches[1])) {
                                                 $referentiel_file = "referentiel_" . $matches[1] . ".xml";
@@ -140,6 +134,7 @@ class AxiomeImporter
      */
     private function axiome_create_dir($folder) {
         if (!file_exists($folder)) {
+
             if (mkdir($folder, 0777, true)) {
                 return $folder;
             } else {
@@ -162,7 +157,6 @@ class AxiomeImporter
      */
     private function axiome_unzip($file, $destination) {
         $this->axiome_create_dir($destination);
-
         if (is_dir($destination)) {
             $cwd = getcwd();
             chdir($destination);
