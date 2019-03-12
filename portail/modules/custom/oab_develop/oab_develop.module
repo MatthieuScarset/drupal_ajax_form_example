@@ -2,6 +2,7 @@
 
 use Symfony\Component\Yaml\Yaml;
 use Drupal\locale\SourceString;
+use Drupal\oab_develop\Form\OabLogSettingsForm;
 
 define('LOG_DIR', 'public://log/');
 
@@ -313,7 +314,7 @@ function oab_develop_cron() {
 
         if (count($files) > 0) {
             // Liste des destinataires en conf
-            $mails = Drupal::config(\Drupal\oab_backoffice\Form\OabGeneralSettingsForm::getConfigName())->get('oabt_logs.mails_destinataires');
+            $mails = Drupal::config(OabLogSettingsForm::getConfigName())->get(OabLogSettingsForm::MAILS_DESTINATAIRE);
 
             // Préparation des fichiers
             $erreurs = "";

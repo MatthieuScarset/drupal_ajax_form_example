@@ -1,0 +1,6 @@
+services:
+  oab_develop.oab_logger:
+    class: Drupal\oab_develop\Logger\OabLogger
+    arguments: ['@logger.log_message_parser']
+    tags:
+      - { name: logger }

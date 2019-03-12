@@ -1,0 +1,13 @@
+oab.settings:
+  title: OAB settings
+  route_name: oab.settings
+  parent: system.admin_config
+  description: 'Configure oab settings'
+  weight: -20
+
+oab_develop.logs:
+  title: Logs settings
+  route_name: oab.log_settings
+  parent: oab.settings
+  description: 'Configure OAB Logger'
+  weight: -20
