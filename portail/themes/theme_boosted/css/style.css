@@ -85,7 +85,6 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes{
-    background-color: #eee;
     margin-right: 2rem;
     min-height: 30rem;
     /*max-height: 30rem;*/
@@ -146,6 +145,7 @@ article .product ul.nav-tabs li:before{
 .view-subhomes .display-subhomes-press{
     min-height: 0;
     padding-bottom: 0;
+    margin-top: 2rem;
 }
 
 .view-subhomes .display-subhomes-press .txt,
@@ -185,6 +185,9 @@ article .product ul.nav-tabs li:before{
     max-width:160px;
 }
 
+.row .subhome-view-press {
+    margin-left: 30px;
+}
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -333,7 +336,6 @@ article .product ul.nav-tabs li:before{
 }
 
 .link-subhomes:hover > .display-subhomes{
-    background-color: #F16e00;
     color: #fff;
 }
 .link-subhomes:hover > .display-subhomes > .encart{
@@ -2303,7 +2305,7 @@ body.page-node-type-custom-page{
 }
 
 .subhome-entity-bottom-blocks {
-    margin: 2.143em 0;
+    margin: 2.143em;
 }
 
 .subhome-entity-bottom-blocks div {
@@ -2491,6 +2493,7 @@ body.page-node-type-custom-page{
 
 #carousel-press-kit  {
     font-size: 1.6rem;
+    margin-left: 30px;
 }
 
 #carousel-press-kit .carousel-control .glyphicon {
@@ -2621,7 +2624,7 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content{
-    margin: 0 -30px;
+    margin: 0;
     background-color: #ededed;
 }
 
