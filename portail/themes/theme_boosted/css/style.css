@@ -85,12 +85,14 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes{
+    background-color: #eee;
     margin-right: 2rem;
     min-height: 30rem;
     /*max-height: 30rem;*/
     padding-bottom: 0.3rem;
     margin-bottom: 2rem;
 }
+
 .display-subhomes .encart{
     background: white;
     padding: 2rem;
@@ -143,6 +145,7 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes-press{
+    background-color: #fff;
     min-height: 0;
     padding-bottom: 0;
     margin-top: 2rem;
@@ -336,7 +339,12 @@ article .product ul.nav-tabs li:before{
 }
 
 .link-subhomes:hover > .display-subhomes{
-    color: #fff;
+     background-color: #F16e00;
+     color: #fff;
+ }
+
+.link-subhomes:hover > .display-subhomes-press{
+    background-color: #fff;
 }
 .link-subhomes:hover > .display-subhomes > .encart{
     background-color: #F16e00;
