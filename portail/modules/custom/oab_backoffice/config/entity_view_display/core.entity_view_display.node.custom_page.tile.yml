@@ -47,10 +47,6 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-<<<<<<< HEAD
-  links:
-    weight: 3
-=======
   field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
@@ -62,12 +58,10 @@ content:
     third_party_settings: {  }
   links:
     weight: 4
->>>>>>> RUBYPORTAILOBS-3465
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_display_title: true
   field_hub: true
   field_hub_portal: true
   field_meta_description: true
