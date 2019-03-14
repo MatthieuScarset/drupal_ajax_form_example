@@ -14,3 +14,9 @@ function oab_eddy_update_dependencies() {
     return $dependencies;
 }
 
+/**
+ * Ajout Tealium sur bouton télécharger
+ */
+function oab_eddy_update_8003() {
+    include_once("updates/update_8002.inc");
+}
