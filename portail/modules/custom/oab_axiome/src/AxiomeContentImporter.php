@@ -37,6 +37,7 @@ class AxiomeContentImporter {
             drupal_get_path('theme', 'theme_boosted') . '/templates/nodes/axiome_topzone.html.twig'
         );
 
+        /** @var DOMDocument $dom */
         $dom = Html::load($content);
 
         self::replaceLeftBlock($dom, $banner_data);
@@ -77,31 +78,79 @@ class AxiomeContentImporter {
         //$node->save();
     }
 
+    /**
+     * @param \DOMDocument $dom
+     * @param string $class
+     * @return \DOMNode|bool
+     */
+    private static function findDomByClass($dom, $class, $type = 'div') {
+        $ret = false;
+
+        /** @var \DOMNodeList $elements */
+        $elements = $dom->getElementsByTagName($type);
+        for ($i = 0; $i < $elements->length; $i++) {
+            if (is_a($elements->item($i), 'DOMElement')
+                && $elements->item($i)->hasAttribute('class')
+                && strstr($elements->item($i)->getAttribute('class'), $class)) {
+                $ret = $elements->item($i);
+            }
+        }
+
+        return $ret;
+    }
+
+    /**
+     * @param DOMDocument $dom
+     * @param $banner_data
+     */
     private static function replaceLeftBlock(&$dom, $banner_data) {
         $css_class_left_block =  $banner_data['orange_theme']['boosted_css_name'];
-        $font_color = $banner_data['font_color'];
-        //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
 
-        $class_left_block = str_replace("-", "_", $css_class_left_block);
-        $title_left_block = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get($class_left_block);
+        // Si c'est un string, on check la correspondance et tout le reste pour afficher la popup
+        // Si y a rien, c'est un tableau qui est renvoyé, on supprime alors la part de l'HTML qui lui est reservé
+        if (is_string($css_class_left_block)) {
+            $font_color = $banner_data['font_color'];
+            //$title_left_block = $bannerData['title']; KO chez Axiome, quick and dirty palliatif ci-dessous
+            $class_left_block = str_replace("-", "_", $css_class_left_block);
 
-        // change class name
-        $nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
-        foreach ($nodes as $el) {
-            $el->removeAttribute('class');
-            $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$css_class_left_block);
+
+
+            $correspondances = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get();
+            $title_left_block = "";
+            if ($class_left_block !== '' && isset($correspondances[$class_left_block])) {
+                $title_left_block = $correspondances[$class_left_block];
+            }
+       // $title_left_block = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get($class_left_block);
+
+            // change class name
+            $nodes = self::getNodesByClass($dom, 'icon-frame-connectivity', 'div');
+            foreach ($nodes as $el) {
+                $el->removeAttribute('class');
+                $el->setAttribute('class', 'frame-icon-rel inline text_orange '.$css_class_left_block);
+            }
+
+            // change title
+            $nodes_span = self::getNodesByClass($dom, 'frame', 'span');
+            foreach ($nodes_span as $el) {
+                $el->textContent = $title_left_block;
+                $el->setAttribute('style', 'color: '.$font_color);
+            }
+        } else {
+            if ($dom->hasChildNodes()) {
+                $i = 0;
+                $childToSupp = self::findDomByClass($dom, 'leftcol');
+
+               if ($childToSupp !== false) {
+                   $dom->removeChild($childToSupp);
+               }
+
+            }
+
         }
-
-        // change title
-        $nodes_span = self::getNodesByClass($dom, 'frame', 'span');
-        foreach ($nodes_span as $el) {
-            $el->textContent = $title_left_block;
-            $el->setAttribute('style', 'color: '.$font_color);
-        }
-
     }
 
     private static function replaceCenterBlock(&$dom, $banner_data) {
+        //$title_center = is_string($banner_data['insight']) ? $banner_data['insight'] : "";
         $title_center = $banner_data['insight'];
         $font_color = $banner_data['font_color'];
         // change title
@@ -115,7 +164,7 @@ class AxiomeContentImporter {
 
     private static function replaceRightBlock(&$dom, $banner_data) {
         $css_class_right_block =  $banner_data['pop_out_color']['boosted_css_name'];
-        $title_right_block = $banner_data['offre_name'];
+        $title_right_block = is_string($banner_data['offre_name']) ? $banner_data['offre_name'] : "";
         $popout_color = $banner_data['pop_out_color']['color'];
         // change class name
         $nodes = self::getNodesByClass($dom, 'icon-popout-connectivity');
