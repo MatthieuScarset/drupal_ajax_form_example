@@ -62,7 +62,7 @@
     {% macro mega_menu_items(title, items) %}
         <li>
             <div id="items_megamenu" class="row">
-                <h2 class="hidden-sm hidden-xs hidden-md">{{ title }}</h2>
+                <span class="hidden-sm hidden-xs hidden-md title_megamenu">{{ title }}</span>
                 {% for item in items %}
                     {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
