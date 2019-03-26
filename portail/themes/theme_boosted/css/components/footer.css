@@ -18,6 +18,7 @@ span.footer_link_title {
     font-family: HelvNeueOrange, Arial, sans-serif;
     font-weight: 700;
     font-size: 1.5em;
+    margin-bottom: 1rem;
 }
 
 #sharebar .content, .followbar .content {display: inline !important; margin-left: 10px;}
