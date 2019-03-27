@@ -66,7 +66,7 @@ foreach ($contentTypes as $contentType) {
 $new_terms = [
     "Blogs" => ['fr' => "Blogs"],
     "Debates" => ['fr' => "Débats"],
-    "News" => ['fr' => "Atualités"],
+    "News" => ['fr' => "Actualités"],
     "Customers stories" => ['fr' => "Témoignages"],
     "Report" => ['fr' => "Dossier"]
 ];
