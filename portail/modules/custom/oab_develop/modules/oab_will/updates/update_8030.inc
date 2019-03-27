@@ -51,7 +51,7 @@ foreach ($contentTypes as $contentType) {
     if (empty($field)) {
         $config_array = array(
             'field_name' =>  $fieldName,
-            'entity_type' => 'taxonomy_term',
+            'entity_type' => 'node',
             'bundle' => $contentType,
             'label' => $label,
             'required' => false,
@@ -66,7 +66,7 @@ foreach ($contentTypes as $contentType) {
 $new_terms = [
     "Blogs" => ['fr' => "Blogs"],
     "Debates" => ['fr' => "Débats"],
-    "News" => ['fr' => "Atualités"],
+    "News" => ['fr' => "Actualités"],
     "Customers stories" => ['fr' => "Témoignages"],
     "Report" => ['fr' => "Dossier"]
 ];
