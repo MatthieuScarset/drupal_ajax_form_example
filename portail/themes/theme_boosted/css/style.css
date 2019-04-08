@@ -2632,7 +2632,7 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content .views-row{
-    width: 315px;
+    width: 440px;
     padding:10px;
 }
 
@@ -2793,6 +2793,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .view-business-insight .view-content .views-row .tile .field_insight,
 .view-business-insight .view-content .views-row .tile .field_insight_type{
     display: inline-block;
+    font-weight: normal;
 }
 
 .view-business-insight .view-content .views-row .tile .encart-image img{
@@ -2802,7 +2803,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 .view-business-insight .view-content .views-row .tile .title_node{
-    font-size: 2.5rem;
+    font-size: 1.7rem;
     line-height: 2.5rem;
     padding: 1rem;
 }
