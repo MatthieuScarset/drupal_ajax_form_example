@@ -9,8 +9,8 @@
 
 
 /* Suppression du background-color: black sur la navbar tout en haut (celle avec Global) */
-.oab_background_image #navtop,
-.oab_background_image .navbar-default {
+.oab_background_image header #navtop,
+.oab_background_image header .navbar-default {
     background: none;
 }
 
