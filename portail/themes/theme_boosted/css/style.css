@@ -2636,6 +2636,12 @@ body.page-node-type-custom-page{
     padding:10px;
 }
 
+.col-xxs .view-business-insight .view-content .views-row{
+    width: 100%;
+    padding:10px;
+}
+
+
 .view-business-insight .view-content .views-row .encart-image{
     text-align: center;
 }
