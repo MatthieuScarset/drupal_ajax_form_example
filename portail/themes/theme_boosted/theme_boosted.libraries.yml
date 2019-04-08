@@ -26,7 +26,7 @@ global-styling:
       css/templating/layout.css: {}
       css/templating/nodes.css: {}
       css/templating/linked_content.css: {}
-      css/templating/pages_with_background.css: {}
+      css/components/pages_with_background.css: {}
   js:
     boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}

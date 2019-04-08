@@ -2,4 +2,47 @@
  CSS Spécifique pour adapter le style aux pages qui possèdent un background
  */
 
+.oab_background_image .view-business-insight .view-filters {
+    background-color: #ededed;
+    padding-bottom: 2rem;
+}
 
+
+/* Suppression du background-color: black sur la navbar tout en haut (celle avec Global) */
+.oab_background_image #navtop,
+.oab_background_image .navbar-default {
+    background: none;
+}
+
+/* Suppression du background-color:black pour la main nav */
+.oab_background_image .mega-menu.navbar,
+.oab_background_image .navbar-inverse,
+.oab_background_image .oab-synomia-search-header-block-form .top-block-search-form .form-text {
+    background: none;
+}
+
+/* Changement de la bordure : elle ne prend plus toute la longueur, mais que la taille du navbar */
+.oab_background_image .subnav {
+    /* Je supprime la bordure qui prend toute la largeur */
+    border: none;
+
+    /*Je supprime les paddings pour les transférer sur le container fluid qui a la bonne taille */
+    padding: 0;
+}
+
+.oab_background_image .subnav .container-fluid-navbar {
+    /* Je rajoute les borders */
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
+
+    /* Je réapplique les padding supprimés precedement */
+    padding: 25px 0 20px 0;
+}
+
+.oab_background_image .menu.navbar-nav .nav-item.dropdown span.caret {
+    display: none;
+}
+
+.oab_background_image .menu.navbar-nav .nav-item.dropdown.open > a {
+    border: none;
+}
