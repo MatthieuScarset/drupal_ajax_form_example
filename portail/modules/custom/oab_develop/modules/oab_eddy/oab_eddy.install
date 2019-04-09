@@ -1,0 +1,41 @@
+<?php
+
+function oab_eddy_install() {
+    drupal_set_installed_schema_version('oab_eddy', 8000);
+    module_set_weight("oab_eddy",30);
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_eddy_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}
+
+/**
+ *  Création taxo analyste + ajout aux simples pages
+ */
+function oab_eddy_update_8001() {
+    include_once("updates/update_8001.inc");
+}
+
+function oab_eddy_update_8002() {
+    include_once("updates/update_8002.inc");
+}
+
+/**
+ * Ajout Tealium sur bouton télécharger
+ */
+function oab_eddy_update_8003() {
+    include_once("updates/update_8003.inc");
+}
+
+/**
+ * Ajout droit suppression submission role webform business analyst
+ */
+
+function oab_eddy_update_8004() {
+    include_once("updates/update_8004.inc");
+}
