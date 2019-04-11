@@ -235,7 +235,7 @@ display:
           exposed: true
           expose:
             operator_id: field_insight_target_id_op
-            label: 'Vision Business for'
+            label: ''
             description: ''
             use_operator: false
             operator: field_insight_target_id_op
@@ -367,7 +367,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: business_insight
+      title: 'Au cœur de l''innovation et de la transformation digitale des entreprises'
       header: {  }
       footer: {  }
       empty: {  }
