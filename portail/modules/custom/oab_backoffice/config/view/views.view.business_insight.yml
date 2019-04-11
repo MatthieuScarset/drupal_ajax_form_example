@@ -294,7 +294,7 @@ display:
           exposed: true
           expose:
             operator_id: field_insight_type_target_id_op
-            label: 'Filter by'
+            label: ''
             description: ''
             use_operator: false
             operator: field_insight_type_target_id_op

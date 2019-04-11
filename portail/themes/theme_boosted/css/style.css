@@ -2740,7 +2740,7 @@ div.business-insight-field-insight {
 .business-insight-field-insight select.form-control {
     vertical-align: top;
     color: #f16e00;
-    color: #fff;
+    color: #000;
     height: auto;
     border: none;
     background-color: transparent;
@@ -2753,8 +2753,8 @@ div.business-insight-field-insight {
 
     /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
     background-image:
-            linear-gradient(45deg, transparent 50%, #fff 50%),
-            linear-gradient(135deg, #fff 50%, transparent 50%),
+            linear-gradient(45deg, transparent 50%, #000 50%),
+            linear-gradient(135deg, #000 50%, transparent 50%),
             linear-gradient(to right, transparent, transparent);
     background-position:
             calc(100% - 15px) .15em,
@@ -2770,8 +2770,8 @@ div.business-insight-field-insight {
 
 .business-insight-field-insight select.form-control:focus {
     background-image:
-            linear-gradient(45deg, transparent 50%, #fff 50%),
-            linear-gradient(135deg, #fff 50%, transparent 50%),
+            linear-gradient(45deg, transparent 50%, #000 50%),
+            linear-gradient(135deg, #000 50%, transparent 50%),
             linear-gradient(to right, transparent, transparent);
     background-position:
             calc(100% - 15px) .15em,
