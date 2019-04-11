@@ -1,0 +1,22 @@
+<?php
+
+function oab_eddy_install() {
+    drupal_set_installed_schema_version('oab_eddy', 8000);
+    module_set_weight("oab_eddy",30);
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_eddy_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}
+
+/*
+ * Suppression du label du filtre "all thematic" dans la view business insight
+ */
+function oab_eddy_update_8005() {
+    include_once("updates/update_8005.inc");
+}

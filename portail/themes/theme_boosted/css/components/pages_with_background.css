@@ -3,7 +3,6 @@
  */
 
 .oab_background_image .view-business-insight .view-filters {
-    background-color: #ededed;
     padding-bottom: 2rem;
 }
 
@@ -53,6 +52,24 @@
     border: none;
 }
 
+.oab_background_image .fieldset-field-insight-type .btn,
+.fieldset-field-insight-type .btn.btn-primary {
+    background-color: transparent;
+    border: none;
+}
+
+.oab_background_image .subhomes-filterbar-background {
+    background-color: transparent;
+}
+
+.oab_background_image .fieldset-field-insight-type .fieldset-legend {
+    display: none;
+}
+
+
+.oab_background_image .view-business-insight .btn-primary {
+    color: #f16e00;
+}
 /* Petit test */
 .path-business-insight.oab_background_image .mega-menu.navbar {
     background: none;
