@@ -47,7 +47,7 @@
 }
 
 .oab_background_image .fieldset-field-insight-type .btn,
-.fieldset-field-insight-type .btn.btn-primary {
+.oab_background_image .fieldset-field-insight-type .btn.btn-primary {
     background-color: transparent;
     border: none;
 }
@@ -61,6 +61,18 @@
 }
 
 
-.oab_background_image .view-business-insight .btn-primary {
+.oab_background_image .view-business-insight .btn-primary label {
     color: #f16e00;
+    font-weight: bold;
+}
+
+.oab_background_image .view-business-insight .btn-info:hover {
+    color: #fff;
+}
+
+.oab_background_image .view-business-insight h1 {
+    color: #fff;
+    font-weight: normal;
+    font-size: 2.5rem;
+    margin: 3rem 0;
 }

@@ -2650,6 +2650,7 @@ body.page-node-type-custom-page{
 
 .fieldset-field-insight-type .fieldset-wrapper {
     display: inline-block;
+    float: right;
 }
 .fieldset-field-insight-type .btn {
     margin-right: 0;
@@ -2657,7 +2658,7 @@ body.page-node-type-custom-page{
 }
 
 .fieldset-field-insight-type .btn label{
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .fieldset-field-insight-type .btn,
@@ -2712,9 +2713,10 @@ div.business-insight-field-insight {
 }
 
 .view-business-insight h1 {
-    color: #fff;
+    color: #000;
     font-weight: normal;
     font-size: 2.5rem;
+    margin: 3rem 0;
 }
 
 .business-insight-field-insight select.form-control::-ms-expand {
@@ -2726,7 +2728,6 @@ div.business-insight-field-insight {
     color: #fff;
     height: auto;
     border: none;
-    border-bottom: 2px solid grey;
     background-color: transparent;
     padding: 0;
     padding-right: 60px;
@@ -2736,7 +2737,52 @@ div.business-insight-field-insight {
 
 }
 
+.business-insight-field-insight select.form-control {
+    vertical-align: top;
+    color: #f16e00;
+    color: #fff;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    padding-right: 60px;
+    margin-top: 5px;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+    font-size: 1.6rem;
+
+    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
+    background-image:
+            linear-gradient(45deg, transparent 50%, #fff 50%),
+            linear-gradient(135deg, #fff 50%, transparent 50%),
+            linear-gradient(to right, transparent, transparent);
+    background-position:
+            calc(100% - 15px) .15em,
+            calc(100% - 5px) .15em,
+            calc(100% - .5em) 0.5em;
+    background-size:
+            10px 10px,
+            10px 10px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+
+}
+
 .business-insight-field-insight select.form-control:focus {
+    background-image:
+            linear-gradient(45deg, transparent 50%, #fff 50%),
+            linear-gradient(135deg, #fff 50%, transparent 50%),
+            linear-gradient(to right, transparent, transparent);
+    background-position:
+            calc(100% - 15px) .15em,
+            calc(100% - 5px) .15em,
+            calc(100% - .5em) 0;
+    background-size:
+            10px 10px,
+            10px 10px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+    outline: 0;
 
 }
 
