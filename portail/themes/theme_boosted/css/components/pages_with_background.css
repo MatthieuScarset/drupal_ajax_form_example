@@ -40,8 +40,7 @@
     /* Changement de la bordure : elle ne prend plus toute la longueur, mais que la taille du navbar */
     .oab_background_image .subnav {
         /* Je supprime la bordure qui prend toute la largeur */
-        border-top: 2px solid grey;
-        border-bottom: 2px solid grey;
+        border: none;
 
         /*Je supprime les paddings pour les transférer sur le container fluid qui a la bonne taille */
         padding: 0;
@@ -50,16 +49,18 @@
     /* Je met un backgroudn semi-transparent sur la navbar quand elle passe en sticky */
     .oab_background_image .subnav.navbar-fixed {
         background-color: rgba(0, 0, 0, 0.8);
-        border-top: none;
     }
 
     .oab_background_image .subnav .container-fluid-navbar {
+        border-top: 2px solid grey;
+        border-bottom: 2px solid grey;
+
         /* Je réapplique les padding supprimés precedement */
         padding: 25px 0 20px 0;
     }
 
-    .oab_background_image .menu.navbar-nav .nav-item.dropdown span.caret {
-        display: none;
+    .oab_background_image .subnav.navbar-fixed .container-fluid-navbar {
+        border: none;
     }
 
     .oab_background_image .menu.navbar-nav .nav-item.dropdown.open > a {
