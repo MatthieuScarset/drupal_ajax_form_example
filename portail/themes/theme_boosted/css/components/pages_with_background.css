@@ -61,6 +61,12 @@
 }
 
 
+.oab_background_image .fieldset-field-insight-type .btn label {
+    font-weight: normal;
+    color: #fff;
+}
+
+
 .oab_background_image .view-business-insight .btn-primary label {
     color: #f16e00;
     font-weight: bold;

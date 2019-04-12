@@ -2658,17 +2658,28 @@ body.page-node-type-custom-page{
 }
 
 .fieldset-field-insight-type .btn label{
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .fieldset-field-insight-type .btn,
 .fieldset-field-insight-type .btn.btn-primary {
     padding: .3rem 1.8rem .5rem 1.8rem;
+    background-color: transparent;
+    border: none;
+    color: #000;
 }
 
+
 .fieldset-field-insight-type .btn.btn-primary {
-    border-color: #f16e00;
+    color: #f16e00;;
 }
+
+.fieldset-field-insight-type .btn.btn-primary:active,
+.fieldset-field-insight-type .btn.btn-info:active {
+    color: #000;
+    background-color: transparent;
+}
+
 
 @media (max-width: 1024px) {
 
