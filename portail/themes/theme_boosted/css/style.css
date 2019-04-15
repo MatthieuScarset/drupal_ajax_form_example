@@ -2606,5 +2606,5 @@ body.page-node-type-custom-page{
 }
 
 #block-twitterblock #twitter-block-carousel .twitter-tweet{
-    margin: 0;
+    margin: 0 !important;
 }
