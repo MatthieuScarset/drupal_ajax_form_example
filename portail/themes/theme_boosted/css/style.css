@@ -2632,7 +2632,6 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content .views-row{
-    width: 435px;
     padding:10px;
 }
 
@@ -2640,7 +2639,6 @@ body.page-node-type-custom-page{
     width: 100%;
     padding:10px;
 }
-
 
 .view-business-insight .view-content .views-row .encart-image{
     text-align: center;
@@ -2664,6 +2662,7 @@ body.page-node-type-custom-page{
 .fieldset-field-insight-type .fieldset-wrapper {
     display: inline-block;
 }
+
 .fieldset-field-insight-type .btn {
     margin-right: 0;
     margin-left: 1.5rem;
@@ -2696,7 +2695,6 @@ body.page-node-type-custom-page{
         margin-bottom: 1.5rem;
     }
 }
-
 
 .business-insight-field-insight label,
 .business-insight-field-insight select {
