@@ -2606,5 +2606,5 @@ body.page-node-type-custom-page{
 }
 
 .mega-menu .nav-item.dropdown .dropdown-menu ul {
-    margin-left: 10px;
+    margin-left: 10px !important;
 }
