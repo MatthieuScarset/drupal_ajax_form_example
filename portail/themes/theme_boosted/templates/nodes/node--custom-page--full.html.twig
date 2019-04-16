@@ -81,21 +81,6 @@
     {{ title_suffix }}
     {{ title_prefix }}
 
-
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebPage",
-      "headline" : "{{ node.label }}",
-      "genre" : "{{ fieldPage|striptags|trim }}",
-      "creationDate": "{{ createdDate }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ fieldAuthor|striptags|trim }}",
-      }
-    }
-    </script>
-
     <div{{ content_attributes.addClass('content') }}>
         {{ content }}
     </div>

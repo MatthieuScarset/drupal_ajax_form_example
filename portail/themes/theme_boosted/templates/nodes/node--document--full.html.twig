@@ -94,21 +94,6 @@ view_mode ? view_mode|clean_class,
         {{ content.field_content_owner }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-<script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "DigitalDocument",
-      "headline" : "{{ node.label }}",
-      "genre" : "{{ fieldDocumentTheme|striptags|trim }}",
-      "creationDate": "{{ createdDate }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ fieldOwner|striptags|trim }}",
-      }
-    }
-    </script>
-
-
 <div class="content_info">
     <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
 </div>
