@@ -687,3 +687,8 @@ nav .menu.navbar-nav a:active,
 nav .menu.navbar-nav a:focus {
     outline: none;
 }
+
+#main_nav .navbar-nav .nav-item.dropdown span.caret,
+#navtop .navbar-nav .dropdown span.caret {
+    display: none;
+}
