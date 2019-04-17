@@ -86,7 +86,7 @@
     }
 
     .oab_background_image .menu.navbar-nav .nav-item.dropdown.open > a {
-        border: none;
+        border-color: transparent;
     }
 
 }
