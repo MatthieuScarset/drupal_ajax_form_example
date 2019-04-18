@@ -313,4 +313,5 @@ class OabExtension extends \Twig_Extension {
     $content = str_replace("</link>", "</a>", $content);
     return $content;
   }
+
 }
