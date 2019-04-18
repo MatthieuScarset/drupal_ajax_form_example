@@ -193,7 +193,7 @@ function theme_boosted_preprocess_node(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 	}
 
-    $variables['http_host'] = $_SERVER['HTTP_HOST'];
+    $variables['http_host'] = \Drupal::request()->getSchemeAndHttpHost();
 }
 
 function theme_boosted_preprocess_page(&$variables) {
