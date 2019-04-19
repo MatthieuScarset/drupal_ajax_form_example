@@ -1370,10 +1370,10 @@ a.home_banner_element_mobile_link {
     padding-left: 0rem;
 }
 
-.container-fluid {
+/*.container-fluid {
     padding-right: 0 !important;
     padding-left: 0 !important;
-}
+}C'est ce qui cause le problème de la scrollbar horizontale sur la home. A garder au cas où des effets de bord ont lieu*/
 
 .home_thematic_automatic {
     background-color: #eee;
