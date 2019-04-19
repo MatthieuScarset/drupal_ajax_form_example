@@ -107,6 +107,9 @@ view_mode ? view_mode|clean_class,
     {% set logoUrl %}
         {{ http_host ~ "/themes/theme_boosted/logo-fond-blanc.png" }}
     {% endset %}
+    {% set cleanHeadline %}
+        {{  node.label|replace({ ('\\'): '' }) }}
+    {% endset %}
 
     <script type="application/ld+json"> {
         "@context": "http://schema.org",
@@ -115,7 +118,7 @@ view_mode ? view_mode|clean_class,
           "@type": "WebPage",
           "@id": "https://google.com/article"
         },
-        "headline": "{{ node.label }}",
+        "headline": "{{ specialCharacters(node.label) }}",
         "image": "{{ imageUrl }}",
         "datePublished": "{{ node.created.value|date("Y-m-dT:h:m:s+h:m") }}",
         "dateModified": "{{ node.updated.value|date("Y-m-dT:h:m:s+h:m") }}",

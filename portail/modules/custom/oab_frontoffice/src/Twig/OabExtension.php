@@ -31,6 +31,7 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
           new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
+          new \Twig_SimpleFunction('specialCharacters', [$this, 'specialCharacters']),
       ];
 }
 
@@ -312,6 +313,11 @@ class OabExtension extends \Twig_Extension {
     $content = str_replace("<link", "<a", $content);
     $content = str_replace("</link>", "</a>", $content);
     return $content;
+  }
+
+  public function specialCharacters($string) {
+      $cleanString = str_replace('\\', '', $string);
+      return htmlentities($cleanString);
   }
 
 }
