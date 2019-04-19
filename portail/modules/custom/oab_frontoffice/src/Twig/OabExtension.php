@@ -319,5 +319,4 @@ class OabExtension extends \Twig_Extension {
       $cleanString = str_replace('\\', '', $string);
       return htmlentities($cleanString);
   }
-
 }
