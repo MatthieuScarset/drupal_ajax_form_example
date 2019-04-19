@@ -497,7 +497,6 @@ body {
     display: table-cell;
     vertical-align: middle;
     background-color: #eee;
-    overflow-x: hidden;
 }
 body > .main-container{
    /* margin-bottom: 3rem; */
@@ -859,4 +858,9 @@ aside.right-column > .region{
     padding: 0px 20px 40px 20px;
     width: 30%;
     float: left;
+}
+
+.row .top-zone-homepage {
+    margin-left: 0;
+    margin-right: 0;
 }
