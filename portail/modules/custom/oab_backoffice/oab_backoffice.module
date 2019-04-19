@@ -108,7 +108,6 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     _in_hook_form_alter($form, $form_state, $form_id);
 
     if ($form === "webform_handler_form" || strpos($form_id, 'webform_handler_form') !== false) {
-        kint($form['settings']);
 
         // Petit changement pour mettre mon option avant les elements
         $b = $form["settings"]['message']['body']['#options']['Elements'];
