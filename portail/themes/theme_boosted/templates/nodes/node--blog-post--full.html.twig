@@ -107,10 +107,7 @@ view_mode ? view_mode|clean_class,
     {% set logoUrl %}
         {{ http_host ~ "/themes/theme_boosted/logo-fond-blanc.png" }}
     {% endset %}
-    {% set cleanHeadline %}
-        {{  node.label|replace({ ('\\'): '' }) }}
-    {% endset %}
-
+    
     <script type="application/ld+json"> {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
