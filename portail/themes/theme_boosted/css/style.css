@@ -2861,6 +2861,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding:10px;
 }
 
+.col-xs .view-business-insight .view-content .views-row,
 .col-xxs .view-business-insight .view-content .views-row{
     width: 100%;
     padding:10px;
