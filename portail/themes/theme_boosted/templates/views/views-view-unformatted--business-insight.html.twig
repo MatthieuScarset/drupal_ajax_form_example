@@ -29,14 +29,14 @@
         view.exposed_data.field_insight_target_id is defined
         and view.exposed_data.field_insight_target_id == 'All'
         and loop.index == 10%}
-        <div class="views-row">
+        <div class="views-row col-md-4">
             {{ drupal_entity('block', 'twitterblock', check_access=false) }}
         </div>
     {% endif %}
 
     {%
         set row_classes = [
-        default_row_class ? 'views-row',
+        default_row_class ? 'views-row col-md-4',
     ]
     %}
     <div{{ row.attributes.addClass(row_classes) }}>
