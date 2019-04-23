@@ -861,7 +861,7 @@ display:
         description: ''
         expanded: false
         parent: ''
-        weight: 0
+        weight: 3
         context: '0'
         menu_name: main
       display_description: 'The list of the backgrounds'
