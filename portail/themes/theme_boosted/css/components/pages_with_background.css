@@ -105,7 +105,7 @@
         height: 35px;
         font-size: 2rem;
         width: 100%;
-        paddgin-left: 5px;
+        padding-left: 5px;
     }
 
     .oab_background_image .fieldset-field-insight-type .btn {
@@ -135,10 +135,6 @@
         background-color: transparent;
     }
 
-    .oab_background_image .fieldset-field-insight-type .btn, .fieldset-field-insight-type .btn.btn-primary {
-        color: #fff;
-    }
-
     .oab_background_image .business-insight-field-insight {
         padding: 0;
         margin-left: 10px;
@@ -146,6 +142,10 @@
 
     .oab_background_image.fieldset-field-insight-type .fieldset-wrapper {
         margin-left: 10px;
+    }
+
+    .oab_background_image .fieldset-field-insight-type .btn.btn-primary:active {
+        color: #fff;
     }
 }
 
