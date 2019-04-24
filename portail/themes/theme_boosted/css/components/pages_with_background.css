@@ -147,12 +147,13 @@
         color: #fff;
     }
 
-    .oab_background_image .fieldset-field-insight-type .btn, .fieldset-field-insight-type .btn.btn-primary {
+    .oab_background_image .fieldset-field-insight-type .btn {
         color: #fff;
     }
 
     .oab_background_image .business-insight-field-insight select.form-control {
         background-image: none;
+        -webkit-appearance: menulist;
     }
 }
 
