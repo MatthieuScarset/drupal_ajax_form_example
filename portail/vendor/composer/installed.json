@@ -1525,17 +1525,17 @@
     },
     {
         "name": "symfony/dependency-injection",
-        "version": "v3.4.15",
-        "version_normalized": "3.4.15.0",
+        "version": "v3.4.26",
+        "version_normalized": "3.4.26.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/dependency-injection.git",
-            "reference": "09d7df7bf06c1393b6afc85875993cbdbdf897a0"
+            "reference": "dee85a9148399cdb2731603802842bcfd8afe5ab"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/09d7df7bf06c1393b6afc85875993cbdbdf897a0",
-            "reference": "09d7df7bf06c1393b6afc85875993cbdbdf897a0",
+            "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/dee85a9148399cdb2731603802842bcfd8afe5ab",
+            "reference": "dee85a9148399cdb2731603802842bcfd8afe5ab",
             "shasum": ""
         },
         "require": {
@@ -1563,7 +1563,7 @@
             "symfony/proxy-manager-bridge": "Generate service proxies to lazy load them",
             "symfony/yaml": ""
         },
-        "time": "2018-08-08T11:42:34+00:00",
+        "time": "2019-04-16T11:13:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1663,17 +1663,17 @@
     },
     {
         "name": "symfony/http-foundation",
-        "version": "v3.4.15",
-        "version_normalized": "3.4.15.0",
+        "version": "v3.4.26",
+        "version_normalized": "3.4.26.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/http-foundation.git",
-            "reference": "2fb33cb6eefe6e790e4023f7c534a9e4214252fc"
+            "reference": "90454ad44c95d75faf3507d56388056001b74baf"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/2fb33cb6eefe6e790e4023f7c534a9e4214252fc",
-            "reference": "2fb33cb6eefe6e790e4023f7c534a9e4214252fc",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/90454ad44c95d75faf3507d56388056001b74baf",
+            "reference": "90454ad44c95d75faf3507d56388056001b74baf",
             "shasum": ""
         },
         "require": {
@@ -1684,7 +1684,7 @@
         "require-dev": {
             "symfony/expression-language": "~2.8|~3.0|~4.0"
         },
-        "time": "2018-08-27T17:45:33+00:00",
+        "time": "2019-04-17T14:51:18+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1856,7 +1856,7 @@
             },
             {
                 "name": "Gert de Pagter",
-                "email": "BackEndTea@gmail.com"
+                "email": "backendtea@gmail.com"
             }
         ],
         "description": "Symfony polyfill for ctype functions",
@@ -2545,33 +2545,33 @@
     },
     {
         "name": "twig/twig",
-        "version": "v1.35.4",
-        "version_normalized": "1.35.4.0",
+        "version": "v1.38.2",
+        "version_normalized": "1.38.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twigphp/Twig.git",
-            "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a"
+            "reference": "874adbd9222f928f6998732b25b01b41dff15b0c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twigphp/Twig/zipball/7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
-            "reference": "7e081e98378a1e78c29cc9eba4aefa5d78a05d2a",
+            "url": "https://api.github.com/repos/twigphp/Twig/zipball/874adbd9222f928f6998732b25b01b41dff15b0c",
+            "reference": "874adbd9222f928f6998732b25b01b41dff15b0c",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3",
+            "php": ">=5.4.0",
             "symfony/polyfill-ctype": "^1.8"
         },
         "require-dev": {
             "psr/container": "^1.0",
             "symfony/debug": "^2.7",
-            "symfony/phpunit-bridge": "^3.3"
+            "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
         },
-        "time": "2018-07-13T07:12:17+00:00",
+        "time": "2019-03-12T18:45:24+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.35-dev"
+                "dev-master": "1.38-dev"
             }
         },
         "installation-source": "dist",
