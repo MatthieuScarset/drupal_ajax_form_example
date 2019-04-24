@@ -83,43 +83,17 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.oab_background_image .business-insight-field-insight select.form-control {
-    vertical-align: top;
-    color: #f16e00;
-    color: #fff;
-    height: auto;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    padding-right: 60px;
-    margin-top: 5px;
-    -moz-appearance:none;
-    -webkit-appearance: none;
-    font-size: 1.6rem;
-
-    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
-    background-image:
-            linear-gradient(45deg, transparent 50%, #fff 50%),
-            linear-gradient(135deg, #fff 50%, transparent 50%),
-            linear-gradient(to right, transparent, transparent);
-    background-position:
-            calc(100% - 15px) .15em,
-            calc(100% - 5px) .15em,
-            calc(100% - .5em) 0.5em;
-    background-size:
-            10px 10px,
-            10px 10px,
-            1px 1.5em;
-    background-repeat: no-repeat;
-
-}
-
 @media(max-width: 767px) {
 
+    body {
+        background-color: #333;
+    }
+
     .oab_background_image .view-business-insight h1 {
-        padding: 3rem 0;
+        padding: 3rem 1.1rem;
         font-size: 2.9rem;
         border-bottom: solid 1px #BBB;
+        color: #fff;
     }
 
     .oab_background_image .business-insight-field-insight select.form-control {
@@ -135,13 +109,14 @@
     }
 
     .oab_background_image .view-business-insight .view-filters {
-        width: 90%;
+        width: 100%;
         margin: auto;
         padding: 0 10px;
     }
 
     .oab_background_image .fieldset-field-insight-type {
         padding-left: 10px;
+        margin-right: 10px;
     }
 
     .oab_background_image .view-business-insight .view-content .views-row .tile .title_node {
@@ -151,6 +126,18 @@
     .oab_background_image .view-business-insight .view-content .views-row {
         width: auto;
         padding: 20px;
+    }
+
+    .oab_background_image .subhomes-filterbar-background {
+        background-color: transparent;
+    }
+
+    .oab_background_image .fieldset-field-insight-type .btn, .fieldset-field-insight-type .btn.btn-primary {
+        color: #fff;
+    }
+
+    .oab_background_image .div.business-insight-field-insight {
+        padding: 0 0 0 1rem;
     }
 }
 
