@@ -159,5 +159,9 @@
     .oab_background_image .view-business-insight .btn-primary label {
         color: #f16e00;
     }
+
+    .business-insight-field-insight div {
+        padding: 0;
+    }
 }
 
