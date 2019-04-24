@@ -83,6 +83,9 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* Refonte responsive VB */
+/* Branche RUBYPORTAILOBS-3512 Eddy */
+
 @media(max-width: 767px) {
 
     body {
@@ -102,6 +105,7 @@
         height: 35px;
         font-size: 2rem;
         width: 100%;
+        paddgin-left: 5px;
     }
 
     .oab_background_image .fieldset-field-insight-type .btn {
@@ -110,8 +114,8 @@
 
     .oab_background_image .view-business-insight .view-filters {
         width: 100%;
-        margin: auto;
-        padding: 0 10px;
+        margin-left: 12px;
+        padding: 0;
     }
 
     .oab_background_image .fieldset-field-insight-type {
@@ -124,7 +128,7 @@
 
     .oab_background_image .view-business-insight .view-content .views-row {
         width: auto;
-        padding: 20px;
+        padding: 0;
     }
 
     .oab_background_image .subhomes-filterbar-background {
@@ -135,16 +139,17 @@
         color: #fff;
     }
 
-    .oab_background_image .div.business-insight-field-insight {
+    .oab_background_image .business-insight-field-insight {
         padding: 0;
+        margin-left: 10px;
     }
 
-    .oab_background_image .view-business-insight .view-filters {
-        padding: 0;
+    .oab_background_image.fieldset-field-insight-type .fieldset-wrapper {
+        margin-left: 10px;
+    }
+
+    .oab_background_image .business-insight-field-insight select.form-control {
+        display: none;
     }
 }
 
-@media(max-width: 576px) {
-
-
-}
