@@ -86,11 +86,11 @@
 @media(max-width: 767px) {
 
     body {
-        background-color: #333;
+        background-color: #333 !important;
     }
 
     .oab_background_image .view-business-insight h1 {
-        padding: 3rem 1.1rem;
+        padding: 3rem 0rem;
         font-size: 2.9rem;
         border-bottom: solid 1px #BBB;
         color: #fff;
@@ -115,8 +115,7 @@
     }
 
     .oab_background_image .fieldset-field-insight-type {
-        padding-left: 10px;
-        margin-right: 10px;
+        padding: 0;
     }
 
     .oab_background_image .view-business-insight .view-content .views-row .tile .title_node {
@@ -137,13 +136,15 @@
     }
 
     .oab_background_image .div.business-insight-field-insight {
-        padding: 0 0 0 1rem;
+        padding: 0;
+    }
+
+    .oab_background_image .view-business-insight .view-filters {
+        padding: 0;
     }
 }
 
 @media(max-width: 576px) {
 
-    .oab_background_image .view-business-insight .view-filters {
-        padding: 0;
-    }
+
 }
