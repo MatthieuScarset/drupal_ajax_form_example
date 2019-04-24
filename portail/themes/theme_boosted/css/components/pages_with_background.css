@@ -155,5 +155,9 @@
         background-image: none;
         -webkit-appearance: menulist;
     }
+
+    .oab_background_image .view-business-insight .btn-primary label {
+        color: #f16e00;
+    }
 }
 
