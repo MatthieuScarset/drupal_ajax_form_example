@@ -2750,7 +2750,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     background-color: #FFFFFF;
     width:100%;
     font-weight: bold;
-    padding: 0;
+    padding: 0 10px;
 }
 
 .view-business-insight .view-content .views-row .tile_Report{
@@ -2758,7 +2758,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 .view-business-insight .view-content .views-row .tile_Blogs{
-    padding: 0;
+    padding: 0 0 10px 0;
 }
 
 .view-business-insight .view-content .views-row .tile .field_insight,
