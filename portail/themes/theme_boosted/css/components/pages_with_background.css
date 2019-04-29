@@ -165,5 +165,9 @@
     .oab_background_image .view-business-insight .view-content .views-row .tile {
         margin-bottom: 10px;
     }
+
+    .oab_background_image .view-business-insight .view-content .views-row .tile_Report {
+        height: 150px;
+    }
 }
 
