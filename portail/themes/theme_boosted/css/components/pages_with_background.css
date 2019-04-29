@@ -157,9 +157,13 @@
         color: #f16e00;
     }
 
-    .business-insight-field-insight div {
+    .oab_background_image .business-insight-field-insight div {
         padding: 0;
         margin: 0;
+    }
+
+    oab_background_image .view-business-insight .view-content .tile.tile_Blogs .tags {
+        padding: 0;
     }
 }
 
