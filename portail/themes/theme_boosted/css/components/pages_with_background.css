@@ -127,7 +127,7 @@
     }
 
     .oab_background_image .view-business-insight .view-content .views-row {
-        width: auto;
+        width: 100%;
         padding: 0;
     }
 
@@ -163,6 +163,10 @@
     .business-insight-field-insight div {
         padding: 0;
         margin: 0;
+    }
+
+    .view-business-insight .view-content .views-row .tile_Blogs {
+        padding: 0;
     }
 
 }
