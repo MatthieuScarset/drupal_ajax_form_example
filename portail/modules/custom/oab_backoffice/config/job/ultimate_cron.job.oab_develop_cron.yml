@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - oab_develop
+title: 'Check le dossier de log et on envoie par mail les fichiers présents par la suite on supprime tout'
+id: oab_develop_cron
+weight: 0
+module: oab_develop
+callback: oab_develop_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

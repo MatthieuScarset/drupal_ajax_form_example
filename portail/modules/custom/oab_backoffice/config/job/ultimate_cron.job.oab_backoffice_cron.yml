@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - oab_backoffice
+title: "Suppression des resultats des webforms de plus d'un an"
+id: oab_backoffice_cron
+weight: 0
+module: oab_backoffice
+callback: oab_backoffice_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database
