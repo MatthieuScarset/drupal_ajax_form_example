@@ -83,6 +83,10 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+.oab_background_image .view-business-insight .view-content .views-row .tile_Report {
+    padding-bottom: 20px;
+}
+
 /* Refonte responsive VB */
 /* Branche RUBYPORTAILOBS-3512 Eddy */
 
@@ -164,10 +168,6 @@
 
     .oab_background_image .view-business-insight .view-content .views-row .tile {
         margin-bottom: 20px;
-    }
-
-    .oab_background_image .view-business-insight .view-content .views-row .tile_Report {
-        padding-bottom: 20px;
     }
 }
 
