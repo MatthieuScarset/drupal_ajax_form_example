@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - oab_axiome
+title: "l'import des archives"
+id: oab_axiome_cron
+weight: 0
+module: oab_axiome
+callback: oab_axiome_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

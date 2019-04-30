@@ -1,0 +1,30 @@
+<?php
+
+function oab_riad_install() {
+    drupal_set_installed_schema_version('oab_riad', 8000);
+}
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_riad_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}
+
+
+/**
+ * RUBYPORTAILOBS-2722 rajout daste par defaut au champs de publication
+ */
+function oab_riad_update_8001() {
+  include_once("updates/update_8001.inc");
+}
+
+
+/**
+ * RUBYPORTAILOBS-3513 rajout daste par defaut au champs de publication
+ */
+function oab_riad_update_8002() {
+    include_once("updates/update_8002.inc");
+}
