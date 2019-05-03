@@ -67,7 +67,6 @@
 #}
 
 <div class="tile tile_{{ node.field_insight_type.entity.name.value }}">
-
     <a href="{{ url }}" class="">
         <div class="encart encart-image">
             {% for key, image in content.field_visual  %}
@@ -86,15 +85,14 @@
     </div>
 
     <a href="{{ url }}" class="">
-        <div class="title_node col-lg-12">{{ label }}</div>
+        <div class="title_node col-lg-12" onmousedown="utag_link('{{ utag_data.titre_page }}', 'Tile', 'Text Link', '{{ node.label }}');">{{ label }}</div>
     </a>
-
     <div class="profile col-lg-12">
         {% for p in content.field_profile %}
             {% set profile = p.entity %}
             {% for key, image in profile.field_visual  %}
                 {% if image.entity.field_image.entity.uri.value is not null and image.entity.name.value is not null %}
-                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('subhome') }}" alt="{{ image.entity.name.value }}" />
+                    <img onmousedown="utag_link(utag_data.titre_page, 'Tile', 'Illustration', '{{ node.label }}');" src="{{ image.entity.field_image.entity.uri.value|image_style_uri('subhome') }}" alt="{{ image.entity.name.value }}" />
                 {% endif %}
             {% endfor %}
             {% if profile.label is not null %}
