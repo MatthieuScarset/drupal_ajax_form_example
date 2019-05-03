@@ -1,8 +1,8 @@
 <?php
 
 function get_correspondances_subhomes() {
-	$subhomes = array(
-		'blogs' => array(
+    $subhomes = array(
+        'blogs' => array(
 			'fr' => array('label' => 'Blogs', 'tid_D8' => ''),
 			'en' => array('label' => 'Blogs', 'tid_D8' => ''),
 			'ru' => array('label' => 'Блоги', 'tid_D8' => ''),
@@ -26,5 +26,5 @@ function get_correspondances_subhomes() {
 			'ru' => array('label' => 'Новости', 'tid_D8' => ''),
 			'ru-en' => array('label' => 'Newsroom', 'tid_D8' => '')),
 	);
-	return $subhomes;
+    return $subhomes;
 }

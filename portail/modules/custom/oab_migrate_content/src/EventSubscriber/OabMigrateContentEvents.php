@@ -40,16 +40,16 @@ class OabMigrateContentEvents implements EventSubscriberInterface {
 
     public function swtchUserToAdmin(MigrateImportEvent $migrate_row) {
         // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
-        $accountSwitcher = \Drupal::service('account_switcher');
+        $account_switcher = \Drupal::service('account_switcher');
         // switch to the admin user
-        $accountSwitcher->switchTo(new UserSession(['uid' => 1]));
+        $account_switcher->switchTo(new UserSession(['uid' => 1]));
     }
 
     public function swtchUserToAnonymous(MigrateImportEvent $migrate_row) {
         // On change le current user car l'utilisateur anonyme (0) pose des problèmes avec le workflow
-        $accountSwitcher = \Drupal::service('account_switcher');
+        $account_switcher = \Drupal::service('account_switcher');
         // switch to the admin user
-        $accountSwitcher->switchTo(new UserSession(['uid' => 0]));
+        $account_switcher->switchTo(new UserSession(['uid' => 0]));
     }
 
   /**
