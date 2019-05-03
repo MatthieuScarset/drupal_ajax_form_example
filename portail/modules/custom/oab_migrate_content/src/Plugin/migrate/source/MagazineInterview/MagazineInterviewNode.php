@@ -73,7 +73,7 @@ class MagazineInterviewNode extends SqlBase {
 
         //META TITRE
         $title = $row->getSourceProperty('title');
-        $title = mb_substr($title,0, 55);
+        $title = mb_substr($title, 0, 55);
         $row->setSourceProperty('meta_title', $title) ;
 
         //META DESCRIPTION - récupération de la short description (txt_catcher)
@@ -97,10 +97,9 @@ class MagazineInterviewNode extends SqlBase {
                 }
             }
         }
-        if (isset($meta_description) && !empty($meta_description))
-        {
+        if (isset($meta_description) && !empty($meta_description)) {
             $row->setSourceProperty('highlight_field', $meta_description) ;
-            $meta_description_short = mb_substr($meta_description,0, 155);
+            $meta_description_short = mb_substr($meta_description, 0, 155);
             $row->setSourceProperty('meta_description', $meta_description_short) ;
         }
 
@@ -108,8 +107,7 @@ class MagazineInterviewNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['magazine'][$row->getSourceProperty('language')])
             && isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -172,19 +170,26 @@ class MagazineInterviewNode extends SqlBase {
       }
     }
 
-    $verbatim_content = '<div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
-                                                <div class="bubble">';
-    if ($field_txt_citation_1_value !== '') $verbatim_content .= '<div class="verbatim-title">' . $field_txt_citation_1_value . '</div>';
-    $verbatim_source = "";
-    if ($field_txt_auteur_1_value !== '') $verbatim_source .= $field_txt_auteur_1_value ;
-    if ($field_location_value !== '') $verbatim_source .= ','. $field_location_value ;
-    if ($field_profil_value !== '') $verbatim_source .=  ','. $field_profil_value ;
+    $verbatim_content = '<div class="col col-md-12 col-xs-12 col-sm-12 nopadding"><div class="bubble">';
+    if ($field_txt_citation_1_value !== '') {
+        $verbatim_content .= '<div class="verbatim-title">' . $field_txt_citation_1_value . '</div>';
+        $verbatim_source = "";
+    }
+    if ($field_txt_auteur_1_value !== '') {
+        $verbatim_source .= $field_txt_auteur_1_value ;
+    }
+    if ($field_location_value !== '') {
+        $verbatim_source .= ','. $field_location_value ;
+    }
+    if ($field_profil_value !== '') {
+        $verbatim_source .=  ','. $field_profil_value ;
         $verbatim_content .= '<p class="verbatim-source">'.$verbatim_source.'</p>';
+    }
     $verbatim_content .= '</div></div>';
 
     $body_value = oab_migrate_wysiwyg_images($body_value, $row->getSourceProperty('nid'));
 
-    $row->setSourceProperty('content_field',  array(
+    $row->setSourceProperty('content_field', array(
       array('value' => $verbatim_content, 'format' => 'full_html'),
       array('value' => $body_value, 'format' => 'full_html'),
     ));
@@ -302,7 +307,7 @@ class MagazineInterviewNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

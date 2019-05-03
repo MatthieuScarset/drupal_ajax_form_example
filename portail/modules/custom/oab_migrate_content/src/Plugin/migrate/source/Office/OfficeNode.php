@@ -111,8 +111,7 @@ class OfficeNode extends SqlBase {
                 }
             }
         }
-        if (isset($email_value) && !empty($email_value))
-        {
+        if (isset($email_value) && !empty($email_value)) {
             $row->setSourceProperty('email_address', $email_value) ;
         }
 
@@ -136,8 +135,7 @@ class OfficeNode extends SqlBase {
                 }
             }
         }
-        if (isset($phone_value) && !empty($phone_value))
-        {
+        if (isset($phone_value) && !empty($phone_value)) {
             $row->setSourceProperty('phone_number', $phone_value) ;
         }
 
@@ -163,9 +161,9 @@ class OfficeNode extends SqlBase {
         $country_result = $country_query->execute()->fetchObject();
 
         if (is_object($country_result) && isset($country_result->code)) {
-            $tidCountry = get_country_term($country_result->code, $country_result->name);
-            if (isset($tidCountry)) {
-                $row->setSourceProperty('country', $tidCountry);
+            $tid_country = get_country_term($country_result->code, $country_result->name);
+            if (isset($tid_country)) {
+                $row->setSourceProperty('country', $tid_country);
             }
         }
 
