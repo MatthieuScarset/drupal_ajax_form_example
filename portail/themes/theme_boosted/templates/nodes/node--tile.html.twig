@@ -74,7 +74,7 @@
     </div>
 
     <a href="{{ url }}" class="">
-        <div class="title_node col-lg-12">{{ label }}</div>
+        <div class="title_node col-lg-12" onmousedown="utag_link('{{ utag_data.titre_page }}', 'Tile', 'Text Link', '{{ node.label }}');">{{ label }}</div>
     </a>
 
     <a href="{{ url }}" class="">
@@ -84,7 +84,7 @@
                 {% set file = media.field_image.entity %}
                 {% set uri = file.uri.value %}
                 {% if uri is not null and media.name.value is not null %}
-                    <img src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
+                    <img onmousedown="utag_link(utag_data.titre_page, 'Tile', 'Illustration', '{{ node.label }}');" src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" />
                 {% endif %}
             {% endfor %}
         </div>
