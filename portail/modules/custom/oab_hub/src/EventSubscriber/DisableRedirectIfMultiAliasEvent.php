@@ -14,8 +14,7 @@ class DisableRedirectIfMultiAliasEvent implements EventSubscriberInterface {
      *
      * Publish the Event.
      */
-    public static function getSubscribedEvents()
-    {
+    public static function getSubscribedEvents() {
         # Il faut que je passe avant l'event du module Redirect de normalisation pour setter un param de la requete,
         # donc je mets un gros Coef pour être sur d'etre avant
         $events[KernelEvents::REQUEST][] = ['onRequest', 31];

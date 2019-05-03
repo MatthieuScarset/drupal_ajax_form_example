@@ -8,7 +8,7 @@ function flash_message(text, type, delay) {
     if (typeof (delay) === 'undefined')
         delay = 10000;
     if (type == "success" || type == "error" || type == "danger" || type == "info" || type == "base") {
-        alerttype = " alert-" + type;
+        var alerttype = " alert-" + type;
     } else {
         alerttype = "";
     }
@@ -57,8 +57,8 @@ function flash_message(text, type, delay) {
         });
     });
     // centrer popin
-    marginLeft = -jQuery("#flashmessage").width() / 2 + "px";
-    marginTop = -jQuery("#flashmessage").height() / 2 + "px";
+    var marginLeft = -jQuery("#flashmessage").width() / 2 + "px";
+    var marginTop = -jQuery("#flashmessage").height() / 2 + "px";
     jQuery("#flashmessage").css("margin-left", marginLeft);
     jQuery("#flashmessage").css("margin-top", marginTop);
     jQuery("#flashmessage .text").focus();

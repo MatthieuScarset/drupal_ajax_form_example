@@ -46,7 +46,7 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
             ];
             unset($form['actions']);
         }
-        else if ($form['#form_id'] == 'entity_embed_dialog' && $embed_button = $form_state->get('embed_button')) {
+        elseif ($form['#form_id'] == 'entity_embed_dialog' && $embed_button = $form_state->get('embed_button')) {
             // Check that we're using oab_media_browser.
             if ($embed_button->getTypePlugin()->getConfigurationValue('entity_browser') == 'browse_files_iframe') {
                 // Override the first step of the form, if we're using oab_media_browser.
@@ -70,7 +70,7 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
                 }
             }
         }
-        else if ($form['#form_id'] == 'media_image_form'
+        elseif ($form['#form_id'] == 'media_image_form'
             || $form['#form_id'] == 'media_image_edit_form') {
             $entity = $form_state->getFormObject()->getEntity();
             $entity_status = $entity->isPublished();
@@ -89,10 +89,9 @@ function oab_media_browser_form_alter(&$form, FormStateInterface &$form_state) {
                 '#group' => 'status_information',
             ];
         }
-        else if ($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
+        elseif ($form['#form_id'] == 'entity_browser_browse_medias_iframe_form'
             || $form['#form_id'] =='entity_browser_browse_media_modal_form'
-            || $form['#form_id'] =='entity_browser_browser_file_modal_form')
-        {
+            || $form['#form_id'] =='entity_browser_browser_file_modal_form') {
             $form['#attached']['library'][] = 'oab_media_browser/mediatheque';
         }
     }

@@ -3,8 +3,7 @@ namespace Drupal\oab_background_image\Services;
 
 use Drupal\media_entity\Entity\Media;
 
-class BgImageManagement
-{
+class BgImageManagement {
 
     /** @var \Drupal\Core\Cache\CacheBackendInterface  */
     private $cache;
@@ -29,7 +28,7 @@ class BgImageManagement
         $data = null;
         if (is_a($mid, 'Drupal\media_entity\Entity\Media')) {
             $data = $mid->id();
-        } elseif (ctype_digit ($mid) !== false) {
+        } elseif (ctype_digit($mid) !== false) {
             $data = $mid;
         } else {
             throw new \Exception("Mauvais paramètre");

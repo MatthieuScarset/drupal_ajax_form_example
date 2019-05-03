@@ -5,8 +5,7 @@ namespace Drupal\oab_background_image\Services;
 use Drupal\Core\Entity\ContentEntityInterface;
 
 
-class EntityGetField
-{
+class EntityGetField {
     /**
      * @param ContentEntityInterface $entity
      * @param $field_name
