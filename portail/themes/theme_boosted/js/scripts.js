@@ -397,7 +397,6 @@
     }
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
-          window.alert($(evt.target).text());
       });
   });
 
