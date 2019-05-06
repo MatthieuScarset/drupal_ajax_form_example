@@ -72,7 +72,7 @@ class MagazineArticleNode extends SqlBase {
   public function prepareRow(Row $row) {
         //META TITRE
         $title = $row->getSourceProperty('title');
-        $title = mb_substr($title,0, 55);
+        $title = mb_substr($title, 0, 55);
         $row->setSourceProperty('meta_title', $title) ;
 
         //META DESCRIPTION - récupération de la short description (txt_catcher)
@@ -96,10 +96,9 @@ class MagazineArticleNode extends SqlBase {
                 }
             }
         }
-        if (isset($meta_description) && !empty($meta_description))
-        {
+        if (isset($meta_description) && !empty($meta_description)) {
             $row->setSourceProperty('highlight_field', $meta_description) ;
-            $meta_description_short = mb_substr($meta_description,0, 155);
+            $meta_description_short = mb_substr($meta_description, 0, 155);
             $row->setSourceProperty('meta_description', $meta_description_short) ;
         }
 
@@ -107,8 +106,7 @@ class MagazineArticleNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['magazine'][$row->getSourceProperty('language')])
             && isset($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['magazine'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -254,7 +252,7 @@ class MagazineArticleNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

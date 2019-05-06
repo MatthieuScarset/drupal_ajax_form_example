@@ -112,8 +112,7 @@ class PressReleaseNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['press'][$row->getSourceProperty('language')])
             && isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['press'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -237,8 +236,7 @@ class PressReleaseNode extends SqlBase {
         $formats = \Drupal::state()->get('press_format_for_migration');
         if (isset($formats['press_release'][$row->getSourceProperty('language')])
             && isset($formats['press_release'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($formats['press_release'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($formats['press_release'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('press_types', $formats['press_release'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -276,8 +274,7 @@ class PressReleaseNode extends SqlBase {
 
     $workflow_results = $workflow_query->execute()->fetchAll();
 
-    if (is_array($workflow_results))
-    {
+    if (is_array($workflow_results)) {
       foreach ($workflow_results AS $workflow_result) {
         $sid = '';
         // On vérifie si on a affaire à un objet ou à un tableau
@@ -303,7 +300,7 @@ class PressReleaseNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

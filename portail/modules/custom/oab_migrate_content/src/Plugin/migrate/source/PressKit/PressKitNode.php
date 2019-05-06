@@ -225,7 +225,7 @@ class PressKitNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
     return parent::prepareRow($row);
   }

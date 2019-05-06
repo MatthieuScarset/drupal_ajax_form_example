@@ -107,12 +107,12 @@ class PressKitFile extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    $fileFolders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
+    $file_folders = ['media', 'pictures', 'Blog', 'Contributor en', 'Contributor fr', 'Editorial Master', 'Events', 'library', 'magazine', 'press', 'webtv',
         'media/agences', 'media/blog', 'media/contributor_en', 'media/editorial_master', 'media/events', 'media/events/events_document', 'media/library', 'media/magazine', 'media/press', 'media/webtv', 'field/image'];
 
-    foreach ($fileFolders AS $folder) {
-      $folderName = 'public://'.$folder;
-      file_prepare_directory($folderName, FILE_CREATE_DIRECTORY);
+    foreach ($file_folders AS $folder) {
+      $folder_name = 'public://'.$folder;
+      file_prepare_directory($folder_name, FILE_CREATE_DIRECTORY);
     }
     // Compute the filepath property, which is a physical representation of
     // the URI relative to the Drupal root.
