@@ -7,7 +7,7 @@
         var map;
         var infowindow;
         google.maps.InfoWindow = InfoBox;
-        var infowindow = new google.maps.InfoWindow();
+        infowindow = new google.maps.InfoWindow();
 
         Drupal.geolocation.loadGoogle(function () {
             //méthode appelée une fois que la map est chargée
@@ -44,9 +44,9 @@
                $('.offices-addresses .offices-addresses-list .office-address').mouseout(
                     function(){
                         if(currentMarkerPosition != undefined){
-                            var markerAssociated = map.mapMarkers[currentMarkerPosition];
+                            var markerAssociated2 = map.mapMarkers[currentMarkerPosition];
                             for (var i=0; i < map.mapMarkers.length; i++){
-                                if(markerAssociated !=  map.mapMarkers[i]) {
+                                if(markerAssociated2 !=  map.mapMarkers[i]) {
                                     var iconNormal = map.mapMarkers[i].icon.replace('-hover.png', '.png');
                                     map.mapMarkers[i].setIcon(iconNormal);
                                 }
@@ -60,11 +60,11 @@
                             //console.log(currentTargetPosition);
 
                             // On recupere le marker de la map grace au numero de l'element selectionne
-                            var markerAssociated = map.mapMarkers[currentTargetPosition - 1];
-                            var icon = markerAssociated.icon;
+                            var markerAssociated3 = map.mapMarkers[currentTargetPosition - 1];
+                            var icon = markerAssociated3.icon;
                             if (icon.indexOf('-hover.png')) {
                                 var iconNormal = icon.replace('-hover.png', '.png');
-                                markerAssociated.setIcon(iconNormal);
+                                markerAssociated3.setIcon(iconNormal);
                             }
                         }
                     }

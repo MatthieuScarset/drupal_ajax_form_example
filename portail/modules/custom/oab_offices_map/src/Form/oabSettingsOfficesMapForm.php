@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class oab_settings_offices_map_form extends ConfigFormBase {
+class OabSettingsOfficesMapForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */

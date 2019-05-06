@@ -51,11 +51,11 @@ function Start() {
 
 
 // Variables globales diverses
-RessourcesPath = document.location.protocol;
+var RessourcesPath = document.location.protocol;
 RessourcesPath += "//www.synomia-autocompletion.com/";
 
-collection = new Array;
-SynSuggestsParams = new Array;
+var collection = new Array;
+var SynSuggestsParams = new Array;
 var Main = null;
 TabSuggestElt = new Array;
 var TabSuggestLancement = new Array;
