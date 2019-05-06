@@ -367,7 +367,6 @@ InfoBox.prototype.panBox_ = function (disablePan) {
 
                 // Move the map to the shifted center.
                 //
-                var c = map.getCenter();
                 map.panBy(xOffset, yOffset);
             }
         }

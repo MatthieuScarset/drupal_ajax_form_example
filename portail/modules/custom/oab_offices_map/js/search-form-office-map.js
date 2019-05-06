@@ -35,7 +35,6 @@
             var offices = drupalSettings.countriesRegionsTab;
             var allCountriesArray = drupalSettings.allCountriesArray;
             var selectedCountryParameter = drupalSettings.selectedCountryParameter;
-            var selectedRegionParameter = drupalSettings.selectedRegionParameter;
             $("#edit-country").empty();
             $("#edit-country").append($("<option></option>")
                 .attr("value","all")

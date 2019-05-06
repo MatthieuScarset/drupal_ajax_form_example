@@ -30,8 +30,7 @@ class OabOfficesMapPageController extends ControllerBase {
     public function viewPage(Request $request) {
 
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-        if ($current_language == "fr")
-        {
+        if ($current_language == "fr") {
             //on lance une 404
             throw new NotFoundHttpException();
         }
@@ -42,16 +41,14 @@ class OabOfficesMapPageController extends ControllerBase {
             $country_id = (!empty($parameters) && isset($parameters['country']) && $parameters['country'] != 'All') ? $parameters['country'] : 'all';
 
             if (($current_language == "ru" && !empty($country_id) && $country_id =="ru")
-                || ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
-            {
+                || ($current_language == "ru" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all"))) {
                 // si l'url est /ru/contacts ou /ru/contacts?country=ru => on redirige vers le bon id du pays Russia
                 $query = \Drupal::entityQuery('taxonomy_term');
                 $query->condition('vid', 'office_countries');
                 $query->condition('name', 'Russia');
                 $entity_countries = $query->execute();
 
-                if (!empty($entity_countries))
-                {
+                if (!empty($entity_countries)) {
                     $country_id = array_pop(array_values($entity_countries));
                 }
                 $current_route = \Drupal::routeMatch()->getRouteName();
@@ -62,16 +59,14 @@ class OabOfficesMapPageController extends ControllerBase {
                 return new RedirectResponse($url->toString());
             }
             elseif (($current_language == "es" && !empty($country_id) && $country_id =="es")
-                || ($current_language == "es" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
-            {
+                || ($current_language == "es" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all"))) {
 
                 $query = \Drupal::entityQuery('taxonomy_term');
                 $query->condition('vid', 'regions');
                 $query->condition('name', 'Latin America');
                 $entity_regions = $query->execute();
 
-                if (!empty($entity_regions))
-                {
+                if (!empty($entity_regions)) {
                     $region_id = array_pop(array_values($entity_regions));
                 }
 
@@ -83,16 +78,14 @@ class OabOfficesMapPageController extends ControllerBase {
                 return new RedirectResponse($url->toString());
             }
             elseif (($current_language == "pt-br" && !empty($country_id) && $country_id =="pt-br")
-                || ($current_language == "pt-br" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all")))
-            {
+                || ($current_language == "pt-br" && !empty($country_id) && $country_id =="all" && (empty($region_id) || $region_id == "all"))) {
                 // si l'url est /br/contacts ou /br/contacts?country=br => on redirige vers le bon id du pays Brazil
                 $query = \Drupal::entityQuery('taxonomy_term');
                 $query->condition('vid', 'office_countries');
                 $query->condition('name', 'Brazil');
                 $entity_countries = $query->execute();
 
-                if (!empty($entity_countries))
-                {
+                if (!empty($entity_countries)) {
                     $country_id = array_pop(array_values($entity_countries));
                 }
 
@@ -101,8 +94,7 @@ class OabOfficesMapPageController extends ControllerBase {
                 $query->condition('name', 'Latin America');
                 $entity_regions = $query->execute();
 
-                if (!empty($entity_regions))
-                {
+                if (!empty($entity_regions)) {
                     $region_id = array_pop(array_values($entity_regions));
                 }
 
@@ -114,19 +106,19 @@ class OabOfficesMapPageController extends ControllerBase {
                 return new RedirectResponse($url->toString());
             }
             else {
-                $officesMapView = Views::getView('offices_map_view');
-                $officesMapView->setDisplay('offices_map_block');
-                $officesMapView->args = array($region_id, $country_id);
-                $officesMapView->preExecute();
-                $officesMapView->execute();
-                $mapBlock = $officesMapView->buildRenderable('offices_map_block', array());
+                $offices_map_view = Views::getView('offices_map_view');
+                $offices_map_view->setDisplay('offices_map_block');
+                $offices_map_view->args = array($region_id, $country_id);
+                $offices_map_view->preExecute();
+                $offices_map_view->execute();
+                $mapBlock = $offices_map_view->buildRenderable('offices_map_block', array());
 
-                $officesMapView = Views::getView('offices_map_view');
-                $officesMapView->setDisplay('offices_addresses_list_block');
-                $officesMapView->args = array($region_id, $country_id);
-                $officesMapView->preExecute();
-                $officesMapView->execute();
-                $officesListBlock = $officesMapView->buildRenderable('offices_addresses_list_block', array());
+                $offices_map_view = Views::getView('offices_map_view');
+                $offices_map_view->setDisplay('offices_addresses_list_block');
+                $offices_map_view->args = array($region_id, $country_id);
+                $offices_map_view->preExecute();
+                $offices_map_view->execute();
+                $officesListBlock = $offices_map_view->buildRenderable('offices_addresses_list_block', array());
 
                 $regionsCountriesForm = \Drupal::formBuilder()
                     ->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
