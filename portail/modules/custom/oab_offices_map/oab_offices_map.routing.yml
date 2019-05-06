@@ -10,7 +10,7 @@ oab_offices_map.page:
 oab.settings_offices_map:
   path: '/admin/structure/oab/settings/offices_map'
   defaults:
-    _form: '\Drupal\oab_offices_map\Form\oabSettingsOfficesMapForm'
+    _form: '\Drupal\oab_offices_map\Form\oab_settings_offices_map_form'
     _title: 'Offices Map settings'
   requirements:
     _permission: 'oab_offices_map_administer'

@@ -111,16 +111,16 @@ class OabOfficesMapPageController extends ControllerBase {
                 $offices_map_view->args = array($region_id, $country_id);
                 $offices_map_view->preExecute();
                 $offices_map_view->execute();
-                $mapBlock = $offices_map_view->buildRenderable('offices_map_block', array());
+                $map_block = $offices_map_view->buildRenderable('offices_map_block', array());
 
                 $offices_map_view = Views::getView('offices_map_view');
                 $offices_map_view->setDisplay('offices_addresses_list_block');
                 $offices_map_view->args = array($region_id, $country_id);
                 $offices_map_view->preExecute();
                 $offices_map_view->execute();
-                $officesListBlock = $offices_map_view->buildRenderable('offices_addresses_list_block', array());
+                $offices_list_block = $offices_map_view->buildRenderable('offices_addresses_list_block', array());
 
-                $regionsCountriesForm = \Drupal::formBuilder()
+                $regions_countries_form = \Drupal::formBuilder()
                     ->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
 
                 $listLabel = t('All offices');
@@ -129,9 +129,9 @@ class OabOfficesMapPageController extends ControllerBase {
                     $listLabel = $region->label() . ' offices';
                 }
                 return array(
-                    '#mapBlock' => $mapBlock,
-                    '#officesListBlock' => $officesListBlock,
-                    '#regionsCountriesForm' => $regionsCountriesForm,
+                    '#mapBlock' => $map_block,
+                    '#officesListBlock' => $offices_list_block,
+                    '#regionsCountriesForm' => $regions_countries_form,
                     '#labelList' => $listLabel,
                     '#theme' => 'offices_map_page',
                     '#attached' => array(
