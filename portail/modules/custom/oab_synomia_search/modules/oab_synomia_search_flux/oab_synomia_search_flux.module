@@ -27,15 +27,15 @@ function oab_synomia_search_flux_node_predelete(\Drupal\node\Entity\Node $node) 
 function oab_synomia_search_flux_page_attachments(array &$attachments) {
     //Ajout de la méta rubrique pour la catégorisation de Synomia
     $node = \Drupal::routeMatch()->getParameter('node');
-    if (!empty($node) && is_object($node) ) {
+    if (!empty($node) && is_object($node)) {
         //oabt($node, true);
-        $synomiaRubrique = [
+        $synomia_rubrique = [
             '#tag' => 'meta',
             '#attributes' => [
                 'name' => 'rubrique',
                 'content' => $node->getType(),
             ],
         ];
-        $attachments['#attached']['html_head'][] = [$synomiaRubrique, 'rubrique'];
+        $attachments['#attached']['html_head'][] = [$synomia_rubrique, 'rubrique'];
     }
 }

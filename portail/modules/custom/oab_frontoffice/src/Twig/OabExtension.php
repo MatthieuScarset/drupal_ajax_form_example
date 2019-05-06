@@ -82,8 +82,9 @@ class OabExtension extends \Twig_Extension {
     if ($module_handler->moduleExists('kint')) {
       kint($array);
 
-      if ($stop)
-        die();
+      if ($stop) {
+          die();
+      }
     }
   }
 

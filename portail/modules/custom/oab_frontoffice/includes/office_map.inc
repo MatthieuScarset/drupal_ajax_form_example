@@ -4,7 +4,6 @@
 /*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/
 /*******************************************************************************************************************/
 
-
 use Drupal\Core\Database\Database;
 
 /**
@@ -134,7 +133,7 @@ function getRegions() {
     foreach ($results as $region) {
         if (!array_key_exists($region->region_tid, $table_regions)
             && !empty($region->region_tid)
-            && $region->region_langcode == $current_language ) {
+            && $region->region_langcode == $current_language) {
             $table_regions[$region->region_tid] = $region->region_name;
         }
     }

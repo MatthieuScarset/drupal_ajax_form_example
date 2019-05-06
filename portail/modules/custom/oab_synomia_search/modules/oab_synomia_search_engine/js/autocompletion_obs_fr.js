@@ -203,7 +203,7 @@ function chargement_immediat() {
 
 function chargement_onfocus() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for (let i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if (inp.addEventListener) {
 			inp.addEventListener("focus", function() { window.LaunchSuggest = this; chargement("Chargement sur focus"); }, false);
@@ -425,12 +425,12 @@ if ( loadACNow ) { GestionDom.DomReadySuggests( function() {
 // exemple qui prend tous les input dont le name vaut "q" ou "mot"
 // les associe pour l'utilisation des Suggest, et leur retire le focus 
 var Elt=document.getElementsByTagName("input");
-for (j=0; j< Elt.length; j++) {
+for (let j=0; j< Elt.length; j++) {
 	if ( Elt[j].name == "q" || Elt[j].name == "mot" ) {
 		SynSuggest.AddInput(Elt[j]);
 		Elt[j].blur();
 	}
-};
+}
 SynSuggest.setChargementSurFocus(true);
 SynSuggest.Start();
 }, "params" ); }
