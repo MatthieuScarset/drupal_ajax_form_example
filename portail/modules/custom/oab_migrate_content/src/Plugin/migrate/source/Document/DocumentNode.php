@@ -81,7 +81,7 @@ class DocumentNode extends SqlBase {
 
         //META TITRE
         $title = $row->getSourceProperty('title');
-        $title = mb_substr($title,0, 55);
+        $title = mb_substr($title, 0, 55);
         $row->setSourceProperty('meta_title', $title) ;
 
         //META DESCRIPTION - récupération de la short description (txt_catcher)
@@ -105,10 +105,9 @@ class DocumentNode extends SqlBase {
                 }
             }
         }
-        if (isset($meta_description) && !empty($meta_description))
-        {
+        if (isset($meta_description) && !empty($meta_description)) {
             $row->setSourceProperty('highlight_field', $meta_description) ;
-            $meta_description_short = mb_substr($meta_description,0, 155);
+            $meta_description_short = mb_substr($meta_description, 0, 155);
             $row->setSourceProperty('meta_description', $meta_description_short) ;
         }
 
@@ -116,8 +115,7 @@ class DocumentNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['library'][$row->getSourceProperty('language')])
             && isset($subhomes['library'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['library'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['library'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['library'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -154,13 +152,13 @@ class DocumentNode extends SqlBase {
      */
 
         // récupération du tag "document_type"
-        $docTypes = get_correspondance_tid_D7_tid_D8('correspondence_format_document',
+        $doc_types = get_correspondance_tid_D7_tid_D8('correspondence_format_document',
             'field_data_field_taxo_document_type',
             'field_taxo_document_type_tid',
             $row->getSourceProperty('nid'),
             'content_document_type');
-        if (count($docTypes) > 0) {
-            $row->setSourceProperty('document_types', $docTypes);
+        if (count($doc_types) > 0) {
+            $row->setSourceProperty('document_types', $doc_types);
         }
 
         // récupération du tag "industries"
@@ -285,7 +283,7 @@ class DocumentNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     return parent::prepareRow($row);

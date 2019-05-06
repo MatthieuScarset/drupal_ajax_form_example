@@ -51,13 +51,13 @@ function Start() {
 
 
 // Variables globales diverses
-RessourcesPath = document.location.protocol;
+var RessourcesPath = document.location.protocol;
 RessourcesPath += "//www.synomia-autocompletion.com/";
 
-collection = new Array;
-SynSuggestsParams = new Array;
+var collection = new Array;
+var SynSuggestsParams = new Array;
 var Main = null;
-TabSuggestElt = new Array;
+var TabSuggestElt = new Array;
 var TabSuggestLancement = new Array;
 TabSuggestLancement["immediat"] = false;
 TabSuggestLancement["delai"] = 0;
@@ -76,7 +76,7 @@ function SynInitFctSuggest() {
 	var Elt = document.getElementById("synTxtInput");
 	if ( Elt )
 		AddInput(Elt, "SynSuggestDefault");	
-};
+}
 
 function __Start() {
 	debug_suggest("__Start - Nombre de champ a gerer : "+TabSuggestElt.length);

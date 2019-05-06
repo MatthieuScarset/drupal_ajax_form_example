@@ -316,7 +316,6 @@ InfoBox.prototype.getCloseClickHandler_ = function () {
 InfoBox.prototype.panBox_ = function (disablePan) {
 
     var map;
-    var bounds;
     var xOffset = 0, yOffset = 0;
 
     if (!disablePan) {
@@ -330,8 +329,6 @@ InfoBox.prototype.panBox_ = function (disablePan) {
                 // of map to the marker position first.
                 map.setCenter(this.position_);
             }
-
-            bounds = map.getBounds();
 
             var mapDiv = map.getDiv();
             var mapWidth = mapDiv.offsetWidth;

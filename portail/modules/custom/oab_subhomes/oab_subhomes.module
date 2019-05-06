@@ -85,7 +85,7 @@ function oab_subhomes_theme_suggestions_subhome_entity(array $variables) {
 
 function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
                                                          $cacheable) {
-    $allowedValues = array (
+    $allowed_values = array (
         "black-on-orange"   => "Black on Orange",
         "white-on-orange"   => "White on Orange",
         "orange-on-white"   => "Orange on White",
@@ -101,12 +101,12 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
         "black-on-purple"   => "Black on Purple",
         "black-on-pink"     => "Black on Pink"
     );
-    return $allowedValues;
+    return $allowed_values;
 }
 
 function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
                                      $cacheable) {
-    $allowedValues = array (
+    $allowed_values = array (
         "btn-txt-white-bg-black"   => "Texte blanc, fond noir",
         "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
         "btn-txt-black-bg-white"   => "Texte noir, fond blanc",
@@ -114,7 +114,7 @@ function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition
         "btn-txt-white-bg-orange"   => "Texte blanc, fond orange",
         "btn-txt-black-bg-orange"   => "Texte noir, fond orange"
     );
-    return $allowedValues;
+    return $allowed_values;
 }
 
 
@@ -149,14 +149,14 @@ function oab_subhomes_preprocess_views_view(&$variables) {
                     ->condition('status', 1)
                     ->condition('type', 'press_kit')
                     ->condition('langcode', $entity->language()->getId())
-                    ->sort('changed' , 'DESC');
+                    ->sort('changed' ,'DESC');
 
                 $nids = $query->execute();
                 $entities = \Drupal::entityTypeManager()->getStorage('node')
                     ->loadMultiple($nids);
 
                 $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
-                foreach ($entities as $entity ) {
+                foreach ($entities as $entity) {
                     $builded_entity = $view_builder->view($entity, 'subhome');
                     $variables[SubhomeEntity::TWIG_VAR_NAME]['press_kit'][] =
                         render($builded_entity);
@@ -224,7 +224,7 @@ function oab_subhomes_check_group_team(&$form, Drupal\Core\Form\FormState &$form
 
 }
 
-function oab_subhomes_check_visual_aplat ($form, Drupal\Core\Form\FormState &$form_state) {
+function oab_subhomes_check_visual_aplat($form, Drupal\Core\Form\FormState &$form_state) {
 
     if ($form['#form_id'] === 'subhome_entity_presse_edit_form') {
         $field_aplat = $form_state->getValue('field_corporate_aplat');

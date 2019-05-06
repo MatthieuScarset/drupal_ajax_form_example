@@ -88,7 +88,7 @@
                   //  google.maps.event.addListener(map.mapMarkers[i], 'click', function(marker) {
                         console.log(i);
                     });*/
-                    marker = map.mapMarkers[i];
+                    var marker = map.mapMarkers[i];
                     google.maps.event.clearListeners(marker, 'click');
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
