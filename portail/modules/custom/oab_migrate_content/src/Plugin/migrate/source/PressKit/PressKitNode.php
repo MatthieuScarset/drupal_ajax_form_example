@@ -73,7 +73,7 @@ class PressKitNode extends SqlBase {
   public function prepareRow(Row $row) {
         //META TITRE
         $title = $row->getSourceProperty('title');
-        $title = mb_substr($title,0, 55);
+        $title = mb_substr($title, 0, 55);
         $row->setSourceProperty('meta_title', $title) ;
 
         //META DESCRIPTION - récupération de la short description (txt_catcher)
@@ -97,10 +97,9 @@ class PressKitNode extends SqlBase {
                 }
             }
         }
-        if (isset($meta_description) && !empty($meta_description))
-        {
+        if (isset($meta_description) && !empty($meta_description)) {
             $row->setSourceProperty('highlight_field', $meta_description) ;
-            $meta_description_short = mb_substr($meta_description,0, 155);
+            $meta_description_short = mb_substr($meta_description, 0, 155);
             $row->setSourceProperty('meta_description', $meta_description_short) ;
         }
 
@@ -109,8 +108,7 @@ class PressKitNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['press'][$row->getSourceProperty('language')])
             && isset($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['press'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['press'][$row->getSourceProperty('language')]['tid_D8']);
         }
     
@@ -165,8 +163,7 @@ class PressKitNode extends SqlBase {
         $formats = \Drupal::state()->get('press_format_for_migration');
         if (isset($formats['press_kit'][$row->getSourceProperty('language')])
             && isset($formats['press_kit'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($formats['press_kit'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($formats['press_kit'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('press_types', $formats['press_kit'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -230,7 +227,6 @@ class PressKitNode extends SqlBase {
     if (is_object($path_results)) {
             $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
-
     return parent::prepareRow($row);
   }
 
