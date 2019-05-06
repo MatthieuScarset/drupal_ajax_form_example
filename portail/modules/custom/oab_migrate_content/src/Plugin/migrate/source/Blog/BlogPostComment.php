@@ -89,8 +89,7 @@ class BlogPostComment extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  public function prepareRow(Row $row)
-  {
+  public function prepareRow(Row $row){
     //comment parent
     $comment_parent_query = Database::getConnection()->select('migrate_map_blogpost_comment', 'c');
     $comment_parent_query->fields('c', ['sourceid1', 'destid1'])
@@ -99,7 +98,7 @@ class BlogPostComment extends SqlBase {
 
     if (is_array($comment_parent_results)) {
       foreach ($comment_parent_results AS $parent) {
-        if (is_object($parent) && isset($parent->destid1) ) {
+        if (is_object($parent) && isset($parent->destid1)) {
           $row->setSourceProperty('pid_parent', $parent->destid1);
         }
         elseif (is_array($parent) && isset($parent['destid1'])) {
@@ -107,7 +106,7 @@ class BlogPostComment extends SqlBase {
         }
       }
     }
-    else{
+    else {
       $row->setSourceProperty('pid_parent', '0');
     }
 

@@ -149,7 +149,7 @@ function oab_subhomes_preprocess_views_view(&$variables) {
                     ->condition('status', 1)
                     ->condition('type', 'press_kit')
                     ->condition('langcode', $entity->language()->getId())
-                    ->sort('changed','DESC');
+                    ->sort('changed', 'DESC');
 
                 $nids = $query->execute();
                 $entities = \Drupal::entityTypeManager()->getStorage('node')

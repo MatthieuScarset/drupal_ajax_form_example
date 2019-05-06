@@ -114,7 +114,6 @@ var Script_CSS = false;
 var Init_Fields = false;
 
 function chargement(comm) {
-	var Ph = "Lancement ( "+comm+" )";
 	GestionDom.debug(comm);	
 	if ( ChargementTimer == null ) {
 		ChargementTimer = chargement_engine();
@@ -124,7 +123,7 @@ function chargement(comm) {
 function chargement_engine() {
 	if ( ChargementTimer != null ) { clearTimeout(ChargementTimer); ChargementTimer = null; }
 	Cpt_Chargement++;
-	Ph = "Mode auto => Essai "+Cpt_Chargement;
+	var Ph = "Mode auto => Essai "+Cpt_Chargement;
 	debug_suggest(Ph);
 		
 	var ChargementNecessaire = ! ( Script_Data && Script_Lib && Script_CSS );
@@ -203,7 +202,7 @@ function chargement_immediat() {
 
 function chargement_onfocus() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for ( var i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if (inp.addEventListener) {
 			inp.addEventListener("focus", function() { window.LaunchSuggest = this; chargement("Chargement sur focus"); }, false);
@@ -425,7 +424,7 @@ if ( loadACNow ) { GestionDom.DomReadySuggests( function() {
 // exemple qui prend tous les input dont le name vaut "q" ou "mot"
 // les associe pour l'utilisation des Suggest, et leur retire le focus 
 var Elt=document.getElementsByTagName("input");
-for (j=0; j< Elt.length; j++) {
+for (var j=0; j< Elt.length; j++) {
 	if ( Elt[j].name == "q" || Elt[j].name == "mot" ) {
 		SynSuggest.AddInput(Elt[j]);
 		Elt[j].blur();

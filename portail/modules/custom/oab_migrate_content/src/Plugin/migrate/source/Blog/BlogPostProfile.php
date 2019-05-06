@@ -122,7 +122,7 @@ class BlogPostProfile extends SqlBase {
     }
 
     //titre du node
-    if ($title == '') $title = ' ';
+    if ($title == '') { $title = ' '; }
     $row->setSourceProperty('title', $title);
 
     // récupération des images

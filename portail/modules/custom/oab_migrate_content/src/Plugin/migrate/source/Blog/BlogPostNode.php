@@ -82,7 +82,7 @@ class BlogPostNode extends SqlBase {
 
         //META TITRE
         $title = $row->getSourceProperty('title');
-        $title = mb_substr($title,0, 55);
+        $title = mb_substr($title, 0, 55);
         $row->setSourceProperty('meta_title', $title) ;
 
         //META DESCRIPTION - récupération de la short description (txt_catcher)
@@ -106,10 +106,9 @@ class BlogPostNode extends SqlBase {
                 }
             }
         }
-        if (isset($meta_description) && !empty($meta_description))
-        {
+        if (isset($meta_description) && !empty($meta_description)) {
             $row->setSourceProperty('highlight_field', $meta_description) ;
-            $meta_description_short = mb_substr($meta_description,0, 155);
+            $meta_description_short = mb_substr($meta_description, 0, 155);
             $row->setSourceProperty('meta_description', $meta_description_short) ;
         }
 
@@ -117,8 +116,7 @@ class BlogPostNode extends SqlBase {
         $subhomes = \Drupal::state()->get('subhomes_ids_for_migration');
         if (isset($subhomes['blogs'][$row->getSourceProperty('language')])
             && isset($subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8'])
-            && !empty($subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8']))
-        {
+            && !empty($subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8'])) {
             $row->setSourceProperty('subhomes', $subhomes['blogs'][$row->getSourceProperty('language')]['tid_D8']);
         }
 
@@ -264,7 +262,7 @@ class BlogPostNode extends SqlBase {
     $path_results = $path_query->execute()->fetchObject();
 
     if (is_object($path_results)) {
-            $row->setSourceProperty('path', array( 'alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
+            $row->setSourceProperty('path', array('alias' => '/' . $path_results->alias, 'pathauto' => 'false'));
     }
 
     //auteur du blog - profile bloggeur
@@ -275,7 +273,7 @@ class BlogPostNode extends SqlBase {
 
     if (is_array($profile_query_results)) {
       foreach ($profile_query_results AS $profile) {
-        if (is_object($profile) && isset($profile->destid1) ) {
+        if (is_object($profile) && isset($profile->destid1)) {
           $row->setSourceProperty('profile_blogger_id', $profile->destid1);
         }
         elseif (is_array($profile) && isset($profile['destid1'])) {
