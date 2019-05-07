@@ -93,7 +93,6 @@
                 slides.each(function(){
 
                     var slide = $(this);
-                    var slideId = slide.index();
 
                     slide.animate({
                         left: (slide.position().left - (thisEl.width() + settings.offset)) + 'px'
@@ -118,7 +117,6 @@
                 slides.each(function(){
 
                     var slide = $(this);
-                    var slideId = slide.index();
 
                     slide.animate({
                         left: (slide.position().left + (thisEl.width() + settings.offset)) + 'px'
