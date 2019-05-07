@@ -18,7 +18,7 @@ class SynomiaSearchResponse
     public $corrections = array();
     public $nbResultsTotal = 0;
     public $results = array();
-    public $current_page = 0;
+    public $currentPage = 0;
     PUBLIC $pager = null;
     public $searchMode = '';
 
@@ -68,7 +68,7 @@ class SynomiaSearchResponse
                     $nbResultsPerPage = 10; // 10 par défaut si aucune configuration
                 }
 
-                $this->current_page = pager_default_initialize($xmlResult->estimatedTotalResultsCount, $nbResultsPerPage);
+                $this->currentPage = pager_default_initialize($xmlResult->estimatedTotalResultsCount, $nbResultsPerPage);
                 //$this->pager = theme('pager');
             }
         }

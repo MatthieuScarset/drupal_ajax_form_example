@@ -228,24 +228,24 @@ class OabSynomiaSearchEngineController extends ControllerBase
     }
 
     /** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
-     * @param $oldFacetsArray
+     * @param $old_facets_array
      * @return array
      */
-    private function orderFacetsArray($oldFacetsArray) {
+    private function orderFacetsArray($old_facets_array) {
           $newFacetsArrayOrdered = array();
         $contentTypes = $this->getOrderContentTypesArray();
         if (!empty($contentTypes)) {
             foreach ($contentTypes as $contentType) {
-                $newFacetsArrayOrdered[$contentType] = $oldFacetsArray[$contentType];
-                unset($oldFacetsArray[$contentType]);
+                $newFacetsArrayOrdered[$contentType] = $old_facets_array[$contentType];
+                unset($old_facets_array[$contentType]);
             }
-            return array_merge($newFacetsArrayOrdered, $oldFacetsArray);
+            return array_merge($newFacetsArrayOrdered, $old_facets_array);
         }
-        return $oldFacetsArray;
+        return $old_facets_array;
     }
 
     /** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
-     * @param $oldFacetsArray
+     * @param $old_facets_array
      * @return array
      */
     private function orderResultsArray($oldResultsArray) {

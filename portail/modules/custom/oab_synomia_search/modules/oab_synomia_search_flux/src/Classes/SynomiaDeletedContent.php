@@ -9,7 +9,7 @@ class SynomiaDeletedContent
 {
 
     private $nid;
-    private $content_type;
+    private $contentType;
     private $url;
     private $language;
     private $deleted;
@@ -22,24 +22,24 @@ class SynomiaDeletedContent
     }
 
     /** Set NID
-     * @param $newNid
+     * @param new_nid
      */
-    public function setNid($newNid) {
-        $this->nid = $newNid;
+    public function setNid($new_nid) {
+        $this->nid = $new_nid;
     }
 
     /** Get ContentType
      * @return mixed
      */
     public function getContentType() {
-        return $this->content_type;
+        return $this->contentType;
     }
 
     /** Set ContentType
-     * @param $newContentType
+     * @param $new_content_type
      */
-    public function setContentType($newContentType) {
-        $this->content_type = $newContentType;
+    public function setContentType($new_content_type) {
+        $this->contentType = $new_content_type;
     }
 
     /** Get URL
@@ -50,10 +50,10 @@ class SynomiaDeletedContent
     }
 
     /** Set Url
-     * @param $newUrl
+     * @param $new_url
      */
-    public function setUrl($newUrl) {
-        $this->url = $newUrl;
+    public function setUrl($new_url) {
+        $this->url = $new_url;
     }
 
     /** Get language
@@ -64,10 +64,10 @@ class SynomiaDeletedContent
     }
 
     /** Set language
-     * @param $newNid
+     * @param $new_nid
      */
-    public function setLanguage($newLanguage) {
-        $this->language = $newLanguage;
+    public function setLanguage($new_language) {
+        $this->language = $new_language;
     }
 
     /** Get deleted
@@ -78,16 +78,16 @@ class SynomiaDeletedContent
     }
 
     /** Set Deleted
-     * @param $newDeleted
+     * @param $new_deleted
      */
-    public function setDeleted($newDeleted) {
-        $this->deleted = $newDeleted;
+    public function setDeleted($new_deleted) {
+        $this->deleted = $new_deleted;
     }
 
 
     public function save() {
         if (!empty($this->nid)
-            && !empty($this->content_type)
+            && !empty($this->contentType)
             &&!empty($this->url)
             && !empty($this->language)
             && !empty($this->deleted)) {
@@ -95,7 +95,7 @@ class SynomiaDeletedContent
                 ->key(array('nid' => $this->nid))
                 ->fields(array(
                     'nid' => $this->nid,
-                    'content_type' => $this->content_type,
+                    'content_type' => $this->contentType,
                     'url' => $this->url,
                     'language' => $this->language,
                     'deleted' => $this->deleted
@@ -106,12 +106,12 @@ class SynomiaDeletedContent
 
     public function delete() {
         if (!empty($this->nid)
-            && !empty($this->content_type)
+            && !empty($this->contentType)
             && !empty($this->language)) {
             $query = Database::getConnection()->delete('synomia_deleted_content')
-                ->condition('nid',$this->nid,'=')
-                ->condition('content_type',$this->content_type,'=')
-                ->condition('language',$this->language,'=')
+                ->condition('nid', $this->nid,'=')
+                ->condition('content_type', $this->contentType,'=')
+                ->condition('language', $this->language,'=')
                 ->execute();
         }
     }
