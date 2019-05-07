@@ -155,7 +155,7 @@
     });
 
     //initialize swiper when document ready
-    var mySwiperHomepage = new Swiper ('.swiper-container', {
+   /* var mySwiperHomepage = new Swiper ('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
         loop: true,
@@ -179,16 +179,16 @@
               spaceBetween: 30
           }
         }
-      });
+      });*/
 
       //initialize swiper when document ready
-      var mySwiperThematic = new Swiper ('.swiper-container-columns', {
+     /* var mySwiperThematic = new Swiper ('.swiper-container-columns', {
         // Optional parameters
         direction: 'horizontal',
         loop: true,
         pagination : '.swiper-pagination',
         paginationType: 'bullets',
-      });
+      });*/
 
   });
 
