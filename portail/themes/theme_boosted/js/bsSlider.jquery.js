@@ -23,10 +23,10 @@
 
         var swipeEnabled = ($.fn.swipe !== undefined);
 
-        if(isLarge){ lastSize = currentSize = 'lg'; }else
-        if(isNormal){ lastSize = currentSize = 'md'; }else
-        if(isSmall){ lastSize = currentSize = 'sm'; }else
-        if(isXSmall){ lastSize = currentSize = 'xs'; }
+        if(isLarge){ lastSize = 'lg'; currentSize = 'lg'; }else
+        if(isNormal){ lastSize = 'md'; currentSize = 'md'; }else
+        if(isSmall){ lastSize = 'sm'; currentSize = 'sm'; }else
+        if(isXSmall){ lastSize = 'xs'; currentSize = 'xs'; }
 
         // options
         var settings = {

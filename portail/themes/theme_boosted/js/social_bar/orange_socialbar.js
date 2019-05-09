@@ -678,7 +678,7 @@ var showFollowBar = function(){
     // if(followbar_parameters.background_color != null && followbar_parameters.layout != null){
     //     document.getElementById('followbar').className = followbar_parameters.background_color + ' ' + followbar_parameters.layout;
     // }
-    followBars = document.getElementsByClassName('followbar');
+    var followBars = document.getElementsByClassName('followbar');
     for(var i=0;i<followBars.length;i++) {
         followBars[i].innerHTML = followbarHTML;
         if(followbar_parameters.background_color != null && followbar_parameters.layout != null){
@@ -912,7 +912,7 @@ window.onload = function(){
 			if(document.getElementById('sharebar')){
 				if(sharebar_parameters.auto_load === true){
 					showShareBar();
-				};
+				}
 				//getShares();
 
 				/*if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
@@ -929,7 +929,7 @@ window.onload = function(){
 			if(document.getElementsByClassName('followbar')){
 				if(followbar_parameters.auto_load === true){
 					showFollowBar();
-				};
+				}
 			}
 		}
 	}

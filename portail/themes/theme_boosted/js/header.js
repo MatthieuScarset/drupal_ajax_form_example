@@ -21,9 +21,9 @@
         var preview_bar_offset = 0;
         var init_preview_bar_offset = 0;
         var localnav_offset = 0;
-        //var topShare = 0;
+        var topShare = 0;
         if ($('#block-socialshareblock').offset()) {
-            var topShare = $('#block-socialshareblock').offset().top;
+             topShare = $('#block-socialshareblock').offset().top;
         }
 
         if(local_nav.length) {

@@ -109,9 +109,9 @@ class SynomiaDeletedContent
             && !empty($this->contentType)
             && !empty($this->language)) {
             $query = Database::getConnection()->delete('synomia_deleted_content')
-                ->condition('nid', $this->nid,'=')
-                ->condition('content_type', $this->contentType,'=')
-                ->condition('language', $this->language,'=')
+                ->condition('nid',$this->nid,'=')
+                ->condition('content_type',$this->contentType,'=')
+                ->condition('language',$this->language,'=')
                 ->execute();
         }
     }
