@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_categoriesMagazineD7_to_MagazineFormatD8 () {
+function get_correspondances_categoriesMagazineD7_to_MagazineFormatD8() {
     $correspondances =
         array(
             //EN

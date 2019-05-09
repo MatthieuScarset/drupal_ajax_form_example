@@ -12,7 +12,7 @@ use Drupal\Core\Database\Database;
  * cleane les options du menu déroulant des filtres exposés
  * @param $options du tableau
  */
-function clean_exposed_filters_by_language($options = array(), $txt_all) {
+function clean_exposed_filters_by_language($txt_all, $options = array()) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     foreach ($options as $key => $value) {
         if ($key != 'All') {
@@ -20,7 +20,7 @@ function clean_exposed_filters_by_language($options = array(), $txt_all) {
             if (isset($term) && $term != null) {
                 $lang = $term->language();
                 if ($lang->getId() != $current_language) {
-                    unset( $options[ $key ] );
+                    unset($options[ $key ] );
                 }
             }
         } else {

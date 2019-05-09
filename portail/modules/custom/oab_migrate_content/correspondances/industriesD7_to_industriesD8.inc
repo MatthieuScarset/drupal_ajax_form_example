@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_industriesD7_to_industriesD8 () {
+function get_correspondances_industriesD7_to_industriesD8() {
     $industries = array(
         //industries EN
         '16384' => array('tid_d7' => '16384', 'label_d7' => 'air transport', 'langcode' => 'en', 'label_d8' => 'Transport and Logistic', 'tid_D8' => ''),

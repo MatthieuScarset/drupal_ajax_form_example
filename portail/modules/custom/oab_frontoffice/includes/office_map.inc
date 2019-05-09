@@ -2,6 +2,7 @@
 
 /*******************************************************************************************************************/
 /*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/
+
 /*******************************************************************************************************************/
 
 use Drupal\Core\Database\Database;
@@ -10,7 +11,7 @@ use Drupal\Core\Database\Database;
  * Méthode qui renvoie le tableau des pays pour remplir le filtre Pays en JS
  * @return array
  */
-function getCountriesForJS() {
+function getCountriesForJS () {
     $keys = array();
     $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
@@ -21,7 +22,7 @@ function getCountriesForJS() {
     $query->addField('oc', 'name', 'country_name');
     $query->addField('oc', 'langcode', 'country_langcode');
     $query->orderBy('oc.name');
-    $results =	$query->execute()->fetchAll();
+    $results = $query->execute()->fetchAll();
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $table_countries = array();
@@ -46,7 +47,7 @@ function getCountriesForJS() {
  * Méthode qui renvoie le tableau d'association [country id] => region_id
  * @return array
  */
-function getArrayRegionsCountries() {
+function getArrayRegionsCountries () {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     $query = Database::getConnection()->select('node_field_data', 'n');
@@ -77,7 +78,7 @@ function getArrayRegionsCountries() {
  * Méthode qui renvoie le tableau de pays (termes de taxo offices countrie) [country id] => country name
  * @return array
  */
-function getCountries() {
+function getCountries () {
     $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
     $query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
@@ -113,7 +114,7 @@ function getCountries() {
  * Méthode qui renvoie le tableau de régions (termes de taxo region) [region id] => region name
  * @return array
  */
-function getRegions() {
+function getRegions () {
     $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
     $query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
@@ -123,7 +124,7 @@ function getRegions() {
     $query->addField('t', 'name', 'region_name');
     $query->addField('t', 'langcode', 'region_langcode');
     $query->orderBy('t.name');
-    $results =	$query->execute()->fetchAll();
+    $results = $query->execute()->fetchAll();
 
     $table_regions = array();
     $table_regions['all'] = t('Region');

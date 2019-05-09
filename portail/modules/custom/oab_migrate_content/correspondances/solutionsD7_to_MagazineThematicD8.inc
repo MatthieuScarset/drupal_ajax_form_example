@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_solutionsD7_to_MagazineThematicD8 () {
+function get_correspondances_solutionsD7_to_MagazineThematicD8() {
     $correspondances =
         array(
             //Solutions EN

@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_formatDocumentD7_to_formatDocumentD8 () {
+function get_correspondances_formatDocumentD7_to_formatDocumentD8() {
     $correspondances =
         array(
             //EN

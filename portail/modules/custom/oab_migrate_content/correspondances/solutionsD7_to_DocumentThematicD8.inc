@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_solutionsD7_to_DocumentThematicD8 () {
+function get_correspondances_solutionsD7_to_DocumentThematicD8() {
     $correspondances =
         array(
             //Solutions EN

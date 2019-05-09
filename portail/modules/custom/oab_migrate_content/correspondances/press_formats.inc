@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_press_formats () {
+function get_correspondances_press_formats() {
     $press_formats = array(
         'press_kit' => array(
             'fr' => array('label' => 'Dossier de presse', 'tid_D8' => ''),

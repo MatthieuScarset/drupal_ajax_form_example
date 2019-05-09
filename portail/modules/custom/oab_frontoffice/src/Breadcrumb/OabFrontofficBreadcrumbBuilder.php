@@ -15,14 +15,14 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     /**
      * @inheritdoc
      */
-    public function applies(RouteMatchInterface $route_match) {
+    public function applies (RouteMatchInterface $route_match) {
         ##ici, on indique si on veut utiliser ou non le breadcrumb perso
 
 
         ##Je ne le gère que pour la front page
         $is_admin_route = Drupal::service('router.admin_context')->isAdminRoute();
 
-        if ( !$is_admin_route) {
+        if (!$is_admin_route) {
             return true;
         }
 
@@ -32,7 +32,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     /**
      * @inheritdoc
      */
-    public function build(RouteMatchInterface $route_match) {
+    public function build (RouteMatchInterface $route_match) {
         # Ici, on personnalise le fil d'ariane
 
         /**
@@ -47,7 +47,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $parameters = $route_match->getParameters()->all();
 
         $current_route_match = Drupal::getContainer()
-                                     ->get('current_route_match');
+            ->get('current_route_match');
         $route_name = $current_route_match->getRouteName();
 
 
@@ -88,33 +88,36 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             if ($parameters['view_id'] === "subhomes") {
                 ##On ajoute un lien vide au fil d'ariane
 
-                $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>' ));
-            } else {  ## Subhome archive
+                $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>'));
+            }
+            else {  ## Subhome archive
 
                 ##On ajoute un lien vide au fil d'ariane
 
-                $link = Link::createFromRoute($displayName, "view.subhomes." . $subhome_display );
+                $link = Link::createFromRoute($displayName, "view.subhomes." . $subhome_display);
                 $link->setUrl(Drupal\Core\Url::fromUri(OabHubController::getHubSubhomeUrl($link->getUrl()->toString())));
 
                 $breadcrumb->addLink($link);
-                $breadcrumb->addLink(Link::createFromRoute("Archives", '<none>' ));
+                $breadcrumb->addLink(Link::createFromRoute("Archives", '<none>'));
             }
 
 
-        } else {
+        }
+        else {
 
             #Liste des types de contenu pour cette config du fil d'ariane
-            $contentTypes = ["blog_post","customer_story", "document", "magazine",
-                "office", "partner", "press_kit", "press_release","product" ];
+            $contentTypes = [
+                "blog_post", "customer_story", "document", "magazine",
+                "office", "partner", "press_kit", "press_release", "product"];
 
 
             ##Si on a un bien un node en affichage,
             # et que le type de contenu est dans le tableau ci-dessus
             # et qu'il possède le champs 'field_subhome'
             if (isset($node)
-        && method_exists(get_class($parameters['node']), 'getType')
-        && in_array($parameters['node']->getType(), $contentTypes)
-            && $node->hasField('field_subhome')) {
+                && method_exists(get_class($parameters['node']), 'getType')
+                && in_array($parameters['node']->getType(), $contentTypes)
+                && $node->hasField('field_subhome')) {
 
                 ##Affichage du fil d'ariane :
                 ## Home > Subhome de rattachement (Lien vers la display view)
@@ -123,11 +126,11 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                 $subhomes = $node->get('field_subhome')->getValue();
 
                 ##On vérifie qu'on a bien un résultat
-                if (is_array($subhomes) && count($subhomes)>0) {
-          ##Récupération de la taxo pour la target du subhome en question
+                if (is_array($subhomes) && count($subhomes) > 0) {
+                    ##Récupération de la taxo pour la target du subhome en question
                     $term = \Drupal::entityTypeManager()
-                                   ->getStorage('taxonomy_term')
-                                   ->load($subhomes[0]['target_id']);
+                        ->getStorage('taxonomy_term')
+                        ->load($subhomes[0]['target_id']);
 
                     ##Si le terme a le field "field_related_view_path'
                     #(contient le nom machine de la display view correspondante)

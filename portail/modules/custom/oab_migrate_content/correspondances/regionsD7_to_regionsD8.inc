@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_regionsD7_to_regionsD8 () {
+function get_correspondances_regionsD7_to_regionsD8() {
     $regions =
         array(
             '26455' => array('tid_d7' => '26455', 'label_d7' => 'Africa', 'langcode' => 'en', 'label_d8' => 'Middle East & Africa', 'tid_D8' => ''),
