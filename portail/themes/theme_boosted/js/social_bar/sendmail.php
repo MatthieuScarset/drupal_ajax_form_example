@@ -9,4 +9,3 @@
     $headers .= 'From: ' . $from . "\r\n";
     mail($to, $subject, $message, $headers);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
-?>
