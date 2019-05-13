@@ -127,7 +127,7 @@
     });
   }
 
-  /*function tile_format(){
+  function tile_format(){
       var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
           easing: "easeOutQuint",
           useLoadImageEvent: true,
@@ -139,7 +139,7 @@
               wait: 500
           }
       });
-  }*/
+  }
 
   $(document).ready(function () {
     image_resize_width();
