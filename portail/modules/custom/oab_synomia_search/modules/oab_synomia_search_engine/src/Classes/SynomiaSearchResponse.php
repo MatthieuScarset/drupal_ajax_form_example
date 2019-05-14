@@ -17,7 +17,7 @@ class SynomiaSearchResponse {
     public $corrections = array();
     public $nbResultsTotal = 0;
     public $results = array();
-    public $current_page = 0;
+    public $currentPage = 0;
     PUBLIC $pager = null;
     public $searchMode = '';
 

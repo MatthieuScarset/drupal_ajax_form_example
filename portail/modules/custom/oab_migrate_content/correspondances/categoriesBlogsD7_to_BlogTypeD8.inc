@@ -1,6 +1,6 @@
 <?php
 
-function get_correspondances_categoriesBlogD7_to_BlogTypeD8 () {
+function get_correspondances_categoriesBlogD7_to_BlogTypeD8() {
     $correspondances =
         array(
             //EN

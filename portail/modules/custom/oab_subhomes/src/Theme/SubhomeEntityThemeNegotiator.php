@@ -10,7 +10,7 @@ class SubhomeEntityThemeNegotiator implements ThemeNegotiatorInterface {
     /**
      * Check si on doit utiliser notre themeNegotiator
      */
-    public function applies (RouteMatchInterface $route_match) {
+    public function applies(RouteMatchInterface $route_match) {
         $applies = false;
 
         ##je fais activer le theme back office lorsqu'on veut modifier tac_lite pour un utilisateur
@@ -25,7 +25,7 @@ class SubhomeEntityThemeNegotiator implements ThemeNegotiatorInterface {
     /**
      * Retourne le nom du theme à utiliser
      */
-    public function determineActiveTheme (RouteMatchInterface $route_match) {
+    public function determineActiveTheme(RouteMatchInterface $route_match) {
         return 'theme_boosted';
     }
 }

@@ -107,7 +107,7 @@
 
                             if (icon.indexOf('-hover.png')) {
 
-                                var iconNormal = icon.replace('-hover.png', '.png');
+                                iconNormal = icon.replace('-hover.png', '.png');
 
                                 markerAssociated3.setIcon(iconNormal);
 

@@ -15,7 +15,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     /**
      * @inheritdoc
      */
-    public function applies (RouteMatchInterface $route_match) {
+    public function applies(RouteMatchInterface $route_match) {
         ##ici, on indique si on veut utiliser ou non le breadcrumb perso
 
 
@@ -32,7 +32,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     /**
      * @inheritdoc
      */
-    public function build (RouteMatchInterface $route_match) {
+    public function build(RouteMatchInterface $route_match) {
         # Ici, on personnalise le fil d'ariane
 
         /**
