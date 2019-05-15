@@ -18,6 +18,10 @@
     var url_appelee = drupalSettings.tealium.url_appelee;
     var url_referente = drupalSettings.tealium.url_referente;
 
+    if (drupalSettings.tealium.view_title) {
+      titre_page = drupalSettings.tealium.view_title;
+    }
+
     var utag_data={
       "sous_domaine" : sous_domaine,
       "univers_affichage" : univers_affichage,
