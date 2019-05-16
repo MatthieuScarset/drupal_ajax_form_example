@@ -573,7 +573,6 @@ function gdpr_hook_entity_update($entity) {
 function gdpr_hook_cron() {
     ##Je fais la vérif' qu'une fois par jour, à 1h du mat'
     #(2h, mais du coup, y a 1h de decalage par rapport à l'heure D8)
-    if (date('G', \Drupal::time()->getCurrentTime()) == 2) {
 
 
         ## Je recupère tous les webforms existants et je boucle sur chacun d'entre eux,
@@ -656,5 +655,4 @@ function gdpr_hook_cron() {
         \Drupal\oab_backoffice\Controller\OabExportFileListController::clearStorageDir();
 
 
-    }
 }
