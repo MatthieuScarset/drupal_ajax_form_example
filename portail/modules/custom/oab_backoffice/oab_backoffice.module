@@ -52,10 +52,14 @@ function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation,
  */
 function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
     $ret = gdpr_is_webform_authorized($entity, $operation, $account);
-
     return $ret;
 }
 
+
+function oab_backoffice_webform_submission_access(Drupal\webform\Entity\WebformSubmission $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+    $ret = gdpr_is_webform_submission_authorized($entity, $operation, $account);
+    return $ret;
+}
 
 
 /*

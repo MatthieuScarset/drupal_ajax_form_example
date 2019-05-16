@@ -7,6 +7,21 @@
 use Drupal\Core\Datetime;
 
 
+function gdpr_is_webform_submission_authorized(Drupal\webform\Entity\WebformSubmission $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+
+    if ($operation == "delete" && in_array('webform_business_analyst', $account->getRoles())) {
+
+        $webform = $entity->getWebform();
+        $business_analaysts_list = $webform->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts');
+
+        if (array_key_exists($account->id(), $business_analaysts_list)) {
+
+            return Drupal\Core\Access\AccessResult::allowed();
+        }
+    }
+    return Drupal\Core\Access\AccessResult::neutral();
+}
+
 /**
  * Je regroupe tout dans une fonction perso, parce que je m'en sers dans plusieurs hook_access
  */
@@ -15,6 +30,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
      * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
      * pour voir les soumissions et faire des modifs
      */
+
     if (in_array('webform_business_owner', $account->getRoles())) {
         $form_bo = \Drupal\user\Entity\User::load($entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_owner'));
         if (($operation == "submission_view_any" || $operation == "update")
@@ -30,6 +46,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         $business_analaysts_list = $entity->getThirdPartySetting('oab_gdpr', 'gdpr_business_analysts');
 
         if (array_key_exists($account->id(), $business_analaysts_list)) {
+
             return Drupal\Core\Access\AccessResult::allowed();
         }
 
@@ -104,6 +121,7 @@ function gdpr_check_authorized_view($entity, $account) {
         return $ret;
     } else {
         // SI le webform est publié, on return true;
+
         return true;
     }
 
