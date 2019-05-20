@@ -395,6 +395,9 @@
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
         tile_format();
     }
+      $('.fieldset-field-insight-type .btn label').on('click', function(evt){
+          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
+      });
   });
 
     $(document).on("click", "div.btn-field-insight-type", function() {
@@ -407,6 +410,10 @@
      //   $('select#edit-field-insight-target-id').on('change', function() {
      $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
   });
+
+    $('.fieldset-field-insight-type .btn label').on('click', function(evt){
+         utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
+    });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
