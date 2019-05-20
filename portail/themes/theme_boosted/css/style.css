@@ -2657,6 +2657,7 @@ body.page-node-type-custom-page{
 
 .fieldset-field-insight-type .fieldset-wrapper {
     display: inline-block;
+    float: right;
 }
 
 .fieldset-field-insight-type .btn {
@@ -2670,12 +2671,23 @@ body.page-node-type-custom-page{
 
 .fieldset-field-insight-type .btn,
 .fieldset-field-insight-type .btn.btn-primary {
-    padding: .3rem 1.8rem .5rem 1.8rem
+    padding: .3rem 1.8rem .5rem 1.8rem;
+    background-color: transparent;
+    border: none;
+    color: #000;
 }
 
+
 .fieldset-field-insight-type .btn.btn-primary {
-    border-color: #f16e00;
+    color: #f16e00;;
 }
+
+.fieldset-field-insight-type .btn.btn-primary:active,
+.fieldset-field-insight-type .btn.btn-info:active {
+    color: #000;
+    background-color: transparent;
+}
+
 
 @media (max-width: 1024px) {
 
@@ -2718,6 +2730,13 @@ div.business-insight-field-insight {
     margin-right: 1rem;
 }
 
+.view-business-insight h1 {
+    color: #000;
+    font-weight: normal;
+    font-size: 2.5rem;
+    margin: 3rem 0;
+}
+
 .business-insight-field-insight select.form-control::-ms-expand {
     display: none;
 }
@@ -2727,7 +2746,6 @@ div.business-insight-field-insight {
     color: #f16e00;
     height: auto;
     border: none;
-    border-bottom: 2px solid grey;
     background-color: transparent;
     padding: 0;
     padding-right: 60px;
@@ -2752,21 +2770,53 @@ div.business-insight-field-insight {
 
 }
 
-.business-insight-field-insight select.form-control:focus {
+.business-insight-field-insight select.form-control {
+    vertical-align: top;
+    color: #f16e00;
+    color: #000;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    padding-right: 60px;
+    margin-top: 5px;
+    -moz-appearance:none;
+    -webkit-appearance: none;
+    font-size: 1.6rem;
+
+    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
     background-image:
-            linear-gradient(45deg, transparent 50%, #f16e00 50%),
-            linear-gradient(135deg, #f16e00 50%, transparent 50%),
+            linear-gradient(45deg, transparent 50%, #000 50%),
+            linear-gradient(135deg, #000 50%, transparent 50%),
             linear-gradient(to right, transparent, transparent);
     background-position:
-            calc(100% - 30px) .55em,
-            calc(100% - 10px) .55em,
+            calc(100% - 15px) .15em,
+            calc(100% - 5px) .15em,
             calc(100% - .5em) 0.5em;
     background-size:
-            20px 20px,
-            20px 20px,
+            10px 10px,
+            10px 10px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+
+}
+
+.business-insight-field-insight select.form-control:focus {
+    background-image:
+            linear-gradient(45deg, transparent 50%, #000 50%),
+            linear-gradient(135deg, #000 50%, transparent 50%),
+            linear-gradient(to right, transparent, transparent);
+    background-position:
+            calc(100% - 15px) .15em,
+            calc(100% - 5px) .15em,
+            calc(100% - .5em) 0;
+    background-size:
+            10px 10px,
+            10px 10px,
             1px 1.5em;
     background-repeat: no-repeat;
     outline: 0;
+
 }
 
 form#views-exposed-form-business-insight-business-insight-page input[type="submit"]{
