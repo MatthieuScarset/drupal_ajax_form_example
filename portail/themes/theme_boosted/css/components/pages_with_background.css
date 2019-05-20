@@ -176,3 +176,92 @@
     outline: 0;
 
 }
+
+.oab_background_image .view-business-insight .view-content .views-row .tile_Report {
+    padding-bottom: 20px;
+}
+
+/* Refonte responsive VB */
+/* Branche RUBYPORTAILOBS-3512 Eddy */
+
+@media(max-width: 767px) {
+
+    body {
+        background-color: #333 !important;
+    }
+
+    .oab_background_image .view-business-insight h1 {
+        padding: 3rem 0rem;
+        font-size: 2.9rem;
+        border-bottom: solid 1px #BBB;
+        color: #fff;
+    }
+
+    .oab_background_image .business-insight-field-insight select.form-control {
+        background-color: #fff;
+        color: #000;
+        height: 35px;
+        font-size: 2rem;
+        width: 100%;
+        padding-left: 5px;
+    }
+
+    .oab_background_image .fieldset-field-insight-type .btn {
+        padding: .3rem 1.8rem 1rem 0rem;
+    }
+
+    .oab_background_image .view-business-insight .view-filters {
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+
+    .oab_background_image .fieldset-field-insight-type {
+        padding-left: 10px;
+    }
+
+    .oab_background_image .view-business-insight .view-content .views-row .tile .title_node {
+        font-size: 2.7rem
+    }
+
+    .oab_background_image .view-business-insight .view-content .views-row {
+        width: 100%;
+        padding: 0;
+    }
+
+    .oab_background_image .subhomes-filterbar-background {
+        background-color: transparent;
+    }
+
+    .oab_background_image .business-insight-field-insight {
+        padding: 0;
+    }
+
+    .oab_background_image.fieldset-field-insight-type .fieldset-wrapper {
+        margin-left: 10px;
+    }
+
+    .oab_background_image .fieldset-field-insight-type .btn.btn-primary:active,
+    .oab_background_image .fieldset-field-insight-type .btn{
+        color: #fff;
+    }
+    
+    .oab_background_image .business-insight-field-insight select.form-control {
+        background-image: none;
+        -webkit-appearance: menulist;
+    }
+
+    .oab_background_image .view-business-insight .btn-primary label {
+        color: #f16e00;
+    }
+
+    .oab_background_image .business-insight-field-insight div {
+        padding: 0;
+        margin: 0;
+    }
+
+    .oab_background_image .view-business-insight .view-content .views-row .tile {
+        margin-bottom: 20px;
+    }
+}
+

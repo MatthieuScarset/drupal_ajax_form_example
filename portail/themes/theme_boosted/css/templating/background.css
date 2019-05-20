@@ -495,3 +495,10 @@ _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
 .oab_background_image .page-business-insight .region.region-content {
     background-color: transparent;
 }
+
+@media(max-width: 767px) {
+    .oab_background_image .page-business-insight .region.region-content {
+        padding-left: 0px;
+        background-color: #333;
+    }
+}
