@@ -859,3 +859,8 @@ aside.right-column > .region{
     width: 30%;
     float: left;
 }
+
+.row .top-zone-homepage {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
