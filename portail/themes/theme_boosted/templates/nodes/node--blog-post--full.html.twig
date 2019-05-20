@@ -78,9 +78,18 @@ view_mode ? view_mode|clean_class,
 %}
 
 <article{{ attributes.addClass(classes) }}>
+
+    {% for key, image in node.field_visual  %}
+        {% set media = image.entity %}
+        {% set file = media.field_image.entity %}
+        {% set uri = file.uri.value %}
+        {% if uri is not null %}
+            {% set img_uri = uri %}
+        {% endif %}
+    {% endfor %}
+
     {{ title_suffix }}
     {{ title_prefix }}
-
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldBlog %}
@@ -92,18 +101,37 @@ view_mode ? view_mode|clean_class,
     {% set fieldOwner %}
         {{ content.field_content_owner }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "BlogPosting",
-      "headline" : "{{ node.label }}",
-      "genre" : "{{ fieldBlog|striptags|trim }}",
-      "creationDate": "{{ createdDate }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ fieldOwner|striptags|trim }}",
-      }
+    {% set imageUrl %}
+        {{ http_host ~ file_url(node.field_visual.0.entity.field_image.0.entity.uri.value) }}
+    {% endset %}
+    {% set logoUrl %}
+        {{ http_host ~ "/themes/theme_boosted/logo-fond-blanc.png" }}
+    {% endset %}
+    
+    <script type="application/ld+json"> {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://google.com/article"
+        },
+        "headline": "{{ specialCharacters(node.label) }}",
+        "image": "{{ imageUrl }}",
+        "datePublished": "{{ node.created.value|date("Y-m-dT:h:m:s+h:m") }}",
+        "dateModified": "{{ node.updated.value|date("Y-m-dT:h:m:s+h:m") }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ node.field_profile.0.entity.label }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Orange Business Services",
+          "logo": {
+               "@type": "ImageObject",
+               "url": "{{ logoUrl }}"
+          }
+        },
+        "description": "{{ node.field_meta_description.value }}"
     }
     </script>
 
