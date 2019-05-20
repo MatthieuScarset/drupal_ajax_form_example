@@ -2605,6 +2605,9 @@ body.page-node-type-custom-page{
      margin-top: 3.5rem;
 }
 
+#block-twitterblock #twitter-block-carousel .twitter-tweet{
+    margin-top: 0 !important;
+}
 
 #twitter-block-carousel .carousel-indicators li {
     width: 1.4rem;
