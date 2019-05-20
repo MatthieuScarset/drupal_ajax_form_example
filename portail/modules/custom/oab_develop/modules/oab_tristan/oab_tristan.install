@@ -657,3 +657,33 @@ function oab_tristan_update_8085() {
 function oab_tristan_update_8086() {
     oabt_YmlImport('views.view.document_list.yml');
 }
+
+/**
+ * Mise à jour des taxos Insight => Suppression de l'ancien field inutilisé, mise en place du field utilisé dans tous les types de contenus
+ */
+function oab_tristan_update_8087() {
+    include_once('updates/update_8087.inc');
+}
+
+/**
+ * Mise à jour de la taxo Thématique
+ */
+function oab_tristan_update_8088(&$sandbox) {
+    include_once('updates/update_8088.inc');
+    processUpdateWithSandbox_8088($sandbox);
+}
+
+
+/**
+ * Ajout du block twitter
+ */
+function oab_tristan_update_8089() {
+    oabt_YmlImport('block.block.twitterblock.yml');
+}
+
+/**
+ * Ajout des traductions
+ */
+function oab_tristan_update_8090() {
+    include_once('updates/update_8090.inc');
+}

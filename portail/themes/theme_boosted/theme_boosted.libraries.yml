@@ -26,6 +26,7 @@ global-styling:
       css/templating/layout.css: {}
       css/templating/nodes.css: {}
       css/templating/linked_content.css: {}
+      css/components/pages_with_background.css: {}
   js:
     boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}
@@ -39,6 +40,7 @@ global-styling:
     js/switch.js: {}
     js/tealium.js: {}
     js/cssua.min.js: {}
+    js/jquery.vgrid.min.js: {}
 
   dependencies:
     - core/jquery

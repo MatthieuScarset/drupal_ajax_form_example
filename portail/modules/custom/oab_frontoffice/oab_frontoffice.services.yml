@@ -15,6 +15,12 @@ services:
       class: Drupal\oab_frontoffice\EventSubscriber\SmartRedirectionEvent
       tags:
          - { name: event_subscriber }
+  cache.twitter_api:
+      class: Drupal\Core\Cache\CacheBackendInterface
+      tags:
+          - { name: cache.bin }
+      factory: cache_factory:get
+      arguments: [twitter_api]
 #  oab_frontoffice.event_subscriber:
 #      class: Drupal\oab_frontoffice\EventSubscriber\SubhomeUrlAlterEvent
 #      tags:

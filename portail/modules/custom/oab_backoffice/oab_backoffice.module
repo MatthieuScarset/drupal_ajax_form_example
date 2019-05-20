@@ -61,7 +61,7 @@ function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $o
 /*
 * implement hook_token_info()
 */
-function oab_backoffice_token_info(){
+function oab_backoffice_token_info() {
     $types = [];
     $tokens = [];
 

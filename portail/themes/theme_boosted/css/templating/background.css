@@ -345,6 +345,10 @@ _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
     font-weight: bold;
 }
 
+.page-business-insight .region.region-content {
+    background-color: #ededed;
+}
+
 @media (max-width: 480px) {
     .product_modules.bg_white {
        /* background-color: #ddd;*/
@@ -482,4 +486,12 @@ _:-ms-fullscreen, :root .banner-topzone .topzonebg { margin-top: 70px; }
     .banner-topzone-pwp .frame-text {
         font-size: 2rem;
     }
+}
+
+.oab_background_image .view-business-insight .view-content {
+    margin: 0;
+    background-color: transparent;
+}
+.oab_background_image .page-business-insight .region.region-content {
+    background-color: transparent;
 }

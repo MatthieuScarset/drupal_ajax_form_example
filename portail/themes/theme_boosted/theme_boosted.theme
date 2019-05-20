@@ -35,12 +35,75 @@ function theme_boosted_preprocess_html(&$variables) {
         $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
     }
 }
+
+function theme_boosted_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    $actual_route = \Drupal::routeMatch();
+    $actual_route_name = $actual_route->getRouteName();
+
+    ## Si on est dans la subhome Analystes
+    ## et qu'on veut afficher un node (qui est donc en mode d'affichage Subhome)
+    if( $actual_route_name === "view.subhomes.page_analysts"
+        && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
+        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+        //Si on fait l'affichage d'un node en mode "subhome"
+    ) {
+        $suggestions = ['node__analysts__subhome'];
+    }
+
+    if ($actual_route_name === "views.ajax" && $variables['theme_hook_original'] == "node"
+        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+    ){
+        // Getting the referer.
+        $request = \Drupal::request();
+        $referer = $request->headers->get('referer');
+        // Getting the base url.
+        $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
+        // Getting the alias or the relative path.
+        $alias = substr($referer, strlen($base_url));
+        $url_object = \Drupal::service('path.validator')->getUrlIfValid($alias);
+        // Gettin route name from referer
+        $referer_route_name = $url_object->getRouteName();
+
+        if($referer_route_name=="view.subhomes.page_analysts"){
+            $suggestions = ['node__analysts__subhome'];
+        }
+
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+
+    if (isset($variables['view'])) {
+        $view = $variables['view'];
+        $suggestions[] = $hook . '__' . $view->id();
+        $suggestions[] = $hook . '__' . $view->id() . '__' . $view->current_display;
+
+        /**
+         * @var Drupal\views\ViewExecutable $view
+         * @var SubhomeEntity $entity
+         */
+
+        if (preg_match('/^subhomes/', $view->id()) && isset ($view->argument['field_subhome_target_id'])) {
+            $sid = $view->argument['field_subhome_target_id']->value;
+            $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+            // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+            if ($entity !== null) {
+                $suggestions[] = $hook . '__' . $view->id() . '__' . $entity->bundle();
+            }
+
+        }
+
+    }
+}
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $variables) {
     $suggestions[] = 'form__' . $variables['element']['#form_id'];
-  return $suggestions;
+    return $suggestions;
 }
 
 /**
@@ -48,40 +111,6 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
  */
 
 function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
-
-}
-
-function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables){
-    $current_route_match = \Drupal::getContainer()->get('current_route_match');
-    $route_match = $current_route_match->getRouteName();
-
-    if((preg_match('/^view.subhomes/', $route_match)
-        || preg_match('/^view.subhomes_archive/', $route_match)
-        || $route_match == 'views.ajax')
-			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
-        $suggestions[]='form_element__subhomes';
-    }
-    if (isset($variables['element']['#webform'])) {
-      if ( $variables['element']['#webform'] === 'telechargement_documents'
-        && $variables['element']['#type'] != "checkbox") {
-        $suggestions[] = 'form_element__telechargement_documents';
-      }
-
-      if ( $variables['element']['#webform'] === 'dvi_contact_global'
-        && $variables['element']['#type'] != "checkbox"
-        && $variables['element']['#type'] != "processed_text") {
-        $suggestions[] = 'form_element__dvi_contact_global';
-        $suggestions[] = 'form_element__dvi_contact_global__' . $variables['element']['#type'];
-      }
-
-
-      if ( $variables['element']['#webform'] === 'dvi_becoming_distributor'
-          && $variables['element']['#type'] != "checkbox"
-          && $variables['element']['#type'] != "processed_text") {
-          $suggestions[] = 'form_element__dvi_becoming_distributor';
-          $suggestions[] = 'form_element__dvi_becoming_distributor__' . $variables['element']['#type'] ;
-      }
-  }
 
 }
 
@@ -114,6 +143,72 @@ function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggest
 
 function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array $variables){
 
+}
+
+
+
+function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+    /**
+     * Homepage Eclairage View Grid Twig Template Suggestions
+     */
+    // Firstly check it's a view
+    if($hook === 'views_view') {
+        // Check if it's the 'home_eclairage_playlist' view
+        if($variables['view']->id() === 'home_eclairage_playlist') {
+            if($hook === 'views_view_grid') {
+
+                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+            }
+        }
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        $content_type = $node->bundle();
+        if($content_type == 'custom_page') {
+            $suggestions[] = 'page__' . $content_type;
+        }
+    }
+}
+
+
+function theme_boosted_theme_suggestions_fieldset_alter(array &$suggestoins, array $variables, $hook) {
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+}
+
+
+function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook){
+
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if((preg_match('/^view.subhomes/', $route_match)
+        || preg_match('/^view.subhomes_archive/', $route_match)
+        || $route_match == 'views.ajax')
+			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
+        $suggestions[]='form_element__subhomes';
+    }
+    if (isset($variables['element']['#webform'])) {
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'];
+        $suggestions[] = 'form_element__' . $variables['element']['#type'];
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'field_insight_target_id') {
+        $suggestions[] = 'form_element__field_insight__business_insight';
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
 }
 
 
@@ -268,13 +363,16 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
 
-	// Si on est dans une subhome || subhomes_archive
-    if (preg_match('/^view.subhomes/', $route_name)) {
-	    ## Si on est dans une vue, je charge la vue
+    // Si on est dans une subhome || subhomes_archive
+    if (preg_match('/^view.subhomes/', $route_name)
+        || preg_match('/^view.business_insight/', $route_name)) {
+        ## Si on est dans une vue, je charge la vue
         $route_parts = explode('.', $route_name);
 
         $view_id = $route_parts[1];
         $display_id = $route_parts[2];
+
+        $hide_title_block = false;
 
         $view = \Drupal\views\Entity\View::load($view_id);
         if ($view !== null) {
@@ -291,10 +389,16 @@ function theme_boosted_preprocess_page(&$variables) {
                 // pour le passer en container-fluid, ie. avoir la page complète sans bordure
                 // et je cache le titre de la page
                 if ($entity !== null) {
-                    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+                    $hide_title_block = true;
                 }
 
+            } elseif ($view->id() == 'business_insight') {
+                $hide_title_block = true;
             }
+        }
+
+        if ($hide_title_block) {
+            $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
         }
     }
 
@@ -540,35 +644,3 @@ function get_image_uri($entity, $fieldName){
     }
   return $image_uri;
 }
-
-
-function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
-
-    /**
-     * Homepage Eclairage View Grid Twig Template Suggestions
-     */
-    // Firstly check it's a view
-    if($hook === 'views_view') {
-        // Check if it's the 'home_eclairage_playlist' view
-        if($variables['view']->id() === 'home_eclairage_playlist') {
-            if($hook === 'views_view_grid') {
-
-                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
-            }
-        }
-    }
-
-}
-
-/**
- * Implements hook_theme_suggestions_HOOK_alter().
- */
-function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-	if ($node = \Drupal::routeMatch()->getParameter('node')) {
-		$content_type = $node->bundle();
-		if($content_type == 'custom_page') {
-			$suggestions[] = 'page__' . $content_type;
-		}
-	}
-}
-

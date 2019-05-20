@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.full_html.field_hub_portal
     - field.field.node.full_html.field_industry
     - field.field.node.full_html.field_insight
+    - field.field.node.full_html.field_insight_type
     - field.field.node.full_html.field_job_profile
     - field.field.node.full_html.field_meta_description
     - field.field.node.full_html.field_meta_title
@@ -73,6 +74,7 @@ third_party_settings:
         - field_blog_thematic
         - field_blog_format
         - field_insight
+        - field_insight_type
         - field_industry
         - field_region
         - field_job_profile
@@ -174,20 +176,20 @@ content:
     type: datetime_default
     region: content
   field_hub:
-    weight: 39
+    weight: 40
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 40
+    weight: 41
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_industry:
-    weight: 36
+    weight: 37
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -198,14 +200,20 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_insight_type:
+    type: options_select
+    weight: 36
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_job_profile:
-    weight: 38
+    weight: 39
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_meta_description:
-    weight: 124
+    weight: 125
     settings:
       size: 60
       placeholder: ''
@@ -227,7 +235,7 @@ content:
     type: metatag_firehose
     region: content
   field_region:
-    weight: 37
+    weight: 38
     settings: {  }
     third_party_settings: {  }
     type: options_select

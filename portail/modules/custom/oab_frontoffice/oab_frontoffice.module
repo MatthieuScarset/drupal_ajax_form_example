@@ -22,47 +22,6 @@ module_load_include('inc', 'oab_frontoffice', 'includes/office_map');
 // Mise dans un fichier a part des filtres des subhomes
 module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_form');
 
-/**
- * Pour la subhome analystes, je crée la suggestion pour l'affichage en mode subhome
- * parce que les éléments peuvent être de différents contenus mais doivent
- */
-function oab_frontoffice_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-
-    $actual_route = \Drupal::routeMatch();
-    $actual_route_name = $actual_route->getRouteName();
-
-    ## Si on est dans la subhome Analystes
-    ## et qu'on veut afficher un node (qui est donc en mode d'affichage Subhome)
-    if( $actual_route_name === "view.subhomes.page_analysts"
-        && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
-        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
-        //Si on fait l'affichage d'un node en mode "subhome"
-    ) {
-        $suggestions = ['node__analysts__subhome'];
-    }
-
-    if ($actual_route_name === "views.ajax" && $variables['theme_hook_original'] == "node"
-        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
-    ){
-        // Getting the referer.
-        $request = \Drupal::request();
-        $referer = $request->headers->get('referer');
-        // Getting the base url.
-        $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
-        // Getting the alias or the relative path.
-        $alias = substr($referer, strlen($base_url));
-        $url_object = \Drupal::service('path.validator')->getUrlIfValid($alias);
-        // Gettin route name from referer
-        $referer_route_name = $url_object->getRouteName();
-
-        if($referer_route_name=="view.subhomes.page_analysts"){
-            $suggestions = ['node__analysts__subhome'];
-        }
-
-    }
-}
-
-
 function oab_frontoffice_preprocess_menu(&$variables) {
     if (isset($variables['items'])
         && is_array($variables['items'])) {
@@ -377,6 +336,23 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
         if ($current_language != 'en') {
             unset($form['field_region_target_id']);
+        }
+    }
+
+    if ($form['#id'] == 'views-exposed-form-business-insight-business-insight-page') {
+        //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
+
+        $form['field_insight_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_insight_target_id']['#options'],'All thematics'
+        );
+
+        $form['field_insight_type_target_id']['#options'] = clean_exposed_filters_by_language(
+            $form['field_insight_type_target_id']['#options'],'See all'
+        );
+
+        if (isset($form['field_insight_type_target_id']['#type'])
+            && $form['field_insight_type_target_id']['#type'] == "select") {
+            $form['field_insight_type_target_id']['#type'] = "radios";
         }
     }
 

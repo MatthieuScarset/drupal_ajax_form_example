@@ -55,14 +55,6 @@ content:
     third_party_settings: {  }
     type: basic_string
     region: content
-  field_industry:
-    weight: 3
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_insight:
     weight: 14
     label: hidden
