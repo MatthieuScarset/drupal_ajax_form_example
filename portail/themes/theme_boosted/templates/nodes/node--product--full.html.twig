@@ -109,19 +109,6 @@
         {% set id_fiche = content.axiome_data['@attributes'].id %}
         {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
     {% endif %}
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "headline": "{{ node.label }}",
-      "genre": "{{ fieldProduct|striptags|trim }}",
-      "dateCreated": "{{ createdDate }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ fieldAuthor|striptags|trim }}",
-      }
-    }
-    </script>
 
     {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
 

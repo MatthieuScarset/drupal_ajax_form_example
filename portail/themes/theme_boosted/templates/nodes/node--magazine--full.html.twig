@@ -89,19 +89,6 @@ view_mode ? view_mode|clean_class,
          {{ author_name }}
      {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Article",
-      "headline": "{{ node.label }}",
-      "genre": "{{ fieldMagazine|striptags|trim }}",
-      "dateCreated": "{{ createdDate }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ fieldAuthor|striptags|trim }}",
-      }
-    }
-    </script>
 
     <div class="content_info">
         <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
