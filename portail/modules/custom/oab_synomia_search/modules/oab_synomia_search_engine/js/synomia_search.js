@@ -51,4 +51,4 @@
 		
 	});
 	
-})(jQuery, Drupal, this, this.document);
+})(jQuery, Drupal, this.document);

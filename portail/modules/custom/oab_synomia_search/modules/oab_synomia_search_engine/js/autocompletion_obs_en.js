@@ -51,13 +51,13 @@ function Start() {
 
 
 // Variables globales diverses
-RessourcesPath = document.location.protocol;
+var RessourcesPath = document.location.protocol;
 RessourcesPath += "//www.synomia-autocompletion.com/";
 
-collection = new Array;
-SynSuggestsParams = new Array;
+var collection = new Array;
+var SynSuggestsParams = new Array;
 var Main = null;
-TabSuggestElt = new Array;
+var TabSuggestElt = new Array;
 var TabSuggestLancement = new Array;
 TabSuggestLancement["immediat"] = false;
 TabSuggestLancement["delai"] = 0;
@@ -76,12 +76,12 @@ function SynInitFctSuggest() {
 	var Elt = document.getElementById("synTxtInput");
 	if ( Elt )
 		AddInput(Elt, "SynSuggestDefault");	
-};
+}
 
 function __Start() {
 	debug_suggest("__Start - Nombre de champ a gerer : "+TabSuggestElt.length);
-	for (j=0; j< TabSuggestElt.length; j++) {
-		Elt = TabSuggestElt[j];
+	for (var j=0;  j< TabSuggestElt.length; j++) {
+		var Elt = TabSuggestElt[j];
 		if ( Elt ) {
 			var Espace = "";
 			if ( Elt.className != "" ) Espace = " "; 
@@ -106,7 +106,7 @@ function debug_suggest(Val, type) {
 		if ( window.console ) console.log(Val);
 		//else alert(Val);
 	}
-};
+}
 
 debug_suggest("librairie en cours de chargement");
 var Cpt_Chargement = 0;
@@ -117,17 +117,16 @@ var Script_CSS = false;
 var Init_Fields = false;
 
 function chargement(comm) {
-	Ph = "Lancement ( "+comm+" )";
 	GestionDom.debug(comm);	
 	if ( ChargementTimer == null ) {
 		ChargementTimer = chargement_engine();
-	};
-};
+	}
+}
 
 function chargement_engine() {
-	if ( ChargementTimer != null ) { clearTimeout(ChargementTimer); ChargementTimer = null; };
+	if ( ChargementTimer != null ) { clearTimeout(ChargementTimer); ChargementTimer = null; }
 	Cpt_Chargement++;
-	Ph = "Mode auto => Essai "+Cpt_Chargement;
+	var Ph = "Mode auto => Essai "+Cpt_Chargement;
 	debug_suggest(Ph);
 		
 	var ChargementNecessaire = ! ( Script_Data && Script_Lib && Script_CSS );
@@ -141,8 +140,8 @@ function chargement_engine() {
 		var supp = "";
 		var tmp = querySt("infos");
 		if ( tmp ) {
-			tmp2 = tmp.split(",");
-			for(i=0; i<tmp2.length;i++) supp+="&"+tmp2[i]+"="+querySt(tmp2[i]);
+			var tmp2 = tmp.split(",");
+			for(var i=0; i<tmp2.length;i++) supp+="&"+tmp2[i]+"="+querySt(tmp2[i]);
 		}
 		//console.log("supp : "+supp);
 		if ( ! Script_Data ) {
@@ -201,12 +200,12 @@ function chargement_engine() {
 
 function chargement_immediat() {
 	chargement("Chargement immediat");
-};
+}
 
 
 function chargement_onfocus() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for ( var i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if (inp.addEventListener) {
 			inp.addEventListener("focus", function() { window.LaunchSuggest = this; chargement("Chargement sur focus"); }, false);
@@ -225,13 +224,13 @@ function chargement_onfocus() {
 			}
 		}
 	}
-};
+}
 
 var synTimer = null;
 function chargement_delai(Val) {
 	if ( Val == undefined ) Val = 5000;
 	synTimer = setTimeout("chargement('Chargement sur delai')", Val);
-};
+}
 
 function chargement_onkeypress() {
 	var inp;
@@ -260,13 +259,13 @@ function chargement_onkeypress() {
 		}
 	}
 	
-};
+}
 
 function querySt(ji) {
-hu = window.location.search.substring(1);
-gy = hu.split("&");
-for (let i=0;i<gy.length;i++) {
-ft = gy[i].split("=");
+var hu = window.location.search.substring(1);
+var gy = hu.split("&");
+for (i=0;i<gy.length;i++) {
+var ft = gy[i].split("=");
 if (ft[0] == ji) {
 return ft[1];
 }
@@ -328,7 +327,7 @@ function DomCreateManager(force) {
 	else
 	{
 		if ( ! this.ManagerCreated ) {
-			fn2 = document.onreadystatechange;
+			var fn2 = document.onreadystatechange;
 			if ( typeof fn2 == 'function' ) { this.TabFnDomReady.unshift(fn2); this.debug("DomReadySuggests - onreadystatechange existe, on s'ajoute au gestionnaire existant"); }
 			document.onreadystatechange = function() { __DomReadySuggests_Callback(GestionDom, "readyStateSuggests"); };
 			this.debug("DomReadySuggests - onreadystatechange cree");
@@ -375,7 +374,7 @@ function __DomReadySuggests() {
 	for(i=0; i<this.TabFnDomReady.length; i++) {
 		if ( this.TabFnDomReady[i] ) {
 			this.debug("execution de la fonction "+(i+1)+" ("+this.TabFnDomReady[i].name+")");
-			fn = this.TabFnDomReady[i];
+			var fn = this.TabFnDomReady[i];
 			this.TabFnDomReady[i] = null;
 			fn();
 		}
@@ -391,7 +390,7 @@ function __DomReadySuggests_Callback(Classe, fn) {
 
 if ( !window.GestionDom || typeof GestionDom != 'object' ) {
  
-GestionDom = {};
+var GestionDom = {};
 // Fonctions interactions avec le browser
 GestionDom.TabFnDomReady = new Array;
 GestionDom.isReady = false;
@@ -422,18 +421,18 @@ if (    typeof document.getElementsByTagName != 'undefined'
 
 GestionDom.DomReadySuggests(SynInitFctSuggest, "SynInitFctSuggest");
 
-SynSuggest = new SynSuggests();
+var SynSuggest = new SynSuggests();
 }
 if ( loadACNow ) { GestionDom.DomReadySuggests( function() {
 // exemple qui prend tous les input dont le name vaut "q" ou "mot"
 // les associe pour l'utilisation des Suggest, et leur retire le focus 
 var Elt=document.getElementsByTagName("input");
-for (j=0; j< Elt.length; j++) {
+for (var j=0; j< Elt.length; j++) {
 	if ( Elt[j].name == "q" || Elt[j].name == "mot" ) {
 		SynSuggest.AddInput(Elt[j]);
 		Elt[j].blur();
 	}
-};
+}
 SynSuggest.setChargementSurFocus(true);
 SynSuggest.Start();
 }, "params" ); }

@@ -4,7 +4,6 @@ var delta_oab_develop_theme = 200;
 var last_size="";
 
 (function($, w, d) {
-    var ww = window.innerWidth;
     $(d).ready(function() {
         /*gestion du no-js*/
         $("body").removeClass("no-js");
@@ -34,7 +33,6 @@ function resizeend_oab_develop_theme() {
 function check_body_size(){
 
     var body_width = $("body").width();
-    var classNames = $("html").attr("class").split(' ');
 
     $.each($("html").attr('class').split(/\s+/), function(i, name) {
         if (name.indexOf('col-') > -1) {

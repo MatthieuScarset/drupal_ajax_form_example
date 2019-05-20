@@ -1,7 +1,7 @@
 oab.settings_tealium:
   path: '/admin/structure/oab/settings/tealium'
   defaults:
-    _form: '\Drupal\oab_tealium\Form\oabSettingsTealiumForm'
+    _form: '\Drupal\oab_tealium\Form\OabSettingsTealiumForm'
     _title: 'Tealium settings'
   requirements:
     _permission: 'administer site configuration'

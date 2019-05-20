@@ -98,24 +98,6 @@
         });
     }
 
-    function resizeIframeAuto(){
-        var obj = document.getElementById('myFrame');
-
-        jQuery(function(){
-            var lastHeight = 0, curHeight = 0, maframe = $('iframe:eq(0)');
-            setInterval(function(){
-                curHeight = maframe.contents().find('body').height();
-                if ( curHeight != lastHeight ) {
-                    maframe.css('height', (lastHeight = curHeight) + 'px' );
-                } else {
-                    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-                    return true;
-                }
-            },0);
-        });
-    }
-
-
   // classe CSS sur les petites images dans les templates colonnages
   function manageSmallImageInTemplates(){
     $('.left-column .pourquoi .col div.ligne img').each(function(){
@@ -173,7 +155,7 @@
     });
 
     //initialize swiper when document ready
-    var mySwiperHomepage = new Swiper ('.swiper-container', {
+   /* var mySwiperHomepage = new Swiper ('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
         loop: true,
@@ -197,16 +179,16 @@
               spaceBetween: 30
           }
         }
-      });
+      });*/
 
       //initialize swiper when document ready
-      var mySwiperThematic = new Swiper ('.swiper-container-columns', {
+     /* var mySwiperThematic = new Swiper ('.swiper-container-columns', {
         // Optional parameters
         direction: 'horizontal',
         loop: true,
         pagination : '.swiper-pagination',
         paginationType: 'bullets',
-      });
+      });*/
 
   });
 

@@ -175,7 +175,7 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
           if (!empty($new_select_options_flatten)) {
             $element['#options'] = $new_select_options_flatten;
           }
-          else{
+          else {
             $element['#options'] = $new_select_options;
           }
         }

@@ -203,18 +203,19 @@ var staticText = {
 
 //check language
 var currentLang = jQuery('html').attr('lang');
+var staticTextLocale = '';
 if(typeof currentLang !== "undefined" && currentLang !== null){
     if(currentLang === "en"){
-        var staticTextLocale = staticText.en_US;
+         staticTextLocale = staticText.en_US;
     }else if(currentLang === "fr"){
-        var staticTextLocale = staticText.fr_FR;
+         staticTextLocale = staticText.fr_FR;
     }else if(currentLang === "ru"){
-        var staticTextLocale = staticText.ru_RU;
+         staticTextLocale = staticText.ru_RU;
     // (sharebar) add new language
     // }else if(sharebar_parameters.og_locale === "xy_XY"){
     //  var staticTextLocale = staticText.xy_XY;
     }else{
-        var staticTextLocale = staticText.en_US;
+         staticTextLocale = staticText.en_US;
     }
 }
 /*}else if(typeof followbar_parameters !== "undefined"){
@@ -243,6 +244,7 @@ if(typeof currentLang !== "undefined" && currentLang !== null){
 }*/
 
 var checkIfRightToLeft = function(){
+    var followBars = '';
     if(typeof sharebar_parameters !== "undefined"){
         if(typeof sharebar_parameters.og_locale !== "undefined" && sharebar_parameters.og_locale !== null){
             if(sharebar_parameters.og_locale === "ar_AR"){
@@ -250,7 +252,7 @@ var checkIfRightToLeft = function(){
                     document.getElementById('sharebar').className += " righttoleft";
                 }
                 if(document.getElementsByClassName('followbar')){
-                    var followBars = document.getElementsByClassName('followbar');
+                    followBars = document.getElementsByClassName('followbar');
                     for(var i=0;i<followBars.length;i++) {
                         followBars[i].className += " righttoleft";
                     }
@@ -264,7 +266,7 @@ var checkIfRightToLeft = function(){
                     document.getElementById('sharebar').className += " righttoleft";
                 }
                 if(document.getElementsByClassName('followbar')){
-                    var followBars = document.getElementsByClassName('followbar');
+                    followBars = document.getElementsByClassName('followbar');
                     for(var i=0;i<followBars.length;i++) {
                         followBars[i].className += " righttoleft";
                     }
@@ -396,31 +398,32 @@ if(typeof sharebar_parameters !== "undefined"){
 var shareClick = function(button){
 
     var config = "toolbar = no, location = no, directories = no, menubar = no, width = 560, height = 500";
-
+    var link;
+    var popup_title;
     if(button === 'facebook'){
-        var link = drupalSettings.shareSettings.share_siteUrls.facebook;
-        var popup_title = "Facebook share";
+        link = drupalSettings.shareSettings.share_siteUrls.facebook;
+        popup_title = "Facebook share";
         window.open(link, popup_title, config);
     }else if(button === 'twitter' && sharebar_parameters.use_bitly === true){
-        var link = share_links.twitter_short;
-        var popup_title = "Twitter share";
+        link = share_links.twitter_short;
+        popup_title = "Twitter share";
         window.open(link, popup_title, config);
     }else if(button === 'twitter'){
-        var link = drupalSettings.shareSettings.share_siteUrls.twitter;
-        var popup_title = "Twitter share";
+        link = drupalSettings.shareSettings.share_siteUrls.twitter;
+        popup_title = "Twitter share";
         window.open(link, popup_title, config);
     }else if(button === 'googleplus'){
-        var link = share_links.googleplus;
-        var popup_title = "Google Plus share";
+        link = share_links.googleplus;
+        popup_title = "Google Plus share";
         window.open(link, popup_title, config);
     }else if(button === 'linkedin'){
-        var link = drupalSettings.shareSettings.share_siteUrls.linkedin;
-        var popup_title = "LinkedIn share";
+        link = drupalSettings.shareSettings.share_siteUrls.linkedin;
+        popup_title = "LinkedIn share";
         window.open(link, popup_title, config);
         //shares.user += 1;
     }else if(button === 'pinterest'){
-        var link = share_links.pinterest;
-        var popup_title = "Pinterest share";
+         link = share_links.pinterest;
+         popup_title = "Pinterest share";
         window.open(link, popup_title, config);
         //shares.user += 1;
     }else if(button === 'email'){
@@ -688,6 +691,7 @@ var showFollowBar = function(){
 
 function setCookie(name, value, daysUntilExpires) {
     var d = new Date();
+    var cookie;
     d.setTime(d.getTime() + (daysUntilExpires*24*60*60*1000));
     var expires = "expires="+d.toUTCString();
     var splitedPath = window.location.pathname.split("/");
@@ -697,11 +701,11 @@ function setCookie(name, value, daysUntilExpires) {
         for(var i=0;i<splitedPath.length-1;i++) {
             path += splitedPath[i] + "/";
         }
-        var cookie = name + "|" + splitedPath[splitedPath.length-1] + "=" + value + "; " + expires + "; path=" + path;
+        cookie = name + "|" + splitedPath[splitedPath.length-1] + "=" + value + "; " + expires + "; path=" + path;
         document.cookie = cookie;
 
     } else {
-        var cookie = name + "=" + value + "; " + expires + "; path=" + window.location.pathname;
+        cookie = name + "=" + value + "; " + expires + "; path=" + window.location.pathname;
         document.cookie = cookie;
     }
     setVisitedLinks();
@@ -908,7 +912,7 @@ window.onload = function(){
 			if(document.getElementById('sharebar')){
 				if(sharebar_parameters.auto_load === true){
 					showShareBar();
-				};
+				}
 				//getShares();
 
 				/*if(typeof sharebar_parameters.counter_reload_time !== "undefined"){
@@ -925,7 +929,7 @@ window.onload = function(){
 			if(document.getElementsByClassName('followbar')){
 				if(followbar_parameters.auto_load === true){
 					showFollowBar();
-				};
+				}
 			}
 		}
 	}

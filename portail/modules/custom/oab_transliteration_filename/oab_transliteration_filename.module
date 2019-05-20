@@ -20,7 +20,7 @@ function oab_transliteration_filename_file_presave($entity) {
         $uri = $entity->getFileUri();
         $directory = drupal_dirname($uri);
         $uri = $directory . '/' . $new_filename;
-        if ($new_uri = file_unmanaged_move($entity->getFileUri() , $uri, FILE_EXISTS_RENAME)) {
+        if ($new_uri = file_unmanaged_move($entity->getFileUri(),$uri,FILE_EXISTS_RENAME)) {
             $entity->set('uri', $new_uri);
             $entity->set('filename', drupal_basename($new_uri));
         }

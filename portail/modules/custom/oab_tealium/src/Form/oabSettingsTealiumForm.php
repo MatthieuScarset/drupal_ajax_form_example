@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class oabSettingsTealiumForm extends ConfigFormBase {
+class OabSettingsTealiumForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */

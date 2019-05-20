@@ -23,7 +23,7 @@
         var localnav_offset = 0;
         var topShare = 0;
         if ($('#block-socialshareblock').offset()) {
-            topShare = $('#block-socialshareblock').offset().top;
+             topShare = $('#block-socialshareblock').offset().top;
         }
 
         if(local_nav.length) {

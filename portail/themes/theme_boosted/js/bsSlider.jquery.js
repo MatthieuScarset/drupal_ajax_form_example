@@ -23,10 +23,10 @@
 
         var swipeEnabled = ($.fn.swipe !== undefined);
 
-        if(isLarge){ lastSize = currentSize = 'lg'; }else
-        if(isNormal){ lastSize = currentSize = 'md'; }else
-        if(isSmall){ lastSize = currentSize = 'sm'; }else
-        if(isXSmall){ lastSize = currentSize = 'xs'; }
+        if(isLarge){ lastSize = 'lg'; currentSize = 'lg'; }else
+        if(isNormal){ lastSize = 'md'; currentSize = 'md'; }else
+        if(isSmall){ lastSize = 'sm'; currentSize = 'sm'; }else
+        if(isXSmall){ lastSize = 'xs'; currentSize = 'xs'; }
 
         // options
         var settings = {
@@ -93,7 +93,6 @@
                 slides.each(function(){
 
                     var slide = $(this);
-                    var slideId = slide.index();
 
                     slide.animate({
                         left: (slide.position().left - (thisEl.width() + settings.offset)) + 'px'
@@ -118,7 +117,6 @@
                 slides.each(function(){
 
                     var slide = $(this);
-                    var slideId = slide.index();
 
                     slide.animate({
                         left: (slide.position().left + (thisEl.width() + settings.offset)) + 'px'
