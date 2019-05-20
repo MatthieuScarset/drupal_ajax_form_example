@@ -125,7 +125,7 @@ class OabHubController extends ControllerBase {
         }
 
         $machine_readable = strtolower($term_name);
-        $machine_readable = preg_replace('@[^a-z0-9_]+@', '-',$machine_readable);
+        $machine_readable = preg_replace('@[^a-z0-9_]+@', '-', $machine_readable);
         $machine_readable = str_replace('_', '-', $machine_readable);
         $term->set(self::FIELD_MN_SUFFIXE_ID, $machine_readable);
     }
@@ -146,7 +146,7 @@ class OabHubController extends ControllerBase {
         $machine_name = false;
 
         ##je checke que le term passé en paramètre est bien un term de taxo
-        if (is_a($term,'\Drupal\taxonomy\Entity\Term')) {
+        if (is_a($term, '\Drupal\taxonomy\Entity\Term')) {
             $machine_name_value = $term->get(self::FIELD_MN_SUFFIXE_ID);
             if ($machine_name_value->count() > 0) {
                 $machine_name = $machine_name_value->first()->getString();
@@ -596,11 +596,11 @@ class OabHubController extends ControllerBase {
 
         if (!is_object($new_url) && $add_internal) {
             if (strpos($new_url, '/') == 0) {
-                $new_url = substr($new_url,1);
+                $new_url = substr($new_url, 1);
             }
 
            $new_url = 'internal:/' . $new_url;
-           $new_url =  str_replace("/index.php",'', $new_url);
+           $new_url =  str_replace("/index.php", '', $new_url);
         }
 
         return $new_url;

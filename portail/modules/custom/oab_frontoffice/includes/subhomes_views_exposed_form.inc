@@ -29,7 +29,7 @@ function subhomes_views_exposed_form(&$form) {
                         $form[$key]['#validated'] = TRUE;
                         $form[$key]['#size'] = null;
                     }
-                    else{
+                    else {
                         unset($form[$key]);
                     }
                 }
@@ -227,7 +227,7 @@ function subhomes_views_exposed_form(&$form) {
             unset($form['year']);
         } else {
             // Regions
-            if (!isset($form['region']) || !isset($form['region']['#options'])){
+            if (!isset($form['region']) || !isset($form['region']['#options'])) {
                 $form['region']['#options'] = array();
             }
             $form['region']['#options'] = clean_exposed_filters_by_language(

@@ -2,8 +2,8 @@
 
 /*******************************************************************************************************************/
 /*************** METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA) *************/
-/*******************************************************************************************************************/
 
+/*******************************************************************************************************************/
 
 use Drupal\Core\Database\Database;
 
@@ -22,7 +22,7 @@ function getCountriesForJS() {
     $query->addField('oc', 'name', 'country_name');
     $query->addField('oc', 'langcode', 'country_langcode');
     $query->orderBy('oc.name');
-    $results =	$query->execute()->fetchAll();
+    $results = $query->execute()->fetchAll();
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $table_countries = array();
@@ -124,7 +124,7 @@ function getRegions() {
     $query->addField('t', 'name', 'region_name');
     $query->addField('t', 'langcode', 'region_langcode');
     $query->orderBy('t.name');
-    $results =	$query->execute()->fetchAll();
+    $results = $query->execute()->fetchAll();
 
     $table_regions = array();
     $table_regions['all'] = t('Region');
@@ -134,7 +134,7 @@ function getRegions() {
     foreach ($results as $region) {
         if (!array_key_exists($region->region_tid, $table_regions)
             && !empty($region->region_tid)
-            && $region->region_langcode == $current_language ) {
+            && $region->region_langcode == $current_language) {
             $table_regions[$region->region_tid] = $region->region_name;
         }
     }

@@ -7,15 +7,15 @@ function oab_background_image_media_insert(Drupal\media_entity\Entity\Media $ent
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
-    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
 
     if ($entity->isPublished()) {
         $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
 
         foreach (_oab_background_image_get_urls($field_value) as $url) {
-            $bgCacheService->add($url, $entity);
+            $bg_cache_service->add($url, $entity);
         }
     }
 }
@@ -26,8 +26,8 @@ function oab_background_image_media_update(Drupal\media_entity\Entity\Media $ent
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
-    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
     if ($entity->isPublished()) {
 
@@ -41,7 +41,7 @@ function oab_background_image_media_update(Drupal\media_entity\Entity\Media $ent
                 $urls = explode("\r\n", $value);
 
                 foreach ($urls as $url) {
-                    $bgCacheService->remove($url);
+                    $bg_cache_service->remove($url);
                 }
             }
         }
@@ -51,7 +51,7 @@ function oab_background_image_media_update(Drupal\media_entity\Entity\Media $ent
         $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
 
         foreach (_oab_background_image_get_urls($field_value) as $url) {
-            $bgCacheService->add($url, $entity);
+            $bg_cache_service->add($url, $entity);
         }
 
 
@@ -63,7 +63,7 @@ function oab_background_image_media_update(Drupal\media_entity\Entity\Media $ent
         if ($original->isPublished()) {
             $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
             foreach (_oab_background_image_get_urls($field_value) as $url) {
-                $bgCacheService->remove($url);
+                $bg_cache_service->remove($url);
             }
         }
 
@@ -80,14 +80,14 @@ function oab_background_image_media_delete(Drupal\media_entity\Entity\Media $ent
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bgCacheService */
-    $bgCacheService = \Drupal::service('oab_background_image.bg_image_management');
+    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
     /** @var Drupal\media_entity\Entity\Media $original */
     $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
 
     foreach (_oab_background_image_get_urls($field_value) as $url) {
-        $bgCacheService->remove($url);
+        $bg_cache_service->remove($url);
     }
 }
 

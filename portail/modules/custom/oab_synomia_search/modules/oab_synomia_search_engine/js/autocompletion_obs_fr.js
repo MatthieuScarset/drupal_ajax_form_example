@@ -98,7 +98,7 @@ function __Start() {
 
 function debug_suggest(Val, type) {
 	if ( typeof type == "undefined" ) type=1;
-	if ( typeof DebugSug == "undefined" ) { var Ph = window.location.search.substring(1); var nb = Ph.indexOf("DebugSug="); DebugSug=(nb>=0)?Ph.substring(nb+9, nb+10):0; }
+	if ( typeof DebugSug == "undefined" ) { var ph = window.location.search.substring(1); var nb = ph.indexOf("DebugSug="); DebugSug=(nb>=0)?ph.substring(nb+9, nb+10):0; }
 	if ( DebugSug && type>=DebugSug ) {
 		if ( window.console ) console.log(Val);
 		//else alert(Val);
@@ -114,7 +114,7 @@ var Script_CSS = false;
 var Init_Fields = false;
 
 function chargement(comm) {
-	Ph = "Lancement ( "+comm+" )";
+	ph = "Lancement ( "+comm+" )";
 	GestionDom.debug(comm);	
 	if ( ChargementTimer == null ) {
 		ChargementTimer = chargement_engine();
@@ -124,8 +124,8 @@ function chargement(comm) {
 function chargement_engine() {
 	if ( ChargementTimer != null ) { clearTimeout(ChargementTimer); ChargementTimer = null; };
 	Cpt_Chargement++;
-	Ph = "Mode auto => Essai "+Cpt_Chargement;
-	debug_suggest(Ph);
+	ph = "Mode auto => Essai "+Cpt_Chargement;
+	debug_suggest(ph);
 		
 	var ChargementNecessaire = ! ( Script_Data && Script_Lib && Script_CSS );
 
@@ -203,7 +203,7 @@ function chargement_immediat() {
 
 function chargement_onfocus() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for (let i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if (inp.addEventListener) {
 			inp.addEventListener("focus", function() { window.LaunchSuggest = this; chargement("Chargement sur focus"); }, false);
@@ -232,7 +232,7 @@ function chargement_delai(Val) {
 
 function chargement_onkeypress() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for (let i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if ( inp ) {
 			if (inp.addEventListener) {
@@ -425,12 +425,12 @@ if ( loadACNow ) { GestionDom.DomReadySuggests( function() {
 // exemple qui prend tous les input dont le name vaut "q" ou "mot"
 // les associe pour l'utilisation des Suggest, et leur retire le focus 
 var Elt=document.getElementsByTagName("input");
-for (j=0; j< Elt.length; j++) {
+for (let j=0; j< Elt.length; j++) {
 	if ( Elt[j].name == "q" || Elt[j].name == "mot" ) {
 		SynSuggest.AddInput(Elt[j]);
 		Elt[j].blur();
 	}
-};
+}
 SynSuggest.setChargementSurFocus(true);
 SynSuggest.Start();
 }, "params" ); }

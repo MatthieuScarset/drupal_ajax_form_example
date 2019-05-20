@@ -2,7 +2,7 @@
 
 function oab_will_install() {
     drupal_set_installed_schema_version('oab_will', 8000);
-    module_set_weight("oab_will",30);
+    module_set_weight("oab_will", 30);
 }
 
 

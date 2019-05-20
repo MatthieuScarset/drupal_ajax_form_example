@@ -21,3 +21,10 @@ function oab_riad_update_8001() {
   include_once("updates/update_8001.inc");
 }
 
+
+/**
+ * RUBYPORTAILOBS-3513 rajout daste par defaut au champs de publication
+ */
+function oab_riad_update_8002() {
+    include_once("updates/update_8002.inc");
+}

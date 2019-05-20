@@ -314,9 +314,4 @@ class OabExtension extends \Twig_Extension {
     $content = str_replace("</link>", "</a>", $content);
     return $content;
   }
-
-  public function specialCharacters($string) {
-      $cleanString = str_replace('\\', '', $string);
-      return htmlentities($cleanString);
-  }
 }

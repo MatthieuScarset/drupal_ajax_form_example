@@ -89,8 +89,7 @@ class BlogPostComment extends SqlBase {
   /**
    * {@inheritdoc}
    */
-  public function prepareRow(Row $row)
-  {
+  public function prepareRow(Row $row) {
     //comment parent
     $comment_parent_query = Database::getConnection()->select('migrate_map_blogpost_comment', 'c');
     $comment_parent_query->fields('c', ['sourceid1', 'destid1'])

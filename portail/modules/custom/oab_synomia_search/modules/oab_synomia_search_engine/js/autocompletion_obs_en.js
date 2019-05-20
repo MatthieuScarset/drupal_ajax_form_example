@@ -97,6 +97,9 @@ function __Start() {
 }
 
 function debug_suggest(Val, type) {
+
+	var DebugSug;
+
 	if ( typeof type == "undefined" ) type=1;
 	if ( typeof DebugSug == "undefined" ) { var Ph = window.location.search.substring(1); var nb = Ph.indexOf("DebugSug="); DebugSug=(nb>=0)?Ph.substring(nb+9, nb+10):0; }
 	if ( DebugSug && type>=DebugSug ) {
@@ -232,7 +235,7 @@ function chargement_delai(Val) {
 
 function chargement_onkeypress() {
 	var inp;
-	for ( i=0; i < TabSuggestElt.length; i++ ) {
+	for (let i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if ( inp ) {
 			if (inp.addEventListener) {
@@ -262,7 +265,7 @@ function chargement_onkeypress() {
 function querySt(ji) {
 hu = window.location.search.substring(1);
 gy = hu.split("&");
-for (i=0;i<gy.length;i++) {
+for (let i=0;i<gy.length;i++) {
 ft = gy[i].split("=");
 if (ft[0] == ji) {
 return ft[1];

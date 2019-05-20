@@ -14,13 +14,11 @@ class HubExtension extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
-    {
+    public function getName() {
         return "OAB/Hub Twig extension";
     }
 
-    public function getFunctions()
-    {
+    public function getFunctions() {
         return [
             new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
             new \Twig_SimpleFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
@@ -28,8 +26,7 @@ class HubExtension extends \Twig_Extension
         ];
     }
 
-    public function getFilters()
-    {
+    public function getFilters() {
         $filters = [
             new \Twig_SimpleFilter('hub_getMenu', [$this, 'getMenu']),
         ];

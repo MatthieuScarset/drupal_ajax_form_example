@@ -10,15 +10,14 @@ namespace Drupal\oab_synomia_search_engine\Classes;
 use Drupal\node\Entity\NodeType;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 
-class SynomiaSearchResponse
-{
+class SynomiaSearchResponse {
 
     public $facets = array();
     public $degradations = array();
     public $corrections = array();
     public $nbResultsTotal = 0;
     public $results = array();
-    public $current_page = 0;
+    public $currentPage = 0;
     PUBLIC $pager = null;
     public $searchMode = '';
 
@@ -26,49 +25,49 @@ class SynomiaSearchResponse
 
     }
 
-    public function readXML($fluxXML, $rubrique) {
-        if (!empty($fluxXML)) {
+    public function readXML($flux_xml, $rubrique) {
+        if (!empty($flux_xml)) {
             $dom = new \DOMDocument();
-            $dom->loadXML($fluxXML);
+            $dom->loadXML($flux_xml);
 
             //transfo du flux XML en objet lisible
-            $xmlResult = new \SimpleXMLElement($fluxXML);
+            $xml_result = new \SimpleXMLElement($flux_xml);
 
             //récupération de la categorisation des resultats = facets
             $this->getFacetsFromXml($dom);
 
             //corrections éventuelles
-            if (isset($xmlResult->corrections) && isset($xmlResult->corrections->correction)) {
-                $this->corrections = $xmlResult->corrections->correction;
+            if (isset($xml_result->corrections) && isset($xml_result->corrections->correction)) {
+                $this->corrections = $xml_result->corrections->correction;
             }
 
             //degradations de requete, uniquement si pas de résultats
-            if (isset($xmlResult->degradations) && $xmlResult->estimatedTotalResultsCount == 0) {
+            if (isset($xml_result->degradations) && $xml_result->estimatedTotalResultsCount == 0) {
                 $this->getDegradationsFromXML($dom);
             }
 
             //nb de resultats total
-            $this->nbResultsTotal = $xmlResult->estimatedTotalResultsCount;
+            $this->nbResultsTotal = $xml_result->estimatedTotalResultsCount;
 
             //resultats
-            if (isset($xmlResult->cluster) || empty($rubrique)) {
+            if (isset($xml_result->cluster) || empty($rubrique)) {
                 $this->searchMode = "global";
                 $this->getResultsClustersArray($dom);
             } else {
                 //filtré sur une rubrique particuliere
                 $this->searchMode = "rubrique";
-                $this->getResultsSimpleArray($xmlResult, $rubrique);
+                $this->getResultsSimpleArray($xml_result, $rubrique);
 
                 //Pager
                 $config_factory = \Drupal::configFactory();
                 $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
                 if (!empty($config) && !empty($config->get('nb_results_per_page'))) {
-                    $nbResultsPerPage = $config->get('nb_results_per_page');
+                    $nb_results_per_page = $config->get('nb_results_per_page');
                 } else {
-                    $nbResultsPerPage = 10; // 10 par défaut si aucune configuration
+                    $nb_results_per_page = 10; // 10 par défaut si aucune configuration
                 }
 
-                $this->current_page = pager_default_initialize($xmlResult->estimatedTotalResultsCount, $nbResultsPerPage);
+                $this->current_page = pager_default_initialize($xml_result->estimatedTotalResultsCount, $nb_results_per_page);
                 //$this->pager = theme('pager');
             }
         }
@@ -79,23 +78,23 @@ class SynomiaSearchResponse
      * @param unknown $dom
      * @return Ambigous <multitype:multitype: , multitype:NULL >
      */
-    private function getResultsSimpleArray($xmlResult, $type) {
-        $clusterArray = array();
-        if ( $type != "#SYNAUTRE#") {
-            $clusterArray['typeId'] = $type;
-            $clusterArray['typeName'] = $this->getTypeLabel($type);
-            $clusterArray['nbResults'] = $this->nbResultsTotal;
-            $clusterArray['results'] = array();
-            if (isset($xmlResult->resultElements) && isset($xmlResult->resultElements->item)) {
-                foreach ($xmlResult->resultElements->item as $item) {
-                    $myItem = array();
-                    $myItem['title'] = $item->extitle;
-                    $myItem['URL'] = $item->URL;
-                    $myItem['description'] = $item->description;
-                    $clusterArray['results'][] = $myItem;
+    private function getResultsSimpleArray($xml_result, $type) {
+        $cluster_array = array();
+        if ($type != "#SYNAUTRE#") {
+            $cluster_array['typeId'] = $type;
+            $cluster_array['typeName'] = $this->getTypeLabel($type);
+            $cluster_array['nbResults'] = $this->nbResultsTotal;
+            $cluster_array['results'] = array();
+            if (isset($xml_result->resultElements) && isset($xml_result->resultElements->item)) {
+                foreach ($xml_result->resultElements->item as $item) {
+                    $my_item = array();
+                    $my_item['title'] = $item->extitle;
+                    $my_item['URL'] = $item->URL;
+                    $my_item['description'] = $item->description;
+                    $cluster_array['results'][] = $my_item;
                 }
             }
-            $this->results[$type] = $clusterArray;
+            $this->results[$type] = $cluster_array;
         }
     }
 
@@ -107,40 +106,40 @@ class SynomiaSearchResponse
     public function getResultsClustersArray($dom) {
         $cluster = $dom->getElementsByTagName("cluster");
         if (isset($cluster)) {
-            $clusterArray = array();
+            $cluster_array = array();
             $cluster = $cluster->item(0);
             if (isset($cluster)) {
                 $aspects = $cluster->getElementsByTagName("aspect");
                 foreach ($aspects as $aspect) {
                     $type = $aspect->getAttribute('value');
-                    if ( $type != "#SYNAUTRE#") {
-                        $clusterArray['typeId'] = $type;
-                        $clusterArray['typeName'] = $this->getTypeLabel($type);
-                        $clusterArray['nbResults'] = $aspect->getAttribute('nb_res');
+                    if ($type != "#SYNAUTRE#") {
+                        $cluster_array['typeId'] = $type;
+                        $cluster_array['typeName'] = $this->getTypeLabel($type);
+                        $cluster_array['nbResults'] = $aspect->getAttribute('nb_res');
 
                         $items = $aspect->getElementsByTagName("item");
-                        $clusterArray['results'] = array();
+                        $cluster_array['results'] = array();
                         foreach ($items as $item) {
-                            $myItem = array();
+                            $my_item = array();
                             if ($item->getElementsByTagName("extitle")->length > 0) {
-                                $myItem['title'] = $item->getElementsByTagName("extitle")
+                                $my_item['title'] = $item->getElementsByTagName("extitle")
                                     ->item(0)->nodeValue;
                             }
                             if ($item->getElementsByTagName("URL")->length > 0) {
-                                $myItem['URL'] = $item->getElementsByTagName("URL")
+                                $my_item['URL'] = $item->getElementsByTagName("URL")
                                     ->item(0)->nodeValue;
                             }
                             if ($item->getElementsByTagName("description")->length > 0) {
-                                $myItem['description'] = $item->getElementsByTagName("description")
+                                $my_item['description'] = $item->getElementsByTagName("description")
                                     ->item(0)->nodeValue;
                             }
                             if ($item->getElementsByTagName("rubrique")->length > 0) {
-                                $myItem['rubrique'] = $item->getElementsByTagName("rubrique")
+                                $my_item['rubrique'] = $item->getElementsByTagName("rubrique")
                                     ->item(0)->nodeValue;
                             }
-                            $clusterArray['results'][] = $myItem;
+                            $cluster_array['results'][] = $my_item;
                         }
-                        $this->results[$type] = $clusterArray;
+                        $this->results[$type] = $cluster_array;
                     }
                 }
             }
@@ -154,14 +153,14 @@ class SynomiaSearchResponse
      */
     private function getFacetsFromXml($dom) {
         //oabt($dom, true);
-        $facetsTag = $dom->getElementsByTagName("facets");
-        if (isset($facetsTag)) {
-            $facetsTag = $facetsTag->item(0);
-            if (isset($facetsTag)) {
-                $facets = $facetsTag->getElementsByTagName("aspect");
+        $facets_tag = $dom->getElementsByTagName("facets");
+        if (isset($facets_tag)) {
+            $facets_tag = $facets_tag->item(0);
+            if (isset($facets_tag)) {
+                $facets = $facets_tag->getElementsByTagName("aspect");
                 foreach ($facets as $facet) {
-                    if ( $facet->firstChild->nodeValue != "#SYNAUTRE#") {
-                        $this->facets[str_replace(' ','_',$facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ','_',$facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
+                    if ($facet->firstChild->nodeValue != "#SYNAUTRE#") {
+                        $this->facets[str_replace(' ', '_', $facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ', '_', $facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
                     }
                 }
             }
@@ -174,11 +173,11 @@ class SynomiaSearchResponse
      * @param unknown $flux
      */
     private function getDegradationsFromXML($dom) {
-        $degradationsTag = $dom->getElementsByTagName("degradations");
-        if (isset($degradationsTag)) {
-            $degradationsTag = $degradationsTag->item(0);
-            if (isset($degradationsTag)) {
-                $degradations = $degradationsTag->getElementsByTagName("degradation");
+        $degradations_tag = $dom->getElementsByTagName("degradations");
+        if (isset($degradations_tag)) {
+            $degradations_tag = $degradations_tag->item(0);
+            if (isset($degradations_tag)) {
+                $degradations = $degradations_tag->getElementsByTagName("degradation");
                 foreach ($degradations as $degradation) {
                     $this->degradations[$degradation->getAttribute('combi')] = $degradation->nodeValue;
                 }
@@ -190,22 +189,22 @@ class SynomiaSearchResponse
      * @param $type_id
      */
     private function getTypeLabel($type_id) {
-        $typeName = "";
+        $type_name = "";
         switch ($type_id) {
             case 'full_html':
-                $typeName = 'Content';
+                $type_name = 'Content';
                 break;
             case 'simple_page':
-                $typeName = 'Article';
+                $type_name = 'Article';
                 break;
             default:
-                $typeObject = NodeType::load($type_id);
-                if (isset($typeObject) && !empty($typeObject)) {
-                    $typeName = $typeObject->label();
+                $type_object = NodeType::load($type_id);
+                if (isset($type_object) && !empty($type_object)) {
+                    $type_name = $type_object->label();
                 }
 
         }
-        return $typeName;
+        return $type_name;
     }
 }
 

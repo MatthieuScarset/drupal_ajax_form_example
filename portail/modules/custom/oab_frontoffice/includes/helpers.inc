@@ -20,7 +20,7 @@ function clean_exposed_filters_by_language($options = array(), $txt_all) {
             if (isset($term) && $term != null) {
                 $lang = $term->language();
                 if ($lang->getId() != $current_language) {
-                    unset( $options[ $key ] );
+                    unset($options[ $key ]);
                 }
             }
         } else {

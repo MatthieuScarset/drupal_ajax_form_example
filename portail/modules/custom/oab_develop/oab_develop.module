@@ -5,7 +5,7 @@ use Drupal\locale\SourceString;
 
 define ('LOG_DIR', 'public://log/');
 
-class OAB_Trace{
+class OabTrace {
 
   public static function debug($elem, $message="") {
     echo '<pre>';
@@ -27,9 +27,9 @@ class OAB_Trace{
  */
 function oabt($elem, $lock=false, $message="") {
   if ($lock) {
-    OAB_Trace::lock($elem);
+    OabTrace::lock($elem);
   } else {
-    OAB_Trace::debug($elem,$message);
+    OabTrace::debug($elem, $message);
   }
 }
 

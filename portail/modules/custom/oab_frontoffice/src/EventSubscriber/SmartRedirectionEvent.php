@@ -30,8 +30,7 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
    *
    * Publish the Event.
    */
-  public static function getSubscribedEvents()
-  {
+  public static function getSubscribedEvents() {
     ##Lorsqu'il y a une exception levée par Drupal, on appel la fonction checkRedirection
     $events[KernelEvents::EXCEPTION][] = ['checkRedirection'];
 
