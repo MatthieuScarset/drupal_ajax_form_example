@@ -9,4 +9,6 @@ permissions:
   - 'access administration pages'
   - 'access toolbar'
   - 'access webform overview'
+  - 'delete own webform submission'
+  - 'view own webform submission'
   - 'view the administration theme'
