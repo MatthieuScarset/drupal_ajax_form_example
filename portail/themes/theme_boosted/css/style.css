@@ -2820,8 +2820,8 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 .view-business-insight .view-content .views-row .tile .field--name-field-insight .field--item{
-    color: #FFFFFF;
-    background-color: #000000;
+    color: #f16e00;
+    font-weight: bold;
     display: inline-block;
     padding:5px;
 }
