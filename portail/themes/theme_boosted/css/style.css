@@ -2596,10 +2596,6 @@ body.page-node-type-custom-page{
 }
 
 
-#block-twitterblock #twitter-block-carousel .twitter-tweet{
-    margin-top: 0 !important;
-}
-
 #twitter-block-carousel .carousel-indicators li {
     width: 1.4rem;
     height: 1.4rem;
@@ -2611,10 +2607,11 @@ body.page-node-type-custom-page{
     background-color: #2b7bb9;
 }
 
+#block-twitterblock #twitter-block-carousel .twitter-tweet{
+    margin-top: 0 !important;
+}
 
 .path-business-insight .main-container{
-    width:100%;
-    max-width:100%;
     padding: 0;
 }
 
@@ -2634,7 +2631,6 @@ body.page-node-type-custom-page{
 .col-xs .view-business-insight .view-content .views-row,
 .col-xxs .view-business-insight .view-content .views-row{
     width: 100%;
-    width: 315px;
     padding:10px;
 }
 
@@ -2739,6 +2735,10 @@ div.business-insight-field-insight {
     margin: 3rem 0;
 }
 
+.btn-field-insight-type label.control-label {
+    margin-bottom: 0;
+}
+
 .business-insight-field-insight select.form-control::-ms-expand {
     display: none;
 }
@@ -2748,7 +2748,6 @@ div.business-insight-field-insight {
     color: #fff;
     height: auto;
     border: none;
-    border-bottom: 2px solid grey;
     background-color: transparent;
     padding: 0;
     padding-right: 60px;
@@ -2758,217 +2757,10 @@ div.business-insight-field-insight {
 
 }
 
-.business-insight-field-insight select.form-control:focus {
-
-}
-
-form#views-exposed-form-business-insight-business-insight-page input[type="submit"]{
-    display: none;
-}
-
-.view-business-insight .view-content .views-row .tile{
-    border: #e0e0e0 1px solid;
-    display:inline-block;
-    background-color: #FFFFFF;
-    width:100%;
-    font-weight: bold;
-    padding:10px 0;
-}
-
-.view-business-insight .view-content .views-row .tile_Report{
-    background-color: #CCCCCC;
-}
-
-.view-business-insight .view-content .views-row .tile_Blogs{
-    padding:0 0 10px 0;
-}
-
-.view-business-insight .view-content .views-row .tile .field_insight,
-.view-business-insight .view-content .views-row .tile .field_insight_type{
-    display: inline-block;
-}
-
-.view-business-insight .view-content .views-row .tile .encart-image img{
-    width: 100%;
-    height: auto;
-    padding-bottom: 2rem;
-}
-
-.view-business-insight .view-content .views-row .tile .title_node{
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    padding: 1rem;
-}
-
-.view-business-insight .view-content .views-row .tile .profile{
-    margin: 2rem 0 1rem;
-}
-
-.view-business-insight .view-content .views-row .tile .profile img{
-    background-color: #000000;
-    border-radius: 100%;
-    width:50px;
-}
-
-.view-business-insight .view-content .views-row .tile .field--name-field-insight .field--item{
-    color: #FFFFFF;
-    background-color: #000000;
-    display: inline-block;
-    padding:5px;
-}
-
-.view-business-insight .view-content .views-row .tile .report_link{
-    margin-left: 2rem;
-}
-
-.page-business-insight .subhomes-filterbar-background {
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.page-business-insight section.left-column > .region {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-@media(max-width: 480px) {
-    .page-business-insight section.left-column > .region {
-        padding-left: 10px;
-    }
-}
-
-@media(max-width: 767px) and (min-width: 481px) {
-    .page-business-insight section.left-column > .region {
-        padding-left: 20px;
-    }
-}
-
-
-#twitter-block-carousel .carousel-indicators li {
-    width: 1.4rem;
-    height: 1.4rem;
-    border-radius: 100%;
-}
-
-#twitter-block-carousel .carousel-indicators li.active,
-#twitter-block-carousel .carousel-indicators li:hover {
-    background-color: #2b7bb9;
-}
-
-
-.path-business-insight .main-container{
-    padding: 0;
-}
-
-.view-business-insight .form-group{
-    margin-bottom: 0;
-}
-
-.view-business-insight .view-content{
-    margin: 0;
-    background-color: #ededed;
-}
-
-.view-business-insight .view-content .views-row{
-    padding:10px;
-}
-
-.col-xs .view-business-insight .view-content .views-row,
-.col-xxs .view-business-insight .view-content .views-row{
-    width: 100%;
-    padding:10px;
-}
-
-.view-business-insight .view-content .views-row .encart-image{
-    text-align: center;
-}
-
-.view-business-insight .view-content .views-row img{
-    max-width: 100%;
-    max-height: 316px;
-}
-
-.view-business-insight .view-content .tile.tile_Blogs .tags {
-   padding-top: 10px;
-}
-
-.fieldset-field-insight-type .fieldset-legend {
-    display: inline-block;
-    font-weight: bold;
-    font-size: 2rem;
-}
-
-.fieldset-field-insight-type .fieldset-wrapper {
-    display: inline-block;
-}
-
-.fieldset-field-insight-type .btn {
-    margin-right: 0;
-    margin-left: 1.5rem;
-}
-
-.fieldset-field-insight-type .btn label{
-    font-weight: bold;
-}
-
-.fieldset-field-insight-type .btn,
-.fieldset-field-insight-type .btn.btn-primary {
-    padding: .3rem 1.8rem .5rem 1.8rem
-}
-
-.fieldset-field-insight-type .btn.btn-primary {
-    border-color: #f16e00;
-}
-
-@media (max-width: 1024px) {
-
-    .fieldset-field-insight-type .fieldset-legend,
-    .fieldset-field-insight-type .fieldset-wrapper {
-        display: block;
-    }
-    .fieldset-field-insight-type .fieldset-wrapper .form-element {
-        display: inline-block;
-    }
-
-    div.btn.btn-field-insight-type {
-        margin-bottom: 1.5rem;
-    }
-}
-
-.business-insight-field-insight label,
-.business-insight-field-insight select {
-    font-size: 4rem;
-    font-weight: normal;
-}
-
-div.business-insight-field-insight {
-    margin-bottom: 3rem;
-}
-
-.business-insight-field-insight div {
-    padding-left: 0;
-    margin-left: 0;
-}
-
-.business-insight-field-insight select option {
-    color: initial;
-    font-size: initial;
-    margin: 0;
-    height: 4.6rem;
-}
-
-.business-insight-field-insight label {
-    margin-right: 1rem;
-}
-
-.business-insight-field-insight select.form-control::-ms-expand {
-    display: none;
-}
-
 .business-insight-field-insight select.form-control {
     vertical-align: top;
     color: #f16e00;
+    color: #000;
     height: auto;
     border: none;
     background-color: transparent;
@@ -2977,19 +2769,20 @@ div.business-insight-field-insight {
     margin-top: 5px;
     -moz-appearance:none;
     -webkit-appearance: none;
+    font-size: 1.6rem;
 
     /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
     background-image:
-            linear-gradient(45deg, transparent 50%, #f16e00 50%),
-            linear-gradient(135deg, #f16e00 50%, transparent 50%),
+            linear-gradient(45deg, transparent 50%, #000 50%),
+            linear-gradient(135deg, #000 50%, transparent 50%),
             linear-gradient(to right, transparent, transparent);
     background-position:
-            calc(100% - 30px) .55em,
-            calc(100% - 10px) .55em,
+            calc(100% - 15px) .15em,
+            calc(100% - 5px) .15em,
             calc(100% - .5em) 0.5em;
     background-size:
-            20px 20px,
-            20px 20px,
+            10px 10px,
+            10px 10px,
             1px 1.5em;
     background-repeat: no-repeat;
 
@@ -3003,13 +2796,14 @@ div.business-insight-field-insight {
     background-position:
             calc(100% - 15px) .15em,
             calc(100% - 5px) .15em,
-            calc(100% - .5em) 0.5em;
+            calc(100% - .5em) 0;
     background-size:
-            20px 20px,
-            20px 20px,
+            10px 10px,
+            10px 10px,
             1px 1.5em;
     background-repeat: no-repeat;
     outline: 0;
+
 }
 
 form#views-exposed-form-business-insight-business-insight-page input[type="submit"]{
@@ -3096,7 +2890,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     }
 }
 
-
 .mega-menu .nav-item.dropdown .dropdown-menu ul {
     margin-left: 10px !important;
 }
+

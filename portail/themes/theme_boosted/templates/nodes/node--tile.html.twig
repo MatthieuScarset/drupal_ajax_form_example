@@ -79,7 +79,7 @@
 
     <a href="{{ url }}" class="">
         <div class="encart encart-image">
-            {% for key, image in content.field_visual  %}
+            {% for key, image in content.field_visual_tile  %}
                 {% set media = image.entity %}
                 {% set file = media.field_image.entity %}
                 {% set uri = file.uri.value %}

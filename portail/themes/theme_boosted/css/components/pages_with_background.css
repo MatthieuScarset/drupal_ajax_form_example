@@ -45,46 +45,6 @@
         padding: 0;
     }
 
-.oab_background_image .subnav .container-fluid-navbar {
-    /* Je rajoute les borders */
-    border-top: 2px solid grey;
-    border-bottom: 2px solid grey;
-
-    /* Je réapplique les padding supprimés precedement */
-    padding: 25px 0 20px 0;
-}
-
-.oab_background_image .menu.navbar-nav .nav-item.dropdown span.caret {
-    display: none;
-}
-
-.oab_background_image .menu.navbar-nav .nav-item.dropdown.open > a {
-    border: none;
-}
-
-.oab_background_image .fieldset-field-insight-type .btn,
-.oab_background_image .fieldset-field-insight-type .btn.btn-primary {
-    background-color: transparent;
-    border: none;
-}
-
-    .oab_background_image .subhomes-filterbar-background {
-        background-color: transparent;
-    }
-
-    .oab_background_image .fieldset-field-insight-type .fieldset-legend {
-        display: none;
-    }
-
-
-    .oab_background_image .view-business-insight .btn-primary {
-        color: #f16e00;
-    }
-    /* Petit test */
-    .path-business-insight.oab_background_image .mega-menu.navbar {
-        background: none;
-    }
-
     /* Je met un backgroudn semi-transparent sur la navbar quand elle passe en sticky */
     .oab_background_image .subnav.navbar-fixed {
         background-color: rgba(0, 0, 0, 0.8);
@@ -106,74 +66,70 @@
         border-color: transparent;
     }
 
-.oab_background_image .fieldset-field-insight-type .btn label {
-    font-weight: normal;
-    color: #fff;
-}
+    .oab_background_image .fieldset-field-insight-type .btn,
+    .oab_background_image .fieldset-field-insight-type .btn.btn-primary {
+        background-color: transparent;
+        border: none;
+    }
+
+    .oab_background_image .subhomes-filterbar-background {
+        background-color: transparent;
+    }
+
+    .oab_background_image .fieldset-field-insight-type .fieldset-legend {
+        display: none;
+    }
 
 
-.oab_background_image .view-business-insight .btn-primary label {
-    color: #f16e00;
-    font-weight: bold;
-}
+    .oab_background_image .fieldset-field-insight-type .btn label {
+        font-weight: normal;
+        color: #fff;
+    }
 
-.oab_background_image .view-business-insight .btn-info:hover {
-    color: #fff;
-}
 
-.oab_background_image .view-business-insight h1 {
-    color: #fff;
-    font-weight: normal;
-    font-size: 2.5rem;
-    margin: 3rem 0;
-}
+    .oab_background_image .view-business-insight .btn-primary label {
+        color: #f16e00;
+        font-weight: bold;
+    }
 
-.oab_background_image .business-insight-field-insight select.form-control {
-    vertical-align: top;
-    color: #f16e00;
-    color: #fff;
-    height: auto;
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    padding-right: 60px;
-    margin-top: 5px;
-    -moz-appearance:none;
-    -webkit-appearance: none;
-    font-size: 1.6rem;
+    .oab_background_image .view-business-insight .btn-info:hover {
+        color: #fff;
+    }
 
-    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
-    background-image:
-            linear-gradient(45deg, transparent 50%, #fff 50%),
-            linear-gradient(135deg, #fff 50%, transparent 50%),
-            linear-gradient(to right, transparent, transparent);
-    background-position:
-            calc(100% - 15px) .15em,
-            calc(100% - 5px) .15em,
-            calc(100% - .5em) 0.5em;
-    background-size:
-            10px 10px,
-            10px 10px,
-            1px 1.5em;
-    background-repeat: no-repeat;
+    .oab_background_image .view-business-insight h1 {
+        color: #fff;
+        font-weight: normal;
+        font-size: 2.5rem;
+        margin: 3rem 0;
+    }
 
-}
+    .oab_background_image .business-insight-field-insight select.form-control {
+        vertical-align: top;
+        color: #f16e00;
+        color: #fff;
+        height: auto;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        padding-right: 60px;
+        margin-top: 5px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        font-size: 1.6rem;
 
-.oab_background_image .business-insight-field-insight select.form-control:focus {
-    background-image:
-            linear-gradient(45deg, transparent 50%, #fff 50%),
-            linear-gradient(135deg, #fff 50%, transparent 50%),
-            linear-gradient(to right, transparent, transparent);
-    background-position:
-            calc(100% - 15px) .15em,
-            calc(100% - 5px) .15em,
-            calc(100% - .5em) 0;
-    background-size:
-            10px 10px,
-            10px 10px,
-            1px 1.5em;
-    background-repeat: no-repeat;
-    outline: 0;
+        /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
+        background-image: linear-gradient(45deg, transparent 50%, #fff 50%),
+        linear-gradient(135deg, #fff 50%, transparent 50%),
+        linear-gradient(to right, transparent, transparent);
+        background-position: calc(100% - 15px) .15em,
+        calc(100% - 5px) .15em,
+        calc(100% - .5em) 0.5em;
+        background-size: 10px 10px,
+        10px 10px,
+        1px 1.5em;
+        background-repeat: no-repeat;
+
+    }
 
 }
 
