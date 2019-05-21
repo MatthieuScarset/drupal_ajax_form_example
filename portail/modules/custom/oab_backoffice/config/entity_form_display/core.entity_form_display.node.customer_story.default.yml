@@ -30,6 +30,7 @@ dependencies:
     - field.field.node.customer_story.field_start_date
     - field.field.node.customer_story.field_subhome
     - field.field.node.customer_story.field_visual
+    - field.field.node.customer_story.field_visual_tile
     - field.field.node.customer_story.moderation_state_update
     - node.type.customer_story
   module:
@@ -68,6 +69,7 @@ third_party_settings:
         - field_content
         - field_file
         - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 20
       format_type: tab
@@ -173,7 +175,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
-    weight: 8
+    weight: 6
     settings:
       rows: 5
       placeholder: ''
@@ -218,7 +220,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 9
+    weight: 7
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -232,7 +234,7 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_highlight:
-    weight: 6
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
@@ -363,7 +365,7 @@ content:
     region: content
   field_visual:
     type: entity_browser_entity_reference
-    weight: 10
+    weight: 8
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -374,6 +376,20 @@ content:
         view_mode: default
       open: false
     third_party_settings: {  }
+    region: content
+  field_visual_tile:
+    weight: 9
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   field_wysiwyg_rebond:
     weight: 3

@@ -92,6 +92,7 @@ article .product ul.nav-tabs li:before{
     padding-bottom: 0.3rem;
     margin-bottom: 2rem;
 }
+
 .display-subhomes .encart{
     background: white;
     padding: 2rem;
@@ -144,8 +145,10 @@ article .product ul.nav-tabs li:before{
 }
 
 .view-subhomes .display-subhomes-press{
+    background-color: #fff;
     min-height: 0;
     padding-bottom: 0;
+    margin-top: 2rem;
 }
 
 .view-subhomes .display-subhomes-press .txt,
@@ -185,6 +188,9 @@ article .product ul.nav-tabs li:before{
     max-width:160px;
 }
 
+.row .subhome-view-press {
+    margin-left: 30px;
+}
 
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -332,8 +338,12 @@ article .product ul.nav-tabs li:before{
 }
 
 .link-subhomes:hover > .display-subhomes{
-    background-color: #F16e00;
-    color: #fff;
+     background-color: #F16e00;
+     color: #fff;
+ }
+
+.link-subhomes:hover > .display-subhomes-press{
+    background-color: #fff;
 }
 .link-subhomes:hover > .display-subhomes > .encart{
     background-color: #F16e00;
@@ -2281,8 +2291,8 @@ body.page-node-type-custom-page{
 }
 
 .view-subhomes .field--name-field-carrousel {
-    margin-left: -2.857em;
-    margin-right: -2.857em; /* Pour contrebalencer les margin/paddings des row */
+    margin-left: -1.4em;
+    margin-right: -1.4em; /* Pour contrebalencer les margin/paddings des row */
 }
 
 
@@ -2302,7 +2312,7 @@ body.page-node-type-custom-page{
 }
 
 .subhome-entity-bottom-blocks {
-    margin: 2.143em 0;
+    margin: 2.143em;
 }
 
 .subhome-entity-bottom-blocks div {
@@ -2490,6 +2500,7 @@ body.page-node-type-custom-page{
 
 #carousel-press-kit  {
     font-size: 1.6rem;
+    margin-left: 30px;
 }
 
 #carousel-press-kit .carousel-control .glyphicon {
@@ -2615,6 +2626,7 @@ body.page-node-type-custom-page{
     padding: 0;
 }
 
+
 .view-business-insight .form-group{
     margin-bottom: 0;
 }
@@ -2644,7 +2656,7 @@ body.page-node-type-custom-page{
 }
 
 .view-business-insight .view-content .tile.tile_Blogs .tags {
-   padding-top: 10px;
+    padding-top: 10px;
 }
 
 .fieldset-field-insight-type .fieldset-legend {
@@ -2663,8 +2675,9 @@ body.page-node-type-custom-page{
     margin-left: 1.5rem;
 }
 
-.fieldset-field-insight-type .btn label{
+.fieldset-field-insight-type .btn label.control-label {
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .fieldset-field-insight-type .btn,
@@ -2709,12 +2722,8 @@ body.page-node-type-custom-page{
 }
 
 div.business-insight-field-insight {
-    margin-bottom: 3rem;
-}
-
-.business-insight-field-insight div {
-    padding-left: 0;
-    margin-left: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .business-insight-field-insight select option {
@@ -2766,7 +2775,7 @@ div.business-insight-field-insight {
     background-color: transparent;
     padding: 0;
     padding-right: 60px;
-    margin-top: 5px;
+    margin-top: 0;
     -moz-appearance:none;
     -webkit-appearance: none;
     font-size: 1.6rem;
@@ -2894,3 +2903,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-left: 10px !important;
 }
 
+.oab_background_image .view-business-insight .view-filters {
+    background-color: #ededed;
+    padding-bottom: 2rem;
+}

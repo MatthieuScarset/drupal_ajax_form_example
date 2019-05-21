@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.simple_page.field_analysts
     - field.field.node.simple_page.field_blog_format
     - field.field.node.simple_page.field_blog_thematic
     - field.field.node.simple_page.field_content
@@ -30,8 +31,8 @@ dependencies:
     - field.field.node.simple_page.field_solution
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
-    - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
+    - field.field.node.simple_page.field_visual_tile
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
   module:
@@ -70,6 +71,7 @@ third_party_settings:
         - field_highlight
         - field_content
         - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 3
       format_type: tab
@@ -88,6 +90,7 @@ third_party_settings:
         - field_blog_thematic
         - field_solution
         - field_region
+        - field_analysts
         - field_job_profile
         - field_insight
         - field_insight_type
@@ -176,6 +179,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_analysts:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_blog_format:
     weight: 28
     settings: {  }
@@ -242,13 +251,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 35
+    weight: 36
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 36
+    weight: 37
     settings:
       display_label: true
     third_party_settings: {  }
@@ -261,19 +270,19 @@ content:
     type: options_select
     region: content
   field_insight:
-    weight: 33
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_insight_type:
     type: options_select
-    weight: 34
+    weight: 35
     region: content
     settings: {  }
     third_party_settings: {  }
   field_job_profile:
-    weight: 32
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -373,6 +382,20 @@ content:
       selection_mode: selection_append
       open: false
       field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 8
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content

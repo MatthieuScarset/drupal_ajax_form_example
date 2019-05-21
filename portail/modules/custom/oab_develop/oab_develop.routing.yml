@@ -1,0 +1,15 @@
+oab.settings:
+  path: '/admin/structure/oab/settings'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OAB settings'
+  requirements:
+    _permission: 'access administration pages'
+
+oab.log_settings:
+  path: '/admin/structure/oab/settings/logs'
+  defaults:
+    _form: '\Drupal\oab_develop\Form\OabLogSettingsForm'
+    _title: 'OAB Specific Log settings'
+  requirements:
+    _permission: 'administer site configuration'

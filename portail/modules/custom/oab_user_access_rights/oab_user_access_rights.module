@@ -83,8 +83,11 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
   && method_exists($context['items'], 'getFieldDefinition')) {
     $field_definition = $context['items']->getFieldDefinition();
     $field_settings = $field_definition->getSettings();
+    $field_name = $field_definition->getName();
+    $entity_type = $field_definition->get('entity_type');
+
     if (isset($field_settings['target_type'])
-      && $field_settings['target_type'] == 'taxonomy_term'
+        && $field_settings['target_type'] == 'taxonomy_term'
     ) {
       $edit_form = false;
 
@@ -141,7 +144,9 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
                   }
                 }
 
-                if ($edit_form) {
+                if ($edit_form && (
+                        $entity_type !== "node" || $entity_type === "node" && $field_name !== "field_analysts" )
+                    ) {
                   $node = \Drupal::routeMatch()->getParameter('node');
                   if (isset($node) && is_object($node)) {
                     if ($term_language !== $node->language()->getId()) {

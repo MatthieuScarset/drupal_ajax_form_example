@@ -13,7 +13,7 @@ use \Drupal\file\Entity\File;
 
 function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     $user = \Drupal::currentUser();
-    $userId = $user->id();
+    $user_id = $user->id();
 
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $languages = \Drupal::languageManager()->getLanguages();
@@ -23,7 +23,7 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   //R-3177 suppression des formats systeme pour les non admin
   if ($form_id=="entity_embed_dialog") {
-     if ($userId <> 1) {
+     if ($user_id <> 1) {
         unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["document_visual_image"]);
         unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["file_entity_browser_thumbnail"]);
         unset($form['attributes']['data-entity-embed-display-settings']['image_style']['#options']["homepage_expertise"]);
@@ -42,8 +42,8 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
      }
   }
 
-    if ( $form_id=="views_exposed_form" ) {
-        switch($form['#id']) {
+    if ($form_id=="views_exposed_form") {
+        switch ($form['#id']) {
             case "views-exposed-form-content-page-1":
 
                 $form['field_profile_target_id']['#autocomplete_route_name'] = 'views_autocomplete_api';
@@ -57,8 +57,7 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     }
 }
 
-function views_exposed_form_content_page_1_form_validate($form,FormStateInterface &$form_state)
-{
+function views_exposed_form_content_page_1_form_validate($form, FormStateInterface &$form_state) {
     $values = $form_state->getValue('field_profile_target_id');
     if (isset($values) && $values <> "") {
         $tab_values = explode(" | ", $values);

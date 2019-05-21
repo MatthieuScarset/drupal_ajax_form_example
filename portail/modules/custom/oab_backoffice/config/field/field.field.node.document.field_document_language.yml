@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_document_language
+    - node.type.document
+    - taxonomy.vocabulary.document_language
+  content:
+    - 'taxonomy_term:document_language:595c9f79-0aa4-4232-ad0f-42dd6947e155'
+id: node.document.field_document_language
+field_name: field_document_language
+entity_type: node
+bundle: document
+label: 'Document language'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 595c9f79-0aa4-4232-ad0f-42dd6947e155
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      document_language: document_language
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

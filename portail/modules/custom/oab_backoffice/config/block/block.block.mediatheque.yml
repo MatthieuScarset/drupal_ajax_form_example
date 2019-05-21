@@ -1,0 +1,39 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: mediatheque
+theme: theme_boosted
+region: sidebar
+weight: -27
+provider: null
+plugin: mediatheque_block
+settings:
+  id: mediatheque_block
+  label: Mediatheque
+  provider: oab_frontoffice
+  label_display: visible
+  mediatheque_text: 'Vous êtes à la recherche d''images ou de vidéos pour illustrer vos supports de communication ?'
+  mediatheque_link: 'https://mediatheque.orange.com/fr/mediacenter'
+  mediatheque_link_text: 'En savoir plus'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      press_release: press_release
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

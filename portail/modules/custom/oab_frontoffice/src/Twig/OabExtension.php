@@ -79,12 +79,13 @@ class OabExtension extends \Twig_Extension {
       die();
   }*/
   public function kint_t($array, $stop = false) {
-    $moduleHandler = \Drupal::service('module_handler');
-    if ($moduleHandler->moduleExists('kint')) {
+    $module_handler = \Drupal::service('module_handler');
+    if ($module_handler->moduleExists('kint')) {
       kint($array);
 
-      if ($stop)
-        die();
+      if ($stop) {
+          die();
+      }
     }
   }
 
@@ -99,8 +100,7 @@ class OabExtension extends \Twig_Extension {
    * @param int $precision
    * @return string
    */
-  public function format_bytes($bytes, $precision = 2)
-  {
+  public function format_bytes($bytes, $precision = 2) {
     $units = array('B', 'KB', 'MB', 'GB', 'TB');
     $bytes = max($bytes, 0);
     $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
@@ -117,16 +117,16 @@ class OabExtension extends \Twig_Extension {
    * @param $filename
    * @return string
    */
-  public function file_format ($filename) {
+  public function file_format($filename) {
 
     ##Je recupère toutes les parties du fichier, séparées par un "."
-    $fileParts = explode(".", $filename);
+    $file_parts = explode(".", $filename);
 
     $return = "";
     #Je regarde s'il y a au moins 2 éléments dans le tableau
-    if (count($fileParts) > 1) {
+    if (count($file_parts) > 1) {
       ##Je renvoie le dernier element du tableau
-      $return = strtoupper($fileParts[count($fileParts)-1]);
+      $return = strtoupper($file_parts[count($file_parts)-1]);
     }
     return $return;
   }
@@ -203,10 +203,10 @@ class OabExtension extends \Twig_Extension {
    * @param $node
    * @return mixed
    */
-  public function nodeAbsoluteUrl($type, $nid, $defaultLanguage = false) {
+  public function nodeAbsoluteUrl($type, $nid, $default_language = false) {
 
       $options = array('absolute' => TRUE);
-      if ($defaultLanguage) {
+      if ($default_language) {
             $node = \Drupal\node\Entity\Node::load($nid);
             $options['language'] = $node->language();
         }

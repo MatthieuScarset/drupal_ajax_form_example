@@ -79,34 +79,31 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             ##On recupère la display view correspondante
             $view = \Drupal\views\Views::getView('subhomes');
             $view->setDisplay($subhome_display);
-            $displayObj = $view->getDisplay();
+            $display_obj = $view->getDisplay();
 
             #Et on en recupère son titre pour l'affichage
-            $displayName = ucfirst($displayObj->display['display_title']);
+            $display_name = ucfirst($display_obj->display['display_title']);
 
 
             if ($parameters['view_id'] === "subhomes") {
                 ##On ajoute un lien vide au fil d'ariane
 
-                $breadcrumb->addLink(Link::createFromRoute($displayName, '<none>'));
-            }
-            else {  ## Subhome archive
+                $breadcrumb->addLink(Link::createFromRoute($display_name, '<none>'));
+            } else {  ## Subhome archive
 
                 ##On ajoute un lien vide au fil d'ariane
 
-                $link = Link::createFromRoute($displayName, "view.subhomes." . $subhome_display);
+                $link = Link::createFromRoute($display_name, "view.subhomes." . $subhome_display);
                 $link->setUrl(Drupal\Core\Url::fromUri(OabHubController::getHubSubhomeUrl($link->getUrl()->toString())));
 
                 $breadcrumb->addLink($link);
                 $breadcrumb->addLink(Link::createFromRoute("Archives", '<none>'));
             }
 
-
-        }
-        else {
+        } else {
 
             #Liste des types de contenu pour cette config du fil d'ariane
-            $contentTypes = [
+            $content_types = [
                 "blog_post", "customer_story", "document", "magazine",
                 "office", "partner", "press_kit", "press_release", "product"];
 
@@ -116,7 +113,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             # et qu'il possède le champs 'field_subhome'
             if (isset($node)
                 && method_exists(get_class($parameters['node']), 'getType')
-                && in_array($parameters['node']->getType(), $contentTypes)
+                && in_array($parameters['node']->getType(), $content_types)
                 && $node->hasField('field_subhome')) {
 
                 ##Affichage du fil d'ariane :
@@ -140,34 +137,33 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                         ##on test si on a un resultat
                         if (isset($value[0]['value'])) {
                             ## On recupère le nom machine de la display view
-                            $display_machineName = $value[0]['value'];
+                            $display_machine_name = $value[0]['value'];
 
                             ##On charge la vue "Subhome", puis on set avec la display view de la subhome
                             $view = \Drupal\views\Views::getView('subhomes');
-                            $view->execute($display_machineName);
-                            $displayObj = $view->getDisplay();
+                            $view->execute($display_machine_name);
+                            $display_obj = $view->getDisplay();
 
                             ##On en recupère le nom de la vue (pour le nom du lien)
-                            $displayName = ucfirst($displayObj->display['display_title']);
+                            $display_name = ucfirst($display_obj->display['display_title']);
 
                             ##Et la route de la display view (pour en créer l'url)
-                            $routeName = $displayObj->getRouteName();
+                            $display_route_name = $display_obj->getRouteName();
 
                             ##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
                             $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
 
 
-                            $url = \Drupal\oab_hub\Controller\OabHubController::getHubSubhomeUrl(\Drupal\Core\Url::fromRoute($routeName));
+							$url = \Drupal\oab_hub\Controller\OabHubController::getHubSubhomeUrl(\Drupal\Core\Url::fromRoute($display_route_name));
 
                             if (is_string($url)) {
                                 $url = \Drupal\Core\Url::fromUri($url);
                             }
 
-                            $breadcrumb->addLink(Link::fromTextAndUrl($displayName, $url));
-                        }
-                    }
-                }
-
+							$breadcrumb->addLink(Link::fromTextAndUrl($display_name, $url));
+						}
+					}
+				}
             }
         }
 

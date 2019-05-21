@@ -62,3 +62,11 @@ function oab_subhomes_update_8006() {
 function oab_subhomes_update_8007() {
     include_once("updates/update_8007.inc");
 }
+
+
+/**
+ * Maj des fields du bloc equipe pour supprimer le required
+ */
+function oab_subhomes_update_8009() {
+    include_once("updates/update_8008.inc");
+}

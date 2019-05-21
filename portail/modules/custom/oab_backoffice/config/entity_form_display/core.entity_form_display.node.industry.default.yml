@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.industry.field_top_zone_background
     - field.field.node.industry.field_top_zone_bg_mobile
     - field.field.node.industry.field_visual
+    - field.field.node.industry.field_visual_tile
     - field.field.node.industry.moderation_state_update
     - node.type.industry
   module:
@@ -59,6 +60,7 @@ third_party_settings:
         - field_top_zone_background
         - field_top_zone_bg_mobile
         - field_visual
+        - field_visual_tile
         - field_local_nav
         - field_content
         - field_related_content
@@ -144,7 +146,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
-    weight: 11
+    weight: 12
     settings:
       rows: 5
       placeholder: ''
@@ -220,7 +222,7 @@ content:
     type: options_select
     region: content
   field_local_nav:
-    weight: 10
+    weight: 11
     settings:
       rows: 5
       placeholder: ''
@@ -256,7 +258,7 @@ content:
     type: options_select
     region: content
   field_related_content:
-    weight: 12
+    weight: 13
     settings:
       title: 'Related content'
       title_plural: 'Related contents'
@@ -317,6 +319,20 @@ content:
     region: content
   field_visual:
     weight: 9
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 10
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity

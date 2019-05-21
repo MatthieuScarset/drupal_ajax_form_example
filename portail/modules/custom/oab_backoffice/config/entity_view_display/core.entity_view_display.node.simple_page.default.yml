@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.simple_page.field_analysts
     - field.field.node.simple_page.field_blog_format
     - field.field.node.simple_page.field_blog_thematic
     - field.field.node.simple_page.field_content
@@ -15,6 +16,7 @@ dependencies:
     - field.field.node.simple_page.field_hub_portal
     - field.field.node.simple_page.field_industry
     - field.field.node.simple_page.field_insight
+    - field.field.node.simple_page.field_insight_type
     - field.field.node.simple_page.field_job_profile
     - field.field.node.simple_page.field_market_segment
     - field.field.node.simple_page.field_meta_description
@@ -28,8 +30,8 @@ dependencies:
     - field.field.node.simple_page.field_solution
     - field.field.node.simple_page.field_start_date
     - field.field.node.simple_page.field_subhome
-    - field.field.node.simple_page.field_thematic
     - field.field.node.simple_page.field_visual
+    - field.field.node.simple_page.field_visual_tile
     - field.field.node.simple_page.moderation_state_update
     - node.type.simple_page
   module:
@@ -105,6 +107,14 @@ content:
       link: true
     third_party_settings: {  }
     region: content
+  field_visual_tile:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_start_date:
     type: datetime_default
     weight: 3
@@ -125,6 +135,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_analysts: true
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
@@ -132,6 +143,7 @@ hidden:
   field_hub: true
   field_hub_portal: true
   field_industry: true
+  field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -141,6 +153,7 @@ hidden:
   field_page_du_site_2: true
   field_rebond_document: true
   field_region: true
+  field_start_date: true
   field_subhome: true
   field_thematic: true
   field_visual: true

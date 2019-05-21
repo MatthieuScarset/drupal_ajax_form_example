@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.industry.field_hub
     - field.field.node.industry.field_hub_portal
     - field.field.node.industry.field_insight
+    - field.field.node.industry.field_insight_type
     - field.field.node.industry.field_local_nav
     - field.field.node.industry.field_meta_description
     - field.field.node.industry.field_meta_title
@@ -20,6 +21,7 @@ dependencies:
     - field.field.node.industry.field_top_zone_background
     - field.field.node.industry.field_top_zone_bg_mobile
     - field.field.node.industry.field_visual
+    - field.field.node.industry.field_visual_tile
     - field.field.node.industry.moderation_state_update
     - node.type.industry
   module:
@@ -119,6 +121,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_visual_tile:
+    weight: 15
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   links:
     weight: 1
     region: content
@@ -135,6 +145,7 @@ hidden:
   field_end_date: true
   field_hub: true
   field_hub_portal: true
+  field_insight_type: true
   field_market_segment: true
   field_start_date: true
   field_top_zone: true

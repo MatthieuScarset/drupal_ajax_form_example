@@ -39,11 +39,11 @@ function oab_migrate_content_install() {
     \Drupal::state()->set('correspondence_taxo_solution', $solutions);
 
 //BLOGS
-    $categBlog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
-    \Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categBlog_to_thematic);
+    $categblog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
+    \Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categblog_to_thematic);
 
-    $categBlog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
-    \Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categBlog_to_type);
+    $categblog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
+    \Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categblog_to_type);
 
 // INDUSTRIES
     $industries = get_correspondances_industriesD7_to_industriesD8();
@@ -57,20 +57,20 @@ function oab_migrate_content_install() {
     \Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);
 
 //MAG CATEG TO MAG FORMAT
-    $categMag_to_formatMag = get_correspondances_categoriesMagazineD7_to_MagazineFormatD8();
-    \Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categMag_to_formatMag);
+    $categmag_to_formatmag = get_correspondances_categoriesMagazineD7_to_MagazineFormatD8();
+    \Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categmag_to_formatmag);
 
 //Solution to mag theme
     $solution_to_themeMag = get_correspondances_solutionsD7_to_MagazineThematicD8();
     \Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_themeMag);
 
 //solution to doc theme
-    $solution_to_themeDoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
-    \Drupal::state()->set('correspondence_solution_to_theme_doc', $solution_to_themeDoc);
+    $solution_to_themedoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
+    \Drupal::state()->set('correspondence_solution_to_theme_doc', $solution_to_themedoc);
 
 //format doc to doc format
-    $formatDoc_to_formatDoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
-    \Drupal::state()->set('correspondence_format_document', $formatDoc_to_formatDoc);
+    $formatdoc_to_formatdoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
+    \Drupal::state()->set('correspondence_format_document', $formatdoc_to_formatdoc);
 
   $subhomes = get_correspondances_subhomes();
     \Drupal::state()->set('subhomes_ids_for_migration', $subhomes);

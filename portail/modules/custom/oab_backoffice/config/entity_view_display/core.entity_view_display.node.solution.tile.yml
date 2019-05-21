@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.solution.field_top_zone_background
     - field.field.node.solution.field_top_zone_bg_mobile
     - field.field.node.solution.field_visual
+    - field.field.node.solution.field_visual_tile
     - field.field.node.solution.moderation_state_update
     - node.type.solution
   module:
@@ -63,7 +64,7 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_visual:
+  field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
     region: content
@@ -96,6 +97,7 @@ hidden:
   field_top_zone: true
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
+  field_visual: true
   langcode: true
   moderation_state_update: true
   workbench_moderation_control: true

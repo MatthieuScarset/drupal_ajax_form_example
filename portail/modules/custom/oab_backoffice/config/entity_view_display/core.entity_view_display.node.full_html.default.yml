@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.full_html.field_hub_portal
     - field.field.node.full_html.field_industry
     - field.field.node.full_html.field_insight
+    - field.field.node.full_html.field_insight_type
     - field.field.node.full_html.field_job_profile
     - field.field.node.full_html.field_meta_description
     - field.field.node.full_html.field_meta_title
@@ -22,6 +23,7 @@ dependencies:
     - field.field.node.full_html.field_start_date
     - field.field.node.full_html.field_subhome
     - field.field.node.full_html.field_visual
+    - field.field.node.full_html.field_visual_tile
     - field.field.node.full_html.moderation_state_update
     - node.type.full_html
   module:
@@ -95,6 +97,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_visual_tile:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   workbench_moderation_control:
     weight: 0
     region: content
@@ -105,6 +115,7 @@ hidden:
   field_end_date: true
   field_hub: true
   field_hub_portal: true
+  field_insight_type: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true

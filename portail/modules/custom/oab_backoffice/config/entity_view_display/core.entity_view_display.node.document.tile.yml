@@ -32,6 +32,7 @@ dependencies:
     - field.field.node.document.field_start_date
     - field.field.node.document.field_subhome
     - field.field.node.document.field_visual
+    - field.field.node.document.field_visual_tile
     - field.field.node.document.moderation_state_update
     - node.type.document
   module:
@@ -57,14 +58,14 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-  field_visual:
+  field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
     region: content
     label: hidden
     settings:
-      view_mode: document_visual
-      link: false
+      link: true
+      view_mode: default
     third_party_settings: {  }
   links:
     weight: 3
@@ -99,6 +100,7 @@ hidden:
   field_start_date: true
   field_subhome: true
   field_thematic: true
+  field_visual: true
   field_wysiwyg_rebond: true
   langcode: true
   moderation_state_update: true

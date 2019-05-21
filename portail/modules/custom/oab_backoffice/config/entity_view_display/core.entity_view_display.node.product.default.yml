@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.product.field_id_offre
     - field.field.node.product.field_industry
     - field.field.node.product.field_insight
+    - field.field.node.product.field_insight_type
     - field.field.node.product.field_is_dvi_product
     - field.field.node.product.field_job_profile
     - field.field.node.product.field_market_segment
@@ -34,6 +35,7 @@ dependencies:
     - field.field.node.product.field_top_zone_bg_mobile
     - field.field.node.product.field_try_and_buy
     - field.field.node.product.field_visual
+    - field.field.node.product.field_visual_tile
     - field.field.node.product.moderation_state_update
     - node.type.product
   module:
@@ -114,6 +116,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_visual_tile:
+    weight: 11
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   links:
     weight: 1
     region: content
@@ -134,6 +144,7 @@ hidden:
   field_id_offre: true
   field_industry: true
   field_insight: true
+  field_insight_type: true
   field_is_dvi_product: true
   field_job_profile: true
   field_market_segment: true

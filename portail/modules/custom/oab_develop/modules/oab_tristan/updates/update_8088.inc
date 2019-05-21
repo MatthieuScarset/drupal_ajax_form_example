@@ -123,19 +123,18 @@ function processUpdateWithSandbox_8088(&$sandbox) {
         $query->sort('nid', 'ASC');
         $query->condition('nid', isset($sandbox['last_nid']) ? $sandbox['last_nid'] : 0, '>');
 
-        $ids = $query->execute();
-        $nodes = Node::loadMultiple($ids);
+        $nids = $query->execute();
+        //$nodes = Node::loadMultiple($nids);
         $count = 0;
 
         $toUpdate = [];
 
         /** @var Node $node */
-        foreach ($nodes as $node) {
+        foreach ($nids as $nid) {
 
-            //$node = Node::load($id);
+            $node = Node::load($nid);
 
             $terms_to_set = [];
-
 
             $field_name = "";
             switch ($node->bundle()) {

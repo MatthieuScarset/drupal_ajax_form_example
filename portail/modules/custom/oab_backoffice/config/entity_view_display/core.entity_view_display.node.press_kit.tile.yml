@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.press_kit.field_start_date
     - field.field.node.press_kit.field_subhome
     - field.field.node.press_kit.field_visual
+    - field.field.node.press_kit.field_visual_tile
     - field.field.node.press_kit.moderation_state_update
     - node.type.press_kit
   module:
@@ -50,7 +51,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-  field_visual:
+  field_visual_tile:
     type: entity_reference_entity_view
     weight: 0
     region: content
@@ -84,6 +85,7 @@ hidden:
   field_solution: true
   field_start_date: true
   field_subhome: true
+  field_visual: true
   langcode: true
   moderation_state_update: true
   workbench_moderation_control: true

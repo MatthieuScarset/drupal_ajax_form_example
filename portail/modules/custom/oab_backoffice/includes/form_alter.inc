@@ -173,6 +173,14 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if (!in_array("administrator", $roles) && !in_array("digital_admin", $roles)) {
             $form['field_metatags']['#access'] = false;
         }
+
+        // Spécific Document : je cache la langue du document pour les contenus qui sont pas en Anglais
+        if (isset($form['field_document_language'])) {
+            if ($current_language !== "en") {
+                unset($form['field_document_language']);
+            }
+        }
+
     }
 
 
@@ -276,7 +284,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         if ($url !== null) {
 
             ##On recupère l'alias
-            $path = preg_replace('/\//', '', parse_url($url, PHP_URL_PATH),1);
+            $path = preg_replace('/\//', '', parse_url($url, PHP_URL_PATH), 1);
             $path = str_replace($current_language, '', $path);
 
             ##On recupère le /node/xxx depuis l'alias

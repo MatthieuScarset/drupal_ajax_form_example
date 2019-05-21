@@ -1,11 +1,3 @@
-oab.settings:
-  path: '/admin/structure/oab/settings'
-  defaults:
-    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'OAB settings'
-  requirements:
-    _permission: 'access administration pages'
-
 oab.settings_subhomes:
   path: '/admin/structure/oab/settings/subhomes'
   defaults:
