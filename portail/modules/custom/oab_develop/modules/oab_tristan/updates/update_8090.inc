@@ -14,25 +14,15 @@ $trad_fr = array (
                         array (
                             'filters' =>
                                 array (
-                                    'field_insight_type_target_id' =>
-                                        array (
-                                            'expose' =>
-                                                array (
-                                                    'label' => 'Filtrer par',
-                                                ),
-                                        ),
                                     'field_insight_target_id' =>
                                         array (
-                                            'expose' =>
-                                                array (
-                                                    'label' => 'Visions Business sur',
-                                                ),
                                             'group_info' =>
                                                 array (
                                                     'description' => '',
                                                 ),
                                         ),
                                 ),
+                            'title' => 'Au cœur de l\'innovation et de la transformation digitale des entreprises',
                         ),
                 ),
         ),
