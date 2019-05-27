@@ -92,10 +92,6 @@
 
 @media(max-width: 767px) {
 
-    body {
-        background-color: #333 !important;
-    }
-
     .oab_background_image .view-business-insight h1 {
         padding: 3rem 0rem;
         font-size: 2.9rem;
