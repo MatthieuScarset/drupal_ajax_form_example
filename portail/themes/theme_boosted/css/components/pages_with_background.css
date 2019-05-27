@@ -1,7 +1,7 @@
 @media not screen, (max-width: 767px) {
     .oab_background_image {
         background-image: none !important;
-        background-color: #fff;
+        background-color: #333;
     }
 }
 
