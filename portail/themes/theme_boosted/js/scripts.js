@@ -381,8 +381,8 @@
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
       });
 
-      $('.view-business-insight .field_insight_type a').on('click', function(evt) {
-          let taxo_id = evt.target.getAttribute('data-taxo');
+      $('.view-business-insight .field_insight_type a').on('click', function() {
+          let taxo_id = $(this).attr('data-taxo');
           let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
 
           $(selector).click();
@@ -406,8 +406,8 @@
          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
     });
 
-    $('.view-business-insight .field_insight_type a').on('click', function(evt) {
-        let taxo_id = evt.target.getAttribute('data-taxo');
+    $('.view-business-insight .field_insight_type a').on('click', function() {
+        let taxo_id = $(this).attr('data-taxo');
         let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
 
         $(selector).click();
