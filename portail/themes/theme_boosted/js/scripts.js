@@ -381,13 +381,6 @@
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
       });
 
-      $('.view-business-insight .field_insight_type a').on('click', function() {
-          let taxo_id = $(this).attr('data-taxo');
-          let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
-
-          $(selector).click();
-          return false;
-      });
   });
 
     $(document).on("click", "div.btn-field-insight-type", function() {
@@ -406,7 +399,7 @@
          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
     });
 
-    $('.view-business-insight .field_insight_type a').on('click', function() {
+    $(document).on('click', '.view-business-insight .field_insight_type a', function() {
         let taxo_id = $(this).attr('data-taxo');
         let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
 
