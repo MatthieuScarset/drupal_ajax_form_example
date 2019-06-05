@@ -380,6 +380,7 @@
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
       });
+
   });
 
     $(document).on("click", "div.btn-field-insight-type", function() {
@@ -391,10 +392,19 @@
     $(document).on("change", "select[name='field_insight_target_id']", function() {
      //   $('select#edit-field-insight-target-id').on('change', function() {
      $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+
   });
 
     $('.fieldset-field-insight-type .btn label').on('click', function(evt){
          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
+    });
+
+    $(document).on('click', '.view-business-insight .field_insight_type a', function() {
+        let taxo_id = $(this).attr('data-taxo');
+        let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
+
+        $(selector).click();
+        return false;
     });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

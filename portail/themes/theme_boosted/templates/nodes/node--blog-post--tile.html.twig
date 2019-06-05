@@ -65,7 +65,9 @@
  *   in different view modes.
  */
 #}
-
+{% if element['#attributes'].checked == 'checked' %}
+    {% set button_class = 'btn-primary' %}
+{% endif %}
 <div class="tile tile_{{ node.field_insight_type.entity.name.value }}">
     <a href="{{ url }}" class="">
         <div class="encart encart-image">
@@ -80,7 +82,7 @@
 
     <div class="tags col-lg-12">
         <span class="field_insight">{{ content.field_insight }}</span>
-        <span class="field_insight_type">#{{ node.field_insight_type.entity.name.value }}</span>
+        <span class="field_insight_type"><a href="#" data-taxo="{{ node.field_insight_type.entity.id }}">#{{ node.field_insight_type.entity.name.value }}</a></span>
     </div>
 
     <a href="{{ url }}" class="">
