@@ -65,7 +65,9 @@
         'help-block',
         description_display == 'invisible' ? 'visually-hidden',
     ]
-%}
+    %}
+
+
 <div {{ attributes.addClass(classes) }}>
     <div class="hidden">
         {{ children }}
@@ -74,5 +76,7 @@
     {% if element['#attributes'].checked == 'checked' %}
         {% set button_class = 'btn-primary' %}
     {% endif %}
-    <div class="btn {{ button_class }} btn-field-insight-type" data-input="{{ element['#attributes'].id }}">{{ label }}</div>
+    {% if element['#attributes'].value != 'All' %}
+    {% endif %}
+    <div class="btn {{ button_class }} btn-field-insight-type" data-input="{{ element['#attributes'].id }}" data-taxo="{{ element['#attributes'].value }}">{{ label }}</div>
 </div>
