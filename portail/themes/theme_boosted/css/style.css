@@ -2780,7 +2780,8 @@ div.business-insight-field-insight {
     -webkit-appearance: none;
     font-size: 1.6rem;
 
-    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous. Le code doit être identique à pages_with_background */
+    /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous.
+    Le code doit être identique sur pages_with_background */
     background-image:
             linear-gradient(45deg, transparent 50%, #000 50%),
             linear-gradient(135deg, #000 50%, transparent 50%),

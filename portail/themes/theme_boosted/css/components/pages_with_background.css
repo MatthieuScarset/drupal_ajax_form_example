@@ -105,18 +105,7 @@
     }
 
     .oab_background_image .business-insight-field-insight select.form-control {
-        vertical-align: top;
-        color: #f16e00;
         color: #fff;
-        height: auto;
-        border: none;
-        background-color: transparent;
-        padding: 0;
-        padding-right: 60px;
-        margin-top: 5px;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        font-size: 1.6rem;
 
         /* C'est la fleche, ne pas toucher !!! Il doit etre identique au :focus juste en dessous */
         background-image:
