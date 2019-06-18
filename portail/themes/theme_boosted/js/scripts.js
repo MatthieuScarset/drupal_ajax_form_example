@@ -407,4 +407,12 @@
         return false;
     });
 
+    $(document).on('click', '.view-business-insight .field_insight a', function() {
+        let taxo_id = $(this).attr('data-taxo');
+        let selector = "select[name='field_insight_target_id']";
+
+        $(selector).val(taxo_id).trigger('change');
+        return false;
+    });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
