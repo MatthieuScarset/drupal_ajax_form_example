@@ -70,7 +70,7 @@
 
     <div class="tags col-lg-12">
         <span class="field_insight"><a href="#" data-taxo="{{ node.field_insight.entity.id }}">{{ content.field_insight }}</a></span>
-        <span class="field_insight_type"><a href="#" data-taxo="{{ node.field_insight_type.entity.id }}">#{{ node.field_insight_type.entity.name.value }}</a></span>
+        <span class="field_insight_type"><a onmousedown="utag_link(utag_data.titre_page, 'Tile', 'Content Type', '{{ node.field_insight_type.entity.name.value }}')" href="#" data-taxo="{{ node.field_insight_type.entity.id }}">#{{ node.field_insight_type.entity.name.value }}</a></span>
     </div>
 
     <a href="{{ url }}" class="">
