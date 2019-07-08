@@ -84,8 +84,9 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
     $field_definition = $context['items']->getFieldDefinition();
     $field_settings = $field_definition->getSettings();
     $field_name = $field_definition->getName();
-    $entity_type = $field_definition->get('entity_type');
-
+    if (method_exists($field_definition, 'get')) {
+        $entity_type = $field_definition->get('entity_type');
+    }
     if (isset($field_settings['target_type'])
         && $field_settings['target_type'] == 'taxonomy_term'
     ) {
