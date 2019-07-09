@@ -193,6 +193,7 @@
   });
 
   $(window).on('load', function(e){
+    tile_format();
     manageSmallImageInTemplates();
     //vg.vgrefresh();
   });
