@@ -375,10 +375,9 @@
   jQuery(document).ajaxComplete(function(event, xhr, settings) {
     // see if it is from our view
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
-
-        setTimeout(function() {
+        $('.imgBusinessInsight').on('load', function () {
             tile_format();
-        }, 1000);
+        });
     }
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
