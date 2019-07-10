@@ -32,6 +32,7 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
           new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
           new \Twig_SimpleFunction('specialCharacters', [$this, 'specialCharacters']),
+          new \Twig_SimpleFunction('isAjaxContext', [$this, 'isAjaxContext']),
       ];
 }
 
@@ -288,6 +289,10 @@ class OabExtension extends \Twig_Extension {
             'rows' => $total_rows,
             'render' => $view->render('block_1')
         ];
+    }
+
+    public function isAjaxContext() {
+        return \Drupal::request()->isXmlHttpRequest();
     }
 
   /**
