@@ -1,0 +1,32 @@
+<?php
+
+
+function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
+
+    return array(
+        'orange_business_lounge_page_zone' =>
+            array(
+                'variables' => array(
+                    'zones' => array()
+                ),
+                'template' => 'obl_template'
+            ),
+
+        'orange_business_lounge_page_pays' =>
+            array(
+                'variables' => array(
+                    'countries' => array(),
+                    'zones' => array(),
+                    'pass_data' => array()
+                ),
+                'template' => 'obl_prices_template'
+            ),
+        );
+}
+
+
+# hook_page_attachments_alter for application js to module
+function oab_orange_business_lounge_page_attachments_alter(array &$attachments) {
+    $attachments['#attached']['library'][] = 'oab_orange_business_lounge/oab_obl_js';
+}
+

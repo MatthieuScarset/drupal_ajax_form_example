@@ -2908,3 +2908,32 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-left: 10px !important;
 }
 
+.get_zone {
+    cursor: pointer;
+    /* Style the panel */
+    font-weight: normal;
+    font-family: HelveticaNeue75BoldBold;
+}
+
+.oblHeaderZone {
+    font-size: 17px;
+}
+
+.oblFooterZone {
+    font-size: 14px;
+}
+
+/* Style the active class, and buttons on mouse-over */
+.active.get_zone, .get_zone:hover {
+    color: #F16E00;
+    background-color: black;
+}
+
+#select_pays_zone {
+    width: 100%;
+}
+
+img.image_pannel{
+    width: 100%;
+    height: 100px;
+}
