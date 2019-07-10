@@ -144,7 +144,7 @@
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
-    tile_format();
+    //tile_format();
     showhideFilters();
     //resizeIframeAuto('iframePardot');
 

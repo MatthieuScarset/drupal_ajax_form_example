@@ -73,47 +73,8 @@
         <div class="encart encart-image">
             {% for key, image in content.field_visual_tile  %}
 
-                {% set new_height_image = (image.entity.field_image.0.value['width'] * image.entity.field_image.0.get('height').value)/418 %}
-                {% set resize_image = '
-                                        @media(max-width: 320px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media(max-width: 320px) and (min-width: 480px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media(max-width: 480px) and (min-width: 760px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media(max-width: 760px) and (min-width: 1024px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media(max-width: 1024px) and (min-width: 1280px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media(max-width: 1280px) and (min-width: 1440px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                        }
-                                        @media (min-width: 1440px) {
-                                            .imgBusinessInsight {
-                                                height:' ~ new_height_image ~
-                                            '}
-                                         }'
-                %}
-
                 {% if image.entity.field_image.entity.uri.value is not null and image.entity.name.value is not null %}
-                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('max_650') }}" alt="{{ image.entity.name.value }}" class="imgBusinessInsight" style="{{ resize_image }}" />
+                    <img src="{{ image.entity.field_image.entity.uri.value|image_style_uri('max_650') }}" alt="{{ image.entity.name.value }}" class="imgBusinessInsight" />
                 {% endif %}
 
             {% endfor %}
