@@ -2,17 +2,17 @@ langcode: en
 status: true
 dependencies:
   module:
-  - oab_backoffice
+    - oab_backoffice
 title: 'Suppression des resultats des webforms de plus d''un an'
 id: oab_backoffice_cron
 weight: 0
 module: oab_backoffice
-callback: oab_backoffice_cron
+callback: gdpr_hook_cron
 scheduler:
   id: crontab
   configuration:
     rules:
-    - '0 1 * * *'   #Execute job every day at 1:00
+      - '0 1 * * *'
     catch_up: 0
 launcher:
   id: serial

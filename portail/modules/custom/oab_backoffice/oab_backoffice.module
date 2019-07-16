@@ -463,7 +463,7 @@ function oab_backoffice_transliteration_overrides_alter(&$overrides, $langcode) 
  * Suppression des resultats des webforms de plus d'un an
  */
 function oab_backoffice_cron() {
-    gdpr_hook_cron();
+   // gdpr_hook_cron();
 }
 
 /**

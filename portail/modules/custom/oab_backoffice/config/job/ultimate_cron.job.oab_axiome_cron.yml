@@ -7,7 +7,7 @@ title: "l'import des archives"
 id: oab_axiome_cron
 weight: 0
 module: oab_axiome
-callback: oab_axiome_cron
+callback: archive_import_for_cron
 scheduler:
   id: simple
 launcher:
