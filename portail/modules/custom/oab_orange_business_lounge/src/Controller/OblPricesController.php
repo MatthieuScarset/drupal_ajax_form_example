@@ -12,6 +12,7 @@ class OblPricesController extends ControllerBase {
         $countries = $obl_service->getCountries();
         $zones = $obl_service->getZones();
         $pass_data = $obl_service->getPassData();
+        $title = $obl_service->getTitle();
 
        // kint($countries);
 
@@ -19,6 +20,7 @@ class OblPricesController extends ControllerBase {
             '#countries' => $countries,
             '#zones' => $zones,
             '#pass_data' => $pass_data,
+            '#title' => $title,
             '#theme' => 'orange_business_lounge_page_pays',
             '#attached' => [
                 'library' => [
@@ -32,4 +34,3 @@ class OblPricesController extends ControllerBase {
         );
     }
 }
-

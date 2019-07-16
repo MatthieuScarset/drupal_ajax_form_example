@@ -17,7 +17,7 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
                 'variables' => array(
                     'countries' => array(),
                     'zones' => array(),
-                    'pass_data' => array()
+                    'pass_data' => array(),
                 ),
                 'template' => 'obl_prices_template'
             ),

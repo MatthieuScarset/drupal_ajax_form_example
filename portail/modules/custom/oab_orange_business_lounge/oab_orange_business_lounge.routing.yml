@@ -20,6 +20,5 @@ oab_obl_country_settings:
   path: '/oblPricePage'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblPricePage'
-    _title: 'obl price page'
   requirements:
     _permission: 'administer site configuration'

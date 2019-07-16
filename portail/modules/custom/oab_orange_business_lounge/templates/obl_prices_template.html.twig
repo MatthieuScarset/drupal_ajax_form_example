@@ -1,56 +1,31 @@
 <!-- Zones économiques -->
 <div class="container">
-
-
     <div class="col-md-6">
-
         <div class="row">
             {% for zone in zones.items %}
-
                 <div class="col-sm-6">
-
                     <div class="panel-group">
-
                         <div class="panel panel-default get_zone" data-zone="{{ zone.code }}" name="data_zone">
-
-                            <div class="panel-body">
+                            <div class="panel-body obl-block-countries">
                                 <div class="text-align-left oblHeaderZone"> {{ zone.label }} </div>
                                 <img class="img-responsive image_pannel"  src="/modules/custom/oab_orange_business_lounge/images/{{ zone.code }}.jpg" />
                                 <div class="text-align-right oblFooterZone">Voir les pays <span class="glyphicon glyphicon-play"></span></div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             {% endfor %}
         </div>
-
     </div>
-
-
     <div class="col-md-6">
-
         <span><h5> Pays Zone Europe</h5></span>
-
         <select id="select_pays_zone" class="pays-zone hidden" name="pays_zone" size="20">
             <!-- <select id="select_pays_zone" class="pays-zone" name="pays_zone" size="20" hidden="hidden"> -->
-
         </select>
-
-
     </div>
-
-
 </div>
 
 
 <div class="container">
-
-    <!-- -->
     <h3>Vous pouvez également rechercher directement avec le nom du pays</h3>
-
 </div>
-
-

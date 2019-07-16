@@ -10,6 +10,7 @@ use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 class OabOblSwagger {
 
     private $url_api = '';
+    private $title_label = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
@@ -18,6 +19,8 @@ class OabOblSwagger {
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
         $this->url_api = $config->get('url_api');
+        $this->title_label = $config->get('title_label');
+        echo 'Yo '. $this->title_label; die();
     }
 
 
@@ -43,6 +46,10 @@ class OabOblSwagger {
     public function getPassData () {
         $data = $this->executeScriptCurl(self::API_PASS_DATA);
         return $data;
+    }
+
+    public function getTitle() {
+        return $this->title_label;
     }
 
 

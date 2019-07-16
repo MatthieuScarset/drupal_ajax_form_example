@@ -2921,10 +2921,15 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .oblFooterZone {
     font-size: 14px;
+    padding-top: 10px;
+}
+
+.obl-block-countries {
+    background-color: #ddd;
 }
 
 /* Style the active class, and buttons on mouse-over */
-.active.get_zone, .get_zone:hover {
+.active.obl-block-countries, .obl-block-countries:hover {
     color: #F16E00;
     background-color: black;
 }
