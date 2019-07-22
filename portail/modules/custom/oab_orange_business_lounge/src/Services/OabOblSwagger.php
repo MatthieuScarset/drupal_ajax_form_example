@@ -20,7 +20,6 @@ class OabOblSwagger {
         $config = \Drupal::config(OabOblForm::getConfigName());
         $this->url_api = $config->get('url_api');
         $this->title_label = $config->get('title_label');
-        echo 'Yo '. $this->title_label; die();
     }
 
 
@@ -46,10 +45,6 @@ class OabOblSwagger {
     public function getPassData () {
         $data = $this->executeScriptCurl(self::API_PASS_DATA);
         return $data;
-    }
-
-    public function getTitle() {
-        return $this->title_label;
     }
 
 

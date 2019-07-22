@@ -60,8 +60,8 @@ class OabOblForm extends ConfigFormBase {
         $form['global']['title_label'] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Titre de la page'),
-            '#default_value' => 'Choisir un titre',
-            '#size'=> 80,
+            '#default_value' => $config->get('title_label'),
+            '#size'=> 350,
         );
 
         return parent::buildForm($form, $form_state);
@@ -89,6 +89,7 @@ class OabOblForm extends ConfigFormBase {
         // Retrieve the configuration
         $this->config($this->getConfigName())
             ->set('url_api', $form_state->getValue('url_api'))
+            ->set('title_label', $form_state->getValue('title_label'))
             ->save();
 
         parent::submitForm($form, $form_state);

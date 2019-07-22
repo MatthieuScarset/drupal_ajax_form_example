@@ -10,3 +10,6 @@ configure: oab.settings
 version: '8.x-1.0'
 core: '8.x'
 project: 'oab_orange_business_lounge'
+
+libraries:
+  - oab_orange_business_lounge/oab_obl_js

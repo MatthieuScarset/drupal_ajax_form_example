@@ -1,6 +1,6 @@
 (function ($, Drupal, Bootstrap, drupalSettings) {
-
 //      $(document).on("click",".panel-footer", function () {
+    countries_form_autocomplete();
     $('.get_zone').click(function () {
 
        $(".get_zone").removeClass("active");
@@ -34,7 +34,28 @@
             $('#select_pays_zone').append('<option value="' + pays.id + '">' + pays.label + '</option>');
         }));
 
+        }
 
+    function countries_form_autocomplete() {
+        var arr_hydra_member = drupalSettings.arr_contries;
+        var countries = [];
+
+        arr_hydra_member.forEach(function (item, key) {
+            countries[key] = item.label;
+        });
+
+        listen_form_countries(countries);
+    }
+
+    function listen_form_countries(countries) {
+
+        $('.countries_input_autocomplete').on('keyup', function() {
+
+            $('.countries_input_autocomplete').autocomplete({
+                source: countries
+            });
+        });
+    }
         /*
         $('#select_pays_zone')
             .fadeOut(1500, function () {
@@ -47,7 +68,6 @@
             .fadeIn(1500);
       */
 
-    }
 
 
     //This function will sort array

@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <span><h5> Pays Zone Europe</h5></span>
+        <span><h2> Pays Zone Europe</h2></span>
         <select id="select_pays_zone" class="pays-zone hidden" name="pays_zone" size="20">
             <!-- <select id="select_pays_zone" class="pays-zone" name="pays_zone" size="20" hidden="hidden"> -->
         </select>
@@ -28,4 +28,20 @@
 
 <div class="container">
     <h3>Vous pouvez également rechercher directement avec le nom du pays</h3>
+    <form action="" class="countries_form_autocomplete">
+        <input type="text" name="countries_input_autocomplete" class="countries_input_autocomplete">
+    </form>
 </div>
+
+<div class="container">
+    <div class="container call-main-container">
+        <h2>Appels</h2>
+        <p>Emissions d'appels vers la zone</p>
+        <p>Réception d'appels</p>
+        <p>Renvoi d'appels conditionnel vers la France Métropolitaine</p>
+    </div>
+</div>
+
+{# {% for country in zones.items %}
+    {{ kint_t(country, true) }}
+{% endfor %} #}
