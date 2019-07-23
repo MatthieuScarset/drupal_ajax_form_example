@@ -6,11 +6,22 @@
 
 (function ($, Drupal, Bootstrap) {
 
+    var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+        easing: "easeOutQuint",
+        useLoadImageEvent: true,
+        time: 400,
+        delay: 20,
+        fadeIn: {
+            time: 500,
+            delay: 50,
+            wait: 500
+        }
+    });
+
     $( window ).resize(function() {
         image_resize_width();
         obs_template_height();
         changeHeightSubhome();
-        tile_format();
     });
 
     function image_resize_width(){
@@ -127,20 +138,6 @@
     });
   }
 
-  function tile_format(){
-      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-          easing: "easeOutQuint",
-          useLoadImageEvent: true,
-          time: 400,
-          delay: 20,
-          fadeIn: {
-              time: 500,
-              delay: 50,
-              wait: 500
-          }
-      });
-  }
-
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
@@ -193,8 +190,8 @@
   });
 
   $(window).on('load', function(e){
-    tile_format();
-    manageSmallImageInTemplates();
+     vg.vgrefresh();
+     manageSmallImageInTemplates();
     //vg.vgrefresh();
   });
 
@@ -376,9 +373,7 @@
   jQuery(document).ajaxComplete(function(event, xhr, settings) {
     // see if it is from our view
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
-        $('.imgBusinessInsight').on('load', function () {
-            tile_format();
-        });
+        vg.vgrefresh();
     }
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
