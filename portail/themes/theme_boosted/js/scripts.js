@@ -190,7 +190,7 @@
   });
 
   $(window).on('load', function(e){
-     vg.vgrefresh();
+     //vg.vgrefresh();
      manageSmallImageInTemplates();
     //vg.vgrefresh();
   });
@@ -373,7 +373,23 @@
   jQuery(document).ajaxComplete(function(event, xhr, settings) {
     // see if it is from our view
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
-        vg.vgrefresh();
+        // Si Vg a autant voire plus d'element que notre div de base, c'est que la div complete a été remplacée
+        // Dans ce cas, on refait le vgrid
+        if (vg[0].children.length >= $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper > div").length) {
+            vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+                easing: "easeOutQuint",
+                useLoadImageEvent: true,
+                time: 400,
+                delay: 20,
+                fadeIn: {
+                    time: 500,
+                    delay: 50,
+                    wait: 500
+                }
+            });
+        } else {
+            vg.vgrefresh();
+        }
     }
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
