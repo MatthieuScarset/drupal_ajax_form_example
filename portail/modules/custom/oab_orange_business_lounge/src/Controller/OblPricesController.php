@@ -2,7 +2,9 @@
 namespace Drupal\oab_orange_business_lounge\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\migrate_plus\Plugin\migrate_plus\data_parser\Json;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
+use Zend\Diactoros\Response\JsonResponse;
 
 class OblPricesController extends ControllerBase {
 
@@ -28,10 +30,18 @@ class OblPricesController extends ControllerBase {
                     'oab_orange_business_lounge/js/metadata.js',
                 ],
                 'drupalSettings' => [
-                    'arr_contries' => $countries["hydra:member"]
+                    'arr_contries' => $countries["hydra:member"],
                 ]
             ],
 
         );
+    }
+
+    public function oblUniqueZone($id) {
+
+        $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+        $unique_zone = $obl_service->getOneZone($id);
+        
+        return new JsonResponse($unique_zone);
     }
 }

@@ -2942,3 +2942,32 @@ img.image_pannel{
     width: 100%;
     height: 100px;
 }
+
+.roaming-infos-container {
+    width: 600px;
+}
+
+.api-result-infos {
+    float: right;
+}
+
+.empty-roaming-infos-container {
+    background-color: #3E3E3E;
+}
+
+.empty-roaming-infos-container h4 {
+    color: #fff;
+    width: 50%;
+    padding: 10px;
+}
+
+.reseau-partenaire-tarif-roaming {
+    margin-top: 15px;
+}
+
+.table-roaming-entete {
+    background-color: #3E3E3E;
+    color: #fff;
+    font-size: 16px;
+    padding-left: 10px;
+}

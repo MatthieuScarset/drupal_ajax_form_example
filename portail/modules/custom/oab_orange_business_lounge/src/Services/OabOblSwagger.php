@@ -11,6 +11,7 @@ class OabOblSwagger {
 
     private $url_api = '';
     private $title_label = '';
+    private $zone_id = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
@@ -37,6 +38,13 @@ class OabOblSwagger {
     public function getZones () {
         $data = $this->executeScriptCurl(self::API_ZONE);
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOneZone($id) {
+        return $this->executeScriptCurl("/zones/".$id);
     }
 
     /**
@@ -88,8 +96,9 @@ class OabOblSwagger {
             }
         }
 
-        return $json_ret;
         curl_close($ch);
+        return $json_ret;
+
     }
 
 }
