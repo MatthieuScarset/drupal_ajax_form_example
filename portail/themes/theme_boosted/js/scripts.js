@@ -18,6 +18,10 @@
         }
     });
 
+    //Par défaut, sur le filter parce qu'on y fait des ations, contrairement au load more
+    var ajax_is_filter = false;
+
+
     $( window ).resize(function() {
         image_resize_width();
         obs_template_height();
@@ -190,9 +194,7 @@
   });
 
   $(window).on('load', function(e){
-     //vg.vgrefresh();
      manageSmallImageInTemplates();
-    //vg.vgrefresh();
   });
 
 
@@ -375,7 +377,7 @@
     if (settings.data.indexOf( "view_name=business_insight") != -1) {
         // Si Vg a autant voire plus d'element que notre div de base, c'est que la div complete a été remplacée
         // Dans ce cas, on refait le vgrid
-        if (vg[0].children.length >= $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper > div").length) {
+        if (ajax_is_filter) {
             vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
                 easing: "easeOutQuint",
                 useLoadImageEvent: true,
@@ -390,6 +392,9 @@
         } else {
             vg.vgrefresh();
         }
+
+        // Par défaut, parce que pas moyen de le changer au load
+        ajax_is_filter = false;
     }
       $('.fieldset-field-insight-type .btn label').on('click', function(evt){
           utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
@@ -400,14 +405,16 @@
     $(document).on("click", "div.btn-field-insight-type", function() {
         let input_id = $(this).attr('data-input');
         $('input#' + input_id).prop( "checked", true );
+        ajax_is_filter = true;
+
        $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
-  });
+    });
 
     $(document).on("change", "select[name='field_insight_target_id']", function() {
-     //   $('select#edit-field-insight-target-id').on('change', function() {
-     $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+        ajax_is_filter = true;
+        $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
 
-  });
+    });
 
     $('.fieldset-field-insight-type .btn label').on('click', function(evt){
          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
