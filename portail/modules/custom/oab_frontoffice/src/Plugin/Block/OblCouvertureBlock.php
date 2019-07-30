@@ -21,7 +21,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  */
 
-class OblPartenairesBlock extends BlockBase {
+class OblCouvertureBlock extends BlockBase {
 
     public function build() {
 
