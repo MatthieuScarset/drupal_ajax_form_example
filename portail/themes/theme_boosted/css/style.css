@@ -2971,3 +2971,12 @@ img.image_pannel{
     font-size: 16px;
     padding-left: 10px;
 }
+
+.block-content-partners-obl-price {
+    margin-left: 10px;
+}
+
+.main-container-partner-obl-price {
+    background-color: #DDDDDD;
+    margin-bottom: 20px;
+}

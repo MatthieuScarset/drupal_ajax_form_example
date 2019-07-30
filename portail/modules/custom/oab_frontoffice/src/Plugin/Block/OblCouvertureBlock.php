@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @author FVMV3117
  * @Block(
- *   id = "obl_partenaires_block",
+ *   id = "obl_couverture_block",
  *   admin_label = @Translation("Partenaires OBL"),
  *   category = @Translation("Blocks"),
  * )
@@ -55,7 +55,7 @@ class OblPartenairesBlock extends BlockBase {
         ];
         $form['content'] = array(
             '#type' => 'text_format',
-            '#title' => t('Liste des réseaux partenaires'),
+            '#title' => t('Label du lien'),
             '#default_value' => isset($this->configuration['content']) ? $this->configuration['content'] : '',
             '#format' => isset($this->configuration['content_format']) ? $this->configuration['content_format'] : 'full_html',
         );
