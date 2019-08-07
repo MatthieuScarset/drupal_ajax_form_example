@@ -2972,11 +2972,65 @@ img.image_pannel{
     padding-left: 10px;
 }
 
-.block-content-partners-obl-price {
+.block-content-partners-obl-price, .block-content-couverture-obl-price {
     margin-left: 10px;
+}
+
+.block-content-couverture-obl-price {
+    background-color: #FF7900;
+    padding: 5px;
+    margin-left: 10px;
+    color: #fff;
 }
 
 .main-container-partner-obl-price {
     background-color: #DDDDDD;
     margin-bottom: 20px;
+    padding: 5px;
+    height: 300px;
+}
+
+.main-container-couverture-obl-price {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-container-couverture-obl-price h3, .block-content-couverture-obl-price h4{
+    color: #fff;
+}
+
+.obl-search-by-country {
+    padding-left: 0 !important;
+}
+
+.countries_input_autocomplete {
+    border: solid 2px black;
+}
+
+@media(max-width: 767px) {
+    .roaming-infos-container {
+        width: auto;
+    }
+
+    .partenaires_obl_block_title {
+        padding-left: 10px;
+    }
+
+    .obl-zone-container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .empty-roaming-infos-container h4 {
+        width: 100%;
+    }
+
+    .obl-block-display {
+        padding: 0 !important;
+    }
 }

@@ -15,7 +15,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @author FVMV3117
  * @Block(
  *   id = "obl_couverture_block",
- *   admin_label = @Translation("Partenaires OBL"),
+ *   admin_label = @Translation("Couverture OBL"),
  *   category = @Translation("Blocks"),
  * )
  *
@@ -27,14 +27,13 @@ class OblCouvertureBlock extends BlockBase {
 
         $block = array();
 
-        $current_block = \Drupal\block\Entity\Block::load('partenairesobl');
+        $current_block = \Drupal\block\Entity\Block::load('couvertureobl');
 
         if ($current_block) {
             $settings = $current_block->get('settings');
             $content = $settings['content'];
             $title = $settings['block_title'];
         }
-
         $block['#markup'] = $content;
         $block['block_title'] = $title;
 
@@ -54,10 +53,10 @@ class OblCouvertureBlock extends BlockBase {
             '#required' => true,
         ];
         $form['content'] = array(
-            '#type' => 'text_format',
+            '#type' => 'textfield',
             '#title' => t('Label du lien'),
             '#default_value' => isset($this->configuration['content']) ? $this->configuration['content'] : '',
-            '#format' => isset($this->configuration['content_format']) ? $this->configuration['content_format'] : 'full_html',
+            '#required' => true,
         );
 
         return $form;
@@ -74,9 +73,7 @@ class OblCouvertureBlock extends BlockBase {
      * {@inheritdoc}
      */
     public function blockSubmit($form, FormStateInterface $form_state) {
-        $content = $form_state->getValue('content');
-        $this->configuration['content'] = $content['value'];
-        $this->configuration['content_format'] = $content['format'];
+        $this->configuration['content'] = $form_state->getValue('content');
         $this->configuration['block_title'] = $form_state->getValue('block_title');
     }
 }

@@ -39,6 +39,7 @@ global-styling:
     js/script.js: {}
   dependencies:
     - system/admin
+    - core/jquery
 
 node-form:
   version: VERSION
