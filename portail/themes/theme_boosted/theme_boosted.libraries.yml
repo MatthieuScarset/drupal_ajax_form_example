@@ -31,6 +31,7 @@ global-styling:
     boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}
     js/jquery.vgrid.min.js: {}
+    js/vision_business.js: {}
     js/readmorelink.js: {}
     js/header.js: {}
     js/social_bar/orange_socialbar.js: {}
