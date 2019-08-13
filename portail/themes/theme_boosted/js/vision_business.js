@@ -10,22 +10,28 @@
 
 (function ($, Drupal, Bootstrap) {
 
-    var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-        easing: "easeOutQuint",
-        useLoadImageEvent: true,
-        time: 400,
-        delay: 20,
-        fadeIn: {
-            time: 500,
-            delay: 50,
-            wait: 500
-        }
-    });
+    function createVgrid() {
 
-    //Par défaut, sur le filter parce qu'on y fait des ations, contrairement au load more
+        $(window).off('resize.vgrid');
+        return $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
+            easing: "easeOutQuint",
+            useLoadImageEvent: true,
+            time: 400,
+            delay: 20,
+            fadeIn: {
+                time: 500,
+                delay: 50,
+                wait: 500
+            }
+        });
+    }
+
+    let vg = createVgrid();
+
+    //Par défaut, sur le filter parce qu'on y fait des actions, contrairement au load more
     // + compteur pour compter le nb de requetes ajax qui partent (on a parfois 2 requetes qui partent.. Impossible de localiser l'envoie pour l'instant)
-    var ajax_is_filter = false;
-    var compteur = 0;
+    let ajax_is_filter = false;
+    let compteur = 0;
 
     jQuery(document).ajaxSend(function(event, xhr, settings) {
         if (settings.data.indexOf( "view_name=business_insight") != -1) {
@@ -39,24 +45,15 @@
         if (settings.data.indexOf( "view_name=business_insight") != -1) {
             compteur --;
             if (compteur < 1) {
-                if (ajax_is_filter && compteur == 0) {
-                    vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-                        easing: "easeOutQuint",
-                        useLoadImageEvent: true,
-                        time: 400,
-                        delay: 20,
-                        fadeIn: {
-                            time: 500,
-                            delay: 50,
-                            wait: 500
-                        }
-                    });
-                } else if (compteur == 0) {
+                if (ajax_is_filter && compteur === 0) {
+                    vg = createVgrid();
+                } else if (compteur === 0) {
                     vg.vgrefresh();
                 }
 
                 // Par défaut, parce que pas moyen de le changer au load
                 ajax_is_filter = false;
+                compteur = 0;
             }
         }
 
