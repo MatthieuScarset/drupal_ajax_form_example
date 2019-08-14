@@ -46,3 +46,10 @@ oab.export_file_list:
   parent: oab.settings
   description: 'Export File list'
   weight: -20
+
+oab.settings_custom_email_handler_template:
+  title: Webform custom handlers settings
+  route_name: oab.settings_custom_email_handler_template
+  parent: oab.settings
+  description: 'Custom webform email templates'
+  weight: -20

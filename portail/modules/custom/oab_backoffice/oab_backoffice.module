@@ -15,6 +15,7 @@ use Drupal\node\Entity\Node;
 use Drupal\entity\Revision\RevisionableContentEntityBase;
 use Drupal\workbench_moderation\Entity\ModerationState;
 use \Drupal\oab_dvi\DviHelper;
+use Drupal\oab_backoffice\Form\OabSettingsWebformCustomTemplateForm;
 
 //include_once 'includes/mediatheque.inc';
 define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -109,6 +110,48 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
     // Deplacement de la fonction dans une fichier .include spécifique pour ne pas surcharger ce fichier
     _in_hook_form_alter($form, $form_state, $form_id);
+
+    if ($form === "webform_handler_form" || strpos($form_id, 'webform_handler_form') !== false) {
+
+        // Petit changement pour mettre mon option avant les elements
+        $b = $form["settings"]['message']['body']['#options']['Elements'];
+        unset($form["settings"]['message']['body']['#options']['Elements']);
+        $form["settings"]['message']['body']['#options']['_html_obs_template'] = "HTML OBS template";
+        $form["settings"]['message']['body']['#options']['Elements'] = $b;
+
+        $email_template = \Drupal::config(OabSettingsWebformCustomTemplateForm::getConfigName())->get(OabSettingsWebformCustomTemplateForm::CUSTOM_TEMPLATE);
+
+        $custom_html_oab = [
+            '#type' => "webform_html_editor",
+            '#format' => "",
+            '#title' => "HTML OBS template",
+            '#title_display' => "hidden",
+            '#parents' => [
+                'settings',
+                'body_custom_oab_template'
+            ],
+            '#default_value' => isset($email_template['value']) ? $email_template['value'] : "",
+            '#states' => [
+                'visible' => [
+                    ':input[name="settings[body]"]' => ['value' => '_html_obs_template'],
+                    ':input[name="settings[html]"]' => ['checked' => true]
+                ],
+                'required' => [
+                    ':input[name="settings[body]"]' => ['value' => '_html_obs_template'],
+                    ':input[name="settings[html]"]' => ['checked' => true]
+                ]
+            ],
+            '#element_validate' => ['Drupal\webform\WebformTokenManager', 'validateElement'],
+            '#token_types' => [
+                'webform',
+                'webform_submission',
+                'site',
+                'date'
+            ]
+        ];
+
+        $form["settings"]['message']['body_custom_oab_template'] = $custom_html_oab;
+    }
 
 }
 
