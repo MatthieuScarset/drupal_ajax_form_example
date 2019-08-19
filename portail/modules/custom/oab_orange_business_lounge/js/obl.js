@@ -46,9 +46,9 @@
         var arr_hydra_member = drupalSettings.arr_contries;
         var countries = [];
 
-        /*arr_hydra_member.forEach(function (item, key) {
+        arr_hydra_member.forEach(function (item, key) {
             countries[key] = item.label;
-        });*/
+        });
 
         listen_form_countries(countries);
     }

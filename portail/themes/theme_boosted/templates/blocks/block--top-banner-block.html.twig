@@ -48,17 +48,10 @@
 
 
 <section{{ attributes.addClass('block', 'clearfix', 'phonenumber') }}>
-    <div class="col-xs-12">
-        <div>{{ content.block_image}}</div>
-        {% block content %}
-            {% if content is not null %}
-                <div class="row">
-                    <div class="block-content-couverture-obl-price">
-                        <h4>{{ content['#markup'] }}</h4>
-                    </div>
-                </div>
-            {% endif %}
-        {% endblock %}
+
+    <div class="container">
+      {{ content.block_image }}
+        <h2>{{ content.block_title_custom }}</h2>
     </div>
 </section>
 
