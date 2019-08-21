@@ -78,7 +78,11 @@ class OabOblForm extends ConfigFormBase {
 
         /** @var \Drupal\oab_orange_business_lounge\Services\OabOblSwagger $obl_service */
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
-        $obl_service->isValid($url);
+
+        if ($obl_service->isValid($url))
+            drupal_set_message(t('Api connected Successfully'), 'status', TRUE);
+        else
+            drupal_set_message(t('Unexpected HTTP code'), 'error', TRUE);
     }
 
 

@@ -58,10 +58,10 @@ class OabOblSwagger {
 
     /**
      * @param $url
+     * @return bool|mixed
      */
     public function isValid($url) {
-
-        $this->executeScriptCurl(self::API_COUNTRIES, $url);
+        return $this->executeScriptCurl(self::API_COUNTRIES, $url);
     }
 
 
@@ -86,12 +86,10 @@ class OabOblSwagger {
 
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
-                    drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
                     $json_ret = json_decode($ret_value, true);
                     break;
 
                 default:
-                    drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
                     $json_ret = false;
             }
         }

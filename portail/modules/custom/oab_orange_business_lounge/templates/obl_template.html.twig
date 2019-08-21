@@ -1,89 +1,64 @@
 <div class="container">
+    <a href="/modules/custom/oab_orange_business_lounge/images/CDC_API_BU_MOBILE.pdf" download="CDC_API_BU">
+        <button type="button" class="btn btn-primary" style="color:black;"> Télécharger au format pdf </button>
+    </a>
+</div>
 
-    {% for key, country in zones.items %}
+<br/><br/>
+<div class="container">
 
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="col-md-9 col-lg-9">
 
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading{{ key }}">
-                    <h5 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ key }}" aria-expanded="true" aria-controls="collapse{{ key }}" class="collapsed">{{ country.id }} : {{ country.code }} >>> {{ country.label }} </a>
-                    </h5>
-                </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
 
-                <div id="collapse{{ key }}" class="panel-collapse collapse " role="tabpanel" aria-labelledby="heading{{ key }}">
-                    <div class="panel-body">
+    </div>
 
+    <div class="col-md-3 col-lg-3">
 
-                        <div class="col-sm-6">
-                            {%  if country.code == "TRAVEL" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_travel.jpg" />
-                            {% endif %}
-
-                            {%  if country.code == "BUSINESS" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_business.jpg" />
-                            {% endif %}
-
-                            {%  if country.code == "HZONE" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_restedumonde.jpg" />
-                            {% endif %}
-
-                            {%  if country.code == "SATEL" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_satellite.jpg" />
-                            {% endif %}
-
-                            {%  if country.code == "UE" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_europe.jpg" />
-                            {% endif %}
-
-                            {%  if country.code == "SA" %}
-                                <img class="image_pannel" src="/modules/custom/oab_orange_business_lounge/images/visuel_suisse_andorre.jpg" />
-                            {% endif %}
-                        </div>
-
-
-                        <div class="col-sm-6">
-                            <ul>
-                                {% for key, myRoaming in country.roamingCharges %}
-                                    <li><h6>{{ key }} : {{ myRoaming }}</h6></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <table class='table table-striped'>
-                            <thead>
-                                <tr class="header_col">
-                                    <th>calling</th>
-                                    <th>sendingSms</th>
-                                    <th>sendingMms</th>
-                                    <th>forwardingCall</th>
-                                    <th>zoneId</th>
-                                    <th>zoneCode</th>
-                                </tr>
-                            </thead>
-
-                            {% for myRoamingChargesToZones in country.roamingChargesToZones %}
-                                <tr>
-                                    <td><h6>{{ myRoamingChargesToZones.calling }}</h6></td>
-                                    <td><h6>{{ myRoamingChargesToZones.sendingSms }}</h6></td>
-                                    <td><h6>{{ myRoamingChargesToZones.sendingMms }}</h6></td>
-                                    <td><h6>{{ myRoamingChargesToZones.forwardingCall }}</h6></td>
-                                    <td><h6>{{ myRoamingChargesToZones.zoneId }}</h6></td>
-                                    <td><h6>{{ myRoamingChargesToZones.zoneCode }}</h6></td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-
-                    </div>
-                </div>
-
-            </div>
+        <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
+            <h5>Vous avez également les accords et tarifs roaming par pays de destination</h5>
+            <br/>
+            <form action="" class="countries_form_autocomplete">
+                <input type="text" name="countries_input_autocomplete" class="countries_input_autocomplete" style="width:100%;margin-bottom:20%" />
+                <input type="submit" class="btn btn-primary" style="color:black;width:100%;color:black;border: none;text-align: left;" value="Voir les tarifs" />
+            </form>
+            <br/>
 
         </div>
 
-    {% endfor %}
+    </div>
 
 </div>
-
-
-
