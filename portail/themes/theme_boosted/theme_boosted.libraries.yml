@@ -30,6 +30,8 @@ global-styling:
   js:
     boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}
+    js/jquery.vgrid.min.js: {}
+    js/vision_business.js: {}
     js/readmorelink.js: {}
     js/header.js: {}
     js/social_bar/orange_socialbar.js: {}
@@ -40,11 +42,12 @@ global-styling:
     js/switch.js: {}
     js/tealium.js: {}
     js/cssua.min.js: {}
-    js/jquery.vgrid.min.js: {}
 
   dependencies:
     - core/jquery
     - core/jquery.once
+    - core/jquery.ui
+    - core/jquery.ui.effects.slide
     - core/drupal
     - js/orange_socialbar_settings.js
 

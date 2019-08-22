@@ -241,14 +241,6 @@
 
         local_nav.addClass('hidden-xs');
     }
-    $( document ).ajaxComplete(function() {
-       console.log( "Triggered ajaxComplete handler." );
-        //TODO Uncomment me + find a better way to handle the first call, if necessary
-       // $('#page_thematique_filter').collapse("toggle");
-
-
-
-    });
 
     $(document).ready(function () {
 

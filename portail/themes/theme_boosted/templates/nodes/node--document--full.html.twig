@@ -129,6 +129,7 @@ view_mode ? view_mode|clean_class,
                 {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
                     ~ '&fname=' ~ media.field_file.entity.filename.value
                     ~ '&dwname=' ~ media.field_file.entity.filename.value
+                    ~ '&title=' ~ node.label|url_encode
                 %}
             {% endif %}
         {% endif %}

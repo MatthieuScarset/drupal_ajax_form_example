@@ -46,6 +46,13 @@ oab.gdpr_settings:
   requirements:
     _custom_access: \Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm::access
 
+oab.settings_custom_email_handler_template:
+  path: '/admin/structure/oab/settings/custom-email-handler-template'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsWebformCustomTemplateForm'
+    _title: 'Webform email handlers settings'
+  requirements:
+    _custom_access: \Drupal\oab_backoffice\Form\OabSettingSpecificAccessForm::access
 
 #page d'administration par défaut
 oab_backoffice.export_file_list:
