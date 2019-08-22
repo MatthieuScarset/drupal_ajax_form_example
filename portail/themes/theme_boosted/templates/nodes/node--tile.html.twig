@@ -84,7 +84,7 @@
                 {% set file = media.field_image.entity %}
                 {% set uri = file.uri.value %}
                 {% if uri is not null and media.name.value is not null %}
-                    <img onmousedown="utag_link(utag_data.titre_page, 'Tile', 'Illustration', '{{ node.label }}');" src="{{ uri|image_style_uri('subhome') }}" alt="{{ media.name.value }}" class="imgBusinessInsight"  />
+                    <img onmousedown="utag_link(utag_data.titre_page, 'Tile', 'Illustration', '{{ node.label }}');" src="{{ uri|image_style_uri('max_650') }}" alt="{{ media.name.value }}" class="imgBusinessInsight"  />
                 {% endif %}
             {% endfor %}
         </div>

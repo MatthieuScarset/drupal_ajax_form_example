@@ -10,7 +10,6 @@
         image_resize_width();
         obs_template_height();
         changeHeightSubhome();
-        tile_format();
     });
 
     function image_resize_width(){
@@ -127,26 +126,10 @@
     });
   }
 
-  function tile_format(){
-      var vg = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-          easing: "easeOutQuint",
-          useLoadImageEvent: true,
-          time: 400,
-          delay: 20,
-          fadeIn: {
-              time: 500,
-              delay: 50,
-              wait: 500
-          }
-      });
-  }
-
   $(document).ready(function () {
     image_resize_width();
     obs_template_height();
-    //tile_format();
     showhideFilters();
-    //resizeIframeAuto('iframePardot');
 
     $( ".close-env-info" ).click(function(){
       if ($('.env-info').is(":visible")){
@@ -154,48 +137,10 @@
       }
     });
 
-    //initialize swiper when document ready
-   /* var mySwiperHomepage = new Swiper ('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-        loop: true,
-        pagination : '.swiper-pagination',
-        paginationType: 'bullets',
-        // Responsive breakpoints
-        breakpoints: {
-          // when window width is <= 320px
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          },
-          // when window width is <= 480px
-          480: {
-              slidesPerView: 1,
-              spaceBetween: 20
-          },
-          // when window width is <= 640px
-          768: {
-              slidesPerView: 3,
-              spaceBetween: 30
-          }
-        }
-      });*/
-
-      //initialize swiper when document ready
-     /* var mySwiperThematic = new Swiper ('.swiper-container-columns', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-        pagination : '.swiper-pagination',
-        paginationType: 'bullets',
-      });*/
-
   });
 
   $(window).on('load', function(e){
-    tile_format();
-    manageSmallImageInTemplates();
-    //vg.vgrefresh();
+     manageSmallImageInTemplates();
   });
 
 
@@ -372,50 +317,5 @@
       $('.icon-share[data-target="#social-share"]').click();
     }
   });
-
-  jQuery(document).ajaxComplete(function(event, xhr, settings) {
-    // see if it is from our view
-    if (settings.data.indexOf( "view_name=business_insight") != -1) {
-        $('.imgBusinessInsight').on('load', function () {
-            tile_format();
-        });
-    }
-      $('.fieldset-field-insight-type .btn label').on('click', function(evt){
-          utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
-      });
-
-  });
-
-    $(document).on("click", "div.btn-field-insight-type", function() {
-        let input_id = $(this).attr('data-input');
-        $('input#' + input_id).prop( "checked", true );
-       $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
-  });
-
-    $(document).on("change", "select[name='field_insight_target_id']", function() {
-     //   $('select#edit-field-insight-target-id').on('change', function() {
-     $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
-
-  });
-
-    $('.fieldset-field-insight-type .btn label').on('click', function(evt){
-         utag_link(utag_data.titre_page, 'Filters', 'Content Type', $(evt.target).text());
-    });
-
-    $(document).on('click', '.view-business-insight .field_insight_type a', function() {
-        let taxo_id = $(this).attr('data-taxo');
-        let selector = "div.btn-field-insight-type[data-taxo='"+taxo_id+"']";
-
-        $(selector).click();
-        return false;
-    });
-
-    $(document).on('click', '.view-business-insight .field_insight a', function() {
-        let taxo_id = $(this).attr('data-taxo');
-        let selector = "select[name='field_insight_target_id']";
-
-        $(selector).val(taxo_id).trigger('change');
-        return false;
-    });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
