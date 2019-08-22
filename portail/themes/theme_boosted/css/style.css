@@ -3021,6 +3021,7 @@ img.image_pannel{
 
 .header-top-banner-container > img {
     width: 100%;
+    height: auto;
 }
 
 .header-top-banner-container h2 {
@@ -3028,6 +3029,11 @@ img.image_pannel{
     left: 100px;
     top: 200px;
     color: #fff;
+}
+
+.obl-label-name {
+    padding-top: 0;
+    margin-top: 0;
 }
 
 @media(max-width: 767px) {

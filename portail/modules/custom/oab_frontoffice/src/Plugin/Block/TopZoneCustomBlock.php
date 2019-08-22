@@ -15,14 +15,14 @@ use Drupal\media_entity\Entity\Media;
  *
  * @author DMPT2806
  * @Block(
- *   id = "top_banner_block",
- *   admin_label = @Translation("Top Banner"),
+ *   id = "top_zone_custom_block",
+ *   admin_label = @Translation("Top Zone Custom"),
  *   category = @Translation("Blocks"),
  * )
  *
  */
 
-class TopBannerBlock extends BlockBase {
+class TopZoneCustomBlock extends BlockBase {
 
     public function build() {
         $block = array();
