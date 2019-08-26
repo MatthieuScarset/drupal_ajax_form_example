@@ -26,6 +26,7 @@ class TopZoneCustomBlock extends BlockBase {
 
     public function build() {
         $block = array();
+
         $settings = $this->configuration;
         $file = File::load($settings['block_image']);
 
@@ -53,16 +54,12 @@ class TopZoneCustomBlock extends BlockBase {
         $renderer = \Drupal::service('renderer');
         $renderer->addCacheableDependency($logo_render_array, $file);
 
-            //
-            //$settings = $current_block->get('settings');
-            $content = $settings['content'];
-            $title = $settings['block_title_custom'];
+        $content = $settings['content'];
+        $title = $settings['block_title_custom']['value'];
 
         $block['#markup'] = $content;
         $block['block_image'] = $logo_render_array;
-
         $block['block_title_custom'] = $title;
-
 
         return $block;
     }
@@ -76,8 +73,9 @@ class TopZoneCustomBlock extends BlockBase {
 
         $form['block_title_custom'] = [
             '#title' => $this->t('Titre du block'),
-            '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['block_title_custom']) ? $this->configuration['block_title_custom'] : 'Titre du block',
+            '#type' => 'text_format',
+            '#default_value' => isset($this->configuration['block_title_custom']['value']) ? $this->configuration['block_title_custom']['value'] : '',
+            '#format' => isset($this->configuration['content_format']) ? $this->configuration['content_format'] : 'full_html',
             '#required' => true,
         ];
 
