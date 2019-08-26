@@ -30,34 +30,13 @@ class TopZoneCustomBlock extends BlockBase {
         $settings = $this->configuration;
         $file = File::load($settings['block_image']);
 
-        $variables = [
-            'style_name' => 'top_zone_big',
-            'uri' => $file->getFileUri()
-        ];
 
-        $image = \Drupal::service('image.factory')->get($file->getFileUri());
-        if ($image->isValid()) {
-            $variables['width'] = $image->getWidth();
-            $variables['height'] = $image->getHeight();
-        } else {
-            $variables['width'] = $variables['height'] = NULL;
-        }
+        $url = ImageStyle::load('top_zone_big')->buildUrl($file->getFileUri());
+        $url = file_url_transform_relative($url);
 
-        $logo_render_array = [
-            '#theme' => 'image_style',
-            '#width' => $variables['width'],
-            '#height' => $variables['height'],
-            '#style_name' => $variables['style_name'],
-            '#uri' => $variables['uri'],
-        ];
 
-        $renderer = \Drupal::service('renderer');
-        $renderer->addCacheableDependency($logo_render_array, $file);
-
-        $title = $settings['block_title_custom']['value'];
-
-        $block['block_image'] = $logo_render_array;
-        $block['block_title_custom'] = $title;
+        $block['block_title_custom'] = $settings['block_title_custom']['value'];
+        $block['block_bgimage_url'] = $url;
 
         return $block;
     }

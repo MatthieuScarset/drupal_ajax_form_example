@@ -49,12 +49,8 @@
 
 <section{{ attributes.addClass('block', 'clearfix', 'header-top-banner-container') }}>
 
-    <div class="hidden-xs banner-topzone-pwp container">
-        {{ content.block_image }}
-        <div class="top-zone-main-content">
-            <div>
-                {{ content.block_title_custom | raw }}
-            </div>
-        </div>
+    <div class="topzonebg" style="background:url('{{ content.block_bgimage_url }}') top center no-repeat">
+        {{ content.block_title_custom | raw }}
     </div>
+
 </section>
