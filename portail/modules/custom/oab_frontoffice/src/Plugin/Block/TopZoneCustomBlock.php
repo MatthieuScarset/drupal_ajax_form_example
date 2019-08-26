@@ -55,7 +55,7 @@ class TopZoneCustomBlock extends BlockBase {
             '#format' => isset($this->configuration['block_title_custom']['format']) ? $this->configuration['block_title_custom']['format'] : 'full_html',
             '#required' => true,
         ];
-        kint($this->configuration);
+
         $form['block_image'] = [
             '#title' => $this->t('blooop du block'),
            '#type' => 'managed_file',
