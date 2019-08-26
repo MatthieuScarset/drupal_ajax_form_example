@@ -47,10 +47,14 @@
 #}
 
 
-<section{{ attributes.addClass('block', 'clearfix') }}>
+<section{{ attributes.addClass('block', 'clearfix', 'header-top-banner-container') }}>
 
-    <div class="header-top-banner-container container-fluid">
+    <div class="hidden-xs banner-topzone-pwp container">
         {{ content.block_image }}
-        <h2>{{ content.block_title_custom }}</h2>
+        <div class="top-zone-main-content">
+            <div>
+                {{ content.block_title_custom | raw }}
+            </div>
+        </div>
     </div>
 </section>
