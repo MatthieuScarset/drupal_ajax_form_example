@@ -76,7 +76,7 @@ class TopZoneCustomBlock extends BlockBase {
 
         $form['block_title_custom'] = [
             '#title' => $this->t('Titre du block'),
-            '#type' => 'textfield',
+            '#type' => 'textformat',
             '#default_value' => isset($this->configuration['block_title_custom']) ? $this->configuration['block_title_custom'] : 'Titre du block',
             '#required' => true,
         ];
