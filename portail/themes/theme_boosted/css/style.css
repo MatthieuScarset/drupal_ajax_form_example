@@ -3013,27 +3013,13 @@ img.image_pannel{
     margin-bottom: 15px;
 }
 
-.header-top-banner-container {
-    position: relative;
-    max-width: 100%;
-    padding: 0 !important;
-}
-
-.header-top-banner-container > img {
-    width: 100%;
-    height: auto;
-}
-
-.header-top-banner-container h2 {
-    position: absolute;
-    left: 100px;
-    top: 200px;
-    color: #fff;
-}
-
 .obl-label-name {
     padding-top: 0;
     margin-top: 0;
+}
+
+.header-top-banner-container h1 {
+    color: #fff;
 }
 
 @media(max-width: 767px) {
@@ -3058,7 +3044,7 @@ img.image_pannel{
         padding: 0 !important;
     }
 
-    .header-top-banner-container > img, .header-top-banner-container h2, .reseau-partenaire-tarif-roaming  {
+    .header-top-banner-container, .reseau-partenaire-tarif-roaming  {
         display: none;
     }
 
@@ -3066,7 +3052,7 @@ img.image_pannel{
         background-color: #333333;
     }
 
-    .path-oblpricepage .js-quickedit-page-title.page-header, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2{
+    .path-oblpricepage .page-header, .path-oblpricepage > h1, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2, .obl-label-name{
         color: #fff;
         border: none;
     }
