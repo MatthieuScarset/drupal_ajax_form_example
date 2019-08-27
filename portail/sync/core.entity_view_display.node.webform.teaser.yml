@@ -1,0 +1,35 @@
+uuid: ac0b7953-ea14-4110-9c8b-d927e72b9646
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.webform.field_p_wysiwyg_rebond
+    - field.field.node.webform.field_page_du_site_1
+    - field.field.node.webform.field_page_du_site_2
+    - field.field.node.webform.field_rebond_document
+    - field.field.node.webform.moderation_state_update
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - user
+_core:
+  default_config_hash: GcTiETZqKZA6eKXXDvwzpP73csiMScB5_TyYGrKJMd8
+id: node.webform.teaser
+targetEntityType: node
+bundle: webform
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_rebond_document: true
+  langcode: true
+  moderation_state_update: true
+  webform: true

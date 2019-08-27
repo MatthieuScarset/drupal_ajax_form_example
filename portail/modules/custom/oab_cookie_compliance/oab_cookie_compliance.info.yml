@@ -3,7 +3,7 @@ description: 'OAB cookies management'
 type: module
 package: OAB
 # core: 8.x
-configure: oab.cookie_compliance_settings
+configure: oab_cookie_compliance.cookie_compliance_settings
 
 version: '8.x-1.0'
 core: '8.x'

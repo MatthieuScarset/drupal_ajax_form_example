@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: homepage_top_zone
+label: 'Homepage Top Zone Banner (1400x500)'
+effects:
+  fa31d56a-dcba-4c2d-8f8f-391b7ddeca54:
+    uuid: fa31d56a-dcba-4c2d-8f8f-391b7ddeca54
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 500
+      anchor: center-center

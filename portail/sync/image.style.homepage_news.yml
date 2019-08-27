@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: homepage_news
+label: 'Homepage Top News (380x180)'
+effects:
+  efe19084-4b06-438d-af57-bfa49592c023:
+    uuid: efe19084-4b06-438d-af57-bfa49592c023
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 380
+      height: 180
+      anchor: center-center

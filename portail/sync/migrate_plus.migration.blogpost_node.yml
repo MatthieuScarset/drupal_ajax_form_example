@@ -1,0 +1,50 @@
+uuid: 8d5c05e8-41a9-424c-8c2e-4ae54d46539c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3AwHQriYQ9-G7zCrFJHpu4fxDaV-2Zhs4K7kCCIaekI
+id: blogpost_node
+migration_tags: null
+migration_group: blogpost
+label: 'Blog posts nodes'
+source:
+  plugin: blogpost_node
+process:
+  type:
+    plugin: default_value
+    default_value: blog_post
+  title: title
+  created: created
+  changed: changed
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_content/value: content_field
+  field_content/format:
+    plugin: default_value
+    default_value: full_html
+  field_blog_thematic: blog_thematics
+  field_blog_format: blog_formats
+  field_industry: industries
+  field_region: regions
+  field_subhome: subhomes
+  field_insight: thematics
+  field_visual:
+    plugin: migration
+    migration: blogpost_media
+    source: images
+  path: path
+  field_profile: profile_blogger_id
+  moderation_state: moderation_state
+  status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - blogpost_image
+    - blogpost_media
+    - blogpost_profile

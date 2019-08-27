@@ -1,0 +1,40 @@
+uuid: 474eced8-05da-4d63-96ce-9a1b45338b50
+langcode: en
+status: true
+dependencies:
+  module:
+    - migrate_plus
+    - node
+_core:
+  default_config_hash: VQruf2HLwFXvM1STmkRQFSbdnpycQmJuHro2wCmBRPs
+id: office_node
+migration_tags: null
+migration_group: office
+label: Office
+source:
+  plugin: office_node
+process:
+  type:
+    plugin: default_value
+    default_value: office
+  title: title
+  created: created
+  changed: changed
+  status: status
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_office_location/lat: latitude
+  field_office_location/lng: longitude
+  field_office_country: country
+  field_city: city
+  field_postal_code: postal_code
+  field_phone_number: phone_number
+  field_street: street
+  field_additionnal: additional
+  field_email_address: email_address
+  field_region: regions
+destination:
+  plugin: 'entity:node'
+migration_dependencies: {  }

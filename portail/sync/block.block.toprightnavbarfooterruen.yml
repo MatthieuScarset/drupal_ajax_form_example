@@ -1,0 +1,32 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.top-right-navbar-footer-rue
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: toprightnavbarfooterruen
+theme: theme_boosted
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:top-right-navbar-footer-rue'
+settings:
+  id: 'system_menu_block:top-right-navbar-footer-rue'
+  label: 'Top right navbar Footer RU-EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

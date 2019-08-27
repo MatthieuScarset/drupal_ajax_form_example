@@ -1,0 +1,19 @@
+uuid: 1e711c23-8d77-46ad-82e5-ecaf2263f66f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight
+    - node.type.simple_page
+id: node.simple_page.field_highlight
+field_name: field_highlight
+entity_type: node
+bundle: simple_page
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

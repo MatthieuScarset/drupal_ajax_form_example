@@ -1,0 +1,11 @@
+uuid: 6a52dbfd-cea1-4870-b5f3-3fff61c604e3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_a_la_visite_du_centr
+id: webform_submission.inscription_a_la_visite_du_centr
+target_entity_type_id: webform_submission
+target_bundle: inscription_a_la_visite_du_centr
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,24 @@
+uuid: 501c6344-f57e-4049-a169-998c2362224a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.moderation_state_update
+    - node.type.customer_story
+    - scheduled_updates.scheduled_update_type.moderation_state_update
+id: node.customer_story.moderation_state_update
+field_name: moderation_state_update
+entity_type: node
+bundle: customer_story
+label: 'Moderation state update'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler_settings:
+    target_bundles:
+      - moderation_state_update
+  handler: 'default:scheduled_update'
+field_type: entity_reference

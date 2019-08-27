@@ -1,0 +1,14 @@
+uuid: da223a3e-3a6e-493d-befe-27af433b5b00
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.fh_backbones
+  module:
+    - user
+id: user_remove_role_action.fh_backbones
+label: 'Remove the FH Backbones role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: fh_backbones

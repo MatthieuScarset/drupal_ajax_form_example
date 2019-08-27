@@ -1,0 +1,18 @@
+uuid: 94065829-735e-4976-be1b-d98472e6e3e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subhomes
+id: taxonomy_term.subhomes.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: subhomes
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

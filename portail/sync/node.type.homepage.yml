@@ -1,0 +1,24 @@
+uuid: 3a10e7ef-1dcc-4e16-ab10-8ce640ce2d57
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+      - main-navigation-fr
+      - main-navigation-ru
+      - main-navigation-ru-en
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+name: Homepage
+type: homepage
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

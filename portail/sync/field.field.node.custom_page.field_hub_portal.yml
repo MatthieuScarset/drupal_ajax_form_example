@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hub_portal
+    - node.type.custom_page
+id: node.custom_page.field_hub_portal
+field_name: field_hub_portal
+entity_type: node
+bundle: custom_page
+label: 'partagé sur le portail'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Partagé sur le portail'
+  off_label: 'Off'
+field_type: boolean

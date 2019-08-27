@@ -1,0 +1,23 @@
+uuid: 7a737fa4-f5d0-4902-a763-2bcbc33bf8bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_link
+    - paragraphs.paragraphs_type.homepage_banner_item
+  module:
+    - link
+id: paragraph.homepage_banner_item.field_card_link
+field_name: field_card_link
+entity_type: paragraph
+bundle: homepage_banner_item
+label: 'Card link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

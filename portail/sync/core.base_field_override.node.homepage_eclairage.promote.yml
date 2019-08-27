@@ -1,0 +1,22 @@
+uuid: 56edab57-af59-4819-b718-2e981c0e9a6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.homepage_eclairage
+id: node.homepage_eclairage.promote
+field_name: promote
+entity_type: node
+bundle: homepage_eclairage
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,53 @@
+uuid: 7f142a40-95a1-474e-b66d-c5e33700ae7f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ZX7IxgrBYzfL1-UqeL1mSAq75bpcdL4C1zmqCLXl7ws
+id: magazineinterview_node
+migration_tags: null
+migration_group: magazineinterview
+label: 'Magazine interviews nodes'
+source:
+  plugin: magazineinterview_node
+process:
+  type:
+    plugin: default_value
+    default_value: magazine
+  title: title
+  created: created
+  changed: changed
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_content:
+    plugin: iterator
+    source: content_field
+    process:
+      value: value
+      format:
+        plugin: default_value
+        default_value: full_html
+  field_magazine_thematic: magazine_thematics
+  field_magazine_type: magazine_types
+  field_industry: industries
+  field_region: regions
+  field_subhome: subhomes
+  field_insight: thematics
+  field_visual:
+    plugin: migration
+    migration: magazineinterview_media
+    source: images
+  path: path
+  moderation_state: moderation_state
+  status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
+  field_highlight: highlight_field
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - magazineinterview_term
+    - magazineinterview_media

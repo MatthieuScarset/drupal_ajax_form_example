@@ -1,0 +1,21 @@
+uuid: 615ced40-f550-4fa9-988e-bcfd3970bffe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.homepage_banner_experience
+  module:
+    - text
+id: paragraph.homepage_banner_experience.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: homepage_banner_experience
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

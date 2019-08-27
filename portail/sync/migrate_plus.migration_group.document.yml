@@ -1,0 +1,14 @@
+uuid: 19c2f085-08a9-46d7-a83c-23e8be08fd98
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: IIlj8KG06wMFczetDb6IzwM9N9oQk-mgG-lYbeKZ6sw
+id: document
+label: 'Document Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

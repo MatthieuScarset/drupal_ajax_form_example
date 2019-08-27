@@ -1,0 +1,19 @@
+uuid: 65dd8f19-8e3d-4a12-9610-3a82dfda25fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_description
+    - node.type.simple_page
+id: node.simple_page.field_meta_description
+field_name: field_meta_description
+entity_type: node
+bundle: simple_page
+label: 'Meta description'
+description: 'This field is limited to 156 characters (used for SEO-optimization)'
+required: 'true'
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

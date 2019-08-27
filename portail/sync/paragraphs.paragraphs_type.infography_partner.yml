@@ -1,0 +1,7 @@
+uuid: 68264280-8919-4e77-a330-33e1bd469452
+langcode: en
+status: true
+dependencies: {  }
+id: infography_partner
+label: 'Infography partner'
+behavior_plugins: {  }

@@ -1,0 +1,16 @@
+uuid: 9f0fe752-b3d7-4550-9df8-1eae149f2145
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.press_formats
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.press_formats
+target_entity_type_id: taxonomy_term
+target_bundle: press_formats
+default_langcode: current_interface
+language_alterable: true

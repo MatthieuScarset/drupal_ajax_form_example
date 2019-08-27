@@ -1,0 +1,9 @@
+uuid: e2bc35ad-888b-45b9-ab31-45cf760e0f62
+langcode: en
+status: true
+dependencies: {  }
+name: Category
+vid: partner_types
+description: null
+hierarchy: 0
+weight: 0

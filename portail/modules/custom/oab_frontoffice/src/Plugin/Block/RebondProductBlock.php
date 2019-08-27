@@ -75,7 +75,7 @@ class RebondProductBlock extends BlockBase {
           }*/
 
           ##Changement pour la zone, on l'affiche toujours avec une URL par défaut si non dispo via Axiome
-          $ece_settings = \Drupal::config('oab.ece');
+          $ece_settings = \Drupal::config('oab_backoffice.ece');
 
           $block['rebondProduct']['type'] = 'espaceClient';
           $block['rebondProduct']['title'] = $ece_settings->get('title');

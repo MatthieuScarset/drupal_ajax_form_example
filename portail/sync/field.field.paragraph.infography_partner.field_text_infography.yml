@@ -1,0 +1,19 @@
+uuid: 58ac9c17-e3d7-402d-a014-7d3a59c30ab5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_infography
+    - paragraphs.paragraphs_type.infography_partner
+id: paragraph.infography_partner.field_text_infography
+field_name: field_text_infography
+entity_type: paragraph
+bundle: infography_partner
+label: 'Text infography'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

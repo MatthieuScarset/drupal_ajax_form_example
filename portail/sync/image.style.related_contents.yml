@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: related_contents
+label: 'Related Contents (420x200)'
+effects:
+  64299098-90a4-4b7c-9a04-d6002a64f46b:
+    uuid: 64299098-90a4-4b7c-9a04-d6002a64f46b
+    id: image_scale
+    weight: 1
+    data:
+      width: 420
+      height: 200
+      upscale: true

@@ -1,0 +1,8 @@
+uuid: 744a5d00-e1f7-4a0d-8ff2-d523de0d8604
+langcode: es
+status: true
+dependencies: {  }
+id: top-right-navbar-es
+label: 'Top right navbar ES'
+description: 'Top right navbar ES'
+locked: false

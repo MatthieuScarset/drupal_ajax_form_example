@@ -1,0 +1,33 @@
+uuid: 87b25379-8c1f-4696-9c27-91f83d6e9c20
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: press_fr
+label: 'press FR'
+type: 'canonical_entities:node'
+pattern: 'presse/[node:title]'
+selection_criteria:
+  71c53c99-3d42-4197-841f-c81c52a85b3b:
+    id: node_type
+    bundles:
+      press_release: press_release
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 71c53c99-3d42-4197-841f-c81c52a85b3b
+  89868bbf-aeca-41d3-8705-035f8c85f70d:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 89868bbf-aeca-41d3-8705-035f8c85f70d
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

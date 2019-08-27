@@ -1,0 +1,16 @@
+uuid: 92d6ca73-c7cb-4727-91b8-265ca058c8de
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.industries
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.industries
+target_entity_type_id: taxonomy_term
+target_bundle: industries
+default_langcode: current_interface
+language_alterable: true

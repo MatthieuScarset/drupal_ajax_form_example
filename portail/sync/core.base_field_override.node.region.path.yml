@@ -1,0 +1,20 @@
+uuid: 2a0ce35d-715a-4360-b126-2a59b571a09b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.region
+  module:
+    - path
+id: node.region.path
+field_name: path
+entity_type: node
+bundle: region
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

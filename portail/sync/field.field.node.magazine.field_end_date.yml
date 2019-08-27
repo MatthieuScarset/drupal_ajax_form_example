@@ -1,0 +1,21 @@
+uuid: 08eff6c0-f6c4-4ec7-b8a5-45da9f88fa78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_end_date
+    - node.type.magazine
+  module:
+    - datetime
+id: node.magazine.field_end_date
+field_name: field_end_date
+entity_type: node
+bundle: magazine
+label: 'End date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

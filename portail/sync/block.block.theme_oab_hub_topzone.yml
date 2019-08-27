@@ -1,0 +1,34 @@
+uuid: 08ccbb39-abef-497c-81fe-d59b4ccf8fe0
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_topzone
+theme: theme_oab_hub
+region: top_zone
+weight: -17
+provider: null
+plugin: top_zone_block
+settings:
+  id: top_zone_block
+  label: 'Top Zone'
+  provider: oab_frontoffice
+  label_display: visible
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      country: country
+      industry: industry
+      product: product
+      region: region
+      solution: solution
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

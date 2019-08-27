@@ -1,0 +1,11 @@
+uuid: 494171c0-9c8c-467d-8c9e-b1b1a137d20a
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.infography_partner
+id: paragraph.infography_partner
+target_entity_type_id: paragraph
+target_bundle: infography_partner
+default_langcode: site_default
+language_alterable: false

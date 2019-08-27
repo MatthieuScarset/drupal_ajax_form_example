@@ -1,0 +1,8 @@
+uuid: b48147c9-3727-44df-8a55-6ef78c4d7ba8
+langcode: ru
+status: true
+dependencies: {  }
+id: top-navbar-ru
+label: 'Top navbar RU'
+description: 'Top navbar RU'
+locked: false

@@ -1,0 +1,27 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: webform_admin
+label: 'Webform Admin'
+weight: 1
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access webform overview'
+  - 'create webform'
+  - 'create webform content'
+  - 'delete any webform'
+  - 'delete any webform content'
+  - 'delete webform revisions'
+  - 'delete webform submissions any node'
+  - 'edit any webform'
+  - 'edit any webform content'
+  - 'edit any webform submission'
+  - 'edit webform submissions any node'
+  - 'revert webform revisions'
+  - 'view any webform submission'
+  - 'view the administration theme'
+  - 'view webform revisions'
+  - 'view webform submissions any node'

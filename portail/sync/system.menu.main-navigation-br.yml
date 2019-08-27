@@ -1,0 +1,8 @@
+uuid: fa9fc294-38d1-44ad-8388-89b8c6978602
+langcode: pt-br
+status: true
+dependencies: {  }
+id: main-navigation-br
+label: 'Main navigation BR'
+description: 'PT Site section links'
+locked: false

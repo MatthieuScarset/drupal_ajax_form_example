@@ -1,0 +1,165 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.press_release.field_city
+    - field.field.node.press_release.field_content
+    - field.field.node.press_release.field_content_owner
+    - field.field.node.press_release.field_country
+    - field.field.node.press_release.field_display_title
+    - field.field.node.press_release.field_email_owner
+    - field.field.node.press_release.field_end_date
+    - field.field.node.press_release.field_file
+    - field.field.node.press_release.field_highlight
+    - field.field.node.press_release.field_industry
+    - field.field.node.press_release.field_insight
+    - field.field.node.press_release.field_insight_type
+    - field.field.node.press_release.field_job_profile
+    - field.field.node.press_release.field_market_segment
+    - field.field.node.press_release.field_meta_description
+    - field.field.node.press_release.field_meta_title
+    - field.field.node.press_release.field_metatags
+    - field.field.node.press_release.field_p_wysiwyg_rebond
+    - field.field.node.press_release.field_page_du_site_1
+    - field.field.node.press_release.field_page_du_site_2
+    - field.field.node.press_release.field_press_type
+    - field.field.node.press_release.field_rebond_document
+    - field.field.node.press_release.field_region
+    - field.field.node.press_release.field_solution
+    - field.field.node.press_release.field_start_date
+    - field.field.node.press_release.field_subhome
+    - field.field.node.press_release.field_visual
+    - field.field.node.press_release.field_visual_tile
+    - field.field.node.press_release.moderation_state_update
+    - node.type.press_release
+  module:
+    - datetime
+    - metatag
+    - text
+    - user
+id: node.press_release.default
+targetEntityType: node
+bundle: press_release
+mode: default
+content:
+  field_city:
+    weight: 10
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_content:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_country:
+    weight: 11
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_end_date:
+    weight: 2
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_file:
+    weight: 7
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_highlight:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_industry:
+    weight: 9
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_metatags:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_press_type:
+    weight: 12
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_solution:
+    weight: 8
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_start_date:
+    weight: 3
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_blog_thematic: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_insight: true
+  field_insight_type: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_rebond_document: true
+  field_region: true
+  field_subhome: true
+  field_visual: true
+  field_visual_tile: true
+  field_wysiwyg_rebond: true
+  langcode: true
+  moderation_state_update: true

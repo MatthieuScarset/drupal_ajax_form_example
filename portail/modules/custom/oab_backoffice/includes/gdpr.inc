@@ -152,7 +152,7 @@ function gdpr_hook_node_acces(Drupal\node\Entity\Node $entity, $operation, \Drup
  */
 function gdpr_hook_mail($key, &$message, $params) {
     $token_service = \Drupal::token();
-    $config = \Drupal::config('oab.gdpr_settings');
+    $config = \Drupal::config('oab_backoffice.gdpr_settings');
 
     switch ($key) {
         case 'gdpr_spoc_notice':

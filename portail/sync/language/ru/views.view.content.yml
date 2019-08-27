@@ -1,0 +1,28 @@
+label: Cодержание
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      fields:
+        type:
+          label: 'Тип материала'
+        operations:
+          label: Операции
+      filters:
+        type:
+          expose:
+            label: 'Тип материала'
+      title: Cодержание
+  page_1:
+    display_options:
+      menu:
+        title: Cодержание
+      tab_options:
+        title: Cодержание

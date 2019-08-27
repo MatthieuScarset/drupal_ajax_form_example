@@ -3,7 +3,7 @@
 use Drupal\Core\Database\Database;
 
 $config_factory = \Drupal::configFactory();
-$config_old = $config_factory->getEditable('oab.subhomes');
+$config_old = $config_factory->getEditable('oab_subhomes.subhomes');
 
 $config_new = array(
     'press_term_tid' => $config_old->get('press_term_tid'),
@@ -24,7 +24,7 @@ $config_new = array(
 
 // Meta title EN
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.subhomes');
+$config_group = $config_factory->getEditable('oab_subhomes.subhomes');
 $config_group->setData($config_new);
 $config_group->save();
 
@@ -32,14 +32,14 @@ $config_group->save();
 $connection = Database::getConnection();
 $sth = $connection->select('config', 'c')
     ->fields('c', array('data'))
-    ->condition('name', 'oab.subhomes')
+    ->condition('name', 'oab_subhomes.subhomes')
     ->condition('collection', 'language.fr');
 $data = $sth->execute();
 $results = $data->fetchAll(\PDO::FETCH_OBJ);
 if (count($results) > 0) {
     $olddata = unserialize($results[0]->data);
     $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-    $collection->write('oab.subhomes', array (
+    $collection->write('oab_subhomes.subhomes', array (
         'press_term_tid' => $olddata['press_term_tid'],
         'partner_term_tid' => $olddata['partner_term_tid'],
         'customer_term_tid' => $olddata['customer_term_tid'],
@@ -61,14 +61,14 @@ if (count($results) > 0) {
 $connection = Database::getConnection();
 $sth = $connection->select('config', 'c')
     ->fields('c', array('data'))
-    ->condition('name', 'oab.subhomes')
+    ->condition('name', 'oab_subhomes.subhomes')
     ->condition('collection', 'language.ru');
 $data = $sth->execute();
 $results = $data->fetchAll(\PDO::FETCH_OBJ);
 if (count($results) > 0) {
     $olddata = unserialize($results[0]->data);
     $collection = \Drupal::service('config.storage')->createCollection('language.ru');
-    $collection->write('oab.subhomes', array (
+    $collection->write('oab_subhomes.subhomes', array (
         'press_term_tid' => $olddata['press_term_tid'],
         'partner_term_tid' => $olddata['partner_term_tid'],
         'customer_term_tid' => $olddata['customer_term_tid'],

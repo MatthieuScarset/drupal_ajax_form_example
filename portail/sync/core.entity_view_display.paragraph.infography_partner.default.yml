@@ -1,0 +1,45 @@
+uuid: a73729f9-7e7f-49a9-acf4-0b194b634e7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.infography_partner.field_background_image
+    - field.field.paragraph.infography_partner.field_key_figures
+    - field.field.paragraph.infography_partner.field_text_infography
+    - paragraphs.paragraphs_type.infography_partner
+  module:
+    - image
+id: paragraph.infography_partner.default
+targetEntityType: paragraph
+bundle: infography_partner
+mode: default
+content:
+  field_background_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_key_figures:
+    weight: 1
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_text_infography:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

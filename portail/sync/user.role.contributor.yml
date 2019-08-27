@@ -1,0 +1,53 @@
+uuid: 9d0a2637-b58f-4e23-952a-609c8c9dc59f
+langcode: en
+status: true
+dependencies: {  }
+id: contributor
+label: contributeur
+weight: 6
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access browse_media_modal entity browser pages'
+  - 'access browse_medias_iframe entity browser pages'
+  - 'access browser_file_modal entity browser pages'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access in-place editing'
+  - 'access media overview'
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access tour'
+  - 'access user profiles'
+  - 'access workbench'
+  - 'administer media'
+  - 'administer nodes'
+  - 'create url aliases'
+  - 'delete own product content'
+  - 'edit own blog_post content'
+  - 'edit own country content'
+  - 'edit own customer_story content'
+  - 'edit own document content'
+  - 'edit own full_html content'
+  - 'edit own industry content'
+  - 'edit own magazine content'
+  - 'edit own office content'
+  - 'edit own partner content'
+  - 'edit own press_kit content'
+  - 'edit own press_release content'
+  - 'edit own profile content'
+  - 'edit own region content'
+  - 'edit own simple_page content'
+  - 'edit own solution content'
+  - 'edit own webform content'
+  - 'use draft_draft transition'
+  - 'use draft_needs_review transition'
+  - 'use needs_review_draft transition'
+  - 'use published_draft transition'
+  - 'use published_published transition'
+  - 'use text format full_html'
+  - 'use unpublished_to_draft transition'
+  - 'view full_html revisions'
+  - 'view moderation states'
+  - 'view own unpublished content'
+  - 'view the administration theme'

@@ -1,0 +1,352 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.homepage.field_banner_expertise
+    - field.field.node.homepage.field_banner_left_zone_title
+    - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_corporate_button_link
+    - field.field.node.homepage.field_corporate_button_text
+    - field.field.node.homepage.field_corporate_highlight
+    - field.field.node.homepage.field_corporate_image
+    - field.field.node.homepage.field_corporate_menu
+    - field.field.node.homepage.field_corporate_menu_title
+    - field.field.node.homepage.field_corporate_show_menu
+    - field.field.node.homepage.field_corporate_title
+    - field.field.node.homepage.field_expertise_title
+    - field.field.node.homepage.field_header_title
+    - field.field.node.homepage.field_infography
+    - field.field.node.homepage.field_meta_description
+    - field.field.node.homepage.field_meta_title
+    - field.field.node.homepage.field_metatags
+    - field.field.node.homepage.field_news_top_zone
+    - field.field.node.homepage.field_partner_button_link
+    - field.field.node.homepage.field_partner_title
+    - field.field.node.homepage.field_partners_button_text
+    - field.field.node.homepage.field_solution_banner_btn_link
+    - field.field.node.homepage.field_solution_banner_btn_text
+    - field.field.node.homepage.field_solution_banner_highlight
+    - field.field.node.homepage.field_solution_banner_image
+    - field.field.node.homepage.field_solution_banner_left_zone
+    - field.field.node.homepage.field_solution_banner_right_zone
+    - field.field.node.homepage.field_solution_banner_title
+    - field.field.node.homepage.field_solution_banner_title_colo
+    - field.field.node.homepage.field_solution_image_mobile
+    - field.field.node.homepage.field_subhead_title_top_zone
+    - field.field.node.homepage.field_title_btn_text
+    - field.field.node.homepage.field_title_button_link
+    - field.field.node.homepage.field_title_color
+    - field.field.node.homepage.field_top_zone_image
+    - field.field.node.homepage.field_top_zone_image_mobile
+    - field.field.node.homepage.moderation_state_update
+    - image.style.max_650
+    - node.type.homepage
+  module:
+    - entity_reference_revisions
+    - image
+    - link
+    - options
+    - text
+    - user
+id: node.homepage.full
+targetEntityType: node
+bundle: homepage
+mode: full
+content:
+  field_banner_expertise:
+    type: entity_reference_revisions_entity_view
+    weight: 14
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_banner_left_zone_title:
+    type: string
+    weight: 10
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_banner_right_zone_title:
+    type: string
+    weight: 11
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_corporate_button_link:
+    type: link
+    weight: 12
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_corporate_button_text:
+    type: string
+    weight: 26
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_corporate_highlight:
+    type: text_default
+    weight: 13
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_corporate_image:
+    type: image
+    weight: 18
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+  field_corporate_menu:
+    type: entity_reference_label
+    weight: 16
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_corporate_menu_title:
+    type: string
+    weight: 19
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_corporate_show_menu:
+    type: boolean
+    weight: 17
+    region: content
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_corporate_title:
+    type: string
+    weight: 15
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_expertise_title:
+    type: string
+    weight: 20
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_header_title:
+    type: string
+    weight: 9
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_infography:
+    type: entity_reference_revisions_entity_view
+    weight: 22
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_meta_title:
+    type: string
+    weight: 23
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_news_top_zone:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_partner_button_link:
+    type: link
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_partner_title:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_partners_button_text:
+    type: string
+    weight: 25
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_solution_banner_btn_link:
+    type: entity_reference_label
+    weight: 33
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_solution_banner_btn_text:
+    type: string
+    weight: 32
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_solution_banner_highlight:
+    type: text_default
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_solution_banner_image:
+    type: image
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      image_style: homepage_solution_banner
+      image_link: ''
+    third_party_settings: {  }
+  field_solution_banner_left_zone:
+    type: entity_reference_revisions_entity_view
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_solution_banner_right_zone:
+    type: entity_reference_revisions_entity_view
+    weight: 21
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_solution_banner_title:
+    type: string
+    weight: 8
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_solution_banner_title_colo:
+    type: list_key
+    weight: 31
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_solution_image_mobile:
+    type: image
+    weight: 27
+    region: content
+    label: hidden
+    settings:
+      image_style: max_650
+      image_link: ''
+    third_party_settings: {  }
+  field_subhead_title_top_zone:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_title_btn_text:
+    type: string
+    weight: 29
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_title_button_link:
+    type: entity_reference_label
+    weight: 30
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_title_color:
+    type: list_key
+    weight: 24
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_top_zone_image:
+    type: image
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      image_style: homepage_top_zone
+      image_link: ''
+    third_party_settings: {  }
+  field_top_zone_image_mobile:
+    type: image
+    weight: 28
+    region: content
+    label: hidden
+    settings:
+      image_style: max_650
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  field_hub: true
+  field_hub_portal: true
+  field_meta_description: true
+  field_metatags: true
+  langcode: true
+  links: true
+  moderation_state_update: true

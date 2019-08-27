@@ -1,0 +1,25 @@
+uuid: e163b8f4-32db-4e26-9bd3-51bac6e8552b
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 4jN2q56DEj5Uyt-1w5tafEHKC4GYOXPcVKyhZgUdWcw
+id: blogpost_image
+migration_tags: null
+migration_group: blogpost
+label: 'Blog posts images'
+source:
+  plugin: blogpost_image
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:file'
+migration_dependencies: {  }

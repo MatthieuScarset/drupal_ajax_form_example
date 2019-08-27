@@ -1,0 +1,22 @@
+uuid: 81b770bb-735d-4498-a618-d2d90e015ae8
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.file
+id: media.file.status
+field_name: status
+entity_type: media
+bundle: file
+label: 'Publishing status'
+description: 'A boolean indicating whether the media is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

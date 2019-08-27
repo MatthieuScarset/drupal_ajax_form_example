@@ -1,0 +1,34 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.rebond_wysiwyg.field_p_rebond_wysiwyg_contenu
+    - field.field.paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - text
+    - workbench_moderation
+id: paragraph.rebond_wysiwyg.default
+targetEntityType: paragraph
+bundle: rebond_wysiwyg
+mode: default
+content:
+  field_p_rebond_wysiwyg_contenu:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_p_wysiwyg_rebond_color:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,45 @@
+uuid: 4d99058b-5414-4cf4-a568-5750d33231e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.home_playlist.field_link_button
+    - field.field.paragraph.home_playlist.field_playlist_taxonomy_term
+    - field.field.paragraph.home_playlist.field_title
+    - paragraphs.paragraphs_type.home_playlist
+  module:
+    - link
+id: paragraph.home_playlist.default
+targetEntityType: paragraph
+bundle: home_playlist
+mode: default
+content:
+  field_link_button:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_playlist_taxonomy_term:
+    weight: 3
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

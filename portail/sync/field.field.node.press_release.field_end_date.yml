@@ -1,0 +1,21 @@
+uuid: 3bb9f56a-f987-41cc-8f07-d4fa47566ddd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_end_date
+    - node.type.press_release
+  module:
+    - datetime
+id: node.press_release.field_end_date
+field_name: field_end_date
+entity_type: node
+bundle: press_release
+label: 'End date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,8 @@
+uuid: 041a63d6-1fbb-45a6-be29-5c8970a1cf30
+langcode: fr
+status: true
+dependencies: {  }
+id: main-menu-consulting-fr
+label: 'consulting Main menu fr'
+description: 'consulting Main menu fr'
+locked: false

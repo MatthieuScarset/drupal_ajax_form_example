@@ -1,0 +1,8 @@
+uuid: da161943-e239-4670-ba0a-6f4d7b75ab29
+langcode: pt-br
+status: true
+dependencies: {  }
+id: bottom-footerbar-br
+label: 'Bottom Footerbar BR'
+description: 'Bottom Footerbar BR'
+locked: false

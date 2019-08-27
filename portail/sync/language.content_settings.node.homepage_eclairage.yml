@@ -1,0 +1,18 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.homepage_eclairage
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.homepage_eclairage
+target_entity_type_id: node
+target_bundle: homepage_eclairage
+default_langcode: current_interface
+language_alterable: true

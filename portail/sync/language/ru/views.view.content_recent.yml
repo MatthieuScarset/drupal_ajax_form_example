@@ -1,0 +1,8 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Найти
+          exposed_sorts_label: Фильтр
+      use_more_text: Ещё

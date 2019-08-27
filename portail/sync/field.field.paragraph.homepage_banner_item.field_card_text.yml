@@ -1,0 +1,21 @@
+uuid: b254ea43-3048-4ac1-a8bb-08c7817e8a68
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_text
+    - paragraphs.paragraphs_type.homepage_banner_item
+  module:
+    - text
+id: paragraph.homepage_banner_item.field_card_text
+field_name: field_card_text
+entity_type: paragraph
+bundle: homepage_banner_item
+label: 'Card text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

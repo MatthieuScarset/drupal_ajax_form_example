@@ -1,0 +1,8 @@
+uuid: a6b9082d-c7eb-4fcf-96bf-61f959742010
+langcode: en
+status: true
+dependencies: {  }
+id: direct-access-bar-en
+label: 'Direct Access Bar EN'
+description: 'Menu for Direct Access Bar EN'
+locked: false

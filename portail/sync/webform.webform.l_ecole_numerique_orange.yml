@@ -1,0 +1,202 @@
+langcode: fr
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 22
+template: false
+archive: false
+id: l_ecole_numerique_orange
+title: 'L''Ecole Numérique Orange'
+description: 'Agence DEF'
+category: Agence
+elements: "descriptif:\n  '#type': processed_text\n  '#text': \"<p>Vos coordonnées sont nécessaires pour traiter votre demande et vous informer en retour.<br />\\r\\nLes champs précédés de * sont obligatoires.</p>\\r\\n\\r\\n<p>Ces informations seront utilisées par Orange conformément à la loi Informatique et Libertés du 6 janvier 1978.<br />\\r\\nUn droit d'accès et de rectification peut être exercé auprès de Orange.</p>\\r\\n\"\n  '#format': full_html\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#required': true\ncivilite:\n  '#type': radios\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Mademoiselle: Mademoiselle\n    Monsieur: Monsieur\n  '#options_display': three_columns\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nville:\n  '#type': textfield\n  '#title': Ville\nfonction:\n  '#type': textarea\n  '#title': Fonction\n  '#required': true\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Je m''inscris'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: false
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "Votre demande est prise en compte.<br />\r\n<br />\r\nMerci pour votre confiance"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: false
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  form_submission_from_l_ecole_numerique_orange:
+    id: email
+    label: 'form submission from : L''Ecole Numérique Orange'
+    handler_id: form_submission_from_l_ecole_numerique_orange
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: mariemelanie.renaud@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: no-reply@orange-business.com
+      from_options: {  }
+      from_name: _default
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+uuid: 456ac1fe-b0f0-4dc1-a74b-8bce6a0256e1

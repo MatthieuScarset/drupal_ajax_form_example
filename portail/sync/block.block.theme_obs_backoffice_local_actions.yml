@@ -1,0 +1,20 @@
+uuid: 94d38c00-8bc1-4e08-a59d-1a91fc7c99c8
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: theme_obs_backoffice_local_actions
+theme: theme_obs_backoffice
+region: content
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

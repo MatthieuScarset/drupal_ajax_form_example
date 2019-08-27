@@ -1,0 +1,32 @@
+uuid: 37fb7794-240b-45b8-beb7-6f067f3490da
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.top-right-navbar-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: toprightnavbarfr
+theme: theme_boosted
+region: header
+weight: -9
+provider: null
+plugin: 'system_menu_block:top-right-navbar-fr'
+settings:
+  id: 'system_menu_block:top-right-navbar-fr'
+  label: 'Top right navbar FR'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

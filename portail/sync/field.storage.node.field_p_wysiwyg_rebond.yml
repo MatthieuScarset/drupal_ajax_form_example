@@ -1,0 +1,21 @@
+uuid: 6908b3c5-1e2b-4a1d-9e65-2fef79a76b58
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_p_wysiwyg_rebond
+field_name: field_p_wysiwyg_rebond
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

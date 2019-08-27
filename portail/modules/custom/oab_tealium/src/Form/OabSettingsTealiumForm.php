@@ -21,7 +21,7 @@ class OabSettingsTealiumForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.tealium',
+      'oab_tealium.tealium',
     ];
   }
 
@@ -29,7 +29,7 @@ class OabSettingsTealiumForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.tealium');
+    $config = $this->config('oab_tealium.tealium');
 
     $form['sous_domaine'] = array(
       '#type' => 'textfield',
@@ -75,7 +75,7 @@ class OabSettingsTealiumForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.tealium')
+    $this->config('oab_tealium.tealium')
       ->set('sous_domaine', $form_state->getValue('sous_domaine'))
       ->set('univers_affichage', $form_state->getValue('univers_affichage'))
       ->set('sous_univers', $form_state->getValue('sous_univers'))

@@ -1,0 +1,35 @@
+uuid: f2271d47-8362-4cc8-8cdd-6d2148e9e891
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.blogger_insert
+    - field.field.media.image.field_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - image.style.blogger_insert
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.blogger_insert
+targetEntityType: media
+bundle: image
+mode: blogger_insert
+content:
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: blogger_insert
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

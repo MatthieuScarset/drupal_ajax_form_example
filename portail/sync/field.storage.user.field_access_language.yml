@@ -1,0 +1,20 @@
+uuid: 1a550875-d74c-4060-84c6-b1c02bd77457
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - user
+id: user.field_access_language
+field_name: field_access_language
+entity_type: user
+type: entity_reference
+settings:
+  target_type: configurable_language
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

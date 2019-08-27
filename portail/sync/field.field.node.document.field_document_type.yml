@@ -1,0 +1,32 @@
+uuid: 9a8e1e34-dff7-48e1-8300-3a2ca11d9290
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_document_type
+    - node.type.document
+    - taxonomy.vocabulary.document_types
+  content:
+    - 'taxonomy_term:document_types:e83a2ebe-9dc8-48e9-8f87-3e0eb784e748'
+id: node.document.field_document_type
+field_name: field_document_type
+entity_type: node
+bundle: document
+label: 'Document Type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: e83a2ebe-9dc8-48e9-8f87-3e0eb784e748
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      document_types: document_types
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: 8878fc5c-c643-4e59-9f1e-0862a5527cfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.homepage_news
+id: paragraph.homepage_news.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: homepage_news
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

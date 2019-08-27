@@ -1,0 +1,9 @@
+uuid: 86986fa6-ec4c-43cb-aa5e-15603339fd2b
+langcode: en
+status: true
+dependencies: {  }
+name: 'Documents thematics'
+vid: document_thematics
+description: ''
+hierarchy: 0
+weight: 0

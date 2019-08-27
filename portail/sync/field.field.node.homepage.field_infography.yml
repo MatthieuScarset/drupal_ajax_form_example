@@ -1,0 +1,42 @@
+uuid: 24b33334-d140-4e02-9c9a-d7cf2f569bb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_infography
+    - node.type.homepage
+    - paragraphs.paragraphs_type.infography_partner
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_infography
+field_name: field_infography
+entity_type: node
+bundle: homepage
+label: Infography
+description: 'Image size: 100x100px'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      infography_partner: infography_partner
+    target_bundles_drag_drop:
+      homepage_banner_experience:
+        weight: 6
+        enabled: false
+      homepage_banner_item:
+        weight: 7
+        enabled: false
+      homepage_news:
+        weight: 8
+        enabled: false
+      infography_partner:
+        enabled: true
+        weight: 9
+      related_content:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

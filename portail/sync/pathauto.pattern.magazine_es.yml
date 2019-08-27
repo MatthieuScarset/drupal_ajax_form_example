@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: magazine_es
+label: 'magazine ES'
+type: 'canonical_entities:node'
+pattern: 'revista/[node:title]'
+selection_criteria:
+  8ab52243-bd65-4df2-aa34-7656b27fa88f:
+    id: node_type
+    bundles:
+      magazine: magazine
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 8ab52243-bd65-4df2-aa34-7656b27fa88f
+  dab9c298-260b-4a62-bd85-8671bbba0d6c:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: dab9c298-260b-4a62-bd85-8671bbba0d6c
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

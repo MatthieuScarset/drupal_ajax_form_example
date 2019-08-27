@@ -1,0 +1,11 @@
+uuid: 146abe6d-9c7e-4fd1-b954-ef5974838626
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.home_banner
+id: paragraph.home_banner
+target_entity_type_id: paragraph
+target_bundle: home_banner
+default_langcode: site_default
+language_alterable: false

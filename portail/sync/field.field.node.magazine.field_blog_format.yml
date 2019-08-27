@@ -1,0 +1,28 @@
+uuid: 8f8e12db-81cd-475a-8506-4ad47dbc8f66
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_format
+    - node.type.magazine
+    - taxonomy.vocabulary.blog_formats
+id: node.magazine.field_blog_format
+field_name: field_blog_format
+entity_type: node
+bundle: magazine
+label: 'Magazine format'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      blog_formats: blog_formats
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

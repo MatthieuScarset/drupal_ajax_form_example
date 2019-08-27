@@ -1,0 +1,9 @@
+uuid: 25abd912-940b-4a70-a5e2-b105762ee940
+langcode: und
+status: true
+dependencies: {  }
+name: 'Media thematics'
+vid: media_thematics
+description: ''
+hierarchy: 0
+weight: 0

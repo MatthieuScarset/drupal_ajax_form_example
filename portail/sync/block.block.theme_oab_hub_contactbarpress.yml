@@ -1,0 +1,48 @@
+uuid: 0b54f050-b5bc-4d0a-9320-007d8a654981
+langcode: fr
+status: false
+dependencies:
+  module:
+    - language
+    - node
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_contactbarpress
+theme: theme_oab_hub
+region: prefooter
+weight: 0
+provider: null
+plugin: contact_bar_press_block
+settings:
+  id: contact_bar_press_block
+  label: 'Contact Bar Press EN'
+  provider: oab_frontoffice
+  label_display: '0'
+  link_ecrire: /en/media-contacts
+  link_ecrire_text: 'Contact us'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: "/press*\r\n/presse*"
+    negate: false
+    context_mapping: {  }
+  node_type:
+    id: node_type
+    bundles:
+      press_kit: press_kit
+      press_release: press_release
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

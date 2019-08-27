@@ -1,0 +1,9 @@
+uuid: 98688e32-1276-4f12-8e9b-31961265cfd0
+langcode: en
+status: true
+dependencies: {  }
+name: 'Blog thematic'
+vid: blog_thematics
+description: null
+hierarchy: 0
+weight: 0

@@ -21,7 +21,7 @@ class OabSettingsOfficesMapForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.offices_map',
+      'oab_offices_map.offices_map',
     ];
   }
 
@@ -29,7 +29,7 @@ class OabSettingsOfficesMapForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.offices_map');
+    $config = $this->config('oab_offices_map.offices_map');
 
     $form['contact_url'] = array(
       '#type' => 'textfield',
@@ -45,7 +45,7 @@ class OabSettingsOfficesMapForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.offices_map')
+    $this->config('oab_offices_map.offices_map')
       ->set('contact_url', $form_state->getValue('contact_url'))
       ->save();
 

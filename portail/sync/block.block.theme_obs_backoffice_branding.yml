@@ -1,0 +1,25 @@
+uuid: adf211e3-3ba8-48d9-8c89-07a452b5aa3e
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: fRKXNB91UxDvEMkzCR8ZBsawfC6Fqbme2gtobei3gu4
+id: theme_obs_backoffice_branding
+theme: theme_obs_backoffice
+region: header
+weight: -3
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

@@ -1,0 +1,29 @@
+uuid: 42933379-7bd4-4b21-a3fa-f8a6415f653d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_market_segment_dvi
+    - node.type.distributor
+    - taxonomy.vocabulary.market_segments_dvi
+id: node.distributor.field_market_segment_dvi
+field_name: field_market_segment_dvi
+entity_type: node
+bundle: distributor
+label: 'Market segment DVI'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      market_segments_dvi: market_segments_dvi
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

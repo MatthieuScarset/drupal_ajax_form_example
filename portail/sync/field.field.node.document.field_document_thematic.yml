@@ -1,0 +1,28 @@
+uuid: b12e9cf9-60ba-4cf6-b9aa-7eb8f23fc81a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_document_thematic
+    - node.type.document
+    - taxonomy.vocabulary.document_thematics
+id: node.document.field_document_thematic
+field_name: field_document_thematic
+entity_type: node
+bundle: document
+label: 'Document Thematic'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      document_thematics: document_thematics
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

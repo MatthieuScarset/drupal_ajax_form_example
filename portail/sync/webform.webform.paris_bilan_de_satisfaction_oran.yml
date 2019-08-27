@@ -1,0 +1,202 @@
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 22
+template: false
+archive: false
+id: paris_bilan_de_satisfaction_oran
+title: 'Paris Bilan de satisfaction Orange Event Solutions'
+description: 'Agence Paris'
+category: Agence
+elements: "descriptif:\n  '#type': processed_text\n  '#text': \"<p>Votre satisfaction est notre priorité<br />\\r\\n<br />\\r\\nLes champs précédés de * sont obligatoires.</p>\\r\\n\\r\\n<p>Ces informations seront utilisées par Orange conformément à la loi Informatique et Libertés du 6 janvier 1978.<br />\\r\\nUn droit d'accès et de rectification peut être exercé auprès d'Orange.</p>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': radios\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Mademoiselle: Mademoiselle\n    Monsieur: Monsieur\n  '#options_display': three_columns\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse mail'\n  '#required': true\nq1:\n  '#type': processed_text\n  '#admin_title': 'accueil téléphonique et la prise en charge ?'\n  '#text': \"<p class=\\\"insight_banniere\\\">Concernant l'accueil téléphonique et la prise en charge de votre demande, comment jugez-vous :</p>\\r\\n\"\n  '#format': full_html\n  la_faciilite_a_contacter_les_services_orange_event_solution:\n    '#type': radios\n    '#title': 'La facilité à contacter les services Orange Event Solutions'\n    '#title_display': inline\n    '#options':\n      'Très satisfaisant': 'Très satisfaisant'\n      Satisfaisant: Satisfaisant\n      'Peu satisfaisant': 'Peu satisfaisant'\n      'Pas du tout satisfaisant': 'Pas du tout satisfaisant'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\n  le_delais_de_prise_en_charge_de_votre_demande_par_un_conseiller_:\n    '#type': radios\n    '#title': 'Le délais de prise en charge de votre demande par un conseiller client'\n    '#options':\n      'Très satisfaisant': 'Très satisfaisant'\n      Satisfaisant: Satisfaisant\n      'Peu satisfaisant': 'Peu satisfaisant'\n      'Pas du tout satisfaisant': 'Pas du tout satisfaisant'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\n  adequation_reponse_demande:\n    '#type': radios\n    '#title': 'L''adéquation de la réponse à votre demande'\n    '#options':\n      'Très satisfaisante': 'Très satisfaisante'\n      Satisfaisante: Satisfaisante\n      'Peu satisfaisante': 'Peu satisfaisante'\n      'Pas du tout satisfaisante': 'Pas du tout satisfaisante'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\nq2:\n  '#type': processed_text\n  '#admin_title': 'Plus particulièrement comment jugez-vous ?'\n  '#text': \"<p class=\\\"insight_banniere\\\">Plus particulièrement comment jugez-vous :</p>\\n\"\n  '#format': full_html\n  info_prestation:\n    '#type': radios\n    '#title': 'L''information donnée sur le déroulement de la prestation'\n    '#options':\n      'Très satisfaisante': 'Très satisfante'\n      Satisfaisante: Satisfaisante\n      'Peu satisfaisante': 'Peu satisfaisante'\n      'Pas du tout satisfaisante': 'Pas du tout satisfaisante'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\n  delais_mes:\n    '#type': radios\n    '#title': 'Le respect du délais de mise en service'\n    '#options':\n      'Très satisfaisant': 'Très satisfaisant'\n      Satisfaisant: Satisfaisant\n      'Peu satisfaisant': 'Peu satisfaisant'\n      'Pas du tout satisfaisant': 'Pas du tout satisfaisant'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\n  quali_inter:\n    '#type': radios\n    '#title': 'La qualité  d''exécution des travaux par les techniciens d''intervention'\n    '#options':\n      'Très satisfaisante': 'Très satisfaisante'\n      Satisfaisante: Satisfaisante\n      'Peu satisfaisante': 'Peu satisfaisante'\n      'Pas du tout satisfaisante': 'Pas du tout satisfaisante'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\n  capacite_coordonner:\n    '#type': radios\n    '#title': 'La capacité de nos techniciens à se coordonner avec vous'\n    '#options':\n      'Très satisfaisante': 'Très satisfaisante'\n      Satisfaisante: Satisfaisante\n      'Peu satisfaisante': 'Peu satisfaisante'\n      'Pas du tout satisfaisante': 'Pas du tout satisfaisante'\n      'Ne se prononce pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\nconclusion:\n  '#type': processed_text\n  '#admin_title': Conclusion\n  '#text': \"<p class=\\\"insight_banniere\\\">En conclusion, sur une échelle de 0 à 10, recommanderiez-vous Orange Event Solutions à votre entourage ?</p>\\r\\n\\r\\n<div class=\\\"titre3\\\">\\\"0\\\" signifie que vous ne recommanderiez certainement pas, les notes intermédiaires permettent de nuancer votre jugement et les notes 9 et 10 signifient que vous êtes promoteur d'Orange Event Solutions</div>\\r\\n\"\n  '#format': full_html\n  votre_note:\n    '#type': radios\n    '#title': 'Votre note'\n    '#title_display': invisible\n    '#options':\n      0: '0'\n      1: '1'\n      2: '2'\n      3: '3'\n      4: '4'\n      5: '5'\n      6: '6'\n      7: '7'\n      8: '8'\n      9: '9'\n      10: '10'\n      'Ne se proncone pas': 'Ne se prononce pas'\n    '#options_display': side_by_side\n    '#required': true\nsouhait_amelioration:\n  '#type': processed_text\n  '#admin_title': 'Souhait amelioration'\n  '#text': \"<p class=\\\"insight_banniere\\\">Quels sont vos souhaits d'amélioration pour le traitement de votre prochaine demande ?</p>\\r\\n\"\n  '#format': full_html\n  mes_souhaits:\n    '#type': textarea\n    '#title': 'Mes souhaits'\n    '#title_display': invisible\n  vos_commentaires:\n    '#type': textarea\n    '#title': 'Vos commentaires'\n  souahitez_vous_etre_recontacte_:\n    '#type': radios\n    '#title': 'Souhaitez-vous être recontacté ?'\n    '#options':\n      oui: oui\n      non: non\n    '#options_display': side_by_side\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': 'Je valide'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: false
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: 'Merci pour ces informations'
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email:
+    id: email
+    label: Email
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: 'oes@orange.com,mich.rouillon@orange.com'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: _default
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+uuid: 5823cb5a-1a73-4a93-905b-dc18a3666ccf

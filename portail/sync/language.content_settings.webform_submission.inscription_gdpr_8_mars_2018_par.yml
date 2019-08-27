@@ -1,0 +1,11 @@
+uuid: 2edbab1c-b870-4992-9234-7baf7f60c90d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_gdpr_8_mars_2018_par
+id: webform_submission.inscription_gdpr_8_mars_2018_par
+target_entity_type_id: webform_submission
+target_bundle: inscription_gdpr_8_mars_2018_par
+default_langcode: site_default
+language_alterable: false

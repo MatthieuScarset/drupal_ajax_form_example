@@ -1,0 +1,11 @@
+uuid: 7bc78964-fefd-48bf-bd08-86f4ee70aad5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_a_la_matinee_connect
+id: webform_submission.inscription_a_la_matinee_connect
+target_entity_type_id: webform_submission
+target_bundle: inscription_a_la_matinee_connect
+default_langcode: site_default
+language_alterable: false

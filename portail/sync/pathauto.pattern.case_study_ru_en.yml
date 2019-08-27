@@ -1,0 +1,33 @@
+uuid: a28a9e10-234f-4801-a417-63ac228f1df9
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: case_study_ru_en
+label: 'case study RU-EN'
+type: 'canonical_entities:node'
+pattern: 'customer-stories/[node:title]'
+selection_criteria:
+  82cece73-9447-42e2-b8bd-0bce67595d87:
+    id: node_type
+    bundles:
+      customer_story: customer_story
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 82cece73-9447-42e2-b8bd-0bce67595d87
+  991e5c3b-6871-4129-bcc2-3516f6b0dedf:
+    id: language
+    langcodes:
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 991e5c3b-6871-4129-bcc2-3516f6b0dedf
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

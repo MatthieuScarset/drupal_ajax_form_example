@@ -1,0 +1,14 @@
+uuid: e47b32ba-3acc-4421-b7c4-17fbd13d0b80
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_business_owner
+  module:
+    - user
+id: user_remove_role_action.webform_business_owner
+label: 'Remove the Webform Business Owner role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: webform_business_owner

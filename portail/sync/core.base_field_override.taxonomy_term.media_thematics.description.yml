@@ -1,0 +1,20 @@
+uuid: 3c18c2ad-c29c-4e2c-90ee-1cf4f1ba2c51
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematics
+  module:
+    - text
+id: taxonomy_term.media_thematics.description
+field_name: description
+entity_type: taxonomy_term
+bundle: media_thematics
+label: Description
+description: 'A description of the term.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

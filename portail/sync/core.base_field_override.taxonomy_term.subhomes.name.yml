@@ -1,0 +1,18 @@
+uuid: 666a5000-4d30-4bb3-9f1d-9ceabd11ae04
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subhomes
+id: taxonomy_term.subhomes.name
+field_name: name
+entity_type: taxonomy_term
+bundle: subhomes
+label: Name
+description: 'The term name.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: 9c125e07-e879-4fce-b056-0d14c49f49cd
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: footersocialblock
+theme: theme_boosted
+region: footer
+weight: -15
+provider: null
+plugin: footer_social_block
+settings:
+  id: footer_social_block
+  label: 'Footer Social Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  footer_social_custom_text:
+    value: '<div class="followbar"></div>'
+    format: full_html
+visibility: {  }

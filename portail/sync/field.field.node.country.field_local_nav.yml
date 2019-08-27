@@ -1,0 +1,24 @@
+uuid: 4ee2b5a8-4aa5-4c58-96e4-80186b1d9add
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_local_nav
+    - node.type.country
+  module:
+    - text
+id: node.country.field_local_nav
+field_name: field_local_nav
+entity_type: node
+bundle: country
+label: 'Local nav'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '<div class=''local_nav sub_local_menu container-fluid'' id=''local_nav'' data-title-mobile=''Sous-menu''><div class=''container''><ul><li><a href=''#zone1''>Zone 1</a></li><li><a href=''#zone2''>Zone 2</a></li><li><a href=''#zone3''>Zone 3</a></li><li><a href=''#zone4''>Zone 4</a></li><li><a href=''#zone5''>Zone 5</a></li></ul></div></div>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

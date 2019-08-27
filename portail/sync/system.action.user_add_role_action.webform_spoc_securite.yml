@@ -1,0 +1,14 @@
+uuid: ebcca168-fe8f-4998-b93e-24c0e8b29a56
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_spoc_securite
+  module:
+    - user
+id: user_add_role_action.webform_spoc_securite
+label: 'Add the Webform SPOC Sécurité role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: webform_spoc_securite

@@ -1,0 +1,23 @@
+uuid: 3865533b-f158-4250-b2d1-f1a8bc84d57e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.press_kit
+id: node.press_kit.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: press_kit
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

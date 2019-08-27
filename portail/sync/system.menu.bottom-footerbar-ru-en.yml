@@ -1,0 +1,8 @@
+uuid: 2f2d2990-dc59-428f-8fad-72a8b855efa3
+langcode: ru-en
+status: true
+dependencies: {  }
+id: bottom-footerbar-ru-en
+label: 'Bottom Footerbar RU-EN'
+description: 'Bottom Footerbar RU-EN'
+locked: false

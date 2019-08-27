@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_button
+    - paragraphs.paragraphs_type.default_button
+  module:
+    - link
+id: paragraph.default_button.field_link_button
+field_name: field_link_button
+entity_type: paragraph
+bundle: default_button
+label: URL
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

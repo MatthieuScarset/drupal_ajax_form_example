@@ -1,0 +1,42 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.custom_page.field_content
+    - field.field.node.custom_page.field_display_title
+    - field.field.node.custom_page.field_hub
+    - field.field.node.custom_page.field_hub_portal
+    - field.field.node.custom_page.field_meta_description
+    - field.field.node.custom_page.field_meta_title
+    - field.field.node.custom_page.field_metatags
+    - field.field.node.custom_page.moderation_state_update
+    - node.type.custom_page
+  module:
+    - user
+id: node.custom_page.teaser
+targetEntityType: node
+bundle: custom_page
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_display_title: true
+  field_hub: true
+  field_hub_portal: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  langcode: true
+  moderation_state_update: true

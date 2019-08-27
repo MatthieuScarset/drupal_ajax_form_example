@@ -1,0 +1,23 @@
+uuid: 223f56a0-956e-4eb1-a58b-d5ce2de62922
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_reallink
+    - paragraphs.paragraphs_type.related_content
+  module:
+    - link
+id: paragraph.related_content.field_reallink
+field_name: field_reallink
+entity_type: paragraph
+bundle: related_content
+label: link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

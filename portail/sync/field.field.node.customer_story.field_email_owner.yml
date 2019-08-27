@@ -1,0 +1,19 @@
+uuid: 2c1d8823-0744-4296-b230-2ea6ee20e071
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email_owner
+    - node.type.customer_story
+id: node.customer_story.field_email_owner
+field_name: field_email_owner
+entity_type: node
+bundle: customer_story
+label: 'Email of content owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

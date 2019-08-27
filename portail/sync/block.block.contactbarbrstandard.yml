@@ -1,0 +1,58 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: contactbarbrstandard
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: contact_bar_br_standard_block
+settings:
+  id: contact_bar_br_standard_block
+  label: 'Contact Bar BR Standard'
+  provider: oab_frontoffice
+  label_display: '0'
+  link_offices: 'http://www.orange-business.com/en/where-we-are'
+  link_offices_text: 'Nossos escritórios locais'
+  link_help: 'https://www.orange-business.com/en/contact-us'
+  link_help_text: Dúvidas
+  link_contact: 'https://www.orange-business.com/en/any-request'
+  link_contact_text: 'Entre em contato'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      country: country
+      customer_story: customer_story
+      document: document
+      full_html: full_html
+      homepage: homepage
+      homepage_eclairage: homepage_eclairage
+      hp_eclairage_thematique: hp_eclairage_thematique
+      industry: industry
+      magazine: magazine
+      partner: partner
+      product: product
+      region: region
+      simple_page: simple_page
+      solution: solution
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

@@ -1,0 +1,18 @@
+uuid: 842ae2e2-1dbc-4bd9-83c1-af23746ae2b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.partner
+id: node.partner.changed
+field_name: changed
+entity_type: node
+bundle: partner
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

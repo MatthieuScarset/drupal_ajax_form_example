@@ -1,0 +1,20 @@
+uuid: 198f4393-c718-413e-b8d2-db348b8d20aa
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_oab_hub
+_core:
+  default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
+id: theme_oab_hub_page_title
+theme: theme_oab_hub
+region: content
+weight: -15
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

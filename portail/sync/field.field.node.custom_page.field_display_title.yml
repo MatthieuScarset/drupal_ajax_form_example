@@ -1,0 +1,23 @@
+uuid: 4a14aa4c-1d2a-42bd-9dc3-fb1257c6a5f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.custom_page
+id: node.custom_page.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: custom_page
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

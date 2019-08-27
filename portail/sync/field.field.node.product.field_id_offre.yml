@@ -1,0 +1,23 @@
+uuid: 81e64b2c-15eb-4199-ab00-fab53eab8c9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_id_offre
+    - node.type.product
+id: node.product.field_id_offre
+field_name: field_id_offre
+entity_type: node
+bundle: product
+label: 'Id Offre'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

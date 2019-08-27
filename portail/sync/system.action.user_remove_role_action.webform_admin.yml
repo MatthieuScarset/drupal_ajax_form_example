@@ -1,0 +1,14 @@
+uuid: 277eca4e-9ae4-48bf-a97a-7a227a3aaa9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_admin
+  module:
+    - user
+id: user_remove_role_action.webform_admin
+label: 'Remove the Webform Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: webform_admin

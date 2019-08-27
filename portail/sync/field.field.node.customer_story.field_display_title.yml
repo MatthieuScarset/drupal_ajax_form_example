@@ -1,0 +1,23 @@
+uuid: f6604601-7043-4cd3-819b-ae08f1724038
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.customer_story
+id: node.customer_story.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: customer_story
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

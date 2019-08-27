@@ -1,0 +1,33 @@
+uuid: 4398d76c-af4f-4fd6-a8ef-cd213bb0daf4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

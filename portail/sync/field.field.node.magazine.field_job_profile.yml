@@ -1,0 +1,28 @@
+uuid: addec776-ff5b-4755-b64a-8cf7392f953c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_profile
+    - node.type.magazine
+    - taxonomy.vocabulary.jobs_profiles
+id: node.magazine.field_job_profile
+field_name: field_job_profile
+entity_type: node
+bundle: magazine
+label: Profession
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      jobs_profiles: jobs_profiles
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

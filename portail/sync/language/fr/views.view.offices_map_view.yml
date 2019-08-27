@@ -1,0 +1,15 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+  offices_map_block:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'

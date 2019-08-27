@@ -1,0 +1,49 @@
+uuid: 46d5d2b5-2191-4cb0-a452-c14b687dcbc0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: link
+label: link
+description: ''
+attributes:
+  title:
+    id: title
+    weight: -10
+    settings:
+      automatic_title: true
+  target:
+    id: target
+    weight: -9
+    settings:
+      widget_type: simple_checkbox
+  id:
+    id: id
+    weight: -8
+    settings: {  }
+matchers:
+  b0f24390-41d2-44b3-873b-cb9f26574d49:
+    uuid: b0f24390-41d2-44b3-873b-cb9f26574d49
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: ''
+      bundles:
+        simple_page: simple_page
+        blog_post: blog_post
+        country: country
+        customer_story: customer_story
+        document: document
+        industry: industry
+        magazine: magazine
+        office: office
+        partner: partner
+        press_kit: press_kit
+        press_release: press_release
+        product: product
+        profile: profile
+        region: region
+        solution: solution
+      group_by_bundle: true
+      include_unpublished: false

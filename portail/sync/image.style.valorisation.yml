@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: valorisation
+label: 'Valorisation (310x150)'
+effects:
+  61b55c8f-22ce-48b5-bd50-597e0bd366ab:
+    uuid: 61b55c8f-22ce-48b5-bd50-597e0bd366ab
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 310
+      height: 150
+      anchor: center-center

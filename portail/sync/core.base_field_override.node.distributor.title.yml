@@ -1,0 +1,18 @@
+uuid: c6acb6d5-0bd5-4989-938a-607957d20a7d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.distributor
+id: node.distributor.title
+field_name: title
+entity_type: node
+bundle: distributor
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

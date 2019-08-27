@@ -1,0 +1,21 @@
+uuid: 4a2ebaf2-fdfb-4542-b513-1233f2128910
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.region
+  module:
+    - text
+id: node.region.field_content
+field_name: field_content
+entity_type: node
+bundle: region
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

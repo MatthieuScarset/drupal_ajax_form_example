@@ -1,0 +1,18 @@
+uuid: f17ddaa5-1b38-43f2-afab-98ea105472c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematics
+id: taxonomy_term.media_thematics.name
+field_name: name
+entity_type: taxonomy_term
+bundle: media_thematics
+label: Name
+description: 'The term name.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

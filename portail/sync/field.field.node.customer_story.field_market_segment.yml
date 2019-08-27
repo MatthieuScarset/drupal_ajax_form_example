@@ -1,0 +1,28 @@
+uuid: e56dd159-7a23-4750-8e1a-9a1065949713
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_market_segment
+    - node.type.customer_story
+    - taxonomy.vocabulary.market_segments
+id: node.customer_story.field_market_segment
+field_name: field_market_segment
+entity_type: node
+bundle: customer_story
+label: 'Market segment'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      market_segments: market_segments
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

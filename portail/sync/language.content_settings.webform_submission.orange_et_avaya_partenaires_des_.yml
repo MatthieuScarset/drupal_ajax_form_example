@@ -1,0 +1,11 @@
+uuid: 56f2bcb9-2174-4294-bf4e-a3b8bbe373a7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.orange_et_avaya_partenaires_des_
+id: webform_submission.orange_et_avaya_partenaires_des_
+target_entity_type_id: webform_submission
+target_bundle: orange_et_avaya_partenaires_des_
+default_langcode: site_default
+language_alterable: false

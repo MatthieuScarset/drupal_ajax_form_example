@@ -1,0 +1,10 @@
+uuid: 2a7fd942-d107-485a-8872-8635eb1b4bc1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.rebond_document
+label: rebond_document
+targetEntityType: node
+cache: true

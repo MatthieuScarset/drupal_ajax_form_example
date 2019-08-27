@@ -1,0 +1,20 @@
+uuid: 891aa7f4-f102-4d30-b545-008aec625f99
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.partner
+id: node.partner.moderation_state
+field_name: moderation_state
+entity_type: node
+bundle: partner
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,16 @@
+uuid: 44e29474-e735-4bb2-99a9-fb692e96c4be
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.countries
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.countries
+target_entity_type_id: taxonomy_term
+target_bundle: countries
+default_langcode: current_interface
+language_alterable: true

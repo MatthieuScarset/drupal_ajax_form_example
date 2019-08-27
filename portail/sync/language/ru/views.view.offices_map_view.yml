@@ -1,0 +1,33 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Найти
+          exposed_sorts_label: Фильтр
+      arguments:
+        field_region_target_id:
+          exception:
+            title: Все
+  offices_addresses_list_block:
+    display_options:
+      arguments:
+        field_region_target_id:
+          exception:
+            title: Все
+        field_office_country_target_id:
+          exception:
+            title: Все
+  offices_map_block:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Найти
+          exposed_sorts_label: Фильтр
+      arguments:
+        field_region_target_id:
+          exception:
+            title: Все
+        field_office_country_target_id:
+          exception:
+            title: Все

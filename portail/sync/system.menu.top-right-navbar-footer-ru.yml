@@ -1,0 +1,7 @@
+langcode: ru
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-ru
+label: 'Top right navbar Footer RU'
+description: ''
+locked: false

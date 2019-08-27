@@ -1,0 +1,58 @@
+uuid: 338aec56-fb47-4e6a-88dd-58e8ba5fafe8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_content
+    - field.field.node.solution.field_content
+    - field.field.node.solution.field_content_owner
+    - field.field.node.solution.field_display_title
+    - field.field.node.solution.field_email_owner
+    - field.field.node.solution.field_end_date
+    - field.field.node.solution.field_highlight
+    - field.field.node.solution.field_local_nav
+    - field.field.node.solution.field_meta_description
+    - field.field.node.solution.field_meta_title
+    - field.field.node.solution.field_start_date
+    - field.field.node.solution.field_top_zone
+    - field.field.node.solution.field_top_zone_background
+    - field.field.node.solution.field_visual
+    - node.type.solution
+  module:
+    - user
+id: node.solution.related_content
+targetEntityType: node
+bundle: solution
+mode: related_content
+content:
+  field_highlight:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: related_content_image
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_local_nav: true
+  field_meta_description: true
+  field_meta_title: true
+  field_start_date: true
+  field_top_zone: true
+  field_top_zone_background: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

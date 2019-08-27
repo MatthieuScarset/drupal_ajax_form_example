@@ -1,0 +1,23 @@
+uuid: 60a65b4a-a081-40b4-92f3-a82733654b10
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_title
+    - paragraphs.paragraphs_type.home_column_section
+  module:
+    - link
+id: paragraph.home_column_section.field_link_title
+field_name: field_link_title
+entity_type: paragraph
+bundle: home_column_section
+label: 'Link Title'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

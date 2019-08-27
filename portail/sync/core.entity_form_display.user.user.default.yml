@@ -1,0 +1,74 @@
+uuid: 099f050b-1db1-4627-92fc-4968427260a4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_access_language
+    - field.field.user.user.field_last_password_reset
+    - field.field.user.user.field_password_expiration
+    - field.field.user.user.field_workbench_access
+  module:
+    - datetime
+    - path
+    - user
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  contact:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_access_language:
+    type: options_buttons
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_last_password_reset:
+    type: datetime_default
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_password_expiration:
+    type: boolean_checkbox
+    weight: 3
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    region: content
+  language:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  timezone:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  user_picture:
+    type: image_image
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_workbench_access: true
+  langcode: true

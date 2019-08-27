@@ -1,0 +1,15 @@
+uuid: null
+langcode: fr
+status: true
+dependencies: {  }
+name: top_zone
+label: 'Top zone (1400x280)'
+effects:
+  7c40d148-7df6-4a44-8c1e-4f4015fc79ec:
+    uuid: 7c40d148-7df6-4a44-8c1e-4f4015fc79ec
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 280
+      anchor: center-center

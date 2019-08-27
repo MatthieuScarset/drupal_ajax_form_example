@@ -1,0 +1,16 @@
+uuid: cac271f5-49de-41c1-b529-89fc93d3ea92
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.blog_formats
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.blog_formats
+target_entity_type_id: taxonomy_term
+target_bundle: blog_formats
+default_langcode: current_interface
+language_alterable: true

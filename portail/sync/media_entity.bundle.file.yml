@@ -1,0 +1,12 @@
+uuid: a1e6811e-c441-410f-b7b6-cc9a9af56d3e
+langcode: en
+status: true
+dependencies: {  }
+id: file
+label: File
+description: 'Ajoutez un fichier PDF'
+type: generic
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration: {  }
+field_map: {  }

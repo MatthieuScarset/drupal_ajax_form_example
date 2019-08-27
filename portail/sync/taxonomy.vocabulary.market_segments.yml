@@ -1,0 +1,9 @@
+uuid: 98d781fa-ab26-4863-a72e-6e4eafdf60f3
+langcode: en
+status: true
+dependencies: {  }
+name: 'Market segment'
+vid: market_segments
+description: null
+hierarchy: 0
+weight: 0

@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - workbench
+id: oab_backoffice_node_workbench_unpublish
+label: 'Unpublish content'
+type: node
+plugin: oab_backoffice_node_workbench_unpublish
+configuration: {  }

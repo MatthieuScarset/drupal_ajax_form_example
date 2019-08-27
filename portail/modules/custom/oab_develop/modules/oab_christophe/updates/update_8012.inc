@@ -56,9 +56,9 @@ foreach ($terms as &$term)
 }
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.subhomes');
+$config_group = $config_factory->getEditable('oab_subhomes.subhomes');
 $config_group->setData($EnConfig);
 $config_group->save();
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$collection->write('oab.subhomes', $FRConfig);
+$collection->write('oab_subhomes.subhomes', $FRConfig);

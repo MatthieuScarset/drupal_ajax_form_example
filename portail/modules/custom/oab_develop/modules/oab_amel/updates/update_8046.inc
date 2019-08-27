@@ -34,11 +34,11 @@ foreach ($languages as $lang)
 
     $Config = array();
     $collection = \Drupal::service('config.storage')->createCollection('language.' . $lang);
-    $Config = $collection->read('oab.subhomes');
+    $Config = $collection->read('oab_subhomes.subhomes');
     foreach ($terms as $key => $term) {
         $Config[$term['conf']] =$term['tid'];
     }
-    $collection->write('oab.subhomes', $Config);
+    $collection->write('oab_subhomes.subhomes', $Config);
 
 }
 

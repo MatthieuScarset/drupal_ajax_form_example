@@ -1,0 +1,16 @@
+uuid: e4d6d8a7-db9b-48d1-8187-c62b63ba1154
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.magazine_thematics
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.magazine_thematics
+target_entity_type_id: taxonomy_term
+target_bundle: magazine_thematics
+default_langcode: current_interface
+language_alterable: true

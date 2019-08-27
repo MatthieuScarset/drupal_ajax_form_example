@@ -1,0 +1,22 @@
+uuid: dd6b5275-50e3-449a-b759-cc410e174f86
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customer_story
+id: node.customer_story.sticky
+field_name: sticky
+entity_type: node
+bundle: customer_story
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

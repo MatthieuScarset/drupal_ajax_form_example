@@ -1,0 +1,18 @@
+uuid: 73920170-87f9-4033-977d-ca9131c2a530
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment_blog
+id: comment.comment_blog.subject
+field_name: subject
+entity_type: comment
+bundle: comment_blog
+label: Subject
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

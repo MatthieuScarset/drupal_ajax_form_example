@@ -1,0 +1,40 @@
+uuid: 16491f92-6fcd-4504-aad1-fd838c8bf8f8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.rebond_document
+  module:
+    - ctools
+    - views
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_views_block__rebond_document_block_document
+theme: theme_oab_hub
+region: sidebar
+weight: -40
+provider: null
+plugin: 'views_block:rebond_document-block_document'
+settings:
+  id: 'views_block:rebond_document-block_document'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      customer_story: customer_story
+      document: document
+      magazine: magazine
+      partner: partner
+      press_release: press_release
+      simple_page: simple_page
+      webform: webform
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

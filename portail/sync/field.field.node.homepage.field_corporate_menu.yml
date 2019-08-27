@@ -1,0 +1,23 @@
+uuid: dbca4818-0202-485f-8b7b-5a8804c2f81a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_corporate_menu
+    - node.type.homepage
+id: node.homepage.field_corporate_menu
+field_name: field_corporate_menu
+entity_type: node
+bundle: homepage
+label: Menu
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

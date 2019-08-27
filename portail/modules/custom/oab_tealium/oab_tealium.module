@@ -3,12 +3,12 @@
 use Symfony\Component\HttpFoundation\Response;
 
 function oab_tealium_page_attachments(array &$attachments) {
-    $attachments['#attached']['drupalSettings']['tealium']['sous_domaine'] = \Drupal::config('oab.tealium')->get('sous_domaine');
-    $attachments['#attached']['drupalSettings']['tealium']['univers_affichage'] = \Drupal::config('oab.tealium')->get('univers_affichage');
-    $attachments['#attached']['drupalSettings']['tealium']['sous_univers'] = \Drupal::config('oab.tealium')->get('sous_univers');
-    $attachments['#attached']['drupalSettings']['tealium']['domaine_marketing'] = \Drupal::config('oab.tealium')->get('domaine_marketing');
-    $attachments['#attached']['drupalSettings']['tealium']['code_univers'] = \Drupal::config('oab.tealium')->get('code_univers');
-    $attachments['#attached']['drupalSettings']['tealium']['tealium_url'] = \Drupal::config('oab.tealium')->get('tealium_url');
+    $attachments['#attached']['drupalSettings']['tealium']['sous_domaine'] = \Drupal::config('oab_tealium.tealium')->get('sous_domaine');
+    $attachments['#attached']['drupalSettings']['tealium']['univers_affichage'] = \Drupal::config('oab_tealium.tealium')->get('univers_affichage');
+    $attachments['#attached']['drupalSettings']['tealium']['sous_univers'] = \Drupal::config('oab_tealium.tealium')->get('sous_univers');
+    $attachments['#attached']['drupalSettings']['tealium']['domaine_marketing'] = \Drupal::config('oab_tealium.tealium')->get('domaine_marketing');
+    $attachments['#attached']['drupalSettings']['tealium']['code_univers'] = \Drupal::config('oab_tealium.tealium')->get('code_univers');
+    $attachments['#attached']['drupalSettings']['tealium']['tealium_url'] = \Drupal::config('oab_tealium.tealium')->get('tealium_url');
     if (\Drupal::currentUser()->isAnonymous()) {
         $attachments['#attached']['drupalSettings']['tealium']['profil_compte_navigation'] = 'Utilisateur';
     } else {

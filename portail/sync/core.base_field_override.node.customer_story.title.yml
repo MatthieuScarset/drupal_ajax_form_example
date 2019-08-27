@@ -1,0 +1,18 @@
+uuid: 296f5b5d-b377-4404-a3cd-d22026b6de3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customer_story
+id: node.customer_story.title
+field_name: title
+entity_type: node
+bundle: customer_story
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

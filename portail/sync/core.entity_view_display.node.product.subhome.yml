@@ -1,0 +1,80 @@
+uuid: 5ccac2f5-5357-4d2f-b3ae-a04b42c1d9a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.subhome
+    - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_content
+    - field.field.node.product.field_content_owner
+    - field.field.node.product.field_email_owner
+    - field.field.node.product.field_end_date
+    - field.field.node.product.field_file
+    - field.field.node.product.field_highlight
+    - field.field.node.product.field_id_fiche
+    - field.field.node.product.field_id_offre
+    - field.field.node.product.field_industry
+    - field.field.node.product.field_job_profile
+    - field.field.node.product.field_market_segment
+    - field.field.node.product.field_meta_description
+    - field.field.node.product.field_meta_title
+    - field.field.node.product.field_metatags
+    - field.field.node.product.field_region
+    - field.field.node.product.field_solution
+    - field.field.node.product.field_start_date
+    - field.field.node.product.field_sub_family
+    - field.field.node.product.field_subhome
+    - field.field.node.product.field_top_zone
+    - field.field.node.product.field_top_zone_background
+    - field.field.node.product.field_visual
+    - node.type.product
+  module:
+    - user
+id: node.product.subhome
+targetEntityType: node
+bundle: product
+mode: subhome
+content:
+  field_solution:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: visually_hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+hidden:
+  field_axiome_data: true
+  field_content: true
+  field_content_owner: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_highlight: true
+  field_id_fiche: true
+  field_id_offre: true
+  field_industry: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_region: true
+  field_start_date: true
+  field_sub_family: true
+  field_subhome: true
+  field_top_zone: true
+  field_top_zone_background: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

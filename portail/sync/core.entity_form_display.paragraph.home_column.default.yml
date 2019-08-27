@@ -1,0 +1,51 @@
+uuid: 0c095571-e0fd-4669-9716-e36135161d08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.home_column.field_column_section
+    - field.field.paragraph.home_column.field_solaris_icon
+    - field.field.paragraph.home_column.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.home_column
+  module:
+    - image
+    - paragraphs
+    - workbench_moderation
+id: paragraph.home_column.default
+targetEntityType: paragraph
+bundle: home_column
+mode: default
+content:
+  field_column_section:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_solaris_icon:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

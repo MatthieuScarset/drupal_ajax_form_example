@@ -1,0 +1,23 @@
+uuid: 40aaadde-fe48-4478-a6f8-c42b85e7a16a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_key_figures
+    - paragraphs.paragraphs_type.infography_partner
+id: paragraph.infography_partner.field_key_figures
+field_name: field_key_figures
+entity_type: paragraph
+bundle: infography_partner
+label: 'key figures'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

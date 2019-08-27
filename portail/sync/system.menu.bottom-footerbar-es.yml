@@ -1,0 +1,8 @@
+uuid: 9790c888-9f1d-4f23-8f84-936d0937973a
+langcode: es
+status: true
+dependencies: {  }
+id: bottom-footerbar-es
+label: 'Bottom Footerbar ES'
+description: 'Bottom Footerbar ES'
+locked: false

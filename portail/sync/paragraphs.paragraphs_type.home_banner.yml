@@ -1,0 +1,7 @@
+uuid: 8ca9bebf-b64c-4c1d-ab64-c6370b474dac
+langcode: en
+status: true
+dependencies: {  }
+id: home_banner
+label: 'Home Banner'
+behavior_plugins: {  }

@@ -53,7 +53,7 @@ foreach ($terms as &$term)
 }
 
 $collection = \Drupal::service('config.storage')->createCollection('language.ru');
-$collection->write('oab.subhomes', $RUConfig);
+$collection->write('oab_subhomes.subhomes', $RUConfig);
 
 $collection = \Drupal::service('config.storage')->createCollection('language.ru-en');
-$collection->write('oab.subhomes', $RUENConfig);
+$collection->write('oab_subhomes.subhomes', $RUENConfig);

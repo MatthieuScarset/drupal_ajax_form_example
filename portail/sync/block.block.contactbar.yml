@@ -1,0 +1,50 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: contactbar
+theme: theme_boosted
+region: prefooter
+weight: -19
+provider: null
+plugin: contact_bar_block
+settings:
+  id: contact_bar_block
+  label: 'Contact Bar Axiome FR'
+  provider: oab_frontoffice
+  label_display: '0'
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+  link_assistance: 'https://espaceclient.orange-business.com/web/ece2/assistance'
+  link_assistance_text: Assistance
+  link_ecrire: '/fr/contact#etude'
+  link_ecrire_text: 'Nous écrire'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: "/ventes-indirectes/produits/*\r\n/produits/numeros-contact-ip\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/dossier/gdpr/pme-conformite"
+    negate: true
+    context_mapping: {  }

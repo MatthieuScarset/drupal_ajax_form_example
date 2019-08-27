@@ -1,0 +1,8 @@
+uuid: d8cd3069-18f1-4180-9e27-f63250250dd5
+langcode: en
+status: true
+dependencies: {  }
+id: top-navbar-en
+label: 'Top navbar EN'
+description: 'Top navbar EN'
+locked: false

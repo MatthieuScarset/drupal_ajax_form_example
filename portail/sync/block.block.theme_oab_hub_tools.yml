@@ -1,0 +1,26 @@
+uuid: fa88df8e-0ace-45a3-9f33-9c6f022841de
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - theme_oab_hub
+_core:
+  default_config_hash: xCOijLdB1-UgXxQ9a0D1_pd8vxNEhfMnxXZc8jYhHjs
+id: theme_oab_hub_tools
+theme: theme_oab_hub
+region: header
+weight: -14
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Tools
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

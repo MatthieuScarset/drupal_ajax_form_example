@@ -1,0 +1,16 @@
+uuid: 5824701b-3bd3-42eb-87db-bdfcc7644cca
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.market_segments
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.market_segments
+target_entity_type_id: taxonomy_term
+target_bundle: market_segments
+default_langcode: current_interface
+language_alterable: true

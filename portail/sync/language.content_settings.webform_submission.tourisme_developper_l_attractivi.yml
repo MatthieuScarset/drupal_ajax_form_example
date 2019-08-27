@@ -1,0 +1,11 @@
+uuid: a28add01-45c5-4cd7-a82c-def131512e7b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.tourisme_developper_l_attractivi
+id: webform_submission.tourisme_developper_l_attractivi
+target_entity_type_id: webform_submission
+target_bundle: tourisme_developper_l_attractivi
+default_langcode: site_default
+language_alterable: false

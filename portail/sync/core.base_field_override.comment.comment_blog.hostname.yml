@@ -1,0 +1,18 @@
+uuid: 0b364d64-175c-4d19-9462-63df9392f55c
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment_blog
+id: comment.comment_blog.hostname
+field_name: hostname
+entity_type: comment
+bundle: comment_blog
+label: Hostname
+description: 'The comment author''s hostname.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

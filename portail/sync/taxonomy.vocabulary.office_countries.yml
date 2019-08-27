@@ -1,0 +1,9 @@
+uuid: dbd824b0-b0f1-454e-affb-ed9562cc6828
+langcode: en
+status: true
+dependencies: {  }
+name: 'Office Countries'
+vid: office_countries
+description: ''
+hierarchy: 0
+weight: 0

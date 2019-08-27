@@ -1,0 +1,72 @@
+uuid: 2222dc93-fd8d-4426-b941-6972a6b4c629
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.full_html.field_blog_format
+    - field.field.node.full_html.field_blog_thematic
+    - field.field.node.full_html.field_content
+    - field.field.node.full_html.field_display_title
+    - field.field.node.full_html.field_end_date
+    - field.field.node.full_html.field_hub
+    - field.field.node.full_html.field_hub_portal
+    - field.field.node.full_html.field_industry
+    - field.field.node.full_html.field_insight
+    - field.field.node.full_html.field_job_profile
+    - field.field.node.full_html.field_meta_description
+    - field.field.node.full_html.field_meta_title
+    - field.field.node.full_html.field_metatags
+    - field.field.node.full_html.field_page_du_site_1
+    - field.field.node.full_html.field_page_du_site_2
+    - field.field.node.full_html.field_rebond_document
+    - field.field.node.full_html.field_region
+    - field.field.node.full_html.field_start_date
+    - field.field.node.full_html.field_subhome
+    - field.field.node.full_html.field_visual
+    - field.field.node.full_html.moderation_state_update
+    - node.type.full_html
+  module:
+    - text
+    - user
+id: node.full_html.teaser
+targetEntityType: node
+bundle: full_html
+mode: teaser
+content:
+  field_content:
+    type: text_trimmed
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: 100
+    third_party_settings: {  }
+    region: content
+  workbench_moderation_control:
+    weight: -20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_blog_format: true
+  field_blog_thematic: true
+  field_display_title: true
+  field_end_date: true
+  field_hub: true
+  field_hub_portal: true
+  field_industry: true
+  field_insight: true
+  field_job_profile: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_rebond_document: true
+  field_region: true
+  field_start_date: true
+  field_subhome: true
+  field_visual: true
+  langcode: true
+  links: true
+  moderation_state_update: true

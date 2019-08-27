@@ -1,0 +1,28 @@
+uuid: 248aa275-1792-48bd-b295-29ee08b23f43
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_thematic
+    - node.type.magazine
+    - taxonomy.vocabulary.blog_thematics
+id: node.magazine.field_blog_thematic
+field_name: field_blog_thematic
+entity_type: node
+bundle: magazine
+label: 'Magazine thematic'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      blog_thematics: blog_thematics
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

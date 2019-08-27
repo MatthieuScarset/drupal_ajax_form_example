@@ -1,0 +1,8 @@
+uuid: 78c91760-bfc7-44b7-9510-c8aeb1df91c1
+langcode: es
+status: true
+dependencies: {  }
+id: top-navbar-es
+label: 'Top navbar ES'
+description: 'Sur-header ES'
+locked: false

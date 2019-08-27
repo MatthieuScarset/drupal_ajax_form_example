@@ -1,0 +1,14 @@
+uuid: b6bdc89f-6b3a-4f9f-8245-f7e9a8a83f86
+langcode: en
+status: true
+dependencies: {  }
+id: fh_backbones
+label: 'FH Backbones'
+weight: 7
+is_admin: null
+permissions:
+  - 'access shortcuts'
+  - 'access toolbar'
+  - 'access user profiles'
+  - obs_backbones_functional_access
+  - 'view the administration theme'

@@ -1,0 +1,66 @@
+uuid: b2a2d4ec-4dc5-43d4-855f-229c95d43018
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.right_linked_content
+    - field.field.node.industry.field_content
+    - field.field.node.industry.field_content_owner
+    - field.field.node.industry.field_display_title
+    - field.field.node.industry.field_email_owner
+    - field.field.node.industry.field_end_date
+    - field.field.node.industry.field_highlight
+    - field.field.node.industry.field_hub
+    - field.field.node.industry.field_hub_portal
+    - field.field.node.industry.field_insight
+    - field.field.node.industry.field_local_nav
+    - field.field.node.industry.field_meta_description
+    - field.field.node.industry.field_meta_title
+    - field.field.node.industry.field_related_content
+    - field.field.node.industry.field_start_date
+    - field.field.node.industry.field_top_zone
+    - field.field.node.industry.field_top_zone_background
+    - field.field.node.industry.field_top_zone_bg_mobile
+    - field.field.node.industry.field_visual
+    - field.field.node.industry.moderation_state_update
+    - node.type.industry
+  module:
+    - user
+id: node.industry.right_linked_content
+targetEntityType: node
+bundle: industry
+mode: right_linked_content
+content:
+  field_highlight:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_hub: true
+  field_hub_portal: true
+  field_insight: true
+  field_local_nav: true
+  field_meta_description: true
+  field_meta_title: true
+  field_related_content: true
+  field_start_date: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
+  field_visual: true
+  langcode: true
+  moderation_state_update: true
+  workbench_moderation_control: true

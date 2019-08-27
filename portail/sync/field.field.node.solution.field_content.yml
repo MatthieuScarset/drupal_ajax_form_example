@@ -1,0 +1,21 @@
+uuid: c497d257-1192-4407-bb25-740fd949786b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.solution
+  module:
+    - text
+id: node.solution.field_content
+field_name: field_content
+entity_type: node
+bundle: solution
+label: Contenu
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

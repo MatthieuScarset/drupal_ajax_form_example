@@ -1,0 +1,18 @@
+uuid: df25d25f-faad-4019-8469-57965d3b842d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematics
+id: taxonomy_term.media_thematics.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: media_thematics
+label: Changed
+description: 'The time that the term was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

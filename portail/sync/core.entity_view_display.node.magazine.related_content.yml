@@ -1,0 +1,92 @@
+uuid: c73271d5-589f-4105-91cc-d62ae85e15bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_content
+    - field.field.node.magazine.field_blog_format
+    - field.field.node.magazine.field_blog_thematic
+    - field.field.node.magazine.field_content
+    - field.field.node.magazine.field_content_owner
+    - field.field.node.magazine.field_display_title
+    - field.field.node.magazine.field_email_owner
+    - field.field.node.magazine.field_end_date
+    - field.field.node.magazine.field_highlight
+    - field.field.node.magazine.field_hub
+    - field.field.node.magazine.field_hub_portal
+    - field.field.node.magazine.field_industry
+    - field.field.node.magazine.field_insight
+    - field.field.node.magazine.field_job_profile
+    - field.field.node.magazine.field_magazine_thematic
+    - field.field.node.magazine.field_magazine_type
+    - field.field.node.magazine.field_market_segment
+    - field.field.node.magazine.field_meta_description
+    - field.field.node.magazine.field_meta_title
+    - field.field.node.magazine.field_metatags
+    - field.field.node.magazine.field_p_wysiwyg_rebond
+    - field.field.node.magazine.field_page_du_site_1
+    - field.field.node.magazine.field_page_du_site_2
+    - field.field.node.magazine.field_rebond_document
+    - field.field.node.magazine.field_region
+    - field.field.node.magazine.field_solution
+    - field.field.node.magazine.field_start_date
+    - field.field.node.magazine.field_subhome
+    - field.field.node.magazine.field_visual
+    - field.field.node.magazine.moderation_state_update
+    - node.type.magazine
+  module:
+    - user
+id: node.magazine.related_content
+targetEntityType: node
+bundle: magazine
+mode: related_content
+content:
+  field_highlight:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: related_content_image
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_blog_format: true
+  field_blog_thematic: true
+  field_content: true
+  field_content_owner: true
+  field_customer_story: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_hub: true
+  field_hub_portal: true
+  field_industry: true
+  field_insight: true
+  field_job_profile: true
+  field_magazine_thematic: true
+  field_magazine_type: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_partner: true
+  field_rebond_document: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
+  langcode: true
+  links: true
+  moderation_state_update: true
+  workbench_moderation_control: true

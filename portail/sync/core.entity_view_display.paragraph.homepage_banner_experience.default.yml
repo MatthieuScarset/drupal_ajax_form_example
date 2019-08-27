@@ -1,0 +1,61 @@
+uuid: d9362019-a3af-4a67-bba7-5ff0f92d00ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_banner_experience.field_content
+    - field.field.paragraph.homepage_banner_experience.field_content_image
+    - field.field.paragraph.homepage_banner_experience.field_content_title
+    - field.field.paragraph.homepage_banner_experience.field_tab_picto_class
+    - field.field.paragraph.homepage_banner_experience.field_tab_title
+    - image.style.homepage_expertise
+    - paragraphs.paragraphs_type.homepage_banner_experience
+  module:
+    - image
+    - text
+id: paragraph.homepage_banner_experience.default
+targetEntityType: paragraph
+bundle: homepage_banner_experience
+mode: default
+content:
+  field_content:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_content_image:
+    weight: 3
+    label: hidden
+    settings:
+      image_style: homepage_expertise
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_content_title:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_tab_picto_class:
+    weight: 6
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_tab_title:
+    weight: 5
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class OabGeneralSettingsForm extends ConfigFormBase {
     public static function getConfigName() {
-        return 'oab.general_settings';
+        return 'oab_backoffice.general_settings';
     }
   /**
    * {@inheritdoc}
@@ -24,7 +24,7 @@ class OabGeneralSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.general_settings',
+      'oab_backoffice.general_settings',
     ];
   }
 

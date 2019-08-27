@@ -1,0 +1,21 @@
+uuid: 312543ba-92d4-4345-b1a2-b206a84251ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.product
+  module:
+    - text
+id: node.product.field_content
+field_name: field_content
+entity_type: node
+bundle: product
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

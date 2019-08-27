@@ -1,0 +1,26 @@
+uuid: 6845225e-9c95-4bd6-bc1e-67bb0b3ba6a5
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.admin
+  module:
+    - system
+  theme:
+    - theme_oab_hub
+_core:
+  default_config_hash: DWAB7HaAfAJerAmyT8B2K-6qxicu9n0PcKVpDr--N4c
+id: theme_oab_hub_admin
+theme: theme_oab_hub
+region: header
+weight: -17
+provider: null
+plugin: 'system_menu_block:admin'
+settings:
+  id: 'system_menu_block:admin'
+  label: Administration
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

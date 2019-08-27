@@ -1,0 +1,8 @@
+uuid: 74adb8e4-aa13-4f8e-a822-2492999ed86c
+langcode: ru
+status: true
+dependencies: {  }
+id: direct-access-bar-ru
+label: 'Direct Access Bar RU'
+description: 'Menu for Direct Access Bar RU'
+locked: false

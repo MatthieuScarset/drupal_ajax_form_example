@@ -1,0 +1,8 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+id: menu-homepage-eclairage
+label: 'Menu Homepage Eclairage EN'
+description: ''
+locked: false

@@ -1,0 +1,28 @@
+uuid: c6cad089-27c3-4795-a8cd-0ef58da21963
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geographic
+    - node.type.partner
+    - taxonomy.vocabulary.geographics
+id: node.partner.field_geographic
+field_name: field_geographic
+entity_type: node
+bundle: partner
+label: Geographic
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      geographics: geographics
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

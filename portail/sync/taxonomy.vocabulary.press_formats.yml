@@ -1,0 +1,9 @@
+uuid: 7328945e-9c2b-43e5-8567-87065c53134c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Press type'
+vid: press_formats
+description: ''
+hierarchy: 0
+weight: 0

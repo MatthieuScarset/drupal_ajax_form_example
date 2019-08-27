@@ -21,15 +21,22 @@ class OabSettingsEceForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.ece',
+      'oab_backoffice.ece',
     ];
   }
 
   /**
    * {@inheritdoc}
    */
+   public static function getConfigName() {
+    return 'oab_backoffice.ece';
+  }
+
+    /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.ece');
+    $config = $this->config(self::getConfigName());
 
     $form['title'] = array(
       '#type' => 'textfield',
@@ -87,7 +94,7 @@ class OabSettingsEceForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.ece')
+    $this->config(self::getConfigName())
       ->set('title', $form_state->getValue('title'))
         ->set('intro', $form_state->getValue('intro'))
         ->set('connect_txt', $form_state->getValue('connect_txt'))

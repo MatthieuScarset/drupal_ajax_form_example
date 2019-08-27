@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
 class OabSettingsSubhomesForm extends ConfigFormBase {
 
     public static function getConfigName() {
-        return 'oab.subhomes';
+        return 'oab_subhomes.subhomes';
     }
 
   /**
@@ -152,7 +152,7 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.subhomes')
+    $this->config('oab_subhomes.subhomes')
       ->set('press_term_tid', $form_state->getValue('press_term_tid'))
       ->set('partner_term_tid', $form_state->getValue('partner_term_tid'))
       ->set('customer_term_tid', $form_state->getValue('customer_term_tid'))

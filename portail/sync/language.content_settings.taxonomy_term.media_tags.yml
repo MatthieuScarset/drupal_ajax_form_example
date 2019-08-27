@@ -1,0 +1,16 @@
+uuid: a0f973bc-be5f-4d36-a347-8c7d86367de1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_tags
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: taxonomy_term.media_tags
+target_entity_type_id: taxonomy_term
+target_bundle: media_tags
+default_langcode: current_interface
+language_alterable: true

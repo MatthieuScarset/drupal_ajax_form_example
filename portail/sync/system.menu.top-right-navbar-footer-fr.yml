@@ -1,0 +1,7 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-fr
+label: 'Top right navbar Footer FR'
+description: 'Liens de la right navbar s''affichant dans le footer en version mobile'
+locked: false

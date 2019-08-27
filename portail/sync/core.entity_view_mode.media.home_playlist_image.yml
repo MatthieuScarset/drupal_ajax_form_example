@@ -1,0 +1,10 @@
+uuid: 073b9878-ea2c-4f5a-a517-a36a1035cc29
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.home_playlist_image
+label: 'Home Playlist image'
+targetEntityType: media
+cache: true

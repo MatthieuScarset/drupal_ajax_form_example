@@ -1,0 +1,9 @@
+uuid: 191d36a1-b0cd-4bf5-b862-963e62685303
+langcode: en
+status: true
+dependencies: {  }
+id: node__press_release
+label: 'Content: Communiqué de presse'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

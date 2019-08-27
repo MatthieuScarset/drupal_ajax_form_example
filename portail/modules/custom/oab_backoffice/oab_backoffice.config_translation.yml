@@ -2,16 +2,16 @@ oab.settings_subhomes:
   title: 'oab Settings'
   base_route_name: oab.settings_subhomes
   names:
-    - oab.subhomes
+    - oab_subhomes.subhomes
 
 oab.settings_pardot:
   title: 'oab Pardot settings'
   base_route_name: oab.settings_pardot
   names:
-    - oab.pardot
+    - oab_backoffice.pardot
 
 oab.settings_ece:
   title: 'oab ECE Settings'
   base_route_name: oab.settings_ece
   names:
-    - oab.ece
+    - oab_backoffice.ece

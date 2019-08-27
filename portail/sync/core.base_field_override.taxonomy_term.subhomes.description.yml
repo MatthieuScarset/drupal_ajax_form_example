@@ -1,0 +1,20 @@
+uuid: 00d951bb-0d3b-404f-999a-0ba8e105a18e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subhomes
+  module:
+    - text
+id: taxonomy_term.subhomes.description
+field_name: description
+entity_type: taxonomy_term
+bundle: subhomes
+label: Description
+description: 'A description of the term.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

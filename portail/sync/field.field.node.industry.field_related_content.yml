@@ -1,0 +1,30 @@
+uuid: de83d1bd-02dc-43f9-bc7c-2df6d64d41c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_content
+    - node.type.industry
+    - paragraphs.paragraphs_type.related_content
+  module:
+    - entity_reference_revisions
+id: node.industry.field_related_content
+field_name: field_related_content
+entity_type: node
+bundle: industry
+label: 'related content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      related_content: related_content
+    target_bundles_drag_drop:
+      related_content:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

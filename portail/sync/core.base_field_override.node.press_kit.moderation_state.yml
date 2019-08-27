@@ -1,0 +1,20 @@
+uuid: 8b3a44e1-b808-41d8-b9b4-3b88682e4f36
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_kit
+id: node.press_kit.moderation_state
+field_name: moderation_state
+entity_type: node
+bundle: press_kit
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

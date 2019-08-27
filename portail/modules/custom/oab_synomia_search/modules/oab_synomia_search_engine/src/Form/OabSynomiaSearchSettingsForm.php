@@ -12,7 +12,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
 {
 
     public static function getConfigName() {
-        return 'oab.synomia.searchSettings';
+        return 'oab_synomia_search.synomia.searchSettings';
     }
   /**
    * {@inheritdoc}

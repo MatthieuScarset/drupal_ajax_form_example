@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.subhome_entity.field_afficher_bloc_notre_equipe
+    - oab_subhomes.subhome_entity_type.presse
+id: subhome_entity.presse.field_afficher_bloc_notre_equipe
+field_name: field_afficher_bloc_notre_equipe
+entity_type: subhome_entity
+bundle: presse
+label: 'Afficher bloc'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

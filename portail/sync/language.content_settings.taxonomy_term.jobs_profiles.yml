@@ -1,0 +1,16 @@
+uuid: a001972b-21ef-4705-8759-708b52969d05
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.jobs_profiles
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.jobs_profiles
+target_entity_type_id: taxonomy_term
+target_bundle: jobs_profiles
+default_langcode: current_interface
+language_alterable: true

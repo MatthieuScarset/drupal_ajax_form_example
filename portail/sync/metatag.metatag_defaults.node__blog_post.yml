@@ -1,0 +1,9 @@
+uuid: 438d8e3c-e6ee-4342-86ff-ac6e8b8374f6
+langcode: en
+status: true
+dependencies: {  }
+id: node__blog_post
+label: 'Content: Article de blog'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

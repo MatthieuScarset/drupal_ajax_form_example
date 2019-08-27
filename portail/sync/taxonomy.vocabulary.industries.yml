@@ -1,0 +1,9 @@
+uuid: d361073b-b69e-468b-a2c5-8be128747d21
+langcode: und
+status: true
+dependencies: {  }
+name: Industry
+vid: industries
+description: ''
+hierarchy: 0
+weight: 0

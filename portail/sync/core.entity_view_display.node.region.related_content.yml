@@ -1,0 +1,46 @@
+uuid: 23d6003f-8afc-4f8a-87f0-43f505b02028
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_content
+    - field.field.node.region.field_content_owner
+    - field.field.node.region.field_email_owner
+    - field.field.node.region.field_end_date
+    - field.field.node.region.field_highlight
+    - field.field.node.region.field_region
+    - field.field.node.region.field_start_date
+    - field.field.node.region.field_visual
+    - node.type.region
+  module:
+    - user
+id: node.region.related_content
+targetEntityType: node
+bundle: region
+mode: related_content
+content:
+  field_highlight:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: related_content_image
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content_owner: true
+  field_email_owner: true
+  field_end_date: true
+  field_region: true
+  field_start_date: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

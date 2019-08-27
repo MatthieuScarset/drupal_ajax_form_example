@@ -1,0 +1,23 @@
+uuid: 37afb6fc-c50a-4504-9085-5d70b3d5bece
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_news
+    - paragraphs.paragraphs_type.homepage_news
+  module:
+    - link
+id: paragraph.homepage_news.field_link_news
+field_name: field_link_news
+entity_type: paragraph
+bundle: homepage_news
+label: 'Highlight link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

@@ -1,0 +1,14 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+      empty:
+        area_text_custom:
+          content: 'Pas de contenu disponible.'
+      use_more_text: Plus
+  block_1:
+    display_title: Bloc

@@ -1,0 +1,16 @@
+uuid: fbc8a54b-2db6-4268-af5b-f30935ababdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - media_entity.bundle.file
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: media.file
+target_entity_type_id: media
+target_bundle: file
+default_langcode: site_default
+language_alterable: false

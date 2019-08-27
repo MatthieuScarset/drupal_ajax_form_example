@@ -1,0 +1,72 @@
+uuid: 6d7a0a23-2edc-4fa0-b9d0-17e6245e8ba0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.solution.field_content
+    - field.field.node.solution.field_content_owner
+    - field.field.node.solution.field_display_title
+    - field.field.node.solution.field_email_owner
+    - field.field.node.solution.field_end_date
+    - field.field.node.solution.field_highlight
+    - field.field.node.solution.field_hub
+    - field.field.node.solution.field_hub_portal
+    - field.field.node.solution.field_insight
+    - field.field.node.solution.field_local_nav
+    - field.field.node.solution.field_meta_description
+    - field.field.node.solution.field_meta_title
+    - field.field.node.solution.field_related_content
+    - field.field.node.solution.field_start_date
+    - field.field.node.solution.field_top_zone
+    - field.field.node.solution.field_top_zone_background
+    - field.field.node.solution.field_top_zone_bg_mobile
+    - field.field.node.solution.field_visual
+    - field.field.node.solution.moderation_state_update
+    - node.type.solution
+  module:
+    - user
+id: node.solution.teaser
+targetEntityType: node
+bundle: solution
+mode: teaser
+content:
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: automatic_teaser
+      link: false
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  workbench_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_highlight: true
+  field_hub: true
+  field_hub_portal: true
+  field_insight: true
+  field_local_nav: true
+  field_meta_description: true
+  field_meta_title: true
+  field_related_content: true
+  field_start_date: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
+  langcode: true
+  moderation_state_update: true

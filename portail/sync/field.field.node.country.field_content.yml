@@ -1,0 +1,21 @@
+uuid: 13ebda50-84e9-4542-bc12-715560548cc8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.country
+  module:
+    - text
+id: node.country.field_content
+field_name: field_content
+entity_type: node
+bundle: country
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

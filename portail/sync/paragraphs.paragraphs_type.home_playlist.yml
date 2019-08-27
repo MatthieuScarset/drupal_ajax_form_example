@@ -1,0 +1,7 @@
+uuid: ca37e7df-b159-4d18-af7e-7b9addbe5a86
+langcode: en
+status: true
+dependencies: {  }
+id: home_playlist
+label: 'Home Playlist'
+behavior_plugins: {  }

@@ -1,0 +1,11 @@
+uuid: ff178b81-97fb-4e40-86c7-9ac4608308c7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.matinale_collectivites_locales_a
+id: webform_submission.matinale_collectivites_locales_a
+target_entity_type_id: webform_submission
+target_bundle: matinale_collectivites_locales_a
+default_langcode: site_default
+language_alterable: false

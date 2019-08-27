@@ -1,0 +1,15 @@
+uuid: null
+langcode: fr
+status: true
+dependencies: {  }
+name: top_zone_big
+label: 'Top zone big (1400x500)'
+effects:
+  cb946ff7-285a-4ecd-b82c-b55375a0ac81:
+    uuid: cb946ff7-285a-4ecd-b82c-b55375a0ac81
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 500
+      anchor: center-center

@@ -1,0 +1,3 @@
+elements: "dvi_contact_global_description:\n  '#text': \"<p>Vous avez un projet, une question ? Vous êtes intéressé par une de nos solutions ? Merci de renseigner le fomulaire suivant, nous vous contacterons dans les plus brefs délais.</p>\\n\\n<p>&nbsp;</p>\\n\\n<hr />\\n<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\n\"\nfirst_name:\n  '#title': Prénom\nlast_name:\n  '#title': Nom\ncompany:\n  '#title': Société\nphone:\n  '#title': Téléphone\nsubject:\n  '#title': Objet\n"
+settings:
+  confirmation_message: "Merci pour votre demande de contact.\r\nNous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.\r\n\r\nCordialement,\r\nLa direction des Ventes Indirectes."

@@ -1,0 +1,23 @@
+uuid: 7d39d799-3252-4341-90a0-b9d1e766e891
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_metatags
+    - node.type.magazine
+  module:
+    - metatag
+id: node.magazine.field_metatags
+field_name: field_metatags
+entity_type: node
+bundle: magazine
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'a:0:{}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

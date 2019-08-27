@@ -1,7 +1,7 @@
 <?php
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.offices_map');
+$config_group = $config_factory->getEditable('oab_offices_map.offices_map');
 $config_group->set('contact_url', '/en'); // juste pour initialiser => à chnger
 $config_group->save();
 

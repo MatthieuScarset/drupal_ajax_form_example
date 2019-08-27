@@ -1,0 +1,9 @@
+uuid: 5fd418a4-e16a-490d-887c-d365c11d11eb
+langcode: en
+status: true
+dependencies: {  }
+id: node__document
+label: 'Content: Document'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

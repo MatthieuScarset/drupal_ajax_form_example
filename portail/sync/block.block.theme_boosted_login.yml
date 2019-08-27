@@ -1,0 +1,22 @@
+uuid: c56c80a7-1116-4a34-8fde-3011cfdcb3ef
+langcode: en
+status: false
+dependencies:
+  module:
+    - user
+  theme:
+    - theme_boosted
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: theme_boosted_login
+theme: theme_boosted
+region: header
+weight: -13
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

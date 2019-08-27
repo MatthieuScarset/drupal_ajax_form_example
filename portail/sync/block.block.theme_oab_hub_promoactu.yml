@@ -1,0 +1,32 @@
+uuid: f8f1c46b-db63-4502-924a-d218e6c284f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_promoactu
+theme: theme_oab_hub
+region: sidebar
+weight: -42
+provider: null
+plugin: promo_actu_block
+settings:
+  id: promo_actu_block
+  label: 'Promo Actu'
+  provider: oab_frontoffice
+  label_display: '0'
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

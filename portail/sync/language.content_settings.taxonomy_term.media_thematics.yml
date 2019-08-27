@@ -1,0 +1,16 @@
+uuid: 2309fb92-e841-4cbe-80b5-d0855b043cb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.media_thematics
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: taxonomy_term.media_thematics
+target_entity_type_id: taxonomy_term
+target_bundle: media_thematics
+default_langcode: current_interface
+language_alterable: true

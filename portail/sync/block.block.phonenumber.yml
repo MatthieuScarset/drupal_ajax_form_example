@@ -1,0 +1,33 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: phonenumber
+theme: theme_boosted
+region: sidebar
+weight: -33
+provider: null
+plugin: phone_number_block
+settings:
+  id: phone_number_block
+  label: 'Phone Number'
+  provider: oab_frontoffice
+  label_display: visible
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+  block_title: 'Pour le contacter par téléphone'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      distributor: distributor
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

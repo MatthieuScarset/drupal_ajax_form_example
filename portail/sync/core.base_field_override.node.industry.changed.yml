@@ -1,0 +1,18 @@
+uuid: 42aa30f8-7e02-4a9b-aa94-c1bac5e09280
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.industry
+id: node.industry.changed
+field_name: changed
+entity_type: node
+bundle: industry
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,0 +1,30 @@
+uuid: 1316492b-212a-4d06-b57f-f6e6dbf0ee29
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_access:
+    workbench_access_status: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+      - unpublished
+    default_moderation_state: draft
+name: Industry
+type: industry
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

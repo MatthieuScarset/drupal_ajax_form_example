@@ -1,0 +1,9 @@
+uuid: 09d43302-c604-4e93-bc6f-6c0fff7932ee
+langcode: en
+status: true
+dependencies: {  }
+id: node__region
+label: 'Content: Region'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

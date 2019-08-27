@@ -1,0 +1,8 @@
+uuid: a87753e2-81fd-4c00-9070-bb8369b41442
+langcode: br
+status: true
+dependencies: {  }
+id: direct-access-bar-br
+label: 'Direct Access Bar BR'
+description: 'Menu for Direct Access Bar BR'
+locked: false

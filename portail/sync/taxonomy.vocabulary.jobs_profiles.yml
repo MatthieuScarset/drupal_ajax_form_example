@@ -1,0 +1,9 @@
+uuid: b559c4e9-4642-4b12-8b21-2158c3dd82ed
+langcode: und
+status: true
+dependencies: {  }
+name: Profession
+vid: jobs_profiles
+description: ''
+hierarchy: 0
+weight: 0

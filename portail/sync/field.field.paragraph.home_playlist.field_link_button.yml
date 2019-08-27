@@ -1,0 +1,23 @@
+uuid: 31435e21-7052-47c1-aca9-335b5a444114
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_button
+    - paragraphs.paragraphs_type.home_playlist
+  module:
+    - link
+id: paragraph.home_playlist.field_link_button
+field_name: field_link_button
+entity_type: paragraph
+bundle: home_playlist
+label: 'Link Button'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

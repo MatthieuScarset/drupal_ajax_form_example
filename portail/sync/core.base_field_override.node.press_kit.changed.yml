@@ -1,0 +1,18 @@
+uuid: ede1ed6d-e65a-4479-b6a6-2937a0634f77
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_kit
+id: node.press_kit.changed
+field_name: changed
+entity_type: node
+bundle: press_kit
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

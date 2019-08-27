@@ -1,0 +1,33 @@
+uuid: f75ada61-579d-45bf-a080-e1dad2f56bd9
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: document_fr
+label: 'document FR'
+type: 'canonical_entities:node'
+pattern: 'mediatheque/[node:field_document_type:entity:name]/[node:title]'
+selection_criteria:
+  3ab8dbbc-8e34-4f90-b72c-11a52cd998ca:
+    id: node_type
+    bundles:
+      document: document
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 3ab8dbbc-8e34-4f90-b72c-11a52cd998ca
+  1cddaf73-ae8b-4f5e-b4af-1a15f3325615:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 1cddaf73-ae8b-4f5e-b4af-1a15f3325615
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

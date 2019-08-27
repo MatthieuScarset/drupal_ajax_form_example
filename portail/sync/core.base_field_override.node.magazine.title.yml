@@ -1,0 +1,18 @@
+uuid: 49136fd0-85a8-4681-87fa-28bb07be76e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.magazine
+id: node.magazine.title
+field_name: title
+entity_type: node
+bundle: magazine
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

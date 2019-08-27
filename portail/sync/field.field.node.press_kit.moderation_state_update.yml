@@ -1,0 +1,24 @@
+uuid: c7ff3b35-4a7b-46f2-b97b-1c397d8b9374
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.moderation_state_update
+    - node.type.press_kit
+    - scheduled_updates.scheduled_update_type.moderation_state_update
+id: node.press_kit.moderation_state_update
+field_name: moderation_state_update
+entity_type: node
+bundle: press_kit
+label: 'Moderation state update'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler_settings:
+    target_bundles:
+      - moderation_state_update
+  handler: 'default:scheduled_update'
+field_type: entity_reference

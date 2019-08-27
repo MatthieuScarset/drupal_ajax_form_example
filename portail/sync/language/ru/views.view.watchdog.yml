@@ -1,0 +1,14 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
+      fields:
+        nothing:
+          admin_label: Иконка
+        name:
+          label: Пользователь
+        link:
+          label: Операции

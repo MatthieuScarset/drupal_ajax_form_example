@@ -1,0 +1,19 @@
+uuid: cf097525-8ba5-41c3-ac96-e14e61e00540
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_phone_number
+    - node.type.office
+id: node.office.field_phone_number
+field_name: field_phone_number
+entity_type: node
+bundle: office
+label: 'Phone number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

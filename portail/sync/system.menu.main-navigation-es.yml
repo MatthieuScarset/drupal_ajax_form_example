@@ -1,0 +1,8 @@
+uuid: 3b5f0a22-fbbc-4e22-b94e-e0c783ecdd1d
+langcode: es
+status: true
+dependencies: {  }
+id: main-navigation-es
+label: 'Main navigation ES'
+description: 'ES Site section links'
+locked: false

@@ -1,0 +1,21 @@
+uuid: 5abc3dc3-c76b-4491-815d-1c18a46931d7
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_backoffice
+  theme:
+    - theme_obs_backoffice
+id: rubyversionblock
+theme: theme_obs_backoffice
+region: content
+weight: 0
+provider: null
+plugin: ruby_version_block
+settings:
+  id: ruby_version_block
+  label: 'Ruby Version Block'
+  provider: oab_backoffice
+  label_display: '0'
+  ruby_version: G0R1C6
+visibility: {  }

@@ -1,0 +1,16 @@
+uuid: b96489dc-0b47-4a83-be08-c115eca5707d
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.geographics
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.geographics
+target_entity_type_id: taxonomy_term
+target_bundle: geographics
+default_langcode: current_interface
+language_alterable: true

@@ -1,0 +1,8 @@
+uuid: b63231b4-aeca-417d-84f0-a5dfe7577697
+langcode: pt-br
+status: true
+dependencies: {  }
+id: footer-br
+label: 'Footer BR'
+description: 'Footer BR'
+locked: false

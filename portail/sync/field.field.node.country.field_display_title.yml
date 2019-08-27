@@ -1,0 +1,21 @@
+uuid: 60cab538-e3ed-4d8d-8d3d-67cce8788076
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.country
+id: node.country.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: country
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

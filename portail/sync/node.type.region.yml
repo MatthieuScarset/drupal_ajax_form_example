@@ -1,0 +1,30 @@
+uuid: 7a610f59-7320-4363-85cd-5b323ccac714
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_access:
+    workbench_access_status: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+      - unpublished
+    default_moderation_state: draft
+name: Region
+type: region
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

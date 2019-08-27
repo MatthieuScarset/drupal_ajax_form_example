@@ -1,0 +1,32 @@
+uuid: 44bf0c72-861a-4688-9190-587408b16a81
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.top-navbar-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: topnavbaren_2
+theme: theme_boosted
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:top-navbar-en'
+settings:
+  id: 'system_menu_block:top-navbar-en'
+  label: 'Top navbar EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

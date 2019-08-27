@@ -1,0 +1,23 @@
+uuid: 4940f09a-6582-4272-95f4-aef84c7cb187
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.blog_post
+id: node.blog_post.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: blog_post
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

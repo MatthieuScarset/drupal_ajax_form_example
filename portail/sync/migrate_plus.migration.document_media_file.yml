@@ -1,0 +1,37 @@
+uuid: d9e7674a-efb2-4ec9-a605-efe58f4915bf
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: yHbFwOniTTbytA_2j7OodRQn23GycDwE45Vg9LQ-KhQ
+id: document_media_file
+migration_tags: null
+migration_group: document
+label: 'Document files medias'
+source:
+  plugin: document_media_file
+process:
+  bundle:
+    plugin: default_value
+    default_value: file
+  langcode:
+    plugin: default_value
+    default_value: und
+  name: filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_file:
+    plugin: migration
+    migration: document_file
+    source: file_info
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - document_file

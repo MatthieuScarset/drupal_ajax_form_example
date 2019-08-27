@@ -65,7 +65,7 @@ foreach ($terms as &$term)
 
 ##On crée les champs en anglais
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.subhomes');
+$config_group = $config_factory->getEditable('oab_subhomes.subhomes');
 $config_group->setData($config['en']);
 $config_group->save();
 
@@ -76,7 +76,7 @@ unset($config['en']);
 foreach ($config as $language => $l_config ) {
   ##Pour les autres langues, on crée une collection de la langue
   $collection = \Drupal::service('config.storage')->createCollection('language.' . $language);
-  $collection->write('oab.subhomes', $l_config);
+  $collection->write('oab_subhomes.subhomes', $l_config);
 }
 
 #A enlever à la fin des tests

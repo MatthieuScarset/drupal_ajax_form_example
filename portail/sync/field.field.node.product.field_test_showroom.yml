@@ -1,0 +1,30 @@
+uuid: 35c3cf67-a67d-43bd-badd-302b23b757e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_test_showroom
+    - node.type.product
+    - paragraphs.paragraphs_type.paragraph_block_rebond
+  module:
+    - entity_reference_revisions
+id: node.product.field_test_showroom
+field_name: field_test_showroom
+entity_type: node
+bundle: product
+label: 'Test Showroom'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      paragraph_block_rebond: paragraph_block_rebond
+    target_bundles_drag_drop:
+      paragraph_block_rebond:
+        enabled: true
+        weight: 21
+field_type: entity_reference_revisions

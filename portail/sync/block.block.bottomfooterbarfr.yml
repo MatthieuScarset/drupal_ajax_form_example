@@ -1,0 +1,32 @@
+uuid: f92f3a10-92ad-4a43-81d2-4de0b467d3bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.bottom-footerbar-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: bottomfooterbarfr
+theme: theme_boosted
+region: footer
+weight: -9
+provider: null
+plugin: 'system_menu_block:bottom-footerbar-fr'
+settings:
+  id: 'system_menu_block:bottom-footerbar-fr'
+  label: 'Bottom Footerbar FR'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

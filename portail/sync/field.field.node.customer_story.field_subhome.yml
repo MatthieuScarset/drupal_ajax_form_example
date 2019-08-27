@@ -1,0 +1,28 @@
+uuid: 4af9f9aa-98b8-4607-98a8-92af954576c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subhome
+    - node.type.customer_story
+    - taxonomy.vocabulary.subhomes
+id: node.customer_story.field_subhome
+field_name: field_subhome
+entity_type: node
+bundle: customer_story
+label: Subhome
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subhomes: subhomes
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

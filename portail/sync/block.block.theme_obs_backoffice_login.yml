@@ -1,0 +1,22 @@
+uuid: b780366d-b807-4c42-bce7-2536c1f91fb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: theme_obs_backoffice_login
+theme: theme_obs_backoffice
+region: header
+weight: 0
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'User login'
+  provider: user
+  label_display: visible
+visibility: {  }

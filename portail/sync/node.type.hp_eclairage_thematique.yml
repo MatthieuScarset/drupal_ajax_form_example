@@ -1,0 +1,21 @@
+uuid: 8388d844-b6eb-4c75-80f1-7e9a9ccdf29f
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+name: 'Homepage Eclairage Thématique'
+type: hp_eclairage_thematique
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

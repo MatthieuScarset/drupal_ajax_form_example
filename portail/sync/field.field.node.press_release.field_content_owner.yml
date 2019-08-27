@@ -1,0 +1,19 @@
+uuid: 530aa789-2f7c-4e75-ad85-b2853a58ba69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_owner
+    - node.type.press_release
+id: node.press_release.field_content_owner
+field_name: field_content_owner
+entity_type: node
+bundle: press_release
+label: 'Content owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

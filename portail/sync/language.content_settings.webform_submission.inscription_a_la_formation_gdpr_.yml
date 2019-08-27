@@ -1,0 +1,11 @@
+uuid: 834fa507-4674-4ee3-903f-d30a565233c9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_a_la_formation_gdpr_
+id: webform_submission.inscription_a_la_formation_gdpr_
+target_entity_type_id: webform_submission
+target_bundle: inscription_a_la_formation_gdpr_
+default_langcode: site_default
+language_alterable: false

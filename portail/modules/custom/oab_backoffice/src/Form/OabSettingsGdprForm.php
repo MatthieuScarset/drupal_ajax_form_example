@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class OabSettingsGdprForm extends ConfigFormBase {
     public static function getConfigName() {
-        return 'oab.gdpr_settings';
+        return 'oab_backoffice.gdpr_settings';
     }
     /**
      * {@inheritdoc}
@@ -24,7 +24,7 @@ class OabSettingsGdprForm extends ConfigFormBase {
      */
     protected function getEditableConfigNames() {
         return [
-            'oab.gdpr_settings',
+            'oab_backoffice.gdpr_settings',
         ];
     }
 

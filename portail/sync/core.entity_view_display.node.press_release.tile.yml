@@ -1,0 +1,102 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.tile
+    - field.field.node.press_release.field_city
+    - field.field.node.press_release.field_content
+    - field.field.node.press_release.field_content_owner
+    - field.field.node.press_release.field_country
+    - field.field.node.press_release.field_display_title
+    - field.field.node.press_release.field_email_owner
+    - field.field.node.press_release.field_end_date
+    - field.field.node.press_release.field_file
+    - field.field.node.press_release.field_highlight
+    - field.field.node.press_release.field_industry
+    - field.field.node.press_release.field_insight
+    - field.field.node.press_release.field_insight_type
+    - field.field.node.press_release.field_job_profile
+    - field.field.node.press_release.field_market_segment
+    - field.field.node.press_release.field_meta_description
+    - field.field.node.press_release.field_meta_title
+    - field.field.node.press_release.field_metatags
+    - field.field.node.press_release.field_p_wysiwyg_rebond
+    - field.field.node.press_release.field_page_du_site_1
+    - field.field.node.press_release.field_page_du_site_2
+    - field.field.node.press_release.field_press_type
+    - field.field.node.press_release.field_rebond_document
+    - field.field.node.press_release.field_region
+    - field.field.node.press_release.field_solution
+    - field.field.node.press_release.field_start_date
+    - field.field.node.press_release.field_subhome
+    - field.field.node.press_release.field_visual
+    - field.field.node.press_release.field_visual_tile
+    - field.field.node.press_release.moderation_state_update
+    - node.type.press_release
+  module:
+    - user
+id: node.press_release.tile
+targetEntityType: node
+bundle: press_release
+mode: tile
+content:
+  field_insight:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_insight_type:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_visual_tile:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_city: true
+  field_content: true
+  field_content_owner: true
+  field_country: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_highlight: true
+  field_industry: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_press_type: true
+  field_rebond_document: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
+  field_visual: true
+  field_wysiwyg_rebond: true
+  langcode: true
+  moderation_state_update: true
+  workbench_moderation_control: true

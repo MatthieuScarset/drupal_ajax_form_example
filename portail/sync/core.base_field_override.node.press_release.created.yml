@@ -1,0 +1,18 @@
+uuid: a925b647-eba5-4787-a675-1bf5dbdd7398
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_release
+id: node.press_release.created
+field_name: created
+entity_type: node
+bundle: press_release
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

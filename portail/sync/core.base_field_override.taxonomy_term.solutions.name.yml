@@ -1,0 +1,18 @@
+uuid: 9074189f-ae71-40fe-9a3a-aca2bdcc4dca
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.solutions
+id: taxonomy_term.solutions.name
+field_name: name
+entity_type: taxonomy_term
+bundle: solutions
+label: Name
+description: 'The term name.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

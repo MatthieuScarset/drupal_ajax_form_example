@@ -1,0 +1,20 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.subhome_entity.field_corporate_aplat
+    - oab_subhomes.subhome_entity_type.presse
+  module:
+    - options
+id: subhome_entity.presse.field_corporate_aplat
+field_name: field_corporate_aplat
+entity_type: subhome_entity
+bundle: presse
+label: Aplat
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

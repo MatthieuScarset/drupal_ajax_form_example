@@ -1,0 +1,4 @@
+label: 'Affichage du titre'
+settings:
+  on_label: 'Le titre doit s''afficher sur la page'
+  off_label: 'Le titre est invisible'

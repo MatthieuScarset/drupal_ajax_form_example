@@ -1,0 +1,19 @@
+uuid: 2d638747-6d66-420b-9f22-399af42cd10c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.magazine
+id: node.magazine.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: magazine
+label: 'Meta title'
+description: 'This field is limited to 56 characters (used for SEO-optimization)'
+required: 'true'
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,33 @@
+uuid: 453a3215-10e6-4ac3-8cfc-761b2daf8441
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: relatedcontent
+theme: theme_boosted
+region: prefooter
+weight: -18
+provider: null
+plugin: related_content_block
+settings:
+  id: related_content_block
+  label: 'Related content'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      country: country
+      industry: industry
+      region: region
+      solution: solution
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

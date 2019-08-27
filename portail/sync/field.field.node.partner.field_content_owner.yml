@@ -1,0 +1,19 @@
+uuid: 97318fe1-81cf-4e40-bdab-11eda39e6b3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_owner
+    - node.type.partner
+id: node.partner.field_content_owner
+field_name: field_content_owner
+entity_type: node
+bundle: partner
+label: 'Content owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

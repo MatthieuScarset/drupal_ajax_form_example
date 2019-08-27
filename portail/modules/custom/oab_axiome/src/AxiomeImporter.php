@@ -557,7 +557,7 @@ class AxiomeImporter
                                     $storage = $storage->createCollection('language.' . $language);
                                 }
 
-                                $conf = $storage->read('oab.subhomes');
+                                $conf = $storage->read('oab_subhomes.subhomes');
 
                                 if ($conf !== false && isset($conf['product_term_tid'])) {
                                     $tid = $conf['product_term_tid'];

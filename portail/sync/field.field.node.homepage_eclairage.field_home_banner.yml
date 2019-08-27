@@ -1,0 +1,33 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_home_banner
+    - node.type.homepage_eclairage
+    - paragraphs.paragraphs_type.home_banner
+  module:
+    - entity_reference_revisions
+id: node.homepage_eclairage.field_home_banner
+field_name: field_home_banner
+entity_type: node
+bundle: homepage_eclairage
+label: 'Home Banner'
+description: 'Taille de l''image (largeur x hauteur) : 1000x465px'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      home_banner: home_banner
+    target_bundles_drag_drop:
+      home_banner:
+        enabled: true
+        weight: 3
+      home_column:
+        weight: 4
+        enabled: false
+field_type: entity_reference_revisions

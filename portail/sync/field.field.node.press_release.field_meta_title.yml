@@ -1,0 +1,19 @@
+uuid: 1d6a8c63-ce9a-4158-96b4-31480ca0678f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.press_release
+id: node.press_release.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: press_release
+label: 'Meta title'
+description: 'This field is limited to 56 characters (used for SEO-optimization)'
+required: 'true'
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

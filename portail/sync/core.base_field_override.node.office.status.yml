@@ -1,0 +1,22 @@
+uuid: c718d47a-a259-43a7-9cc5-f8ad0358b1d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.office
+id: node.office.status
+field_name: status
+entity_type: node
+bundle: office
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

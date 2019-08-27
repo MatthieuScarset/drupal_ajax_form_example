@@ -1,0 +1,14 @@
+uuid: ec44102f-8025-4109-b7dd-c37ff1049db3
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.dvi
+  module:
+    - user
+id: user_remove_role_action.dvi
+label: 'Remove the DVI role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: dvi

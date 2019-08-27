@@ -1,0 +1,7 @@
+uuid: daaab735-bd11-451e-8c25-f0f944a95bba
+langcode: en
+status: true
+dependencies: {  }
+id: home_thematic_columns
+label: 'Home Thematic Columns'
+behavior_plugins: {  }

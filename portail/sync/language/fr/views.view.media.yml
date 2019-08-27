@@ -1,0 +1,64 @@
+label: Médias
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+          tags:
+            previous: '‹ Précédent'
+            next: 'Suivant ›'
+            first: '« Premier'
+            last: 'Dernier »'
+      fields:
+        media_bulk_form:
+          action_title: Action
+        name:
+          label: 'Nom du média'
+        bundle:
+          label: Fournisseur
+        uid:
+          label: Auteur
+        status:
+          label: Statut
+          settings:
+            format_custom_true: Publié
+            format_custom_false: Dépublié
+        changed:
+          label: 'Mise à jour'
+        operations:
+          label: Actions
+      filters:
+        status:
+          group_info:
+            label: 'Statut de publication'
+            group_items:
+              1:
+                title: Publié
+              2:
+                title: Dépublié
+        bundle:
+          expose:
+            label: Fournisseur
+        name:
+          expose:
+            label: 'Nom du média'
+        langcode:
+          expose:
+            label: Langue
+      title: Médias
+      empty:
+        area_text_custom:
+          content: 'Pas de contenu disponible.'
+  media_page_list:
+    display_title: Médias
+    display_options:
+      menu:
+        title: Médias

@@ -1,0 +1,8 @@
+uuid: b95fd182-23b4-4eab-9af0-dd5a3480f2ec
+langcode: pt-br
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-br
+label: 'Top right navbar Footer BR'
+description: 'Right navbar''s links to be displayed in the footer in mobile mode'
+locked: false

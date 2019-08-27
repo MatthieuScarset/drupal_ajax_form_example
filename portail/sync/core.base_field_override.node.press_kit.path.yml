@@ -1,0 +1,20 @@
+uuid: 598359d9-7076-401c-9daa-283f82d30048
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_kit
+  module:
+    - path
+id: node.press_kit.path
+field_name: path
+entity_type: node
+bundle: press_kit
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

@@ -1,0 +1,103 @@
+uuid: 21c57b74-b6db-42b7-a841-973defa59aa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.office.field_additionnal
+    - field.field.node.office.field_city
+    - field.field.node.office.field_email_address
+    - field.field.node.office.field_office_country
+    - field.field.node.office.field_office_location
+    - field.field.node.office.field_phone_number
+    - field.field.node.office.field_postal_code
+    - field.field.node.office.field_region
+    - field.field.node.office.field_street
+    - field.field.node.office.moderation_state_update
+    - node.type.office
+  module:
+    - geolocation
+    - user
+id: node.office.default
+targetEntityType: node
+bundle: office
+mode: default
+content:
+  field_additionnal:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_city:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_email_address:
+    weight: 107
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_office_country:
+    weight: 105
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_office_location:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
+    region: content
+  field_phone_number:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_postal_code:
+    weight: 104
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_region:
+    weight: 109
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_street:
+    weight: 101
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  moderation_state_update: true

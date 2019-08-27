@@ -1,0 +1,9 @@
+uuid: db3241f5-9ca7-4a5f-8a56-2e700a8b81af
+langcode: en
+status: true
+dependencies: {  }
+id: node__full_html
+label: 'Content: Full html page'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

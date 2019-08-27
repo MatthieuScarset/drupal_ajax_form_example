@@ -1,0 +1,29 @@
+display:
+  default:
+    display_title: Новости
+    display_options:
+      title: Новости
+  page_blog:
+    display_title: Блоги
+    display_options:
+      title: Блоги
+  page_catalogue:
+    display_title: Услуги
+    display_options:
+      title: Услуги
+  page_customer:
+    display_title: Проекты
+    display_options:
+      title: Проекты
+  page_document:
+    display_title: ''
+  page_magazine:
+    display_title: ''
+  page_partners:
+    display_title: Партнеры
+    display_options:
+      title: Партнеры
+  page_press:
+    display_title: Новости
+  page_press_old:
+    display_title: Новости

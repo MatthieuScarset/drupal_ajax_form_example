@@ -1,0 +1,9 @@
+uuid: e102a172-4eef-48a9-9ef7-417990c8304f
+langcode: en
+status: true
+dependencies: {  }
+name: Geographic
+vid: geographics
+description: ''
+hierarchy: 0
+weight: 0

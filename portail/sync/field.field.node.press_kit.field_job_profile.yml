@@ -1,0 +1,28 @@
+uuid: b63da216-3a78-44bd-8052-6f1bfeb6b009
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_profile
+    - node.type.press_kit
+    - taxonomy.vocabulary.jobs_profiles
+id: node.press_kit.field_job_profile
+field_name: field_job_profile
+entity_type: node
+bundle: press_kit
+label: Profession
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      jobs_profiles: jobs_profiles
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

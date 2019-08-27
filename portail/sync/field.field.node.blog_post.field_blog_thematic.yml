@@ -1,0 +1,28 @@
+uuid: 23990e3f-ae0c-4547-9f4a-f443f71ebfdc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog_thematic
+    - node.type.blog_post
+    - taxonomy.vocabulary.blog_thematics
+id: node.blog_post.field_blog_thematic
+field_name: field_blog_thematic
+entity_type: node
+bundle: blog_post
+label: 'Blog thematic'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      blog_thematics: blog_thematics
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,16 @@
+display:
+  default:
+    display_options:
+      fields:
+        media_bulk_form:
+          action_title: Ação
+        bundle:
+          label: Provedor
+        status:
+          label: Status
+        operations:
+          label: Operações
+      filters:
+        bundle:
+          expose:
+            label: Provedor

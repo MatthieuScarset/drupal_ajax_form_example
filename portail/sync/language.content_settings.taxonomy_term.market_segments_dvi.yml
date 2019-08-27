@@ -1,0 +1,11 @@
+uuid: fcfb9516-4c14-40b8-805a-1ce1a5ba6b96
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.market_segments_dvi
+id: taxonomy_term.market_segments_dvi
+target_entity_type_id: taxonomy_term
+target_bundle: market_segments_dvi
+default_langcode: site_default
+language_alterable: false

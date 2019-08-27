@@ -1,0 +1,28 @@
+uuid: 56e4ad9e-377f-40e9-b8d1-886fc37dd042
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - media_entity.bundle.file
+    - node.type.document
+id: node.document.field_file
+field_name: field_file
+entity_type: node
+bundle: document
+label: 'Upload document'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

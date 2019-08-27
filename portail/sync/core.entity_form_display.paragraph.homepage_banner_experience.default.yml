@@ -1,0 +1,65 @@
+uuid: 9951ad81-f041-4ad0-bfd0-ce30d2f1eef4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_banner_experience.field_content
+    - field.field.paragraph.homepage_banner_experience.field_content_image
+    - field.field.paragraph.homepage_banner_experience.field_content_title
+    - field.field.paragraph.homepage_banner_experience.field_tab_picto_class
+    - field.field.paragraph.homepage_banner_experience.field_tab_title
+    - image.style.homepage_expertise
+    - paragraphs.paragraphs_type.homepage_banner_experience
+  module:
+    - image
+    - text
+    - workbench_moderation
+id: paragraph.homepage_banner_experience.default
+targetEntityType: paragraph
+bundle: homepage_banner_experience
+mode: default
+content:
+  field_content:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_content_image:
+    weight: 3
+    settings:
+      preview_image_style: homepage_expertise
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_content_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_tab_picto_class:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_tab_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

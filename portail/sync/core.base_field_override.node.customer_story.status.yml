@@ -1,0 +1,22 @@
+uuid: f59793cb-4a09-4b70-8683-c38785c379aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customer_story
+id: node.customer_story.status
+field_name: status
+entity_type: node
+bundle: customer_story
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

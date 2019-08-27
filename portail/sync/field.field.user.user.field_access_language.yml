@@ -1,0 +1,22 @@
+uuid: 7c873d86-a622-4c9e-aaf8-ed214ef7b131
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_access_language
+  module:
+    - user
+id: user.user.field_access_language
+field_name: field_access_language
+entity_type: user
+bundle: user
+label: 'Access Language'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:configurable_language'
+  handler_settings: {  }
+field_type: entity_reference

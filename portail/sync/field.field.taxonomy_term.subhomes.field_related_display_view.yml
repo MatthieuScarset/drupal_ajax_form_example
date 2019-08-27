@@ -1,0 +1,19 @@
+uuid: 7a77e91d-f790-4ddc-a603-357484d3613b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_related_display_view
+    - taxonomy.vocabulary.subhomes
+id: taxonomy_term.subhomes.field_related_display_view
+field_name: field_related_display_view
+entity_type: taxonomy_term
+bundle: subhomes
+label: related_display_view
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rebond_document
+    - node.type.customer_story
+id: node.customer_story.field_rebond_document
+field_name: field_rebond_document
+entity_type: node
+bundle: customer_story
+label: Document
+description: 'Related document'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: rebond_entity_reference
+      display_name: rebond_entity_reference_document
+      arguments: {  }
+field_type: entity_reference

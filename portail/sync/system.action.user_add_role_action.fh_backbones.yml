@@ -1,0 +1,14 @@
+uuid: dd10cf3a-7e89-4340-b39f-5c4915bd21ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.fh_backbones
+  module:
+    - user
+id: user_add_role_action.fh_backbones
+label: 'Add the FH Backbones role to the selected users'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: fh_backbones

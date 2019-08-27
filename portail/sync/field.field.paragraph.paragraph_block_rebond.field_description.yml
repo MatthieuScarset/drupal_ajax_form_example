@@ -1,0 +1,19 @@
+uuid: fb3f5d21-c6d4-4707-b77b-7839f1d14cf3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.paragraph_block_rebond
+id: paragraph.paragraph_block_rebond.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: paragraph_block_rebond
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

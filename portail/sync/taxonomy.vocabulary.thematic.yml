@@ -1,0 +1,9 @@
+uuid: a733d3d6-4abe-4a36-b0ba-4a1a80f99e74
+langcode: en
+status: true
+dependencies: {  }
+name: Thematic
+vid: thematic
+description: ''
+hierarchy: 0
+weight: 0

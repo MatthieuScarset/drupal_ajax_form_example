@@ -1,0 +1,14 @@
+uuid: 8ab09e7d-b0d2-4aa2-91c4-b541269338b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.digital_admin
+  module:
+    - user
+id: user_remove_role_action.digital_admin
+label: 'Remove the Digital Admin role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: digital_admin

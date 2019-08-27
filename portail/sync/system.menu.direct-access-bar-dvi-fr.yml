@@ -1,0 +1,8 @@
+uuid: e7a63a7e-48d1-42fa-afba-fd00121e36e7
+langcode: fr
+status: true
+dependencies: {  }
+id: direct-access-bar-dvi-fr
+label: 'Direct Access Bar DVI FR'
+description: 'Menu for Direct Access Bar FR only for DVI'
+locked: false

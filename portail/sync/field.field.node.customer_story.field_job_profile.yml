@@ -1,0 +1,28 @@
+uuid: 6af4c92e-c064-48c9-bd76-801a83699df2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_profile
+    - node.type.customer_story
+    - taxonomy.vocabulary.jobs_profiles
+id: node.customer_story.field_job_profile
+field_name: field_job_profile
+entity_type: node
+bundle: customer_story
+label: Profession
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      jobs_profiles: jobs_profiles
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,35 @@
+uuid: 082bbd6d-9ed9-41f6-a65f-dd0ca83ac339
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+id: nodes
+label: nodes
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  2b330202-9701-4f29-bc0d-7fbcf203bf39:
+    id: node_type
+    bundles:
+      blog_post: blog_post
+      country: country
+      customer_story: customer_story
+      document: document
+      industry: industry
+      magazine: magazine
+      partner: partner
+      press_kit: press_kit
+      press_release: press_release
+      product: product
+      profile: profile
+      region: region
+      simple_page: simple_page
+      solution: solution
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 2b330202-9701-4f29-bc0d-7fbcf203bf39
+selection_logic: and
+weight: -5
+relationships: {  }

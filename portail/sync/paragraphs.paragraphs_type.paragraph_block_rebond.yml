@@ -1,0 +1,7 @@
+uuid: dac39624-8647-4cd0-b83f-ac0502689893
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph_block_rebond
+label: 'Paragraph block rebond'
+behavior_plugins: {  }

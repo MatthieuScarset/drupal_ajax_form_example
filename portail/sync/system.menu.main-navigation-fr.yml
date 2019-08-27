@@ -1,0 +1,8 @@
+uuid: 4a6193cd-7f46-4690-b987-56fdd2b5cbee
+langcode: fr
+status: true
+dependencies: {  }
+id: main-navigation-fr
+label: 'Main navigation FR'
+description: 'Liens de navigation principale'
+locked: false

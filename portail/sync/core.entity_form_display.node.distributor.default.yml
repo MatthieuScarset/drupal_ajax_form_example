@@ -1,0 +1,336 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.node.distributor.field_additionnal
+    - field.field.node.distributor.field_certification_obs
+    - field.field.node.distributor.field_city
+    - field.field.node.distributor.field_content
+    - field.field.node.distributor.field_departments
+    - field.field.node.distributor.field_display_title
+    - field.field.node.distributor.field_email_address
+    - field.field.node.distributor.field_header_title
+    - field.field.node.distributor.field_highlight
+    - field.field.node.distributor.field_market_segment
+    - field.field.node.distributor.field_market_segment_dvi
+    - field.field.node.distributor.field_meta_description
+    - field.field.node.distributor.field_meta_title
+    - field.field.node.distributor.field_navigation_link
+    - field.field.node.distributor.field_phone_number
+    - field.field.node.distributor.field_postal_code
+    - field.field.node.distributor.field_products
+    - field.field.node.distributor.field_solution
+    - field.field.node.distributor.field_street
+    - field.field.node.distributor.field_subhome
+    - field.field.node.distributor.field_visual
+    - node.type.distributor
+  module:
+    - entity_browser
+    - field_group
+    - link
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_write
+        - group_classify
+        - group_seo
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_seo:
+      children:
+        - field_meta_title
+        - field_meta_description
+      parent_name: group_onglets
+      weight: 10
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: SEO
+    group_write:
+      children:
+        - langcode
+        - title
+        - field_display_title
+        - field_header_title
+        - field_content
+        - field_visual
+        - field_certification_obs
+        - field_navigation_link
+        - field_email_address
+        - field_street
+        - field_additionnal
+        - field_postal_code
+        - field_city
+        - field_phone_number
+        - field_products
+      parent_name: group_onglets
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Write
+    group_classify:
+      children:
+        - field_market_segment
+        - field_solution
+        - field_departments
+        - field_subhome
+        - field_market_segment_dvi
+      parent_name: group_onglets
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
+id: node.distributor.default
+targetEntityType: node
+bundle: distributor
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 7
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_additionnal:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_certification_obs:
+    weight: 8
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_city:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_content:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_departments:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_display_title:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_email_address:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_header_title:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_logo:
+    weight: 5
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_market_segment:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_market_segment_dvi:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_meta_description:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_meta_title:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_navigation_link:
+    weight: 9
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_phone_number:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_postal_code:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_products:
+    weight: 16
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_solution:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_street:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_subhome:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_visual:
+    weight: 7
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      open: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_highlight: true
+  promote: true
+  sticky: true

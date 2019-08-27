@@ -1,0 +1,34 @@
+uuid: 4fe3be65-d24c-4ea0-b009-a6889933ad06
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: magazine
+label: magazine
+type: 'canonical_entities:node'
+pattern: 'magazine/[node:title]'
+selection_criteria:
+  a061c975-76fb-4c44-928d-15369008db61:
+    id: node_type
+    bundles:
+      magazine: magazine
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a061c975-76fb-4c44-928d-15369008db61
+  04e84c4d-b7cb-44f5-b1c3-a091ff795f85:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 04e84c4d-b7cb-44f5-b1c3-a091ff795f85
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

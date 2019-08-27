@@ -1,0 +1,9 @@
+uuid: 8b38fec7-335f-471d-a98f-d80d53ed7963
+langcode: und
+status: true
+dependencies: {  }
+name: 'Documents types'
+vid: document_types
+description: ''
+hierarchy: 0
+weight: 0

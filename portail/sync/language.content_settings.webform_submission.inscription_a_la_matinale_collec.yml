@@ -1,0 +1,11 @@
+uuid: 6296a79b-78fc-407a-bd69-a32bb83f8d7e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_a_la_matinale_collec
+id: webform_submission.inscription_a_la_matinale_collec
+target_entity_type_id: webform_submission
+target_bundle: inscription_a_la_matinale_collec
+default_langcode: site_default
+language_alterable: false

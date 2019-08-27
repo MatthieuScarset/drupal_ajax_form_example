@@ -1,0 +1,19 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Applicar
+      fields:
+        media_bulk_form:
+          action_title: Acción
+        bundle:
+          label: Proveedor
+        status:
+          label: Estado
+        operations:
+          label: Operaciones
+      filters:
+        bundle:
+          expose:
+            label: Proveedor

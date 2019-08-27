@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: playlist
+label: 'Playlist (310x165)'
+effects:
+  678fd877-9e7c-4d01-b4cf-0d2ded02f43b:
+    uuid: 678fd877-9e7c-4d01-b4cf-0d2ded02f43b
+    id: image_scale_and_crop
+    weight: 3
+    data:
+      width: 310
+      height: 165
+      anchor: center-center

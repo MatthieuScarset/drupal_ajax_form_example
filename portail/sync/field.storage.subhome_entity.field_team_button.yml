@@ -1,0 +1,20 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - oab_subhomes
+    - paragraphs
+id: subhome_entity.field_team_button
+field_name: field_team_button
+entity_type: subhome_entity
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

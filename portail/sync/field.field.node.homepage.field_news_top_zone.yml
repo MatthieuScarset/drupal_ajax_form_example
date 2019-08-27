@@ -1,0 +1,39 @@
+uuid: 07cf7f00-5bd7-419f-9587-bbe451bfb52d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_top_zone
+    - node.type.homepage
+    - paragraphs.paragraphs_type.homepage_news
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_news_top_zone
+field_name: field_news_top_zone
+entity_type: node
+bundle: homepage
+label: 'Top Highlights'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      homepage_news: homepage_news
+    target_bundles_drag_drop:
+      infography_partner:
+        weight: 5
+        enabled: false
+      homepage_banner_experience:
+        weight: 6
+        enabled: false
+      homepage_banner_item:
+        weight: 7
+        enabled: false
+      homepage_news:
+        enabled: true
+        weight: 8
+field_type: entity_reference_revisions

@@ -1,0 +1,9 @@
+uuid: f8709c1b-a56d-4753-af59-93873ea11fa7
+langcode: en
+status: true
+dependencies: {  }
+id: node__simple_page
+label: 'Content: Page simple'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

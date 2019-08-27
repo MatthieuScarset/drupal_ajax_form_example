@@ -1,0 +1,12 @@
+uuid: 41a88dd9-07c5-471e-913d-766a339ade70
+langcode: en
+status: true
+dependencies: {  }
+id: _KyYVoP1pMRSEJD8cDQst9Nj-h1vo7ZVPnvdm5RCdy4
+label: 'https://www.orange-business.com/ru/sitemap.xml'
+chunks: 1
+links: 294
+max_filesize: 54547
+context:
+  language: ru
+updated: 1565915998

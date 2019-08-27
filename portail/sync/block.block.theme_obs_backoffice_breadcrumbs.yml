@@ -1,0 +1,20 @@
+uuid: c5fa44ec-7d85-4cb9-99f1-53ecd8bf10b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice
+id: theme_obs_backoffice_breadcrumbs
+theme: theme_obs_backoffice
+region: breadcrumb
+weight: -4
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

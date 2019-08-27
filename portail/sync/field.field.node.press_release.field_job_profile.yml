@@ -1,0 +1,28 @@
+uuid: 076abf21-842c-4531-873d-b99f754ef9fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_profile
+    - node.type.press_release
+    - taxonomy.vocabulary.jobs_profiles
+id: node.press_release.field_job_profile
+field_name: field_job_profile
+entity_type: node
+bundle: press_release
+label: 'Job profile'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      jobs_profiles: jobs_profiles
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

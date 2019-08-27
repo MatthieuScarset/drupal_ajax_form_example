@@ -1,0 +1,41 @@
+display:
+  page_press:
+    display_title: Presse
+    display_options:
+      empty:
+        area:
+          content:
+            value: '<p>Aucun élément ne correspond à votre requête. Veuillez élargir votre recherche.</p>'
+            format: full_html
+  page_catalogue:
+    display_options:
+      title: Produits
+    display_title: Produits
+  page_customer:
+    display_options:
+      title: 'Témoignage client'
+    display_title: 'Témoignage client'
+  page_document:
+    display_options:
+      title: Médiathèque
+    display_title: Médiathèque
+  page_partners:
+    display_options:
+      title: Partenaires
+    display_title: Partenaires
+  default:
+    display_options:
+      title: Analystes
+      exposed_form:
+        options:
+          submit_button: Filtrer
+  page_catalogue_dvi:
+    display_title: 'Produits DVI'
+    display_options:
+      title: 'Produits DVI'
+  page_distributor:
+    display_title: Distributeurs
+    display_options:
+      title: Distributeurs
+  page_analysts:
+    display_title: analystes

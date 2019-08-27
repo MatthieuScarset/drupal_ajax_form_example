@@ -1,0 +1,23 @@
+uuid: 817d25ab-93cd-4ed2-8b48-b9ec325c41cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.document
+id: node.document.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: document
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

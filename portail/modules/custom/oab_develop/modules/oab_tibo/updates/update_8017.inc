@@ -2671,7 +2671,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'blog_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -2907,7 +2907,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'product_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -3333,7 +3333,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'customer_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -3696,7 +3696,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'library_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -4122,7 +4122,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'magazine_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -4359,7 +4359,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'partner_term_tid',
 													),
 												'default_argument_skip_url' => false,
@@ -4722,7 +4722,7 @@ $config_group->setData(
 												'default_argument_type' => 'config_key',
 												'default_argument_options' =>
 													array (
-														'config_name' => 'oab.subhomes',
+														'config_name' => 'oab_subhomes.subhomes',
 														'config_key' => 'press_term_tid',
 													),
 												'default_argument_skip_url' => false,

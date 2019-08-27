@@ -1,0 +1,98 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.homepage.field_banner_expertise
+    - field.field.node.homepage.field_banner_left_zone_title
+    - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_corporate_button_link
+    - field.field.node.homepage.field_corporate_button_text
+    - field.field.node.homepage.field_corporate_highlight
+    - field.field.node.homepage.field_corporate_image
+    - field.field.node.homepage.field_corporate_menu
+    - field.field.node.homepage.field_corporate_menu_title
+    - field.field.node.homepage.field_corporate_show_menu
+    - field.field.node.homepage.field_corporate_title
+    - field.field.node.homepage.field_expertise_title
+    - field.field.node.homepage.field_header_title
+    - field.field.node.homepage.field_hub
+    - field.field.node.homepage.field_hub_portal
+    - field.field.node.homepage.field_infography
+    - field.field.node.homepage.field_meta_description
+    - field.field.node.homepage.field_meta_title
+    - field.field.node.homepage.field_metatags
+    - field.field.node.homepage.field_news_top_zone
+    - field.field.node.homepage.field_partner_button_link
+    - field.field.node.homepage.field_partner_title
+    - field.field.node.homepage.field_partners_button_text
+    - field.field.node.homepage.field_solution_banner_btn_link
+    - field.field.node.homepage.field_solution_banner_btn_text
+    - field.field.node.homepage.field_solution_banner_highlight
+    - field.field.node.homepage.field_solution_banner_image
+    - field.field.node.homepage.field_solution_banner_left_zone
+    - field.field.node.homepage.field_solution_banner_right_zone
+    - field.field.node.homepage.field_solution_banner_title
+    - field.field.node.homepage.field_solution_banner_title_colo
+    - field.field.node.homepage.field_solution_image_mobile
+    - field.field.node.homepage.field_subhead_title_top_zone
+    - field.field.node.homepage.field_title_btn_text
+    - field.field.node.homepage.field_title_button_link
+    - field.field.node.homepage.field_title_color
+    - field.field.node.homepage.field_top_zone_image
+    - field.field.node.homepage.field_top_zone_image_mobile
+    - field.field.node.homepage.moderation_state_update
+    - node.type.homepage
+  module:
+    - user
+id: node.homepage.default
+targetEntityType: node
+bundle: homepage
+mode: default
+content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_banner_expertise: true
+  field_banner_left_zone_title: true
+  field_banner_right_zone_title: true
+  field_corporate_button_link: true
+  field_corporate_button_text: true
+  field_corporate_highlight: true
+  field_corporate_image: true
+  field_corporate_menu: true
+  field_corporate_menu_title: true
+  field_corporate_show_menu: true
+  field_corporate_title: true
+  field_expertise_title: true
+  field_header_title: true
+  field_hub: true
+  field_hub_portal: true
+  field_infography: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_news_top_zone: true
+  field_partner_button_link: true
+  field_partner_title: true
+  field_partners_button_text: true
+  field_solution_banner_btn_link: true
+  field_solution_banner_btn_text: true
+  field_solution_banner_highlight: true
+  field_solution_banner_image: true
+  field_solution_banner_left_zone: true
+  field_solution_banner_right_zone: true
+  field_solution_banner_title: true
+  field_solution_banner_title_colo: true
+  field_solution_image_mobile: true
+  field_subhead_title_top_zone: true
+  field_title_btn_text: true
+  field_title_button_link: true
+  field_title_color: true
+  field_top_zone_image: true
+  field_top_zone_image_mobile: true
+  langcode: true
+  moderation_state_update: true

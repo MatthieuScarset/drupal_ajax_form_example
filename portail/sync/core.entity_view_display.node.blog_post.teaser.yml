@@ -1,0 +1,94 @@
+uuid: 30a0c0c0-e195-4a5e-a4dd-0a3de2f90381
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.blog_post.field_blog_format
+    - field.field.node.blog_post.field_blog_thematic
+    - field.field.node.blog_post.field_comments
+    - field.field.node.blog_post.field_content
+    - field.field.node.blog_post.field_content_owner
+    - field.field.node.blog_post.field_display_title
+    - field.field.node.blog_post.field_email_owner
+    - field.field.node.blog_post.field_end_date
+    - field.field.node.blog_post.field_highlight
+    - field.field.node.blog_post.field_hub
+    - field.field.node.blog_post.field_hub_portal
+    - field.field.node.blog_post.field_industry
+    - field.field.node.blog_post.field_insight
+    - field.field.node.blog_post.field_job_profile
+    - field.field.node.blog_post.field_market_segment
+    - field.field.node.blog_post.field_meta_description
+    - field.field.node.blog_post.field_meta_title
+    - field.field.node.blog_post.field_metatags
+    - field.field.node.blog_post.field_p_wysiwyg_rebond
+    - field.field.node.blog_post.field_page_du_site_1
+    - field.field.node.blog_post.field_page_du_site_2
+    - field.field.node.blog_post.field_profile
+    - field.field.node.blog_post.field_rebond_document
+    - field.field.node.blog_post.field_region
+    - field.field.node.blog_post.field_solution
+    - field.field.node.blog_post.field_start_date
+    - field.field.node.blog_post.field_subhome
+    - field.field.node.blog_post.field_visual
+    - field.field.node.blog_post.moderation_state_update
+    - field.field.node.blog_post.unpublish_date
+    - node.type.blog_post
+  module:
+    - user
+id: node.blog_post.teaser
+targetEntityType: node
+bundle: blog_post
+mode: teaser
+content:
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: automatic_teaser
+      link: false
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  workbench_moderation_control:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_blog_format: true
+  field_blog_thematic: true
+  field_comments: true
+  field_content: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_highlight: true
+  field_hub: true
+  field_hub_portal: true
+  field_industry: true
+  field_insight: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_profile: true
+  field_rebond_document: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
+  langcode: true
+  moderation_state_update: true
+  unpublish_date: true

@@ -1,0 +1,21 @@
+uuid: c6e83b7f-8755-48c7-bf99-c766b5b1ee41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_rebond_wysiwyg_contenu
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - text
+id: paragraph.rebond_wysiwyg.field_p_rebond_wysiwyg_contenu
+field_name: field_p_rebond_wysiwyg_contenu
+entity_type: paragraph
+bundle: rebond_wysiwyg
+label: Contenu
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

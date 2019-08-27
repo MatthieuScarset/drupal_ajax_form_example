@@ -1,0 +1,14 @@
+uuid: 29e00fe6-7bd8-47df-8592-e7c8862bfaa7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.digital_admin
+  module:
+    - user
+id: user_add_role_action.digital_admin
+label: 'Add the Digital Admin role to the selected users'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: digital_admin

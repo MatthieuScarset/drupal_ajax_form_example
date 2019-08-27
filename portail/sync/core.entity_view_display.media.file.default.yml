@@ -1,0 +1,27 @@
+uuid: cc4ea871-b8e5-4f42-959c-25df2e48c57d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.file.field_file
+    - media_entity.bundle.file
+  module:
+    - file
+id: media.file.default
+targetEntityType: media
+bundle: file
+mode: default
+content:
+  field_file:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

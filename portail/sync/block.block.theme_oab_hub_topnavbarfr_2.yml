@@ -1,0 +1,32 @@
+uuid: 85be00a8-4d31-4350-81d5-a145779fcdb7
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.top-navbar-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_topnavbarfr_2
+theme: theme_oab_hub
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:top-navbar-fr'
+settings:
+  id: 'system_menu_block:top-navbar-fr'
+  label: 'Top navbar FR'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

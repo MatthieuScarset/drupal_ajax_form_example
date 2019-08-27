@@ -1,0 +1,11 @@
+uuid: 71eea648-5fe3-40c1-8ba5-394a63445623
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscrivez_vous_aux_prochains_hac
+id: webform_submission.inscrivez_vous_aux_prochains_hac
+target_entity_type_id: webform_submission
+target_bundle: inscrivez_vous_aux_prochains_hac
+default_langcode: site_default
+language_alterable: false

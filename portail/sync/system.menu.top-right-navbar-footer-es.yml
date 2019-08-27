@@ -1,0 +1,8 @@
+uuid: 99eb1851-9ffe-4939-987a-b36fc512033f
+langcode: es
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-es
+label: 'Top right navbar Footer ES'
+description: 'Right navbar''s links to be displayed in the footer in mobile mode'
+locked: false

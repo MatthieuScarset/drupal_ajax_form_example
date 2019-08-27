@@ -1,0 +1,31 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.rebond_wysiwyg.field_p_rebond_wysiwyg_contenu
+    - field.field.paragraph.rebond_wysiwyg.field_p_wysiwyg_rebond_color
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - options
+    - text
+id: paragraph.rebond_wysiwyg.default
+targetEntityType: paragraph
+bundle: rebond_wysiwyg
+mode: default
+content:
+  field_p_rebond_wysiwyg_contenu:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_p_wysiwyg_rebond_color:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

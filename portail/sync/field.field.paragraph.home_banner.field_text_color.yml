@@ -1,0 +1,23 @@
+uuid: 48375b0c-d447-4f9e-ba5c-772b993347da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_color
+    - paragraphs.paragraphs_type.home_banner
+  module:
+    - options
+id: paragraph.home_banner.field_text_color
+field_name: field_text_color
+entity_type: paragraph
+bundle: home_banner
+label: 'Text Color'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: black
+default_value_callback: ''
+settings: {  }
+field_type: list_string

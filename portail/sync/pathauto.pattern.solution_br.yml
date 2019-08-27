@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: solution_br
+label: 'Solution BR'
+type: 'canonical_entities:node'
+pattern: 'solucoes/[node:title]'
+selection_criteria:
+  a60fb63f-75f7-4ba5-a42a-cc136d09b71a:
+    id: node_type
+    bundles:
+      solution: solution
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a60fb63f-75f7-4ba5-a42a-cc136d09b71a
+  6326a5ba-0e42-4c0f-bbab-eb59d0173b75:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 6326a5ba-0e42-4c0f-bbab-eb59d0173b75
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

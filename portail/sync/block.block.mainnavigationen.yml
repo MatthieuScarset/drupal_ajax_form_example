@@ -1,0 +1,32 @@
+uuid: 5b4d4747-f2ec-4d05-b211-f1040c4263c7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: mainnavigationen
+theme: theme_boosted
+region: header
+weight: -4
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

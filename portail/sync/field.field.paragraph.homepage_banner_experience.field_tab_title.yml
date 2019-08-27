@@ -1,0 +1,19 @@
+uuid: 2d735d94-bc21-4062-bfa0-a5ebd804de70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tab_title
+    - paragraphs.paragraphs_type.homepage_banner_experience
+id: paragraph.homepage_banner_experience.field_tab_title
+field_name: field_tab_title
+entity_type: paragraph
+bundle: homepage_banner_experience
+label: 'Tab title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

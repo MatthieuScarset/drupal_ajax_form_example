@@ -1,0 +1,86 @@
+uuid: 680967c5-30cc-4478-984e-a1e27ff778ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.related_content
+    - field.field.node.customer_story.field_content
+    - field.field.node.customer_story.field_content_owner
+    - field.field.node.customer_story.field_country
+    - field.field.node.customer_story.field_display_title
+    - field.field.node.customer_story.field_email_owner
+    - field.field.node.customer_story.field_end_date
+    - field.field.node.customer_story.field_file
+    - field.field.node.customer_story.field_highlight
+    - field.field.node.customer_story.field_hub
+    - field.field.node.customer_story.field_hub_portal
+    - field.field.node.customer_story.field_industry
+    - field.field.node.customer_story.field_insight
+    - field.field.node.customer_story.field_job_profile
+    - field.field.node.customer_story.field_market_segment
+    - field.field.node.customer_story.field_meta_description
+    - field.field.node.customer_story.field_meta_title
+    - field.field.node.customer_story.field_metatags
+    - field.field.node.customer_story.field_p_wysiwyg_rebond
+    - field.field.node.customer_story.field_page_du_site_1
+    - field.field.node.customer_story.field_page_du_site_2
+    - field.field.node.customer_story.field_rebond_document
+    - field.field.node.customer_story.field_region
+    - field.field.node.customer_story.field_solution
+    - field.field.node.customer_story.field_start_date
+    - field.field.node.customer_story.field_subhome
+    - field.field.node.customer_story.field_visual
+    - field.field.node.customer_story.moderation_state_update
+    - node.type.customer_story
+  module:
+    - user
+id: node.customer_story.related_content
+targetEntityType: node
+bundle: customer_story
+mode: related_content
+content:
+  field_highlight:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: related_content_image
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_content_owner: true
+  field_country: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_hub: true
+  field_hub_portal: true
+  field_industry: true
+  field_insight: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_rebond_document: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
+  langcode: true
+  links: true
+  moderation_state_update: true
+  workbench_moderation_control: true

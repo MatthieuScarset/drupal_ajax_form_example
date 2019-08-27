@@ -1,0 +1,20 @@
+uuid: 47fe71e7-a405-4de6-b9dc-26d7cfe6e25a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.office
+  module:
+    - path
+id: node.office.path
+field_name: path
+entity_type: node
+bundle: office
+label: 'URL alias'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

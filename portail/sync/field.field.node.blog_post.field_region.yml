@@ -1,0 +1,28 @@
+uuid: aca35d57-7934-4b97-b634-e1cac9549632
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_region
+    - node.type.blog_post
+    - taxonomy.vocabulary.regions
+id: node.blog_post.field_region
+field_name: field_region
+entity_type: node
+bundle: blog_post
+label: Region
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      regions: regions
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

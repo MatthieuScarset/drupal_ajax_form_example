@@ -1,0 +1,18 @@
+uuid: 3239794e-f9fc-4cd0-a4af-6d582795599f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.office
+id: node.office.created
+field_name: created
+entity_type: node
+bundle: office
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

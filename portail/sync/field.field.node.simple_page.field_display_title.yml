@@ -1,0 +1,23 @@
+uuid: c657e7f5-8381-4c89-98d6-4cad7d236eb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.simple_page
+id: node.simple_page.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: simple_page
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

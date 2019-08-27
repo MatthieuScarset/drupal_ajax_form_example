@@ -1,0 +1,32 @@
+uuid: 2f2f2749-4970-4e2e-924b-1b7893ca8edc
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.main-navigation-es
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_mainnavigationes
+theme: theme_oab_hub
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:main-navigation-es'
+settings:
+  id: 'system_menu_block:main-navigation-es'
+  label: 'Main navigation ES'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

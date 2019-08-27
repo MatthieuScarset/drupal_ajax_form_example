@@ -1,0 +1,19 @@
+uuid: 4062fce0-689b-4b56-969b-358cc9546252
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight
+    - node.type.magazine
+id: node.magazine.field_highlight
+field_name: field_highlight
+entity_type: node
+bundle: magazine
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

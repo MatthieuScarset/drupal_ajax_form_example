@@ -1,0 +1,42 @@
+uuid: ba8b57f4-db3f-4f11-8461-20be07c6f697
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.medias_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: browse_media_modal
+label: 'Browser modal for medias'
+display: modal
+display_configuration:
+  width: ''
+  height: '700'
+  link_text: 'Select medias'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  4d58d6d8-8ee5-457f-b211-2acc1ef36ac7:
+    settings:
+      view: medias_entity_browser
+      view_display: entity_browser_media
+      submit_text: Select
+      auto_select: false
+    uuid: 4d58d6d8-8ee5-457f-b211-2acc1ef36ac7
+    weight: 1
+    label: 'Medias listing'
+    id: view
+  2d062df6-4605-4f54-a75b-33309126c382:
+    settings:
+      entity_type: media
+      bundle: image
+      form_mode: default
+      submit_text: Save
+    uuid: 2d062df6-4605-4f54-a75b-33309126c382
+    weight: 2
+    label: 'Upload media'
+    id: entity_form

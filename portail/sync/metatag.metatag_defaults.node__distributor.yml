@@ -1,0 +1,9 @@
+uuid: 6dc1f333-e538-4859-8bb4-0b40534c1af5
+langcode: en
+status: true
+dependencies: {  }
+id: node__distributor
+label: 'Content: Distributor'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

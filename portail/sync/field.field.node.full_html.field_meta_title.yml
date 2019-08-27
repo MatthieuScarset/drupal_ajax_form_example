@@ -1,0 +1,19 @@
+uuid: bf6060f7-f8cf-4f22-9263-f98f3856293f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.full_html
+id: node.full_html.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: full_html
+label: 'Meta title'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

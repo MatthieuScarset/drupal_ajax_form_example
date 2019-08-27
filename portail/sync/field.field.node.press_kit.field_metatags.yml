@@ -1,0 +1,23 @@
+uuid: 7479150a-0367-4eeb-9774-0580f70462a4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_metatags
+    - node.type.press_kit
+  module:
+    - metatag
+id: node.press_kit.field_metatags
+field_name: field_metatags
+entity_type: node
+bundle: press_kit
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'a:0:{}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

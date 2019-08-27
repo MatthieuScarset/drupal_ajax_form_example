@@ -1,0 +1,19 @@
+uuid: 2e422354-514d-410e-85e7-c30b33b80dba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_axiome_data
+    - node.type.product
+id: node.product.field_axiome_data
+field_name: field_axiome_data
+entity_type: node
+bundle: product
+label: 'Axiome data'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

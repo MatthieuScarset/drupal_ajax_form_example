@@ -1,0 +1,30 @@
+uuid: c2a7a298-f04a-41ba-85c0-8f9a039ac4e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_tryandbuy
+theme: theme_oab_hub
+region: sidebar
+weight: -36
+provider: null
+plugin: try_and_buy_block
+settings:
+  id: try_and_buy_block
+  label: 'Try and Buy Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

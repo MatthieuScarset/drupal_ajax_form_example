@@ -1,0 +1,11 @@
+uuid: debd5f17-ff08-46c5-a617-01cd94ce88db
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.demande_de_contact_geopack_ocean
+id: webform_submission.demande_de_contact_geopack_ocean
+target_entity_type_id: webform_submission
+target_bundle: demande_de_contact_geopack_ocean
+default_langcode: site_default
+language_alterable: false

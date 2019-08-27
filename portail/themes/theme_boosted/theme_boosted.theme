@@ -510,7 +510,7 @@ function theme_boosted_preprocess_views_view_list(&$variables) {
   $id = $view->storage->id();
 	if ($id == 'offices_map_view'){
 		$config_factory = \Drupal::configFactory();
-		$config_group = $config_factory->get('oab.offices_map');
+		$config_group = $config_factory->get('oab_offices_map.offices_map');
 		if(!empty($config_group)) {
 			$url_contact = $config_group->get('contact_url');
 			if(!empty($url_contact)) {
@@ -525,7 +525,7 @@ function theme_boosted_preprocess_views_view_fields(&$variables){
 	$id = $view->storage->id();
 	if ($id == 'offices_map_view'){
 		$config_factory = \Drupal::configFactory();
-		$config_group = $config_factory->get('oab.offices_map');
+		$config_group = $config_factory->get('oab_offices_map.offices_map');
 		if(!empty($config_group)) {
 			$url_contact = $config_group->get('contact_url');
 			if(!empty($url_contact)) {

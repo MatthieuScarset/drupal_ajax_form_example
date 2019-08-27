@@ -1,0 +1,41 @@
+display:
+  default:
+    display_options:
+      title: Imprensa
+      exposed_form:
+        options:
+          submit_button: Aplique
+  page_catalogue:
+    display_options:
+      title: Produto
+    display_title: Produto
+  page_customer:
+    display_options:
+      title: 'Nossos Clientes'
+    display_title: 'Nossos Clientes'
+  page_distributor:
+    display_options:
+      title: Distribuidores
+    display_title: Distribuidores
+  page_document:
+    display_options:
+      title: Mediateca
+    display_title: Mediateca
+  page_magazine:
+    display_options:
+      title: Revista
+    display_title: Revista
+  page_partners:
+    display_options:
+      title: Parceiros
+    display_title: Parceiros
+  page_press:
+    display_title: Imprensa
+    display_options:
+      empty:
+        area:
+          content:
+            value: "<p>No items match your query. Please modify the selected request.</p>\r\n"
+            format: full_html
+  page_press_old:
+    display_title: Imprensa

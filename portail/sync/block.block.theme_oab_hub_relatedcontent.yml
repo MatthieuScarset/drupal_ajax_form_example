@@ -1,0 +1,39 @@
+uuid: 8e4e19f5-a069-41ee-9bac-063a896cb43d
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_relatedcontent
+theme: theme_oab_hub
+region: prefooter
+weight: -18
+provider: null
+plugin: related_content_block
+settings:
+  id: related_content_block
+  label: 'Related content'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      country: country
+      industry: industry
+      region: region
+      solution: solution
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  request_path:
+    id: request_path
+    pages: '/consulting*'
+    negate: false
+    context_mapping: {  }

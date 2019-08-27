@@ -1,0 +1,51 @@
+uuid: 64dd6551-d6a8-4e99-9e2e-9a288087c96f
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: contactbardvi
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: contact_bar_dvi_block
+settings:
+  id: contact_bar_dvi_block
+  label: 'Contact Bar DVI'
+  provider: oab_frontoffice
+  label_display: '0'
+  need_help: 'Besoin d''aide ?'
+  link_partenaire: /fr/ventes-indirectes/devenir-distributeur
+  link_partenaire_text: 'Devenir distributeur'
+  link_contact: /fr/ventes-indirectes/contact
+  link_contact_text: 'Nous contacter'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      distributor: distributor
+      industry: industry
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: "/ventes-indirectes\r\n/ventes-indirectes/*\r\n/ventes-indirectes/produits/*\r\n/ventes-indirectes/distributeurs/*"
+    negate: false
+    context_mapping: {  }

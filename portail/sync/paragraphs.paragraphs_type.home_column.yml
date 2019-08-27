@@ -1,0 +1,7 @@
+uuid: 8a6502a7-cc66-4e4e-b402-4a6bd7764092
+langcode: en
+status: true
+dependencies: {  }
+id: home_column
+label: 'Home Column'
+behavior_plugins: {  }

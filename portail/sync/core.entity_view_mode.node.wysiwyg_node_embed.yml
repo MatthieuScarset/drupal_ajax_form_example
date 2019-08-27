@@ -1,0 +1,10 @@
+uuid: fe78fd7e-cdc3-4998-ad3d-73b0555197fc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.wysiwyg_node_embed
+label: 'Wysiwyg node embed'
+targetEntityType: node
+cache: true

@@ -1,0 +1,11 @@
+uuid: 607d7583-e0c7-415d-b8ee-0a71a7f577c6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.paragraph_block_rebond
+id: paragraph.paragraph_block_rebond
+target_entity_type_id: paragraph
+target_bundle: paragraph_block_rebond
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,20 @@
+uuid: 47e7818b-aa4e-48ea-a79b-8f4e926f1dd3
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
+id: theme_obs_backoffice_page_title
+theme: theme_obs_backoffice
+region: content
+weight: -4
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

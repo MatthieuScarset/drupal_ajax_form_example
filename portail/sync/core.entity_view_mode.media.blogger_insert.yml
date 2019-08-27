@@ -1,0 +1,10 @@
+uuid: 77f812c1-4b17-4438-8d36-3bae3d5b8362
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.blogger_insert
+label: 'Blogger insert'
+targetEntityType: media
+cache: true

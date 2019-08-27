@@ -1,0 +1,14 @@
+uuid: 00fbb264-935e-4196-b75e-9096914023e1
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: xJHL3738FUvNj7_ZhMgKZMZF8aXM-yIQnDw2IGMmN7k
+id: magazineinterview
+label: 'Magazine interviews Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

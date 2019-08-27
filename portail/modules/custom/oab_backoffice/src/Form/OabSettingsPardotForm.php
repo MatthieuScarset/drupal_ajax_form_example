@@ -21,7 +21,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab.pardot',
+      'oab_backoffice.pardot',
     ];
   }
 
@@ -29,7 +29,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('oab.pardot');
+    $config = $this->config('oab_backoffice.pardot');
 
     $form['iframe_url'] = array(
       '#type' => 'textfield',
@@ -45,7 +45,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $this->config('oab.pardot')
+    $this->config('oab_backoffice.pardot')
       ->set('iframe_url', $form_state->getValue('iframe_url'))
       ->save();
 

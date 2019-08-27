@@ -367,8 +367,8 @@ function oab_frontoffice_views_post_render($view) {
 
     if ($view->id() == 'subhomes') {
         if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
-            // on recupere les valeurs dans oab.subhomes
-            $data =\Drupal::config('oab.subhomes');
+            // on recupere les valeurs dans oab_subhomes.subhomes
+            $data =\Drupal::config('oab_subhomes.subhomes');
             if (count($data) > 0) {
                 switch ($view->current_display) {
                     case 'page_press':

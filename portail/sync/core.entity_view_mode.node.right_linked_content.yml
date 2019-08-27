@@ -1,0 +1,10 @@
+uuid: dd14f40d-1171-439d-84df-8f25cb7fbda3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.right_linked_content
+label: 'Right Linked Content'
+targetEntityType: node
+cache: true

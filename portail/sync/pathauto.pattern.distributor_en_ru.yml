@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: distributor_en_ru
+label: 'Distributor EN RU'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  bd466273-31e7-4cd4-b160-fa8a1abd8cd3:
+    id: node_type
+    bundles:
+      distributor: distributor
+    negate: false
+    context_mapping:
+      node: node
+    uuid: bd466273-31e7-4cd4-b160-fa8a1abd8cd3
+  fe487816-e3e3-4f91-8856-cc79639cd942:
+    id: language
+    langcodes:
+      en: en
+      ru: ru
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: fe487816-e3e3-4f91-8856-cc79639cd942
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

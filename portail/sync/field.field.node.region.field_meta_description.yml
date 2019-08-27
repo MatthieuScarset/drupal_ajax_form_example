@@ -1,0 +1,19 @@
+uuid: d2b4e6ab-307a-40be-8dc6-8384717066b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_description
+    - node.type.region
+id: node.region.field_meta_description
+field_name: field_meta_description
+entity_type: node
+bundle: region
+label: 'Meta description'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,42 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.default_button.field_button_color
+    - field.field.paragraph.default_button.field_button_text
+    - field.field.paragraph.default_button.field_link_button
+    - paragraphs.paragraphs_type.default_button
+  module:
+    - link
+    - workbench_moderation
+id: paragraph.default_button.default
+targetEntityType: paragraph
+bundle: default_button
+mode: default
+content:
+  field_button_color:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_button_text:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_link_button:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

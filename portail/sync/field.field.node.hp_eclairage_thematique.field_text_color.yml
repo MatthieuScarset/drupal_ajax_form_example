@@ -1,0 +1,23 @@
+uuid: b1d5c1e8-5fa9-4d91-96d8-81381860d0a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_color
+    - node.type.hp_eclairage_thematique
+  module:
+    - options
+id: node.hp_eclairage_thematique.field_text_color
+field_name: field_text_color
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Text Color'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: black
+default_value_callback: ''
+settings: {  }
+field_type: list_string

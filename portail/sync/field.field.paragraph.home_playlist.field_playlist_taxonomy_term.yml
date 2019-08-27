@@ -1,0 +1,28 @@
+uuid: bc4c4c8f-a99d-4de5-9076-ffe57cfe3dfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_playlist_taxonomy_term
+    - paragraphs.paragraphs_type.home_playlist
+    - taxonomy.vocabulary.thematic
+id: paragraph.home_playlist.field_playlist_taxonomy_term
+field_name: field_playlist_taxonomy_term
+entity_type: paragraph
+bundle: home_playlist
+label: 'Playlist Taxonomy Term'
+description: 'Taxonomie Insight'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      thematic: thematic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: insight
+field_type: entity_reference

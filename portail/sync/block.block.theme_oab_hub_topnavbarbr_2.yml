@@ -1,0 +1,32 @@
+uuid: 271283c0-eedb-42b4-9097-6ee6d3c6ba6b
+langcode: pt-br
+status: false
+dependencies:
+  config:
+    - system.menu.top-navbar-br
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_topnavbarbr_2
+theme: theme_oab_hub
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:top-navbar-br'
+settings:
+  id: 'system_menu_block:top-navbar-br'
+  label: 'Top navbar BR'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

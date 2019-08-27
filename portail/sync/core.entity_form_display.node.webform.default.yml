@@ -1,0 +1,186 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.webform.field_p_wysiwyg_rebond
+    - field.field.node.webform.field_page_du_site_1
+    - field.field.node.webform.field_page_du_site_2
+    - field.field.node.webform.field_rebond_document
+    - field.field.node.webform.moderation_state_update
+    - field.field.node.webform.webform
+    - node.type.webform
+  module:
+    - field_group
+    - inline_entity_form
+    - paragraphs
+    - path
+    - webform
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_rebond:
+      children:
+        - field_rebond_document
+        - field_page_du_site_1
+        - field_page_du_site_2
+        - field_wysiwyg_rebond
+        - field_p_wysiwyg_rebond
+      parent_name: group_onglets
+      weight: 60
+      format_type: tab
+      format_settings:
+        label: Rebond
+        formatter: closed
+        description: 'Contenus relatifs qui s''afficheront dans la zone "Rebond" ou "1/3" de la page'
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Rebond
+    group_onglets:
+      children:
+        - group_rebond
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+_core:
+  default_config_hash: 3QPllhmSDNxHFnxrVUPmO5RhAOJtt5AWVmXxyfHQBS0
+id: node.webform.default
+targetEntityType: node
+bundle: webform
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_p_wysiwyg_rebond:
+    weight: 40
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_page_du_site_1:
+    weight: 37
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_page_du_site_2:
+    weight: 38
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_rebond_document:
+    weight: 36
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_wysiwyg_rebond:
+    weight: 39
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  moderation_state_update:
+    type: inline_entity_form_complex
+    weight: 11
+    settings:
+      override_labels: true
+      label_singular: 'Moderation state update'
+      label_plural: 'Moderation state updates'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  webform:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: webform_entity_reference_select
+    region: content
+hidden: {  }

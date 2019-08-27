@@ -1,0 +1,11 @@
+uuid: 5366dd4b-265f-4921-810b-9b8af2817397
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_a_l_event_apple_jeud
+id: webform_submission.inscription_a_l_event_apple_jeud
+target_entity_type_id: webform_submission
+target_bundle: inscription_a_l_event_apple_jeud
+default_langcode: site_default
+language_alterable: false

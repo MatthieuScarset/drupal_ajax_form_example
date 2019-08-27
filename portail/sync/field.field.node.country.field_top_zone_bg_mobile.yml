@@ -1,0 +1,28 @@
+uuid: 943c6d23-504a-4a9a-8ac0-5b0a57f8416e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_zone_bg_mobile
+    - media_entity.bundle.image
+    - node.type.country
+id: node.country.field_top_zone_bg_mobile
+field_name: field_top_zone_bg_mobile
+entity_type: node
+bundle: country
+label: 'Top zone background mobile'
+description: 'Max-height: 500px'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

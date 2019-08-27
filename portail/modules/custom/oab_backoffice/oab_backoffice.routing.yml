@@ -14,7 +14,7 @@ oab.settings_pardot:
   requirements:
     _permission: 'administer site configuration'
 
-oab.general_settings:
+oab_backoffice.general_settings:
   path: '/admin/structure/oab/settings/general'
   defaults:
     _form: '\Drupal\oab_backoffice\Form\OabGeneralSettingsForm'
@@ -38,7 +38,7 @@ oab.settings_ece:
   requirements:
     _permission: 'administer site configuration'
 
-oab.gdpr_settings:
+oab_backoffice.gdpr_settings:
   path: '/admin/structure/oab/settings/gdpr'
   defaults:
     _form: '\Drupal\oab_backoffice\Form\OabSettingsGdprForm'

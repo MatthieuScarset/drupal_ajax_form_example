@@ -1,0 +1,70 @@
+uuid: 497ed8e7-356c-415d-a8a8-438764b7cbad
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.right_linked_content
+    - field.field.node.press_kit.field_aplat
+    - field.field.node.press_kit.field_content
+    - field.field.node.press_kit.field_content_owner
+    - field.field.node.press_kit.field_display_title
+    - field.field.node.press_kit.field_email_owner
+    - field.field.node.press_kit.field_end_date
+    - field.field.node.press_kit.field_file
+    - field.field.node.press_kit.field_highlight
+    - field.field.node.press_kit.field_industry
+    - field.field.node.press_kit.field_job_profile
+    - field.field.node.press_kit.field_market_segment
+    - field.field.node.press_kit.field_meta_description
+    - field.field.node.press_kit.field_meta_title
+    - field.field.node.press_kit.field_metatags
+    - field.field.node.press_kit.field_press_type
+    - field.field.node.press_kit.field_region
+    - field.field.node.press_kit.field_solution
+    - field.field.node.press_kit.field_start_date
+    - field.field.node.press_kit.field_subhome
+    - field.field.node.press_kit.field_visual
+    - field.field.node.press_kit.moderation_state_update
+    - node.type.press_kit
+  module:
+    - user
+id: node.press_kit.right_linked_content
+targetEntityType: node
+bundle: press_kit
+mode: right_linked_content
+content:
+  field_highlight:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  links:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_aplat: true
+  field_content: true
+  field_content_owner: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_industry: true
+  field_job_profile: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_press_type: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
+  field_visual: true
+  langcode: true
+  moderation_state_update: true
+  workbench_moderation_control: true

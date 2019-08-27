@@ -1,0 +1,26 @@
+uuid: d036f158-ef7e-4364-bb90-c01ae7d88dcd
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.admin
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice
+_core:
+  default_config_hash: DWAB7HaAfAJerAmyT8B2K-6qxicu9n0PcKVpDr--N4c
+id: theme_obs_backoffice_admin
+theme: theme_obs_backoffice
+region: header
+weight: -4
+provider: null
+plugin: 'system_menu_block:admin'
+settings:
+  id: 'system_menu_block:admin'
+  label: Administration
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

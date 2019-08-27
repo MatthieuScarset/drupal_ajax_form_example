@@ -1,0 +1,12 @@
+uuid: 24d727bb-e421-4217-8ba5-e78416315022
+langcode: en
+status: true
+dependencies:
+  config:
+    - workbench_moderation.moderation_state.published
+    - workbench_moderation.moderation_state.unpublished
+id: unpublished_to_publish
+label: 'unpublished to publish'
+stateFrom: unpublished
+stateTo: published
+weight: -12

@@ -1,4 +1,4 @@
-oab.cookie_compliance:
+oab_cookie_compliance.cookie_compliance:
   type: config_object
   label: 'Cookie compliance ddd'
   mapping:

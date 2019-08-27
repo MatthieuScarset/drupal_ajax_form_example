@@ -1,0 +1,39 @@
+uuid: 20037605-6ff2-452e-95a7-b81271d333ad
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: OlaKehXSg7j5AAWtDlnXgWa2zTYhJiv7660pcZImGLg
+id: magazinearticle_media
+migration_tags: null
+migration_group: magazinearticle
+label: 'Magazine articles medias'
+source:
+  plugin: magazinearticle_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: image
+  langcode:
+    plugin: default_value
+    default_value: und
+  name: filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_image/target_id:
+    plugin: migration
+    migration: magazinearticle_image
+    source: image_info
+  field_image/alt: field_image_alt
+  field_image/title: field_image_title
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - magazinearticle_image

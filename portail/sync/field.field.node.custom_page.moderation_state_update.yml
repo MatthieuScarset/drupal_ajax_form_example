@@ -1,0 +1,28 @@
+uuid: 72942a26-d4ef-4b21-8ea0-1bc547148c67
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.moderation_state_update
+    - node.type.custom_page
+    - scheduled_updates.scheduled_update_type.moderation_state_update
+id: node.custom_page.moderation_state_update
+field_name: moderation_state_update
+entity_type: node
+bundle: custom_page
+label: 'Moderation state update'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:scheduled_update'
+  handler_settings:
+    target_bundles:
+      moderation_state_update: moderation_state_update
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

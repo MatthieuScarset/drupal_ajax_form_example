@@ -1,0 +1,14 @@
+uuid: f61fcfd5-bace-4131-8ac8-93c2a58dc3df
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_business_owner
+  module:
+    - user
+id: user_add_role_action.webform_business_owner
+label: 'Add the Webform Business Owner role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: webform_business_owner

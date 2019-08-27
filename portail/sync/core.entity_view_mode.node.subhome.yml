@@ -1,0 +1,10 @@
+uuid: b8502f72-a1eb-40f1-a4bf-6929929e4bb4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.subhome
+label: Subhome
+targetEntityType: node
+cache: true

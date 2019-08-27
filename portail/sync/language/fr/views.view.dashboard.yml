@@ -1,0 +1,34 @@
+description: 'Gestion des contenus expirés pour le manager éditorial'
+display:
+  default:
+    display_options:
+      fields:
+        title:
+          label: Titre
+        uid:
+          label: Auteur
+        field_start_date:
+          label: 'Date de création'
+        field_end_date:
+          label: 'Date d''expiration'
+        moderation_state:
+          label: 'Statut du Workflow'
+      filters:
+        moderation_state:
+          expose:
+            label: 'Statut du Workflow'
+          group_info:
+            label: 'Statut du Workflow'
+        title:
+          expose:
+            label: Titre
+        uid:
+          expose:
+            label: Auteur
+        langcode:
+          expose:
+            label: Langue
+  page_1:
+    display_options:
+      menu:
+        description: 'Gestion des contenus expirés pour le manager éditorial'

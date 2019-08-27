@@ -1,0 +1,32 @@
+uuid: 6242053f-5de4-437b-901f-c44f5d8c5034
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.direct-access-bar-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: directaccessbaren
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'system_menu_block:direct-access-bar-en'
+settings:
+  id: 'system_menu_block:direct-access-bar-en'
+  label: 'Direct Access Bar EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

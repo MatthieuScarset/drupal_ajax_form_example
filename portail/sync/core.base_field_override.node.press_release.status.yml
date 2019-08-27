@@ -1,0 +1,22 @@
+uuid: 8857f883-cedf-4b34-b10e-48de902022c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_release
+id: node.press_release.status
+field_name: status
+entity_type: node
+bundle: press_release
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

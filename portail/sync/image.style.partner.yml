@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: partner
+label: 'Partner (180x97)'
+effects:
+  dcb6b1ad-98e9-4d60-a8d2-4ef9701c583a:
+    uuid: dcb6b1ad-98e9-4d60-a8d2-4ef9701c583a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 180
+      height: 97
+      anchor: center-center

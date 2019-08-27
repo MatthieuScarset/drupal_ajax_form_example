@@ -1,0 +1,28 @@
+uuid: 56b04a18-9a37-4992-a1d9-0dd0f043aa09
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_region
+    - node.type.press_kit
+    - taxonomy.vocabulary.regions
+id: node.press_kit.field_region
+field_name: field_region
+entity_type: node
+bundle: press_kit
+label: Region
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      regions: regions
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

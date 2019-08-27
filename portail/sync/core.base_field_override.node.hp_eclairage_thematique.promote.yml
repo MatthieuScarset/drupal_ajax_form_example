@@ -1,0 +1,22 @@
+uuid: c8cb02cd-7fc9-4244-a694-f0a0362a4e22
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.hp_eclairage_thematique
+id: node.hp_eclairage_thematique.promote
+field_name: promote
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

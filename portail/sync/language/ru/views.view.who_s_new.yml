@@ -1,0 +1,10 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Найти
+          exposed_sorts_label: Фильтр
+  block_1:
+    display_options:
+      block_category: Пользователь

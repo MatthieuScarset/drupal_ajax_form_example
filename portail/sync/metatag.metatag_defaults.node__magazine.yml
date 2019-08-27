@@ -1,0 +1,9 @@
+uuid: 052432be-b250-45fe-8d92-a68c2e655643
+langcode: en
+status: true
+dependencies: {  }
+id: node__magazine
+label: 'Content: Magazine'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

@@ -1,0 +1,13 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filtrar
+      fields:
+        nothing:
+          admin_label: Ícone
+        name:
+          label: Usuário
+        link:
+          label: Operações

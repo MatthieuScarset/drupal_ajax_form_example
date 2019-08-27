@@ -1,0 +1,11 @@
+uuid: caf47698-256d-44d0-8db5-4aae1d63407c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.inscription_work_playmobile_le_5
+id: webform_submission.inscription_work_playmobile_le_5
+target_entity_type_id: webform_submission
+target_bundle: inscription_work_playmobile_le_5
+default_langcode: site_default
+language_alterable: false

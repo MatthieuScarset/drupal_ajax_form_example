@@ -1,0 +1,31 @@
+uuid: 89f78ff7-f890-42c0-bd2f-f42725d6c1bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.subhomes.field_related_display_view
+    - taxonomy.vocabulary.subhomes
+  module:
+    - text
+id: taxonomy_term.subhomes.default
+targetEntityType: taxonomy_term
+bundle: subhomes
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_related_display_view:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

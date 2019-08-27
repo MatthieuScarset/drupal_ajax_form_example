@@ -1,0 +1,8 @@
+uuid: bfc59c49-758b-4983-af96-32e035128c5b
+langcode: fr
+status: true
+dependencies: {  }
+id: top-right-navbar-consult-fr
+label: 'consulting Top right Navbar fr'
+description: 'consulting Top right Navbar fr'
+locked: false

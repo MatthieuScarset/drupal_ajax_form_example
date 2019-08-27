@@ -1,0 +1,19 @@
+uuid: 9093da7b-e4c8-47c8-8457-dd5645dfe998
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_title
+    - paragraphs.paragraphs_type.homepage_banner_item
+id: paragraph.homepage_banner_item.field_card_title
+field_name: field_card_title
+entity_type: paragraph
+bundle: homepage_banner_item
+label: 'Card title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

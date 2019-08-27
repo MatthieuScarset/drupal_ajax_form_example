@@ -1,0 +1,32 @@
+uuid: 27f961e0-c54a-4926-843e-e3f851e9c96a
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.top-right-navbar-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_toprightnavbaren
+theme: theme_oab_hub
+region: header
+weight: -10
+provider: null
+plugin: 'system_menu_block:top-right-navbar-en'
+settings:
+  id: 'system_menu_block:top-right-navbar-en'
+  label: 'Top right navbar EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.subhome_entity.field_corporate_title
+    - oab_subhomes.subhome_entity_type.presse
+id: subhome_entity.presse.field_corporate_title
+field_name: field_corporate_title
+entity_type: subhome_entity
+bundle: presse
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

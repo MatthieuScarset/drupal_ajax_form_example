@@ -1,6 +1,6 @@
-oab.cookie_compliance_settings:
+oab_cookie_compliance.cookie_compliance_settings:
   title: OAB cookie compliance settings
-  route_name: oab.cookie_compliance.settings
+  route_name: oab_cookie_compliance.cookie_compliance.settings
   parent: oab.settings
   description: 'Configure oab cookie compliance settings'
   weight: -20

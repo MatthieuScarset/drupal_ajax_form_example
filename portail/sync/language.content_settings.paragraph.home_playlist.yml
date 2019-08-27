@@ -1,0 +1,11 @@
+uuid: 42da3c25-f41b-486a-b2aa-65895871fbc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.home_playlist
+id: paragraph.home_playlist
+target_entity_type_id: paragraph
+target_bundle: home_playlist
+default_langcode: site_default
+language_alterable: false

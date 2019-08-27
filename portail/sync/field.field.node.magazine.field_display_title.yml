@@ -1,0 +1,23 @@
+uuid: 7daec683-e1ee-4ded-91a2-1521aa3b0bbd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.magazine
+id: node.magazine.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: magazine
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

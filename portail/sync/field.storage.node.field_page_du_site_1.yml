@@ -1,0 +1,19 @@
+uuid: 0288d123-281e-4eb4-b05e-7930accb253f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_page_du_site_1
+field_name: field_page_du_site_1
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

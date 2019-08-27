@@ -1,0 +1,22 @@
+uuid: c7f886d7-97c4-44f1-8deb-b10f0cd60395
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.simple_page
+id: node.simple_page.status
+field_name: status
+entity_type: node
+bundle: simple_page
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

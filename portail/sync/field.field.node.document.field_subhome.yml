@@ -1,0 +1,28 @@
+uuid: 6df9eadc-9023-4c4c-a07b-063c6ceec5f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subhome
+    - node.type.document
+    - taxonomy.vocabulary.subhomes
+id: node.document.field_subhome
+field_name: field_subhome
+entity_type: node
+bundle: document
+label: Subhome
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      subhomes: subhomes
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

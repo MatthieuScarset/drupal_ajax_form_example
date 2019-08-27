@@ -1,0 +1,9 @@
+uuid: 109fd241-6d0f-4f53-89b7-2558557afb84
+langcode: en
+status: true
+dependencies: {  }
+id: node__partner
+label: 'Content: Partenaire'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

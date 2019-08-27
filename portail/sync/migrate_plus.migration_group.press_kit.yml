@@ -1,0 +1,14 @@
+uuid: 0dd347c9-8d97-4645-a68e-32989ada3474
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: M84znEXzASdwLlpfps1Ga1iA8cKu0kit7IZab8U9W8g
+id: press_kit
+label: 'Press kit Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

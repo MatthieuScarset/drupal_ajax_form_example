@@ -1,0 +1,14 @@
+uuid: 4e1e8a39-0cec-430a-b63b-37863b412d1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_business_analyst
+  module:
+    - user
+id: user_remove_role_action.webform_business_analyst
+label: 'Remove the Webform Business Analyst role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: webform_business_analyst

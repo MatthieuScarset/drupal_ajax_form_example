@@ -1,0 +1,33 @@
+uuid: 3329e872-81a1-4310-92a0-0e1f78d3cf02
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_phonenumber
+theme: theme_oab_hub
+region: sidebar
+weight: -33
+provider: null
+plugin: phone_number_block
+settings:
+  id: phone_number_block
+  label: 'Phone Number'
+  provider: oab_frontoffice
+  label_display: visible
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+  block_title: 'To contact him by phone'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      distributor: distributor
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

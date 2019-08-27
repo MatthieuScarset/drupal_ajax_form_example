@@ -1,0 +1,39 @@
+uuid: 46e1416e-f8f6-42dc-94be-095cccfb0cba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solution_banner_right_zone
+    - node.type.homepage
+    - paragraphs.paragraphs_type.homepage_banner_item
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_solution_banner_right_zone
+field_name: field_solution_banner_right_zone
+entity_type: node
+bundle: homepage
+label: 'Right Zone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      homepage_banner_item: homepage_banner_item
+    target_bundles_drag_drop:
+      homepage_banner_item:
+        enabled: true
+        weight: 3
+      homepage_news:
+        weight: 4
+        enabled: false
+      infography_partner:
+        weight: 5
+        enabled: false
+      homepage_banner_experience:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,21 @@
+uuid: fe1fb5bc-1360-4a55-b3ba-5070cd8a4e31
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+  module:
+    - workbench_access
+third_party_settings:
+  workbench_access:
+    workbench_access_status: false
+_core:
+  default_config_hash: e0BoXlrxD4xhZMqJm5A1gTUkmntzhvyhDNY-3Y4glyc
+name: Webform
+type: webform
+description: 'A basic page with an attached webform'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

@@ -1,0 +1,19 @@
+uuid: c2e082b0-a197-43cf-a4f5-d30604e3d513
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_reallink
+field_name: field_reallink
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

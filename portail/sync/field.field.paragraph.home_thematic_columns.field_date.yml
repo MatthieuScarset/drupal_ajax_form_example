@@ -1,0 +1,24 @@
+uuid: 6f7b5e0a-063e-4b5b-8edf-afe07685f44a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date
+    - paragraphs.paragraphs_type.home_thematic_columns
+  module:
+    - datetime
+id: paragraph.home_thematic_columns.field_date
+field_name: field_date
+entity_type: paragraph
+bundle: home_thematic_columns
+label: Date
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

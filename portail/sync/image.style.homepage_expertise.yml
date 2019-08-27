@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: homepage_expertise
+label: 'Homepage Expertise (345x270)'
+effects:
+  4f0289a0-5f4f-4221-83e8-be894ecced08:
+    uuid: 4f0289a0-5f4f-4221-83e8-be894ecced08
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 345
+      height: 270
+      anchor: center-center

@@ -1,0 +1,19 @@
+uuid: ef7bcebd-c6f9-4dc8-9e05-e12854e7c1ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_description
+    - node.type.magazine
+id: node.magazine.field_meta_description
+field_name: field_meta_description
+entity_type: node
+bundle: magazine
+label: 'Meta description'
+description: 'This field is limited to 156 characters (used for SEO-optimization)'
+required: 'true'
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

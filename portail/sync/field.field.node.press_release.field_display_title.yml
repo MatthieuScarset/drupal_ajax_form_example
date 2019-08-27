@@ -1,0 +1,23 @@
+uuid: a3c0c768-2560-4ae5-abcf-e9d19291ee95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.press_release
+id: node.press_release.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: press_release
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'The title is displayed on the page'
+  off_label: 'The title is invisible'
+field_type: boolean

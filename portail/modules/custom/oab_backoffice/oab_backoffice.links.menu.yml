@@ -12,16 +12,16 @@ oab.settings_pardot:
   description: 'Configure oab pardot settings'
   weight: -20
 
-oab.general_settings:
+oab_backoffice.general_settings:
   title: General settings
-  route_name: oab.general_settings
+  route_name: oab_backoffice.general_settings
   parent: oab.settings
   description: 'Configure general site settings'
   weight: -20
 
-oab.gdpr_settings:
+oab_backoffice.gdpr_settings:
   title: GDPR/Webform settings
-  route_name: oab.gdpr_settings
+  route_name: oab_backoffice.gdpr_settings
   parent: oab.settings
   description: 'Configure GDPR/Webforms settings'
   weight: -20

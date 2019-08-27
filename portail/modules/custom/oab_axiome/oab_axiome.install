@@ -8,7 +8,7 @@ function oab_axiome_install() {
    // drupal_set_installed_schema_version('oab_axiome', 8000);
    // variable_set('revision_auto_draft', array('none'));
 
-  oabt_YmlImport('oab.axiome.yml');
+  //oabt_YmlImport('oab.axiome.yml');
 
   $folder =  \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER);
 

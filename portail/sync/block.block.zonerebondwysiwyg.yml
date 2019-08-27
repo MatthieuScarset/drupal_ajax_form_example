@@ -1,0 +1,36 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: zonerebondwysiwyg
+theme: theme_boosted
+region: sidebar
+weight: -32
+provider: null
+plugin: zone_rebond_wysiwyg_block
+settings:
+  id: zone_rebond_wysiwyg_block
+  label: 'Zone rebond: WYSIWYG'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      customer_story: customer_story
+      magazine: magazine
+      partner: partner
+      press_release: press_release
+      simple_page: simple_page
+      webform: webform
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

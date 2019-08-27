@@ -1,0 +1,256 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.subhome_entity.presse.field_afficher_bloc_notre_equipe
+    - field.field.subhome_entity.presse.field_carrousel
+    - field.field.subhome_entity.presse.field_corporate_aplat
+    - field.field.subhome_entity.presse.field_corporate_title
+    - field.field.subhome_entity.presse.field_corporate_url
+    - field.field.subhome_entity.presse.field_corporate_visual
+    - field.field.subhome_entity.presse.field_team_button
+    - field.field.subhome_entity.presse.field_team_title
+    - field.field.subhome_entity.presse.field_team_visual
+    - oab_subhomes.subhome_entity_type.presse
+  module:
+    - entity_browser
+    - field_group
+    - link
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_config
+        - group_header
+        - group_carrousel
+        - group_corporate
+        - group_team
+      parent_name: ''
+      weight: 11
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_header:
+      children:
+        - title
+        - description
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Header
+    group_carrousel:
+      children:
+        - field_carrousel
+      parent_name: group_onglets
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Carrousel
+    group_corporate:
+      children:
+        - field_corporate_title
+        - field_corporate_url
+        - field_corporate_visual
+        - field_corporate_aplat
+      parent_name: group_onglets
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Corporate
+    group_team:
+      children:
+        - field_afficher_bloc_notre_equipe
+        - group_team_details
+      parent_name: group_onglets
+      weight: 24
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Notre équipe'
+    group_config:
+      children:
+        - langcode
+        - subhome_id
+      parent_name: group_onglets
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Config
+    group_team_details:
+      children:
+        - field_team_title
+        - field_team_visual
+        - field_team_button
+      parent_name: group_team
+      weight: 26
+      format_type: details
+      format_settings:
+        label: Details
+        open: true
+        id: group_team_details
+        classes: ''
+        required_fields: false
+      label: Details
+id: subhome_entity.presse.default
+targetEntityType: subhome_entity
+bundle: presse
+mode: default
+content:
+  description:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_afficher_bloc_notre_equipe:
+    weight: 25
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_carrousel:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_corporate_aplat:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_corporate_title:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_corporate_url:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_corporate_visual:
+    weight: 7
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_team_button:
+    type: entity_reference_paragraphs
+    weight: 29
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_team_title:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_team_visual:
+    weight: 28
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: false
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  subhome_id:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

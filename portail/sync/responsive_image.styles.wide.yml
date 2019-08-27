@@ -1,0 +1,16 @@
+uuid: cfa9770d-45e9-4cfd-b1af-f09d5c89a836
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.max_2600x2600
+id: wide
+label: Wide
+image_style_mappings:
+  -
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: max_2600x2600
+breakpoint_group: responsive_image
+fallback_image_style: max_2600x2600

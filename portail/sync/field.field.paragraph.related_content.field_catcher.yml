@@ -1,0 +1,19 @@
+uuid: 8d08a020-7ad2-4292-9cc1-133dcbd27166
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_catcher
+    - paragraphs.paragraphs_type.related_content
+id: paragraph.related_content.field_catcher
+field_name: field_catcher
+entity_type: paragraph
+bundle: related_content
+label: catcher
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

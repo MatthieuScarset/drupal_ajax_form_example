@@ -1,0 +1,14 @@
+uuid: 0de4e89e-79a6-40de-96fc-10c9fe7240fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_spoc_securite
+  module:
+    - user
+id: user_remove_role_action.webform_spoc_securite
+label: 'Remove the Webform SPOC Sécurité role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: webform_spoc_securite

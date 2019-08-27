@@ -1,0 +1,14 @@
+uuid: e40d6b9d-cf5a-4f62-bb18-ab2a24b09343
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 20nOtadJbXu8eQ0Vs-vpRpXk90J0B8onTCkgeIevyKo
+id: magazinearticle
+label: 'Magazine articles Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

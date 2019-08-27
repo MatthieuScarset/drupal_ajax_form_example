@@ -1,0 +1,28 @@
+uuid: f5b83293-033d-4409-a7d4-249127de4881
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_insight
+    - node.type.blog_post
+    - taxonomy.vocabulary.thematic
+id: node.blog_post.field_insight
+field_name: field_insight
+entity_type: node
+bundle: blog_post
+label: Insight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      thematic: thematic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

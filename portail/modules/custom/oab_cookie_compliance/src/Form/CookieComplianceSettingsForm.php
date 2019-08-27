@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class CookieComplianceSettingsForm extends ConfigFormBase {
 
-    const CONFIG_NAME = 'oab.cookie_compliance';
+    const CONFIG_NAME = 'oab_cookie_compliance.cookie_compliance';
     public static function getConfigName() {
         return self::CONFIG_NAME;
     }

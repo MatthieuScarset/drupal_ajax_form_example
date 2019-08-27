@@ -1,0 +1,14 @@
+uuid: b9bfcd9b-db2d-462a-9dfb-13c940a86fe8
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.webform_business_analyst
+  module:
+    - user
+id: user_add_role_action.webform_business_analyst
+label: 'Add the Webform Business Analyst role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: webform_business_analyst

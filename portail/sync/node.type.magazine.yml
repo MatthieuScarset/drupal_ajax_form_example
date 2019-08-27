@@ -1,0 +1,30 @@
+uuid: 0f7e9606-7f88-4c00-884e-3e302f386f63
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+    - workbench_moderation
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  workbench_access:
+    workbench_access_status: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+      - unpublished
+    default_moderation_state: draft
+name: 'Magazine article'
+type: magazine
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

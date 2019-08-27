@@ -1,0 +1,28 @@
+uuid: 46f2131e-1c35-4142-a8c6-9686d74fe5ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_market_segment
+    - node.type.product
+    - taxonomy.vocabulary.market_segments
+id: node.product.field_market_segment
+field_name: field_market_segment
+entity_type: node
+bundle: product
+label: 'Market Segment'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      market_segments: market_segments
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

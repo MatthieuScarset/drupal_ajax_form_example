@@ -1,0 +1,19 @@
+uuid: b698e9ab-0483-40fc-a20f-571bdb242281
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.paragraph_block_rebond
+id: paragraph.paragraph_block_rebond.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: paragraph_block_rebond
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

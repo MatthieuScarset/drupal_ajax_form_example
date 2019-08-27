@@ -1,0 +1,11 @@
+uuid: 9d4522ff-8561-4fc6-922c-0560eb6c60a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.homepage_news
+id: paragraph.homepage_news
+target_entity_type_id: paragraph
+target_bundle: homepage_news
+default_langcode: site_default
+language_alterable: false

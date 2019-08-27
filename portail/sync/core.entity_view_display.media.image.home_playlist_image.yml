@@ -1,0 +1,35 @@
+uuid: 2e278d9e-684d-453e-a3de-fb68a20c3671
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.home_playlist_image
+    - field.field.media.image.field_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - image.style.playlist
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.home_playlist_image
+targetEntityType: media
+bundle: image
+mode: home_playlist_image
+content:
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: playlist
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,26 @@
+uuid: ca4fba31-6cb8-48bb-a4c6-db952ba6fe0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sub_family
+    - node.type.product
+id: node.product.field_sub_family
+field_name: field_sub_family
+entity_type: node
+bundle: product
+label: Sub-family
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles: {  }
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

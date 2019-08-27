@@ -1,0 +1,84 @@
+uuid: b4567a9d-c87f-4f95-851d-198c393408ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.subhome
+    - field.field.node.partner.field_content
+    - field.field.node.partner.field_content_owner
+    - field.field.node.partner.field_departments
+    - field.field.node.partner.field_display_title
+    - field.field.node.partner.field_email_owner
+    - field.field.node.partner.field_end_date
+    - field.field.node.partner.field_file
+    - field.field.node.partner.field_geographic
+    - field.field.node.partner.field_highlight
+    - field.field.node.partner.field_industry
+    - field.field.node.partner.field_market_segment
+    - field.field.node.partner.field_meta_description
+    - field.field.node.partner.field_meta_title
+    - field.field.node.partner.field_metatags
+    - field.field.node.partner.field_p_wysiwyg_rebond
+    - field.field.node.partner.field_page_du_site_1
+    - field.field.node.partner.field_page_du_site_2
+    - field.field.node.partner.field_partner_type
+    - field.field.node.partner.field_rebond_document
+    - field.field.node.partner.field_region
+    - field.field.node.partner.field_solution
+    - field.field.node.partner.field_start_date
+    - field.field.node.partner.field_subhome
+    - field.field.node.partner.field_visual
+    - field.field.node.partner.moderation_state_update
+    - node.type.partner
+  module:
+    - user
+id: node.partner.subhome
+targetEntityType: node
+bundle: partner
+mode: subhome
+content:
+  field_solution:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: subhome_image
+      link: false
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_content_owner: true
+  field_departments: true
+  field_display_title: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_geographic: true
+  field_highlight: true
+  field_industry: true
+  field_market_segment: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_page_du_site_1: true
+  field_page_du_site_2: true
+  field_partner_type: true
+  field_rebond_document: true
+  field_region: true
+  field_start_date: true
+  field_subhome: true
+  langcode: true
+  links: true
+  moderation_state_update: true
+  workbench_moderation_control: true

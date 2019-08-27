@@ -1,7 +1,7 @@
 <?php
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.ece');
+$config_group = $config_factory->getEditable('oab_backoffice.ece');
 $config_group->setData(array (
     'title' => 'My Service Space',
     'intro' => 'Track your use, manage your bills, options and services 24/24',
@@ -15,7 +15,7 @@ $config_group->setData(array (
 $config_group->save(TRUE);
 
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$collection->write('oab.ece', array (
+$collection->write('oab_backoffice.ece', array (
     'title' => 'Espace Client Entreprise',
     'intro' => 'Gérer vos solutions, consulter vos factures et retrouver les informations clés pour votre activité…',
     'connect_txt' => 'Se connecter',

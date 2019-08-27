@@ -1,0 +1,18 @@
+uuid: 46a559c1-84d0-4da5-8b27-8fe0d2cf024b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.office
+id: node.office.metatag
+field_name: metatag
+entity_type: node
+bundle: office
+label: Metatags
+description: 'The metatags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

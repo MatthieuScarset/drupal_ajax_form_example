@@ -1,0 +1,11 @@
+uuid: f69e9bb0-dbe6-4174-8ad4-32ff955fed4d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.besoin_de_plus_d_informations_co
+id: webform_submission.besoin_de_plus_d_informations_co
+target_entity_type_id: webform_submission
+target_bundle: besoin_de_plus_d_informations_co
+default_langcode: site_default
+language_alterable: false

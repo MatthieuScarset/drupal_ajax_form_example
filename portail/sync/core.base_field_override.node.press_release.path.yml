@@ -1,0 +1,20 @@
+uuid: fadba780-0da9-486d-835d-406f3c367ab1
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_release
+  module:
+    - path
+id: node.press_release.path
+field_name: path
+entity_type: node
+bundle: press_release
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

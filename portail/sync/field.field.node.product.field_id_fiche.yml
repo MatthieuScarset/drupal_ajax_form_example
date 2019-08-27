@@ -1,0 +1,23 @@
+uuid: f82f7f29-8d4e-41f2-9f0d-7ec409ec6d08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_id_fiche
+    - node.type.product
+id: node.product.field_id_fiche
+field_name: field_id_fiche
+entity_type: node
+bundle: product
+label: 'Id Fiche'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

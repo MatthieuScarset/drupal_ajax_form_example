@@ -1,0 +1,19 @@
+uuid: 68630f0b-0bcd-41a7-be22-b1cc9722d0c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.customer_story
+id: node.customer_story.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: customer_story
+label: 'Meta title'
+description: 'This field is limited to 56 characters (used for SEO-optimization)'
+required: 'true'
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

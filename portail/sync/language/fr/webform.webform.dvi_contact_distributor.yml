@@ -1,0 +1,4 @@
+elements: "last_name:\n  '#title': Nom\nfirst_name:\n  '#title': Prénom\ncompany:\n  '#title': Société\nphone:\n  '#title': Téléphone\nsubject:\n  '#title': Objet\ndvi_contact_distributor_description:\n  '#text': '<p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>'\n"
+settings:
+  confirmation_message: 'Merci pour votre demande. Le distributeur reviendra rapidement vers vous.'
+  confirmation_back_label: 'Retour au formulaire'

@@ -1,0 +1,11 @@
+uuid: eb21e340-996c-463d-a3f4-1e5e33ce61e4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.les_matinales_collectivites_loca
+id: webform_submission.les_matinales_collectivites_loca
+target_entity_type_id: webform_submission
+target_bundle: les_matinales_collectivites_loca
+default_langcode: site_default
+language_alterable: false

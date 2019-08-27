@@ -1,0 +1,22 @@
+uuid: ff670e3a-25c6-4e47-952b-aed2c4409a85
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.region
+id: node.region.status
+field_name: status
+entity_type: node
+bundle: region
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

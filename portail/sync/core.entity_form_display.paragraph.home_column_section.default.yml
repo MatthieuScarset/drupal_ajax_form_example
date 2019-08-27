@@ -1,0 +1,60 @@
+uuid: 0e26fabb-5e60-45bc-85c3-26958f44debf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.home_column_section.field_function
+    - field.field.paragraph.home_column_section.field_image
+    - field.field.paragraph.home_column_section.field_link
+    - field.field.paragraph.home_column_section.field_link_title
+    - field.field.paragraph.home_column_section.field_name
+    - field.field.paragraph.home_column_section.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.home_column_section
+  module:
+    - image
+    - link
+    - workbench_moderation
+id: paragraph.home_column_section.default
+targetEntityType: paragraph
+bundle: home_column_section
+mode: default
+content:
+  field_function:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_link_title:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  field_link: true
+  field_title: true
+  status: true
+  uid: true

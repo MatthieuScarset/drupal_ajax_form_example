@@ -1,0 +1,7 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: unpublished
+label: Dépublié
+published: false
+default_revision: true

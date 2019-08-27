@@ -1,0 +1,9 @@
+uuid: c0ece2d9-3fab-43b0-8a12-2fd0af52f349
+langcode: en
+status: true
+dependencies: {  }
+id: node__country
+label: 'Content: Country'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

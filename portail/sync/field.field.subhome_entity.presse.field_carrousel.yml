@@ -1,0 +1,66 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.subhome_entity.field_carrousel
+    - oab_subhomes.subhome_entity_type.presse
+    - paragraphs.paragraphs_type.subhome_presse_carrousel
+  module:
+    - entity_reference_revisions
+id: subhome_entity.presse.field_carrousel
+field_name: field_carrousel
+entity_type: subhome_entity
+bundle: presse
+label: Carrousel
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      subhome_presse_carrousel: subhome_presse_carrousel
+    target_bundles_drag_drop:
+      subhome_presse_carrousel:
+        enabled: true
+        weight: 14
+      home_banner:
+        weight: 15
+        enabled: false
+      home_column:
+        weight: 16
+        enabled: false
+      home_column_section:
+        weight: 17
+        enabled: false
+      home_playlist:
+        weight: 18
+        enabled: false
+      home_thematic_columns:
+        weight: 19
+        enabled: false
+      homepage_banner_experience:
+        weight: 20
+        enabled: false
+      homepage_banner_item:
+        weight: 21
+        enabled: false
+      homepage_news:
+        weight: 22
+        enabled: false
+      infography_partner:
+        weight: 23
+        enabled: false
+      paragraph_block_rebond:
+        weight: 24
+        enabled: false
+      rebond_wysiwyg:
+        weight: 25
+        enabled: false
+      related_content:
+        weight: 26
+        enabled: false
+field_type: entity_reference_revisions

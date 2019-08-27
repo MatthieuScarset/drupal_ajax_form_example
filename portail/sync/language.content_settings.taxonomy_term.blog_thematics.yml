@@ -1,0 +1,16 @@
+uuid: 1d47a978-3308-4098-8861-8a3251a8629e
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.blog_thematics
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.blog_thematics
+target_entity_type_id: taxonomy_term
+target_bundle: blog_thematics
+default_langcode: current_interface
+language_alterable: true

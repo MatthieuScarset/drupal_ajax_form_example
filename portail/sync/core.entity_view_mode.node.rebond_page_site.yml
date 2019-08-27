@@ -1,0 +1,10 @@
+uuid: faa4075a-3c39-46fd-8839-0f9a70a64a38
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.rebond_page_site
+label: rebond_page_site
+targetEntityType: node
+cache: true

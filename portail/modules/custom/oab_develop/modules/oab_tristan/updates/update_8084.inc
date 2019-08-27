@@ -60,17 +60,17 @@ foreach ($terms as &$term) {
 
 ##Conf original en En
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.subhomes');
+$config_group = $config_factory->getEditable('oab_subhomes.subhomes');
 $config_group->set('analysts_term_tid', $tids['en']);
 $config_group->set('analysts_meta', "Analysts");
 $config_group->save();
 
 ## Config fr => Je charge la collection déjà existante, je rajoute nos champs, puis je la save
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$config_fr = $collection->read('oab.subhomes');
+$config_fr = $collection->read('oab_subhomes.subhomes');
 $config_fr['analysts_term_tid'] = $tids['fr'];
 $config_fr['analysts_meta'] = "Analystes";
-$collection->write('oab.subhomes', $config_fr);
+$collection->write('oab_subhomes.subhomes', $config_fr);
 
 
 ###########################################################

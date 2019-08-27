@@ -1,0 +1,41 @@
+uuid: 147c7e4a-d5e4-426f-85e9-88c927d9e5a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.office.field_additionnal
+    - field.field.node.office.field_city
+    - field.field.node.office.field_email_address
+    - field.field.node.office.field_office_country
+    - field.field.node.office.field_office_location
+    - field.field.node.office.field_phone_number
+    - field.field.node.office.field_postal_code
+    - field.field.node.office.field_region
+    - field.field.node.office.field_street
+    - field.field.node.office.moderation_state_update
+    - node.type.office
+  module:
+    - user
+id: node.office.teaser
+targetEntityType: node
+bundle: office
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_additionnal: true
+  field_city: true
+  field_email_address: true
+  field_office_country: true
+  field_office_location: true
+  field_phone_number: true
+  field_postal_code: true
+  field_region: true
+  field_street: true
+  langcode: true
+  moderation_state_update: true

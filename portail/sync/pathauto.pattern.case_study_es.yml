@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: case_study_es
+label: 'case study ES'
+type: 'canonical_entities:node'
+pattern: 'nuestros-clientes/[node:title]'
+selection_criteria:
+  2e9c9340-35bf-4f8f-a930-cb82eddbe34b:
+    id: node_type
+    bundles:
+      customer_story: customer_story
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 2e9c9340-35bf-4f8f-a930-cb82eddbe34b
+  74fbf6e3-2d18-43b7-a7e0-9078ec8f846a:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 74fbf6e3-2d18-43b7-a7e0-9078ec8f846a
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

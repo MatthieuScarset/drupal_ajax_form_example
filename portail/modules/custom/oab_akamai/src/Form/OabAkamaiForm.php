@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class OabAkamaiForm extends ConfigFormBase {
     public static function getConfigName() {
-        return 'oab.akamai_settings';
+        return 'oab_akamai.akamai_settings';
     }
 
     /**

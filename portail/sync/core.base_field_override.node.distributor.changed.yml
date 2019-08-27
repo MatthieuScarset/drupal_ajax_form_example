@@ -1,0 +1,18 @@
+uuid: 68c243be-032f-43de-a5e1-bfae9a38c76d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.distributor
+id: node.distributor.changed
+field_name: changed
+entity_type: node
+bundle: distributor
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

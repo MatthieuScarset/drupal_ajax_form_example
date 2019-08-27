@@ -1,0 +1,32 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: promoactu
+theme: theme_boosted
+region: sidebar
+weight: -42
+provider: null
+plugin: promo_actu_block
+settings:
+  id: promo_actu_block
+  label: 'Promo Actu'
+  provider: oab_frontoffice
+  label_display: '0'
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

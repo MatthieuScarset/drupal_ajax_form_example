@@ -1,0 +1,39 @@
+uuid: 1262ddef-1060-4d3d-b1cf-fd1d98d6cbba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_banner_expertise
+    - node.type.homepage
+    - paragraphs.paragraphs_type.homepage_banner_experience
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_banner_expertise
+field_name: field_banner_expertise
+entity_type: node
+bundle: homepage
+label: 'Banner Expertise'
+description: 'Image size : 345x270px'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      homepage_banner_experience: homepage_banner_experience
+    target_bundles_drag_drop:
+      infography_partner:
+        weight: 5
+        enabled: false
+      homepage_banner_experience:
+        enabled: true
+        weight: 6
+      homepage_banner_item:
+        weight: 7
+        enabled: false
+      homepage_news:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

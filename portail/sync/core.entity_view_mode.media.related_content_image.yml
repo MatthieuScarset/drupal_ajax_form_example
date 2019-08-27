@@ -1,0 +1,10 @@
+uuid: d7e714e2-575d-4961-a4ff-208f6fd293ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.related_content_image
+label: 'Related Content Image'
+targetEntityType: media
+cache: true

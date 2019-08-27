@@ -1,0 +1,36 @@
+uuid: 0dd21dcd-4c7e-42b9-b587-e417c46d1f03
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_mediatheque
+theme: theme_oab_hub
+region: sidebar
+weight: -41
+provider: null
+plugin: mediatheque_block
+settings:
+  id: mediatheque_block
+  label: Mediatheque
+  provider: oab_frontoffice
+  label_display: visible
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      press_release: press_release
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

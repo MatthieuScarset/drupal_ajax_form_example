@@ -1,0 +1,8 @@
+uuid: 77e217d7-b334-4d42-8b62-1c77ac095b3e
+langcode: es
+status: true
+dependencies: {  }
+id: footer-es
+label: 'Footer ES'
+description: 'ES footer'
+locked: false

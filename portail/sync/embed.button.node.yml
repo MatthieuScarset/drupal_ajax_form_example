@@ -1,0 +1,38 @@
+uuid: d9f2ecc4-63f1-49f5-aaa7-4b64b98107d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.blog_post
+    - node.type.customer_story
+    - node.type.document
+    - node.type.magazine
+    - node.type.partner
+    - node.type.press_kit
+    - node.type.simple_page
+  content:
+    - 'file:file:d780d689-d62a-4f46-9837-7cb10653a7d6'
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: xgvZUh-eaMilacE1XYCQ9nLH-2-meOjCyofXSO82gqg
+label: Node
+id: node
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - blog_post
+    - customer_story
+    - document
+    - magazine
+    - partner
+    - press_kit
+    - simple_page
+  display_plugins:
+    - 'view_mode:node.wysiwyg_node_embed'
+  entity_browser: ''
+  entity_browser_settings:
+    display_review: false
+icon_uuid: d780d689-d62a-4f46-9837-7cb10653a7d6

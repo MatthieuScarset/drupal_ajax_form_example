@@ -1,0 +1,8 @@
+uuid: 59a59561-9c43-4d39-bb3f-8ffa5bdeb62e
+langcode: fr
+status: true
+dependencies: {  }
+id: footer-fr
+label: 'Footer FR'
+description: 'Pied de page FR'
+locked: false

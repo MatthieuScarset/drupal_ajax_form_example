@@ -1,0 +1,106 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.homepage_eclairage.field_display_title
+    - field.field.node.homepage_eclairage.field_home_banner
+    - field.field.node.homepage_eclairage.field_home_columns
+    - field.field.node.homepage_eclairage.field_home_playlists
+    - field.field.node.homepage_eclairage.field_menu_title
+    - field.field.node.homepage_eclairage.field_meta_description
+    - field.field.node.homepage_eclairage.field_meta_title
+    - field.field.node.homepage_eclairage.moderation_state_update
+    - node.type.homepage_eclairage
+  module:
+    - entity_reference_revisions
+    - user
+id: node.homepage_eclairage.default
+targetEntityType: node
+bundle: homepage_eclairage
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_display_title:
+    weight: 7
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_home_banner:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_home_columns:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_home_playlists:
+    type: entity_reference_revisions_entity_view
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_menu_title:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_meta_description:
+    weight: 6
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_meta_title:
+    weight: 5
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  langcode:
+    type: language
+    weight: 8
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+      native_language: false
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  moderation_state_update: true

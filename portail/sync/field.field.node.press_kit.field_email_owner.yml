@@ -1,0 +1,19 @@
+uuid: fffd4c78-8949-4810-9700-57994ef3c62e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email_owner
+    - node.type.press_kit
+id: node.press_kit.field_email_owner
+field_name: field_email_owner
+entity_type: node
+bundle: press_kit
+label: 'Email of content owner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

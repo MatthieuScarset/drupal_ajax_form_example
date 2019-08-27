@@ -1,0 +1,8 @@
+uuid: 415f890e-ab14-41a4-853a-5e8d9aedf201
+langcode: fr
+status: true
+dependencies: {  }
+id: bottom-footerbar-fr
+label: 'Bottom Footerbar FR'
+description: 'Barre footer bas de page FR'
+locked: false

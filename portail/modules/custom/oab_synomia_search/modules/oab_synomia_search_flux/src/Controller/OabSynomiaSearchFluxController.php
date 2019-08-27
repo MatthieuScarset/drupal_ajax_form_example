@@ -137,8 +137,8 @@ class OabSynomiaSearchFluxController extends ControllerBase
     private function getContentTypeToIndex() {
           $types = array();
         $config_factory = \Drupal::configFactory();
-        //on récupère la configuration oab.synomia.contentTypes
-        $config = $config_factory->get('oab.synomia.contentTypes');
+        //on récupère la configuration oab_synomia_search.synomia.contentTypes
+        $config = $config_factory->get('oab_synomia_search.synomia.contentTypes');
         //on charge la liste des types de contenus
         $content_types = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
         foreach ($content_types as $content_type) {
@@ -156,8 +156,8 @@ class OabSynomiaSearchFluxController extends ControllerBase
      */
     private function getCreationDateLimit() {
         $config_factory = \Drupal::configFactory();
-        //on récupère la configuration oab.synomia.contentTypes
-        $config = $config_factory->get('oab.synomia.contentTypes');
+        //on récupère la configuration oab_synomia_search.synomia.contentTypes
+        $config = $config_factory->get('oab_synomia_search.synomia.contentTypes');
         $date = $config->get('creationDateLimit');
         if (isset($date) && !empty($date)) {
             $timestamp = strtotime($date);

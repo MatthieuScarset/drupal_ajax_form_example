@@ -1,0 +1,19 @@
+uuid: 7d90c505-4423-4e5a-be24-5f5a33857d5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight
+    - node.type.solution
+id: node.solution.field_highlight
+field_name: field_highlight
+entity_type: node
+bundle: solution
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

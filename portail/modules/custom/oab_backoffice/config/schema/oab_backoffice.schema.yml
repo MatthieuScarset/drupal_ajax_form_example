@@ -1,4 +1,4 @@
-oab.subhomes:
+oab_subhomes.subhomes:
   type: config_object
   label: 'Subhomes'
   mapping:
@@ -57,7 +57,7 @@ oab.subhomes:
       type: label
       label: 'Distributor term id'
 
-oab.pardot:
+oab_backoffice.pardot:
   type: config_object
   label: 'Pardot'
   mapping:
@@ -73,7 +73,7 @@ action.configuration.oab_backoffice_node_workbench_unpublish:
   type: action_configuration_default
   label: 'Node workbench unpublish'
 
-oab.ece:
+oab_backoffice.ece:
   type: config_object
   label: 'ECE'
   mapping:

@@ -1,0 +1,19 @@
+uuid: ff1a34e0-7e7c-4313-83a9-727cc984db42
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_account
+    - node.type.profile
+id: node.profile.field_social_account
+field_name: field_social_account
+entity_type: node
+bundle: profile
+label: 'Twitter account'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

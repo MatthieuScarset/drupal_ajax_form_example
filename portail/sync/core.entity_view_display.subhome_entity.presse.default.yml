@@ -1,0 +1,120 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.subhome_entity.presse.field_afficher_bloc_notre_equipe
+    - field.field.subhome_entity.presse.field_carrousel
+    - field.field.subhome_entity.presse.field_corporate_aplat
+    - field.field.subhome_entity.presse.field_corporate_title
+    - field.field.subhome_entity.presse.field_corporate_url
+    - field.field.subhome_entity.presse.field_corporate_visual
+    - field.field.subhome_entity.presse.field_team_button
+    - field.field.subhome_entity.presse.field_team_title
+    - field.field.subhome_entity.presse.field_team_visual
+    - oab_subhomes.subhome_entity_type.presse
+  module:
+    - entity_reference_revisions
+    - link
+    - options
+id: subhome_entity.presse.default
+targetEntityType: subhome_entity
+bundle: presse
+mode: default
+content:
+  description:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_afficher_bloc_notre_equipe:
+    weight: 10
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_carrousel:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_corporate_aplat:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_corporate_title:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_corporate_url:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_corporate_visual:
+    weight: 6
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_team_button:
+    type: entity_reference_revisions_entity_view
+    weight: 9
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_team_title:
+    weight: 8
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_team_visual:
+    weight: 4
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  langcode: true

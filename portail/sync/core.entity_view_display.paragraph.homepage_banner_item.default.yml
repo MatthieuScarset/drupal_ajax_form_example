@@ -1,0 +1,54 @@
+uuid: 190639cf-b476-4951-876e-20df1ab110e6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.homepage_banner_item.field_button_text
+    - field.field.paragraph.homepage_banner_item.field_card_link
+    - field.field.paragraph.homepage_banner_item.field_card_text
+    - field.field.paragraph.homepage_banner_item.field_card_title
+    - paragraphs.paragraphs_type.homepage_banner_item
+  module:
+    - link
+    - text
+id: paragraph.homepage_banner_item.default
+targetEntityType: paragraph
+bundle: homepage_banner_item
+mode: default
+content:
+  field_button_text:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_card_link:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_card_text:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_card_title:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

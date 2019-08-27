@@ -1,0 +1,11 @@
+uuid: 97111d3f-cb1e-4241-a814-fd52c19bd5cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.home_thematic_columns
+id: paragraph.home_thematic_columns
+target_entity_type_id: paragraph
+target_bundle: home_thematic_columns
+default_langcode: site_default
+language_alterable: false

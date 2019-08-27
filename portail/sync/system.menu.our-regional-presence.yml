@@ -1,0 +1,8 @@
+uuid: 45dc250e-8095-44c8-a78f-14c87f685f6d
+langcode: en
+status: true
+dependencies: {  }
+id: our-regional-presence
+label: 'Our regional presence'
+description: ''
+locked: false

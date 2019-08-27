@@ -1,0 +1,19 @@
+uuid: 0353d071-1c6f-42a1-8596-bc6858a5f960
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - paragraphs.paragraphs_type.home_thematic_columns
+id: paragraph.home_thematic_columns.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: home_thematic_columns
+label: Highlight
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

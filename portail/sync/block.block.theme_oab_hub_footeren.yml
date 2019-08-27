@@ -1,0 +1,32 @@
+uuid: ef11a900-e42f-4aab-a0ff-80b6b556a198
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: theme_oab_hub_footeren
+theme: theme_oab_hub
+region: footer
+weight: -14
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

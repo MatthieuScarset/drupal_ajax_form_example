@@ -1,0 +1,39 @@
+uuid: d77319e6-3dff-477c-acfb-2f604c9ce67e
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: aL1GBb3UIPe4bfJ7OHcPXt2H-3tAkB--gF9BINoVxVI
+id: magazineinterview_media
+migration_tags: null
+migration_group: magazineinterview
+label: 'Magazine interviews medias'
+source:
+  plugin: magazineinterview_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: image
+  langcode:
+    plugin: default_value
+    default_value: und
+  name: filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_image/target_id:
+    plugin: migration
+    migration: magazineinterview_image
+    source: image_info
+  field_image/alt: field_image_alt
+  field_image/title: field_image_title
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - magazineinterview_image

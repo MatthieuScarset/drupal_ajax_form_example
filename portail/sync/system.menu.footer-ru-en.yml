@@ -1,0 +1,8 @@
+uuid: c06a8220-edbe-4e0d-8acf-2d6ca7e7d458
+langcode: ru-en
+status: true
+dependencies: {  }
+id: footer-ru-en
+label: 'Footer RU-EN'
+description: 'Footer RU-EN'
+locked: false

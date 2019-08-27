@@ -1,0 +1,8 @@
+uuid: e3326de1-d63d-4279-a81f-3053cc348b8b
+langcode: pt-br
+status: true
+dependencies: {  }
+id: top-right-navbar-br
+label: 'Top right navbar BR'
+description: 'Top right navbar BR'
+locked: false

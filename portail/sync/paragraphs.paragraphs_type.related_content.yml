@@ -1,0 +1,7 @@
+uuid: 05a01cd5-cdb7-4b73-985c-77a0aa4c88c6
+langcode: en
+status: true
+dependencies: {  }
+id: related_content
+label: 'related content'
+behavior_plugins: {  }

@@ -1,0 +1,11 @@
+uuid: 0bed71aa-0b92-4010-8f3d-c6828b944be9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+id: paragraph.rebond_wysiwyg
+target_entity_type_id: paragraph
+target_bundle: rebond_wysiwyg
+default_langcode: site_default
+language_alterable: false

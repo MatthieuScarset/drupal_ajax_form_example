@@ -1,0 +1,39 @@
+uuid: e3131151-d488-4299-b5db-bdd6ca42b0ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_home_columns
+    - node.type.homepage_eclairage
+    - paragraphs.paragraphs_type.home_column
+  module:
+    - entity_reference_revisions
+id: node.homepage_eclairage.field_home_columns
+field_name: field_home_columns
+entity_type: node
+bundle: homepage_eclairage
+label: 'Home Columns'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      home_column: home_column
+    target_bundles_drag_drop:
+      home_banner:
+        weight: 5
+        enabled: false
+      home_column:
+        enabled: true
+        weight: 6
+      home_column_section:
+        weight: 7
+        enabled: false
+      home_playlist:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

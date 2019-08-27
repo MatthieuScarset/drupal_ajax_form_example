@@ -1,0 +1,28 @@
+uuid: f602b20d-8981-4033-8c16-5777bc0e9115
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - media_entity.bundle.file
+    - node.type.press_release
+id: node.press_release.field_file
+field_name: field_file
+entity_type: node
+bundle: press_release
+label: 'Upload document'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

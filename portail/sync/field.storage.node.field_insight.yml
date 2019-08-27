@@ -1,0 +1,20 @@
+uuid: 5df06fa5-e18e-49e0-9384-9bd09c56bdaa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_insight
+field_name: field_insight
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -7,7 +7,7 @@ $terms = array(
 
 $FRConfig = array();
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$FRConfig = $collection->read('oab.subhomes');
+$FRConfig = $collection->read('oab_subhomes.subhomes');
 foreach ($terms as &$term) {
     $term_id = "";
     //vérification de l'existance du terme pour ce vocabulaire
@@ -33,12 +33,12 @@ foreach ($terms as &$term) {
 
     if ($term['language'] == 'en') {
         $config_factory = \Drupal::configFactory();
-        $config_group = $config_factory->getEditable('oab.subhomes');
+        $config_group = $config_factory->getEditable('oab_subhomes.subhomes');
         $config_group->set('distributor_term_tid', $term_id);
         $config_group->save(TRUE);
     } elseif ($term['language'] == 'fr') {
         $FRConfig[$term['variable']] = $term_id;
-        $collection->write('oab.subhomes', $FRConfig);
+        $collection->write('oab_subhomes.subhomes', $FRConfig);
     }
 }
 

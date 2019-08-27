@@ -1,0 +1,19 @@
+uuid: 186083ff-1304-4d01-a3fe-f9c29625bff0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_highlight
+    - node.type.partner
+id: node.partner.field_highlight
+field_name: field_highlight
+entity_type: node
+bundle: partner
+label: Highlight
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

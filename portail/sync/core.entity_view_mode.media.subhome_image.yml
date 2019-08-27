@@ -1,0 +1,10 @@
+uuid: e304983e-4c5e-4ed6-a81f-7b0fc1693b33
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.subhome_image
+label: 'Subhome image'
+targetEntityType: media
+cache: true

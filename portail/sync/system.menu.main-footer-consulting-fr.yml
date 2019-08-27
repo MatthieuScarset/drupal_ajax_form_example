@@ -1,0 +1,8 @@
+uuid: 3096f56d-6892-4504-8bf2-8d6684802bda
+langcode: fr
+status: true
+dependencies: {  }
+id: main-footer-consulting-fr
+label: 'consulting Footer fr'
+description: 'consulting Footer fr'
+locked: false

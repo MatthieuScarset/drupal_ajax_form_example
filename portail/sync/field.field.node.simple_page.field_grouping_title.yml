@@ -1,0 +1,19 @@
+uuid: 1954096f-7c8c-4137-9e93-b92d70e3ae17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_grouping_title
+    - node.type.simple_page
+id: node.simple_page.field_grouping_title
+field_name: field_grouping_title
+entity_type: node
+bundle: simple_page
+label: 'Grouping title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

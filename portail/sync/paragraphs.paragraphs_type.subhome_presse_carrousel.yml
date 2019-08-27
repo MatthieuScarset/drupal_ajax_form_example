@@ -1,0 +1,8 @@
+langcode: fr
+status: true
+dependencies: {  }
+id: subhome_presse_carrousel
+label: 'Subhome Presse Carrousel'
+icon_uuid: null
+description: 'Paragraph pour gérer les carrousel de la subhome presse'
+behavior_plugins: {  }

@@ -1,4 +1,4 @@
-oab.axiome:
+oab_axiome.axiome_settings:
   type: config_object
   label: 'Axiome'
   mapping:

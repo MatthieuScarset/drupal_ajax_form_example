@@ -1,0 +1,18 @@
+uuid: b9f74785-4fa1-48f9-8a48-b8e945c86aa4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - oab_subhomes.subhome_entity_type.presse
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: subhome_entity.presse
+target_entity_type_id: subhome_entity
+target_bundle: presse
+default_langcode: site_default
+language_alterable: true

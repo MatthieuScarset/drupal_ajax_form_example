@@ -1,0 +1,22 @@
+uuid: c1b004ac-24e9-4da1-ae15-55e047373b40
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.solution
+id: node.solution.status
+field_name: status
+entity_type: node
+bundle: solution
+label: 'Publishing status'
+description: 'A boolean indicating whether the node is published.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

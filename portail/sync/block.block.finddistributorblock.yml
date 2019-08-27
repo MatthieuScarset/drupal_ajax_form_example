@@ -1,0 +1,36 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_dvi
+  theme:
+    - theme_boosted
+id: finddistributorblock
+theme: theme_boosted
+region: sidebar
+weight: -35
+provider: null
+plugin: find_distributor_block
+settings:
+  id: find_distributor_block
+  label: 'Find Distributor Block'
+  provider: oab_dvi
+  label_display: visible
+  context_mapping:
+    node: '@node.node_route_context:node'
+  find_distributor_title: 'Find a distributor near you'
+  find_distributor_description: 'Voici ma description'
+  find_distributor_button: 'Find Dist'
+  title: 'Trouver un revendeur à proximité'
+  description: 'description to find distributor'
+  button_label: Find
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

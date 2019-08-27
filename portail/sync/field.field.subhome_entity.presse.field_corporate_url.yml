@@ -1,0 +1,22 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.subhome_entity.field_corporate_url
+    - oab_subhomes.subhome_entity_type.presse
+  module:
+    - link
+id: subhome_entity.presse.field_corporate_url
+field_name: field_corporate_url
+entity_type: subhome_entity
+bundle: presse
+label: URL
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

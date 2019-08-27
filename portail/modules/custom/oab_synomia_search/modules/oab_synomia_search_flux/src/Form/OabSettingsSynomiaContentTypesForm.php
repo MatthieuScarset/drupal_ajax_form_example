@@ -21,7 +21,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['oab.synomia.contentTypes',];
+    return ['oab_synomia_search.synomia.contentTypes',];
   }
 
   /**
@@ -29,7 +29,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-        $config = $this->config('oab.synomia.contentTypes');
+        $config = $this->config('oab_synomia_search.synomia.contentTypes');
         $content_types = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
         $form['label'] = array(
             '#type' => 'label',
@@ -55,7 +55,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
-    $config = $this->config('oab.synomia.contentTypes');
+    $config = $this->config('oab_synomia_search.synomia.contentTypes');
         $content_types = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
         foreach ($content_types as $contentType) {
             $config->set($contentType->id(), $form_state->getValue($contentType->id()));

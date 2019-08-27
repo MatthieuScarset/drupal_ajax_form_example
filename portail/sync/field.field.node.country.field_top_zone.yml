@@ -1,0 +1,21 @@
+uuid: 4e0a4221-9c73-4cb8-a521-a6a6719455ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_zone
+    - node.type.country
+  module:
+    - text
+id: node.country.field_top_zone
+field_name: field_top_zone
+entity_type: node
+bundle: country
+label: 'Top zone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

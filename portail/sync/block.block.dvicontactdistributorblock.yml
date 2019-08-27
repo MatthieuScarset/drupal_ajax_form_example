@@ -1,0 +1,30 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: dvicontactdistributorblock
+theme: theme_boosted
+region: sidebar
+weight: -34
+provider: null
+plugin: dvi_contact_distributor_block
+settings:
+  id: dvi_contact_distributor_block
+  label: 'Dvi - Contact Distributor Block'
+  provider: oab_frontoffice
+  label_display: visible
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      distributor: distributor
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

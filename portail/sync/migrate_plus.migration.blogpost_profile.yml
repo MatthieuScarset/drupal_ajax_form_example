@@ -1,0 +1,38 @@
+uuid: fa3ad2ba-9d83-47ec-af67-7f856cc8175f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: suv9kqfAarRPoAvC4gRoaINcJkeedn_7J3I3yXDVOLA
+id: blogpost_profile
+migration_tags: null
+migration_group: blogpost
+label: 'Blog posts profiles'
+source:
+  plugin: blogpost_profile
+process:
+  type:
+    plugin: default_value
+    default_value: profile
+  uid:
+    plugin: default_value
+    default_value: 1
+  langcode: langcode
+  title: title
+  body/value: field_txt_catcher
+  body/format:
+    plugin: default_value
+    default_value: full_html
+  field_first_name/value: field_first_name
+  field_last_name/value: field_last_name
+  field_social_account: field_social_account
+  field_visual:
+    plugin: migration
+    migration: blogpost_profile_media
+    source: images
+  path: path
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - blogpost_profile_media

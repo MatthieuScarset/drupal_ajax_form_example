@@ -1,0 +1,16 @@
+uuid: 3a6ef9ed-bc94-436f-8b0f-5e34b33bb6f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.office_countries
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.office_countries
+target_entity_type_id: taxonomy_term
+target_bundle: office_countries
+default_langcode: site_default
+language_alterable: false

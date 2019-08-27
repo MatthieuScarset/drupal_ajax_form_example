@@ -1,0 +1,9 @@
+uuid: d91f94bd-734c-41ec-8e6a-7a2d57d4dfe8
+langcode: en
+status: true
+dependencies: {  }
+id: node__hp_eclairage_thematique
+label: 'Content: Homepage Eclairage Thématique'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

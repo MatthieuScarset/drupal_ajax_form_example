@@ -1,0 +1,9 @@
+uuid: 20897c55-5a29-4126-a7f8-ee4e611450a9
+langcode: en
+status: true
+dependencies: {  }
+name: 'Market segments DVI'
+vid: market_segments_dvi
+description: null
+hierarchy: 0
+weight: 0

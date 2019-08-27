@@ -1,0 +1,8 @@
+uuid: b4965a08-59cc-40a5-8197-c28d58f208e7
+langcode: en
+status: true
+dependencies: {  }
+id: top-right-navbar-en
+label: 'Top right navbar EN'
+description: 'Top right navbar EN = service space'
+locked: false

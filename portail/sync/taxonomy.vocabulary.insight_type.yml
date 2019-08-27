@@ -1,0 +1,9 @@
+uuid: 7afb8284-39ca-4158-8601-1fdf26cedf14
+langcode: en
+status: true
+dependencies: {  }
+name: 'Insight type'
+vid: insight_type
+description: null
+hierarchy: 0
+weight: 0

@@ -1,0 +1,7 @@
+langcode: ru-en
+status: true
+dependencies: {  }
+id: menu-homepage-eclairage-ru-
+label: 'Menu Homepage Eclairage RU-EN'
+description: ''
+locked: false

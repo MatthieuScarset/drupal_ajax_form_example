@@ -1,0 +1,8 @@
+uuid: 67e3bd8c-8d9a-4ec9-a021-ee128b4dcac5
+langcode: fr
+status: true
+dependencies: {  }
+id: top-navbar-consulting-fr
+label: 'consulting Top Navbar fr'
+description: 'consulting Top Navbar fr'
+locked: false

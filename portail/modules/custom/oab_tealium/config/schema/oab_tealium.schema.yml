@@ -1,4 +1,4 @@
-oab.tealium:
+oab_tealium.tealium:
   type: config_object
   label: 'Tealium'
   mapping:

@@ -1,0 +1,20 @@
+uuid: 2b7d657b-a5db-4091-94d8-df954a504f48
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.custom_page
+  module:
+    - path
+id: node.custom_page.path
+field_name: path
+entity_type: node
+bundle: custom_page
+label: 'Alias d''URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

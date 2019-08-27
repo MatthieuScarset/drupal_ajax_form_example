@@ -1,0 +1,21 @@
+uuid: 152929c9-1cb0-498e-a444-2005e91249c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.customer_story
+  module:
+    - text
+id: node.customer_story.field_content
+field_name: field_content
+entity_type: node
+bundle: customer_story
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

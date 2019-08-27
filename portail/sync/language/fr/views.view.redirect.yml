@@ -1,0 +1,25 @@
+label: Redirection
+description: 'Liste des redirections'
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+      pager:
+        options:
+          tags:
+            previous: '‹ précédent'
+            next: 'suivant ›'
+            first: '« premier'
+            last: 'dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+      filters:
+        redirect_redirect__uri:
+          expose:
+            label: À
+      title: Redirection

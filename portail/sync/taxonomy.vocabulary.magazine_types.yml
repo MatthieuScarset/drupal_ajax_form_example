@@ -1,0 +1,9 @@
+uuid: ba943093-4825-449c-b6fa-4fca9c640365
+langcode: en
+status: true
+dependencies: {  }
+name: 'Magazine type'
+vid: magazine_types
+description: ''
+hierarchy: 0
+weight: 0

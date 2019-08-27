@@ -1,0 +1,9 @@
+uuid: 9dbbae8a-fafe-4a59-be0c-acfd692f3dff
+langcode: en
+status: true
+dependencies: {  }
+id: node__customer_story
+label: 'Content: Cas client'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

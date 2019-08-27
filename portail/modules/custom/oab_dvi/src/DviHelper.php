@@ -52,11 +52,11 @@ abstract class DviHelper {
           $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
       }
       if ($langcode == \Drupal::languageManager()->getDefaultLanguage()->getId()) {
-        $config = \Drupal::config('oab.subhomes');
+        $config = \Drupal::config('oab_subhomes.subhomes');
         return $config->get('product_dvi_term_tid');
       } else {
         $config = \Drupal::service('config.storage')->createCollection('language.'.$langcode);
-        $subhomes = $config->read('oab.subhomes');
+        $subhomes = $config->read('oab_subhomes.subhomes');
         if (isset($subhomes['product_dvi_term_tid'])) {
           return $subhomes['product_dvi_term_tid'];
         } else {

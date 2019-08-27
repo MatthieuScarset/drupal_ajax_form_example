@@ -1,0 +1,14 @@
+uuid: 4ac535ae-d789-49b1-9158-00335c728d7e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.chief_editor
+  module:
+    - user
+id: user_remove_role_action.chief_editor
+label: 'Remove the Chief editor role from the selected users'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: chief_editor

@@ -1,0 +1,22 @@
+uuid: 4bc460c7-2333-4656-9bec-8c812df7c9f5
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_oab_hub
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: theme_oab_hub_messages
+theme: theme_oab_hub
+region: header
+weight: -15
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -33,15 +33,15 @@ foreach ($terms as $term) {
 }
 
 $config_factory = \Drupal::configFactory();
-$config_group = $config_factory->getEditable('oab.subhomes');
+$config_group = $config_factory->getEditable('oab_subhomes.subhomes');
 $config_group->set('product_dvi_term_tid', $termsTID["en"]);
 $config_group->save(TRUE);
 
 
 $FRConfig = array();
 $collection = \Drupal::service('config.storage')->createCollection('language.fr');
-$FRConfig = $collection->read('oab.subhomes');
+$FRConfig = $collection->read('oab_subhomes.subhomes');
 $FRConfig["product_dvi_term_tid"] = $termsTID["fr"];
-$collection->write('oab.subhomes', $FRConfig);
+$collection->write('oab_subhomes.subhomes', $FRConfig);
 
 

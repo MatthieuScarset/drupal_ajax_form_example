@@ -1,0 +1,21 @@
+display:
+  default:
+    display_title: Newsroom
+    display_options:
+      title: Newsroom
+  page_blog:
+    display_title: ''
+  page_customer:
+    display_title: Projects
+    display_options:
+      title: Projects
+  page_document:
+    display_title: ''
+  page_magazine:
+    display_title: ''
+  page_partners:
+    display_title: Partners
+    display_options:
+      title: Partners
+  page_press:
+    display_title: Newsroom

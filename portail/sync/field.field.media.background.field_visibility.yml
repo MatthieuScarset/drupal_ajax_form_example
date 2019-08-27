@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_visibility
+    - media_entity.bundle.background
+id: media.background.field_visibility
+field_name: field_visibility
+entity_type: media
+bundle: background
+label: Visibility
+description: 'Specify pages by using their paths. One URL per row'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,9 @@
+uuid: 4aae65fc-25e9-4235-8f0b-0da98a736298
+langcode: en
+status: true
+dependencies: {  }
+name: 'Magazine thematic'
+vid: magazine_thematics
+description: ''
+hierarchy: 0
+weight: 0

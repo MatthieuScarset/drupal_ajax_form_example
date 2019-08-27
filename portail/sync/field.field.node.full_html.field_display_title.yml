@@ -1,0 +1,23 @@
+uuid: 36f5493d-1dc8-467a-8c1f-7df1b3a51fd6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_title
+    - node.type.full_html
+id: node.full_html.field_display_title
+field_name: field_display_title
+entity_type: node
+bundle: full_html
+label: 'Display title'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

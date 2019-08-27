@@ -1,0 +1,16 @@
+uuid: 52c4ab93-7674-4392-8cc8-e7a98109c798
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subhomes
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.subhomes
+target_entity_type_id: taxonomy_term
+target_bundle: subhomes
+default_langcode: current_interface
+language_alterable: true

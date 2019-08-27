@@ -1,0 +1,60 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_p_wysiwyg_rebond
+    - node.type.press_release
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.press_release.field_p_wysiwyg_rebond
+field_name: field_p_wysiwyg_rebond
+entity_type: node
+bundle: press_release
+label: 'Wysiwyg rebond'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      rebond_wysiwyg: rebond_wysiwyg
+    target_bundles_drag_drop:
+      home_banner:
+        weight: 12
+        enabled: false
+      home_column:
+        weight: 13
+        enabled: false
+      home_column_section:
+        weight: 14
+        enabled: false
+      home_playlist:
+        weight: 15
+        enabled: false
+      home_thematic_columns:
+        weight: 16
+        enabled: false
+      homepage_banner_experience:
+        weight: 17
+        enabled: false
+      homepage_banner_item:
+        weight: 18
+        enabled: false
+      homepage_news:
+        weight: 19
+        enabled: false
+      infography_partner:
+        weight: 20
+        enabled: false
+      rebond_wysiwyg:
+        enabled: true
+        weight: 21
+      related_content:
+        weight: 22
+        enabled: false
+field_type: entity_reference_revisions

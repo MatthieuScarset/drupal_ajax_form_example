@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: file_entity_browser_thumbnail
+label: 'File entity browser thumbnail (350x263)'
+effects:
+  61fca75e-cc25-4c40-a02f-84effdd5b97a:
+    uuid: 61fca75e-cc25-4c40-a02f-84effdd5b97a
+    id: image_scale
+    weight: 1
+    data:
+      width: 350
+      height: null
+      upscale: false

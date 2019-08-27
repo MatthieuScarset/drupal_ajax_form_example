@@ -1,0 +1,12 @@
+uuid: cb144ad1-f464-4e15-a7dd-3669406db09f
+langcode: en
+status: true
+dependencies: {  }
+id: 2e9ZfIfLFCC0V-PbcDKUTb1Wk22XgjzJ6f-b16CFlPE
+label: 'https://www.orange-business.com/fr/sitemap.xml'
+chunks: 1
+links: 4487
+max_filesize: 922316
+context:
+  language: fr
+updated: 1565915998

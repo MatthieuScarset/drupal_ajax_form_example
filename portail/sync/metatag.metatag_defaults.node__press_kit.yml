@@ -1,0 +1,9 @@
+uuid: bfbd8c99-73c3-4e13-aeda-077371e00f4c
+langcode: en
+status: true
+dependencies: {  }
+id: node__press_kit
+label: 'Content: Dossier de presse'
+tags:
+  description: '[node:field_meta_description]'
+  title: '[node:field_meta_title] | [site:name]'

@@ -1,0 +1,18 @@
+uuid: 4013a55f-9d2e-4704-be01-b38f51e9bbaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.customer_story
+id: node.customer_story.changed
+field_name: changed
+entity_type: node
+bundle: customer_story
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

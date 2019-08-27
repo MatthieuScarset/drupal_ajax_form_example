@@ -1,0 +1,19 @@
+uuid: 86731752-52e7-48fb-85cd-6e12e42a4ad1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_description
+    - node.type.product
+id: node.product.field_meta_description
+field_name: field_meta_description
+entity_type: node
+bundle: product
+label: 'Meta description'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

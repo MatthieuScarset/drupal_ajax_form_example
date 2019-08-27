@@ -1,0 +1,10 @@
+uuid: b5ee3415-eb43-4eba-840b-ab275bf8d331
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.automatic_teaser
+label: 'Automatic teaser'
+targetEntityType: media
+cache: true

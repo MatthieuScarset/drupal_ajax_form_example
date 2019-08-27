@@ -1,0 +1,18 @@
+uuid: fee48d71-0adc-4a37-8511-4e1bf368033e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_kit
+id: node.press_kit.title
+field_name: title
+entity_type: node
+bundle: press_kit
+label: Title
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

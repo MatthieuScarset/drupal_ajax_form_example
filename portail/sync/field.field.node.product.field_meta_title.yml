@@ -1,0 +1,19 @@
+uuid: 0995421a-5304-4fb4-8003-cbf5abc37e84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.product
+id: node.product.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: product
+label: 'Meta title'
+description: 'This field is limited to 56 characters (used for SEO-optimization)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

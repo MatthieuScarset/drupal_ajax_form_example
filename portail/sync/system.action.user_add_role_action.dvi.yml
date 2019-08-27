@@ -1,0 +1,14 @@
+uuid: c196d29a-9043-491b-a636-bcf8e8f2f641
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.dvi
+  module:
+    - user
+id: user_add_role_action.dvi
+label: 'Add the DVI role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: dvi

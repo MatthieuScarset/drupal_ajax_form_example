@@ -1,0 +1,28 @@
+uuid: null
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comment_blog
+    - field.field.comment.comment_blog.comment_body
+  module:
+    - text
+id: comment.comment_blog.default
+targetEntityType: comment
+bundle: comment_blog
+mode: default
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

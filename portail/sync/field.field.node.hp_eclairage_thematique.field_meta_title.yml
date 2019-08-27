@@ -1,0 +1,19 @@
+uuid: 000ba44d-399f-4def-814b-4025d18fb050
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.hp_eclairage_thematique
+id: node.hp_eclairage_thematique.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Meta title'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

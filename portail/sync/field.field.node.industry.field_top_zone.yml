@@ -1,0 +1,21 @@
+uuid: 14c25fb2-1379-4e4c-b4ba-431ad68bb979
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_top_zone
+    - node.type.industry
+  module:
+    - text
+id: node.industry.field_top_zone
+field_name: field_top_zone
+entity_type: node
+bundle: industry
+label: 'Top zone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

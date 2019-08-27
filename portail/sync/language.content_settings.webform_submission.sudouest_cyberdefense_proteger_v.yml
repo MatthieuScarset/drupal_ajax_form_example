@@ -1,0 +1,11 @@
+uuid: da8ec5c9-820e-4bf6-b71c-4bccb9ccf4a9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.sudouest_cyberdefense_proteger_v
+id: webform_submission.sudouest_cyberdefense_proteger_v
+target_entity_type_id: webform_submission
+target_bundle: sudouest_cyberdefense_proteger_v
+default_langcode: site_default
+language_alterable: false

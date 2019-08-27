@@ -1,0 +1,46 @@
+uuid: e0fa1dcd-c8ae-41c0-a93c-4b7b729ffded
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.home_playlist.field_link_button
+    - field.field.paragraph.home_playlist.field_playlist_taxonomy_term
+    - field.field.paragraph.home_playlist.field_title
+    - paragraphs.paragraphs_type.home_playlist
+  module:
+    - link
+    - workbench_moderation
+id: paragraph.home_playlist.default
+targetEntityType: paragraph
+bundle: home_playlist
+mode: default
+content:
+  field_link_button:
+    weight: 11
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_playlist_taxonomy_term:
+    weight: 9
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_title:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

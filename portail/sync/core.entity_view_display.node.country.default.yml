@@ -1,0 +1,135 @@
+uuid: 1b599147-7899-418c-a9e2-74442607a028
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.country.field_content
+    - field.field.node.country.field_content_owner
+    - field.field.node.country.field_display_title
+    - field.field.node.country.field_email_owner
+    - field.field.node.country.field_end_date
+    - field.field.node.country.field_highlight
+    - field.field.node.country.field_local_nav
+    - field.field.node.country.field_meta_description
+    - field.field.node.country.field_meta_title
+    - field.field.node.country.field_region
+    - field.field.node.country.field_related_content
+    - field.field.node.country.field_start_date
+    - field.field.node.country.field_top_zone
+    - field.field.node.country.field_top_zone_background
+    - field.field.node.country.field_top_zone_bg_mobile
+    - field.field.node.country.field_visual
+    - field.field.node.country.moderation_state_update
+    - node.type.country
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.country.default
+targetEntityType: node
+bundle: country
+mode: default
+content:
+  field_content:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_display_title:
+    weight: 5
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_highlight:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_industry:
+    weight: 13
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_local_nav:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_meta_description:
+    weight: 8
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_meta_title:
+    weight: 7
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_region:
+    weight: 6
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_related_content:
+    weight: 9
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_solution:
+    weight: 10
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_content_owner: true
+  field_email_owner: true
+  field_end_date: true
+  field_job_profile: true
+  field_market_segment: true
+  field_start_date: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
+  field_visual: true
+  langcode: true
+  moderation_state_update: true

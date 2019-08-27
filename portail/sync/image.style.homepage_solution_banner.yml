@@ -1,0 +1,15 @@
+uuid: null
+langcode: en
+status: true
+dependencies: {  }
+name: homepage_solution_banner
+label: 'Homepage Solution Banner (1400x450)'
+effects:
+  58b962ac-d609-4a2c-b1b4-0a933258d3b8:
+    uuid: 58b962ac-d609-4a2c-b1b4-0a933258d3b8
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 450
+      anchor: center-center

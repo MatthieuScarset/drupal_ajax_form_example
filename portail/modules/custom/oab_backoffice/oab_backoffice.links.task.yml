@@ -8,10 +8,10 @@ oab.settings_pardot_tab:
   title: Settings
   base_route: oab.settings_pardot
 
-oab.general_settings_tab:
-  route_name: oab.general_settings
+oab_backoffice.general_settings_tab:
+  route_name: oab_backoffice.general_settings
   title: General Settings
-  base_route: oab.general_settings
+  base_route: oab_backoffice.general_settings
 
 oab.settings_ece_tab:
   route_name: oab.settings_ece

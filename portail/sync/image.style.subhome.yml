@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: subhome
+label: 'Subhome (310x125)'
+effects:
+  4cb2e9ce-974c-45f1-b483-0a4c79ce49f9:
+    uuid: 4cb2e9ce-974c-45f1-b483-0a4c79ce49f9
+    id: image_scale
+    weight: 1
+    data:
+      width: 310
+      height: 125
+      upscale: true

@@ -1,4 +1,4 @@
-oab.cookie_compliance.settings:
+oab_cookie_compliance.cookie_compliance.settings:
   path: '/admin/structure/oab/settings/cookie-compliance'
   defaults:
     _form: '\Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm'

@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_btn_text
+    - node.type.homepage
+id: node.homepage.field_title_btn_text
+field_name: field_title_btn_text
+entity_type: node
+bundle: homepage
+label: 'Title button text'
+description: 'Leave empty to hide the button'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,11 @@
+uuid: d079b21e-788e-4b2c-8090-2c392a1f7226
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.orange_et_cisco_vous_invitent_le
+id: webform_submission.orange_et_cisco_vous_invitent_le
+target_entity_type_id: webform_submission
+target_bundle: orange_et_cisco_vous_invitent_le
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,8 @@
+uuid: 3a80e071-d354-4cd0-b613-8717acd44c4a
+langcode: fr
+status: true
+dependencies: {  }
+id: top-right-navbar-fr
+label: 'Top right navbar FR'
+description: 'Top right navbar FR'
+locked: false

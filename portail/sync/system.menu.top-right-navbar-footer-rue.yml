@@ -1,0 +1,7 @@
+langcode: ru-en
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-rue
+label: 'Top right navbar Footer RU-EN'
+description: 'Right navbar''s links to be displayed in the footer in mobile mode'
+locked: false

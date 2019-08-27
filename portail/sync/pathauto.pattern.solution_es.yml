@@ -1,0 +1,32 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: solution_es
+label: 'Solution ES'
+type: 'canonical_entities:node'
+pattern: 'soluciones/[node:title]'
+selection_criteria:
+  a9895e40-3cb0-4c4d-b1f1-0854381834b4:
+    id: node_type
+    bundles:
+      solution: solution
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a9895e40-3cb0-4c4d-b1f1-0854381834b4
+  1f41ccac-e576-4b18-8b8f-21e1acf2333b:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: 1f41ccac-e576-4b18-8b8f-21e1acf2333b
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

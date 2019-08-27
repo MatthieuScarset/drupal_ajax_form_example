@@ -1,0 +1,35 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Aplicar
+      title: Prensa
+  page_catalogue:
+    display_options:
+      title: Producto
+    display_title: Producto
+  page_customer:
+    display_options:
+      title: 'Nuestros clientes'
+    display_title: 'Nuestros clientes'
+  page_document:
+    display_options:
+      title: Libreria
+    display_title: Libreria
+  page_distributor:
+    display_options:
+      title: Distribuidores
+    display_title: Distribuidores
+  page_magazine:
+    display_options:
+      title: Revista
+    display_title: Revista
+  page_partners:
+    display_options:
+      title: 'Socios de negocio'
+    display_title: 'Socios de negocio'
+  page_press:
+    display_title: Prensa
+  page_press_old:
+    display_title: Prensa

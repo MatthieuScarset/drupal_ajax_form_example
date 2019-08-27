@@ -1,0 +1,7 @@
+uuid: a274da56-53a3-48df-ab4d-6a06d4e4777f
+langcode: en
+status: true
+dependencies: {  }
+id: homepage_banner_item
+label: 'Homepage Solution Banner Item'
+behavior_plugins: {  }
