@@ -1,0 +1,9 @@
+# oab_orange_business_lounge.libraries.yml
+
+oab_obl_js:
+  version: 8.x
+  js:
+    js/obl.js: {}
+
+  dependencies:
+    - core/jquery.ui.autocomplete
