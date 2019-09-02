@@ -12,7 +12,6 @@ oab_obl_settings:
   path: '/oblPage'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblController::oblPage'
-    _title: 'obl page'
   requirements:
     _permission: 'administer site configuration'
 

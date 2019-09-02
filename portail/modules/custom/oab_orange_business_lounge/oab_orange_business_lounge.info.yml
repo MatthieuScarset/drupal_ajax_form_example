@@ -3,7 +3,7 @@ description: 'API pour la récupération des informations tarifaires et accords 
 type: module
 package: OAB
 
-configure: oab.settings
+configure: oab_orange_business_lounge_settings
 
 # core: 8.x
 # Information added by Drupal.org packaging script on 2019-05-23
