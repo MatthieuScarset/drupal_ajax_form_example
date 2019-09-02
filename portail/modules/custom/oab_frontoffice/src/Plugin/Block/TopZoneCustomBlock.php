@@ -57,7 +57,7 @@ class TopZoneCustomBlock extends BlockBase {
         ];
 
         $form['block_image'] = [
-            '#title' => $this->t('blooop du block'),
+            '#title' => $this->t('Image en background'),
            '#type' => 'managed_file',
             //'#entity_browser' => 'browse_media_modal',
            '#default_value' => isset($this->configuration['block_image']) ? [$this->configuration['block_image']] : '',
