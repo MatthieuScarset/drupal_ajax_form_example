@@ -88,7 +88,7 @@ view_mode ? view_mode|clean_class,
     {{ author_name }}
 {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+
 
     <div{{ content_attributes.addClass('content') }}>
         {{ content|without('field_customer_story', 'field_country', 'field_city', 'field_area', 'field_display_title', 'field_meta_description', 'field_meta_title', 'field_highlight', 'field_solution', 'field_industry', 'field_insight', 'field_start_date', 'field_end_date') }}
