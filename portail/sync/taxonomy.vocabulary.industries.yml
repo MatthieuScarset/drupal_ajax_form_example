@@ -5,5 +5,4 @@ dependencies: {  }
 name: Industry
 vid: industries
 description: ''
-hierarchy: 0
 weight: 0

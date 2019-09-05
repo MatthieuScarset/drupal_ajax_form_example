@@ -5,5 +5,4 @@ dependencies: {  }
 name: Profession
 vid: jobs_profiles
 description: ''
-hierarchy: 0
 weight: 0

@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Media thematics'
 vid: media_thematics
 description: ''
-hierarchy: 0
 weight: 0

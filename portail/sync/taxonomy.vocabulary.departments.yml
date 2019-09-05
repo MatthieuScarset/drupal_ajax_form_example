@@ -5,5 +5,4 @@ dependencies: {  }
 name: Departments
 vid: departments
 description: null
-hierarchy: 0
 weight: 0

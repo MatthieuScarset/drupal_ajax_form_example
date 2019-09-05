@@ -1,8 +1,8 @@
+uuid: null
 langcode: en
 status: true
 dependencies: {  }
 name: Analyst
 vid: analyst
 description: ''
-hierarchy: 0
 weight: 0

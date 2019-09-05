@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Magazine type'
 vid: magazine_types
 description: ''
-hierarchy: 0
 weight: 0

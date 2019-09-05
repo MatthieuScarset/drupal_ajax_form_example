@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Press type'
 vid: press_formats
 description: ''
-hierarchy: 0
 weight: 0
