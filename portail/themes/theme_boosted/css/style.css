@@ -3022,6 +3022,14 @@ img.image_pannel{
     color: #fff;
 }
 
+.reseau-partenaire-tarif-roaming th {
+    color: #FF7900;
+}
+
+.reseau-partenaire-tarif-roaming td {
+    font-weight: bold;
+}
+
 @media(max-width: 767px) {
     .roaming-infos-container {
         width: auto;

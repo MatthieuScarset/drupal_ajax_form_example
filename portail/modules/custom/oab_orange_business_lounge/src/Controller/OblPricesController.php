@@ -15,15 +15,14 @@ class OblPricesController extends ControllerBase {
 
         $countries = $obl_service->getCountries();
         $zones = $obl_service->getZones();
-        $pass_data = $obl_service->getPassData();
+        $network_data = $obl_service->getNetworkData();
         $title = $config->get('title_label');
-       // kint($countries);
 
         return array(
             '#countries' => $countries,
             '#zones' => $zones,
-            '#pass_data' => $pass_data,
             '#title' => $title,
+            '#network_data' => $network_data,
             '#theme' => 'orange_business_lounge_page_pays',
             '#attached' => [
                 'library' => [

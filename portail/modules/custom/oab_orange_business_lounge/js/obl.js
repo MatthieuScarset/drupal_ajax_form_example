@@ -40,7 +40,24 @@
 
         $('.obl-label-name').text(code_zone);
 
+        update_label_countrie_reseaux();
+        update_label_zone_reseaux();
+
         }
+
+    function update_label_countrie_reseaux() {
+        $('#select_pays_zone option').click(function() {
+            var selected = $('#select_pays_zone option:selected');
+            $('.roaming-country-selected').text(selected.text());
+        });
+    }
+
+    function update_label_zone_reseaux() {
+        $('.get_zone').click(function(e) {
+            $('.roaming-country-selected').text(e.currentTarget.dataset.zone);
+        });
+    }
+
 
     function countries_form_autocomplete() {
         var arr_hydra_member = drupalSettings.arr_contries;
@@ -65,6 +82,7 @@
             select: function (e, correctValue){
 
                 pays = correctValue.item.value;
+                $('.roaming-country-selected').text(pays);
                 arr_hydra_member.forEach(function(item) {
                     if(item.label == pays) {
                         id_zone = item.rootZone.id;

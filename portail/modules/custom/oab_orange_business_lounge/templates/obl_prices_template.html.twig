@@ -60,12 +60,11 @@
             <p>Connexions multimédias<span id="data-roaming" class="api-result-infos"></span></p>
         </div>
     </div>
-
     <div class="reseau-partenaire-tarif-roaming">
         <table class="table table-sm table-striped">
             <thead>
             <caption class="table-roaming-entete">
-               Liste des réseaux partenaires disponibles pour...
+               Liste des réseaux partenaires disponibles pour <span class="roaming-country-selected"></span>
             </caption>
             <tr>
                 <th scope="col">Nom du réseau</th>
@@ -73,18 +72,12 @@
             </tr>
             </thead>
             <tbody>
+            {% for data in network_data %}
             <tr>
-                <td>Mark</td>
-                <td>Otto</td>
+                <td>{{ data.operator.name }}</td>
+                <td>{{ data.operator.networkNorms.items.type }}</td>
             </tr>
-            <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
-            <tr>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
