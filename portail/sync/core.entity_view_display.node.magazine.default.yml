@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -115,6 +116,7 @@ hidden:
   field_hub: true
   field_hub_portal: true
   field_industry: true
+  field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -129,6 +131,7 @@ hidden:
   field_subhome: true
   field_thematic: true
   field_visual: true
+  field_visual_tile: true
   field_wysiwyg_rebond: true
   langcode: true
   moderation_state_update: true
