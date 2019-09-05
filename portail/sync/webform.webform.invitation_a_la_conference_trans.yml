@@ -1,8 +1,16 @@
+uuid: 52a64fbe-6047-449c-a5b8-2514c2b51943
 langcode: fr
 status: open
 dependencies:
   module:
-    - oab_gdpr
+    - oab_backoffice
+third_party_settings:
+  oab_backoffice:
+    gdpr_business_owner: '1358'
+    gdpr_spoc_security: '1358'
+    gdpr_expiration_date: '2018-11-30'
+    gdpr_business_analysts: {  }
+    gdpr_form_published: 1
 open: null
 close: null
 weight: 0
@@ -201,11 +209,3 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
-uuid: 52a64fbe-6047-449c-a5b8-2514c2b51943
-third_party_settings:
-  oab_gdpr:
-    gdpr_business_owner: '1358'
-    gdpr_spoc_security: '1358'
-    gdpr_expiration_date: '2018-11-30'
-    gdpr_business_analysts: {  }
-    gdpr_form_published: 1

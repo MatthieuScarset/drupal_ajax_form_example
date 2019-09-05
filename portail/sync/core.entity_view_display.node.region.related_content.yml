@@ -4,13 +4,22 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.related_content
+    - field.field.node.region.field_content
     - field.field.node.region.field_content_owner
+    - field.field.node.region.field_display_title
     - field.field.node.region.field_email_owner
     - field.field.node.region.field_end_date
     - field.field.node.region.field_highlight
-    - field.field.node.region.field_region
+    - field.field.node.region.field_local_nav
+    - field.field.node.region.field_meta_description
+    - field.field.node.region.field_meta_title
+    - field.field.node.region.field_related_content
     - field.field.node.region.field_start_date
+    - field.field.node.region.field_top_zone
+    - field.field.node.region.field_top_zone_background
+    - field.field.node.region.field_top_zone_bg_mobile
     - field.field.node.region.field_visual
+    - field.field.node.region.moderation_state_update
     - node.type.region
   module:
     - user
@@ -36,11 +45,21 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_content: true
   field_content_owner: true
+  field_display_title: true
   field_email_owner: true
   field_end_date: true
+  field_local_nav: true
+  field_meta_description: true
+  field_meta_title: true
   field_region: true
+  field_related_content: true
   field_start_date: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
   langcode: true
   links: true
+  moderation_state_update: true
   workbench_moderation_control: true
