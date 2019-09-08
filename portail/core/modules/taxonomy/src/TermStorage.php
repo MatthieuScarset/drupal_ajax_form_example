@@ -401,7 +401,16 @@ class TermStorage extends SqlContentEntityStorage implements TermStorageInterfac
 
     $query->groupBy("tfr.$id_field");
 
-    return $query->execute()->fetchAllKeyed(1, 0);
+    if(isset($table_mapping) && $table_mapping<>"" &&
+      isset($id_field) && $id_field<>"" &&
+      isset($revision_field) && $revision_field<>"" &&
+      isset($rta_field) && $rta_field<>"" &&
+      isset($langcode_field) && $langcode_field<>"" &&
+      isset($revision_default_field) && $revision_default_field<>""){
+        return $query->execute()->fetchAllKeyed(1, 0);
+      }else{
+        return array();
+    }
   }
 
   /**
