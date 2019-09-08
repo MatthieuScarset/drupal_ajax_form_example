@@ -235,8 +235,15 @@ function oab_will_update_8033() {
 
 
 /**
- *                 RUBYPORTAILOBS-3541 Gestion de configuration CIM
+ *                 RUBYPORTAILOBS-3542 gestion update 8.7.6
  */
 function oab_will_update_8034() {
+    include_once("updates/update_8034.inc");
+}
+
+/**
+ *                 RUBYPORTAILOBS-3541 Gestion de configuration CIM
+ */
+function oab_will_update_8035() {
     include_once("updates/update_8034.inc");
 }
