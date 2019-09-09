@@ -30,7 +30,9 @@
             // console.log(element.rootZone.code + " vs " + code_zone + '|' + element.rootZone.code.length + " vs " + code_zone.length);
             return element.rootZone.code === code_zone;
         });
-        //Call method sort by country label _A-Z
+        /*
+        - Call method sort by country label _A-Z
+         */
         listePays = listePays.sort(SortByLabel);
 
         $('#select_pays_zone').html("");
@@ -45,6 +47,11 @@
     function countries_form_autocomplete() {
         var arr_hydra_member = drupalSettings.arr_contries;
         var countries = [];
+
+        /*
+        - Call method sort by country label _A-Z
+         */
+        arr_hydra_member.sort(SortByLabel);
 
         arr_hydra_member.forEach(function (item, key) {
             countries[key] = item.label;
@@ -123,5 +130,51 @@
         var bName = b.label.toLowerCase();
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
+
+
+
+    /*
+    - obl_template.html.twig return tab of countries accords roaming
+     */
+    $('#form_countries').submit(function(e) {
+
+        e.preventDefault();
+
+
+        var arr_hydra_member = drupalSettings.arr_contries;
+        var my_country = $('#input_country').val();
+
+        console.log(my_country);
+
+
+
+        $.each(arr_hydra_member, function(i, v) {
+            if (v.label == my_country) {
+                /**
+                 * somme request
+                 */
+            }
+        });
+
+       /* $.ajax({
+            url: '/oblGetOneZone/'+code_zone,
+            type: 'GET',
+            success: function(result) {
+
+                result.roamingChargesToZones.forEach(function(item) {
+                    if (item.zoneId == code_zone) {
+                        $('#emission-appel').text(item.calling);
+                        $('#envoi-sms').text(item.sendingSms);
+                        $('#envoi-mms').text(item.sendingMms);
+                    }
+                });
+
+            }
+        });*/
+
+    });
+
+
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
