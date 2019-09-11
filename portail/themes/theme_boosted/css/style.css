@@ -2849,6 +2849,10 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding-bottom: 2rem;
 }
 
+.view-business-insight .view-content .views-row .tile_Dossiers, .view-business-insight .view-content .views-row .tile.tile_Dossiers img {
+    padding : 0;
+}
+
 .view-business-insight .view-content .views-row .tile .title_node{
     font-size: 1.7rem;
     line-height: 2.5rem;
