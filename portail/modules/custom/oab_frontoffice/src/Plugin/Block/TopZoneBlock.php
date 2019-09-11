@@ -58,7 +58,6 @@ class TopZoneBlock extends BlockBase {
         }
         if (isset($top_zone_background[0]['target_id'])) {
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background[0]['target_id']);
-
             $url = '';
             if (!is_null($entity)) {
                 $uri = $entity->getType()->thumbnail($entity);

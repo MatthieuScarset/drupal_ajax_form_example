@@ -1,0 +1,95 @@
+<!-- Zones économiques -->
+<div class="global-obl-container">
+    <div class="container">
+        <div class="col-md-6 col-sm-12 obl-zone-container">
+            <div class="row">
+                {% for zone in zones.items %}
+                    <div class="col-md-6 col-sm-12 obl-zone-container">
+                        <div class="panel-group">
+                            <div class="panel panel-default get_zone" data-zone="{{ zone.code }}" data-zone-id="{{ zone.id }}" name="data_zone">
+                                <div class="panel-body obl-block-countries">
+                                    <div class="text-align-left oblHeaderZone"> {{ zone.label }} </div>
+                                    <img class="img-responsive image_pannel"  src="/modules/custom/oab_orange_business_lounge/images/{{ zone.code }}.jpg" />
+                                    <div class="text-align-right oblFooterZone">Voir les pays <span class="glyphicon glyphicon-play"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 obl-search-by-country">
+            <h2 class="obl-label-name"></h2>
+            <select id="select_pays_zone" class="pays-zone hidden" name="pays_zone" size="20">
+                <!-- <select id="select_pays_zone" class="pays-zone" name="pays_zone" size="20" hidden="hidden"> -->
+            </select>
+        </div>
+    </div>
+
+
+    <div class="container obl-search-by-country">
+        <h3>Vous pouvez également rechercher directement avec le nom du pays</h3>
+        <form action="" class="countries_form_autocomplete">
+            <input type="text" name="countries_input_autocomplete" class="countries_input_autocomplete">
+        </form>
+    </div>
+
+    <div class="empty-roaming-infos-container">
+        <h4>Pour connaître les tarifs et réseaux partenaires, veuillez séletionner votre pays de destination ci-dessus</h4>
+    </div>
+
+    <div class="roaming-infos-container">
+        <div class="call-main-container">
+            <h2>Appels</h2>
+            <p>Emissions d'appels vers la zone <span id="emission-appel" class="api-result-infos"></span></p>
+            <p>Réception d'appels<span id="reception-appel" class="api-result-infos"></span></p>
+            <p>Renvoi d'appels conditionnel vers la France Métropolitaine<span id="renvoi-appel-france" class="api-result-infos"></span></p>
+        </div>
+        <div class="sms-main-container">
+            <h2>SMS</h2>
+            <p>Envoi d'un SMS vers la zone<span id="envoi-sms" class="api-result-infos"></span></p>
+            <p>Le 444 et le #123#<span id="boite-vocale" class="api-result-infos"></span></p>
+        </div>
+        <div class="mms-main-container">
+            <h2>MMS</h2>
+            <p>Réception d'un MMS<span id="reception-mms" class="api-result-infos"></span></p>
+            <p>Envoi d'un MMS<span id="envoi-mms" class="api-result-infos"></span></p>
+        </div>
+        <div class="data-main-container">
+            <h2>DATA</h2>
+            <p>Connexions multimédias<span id="data-roaming" class="api-result-infos"></span></p>
+        </div>
+    </div>
+    <div class="reseau-partenaire-tarif-roaming">
+        <table class="table table-sm table-striped">
+            <thead>
+            <caption class="table-roaming-entete">
+               Liste des réseaux partenaires disponibles pour <span class="roaming-country-selected"></span>
+            </caption>
+            <tr>
+                <th scope="col">Nom du réseau</th>
+                <th scope="col">Fréquences disponibles</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in network_data %}
+            <tr>
+                <td>{{ data.operator.name }}</td>
+                <td>{{ data.operator.networkNorms.items.type }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-sm-12 obl-block-display">
+            {{ drupal_entity('block', 'partenairesobl', check_access=false) }}
+        </div>
+        <div class="col-md-4 col-sm-12 obl-block-display">
+            {{ drupal_entity('block', 'couvertureobl', check_access=false) }}
+        </div>
+    </div>
+</div>
+{# {% for country in zones.items %}
+    {{ kint_t(country, true) }}
+{% endfor %} #}

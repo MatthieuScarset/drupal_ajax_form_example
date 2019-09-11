@@ -1,0 +1,4 @@
+services:
+  oab_orange_business_lounge.oab_obl_swagger:
+    class: Drupal\oab_orange_business_lounge\Services\OabOblSwagger
+
