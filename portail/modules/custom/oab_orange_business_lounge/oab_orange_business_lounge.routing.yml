@@ -17,7 +17,7 @@ oab_obl_settings:
     _permission: 'administer site configuration'
 
 oab_obl_country_settings:
-  path: '/oblPricePage'
+  path: '/reseau-mobile/tarifs-roaming'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblPricePage'
   requirements:
@@ -27,6 +27,13 @@ oab_obl_unique_zone_settings:
   path: '/oblGetOneZone/{id}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueZone'
+  requirements:
+    _permission: 'administer site configuration'
+
+oab_obl_unique_country_settings:
+  path: '/oblGetOneCountry/{id}'
+  defaults:
+    _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueCountry'
   requirements:
     _permission: 'administer site configuration'
 

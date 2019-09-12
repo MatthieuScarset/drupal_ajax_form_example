@@ -3,6 +3,7 @@
     countries_form_autocomplete();
 
     $(".roaming-infos-container").hide();
+    $(".reseau-partenaire-tarif-roaming").hide();
 
     $('.get_zone').click(function () {
 
@@ -39,7 +40,6 @@
         }));
 
         $('.obl-label-name').text(code_zone);
-
         update_label_countrie_reseaux();
         update_label_zone_reseaux();
 
@@ -48,13 +48,34 @@
     function update_label_countrie_reseaux() {
         $('#select_pays_zone option').click(function() {
             var selected = $('#select_pays_zone option:selected');
+            var countrie_id = (selected.val());
+
             $('.roaming-country-selected').text(selected.text());
+
+            load_country_operators(countrie_id);
         });
     }
 
     function update_label_zone_reseaux() {
         $('.get_zone').click(function(e) {
             $('.roaming-country-selected').text(e.currentTarget.dataset.zone);
+        });
+    }
+
+    function load_country_operators(countrie_id) {
+
+        $(".reseau-partenaire-tarif-roaming").show();
+        $.ajax({
+            url: '/oblGetOneCountry/'+countrie_id,
+            type: 'GET',
+            success: function(result) {
+                $('.roaming-operators-table').html('');
+                result.operators.forEach(function(operator) {
+                    operator.networkNorms.forEach(function(item) {
+                        $('.roaming-operators-table').append('<tr><td>'+operator.name+'</td><td>'+item.name+'</td></tr>');
+                    });
+                });
+            }
         });
     }
 
@@ -76,6 +97,7 @@
         var pays = '';
         var id_zone = '';
         var label_zone = '';
+        var id_country = '';
 
         $('.countries_input_autocomplete').autocomplete({
             source: countries,
@@ -83,12 +105,16 @@
 
                 pays = correctValue.item.value;
                 $('.roaming-country-selected').text(pays);
+
                 arr_hydra_member.forEach(function(item) {
                     if(item.label == pays) {
+                        id_country = item.id;
                         id_zone = item.rootZone.id;
-                        label_zone = item.rootZone.code
+                        label_zone = item.rootZone.code;
+
                         get_zone_tarif_info(id_zone);
                         get_countries_with_zone_code(label_zone);
+                        load_country_operators(id_country);
                     }
                 });
             },
@@ -104,7 +130,6 @@
             url: '/oblGetOneZone/'+code_zone,
             type: 'GET',
             success: function(result) {
-
                 result.roamingChargesToZones.forEach(function(item) {
                    if (item.zoneId == code_zone) {
                        $('#emission-appel').text(item.calling);

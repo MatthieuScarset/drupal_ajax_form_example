@@ -3056,11 +3056,11 @@ img.image_pannel{
         display: none;
     }
 
-    .path-oblpricepage, .path-oblpricepage .region.region-content {
+    .path-reseau-mobile, .path-reseau-mobile .region.region-content {
         background-color: #333333;
     }
 
-    .path-oblpricepage .page-header, .path-oblpricepage > h1, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2, .obl-label-name{
+    .path-reseau-mobile .page-header, .path-reseau-mobile > h1, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2, .obl-label-name{
         color: #fff;
         border: none;
     }

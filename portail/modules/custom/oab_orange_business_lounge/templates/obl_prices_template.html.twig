@@ -71,13 +71,7 @@
                 <th scope="col">Fréquences disponibles</th>
             </tr>
             </thead>
-            <tbody>
-            {% for data in network_data %}
-            <tr>
-                <td>{{ data.operator.name }}</td>
-                <td>{{ data.operator.networkNorms.items.type }}</td>
-            </tr>
-            {% endfor %}
+            <tbody class="roaming-operators-table">
             </tbody>
         </table>
     </div>

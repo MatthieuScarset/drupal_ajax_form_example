@@ -59,65 +59,8 @@ class OabOblSwagger {
      * @return mixed
      */
 
-    public function getNetworkData() {
-        //return $this->executeScriptCurl("/operator/".$rootZone."/".$rootCountry);
-        $toto = [
-            [
-                    'id' => 20,
-                    'code' => "20408",
-                    'rootCountry' => [
-                        'france' => false,
-                        'id' => 0,
-                        'auroreCode' => '400',
-                        'isoCode' => "CU",
-                        'slug' => "cuba",
-                        'label' => 'cuba',
-                        'rootZone' => [
-                            'id' => 3,
-                            'label' => 'Business',
-                        ],
-                        'savAvailable' => false,
-                    ],
-                    'operator' => [
-                        'name' => "mtn",
-                        'networkNorms' => [
-                            'items' => [
-                                'networknorm' => "GSM (900\/1800)",
-                                'type' => "GSM"
-                            ]
-                        ]
-                    ],
-                ],
-
-            [
-                'id' => 20,
-                'code' => "20408",
-                'rootCountry' => [
-                    'france' => false,
-                    'id' => 0,
-                    'auroreCode' => '400',
-                    'isoCode' => "CU",
-                    'slug' => "cuba",
-                    'label' => 'cuba',
-                    'rootZone' => [
-                        'id' => 3,
-                        'label' => 'Business',
-                    ],
-                    'savAvailable' => false,
-                ],
-                'operator' => [
-                    'name' => "CORE",
-                    'networkNorms' => [
-                        'items' => [
-                            'networknorm' => "GSM (900\/1800)",
-                            'type' => "4G"
-                        ]
-                    ]
-                ],
-            ],
-         ];
-
-        return $toto;
+    public function getOneCountry($id) {
+        return $this->executeScriptCurl("/countries/".$id);
     }
 
     /**
