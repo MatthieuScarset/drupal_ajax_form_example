@@ -188,7 +188,7 @@ class OabExtension extends \Twig_Extension {
         $tree = $menu_tree->transform($tree, $manipulators);
         return $menu_tree->build($tree);
     }
-    
+
   /**
    * Encode un texte avec rawurlencode ( ...les %20 à la place des espaces)
    * @param $url
@@ -319,4 +319,10 @@ class OabExtension extends \Twig_Extension {
     $content = str_replace("</link>", "</a>", $content);
     return $content;
   }
+
+  public function specialCharacters($string) {
+    $cleanString = str_replace('\\', '', $string);
+    return htmlentities($cleanString);
+  }
+
 }
