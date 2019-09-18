@@ -15,14 +15,11 @@ class OblPricesController extends ControllerBase {
 
         $countries = $obl_service->getCountries();
         $zones = $obl_service->getZones();
-        $pass_data = $obl_service->getPassData();
         $title = $config->get('title_label');
-       // kint($countries);
 
         return array(
             '#countries' => $countries,
             '#zones' => $zones,
-            '#pass_data' => $pass_data,
             '#title' => $title,
             '#theme' => 'orange_business_lounge_page_pays',
             '#attached' => [
@@ -41,7 +38,15 @@ class OblPricesController extends ControllerBase {
 
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $unique_zone = $obl_service->getOneZone($id);
-        
+
         return new JsonResponse($unique_zone);
+    }
+
+    public function oblUniqueCountry($id) {
+
+        $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+        $unique_countrie = $obl_service->getOneCountry($id);
+
+        return new JsonResponse($unique_countrie);
     }
 }
