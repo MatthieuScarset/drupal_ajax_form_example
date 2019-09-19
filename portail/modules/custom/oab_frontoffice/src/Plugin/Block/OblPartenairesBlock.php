@@ -27,13 +27,9 @@ class OblPartenairesBlock extends BlockBase {
 
         $block = array();
 
-        $current_block = \Drupal\block\Entity\Block::load('partenairesobl');
-
-        if ($current_block) {
-            $settings = $current_block->get('settings');
-            $content = $settings['content'];
-            $title = $settings['block_title'];
-        }
+        $settings = $this->getConfiguration();
+        $content = $settings['content'];
+        $title = $settings['block_title'];
 
         $block['#markup'] = $content;
         $block['block_title'] = $title;

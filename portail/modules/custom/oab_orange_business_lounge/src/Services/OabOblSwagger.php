@@ -55,6 +55,13 @@ class OabOblSwagger {
         return $data;
     }
 
+    /**
+     * @return mixed
+     */
+
+    public function getOneCountry($id) {
+        return $this->executeScriptCurl("/countries/".$id);
+    }
 
     /**
      * @param $url
