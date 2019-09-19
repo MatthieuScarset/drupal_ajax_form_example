@@ -33,3 +33,9 @@ $query_del->execute();
 $query_del = $connection->delete('config');
 $query_del->condition('name','oab.axiome_settings');
 $query_del->execute();
+
+
+$vocab = \Drupal\taxonomy\Entity\Vocabulary::load("hub");
+if ($vocab) {
+  $vocab->delete();
+}
