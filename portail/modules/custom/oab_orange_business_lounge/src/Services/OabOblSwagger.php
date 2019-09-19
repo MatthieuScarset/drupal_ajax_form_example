@@ -11,11 +11,11 @@ class OabOblSwagger {
 
     private $url_api = '';
     private $title_label = '';
-    private $zone_id = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
     const API_COUNTRIES = '/root_countries?itemsPerPage=300';
+    const  API_OPER_COUNTRIES = '/countries';
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
@@ -44,7 +44,7 @@ class OabOblSwagger {
      * @return mixed
      */
     public function getOneZone($id) {
-        return $this->executeScriptCurl("/zones/".$id);
+      return $this->executeScriptCurl(self::API_ZONE.'/'.$id);
     }
 
     /**
@@ -58,9 +58,15 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-
     public function getOneCountry($id) {
-        return $this->executeScriptCurl("/countries/".$id);
+      return $this->executeScriptCurl(self::API_OPER_COUNTRIES.'/'.$id);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountriesWithOperator () {
+      return $this->executeScriptCurl(self::API_OPER_COUNTRIES);
     }
 
     /**

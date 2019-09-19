@@ -7,7 +7,9 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
         'orange_business_lounge_page_zone' =>
             array(
                 'variables' => array(
-                    'zones' => array()
+                    'zones' => array(),
+                    'countriesWithOperators' => array(),
+                    'mon_form' => array()
                 ),
                 'template' => 'obl_template'
             ),

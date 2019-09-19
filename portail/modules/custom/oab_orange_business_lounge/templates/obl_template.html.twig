@@ -11,38 +11,45 @@
 
     <div class="col-md-9 col-lg-9 col-sm-9 order-2">
 
-        <table border="1" width="100%">
-            <thead style="background: #F6F6F6">
-            <tr>
-                <th scope="col">Destination</th>
-                <th scope="col">Zone</th>
-                <th scope="col">Opérateur</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><span id="emission-appel"></span></td>
-                <td><span id="envoi-sms"></span></td>
-                <td><span id="envoi-mms"></span></td>
-            </tr>
-            </tbody>
-        </table>
+    <table border="1" width="100%">
+      <thead style="background: #F6F6F6">
+      <tr>
+        <th scope="col">Destination</th>
+        <th scope="col">Zone</th>
+        <th scope="col">Opérateur</th>
+      </tr>
+      </thead>
+      <tbody>
 
-    </div>
+      {% for country in countriesWithOperators %}
+        <tr>
+          <td> {{ country['label'] }} </td>
+          <td> {{ country['zoneId']  }} </td>
+
+          <td>
+            {% for myoperator in country['operators'] %}
+              {{ myoperator['name']  }}
+              <br/>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+
+  </div>
 
     <div class="col-md-3 col-lg-3 col-sm-3 order-1">
 
-        <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
-            <h5>Vous avez également les accords et tarifs roaming par pays de destination</h5>
-            <br/>
-            <form action="" class="countries_form_autocomplete" id="form_countries">
-                <input type="text" name="countries_input_autocomplete" id="input_country" class="countries_input_autocomplete" style="width:100%;margin-bottom:20%" />
-                <input type="submit" class="btn btn-primary" id="submit1" style="color:black;width:100%;color:black;border: none;text-align: left;" value="Voir les tarifs" />
-            </form>
-            <br/>
-
-        </div>
+    <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
+      <h5>Vous avez également les accords et tarifs roaming par pays de destination</h5>
+      <br/>
+        {{ mon_form }}
+      <br/>
 
     </div>
+
+  </div>
 
 </div>
