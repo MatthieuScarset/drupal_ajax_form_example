@@ -8,7 +8,7 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class OblPricesController extends ControllerBase {
 
-    public function oblPricePage() {
+    public function oblPricePage($id) {
 
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $config = \Drupal::config(OabOblForm::getConfigName());
@@ -19,6 +19,7 @@ class OblPricesController extends ControllerBase {
 
         return array(
             '#countries' => $countries,
+            '#countrie_id' => $id,
             '#zones' => $zones,
             '#title' => $title,
             '#theme' => 'orange_business_lounge_page_pays',

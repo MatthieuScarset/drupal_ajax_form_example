@@ -46,7 +46,9 @@ function oab_eddy_update_8005() {
     include_once("updates/update_8005.inc");
 }
 
-// Modification des yml et des hooks pour les crons
+/*
+ * Ajout des blocks pour les tarifs roaming (module OAB Business Lounge)
+ */
 function oab_eddy_update_8006() {
     include_once("updates/update_8006.inc");
 }

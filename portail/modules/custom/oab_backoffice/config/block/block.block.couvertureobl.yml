@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: couvertureobl
+theme: theme_boosted
+region: header
+weight: 0
+provider: null
+plugin: obl_couverture_block
+settings:
+  id: obl_couverture_block
+  label: 'Couverture OBL'
+  provider: oab_frontoffice
+  label_display: visible
+  content: 'Découvrez le réseau Orange'
+  content_format: D
+  block_title: 'Couverture mobile d''Orange Business Services'
+visibility: {  }

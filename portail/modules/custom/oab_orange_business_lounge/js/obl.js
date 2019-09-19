@@ -1,9 +1,14 @@
 (function ($, Drupal, Bootstrap, drupalSettings) {
 //      $(document).on("click",".panel-footer", function () {
-    countries_form_autocomplete();
-
+    init_listen_form_countries();
     $(".roaming-infos-container").hide();
     $(".reseau-partenaire-tarif-roaming").hide();
+
+    var pays_id = $('.hidden-countrie-id').text();
+
+    if (pays_id.length) {
+        load_data_from_id_countrie(pays_id);
+    }
 
     $('.get_zone').click(function () {
 
@@ -15,13 +20,41 @@
         var code_zone = data.zone;
         var id_zone = data.zoneId;
 
-        get_countries_with_zone_code(code_zone);
-        get_zone_tarif_info(id_zone);
+
+        update_page_datas_with_selection(code_zone, id_zone);
+        init_reset_autocomplete_field();
 
     });
 
+    function load_data_from_id_countrie(pays_id) {
+        var arr_hydra_member = drupalSettings.arr_contries;
 
-    function get_countries_with_zone_code(code_zone) {
+        arr_hydra_member.forEach(function(item) {
+            if(item.id == pays_id) {
+
+                $('.countries_input_autocomplete').val(item.label);
+
+                update_page_datas_with_selection(item.rootZone.code, item.rootZone.id);
+                load_country_operators(pays_id);
+                update_label_countrie_reseaux(item.label);
+
+                $('#select_pays_zone').val(pays_id);
+            }
+        });
+    }
+
+    function update_page_datas_with_selection (code_zone, id_zone) {
+        set_countries_with_zone_code(code_zone);
+        set_zone_tarif_info(id_zone);
+    }
+
+    function init_reset_autocomplete_field() {
+        $('#select_pays_zone').click(function() {
+            $('.countries_input_autocomplete').val('');
+        });
+    }
+
+    function set_countries_with_zone_code(code_zone) {
 
         var arr_hydra_member = drupalSettings.arr_contries;
 
@@ -31,9 +64,7 @@
             // console.log(element.rootZone.code + " vs " + code_zone + '|' + element.rootZone.code.length + " vs " + code_zone.length);
             return element.rootZone.code === code_zone;
         });
-        /*
-        - Call method sort by country label _A-Z
-         */
+        //Call method sort by country label _A-Z
         listePays = listePays.sort(SortByLabel);
 
         $('#select_pays_zone').html("");
@@ -47,7 +78,11 @@
 
         }
 
-    function update_label_countrie_reseaux() {
+    function update_label_countrie_reseaux(pays_name = '') {
+
+        if (pays_name.length > 0) {
+            $('.roaming-country-selected').text(pays_name);
+        }
         $('#select_pays_zone option').click(function() {
             var selected = $('#select_pays_zone option:selected');
             var countrie_id = (selected.val());
@@ -81,54 +116,32 @@
         });
     }
 
-
-    function countries_form_autocomplete() {
-        var arr_hydra_member = drupalSettings.arr_contries;
-        var countries = [];
-
-        /*
-        - Call method sort by country label _A-Z
-         */
-        arr_hydra_member.sort(SortByLabel);
-
-        arr_hydra_member.forEach(function (item, key) {
-            countries[key] = item.label;
-        });
-
-        listen_form_countries(countries);
-    }
-
-    function listen_form_countries(countries) {
+    function init_listen_form_countries() {
 
         var arr_hydra_member = drupalSettings.arr_contries;
         var pays = '';
-        var id_zone = '';
-        var label_zone = '';
-        var id_country = '';
 
         $('.countries_input_autocomplete').autocomplete({
-            source: countries,
+            source: arr_hydra_member,
             select: function (e, correctValue){
 
-                pays = correctValue.item.value;
-                $('.roaming-country-selected').text(pays);
+                pays = correctValue.item;
+                $('.roaming-country-selected').text(pays.label);
 
-                arr_hydra_member.forEach(function(item) {
-                    if(item.label == pays) {
-                        id_country = item.id;
-                        id_zone = item.rootZone.id;
-                        label_zone = item.rootZone.code;
+                if ($('input[name="country_id"]').length) {
+                    $('input[name="country_id"]').val(pays.id);
+                }
 
-                        get_zone_tarif_info(id_zone);
-                        get_countries_with_zone_code(label_zone);
-                        load_country_operators(id_country);
-                    }
-                });
+                update_page_datas_with_selection(pays.rootZone.code, pays.rootZone.id);
+                load_country_operators(pays.id);
+
+                $('#select_pays_zone option[value='+pays.id+']').attr("selected", "selected");
+
             },
         });
     }
 
-    function get_zone_tarif_info(code_zone) {
+    function set_zone_tarif_info(code_zone) {
 
         $(".roaming-infos-container").show();
         $(".empty-roaming-infos-container").hide();
@@ -173,51 +186,5 @@
         var bName = b.label.toLowerCase();
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
-
-
-
-    /*
-    - obl_template.html.twig return tab of countries accords roaming
-     */
-    $('#form_countries').submit(function(e) {
-
-        e.preventDefault();
-
-
-        var arr_hydra_member = drupalSettings.arr_contries;
-        var my_country = $('#input_country').val();
-
-        console.log(my_country);
-
-
-
-        $.each(arr_hydra_member, function(i, v) {
-            if (v.label == my_country) {
-                /**
-                 * somme request
-                 */
-            }
-        });
-
-       /* $.ajax({
-            url: '/oblGetOneZone/'+code_zone,
-            type: 'GET',
-            success: function(result) {
-
-                result.roamingChargesToZones.forEach(function(item) {
-                    if (item.zoneId == code_zone) {
-                        $('#emission-appel').text(item.calling);
-                        $('#envoi-sms').text(item.sendingSms);
-                        $('#envoi-mms').text(item.sendingMms);
-                    }
-                });
-
-            }
-        });*/
-
-    });
-
-
-
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
