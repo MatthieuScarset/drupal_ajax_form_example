@@ -166,18 +166,6 @@
             }
         });
     }
-        /*
-        $('#select_pays_zone')
-            .fadeOut(1500, function () {
-                $('#select_pays_zone').html("");
-                listePays.forEach(function(pays) {
-                    $('#select_pays_zone').append('<option value="' + pays.id + '">' + pays.label + '</option>');
-
-                });
-            })
-            .fadeIn(1500);
-      */
-
 
 
     //This function will sort array

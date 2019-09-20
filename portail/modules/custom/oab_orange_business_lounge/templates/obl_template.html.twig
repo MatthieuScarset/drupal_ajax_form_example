@@ -4,52 +4,47 @@
     </a>
 </div>
 
+<br/>
 
-
-<br/><br/>
 <div class="container">
 
     <div class="col-md-9 col-lg-9 col-sm-9 order-2">
 
-    <table border="1" width="100%">
-      <thead style="background: #F6F6F6">
-      <tr>
-        <th scope="col">Destination</th>
-        <th scope="col">Zone</th>
-        <th scope="col">Opérateur</th>
-      </tr>
-      </thead>
-      <tbody>
-
-      {% for country in countriesWithOperators %}
+      <table border="1" width="100%">
+        <thead style="background: #F6F6F6">
         <tr>
-          <td> {{ country['label'] }} </td>
-          <td> {{ country['zoneId']  }} </td>
-
-          <td>
-            {% for myoperator in country['operators'] %}
-              {{ myoperator['name']  }}
-              <br/>
-            {% endfor %}
-          </td>
+          <th scope="col">Destination</th>
+          <th scope="col">Zone <a href="#footnote-1"><sup>(1)</sup></a></th>
+          <th scope="col">Opérateur</th>
         </tr>
-      {% endfor %}
+        </thead>
 
-      </tbody>
-    </table>
+        <tbody>
+        {% for country in countriesWithOperators %}
+          <tr>
+            <td> {{ country['label'] }} </td>
+            <td> {{ country['zoneId']  }} </td>
 
-  </div>
-
-    <div class="col-md-3 col-lg-3 col-sm-3 order-1">
-
-    <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
-      <h5>Vous avez également les accords et tarifs roaming par pays de destination</h5>
-      <br/>
-        {{ mon_form }}
-      <br/>
+            <td>
+              {% for myoperator in country['operators'] %}
+                {{ myoperator['name']  }}
+                <br/>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
 
     </div>
 
-  </div>
+    <div class="col-md-3 col-lg-3 col-sm-3 order-1">
+      <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
+          {{ mon_form }}
+      </div>
+    </div>
 
 </div>
+
+<br/>
+<p id="footnote-1">(1) Here is my first footnote.</p>

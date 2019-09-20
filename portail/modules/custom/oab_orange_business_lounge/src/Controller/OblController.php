@@ -13,13 +13,16 @@ class OblController extends ControllerBase {
         $countries = $obl_service->getCountries();
 
 
-      /*$countriesWithoutOperator = $obl_service->getCountriesWithOperator();
+      $countriesWithoutOperator = $obl_service->getCountriesWithOperator();
 
+      $i = 0;
       foreach ($countriesWithoutOperator['items'] as $tab) {
         $countriesWithOperators[] =  $obl_service->getOneCountry($tab['id']);
-      }*/
+        if (++$i > 20) break;
+      }
 
 
+      /*
       $countriesWithOperators = [[
                                    'id' => 129,
                                    'slug' => "afghanistan",
@@ -34,8 +37,25 @@ class OblController extends ControllerBase {
                                        'id' => 501,
                                        'name' => "MTN Afghanistan (Areeba)",
                                      ],
-                                   ]
+                                   ],
+                                   ],
+                                   [
+                                   'id' => 150,
+                                   'slug' => "mexique",
+                                   'label' => "Mexique",
+                                   'zoneId' => 36,
+                                   'operators' => [
+                                      [
+                                        'id' => 4,
+                                        'name' => "AFGHAN WIRELESS COMMUNICATION COMPANY"
+                                      ],
+                                      [
+                                        'id' => 501,
+                                        'name' => "MTN Afghanistan (Areeba)",
+                                      ],
+                                    ]
                                  ]];
+      */
 
       $mon_form = \Drupal::formBuilder()->getForm(SearchCountryForm::class);
 

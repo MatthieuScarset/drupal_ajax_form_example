@@ -26,7 +26,14 @@ class SearchCountryForm extends FormBase {
     ];
 
     $form['actions'] = ['#type' => 'actions'];
-    $form['actions']['submit'] = ['#type' => 'submit', '#value' => 'Voir les tarifs'];
+    $form['actions']['submit'] = [
+      '#type' => 'submit',
+      '#value' => 'Voir les tarifs',
+      '#attributes' => [
+        'style' => array('color:black; border:0; text-align:left;'),
+        'class' => array('btn btn-primary btn-block')
+      ],
+    ];
 
     return $form;
   }
