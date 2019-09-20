@@ -9,7 +9,7 @@ use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 
 class OabOblSwagger {
 
-    private $url_api = '';
+    private $urlApi = '';
     private $title_label = '';
 
     const API_ZONE = "/zones";
@@ -19,7 +19,7 @@ class OabOblSwagger {
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
-        $this->url_api = $config->get('url_api');
+        $this->urlApi = $config->get('url_api');
         $this->title_label = $config->get('title_label');
     }
 
@@ -27,7 +27,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountries () {
+    public function getCountries() {
         $data = $this->executeScriptCurl(self::API_COUNTRIES);
         return $data;
     }
@@ -35,7 +35,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getZones () {
+    public function getZones() {
         $data = $this->executeScriptCurl(self::API_ZONE);
         return $data;
     }
@@ -50,7 +50,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getPassData () {
+    public function getPassData() {
         $data = $this->executeScriptCurl(self::API_PASS_DATA);
         return $data;
     }
@@ -65,7 +65,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountriesWithOperator () {
+    public function getCountriesWithOperator() {
       return $this->executeScriptCurl(self::API_OPER_COUNTRIES);
     }
 
@@ -86,7 +86,7 @@ class OabOblSwagger {
     private function executeScriptCurl($domaine, $url = null) {
 
         if ($url === null) {
-            $url = $this->url_api;
+            $url = $this->urlApi;
         }
         $ch = curl_init($url . $domaine);
         // Will return the response, if false it print the response

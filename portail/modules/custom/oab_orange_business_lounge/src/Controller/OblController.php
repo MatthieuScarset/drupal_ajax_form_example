@@ -12,57 +12,20 @@ class OblController extends ControllerBase {
         $zones = $obl_service->getZones();
         $countries = $obl_service->getCountries();
 
-
-      $countriesWithoutOperator = $obl_service->getCountriesWithOperator();
+      $countries_without_operator = $obl_service->getCountriesWithOperator();
 
       $i = 0;
-      foreach ($countriesWithoutOperator['items'] as $tab) {
-        $countriesWithOperators[] =  $obl_service->getOneCountry($tab['id']);
-        if (++$i > 20) break;
+      foreach ($countries_without_operator['items'] as $tab) {
+        $countries_without_operator[] =  $obl_service->getOneCountry($tab['id']);
+        if (++$i > 30) break;
       }
-
-
-      /*
-      $countriesWithOperators = [[
-                                   'id' => 129,
-                                   'slug' => "afghanistan",
-                                   'label' => "Afghanistan",
-                                   'zoneId' => 36,
-                                   'operators' => [
-                                     [
-                                       'id' => 4,
-                                       'name' => "AFGHAN WIRELESS COMMUNICATION COMPANY"
-                                     ],
-                                     [
-                                       'id' => 501,
-                                       'name' => "MTN Afghanistan (Areeba)",
-                                     ],
-                                   ],
-                                   ],
-                                   [
-                                   'id' => 150,
-                                   'slug' => "mexique",
-                                   'label' => "Mexique",
-                                   'zoneId' => 36,
-                                   'operators' => [
-                                      [
-                                        'id' => 4,
-                                        'name' => "AFGHAN WIRELESS COMMUNICATION COMPANY"
-                                      ],
-                                      [
-                                        'id' => 501,
-                                        'name' => "MTN Afghanistan (Areeba)",
-                                      ],
-                                    ]
-                                 ]];
-      */
 
       $mon_form = \Drupal::formBuilder()->getForm(SearchCountryForm::class);
 
         return array(
             '#zones' => $zones,
             '#mon_form' => $mon_form,
-            '#countriesWithOperators' => $countriesWithOperators,
+            '#countriesWithOperators' => $countries_without_operator,
             '#theme' => 'orange_business_lounge_page_zone',
             '#attached' => [
                 'library' => [

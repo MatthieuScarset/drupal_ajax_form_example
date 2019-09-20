@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 class SearchCountryForm extends FormBase {
 
 
-  public function buildForm (array $form, FormStateInterface $form_state, $extra = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
 
     $form['country_autocomplete'] = [
       '#type' => 'textfield',
@@ -48,7 +48,7 @@ class SearchCountryForm extends FormBase {
    * @return string
    *   The unique string identifying the form.
    */
-  public function getFormId () {
+  public function getFormId() {
       return 'search_country_form';
   }
 
@@ -60,7 +60,7 @@ class SearchCountryForm extends FormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function submitForm (array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     if ($form_state->hasValue('country_id')
         && count($form_state->getErrors()) === 0) {
       $country_id = $form_state->getValue('country_id', null);
