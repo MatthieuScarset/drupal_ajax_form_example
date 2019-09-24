@@ -16,16 +16,13 @@ class OblController extends ControllerBase {
 
       $i = 0;
       foreach ($countries_without_operator['items'] as $tab) {
-        $countries_without_operator[] =  $obl_service->getOneCountry($tab['id']);
+        $countries_with_operator[] =  $obl_service->getOneCountry($tab['id']);
         if (++$i > 30) break;
       }
 
-      $mon_form = \Drupal::formBuilder()->getForm(SearchCountryForm::class);
-
         return array(
             '#zones' => $zones,
-            '#mon_form' => $mon_form,
-            '#countriesWithOperators' => $countries_without_operator,
+            '#countriesWithOperators' => $countries_with_operator,
             '#theme' => 'orange_business_lounge_page_zone',
             '#attached' => [
                 'library' => [

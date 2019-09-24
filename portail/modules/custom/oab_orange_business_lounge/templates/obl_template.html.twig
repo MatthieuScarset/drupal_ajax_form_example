@@ -38,10 +38,8 @@
 
     </div>
 
-    <div class="col-md-3 col-lg-3 col-sm-3 order-1">
-      <div class="container obl-search-accord-by-country" style="background-color:#DDDDDD;color:black;padding:15px;margin-bottom:50%;">
-          {{ mon_form }}
-      </div>
+    <div>
+      {{ drupal_entity('block','searchaccordspricebycountryobl', check_access=false) }}
     </div>
 
 </div>
