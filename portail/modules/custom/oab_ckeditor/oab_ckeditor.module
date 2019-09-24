@@ -189,9 +189,11 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
         $attachments['#attached']['drupalSettings']['oab_templating_components'] = $component_list;
 
         // regions et pays pour le plugin offices_map
-                $attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
-                $attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
-                $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
+        $attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
+        $attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
+        $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
+        $attachments['#attached']['drupalSettings']['oab_ckeditor']['path'] = drupal_get_path('module','oab_ckeditor');
+
     }
 }
 
