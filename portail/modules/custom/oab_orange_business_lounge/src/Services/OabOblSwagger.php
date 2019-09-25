@@ -35,8 +35,8 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getZones () {
-        $data = $this->executeScriptCurl(self::API_ZONE);
+    public function getZones ($display_message = false) {
+        $data = $this->executeScriptCurl(self::API_ZONE, $display_message);
         return $data;
     }
 
@@ -77,7 +77,7 @@ class OabOblSwagger {
      * @param null $url
      * @return bool|mixed
      */
-    private function executeScriptCurl($domaine, $url = null) {
+    private function executeScriptCurl($domaine, $display_message = false, $url = null) {
 
         if ($url === null) {
             $url = $this->url_api;
@@ -93,12 +93,16 @@ class OabOblSwagger {
 
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
-                    drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                    if ($display_message) {
+                        drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                    }
                     $json_ret = json_decode($ret_value, true);
                     break;
 
                 default:
-                    drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
+                    if($display_message) {
+                        drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
+                    }
                     $json_ret = false;
             }
         }

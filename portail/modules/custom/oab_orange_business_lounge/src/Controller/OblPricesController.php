@@ -2,6 +2,7 @@
 namespace Drupal\oab_orange_business_lounge\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\file\Entity\File;
 use Drupal\migrate_plus\Plugin\migrate_plus\data_parser\Json;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Zend\Diactoros\Response\JsonResponse;
@@ -13,14 +14,22 @@ class OblPricesController extends ControllerBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $config = \Drupal::config(OabOblForm::getConfigName());
 
+        $zones_image = $config->getRawData()['zones_image'];
+
+        foreach ($zones_image as $key => $image) {
+            $file = \Drupal\file\Entity\File::load($image);
+            $zones_image[$key] = file_create_url($file->getFileUri());
+        }
+
         $countries = $obl_service->getCountries();
-        $zones = $obl_service->getZones();
+        $zones = $obl_service->getZones(false);
         $title = $config->get('title_label');
 
         return array(
             '#countries' => $countries,
             '#countrie_id' => $id,
             '#zones' => $zones,
+            '#zones_image' => $zones_image,
             '#title' => $title,
             '#theme' => 'orange_business_lounge_page_pays',
             '#attached' => [
