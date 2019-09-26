@@ -32,6 +32,11 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
                         type: 'text',
                         id: 'css_class',
                         label: editor.lang.videoembed.input_css
+                    },
+                    {
+                      type: 'checkbox',
+                      id: 'is_modal',
+                      label: editor.lang.videoembed.is_modal
                     }
                 ]
             }
@@ -40,7 +45,9 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
             var
                     dialog = this,
                     div_container = new CKEDITOR.dom.element('div'),
-                    css = 'videoEmbed';
+                    css = 'videoEmbed',
+                    is_modal = dialog.getValueOf('tab-basic', 'is_modal');
+
             // Set custom css class name
             if (dialog.getValueOf('tab-basic', 'css_class').length > 0) {
                 css = dialog.getValueOf('tab-basic', 'css_class');
@@ -51,13 +58,57 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
             var url = detect(dialog.getValueOf('tab-basic', 'url_video'));
             // Create iframe with specific url
             if (url.length > 1) {
-                var iframe = new CKEDITOR.dom.element.createFromHtml('<iframe frameborder="0" width="560" height="349" src="' + url + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
-                div_container.append(iframe);
-                editor.insertElement(div_container);
+              let html = "";
+              if (is_modal) {
+                html = htmlWithModal(url);
+              } else {
+                html = htmlWithoutModal(url);
+              }
+              div_container.appendHtml(html);
+              editor.insertElement(div_container);
             }
         }
     };
 });
+
+function htmlWithModal(url) {
+  let html = "";
+  let random_numb =  Math.random();
+  random_numb = Math.floor(random_numb * 10000);
+  let randomizedId = "embedVideoModal-" + random_numb;
+  console.log(drupalSettings);
+  let nom_image = "";
+  nom_image = '/'+ drupalSettings.oab_ckeditor.path + '/js/plugins/videoembed/icons/play_icon_banner.png';
+
+  html = "<!-- Button trigger modal -->" +
+    "<div class=\"row\">" +
+    "     <button type=\"button\" class=\"btn btn-modal-video\" data-toggle=\"modal\" data-target=\"#" + randomizedId + "\">" +
+    "         <img src=\""+ nom_image + "\" aria-hidden=\"true\"" +
+    "     </button>" +
+    "</div>" +
+
+    " <div class=\"modal fade ckeditor-embed-video\" id=\"" + randomizedId + "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\n" +
+    "     aria-hidden=\"true\">" +
+    "  <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">" +
+    "      <div class=\"text-right\">" +
+    "          <button type=\"button\" class=\"btn btn-primary btn-rounded btn-md ml-4\"" +
+    "              data-dismiss=\"modal\">Close</button>" +
+    "     </div>" +
+    "      <div class=\"modal-body mb-0 p-0\">" +
+    "        <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">" +
+                 htmlWithoutModal(url)+
+    "        </div>" +
+    "      </div>" +
+    "  </div>" +
+    "</div>";
+
+  return html;
+}
+
+function htmlWithoutModal(url) {
+  return '<iframe frameborder="0" width="560" height="349" src="' + url + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+}
+
 
 // Detect platform and return video ID
 function detect(url) {

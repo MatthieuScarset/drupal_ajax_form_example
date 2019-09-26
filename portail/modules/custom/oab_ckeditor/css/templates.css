@@ -4,7 +4,7 @@
 .obs_template.three_columns p,
 .obs_template.four_columns p,
 .obs_template.two_columns p
-{	
+{
   padding: 10px;
 }
 
@@ -239,3 +239,10 @@
     display:         flex;
 }
 
+.ckeditor-embed-video .modal-lg {
+  width: 900px; /* remise modal à taille large (bootstrap original) */
+}
+
+.ckeditor-embed-video .btn-primary {
+  margin-right: 0rem;
+}

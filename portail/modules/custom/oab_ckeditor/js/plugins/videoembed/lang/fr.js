@@ -3,6 +3,7 @@ CKEDITOR.plugins.setLang('videoembed', 'fr', {
     button: 'Vidéo intégrée',
     onlytxt: 'Uniquement les URLs de Youtube, Vimeo & Dailymotion',
     validatetxt: 'Le champ URL ne doit pas être vide!',
-    input_css: 'Classe CSS personnalisée :'
+    input_css: 'Classe CSS personnalisée :',
+    is_modal: 'Insérer la vidéo dans une modal'
 });
 
