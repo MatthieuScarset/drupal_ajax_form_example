@@ -2908,3 +2908,6 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-left: 10px !important;
 }
 
+.btn .btn-lg .btn-modal-video {
+  font-size: 8rem;
+}
