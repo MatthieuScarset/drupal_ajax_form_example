@@ -321,8 +321,8 @@ class OabExtension extends \Twig_Extension {
   }
 
   public function specialCharacters($string) {
-    $cleanString = str_replace('\\', '', $string);
-    return htmlentities($cleanString);
+    $clean_string = str_replace('\\', '', $string);
+    return htmlentities($clean_string);
   }
 
 }
