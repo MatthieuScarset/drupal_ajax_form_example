@@ -9,9 +9,8 @@ use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 
 class OabOblSwagger {
 
-    private $url_api = '';
-    private $title_label = '';
-    private $zone_id = '';
+    private $urlApi = '';
+    private $titleLabel = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
@@ -19,8 +18,8 @@ class OabOblSwagger {
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
-        $this->url_api = $config->get('url_api');
-        $this->title_label = $config->get('title_label');
+        $this->urlApi = $config->get('url_api');
+        $this->titleLabel = $config->get('title_label');
     }
 
 
@@ -35,7 +34,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getZones ($display_message = false) {
+    public function getZones($display_message = false) {
         $data = $this->executeScriptCurl(self::API_ZONE, $display_message);
         return $data;
     }
@@ -100,7 +99,7 @@ class OabOblSwagger {
                     break;
 
                 default:
-                    if($display_message) {
+                    if ($display_message) {
                         drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
                     }
                     $json_ret = false;
