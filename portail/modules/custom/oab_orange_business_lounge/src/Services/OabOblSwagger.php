@@ -79,7 +79,7 @@ class OabOblSwagger {
     private function executeScriptCurl($domaine, $display_message = false, $url = null) {
 
         if ($url === null) {
-            $url = $this->url_api;
+            $url = $this->urlApi;
         }
         $ch = curl_init($url . $domaine);
         // Will return the response, if false it print the response
