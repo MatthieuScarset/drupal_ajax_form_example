@@ -14,7 +14,7 @@ oab_obl_settings:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblController::oblPage'
     _title: 'obl page'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access content'
 
 oab_obl_country_settings:
   path: '/reseau-mobile/tarifs-roaming/{id}'
@@ -22,19 +22,19 @@ oab_obl_country_settings:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblPricePage'
     id: null
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access content'
 
 oab_obl_unique_zone_settings:
   path: '/oblGetOneZone/{id}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueZone'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access content'
 
 oab_obl_unique_country_settings:
   path: '/oblGetOneCountry/{id}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueCountry'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access content'
 
