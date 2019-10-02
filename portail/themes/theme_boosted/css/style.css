@@ -2910,9 +2910,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .get_zone {
     cursor: pointer;
-    /* Style the panel */
     font-weight: normal;
-    font-family: HelveticaNeue75BoldBold;
 }
 
 .oblHeaderZone {
