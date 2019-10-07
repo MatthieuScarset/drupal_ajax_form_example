@@ -2914,7 +2914,8 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 .oblHeaderZone {
-    font-size: 17px;
+    font-size: 14px;
+    padding-left: 5px;
 }
 
 .oblFooterZone {
@@ -2922,8 +2923,9 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding-top: 10px;
 }
 
-.obl-block-countries {
+.global-obl-container .obl-block-countries  {
     background-color: #ddd;
+    padding: 5px 0;
 }
 
 /* Style the active class, and buttons on mouse-over */
