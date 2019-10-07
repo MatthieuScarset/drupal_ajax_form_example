@@ -1,0 +1,22 @@
+oab.orange_business_lounge_settings:
+  title: Orange Business Lounge settings
+  route_name: oab_orange_business_lounge_settings
+  parent: oab.settings
+  description: 'Configure obl settings'
+  weight: -20
+
+
+oab.orange_business_lounge_page_zone:
+  title: Orange roaming by zone
+  route_name: oab_obl_settings
+  parent: oab.orange_business_lounge_settings
+  description: 'Configure obl settings'
+  weight: -20
+
+
+oab.orange_business_lounge_page_country:
+  title: Orange roaming by country
+  route_name: oab_obl_country_settings
+  parent: oab.orange_business_lounge_settings
+  description: 'Configure obl settings'
+  weight: -20

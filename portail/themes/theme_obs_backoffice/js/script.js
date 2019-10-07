@@ -27,4 +27,4 @@
         oab_backoffice_subhome_entity_form();
     });
 
-})(jQuery, Drupal);
+})(window.jQuery, window.Drupal);
