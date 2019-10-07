@@ -16,6 +16,7 @@ class OabOblSwagger {
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
     const API_COUNTRIES = '/root_countries?itemsPerPage=300';
     const  API_OPER_COUNTRIES = '/countries';
+    const API_TECHNOLOGIES = '/network-types';
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
@@ -67,6 +68,53 @@ class OabOblSwagger {
      */
     public function getCountriesWithOperator() {
       return $this->executeScriptCurl(self::API_OPER_COUNTRIES);
+    }
+
+  /**
+      * @return bool|mixed
+      */
+    public function getTechnologies() {
+      return $this->executeScriptCurl(self::API_TECHNOLOGIES);
+    }
+
+
+    public function extractingUsefulData() {
+
+      $i = 1; /*********************** A suup ********/
+      $countries_with_operator = [];
+      $countries_without_operator = $this->getCountriesWithOperator();
+      $my_data = [];
+      $network_norms = array();
+
+      foreach ($countries_without_operator['items'] as $tab) {
+        $country_data = $this->getOneCountry($tab['id']);
+
+        $my_data['label'] = $country_data['label'];
+        $my_data['zoneId'] = $country_data['zoneId'];
+
+        foreach ($country_data['operators'] as $key => $val) {
+          $my_data['operators'][$key] = $val['name'];
+          $network_norms = $val['networkNorms'];
+        }
+
+        foreach ($network_norms as $key => $val) {
+          $types[$key] = $val['type'];
+        }
+
+        foreach ($types as $key => $val) {
+          $my_data['techno'][$key] = $val['name'];
+        }
+
+        $countries_with_operator[] = $my_data;
+
+       /*********************** A suup ********/
+        if (++$i > 70) {
+          return $countries_with_operator;
+          break;
+        }
+        //return $countries_with_operator;
+      }
+
     }
 
     /**

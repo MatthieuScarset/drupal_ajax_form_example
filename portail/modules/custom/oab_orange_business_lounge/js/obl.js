@@ -175,4 +175,37 @@
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
+
+  /**
+   * Page Accords-roaming
+   */
+  $('#select_technologie_obl').html("");
+  var arr_technologies = drupalSettings.arr_technologies_obl;
+  //console.log(arr_technologies);
+    if(arr_technologies.length != 0) {
+      $.each(arr_technologies, function (index, value) {
+        $('#select_technologie_obl').append('<option value="' + value.id + '">' + value.name + '</option>');
+      });
+
+      $('#select_technologie_obl').on('change',function(){
+        var optionText = $("#select_technologie_obl option:selected").text();
+
+        /**
+         * API countries + op
+         */
+        var arr_country_with_op = drupalSettings.arr_country_with_op;
+        $('#table-accord-romaing').html('');
+        $.map(arr_country_with_op, function(value) {
+          $.map(value.techno, function(val) {
+            if(val === optionText) {
+              $('#table-accord-romaing').append('<tr><td>'+value.label+'</td><td>'+value.zoneId+'</td><td>'+value.operators+'</td></tr>');
+            }
+          });
+        });
+
+      });
+    }
+
+
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
