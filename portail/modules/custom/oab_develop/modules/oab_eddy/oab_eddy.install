@@ -52,3 +52,10 @@ function oab_eddy_update_8005() {
 function oab_eddy_update_8006() {
     include_once("updates/update_8006.inc");
 }
+
+/*
+ * Modifications taille field title du Caroussel dans la subhome presse
+ */
+function oab_eddy_update_8007() {
+    include_once("updates/update_8007.inc");
+}
