@@ -188,24 +188,29 @@
       });
 
       $('#select_technologie_obl').on('change',function(){
-        var optionText = $("#select_technologie_obl option:selected").text();
+        var option_select_techno = $("#select_technologie_obl option:selected").text();
 
         /**
          * API countries + op
          */
         var arr_country_with_op = drupalSettings.arr_country_with_op;
-        $('#table-accord-romaing').html('');
-        $.map(arr_country_with_op, function(value) {
-          $.map(value.techno, function(val) {
-            if(val === optionText) {
-              $('#table-accord-romaing').append('<tr><td>'+value.label+'</td><td>'+value.zoneId+'</td><td>'+value.operators+'</td></tr>');
-            }
-          });
+        $('#table-accord-romaing tbody').html('');
+        $.map(arr_country_with_op, function(country) {
+            $.map(country.networks, function(index, network) {
+              if(network === option_select_techno) {
+                let ma_liste_des_operateurs = "";
+                $.map(index, function (i) {
+                  if (ma_liste_des_operateurs.length != 0) {
+                    ma_liste_des_operateurs += '<br />';
+                  }
+                  ma_liste_des_operateurs += i;
+                });
+                  $('#table-accord-romaing tbody').append('<tr><td>'+country.label+'</td><td>'+country.zoneId+'</td><td>'+ ma_liste_des_operateurs +'</td></tr>');
+              }
+            });
         });
-
       });
     }
-
 
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);

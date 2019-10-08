@@ -14,7 +14,7 @@ class OblController extends ControllerBase {
         $zones = $obl_service->getZones();
         $countries = $obl_service->getCountries();
 
-        $countries_with_operator = $obl_service->extractingUsefulData();
+        $countries_with_operator = $obl_service->extractingUsefulDataFromApi();
         $technologies = $obl_service->getTechnologies();
 
         return array(

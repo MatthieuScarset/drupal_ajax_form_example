@@ -66,7 +66,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountriesWithOperator() {
+    public function getCountriesWithoutOperator() {
       return $this->executeScriptCurl(self::API_OPER_COUNTRIES);
     }
 
@@ -78,43 +78,43 @@ class OabOblSwagger {
     }
 
 
-    public function extractingUsefulData() {
+    public function extractingUsefulDataFromApi() {
 
-      $i = 1; /*********************** A suup ********/
+      /*********************** A suup ********/
+      $i = 1;
+
       $countries_with_operator = [];
-      $countries_without_operator = $this->getCountriesWithOperator();
-      $my_data = [];
-      $network_norms = array();
+      $countries_without_operator = $this->getCountriesWithoutOperator();
 
       foreach ($countries_without_operator['items'] as $tab) {
+        $my_data = [];
+
         $country_data = $this->getOneCountry($tab['id']);
-
-        $my_data['label'] = $country_data['label'];
-        $my_data['zoneId'] = $country_data['zoneId'];
-
-        foreach ($country_data['operators'] as $key => $val) {
-          $my_data['operators'][$key] = $val['name'];
-          $network_norms = $val['networkNorms'];
+        if (isset($country_data['operators'])) {
+          foreach ($country_data['operators'] as $operator) {
+            $operator_name = $operator['name'];
+            foreach ($operator['networkNorms'] as $network_norms) {
+              if (!isset($my_data[$network_norms['type']['name']])) {
+                $my_data[$network_norms['type']['name']] = [];
+              }
+              $my_data[$network_norms['type']['name']][] = $operator_name;
+            }
+          }
         }
 
-        foreach ($network_norms as $key => $val) {
-          $types[$key] = $val['type'];
-        }
-
-        foreach ($types as $key => $val) {
-          $my_data['techno'][$key] = $val['name'];
-        }
-
-        $countries_with_operator[] = $my_data;
+        $countries_with_operator[] = [
+          'label' => $country_data['label'],
+          'zoneId' => $country_data['zoneId'],
+          'networks' => $my_data
+        ];
 
        /*********************** A suup ********/
-        if (++$i > 70) {
+        if (++$i > 3) {
           return $countries_with_operator;
-          break;
         }
-        //return $countries_with_operator;
       }
 
+      //return $countries_with_operator;
     }
 
     /**
