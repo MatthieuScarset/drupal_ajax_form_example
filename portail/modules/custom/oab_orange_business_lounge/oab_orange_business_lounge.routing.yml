@@ -9,11 +9,11 @@ oab_orange_business_lounge_settings:
     _permission: 'administer site configuration'
 
 oab_obl_settings:
-  path: '/accords-roaming'
+  path: '/reseau-mobile/accords-roaming'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblController::oblPage'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'access content'
 
 oab_obl_country_settings:
   path: '/reseau-mobile/tarifs-roaming/{id}'
