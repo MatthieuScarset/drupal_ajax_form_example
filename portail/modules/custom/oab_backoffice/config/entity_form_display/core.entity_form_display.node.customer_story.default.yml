@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_insight_type
     - field.field.node.customer_story.field_job_profile
+    - field.field.node.customer_story.field_local_nav
     - field.field.node.customer_story.field_market_segment
     - field.field.node.customer_story.field_meta_description
     - field.field.node.customer_story.field_meta_title
@@ -71,6 +72,7 @@ third_party_settings:
         - field_highlight
         - field_top_zone
         - field_top_zone_background
+        - field_local_nav
         - field_content
         - field_file
         - field_visual
@@ -180,7 +182,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
-    weight: 8
+    weight: 9
     settings:
       rows: 5
       placeholder: ''
@@ -225,7 +227,7 @@ content:
     type: datetime_default
     region: content
   field_file:
-    weight: 9
+    weight: 10
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
@@ -282,6 +284,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_local_nav:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
     region: content
   field_meta_description:
     weight: 6
@@ -401,7 +411,7 @@ content:
     region: content
   field_visual:
     type: entity_browser_entity_reference
-    weight: 10
+    weight: 11
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -414,7 +424,7 @@ content:
     third_party_settings: {  }
     region: content
   field_visual_tile:
-    weight: 11
+    weight: 12
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
