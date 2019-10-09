@@ -47,7 +47,7 @@ function oab_eddy_update_8005() {
 }
 
 /*
- * Ajout du field Top Zone et Top zone mobile dans la structure des cases study
+ * Ajout du field Top Zone et Top zone mobile + local nav dans la structure des cases study
  */
 function oab_eddy_update_8007() {
     include_once("updates/update_8007.inc");
