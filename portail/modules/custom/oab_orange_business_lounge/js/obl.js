@@ -168,49 +168,59 @@
     }
 
 
-    //This function will sort array
+    //This function will sort array by Label
     function SortByLabel(a, b) {
         var aName = a.label.toLowerCase();
         var bName = b.label.toLowerCase();
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
+    //This function will sort array by ID
+    function SortById(a, b) {
+      var aName = a.id;
+      var bName = b.id;
+      return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
+    }
 
-  /**
-   * Page Accords-roaming
-   */
-  $('#select_technologie_obl').html("");
-  var arr_technologies = drupalSettings.arr_technologies_obl;
-  //console.log(arr_technologies);
-    if(arr_technologies.length != 0) {
-      $.each(arr_technologies, function (index, value) {
-        $('#select_technologie_obl').append('<option value="' + value.id + '">' + value.name + '</option>');
+
+    /**
+     * Page Accords-roaming
+     */
+    $('#ul_technologie_obl').html("");
+    var arr_technologies = drupalSettings.arr_technologies_obl;
+    var arr_technologies_sort = arr_technologies.sort(SortById);
+
+    if (arr_technologies_sort.length != 0) {
+      $.each(arr_technologies_sort, function (index, value) {
+        $('#ul_technologie_obl').append('<li value="' + value.name + '">' + 'couverture ' + value.name + '</li>');
       });
-
-      $('#select_technologie_obl').on('change',function(){
-        var option_select_techno = $("#select_technologie_obl option:selected").text();
-
+      $('#ul_technologie_obl li').click(function () {
+        var li_select_techno = $(this).attr('value');
         /**
          * API countries + op
          */
         var arr_country_with_op = drupalSettings.arr_country_with_op;
         $('#table-accord-romaing tbody').html('');
-        $.map(arr_country_with_op, function(country) {
-            $.map(country.networks, function(index, network) {
-              if(network === option_select_techno) {
-                let ma_liste_des_operateurs = "";
-                $.map(index, function (i) {
-                  if (ma_liste_des_operateurs.length != 0) {
-                    ma_liste_des_operateurs += '<br />';
-                  }
-                  ma_liste_des_operateurs += i;
-                });
-                  $('#table-accord-romaing tbody').append('<tr><td>'+country.label+'</td><td>'+country.zoneId+'</td><td>'+ ma_liste_des_operateurs +'</td></tr>');
-              }
-            });
+        $.map(arr_country_with_op, function (country) {
+          $.map(country.networks, function (index, network) {
+            if (network === li_select_techno) {
+              var ma_liste_des_operateurs = "";
+              $.map(index, function (i) {
+                if (ma_liste_des_operateurs.length != 0) {
+                  ma_liste_des_operateurs += '<hr class="reseau-mobile-accords-roaming" />';
+                }
+                ma_liste_des_operateurs += i;
+              });
+              $('#table-accord-romaing tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
+            }
+          });
         });
       });
     }
+
+    $(function() {
+      $('#ul_technologie_obl li').trigger('click');
+    });
 
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);

@@ -3030,6 +3030,12 @@ img.image_pannel{
     font-weight: bold;
 }
 
+hr.reseau-mobile-accords-roaming {
+  border-top: 1px solid black;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
 @media(max-width: 767px) {
     .roaming-infos-container {
         width: auto;

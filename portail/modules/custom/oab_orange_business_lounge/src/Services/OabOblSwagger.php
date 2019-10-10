@@ -109,7 +109,7 @@ class OabOblSwagger {
         ];
 
        /*********************** A suup ********/
-        if (++$i > 3) {
+        if (++$i > 50) {
           return $countries_with_operator;
         }
       }
