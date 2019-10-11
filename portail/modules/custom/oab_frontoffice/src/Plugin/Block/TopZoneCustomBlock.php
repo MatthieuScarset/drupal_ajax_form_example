@@ -30,15 +30,18 @@ class TopZoneCustomBlock extends BlockBase {
         $settings = $this->configuration;
         $file = File::load($settings['block_image']);
 
+        if ($file != null) {
+          $url = ImageStyle::load('top_zone_big')->buildUrl($file->getFileUri());
+          $url = file_url_transform_relative($url);
 
-        $url = ImageStyle::load('top_zone_big')->buildUrl($file->getFileUri());
-        $url = file_url_transform_relative($url);
+          $block['block_title_custom'] = $settings['block_title_custom']['value'];
+          $block['block_bgimage_url'] = $url;
 
-
-        $block['block_title_custom'] = $settings['block_title_custom']['value'];
-        $block['block_bgimage_url'] = $url;
-
+        } else {
+          return $block;
+        }
         return $block;
+
     }
 
 
@@ -64,7 +67,7 @@ class TopZoneCustomBlock extends BlockBase {
             '#required' => true,
             '#upload_location' => 'public://',
         ];
-        
+
 
         return $form;
     }
