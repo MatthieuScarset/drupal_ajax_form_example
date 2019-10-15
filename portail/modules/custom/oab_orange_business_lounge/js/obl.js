@@ -179,31 +179,36 @@
     function SortById(a, b) {
       var aName = a.id;
       var bName = b.id;
-      return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
+      return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
 
     /**
      * Page Accords-roaming
      */
-    $('#ul_technologie_obl').html("");
+    $('#select_technologie_obl').html('<option value="4G" selected="selected">(autre couverture)</option>');
     var arr_technologies = drupalSettings.arr_technologies_obl;
     var arr_technologies_sort = arr_technologies.sort(SortById);
 
     if (arr_technologies_sort.length != 0) {
-      $.each(arr_technologies_sort, function (index, value) {
-        $('#ul_technologie_obl').append('<li value="' + value.name + '">' + 'couverture ' + value.name + '</li>');
-      });
-      $('#ul_technologie_obl li').click(function () {
-        var li_select_techno = $(this).attr('value');
+        $.each(arr_technologies_sort, function (index, value) {
+          $('#select_technologie_obl').append('<option value="' + value.name + '" style="color: black">' + 'couverture  ' + value.name + '</option>');
+        });
+        $('#select_technologie_obl').on('change', function () {
+        var techno_selected = $("option:selected", this).attr('value');
+
         /**
          * API countries + op
          */
         var arr_country_with_op = drupalSettings.arr_country_with_op;
         $('#table-accord-romaing tbody').html('');
         $.map(arr_country_with_op, function (country) {
+          //console.log('1');
           $.map(country.networks, function (index, network) {
-            if (network === li_select_techno) {
+            //console.log('2');
+            //console.log(network === techno_selected);
+            if (network === techno_selected) {
+              //console.log('I\'am here');
               var ma_liste_des_operateurs = "";
               $.map(index, function (i) {
                 if (ma_liste_des_operateurs.length != 0) {
@@ -219,7 +224,7 @@
     }
 
     $(function() {
-      $('#ul_technologie_obl li').trigger('click');
+      $('#select_technologie_obl').trigger("change");
     });
 
 
