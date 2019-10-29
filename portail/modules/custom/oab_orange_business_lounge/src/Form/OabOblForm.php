@@ -41,11 +41,9 @@ class OabOblForm extends ConfigFormBase {
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
         $config = $this->config(self::getConfigName());
-        $settings = $this->configuration;
 
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $zones = $obl_service->getZones();
-        $images = $config->get('zones_image');
 
 
         $form['global'] = array(
@@ -94,6 +92,17 @@ class OabOblForm extends ConfigFormBase {
                     //isset($this->configuration['block_image_'.$key]) ? [$this->configuration['block_image_'.$key]] : '',
                 );
             }
+        } else {
+
+            foreach ($images as $image) {
+                $form['images']['image_block_' . $image] = array(
+                    '#type' => 'managed_file',
+                    '#upload_location' => self::IMAGE_LOCATION,
+                    '#default_value' => isset($image) ? array($image) : '',
+                    //isset($this->configuration['block_image_'.$key]) ? [$this->configuration['block_image_'.$key]] : '',
+                );
+                drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
+            }
         }
 
         return parent::buildForm($form, $form_state);
@@ -129,7 +138,7 @@ class OabOblForm extends ConfigFormBase {
 
         foreach ($values as $key => $value) {
             if (strstr($key, 'image_block_') && isset($value[0])) {
-
+                // Correspond au zone ID récupéré ligne 93
                 $key_parts = explode('_', $key);
 
                 $file = File::load($value[0]);
