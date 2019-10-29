@@ -93,7 +93,8 @@ class OabOblForm extends ConfigFormBase {
                 );
             }
         } else {
-
+            drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
+            
             foreach ($images as $image) {
                 $form['images']['image_block_' . $image] = array(
                     '#type' => 'managed_file',
@@ -101,7 +102,6 @@ class OabOblForm extends ConfigFormBase {
                     '#default_value' => isset($image) ? array($image) : '',
                     //isset($this->configuration['block_image_'.$key]) ? [$this->configuration['block_image_'.$key]] : '',
                 );
-                drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
             }
         }
 
