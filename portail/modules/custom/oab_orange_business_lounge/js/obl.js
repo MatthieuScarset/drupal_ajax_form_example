@@ -44,7 +44,7 @@
     }
 
     function update_page_datas_with_selection (code_zone, id_zone) {
-        set_countries_with_zone_code(code_zone);
+        set_countries_with_zone_code(code_zone, id_zone);
         set_zone_tarif_info(id_zone);
     }
 
@@ -54,7 +54,7 @@
         });
     }
 
-    function set_countries_with_zone_code(code_zone) {
+    function set_countries_with_zone_code(code_zone, id_zone) {
 
         var arr_hydra_member = drupalSettings.arr_contries;
 
@@ -62,7 +62,7 @@
 
         var listePays = arr_hydra_member.filter(function (element) {
             // console.log(element.rootZone.code + " vs " + code_zone + '|' + element.rootZone.code.length + " vs " + code_zone.length);
-            return element.rootZone.code === code_zone;
+            return element.zoneId === id_zone;
         });
         //Call method sort by country label _A-Z
         listePays = listePays.sort(SortByLabel);
@@ -132,7 +132,7 @@
                     $('input[name="country_id"]').val(pays.id);
                 }
 
-                update_page_datas_with_selection(pays.rootZone.code, pays.rootZone.id);
+                update_page_datas_with_selection(null, pays.zoneId);
                 load_country_operators(pays.id);
 
                 $('#select_pays_zone option[value='+pays.id+']').attr("selected", "selected");
@@ -166,25 +166,61 @@
             }
         });
     }
-        /*
-        $('#select_pays_zone')
-            .fadeOut(1500, function () {
-                $('#select_pays_zone').html("");
-                listePays.forEach(function(pays) {
-                    $('#select_pays_zone').append('<option value="' + pays.id + '">' + pays.label + '</option>');
 
-                });
-            })
-            .fadeIn(1500);
-      */
-
-
-
-    //This function will sort array
+    //This function will sort array by Label
     function SortByLabel(a, b) {
-        var aName = a.label.toLowerCase();
-        var bName = b.label.toLowerCase();
-        return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+      var aName = a.label.toLowerCase();
+      var bName = b.label.toLowerCase();
+      return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
     }
 
+    //This function will sort array by ID
+    function SortById(a, b) {
+      var aName = a.id;
+      var bName = b.id;
+      return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+    }
+
+
+    /**
+     * Page Accords-roaming
+     */
+    $('#select_technologie_obl').html('<option value="4G" selected="selected" disabled>(autre couverture)</option>');
+    var arr_technologies = drupalSettings.arr_technologies_obl;
+    var arr_technologies_sort = arr_technologies.sort(SortById);
+
+    if (arr_technologies_sort.length != 0) {
+      $.each(arr_technologies_sort, function (index, value) {
+        $('#select_technologie_obl').append('<option value="' + value.name + '" style="color: black">' + 'couverture  ' + value.name + '</option>');
+      });
+      $('#select_technologie_obl').on('change', function () {
+        var techno_selected = $("option:selected", this).attr('value');
+
+        /**
+         * API countries + op
+         */
+        var arr_country_with_op = drupalSettings.arr_country_with_op;
+        $('#table-accord-romaing tbody').html('');
+        $.map(arr_country_with_op, function (country) {
+          $.map(country.networks, function (index, network) {
+            if (network === techno_selected) {
+              var ma_liste_des_operateurs = "";
+              $.map(index, function (i) {
+                if (ma_liste_des_operateurs.length != 0) {
+                  ma_liste_des_operateurs += '<hr class="reseau-mobile-accords-roaming" />';
+                }
+                ma_liste_des_operateurs += i;
+              });
+              $('#table-accord-romaing tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
+            }
+          });
+        });
+      });
+    }
+
+    $(function() {
+      $('#select_technologie_obl').trigger("change");
+    });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
+

@@ -14,7 +14,7 @@ class OabOblSwagger {
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
-    const API_COUNTRIES = '/root_countries?itemsPerPage=300';
+    const API_COUNTRIES = '/countries';
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
@@ -26,7 +26,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountries () {
+    public function getCountriesWithoutOperator() {
         $data = $this->executeScriptCurl(self::API_COUNTRIES);
         return $data;
     }

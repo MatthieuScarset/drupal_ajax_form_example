@@ -2,8 +2,6 @@
 namespace Drupal\oab_orange_business_lounge\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
-use Drupal\file\Entity\File;
-use Drupal\migrate_plus\Plugin\migrate_plus\data_parser\Json;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Zend\Diactoros\Response\JsonResponse;
 
@@ -21,7 +19,7 @@ class OblPricesController extends ControllerBase {
             $zones_image[$key] = file_create_url($file->getFileUri());
         }
 
-        $countries = $obl_service->getCountries();
+        $countries = $obl_service->getCountriesWithoutOperator();
         $zones = $obl_service->getZones(false);
         $title = $config->get('title_label');
 
@@ -37,7 +35,7 @@ class OblPricesController extends ControllerBase {
                     'oab_orange_business_lounge/js/metadata.js',
                 ],
                 'drupalSettings' => [
-                    'arr_contries' => $countries["hydra:member"],
+                    'arr_contries' => $countries["items"],
                 ]
             ],
 
