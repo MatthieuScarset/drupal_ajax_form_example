@@ -14,8 +14,8 @@ class OabOblSwagger {
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
-    const API_COUNTRIES = '/root_countries?itemsPerPage=300';
-    const  API_OPER_COUNTRIES = '/countries';
+    //const API_COUNTRIES = '/root_countries?itemsPerPage=300';
+    const  API_COUNTRIES = '/countries';
     const API_TECHNOLOGIES = '/network-types';
 
     public function __construct() {
@@ -28,10 +28,10 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountries() {
+    /*public function getCountries() {
         $data = $this->executeScriptCurl(self::API_COUNTRIES);
         return $data;
-    }
+    }*/
 
     /**
      * @return mixed
@@ -60,14 +60,14 @@ class OabOblSwagger {
      * @return mixed
      */
     public function getOneCountry($id) {
-      return $this->executeScriptCurl(self::API_OPER_COUNTRIES.'/'.$id);
+      return $this->executeScriptCurl(self::API_COUNTRIES.'/'.$id);
     }
 
     /**
      * @return mixed
      */
     public function getCountriesWithoutOperator() {
-      return $this->executeScriptCurl(self::API_OPER_COUNTRIES);
+      return $this->executeScriptCurl(self::API_COUNTRIES);
     }
 
   /**

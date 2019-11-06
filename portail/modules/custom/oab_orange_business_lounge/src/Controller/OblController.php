@@ -12,7 +12,8 @@ class OblController extends ControllerBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
         $zones = $obl_service->getZones();
-        $countries = $obl_service->getCountries();
+        //$countries = $obl_service->getCountries();
+        $countries = $obl_service->getCountriesWithoutOperator();
 
         $countries_with_operator = $obl_service->extractingUsefulDataFromApi();
         $technologies = $obl_service->getTechnologies();
@@ -25,7 +26,7 @@ class OblController extends ControllerBase {
                     'oab_orange_business_lounge/js/obl.js',
                 ],
                 'drupalSettings' => [
-                    'arr_contries' => $countries["hydra:member"],
+                    'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
                     'arr_country_with_op' => $countries_with_operator
                 ]
