@@ -34,7 +34,7 @@
 
                 $('.countries_input_autocomplete').val(item.label);
 
-                update_page_datas_with_selection(item.rootZone.code, item.rootZone.id);
+                update_page_datas_with_selection(code_zone = '', item.zoneId);
                 load_country_operators(pays_id);
                 update_label_countrie_reseaux(item.label);
 
@@ -132,7 +132,7 @@
                     $('input[name="country_id"]').val(pays.id);
                 }
 
-                update_page_datas_with_selection(null, pays.zoneId);
+                update_page_datas_with_selection(code_zone = '', pays.zoneId);
                 load_country_operators(pays.id);
 
                 $('#select_pays_zone option[value='+pays.id+']').attr("selected", "selected");
