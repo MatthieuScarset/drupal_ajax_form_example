@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /oblPricePage
+    pages: /reseau-mobile/tarifs-roaming
     negate: false
     context_mapping: {  }
