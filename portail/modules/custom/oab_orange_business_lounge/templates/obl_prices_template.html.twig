@@ -4,14 +4,14 @@
     <div class="container">
         <div class="col-md-6 col-sm-12 obl-zone-container">
             <div class="row">
-                {% for zone in zones.items %}
+                {% for zone in zones.items if zones_image[zone.id] is defined %}
                     <div class="col-md-6 col-sm-12 obl-zone-container">
                         <div class="panel-group">
                             <div class="panel panel-default get_zone" data-zone="{{ zone.code }}" data-zone-id="{{ zone.id }}" name="data_zone">
                                 <div class="panel-body obl-block-countries">
-                                    <div class="text-align-left oblHeaderZone"> {{ zone.label }} </div>
-                                    <img class="img-responsive image_pannel"  src="/modules/custom/oab_orange_business_lounge/images/{{ zone.code | lower }}.jpg" />
-                                    <div class="text-align-right oblFooterZone">Voir les pays <span class="glyphicon glyphicon-play"></span></div>
+                                    <div class="text-align-left oblHeaderZone"><b>{{ zone.label }}</b></div>
+                                    <img class="img-responsive image_pannel"  src="{{ zones_image[zone.id] | lower }}" />
+                                    <div class="text-align-right oblFooterZone"><b>Voir les pays</b> <span class="glyphicon glyphicon-play"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -38,8 +38,8 @@
     <div class="empty-roaming-infos-container">
         <h4>Pour connaître les tarifs et réseaux partenaires, veuillez séletionner votre pays de destination ci-dessus</h4>
     </div>
-
     <div class="roaming-infos-container">
+        <p><b>Tarifs en vigueur pour les offres souscrites à compter d'avril 2017</b></p>
         <div class="call-main-container">
             <h2>Appels</h2>
             <p>Emissions d'appels vers la zone <span id="emission-appel" class="api-result-infos"></span></p>

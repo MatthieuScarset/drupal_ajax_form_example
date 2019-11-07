@@ -10,34 +10,32 @@ use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 class OabOblSwagger {
 
     private $urlApi = '';
-    private $title_label = '';
+    private $titleLabel = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
-    //const API_COUNTRIES = '/root_countries?itemsPerPage=300';
-    const  API_COUNTRIES = '/countries';
-    const API_TECHNOLOGIES = '/network-types';
+    const API_COUNTRIES = '/countries';
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
         $this->urlApi = $config->get('url_api');
-        $this->title_label = $config->get('title_label');
+        $this->titleLabel = $config->get('title_label');
     }
 
 
     /**
      * @return mixed
      */
-    /*public function getCountries() {
+    public function getCountriesWithoutOperator() {
         $data = $this->executeScriptCurl(self::API_COUNTRIES);
         return $data;
-    }*/
+    }
 
     /**
      * @return mixed
      */
-    public function getZones() {
-        $data = $this->executeScriptCurl(self::API_ZONE);
+    public function getZones($display_message = false) {
+        $data = $this->executeScriptCurl(self::API_ZONE, $display_message);
         return $data;
     }
 
@@ -60,69 +58,15 @@ class OabOblSwagger {
      * @return mixed
      */
     public function getOneCountry($id) {
-      return $this->executeScriptCurl(self::API_COUNTRIES.'/'.$id);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCountriesWithoutOperator() {
-      return $this->executeScriptCurl(self::API_COUNTRIES);
-    }
-
-  /**
-      * @return bool|mixed
-      */
-    public function getTechnologies() {
-      return $this->executeScriptCurl(self::API_TECHNOLOGIES);
-    }
-
-
-    public function extractingUsefulDataFromApi() {
-
-      /*********************** A suup ********/
-      $i = 1;
-
-      $countries_with_operator = [];
-      $countries_without_operator = $this->getCountriesWithoutOperator();
-
-      foreach ($countries_without_operator['items'] as $tab) {
-        $my_data = [];
-
-        $country_data = $this->getOneCountry($tab['id']);
-        if (isset($country_data['operators'])) {
-          foreach ($country_data['operators'] as $operator) {
-            $operator_name = $operator['name'];
-            foreach ($operator['networkNorms'] as $network_norms) {
-              if (!isset($my_data[$network_norms['type']['name']])) {
-                $my_data[$network_norms['type']['name']] = [];
-              }
-              $my_data[$network_norms['type']['name']][] = $operator_name;
-            }
-          }
-        }
-
-        $countries_with_operator[] = [
-          'label' => $country_data['label'],
-          'zoneId' => $country_data['zoneId'],
-          'networks' => $my_data
-        ];
-
-       /*********************** A suup ********/
-        if (++$i > 3) {
-          return $countries_with_operator;
-        }
-      }
-
-      //return $countries_with_operator;
+        return $this->executeScriptCurl("/countries/".$id);
     }
 
     /**
      * @param $url
-     * @return bool|mixed
      */
     public function isValid($url) {
-        return $this->executeScriptCurl(self::API_COUNTRIES, $url);
+
+        $this->executeScriptCurl(self::API_COUNTRIES, $url);
     }
 
 
@@ -131,7 +75,7 @@ class OabOblSwagger {
      * @param null $url
      * @return bool|mixed
      */
-    private function executeScriptCurl($domaine, $url = null) {
+    private function executeScriptCurl($domaine, $display_message = false, $url = null) {
 
         if ($url === null) {
             $url = $this->urlApi;
@@ -147,10 +91,16 @@ class OabOblSwagger {
 
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
+                    if ($display_message) {
+                        drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                    }
                     $json_ret = json_decode($ret_value, true);
                     break;
 
                 default:
+                    if ($display_message) {
+                        drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
+                    }
                     $json_ret = false;
             }
         }

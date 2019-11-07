@@ -19,6 +19,7 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
                     'countries' => array(),
                     'countrie_id' => array(),
                     'zones' => array(),
+                    'zones_image' => array(),
                     'pass_data' => array(),
                     'network_data' => array(),
                 ),
