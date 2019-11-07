@@ -4,7 +4,8 @@
     $(".roaming-infos-container").hide();
     $(".reseau-partenaire-tarif-roaming").hide();
 
-    var pays_id = drupalSettings.id_country;
+    var pays_id = $('.hidden-countrie-id').text();
+    //var pays_id = drupalSettings.id_country;
 
     if (pays_id.length) {
         load_data_from_id_countrie(pays_id);
