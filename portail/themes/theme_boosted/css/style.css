@@ -3038,9 +3038,22 @@ img.image_pannel{
 }
 
 hr.reseau-mobile-accords-roaming {
-  border-top: 1px solid black;
-  margin-top: 2px;
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
   margin-bottom: 2px;
+}
+
+#table-accord-roaming {
+  background-color: #fff;
+  border: 1px solid #aaa;
+}
+
+#table-accord-roaming td {
+  padding:2rem
+}
+
+#table-accord-roaming th {
+  padding:2rem
 }
 
 @media(max-width: 767px) {

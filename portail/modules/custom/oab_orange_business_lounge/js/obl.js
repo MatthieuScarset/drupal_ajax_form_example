@@ -200,7 +200,7 @@
          * API countries + op
          */
         var arr_country_with_op = drupalSettings.arr_country_with_op;
-        $('#table-accord-romaing tbody').html('');
+        $('#table-accord-roaming tbody').html('');
         $.map(arr_country_with_op, function (country) {
           $.map(country.networks, function (index, network) {
             if (network === techno_selected) {
@@ -211,7 +211,7 @@
                 }
                 ma_liste_des_operateurs += i;
               });
-              $('#table-accord-romaing tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
+              $('#table-accord-roaming tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
             }
           });
         });
