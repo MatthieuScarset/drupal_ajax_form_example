@@ -7,7 +7,7 @@ oab.orange_business_lounge_settings:
 
 
 oab.orange_business_lounge_page_zone:
-  title: Orange roaming by zone
+  title: Orange accords roaming
   route_name: oab_obl_settings
   parent: oab.orange_business_lounge_settings
   description: 'Configure obl settings'
@@ -15,7 +15,7 @@ oab.orange_business_lounge_page_zone:
 
 
 oab.orange_business_lounge_page_country:
-  title: Orange roaming by country
+  title: Orange tarifs roaming
   route_name: oab_obl_country_settings
   parent: oab.orange_business_lounge_settings
   description: 'Configure obl settings'
