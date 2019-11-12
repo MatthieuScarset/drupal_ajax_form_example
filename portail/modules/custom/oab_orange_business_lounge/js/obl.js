@@ -186,36 +186,39 @@
      * Page Accords-roaming
      */
     $('#select_technologie_obl').html('<option value="4G" selected="selected" disabled>(autre couverture)</option>');
-    var arr_technologies = drupalSettings.arr_technologies_obl;
-    var arr_technologies_sort = arr_technologies.sort(SortById);
 
-    if (arr_technologies_sort.length != 0) {
-      $.each(arr_technologies_sort, function (index, value) {
-        $('#select_technologie_obl').append('<option value="' + value.name + '" style="color: black">' + 'couverture  ' + value.name + '</option>');
-      });
-      $('#select_technologie_obl').on('change', function () {
-        var techno_selected = $("option:selected", this).attr('value');
+    if (drupalSettings.arr_technologies_obl != null) {
+      var arr_technologies = drupalSettings.arr_technologies_obl;
+      var arr_technologies_sort = arr_technologies.sort(SortById);
 
-        /**
-         * API countries + op
-         */
-        var arr_country_with_op = drupalSettings.arr_country_with_op;
-        $('#table-accord-roaming tbody').html('');
-        $.map(arr_country_with_op, function (country) {
-          $.map(country.networks, function (index, network) {
-            if (network === techno_selected) {
-              var ma_liste_des_operateurs = "";
-              $.map(index, function (i) {
-                if (ma_liste_des_operateurs.length != 0) {
-                  ma_liste_des_operateurs += '<hr class="reseau-mobile-accords-roaming" />';
-                }
-                ma_liste_des_operateurs += i;
-              });
-              $('#table-accord-roaming tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
-            }
+      if (arr_technologies_sort.length != 0) {
+        $.each(arr_technologies_sort, function (index, value) {
+          $('#select_technologie_obl').append('<option value="' + value.name + '" style="color: black">' + 'couverture  ' + value.name + '</option>');
+        });
+        $('#select_technologie_obl').on('change', function () {
+          var techno_selected = $("option:selected", this).attr('value');
+
+          /**
+           * API countries + op
+           */
+          var arr_country_with_op = drupalSettings.arr_country_with_op;
+          $('#table-accord-roaming tbody').html('');
+          $.map(arr_country_with_op, function (country) {
+            $.map(country.networks, function (index, network) {
+              if (network === techno_selected) {
+                var ma_liste_des_operateurs = "";
+                $.map(index, function (i) {
+                  if (ma_liste_des_operateurs.length != 0) {
+                    ma_liste_des_operateurs += '<hr class="reseau-mobile-accords-roaming" />';
+                  }
+                  ma_liste_des_operateurs += i;
+                });
+                $('#table-accord-roaming tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
+              }
+            });
           });
         });
-      });
+      }
     }
 
     $(function() {
