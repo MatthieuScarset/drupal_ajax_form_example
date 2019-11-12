@@ -5,11 +5,9 @@
     $(".reseau-partenaire-tarif-roaming").hide();
 
     //var pays_id = $('.hidden-countrie-id').text();
-    if (drupalSettings.id_country != null) {
+    if (drupalSettings.id_country !== undefined && drupalSettings.id_country.length > 0) {
       var pays_id = drupalSettings.id_country;
-      if (pays_id.length) {
-        load_data_from_id_countrie(pays_id);
-      }
+      load_data_from_id_countrie(pays_id);
     }
 
 
