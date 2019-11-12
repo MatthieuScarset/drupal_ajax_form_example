@@ -187,7 +187,7 @@
      */
     $('#select_technologie_obl').html('<option value="4G" selected="selected" disabled>(autre couverture)</option>');
 
-    if (drupalSettings.arr_technologies_obl != null) {
+    if (drupalSettings.arr_technologies_obl !== undefined && drupalSettings.arr_technologies_obl.length > 0) {
       var arr_technologies = drupalSettings.arr_technologies_obl;
       var arr_technologies_sort = arr_technologies.sort(SortById);
 
