@@ -20,16 +20,17 @@
 {% if title %}
     <h3>{{ title }}</h3>
 {% endif %}
-
+{% set current_item = 0 %}
 {% for row in rows %}
     {# Ajout du flux twitter que si y pas le filtre sur les thématiques#}
     {% if
         view.exposed_data.field_insight_target_id is defined
         and view.exposed_data.field_insight_target_id == 'All'
-        and loop.index == 10
-        and view.pager.current_page == 0 %}
+        and loop.index > 1
+        and loop.index is divisible by(5) %}
+        {% set current_item = current_item + 1 %}
         <div class="views-row col-md-4 business-insight-twitter-tile">
-            {{ drupal_entity('block', 'twitterblock', check_access=false) }}
+          {{ drupal_block('twitter_block', {position: ((view.pager.current_page * 4) + current_item) }) }}
         </div>
     {% endif %}
 

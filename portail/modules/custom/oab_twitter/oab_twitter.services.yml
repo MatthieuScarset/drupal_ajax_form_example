@@ -1,0 +1,3 @@
+services:
+  oab_twitter.twitter_service:
+    class: Drupal\oab_twitter\Services\TwitterService

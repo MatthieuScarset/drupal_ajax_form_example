@@ -11,8 +11,8 @@ use Drupal\oab_backoffice\Form\OabGeneralSettingsForm;
 /**
  *
  * @Block(
- *   id = "twitter_block",
- *   admin_label = @Translation("Twitter Block"),
+ *   id = "twitter_block_old",
+ *   admin_label = @Translation("Twitter Block old"),
  *   category = @Translation("Blocks")
  * )
  *
@@ -37,7 +37,7 @@ class TwitterBlock extends BlockBase {
 
     public function build() {
 
-        $timeline = $this->getTimeline();
+        $timeline = $this->getTimeline(0);
         $tweets = $this->getEmbededTweets($timeline);
         return (count($tweets) > 0) ? array("tweets" => $tweets) : array();
     }
@@ -163,17 +163,17 @@ class TwitterBlock extends BlockBase {
         return 'https://twitter.com/' . $this->getConf(self::USER_PROFILE) . '/status/' . $tweet_id;
     }
 
-    private function getTimeline($nb_tweet_requested = null) {
-        $nb_tweet_wanted = $this->getConf(self::NB_TWEET);
+    private function getTimeline($position, $nb_tweet_requested = null) {
+        $nb_tweet_cache = $this->getConf(self::NB_TWEET);
 
         if ($nb_tweet_requested === null) {
-            $nb_tweet_requested = $nb_tweet_wanted;
+            $nb_tweet_requested = $nb_tweet_cache;
         }
 
         $data = [
             'screen_name'       => $this->getConf(self::USER_PROFILE),
             // J'augmente le count pour éviter de faire trop de requetes
-            'count'             => (int) $nb_tweet_requested + ($nb_tweet_requested > 20 ? $nb_tweet_requested * 25 / 100 : 5),
+            'count'             => (int) $nb_tweet_requested * 1.30,
             'trim_user'         => false,
             'include_rts'       => false,
             'exclude_replies'   => true
@@ -197,12 +197,12 @@ class TwitterBlock extends BlockBase {
             // et pas au nb tweet passé en param
             // Twitter ne renvoie pas les Retweets, parce que demandé, mais les comptes quand mêmes dans son nb tweets
             // donc on recoie moins de tweet que demandé
-            if (count($json_ret) < $nb_tweet_wanted) {
-                $json_ret = $this->getTimeline($nb_tweet_requested + 5);
+            if (count($json_ret) < $nb_tweet_cache) {
+                $json_ret = $this->getTimeline($position, $nb_tweet_requested * 2);
             }
 
             // On retourne le nombre de tweets voulu, et non celui requeté
-            $ret = array_slice($json_ret, 0, $nb_tweet_wanted);
+            $ret = array_slice($json_ret, 0, 1);
 
         } else {
             \Drupal::logger(self::LOGGER_CHANNEL)->error('Bearer null, Authentification à l\'API Twitter impossible.');

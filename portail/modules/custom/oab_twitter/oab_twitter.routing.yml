@@ -1,0 +1,7 @@
+oab_twitter.settings:
+  path: '/admin/structure/oab/settings/twitter'
+  defaults:
+    _form: '\Drupal\oab_twitter\Form\TwitterForm'
+    _title: 'OAB Twitter'
+  requirements:
+    _permission: 'administer site configuration'

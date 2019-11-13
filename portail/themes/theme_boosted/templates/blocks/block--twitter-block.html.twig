@@ -1,16 +1,8 @@
 <section {{ attributes.addClass('block', 'clearfix', 'twitter-block') }}>
 
     {% if content.tweets and content.tweets is iterable and content.tweets|length > 0 %}
-        <div id="twitter-block-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                {% for i in 0..(content.tweets|length - 1) %}
-                    <li data-target="#twitter-block-carousel" data-slide-to="{{ i }}" {% if i == 0 %}class="active" {% endif %}></li>
-                {% endfor %}
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
+        <div id="twitter-block-carousel">
+            <div class="carousel-inner">
                 {% for key, tweet in content.tweets %}
                     <div class="item {% if key == 0 %}active{% endif %}">
                         {{ tweet|raw }}

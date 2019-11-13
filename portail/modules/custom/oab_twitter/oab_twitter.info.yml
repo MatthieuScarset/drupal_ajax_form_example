@@ -1,0 +1,10 @@
+name: OAB Twitter
+description: 'OAB twitter, provide a twitter block and his configuration'
+type: module
+package: OAB
+
+
+version: 1.0
+core: 8.x
+
+configure: oab.settings
