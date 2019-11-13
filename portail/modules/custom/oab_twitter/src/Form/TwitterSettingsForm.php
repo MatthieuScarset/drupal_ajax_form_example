@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Configure example settings for this site.
  */
-class TwitterForm extends ConfigFormBase {
+class TwitterSettingsForm extends ConfigFormBase {
 
   const API_KEY       = 'api_key';
   const API_SECRET    = 'api_secret';
@@ -17,7 +17,7 @@ class TwitterForm extends ConfigFormBase {
   const TWEET_LENGTTH  = 'tweet_length';
 
   public static function getConfigName() {
-    return 'oab_twitter.settings';
+    return 'oab_twitter.settings_form';
   }
 
   /**
@@ -32,7 +32,7 @@ class TwitterForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'oab_twitter.settings',
+      'oab_twitter.settings_form',
     ];
   }
 

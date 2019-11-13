@@ -3,8 +3,12 @@
 namespace Drupal\oab_twitter\Services;
 
 use Drupal\oab_backoffice\Form\OabGeneralSettingsForm;
+use Drupal\oab_twitter\Form\TwitterSettingsForm;
 
 class TwitterService {
+
+  /* var \Drupal\Core\Config\ImmutableConfig */
+  protected $config;
 
   const KEY_API_KEY       = 'api_key';
   const KEY_API_SECRET    = 'api_secret';
@@ -20,6 +24,13 @@ class TwitterService {
   private $urlOauth      = 'https://api.twitter.com/oauth2/token';
   private $urlTimeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
   private $urlOembed     = 'https://publish.twitter.com/oembed';
+
+  /**
+   * Class constructor.
+   */
+  public function __construct($config, $key) {
+    $this->config = $config->get($key);
+  }
 
   public function getTweet(int $position) {
     $timeline = $this->getTimeline($position);
@@ -237,11 +248,10 @@ class TwitterService {
   }
 
   private function getConf($key, $default = '') {
-    $conf = \Drupal::config('oab_twitter.settings');
     $ret = $default;
 
-    if ($conf->get($key)) {
-      $ret = $conf->get($key);
+    if ($this->config->get($key)) {
+      $ret = $this->config->get($key);
     }
 
     return $ret;

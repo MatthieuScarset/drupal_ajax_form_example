@@ -1,6 +1,6 @@
 oab.twitter_settings:
   title: Twitter settings
-  route_name: oab_twitter.settings
+  route_name: oab_twitter.settings_form
   parent: oab.settings
   description: 'Configure Twitter'
   weight: -20

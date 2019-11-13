@@ -1,3 +1,4 @@
 services:
-  oab_twitter.twitter_service:
+  oab_twitter.twitter_settings_form_service:
     class: Drupal\oab_twitter\Services\TwitterService
+    arguments: ['@config.factory', 'oab_twitter.settings_form']

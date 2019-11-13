@@ -7,4 +7,4 @@ package: OAB
 version: 1.0
 core: 8.x
 
-configure: oab.settings
+configure: oab_twitter.settings_form
