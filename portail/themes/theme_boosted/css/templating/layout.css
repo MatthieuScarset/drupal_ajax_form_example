@@ -401,7 +401,7 @@
     .col-xs-bottom {
         vertical-align: bottom;
     }
-    
+
 }
 
 @media (min-width: 768px) {
@@ -496,7 +496,7 @@ html {
 body {
     display: table-cell;
     vertical-align: middle;
-    background-color: #eee;
+    background-color: #ffffff;
 }
 body > .main-container{
    /* margin-bottom: 3rem; */
