@@ -9,6 +9,9 @@ class TwitterService {
   /* var \Drupal\Core\Config\ImmutableConfig */
   protected $config;
 
+  /* var \Drupal\Core\Config\ImmutableConfig */
+  protected $generalConfig;
+
   /* var \Drupal\Core\Cache\DatabaseBackend */
   protected $cache;
 
@@ -31,8 +34,9 @@ class TwitterService {
   /**
    * Class constructor.
    */
-  public function __construct($config, $cache, $logger) {
+  public function __construct($config, $generalConfig, $cache, $logger) {
     $this->config = $config;
+    $this->generalConfig = $generalConfig;
     $this->cache = $cache;
     $this->logger = $logger;
   }
@@ -225,12 +229,10 @@ class TwitterService {
 
   private function getCurl($url = null) {
 
-    $config_factory = \Drupal::configFactory();
-    $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
-    if (!empty($config_proxy) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
-      $proxy_server = $config_proxy->get('proxy_server').':'.$config_proxy->get('proxy_port');
-    } else {
-      $proxy_server = NULL;
+    $proxy_server = NULL;
+
+    if (!empty($this->generalConfig) && !empty($this->generalConfig->get('proxy_server')) && !empty($this->generalConfig->get('proxy_port'))) {
+      $proxy_server = $this->generalConfig->get('proxy_server').':'.$this->generalConfig->get('proxy_port');
     }
 
     $ch = curl_init();

@@ -1,15 +1,19 @@
 services:
+
   oab_twitter.cache:
     class: Drupal\Core\Cache\CacheBackendInterface
     factory: cache_factory:get
-    arguments: [cache_oab_twitter]
+    arguments: ['oab_twitter']
+
   oab_twitter.logger:
     parent: logger.channel_base
     arguments: ['oab_twitter']
-  oab_twitter.config:
+
+  oab_twitter.settings:
     class: \Drupal\Core\Config\ImmutableConfig
     factory: config.factory:get
     arguments: ['oab_twitter.settings_form']
-  oab_twitter.twitter_settings_form_service:
+
+  oab_twitter.twitter_service:
     class: Drupal\oab_twitter\Services\TwitterService
-    arguments: ['@oab_twitter.config', '@oab_twitter.cache', '@oab_twitter.logger']
+    arguments: ['@oab_twitter.settings', '@oab_backoffice.general_settings', '@oab_twitter.cache', '@oab_twitter.logger']

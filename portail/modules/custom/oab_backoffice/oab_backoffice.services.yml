@@ -1,0 +1,5 @@
+services:
+  oab_backoffice.general_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_backoffice.general_settings']
