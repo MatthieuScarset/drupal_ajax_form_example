@@ -3,12 +3,17 @@
 namespace Drupal\oab_twitter\Services;
 
 use Drupal\oab_backoffice\Form\OabGeneralSettingsForm;
-use Drupal\oab_twitter\Form\TwitterSettingsForm;
 
 class TwitterService {
 
   /* var \Drupal\Core\Config\ImmutableConfig */
   protected $config;
+
+  /* var \Drupal\Core\Cache\DatabaseBackend */
+  protected $cache;
+
+  /* var Drupal\Core\Logger\LoggerChannel */
+  protected $logger;
 
   const KEY_API_KEY       = 'api_key';
   const KEY_API_SECRET    = 'api_secret';
@@ -16,10 +21,8 @@ class TwitterService {
   const KEY_NB_TWEET      = 'nb_tweet';
   const KEY_TAILLE_TWEET  = 'taille_tweet';
 
-  const KEY_CACHE_BIN                 = 'twitter_api';
   const KEY_CACHE_BEARER_CID          = 'twitter_oauth_bearer';
   const KEY_CACHE_OEMBED_TWEET_CID    = 'twitter_oembed_tweet';
-  const KEY_LOGGER_CHANNEL            = 'twitter_api';
 
   private $urlOauth      = 'https://api.twitter.com/oauth2/token';
   private $urlTimeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
@@ -28,15 +31,15 @@ class TwitterService {
   /**
    * Class constructor.
    */
-  public function __construct($config, $key) {
-    $this->config = $config->get($key);
+  public function __construct($config, $cache, $logger) {
+    $this->config = $config;
+    $this->cache = $cache;
+    $this->logger = $logger;
   }
 
   public function getTweet(int $position) {
     $timeline = $this->getTimeline($position);
     $tweets = $this->getEmbededTweets($timeline);
-    //var_dump($tweets);
-    //$tweet = array_slice($tweets, $position - 1, $position);
     return $tweets;
   }
 
@@ -53,10 +56,10 @@ class TwitterService {
 
   private function getEmbededTweet($tweet_id) {
     $cache_name = self::KEY_CACHE_OEMBED_TWEET_CID . '_' . $tweet_id;
-    $cache = \Drupal::cache(self::KEY_CACHE_BIN)->get($cache_name);
+    $cache = $this->cache->get($cache_name);
 
     $ret = null;
-    if ($cache !== false && isset($cachedData->data)) {
+    if ($cache !== false && isset($cache->data)) {
       $ret = $cache->data;
     } else {
       $tweet = $this->requestForEmbededTweet($tweet_id);
@@ -64,7 +67,7 @@ class TwitterService {
       $expiration = new \DateTime();
       $expiration->add(new \DateInterval("PT12H"));
 
-      \Drupal::cache(self::KEY_CACHE_BIN)->set($cache_name, $tweet, $expiration->getTimestamp());
+      $this->cache->set($cache_name, $tweet, $expiration->getTimestamp());
 
       $ret = $tweet;
     }
@@ -140,7 +143,7 @@ class TwitterService {
       $ret = array_slice($json_ret, $position - 1, $position);
 
     } else {
-      \Drupal::logger(self::KEY_LOGGER_CHANNEL)->error('Bearer null, Authentification à l\'API Twitter impossible.');
+      $this->logger->error('Bearer null, Authentification à l\'API Twitter impossible.');
     }
 
     return $ret;
@@ -151,7 +154,7 @@ class TwitterService {
 
     $cid = self::KEY_CACHE_BEARER_CID . '_' . $this->getConf(self::KEY_API_KEY);
 
-    $cached_data = \Drupal::cache()->get($cid);
+    $cached_data = $this->cache->get($cid);
     if ($cached_data !== false && isset($cached_data->data)) {
       $ret = $cached_data->data;
     } else {
@@ -160,7 +163,7 @@ class TwitterService {
       $expiration = new \DateTime();
       $expiration->add(new \DateInterval("PT12H"));
 
-      \Drupal::cache(self::KEY_CACHE_BIN)->set($cid, $bearer, $expiration->getTimestamp());
+      $this->cache->set($cid, $bearer, $expiration->getTimestamp());
 
       $ret = $bearer;
     }
@@ -209,12 +212,12 @@ class TwitterService {
         $errors_message .= $key . ' : ' . $error['code'] . " => " . $error['message'] . ' | ';
       }
 
-      \Drupal::logger(self::KEY_LOGGER_CHANNEL)->error($errors_message);
+      $this->logger->error($errors_message);
     } elseif (!is_array($json_ret) || curl_errno($ch) > 0) {
       $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | "
         . curl_errno($ch) . ' => ' . curl_error($ch) .  ' | '
         . $result . ' | ' . json_encode(curl_getinfo($ch));
-      \Drupal::logger(self::KEY_LOGGER_CHANNEL)->error($error_message);
+      $this->logger->error($error_message);
     }
 
     return $json_ret;
@@ -249,7 +252,6 @@ class TwitterService {
 
   private function getConf($key, $default = '') {
     $ret = $default;
-
     if ($this->config->get($key)) {
       $ret = $this->config->get($key);
     }
