@@ -21,4 +21,4 @@ services:
       generalConfig: '@oab_backoffice.general_settings'
       cache: '@oab_twitter.cache'
       logger: '@oab_twitter.logger'
-      language: '@language.default'
+      languageManager: '@language_manager'

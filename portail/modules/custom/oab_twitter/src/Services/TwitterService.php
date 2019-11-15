@@ -18,8 +18,8 @@ class TwitterService {
   /* var Drupal\Core\Logger\LoggerChannel */
   public $logger;
 
-  /* var Drupal\Core\Language\LanguageDefault */
-  public $language;
+  /* var Drupal\Core\Language\LanguageManager */
+  public $languageManager;
 
   const KEY_API_KEY       = 'api_key';
   const KEY_API_SECRET    = 'api_secret';
@@ -52,7 +52,7 @@ class TwitterService {
   }
 
   private function getEmbededTweet($tweet_id) {
-    $cache_name = self::KEY_CACHE_OEMBED_TWEET_CID . '_' . $tweet_id;
+    $cache_name = self::KEY_CACHE_OEMBED_TWEET_CID . '_' . $this->languageManager->getCurrentLanguage()->getId() . '_' . $tweet_id;
     $cache = $this->cache->get($cache_name);
 
     $ret = null;
@@ -76,7 +76,7 @@ class TwitterService {
     $data = [
       'url' => $this->generateTweetUrl($tweet_id),
       'hide_thread' => true,
-      'lang'      => $this->language->get()->getId(),
+      'lang'      => $this->languageManager->getCurrentLanguage()->getId(),
       'maxwidth' => $this->getConf(self::KEY_TAILLE_TWEET)
     ];
 
