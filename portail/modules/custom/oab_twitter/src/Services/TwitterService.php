@@ -7,16 +7,19 @@ use Drupal\oab_backoffice\Form\OabGeneralSettingsForm;
 class TwitterService {
 
   /* var \Drupal\Core\Config\ImmutableConfig */
-  protected $config;
+  public $config;
 
   /* var \Drupal\Core\Config\ImmutableConfig */
-  protected $generalConfig;
+  public $generalConfig;
 
   /* var \Drupal\Core\Cache\DatabaseBackend */
-  protected $cache;
+  public $cache;
 
   /* var Drupal\Core\Logger\LoggerChannel */
-  protected $logger;
+  public $logger;
+
+  /* var Drupal\Core\Language\LanguageDefault */
+  public $language;
 
   const KEY_API_KEY       = 'api_key';
   const KEY_API_SECRET    = 'api_secret';
@@ -30,16 +33,6 @@ class TwitterService {
   private $urlOauth      = 'https://api.twitter.com/oauth2/token';
   private $urlTimeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
   private $urlOembed     = 'https://publish.twitter.com/oembed';
-
-  /**
-   * Class constructor.
-   */
-  public function __construct($config, $generalConfig, $cache, $logger) {
-    $this->config = $config;
-    $this->generalConfig = $generalConfig;
-    $this->cache = $cache;
-    $this->logger = $logger;
-  }
 
   public function getTweet(int $position) {
     $timeline = $this->getTimeline($position);
@@ -83,7 +76,7 @@ class TwitterService {
     $data = [
       'url' => $this->generateTweetUrl($tweet_id),
       'hide_thread' => true,
-      'lang'      => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+      'lang'      => $this->language->get()->getId(),
       'maxwidth' => $this->getConf(self::KEY_TAILLE_TWEET)
     ];
 

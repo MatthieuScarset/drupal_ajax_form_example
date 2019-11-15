@@ -16,4 +16,9 @@ services:
 
   oab_twitter.twitter_service:
     class: Drupal\oab_twitter\Services\TwitterService
-    arguments: ['@oab_twitter.settings', '@oab_backoffice.general_settings', '@oab_twitter.cache', '@oab_twitter.logger']
+    properties:
+      config: '@oab_twitter.settings'
+      generalConfig: '@oab_backoffice.general_settings'
+      cache: '@oab_twitter.cache'
+      logger: '@oab_twitter.logger'
+      language: '@language.default'
