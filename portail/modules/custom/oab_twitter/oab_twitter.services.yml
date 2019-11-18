@@ -14,6 +14,16 @@ services:
     factory: config.factory:get
     arguments: ['oab_twitter.settings_form']
 
+  oab_twitter.http_client:
+    class: \GuzzleHttp\Client
+    factory: oab_twitter.http_client_factory:fromSettings
+    arguments: ['@oab_twitter.settings']
+
+  oab_twitter.http_client_factory:
+    class: \Drupal\oab_twitter\Services\ClientFactory
+    properties:
+      httpClientFactory: '@http_client_factory'
+
   oab_twitter.twitter_service:
     class: Drupal\oab_twitter\Services\TwitterService
     properties:
@@ -22,3 +32,4 @@ services:
       cache: '@oab_twitter.cache'
       logger: '@oab_twitter.logger'
       languageManager: '@language_manager'
+      client: '@oab_twitter.http_client'

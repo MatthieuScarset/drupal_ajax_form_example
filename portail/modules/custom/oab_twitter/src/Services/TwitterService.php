@@ -15,11 +15,14 @@ class TwitterService {
   /* var \Drupal\Core\Cache\DatabaseBackend */
   public $cache;
 
-  /* var Drupal\Core\Logger\LoggerChannel */
+  /* var \Drupal\Core\Logger\LoggerChannel */
   public $logger;
 
-  /* var Drupal\Core\Language\LanguageManager */
+  /* var \Drupal\Core\Language\LanguageManager */
   public $languageManager;
+
+  /* var \GuzzleHttp\Client */
+  public $client;
 
   const KEY_API_KEY       = 'api_key';
   const KEY_API_SECRET    = 'api_secret';
@@ -81,11 +84,13 @@ class TwitterService {
     ];
 
     $url = $this->urlOembed . '?' . http_build_query($data);
-    $ch = $this->getCurl($url);
+
+    $response =  $this->client->request('GET', $url);
+
+    $result = json_decode($response->getBody()->getContents(), true);
 
     $ret = null;
 
-    $result = $this->execCurl($ch);
     if (is_array($result) && isset($result['html'])) {
       $ret = $result['html'];
     }
@@ -116,16 +121,17 @@ class TwitterService {
     $ret = array();
     if (null !== ($bearer = $this->getBearer())) {
       $headers = [
-        'Authorization: Bearer ' . $bearer,
-        'Content-Type: application/x-www-form-urlencoded'
+        'Authorization' => 'Bearer ' . $bearer,
+        'Content-Type' => 'application/x-www-form-urlencoded'
       ];
 
       $url = $this->urlTimeline . "?" . http_build_query($data);
-      $ch = $this->getCurl($url);
 
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      $response =  $this->client->request('GET', $url, [
+        'headers' => $headers
+      ]);
 
-      $json_ret = $this->execCurl($ch);
+      $json_ret = json_decode($response->getBody()->getContents(), true);
 
       // On check toujours par rapport au nombre de tweets voulu dans la conf
       // et pas au nb tweet passé en param
@@ -169,16 +175,20 @@ class TwitterService {
   }
 
   private function requestForBearer() {
-    $api_key = $this->getConf(self::KEY_API_KEY);
-    $api_secret = $this->getConf(self::KEY_API_SECRET);
 
-    $ch = $this->getCurl($this->urlOauth);
+    $json_ret = null;
 
-    curl_setopt($ch, CURLOPT_USERPWD, $api_key . ":" . $api_secret);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, array('grant_type' => 'client_credentials'));
+    $response =  $this->client->request('POST', $this->urlOauth, [
+      'auth' => [
+        $this->getConf(self::KEY_API_KEY),
+        $this->getConf(self::KEY_API_SECRET)
+      ],
+      'form_params' => array(
+        'grant_type' => 'client_credentials'
+      )
+    ]);
 
-    $json_ret = $this->execCurl($ch);
+    $json_ret = json_decode($response->getBody()->getContents(), true);
 
     $ret = null;
     if (is_array($json_ret) && isset($json_ret['access_token'])) {
@@ -186,63 +196,6 @@ class TwitterService {
     }
 
     return $ret;
-  }
-
-  /**
-   * @param $ch
-   * @return array
-   */
-  private function execCurl($ch) {
-    $result = curl_exec($ch);
-
-    // Obligé de passer par là, le proxy ajoute de la data avant le json
-    $json_ret = json_decode(strstr($result, '{'), true);
-
-    // Si on a null, c'est que le json commencait par "["
-    if (is_null($json_ret) || !is_array($json_ret)) {
-      $json_ret = json_decode(strstr($result, '['), true);
-    }
-
-    if (is_array($json_ret) && isset($json_ret['errors'])) {
-      $errors_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | ";
-      foreach ($json_ret['errors'] as $key => $error) {
-        $errors_message .= $key . ' : ' . $error['code'] . " => " . $error['message'] . ' | ';
-      }
-
-      $this->logger->error($errors_message);
-    } elseif (!is_array($json_ret) || curl_errno($ch) > 0) {
-      $error_message = "Curl error : " . curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . " | "
-        . curl_errno($ch) . ' => ' . curl_error($ch) .  ' | '
-        . $result . ' | ' . json_encode(curl_getinfo($ch));
-      $this->logger->error($error_message);
-    }
-
-    return $json_ret;
-  }
-
-  private function getCurl($url = null) {
-
-    $proxy_server = NULL;
-
-    if (!empty($this->generalConfig) && !empty($this->generalConfig->get('proxy_server')) && !empty($this->generalConfig->get('proxy_port'))) {
-      $proxy_server = $this->generalConfig->get('proxy_server').':'.$this->generalConfig->get('proxy_port');
-    }
-
-    $ch = curl_init();
-
-    if ($url !== null) {
-      curl_setopt($ch, CURLOPT_URL, $url);
-    }
-
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-    curl_setopt($ch, CURLOPT_PROXY, $proxy_server);
-    curl_setopt($ch, CURLOPT_SSLVERSION, 0);
-    curl_setopt($ch, CURLOPT_SSLVERSION, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-
-    return $ch;
   }
 
   private function getConf($key, $default = '') {
