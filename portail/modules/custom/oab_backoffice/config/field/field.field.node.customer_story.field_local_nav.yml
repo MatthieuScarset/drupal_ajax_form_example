@@ -19,3 +19,5 @@ default_value:
     value: "<div class=\"local_nav sub_local_menu container-fluid\" data-title-mobile=\"Sous-menu\" id=\"local_nav\">\r\n<div class=\"container\">\r\n<ul>\r\n\t<li><a href=\"#zone1\">Zone 1</a></li>\r\n\t<li><a href=\"#zone2\">Zone 2</a></li>\r\n\t<li><a href=\"#zone3\">Zone 3</a></li>\r\n\t<li><a href=\"#zone4\">Zone 4</a></li>\r\n\t<li><a href=\"#zone5\">Zone 5</a></li>\r\n</ul>\r\n</div>\r\n</div>\r\n"
     format: full_html
 default_value_callback: ''
+settings: {  }
+field_type: text_long
