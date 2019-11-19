@@ -37,7 +37,7 @@ class TwitterService {
   private $urlTimeline   = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
   private $urlOembed     = 'https://publish.twitter.com/oembed';
 
-  public function getTweet(int $position) {
+  public function getTweet($position) {
     $timeline = $this->getTimeline($position);
     $tweets = $this->getEmbededTweets($timeline);
     return $tweets;
