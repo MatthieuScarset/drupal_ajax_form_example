@@ -1,0 +1,12 @@
+<?php
+
+function oab_cedric_install() {
+    drupal_set_installed_schema_version('oab_cedric', 8000);
+}
+
+/**
+ * update twitter block
+ */
+function oab_cedric_update_8001() {
+  oabt_YmlImport("oab_twitter.settings_form.yml");
+}
