@@ -1261,12 +1261,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 }
 .rebond article, .block-mediatheque, #block-promoactublock {
-    margin: 8rem 2rem 0 2rem;
+    margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
 }
 
 .rebond.rebond-contact-distributor article {
-    padding: 3rem 1rem;
+    padding: 1rem 1rem;
 }
 
 .rebond .form-group {
@@ -2910,4 +2910,8 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
+}
+
+.path-node .main-container {
+  background-color: white;
 }

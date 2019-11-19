@@ -496,7 +496,9 @@ html {
 body {
     display: table-cell;
     vertical-align: middle;
-    background-color: #ffffff;
+   /* background-color: #ffffff;*/
+    background-color: #eee;
+
 }
 body > .main-container{
    /* margin-bottom: 3rem; */
