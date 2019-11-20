@@ -2915,3 +2915,16 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .path-node .main-container {
   background-color: white;
 }
+
+.page-node-type-webform .content form .form-item label {
+  margin-top: 2rem;
+}
+
+.page-node-type-webform .content form .form-item {
+  padding-left: 0;
+}
+
+.page-node-type-webform .page-header {
+   margin-left: -1rem;
+}
+
