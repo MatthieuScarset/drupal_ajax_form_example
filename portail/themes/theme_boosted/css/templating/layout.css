@@ -811,9 +811,8 @@ aside.right-column > .region{
     padding: 20px 20px !important;
 }
 
-.subhomes-filterbar-background{
-    background-color: #ededed;
-    padding: 20px 30px;
+.subhomes-filterbar-background {
+    padding: 20px 45px 0 30px;
     margin-left: -30px;
     margin-right: -30px;
 }
