@@ -13,7 +13,7 @@ if (empty($field_storage)) {
   ));
   $field_storage->save();
 }
-oabt_YmlImport('field.storage.paragraph.field_block_size.yml');
+oabt_YmlImport('field.field.storage.paragraph.field_block_size.yml');
 
 $fieldConfig = FieldConfig::loadByName('paragraph', 'homepage_news', 'field_block_size');
 if (empty($fieldConfig)) {
