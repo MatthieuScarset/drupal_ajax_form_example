@@ -25,7 +25,7 @@ if (empty($fieldConfig)) {
   ));
   $fieldConfig->save();
 }
-oabt_YmlImport('field.field.node.document.field_document_language.yml');
+oabt_YmlImport('field.field.paragraph.homepage_news.field_block_size.yml');
 
 
 oabt_YmlImport("core.entity_form_display.paragraph.homepage_news.default.yml");
