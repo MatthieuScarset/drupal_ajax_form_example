@@ -1,0 +1,8 @@
+<?php
+
+
+
+
+function oab_cedric_update_8002() {
+  include_once('updates/update_8002.inc');
+}
