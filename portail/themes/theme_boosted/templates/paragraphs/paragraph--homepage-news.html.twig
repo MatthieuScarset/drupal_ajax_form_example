@@ -49,7 +49,9 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     {% set highlighted_node = content.field_highlight_content[0]['#node'] %}
     {% set block_size = content.field_block_size[0]['#markup'] %}
     {% set url = '/' %}
-    {% set url = path('entity.node.canonical', {'node': content.field_highlight_content[0]['#node'].id}) %}
+    {% if content.field_highlight_content[0]['#node'].id is not empty %}
+      {% set url = path('entity.node.canonical', {'node': content.field_highlight_content[0]['#node'].id}) %}
+    {%  endif %}
     {%  if block_size == 'full' %}
       <div class="col-xl-12 col-lg-12 col-md-12 hidden-sm hidden-xs block-card block-card-black block-card-full text-align-center" style=" ">
         <a href="{{ url }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_title[0]['#context']['value'] }}', '')">
