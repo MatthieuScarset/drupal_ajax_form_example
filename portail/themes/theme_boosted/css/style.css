@@ -2905,9 +2905,25 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 .mega-menu .nav-item.dropdown .dropdown-menu ul {
-    margin-left: 10px !important;
+    margin-left: 10hpx !important;
 }
 
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
+}
+
+.arrow-down-claim-homepage {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #000;
+    opacity: 0.7;
+    position: relative;
+    top: 19px;
+}
+
+.claim-homepage-container {
+    text-align: center;
+    min-height: 90px;
 }

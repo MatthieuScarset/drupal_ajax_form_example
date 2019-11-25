@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.homepage.field_banner_expertise
     - field.field.node.homepage.field_banner_left_zone_title
     - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_claim
     - field.field.node.homepage.field_corporate_button_link
     - field.field.node.homepage.field_corporate_button_text
     - field.field.node.homepage.field_corporate_highlight
@@ -16,6 +17,8 @@ dependencies:
     - field.field.node.homepage.field_corporate_title
     - field.field.node.homepage.field_expertise_title
     - field.field.node.homepage.field_header_title
+    - field.field.node.homepage.field_hub
+    - field.field.node.homepage.field_hub_portal
     - field.field.node.homepage.field_infography
     - field.field.node.homepage.field_meta_description
     - field.field.node.homepage.field_meta_title
@@ -78,6 +81,13 @@ content:
     label: hidden
     settings:
       link_to_entity: false
+    third_party_settings: {  }
+  field_claim:
+    type: text_default
+    weight: 34
+    region: content
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
   field_corporate_button_link:
     type: link

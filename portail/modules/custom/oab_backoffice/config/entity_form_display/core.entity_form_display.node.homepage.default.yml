@@ -1,4 +1,3 @@
-uuid: null
 langcode: en
 status: true
 dependencies:
@@ -6,6 +5,7 @@ dependencies:
     - field.field.node.homepage.field_banner_expertise
     - field.field.node.homepage.field_banner_left_zone_title
     - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_claim
     - field.field.node.homepage.field_corporate_button_link
     - field.field.node.homepage.field_corporate_button_text
     - field.field.node.homepage.field_corporate_highlight
@@ -42,7 +42,7 @@ dependencies:
     - field.field.node.homepage.field_top_zone_image
     - field.field.node.homepage.field_top_zone_image_mobile
     - field.field.node.homepage.moderation_state_update
-    - image.style.max_650
+    - image.style.thumbnail
     - node.type.homepage
   module:
     - field_group
@@ -58,10 +58,11 @@ third_party_settings:
       children:
         - field_header_title
         - field_subhead_title_top_zone
-        - field_title_color
-        - group_title_button
         - field_top_zone_image
         - field_top_zone_image_mobile
+        - field_title_btn_text
+        - field_title_button_link
+        - field_title_color
         - field_news_top_zone
       parent_name: group_onglets
       weight: 0
@@ -77,13 +78,14 @@ third_party_settings:
     group_onglets:
       children:
         - group_homepage_top_zone
+        - group_claim
         - group_solution_banner
         - group_banner_experience
         - group_partner_
         - group_corporate_banner
         - group_seo
       parent_name: ''
-      weight: 3
+      weight: 2
       format_type: tabs
       format_settings:
         id: ''
@@ -94,14 +96,11 @@ third_party_settings:
       children:
         - field_solution_banner_title
         - field_solution_banner_highlight
-        - field_solution_banner_title_colo
-        - group_solution_title
         - field_solution_banner_image
-        - field_solution_image_mobile
         - group_left_zone
         - group_right
       parent_name: group_onglets
-      weight: 1
+      weight: 2
       format_type: tab
       format_settings:
         label: Solution
@@ -116,7 +115,7 @@ third_party_settings:
         - field_banner_left_zone_title
         - field_solution_banner_left_zone
       parent_name: group_solution_banner
-      weight: 32
+      weight: 29
       format_type: fieldset
       format_settings:
         id: ''
@@ -129,7 +128,7 @@ third_party_settings:
         - field_banner_right_zone_title
         - field_solution_banner_right_zone
       parent_name: group_solution_banner
-      weight: 33
+      weight: 30
       format_type: fieldset
       format_settings:
         id: ''
@@ -142,7 +141,7 @@ third_party_settings:
         - field_expertise_title
         - field_banner_expertise
       parent_name: group_onglets
-      weight: 2
+      weight: 3
       format_type: tab
       format_settings:
         label: Expertise
@@ -162,7 +161,7 @@ third_party_settings:
         - field_corporate_image
         - field_infography
       parent_name: group_onglets
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         label: Corporate
@@ -177,7 +176,7 @@ third_party_settings:
         - field_partner_title
         - field_partners_button_text
       parent_name: group_onglets
-      weight: 3
+      weight: 4
       format_type: tab
       format_settings:
         label: Partners
@@ -192,7 +191,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 5
+      weight: 6
       format_type: tab
       format_settings:
         id: ''
@@ -201,33 +200,19 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
-    group_title_button:
+    group_claim:
       children:
-        - field_title_btn_text
-        - field_title_button_link
-      parent_name: group_homepage_top_zone
-      weight: 46
-      format_type: fieldset
+        - field_claim
+      parent_name: group_onglets
+      weight: 1
+      format_type: tab
       format_settings:
         id: ''
         classes: ''
+        formatter: closed
         description: ''
         required_fields: true
-      label: 'Title button'
-    group_solution_title:
-      children:
-        - field_solution_banner_btn_text
-        - field_solution_banner_btn_link
-      parent_name: group_solution_banner
-      weight: 29
-      format_type: fieldset
-      format_settings:
-        label: 'Solution banner button'
-        description: ''
-        required_fields: true
-        id: ''
-        classes: ''
-      label: 'Solution banner button'
+      label: Claim
 id: node.homepage.default
 targetEntityType: node
 bundle: homepage
@@ -235,7 +220,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -267,6 +252,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_claim:
+    weight: 50
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_corporate_button_link:
     weight: 34
     settings:
@@ -276,7 +269,7 @@ content:
     type: link_default
     region: content
   field_corporate_button_text:
-    weight: 36
+    weight: 35
     settings:
       size: 60
       placeholder: ''
@@ -300,7 +293,7 @@ content:
     type: image_image
     region: content
   field_corporate_menu_title:
-    weight: 37
+    weight: 36
     settings:
       size: 60
       placeholder: ''
@@ -330,19 +323,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_hub:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_hub_portal:
-    weight: 3
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
     region: content
   field_infography:
     type: entity_reference_paragraphs
@@ -374,7 +354,7 @@ content:
     region: content
   field_news_top_zone:
     type: entity_reference_paragraphs
-    weight: 49
+    weight: 51
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -400,23 +380,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_solution_banner_btn_link:
-    weight: 127
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_solution_banner_btn_text:
-    weight: 126
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_solution_banner_highlight:
     weight: 27
     settings:
@@ -426,7 +389,7 @@ content:
     type: text_textarea
     region: content
   field_solution_banner_image:
-    weight: 30
+    weight: 28
     settings:
       preview_image_style: homepage_solution_banner
       progress_indicator: throbber
@@ -465,20 +428,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_solution_banner_title_colo:
-    weight: 28
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_solution_image_mobile:
-    weight: 31
-    settings:
-      preview_image_style: large
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
-    region: content
   field_subhead_title_top_zone:
     weight: 44
     settings:
@@ -488,38 +437,30 @@ content:
     type: string_textfield
     region: content
   field_title_btn_text:
-    weight: 124
+    type: string_textfield
+    weight: 47
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_title_button_link:
-    weight: 125
+    type: entity_reference_autocomplete
+    weight: 48
+    region: content
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_title_button_text:
-    weight: 122
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textfield
-    region: content
   field_title_color:
-    weight: 45
+    weight: 49
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_top_zone_image:
-    weight: 47
+    weight: 45
     settings:
       preview_image_style: homepage_top_zone
       progress_indicator: throbber
@@ -527,13 +468,13 @@ content:
     type: image_image
     region: content
   field_top_zone_image_mobile:
-    weight: 48
-    settings:
-      preview_image_style: max_650
-      progress_indicator: throbber
-    third_party_settings: {  }
     type: image_image
+    weight: 46
     region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 1
@@ -543,7 +484,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -551,21 +492,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 6
+    weight: 5
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
-    third_party_settings: {  }
+    weight: 120
     region: content
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 7
+    weight: 6
     region: content
     third_party_settings: {  }
   title:
@@ -578,7 +519,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -586,14 +527,20 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 9
+    weight: 50
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   field_corporate_menu: true
   field_corporate_show_menu: true
+  field_hub: true
+  field_hub_portal: true
   field_metatags: true
   field_partner_button_link: true
+  field_solution_banner_btn_link: true
+  field_solution_banner_btn_text: true
+  field_solution_banner_title_colo: true
+  field_solution_image_mobile: true
   moderation_state_update: true
   translation: true
