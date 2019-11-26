@@ -52,5 +52,13 @@ if (empty($fieldConfig)) {
 oabt_YmlImport('field.field.paragraph.homepage_news.field_highlight_content.yml');
 
 
+oabt_YmlImport('paragraphs.paragraphs_type.homepage_news.yml');
+
+
 oabt_YmlImport("core.entity_form_display.paragraph.homepage_news.default.yml");
 oabt_YmlImport("core.entity_view_display.paragraph.homepage_news.default.yml");
+
+
+oabt_YmlImport('field.storage.node.field_news_top_zone.yml');
+
+
