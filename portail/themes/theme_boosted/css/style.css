@@ -438,6 +438,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 2rem;
 }
 
+.block-card-container{
+  margin: auto;
+  max-width: 1180px;
+  margin-top: -70px;
+}
+
 @media (min-width: 768px) {
     .block-card img{
         width: 100%;
