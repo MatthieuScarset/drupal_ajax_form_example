@@ -358,6 +358,31 @@
         </div>
         {% endif %}
 
+        <!-- Expertise Zone Homepage MOBILE -->
+
+        {% if content.field_expertise_title|render|trim is not empty %}
+            <div class="homepage-banner-container-mobile">
+                <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
+
+                    <div class="title">
+                        {{ content.field_expertise_title }}
+                    </div>
+                    <div class="tabpanel-expertise" role="tabpanel">
+                        <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tabs <span class="caret"></span>
+                        </button>
+
+                            {% for key, item in node.field_banner_expertise %}
+                                <div class="homepage-expertise-content-mobile">
+                                    {{ content.field_banner_expertise[key] }}
+                                </div>
+                            {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
         <!-- Partner Zone Homepage -->
         {% if content.field_partner_title|render|trim is not empty %}
             <div class="homepage-banner-container">

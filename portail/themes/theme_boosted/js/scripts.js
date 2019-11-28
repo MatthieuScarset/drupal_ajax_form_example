@@ -318,4 +318,9 @@
     }
   });
 
+  $('#tab-expertise-banner li').on('click', function (elem) {
+      $(elem.target).css('height', '100%');
+      console.log(elem);
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
