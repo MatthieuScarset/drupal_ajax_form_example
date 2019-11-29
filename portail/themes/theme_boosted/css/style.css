@@ -1098,7 +1098,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .homepage-banner-expertise-image img{ width: 100%;  height : auto;}
     .homepage-banner-expertise-content{
         padding-left: 0px;
-        padding-top: 20px;
+        padding-top: 10px;
     }
 
     .homepage-banner-expertise-content{
@@ -1114,6 +1114,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         width: 100%;
         display: block;
         padding: 0;
+        margin-bottom: 10px;
     }
 
     .block-card a {
