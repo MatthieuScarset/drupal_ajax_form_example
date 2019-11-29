@@ -697,7 +697,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
      content : "";
      position: absolute;
      right    : 0;
-     z-index: 1000;
+     z-index: 10;
      top  : 50%;
      width  : 2px;
      height   : 50%;  /* or 100px */
@@ -710,7 +710,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     content : "";
     position: absolute;
     left    : 0;
-    z-index: 1000;
+    z-index: 10;
     top  : 50%;
     width  : 2px;
     height   : 50%;  /* or 100px */
