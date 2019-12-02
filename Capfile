@@ -3,6 +3,7 @@ require 'capistrano/setup'
 
 # Include default deployment tasks
 require 'capistrano/deploy'
+require 'capistrano/file-permissions'
 
 # Include tasks from other gems included in your Gemfile
 #

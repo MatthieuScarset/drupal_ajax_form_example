@@ -8,8 +8,6 @@ set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
 set :runner_group, "www-data"
-set :file_permissions_paths, ["/var/www/current"]
-set :file_permissions_users, ["www-data"]
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -29,8 +27,11 @@ set :deploy_to, '/var/www'
 # Default value for :pty is false
 # set :pty, true
 
+# Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('portail/sites/default/settings.php')
+
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default')
+set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default/files')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -122,8 +123,7 @@ namespace :deploy do
    task :delete_unnecessary_files do
     on roles(:all) do
     execute :rm, "-rf #{release_path}/scripts"
-     execute :rm, "-rf #{release_path}/config/deploy"
-     execute :rm, "-rf #{release_path}/config/deploy.rb"
+     execute :rm, "-rf #{release_path}/config"
      execute :rm, "-rf #{release_path}/.git"
      execute :rm, "-rf #{release_path}/public"
      execute :rm, "-rf #{release_path}/tmp"
@@ -143,37 +143,21 @@ namespace :deploy do
     end
    end
    
-   desc 'Create /var/www/current symbolik link'
-   task :create_current_link do
-    on roles(:all) do
-     execute "ln -s #{release_path} /var/www/current"
-    end
-   end
-
-   desc 'Re-run docker'
-   task :restart_docker do
-    on roles(:all) do
-     execute "docker-compose -f /etc/docker/drupal/docker-compose.yml stop"
-     execute "docker-compose -f /etc/docker/drupal/docker-compose.yml up -d"
-    end
-   end
-
    desc 'Run update commands on server'
    task :drush_update do
     on roles(:all) do
-   	 #execute "docker exec opal_php-fpm drush cim --yes"
-     #execute "docker exec opal_php-fpm drush updb --yes"
-	 #execute "docker exec opal_php-fpm drush entity-updates --yes"
-	 #execute "docker exec opal_php-fpm drush cr"
+     execute "drush oab:updb --yes --root=#{release_path}/portail"
+	 #execute "drush updb --yes --root=#{release_path}/portail"
+	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
+	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
+	 execute "drush cr --root=#{release_path}/portail"
+	 execute "ln -sf /home/oab_web/drupal7 #{release_path}/portail/drupal7"
+	 execute "ln -sf /var/www/DVI/current/portail /var/www/current/portail/DVI"
     end
    end
 end
 
-
 before 'deploy:updating', 'deploy:upload_tarball'
 after 'deploy:updating', 'deploy:delete_unnecessary_files'
 after 'deploy:updating', 'deploy:save_archive_file'
-#after 'deploy:updating', "deploy:create_current_link"
-#after 'deploy:publishing', "deploy:set_permissions:acl"
-after 'deploy:publishing', 'deploy:restart_docker'
-after 'deploy:publishing', 'deploy:drush_update'
+after 'deploy:updating', 'deploy:drush_update'
