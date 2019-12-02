@@ -153,8 +153,8 @@ namespace :deploy do
    desc 'Re-run docker'
    task :restart_docker do
     on roles(:all) do
-     execute "docker-compose -f /etc/docker/drupal/docker-compose.yml stop"
-     execute "docker-compose -f /etc/docker/drupal/docker-compose.yml up -d"
+     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml stop"
+     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml up -d"
     end
    end
 
