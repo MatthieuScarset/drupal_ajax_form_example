@@ -6,7 +6,7 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\workbench_moderation\Entity\ModerationState as ModerationStateEntity;
+use Drupal\workbench_moderation\Entity\ModerationState;
 use Drupal\workbench_moderation\ModerationInformationInterface;
 use Drupal\workbench_moderation\StateTransitionValidation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -90,11 +90,8 @@ class ModerationStateValidator extends ConstraintValidator implements ContainerI
     $bundle = $this->entityTypeManager->getStorage($entity->getEntityType()->getBundleEntityType())->load($entity->bundle());
 
     $default_state = $bundle->getThirdPartySetting('workbench_moderation', 'default_moderation_state');
-    #$next_moderation_state = ModerationState::load(!$entity->moderation_state->isEmpty() ? $entity->moderation_state->target_id : $default_state);
-    #$original_moderation_state = ModerationState::load($original_entity && !$original_entity->moderation_state->isEmpty() ? $original_entity->moderation_state->target_id : $default_state);
-    # WMI patcj de maintien hors PHP7
-    $next_moderation_state = ModerationStateEntity::load(!$entity->moderation_state->isEmpty() ? $entity->moderation_state->target_id : $default_state);
-    $original_moderation_state = ModerationStateEntity::load($original_entity && !$original_entity->moderation_state->isEmpty() ? $original_entity->moderation_state->target_id : $default_state);
+    $next_moderation_state = ModerationState::load(!$entity->moderation_state->isEmpty() ? $entity->moderation_state->target_id : $default_state);
+    $original_moderation_state = ModerationState::load($original_entity && !$original_entity->moderation_state->isEmpty() ? $original_entity->moderation_state->target_id : $default_state);
 
     if (!$this->validation->isTransitionAllowed($original_moderation_state->id(), $next_moderation_state->id())) {
       $this->context->addViolation($constraint->message, ['%from' => $original_moderation_state->label(), '%to' => $next_moderation_state->label()]);
