@@ -64,9 +64,19 @@
   {% endif %}
 
   {% if rows %}
-    <div class="view-content">
-     <div id="views-hp-partenaire-previous" class="icon-arrow-previous"></div> {{ rows }} <div id="views-hp-partenaire-next" class="icon-arrow-next"></div> {# chevron en html > #}
+    <div class="view-content ">
+        {# chevron en html > #}
+        <div class="col-sm-1 views-hp-partenaire-previous ">
+          <span id="views-hp-partenaire-previous" class="icon-arrow-previous"></span>
+        </div>
+        <div class="col-sm-10">
+          {{ rows }}
+        </div>
+        <div class="col-sm-1 views-hp-partenaire-next">
+          <span id="views-hp-partenaire-next" class="icon-arrow-next"></span>
+        </div>
     </div>
+
   {% elseif empty %}
     <div class="view-empty">
       {{ empty }}
@@ -74,9 +84,9 @@
   {% endif %}
 
   {% if pager %}
-
+    <div class="hidden">
       {{ pager }}
-
+    </div>
   {% endif %}
 
   {% if attachment_after %}

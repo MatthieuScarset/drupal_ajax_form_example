@@ -318,14 +318,17 @@
     }
   });
 
-/*
-prev and next Nos partenaire
+  /*
+    prev and next Nos partenaire
  */
   $(document).on('click', '#views-hp-partenaire-previous', function(e) {
    // alert('bla');
     var css_button_created_by_drupal = '.view.view-homepage-partner nav a[rel="prev"]';
     if ($(css_button_created_by_drupal).length) {
       $(css_button_created_by_drupal).click();
+    }
+    else {
+      $(this).addClass('hidden');
     }
   });
 
