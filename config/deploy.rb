@@ -8,14 +8,14 @@ set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
 set :runner_group, "www-data"
-set :file_permissions_paths, ["/var/www/current"]
+set :file_permissions_paths, ["/var/www/ruby/current"]
 set :file_permissions_users, ["www-data"]
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/var/www'
+set :deploy_to, '/var/www/ruby'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -44,40 +44,9 @@ set :keep_releases, 5
 # see http://hugopl.github.io/2014/07/29/Capistrano-3-copy-deploy.html
 set :project_tarball_path, "/tmp/#{fetch(:application)}.tar.gz"
 
-# We create a Git Strategy and tell Capistrano to use it, our Git Strategy has a simple rule: Don't use git.
-module NoGitStrategy
-  def check
-    true
-  end
-
-  def test
-    # Check if the tarball was uploaded.
-    test! " [ -f #{fetch(:project_tarball_path)} ] "
-  end
-
-  def clone
-    true
-  end
-
-  def update
-    true
-  end
-
-  def release
-    # Unpack the tarball uploaded by deploy:upload_tarball task.
-    context.execute "tar -xf #{fetch(:project_tarball_path)} -C #{release_path}"
-    # Remove it just to keep things clean.
-    context.execute :rm, fetch(:project_tarball_path)
-  end
-
-  def fetch_revision
-    # Return the tarball release id, we are using the git hash of HEAD.
-    fetch(:release_name)
-  end
-end
 
 # Capistrano will use the module in :git_strategy property to know what to do on some Capistrano operations.
-set :git_strategy, NoGitStrategy
+#set :git_strategy, NoGitStrategy
 
 #namespace :deploy do
 
@@ -93,31 +62,7 @@ set :git_strategy, NoGitStrategy
 #end
 
 namespace :deploy do
-   desc 'Create and upload project tarball'
-   task :upload_tarball do |task, args|
-    tarball_path = fetch(:project_tarball_path)
-    # This will create a project tarball from HEAD, stashed and not committed changes wont be released.
-   `git archive -o #{tarball_path} HEAD`
-    raise 'Error creating tarball.'if $? != 0
 
-    on roles(:all) do
-      upload! tarball_path, tarball_path
-    end
-   end
-   
-   desc 'Run dev deployment on each dev server'
-   task :deploy_dev do
-    #system("cap dev dev_bo deploy")
-    system("cap dev deploy")
-    #system("cap dev_bo deploy")
-    #run_locally "cap dev dev-bo deploy"
-   end
-	
-   desc 'Run recette deployment on each recette server'
-   task :deploy_recette do
-    system("cap recette recette-bo deploy")
-   end
-	
    desc 'Delete unnecessary files'
    task :delete_unnecessary_files do
     on roles(:all) do
@@ -170,7 +115,7 @@ namespace :deploy do
 end
 
 
-before 'deploy:updating', 'deploy:upload_tarball'
+#before 'deploy:updating', 'deploy:upload_tarball'
 after 'deploy:updating', 'deploy:delete_unnecessary_files'
 after 'deploy:updating', 'deploy:save_archive_file'
 #after 'deploy:updating', "deploy:create_current_link"
