@@ -100,6 +100,9 @@ namespace :deploy do
     on roles(:all) do
      execute "docker-compose -f /etc/docker/ruby/docker-compose.yml stop"
      execute "docker-compose -f /etc/docker/ruby/docker-compose.yml up -d"
+     execute "drush updb --yes --root=#{release_path}/portail"
+   	 #execute "drush cim --yes --root=#{release_path}/portail"
+     execute "drush cr --root=#{release_path}/portail"
     end
    end
 
