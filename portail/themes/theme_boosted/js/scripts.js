@@ -326,8 +326,7 @@
     var css_button_created_by_drupal = '.view.view-homepage-partner nav a[rel="prev"]';
     if ($(css_button_created_by_drupal).length) {
       $(css_button_created_by_drupal).click();
-    }
-    else {
+    } else {
       $(this).addClass('hidden');
     }
   });
@@ -336,6 +335,8 @@
     var css_button_created_by_drupal = '.view.view-homepage-partner nav a[rel="next"]';
     if ($(css_button_created_by_drupal).length) {
       $(css_button_created_by_drupal).click();
+    } else {
+      $(this).addClass('hidden');
     }
   });
 
