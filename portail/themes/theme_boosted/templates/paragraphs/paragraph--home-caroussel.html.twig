@@ -1,0 +1,9 @@
+
+{% block paragraph %}
+    {% block content %}
+        <div class="carousel-caption" >
+            <p>{{  paragraph.field_home_accroche[0].value }}</p>
+            {{ content.field_button }}
+        </div>
+    {% endblock %}
+{% endblock paragraph %}
