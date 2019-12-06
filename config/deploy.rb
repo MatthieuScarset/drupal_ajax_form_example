@@ -100,19 +100,15 @@ namespace :deploy do
     on roles(:all) do
      execute "docker-compose -f /etc/docker/ruby/docker-compose.yml stop"
      execute "docker-compose -f /etc/docker/ruby/docker-compose.yml up -d"
-     execute "drush updb --yes --root=#{release_path}/portail"
-   	 #execute "drush cim --yes --root=#{release_path}/portail"
-     execute "drush cr --root=#{release_path}/portail"
     end
    end
 
    desc 'Run update commands on server'
    task :drush_update do
     on roles(:all) do
-   	 #execute "docker exec opal_php-fpm drush cim --yes"
-     #execute "docker exec opal_php-fpm drush updb --yes"
-	 #execute "docker exec opal_php-fpm drush entity-updates --yes"
-	 #execute "docker exec opal_php-fpm drush cr"
+     execute "drush oab:updb --yes --root=#{release_path}/portail"
+   	 #execute "drush cim --yes --root=#{release_path}/portail"
+     execute "drush cr --root=#{release_path}/portail"
     end
    end
 end
