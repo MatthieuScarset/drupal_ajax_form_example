@@ -25,7 +25,6 @@ class OblPricesController extends ControllerBase {
 
         return array(
             '#countries' => $countries,
-            '#countrie_id' => $id,
             '#zones' => $zones,
             '#zones_image' => $zones_image,
             '#title' => $title,
@@ -36,6 +35,7 @@ class OblPricesController extends ControllerBase {
                 ],
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
+                    'id_country' => $id
                 ]
             ],
 

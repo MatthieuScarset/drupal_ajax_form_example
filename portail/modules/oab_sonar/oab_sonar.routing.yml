@@ -1,0 +1,7 @@
+oab_sonar_settings:
+  path: '/admin/structure/oab/settings/oab_sonar'
+  defaults:
+    #_form: '\Drupal\oab_orange_business_lounge\Form\OabOblForm'
+    _title: 'SONAR settings'
+  requirements:
+    _permission: 'administer site configuration'

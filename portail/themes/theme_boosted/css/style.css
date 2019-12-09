@@ -2929,7 +2929,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 /* Style the active class, and buttons on mouse-over */
-.active.obl-block-countries, .obl-block-countries:hover {
+.active.get_zone, .obl-block-countries:hover {
     color: #F16E00;
     background-color: black;
 }
@@ -2940,7 +2940,6 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 img.image_pannel{
     width: 100%;
-    height: 100px;
 }
 
 .roaming-infos-container {
