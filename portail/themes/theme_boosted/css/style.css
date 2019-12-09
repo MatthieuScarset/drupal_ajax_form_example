@@ -625,7 +625,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         overflow: hidden;
     }
     .homepage-banner.partner-banner .tabpanel-partner .views-element-container .view-homepage-partner {
-        overflow-x: scroll;
+        overflow-x: hidden;
     }
     .homepage-banner.partner-banner .tabpanel-partner .views-element-container .view-homepage-partner .views-view-grid horizontal {
         width: 1000px;
@@ -851,6 +851,18 @@ a.link-subhomes:hover .encart-image.subhome-image {
     display: table-cell;
     vertical-align: middle;
     float: none;
+}
+
+@media (max-width: 768px) {
+  .partner-banner .views-view-grid .partner-img {
+    display: initial;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: left;
+  }
+
 }
 .partner-banner .views-view-grid .partner-img:hover{
     border: 1px solid #F16E00;
@@ -1250,14 +1262,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-left: 15px;
     }
 
-    .partner-banner .views-view-grid .views-row {
-        margin-left: -20px;
-    }
 
-
-    .partner-banner .views-view-grid .partner-img {
-        min-width: 190px;
-    }
 
 }
 .rebond article, .block-mediatheque, #block-promoactublock {
