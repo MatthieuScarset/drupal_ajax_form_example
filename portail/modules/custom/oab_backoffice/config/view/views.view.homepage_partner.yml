@@ -51,7 +51,7 @@ display:
       pager:
         type: mini
         options:
-          items_per_page: 5
+          items_per_page: 4
           offset: 0
           id: 0
           total_pages: null
@@ -70,7 +70,7 @@ display:
         type: grid
         options:
           grouping: {  }
-          columns: 5
+          columns: 4
           automatic_width: true
           alignment: horizontal
           col_class_default: true
@@ -79,6 +79,11 @@ display:
           row_class_custom: ''
       row:
         type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         path:
           id: path

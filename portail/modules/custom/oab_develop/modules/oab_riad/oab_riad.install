@@ -36,3 +36,11 @@ function oab_riad_update_8002() {
 function oab_riad_update_8006() {
   include_once("updates/update_8006.inc");
 }
+
+
+/**
+ * RUBYPORTAILOBS-3572 affichage de 4 blocs au lieu de 5 pour la vue hp-nos partenaires
+ */
+function oab_riad_update_8007() {
+  include_once("updates/update_8007.inc");
+}
