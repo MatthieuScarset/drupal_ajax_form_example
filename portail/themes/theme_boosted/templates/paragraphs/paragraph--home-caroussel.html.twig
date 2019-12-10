@@ -1,0 +1,9 @@
+
+{% block paragraph %}
+    {% block content %}
+        <div>
+            {{  paragraph.field_home_accroche[0].value | raw}}
+            {{ content.field_button }}
+        </div>
+{% endblock %}
+{% endblock paragraph %}
