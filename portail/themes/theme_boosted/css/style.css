@@ -439,11 +439,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 
-.block-card-container{
-    margin: auto;
-    max-width: 1180px;
-    margin-top: -70px;
-}
 
 @media (min-width: 768px) {
     .block-card-container {
@@ -2910,4 +2905,17 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
+}
+
+.carrousel-homepage-header .carousel-inner .item img {
+    opacity: 0;
+    height: 400px;
+}
+
+.carousel-caption.homepage-carousel {
+    top : 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: left;
 }

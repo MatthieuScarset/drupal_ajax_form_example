@@ -1,0 +1,82 @@
+{%
+    set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'carrousel-homepage-header'
+]
+%}
+{%
+    set title_classes = [
+    'field--label',
+    label_display == 'visually_hidden' ? 'sr-only',
+]
+%}
+
+{# je crée un id random au cas ou il y ait plus elements de ce field dans une même class
+    car le carrousel bootstrap a besoin d'un id unique #}
+{% set id = 'carrousel-homepage-header-' ~ random() %}
+
+
+<div id="{{ id }}" class="carousel slide carrousel-homepage-header" data-interval="false" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for i in 0..(items|length - 1) %}
+            <li data-target="{{ "#" ~ id }}" data-slide-to="{{ i }}" {% if i == 0 %}class="active" {% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for key, item in items %}
+            <div class="item {% if key == 0 %}active{% endif %}">
+                <img src="portail/themes/theme_boosted/images/fond-gris.png"  />
+                <div class="carousel-caption homepage-carousel">
+                    {{ item.content }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="{{ '#' ~ id }}" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="{{ '#' ~ id }}" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+{# <div id="{{ id }}" class="carousel slide col-12" data-interval="false" data-ride="carousel">
+
+
+        <ol class="carousel-indicators">
+
+            {% for i in 0..(items|length - 1) %}
+                <li data-target="{{ "#" ~ id }}" data-slide-to="{{ i }}" {% if i == 0 %}class="active" {% endif %}></li>
+            {% endfor %}
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            {% for key, item in items %}
+                <div class="carousel-item {% if key == 0 %}active{% endif %}">
+                    {{ item.content }}
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="{{ '#' ~ id }}" role="button" data-slide="prev">
+            <span class="glyphicon icon-arrow-previous" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="{{ '#' ~ id }}" role="button" data-slide="next">
+            <span class="glyphicon icon-arrow-next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div> #}

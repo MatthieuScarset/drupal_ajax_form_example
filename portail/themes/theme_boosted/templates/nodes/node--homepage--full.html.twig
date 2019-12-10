@@ -73,45 +73,29 @@
  */
 #}
 
+
+{%
+    set classes = [
+    'node',
+    node.bundle|clean_class,
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+    'container-fluid'
+]
+%}
+
 <article{{ attributes.addClass(classes) }}>
-    {{ title_suffix }}
-    {{ title_prefix }}
-<!-- Top Zone Homepage -->
-<div class="row top-zone-homepage">
-    {% set url = '' %}
-
-    {# IMAGE DESKTOP#}
-    {% for key, image in content.field_top_zone_image if image.entity is not null  %}
-        {% set media = image.entity %}
-        {% set uri = media.uri.value %}
-
-        {% if uri is not null %}
-            {% set url = file_url(uri) %}
-        {% endif %}
-    {% endfor %}
-
-    <div class="col-md-12 hidden-xs banner-bg top-banner"  style="background: url({{ url }}) ">
-        {% set tzColorClass = "homepage-title-" ~ content.field_title_color.0["#markup"] %}
-        <div class="section-title-top-zone {{ tzColorClass }} container-fluid-navbar">
-            <div class="col-md-7 no-padding text-left subhead-title">
-                {{ content.field_subhead_title_top_zone }}
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-12 no-padding text-left title">
-                {{ content.field_caroussel_header }}
-            </div>
-            {% if content.field_title_btn_text|render|trim is not empty %}
-                <div class="clearfix"></div>
-                <div class="col-md-7 no-padding text-left title title-btn">
-                    <a class="btn btn-default btn-hp-title" href="{{ content.field_title_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '{{ content.field_header_title.0["#context"].value  }}', '')" >
-                        {{ content.field_title_btn_text.0["#context"].value }}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
+    <div class="container-fluid-navbar"  style=" ">
+        {{ content.field_caroussel_header }}
     </div>
-    {# IMAGE MOBILE#}
-    {% set urlMobile = '' %}
+
+    <div class="container-fluid" style="background-color: #eee">
+
+
+    <!-- Top Zone Homepage -->
+    <div class=" top-zone-homepage">
+
+
 
     {% for key, image in content.field_top_zone_image_mobile if image.entity is not null  %}
         {% set media = image.entity %}
@@ -149,59 +133,28 @@
             {% endfor %}
         </div>
 
+        </div>
+
     </div>
 
-</div>
 
+    <!-- Solution Zone Homepage -->
+    <div class="row solution-homepage">
+        {% set url = '' %}
 
-<!-- Solution Zone Homepage -->
-<div class="row solution-homepage">
-    {% set url = '' %}
-
-    {% for key, image in content.field_solution_banner_image if image.entity is not null  %}
-        {% set media = image.entity %}
-        {% set uri = media.uri.value %}
-
-        {% if uri is not null %}
-            {% set url = file_url(uri) %}
-        {% endif %}
-    {% endfor %}
-
-    {% if content.field_solution_banner_title|render|trim is not empty %}
-    <div class="col-md-12 hidden-xs banner-bg solution-banner" style="background: url({{ url }}) ">
-        <div class="container">
-            {% set solutionColorClass = "homepage-title-" ~ content.field_solution_banner_title_colo.0["#markup"] %}
-            <div class="col-md-offset-1 section-title-solution {{ solutionColorClass }}">
-                <div class="col-md-7 col-lg-5 no-padding text-left title">
-                    {{ content.field_solution_banner_title }}
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-7 col-lg-5 no-padding text-left highlight-solution">
-                    {{ content.field_solution_banner_highlight }}
-                </div>
-                {% if content.field_solution_banner_btn_text|render|trim is not empty %}
-                    <div class="clearfix"></div>
-                    <div class="col-md-7 no-padding text-left title">
-                        <a class="btn btn-default btn-hp-title" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '{{ content.field_solution_banner_title.0["#context"].value  }}', '')" >
-                            {{ content.field_solution_banner_btn_text.0["#context"].value }}
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-        {% set urlMobile = '' %}
-
-        {% for key, image in content.field_solution_image_mobile if image.entity is not null  %}
+        {% for key, image in content.field_solution_banner_image if image.entity is not null  %}
             {% set media = image.entity %}
-            {% set uriMobile = media.uri.value %}
+            {% set uri = media.uri.value %}
 
-            {% if uriMobile is not null %}
-                {% set urlMobile = file_url(uriMobile) %}
+            {% if uri is not null %}
+                {% set url = file_url(uri) %}
             {% endif %}
         {% endfor %}
-    </div>
-        <div class="visible-xs col-xs-12 banner-bg solution-banner" style="background: url({{ urlMobile }}) ">
+
+        {% if content.field_solution_banner_title|render|trim is not empty %}
+        <div class="col-md-12 hidden-xs banner-bg solution-banner" style="background: url({{ url }}) ">
             <div class="container">
+                {% set solutionColorClass = "homepage-title-" ~ content.field_solution_banner_title_colo.0["#markup"] %}
                 <div class="col-md-offset-1 section-title-solution {{ solutionColorClass }}">
                     <div class="col-md-7 col-lg-5 no-padding text-left title">
                         {{ content.field_solution_banner_title }}
@@ -220,244 +173,275 @@
                     {% endif %}
                 </div>
             </div>
+            {% set urlMobile = '' %}
 
+            {% for key, image in content.field_solution_image_mobile if image.entity is not null  %}
+                {% set media = image.entity %}
+                {% set uriMobile = media.uri.value %}
+
+                {% if uriMobile is not null %}
+                    {% set urlMobile = file_url(uriMobile) %}
+                {% endif %}
+            {% endfor %}
         </div>
-    {% endif %}
-    <div class="container">
-        {% if content.field_solution_banner_title|render|trim is not empty %}
-        <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
+            <div class="visible-xs col-xs-12 banner-bg solution-banner" style="background: url({{ urlMobile }}) ">
+                <div class="container">
+                    <div class="col-md-offset-1 section-title-solution {{ solutionColorClass }}">
+                        <div class="col-md-7 col-lg-5 no-padding text-left title">
+                            {{ content.field_solution_banner_title }}
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-7 col-lg-5 no-padding text-left highlight-solution">
+                            {{ content.field_solution_banner_highlight }}
+                        </div>
+                        {% if content.field_solution_banner_btn_text|render|trim is not empty %}
+                            <div class="clearfix"></div>
+                            <div class="col-md-7 no-padding text-left title">
+                                <a class="btn btn-default btn-hp-title" href="{{ content.field_solution_banner_btn_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '{{ content.field_solution_banner_title.0["#context"].value  }}', '')" >
+                                    {{ content.field_solution_banner_btn_text.0["#context"].value }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
 
-            <table class="table hidden-xs hidden-sm">
-                <tr>
-                    {% set numberItems = 0 %}
-                    {% set columnSize = '12' %}
-                    {% set slickMode = 'slick-mode-none' %}
-                    {% for key, news in content.field_solution_banner_left_zone if key|first != '#'  %}
-                        {% set numberItems = numberItems + 1 %}
-                    {% endfor %}
+            </div>
+        {% endif %}
+        <div class="container">
+            {% if content.field_solution_banner_title|render|trim is not empty %}
+            <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
 
-                    <td class="left-zone">
-                        <div class="title-solution-banner row">
-                            {% if numberItems > 1 %}
-                                <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                                    <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
-                                    <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
+                <table class="table hidden-xs hidden-sm">
+                    <tr>
+                        {% set numberItems = 0 %}
+                        {% set columnSize = '12' %}
+                        {% set slickMode = 'slick-mode-none' %}
+                        {% for key, news in content.field_solution_banner_left_zone if key|first != '#'  %}
+                            {% set numberItems = numberItems + 1 %}
+                        {% endfor %}
+
+                        <td class="left-zone">
+                            <div class="title-solution-banner row">
+                                {% if numberItems > 1 %}
+                                    <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                        <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
+                                        <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
+                                    </div>
+                                    {% set columnSize = '9' %}
+                                    {% set slickMode = 'slick-mode' %}
+                                {% endif %}
+                                {% set columnSizeXl = (columnSize == 12 ) ? 12 : columnSize + 1 %}
+                                <div class="col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} no-padding title">{{ content.field_banner_left_zone_title }}</div>
+                            </div>
+                            <div class="row">
+                                {% if numberItems > 1 %}
+                                    {% set classCompl = "col-md-offset-3 col-xl-offset-2" %}
+                                {% endif %}
+                                <div id="slick-left-zone" class="{{ classCompl }} col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} content no-padding slick-left-zone {{ slickMode }}">
+                                    {{ content.field_solution_banner_left_zone }}
                                 </div>
-                                {% set columnSize = '9' %}
-                                {% set slickMode = 'slick-mode' %}
-                            {% endif %}
-                            {% set columnSizeXl = (columnSize == 12 ) ? 12 : columnSize + 1 %}
-                            <div class="col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} no-padding title">{{ content.field_banner_left_zone_title }}</div>
+                            </div>
+                        </td>
+
+                        {% set numberItems = 0 %}
+                        {% set columnSize = '12' %}
+                        {% set slickModeRight = 'slick-mode-none' %}
+                        {% for key, news in content.field_solution_banner_right_zone if key|first != '#'  %}
+                            {% set numberItems = numberItems + 1 %}
+                        {% endfor %}
+
+                        <td class="right-zone">
+                            <div class="title-solution-banner row">
+                                {% if numberItems > 1 %}
+                                    <div class="col-md-3 col-xl-2  buttons-carousel slider-nav hidden-sm hidden-xs">
+                                        <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
+                                        <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
+                                    </div>
+                                    {% set columnSize = '9' %}
+                                    {% set slickModeRight = 'slick-mode' %}
+                                {% endif %}
+                                {% set columnSizeXl = (columnSize == 12 ) ? 12 : columnSize + 1 %}
+                                <div class="col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                            </div>
+                            <div class="row">
+                                {% if numberItems > 1 %}
+                                    {% set classCompl = "col-md-offset-3 col-xl-offset-2" %}
+                                {% endif %}
+                                <div id="slick-right-zone" class="{{ classCompl }} col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} content no-padding slick-right-zone {{ slickMode }}">
+                                    {{ content.field_solution_banner_right_zone }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="section-solution col-xs-12 table-row visible-xs visible-sm">
+                    <div class="solution-zone left-zone col-md-5 col-xs-12 table-cell">
+                        <div class="title-solution-banner row">
+                            <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                            </div>
+                            <div class="col-md-10 no-padding title">{{ content.field_banner_left_zone_title }}</div>
                         </div>
                         <div class="row">
-                            {% if numberItems > 1 %}
-                                {% set classCompl = "col-md-offset-3 col-xl-offset-2" %}
-                            {% endif %}
-                            <div id="slick-left-zone" class="{{ classCompl }} col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} content no-padding slick-left-zone {{ slickMode }}">
+                            <div class="col-md-2"> </div>
+                            <div id="slick-left-zone" class="col-sm-12 col-xs-12 no-padding content slick-left-zone {{ slickMode }}">
                                 {{ content.field_solution_banner_left_zone }}
                             </div>
                         </div>
-                    </td>
-
-                    {% set numberItems = 0 %}
-                    {% set columnSize = '12' %}
-                    {% set slickModeRight = 'slick-mode-none' %}
-                    {% for key, news in content.field_solution_banner_right_zone if key|first != '#'  %}
-                        {% set numberItems = numberItems + 1 %}
-                    {% endfor %}
-
-                    <td class="right-zone">
+                    </div>
+                    <div class="solution-zone right-zone col-md-5 col-xs-12 table-cell">
                         <div class="title-solution-banner row">
-                            {% if numberItems > 1 %}
-                                <div class="col-md-3 col-xl-2  buttons-carousel slider-nav hidden-sm hidden-xs">
-                                    <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow_homepage prev_arrow"> < </div>
-                                    <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow_homepage next_arrow"> > </div>
-                                </div>
-                                {% set columnSize = '9' %}
-                                {% set slickModeRight = 'slick-mode' %}
-                            {% endif %}
-                            {% set columnSizeXl = (columnSize == 12 ) ? 12 : columnSize + 1 %}
-                            <div class="col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} no-padding title">{{ content.field_banner_right_zone_title }}</div>
+                            <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
+                                <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
+                                <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
+                            </div>
+                            <div class="col-md-10 no-padding title">{{ content.field_banner_right_zone_title }}</div>
                         </div>
                         <div class="row">
-                            {% if numberItems > 1 %}
-                                {% set classCompl = "col-md-offset-3 col-xl-offset-2" %}
-                            {% endif %}
-                            <div id="slick-right-zone" class="{{ classCompl }} col-md-{{ columnSize }} col-xl-{{ columnSizeXl }} content no-padding slick-right-zone {{ slickMode }}">
+                            <div class="col-md-2"> </div>
+                            <div id="slick-right-zone" class="col-sm-12 col-xs-12 no-padding content slick-right-zone {{ slickModeRight }}">
                                 {{ content.field_solution_banner_right_zone }}
                             </div>
                         </div>
-                    </td>
-                </tr>
-            </table>
-
-            <div class="section-solution col-xs-12 table-row visible-xs visible-sm">
-                <div class="solution-zone left-zone col-md-5 col-xs-12 table-cell">
-                    <div class="title-solution-banner row">
-                        <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                            <div id="home-slick-carousel-left-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                            <div id="home-slick-carousel-left-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                        </div>
-                        <div class="col-md-10 no-padding title">{{ content.field_banner_left_zone_title }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2"> </div>
-                        <div id="slick-left-zone" class="col-sm-12 col-xs-12 no-padding content slick-left-zone {{ slickMode }}">
-                            {{ content.field_solution_banner_left_zone }}
-                        </div>
-                    </div>
-                </div>
-                <div class="solution-zone right-zone col-md-5 col-xs-12 table-cell">
-                    <div class="title-solution-banner row">
-                        <div class="col-md-3 col-xl-2 buttons-carousel slider-nav hidden-sm hidden-xs">
-                            <div id="home-slick-carousel-right-prev_arrow" class="navigation_arrow prev_arrow"> < </div>
-                            <div id="home-slick-carousel-right-next_arrow" class="navigation_arrow next_arrow"> > </div>
-                        </div>
-                        <div class="col-md-10 no-padding title">{{ content.field_banner_right_zone_title }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2"> </div>
-                        <div id="slick-right-zone" class="col-sm-12 col-xs-12 no-padding content slick-right-zone {{ slickModeRight }}">
-                            {{ content.field_solution_banner_right_zone }}
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
-
-        <!-- Expertise Zone Homepage -->
-        {% if content.field_expertise_title|render|trim is not empty %}
-        <div class="homepage-banner-container">
-            <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
-
-                <div class="title">
-                    {{ content.field_expertise_title }}
-                </div>
-                <div class="tabpanel-expertise" role="tabpanel">
-                    <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tabs <span class="caret"></span>
-                    </button>
-                    <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
-                        {% for key, item in node.field_banner_expertise %}
-                            <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
-                                <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-title">
-                                            {{ item.entity.field_tab_title.value }}
-                                        </div>
-                                    </div>
-
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    {{ content.field_banner_expertise }}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Partner Zone Homepage -->
-        {% if content.field_partner_title|render|trim is not empty %}
-            <div class="homepage-banner-container">
-        <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 homepage-banner partner-banner" {#style="display: none"#}>
-            <div class="title">
-                {{ content.field_partner_title }}
-            </div>
-            <div class="tabpanel-partner">
-                {{ oab_drupal_view('homepage_partner', 'block_1') }}
-                <div class="col-md-12 text-right no-padding no-margin"> 
-{{ link(content.field_partners_button_text.0["#context"].value, hub_getHubSubhomeUrl(path('view.subhomes.page_partners')),
-    {'class':'btn btn-homepage btn-homepage-partners',
-    'onmousedown': 'utag_link(\'Homepage\', \'Partenaires\', \'' ~ content.field_partners_button_text.0["#context"].value|raw ~ '\', \'\')
-'}) }}
-                </div>
-            </div>
-        </div></div>
-        {% endif %}
-    </div>
-
-</div>
-
-<!-- Corporate Zone Homepage -->
-{% if content.field_corporate_title|render|trim is not empty %}
-    <div class="row corporate-homepage">
-        {% set urlPartner = '' %}
-
-        {% for key, image in content.field_corporate_image if image.entity is not null  %}
-            {% set media = image.entity %}
-            {% set uri = media.uri.value %}
-
-            {% if uri is not null %}
-                {% set urlPartner = file_url(uri) %}
             {% endif %}
-        {% endfor %}
 
+            <!-- Expertise Zone Homepage -->
+            {% if content.field_expertise_title|render|trim is not empty %}
+            <div class="homepage-banner-container">
+                <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
 
-        <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
-            <div class="section-corporate container">
-                <div class="col-md-offset-1 col-md-10 section-title-corporate">
-                    <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
-                        <div class="no-padding text-left title">
-                            {{ content.field_corporate_title }}
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="no-padding text-left highlight-corporate">
-                            {{ content.field_corporate_highlight }}
-                           <a class="btn btn-inverse btn-info" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
-                                {{ content.field_corporate_button_text.0["#context"].value }}
-                            </a>
-                        </div>
-
+                    <div class="title">
+                        {{ content.field_expertise_title }}
                     </div>
+                    <div class="tabpanel-expertise" role="tabpanel">
+                        <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tabs <span class="caret"></span>
+                        </button>
+                        <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
+                            {% for key, item in node.field_banner_expertise %}
+                                <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
+                                    <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-title">
+                                                {{ item.entity.field_tab_title.value }}
+                                            </div>
+                                        </div>
 
-                    {% if content.field_corporate_show_menu %}
-                        <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
-                            <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
-                            {{ oab_drupal_menu('our-regional-presence')  }}
-                        </div>
-                    {% endif %}
-
-
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {{ content.field_banner_expertise }}
+                    </div>
                 </div>
-
             </div>
+            {% endif %}
+
+            <!-- Partner Zone Homepage -->
+            {% if content.field_partner_title|render|trim is not empty %}
+                <div class="homepage-banner-container">
+            <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 homepage-banner partner-banner" {#style="display: none"#}>
+                <div class="title">
+                    {{ content.field_partner_title }}
+                </div>
+                <div class="tabpanel-partner">
+                    {{ oab_drupal_view('homepage_partner', 'block_1') }}
+                    <div class="col-md-12 text-right no-padding no-margin">
+    {{ link(content.field_partners_button_text.0["#context"].value, hub_getHubSubhomeUrl(path('view.subhomes.page_partners')),
+        {'class':'btn btn-homepage btn-homepage-partners',
+        'onmousedown': 'utag_link(\'Homepage\', \'Partenaires\', \'' ~ content.field_partners_button_text.0["#context"].value|raw ~ '\', \'\')
+    '}) }}
+                    </div>
+                </div>
+            </div></div>
+            {% endif %}
         </div>
 
     </div>
-    {% if content.field_corporate_show_menu %}
-        <div class="container visible-xs visible-sm">
 
-            <div class="menu-right col-xs-12">
-                {% if content.field_corporate_menu is not null %}
-                    <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
-                    {{ oab_drupal_menu('our-regional-presence')  }}
+    <!-- Corporate Zone Homepage -->
+    {% if content.field_corporate_title|render|trim is not empty %}
+        <div class="row corporate-homepage">
+            {% set urlPartner = '' %}
+
+            {% for key, image in content.field_corporate_image if image.entity is not null  %}
+                {% set media = image.entity %}
+                {% set uri = media.uri.value %}
+
+                {% if uri is not null %}
+                    {% set urlPartner = file_url(uri) %}
                 {% endif %}
+            {% endfor %}
+
+
+            <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
+                <div class="section-corporate container">
+                    <div class="col-md-offset-1 col-md-10 section-title-corporate">
+                        <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
+                            <div class="no-padding text-left title">
+                                {{ content.field_corporate_title }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="no-padding text-left highlight-corporate">
+                                {{ content.field_corporate_highlight }}
+                               <a class="btn btn-inverse btn-info" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
+                                    {{ content.field_corporate_button_text.0["#context"].value }}
+                                </a>
+                            </div>
+
+                        </div>
+
+                        {% if content.field_corporate_show_menu %}
+                            <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
+                                <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
+                                {{ oab_drupal_menu('our-regional-presence')  }}
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        {% if content.field_corporate_show_menu %}
+            <div class="container visible-xs visible-sm">
+
+                <div class="menu-right col-xs-12">
+                    {% if content.field_corporate_menu is not null %}
+                        <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
+                        {{ oab_drupal_menu('our-regional-presence')  }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
+        <div class="row infography-banner">
+            <div class="container">
+                <div class="col-md-12 corporate-infography-banner ">
+                    <div class="row text-center">
+                        {% for key, infography in content.field_infography if key|first != '#'  %}
+                        {% if key == 0 %}
+                        <div class="col-md-2 col-md-offset-1 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10  block-infography" >
+                            {% else %}
+                            <div class="col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10 block-infography col-xs-12 " >
+                                {% endif %}
+                                {{ infography }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% endif %}
-{% endif %}
-{% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
-    <div class="row infography-banner">
-        <div class="container">
-            <div class="col-md-12 corporate-infography-banner ">
-                <div class="row text-center">
-                    {% for key, infography in content.field_infography if key|first != '#'  %}
-                    {% if key == 0 %}
-                    <div class="col-md-2 col-md-offset-1 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10  block-infography" >
-                        {% else %}
-                        <div class="col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10 block-infography col-xs-12 " >
-                            {% endif %}
-                            {{ infography }}
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
-{% endif %}
-
-
 </article>
