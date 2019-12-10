@@ -88,8 +88,10 @@
     <div class="container-fluid-navbar"  style=" ">
         {{ content.field_caroussel_header }}
     </div>
-
-
+    <div class="claim-homepage-container">
+        {{ (content.field_claim) }}
+        <i class="arrow-down-claim-homepage"></i>
+    </div>
     <!-- Top Zone Homepage -->
     <div class=" top-zone-homepage">
         {% for key, image in content.field_top_zone_image_mobile if image.entity is not null  %}
@@ -129,12 +131,6 @@
             </div>
 
         </div>
-    </div>
-
-
-    <div class="claim-homepage-container col-12">
-        {{ content.field_claim }}
-        <i class="arrow-down-claim-homepage"></i>
     </div>
 
 

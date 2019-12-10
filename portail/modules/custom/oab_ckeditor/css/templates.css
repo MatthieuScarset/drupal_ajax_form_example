@@ -61,7 +61,7 @@
 
 .obs_template.obs_background_claim_black {
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
+    min-height: 90px;
     color: #fff;
 }
 
