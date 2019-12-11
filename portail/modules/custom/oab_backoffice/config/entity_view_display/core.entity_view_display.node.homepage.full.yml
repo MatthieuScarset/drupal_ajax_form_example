@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.homepage.field_banner_expertise
     - field.field.node.homepage.field_banner_left_zone_title
     - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_caroussel_header
+    - field.field.node.homepage.field_claim
     - field.field.node.homepage.field_corporate_button_link
     - field.field.node.homepage.field_corporate_button_text
     - field.field.node.homepage.field_corporate_highlight
@@ -16,6 +18,8 @@ dependencies:
     - field.field.node.homepage.field_corporate_title
     - field.field.node.homepage.field_expertise_title
     - field.field.node.homepage.field_header_title
+    - field.field.node.homepage.field_hub
+    - field.field.node.homepage.field_hub_portal
     - field.field.node.homepage.field_infography
     - field.field.node.homepage.field_meta_description
     - field.field.node.homepage.field_meta_title
@@ -56,7 +60,7 @@ mode: full
 content:
   field_banner_expertise:
     type: entity_reference_revisions_entity_view
-    weight: 14
+    weight: 10
     region: content
     label: hidden
     settings:
@@ -65,7 +69,7 @@ content:
     third_party_settings: {  }
   field_banner_left_zone_title:
     type: string
-    weight: 10
+    weight: 6
     region: content
     label: hidden
     settings:
@@ -73,15 +77,40 @@ content:
     third_party_settings: {  }
   field_banner_right_zone_title:
     type: string
-    weight: 11
+    weight: 7
     region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+  field_caroussel:
+    type: entity_reference_revisions_entity_view
+    weight: 24
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_caroussel_header:
+    type: entity_reference_revisions_entity_view
+    weight: 24
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_claim:
+    type: text_default
+    weight: 27
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_corporate_button_link:
     type: link
-    weight: 12
+    weight: 8
     region: content
     label: hidden
     settings:
@@ -93,7 +122,7 @@ content:
     third_party_settings: {  }
   field_corporate_button_text:
     type: string
-    weight: 26
+    weight: 21
     region: content
     label: hidden
     settings:
@@ -101,14 +130,14 @@ content:
     third_party_settings: {  }
   field_corporate_highlight:
     type: text_default
-    weight: 13
+    weight: 9
     region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
   field_corporate_image:
     type: image
-    weight: 18
+    weight: 14
     region: content
     label: hidden
     settings:
@@ -117,7 +146,7 @@ content:
     third_party_settings: {  }
   field_corporate_menu:
     type: entity_reference_label
-    weight: 16
+    weight: 12
     region: content
     label: hidden
     settings:
@@ -125,7 +154,7 @@ content:
     third_party_settings: {  }
   field_corporate_menu_title:
     type: string
-    weight: 19
+    weight: 15
     region: content
     label: hidden
     settings:
@@ -133,7 +162,7 @@ content:
     third_party_settings: {  }
   field_corporate_show_menu:
     type: boolean
-    weight: 17
+    weight: 13
     region: content
     label: hidden
     settings:
@@ -143,7 +172,7 @@ content:
     third_party_settings: {  }
   field_corporate_title:
     type: string
-    weight: 15
+    weight: 11
     region: content
     label: hidden
     settings:
@@ -151,15 +180,7 @@ content:
     third_party_settings: {  }
   field_expertise_title:
     type: string
-    weight: 20
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_header_title:
-    type: string
-    weight: 9
+    weight: 16
     region: content
     label: hidden
     settings:
@@ -167,7 +188,7 @@ content:
     third_party_settings: {  }
   field_infography:
     type: entity_reference_revisions_entity_view
-    weight: 22
+    weight: 18
     region: content
     label: hidden
     settings:
@@ -176,7 +197,7 @@ content:
     third_party_settings: {  }
   field_meta_title:
     type: string
-    weight: 23
+    weight: 19
     region: content
     label: hidden
     settings:
@@ -184,7 +205,7 @@ content:
     third_party_settings: {  }
   field_news_top_zone:
     type: entity_reference_revisions_entity_view
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       view_mode: default
@@ -193,7 +214,7 @@ content:
     region: content
   field_partner_button_link:
     type: link
-    weight: 4
+    weight: 3
     region: content
     label: hidden
     settings:
@@ -205,7 +226,7 @@ content:
     third_party_settings: {  }
   field_partner_title:
     type: string
-    weight: 1
+    weight: 0
     region: content
     label: hidden
     settings:
@@ -213,7 +234,7 @@ content:
     third_party_settings: {  }
   field_partners_button_text:
     type: string
-    weight: 25
+    weight: 20
     region: content
     label: hidden
     settings:
@@ -221,7 +242,7 @@ content:
     third_party_settings: {  }
   field_solution_banner_btn_link:
     type: entity_reference_label
-    weight: 33
+    weight: 26
     region: content
     label: hidden
     settings:
@@ -229,7 +250,7 @@ content:
     third_party_settings: {  }
   field_solution_banner_btn_text:
     type: string
-    weight: 32
+    weight: 25
     region: content
     label: hidden
     settings:
@@ -237,14 +258,14 @@ content:
     third_party_settings: {  }
   field_solution_banner_highlight:
     type: text_default
-    weight: 3
+    weight: 2
     region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
   field_solution_banner_image:
     type: image
-    weight: 6
+    weight: 4
     region: content
     label: hidden
     settings:
@@ -253,7 +274,7 @@ content:
     third_party_settings: {  }
   field_solution_banner_left_zone:
     type: entity_reference_revisions_entity_view
-    weight: 7
+    weight: 5
     region: content
     label: hidden
     settings:
@@ -262,80 +283,23 @@ content:
     third_party_settings: {  }
   field_solution_banner_right_zone:
     type: entity_reference_revisions_entity_view
-    weight: 21
+    weight: 17
     region: content
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-  field_solution_banner_title:
-    type: string
-    weight: 8
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
   field_solution_banner_title_colo:
     type: list_key
-    weight: 31
+    weight: 23
     region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
   field_solution_image_mobile:
     type: image
-    weight: 27
-    region: content
-    label: hidden
-    settings:
-      image_style: max_650
-      image_link: ''
-    third_party_settings: {  }
-  field_subhead_title_top_zone:
-    type: string
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_title_btn_text:
-    type: string
-    weight: 29
-    region: content
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  field_title_button_link:
-    type: entity_reference_label
-    weight: 30
-    region: content
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-  field_title_color:
-    type: list_key
-    weight: 24
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  field_top_zone_image:
-    type: image
-    weight: 5
-    region: content
-    label: hidden
-    settings:
-      image_style: homepage_top_zone
-      image_link: ''
-    third_party_settings: {  }
-  field_top_zone_image_mobile:
-    type: image
-    weight: 28
+    weight: 22
     region: content
     label: hidden
     settings:
@@ -343,10 +307,18 @@ content:
       image_link: ''
     third_party_settings: {  }
 hidden:
+  field_header_title: true
   field_hub: true
   field_hub_portal: true
   field_meta_description: true
   field_metatags: true
+  field_solution_banner_title: true
+  field_subhead_title_top_zone: true
+  field_title_btn_text: true
+  field_title_button_link: true
+  field_title_color: true
+  field_top_zone_image: true
+  field_top_zone_image_mobile: true
   langcode: true
   links: true
   moderation_state_update: true
