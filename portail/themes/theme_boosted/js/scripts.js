@@ -318,4 +318,26 @@
     }
   });
 
+var count = 1;
+var maxItems = $('.item-carousel-number').data("value");
+
+ $('.left.carousel-control.homepage-carousel-indicators').on('click', function() {
+     if (count > 1) {
+         count--;
+     } else {
+         count = maxItems;
+     }
+     $('.item-carousel-number').html(count+' / '+maxItems);
+ });
+
+$('.right.carousel-control.homepage-carousel-indicators').on('click', function() {
+    if (count >= maxItems) {
+        count = 1;
+    } else {
+        count++;
+    }
+    $('.item-carousel-number').html(count+' / '+maxItems);
+});
+
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
