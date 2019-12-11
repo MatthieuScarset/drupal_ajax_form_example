@@ -2919,3 +2919,22 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     right: 0;
     text-align: left;
 }
+
+.left.carousel-control.homepage-carousel-indicators,
+.right.carousel-control.homepage-carousel-indicators {
+    background-color: transparent;
+}
+
+.carrousel-homepage-header .container-homepage-carousel-indicators {
+    float: right;
+}
+
+.homepage-carousel-glyphicon:before {
+    color: #9E9F9F;
+}
+
+.item-carousel-number {
+    color: #9E9F9F;
+    position: relative;
+    left: 40%;
+}
