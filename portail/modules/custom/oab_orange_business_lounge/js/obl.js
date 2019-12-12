@@ -200,6 +200,11 @@
           var techno_selected = $("option:selected", this).attr('value');
 
           /**
+           * selected techno just for print
+           */
+          $('.obl_accords_techno_selected').html(techno_selected);
+
+          /**
            * API countries + op
            */
           var arr_country_with_op = drupalSettings.arr_country_with_op;
@@ -214,7 +219,7 @@
                   }
                   ma_liste_des_operateurs += i;
                 });
-                $('#table-accord-roaming tbody').append('<tr><td>' + country.label + '</td><td>' + country.zoneId + '</td><td>' + ma_liste_des_operateurs + '</td></tr>');
+                $('#table-accord-roaming tbody').append('<tr><td class="accords_obl_label">' + country.label + '</td><td class="accords_obl_zone_id">' + country.zoneId + '</td><td class="accords_obl_operateurs">' + ma_liste_des_operateurs + '</td></tr>');
               }
             });
           });
@@ -225,6 +230,14 @@
     $(function() {
       $('#select_technologie_obl').trigger("change");
     });
+
+    /*
+     print tab obl accords
+     */
+    $('.btn_print_accords_obl').on('click',function() {
+      window.print();
+    });
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
 
