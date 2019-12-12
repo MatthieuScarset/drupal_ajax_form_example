@@ -318,26 +318,9 @@
     }
   });
 
-var count = 1;
-var maxItems = $('.item-carousel-number').data("value");
-
- $('.left.carousel-control.homepage-carousel-indicators').on('click', function() {
-     if (count > 1) {
-         count--;
-     } else {
-         count = maxItems;
-     }
-     $('.item-carousel-number').html(count+' / '+maxItems);
- });
-
-$('.right.carousel-control.homepage-carousel-indicators').on('click', function() {
-    if (count >= maxItems) {
-        count = 1;
-    } else {
-        count++;
-    }
-    $('.item-carousel-number').html(count+' / '+maxItems);
+$('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
+    const num_item = $(events.relatedTarget).data('key');
+   $(this).find('.actual-slide').html(num_item + 1);
 });
-
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

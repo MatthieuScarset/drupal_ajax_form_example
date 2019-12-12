@@ -2925,6 +2925,13 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     background-color: transparent;
 }
 
+.left.carousel-control.homepage-carousel-indicators:hover,
+.right.carousel-control.homepage-carousel-indicators:hover,
+.left.carousel-control.homepage-carousel-indicators:focus,
+.right.carousel-control.homepage-carousel-indicators:focus{
+    width: 6rem !important;
+}
+
 .carrousel-homepage-header .container-homepage-carousel-indicators {
     float: right;
 }

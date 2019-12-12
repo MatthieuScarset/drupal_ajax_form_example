@@ -18,7 +18,7 @@
 {# je crée un id random au cas ou il y ait plus elements de ce field dans une même class
     car le carrousel bootstrap a besoin d'un id unique #}
 {% set id = 'carrousel-homepage-header-' ~ random() %}
-{% set nbItems = 0 %}
+{% set nbItems = items|length %}
 
 
 <div id="{{ id }}" class="carousel slide carrousel-homepage-header" data-interval="false" data-ride="carousel">
@@ -26,8 +26,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         {% for key, item in items %}
-            {% set nbItems = key + 1 %}
-            <div class="item {% if key == 0 %}active{% endif %}">
+            <div class="item {% if key == 0 %}active{% endif %}" data-key="{{ key }}">
                 <img src="portail/themes/theme_boosted/images/fond-gris.png"  />
                 <div class="carousel-caption homepage-carousel">
                     {{ item.content }}
@@ -37,7 +36,7 @@
     </div>
 
     <!-- Controls -->
-    <div class="col-lg-2 col-xs-3 container-homepage-carousel-indicators">
+    <div class="col-sm-2 col-xs-4 container-homepage-carousel-indicators">
         <a class="left carousel-control homepage-carousel-indicators" href="{{ '#' ~ id }}" role="button" data-slide="prev">
             <span class="glyphicon icon-arrow-previous homepage-carousel-glyphicon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -46,7 +45,7 @@
             <span class="glyphicon icon-arrow-next homepage-carousel-glyphicon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-        <span class="item-carousel-number" data-value="{{ nbItems }}">1 / {{ nbItems }}</span>
+        <span class="item-carousel-number" data-value="{{ nbItems }}"><span class="actual-slide">1</span> / {{ nbItems }}</span>
     </div>
 </div>
 
