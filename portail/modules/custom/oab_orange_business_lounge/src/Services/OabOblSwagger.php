@@ -16,6 +16,7 @@ class OabOblSwagger {
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
     const API_COUNTRIES = '/countries';
     const API_TECHNOLOGIES = '/network-types';
+    const API_NETWORK_TYPES = '/network-types';
 
 
   public function __construct() {
@@ -71,44 +72,11 @@ class OabOblSwagger {
       return $this->executeScriptCurl(self::API_TECHNOLOGIES);
     }
 
-
-    public function getDataCountriesWithOperatorsPrepared() {
-
-      /*********************** A suup ********/
-      $i = 1;
-
-      $countries_with_operator = [];
-      $countries_without_operator = $this->getCountriesWithoutOperator();
-
-      foreach ($countries_without_operator['items'] as $tab) {
-        $my_data = [];
-
-        $country_data = $this->getOneCountry($tab['id']);
-        if (isset($country_data['operators'])) {
-          foreach ($country_data['operators'] as $operator) {
-            $operator_name = $operator['name'];
-            foreach ($operator['networkNorms'] as $network_norms) {
-              if (!isset($my_data[$network_norms['type']['name']])) {
-                $my_data[$network_norms['type']['name']] = [];
-              }
-              $my_data[$network_norms['type']['name']][] = $operator_name;
-            }
-          }
-        }
-
-        $countries_with_operator[] = [
-          'label' => $country_data['label'],
-          'zoneId' => $country_data['zoneId'],
-          'networks' => $my_data
-        ];
-
-        /*********************** A suup ********/
-        if (++$i > 10) {
-          return $countries_with_operator;
-        }
-      }
-
-      //return $countries_with_operator;
+  /**
+   * @return bool|mixed
+   */
+    public function getNetworkTypes($id) {
+      return $this->executeScriptCurl(self::API_NETWORK_TYPES.'/'.$id.'/table');
     }
 
 

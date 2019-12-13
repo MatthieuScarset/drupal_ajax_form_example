@@ -3,6 +3,7 @@ namespace Drupal\oab_orange_business_lounge\Controller;
 use Drupal\oab_orange_business_lounge\Form\SearchCountryForm;
 use \Drupal\Core\Controller\ControllerBase;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
+use Zend\Diactoros\Response\JsonResponse;
 
 class OblController extends ControllerBase {
 
@@ -12,10 +13,7 @@ class OblController extends ControllerBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
         $zones = $obl_service->getZones();
-        //$countries = $obl_service->getCountries();
         $countries = $obl_service->getCountriesWithoutOperator();
-
-        $countries_with_operator = $obl_service->getDataCountriesWithOperatorsPrepared();
         $technologies = $obl_service->getTechnologies();
 
         return array(
@@ -28,9 +26,16 @@ class OblController extends ControllerBase {
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
-                    'arr_country_with_op' => $countries_with_operator
                 ]
             ],
         );
     }
+
+    public function oblGetCountriesWithOperators($id) {
+      $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+      $get_countries_with_op = $obl_service->getNetworkTypes($id);
+
+      return new JsonResponse($get_countries_with_op);
+    }
+
 }
