@@ -223,7 +223,7 @@
 
         </div>
     {% endif %}
-    < class="container">
+    <div class="container">
         {% if content.field_solution_banner_title|render|trim is not empty %}
         <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
 
@@ -391,7 +391,7 @@
             </div>
             <div class="tabpanel-partner">
                 {{ oab_drupal_view('homepage_partner', 'block_1') }}
-                <div class="col-md-12 text-right no-padding no-margin"> 
+                <div class="col-md-12 text-right no-padding no-margin">
 {{ link(content.field_partners_button_text.0["#context"].value, hub_getHubSubhomeUrl(path('view.subhomes.page_partners')),
     {'class':'btn btn-homepage btn-homepage-partners',
     'onmousedown': 'utag_link(\'Homepage\', \'Partenaires\', \'' ~ content.field_partners_button_text.0["#context"].value|raw ~ '\', \'\')
