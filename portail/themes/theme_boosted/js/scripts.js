@@ -318,9 +318,16 @@
     }
   });
 
+let num_item = $('.item-carousel-number').data('value');
+console.log('il y a '+ num_item);
+
+if (num_item == 1) {
+    $('.container-homepage-carousel-indicators').css('display','none');
+}
+
 $('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
-    const num_item = $(events.relatedTarget).data('key');
-   $(this).find('.actual-slide').html(num_item + 1);
+    num_item = $(events.relatedTarget).data('key');
+    $(this).find('.actual-slide').html(num_item + 1);
 });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
