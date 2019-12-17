@@ -319,7 +319,6 @@
   });
 
 let num_item = $('.item-carousel-number').data('value');
-console.log('il y a '+ num_item);
 
 if (num_item == 1) {
     $('.container-homepage-carousel-indicators').css('display','none');
