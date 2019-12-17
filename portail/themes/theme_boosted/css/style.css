@@ -687,6 +687,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
+
+.homepage-banner.expertise-banner {
+    background-color: transparent;
+}
+
 #tab-expertise-banner li {
     background-color: #d8d8d8;
     vertical-align: top;
@@ -804,6 +809,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
+    background-color: #fff;
+}
+
+.field--name-field-expertise-title {
+    color: #fff;
 }
 
 .tabpanel-expertise{
