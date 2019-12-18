@@ -2933,7 +2933,10 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .claim-homepage-container {
     text-align: center;
     min-height: 90px;
-    margin-bottom: 20px;
+}
+
+.top-zone-homepage .carousel-solution {
+    margin-top: 20px;
 }
 
 .left.carousel-control.homepage-carousel-indicators,
