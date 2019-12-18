@@ -91,47 +91,6 @@
         {{ (content.field_claim) }}
         <i class="arrow-down-claim-homepage"></i>
     </div>
-    <!-- Top Zone Homepage -->
-    <div class=" top-zone-homepage">
-        {% for key, image in content.field_top_zone_image_mobile if image.entity is not null  %}
-            {% set media = image.entity %}
-            {% set uriMobile = media.uri.value %}
-
-            {% if uriMobile is not null %}
-                {% set urlMobile = file_url(uriMobile) %}
-            {% endif %}
-        {% endfor %}
-        <div class="visible-xs col-xs-12 banner-bg top-banner"  style="background: url({{ urlMobile }}) ">
-            <div class="section-title-top-zone {{ tzColorClass }} container-fluid-navbar">
-                <div class="col-md-7 no-padding text-left subhead-title">
-                    {{ content.field_subhead_title_top_zone }}
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-7 no-padding text-left title">
-                    {{ content.field_header_title }}
-                </div>
-                {% if content.field_title_btn_text|render|trim is not empty %}
-                    <div class="clearfix"></div>
-                    <div class="col-md-7 no-padding text-left title title-btn">
-                        <a class="btn btn-default btn-hp-title" href="{{ content.field_title_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '{{ content.field_header_title.0["#context"].value  }}', '')" >
-                            {{ content.field_title_btn_text.0["#context"].value }}
-                        </a>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 carousel-solution no-padding">
-            <div class="block-card-container">
-                {% for key, news in content.field_news_top_zone if key|first != '#'  %}
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 block-card text-align-center" style=" ">
-                        {{ news }}
-                    </div>
-                {% endfor %}
-            </div>
-
-        </div>
-    </div>
-
 
     <!-- Solution Zone Homepage -->
     <div class="row solution-homepage">
