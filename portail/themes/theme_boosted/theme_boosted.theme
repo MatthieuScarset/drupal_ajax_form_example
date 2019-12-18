@@ -172,9 +172,7 @@ function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $
     if ($node = \Drupal::routeMatch()->getParameter('node')) {
         if (is_object($node)) {
             $content_type = $node->bundle();
-            if ($content_type == 'custom_page') {
-                $suggestions[] = 'page__' . $content_type;
-            }
+            $suggestions[] = 'page__' . $content_type;
         }
     }
 }
