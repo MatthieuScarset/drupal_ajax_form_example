@@ -320,7 +320,7 @@
 
     <!-- Corporate Zone Homepage -->
     {% if content.field_corporate_title|render|trim is not empty %}
-        <div class="row corporate-homepage">
+        <div class="corporate-homepage">
             {% set urlPartner = '' %}
 
             {% for key, image in content.field_corporate_image if image.entity is not null  %}
@@ -377,9 +377,9 @@
         {% endif %}
     {% endif %}
     {% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
-        <div class="row infography-banner">
+        <div class="infography-banner">
             <div class="container">
-                <div class="col-md-12 corporate-infography-banner ">
+                <div class="col-md-offset-1 col-md-10 corporate-infography-banner ">
                     <div class="row text-center">
                         {% for key, infography in content.field_infography if key|first != '#'  %}
                         {% if key == 0 %}
