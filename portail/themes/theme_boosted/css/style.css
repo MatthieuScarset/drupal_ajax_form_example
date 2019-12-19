@@ -2926,8 +2926,8 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     border-right: 20px solid transparent;
     border-top: 20px solid #000;
     opacity: 0.7;
-    position: relative;
-    top: 19px;
+    display: block;
+    margin: auto;
 }
 
 @media (max-width: 767px) {
