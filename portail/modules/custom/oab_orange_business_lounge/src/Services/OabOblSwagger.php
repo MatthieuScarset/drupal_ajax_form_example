@@ -72,11 +72,16 @@ class OabOblSwagger {
       return $this->executeScriptCurl(self::API_TECHNOLOGIES);
     }
 
-  /**
-   * @return bool|mixed
-   */
-    public function getNetworkTypes($id) {
-      return $this->executeScriptCurl(self::API_NETWORK_TYPES.'/'.$id.'/table');
+
+    /**
+     * @return bool|mixed
+     */
+    public function getNetworkTypes($id, $num_page) {
+      $page_ext = "";
+      if ($num_page > 0) {
+        $page_ext = "?page=$num_page";
+      }
+      return $this->executeScriptCurl(self::API_NETWORK_TYPES.'/'.$id.'/table' . $page_ext);
     }
 
 

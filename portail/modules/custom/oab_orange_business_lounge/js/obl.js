@@ -188,56 +188,24 @@
      */
     $('#select_technologie_obl').html('<option value="1" selected="selected" disabled>(autre couverture)</option>');
 
-    function set_table_accords_roaming(code_techno) {
-      $.ajax({
-        url: '/oblNetworkTypes/'+code_techno+'/table',
-        type: 'GET',
-        success: function(result) {
-          $('#table-accord-roaming tbody').html('');
-          var array_sort_by_country = _.groupBy(result.items, 'country');
-          $.each(array_sort_by_country, function (country, liste_operator) {
-            var ma_liste_des_operateurs = "";
-            $.map(liste_operator, function (i) {
-              if (ma_liste_des_operateurs.length != 0) {
-                ma_liste_des_operateurs += '<hr class="reseau-mobile-accords-roaming" />';
-              }
-              ma_liste_des_operateurs += i.operator;
-            });
-            $('#table-accord-roaming tbody').append('<tr><td class="accords_obl_label">' + country + '</td><td class="accords_obl_zone_id">' + liste_operator[0].zone + '</td><td class="accords_obl_operateurs">' + ma_liste_des_operateurs + '</td></tr>');
-          });
-        }
-      });
-    }
-
-
     if (drupalSettings.arr_technologies_obl !== undefined && drupalSettings.arr_technologies_obl.length > 0) {
       var arr_technologies = drupalSettings.arr_technologies_obl;
       var arr_technologies_sort = arr_technologies.sort(SortById);
 
       if (arr_technologies_sort.length != 0) {
         $.each(arr_technologies_sort, function (index, value) {
-          $('#select_technologie_obl').append('<option value="' + value.id + '" name="'+ value.name +'" style="color: black">' + 'couverture  ' + value.name + '</option>');
+          var selected = "";
+          if (drupalSettings.techno !== undefined && drupalSettings.techno == value.id) {
+            selected = 'selected="selected"';
+          }
+          $('#select_technologie_obl').append('<option value="' + value.id + '" name="'+ value.name +'" style="color: black"' + selected + '>' + 'couverture  ' + value.name + '</option>');
         });
         $('#select_technologie_obl').on('change', function () {
-          var techno_selected = $("option:selected", this).attr('value');
-
-          /**
-           * selected techno just for print
-           */
-          var name_of_techno_selected = $("option:selected").attr('name');
-          $('.obl_accords_techno_selected').html(name_of_techno_selected);
-
-          /**
-           * API countries + op
-           */
-          set_table_accords_roaming(techno_selected);
+            var techno_selected = $("option:selected", this).attr('value');
+            window.location.href = '?techno=' +techno_selected;
         });
       }
     }
-
-    $(function() {
-      $('#select_technologie_obl').trigger("change");
-    });
 
     /*
      print tab obl accords

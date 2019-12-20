@@ -1,59 +1,7 @@
-<style type="text/css">
-  .btn_print_accords_obl {
-    color:black;
-    margin-top: 100px;
-    margin-left: 10px;
-  }
-  .obl_accords_techno_selected {
-    visibility: hidden;
-  }
-
-  @media print {
-    .obl_accords_techno_selected {
-      display: block;
-      visibility: visible;
-      font-size: 3rem;
-      margin-left: 2rem;
-    }
-    .btn_print_accords_obl {
-      display: none;
-    }
-    .path-reseau-mobile .dialog-off-canvas-main-canvas .region-prefooter  {
-      display: none;
-    }
-    .path-reseau-mobile #block-topzoneoblpageaccords {
-      display: none;
-    }
-    .path-reseau-mobile .searchaccordspricebycountryobl {
-      display: none;
-    }
-    #table-accord-roaming {
-      border: 1px solid;
-      margin-bottom: 130%;
-      width: 130%;
-    }
-    #table-accord-roaming .accords_obl_label {
-      width: 20%;
-    }
-    #table-accord-roaming .accords_obl_zone_id {
-      width: 20%;
-    }
-    #table-accord-roaming td {
-      padding:2rem
-    }
-    #table-accord-roaming th {
-      padding:2rem
-    }
-  }
-
-</style>
-
 <div class="container">
   <button class="btn_print_accords_obl btn btn-primary"> Imprimer au format pdf </button>
 </div>
 
-{# for print #}
-<span class="obl_accords_techno_selected"></span>
 
 <br/>
 
@@ -63,20 +11,45 @@
       <table border="1" width="100%" id="table-accord-roaming">
         <thead style="background: #F6F6F6" class="thead-table-accord-romaing">
             <th scope="col">Destination</th>
-            <th scope="col">Zone <a href="#footnote-1"><sup>(1)</sup></a></th>
+            <th scope="col">Zone</th>
             <th scope="col">Opérateur</th>
         </thead>
         <tbody>
-
+          {% for country, row in detail_accords %}
+            <tr>
+              <td>{{ country }}</td>
+              <td>{{ row.0.zone }}</td>
+              <td>
+                {% for operator in row %}
+                  {{ operator.operator }}
+                  {% if not loop.last %}
+                    <hr class="reseau-mobile-accords-roaming" >
+                  {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
+
+      <div class="row div_btn_obl_accords_perv_next">
+            {% if page > 1 %}
+              <a class="btn btn-default btn_previous_obl_accords" href="{{ url('oab_obl_settings', {'page': page-1, 'techno': techno}) }}">Previous</a>
+            {% else %}
+              <a class="btn btn-default btn_previous_obl_accords disabled">Previous</a>
+            {% endif %}
+
+            {% if (page >= max_limit_page or detail_accords is empty) %}
+              <a class="btn btn-default btn_next_obl_accords disabled">Next</a>
+            {% else %}
+              <a class="btn btn-default btn_next_obl_accords" href="{{ url('oab_obl_settings', {'page': page+1, 'techno': techno}) }}">Next</a>
+            {% endif %}
+      </div>
+
     </div>
 
-    <div class="searchaccordspricebycountryobl">
+    <div class="col-xs-12 col-sm-12 col-md-3 searchaccordspricebycountryobl">
       {{ drupal_entity('block','searchaccordspricebycountryobl', check_access=false) }}
     </div>
 
 </div>
-
-<br/>
-<p id="footnote-1">(1) Here is my first footnote.</p>

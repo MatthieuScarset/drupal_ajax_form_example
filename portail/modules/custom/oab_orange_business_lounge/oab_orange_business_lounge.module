@@ -8,7 +8,11 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
             array(
                 'variables' => array(
                     'zones' => array(),
-                    'countriesWithOperators' => array()
+                    'countriesWithOperators' => array(),
+                    'detail_accords' => array(),
+                    'page' => 0,
+                    'techno' => '0',
+                    'max_limit_page' => array()
                 ),
                 'template' => 'obl_template'
             ),
@@ -32,4 +36,3 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
 function oab_orange_business_lounge_page_attachments_alter(array &$attachments) {
     $attachments['#attached']['library'][] = 'oab_orange_business_lounge/oab_obl_js';
 }
-

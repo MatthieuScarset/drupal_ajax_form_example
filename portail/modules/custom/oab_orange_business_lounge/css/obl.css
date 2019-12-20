@@ -1,0 +1,46 @@
+.path-reseau-mobile .btn_print_accords_obl {
+  color: black;
+  margin-top: 100px;
+  margin-left: 10px;
+}
+
+#select_technologie_obl {
+  -moz-appearance: none;
+  border: none;
+  font-size: 0.7em;
+  background-color: transparent;
+}
+
+hr.reseau-mobile-accords-roaming {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 2px;
+}
+
+#table-accord-roaming {
+  background-color: #fff;
+  border: 1px solid #aaa;
+  margin-bottom: 2rem;
+}
+
+#table-accord-roaming td {
+  padding: 2rem
+}
+
+#table-accord-roaming th {
+  padding: 2rem
+}
+
+a.btn_previous_obl_accords {
+  float: left;
+  margin-left: 1rem;
+}
+
+a.btn_next_obl_accords {
+  float: right;
+  margin-right: 1rem;
+}
+
+.div_btn_obl_accords_perv_next {
+  margin-bottom: 3rem;
+}

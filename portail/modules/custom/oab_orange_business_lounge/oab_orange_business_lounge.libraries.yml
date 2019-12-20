@@ -5,5 +5,11 @@ oab_obl_js:
   js:
     js/obl.js: {}
 
+  css:
+    base:
+      css/obl.css: {}
+    theme:
+      css/print.css: { media: print }
+
   dependencies:
     - core/jquery.ui.autocomplete

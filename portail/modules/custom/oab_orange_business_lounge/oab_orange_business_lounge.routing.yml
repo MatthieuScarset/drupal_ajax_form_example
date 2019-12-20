@@ -38,7 +38,7 @@ oab_obl_unique_country_settings:
     _permission: 'access content'
 
 oab_obl_get_countries_with_operators_settings:
-  path: '/oblNetworkTypes/{id}'
+  path: '/oblNetworkTypes/{id}/{page}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblController::oblGetCountriesWithOperators'
   requirements:

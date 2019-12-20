@@ -1,0 +1,45 @@
+.path-reseau-mobile .btn_print_accords_obl {
+  display: none;
+}
+
+.path-reseau-mobile .dialog-off-canvas-main-canvas .region-prefooter {
+  display: none;
+}
+
+.path-reseau-mobile #block-topzoneoblpageaccords {
+  display: none;
+}
+
+.path-reseau-mobile .searchaccordspricebycountryobl {
+  display: none;
+}
+
+.path-reseau-mobile .btn_previous_obl_accords {
+  display: none;
+}
+
+.path-reseau-mobile .btn_next_obl_accords {
+  display: none;
+}
+
+#table-accord-roaming {
+  border: 1px solid;
+  margin-bottom: 130%;
+  width: 130%;
+}
+
+#table-accord-roaming .accords_obl_label {
+  width: 20%;
+}
+
+#table-accord-roaming .accords_obl_zone_id {
+  width: 20%;
+}
+
+#table-accord-roaming td {
+  padding: 2rem
+}
+
+#table-accord-roaming th {
+  padding: 2rem
+}

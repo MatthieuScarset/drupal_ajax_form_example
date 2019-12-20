@@ -20,8 +20,18 @@ class OblPricesController extends ControllerBase {
         }
 
         $countries = $obl_service->getCountriesWithoutOperator();
-        $zones = $obl_service->getZones(false);
         $title = $config->get('title_label');
+
+        $zones = $obl_service->getZones(false);
+        $items = $zones['items'];
+        usort($items, function($a, $b) {
+          return $a['position'] <=> $b['position'];
+        });
+        //revenir à l'état initial du tableau avant le tri
+        $zones = [
+          items => $items
+        ];
+
 
         return array(
             '#countries' => $countries,

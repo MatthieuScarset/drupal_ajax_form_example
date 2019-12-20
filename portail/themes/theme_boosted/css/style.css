@@ -3029,32 +3029,6 @@ img.image_pannel{
     font-weight: bold;
 }
 
-#select_technologie_obl {
-  -moz-appearance: none;
-  border: none;
-  font-size: 0.7em;
-  background-color: transparent;
-}
-
-hr.reseau-mobile-accords-roaming {
-  border-top: 1px solid #ccc;
-  margin-top: 1rem;
-  margin-bottom: 2px;
-}
-
-#table-accord-roaming {
-  background-color: #fff;
-  border: 1px solid #aaa;
-}
-
-#table-accord-roaming td {
-  padding:2rem
-}
-
-#table-accord-roaming th {
-  padding:2rem
-}
-
 @media(max-width: 767px) {
     .roaming-infos-container {
         width: auto;
