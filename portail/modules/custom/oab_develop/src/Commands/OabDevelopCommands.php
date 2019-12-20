@@ -47,6 +47,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       $fp = fopen($file_commands, 'r');
 
       while ($row = fgets($fp)) {
+        $row = trim(preg_replace('/\s+/', ' ', $row));
         if (!empty($row) && substr($row, 0, 1) != '#'
             && strlen($row) > 1  /* Prevent empty lines to be executed */) {
           $this->output()->writeln('- ' . $row );
@@ -61,8 +62,9 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
             $this->output()->writeln($process->getExitCode() . ' - ' . $process->getErrorOutput());
           } else {
             $this->output()->writeln($process->getOutput());
-            $this->output()->writeln('--------------------------');
           }
+
+          $this->output()->writeln('--------------------------');
 
         }
       }
