@@ -22,9 +22,7 @@ class OblController extends ControllerBase {
 
         $technologies = $obl_service->getTechnologies();
         $items = $technologies['items'];
-        kint($items);
         uasort($items, [$this, "sortById"]);
-        kint($items);
 
 
         $actual_techno = $request->query->has('techno') && $request->query->get('techno') !== 0
