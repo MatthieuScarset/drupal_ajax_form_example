@@ -16,7 +16,6 @@ class OabOblSwagger {
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
     const API_COUNTRIES = '/countries';
     const API_TECHNOLOGIES = '/network-types';
-    const API_NETWORK_TYPES = '/network-types';
 
 
   public function __construct() {
@@ -81,7 +80,7 @@ class OabOblSwagger {
       if ($num_page > 0) {
         $page_ext = "?page=$num_page";
       }
-      return $this->executeScriptCurl(self::API_NETWORK_TYPES.'/'.$id.'/table' . $page_ext);
+      return $this->executeScriptCurl(self::API_TECHNOLOGIES.'/'.$id.'/table' . $page_ext);
     }
 
 
