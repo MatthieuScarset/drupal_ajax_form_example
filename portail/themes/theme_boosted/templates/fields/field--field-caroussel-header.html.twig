@@ -36,7 +36,7 @@
     </div>
 
     <!-- Controls -->
-    <div class="col-sm-2 col-xs-4 container-homepage-carousel-indicators">
+    <div class="col-sm-2 col-xs-4 container-homepage-carousel-indicators {% if  nbItems < 2 %} hidden {% endif %}">
         <a class="left carousel-control homepage-carousel-indicators" href="{{ '#' ~ id }}" role="button" data-slide="prev">
             <span class="glyphicon icon-arrow-previous homepage-carousel-glyphicon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>

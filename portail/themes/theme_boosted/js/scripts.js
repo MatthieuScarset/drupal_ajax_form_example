@@ -318,14 +318,9 @@
     }
   });
 
-let num_item = $('.item-carousel-number').data('value');
-
-if (num_item == 1) {
-    $('.container-homepage-carousel-indicators').css('display','none');
-}
 
 $('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
-    num_item = $(events.relatedTarget).data('key');
+    var num_item = $(events.relatedTarget).data('key');
     $(this).find('.actual-slide').html(num_item + 1);
 });
 
