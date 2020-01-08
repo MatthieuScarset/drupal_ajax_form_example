@@ -320,7 +320,28 @@
 
   $('#tab-expertise-banner li').on('click', function (elem) {
       $(elem.target).css('height', '100%');
-      console.log(elem);
+  });
+
+  /*
+    prev and next Nos partenaire
+ */
+  $(document).on('click', '#views-hp-partenaire-previous', function(e) {
+   // alert('bla');
+    var css_button_created_by_drupal = '.view.view-homepage-partner nav a[rel="prev"]';
+    if ($(css_button_created_by_drupal).length) {
+      $(css_button_created_by_drupal).click();
+    } else {
+      $(this).addClass('hidden');
+    }
+  });
+
+  $(document).on('click', '#views-hp-partenaire-next', function(e) {
+    var css_button_created_by_drupal = '.view.view-homepage-partner nav a[rel="next"]';
+    if ($(css_button_created_by_drupal).length) {
+      $(css_button_created_by_drupal).click();
+    } else {
+      $(this).addClass('hidden');
+    }
   });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

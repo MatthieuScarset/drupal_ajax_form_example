@@ -37,15 +37,16 @@ options.alignment,
 {% if options.row_class_default %}
     {%
     set row_classes = [
-    'views-row',
-    options.alignment == 'horizontal' ? 'clearfix',
+      'views-row',
+      options.alignment == 'horizontal' ? 'clearfix',
+      'row',
     ]
     %}
 {% endif %}
 {% if options.col_class_default %}
     {%
     set col_classes = [
-    options.alignment == 'vertical' ? 'clearfix',
+      options.alignment == 'vertical' ? 'clearfix',
     ]
     %}
 {% endif %}
@@ -57,9 +58,9 @@ options.alignment,
         {% for row in items %}
             <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
                 {% for column in row.content %}
-                    <div{{ column.attributes.addClass(col_classes, options.col_class_default ? '', 'partner-img') }}>
-                        {{ column.content }}
-                    </div>
+                  <div class="col-xs-12 col-sm-12 col-md-3 partner-img">
+                    {{ column.content }}
+                  </div>
                 {% endfor %}
             </div>
         {% endfor %}
