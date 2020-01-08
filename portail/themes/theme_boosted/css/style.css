@@ -568,11 +568,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-.section-title-corporate {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-}
-
 .section-title-corporate .title,
 .section-title-solution .title{
     font-size: 3rem;
@@ -773,7 +768,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
-    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -3011,6 +3005,34 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     bottom: 0;
     right: 0;
     text-align: left;
+}
+.arrow-down-claim-homepage {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #000;
+    opacity: 0.7;
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 767px) {
+    .homepage-content {
+        margin-top: 0px;
+    }
+
+    .arrow-down-claim-homepage {
+        top: 14px;
+    }
+}
+.claim-homepage-container {
+    text-align: center;
+    min-height: 90px;
+}
+
+.top-zone-homepage .carousel-solution {
+    margin-top: 20px;
 }
 
 .left.carousel-control.homepage-carousel-indicators,

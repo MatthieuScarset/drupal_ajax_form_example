@@ -172,6 +172,12 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
           'html'        => file_get_contents('templates/background_lighter_grey.html.twig', FILE_USE_INCLUDE_PATH),
           'image'       => 'background_lighter_grey.gif',
         );
+        $data[18] = array(
+            'title'       => t('Claim black background'),
+            'description' => t('Claim black background'),
+            'html'        => file_get_contents('templates/background_claim_black.html.twig', FILE_USE_INCLUDE_PATH),
+            'image'       => 'background_black.gif',
+        );
 
         $attachments['#attached']['drupalSettings']['oab_templates'] = $data;
         // Chargement des modules depuis le fichier templating/components.json
