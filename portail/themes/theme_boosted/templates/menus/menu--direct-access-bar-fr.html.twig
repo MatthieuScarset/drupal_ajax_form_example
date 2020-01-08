@@ -26,20 +26,44 @@
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
   {% if items %}
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg bg-direct-bar">
-      <div class="container" id="slider_direct_access">
+    <div class="bg bg-direct-bar">
+      <div class="container">
+        <div class="row">
       {% for item in items %}
 
         {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
         {% set link_icon = item.url.options.icon %}
-        <div class="item-direct-access nopadding text-align-center">
-          <div class="div_direct_access border-right">
-            {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
-            {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
-            </a>
-          </div>
+
+        {% if items|length == 4 %}
+          {% set class = 'col-sm-3' %}
+        {% else %}
+          {% set class = 'col-sm-4' %} {# if(items==3 and != 4 ) / placé en 3 blocs version desktop #}
+        {% endif %}
+
+        {% if items|length == 3 and loop.index == 1 %}
+          {% set class = class ~" col-xs-12" %}
+        {% else %}
+          {% set class = class ~" col-xs-6" %}
+        {% endif %}
+
+        <div class="text-align-center">
+          {% if (items|length == 3) %}
+            <div class="location-bar-direct-access-3-items-{{ loop.index }} {{ class }}">
+              {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
+              {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+            </div>
+          {% endif %}
+
+          {% if (items|length == 4) %}
+            <div class="location-bar-direct-access-4-items-{{ loop.index }} {{ class }}">
+              {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
+              {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+            </div>
+          {% endif %}
         </div>
+
       {% endfor %}
+        </div>
       </div>
     </div>
   {% endif %}
