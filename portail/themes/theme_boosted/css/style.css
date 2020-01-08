@@ -1332,8 +1332,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .homepage-banner-container-mobile, .homepage-field-tab-title-mobile {
         display: block;
     }
-    .homepage-banner-container {
-        display: none;
+    .zone-partner.homepage-banner-container {
+        display: initial;
     }
 }
 
