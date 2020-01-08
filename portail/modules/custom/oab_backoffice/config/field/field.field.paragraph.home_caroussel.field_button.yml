@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button
+    - paragraphs.paragraphs_type.default_button
+    - paragraphs.paragraphs_type.home_caroussel
+  module:
+    - entity_reference_revisions
+id: paragraph.home_caroussel.field_button
+field_name: field_button
+entity_type: paragraph
+bundle: home_caroussel
+label: Button
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      default_button: default_button
+    target_bundles_drag_drop:
+      carou_test:
+        weight: 17
+        enabled: false
+      default_button:
+        enabled: true
+        weight: 18
+      home_banner:
+        weight: 19
+        enabled: false
+      home_caroussel:
+        weight: 20
+        enabled: false
+      home_column:
+        weight: 21
+        enabled: false
+      home_column_section:
+        weight: 22
+        enabled: false
+      home_playlist:
+        weight: 23
+        enabled: false
+      home_thematic_columns:
+        weight: 24
+        enabled: false
+      homepage_banner_experience:
+        weight: 25
+        enabled: false
+      homepage_banner_item:
+        weight: 26
+        enabled: false
+      homepage_news:
+        weight: 27
+        enabled: false
+      infography_partner:
+        weight: 28
+        enabled: false
+      paragraph_block_rebond:
+        weight: 29
+        enabled: false
+      rebond_wysiwyg:
+        weight: 30
+        enabled: false
+      related_content:
+        weight: 31
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions

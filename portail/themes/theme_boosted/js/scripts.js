@@ -318,6 +318,12 @@
     }
   });
 
+
+$('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
+    var num_item = $(events.relatedTarget).data('key');
+    $(this).find('.actual-slide').html(num_item + 1);
+});
+
   $('#tab-expertise-banner li').on('click', function (elem) {
       $(elem.target).css('height', '100%');
   });

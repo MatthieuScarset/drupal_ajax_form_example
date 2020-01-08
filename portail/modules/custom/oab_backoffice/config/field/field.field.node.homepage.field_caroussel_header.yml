@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_caroussel_header
+    - node.type.homepage
+    - paragraphs.paragraphs_type.home_caroussel
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_caroussel_header
+field_name: field_caroussel_header
+entity_type: node
+bundle: homepage
+label: 'Caroussel Header'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      home_caroussel: home_caroussel
+    target_bundles_drag_drop:
+      carou_test:
+        weight: 17
+        enabled: false
+      default_button:
+        weight: 18
+        enabled: false
+      homepage_banner_experience:
+        weight: 19
+        enabled: false
+      homepage_banner_item:
+        weight: 20
+        enabled: false
+      homepage_news:
+        weight: 21
+        enabled: false
+      home_banner:
+        weight: 22
+        enabled: false
+      home_caroussel:
+        enabled: true
+        weight: 23
+      home_column:
+        weight: 24
+        enabled: false
+      home_column_section:
+        weight: 25
+        enabled: false
+      home_playlist:
+        weight: 26
+        enabled: false
+      home_thematic_columns:
+        weight: 27
+        enabled: false
+      infography_partner:
+        weight: 28
+        enabled: false
+      paragraph_block_rebond:
+        weight: 29
+        enabled: false
+      rebond_wysiwyg:
+        weight: 30
+        enabled: false
+      related_content:
+        weight: 31
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions

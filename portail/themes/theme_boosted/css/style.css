@@ -1048,7 +1048,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-ces .block-card img {
+.block-card img {
     width: 100%;
     height: auto;
 }
@@ -3000,6 +3000,44 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
   font-size: 8rem;
 }
 
+.carrousel-homepage-header .carousel-inner .item img {
+    opacity: 0;
+    height: 400px;
+}
+
+.carousel-caption.homepage-carousel {
+    top : 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: left;
+}
+
+.left.carousel-control.homepage-carousel-indicators,
+.right.carousel-control.homepage-carousel-indicators {
+    background-color: transparent;
+}
+
+.left.carousel-control.homepage-carousel-indicators:hover,
+.right.carousel-control.homepage-carousel-indicators:hover,
+.left.carousel-control.homepage-carousel-indicators:focus,
+.right.carousel-control.homepage-carousel-indicators:focus{
+    width: 6rem !important;
+}
+
+.carrousel-homepage-header .container-homepage-carousel-indicators {
+    float: right;
+}
+
+.homepage-carousel-glyphicon:before {
+    color: #9E9F9F;
+}
+
+.item-carousel-number {
+    color: #9E9F9F;
+    position: relative;
+    left: 40%;
+}
 
 /*For Desktop*/
 @media (min-width: 480px) {

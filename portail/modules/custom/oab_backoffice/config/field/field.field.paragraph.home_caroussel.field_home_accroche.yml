@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_home_accroche
+    - paragraphs.paragraphs_type.home_caroussel
+  module:
+    - text
+id: paragraph.home_caroussel.field_home_accroche
+field_name: field_home_accroche
+entity_type: paragraph
+bundle: home_caroussel
+label: Accroche
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
