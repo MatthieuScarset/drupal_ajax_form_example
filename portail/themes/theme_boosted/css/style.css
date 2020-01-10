@@ -2918,6 +2918,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     bottom: 0;
     right: 0;
     text-align: left;
+    text-shadow: none;
 }
 
 .left.carousel-control.homepage-carousel-indicators,
