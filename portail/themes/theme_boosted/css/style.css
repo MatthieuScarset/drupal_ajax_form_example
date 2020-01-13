@@ -677,7 +677,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .homepage-banner{
     background-color: white;
-    padding: 60px 45px;
+    padding: 60px 0;
     margin-top: 20px;
 }
 .homepage-banner .title{
@@ -817,8 +817,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .tabpanel-expertise{
-    margin-left: 40px !important;
-    margin-right: 40px !important;
+    /*margin-left: 40px !important;
+    margin-right: 40px !important;*/
 }
 .tabpanel-expertise .tab-content{
     padding: 0em;
@@ -912,7 +912,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .section-corporate{
-    max-width: 1080px;
+    /*max-width: 1080px;*/
     margin: auto;
     padding-left: -10px;
     color: #fff;
