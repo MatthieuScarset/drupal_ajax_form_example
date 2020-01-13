@@ -691,7 +691,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
-.homepage-banner.expertise-banner title {
+.homepage-banner.expertise-banner .title {
   padding-left: 0;
 }
 
