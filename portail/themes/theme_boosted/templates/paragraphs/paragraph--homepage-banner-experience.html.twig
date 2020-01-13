@@ -48,11 +48,13 @@
 {% block paragraph %}
     <div{{ attributes.addClass(classes) }}>
         {% block content %}
+          <div class="row">
             <div class="homepage-banner-expertise-image col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-5">{{ content.field_content_image}}</div>
             <div class="homepage-banner-expertise-content col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-7">
                 {{ content.field_content_title }}
                 {{ content.field_content }}
             </div>
+          </div>
         {% endblock %}
     </div>
 {% endblock paragraph %}
