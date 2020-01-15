@@ -9,6 +9,7 @@ class OblPricesController extends ControllerBase {
 
     public function oblPricePage($id) {
 
+      /** @var \Drupal\oab_orange_business_lounge\Services\OabOblSwagger $obl_service */
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $config = \Drupal::config(OabOblForm::getConfigName());
 
@@ -20,14 +21,22 @@ class OblPricesController extends ControllerBase {
         }
 
         $countries = $obl_service->getCountriesWithoutOperator();
+
         $zones = $obl_service->getZones(false);
-        $title = $config->get('title_label');
+        $items = $zones['items'];
+        usort($items, function($a, $b) {
+          return $a['position'] <=> $b['position'];
+        });
+        //revenir à l'état initial du tableau avant le tri
+        $zones = [
+          'items' => $items
+        ];
+
 
         return array(
             '#countries' => $countries,
             '#zones' => $zones,
             '#zones_image' => $zones_image,
-            '#title' => $title,
             '#theme' => 'orange_business_lounge_page_pays',
             '#attached' => [
                 'library' => [
@@ -35,11 +44,16 @@ class OblPricesController extends ControllerBase {
                 ],
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
-                    'id_country' => $id
+                    'id_country' => $id,
+                    'obl_zones' => $items
                 ]
             ],
-
         );
+    }
+
+    public function getTitle() {
+      $config = \Drupal::config(OabOblForm::getConfigName());
+      return $config->get('title_label');
     }
 
     public function oblUniqueZone($id) {

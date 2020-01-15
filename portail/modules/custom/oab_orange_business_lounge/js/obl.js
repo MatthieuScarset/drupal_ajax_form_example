@@ -18,34 +18,30 @@
 
         //get code zone since twig template
         var data = $(this).data();
-        var code_zone = data.zone;
         var id_zone = data.zoneId;
 
-
-        update_page_datas_with_selection(code_zone, id_zone);
+        update_page_datas_with_selection(id_zone);
         init_reset_autocomplete_field();
 
     });
 
     function load_data_from_id_countrie(pays_id) {
         var arr_hydra_member = drupalSettings.arr_contries;
+        const country = arr_hydra_member.find(country => country.id == pays_id);
 
-        arr_hydra_member.forEach(function(item) {
-            if(item.id == pays_id) {
+        if (country !== undefined) {
+          $('.countries_input_autocomplete').val(country.label);
 
-                $('.countries_input_autocomplete').val(item.label);
+          update_page_datas_with_selection(country.zoneId);
+          load_country_operators(pays_id);
+          update_label_countrie_reseaux(country.label);
 
-                update_page_datas_with_selection(code_zone = '', item.zoneId);
-                load_country_operators(pays_id);
-                update_label_countrie_reseaux(item.label);
-
-                $('#select_pays_zone').val(pays_id);
-            }
-        });
+          $('#select_pays_zone').val(pays_id);
+        }
     }
 
-    function update_page_datas_with_selection (code_zone, id_zone) {
-        set_countries_with_zone_code(code_zone, id_zone);
+    function update_page_datas_with_selection (id_zone) {
+        set_countries_with_zone_code(id_zone);
         set_zone_tarif_info(id_zone);
     }
 
@@ -55,14 +51,13 @@
         });
     }
 
-    function set_countries_with_zone_code(code_zone, id_zone) {
+    function set_countries_with_zone_code(id_zone) {
 
         var arr_hydra_member = drupalSettings.arr_contries;
 
-        $('#select_pays_zone').removeClass('hidden');
+        $('.global-obl-container .obl-search-by-country').removeClass('hidden');
 
         var listePays = arr_hydra_member.filter(function (element) {
-            // console.log(element.rootZone.code + " vs " + code_zone + '|' + element.rootZone.code.length + " vs " + code_zone.length);
             return element.zoneId === id_zone;
         });
         //Call method sort by country label _A-Z
@@ -73,7 +68,16 @@
             $('#select_pays_zone').append('<option value="' + pays.id + '">' + pays.label + '</option>');
         }));
 
-        $('.obl-label-name').text(code_zone);
+
+        var zone_label = '';
+        if (drupalSettings.obl_zones !== undefined && drupalSettings.obl_zones.length > 0) {
+          var actual_zone = drupalSettings.obl_zones.find(zone => zone.id === id_zone);
+          if (actual_zone !== undefined) {
+            zone_label = actual_zone.label;
+          }
+        }
+
+        $('.obl-label-name').text(zone_label);
         update_label_countrie_reseaux();
         update_label_zone_reseaux();
 
@@ -133,7 +137,7 @@
                     $('input[name="country_id"]').val(pays.id);
                 }
 
-                update_page_datas_with_selection(code_zone = '', pays.zoneId);
+                update_page_datas_with_selection(pays.zoneId);
                 load_country_operators(pays.id);
 
                 $('#select_pays_zone option[value='+pays.id+']').attr("selected", "selected");

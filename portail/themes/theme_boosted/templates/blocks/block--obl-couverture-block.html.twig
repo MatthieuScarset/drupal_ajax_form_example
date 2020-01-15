@@ -47,17 +47,18 @@
 #}
 
 <section{{ attributes.addClass('block', 'clearfix', 'phonenumber') }}>
-    <div class="main-container-couverture-obl-price">
+  {% block content %}
+      <div class="main-container-couverture-obl-price">
         <h3 class="partenaires_obl_block_title">{{ content.block_title }}</h3>
-        {% block content %}
-            {% if content is not null %}
-                <div class="row">
-                    <div class="block-content-couverture-obl-price">
-                        <h4>{{ content['#markup'] }}</h4>
-                    </div>
-                </div>
-            {% endif %}
-        {% endblock %}
-    </div>
+        {#<div class="row">
+            <div class="block-content-couverture-obl-price">
+                <h4>{{ content['#markup'] }}</h4>
+            </div>
+        </div>#}
+        <div class="button-container">
+          <a class="btn btn-primary" href="{{ content.link }}">{{ content.link_label }}</a>
+        </div>
+      </div>
+  {% endblock %}
 </section>
 

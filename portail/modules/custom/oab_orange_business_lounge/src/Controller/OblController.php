@@ -2,11 +2,21 @@
 namespace Drupal\oab_orange_business_lounge\Controller;
 use Drupal\oab_orange_business_lounge\Form\SearchCountryForm;
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
 
 class OblController extends ControllerBase {
 
-    public function oblPage() {
+    public function getTitle() {
+        return "Accords roaming";
+    }
+
+    public function oblPage(Request $request) {
+
+      $page = 1;
+      if ($request->query->has('page')) {
+          $page = $request->query->get('page');
+      }
 
       /** @var OabOblSwagger $obl_service */
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
