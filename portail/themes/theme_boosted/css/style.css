@@ -1501,9 +1501,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 /*for desktop*/
 @media (min-width: 767px) {
-  .btn-homepage-partners {
-    margin-left: 82%
-  }
   .partner-banner .views-view-grid .partner-img .field--item img {
     max-width: 100px;
     width: 100%;
