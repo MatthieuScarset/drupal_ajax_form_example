@@ -490,6 +490,11 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-left: 10px;
 }
 
+.block-card.block-card-full .news-title {
+  padding-left: 20px;
+}
+
+
 .block-card .h4 {
   padding-top: 30px;
   padding-bottom: 0;
