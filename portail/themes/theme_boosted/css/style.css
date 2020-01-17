@@ -1210,8 +1210,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 
     .expertise-banner, .partner-banner-container {
-      padding-right: 0 !important;
-      padding-left: 0!important;
+      /*padding-right: 0 !important;
+      padding-left: 0!important;*/
     }
 
     .homepage-banner .title{
@@ -3098,7 +3098,11 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-bottom: 3em;
   }
   .homepage-banner .title {
-    padding-left: 5px;
+    padding-left: 0;
+  }
+
+  .field--name-field-expertise-title {
+    color: black;
   }
 
   .page-node-type-homepage display-flex {
