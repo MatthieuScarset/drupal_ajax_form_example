@@ -1187,11 +1187,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
         margin-left: 0px;
         margin-top: 20px;
     }
-    .section-solution,
-    .carousel-solution{
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-    }
     .nav-tabs-dropdown {
         display: block !important;
         height: 40px;
@@ -1207,11 +1202,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     .homepage-banner.expertise-banner {
       padding-top: 0;
       margin-top: 2em;
-    }
-
-    .expertise-banner, .partner-banner-container {
-      /*padding-right: 0 !important;
-      padding-left: 0!important;*/
     }
 
     .homepage-banner .title{
@@ -3031,6 +3021,11 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     .arrow-down-claim-homepage {
         top: 14px;
     }
+
+  .page-node-type-homepage .carrousel-homepage-header {
+    padding: 5rem;
+  }
+
 }
 .claim-homepage-container {
     text-align: center;
