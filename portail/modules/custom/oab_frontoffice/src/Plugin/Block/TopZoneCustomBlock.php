@@ -32,7 +32,7 @@ class TopZoneCustomBlock extends BlockBase {
 
         $url = '';
         if ($file != null) {
-          $url = ImageStyle::load('top_zone_big')->buildUrl($file->getFileUri());
+          $url = ImageStyle::load('top_zone')->buildUrl($file->getFileUri());
           $url = file_url_transform_relative($url);
         }
 
