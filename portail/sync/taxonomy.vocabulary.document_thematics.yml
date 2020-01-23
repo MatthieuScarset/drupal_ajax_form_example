@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Documents thematics'
 vid: document_thematics
 description: ''
-hierarchy: 0
 weight: 0

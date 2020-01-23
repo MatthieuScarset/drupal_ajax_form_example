@@ -5,5 +5,4 @@ dependencies: {  }
 name: Category
 vid: partner_types
 description: null
-hierarchy: 0
 weight: 0

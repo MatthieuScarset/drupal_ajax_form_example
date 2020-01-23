@@ -5,5 +5,4 @@ dependencies: {  }
 name: Geographic
 vid: geographics
 description: ''
-hierarchy: 0
 weight: 0

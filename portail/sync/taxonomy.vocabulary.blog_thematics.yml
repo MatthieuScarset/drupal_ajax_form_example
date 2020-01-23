@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Blog thematic'
 vid: blog_thematics
 description: null
-hierarchy: 0
 weight: 0

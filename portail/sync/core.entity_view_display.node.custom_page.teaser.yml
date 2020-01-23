@@ -35,8 +35,11 @@ hidden:
   field_display_title: true
   field_hub: true
   field_hub_portal: true
+  field_insight: true
+  field_insight_type: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

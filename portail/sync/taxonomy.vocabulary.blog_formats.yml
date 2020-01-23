@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Blog type'
 vid: blog_formats
 description: null
-hierarchy: 0
 weight: 0

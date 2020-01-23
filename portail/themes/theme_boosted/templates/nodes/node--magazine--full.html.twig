@@ -83,7 +83,7 @@ view_mode ? view_mode|clean_class,
     {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
 
     {% set fieldMagazine %}
-        {{ content.theme_term }}
+        {{ content.theme_term["#markup"] }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
      {% set fieldAuthor %}
          {{ author_name }}
@@ -91,7 +91,7 @@ view_mode ? view_mode|clean_class,
 
 
     <div class="content_info">
-        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term }} {% endif %}
+        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term["#markup"] }} {% endif %}
     </div>
 
 

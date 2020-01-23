@@ -1,8 +1,8 @@
+uuid: null
 langcode: en
 status: true
 dependencies: {  }
 name: 'Document language'
 vid: document_language
 description: ''
-hierarchy: 0
 weight: 0

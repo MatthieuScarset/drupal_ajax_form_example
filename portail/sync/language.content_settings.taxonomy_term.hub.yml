@@ -1,4 +1,4 @@
-uuid: null
+uuid: ac58e589-249b-43be-9723-674bff3fb8e8
 langcode: en
 status: true
 dependencies:
@@ -13,4 +13,4 @@ id: taxonomy_term.hub
 target_entity_type_id: taxonomy_term
 target_bundle: hub
 default_langcode: current_interface
-language_alterable: false
+language_alterable: true

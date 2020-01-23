@@ -1,4 +1,4 @@
-uuid: null
+uuid: 9dc8a145-6370-4b4c-abb7-9bd0f5add8bd
 langcode: fr
 status: true
 dependencies:
@@ -22,6 +22,7 @@ settings:
   label_display: '0'
   level: 1
   depth: 0
+  expand_all_items: false
 visibility:
   language:
     id: language

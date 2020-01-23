@@ -107,7 +107,7 @@ view_mode ? view_mode|clean_class,
     {% set logoUrl %}
         {{ http_host ~ "/themes/theme_boosted/logo-fond-blanc.png" }}
     {% endset %}
-    
+
     <script type="application/ld+json"> {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -143,8 +143,11 @@ view_mode ? view_mode|clean_class,
         <a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': content.field_profile[0]['#node'].getTitle() }) }}">{{ content.field_profile[0]['#node'].getTitle() }}</a>
         {% if content.theme_term %}{{ ', ' }}{% endif %}
     {% endif %}
-    {{ content.theme_term }}
+    {{ content.theme_term["#markup"] }}
 </div>
+
+  ooo
+
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar_blogs.html.twig' %}
 

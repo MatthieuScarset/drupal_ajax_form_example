@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Magazine thematic'
 vid: magazine_thematics
 description: ''
-hierarchy: 0
 weight: 0

@@ -1,8 +1,16 @@
+uuid: 4ece0ed6-68f9-4496-8415-d5aedf7eb265
 langcode: en
 status: open
 dependencies:
   module:
-    - oab_gdpr
+    - oab_backoffice
+third_party_settings:
+  oab_backoffice:
+    gdpr_business_owner: '567'
+    gdpr_spoc_security: '567'
+    gdpr_expiration_date: ''
+    gdpr_business_analysts: {  }
+    gdpr_form_published: false
 open: null
 close: null
 weight: 0
@@ -167,11 +175,3 @@ access:
     users: {  }
     permissions: {  }
 handlers: {  }
-uuid: 4ece0ed6-68f9-4496-8415-d5aedf7eb265
-third_party_settings:
-  oab_gdpr:
-    gdpr_business_owner: '567'
-    gdpr_spoc_security: '567'
-    gdpr_expiration_date: ''
-    gdpr_business_analysts: {  }
-    gdpr_form_published: false

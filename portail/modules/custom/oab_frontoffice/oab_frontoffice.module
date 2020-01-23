@@ -215,7 +215,6 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 
             if ($theme_term != '') {
                 $term = \Drupal\taxonomy\Entity\Term::load($theme_term);
-                //oabt($term, true);
                 if (isset($term)) {
                     $build['theme_term'] = array(
                         '#markup' => $term->getName(),

@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Market segment'
 vid: market_segments
 description: null
-hierarchy: 0
 weight: 0
