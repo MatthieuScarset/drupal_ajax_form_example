@@ -307,6 +307,21 @@ function oabt_tracelog($module, $message, $dirpath="oabt") {
  * On check le dosier de log et on envoie par mail les fichier qui y sont présents, puis on supprime tout
  */
 function oab_develop_cron() {
+
+}
+
+function oab_develop_mail($key, &$message, $params) {
+    switch ($key) {
+        case 'mail_log':
+            $message['send'] = true;
+
+            $message['subject'] = $params['subject'];
+            $message['body'] = array($params['body']);
+            break;
+    }
+}
+
+function check_log_for_cron(){
     $dir = \Drupal::service('file_system')->realpath(LOG_DIR . 'oabt');
 
     if (file_exists($dir)) {
@@ -327,16 +342,5 @@ function oab_develop_cron() {
             $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) . "<br />Cordialement,<br />L'equipe ruby";
             \Drupal::service('plugin.manager.mail')->mail('oab_develop', 'mail_log', $mails, 'fr', $params);
         }
-    }
-}
-
-function oab_develop_mail($key, &$message, $params) {
-    switch ($key) {
-        case 'mail_log':
-            $message['send'] = true;
-
-            $message['subject'] = $params['subject'];
-            $message['body'] = array($params['body']);
-            break;
     }
 }

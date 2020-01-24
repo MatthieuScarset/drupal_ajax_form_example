@@ -28,11 +28,10 @@ class OblCouvertureBlock extends BlockBase {
         $block = array();
 
         $settings = $this->getConfiguration();
-        $content = $settings['content'];
-        $title = $settings['block_title'];
 
-        $block['#markup'] = $content;
-        $block['block_title'] = $title;
+        $block['link'] = isset($settings['link']) ? $settings['link'] : '';
+        $block['link_label'] = isset($settings['link_label']) ? $settings['link_label'] : '';
+        $block['block_title'] = isset($settings['block_title']) ? $settings['block_title'] : '';
 
         return $block;
     }
@@ -49,11 +48,18 @@ class OblCouvertureBlock extends BlockBase {
             '#default_value' => isset($this->configuration['block_title']) ? $this->configuration['block_title'] : 'Titre du block',
             '#required' => true,
         ];
-        $form['content'] = array(
+        $form['link_label'] = array(
             '#type' => 'textfield',
             '#title' => t('Label du lien'),
-            '#default_value' => isset($this->configuration['content']) ? $this->configuration['content'] : '',
+            '#default_value' => isset($this->configuration['link_label']) ? $this->configuration['link_label'] : '',
             '#required' => true,
+        );
+
+        $form['link'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Lien'),
+          '#default_value' => isset($this->configuration['link']) ? $this->configuration['link'] : '',
+          '#required' => true,
         );
 
         return $form;
@@ -70,7 +76,8 @@ class OblCouvertureBlock extends BlockBase {
      * {@inheritdoc}
      */
     public function blockSubmit($form, FormStateInterface $form_state) {
-        $this->configuration['content'] = $form_state->getValue('content');
         $this->configuration['block_title'] = $form_state->getValue('block_title');
+        $this->configuration['link_label'] = $form_state->getValue('link_label');
+        $this->configuration['link'] = $form_state->getValue('link');
     }
 }

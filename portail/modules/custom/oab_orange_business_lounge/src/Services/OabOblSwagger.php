@@ -14,9 +14,11 @@ class OabOblSwagger {
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
-    const API_COUNTRIES = '/root_countries?itemsPerPage=300';
+    const API_COUNTRIES = '/countries';
+    const API_TECHNOLOGIES = '/network-types';
 
-    public function __construct() {
+
+  public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
         $this->urlApi = $config->get('url_api');
         $this->titleLabel = $config->get('title_label');
@@ -26,7 +28,7 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getCountries () {
+    public function getCountriesWithoutOperator() {
         $data = $this->executeScriptCurl(self::API_COUNTRIES);
         return $data;
     }
@@ -43,13 +45,13 @@ class OabOblSwagger {
      * @return mixed
      */
     public function getOneZone($id) {
-        return $this->executeScriptCurl("/zones/".$id);
+      return $this->executeScriptCurl(self::API_ZONE.'/'.$id);
     }
 
     /**
      * @return mixed
      */
-    public function getPassData () {
+    public function getPassData() {
         $data = $this->executeScriptCurl(self::API_PASS_DATA);
         return $data;
     }
@@ -57,16 +59,63 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-
     public function getOneCountry($id) {
         return $this->executeScriptCurl("/countries/".$id);
     }
+
+
+    /**
+     * @return bool|mixed
+     */
+    public function getTechnologies() {
+      return $this->executeScriptCurl(self::API_TECHNOLOGIES);
+    }
+
+
+    public function getDataCountriesWithOperatorsPrepared() {
+
+      /*********************** A suup ********/
+      $i = 1;
+
+      $countries_with_operator = [];
+      $countries_without_operator = $this->getCountriesWithoutOperator();
+
+      foreach ($countries_without_operator['items'] as $tab) {
+        $my_data = [];
+
+        $country_data = $this->getOneCountry($tab['id']);
+        if (isset($country_data['operators'])) {
+          foreach ($country_data['operators'] as $operator) {
+            $operator_name = $operator['name'];
+            foreach ($operator['networkNorms'] as $network_norms) {
+              if (!isset($my_data[$network_norms['type']['name']])) {
+                $my_data[$network_norms['type']['name']] = [];
+              }
+              $my_data[$network_norms['type']['name']][] = $operator_name;
+            }
+          }
+        }
+
+        $countries_with_operator[] = [
+          'label' => $country_data['label'],
+          'zoneId' => $country_data['zoneId'],
+          'networks' => $my_data
+        ];
+
+        /*********************** A suup ********/
+        if (++$i > 10) {
+          return $countries_with_operator;
+        }
+      }
+
+      //return $countries_with_operator;
+    }
+
 
     /**
      * @param $url
      */
     public function isValid($url) {
-
         $this->executeScriptCurl(self::API_COUNTRIES, $url);
     }
 

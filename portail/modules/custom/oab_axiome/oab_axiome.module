@@ -18,15 +18,6 @@ define('AXIOME_TAXO_METIERS', 'jobs_profiles');
  */
 function oab_axiome_cron() {
 
-  #Je recupère la config pour savoir si le cron axiome est actif
-  $cron_actif = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get('axiome_enable_cron');
-
-  //Si oui, je lance l'import ; si non, rien ne se passe.
-  if ($cron_actif) {
-    $axiome_importer = new AxiomeImporter();
-    $axiome_importer->axiome_search_archive($axiome_importer->axiomeFolderRootPath);
-  }
-
 }
 
 /**
@@ -59,5 +50,17 @@ function oab_axiome_node_delete($node) {
         }
     }
 }
+
+function archive_import_for_cron() {
+    #Je recupère la config pour savoir si le cron axiome est actif
+    $cron_actif = \Drupal::config(OabAxiomeSettingsForm::getConfigName())->get('axiome_enable_cron');
+
+    //Si oui, je lance l'import ; si non, rien ne se passe.
+    if ($cron_actif) {
+        $axiome_importer = new AxiomeImporter();
+        $axiome_importer->axiome_search_archive($axiome_importer->axiomeFolderRootPath);
+    }
+}
+
 
 

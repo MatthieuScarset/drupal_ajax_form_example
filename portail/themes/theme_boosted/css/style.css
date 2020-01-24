@@ -2925,30 +2925,46 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .oblFooterZone {
     font-size: 14px;
     padding-top: 10px;
+    padding-right: 5px;
 }
 
 .global-obl-container .obl-block-countries  {
-    background-color: #ddd;
+    background-color: #eee;
     padding: 5px 0;
 }
 
 /* Style the active class, and buttons on mouse-over */
-.active.obl-block-countries, .obl-block-countries:hover {
+.active.get_zone, .obl-block-countries:hover {
     color: #F16E00;
     background-color: black;
 }
 
+.global-obl-container .obl-search-by-country {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding-top: 5px;
+}
+
+
+.global-obl-container .obl-search-by-country > div {
+  padding: 10px;
+}
+
 #select_pays_zone {
-    width: 100%;
+  width: 100%;
+  background-color: #eee;
+  border: none;
+  text-transform: uppercase;
+}
+
+
+.countries_form_autocomplete input {
+  padding-left: 10px;
+  width: 100%;
 }
 
 img.image_pannel{
     width: 100%;
-    height: 100px;
-}
-
-.roaming-infos-container {
-    width: 600px;
 }
 
 .api-result-infos {
@@ -2985,31 +3001,36 @@ img.image_pannel{
     padding: 5px;
     margin-left: 10px;
     color: #fff;
+  min-height: 220px;
 }
 
 .main-container-partner-obl-price {
     background-color: #DDDDDD;
-    margin-bottom: 20px;
     padding: 5px;
-    height: 300px;
+  min-height: 220px;
 }
 
 .main-container-couverture-obl-price {
     background-color: #000;
     color: #fff;
     padding: 10px;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  min-height: 220px;
+}
+
+.main-container-couverture-obl-price .btn-primary {
+  border: none;  /* petit hack tout moche pour contrebalancer ce qu'on a fait dans button.css */
+  width: 100%;
+}
+
+.main-container-couverture-obl-price .button-container {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  right: 10px;
 }
 
 .main-container-couverture-obl-price h3, .block-content-couverture-obl-price h4{
     color: #fff;
-}
-
-.obl-search-by-country {
-    padding-left: 0 !important;
 }
 
 .countries_input_autocomplete {
@@ -3032,6 +3053,32 @@ img.image_pannel{
 
 .reseau-partenaire-tarif-roaming td {
     font-weight: bold;
+}
+
+#select_technologie_obl {
+  -moz-appearance: none;
+  border: none;
+  font-size: 0.7em;
+  background-color: transparent;
+}
+
+hr.reseau-mobile-accords-roaming {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 2px;
+}
+
+#table-accord-roaming {
+  background-color: #fff;
+  border: 1px solid #aaa;
+}
+
+#table-accord-roaming td {
+  padding:2rem
+}
+
+#table-accord-roaming th {
+  padding:2rem
 }
 
 @media(max-width: 767px) {
