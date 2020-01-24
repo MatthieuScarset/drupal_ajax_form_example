@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.customer_story.field_blog_thematic
     - field.field.node.customer_story.field_content
     - field.field.node.customer_story.field_content_owner
     - field.field.node.customer_story.field_country
@@ -17,6 +16,7 @@ dependencies:
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_insight_type
     - field.field.node.customer_story.field_job_profile
+    - field.field.node.customer_story.field_local_nav
     - field.field.node.customer_story.field_market_segment
     - field.field.node.customer_story.field_meta_description
     - field.field.node.customer_story.field_meta_title
@@ -29,6 +29,9 @@ dependencies:
     - field.field.node.customer_story.field_solution
     - field.field.node.customer_story.field_start_date
     - field.field.node.customer_story.field_subhome
+    - field.field.node.customer_story.field_top_zone
+    - field.field.node.customer_story.field_top_zone_background
+    - field.field.node.customer_story.field_top_zone_bg_mobile
     - field.field.node.customer_story.field_visual
     - field.field.node.customer_story.field_visual_tile
     - field.field.node.customer_story.moderation_state_update
@@ -91,6 +94,21 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_insight:
+    weight: 11
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_local_nav:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
   field_metatags:
     weight: 7
     label: hidden
@@ -115,14 +133,6 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  field_visual_tile:
-    weight: 12
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   links:
     weight: 1
     region: content
@@ -134,14 +144,12 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_blog_thematic: true
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
   field_hub: true
   field_hub_portal: true
   field_insight_type: true
-  field_insight: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -153,7 +161,11 @@ hidden:
   field_region: true
   field_subhome: true
   field_thematic: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
   field_visual: true
+  field_visual_tile: true
   field_wysiwyg_rebond: true
   langcode: true
   moderation_state_update: true

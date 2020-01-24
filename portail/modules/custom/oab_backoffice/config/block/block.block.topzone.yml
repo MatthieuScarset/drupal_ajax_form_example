@@ -6,17 +6,17 @@ dependencies:
     - oab_frontoffice
   theme:
     - theme_boosted
-id: localnav
+id: topzone
 theme: theme_boosted
 region: top_zone
-weight: 0
+weight: -45
 provider: null
-plugin: local_nav_block
+plugin: top_zone_block
 settings:
-  id: local_nav_block
-  label: 'Local Nav'
+  id: top_zone_block
+  label: 'Top Zone'
   provider: oab_frontoffice
-  label_display: '0'
+  label_display: visible
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
@@ -24,7 +24,9 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       country: country
+      customer_story: customer_story
       industry: industry
+      product: product
       region: region
       solution: solution
     negate: false

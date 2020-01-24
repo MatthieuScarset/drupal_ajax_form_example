@@ -53,6 +53,14 @@ function oab_eddy_update_8006() {
     include_once("updates/update_8006.inc");
 }
 
+
+/*
+ * Ajout du field Top Zone et Top zone mobile + local nav dans la structure des cases study
+ */
+function oab_eddy_update_8007() {
+  include_once("updates/update_8007.inc");
+}
+
 /*
  * Modifications taille field title du Caroussel dans la subhome presse
  */
