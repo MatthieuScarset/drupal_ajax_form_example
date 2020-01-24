@@ -2912,18 +2912,14 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-left: 10px !important;
 }
 
-.btn .btn-lg .btn-modal-video {
-  font-size: 8rem;
-}
 .get_zone {
     cursor: pointer;
-    /* Style the panel */
     font-weight: normal;
-    font-family: HelveticaNeue75BoldBold;
 }
 
 .oblHeaderZone {
-    font-size: 17px;
+    font-size: 14px;
+    padding-left: 5px;
 }
 
 .oblFooterZone {
@@ -2931,8 +2927,9 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     padding-top: 10px;
 }
 
-.obl-block-countries {
+.global-obl-container .obl-block-countries  {
     background-color: #ddd;
+    padding: 5px 0;
 }
 
 /* Style the active class, and buttons on mouse-over */
@@ -3063,12 +3060,15 @@ img.image_pannel{
         display: none;
     }
 
-    .path-oblpricepage, .path-oblpricepage .region.region-content {
+    .path-reseau-mobile, .path-reseau-mobile .region.region-content {
         background-color: #333333;
     }
 
-    .path-oblpricepage .page-header, .path-oblpricepage > h1, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2, .obl-label-name{
+    .path-reseau-mobile .page-header, .path-reseau-mobile > h1, .obl-search-by-country h3, .roaming-infos-container, .roaming-infos-container h2, .obl-label-name{
         color: #fff;
         border: none;
     }
+}
+.btn .btn-lg .btn-modal-video {
+  font-size: 8rem;
 }

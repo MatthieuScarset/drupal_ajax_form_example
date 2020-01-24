@@ -9,9 +9,8 @@ use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 
 class OabOblSwagger {
 
-    private $url_api = '';
-    private $title_label = '';
-    private $zone_id = '';
+    private $urlApi = '';
+    private $titleLabel = '';
 
     const API_ZONE = "/zones";
     const API_PASS_DATA = '/pass_data_offers/retrieve.json';
@@ -19,8 +18,8 @@ class OabOblSwagger {
 
     public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
-        $this->url_api = $config->get('url_api');
-        $this->title_label = $config->get('title_label');
+        $this->urlApi = $config->get('url_api');
+        $this->titleLabel = $config->get('title_label');
     }
 
 
@@ -35,8 +34,8 @@ class OabOblSwagger {
     /**
      * @return mixed
      */
-    public function getZones () {
-        $data = $this->executeScriptCurl(self::API_ZONE);
+    public function getZones($display_message = false) {
+        $data = $this->executeScriptCurl(self::API_ZONE, $display_message);
         return $data;
     }
 
@@ -59,65 +58,8 @@ class OabOblSwagger {
      * @return mixed
      */
 
-    public function getNetworkData() {
-        //return $this->executeScriptCurl("/operator/".$rootZone."/".$rootCountry);
-        $toto = [
-            [
-                    'id' => 20,
-                    'code' => "20408",
-                    'rootCountry' => [
-                        'france' => false,
-                        'id' => 0,
-                        'auroreCode' => '400',
-                        'isoCode' => "CU",
-                        'slug' => "cuba",
-                        'label' => 'cuba',
-                        'rootZone' => [
-                            'id' => 3,
-                            'label' => 'Business',
-                        ],
-                        'savAvailable' => false,
-                    ],
-                    'operator' => [
-                        'name' => "mtn",
-                        'networkNorms' => [
-                            'items' => [
-                                'networknorm' => "GSM (900\/1800)",
-                                'type' => "GSM"
-                            ]
-                        ]
-                    ],
-                ],
-
-            [
-                'id' => 20,
-                'code' => "20408",
-                'rootCountry' => [
-                    'france' => false,
-                    'id' => 0,
-                    'auroreCode' => '400',
-                    'isoCode' => "CU",
-                    'slug' => "cuba",
-                    'label' => 'cuba',
-                    'rootZone' => [
-                        'id' => 3,
-                        'label' => 'Business',
-                    ],
-                    'savAvailable' => false,
-                ],
-                'operator' => [
-                    'name' => "CORE",
-                    'networkNorms' => [
-                        'items' => [
-                            'networknorm' => "GSM (900\/1800)",
-                            'type' => "4G"
-                        ]
-                    ]
-                ],
-            ],
-         ];
-
-        return $toto;
+    public function getOneCountry($id) {
+        return $this->executeScriptCurl("/countries/".$id);
     }
 
     /**
@@ -134,10 +76,10 @@ class OabOblSwagger {
      * @param null $url
      * @return bool|mixed
      */
-    private function executeScriptCurl($domaine, $url = null) {
+    private function executeScriptCurl($domaine, $display_message = false, $url = null) {
 
         if ($url === null) {
-            $url = $this->url_api;
+            $url = $this->urlApi;
         }
         $ch = curl_init($url . $domaine);
         // Will return the response, if false it print the response
@@ -150,12 +92,16 @@ class OabOblSwagger {
 
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
-                    drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                    if ($display_message) {
+                        drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                    }
                     $json_ret = json_decode($ret_value, true);
                     break;
 
                 default:
-                    drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
+                    if ($display_message) {
+                        drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
+                    }
                     $json_ret = false;
             }
         }
