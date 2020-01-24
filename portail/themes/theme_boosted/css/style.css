@@ -3053,6 +3053,7 @@ img.image_pannel{
 
 .global-obl-container .obl-zone-container .obl-zone-container.panel-group {
   margin-top: 2rem;
+  margin-bottom: 0;
 }
 
 .global-obl-container .obl-zone-container .obl-zone-container.panel-group:nth-child(-n+2) {
