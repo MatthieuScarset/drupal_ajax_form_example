@@ -111,6 +111,10 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
     // Deplacement de la fonction dans une fichier .include spécifique pour ne pas surcharger ce fichier
     _in_hook_form_alter($form, $form_state, $form_id);
 
+
+    //oabt($form['field_visual']['widget']['entity_browser']['#process'], true);
+    //kint($form['field_visual_wrapper'], $form['field_visual']); die();
+
     if ($form === "webform_handler_form" || strpos($form_id, 'webform_handler_form') !== false) {
 
         // Petit changement pour mettre mon option avant les elements
