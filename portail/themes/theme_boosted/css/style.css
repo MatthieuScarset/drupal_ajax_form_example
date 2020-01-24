@@ -3051,6 +3051,14 @@ img.image_pannel{
     font-weight: bold;
 }
 
+.global-obl-container .obl-zone-container .obl-zone-container.panel-group {
+  margin-top: 2rem;
+}
+
+.global-obl-container .obl-zone-container .obl-zone-container.panel-group:nth-child(-n+2) {
+  margin-top: 0;
+}
+
 #select_technologie_obl {
   -moz-appearance: none;
   border: none;
