@@ -367,6 +367,11 @@ function theme_boosted_preprocess_page(&$variables) {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
 	}
 
+  // On n'affiche pas le block non plus sur la page des API OBL. Il y a une top zone
+  if ($route_name === 'oab_obl_settings') {
+    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+  }
+
     // Si on est dans une subhome || subhomes_archive
     if (preg_match('/^view.subhomes/', $route_name)
         || preg_match('/^view.business_insight/', $route_name)) {
@@ -424,7 +429,7 @@ function theme_boosted_preprocess_views_view(&$variables) {
   if ($id == 'business_insight') {
       $variables['#attached']['drupalSettings']['tealium']['view_title'] = t('Business insight');
   }
-      
+
   if ($id == 'subhomes' || $id == 'subhomes_archive'){
   	if($view->current_display == 'page_distributor')		{//subhome distributors  dvi
 			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage revendeurs';
