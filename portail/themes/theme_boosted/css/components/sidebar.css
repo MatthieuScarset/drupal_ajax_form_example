@@ -125,3 +125,15 @@
 .phonenumber .numero p {
     margin: 0;
 }
+
+aside.right-column > .region {
+  margin-top: 6rem;
+}
+
+.page-node-type-simple-page aside.right-column > .region {
+  margin-top: 2rem;
+}
+
+.page-node-type-distributor aside.right-column > .region {
+  margin-top: 0;
+}

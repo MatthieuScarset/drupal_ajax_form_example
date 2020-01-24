@@ -1266,7 +1266,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .rebond.rebond-contact-distributor article {
-    padding: 3rem 1rem;
+    padding: 1rem 1rem;
 }
 
 .rebond .form-group {
@@ -3119,3 +3119,20 @@ hr.reseau-mobile-accords-roaming {
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
 }
+
+.path-node .main-container {
+  background-color: white;
+}
+
+.page-node-type-webform .content form .form-item label {
+  margin-top: 2rem;
+}
+
+.page-node-type-webform .content form .form-item {
+  padding-left: 0;
+}
+
+.page-node-type-webform .page-header {
+   margin-left: -1rem;
+}
+

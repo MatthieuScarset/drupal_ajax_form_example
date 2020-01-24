@@ -60,7 +60,7 @@ article.node.full{
     text-decoration: underline;
 }
 .node-socialbar{
-    margin: 5rem 0 3rem 0;
+    margin: 3rem 0 3rem 0;
     /*margin: 65px 0 130px 0; ref.guidelines*/
     font-size: 1.4rem;
 }
@@ -1427,7 +1427,7 @@ a.home_banner_element_mobile_link {
 }
 .valorisation-element .views-field-field-highlight {
     font-size: 1.6rem;
-    line-height: 2rem;    
+    line-height: 2rem;
     padding: 0 30px 15px 30px;
 }
 
