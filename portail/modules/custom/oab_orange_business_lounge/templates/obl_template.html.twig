@@ -1,8 +1,7 @@
 <div class="container">
-    <a href="/modules/custom/oab_orange_business_lounge/images/CDC_API_BU_MOBILE.pdf" download="CDC_API_BU">
-        <button type="button" class="btn btn-primary" style="color:black; margin-top: 100px; margin-left: 10px;"> Télécharger au format pdf </button>
-    </a>
+  <button class="btn_print_accords_obl btn btn-primary"> Imprimer au format pdf </button>
 </div>
+
 
 <br/>
 
@@ -12,20 +11,45 @@
       <table border="1" width="100%" id="table-accord-roaming">
         <thead style="background: #F6F6F6" class="thead-table-accord-romaing">
             <th scope="col">Destination</th>
-            <th scope="col">Zone <a href="#footnote-1"><sup>(1)</sup></a></th>
+            <th scope="col">Zone</th>
             <th scope="col">Opérateur</th>
         </thead>
         <tbody>
-
+          {% for country, row in detail_accords %}
+            <tr>
+              <td>{{ country }}</td>
+              <td>{{ row.0.zone }}</td>
+              <td>
+                {% for operator in row %}
+                  {{ operator.operator }}
+                  {% if not loop.last %}
+                    <hr class="reseau-mobile-accords-roaming" >
+                  {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
+
+      <div class="row div_btn_obl_accords_perv_next">
+            {% if page > 1 %}
+              <a class="btn btn-default btn_previous_obl_accords" href="{{ url('oab_obl_settings', {'page': page-1, 'techno': techno}) }}">Previous</a>
+            {% else %}
+              <a class="btn btn-default btn_previous_obl_accords disabled">Previous</a>
+            {% endif %}
+
+            {% if (page >= max_limit_page or detail_accords is empty) %}
+              <a class="btn btn-default btn_next_obl_accords disabled">Next</a>
+            {% else %}
+              <a class="btn btn-default btn_next_obl_accords" href="{{ url('oab_obl_settings', {'page': page+1, 'techno': techno}) }}">Next</a>
+            {% endif %}
+      </div>
+
     </div>
 
-    <div>
+    <div class="col-xs-12 col-sm-12 col-md-3 searchaccordspricebycountryobl">
       {{ drupal_entity('block','searchaccordspricebycountryobl', check_access=false) }}
     </div>
 
 </div>
-
-<br/>
-<p id="footnote-1">(1) Here is my first footnote.</p>

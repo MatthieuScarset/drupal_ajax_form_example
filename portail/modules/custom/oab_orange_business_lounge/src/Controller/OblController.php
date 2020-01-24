@@ -1,9 +1,10 @@
 <?php
 namespace Drupal\oab_orange_business_lounge\Controller;
-use Drupal\oab_orange_business_lounge\Form\SearchCountryForm;
 use \Drupal\Core\Controller\ControllerBase;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
+use Symfony\Component\HttpFoundation\Request;
+use Zend\Diactoros\Response\JsonResponse;
 
 class OblController extends ControllerBase {
 
@@ -22,13 +23,27 @@ class OblController extends ControllerBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
         $zones = $obl_service->getZones();
-        //$countries = $obl_service->getCountries();
         $countries = $obl_service->getCountriesWithoutOperator();
 
-        $countries_with_operator = $obl_service->getDataCountriesWithOperatorsPrepared();
         $technologies = $obl_service->getTechnologies();
+        $items = $technologies['items'];
+        uasort($items, [$this, "sortById"]);
 
-        return array(
+
+        $actual_techno = $request->query->has('techno') && $request->query->get('techno') !== 0
+            ? $request->query->get('techno')
+            : reset($items);
+
+
+        $data = $obl_service->getNetworkTypes($actual_techno['id'], $page);
+        $prepared_data = [];
+        foreach ($data['items'] as $row) {
+          $prepared_data[$row['country']][] = $row;
+        }
+
+        $max_limit_page = ceil($data['totalItem']/$data['itemPerPage']);
+
+        return array (
             '#zones' => $zones,
             '#theme' => 'orange_business_lounge_page_zone',
             '#attached' => [
@@ -38,9 +53,30 @@ class OblController extends ControllerBase {
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
-                    'arr_country_with_op' => $countries_with_operator
+                    'techno' => $actual_techno
                 ]
             ],
+            '#detail_accords' => $prepared_data,
+            '#page' => $page,
+            '#techno' => $actual_techno['id'],
+            '#max_limit_page' => $max_limit_page
         );
     }
+
+    public function oblGetCountriesWithOperators($id, $page) {
+
+      $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+      $get_countries_with_op = $obl_service->getNetworkTypes($id, $page);
+
+      return new JsonResponse($get_countries_with_op);
+    }
+
+    /*
+     * sort tab technos
+     */
+    public function sortById($a, $b) {
+      return $a["id"] > $b["id"];
+    }
+
+
 }

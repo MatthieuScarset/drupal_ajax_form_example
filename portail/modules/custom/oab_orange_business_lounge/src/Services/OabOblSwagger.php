@@ -72,43 +72,15 @@ class OabOblSwagger {
     }
 
 
-    public function getDataCountriesWithOperatorsPrepared() {
-
-      /*********************** A suup ********/
-      $i = 1;
-
-      $countries_with_operator = [];
-      $countries_without_operator = $this->getCountriesWithoutOperator();
-
-      foreach ($countries_without_operator['items'] as $tab) {
-        $my_data = [];
-
-        $country_data = $this->getOneCountry($tab['id']);
-        if (isset($country_data['operators'])) {
-          foreach ($country_data['operators'] as $operator) {
-            $operator_name = $operator['name'];
-            foreach ($operator['networkNorms'] as $network_norms) {
-              if (!isset($my_data[$network_norms['type']['name']])) {
-                $my_data[$network_norms['type']['name']] = [];
-              }
-              $my_data[$network_norms['type']['name']][] = $operator_name;
-            }
-          }
-        }
-
-        $countries_with_operator[] = [
-          'label' => $country_data['label'],
-          'zoneId' => $country_data['zoneId'],
-          'networks' => $my_data
-        ];
-
-        /*********************** A suup ********/
-        if (++$i > 10) {
-          return $countries_with_operator;
-        }
+    /**
+     * @return bool|mixed
+     */
+    public function getNetworkTypes($id, $num_page) {
+      $page_ext = "";
+      if ($num_page > 0) {
+        $page_ext = "?page=$num_page";
       }
-
-      //return $countries_with_operator;
+      return $this->executeScriptCurl(self::API_TECHNOLOGIES.'/'.$id.'/table' . $page_ext);
     }
 
 
