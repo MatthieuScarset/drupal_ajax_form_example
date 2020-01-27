@@ -161,7 +161,7 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
             $query->where[0]['conditions'][] = [
                 'field' => "node__field_hub.field_hub_target_id = :node__field_hub_field_hub_target_id",
                 'value' => [
-                    'node__field_hub_field_hub_target_id' => $term->id()
+                    'node__field_hub_field_hub_target_id' => $page_term->id()
                 ],
                 'operator' => "formula"
             ];
