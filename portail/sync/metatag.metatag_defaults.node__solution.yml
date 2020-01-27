@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies: {  }
@@ -6,5 +7,3 @@ label: 'Content: Solution'
 tags:
   description: '[node:field_meta_description]'
   title: '[node:field_meta_title] | [site:name]'
-  og_image: '[node:field_top_zone_background:entity:field_image]'
-  twitter_cards_image: '[node:field_top_zone_background:entity:field_image]'

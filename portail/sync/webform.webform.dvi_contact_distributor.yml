@@ -220,7 +220,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: caroline.lepoac@orange.com
+      to_mail: sarah1.rebiai@orange.com
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
@@ -230,7 +230,7 @@ handlers:
       from_options: {  }
       from_name: '[webform_submission:values:last_name:raw]'
       subject: 'Message Transmis à [webform_submission:values:distributeur_name]'
-      body: "<p>Le message suivant a été transmis à [webform_submission:values:distributeur_name] :<br />\r\n<br />\r\n<em><strong>[webform_submission:values:message]</strong></em><br />\r\n<br />\r\n<strong>Par </strong>[webform_submission:values:last_name]&nbsp;[webform_submission:values:first_name]<br />\r\n<strong>Société </strong>[webform_submission:values:company]<br />\r\n<strong>Email </strong>: [webform_submission:values:e_mail]<br />\r\n<strong>Contacter au numéro</strong> : [webform_submission:values:phone]</p>\r\n"
+      body: "<p>Le message suivant a été transmis à [webform_submission:values:distributeur_name] :<br />\r\n<br />\r\n<em><strong>[webform_submission:values:message]</strong></em><br />\r\n<br />\r\n<strong>Par </strong>[webform_submission:values:last_name]&nbsp;[webform_submission:values:first_name]<br />\r\n<strong>Société </strong>[webform_submission:values:company]<br />\r\n<strong>Email </strong>: [webform_submission:values:e_mail]<br />\r\n<strong>Contacter au numéro</strong> : [webform_submission:values:phone]</p>"
       excluded_elements:
         last_name: last_name
         first_name: first_name

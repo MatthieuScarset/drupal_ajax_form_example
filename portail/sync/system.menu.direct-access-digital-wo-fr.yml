@@ -1,0 +1,8 @@
+uuid: 304c60eb-344d-453a-9b7d-92e94be3c77e
+langcode: fr
+status: true
+dependencies: {  }
+id: direct-access-digital-wo-fr
+label: 'Digital Workspace Direct Access fr'
+description: 'Digital Workspace Direct Access fr'
+locked: false

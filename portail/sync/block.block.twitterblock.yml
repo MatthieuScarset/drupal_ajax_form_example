@@ -9,7 +9,7 @@ dependencies:
 id: twitterblock
 theme: theme_boosted
 region: sidebar
-weight: 0
+weight: -30
 provider: null
 plugin: twitter_block
 settings:

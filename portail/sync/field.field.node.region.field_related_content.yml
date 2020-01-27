@@ -21,50 +21,10 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       related_content: related_content
     target_bundles_drag_drop:
       related_content:
         enabled: true
         weight: 2
-      default_button:
-        weight: 15
-        enabled: false
-      homepage_banner_experience:
-        weight: 16
-        enabled: false
-      homepage_banner_item:
-        weight: 17
-        enabled: false
-      homepage_news:
-        weight: 18
-        enabled: false
-      home_banner:
-        weight: 19
-        enabled: false
-      home_column:
-        weight: 20
-        enabled: false
-      home_column_section:
-        weight: 21
-        enabled: false
-      home_playlist:
-        weight: 22
-        enabled: false
-      home_thematic_columns:
-        weight: 23
-        enabled: false
-      infography_partner:
-        weight: 24
-        enabled: false
-      paragraph_block_rebond:
-        weight: 25
-        enabled: false
-      rebond_wysiwyg:
-        weight: 26
-        enabled: false
-      subhome_presse_carrousel:
-        weight: 28
-        enabled: false
 field_type: entity_reference_revisions

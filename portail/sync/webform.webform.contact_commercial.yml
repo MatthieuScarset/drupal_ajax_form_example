@@ -1,6 +1,18 @@
+uuid: c9870609-dbe5-4e01-a94c-eeea3e40872b
 langcode: en
 status: open
-dependencies: {  }
+dependencies:
+  module:
+    - oab_gdpr
+third_party_settings:
+  oab_gdpr:
+    gdpr_business_owner: '2067'
+    gdpr_spoc_security: '2054'
+    gdpr_expiration_date: '2020-10-17'
+    gdpr_business_analysts:
+      2065: '2065'
+      2066: '2066'
+    gdpr_form_published: 0
 open: null
 close: null
 weight: 0
@@ -8,9 +20,9 @@ uid: 21
 template: false
 archive: false
 id: contact_commercial
-title: 'Contact commercial'
-description: 'g&eacute;n&eacute;rique France'
-category: ''
+title: 'Contact commercial Smart Mobility Services'
+description: '<p>générique France</p>'
+category: SMS
 elements: "introduction:\n  '#type': processed_text\n  '#admin_title': Intro\n  '#text': \"<p>Vous avez un projet, une question ?<br />\\r\\nVous êtes intéressé par une de nos solutions ?<br />\\r\\n&nbsp;<br />\\r\\nPour bénéficier d’un conseil personnalisé, n'hésitez pas à nous envoyer votre message, nous vous contacterons dans les meilleurs délais.<br />\\r\\nVos coordonnées sont nécessaires pour traiter votre demande et vous informer en retour.</p>\\r\\n\\r\\n<p>* mentions obligatoires</p>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Mademoiselle: Mademoiselle\n    Madame: Madame\n    Monsieur: Monsieur\n  '#empty_option': Sélectionnez\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nfonction:\n  '#type': textfield\n  '#title': Fonction\n  '#required': true\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\n  '#required': true\nnumero_siret_14_chiffres_:\n  '#type': textfield\n  '#title': 'Numéro SIRET (14 chiffres)'\nnumero_de_compte_client:\n  '#type': textfield\n  '#title': 'Numéro de compte client'\ntelephone_de_contact:\n  '#type': textfield\n  '#title': 'Téléphone de contact'\n  '#required': true\nstandard_de_l_entreprise:\n  '#type': textfield\n  '#title': 'Standard de l''entreprise'\nadresse:\n  '#type': textfield\n  '#title': Adresse\nville:\n  '#type': textfield\n  '#title': Ville\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\norigin_product_name:\n  '#type': hidden\n  '#title': 'Page de provenance'\n"
 css: ''
 javascript: ''
@@ -165,4 +177,3 @@ access:
     users: {  }
     permissions: {  }
 handlers: {  }
-uuid: c9870609-dbe5-4e01-a94c-eeea3e40872b

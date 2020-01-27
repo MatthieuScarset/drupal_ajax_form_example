@@ -176,7 +176,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: caroline.lepoac@orange.com
+      to_mail: sarah1.rebiai@orange.com
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
@@ -186,7 +186,7 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: 'Nouveau contact "Direction des ventes indirectes"'
-      body: "<p>Bonjour,&nbsp;<br />\r\nVous avez reçu une nouvelle prise de contact sur le portail des Ventes indirectes :</p>\r\n\r\n<p>Date de la demande :&nbsp;[webform_submission:created]</p>\r\n\r\n<p>Auteur de la demande : [webform_submission:user]</p>\r\n\r\n<p>Message :</p>\r\n\r\n<p>[webform_submission:values]</p>\r\n"
+      body: "<p>Bonjour,&nbsp;<br />\r\nVous avez reçu une nouvelle prise de contact sur le portail des Ventes indirectes :</p>\r\n\r\n<p>Date de la demande :&nbsp;[webform_submission:created]</p>\r\n\r\n<p>Auteur de la demande : [webform_submission:user]</p>\r\n\r\n<p>Message :</p>\r\n\r\n<p>[webform_submission:values]</p>"
       excluded_elements: {  }
       ignore_access: true
       exclude_empty: true

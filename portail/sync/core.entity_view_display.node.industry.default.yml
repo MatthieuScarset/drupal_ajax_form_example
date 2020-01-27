@@ -137,13 +137,11 @@ hidden:
   field_hub: true
   field_hub_portal: true
   field_insight: true
-  field_insight_type: true
   field_market_segment: true
   field_start_date: true
   field_top_zone: true
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
   field_visual: true
-  field_visual_tile: true
   langcode: true
   moderation_state_update: true

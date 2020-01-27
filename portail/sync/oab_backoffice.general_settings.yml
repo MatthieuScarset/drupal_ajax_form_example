@@ -1,4 +1,2 @@
-proxy_server: 192.168.128.13
-proxy_port: '3128'
-oabt_logs:
-  mails_destinataires: ''
+proxy_server: ''
+proxy_port: ''

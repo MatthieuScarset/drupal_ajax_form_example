@@ -1,0 +1,8 @@
+uuid: 482838e1-0d83-434b-8b46-c902584f925a
+langcode: fr
+status: true
+dependencies: {  }
+id: main-menu-digital-worksp-fr
+label: 'Digital Workspace Main menu fr'
+description: 'Digital Workspace Main menu fr'
+locked: false

@@ -1,4 +1,3 @@
-uuid: 4f93e884-e26f-402b-a392-833e615de361
 langcode: en
 status: true
 dependencies:
@@ -10,7 +9,7 @@ dependencies:
 id: topzone
 theme: theme_boosted
 region: top_zone
-weight: -17
+weight: -45
 provider: null
 plugin: top_zone_block
 settings:
@@ -25,6 +24,7 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       country: country
+      customer_story: customer_story
       industry: industry
       product: product
       region: region

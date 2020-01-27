@@ -3,15 +3,15 @@ langcode: fr
 status: open
 dependencies:
   module:
-    - oab_backoffice
+    - oab_gdpr
 third_party_settings:
-  oab_backoffice:
-    gdpr_business_owner: '1750'
-    gdpr_spoc_security: '1753'
+  oab_gdpr:
+    gdpr_business_owner: '2067'
+    gdpr_spoc_security: '2054'
     gdpr_expiration_date: '2019-12-31'
     gdpr_business_analysts:
-      1751: '1751'
-      1752: '1752'
+      2065: '2065'
+      2066: '2066'
     gdpr_form_published: 1
 open: null
 close: null
@@ -22,8 +22,8 @@ archive: false
 id: besoin_de_plus_d_informations_co
 title: 'Besoin  de plus d’informations : contactez nous'
 description: ''
-category: Mobilité
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<drupal-entity data-embed-button=\\\"media_browser\\\" data-entity-embed-display=\\\"entity_reference:entity_reference_entity_view\\\" data-entity-embed-settings=\\\"{&quot;view_mode&quot;:&quot;default&quot;}\\\" data-entity-type=\\\"media\\\" data-entity-uuid=\\\"ed3b3ffa-07ba-48ea-8d99-868c4c20b37e\\\"></drupal-entity>\\r\\n<p>Ce formulaire vous permet d’entrer directement en contact avec nos équipes pour vous aider à démarrer votre projet ou pour souscrire à  une offre de connectivité qui vous convient. Quelle que soit votre problématique, Orange est là pour vous accompagner. </p>\\r\\n\\r\\n\"\n  '#format': full_html\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\n  '#required': true\nadresse_e_mail:\n  '#type': email\n  '#title': 'Adresse e-mail'\n  '#required': true\nnumero_de_telephone:\n  '#type': tel\n  '#title': 'Numéro de téléphone'\nobjet_de_votre_demande:\n  '#type': textarea\n  '#title': 'Objet de votre demande'\n  '#required': true\ndescription_du_projet:\n  '#type': textarea\n  '#title': 'Description du projet'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#select2': true\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#required': true\n  '#states':\n    checked:\n      ':input[name=\"pays\"]':\n        value:\n          pattern: '/|Finland|France|Ireland|Latvia|Poland|Sweden|United Kingdom|China|Argentina|Chile|United States|Mexico|/'\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange S.A. (Orange Business Services division) 1 Place des Droits de l'Homme, 93450 La Plaine Saint-Denis, est responsable de traitement, que vous pouvez contacter à <a href=\\\"mailto:obs.francedpo@orange.com\\\">obs.francedpo@orange.com</a>. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html"
+category: SMS
+elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<drupal-entity data-embed-button=\\\"media_browser\\\" data-entity-embed-display=\\\"entity_reference:entity_reference_entity_view\\\" data-entity-embed-settings=\\\"{&quot;view_mode&quot;:&quot;default&quot;}\\\" data-entity-type=\\\"media\\\" data-entity-uuid=\\\"ed3b3ffa-07ba-48ea-8d99-868c4c20b37e\\\"></drupal-entity>\\r\\n<p>Ce formulaire vous permet d’entrer directement en contact avec nos équipes pour vous aider à démarrer votre projet ou pour souscrire à  une offre de connectivité qui vous convient. Quelle que soit votre problématique, Orange est là pour vous accompagner. </p>\\r\\n\\r\\n\"\n  '#format': full_html\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\n  '#required': true\nadresse_e_mail:\n  '#type': email\n  '#title': 'Adresse e-mail'\n  '#required': true\nnumero_de_telephone:\n  '#type': tel\n  '#title': 'Numéro de téléphone'\nobjet_de_votre_demande:\n  '#type': textarea\n  '#title': 'Objet de votre demande'\n  '#required': true\ndescription_du_projet:\n  '#type': textarea\n  '#title': 'Description du projet'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#required': true\n  '#select2': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
 css: ''
 javascript: ''
 settings:
@@ -187,7 +187,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: 'gilles.guedj@orange.com,katia.bouzou@orange.com,nicolas.griffet@orange.com,anna.dynyak@orange.com'
+      to_mail: 'mireille.sikanic@orange.com, marie.lhomme@orange.com'
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
@@ -197,7 +197,7 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: 'Portail orange business : vous avez un nouveau contact'
-      body: "Bonjour,\r\nUne nouvelle demande a été postée par un internaute sur le portail orange-business.com.\r\nPour y accéder, merci de vous reporter à la documentation reçue avec vos accès.\r\nBien à vous,\r\nL'équipe Digitale"
+      body: '<p>Bonjour, Une nouvelle demande a été postée par un internaute sur le portail orange-business.com. Pour y accéder, merci de vous reporter à la documentation reçue avec vos accès. Bien à vous, L''équipe Digitale</p>'
       excluded_elements:
         nom: nom
         prenom: prenom
@@ -206,7 +206,9 @@ handlers:
         numero_de_telephone: numero_de_telephone
         objet_de_votre_demande: objet_de_votre_demande
         description_du_projet: description_du_projet
+        pays: pays
         donnees_personnelles: donnees_personnelles
+        provenance: provenance
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

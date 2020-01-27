@@ -1137,8 +1137,19 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
             reduce: false
           is_grouped: false
           group_info:

@@ -16,7 +16,6 @@ module:
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
-  devel: 0
   editor: 0
   embed: 0
   entity: 0
@@ -59,6 +58,7 @@ module:
   oab_backbones: 0
   oab_background_image: 0
   oab_backoffice: 0
+  oab_cedric: 0
   oab_christophe: 0
   oab_ckeditor: 0
   oab_cookie_compliance: 0
@@ -70,6 +70,7 @@ module:
   oab_media_browser: 0
   oab_migrate_content: 0
   oab_offices_map: 0
+  oab_orange_business_lounge: 0
   oab_riad: 0
   oab_stephanie: 0
   oab_subhomes: 0
@@ -80,6 +81,7 @@ module:
   oab_tibo: 0
   oab_transliteration_filename: 0
   oab_tristan: 0
+  oab_twitter: 0
   oab_user_access_rights: 0
   oab_yassine: 0
   options: 0

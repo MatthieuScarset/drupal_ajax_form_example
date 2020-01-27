@@ -1,0 +1,8 @@
+uuid: 5673d4cf-dd1e-425b-8b6e-9397766a1aa9
+langcode: fr
+status: true
+dependencies: {  }
+id: main-footer-digital-work-fr
+label: 'Digital Workspace Footer fr'
+description: 'Digital Workspace Footer fr'
+locked: false

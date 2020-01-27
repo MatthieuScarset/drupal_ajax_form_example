@@ -106,7 +106,6 @@ hidden:
   field_end_date: true
   field_hub: true
   field_hub_portal: true
-  field_insight_type: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true
@@ -115,7 +114,6 @@ hidden:
   field_rebond_document: true
   field_start_date: true
   field_visual: true
-  field_visual_tile: true
   langcode: true
   links: true
   moderation_state_update: true

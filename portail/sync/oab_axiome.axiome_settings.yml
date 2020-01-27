@@ -1,192 +1,4 @@
 axiome_enable_cron: '1'
-sous_famille_values:
-  8404: 'Solutions de communication et collaboration'
-  8492: 'Communication et collaboration'
-  8272: 'Réseaux intelligents'
-  8273: 'Réseaux intelligents'
-  8265: 'Réseaux intelligents'
-  8274: 'Réseaux intelligents'
-  8405: 'Connectivité, hybride'
-  8275: 'Réseaux intelligents'
-  8389: 'Réseaux intelligents'
-  8390: 'Solutions de communication et collaboration'
-  8455: 'Applications et environnements '
-  8493: 'Services clients'
-  8494: 'Services clients'
-  8456: 'Connectivité, hybride'
-  8613: 'Communication et collaboration'
-  8495: 'Connectivité, hybride'
-  8276: 'Services clients'
-  8391: 'Solutions de communication et collaboration'
-  8614: 'Services clients'
-  8615: 'Services clients'
-  8277: Protéger
-  8392: 'Réseaux intelligents'
-  8457: 'Offres tarifaires'
-  8406: 'Services clients'
-  8266: 'Exploitation et assistance'
-  8270: 'Solutions de mobilité'
-  8260: 'Solutions de mobilité'
-  8458: 'Solutions de communication et collaboration'
-  8616: 'Innovation sectorielle'
-  8617: 'Offres tarifaires'
-  8459: 'Réseaux intelligents'
-  8393: 'Solutions de communication et collaboration'
-  8496: 'Solutions de communication et collaboration'
-  8618: 'Sécuriser les objets et leurs données'
-  8407: Exécution
-  8460: 'Services clients'
-  8471: 'Transformation du poste de travail'
-  8461: 'Réseaux intelligents'
-  8278: 'Comprendre vos clients pour mieux les servir'
-  8472: 'Partage et collaboration'
-  8267: 'Déploiement, analyse et accompagnement'
-  8619: 'Performance client'
-  8261: 'Equipements et services'
-  8279: 'Offres tarifaires'
-  8280: 'Réseaux intelligents'
-  8497: 'Solutions de mobilité'
-  8281: Protéger
-  8851: 'Transformation des infrastructures'
-  8408: 'Magasins connectés'
-  8462: Exécution
-  8394: 'Réseaux intelligents'
-  8395: 'Développement et management des applications'
-  8262: 'Reporting et amélioration'
-  8620: 'Déploiement, analyse et accompagnement'
-  8621: 'Sécuriser les objets et leurs données'
-  8409: 'Services clients'
-  8282: 'Réseaux intelligents'
-  8622: 'Offres tarifaires'
-  8498: 'Objets connectés'
-  8283: 'Data & analytics'
-  8284: 'Management des identités et des données'
-  8499: 'Magasins connectés'
-  8572: 'Services clients'
-  8271: 'Solutions de communication et collaboration'
-  8396: Protéger
-  8397: Identifier
-  8398: 'Applications métiers et productivité'
-  8285: Protéger
-  8399: Protéger
-  8387: Protéger
-  8410: 'Déploiement et accompagnement'
-  8400: 'Accompagnement et expertises'
-  8401: 'Solutions de communication et collaboration'
-  8286: 'Communication et collaboration'
-  8287: Anticiper
-  8411: Identifier
-  8402: Protéger
-  8257: Intégration
-  8288: 'Solutions de communication et collaboration'
-  8403: Identifier
-  8258: 'Applications métiers et productivité'
-  8388: 'Applications métiers et productivité'
-  8268: 'Applications métiers et productivité'
-  8412: 'Déploiement, analyse et accompagnement'
-  8413: Exécution
-  8263: 'Applications métiers et productivité'
-  8264: 'Réseaux intelligents'
-  8269: 'Connectivité sur site'
-  8289: 'Solutions de mobilité'
-  8290: 'Déploiement et accompagnement'
-  8291: Intégration
-  8414: 'Solutions de communication et collaboration'
-  8463: Protéger
-  8464: 'Reporting et amélioration'
-  8465: 'Réseaux intelligents'
-  8466: 'Conseil et conception'
-  8467: 'Innovation sectorielle'
-  8468: 'Services de transformation'
-  8469: 'Services clients'
-  8470: 'Innovation sectorielle'
-  8623: 'Services clients'
-  8500: ' Infrastructures'
-  8501: 'Développement et management des applications'
-  8502: 'Accompagnement et expertises'
-  8503: 'Solutions de communication et collaboration'
-  8504: 'Solutions de communication et collaboration'
-  8711: 'Objets connectés'
-  8544: 'Applications métiers et productivité'
-  8550: 'Solutions de communication et collaboration'
-  8551: Exécution
-  8552: 'Communication et collaboration'
-  8553: 'Connectivité sur site'
-  8555: Protéger
-  8571: 'Applications digitales'
-  8573: 'Communication et collaboration'
-  8607: 'Connectivité, hybride'
-  8608: 'Connectivité sur site'
-  8609: 'Connectivité sécurisée'
-  8833: 'Services clients'
-  8964: 'Solutions de communication et collaboration'
-  9058: 'Réseaux intelligents'
-  9059: Détecter
-  9060: 'Communication et collaboration'
-  9218: Détecter
-  9310: Identifier
-  8505: Protect
-  8506: 'Communication and collaboration'
-  8507: 'Communication and collaboration'
-  8473: Execution
-  8508: 'Intelligent networking'
-  8509: 'Contact Centers'
-  8510: Protect
-  8511: 'Hybrid Connectivity'
-  8536: 'Contact Centers'
-  8512: 'Secure Infrastructure'
-  8537: 'Self services'
-  8538: Integration
-  8539: Integration
-  8540: Integration
-  8513: Integration
-  8514: 'Contact Centers'
-  8515: 'Application Performance'
-  8516: 'Support and expertise'
-  8517: 'Intelligent networking'
-  8518: 'Digital management portal'
-  8415: Integration
-  8519: Execution
-  8416: Integration
-  8520: 'Communication and collaboration'
-  8521: Protect
-  8417: Integration
-  8474: 'Digital management portal'
-  8522: 'Flexible Infrastructure'
-  8523: Infrastructures
-  8524: 'Social networking'
-  8525: Identify
-  8541: 'Select and configure connected objects'
-  8526: 'Hybrid Connectivity'
-  8527: 'Advanced Threat Detection'
-  8528: 'Select and configure connected objects'
-  8529: 'On-site Connectivity'
-  8530: 'Collaborative Solutions'
-  8531: Execution
-  8532: Execution
-  8533: Detect
-  8534: 'Communication and collaboration'
-  8535: 'Communication and collaboration'
-  8586: 'Application Performance'
-  8587: Protect
-  8717: 'Digital management portal'
-  8824: Protect
-  8986: 'Contact Centers'
-  8987: 'Communication and collaboration'
-  9002: Protect
-  9109: 'Contact Centers'
-  9171: 'Self services'
-  9215: Integration
-  9272: Execution
-  9335: 'Understand customers to better serve them'
-  9369: 'Hybrid Connectivity'
-  9632: 'Secure Infrastructure'
-  9716: 'Solutions de communication et collaboration'
-  9817: 'Connectivité multi-cloud simple et sécurisée'
-  9829: 'Services clients'
-  10011: 'Solutions de communication et collaboration'
-  10012: 'Développement et management des applications'
-  10013: 'Optimize the operational efficiency of your business'
 icon_frame_connectivity: Connectivity
 icon_frame_teamwork: Teamwork
 icon_frame_my_customers: Customers
@@ -194,3 +6,113 @@ icon_frame_performance: Flexibility
 icon_frame_security: Security
 icon_frame_care: Service
 icon_frame_tech: Industry
+sous_famille_values:
+  8391: 'Solutions de communication et collaboration'
+  8407: Exécution
+  8471: ' Infrastructures'
+  8502: 'Accompagnement et expertises'
+  9369: 'Intelligent networking'
+  8528: 'Select and configure connected objects'
+  8500: ' Infrastructures'
+  8501: 'Développement et management des applications'
+  10205: 'Analyse Conseil'
+  10215: 'Comprendre vos clients pour mieux les servir'
+  8457: 'Réseaux intelligents'
+  8461: 'Réseaux intelligents'
+  9058: 'Réseaux intelligents'
+  9215: Integration
+  8964: 'Solutions de communication et collaboration'
+  8389: 'Réseaux intelligents'
+  8276: 'Services clients'
+  8614: 'Services clients'
+  8398: 'Applications métiers et productivité'
+  8506: 'Communication and collaboration'
+  8520: 'Communication and collaboration'
+  8851: ' Infrastructures'
+  8468: 'Développement et management des applications'
+  8416: Integration
+  8531: Execution
+  8532: Execution
+  10389: 'Solutions de communication et collaboration'
+  10390: 'Select and configure connected objects'
+  8711: 'Choisir et configurer les objets connectés'
+  8492: 'Solutions de communication et collaboration'
+  8550: 'Solutions de communication et collaboration'
+  10447: Protect
+  8279: 'Réseaux intelligents'
+  8541: 'Select and configure connected objects'
+  10486: Respond
+  8406: 'Services clients'
+  8519: Execution
+  9218: Détecter
+  10566: Identifier
+  8619: 'Performance client'
+  8399: 'Protéger (suite)'
+  9829: 'Services clients'
+  10606: 'Améliorer les processus métier'
+  8555: Protéger
+  8551: Exécution
+  8278: 'Comprendre vos clients pour mieux les servir'
+  8514: 'Contact Centers'
+  8413: Exécution
+  8393: 'Solutions de communication et collaboration'
+  8587: Protect
+  8395: 'Développement et management des applications'
+  8397: Identifier
+  8400: 'Accompagnement et expertises'
+  8513: Integration
+  9272: Execution
+  8833: 'Services clients'
+  8270: 'Equipements et solutions de connectivité mobile'
+  8615: 'Services clients'
+  8460: 'Services clients'
+  10897: 'Communication and collaboration'
+  8535: 'Communication and collaboration'
+  8498: 'Piloter les objets connectés'
+  8503: 'Solutions de communication et collaboration'
+  10925: 'Protéger (suite)'
+  10941: 'Intelligent networking'
+  10942: 'Intelligent networking'
+  8455: 'Connectivité multi-cloud simple et sécurisée'
+  9716: 'Solutions de communication et collaboration'
+  8526: 'Simple and secure multi-cloud connectivity'
+  8466: 'Réseaux intelligents'
+  8470: 'Applications digitales'
+  10948: 'Solutions de communication et collaboration'
+  8493: 'Services clients'
+  8257: Intégration
+  8571: 'Applications digitales'
+  8516: 'Support and expertise'
+  8533: Detect
+  8987: 'Communication and collaboration'
+  11007: 'Identifier (suite)'
+  11011: Réagir
+  11048: Detect
+  8283: 'Comprendre vos clients pour mieux les servir'
+  8572: 'Services clients'
+  11095: Anticipate
+  8505: Protect
+  8510: Protect
+  8512: Protect
+  8527: Detect
+  8265: 'Réseaux intelligents'
+  8401: 'Solutions de communication et collaboration'
+  8463: 'Protéger (suite)'
+  11200: 'Solutions de communication et collaboration'
+  11243: 'Maitriser les risques'
+  11276: 'Analyse Conseil'
+  8277: 'Protéger (suite)'
+  8281: Réagir
+  8396: 'Protéger (suite)'
+  8287: Détecter
+  9059: Détecter
+  11292: Identify
+  8507: 'Communication and collaboration'
+  8473: 'Intelligent networking'
+  8530: 'Collaborative Solutions'
+  8534: 'Communication and collaboration'
+  8824: Protect
+  11326: Consulting
+  8269: 'Services clients'
+  9002: Protect
+  11707: 'Contact Centers'

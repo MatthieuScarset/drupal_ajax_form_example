@@ -45,6 +45,6 @@ visibility:
       language: '@language.current_language_context:language_interface'
   request_path:
     id: request_path
-    pages: "/ventes-indirectes/produits/*\r\n/produits/numeros-contact-ip\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/dossier/gdpr/pme-conformite"
+    pages: "/ventes-indirectes/produits/*\r\n/produits/numeros-contact-ip\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/dossier/gdpr/pme-conformite\r\n/solutions/cloud-computing/datacenter-modernisation-cloud-prive\r\n/produits/working-together-flash-solutions-digitales-humaines\r\n/dossier/industrie-reseaux-connectee"
     negate: true
     context_mapping: {  }

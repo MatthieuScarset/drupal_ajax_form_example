@@ -1,6 +1,16 @@
+uuid: 50daf693-f653-49d9-adda-995b584d8817
 langcode: en
 status: open
-dependencies: {  }
+dependencies:
+  module:
+    - oab_gdpr
+third_party_settings:
+  oab_gdpr:
+    gdpr_business_owner: '567'
+    gdpr_spoc_security: '1102'
+    gdpr_expiration_date: '2019-12-31'
+    gdpr_business_analysts: {  }
+    gdpr_form_published: false
 open: null
 close: null
 weight: 0
@@ -9,8 +19,8 @@ template: false
 archive: false
 id: analyst_relations_en
 title: 'Analyst relations EN'
-description: 'Form for analyst relations requests'
-category: ''
+description: '<p>Form for analyst relations requests</p>'
+category: Analystes
 elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1.8rem;\\\">We understand the challenges that industry analysts and consultants face in the rapidly changing telecommunications industry. </span></p>\\r\\n\\r\\n<p><span style=\\\"font-size:1.8rem;\\\">So we strive to make it easy for you to obtain information concerning our company, our strategy, our products and services, our network and the latest Orange Business Services news.</span></p>\\r\\n\\r\\n<p>Please contact us directly as listed below. We will respond to your questions promptly and, if necessary, organize briefings with our experts.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nlast_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\nphone_number:\n  '#type': tel\n  '#title': 'Phone number'\ncompany:\n  '#type': textfield\n  '#title': Company\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\npersonal_data:\n  '#type': checkbox\n  '#title': 'personal data'\n  '#description': '<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result.</p></strong>'\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprivacy_polycy:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy./a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\n"
 css: ''
 javascript: ''
@@ -199,4 +209,3 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
-uuid: 50daf693-f653-49d9-adda-995b584d8817

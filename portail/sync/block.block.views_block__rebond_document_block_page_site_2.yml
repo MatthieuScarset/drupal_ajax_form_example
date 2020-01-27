@@ -12,7 +12,7 @@ dependencies:
 id: views_block__rebond_document_block_page_site_2
 theme: theme_boosted
 region: sidebar
-weight: -37
+weight: -38
 provider: null
 plugin: 'views_block:rebond_document-block_page_site_2'
 settings:

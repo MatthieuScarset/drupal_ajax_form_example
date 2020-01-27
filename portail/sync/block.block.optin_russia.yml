@@ -1,0 +1,41 @@
+uuid: 45097811-37a0-413c-8000-5b64b8e1d02f
+langcode: ru
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
+  module:
+    - block_content
+    - ctools
+    - language
+  theme:
+    - theme_boosted
+id: optin_russia
+theme: theme_boosted
+region: sidebar
+weight: -45
+provider: null
+plugin: 'block_content:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
+settings:
+  id: 'block_content:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
+  label: optin_russia
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    langcodes:
+      ru: ru
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

@@ -1,0 +1,38 @@
+uuid: null
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main-footer-digital-work-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: mainfooterdigitalworkfr
+theme: theme_oab_hub
+region: footer
+weight: -13
+provider: null
+plugin: 'system_menu_block:main-footer-digital-work-fr'
+settings:
+  id: 'system_menu_block:main-footer-digital-work-fr'
+  label: 'Footer Digital Workspace fr'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: '/digitalworkspace*'
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,8 @@
+uuid: 4e50058b-1952-462e-9d09-1837aec952e7
+langcode: fr
+status: true
+dependencies: {  }
+id: top-right-navbar-digital-fr
+label: 'Digital Workspace Top right Navbar fr'
+description: 'Digital Workspace Top right Navbar fr'
+locked: false

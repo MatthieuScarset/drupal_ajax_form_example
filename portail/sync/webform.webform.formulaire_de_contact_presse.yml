@@ -3,12 +3,12 @@ langcode: fr
 status: open
 dependencies:
   module:
-    - oab_backoffice
+    - oab_gdpr
 third_party_settings:
-  oab_backoffice:
+  oab_gdpr:
     gdpr_business_owner: '1101'
     gdpr_spoc_security: '1102'
-    gdpr_expiration_date: ''
+    gdpr_expiration_date: '2019-12-31'
     gdpr_business_analysts:
       1697: '1697'
       1497: '1497'
@@ -22,7 +22,7 @@ archive: false
 id: formulaire_de_contact_presse
 title: 'Formulaire de contact Presse'
 description: ''
-category: ''
+category: Presse
 elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>Abonnez-vous à nos publications</p>\\r\\n\"\n  '#format': full_html\nnom_et_prenom:\n  '#type': textfield\n  '#title': 'Nom et prénom'\n  '#title_display': invisible\n  '#placeholder': 'Nom et prénom*'\n  '#required': true\nmedia:\n  '#type': textfield\n  '#title': Média\n  '#title_display': invisible\n  '#placeholder': 'Média*'\n  '#required': true\nvotre_email:\n  '#type': email\n  '#title': 'Votre e-mail'\n  '#title_display': invisible\n  '#placeholder': 'Votre e-mail*'\n  '#required': true\nutilisation_des_donnees:\n  '#type': checkbox\n  '#title': 'utilisation des donnees'\n  '#description': |\n    <p>J'accepte explicitement l'utilisation de mes données personnelles à l'usage exclusif du traitement de ma demande soumise via ce formulaire.</p>\n    \n  '#title_display': invisible\n  '#description_display': after\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__label': Envoyer\n  '#submit__attributes':\n    class:\n      - btn-grey\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
 css: ''
 javascript: ''
