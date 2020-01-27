@@ -34,11 +34,9 @@
                     {% set link_icon = item.url.options.icon %}
                     <div class="item-direct-access nopadding text-align-center">
                         <div class="div_direct_access border-right">
-                            <a href="{{ item.url }}" target="{{ link_target }}" onmousedown="utag_link(utag_data.titre_page, 'Footer', 'Images thèmes', '{{ item.title }}');">
-                                <i class="glyphicon icon {{ link_icon }} link_direct_access">
-                                    <span class="text_direct_access" >{{ item.title }}</span>
-                                </i>
-                            </a>
+                          {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
+                          {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+
                         </div>
                     </div>
                 {% endfor %}

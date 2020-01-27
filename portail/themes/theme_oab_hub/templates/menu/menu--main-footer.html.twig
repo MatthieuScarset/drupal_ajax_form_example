@@ -34,11 +34,11 @@
                 <ul>
                 {% set isDivAndUl = true %}
                 <h2{{ item.attributes.addClass('footer_link_title') }}>
-                    {{ link(item.title, item.url, {'target': link_target, 'class': ('bg_black'), 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
+                    {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'class': ('bg_black'), 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
                 </h2>
             {% else %}
                 <li{{ item.attributes }}>
-                    {{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
+                    {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
                 </li>
             {% endif %}
             {% if item.below %}

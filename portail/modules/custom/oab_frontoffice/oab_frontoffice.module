@@ -368,7 +368,7 @@ function oab_frontoffice_views_post_render($view) {
         if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
             // on recupere les valeurs dans oab_subhomes.subhomes
             $data =\Drupal::config('oab_subhomes.subhomes');
-            if (count($data) > 0) {
+            if ($data !== null) {
                 switch ($view->current_display) {
                     case 'page_press':
                         $route->setDefault('_title', $data->get('press_meta'));
