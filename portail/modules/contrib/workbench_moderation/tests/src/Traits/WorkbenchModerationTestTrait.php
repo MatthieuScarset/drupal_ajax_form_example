@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\workbench_moderation;
+namespace Drupal\Tests\workbench_moderation\Traits;
 
 /**
  * Defines a trait for common testing methods for workbench moderation.

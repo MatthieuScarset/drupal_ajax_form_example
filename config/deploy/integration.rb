@@ -1,3 +1,3 @@
 set :stage, :integration
 set :branch, 'integration'
-server '192.168.20.89', domain: 'recetteclientfinale.obs-ruby.build.620nm.net', user: 'oab_web'
+server '10.36.204.16', domain: 'orangepointcomrefonte.obs-ruby.build.620nm.net', user: 'oab_web'

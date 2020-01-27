@@ -1,0 +1,5 @@
+services:
+  oab_develop.commands:
+    class: \Drupal\oab_develop\Commands\OabDevelopCommands
+    tags:
+      - { name: drush.command }

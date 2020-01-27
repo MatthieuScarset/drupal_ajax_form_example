@@ -8,14 +8,12 @@ set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
 set :runner_group, "www-data"
-set :file_permissions_paths, ["/var/www/ruby/current"]
-set :file_permissions_users, ["www-data"]
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/var/www/ruby'
+set :deploy_to, '/var/www'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -29,8 +27,11 @@ set :deploy_to, '/var/www/ruby'
 # Default value for :pty is false
 # set :pty, true
 
+# Default value for :linked_files is []
+set :linked_files, fetch(:linked_files, []).push('portail/sites/default/settings.php')
+
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default')
+set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default/files')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -44,9 +45,40 @@ set :keep_releases, 5
 # see http://hugopl.github.io/2014/07/29/Capistrano-3-copy-deploy.html
 set :project_tarball_path, "/tmp/#{fetch(:application)}.tar.gz"
 
+# We create a Git Strategy and tell Capistrano to use it, our Git Strategy has a simple rule: Don't use git.
+module NoGitStrategy
+  def check
+    true
+  end
+
+  def test
+    # Check if the tarball was uploaded.
+    test! " [ -f #{fetch(:project_tarball_path)} ] "
+  end
+
+  def clone
+    true
+  end
+
+  def update
+    true
+  end
+
+  def release
+    # Unpack the tarball uploaded by deploy:upload_tarball task.
+    context.execute "tar -xf #{fetch(:project_tarball_path)} -C #{release_path}"
+    # Remove it just to keep things clean.
+    context.execute :rm, fetch(:project_tarball_path)
+  end
+
+  def fetch_revision
+    # Return the tarball release id, we are using the git hash of HEAD.
+    fetch(:release_name)
+  end
+end
 
 # Capistrano will use the module in :git_strategy property to know what to do on some Capistrano operations.
-#set :git_strategy, NoGitStrategy
+set :git_strategy, NoGitStrategy
 
 #namespace :deploy do
 
@@ -62,13 +94,36 @@ set :project_tarball_path, "/tmp/#{fetch(:application)}.tar.gz"
 #end
 
 namespace :deploy do
+   desc 'Create and upload project tarball'
+   task :upload_tarball do |task, args|
+    tarball_path = fetch(:project_tarball_path)
+    # This will create a project tarball from HEAD, stashed and not committed changes wont be released.
+   `git archive -o #{tarball_path} HEAD`
+    raise 'Error creating tarball.'if $? != 0
 
+    on roles(:all) do
+      upload! tarball_path, tarball_path
+    end
+   end
+   
+   desc 'Run dev deployment on each dev server'
+   task :deploy_dev do
+    #system("cap dev dev_bo deploy")
+    system("cap dev deploy")
+    #system("cap dev_bo deploy")
+    #run_locally "cap dev dev-bo deploy"
+   end
+	
+   desc 'Run recette deployment on each recette server'
+   task :deploy_recette do
+    system("cap recette recette-bo deploy")
+   end
+	
    desc 'Delete unnecessary files'
    task :delete_unnecessary_files do
     on roles(:all) do
     execute :rm, "-rf #{release_path}/scripts"
-     execute :rm, "-rf #{release_path}/config/deploy"
-     execute :rm, "-rf #{release_path}/config/deploy.rb"
+     execute :rm, "-rf #{release_path}/config"
      execute :rm, "-rf #{release_path}/.git"
      execute :rm, "-rf #{release_path}/public"
      execute :rm, "-rf #{release_path}/tmp"
@@ -88,36 +143,21 @@ namespace :deploy do
     end
    end
    
-   desc 'Create /var/www/current symbolik link'
-   task :create_current_link do
-    on roles(:all) do
-     execute "ln -s #{release_path} /var/www/current"
-    end
-   end
-
-   desc 'Re-run docker'
-   task :restart_docker do
-    on roles(:all) do
-     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml stop"
-     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml up -d"
-    end
-   end
-
    desc 'Run update commands on server'
    task :drush_update do
     on roles(:all) do
      execute "drush oab:updb --yes --root=#{release_path}/portail"
-   	 #execute "drush cim --yes --root=#{release_path}/portail"
-     execute "drush cr --root=#{release_path}/portail"
+	 #execute "drush updb --yes --root=#{release_path}/portail"
+	 #execute "drush entity-updates --yes --root=#{release_path}/portail"
+	 #execute "drush config-import oab --yes --root=#{release_path}/portail"
+	 execute "drush cr --root=#{release_path}/portail"
+	 execute "ln -sf /home/oab_web/drupal7 #{release_path}/portail/drupal7"
+	 execute "ln -sf /var/www/DVI/current/portail /var/www/current/portail/DVI"
     end
    end
 end
 
-
-#before 'deploy:updating', 'deploy:upload_tarball'
+before 'deploy:updating', 'deploy:upload_tarball'
 after 'deploy:updating', 'deploy:delete_unnecessary_files'
 after 'deploy:updating', 'deploy:save_archive_file'
-#after 'deploy:updating', "deploy:create_current_link"
-#after 'deploy:publishing', "deploy:set_permissions:acl"
-after 'deploy:publishing', 'deploy:restart_docker'
-after 'deploy:publishing', 'deploy:drush_update'
+after 'deploy:updating', 'deploy:drush_update'

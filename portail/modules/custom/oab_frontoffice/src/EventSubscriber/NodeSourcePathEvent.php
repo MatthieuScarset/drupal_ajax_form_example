@@ -33,9 +33,10 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      */
     public function onRequest(GetResponseEvent $event) {
         $request = $event->getRequest();
-
-        if (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
-            || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException") {
+        
+        if ($request->attributes->has('exception')
+          && (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
+            || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException")) {
 
             $code = $request->attributes->get('exception')->getStatusCode();
             if (!in_array($code, array(403, 404))) {
