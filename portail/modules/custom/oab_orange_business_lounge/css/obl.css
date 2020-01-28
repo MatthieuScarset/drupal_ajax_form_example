@@ -11,6 +11,17 @@
   background-color: transparent;
 }
 
+.obl_accords_techno_selected {
+  visibility: hidden;
+}
+
+.titre-top-zone-accords-roaming-first {
+}
+
+.titre-top-zone-accords-roaming-second {
+  color: #ff7900;
+}
+
 hr.reseau-mobile-accords-roaming {
   border-top: 1px solid #ccc;
   margin-top: 1rem;
