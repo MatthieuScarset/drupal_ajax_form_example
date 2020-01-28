@@ -30,18 +30,18 @@ oab_obl_unique_zone_settings:
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueZone'
   requirements:
-    _permission: 'access content'
+    _custom_access: 'Drupal\oab_orange_business_lounge\Controller\OblPricesController::access'
 
 oab_obl_unique_country_settings:
   path: '/oblGetOneCountry/{id}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::oblUniqueCountry'
   requirements:
-    _permission: 'access content'
+    _custom_access: '\Drupal\oab_orange_business_lounge\Controller\OblPricesController::access'
 
 oab_obl_get_countries_with_operators_settings:
   path: '/oblNetworkTypes/{id}/{page}'
   defaults:
     _controller: '\Drupal\oab_orange_business_lounge\Controller\OblController::oblGetCountriesWithOperators'
   requirements:
-    _permission: 'access content'
+    _custom_access: '\Drupal\oab_orange_business_lounge\Controller\OblController::access'

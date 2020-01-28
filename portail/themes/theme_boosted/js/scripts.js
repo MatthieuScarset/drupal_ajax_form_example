@@ -266,46 +266,48 @@
           $(e.target).closest('ul').prev('button').append('<span class="caret"></span>');
       });
 
+
   Drupal.behaviors.myBehaviour = {
     attach: function (context, settings) {
-      //On s'occupe de Facebook
-      if (settings.shareSettings.share_siteUrls.facebook.length) {
-        $("a.share-button-facebook").each(function() {
-          $(this).attr("href",settings.shareSettings.share_siteUrls.facebook );
-        });
-      }
+      if (settings.shareSettings !== undefined) {
+        //On s'occupe de Facebook
+        if (settings.shareSettings.share_siteUrls.facebook.length) {
+          $("a.share-button-facebook").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.facebook);
+          });
+        }
 
-      //Maintenant de linkedin
-      if (settings.shareSettings.share_siteUrls.linkedin.length) {
-        $("a.share-button-linkedin").each(function() {
-          $(this).attr("href",settings.shareSettings.share_siteUrls.linkedin );
-        });
-      }
+        //Maintenant de linkedin
+        if (settings.shareSettings.share_siteUrls.linkedin.length) {
+          $("a.share-button-linkedin").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.linkedin);
+          });
+        }
 
-      //Et enfin de twitter
-      if (settings.shareSettings.share_siteUrls.twitter.length) {
-        $("a.share-button-twitter").each(function() {
-          $(this).attr("href",settings.shareSettings.share_siteUrls.twitter );
-        });
-      }
+        //Et enfin de twitter
+        if (settings.shareSettings.share_siteUrls.twitter.length) {
+          $("a.share-button-twitter").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.twitter);
+          });
+        }
 
-      // RSS
+        // RSS
         if (settings.shareSettings.share_siteUrls.rss_blogs.length) {
-            $("a.share-button-rss-blogs").each(function() {
-                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_blogs );
-            });
+          $("a.share-button-rss-blogs").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.rss_blogs);
+          });
         }
         if (settings.shareSettings.share_siteUrls.rss_magazine.length) {
-            $("a.share-button-rss-magazine").each(function() {
-                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_magazine );
-            });
+          $("a.share-button-rss-magazine").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.rss_magazine);
+          });
         }
         if (settings.shareSettings.share_siteUrls.rss_presse.length) {
-            $("a.share-button-rss-presse").each(function() {
-                $(this).attr("href",settings.shareSettings.share_siteUrls.rss_presse );
-            });
+          $("a.share-button-rss-presse").each(function () {
+            $(this).attr("href", settings.shareSettings.share_siteUrls.rss_presse);
+          });
         }
-
+      }
     }};
 
   $(document).on('click', function(e) {

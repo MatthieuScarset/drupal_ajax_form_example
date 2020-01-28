@@ -108,7 +108,7 @@
 
         $(".reseau-partenaire-tarif-roaming").show();
         $.ajax({
-            url: '/oblGetOneCountry/'+countrie_id,
+            url: '/oblGetOneCountry/'+countrie_id + '?t=' + drupalSettings.ajax_token,
             type: 'GET',
             success: function(result) {
                 $('.roaming-operators-table').html('');
@@ -152,7 +152,7 @@
         $(".empty-roaming-infos-container").hide();
 
         $.ajax({
-            url: '/oblGetOneZone/'+code_zone,
+            url: '/oblGetOneZone/'+code_zone + '?t=' + drupalSettings.ajax_token,
             type: 'GET',
             success: function(result) {
                 result.roamingChargesToZones.forEach(function(item) {

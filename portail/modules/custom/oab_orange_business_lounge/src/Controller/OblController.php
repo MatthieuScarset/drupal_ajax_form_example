@@ -6,7 +6,7 @@ use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
 use Symfony\Component\HttpFoundation\Request;
 use Zend\Diactoros\Response\JsonResponse;
 
-class OblController extends ControllerBase {
+class OblController extends OblControllerBase {
 
     public function getTitle() {
         return "Accords roaming";
@@ -53,7 +53,8 @@ class OblController extends ControllerBase {
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
-                    'techno' => $actual_techno
+                    'techno' => $actual_techno,
+                    'ajax_token' => $this->generateToken()
                 ]
             ],
             '#detail_accords' => $prepared_data,

@@ -5,6 +5,7 @@ namespace  Drupal\oab_frontoffice\EventSubscriber;
 use Drupal\node\Plugin\views\field\Path;
 use Drupal\pathauto\Entity\PathautoPattern;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -68,10 +69,16 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
       && $event->getException()->getStatusCode() == 403) {
       ########################
       ## CAS DES 403
-      if (\Drupal::currentUser()->isAnonymous()) {
+
+      // Petit check pour les requetes AJAX de l'API OBL
+      $route_name = \Drupal::routeMatch()->getRouteName();
+
+      if (\Drupal::currentUser()->isAnonymous() && strpos($route_name, 'oab_obl') !== 0) {
         # Si user n'est pas loggué, on redirige vers la home
         $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
         $event->setResponse($response);
+      } elseif (strpos($route_name, 'oab_obl') === 0) {
+        $event->setResponse(new JsonResponse(["Access denied"], 403));
       }
     }
 
