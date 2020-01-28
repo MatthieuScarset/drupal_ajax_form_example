@@ -5,7 +5,7 @@ use \Drupal\Core\Controller\ControllerBase;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
 
-class OblController extends ControllerBase {
+class OblController extends OblControllerBase {
 
     public function getTitle() {
         return "Accords roaming";
@@ -38,7 +38,8 @@ class OblController extends ControllerBase {
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
-                    'arr_country_with_op' => $countries_with_operator
+                    'arr_country_with_op' => $countries_with_operator,
+                    'ajax_token' => $this->generateToken()
                 ]
             ],
         );
