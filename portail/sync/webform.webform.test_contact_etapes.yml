@@ -2,7 +2,7 @@ langcode: en
 status: open
 dependencies:
   module:
-    - oab_gdpr
+    - oab_backoffice
 open: null
 close: null
 weight: 0
@@ -169,7 +169,7 @@ access:
 handlers: {  }
 uuid: 4ece0ed6-68f9-4496-8415-d5aedf7eb265
 third_party_settings:
-  oab_gdpr:
+  oab_backoffice:
     gdpr_business_owner: '567'
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''

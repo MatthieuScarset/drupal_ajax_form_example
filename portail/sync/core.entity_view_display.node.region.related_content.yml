@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.region.field_email_owner
     - field.field.node.region.field_end_date
     - field.field.node.region.field_highlight
-    - field.field.node.region.field_region
     - field.field.node.region.field_start_date
     - field.field.node.region.field_visual
     - node.type.region
