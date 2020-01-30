@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -16,7 +17,7 @@ settings:
   label: 'Partenaires OBL'
   provider: oab_frontoffice
   label_display: visible
-  content: "<p><u>Couverture 4G</u></p>\r\n\r\n<p><u>Couverture 3G+</u></p>\r\n\r\n<p><u>Couverture 3G</u></p>\r\n\r\n<p><u>Couvertue&nbsp;CAMEL</u></p>\r\n\r\n<p><u>Couverture EDGE</u></p>\r\n\r\n<p><u>Couverture GPRS</u></p>\r\n\r\n<p><u>Hotspots Wi-Fi</u></p>\r\n"
+  content: "<div class=\"container-fluid\">\r\n<div class=\"row obs_template two_columns\">\r\n<div class=\"col-md-6 col-sm-12\"><strong><u>Couverture 4G</u></strong><br />\r\n<strong><u>Couverture 3G+</u></strong><br />\r\n<strong><u>Couverture 3G</u></strong><br />\r\n<strong><u>Couvertue&nbsp;CAMEL</u></strong></div>\r\n\r\n<div class=\"col-md-6 col-sm-12\"><strong><u>Couverture EDGE</u></strong><br />\r\n<strong><u>Couverture GPRS</u></strong><br />\r\n<strong><u>Hotspots Wi-Fi</u></strong></div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n"
   content_format: full_html
   block_title: 'Retrouvez également nos réseaux partenaires par technologie'
 visibility: {  }

@@ -19,7 +19,7 @@ settings:
   label_display: visible
   block_image: '22191'
   block_title_custom:
-    value: "<div class=\"banner-topzone container\">\r\n<div class=\"topzonebg\">\r\n<div class=\"col\">\r\n<div class=\"col col-lg-2 nopadding col-md-3 col-sm-4 col-xs-6 leftcol\">\r\n<p>&nbsp;</p>\r\n</div>\r\n</div>\r\n\r\n<div class=\"col col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding\">\r\n<div class=\"col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding\">\r\n<h2 class=\"titre3\"><span>Accords Roaming</span><br />\r\n<span style=\"color:#ff7900;\">Couverture 4G <select id=\"select_technologie_obl\"><!--option --></select> </span></h2>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n"
+    value: "<div class=\"banner-topzone container\">\r\n<div class=\"topzonebg\">\r\n<div class=\"col\">\r\n<div class=\"col col-lg-2 nopadding col-md-3 col-sm-4 col-xs-6 leftcol\">\r\n<p>&nbsp;</p>\r\n</div>\r\n</div>\r\n\r\n<div class=\"col col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding\">\r\n<div class=\"col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding\">\r\n<h1 class=\"titre3\"><span>Accords Roaming</span><br />\r\n<span style=\"color:#ff7900;\">Couverture 4G <select id=\"select_technologie_obl\"><!--option --></select> </span></h1>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n"
     format: full_html
 visibility:
   request_path:

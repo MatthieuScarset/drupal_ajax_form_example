@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -19,4 +20,6 @@ settings:
   content: 'Découvrez le réseau Orange'
   content_format: D
   block_title: 'Couverture mobile d''Orange Business Services'
+  link_label: 'Découvrez le réseau Orange'
+  link: 'https://reseaux.orange.fr/cartes-de-couverture/mobile-3g-4g'
 visibility: {  }
