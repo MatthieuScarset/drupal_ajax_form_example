@@ -3143,3 +3143,31 @@ hr.reseau-mobile-accords-roaming {
    margin-left: -1rem;
 }
 
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+.row.display-flex.justify-content-start {
+  justify-content: start;
+}
+.row.display-flex.justify-content-end {
+  justify-content: end;
+}
+
+.row.display-flex.justify-content-center {
+  justify-content: center;
+}
+
+.row.display-flex.justify-content-between {
+  justify-content: space-between;
+}
+
+.row.display-flex.justify-content-around {
+  justify-content: space-around;
+}
+
+.row.display-flex > * {
+  margin: 0 0 1em 0;
+}
+
