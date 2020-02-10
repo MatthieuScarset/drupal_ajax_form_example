@@ -90,9 +90,9 @@ function htmlWithModal(url) {
     " <div class=\"modal fade ckeditor-embed-video\" id=\"" + randomizedId + "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\n" +
     "     aria-hidden=\"true\">" +
     "  <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">" +
-    "      <div class=\"text-right\">" +
-    "          <button type=\"button\" class=\"btn btn-primary btn-rounded btn-md ml-4\"" +
-    "              data-dismiss=\"modal\">Close</button>" +
+    "      <div class=\"embed-video-button-close text-right\">" +
+    "          <button type=\"button\" class=\"btn btn-info btn-rounded btn-md ml-4\"" +
+    "              data-dismiss=\"modal\"><span class=\"glyphicon glyphicon-remove\"></span></button>" +
     "     </div>" +
     "      <div class=\"modal-body mb-0 p-0\">" +
     "        <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">" +

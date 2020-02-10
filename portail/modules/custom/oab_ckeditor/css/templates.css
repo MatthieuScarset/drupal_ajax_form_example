@@ -239,10 +239,26 @@
     display:         flex;
 }
 
-.ckeditor-embed-video .modal-lg {
-  width: 900px; /* remise modal à taille large (bootstrap original) */
+.ckeditor-embed-video .modal-dialog {
+  width: 60%;
+  /*width: 900px; /* remise modal à taille large (bootstrap original) */
+}
+
+@media (max-width: 760px) {
+  .ckeditor-embed-video .modal-dialog {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+.ckeditor-embed-video .modal-body {
+  padding: 0;
+}
+
+.ckeditor-embed-video .embed-video-button-close {
+  background-color: black;
 }
 
 .ckeditor-embed-video .btn-primary {
-  margin-right: 0rem;
+  margin-right: 0;
 }
