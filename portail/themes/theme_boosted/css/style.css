@@ -2885,6 +2885,17 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     margin-left: 2rem;
 }
 
+.tile.tile_focus, .tile.tile_dossiers {
+  min-height: 430px;
+  position: relative;
+}
+
+.tile.tile_focus .btn-container, .tile.tile_dossiers .btn-container {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
 .page-business-insight .subhomes-filterbar-background {
     padding: 0;
     margin-left: 0;
