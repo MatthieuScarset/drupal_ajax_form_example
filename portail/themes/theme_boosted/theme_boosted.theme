@@ -204,7 +204,7 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
         $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
     }
 
-    if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'field_insight_target_id') {
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'thematic') {
         $suggestions[] = 'form_element__field_insight__business_insight';
     }
 
@@ -424,7 +424,7 @@ function theme_boosted_preprocess_views_view(&$variables) {
   if ($id == 'business_insight') {
       $variables['#attached']['drupalSettings']['tealium']['view_title'] = t('Business insight');
   }
-      
+
   if ($id == 'subhomes' || $id == 'subhomes_archive'){
   	if($view->current_display == 'page_distributor')		{//subhome distributors  dvi
 			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage revendeurs';

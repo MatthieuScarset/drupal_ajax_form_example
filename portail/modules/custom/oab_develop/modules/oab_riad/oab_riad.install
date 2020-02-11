@@ -28,3 +28,11 @@ function oab_riad_update_8001() {
 function oab_riad_update_8002() {
     include_once("updates/update_8002.inc");
 }
+
+
+/**
+ * RUBYPORTAILOBS-3591 Liens entre contenus et la page /business-insight
+ */
+function oab_riad_update_8011() {
+  include_once("updates/update_80011.inc");
+}
