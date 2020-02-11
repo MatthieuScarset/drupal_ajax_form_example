@@ -2875,6 +2875,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     font-weight: bold;
     display: inline-block;
     padding:5px;
+    padding-left: 0;
 }
 
 .view-business-insight .view-content .views-row .tile .field--name-field-insight .field--item {
