@@ -318,4 +318,21 @@
     }
   });
 
+
+  $('.modal.ckeditor-embed-video').on('hidden.bs.modal', function (event) {
+      /*
+        Suppression de l'iframe video de la modal "Embed Video" lorsqu'on la ferme, pour arreter la viédéo
+        Rien trouver de mieux en l'état et plusieurs fournisseurs de vidéo
+       */
+      let iframe = $(this).find('iframe');
+      if (iframe.length) {
+        $('iframe', this).html("");
+        let iframe_src = $('iframe', this).attr('src');
+
+        $('iframe', this).attr('src', '');
+        $('iframe', this).attr('src', iframe_src);
+      }
+  });
+
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
