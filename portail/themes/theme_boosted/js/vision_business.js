@@ -34,7 +34,7 @@
     let compteur = 0;
 
     jQuery(document).ajaxSend(function(event, xhr, settings) {
-        if (settings.data !== undefined && settings.data.indexOf( "view_name=business_insight") != -1) {
+        if (settings.data !== undefined && typeof settings.data.indexOf === "function" && settings.data.indexOf( "view_name=business_insight") != -1) {
             compteur++;
         }
     });
@@ -42,7 +42,7 @@
     jQuery(document).ajaxComplete(function(event, xhr, settings) {
 
         // see if it is from our view
-        if (settings.data !== undefined && settings.data.indexOf( "view_name=business_insight") != -1) {
+        if (settings.data !== undefined && typeof settings.data.indexOf === "function" && settings.data.indexOf( "view_name=business_insight") != -1) {
             compteur --;
             if (compteur < 1) {
                 if (ajax_is_filter && compteur === 0) {
