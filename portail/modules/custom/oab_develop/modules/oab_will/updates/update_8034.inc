@@ -79,12 +79,14 @@ foreach ($fields as $field) {
   $field_config = FieldConfig::loadByName('taxonomy_term', 'hub', $field);
   if ($field_config !== null) {
     $field_config->delete();
+    drupal_set_message("Field $field deleted", 'notice');
   }
 
   // Deleting field storage.
   $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', $field);
   if ($field_storage !== null) {
     $field_storage->delete();
+    drupal_set_message("Field Storage $field deleted", 'notice');
   }
 }
 

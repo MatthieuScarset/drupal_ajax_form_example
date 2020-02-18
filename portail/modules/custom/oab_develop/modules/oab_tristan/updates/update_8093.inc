@@ -31,6 +31,7 @@ foreach ($data as $tid => $row) {
         }
       }
       $term->save();
+      drupal_set_message("Hub " . $term->label() . " refill", 'notice');
     }
   }
 }

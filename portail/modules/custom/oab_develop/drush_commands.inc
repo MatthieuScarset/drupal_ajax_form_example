@@ -11,7 +11,7 @@ pm-enable -y oab_twitter
 updb
 
 #Import config to recreate hub fields
-cim
+cim -y
 
 #Rerun my update to refill hub data
 ev drupal_set_installed_schema_version('oab_tristan','8092')
