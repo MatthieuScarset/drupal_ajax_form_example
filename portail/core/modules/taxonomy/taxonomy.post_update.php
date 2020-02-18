@@ -145,7 +145,42 @@ function taxonomy_post_update_remove_hierarchy_from_vocabularies(&$sandbox = NUL
 /**
  * Update taxonomy terms to be revisionable.
  */
-function taxonomy_post_update_make_taxonomy_term_revisionable(&$sandbox) {
+function taxonomy_post_update_make_taxonomy_term_revisionable_patched(&$sandbox) {
+
+  // Delete the tables if it already exists.
+  $tables = [
+    'taxonomy_term_r__e3b0c44298',
+    'taxonomy_term_revision__field_code',
+    'taxonomy_term_revision',
+    'taxonomy_term_revision__parent',
+    'taxonomy_term_field_revision'
+  ];
+
+  $prefix = 'backup_';
+  $schema_db = \Drupal::database()->schema();
+
+  $ACTION_FUNC = function ($table_name, $action = 'dropTable', $prefix = '') use ($schema_db) {
+    $args = [$table_name];
+    // Renamed
+    if ($action == 'renameTable') {
+      $args[] = $prefix . $table_name;
+    }
+    if ($schema_db->tableExists($table_name)) {
+      call_user_func_array([$schema_db, $action], $args);
+    }
+  };
+  // Delete backup tables if they already exists.
+  foreach ($tables AS $table_name) {
+    $ACTION_FUNC($prefix . $table_name);
+  }
+  // Use only once
+  if (empty($sandbox['once'])) {
+    foreach ($tables AS $table_name) {
+      $ACTION_FUNC($table_name, 'renameTable', $prefix);
+    }
+    $sandbox['once'] = TRUE;
+  }
+
   $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
   /** @var \Drupal\Core\Entity\EntityLastInstalledSchemaRepositoryInterface $last_installed_schema_repository */
   $last_installed_schema_repository = \Drupal::service('entity.last_installed_schema.repository');
@@ -229,6 +264,20 @@ function taxonomy_post_update_make_taxonomy_term_revisionable(&$sandbox) {
     ->setDefaultValue('');
 
   $definition_update_manager->updateFieldableEntityType($entity_type, $field_storage_definitions, $sandbox);
+
+  $ready = TRUE;
+  foreach ($tables AS $table_name) {
+    if (!$schema_db->tableExists($table_name)) {
+      $ready = FALSE;
+      break;
+    }
+  }
+  // Removes after success operation
+  if ($ready) {
+    foreach ($tables AS $table_name) {
+      $ACTION_FUNC($prefix . $table_name);
+    }
+  }
 
   return t('Taxonomy terms have been converted to be revisionable.');
 }

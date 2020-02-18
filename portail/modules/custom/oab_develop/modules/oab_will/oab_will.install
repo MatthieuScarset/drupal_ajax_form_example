@@ -11,6 +11,8 @@ function oab_will_install() {
  */
 function oab_will_update_dependencies() {
     $dependencies = array();
+  $dependencies['oab_will'][8034] = array('comment' => 8701);
+  $dependencies['taxonomy'][8701] = array('oab_will' => 8034);
     return $dependencies;
 }
 

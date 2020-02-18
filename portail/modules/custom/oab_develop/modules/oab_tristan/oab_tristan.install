@@ -15,6 +15,7 @@ function oab_tristan_update_dependencies() {
   $dependencies['oab_tristan'][8030] = array('oab_yassine' => 8020);
   $dependencies['oab_tristan'][8050] = array('oab_tibo' => 8031);
   $dependencies['oab_tristan'][8060] = array('oab_yassine' => 8023);
+  $dependencies['oab_tristan'][8093] = array('oab_will' => 8034);
  // $dependencies['oab_tristan'][8085] = array('oab_subhomes' => 8002);
 
   return $dependencies;
@@ -698,3 +699,9 @@ function oab_tristan_update_8092() {
     include_once('updates/update_8092.inc');
 }
 
+/**
+ * Refill hub taxo data
+ */
+function oab_tristan_update_8093() {
+  include_once('updates/update_8093.inc');
+}

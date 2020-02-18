@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_hub_menus
+    - taxonomy.vocabulary.hub
+id: taxonomy_term.hub.field_hub_menus
+field_name: field_hub_menus
+entity_type: taxonomy_term
+bundle: hub
+label: 'Menus du hub'
+description: 'Nom machines des menus créés et utilisés pour le mini-site'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

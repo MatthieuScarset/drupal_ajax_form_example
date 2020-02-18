@@ -23,8 +23,10 @@ function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
     $config = \Drupal::config(OabAkamaiForm::getConfigName());
     $hook_enabled = $config->get('enable_hook');
 
+    $state = \Drupal::state()->get('system.maintenance_mode');
+
     #Si la conf est activée, on vire les caches
-    if ($hook_enabled) {
+    if ($state != 1 && $hook_enabled) {
 
         # On recupère l'URL du noeud et le host du site
         $node_url = $node->toUrl()->setAbsolute()->toString();

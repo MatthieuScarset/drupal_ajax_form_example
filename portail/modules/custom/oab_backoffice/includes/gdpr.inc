@@ -522,7 +522,10 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
  * Envoi des mails aux users specifiés lors de la publication d'un webform
  */
 function gdpr_hook_entity_update($entity) {
-    if ($entity instanceof Drupal\webform\Entity\Webform) {
+
+  $state = \Drupal::state()->get('system.maintenance_mode');
+    if ($state != 1
+      && $entity instanceof Drupal\webform\Entity\Webform) {
         $current_user = Drupal::currentUser();
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
