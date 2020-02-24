@@ -6,6 +6,7 @@ dependencies:
     - system.menu.main-menu-consulting-fr
   module:
     - language
+    - oab_hub
     - system
   theme:
     - theme_oab_hub
@@ -31,8 +32,9 @@ visibility:
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
-  request_path:
-    id: request_path
-    pages: "/consulting*\r\n/consulting/*"
+  hub_condition:
+    id: hub_condition
+    hub: '900'
     negate: false
     context_mapping: {  }
+    hub_id: '900'
