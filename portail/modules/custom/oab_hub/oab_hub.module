@@ -1,13 +1,19 @@
 <?php
 
+use Drupal\block\Entity\Block;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\oab_hub\Controller\OabHubController;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 /**
  * Pour le formulaire d'ajout d'une taxo Hub, je n'affiche que les subhomes de la langue en cours
  */
-function oab_hub_form_taxonomy_term_hub_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function oab_hub_form_taxonomy_term_hub_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $tids = array_keys($form[OabHubController::FIELD_SUBHOMES_ID]['widget']['#options']);
   $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
@@ -426,7 +432,7 @@ function oab_hub_theme_suggestions_menu_alter(array &$suggestions, array $variab
   $menus = OabHubController::getDefaultBlockName();
 
   # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
-  $actif_hub = OabHubController::getActifHub();
+  //$actif_hub = OabHubController::getActifHub();  //Mise en commentaire de code inutiles
 
 
   $menu_name = false;
@@ -455,7 +461,7 @@ function oab_hub_preprocess_block(&$variables) {
   $menus = OabHubController::getDefaultBlockName();
 
   # A ajouter pour améliorer la validation : on ceheck le nom du menu avec le nom du hub à l'interieur pour réduire les erreurs
-  $actif_hub = OabHubController::getActifHub();
+  //$actif_hub = OabHubController::getActifHub();    ## Mise en commentaire de code inutile
 
   if (isset($variables['elements']['#base_plugin_id']) && $variables['elements']['#base_plugin_id'] == "system_menu_block") {
     foreach ($menus as $menu) {
