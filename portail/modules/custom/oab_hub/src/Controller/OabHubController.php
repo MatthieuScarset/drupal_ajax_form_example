@@ -1,6 +1,8 @@
 <?php
 namespace Drupal\oab_hub\Controller;
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\taxonomy\Entity\Term;
 use Masterminds\HTML5\Exception;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\Core\Controller\ControllerBase;
@@ -277,7 +279,8 @@ class OabHubController extends ControllerBase {
             $conf["region"] = $block["region"];
             $conf["settings"]["label"] = $block["name"] . " $term_name $term_langcode";
             $conf["visibility"]["language"]["langcodes"] = array($term_langcode => $term_langcode);
-            $conf["visibility"]["request_path"]["pages"] = "/$base_url*";
+            //$conf["visibility"]["request_path"]["pages"] = "/$base_url*";
+            $config["visibility"]["hub"]["hub_id"] = $term->id();
 
             if ($block['menu']) {
                 $conf["dependencies"]["config"] = array("system.menu.$menu_id");
@@ -409,16 +412,27 @@ class OabHubController extends ControllerBase {
         }
     }
 
-    //TODO faire une fonction pour recuperer le hub en fonction de l'URL
+  /**
+   * @return EntityInterface|Term|null
+   */
     public static function getActifHub() {
+      $term = null;
+
+      if (($url = self::getHubPartOfUrl()) !== false) {
+        $term = self::getTermFromUrl($url);
+      }
+
+      return $term;
+    }
+
+    //TODO faire une fonction pour recuperer le hub en fonction de l'URL
+    public static function getHubPartOfUrl() {
         $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
         if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
             $url_list = [];
         }
 
-        #Path du noeud (sous la forme /node/id
         $url = \Drupal::request()->getRequestUri();
-
 
         ##Je recupère toutes les parties de la route
         $route_parts = explode('/', $url);
@@ -435,7 +449,7 @@ class OabHubController extends ControllerBase {
 
             foreach ($url_list as $hub => $url) {
                 if ($url == $hub_part) {
-                    $actif_hub = $hub;
+                    $actif_hub = $url;
                 }
             }
         }
@@ -443,6 +457,31 @@ class OabHubController extends ControllerBase {
         return $actif_hub;
     }
 
+  /**
+   * @return Term[]
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+    public static function getAllHubTerms() {
+      return \Drupal::entityTypeManager()
+        ->getStorage('taxonomy_term')
+        ->loadTree('hub',0,NULL,TRUE);
+    }
+
+  public static function getTermFromUrl($url) {
+      $res = \Drupal::entityQuery('taxonomy_term')
+        ->condition(self::FIELD_URL_ID, $url)
+        ->execute();
+
+      $ret = null;
+
+      if (count($res) > 0) {
+        $tid = reset($res);
+        $ret = Term::load($tid);
+      }
+
+      return $ret;
+  }
 
     public static function getNodeUrl($nid) {
         $url = \Drupal::request()->getRequestUri();
