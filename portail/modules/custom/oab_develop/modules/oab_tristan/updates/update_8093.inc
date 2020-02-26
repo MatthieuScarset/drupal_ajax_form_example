@@ -5,7 +5,7 @@
 
 use Drupal\taxonomy\Entity\Term;
 
-
+/*
 $connection = \Drupal\Core\Database\Database::getConnection();
 $connection->schema()->dropTable('menu_link_content_field_revision');
 $connection->schema()->dropTable('menu_link_content_revision');
@@ -34,9 +34,9 @@ foreach ($post_updates as $post_update) {
 
 
 $key_value->set('existing_updates', $update_list);
+*/
 
 
-/*
 
 $data = [
   900 => "{\"field_hub_blocs\":[{\"value\":\"topnavbarconsultingfr\"},{\"value\":\"toprightnavbarconsultfr\"},{\"value\":\"mainmenuconsultingfr\"},{\"value\":\"directaccessconsultingfr\"},{\"value\":\"mainfooterconsultingfr\"},{\"value\":\"contactbarblockhubcofr\"}],\"field_hub_machine_name_suffixe\":[{\"value\":\"consulting\"}],\"field_hub_menus\":[{\"value\":\"top-navbar-consulting-fr\"},{\"value\":\"top-right-navbar-consult-fr\"},{\"value\":\"main-menu-consulting-fr\"},{\"value\":\"direct-access-consulting-fr\"},{\"value\":\"main-footer-consulting-fr\"}],\"field_hub_subhomes\":[{\"target_id\":\"211\"},{\"target_id\":\"210\"},{\"target_id\":\"213\"},{\"target_id\":\"214\"},{\"target_id\":\"209\"},{\"target_id\":\"212\"},{\"target_id\":\"297\"}],\"field_hub_url\":[{\"value\":\"consulting\"}]}",
@@ -67,4 +67,4 @@ foreach ($data as $tid => $row) {
       drupal_set_message("Hub " . $term->label() . " refill", 'notice');
     }
   }
-}*/
+}
