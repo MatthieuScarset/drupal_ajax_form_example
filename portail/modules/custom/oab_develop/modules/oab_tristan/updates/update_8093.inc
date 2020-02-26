@@ -5,6 +5,39 @@
 
 use Drupal\taxonomy\Entity\Term;
 
+
+$connection = \Drupal\Core\Database\Database::getConnection();
+$connection->schema()->dropTable('menu_link_content_field_revision');
+$connection->schema()->dropTable('menu_link_content_revision');
+$connection->schema()->dropTable('taxonomy_term_r__9e5738c328');
+
+$connection->schema()->dropTable('taxonomy_term_revision__field_country_code');
+
+
+$key_value = \Drupal::keyValue('post_update');
+$update_list = $key_value->get('existing_updates');
+
+
+$post_updates = [
+  'menu_link_content_post_update_make_menu_link_content_revisionable',
+  'system_post_update_add_expand_all_items_key_in_system_menu_block',
+  'system_post_update_clear_menu_cache',
+  'taxonomy_post_update_make_taxonomy_term_revisionable_patched'
+];
+
+foreach ($post_updates as $post_update) {
+  $key = array_search($post_update, $update_list);
+  if ($key !== false) {
+    unset($update_list[$key]);
+  }
+}
+
+
+$key_value->set('existing_updates', $update_list);
+
+
+/*
+
 $data = [
   900 => "{\"field_hub_blocs\":[{\"value\":\"topnavbarconsultingfr\"},{\"value\":\"toprightnavbarconsultfr\"},{\"value\":\"mainmenuconsultingfr\"},{\"value\":\"directaccessconsultingfr\"},{\"value\":\"mainfooterconsultingfr\"},{\"value\":\"contactbarblockhubcofr\"}],\"field_hub_machine_name_suffixe\":[{\"value\":\"consulting\"}],\"field_hub_menus\":[{\"value\":\"top-navbar-consulting-fr\"},{\"value\":\"top-right-navbar-consult-fr\"},{\"value\":\"main-menu-consulting-fr\"},{\"value\":\"direct-access-consulting-fr\"},{\"value\":\"main-footer-consulting-fr\"}],\"field_hub_subhomes\":[{\"target_id\":\"211\"},{\"target_id\":\"210\"},{\"target_id\":\"213\"},{\"target_id\":\"214\"},{\"target_id\":\"209\"},{\"target_id\":\"212\"},{\"target_id\":\"297\"}],\"field_hub_url\":[{\"value\":\"consulting\"}]}",
   1048 => "{\"field_hub_blocs\":[{\"value\":\"topnavbardigitalworksfr\"},{\"value\":\"toprightnavbardigitalfr\"},{\"value\":\"mainmenudigitalworkspfr\"},{\"value\":\"directaccessdigitalwofr\"},{\"value\":\"mainfooterdigitalworkfr\"},{\"value\":\"contactbarblockhubdifr\"}],\"field_hub_machine_name_suffixe\":[{\"value\":\"digital-workspace\"}],\"field_hub_menus\":[{\"value\":\"top-navbar-digital-works-fr\"},{\"value\":\"top-right-navbar-digital-fr\"},{\"value\":\"main-menu-digital-worksp-fr\"},{\"value\":\"direct-access-digital-wo-fr\"},{\"value\":\"main-footer-digital-work-fr\"}],\"field_hub_subhomes\":[{\"target_id\":\"210\"},{\"target_id\":\"212\"},{\"target_id\":\"297\"}],\"field_hub_url\":[{\"value\":\"digitalworkspace\"}]}"
@@ -34,4 +67,4 @@ foreach ($data as $tid => $row) {
       drupal_set_message("Hub " . $term->label() . " refill", 'notice');
     }
   }
-}
+}*/
