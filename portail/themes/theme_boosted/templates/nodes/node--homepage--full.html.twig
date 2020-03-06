@@ -75,59 +75,34 @@
 
 
 {%
-    set classes = [
-    'node',
-    node.bundle|clean_class,
-    view_mode ? view_mode|clean_class,
-    'clearfix',
-    'container-fluid'
+  set classes = [
+  'node',
+  node.bundle|clean_class,
+  view_mode ? view_mode|clean_class,
+  'clearfix',
 ]
 %}
 
 <article{{ attributes.addClass(classes) }}>
-    <div class="container-fluid-navbar"  style=" ">
-        {{ content.field_caroussel_header }}
-    </div>
-
-    <div class="container-fluid" style="background-color: #eee">
-
-
-    <!-- Top Zone Homepage -->
-    <div class=" top-zone-homepage">
+  <div class="container-fluid-navbar"  style=" ">
+    {{ content.field_caroussel_header }}
+  </div>
+  <div class="claim-homepage-container">
+    {{ (content.field_claim) }}
+    <i class="arrow-down-claim-homepage"></i>
+  </div>
 
 
+  <!-- Solution Zone Homepage -->
+  <div class="homepage-content">
 
-    {% for key, image in content.field_top_zone_image_mobile if image.entity is not null  %}
-        {% set media = image.entity %}
-        {% set uriMobile = media.uri.value %}
+    <div class="container">
 
-        {% if uriMobile is not null %}
-            {% set urlMobile = file_url(uriMobile) %}
-        {% endif %}
-    {% endfor %}
-    <div class="visible-xs col-xs-12 banner-bg top-banner"  style="background: url({{ urlMobile }}) ">
-        <div class="section-title-top-zone {{ tzColorClass }} container-fluid-navbar">
-            <div class="col-md-7 no-padding text-left subhead-title">
-                {{ content.field_subhead_title_top_zone }}
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-7 no-padding text-left title">
-                {{ content.field_header_title }}
-            </div>
-            {% if content.field_title_btn_text|render|trim is not empty %}
-                <div class="clearfix"></div>
-                <div class="col-md-7 no-padding text-left title title-btn">
-                    <a class="btn btn-default btn-hp-title" href="{{ content.field_title_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Banniere de une', '{{ content.field_header_title.0["#context"].value  }}', '')" >
-                        {{ content.field_title_btn_text.0["#context"].value }}
-                    </a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 carousel-solution no-padding">
-        <div class="block-card-container">
-          <div class="row display-flex">
-            {% for key, news in content.field_news_top_zone if key|first != '#'  %}
+      <div class="top-zone-homepage">
+        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 carousel-solution">
+          <div class="block-card-container">
+            <div class="row display-flex">
+              {% for key, news in content.field_news_top_zone if key|first != '#'  %}
                 {{ news }}
             {% endfor %}
           </div>
@@ -309,62 +284,70 @@
                 </div>
             </div>
             {% endif %}
-
-            <!-- Expertise Zone Homepage -->
-            {% if content.field_expertise_title|render|trim is not empty %}
-            <div class="homepage-banner-container">
-                <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
-
-                    <div class="title">
-                        {{ content.field_expertise_title }}
-                    </div>
-                    <div class="tabpanel-expertise" role="tabpanel">
-                        <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tabs <span class="caret"></span>
-                        </button>
-                        <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
-                            {% for key, item in node.field_banner_expertise %}
-                                <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
-                                    <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-title">
-                                                {{ item.entity.field_tab_title.value }}
-                                            </div>
-                                        </div>
-
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        {{ content.field_banner_expertise }}
-                    </div>
-                </div>
+              {% endfor %}
             </div>
-            {% endif %}
+          </div>
+        </div>
 
+      </div>
+
+
+      <!-- Expertise Zone Homepage -->
+      {% if content.field_expertise_title|render|trim is not empty %}
+        <div class="homepage-banner-container row">
+          <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
+
+            <div class="title">
+              {{ content.field_expertise_title }}
+            </div>
+            <div class="tabpanel-expertise" role="tabpanel">
+              <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tabs <span class="caret"></span>
+              </button>
+              <ul class="nav nav-tabs nav-justified nav-stacked" id='tab-expertise-banner' role="tablist">
+                {% for key, item in node.field_banner_expertise %}
+                  <li role="presentation" {%  if loop.first %} class="active" {% endif %}>
+                    <a href="#tab-{{ key }}" data-toggle="tab" aria-controls="tab-{{ key }}" role="tab" onmousedown="utag_link('Homepage', 'Expertises', '{{ item.entity.field_tab_title.value|raw }}', '')">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-title">
+                          {{ item.entity.field_tab_title.value }}
+                        </div>
+                      </div>
+
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+              {{ content.field_banner_expertise }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Expertise Zone Homepage MOBILE -->
         <!-- Expertise Zone Homepage MOBILE -->
 
-        {% if content.field_expertise_title|render|trim is not empty %}
-            <div class="homepage-banner-container-mobile">
-                <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
-                    <div class="title">
-                        {{ content.field_expertise_title }}
-                    </div>
-                    <div class="tabpanel-expertise" role="tabpanel">
-                        <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Tabs <span class="caret"></span>
-                        </button>
-
-                            {% for key, item in node.field_banner_expertise %}
-                                <div class="homepage-expertise-content-mobile">
-                                    {{ content.field_banner_expertise[key] }}
-                                </div>
-                            {% endfor %}
-
-                    </div>
-                </div>
+      {% if content.field_expertise_title|render|trim is not empty %}
+        <div class="homepage-banner-container-mobile row">
+          <div class="homepage-banner expertise-banner col-md-10 col-md-offset-1 col-xs-12 " >
+            <div class="title">
+              {{ content.field_expertise_title }}
             </div>
-        {% endif %}
+            <div class="tabpanel-expertise" role="tabpanel">
+              <button type="button" class="nav-tabs-dropdown btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tabs <span class="caret"></span>
+              </button>
+
+              {% for key, item in node.field_banner_expertise %}
+                <div class="homepage-expertise-content-mobile paragraph-expertise">
+                  {{ content.field_banner_expertise[key] }}
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+      {% endif %}
 
             <!-- Partner Zone Homepage -->
             {% if content.field_partner_title|render|trim is not empty %}
@@ -387,85 +370,112 @@
         </div>
 
     </div>
+      <!-- Partner Zone Homepage -->
+      {% if content.field_partner_title|render|trim is not empty %}
+        <div class="homepage-banner-container row">
+          <div class="col-md-10 col-md-offset-1 col-xs-12 col-sm-12 homepage-banner partner-banner" {#style="display: none"#}>
+            <div class="title">
+              {{ content.field_partner_title }}
+            </div>
 
-    <!-- Corporate Zone Homepage -->
-    {% if content.field_corporate_title|render|trim is not empty %}
-        <div class="row corporate-homepage">
-            {% set urlPartner = '' %}
-
-            {% for key, image in content.field_corporate_image if image.entity is not null  %}
-                {% set media = image.entity %}
-                {% set uri = media.uri.value %}
-
-                {% if uri is not null %}
-                    {% set urlPartner = file_url(uri) %}
-                {% endif %}
-            {% endfor %}
-
-
-            <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
-                <div class="section-corporate container">
-                    <div class="col-md-offset-1 col-md-10 section-title-corporate">
-                        <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
-                            <div class="no-padding text-left title">
-                                {{ content.field_corporate_title }}
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="no-padding text-left highlight-corporate">
-                                {{ content.field_corporate_highlight }}
-                               <a class="btn btn-inverse btn-info" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
-                                    {{ content.field_corporate_button_text.0["#context"].value }}
-                                </a>
-                            </div>
-
-                        </div>
-
-                        {% if content.field_corporate_show_menu %}
-                            <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
-                                <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
-                                {{ oab_drupal_menu('our-regional-presence')  }}
-                            </div>
-                        {% endif %}
+            <div class="tabpanel-partner">
+              {{ oab_drupal_view('homepage_partner', 'block_1') }}
+              <div class="col-md-12 text-right no-padding no-margin">
+                {{ link(content.field_partners_button_text.0["#context"].value, hub_getHubSubhomeUrl(path('view.subhomes.page_partners')),
+                  {'class':'btn btn-primary btn-homepage-partners',
+                    'onmousedown': 'utag_link(\'Homepage\', \'Partenaires\', \'' ~ content.field_partners_button_text.0["#context"].value|raw ~ '\', \'\')'})
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
 
 
+      <!-- Corporate Zone Homepage -->
+      {% if content.field_corporate_title|render|trim is not empty %}
+        <div class="corporate-homepage row">
+          {% set urlPartner = '' %}
+
+          {% for key, image in content.field_corporate_image if image.entity is not null  %}
+            {% set media = image.entity %}
+            {% set uri = media.uri.value %}
+
+            {% if uri is not null %}
+              {% set urlPartner = file_url(uri) %}
+            {% endif %}
+          {% endfor %}
+
+
+          <div class="col-md-12 col-xs-12 banner-bg corporate-banner" style="background: url({{ urlPartner }});">
+            <div class="section-corporate container">
+              <div class="section-title-corporate row">
+                <div class="col-md-offset-1 col-md-10">
+                  <div class="col-md-5 no-padding col-sm-12 col-xs-12 " >
+                    <div class="no-padding text-left title">
+                      {{ content.field_corporate_title }}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="no-padding text-left highlight-corporate">
+                      {{ content.field_corporate_highlight }}
+                      <a class="btn btn-inverse btn-info" href="{{ content.field_corporate_button_link.0["#url"] }}" onmousedown="utag_link('Homepage', 'Discover', '{{ content.field_corporate_button_text.0["#context"].value|raw }}', '')">
+                        {{ content.field_corporate_button_text.0["#context"].value }}
+                      </a>
                     </div>
 
+                  </div>
+
+                  {% if content.field_corporate_show_menu %}
+                    <div class="menu-right col-md-offset-3 col-md-4 col-lg-offset-4 col-lg-3 hidden-xs hidden-sm">
+                      <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
+                      {{ oab_drupal_menu('our-regional-presence')  }}
+                    </div>
+                  {% endif %}
+
                 </div>
+              </div>
+
             </div>
+          </div>
 
         </div>
         {% if content.field_corporate_show_menu %}
-            <div class="container visible-xs visible-sm">
+          <div class="container visible-xs visible-sm">
 
-                <div class="menu-right col-xs-12">
-                    {% if content.field_corporate_menu is not null %}
-                        <div class="menu-title">{{ content.field_corporate_menu_title }}</div>
-                        {{ oab_drupal_menu('our-regional-presence')  }}
-                    {% endif %}
+            <div class="menu-right col-xs-12">
+              {% if content.field_corporate_menu is not null %}
+                <div class="menu-title">
+                    {{ content.field_corporate_menu_title }}
                 </div>
+                {{ oab_drupal_menu('our-regional-presence')  }}
+              {% endif %}
             </div>
+          </div>
         {% endif %}
-    {% endif %}
-    {% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
-        <div class="row infography-banner">
-            <div class="container">
-                <div class="col-md-12 corporate-infography-banner ">
-                    <div class="row text-center">
-                        {% for key, infography in content.field_infography if key|first != '#'  %}
-                        {% if key == 0 %}
-                        <div class="col-md-2 col-md-offset-1 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10  block-infography" >
-                            {% else %}
-                            <div class="col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10 block-infography col-xs-12 " >
-                                {% endif %}
-                                {{ infography }}
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+      {% endif %}
+      {% if node.field_infography.0.entity is not empty and content.field_corporate_title|render|trim is not empty %}
+        <div class="infography-banner row">
+          <div class="container">
+            <div class="col-md-offset-1 col-md-10 corporate-infography-banner ">
+              <div class="row text-center">
+                {% for key, infography in content.field_infography if key|first != '#'  %}
+                  {% if key == 0 %}
+                    {% set col_class = "col-md-2 col-md-offset-1 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10" %}
+                  {% else %}
+                    {% set col_class = "col-md-2 col-md-offset-0 col-xs-offset-1 col-xs-10 col-sm-offset-1 col-sm-10 block-infography col-xs-12" %}
+                  {% endif %}
+                  <div class="block-infography {{ col_class }} " >
+                    {{ infography }}
+                  </div>
+                  {% endfor %}
                 </div>
+              </div>
             </div>
+          </div>
+        {% endif %}
         </div>
     {% endif %}
 
     </div>
+  </div>
 </article>

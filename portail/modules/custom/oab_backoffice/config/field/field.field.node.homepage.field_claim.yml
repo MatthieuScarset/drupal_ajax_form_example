@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_claim
+    - node.type.homepage
+  module:
+    - text
+id: node.homepage.field_claim
+field_name: field_claim
+entity_type: node
+bundle: homepage
+label: Claim
+description: 'Texte du claim'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

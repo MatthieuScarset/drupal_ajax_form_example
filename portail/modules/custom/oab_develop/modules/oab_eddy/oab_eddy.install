@@ -75,6 +75,13 @@ function oab_eddy_update_8009() {
     include_once("updates/update_8009.inc");
 }
 
+/**
+ * Création du field claim pour la homepage
+ */
+
+function oab_eddy_update_8010() {
+    include_once("updates/update_8010.inc");
+}
 
 /**
  * Carousel du header de la homepage

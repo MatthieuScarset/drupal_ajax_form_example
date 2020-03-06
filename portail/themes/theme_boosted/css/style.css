@@ -464,6 +464,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-decoration: none !important;
 }
 
+@media (max-width: 767px) {
+  .block-card a {
+    max-width: none;
+  }
+}
+
 .block-card a {
     padding-bottom: 20px !important;
     display: block;
@@ -566,11 +572,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-right: 0px !important;
         padding-left: 0px! important;
     }
-}
-
-.section-title-corporate {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
 }
 
 .section-title-corporate .title,
@@ -781,7 +782,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     padding-top: 70px;
     padding-bottom: 70px;
     text-align: center;
-    margin-left: -10px;
 }
 .corporate-infography-banner{
     margin-bottom: 5.5rem;
@@ -1048,7 +1048,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-ces .block-card img {
+.block-card img {
     width: 100%;
     height: auto;
 }
@@ -1187,11 +1187,6 @@ ces .block-card img {
         margin-left: 0px;
         margin-top: 20px;
     }
-    .section-solution,
-    .carousel-solution{
-        padding-right: 0px !important;
-        padding-left: 0px !important;
-    }
     .nav-tabs-dropdown {
         display: block !important;
         height: 40px;
@@ -1204,6 +1199,11 @@ ces .block-card img {
     .homepage-banner{
         padding: 40px 15px;
     }
+    .homepage-banner.expertise-banner {
+      padding-top: 0;
+      margin-top: 2em;
+    }
+
     .homepage-banner .title{
         padding-left: 25px;
         padding-right: 25px;
@@ -1236,16 +1236,6 @@ ces .block-card img {
         border: 1px solid #ccc;
         background-color: white;
         color: black;
-    }
-
-    .expertise-banner {
-        padding-right: 0 !important;
-        padding-left: 0!important;
-    }
-
-    .tabpanel-expertise {
-        padding-right: 5px;
-        padding-left: 5px;
     }
 
     #tab-expertise-banner li {
@@ -3301,6 +3291,39 @@ hr.reseau-mobile-accords-roaming {
     text-align: left;
     text-shadow: none;
 }
+.arrow-down-claim-homepage {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #000;
+    opacity: 0.7;
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 767px) {
+    .homepage-content {
+        margin-top: 0px;
+    }
+
+    .arrow-down-claim-homepage {
+        top: 14px;
+    }
+
+  .page-node-type-homepage .carrousel-homepage-header {
+    padding: 5rem;
+  }
+
+}
+.claim-homepage-container {
+    text-align: center;
+    min-height: 90px;
+}
+
+.top-zone-homepage .carousel-solution {
+    margin-top: 20px;
+}
 
 .left.carousel-control.homepage-carousel-indicators,
 .right.carousel-control.homepage-carousel-indicators {
@@ -3328,9 +3351,8 @@ hr.reseau-mobile-accords-roaming {
     left: 40%;
 }
 
-
 /*For Desktop*/
-@media (min-width: 480px) {
+@media (min-width: 767px) {
   div.views-hp-partenaire-previous {
     text-align: right;
     margin-top: 3.5%;
@@ -3343,7 +3365,7 @@ hr.reseau-mobile-accords-roaming {
   }
 }
 /*for Mobile */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   div.views-hp-partenaire-previous {
     font-size: 1.5rem;
     margin-top: 0;
@@ -3354,5 +3376,34 @@ hr.reseau-mobile-accords-roaming {
     font-size: 1.5rem;
     text-align: left;
   }
+
+  /* home-page */
+  .homepage-expertise-content-mobile.paragraph-expertise {
+    margin-bottom: 3em;
+  }
+  .homepage-banner .title {
+    padding-left: 0;
+  }
+
+  .page-node-type-homepage display-flex {
+    margin: 0 0 2em 0;
+  }
 }
 
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: auto;
+}
+.row.display-flex > * {
+  margin: 0 0 1em 0;
+}
+.block-card-black a {
+  background-color: black;
+  color: white;
+}
+.block-card-black a h3 {
+  color: white;
+}
