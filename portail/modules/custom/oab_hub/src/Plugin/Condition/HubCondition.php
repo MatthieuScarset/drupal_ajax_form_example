@@ -67,7 +67,7 @@ class HubCondition extends ConditionPluginBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return ['hub_id' => 0] + parent::defaultConfiguration();
+    return ['hub_id' => []] + parent::defaultConfiguration();
   }
 
   /**
@@ -77,16 +77,15 @@ class HubCondition extends ConditionPluginBase implements ContainerFactoryPlugin
 
     $terms = OabHubController::getAllHubTerms();
 
-    $options = [0 => 'None'];
     foreach ($terms as $term) {
       $options[$term->id()] = $term->label();
     }
 
     $form['hub_id'] = [
-      '#type' => 'select',
+      '#type' => 'checkboxes',
       '#options' => $options,
       '#title' => $this->t('Hub'),
-      '#default_value' => $this->configuration['hub_id'],
+      '#default_value' => is_array($this->configuration['hub_id']) ? $this->configuration['hub_id'] : [$this->configuration['hub_id']],
       '#description' => $this->t("Define which hub it belongs to, on which hub it should appear. Use it only on Hub Block (ie. theme Oab Hub)", []),
     ];
     return parent::buildConfigurationForm($form, $form_state);
@@ -96,7 +95,7 @@ class HubCondition extends ConditionPluginBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    $this->configuration['hub_id'] = $form_state->getValue('hub_id');
+    $this->configuration['hub_id'] = array_filter($form_state->getValue('hub_id'));
     parent::submitConfigurationForm($form, $form_state);
   }
 
@@ -111,17 +110,28 @@ class HubCondition extends ConditionPluginBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function evaluate() {
-    if (!isset($this->configuration['hub_id']) || $this->configuration['hub_id'] == 0) {
-      return false;
+
+    if ((is_array($this->configuration['hub_id']) && count($this->configuration['hub_id']) === 0)
+      || $this->configuration === 0) {
+      return true;
     }
+
     /** @var Term $term */
     $term = OabHubController::getActifHub();
-
+    $ret = false;
     if ($term !== null) {
-      return $term->id() === $this->configuration['hub_id'];
+      if (is_array($this->configuration['hub_id'])) {
+        foreach ($this->configuration['hub_id'] as $hub_id) {
+          if ($term->id() === $hub_id) {
+            $ret = true;
+          }
+        }
+      } else {
+        $ret = ($term->id() === $this->configuration['hub_id']);
+      }
     }
 
-    return false;
+    return $ret;
   }
 
   /**
