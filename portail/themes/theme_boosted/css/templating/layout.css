@@ -798,6 +798,101 @@ aside.right-column > .region{
   width: 100%;
 }
 
+/*For Mobile*/
+@media (max-width: 480px) {
+  /* For 3 items */
+  div.location-bar-direct-access-3-items-1 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+
+  div.location-bar-direct-access-3-items-2 {
+    padding-top: 7%;
+    border-right: 1px solid #eee;
+  }
+
+  div.location-bar-direct-access-3-items-3 {
+    padding-top: 7%;
+  }
+
+  div.location-bar-direct-access-3-items-4 {
+    padding-top: 7%;
+  }
+
+  /* For 4 items */
+  div.location-bar-direct-access-4-items-1 {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+  }
+
+  div.location-bar-direct-access-4-items-2 {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  div.location-bar-direct-access-4-items-3 {
+    border-right: 1px solid #eee;
+    padding-top: 7%;
+  }
+
+  div.location-bar-direct-access-4-items-4 {
+    padding-top: 7%;
+  }
+}
+
+/*For Desktop*/
+@media (min-width: 480px) {
+  /* For 3 items */
+  div.location-bar-direct-access-3-items-1 {
+    border-right: 1px solid;
+    border-right-color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+  div.location-bar-direct-access-3-items-2 {
+    border-right: 1px solid;
+    border-right-color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+  div.location-bar-direct-access-3-items-3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+
+  /* For 4 items */
+  div.location-bar-direct-access-4-items-1 {
+    border-right: 1px solid;
+    border-right-color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+  div.location-bar-direct-access-4-items-2 {
+    border-right: 1px solid;
+    border-right-color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+  div.location-bar-direct-access-4-items-3 {
+    border-right: 1px solid;
+    border-right-color: #bbb;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+  div.location-bar-direct-access-4-items-4 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 6.5rem;
+  }
+}
+
 .item-direct-access {
   width: 20%;
   float: left;
