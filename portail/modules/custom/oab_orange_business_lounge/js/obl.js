@@ -187,29 +187,34 @@
     }
 
 
-    /**
-     * Page Accords-roaming
-     */
-    $('#select_technologie_obl').html('<option value="1" selected="selected" disabled>(autre couverture)</option>');
+  /**
+   * Page Accords-roaming
+   */
+  $('.select_technologie_obl').html('<option selected="selected" disabled>(autre couverture)</option>');
 
     if (drupalSettings.arr_technologies_obl !== undefined && drupalSettings.arr_technologies_obl.length > 0) {
       var arr_technologies = drupalSettings.arr_technologies_obl;
       var arr_technologies_sort = arr_technologies.sort(SortById);
 
-      if (arr_technologies_sort.length != 0) {
-        $.each(arr_technologies_sort, function (index, value) {
-          var selected = "";
-          if (drupalSettings.techno !== undefined && drupalSettings.techno == value.id) {
-            selected = 'selected="selected"';
-          }
-          $('#select_technologie_obl').append('<option value="' + value.id + '" name="'+ value.name +'" style="color: black"' + selected + '>' + 'couverture  ' + value.name + '</option>');
-        });
-        $('#select_technologie_obl').on('change', function () {
-            var techno_selected = $("option:selected", this).attr('value');
-            window.location.href = '?techno=' +techno_selected;
-        });
-      }
+    /*
+      for wysiwyg
+    */
+    var techno_name = drupalSettings.techno_name;
+    $('.techno_name').append(techno_name);
+
+    if (arr_technologies_sort.length != 0) {
+
+      $.each(arr_technologies_sort, function (index, value) {
+        $('.select_technologie_obl').append('<option value="' + value.id + '" name="'+ value.name +'" style="color: black"' + '>' + 'couverture ' + value.name + '</option>');
+      });
+
+      $('.select_technologie_obl').on('change', function () {
+        var techno_selected = $("option:selected", this).attr('value');
+        window.location.href = '?techno=' +techno_selected;
+      });
+
     }
+  }
 
     /*
      print tab obl accords
@@ -220,4 +225,3 @@
 
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap, drupalSettings);
-
