@@ -239,7 +239,7 @@ display:
             description: ''
             use_operator: false
             operator: field_insight_target_id_op
-            identifier: field_insight_target_id
+            identifier: vb_thematic
             required: false
             remember: false
             multiple: false

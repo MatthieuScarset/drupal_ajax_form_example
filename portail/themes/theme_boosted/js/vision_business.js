@@ -73,7 +73,7 @@
     });
 
 
-    $(document).on("change", "select[name='field_insight_target_id']", function() {
+    $(document).on("change", "select[name='vb_thematic']", function() {
         ajax_is_filter = true;
         $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
 
@@ -90,7 +90,7 @@
 
     $(document).on('click', '.view-business-insight .field_insight a', function() {
         let taxo_id = $(this).attr('data-taxo');
-        let selector = "select[name='field_insight_target_id']";
+        let selector = "select[name='vb_thematic']";
 
         $(selector).val(taxo_id).trigger('change');
         return false;

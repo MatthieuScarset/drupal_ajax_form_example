@@ -143,10 +143,8 @@ view_mode ? view_mode|clean_class,
         <a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': content.field_profile[0]['#node'].getTitle() }) }}">{{ content.field_profile[0]['#node'].getTitle() }}</a>
         {% if content.theme_term %}{{ ', ' }}{% endif %}
     {% endif %}
-    {{ content.theme_term["#markup"] }}
+  <a href="{{ path('view.business_insight.business_insight_page') }}?vb_thematic={{ content.theme_term["id"] }}"> {{ content.theme_term["#markup"] }} </a>
 </div>
-
-  ooo
 
 
 {% include 'themes/theme_boosted/templates/nodes/socialbar_blogs.html.twig' %}

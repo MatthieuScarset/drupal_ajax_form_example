@@ -310,10 +310,10 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     // view Page thématique
     if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {
         $insight = clean_exposed_filters_by_language(
-            $form['field_insight_target_id']['#options'],
+            $form['vb_thematic']['#options'],
             'Insight'
         );
-        $form['field_insight_target_id']['#options'] = $insight;
+        $form['vb_thematic']['#options'] = $insight;
 
         $profession = clean_exposed_filters_by_language(
             $form['field_job_profile_target_id']['#options'],
@@ -341,8 +341,8 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     if ($form['#id'] == 'views-exposed-form-business-insight-business-insight-page') {
         //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
 
-        $form['field_insight_target_id']['#options'] = clean_exposed_filters_by_language(
-            $form['field_insight_target_id']['#options'], 'All thematics'
+        $form['vb_thematic']['#options'] = clean_exposed_filters_by_language(
+            $form['vb_thematic']['#options'], 'All thematics'
         );
 
         $form['field_insight_type_target_id']['#options'] = clean_exposed_filters_by_language(
