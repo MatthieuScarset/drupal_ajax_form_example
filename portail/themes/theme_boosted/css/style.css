@@ -691,9 +691,13 @@ a.link-subhomes:hover .encart-image.subhome-image {
 
 .homepage-banner{
     background-color: white;
-    padding: 60px 45px;
+    padding: 20px 0;
     margin-top: 20px;
 }
+.homepage-banner.expertise-banner {
+  padding-top: 0;
+}
+
 .homepage-banner .title{
     padding-bottom: 30px;
     padding-left: 40px;
@@ -701,15 +705,52 @@ a.link-subhomes:hover .encart-image.subhome-image {
     font-weight: bold;
 }
 
-#tab-expertise-banner li {
-    background-color: #eee;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid white;
+.homepage-banner.expertise-banner .title {
+  padding-left: 0;
 }
 
-#tab-expertise-banner li:last-child {
-    border-right: none;
+
+.homepage-banner.expertise-banner {
+    background-color: transparent;
+}
+
+#tab-expertise-banner li {
+    background-color: #d8d8d8;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+#tab-expertise-banner li:after {
+     content : "";
+     position: absolute;
+     right    : 0;
+     z-index: 10;
+     top  : 50%;
+     width  : 2px;
+     height   : 50%;  /* or 100px */
+    background: #ccc;
+    transform: translateY(-50%);
+
+ }
+
+#tab-expertise-banner li:before{
+    content : "";
+    position: absolute;
+    left    : 0;
+    z-index: 10;
+    top  : 50%;
+    width  : 2px;
+    height   : 50%;  /* or 100px */
+    background: #ccc;
+    transform: translateY(-50%);
+
+}
+
+#tab-expertise-banner li.active:after,
+#tab-expertise-banner li.active:before,
+#tab-expertise-banner li:first-child:before,
+#tab-expertise-banner li:last-child:after{
+    top: 0; height: 0;
 }
 
 #tab-expertise-banner li a{
@@ -723,6 +764,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     display: block;
     height: 100%;
     width: 100%;
+    background-color: #D8D8D8;
 }
 
 @media (min-width: 980px) and (max-width: 1279px) {
@@ -756,16 +798,18 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 #tab-expertise-banner li.active {
-    color: #F16E00;
+    color: #000;
     background-color: #fff;
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
-    border-bottom: 1px solid #fff;
+    border-bottom: 6px solid #F16E00;
 }
 
 #tab-expertise-banner li.active a {
-    color: #F16E00;
+    color: #000;
+    background-color: #fff;
+    border: none;
 }
 
 #tab-expertise-banner li.active a:focus {
@@ -776,18 +820,23 @@ a.link-subhomes:hover .encart-image.subhome-image {
     background-color: #fff;
 }
 
+#tab-expertise-banner li:hover {
+    background-color: #eee;
+}
+
 #tab-expertise-banner div.tab-title {
-    text-align: left;
+    text-align: center;
 }
 
 .paragraph--type--homepage-banner-experience{
     padding-top: 30px;
     padding-bottom: 30px;
+    background-color: #fff;
 }
 
 .tabpanel-expertise{
-    margin-left: 40px !important;
-    margin-right: 40px !important;
+    /*margin-left: 40px !important;
+    margin-right: 40px !important;*/
 }
 .tabpanel-expertise .tab-content{
     padding: 0em;
@@ -866,9 +915,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     vertical-align: middle;
     float: none;
 }
-.partner-banner .views-view-grid .partner-img:hover{
-    border: 1px solid #F16E00;
-}
 
 .partner-banner .views-view-grid .partner-img .field--item{
     padding: 20px;
@@ -881,7 +927,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 .section-corporate{
-    max-width: 1080px;
+    /*max-width: 1080px;*/
     margin: auto;
     padding-left: -10px;
     color: #fff;
@@ -937,8 +983,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
     text-decoration: none !important;
 }
 
-.corporate-banner{
-    margin-top:85px;
+.corporate-banner {
+    margin-top: 40px;
     background: #FFF;
 }
 .infography{
@@ -1077,12 +1123,23 @@ ces .block-card img {
     .homepage-banner-expertise-image img{ width: 100%;  height : auto;}
     .homepage-banner-expertise-content{
         padding-left: 0px;
-        padding-top: 20px;
+        padding-top: 10px;
     }
+
+    .homepage-banner-expertise-content{
+        margin-top: 20px;
+        background-color: #fff;
+    }
+
+    .homepage-banner {
+        background-color: #eeeeee;
+    }
+
     .homepage-banner-expertise-image{
         width: 100%;
         display: block;
         padding: 0;
+        margin-bottom: 10px;
     }
 
      .block-card a {
@@ -1158,6 +1215,10 @@ ces .block-card img {
         border: 1px solid #ccc;
     }
 
+    .tabpanel-expertise button, .tabpanel-expertise ul {
+        display: none !important;
+    }
+
     .tabpanel-expertise button.btn.btn-default:hover {
         background-color: #ccc;
         border: 1px solid #ccc;
@@ -1169,7 +1230,6 @@ ces .block-card img {
         border: 1px solid #ccc;
         background-color: white;
         color: black;
-
     }
 
     .expertise-banner {
@@ -1197,8 +1257,9 @@ ces .block-card img {
         border-right: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         text-align: left;
-        background-color: #FFF;
+        background-color: #d8d8d8;
     }
+
 
     #tab-expertise-banner li:first-child {
         margin-bottom: 0;
@@ -1274,6 +1335,23 @@ ces .block-card img {
     }
 
 }
+.homepage-banner-container-mobile, .homepage-field-tab-title-mobile {
+    display: none;
+}
+
+.expertise-category-name-mobile {
+    padding-left: 37px;
+}
+
+@media (max-width: 767px) {
+    .homepage-banner-container-mobile, .homepage-field-tab-title-mobile {
+        display: block;
+    }
+    .zone-partner.homepage-banner-container {
+        display: initial;
+    }
+}
+
 .rebond article, .block-mediatheque, #block-promoactublock {
     margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
