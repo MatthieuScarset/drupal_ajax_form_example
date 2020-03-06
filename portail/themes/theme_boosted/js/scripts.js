@@ -325,4 +325,10 @@
       console.log(elem);
   });
 
+
+$('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
+    var num_item = $(events.relatedTarget).data('key');
+    $(this).find('.actual-slide').html(num_item + 1);
+});
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

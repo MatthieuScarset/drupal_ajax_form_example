@@ -438,11 +438,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 2rem;
 }
 
-.block-card-container{
-  margin: auto;
-  max-width: 1180px;
-  margin-top: -70px;
-}
 
 @media (min-width: 768px) {
     .block-card img{
@@ -3266,4 +3261,44 @@ hr.reseau-mobile-accords-roaming {
 }
 .block-card-black a h3 {
   color: white;
+}
+
+.carrousel-homepage-header .carousel-inner .item img {
+    opacity: 0;
+    height: 290px;
+}
+
+.carousel-caption.homepage-carousel {
+    top : 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: left;
+    text-shadow: none;
+}
+
+.left.carousel-control.homepage-carousel-indicators,
+.right.carousel-control.homepage-carousel-indicators {
+    background-color: transparent;
+}
+
+.left.carousel-control.homepage-carousel-indicators:hover,
+.right.carousel-control.homepage-carousel-indicators:hover,
+.left.carousel-control.homepage-carousel-indicators:focus,
+.right.carousel-control.homepage-carousel-indicators:focus{
+    width: 6rem !important;
+}
+
+.carrousel-homepage-header .container-homepage-carousel-indicators {
+    float: right;
+}
+
+.homepage-carousel-glyphicon:before {
+    color: #9E9F9F;
+}
+
+.item-carousel-number {
+    color: #9E9F9F;
+    position: relative;
+    left: 40%;
 }
