@@ -438,36 +438,33 @@ a.link-subhomes:hover .encart-image.subhome-image {
     margin-top: 2rem;
 }
 
-
 .block-card-container{
-    margin: auto;
-    max-width: 1180px;
-    margin-top: -70px;
+  margin: auto;
+  max-width: 1180px;
+  margin-top: -70px;
 }
 
 @media (min-width: 768px) {
-    .block-card-container {
-        display: flex;
-    }
-
     .block-card img{
         width: 100%;
         max-width: 380px;
         height: auto;
     }
+  .block-card.block-card-full img{
+    width: 100%;
+    max-width: 866px;
+    height: auto;
+  }
 }
 
 @media (max-width: 1200px) {
-    .block-card{
+     .block-card{
         margin-bottom: 20px;
     }
 }
 
 .block-card a{
     max-width: 380px;
-    /* padding-left: 10px !important;
-     padding-right: 10px !important;
-     padding: 0 !important;*/
     background: white;
     text-decoration: none !important;
 }
@@ -479,12 +476,29 @@ a.link-subhomes:hover .encart-image.subhome-image {
     height: 100%;
 }
 
+.block-card.block-card-full a {
+  padding-bottom: 0 !important;
+  width: 100%;
+  max-width: none;
+}
+
 .block-card .news-title{
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: 2.4rem;
     padding-right: 10px;
     padding-left: 10px;
+}
+
+.block-card.block-card-full .news-title {
+  padding-left: 20px;
+}
+
+
+.block-card .h4 {
+  padding-top: 30px;
+  padding-bottom: 0;
+  margin:0;
 }
 
 .page-node-type-homepage section.left-column > .region,
@@ -982,7 +996,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-.block-card img {
+ces .block-card img {
     width: 100%;
     height: auto;
 }
@@ -1071,7 +1085,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding: 0;
     }
 
-    .block-card a {
+     .block-card a {
         margin: auto;
     }
 
@@ -1097,9 +1111,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
-    .block-card .news-title {
+    /*.block-card .news-title {
         padding-left: 20px;
-    }
+    }*/
     .solution-homepage .carousel-solution .left-zone, .solution-homepage .carousel-solution .right-zone {
         padding: 25px 25px;
     }
@@ -1301,9 +1315,6 @@ a.link-subhomes:hover .encart-image.subhome-image {
 @media (max-width: 480px) {
     .view-subhomes .views-exposed-form .form-submit {
         margin-top: 2rem;
-    }
-    .block-card img {
-        /* max-width:312px; */
     }
 }
 
@@ -3171,3 +3182,10 @@ hr.reseau-mobile-accords-roaming {
   margin: 0 0 1em 0;
 }
 
+.block-card-black a {
+  background-color: black;
+  color: white;
+}
+.block-card-black a h3 {
+  color: white;
+}

@@ -46,13 +46,51 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 ]
 %}
 {% block paragraph %}
-    <a href="{{ content.field_link_news[0]['#url'] }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_title[0]['#context']['value'] }}', '')">
-        <div{{ attributes.addClass(classes) }}>
-            {% block content %}
+    {% set highlighted_node = content.field_highlight_content[0]['#node'] %}
+    {% set block_size = content.field_block_size[0]['#markup'] %}
+    {% set url = '/' %}
+    {% if content.field_highlight_content[0]['#node'].id is not empty %}
+      {% set url = path('entity.node.canonical', {'node': content.field_highlight_content[0]['#node'].id}) %}
+    {%  endif %}
+    {%  if block_size == 'full' %}
+      <div class="col-xl-12 col-lg-12 col-md-12 hidden-sm hidden-xs block-card block-card-black block-card-full text-align-center" style=" ">
+        <a href="{{ url }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_title[0]['#context']['value'] }}', '')">
+          <div{{ attributes.addClass(classes) }}>
+            <div class="col-sm-8 no-padding news-image">{{ content.field_image }}</div>
+            <div class="col-sm-4">
+              {% if (highlighted_node.field_subhome | length) %}
+                <div class="text-align-left padding-side-20 h4 text-primary">{{ highlighted_node.field_subhome[0].entity.label }}</div>
+              {% endif %}
+              <div class="text-align-left">{{ content.field_title }}</div>
+              <div class="text-align-left padding-side-20 news-chapo">{{ content.field_chapo }}</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="hidden-xl hidden-lg hidden-md col-sm-12 col-xs-12 block-card block-card-black text-align-center" style=" ">
+        <a href="{{ url }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_title[0]['#context']['value'] }}', '')">
+          <div{{ attributes.addClass(classes) }}>
+            <div class="col-md-12 no-padding news-image">{{ content.field_image }}</div>
+            {% if (highlighted_node.field_subhome | length) %}
+              <div class="col-md-12 text-align-left padding-side-20 h4 text-primary">{{ highlighted_node.field_subhome[0].entity.label }}</div>
+            {% endif %}
+            <div class="col-md-12 text-align-left">{{ content.field_title }}</div>
+            <div class="col-md-12 text-align-left padding-side-20 news-chapo">{{ content.field_chapo }}</div>
+          </div>
+        </a>
+      </div>
+    {%  else %}
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 block-card text-align-center" style=" ">
+        <a href="{{ url }}" onmousedown="utag_link('Homepage', 'A la une', '{{ content.field_title[0]['#context']['value'] }}', '')">
+            <div{{ attributes.addClass(classes) }}>
                 <div class="col-md-12 no-padding news-image">{{ content.field_image }}</div>
+                {% if (highlighted_node.field_subhome | length) %}
+                    <div class="col-md-12 text-align-left padding-side-20 h4 text-primary">{{ highlighted_node.field_subhome[0].entity.label }}</div>
+                {% endif %}
                 <div class="col-md-12 text-align-left">{{ content.field_title }}</div>
                 <div class="col-md-12 text-align-left padding-side-20 news-chapo">{{ content.field_chapo }}</div>
-            {% endblock %}
-        </div>
-    </a>
+            </div>
+        </a>
+      </div>
+  {%  endif %}
 {% endblock paragraph %}

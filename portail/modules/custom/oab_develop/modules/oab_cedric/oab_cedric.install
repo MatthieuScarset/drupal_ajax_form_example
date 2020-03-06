@@ -10,3 +10,11 @@ function oab_cedric_install() {
 function oab_cedric_update_8001() {
   oabt_YmlImport("oab_twitter.settings_form.yml");
 }
+
+
+/**
+* update top highlights
+*/
+function oab_cedric_update_8002() {
+  include_once('updates/update_8002.inc');
+}

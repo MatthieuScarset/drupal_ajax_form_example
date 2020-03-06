@@ -3,48 +3,53 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.homepage_news.field_block_size
     - field.field.paragraph.homepage_news.field_chapo
+    - field.field.paragraph.homepage_news.field_highlight_content
     - field.field.paragraph.homepage_news.field_image
     - field.field.paragraph.homepage_news.field_link_news
     - field.field.paragraph.homepage_news.field_title
-    - image.style.homepage_news
     - paragraphs.paragraphs_type.homepage_news
   module:
     - image
-    - link
+    - options
     - text
 id: paragraph.homepage_news.default
 targetEntityType: paragraph
 bundle: homepage_news
 mode: default
 content:
-  field_chapo:
+  field_block_size:
     weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_chapo:
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
-  field_image:
-    weight: 2
-    label: hidden
-    settings:
-      image_style: homepage_news
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
-  field_link_news:
+  field_highlight_content:
     weight: 3
     label: hidden
     settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      link: true
+      view_mode: default
     third_party_settings: {  }
-    type: link
+    type: entity_reference_entity_view
+    region: content
+  field_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   field_title:
     weight: 0
@@ -54,4 +59,5 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-hidden: {  }
+hidden:
+  field_link_news: true

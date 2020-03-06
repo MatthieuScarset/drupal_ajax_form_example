@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: homepage_news
+label: 'Highlight on top (max. 4)'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }
