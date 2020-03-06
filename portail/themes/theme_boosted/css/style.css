@@ -2974,6 +2974,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     font-weight: bold;
     display: inline-block;
     padding:5px;
+    padding-left: 0;
 }
 
 .view-business-insight .view-content .views-row .tile .field--name-field-insight .field--item {
@@ -2982,6 +2983,17 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 
 .view-business-insight .view-content .views-row .tile .report_link{
     margin-left: 2rem;
+}
+
+.tile.tile_focus, .tile.tile_dossiers {
+  min-height: 430px;
+  position: relative;
+}
+
+.tile.tile_focus .btn-container, .tile.tile_dossiers .btn-container {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
 }
 
 .page-business-insight .subhomes-filterbar-background {
