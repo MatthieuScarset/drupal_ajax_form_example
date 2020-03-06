@@ -206,7 +206,8 @@
 
             </div>
         {% endif %}
-        <div class="container">
+        </div>
+    <div class="container">
             {% if content.field_solution_banner_title|render|trim is not empty %}
             <div class="col-md-10 col-md-offset-1 col-xs-12 carousel-solution">
 
@@ -379,7 +380,7 @@
         {'class':'btn btn-homepage btn-homepage-partners',
         'onmousedown': 'utag_link(\'Homepage\', \'Partenaires\', \'' ~ content.field_partners_button_text.0["#context"].value|raw ~ '\', \'\')
     '}) }}
-                    </div>
+
                 </div>
             </div></div>
             {% endif %}
