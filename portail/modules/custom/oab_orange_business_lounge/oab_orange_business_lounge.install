@@ -13,3 +13,20 @@ function oab_orange_business_lounge_update_dependencies() {
     $dependencies = array();
     return $dependencies;
 }
+
+/**
+ * Implements hook_update_8001().
+ */
+function oab_orange_business_lounge_update_8001(&$sandbox) {
+  $old_name = "oab.orange_business_lounge_settings";
+  $new_name = "orange_business_lounge_settings";
+
+  $old_config = \Drupal::configFactory()->getEditable($old_name);
+  $old_config_data = $old_config->get();
+
+  $new_config = \Drupal::configFactory()->getEditable($new_name)
+    ->setData($old_config_data)
+    ->save(true);
+
+  $old_config->delete();
+}
