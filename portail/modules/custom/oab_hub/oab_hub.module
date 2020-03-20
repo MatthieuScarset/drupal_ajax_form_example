@@ -468,3 +468,18 @@ function oab_hub_form_views_exposed_form_alter(&$form, &$form_state) {
         $form["#action"] = OabHubController::getHubSubhomeUrl($form["#action"]);
     }
 }
+
+/**
+ * Si on est dans le theme Oab Hub, j'ajoute au cache du logo le contexte de l'url pour qu'il mette bien la bonne URL
+ * @param array $build
+ * @param \Drupal\Core\Block\BlockPluginInterface $block
+ */
+function oab_hub_block_build_system_branding_block_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  $theme_name = Drupal::theme()->getActiveTheme()->getName();
+
+  if ($theme_name === 'theme_oab_hub') {
+    $build['#cache']['contexts'][] = 'url.path';
+  }
+
+}
+
