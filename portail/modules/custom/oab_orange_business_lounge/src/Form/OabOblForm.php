@@ -17,7 +17,7 @@ class OabOblForm extends ConfigFormBase {
     const IMAGE_LOCATION = "public://obl_zone_images";
 
     public static function getConfigName() {
-        return 'oab.orange_business_lounge_settings';
+        return 'orange_business_lounge.settings';
     }
 
     /**
@@ -94,7 +94,7 @@ class OabOblForm extends ConfigFormBase {
             }
         } else {
             drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
-            
+
             foreach ($images as $image) {
                 $form['images']['image_block_' . $image] = array(
                     '#type' => 'managed_file',
