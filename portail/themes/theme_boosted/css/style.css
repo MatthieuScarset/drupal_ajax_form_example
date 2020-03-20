@@ -2912,7 +2912,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
   font-size: 8rem;
 }
 
-.path-node .main-container {
+.path-node:not(.page-node-type-homepage) .main-container {
   background-color: white;
 }
 
