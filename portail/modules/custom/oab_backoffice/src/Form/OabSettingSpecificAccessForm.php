@@ -28,7 +28,7 @@ class OabSettingSpecificAccessForm extends ConfigFormBase {
      */
     protected function getEditableConfigNames() {
         return [
-            'oab.specific_access',
+            'oab_backoffice.specific_access',
         ];
     }
 
@@ -36,7 +36,7 @@ class OabSettingSpecificAccessForm extends ConfigFormBase {
      * {@inheritdoc}
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $config = $this->config('oab.specific_access');
+        $config = $this->config('oab_backoffice.specific_access');
 
         $form[$this->configKey] = array(
             '#type' => 'textfield',
@@ -54,7 +54,7 @@ class OabSettingSpecificAccessForm extends ConfigFormBase {
 
         $values = $this->getValues($form_state->getValue($this->configKey));
         // Retrieve the configuration
-        $this->config('oab.specific_access')
+        $this->config('oab_backoffice.specific_access')
             ->set($this->configKey, $values)
             ->save();
 
@@ -71,7 +71,13 @@ class OabSettingSpecificAccessForm extends ConfigFormBase {
     public function access(AccountInterface $account) {
         $uid = $account->id();
 
-        $authorized_ids = $this->config('oab.specific_access')->get($this->configKey);
+        $authorized_ids = $this->config('oab_backoffice.specific_access')->get($this->configKey);
+
+
+        if ($authorized_ids === null) {
+          $authorized_ids = [];
+        }
+
 
         ## On autorise l'accès que pour l'admin et et les id autorisés
         if ($uid == 1 || in_array($uid, $authorized_ids)) {
