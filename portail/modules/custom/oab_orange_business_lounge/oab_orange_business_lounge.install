@@ -19,7 +19,7 @@ function oab_orange_business_lounge_update_dependencies() {
  */
 function oab_orange_business_lounge_update_8001(&$sandbox) {
   $old_name = "oab.orange_business_lounge_settings";
-  $new_name = "orange_business_lounge_settings";
+  $new_name = "oab_orange_business_lounge.settings";
 
   $old_config = \Drupal::configFactory()->getEditable($old_name);
   $old_config_data = $old_config->get();
