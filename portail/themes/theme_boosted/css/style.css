@@ -3402,16 +3402,6 @@ hr.reseau-mobile-accords-roaming {
   }
 }
 
-
-.row.display-flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: auto;
-}
-.row.display-flex > * {
-  margin: 0 0 1em 0;
-}
 .block-card-black a {
   background-color: black;
   color: white;
