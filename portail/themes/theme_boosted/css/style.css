@@ -685,6 +685,13 @@ a.link-subhomes:hover .encart-image.subhome-image {
     line-height: 2rem;
 }
 
+
+.homepage-content {
+  margin-top: -20px;
+  background-color: rgba(221,221,221, 0.9);
+}
+
+
 .homepage-banner{
     background-color: white;
     padding: 20px 0;
