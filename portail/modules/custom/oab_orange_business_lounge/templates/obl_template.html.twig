@@ -2,6 +2,8 @@
   <button class="btn_print_accords_obl btn btn-primary"> Imprimer au format pdf </button>
 </div>
 
+{#for print#}
+<span class="obl_accords_techno_selected">{{ 'Couverture ' ~ techno_for_print }}</span>
 
 <br/>
 
@@ -34,22 +36,22 @@
 
       <div class="row div_btn_obl_accords_perv_next">
             {% if page > 1 %}
-              <a class="btn btn-default btn_previous_obl_accords" href="{{ url('oab_obl_settings', {'page': page-1, 'techno': techno}) }}">Previous</a>
+              <a class="btn btn-default btn_previous_obl_accords" href="{{ url('oab_obl_settings', {'page': page-1, 'techno': techno}) }}">{{ 'Previous page'|t }}</a>
             {% else %}
-              <a class="btn btn-default btn_previous_obl_accords disabled">Previous</a>
+              <a class="btn btn-default btn_previous_obl_accords disabled">{{ 'Previous page'|t }}</a>
             {% endif %}
 
-            {% if (page >= max_limit_page or detail_accords is empty) %}
-              <a class="btn btn-default btn_next_obl_accords disabled">Next</a>
-            {% else %}
-              <a class="btn btn-default btn_next_obl_accords" href="{{ url('oab_obl_settings', {'page': page+1, 'techno': techno}) }}">Next</a>
-            {% endif %}
-      </div>
-
+      {% if (page >= max_limit_page or detail_accords is empty) %}
+        <a class="btn btn-default btn_next_obl_accords disabled">{{ 'Next page'|t }}</a>
+      {% else %}
+        <a class="btn btn-default btn_next_obl_accords" href="{{ url('oab_obl_settings', {'page': page+1, 'techno': techno}) }}">{{ 'Next page'|t }}</a>
+      {% endif %}
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-3 searchaccordspricebycountryobl">
-      {{ drupal_entity('block','searchaccordspricebycountryobl', check_access=false) }}
-    </div>
+  </div>
+
+  <div class="col-xs col-md-3 searchaccordspricebycountryobl">
+    {{ drupal_entity('block','searchaccordspricebycountryobl', check_access=false) }}
+  </div>
 
 </div>

@@ -1,5 +1,6 @@
 <?php
 namespace Drupal\oab_orange_business_lounge\Controller;
+use Drupal\oab_orange_business_lounge\Form\SearchCountryForm;
 use \Drupal\Core\Controller\ControllerBase;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
@@ -54,13 +55,15 @@ class OblController extends OblControllerBase {
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
                     'techno' => $actual_techno,
+                    'techno_name' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id']),
                     'ajax_token' => $this->generateToken()
                 ]
             ],
             '#detail_accords' => $prepared_data,
             '#page' => $page,
             '#techno' => $actual_techno['id'],
-            '#max_limit_page' => $max_limit_page
+            '#max_limit_page' => $max_limit_page,
+            '#techno_for_print' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id'])
         );
     }
 
@@ -78,6 +81,23 @@ class OblController extends OblControllerBase {
     public function sortById($a, $b) {
       return $a["id"] > $b["id"];
     }
+
+  /**
+   * @param $technologies
+   * @param $actual_techno
+   * @return mixed
+   */
+  private function getNameTechnoByActualTech($technologies, $actual_techno) {
+    $ret = '';
+    foreach($technologies as $key => $technology) {
+      if ( $technology['id'] == $actual_techno ) {
+        $ret = $technology['name'];
+      }
+    }
+
+    return $ret;
+  }
+
 
 
 }
