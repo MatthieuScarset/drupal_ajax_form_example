@@ -93,7 +93,7 @@ view_mode ? view_mode|clean_class,
     <div class="content_info">
       <span class="date">{{ createdDate }}</span>
       {% if content.theme_term %}
-        <a href="{{ path('view.subhomes.page_magazine') }}?thematic={{ content.theme_term["#markup"] }}"> {{ content.theme_term["#markup"] }} </a>
+        <a href="{{ path('view.business_insight.business_insight_page') }}?vb_thematic={{ content.theme_term["id"] }}"> {{ content.theme_term["#markup"] }} </a>
       {% endif %}
     </div>
 
