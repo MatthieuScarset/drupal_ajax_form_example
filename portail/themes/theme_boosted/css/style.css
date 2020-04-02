@@ -2932,7 +2932,6 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
     background-color: #FFFFFF;
     width:100%;
     font-weight: bold;
-    padding: 0 10px;
 }
 
 .view-business-insight .view-content .views-row .tile_Report{
@@ -2952,7 +2951,6 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .view-business-insight .view-content .views-row .tile .encart-image img{
     width: 100%;
     height: auto;
-    padding-bottom: 2rem;
 }
 
 .view-business-insight .view-content .views-row .tile_Dossiers, .view-business-insight .view-content .views-row .tile.tile_Dossiers img {
