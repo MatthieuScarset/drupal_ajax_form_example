@@ -6,54 +6,60 @@
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-  if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false
-    OR strpos($form['#id'], 'views-exposed-form-business-insight-business-insight-page') !== false) {
-    foreach ($form AS $key => $value) {
-      if (isset($value['#type'])
-        && $value['#type'] == "textfield") {
+    if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
+      foreach ($form AS $key => $value) {
+        if (isset($value['#type'])
+          && $value['#type'] == "textfield") {
+          $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
+          if (is_object($vocabulary)) {
 
-        $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load('thematic');
-
-        if (is_object($vocabulary)) {
-          if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
             $properties = [
               "vid" => $key
             ];
-          }
-          else if (strpos($form['#id'], 'views-exposed-form-business-insight-business-insight-page') !== false) {
-            $properties = [
-              "vid" => 'thematic',
-              "langcode" => \Drupal::languageManager()->getCurrentLanguage()->getId()
-            ];
-          }
 
-          if ($key !== 'analyst') {
-            $properties['langcode'] = $current_language;
-          }
-
-          $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-          if (is_array($terms)
-            && !empty($terms)) {
-            $options = array('All' => t($vocabulary->get('name')));
-            foreach ($terms AS $term) {
-              $term_name = $term->getName();
-              $options[$term_name] = $term_name;
+            if ($key !== 'analyst') {
+              $properties['langcode'] = $current_language;
             }
-            $form[$key]['#type'] = "select";
-            $form[$key]['#options'] = $options;
-            $form[$key]['#default_value'] = 'All';
-            $form[$key]['#validated'] = TRUE;
-            $form[$key]['#size'] = null;
+
+            $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+            if (is_array($terms)
+              && !empty($terms)) {
+              $options = array('All' => t($vocabulary->get('name')));
+              foreach ($terms AS $term) {
+                $term_name = $term->getName();
+                $options[$term_name] = $term_name;
+              }
+              $form[$key]['#type'] = "select";
+              $form[$key]['#options'] = $options;
+              $form[$key]['#default_value'] = 'All';
+              $form[$key]['#validated'] = TRUE;
+              $form[$key]['#size'] = null;
+
+            } else {
+              unset($form[$key]);
+            }
           }
-          else {
-            unset($form[$key]);
+
+          /**
+           * je cache le bouton "Apply" s'il n'y a plus de filtre
+           */
+          $has_filters = false;
+          foreach ($form["#info"] as $filter_name => $filter_infos) {
+            if (isset($form[$filter_infos['value']])) {
+              $has_filters = true;
+            }
+          }
+
+          if (!$has_filters) {
+            $form['actions']['submit']['#attributes']['class'][] = 'hidden';
           }
         }
       }
     }
-  }
 
-    // Pour tous les contenus avec le filtre thématic/ field_insight
+
+
+  // Pour tous les contenus avec le filtre thématic/ field_insight
     if (isset($form['field_insight'])) {
         $form['field_insight']['#options'] = clean_exposed_filters_by_language(
             $form['field_insight']['#options'],

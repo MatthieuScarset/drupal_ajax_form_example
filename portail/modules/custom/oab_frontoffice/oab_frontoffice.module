@@ -22,6 +22,9 @@ module_load_include('inc', 'oab_frontoffice', 'includes/office_map');
 // Mise dans un fichier a part des filtres des subhomes
 module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_form');
 
+// Mise dans un fichier a part des filtres de la view business-insight
+module_load_include('inc', 'oab_frontoffice', 'includes/vb_views_exposed_form');
+
 function oab_frontoffice_preprocess_menu(&$variables) {
     if (isset($variables['items'])
         && is_array($variables['items'])) {
@@ -305,6 +308,9 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
 
     // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
     subhomes_views_exposed_form($form);
+
+    // Gestion des formulaires spécifiques à la vb via une fonction pour ne pas surcharger ici
+    vb_views_exposed_form($form);
 
 
     // view Page thématique
