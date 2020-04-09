@@ -3,12 +3,8 @@
 
     var mkt_to_domain = drupalSettings.marketo.mkt_to_domain;
     var mkt_to_munchkin_id = drupalSettings.marketo.mkt_to_munchkin_id;
-    var mkt_to_form_id = drupalSettings.marketo.mkt_to_form_id;
+    var mkt_to_form_id = parseInt(drupalSettings.marketo.mkt_to_form_id);
     var mkt_custom_follow_up_url = drupalSettings.marketo.mkt_custom_follow_up_url;
-    var mkt_form_follow_up_message = drupalSettings.marketo.mkt_form_follow_up_message;
-    var mkt_version = drupalSettings.marketo.mkt_version;
-    var mkt_sous_domaine = drupalSettings.marketo.mkt_sous_domaine;
-    var mkt_univers_affichage = drupalSettings.marketo.mkt_univers_affichage;
     var mkt_theme = drupalSettings.marketo.mkt_theme;
     var mktoPdfRubrique = drupalSettings.marketo.mkto_pdf_rubrique;
     var mktoPdftype = drupalSettings.marketo.mkto_pdf_type;

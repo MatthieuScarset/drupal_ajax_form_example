@@ -693,8 +693,8 @@ function oab_backoffice_page_attachments(array &$attachments) {
   $attachments['#attached']['drupalSettings']['marketo']['mkt_to_munchkin_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_munchkin_id');
   $attachments['#attached']['drupalSettings']['marketo']['mkt_to_form_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_form_id');
   $attachments['#attached']['drupalSettings']['marketo']['mkt_custom_follow_up_url'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_custom_follow_up_url');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_form_follow_up_message'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_form_follow_up_message');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_version'] = \Drupal::config('ooab_backoffice.pardot')->get('mkt_version');
+  //$attachments['#attached']['drupalSettings']['marketo']['mkt_form_follow_up_message'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_form_follow_up_message');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_version'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_version');
   $attachments['#attached']['drupalSettings']['marketo']['mkt_sous_domaine'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_sous_domaine');
   $attachments['#attached']['drupalSettings']['marketo']['mkt_univers_affichage'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_univers_affichage');
 

@@ -1,7 +1,11 @@
 (function ($, Drupal, Bootstrap) {
   $(document).ready(function () {
-    var sous_domaine = drupalSettings.tealium.sous_domaine;
-    var univers_affichage = drupalSettings.tealium.univers_affichage;
+    var mkt_version = drupalSettings.marketo.mkt_version;
+    var mkt_sous_domaine = "market automation";
+    var mkt_univers_affichage = drupalSettings.marketo.mkt_univers_affichage;
+    var mkt_pdf_name = $('.merkato_mkt_pdf_name').data('name');
+    //var sous_domaine = drupalSettings.tealium.sous_domaine;
+    //var univers_affichage = drupalSettings.tealium.univers_affichage;
     var sous_univers = drupalSettings.tealium.sous_univers;
     var domaine_marketing = drupalSettings.tealium.domaine_marketing;
     var code_univers = drupalSettings.tealium.code_univers;
@@ -23,8 +27,12 @@
     }
 
     var utag_data={
-      "sous_domaine" : sous_domaine,
-      "univers_affichage" : univers_affichage,
+      "version": mkt_version,
+      "sous_domaine": mkt_sous_domaine,
+      "univers_affichage": mkt_univers_affichage,
+      "id_article": mkt_pdf_name,
+      //"sous_domaine" : sous_domaine,
+      //"univers_affichage" : univers_affichage,
       "sous_univers" : sous_univers,
       "domaine_marketing" : domaine_marketing ,
       "code_univers" : code_univers,
