@@ -36,6 +36,8 @@ module_load_include('inc', 'oab_backoffice', 'includes/gdpr');
 // Fichier pour le hook_form_alter qui commencait à prendre trop de place
 module_load_include('inc', 'oab_backoffice', 'includes/form_alter');
 
+// Mise dans un fichier a part les variables dynamique pour la construction du formulaire Marketo
+module_load_include('inc', 'oab_backoffice', 'includes/marketo');
 
 
 function oab_backoffice_mail($key, &$message, $params) {
@@ -412,7 +414,6 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
    * Ajout du type de contenu et du NID
    */
   if ($view->id() == 'rebond_entity_reference') {
-
     foreach ($view->result as $i => $result) {
       #On recupère les données nécessaires
       $node_type = $result->_entity->get('type')->entity->label();
@@ -681,4 +682,39 @@ function oab_backoffice_theme($existing, $type, $theme, $path) {
             'template'  => 'OabExportFileList/oab-export-file-list--ending-page'
         ],
     ];
+}
+
+/**
+ * Implements hook_() oab_backoffice_page_attachments for Marketo.
+ */
+function oab_backoffice_page_attachments(array &$attachments) {
+
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_domain'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_domain');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_munchkin_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_munchkin_id');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_form_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_form_id');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_custom_follow_up_url'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_custom_follow_up_url');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_form_follow_up_message'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_form_follow_up_message');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_version'] = \Drupal::config('ooab_backoffice.pardot')->get('mkt_version');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_sous_domaine'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_sous_domaine');
+  $attachments['#attached']['drupalSettings']['marketo']['mkt_univers_affichage'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_univers_affichage');
+
+  // Gestion des variable spécifiques au formulaire Marketo via des fonctions pour ne pas surcharger ici
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (is_object($node) != false && $node->bundle() == 'document') {
+    $attachments['#attached']['drupalSettings']['marketo']['mkt_theme'] = marketo_get_taxo_term_document_thematic($node);
+    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_rubrique'] = marketo_get_taxo_term_subhome($node);
+    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_type'] = marketo_get_taxo_term_document_type($node);
+    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_solution'] = marketo_get_taxo_term_solutions($node);
+    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_job_roles'] = marketo_get_taxo_term_job_profile($node);
+    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_industrie'] = marketo_get_taxo_term_industry($node);
+  }
+
+  /*if (\Drupal::currentUser()->isAnonymous()) {
+    $attachments['#attached']['drupalSettings']['marketo']['profil_compte_navigation'] = 'Utilisateur';
+  } else {
+    $attachments['#attached']['drupalSettings']['marketo']['profil_compte_navigation'] = 'Gestionnaire';
+  }*/
+
+  $attachments['#attached']['drupalSettings']['marketo']['type_langue'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
 }
