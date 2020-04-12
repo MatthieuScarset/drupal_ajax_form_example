@@ -1,9 +1,5 @@
 (function ($, Drupal, Bootstrap) {
   $(document).ready(function () {
-    var mkt_version = drupalSettings.marketo.mkt_version;
-    var mkt_sous_domaine = "market automation";
-    var mkt_univers_affichage = drupalSettings.marketo.mkt_univers_affichage;
-    var mkt_pdf_name = $('.merkato_mkt_pdf_name').data('name');
     //var sous_domaine = drupalSettings.tealium.sous_domaine;
     //var univers_affichage = drupalSettings.tealium.univers_affichage;
     var sous_univers = drupalSettings.tealium.sous_univers;
@@ -27,10 +23,6 @@
     }
 
     var utag_data={
-      "version": mkt_version,
-      "sous_domaine": mkt_sous_domaine,
-      "univers_affichage": mkt_univers_affichage,
-      "id_article": mkt_pdf_name,
       //"sous_domaine" : sous_domaine,
       //"univers_affichage" : univers_affichage,
       "sous_univers" : sous_univers,
@@ -45,6 +37,20 @@
       "url_appelee" : url_appelee,
       "url_referente" : url_referente
     };
+
+    /**
+     *  for construction Webform Marketo
+     **/
+    var tab_data_marketo = drupalSettings.data_for_tealium;
+
+    if (tab_data_marketo != null) {
+      utag_data.id_article = $('.merkato_mkt_pdf_name').data('name');
+      utag_data = $.extend(utag_data, tab_data_marketo);
+    }
+    /**
+    * End construction Webform Marketo
+    **/
+
     if (typeof custom_variable_key !== 'undefined' && typeof custom_variable_value !== 'undefined'){
       utag_data[custom_variable_key] = custom_variable_value;
     }

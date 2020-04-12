@@ -684,37 +684,56 @@ function oab_backoffice_theme($existing, $type, $theme, $path) {
     ];
 }
 
+
 /**
  * Implements hook_() oab_backoffice_page_attachments for Marketo.
+ * @param array $attachments datas nécessaires pour la construction du webform marketo
  */
 function oab_backoffice_page_attachments(array &$attachments) {
 
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_domain'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_domain');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_munchkin_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_munchkin_id');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_to_form_id'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_to_form_id');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_custom_follow_up_url'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_custom_follow_up_url');
-  //$attachments['#attached']['drupalSettings']['marketo']['mkt_form_follow_up_message'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_form_follow_up_message');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_version'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_version');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_sous_domaine'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_sous_domaine');
-  $attachments['#attached']['drupalSettings']['marketo']['mkt_univers_affichage'] = \Drupal::config('oab_backoffice.pardot')->get('mkt_univers_affichage');
-
-  // Gestion des variable spécifiques au formulaire Marketo via des fonctions pour ne pas surcharger ici
   $node = \Drupal::routeMatch()->getParameter('node');
+  $marketo_conf = \Drupal::config('oab_backoffice.pardot');
+
+  /*
+  $nid = $node->id();
+  $options = ['absolute' => TRUE];
+  $url_object = \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $nid], $options);
+  kint($url_object->toString());
+  $my_path = file_create_url("public://");
+  kint($my_path);
+  die();
+  */
+
   if (is_object($node) != false && $node->bundle() == 'document') {
-    $attachments['#attached']['drupalSettings']['marketo']['mkt_theme'] = marketo_get_taxo_term_document_thematic($node);
-    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_rubrique'] = marketo_get_taxo_term_subhome($node);
-    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_type'] = marketo_get_taxo_term_document_type($node);
-    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_solution'] = marketo_get_taxo_term_solutions($node);
-    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_job_roles'] = marketo_get_taxo_term_job_profile($node);
-    $attachments['#attached']['drupalSettings']['marketo']['mkto_pdf_industrie'] = marketo_get_taxo_term_industry($node);
+
+    $attachments['#attached']['drupalSettings']['data_for_construction_webform_marketo'] = [
+      'mktoDomain' => $marketo_conf->get('mkt_to_domain'),
+      'mktoMunchkinID' => $marketo_conf->get('mkt_to_munchkin_id'),
+      'mktoFormID' => (int)$marketo_conf->get('mkt_to_form_id'),
+      'customFollowUpUrl' => $marketo_conf->get('mkt_custom_follow_up_url'),
+      'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$marketo_conf->get('mkt_to_form_id'),
+      'formName' => "My Test Embed Form",
+      //'mktPdfName' => isset($media) ? $media->label() : '',
+      //'mktoPdfLink' => isset($media) ? $file->url('canonical', ['absolute' => true]) : null,
+      'mktPdfName' => null,
+      'mktoPdfLink' => null,
+      'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
+      'mktoPdfRubrique' => _oab_get_labels_from_term($node->get('field_subhome')),
+      'mktoPdftype' => _oab_get_labels_from_term($node->get('field_document_type')),
+      'mktoPdfSolution' => _oab_get_labels_from_term($node->get('field_solution')),
+      'mktoPdfJobroles' => _oab_get_labels_from_term($node->get('field_job_profile')),
+      'mktoPdfSegment' => null,
+      'mktoPdfCustomerjourney' => null,
+      'mktoPdfIndustrie' => _oab_get_labels_from_term($node->get('field_industry'))
+    ];
+
+    $attachments['#attached']['drupalSettings']['data_for_tealium'] = [
+      'version' => $marketo_conf->get('mkt_version'),
+      'sous_domaine' => $marketo_conf->get('mkt_sous_domaine'),
+      'univers_affichage' => $marketo_conf->get('mkt_univers_affichage'),
+      //'id_article' => isset($media) ? $media->label() : null,
+    ];
+
   }
-
-  /*if (\Drupal::currentUser()->isAnonymous()) {
-    $attachments['#attached']['drupalSettings']['marketo']['profil_compte_navigation'] = 'Utilisateur';
-  } else {
-    $attachments['#attached']['drupalSettings']['marketo']['profil_compte_navigation'] = 'Gestionnaire';
-  }*/
-
-  $attachments['#attached']['drupalSettings']['marketo']['type_langue'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
 }
