@@ -142,7 +142,10 @@ view_mode ? view_mode|clean_class,
 
 
       {# récupérer les var #}
-      {% set marketo_mkt_to_form_id = d_config('oab_backoffice.pardot').get('mkt_to_form_id') %}
+      {% set mkto_form_follow_up_message = d_config('oab_backoffice.pardot').get('mkt_form_follow_up_message') %}
+      {% if mkto_form_follow_up_message is empty %}
+        {% set mkto_form_follow_up_message = '' %}
+      {% endif %}
 
       {% for key, file in content.field_file  %}
         {% if key == "#items" %}
@@ -157,11 +160,11 @@ view_mode ? view_mode|clean_class,
 
       {% set filename_without_extension = filename|split('.')|first %}
 
-      <form id="mktoForm_{{ marketo_mkt_to_form_id }}"></form>
-        <div id="FormFollowUpMessage_{{ marketo_mkt_to_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
+      <form id="mktoForm_1293"></form>
+        <div id="FormFollowUpMessage_1293" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
           <div class="custum-fum-div">
             <div class="custom-fum">
-              <p>Merci</p>
+              <p>{{ mkto_form_follow_up_message }}</p>
             </div>
             <a name="pdf-link" href="{{ base_url }}/sites/default/files/{{ filename }}">Télécharger le document</a>
           </div>

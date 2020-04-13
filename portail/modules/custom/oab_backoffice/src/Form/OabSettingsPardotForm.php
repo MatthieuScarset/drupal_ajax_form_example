@@ -62,11 +62,11 @@ class OabSettingsPardotForm extends ConfigFormBase {
       '#size'=> 80,
     );
 
-    $form['Marketo']['mkt_to_domain'] = array(
+    $form['Marketo']['mkt_form_name'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('mktToDomain'),
-      '#default_value' => $config->get('mkt_to_domain'),
-      '#description' => 'API domain : ' . $config->get('mkt_to_domain'),
+      '#title' => $this->t('formName'),
+      '#default_value' => $config->get('mkt_form_name'),
+      '#description' => 'API domain : ' . $config->get('mkt_form_name'),
       '#size'=> 80,
     );
 
@@ -141,6 +141,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
     $this->config('oab_backoffice.pardot')
       /* for Marketo */
       ->set('mkt_to_domain', $form_state->getValue('mkt_to_domain'))
+      ->set('mkt_form_name', $form_state->getValue('mkt_form_name'))
       ->set('mkt_to_munchkin_id', $form_state->getValue('mkt_to_munchkin_id'))
       ->set('mkt_to_form_id', $form_state->getValue('mkt_to_form_id'))
       ->set('mkt_custom_follow_up_url', $form_state->getValue('mkt_custom_follow_up_url'))
