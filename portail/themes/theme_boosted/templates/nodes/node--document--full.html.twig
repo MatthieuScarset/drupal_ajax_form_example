@@ -142,6 +142,8 @@ view_mode ? view_mode|clean_class,
 
 
       {# récupérer les var #}
+      {% set mkt_to_form_id = d_config('oab_backoffice.pardot').get('mkt_to_form_id') %}
+
       {% set mkto_form_follow_up_message = d_config('oab_backoffice.pardot').get('mkt_form_follow_up_message') %}
       {% if mkto_form_follow_up_message is empty %}
         {% set mkto_form_follow_up_message = '' %}
@@ -160,8 +162,8 @@ view_mode ? view_mode|clean_class,
 
       {% set filename_without_extension = filename|split('.')|first %}
 
-      <form id="mktoForm_1293"></form>
-        <div id="FormFollowUpMessage_1293" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
+      <form id="mktoForm_{{ mkt_to_form_id }}"></form>
+      <div id="FormFollowUpMessage_{{ mkt_to_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
           <div class="custum-fum-div">
             <div class="custom-fum">
               <p>{{ mkto_form_follow_up_message }}</p>

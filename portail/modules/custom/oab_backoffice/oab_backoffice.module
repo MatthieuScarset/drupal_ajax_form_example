@@ -712,7 +712,7 @@ function oab_backoffice_page_attachments(array &$attachments) {
       'mktoFormID' => (int)$marketo_conf->get('mkt_to_form_id'),
       'customFollowUpUrl' => $marketo_conf->get('mkt_custom_follow_up_url'),
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$marketo_conf->get('mkt_to_form_id'),
-      'formName' => "My Test Embed Form",
+      'formName' => $marketo_conf->get('mkt_form_name'),
       //'mktPdfName' => isset($media) ? $media->label() : '',
       //'mktoPdfLink' => isset($media) ? $file->url('canonical', ['absolute' => true]) : null,
       'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
