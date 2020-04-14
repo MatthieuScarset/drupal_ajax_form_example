@@ -43,7 +43,7 @@
      **/
     var tab_data_marketo = drupalSettings.data_for_tealium;
 
-    if (tab_data_marketo != null) {
+    if (tab_data_marketo != null && type_page == 'Document' && type_langue == 'fr') {
       utag_data.id_article = $('.merkato_mkt_pdf_name').data('name');
       utag_data = $.extend(utag_data, tab_data_marketo);
     }

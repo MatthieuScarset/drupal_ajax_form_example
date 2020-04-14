@@ -715,8 +715,6 @@ function oab_backoffice_page_attachments(array &$attachments) {
       'formName' => "My Test Embed Form",
       //'mktPdfName' => isset($media) ? $media->label() : '',
       //'mktoPdfLink' => isset($media) ? $file->url('canonical', ['absolute' => true]) : null,
-      'mktPdfName' => null,
-      'mktoPdfLink' => null,
       'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
       'mktoPdfRubrique' => _oab_get_labels_from_term($node->get('field_subhome')),
       'mktoPdftype' => _oab_get_labels_from_term($node->get('field_document_type')),
