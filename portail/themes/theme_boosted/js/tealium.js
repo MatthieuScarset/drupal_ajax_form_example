@@ -1,7 +1,7 @@
 (function ($, Drupal, Bootstrap) {
   $(document).ready(function () {
-    //var sous_domaine = drupalSettings.tealium.sous_domaine;
-    //var univers_affichage = drupalSettings.tealium.univers_affichage;
+    var sous_domaine = drupalSettings.tealium.sous_domaine;
+    var univers_affichage = drupalSettings.tealium.univers_affichage;
     var sous_univers = drupalSettings.tealium.sous_univers;
     var domaine_marketing = drupalSettings.tealium.domaine_marketing;
     var code_univers = drupalSettings.tealium.code_univers;
@@ -23,8 +23,8 @@
     }
 
     var utag_data={
-      //"sous_domaine" : sous_domaine,
-      //"univers_affichage" : univers_affichage,
+      "sous_domaine" : sous_domaine,
+      "univers_affichage" : univers_affichage,
       "sous_univers" : sous_univers,
       "domaine_marketing" : domaine_marketing ,
       "code_univers" : code_univers,
