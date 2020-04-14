@@ -92,10 +92,9 @@ class OabSettingsPardotForm extends ConfigFormBase {
     );
 
     $form['Marketo']['mkt_form_follow_up_message'] = array(
-      '#type' => 'textarea',
+      '#type' => 'webform_html_editor',
       '#title' => $this->t('formFollowUpMessage'),
       '#default_value' => $config->get('mkt_form_follow_up_message'),
-      '#size'=> 350,
     );
 
     echo'<hr>';
