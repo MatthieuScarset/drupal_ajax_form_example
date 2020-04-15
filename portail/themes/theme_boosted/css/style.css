@@ -3433,7 +3433,7 @@ hr.reseau-mobile-accords-roaming {
 
   form.mktoForm.mktoHasWidth .mktoLabel.mktoHasWidth {
     font-size: 1.6rem;
-    display: table-footer-group; !important;
+    display: table-footer-group;
   }
 
   form.mktoForm.mktoHasWidth .mktoAsterix {
@@ -3461,7 +3461,6 @@ hr.reseau-mobile-accords-roaming {
   }
 
   form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
-    width: 100% !important;
     font-size: 1.5rem;
     margin-bottom: 2rem;
     border: 2px solid #ccc;
@@ -3481,4 +3480,24 @@ hr.reseau-mobile-accords-roaming {
     order: 1;
   }
 
+}
+
+/*for mobile*/
+@media (max-width: 767px) {
+  form.mktoForm.mktoHasWidth.mktoLayoutLeft .mktoHtmlText.mktoHasWidth {
+    width: 100%;
+  }
+  form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
+    width: 100% !important;
+  }
+}
+
+/*for Navigator*/
+@media (min-width: 767px) {
+  form.mktoForm.mktoHasWidth.mktoLayoutLeft .mktoHtmlText.mktoHasWidth {
+    width: 70% !important;
+  }
+  form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
+    width: 70% !important;
+  }
 }
