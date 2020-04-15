@@ -3481,7 +3481,7 @@ hr.reseau-mobile-accords-roaming {
 /*for mobile*/
 @media (max-width: 767px) {
   form.mktoForm.mktoHasWidth.mktoLayoutLeft .mktoHtmlText.mktoHasWidth {
-    width: 100%;
+    width: 100% !important;
   }
   form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
     width: 100% !important;
