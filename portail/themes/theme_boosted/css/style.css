@@ -3487,7 +3487,7 @@ hr.reseau-mobile-accords-roaming {
     width: 100% !important;
   }
   form.mktoForm.mktoHasWidth .mktoLogicalField.mktoCheckboxList.mktoHasWidth {
-    width: auto;
+    width: auto !important;
   }
 }
 
