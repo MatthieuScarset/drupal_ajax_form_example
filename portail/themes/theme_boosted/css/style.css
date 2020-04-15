@@ -3467,10 +3467,6 @@ hr.reseau-mobile-accords-roaming {
     padding: 0.8rem 1rem;
   }
 
-  form.mktoForm.mktoHasWidth .mktoLogicalField.mktoCheckboxList.mktoHasWidth {
-    width: auto !important;
-  }
-
   form.mktoForm.mktoHasWidth .mktoFieldDescriptor.mktoFormCol.emptyLabel .mktoFieldWrap {
     display: flex;
     flex-direction: row;
@@ -3490,6 +3486,9 @@ hr.reseau-mobile-accords-roaming {
   form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
     width: 100% !important;
   }
+  form.mktoForm.mktoHasWidth .mktoLogicalField.mktoCheckboxList.mktoHasWidth {
+    width: auto !important;
+  }
 }
 
 /*for Navigator*/
@@ -3498,6 +3497,9 @@ hr.reseau-mobile-accords-roaming {
     width: 70% !important;
   }
   form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
+    width: 70% !important;
+  }
+  form.mktoForm.mktoHasWidth .mktoLogicalField.mktoCheckboxList.mktoHasWidth {
     width: 70% !important;
   }
 }
