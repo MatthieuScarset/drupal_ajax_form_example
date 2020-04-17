@@ -10,50 +10,23 @@ function subhomes_views_exposed_form(&$form) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($key);
-          if (is_object($vocabulary)) {
-
-            $properties = [
-              "vid" => $key
-            ];
-
-            if ($key !== 'analyst') {
-              $properties['langcode'] = $current_language;
-            }
-
-            $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-            if (is_array($terms)
-              && !empty($terms)) {
-              $options = array('All' => t($vocabulary->get('name')));
-              foreach ($terms AS $term) {
-                $term_name = $term->getName();
-                $options[$term_name] = $term_name;
-              }
-              $form[$key]['#type'] = "select";
-              $form[$key]['#options'] = $options;
-              $form[$key]['#default_value'] = 'All';
-              $form[$key]['#validated'] = TRUE;
-              $form[$key]['#size'] = null;
-
-            } else {
-              unset($form[$key]);
-            }
-          }
-
-          /**
-           * je cache le bouton "Apply" s'il n'y a plus de filtre
-           */
-          $has_filters = false;
-          foreach ($form["#info"] as $filter_name => $filter_infos) {
-            if (isset($form[$filter_infos['value']])) {
-              $has_filters = true;
-            }
-          }
-
-          if (!$has_filters) {
-            $form['actions']['submit']['#attributes']['class'][] = 'hidden';
-          }
+          $default_langocde = $key !== 'analayst' ? true : false;
+          $form[$key] = change_textfield_to_select($key, $key !== 'analayst');
         }
+      }
+
+      /**
+       * je cache le bouton "Apply" s'il n'y a plus de filtre
+       */
+      $has_filters = false;
+      foreach ($form["#info"] as $filter_name => $filter_infos) {
+        if (isset($form[$filter_infos['value']])) {
+          $has_filters = true;
+        }
+      }
+
+      if (!$has_filters) {
+        $form['actions']['submit']['#attributes']['class'][] = 'hidden';
       }
     }
 
