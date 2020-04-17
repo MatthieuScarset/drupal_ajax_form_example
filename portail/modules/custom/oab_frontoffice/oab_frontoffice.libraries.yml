@@ -1,0 +1,4 @@
+marketo:
+  version: 8.x
+  js:
+    js/marketo.js: {}

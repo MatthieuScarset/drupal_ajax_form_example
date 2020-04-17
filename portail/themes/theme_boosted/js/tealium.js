@@ -37,6 +37,21 @@
       "url_appelee" : url_appelee,
       "url_referente" : url_referente
     };
+
+    /**
+     *  for construction Webform Marketo
+     **/
+    var tab_data_marketo = drupalSettings.data_for_tealium;
+
+    if (tab_data_marketo != null && type_page == 'Document' && type_langue == 'fr') {
+      utag_data.id_article = $('.merkato_mkt_pdf_name').data('name');
+      utag_data = $.extend(utag_data, tab_data_marketo);
+      utag_data.type_page =  "form-marketo";
+    }
+    /**
+    * End construction Webform Marketo
+    **/
+
     if (typeof custom_variable_key !== 'undefined' && typeof custom_variable_value !== 'undefined'){
       utag_data[custom_variable_key] = custom_variable_value;
     }

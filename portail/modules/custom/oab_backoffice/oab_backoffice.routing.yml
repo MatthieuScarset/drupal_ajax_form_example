@@ -6,13 +6,6 @@ oab.settings_subhomes:
   requirements:
     _permission: 'administer site configuration'
 
-oab.settings_pardot:
-  path: '/admin/structure/oab/settings/pardot'
-  defaults:
-    _form: '\Drupal\oab_backoffice\Form\OabSettingsPardotForm'
-    _title: 'Pardot settings'
-  requirements:
-    _permission: 'administer site configuration'
 
 oab_backoffice.general_settings:
   path: '/admin/structure/oab/settings/general'
@@ -69,3 +62,12 @@ oab_backoffice.download_file_list:
     _title: 'Export File list'
   requirements:
     _role: 'administrator+digital_admin'
+
+#config marketing automation
+oab.settings_pardot:
+  path: '/admin/structure/oab/settings/marketing-automation'
+  defaults:
+    _form: '\Drupal\oab_backoffice\Form\OabSettingsPardotForm'
+    _title: 'Marketing automation'
+  requirements:
+    _permission: 'administer site configuration'
