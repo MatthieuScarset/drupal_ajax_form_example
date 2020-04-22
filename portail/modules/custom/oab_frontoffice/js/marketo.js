@@ -5,7 +5,7 @@
 
     if (formParameters != null) {
       formParameters.mktoPdfName = $('.merkato_mkt_pdf_name').data('name');
-      formParameters.mktPdfLink = $('.merkato_mkt_pdf_url').data('url');
+      formParameters.mktoPdfLink = $('.merkato_mkt_pdf_url').data('url');
       formParameters.mktoFieldOrder = ["submitButton", "LegalInfos"]; //info Api Marketo
       instantiateMktoForm(formParameters.mktoFormID, formParameters);
     }
