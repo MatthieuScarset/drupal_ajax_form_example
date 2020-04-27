@@ -24,8 +24,8 @@
 {% for row in rows %}
     {# Ajout du flux twitter que si y pas le filtre sur les thématiques#}
     {% if
-        view.exposed_data.field_insight_target_id is defined
-        and view.exposed_data.field_insight_target_id == 'All'
+        view.exposed_data.vb_thematic is defined
+        and view.exposed_data.vb_thematic == 'All'
         and loop.index > 1
         and loop.index is divisible by(5) %}
         {% set current_item = current_item + 1 %}
