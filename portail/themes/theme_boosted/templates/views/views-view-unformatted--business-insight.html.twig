@@ -25,7 +25,8 @@
     {# Ajout du flux twitter que si y pas le filtre sur les thématiques#}
     {% if
         view.exposed_data.vb_thematic is defined
-        and view.exposed_data.vb_thematic == 'All'
+        and (view.exposed_data.vb_thematic == 'All'
+          or view.exposed_data.vb_thematic == '')
         and loop.index > 1
         and loop.index is divisible by(5) %}
         {% set current_item = current_item + 1 %}
