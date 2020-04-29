@@ -2771,11 +2771,6 @@ body.page-node-type-custom-page{
     font-size: 2rem;
 }
 
-.fieldset-field-insight-type .fieldset-wrapper {
-    display: inline-block;
-    float: right;
-}
-
 .fieldset-field-insight-type .btn {
     margin-right: 0;
     margin-left: 1.5rem;
@@ -2796,7 +2791,8 @@ body.page-node-type-custom-page{
 
 
 .fieldset-field-insight-type .btn.btn-primary {
-    color: #f16e00;;
+    color: #f16e00;
+    visibility: hidden;
 }
 
 .fieldset-field-insight-type .btn.btn-primary:active,
@@ -3012,6 +3008,21 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .page-business-insight section.left-column > .region {
     padding-right: 0;
     padding-left: 0;
+}
+
+/* header-menu vb*/
+div.btn-field-insight-type.new-btn-see-all-business-insight {
+  display: inline;
+  font-size: 1.6rem;
+  color: #F16E00;
+  background-color: transparent;
+  font-weight: bold;
+  margin-right: 20%;
+  cursor: pointer;
+}
+
+.business-insight-field-insight select {
+  float: right;
 }
 
 @media(max-width: 480px) {

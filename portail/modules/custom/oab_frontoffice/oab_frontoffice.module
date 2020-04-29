@@ -345,9 +345,20 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             $form['vb_thematic']['#options'], 'All thematics'
         );
 
-        $form['field_insight_type_target_id']['#options'] = clean_exposed_filters_by_language(
-            $form['field_insight_type_target_id']['#options'], 'See all'
-        );
+      /**
+       * reorder_element_header_menu_page_vb($form)
+       */
+      $menu_header_page_vb = clean_exposed_filters_by_language(
+        $form['field_insight_type_target_id']['#options'], 'See all'
+      );
+      if ( isset($menu_header_page_vb['All']) ) {
+        $v = $menu_header_page_vb['All'];
+        unset($menu_header_page_vb['All']);
+        $menu_header_page_vb['All'] = $v;
+        $form['field_insight_type_target_id']['#options'] = $menu_header_page_vb;
+      } else {
+        $form['field_insight_type_target_id']['#options'] = $menu_header_page_vb;
+      }
 
         if (isset($form['field_insight_type_target_id']['#type'])
             && $form['field_insight_type_target_id']['#type'] == "select") {

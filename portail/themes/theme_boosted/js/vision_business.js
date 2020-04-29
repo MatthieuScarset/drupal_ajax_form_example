@@ -70,6 +70,8 @@
         ajax_is_filter = true;
 
         $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
+
+        $("select[name='vb_thematic']").val('All').trigger('change');
     });
 
 
