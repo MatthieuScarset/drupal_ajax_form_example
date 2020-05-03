@@ -65,10 +65,12 @@
 
 
     $(document).on("click", "div.btn-field-insight-type", function() {
-        $("select[name='vb_thematic']").val('All').trigger('change');
 
         let input_id = $(this).attr('data-input');
-        $('input#' + input_id).prop( "checked", true );
+        if (input_id == null) {
+          $("select[name='vb_thematic']").val('All').trigger('change');
+        }
+      $('input#' + input_id).prop( "checked", true );
         ajax_is_filter = true;
 
         $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
