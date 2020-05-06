@@ -2791,8 +2791,7 @@ body.page-node-type-custom-page{
 
 
 .fieldset-field-insight-type .btn.btn-primary {
-   /* color: #f16e00;
-    visibility: hidden; */
+   color: #f16e00;
 }
 
 .fieldset-field-insight-type .btn.btn-primary:active,
@@ -3011,7 +3010,7 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 }
 
 /* header-menu vb*/
-div.btn-field-insight-type.new-btn-see-all-business-insight {
+div.new-btn-see-all-business-insight {
   display: inline;
   font-size: 1.6rem;
   /*color: #F16E00;*/
