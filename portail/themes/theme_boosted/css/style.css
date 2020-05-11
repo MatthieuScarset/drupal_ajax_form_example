@@ -3020,7 +3020,7 @@ div.new-btn-see-all-business-insight {
   cursor: pointer;
 }
 
-.btn.btn-primary.btn-field-insight-type[data-input=edit-field-insight-type-target-id-all] {
+.btn.btn-field-insight-type[data-taxo=All] {
   display: none;
 }
 
