@@ -67,10 +67,8 @@
     $(document).on("click", "div.btn-field-insight-type", function() {
 
         let input_id = $(this).attr('data-input');
-        if (input_id != null) {
-          $('div.new-btn-see-all-business-insight').removeClass('text-primary');
-        }
-      $('input#' + input_id).prop( "checked", true );
+
+        $('input#' + input_id).prop( "checked", true );
         ajax_is_filter = true;
 
         $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
@@ -110,14 +108,9 @@
           $('.view.view-business-insight').triggerHandler('RefreshView');
           delete view.settings.field_insight_type_target_id;
           delete view.settings.vb_thematic ;
-          //vg = createVgrid();
-          //vg.vgrefresh();
+          ajax_is_filter = true;
         }
-        //vg = createVgrid();
-        //vg.vgrefresh();
       });
-      vg = createVgrid();
-      vg.vgrefresh();
     });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

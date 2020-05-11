@@ -3020,6 +3020,10 @@ div.new-btn-see-all-business-insight {
   cursor: pointer;
 }
 
+.btn.btn-primary.btn-field-insight-type[data-input=edit-field-insight-type-target-id-all] {
+  display: none;
+}
+
 .business-insight-field-insight select {
   float: right;
 }
