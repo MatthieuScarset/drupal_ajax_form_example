@@ -47,6 +47,8 @@
       utag_data.id_article = $('.merkato_mkt_pdf_name').data('name');
       utag_data = $.extend(utag_data, tab_data_marketo);
       utag_data.type_page =  "form-marketo";
+      titre_page =  "form-marketo | "+document.title;
+      utag_data.titre_page =  titre_page.toLocaleLowerCase();
     }
     /**
     * End construction Webform Marketo
