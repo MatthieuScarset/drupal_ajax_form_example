@@ -2911,3 +2911,23 @@ form#views-exposed-form-business-insight-business-insight-page input[type="submi
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
 }
+
+/* Video embarquee dans un modal : gestion du bouton fermer */
+.modal.ckeditor-embed-video .modal-dialog .modal-content {
+  padding: 0;
+  background-color: transparent;
+}
+.modal.ckeditor-embed-video .modal-dialog .modal-content .modal-header {
+  margin-bottom: 0;
+  height: 40px;
+  background-color: black;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+.modal.ckeditor-embed-video .modal-dialog .modal-content .modal-header #modal-close span {
+  font-size: 30px;
+  color: white;
+}
+.btn .btn-lg .btn-modal-video {
+  font-size: 8rem;
+}

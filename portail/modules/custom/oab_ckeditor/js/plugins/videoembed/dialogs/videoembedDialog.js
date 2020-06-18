@@ -76,31 +76,30 @@ function htmlWithModal(url) {
   let random_numb =  Math.random();
   random_numb = Math.floor(random_numb * 10000);
   let randomizedId = "embedVideoModal-" + random_numb;
-  console.log(drupalSettings);
   let nom_image = "";
-  nom_image = '/'+ drupalSettings.oab_ckeditor.path + '/js/plugins/videoembed/icons/play_icon_banner.png';
+  // nom_image = '/'+ drupalSettings.oab_ckeditor.path + '/js/plugins/videoembed/icons/play_icon_banner.png';
 
-  html = "<!-- Button trigger modal -->" +
-    "<div class=\"row\">" +
-    "     <button type=\"button\" class=\"btn btn-modal-video\" data-toggle=\"modal\" data-target=\"#" + randomizedId + "\">" +
-    "         <img src=\""+ nom_image + "\" aria-hidden=\"true\"" +
-    "     </button>" +
-    "</div>" +
+  html = '<!-- Button trigger modal -->' +
+    '<div class="row">' +
+    '     <button type="button" class="btn btn-modal-video" data-toggle="modal" data-target="#' + randomizedId + '">' +
+    '         <img src="'+ nom_image + '" aria-hidden="true" />' +
+    '     </button>' +
+    '</div>' +
 
-    " <div class=\"modal fade ckeditor-embed-video\" id=\"" + randomizedId + "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\n" +
-    "     aria-hidden=\"true\">" +
-    "  <div class=\"modal-dialog modal-lg modal-dialog-centered\" role=\"document\">" +
-    "      <div class=\"embed-video-button-close text-right\">" +
-    "          <button type=\"button\" class=\"btn btn-info btn-rounded btn-md ml-4\"" +
-    "              data-dismiss=\"modal\"><span class=\"glyphicon glyphicon-remove\"></span></button>" +
-    "     </div>" +
-    "      <div class=\"modal-body mb-0 p-0\">" +
-    "        <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">" +
-                 htmlWithoutModal(url)+
-    "        </div>" +
-    "      </div>" +
-    "  </div>" +
-    "</div>";
+    ' <div class="modal fade ckeditor-embed-video" id="' + randomizedId + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+    '  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">' +
+    '    <div class="modal-content">' +
+    '      <div class="modal-header text-right">' +
+    '          <button id="modal-close" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+    '      </div>' +
+    '      <div class="modal-body mb-0 p-0">' +
+    '        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">' +
+               htmlWithoutModal(url) +
+    '        </div>' +
+    '      </div>' +
+    '    </div>' +
+    '  </div>' +
+    '</div>';
 
   return html;
 }
@@ -142,7 +141,6 @@ function detect(url) {
         // if this is a playlist (jukebox)
         if (url.indexOf('/playlist/') > 0) {
            id = url.substring(url.lastIndexOf('/playlist/') + 10, url.indexOf("/1#video="));
-           console.log(id);
             return embed_url = 'https://www.dailymotion.com/widget/jukebox?list[]=%2Fplaylist%2F' + id + '%2F1&&autoplay=0&mute=0';
         } else {
             id = getId(url);
