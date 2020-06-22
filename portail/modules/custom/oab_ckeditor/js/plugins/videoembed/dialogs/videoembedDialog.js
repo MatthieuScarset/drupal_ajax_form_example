@@ -73,11 +73,9 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
 
 function htmlWithModal(url) {
   let html = "";
-  let random_numb =  Math.random();
-  random_numb = Math.floor(random_numb * 10000);
+  let random_numb = Math.floor(Math.random() * 10000);
   let randomizedId = "embedVideoModal-" + random_numb;
-  let nom_image = "";
-  // nom_image = '/'+ drupalSettings.oab_ckeditor.path + '/js/plugins/videoembed/icons/play_icon_banner.png';
+  let nom_image = '/'+ drupalSettings.oab_ckeditor.path + '/js/plugins/videoembed/icons/play_icon_banner.png';
 
   html = '<!-- Button trigger modal -->' +
     '<div class="row">' +
