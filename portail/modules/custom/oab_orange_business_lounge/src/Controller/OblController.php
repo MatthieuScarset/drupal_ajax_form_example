@@ -7,7 +7,7 @@ use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
 use Symfony\Component\HttpFoundation\Request;
 use Zend\Diactoros\Response\JsonResponse;
 
-class OblController extends OblControllerBase {
+class OblController extends ControllerBase {
 
     public function getTitle() {
         return "Accords roaming";
@@ -15,7 +15,7 @@ class OblController extends OblControllerBase {
 
     public function oblPage(Request $request) {
 
-      $page = 1;
+      $page = 0;
       if ($request->query->has('page')) {
           $page = $request->query->get('page');
       }
@@ -31,18 +31,20 @@ class OblController extends OblControllerBase {
         uasort($items, [$this, "sortById"]);
 
 
-        $actual_techno = $request->query->has('techno') && $request->query->get('techno') !== 0
-            ? $request->query->get('techno')
-            : reset($items);
+        if ($request->query->has('techno')
+          && false !==  $this->getTechnoByName($items, $request->query->get('techno'))) {
+          $actual_techno = $this->getTechnoByName($items, $request->query->get('techno'));
+        } else {
+          $actual_techno = reset($items);  // Else on retourne le 1er element des technos
+        }
 
+        $data = $obl_service->getNetworkTypes($actual_techno['id'], $page+1);
 
-        $data = $obl_service->getNetworkTypes($actual_techno['id'], $page);
-        $prepared_data = [];
         foreach ($data['items'] as $row) {
           $prepared_data[$row['country']][] = $row;
         }
 
-        $max_limit_page = ceil($data['totalItem']/$data['itemPerPage']);
+        pager_default_initialize($data['totalItem'], $data['itemPerPage']);
 
         return array (
             '#zones' => $zones,
@@ -55,15 +57,16 @@ class OblController extends OblControllerBase {
                     'arr_contries' => $countries["items"],
                     'arr_technologies_obl' => $technologies["items"],
                     'techno' => $actual_techno,
-                    'techno_name' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id']),
-                    'ajax_token' => $this->generateToken()
+                    'techno_name' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id'])
                 ]
             ],
             '#detail_accords' => $prepared_data,
-            '#page' => $page,
-            '#techno' => $actual_techno['id'],
-            '#max_limit_page' => $max_limit_page,
-            '#techno_for_print' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id'])
+            '#techno' => $actual_techno['name'],
+            '#techno_for_print' => $this->getNameTechnoByActualTech($technologies['items'], $actual_techno['id']),
+            '#pager' => [
+              '#type' => 'pager',
+              '#page_id' => 'obl_controller'
+            ]
         );
     }
 
@@ -98,6 +101,15 @@ class OblController extends OblControllerBase {
     return $ret;
   }
 
+  private function getTechnoByName($technologies, $techno_name) {
+    $ret = false;
+    foreach ($technologies as $techno) {
+      if (isset($techno['name']) && $techno['name'] === $techno_name) {
+        $ret = $techno;
+      }
+    }
+    return $ret;
+  }
 
 
 }
