@@ -30,7 +30,9 @@ global-styling:
   js:
     boosted/js/hack.js: {}
     boosted/js/boosted.min.js: {}
+    js/masonry.pkgd.min.js: {}
     js/jquery.vgrid.min.js: {}
+    js/tealium.js: {}
     js/vision_business.js: {}
     js/readmorelink.js: {}
     js/header.js: {}
@@ -40,7 +42,6 @@ global-styling:
     js/scripts.js: {}
     js/swiper.jquery.min.js: {}
     js/switch.js: {}
-    js/tealium.js: {}
     js/cssua.min.js: {}
 
   dependencies:

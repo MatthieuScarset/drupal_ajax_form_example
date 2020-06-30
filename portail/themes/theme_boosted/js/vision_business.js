@@ -10,23 +10,19 @@
 
 (function ($, Drupal, Bootstrap) {
 
-    function createVgrid() {
+    let createGrid = function() {
+      let grid = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").masonry({
+        itemSelector: '.views-row',
+        columnWidth: '.col-md-4',
+        // gutter: 0,
+      });
 
-        $(window).off('resize.vgrid');
-        return $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").vgrid({
-            easing: "easeOutQuint",
-            useLoadImageEvent: true,
-            time: 400,
-            delay: 20,
-            fadeIn: {
-                time: 500,
-                delay: 50,
-                wait: 500
-            }
-        });
-    }
+      // on supprime la classe grid-item
+      $('.grid-item').removeClass('grid-item');
+      return grid;
+    };
 
-    let vg = createVgrid();
+    let grid = createGrid();
 
     //Par défaut, sur le filter parce qu'on y fait des actions, contrairement au load more
     // + compteur pour compter le nb de requetes ajax qui partent (on a parfois 2 requetes qui partent.. Impossible de localiser l'envoie pour l'instant)
@@ -40,15 +36,18 @@
     });
 
     jQuery(document).ajaxComplete(function(event, xhr, settings) {
-
         // see if it is from our view
         if (settings.data !== undefined && typeof settings.data.indexOf === "function" && settings.data.indexOf( "view_name=business_insight") != -1) {
             compteur --;
             if (compteur < 1) {
                 if (ajax_is_filter && compteur === 0) {
-                    vg = createVgrid();
+                    grid = createGrid();
                 } else if (compteur === 0) {
-                    vg.vgrefresh();
+                    // on ajoute les nouveaux items au grid
+                    grid.masonry('appended', $('.grid-item'));
+
+                    // on supprime la classe grid-item
+                    $('.grid-item').removeClass('grid-item');
                 }
 
                 // Par défaut, parce que pas moyen de le changer au load
@@ -56,7 +55,6 @@
                 compteur = 0;
             }
         }
-
     });
 
     $(document).on("click", ".fieldset-field-insight-type .btn label", function(evt) {
@@ -76,7 +74,6 @@
     $(document).on("change", "select[name='vb_thematic']", function() {
         ajax_is_filter = true;
         $("form#views-exposed-form-business-insight-business-insight-page input[type='submit']").click();
-
     });
 
 
