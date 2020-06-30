@@ -65,7 +65,9 @@
 
 
     $(document).on("click", "div.btn-field-insight-type", function() {
+
         let input_id = $(this).attr('data-input');
+
         $('input#' + input_id).prop( "checked", true );
         ajax_is_filter = true;
 
@@ -94,6 +96,21 @@
 
         $(selector).val(taxo_id).trigger('change');
         return false;
+    });
+
+
+    $(document).on('click', 'div.new-btn-see-all-business-insight', function() {
+      $.each(Drupal.views.instances, function(i, view) {
+        if (view.settings.view_name === "business_insight") {
+          view.settings.field_insight_type_target_id = 'All';
+          view.settings.vb_thematic = 'All';
+          view.pager_element= 0;
+          $('.view.view-business-insight').triggerHandler('RefreshView');
+          delete view.settings.field_insight_type_target_id;
+          delete view.settings.vb_thematic ;
+          ajax_is_filter = true;
+        }
+      });
     });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

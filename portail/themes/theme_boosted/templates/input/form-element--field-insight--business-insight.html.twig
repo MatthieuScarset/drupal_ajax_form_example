@@ -54,7 +54,7 @@
     'js-form-type-' ~ type|clean_class,
     'form-item-' ~ name|clean_class,
     'js-form-item-' ~ name|clean_class,
-    'col-md-4',
+    'col-md-6',
     'col-sm-12',
     'col-xs-12',
     title_display not in ['after', 'before'] ? 'form-no-label',
@@ -75,6 +75,7 @@
 <div {{ attributes.addClass(classes, "container-fluid") }} >
     <div class="row">
         <div class="col-sm-12">
+          <div class="new-btn-see-all-business-insight">{{ 'See all'|t }}</div>
             {{ label }}
             {{ children }}
         </div>
