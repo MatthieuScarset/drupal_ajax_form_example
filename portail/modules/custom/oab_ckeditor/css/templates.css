@@ -4,7 +4,7 @@
 .obs_template.three_columns p,
 .obs_template.four_columns p,
 .obs_template.two_columns p
-{	
+{
   padding: 10px;
 }
 
@@ -245,3 +245,26 @@
     display:         flex;
 }
 
+.ckeditor-embed-video .modal-dialog {
+  width: 60%;
+  /*width: 900px; /* remise modal à taille large (bootstrap original) */
+}
+
+@media (max-width: 760px) {
+  .ckeditor-embed-video .modal-dialog {
+    width: 95%;
+    padding: 10px;
+  }
+}
+
+.ckeditor-embed-video .modal-body {
+  padding: 0;
+}
+
+.ckeditor-embed-video .embed-video-button-close {
+  background-color: black;
+}
+
+.ckeditor-embed-video .btn-primary {
+  margin-right: 0;
+}
