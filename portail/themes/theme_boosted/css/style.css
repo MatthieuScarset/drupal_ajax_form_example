@@ -3020,6 +3020,13 @@ div.new-btn-see-all-business-insight {
   cursor: pointer;
 }
 
+@media(max-width: 767px) {
+  div.new-btn-see-all-business-insight {
+    display: block;
+    padding-bottom: 2rem;
+  }
+}
+
 .btn.btn-field-insight-type[data-taxo=All] {
   display: none;
 }
