@@ -10,6 +10,7 @@
 
 (function ($, Drupal, Bootstrap) {
 
+    // création du grid masonry
     let createGrid = function() {
       let grid = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").masonry({
         itemSelector: '.views-row',
@@ -22,8 +23,13 @@
       return grid;
     };
 
+    // mise à jour du grid (permet de résoudre un problème de positionnement lorsqu'il y a des requêtes ajax)
+    let updateGrid = function() {
+      setTimeout(function() {
+        $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").masonry();
+      }, 0);
+    };
 
-    // let grid = createGrid();
     let grid;
 
     $(window).on('load', function() {
@@ -51,6 +57,7 @@
                 } else if (compteur === 0) {
                     // on ajoute les nouveaux items au grid
                     grid.masonry('appended', $('.grid-item'));
+                    updateGrid();
 
                     // on supprime la classe grid-item
                     $('.grid-item').removeClass('grid-item');
