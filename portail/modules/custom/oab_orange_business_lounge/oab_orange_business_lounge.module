@@ -10,9 +10,8 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
                     'zones' => array(),
                     'countriesWithOperators' => array(),
                     'detail_accords' => array(),
-                    'page' => 0,
                     'techno' => '0',
-                    'max_limit_page' => array()
+                    'pager' => array()
                 ),
                 'template' => 'obl_template'
             ),
@@ -35,4 +34,12 @@ function oab_orange_business_lounge_theme($existing, $type, $theme, $path) {
 # hook_page_attachments_alter for application js to module
 function oab_orange_business_lounge_page_attachments_alter(array &$attachments) {
     $attachments['#attached']['library'][] = 'oab_orange_business_lounge/oab_obl_js';
+}
+
+function oab_orange_business_lounge_preprocess_pager(&$variables) {
+//  kint($variables);
+  if (isset($variables['pager']['#page_id']) && $variables['pager']['#page_id'] === 'obl_controller') {
+    unset($variables['items']['previous']);
+    $variables['items']['next']['text'] = '›';
+  }
 }

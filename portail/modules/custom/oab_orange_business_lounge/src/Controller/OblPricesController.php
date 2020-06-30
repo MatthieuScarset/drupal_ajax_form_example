@@ -5,7 +5,7 @@ use \Drupal\Core\Controller\ControllerBase;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Zend\Diactoros\Response\JsonResponse;
 
-class OblPricesController extends OblControllerBase {
+class OblPricesController extends ControllerBase {
 
     public function oblPricePage($id) {
 
@@ -45,8 +45,7 @@ class OblPricesController extends OblControllerBase {
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
                     'id_country' => $id,
-                    'obl_zones' => $items,
-                    'ajax_token' => $this->generateToken()
+                    'obl_zones' => $items
                 ]
             ],
         );

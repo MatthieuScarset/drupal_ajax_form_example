@@ -108,7 +108,7 @@
 
         $(".reseau-partenaire-tarif-roaming").show();
         $.ajax({
-            url: '/oblGetOneCountry/'+countrie_id + '?t=' + drupalSettings.ajax_token,
+            url: '/oblGetOneCountry/'+countrie_id,
             type: 'GET',
             success: function(result) {
                 $('.roaming-operators-table').html('');
@@ -152,7 +152,7 @@
         $(".empty-roaming-infos-container").hide();
 
         $.ajax({
-            url: '/oblGetOneZone/'+code_zone + '?t=' + drupalSettings.ajax_token,
+            url: '/oblGetOneZone/'+code_zone,
             type: 'GET',
             success: function(result) {
                 result.roamingChargesToZones.forEach(function(item) {
@@ -205,7 +205,7 @@
     if (arr_technologies_sort.length != 0) {
 
       $.each(arr_technologies_sort, function (index, value) {
-        $('.select_technologie_obl').append('<option value="' + value.id + '" name="'+ value.name +'" style="color: black"' + '>' + 'couverture ' + value.name + '</option>');
+        $('.select_technologie_obl').append('<option value="' + value.name + '" name="'+ value.name +'" style="color: black"' + '>' + 'couverture ' + value.name + '</option>');
       });
 
       $('.select_technologie_obl').on('change', function () {

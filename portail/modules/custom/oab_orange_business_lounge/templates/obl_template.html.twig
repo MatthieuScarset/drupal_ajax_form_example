@@ -34,19 +34,7 @@
         </tbody>
       </table>
 
-      <div class="row div_btn_obl_accords_perv_next">
-            {% if page > 1 %}
-              <a class="btn btn-default btn_previous_obl_accords" href="{{ url('oab_obl_settings', {'page': page-1, 'techno': techno}) }}">{{ 'Previous page'|t }}</a>
-            {% else %}
-              <a class="btn btn-default btn_previous_obl_accords disabled">{{ 'Previous page'|t }}</a>
-            {% endif %}
-
-      {% if (page >= max_limit_page or detail_accords is empty) %}
-        <a class="btn btn-default btn_next_obl_accords disabled">{{ 'Next page'|t }}</a>
-      {% else %}
-        <a class="btn btn-default btn_next_obl_accords" href="{{ url('oab_obl_settings', {'page': page+1, 'techno': techno}) }}">{{ 'Next page'|t }}</a>
-      {% endif %}
-    </div>
+      {{ pager }}
 
   </div>
 
