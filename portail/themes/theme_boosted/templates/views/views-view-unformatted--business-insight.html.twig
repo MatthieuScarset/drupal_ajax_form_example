@@ -29,7 +29,7 @@
         and loop.index > 1
         and loop.index is divisible by(5) %}
         {% set current_item = current_item + 1 %}
-        <div class="views-row col-md-4 business-insight-twitter-tile">
+        <div class="views-row col-md-4 grid-item business-insight-twitter-tile">
           {{ drupal_block('twitter_block', {position: ((view.pager.current_page * 4) + current_item) }) }}
         </div>
     {% endif %}
