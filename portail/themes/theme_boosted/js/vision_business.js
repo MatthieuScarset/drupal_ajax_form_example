@@ -38,15 +38,18 @@
     grid = createGrid();
 
     // on capte l'évènement twitter pour recharger le grid une fois l'encart chargé
-    // if(twttr !== undefined) {
-    //   // twttr.ready(function (twttr) {
-    //     twttr.events.bind('loaded', function (event) {
-    //       // At this point the tweet as been fully loaded
-    //       // and rendered and you we can proceed with our Javascript
-    //       updateGrid();
-    //     });
-    //   // });
-    // }
+    if(twttr !== undefined) {
+      // twttr.ready(function (twttr) {
+      // évènement twitter :
+      // "loaded" pour tout le lot de tweets
+      // "rendered" pour chaque tweet
+      twttr.events.bind('loaded', function (event) {
+        // At this point the tweet as been fully loaded
+        // and rendered and you we can proceed with our Javascript
+        updateGrid();
+      });
+      // });
+    }
   });
 
   //Par défaut, sur le filter parce qu'on y fait des actions, contrairement au load more
