@@ -22,7 +22,13 @@
       return grid;
     };
 
-    let grid = createGrid();
+
+    // let grid = createGrid();
+    let grid;
+
+    $(window).on('load', function() {
+      grid = createGrid();
+    });
 
     //Par défaut, sur le filter parce qu'on y fait des actions, contrairement au load more
     // + compteur pour compter le nb de requetes ajax qui partent (on a parfois 2 requetes qui partent.. Impossible de localiser l'envoie pour l'instant)
