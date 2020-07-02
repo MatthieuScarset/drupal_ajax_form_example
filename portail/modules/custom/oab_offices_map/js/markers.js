@@ -9,12 +9,14 @@
         google.maps.InfoWindow = InfoBox;
         var infowindow = new google.maps.InfoWindow();
 
-        Drupal.geolocation.loadGoogle(function () {
+        if(Drupal.geolocation !== undefined) {
+          Drupal.geolocation.loadGoogle(function () {
             //méthode appelée une fois que la map est chargée
             gestionManipulation();
 
             google.maps.InfoWindow = InfoBox;
-        });
+          });
+        }
 
         function gestionManipulation() {
             if(Drupal.geolocation.maps.length > 0) {

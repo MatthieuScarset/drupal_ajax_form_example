@@ -143,7 +143,7 @@ class TwitterService {
       }
 
       // On retourne le nombre de tweets voulu, et non celui requeté
-      $ret = array_slice($json_ret, $position - 1, $position);
+      $ret = array_slice($json_ret, $position - 1, 1);
 
     } else {
       $this->logger->error('Bearer null, Authentification à l\'API Twitter impossible.');

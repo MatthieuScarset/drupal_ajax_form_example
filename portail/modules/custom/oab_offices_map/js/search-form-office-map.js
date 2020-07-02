@@ -31,7 +31,7 @@
         function initShowCountries() {
             //à l'arrivée sur la page
             var regionSelect = document.getElementById('edit-region');
-            var region_id = regionSelect.options[regionSelect.selectedIndex].value;
+            var region_id = (regionSelect !== null) ? regionSelect.options[regionSelect.selectedIndex].value : null;
             var offices = drupalSettings.countriesRegionsTab;
             var allCountriesArray = drupalSettings.allCountriesArray;
             var selectedCountryParameter = drupalSettings.selectedCountryParameter;
