@@ -39,7 +39,7 @@
     grid = createGrid();
 
     // on capte l'évènement twitter pour recharger le grid une fois l'encart chargé
-    if(twttr !== undefined) {
+    if(typeof twttr !== 'undefined') {
         twttr.ready(function (twttr) {
         // évènement twitter :
         // "loaded" pour tout le lot de tweets
