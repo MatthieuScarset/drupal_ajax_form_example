@@ -70,7 +70,7 @@
       compteur --;
       if (compteur < 1) {
         if (ajax_is_filter && compteur === 0) {
-          $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").masonry();
+          createGrid();
         } else if (compteur === 0) {
           // on ajoute les nouveaux items au grid
           $(gridContainer).masonry('appended', $('.grid-item'));
