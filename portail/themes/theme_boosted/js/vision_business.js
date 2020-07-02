@@ -10,11 +10,12 @@
 
 (function ($, Drupal, Bootstrap) {
 
-  let $gridContainer = $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper");
+  let gridContainer = ".view-business-insight .view-content .views-infinite-scroll-content-wrapper";
 
   // création du grid masonry
-  let createGrid = function() {
-    let grid = $gridContainer.masonry({
+  function createGrid() {
+    // Reinit la valeur pour remettre le nouveau contenu lorsqu'il est chargé en ajax
+    let grid = $(gridContainer).masonry({
       itemSelector: '.views-row',
       columnWidth: '.col-md-4',
       // gutter: 0,
@@ -28,7 +29,7 @@
   // mise à jour du grid (permet de résoudre un problème de positionnement lorsqu'il y a des requêtes ajax)
   let updateGrid = function() {
     setTimeout(function() {
-      $gridContainer.masonry();
+      $(gridContainer).masonry();
     }, 0);
   };
 
@@ -69,10 +70,10 @@
       compteur --;
       if (compteur < 1) {
         if (ajax_is_filter && compteur === 0) {
-          grid = createGrid();
+          $(".view-business-insight .view-content .views-infinite-scroll-content-wrapper").masonry();
         } else if (compteur === 0) {
           // on ajoute les nouveaux items au grid
-          grid.masonry('appended', $('.grid-item'));
+          $(gridContainer).masonry('appended', $('.grid-item'));
           updateGrid();
 
           // on supprime la classe grid-item
