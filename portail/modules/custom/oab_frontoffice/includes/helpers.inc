@@ -138,10 +138,10 @@ function getSocialBarParameters($page_title, $meta_description, $og_image) {
  * @return array
  */
 function oab_getAllPathFromNID($nid, $langcode = null) {
-    $query = Database::getConnection()->select('url_alias', 'u');
+    $query = Database::getConnection()->select('path_alias', 'u');
 
     $query->fields('u', ['alias']);
-    $query->condition('source', '/node/' . $nid);
+    $query->condition('path', '/node/' . $nid);
 
     if ($langcode !== null) {
         $query->condition('langcode', $langcode);
