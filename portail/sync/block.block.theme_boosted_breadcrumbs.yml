@@ -9,7 +9,7 @@ dependencies:
 id: theme_boosted_breadcrumbs
 theme: theme_boosted
 region: content
-weight: -15
+weight: -49
 provider: null
 plugin: system_breadcrumb_block
 settings:

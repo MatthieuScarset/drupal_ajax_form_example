@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_dvicontactdistributorblock
 theme: theme_oab_hub
 region: sidebar
-weight: -34
+weight: -40
 provider: null
 plugin: dvi_contact_distributor_block
 settings:

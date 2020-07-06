@@ -10,7 +10,7 @@ dependencies:
 id: promoactu
 theme: theme_boosted
 region: sidebar
-weight: -42
+weight: -45
 provider: null
 plugin: promo_actu_block
 settings:

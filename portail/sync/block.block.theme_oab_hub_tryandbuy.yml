@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_tryandbuy
 theme: theme_oab_hub
 region: sidebar
-weight: -36
+weight: -42
 provider: null
 plugin: try_and_buy_block
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: mainnavigationru
 theme: theme_boosted
 region: header
-weight: -2
+weight: -33
 provider: null
 plugin: 'system_menu_block:main-navigation-ru'
 settings:

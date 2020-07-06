@@ -26,7 +26,6 @@ dependencies:
     - field.field.node.partner.field_solution
     - field.field.node.partner.field_start_date
     - field.field.node.partner.field_subhome
-    - field.field.node.partner.field_thematic
     - field.field.node.partner.field_visual
     - field.field.node.partner.moderation_state_update
     - node.type.partner
@@ -64,14 +63,6 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
-    region: content
-  field_geographic:
-    weight: 8
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
     region: content
   field_highlight:
     weight: 2
@@ -111,6 +102,7 @@ hidden:
   field_departments: true
   field_display_title: true
   field_email_owner: true
+  field_geographic: true
   field_industry: true
   field_market_segment: true
   field_meta_description: true

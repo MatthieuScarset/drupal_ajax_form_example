@@ -11,7 +11,7 @@ dependencies:
 id: theme_oab_hub_mediatheque
 theme: theme_oab_hub
 region: sidebar
-weight: -41
+weight: -47
 provider: null
 plugin: mediatheque_block
 settings:

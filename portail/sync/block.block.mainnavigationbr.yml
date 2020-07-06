@@ -12,7 +12,7 @@ dependencies:
 id: mainnavigationbr
 theme: theme_boosted
 region: header
-weight: 0
+weight: -30
 provider: null
 plugin: 'system_menu_block:main-navigation-br'
 settings:

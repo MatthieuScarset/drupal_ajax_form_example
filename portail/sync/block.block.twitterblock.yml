@@ -3,13 +3,13 @@ langcode: en
 status: false
 dependencies:
   module:
-    - oab_frontoffice
+    - oab_twitter
   theme:
     - theme_boosted
 id: twitterblock
 theme: theme_boosted
 region: sidebar
-weight: -30
+weight: -33
 provider: null
 plugin: twitter_block
 settings:

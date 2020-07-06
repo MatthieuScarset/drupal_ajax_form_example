@@ -1,7 +1,8 @@
-uuid: 3662c1a9-8eb6-4379-a0d0-51097951436e
 langcode: en
 status: true
 dependencies: {  }
 id: homepage_news
-label: 'Highlight on top (max. 3)'
+label: 'Highlight on top (max. 4)'
+icon_uuid: null
+description: ''
 behavior_plugins: {  }

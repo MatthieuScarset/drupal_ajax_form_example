@@ -5,5 +5,4 @@ dependencies: {  }
 name: Hub
 vid: hub
 description: 'gestion des mini-sites'
-hierarchy: 0
 weight: 0

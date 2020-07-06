@@ -9,7 +9,7 @@ dependencies:
 id: couvertureobl
 theme: theme_boosted
 region: header
-weight: 0
+weight: -31
 provider: null
 plugin: obl_couverture_block
 settings:

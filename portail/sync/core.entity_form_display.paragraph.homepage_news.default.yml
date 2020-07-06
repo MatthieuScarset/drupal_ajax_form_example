@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.homepage_news.field_block_size
     - field.field.paragraph.homepage_news.field_chapo
+    - field.field.paragraph.homepage_news.field_highlight_content
     - field.field.paragraph.homepage_news.field_image
     - field.field.paragraph.homepage_news.field_link_news
     - field.field.paragraph.homepage_news.field_title
@@ -11,14 +13,18 @@ dependencies:
     - paragraphs.paragraphs_type.homepage_news
   module:
     - image
-    - link
     - text
-    - workbench_moderation
 id: paragraph.homepage_news.default
 targetEntityType: paragraph
 bundle: homepage_news
 mode: default
 content:
+  field_block_size:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_chapo:
     weight: 2
     settings:
@@ -27,6 +33,15 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
+  field_highlight_content:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_image:
     weight: 0
     settings:
@@ -34,14 +49,6 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
-    region: content
-  field_link_news:
-    weight: 3
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
     region: content
   field_title:
     weight: 1
@@ -53,5 +60,6 @@ content:
     region: content
 hidden:
   created: true
+  field_link_news: true
   status: true
   uid: true

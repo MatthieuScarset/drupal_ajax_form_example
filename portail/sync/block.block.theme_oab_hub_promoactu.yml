@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_promoactu
 theme: theme_oab_hub
 region: sidebar
-weight: -42
+weight: -48
 provider: null
 plugin: promo_actu_block
 settings:

@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_phonenumber
 theme: theme_oab_hub
 region: sidebar
-weight: -33
+weight: -39
 provider: null
 plugin: phone_number_block
 settings:

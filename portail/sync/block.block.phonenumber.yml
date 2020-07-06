@@ -10,7 +10,7 @@ dependencies:
 id: phonenumber
 theme: theme_boosted
 region: sidebar
-weight: -34
+weight: -37
 provider: null
 plugin: phone_number_block
 settings:

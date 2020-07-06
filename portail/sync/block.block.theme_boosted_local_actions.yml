@@ -9,7 +9,7 @@ _core:
 id: theme_boosted_local_actions
 theme: theme_boosted
 region: header
-weight: -16
+weight: -26
 provider: null
 plugin: local_actions_block
 settings:

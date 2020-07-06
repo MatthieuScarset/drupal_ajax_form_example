@@ -24,7 +24,7 @@ settings:
   link_help: '/ru/tehnicheskaya-podderzhka '
   link_help_text: 'Сообщить о проблеме'
   link_contact: /ru/stat-klientom
-  link_contact_text: 'Стать клиентом'
+  link_contact_text: 'Связаться с нами'
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:

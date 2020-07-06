@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_finddistributorblock
 theme: theme_oab_hub
 region: sidebar
-weight: -35
+weight: -41
 provider: null
 plugin: find_distributor_block
 settings:

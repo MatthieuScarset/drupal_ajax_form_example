@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -9,7 +10,7 @@ dependencies:
 id: localnav
 theme: theme_boosted
 region: top_zone
-weight: 0
+weight: -46
 provider: null
 plugin: local_nav_block
 settings:
@@ -23,10 +24,11 @@ visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      country: country
+      customer_story: customer_story
       industry: industry
-      region: region
       solution: solution
+      country: country
+      region: region
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
