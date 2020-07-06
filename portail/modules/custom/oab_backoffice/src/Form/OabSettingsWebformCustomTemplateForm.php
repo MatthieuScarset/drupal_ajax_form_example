@@ -13,7 +13,7 @@ class OabSettingsWebformCustomTemplateForm extends ConfigFormBase {
     const CUSTOM_TEMPLATE = 'custom_template';
 
     public static function getConfigName() {
-        return 'oab.webform_email_custom_template_settings';
+        return 'oab_backoffice.webform_email_custom_template_settings';
     }
     /**
      * {@inheritdoc}
