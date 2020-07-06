@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\pathauto\Tests;
-use Drupal\Component\Utility\Unicode;
-use Drupal\simpletest\WebTestBase;
+namespace Drupal\Tests\pathauto\Functional;
+
+use Drupal\Tests\BrowserTestBase;
 use Drupal\views\Views;
 
 /**
@@ -10,16 +10,21 @@ use Drupal\views\Views;
  *
  * @group pathauto
  */
-class PathautoUserWebTest extends WebTestBase {
+class PathautoUserWebTest extends BrowserTestBase {
 
   use PathautoTestHelperTrait;
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stable';
+
+   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = array('pathauto', 'views');
+  public static $modules = ['pathauto', 'views'];
 
   /**
    * Admin user.
@@ -29,29 +34,28 @@ class PathautoUserWebTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
-  function setUp() {
+  protected function setUp() {
     parent::setUp();
 
     // Allow other modules to add additional permissions for the admin user.
-    $permissions = array(
+    $permissions = [
       'administer pathauto',
       'administer url aliases',
       'create url aliases',
       'administer users',
-    );
+    ];
     $this->adminUser = $this->drupalCreateUser($permissions);
     $this->drupalLogin($this->adminUser);
 
     $this->createPattern('user', '/users/[user:name]');
   }
 
-
   /**
    * Basic functional testing of Pathauto with users.
    */
-  function testUserEditing() {
+  public function testUserEditing() {
     // There should be no Pathauto checkbox on user forms.
     $this->drupalGet('user/' . $this->adminUser->id() . '/edit');
     $this->assertNoFieldById('path[0][pathauto]');
@@ -60,7 +64,7 @@ class PathautoUserWebTest extends WebTestBase {
   /**
    * Test user operations.
    */
-  function testUserOperations() {
+  public function testUserOperations() {
     $account = $this->drupalCreateUser();
 
     // Delete all current URL aliases.
@@ -71,21 +75,20 @@ class PathautoUserWebTest extends WebTestBase {
     $view->initDisplay();
     $view->preview('page_1');
 
-
     foreach ($view->result as $key => $row) {
-      if ($view->field['name']->getValue($row) == $account->getUsername()) {
+      if ($view->field['name']->getValue($row) == $account->getDisplayName()) {
         break;
       }
     }
 
-    $edit = array(
+    $edit = [
       'action' => 'pathauto_update_alias_user',
       "user_bulk_form[$key]" => TRUE,
-    );
+    ];
     $this->drupalPostForm('admin/people', $edit, t('Apply to selected items'));
     $this->assertText('Update URL alias was applied to 1 item.');
 
-    $this->assertEntityAlias($account, '/users/' . Unicode::strtolower($account->getUsername()));
+    $this->assertEntityAlias($account, '/users/' . mb_strtolower($account->getDisplayName()));
     $this->assertEntityAlias($this->adminUser, '/user/' . $this->adminUser->id());
   }
 

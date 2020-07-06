@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\pathauto\Tests;
+namespace Drupal\Tests\pathauto\Functional;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 use Drupal\comment\Tests\CommentTestTrait;
 
 /**
@@ -10,17 +10,23 @@ use Drupal\comment\Tests\CommentTestTrait;
  *
  * @group pathauto
  */
-class PathautoEnablingEntityTypesTest extends WebTestBase {
+class PathautoEnablingEntityTypesTest extends BrowserTestBase {
 
   use PathautoTestHelperTrait;
+
   use CommentTestTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stable';
 
   /**
    * Modules to enable.
    *
    * @var array
    */
-  public static $modules = array('node', 'pathauto', 'comment');
+  public static $modules = ['node', 'pathauto', 'comment'];
 
   /**
    * Admin user.
@@ -30,21 +36,21 @@ class PathautoEnablingEntityTypesTest extends WebTestBase {
   protected $adminUser;
 
   /**
-   * {inheritdoc}
+   * {@inheritdoc}
    */
-  function setUp() {
+  protected function setUp() {
     parent::setUp();
 
-    $this->drupalCreateContentType(array('type' => 'article'));
+    $this->drupalCreateContentType(['type' => 'article']);
     $this->addDefaultCommentField('node', 'article');
 
-    $permissions = array(
+    $permissions = [
       'administer pathauto',
       'administer url aliases',
       'create url aliases',
       'administer nodes',
       'post comments',
-    );
+    ];
     $this->adminUser = $this->drupalCreateUser($permissions);
     $this->drupalLogin($this->adminUser);
   }
@@ -54,12 +60,12 @@ class PathautoEnablingEntityTypesTest extends WebTestBase {
    * ability to define alias patterns for a given entity type works. Test with
    * the comment module, as it is not enabled by default.
    */
-  function testEnablingEntityTypes() {
+  public function testEnablingEntityTypes() {
     // Verify that the comment entity type is not available when trying to add
     // a new pattern, nor "broken".
     $this->drupalGet('/admin/config/search/path/patterns/add');
-    $this->assertEqual(count($this->cssSelect('option[value = "canonical_entities:comment"]:contains(Comment)')), 0);
-    $this->assertEqual(count($this->cssSelect('option:contains(Broken)')), 0);
+    $this->assertCount(0, $this->cssSelect('option[value = "canonical_entities:comment"]:contains(Comment)'));
+    $this->assertCount(0, $this->cssSelect('option:contains(Broken)'));
 
     // Enable the entity type and create a pattern for it.
     $this->drupalGet('/admin/config/search/path/settings');
@@ -81,7 +87,7 @@ class PathautoEnablingEntityTypesTest extends WebTestBase {
     // be disabled.
     $this->assertAliasExists(['alias' => '/comment/test-body']);
     $this->drupalGet('/admin/config/search/path/settings');
-    $this->assertEqual(count($this->cssSelect('input[name = "enabled_entity_types[comment]"][disabled = "disabled"]')), 1);
+    $this->assertCount(1, $this->cssSelect('input[name = "enabled_entity_types[comment]"][disabled = "disabled"]'));
   }
 
 }
