@@ -12,7 +12,7 @@ dependencies:
 id: theme_oab_hub_views_block__linked_content_linked_content
 theme: theme_oab_hub
 region: sidebar
-weight: -31
+weight: -37
 provider: null
 plugin: 'views_block:linked_content-linked_content'
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: topnavbarbr
 theme: theme_boosted
 region: header
-weight: -28
+weight: -48
 provider: null
 plugin: 'system_menu_block:top-navbar-br'
 settings:

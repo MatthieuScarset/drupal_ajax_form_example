@@ -1,4 +1,4 @@
-axiome_enable_cron: '1'
+axiome_enable_cron: '0'
 icon_frame_connectivity: Connectivity
 icon_frame_teamwork: Teamwork
 icon_frame_my_customers: Customers
@@ -116,3 +116,10 @@ sous_famille_values:
   8269: 'Services clients'
   9002: Protect
   11707: 'Contact Centers'
+  8264: 'Réseaux intelligents'
+  10011: 'Solutions de communication et collaboration'
+  11995: 'Réseaux intelligents'
+  8462: Exécution
+  12139: Exécution
+  8464: Exécution
+  8290: Intégration

@@ -1,0 +1,73 @@
+uuid: 7753c952-20a5-49f2-bc5f-ac108e862ae5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_p_wysiwyg_rebond
+    - node.type.product
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.product.field_p_wysiwyg_rebond
+field_name: field_p_wysiwyg_rebond
+entity_type: node
+bundle: product
+label: 'Wysiwyg rebond'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      rebond_wysiwyg: rebond_wysiwyg
+    target_bundles_drag_drop:
+      default_button:
+        weight: 16
+        enabled: false
+      home_banner:
+        weight: 17
+        enabled: false
+      home_caroussel:
+        weight: 18
+        enabled: false
+      home_column:
+        weight: 19
+        enabled: false
+      home_column_section:
+        weight: 20
+        enabled: false
+      home_playlist:
+        weight: 21
+        enabled: false
+      home_thematic_columns:
+        weight: 22
+        enabled: false
+      homepage_banner_experience:
+        weight: 23
+        enabled: false
+      homepage_banner_item:
+        weight: 24
+        enabled: false
+      homepage_news:
+        weight: 25
+        enabled: false
+      infography_partner:
+        weight: 26
+        enabled: false
+      paragraph_block_rebond:
+        weight: 27
+        enabled: false
+      rebond_wysiwyg:
+        enabled: true
+        weight: 28
+      related_content:
+        weight: 29
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

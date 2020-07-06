@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -102,13 +103,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_local_nav:
-    weight: 12
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: content
   field_metatags:
     weight: 7
     label: hidden
@@ -151,6 +145,7 @@ hidden:
   field_hub_portal: true
   field_insight_type: true
   field_job_profile: true
+  field_local_nav: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true

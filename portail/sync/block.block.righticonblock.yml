@@ -9,7 +9,7 @@ dependencies:
 id: righticonblock
 theme: theme_boosted
 region: header
-weight: -5
+weight: -36
 provider: null
 plugin: right_icon_block
 settings:

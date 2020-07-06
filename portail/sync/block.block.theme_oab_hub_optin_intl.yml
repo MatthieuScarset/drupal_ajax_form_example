@@ -13,7 +13,7 @@ dependencies:
 id: theme_oab_hub_optin_intl
 theme: theme_oab_hub
 region: sidebar
-weight: -44
+weight: -51
 provider: null
 plugin: 'block_content:e2499cb2-c271-460e-9bfa-83eb7b827e86'
 settings:

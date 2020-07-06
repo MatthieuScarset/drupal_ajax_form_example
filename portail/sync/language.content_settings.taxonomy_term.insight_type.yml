@@ -1,0 +1,11 @@
+uuid: 480f70d6-a85d-4ae7-bfe0-8f0817607d5d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.insight_type
+id: taxonomy_term.insight_type
+target_entity_type_id: taxonomy_term
+target_bundle: insight_type
+default_langcode: current_interface
+language_alterable: false

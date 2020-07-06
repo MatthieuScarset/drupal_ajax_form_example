@@ -1,37 +1,30 @@
-uuid: 45097811-37a0-413c-8000-5b64b8e1d02f
-langcode: ru
+uuid: 919664c3-e116-4962-91e7-543746faf6f9
+langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
+    - 'block_content:basic:e0ae8a22-6eb9-4763-b519-bc13efe6ee0e'
   module:
     - block_content
     - ctools
     - language
   theme:
     - theme_boosted
-id: optin_russia
+id: pardot_russia
 theme: theme_boosted
 region: sidebar
-weight: -45
+weight: -48
 provider: null
-plugin: 'block_content:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
+plugin: 'block_content:e0ae8a22-6eb9-4763-b519-bc13efe6ee0e'
 settings:
-  id: 'block_content:ca88f651-8f9b-4452-80ed-e1aa8b1c69ee'
-  label: optin_russia
+  id: 'block_content:e0ae8a22-6eb9-4763-b519-bc13efe6ee0e'
+  label: pardot_russia
   provider: block_content
   label_display: '0'
   status: true
   info: ''
   view_mode: full
 visibility:
-  language:
-    id: language
-    langcodes:
-      ru: ru
-    negate: false
-    context_mapping:
-      language: '@language.current_language_context:language_interface'
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
@@ -39,3 +32,10 @@ visibility:
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      ru: ru
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

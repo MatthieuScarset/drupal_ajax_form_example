@@ -13,7 +13,7 @@ field_name: field_banner_expertise
 entity_type: node
 bundle: homepage
 label: 'Banner Expertise'
-description: 'Image size : 345x270px'
+description: 'Image size : 502x270px'
 required: false
 translatable: false
 default_value: {  }

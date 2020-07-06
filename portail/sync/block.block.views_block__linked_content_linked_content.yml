@@ -12,7 +12,7 @@ dependencies:
 id: views_block__linked_content_linked_content
 theme: theme_boosted
 region: sidebar
-weight: -31
+weight: -34
 provider: null
 plugin: 'views_block:linked_content-linked_content'
 settings:

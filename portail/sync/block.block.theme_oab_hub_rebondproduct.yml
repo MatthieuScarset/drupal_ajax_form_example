@@ -11,7 +11,7 @@ dependencies:
 id: theme_oab_hub_rebondproduct
 theme: theme_oab_hub
 region: sidebar
-weight: -43
+weight: -49
 provider: null
 plugin: rebond_product_block
 settings:

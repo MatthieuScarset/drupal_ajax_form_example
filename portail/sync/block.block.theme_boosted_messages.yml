@@ -11,7 +11,7 @@ _core:
 id: theme_boosted_messages
 theme: theme_boosted
 region: header
-weight: -15
+weight: -25
 provider: null
 plugin: system_messages_block
 settings:

@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_zonerebondwysiwyg
 theme: theme_oab_hub
 region: sidebar
-weight: -32
+weight: -38
 provider: null
 plugin: zone_rebond_wysiwyg_block
 settings:

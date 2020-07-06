@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -9,7 +10,7 @@ dependencies:
 id: topzone
 theme: theme_boosted
 region: top_zone
-weight: -45
+weight: -47
 provider: null
 plugin: top_zone_block
 settings:

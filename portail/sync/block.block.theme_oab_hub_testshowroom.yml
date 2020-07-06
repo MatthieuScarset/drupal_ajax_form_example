@@ -10,7 +10,7 @@ dependencies:
 id: theme_oab_hub_testshowroom
 theme: theme_oab_hub
 region: sidebar
-weight: -38
+weight: -44
 provider: null
 plugin: test_showroom_block
 settings:

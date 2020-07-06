@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -19,6 +20,16 @@ settings:
   label_display: '0'
   level: 1
   depth: 0
+  link_assistance: ''
+  link_assistance_text: Assistance
+  assistance_icon: icon-control_centre
+  tel_number: ''
+  tel_number_affichage: ''
+  link_ecrire: /fr/digitalworkspace/contact
+  link_ecrire_text: Contactez-nous
+  ecrire_icon: icon-email
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   language:
     id: language

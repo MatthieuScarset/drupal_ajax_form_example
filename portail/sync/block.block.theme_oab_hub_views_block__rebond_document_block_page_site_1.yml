@@ -12,7 +12,7 @@ dependencies:
 id: theme_oab_hub_views_block__rebond_document_block_page_site_1
 theme: theme_oab_hub
 region: sidebar
-weight: -39
+weight: -45
 provider: null
 plugin: 'views_block:rebond_document-block_page_site_1'
 settings:

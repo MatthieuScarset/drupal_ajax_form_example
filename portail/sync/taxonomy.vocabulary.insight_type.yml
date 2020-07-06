@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 name: 'Insight type'
 vid: insight_type
-description: null
+description: ''
 weight: 0

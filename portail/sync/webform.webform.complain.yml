@@ -1,3 +1,4 @@
+uuid: 4378e362-b4c9-4817-8d83-07ff6d283ee9
 langcode: en
 status: open
 dependencies: {  }
@@ -51,7 +52,9 @@ settings:
   submission_label: ''
   submission_log: false
   submission_views: {  }
-  submission_views_replace: {  }
+  submission_views_replace:
+    webform_routes: {  }
+    node_routes: {  }
   submission_user_columns: {  }
   submission_user_duplicate: false
   submission_access_denied: default
@@ -104,7 +107,7 @@ settings:
   limit_total_interval: null
   limit_total_message: ''
   limit_total_unique: false
-  limit_user: null
+  limit_user: 1
   limit_user_interval: null
   limit_user_message: ''
   limit_user_unique: false
@@ -199,4 +202,3 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
-uuid: 4378e362-b4c9-4817-8d83-07ff6d283ee9

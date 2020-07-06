@@ -11,7 +11,7 @@ dependencies:
 id: mediatheque
 theme: theme_boosted
 region: sidebar
-weight: -32
+weight: -35
 provider: null
 plugin: mediatheque_block
 settings:
@@ -19,9 +19,9 @@ settings:
   label: Mediatheque
   provider: oab_frontoffice
   label_display: visible
-  mediatheque_text: 'Vous êtes à la recherche d''images ou de vidéos pour illustrer vos supports de communication ?'
-  mediatheque_link: 'https://mediatheque.orange.com/fr/mediacenter'
-  mediatheque_link_text: 'En savoir plus'
+  mediatheque_text: 'Are you looking for images or videos to illustrate your communication media?'
+  mediatheque_link: 'https://mediatheque.orange.com/en/mediacenter'
+  mediatheque_link_text: 'Click here'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
