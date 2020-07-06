@@ -8,6 +8,7 @@ dependencies:
   module:
     - path
     - text
+    - workbench_moderation
 id: taxonomy_term.office_countries.default
 targetEntityType: taxonomy_term
 bundle: office_countries
@@ -49,6 +50,13 @@ content:
     weight: 30
     region: content
     settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
   translation:
     weight: 10

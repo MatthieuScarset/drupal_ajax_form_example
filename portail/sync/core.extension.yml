@@ -49,7 +49,6 @@ module:
   metatag_verification: 0
   migrate: 0
   migrate_drupal: 0
-  migrate_drupal_multilingual: 0
   migrate_plus: 0
   migrate_tools: 0
   multiple_fields_remove_button: 0
@@ -95,6 +94,7 @@ module:
   password_policy_length: 0
   password_policy_username: 0
   path: 0
+  path_alias: 0
   pathauto: 0
   quickedit: 0
   recaptcha: 0

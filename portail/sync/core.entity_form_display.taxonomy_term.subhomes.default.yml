@@ -8,6 +8,7 @@ dependencies:
   module:
     - path
     - text
+    - workbench_moderation
 id: taxonomy_term.subhomes.default
 targetEntityType: taxonomy_term
 bundle: subhomes
@@ -49,6 +50,13 @@ content:
     weight: 3
     region: content
     settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
   translation:
     weight: 10

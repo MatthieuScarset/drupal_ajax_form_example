@@ -10,6 +10,7 @@ dependencies:
     - media_entity.bundle.image
   module:
     - image
+    - path
     - workbench_moderation
 id: media.image.default
 targetEntityType: media
@@ -30,6 +31,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete_tags
     region: content
@@ -47,6 +49,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   langcode: true

@@ -11,6 +11,7 @@ dependencies:
     - taxonomy.vocabulary.hub
   module:
     - text
+    - workbench_moderation
 id: taxonomy_term.hub.default
 targetEntityType: taxonomy_term
 bundle: hub
@@ -68,6 +69,13 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
   translation:
     weight: 4
