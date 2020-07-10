@@ -1,0 +1,52 @@
+## Admin route to see all subscription
+entity.marketo_form.collection:
+  path: '/admin/marketo'
+  defaults:
+    _entity_list: 'marketo_form'
+    _title: 'Mailing List configuration'
+  requirements:
+    _permission: 'view any marketo form'
+
+## Route to create a subscription
+entity.marketo_form.add_form:
+  path: '/admin/marketo/form/add'
+  defaults:
+    _entity_form: 'marketo_form.add'
+    _title: 'Add Mailing list Subscription'
+  requirements:
+    _permission: 'create marketo form'
+
+## Route to create a subscription
+entity.marketo_form.edit_form:
+  path: '/admin/marketo/form/edit/{marketo_form}'
+  defaults:
+    _entity_form: 'marketo_form.edit'
+    _title: 'Edit Subscription'
+  requirements:
+    _permission: 'edit marketo form'
+
+## Admin route to delete specific subscription
+entity.marketo_form.delete_form:
+  path: '/admin/marketo/form/delete/{marketo_form}'
+  defaults:
+    _entity_form: 'marketo_form.delete'
+    _title: 'Delete Subscription'
+  requirements:
+    _permission: 'delete marketo form'
+
+entity.paragraph.edit_form:
+  path: '/admin/paragraph/form/{paragraph}/edit'
+  defaults:
+    _entity_form: 'paragraph.edit'
+    _title: 'Edit Paragraph'
+  requirements:
+    _permission: 'edit marketo form'
+
+entity.paragraph.delete_form:
+  path: '/admin/paragraph/form/{paragraph}/delete'
+  defaults:
+    _entity_form: 'paragraph.delete'
+    _title: 'Delete Paragraph'
+  requirements:
+    _permission: 'delete marketo form'
+

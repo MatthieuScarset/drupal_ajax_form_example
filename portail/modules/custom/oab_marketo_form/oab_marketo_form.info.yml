@@ -1,0 +1,10 @@
+name: OAB Marketo Form
+description: 'Provide default entity form Marketo Form'
+type: module
+package: OAB
+
+
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_marketo_form'
+datestamp: 1453308360
