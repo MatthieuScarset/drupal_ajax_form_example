@@ -610,7 +610,7 @@ function change_textfield_to_select($vid, $default_langcode = true) {
       $properties["langcode"] = \Drupal::languageManager()->getCurrentLanguage()->getId();
     }
 
-    $terms = \Drupal::entiyTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
     if (is_array($terms)
       && !empty($terms)) {
       $options = array('All' => t($vocabulary->get('name')));
