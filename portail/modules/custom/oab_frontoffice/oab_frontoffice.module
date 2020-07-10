@@ -599,18 +599,18 @@ function oab_frontoffice_library_info_alter(&$libraries, $extension) {
 function change_textfield_to_select($vid, $default_langcode = true) {
   $ret = [];
 
-  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load('thematic');
+  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
   if (is_object($vocabulary)) {
 
     $properties = [
-      "vid" => 'thematic',
+      "vid" => $vid,
     ];
 
     if ($default_langcode) {
       $properties["langcode"] = \Drupal::languageManager()->getCurrentLanguage()->getId();
     }
 
-    $terms = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    $terms = \Drupal::entiyTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
     if (is_array($terms)
       && !empty($terms)) {
       $options = array('All' => t($vocabulary->get('name')));

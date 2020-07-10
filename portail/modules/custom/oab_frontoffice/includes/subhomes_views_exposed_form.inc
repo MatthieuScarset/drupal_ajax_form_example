@@ -10,8 +10,7 @@ function subhomes_views_exposed_form(&$form) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          $default_langocde = $key !== 'analayst' ? true : false;
-          $form[$key] = change_textfield_to_select($key, $key !== 'analayst');
+          $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
         }
       }
 
