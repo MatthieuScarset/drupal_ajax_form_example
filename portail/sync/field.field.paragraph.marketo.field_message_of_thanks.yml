@@ -1,0 +1,21 @@
+uuid: ed69d835-81da-41b9-8ce0-0a4e2cd44401
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_message_of_thanks
+    - paragraphs.paragraphs_type.marketo
+  module:
+    - text
+id: paragraph.marketo.field_message_of_thanks
+field_name: field_message_of_thanks
+entity_type: paragraph
+bundle: marketo
+label: 'Message of thanks'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

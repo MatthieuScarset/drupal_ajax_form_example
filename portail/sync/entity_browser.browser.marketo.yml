@@ -1,0 +1,42 @@
+uuid: 018b9272-ccf3-49b7-940b-f35d09faddc9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.marketo_paragraph_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: marketo
+label: Marketo
+display: iframe
+display_configuration:
+  width: '1150'
+  height: '700'
+  link_text: 'Select entities'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  e97b82ff-274c-4f81-9f7f-d2f8b7f4bada:
+    settings:
+      entity_type: paragraph
+      bundle: marketo
+      form_mode: default
+      submit_text: 'Save marketo form'
+    uuid: e97b82ff-274c-4f81-9f7f-d2f8b7f4bada
+    weight: 1
+    label: 'Create a marketo form'
+    id: entity_form
+  bd675bf4-67d4-4453-8de8-c567edd9867d:
+    settings:
+      view: marketo_paragraph_entity_browser
+      view_display: entity_browser_1
+      submit_text: 'Select Form'
+      auto_select: false
+    uuid: bd675bf4-67d4-4453-8de8-c567edd9867d
+    weight: 2
+    label: 'Select a marketo form'
+    id: view

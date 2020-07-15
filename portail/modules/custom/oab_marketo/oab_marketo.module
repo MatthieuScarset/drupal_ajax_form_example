@@ -1,0 +1,35 @@
+<?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\paragraphs\ParagraphInterface;
+
+
+/**
+ * Implements hook_paragraph_access().
+ */
+function oab_marketo_pargraph_access(ParagraphInterface $pargraph, $operation, AccountInterface $account) {
+ if ($pargraph->bundle() === 'marketo') {
+   return AccessResult::allowedIfHasPermission($account, "$operation marketo form");
+ }
+
+ return AccessResult::neutral();
+}
+
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function oab_marketo_entity_operation_alter(array &$operations, \Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() === 'paragraph' && $entity->bundle() === 'marketo') {
+    kint($operations);
+  }
+}
+
+
+/**
+ * Implements hook_contextual_links_alter().
+ */
+function oab_marketo_contextual_links_alter(array &$links, $group, array $route_parameters) {
+  kint($group, $links);
+}

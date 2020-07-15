@@ -111,38 +111,9 @@ content:
     region: content
   field_office_location:
     weight: 9
-    settings:
-      default_longitude: '2.3522219000000177'
-      default_latitude: '48.856614'
-      auto_client_location: '1'
-      google_map_settings:
-        height: 400px
-        width: 100%
-        type: ROADMAP
-        zoom: '6'
-        maxZoom: 18
-        minZoom: 0
-        zoomControl: 1
-        scrollwheel: 1
-        gestureHandling: auto
-        draggable: 1
-        style: ''
-        info_auto_display: 1
-        marker_icon_path: ''
-        disableAutoPan: 1
-        mapTypeControl: 0
-        streetViewControl: 0
-        rotateControl: 0
-        fullscreenControl: 0
-        preferScrollingToZooming: 0
-        disableDoubleClickZoom: 0
-      auto_client_location_marker: '0'
-      allow_override_map_settings: 0
-      populate_address_field: ''
-      target_address_field: null
-      explicite_actions_address_field: ''
+    settings: {  }
     third_party_settings: {  }
-    type: geolocation_googlegeocoder
+    type: geolocation_latlng
     region: content
   field_phone_number:
     weight: 7
@@ -233,9 +204,9 @@ content:
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   path: true
   promote: true

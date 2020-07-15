@@ -1,0 +1,23 @@
+uuid: 756fee04-dd15-42e4-b4cd-75b4c1a1fccc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.marketo
+  content:
+    - 'file:file:d26be076-1cec-4fc9-9a7d-8779c30175de'
+  module:
+    - entity_embed
+    - paragraphs
+label: Marketo
+id: marketo
+type_id: entity
+type_settings:
+  entity_type: paragraph
+  bundles:
+    - marketo
+  display_plugins: {  }
+  entity_browser: marketo
+  entity_browser_settings:
+    display_review: true
+icon_uuid: d26be076-1cec-4fc9-9a7d-8779c30175de

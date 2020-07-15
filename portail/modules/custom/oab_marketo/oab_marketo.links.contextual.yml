@@ -1,0 +1,10 @@
+entity.paragraph.edit_form:
+  route_name: entity.paragraph.edit_form
+  group: paragraph
+  title: Edit
+
+entity.paragraph.delete_form:
+  route_name: entity.pragraph.delete_form
+  group: paragraph
+  title: Delete
+  weight: 10

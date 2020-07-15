@@ -68,6 +68,7 @@ module:
   oab_entity_embed_link: 0
   oab_frontoffice: 0
   oab_hub: 0
+  oab_marketo: 0
   oab_media_browser: 0
   oab_migrate_content: 0
   oab_offices_map: 0
