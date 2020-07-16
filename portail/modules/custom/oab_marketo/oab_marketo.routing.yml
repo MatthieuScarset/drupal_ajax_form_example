@@ -14,3 +14,15 @@ entity.paragraph.delete_form:
   requirements:
     _permission: 'delete marketo form'
 
+
+entity.paragraph.add_form:
+  path: '/admin/paragraph/{type}/add'
+  defaults:
+    _entity_form: 'paragraph.default'
+    _title: 'Create Paragraph'
+  requirements:
+    _permission: 'create marketo form'
+  options:
+    parameters:
+      type:
+        type: entity:paragraph_type

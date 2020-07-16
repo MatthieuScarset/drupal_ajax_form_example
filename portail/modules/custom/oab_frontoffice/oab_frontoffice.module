@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Database\Database;
+use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
 use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
@@ -48,24 +49,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $variables['langcode'] = $current_language;
-
-    ##Pour les documents FR, j'ajoute un formulaire à la mano
-    if ($variables['node']->bundle() == 'document') {
-
-
-        ##Je charge le webform juste pour les contenus fr
-        if ($current_language == 'fr') {
-            $form = \Drupal\webform\Entity\Webform::load('telechargement_documents');
-            $form_output = \Drupal::entityTypeManager()
-                ->getViewBuilder('webform')
-                ->view($form);
-            $variables['form_dlFile'] = $form_output;
-
-        }
-
-    }
-
-
 
     if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
@@ -549,8 +532,6 @@ function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal
  * @param array $attachments
  */
 function oab_frontoffice_page_attachments_alter(array &$attachments) {
-  /** for marketo */
-  $attachments['#attached']['library'][] = 'oab_frontoffice/marketo';
 
     $node = \Drupal::routeMatch()->getParameter('node');
     if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
@@ -580,21 +561,6 @@ function __seek_alternate($tab) {
     return $tab;
 }
 
-/**
- * Implements hook_library_info_alter().
- */
-function oab_frontoffice_library_info_alter(&$libraries, $extension) {
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($extension === 'oab_frontoffice'
-    && is_object($node) != false && $node->bundle() == 'document') {
-    $libraries['marketo']['js']['https://marketing-news.orange-business.com/rs/759-QCL-211/images/forms2.min.js'] = ["#type" => "external"];
-    //$libraries['marketo']['js']['https://marketing-news.orange-business.com/rs/759-QCL-211/images/jQuery-v3.1.1.js'] = ["#type" => "external"];
-    $libraries['marketo']['js']['https://marketing-news.orange-business.com/rs/759-QCL-211/images/enhancedFormFunctions-v2.js'] = ["#type" => "external"];
-    $libraries['marketo']['js']['https://marketing-news.orange-business.com/rs/759-QCL-211/images/simpledto-multi-domain.js'] = ["#type" => "external"];
-    $libraries['marketo']['js']['https://marketing-news.orange-business.com/rs/759-QCL-211/images/OBSExternalEmbedCode.js'] = ["#type" => "external"];
-  }
-
-}
 
 function change_textfield_to_select($vid, $default_langcode = true) {
   $ret = [];

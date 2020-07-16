@@ -1,10 +1,16 @@
-entity.paragraph.edit_form:
+oab_marketo.paragraph.edit_form:
   route_name: entity.paragraph.edit_form
   group: paragraph
   title: Edit
 
-entity.paragraph.delete_form:
-  route_name: entity.pragraph.delete_form
+oab_marketo.paragraph.delete_form:
+  route_name: entity.paragraph.delete_form
+  group: paragraph
+  title: Delete
+  weight: 10
+
+oab_marketo.paragraph.create_form:
+  route_name: entity.paragraph.create_form
   group: paragraph
   title: Delete
   weight: 10
