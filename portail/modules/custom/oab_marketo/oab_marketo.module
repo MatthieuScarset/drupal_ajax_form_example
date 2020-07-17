@@ -1,12 +1,30 @@
 <?php
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\media_entity\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
 use Drupal\taxonomy\Entity\Term;
+
+
+
+
+/**
+ * Implements hook_paragraph_access().
+ */
+function oab_marketo_pargraph_access(ParagraphInterface $paragraph, $operation, AccountInterface $account) {
+  if ($paragraph->bundle() === 'marketo') {
+    return AccessResult::allowedIfHasPermission($account, "$operation marketo form");
+  }
+
+  return AccessResult::neutral();
+}
+
 
 
 /**
