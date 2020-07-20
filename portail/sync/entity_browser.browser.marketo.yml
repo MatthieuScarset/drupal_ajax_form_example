@@ -27,7 +27,7 @@ widgets:
       form_mode: default
       submit_text: 'Save marketo form'
     uuid: e97b82ff-274c-4f81-9f7f-d2f8b7f4bada
-    weight: 1
+    weight: -9
     label: 'Create a marketo form'
     id: entity_form
   bd675bf4-67d4-4453-8de8-c567edd9867d:
@@ -37,6 +37,6 @@ widgets:
       submit_text: 'Select Form'
       auto_select: false
     uuid: bd675bf4-67d4-4453-8de8-c567edd9867d
-    weight: 2
+    weight: -10
     label: 'Select a marketo form'
     id: view

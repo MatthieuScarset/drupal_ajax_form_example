@@ -5,7 +5,7 @@ dependencies:
   config:
     - paragraphs.paragraphs_type.marketo
   content:
-    - 'file:file:d26be076-1cec-4fc9-9a7d-8779c30175de'
+    - 'file:file:d224330c-3e94-44f8-8556-15d25b7f89e0'
   module:
     - entity_embed
     - paragraphs
@@ -20,4 +20,4 @@ type_settings:
   entity_browser: marketo
   entity_browser_settings:
     display_review: true
-icon_uuid: d26be076-1cec-4fc9-9a7d-8779c30175de
+icon_uuid: d224330c-3e94-44f8-8556-15d25b7f89e0

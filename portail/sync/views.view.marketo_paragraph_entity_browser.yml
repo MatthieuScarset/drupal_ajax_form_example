@@ -9,14 +9,11 @@ dependencies:
     - field.storage.paragraph.field_title
     - paragraphs.paragraphs_type.marketo
     - system.menu.admin
-    - user.role.administrator
-    - user.role.webform_admin
   module:
     - entity_browser
     - link
     - paragraphs
     - text
-    - user
 id: marketo_paragraph_entity_browser
 label: 'Marketo paragraph Entity Browser'
 module: views
@@ -32,11 +29,8 @@ display:
     position: 0
     display_options:
       access:
-        type: role
-        options:
-          role:
-            webform_admin: webform_admin
-            administrator: administrator
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
@@ -501,7 +495,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.roles
       tags:
         - 'config:field.storage.paragraph.field_form_id'
         - 'config:field.storage.paragraph.field_message_of_thanks'
@@ -519,7 +512,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.roles
       tags:
         - 'config:field.storage.paragraph.field_form_id'
         - 'config:field.storage.paragraph.field_message_of_thanks'
@@ -1090,12 +1082,15 @@ display:
           plugin_id: dropbutton
       defaults:
         fields: false
+        access: false
+      access:
+        type: none
+        options: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - user.roles
       tags:
         - 'config:field.storage.paragraph.field_form_id'
         - 'config:field.storage.paragraph.field_message_of_thanks'
