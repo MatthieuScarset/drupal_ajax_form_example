@@ -16,16 +16,3 @@ display:
   page_1:
     display_options:
       display_description: 'Block containing the list of offices'
-      fields:
-        field_street:
-          label: Rue
-        field_additionnal:
-          label: 'Informations supplémentaires'
-        field_postal_code:
-          label: 'Code postal'
-        field_city:
-          label: Ville
-        field_phone_number:
-          label: Téléphone
-        nothing:
-          alter: {  }
