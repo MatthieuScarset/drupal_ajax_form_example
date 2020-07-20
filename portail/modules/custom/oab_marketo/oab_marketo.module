@@ -89,12 +89,16 @@ function oab_marketo_preprocess_paragraph(&$variables) {
 
     $referer = str_replace(Drupal::request()->getSchemeAndHttpHost(), '', Drupal::request()->headers->get('referer'));
 
+    if ($paragraph->field_redirection_url->count() > 0 ) {
+      $redirection_url = $paragraph->field_redirection_url->first()->getUrl()->toString();
+    }
+
     $variables['#attached']['drupalSettings']['marketo_data'] = [
       'mktoDomain' => $marketo_conf->get('mkt_to_domain'),
       'mktoMunchkinID' => $marketo_conf->get('mkt_to_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
       'formName' => $paragraph->field_title->value,
-      'customFollowUpUrl' => $paragraph->field_redirection_url->first()->getUrl()->toString(),
+      'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : null,
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
       'mktoFrom' => $referer,
       'mktoFieldOrder' =>["submitButton","LegalInfos"]
