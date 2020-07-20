@@ -2,7 +2,8 @@
 
 namespace Drupal\entity_browser;
 
-use Drupal\Component\Plugin\ConfigurablePluginInterface;
+use Drupal\Component\Plugin\ConfigurableInterface;
+use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
@@ -14,7 +15,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
  * entity browser. Once entities have been selected, they are delivered upstream
  * to the entity browser's selection display plugin.
  */
-interface WidgetInterface extends PluginInspectionInterface, ConfigurablePluginInterface, PluginFormInterface {
+interface WidgetInterface extends PluginInspectionInterface, ConfigurableInterface, PluginFormInterface, DependentPluginInterface {
 
   /**
    * Returns the widget id.
@@ -117,5 +118,13 @@ interface WidgetInterface extends PluginInspectionInterface, ConfigurablePluginI
    *   over javascript events on selection display.
    */
   public function requiresJsCommands();
+
+  /**
+   * Defines if the widget is visible / accessible in a given context.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function access();
 
 }

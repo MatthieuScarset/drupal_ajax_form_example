@@ -3,6 +3,7 @@
 namespace Drupal\entity_browser\Plugin\EntityBrowser\Widget;
 
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\entity_browser\WidgetBase;
@@ -89,8 +90,8 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    */
   public function getForm(array &$original_form, FormStateInterface $form_state, array $additional_widget_parameters) {
     $form = parent::getForm($original_form, $form_state, $additional_widget_parameters);
-    // TODO - do we need better error handling for view and view_display (in case
-    // either of those is nonexistent or display not of correct type)?
+    // TODO - do we need better error handling for view and view_display (in
+    // case either of those is nonexistent or display not of correct type)?
     $form['#attached']['library'] = ['entity_browser/view'];
 
     /** @var \Drupal\views\ViewExecutable $view */
@@ -98,13 +99,6 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
       ->getStorage('view')
       ->load($this->configuration['view'])
       ->getExecutable();
-
-    // Check if the current user has access to this view.
-    if (!$view->access($this->configuration['view_display'])) {
-      return [
-        '#markup' => $this->t('You do not have access to this View.'),
-      ];
-    }
 
     if (!empty($this->configuration['arguments'])) {
       if (!empty($additional_widget_parameters['path_parts'])) {
@@ -135,7 +129,7 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
 
     // When rebuilding makes no sense to keep checkboxes that were previously
     // selected.
-    if (!empty($form['view']['entity_browser_select']) && $form_state->isRebuilding()) {
+    if (!empty($form['view']['entity_browser_select'])) {
       foreach (Element::children($form['view']['entity_browser_select']) as $child) {
         $form['view']['entity_browser_select'][$child]['#process'][] = ['\Drupal\entity_browser\Plugin\EntityBrowser\Widget\View', 'processCheckbox'];
         $form['view']['entity_browser_select'][$child]['#process'][] = ['\Drupal\Core\Render\Element\Checkbox', 'processAjaxForm'];
@@ -158,7 +152,10 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    * @see \Drupal\Core\Render\Element\Checkbox::processCheckbox()
    */
   public static function processCheckbox(&$element, FormStateInterface $form_state, &$complete_form) {
-    $element['#checked'] = FALSE;
+    if ($form_state->isRebuilding()) {
+      $element['#checked'] = FALSE;
+    }
+
     return $element;
   }
 
@@ -168,7 +165,22 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
   public function validate(array &$form, FormStateInterface $form_state) {
     $user_input = $form_state->getUserInput();
     if (isset($user_input['entity_browser_select'])) {
-      $selected_rows = array_values(array_filter($user_input['entity_browser_select']));
+      if (is_array($user_input['entity_browser_select'])) {
+        $selected_rows = array_values(array_filter($user_input['entity_browser_select']));
+      }
+      else {
+        $selected_rows = [$user_input['entity_browser_select']];
+      }
+
+      $use_field_cardinality = !empty($user_input['entity_browser_select_form_metadata']['use_field_cardinality']);
+      if ($use_field_cardinality) {
+        $cardinality = !empty($user_input['entity_browser_select_form_metadata']['cardinality']) ? $user_input['entity_browser_select_form_metadata']['cardinality'] : 0;
+        if ($cardinality > 0 && count($selected_rows) > $cardinality) {
+          $message = $this->formatPlural($cardinality, 'You can only select one item.', 'You can only select up to @number items.', ['@number' => $cardinality]);
+          $form_state->setError($form['widget']['view']['entity_browser_select'], $message);
+        }
+      }
+
       foreach ($selected_rows as $row) {
         // Verify that the user input is a string and split it.
         // Each $row is in the format entity_type:id.
@@ -206,13 +218,22 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   protected function prepareEntities(array $form, FormStateInterface $form_state) {
-    $selected_rows = array_values(array_filter($form_state->getUserInput()['entity_browser_select']));
+    if (is_array($form_state->getUserInput()['entity_browser_select'])) {
+      $selected_rows = array_values(array_filter($form_state->getUserInput()['entity_browser_select']));
+    }
+    else {
+      $selected_rows = [$form_state->getUserInput()['entity_browser_select']];
+    }
+
     $entities = [];
     foreach ($selected_rows as $row) {
-      list($type, $id) = explode(':', $row);
-      $storage = $this->entityTypeManager->getStorage($type);
-      if ($entity = $storage->load($id)) {
-        $entities[] = $entity;
+      $item = explode(':', $row);
+      if (count($item) == 2) {
+        list($type, $id) = $item;
+        $storage = $this->entityTypeManager->getStorage($type);
+        if ($entity = $storage->load($id)) {
+          $entities[] = $entity;
+        }
       }
     }
     return $entities;
@@ -277,6 +298,21 @@ class View extends WidgetBase implements ContainerFactoryPluginInterface {
       $dependencies[$view->getConfigDependencyKey()] = [$view->getConfigDependencyName()];
     }
     return $dependencies;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function access() {
+    // Mark the widget as not visible if the user has no access to the view.
+    /** @var \Drupal\views\ViewExecutable $view */
+    $view = $this->entityTypeManager
+      ->getStorage('view')
+      ->load($this->configuration['view'])
+      ->getExecutable();
+
+    // Check if the current user has access to this view.
+    return AccessResult::allowedIf($view->access($this->configuration['view_display']));
   }
 
 }
