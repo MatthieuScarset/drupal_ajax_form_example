@@ -10,14 +10,14 @@ use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\ParagraphInterface;
 use Drupal\taxonomy\Entity\Term;
-
-
+use Drupal\views\ViewExecutable;
 
 
 /**
  * Implements hook_paragraph_access().
  */
-function oab_marketo_pargraph_access(ParagraphInterface $paragraph, $operation, AccountInterface $account) {
+function oab_marketo_paragraph_access(ParagraphInterface $paragraph, $operation, AccountInterface $account) {
+
   if ($paragraph->bundle() === 'marketo') {
     return AccessResult::allowedIfHasPermission($account, "$operation marketo form");
   }
@@ -25,6 +25,26 @@ function oab_marketo_pargraph_access(ParagraphInterface $paragraph, $operation, 
   return AccessResult::neutral();
 }
 
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ * @param AccountInterface $account
+ * @param array $context
+ * @param $entity_bundle
+ * @return AccessResult
+ */
+function oab_marketo_paragraph_create_access(AccountInterface $account, array $context, $entity_bundle) {
+//  kint($context, $entity_bundle);
+  if ($entity_bundle === 'marketo') {
+    if ($account->hasPermission('create marketo form')) {
+      return AccessResult::allowed();
+    } else {
+      return AccessResult::forbidden();
+    }
+  }
+
+  return AccessResult::neutral();
+}
 
 
 /**
@@ -171,4 +191,28 @@ function _oab_get_labels_from_term($field) {
   }
   return count($ret) ? implode('|', $ret) : null;
 }
+
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function oab_marketo_views_pre_render(ViewExecutable $view) {
+
+  $current_user = Drupal::currentUser();
+  if ($view->id() === 'marketo_paragraph_entity_browser' && $view->current_display === 'page_list') {
+    if (isset($view->field['dropbutton']->options['fields']['nothing'])) {
+      if (!$current_user->hasPermission('edit marketo form')) {
+        $view->field['dropbutton']->options['fields']['nothing'] = false;
+      }
+    }
+    if (isset($view->field['dropbutton']->options['fields']['nothing_1'])) {
+      if (!$current_user->hasPermission('delete marketo form')) {
+        $view->field['dropbutton']->options['fields']['nothing_1'] = false;
+      }
+    }
+  }
+
+
+}
+
 
