@@ -5,12 +5,15 @@ namespace Drupal\advagg_js_minify\Asset;
 use Drupal\Component\Utility\Unicode;
 use Drupal\advagg\Asset\SingleAssetOptimizerBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Psr\Log\LoggerInterface;
 
 /**
  * Optimizes a JavaScript asset.
  */
 class JsMinifier extends SingleAssetOptimizerBase {
+
+  use StringTranslationTrait;
 
   /**
    * Construct the optimizer instance.
@@ -47,7 +50,8 @@ class JsMinifier extends SingleAssetOptimizerBase {
       return $contents;
     }
 
-    call_user_func_array($function, [&$contents, $asset['data']]);
+    $arguments = [&$contents, $asset['data']];
+    call_user_func_array($function, $arguments);
 
     $contents = trim($contents);
 
@@ -96,7 +100,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
    */
   public function clean($contents, array $asset) {
     if ($encoding = Unicode::encodingFromBOM($contents)) {
-      $contents = Unicode::substr(Unicode::convertToUtf8($contents, $encoding), 1);
+      $contents = mb_substr(Unicode::convertToUtf8($contents, $encoding), 1);
     }
 
     // If no BOM is found, check for the charset attribute.
@@ -121,8 +125,8 @@ class JsMinifier extends SingleAssetOptimizerBase {
   public function minifyJsmin(&$contents, $path) {
     // Do not use jsmin() if the function can not be called.
     if (!function_exists('jsmin')) {
-      $this->logger->notice(t('The jsmin function does not exist. Using JSqueeze.'), []);
-      $contents = $this->minifyJsqueeze($contents);
+      $this->logger->notice($this->t('The jsmin function does not exist. Using JSqueeze.'), []);
+      $contents = $this->minifyJsqueeze($contents, $path);
       return;
     }
 
@@ -131,7 +135,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     // byte characters.
     if (version_compare(phpversion('jsmin'), '2.0.0', '<') && $this->stringContainsMultibyteCharacters($contents)) {
       $this->logger->notice('The currently installed jsmin version does not handle multibyte characters, you may consider to upgrade the jsmin extension. Using JSqueeze fallback.', []);
-      $contents = $this->minifyJsqueeze($contents);
+      $contents = $this->minifyJsqueeze($contents, $path);
       return;
     }
 
@@ -145,7 +149,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     $error = jsmin_last_error_msg();
     if ($error != 'No error') {
       $this->logger->warning('JSMin had an error processing, using JSqueeze fallback. Error details: ' . $error, []);
-      $contents = $this->minifyJsqueeze($contents);
+      $contents = $this->minifyJsqueeze($contents, $path);
       return;
     }
 
@@ -154,7 +158,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     // necessary. The chars unfortunately vary in number and specific chars.
     // Hence this is a poor quality check but often works.
     if (ctype_cntrl(substr(trim($minified), -1)) || strpbrk(substr(trim($minified), -1), ';})') === FALSE) {
-      $this->logger->notice(t('JSMin had a possible error minifying: @file, correcting.', ['@file' => $path]));
+      $this->logger->notice($this->t('JSMin had a possible error minifying: @file, correcting.', ['@file' => $path]));
       if (strrpos(substr($minified, -10), ';')) {
         $contents = substr($minified, 0, strrpos($minified, ';'));
       }
@@ -166,7 +170,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     if ($semicolons > 2) {
       $start = substr($contents, 0, -5);
       $contents = $start . preg_replace("/([;)}]*)([\w]*)([;)}]*)/", "$1$3", substr($contents, -5));
-      $this->logger->notice(t('JSMin had an error minifying file: @file, attempting to correct.', ['@file' => $path]));
+      $this->logger->notice($this->t('JSMin had an error minifying file: @file, attempting to correct.', ['@file' => $path]));
     }
   }
 
@@ -176,7 +180,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
    * @param string $contents
    *   Javascript string.
    */
-  public function minifyJsminplus(&$contents) {
+  public function minifyJsminplus(&$contents, $path) {
     $contents_before = $contents;
 
     // Only include jsminplus.inc if the JSMinPlus class doesn't exist.
@@ -200,7 +204,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     }
     catch (\Exception $e) {
       // Log exception thrown by JSMin+ and roll back to uncompressed content.
-      $this->logger->warning($e->getMessage(), []);
+      $this->logger->warning('JSMinPlus had a possible error minifying: @file. Using uncompressed version. Error: ' . $e->getMessage(), ['@file' => $path]);
       $contents = $contents_before;
     }
     ob_end_clean();
@@ -232,7 +236,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
    * @param string $contents
    *   Javascript string.
    */
-  public function minifyJshrink(&$contents) {
+  public function minifyJshrink(&$contents, $path) {
     $contents_before = $contents;
 
     // Only include jshrink.inc if the JShrink\Minifier class doesn't exist.
@@ -257,7 +261,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     }
     catch (\Exception $e) {
       // Log the JShrink exception and rollback to uncompressed content.
-      $this->logger->warning($e->getMessage(), []);
+      $this->logger->warning('JShrink had a possible error minifying: @file. Using uncompressed version. Error: ' . $e->getMessage(), ['@file' => $path]);
       $contents = $contents_before;
     }
     ob_end_clean();
@@ -269,7 +273,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
    * @param string $contents
    *   Javascript string.
    */
-  public function minifyJsqueeze(&$contents) {
+  public function minifyJsqueeze(&$contents, $path = NULL) {
     $contents_before = $contents;
 
     // Only include jshrink.inc if the Patchwork\JSqueeze class doesn't exist.
@@ -288,7 +292,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
       $contents = $jz->squeeze(
         $contents,
         TRUE,
-        \Drupal::config('advagg_js_minify.settings')->get('add_license'),
+        $this->config->get('add_license'),
         FALSE
       );
 
@@ -300,7 +304,7 @@ class JsMinifier extends SingleAssetOptimizerBase {
     }
     catch (\Exception $e) {
       // Log the JSqueeze exception and rollback to uncompressed content.
-      $this->logger->warning('JSqueeze error, skipping file. ' . $e->getMessage(), []);
+      $this->logger->warning('JSqueeze had a possible error minifying: @file. Using uncompressed version. Error: ' . $e->getMessage(), ['@file' => $path]);
       $contents = $contents_before;
     }
     ob_end_clean();

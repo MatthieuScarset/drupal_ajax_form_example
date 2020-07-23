@@ -2,17 +2,18 @@
 
 namespace Drupal\advagg_old_ie_compatibility\Form;
 
+use Drupal\advagg\AdvaggSettersTrait;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Configure advagg_mod settings for this site.
+ * Configure advagg ie compatibility for this site.
  */
 class SettingsForm extends ConfigFormBase {
+
+  use AdvaggSettersTrait;
 
   /**
    * The Advagg cache.
@@ -36,27 +37,16 @@ class SettingsForm extends ConfigFormBase {
   protected $languageManager;
 
   /**
-   * Constructs a SettingsForm object.
-   *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\Cache\CacheBackendInterface $cache
-   *   The JavaScript asset collection optimizer service.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, CacheBackendInterface $cache) {
-    parent::__construct($config_factory);
-
-    $this->cache = $cache;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('cache.advagg')
-    );
+    /**
+     * @var \Drupal\advagg_old_ie_compatibility\Form\SettingsForm
+     */
+    $instance = parent::create($container);
+    $instance->setCache($container->get('cache.advagg'));
+
+    return $instance;
   }
 
   /**
@@ -80,15 +70,15 @@ class SettingsForm extends ConfigFormBase {
     $config = $this->config('advagg_old_ie_compatibility.settings');
     $form['active'] = [
       '#type' => 'checkbox',
-      '#title' => t('Prevent more than %limit CSS selectors in an aggregated CSS file', ['%limit' => $config->get('limit')]),
+      '#title' => $this->t('Prevent more than %limit CSS selectors in an aggregated CSS file', ['%limit' => $config->get('limit')]),
       '#default_value' => $config->get('active'),
-      '#description' => t('Internet Explorer before version 10; IE9, IE8, IE7, and IE6 all have 4095 as the limit for the maximum number of css selectors that can be in a file. Enabling this will prevent CSS aggregates from being created that exceed this limit. <a href="@link">More info</a>.', ['@link' => 'http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/10164546.aspx']),
+      '#description' => $this->t('Internet Explorer before version 10; IE9, IE8, IE7, and IE6 all have 4095 as the limit for the maximum number of css selectors that can be in a file. Enabling this will prevent CSS aggregates from being created that exceed this limit. <a href="@link">More info</a>.', ['@link' => 'http://blogs.msdn.com/b/ieinternals/archive/2011/05/14/10164546.aspx']),
     ];
     $form['limit'] = [
       '#type' => 'textfield',
-      '#title' => t('The selector count the IE CSS limiter should use'),
+      '#title' => $this->t('The selector count the IE CSS limiter should use'),
       '#default_value' => $config->get('limit'),
-      '#description' => t('Internet Explorer before version 10; IE9, IE8, IE7, and IE6 all have 4095 as the limit for the maximum number of css selectors that can be in a file. Use this field to modify the value used.'),
+      '#description' => $this->t('Internet Explorer before version 10; IE9, IE8, IE7, and IE6 all have 4095 as the limit for the maximum number of css selectors that can be in a file. Use this field to modify the value used.'),
       '#states' => [
         'visible' => [
           '#edit-active' => ['checked' => TRUE],
