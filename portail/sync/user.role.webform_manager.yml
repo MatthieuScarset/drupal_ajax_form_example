@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies: {  }
@@ -11,6 +12,7 @@ permissions:
   - 'access toolbar'
   - 'access webform overview'
   - 'administer nodes'
+  - 'create marketo form'
   - 'create webform'
   - 'create webform content'
   - 'delete all revisions'

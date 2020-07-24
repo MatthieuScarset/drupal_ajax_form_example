@@ -1,0 +1,222 @@
+<?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\media_entity\Entity\Media;
+use Drupal\node\Entity\Node;
+use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\views\ViewExecutable;
+
+
+/**
+ * Implements hook_paragraph_access().
+ */
+function oab_marketo_paragraph_access(ParagraphInterface $paragraph, $operation, AccountInterface $account) {
+
+  if ($paragraph->bundle() === 'marketo') {
+    return AccessResult::allowedIfHasPermission($account, "$operation marketo form");
+  }
+
+  return AccessResult::neutral();
+}
+
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ * @param AccountInterface $account
+ * @param array $context
+ * @param $entity_bundle
+ * @return AccessResult
+ */
+function oab_marketo_paragraph_create_access(AccountInterface $account, array $context, $entity_bundle) {
+//  kint($context, $entity_bundle);
+  if ($entity_bundle === 'marketo') {
+    if ($account->hasPermission('create marketo form')) {
+      return AccessResult::allowed();
+    } else {
+      return AccessResult::forbidden();
+    }
+  }
+
+  return AccessResult::neutral();
+}
+
+
+/**
+ * Implements hook_library_info_alter().
+ * Lorsqu'on utilise la librairie Marketo, on ajoute des JS externes avec une URL dépendante de paramètres
+ */
+function oab_marketo_library_info_alter(&$libraries, $extension) {
+
+  if (isset($libraries['marketo'])) {
+    $conf = Drupal::config(OabSettingsPardotForm::getConfigName());
+    $domain = $conf->get('mkt_to_domain');
+    $munchkin = $conf->get('mkt_to_munchkin_id');
+
+    $base_url = "https:$domain/rs/$munchkin";
+
+    $libraries['marketo']['js'][$base_url . '/images/forms2.min.js'] = ["#type" => "external"];
+    $libraries['marketo']['js'][$base_url . '/images/enhancedFormFunctions-v2.js'] = ["#type" => "external"];
+    $libraries['marketo']['js'][$base_url . '/images/simpledto-multi-domain.js'] = ["#type" => "external"];
+    $libraries['marketo']['js'][$base_url . '/images/OBSExternalEmbedCode.js'] = ["#type" => "external"];
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK
+ *
+ * @param $variables
+ * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+ */
+function oab_marketo_preprocess_paragraph(&$variables) {
+
+  if (!isset($variables['paragraph'])) {
+    return;
+  }
+
+  $marketo_conf = \Drupal::config(OabSettingsPardotForm::getConfigName());
+
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  if ($paragraph->bundle() === 'marketo') {
+    $variables['#attached']['library'][] = 'oab_marketo/marketo';
+
+    $referer = str_replace(Drupal::request()->getSchemeAndHttpHost(), '', Drupal::request()->headers->get('referer'));
+
+    if ($paragraph->field_redirection_url->count() > 0 ) {
+      $redirection_url = $paragraph->field_redirection_url->first()->getUrl()->toString();
+    }
+
+    $variables['#attached']['drupalSettings']['marketo_data'] = [
+      'mktoDomain' => $marketo_conf->get('mkt_to_domain'),
+      'mktoMunchkinID' => $marketo_conf->get('mkt_to_munchkin_id'),
+      'mktoFormID' => (int) $paragraph->field_form_id->value,
+      'formName' => $paragraph->field_title->value,
+      'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : null,
+      'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
+      'mktoFrom' => $referer,
+      'mktoFieldOrder' =>["submitButton","LegalInfos"]
+    ];
+
+    $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
+      'version' => $marketo_conf->get('mkt_version'),
+      'sous_domaine' => $marketo_conf->get('mkt_sous_domaine'),
+      'univers_affichage' => $marketo_conf->get('mkt_univers_affichage'),
+    ];
+
+  }
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_marketo_preprocess_node(&$variables) {
+
+  $current_language = Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  if (!isset($variables['node'])) {
+    return;
+  }
+
+  /** @var Node $node */
+  $node = $variables['node'];
+
+  if ($node->bundle() === 'document' && $current_language === 'fr') {
+
+      if (null !== ($media = Media::load($node->field_file->target_id))) {
+        if (null !== ($file = File::load($media->field_file->target_id))) {
+          $variables['document_file_absolute_url'] = $file->url('canonical', ['absolute' => true]);
+        }
+      }
+
+
+      $mkto_config = \Drupal::config(OabSettingsPardotForm::getConfigName());
+
+      // Variables pour le templates
+      $variables['mkto_form_id'] = $mkto_config->get('mkt_to_form_id');
+      $variables['mkto_follow_up_message'] = $mkto_config->get('mkt_form_follow_up_message');
+
+      // Ajout de la librairie marketo
+      $variables['#attached']['library'][] = 'oab_marketo/marketo';
+
+      // Variables nécessaires pour l'instanciation du formulaire par les scripts marketo
+      $variables['#attached']['drupalSettings']['marketo_data'] = [
+        'mktoDomain' => $mkto_config->get('mkt_to_domain'),
+        'mktoMunchkinID' => $mkto_config->get('mkt_to_munchkin_id'),
+        'mktoFormID' => (int)$mkto_config->get('mkt_to_form_id'),
+        'customFollowUpUrl' => $mkto_config->get('mkt_custom_follow_up_url'),
+        'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$mkto_config->get('mkt_to_form_id'),
+        'formName' => $mkto_config->get('mkt_form_name'),
+        'mktPdfName' => isset($media) ? $media->label() : '',
+        'mktoPdfLink' => isset($file) ? $file->url('canonical', ['absolute' => true]) : null,
+        'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
+        'mktoPdfRubrique' => _oab_get_labels_from_term($node->get('field_subhome')),
+        'mktoPdftype' => _oab_get_labels_from_term($node->get('field_document_type')),
+        'mktoPdfSolution' => _oab_get_labels_from_term($node->get('field_solution')),
+        'mktoPdfJobroles' => _oab_get_labels_from_term($node->get('field_job_profile')),
+        'mktoPdfSegment' => null,
+        'mktoPdfCustomerjourney' => null,
+        'mktoPdfIndustrie' => _oab_get_labels_from_term($node->get('field_industry')),
+        'mktoFieldOrder' =>["submitButton","LegalInfos"]
+      ];
+
+      $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
+        'version' => $mkto_config->get('mkt_version'),
+        'sous_domaine' => $mkto_config->get('mkt_sous_domaine'),
+        'univers_affichage' => $mkto_config->get('mkt_univers_affichage'),
+      ];
+
+  }
+}
+
+
+/**
+ * @param $field
+ * @return string|null
+ * une fonction qui retourne la liste des terms associé à un seul contenu
+ */
+function _oab_get_labels_from_term($field) {
+  $ret = [];
+  $field_values = $field->getValue();
+  if (is_array($field_values)) {
+    foreach ($field_values as $value) {
+      if (isset($value['target_id'])) {
+        $term = Term::load($value['target_id']);
+        $ret[] = strtolower($term->label());
+      }
+    }
+  }
+  return count($ret) ? implode('|', $ret) : null;
+}
+
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function oab_marketo_views_pre_render(ViewExecutable $view) {
+
+  $current_user = Drupal::currentUser();
+  if ($view->id() === 'marketo_paragraph_entity_browser' && $view->current_display === 'page_list') {
+    if (isset($view->field['dropbutton']->options['fields']['nothing'])) {
+      if (!$current_user->hasPermission('edit marketo form')) {
+        $view->field['dropbutton']->options['fields']['nothing'] = false;
+      }
+    }
+    if (isset($view->field['dropbutton']->options['fields']['nothing_1'])) {
+      if (!$current_user->hasPermission('delete marketo form')) {
+        $view->field['dropbutton']->options['fields']['nothing_1'] = false;
+      }
+    }
+  }
+
+
+}
+
+

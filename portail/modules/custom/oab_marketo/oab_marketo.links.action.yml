@@ -1,0 +1,7 @@
+oab_marketo.paragraph.add_form:
+  route_name: 'entity.paragraph.add_form'
+  route_parameters:
+    type: 'marketo'
+  title: 'Create new marketo form'
+  appears_on:
+    - view.marketo_paragraph_entity_browser.page_list

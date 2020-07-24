@@ -108,9 +108,9 @@ function oab_background_image_preprocess_html(&$variables) {
             }
 
             if (!isset($variables['attributes']['class'])) {
-                $variables['attributes']['class'] = "";
+                $variables['attributes']['class'] = [];
             }
-            $variables['attributes']['class'] .= " oab_background_image ";
+            $variables['attributes']['class'][] = "oab_background_image";
             $variables['attributes']['style'] .= "; background-image: url('". $file_url ."'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover";
 
         }

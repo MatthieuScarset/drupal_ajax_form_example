@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - media_entity.bundle.image
-  content:
-    - 'file:file:cbfece32-07b4-433d-bed0-d8c6efc0ab5e'
   module:
     - entity_embed
     - media_entity
@@ -21,4 +19,7 @@ type_settings:
   entity_browser: browse_medias_iframe
   entity_browser_settings:
     display_review: false
-icon_uuid: cbfece32-07b4-433d-bed0-d8c6efc0ab5e
+icon:
+  data: iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAZhJREFUeNpiYBhowAgirP39/2OTvPnuHV7Nbw4fZmSBcY5s2MDw49sLhm+PSpCU8DAIaSxhKDr5iuHuL2awyMPPv8H0044wMM2EbCKqZgjYcO0LnL12txKDPC8rRCMjI6oBf4H4kUA3Vqd2bVUFa77/+j9DzzJFsCH//kN8zYKs8OtHIbAhgl9Pgvn3/2sx+CyShssrijIysLz6zFA7WYrBk8Ec1QAmoImv//5meP2Ol+EBgwtYzH2XMsPDn1xg9r9PXxk+vv0JZLGiuA5uACPQT4/+/0aRrLa8zJD4cRuY/fLbTTB96eJeiJef/cP0woMvCAMgoc7MIKuvyaCRzcJwslMALK6qa86wdkkbAzM0AlmQ49uTuR9hGicDw4FH7xkY1BIZbkz9AxSQZPj45TlSCsLigtvPlqN4QRoou+zkDoY7T96D+ffu/EBI/rdEjcZpmxRwpjgVGUEwraTCAcbgMPj/B+ECUJyCbIEpRAYw29FdwAhNSHAvzFmsBaZZWRC+AqU2dhYlOP/3379gy0AYlhIHHgAEGABg+ZNjlH/6UwAAAABJRU5ErkJggg==
+  uri: modules/custom/oab_develop/modules/oab_tibo/images/mediaembed_update_8020.png
+icon_uuid: null

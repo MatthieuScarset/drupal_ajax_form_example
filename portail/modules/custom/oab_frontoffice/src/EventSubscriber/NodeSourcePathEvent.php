@@ -2,7 +2,10 @@
 
 namespace Drupal\oab_frontoffice\EventSubscriber;
 
+use Drupal\Core\Http\Exception\CacheableAccessDeniedHttpException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Drupal\Core\Url;
@@ -33,10 +36,11 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      */
     public function onRequest(GetResponseEvent $event) {
         $request = $event->getRequest();
-        
+
         if ($request->attributes->has('exception')
-          && (get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\NotFoundHttpException"
-            || get_class($request->attributes->get('exception')) == "Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException")) {
+          && (is_a($request->attributes->get('exception'),NotFoundHttpException::class)
+            || is_a($request->attributes->get('exception'),AccessDeniedHttpException::class))
+        ) {
 
             $code = $request->attributes->get('exception')->getStatusCode();
             if (!in_array($code, array(403, 404))) {
@@ -126,6 +130,4 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
             }
         }
     }
-
-
 }

@@ -51,7 +51,7 @@ class OblController extends ControllerBase {
             '#theme' => 'orange_business_lounge_page_zone',
             '#attached' => [
                 'library' => [
-                    'oab_orange_business_lounge/js/obl.js',
+                    'oab_orange_business_lounge/oab_obl_js',
                 ],
                 'drupalSettings' => [
                     'arr_contries' => $countries["items"],
