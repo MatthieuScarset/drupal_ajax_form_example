@@ -3,18 +3,17 @@
 namespace Drupal\advagg_validator\Form;
 
 use DOMDocument;
-use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\advagg\AdvaggSettersTrait;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\RendererInterface;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Configure form for W3C validation of CSS files.
  */
 class CssW3Form extends BaseValidatorForm {
+
+  use AdvaggSettersTrait;
 
   /**
    * The Guzzle HTTP Client.
@@ -32,29 +31,17 @@ class CssW3Form extends BaseValidatorForm {
 
   /**
    * {@inheritdoc}
-   *
-   * @param \GuzzleHttp\Client $http_client
-   *   The Guzzle HTTP Client.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The Drupal renderer.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, RequestStack $request_stack, Client $http_client, RendererInterface $renderer) {
-    parent::__construct($config_factory, $request_stack);
-    $this->requestStack = $request_stack;
-    $this->httpClient = $http_client;
-    $this->renderer = $renderer;
-  }
-
-  /**
-   * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('request_stack'),
-      $container->get('http_client'),
-      $container->get('renderer')
-    );
+    /**
+     * @var \Drupal\advagg_validator\Form\CssW3Form
+     */
+    $instance = parent::create($container);
+    $instance->setRequestStack($container->get('request_stack'));
+    $instance->setHttpClient($container->get('http_client'));
+    $instance->setRenderer($container->get('renderer'));
+
+    return $instance;
   }
 
   /**
@@ -70,7 +57,7 @@ class CssW3Form extends BaseValidatorForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::generateForm('css', FALSE);
     $form['notice'] = [
-      '#markup' => '<div>' . t('Notice: The form below will submit files to the <a href="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</a> service if used.') . '</div>',
+      '#markup' => '<div>' . $this->t('Notice: The form below will submit files to the <a href="http://jigsaw.w3.org/css-validator/">http://jigsaw.w3.org/css-validator/</a> service if used.') . '</div>',
       '#weight' => -1,
     ];
     $form = parent::buildForm($form, $form_state);
@@ -99,7 +86,7 @@ class CssW3Form extends BaseValidatorForm {
       '#theme' => 'item_list',
       '#items' => $info,
     ];
-    drupal_set_message($this->renderer->render($output));
+    $this->messenger()->addMessage($this->renderer->render($output));
   }
 
   /**
@@ -137,7 +124,7 @@ class CssW3Form extends BaseValidatorForm {
       '#theme' => 'item_list',
       '#items' => $info,
     ];
-    drupal_set_message($this->renderer->render($output));
+    $this->messenger()->addMessage($this->renderer->render($output));
   }
 
   /**
@@ -178,9 +165,6 @@ class CssW3Form extends BaseValidatorForm {
         }
         unset($value);
       }
-
-      // Save data.
-      $file_info[$filename]['validation']['w3'] = $output[$filename]['jigsaw.w3.org'];
     }
     return $output;
   }
@@ -243,7 +227,7 @@ class CssW3Form extends BaseValidatorForm {
       return $return;
     }
 
-    return ['error' => t('W3C Server did not return a 200 or request data was empty.')];
+    return ['error' => $this->t('W3C Server did not return a 200 or request data was empty.')];
   }
 
   /**
