@@ -9,7 +9,7 @@
         google.maps.InfoWindow = InfoBox;
         var infowindow = new google.maps.InfoWindow();
 
-        if(Drupal.geolocation !== undefined) {
+        if(typeof Drupal.geolocation !== undefined && typeof Drupal.geolocation.loadGoogle === 'function') {
           Drupal.geolocation.loadGoogle(function () {
             //méthode appelée une fois que la map est chargée
             gestionManipulation();
