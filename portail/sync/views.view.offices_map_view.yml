@@ -1466,7 +1466,7 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: standard
-      title: 'Offices map block'
+      title: 'Our local offices'
       header: {  }
       footer: {  }
       empty: {  }
@@ -3309,6 +3309,7 @@ display:
         relationships: false
         style: false
         row: false
+        title: false
       exposed_form:
         type: basic
         options:
@@ -3332,7 +3333,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<h2>{{ title__value }}</h2>'
+            text: '<h4>{{ title__value }}</h4>'
             make_link: false
             path: ''
             absolute: false
@@ -3900,7 +3901,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="https://www.google.com/maps/search/?api=1&query={{ field_office_location|trim }}" target="_blank">{{ "Link to google"|t }}</a>'
+            text: '<a href="https://www.google.com/maps/search/?api=1&query={{ field_office_location|trim }}" target="_blank" class="text-primary"><strong>{{ "View in Maps"|t }}</strong></a>'
             make_link: false
             path: ''
             absolute: false
@@ -3964,6 +3965,7 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+          group: 1
         field_office_location_lat:
           id: field_office_location_lat
           table: node__field_office_location
@@ -4111,7 +4113,7 @@ display:
             operator: field_region_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: filter_region_id
+            identifier: field_region_target_id
             required: false
             remember: false
             multiple: false
@@ -4241,6 +4243,8 @@ display:
           separator: ''
           hide_empty: true
       path: new-where-we-are
+      title: 'Our local offices'
+      exposed_block: false
     cache_metadata:
       max-age: -1
       contexts:
