@@ -23,6 +23,10 @@ var MapControl = function() {
       return;
     }
 
+    if(typeof Drupal.geolocation === 'undefined') {
+      return;
+    }
+
     var drupalMap = Drupal.geolocation.maps[0];
 
     if(drupalMap.type !== 'leaflet') {
