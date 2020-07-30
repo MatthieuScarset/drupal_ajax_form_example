@@ -3543,3 +3543,24 @@ hr.reseau-mobile-accords-roaming {
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
 }
+
+/* Page temporaire (offices) */
+.view-offices-map-view .views-view-grid div.office-address {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+    /* filtres alignés */
+.view-offices-map-view .form--inline {
+  position: relative;
+}
+
+.view-offices-map-view .form--inline > .form-item {
+  display: inline;
+  float: left;
+  margin-right: 20px;
+}
+
+.view-offices-map-view .form--inline .form-actions {
+  position: absolute;
+  bottom: 0;
+}
