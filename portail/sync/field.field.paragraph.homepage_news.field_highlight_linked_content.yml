@@ -1,0 +1,23 @@
+uuid: 31fa7f69-1476-4f19-a568-3e674e6bd85d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight_linked_content
+    - paragraphs.paragraphs_type.homepage_news
+  module:
+    - link
+id: paragraph.homepage_news.field_highlight_linked_content
+field_name: field_highlight_linked_content
+entity_type: paragraph
+bundle: homepage_news
+label: 'Highlight linked content'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link
