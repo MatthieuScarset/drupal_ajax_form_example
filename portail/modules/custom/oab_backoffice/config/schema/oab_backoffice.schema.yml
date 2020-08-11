@@ -64,6 +64,34 @@ oab_backoffice.pardot:
     iframe_url:
       type: label
       label: 'Iframe url'
+    mkt_to_domain:
+      type: label
+      label: 'mktToDomain'
+    mkt_form_name:
+      type: label
+      label: 'formName'
+    mkt_to_munchkin_id:
+      type: label
+      label: 'mktToMunchkinId'
+    mkt_to_form_id:
+      type: label
+      label: 'mktToFormId'
+    mkt_custom_follow_up_url:
+      type: label
+      label: 'customFollowUpUrl'
+#    mkt_form_follow_up_message[value][value]:
+    mkt_form_follow_up_message:
+      type: text
+      label: 'formFollowUpMessage'
+    mkt_version:
+      type: label
+      label: 'version'
+    mkt_sous_domaine:
+      type: label
+      label: 'sous_domaine'
+    mkt_univers_affichage:
+      type: label
+      label: 'univers_affichage'
 
 action.configuration.oab_backoffice_node_workbench_publish:
   type: action_configuration_default
