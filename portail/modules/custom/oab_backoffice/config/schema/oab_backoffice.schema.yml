@@ -81,7 +81,7 @@ oab_backoffice.pardot:
       label: 'customFollowUpUrl'
 #    mkt_form_follow_up_message[value][value]:
     mkt_form_follow_up_message:
-      type: text
+      type: text_format
       label: 'formFollowUpMessage'
     mkt_version:
       type: label
