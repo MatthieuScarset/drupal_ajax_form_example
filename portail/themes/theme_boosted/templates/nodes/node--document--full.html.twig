@@ -138,41 +138,15 @@ view_mode ? view_mode|clean_class,
 
     {% if langcode == 'fr' %}
 
-      {{ attach_library('oab_frontoffice/marketo') }}
-
-
-      {# récupérer les var #}
-      {% set mkt_to_form_id = d_config('oab_backoffice.pardot').get('mkt_to_form_id') %}
-
-      {% set mkto_form_follow_up_message = d_config('oab_backoffice.pardot').get('mkt_form_follow_up_message') %}
-      {% if mkto_form_follow_up_message is empty %}
-        {% set mkto_form_follow_up_message = '' %}
-      {% endif %}
-
-      {% for key, file in content.field_file  %}
-        {% if key == "#items" %}
-          {% set media = file.entity %}
-          {% set file_entity = media.field_image_file.entity %}
-          {% set inactiveClasse = "" %}
-          {% if media is not empty %}
-            {% set filename = media.field_file.entity.filename.value %}
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-
-      {% set filename_without_extension = filename|split('.')|first %}
-
-      <form id="mktoForm_{{ mkt_to_form_id }}"></form>
-      <div id="FormFollowUpMessage_{{ mkt_to_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
+      <form id="mktoForm_{{ mkto_form_id }}"></form>
+      <div id="FormFollowUpMessage_{{ mkto_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
           <div class="custum-fum-div">
             <div class="custom-fum">
-              {{ mkto_form_follow_up_message|raw }}
+              {{ mkto_follow_up_message|raw }}
             </div>
-            <a class="btn btn-primary" href="{{ base_url }}/sites/default/files/{{ filename }}">Télécharger le document</a>
+            <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
           </div>
         </div>
-      <span class="merkato_mkt_pdf_name hidden" id="mkt-pdf-name" data-name="{{ filename_without_extension }}"></span>
-      <span class="merkato_mkt_pdf_url hidden" id="mkt-pdf-url" data-url="{{base_url}}/sites/default/files/{{filename}}"></span>
 
 
     {% else %}

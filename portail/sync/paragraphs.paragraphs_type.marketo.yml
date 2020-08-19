@@ -1,0 +1,9 @@
+uuid: 9f9f1192-078f-480d-a9ed-63392ea90b03
+langcode: fr
+status: true
+dependencies: {  }
+id: marketo
+label: Marketo
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

@@ -9,6 +9,11 @@ use Drupal\Core\Form\FormStateInterface;
  * Configure example settings for this site.
  */
 class OabSettingsPardotForm extends ConfigFormBase {
+
+  public static function getConfigName() {
+    return 'oab_backoffice.pardot';
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -38,7 +43,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
     ];
 
     /* Tab for Marketo */
-    $form['Marketo'] = [
+    $form['marketo'] = [
       '#type' => 'details',
       '#title' => t('Marketo'),
       '#group' => "tabs_general"
@@ -54,72 +59,82 @@ class OabSettingsPardotForm extends ConfigFormBase {
 
     /** My fields for Marketo **/
 
-    $form['Marketo']['mkt_to_domain'] = array(
+    $form['marketo']['general'] = [
+      '#type' => "fieldset",
+      '#title' => $this->t("General conf"),
+      '#description' => $this->t("Configuration for all marketo forms"),
+    ];
+
+    $form['marketo']['general']['mkt_to_domain'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('mktToDomain'),
+      '#title' => $this->t('Domain'),
       '#default_value' => $config->get('mkt_to_domain'),
       '#description' => 'API domain : ' . $config->get('mkt_to_domain'),
       '#size'=> 80,
     );
 
-    $form['Marketo']['mkt_form_name'] = array(
+    $form['marketo']['general']['mkt_to_munchkin_id'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('formName'),
-      '#default_value' => $config->get('mkt_form_name'),
-      '#description' => 'API domain : ' . $config->get('mkt_form_name'),
-      '#size'=> 80,
-    );
-
-    $form['Marketo']['mkt_to_munchkin_id'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('mktToMunchkinId'),
+      '#title' => $this->t('MunchkinId'),
       '#default_value' => $config->get('mkt_to_munchkin_id'),
       '#size'=> 350,
     );
 
-    $form['Marketo']['mkt_to_form_id'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('mktToFormId'),
-      '#default_value' => $config->get('mkt_to_form_id'),
-      '#size'=> 350,
-    );
-
-    $form['Marketo']['mkt_custom_follow_up_url'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('customFollowUpUrl'),
-      '#default_value' => $config->get('mkt_custom_follow_up_url'),
-      '#size'=> 350,
-    );
-    
-    $mkt_follow_up = $config->get('mkt_form_follow_up_message');
-    $form['Marketo']['mkt_form_follow_up_message'] = array(
-      '#type' => 'text_format',
-      '#title' => $this->t('formFollowUpMessage'),
-      '#default_value' => $mkt_follow_up['value'] ?: "",
-      '#format'=> $mkt_follow_up['format'] ?: 'full_html',
-    );
-
-    echo'<hr>';
-
-    $form['Marketo']['mkt_version'] = array(
+    $form['marketo']['general']['mkt_version'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('version'),
       '#default_value' => $config->get('mkt_version'),
       '#size'=> 350,
     );
 
-    $form['Marketo']['mkt_sous_domaine'] = array(
+    $form['marketo']['general']['mkt_sous_domaine'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('sous_domaine'),
       '#default_value' => $config->get('mkt_sous_domaine'),
       '#size'=> 350,
     );
 
-    $form['Marketo']['mkt_univers_affichage'] = array(
+    $form['marketo']['general']['mkt_univers_affichage'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('univers_affichage'),
       '#default_value' => $config->get('mkt_univers_affichage'),
       '#size'=> 350,
+    );
+
+
+    $form['marketo']['document'] = [
+      '#type' => "fieldset",
+      '#title' => $this->t("Document marketo form settings"),
+      '#description' => $this->t("Specific config for document marketo form")
+    ];
+
+    $form['marketo']['document']['mkt_form_name'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('form name'),
+      '#default_value' => $config->get('mkt_form_name'),
+      '#size'=> 80,
+    );
+
+    $form['marketo']['document']['mkt_to_form_id'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('FormId'),
+      '#default_value' => $config->get('mkt_to_form_id'),
+      '#size'=> 350,
+    );
+
+    $form['marketo']['document']['mkt_custom_follow_up_url'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Custom follow up URL'),
+      '#default_value' => $config->get('mkt_custom_follow_up_url'),
+      '#size'=> 350,
+    );
+
+    $mkt_follow_up = $config->get('mkt_form_follow_up_message');
+    $form['marketo']['document']['mkt_form_follow_up_message'] = array(
+      '#type' => 'text_format',
+      '#title' => $this->t('formFollowUpMessage'),
+      '#default_value' => $mkt_follow_up['value'] ?: "",
+      '#format'=> $mkt_follow_up['format'] ?: 'full_html',
     );
 
 

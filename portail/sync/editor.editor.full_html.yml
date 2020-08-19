@@ -37,6 +37,8 @@ settings:
             - Table
             - VideoEmbed
             - node
+            - marketo
+            - marketo_form
             - HorizontalRule
             - BulletedList
             - SpecialChar

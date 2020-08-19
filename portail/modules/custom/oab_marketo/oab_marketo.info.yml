@@ -1,0 +1,10 @@
+name: OAB Marketo
+description: 'Provide specific code for Marketo'
+type: module
+package: OAB
+
+
+version: '8.x-1.0'
+core: '8.x'
+project: 'oab_marketo'
+datestamp: 1453308360
