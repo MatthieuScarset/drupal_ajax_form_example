@@ -55,17 +55,19 @@ function oab_marketo_library_info_alter(&$libraries, $extension) {
 
   if (isset($libraries['marketo'])) {
     $conf = Drupal::config(OabSettingsPardotForm::getConfigName());
-    $domain = $conf->get('mkt_to_domain');
-    $munchkin = $conf->get('mkt_to_munchkin_id');
+    $domain = $conf->get('marketo.general.mkto_domain');
+    $munchkin = $conf->get('marketo.general.mkto_munchkin_id');
 
     $base_url = "https:$domain/rs/$munchkin";
 
-    $libraries['marketo']['js'][$base_url . '/images/forms2.min.js'] = ["#type" => "external"];
-    $libraries['marketo']['js'][$base_url . '/images/enhancedFormFunctions-v2.js'] = ["#type" => "external"];
-    $libraries['marketo']['js'][$base_url . '/images/simpledto-multi-domain.js'] = ["#type" => "external"];
-    $libraries['marketo']['js'][$base_url . '/images/OBSExternalEmbedCode.js'] = ["#type" => "external"];
+    if ($domain !== null && $domain !== ""
+        && $munchkin !== null && $munchkin !== "") {
+      $libraries['marketo']['js'][$base_url . '/images/forms2.min.js'] = ["#type" => "external"];
+      $libraries['marketo']['js'][$base_url . '/images/enhancedFormFunctions-v2.js'] = ["#type" => "external"];
+      $libraries['marketo']['js'][$base_url . '/images/simpledto-multi-domain.js'] = ["#type" => "external"];
+      $libraries['marketo']['js'][$base_url . '/images/OBSExternalEmbedCode.js'] = ["#type" => "external"];
+    }
   }
-
 }
 
 /**
@@ -94,8 +96,8 @@ function oab_marketo_preprocess_paragraph(&$variables) {
     }
 
     $variables['#attached']['drupalSettings']['marketo_data'] = [
-      'mktoDomain' => $marketo_conf->get('mkt_to_domain'),
-      'mktoMunchkinID' => $marketo_conf->get('mkt_to_munchkin_id'),
+      'mktoDomain' => $marketo_conf->get('marketo.general.mkto_domain'),
+      'mktoMunchkinID' => $marketo_conf->get('marketo.general.mkto_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
       'formName' => $paragraph->field_title->value,
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
@@ -105,9 +107,9 @@ function oab_marketo_preprocess_paragraph(&$variables) {
     ];
 
     $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
-      'version' => $marketo_conf->get('mkt_version'),
-      'sous_domaine' => $marketo_conf->get('mkt_sous_domaine'),
-      'univers_affichage' => $marketo_conf->get('mkt_univers_affichage'),
+      'version' => $marketo_conf->get('marketo.general.mkto_version'),
+      'sous_domaine' => $marketo_conf->get('marketo.general.mkto_sous_domaine'),
+      'univers_affichage' => $marketo_conf->get('marketo.general.mkto_univers_affichage'),
     ];
 
   }
@@ -119,8 +121,6 @@ function oab_marketo_preprocess_paragraph(&$variables) {
  */
 function oab_marketo_preprocess_node(&$variables) {
 
-  $current_language = Drupal::languageManager()->getCurrentLanguage()->getId();
-
   if (!isset($variables['node'])) {
     return;
   }
@@ -128,7 +128,7 @@ function oab_marketo_preprocess_node(&$variables) {
   /** @var Node $node */
   $node = $variables['node'];
 
-  if ($node->bundle() === 'document' && $current_language === 'fr') {
+  if ($node->bundle() === 'document') {
 
       if (null !== ($media = Media::load($node->field_file->target_id))) {
         if (null !== ($file = File::load($media->field_file->target_id))) {
@@ -136,24 +136,23 @@ function oab_marketo_preprocess_node(&$variables) {
         }
       }
 
-
       $mkto_config = \Drupal::config(OabSettingsPardotForm::getConfigName());
 
       // Variables pour le templates
-      $variables['mkto_form_id'] = $mkto_config->get('mkt_to_form_id');
-      $variables['mkto_follow_up_message'] = $mkto_config->get('mkt_form_follow_up_message');
+      $variables['mkto_form_id'] = $mkto_config->get('marketo.document.mkto_form_id');
+      $variables['mkto_follow_up_message'] = $mkto_config->get('marketo.document.mkto_form_follow_up_message');
 
       // Ajout de la librairie marketo
       $variables['#attached']['library'][] = 'oab_marketo/marketo';
 
       // Variables nécessaires pour l'instanciation du formulaire par les scripts marketo
       $variables['#attached']['drupalSettings']['marketo_data'] = [
-        'mktoDomain' => $mkto_config->get('mkt_to_domain'),
-        'mktoMunchkinID' => $mkto_config->get('mkt_to_munchkin_id'),
-        'mktoFormID' => (int)$mkto_config->get('mkt_to_form_id'),
-        'customFollowUpUrl' => $mkto_config->get('mkt_custom_follow_up_url'),
-        'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$mkto_config->get('mkt_to_form_id'),
-        'formName' => $mkto_config->get('mkt_form_name'),
+        'mktoDomain' => $mkto_config->get('marketo.general.mkto_domain'),
+        'mktoMunchkinID' => $mkto_config->get('marketo.general.mkto_munchkin_id'),
+        'mktoFormID' => (int)$mkto_config->get('marketo.document.mkto_form_id'),
+        'customFollowUpUrl' => $mkto_config->get('marketo.document.mkto_custom_follow_up_url'),
+        'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$mkto_config->get('marketo.document.mkto_form_id'),
+        'formName' => $mkto_config->get('marketo.document.mkto_form_name'),
         'mktoPdfName' => isset($media) ? $media->label() : '',
         'mktoPdfLink' => isset($file) ? $file->url('canonical', ['absolute' => true]) : null,
         'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
@@ -168,9 +167,9 @@ function oab_marketo_preprocess_node(&$variables) {
       ];
 
       $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
-        'version' => $mkto_config->get('mkt_version'),
-        'sous_domaine' => $mkto_config->get('mkt_sous_domaine'),
-        'univers_affichage' => $mkto_config->get('mkt_univers_affichage'),
+        'version' => $mkto_config->get('marketo.general.mkto_version'),
+        'sous_domaine' => $mkto_config->get('marketo.general.mkto_sous_domaine'),
+        'univers_affichage' => $mkto_config->get('marketo.general.mkto_univers_affichage'),
       ];
 
   }
@@ -215,8 +214,4 @@ function oab_marketo_views_pre_render(ViewExecutable $view) {
       }
     }
   }
-
-
 }
-
-
