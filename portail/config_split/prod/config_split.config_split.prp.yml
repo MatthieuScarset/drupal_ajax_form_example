@@ -1,0 +1,15 @@
+uuid: a36adafc-2863-4b7f-b1ee-6aeaefc56841
+langcode: fr
+status: false
+dependencies: {  }
+id: prp
+label: PRP
+description: ''
+folder: config_split/prp
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

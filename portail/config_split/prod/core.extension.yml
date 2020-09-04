@@ -1,9 +1,6 @@
 module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
-  advagg: 0
-  advagg_css_minify: 0
-  advagg_js_minify: 0
   autologout: 0
   automated_cron: 0
   block: 0
@@ -20,7 +17,6 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
-  devel: 0
   dynamic_page_cache: 0
   editor: 0
   embed: 0
@@ -73,7 +69,6 @@ module:
   oab_entity_embed_link: 0
   oab_frontoffice: 0
   oab_hub: 0
-  oab_marketo: 0
   oab_media_browser: 0
   oab_migrate_content: 0
   oab_offices_map: 0
