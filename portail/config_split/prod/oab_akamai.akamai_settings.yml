@@ -1,4 +1,4 @@
-enable_hook: 0
+enable_hook: 1
 auth_prefixe: 'EG1-HMAC-SHA256 '
 base_url: akab-lgsc3ap2lfgdhc65-gnbwwdu5i4yvnlfx.purge.akamaiapis.net
 req_path: /ccu/v3/delete/url/production
