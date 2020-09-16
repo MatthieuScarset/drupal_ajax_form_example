@@ -3564,3 +3564,7 @@ hr.reseau-mobile-accords-roaming {
   position: absolute;
   bottom: 0;
 }
+
+.view-offices-map-view .views-view-grid .views-row {
+  margin-bottom: 3rem;
+}
