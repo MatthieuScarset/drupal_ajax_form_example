@@ -116,33 +116,15 @@ view_mode ? view_mode|clean_class,
 
     </div>
 
-    {% set pardot_iframe = d_config('oab_backoffice.pardot').get('iframe_url') %}
-    {% set filename = "" %}
-    {% set fullUrl = "" %}
+    {% set pardot_iframe = d_config('oab_backoffice.pardot').get('pardot.iframe_url') %}
 
-    {% for key, file in content.field_file  %}
-        {% if key == "#items" %}
-            {% set media = file.entity %}
-            {% set file_entity = media.field_image_file.entity %}
-            {% set inactiveClasse = "" %}
-            {% if media is not empty %}
-                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
-                    ~ '&fname=' ~ media.field_file.entity.filename.value
-                    ~ '&dwname=' ~ media.field_file.entity.filename.value
-                    ~ '&title=' ~ node.label|url_encode
-                %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-
-
-    {% if langcode == 'fr' %}
+    {% if langcode == 'fr' or pardot_iframe|length == 0 %}
 
       <form id="mktoForm_{{ mkto_form_id }}"></form>
       <div id="FormFollowUpMessage_{{ mkto_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
           <div class="custum-fum-div">
             <div class="custom-fum">
-              {{ mkto_follow_up_message|raw }}
+              {{ mkto_follow_up_message.value|raw }}
             </div>
             <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
           </div>
@@ -150,6 +132,23 @@ view_mode ? view_mode|clean_class,
 
 
     {% else %}
+      {% set filename = "" %}
+      {% set fullUrl = "" %}
+
+      {% for key, file in content.field_file  %}
+        {% if key == "#items" %}
+          {% set media = file.entity %}
+          {% set file_entity = media.field_image_file.entity %}
+          {% set inactiveClasse = "" %}
+          {% if media is not empty %}
+            {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
+              ~ '&fname=' ~ media.field_file.entity.filename.value
+              ~ '&dwname=' ~ media.field_file.entity.filename.value
+              ~ '&title=' ~ node.label|url_encode
+            %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
         <div class="pardot-form" style="margin-top: 4rem;">
             <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
         </div>

@@ -65,39 +65,39 @@ class OabSettingsPardotForm extends ConfigFormBase {
       '#description' => $this->t("Configuration for all marketo forms"),
     ];
 
-    $form['marketo']['general']['mkt_to_domain'] = array(
+    $form['marketo']['general']['mkto_domain'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Domain'),
-      '#default_value' => $config->get('mkt_to_domain'),
-      '#description' => 'API domain : ' . $config->get('mkt_to_domain'),
+      '#default_value' => $config->get('marketo.general.mkto_domain'),
+      '#description' => 'API domain : ' . $config->get('marketo.general.mkto_domain'),
       '#size'=> 80,
     );
 
-    $form['marketo']['general']['mkt_to_munchkin_id'] = array(
+    $form['marketo']['general']['mkto_munchkin_id'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('MunchkinId'),
-      '#default_value' => $config->get('mkt_to_munchkin_id'),
+      '#title' => $this->t('Munchkin Id'),
+      '#default_value' => $config->get('marketo.general.mkt_to_munchkin_id'),
       '#size'=> 350,
     );
 
-    $form['marketo']['general']['mkt_version'] = array(
+    $form['marketo']['general']['mkto_version'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('version'),
-      '#default_value' => $config->get('mkt_version'),
+      '#title' => $this->t('Version'),
+      '#default_value' => $config->get('marketo.general.mkto_version'),
       '#size'=> 350,
     );
 
-    $form['marketo']['general']['mkt_sous_domaine'] = array(
+    $form['marketo']['general']['mkto_sous_domaine'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('sous_domaine'),
-      '#default_value' => $config->get('mkt_sous_domaine'),
+      '#title' => $this->t('Sous domaine'),
+      '#default_value' => $config->get('marketo.general.mkto_sous_domaine'),
       '#size'=> 350,
     );
 
-    $form['marketo']['general']['mkt_univers_affichage'] = array(
+    $form['marketo']['general']['mkto_univers_affichage'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('univers_affichage'),
-      '#default_value' => $config->get('mkt_univers_affichage'),
+      '#title' => $this->t('Univers affichage'),
+      '#default_value' => $config->get('marketo.general.mkto_univers_affichage'),
       '#size'=> 350,
     );
 
@@ -108,31 +108,33 @@ class OabSettingsPardotForm extends ConfigFormBase {
       '#description' => $this->t("Specific config for document marketo form")
     ];
 
-    $form['marketo']['document']['mkt_form_name'] = array(
+    $form['marketo']['document']['mkto_form_name'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('form name'),
-      '#default_value' => $config->get('mkt_form_name'),
+      '#title' => $this->t('Form name'),
+      '#default_value' => $config->get('marketo.document.mkto_form_name'),
       '#size'=> 80,
     );
 
-    $form['marketo']['document']['mkt_to_form_id'] = array(
+    $form['marketo']['document']['mkto_form_id'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('FormId'),
-      '#default_value' => $config->get('mkt_to_form_id'),
+      '#title' => $this->t('Form Id'),
+      '#default_value' => $config->get('marketo.document.mkto_form_id'),
       '#size'=> 350,
     );
 
-    $form['marketo']['document']['mkt_custom_follow_up_url'] = array(
+    $form['marketo']['document']['mkto_custom_follow_up_url'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Custom follow up URL'),
-      '#default_value' => $config->get('mkt_custom_follow_up_url'),
+      '#default_value' => $config->get('marketo.document.mkto_custom_follow_up_url'),
       '#size'=> 350,
     );
 
-    $form['marketo']['document']['mkt_form_follow_up_message'] = array(
-      '#type' => 'webform_html_editor',
+    $mkt_follow_up = $config->get('marketo.document.mkto_form_follow_up_message');
+    $form['marketo']['document']['mkto_form_follow_up_message'] = array(
+      '#type' => 'text_format',
       '#title' => $this->t('Form follow up message'),
-      '#default_value' => $config->get('mkt_form_follow_up_message'),
+      '#default_value' => $mkt_follow_up['value'] ?: "",
+      '#format'=> $mkt_follow_up['format'] ?: 'full_html',
     );
 
 
@@ -141,7 +143,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
     $form['Pardot']['iframe_url'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('iframe url'),
-      '#default_value' => $config->get('iframe_url'),
+      '#default_value' => $config->get('pardot.iframe_url'),
     );
 
     return parent::buildForm($form, $form_state);
@@ -152,20 +154,20 @@ class OabSettingsPardotForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
+
     $this->config('oab_backoffice.pardot')
-      /* for Marketo */
-      ->set('mkt_to_domain', $form_state->getValue('mkt_to_domain'))
-      ->set('mkt_form_name', $form_state->getValue('mkt_form_name'))
-      ->set('mkt_to_munchkin_id', $form_state->getValue('mkt_to_munchkin_id'))
-      ->set('mkt_to_form_id', $form_state->getValue('mkt_to_form_id'))
-      ->set('mkt_custom_follow_up_url', $form_state->getValue('mkt_custom_follow_up_url'))
-      ->set('mkt_form_follow_up_message', $form_state->getValue('mkt_form_follow_up_message'))
-      ->set('mkt_version', $form_state->getValue('mkt_version'))
-      ->set('mkt_sous_domaine', $form_state->getValue('mkt_sous_domaine'))
-      ->set('mkt_univers_affichage', $form_state->getValue('mkt_univers_affichage'))
+      ->set('marketo.general.mkto_domain', $form_state->getValue('mkto_domain'))
+      ->set('marketo.general.mkto_munchkin_id', $form_state->getValue('mkto_munchkin_id'))
+      ->set('marketo.general.mkto_version', $form_state->getValue('mkto_version'))
+      ->set('marketo.general.mkto_sous_domaine', $form_state->getValue('mkto_sous_domaine'))
+      ->set('marketo.general.mkto_univers_affichage', $form_state->getValue('mkto_univers_affichage'))
+      ->set('marketo.document.mkto_form_name', $form_state->getValue('mkto_form_name'))
+      ->set('marketo.document.mkto_form_id', $form_state->getValue('mkto_form_id'))
+      ->set('marketo.document.mkto_custom_follow_up_url', $form_state->getValue('mkto_custom_follow_up_url'))
+      ->set('marketo.document.mkto_form_follow_up_message', $form_state->getValue('mkto_form_follow_up_message'))
 
       /* for Pardot */
-      ->set('iframe_url', $form_state->getValue('iframe_url'))
+      ->set('pardot.iframe_url', $form_state->getValue('iframe_url'))
       ->save();
 
     parent::submitForm($form, $form_state);
