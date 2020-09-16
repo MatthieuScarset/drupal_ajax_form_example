@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.homepage_news.field_block_size
     - field.field.paragraph.homepage_news.field_chapo
     - field.field.paragraph.homepage_news.field_highlight_content
+    - field.field.paragraph.homepage_news.field_highlight_text
     - field.field.paragraph.homepage_news.field_image
     - field.field.paragraph.homepage_news.field_link_news
     - field.field.paragraph.homepage_news.field_title
@@ -41,6 +42,14 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
+  field_highlight_text:
+    weight: 5
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_image:
     weight: 1
