@@ -126,16 +126,20 @@ article .product ul.nav-tabs li:before{
 }
 
 .path-subhome-press .block-mediatheque,
-.path-subhome-archive-press .block-mediatheque{
+.path-subhome-archive-press .block-mediatheque,
+.path-subhome-press .block-rebond-subhome,
+.path-subhome-archive-press .block-rebond-subhome{
     margin: 0;
 }
 
-#views-exposed-form-subhomes-archive-archive-press {
+#views-exposed-form-subhomes-archive-archive-press,
+#views-exposed-form-subhomes-archive-archive-news {
     padding-top: 0;
 }
 
 #views-exposed-form-subhomes-page-press,
-#views-exposed-form-subhomes-archive-archive-press {
+#views-exposed-form-subhomes-archive-archive-press,
+#views-exposed-form-subhomes-archive-archive-news {
     background-color: #FFFFFF;
     padding-bottom: 0;
 }
@@ -173,10 +177,15 @@ article .product ul.nav-tabs li:before{
     margin-top: 1.4rem;
 }
 
-.view-display-id-page_press .subhome-view-press .archives_link{
+.view-display-id-page_press .subhome-view-press .archives_link,
+.subhome-view-news .archives_link {
     border-bottom: #8F8C87 1px solid;
     text-align: right;
     padding: 0 0.714em 2.143em 0;
+}
+
+.view-display-id-archive_news .date-subhome {
+  display: none;
 }
 
 .view-display-id-page_press .subhomes-filterbar-background{
@@ -188,7 +197,8 @@ article .product ul.nav-tabs li:before{
     max-width:160px;
 }
 
-.row .subhome-view-press {
+.row .subhome-view-press,
+.row .subhome-view-news {
     margin-left: 30px;
 }
 
@@ -1348,7 +1358,10 @@ a.link-subhomes:hover .encart-image.subhome-image {
     }
 }
 
-.rebond article, .block-mediatheque, #block-promoactublock {
+.rebond article,
+.block-mediatheque,
+#block-promoactublock,
+.block-rebond-subhome {
     margin: 2rem 2rem 0 2rem;
     padding: 3rem 2rem;
 }
@@ -1371,7 +1384,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
 }
 
 @media (max-width: 767px) {
-    .rebond article, .block-mediatheque {
+    .rebond article, .block-mediatheque, .block-rebond-subhome {
         padding: 3rem 1rem;
     }
 
@@ -1697,12 +1710,12 @@ a.link-subhomes:hover .encart-image.subhome-image {
     left: 1px;
 }
 
-.block-mediatheque {
+.block-mediatheque, .block-rebond-subhome {
     background-color: #DDDDDD;
     display: block;
 }
 
-.block-mediatheque p {
+.block-mediatheque p, .block-rebond-subhome p {
     font-size: 1.6rem;
     font-weight: bold;
     line-height: 2rem;
@@ -1713,24 +1726,21 @@ aside.right-column > .region {
     padding-bottom: 2rem;
 }
 
-.block-mediatheque .block-title {
+.block-mediatheque .block-title, .block-rebond-subhome .block-title {
     margin-top: 0;
     margin-bottom: 2rem;
 }
 
-.block-mediatheque .block-title img {
+.block-mediatheque .block-title img, .block-rebond-subhome .block-title img {
     vertical-align: bottom;
     height: 5rem;
     margin-right: .5rem;
 }
 
-.block-mediatheque .rebond-link {
+.block-mediatheque .rebond-link, .block-rebond-subhome .rebond-link {
     margin-top: 10px;
 }
 
-.block-mediatheque .rebond-link {
-    margin-top: 10px;
-}
 
 .homepage-title-white, .homepage-title-white-t {
     color: white;

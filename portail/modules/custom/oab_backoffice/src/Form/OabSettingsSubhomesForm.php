@@ -96,6 +96,12 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
           '#default_value' => $config->get('analysts_term_tid'),
       );
 
+      $form['news_term_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('News term ID'),
+        '#default_value' => $config->get('news_term_tid'),
+      );
+
       $form['press_meta'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('Meta Title for Press subhome'),
@@ -163,6 +169,7 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
         ->set('product_dvi_term_tid', $form_state->getValue('product_dvi_term_tid'))
         ->set('distributor_term_tid', $form_state->getValue('distributor_term_tid'))
         ->set('analysts_term_tid', $form_state->getValue('analysts_term_tid'))
+        ->set('news_term_tid', $form_state->getValue('news_term_tid'))
         ->set('press_meta', $form_state->getValue('press_meta'))
         ->set('partner_meta', $form_state->getValue('partner_meta'))
         ->set('customer_meta', $form_state->getValue('customer_meta'))
