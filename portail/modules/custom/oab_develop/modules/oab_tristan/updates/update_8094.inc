@@ -13,7 +13,7 @@ $langcodes = ['en', 'fr'];
 foreach ($langcodes as $langcode) {
   $term_data = [
     'vid' => "subhomes",
-    'label' => $label[$langcode],
+    'name' => $label[$langcode],
     'langcode' => $langcode,
     'field_related_display_view' => "page_press"
   ];
