@@ -10,6 +10,11 @@ use Drupal\taxonomy\Entity\Term;
 
 $langcodes = ['en', 'fr'];
 
+$label = [
+  'en' => "News",
+  'fr' => 'Actualités'
+];
+
 foreach ($langcodes as $langcode) {
   $term_data = [
     'vid' => "subhomes",
