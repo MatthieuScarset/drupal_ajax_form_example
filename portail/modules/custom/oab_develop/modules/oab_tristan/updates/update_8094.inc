@@ -43,7 +43,7 @@ $aliases = [
     'lang' => 'en'
   ],
   [
-    'system' => 'subhome-archive-news',
+    'system' => '/subhome-archive-news',
     'alias' => '/presse/actualites',
     'lang' => 'fr'
   ]

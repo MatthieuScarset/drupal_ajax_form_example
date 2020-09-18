@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +11,7 @@ entity_type: subhome_entity
 bundle: presse
 label: Title
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

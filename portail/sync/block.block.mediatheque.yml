@@ -26,6 +26,7 @@ visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
+      news: news
       press_release: press_release
     negate: false
     context_mapping:
