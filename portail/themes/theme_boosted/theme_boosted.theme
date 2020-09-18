@@ -506,7 +506,7 @@ function theme_boosted_preprocess_views_view(&$variables) {
 
         // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
         if ($entity !== null) {
-oabt($entity);
+
             /** @var Drupal\Core\Field\FieldItemInterface $field */
             foreach($entity->getFields() as $field) {
                 $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
