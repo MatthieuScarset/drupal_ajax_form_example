@@ -1,11 +1,11 @@
-uuid: a36adafc-2863-4b7f-b1ee-6aeaefc56841
+uuid: 8e41ff01-19a5-47b9-8422-a45964720df4
 langcode: fr
 status: false
 dependencies: {  }
-id: prp
-label: PRP
+id: prod
+label: Prod
 description: ''
-folder: config_split/prp
+folder: config_split/prod
 module: {  }
 theme: {  }
 blacklist: {  }
