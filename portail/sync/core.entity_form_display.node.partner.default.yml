@@ -45,6 +45,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_visual
         - group_classify
         - group_rebond
         - group_seo
@@ -64,7 +65,6 @@ third_party_settings:
         - field_display_title
         - field_highlight
         - field_content
-        - field_visual
         - field_file
       parent_name: group_onglets
       weight: 20
@@ -85,7 +85,7 @@ third_party_settings:
         - field_departments
         - field_market_segment
       parent_name: group_onglets
-      weight: 21
+      weight: 22
       format_type: tab
       format_settings:
         id: ''
@@ -104,7 +104,7 @@ third_party_settings:
         - field_metatags
         - moderation_state_update
       parent_name: group_onglets
-      weight: 24
+      weight: 25
       format_type: tab
       format_settings:
         id: ''
@@ -131,7 +131,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 23
+      weight: 24
       format_type: tab
       format_settings:
         id: ''
@@ -145,10 +145,9 @@ third_party_settings:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
-        - field_wysiwyg_rebond
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
-      weight: 22
+      weight: 23
       format_type: tab
       format_settings:
         id: ''
@@ -157,6 +156,19 @@ third_party_settings:
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
       label: Rebond
+    group_visual:
+      children:
+        - field_visual
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Visual
 id: node.partner.default
 targetEntityType: node
 bundle: partner
@@ -222,6 +234,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -344,6 +357,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -420,9 +434,9 @@ content:
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   field_industry: true
   field_region: true
