@@ -1,0 +1,28 @@
+uuid: af0e75ef-778b-48ce-bb0f-d5bea4d91787
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background
+    - media_entity.bundle.image
+    - paragraphs.paragraphs_type.home_caroussel
+id: paragraph.home_caroussel.field_background
+field_name: field_background
+entity_type: paragraph
+bundle: home_caroussel
+label: Background
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,7 +1,7 @@
 
 {% block paragraph %}
     {% block content %}
-        <div>
+       <div class="home-carrousel-item" data-background="{{ file_url(paragraph.field_background[0].entity.field_image.entity.uri.value) }}">
             {{  paragraph.field_home_accroche[0].value | raw}}
             {{ content.field_button }}
         </div>

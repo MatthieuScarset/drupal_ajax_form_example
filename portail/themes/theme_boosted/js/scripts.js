@@ -321,10 +321,20 @@
   });
 
 
-$('.carrousel-homepage-header').on('slid.bs.carousel', function (events) {
-    var num_item = $(events.relatedTarget).data('key');
+$('.carrousel-homepage-header').on('slid.bs.carousel', function (event) {
+    var num_item = $(event.relatedTarget).data('key');
     $(this).find('.actual-slide').html(num_item + 1);
 });
+  $('.carrousel-homepage-header').on('slide.bs.carousel', function (event) {
+    var item = $(event.relatedTarget).find('.home-carrousel-item');
+    if (item.length && item.data('background').length) {
+      $('#hp-background').addClass('transitioning');
+      setTimeout(() => {
+        $('#hp-background').css('background-image', "url('" + item.data('background') + "')").removeClass('transitioning');
+      }, 400);
+    }
+  });
+
 
   $('#tab-expertise-banner li').on('click', function (elem) {
       $(elem.target).css('height', '100%');

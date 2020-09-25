@@ -155,6 +155,15 @@ function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestio
 
 }
 
+function theme_boosted_theme_suggestions_html_alter(array &$suggestions, array $variables, $hook) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+    if ($node->bundle() == 'homepage') {
+      $suggestions[] = $hook . '__' . $node->bundle();
+    }
+  }
+}
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
