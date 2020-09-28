@@ -327,11 +327,10 @@ $('.carrousel-homepage-header').on('slid.bs.carousel', function (event) {
 });
   $('.carrousel-homepage-header').on('slide.bs.carousel', function (event) {
     var item = $(event.relatedTarget).find('.home-carrousel-item');
-    if (item.length && item.data('background').length) {
-      $('#hp-background').addClass('transitioning');
-      setTimeout(() => {
-        $('#hp-background').css('background-image', "url('" + item.data('background') + "')").removeClass('transitioning');
-      }, 400);
+
+    if (item.length && typeof item.data('background') !== "undefined") {
+      $('.hp-background-carousel.active').removeClass("active");
+      $('.hp-background-carousel[data-media="' + item.data('background') + '"]').addClass("active");
     }
   });
 

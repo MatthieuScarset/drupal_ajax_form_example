@@ -65,8 +65,10 @@
 
         </head>
 <body{{ attributes.addClass(body_classes) }} >
-{% if first_carrousel_bg is defined %}
-<span id="hp-background" style="background-image: url('{{ first_carrousel_bg }}'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover"></span>
+{% if carousel_bg is defined %}
+  {% for media_id, img_url in carousel_bg %}
+      <span class="hp-background-carousel {% if loop.first %}active{% endif %}" data-media="{{ media_id }}" style="background-image: url('{{ img_url }}');"></span>
+  {% endfor %}
 {% endif %}
 <a href="#main-content" class="visually-hidden focusable skip-link">
   {{ 'Skip to main content'|t }}

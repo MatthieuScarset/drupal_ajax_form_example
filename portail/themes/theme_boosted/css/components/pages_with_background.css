@@ -2,7 +2,7 @@
 Specific HP with background in carrousel
  */
 
-#hp-background {
+.hp-background-carousel {
   z-index: -1000;  /* Push it back in any ways */
   position: fixed;
   top: 0;
@@ -13,24 +13,16 @@ Specific HP with background in carrousel
   background-attachment: fixed;
   background-size: cover;
 
-  transition: opacity .4s linear 0s,visibility 0s linear 0s;
-  -webkit-transition: opacity .4s linear 0s,visibility 0s linear 0s;
-  -moz-transition: opacity .4s linear 0s,visibility 0s linear 0s;
-  -ms-transition: opacity .4s linear 0s,visibility 0s linear 0s;
-  -o-transition: opacity .4s linear 0s,visibility 0s linear 0s;
-  opacity: 1;
-}
-
-#hp-background.transitioning {
-  transition: opacity 0.4s ease-in-out;
-  -webkit-transition: opacity 0.4s ease-in-out;
-  -moz-transition: opacity 0.4s ease-in-out;
-  -ms-transition: opacity 0.4s ease-in-out;
-  -o-transition: opacity 0.4s ease-in-out;
-
+  -webkit-transition: opacity .4s ease-in-out;
+  -moz-transition: opacity .4s ease-in-out;
+  -o-transition: opacity .4s ease-in-out;
+  transition: opacity .4s ease-in-out;
   opacity: 0;
 }
 
+.hp-background-carousel.active {
+  opacity: 1;
+}
 
 
 /**
@@ -38,7 +30,7 @@ Specific HP with background in carrousel
  */
 
 @media not screen, (max-width: 767px) {
-    .oab_background_image, #hp-background {
+    .oab_background_image, .hp-background-carousel {
         background-image: none !important;
         background-color: #333;
     }

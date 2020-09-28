@@ -604,15 +604,23 @@ function oab_frontoffice_preprocess_html(&$variables) {
 
   $node = \Drupal::routeMatch()->getParameter('node');
   if (NULL !== $node && $node instanceof NodeInterface) {
-    if ($node->bundle() == 'homepage' && isset($node->field_caroussel_header->entity->field_background->target_id)) {
-        // Load first item of carrousel
-        $media = Media::load($node->field_caroussel_header->entity->field_background->target_id);
-        if ($media !== null && isset($media->field_image->entity)) {
-          $file_uri = file_url_transform_relative(file_create_url($media->field_image->entity->getFileUri()));
-          $variables['first_carrousel_bg'] = $file_uri;
+
+    if ($node->bundle() == 'homepage' && $node->hasField('field_caroussel_header')) {
+
+        foreach ($node->field_caroussel_header as $field_carousel) {
+          // Load first item of carrousel
+          if (isset($field_carousel->entity->field_background->target_id)) {
+            $media = Media::load($field_carousel->entity->field_background->target_id);
+            if ($media !== null && isset($media->field_image->entity)) {
+              $file_uri = file_url_transform_relative(file_create_url($media->field_image->entity->getFileUri()));
+              $variables['carousel_bg'][$media->id()] = $file_uri;
+            }
+          }
         }
 
-        $variables['attributes']['class'][] = "oab_background_image";
+        if (isset($variables['carousel_bg'])) {
+          $variables['attributes']['class'][] = "oab_background_image";
+        }
     }
   }
 
