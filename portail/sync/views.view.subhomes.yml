@@ -2247,55 +2247,6 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: string
-        field_products_target_id:
-          id: field_products_target_id
-          table: node__field_products
-          field: field_products_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_products_target_id_op
-            label: Produits
-            description: ''
-            use_operator: false
-            operator: field_products_target_id_op
-            identifier: product
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
         field_hub_target_id:
           id: field_hub_target_id
           table: node__field_hub
