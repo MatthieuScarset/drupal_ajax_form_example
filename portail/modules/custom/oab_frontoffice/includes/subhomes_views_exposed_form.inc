@@ -185,11 +185,6 @@ function subhomes_views_exposed_form(&$form) {
 
     //Subhome Distributors
     if ($form['#id'] == 'views-exposed-form-subhomes-page-distributor') {
-        $solutions = clean_exposed_filters_by_language(
-            $form['field_solution_target_id']['#options'],
-            'Solution'
-        );
-        $form['field_solution_target_id']['#options'] = $solutions;
 
         $departements = clean_exposed_filters_by_language(
             $form['field_departments_target_id']['#options'],
