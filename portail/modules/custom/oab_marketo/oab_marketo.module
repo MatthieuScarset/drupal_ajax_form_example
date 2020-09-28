@@ -7,11 +7,16 @@ use Drupal\file\Entity\File;
 use Drupal\media_entity\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\oab_marketo\Form\ParagraphDeleteForm;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\ParagraphInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 
+
+function oab_marketo_entity_type_build(array &$entity_types) {
+  $entity_types['paragraph']->setFormClass('entity_delete', ParagraphDeleteForm::class);
+}
 
 /**
  * Implements hook_paragraph_access().
