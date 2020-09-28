@@ -76,7 +76,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
     $form['marketo']['general']['mkto_munchkin_id'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Munchkin Id'),
-      '#default_value' => $config->get('marketo.general.mkt_to_munchkin_id'),
+      '#default_value' => $config->get('marketo.general.mkto_munchkin_id'),
       '#size'=> 350,
     );
 
