@@ -55,15 +55,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
           $args = explode(' ', $row);
           $cmd = array_shift($args);
 
-          $process = $this->processManager()->drush(Drush::aliasManager()->getSelf(), $cmd, $args, ['yes' => true]);
-          $process->enableOutput();
-          $process->mustRun();
-          if (!$process->isSuccessful()) {
-            $this->output()->writeln($process->getExitCode() . ' - ' . $process->getErrorOutput());
-          } else {
-            $this->output()->writeln($process->getOutput());
-          }
-
+          $this->runCmd($cmd, $args);
           $this->output()->writeln('--------------------------');
 
         }
@@ -72,4 +64,54 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
     $this->output()->writeln('...Fin d\'execution oab-updb');
   }
 
+  /**
+   * Installation des modules de dev après un config import
+   *
+   * @usage oab:config-import
+   *   Installation des modules de dev après un config import
+   *
+   * @command oab:config-import
+   * @aliases oab-cim
+   */
+  public function configImport() {
+    $this->output()->writeln('drush config-import');
+    $this->runCmd('cim', [], true);
+    $this->output()->writeln('Installation des modules devs...');
+    $file_commands = drupal_get_path('module', 'oab_develop').'/dev_modules.data';
+    if (file_exists($file_commands)) {
+
+      $fp = fopen($file_commands, 'r');
+      $modules = [];
+      while ($row = fgets($fp)) {
+        $row = trim(preg_replace('/\s+/', ' ', $row));
+        if (!empty($row) && substr($row, 0, 1) != '#' && strlen($row) > 1/* Prevent empty lines to be executed */) {
+          $modules[] = $row;
+        }
+      }
+      $this->output()->writeln('- pm:enable ' . implode(" ", $modules));
+      $this->runCmd("pm:enable", $modules, true);
+    }
+  }
+
+
+  private function runCmd($cmd, $args, $yes = true) {
+    $options = [
+//      'debug' => true,
+    ];
+
+    if ($yes) {
+      $options['yes'] = true;
+    }
+
+    $process = $this->processManager()->drush($this->siteAliasManager()->getSelf(), $cmd, $args,  $options);
+    $process->enableOutput(true);
+    $process->mustRun();
+    foreach ($process as $type => $data) {
+      if ($process::OUT === $type) {
+        echo $data."\n";
+      } else {
+        echo $data."\n";
+      }
+    }
+  }
 }
