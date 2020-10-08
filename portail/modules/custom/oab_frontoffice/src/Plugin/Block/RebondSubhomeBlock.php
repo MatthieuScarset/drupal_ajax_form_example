@@ -41,7 +41,9 @@ class RebondSubhomeBlock extends BlockBase {
         $img_src = $this->default_img_src;
         if (isset($config[self::IMAGE])) {
           $file = File::load($config[self::IMAGE]);
-          $img_src = $file->getFileUri();
+          if ($file !== null) {
+            $img_src = $file->getFileUri();
+          }
         }
 
         /*

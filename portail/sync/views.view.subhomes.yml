@@ -288,7 +288,7 @@ display:
           expose:
             label: ''
           plugin_id: standard
-      title: News
+      title: 'Press releases'
       header: {  }
       footer: {  }
       empty: {  }
@@ -369,6 +369,7 @@ display:
         relationships: false
         header: false
         empty: false
+        title: false
       filters:
         status:
           value: '1'
@@ -709,7 +710,20 @@ display:
           admin_label: 'field_press_type: Taxonomy term'
           required: false
           plugin_id: standard
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2>[view:title]</h2>'
+            format: full_html
+          plugin_id: text
       style:
         type: grid
         options:
@@ -735,6 +749,7 @@ display:
       block_hide_empty: false
       display_comment: 'Displayed on press subhome as a block'
       use_ajax: true
+      title: News
     cache_metadata:
       max-age: -1
       contexts:
@@ -1078,6 +1093,7 @@ display:
         filter_groups: false
         arguments: false
         relationships: false
+        title: false
       filter_groups:
         operator: AND
         groups:
@@ -1147,6 +1163,7 @@ display:
           admin_label: 'field_analysts: Taxonomy term'
           required: false
           plugin_id: standard
+      title: Analysts
     cache_metadata:
       max-age: -1
       contexts:
@@ -2645,55 +2662,6 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: string
-        field_products_target_id:
-          id: field_products_target_id
-          table: node__field_products
-          field: field_products_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_products_target_id_op
-            label: Produits
-            description: ''
-            use_operator: false
-            operator: field_products_target_id_op
-            identifier: product
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
         field_hub_target_id:
           id: field_hub_target_id
           table: node__field_hub
@@ -3724,7 +3692,7 @@ display:
   page_press:
     display_plugin: page
     id: page_press
-    display_title: press
+    display_title: 'Press Releases'
     position: 1
     display_options:
       display_extenders: {  }
@@ -3778,6 +3746,7 @@ display:
         relationships: false
         header: false
         empty: false
+        title: false
       filters:
         status:
           value: '1'
@@ -4118,7 +4087,20 @@ display:
           admin_label: 'field_press_type: Taxonomy term'
           required: false
           plugin_id: standard
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2>[view:title]</h2>'
+            format: full_html
+          plugin_id: text
       style:
         type: grid
         options:
@@ -4154,6 +4136,7 @@ display:
             value: 'No items match your query. Please modify the selected request.'
             format: full_html
           plugin_id: text
+      title: 'Press releases'
     cache_metadata:
       max-age: -1
       contexts:
