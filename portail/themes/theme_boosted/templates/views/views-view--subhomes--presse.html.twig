@@ -63,7 +63,11 @@
         <div class="col-sm-12 col-md-8 col-xs-12">
             <div class="row subhome-view-press">
                 {# Contenu principal #}
-
+              {% if header %}
+                <div class="view-header">
+                  {{ header }}
+                </div>
+              {% endif %}
                 {% if exposed %}
                     <div class="view-filters form-group">
                         {{ exposed }}
