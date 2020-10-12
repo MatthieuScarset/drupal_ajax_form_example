@@ -7,7 +7,7 @@ dependencies:
     - field.field.media.image.field_tags
     - field.field.media.image.field_thematic
     - image.style.thumbnail
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - image
     - path

@@ -20,7 +20,6 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
-  devel: 0
   dynamic_page_cache: 0
   editor: 0
   embed: 0
@@ -44,8 +43,8 @@ module:
   link: 0
   linkit: 0
   locale: 0
-  media_entity: 0
-  media_entity_image: 0
+  media: 0
+  media_entity_generic: 0
   menu_link_content: 0
   menu_ui: 0
   metatag: 0
@@ -74,7 +73,6 @@ module:
   oab_frontoffice: 0
   oab_hub: 0
   oab_marketo: 0
-  oab_media_browser: 0
   oab_migrate_content: 0
   oab_offices_map: 0
   oab_orange_business_lounge: 0

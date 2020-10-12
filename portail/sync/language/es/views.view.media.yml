@@ -3,17 +3,11 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Applicar
+          submit_button: Filtro
       fields:
         media_bulk_form:
           action_title: Acción
-        bundle:
-          label: Proveedor
         status:
           label: Estado
         operations:
           label: Operaciones
-      filters:
-        bundle:
-          expose:
-            label: Proveedor

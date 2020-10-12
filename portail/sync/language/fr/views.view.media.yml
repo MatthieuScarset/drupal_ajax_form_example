@@ -4,7 +4,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Appliquer
+          submit_button: Filtre
           reset_button_label: 'Remise à zéro'
           exposed_sorts_label: 'Filtrer par'
       pager:
@@ -23,7 +23,7 @@ display:
         name:
           label: 'Nom du média'
         bundle:
-          label: Fournisseur
+          label: Format
         uid:
           label: Auteur
         status:
@@ -36,27 +36,23 @@ display:
         operations:
           label: Actions
       filters:
+        name:
+          expose:
+            label: 'Nom du média'
+        bundle:
+          expose:
+            label: Format
         status:
           group_info:
-            label: 'Statut de publication'
             group_items:
               1:
                 title: Publié
               2:
                 title: Dépublié
-        bundle:
-          expose:
-            label: Fournisseur
-        name:
-          expose:
-            label: 'Nom du média'
         langcode:
           expose:
             label: Langue
       title: Médias
-      empty:
-        area_text_custom:
-          content: 'Pas de contenu disponible.'
   media_page_list:
     display_title: Médias
     display_options:

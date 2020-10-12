@@ -4,9 +4,10 @@ status: true
 dependencies:
   config:
     - field.field.media.background.field_image
+    - field.field.media.background.field_media_image
     - field.field.media.background.field_visibility
     - image.style.thumbnail
-    - media_entity.bundle.background
+    - media.type.background
   module:
     - image
     - path
@@ -59,6 +60,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
+    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
@@ -69,4 +77,5 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_media_image: true

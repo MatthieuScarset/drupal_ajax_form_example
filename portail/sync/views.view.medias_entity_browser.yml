@@ -5,15 +5,15 @@ dependencies:
   config:
     - field.storage.media.field_image
     - image.style.thumbnail
-    - media_entity.bundle.file
-    - media_entity.bundle.image
+    - media.type.file
+    - media.type.image
     - taxonomy.vocabulary.media_tags
     - taxonomy.vocabulary.media_thematics
   module:
     - entity_browser
     - file
     - image
-    - media_entity
+    - media
     - taxonomy
     - user
 id: medias_entity_browser

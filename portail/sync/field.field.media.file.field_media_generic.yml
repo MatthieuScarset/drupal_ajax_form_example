@@ -1,0 +1,19 @@
+uuid: b1398029-1051-485c-9cce-85498a5142e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_generic
+    - media.type.file
+id: media.file.field_media_generic
+field_name: field_media_generic
+entity_type: media
+bundle: file
+label: 'Generic media'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

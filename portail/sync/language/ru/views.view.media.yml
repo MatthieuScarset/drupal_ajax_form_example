@@ -3,7 +3,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Найти
+          submit_button: Фильтр
           exposed_sorts_label: Фильтр
       pager:
         options:
@@ -12,13 +12,7 @@ display:
       fields:
         media_bulk_form:
           action_title: Действие
-        bundle:
-          label: Поставщик
         status:
           label: Статус
         operations:
           label: Операции
-      filters:
-        bundle:
-          expose:
-            label: Поставщик

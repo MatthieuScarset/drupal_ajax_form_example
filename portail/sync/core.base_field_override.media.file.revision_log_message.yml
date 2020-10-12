@@ -1,13 +1,13 @@
-uuid: d7b03ad0-42f1-4051-88ef-6b777b3da56e
+uuid: 47940f04-805d-49a7-8b5e-1eb8f13112c2
 langcode: en
 status: true
 dependencies:
   config:
-    - media_entity.bundle.image
-id: media.image.revision_log
-field_name: revision_log
+    - media.type.file
+id: media.file.revision_log_message
+field_name: revision_log_message
 entity_type: media
-bundle: image
+bundle: file
 label: 'Revision Log'
 description: 'The log entry explaining the changes in this revision.'
 required: false

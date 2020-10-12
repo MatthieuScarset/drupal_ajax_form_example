@@ -8,7 +8,7 @@ dependencies:
     - field.field.media.image.field_tags
     - field.field.media.image.field_thematic
     - image.style.playlist
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - image
 id: media.image.home_playlist_image

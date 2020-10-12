@@ -1,11 +1,13 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.media.background.field_image
+    - field.field.media.background.field_media_image
     - field.field.media.background.field_visibility
     - image.style.thumbnail
-    - media_entity.bundle.background
+    - media.type.background
   module:
     - image
     - user
@@ -65,4 +67,5 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_media_image: true
   langcode: true
