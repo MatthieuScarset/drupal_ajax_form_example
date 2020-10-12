@@ -1,14 +1,14 @@
 <?php
 
-use Drupal\media_entity\Entity\Media;
-use Drupal\media_entity\Entity\MediaBundle;
+use Drupal\media\Entity\Media;
+use Drupal\media\Entity\MediaType;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 ## Création d'un type de media spécifique
 
-$media_bundle = MediaBundle::load('background');
+$media_bundle = MediaType::load('background');
 if ($media_bundle === null) {
-    $media_bundle = MediaBundle::create([
+    $media_bundle = MediaType::create([
         'langcode' => 'en',
         'id' => 'background',
         'label' => 'background',

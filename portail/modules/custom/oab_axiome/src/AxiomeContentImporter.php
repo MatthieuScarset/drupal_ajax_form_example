@@ -13,7 +13,7 @@ use DOMXPath;
 use Drupal\Component\Utility\Html;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 
 class AxiomeContentImporter {

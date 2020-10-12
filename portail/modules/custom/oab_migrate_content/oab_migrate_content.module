@@ -1,7 +1,7 @@
 <?php
 
 use Drupal\Core\Database\Database;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 
 
 //define('BLOGPOST_SELECT_DATE', (60 * 60 * 24 * 150));

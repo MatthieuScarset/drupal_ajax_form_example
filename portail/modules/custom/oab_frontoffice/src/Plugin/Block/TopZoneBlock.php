@@ -4,6 +4,7 @@ namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Entity;
 use Drupal\Core\Url;
@@ -57,10 +58,11 @@ class TopZoneBlock extends BlockBase {
             $content_top = check_markup($top_zone[0]['value'], 'full_html', '', []);
         }
         if (isset($top_zone_background[0]['target_id'])) {
+            /** @var Media $entity */
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background[0]['target_id']);
             $url = '';
-            if (!is_null($entity)) {
-                $uri = $entity->getType()->thumbnail($entity);
+            if (!is_null($entity) && isset($entity->image->entity)) {
+                $uri = $entity->image->entity->getFileUri();
                 $type = $node->getType();
                 if ($type == 'product') {
                     $img_style = 'top_zone';
@@ -78,10 +80,11 @@ class TopZoneBlock extends BlockBase {
             $content = $content_desktop;
         }
         if (isset($top_zone_background_mobile[0]['target_id'])) {
+          /** @var Media $entity */
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background_mobile[0]['target_id']);
             $url = '';
-            if (!is_null($entity)) {
-                $uri = $entity->getType()->thumbnail($entity);
+            if (!is_null($entity) && isset($entity->image->entity)) {
+                $uri = $entity->image->entity->getFileUri();
                 $img_style = 'max_650';
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
                 $url = file_url_transform_relative($url);

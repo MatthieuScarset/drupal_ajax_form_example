@@ -4,7 +4,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
-use Drupal\media_entity\Entity\Media;
+use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
 use Drupal\paragraphs\Entity\Paragraph;

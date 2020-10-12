@@ -489,7 +489,7 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
 
             ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
             $field_value = $field_file->getValue();
-            $media = \Drupal\media_entity\Entity\Media::load($field_value[0]['target_id']);
+            $media = \Drupal\media\Entity\Media::load($field_value[0]['target_id']);
 
             ##On load le file contenu dans l'entity media
             $file_value = $media->get('field_file')->getValue();
