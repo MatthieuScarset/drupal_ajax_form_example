@@ -33,9 +33,12 @@
     {# ======= VIDEO ========= #}
     {% if field_header.video is iterable %}
         {% for video in field_header.video %}
-            <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
-                {{ video|raw }}
-            </div>
+            {# sometimes, video is an axiome array and not a video tag, so Drupal try to use it as a RenderArray, which it isn't #}
+            {% if video is not iterable %}
+                <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+                    {{ video|raw }}
+                </div>
+            {% endif %}
         {% endfor %}
     {% else %}
         {% if field_header.video|trim is not empty %}
