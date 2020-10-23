@@ -541,6 +541,13 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
             }
         }
     }
+
+    // Remove Generator meta tag
+    foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+      if ($attachment[1] == 'system_meta_generator') {
+        unset($attachments['#attached']['html_head'][$key]);
+      }
+    }
 }
 
 /**
