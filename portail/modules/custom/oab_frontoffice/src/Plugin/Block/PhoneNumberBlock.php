@@ -39,16 +39,13 @@ class PhoneNumberBlock extends BlockBase {
             $phone_number = $node->get('field_phone_number')->getValue();
         }
 
-        $block['#type'] = 'markup';
-        $block['#markup'] = '';
-        $content = '';
+        $block['block_num_tel'] = '';
         if (isset($phone_number[0]['value'])) {
             //$content = check_markup($phone_number[0]['value'], 'full_html', '', []);
-            $content = $phone_number[0]['value'];
+          $block['block_num_tel'] = $phone_number[0]['value'];
         }
 
         $block['block_title'] = isset($config['block_title']) ? t($config['block_title']) : '';//oabt($config, true);
-        $block['#markup'] = $content;
 
         return $block;
     }
