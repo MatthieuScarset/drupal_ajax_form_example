@@ -3390,13 +3390,13 @@ hr.reseau-mobile-accords-roaming {
 }
 
 .homepage-carousel-glyphicon:before {
-    color: #9E9F9F;
+  color: white;
 }
 
 .item-carousel-number {
-    color: #9E9F9F;
-    position: relative;
-    left: 40%;
+  color: white;
+  position: relative;
+  left: 40%;
 }
 
 /*For Desktop*/
