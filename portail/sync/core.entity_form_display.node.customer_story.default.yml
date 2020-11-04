@@ -53,6 +53,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_visual
         - group_classify
         - group_rebond
         - group_seo
@@ -77,8 +78,6 @@ third_party_settings:
         - field_local_nav
         - field_content
         - field_file
-        - field_visual
-        - field_visual_tile
       parent_name: group_onglets
       weight: 20
       format_type: tab
@@ -102,7 +101,7 @@ third_party_settings:
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
-      weight: 21
+      weight: 22
       format_type: tab
       format_settings:
         id: ''
@@ -120,7 +119,7 @@ third_party_settings:
         - path
         - field_metatags
       parent_name: group_onglets
-      weight: 24
+      weight: 25
       format_type: tab
       format_settings:
         id: ''
@@ -147,7 +146,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 23
+      weight: 24
       format_type: tab
       format_settings:
         id: ''
@@ -163,7 +162,7 @@ third_party_settings:
         - field_page_du_site_2
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
-      weight: 22
+      weight: 23
       format_type: tab
       format_settings:
         id: ''
@@ -172,6 +171,20 @@ third_party_settings:
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
       label: Rebond
+    group_visual:
+      children:
+        - field_visual_tile
+        - field_visual
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Visual
 id: node.customer_story.default
 targetEntityType: node
 bundle: customer_story
@@ -239,6 +252,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -402,6 +416,7 @@ content:
       selection_mode: selection_append
       field_widget_display_settings:
         view_mode: teaser
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -416,12 +431,13 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
   field_visual:
     type: entity_browser_entity_reference
-    weight: 12
+    weight: 14
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
@@ -431,6 +447,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     region: content
   field_visual_tile:
@@ -444,6 +461,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
