@@ -1,4 +1,7 @@
 display:
+  page_1:
+    display_options:
+      display_description: 'Block containing the list of offices'
   default:
     display_options:
       exposed_form:

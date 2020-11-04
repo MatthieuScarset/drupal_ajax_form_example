@@ -3565,6 +3565,17 @@ hr.reseau-mobile-accords-roaming {
   bottom: 0;
 }
 
+
 .view-offices-map-view .views-view-grid .views-row {
   margin-bottom: 3rem;
+}
+
+/* Nouvelle page offices (carte Leaftlet) : filtres */
+.page-offices-map .form_filter_regions_countries {
+  position: relative;
+}
+
+.page-offices-map .form_filter_regions_countries input.form-submit {
+  position: absolute;
+  bottom: 0;
 }
