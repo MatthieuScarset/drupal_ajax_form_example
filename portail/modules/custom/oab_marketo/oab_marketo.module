@@ -89,8 +89,6 @@ function oab_marketo_preprocess_paragraph(&$variables) {
   if ($paragraph->bundle() === 'marketo') {
     $variables['#attached']['library'][] = 'oab_marketo/marketo';
 
-    $referer = str_replace(Drupal::request()->getSchemeAndHttpHost(), '', Drupal::request()->headers->get('referer'));
-
     if ($paragraph->field_redirection_url->count() > 0 ) {
       $redirection_url = $paragraph->field_redirection_url->first()->getUrl()->toString();
     }
@@ -102,8 +100,8 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       'formName' => $paragraph->field_title->value,
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
-      'mktoFrom' => $referer,
       'mktoFieldOrder' =>["submitButton","LegalInfos"]
+      // mktoFrom key added in JS to get the referrer
     ];
 
     $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
