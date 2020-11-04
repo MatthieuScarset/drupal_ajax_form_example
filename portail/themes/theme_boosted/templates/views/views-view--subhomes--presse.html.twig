@@ -63,7 +63,11 @@
         <div class="col-sm-12 col-md-8 col-xs-12">
             <div class="row subhome-view-press">
                 {# Contenu principal #}
-
+              {% if header %}
+                <div class="view-header">
+                  {{ header }}
+                </div>
+              {% endif %}
                 {% if exposed %}
                     <div class="view-filters form-group">
                         {{ exposed }}
@@ -85,12 +89,16 @@
                 {% endif %}
 
                 {% if rows %}
-                    <div class="archives_link paragraph--default-button">
-                        <a href="{{ path('view.subhomes_archive.archive_press') }}" class="rebond-link btn btn-txt-white-bg-black">{{
-                            'Archives'|t }}</a>
+                    <div class="archives_link">
+                        <a href="{{ path('view.subhomes_archive.archive_press') }}" class="btn btn-info">{{
+                            'More press release'|t }}</a>
                     </div>
                 {% endif %}
             </div>
+
+          <div class="row subhome-view-news">
+            {{ drupal_view('subhomes', 'news') }}
+          </div>
 
             {# Blocks du bas (press-kits + Coroporate#}
             <div class="row subhome-entity-bottom-blocks">
@@ -170,6 +178,12 @@
                     </div>
                 </div>
             {% endif %}
+
+            <div class="row">
+              <div class="col-sm-12 col-xs-12">
+                {{ drupal_entity('block', "rebond_subhome_blogs", check_access=false) }}
+              </div>
+            </div>
 
             {# Block médiatheque #}
             <div class="row">

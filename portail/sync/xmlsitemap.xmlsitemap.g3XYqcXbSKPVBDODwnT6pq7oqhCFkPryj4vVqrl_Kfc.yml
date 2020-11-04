@@ -5,8 +5,8 @@ dependencies: {  }
 id: g3XYqcXbSKPVBDODwnT6pq7oqhCFkPryj4vVqrl_Kfc
 label: 'https://ruby-prp.multimediabs.com/en/sitemap.xml'
 chunks: 1
-links: 3441
-max_filesize: 683278
+links: 3442
+max_filesize: 683290
 context:
   language: en
-updated: 1594904852
+updated: 1600351902

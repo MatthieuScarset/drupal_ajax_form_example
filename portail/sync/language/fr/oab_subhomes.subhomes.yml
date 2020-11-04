@@ -9,10 +9,9 @@ press_meta: Presse
 partner_meta: Partenaires
 customer_meta: 'Témoignages clients'
 library_meta: Médiathèque
-blog_meta: Blogs
-magazine_meta: Magazine
 product_meta: Produits
 distributor_term_tid: '848'
 product_dvi_term_tid: '857'
 analysts_term_tid: '902'
 analysts_meta: Analystes
+news_term_tid: '1058'

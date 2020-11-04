@@ -29,6 +29,9 @@ oab_subhomes.subhomes:
     analysts_term_tid:
       type: label
       label: 'Analysts term id'
+    news_term_tid:
+      type: label
+      label: 'News term id'
     press_meta:
       type: label
       label: 'Press meta title'

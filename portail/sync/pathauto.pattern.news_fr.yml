@@ -1,0 +1,33 @@
+uuid: d65a8b57-4ee4-4606-8aa9-9dfb7f21aec7
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: news_fr
+label: 'News FR'
+type: 'canonical_entities:node'
+pattern: '/presse/actualites/[node:title]'
+selection_criteria:
+  c33e5e5a-52c2-454f-8e07-a10a57a83c6f:
+    id: node_type
+    bundles:
+      news: news
+    negate: false
+    context_mapping:
+      node: node
+    uuid: c33e5e5a-52c2-454f-8e07-a10a57a83c6f
+  ec1d1aab-b387-4d27-a1d5-e6808fa6e6b3:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: 'node:langcode:language'
+    uuid: ec1d1aab-b387-4d27-a1d5-e6808fa6e6b3
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language
