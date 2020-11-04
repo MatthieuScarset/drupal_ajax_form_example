@@ -9,7 +9,7 @@ entity.paragraph.edit_form:
 entity.paragraph.delete_form:
   path: '/admin/paragraph/form/{paragraph}/delete'
   defaults:
-    _entity_form: 'paragraph.delete'
+    _entity_form: 'paragraph.entity_delete'
     _title: 'Delete Paragraph'
   requirements:
     _permission: 'delete marketo form'
