@@ -185,18 +185,7 @@ function subhomes_views_exposed_form(&$form) {
 
     //Subhome Distributors
     if ($form['#id'] == 'views-exposed-form-subhomes-page-distributor') {
-        $solutions = clean_exposed_filters_by_language(
-            $form['field_solution_target_id']['#options'],
-            'Solution'
-        );
-        $form['field_solution_target_id']['#options'] = $solutions;
-
-        $departements = clean_exposed_filters_by_language(
-            $form['field_departments_target_id']['#options'],
-            'Departements'
-        );
-        $form['field_departments_target_id']['#options'] = $departements;
-
+        // I don't know where the change is... I delete because it's the real field name
     }
 
     // Subhome Analysts
