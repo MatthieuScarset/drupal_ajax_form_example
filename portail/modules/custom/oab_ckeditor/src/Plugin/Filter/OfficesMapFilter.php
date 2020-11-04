@@ -28,6 +28,8 @@ class OfficesMapFilter extends FilterBase {
     private $boolParamsUrl = false;
 
     public function process($text, $langcode) {
+        $result = new FilterProcessResult($text);
+
         //on regarde d'abord s'il y a des paramètres dans l'url
         $parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
         if (!empty($parameters) && isset($parameters['region'])) {
@@ -47,8 +49,10 @@ class OfficesMapFilter extends FilterBase {
         //Pattern de recherche pour une MAP dans un WYSIWYG
         $search_results = array();
         $error = false;
+        $has_map_filter = false;
         //Recherche du pattern
         while (preg_match($this->pattern, $text, $search_results) && !$error) {
+            $has_map_filter = true;
             $chaine_trouvee = $search_results[0];
             //on teste s'il y a plusieurs maps dans un résultat
             $count = mb_substr_count($chaine_trouvee, "}||");
@@ -64,18 +68,20 @@ class OfficesMapFilter extends FilterBase {
             }
         }
 
-        $result = new FilterProcessResult($text);
-        $result->addAttachments(
-            array(
-                'library' => ['oab_offices_map/oab_offices_map.markers'],
-                'drupalSettings' => array(
-                    'countriesRegionsTab' => getArrayRegionsCountries(),
-                    'allCountriesArray' => getCountriesForJS(),
-                    'selectedCountryParameter' => $this->countryId,
-                    'selectedRegionParameter' => $this->regionId,
-                ),
-                )
-        );
+        if ($has_map_filter) {
+          $result->addAttachments(
+              array(
+                  'library' => ['oab_offices_map/oab_offices_map.markers'],
+                  'drupalSettings' => array(
+                      'countriesRegionsTab' => getArrayRegionsCountries(),
+                      'allCountriesArray' => getCountriesForJS(),
+                      'selectedCountryParameter' => $this->countryId,
+                      'selectedRegionParameter' => $this->regionId,
+                  ),
+                  )
+          );
+        }
+
         return $result;
     }
 
