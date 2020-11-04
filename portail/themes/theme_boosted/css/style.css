@@ -1422,7 +1422,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
     color: #FFFFFF;
 }
 
-.rebond-wysiwyg article{
+.rebond-wysiwyg article:not('.embedded-entity'){
     background-color: #DDDDDD;
 }
 
@@ -3523,13 +3523,27 @@ hr.reseau-mobile-accords-roaming {
 
 /*for Navigator*/
 @media (min-width: 767px) {
-  form.mktoForm.mktoHasWidth.mktoLayoutLeft .mktoHtmlText.mktoHasWidth {
-    width: 70% !important;
+  form.mktoForm .mktoHtmlText, form.mktoForm .mktoField {
+    width: 70%;
   }
-  form.mktoForm.mktoHasWidth .mktoField.mktoHasWidth {
-    width: 70% !important;
+  .rebond-wysiwyg form.mktoForm .mktoHtmlText, form.mktoForm .mktoField {
+    width: 100%;
   }
 }
+
+.rebond-wysiwyg form.mktoForm .mktoCheckboxList label {
+  display: initial;
+}
+.rebond-wysiwyg form.mktoForm .mktoCheckboxList input {
+  width: initial;
+}
+
+.rebond-wysiwyg form.mktoForm .mktoHtmlText {
+  font-size: 1.1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
 }
