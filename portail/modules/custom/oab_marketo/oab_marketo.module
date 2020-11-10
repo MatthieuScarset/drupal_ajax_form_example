@@ -97,7 +97,8 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       'mktoDomain' => $marketo_conf->get('marketo.general.mkto_domain'),
       'mktoMunchkinID' => $marketo_conf->get('marketo.general.mkto_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
-      'formName' => $paragraph->field_title->value,
+//      'formName' => $paragraph->field_title->value,
+      'formName' => 'contact',
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
       'mktoFieldOrder' =>["submitButton","LegalInfos"]
