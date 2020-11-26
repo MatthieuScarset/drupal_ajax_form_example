@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_background
-    - media.bundle.image
+    - media.type.image
     - paragraphs.paragraphs_type.home_caroussel
 id: paragraph.home_caroussel.field_background
 field_name: field_background
