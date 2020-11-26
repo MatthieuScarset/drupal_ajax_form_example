@@ -2,6 +2,15 @@
     $(d).ready(function() {
         initShowCountries();
 
+        // initialisation du contrôle de la carte (nécessite mapcontrol.js)
+        var mc = new MapControl();
+
+        // EVENEMENT : clic sur "Afficher la carte" > Voir l'agence sur la carte
+        $('.show_on_map').click(function() {
+          mc.gotoMarker($(this).data('location'));
+          // mc.flyToMarker($(this).data('location'));
+        });
+
         $('#edit-region').change(function(e) {
             onChangeHideShowCountries();
         });

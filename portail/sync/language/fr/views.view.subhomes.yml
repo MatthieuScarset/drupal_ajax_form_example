@@ -1,12 +1,18 @@
 display:
   page_press:
-    display_title: Presse
+    display_title: 'Communiqués de presse'
     display_options:
       empty:
         area:
           content:
-            value: '<p>Aucun élément ne correspond à votre requête. Veuillez élargir votre recherche.</p>'
+            value: "<p>Aucun élément ne correspond à votre requête. Veuillez élargir votre recherche.</p>\r\n"
             format: full_html
+      header:
+        area:
+          content:
+            value: "<h2>[view:title]</h2>\r\n"
+            format: full_html
+      title: 'Communiqués de presse'
   page_catalogue:
     display_options:
       title: Produits
@@ -39,3 +45,12 @@ display:
       title: Distributeurs
   page_analysts:
     display_title: analystes
+  news:
+    display_title: Actualités
+    display_options:
+      header:
+        area:
+          content:
+            value: "<h2>[view:title]</h2>\r\n"
+            format: full_html
+      title: Actualités

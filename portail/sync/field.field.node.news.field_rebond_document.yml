@@ -1,0 +1,25 @@
+uuid: e9458e19-c4e0-48bc-b6be-c7c58b7c05da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rebond_document
+    - node.type.news
+id: node.news.field_rebond_document
+field_name: field_rebond_document
+entity_type: node
+bundle: news
+label: Document
+description: 'Related document'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: rebond_entity_reference
+      display_name: rebond_entity_reference_document
+      arguments: {  }
+field_type: entity_reference

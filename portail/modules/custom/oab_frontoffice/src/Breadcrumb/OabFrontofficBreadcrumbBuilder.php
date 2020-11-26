@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\AdminContext;
 use Drupal\oab_hub\Controller\OabHubController;
+use Drupal\views\Views;
 
 
 class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
@@ -76,8 +77,13 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
             $subhome_display = str_replace('archive_', 'page_', $parameters['display_id']);
 
+              // Petit hack pour "News" qui renvoie vers la subhome presse
+            if ($subhome_display === 'page_news') {
+              $subhome_display = "page_press";
+            }
+
             ##On recupère la display view correspondante
-            $view = \Drupal\views\Views::getView('subhomes');
+            $view = Views::getView('subhomes');
             $view->setDisplay($subhome_display);
             $display_obj = $view->getDisplay();
 
@@ -95,9 +101,21 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
                 $link = Link::createFromRoute($display_name, "view.subhomes." . $subhome_display);
                 $link->setUrl(Drupal\Core\Url::fromUri(OabHubController::getHubSubhomeUrl($link->getUrl()->toString())));
-
                 $breadcrumb->addLink($link);
-                $breadcrumb->addLink(Link::createFromRoute("Archives", '<none>'));
+
+                if ($subhome_display === 'archive_press') {
+                  $link_text = t("Archives");
+                } else {
+                  ##On recupère la display view correspondante
+                  $current_view = Views::getView($parameters['view_id']);
+                  $current_view->setDisplay($parameters['display_id']);
+                  $current_display = $current_view->getDisplay();
+
+                  #Et on en recupère son titre pour l'affichage
+                  $link_text = ucfirst($current_display->display['display_title']);
+                }
+
+                $breadcrumb->addLink(Link::createFromRoute($link_text, '<none>'));
             }
 
         } else {
@@ -105,7 +123,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             #Liste des types de contenu pour cette config du fil d'ariane
             $content_types = [
                 "blog_post", "customer_story", "document", "magazine",
-                "office", "partner", "press_kit", "press_release", "product"];
+                "office", "partner", "press_kit", "press_release", "product", "news"];
 
 
             ##Si on a un bien un node en affichage,
@@ -140,7 +158,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                             $display_machine_name = $value[0]['value'];
 
                             ##On charge la vue "Subhome", puis on set avec la display view de la subhome
-                            $view = \Drupal\views\Views::getView('subhomes');
+                            $view = Views::getView('subhomes');
                             $view->execute($display_machine_name);
                             $display_obj = $view->getDisplay();
 
@@ -154,16 +172,16 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                             $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
 
 
-							$url = \Drupal\oab_hub\Controller\OabHubController::getHubSubhomeUrl(\Drupal\Core\Url::fromRoute($display_route_name));
+							              $url = OabHubController::getHubSubhomeUrl(\Drupal\Core\Url::fromRoute($display_route_name));
 
                             if (is_string($url)) {
                                 $url = \Drupal\Core\Url::fromUri($url);
                             }
 
-							$breadcrumb->addLink(Link::fromTextAndUrl($display_name, $url));
-						}
-					}
-				}
+                            $breadcrumb->addLink(Link::fromTextAndUrl($display_name, $url));
+                        }
+                    }
+                }
             }
         }
 

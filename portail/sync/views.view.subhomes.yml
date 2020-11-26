@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.subhome
     - node.type.distributor
+    - node.type.news
     - node.type.press_release
     - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.solutions
@@ -287,7 +288,7 @@ display:
           expose:
             label: ''
           plugin_id: standard
-      title: Analysts
+      title: 'Press releases'
       header: {  }
       footer: {  }
       empty: {  }
@@ -348,6 +349,418 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
+  news:
+    display_plugin: block
+    id: news
+    display_title: news
+    position: 1
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      arguments: {  }
+      defaults:
+        arguments: false
+        filters: false
+        filter_groups: false
+        pager: false
+        use_ajax: false
+        style: false
+        row: false
+        relationships: false
+        header: false
+        empty: false
+        title: false
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        langcode:
+          id: langcode
+          table: node
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+        field_hub_target_id:
+          id: field_hub_target_id
+          table: node__field_hub
+          field: field_hub_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: hub
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: 'Authored on after'
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: created_op
+            label: 'Authored on - min'
+            description: ''
+            use_operator: false
+            operator: created_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created-min
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+        created_1:
+          id: created_1
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: 'Authored on before'
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: created_1_op
+            label: 'Authored on - max'
+            description: ''
+            use_operator: false
+            operator: created_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created-max
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            news: news
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_solution
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: Name
+            description: ''
+            use_operator: false
+            operator: name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: solutions
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      relationships:
+        field_solution:
+          id: field_solution
+          table: node__field_solution
+          field: field_solution
+          relationship: none
+          group_type: group
+          admin_label: 'field_solution: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_press_type:
+          id: field_press_type
+          table: node__field_press_type
+          field: field_press_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_press_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2>[view:title]</h2>'
+            format: full_html
+          plugin_id: text
+      style:
+        type: grid
+        options:
+          uses_fields: false
+          columns: 1
+          automatic_width: false
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: 'col-xs-12 col-md-12'
+          row_class_default: true
+          row_class_custom: ''
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: subhome
+      pager:
+        type: some
+        options:
+          items_per_page: 4
+          offset: 0
+      empty: {  }
+      block_hide_empty: false
+      display_comment: 'Displayed on press subhome as a block'
+      use_ajax: true
+      title: News
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+    title: Press
   page_analysts:
     display_plugin: page
     id: page_analysts
@@ -680,6 +1093,7 @@ display:
         filter_groups: false
         arguments: false
         relationships: false
+        title: false
       filter_groups:
         operator: AND
         groups:
@@ -749,6 +1163,7 @@ display:
           admin_label: 'field_analysts: Taxonomy term'
           required: false
           plugin_id: standard
+      title: Analysts
     cache_metadata:
       max-age: -1
       contexts:
@@ -2247,55 +2662,6 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: string
-        field_products_target_id:
-          id: field_products_target_id
-          table: node__field_products
-          field: field_products_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_products_target_id_op
-            label: Produits
-            description: ''
-            use_operator: false
-            operator: field_products_target_id_op
-            identifier: product
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              chief_editor: '0'
-              digital_admin: '0'
-              webform_manager: '0'
-              contributor: '0'
-              fh_backbones: '0'
-              dvi: '0'
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
         field_hub_target_id:
           id: field_hub_target_id
           table: node__field_hub
@@ -3326,7 +3692,7 @@ display:
   page_press:
     display_plugin: page
     id: page_press
-    display_title: press
+    display_title: 'Press Releases'
     position: 1
     display_options:
       display_extenders: {  }
@@ -3380,6 +3746,7 @@ display:
         relationships: false
         header: false
         empty: false
+        title: false
       filters:
         status:
           value: '1'
@@ -3541,8 +3908,8 @@ display:
           field: created
           relationship: none
           group_type: group
-          admin_label: ''
-          operator: between
+          admin_label: 'Authored on after'
+          operator: '>='
           value:
             min: ''
             max: ''
@@ -3556,30 +3923,30 @@ display:
             description: ''
             use_operator: false
             operator: created_op
-            identifier: created
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created-min
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
+              webform_manager: '0'
               anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
               administrator: '0'
+              webform_spoc_securite: '0'
               chief_editor: '0'
               digital_admin: '0'
               contributor: '0'
               fh_backbones: '0'
               dvi: '0'
-              webform_manager: '0'
-              webform_business_owner: '0'
-              webform_admin: '0'
-              webform_spoc_securite: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -3637,6 +4004,66 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        created_1:
+          id: created_1
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: 'Authored on before'
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: created_1_op
+            label: 'Authored on'
+            description: ''
+            use_operator: false
+            operator: created_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: created-max
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: created
+          plugin_id: date
       filter_groups:
         operator: AND
         groups:
@@ -3660,7 +4087,20 @@ display:
           admin_label: 'field_press_type: Taxonomy term'
           required: false
           plugin_id: standard
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<h2>[view:title]</h2>'
+            format: full_html
+          plugin_id: text
       style:
         type: grid
         options:
@@ -3696,6 +4136,7 @@ display:
             value: 'No items match your query. Please modify the selected request.'
             format: full_html
           plugin_id: text
+      title: 'Press releases'
     cache_metadata:
       max-age: -1
       contexts:
@@ -3706,7 +4147,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-    title: Press
+    title: 'Press releases'
   page_press_old:
     display_plugin: page
     id: page_press_old

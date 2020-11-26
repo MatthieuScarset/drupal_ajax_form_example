@@ -1,0 +1,25 @@
+uuid: 33a2ea50-8369-4086-b747-38cee39655eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_page_du_site_1
+    - node.type.news
+id: node.news.field_page_du_site_1
+field_name: field_page_du_site_1
+entity_type: node
+bundle: news
+label: 'Site page #1'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: rebond_entity_reference
+      display_name: rebond_entity_reference_content
+      arguments: {  }
+field_type: entity_reference

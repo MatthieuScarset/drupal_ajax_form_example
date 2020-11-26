@@ -1,0 +1,76 @@
+uuid: b84a0602-9bee-4082-a61d-affced4afafa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_p_wysiwyg_rebond
+    - node.type.news
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.news.field_p_wysiwyg_rebond
+field_name: field_p_wysiwyg_rebond
+entity_type: node
+bundle: news
+label: 'Wysiwyg rebond'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      rebond_wysiwyg: rebond_wysiwyg
+    target_bundles_drag_drop:
+      default_button:
+        weight: 17
+        enabled: false
+      home_banner:
+        weight: 18
+        enabled: false
+      home_caroussel:
+        weight: 19
+        enabled: false
+      home_column:
+        weight: 20
+        enabled: false
+      home_column_section:
+        weight: 21
+        enabled: false
+      home_playlist:
+        weight: 22
+        enabled: false
+      home_thematic_columns:
+        weight: 23
+        enabled: false
+      homepage_banner_experience:
+        weight: 24
+        enabled: false
+      homepage_banner_item:
+        weight: 25
+        enabled: false
+      homepage_news:
+        weight: 26
+        enabled: false
+      infography_partner:
+        weight: 27
+        enabled: false
+      marketo:
+        weight: 28
+        enabled: false
+      paragraph_block_rebond:
+        weight: 29
+        enabled: false
+      rebond_wysiwyg:
+        enabled: true
+        weight: 30
+      related_content:
+        weight: 31
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions

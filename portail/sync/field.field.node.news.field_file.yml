@@ -1,0 +1,28 @@
+uuid: 4f244db3-156a-404d-bd11-74ab620209a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - media_entity.bundle.file
+    - node.type.news
+id: node.news.field_file
+field_name: field_file
+entity_type: node
+bundle: news
+label: 'Upload document'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

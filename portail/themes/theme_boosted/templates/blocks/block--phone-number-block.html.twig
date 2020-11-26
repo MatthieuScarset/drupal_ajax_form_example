@@ -53,16 +53,13 @@
     {% block content %}
         {% if content is not null %}
             <div class="block-content">
-                <div class="numero" style=""><a href="tel:{{ content }}">{{ content }}</a></div>
+                <div class="numero" style=""><a href="tel:{{ content.block_num_tel }}">{{ content.block_num_tel }}</a></div>
                 <div class="text text-align-left" style="">
                     <span class="glyphicon glyphicon-play" style=""></span>
                     Service & appel <br/> gratuits
                 </div>
             </div>
-
-    {% endif %}
-
+        {% endif %}
     {% endblock %}
-
 </section>
 

@@ -225,7 +225,7 @@ class OabHubController extends ControllerBase {
 
             # Suppression des URLS créées pour les différents contenus
             $connection = \Drupal::database();
-            $results = $connection->select('url_alias', 'u')
+            $results = $connection->select('path_alias', 'u')
                 ->fields('u', ['source', 'alias', 'langcode'])
                 ->condition('langcode', $term_langcode)
                 ->condition('alias', "%$url%", 'LIKE')
@@ -498,7 +498,7 @@ class OabHubController extends ControllerBase {
 
         $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
         $connection = \Drupal::database();
-        $results = $connection->select('url_alias', 'u')
+        $results = $connection->select('path_alias', 'u')
             ->fields('u', ['source', 'alias', 'langcode'])
             ->condition('langcode', $langcode)
             ->condition('alias', "%$actual_url%", 'LIKE')
