@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_visual_tile
-    - media_entity.bundle.image
+    - media.bundle.image
     - node.type.news
 id: node.news.field_visual_tile
 field_name: field_visual_tile
