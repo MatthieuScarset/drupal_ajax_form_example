@@ -1,0 +1,4 @@
+# Liste des modules à réinstaller après un config-import
+# Cette liste devrait être identique à ce qu'il y a dans le tableau $settings['config_exclude_modules'] dans le fichier settings.php
+devel
+kint

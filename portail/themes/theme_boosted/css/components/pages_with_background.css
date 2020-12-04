@@ -1,9 +1,36 @@
 /**
+Specific HP with background in carrousel
+ */
+
+.hp-background-carousel {
+  z-index: -1000;  /* Push it back in any ways */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  -webkit-transition: opacity .4s ease-in-out;
+  -moz-transition: opacity .4s ease-in-out;
+  -o-transition: opacity .4s ease-in-out;
+  transition: opacity .4s ease-in-out;
+  opacity: 0;
+}
+
+.hp-background-carousel.active {
+  opacity: 1;
+}
+
+
+/**
  CSS Spécifique pour adapter le style aux pages qui possèdent un background
  */
 
 @media not screen, (max-width: 767px) {
-    .oab_background_image {
+    .oab_background_image, .hp-background-carousel {
         background-image: none !important;
         background-color: #333;
     }

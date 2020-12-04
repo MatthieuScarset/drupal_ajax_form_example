@@ -16,7 +16,7 @@ dependencies:
     - node.type.office
   module:
     - field_group
-    - geolocation
+    - geolocation_google_maps
     - inline_entity_form
     - workbench_moderation
 third_party_settings:

@@ -1,4 +1,7 @@
 display:
+  page_1:
+    display_options:
+      display_description: 'Block containing the list of offices'
   default:
     display_options:
       exposed_form:
@@ -6,6 +9,7 @@ display:
           submit_button: Appliquer
           reset_button_label: 'Remise à zéro'
           exposed_sorts_label: 'Filtrer par'
+      title: 'Our local offices'
   offices_map_block:
     display_options:
       exposed_form:

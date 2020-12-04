@@ -350,11 +350,11 @@ function check_log_for_cron(){
  * Implements hook_js_alter().
  * Hack pour ne pas charger en local tealium et cie pour réduire le nombre de chargement/appels exterieurs lors d'un dev en local
  */
-function oab_develop_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
-  if (strpos(Drupal::request()->getHost(), '.local') !== false) {
-    unset($javascript['modules/contrib/autologout/js/autologout.js']);  //automatically remove autologout
-    unset($javascript['themes/theme_boosted/js/social_bar/orange_socialbar.js']);
-    unset($javascript['themes/theme_boosted/js/tealium.js']);
-    unset($javascript['themes/theme_boosted/js/social_bar/orange_socialbar_settings.js']);
-  }
-}
+//function oab_develop_js_alter(&$javascript, \Drupal\Core\Asset\AttachedAssetsInterface $assets) {
+//  if (strpos(Drupal::request()->getHost(), '.local') !== false) {
+//    unset($javascript['modules/contrib/autologout/js/autologout.js']);  //automatically remove autologout
+//    unset($javascript['themes/theme_boosted/js/social_bar/orange_socialbar.js']);
+//    unset($javascript['themes/theme_boosted/js/tealium.js']);
+//    unset($javascript['themes/theme_boosted/js/social_bar/orange_socialbar_settings.js']);
+//  }
+//}

@@ -1,0 +1,19 @@
+uuid: 9a6210da-b870-47f8-ba4f-a35d09683262
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight_text
+    - paragraphs.paragraphs_type.homepage_news
+id: paragraph.homepage_news.field_highlight_text
+field_name: field_highlight_text
+entity_type: paragraph
+bundle: homepage_news
+label: 'Highlight text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

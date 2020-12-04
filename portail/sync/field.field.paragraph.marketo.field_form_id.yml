@@ -1,0 +1,19 @@
+uuid: a15d206f-2a26-43fa-9010-f858e5a921e1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_form_id
+    - paragraphs.paragraphs_type.marketo
+id: paragraph.marketo.field_form_id
+field_name: field_form_id
+entity_type: paragraph
+bundle: marketo
+label: 'Form ID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

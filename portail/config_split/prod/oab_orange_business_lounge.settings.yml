@@ -1,0 +1,9 @@
+title_label: 'Retrouvez les tarifs et nos réseaux partenaires en fonction de votre pays de destination'
+zones_image:
+  1: '24273'
+  2: '24274'
+  3: '24275'
+  5: '24276'
+  6: '24277'
+  7: '24278'
+url_api: 'https://businesslounge.orange.fr/api/api/3.0.0'

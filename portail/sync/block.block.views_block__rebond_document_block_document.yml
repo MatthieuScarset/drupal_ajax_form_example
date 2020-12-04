@@ -30,6 +30,7 @@ visibility:
       blog_post: blog_post
       customer_story: customer_story
       magazine: magazine
+      news: news
       partner: partner
       press_release: press_release
       simple_page: simple_page

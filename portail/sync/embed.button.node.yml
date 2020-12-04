@@ -10,8 +10,6 @@ dependencies:
     - node.type.partner
     - node.type.press_kit
     - node.type.simple_page
-  content:
-    - 'file:file:d780d689-d62a-4f46-9837-7cb10653a7d6'
   module:
     - entity_embed
     - node
@@ -35,4 +33,5 @@ type_settings:
   entity_browser: ''
   entity_browser_settings:
     display_review: false
-icon_uuid: d780d689-d62a-4f46-9837-7cb10653a7d6
+icon: {  }
+icon_uuid: null

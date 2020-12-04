@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies: {  }
@@ -12,6 +13,7 @@ permissions:
   - 'access browser_file_modal entity browser pages'
   - 'access content overview'
   - 'access files overview'
+  - 'access marketo entity browser pages'
   - 'access media overview'
   - 'access toolbar'
   - 'access user profiles'

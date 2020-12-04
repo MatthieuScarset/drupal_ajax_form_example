@@ -54,6 +54,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_visual
         - group_rebond
         - group_classify
         - group_seo
@@ -76,8 +77,6 @@ third_party_settings:
         - field_top_zone_background
         - field_top_zone_bg_mobile
         - field_content
-        - field_visual
-        - field_visual_tile
         - field_file
       parent_name: group_onglets
       weight: 5
@@ -189,7 +188,7 @@ third_party_settings:
         - group_try_and_buy_block
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
-      weight: 6
+      weight: 7
       format_type: tab
       format_settings:
         id: ''
@@ -198,6 +197,20 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Rebond
+    group_visual:
+      children:
+        - field_visual_tile
+        - field_visual
+      parent_name: group_onglets
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Visual
 id: node.product.default
 targetEntityType: node
 bundle: product
@@ -243,6 +256,7 @@ content:
       selection_mode: selection_append
       open: false
       field_widget_display_settings: {  }
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -399,6 +413,7 @@ content:
       selection_mode: selection_append
       open: false
       field_widget_display_settings: {  }
+      field_widget_replace: false
     third_party_settings: {  }
   field_top_zone_bg_mobile:
     weight: 8
@@ -410,6 +425,7 @@ content:
       selection_mode: selection_append
       open: false
       field_widget_display_settings: {  }
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -427,7 +443,7 @@ content:
     region: content
   field_visual:
     type: entity_browser_entity_reference
-    weight: 10
+    weight: 12
     region: content
     settings:
       entity_browser: browse_media_modal
@@ -438,6 +454,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
   field_visual_tile:
     weight: 11
@@ -450,6 +467,7 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
+      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content

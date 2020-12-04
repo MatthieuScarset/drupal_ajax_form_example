@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -13,7 +14,7 @@ entity_type: subhome_entity
 bundle: presse
 label: Carrousel
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -33,11 +34,17 @@ settings:
       home_column:
         weight: 16
         enabled: false
+      default_button:
+        weight: 17
+        enabled: false
       home_column_section:
         weight: 17
         enabled: false
       home_playlist:
         weight: 18
+        enabled: false
+      home_caroussel:
+        weight: 19
         enabled: false
       home_thematic_columns:
         weight: 19
@@ -62,5 +69,8 @@ settings:
         enabled: false
       related_content:
         weight: 26
+        enabled: false
+      marketo:
+        weight: 28
         enabled: false
 field_type: entity_reference_revisions

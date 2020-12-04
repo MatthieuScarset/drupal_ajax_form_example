@@ -16,6 +16,7 @@ permissions:
   - 'access content overview'
   - 'access files overview'
   - 'access in-place editing'
+  - 'access marketo entity browser pages'
   - 'access media overview'
   - 'access shortcuts'
   - 'access toolbar'

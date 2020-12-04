@@ -5,13 +5,15 @@ dependencies:
   config:
     - field.field.paragraph.homepage_news.field_block_size
     - field.field.paragraph.homepage_news.field_chapo
-    - field.field.paragraph.homepage_news.field_highlight_content
+    - field.field.paragraph.homepage_news.field_highlight_linked_content
+    - field.field.paragraph.homepage_news.field_highlight_text
     - field.field.paragraph.homepage_news.field_image
     - field.field.paragraph.homepage_news.field_link_news
     - field.field.paragraph.homepage_news.field_title
     - paragraphs.paragraphs_type.homepage_news
   module:
     - image
+    - link
     - options
     - text
 id: paragraph.homepage_news.default
@@ -33,14 +35,25 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
-  field_highlight_content:
-    weight: 3
+  field_highlight_linked_content:
+    weight: 7
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_highlight_text:
+    weight: 5
     label: hidden
     settings:
-      link: true
-      view_mode: default
+      link_to_entity: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: string
     region: content
   field_image:
     weight: 1

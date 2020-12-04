@@ -705,3 +705,10 @@ function oab_tristan_update_8092() {
 function oab_tristan_update_8093() {
   include_once('updates/update_8093.inc');
 }
+
+/**
+ * Création de la subhome "actualites"
+ */
+function oab_tristan_update_8094() {
+  include_once('updates/update_8094.inc');
+}

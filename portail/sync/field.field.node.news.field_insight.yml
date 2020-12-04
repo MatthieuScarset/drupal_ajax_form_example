@@ -1,0 +1,29 @@
+uuid: e0779200-b859-4d55-a7f3-fd434727c626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_insight
+    - node.type.news
+    - taxonomy.vocabulary.thematic
+id: node.news.field_insight
+field_name: field_insight
+entity_type: node
+bundle: news
+label: Insight
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      thematic: thematic
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

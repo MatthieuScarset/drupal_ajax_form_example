@@ -1,0 +1,23 @@
+uuid: 5a3c6669-e7af-4ced-a5c9-a72e55a74b6a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_redirection_url
+    - paragraphs.paragraphs_type.marketo
+  module:
+    - link
+id: paragraph.marketo.field_redirection_url
+field_name: field_redirection_url
+entity_type: paragraph
+bundle: marketo
+label: 'Redirection URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

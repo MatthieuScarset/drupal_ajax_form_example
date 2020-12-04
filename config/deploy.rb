@@ -16,6 +16,7 @@ set :file_permissions_users, ["www-data"]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/ruby'
+set :docker_file, '/etc/docker/ruby/docker-compose.yml'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -98,8 +99,8 @@ namespace :deploy do
    desc 'Re-run docker'
    task :restart_docker do
     on roles(:all) do
-     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml stop"
-     execute "docker-compose -f /etc/docker/ruby/docker-compose.yml up -d"
+     execute "docker-compose -f #{docker_file} stop"
+     execute "docker-compose -f #{docker_file} up -d"
     end
    end
 

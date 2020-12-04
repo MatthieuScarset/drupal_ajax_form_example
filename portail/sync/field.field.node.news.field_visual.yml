@@ -1,0 +1,28 @@
+uuid: 38bfcf37-d51c-423a-912e-fbd9a50367a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_visual
+    - media_entity.bundle.image
+    - node.type.news
+id: node.news.field_visual
+field_name: field_visual
+entity_type: node
+bundle: news
+label: 'Visual for sub-home'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

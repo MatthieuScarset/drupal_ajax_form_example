@@ -2,19 +2,19 @@
    or (axiomeDocs.doc2_url|trim is not empty and axiomeDocs.doc2_custom_link|trim is not empty)
    or (axiomeDocs.doc3_url|trim is not empty and axiomeDocs.doc3_custom_link|trim is not empty)
 %}
-<div class="node-axiome-know-more col-md-12 nopadding">
+  <div class="node-axiome-know-more col-md-12 nopadding">
     <div class="col col-md-12 nopadding">
-        <ul>
-            {% if axiomeDocs.doc1_url|trim is not empty and axiomeDocs.doc1_custom_link|trim is not empty %}
-                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc1_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc1_custom_link }}</span></a></li>
-            {% endif %}
-            {% if axiomeDocs.doc2_url|trim is not empty and axiomeDocs.doc2_custom_link|trim is not empty %}
-                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc2_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc2_custom_link }}</span></a></li>
-            {% endif %}
-            {% if axiomeDocs.doc3_url|trim is not empty and axiomeDocs.doc3_custom_link|trim is not empty %}
-                <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc3_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc3_custom_link }}</span></a></li>
-            {% endif %}
-        </ul>
+      <ul>
+        {% if axiomeDocs.doc1_url is not iterable and axiomeDocs.doc1_url|trim is not empty and axiomeDocs.doc1_custom_link|trim is not empty %}
+          <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc1_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc1_custom_link }}</span></a></li>
+        {% endif %}
+        {% if axiomeDocs.doc2_url is not iterable and axiomeDocs.doc2_url|trim is not empty and axiomeDocs.doc2_custom_link|trim is not empty %}
+          <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc2_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc2_custom_link }}</span></a></li>
+        {% endif %}
+        {% if axiomeDocs.doc3_url is not iterable and axiomeDocs.doc3_url|trim is not empty and axiomeDocs.doc3_custom_link|trim is not empty %}
+          <li><span class="icon-document_stack"></span> <a href="{{ axiomeDocs.doc3_url|url_clean_prefix }}" target="_blank"><span class="downloadPDF">{{ axiomeDocs.doc3_custom_link }}</span></a></li>
+        {% endif %}
+      </ul>
     </div>
-</div>
+  </div>
 {% endif %}

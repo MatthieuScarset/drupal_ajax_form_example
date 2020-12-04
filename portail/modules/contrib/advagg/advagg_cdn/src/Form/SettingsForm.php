@@ -2,9 +2,8 @@
 
 namespace Drupal\advagg_cdn\Form;
 
-use Drupal\Core\Asset\AssetCollectionOptimizerInterface;
+use Drupal\advagg\AdvaggSettersTrait;
 use Drupal\Core\Cache\Cache;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
@@ -15,44 +14,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SettingsForm extends ConfigFormBase {
 
-  /**
-   * The CSS asset collection optimizer service.
-   *
-   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
-   */
-  protected $cssCollectionOptimizer;
-
-  /**
-   * The JavaScript asset collection optimizer service.
-   *
-   * @var \Drupal\Core\Asset\AssetCollectionOptimizerInterface
-   */
-  protected $jsCollectionOptimizer;
-
-  /**
-   * {@inheritdoc}
-   *
-   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $css_collection_optimizer
-   *   The CSS asset collection optimizer service.
-   * @param \Drupal\Core\Asset\AssetCollectionOptimizerInterface $js_collection_optimizer
-   *   The JavaScript asset collection optimizer service.
-   */
-  public function __construct(ConfigFactoryInterface $config_factory, AssetCollectionOptimizerInterface $css_collection_optimizer, AssetCollectionOptimizerInterface $js_collection_optimizer) {
-    parent::__construct($config_factory);
-
-    $this->cssCollectionOptimizer = $css_collection_optimizer;
-    $this->jsCollectionOptimizer = $js_collection_optimizer;
-  }
+  use AdvaggSettersTrait;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('asset.css.collection_optimizer'),
-      $container->get('asset.js.collection_optimizer')
-    );
+    /**
+     * @var \Drupal\advagg_cdn\Form\SettingsForm
+     */
+    $instance = parent::create($container);
+    $instance->setCssCollectionOptimizer($container->get('asset.css.collection_optimizer'));
+    $instance->setJsCollectionOptimizer($container->get('asset.js.collection_optimizer'));
+
+    return $instance;
   }
 
   /**
@@ -78,18 +53,18 @@ class SettingsForm extends ConfigFormBase {
 
     $form['cdn'] = [
       '#type' => 'radios',
-      '#title' => t('CDN to use'),
+      '#title' => $this->t('CDN to use'),
       '#default_value' => $config->get('cdn'),
       '#options' => ['google' => 'Google', 'microsoft' => 'Microsoft'],
     ];
     $form['minified'] = [
       '#type' => 'checkbox',
-      '#title' => t('Use Minified Resources'),
+      '#title' => $this->t('Use Minified Resources'),
       '#default_value' => $config->get('minified'),
-      '#description' => t('When available use minified versions of any resources being served by the CDN.'),
+      '#description' => $this->t('When available use minified versions of any resources being served by the CDN.'),
     ];
     if ($this->config('advagg.settings')->get('cache_level') < 0) {
-      $form['minified']['#description'] .= t('This setting will not have any effect because AdvAgg is currently in <a href="@devel">development mode</a>. Once the cache settings have been set to normal or aggressive, JS minification will take place.', ['@devel' => Url::fromRoute('advagg.settings', ['fragment' => 'edit-advagg-cache-level'])->toString()]);
+      $form['minified']['#description'] .= $this->t('This setting will not have any effect because AdvAgg is currently in <a href="@devel">development mode</a>. Once the cache settings have been set to normal or aggressive, JS minification will take place.', ['@devel' => Url::fromRoute('advagg.settings', ['fragment' => 'edit-advagg-cache-level'])->toString()]);
     }
 
     $form['jquery'] = [
@@ -98,14 +73,14 @@ class SettingsForm extends ConfigFormBase {
     ];
     $form['jquery']['jquery_active'] = [
       '#type' => 'checkbox',
-      '#title' => t('Serve jQuery by CDN'),
+      '#title' => $this->t('Serve jQuery by CDN'),
       '#default_value' => $config->get('jquery'),
     ];
     $form['jquery']['jquery_version'] = [
       '#type' => 'textfield',
-      '#title' => t('jQuery version'),
+      '#title' => $this->t('jQuery version'),
       '#default_value' => $config->get('jquery_version'),
-      '#description' => t('Version of jQuery to load.'),
+      '#description' => $this->t('Version of jQuery to load.'),
       '#states' => [
         'disabled' => [
           ':input[name="jquery_active"]' => ['value' => "0"],
@@ -118,9 +93,9 @@ class SettingsForm extends ConfigFormBase {
     ];
     $form['jquery_ui']['jquery_ui_css'] = [
       '#type' => 'checkbox',
-      '#title' => t('Serve jQuery UI CSS by CDN'),
+      '#title' => $this->t('Serve jQuery UI CSS by CDN'),
       '#default_value' => $config->get('jquery_ui_css'),
-      '#description' => t('Warning: this may change your site appearance as Drupal 8 by default uses the base jQuery theme and the base theme is not available by CDN.'),
+      '#description' => $this->t('Warning: this may change your site appearance as Drupal 8 by default uses the base jQuery theme and the base theme is not available by CDN.'),
     ];
     $jquery_themes = [
       'black-tie',
@@ -150,21 +125,21 @@ class SettingsForm extends ConfigFormBase {
     ];
     $form['jquery_ui']['jquery_ui_theme'] = [
       '#type' => 'select',
-      '#title' => t('jQuery UI theme'),
+      '#title' => $this->t('jQuery UI theme'),
       '#default_value' => $config->get('jquery_ui_theme'),
-      '#description' => t('Choose which jQuery theme to use. Smoothness is the most basic and similar to Drupal standard version.'),
+      '#description' => $this->t('Choose which jQuery theme to use. Smoothness is the most basic and similar to Drupal standard version.'),
       '#options' => array_combine($jquery_themes, $jquery_themes),
     ];
     $form['jquery_ui']['jquery_ui_js'] = [
       '#type' => 'checkbox',
-      '#title' => t('Serve jQuery UI JavaScript by CDN'),
+      '#title' => $this->t('Serve jQuery UI JavaScript by CDN'),
       '#default_value' => $config->get('jquery_ui_js'),
     ];
     $form['jquery_ui']['jquery_ui_version'] = [
       '#type' => 'textfield',
-      '#title' => t('jQuery UI version'),
+      '#title' => $this->t('jQuery UI version'),
       '#default_value' => $config->get('jquery_ui_version'),
-      '#description' => t('Version of jQuery UI to load.'),
+      '#description' => $this->t('Version of jQuery UI to load.'),
     ];
     return parent::buildForm($form, $form_state);
   }

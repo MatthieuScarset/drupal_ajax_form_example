@@ -29,6 +29,9 @@ oab_subhomes.subhomes:
     analysts_term_tid:
       type: label
       label: 'Analysts term id'
+    news_term_tid:
+      type: label
+      label: 'News term id'
     press_meta:
       type: label
       label: 'Press meta title'
@@ -61,9 +64,53 @@ oab_backoffice.pardot:
   type: config_object
   label: 'Pardot'
   mapping:
-    iframe_url:
-      type: label
-      label: 'Iframe url'
+    pardot:
+      label: 'Pardot'
+      type: mapping
+      mapping:
+        iframe_url:
+          type: label
+          label: 'Iframe url'
+    marketo:
+      label: 'Marketo'
+      type: mapping
+      mapping:
+        general:
+          label: 'General'
+          type: mapping
+          mapping:
+            mkto_domain:
+              type: label
+              label: 'Domain'
+            mkto_munchkin_id:
+              type: label
+              label: 'Munchkin Id'
+            mkto_version:
+              type: label
+              label: 'version'
+            mkto_sous_domaine:
+              type: label
+              label: 'Sous domaine'
+            mkto_univers_affichage:
+              type: label
+              label: 'Univers affichage'
+        document:
+          label: 'Document'
+          type: mapping
+          mapping:
+            mkto_form_name:
+              type: label
+              label: 'Form name'
+            mkto_form_id:
+              type: label
+              label: 'Form Id'
+            mkto_custom_follow_up_url:
+              type: label
+              label: 'Custom follow up url'
+            mkto_form_follow_up_message:
+              type: text_format
+              label: 'Form follow up message'
+
 
 action.configuration.oab_backoffice_node_workbench_publish:
   type: action_configuration_default
