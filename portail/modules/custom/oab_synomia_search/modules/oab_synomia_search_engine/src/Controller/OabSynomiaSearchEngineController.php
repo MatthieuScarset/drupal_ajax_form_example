@@ -36,14 +36,13 @@ class OabSynomiaSearchEngineController extends ControllerBase
             if (isset($result) && !empty($result)) {
                 $response = new SynomiaSearchResponse();
                 $response->readXML($result, $filtre_rubrique);
-
-                if ($response->nbResultsTotal > 0) {
+                if (count($response->nbResultsTotal) > 0) {
 
                     if ($response->searchMode == 'rubrique') {
                         $page = pager_default_initialize($response->nbResultsTotal, 10);
                     }
                     $result_label = '';
-                    if ($current_language != 'ru') {
+                  if ($current_language != 'ru') {
                         if (count($response->nbResultsTotal) == 1) {
                             $result_label = $response->nbResultsTotal . ' ' . t('result') . ' ' . t('for');
                         } elseif (count($response->nbResultsTotal) > 1) {
@@ -93,7 +92,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
                     '#searchForm' => $search_form,
                     '#resultLabel' => $result_label,
                     '#searchResults' => $response->results,
-                    '#currentPage' => $response->current_page,
+                    '#currentPage' => $response->currentPage,
                     '#facets' => $response->facets,
                     '#searchMode' => $response->searchMode,
                     '#pager' => $response->pager,
@@ -236,8 +235,10 @@ class OabSynomiaSearchEngineController extends ControllerBase
         $content_types = $this->getOrderContentTypesArray();
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
+              if( isset($old_results_array[$contentType])) {
                 $new_facets_array_ordered[$contentType] = $old_facets_array[$contentType];
                 unset($old_facets_array[$contentType]);
+              }
             }
             return array_merge($new_facets_array_ordered, $old_facets_array);
         }
@@ -249,12 +250,14 @@ class OabSynomiaSearchEngineController extends ControllerBase
      * @return array
      */
     private function orderResultsArray($old_results_array) {
-          $new_results_array_ordered = array();
+        $new_results_array_ordered = array();
         $content_types = $this->getOrderContentTypesArray();
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
+              if( isset($old_results_array[$contentType])) {
                 $new_results_array_ordered[$contentType] = $old_results_array[$contentType];
                 unset($old_results_array[$contentType]);
+              }
             }
             return array_merge($new_results_array_ordered, $old_results_array);
         }
