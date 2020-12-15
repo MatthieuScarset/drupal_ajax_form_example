@@ -76,6 +76,7 @@ module:
   oab_frontoffice: 0
   oab_hub: 0
   oab_marketo: 0
+  oab_media_browser: 0
   oab_migrate_content: 0
   oab_offices_map: 0
   oab_orange_business_lounge: 0
