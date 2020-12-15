@@ -2,11 +2,7 @@
 
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\file\Entity\File;
-// Fix for PRP qui n'a pas encore MEDIA
-//use Drupal\media\Entity\Media;
-use Drupal\media_entity\Entity\Media;
-
-
+use Drupal\media\Entity\Media;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
