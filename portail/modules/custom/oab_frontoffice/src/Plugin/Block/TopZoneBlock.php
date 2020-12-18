@@ -61,8 +61,9 @@ class TopZoneBlock extends BlockBase {
             /** @var Media $entity */
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background[0]['target_id']);
             $url = '';
-            if (!is_null($entity) && isset($entity->image->entity)) {
-                $uri = $entity->image->entity->getFileUri();
+
+            if (!is_null($entity) && isset($entity->field_image->entity)) {
+                $uri = $entity->field_image->entity->getFileUri();
                 $type = $node->getType();
                 if ($type == 'product') {
                     $img_style = 'top_zone';
@@ -83,8 +84,8 @@ class TopZoneBlock extends BlockBase {
           /** @var Media $entity */
             $entity = \Drupal::entityTypeManager()->getStorage('media')->load((int) $top_zone_background_mobile[0]['target_id']);
             $url = '';
-            if (!is_null($entity) && isset($entity->image->entity)) {
-                $uri = $entity->image->entity->getFileUri();
+            if (!is_null($entity) && isset($entity->field_image->entity)) {
+                $uri = $entity->field_image->entity->getFileUri();
                 $img_style = 'max_650';
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
                 $url = file_url_transform_relative($url);
