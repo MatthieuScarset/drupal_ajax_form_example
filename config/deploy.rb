@@ -99,8 +99,8 @@ namespace :deploy do
    desc 'Re-run docker'
    task :restart_docker do
     on roles(:all) do
-     execute "docker-compose -f #{docker_file} stop"
-     execute "docker-compose -f #{docker_file} up -d"
+     execute "docker-compose -f #{fetch(:docker_file)} stop"
+     execute "docker-compose -f #{fetch(:docker_file)} up -d"
     end
    end
 
@@ -121,4 +121,4 @@ after 'deploy:updating', 'deploy:save_archive_file'
 #after 'deploy:updating', "deploy:create_current_link"
 #after 'deploy:publishing', "deploy:set_permissions:acl"
 after 'deploy:publishing', 'deploy:restart_docker'
-after 'deploy:publishing', 'deploy:drush_update'
+after 'deploy:restart_docker', 'deploy:drush_update'
