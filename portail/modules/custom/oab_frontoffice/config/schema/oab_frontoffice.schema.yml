@@ -42,16 +42,16 @@ block.settings.mediatheque_block:
       type: label
       label: 'Link text'
 
-block.settings.blogs_block:
+block.settings.rebond_subhome_block:
   type: block_settings
   label: 'Blogs'
   mapping:
-      blogs_text:
+      block_text:
         type: label
         label: 'Text'
-      blogs_link:
+      block_link:
         type: label
         label: 'Link'
-      blogs_link_text:
+      block_link_text:
         type: label
         label: 'Link text'
