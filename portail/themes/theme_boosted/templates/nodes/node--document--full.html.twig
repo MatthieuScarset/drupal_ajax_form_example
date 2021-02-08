@@ -98,59 +98,62 @@ view_mode ? view_mode|clean_class,
     <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term["#markup"] }} {% endif %}
 </div>
 
-{% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
-
-
+  {% set pardot_iframe = d_config('oab_backoffice.pardot').get('pardot.iframe_url') %}
 
     <div{{ content_attributes.addClass('content', 'div-display-table', 'row') }}>
-        <div class="document_field_image div-display-cell col-md-3 col-xs-12">
-            {{ content.field_visual }}
-        </div>
 
-        <div class="div-display-table-cell col-md-9 col-xs-12">
+{#        <div class="document_field_image div-display-cell">#}
+{#              {{ content.field_visual }}#}
+{#          </div>#}
+
+        <div class="div-display-table-cell col-md-6 col-xs-12">
             {{ content|without('theme_term', 'field_image', 'field_document_type',
             'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
             'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
             'field_start_date', 'field_end_date', 'field_visual_tile') }}
         </div>
 
-    </div>
+      {% if langcode == 'fr' or pardot_iframe|length == 0 %}
 
-    {% set pardot_iframe = d_config('oab_backoffice.pardot').get('pardot.iframe_url') %}
-
-    {% if langcode == 'fr' or pardot_iframe|length == 0 %}
-
-      <form id="mktoForm_{{ mkto_form_id }}"></form>
-      <div id="FormFollowUpMessage_{{ mkto_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
-          <div class="custum-fum-div">
-            <div class="custom-fum">
-              {{ mkto_follow_up_message.value|raw }}
+        <div class="document_form_part col-md-6 col-xs-12">
+          <form id="mktoForm_{{ mkto_form_id }}"></form>
+          <div id="FormFollowUpMessage_{{ mkto_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
+            <div class="custum-fum-div">
+              <div class="custom-fum">
+                {{ mkto_follow_up_message.value|raw }}
+              </div>
+              <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
             </div>
-            <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
+          </div>
+
+
+        {% else %}
+          {% set filename = "" %}
+          {% set fullUrl = "" %}
+
+          {% for key, file in content.field_file  %}
+            {% if key == "#items" %}
+              {% set media = file.entity %}
+              {% set file_entity = media.field_image_file.entity %}
+              {% set inactiveClasse = "" %}
+              {% if media is not empty %}
+                {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
+                  ~ '&fname=' ~ media.field_file.entity.filename.value
+                  ~ '&dwname=' ~ media.field_file.entity.filename.value
+                  ~ '&title=' ~ node.label|url_encode
+                %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <div class="pardot-form" style="margin-top: 4rem;">
+            <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
           </div>
         </div>
+      {% endif %}
+
+    </div>
 
 
-    {% else %}
-      {% set filename = "" %}
-      {% set fullUrl = "" %}
 
-      {% for key, file in content.field_file  %}
-        {% if key == "#items" %}
-          {% set media = file.entity %}
-          {% set file_entity = media.field_image_file.entity %}
-          {% set inactiveClasse = "" %}
-          {% if media is not empty %}
-            {% set filename = '?dw=' ~ media.field_file.entity.uri.value|get_files_folder_pardot
-              ~ '&fname=' ~ media.field_file.entity.filename.value
-              ~ '&dwname=' ~ media.field_file.entity.filename.value
-              ~ '&title=' ~ node.label|url_encode
-            %}
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-        <div class="pardot-form" style="margin-top: 4rem;">
-            <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
-        </div>
-    {% endif %}
+
 </article>
