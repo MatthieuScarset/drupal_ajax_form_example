@@ -94,19 +94,19 @@ view_mode ? view_mode|clean_class,
         {{ content.field_content_owner }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
 
-<div class="content_info">
-    <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term["#markup"] }} {% endif %}
-</div>
-
   {% set pardot_iframe = d_config('oab_backoffice.pardot').get('pardot.iframe_url') %}
 
     <div{{ content_attributes.addClass('content', 'div-display-table', 'row') }}>
+
+      <div class="col-md-12 col-xs-12 content_info">
+        <span class="date">{{ createdDate }}</span> {% if content.theme_term %} {{ content.theme_term["#markup"] }} {% endif %}
+      </div>
 
 {#        <div class="document_field_image div-display-cell">#}
 {#              {{ content.field_visual }}#}
 {#          </div>#}
 
-        <div class="div-display-table-cell col-md-6 col-xs-12">
+        <div class="div-display-table-cell document_content_part col-md-6 col-xs-12">
             {{ content|without('theme_term', 'field_image', 'field_document_type',
             'field_visual', 'field_file', 'field_file_uri', 'field_highlight', 'field_industry',
             'field_solution', 'field_insight', 'field_document_thematic', 'field_document_type',
@@ -145,7 +145,7 @@ view_mode ? view_mode|clean_class,
               {% endif %}
             {% endif %}
           {% endfor %}
-          <div class="pardot-form" style="margin-top: 4rem;">
+          <div class="pardot-form col-md-6 col-xs-12" style="margin-top: 4rem;">
             <iframe src="{{ pardot_iframe }}{{ filename }}" width="100%" height="700" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" id="myFrame"></iframe>
           </div>
         </div>

@@ -18,8 +18,8 @@
  */
 #}
 
-<div class="titre2">
-  <span style="color: #ff7900">{{ document_type }}</span>
+<div class="row titre2">
+  <span class="col-xs-12" style="color: #ff7900">{{ document_type }}</span>
 </div>
 
 <div class="row">
@@ -27,7 +27,7 @@
     <h1{{ title_attributes.addClass('page-header', 'col-md-10', 'col-xs-12') }}>{{ title }}</h1>
   {% endif %}
 
-  <div {{ social_bar_attributes.addClass('col-md-2', 'col-xs-12') }}>
+  <div class='col-md-2 col-xs-12'>
     {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
   </div>
 </div>
