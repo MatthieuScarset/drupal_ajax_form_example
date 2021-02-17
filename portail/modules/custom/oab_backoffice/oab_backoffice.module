@@ -161,6 +161,9 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 }
 
+function oab_backoffice_form_user_pass_alter(&$form) {
+    $form['#validate'][] = '_oab_backoffice_form_user_pass_form_validate';
+}
 
 function oab_backoffice_entity_update(EntityInterface $entity) {
 
@@ -682,4 +685,17 @@ function oab_backoffice_theme($existing, $type, $theme, $path) {
             'template'  => 'OabExportFileList/oab-export-file-list--ending-page'
         ],
     ];
+}
+
+/**
+ *  Implements callback form_user_pass_form_validate
+ */
+
+function _oab_backoffice_form_user_pass_form_validate(&$form, FormStateInterface $form_State) {
+
+    if ($form_State->getError($form['name']) !== null) {
+      $form_State->clearErrors();
+      $form_State->setErrorByName('name', t(' Further instructions have been sent to your email address.'));
+    }
+
 }
