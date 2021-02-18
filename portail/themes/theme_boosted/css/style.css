@@ -3625,3 +3625,9 @@ input[type=checkbox].mktoField {
   color: #ff7900;
   margin-top: 3rem;
 }
+
+.document_form_part .mktoFormFUMsg {
+  padding: 2rem;
+  background: #000;
+  color: #FFF;
+}
