@@ -460,6 +460,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
     max-width: 866px;
     height: auto;
   }
+  .socialbar-document {
+    text-align: end;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -3612,4 +3615,13 @@ input[type=checkbox].mktoField {
 
 .mktoHtmlText.mktoHasWidth {
   width: 100% !important;
+}
+
+.document-type-titre {
+  font-size: 2.4rem;
+  font-family: HelvNeueOrange, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 2.6rem;
+  color: #ff7900;
+  margin-top: 3rem;
 }
