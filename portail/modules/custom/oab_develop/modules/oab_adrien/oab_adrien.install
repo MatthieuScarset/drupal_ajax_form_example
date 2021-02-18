@@ -1,0 +1,13 @@
+<?php
+
+function oab_adrien_install() {
+  drupal_set_installed_schema_version('oab_adrien', 8000);
+
+}
+
+/**
+ * Ajout des traductions reinit password EN et FR
+ */
+function oab_adrien_update_8001() {
+  include_once("updates/update_8001.inc");
+}
