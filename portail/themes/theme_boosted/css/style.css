@@ -2775,6 +2775,10 @@ body.page-node-type-custom-page{
     padding-top: 10px;
 }
 
+.fieldset-field-insight-type {
+  text-align: right;
+}
+
 .fieldset-field-insight-type .fieldset-legend {
     display: inline-block;
     font-weight: bold;
@@ -3037,10 +3041,6 @@ div.new-btn-see-all-business-insight {
 
 .btn.btn-field-insight-type[data-taxo=All] {
   display: none;
-}
-
-.business-insight-field-insight select {
-  float: right;
 }
 
 @media(max-width: 480px) {
