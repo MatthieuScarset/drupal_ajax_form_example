@@ -460,6 +460,9 @@ a.link-subhomes:hover .encart-image.subhome-image {
     max-width: 866px;
     height: auto;
   }
+  .socialbar-document {
+    text-align: end;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -3498,6 +3501,8 @@ hr.reseau-mobile-accords-roaming {
 
   form.mktoForm.mktoHasWidth .mktoLogicalField.mktoCheckboxList.mktoHasWidth {
     width: auto !important;
+    display: flex;
+    flex-direction: row-reverse;
   }
 
   form.mktoForm.mktoHasWidth .mktoFieldDescriptor.mktoFormCol.emptyLabel .mktoFieldWrap {
@@ -3602,4 +3607,27 @@ hr.reseau-mobile-accords-roaming {
 .page-offices-map .form_filter_regions_countries input.form-submit {
   position: absolute;
   bottom: 0;
+}
+
+input[type=checkbox].mktoField {
+  width: 20px;
+}
+
+.mktoHtmlText.mktoHasWidth {
+  width: 100% !important;
+}
+
+.document-type-titre {
+  font-size: 2.4rem;
+  font-family: HelvNeueOrange, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 2.6rem;
+  color: #ff7900;
+  margin-top: 3rem;
+}
+
+.document_form_part .mktoFormFUMsg {
+  padding: 2rem;
+  background: #000;
+  color: #FFF;
 }

@@ -6,6 +6,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\Core\Template\Attribute;
+use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\taxonomy\Entity\Term;
@@ -113,7 +114,7 @@ function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $
  *
  * Pour le mode d'affichage tuiles, on crées un nouveau template "node--tile--Insight-type-term"
  */
-function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables, $hook) {
   /** @var \Drupal\node\Entity\Node $node */
   $node = $variables['elements']['#node'];
   if ($node->hasField('field_insight_type')
@@ -140,7 +141,6 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
     }
   }
 }
-
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -181,8 +181,6 @@ function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array 
 
 }
 
-
-
 function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
 
     /**
@@ -213,13 +211,21 @@ function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $
     }
 }
 
+function theme_boosted_theme_suggestions_page_title_alter(array &$suggestions, array $variables, $hook) {
+
+  /** @var NodeInterface $node */
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = $hook . '__node';
+    $suggestions[] = $hook . '__node__' . $node->bundle();
+  }
+  return $suggestions;
+}
 
 function theme_boosted_theme_suggestions_fieldset_alter(array &$suggestoins, array $variables, $hook) {
     if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
         $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
-
 
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook){
 
@@ -246,7 +252,6 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
         $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
-
 
 function theme_boosted_preprocess_node(&$variables) {
 
@@ -457,7 +462,6 @@ function theme_boosted_preprocess_region(&$variables) {
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
 
-
 function theme_boosted_preprocess_views_view(&$variables) {
 
     /** @var Drupal\views\ViewExecutable $view */
@@ -548,7 +552,6 @@ function theme_boosted_preprocess_views_view(&$variables) {
   }
 }
 
-
 function theme_boosted_preprocess_views_view_list(&$variables) {
   $view = $variables['view'];
   $id = $view->storage->id();
@@ -564,6 +567,7 @@ function theme_boosted_preprocess_views_view_list(&$variables) {
 	}
 
 }
+
 function theme_boosted_preprocess_views_view_fields(&$variables){
 	$view = $variables['view'];
 	$id = $view->storage->id();
@@ -648,6 +652,20 @@ function theme_boosted_preprocess_file_link(&$variables){
   $variables['attributes']->addClass($classes);
 
   $variables['link'] = \Drupal::l($link_text, Url::fromUri($url, $options));
+}
+
+function theme_boosted_preprocess_page_title(&$variables) {
+
+  /** @var NodeInterface $node */
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->bundle() === 'document') {
+       $taxo = Term::load($node->field_document_type->target_id);
+       if($taxo !== NULL){
+         $variables['document_type'] = $taxo->label();
+       }
+    }
+  }
+
 }
 
 /**
