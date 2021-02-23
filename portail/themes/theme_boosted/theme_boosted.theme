@@ -226,11 +226,20 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
     $current_route_match = \Drupal::getContainer()->get('current_route_match');
     $route_match = $current_route_match->getRouteName();
 
+    if (isset($variables['element']['#type'])) {
+      $suggestions[] = $hook . "__" . $variables['element']['#type'];
+    }
+
+
     if((preg_match('/^view.subhomes/', $route_match)
         || preg_match('/^view.subhomes_archive/', $route_match)
         || $route_match == 'views.ajax')
 			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
         $suggestions[]='form_element__subhomes';
+
+      if (isset($variables['element']['#type'])) {
+        $suggestions[] = $hook . "__subhomes__" . $variables['element']['#type'];
+      }
     }
     if (isset($variables['element']['#webform'])) {
         $suggestions[] = 'form_element__' . $variables['element']['#webform'];

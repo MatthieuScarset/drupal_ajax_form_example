@@ -1,0 +1,11 @@
+{% set drop_id = 'subhome-select-' ~ element['#id']  %}
+
+<div class="dropdown">
+  <a class="btn btn-link dropdown-toggle" href="#" role="button" id="{{ drop_id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{ element['#name'] }}
+  </a>
+  <div class="dropdown-menu" aria-labelledby="{{ drop_id }}">
+    {{ children }}
+  </div>
+</div>
+

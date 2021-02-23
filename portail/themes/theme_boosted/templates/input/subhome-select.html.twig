@@ -1,0 +1,11 @@
+
+  <input
+    type="checkbox"
+    id="{{ element["#id"] }}"
+    name="{{ element['#name'] }}"
+    value="{{ element['#title'] }}"
+    {% if element['#checked'] %}checked{% endif %}
+  />
+  <label for="{{ element['#id'] }}">  {{ element['#title'] }}</label>
+
+
