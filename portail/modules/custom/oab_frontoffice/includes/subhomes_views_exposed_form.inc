@@ -5,6 +5,20 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_build().
+ */
+function oab_frontoffice_views_pre_build(ViewExecutable $view) {
+//  kint($view); die();
+//  kint($view->getRequest()->query->has('thematic'), $view->getRequest()->query->get('thematic'));
+//
+//  if ($view->getRequest()->query->has('thematic')) {
+//    $view->getRequest()->query->set('thematic', ['1024']);
+//  }
+//  kint($view->getRequest()->query->has('thematic'), $view->getRequest()->query->get('thematic')); die();
+}
 
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -19,20 +33,7 @@ function subhomes_views_exposed_form(&$form) {
 
       if (isset($form['thematic'])) {
 //        kint($form['thematic']); die();
-        $properties = [
-          "vid" => "thematic",
-          "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-        ];
-
-        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-        if (is_array($terms)
-          && !empty($terms)) {
-          foreach ($terms AS $term) {
-            $term_name = $term->getName();
-            $options[$term_name] = $term_name;
-          }
-        }
-
+//        kint($form['thematic']); die();
         $form['thematic']['#type'] = 'subhome_select_button';
         $properties = [
           "vid" => "thematic",
@@ -40,11 +41,12 @@ function subhomes_views_exposed_form(&$form) {
         ];
         $form['thematic']['#options'] = [];
         $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+
         if (is_array($terms)
           && !empty($terms)) {
           foreach ($terms AS $term) {
             $term_name = $term->getName();
-            $form['thematic']['#options'][$term_name] = $term_name;
+            $form['thematic']['#options'][$term->id()] = $term_name;
           }
         }
       }
