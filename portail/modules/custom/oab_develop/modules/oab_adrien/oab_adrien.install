@@ -11,3 +11,10 @@ function oab_adrien_install() {
 function oab_adrien_update_8001() {
   include_once("updates/update_8001.inc");
 }
+
+/**
+ * Ajout des 4 termes subhomes pour IoT
+ */
+function oab_adrien_update_8002() {
+  include_once("updates/update_8002.inc");
+}
