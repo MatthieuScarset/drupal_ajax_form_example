@@ -22,15 +22,19 @@ id: contact_presse_fr
 title: 'Contact presse FR'
 description: '<p>Formulaire de contact presse</p>'
 category: Presse
-elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p>Afin de répondre au mieux à votre demande, nous vous remercions de bien vouloir remplir<br />\\r\\nle formulaire ci-dessous.</p>\\r\\n\\r\\n<p>&nbsp;<br />\\r\\n* mentions obligatoires</p>\\r\\n\"\n  '#format': full_html\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\ne_mail:\n  '#type': textfield\n  '#title': 'E-mail professionnel'\n  '#required': true\ntelephone:\n  '#type': tel\n  '#title': Téléphone\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\nvotre_message:\n  '#type': textarea\n  '#title': 'Votre message'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#required': true\n  '#select2': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Download'', '''')'"
+elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p>Afin de répondre au mieux à votre demande, nous vous remercions de bien vouloir remplir<br />\\r\\nle formulaire ci-dessous.</p>\\r\\n\\r\\n<p>&nbsp;<br />\\r\\n* mentions obligatoires</p>\\r\\n\"\n  '#format': full_html\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\ne_mail:\n  '#type': textfield\n  '#title': 'E-mail professionnel'\n  '#required': true\ntelephone:\n  '#type': tel\n  '#title': Téléphone\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\nvotre_message:\n  '#type': textarea\n  '#title': 'Votre message'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#required': true\n  '#select2': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Download'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Download'', '''')'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: true
   page_submit_path: ''
   page_confirm_path: ''
+  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -39,6 +43,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -59,6 +64,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -83,11 +93,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -101,6 +120,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
   confirmation_message: 'Merci de votre sollicitation, nous vous r&eacute;pondrons dans les plus brefs d&eacute;lais.'
@@ -111,6 +132,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -127,7 +149,10 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -179,6 +204,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }
@@ -201,6 +227,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -210,3 +237,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }
