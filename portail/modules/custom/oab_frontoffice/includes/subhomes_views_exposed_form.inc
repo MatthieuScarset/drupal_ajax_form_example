@@ -7,18 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
 
-/**
- * Implements hook_views_pre_build().
- */
-function oab_frontoffice_views_pre_build(ViewExecutable $view) {
-//  kint($view); die();
-//  kint($view->getRequest()->query->has('thematic'), $view->getRequest()->query->get('thematic'));
-//
-//  if ($view->getRequest()->query->has('thematic')) {
-//    $view->getRequest()->query->set('thematic', ['1024']);
-//  }
-//  kint($view->getRequest()->query->has('thematic'), $view->getRequest()->query->get('thematic')); die();
-}
 
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();

@@ -48,13 +48,13 @@ class SubhomeSelect extends Checkbox implements FormElementInterface {
 
   public static function preRenderSubhomeSelect($element) {
     $element['#attributes']['type'] = 'checkbox';
-    $element['#name'] = $element['#parents'][0] . '[]';
+//    $element['#name'] = $element['#parents'][0] . '[]';
     Element::setAttributes($element, ['id', 'name', '#return_value' => 'value']);
     // Unchecked checkbox has #value of integer 0.
     if (!empty($element['#checked'])) {
       $element['#attributes']['checked'] = 'checked';
     }
-//kint($element); die();
+    
     static::setAttributes($element, ['form-subhome-select']);
 
     return $element;
