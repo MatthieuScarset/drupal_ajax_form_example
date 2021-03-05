@@ -494,6 +494,11 @@ function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
             }
         }
     }
+
+    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes-page-achievements-iot") {
+      subhomes_views_exposed_form($form);
+
+    }
 }
 
 /**
