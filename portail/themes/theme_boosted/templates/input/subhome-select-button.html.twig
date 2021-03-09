@@ -3,8 +3,9 @@
 <div class="dropdown">
   <a class="btn btn-link dropdown-toggle" href="#" role="button" id="{{ drop_id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{ element['#name'] }}
+{#    {{ element['#title'] }}#}
   </a>
-  <div class="dropdown-menu" aria-labelledby="{{ drop_id }}">
+  <div class="dropdown-menu" aria-labelledby="{{ drop_id }}" style="width: max-content; padding: 5px 10px">
     {{ children }}
   </div>
 </div>

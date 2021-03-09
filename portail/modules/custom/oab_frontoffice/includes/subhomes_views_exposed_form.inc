@@ -19,7 +19,6 @@ function subhomes_views_exposed_form(&$form) {
           $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
-
           if ($num_select >= 1) {
             $form['#info']["filter-field_subhome_target_id_".$num_select]["label"] = '';
           } else {
@@ -32,6 +31,7 @@ function subhomes_views_exposed_form(&$form) {
             "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
           ];
           $form[$key]['#options'] = [];
+          $form[$key]['#title_display'] = 'invisible';
           $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
           if (is_array($terms)
             && !empty($terms)) {
