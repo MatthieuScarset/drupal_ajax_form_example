@@ -37,12 +37,26 @@ $config = [];
 
 foreach ($terms as &$term) {
   $term_id = "";
-  //vérification de l'existance du terme pour ce vocabulaire
-  $query = \Drupal::entityQuery('taxonomy_term');
-  $query->condition('vid', "subhomes");
-  $query->condition('langcode', $term['language']);
-  $query->condition('name', $term['name']);
-  $entity = $query->execute();
+//vérification de l'existance du terme pour ce vocabulaire
+
+//  $query = \Drupal::entityQuery('taxonomy_term');
+//  $query->condition('vid', "subhomes");
+//  $query->condition('langcode', $term['language']);
+//  $query->condition('name', $term['name']);
+//  $entity = $query->execute();
+//
+
+  /** @var \Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  $entity = $entity_type_manager->getStorage('taxonomy_term')->loadByProperties(
+    [
+      'vid' => "subhomes",
+      'langcode' => $term['language'],
+      'name' => $term['name']
+    ]
+  );
+
 
   if (!isset($entity) || empty($entity)) {
     $entity = \Drupal\taxonomy\Entity\Term::create([
