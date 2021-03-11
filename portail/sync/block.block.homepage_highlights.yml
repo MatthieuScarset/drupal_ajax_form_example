@@ -2,17 +2,14 @@ uuid: ef169fe8-3192-4693-8e34-ac5369522340
 langcode: fr
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:a743c2fe-6c3e-4871-8ee1-19717396aebb'
   module:
-    - block_content
     - ctools
   theme:
     - theme_boosted
 id: homepage_highlights
 theme: theme_boosted
 region: top_zone
-weight: -48
+weight: -51
 provider: null
 plugin: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
 settings:

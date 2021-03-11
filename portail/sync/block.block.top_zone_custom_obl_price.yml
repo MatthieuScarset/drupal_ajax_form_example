@@ -10,7 +10,7 @@ dependencies:
 id: top_zone_custom_obl_price
 theme: theme_boosted
 region: top_zone
-weight: -45
+weight: -49
 provider: null
 plugin: top_zone_custom_block
 settings:
