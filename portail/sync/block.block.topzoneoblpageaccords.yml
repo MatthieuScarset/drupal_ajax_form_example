@@ -10,7 +10,7 @@ dependencies:
 id: topzoneoblpageaccords
 theme: theme_boosted
 region: top_zone
-weight: -44
+weight: -48
 provider: null
 plugin: top_zone_custom_block
 settings:
