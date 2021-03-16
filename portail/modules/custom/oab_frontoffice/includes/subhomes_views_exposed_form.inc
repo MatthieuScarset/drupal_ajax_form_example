@@ -19,11 +19,11 @@ function subhomes_views_exposed_form(&$form) {
           $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
-          if ($num_select >= 1) {
-            $form['#info']["filter-field_subhome_target_id_".$num_select]["label"] = '';
-          } else {
-            $form['#info']["filter-field_subhome_target_id"]["label"] = '';
-          }
+//          if ($num_select >= 1) {
+//            $form['#info']["filter-field_subhome_target_id_".$num_select]["label"] = '';
+//          } else {
+//            $form['#info']["filter-field_subhome_target_id"]["label"] = '';
+//          }
 
           $form[$key]['#type'] = 'subhome_select_button';
           $properties = [

@@ -3603,3 +3603,26 @@ hr.reseau-mobile-accords-roaming {
   position: absolute;
   bottom: 0;
 }
+
+
+/*input[type="checkbox"].form-subhome-select {*/
+/*  display: none;*/
+/*}*/
+
+/*input[type="checkbox"].form-subhome-select + label::before {*/
+/*  display: inline-block;*/
+/*  width: 1.25rem;*/
+/*  height: 1.25rem;*/
+/*  pointer-events: none;*/
+/*  content: "";*/
+/*  border: #ccc solid .125rem;*/
+/*  background: 50%/.9375rem no-repeat #fff;*/
+/*}*/
+
+/*input[type="checkbox"].form-subhome-select:checked + label::before {*/
+/*  color: #000;*/
+/*  border-color: #ff7900;*/
+/*  background-color: #ff7900;*/
+/*  pointer-events: none;*/
+/*  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 12'%3e%3cpath fill='%23000' d='M13 0L5 8 2 5 0 7l5 5L15 2z'/%3e%3c/svg%3e");*/
+/*}*/

@@ -466,6 +466,10 @@ function theme_boosted_preprocess_region(&$variables) {
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
 
+function theme_boosted_preprocess_menu(&$variables) {
+  $variables['url'] = $_SERVER['REQUEST_URI'];
+  $variables['#cache']['contexts'][] = 'url.path';
+}
 
 function theme_boosted_preprocess_views_view(&$variables) {
 

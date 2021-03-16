@@ -118,7 +118,7 @@
 .width-xl-7{
     width: 70%;
 }
-.width-xxs-8
+.width-xxs-8,
 .width-xs-8,
 .width-sm-8,
 .width-md-8,
@@ -500,6 +500,11 @@ body {
     background-color: #eee;
 
 }
+body.path-subhome-iot-products,
+body.path-subhome-iot-achievement {
+    background-color: #fff;
+}
+
 body > .main-container{
    /* margin-bottom: 3rem; */
     padding-left: 0;
@@ -904,6 +909,16 @@ aside.right-column > .region{
 
 #views-exposed-form-subhomes-page-document.subhomes-filterbar-background{
     padding: 20px 20px !important;
+}
+
+#views-exposed-form-subhomes-page-iot-products.subhomes-filterbar-background,
+#views-exposed-form-subhomes-page-achievements-iot.subhomes-filterbar-background {
+  background-color: #fff;
+}
+
+#views-exposed-form-subhomes-page-iot-products.subhomes-filterbar-background > div > fieldset > legend,
+#views-exposed-form-subhomes-page-achievements-iot.subhomes-filterbar-background > div > fieldset > legend {
+  border: none;
 }
 
 /*For Desktop*/

@@ -27,6 +27,7 @@
 
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
+  {% set urlvar = url('<current>') %}
 
   {% if items %}
     {% if menu_level == 0 %}
@@ -38,12 +39,12 @@
         {% for item in items %}
             {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
             {% if item.below %}
-            <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
+            <li{% if item.title|lower in urlvar|render|render  %} {{ item.attributes.addClass('nav-item', 'dropdown', 'active') }} {% else %} {{ item.attributes.addClass('nav-item', 'dropdown') }}{% endif %}>
                 {% set link_text %}{{ item.title }} <span class="caret"></span>{% endset %}
                 {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
             {% else %}
 
-                <li>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
+                <li {% if item.title|lower in urlvar|render|render %} {{ item.attributes.addClass('active') }} {% endif %}>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
             {% endif %}
 
             {% if item.below %}
