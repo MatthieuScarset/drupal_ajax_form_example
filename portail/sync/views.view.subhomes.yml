@@ -10,6 +10,8 @@ dependencies:
     - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.industries
     - taxonomy.vocabulary.jobs_profiles
+    - taxonomy.vocabulary.product_type
+    - taxonomy.vocabulary.product_use_case
     - taxonomy.vocabulary.solutions
   module:
     - node
@@ -48,10 +50,9 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
-          disable_ajax_submit: true
-          reset_button: false
-          reset_button_label: Reset
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Cancel
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
@@ -781,6 +782,7 @@ display:
         relationships: false
         sorts: true
         pager: true
+        exposed_form: false
       filters:
         status:
           value: '1'
@@ -895,7 +897,7 @@ display:
           exposed: true
           expose:
             operator_id: field_subhome_target_id_op
-            label: 'Secteur d''activité'
+            label: Industries
             description: ''
             use_operator: false
             operator: field_subhome_target_id_op
@@ -953,7 +955,7 @@ display:
           exposed: true
           expose:
             operator_id: field_subhome_target_id_1_op
-            label: 'Pôles métiers'
+            label: 'Jobs Profiles'
             description: ''
             use_operator: false
             operator: field_subhome_target_id_1_op
@@ -998,6 +1000,122 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        field_subhome_target_id_2:
+          id: field_subhome_target_id_2
+          table: node__field_subhome
+          field: field_subhome_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_subhome_target_id_2_op
+            label: 'Product Type'
+            description: ''
+            use_operator: false
+            operator: field_subhome_target_id_2_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: product_type
+          hierarchy: false
+          error_message: false
+          plugin_id: taxonomy_index_tid
+        field_subhome_target_id_3:
+          id: field_subhome_target_id_3
+          table: node__field_subhome
+          field: field_subhome_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_subhome_target_id_3_op
+            label: 'Product Use Case'
+            description: ''
+            use_operator: false
+            operator: field_subhome_target_id_3_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_use_case
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: product_use_case
+          hierarchy: false
+          error_message: false
+          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
@@ -1022,6 +1140,16 @@ display:
           admin_label: 'field_job_profile: Taxonomy term'
           required: false
           plugin_id: standard
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Cancel
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
     cache_metadata:
       max-age: -1
       contexts:
@@ -3404,6 +3532,7 @@ display:
         relationships: false
         sorts: true
         pager: true
+        exposed_form: false
       filters:
         status:
           value: '1'
@@ -3518,7 +3647,7 @@ display:
           exposed: true
           expose:
             operator_id: field_subhome_target_id_op
-            label: 'Secteur d''activité'
+            label: Industries
             description: ''
             use_operator: false
             operator: field_subhome_target_id_op
@@ -3576,7 +3705,7 @@ display:
           exposed: true
           expose:
             operator_id: field_subhome_target_id_1_op
-            label: 'Pôles métiers'
+            label: 'Jobs Profiles'
             description: ''
             use_operator: false
             operator: field_subhome_target_id_1_op
@@ -3621,6 +3750,122 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        field_subhome_target_id_2:
+          id: field_subhome_target_id_2
+          table: node__field_subhome
+          field: field_subhome_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_subhome_target_id_2_op
+            label: 'Product Type'
+            description: ''
+            use_operator: false
+            operator: field_subhome_target_id_2_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_type
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: product_type
+          hierarchy: false
+          error_message: false
+          plugin_id: taxonomy_index_tid
+        field_subhome_target_id_3:
+          id: field_subhome_target_id_3
+          table: node__field_subhome
+          field: field_subhome_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_subhome_target_id_3_op
+            label: 'Product Use Case'
+            description: ''
+            use_operator: false
+            operator: field_subhome_target_id_3_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: product_use_case
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: product_use_case
+          hierarchy: false
+          error_message: false
+          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
@@ -3645,6 +3890,16 @@ display:
           admin_label: 'field_job_profile: Taxonomy term'
           required: false
           plugin_id: standard
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Cancel
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
     cache_metadata:
       max-age: -1
       contexts:

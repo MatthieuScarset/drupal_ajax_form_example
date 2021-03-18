@@ -1,23 +1,23 @@
-uuid: 634ee326-0e94-49a6-90e0-3ad92a7a6f4d
+uuid: 6ec07da1-1926-4fab-9a02-342929913c39
 langcode: fr
 status: true
 dependencies:
   content:
-    - 'block_content:basic:700a825a-9e93-4c01-80e7-a1e8441c87d8'
+    - 'block_content:basic:e17c7643-f517-4949-bf07-0b180b1ebd00'
   module:
     - block_content
     - system
   theme:
     - theme_boosted
-id: banneriot
+id: iotsidebar
 theme: theme_boosted
-region: pre_content
+region: sidebar
 weight: 0
 provider: null
-plugin: 'block_content:700a825a-9e93-4c01-80e7-a1e8441c87d8'
+plugin: 'block_content:e17c7643-f517-4949-bf07-0b180b1ebd00'
 settings:
-  id: 'block_content:700a825a-9e93-4c01-80e7-a1e8441c87d8'
-  label: 'Banner IoT'
+  id: 'block_content:e17c7643-f517-4949-bf07-0b180b1ebd00'
+  label: 'IoT Sidebar'
   provider: block_content
   label_display: '0'
   status: true
