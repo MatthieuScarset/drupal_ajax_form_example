@@ -3604,6 +3604,9 @@ hr.reseau-mobile-accords-roaming {
   bottom: 0;
 }
 
+.navbar-nav > li.active-trail > a {
+  color: #f16e00 !important;
+}
 
 /*input[type="checkbox"].form-subhome-select {*/
 /*  display: none;*/
