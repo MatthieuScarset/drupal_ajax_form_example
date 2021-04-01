@@ -26,6 +26,8 @@ dependencies:
     - field.field.node.product.field_meta_title
     - field.field.node.product.field_metatags
     - field.field.node.product.field_p_wysiwyg_rebond
+    - field.field.node.product.field_product_type
+    - field.field.node.product.field_product_use_case
     - field.field.node.product.field_region
     - field.field.node.product.field_solution
     - field.field.node.product.field_start_date
@@ -142,6 +144,8 @@ third_party_settings:
         - field_job_profile
         - field_market_segment
         - field_market_segment_dvi
+        - field_product_use_case
+        - field_product_type
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -269,13 +273,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 43
+    weight: 44
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 44
+    weight: 45
     settings:
       display_label: true
     third_party_settings: {  }
@@ -319,7 +323,7 @@ content:
     region: content
   field_market_segment_dvi:
     type: options_select
-    weight: 42
+    weight: 41
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -362,6 +366,18 @@ content:
         collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
+    region: content
+  field_product_type:
+    weight: 43
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_product_use_case:
+    weight: 42
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_solution:
     weight: 37
