@@ -250,10 +250,10 @@ display:
           entity_field: langcode
           plugin_id: language
       sorts:
-        changed:
-          id: changed
+        created:
+          id: created
           table: node_field_data
-          field: changed
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
@@ -263,7 +263,7 @@ display:
             label: ''
           granularity: second
           entity_type: node
-          entity_field: changed
+          entity_field: created
           plugin_id: date
         nid:
           id: nid
@@ -884,23 +884,23 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id:
-          id: field_subhome_target_id
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_industry_target_id:
+          id: field_industry_target_id
+          table: node__field_industry
+          field: field_industry_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_op
-            label: Industries
+            operator_id: field_industry_target_id_op
+            label: Industry
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_op
+            operator: field_industry_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: industries
@@ -942,23 +942,23 @@ display:
           hierarchy: false
           error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_1:
-          id: field_subhome_target_id_1
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_job_profile_target_id:
+          id: field_job_profile_target_id
+          table: node__field_job_profile
+          field: field_job_profile_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_1_op
+            operator_id: field_job_profile_target_id_op
             label: 'Jobs Profiles'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_1_op
+            operator: field_job_profile_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: jobs_profiles
@@ -998,25 +998,25 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_2:
-          id: field_subhome_target_id_2
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_product_type_target_id:
+          id: field_product_type_target_id
+          table: node__field_product_type
+          field: field_product_type_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_2_op
+            operator_id: field_product_type_target_id_op
             label: 'Product Type'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_2_op
+            operator: field_product_type_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: product_type
@@ -1058,23 +1058,23 @@ display:
           hierarchy: false
           error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_3:
-          id: field_subhome_target_id_3
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_product_use_case_target_id:
+          id: field_product_use_case_target_id
+          table: node__field_product_use_case
+          field: field_product_use_case_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_3_op
-            label: 'Product Use Case'
+            operator_id: field_product_use_case_target_id_op
+            label: 'Product use case'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_3_op
+            operator: field_product_use_case_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: product_use_case
@@ -1138,6 +1138,24 @@ display:
           relationship: none
           group_type: group
           admin_label: 'field_job_profile: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_product_type:
+          id: field_product_type
+          table: node__field_product_type
+          field: field_product_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_product_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_product_use_case:
+          id: field_product_use_case
+          table: node__field_product_use_case
+          field: field_product_use_case
+          relationship: none
+          group_type: group
+          admin_label: 'field_product_use_case: Taxonomy term'
           required: false
           plugin_id: standard
       exposed_form:
@@ -3634,23 +3652,23 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id:
-          id: field_subhome_target_id
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_industry_target_id:
+          id: field_industry_target_id
+          table: node__field_industry
+          field: field_industry_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_op
-            label: Industries
+            operator_id: field_industry_target_id_op
+            label: Industry
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_op
+            operator: field_industry_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: industries
@@ -3690,25 +3708,25 @@ display:
           limit: true
           vid: industries
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_1:
-          id: field_subhome_target_id_1
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_job_profile_target_id:
+          id: field_job_profile_target_id
+          table: node__field_job_profile
+          field: field_job_profile_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_1_op
+            operator_id: field_job_profile_target_id_op
             label: 'Jobs Profiles'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_1_op
+            operator: field_job_profile_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: jobs_profiles
@@ -3748,25 +3766,25 @@ display:
           limit: true
           vid: jobs_profiles
           hierarchy: false
-          error_message: true
+          error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_2:
-          id: field_subhome_target_id_2
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_product_type_target_id:
+          id: field_product_type_target_id
+          table: node__field_product_type
+          field: field_product_type_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_2_op
-            label: 'Product Type'
+            operator_id: field_product_type_target_id_op
+            label: 'Product type'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_2_op
+            operator: field_product_type_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: product_type
@@ -3808,23 +3826,23 @@ display:
           hierarchy: false
           error_message: false
           plugin_id: taxonomy_index_tid
-        field_subhome_target_id_3:
-          id: field_subhome_target_id_3
-          table: node__field_subhome
-          field: field_subhome_target_id
+        field_product_use_case_target_id:
+          id: field_product_use_case_target_id
+          table: node__field_product_use_case
+          field: field_product_use_case_target_id
           relationship: none
           group_type: group
           admin_label: ''
-          operator: empty
+          operator: or
           value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: field_subhome_target_id_3_op
-            label: 'Product Use Case'
+            operator_id: field_product_use_case_target_id_op
+            label: 'Product use case'
             description: ''
             use_operator: false
-            operator: field_subhome_target_id_3_op
+            operator: field_product_use_case_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: product_use_case
@@ -3913,7 +3931,7 @@ display:
         options:
           submit_button: Filter
           reset_button: true
-          reset_button_label: Cancel
+          reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
