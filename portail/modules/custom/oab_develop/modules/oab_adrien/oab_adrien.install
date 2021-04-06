@@ -11,3 +11,21 @@ function oab_adrien_install() {
 function oab_adrien_update_8001() {
   include_once("updates/update_8001.inc");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function oab_adrien_update_8004() {
+  include_once("updates/update_8004.inc");
+}
