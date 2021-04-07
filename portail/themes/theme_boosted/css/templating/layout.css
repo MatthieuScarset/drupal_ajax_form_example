@@ -929,6 +929,10 @@ aside.right-column > .region{
     margin-left: -30px;
     margin-right: -30px;
   }
+  #views-exposed-form-subhomes-page-iot-products.subhomes-filterbar-background,
+  #views-exposed-form-subhomes-page-achievements-iot.subhomes-filterbar-background {
+    margin-left: -20px;
+  }
 }
 /*for Mobile */
 @media (max-width: 480px) {
@@ -946,6 +950,7 @@ aside.right-column > .region{
 #edit-submit-subhomes{
     background: black;
     color: #fff;
+    margin-right: 1rem;
 }
 #edit-submit-subhomes:hover,
 #edit-submit-subhomes:active{
