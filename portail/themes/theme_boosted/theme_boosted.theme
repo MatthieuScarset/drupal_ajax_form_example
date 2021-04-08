@@ -462,26 +462,27 @@ function theme_boosted_preprocess_region(&$variables) {
 
 function theme_boosted_preprocess_menu(&$variables, $hook) {
   if (strpos($hook, 'menu__main') !== false) {
-
+    kint($hook, $variables);
     $current_path = \Drupal::request()->getRequestUri();
     $items = $variables['items'];
     $item_title = "";
 
     foreach ($items as $key => $item) {
       $item_title = mb_strtolower(accent2ascii($item['title']));
-      if($item['in_active_trail']) {
+      $url_fragments = explode('/', $current_path);
+
+      if (count($url_fragments) > 1 and $url_fragments[2] === $item_title) {
         $item['attributes']->addClass('active-trail');
-      } else {
-        $url_fragments = explode('/', $current_path);
-        if (count($url_fragments) > 1 AND $url_fragments[2] === $item_title) {
+      } elseif ($url_fragments[2] === 'iot') {
+        if ($hook === 'menu__main_navigation_fr' and $item['title'] === 'Produits') {
           $item['attributes']->addClass('active-trail');
-        } elseif ( $url_fragments[2] === 'iot' ) {
-          if ($hook === 'menu__main_navigation_fr' AND $item['title'] === 'Produits' ) {
-              $item['attributes']->addClass('active-trail');
-          } elseif ($hook === 'menu__main' AND $item['title'] === 'Solutions') {
-              $item['attributes']->addClass('active-trail');
-          }
+        } elseif ($hook === 'menu__main' and $item['title'] === 'Solutions') {
+          $item['attributes']->addClass('active-trail');
         }
+      } elseif ($hook === 'menu__main' and $url_fragments[2] === 'products' and $item['title'] === 'Solutions') {
+        $item['attributes']->addClass('active-trail');
+      } elseif ($item['in_active_trail'] AND $url_fragments[2] !== 'products' ) {
+        $item['attributes']->addClass('active-trail');
       }
     }
   }
