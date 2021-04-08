@@ -479,7 +479,7 @@ function theme_boosted_preprocess_menu(&$variables, $hook) {
           if ($hook === 'menu__main_navigation_fr' AND $item['title'] === 'Produits' ) {
               $item['attributes']->addClass('active-trail');
           } elseif ($hook === 'menu__main' AND $item['title'] === 'Solutions') {
-            $item['attributes']->addClass('active-trail');
+              $item['attributes']->addClass('active-trail');
           }
         }
       }

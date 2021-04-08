@@ -187,7 +187,7 @@
     margin-bottom:0;
 }
 
-.mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li.active > a, .mega-menu.navbar .nav > li.active-trail > a {
+.mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li.active > a {
   color: #f16e00;
 }
 
