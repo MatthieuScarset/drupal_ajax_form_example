@@ -2,10 +2,7 @@ uuid: 919664c3-e116-4962-91e7-543746faf6f9
 langcode: en
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:e0ae8a22-6eb9-4763-b519-bc13efe6ee0e'
   module:
-    - block_content
     - ctools
     - language
   theme:

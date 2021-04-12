@@ -10,7 +10,7 @@ dependencies:
 id: localnav
 theme: theme_boosted
 region: top_zone
-weight: -46
+weight: -49
 provider: null
 plugin: local_nav_block
 settings:

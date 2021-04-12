@@ -9,8 +9,8 @@ dependencies:
     - theme_boosted
 id: topzone
 theme: theme_boosted
-region: top_zone
-weight: -47
+region: pre_content
+weight: -48
 provider: null
 plugin: top_zone_block
 settings:
