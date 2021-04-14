@@ -1,0 +1,21 @@
+uuid: cf165367-06b7-4431-a237-fe7bb4525ada
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - workbench_access
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
+name: 'Cloud Service Provider'
+type: cloud_service_provider
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

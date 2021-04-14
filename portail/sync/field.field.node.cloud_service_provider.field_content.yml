@@ -1,0 +1,21 @@
+uuid: ab403a5a-04bc-4a56-afb7-f60f8ccde927
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.cloud_service_provider
+  module:
+    - text
+id: node.cloud_service_provider.field_content
+field_name: field_content
+entity_type: node
+bundle: cloud_service_provider
+label: Content
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
