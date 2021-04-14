@@ -483,6 +483,7 @@ function theme_boosted_preprocess_views_view(&$variables) {
   }
 
   if ($id == 'subhomes' || $id == 'subhomes_archive'){
+
   	if($view->current_display == 'page_distributor')		{//subhome distributors  dvi
 			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage revendeurs';
 			$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
@@ -492,56 +493,33 @@ function theme_boosted_preprocess_views_view(&$variables) {
 			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage produits';
 			$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
 			$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'DVI';
-		}
-		elseif (isset($view->display_handler->options['arguments'])
-      && is_array($view->display_handler->options['arguments'])) {
-      foreach ($view->display_handler->options['arguments'] AS $field_arg_key => $field_arg_value) {
-        if (isset($field_arg_value['default_argument_type'])
-          && $field_arg_value['default_argument_type'] == 'config_key') {
-          if (isset($field_arg_value['default_argument_options']['config_name'])
-            && !empty($field_arg_value['default_argument_options']['config_name'])
-            && isset($field_arg_value['default_argument_options']['config_key'])
-            && !empty($field_arg_value['default_argument_options']['config_key'])){
-            $term_variable = \Drupal::config($field_arg_value['default_argument_options']['config_name'])->get($field_arg_value['default_argument_options']['config_key']);
-            if (!is_null($term_variable)) {
-              $term = \Drupal\taxonomy\Entity\Term::load((int)$term_variable);
+		} elseif (isset($view->argument['field_subhome_target_id'])) {
+  	  /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+  	  $tid = $view->argument['field_subhome_target_id']->getValue();
+  	  if (null !== ($term = Term::load($tid))) {
+        $variables['views_term'] = $term->getDescription();
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Subhome '.$term->getName();
+      }
 
-              if (isset($term)
-                && is_object($term)) {
-                $variables['views_term'] = $term->getDescription();
-              }
-							$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Subhome '.$term->getName();
-            }
+      /*
+       * Spécifique subhome press
+       * Nouvelle gestion des subhomes
+       * Je passe en variable l'entité subhome correspondante
+       */
+      $entity = SubhomeEntity::loadBySubhomeId($tid);
+
+      // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+      if ($entity !== null) {
+          /** @var Drupal\Core\Field\FieldItemInterface $field */
+          foreach($entity->getFields() as $field) {
+              $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
+
+              $field_rendered = $field->view('default');
+              $variables[SubhomeEntity::TWIG_VAR_NAME]['render'][$field->getName()] =
+                  render($field_rendered);
           }
-        }
       }
     }
-
-    /*
-     * Nouvelle gestion des subhomes
-     * Je passe en variable l'entité subhome correspondante
-     */
-    if (isset($view->argument['field_subhome_target_id'])) {
-
-        $sid = $view->argument['field_subhome_target_id']->value;
-        $entity = SubhomeEntity::loadBySubhomeId($sid);
-
-        // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
-        if ($entity !== null) {
-
-            /** @var Drupal\Core\Field\FieldItemInterface $field */
-            foreach($entity->getFields() as $field) {
-                $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
-
-                $field_rendered = $field->view('default');
-                $variables[SubhomeEntity::TWIG_VAR_NAME]['render'][$field->getName()] =
-                    render($field_rendered);
-            }
-
-        }
-    }
-
-
   }
   elseif ($id == 'offices_map_view') {
 		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
