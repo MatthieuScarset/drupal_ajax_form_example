@@ -1,0 +1,31 @@
+uuid: 03729ac2-0ccf-4c1c-bdb9-64295f10131e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:230d0b0e-93f4-4620-9f7b-ed7a254d3a3d'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: iotsidebarfr
+theme: theme_boosted
+region: sidebar
+weight: 0
+provider: null
+plugin: 'block_content:230d0b0e-93f4-4620-9f7b-ed7a254d3a3d'
+settings:
+  id: 'block_content:230d0b0e-93f4-4620-9f7b-ed7a254d3a3d'
+  label: 'IoT Sidebar FR'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/iot/produits\r\n/iot/temoignages-clients"
+    negate: false
+    context_mapping: {  }

@@ -36,25 +36,25 @@ function subhomes_views_exposed_form(&$form) {
         }
       }
 
-      if (isset($form['thematic'])) {
-//        kint($form['thematic']); die();
-//        kint($form['thematic']); die();
-        $form['thematic']['#type'] = 'subhome_select_button';
-        $properties = [
-          "vid" => "thematic",
-          "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-        ];
-        $form['thematic']['#options'] = [];
-        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-
-        if (is_array($terms)
-          && !empty($terms)) {
-          foreach ($terms AS $term) {
-            $term_name = $term->getName();
-            $form['thematic']['#options'][$term->id()] = $term_name;
-          }
-        }
-      }
+//      if (isset($form['thematic'])) {
+////        kint($form['thematic']); die();
+////        kint($form['thematic']); die();
+//        $form['thematic']['#type'] = 'subhome_select_button';
+//        $properties = [
+//          "vid" => "thematic",
+//          "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
+//        ];
+//        $form['thematic']['#options'] = [];
+//        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+//
+//        if (is_array($terms)
+//          && !empty($terms)) {
+//          foreach ($terms AS $term) {
+//            $term_name = $term->getName();
+//            $form['thematic']['#options'][$term->id()] = $term_name;
+//          }
+//        }
+//      }
 
       /**
        * je cache le bouton "Apply" s'il n'y a plus de filtre

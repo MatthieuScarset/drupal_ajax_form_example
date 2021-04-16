@@ -93,7 +93,6 @@ foreach ($new_terms as &$term) {
     ]);
     $entity->save();
   }
-  kint($entity);
 }
 
 
