@@ -1,0 +1,30 @@
+uuid: ef169fe8-3192-4693-8e34-ac5369522340
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+  theme:
+    - theme_boosted
+id: homepage_highlights
+theme: theme_boosted
+region: top_zone
+weight: -51
+provider: null
+plugin: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
+settings:
+  id: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
+  label: homepage_highlights
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      homepage: homepage
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

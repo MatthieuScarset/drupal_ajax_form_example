@@ -1,0 +1,62 @@
+entity.paragraph.edit_form:
+  path: '/admin/paragraph/form/{paragraph}/edit'
+  defaults:
+    _entity_form: 'paragraph.edit'
+    _title: 'Edit Paragraph'
+  requirements:
+    _permission: 'edit marketo form'
+
+entity.paragraph.delete_form:
+  path: '/admin/paragraph/form/{paragraph}/delete'
+  defaults:
+    _entity_form: 'paragraph.entity_delete'
+    _title: 'Delete Paragraph'
+  requirements:
+    _permission: 'delete marketo form'
+
+
+entity.paragraph.add_form:
+  path: '/admin/paragraph/{type}/add'
+  defaults:
+    _entity_form: 'paragraph.default'
+    _title: 'Create Paragraph'
+  requirements:
+    _permission: 'create marketo form'
+  options:
+    parameters:
+      type:
+        type: entity:paragraph_type
+
+oab_marketo.altares_settings:
+  path: '/admin/structure/oab/settings/altares'
+  defaults:
+    _form: '\Drupal\oab_marketo\Form\OabAltaresSettingsForm'
+    _title: 'Altares settings'
+  requirements:
+    _oab_altares_settings_access: 'TRUE'
+
+oab_marketo.altares_api.getToken:
+  path: '/altares/token'
+  defaults:
+    _controller: '\Drupal\oab_marketo\Controller\AltaresApiController::tokenAction'
+  requirements:
+    _permission: 'access content'
+
+oab_marketo.altares_api.getCompanyAutocomplete:
+  path: '/altares/company-typehead'
+  defaults:
+    _controller: '\Drupal\oab_marketo\Controller\AltaresApiController::getCompanyAutocompleteAction'
+  methods: [GET]
+  requirements:
+    _oab_altares_api_access: 'TRUE'
+    _format: json
+
+oab_marketo.altares_api.getCompanyInfo:
+  path: '/altares/company-info'
+  defaults:
+    _controller: '\Drupal\oab_marketo\Controller\AltaresApiController::getCompanyInfoAction'
+  methods: [GET]
+  requirements:
+    _oab_altares_api_access: 'TRUE'
+    _format: json
+

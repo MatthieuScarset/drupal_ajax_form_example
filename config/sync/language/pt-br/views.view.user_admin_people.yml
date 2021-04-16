@@ -1,0 +1,24 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filtrar
+      fields:
+        name:
+          label: Usuário
+        status:
+          label: Status
+          settings:
+            format_custom_true: Active
+        roles_target_id:
+          label: Papéis
+        operations:
+          label: Operações
+      filters:
+        status:
+          group_info:
+            label: Status
+            group_items:
+              1:
+                title: Active

@@ -1,0 +1,68 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    memcached:
+      image: memcached:alpine
+      container_name: ruby_memcached_d9
+
+    mailhog:
+      image: mailhog/mailhog:latest
+      container_name: ruby_mailhog_d9
+      ports:
+        - "8025:8025"
+
+    mariadb:
+      image: mariadb:10.3
+      container_name: ruby_mariadb_d9
+      volumes:
+        - ./config/data/db_dumps:/tmp/db_dumps
+      environment:
+        MYSQL_ROOT_PASSWORD: 'adminsql'
+        MYSQL_DATABASE: 'drupal'
+        MYSQL_USER: 'oab_web'
+        MYSQL_PASSWORD: 'ruby69!'
+      ports:
+        - "3306:3306"
+
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: ruby_phpmyadmin_d9
+      depends_on:
+        - mariadb
+      links:
+        - mariadb
+      ports :
+        - "8080:80"
+      environment:
+        PMA_HOST: 'mariadb:3306'
+
+    webserver:
+      image: nginx:alpine
+      container_name: ruby_webserver_d9
+      working_dir: /application
+      depends_on:
+        - mariadb
+      links:
+        - mariadb
+      volumes:
+        - .:/application
+        - ./config/docker/local/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ./config/logs:/tmp/logs
+      ports:
+        - "8000:80"
+
+    php-fpm:
+      build: config/docker/local/php-fpm
+      container_name: ruby_php-fpm_d9
+      working_dir: /application
+      depends_on:
+        - mariadb
+      links:
+        - mariadb
+      volumes:
+        - .:/application
+        - ./config/docker/local/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+        #- /app-vendor

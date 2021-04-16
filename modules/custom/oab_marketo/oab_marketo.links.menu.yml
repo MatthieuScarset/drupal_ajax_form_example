@@ -1,0 +1,6 @@
+oab_backoffice.altares_settings:
+  title: Altares settings
+  route_name: oab_marketo.altares_settings
+  parent: oab.settings
+  description: 'Configure Altares settings'
+  weight: -20

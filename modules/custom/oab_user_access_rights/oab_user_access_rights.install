@@ -1,0 +1,342 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+function oab_user_access_rights_install() {
+  /**
+   * 1. création du champ "field_access_language"
+   */
+  $new_field = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_access_language');
+  if (empty($new_field) || $new_field == null) {
+    $new_field = array(
+      'langcode' => 'fr',
+      'status' => true,
+      'dependencies' =>
+        array (
+          'module' =>
+            array (
+              0 => 'language',
+              1 => 'user',
+            ),
+        ),
+      'id' => 'user.field_access_language',
+      'field_name' => 'field_access_language',
+      'entity_type' => 'user',
+      'type' => 'entity_reference',
+      'settings' =>
+        array (
+          'target_type' => 'configurable_language',
+        ),
+      'module' => 'core',
+      'locked' => false,
+      'cardinality' => -1,
+      'translatable' => true,
+      'indexes' =>
+        array (
+        ),
+      'persist_with_no_fields' => false,
+      'custom_storage' => false,
+    );
+    \Drupal::entityTypeManager()->getStorage('field_storage_config')->create($new_field)->save();
+    Drupal::messenger()->addMessage("Champ 'access language' créé ", "status");
+  }
+
+  /**
+   * 2. Création de l'instance du champ pour user
+   */
+  $instance = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_access_language');
+  if (empty($instance) || $instance == null) {
+    $instance = array(
+      'langcode' => 'fr',
+      'status' => true,
+      'dependencies' =>
+        array (
+          'config' =>
+            array (
+              0 => 'field.storage.user.field_access_language',
+            ),
+          'module' =>
+            array (
+              0 => 'user',
+            ),
+        ),
+      'id' => 'user.user.field_access_language',
+      'field_name' => 'field_access_language',
+      'entity_type' => 'user',
+      'bundle' => 'user',
+      'label' => 'accès aux langues',
+      'description' => '',
+      'required' => false,
+      'translatable' => false,
+      'default_value' =>
+        array (
+        ),
+      'default_value_callback' => '',
+      'settings' =>
+        array (
+          'handler' => 'default:configurable_language',
+          'handler_settings' =>
+            array (
+              'target_bundles' => NULL,
+              'auto_create' => false,
+            ),
+        ),
+      'field_type' => 'entity_reference',
+    );
+    \Drupal::entityTypeManager()->getStorage('field_config')->create($instance)->save();
+    Drupal::messenger()->addMessage("Instance du champ 'access language' créé pour 'user'", "status");
+  }
+
+  /**
+   * 3. Edition de la configuration pour le formulaire
+   */
+  /** core.entity_form_display.user.user.default **/
+  $config_factory = \Drupal::configFactory();
+  $config_group = $config_factory->getEditable('core.entity_form_display.user.user.default');
+  $uuid = $config_group->get('uuid');
+  $core_hash = $config_group->get('_core');
+  $config_group->setData(
+    array(
+      'uuid' => $uuid,
+      'langcode' => 'fr',
+      'status' => TRUE,
+      'dependencies' =>
+        array(
+          'config' =>
+            array(
+              0 => 'field.field.user.user.field_access_language',
+              1 => 'field.field.user.user.user_picture',
+              2 => 'image.style.thumbnail',
+            ),
+          'module' =>
+            array(
+              0 => 'image',
+              1 => 'path',
+              2 => 'user',
+            ),
+        ),
+      '_core' => $core_hash,
+      'id' => 'user.user.default',
+      'targetEntityType' => 'user',
+      'bundle' => 'user',
+      'mode' => 'default',
+      'content' =>
+        array(
+          'account' =>
+            array(
+              'weight' => 0,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'contact' =>
+            array(
+              'weight' => 3,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'field_access_language' =>
+            array(
+              'type' => 'options_buttons',
+              'weight' => 6,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'language' =>
+            array(
+              'weight' => 2,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'path' =>
+            array(
+              'type' => 'path',
+              'weight' => 5,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'timezone' =>
+            array(
+              'weight' => 4,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'user_picture' =>
+            array(
+              'type' => 'image_image',
+              'settings' =>
+                array(
+                  'progress_indicator' => 'throbber',
+                  'preview_image_style' => 'thumbnail',
+                ),
+              'third_party_settings' =>
+                array(),
+              'weight' => 1,
+            ),
+        ),
+      'hidden' =>
+        array(
+          'langcode' => TRUE,
+        ),
+    ));
+  $config_group->save(TRUE);
+  Drupal::messenger()->addMessage("Formulaire user modifié", "status");
+
+
+  /**
+   * 4. Edition de la configuration pour l'affichage
+   */
+  /** core.entity_view_display.user.user.default **/
+  $config_factory = \Drupal::configFactory();
+  $config_group = $config_factory->getEditable('core.entity_view_display.user.user.default');
+  $uuid = $config_group->get('uuid');
+  $core_hash = $config_group->get('_core');
+  $config_group->setData(
+    array(
+      'uuid' => $uuid,
+      'langcode' => 'fr',
+      'status' => TRUE,
+      'dependencies' =>
+        array(
+          'config' =>
+            array(
+              0 => 'field.field.user.user.field_access_language',
+              1 => 'field.field.user.user.user_picture',
+              2 => 'image.style.thumbnail',
+            ),
+          'module' =>
+            array(
+              0 => 'image',
+              1 => 'user',
+            ),
+        ),
+      '_core' => $core_hash,
+      'id' => 'user.user.default',
+      'targetEntityType' => 'user',
+      'bundle' => 'user',
+      'mode' => 'default',
+      'content' =>
+        array(
+          'member_for' =>
+            array(
+              'weight' => 5,
+              'settings' =>
+                array(),
+              'third_party_settings' =>
+                array(),
+            ),
+          'user_picture' =>
+            array(
+              'type' => 'image',
+              'weight' => 0,
+              'settings' =>
+                array(
+                  'image_style' => 'thumbnail',
+                  'image_link' => 'content',
+                ),
+              'third_party_settings' =>
+                array(),
+              'label' => 'hidden',
+            ),
+        ),
+      'hidden' =>
+        array(
+          'field_access_language' => TRUE,
+          'langcode' => TRUE,
+        ),
+    ));
+  $config_group->save(TRUE);
+
+  /** core.entity_view_display.user.user.compact **/
+  $config_factory = \Drupal::configFactory();
+  $config_group = $config_factory->getEditable('core.entity_view_display.user.user.compact');
+  $uuid = $config_group->get('uuid');
+  $core_hash = $config_group->get('_core');
+  $config_group->setData(
+    array(
+      'uuid' => $uuid,
+      'langcode' => 'fr',
+      'status' => TRUE,
+      'dependencies' =>
+        array(
+          'config' =>
+            array(
+              0 => 'core.entity_view_mode.user.compact',
+              1 => 'field.field.user.user.field_access_language',
+              2 => 'field.field.user.user.user_picture',
+              3 => 'image.style.thumbnail',
+            ),
+          'module' =>
+            array(
+              0 => 'image',
+              1 => 'user',
+            ),
+        ),
+      '_core' => $core_hash,
+      'id' => 'user.user.compact',
+      'targetEntityType' => 'user',
+      'bundle' => 'user',
+      'mode' => 'compact',
+      'content' =>
+        array(
+          'user_picture' =>
+            array(
+              'type' => 'image',
+              'weight' => 0,
+              'settings' =>
+                array(
+                  'image_style' => 'thumbnail',
+                  'image_link' => 'content',
+                ),
+              'third_party_settings' =>
+                array(),
+              'label' => 'hidden',
+            ),
+        ),
+      'hidden' =>
+        array(
+          'field_access_language' => TRUE,
+          'langcode' => TRUE,
+          'member_for' => TRUE,
+        ),
+    ));
+  $config_group->save(TRUE);
+  Drupal::messenger()->addMessage("Mode d'affichage user modifié", "status");
+
+  /**
+   * 5. Traduction du champ
+   */
+  $connection = Database::getConnection();
+  $query_delete = $connection->delete('config')
+    ->condition('collection', 'language.en')
+    ->condition('name', 'field.field.user.user.field_access_language')
+    ->execute();
+
+  $query_create = $connection->insert('config')
+    ->fields(array(
+      'collection' => 'language.en',
+      'name' => 'field.field.user.user.field_access_language',
+      'data' => serialize(array(
+        'label' => 'access language',
+      ))
+    ))
+    ->execute();
+}
+
+function oab_user_access_rights_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('field.field.user.user.field_access_language');
+  $config->set('required', false);
+  $config->save(TRUE);
+}

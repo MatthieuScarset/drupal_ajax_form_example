@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_ENTITY_TYPE_field_values_init().
+ */
+function oab_transliteration_filename_file_field_values_init($entity) {
+    $filename_postprocessor = Drupal::service('oab_transliteration_filename.filename_postprocessor');
+    $filename = $entity->getFilename();
+    $filename = $filename_postprocessor->process($filename);
+    $entity->setFilename($filename);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function oab_transliteration_filename_file_presave($entity) {
+    $filename_postprocessor = Drupal::service('oab_transliteration_filename.filename_postprocessor');
+    $new_filename = $filename_postprocessor->process($entity->getFilename());
+    if ($new_filename != Drupal::service('file_system')->basename($entity->getFileUri())) {
+        $uri = $entity->getFileUri();
+        $directory = Drupal::service('file_system')->dirname($uri);
+        $uri = $directory . '/' . $new_filename;
+        if ($new_uri = \Drupal::service('file_system')->move($entity->getFileUri(),$uri, \Drupal::service('file_system')::EXISTE_RENAME)) {
+            $entity->set('uri', $new_uri);
+            $entity->set('filename', Drupal::service('file_system')->basename($new_uri));
+        }
+    }
+}
+
+

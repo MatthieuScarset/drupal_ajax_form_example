@@ -1,0 +1,48 @@
+{%
+    set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'carrousel-homepage-header'
+]
+%}
+{%
+    set title_classes = [
+    'field--label',
+    label_display == 'visually_hidden' ? 'sr-only',
+]
+%}
+
+{% set id = 'carrousel-homepage-header' %}
+{% set nbItems = items|length %}
+
+
+<div id="{{ id }}" class="carousel slide carrousel-homepage-header" data-interval="false" data-ride="carousel">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for key, item in items %}
+            <div class="item {% if key == 0 %}active{% endif %}" data-key="{{ key }}">
+                <img src="/themes/theme_boosted/images/fond-gris.png"  />
+                <div class="carousel-caption homepage-carousel">
+                    {{ item.content }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <div class="col-sm-2 col-xs-4 container-homepage-carousel-indicators {% if  nbItems < 2 %} hidden {% endif %}">
+        <a class="left carousel-control homepage-carousel-indicators" href="{{ '#' ~ id }}" role="button" data-slide="prev">
+            <span class="glyphicon icon-arrow-previous homepage-carousel-glyphicon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control homepage-carousel-indicators" href="{{ '#' ~ id }}" role="button" data-slide="next">
+            <span class="glyphicon icon-arrow-next homepage-carousel-glyphicon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <span class="item-carousel-number" data-value="{{ nbItems }}"><span class="actual-slide">1</span> / {{ nbItems }}</span>
+    </div>
+</div>

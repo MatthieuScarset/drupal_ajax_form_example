@@ -1,0 +1,23 @@
+uuid: e6a0e84d-088b-40d6-97b9-05f0f0b8d420
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: socialshareblock
+theme: theme_boosted
+region: pre_content
+weight: -50
+provider: null
+plugin: social_share_block
+settings:
+  id: social_share_block
+  label: 'Social Share Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  social_share_custom_text:
+    value: "<div class=\"collapse\" id=\"social-share\">\r\n<div class=\"container\" id=\"c1\">\r\n<div id=\"sharebar\">&nbsp;</div>\r\n</div>\r\n</div>\r\n"
+    format: full_html
+visibility: {  }

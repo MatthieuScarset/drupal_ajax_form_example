@@ -1,0 +1,33 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      fields:
+        filename:
+          label: Название
+        status:
+          label: Статус
+      filters:
+        filename:
+          expose:
+            label: Filename
+        status:
+          expose:
+            label: Статус
+  page_2:
+    display_options:
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      arguments:
+        fid:
+          exception:
+            title: Все

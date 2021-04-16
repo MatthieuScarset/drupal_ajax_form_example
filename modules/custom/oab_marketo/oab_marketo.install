@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\oab_marketo\Entity\AltaresToken;
+
+/**
+ * Implements hook_update_8001()
+ *
+ * Create TokenEntity
+ */
+function oab_marketo_update_8001()
+{
+  if (!\Drupal::database()->schema()->tableExists('altares_token')) {
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::entityDefinitionUpdateManager()
+      ->installEntityType(\Drupal::entityTypeManager()->getDefinition('altares_token'));
+  }
+}
+
+/**
+ * Implements hook_update_8002()
+ *
+ * Create Photo Commerciale Entity
+ */
+function oab_marketo_update_8002() {
+  if(!\Drupal::database()->schema()->tableExists('photo_commerciale_item')) {
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::entityDefinitionUpdateManager()
+      ->installEntityType(\Drupal::entityTypeManager()->getDefinition('photo_commerciale_item'));
+  }
+}

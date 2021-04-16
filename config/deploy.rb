@@ -101,6 +101,7 @@ namespace :deploy do
     on roles(:all) do
      execute "docker-compose -f #{fetch(:docker_file)} stop"
      execute "docker-compose -f #{fetch(:docker_file)} up -d"
+
     end
    end
 

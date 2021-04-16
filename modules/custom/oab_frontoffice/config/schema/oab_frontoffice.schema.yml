@@ -1,0 +1,57 @@
+block.settings.contact_bar_press_block:
+  type: block_settings
+  label: 'Contact Bar Press'
+  mapping:
+    link_ecrire:
+      type: label
+      label: 'Lien vers Nous écrire'
+    link_ecrire_text:
+      type: label
+      label: 'Texte du lien vers Nous écrire'
+
+block.settings.contact_bar_analyst_block:
+  type: block_settings
+  label: 'Contact Bar Analyst'
+  mapping:
+    link_ecrire:
+      type: label
+      label: 'Lien vers Nous écrire'
+    link_ecrire_text:
+      type: label
+      label: 'Texte du lien vers Nous écrire'
+
+block.settings.phone_number_block:
+  type: block_settings
+  label: 'Phone Number'
+  mapping:
+    block_title:
+      type: label
+      label: 'Block Title'
+
+block.settings.mediatheque_block:
+  type: block_settings
+  label: 'Mediatheque'
+  mapping:
+    mediatheque_text:
+      type: label
+      label: 'Text'
+    mediatheque_link:
+      type: label
+      label: 'Link'
+    mediatheque_link_text:
+      type: label
+      label: 'Link text'
+
+block.settings.rebond_subhome_block:
+  type: block_settings
+  label: 'Blogs'
+  mapping:
+      block_text:
+        type: label
+        label: 'Text'
+      block_link:
+        type: label
+        label: 'Link'
+      block_link_text:
+        type: label
+        label: 'Link text'

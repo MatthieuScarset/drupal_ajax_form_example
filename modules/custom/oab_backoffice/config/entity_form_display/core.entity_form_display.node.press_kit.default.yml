@@ -1,0 +1,397 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.node.press_kit.field_aplat
+    - field.field.node.press_kit.field_content
+    - field.field.node.press_kit.field_content_owner
+    - field.field.node.press_kit.field_display_title
+    - field.field.node.press_kit.field_email_owner
+    - field.field.node.press_kit.field_end_date
+    - field.field.node.press_kit.field_file
+    - field.field.node.press_kit.field_highlight
+    - field.field.node.press_kit.field_industry
+    - field.field.node.press_kit.field_insight
+    - field.field.node.press_kit.field_insight_type
+    - field.field.node.press_kit.field_job_profile
+    - field.field.node.press_kit.field_market_segment
+    - field.field.node.press_kit.field_meta_description
+    - field.field.node.press_kit.field_meta_title
+    - field.field.node.press_kit.field_metatags
+    - field.field.node.press_kit.field_press_type
+    - field.field.node.press_kit.field_region
+    - field.field.node.press_kit.field_solution
+    - field.field.node.press_kit.field_start_date
+    - field.field.node.press_kit.field_subhome
+    - field.field.node.press_kit.field_visual
+    - field.field.node.press_kit.field_visual_tile
+    - field.field.node.press_kit.moderation_state_update
+    - node.type.press_kit
+  module:
+    - datetime
+    - entity_browser
+    - field_group
+    - inline_entity_form
+    - metatag
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_write
+        - group_visual
+        - group_classify
+        - group_seo
+        - group_publish
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_write:
+      children:
+        - langcode
+        - title
+        - field_display_title
+        - field_highlight
+        - field_content
+        - field_aplat
+        - field_file
+      parent_name: group_onglets
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Write
+    group_classify:
+      children:
+        - field_subhome
+        - field_insight
+        - field_insight_type
+        - field_industry
+        - field_solution
+        - field_press_type
+        - field_region
+      parent_name: group_onglets
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Classify
+    group_publish:
+      children:
+        - field_content_owner
+        - field_email_owner
+        - group_content_worthy_period
+        - promote
+        - path
+        - field_metatags
+      parent_name: group_onglets
+      weight: 24
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Publish
+    group_content_worthy_period:
+      children:
+        - field_start_date
+        - field_end_date
+      parent_name: group_publish
+      weight: 43
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Content worthy period'
+    group_seo:
+      children:
+        - field_meta_title
+        - field_meta_description
+      parent_name: group_onglets
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: SEO
+    group_visual:
+      children:
+        - field_visual
+        - field_visual_tile
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Visual
+id: node.press_kit.default
+targetEntityType: node
+bundle: press_kit
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_aplat:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_content:
+    weight: 25
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_content_owner:
+    weight: 41
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_display_title:
+    weight: 23
+    settings:
+      display_label: false
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_email_owner:
+    weight: 42
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_end_date:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_file:
+    weight: 29
+    settings:
+      entity_browser: browser_file_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_highlight:
+    weight: 24
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_industry:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight:
+    weight: 49
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_insight_type:
+    type: options_select
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_meta_description:
+    weight: 25
+    settings:
+      size: 156
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_meta_title:
+    weight: 24
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_metatags:
+    weight: 46
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_press_type:
+    weight: 53
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_region:
+    weight: 54
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_solution:
+    weight: 52
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_start_date:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_subhome:
+    weight: 48
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_visual:
+    weight: 26
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_visual_tile:
+    weight: 27
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  langcode:
+    type: language_select
+    weight: 21
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  moderation_state_update:
+    type: inline_entity_form_complex
+    weight: 11
+    settings:
+      override_labels: true
+      label_singular: 'Moderation state update'
+      label_plural: 'Moderation state updates'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 45
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    weight: 44
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 22
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_job_profile: true
+  field_market_segment: true
+  sticky: true

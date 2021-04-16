@@ -1,0 +1,122 @@
+services:
+
+  oab_marketo.logger_channel:
+    parent: logger.channel_base
+    arguments: ['oab_marketo']
+
+  # Dnb Config
+  oab_marketo.altares_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_marketo.altares_settings']
+
+  # Implements Access Service for routing
+  oab_develop.config_form_access:
+    class: \Drupal\oab_marketo\Access\AltaresSettingsFormAccess
+    arguments: ['@oab_marketo.altares_settings']
+    tags:
+      - { name: access_check, applies_to: _oab_altares_settings_access }
+
+  # Implements Access Service for routing
+  oab_marketo.api_access:
+    class: \Drupal\oab_marketo\Access\AltaresApiAccess
+    arguments:
+      - '@oab_marketo.altares_token.service'
+      - '@request_stack'
+    tags:
+      - { name: access_check, applies_to: _oab_altares_api_access }
+
+
+  # Transform exception in JsonResponse
+  oab_marketo.exception_event_subscriber:
+    class: Drupal\oab_marketo\EventSubscriber\ExceptionRewritingEvent
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }
+
+
+  # Transform exception in JsonResponse
+  oab_marketo.alter_header_event_subscriber:
+    class: Drupal\oab_marketo\EventSubscriber\AlterHeadersEvent
+    tags:
+      - { name: event_subscriber }
+
+
+  ###################################################
+  ## Here is all we need to manage Token (get, save, give, etc...)
+
+  oab_marketo.dnb_token_http_client_factory:
+    class: \Drupal\oab_marketo\DnbTokenHttpClient\DnbTokenHttpClientFactory
+    arguments:
+      - '@http_client_factory'
+      - '@oab_marketo.altares_settings'
+
+  # Dnb HTTP CLIENT (the real Guzzle with headers & credentials already setted up)
+  oab_marketo.dnb_token_http_client:
+    class: \GuzzleHttp\Client
+    factory: oab_marketo.dnb_token_http_client_factory:get
+
+  # Dnb Token Client
+  oab_marketo.dnb_token_client:
+    class: Drupal\oab_marketo\DnbTokenHttpClient\DnbTokenClient
+    arguments:
+      - '@oab_marketo.dnb_token_http_client'
+      - '@oab_marketo.logger_channel'
+
+  # Service to manage Dnb token
+  oab_marketo.dnb_token_service:
+    class: Drupal\oab_marketo\DnbTokenHttpClient\DnbTokenService
+    arguments:
+      - '@oab_marketo.dnb_token_client'
+      - '@cache.data'
+      ## Use drupal data cache to avoid creating a cache table juste for one row
+
+
+  ###############################################
+  ## Here is Dnb API
+  oab_marketo.dnb_http_client_factory:
+    class: \Drupal\oab_marketo\DnbHttpClient\DnbHttpClientFactory
+    arguments:
+      - '@http_client_factory'
+      - '@oab_marketo.altares_settings'
+      - '@oab_marketo.dnb_token_service'
+
+  # Dnb HTTP CLIENT (the real Guzzle with headers & credentials already setted up)
+  oab_marketo.dnb_http_client:
+    class: \GuzzleHttp\Client
+    factory: oab_marketo.dnb_http_client_factory:get
+
+  # Dnb Client
+  oab_marketo.dnb_client:
+    class: Drupal\oab_marketo\DnbHttpClient\DnbClient
+    arguments:
+#      - '@oab_marketo.dnb_http_client'
+      - '@oab_marketo.logger_channel'
+
+  # Service to manage Dnb token
+  oab_marketo.dnb_service:
+    class: Drupal\oab_marketo\DnbHttpClient\DnbService
+    arguments:
+      - '@oab_marketo.dnb_client'
+      - '@cache.oab_dnb'
+
+  # Create cache to store Dnb response
+  cache.oab_dnb:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [oab_dnb]
+
+  oab_marketo.altares_token.service:
+    class: Drupal\oab_marketo\AltaresTokenService
+    arguments:
+      - '@entity_type.manager'
+      - '@oab_marketo.altares_settings'
+
+  oab_marketo.photo_commerciale.service:
+    class: Drupal\oab_marketo\PhotoCommercialeService
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@oab_marketo.altares_settings'

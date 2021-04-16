@@ -1,0 +1,683 @@
+<?php
+
+use Drupal\Core\Menu\MenuLinkInterface;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
+use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\oab_dvi\DviHelper;
+
+use Drupal\paragraphs\Entity\Paragraph;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+// Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
+module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
+
+// Regroupement des METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA)
+module_load_include('inc', 'oab_frontoffice', 'includes/office_map');
+
+// Mise dans un fichier a part des filtres des subhomes
+module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_form');
+
+// Mise dans un fichier a part des filtres de la view business-insight
+module_load_include('inc', 'oab_frontoffice', 'includes/vb_views_exposed_form');
+
+function oab_frontoffice_preprocess_menu(&$variables) {
+    if (isset($variables['items'])
+        && is_array($variables['items'])) {
+        foreach ($variables['items'] as &$item) {
+            $menu_link_entity = oab_frontoffice_load_link_entity_by_link($item['original_link']);
+            if (!empty($menu_link_entity)) {
+                if (!empty($menu_link_entity->link->first()->options['target'])) {
+                    $item['url']->setOption('target', $menu_link_entity->link->first()->options['target']);
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * Préparation du JS pour la génération des liens "Shares"
+ * @param $variables
+ */
+function oab_frontoffice_preprocess_node(&$variables) {
+
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $variables['langcode'] = $current_language;
+
+    if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
+
+        ##Collecte de toutes les données nécessaires
+
+        #Je recupère le nid puis je charge le node associé
+        $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
+        $node = \Drupal\node\Entity\Node::load($nid);
+
+        if (is_null($node) || $node === false) {
+            return;
+        }
+
+        $meta_description = "";
+        ##Je recupère le field_meta_description s'il existe
+        if ($node->hasField('field_meta_decription')) {
+            $meta_description = $node->get('field_meta_description')->getValue();
+        }
+
+        $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
+
+        $og_image = $file = "";
+        if ($node->hasField('field_visual')) {
+            $file = $node->get('field_visual')->getValue();
+            if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
+                $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+                if ($file instanceof \Drupal\file\Entity\File) {
+                    $og_image = $file->url();
+                }
+            }
+        }
+
+        #J'enregistre mes urls et variables OG pour les avoir en JS
+        $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+    }
+
+}
+
+function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
+    $entity = NULL;
+    if ($menu_link_content_plugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
+        list($entity_type, $uuid) = explode(':', $menu_link_content_plugin->getPluginId(), 2);
+
+        /** @var Drupal\Core\Entity\EntityRepository $service */
+        $service = Drupal::service('entity.repository');
+        $entity = $service->loadEntityByUuid($entity_type, $uuid);
+    }
+    return $entity;
+}
+
+function oab_frontoffice_link_alter(&$variables) {
+    $languages = \Drupal::languageManager()->getLanguages();
+
+    if (isset($variables['url'])) {
+        try {
+            $uri = $variables['url']->getUri();
+
+            foreach ($languages AS $key => $value) {
+                $langcode = $value->getId();
+
+                if ($uri === 'base:<front_' . $langcode . '>') {
+                    $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
+                    $variables['options']['language'] = $value;
+                    $variables['url'] = $new_url;
+                }
+            }
+        }
+        catch (\UnexpectedValueException $e) {
+
+        }
+    }
+}
+
+
+/**
+ * Implements hook_entity_view_alter().
+ * @param array $build
+ * @param EntityInterface $entity
+ * @param EntityViewDisplayInterface $display
+ */
+function oab_frontoffice_entity_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+    // Cheking view_mode for node.
+    if ($entity->getEntityType()->id() == 'node') {
+        if (!empty($build['#attached']['html_head_link'])) {
+            _remove_header_links($build);
+        }
+    }
+}
+
+function _remove_header_links(array &$attachments) {
+    // Cheking html_head on attached tags in head.
+    if (!isset($attachments['#attached']['html_head_link'])) {
+        return;
+    }
+
+    // Array to unset.
+    $unset_html_head_link = [
+        'shortlink',
+        'delete-form',
+        'edit-form',
+        'version-history',
+        'revision',
+        'display',
+        'drupal:content-translation-overview',
+        'drupal:content-translation-add',
+        'drupal:content-translation-edit',
+        'drupal:content-translation-delete',
+    ];
+    // Unset loop.
+    foreach ($attachments['#attached']['html_head_link'] as $key => $value) {
+        if (isset($value[0]['rel']) && in_array($value[0]['rel'], $unset_html_head_link)) {
+            unset($attachments['#attached']['html_head_link'][$key]);
+        }
+    }
+}
+
+function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+
+    if ($entity->bundle() == 'product') {
+        //  on deserialise les données à passer au template
+        $field_axiome_data = isset($entity->field_axiome_data->value) ? unserialize($entity->field_axiome_data->value) : array();
+        if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
+            $build['axiome_data'] = $field_axiome_data;
+            $build['axiome_data']['sous_famille'] = \Drupal\oab_axiome\Controller\OabAxiomeController::getSousFamille($entity->id());
+        }
+    }
+
+  if ($build['#view_mode'] == 'full') {
+        $content_type = $entity->bundle();
+        if (in_array($content_type, array('magazine', 'blog_post', 'document', 'simple_page', 'full_html'))) { //, 'external_content'
+            $theme_term = '';
+
+            $field_solution = isset($entity->field_solution) ? $entity->field_solution->getValue() : array();
+            $field_industry = isset($entity->field_industry) ? $entity->field_industry->getValue() : array();
+            $field_insight = isset($entity->field_insight) ? $entity->field_insight->getValue() : array();
+
+            $field_blog_thematic = isset($entity->field_blog_thematic) ? $entity->field_blog_thematic->getValue() : array();
+            $field_document_thematic = isset($entity->field_document_thematic) ? $entity->field_document_thematic->getValue() : array();
+            $field_magazine_thematic = isset($entity->field_magazine_thematic) ? $entity->field_magazine_thematic->getValue() : array();
+
+            if (!empty($field_insight)) {
+                $theme_term = $field_insight[0]['target_id'];
+            } elseif (!empty($field_blog_thematic)) {
+                $theme_term = $field_blog_thematic[0]['target_id'];
+            } elseif (!empty($field_document_thematic)) {
+                $theme_term = $field_document_thematic[0]['target_id'];
+            } elseif (!empty($field_magazine_thematic)) {
+                $theme_term = $field_magazine_thematic[0]['target_id'];
+            } elseif (!empty($field_industry)) {
+                $theme_term = $field_industry[0]['target_id'];
+            } elseif (!empty($field_solution)) {
+                $theme_term = $field_solution[0]['target_id'];
+            }
+
+            if ($theme_term != '') {
+                $term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+                if (isset($term)) {
+                    $build['theme_term'] = array(
+                        '#markup' => $term->getName(),
+                        'id' => $term->id(),
+                    );
+                }
+            }
+        }
+
+        if ($content_type == 'homepage_eclairage') {
+
+            $menu_tree = \Drupal::menuTree();
+            $menu_name = 'menu-homepage-eclairage';
+
+            // Build the typical default set of menu tree parameters.
+            $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+
+            // Load the tree based on this set of parameters.
+            $tree = $menu_tree->load($menu_name, $parameters);
+
+            // Finally, build a renderable array from the transformed tree.
+            $menu = $menu_tree->build($tree);
+
+            $menu_html = \Drupal::service('renderer')->render($menu);
+            //oabt($menu, true);
+            $build['menu_homepage_eclairage'] = $menu;
+
+
+            //first paragraph
+            $first_paragraph = $entity->field_home_banner[0]->entity;
+            // Access the paragraph entity like this:
+
+            //oabt($first_paragraph->get('field_title')->getValue(), false);
+
+
+            // $paragraphHomeBannerFirst = $entity->node.field_home_banner ;
+            // $paragraph = Paragraph::load($paragraphHomeBannerFirst);
+            // $field_title = $paragraph->field_title->value;
+            //oabt($field_title, true);
+
+            $build['firstbanner_homepage_eclairage'] = $first_paragraph->get('field_title')->getValue();
+
+
+            $taxonomy_id = $entity->field_home_playlists[0]->entity->get('field_playlist_taxonomy_term')->getValue() ;//[0]['target_id'];
+            //var_dump(intval($taxonomy_id));
+
+            $build['taxonomy'][count($build['taxonomy'])] = $taxonomy_id;
+        }
+
+        if ($content_type === 'external_content' && isset($entity->field_url->uri)) {
+            $response = new RedirectResponse($entity->field_url->uri);
+            $response->send();
+        }
+    }
+}
+
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
+
+    ## CARTE
+    if ($view->id() == 'offices_map_view') {
+        $language = \Drupal::languageManager()->getCurrentLanguage();
+        $language_id = $language->getId();
+
+        // Modification du trie sur les maps qui ne sont pas sur une page "ru"
+        // On enlève le "order by sticky" dans ce cas là
+        // On doit faire ça à cause du fonctionnement de la view et des traductions
+        // le sticky doit être enregistré au niveau du contenu principal, pas dans ses traductions
+        if (isset($query->orderby)
+            && !empty($query->orderby)) {
+            foreach ($query->orderby AS $key => $value) {
+                if (is_array($value)
+                    && isset($value['field'])
+                    && $value['field'] == "node_field_data_sticky"
+                    && $language_id != "ru") {
+                    unset($query->orderby[$key]);
+                }
+            }
+        }
+    }
+
+}
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+
+    // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
+    subhomes_views_exposed_form($form);
+
+    // Gestion des formulaires spécifiques à la vb via une fonction pour ne pas surcharger ici
+    vb_views_exposed_form($form);
+
+
+    // view Page thématique
+    if ($form['#id'] == 'views-exposed-form-page-thematique-block-1') {
+        $insight = clean_exposed_filters_by_language(
+            $form['vb_thematic']['#options'],
+            'Insight'
+        );
+        $form['vb_thematic']['#options'] = $insight;
+
+        $profession = clean_exposed_filters_by_language(
+            $form['field_job_profile_target_id']['#options'],
+            'Profession'
+        );
+        $form['field_job_profile_target_id']['#options'] = $profession;
+
+        $industry = clean_exposed_filters_by_language(
+            $form['field_industry_target_id']['#options'],
+            'Industry'
+        );
+        $form['field_industry_target_id']['#options'] = $industry;
+
+        $region = clean_exposed_filters_by_language(
+            $form['field_region_target_id']['#options'],
+            'Geography'
+        );
+        $form['field_region_target_id']['#options'] = $region;
+
+        if ($current_language != 'en') {
+            unset($form['field_region_target_id']);
+        }
+    }
+
+    if ($form['#id'] == 'views-exposed-form-business-insight-business-insight-page') {
+        //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
+
+        if (isset($form['vb_thematic']['#options'])) {
+          $form['vb_thematic']['#options'] = clean_exposed_filters_by_language(
+            $form['vb_thematic']['#options'], 'All thematics'
+          );
+        }
+
+      if (isset($form['edit_vb_thematic']['#options'])) {
+        $form['edit_vb_thematic']['#options'] = clean_exposed_filters_by_language(
+          $form['edit_vb_thematic']['#options'], 'All thematics'
+        );
+      }
+
+      /**
+       * reorder_element_header_menu_page_vb($form)
+       */
+      $menu_header_page_vb = clean_exposed_filters_by_language(
+        $form['field_insight_type_target_id']['#options'], 'See all'
+      );
+      if (isset($menu_header_page_vb['All']) ) {
+        $v = $menu_header_page_vb['All'];
+        unset($menu_header_page_vb['All']);
+        $menu_header_page_vb['All'] = $v;
+        $form['field_insight_type_target_id']['#options'] = $menu_header_page_vb;
+      } else {
+        $form['field_insight_type_target_id']['#options'] = $menu_header_page_vb;
+      }
+
+        if (isset($form['field_insight_type_target_id']['#type'])
+            && $form['field_insight_type_target_id']['#type'] == "select") {
+            $form['field_insight_type_target_id']['#type'] = "radios";
+        }
+    }
+
+}
+
+
+function oab_frontoffice_views_post_render($view) {
+    if ($view->id() !== 'VIEW_ID' && $view->getDisplay()->getPluginId() !== 'page') {
+        return;
+    }
+    $request = \Drupal::request();
+
+    if ($view->id() == 'subhomes') {
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+            // on recupere les valeurs dans oab_subhomes.subhomes
+            $data =\Drupal::config('oab_subhomes.subhomes');
+            if ($data !== null) {
+                switch ($view->current_display) {
+                    case 'page_press':
+                        $route->setDefault('_title', $data->get('press_meta'));
+                        $view->setTitle($data->get('press_meta'));
+                        break;
+                    case 'page_partners':
+                        $route->setDefault('_title', $data->get('partner_meta'));
+                        $view->setTitle($data->get('partner_meta'));
+                        break;
+                    case 'page_customer':
+                        $route->setDefault('_title', $data->get('customer_meta'));
+                        $view->setTitle($data->get('customer_meta'));
+                        break;
+                    case 'page_document':
+                        $route->setDefault('_title', $data->get('library_meta'));
+                        $view->setTitle($data->get('library_meta'));
+                        break;
+                    case 'page_blog':
+                        $route->setDefault('_title', $data->get('blog_meta'));
+                        $view->setTitle($data->get('blog_meta'));
+                        break;
+                    case 'page_magazine':
+                        $route->setDefault('_title', $data->get('magazine_meta'));
+                        $view->setTitle($data->get('magazine_meta'));
+                        break;
+                    case 'page_catalogue':
+                        $route->setDefault('_title', $data->get('product_meta'));
+                        $view->setTitle($data->get('product_meta'));
+                        break;
+                }
+            }
+        }
+    }
+}
+
+function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+    if ($route_match && $node = $route_match->getParameter('node')) {
+        $breadcrumb->addCacheableDependency($node);
+    }
+}
+
+/**
+ * Suppression du cache pour les produits DVI lorsqu'on veut l'affichage subhome
+ * pour pouvoir changer l'URL. Si on ne le fait pas, le changement de view_mode par
+ * la fonction "theme_boosted_preprocess_views_view" ne fonctionne pas, car c'est caché
+ * @param array $build
+ * @param \Drupal\node\Entity\Node $entity
+ * @param $view_mode
+ */
+function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\Entity\Node $entity, $view_mode) {
+    if ($entity->bundle() == "product"
+        && DviHelper::isDVIProduct($entity)
+        && ($view_mode == "subhome" || $view_mode == "subhome_distributeur")) {
+        $build["#cache"] = array();
+
+    }
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function oab_frontoffice_theme($existing, $type, $theme, $path) {
+    $theme = array();
+    $theme['custom-righticonblock'] = array(
+        'variables' => array(
+            'synomiaSearchForm' => array(),
+        ),
+        'template' => 'block--righticonblock-custom'
+    );
+
+    $theme['subhome_select'] = [
+       'render element' => 'element'
+    ];
+    $theme['subhome_select_button'] = [
+      'render element' => 'element'
+    ];
+    return $theme;
+}
+
+
+function oab_frontoffice_preprocess_subhome_select(&$variables) {
+//echo "toto"; kint($variables); die();
+}
+
+function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
+//  kint($variables); die();
+  $element = $variables['element'];
+  $variables['attributes'] = [];
+  if (isset($element['#id'])) {
+    $variables['attributes']['id'] = $element['#id'];
+  }
+  if (isset($element['#attributes']['title'])) {
+    $variables['attributes']['title'] = $element['#attributes']['title'];
+  }
+//  kint($element); die();
+  $variables['children'] = $element['#children'];
+}
+
+
+function oab_frontoffice_mail_alter(&$message) {
+    for ($i = 0; $i < count($message["body"]); $i++) {
+        $message["body"][$i] = str_replace("http://", "https://", $message["body"][$i]);
+    }
+}
+
+function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+    if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
+
+        foreach (array_keys($form['actions']) as $action) {
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+                array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_telechargement_documents_form_submit');
+            }
+        }
+    } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
+
+        foreach (array_keys($form['actions']) as $action) {
+
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+                array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
+            }
+        }
+    }
+
+    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
+      subhomes_views_exposed_form($form);
+
+    }
+}
+
+/**
+ * Fonction pour générer l'URL du fichier demandé
+ *
+ * Comme le fichier ne peut etre télécharger qu'après soumission du formulaire,
+ * je ne passe que le nid dans le formulaire et je génère l'url du fichier lors de la soumission
+ *
+ * L'URL du fichier est nécessaire pour générer les mails et messages dans lesquels l'utilisateur peuvent dl les fichiers
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormState $form_state
+ */
+function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof NodeInterface) {
+
+        ##Je tente de récuper le field_file du node d'origine
+        if (NULL !== $field_file = $node->get('field_file')) {
+
+            ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
+            $field_value = $field_file->getValue();
+            $media = \Drupal\media\Entity\Media::load($field_value[0]['target_id']);
+
+            ##On load le file contenu dans l'entity media
+            $file_value = $media->get('field_file')->getValue();
+            $file_id = $file_value[0]['target_id'];
+            $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
+                ->getFileUri());
+            ##je remplace la valeur d'url_du_fichier par l'url générée
+            $form_state->setValue('url_du_fichier', $file_url);
+        }
+    }
+
+
+}
+
+function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof NodeInterface) {
+        if ($node->bundle() == 'distributor') {
+            $field_distrib_email = $node->get('field_email_address');
+
+            $distrib_mail = "";
+            if (isset($field_distrib_email[0])) {
+                $value = $field_distrib_email[0]->getValue();
+                $distrib_mail = $value['value'];
+            }
+
+            $form_state->setValue('distributeur_email', $distrib_mail);
+            $form_state->setValue('distributeur_name', $node->getTitle());
+            $form_state->setValue('distributeur_nid', $node->id());
+        }
+
+    }
+
+}
+
+/**
+ * Modification des metatags pour rediriger les contenus 'homepage" vers la home du site, et pas le noeud "homepage"
+ *
+ * @param array $attachments
+ */
+function oab_frontoffice_page_attachments_alter(array &$attachments) {
+
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (NULL !== $node && $node instanceof NodeInterface) {
+        if ($node->bundle() == 'homepage') {
+            if (isset($attachments["#attached"]['html_head_link'])) {
+                $attachments["#attached"]['html_head_link'] = __seek_alternate($attachments["#attached"]['html_head_link']);
+            }
+        }
+    }
+
+    // Remove Generator meta tag
+    foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+      if ($attachment[1] == 'system_meta_generator') {
+        unset($attachments['#attached']['html_head'][$key]);
+      }
+    }
+}
+
+/**
+ * Petite fonction recursive pour trouver l'element cherché dans la fonction précédente
+ * (C'est un tableau avec des sous tableaux, c'etait plus simple à faire en recursif)
+ * @param $tab
+ * @return array
+ */
+function __seek_alternate($tab) {
+    if (isset($tab['rel']) && $tab['rel'] == "alternate") {
+        $tab['href'] = Url::fromRoute('<front>')->toString();
+    } elseif (is_array($tab)) {
+        foreach ($tab as $key => $value) {
+            $tab[$key] = __seek_alternate($value);
+        }
+    }
+
+    return $tab;
+}
+
+
+function change_textfield_to_select($vid, $default_langcode = true) {
+  $ret = [];
+
+  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
+  if (is_object($vocabulary)) {
+
+    $properties = [
+      "vid" => $vid,
+    ];
+
+    if ($default_langcode) {
+      $properties["langcode"] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    }
+
+    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+    if (is_array($terms)
+      && !empty($terms)) {
+      $options = array('All' => t($vocabulary->get('name')));
+      foreach ($terms AS $term) {
+        $term_name = $term->getName();
+        $options[$term_name] = $term_name;
+      }
+      $ret['#type'] = "select";
+      $ret['#options'] = $options;
+      $ret['#default_value'] = 'All';
+      $ret['#validated'] = TRUE;
+      $ret['#size'] = null;
+    } else {
+      $ret = null;
+    }
+  }
+
+  return $ret;
+}
+
+
+function oab_frontoffice_preprocess_html(&$variables) {
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof NodeInterface) {
+
+    if ($node->bundle() == 'homepage' && $node->hasField('field_caroussel_header')) {
+
+        foreach ($node->field_caroussel_header as $field_carousel) {
+          // Load first item of carrousel
+          if (isset($field_carousel->entity->field_background->target_id)) {
+            $media = Media::load($field_carousel->entity->field_background->target_id);
+            if ($media !== null && isset($media->field_image->entity)) {
+              $file_uri = file_url_transform_relative(file_create_url($media->field_image->entity->getFileUri()));
+              $variables['carousel_bg'][$media->id()] = $file_uri;
+            }
+          }
+        }
+
+        if (isset($variables['carousel_bg'])) {
+          $variables['attributes']['class'][] = "oab_background_image";
+        }
+    }
+  }
+
+}

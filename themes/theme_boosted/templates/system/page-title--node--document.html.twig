@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme override to display page titles for document.
+ *
+ * Available variables:
+ * - title_attributes: HTML attributes for the page title element.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title: The page title, for use in the actual content.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - social_bar_attributes: HTML attributes for the sociale-bar element.
+ *
+ * @see template_preprocess_page_title()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="row">
+  <span class="col-xs-12 document-type-titre">{{ document_type }}</span>
+</div>
+
+<div class="row">
+  {% if title %}
+    <h1{{ title_attributes.addClass('page-header', 'col-md-10', 'col-xs-12') }}>{{ title }}</h1>
+  {% endif %}
+
+  <div class='col-md-2 col-xs-12 socialbar-document'>
+    {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+  </div>
+</div>
+

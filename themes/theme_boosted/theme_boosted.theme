@@ -1,0 +1,780 @@
+<?php
+
+use Drupal\Core\Database\Database;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\Core\Template\Attribute;
+use Drupal\oab_dvi\DviHelper;
+use Drupal\oab_subhomes\Entity\SubhomeEntity;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ */
+function theme_boosted_preprocess_html(&$variables) {
+  global $config;
+
+
+  $c = \Drupal::config("oab.version");
+  $version = $c->get('value');
+  if(!isset($config['header_env'])){
+    $config['header_env'] = "";
+  }
+
+  $variables['header_env'] = $config['header_env'];
+  $variables['oab_version'] = ' - '.$version;
+
+    //RUBYPORTAILOBS-3317
+    //gestion des canonical url pour les contenu hub
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if(isset($node) && $node<>"" && is_object($node)){
+        $nid = $node->id();
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
+        $current_path_alias = \Drupal::service('path_alias.manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
+        $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
+    }
+}
+
+function theme_boosted_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+    $actual_route = \Drupal::routeMatch();
+    $actual_route_name = $actual_route->getRouteName();
+
+    ## Si on est dans la subhome Analystes
+    ## et qu'on veut afficher un node (qui est donc en mode d'affichage Subhome)
+    if( $actual_route_name === "view.subhomes.page_analysts"
+        && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
+        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+        //Si on fait l'affichage d'un node en mode "subhome"
+    ) {
+        $suggestions = ['node__analysts__subhome'];
+    }
+
+    if ($actual_route_name === "views.ajax" && $variables['theme_hook_original'] == "node"
+        && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+    ){
+        // Getting the referer.
+        $request = \Drupal::request();
+        $referer = $request->headers->get('referer');
+        // Getting the base url.
+        $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
+        // Getting the alias or the relative path.
+        $alias = substr($referer, strlen($base_url));
+        $url_object = \Drupal::service('path.validator')->getUrlIfValid($alias);
+        // Gettin route name from referer
+        $referer_route_name = $url_object->getRouteName();
+
+        if($referer_route_name=="view.subhomes.page_analysts"){
+            $suggestions = ['node__analysts__subhome'];
+        }
+
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+
+    if (isset($variables['view'])) {
+        $view = $variables['view'];
+        $suggestions[] = $hook . '__' . $view->id();
+        $suggestions[] = $hook . '__' . $view->id() . '__' . $view->current_display;
+
+        /**
+         * @var Drupal\views\ViewExecutable $view
+         * @var SubhomeEntity $entity
+         */
+
+        if (preg_match('/^subhomes/', $view->id()) && isset ($view->argument['field_subhome_target_id'])) {
+            $sid = $view->argument['field_subhome_target_id']->value;
+            $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+            // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+            if ($entity !== null && $view->current_display !== "news") {
+                $suggestions[] = $hook . '__' . $view->id() . '__' . $entity->bundle();
+            }
+
+        }
+
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+    $suggestions[] = 'form__' . $variables['element']['#form_id'];
+    return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Pour le mode d'affichage tuiles, on crées un nouveau template "node--tile--Insight-type-term"
+ */
+function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\node\Entity\Node $node */
+  $node = $variables['elements']['#node'];
+  if ($node->hasField('field_insight_type')
+    && !empty($node->view) && $node->view->storage->id()) {
+
+    $field = $node->get('field_insight_type')->getValue();
+    if (
+      isset($field[0]['target_id'])
+      && $node->view->storage->id() == 'business_insight' && $node->view->current_display == "business_insight_page") {
+
+      $insight_type_term = Term::load($field[0]['target_id']);
+
+      if (!empty($insight_type_term)) {
+        $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+        $insight_type_label = \Drupal::transliteration()->transliterate($insight_type_term->label(), LanguageInterface::LANGCODE_DEFAULT, '_');
+        $insight_type_label = mb_strtolower($insight_type_label);
+        $insight_type_label = preg_replace('@[^a-z0-9_.]+@', '_', $insight_type_label);
+
+        $suggestions[] = 'node__' . $sanitized_view_mode . '__' . mb_strtolower($insight_type_label);
+      }
+
+
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_grid_alter(array &$suggestions, array $variables) {
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if(preg_match('/^view.subhomes_archive/', $route_match)) {
+        $suggestions[] = 'views_view_grid__subhomes_archive';
+    }
+
+}
+
+function theme_boosted_theme_suggestions_html_alter(array &$suggestions, array $variables, $hook) {
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof \Drupal\node\NodeInterface) {
+    if ($node->bundle() == 'homepage') {
+      $suggestions[] = $hook . '__' . $node->bundle();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+    /** @var Drupal\views\ViewExecutable $view */
+    $view = $variables['view'];
+
+    if($view->id() ===  'subhomes_archive') {
+        $suggestions[] = 'views_view_fields__' . $view->id() . '__' . $view->current_display;
+    }
+
+}
+
+function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array $variables){
+
+}
+
+function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+    /**
+     * Homepage Eclairage View Grid Twig Template Suggestions
+     */
+    // Firstly check it's a view
+    if($hook === 'views_view') {
+        // Check if it's the 'home_eclairage_playlist' view
+        if($variables['view']->id() === 'home_eclairage_playlist') {
+            if($hook === 'views_view_grid') {
+
+                $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+            }
+        }
+    }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+        if (is_object($node)) {
+            $content_type = $node->bundle();
+            $suggestions[] = 'page__' . $content_type;
+        }
+    }
+}
+
+function theme_boosted_theme_suggestions_page_title_alter(array &$suggestions, array $variables, $hook) {
+
+  /** @var NodeInterface $node */
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = $hook . '__node';
+    $suggestions[] = $hook . '__node__' . $node->bundle();
+  }
+  return $suggestions;
+}
+
+function theme_boosted_theme_suggestions_fieldset_alter(array &$suggestoins, array $variables, $hook) {
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+}
+
+function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook){
+
+    $current_route_match = \Drupal::getContainer()->get('current_route_match');
+    $route_match = $current_route_match->getRouteName();
+
+    if (isset($variables['element']['#type'])) {
+      $suggestions[] = $hook . "__" . $variables['element']['#type'];
+    }
+
+
+    if((preg_match('/^view.subhomes/', $route_match)
+        || preg_match('/^view.subhomes_archive/', $route_match)
+        || $route_match == 'views.ajax')
+			&& $variables['element']['#id'] != 'edit-mot' ) { // edit-mot est le champ de recherche synomia, il ne faut pas lui appliquer la suggestion
+        $suggestions[]='form_element__subhomes';
+
+      if (isset($variables['element']['#type'])) {
+        $suggestions[] = $hook . "__subhomes__" . $variables['element']['#type'];
+      }
+    }
+    if (isset($variables['element']['#webform'])) {
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'];
+        $suggestions[] = 'form_element__' . $variables['element']['#type'];
+        $suggestions[] = 'form_element__' . $variables['element']['#webform'] . "__" . $variables['element']['#type'];
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] === 'vb_thematic') {
+        $suggestions[] = 'form_element__field_insight__business_insight';
+    }
+
+    if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+        $suggestions[] = $hook . '__' . 'field_insight_type';
+    }
+}
+
+function theme_boosted_preprocess_node(&$variables) {
+
+ /** Get url server for Marketo */
+  $variables['base_url'] = $GLOBALS['base_url'];
+
+
+	if($variables['view_mode'] == "full") {
+		if (isset($variables['node'])
+			&& is_object($variables['node'])) {
+			$variables['#attached']['drupalSettings']['tealium']['type_page'] = $variables['node']->type->entity->label();
+			switch ($variables['node']->type->entity->get('type')) {
+				case 'homepage':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "Homepage";
+					break;
+				case 'distributor':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "DVI fiche distributeur";
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'DVI';
+					break;
+				case 'webform':
+					if(isset($variables['node']->webform) && isset($variables['node']->webform->entity)
+						&& in_array($variables['node']->webform->entity->id(), array('dvi_contact_global', 'dvi_becoming_distributor' ))){
+						$variables['#attached']['drupalSettings']['tealium']['type_page'] = "DVI webform";
+						$variables['#attached']['drupalSettings']['tealium']['custom_variable_key2'] = 'rubrique';
+						$variables['#attached']['drupalSettings']['tealium']['custom_variable_value2'] = 'DVI';
+					}
+					break;
+				case 'product':
+          if(DviHelper::isDVIProduct($variables['node'])){
+						$variables['#attached']['drupalSettings']['tealium']['custom_variable_key2'] = 'rubrique';
+						$variables['#attached']['drupalSettings']['tealium']['custom_variable_value2'] = 'DVI';
+						$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI fiche produit';
+					}
+					else{
+						$variables['#attached']['drupalSettings']['tealium']['type_page'] = t("our products");
+
+					}
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'fiches_produits';
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+					break;
+				case 'customer_story':
+					$variables['#attached']['drupalSettings']['tealium']['type_page'] = "Nos clients témoignent";
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'temoignage';
+					$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'true';
+					break;
+				case 'blog_post':
+					if (isset($variables['node']->field_blog_thematic)) {
+						$field_blog = $variables['node']->field_blog_thematic->getValue();
+						if (!empty($field_blog) && isset($field_blog[0])) {
+							$theme_term = $field_blog[0]['target_id'];
+							$term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+							if (isset($term)) {
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'blog';
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = $term->getName();
+							}
+						}
+					}
+					break;
+				case 'magazine':
+					if (isset($variables['node']->field_magazine_thematic)) {
+						$field_magazine = $variables['node']->field_magazine_thematic->getValue();
+						if (!empty($field_magazine) && isset($field_magazine[0])) {
+							$theme_term = $field_magazine[0]['target_id'];
+							$term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+							if (isset($term)) {
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
+								$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = $term->getName();
+							}
+						}
+					}
+					break;
+			}
+		}
+
+		$request = \Drupal::request();
+		$route_match = \Drupal::routeMatch();
+		$title = \Drupal::service('title_resolver')
+			->getTitle($request, $route_match->getRouteObject());
+		$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
+	}
+
+    $variables['http_host'] = \Drupal::request()->getSchemeAndHttpHost();
+}
+
+function theme_boosted_preprocess_page(&$variables) {
+	$request = \Drupal::request();
+
+	$route_match = \Drupal::routeMatch();
+	$title = \Drupal::service('title_resolver')
+		->getTitle($request, $route_match->getRouteObject());
+
+	$exception = $request->attributes->get('exception');
+	$code = 200;
+	if(!empty($exception)){
+		$code = \Drupal::request()->attributes->get('exception')->getStatusCode();
+	}
+	if(!empty($code) && $code != 200)
+	{
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page erreur';
+		$variables['#attached']['drupalSettings']['tealium']['erreur_code'] = $code;
+		$url = "";
+		$url = isset($_SERVER["HTTPS"]) ? 'https' : 'http';
+		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
+
+		if(isset($request->server) && isset($request->server)) {
+			$headers = $request->server->getHeaders();
+			$referer_url = isset($headers['REFERER']) ? $headers['REFERER'] : '';
+			$variables['#attached']['drupalSettings']['tealium']['url_referente'] = htmlspecialchars($referer_url);
+		}
+	}
+
+	if (\Drupal::routeMatch()->getParameter('node')) {
+		$node = \Drupal::routeMatch()->getParameter('node');
+	}
+	if (\Drupal::routeMatch()->getParameter('node_preview')) {
+		$node = \Drupal::routeMatch()->getParameter('node_preview');
+	}
+	if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
+		$node = node_revision_load($revision);
+	}
+	$variables['page']['containerClass'] = 'container';
+	if (isset($node) && is_object($node)
+		&& get_class($node) == 'Drupal\node\Entity\Node') {
+		$content_type = $node->bundle();
+		if ($content_type == 'homepage' || $content_type == 'homepage_eclairage' || $content_type == 'hp_eclairage_thematique') {
+			$variables['page']['containerClass'] = 'container-fluid';
+		}
+		$definitions = \Drupal::service('entity_field.manager')
+			->getFieldDefinitions('node', $content_type);
+		if (isset($definitions)
+			&& array_key_exists('field_display_title', $definitions)) {
+			$display_title = $node->get('field_display_title')->getValue();
+			if (isset($display_title[0]['value'])
+				&& $display_title[0]['value'] == 0
+				&& isset($variables['page']['content']['theme_boosted_page_title'])
+			) {
+				$variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+			}
+		}
+	}
+	else{
+		//ajout de la social share bar
+		$variables['#attached'] = [
+			'drupalSettings' => [
+				'myLibrary' => getSocialBarParameters($title, "", "")
+			],
+		];
+	}
+	//tealium
+	$variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
+	$route_name = \Drupal::routeMatch()->getRouteName();
+	if($route_name == 'user.login'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Connexion';
+	}elseif($route_name == 'user.pass'){
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Page Mot de passe';
+	}
+
+  // On n'affiche pas le block non plus sur la page des API OBL. Il y a une top zone
+  if ($route_name === 'oab_obl_settings') {
+    $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+  }
+
+    // Si on est dans une subhome || subhomes_archive
+    if (preg_match('/^view.subhomes/', $route_name)
+        || preg_match('/^view.business_insight/', $route_name)) {
+        ## Si on est dans une vue, je charge la vue
+        $route_parts = explode('.', $route_name);
+
+        $view_id = $route_parts[1];
+        $display_id = $route_parts[2];
+
+        $hide_title_block = false;
+
+        $view = \Drupal\views\Entity\View::load($view_id);
+        if ($view !== null) {
+            /** @var \Drupal\views\ViewExecutable $view_executable */
+            $view_executable = $view->getExecutable();
+            $view_executable->setDisplay($display_id);
+            $view_executable->preview();
+            if (isset($view_executable->argument['field_subhome_target_id'])) {
+
+                $sid = $view_executable->argument['field_subhome_target_id']->value;
+                $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+                // Si on a une entité pour cette vue, je change le mode d'affichage de la page
+                // pour le passer en container-fluid, ie. avoir la page complète sans bordure
+                // et je cache le titre de la page
+                if ($entity !== null) {
+                    $hide_title_block = true;
+                }
+
+            } elseif ($view->id() == 'business_insight') {
+                $hide_title_block = true;
+            }
+        }
+
+        if ($hide_title_block) {
+            $variables['page']['content']['theme_boosted_page_title']['#access'] = FALSE;
+        }
+    }
+
+}
+
+function theme_boosted_preprocess_region(&$variables) {
+    // Create the $content variable that templates expect.
+    $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+}
+
+function theme_boosted_preprocess_menu(&$variables, $hook) {
+  if (strpos($hook, 'menu__main') !== false) {
+
+    $current_path = \Drupal::request()->getRequestUri();
+    $items = $variables['items'];
+    $item_title = "";
+
+    foreach ($items as $key => $item) {
+      $item_title = mb_strtolower(accent2ascii($item['title']));
+      if($item['in_active_trail']) {
+        $item['attributes']->addClass('active-trail');
+      } else {
+        $url_fragments = explode('/', $current_path);
+        if (count($url_fragments) > 1 AND $url_fragments[2] === $item_title) {
+          $item['attributes']->addClass('active-trail');
+        } elseif ( $url_fragments[2] === 'iot' ) {
+          if ($hook === 'menu__main_navigation_fr' AND $item['title'] === 'Produits' ) {
+              $item['attributes']->addClass('active-trail');
+          } elseif ($hook === 'menu__main' AND $item['title'] === 'Solutions') {
+            $item['attributes']->addClass('active-trail');
+          }
+        }
+      }
+    }
+  }
+  elseif (strpos($hook, 'menu__top_navbar_fr') !== false) {
+    $items = $variables['items'];
+    foreach ($items as $key => $item) {
+      if ($item['title'] == 'Entreprises') {
+        $item['attributes']->addClass('active-trail');
+      }
+    }
+  }
+}
+
+function theme_boosted_preprocess_views_view(&$variables) {
+
+    /** @var Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  $id = $view->storage->id();
+
+  //hack pour la vue vision business
+  if ($id == 'business_insight') {
+      $variables['#attached']['drupalSettings']['tealium']['view_title'] = t('Business insight');
+  }
+
+  if ($id == 'subhomes' || $id == 'subhomes_archive'){
+  	if($view->current_display == 'page_distributor')		{//subhome distributors  dvi
+			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage revendeurs';
+			$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
+			$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'DVI';
+		}
+		elseif($view->current_display == 'page_products')		{ //subhome products dvi
+			$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'DVI homepage produits';
+			$variables['#attached']['drupalSettings']['tealium']['custom_variable_key'] = 'rubrique';
+			$variables['#attached']['drupalSettings']['tealium']['custom_variable_value'] = 'DVI';
+		}
+		elseif (isset($view->display_handler->options['arguments'])
+      && is_array($view->display_handler->options['arguments'])) {
+      foreach ($view->display_handler->options['arguments'] AS $field_arg_key => $field_arg_value) {
+        if (isset($field_arg_value['default_argument_type'])
+          && $field_arg_value['default_argument_type'] == 'config_key') {
+          if (isset($field_arg_value['default_argument_options']['config_name'])
+            && !empty($field_arg_value['default_argument_options']['config_name'])
+            && isset($field_arg_value['default_argument_options']['config_key'])
+            && !empty($field_arg_value['default_argument_options']['config_key'])){
+            $term_variable = \Drupal::config($field_arg_value['default_argument_options']['config_name'])->get($field_arg_value['default_argument_options']['config_key']);
+            if (!is_null($term_variable)) {
+              $term = \Drupal\taxonomy\Entity\Term::load((int)$term_variable);
+
+              if (isset($term)
+                && is_object($term)) {
+                $variables['views_term'] = $term->getDescription();
+              }
+							$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Subhome '.$term->getName();
+            }
+          }
+        }
+      }
+    }
+
+    /*
+     * Nouvelle gestion des subhomes
+     * Je passe en variable l'entité subhome correspondante
+     */
+    if (isset($view->argument['field_subhome_target_id'])) {
+
+        $sid = $view->argument['field_subhome_target_id']->value;
+        $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+        // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+        if ($entity !== null) {
+
+            /** @var Drupal\Core\Field\FieldItemInterface $field */
+            foreach($entity->getFields() as $field) {
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['fields'][$field->getName()] = $field;
+
+                $field_rendered = $field->view('default');
+                $variables[SubhomeEntity::TWIG_VAR_NAME]['render'][$field->getName()] =
+                    render($field_rendered);
+            }
+
+        }
+    }
+
+
+  }
+  elseif ($id == 'offices_map_view') {
+		$variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Offices map';
+  	if(in_array($view->current_display, array('offices_map_block', 'offices_addresses_list_block'))) {
+  		//kint($variables['rows']);
+			$variables['contact_url'] = 'http://www.google.fr';
+    }
+  }
+
+  if ($id == 'subhomes') {
+      if($view->current_display == 'page_catalogue_dvi')		{ //subhome produits DVI
+          // j'affecte le view mode à subhome_distributeur
+          for ($i = 0 ; $i < count($variables['rows'][0]['#rows']); $i++) {
+              $variables['rows'][0]['#rows'][$i]['#view_mode'] = 'subhome_distributeur';
+          }
+      }
+  }
+}
+
+function theme_boosted_preprocess_views_view_list(&$variables) {
+  $view = $variables['view'];
+  $id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab_offices_map.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
+
+}
+
+function theme_boosted_preprocess_views_view_fields(&$variables){
+	$view = $variables['view'];
+	$id = $view->storage->id();
+	if ($id == 'offices_map_view'){
+		$config_factory = \Drupal::configFactory();
+		$config_group = $config_factory->get('oab_offices_map.offices_map');
+		if(!empty($config_group)) {
+			$url_contact = $config_group->get('contact_url');
+			if(!empty($url_contact)) {
+				$variables['contact_url'] = $url_contact;
+			}
+		}
+	}
+}
+
+function theme_boosted_preprocess_field(&$variables){
+  /*
+  $element = $variables['element'];
+  if ($element['#field_name'] == 'field_commentaire'){
+    $variables['attributes']['class'][] = 'field-comments';
+    $variables['attributes']['class'][] = 'col';
+    $variables['attributes']['class'][] = 'col-md-8';
+    $variables['attributes']['class'][] = 'col-sm-12';
+  }
+  */
+
+        if($variables['field_name'] == 'field_visual'){
+            /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $field */
+            $field = $variables['element']['#items'][0];
+
+            $field_image_url = get_image_uri($field->getEntity(), 'field_visual');
+
+            $variables['banner_url'] = file_create_url($field_image_url);
+        }
+
+}
+
+function theme_boosted_preprocess_file_link(&$variables){
+  $file = $variables['file'];
+  $options = array();
+
+  $file_entity = ($file instanceof File) ? $file : File::load($file->fid);
+  // @todo Wrap in file_url_transform_relative(). This is currently
+  // impossible. As a work-around, we currently add the 'url.site' cache context
+  // to ensure different file URLs are generated for different sites in a
+  // multisite setup, including HTTP and HTTPS versions of the same site.
+  // Fix in https://www.drupal.org/node/2646744.
+  $url = file_create_url($file_entity->getFileUri());
+  $variables['#cache']['contexts'][] = 'url.site';
+
+  $mime_type = $file->getMimeType();
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  $options['attributes']['type'] = $mime_type . '; length=' . $file->getSize();
+
+  $file_type = strtr($mime_type, array('application/' => '', 'audio/' => '', 'image/' => '', 'multipart/' => '', 'text/' => '', 'video/' => ''));
+
+  //$node = \Drupal::request()->attributes->get('node');
+  //ksr($node->get('field_file'));
+
+  $link_text = t("Download") . " " . strtr($file_type, array('/' => '-', '.' => '-'));
+    // pour le russe on met juste Download
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    if(substr($current_language, 0, 2) == "ru"){
+        $link_text = t("Download");
+    }
+
+  $options['attributes']['title'] = $file_entity->getFilename();
+  $options['attributes']['target'] = '_blank';
+
+  // Classes to add to the file field for icons.
+  $classes = array(
+    'file',
+    // Add a specific class for each and every mime type.
+    'file--mime-' . strtr($mime_type, array('/' => '-', '.' => '-')),
+    // Add a more general class for groups of well known MIME types.
+    'file--' . file_icon_class($mime_type),
+  );
+
+  // Set file classes to the options array.
+  $variables['attributes'] = new Attribute($variables['attributes']);
+  $variables['attributes']->addClass($classes);
+
+  $variables['link'] = \Drupal::l($link_text, Url::fromUri($url, $options));
+}
+
+function theme_boosted_preprocess_page_title(&$variables) {
+
+  /** @var NodeInterface $node */
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    if ($node->bundle() === 'document') {
+       $taxo = Term::load($node->field_document_type->target_id);
+       if($taxo !== NULL){
+         $variables['document_type'] = $taxo->label();
+       }
+    }
+  }
+
+}
+
+/**
+ * Get the set or default image uri for a file image field (if either
+ * exist).
+ * @param $entity
+ * @param $fieldName
+ * @return null|string
+ */
+function get_image_uri($entity, $fieldName){
+    $image_uri = NULL;
+    if($entity->hasField($fieldName)){
+        try{
+            $field = $entity->{$fieldName}; // Try loading from field values first.
+            if($field && $field->target_id){
+                $file = \Drupal\file\Entity\File::load($field->target_id);
+                if($file){
+                    $image_uri = $file->getFileUri();
+                }
+            }
+        } catch(\Exception $e){
+            \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+        }
+        // If a set value above wasn't found, try the default image.
+        if(is_null($image_uri)){
+            try{
+                $field = $entity->get($fieldName); // Loading from field definition
+                if($field){
+                    // From the image module /core/modules/image/ImageFormatterBase.php
+                    // $default_image = $test->fieldDefinition->getFieldStorageDefinition()->getSetting('default_image');
+                    $default_image = $field->getSetting('default_image');
+                    if($default_image && $default_image['uuid']){
+                        // $defaultImageFile = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']));
+                        // See https://www.drupal.org/node/2549139  entityManager is deprecated.
+                        // Use entity.repository instead.
+                        $entityrepository = Drupal::service('entity.repository');
+                        $defaultImageFile = $entityrepository->loadEntityByUuid('file', $default_image['uuid']);
+                        if($defaultImageFile){
+                            $image_uri = $defaultImageFile->getFileUri();
+                        }
+                    }
+                }
+            } catch(\Exception $e){
+                \Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+            }
+        }
+    }
+  return $image_uri;
+}
+
+/**
+ * Converts accentuated characters (àéïöû etc.)
+ * to their ASCII equivalent (aeiou etc.)
+ *
+ * @param  string $str
+ * @param  string $charset
+ * @return string
+ */
+function accent2ascii(string $str, string $charset = 'utf-8'): string
+{
+  $str = htmlentities($str, ENT_NOQUOTES, $charset);
+
+  $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+  $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures
+  $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+  $str = str_replace(' ', '-', $str);
+
+  return $str;
+}

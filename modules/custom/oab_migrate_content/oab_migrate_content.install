@@ -1,0 +1,151 @@
+<?php
+
+include_once 'correspondances/categoriesBlogsD7_to_BlogTypeD8.inc';
+include_once 'correspondances/categoriesBlogsD7_to_BlogThematicsD8.inc';
+include_once 'correspondances/categoriesMagazineD7_to_MagazineFormatD8.inc';
+include_once 'correspondances/formatDocumentD7_to_formatDocumentD8.inc';
+include_once 'correspondances/industriesD7_to_industriesD8.inc';
+include_once 'correspondances/regionsD7_to_regionsD8.inc';
+include_once 'correspondances/solutionsD7_to_DocumentThematicD8.inc';
+include_once 'correspondances/solutionsD7_to_MagazineThematicD8.inc';
+include_once 'correspondances/solutionsD7_to_solutionsD8.inc';
+include_once 'correspondances/solutionsD7_to_thematicD8.inc';
+include_once 'correspondances/press_formats.inc';
+include_once 'correspondances/subhomes.inc';
+
+
+/** Définit l'ordre des updates par rapport aux autres modules
+ * @return mixed
+ */
+function oab_migrate_content_update_dependencies() {
+    //$dependencies['oab_migrate_content'][8005] = array('oab_stephanie' => 8034);
+}
+
+/**
+ * implements hook_uninstall()
+ */
+function oab_migrate_content_uninstall() {
+  $migrate_groups = \Drupal\migrate_plus\Entity\MigrationGroup::loadMultiple();
+  foreach ($migrate_groups AS $migrate_group) {
+    $migrate_group->delete();
+  }
+}
+
+function oab_migrate_content_install() {
+
+    drupal_set_installed_schema_version('oab_migrate_content', 8000);
+
+    $solutions = get_correspondances_soltutionD7_to_solutionD8();
+    \Drupal::state()->set('correspondence_taxo_solution', $solutions);
+
+//BLOGS
+    $categblog_to_thematic = get_correspondances_categoriesBlogD7_to_BlogThematicsD8();
+    \Drupal::state()->set('correspondence_cat_blog_to_thematic_blog', $categblog_to_thematic);
+
+    $categblog_to_type = get_correspondances_categoriesBlogD7_to_BlogTypeD8();
+    \Drupal::state()->set('correspondence_cat_blog_to_type_blog', $categblog_to_type);
+
+// INDUSTRIES
+    $industries = get_correspondances_industriesD7_to_industriesD8();
+    \Drupal::state()->set('correspondence_taxo_industry', $industries);
+
+//REGIONS
+    $regions = get_correspondances_regionsD7_to_regionsD8();
+    \Drupal::state()->set('correspondence_taxo_region', $regions);
+
+    $solution_to_thematic = get_correspondances_soltutionD7_to_thematicD8();
+    \Drupal::state()->set('correspondence_taxo_solution_to_thematic', $solution_to_thematic);
+
+//MAG CATEG TO MAG FORMAT
+    $categmag_to_formatmag = get_correspondances_categoriesMagazineD7_to_MagazineFormatD8();
+    \Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categmag_to_formatmag);
+
+//Solution to mag theme
+    $solution_to_theme_mag = get_correspondances_solutionsD7_to_MagazineThematicD8();
+    \Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_theme_mag);
+
+//solution to doc theme
+    $solution_to_themedoc = get_correspondances_solutionsD7_to_DocumentThematicD8();
+    \Drupal::state()->set('correspondence_solution_to_theme_doc', $solution_to_themedoc);
+
+//format doc to doc format
+    $formatdoc_to_formatdoc = get_correspondances_formatDocumentD7_to_formatDocumentD8();
+    \Drupal::state()->set('correspondence_format_document', $formatdoc_to_formatdoc);
+
+  $subhomes = get_correspondances_subhomes();
+    \Drupal::state()->set('subhomes_ids_for_migration', $subhomes);
+
+    $press_formats = get_correspondances_press_formats();
+  \Drupal::state()->set('press_format_for_migration', $press_formats);
+}
+
+/**
+ * Ajout de la migration du champ Shot description (txt catcher de D7) vers l'accroche (highlight de D8)
+ */
+function oab_migrate_content_update_8001() {
+  include_once("updates/update_8001.inc");
+}
+
+/**
+ * Ajout du format full html sur le body des profils bloggeurs
+ */
+function oab_migrate_content_update_8002() {
+    include_once("updates/update_8002.inc");
+}
+
+
+/**
+ * Ajout de la configuration pour la migration des commentaires
+ */
+function oab_migrate_content_update_8003() {
+    include_once("updates/update_8003.inc");
+}
+
+/**
+ * Modif config des medias image pour migrer les alt et title des images D7
+ */
+function oab_migrate_content_update_8004() {
+    include_once("updates/update_8004.inc");
+}
+
+/**
+ * Mise a jour des correspondances et le state
+ */
+
+function oab_migrate_content_update_8005() {
+    include_once("updates/update_8005.inc");
+}
+/**
+ * Modif config des migrations
+ */
+function oab_migrate_content_update_8006() {
+    include_once("updates/update_8006.inc");
+}
+
+/**
+ * Modif de termes subhomes et theme blog
+ */
+function oab_migrate_content_update_8007() {
+    include_once("updates/update_8007.inc");
+}
+
+/**
+ * correction format de magazine
+ */
+function oab_migrate_content_update_8008() {
+    include_once("updates/update_8008.inc");
+}
+
+/**
+ * Configuration des migrations des offices
+ */
+function oab_migrate_content_update_8009() {
+    include_once("updates/update_8009.inc");
+}
+
+/**
+ * correction correspondances Regions
+ */
+function oab_migrate_content_update_8010() {
+    include_once("updates/update_8010.inc");
+}

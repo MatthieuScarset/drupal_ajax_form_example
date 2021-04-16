@@ -1,0 +1,24 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filtro
+      fields:
+        name:
+          label: 'Nombre de usuario'
+        status:
+          label: Estado
+          settings:
+            format_custom_true: Active
+        roles_target_id:
+          label: Roles
+        operations:
+          label: Operaciones
+      filters:
+        status:
+          group_info:
+            label: Estado
+            group_items:
+              1:
+                title: Active

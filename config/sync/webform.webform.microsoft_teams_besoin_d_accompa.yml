@@ -1,0 +1,356 @@
+uuid: 75e4a316-468a-423f-becb-26b00fe0ea69
+langcode: fr
+status: open
+dependencies:
+  module:
+    - oab_backoffice
+third_party_settings:
+  oab_backoffice:
+    gdpr_business_owner: '1358'
+    gdpr_spoc_security: '1706'
+    gdpr_expiration_date: '2020-12-31'
+    gdpr_business_analysts:
+      2387: '2387'
+      2386: '2386'
+    gdpr_form_published: 1
+open: null
+close: null
+weight: 0
+uid: 86
+template: false
+archive: false
+id: microsoft_teams_besoin_d_accompa
+title: 'Nos experts Microsoft Teams vous répondent dans les meilleurs délais !'
+description: '<p><strong><span style="color:#ff7900;">Microsoft Teams : besoin d’accompagnement</span></strong></p>'
+category: EIC
+elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p><strong>Complétez ce formulaire afin que nos équipes puissent vous contacter pour une réponse personnalisée et gratuite sous 48 heures<br />\\r\\nCet accompagnement est réservé aux entreprises de plus de 50 collaborateurs </strong></p>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Monsieur: Monsieur\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': 'Raison Sociale'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnombre_de_salaries:\n  '#type': textfield\n  '#title': 'Nombre de salariés'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nsiren:\n  '#type': textfield\n  '#title': 'SIREN ou SIRET'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\ntelephone:\n  '#type': textfield\n  '#title': Téléphone\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse e-mail'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nvous_avez_besoin:\n  '#type': checkboxes\n  '#title': '<br/>Vous avez besoin (plusieurs réponses possibles)'\n  '#options':\n    'D’obtenir des licences Microsoft Teams gratuites pendant 6 mois': 'D’obtenir des licences Microsoft Teams gratuites pendant 6 mois'\n    'D’un support technique à la configuration de Teams': 'D’un support technique à la configuration de Teams'\n    'D’un accompagnement à l’utilisation de Teams': 'D’un accompagnement à l’utilisation de Teams'\n  '#required': true\nsi_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa:\n  '#type': checkboxes\n  '#title': '<br/>Si vous n’avez pas de licence Microsoft, à quelle échéance envisagez-vous de déployer la solution collaborative Office 365 ?'\n  '#options':\n    immédiatement: immédiatement\n    'entre 1 et 3 mois': 'entre 1 et 3 mois'\n    'plus de 3 mois': 'plus de 3 mois'\n    'pas de date spécifique': 'pas de date spécifique'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'Pouvez-vous nous préciser en quelques mots votre besoin ?'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: source_entity_webform
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: 'Complétez ce formulaire afin que nos équipes puissent vous contacter pour une réponse personnalisée et gratuite sous 48 heures'
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: inline
+  confirmation_title: ''
+  confirmation_message: "<p><span style=\"font-size:2rem;\">Merci d’avoir rempli ce formulaire, un expert Orange Business Services prendra contact avec vous d’ici 48h (jours ouvrés)</span></p>\r\n\r\n<p><span style=\"font-size:2rem;\">Bien cordialement,</span></p>\r\n\r\n<p><span style=\"font-size:2rem;display:block;margin-bottom:10rem;\"><span style=\"color:#ff7900;\">L'équipe Orange Business Services</span></span></p>"
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  quentin_lagniel_orange_com:
+    id: email
+    label: pierrick.besson@orange.com
+    notes: ''
+    handler_id: quentin_lagniel_orange_com
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: pierrick.besson@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: no-reply@orange-business.com
+      from_options: {  }
+      from_name: _default
+      subject: 'Nouvelle demande depuis : Microsoft Teams : besoin d’accompagnement'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Une nouvelle demande de contact est en ligne</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tUne nouvelle demande pour Microsoft Teams a été soumise par un utilisateur.<br />\r\n\t\t\tVeuillez vous connecter pour en prendre connaissance.<br />\r\n\t\t\t<a href=\"https://backoffice.www.orange-business.com/fr/user\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tCordialement,<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Digitale</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        civilite: civilite
+        nom: nom
+        prenom: prenom
+        societe: societe
+        nombre_de_salaries: nombre_de_salaries
+        siren: siren
+        code_postal: code_postal
+        telephone: telephone
+        adresse_mail: adresse_mail
+        vous_avez_besoin: vous_avez_besoin
+        si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa: si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa
+        message: message
+        donnees_personnelles: donnees_personnelles
+        provenance: provenance
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  pierrick_besson_orange_com:
+    id: email
+    label: svcecommercial.videocollab@orange.com
+    notes: ''
+    handler_id: pierrick_besson_orange_com
+    status: true
+    conditions: {  }
+    weight: 1
+    settings:
+      states:
+        - completed
+      to_mail: svcecommercial.videocollab@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: no-reply@orange-business.com
+      from_options: {  }
+      from_name: _default
+      subject: 'Nouvelle demande depuis : Microsoft Teams : besoin d’accompagnement'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Une nouvelle demande de contact est en ligne</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tUne nouvelle demande pour Microsoft Teams a été soumise par un utilisateur.<br />\r\n\t\t\tVeuillez vous connecter pour en prendre connaissance.<br />\r\n\t\t\t<a href=\"https://backoffice.www.orange-business.com/fr/user\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tCordialement,<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Digitale</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        civilite: civilite
+        nom: nom
+        prenom: prenom
+        societe: societe
+        nombre_de_salaries: nombre_de_salaries
+        siren: siren
+        code_postal: code_postal
+        telephone: telephone
+        adresse_mail: adresse_mail
+        vous_avez_besoin: vous_avez_besoin
+        si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa: si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa
+        message: message
+        donnees_personnelles: donnees_personnelles
+        provenance: provenance
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email:
+    id: email
+    label: Merci
+    notes: ''
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:adresse_mail:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Microsoft Teams : besoin d’accompagnement'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Votre demande de contact</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Confirmation</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour [webform_submission:values:civilite] [webform_submission:values:nom],<br />\r\n\t\t\tNous vous remercions pour votre message. Nos experts prendront contact avec vous dans les plus brefs délais.<br />\r\n\t\t\tMerci de votre visite sur notre site <a href=\"https://www.orange-business.com?utm_source=PageConfirmationTelechargementBibliotheque&amp;utm_medium=Emailing_ENT&amp;utm_campaign=SiteWebOBS&amp;utm_content=lienHP\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe digitale</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        prenom: prenom
+        societe: societe
+        nombre_de_salaries: nombre_de_salaries
+        siren: siren
+        code_postal: code_postal
+        telephone: telephone
+        adresse_mail: adresse_mail
+        vous_avez_besoin: vous_avez_besoin
+        si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa: si_vous_n_avez_pas_de_licence_microsoft_a_quelle_echeance_envisa
+        message: message
+        donnees_personnelles: donnees_personnelles
+        provenance: provenance
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+variants: {  }

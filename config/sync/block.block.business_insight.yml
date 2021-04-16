@@ -1,0 +1,28 @@
+uuid: e606cfcb-74db-4180-818d-c2d8cadec2b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: business_insight
+theme: theme_boosted
+region: top_zone
+weight: -47
+provider: null
+plugin: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+settings:
+  id: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+  label: business_insight
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/visions-business\r\n/business-insight"
+    negate: false
+    context_mapping: {  }

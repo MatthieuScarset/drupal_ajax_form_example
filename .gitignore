@@ -1,13 +1,32 @@
-drupal.buildpath
-.settings
-.project
-nbproject/
-.idea/
-log/
-files_media_d7_20170602/
-.metadata/
-dump_bdd/
-files_D7/
-/portail/robots.txt
+# Ignore configuration files that may contain sensitive information
+/sites
+/core
+/vendor
+/modules/README.txt
+/modules/contrib
+/profiles/README.txt
+/themes/README.txt
+/themes/contrib
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/.ht.router.php
+/.htaccess
+/autoload.php
+/example.gitignore
+/index.php
+/INSTALL.txt
+/LICENSE.txt
+/README.txt
+/robots.txt
+/update.php
+/web.config
 
-/portail/sites/default
+# Ignore IDE conf
+/.idea
+
+# Ignore config data
+/config/data
+

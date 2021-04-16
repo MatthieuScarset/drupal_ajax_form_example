@@ -1,0 +1,29 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      fields:
+        name:
+          label: 'Имя пользователя'
+        status:
+          label: Статус
+          settings:
+            format_custom_true: Active
+        roles_target_id:
+          label: Роли
+        operations:
+          label: Операции
+      filters:
+        status:
+          group_info:
+            label: Статус
+            group_items:
+              1:
+                title: Active

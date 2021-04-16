@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_node_predelete().
+ */
+function oab_synomia_search_flux_node_predelete(\Drupal\node\Entity\Node $node) {
+
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+    if (!empty($node)) {
+        //lors de la suppression d'un node, on enregistre l'url et l'id du node supprimé pour le transmettre au sitemap Synomia
+        $deleted_content = new \Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent();
+        $deleted_content->setNid($node->id());
+        $deleted_content->setContentType($node->bundle());
+        $deleted_content->setLanguage($node->language()->getId());
+        $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id(), $node->language()->getId());
+        $deleted_content->setUrl($alias);
+        $deleted_content->setDeleted(time());
+        $deleted_content->save();
+    }
+
+}
+
+
+/**
+ * Implements hook_page_attachments().
+ */
+function oab_synomia_search_flux_page_attachments(array &$attachments) {
+    //Ajout de la méta rubrique pour la catégorisation de Synomia
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (!empty($node) && is_object($node)) {
+        //oabt($node, true);
+        $synomia_rubrique = [
+            '#tag' => 'meta',
+            '#attributes' => [
+                'name' => 'rubrique',
+                'content' => $node->getType(),
+            ],
+        ];
+        $attachments['#attached']['html_head'][] = [$synomia_rubrique, 'rubrique'];
+    }
+}

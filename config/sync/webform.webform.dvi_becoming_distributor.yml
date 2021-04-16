@@ -1,0 +1,290 @@
+uuid: null
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+weight: 0
+uid: 1
+template: false
+archive: false
+id: dvi_becoming_distributor
+title: 'DVI - Becoming distributor'
+description: ''
+category: DVI
+elements: "'#attributes':\n  class:\n    - webform-dvi-becoming-distributor\ncss_hook:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">\\r\\n.webform-submission-dvi-contact-distributor-add-form .container,\\r\\n.webform-submission-dvi-contact-distributor-add-form .container .row {\\r\\n\\tmargin:0!important;\\r\\n\\tpadding:0!important;\\r\\n}\\r\\n.webform-submission-form .captcha {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\ninput#edit-submit--2 {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\n#block-phonenumber .text-align-left {\\r\\n\\tmargin-right:0!important;\\r\\n\\tpadding: 0.7rem 0 0.7rem 2rem!important;\\r\\n}\\r\\n.phonenumber {\\r\\n    display: block;\\r\\n    border: solid 1px black!important;\\r\\n    margin: 1rem 0.8rem!important;\\r\\n}\\r\\nspan.phone_number_block_title {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\n.intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=text], .intl-tel-input.separate-dial-code input[type=tel] {\\r\\n    padding-right: 36px!important;\\r\\n}\\r\\n.form-group .container, .form-group .container .row, .form-group .container .row .col-sm-12 {\\r\\n\\tpadding:0!important;\\r\\n\\tmargin-left:0!important;\\r\\n}\\r\\n.container.webform-dvi-becoming-distributor-form-element {\\r\\n    padding-left: 3rem!important;\\r\\n}\\r\\n</style>\\r\\n\"\n  '#format': full_html\ndvi_becoming_distributor_description:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"color:#e74c3c;\\\">* Champs obligatoires</span></p>\\r\\n\"\n  '#format': full_html\nentreprise:\n  '#type': container\n  votre_societe_desc:\n    '#type': processed_text\n    '#wrapper_attributes':\n      class:\n        - form-title\n    '#text': \"<h3 class=\\\"titre4\\\">Votre société</h3>\\n\"\n    '#format': full_html\n  business_name:\n    '#type': textfield\n    '#title': 'Raison sociale'\n    '#required': true\n  sector:\n    '#type': select\n    '#title': 'Votre secteur'\n    '#options':\n      professionnal: Professionnel\n      pme_entreprise: 'PME / Entreprise'\n      public_sector: 'Secteur public'\n    '#required': true\n  siren:\n    '#type': textfield\n    '#title': SIREN\n    '#required': true\n  nombre_de_salaries:\n    '#type': number\n    '#title': 'Nombre de salariés'\n    '#required': true\n  anciennete_dans_le_domaine_des_telecoms_en_annee_:\n    '#type': number\n    '#title': 'Ancienneté dans le domaine des télécoms (en année)'\n    '#required': true\n  logo:\n    '#type': webform_image_file\n    '#title': Logo\n    '#required': true\n  address:\n    '#type': textfield\n    '#title': Adresse\n    '#required': true\n  zip_code:\n    '#type': textfield\n    '#title': 'Code postal'\n    '#required': true\n  city:\n    '#type': textfield\n    '#title': Ville\nvous:\n  '#type': container\n  vous_desc:\n    '#type': processed_text\n    '#text': \"<h3 class=\\\"titre4\\\">Vous</h3>\\n\"\n    '#format': full_html\n  last_name:\n    '#type': textfield\n    '#title': Nom\n    '#required': true\n  first_name:\n    '#type': textfield\n    '#title': Prénom\n  e_mail:\n    '#type': email\n    '#title': 'E-mail professionnel'\n    '#required': true\n  tel:\n    '#type': tel\n    '#title': Tel\n    '#required': true\n    '#international': true\n    '#international_initial_country': FR\n  additional_information:\n    '#type': textarea\n    '#title': 'Informations complémentaires'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#required': true\n  '#select2': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#attributes':\n    class:\n      - dvi-becoming-distributor-submit-container\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
+  page: false
+  page_submit_path: ''
+  page_confirm_path: ''
+  page_theme_name: ''
+  form_title: both
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_remote_addr: true
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_disable_inline_errors: false
+  form_required: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  form_access_denied: default
+  form_access_denied_title: ''
+  form_access_denied_message: ''
+  form_access_denied_attributes: {  }
+  form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
+  submission_label: ''
+  submission_log: false
+  submission_views: {  }
+  submission_views_replace: {  }
+  submission_user_columns: {  }
+  submission_user_duplicate: false
+  submission_access_denied: default
+  submission_access_denied_title: ''
+  submission_access_denied_message: ''
+  submission_access_denied_attributes: {  }
+  submission_exception_message: ''
+  submission_locked_message: ''
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
+  previous_submission_message: ''
+  previous_submissions_message: ''
+  autofill: false
+  autofill_message: ''
+  autofill_excluded_elements: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
+  wizard_start_label: ''
+  wizard_preview_link: false
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
+  confirmation_type: page
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
+  confirmation_update: false
+  limit_total: null
+  limit_total_interval: null
+  limit_total_message: ''
+  limit_total_unique: false
+  limit_user: null
+  limit_user_interval: null
+  limit_user_message: ''
+  limit_user_unique: false
+  entity_limit_total: null
+  entity_limit_total_interval: null
+  entity_limit_user: null
+  entity_limit_user_interval: null
+  purge: none
+  purge_days: null
+  results_disabled: false
+  results_disabled_ignore: false
+  results_customize: false
+  token_view: false
+  token_update: false
+  serial_disabled: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  administer:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  configuration:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers:
+  email_to_user:
+    id: email
+    label: 'Email to user'
+    notes: ''
+    handler_id: email_to_user
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:e_mail:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: contact.dvi@orange.com
+      from_options: {  }
+      from_name: 'DVI Orange'
+      subject: 'Demande d’inscription partenaire Orange Business'
+      body: "<div style=\"margin-top: 0pt; margin-bottom: 0pt; text-align: left;\"><span style=\"language:fr\"><span style=\"line-height:normal\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:hanging\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"language:fr\">Bonjour,</span></span></span></span></span></span></span></span></span></div>\n\n<div style=\"margin-top: 0pt; margin-bottom: 0pt; text-align: left;\"><span style=\"language:fr\"><span style=\"line-height:normal\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:hanging\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"language:fr\">Nous avons bien re&ccedil;u votre demande d&rsquo;inscription et nous la traiterons dans les d&eacute;lais les plus brefs.</span></span></span></span></span></span></span></span></span></div>\n\n<div style=\"margin-top: 0pt; margin-bottom: 0pt; text-align: left;\">&nbsp;</div>\n\n<div style=\"margin-top: 0pt; margin-bottom: 0pt; text-align: left;\"><span style=\"language:fr\"><span style=\"line-height:normal\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:hanging\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"language:fr\">Cordialement,</span></span></span></span></span></span></span></span></span></div>\n\n<div style=\"margin-top: 0pt; margin-bottom: 0pt; text-align: left;\"><span style=\"language:fr\"><span style=\"line-height:normal\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:hanging\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"language:fr\">La Direction des Ventes Indirectes.</span></span></span></span></span></span></span></span></span></div>"
+      excluded_elements:
+        business_name: business_name
+        logo: logo
+        sector: sector
+        address: address
+        zip_code: zip_code
+        city: city
+        last_name: last_name
+        first_name: first_name
+        e_mail: e_mail
+        tel: tel
+        additional_information: additional_information
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_to_dvi_team:
+    id: email
+    label: 'Email to DVI team'
+    notes: ''
+    handler_id: email_to_dvi_team
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: sarah1.rebiai@orange.com
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: '[webform_submission:values:e_mail:raw]'
+      from_options: {  }
+      from_name: '[webform_submission:values:last_name] [webform_submission:values:first_name]'
+      subject: 'Demande d’inscription partenaire – ([webform_submission:values:zip_code]) - [webform_submission:values:business_name]'
+      body: "<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\"><span style=\"language:fr\"><span style=\"line-height:90%\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:simple\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"letter-spacing:-.2pt\"><span style=\"language:fr\">Société </span></span></span></span></span></span></span></span></span></span>: [webform_submission:values:business_name]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\">[webform_submission:values:last_name] [webform_submission:values:first_name]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\"><span style=\"language:fr\"><span style=\"line-height:90%\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:simple\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"letter-spacing:-.2pt\"><span style=\"language:fr\">Email </span></span></span></span></span><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"letter-spacing:-.2pt\"><span style=\"language:fr\">: </span></span></span></span></span></span></span></span></span></span>[webform_submission:values:e_mail]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\"><span style=\"language:fr\"><span style=\"line-height:90%\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:simple\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"letter-spacing:-.2pt\"><span style=\"language:fr\">Contacter au numéro : </span></span></span></span></span></span></span></span></span></span>[webform_submission:values:tel]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\">[webform_submission:values:address]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\">[webform_submission:values:zip_code]<span style=\"language:fr\"><span style=\"line-height:90%\"><span style=\"unicode-bidi:embed\"><span style=\"vertical-align:baseline\"><span style=\"punctuation-wrap:simple\"><span style=\"font-size:11.0pt\"><span style=\"font-family:&quot;Helvetica 75 Bold&quot;\"><span style=\"color:black\"><span style=\"letter-spacing:-.2pt\"><span style=\"language:fr\"> </span></span></span></span></span></span></span></span></span></span>[webform_submission:values:city]</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\">&nbsp;</p>\r\n\r\n<p style=\"margin-top:6.0pt; margin-bottom:0pt; text-align:left\">[webform_submission:values:additional_information]</p>"
+      excluded_elements:
+        business_name: business_name
+        sector: sector
+        logo: logo
+        address: address
+        zip_code: zip_code
+        city: city
+        last_name: last_name
+        first_name: first_name
+        e_mail: e_mail
+        tel: tel
+        additional_information: additional_information
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+variants: {  }

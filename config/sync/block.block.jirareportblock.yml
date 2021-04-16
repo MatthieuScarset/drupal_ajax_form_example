@@ -1,0 +1,31 @@
+uuid: 8abfc013-c24c-4a97-8213-5c5cfac9d2ab
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_backoffice
+    - user
+  theme:
+    - theme_boosted
+id: jirareportblock
+theme: theme_boosted
+region: content
+weight: -47
+provider: null
+plugin: jira_report_block
+settings:
+  id: jira_report_block
+  label: 'JIRA report block'
+  provider: oab_backoffice
+  label_display: '0'
+  jira_report_code: 'https://jira-build.orangeapplicationsforbusiness.com/s/96d7e41df7891a94f4e7689e8e66cf85-T/en_US-sccndq/64027/51/1.4.27/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=891ebd03'
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+      chief_editor: chief_editor
+      digital_admin: digital_admin
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
