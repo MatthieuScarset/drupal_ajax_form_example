@@ -5,13 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.cloud_service_provider.field_content
+    - field.field.node.cloud_service_provider.field_csp_location
     - field.field.node.cloud_service_provider.field_facturation
     - field.field.node.cloud_service_provider.field_futher_information
     - field.field.node.cloud_service_provider.field_location
     - field.field.node.cloud_service_provider.field_logo
-    - field.field.node.cloud_service_provider.field_office_country
     - field.field.node.cloud_service_provider.field_p_wysiwyg_rebond
     - field.field.node.cloud_service_provider.field_partner_website
+    - field.field.node.cloud_service_provider.field_provider_type
     - field.field.node.cloud_service_provider.field_technical_qualification
     - field.field.node.cloud_service_provider.field_type_of_cloud_services
     - node.type.cloud_service_provider
@@ -29,13 +30,14 @@ content:
     region: content
 hidden:
   field_content: true
+  field_csp_location: true
   field_facturation: true
   field_futher_information: true
   field_location: true
   field_logo: true
-  field_office_country: true
   field_p_wysiwyg_rebond: true
   field_partner_website: true
+  field_provider_type: true
   field_technical_qualification: true
   field_type_of_cloud_services: true
   langcode: true

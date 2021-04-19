@@ -1,16 +1,16 @@
-uuid: 3b3869d8-3e39-43df-a127-eeb86544027b
+uuid: ec8eccb1-143b-45bc-a582-0b48dbea2e63
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_office_country
+    - field.storage.node.field_provider_type
     - node.type.cloud_service_provider
-    - taxonomy.vocabulary.office_countries
-id: node.cloud_service_provider.field_office_country
-field_name: field_office_country
+    - taxonomy.vocabulary.service_providers
+id: node.cloud_service_provider.field_provider_type
+field_name: field_provider_type
 entity_type: node
 bundle: cloud_service_provider
-label: Country
+label: 'Provider type'
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      office_countries: office_countries
+      service_providers: service_providers
     sort:
       field: name
       direction: asc

@@ -3,21 +3,23 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.browser_file_modal
+    - entity_browser.browser.browse_media_modal
     - field.field.node.cloud_service_provider.field_content
+    - field.field.node.cloud_service_provider.field_csp_location
     - field.field.node.cloud_service_provider.field_facturation
     - field.field.node.cloud_service_provider.field_futher_information
     - field.field.node.cloud_service_provider.field_location
     - field.field.node.cloud_service_provider.field_logo
-    - field.field.node.cloud_service_provider.field_office_country
     - field.field.node.cloud_service_provider.field_p_wysiwyg_rebond
     - field.field.node.cloud_service_provider.field_partner_website
+    - field.field.node.cloud_service_provider.field_provider_type
     - field.field.node.cloud_service_provider.field_technical_qualification
     - field.field.node.cloud_service_provider.field_type_of_cloud_services
     - node.type.cloud_service_provider
   module:
     - entity_browser
     - field_group
+    - geolocation_leaflet
     - link
     - paragraphs
     - path
@@ -44,8 +46,8 @@ third_party_settings:
       children:
         - langcode
         - title
-        - field_name
         - field_content
+        - field_csp_location
         - field_technical_qualification
         - field_futher_information
         - field_facturation
@@ -89,8 +91,8 @@ third_party_settings:
     group_classify:
       children:
         - field_type_of_cloud_services
-        - field_office_country
         - field_location
+        - field_provider_type
       parent_name: group_onglets
       weight: 23
       format_type: tab
@@ -120,12 +122,37 @@ bundle: cloud_service_provider
 mode: default
 content:
   field_content:
-    weight: 5
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_csp_location:
+    weight: 5
+    settings:
+      centre:
+        fit_bounds:
+          enable: true
+      auto_client_location: ''
+      auto_client_location_marker: ''
+      allow_override_map_settings: 0
+      hide_textfield_form: false
+      leaflet_settings:
+        map_features:
+          leaflet_control_zoom:
+            enabled: true
+          leaflet_marker_popup:
+            enabled: true
+          leaflet_control_geocoder:
+            enabled: true
+            weight: -100
+        zoom: '10'
+        height: 400px
+        width: 100%
+    third_party_settings: {  }
+    type: geolocation_leaflet
     region: content
   field_facturation:
     weight: 8
@@ -144,7 +171,7 @@ content:
     type: text_textarea
     region: content
   field_location:
-    weight: 16
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -152,7 +179,7 @@ content:
   field_logo:
     weight: 11
     settings:
-      entity_browser: browser_file_modal
+      entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_display_settings:
         view_mode: default
@@ -163,12 +190,6 @@ content:
       open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
-    region: content
-  field_office_country:
-    weight: 15
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
     region: content
   field_p_wysiwyg_rebond:
     weight: 17
@@ -195,6 +216,12 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_provider_type:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_technical_qualification:
     weight: 6

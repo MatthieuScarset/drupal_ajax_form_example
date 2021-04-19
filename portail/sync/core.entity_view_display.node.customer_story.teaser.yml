@@ -71,7 +71,9 @@ hidden:
   field_hub_portal: true
   field_industry: true
   field_insight: true
+  field_insight_type: true
   field_job_profile: true
+  field_local_nav: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
@@ -84,5 +86,9 @@ hidden:
   field_solution: true
   field_start_date: true
   field_subhome: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

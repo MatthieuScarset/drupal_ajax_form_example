@@ -1,0 +1,21 @@
+uuid: 51664849-b0e9-49cd-9f00-da1be1a54528
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_csp_location
+    - node.type.cloud_service_provider
+  module:
+    - geolocation
+id: node.cloud_service_provider.field_csp_location
+field_name: field_csp_location
+entity_type: node
+bundle: cloud_service_provider
+label: 'Csp location'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation
