@@ -462,6 +462,9 @@ function theme_boosted_preprocess_region(&$variables) {
 
 function theme_boosted_preprocess_menu(&$variables, $hook) {
   if (strpos($hook, 'menu__main') !== false) {
+
+    $variables['#cache']['contexts'][0] = 'url';
+
     $current_path = \Drupal::request()->getRequestUri();
     $items = $variables['items'];
     $item_title = "";
