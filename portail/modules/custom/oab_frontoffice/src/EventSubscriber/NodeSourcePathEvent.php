@@ -38,8 +38,8 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
         $request = $event->getRequest();
 
         if ($request->attributes->has('exception')
-          && (is_a($request->attributes->get('exception'),NotFoundHttpException::class)
-            || is_a($request->attributes->get('exception'),AccessDeniedHttpException::class))
+          && (is_a($request->attributes->get('exception'), NotFoundHttpException::class)
+            || is_a($request->attributes->get('exception'), AccessDeniedHttpException::class))
         ) {
 
             $code = $request->attributes->get('exception')->getStatusCode();

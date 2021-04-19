@@ -83,8 +83,7 @@ function oab_subhomes_theme_suggestions_subhome_entity(array $variables) {
 }
 
 
-function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
-                                                         $cacheable) {
+function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, $cacheable, ContentEntityInterface $entity = NULL) {
     $allowed_values = array (
         "black-on-orange"   => "Black on Orange",
         "white-on-orange"   => "White on Orange",
@@ -104,8 +103,7 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
     return $allowed_values;
 }
 
-function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
-                                     $cacheable) {
+function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, $cacheable, ContentEntityInterface $entity = NULL) {
     $allowed_values = array (
         "btn-txt-white-bg-black"   => "Texte blanc, fond noir",
         "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
