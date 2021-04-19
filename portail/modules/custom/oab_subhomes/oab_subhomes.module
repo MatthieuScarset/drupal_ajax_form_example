@@ -132,7 +132,7 @@ function oab_subhomes_preprocess_views_view(&$variables) {
          */
         if (isset($view->argument['field_subhome_target_id'])) {
 
-            $sid = $view->argument['field_subhome_target_id']->value;
+            $sid = $view->argument['field_subhome_target_id']->getValue();
             $entity = SubhomeEntity::loadBySubhomeId($sid);
 
             // Si on a trouvé une entité pour la subhome et qu'elle est de type presse, je load les press_kits de la langue
