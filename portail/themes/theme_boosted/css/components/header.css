@@ -554,6 +554,10 @@
         padding: 0.5rem 0;
     }
 
+   .navbar-nav > li.active-trail > a {
+      color: #f16e00 !important;
+    }
+
     #items_megamenu > div h3 {
         border-bottom: 1px solid white;
     }

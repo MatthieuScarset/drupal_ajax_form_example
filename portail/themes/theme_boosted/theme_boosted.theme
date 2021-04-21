@@ -141,7 +141,6 @@ function theme_boosted_theme_suggestions_node_alter(array &$suggestions, array $
   }
 }
 
-
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
@@ -181,8 +180,6 @@ function theme_boosted_theme_suggestions_input_alter(array &$suggestions, array 
 
 }
 
-
-
 function theme_boosted_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
 
     /**
@@ -213,13 +210,11 @@ function theme_boosted_theme_suggestions_page_alter(array &$suggestions, array $
     }
 }
 
-
 function theme_boosted_theme_suggestions_fieldset_alter(array &$suggestoins, array $variables, $hook) {
     if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
         $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
-
 
 function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook){
 
@@ -255,7 +250,6 @@ function theme_boosted_theme_suggestions_form_element_alter(array &$suggestions,
         $suggestions[] = $hook . '__' . 'field_insight_type';
     }
 }
-
 
 function theme_boosted_preprocess_node(&$variables) {
 
@@ -466,9 +460,42 @@ function theme_boosted_preprocess_region(&$variables) {
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
 
-function theme_boosted_preprocess_menu(&$variables) {
-  $variables['url'] = $_SERVER['REQUEST_URI'];
-  $variables['#cache']['contexts'][] = 'url.path';
+function theme_boosted_preprocess_menu(&$variables, $hook) {
+  if (strpos($hook, 'menu__main') !== false) {
+
+    $variables['#cache']['contexts'][0] = 'url';
+
+    $current_path = \Drupal::request()->getRequestUri();
+    $items = $variables['items'];
+    $item_title = "";
+
+    foreach ($items as $key => $item) {
+      $item_title = mb_strtolower(accent2ascii($item['title']));
+      $url_fragments = explode('/', $current_path);
+
+      if (count($url_fragments) > 1 and $url_fragments[2] === $item_title) {
+        $item['attributes']->addClass('active-trail');
+      } elseif ($url_fragments[2] === 'iot') {
+        if ($hook === 'menu__main_navigation_fr' and $item['title'] === 'Produits') {
+          $item['attributes']->addClass('active-trail');
+        } elseif ($hook === 'menu__main' and $item['title'] === 'Solutions') {
+          $item['attributes']->addClass('active-trail');
+        }
+      } elseif ($hook === 'menu__main' and $url_fragments[2] === 'products' and $item['title'] === 'Solutions') {
+        $item['attributes']->addClass('active-trail');
+      } elseif ($item['in_active_trail'] AND $url_fragments[2] !== 'products' ) {
+        $item['attributes']->addClass('active-trail');
+      }
+    }
+  }
+  elseif (strpos($hook, 'menu__top_navbar_fr') !== false) {
+    $items = $variables['items'];
+    foreach ($items as $key => $item) {
+      if ($item['title'] == 'Entreprises') {
+        $item['attributes']->addClass('active-trail');
+      }
+    }
+  }
 }
 
 function theme_boosted_preprocess_views_view(&$variables) {
@@ -539,7 +566,6 @@ function theme_boosted_preprocess_views_view(&$variables) {
   }
 }
 
-
 function theme_boosted_preprocess_views_view_list(&$variables) {
   $view = $variables['view'];
   $id = $view->storage->id();
@@ -555,6 +581,7 @@ function theme_boosted_preprocess_views_view_list(&$variables) {
 	}
 
 }
+
 function theme_boosted_preprocess_views_view_fields(&$variables){
 	$view = $variables['view'];
 	$id = $view->storage->id();
@@ -687,4 +714,24 @@ function get_image_uri($entity, $fieldName){
         }
     }
   return $image_uri;
+}
+
+/**
+ * Converts accentuated characters (àéïöû etc.)
+ * to their ASCII equivalent (aeiou etc.)
+ *
+ * @param  string $str
+ * @param  string $charset
+ * @return string
+ */
+function accent2ascii(string $str, string $charset = 'utf-8'): string
+{
+  $str = htmlentities($str, ENT_NOQUOTES, $charset);
+
+  $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+  $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str); // pour les ligatures
+  $str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+  $str = str_replace(' ', '-', $str);
+
+  return $str;
 }
