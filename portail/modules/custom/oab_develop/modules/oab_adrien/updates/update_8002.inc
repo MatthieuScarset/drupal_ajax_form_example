@@ -96,7 +96,7 @@ $collection->write('oab_subhomes.subhomes', $config_fr);
 ## Rechargement de la conf des subhomes pour ajouter la nouvelle subhome
 oabt_YmlImport('views.view.subhomes.yml');
 
-\Drupal::service('path.alias_storage')->save("/subhome_iot_achievement", "/iot/customer-stories", "en");
-\Drupal::service('path.alias_storage')->save("/subhome_iot_achievement", "/iot/temoignages-clients", "fr");
-\Drupal::service('path.alias_storage')->save("/subhome_iot_products", "/iot/products", "en");
-\Drupal::service('path.alias_storage')->save("/subhome_iot_products", "/iot/produits", "fr");
+\Drupal::service('path.alias_storage')->save("/subhome_iot_achievement", "/solutions/iot/customer-stories", "en");
+\Drupal::service('path.alias_storage')->save("/subhome_iot_achievement", "/solutions/iot/temoignages-clients", "fr");
+\Drupal::service('path.alias_storage')->save("/subhome_iot_products", "/solutions/iot/products", "en");
+\Drupal::service('path.alias_storage')->save("/subhome_iot_products", "/solutions/iot/produits", "fr");

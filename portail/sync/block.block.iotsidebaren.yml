@@ -1,9 +1,9 @@
-uuid: e67c9454-bcd2-4662-ab0a-e53adf51baac
+uuid: 5cc02adc-69bc-4184-9ab6-04a6e597e333
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:25b800de-f983-4990-93b3-b25376b2209f'
+    - 'block_content:basic:5fd49f9f-4404-453d-bf12-a09d01df0b98'
   module:
     - block_content
     - system
@@ -14,9 +14,9 @@ theme: theme_boosted
 region: sidebar
 weight: 0
 provider: null
-plugin: 'block_content:25b800de-f983-4990-93b3-b25376b2209f'
+plugin: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
 settings:
-  id: 'block_content:25b800de-f983-4990-93b3-b25376b2209f'
+  id: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
   label: 'IoT Sidebar EN'
   provider: block_content
   label_display: '0'
@@ -26,6 +26,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/iot/products\r\n/iot/customer-stories"
+    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"
     negate: false
     context_mapping: {  }

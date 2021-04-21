@@ -25,3 +25,30 @@ function oab_adrien_update_8002() {
 function oab_adrien_update_8003() {
   include_once("updates/update_8003.inc");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  Ajout des 4 blocks IoT
+ */
+function oab_adrien_update_8007() {
+  include_once("updates/update_8007.inc");
+}
