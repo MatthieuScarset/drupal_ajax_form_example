@@ -1,0 +1,21 @@
+uuid: db03f1d2-a9de-4949-a669-54c1c9533d85
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_wysiwyg_zone_2
+    - node.type.homepage
+  module:
+    - text
+id: node.homepage.field_wysiwyg_zone_2
+field_name: field_wysiwyg_zone_2
+entity_type: node
+bundle: homepage
+label: 'Wysiwyg Zone 2'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

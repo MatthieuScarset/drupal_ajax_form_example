@@ -1,17 +1,16 @@
-uuid: null
-langcode: en
+uuid: 3e22bf94-cd34-400c-929a-6ac540e11320
+langcode: fr
 status: true
 dependencies:
   module:
-    - media_entity
     - node
-id: node.field_visual_tile
-field_name: field_visual_tile
+    - text
+id: node.field_wysiwyg_zone_2
+field_name: field_wysiwyg_zone_2
 entity_type: node
-type: entity_reference
-settings:
-  target_type: media
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true
