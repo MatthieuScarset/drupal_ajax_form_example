@@ -23,21 +23,25 @@ targetEntityType: node
 bundle: cloud_service_provider
 mode: teaser
 content:
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
+  field_logo:
+    type: entity_reference_entity_view
+    weight: 0
     region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
 hidden:
   field_content: true
   field_csp_location: true
   field_facturation: true
   field_futher_information: true
   field_location: true
-  field_logo: true
   field_p_wysiwyg_rebond: true
   field_partner_website: true
   field_provider_type: true
   field_technical_qualification: true
   field_type_of_cloud_services: true
   langcode: true
+  links: true

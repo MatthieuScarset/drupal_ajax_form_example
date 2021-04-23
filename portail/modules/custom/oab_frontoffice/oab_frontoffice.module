@@ -356,6 +356,48 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             $form['field_insight_type_target_id']['#type'] = "radios";
         }
     }
+    //formulaire de recherche de la carte BVPN Gallerie
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-map-page') {
+      foreach ($form AS $key => $value) {
+        if (isset($value['#type'])
+          && $value['#type'] == "textfield") {
+          $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
+        }
+      }
+
+      /**
+       * je cache le bouton "Apply" s'il n'y a plus de filtre
+       */
+      $has_filters = false;
+      foreach ($form["#info"] as $filter_name => $filter_infos) {
+        if (isset($form[$filter_infos['value']])) {
+          $has_filters = true;
+        }
+      }
+
+      if (!$has_filters) {
+        $form['actions']['submit']['#attributes']['class'][] = 'hidden';
+      }
+    }
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-block') {
+        //on cache le champ location qui est déjà présent avec la MAP
+        $form['title']['#attributes']['placeholder'] = t('CSP Name');
+
+        $form['location']['#type'] = 'hidden';
+        /*$form['submit']['#prefix'] = '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>';
+        $form['submit']['#attributes']['class'] = 'search-link';
+        $form['submit']['#value'] = '';
+        $form['submit']['#suffix'] = '</div>';*/
+        unset($form['actions']);
+
+        $form['submit'] = [
+          '#type' => 'submit',
+          '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
+          '#attributes'=> ['class'=>['search-link']],
+          '#suffix' => '</div>',
+        ];
+       // kint($form);
+    }
 
 }
 

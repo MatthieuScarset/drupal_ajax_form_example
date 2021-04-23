@@ -1,0 +1,15 @@
+uuid: 39a227f9-25e5-49cf-9b11-d486bd1d5e07
+langcode: en
+status: true
+dependencies: {  }
+name: csp_logo_gallery_style
+label: 'CSP Logo gallery Style'
+effects:
+  a2e62678-bc0f-42f5-b1d9-9faafa01034e:
+    uuid: a2e62678-bc0f-42f5-b1d9-9faafa01034e
+    id: image_scale
+    weight: 1
+    data:
+      width: 100
+      height: null
+      upscale: false

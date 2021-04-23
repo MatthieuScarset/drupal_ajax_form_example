@@ -1,0 +1,125 @@
+.popup-marker-bvpn-gallery{
+  display: inline-block;
+}
+
+.popup-marker-bvpn-gallery .popup-marker-bvpn-gallery-marker-icone{
+  display: inline-block;
+
+}
+
+.popup-marker-bvpn-gallery .popup-marker-bvpn-gallery-fields{
+  display: inline-block;
+}
+
+.popup-marker-bvpn-gallery .popup-marker-bvpn-gallery-fields .views-field-title span{
+  color: #666666;
+  font-size: 1.077em;
+  line-height: 40px;
+  margin-bottom: 2px;
+}
+.view-bvpn-gallery{
+  margin: 0 !important;
+}
+.view-bvpn-gallery form#views-exposed-form-bvpn-gallery-csp-map-page,
+.view-bvpn-gallery form#views-exposed-form-bvpn-gallery-csp-list-block{
+  background-color: white;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.view-bvpn-gallery > div,
+.view-bvpn-gallery > div > div{
+  padding: 0;
+}
+.view-bvpn-gallery .addresses-list{
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 530px;
+ /* overflow: scroll;*/
+}
+.view-bvpn-gallery .addresses-list .view-bvpn-gallery .view-content{
+  overflow: scroll;
+  height: 450px;
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul{
+  list-style:none;
+  padding: 0;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress{
+  height: 115px;
+  border-bottom: 2px solid #ececec;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress.selected{
+  background-color: #ececec;
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul li:last-of-type .row-csp-adress{
+  border: 0;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .icon-marker-list{
+  float: left;
+  height: 100%;
+  width: 20%;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations{
+  height: 100%;
+  float: left;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .icon-marker-list img{
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .views-field-title span{
+  color: #666;
+  font-weight: bold;
+}
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .views-field-title {
+
+  margin-bottom: 10px;
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .geolocation-data{
+  display: none;
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .views-field-field-csp-location{
+  display: none;
+}
+
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .link-csp-content,
+.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress .csp-informations .link-csp-content a{
+  color: #ff7900;
+  text-decoration: underline;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.addresses-list .view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-item-title input,
+.addresses-list .view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-item-title{
+  float: left;
+}
+
+.addresses-list .view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-item-title input{
+  width: 85%;
+  float: left;
+}
+.view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .glyphicon-search {
+  font-size: 2.8rem !important;
+}
+.addresses-list .view-id-bvpn_gallery .view-filters{
+  border-bottom: 2px solid #ececec;
+}
+.view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search,
+.view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search i,
+.view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-link{
+  position: absolute;
+  top: 15px;
+  right: 8px;
+}
+.view-id-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-link{
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: 0 none;
+  display: inline-block;
+}
