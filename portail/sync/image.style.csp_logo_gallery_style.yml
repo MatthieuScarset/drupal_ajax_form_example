@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies: {  }
 name: csp_logo_gallery_style
-label: 'CSP Logo gallery Style'
+label: 'CSP Logo gallery Style - height 50px'
 effects:
   a2e62678-bc0f-42f5-b1d9-9faafa01034e:
     uuid: a2e62678-bc0f-42f5-b1d9-9faafa01034e
     id: image_scale
     weight: 1
     data:
-      width: 100
-      height: null
+      width: 140
+      height: 50
       upscale: false

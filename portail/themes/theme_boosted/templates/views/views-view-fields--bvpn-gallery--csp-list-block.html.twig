@@ -32,10 +32,6 @@
  */
 #}
 <div class="row-csp-adress" id="csp-block-adress-{{ row.nid }}">
-  <div class="icon-marker-list">
-    <img src="/themes/theme_boosted/images/marker-obs.png">
-  </div>
-  <div class="csp-informations">
     {% for field in fields -%}
       {{ field.separator }}
       {%- if field.wrapper_element -%}
@@ -58,7 +54,6 @@
       {%- endif %}
     {%- endfor %}
     <div class="link-csp-content">
-      <a href="{{ nodeAbsoluteUrl('entity.node.canonical',row.nid, true) }}">+ d'info</a>
+      <a href="{{ nodeAbsoluteUrl('entity.node.canonical',row.nid, true) }}">{% trans %}more information{% endtrans %}</a>
     </div>
-  </div>
 </div>

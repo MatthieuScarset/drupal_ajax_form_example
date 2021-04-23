@@ -361,7 +361,8 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
+          kint($key);
+          $form[$key] = change_textfield_to_select($key);
         }
       }
 
@@ -378,24 +379,42 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       if (!$has_filters) {
         $form['actions']['submit']['#attributes']['class'][] = 'hidden';
       }
+
+      $form['actions']['reset']['#access'] = true;
     }
     if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-block') {
+
         //on cache le champ location qui est déjà présent avec la MAP
         $form['title']['#attributes']['placeholder'] = t('CSP Name');
-
         $form['location']['#type'] = 'hidden';
+
         /*$form['submit']['#prefix'] = '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>';
         $form['submit']['#attributes']['class'] = 'search-link';
         $form['submit']['#value'] = '';
         $form['submit']['#suffix'] = '</div>';*/
-        unset($form['actions']);
 
+      $form['actions']['submit'] = [
+        '#type' => 'submit',
+        '#attributes'=> ['class'=>['submit-link']],
+        '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
+        '#suffix' => '</div>',
+      ];
+      $form['actions']['reset'] = [
+        '#type' => 'submit',
+        '#attributes'=> ['class'=>['reset-link']],
+        '#prefix' => '<div class="top-btn-reset"><i class="glyphicon glyphicon-remove" ></i>',
+        '#suffix' => '</div>',
+      ];
+
+      $form['actions']['reset']['#access'] = true;
+        //kint($form['actions']);
+/*
         $form['submit'] = [
           '#type' => 'submit',
           '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
           '#attributes'=> ['class'=>['search-link']],
           '#suffix' => '</div>',
-        ];
+        ];*/
        // kint($form);
     }
 
