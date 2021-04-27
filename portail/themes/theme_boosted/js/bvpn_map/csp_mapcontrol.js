@@ -131,11 +131,28 @@ var CSPMapControl = function() {
     var latLng = _getLatLng(coordinates);
     changeIcon(latLng, '/themes/theme_boosted/images/marker-obs.png');
   };
+  /**
+   * Remet l'icone noir sur TOUS les markers
+   * @param {String|Array} coordsOrLatitude :
+   * @return {MapControl}
+   */
+  var resetAllIconOnMarker = function() {
+    var markers = _getMarkers();
+    for (var i = 0; i < markers.length; i++) {
+      var marker = markers[i];
+      if(marker instanceof L.Marker) {
+        var icon = marker.options.icon;
+        icon.options.iconUrl = '/themes/theme_boosted/images/marker-obs.png';
+        marker.setIcon(icon);
+      }
+    }
+  };
 
   _init();
 
   return {
     changeIconOnMarker: changeIconOnMarker,
     resetIconOnMarker: resetIconOnMarker,
+    resetAllIconOnMarker: resetAllIconOnMarker,
   }
 };

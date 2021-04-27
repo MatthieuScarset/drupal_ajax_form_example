@@ -361,7 +361,6 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          kint($key);
           $form[$key] = change_textfield_to_select($key);
         }
       }
@@ -380,42 +379,27 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
         $form['actions']['submit']['#attributes']['class'][] = 'hidden';
       }
 
+      if(isset($form['location']['#options']['All'])){
+        $form['location']['#options']['All'] = t('Region');
+      }
+
+      //il faut regarder si pas de recherche en cours ou si All ==> on grise le bouton Clear
+      $location = \Drupal::request()->query->get('location');
+      if(!isset($location) || $location=='All'){
+        $form['actions']['reset']['#attributes']['class'][] = 'disabled';;
+      }
       $form['actions']['reset']['#access'] = true;
+      $form['actions']['reset']['#value'] = t('Clear');
+      $form['actions']['submit']['#value'] = t('Filter');
     }
     if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-block') {
 
         //on cache le champ location qui est déjà présent avec la MAP
         $form['title']['#attributes']['placeholder'] = t('CSP Name');
         $form['location']['#type'] = 'hidden';
+        $form['actions']['submit']['#attributes']= array('data-twig-suggestion' => 'form-bvpn-gallery-csp-list-block',
+                                                          'class' => array('search-icon', 'csp-list-map-search'));
 
-        /*$form['submit']['#prefix'] = '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>';
-        $form['submit']['#attributes']['class'] = 'search-link';
-        $form['submit']['#value'] = '';
-        $form['submit']['#suffix'] = '</div>';*/
-
-      $form['actions']['submit'] = [
-        '#type' => 'submit',
-        '#attributes'=> ['class'=>['submit-link']],
-        '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
-        '#suffix' => '</div>',
-      ];
-      $form['actions']['reset'] = [
-        '#type' => 'submit',
-        '#attributes'=> ['class'=>['reset-link']],
-        '#prefix' => '<div class="top-btn-reset"><i class="glyphicon glyphicon-remove" ></i>',
-        '#suffix' => '</div>',
-      ];
-
-      $form['actions']['reset']['#access'] = true;
-        //kint($form['actions']);
-/*
-        $form['submit'] = [
-          '#type' => 'submit',
-          '#prefix' => '<div class="top-btn-search"><i class="glyphicon glyphicon-search" ></i>',
-          '#attributes'=> ['class'=>['search-link']],
-          '#suffix' => '</div>',
-        ];*/
-       // kint($form);
     }
 
 }
