@@ -1,6 +1,6 @@
 uuid: cdf36242-92dd-43d4-8766-514000b1e912
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - oab_cookie_compliance

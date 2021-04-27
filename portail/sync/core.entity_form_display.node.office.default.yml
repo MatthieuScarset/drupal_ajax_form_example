@@ -119,7 +119,7 @@ content:
         height: 400px
         width: 100%
         type: ROADMAP
-        zoom: '6'
+        zoom: 6
         maxZoom: 18
         minZoom: 0
         zoomControl: 1
@@ -132,7 +132,7 @@ content:
         disableAutoPan: 1
         mapTypeControl: 0
         streetViewControl: 0
-        rotateControl: 0
+        rotateControl: false
         fullscreenControl: 0
         preferScrollingToZooming: 0
         disableDoubleClickZoom: 0
