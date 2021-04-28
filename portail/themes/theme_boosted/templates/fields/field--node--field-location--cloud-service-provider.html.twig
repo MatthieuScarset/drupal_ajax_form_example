@@ -1,0 +1,40 @@
+{# Affiche de la région de disponibilité du service cloud #}
+{% set  france = 0%}
+{% set multiple = 0 %}
+
+{% if items|length > 1 %}
+  {% set multiple = 1 %}
+{% else %}
+  {% set multiple = 0 %}
+{% endif %}
+
+  {% for item in items %}
+    {% if item.content['#title'] is same as('France') %}
+      {% set  france = 1%}
+    {% else %}
+      {% set  france = 0%}
+    {% endif %}
+  {% endfor %}
+
+<div style="display: flex; flex-direction: column" >
+      {% if multiple == 0 and france == 1 %}
+        <div style="margin: auto; padding: 1rem 0 0">
+          <img src="/themes/theme_boosted/images/icons8-carte-de-la-france-50.png" height="40px">
+          <img src="/themes/theme_boosted/images/International_globe_off.png" height="40px">
+        </div>
+        <p class="csp-tech-info">{% trans %}Availability in France{% endtrans %}</p>
+      {% elseif multiple == 1 and france == 1 %}
+        <div style="margin: auto; padding: 1rem 0 0">
+          <img src="/themes/theme_boosted/images/icons8-carte-de-la-france-50.png" height="40px">
+          <img src="/themes/theme_boosted/images/International_globe.png" height="40px">
+        </div>
+        <p class="csp-tech-info">{% trans %}France and International Availability{% endtrans %}</p>
+      {% else %}
+        <div style="margin: auto; padding: 1rem 0 0">
+          <img src="/themes/theme_boosted/images/icons8-carte-de-la-france-50-1.png" height="40px">
+          <img src="/themes/theme_boosted/images/International_globe.png" height="40px">
+        </div>
+        <p class="csp-tech-info">{% trans %}International availability{% endtrans %}</p>
+      {% endif %}
+</div>
+
