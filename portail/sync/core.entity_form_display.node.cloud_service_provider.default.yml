@@ -4,14 +4,13 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.cloud_service_provider.field_bandwidth
     - field.field.node.cloud_service_provider.field_content
     - field.field.node.cloud_service_provider.field_csp_location
     - field.field.node.cloud_service_provider.field_facturation
-    - field.field.node.cloud_service_provider.field_futher_information
     - field.field.node.cloud_service_provider.field_location
     - field.field.node.cloud_service_provider.field_logo
     - field.field.node.cloud_service_provider.field_p_wysiwyg_rebond
-    - field.field.node.cloud_service_provider.field_partner_website
     - field.field.node.cloud_service_provider.field_provider_type
     - field.field.node.cloud_service_provider.field_technical_qualification
     - field.field.node.cloud_service_provider.field_type_of_cloud_services
@@ -20,7 +19,6 @@ dependencies:
     - entity_browser
     - field_group
     - geolocation_leaflet
-    - link
     - paragraphs
     - path
     - text
@@ -49,9 +47,8 @@ third_party_settings:
         - field_content
         - field_csp_location
         - field_technical_qualification
-        - field_futher_information
         - field_facturation
-        - field_partner_website
+        - field_bandwidth
       parent_name: group_onglets
       weight: 20
       format_type: tab
@@ -121,6 +118,14 @@ targetEntityType: node
 bundle: cloud_service_provider
 mode: default
 content:
+  field_bandwidth:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_content:
     weight: 4
     settings:
@@ -155,20 +160,12 @@ content:
     type: geolocation_leaflet
     region: content
   field_facturation:
-    weight: 8
+    weight: 7
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_futher_information:
-    weight: 7
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textarea
     region: content
   field_location:
     weight: 15
@@ -208,14 +205,6 @@ content:
         collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
-    region: content
-  field_partner_website:
-    weight: 9
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
     region: content
   field_provider_type:
     weight: 16

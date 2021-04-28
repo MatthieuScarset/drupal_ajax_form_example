@@ -37,3 +37,31 @@ function oab_adrien_update_8005() {
 function oab_adrien_update_8006() {
   include_once("updates/update_8006.inc");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Ajout block rebond contact CSP
+ */
+function oab_adrien_update_8008() {
+  include_once("updates/update_8008.inc");
+}
+
+/**
+ * Ajout des traductions de la vue CSP
+ */
+function oab_adrien_update_8009() {
+  include_once('updates/update_8009.inc');
+}
