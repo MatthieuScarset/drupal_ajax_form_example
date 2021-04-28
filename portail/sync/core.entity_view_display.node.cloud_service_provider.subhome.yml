@@ -4,14 +4,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.subhome
+    - field.field.node.cloud_service_provider.field_bandwidth
     - field.field.node.cloud_service_provider.field_content
     - field.field.node.cloud_service_provider.field_csp_location
     - field.field.node.cloud_service_provider.field_facturation
-    - field.field.node.cloud_service_provider.field_futher_information
     - field.field.node.cloud_service_provider.field_location
     - field.field.node.cloud_service_provider.field_logo
     - field.field.node.cloud_service_provider.field_p_wysiwyg_rebond
-    - field.field.node.cloud_service_provider.field_partner_website
     - field.field.node.cloud_service_provider.field_provider_type
     - field.field.node.cloud_service_provider.field_technical_qualification
     - field.field.node.cloud_service_provider.field_type_of_cloud_services
@@ -33,13 +32,12 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_bandwidth: true
   field_content: true
   field_csp_location: true
   field_facturation: true
-  field_futher_information: true
   field_location: true
   field_p_wysiwyg_rebond: true
-  field_partner_website: true
   field_provider_type: true
   field_technical_qualification: true
   field_type_of_cloud_services: true
