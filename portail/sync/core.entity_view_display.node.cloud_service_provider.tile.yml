@@ -1,9 +1,9 @@
-uuid: 0333f7c7-68b3-4a28-a6d6-ec821823b104
+uuid: 3421390e-a841-4cee-b8fc-d346781a7fb7
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.subhome
+    - core.entity_view_mode.node.tile
     - field.field.node.cloud_service_provider.field_bandwidth
     - field.field.node.cloud_service_provider.field_content
     - field.field.node.cloud_service_provider.field_csp_location
@@ -16,11 +16,12 @@ dependencies:
     - field.field.node.cloud_service_provider.field_type_of_cloud_services
     - node.type.cloud_service_provider
   module:
+    - taxonomy
     - user
-id: node.cloud_service_provider.subhome
+id: node.cloud_service_provider.tile
 targetEntityType: node
 bundle: cloud_service_provider
-mode: subhome
+mode: tile
 content:
   field_logo:
     type: entity_reference_entity_view
@@ -31,6 +32,21 @@ content:
       link: false
     third_party_settings: {  }
     region: content
+  field_provider_type:
+    type: entity_reference_rss_category
+    weight: 2
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_type_of_cloud_services:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
 hidden:
   field_bandwidth: true
   field_content: true
@@ -38,8 +54,6 @@ hidden:
   field_facturation: true
   field_location: true
   field_p_wysiwyg_rebond: true
-  field_provider_type: true
   field_technical_qualification: true
-  field_type_of_cloud_services: true
   langcode: true
   links: true

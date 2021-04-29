@@ -17,3 +17,28 @@
     margin: 0 !important;
     font-weight: 200 !important;
 }
+
+.icon-lg-active {
+  font-size: 3rem;
+  padding-top: 1.5rem;
+  transform: scaleX(-1);
+}
+
+.icon-lg {
+  font-size: 3rem;
+  padding-top: 1.5rem;
+  color: #d8d9d8;
+  transform: scaleX(-1);
+}
+
+.csp-tech-info {
+  text-align: center;
+  font-weight: bold;
+}
+
+.csp-type {
+  text-align: center;
+  font-size: 3rem;
+  padding-top: 0.5rem;
+  font-weight: bold;
+}

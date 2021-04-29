@@ -1,16 +1,16 @@
-uuid: a0a4a963-4abc-4ab0-9e21-16bec47ad152
-langcode: en
+uuid: a8d2b17c-5039-4c0f-82b8-3b15577404e5
+langcode: fr
 status: true
 dependencies:
   module:
-    - link
     - node
-id: node.field_partner_website
-field_name: field_partner_website
+id: node.field_bandwidth
+field_name: field_bandwidth
 entity_type: node
-type: link
-settings: {  }
-module: link
+type: string_long
+settings:
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true
