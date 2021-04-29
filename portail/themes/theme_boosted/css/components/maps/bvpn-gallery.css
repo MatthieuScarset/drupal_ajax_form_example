@@ -40,6 +40,12 @@
   background-color: black;
   color: #fff;
 }
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-submit-bvpn-gallery.active,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-submit-bvpn-gallery.active:hover
+{
+  background-color: #f16e00;
+  color: #fff;
+}
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-submit-bvpn-gallery:hover,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-submit-bvpn-gallery:active,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-reset:hover,

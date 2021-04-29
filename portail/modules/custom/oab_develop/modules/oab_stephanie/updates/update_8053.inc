@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\locale\SourceString;
+
 $storage = \Drupal::service('locale.storage');
 $translations = [
   "Filter" => "Filtrer",

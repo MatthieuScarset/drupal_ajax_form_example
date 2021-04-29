@@ -44,6 +44,10 @@
       )
     }
 
+    $(document).on('change', '.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page #edit-location.form-select',function() {
+      $('.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions #edit-submit-bvpn-gallery.button').addClass('active');
+    });
+
     $(document).on('click', '.view-id-bvpn_gallery .view-content .item-list ul li .row-csp-adress',
         function(){
           if(this.classList.contains('selected')){
