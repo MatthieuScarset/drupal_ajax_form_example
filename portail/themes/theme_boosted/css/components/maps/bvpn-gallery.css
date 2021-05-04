@@ -12,7 +12,7 @@
 /*** Formulaire de la map ***/
 /****************************/
 
-.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page{
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page {
   background-color: white;
   margin: 0 !important;
   padding-left: 0 !important;
@@ -194,4 +194,19 @@
   text-decoration: underline;
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+/**************************************/
+/*** Page liste CSP ***/
+/**************************************/
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-list-page {
+  background-color: white;
+}
+
+#views-exposed-form-bvpn-gallery-csp-list-page > div.form-inline {
+  display: flex;
+}
+
+#views-exposed-form-bvpn-gallery-csp-list-page > div.form-inline > div.js-form-item {
+  margin: 0 10px;
 }
