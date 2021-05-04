@@ -419,3 +419,10 @@ function oab_stephanie_update_8052() {
 function oab_stephanie_update_8053() {
     include_once("updates/update_8053.inc");
 }
+
+/**
+ * mise a jour coordonnées geolocalisation pour les terme Location
+ */
+function oab_stephanie_update_8054() {
+    include_once("updates/update_8054.inc");
+}

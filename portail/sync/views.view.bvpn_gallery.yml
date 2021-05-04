@@ -46,7 +46,7 @@ display:
         type: basic
         options:
           submit_button: Filter
-          reset_button: true
+          reset_button: false
           reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
           expose_sort_order: false
@@ -71,11 +71,11 @@ display:
               enable: false
               map_center_id: client_location
             fit_bounds:
-              enable: true
               settings:
-                min_zoom: 1
-                reset_zoom: false
+                min_zoom: 3
+                reset_zoom: true
               weight: 0
+              enable: false
               map_center_id: fit_bounds
             fixed_boundaries:
               settings:
@@ -93,12 +93,12 @@ display:
               settings:
                 location_option_id: first_row
             fixed_value:
+              enable: true
               settings:
-                latitude: null
-                longitude: null
+                latitude: 33.879408460639
+                longitude: 5.5178333940036
                 location_option_id: fixed_value
               weight: 0
-              enable: false
               map_center_id: location_plugins
             freeogeoip:
               weight: 0
@@ -569,7 +569,7 @@ display:
                 enabled: false
             height: 530px
             width: 100%
-            zoom: '6'
+            zoom: '2'
       row:
         type: fields
         options:
@@ -1078,6 +1078,7 @@ display:
       arguments: {  }
       display_extenders: {  }
       group_by: true
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1293,23 +1294,23 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
-          relationship: field_location
+        field_location_target_id:
+          id: field_location_target_id
+          table: node__field_location
+          field: field_location_target_id
+          relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
-          value: ''
+          operator: or
+          value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
-            label: ''
+            operator_id: field_location_target_id_op
+            label: 'Location (field_location)'
             description: ''
             use_operator: false
-            operator: name_op
+            operator: field_location_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: location
@@ -1331,7 +1332,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -1344,9 +1345,13 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: taxonomy_term
-          entity_field: name
-          plugin_id: string
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: location
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       filter_groups:
         operator: AND
         groups:
@@ -1618,6 +1623,7 @@ display:
       contexts:
         - 'languages:language_interface'
         - url
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -1749,23 +1755,23 @@ display:
             group_items: {  }
           entity_type: node
           plugin_id: numeric
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
-          relationship: field_location
+        field_location_target_id:
+          id: field_location_target_id
+          table: node__field_location
+          field: field_location_target_id
+          relationship: none
           group_type: group
           admin_label: ''
-          operator: '='
-          value: ''
+          operator: or
+          value: {  }
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
-            label: ''
+            operator_id: field_location_target_id_op
+            label: 'Location (field_location)'
             description: ''
             use_operator: false
-            operator: name_op
+            operator: field_location_target_id_op
             operator_limit_selection: false
             operator_list: {  }
             identifier: location
@@ -1787,7 +1793,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            placeholder: ''
+            reduce: false
           is_grouped: false
           group_info:
             label: ''
@@ -1800,9 +1806,13 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: taxonomy_term
-          entity_field: name
-          plugin_id: string
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: location
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       defaults:
         filters: false
         filter_groups: false
@@ -1946,6 +1956,7 @@ display:
       contexts:
         - 'languages:language_interface'
         - url
+        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
