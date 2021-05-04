@@ -4,7 +4,8 @@
 
     var itemSelectedId = null;
     var searchByName = false;
-    var searchByRegion = false;
+    var nameSearched = '';
+    var searchByNameToReload = false;
 
     //donne un point Latlng à partir de coordonnées "latiture,longitude"
     var getLatLngFromText = function(currentCoordonees) {
@@ -75,6 +76,14 @@
       mc.goTo([lat, lng]);
     }
 
+    $(document).on('keypress', '#views-exposed-form-bvpn-gallery-csp-list-block',function(event) {
+      var keyPressed = event.keyCode || event.which;
+      if (keyPressed === 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
     //on sélectionne une région => on change la couleur du bouton en Orange pour montrer qu'il faut appliquer le filtre
     $(document).on('change', '#views-exposed-form-bvpn-gallery-csp-map-page select[name="location"]',function() {
       $('.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map').addClass('active');
@@ -111,12 +120,15 @@
     $(document).on('click', '#remove-icon-btn', function() {
       $.each(Drupal.views.instances, function(i, view) {
         if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_list_block") {
-          $('#views-exposed-form-bvpn-gallery-csp-list-block #edit-title').attr('value', '');
+          var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
+          var selectedRegion = selectOptions.children("option:selected").val();
+          view.settings.location = selectedRegion;
           var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
           jQuery(selector).triggerHandler('RefreshView');
           unselectAllCSPItem();
           ajax_is_filter = true;
           searchByName = false;
+          nameSearched = '';
         }
       });
     });
@@ -125,6 +137,7 @@
       $.each(Drupal.views.instances, function(i, view) {
         if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_list_block") {
           searchByName = true;
+          nameSearched = $('input[name=title]').val(); //sauvegarde de la recherche
         }
       });
     });
@@ -134,7 +147,6 @@
     $(document).on('click', '.btn_clear_filter_search_map', function() {
       $.each(Drupal.views.instances, function(i, view) {
         if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_map_page") {
-          //$('#views-exposed-form-bvpn-gallery-csp-list-block #edit-title').attr('value', '');
           var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
           jQuery(selector).triggerHandler('RefreshView');
           ajax_is_filter = true;
@@ -147,15 +159,8 @@
   jQuery(document).ajaxSend(function(event, xhr, settings) {
     //temporaire à continuer /modifier
       if (settings.extraData && settings.extraData.view_name == "bvpn_gallery" && settings.extraData.view_display_id == "csp_map_page") {
-        var arguments = settings.data.split('&');
-        if(arguments.length > 1) {
-          var argument = arguments[0];
-          if(argument.indexOf('location')!= -1){
-            var locArgsTab = argument.split('=');
-            if(locArgsTab.length>1){
-              var location = decodeURI(locArgsTab[1]);
-            }
-          }
+        if(nameSearched != '') {
+          searchByNameToReload = true;
         }
       }
     });
@@ -179,6 +184,12 @@
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
       }
+
+      if(nameSearched != '' && searchByNameToReload){
+        $('input[name=title]').val(nameSearched);
+        searchByNameToReload = false;
+        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.search-icon').click();
+      }
     });
 
     //quand les vues ajax ont fini de se charger
@@ -192,7 +203,6 @@
         if(point){
           goTo(point.lat, point.lng);
         }
-
       }
     });
 
