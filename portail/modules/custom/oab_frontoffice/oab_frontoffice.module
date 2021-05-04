@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -287,9 +288,10 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 /**
  * Implements hook_form_views_exposed_form_alter().
  */
-function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
+function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterface &$form_state) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+ //   echo 'blop';
 
     // Gestion des formulaires spécifiques aux subhomes via une fonction pour ne pas surcharger ici
     subhomes_views_exposed_form($form);
@@ -356,52 +358,67 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             $form['field_insight_type_target_id']['#type'] = "radios";
         }
     }
+
+    //BVPN
     //formulaire de recherche de la carte BVPN Gallerie
     if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-map-page') {
-      foreach ($form AS $key => $value) {
-        if (isset($value['#type'])
-          && $value['#type'] == "textfield") {
-          $form[$key] = change_textfield_to_select($key);
+
+      //on filtre les termes de taxo par langue
+      $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load('location');
+      if (is_object($vocabulary)) {
+        $properties = array(
+          "vid" => 'location',
+        );
+        $lancode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if($lancode != 'fr'){
+          $lancode = 'en'; //carte dispo qu'en fr ou en // si on tente en ru, on mettra les terme de en
+        }
+        $properties["langcode"] = $lancode;
+        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+
+        if (is_array($terms)
+          && !empty($terms)) {
+          $options = array('All' => t('Region'));
+          foreach ($terms AS $tid => $term) {
+            $options[$tid] = $term->getName();
+          }
+          $form['location']['#options'] = $options;
         }
       }
 
-      /**
-       * je cache le bouton "Apply" s'il n'y a plus de filtre
-       */
-      $has_filters = false;
-      foreach ($form["#info"] as $filter_name => $filter_infos) {
-        if (isset($form[$filter_infos['value']])) {
-          $has_filters = true;
-        }
+      $form['actions']['reset'] =array(
+        '#value' => "Clear",
+        '#type' => "submit",
+        '#access' => true,
+        '#attributes' => array(
+          'class' => array('btn_clear_filter_search_map'),
+          'disabled'=>'disabled'),
+      );
+
+      //si c'est une recherche d'une région on active le bouteau clear
+      $input = $form_state->getUserInput();
+      $currentLocation = $input['location'];
+      if($currentLocation != 'All'){
+        unset($form['actions']['reset']['#attributes']['disabled']);
       }
 
-      if (!$has_filters) {
-        $form['actions']['submit']['#attributes']['class'][] = 'hidden';
-      }
 
-      if(isset($form['location']['#options']['All'])){
-        $form['location']['#options']['All'] = t('Region');
-      }
-
-      //il faut regarder si pas de recherche en cours ou si All ==> on grise le bouton Clear
-      $location = \Drupal::request()->query->get('location');
-      if(!isset($location) || $location=='All'){
-        $form['actions']['reset']['#attributes']['class'][] = 'disabled';;
-      }
-      $form['actions']['reset']['#access'] = true;
-      $form['actions']['reset']['#value'] = t('Clear');
       $form['actions']['submit']['#value'] = t('Filter');
+      $form['actions']['submit']['#attributes'] = array(
+        'class' => array(
+          'btn_submit_filter_search_map'
+        )
+      );
     }
     if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-block') {
-
         //on cache le champ location qui est déjà présent avec la MAP
         $form['title']['#attributes']['placeholder'] = t('CSP Name');
         $form['location']['#type'] = 'hidden';
-        $form['actions']['submit']['#attributes']= array('data-twig-suggestion' => 'form-bvpn-gallery-csp-list-block',
-                                                          'class' => array('search-icon', 'csp-list-map-search'));
-
+        $form['actions']['submit']['#attributes']= array(
+          'data-twig-suggestion' => 'form-bvpn-gallery-csp-list-block',
+          'class' => array('search-icon', 'csp-list-map-search')
+        );
     }
-
 }
 
 
@@ -496,7 +513,7 @@ function oab_frontoffice_mail_alter(&$message) {
     }
 }
 
-function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
         foreach (array_keys($form['actions']) as $action) {
@@ -595,6 +612,31 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
         unset($attachments['#attached']['html_head'][$key]);
       }
     }
+
+    // Pour BVPN gallery
+    // on charge les infos de geolocalisation des termes de taxo Location pour pouvoir faire le zoom sur la bonne région en JS
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $routeName = \Drupal::routeMatch()->getRouteName();
+    if($routeName == 'view.bvpn_gallery.csp_map_page'){
+      $locationsArray = array();
+      $query = \Drupal::entityQuery('taxonomy_term');
+      $query->condition('vid', "location");
+      $query->condition('langcode', $current_language);
+      $tids = $query->execute();
+      $termsLocation = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+      foreach ($termsLocation as $term) {
+        $location = array();
+        $location['tid'] = $term->tid->value;
+        $location['name'] = $term->name->value;
+        if( isset($term->field_location) && !empty($term->field_location)){
+          $location['lat'] = (isset($term->field_location->lat) && !empty($term->field_location->lat)) ? $term->field_location->lat : '0.0';
+          $location['lng'] = (isset($term->field_location->lng) && !empty($term->field_location->lng)) ? $term->field_location->lng : '0.0';
+        }
+        $locationsArray[$term->tid->value] = $location;
+      }
+      $attachments["#attached"]['drupalSettings']['listRegionMarkers'] = $locationsArray;
+    }
+
 }
 
 /**

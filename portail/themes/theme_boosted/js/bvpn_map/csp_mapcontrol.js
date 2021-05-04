@@ -7,10 +7,11 @@ var CSPMapControl = function() {
   var map = {};
   var _initialized = false;
   var _settings = {
+    //le zoom ne fonctionne pas, il est géré par la views Drupal
     zoom: {
-      min: 2,
-      max: 16, // 19 par Drupal ?
-      detail: 13
+      min: 4,
+      max: 10, // 19 par Drupal ?
+      detail: 4
     },
   };
 
@@ -148,11 +149,28 @@ var CSPMapControl = function() {
     }
   };
 
+  var goTo = function(coordinates) {
+    var latLng = _getLatLng(coordinates);
+    //le zoom ne fonctionne pas, il est géré par la views Drupal
+    map.panTo(latLng);
+  };
+
+  var getZoom = function() {
+    return map.getZoom();
+  };
+
+  var setZoom = function(zoom) {
+    map.setZoom(zoom);
+  };
+
   _init();
 
   return {
     changeIconOnMarker: changeIconOnMarker,
     resetIconOnMarker: resetIconOnMarker,
     resetAllIconOnMarker: resetAllIconOnMarker,
+    goTo: goTo,
+    getZoom: getZoom,
+    setZoom: setZoom,
   }
 };
