@@ -151,8 +151,8 @@ var CSPMapControl = function() {
 
   var goTo = function(coordinates) {
     var latLng = _getLatLng(coordinates);
-    //le zoom ne fonctionne pas, il est géré par la views Drupal
-    map.panTo(latLng);
+   // map.panTo(latLng);
+    map.flyTo(latLng, 3);
   };
 
   var getZoom = function() {

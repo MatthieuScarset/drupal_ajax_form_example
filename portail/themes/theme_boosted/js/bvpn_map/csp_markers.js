@@ -170,6 +170,20 @@
       if(selectOptions.length>0) {
         selectOptions[0][0].disabled = true;
       }
+
+      if(searchByName){
+        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
+        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
+      }
+      else{
+        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
+        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
+      }
+    });
+
+    //quand les vues ajax ont fini de se charger
+    $(document).ajaxStop(function() {
+      var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
       var selectedOption = selectOptions.children("option:selected").val();
       if(selectedOption != 'all')
       {
@@ -180,20 +194,8 @@
         }
 
       }
-
-
-      if(searchByName){
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
-      }
-      else{
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
-      }
-
-
-
     });
+
   });
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
