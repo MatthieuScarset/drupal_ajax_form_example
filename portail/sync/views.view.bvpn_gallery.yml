@@ -3,10 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.subhome
     - field.storage.node.field_csp_location
     - field.storage.node.field_logo
     - filter.format.full_html
     - node.type.cloud_service_provider
+    - taxonomy.vocabulary.hub
     - taxonomy.vocabulary.location
   module:
     - geolocation
@@ -53,9 +55,26 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
-        type: none
+        type: full
         options:
+          items_per_page: 16
           offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹
+            next: ›
+            first: «
+            last: »
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- Tous -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       style:
         type: maps_common
         options:
@@ -1075,6 +1094,20 @@ display:
           admin_label: 'field_location: Taxonomy term'
           required: false
           plugin_id: standard
+        field_provider_type:
+          id: field_provider_type
+          table: node__field_provider_type
+          field: field_provider_type
+          relationship: none
+          group_type: group
+          admin_label: 'field_provider_type: Taxonomy term'
+          required: false
+          plugin_id: standard
+        field_type_of_cloud_services:
+          id: field_type_of_cloud_services
+          table: node__field_type_of_cloud_services
+          field: field_type_of_cloud_services
+          plugin_id: standard
       arguments: {  }
       display_extenders: {  }
       group_by: true
@@ -1085,6 +1118,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -1623,6 +1657,490 @@ display:
       contexts:
         - 'languages:language_interface'
         - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_csp_location'
+        - 'config:field.storage.node.field_logo'
+  csp_list_page:
+    display_plugin: page
+    id: csp_list_page
+    display_title: 'CSP List Page'
+    position: 3
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      title: 'BVPN List'
+      defaults:
+        title: false
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+        exposed_form: false
+        use_ajax: false
+      path: bvpn-list
+      style:
+        type: grid
+        options:
+          uses_fields: false
+          columns: 4
+          automatic_width: false
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: 'col-xs-12 col-md-3'
+          row_class_default: true
+          row_class_custom: ''
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: subhome
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        langcode:
+          id: langcode
+          table: node
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            cloud_service_provider: cloud_service_provider
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
+          group: 1
+        field_csp_location_lat:
+          id: field_csp_location_lat
+          table: node__field_csp_location
+          field: field_csp_location_lat
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: numeric
+        field_csp_location_lng:
+          id: field_csp_location_lng
+          table: node__field_csp_location
+          field: field_csp_location_lng
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '!='
+          value:
+            min: ''
+            max: ''
+            value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: numeric
+        name_2:
+          id: name_2
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_type_of_cloud_services
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_2_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: name_2_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: type_of_cloud_service
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: 'Type of cloud service'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name_1:
+          id: name_1
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_provider_type
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_1_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: name_1_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: service_providers
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: 'Provider type'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        name:
+          id: name
+          table: taxonomy_term_field_data
+          field: name
+          relationship: field_location
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: name_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: location
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: Location
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: taxonomy_term
+          entity_field: name
+          plugin_id: string
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: ''
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              webform_manager: '0'
+              anonymous: '0'
+              webform_business_owner: '0'
+              webform_admin: '0'
+              administrator: '0'
+              webform_spoc_securite: '0'
+              chief_editor: '0'
+              digital_admin: '0'
+              contributor: '0'
+              fh_backbones: '0'
+              dvi: '0'
+              chief_editor_hub: '0'
+              webform_business_analyst: '0'
+            placeholder: 'Service or provider name'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+        field_hub_target_id:
+          id: field_hub_target_id
+          table: node__field_hub
+          field: field_hub_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: empty
+          value: {  }
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: hub
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      rendering_language: '***LANGUAGE_entity_translation***'
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Filter
+          reset_button: true
+          reset_button_label: Clear
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: false
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      use_ajax: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -1633,7 +2151,7 @@ display:
     display_plugin: page
     id: csp_map_page
     display_title: 'CSP Map page'
-    position: 1
+    position: 2
     display_options:
       display_extenders: {  }
       path: bvpn-map
@@ -1817,6 +2335,7 @@ display:
         filters: false
         filter_groups: false
         fields: false
+        relationships: false
       filter_groups:
         operator: AND
         groups:
@@ -1951,11 +2470,22 @@ display:
           field_api_classes: false
           entity_type: node
           plugin_id: geolocation_field
+      relationships:
+        field_location:
+          id: field_location
+          table: node__field_location
+          field: field_location
+          relationship: none
+          group_type: group
+          admin_label: 'field_location: Taxonomy term'
+          required: false
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
+        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions

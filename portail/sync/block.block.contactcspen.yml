@@ -13,7 +13,7 @@ dependencies:
 id: contactcspen
 theme: theme_boosted
 region: sidebar
-weight: 0
+weight: -36
 provider: null
 plugin: 'block_content:ea50b916-a069-4fac-a324-bd82a04a5def'
 settings:

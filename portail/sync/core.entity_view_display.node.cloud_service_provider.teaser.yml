@@ -43,3 +43,4 @@ hidden:
   field_type_of_cloud_services: true
   langcode: true
   links: true
+  workbench_moderation_control: true

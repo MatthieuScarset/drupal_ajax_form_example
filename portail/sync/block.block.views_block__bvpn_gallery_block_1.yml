@@ -2,11 +2,8 @@ uuid: fa2e9b7e-d1e9-489f-9910-ab160b7e44f0
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.bvpn_gallery
   module:
     - system
-    - views
   theme:
     - theme_boosted
 id: views_block__bvpn_gallery_block_1

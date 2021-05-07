@@ -13,7 +13,7 @@ dependencies:
 id: contactcspfr
 theme: theme_boosted
 region: sidebar
-weight: 0
+weight: -35
 provider: null
 plugin: 'block_content:c55c4f20-7284-46c6-9f27-9a5df2395e26'
 settings:

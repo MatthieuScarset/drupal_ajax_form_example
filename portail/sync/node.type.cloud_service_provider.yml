@@ -5,6 +5,7 @@ dependencies:
   module:
     - menu_ui
     - workbench_access
+    - workbench_moderation
 third_party_settings:
   menu_ui:
     available_menus:
@@ -12,6 +13,15 @@ third_party_settings:
     parent: 'main:'
   workbench_access:
     workbench_access_status: false
+  workbench_moderation:
+    enabled: true
+    allowed_moderation_states:
+      - published
+      - archived
+      - draft
+      - needs_review
+      - unpublished
+    default_moderation_state: draft
 name: 'Cloud Service Provider'
 type: cloud_service_provider
 description: ''
