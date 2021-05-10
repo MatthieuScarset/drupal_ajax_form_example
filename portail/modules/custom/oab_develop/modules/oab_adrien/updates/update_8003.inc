@@ -4,17 +4,22 @@ $new_terms = [
   [
     'vid' => 'product_use_case',
     'language' => 'en',
-    'name' => 'Track and geolocate objects'
+    'name' => 'Tracking and geolocating objects'
   ],
   [
     'vid' => 'product_use_case',
     'language' => 'en',
-    'name' => 'Manage and collect data'
+    'name' => 'Control and collect data'
   ],
   [
     'vid' => 'product_use_case',
     'language' => 'en',
-    'name' => 'View information and organise resources'
+    'name' => 'Display information'
+  ],
+  [
+    'vid' => 'product_use_case',
+    'language' => 'en',
+    'name' => 'Optimize resources'
   ],
   [
     'vid' => 'product_use_case',
@@ -29,17 +34,22 @@ $new_terms = [
   [
     'vid' => 'product_use_case',
     'language' => 'fr',
-    'name' => 'Afficher des informations et organiser des ressources'
+    'name' => 'Afficher des informations'
+  ],
+  [
+    'vid' => 'product_use_case',
+    'language' => 'fr',
+    'name' => 'Optimiser les ressources'
   ],
   [
     'vid' => 'product_type',
     'language' => 'en',
-    'name' => 'Packaged solution'
+    'name' => 'Packaged solutions'
   ],
   [
     'vid' => 'product_type',
     'language' => 'en',
-    'name' => 'Modular solution'
+    'name' => ' Modular solutions'
   ],
   [
     'vid' => 'product_type',
@@ -49,22 +59,22 @@ $new_terms = [
   [
     'vid' => 'product_type',
     'language' => 'en',
-    'name' => 'Center of excellence'
+    'name' => 'Center of Excellence'
   ],
   [
     'vid' => 'product_type',
     'language' => 'fr',
-    'name' => 'Solution packagée'
+    'name' => 'Solutions packagées'
   ],
   [
     'vid' => 'product_type',
     'language' => 'fr',
-    'name' => 'Solution modulaire'
+    'name' => 'Solutions modulaires'
   ],
   [
     'vid' => 'product_type',
     'language' => 'fr',
-    'name' => 'Connectivité'
+    'name' => 'Connectivités'
   ],
   [
     'vid' => 'product_type',
@@ -94,5 +104,8 @@ foreach ($new_terms as &$term) {
     $entity->save();
   }
 }
+
+
+
 
 
