@@ -1,0 +1,8 @@
+name: OAB BVPN Import
+description: 'OAB BVPN Import'
+type: module
+package: OAB
+version: VERSION
+core: '8.x'
+project: 'oab_bvpn_import'
+datestamp: 1620309796

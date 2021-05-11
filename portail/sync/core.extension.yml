@@ -67,6 +67,7 @@ module:
   oab_backbones: 0
   oab_background_image: 0
   oab_backoffice: 0
+  oab_bvpn_import: 0
   oab_cedric: 0
   oab_christophe: 0
   oab_ckeditor: 0
