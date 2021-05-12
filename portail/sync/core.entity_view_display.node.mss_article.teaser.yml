@@ -1,0 +1,27 @@
+uuid: 782cc860-ed16-4f68-97c5-5f441735dc44
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.mss_article.field_content
+    - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - node.type.mss_article
+  module:
+    - user
+id: node.mss_article.teaser
+targetEntityType: node
+bundle: mss_article
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_content: true
+  field_hub: true
+  field_p_wysiwyg_rebond: true
+  langcode: true

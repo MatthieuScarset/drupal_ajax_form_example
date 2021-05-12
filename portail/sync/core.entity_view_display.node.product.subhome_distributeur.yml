@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -61,14 +62,21 @@ hidden:
   field_end_date: true
   field_file: true
   field_highlight: true
+  field_hub: true
+  field_hub_portal: true
   field_id_fiche: true
   field_id_offre: true
   field_industry: true
+  field_insight: true
+  field_insight_type: true
+  field_is_dvi_product: true
   field_job_profile: true
   field_market_segment: true
+  field_market_segment_dvi: true
   field_meta_description: true
   field_meta_title: true
   field_metatags: true
+  field_p_wysiwyg_rebond: true
   field_product: true
   field_region: true
   field_start_date: true
@@ -79,6 +87,8 @@ hidden:
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
   field_try_and_buy: true
+  field_visual_tile: true
   langcode: true
   links: true
+  moderation_state_update: true
   workbench_moderation_control: true

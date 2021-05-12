@@ -1,0 +1,76 @@
+uuid: e89f7eef-bf5e-4bf1-85ab-9c578e086498
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_p_wysiwyg_rebond
+    - node.type.mss_article
+    - paragraphs.paragraphs_type.rebond_wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.mss_article.field_p_wysiwyg_rebond
+field_name: field_p_wysiwyg_rebond
+entity_type: node
+bundle: mss_article
+label: 'Wysiwyg rebond'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      rebond_wysiwyg: rebond_wysiwyg
+    target_bundles_drag_drop:
+      default_button:
+        weight: 17
+        enabled: false
+      homepage_banner_experience:
+        weight: 18
+        enabled: false
+      homepage_banner_item:
+        weight: 19
+        enabled: false
+      homepage_news:
+        weight: 20
+        enabled: false
+      home_banner:
+        weight: 21
+        enabled: false
+      home_caroussel:
+        weight: 22
+        enabled: false
+      home_column:
+        weight: 23
+        enabled: false
+      home_column_section:
+        weight: 24
+        enabled: false
+      home_playlist:
+        weight: 25
+        enabled: false
+      home_thematic_columns:
+        weight: 26
+        enabled: false
+      infography_partner:
+        weight: 27
+        enabled: false
+      marketo:
+        weight: 28
+        enabled: false
+      paragraph_block_rebond:
+        weight: 29
+        enabled: false
+      rebond_wysiwyg:
+        enabled: true
+        weight: 30
+      related_content:
+        weight: 31
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions
