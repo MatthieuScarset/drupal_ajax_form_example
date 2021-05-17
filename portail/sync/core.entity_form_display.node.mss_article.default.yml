@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.mss_article.field_content
     - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_hub_portal
     - field.field.node.mss_article.field_p_wysiwyg_rebond
     - node.type.mss_article
   module:
@@ -47,6 +48,7 @@ third_party_settings:
     group_classify:
       children:
         - field_hub
+        - field_hub_portal
       parent_name: group_o
       weight: 10
       format_type: tab
@@ -108,6 +110,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_hub_portal:
+    weight: 17
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_p_wysiwyg_rebond:
     weight: 15

@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.mss_article.field_content
     - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_hub_portal
     - field.field.node.mss_article.field_p_wysiwyg_rebond
     - node.type.mss_article
   module:
@@ -20,8 +21,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  workbench_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_content: true
   field_hub: true
+  field_hub_portal: true
   field_p_wysiwyg_rebond: true
   langcode: true
