@@ -1,5 +1,5 @@
-uuid: 86eef962-fdaa-44b3-aac4-01ed95bd1d9e
-langcode: fr
+uuid: 8ddcdb03-a509-422c-a08b-4973762b7065
+langcode: en
 status: true
 dependencies:
   module:
@@ -7,24 +7,22 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: rebond_subhome_blogs
+id: relatedcontent_2
 theme: theme_boosted
 region: sidebar
-weight: -36
+weight: -31
 provider: null
-plugin: rebond_subhome_block
+plugin: related_content_block
 settings:
-  id: rebond_subhome_block
-  label: Blogs
+  id: related_content_block
+  label: 'Related content'
   provider: oab_frontoffice
   label_display: visible
-  block_text: 'View more Blogs'
-  block_link: /en/blogs
-  block_link_text: 'Click here'
-  block_image_src: '26369'
+  context_mapping:
+    node: '@node.node_route_context:node'
 visibility:
   request_path:
     id: request_path
-    pages: /fr/presse
+    pages: /test-block
     negate: false
     context_mapping: {  }

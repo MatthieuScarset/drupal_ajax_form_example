@@ -11,7 +11,7 @@ dependencies:
 id: rebondproduct
 theme: theme_boosted
 region: sidebar
-weight: -46
+weight: -48
 provider: null
 plugin: rebond_product_block
 settings:

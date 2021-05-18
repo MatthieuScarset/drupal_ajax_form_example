@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -83,13 +84,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_claim:
-    type: text_default
-    weight: 34
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
   field_caroussel:
     type: entity_reference_revisions_entity_view
     weight: 24
@@ -107,6 +101,13 @@ content:
     settings:
       view_mode: default
       link: ''
+    third_party_settings: {  }
+  field_claim:
+    type: text_default
+    weight: 34
+    region: content
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
   field_corporate_button_link:
     type: link

@@ -10,7 +10,7 @@ dependencies:
 id: tryandbuy
 theme: theme_boosted
 region: sidebar
-weight: -40
+weight: -42
 provider: null
 plugin: try_and_buy_block
 settings:

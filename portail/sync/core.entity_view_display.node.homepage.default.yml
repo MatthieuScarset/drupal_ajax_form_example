@@ -59,6 +59,8 @@ hidden:
   field_banner_expertise: true
   field_banner_left_zone_title: true
   field_banner_right_zone_title: true
+  field_caroussel_header: true
+  field_claim: true
   field_corporate_button_link: true
   field_corporate_button_text: true
   field_corporate_highlight: true
