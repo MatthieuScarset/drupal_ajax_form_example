@@ -1,21 +1,21 @@
-uuid: 77051435-1e60-49d2-85cb-5a7071235237
+uuid: aaae7956-4373-4cbc-a94c-299bda5b6d77
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_typologie
+    - field.storage.node.field_typology
     - node.type.mss_article
   module:
     - options
-id: node.mss_article.field_typologie
-field_name: field_typologie
+id: node.mss_article.field_typology
+field_name: field_typology
 entity_type: node
 bundle: mss_article
-label: Typologie
+label: Typology
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: list_integer
+field_type: list_string
