@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.mss_article.field_hub
     - field.field.node.mss_article.field_hub_portal
     - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - field.field.node.mss_article.field_typologie
     - node.type.mss_article
   module:
     - user
@@ -31,4 +32,5 @@ hidden:
   field_hub: true
   field_hub_portal: true
   field_p_wysiwyg_rebond: true
+  field_typologie: true
   langcode: true

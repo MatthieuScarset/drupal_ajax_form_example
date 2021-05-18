@@ -1,0 +1,30 @@
+uuid: a1dbcd01-06d4-4146-aeb3-d439f7c7d793
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_typologie
+field_name: field_typologie
+entity_type: node
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: Article
+    -
+      value: 1
+      label: 'Support topic'
+    -
+      value: 2
+      label: Video
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

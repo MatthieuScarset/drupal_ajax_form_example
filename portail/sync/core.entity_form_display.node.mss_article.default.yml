@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.mss_article.field_hub
     - field.field.node.mss_article.field_hub_portal
     - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - field.field.node.mss_article.field_typologie
     - node.type.mss_article
   module:
     - field_group
@@ -19,8 +20,8 @@ third_party_settings:
     group_o:
       children:
         - group_w
-        - group_classify
         - group_rebond
+        - group_classify
         - group_publi
       parent_name: ''
       weight: 0
@@ -47,10 +48,11 @@ third_party_settings:
       label: Write
     group_classify:
       children:
+        - field_typologie
         - field_hub
         - field_hub_portal
       parent_name: group_o
-      weight: 10
+      weight: 11
       format_type: tab
       format_settings:
         id: ''
@@ -63,7 +65,7 @@ third_party_settings:
       children:
         - field_p_wysiwyg_rebond
       parent_name: group_o
-      weight: 11
+      weight: 10
       format_type: tab
       format_settings:
         id: ''
@@ -106,13 +108,13 @@ content:
     type: text_textarea
     region: content
   field_hub:
-    weight: 16
+    weight: 27
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 17
+    weight: 28
     settings:
       display_label: true
     third_party_settings: {  }
@@ -129,6 +131,12 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     type: entity_reference_paragraphs
+    region: content
+  field_typologie:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   langcode:
     type: language_select

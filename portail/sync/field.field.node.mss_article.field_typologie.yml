@@ -1,0 +1,21 @@
+uuid: 77051435-1e60-49d2-85cb-5a7071235237
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_typologie
+    - node.type.mss_article
+  module:
+    - options
+id: node.mss_article.field_typologie
+field_name: field_typologie
+entity_type: node
+bundle: mss_article
+label: Typologie
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer
