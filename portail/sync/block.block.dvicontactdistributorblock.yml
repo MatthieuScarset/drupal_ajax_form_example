@@ -10,7 +10,7 @@ dependencies:
 id: dvicontactdistributorblock
 theme: theme_boosted
 region: sidebar
-weight: -38
+weight: -40
 provider: null
 plugin: dvi_contact_distributor_block
 settings:

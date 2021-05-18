@@ -1,0 +1,26 @@
+uuid: e8d6a2b3-01b0-4973-ba7f-b5d326fd423e
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: msscategories
+theme: theme_boosted
+region: sidebar
+weight: -35
+provider: null
+plugin: msscategories_block
+settings:
+  id: msscategories_block
+  label: Categories
+  provider: oab_frontoffice
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: /test-block
+    negate: false
+    context_mapping: {  }

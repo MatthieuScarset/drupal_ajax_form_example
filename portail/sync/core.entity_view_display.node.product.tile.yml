@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -95,6 +96,7 @@ hidden:
   field_meta_description: true
   field_meta_title: true
   field_metatags: true
+  field_p_wysiwyg_rebond: true
   field_product: true
   field_region: true
   field_solution: true
