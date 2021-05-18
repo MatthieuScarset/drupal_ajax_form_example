@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.mss_article.field_hub
     - field.field.node.mss_article.field_hub_portal
     - field.field.node.mss_article.field_p_wysiwyg_rebond
-    - field.field.node.mss_article.field_typologie
+    - field.field.node.mss_article.field_typology
     - node.type.mss_article
   module:
     - field_group
@@ -48,7 +48,7 @@ third_party_settings:
       label: Write
     group_classify:
       children:
-        - field_typologie
+        - field_typology
         - field_hub
         - field_hub_portal
       parent_name: group_o
@@ -108,13 +108,13 @@ content:
     type: text_textarea
     region: content
   field_hub:
-    weight: 27
+    weight: 30
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 28
+    weight: 31
     settings:
       display_label: true
     third_party_settings: {  }
@@ -132,8 +132,8 @@ content:
     third_party_settings: {  }
     type: entity_reference_paragraphs
     region: content
-  field_typologie:
-    weight: 26
+  field_typology:
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     type: options_select

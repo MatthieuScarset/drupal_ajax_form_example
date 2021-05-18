@@ -55,3 +55,11 @@ block.settings.rebond_subhome_block:
       block_link_text:
         type: label
         label: 'Link text'
+
+block.settings.category_mss:
+  type: block_settings
+  label: 'MSS Category'
+  mapping:
+    block_title:
+      type: label
+      label: 'Categories'

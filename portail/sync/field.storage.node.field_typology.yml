@@ -1,25 +1,25 @@
-uuid: a1dbcd01-06d4-4146-aeb3-d439f7c7d793
+uuid: 09752f5d-52ef-4efe-8508-4809c1708bd1
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - options
-id: node.field_typologie
-field_name: field_typologie
+id: node.field_typology
+field_name: field_typology
 entity_type: node
-type: list_integer
+type: list_string
 settings:
   allowed_values:
     -
-      value: 0
-      label: Article
+      value: article
+      label: article
     -
-      value: 1
-      label: 'Support topic'
+      value: support_topics
+      label: 'support topics'
     -
-      value: 2
-      label: Video
+      value: video
+      label: video
   allowed_values_function: ''
 module: options
 locked: false

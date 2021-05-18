@@ -1,5 +1,5 @@
-uuid: 86eef962-fdaa-44b3-aac4-01ed95bd1d9e
-langcode: fr
+uuid: e8d6a2b3-01b0-4973-ba7f-b5d326fd423e
+langcode: en
 status: true
 dependencies:
   module:
@@ -7,24 +7,20 @@ dependencies:
     - system
   theme:
     - theme_boosted
-id: rebond_subhome_blogs
+id: msscategories
 theme: theme_boosted
 region: sidebar
-weight: -36
+weight: -35
 provider: null
-plugin: rebond_subhome_block
+plugin: msscategories_block
 settings:
-  id: rebond_subhome_block
-  label: Blogs
+  id: msscategories_block
+  label: Categories
   provider: oab_frontoffice
   label_display: visible
-  block_text: 'View more Blogs'
-  block_link: /en/blogs
-  block_link_text: 'Click here'
-  block_image_src: '26369'
 visibility:
   request_path:
     id: request_path
-    pages: /fr/presse
+    pages: /test-block
     negate: false
     context_mapping: {  }

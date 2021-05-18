@@ -10,7 +10,7 @@ dependencies:
 id: zonerebondwysiwyg
 theme: theme_boosted
 region: sidebar
-weight: -36
+weight: -38
 provider: null
 plugin: zone_rebond_wysiwyg_block
 settings:
