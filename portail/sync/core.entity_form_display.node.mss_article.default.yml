@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.mss_article.field_categories
     - field.field.node.mss_article.field_content
     - field.field.node.mss_article.field_hub
     - field.field.node.mss_article.field_hub_portal
@@ -48,6 +49,7 @@ third_party_settings:
       label: Write
     group_classify:
       children:
+        - field_categories
         - field_typology
         - field_hub
         - field_hub_portal
@@ -99,6 +101,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_categories:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_content:
     weight: 4
     settings:
@@ -108,13 +116,13 @@ content:
     type: text_textarea
     region: content
   field_hub:
-    weight: 30
+    weight: 34
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 31
+    weight: 35
     settings:
       display_label: true
     third_party_settings: {  }
@@ -133,7 +141,7 @@ content:
     type: entity_reference_paragraphs
     region: content
   field_typology:
-    weight: 29
+    weight: 33
     settings: {  }
     third_party_settings: {  }
     type: options_select

@@ -3,8 +3,9 @@ langcode: en
 status: true
 dependencies:
   module:
+    - ctools
+    - node
     - oab_frontoffice
-    - system
   theme:
     - theme_boosted
 id: msscategories
@@ -19,8 +20,17 @@ settings:
   provider: oab_frontoffice
   label_display: visible
 visibility:
-  request_path:
-    id: request_path
-    pages: /test-block
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      mss_article: mss_article
     negate: false
-    context_mapping: {  }
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      mss_article: mss_article
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.mss_article.field_categories
     - field.field.node.mss_article.field_content
     - field.field.node.mss_article.field_hub
     - field.field.node.mss_article.field_hub_portal
@@ -40,6 +41,7 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_categories: true
   field_hub: true
   field_hub_portal: true
   field_typology: true
