@@ -3,9 +3,7 @@
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\term;
 
 
 /**
@@ -21,12 +19,11 @@ use Drupal\taxonomy\Entity\term;
 
 class MssCategoryBlock extends BlockBase {
 
-  /**
-   * {@inheritdoc}
-   */
     public function build() {
 
       $contents = array();
+      $block = array();
+      $cache = array('contexts' => array('url.path'));
 
       $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'category_mss']);
 
@@ -34,9 +31,28 @@ class MssCategoryBlock extends BlockBase {
         $contents [$term->tid->value] = $term->name->value;
       }
 
-     $block['#markup'] = $contents;
 
+      $node = \Drupal::routeMatch()->getParameter('node');
+      $nid = $node->nid->value;
+
+      $nodes = Node::load($nid);
+
+       if ($nodes->hasField('field_categories'))
+       {
+         $categories_id = $nodes->get('field_categories');
+
+         $categories = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($categories_id->target_id);
+
+         $categories_name= $categories->name->value;
+
+         $block ['variable_categories'] = $categories_name;
+
+       }
+
+     $block['#markup'] = $contents;
+     $block['#cache'] = $cache;
 
       return $block;
     }
+
 }
