@@ -4,6 +4,17 @@ oab_synomia_search_engine.engine_url:
   defaults:
     _controller: '\Drupal\oab_synomia_search_engine\Controller\OabSynomiaSearchEngineController::contentSearch'
     _title_callback: '\Drupal\oab_synomia_search_engine\Controller\OabSynomiaSearchEngineController::getPageTitle'
+    type_search: 'default'
+  requirements:
+    _access: 'TRUE'
+
+#page du moteur de recherche principal
+oab_synomia_search_engine.mss_assistance_engine_url:
+  path: '/mss-assistance-search'
+  defaults:
+    _controller: '\Drupal\oab_synomia_search_engine\Controller\OabSynomiaSearchEngineController::contentSearch'
+    _title_callback: '\Drupal\oab_synomia_search_engine\Controller\OabSynomiaSearchEngineController::getPageTitle'
+    type_search: 'mss'
   requirements:
     _access: 'TRUE'
 

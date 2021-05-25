@@ -42,6 +42,12 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
                 '#default_value' => \Drupal::state()->get('url_synomia_'.$language->getId()),
             );
         }
+        //URL SYnomia pour MSS Assistance (pour l'appel au flux)
+        $form['url_synomia_mss_assistance'] = array(
+            '#type' => 'textfield',
+            '#title' => 'URL Synomia for MSS Assistance',
+            '#default_value' => $config->get('url_synomia_mss_assistance'),
+        );
         //nombre de résultats par page
         $form['nb_results_per_page'.$language->getId()] = array(
             '#type' => 'textfield',
@@ -57,6 +63,13 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
                 '#default_value' => $config->get('order_content_types_'.$language->getId()),
             );
         }
+        // Ordre des typologies pour MSS Assistance (pour l'appel au flux)
+        $form['order_typology_mss_assistance'] = array(
+          '#type' => 'textarea',
+          '#size' => '200',
+          '#title' => 'Typology order for MSS Assistance',
+          '#default_value' => $config->get('order_typology_mss_assistance'),
+        );
     return parent::buildForm($form, $form_state);
   }
 
@@ -72,6 +85,8 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
             $config->set('order_content_types_'.$language->getId(), $form_state->getValue('order_content_types_'.$language->getId()));
         }
         $config->set('nb_results_per_page', $form_state->getValue('nb_results_per_page'));
+        $config->set('url_synomia_mss_assistance', $form_state->getValue('url_synomia_mss_assistance'));
+        $config->set('order_typology_mss_assistance', $form_state->getValue('order_typology_mss_assistance'));
         $config->save();
     parent::submitForm($form, $form_state);
   }

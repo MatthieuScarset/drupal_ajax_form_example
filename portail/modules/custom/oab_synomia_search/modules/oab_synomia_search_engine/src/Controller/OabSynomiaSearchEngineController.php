@@ -21,7 +21,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
     }
 
   /** Méthode appelée lorsqu'on appelle la page de recherche */
-  public function contentSearch(Request $request) {
+  public function contentSearch($type_search = 'default',Request $request) {
         $render_array = array();
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         $parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
@@ -29,10 +29,15 @@ class OabSynomiaSearchEngineController extends ControllerBase
         $filtre_rubrique = (!empty($parameters) && isset($parameters['rubrique'])) ? $parameters['rubrique'] : '';
         $num_page = (!empty($parameters) && isset($parameters['page'])) ? $parameters['page'] : '';
 
-        $search_form = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchEngineForm');
+        if($type_search == 'default') {
+          $search_form = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchEngineForm');
+        }
+        elseif ($type_search == 'mss'){
+          $search_form = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaMSSAssistanceSearchEngineForm');
+        }
 
         if (!empty($mot_recherche)) {
-            $result = $this->getSynomiaResult($mot_recherche, $filtre_rubrique, $num_page, '');
+            $result = $this->getSynomiaResult($type_search, $mot_recherche, $filtre_rubrique, $num_page, '');
             if (isset($result) && !empty($result)) {
                 $response = new SynomiaSearchResponse();
                 $response->readXML($result, $filtre_rubrique);
@@ -86,8 +91,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
                 }
 
                 //kint($response->facets);
-                $response->facets = $this->orderFacetsArray($response->facets);
-                $response->results = $this->orderResultsArray($response->results);
+                $response->facets = $this->orderFacetsArray($type_search, $response->facets);
+                $response->results = $this->orderResultsArray($type_search, $response->results);
 
                 $render_array[] = array(
                     '#searchForm' => $search_form,
@@ -159,81 +164,87 @@ class OabSynomiaSearchEngineController extends ControllerBase
         return $render_array;
   }
 
-  private function getSynomiaResult($mot_recherche, $filtre_rubrique, $num_page, $sort_by) {
-        $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-        $url_synomia = \Drupal::state()->get('url_synomia_'.$current_language);
-        //POUR LES TESTS
-        //$url_synomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
+  private function getSynomiaResult($type_search, $mot_recherche, $filtre_rubrique, $num_page, $sort_by) {
+      $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $url_synomia = '';
+      if($type_search == 'default') {
+        $url_synomia = \Drupal::state()->get('url_synomia_' . $current_language);
+      }
+      elseif($type_search == 'mss'){
+        $url_synomia = \Drupal::state()->get('url_synomia_mss_assistance');
+      }
+      //POUR LES TESTS
+      //$url_synomia = 'https://www.synomia.fr/search/xml_request.php?mid=fc982d5c25ff37b9768d8057fee2c5b9';
 
-        if (!empty($url_synomia)) {
-            $path = $url_synomia;
-            if ($current_language == 'ru' || $current_language == 'es' ||$current_language == 'pt-br') {
-                $path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sort_by;
-            } else {
-                $path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sort_by;
-            }
+      if (!empty($url_synomia)) {
+          $path = $url_synomia;
+          if ($current_language == 'ru' || $current_language == 'es' ||$current_language == 'pt-br') {
+              $path .= "&exactSearch=" . urlencode($mot_recherche) . "&sortBy=" . $sort_by;
+          } else {
+              $path .= "&q=" . urlencode($mot_recherche) . "&sortBy=" . $sort_by;
+          }
 
-            //on récupère le nb de résultats par page
-            $config_factory = \Drupal::configFactory();
-            $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
-            if (!empty($config) && !empty($config->get('nb_results_per_page'))) {
-                $nb_results_per_page = $config->get('nb_results_per_page');
-            } else {
-                $nb_results_per_page = 10; // 10 par défaut si aucune configuration
-            }
+          //on récupère le nb de résultats par page
+          $config_factory = \Drupal::configFactory();
+          $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
+          if (!empty($config) && !empty($config->get('nb_results_per_page'))) {
+              $nb_results_per_page = $config->get('nb_results_per_page');
+          } else {
+              $nb_results_per_page = 10; // 10 par défaut si aucune configuration
+          }
 
-            if (isset($num_page) && !empty($num_page)) {
-                $offset = $num_page * $nb_results_per_page;
-                $path .= "&offsetDisplay=".$offset;
-            }
+          if (isset($num_page) && !empty($num_page)) {
+              $offset = $num_page * $nb_results_per_page;
+              $path .= "&offsetDisplay=".$offset;
+          }
 
-            //on ajoute les facettes
-            $path .= "&sortie=facette";
+          //on ajoute les facettes
+          $path .= "&sortie=facette";
 
-            //filtre sur le type de contenu
-            if (!isset($filtre_rubrique) || empty($filtre_rubrique)) {
-                $path .= "&cluster=rubrique"; //sur D7
-                //$path .= "&sortie=facette";
-            } else {
-                $path .= "&filtres[]=rubrique:".$filtre_rubrique;
-            }
+          //filtre sur le type de contenu
+          if (!isset($filtre_rubrique) || empty($filtre_rubrique)) {
+              $path .= "&cluster=rubrique"; //sur D7
+              //$path .= "&sortie=facette";
+          } else {
+              $path .= "&filtres[]=rubrique:".$filtre_rubrique;
+          }
 
-            //oabt($path);die();
-            $ch = curl_init();
+          //oabt($path);die();
+          $ch = curl_init();
 
-            $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
-            if (!empty($config) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
-                $proxy_server = $config_proxy->get('proxy_server').':'.$config_proxy->get('proxy_port');
-            } else {
-                $proxy_server = NULL;
-            }
+          $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
+          if (!empty($config) && !empty($config_proxy->get('proxy_server')) && !empty($config_proxy->get('proxy_port'))) {
+              $proxy_server = $config_proxy->get('proxy_server').':'.$config_proxy->get('proxy_port');
+          } else {
+              $proxy_server = NULL;
+          }
 
-            //var_dump($path);
-            curl_setopt_array($ch, array(
-                    CURLOPT_CONNECTTIMEOUT => 2,
-                    CURLOPT_TIMEOUT => 5,
-                    CURLOPT_PROXY => $proxy_server,
-                    CURLOPT_SSLVERSION => 0,
-                    CURLOPT_HEADER => false,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_URL => $path,
-                )
-            );
-            $ret_value = curl_exec($ch);
-            curl_close($ch);
-            return $ret_value;
-        } else {
-            return null;
-        }
+          //var_dump($path);
+          curl_setopt_array($ch, array(
+                  CURLOPT_CONNECTTIMEOUT => 2,
+                  CURLOPT_TIMEOUT => 5,
+                  CURLOPT_PROXY => $proxy_server,
+                  CURLOPT_SSLVERSION => 0,
+                  CURLOPT_HEADER => false,
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_URL => $path,
+              )
+          );
+          $ret_value = curl_exec($ch);
+          curl_close($ch);
+          return $ret_value;
+      } else {
+          return null;
+      }
     }
 
     /** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
      * @param $old_facets_array
      * @return array
      */
-    private function orderFacetsArray($old_facets_array) {
+    private function orderFacetsArray($type_search, $old_facets_array) {
           $new_facets_array_ordered = array();
-        $content_types = $this->getOrderContentTypesArray();
+        $content_types = $this->getOrderContentTypesArray($type_search);
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
                 $new_facets_array_ordered[$contentType] = $old_facets_array[$contentType];
@@ -248,9 +259,9 @@ class OabSynomiaSearchEngineController extends ControllerBase
      * @param $old_facets_array
      * @return array
      */
-    private function orderResultsArray($old_results_array) {
+    private function orderResultsArray($type_search, $old_results_array) {
           $new_results_array_ordered = array();
-        $content_types = $this->getOrderContentTypesArray();
+        $content_types = $this->getOrderContentTypesArray($type_search);
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
                 $new_results_array_ordered[$contentType] = $old_results_array[$contentType];
@@ -261,20 +272,26 @@ class OabSynomiaSearchEngineController extends ControllerBase
         return $old_results_array;
     }
 
-    private function getOrderContentTypesArray() {
+    private function getOrderContentTypesArray($type_search) {
         $content_types = array();
         $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         //on récupère le nb de résultats par page
         $config_factory = \Drupal::configFactory();
         $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
         if (!empty($config) && !empty($config->get('order_content_types_'.$current_language))) {
-            $order_string = $config->get('order_content_types_'.$current_language);
-            if (!empty($order_string)) {
-                $tmp_content_types = explode(',', $order_string);
-                foreach ($tmp_content_types as $tmp) {
-                    $content_types[] = trim($tmp);
-                }
-            }
+          $order_string = "";
+          if($type_search == 'default') {
+            $order_string = $config->get('order_content_types_' . $current_language);
+          }
+          elseif ($type_search == 'mss'){
+            $order_string = $config->get('order_typology_mss_assistance');
+          }
+          if (!empty($order_string)) {
+              $tmp_content_types = explode(',', $order_string);
+              foreach ($tmp_content_types as $tmp) {
+                  $content_types[] = trim($tmp);
+              }
+          }
         }
         return $content_types;
     }
