@@ -102,7 +102,7 @@ function oab_bvpn_import_batch($columns, $lineNumber, &$context) {
       $tidsLocation[] = $term->id();
     }
     else{
-      logErrorMessage($lineNumber, $csp['title'], 'incorrect taxonomy term for Location (term not found) ', $csp['field_location'], $context);
+      logErrorMessage($lineNumber, $csp['title'], 'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
     }
   }
   $node->set('field_location', $tidsLocation);
@@ -201,11 +201,12 @@ function getTermFromLabelAndVocabulary($termLabel, $vocabulary, $langCode = "en"
       'name' => trim($termLabel)
     ]
   );
-
  if (isset($entities) && !empty($entities)) {
     return array_shift($entities);
   }
   else{
+    \Drupal::logger("oab_bvpn_import")->info('terme non trouvé - vid : '.$vocabulary.' - langcode : '.$langCode.' - name: '.trim($termLabel));
+
     return false;
   }
 }
