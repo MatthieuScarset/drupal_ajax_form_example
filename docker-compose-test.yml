@@ -1,0 +1,33 @@
+version: "3.1"
+services:
+  webserver-d9:
+    image: nginx:alpine
+    container_name: ruby-d9_webserver
+    working_dir: /application
+    volumes:
+      - ./data/log:/var/log/nginx/
+      - /./:/application
+      - ./data/nginx/one_i.conf:/etc/nginx/conf.d/default.conf
+      - /var/www/drupal_9/shared/:/var/www/drupal_9/shared
+    ports:
+      - "8000:80"
+    networks:
+      - master_default
+      - default
+
+  php-fpm-d9:
+    build: config/docker/test/php-fpm
+    container_name: ruby-d9_php-fpm
+    working_dir: /application
+    volumes:
+      - ./:/application
+      - ./config/docker/local/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      - /var/www/drupal_9/shared/:/var/www/drupal_9/shared
+    networks:
+      - master_default
+      - default
+
+
+networks:
+  master_default:
+    external: true

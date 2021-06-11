@@ -8,15 +8,12 @@ set :default_stage, "dev"
 set :local_user,  "oab_web"
 set :group, "www-data"
 set :runner_group, "www-data"
-set :file_permissions_paths, ["/var/www/ruby/current"]
-set :file_permissions_users, ["www-data"]
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/var/www/ruby'
-set :docker_file, '/etc/docker/ruby/docker-compose.yml'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -31,7 +28,7 @@ set :docker_file, '/etc/docker/ruby/docker-compose.yml'
 # set :pty, true
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default')
+set :linked_dirs, fetch(:linked_dirs, []).push('sites/default')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -39,48 +36,16 @@ set :linked_dirs, fetch(:linked_dirs, []).push('portail/sites/default')
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-# release id is just the commit hash used to create the tarball.
-#set :project_release_id, #{release_name}
-# the same path is used local and remote... just to make things simple for who wrote this.
-# see http://hugopl.github.io/2014/07/29/Capistrano-3-copy-deploy.html
-set :project_tarball_path, "/tmp/#{fetch(:application)}.tar.gz"
+# Set dev as default. Other are defined in there own deploy/stage.rb
+set :docker_compose, 'docker-compose-#{fetch:stage}.yml'
+set :container_php, 'ruby-d9_php-fpm'
+set :container_nginx, 'ruby-d9_webserver'
+set :drush, '/application/vendor/bin/drush'
+set :root_dir, '/application'
 
-
-# Capistrano will use the module in :git_strategy property to know what to do on some Capistrano operations.
-#set :git_strategy, NoGitStrategy
-
-#namespace :deploy do
-
-  #after :restart, :clear_cache do
-    #on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    #end
-  #end
-
-#end
 
 namespace :deploy do
 
-   desc 'Delete unnecessary files'
-   task :delete_unnecessary_files do
-    on roles(:all) do
-    execute :rm, "-rf #{release_path}/scripts"
-     execute :rm, "-rf #{release_path}/config/deploy"
-     execute :rm, "-rf #{release_path}/config/deploy.rb"
-     execute :rm, "-rf #{release_path}/.git"
-     execute :rm, "-rf #{release_path}/public"
-     execute :rm, "-rf #{release_path}/tmp"
-     execute :rm, "-rf #{release_path}/Capfile"
-     execute :rm, "-rf #{release_path}/log"
-     execute :rm, "-rf #{release_path}/REVISION"
-     execute :rm, "-rf #{release_path}/.gitignore"
-     execute :rm, "-rf #{release_path}/README.md"
-    end
-   end
-   
    desc 'Save the archive file'
    task :save_archive_file do
     on roles(:all) do
@@ -88,38 +53,56 @@ namespace :deploy do
      execute :tar, 'cfzp', "#{deploy_to}/shared/saved_archives/#{release_timestamp}.tar.gz", "-C #{releases_path} #{release_timestamp}"
     end
    end
-   
-   desc 'Create /var/www/current symbolik link'
-   task :create_current_link do
+
+end
+
+
+namespace :drupal do
+
+   desc 'Install composer dependencies'
+   task :run_composer do
     on roles(:all) do
-     execute "ln -s #{release_path} /var/www/current"
+      execute "docker exec -w /application #{fetch(:container_php)} composer install"
     end
    end
 
-   desc 'Re-run docker'
-   task :restart_docker do
-    on roles(:all) do
-     execute "docker-compose -f #{fetch(:docker_file)} stop"
-     execute "docker-compose -f #{fetch(:docker_file)} up -d"
 
-    end
-   end
-
-   desc 'Run update commands on server'
+   desc 'Update Drupal'
    task :drush_update do
     on roles(:all) do
-     execute "drush oab:updb --yes --root=#{release_path}/portail"
-   	 #execute "drush cim --yes --root=#{release_path}/portail"
-     execute "drush cr --root=#{release_path}/portail"
+     #execute "docker exec -it #{fetch(:container_php)} drush oab:updb --yes"
+
+     execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} updb --yes"
+     execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cr"
+     execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cim --yes"
+     execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cr"
     end
    end
 end
 
+namespace :docker do
 
-#before 'deploy:updating', 'deploy:upload_tarball'
-after 'deploy:updating', 'deploy:delete_unnecessary_files'
+  desc 'Stop project containers'
+  task :stop_containers do
+    on roles(:all) do
+      execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} down"
+      execute "docker stop webserver"
+    end
+  end
+
+  desc 'Run project containers'
+  task :run_containers do
+    on roles(:all) do
+      execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} up -d --build "
+      execute "docker-compose -f /etc/docker/server/master/docker-compose.yml up -d"
+    end
+  end
+
+end
+
+
+before 'deploy:starting', 'docker:stop_containers'
 after 'deploy:updating', 'deploy:save_archive_file'
-#after 'deploy:updating', "deploy:create_current_link"
-#after 'deploy:publishing', "deploy:set_permissions:acl"
-after 'deploy:publishing', 'deploy:restart_docker'
-after 'deploy:restart_docker', 'deploy:drush_update'
+after 'deploy:publishing', 'docker:run_containers'
+after 'deploy:publishing', 'drupal:run_composer'
+after 'deploy:publishing', 'drupal:drush_update'
