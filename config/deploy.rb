@@ -37,7 +37,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('sites/default')
 set :keep_releases, 5
 
 # Set dev as default. Other are defined in there own deploy/stage.rb
-set :docker_compose, 'docker-compose-#{fetch:stage}.yml'
+set :docker_compose, "docker-compose-#{fetch:stage}.yml"
 set :container_php, 'ruby-d9_php-fpm'
 set :container_nginx, 'ruby-d9_webserver'
 set :drush, '/application/vendor/bin/drush'
@@ -85,7 +85,7 @@ namespace :docker do
   desc 'Stop project containers'
   task :stop_containers do
     on roles(:all) do
-      execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} down"
+      #execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} down"
       execute "docker stop webserver"
     end
   end
