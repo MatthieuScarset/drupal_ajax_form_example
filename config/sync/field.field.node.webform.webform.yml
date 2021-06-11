@@ -21,7 +21,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   default_data: ''
-  status: '1'
+  status: true
   handler: 'default:webform'
   handler_settings: {  }
   open: ''

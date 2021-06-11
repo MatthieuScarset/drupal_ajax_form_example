@@ -46,8 +46,8 @@ class RebondProductBlock extends BlockBase {
       if ($node->hasField('field_axiome_data')) {
 
         //on deserialise les données à passer au template
-        $field_axiome_data = isset($node->field_axiome_data->value) ? unserialize($node->field_axiome_data->value) : array();
-        if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
+        $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
+        if (count($field_axiome_data) > 0) {
 
           $axiome_data = $field_axiome_data;
 

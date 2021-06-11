@@ -9,3 +9,15 @@ display:
         options:
           tags:
             previous: Предыдущая
+      fields:
+        type:
+          label: Provider
+      filters:
+        type:
+          expose:
+            label: Provider
+  block_1:
+    display_options:
+      fields:
+        type:
+          label: Provider

@@ -15,6 +15,6 @@ enforced:
 
 # Information added by Drupal.org packaging script on 2016-01-20
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_migrate_content'
 datestamp: 1453308360

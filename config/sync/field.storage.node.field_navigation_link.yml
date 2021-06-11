@@ -1,0 +1,19 @@
+uuid: adc2091a-2cf0-457f-9aeb-6db3bffb06ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_navigation_link
+field_name: field_navigation_link
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

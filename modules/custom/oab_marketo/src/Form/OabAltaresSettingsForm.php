@@ -96,52 +96,50 @@ class OabAltaresSettingsForm extends ConfigFormBase {
       '#title' => t('Configure Altares'),
     ];
 
-    if ($this->currentUser()->hasPermission('administer site configuration')) {
-      $form['altares'] = [
-        '#type' => 'details',
-        '#open' => true,
-        '#title' => t('Config Altares API'),
-        '#description'    => t("Altares API auth config"),
-        '#group' => 'tabs'
-      ];
+    $form['altares'] = [
+      '#type' => 'details',
+      '#open' => true,
+      '#title' => t('Config Altares API'),
+      '#description'    => t("Altares API auth config"),
+      '#group' => 'tabs'
+    ];
 
-      $form['altares'][self::ALTARES_API_URL] = [
-        '#type' => 'url',
-        '#title' => $this->t('Altares API URL'),
-        '#default_value' => $config->get(self::ALTARES_API_URL),
-        '#required' => true
-      ];
+    $form['altares'][self::ALTARES_API_URL] = [
+      '#type' => 'url',
+      '#title' => $this->t('Altares API URL'),
+      '#default_value' => $config->get(self::ALTARES_API_URL),
+      '#required' => true
+    ];
 
-      $form['altares'][self::CONSUMER_KEY] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Consumer key'),
-        '#default_value' => $config->get(self::CONSUMER_KEY),
-        '#required' => true
-      ];
+    $form['altares'][self::CONSUMER_KEY] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Consumer key'),
+      '#default_value' => $config->get(self::CONSUMER_KEY),
+      '#required' => true
+    ];
 
-      $form['altares'][self::CONSUMER_SECRET] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Consumer secret'),
-        '#default_value' => $config->get(self::CONSUMER_SECRET),
-        '#required' => true
-      ];
+    $form['altares'][self::CONSUMER_SECRET] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Consumer secret'),
+      '#default_value' => $config->get(self::CONSUMER_SECRET),
+      '#required' => true
+    ];
 
-      $form['altares'][self::NB_MAX_REQUEST] = [
-        '#type' => 'number',
-        '#title' => $this->t('Max client request allowed'),
-        '#description' => $this->t("Number of request allowed for a token/client"),
-        '#default_value' => $config->get(self::NB_MAX_REQUEST) ?: 50,
-        '#required' => true
-      ];
+    $form['altares'][self::NB_MAX_REQUEST] = [
+      '#type' => 'number',
+      '#title' => $this->t('Max client request allowed'),
+      '#description' => $this->t("Number of request allowed for a token/client"),
+      '#default_value' => $config->get(self::NB_MAX_REQUEST) ?: 50,
+      '#required' => true
+    ];
 
-      $form['altares'][self::CACHE_RETENTION_TIME] = [
-        '#type' => 'number',
-        '#title' => $this->t('Cache retention time'),
-        '#description' => $this->t("How many hours altares data will be saved in cache."),
-        '#default_value' => $config->get(self::CACHE_RETENTION_TIME) ?: 24,
-        '#required' => true
-      ];
-    }
+    $form['altares'][self::CACHE_RETENTION_TIME] = [
+      '#type' => 'number',
+      '#title' => $this->t('Cache retention time'),
+      '#description' => $this->t("How many hours altares data will be saved in cache."),
+      '#default_value' => $config->get(self::CACHE_RETENTION_TIME) ?: 24,
+      '#required' => true
+    ];
 
     $form['photo_commerciale'] = [
       '#type' => 'details',
@@ -155,7 +153,7 @@ class OabAltaresSettingsForm extends ConfigFormBase {
       '#title' => $this->t("Upload file"),
       '#upload_location' => PhotoCommercialeService::IMPORT_DIRECTORY,
       '#upload_validators' => array(
-        'file_validate_extensions' => array('csv zip'),
+        'file_validate_extensions' => array('csv'),
         'file_validate_size' => array(256 * 1024 * 1024),
       )
     ];
@@ -199,27 +197,25 @@ class OabAltaresSettingsForm extends ConfigFormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    if ($this->currentUser()->hasPermission('administer site configuration')) {
-      $config = $this->config($this->getConfigName());
-      $config
-        ->set(self::CONSUMER_KEY, $form_state->getValue(self::CONSUMER_KEY))
-        ->set(self::CONSUMER_SECRET, $form_state->getValue(self::CONSUMER_SECRET))
-        ->set(self::ALTARES_API_URL, $form_state->getValue(self::ALTARES_API_URL))
-        ->set(self::NB_MAX_REQUEST, $form_state->getValue(self::NB_MAX_REQUEST))
-        ->set(self::CACHE_RETENTION_TIME, $form_state->getValue(self::CACHE_RETENTION_TIME));
+    $config = $this->config($this->getConfigName());
+    $config
+      ->set(self::CONSUMER_KEY, $form_state->getValue(self::CONSUMER_KEY))
+      ->set(self::CONSUMER_SECRET, $form_state->getValue(self::CONSUMER_SECRET))
+      ->set(self::ALTARES_API_URL, $form_state->getValue(self::ALTARES_API_URL))
+      ->set(self::NB_MAX_REQUEST, $form_state->getValue(self::NB_MAX_REQUEST))
+      ->set(self::CACHE_RETENTION_TIME, $form_state->getValue(self::CACHE_RETENTION_TIME));
 
-      if ($form_state->hasValue(self::AUTHORIZED_USERS)) {
-        $users_value = $form_state->getValue(self::AUTHORIZED_USERS);
-        $users_id = [];
-        foreach ($users_value as $value) {
-          $users_id[] = $value['target_id'];
-        }
-
-        $config->set(self::AUTHORIZED_USERS, $users_id);
+    if ($form_state->hasValue(self::AUTHORIZED_USERS)) {
+      $users_value = $form_state->getValue(self::AUTHORIZED_USERS);
+      $users_id = [];
+      foreach ($users_value as $value) {
+        $users_id[] = $value['target_id'];
       }
-      $config->save();
+
+      $config->set(self::AUTHORIZED_USERS, $users_id);
     }
 
+    $config->save();
     parent::submitForm($form, $form_state); // TODO: Change the autogenerated stub
   }
 

@@ -104,14 +104,5 @@
     "file": "files/powerpage/pourquoi-obs-1-1-1.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/pourquoi-obs-1-1-1.jpg"
   }]
-},{
-  "id": "clicktocall",
-  "label": "Click to call",
-  "title": "Click to call",
-  "items": [{
-    "label": "Click to call button",
-    "file": "files/clicktocall/call-button.html.twig",
-    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/clicktocall/call-button.png"
-  }]
 }
 ]

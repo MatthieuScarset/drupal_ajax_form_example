@@ -113,7 +113,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
             $results_nodes = $query_nodes->execute()->fetchAll();
 
             foreach ($results_nodes as $node) {
-                $alias = \Drupal::service('path_alias.manager')
+                $alias = \Drupal::service('path.alias_manager')
                     ->getAliasByPath('/node/' . $node->nid, $node->langcode);
 
                 $prefixe = (isset($prefixes[$current_language])) ? $prefixes[$current_language] : $current_language;

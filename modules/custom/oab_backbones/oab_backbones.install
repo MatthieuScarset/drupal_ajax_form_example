@@ -34,14 +34,6 @@ function oab_backbones_update_8004() {
     include_once("updates/update_8004.inc");
 }
 
-
-/**
- * Modification Table Shadow Site
- */
-function oab_backbones_update_8005() {
-  include_once("updates/update_8005.inc");
-}
-
 function oab_backbones_uninstall() {
     //1. suppression du rôle
     $role = \Drupal\user\Entity\Role::load('fh_backbones');
@@ -161,16 +153,10 @@ function oab_backbones_schema() {
         'fields' => array(
             'sid' => array(
                 'description' => 'ID of the site',
-                'type' => 'serial',
+                'type' => 'int',
                 'unsigned' => TRUE,
                 'not null' => TRUE,
-            ),
-            'shadow_code' => array(
-              'description' => 'Code of the site',
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => FALSE,
-              'default' => '',
+                'default' => 0,
             ),
             'probe_name' => array(
                 'description' => 'Name of the probe site',

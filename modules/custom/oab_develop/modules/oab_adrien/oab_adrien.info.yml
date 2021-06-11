@@ -8,6 +8,6 @@ dependencies:
 
 # Information added by Drupal.org packaging script on 2017-02-21
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_adrien'
 datestamp: 1487688273

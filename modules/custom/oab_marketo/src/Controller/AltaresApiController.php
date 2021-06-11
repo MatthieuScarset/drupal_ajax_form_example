@@ -114,29 +114,22 @@ class AltaresApiController extends ControllerBase implements ContainerInjectionI
         //recup info par duns
         $res = $this->altaresService->getInfo($duns);
 
-        if (!empty($res)){
-          $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"];
-          $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"];
-          $raison_sociale = $res[0]["organization"]["primaryName"];
+        $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"];
+        $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"];
+        $raison_sociale = $res[0]["organization"]["primaryName"];
 
-          $photo_commerciale = $this->photoCommercialeService->getPhotoCommercialeItem($reg_numb_type, $reg_numb, $raison_sociale);
+        $photo_commerciale = $this->photoCommercialeService->getPhotoCommercialeItem($reg_numb_type, $reg_numb, $raison_sociale);
 
-          if (!empty($photo_commerciale)){
-            $res_photo = $photo_commerciale->getFieldsAsArray();
-          } else {
-            $res_photo = [];
-          }
-        } else {
-          $res = [];
-          $res_photo = [];
-        }
-        
         $return  = [
           'altares' => $res,
-          'photo_commerciale' => $res_photo,
+          'photo_commerciale' => $photo_commerciale->getFieldsAsArray()
         ];
 
-        return new JsonResponse($return);
+        if (!empty($return)) {
+            return new JsonResponse($return);
+        } else {
+            return new JsonResponse([]);
+        }
     }
 }
 

@@ -1,0 +1,21 @@
+uuid: 686bb7b9-a957-4b32-a661-71530ce10489
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_text_zone
+    - node.type.hp_eclairage_thematique
+  module:
+    - text
+id: node.hp_eclairage_thematique.field_text_zone
+field_name: field_text_zone
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Text Zone'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

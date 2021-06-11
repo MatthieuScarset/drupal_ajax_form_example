@@ -78,15 +78,14 @@ class ImportPerformanceData
             $num_lines++;
             $columns = explode(",", $row);
 
-            if ($num_lines > 1) {
-                if (isset($columns[SID_A]) && $columns[SID_A] <> ""
-                    && isset($shadow_sites[$columns[SID_A]]) && $shadow_sites[$columns[SID_A]] <> ""
-                    && isset($columns[SID_B]) && $columns[SID_B] <> ""
-                    && isset($shadow_sites[$columns[SID_B]]) && $shadow_sites[$columns[SID_B]] <> "") {
-                    $batch_op[] = array('oab_backbones_import_batch', array($columns, $shadow_sites, $date));
-                }
+            if (isset($columns[SID_A]) && $columns[SID_A] <> ""
+                && isset($shadow_sites[$columns[SID_A]]) && $shadow_sites[$columns[SID_A]] <> ""
+                && isset($columns[SID_B]) && $columns[SID_B] <> ""
+                && isset($shadow_sites[$columns[SID_B]]) && $shadow_sites[$columns[SID_B]] <> "") {
+                $batch_op[] = array('oab_backbones_import_batch', array($columns, $shadow_sites, $date));
             }
         }
+
         fclose($fp);
         unlink($filename);
 

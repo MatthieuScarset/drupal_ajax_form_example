@@ -3,6 +3,6 @@ description: 'Varnish and Akamai cache functions'
 type: module
 package: OAB
 version: VERSION
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_akamai'
 datestamp: 1519745454

@@ -5,6 +5,6 @@ package: OAB
 # core: 8.x
 
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_user_access_rights'
 datestamp: 1477401657

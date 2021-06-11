@@ -8,7 +8,7 @@ configure: oab_orange_business_lounge_settings
 # core: 8.x
 # Information added by Drupal.org packaging script on 2019-05-23
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_orange_business_lounge'
 
 libraries:

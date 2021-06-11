@@ -46,7 +46,7 @@ function oab_migrate_workflow_sid_correspondance($old_sid) {
 /** Permet de migrer les images contenues dans un body de wysiwyg
  * @param $content
  */
-function oab_migrate_wysiwyg_images($content, $nidd7) {
+function oab_migrate_wysiwyg_images($content, $nidd7){
   //$content = $content_field->value;
   //Pattern de recherche pour une image dans un WYSIWYG
     $pattern = '/\[\[.*\"fid\":\"(.[0-9]*)\".*\]\]/i';
@@ -180,7 +180,7 @@ function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
 }
 
 
-function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_d7, $field_d7, $nid_d7, $bundle_d7) {
+function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_d7, $field_d7, $nid_d7, $bundle_d7){
     \Drupal\Core\Database\Database::setActiveConnection('drupal7');
     $dbd7 = \Drupal\Core\Database\Database::getConnection();
     $new_values = array();

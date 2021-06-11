@@ -5,7 +5,6 @@ namespace Drupal\oab_marketo\DnbHttpClient;
 
 
 use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Core\Config\Config;
 use Drupal\oab_marketo\Form\OabAltaresSettingsForm;
 use GuzzleHttp\Client;
 
@@ -21,15 +20,9 @@ class DnbService {
    */
   private $cache;
 
-  /**
-   * @var \Drupal\Core\Config\ImmutableConfig
-   */
-  private $oabConf;
-
   public function __construct(DnbClient $altares_client, CacheBackendInterface $cache) {
     $this->altaresClient = $altares_client;
     $this->cache = $cache;
-    $this->oabConf = \Drupal::config(OabAltaresSettingsForm::getConfigName());
   }
 
   public function getInfo(string $string): array {
@@ -87,7 +80,7 @@ class DnbService {
 
   private function putInCache($cid, $data) {
     $now = new \DateTime();
-    $cache_time = $this->oabConf->get(OabAltaresSettingsForm::CACHE_RETENTION_TIME) ?: 24;
+    $cache_time = (string) \Drupal::config(OabAltaresSettingsForm::getConfigName())->get(OabAltaresSettingsForm::CACHE_RETENTION_TIME);
     $now->add(new \DateInterval('PT'.$cache_time.'H')); // Ajout de 24h;
     // On cache le résultat en cache pour éviter de faire trop d'appels
     $this->cache->set($cid, $data, $now->format('U'));

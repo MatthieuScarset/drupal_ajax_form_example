@@ -106,8 +106,6 @@ function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
  */
 function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  #set log-in error message
-  $form['#validate'][] = 'oab_backoffice_form_user_login_form_validate';
 
     // Gestion des formulaires pour la GDPR
     gdpr_hook_form_alter($form, $form_state, $form_id);

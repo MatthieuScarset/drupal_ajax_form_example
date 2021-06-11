@@ -1,2 +1,7 @@
-pardot:
-  iframe_url: //marketing-content.orange-business.com/l/137591/2018-05-22/2g2ygt
+pardot: {  }
+marketo:
+  document:
+    mkto_form_id: '1920'
+    mkto_form_follow_up_message:
+      value: "<p>El enlace del documento ha sido enviado con éxito por correo electrónico.<br />\r\nAquí está el enlace para descargar el documento que acaba de seleccionar.<br />\r\n<br />\r\nGracias por visitar nuestro sitio Web www.orange-business.com/es&nbsp;y feliz lectura!</p>\r\n"
+      format: full_html

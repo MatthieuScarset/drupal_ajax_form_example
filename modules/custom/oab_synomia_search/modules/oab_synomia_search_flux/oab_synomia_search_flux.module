@@ -12,7 +12,7 @@ function oab_synomia_search_flux_node_predelete(\Drupal\node\Entity\Node $node) 
         $deleted_content->setNid($node->id());
         $deleted_content->setContentType($node->bundle());
         $deleted_content->setLanguage($node->language()->getId());
-        $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id(), $node->language()->getId());
+        $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $node->id(), $node->language()->getId());
         $deleted_content->setUrl($alias);
         $deleted_content->setDeleted(time());
         $deleted_content->save();

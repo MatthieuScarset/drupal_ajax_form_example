@@ -1,5 +1,5 @@
 pardot:
-  iframe_url: 'https://marketing-content.orange-business.com/l/137591/2017-08-16/28z2dn'
+  iframe_url: ''
 marketo:
   general:
     mkto_domain: //marketing-news.orange-business.com
@@ -7,15 +7,10 @@ marketo:
     mkto_version: '1'
     mkto_sous_domaine: 'market automation'
     mkto_univers_affichage: mar
-    libraries:
-      awe: OBSExternalEmbedCode.js
-      simple_dto: SimpleDTO.js
-      enhanced_form: enhancedFormFunctions-v2.js
-      forms2: forms2.min.js
   document:
     mkto_form_name: 'Formulaire de téléchargement'
-    mkto_form_id: '1356'
+    mkto_form_id: '1608'
     mkto_custom_follow_up_url: ''
     mkto_form_follow_up_message:
-      value: "<p>Nous vous remercions pour votre demande.<br />\r\nVous pouvez télécharger votre document dès à présent.</p>\r\n\r\n<p>A très bientôt.</p>\r\n"
+      value: "<p>The document link has been successfully sent by email.<br />\r\nHere's the link to download the document that you have just selected.<br />\r\nThank you for visiting our website www.orange-business.com and happy reading!</p>\r\n"
       format: full_html

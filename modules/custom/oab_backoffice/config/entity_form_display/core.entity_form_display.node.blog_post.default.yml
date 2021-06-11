@@ -1,3 +1,4 @@
+langcode: en
 status: true
 dependencies:
   config:
@@ -51,7 +52,6 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
-        - group_visual
         - group_classify
         - group_rebond
         - group_seo
@@ -72,6 +72,8 @@ third_party_settings:
         - field_highlight
         - field_profile
         - field_content
+        - field_visual
+        - field_visual_tile
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -95,7 +97,7 @@ third_party_settings:
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
-      weight: 6
+      weight: 5
       format_type: tab
       format_settings:
         id: ''
@@ -114,7 +116,7 @@ third_party_settings:
         - path
         - field_metatags
       parent_name: group_onglets
-      weight: 9
+      weight: 8
       format_type: tab
       format_settings:
         id: ''
@@ -153,7 +155,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 8
+      weight: 7
       format_type: tab
       format_settings:
         id: ''
@@ -169,7 +171,7 @@ third_party_settings:
         - field_page_du_site_2
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
-      weight: 7
+      weight: 6
       format_type: tab
       format_settings:
         id: ''
@@ -178,20 +180,6 @@ third_party_settings:
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
       label: Rebond
-    group_visual:
-      children:
-        - field_visual
-        - field_visual_tile
-      parent_name: group_onglets
-      weight: 5
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: visual
 id: node.blog_post.default
 targetEntityType: node
 bundle: blog_post
@@ -253,7 +241,7 @@ content:
     type: string_textfield
     region: content
   field_end_date:
-    weight: 16
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -345,7 +333,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_page_du_site_2:
     type: entity_reference_autocomplete
@@ -355,7 +342,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_profile:
     weight: 5
@@ -363,7 +349,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
@@ -375,7 +360,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_region:
     weight: 28
@@ -397,6 +381,19 @@ content:
     region: content
   field_visual:
     type: entity_browser_entity_reference
+    weight: 7
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    region: content
+  field_visual_tile:
     weight: 8
     settings:
       entity_browser: browse_media_modal
@@ -407,21 +404,6 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
-      field_widget_replace: false
-    third_party_settings: {  }
-    region: content
-  field_visual_tile:
-    weight: 9
-    settings:
-      entity_browser: browse_media_modal
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: default
-      open: false
-      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -499,7 +481,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 50

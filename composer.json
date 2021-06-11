@@ -48,6 +48,7 @@
         "drupal/replicate_ui": "^1.0",
         "drupal/robotstxt": "^1.4",
         "drupal/roleassign": "1.0-beta1",
+        "drupal/scheduled_updates": "1.x-dev",
         "drupal/seckit": "^2.0",
         "drupal/simplify": "^1.2",
         "drupal/tac_lite": "^1.5",
@@ -129,6 +130,11 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
-        }
-    }
+        },
+		"patches": {
+			"drupal/scheduled_updates": {
+			  "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
+			}
+		}
+	}
 }

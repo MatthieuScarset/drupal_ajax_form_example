@@ -21,9 +21,8 @@ class ShadowSites
     public function getHeaderTable() {
         $header = array(
             'sid' => array('field' => 'sid', 'data' => t('code'), 'sort' => 'asc'),
-            'shadow_code' => array('field' => 'shadow_code', 'data' => t('site code'), 'sort' => 'asc'),
             'probe_name' => array('field' => 'probe_name', 'data' => t('probe name'), 'sort' => 'asc'),
-            'site_label' => array('field' => 'site_label', 'data' => t('site label'), 'sort' => 'asc'),
+            'site_label' => array('field' => 'site_label', 'data' => t('site label'), 'sort' => 'asc')
         );
         return $header;
     }
@@ -71,9 +70,9 @@ class ShadowSites
         if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
             foreach ($ss_to_update as $key => $name) {
                 $query = Database::getConnection()->merge($this::TABLE_NAME)
-                    ->key(array('shadow_code' => $key))
+                    ->key(array('sid' => $key))
                     ->insertFields(array(
-                        'shadow_code' => $key,
+                        'sid' => $key,
                         'probe_name' => $name
                     ))
                     ->updateFields(array(
@@ -113,16 +112,6 @@ class ShadowSites
         }
     }
 
-  /** Méthode qui sauvegarde les valeurs shadow code et probe_name pour un site (formualire BO) */
-  public function updateShadowSiteCodeInDB( $probe_name, $shadow_code) {
-    if (Database::getConnection()->schema()->tableExists($this::TABLE_NAME)) {
-      $query = Database::getConnection()->update($this::TABLE_NAME)
-        ->fields([ 'probe_name' => $probe_name, 'shadow_code' => $shadow_code])
-        ->condition('probe_name', $probe_name, '=')
-        ->execute();
-    }
-  }
-
     /** Méthode qui retourne un tableau (key=sid) de tous les sites où used =1 */
     public function getAllInformationsForUsedShadowSites() {
         $shadow_sites = array();
@@ -135,9 +124,8 @@ class ShadowSites
 
             if (is_array($results) && count($results) > 0) {
                 foreach ($results as $site) {
-                    $shadow_sites[$site->shadow_code] = array(
+                    $shadow_sites[$site->sid] = array(
                         "sid" => $site->sid,
-                        "shadow_code" => $site->shadow_code,
                         "probe_name" => $site->probe_name,
                         "site_label" => $site->site_label,
                         "used" => $site->used,

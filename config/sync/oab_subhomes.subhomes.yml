@@ -17,7 +17,3 @@ product_dvi_term_tid: '858'
 analysts_term_tid: '901'
 analysts_meta: Analysts
 news_term_tid: '1059'
-achievement_term_tid: '1067'
-iot_product_term_tid: '1068'
-iot_achievement_meta: 'IoT Achievements'
-iot_product_meta: 'IoT Products'

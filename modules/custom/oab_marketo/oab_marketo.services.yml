@@ -35,13 +35,6 @@ services:
       - { name: event_subscriber }
 
 
-  # Transform exception in JsonResponse
-  oab_marketo.alter_header_event_subscriber:
-    class: Drupal\oab_marketo\EventSubscriber\AlterHeadersEvent
-    tags:
-      - { name: event_subscriber }
-
-
   ###################################################
   ## Here is all we need to manage Token (get, save, give, etc...)
 
@@ -86,11 +79,11 @@ services:
     class: \GuzzleHttp\Client
     factory: oab_marketo.dnb_http_client_factory:get
 
-  # Dnb Client
+  # Dnb Token Client
   oab_marketo.dnb_client:
     class: Drupal\oab_marketo\DnbHttpClient\DnbClient
     arguments:
-#      - '@oab_marketo.dnb_http_client'
+      - '@oab_marketo.dnb_http_client'
       - '@oab_marketo.logger_channel'
 
   # Service to manage Dnb token

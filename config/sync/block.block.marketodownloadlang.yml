@@ -1,0 +1,25 @@
+uuid: b226aa83-6e44-456a-a6f8-1fdbd5e0408b
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: marketodownloadlang
+theme: theme_boosted
+region: pre_content
+weight: -51
+provider: null
+plugin: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+settings:
+  id: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+  label: marketo-download-lang
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

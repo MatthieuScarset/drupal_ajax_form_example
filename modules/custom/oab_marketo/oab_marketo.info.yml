@@ -5,6 +5,6 @@ package: OAB
 
 
 version: '8.x-1.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_marketo'
 datestamp: 1453308360

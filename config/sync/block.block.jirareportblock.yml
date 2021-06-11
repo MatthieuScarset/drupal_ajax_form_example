@@ -10,7 +10,7 @@ dependencies:
 id: jirareportblock
 theme: theme_boosted
 region: content
-weight: -47
+weight: -46
 provider: null
 plugin: jira_report_block
 settings:

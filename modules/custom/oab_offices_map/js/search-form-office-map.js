@@ -16,9 +16,9 @@
         });
 
         function onChangeHideShowCountries() {
-            //sur le changement de région
+            //sur le changeement de région
             var regionSelect = document.getElementById('edit-region');
-            var region_id = (regionSelect !== null) ? regionSelect.options[regionSelect.selectedIndex].value : null;
+            var region_id = regionSelect.options[regionSelect.selectedIndex].value;
             var offices = drupalSettings.countriesRegionsTab;
             var allCountriesArray = drupalSettings.allCountriesArray;
 

@@ -75,7 +75,7 @@ function SynInitFctSuggest() {
 	debug_suggest("SynInitFctSuggest - Ajout de synTxtInput par defaut");
 	var Elt = document.getElementById("synTxtInput");
 	if ( Elt )
-		AddInput(Elt, "SynSuggestDefault");
+		AddInput(Elt, "SynSuggestDefault");	
 }
 
 function __Start() {
@@ -84,12 +84,12 @@ function __Start() {
 		var Elt = TabSuggestElt[j];
 		if ( Elt ) {
 			var Espace = "";
-			if ( Elt.className != "" ) Espace = " ";
+			if ( Elt.className != "" ) Espace = " "; 
 			Elt.className += Espace + "SynSuggest";
 			Elt.setAttribute("autocomplete","OFF");
 		}
 	}
-
+	
 	if ( TabSuggestLancement["immediat"] ) chargement_immediat();
 	if ( TabSuggestLancement["surfocus"] ) chargement_onfocus();
 	if ( TabSuggestLancement["surtouche"] ) chargement_onkeypress();
@@ -117,7 +117,7 @@ var Script_CSS = false;
 var Init_Fields = false;
 
 function chargement(comm) {
-	GestionDom.debug(comm);
+	GestionDom.debug(comm);	
 	if ( ChargementTimer == null ) {
 		ChargementTimer = chargement_engine();
 	}
@@ -128,11 +128,11 @@ function chargement_engine() {
 	Cpt_Chargement++;
 	var Ph = "Mode auto => Essai "+Cpt_Chargement;
 	debug_suggest(Ph);
-
+		
 	var ChargementNecessaire = ! ( Script_Data && Script_Lib && Script_CSS );
 
 	if ( ChargementNecessaire && Cpt_Chargement <= 3) {
-
+	
 		debug_suggest("Necessite encore des ressources");
 		// Rien pour le moment
 		var Head = document.getElementsByTagName("head")[0];
@@ -155,7 +155,7 @@ function chargement_engine() {
 			Elt.src = src;
 			Head.appendChild(Elt);
 		}
-
+		
 		if ( ! Script_CSS  && Cpt_Chargement <= 1 ) {
 			// on charge les styles
 			Elt = document.createElement("link");
@@ -165,8 +165,8 @@ function chargement_engine() {
 			Head.appendChild(Elt);
 			Script_CSS = true;
 		}
-
-
+		
+		
 		if ( ! Script_Lib  && Cpt_Chargement <= 1 ) {
 			// on charge la librairie suggest
 			Elt = document.createElement("script");
@@ -174,14 +174,14 @@ function chargement_engine() {
 			Elt.src = RessourcesPath+"suggest_lib.js";
 			Head.appendChild(Elt);
 		}
-
-
+		
+		
 		if ( ChargementTimer == null ) ChargementTimer = setTimeout("chargement_engine()", 1000);
 	}
 	else {
 		if ( ! ChargementNecessaire ) {
 			debug_suggest("Toutes les ressources sont presentes");
-
+			
 
 			if ( window.LaunchSuggest && !window.AlreadyLaunched ) {
 				debug_suggest("LaunchSuggest : "+window.LaunchSuggest);
@@ -234,7 +234,7 @@ function chargement_delai(Val) {
 
 function chargement_onkeypress() {
 	var inp;
-	for (var i=0; i<TabSuggestElt.length; i++) {
+	for (let i=0; i < TabSuggestElt.length; i++ ) {
 		inp = TabSuggestElt[i];
 		if ( inp ) {
 			if (inp.addEventListener) {
@@ -258,13 +258,13 @@ function chargement_onkeypress() {
 			}
 		}
 	}
-
+	
 }
 
 function querySt(ji) {
 var hu = window.location.search.substring(1);
 var gy = hu.split("&");
-for (var i=0;i<gy.length;i++) {
+for (i=0;i<gy.length;i++) {
 var ft = gy[i].split("=");
 if (ft[0] == ji) {
 return ft[1];
@@ -274,7 +274,7 @@ return ft[1];
 
 function getSynCollection() {
 	var collec = 0;
-
+	
 	// on regarde dans la combo, puis dans l'url
 	var synSelect = document.getElementById("synCollectionSelect");
 	if (synSelect) collec = synSelect.options[synSelect.selectedIndex].value;
@@ -283,7 +283,7 @@ function getSynCollection() {
 		collec = querySt("collection");
 	}
 	if ( typeof collec == "undefined" ) collec = 0;
-	//console.log("collection detectee : "+collec);
+	//console.log("collection detectee : "+collec); 
 	return collec;
 }
 
@@ -389,7 +389,7 @@ function __DomReadySuggests_Callback(Classe, fn) {
 }
 
 if ( !window.GestionDom || typeof GestionDom != 'object' ) {
-
+ 
 var GestionDom = {};
 // Fonctions interactions avec le browser
 GestionDom.TabFnDomReady = new Array;
@@ -398,7 +398,7 @@ GestionDom.forceOnTimer = false;
 GestionDom.ManagerCreated = false;
 GestionDom.ManagerInProgress = false;
 GestionDom.DomReadySuggests = DomReadySuggests;
-GestionDom.readyStateSuggests = readyStateSuggests;
+GestionDom.readyStateSuggests = readyStateSuggests; 
 GestionDom.__DomReadySuggests = __DomReadySuggests;
 GestionDom.DomCreateManager = DomCreateManager;
 GestionDom.debug = function(Val, type) {
@@ -408,12 +408,12 @@ GestionDom.debug = function(Val, type) {
 
 /*
 if (    typeof document.getElementsByTagName != 'undefined'
-	&& typeof document.getElementById != 'undefined'
+	&& typeof document.getElementById != 'undefined' 
 	&& ( document.getElementsByTagName('body')[0] != null
 		|| document.body != null ) ) {
 	GestionDom.isReady = false;
 	//GestionDom.isReady = true;
-
+	
 }
 */
 
@@ -425,7 +425,7 @@ var SynSuggest = new SynSuggests();
 }
 if ( loadACNow ) { GestionDom.DomReadySuggests( function() {
 // exemple qui prend tous les input dont le name vaut "q" ou "mot"
-// les associe pour l'utilisation des Suggest, et leur retire le focus
+// les associe pour l'utilisation des Suggest, et leur retire le focus 
 var Elt=document.getElementsByTagName("input");
 for (var j=0; j< Elt.length; j++) {
 	if ( Elt[j].name == "q" || Elt[j].name == "mot" ) {

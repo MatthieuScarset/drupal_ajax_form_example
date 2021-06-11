@@ -1,0 +1,11 @@
+uuid: b2c9bd64-1b89-466b-85d4-65a0f76e9c50
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.dvi_contact_global
+id: webform_submission.dvi_contact_global
+target_entity_type_id: webform_submission
+target_bundle: dvi_contact_global
+default_langcode: site_default
+language_alterable: false

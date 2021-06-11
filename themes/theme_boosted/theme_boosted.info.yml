@@ -28,6 +28,6 @@ libraries:
 
 # Information added by Drupal.org packaging script on 2015-12-19
 version: '8.0.0'
-core: '8.x'
+core_version_requirement: ^8.8.0 || ^9.0
 project: 'theme_boosted'
 datestamp: 1450531741

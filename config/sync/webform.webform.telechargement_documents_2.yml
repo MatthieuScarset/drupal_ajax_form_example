@@ -1,4 +1,3 @@
-uuid: a25a7dd8-7578-4d2e-b187-ae3a860592ef
 langcode: fr
 status: open
 dependencies: {  }
@@ -18,13 +17,9 @@ javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
-  ajax_progress_type: ''
-  ajax_effect: ''
-  ajax_speed: null
   page: false
   page_submit_path: ''
   page_confirm_path: ''
-  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -33,7 +28,6 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -54,11 +48,6 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
-  share: false
-  share_node: false
-  share_theme_name: ''
-  share_title: true
-  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -83,20 +72,11 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
-  wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
-  wizard_prev_button_label: ''
-  wizard_next_button_label: ''
-  wizard_toggle: false
-  wizard_toggle_show_label: ''
-  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -110,8 +90,6 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
-  draft_pending_single_message: ''
-  draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: ''
   confirmation_message: "<p>Bonjour,</p>\n\n<p>Nous avons le plaisir de vous communiquer le lien du document que vous venez de s&eacute;lectionner :<br />\n<a href=\"[webform_submission:values:url_du_fichier]\" onmousedown=\"utag_link(utag_data.type_page, ‘Texte', ‘lien vers le PDF', '');\" target=\"_blank\">cliquez-ici.</a></p>\n\n<p>Merci de votre visite sur notre site&nbsp;<a href=\"http://www.orange-business.com\" onmousedown=\"utag_link(utag_data.type_page, ‘Texte', ‘lien vers www.orange-business.com', '');\" style=\"line-height: 1.538em;\">www.orange-business.com</a></p>\n\n<p>A tr&egrave;s bient&ocirc;t.<br />\nL&#39;&eacute;quipe digitale</p>\n\n<p>&nbsp;</p>\n\n<p>Si vous souhaitez vous d&eacute;sincrire, <a href=\"http://marketing-content.orange-business.com/preferencecentreFR\" target=\"_blank\">cliquez ici</a> pour modifier vos pr&eacute;f&eacute;rences.</p>\n"
@@ -122,7 +100,6 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
-  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -139,10 +116,7 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
-  results_customize: false
-  token_view: false
   token_update: false
-  serial_disabled: false
 access:
   create:
     roles:
@@ -194,7 +168,6 @@ handlers:
   email:
     id: email
     label: Email
-    notes: ''
     handler_id: email
     status: true
     conditions: {  }
@@ -217,7 +190,6 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
-      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -227,5 +199,4 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
-      parameters: {  }
-variants: {  }
+uuid: a25a7dd8-7578-4d2e-b187-ae3a860592ef

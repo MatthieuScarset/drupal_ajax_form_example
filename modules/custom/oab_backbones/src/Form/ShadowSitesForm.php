@@ -159,7 +159,6 @@ class ShadowSitesForm extends FormBase
 
             $options[$shadowSite->sid] = array(
                 'sid' => $shadowSite->sid,
-                'shadow_code' => $shadowSite->shadow_code,
                 'probe_name' => $shadowSite->probe_name,
                 'site_label' => array(
                     'data' => array(

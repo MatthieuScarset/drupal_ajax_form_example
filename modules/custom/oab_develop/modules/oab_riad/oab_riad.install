@@ -78,13 +78,6 @@ function oab_riad_update_8013() {
   include_once("updates/update_8013.inc");
 }
 
-/**
- * RUBYPORTAILOBS-3596 insertion de trad login & login error En et Fr
- */
-function oab_riad_update_8014() {
-  include_once("updates/update_8014.inc");
-}
-
 
 /**
  * RUBYPORTAILOBS-3618 Sur la page /business-insight faire en sorte que sur visions business, l’url filtrées soit ?vb_thematic=Cloud et plus ?vb_thematic=1026
@@ -98,28 +91,4 @@ function oab_riad_update_8015() {
  */
 function oab_riad_update_8016() {
   include_once("updates/update_8016.inc");
-}
-
-
-/**
- * RUBYPORTAILOBS-3621 [HP] -Zone de mise en avant / passer le champ "top highlight" optionnel
- */
-function oab_riad_update_8017() {
-  include_once("updates/update_8017.inc");
-}
-
-
-/**
- * RUBYPORTAILOBS-3607 [Content Types] -mettre les 2 illustrations (visuel pour subhome et visuel pour tuile) dans un nouvel onglet
- */
-function oab_riad_update_8018() {
-  include_once("updates/update_8018.inc");
-}
-
-
-/**
- * RUBYPORTAILOBS-3681 supprimer "visual tile" dans le type de contenu document.
- */
-function oab_riad_update_8019() {
-  include_once("updates/update_8019.inc");
 }

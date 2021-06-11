@@ -1,0 +1,11 @@
+uuid: c51f5d18-7661-48f8-b3ed-eacb69d0ef00
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.analyst_relations_en
+id: webform_submission.analyst_relations_en
+target_entity_type_id: webform_submission
+target_bundle: analyst_relations_en
+default_langcode: site_default
+language_alterable: false

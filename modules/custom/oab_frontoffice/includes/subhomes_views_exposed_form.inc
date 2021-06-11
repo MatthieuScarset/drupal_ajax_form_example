@@ -3,69 +3,14 @@
 // Gestion de l'affichage des forms spécifiques aux subhomes via une fonction pour ne pas surcharger le .module
 
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\views\ViewExecutable;
-
-
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $num_select = 0;
 
     if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          $new_select = change_textfield_to_select($key, $key !== 'analyst');
-          if ($new_select !== null) {
-            $form[$key] = $new_select;
-          } else {
-            $form[$key]['#access'] = false;
-          }
-        }
-        elseif (isset($value['#type']) && $value['#type'] == "select") {
-//          if ($num_select >= 1) {
-//            $form['#info']["filter-field_subhome_target_id_".$num_select]["label"] = '';
-//          } else {
-//            $form['#info']["filter-field_subhome_target_id"]["label"] = '';
-//          }
-
-          $form[$key]['#type'] = 'subhome_select_button';
-          $properties = [
-            "vid" => $key,
-            "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-          ];
-          $form[$key]['#options'] = [];
-          $form[$key]['#title_display'] = 'invisible';
-          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-          if (is_array($terms)
-            && !empty($terms)) {
-            foreach ($terms AS $term) {
-              $term_name = $term->getName();
-              $form[$key]['#options'][$term->id()] = $term_name;
-            }
-          }
-          $num_select++;
-        }
-      }
-
-      if (isset($form['thematic'])) {
-//        kint($form['thematic']); die();
-//        kint($form['thematic']); die();
-        $form['thematic']['#type'] = 'subhome_select_button';
-        $properties = [
-          "vid" => "thematic",
-          "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-        ];
-        $form['thematic']['#options'] = [];
-        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-
-        if (is_array($terms)
-          && !empty($terms)) {
-          foreach ($terms AS $term) {
-            $term_name = $term->getName();
-            $form['thematic']['#options'][$term->id()] = $term_name;
-          }
+          $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
         }
       }
 
@@ -291,4 +236,3 @@ function subhomes_views_exposed_form(&$form) {
     }
 
 }
-

@@ -288,8 +288,8 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             $path = str_replace($current_language, '', $path);
 
             ##On recupère le /node/xxx depuis l'alias
-            $org_path = \Drupal::service('path_alias.manager')
-                ->getPathByAlias("$path");
+          $aliases = \Drupal::entityTypeManager()->getStorage('path_alias')->loadByProperties(['path' => $path]);
+          $org_path = isset($aliases[0]) ? $aliases[0]->getPath() : "";
 
             ##On recupère le nid qui est dans l'url
             if (preg_match('/node\/(\d+)/', $org_path, $matches)) {

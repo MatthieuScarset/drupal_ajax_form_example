@@ -49,7 +49,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       while ($row = fgets($fp)) {
         $row = trim(preg_replace('/\s+/', ' ', $row));
         if (!empty($row) && substr($row, 0, 1) != '#'
-            && strlen($row) > 1/* Prevent empty lines to be executed */) {
+            && strlen($row) > 1  /* Prevent empty lines to be executed */) {
           $this->output()->writeln('- ' . $row);
 
           $args = explode(' ', $row);

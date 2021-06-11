@@ -26,14 +26,13 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings) {
                 $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
             }
         }
+        $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
+        $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
+            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
+        $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
+            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
     }
-  $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
-  $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
-    base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
-
-  $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
-    base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
 }
 
 
@@ -60,9 +59,9 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
 
     $current_uri = \Drupal::request()->getRequestUri();
     //si en ajout de node ou edit node
-   /* if ((strpos($current_uri, '/node/add') !== false)
+    if ((strpos($current_uri, '/node/add') !== false)
         || (strpos($current_uri, '/node/') !== false && strpos($current_uri, '/edit') !== false)
-        || (strpos($current_uri, '/block') !== false)) {*/
+        || (strpos($current_uri, '/block') !== false)) {
         // declaration des templates
         $data    = array();
         $data[0] = array(
@@ -201,7 +200,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
         $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
         $attachments['#attached']['drupalSettings']['oab_ckeditor']['path'] = drupal_get_path('module','oab_ckeditor');
 
-    //}
+    }
 }
 
  function getAllCountriesForJSOptions() {

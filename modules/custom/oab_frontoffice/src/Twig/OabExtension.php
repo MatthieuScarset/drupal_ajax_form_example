@@ -27,17 +27,12 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
           new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
+          new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
           new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
           new \Twig_SimpleFunction('specialCharacters', [$this, 'specialCharacters']),
           new \Twig_SimpleFunction('isAjaxContext', [$this, 'isAjaxContext']),
-          new \Twig_SimpleFunction('kint_t', array($this, 'kint_t'), array(
-            'is_safe' => array('html'),
-            'needs_environment' => TRUE,
-            'needs_context' => TRUE,
-            'is_variadic' => TRUE,
-          )),
       ];
 }
 
@@ -63,24 +58,37 @@ class OabExtension extends \Twig_Extension {
    * @param $data
    * @param bool $stop
    */
-  public function kint_t(\Twig_Environment $env, array $context, array $args = []) {
+  /*function kint_t(\Twig_Environment $env,  array $context, array $args = []) {
+
+  //A Remettre en place, pour utiliser le vrai fonctionnement
+  // de Kint, avec un nombre infini de paramètres;
+  //Pour l'instant, problème avec $args, et plantage lorsque var_dump($args)
+  // et args semble etre vide.......;
+
+    $stop = false;
+    ##Si on a un booléen comme dernier paramètre passé, c'est pas savoir si on
+    ##stop le script ou non
+    if (count($args) > 0 && is_bool($args[count($args)])) {
+      $stop = $args[count($args)];
+    }
+
+    ##Ensuite, j'appelle la vraie fonction kint
+    call_user_func_array('kint',$args);
+
+    ##Ensuite, si on a demandé à s'arreter, on coupe PHP
+    if ($stop)
+      die();
+  }*/
+  public function kint_t($array, $stop = false) {
     $module_handler = \Drupal::service('module_handler');
     if ($module_handler->moduleExists('kint')) {
-      if (empty($args)) {
-        $kint_variable = array();
-        foreach ($context as $key => $value) {
-          if (!$value instanceof \Twig_Template) {
-            $kint_variable[$key] = $value;
-          }
-        }
-      } else {
-        $kint_variable = $args;
+      kint($array);
+
+      if ($stop) {
+          die();
       }
-      kint($kint_variable);
-      die();
     }
   }
-
 
   public function d_config($config) {
     return \Drupal::config($config);

@@ -46,9 +46,9 @@ function oab_will_form_alter(&$form, FormStateInterface $form_state, $form_id) {
         switch ($form['#id']) {
             case "views-exposed-form-content-page-1":
 
-                $form['field_profile_target_id']['#autocomplete_route_name'] = 'views_autocomplete_api';
-                $form['field_profile_target_id']['#autocomplete_route_parameters'] = array('view_name' => 'autocomplete','display_id'=>'block_1');
-                $form['#validate'][] = 'views_exposed_form_content_page_1_form_validate';
+//                $form['field_profile_target_id']['#autocomplete_route_name'] = 'views_autocomplete_api';
+//                $form['field_profile_target_id']['#autocomplete_route_parameters'] = array('view_name' => 'autocomplete','display_id'=>'block_1');
+//                $form['#validate'][] = 'views_exposed_form_content_page_1_form_validate';
 
                 break;
             default:

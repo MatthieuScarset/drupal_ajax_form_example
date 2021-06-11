@@ -1,0 +1,11 @@
+uuid: 2f2bfd3c-cb89-4106-a67d-fe08103ebda2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.telechargement_documents
+id: webform_submission.telechargement_documents
+target_entity_type_id: webform_submission
+target_bundle: telechargement_documents
+default_langcode: site_default
+language_alterable: false

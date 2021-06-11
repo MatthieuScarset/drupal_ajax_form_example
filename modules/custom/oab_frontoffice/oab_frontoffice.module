@@ -14,7 +14,6 @@ use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
@@ -87,7 +86,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
         #J'enregistre mes urls et variables OG pour les avoir en JS
         $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
     }
-
 }
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
@@ -171,17 +169,17 @@ function _remove_header_links(array &$attachments) {
 function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
 
     if ($entity->bundle() == 'product') {
-        //  on deserialise les données à passer au template
-        $field_axiome_data = isset($entity->field_axiome_data->value) ? unserialize($entity->field_axiome_data->value) : array();
-        if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
+        //on deserialise les données à passer au template
+        $field_axiome_data = isset($entity->field_axiome_data) ? unserialize($entity->field_axiome_data->value) : array();
+        if (count($field_axiome_data) > 0) {
             $build['axiome_data'] = $field_axiome_data;
             $build['axiome_data']['sous_famille'] = \Drupal\oab_axiome\Controller\OabAxiomeController::getSousFamille($entity->id());
         }
     }
 
-  if ($build['#view_mode'] == 'full') {
+    if ($build['#view_mode'] == 'full') {
         $content_type = $entity->bundle();
-        if (in_array($content_type, array('magazine', 'blog_post', 'document', 'simple_page', 'full_html'))) { //, 'external_content'
+        if (in_array($content_type, array('magazine', 'blog_post', 'document', 'simple_page', 'full_html'))) {
             $theme_term = '';
 
             $field_solution = isset($entity->field_solution) ? $entity->field_solution->getValue() : array();
@@ -255,11 +253,6 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
             //var_dump(intval($taxonomy_id));
 
             $build['taxonomy'][count($build['taxonomy'])] = $taxonomy_id;
-        }
-
-        if ($content_type === 'external_content' && isset($entity->field_url->uri)) {
-            $response = new RedirectResponse($entity->field_url->uri);
-            $response->send();
         }
     }
 }
@@ -342,17 +335,9 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
     if ($form['#id'] == 'views-exposed-form-business-insight-business-insight-page') {
         //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
 
-        if (isset($form['vb_thematic']['#options'])) {
-          $form['vb_thematic']['#options'] = clean_exposed_filters_by_language(
+        $form['vb_thematic']['#options'] = clean_exposed_filters_by_language(
             $form['vb_thematic']['#options'], 'All thematics'
-          );
-        }
-
-      if (isset($form['edit_vb_thematic']['#options'])) {
-        $form['edit_vb_thematic']['#options'] = clean_exposed_filters_by_language(
-          $form['edit_vb_thematic']['#options'], 'All thematics'
         );
-      }
 
       /**
        * reorder_element_header_menu_page_vb($form)
@@ -360,7 +345,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       $menu_header_page_vb = clean_exposed_filters_by_language(
         $form['field_insight_type_target_id']['#options'], 'See all'
       );
-      if (isset($menu_header_page_vb['All']) ) {
+      if ( isset($menu_header_page_vb['All']) ) {
         $v = $menu_header_page_vb['All'];
         unset($menu_header_page_vb['All']);
         $menu_header_page_vb['All'] = $v;
@@ -459,33 +444,7 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
         ),
         'template' => 'block--righticonblock-custom'
     );
-
-    $theme['subhome_select'] = [
-       'render element' => 'element'
-    ];
-    $theme['subhome_select_button'] = [
-      'render element' => 'element'
-    ];
     return $theme;
-}
-
-
-function oab_frontoffice_preprocess_subhome_select(&$variables) {
-//echo "toto"; kint($variables); die();
-}
-
-function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
-//  kint($variables); die();
-  $element = $variables['element'];
-  $variables['attributes'] = [];
-  if (isset($element['#id'])) {
-    $variables['attributes']['id'] = $element['#id'];
-  }
-  if (isset($element['#attributes']['title'])) {
-    $variables['attributes']['title'] = $element['#attributes']['title'];
-  }
-//  kint($element); die();
-  $variables['children'] = $element['#children'];
 }
 
 
@@ -511,11 +470,6 @@ function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
                 array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
             }
         }
-    }
-
-    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
-      subhomes_views_exposed_form($form);
-
     }
 }
 

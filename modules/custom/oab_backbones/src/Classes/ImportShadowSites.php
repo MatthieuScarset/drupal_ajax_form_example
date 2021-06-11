@@ -45,8 +45,7 @@ class ImportShadowSites
                 //constitution du tableau de sites présents dans le fichier
                 $ss_in_file = array();
                 foreach ($lines as $line) {
-
-                    $parts = explode(",", $line);
+                    $parts = explode("\t", $line);
                     // 0:RowMd5Digest 1:IPShadowSiteCode 2:IPShadowSiteLabel
                     $ss_in_file[trim($parts[1])] = trim($parts[2]);
                 }
@@ -61,14 +60,8 @@ class ImportShadowSites
                 if (count($ss_to_update) > 0) {
                     $shadows_sites->saveShadowSitesInDB($ss_to_update);
                 }
-
-                //mise a jour des shadows code dans la BDD pour correspondre au nouveau format
-                foreach ($ss_in_file as $code => $element) {
-                  $shadows_sites->updateShadowSiteCodeInDB($element, $code);
-                }
-
                 //Comparaison entre la BDD et le fichier pour les sites à supprimer
-                $ss_to_delete = array_keys(array_diff($ss_in_file, $ss_in_db));
+                $ss_to_delete = array_keys(array_diff_key($ss_in_db, $ss_in_file));
 
                 if (count($ss_to_delete) > 0) {
                     $shadows_sites->deleteShadowSitesInDB($ss_to_delete);

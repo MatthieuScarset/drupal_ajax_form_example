@@ -7,21 +7,26 @@ use Psr\Log\LoggerInterface;
 
 class DnbClient {
 
+  /**
+   * @var Client
+   */
+  private $dnbClient;
+
 
   /**
    * @var LoggerInterface
    */
   private $logger;
 
-  public function __construct(LoggerInterface $logger) {
+  public function __construct(Client $dnb_client, LoggerInterface $logger) {
+    $this->dnbClient = $dnb_client;
     $this->logger = $logger;
   }
 
   public function get(string $url, array $params): array {
     $ret = [];
-    $dnbClient = $this->getDnbClient();
 
-    $res = $dnbClient->get($url, ['query' => $params]);
+    $res = $this->dnbClient->get($url, ['query' => $params]);
     if ($res->getStatusCode() > 299) {
       $this->logger->error(t("Altares client return error for url %url with message : %code => %message", [
         '%url' => $url . "?" . http_build_query($params),
@@ -33,10 +38,6 @@ class DnbClient {
     }
 
     return $ret;
-  }
-
-  public function getDnbClient() {
-    return \Drupal::service('oab_marketo.dnb_http_client');
   }
 
 }

@@ -1,0 +1,24 @@
+uuid: 2c44390d-a2a0-4bca-97ba-ef70b6c874f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.moderation_state_update
+    - node.type.hp_eclairage_thematique
+    - scheduled_updates.scheduled_update_type.moderation_state_update
+id: node.hp_eclairage_thematique.moderation_state_update
+field_name: moderation_state_update
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Moderation state update'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler_settings:
+    target_bundles:
+      - moderation_state_update
+  handler: 'default:scheduled_update'
+field_type: entity_reference

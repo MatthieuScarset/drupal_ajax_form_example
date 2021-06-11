@@ -1,0 +1,10 @@
+display:
+  default:
+    display_options:
+      fields:
+        type:
+          label: Provider
+      filters:
+        type:
+          expose:
+            label: Provider

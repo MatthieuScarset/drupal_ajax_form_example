@@ -1,8 +1,0 @@
-uuid: d4088e06-c290-48f7-9e14-494b797a9a69
-langcode: en
-status: true
-dependencies: {  }
-name: 'Product Use Case'
-vid: product_use_case
-description: ''
-weight: 0

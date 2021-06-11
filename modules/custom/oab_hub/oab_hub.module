@@ -259,8 +259,13 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
           if (!$has_portail && $i == 0) {
             $alias = "/" . $term_url . $original_alias;
           } else {
-            \Drupal::service('path.alias_storage')
-              ->save($context['source'], "/" . $term_url . $original_alias, $langcode);
+            \Drupal::entityTypeManager()->getStorage('path_alias')
+              ->create([
+                'path' => $context['source'],
+                'alias' => "/" . $term_url . $original_alias,
+                'langcode' => $langcode,
+              ])
+              ->save();
           }
           oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
           $i++;
@@ -358,8 +363,12 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
       $term = \Drupal\taxonomy\Entity\Term::load($term_id);
       $term_url = $term->get(OabHubController::FIELD_URL_ID);
       $term_url = $term_url->first()->getString();
-      \Drupal::service('path.alias_storage')
-        ->save("/node/" . $entity->id(), "/" . $term_url . $alias, $langcode);
+      \Drupal::entityTypeManager()->getStorage('path_alias')
+        ->create([
+          'path' => "/node/" . $entity->id(),
+          'alias' =>  "/" . $term_url . $alias,
+          'langcode' => $langcode])
+        ->save();
       oab_hub_drupal_message('URL créée :', "/$langcode/$term_url" . $alias);
     }
 
@@ -369,10 +378,11 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
       $term = \Drupal\taxonomy\Entity\Term::load($term_id);
       $term_url = $term->get(OabHubController::FIELD_URL_ID);
       $term_url = $term_url->first()->getString();
-      $ret = \Drupal::service('path.alias_storage')
-        ->delete(array(
-          'alias' => "/" . $term_url . $alias,
-          "langcode"  => $langcode));
+
+      $aliases = \Drupal::entityTypeManager()->getStorage('path_alias')->loadByProperties(array(
+        'alias' => "/" . $term_url . $alias,
+        "langcode"  => $langcode));
+      $ret = \Drupal::entityTypeManager()->getStorage('path_alias')->delete($aliases);
       if ($ret) {
         oab_hub_drupal_message("Alias supprimé ", "/$langcode/$term_url" . $alias);
       } else {
@@ -397,15 +407,21 @@ function oab_hub_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
     ) {
       ## Si on ajoute "portail" je crée l'alias
       if ($on_portal['value'] == 1) {
-        \Drupal::service('path.alias_storage')
-          ->save("/node/" . $entity->id(), $alias, $langcode);
+        \Drupal::entityTypeManager()->getStorage('path_alias')
+          ->create([
+            'path' => "/node/" . $entity->id(),
+            'alias' =>  $alias,
+            'langcode' => $langcode])
+          ->save();
         oab_hub_drupal_message('URL créée :', "/$langcode" . $alias);
       } else {
         ## sinon, je le supprime
-        $ret = \Drupal::service('path.alias_storage')
-          ->delete(array(
+        $aliases = \Drupal::entityTypeManager()->getStorage('path_alias')
+          ->loadByProperties(array(
             'alias' => $alias,
             "langcode"  => $langcode));
+        $ret = \Drupal::entityTypeManager()->getStorage('path_alias')
+          ->delete($aliases);
         if ($ret) {
           oab_hub_drupal_message("Alias supprimé ", "/$langcode" . $alias);
         } else {

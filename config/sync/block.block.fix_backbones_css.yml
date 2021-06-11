@@ -1,0 +1,31 @@
+uuid: 6a8f094e-e2cb-4c4c-87ae-669b6975d769
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:e95872f9-0c38-410e-bf75-b4a910eb6281'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: fix_backbones_css
+theme: theme_boosted
+region: top_zone
+weight: -49
+provider: null
+plugin: 'block_content:e95872f9-0c38-410e-bf75-b4a910eb6281'
+settings:
+  id: 'block_content:e95872f9-0c38-410e-bf75-b4a910eb6281'
+  label: fix_backbones_css
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/network-performance\r\n/network-performance/*"
+    negate: false
+    context_mapping: {  }

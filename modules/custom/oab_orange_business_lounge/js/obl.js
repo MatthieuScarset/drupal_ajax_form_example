@@ -61,11 +61,10 @@
             return element.zoneId === id_zone;
         });
         //Call method sort by country label _A-Z
-        listePaysTriee = listePays.sort(SortByLabel);
-
+        listePays = listePays.sort(SortByLabel);
 
         $('#select_pays_zone').html("");
-        listePaysTriee.forEach((function (pays) {
+        listePays.forEach((function (pays) {
             $('#select_pays_zone').append('<option value="' + pays.id + '">' + pays.label + '</option>');
         }));
 

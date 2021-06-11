@@ -8,7 +8,13 @@ display:
       fields:
         nothing:
           admin_label: Иконка
+        type:
+          label: Provider
         name:
           label: Пользователь
         link:
           label: Операции
+      filters:
+        type:
+          expose:
+            label: Provider

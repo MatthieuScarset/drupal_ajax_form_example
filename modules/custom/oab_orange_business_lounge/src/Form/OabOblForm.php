@@ -114,7 +114,7 @@ class OabOblForm extends ConfigFormBase {
      * @param $form
      * @param FormStateInterface $form_state
      */
-    public function isValid($form, FormStateInterface $form_state) {
+    function isValid($form, FormStateInterface $form_state) {
 
         $url = $form_state->getValue('url_api');
 

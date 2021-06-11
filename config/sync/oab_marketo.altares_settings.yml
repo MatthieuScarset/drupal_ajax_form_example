@@ -1,6 +1,0 @@
-consumer_key: IYFnQouR3iPPzkjMrhwcAPkQEvfM2Z8g
-consumer_secret: zPpDuQ3JEQUi97vL
-api_url: 'https://plus.dnb.com'
-authorized_users:
-  - '1'
-nb_max_request: '53'

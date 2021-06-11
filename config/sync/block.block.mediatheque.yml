@@ -19,9 +19,9 @@ settings:
   label: Mediatheque
   provider: oab_frontoffice
   label_display: visible
-  mediatheque_text: ' Vous recherchez des images ou des vidéos pour illustrer vos supports de communication ?'
-  mediatheque_link: 'https://mediatheque.orange.com/'
-  mediatheque_link_text: 'En savoir plus'
+  mediatheque_text: 'Vous êtes à la recherche d''images ou de vidéos pour illustrer vos supports de communication'
+  mediatheque_link: 'https://mediatheque.orange.com/fr/mediacenter'
+  mediatheque_link_text: Cliquez-ici
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'

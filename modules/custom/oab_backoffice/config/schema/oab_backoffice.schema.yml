@@ -32,12 +32,6 @@ oab_subhomes.subhomes:
     news_term_tid:
       type: label
       label: 'News term id'
-    achievement_term_tid:
-      type: label
-      label: 'IoT Achievement term id'
-    iot_product_term_tid:
-      type: label
-      label: 'IoT Products term id'
     press_meta:
       type: label
       label: 'Press meta title'
@@ -65,12 +59,6 @@ oab_subhomes.subhomes:
     distributor_term_tid:
       type: label
       label: 'Distributor term id'
-    iot_product_meta:
-      type: label
-      label: 'IoT Products meta title'
-    iot_achievement_meta:
-      type: label
-      label: 'IoT Achivements meta title'
 
 oab_backoffice.pardot:
   type: config_object

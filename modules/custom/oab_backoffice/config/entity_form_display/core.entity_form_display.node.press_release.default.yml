@@ -48,7 +48,6 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
-        - group_visual
         - group_classify
         - group_rebond
         - group_seo
@@ -70,6 +69,8 @@ third_party_settings:
         - field_country
         - field_city
         - field_content
+        - field_visual
+        - field_visual_tile
         - field_file
       parent_name: group_onglets
       weight: 20
@@ -91,7 +92,7 @@ third_party_settings:
         - field_industry
         - field_region
       parent_name: group_onglets
-      weight: 22
+      weight: 21
       format_type: tab
       format_settings:
         id: ''
@@ -123,7 +124,7 @@ third_party_settings:
         - field_metatags
         - path
       parent_name: group_onglets
-      weight: 25
+      weight: 24
       format_type: tab
       format_settings:
         id: ''
@@ -137,7 +138,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 24
+      weight: 23
       format_type: tab
       format_settings:
         id: ''
@@ -153,7 +154,7 @@ third_party_settings:
         - field_page_du_site_2
         - field_p_wysiwyg_rebond
       parent_name: group_onglets
-      weight: 23
+      weight: 22
       format_type: tab
       format_settings:
         id: ''
@@ -162,20 +163,6 @@ third_party_settings:
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
       label: Rebond
-    group_visual:
-      children:
-        - field_visual
-        - field_visual_tile
-      parent_name: group_onglets
-      weight: 21
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: Visual
 id: node.press_release.default
 targetEntityType: node
 bundle: press_release
@@ -251,7 +238,6 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
-      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -323,7 +309,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_page_du_site_2:
     type: entity_reference_autocomplete
@@ -333,7 +318,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_press_type:
     weight: 52
@@ -349,7 +333,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_region:
     weight: 53
@@ -386,7 +369,6 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
-      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -401,7 +383,6 @@ content:
       field_widget_display_settings:
         view_mode: default
       open: false
-      field_widget_replace: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
     region: content
@@ -469,7 +450,6 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 50

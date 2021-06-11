@@ -61,8 +61,8 @@ function oab_migrate_content_install() {
     \Drupal::state()->set('correspondence_cat_mag_to_format_mag', $categmag_to_formatmag);
 
 //Solution to mag theme
-    $solution_to_theme_mag = get_correspondances_solutionsD7_to_MagazineThematicD8();
-    \Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_theme_mag);
+    $solution_to_themeMag = get_correspondances_solutionsD7_to_MagazineThematicD8();
+    \Drupal::state()->set('correspondence_solution_to_theme_mag', $solution_to_themeMag);
 
 //solution to doc theme
     $solution_to_themedoc = get_correspondances_solutionsD7_to_DocumentThematicD8();

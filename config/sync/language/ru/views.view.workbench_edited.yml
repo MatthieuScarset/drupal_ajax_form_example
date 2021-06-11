@@ -9,3 +9,10 @@ display:
         options:
           tags:
             previous: Предыдущая
+      fields:
+        type:
+          label: Provider
+      filters:
+        type:
+          expose:
+            label: Provider

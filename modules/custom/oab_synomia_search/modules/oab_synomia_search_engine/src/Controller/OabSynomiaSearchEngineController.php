@@ -250,10 +250,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
         $content_types = $this->getOrderContentTypesArray();
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
-              if( isset($old_results_array[$contentType])) {
                 $new_facets_array_ordered[$contentType] = $old_facets_array[$contentType];
                 unset($old_facets_array[$contentType]);
-              }
             }
             return array_merge($new_facets_array_ordered, $old_facets_array);
         }
@@ -269,10 +267,8 @@ class OabSynomiaSearchEngineController extends ControllerBase
         $content_types = $this->getOrderContentTypesArray();
         if (!empty($content_types)) {
             foreach ($content_types as $contentType) {
-              if( isset($old_results_array[$contentType])) {
                 $new_results_array_ordered[$contentType] = $old_results_array[$contentType];
                 unset($old_results_array[$contentType]);
-              }
             }
             return array_merge($new_results_array_ordered, $old_results_array);
         }

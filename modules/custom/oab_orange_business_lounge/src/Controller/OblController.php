@@ -103,8 +103,8 @@ class OblController extends ControllerBase {
    */
   private function getNameTechnoByActualTech($technologies, $actual_techno) {
     $ret = '';
-    foreach ($technologies as $key => $technology) {
-      if ($technology['id'] == $actual_techno) {
+    foreach($technologies as $key => $technology) {
+      if ( $technology['id'] == $actual_techno ) {
         $ret = $technology['name'];
       }
     }

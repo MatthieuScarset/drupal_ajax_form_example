@@ -43,26 +43,26 @@ function oab_backbones_import_batch($columns, $shadow_sites, $month, &$context) 
 
                 $data_array_atob = array(
                     "date" => $month,
-                    "source_site" => intval($shadow_sites[$columns[SID_A]]["sid"]),
+                    "source_site" => $columns[SID_A],
                     "source_label" => $shadow_sites[$columns[SID_A]]["site_label"],
-                    "destination_site" => intval($shadow_sites[$columns[SID_B]]["sid"]),
+                    "destination_site" => $columns[SID_B],
                     "destination_label" => $shadow_sites[$columns[SID_B]]["site_label"],
                     "RTD" => $columns[RTD],
                     "JITTER" => $columns[JITTER_AB],
                     "PLR" => $columns[PLR_AB]);
-                $bb_import_data_obj->saveDataLine($month, intval($shadow_sites[$columns[SID_A]]["sid"]), intval($shadow_sites[$columns[SID_B]]["sid"]), $data_array_atob);
+                $bb_import_data_obj->saveDataLine($month, $columns[SID_A], $columns[SID_B], $data_array_atob);
 
                 $data_array_btoa = array(
                     "date" => $month,
-                    "source_site" => (int) $shadow_sites[$columns[SID_B]]["sid"],
+                    "source_site" => $columns[SID_B],
                     "source_label" => $shadow_sites[$columns[SID_B]]["site_label"],
-                    "destination_site" => (int) $shadow_sites[$columns[SID_A]]["sid"],
+                    "destination_site" => $columns[SID_A],
                     "destination_label" => $shadow_sites[$columns[SID_A]]["site_label"],
                     "RTD" => $columns[RTD],
                     "JITTER" => $columns[JITTER_BA],
                     "PLR" => $columns[PLR_BA]
                 );
-                $bb_import_data_obj->saveDataLine($month, intval($shadow_sites[$columns[SID_B]]["sid"]), intval($shadow_sites[$columns[SID_A]]["sid"]), $data_array_btoa);
+                $bb_import_data_obj->saveDataLine($month, $columns[SID_B], $columns[SID_A], $data_array_btoa);
 
                 $title = $shadow_sites[$columns[SID_A]]["site_label"] .
                     " to " .

@@ -1,0 +1,23 @@
+uuid: 2337f8bb-5c47-4efd-b3d9-d9e2b253dc4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_navigation_link
+    - node.type.hp_eclairage_thematique
+  module:
+    - link
+id: node.hp_eclairage_thematique.field_navigation_link
+field_name: field_navigation_link
+entity_type: node
+bundle: hp_eclairage_thematique
+label: 'Navigation link'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

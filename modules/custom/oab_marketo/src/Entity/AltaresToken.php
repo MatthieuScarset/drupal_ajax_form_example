@@ -2,7 +2,6 @@
 
 namespace Drupal\oab_marketo\Entity;
 
-use DateInterval;
 use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Entity\Annotation\ContentEntityType;
 use Drupal\Core\Entity\ContentEntityBase;
