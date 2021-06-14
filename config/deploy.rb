@@ -72,7 +72,7 @@ namespace :drupal do
     on roles(:all) do
      #execute "docker exec -it #{fetch(:container_php)} drush oab:updb --yes"
 
-     execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} updb --yes"
+     #execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} updb --yes"
      execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cr"
      execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cim --yes"
      execute "docker exec #{fetch(:container_php)} #{fetch(:drush)} --root=#{fetch(:root_dir)} cr"

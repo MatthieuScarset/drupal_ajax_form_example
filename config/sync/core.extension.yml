@@ -126,7 +126,6 @@ module:
   update: 0
   user: 0
   views: 0
-  views_autocomplete_api: 0
   views_infinite_scroll: 0
   views_ui: 0
   webform: 0
