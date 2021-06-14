@@ -426,3 +426,10 @@ function oab_stephanie_update_8053() {
 function oab_stephanie_update_8054() {
     include_once("updates/update_8054.inc");
 }
+
+/**
+ * ajout de traduction pour BVPN
+ */
+function oab_stephanie_update_8055() {
+  include_once("updates/update_8055.inc");
+}
