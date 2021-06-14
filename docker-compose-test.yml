@@ -5,8 +5,7 @@ services:
     container_name: ruby-d9_webserver
     working_dir: /application
     volumes:
-      - ./data/log:/var/log/nginx/
-      - ./:/application
+      - .:/application
       - ./config/docker/test/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - /var/www/drupal_9/shared/:/var/www/drupal_9/shared
     ports:
