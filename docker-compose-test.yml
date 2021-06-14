@@ -20,7 +20,7 @@ services:
     working_dir: /application
     volumes:
       - ./:/application
-      - ./config/docker/local/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+      - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/php-override.ini
       - /var/www/drupal_9/shared/:/var/www/drupal_9/shared
     networks:
       - master_default

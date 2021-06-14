@@ -21,6 +21,7 @@ RUN apt-get update \
 RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-dev imagemagick \
 	&& pecl install imagick \
 	&& docker-php-ext-enable imagick \
+	&& docker-php-ext-enable zip \
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN apt-get update \
