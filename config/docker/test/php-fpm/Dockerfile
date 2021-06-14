@@ -12,10 +12,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
 	vim \
+  libzip-dev \
 	zip \
 	unzip \
 	wget \
-	php7.3-zip \
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-dev imagemagick \
