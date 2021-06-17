@@ -85,7 +85,7 @@ namespace :docker do
   desc 'Stop project containers'
   task :stop_containers do
     on roles(:all) do
-      #execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} down"
+      execute "docker-compose -f #{current_path}/#{fetch(:docker_compose)} -p #{fetch(:application)}_#{fetch(:stage)} down"
       execute "docker stop webserver"
     end
   end

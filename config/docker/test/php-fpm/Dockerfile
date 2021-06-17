@@ -28,11 +28,6 @@ RUN apt-get update \
 
 RUN apt-cache search libzip
 
-RUN apt-get install -y libzip4 \
-  && docker-php-ext-install zip
-
-
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.19
 
 
