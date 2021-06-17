@@ -27,7 +27,7 @@ RUN apt-get update \
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN apt-get install -y \
-        libzip-dev \
+        libzip \
         zip \
   && docker-php-ext-install zip
 
