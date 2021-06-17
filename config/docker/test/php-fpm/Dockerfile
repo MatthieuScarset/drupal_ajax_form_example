@@ -28,7 +28,7 @@ RUN apt-get update \
 
 RUN apt-cache search libzip
 
-RUN apt-get install -y libzip-dev
+RUN apt-get install -y libzip-dev \
   && docker-php-ext-install zip
 
 
