@@ -1,7 +1,7 @@
 name: 'OAB Subhomes'
 type: module
 description: 'Module for subhomes entity generation'
-core: 8.x
+core_version_requirement: ^8.8.0 || ^9.0
 package: OAB
 
 configure: oab.settings
