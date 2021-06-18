@@ -152,7 +152,8 @@ var CSPMapControl = function() {
   var goTo = function(coordinates) {
     var latLng = _getLatLng(coordinates);
    // map.panTo(latLng);
-    map.flyTo(latLng, 3);
+    console.log(latLng.lat, latLng.lng);
+    map.flyTo(latLng, 3.5);
   };
 
   var getZoom = function() {

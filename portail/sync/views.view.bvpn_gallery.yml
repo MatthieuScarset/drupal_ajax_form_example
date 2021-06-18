@@ -1150,6 +1150,7 @@ display:
         filters: false
         filter_groups: false
         fields: false
+        pager: false
       row:
         type: fields
         options:
@@ -1694,12 +1695,15 @@ display:
           field_api_classes: false
           entity_type: node
           plugin_id: geolocation_field
+      pager:
+        type: none
+        options:
+          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
-        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions
@@ -2420,6 +2424,7 @@ display:
         filter_groups: false
         fields: false
         relationships: false
+        pager: false
       filter_groups:
         operator: AND
         groups:
@@ -2564,12 +2569,15 @@ display:
           admin_label: 'field_location: Taxonomy term'
           required: false
           plugin_id: standard
+      pager:
+        type: none
+        options:
+          offset: 0
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
-        - url.query_args
         - user
         - 'user.node_grants:view'
         - user.permissions

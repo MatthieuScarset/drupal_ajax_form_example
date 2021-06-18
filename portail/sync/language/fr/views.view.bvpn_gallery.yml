@@ -18,10 +18,3 @@ display:
         name:
           expose:
             placeholder: Localisation
-  default:
-    display_options:
-      filters:
-        title:
-          expose:
-            description: ''
-            placeholder: ''
