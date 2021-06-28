@@ -1,0 +1,8 @@
+uuid: 279d75b9-abca-4b24-91d5-8950eb3ab823
+langcode: ja
+status: true
+dependencies: {  }
+id: main-navigation-ja
+label: 'Main navigation JA'
+description: 'JA Site section links'
+locked: false

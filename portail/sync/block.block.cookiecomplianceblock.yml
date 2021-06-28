@@ -9,7 +9,7 @@ dependencies:
 id: cookiecomplianceblock
 theme: theme_boosted
 region: header
-weight: -50
+weight: -52
 provider: null
 plugin: cookie_compliance_block
 settings:
