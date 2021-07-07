@@ -1,0 +1,15 @@
+uuid: 2f97d214-e1be-4b15-94cc-8d5e2a374ef2
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.subhomes
+id: default
+label: Section
+plural_label: Sections
+scheme: taxonomy
+scheme_settings:
+  vocabularies:
+    - blogs
+    - subhomes
+  fields: {  }

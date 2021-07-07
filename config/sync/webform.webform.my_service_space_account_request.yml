@@ -21,15 +21,19 @@ id: my_service_space_account_request
 title: 'My Service Space - account request'
 description: '<p>MSS account requests</p>'
 category: MSS
-elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p>This form may be used by existing Orange Business Services multinational customers to submit a request for account access to the My Service Space customer portal. You may also contact your Orange Business Services representative for account access.<br />\\r\\n&nbsp;<br />\\r\\nAccounts will be created within five business days, subject to validation and authorization.</p>\\r\\n\\r\\n<p>The following features will be included in your account:</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Solutions</strong> (Overview of offers subscribed and quick links to services to manage your solutions)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Maintenance</strong> (Access your planned maintenance dashboard for all your routers)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Incidents &amp; Events</strong> (Manage the entire lifecycle of incidents, track resolutions with dashboard and e-mail notifications)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Ordering</strong> (Request a quotation and view existing quotations)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Billing</strong> (View invoices, credit notes, billing reports, submit billing queries. Optional)</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;<br />\\r\\n<strong>Note: Billing will only be included if Billing Account Numbers are provided</strong></p>\\r\\n\\r\\n<p>If you would like to request additional features (such as service management, change management, disconnect request, reporting, inventory, quote approval and order tracking ) please contact your customer representative to request these additional features once your account has been issued.<br />\\r\\n&nbsp;<br />\\r\\n<strong>This form is only for international customers, for French customers, go to www.orange-business.com/ece</strong><br />\\r\\n&nbsp;<br />\\r\\nPlease note fields with * are mandatory</p>\\r\\n\"\n  '#format': full_html\nrequestor_details:\n  '#type': fieldset\n  '#title': 'Requestor details:'\n  requestor_email_address_person_submitting_the_request_:\n    '#type': textfield\n    '#title': 'Requestor email address '\n    '#description': 'Person submitting the request'\n    '#description_display': after\n    '#required': true\n  authorized_by_please_provide_the_address_of_your_login_administr:\n    '#type': textfield\n    '#title': 'Authorized by '\n    '#description': 'Please provide the address of your login administrator or your Orange Business Services customer representative'\n    '#title_display': before\n    '#description_display': after\n    '#required': true\nuser_details_:\n  '#type': fieldset\n  '#title': 'User details:'\n  user_first_name:\n    '#type': textfield\n    '#title': 'User first name'\n    '#required': true\n  user_last_name:\n    '#type': textfield\n    '#title': 'User last name'\n    '#required': true\n  user_email_address:\n    '#type': email\n    '#title': 'User email address'\n    '#required': true\n  login:\n    '#type': textfield\n    '#title': Login\n    '#description': 'Default Login will be firstname.lastname but requestor can specify their own Login, which must be from 8 to 30 characters, case sensitive, supported characters: A-Z, a-z, 0-9, @, _(underline), -(dash), .(dot)'\n    '#description_display': after\n    '#required': true\n  customer_name:\n    '#type': textfield\n    '#title': 'Customer name'\n    '#required': true\n  customer_id_s_:\n    '#type': textfield\n    '#title': 'Customer ID(s)'\n    '#required': true\nonline_quoting_order_tracking:\n  '#type': select\n  '#title': 'Online quoting & order tracking'\n  '#options':\n    'I am not interested': 'I am not interested'\n    'I want to track orders': 'I want to track orders'\n    'I want to request quotes and track orders': 'I want to request quotes and track orders'\nbilling:\n  '#type': select\n  '#title': Billing\n  '#options':\n    'I am not interested': 'I am not interested'\n    'I want to view bills and credit notes': 'I want to view bills and credit notes'\nbilling_account_numbers_bans_:\n  '#type': select\n  '#title': 'Billing Account Numbers (BANs)'\n  '#description': 'If you require access to all of your BANs, then please select &quot;all&quot;. You will be contacted by an Orange representative to list the BANs you want to access in case you selected &ldquo;short list&rdquo;'\n  '#title_display': before\n  '#description_display': after\n  '#options':\n    All: All\n    Shortlist: Shortlist\n  '#options_display': side_by_side\npersonnal_data:\n  '#type': checkbox\n  '#title': 'Personnal data'\n  '#description': \"<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result. *</strong></p>\\r\\n\"\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprocessed_text:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy.</a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
+elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p>This form may be used by existing Orange Business Services multinational customers to submit a request for account access to the My Service Space customer portal. You may also contact your Orange Business Services representative for account access.<br />\\r\\n&nbsp;<br />\\r\\nAccounts will be created within five business days, subject to validation and authorization.</p>\\r\\n\\r\\n<p>The following features will be included in your account:</p>\\r\\n\\r\\n<ul>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Solutions</strong> (Overview of offers subscribed and quick links to services to manage your solutions)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Maintenance</strong> (Access your planned maintenance dashboard for all your routers)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Incidents &amp; Events</strong> (Manage the entire lifecycle of incidents, track resolutions with dashboard and e-mail notifications)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Ordering</strong> (Request a quotation and view existing quotations)</li>\\r\\n\\t<li>&nbsp;&nbsp;&nbsp; <strong>Billing</strong> (View invoices, credit notes, billing reports, submit billing queries. Optional)</li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;<br />\\r\\n<strong>Note: Billing will only be included if Billing Account Numbers are provided</strong></p>\\r\\n\\r\\n<p>If you would like to request additional features (such as service management, change management, disconnect request, reporting, inventory, quote approval and order tracking ) please contact your customer representative to request these additional features once your account has been issued.<br />\\r\\n&nbsp;<br />\\r\\n<strong>This form is only for international customers, for French customers, go to www.orange-business.com/ece</strong><br />\\r\\n&nbsp;<br />\\r\\nPlease note fields with * are mandatory</p>\\r\\n\"\n  '#format': full_html\nrequestor_details:\n  '#type': fieldset\n  '#title': 'Requestor details:'\n  requestor_email_address_person_submitting_the_request_:\n    '#type': textfield\n    '#title': 'Requestor email address '\n    '#description': 'Person submitting the request'\n    '#description_display': after\n    '#required': true\n  authorized_by_please_provide_the_address_of_your_login_administr:\n    '#type': textfield\n    '#title': 'Authorized by '\n    '#description': 'Please provide the address of your login administrator or your Orange Business Services customer representative'\n    '#title_display': before\n    '#description_display': after\n    '#required': true\nuser_details_:\n  '#type': fieldset\n  '#title': 'User details:'\n  user_first_name:\n    '#type': textfield\n    '#title': 'User first name'\n    '#required': true\n  user_last_name:\n    '#type': textfield\n    '#title': 'User last name'\n    '#required': true\n  user_email_address:\n    '#type': email\n    '#title': 'User email address'\n    '#required': true\n  login:\n    '#type': textfield\n    '#title': Login\n    '#description': 'Default Login will be firstname.lastname but requestor can specify their own Login, which must be from 8 to 30 characters, case sensitive, supported characters: A-Z, a-z, 0-9, @, _(underline), -(dash), .(dot)'\n    '#description_display': after\n    '#required': true\n  customer_name:\n    '#type': textfield\n    '#title': 'Customer name'\n    '#required': true\n  customer_id_s_:\n    '#type': textfield\n    '#title': 'Customer ID(s)'\n    '#required': true\nonline_quoting_order_tracking:\n  '#type': select\n  '#title': 'Online quoting & order tracking'\n  '#options':\n    'I am not interested': 'I am not interested'\n    'I want to track orders': 'I want to track orders'\n    'I want to request quotes and track orders': 'I want to request quotes and track orders'\nbilling:\n  '#type': select\n  '#title': Billing\n  '#options':\n    'I am not interested': 'I am not interested'\n    'I want to view bills and credit notes': 'I want to view bills and credit notes'\nbilling_account_numbers_bans_:\n  '#type': select\n  '#title': 'Billing Account Numbers (BANs)'\n  '#description': 'If you require access to all of your BANs, then please select &quot;all&quot;. You will be contacted by an Orange representative to list the BANs you want to access in case you selected &ldquo;short list&rdquo;'\n  '#title_display': before\n  '#description_display': after\n  '#options':\n    All: All\n    Shortlist: Shortlist\n  '#options_display': side_by_side\npersonnal_data:\n  '#type': checkbox\n  '#title': 'Personnal data'\n  '#description': \"<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result. *</strong></p>\\r\\n\"\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprocessed_text:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy.</a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: false
   page_submit_path: ''
   page_confirm_path: ''
+  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -38,6 +42,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -58,6 +63,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -82,11 +92,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -100,6 +119,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
   confirmation_message: 'Thank you for getting in touch. We&rsquo;ll get back to you shortly.'
@@ -110,6 +131,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -126,7 +148,11 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  token_delete: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -178,6 +204,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }
@@ -200,6 +227,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -209,3 +237,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }

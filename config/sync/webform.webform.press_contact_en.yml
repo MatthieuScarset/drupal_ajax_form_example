@@ -22,15 +22,19 @@ id: press_contact_en
 title: 'Press contact EN'
 description: '<p>Form for international press contacts</p>'
 category: Presse
-elements: "introduction:\n  '#type': processed_text\n  '#text': \"<h3 class=\\\"obs_title_h3\\\">Our media representatives have all our latest news and press releases, and the answers to your specialist questions.</h3>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nlast_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nemail:\n  '#type': textfield\n  '#title': 'Professional Email'\n  '#required': true\nphone_number:\n  '#type': textfield\n  '#title': 'Phone number'\ncompany:\n  '#type': textfield\n  '#title': Company\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\npays:\n  '#type': select\n  '#title': Country\n  '#options': country_names\n  '#required': true\n  '#select2': true\npersonal_data:\n  '#type': checkbox\n  '#title': 'Personal Data'\n  '#description': '<p><strong>I agree to receive information about the services of Orange Business Services.</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprivacy_polycy:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy</a></u></span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
+elements: "introduction:\n  '#type': processed_text\n  '#text': \"<h3 class=\\\"obs_title_h3\\\">Our media representatives have all our latest news and press releases, and the answers to your specialist questions.</h3>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nlast_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nemail:\n  '#type': textfield\n  '#title': 'Professional Email'\n  '#required': true\nphone_number:\n  '#type': textfield\n  '#title': 'Phone number'\ncompany:\n  '#type': textfield\n  '#title': Company\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\npays:\n  '#type': select\n  '#title': Country\n  '#options': country_names\n  '#required': true\n  '#select2': true\npersonal_data:\n  '#type': checkbox\n  '#title': 'Personal Data'\n  '#description': '<p><strong>I agree to receive information about the services of Orange Business Services.</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprivacy_polycy:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy</a></u></span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: false
   page_submit_path: ''
   page_confirm_path: ''
+  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -39,6 +43,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -59,6 +64,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -83,11 +93,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -101,6 +120,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
   confirmation_message: '<p>Thank you for your request, we will reply as soon as possible.</p>'
@@ -111,6 +132,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -127,7 +149,11 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  token_delete: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -179,6 +205,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }
@@ -201,6 +228,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -210,3 +238,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }

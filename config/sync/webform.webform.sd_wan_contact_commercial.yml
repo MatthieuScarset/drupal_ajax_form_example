@@ -21,15 +21,19 @@ id: sd_wan_contact_commercial
 title: 'SD-WAN contact commercial'
 description: "<p>SD-WAN - contact commercial</p>\r\n"
 category: ''
-elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    \n    \n    <p>Complétez ce formulaire nos équipes vous contactent pour une réponse personnalisée et gratuite.</p>\n    \n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Mme\n    Monsieur: Mr\n  '#empty_option': Choisir\n  '#empty_value': Choisir\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\nprofil_metier_:\n  '#type': select\n  '#title': 'Profil métier '\n  '#options':\n    'Direction Générale ': 'Direction Générale '\n    'Direction Administrative & financière ': 'Direction Administrative & financière '\n    'Direction des Ressources Humaines': 'Direction des Ressources Humaines'\n    'Direction Marketing & Communication': 'Direction Marketing & Communication'\n    'Direction des Ventes ': 'Direction des Ventes '\n    'Direction Production & Logistique ': 'Direction Production & Logistique '\n    'Direction Informatique': 'Direction Informatique'\n  '#empty_option': Choisir\n  '#empty_value': Choisir\nraison_sociale:\n  '#type': textfield\n  '#title': 'Raison sociale'\n  '#required': true\nnumero_siret_14_chiffres_:\n  '#type': textfield\n  '#title': 'Numéro SIRET (14 chiffres)* '\n  '#required': true\ntelephone_fixe:\n  '#type': tel\n  '#title': 'Téléphone fixe'\n  '#required': true\nmobile:\n  '#type': tel\n  '#title': Mobile\neffectif_:\n  '#type': select\n  '#title': 'Effectif '\n  '#options':\n    '1 à 10 ': '1 à 10 '\n    '11 à 50 ': '11 à 50 '\n    '51 à 500 ': '51 à 500 '\n    '501 à 1000 ': '501 à 1000 '\n    '1001 et plus': '1001 et plus'\n  '#empty_option': Choisir\n  '#empty_value': Choisir\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': \"<p><strong>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. *</strong></p>\\r\\n\"\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services s’engage, dans le cadre de ses activités et conformément à la législation en vigueur en France et en Europe, à assurer la protection, la confidentialité et la sécurité des données à caractère personnel des utilisateurs de ses services, ainsi qu’à respecter leur vie privée. Vous pouvez consulter <u><a href=\\\"/fr/donnees-personnelles\\\" target=\\\"_blank\\\">notre charte relative à la protection des données personnelles et de la vie privée</a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Soumettre ma demande '\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': \"\\n\\n<p>Complétez ce formulaire nos équipes vous contactent pour une réponse personnalisée et gratuite.</p>\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Mme\n    Monsieur: Mr\n  '#empty_option': Choisir\n  '#empty_value': Choisir\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\nprofil_metier_:\n  '#type': select\n  '#title': 'Profil métier '\n  '#options':\n    'Direction Générale ': 'Direction Générale '\n    'Direction Administrative & financière ': 'Direction Administrative & financière '\n    'Direction des Ressources Humaines': 'Direction des Ressources Humaines'\n    'Direction Marketing & Communication': 'Direction Marketing & Communication'\n    'Direction des Ventes ': 'Direction des Ventes '\n    'Direction Production & Logistique ': 'Direction Production & Logistique '\n    'Direction Informatique': 'Direction Informatique'\n  '#empty_option': Choisir\n  '#empty_value': Choisir\nraison_sociale:\n  '#type': textfield\n  '#title': 'Raison sociale'\n  '#required': true\nnumero_siret_14_chiffres_:\n  '#type': textfield\n  '#title': 'Numéro SIRET (14 chiffres)* '\n  '#required': true\ntelephone_fixe:\n  '#type': tel\n  '#title': 'Téléphone fixe'\n  '#required': true\nmobile:\n  '#type': tel\n  '#title': Mobile\neffectif_:\n  '#type': select\n  '#title': 'Effectif '\n  '#options':\n    '1 à 10 ': '1 à 10 '\n    '11 à 50 ': '11 à 50 '\n    '51 à 500 ': '51 à 500 '\n    '501 à 1000 ': '501 à 1000 '\n    '1001 et plus': '1001 et plus'\n  '#empty_option': Choisir\n  '#empty_value': Choisir\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': \"<p><strong>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. *</strong></p>\\r\\n\"\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services s’engage, dans le cadre de ses activités et conformément à la législation en vigueur en France et en Europe, à assurer la protection, la confidentialité et la sécurité des données à caractère personnel des utilisateurs de ses services, ainsi qu’à respecter leur vie privée. Vous pouvez consulter <u><a href=\\\"/fr/donnees-personnelles\\\" target=\\\"_blank\\\">notre charte relative à la protection des données personnelles et de la vie privée</a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Soumettre ma demande '\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: true
   page_submit_path: ''
   page_confirm_path: ''
+  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -38,6 +42,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -58,6 +63,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -82,11 +92,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -100,6 +119,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: Confirmation
   confirmation_message: "<div class=\"container-fluid\">\r\n<div class=\"row obs_template two_columns\">\r\n<div class=\"col-md-6 col-sm-12\">\r\n<p><strong>Nos experts de la solution Working Together vous répondent dans les meilleurs délais</strong></p>\r\n\r\n<p>Merci de l'intérêt que vous portez aux solutions Orange Business Services.</p>\r\n\r\n<p>A bientôt !</p>\r\n</div>\r\n\r\n<div class=\"col-md-6 col-sm-12\">\r\n<drupal-entity data-embed-button=\"media_browser\" data-entity-embed-display=\"entity_reference:entity_reference_entity_view\" data-entity-embed-settings=\"{&quot;view_mode&quot;:&quot;default&quot;}\" data-entity-type=\"media\" data-entity-uuid=\"860ea89a-ea44-4fe5-b3d0-ccb75e2c8631\"></drupal-entity>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n"
@@ -110,6 +131,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -126,7 +148,11 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  token_delete: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -175,3 +201,4 @@ access:
     users: {  }
     permissions: {  }
 handlers: {  }
+variants: {  }

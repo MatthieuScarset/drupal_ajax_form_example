@@ -35,6 +35,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
+      region: content
     group_banner:
       children:
         - field_home_banner
@@ -48,6 +49,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Banner
+      region: content
     group_home_section:
       children:
         - field_home_columns
@@ -61,6 +63,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Home section'
+      region: content
     group_home_playlist:
       children:
         - field_home_playlists
@@ -74,6 +77,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Home Playlist'
+      region: content
     group_seo:
       children:
         - field_meta_title
@@ -88,6 +92,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
+      region: content
     group_homepage_menu:
       children:
         - title
@@ -103,6 +108,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Homepage Menu'
+      region: content
 id: node.homepage_eclairage.default
 targetEntityType: node
 bundle: homepage_eclairage

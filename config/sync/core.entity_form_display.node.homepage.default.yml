@@ -44,7 +44,7 @@ dependencies:
     - field.field.node.homepage.field_top_zone_image
     - field.field.node.homepage.field_top_zone_image_mobile
     - field.field.node.homepage.moderation_state_update
-    - image.style.homepage_solution_banner
+    - image.style.homepage_top_zone
     - node.type.homepage
   module:
     - field_group
@@ -58,9 +58,11 @@ third_party_settings:
   field_group:
     group_homepage_top_zone:
       children:
+        - field_header_title
+        - field_subhead_title_top_zone
+        - field_top_zone_image
+        - field_title_color
         - field_news_top_zone
-        - field_caroussel_header
-        - field_claim
       parent_name: group_onglets
       weight: 0
       format_type: tab
@@ -72,6 +74,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Top Zone'
+      region: content
     group_onglets:
       children:
         - group_homepage_top_zone
@@ -88,6 +91,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
+      region: content
     group_solution_banner:
       children:
         - field_solution_banner_title
@@ -106,6 +110,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Solution
+      region: content
     group_left_zone:
       children:
         - field_banner_left_zone_title
@@ -119,6 +124,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Left Zone'
+      region: content
     group_right:
       children:
         - field_banner_right_zone_title
@@ -132,6 +138,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Right Zone'
+      region: content
     group_banner_experience:
       children:
         - field_expertise_title
@@ -147,6 +154,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Expertise
+      region: content
     group_corporate_banner:
       children:
         - field_corporate_title
@@ -167,6 +175,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Corporate
+      region: content
     group_partner_:
       children:
         - field_partner_title
@@ -182,6 +191,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Partners
+      region: content
     group_seo:
       children:
         - field_meta_title
@@ -196,6 +206,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
+      region: content
 id: node.homepage.default
 targetEntityType: node
 bundle: homepage
@@ -235,38 +246,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_caroussel:
-    type: entity_reference_paragraphs
-    weight: 51
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
-  field_caroussel_header:
-    type: entity_reference_paragraphs
-    weight: 51
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
-  field_claim:
-    type: text_textarea
-    weight: 52
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
   field_corporate_button_link:
     weight: 34
     settings:
@@ -323,6 +302,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_header_title:
+    weight: 43
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_infography:
     type: entity_reference_paragraphs
     weight: 39
@@ -353,7 +340,7 @@ content:
     region: content
   field_news_top_zone:
     type: entity_reference_paragraphs
-    weight: 50
+    weight: 46
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -427,12 +414,33 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_subhead_title_top_zone:
+    weight: 44
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title_color:
+    weight: 45
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_top_zone_image:
+    weight: 45
+    settings:
+      preview_image_style: homepage_top_zone
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_image
+    region: content
   langcode:
     type: language_select
     weight: 1
     region: content
-    settings:
-      include_locked: true
+    settings: {  }
     third_party_settings: {  }
   path:
     type: path
@@ -451,7 +459,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 120
     region: content
     third_party_settings: {  }
   sticky:
@@ -476,18 +484,18 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
-      match_limit: 10
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 8
-    region: content
+    weight: 50
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
+  field_caroussel_header: true
+  field_claim: true
   field_corporate_menu: true
   field_corporate_show_menu: true
-  field_header_title: true
   field_hub: true
   field_hub_portal: true
   field_metatags: true
@@ -496,11 +504,8 @@ hidden:
   field_solution_banner_btn_text: true
   field_solution_banner_title_colo: true
   field_solution_image_mobile: true
-  field_subhead_title_top_zone: true
   field_title_btn_text: true
   field_title_button_link: true
-  field_title_color: true
-  field_top_zone_image: true
   field_top_zone_image_mobile: true
   moderation_state_update: true
   translation: true

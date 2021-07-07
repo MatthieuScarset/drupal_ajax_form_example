@@ -6,7 +6,6 @@ dependencies:
     - field.field.user.user.field_access_language
     - field.field.user.user.field_last_password_reset
     - field.field.user.user.field_password_expiration
-    - field.field.user.user.field_workbench_access
   module:
     - datetime
     - path
@@ -70,5 +69,4 @@ content:
     weight: 1
     region: content
 hidden:
-  field_workbench_access: true
   langcode: true

@@ -24,15 +24,19 @@ id: share_a_compliment_
 title: 'Share a compliment '
 description: ''
 category: 'S AME'
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>As an existing customer, you can share a compliment with your Customer Service Manager or Account Manager.</p>\\r\\n\\r\\n<p>If you are unsure of who to contact, you can share your compliment here.</p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany_email:\n  '#type': email\n  '#title': 'Company email'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1.2rem;\\\">We are processing your professional contact details to answer your query. [Orange SA (Division Orange Business Services)] is controller of this processing which you may contact at obs.dpo@orange.com. You have the right, notably, to access, rectify, object and suppress your personal data we process. You will be able to unsubscribe to our communications at any time. For more information on the processing of your personal data and your rights, <a href=\\\"https://www.orange-business.com/en/personal-data\\\" target=\\\"_blank\\\" title=\\\"Privacy policy\\\">click here</a></span></p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>As an existing customer, you can share a compliment with your Customer Service Manager or Account Manager.</p>\\r\\n\\r\\n<p>If you are unsure of who to contact, you can share your compliment here.</p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany_email:\n  '#type': email\n  '#title': 'Company email'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1.2rem;\\\">We are processing your professional contact details to answer your query. [Orange SA (Division Orange Business Services)] is controller of this processing which you may contact at obs.dpo@orange.com. You have the right, notably, to access, rectify, object and suppress your personal data we process. You will be able to unsubscribe to our communications at any time. For more information on the processing of your personal data and your rights, <a href=\\\"https://www.orange-business.com/en/personal-data\\\" target=\\\"_blank\\\" title=\\\"Privacy policy\\\">click here</a></span></p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: true
   page_submit_path: ''
   page_confirm_path: ''
+  page_theme_name: ''
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -41,6 +45,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -61,6 +66,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -85,11 +95,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: false
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -103,6 +122,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: ''
   confirmation_message: 'Thank you for getting in touch. We’ll get back to you shortly'
@@ -113,6 +134,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -129,7 +151,11 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  token_delete: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -181,6 +207,7 @@ handlers:
   email:
     id: email
     label: Email
+    notes: ''
     handler_id: email
     status: true
     conditions: {  }
@@ -210,6 +237,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -219,3 +247,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }

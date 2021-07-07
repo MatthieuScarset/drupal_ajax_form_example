@@ -50,6 +50,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Content
+      region: content
     group_banner:
       children:
         - field_display_title
@@ -66,6 +67,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Banner
+      region: content
     group_columns:
       children:
         - field_grouping_title
@@ -80,6 +82,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Columns
+      region: content
     group_seo:
       children:
         - field_meta_title
@@ -94,6 +97,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
+      region: content
     group_navigation_zone:
       children:
         - field_navigation_link
@@ -106,6 +110,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Navigation Zone'
+      region: content
     group_text_zone:
       children:
         - title
@@ -120,6 +125,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Text Zone'
+      region: content
     group_image_zone:
       children:
         - field_date
@@ -139,6 +145,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Image Zone'
+      region: content
     group_automatic_zone:
       children:
         - field_header_title
@@ -153,6 +160,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Automatic zone'
+      region: content
 id: node.hp_eclairage_thematique.default
 targetEntityType: node
 bundle: hp_eclairage_thematique
