@@ -214,6 +214,10 @@ article .product ul.nav-tabs li:before{
         height: 61px;
     }
 
+    .view-display-id-page_iot_products .display-subhomes .encart-image {
+        height: 61px;
+    }
+
     .display-subhomes .encart-image .default-image{
         width: auto;
     }
@@ -230,6 +234,10 @@ article .product ul.nav-tabs li:before{
         height: 83px;
     }
 
+    .view-display-id-page_iot_products .display-subhomes .encart-image {
+        height: 83px;
+    }
+
     .display-subhomes .encart-image .default-image{
         width: auto;
     }
@@ -240,6 +248,10 @@ article .product ul.nav-tabs li:before{
     }
 
     .view-display-id-page_catalogue .display-subhomes .encart-image{
+        height: 106px;
+    }
+
+    .view-display-id-page_iot_products .display-subhomes .encart-image {
         height: 106px;
     }
 
