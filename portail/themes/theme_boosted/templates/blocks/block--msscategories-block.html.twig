@@ -58,9 +58,9 @@
     <ul style="padding: 0" >
     {% for element in content['#markup'] %}
       {% if element == content.variable_categories %}
-        <li class= "mss_categories_selected"> {{ element }} </li>
+        <li style="list-style-type: none"> <a href="{{ content['categories_url'][element] }}" class= "mss_categories_selected">{{ element }}</a> </li>
       {% else %}
-        <li style="list-style-type: none"> {{ element }} </li>
+        <li style="list-style-type: none">  <a href="{{ content['categories_url'][element] }}">{{ element }}</a> </li>
       {% endif %}
     {% endfor %}
     </ul>
