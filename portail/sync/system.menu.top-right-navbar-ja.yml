@@ -1,0 +1,8 @@
+uuid: f03fcdb2-eb34-483a-920b-5c94824647d6
+langcode: ja
+status: true
+dependencies: {  }
+id: top-right-navbar-ja
+label: 'Top right navbar JA'
+description: 'Top right navbar JA'
+locked: false

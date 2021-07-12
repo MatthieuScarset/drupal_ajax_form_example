@@ -54,6 +54,9 @@
                     {% if elements.footeres %}
                         {{ elements.footeres }}
                     {% endif %}
+                    {% if elements.footerja %}
+                        {{ elements.footerja }}
+                    {% endif %}
                 </div>
 
                 {# GESTION SI LE CONTENU EST VIDE (par exemple, en ru, y a pas de menu finalement...; #}
@@ -75,6 +78,9 @@
                 {% endif %}
                 {% if elements.bottomfooterbarbr %}
                     {% set bottomfooterbar =  elements.bottomfooterbarbr %}
+                {% endif %}
+                {% if elements.bottomfooterbarja %}
+                    {% set bottomfooterbar =  elements.bottomfooterbarja %}
                 {% endif %}
                 {% if bottomfooterbar["#markup"]|render|trim is empty %}
                     {% set classSupp = "hidden" %}
@@ -103,6 +109,9 @@
                 {% endif %}
                 {% if elements.topnavbarbr_2 %}
                     {% set topnavbar_2 =  elements.topnavbarbr_2 %}
+                {% endif %}
+                {% if elements.topnavbarja_2 %}
+                    {% set topnavbar_2 =  elements.topnavbarja_2 %}
                 {% endif %}
                 {% if topnavbar_2["#markup"]|render|trim is empty %}
                     {% set classSupp_topnavbar = "hidden" %}
@@ -134,6 +143,9 @@
                 {% endif %}
                 {% if elements.toprightnavbarfooterbr %}
                     {% set toprightnavbar_footer =  elements.toprightnavbarfooterbr %}
+                {% endif %}
+                {% if elements.toprightnavbarfooterja %}
+                    {% set toprightnavbar_footer =  elements.toprightnavbarfooterja %}
                 {% endif %}
 
                 {% if toprightnavbar_footer["#markup"]|render|trim is empty %}

@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   module:
+    - language
     - oab_frontoffice
   theme:
     - theme_boosted
@@ -20,4 +21,16 @@ settings:
   right_icon_custom_text:
     value: '<p><span aria-hidden="true" class="glyphicon glyphicon-search" data-target="#search-form" data-toggle="collapse" font-size="2em"></span><span aria-hidden="true" class="align-right icon icon-share hidden-xs hidden-sm" data-target="#social-share" data-toggle="collapse"></span></p>'
     format: full_html
-visibility: {  }
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+      pt-br: pt-br
+      es: es
+      fr: fr
+      ru: ru
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

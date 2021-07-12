@@ -12,7 +12,7 @@ dependencies:
 id: toprightnavbarruen
 theme: theme_boosted
 region: header
-weight: -38
+weight: -39
 provider: null
 plugin: 'system_menu_block:top-right-navbar-ru-en'
 settings:
