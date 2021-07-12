@@ -42,8 +42,7 @@
                 {% set link_text %}{{ item.title }} <span class="caret"></span>{% endset %}
                 {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
             {% else %}
-
-                <li>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
+                <li{{ item.attributes }}>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
             {% endif %}
 
             {% if item.below %}

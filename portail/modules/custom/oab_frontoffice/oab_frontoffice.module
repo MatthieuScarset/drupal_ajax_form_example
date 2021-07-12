@@ -441,7 +441,33 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
         ),
         'template' => 'block--righticonblock-custom'
     );
+
+    $theme['subhome_select'] = [
+       'render element' => 'element'
+    ];
+    $theme['subhome_select_button'] = [
+      'render element' => 'element'
+    ];
     return $theme;
+}
+
+
+function oab_frontoffice_preprocess_subhome_select(&$variables) {
+//echo "toto"; kint($variables); die();
+}
+
+function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
+//  kint($variables); die();
+  $element = $variables['element'];
+  $variables['attributes'] = [];
+  if (isset($element['#id'])) {
+    $variables['attributes']['id'] = $element['#id'];
+  }
+  if (isset($element['#attributes']['title'])) {
+    $variables['attributes']['title'] = $element['#attributes']['title'];
+  }
+//  kint($element); die();
+  $variables['children'] = $element['#children'];
 }
 
 
@@ -467,6 +493,11 @@ function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
                 array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
             }
         }
+    }
+
+    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
+      subhomes_views_exposed_form($form);
+
     }
 }
 

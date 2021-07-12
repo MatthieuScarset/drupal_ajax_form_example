@@ -59,22 +59,22 @@
 }
 
 .icon-email
-{ 
-  font-family: 'icon-orange' !important; 
+{
+  font-family: 'icon-orange' !important;
   /* use !important to prevent issues with browser extensions that change fonts */
   font-size: 2.6rem !important;
-  font-style: normal; 
-  font-weight: normal; 
-  font-variant: normal; 
-  line-height: 1; 
-  text-transform: none; 
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-transform: none;
   margin-top:30px;
   margin-left:20px;
-  speak: none; 
+  speak: none;
 /*   Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased; 
-  -moz-osx-font-smoothing: grayscale; 
-} 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .icon-control_centre:hover,
 .icon-email:hover,
@@ -187,8 +187,12 @@
     margin-bottom:0;
 }
 
-.mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li > a:focus {
-    color: white;
+.mega-menu.navbar .nav > li > a:hover, .mega-menu.navbar .nav > li.active > a {
+  color: #f16e00;
+}
+
+.mega-menu.navbar .nav > li > a:active {
+  color: #f16e00;
 }
 
 .mega-menu.navbar .nav > li > a {
@@ -548,6 +552,10 @@
     .mega-menu ul.menu.nav.navbar-nav > li {
         border-top: 2px solid white;
         padding: 0.5rem 0;
+    }
+
+   .navbar-nav > li.active-trail > a {
+      color: #f16e00 !important;
     }
 
     #items_megamenu > div h3 {

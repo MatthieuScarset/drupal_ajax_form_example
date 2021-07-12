@@ -5,8 +5,8 @@ dependencies: {  }
 id: 2e9ZfIfLFCC0V-PbcDKUTb1Wk22XgjzJ6f-b16CFlPE
 label: 'https://www.orange-business.com/fr/sitemap.xml'
 chunks: 1
-links: 4835
-max_filesize: 983414
+links: 4654
+max_filesize: 949076
 context:
   language: fr
-updated: 1600351902
+updated: 1617283371

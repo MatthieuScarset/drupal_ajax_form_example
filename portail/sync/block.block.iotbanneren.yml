@@ -1,0 +1,31 @@
+uuid: d8d9ffbb-b753-4bf6-9b07-000ca8902de2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: iotbanneren
+theme: theme_boosted
+region: pre_content
+weight: 0
+provider: null
+plugin: 'block_content:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+settings:
+  id: 'block_content:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+  label: 'IoT Banner EN'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"
+    negate: false
+    context_mapping: {  }
