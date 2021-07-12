@@ -3331,6 +3331,12 @@ hr.reseau-mobile-accords-roaming {
     height: 220px;
 }
 
+.carrousel-homepage-header .carousel-inner .item img.img-fond-carrousel-home {
+  opacity: 0;
+  height: 290px;
+}
+
+
 .carousel-caption.homepage-carousel {
     top : 0;
     left: 0;
