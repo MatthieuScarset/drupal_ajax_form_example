@@ -262,7 +262,7 @@ article .product ul.nav-tabs li:before{
     width: auto;
   }
 }
-@media (min-width: 1220px)  {
+@media (min-width: 1220px ) and (max-width: 1439px)  {
   .display-subhomes .encart-image{
     height: 125px;
   }
@@ -273,7 +273,7 @@ article .product ul.nav-tabs li:before{
 
   .view-display-id-page_iot_products .display-subhomes .encart-image,
   .view-display-id-page_achievements_iot .display-subhomes .encart-image {
-    height: 84px;
+    height: 74px;
   }
 
   .view-display-id-page_iot_products .display-subhomes,
@@ -289,6 +289,18 @@ article .product ul.nav-tabs li:before{
   * .view-display-id-page_customer .display-subhomes .encart-image img,
   * .view-display-id-page_partners .display-subhomes .encart-image img{
     width: 100% !important;
+  }
+}
+@media (min-width: 1440px) {
+  .view-display-id-page_iot_products .display-subhomes .encart-image,
+  .view-display-id-page_achievements_iot .display-subhomes .encart-image {
+    height: 81px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes,
+  .view-display-id-page_achievements_iot .display-subhomes {
+    min-height: 25rem;
+    height: 250px !important;
   }
 }
 
