@@ -10,6 +10,9 @@ display:
         status:
           label: Status
       filters:
+        filename:
+          expose:
+            label: Filename
         status:
           expose:
             label: Status
