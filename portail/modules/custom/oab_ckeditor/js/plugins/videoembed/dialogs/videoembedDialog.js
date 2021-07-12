@@ -37,7 +37,12 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
                       type: 'checkbox',
                       id: 'is_modal',
                       label: editor.lang.videoembed.is_modal
-                    }
+                    },
+                  {
+                    type: 'checkbox',
+                    id: 'autoplay',
+                    label: editor.lang.videoembed.autoplay
+                  }
                 ]
             }
         ],
@@ -55,7 +60,8 @@ CKEDITOR.dialog.add('videoembedDialog', function (editor) {
             div_container.setAttribute('class', css);
 
             // Auto-detect if youtube, vimeo or dailymotion url
-            var url = detect(dialog.getValueOf('tab-basic', 'url_video'));
+            const autoplay = dialog.getValueOf('tab-basic', 'autoplay') ? 1 : 0 ;
+            var url = detect(dialog.getValueOf('tab-basic', 'url_video'), autoplay);
             // Create iframe with specific url
             if (url.length > 1) {
               let html = "";
@@ -92,7 +98,7 @@ function htmlWithModal(url) {
     '      </div>' +
     '      <div class="modal-body mb-0 p-0">' +
     '        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">' +
-               htmlWithoutModal(url) +
+    '           <iframe frameborder="0" width="560" height="349" data-src="' + url + '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>' +
     '        </div>' +
     '      </div>' +
     '    </div>' +
@@ -108,16 +114,16 @@ function htmlWithoutModal(url) {
 
 
 // Detect platform and return video ID
-function detect(url) {
+function detect(url, autoplay) {
     var embed_url = '';
     // full youtube url
     if (url.indexOf('youtube') > 0) {
         id = getId(url, "?v=", 3);
         if (id.indexOf('&list=') > 0) {
             lastId = getId(id, "&list=", 6);
-            return embed_url = 'https://www.youtube.com/embed/' + id + '?list=' + lastId;
+            return embed_url = 'https://www.youtube.com/embed/' + id + '?list=' + lastId + '&autoplay=' + autoplay;
         }
-        return embed_url = 'https://www.youtube.com/embed/' + id;
+        return embed_url = 'https://www.youtube.com/embed/' + id + '?autoplay=' + autoplay;
     }
     // tiny youtube url
     if (url.indexOf('youtu.be') > 0) {
@@ -125,14 +131,14 @@ function detect(url) {
         // if this is a playlist
         if (id.indexOf('&list=') > 0) {
             lastId = getId(id, "&list=", 6);
-            return embed_url = 'https://www.youtube.com/embed/' + id + '?list=' + lastId;
+            return embed_url = 'https://www.youtube.com/embed/' + id + '?list=' + lastId + '&autoplay=' + autoplay;
         }
-        return embed_url = 'https://www.youtube.com/embed/' + id;
+        return embed_url = 'https://www.youtube.com/embed/' + id + '?autoplay=' + autoplay;
     }
     // full vimeo url
     if (url.indexOf('vimeo') > 0) {
         id = getId(url);
-        return embed_url = 'https://player.vimeo.com/video/' + id + '?badge=0';
+        return embed_url = 'https://player.vimeo.com/video/' + id + '?badge=0' + '&autoplay=' + autoplay;
     }
     // full dailymotion url
     if (url.indexOf('dailymotion') > 0) {
@@ -143,12 +149,12 @@ function detect(url) {
         } else {
             id = getId(url);
         }
-        return embed_url = 'https://www.dailymotion.com/embed/video/' + id;
+        return embed_url = 'https://www.dailymotion.com/embed/video/' + id + '?autoplay=' + autoplay;
     }
     // tiny dailymotion url
     if (url.indexOf('dai.ly') > 0) {
         id = getId(url);
-        return embed_url = 'https://www.dailymotion.com/embed/video/' + id;
+        return embed_url = 'https://www.dailymotion.com/embed/video/' + id + '?autoplay=' + autoplay;
     }
     return embed_url;
 }

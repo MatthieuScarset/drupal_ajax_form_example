@@ -3380,9 +3380,15 @@ hr.reseau-mobile-accords-roaming {
 }
 
 .carrousel-homepage-header .carousel-inner .item img {
+    opacity: 0.5;
+    height: 220px;
+}
+
+.carrousel-homepage-header .carousel-inner .item img.img-fond-carrousel-home {
   opacity: 0;
   height: 290px;
 }
+
 
 .carousel-caption.homepage-carousel {
   top : 0;
@@ -3603,9 +3609,6 @@ hr.reseau-mobile-accords-roaming {
   padding-bottom: 3rem;
 }
 
-.btn .btn-lg .btn-modal-video {
-  font-size: 8rem;
-}
 
 /* Video embarquee dans un modal : gestion du bouton fermer */
 .modal.ckeditor-embed-video .modal-dialog .modal-content {
@@ -3625,6 +3628,14 @@ hr.reseau-mobile-accords-roaming {
 }
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
+}
+.modal.ckeditor-embed-video .modal-dialog {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.modal.ckeditor-embed-video .modal-dialog .modal-content{
+  position:relative;
+  padding:35px;
 }
 
 /* Page temporaire (offices) */

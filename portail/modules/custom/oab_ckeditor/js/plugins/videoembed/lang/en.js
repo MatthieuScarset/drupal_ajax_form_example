@@ -4,6 +4,7 @@ CKEDITOR.plugins.setLang('videoembed', 'en', {
     onlytxt: 'Youtube, Vimeo & Dailymotion URLs only',
     validatetxt: 'URL field should not be empty!',
     input_css: 'Custom CSS class name :',
-    is_modal: 'Put the video in the modal'
+    is_modal: 'Put the video in the modal',
+    autoplay: 'Auto play'
 });
 
