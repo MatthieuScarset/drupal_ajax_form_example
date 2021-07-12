@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -43,6 +44,8 @@ dependencies:
     - field.field.node.homepage.field_title_color
     - field.field.node.homepage.field_top_zone_image
     - field.field.node.homepage.field_top_zone_image_mobile
+    - field.field.node.homepage.field_wysiwyg_zone_1
+    - field.field.node.homepage.field_wysiwyg_zone_2
     - field.field.node.homepage.moderation_state_update
     - image.style.max_650
     - node.type.homepage
@@ -83,13 +86,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  field_claim:
-    type: text_default
-    weight: 34
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
   field_caroussel:
     type: entity_reference_revisions_entity_view
     weight: 24
@@ -107,6 +103,13 @@ content:
     settings:
       view_mode: default
       link: ''
+    third_party_settings: {  }
+  field_claim:
+    type: text_default
+    weight: 27
+    region: content
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
   field_corporate_button_link:
     type: link
@@ -305,6 +308,20 @@ content:
     settings:
       image_style: max_650
       image_link: ''
+    third_party_settings: {  }
+  field_wysiwyg_zone_1:
+    type: text_default
+    weight: 28
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_wysiwyg_zone_2:
+    type: text_default
+    weight: 29
+    region: content
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_header_title: true

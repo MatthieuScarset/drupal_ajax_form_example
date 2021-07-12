@@ -43,6 +43,8 @@ dependencies:
     - field.field.node.homepage.field_title_color
     - field.field.node.homepage.field_top_zone_image
     - field.field.node.homepage.field_top_zone_image_mobile
+    - field.field.node.homepage.field_wysiwyg_zone_1
+    - field.field.node.homepage.field_wysiwyg_zone_2
     - field.field.node.homepage.moderation_state_update
     - image.style.homepage_solution_banner
     - node.type.homepage
@@ -58,7 +60,6 @@ third_party_settings:
   field_group:
     group_homepage_top_zone:
       children:
-        - field_news_top_zone
         - field_caroussel_header
         - field_claim
       parent_name: group_onglets
@@ -75,6 +76,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_homepage_top_zone
+        - group_highlight
         - group_solution_banner
         - group_banner_experience
         - group_partner_
@@ -96,7 +98,7 @@ third_party_settings:
         - group_left_zone
         - group_right
       parent_name: group_onglets
-      weight: 1
+      weight: 3
       format_type: tab
       format_settings:
         label: Solution
@@ -111,7 +113,7 @@ third_party_settings:
         - field_banner_left_zone_title
         - field_solution_banner_left_zone
       parent_name: group_solution_banner
-      weight: 29
+      weight: 30
       format_type: fieldset
       format_settings:
         id: ''
@@ -124,7 +126,7 @@ third_party_settings:
         - field_banner_right_zone_title
         - field_solution_banner_right_zone
       parent_name: group_solution_banner
-      weight: 30
+      weight: 31
       format_type: fieldset
       format_settings:
         id: ''
@@ -137,7 +139,7 @@ third_party_settings:
         - field_expertise_title
         - field_banner_expertise
       parent_name: group_onglets
-      weight: 2
+      weight: 4
       format_type: tab
       format_settings:
         label: Expertise
@@ -157,7 +159,7 @@ third_party_settings:
         - field_corporate_image
         - field_infography
       parent_name: group_onglets
-      weight: 4
+      weight: 6
       format_type: tab
       format_settings:
         label: Corporate
@@ -172,7 +174,7 @@ third_party_settings:
         - field_partner_title
         - field_partners_button_text
       parent_name: group_onglets
-      weight: 3
+      weight: 5
       format_type: tab
       format_settings:
         label: Partners
@@ -187,7 +189,7 @@ third_party_settings:
         - field_meta_title
         - field_meta_description
       parent_name: group_onglets
-      weight: 5
+      weight: 7
       format_type: tab
       format_settings:
         id: ''
@@ -196,6 +198,21 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
+    group_highlight:
+      children:
+        - field_wysiwyg_zone_1
+        - field_news_top_zone
+        - field_wysiwyg_zone_2
+      parent_name: group_onglets
+      weight: 1
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Highlight
 id: node.homepage.default
 targetEntityType: node
 bundle: homepage
@@ -209,7 +226,7 @@ content:
     third_party_settings: {  }
   field_banner_expertise:
     type: entity_reference_paragraphs
-    weight: 51
+    weight: 52
     settings:
       title: 'Add new Expertise Item'
       title_plural: Paragraphs
@@ -353,7 +370,7 @@ content:
     region: content
   field_news_top_zone:
     type: entity_reference_paragraphs
-    weight: 50
+    weight: 29
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -372,7 +389,7 @@ content:
     type: string_textfield
     region: content
   field_partners_button_text:
-    weight: 9
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -388,7 +405,7 @@ content:
     type: text_textarea
     region: content
   field_solution_banner_image:
-    weight: 28
+    weight: 29
     settings:
       preview_image_style: homepage_solution_banner
       progress_indicator: throbber
@@ -427,6 +444,22 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_wysiwyg_zone_1:
+    weight: 28
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_wysiwyg_zone_2:
+    weight: 53
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   langcode:
     type: language_select
     weight: 1
@@ -436,7 +469,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -444,21 +477,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 5
+    weight: 6
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 6
+    weight: 7
     region: content
     third_party_settings: {  }
   title:
@@ -480,7 +513,7 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

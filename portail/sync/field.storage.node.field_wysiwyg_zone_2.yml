@@ -1,16 +1,16 @@
-uuid: ad354521-50bf-4f16-a96b-818da593cfd8
-langcode: en
+uuid: b2c4a14d-72e7-4de9-bf33-7796a1241e9b
+langcode: fr
 status: true
 dependencies:
   module:
-    - link
     - node
-id: node.field_banner_link
-field_name: field_banner_link
+    - text
+id: node.field_wysiwyg_zone_2
+field_name: field_wysiwyg_zone_2
 entity_type: node
-type: link
+type: text_long
 settings: {  }
-module: link
+module: text
 locked: false
 cardinality: 1
 translatable: true

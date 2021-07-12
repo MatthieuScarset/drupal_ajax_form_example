@@ -1,0 +1,8 @@
+uuid: 3c98b05c-be18-440d-805c-e98fe90f8337
+langcode: fr
+status: true
+dependencies: {  }
+id: mega-menu-main-navigation-fr
+label: 'Mega menu main navigation FR'
+description: 'Liens de navigation principale du mega menu'
+locked: false

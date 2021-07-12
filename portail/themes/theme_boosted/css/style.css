@@ -3425,6 +3425,10 @@ hr.reseau-mobile-accords-roaming {
 .top-zone-homepage .carousel-solution {
   margin-top: 20px;
 }
+.homepage-wyziwyg {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 
 .left.carousel-control.homepage-carousel-indicators,
 .right.carousel-control.homepage-carousel-indicators {
