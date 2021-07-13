@@ -3,6 +3,7 @@
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 use Drupal\node\Entity\Node;
 
 
@@ -16,16 +17,13 @@ use Drupal\node\Entity\Node;
  * )
  *
  */
-class MssCategoryBlock extends BlockBase
-{
+class MssCategoryBlock extends BlockBase {
 
-  public function build()
-  {
+  public function build() {
 
     $contents = array();
     $contents_url = array();
     $block = array();
-    $cache = array('contexts' => array('url.path'));
 
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'category_mss']);
 
@@ -54,9 +52,13 @@ class MssCategoryBlock extends BlockBase
 
     $block['#markup'] = $contents;
     $block['categories_url'] = $contents_url;
-    $block['#cache'] = $cache;
 
     return $block;
   }
+
+  public function getCacheContexts() {
+    return Cache::mergeContexts(parent::getCacheContexts(), ['url.path']);
+  }
+
 
 }
