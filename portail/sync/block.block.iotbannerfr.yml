@@ -12,7 +12,7 @@ dependencies:
 id: iotbannerfr
 theme: theme_boosted
 region: pre_content
-weight: 0
+weight: -53
 provider: null
 plugin: 'block_content:6e7580fa-a5f6-436c-95e6-10145f5862d4'
 settings:

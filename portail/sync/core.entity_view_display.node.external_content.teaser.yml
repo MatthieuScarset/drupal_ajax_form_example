@@ -21,6 +21,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  workbench_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_insight: true
   field_insight_type: true
