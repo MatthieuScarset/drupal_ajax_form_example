@@ -80,7 +80,7 @@ namespace :deploy do
      execute :rm, "-rf #{release_path}/README.md"
     end
    end
-   
+
    desc 'Save the archive file'
    task :save_archive_file do
     on roles(:all) do
@@ -88,7 +88,7 @@ namespace :deploy do
      execute :tar, 'cfzp', "#{deploy_to}/shared/saved_archives/#{release_timestamp}.tar.gz", "-C #{releases_path} #{release_timestamp}"
     end
    end
-   
+
    desc 'Create /var/www/current symbolik link'
    task :create_current_link do
     on roles(:all) do
@@ -107,8 +107,8 @@ namespace :deploy do
    desc 'Run update commands on server'
    task :drush_update do
     on roles(:all) do
+   	 execute "drush cim --yes --root=#{release_path}/portail"
      execute "drush oab:updb --yes --root=#{release_path}/portail"
-   	 #execute "drush cim --yes --root=#{release_path}/portail"
      execute "drush cr --root=#{release_path}/portail"
     end
    end
