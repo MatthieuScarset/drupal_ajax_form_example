@@ -1,0 +1,23 @@
+uuid: 2e40b929-7f96-40bd-ade2-a112af3ecfe7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_requires_altares
+    - paragraphs.paragraphs_type.marketo
+id: paragraph.marketo.field_requires_altares
+field_name: field_requires_altares
+entity_type: paragraph
+bundle: marketo
+label: 'Requires Altares'
+description: "Check if the marketo form need Altares connection to work properly\r\n"
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

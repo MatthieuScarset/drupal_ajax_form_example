@@ -8,7 +8,7 @@ third_party_settings:
   oab_backoffice:
     gdpr_business_owner: '1746'
     gdpr_spoc_security: '1706'
-    gdpr_expiration_date: '2020-12-31'
+    gdpr_expiration_date: '2022-12-31'
     gdpr_business_analysts:
       77: '77'
     gdpr_form_published: 1

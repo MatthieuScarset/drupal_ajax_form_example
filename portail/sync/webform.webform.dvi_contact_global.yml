@@ -1,7 +1,18 @@
 uuid: null
 langcode: en
 status: open
-dependencies: {  }
+dependencies:
+  module:
+    - oab_backoffice
+third_party_settings:
+  oab_backoffice:
+    gdpr_business_owner: '567'
+    gdpr_spoc_security: '567'
+    gdpr_expiration_date: ''
+    gdpr_business_analysts:
+      1922: '1922'
+      3011: '3011'
+    gdpr_form_published: 1
 open: null
 close: null
 weight: 0
@@ -114,7 +125,7 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: "<p>Merci pour votre demande de contact.<br />\r\nNous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.<br />\r\nCordialement,<br />\r\nLa direction des Ventes Indirectes.</p>\r\n"
+  confirmation_message: "<h2 class=\"titre2\">Votre demande</h2>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.</p>\r\n\r\n<p>À très bientôt sur www.orange-business.com.</p>\r\n\r\n<p><br />\r\n<strong>La direction des Ventes Indirectes.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -202,9 +213,9 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sarah1.rebiai@orange.com
+      to_mail: 'thomas.christensen@orange.com,nicolas.fleury1@orange.com'
       to_options: {  }
-      cc_mail: ''
+      cc_mail: nicolas.griffet@orange.com
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -212,8 +223,16 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: 'Nouveau contact "Direction des ventes indirectes"'
-      body: "<p>Bonjour,&nbsp;<br />\r\nVous avez reçu une nouvelle prise de contact sur le portail des Ventes indirectes :</p>\r\n\r\n<p>Date de la demande :&nbsp;[webform_submission:created]</p>\r\n\r\n<p>Auteur de la demande : [webform_submission:user]</p>\r\n\r\n<p>Message :</p>\r\n\r\n<p>[webform_submission:values]</p>"
-      excluded_elements: {  }
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>DVI</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Nouvelle demande de contact</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tUne nouvelle demande de contact a été soumise.<br />\r\n\t\t\tVeuillez en prendre connaissance depuis votre <strong><a href=\"https://backoffice.www.orange-business.com/fr/user/login\"><span style=\"color:#ff7900;\">espace personnel</span></a></strong>.<br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        first_name: first_name
+        last_name: last_name
+        company: company
+        e_mail: e_mail
+        phone: phone
+        subject: subject
+        message: message
+        donnees_personnelles: donnees_personnelles
       ignore_access: true
       exclude_empty: true
       exclude_empty_checkbox: false
@@ -249,7 +268,7 @@ handlers:
       from_options: {  }
       from_name: _default
       subject: 'Votre prise de contact avec la Direction des ventes indirectes'
-      body: "<p dir=\"ltr\" id=\"docs-internal-guid-c7125d3d-082d-47f1-13c1-40a511156d3a\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Bonjour,</span><br />\r\n<br class=\"kix-line-break\" />\r\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous avons bien reçu votre message.</span><br class=\"kix-line-break\" />\r\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous le traiterons dans les délais les plus brefs.</span></p>\r\n\r\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Cordialement,</span></p>\r\n\r\n<p dir=\"ltr\" style=\"line-height:1.08;margin-top:6pt;margin-bottom:0pt;\"><strong><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">La direction des Ventes Indirectes.</span></strong></p>\r\n"
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Votre demande de contact</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Confirmation</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tNous vous remercions pour votre message. Nos experts prendront contact avec vous dans les plus brefs délais.<br />\r\n\t\t\tMerci de votre visite sur notre site <a href=\"https://www.orange-business.com\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
       excluded_elements:
         first_name: first_name
         last_name: last_name

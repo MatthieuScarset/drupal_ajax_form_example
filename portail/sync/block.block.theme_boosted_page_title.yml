@@ -11,7 +11,7 @@ _core:
 id: theme_boosted_page_title
 theme: theme_boosted
 region: content
-weight: -48
+weight: -49
 provider: null
 plugin: page_title_block
 settings:

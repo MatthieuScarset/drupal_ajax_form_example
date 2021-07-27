@@ -1,68 +1,60 @@
 <?php
 
-use \Drupal\block_content\Entity\BlockContent;
-
-$new_blocks = [
+/** @var  $tocs_new_terms
+ * type of cloud service new terms
+ **/
+$tocs_new_terms = [
   [
-    'uuid' => 'ea50b916-a069-4fac-a324-bd82a04a5def',
+    'vid' => 'type_of_cloud_service',
     'language' => 'en',
-    'name' => 'Contact CSP EN',
-    'type' => 'basic',
-    'body' => array(
-      'value' => '<div class="container-fluid">
-                  <div class="row" style="background-color: #4cb4e6; padding:1rem;">
-                  <div class="col-md-12">
-                  <h2><span style="color:#000000;">Contact our sales team</span></h2>
-
-                  <p><font color="#000000"><b>Request a trial of this solution</b></font><br />
-                  &nbsp;</p>
-                  <a class="btn btn-default " href="/en/any-request">Contact us</a></div>
-                  </div>
-                  </div>',
-      'format' => 'full_html',
-    ),
+    'name' => 'IaaS'
   ],
   [
-    'uuid' => 'c55c4f20-7284-46c6-9f27-9a5df2395e26',
-    'language' => 'fr',
-    'name' => 'Contact CSP FR',
-    'type' => 'basic',
-    'body' => array(
-      'value' => '<div class="container-fluid">
-                  <div class="row" style="background-color: #4cb4e6; padding:1rem;">
-                  <div class="col-md-12">
-                  <h2><span style="color:#000000;">Contacter notre service commercial</span></h2>
-
-                  <p><font color="#000000"><b>Demander un test de cette solution</b></font><br />
-                  &nbsp;</p>
-                  <a class="btn btn-default " href="/fr/contact">Contactez-nous</a></div>
-                  </div>
-                  </div>',
-      'format' => 'full_html',
-),
+    'vid' => 'type_of_cloud_service',
+    'language' => 'en',
+    'name' => 'SaaS'
   ],
+  [
+    'vid' => 'type_of_cloud_service',
+    'language' => 'fr',
+    'name' => 'IaaS'
+  ],
+  [
+    'vid' => 'type_of_cloud_service',
+    'language' => 'fr',
+    'name' => 'SaaS'
+  ]
 ];
 
-foreach ($new_blocks as &$block) {
+$vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
+
+if (!isset($vocabularies['type_of_cloud_service'])) {
+  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+    'vid' => 'type_of_cloud_service',
+    'name' => t('Type of cloud service'),
+  ));
+  $vocabulary->save();
+}
+
+foreach ($tocs_new_terms as $term) {
 
   /** @var \Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
   $entity_type_manager = \Drupal::entityTypeManager();
 
-  $entity = $entity_type_manager->getStorage('block_content')->loadByProperties(
+  $entity = $entity_type_manager->getStorage('taxonomy_term')->loadByProperties(
     [
-      'uuid' => $block['uuid'],
-      'langcode' => $block['language'],
+      'vid' => $term['vid'],
+      'langcode' => $term['language'],
+      'name' => $term['name']
     ]
   );
 
   if (!isset($entity) || empty($entity)) {
-    $newBlock = BlockContent::create([
-      'uuid' => $block['uuid'],
-      'langcode' => $block['language'],
-      'info' => $block['name'],
-      'body' => $block['body'],
-      'type' => $block['type']
+    $entity = \Drupal\taxonomy\Entity\Term::create([
+      'vid' => $term['vid'],
+      'name' => $term['name'],
+      'langcode' => $term['language'],
     ]);
-    $newBlock->save();
+    $entity->save();
   }
 }

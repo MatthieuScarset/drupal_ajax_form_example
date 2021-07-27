@@ -1,20 +1,60 @@
 <?php
 
+/** @var  $service_providers_new_terms
+ * type of cloud service new terms
+ **/
+$service_providers_new_terms = [
+  [
+    'vid' => 'service_providers',
+    'language' => 'en',
+    'name' => 'Orange offers'
+  ],
+  [
+    'vid' => 'service_providers',
+    'language' => 'en',
+    'name' => 'Partner offers'
+  ],
+  [
+    'vid' => 'service_providers',
+    'language' => 'fr',
+    'name' => 'Offres Orange'
+  ],
+  [
+    'vid' => 'service_providers',
+    'language' => 'fr',
+    'name' => 'Offres partenaires'
+  ]
+];
 
-/**
- * Ajout des traductions FR de la page CSP
- */
-oabt_TranslationImport("Availability in France","fr","Disponibilité France");
-oabt_TranslationImport("France and International Availability","fr","Disponibilité France et international");
-oabt_TranslationImport("International availability","fr","Disponibilité international");
-oabt_TranslationImport("No technical qualification","fr","Pas de qualification technique");
-oabt_TranslationImport("Technical standard qualification","fr","Qualification technique standard");
-oabt_TranslationImport("Technical study required","fr","Etude technique nécessaire");
-oabt_TranslationImport("Access to a dedicated infrastructure","fr","Accès à une infrastructure dédiée");
-oabt_TranslationImport("Access to a shared cloud service","fr","Accès à un service cloud partage");
-oabt_TranslationImport("Business VPN Galerie offers a connection to these cloud services at the following speeds","fr","Business VPN Galerie vous propose une connexion à ces services cloud aux débits suivants");
-oabt_TranslationImport("This service is billed according to your number of sites","fr","Ce service est facturé selon votre nombre de sites");
-oabt_TranslationImport("This service is charged according to your number of users","fr","Ce service est facturé selon votre nombre d’utilisateurs ");
+$vocabularies = \Drupal\taxonomy\Entity\Vocabulary::loadMultiple();
 
+if (!isset($vocabularies['service_providers'])) {
+  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+    'vid' => 'service_providers',
+    'name' => t('Service providers'),
+  ));
+  $vocabulary->save();
+}
 
+foreach ($service_providers_new_terms as $term) {
 
+  /** @var \Drupal\Core\Entity\EntityTypeManager $entity_type_manager */
+  $entity_type_manager = \Drupal::entityTypeManager();
+
+  $entity = $entity_type_manager->getStorage('taxonomy_term')->loadByProperties(
+    [
+      'vid' => $term['vid'],
+      'langcode' => $term['language'],
+      'name' => $term['name']
+    ]
+  );
+
+  if (!isset($entity) || empty($entity)) {
+    $entity = \Drupal\taxonomy\Entity\Term::create([
+      'vid' => $term['vid'],
+      'name' => $term['name'],
+      'langcode' => $term['language'],
+    ]);
+    $entity->save();
+  }
+}

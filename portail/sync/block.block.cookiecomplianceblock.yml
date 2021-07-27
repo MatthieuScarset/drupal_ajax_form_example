@@ -1,6 +1,6 @@
 uuid: cdf36242-92dd-43d4-8766-514000b1e912
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - oab_cookie_compliance
@@ -9,7 +9,7 @@ dependencies:
 id: cookiecomplianceblock
 theme: theme_boosted
 region: header
-weight: -50
+weight: -52
 provider: null
 plugin: cookie_compliance_block
 settings:

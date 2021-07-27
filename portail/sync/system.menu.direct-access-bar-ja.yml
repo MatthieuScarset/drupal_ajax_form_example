@@ -1,0 +1,8 @@
+uuid: 8a36ad46-3244-4179-9cf6-f3cc8767fa17
+langcode: ja
+status: true
+dependencies: {  }
+id: direct-access-bar-ja
+label: 'Direct Access Bar JA'
+description: 'Menu for Direct Access Bar JA'
+locked: false

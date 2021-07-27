@@ -1,0 +1,8 @@
+uuid: 61750f47-77e9-46dd-a9ab-7bd410e37017
+langcode: ja
+status: true
+dependencies: {  }
+id: bottom-footerbar-ja
+label: 'Bottom Footerbar JA'
+description: 'Bottom Footerbar JA'
+locked: false

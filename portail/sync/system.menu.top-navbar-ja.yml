@@ -1,0 +1,8 @@
+uuid: ab1857b4-223d-4c6b-8a67-1e091dba6d0d
+langcode: ja
+status: true
+dependencies: {  }
+id: top-navbar-ja
+label: 'Top navbar JA'
+description: 'Sur-header JA'
+locked: false

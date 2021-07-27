@@ -7,7 +7,7 @@ dependencies:
 id: directaccessblock
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -33
 provider: null
 plugin: direct_access_block
 settings:

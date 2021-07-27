@@ -6,11 +6,13 @@ dependencies:
     - oab_backoffice
 third_party_settings:
   oab_backoffice:
-    gdpr_business_owner: '1'
-    gdpr_spoc_security: '1'
+    gdpr_business_owner: '567'
+    gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
-    gdpr_business_analysts: {  }
-    gdpr_form_published: 0
+    gdpr_business_analysts:
+      1922: '1922'
+      3011: '3011'
+    gdpr_form_published: 1
 open: null
 close: null
 weight: 0
@@ -21,7 +23,7 @@ id: dvi_contact_distributor
 title: 'DVI - Contact distributor'
 description: ''
 category: DVI
-elements: "'#attributes':\n  class:\n    - webform-dvi-contact-distributor\ncss_hook:\n  '#type': processed_text\n  '#text': |\n    <style type=\"text/css\">.webform-submission-dvi-contact-distributor-add-form .container,\n    .webform-submission-dvi-contact-distributor-add-form .container .row {\n    \tmargin:0!important;\n    \tpadding:0!important;\n    }\n    .webform-submission-form .captcha {\n        margin-left: 1rem!important;\n    }\n    input#edit-submit--2 {\n        margin-left: 1rem!important;\n    }\n    #block-phonenumber .text-align-left {\n    \tmargin-right:0!important;\n    \tpadding: 0.7rem 0 0.7rem 2rem!important;\n    }\n    .phonenumber {\n        display: block;\n        border: solid 1px black!important;\n        margin: 1rem 0.8rem!important;\n    }\n    span.phone_number_block_title {\n        margin-left: 1rem!important;\n    }\n    .intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=text], .intl-tel-input.separate-dial-code input[type=tel] {\n        padding-right: 36px!important;\n    }\n    </style>\n    \n  '#format': full_html\nlast_name:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__header_label': Bla\n  '#required': true\nfirst_name:\n  '#type': textfield\n  '#title': Prénom\ncompany:\n  '#type': textfield\n  '#title': Société\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Téléphone\n  '#required': true\n  '#international': true\n  '#international_initial_country': FR\n  '#label': bli\nsubject:\n  '#type': textfield\n  '#title': Objet\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': |\n    <p style=\"font-size:1.3rem\"><strong>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. *</strong></p>\n    \n  '#title_display': ''\n  '#required': true\n  '#attributes':\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': processed_text\n  '#text': |\n    <p><span style=\"font-size:1rem;\">Orange Business Services s’engage, dans le cadre de ses activités et conformément à la législation en vigueur en France et en Europe, à assurer la protection, la confidentialité et la sécurité des données à caractère personnel des utilisateurs de ses services, ainsi qu’à respecter leur vie privée. Vous pouvez consulter <u><a href=\"/fr/donnees-personnelles\" target=\"_blank\">notre charte relative à la protection des données personnelles et de la vie privée</a></u>.</span></p>\n    \n  '#format': full_html\ncaptcha_dvi_contact_distributor:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\ndistributeur_email:\n  '#type': hidden\n  '#title': distributeur-email\ndistributeur_name:\n  '#type': hidden\n  '#title': distributeur-name\ndistributeur_nid:\n  '#type': hidden\n  '#title': distributeur-nid\ndvi_contact_distributor_description:\n  '#type': processed_text\n  '#text': '<p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>'\n  '#format': full_html\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
+elements: "'#attributes':\n  class:\n    - webform-dvi-contact-distributor\ncss_hook:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">.webform-submission-dvi-contact-distributor-add-form .container,\\r\\n.webform-submission-dvi-contact-distributor-add-form .container .row {\\r\\n\\tmargin:0!important;\\r\\n\\tpadding:0!important;\\r\\n}\\r\\n.webform-submission-form .captcha {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\ninput#edit-submit--2 {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\n#block-phonenumber .text-align-left {\\r\\n\\tmargin-right:0!important;\\r\\n\\tpadding: 0.7rem 0 0.7rem 2rem!important;\\r\\n}\\r\\n.phonenumber {\\r\\n    display: block;\\r\\n    border: solid 1px black!important;\\r\\n    margin: 1rem 0.8rem!important;\\r\\n}\\r\\nspan.phone_number_block_title {\\r\\n    margin-left: 1rem!important;\\r\\n}\\r\\n.intl-tel-input.allow-dropdown input, .intl-tel-input.allow-dropdown input[type=text], .intl-tel-input.allow-dropdown input[type=tel], .intl-tel-input.separate-dial-code input, .intl-tel-input.separate-dial-code input[type=text], .intl-tel-input.separate-dial-code input[type=tel] {\\r\\n    padding-right: 36px!important;\\r\\n}\\r\\n</style>\\r\\n\"\n  '#format': full_html\nlast_name:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__header_label': Bla\n  '#required': true\nfirst_name:\n  '#type': textfield\n  '#title': Prénom\ncompany:\n  '#type': textfield\n  '#title': Société\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nphone:\n  '#type': tel\n  '#title': Téléphone\n  '#required': true\n  '#international': true\n  '#international_initial_country': FR\n  '#label': bli\nsubject:\n  '#type': textfield\n  '#title': Objet\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p style=\"font-size:1.3rem\"><strong>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. *</strong></p>'\n  '#title_display': ''\n  '#required': true\n  '#attributes':\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services s’engage, dans le cadre de ses activités et conformément à la législation en vigueur en France et en Europe, à assurer la protection, la confidentialité et la sécurité des données à caractère personnel des utilisateurs de ses services, ainsi qu’à respecter leur vie privée. Vous pouvez consulter <u><a href=\\\"/fr/donnees-personnelles\\\" target=\\\"_blank\\\">notre charte relative à la protection des données personnelles et de la vie privée</a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha_dvi_contact_distributor:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\ndistributeur_email:\n  '#type': hidden\n  '#title': distributeur-email\ndistributeur_name:\n  '#type': hidden\n  '#title': distributeur-name\ndistributeur_nid:\n  '#type': hidden\n  '#title': distributeur-nid\ndvi_contact_distributor_description:\n  '#type': processed_text\n  '#text': '<p><span style=\"color:#e74c3c;\">* Champs obligatoires</span></p>'\n  '#format': full_html\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'"
 css: ''
 javascript: ''
 settings:
@@ -123,7 +125,7 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: ''
-  confirmation_message: 'Thank you. The distributor will get back to you shortly.'
+  confirmation_message: "<h3 class=\"titre4\">Votre demande</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.</p>\r\n\r\n<p>À très bientôt sur www.orange-business.com.</p>\r\n\r\n<p><br />\r\n<strong>La direction des Ventes Indirectes.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
@@ -221,7 +223,7 @@ handlers:
       from_options: {  }
       from_name: 'Contact DVI'
       subject: '[webform_submission:values:subject:raw]'
-      body: "<span id=\"docs-internal-guid-c7125d3d-36d5-2f96-91cf-a79e5e60860c\" style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Bonjour,</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Nous avons bien transmis votre message &agrave; la soci&eacute;t&eacute; [webform_submission:values:distributeur_name]</span><span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">. </span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">Cordialement,</span><br class=\"kix-line-break\" />\n<span style=\"background-color:transparent; color:#000000; font-family:Arial; font-size:10pt; font-style:normal; font-variant:normal; font-weight:400; text-decoration:none; vertical-align:baseline\">La Direction des Ventes Indirectes.</span>"
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Votre demande de contact</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Confirmation</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tNous vous remercions pour votre message. Nos experts prendront contact avec vous dans les plus brefs délais.<br />\r\n\t\t\tMerci de votre visite sur notre site <a href=\"https://www.orange-business.com\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
       excluded_elements:
         last_name: last_name
         first_name: first_name
@@ -258,17 +260,17 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: sarah1.rebiai@orange.com
+      to_mail: 'thomas.christensen@orange.com,nicolas.fleury1@orange.com'
       to_options: {  }
       cc_mail: ''
       cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
-      from_mail: '[webform_submission:values:e_mail:raw]'
+      from_mail: _default
       from_options: {  }
-      from_name: '[webform_submission:values:last_name:raw]'
-      subject: 'Message Transmis à [webform_submission:values:distributeur_name]'
-      body: "<p>Le message suivant a été transmis à [webform_submission:values:distributeur_name] :<br />\r\n<br />\r\n<em><strong>[webform_submission:values:message]</strong></em><br />\r\n<br />\r\n<strong>Par </strong>[webform_submission:values:last_name]&nbsp;[webform_submission:values:first_name]<br />\r\n<strong>Société </strong>[webform_submission:values:company]<br />\r\n<strong>Email </strong>: [webform_submission:values:e_mail]<br />\r\n<strong>Contacter au numéro</strong> : [webform_submission:values:phone]</p>"
+      from_name: _default
+      subject: 'Contact distributeur : [webform_submission:values:distributeur_name]'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>DVI</span><br />\r\n\t\t\t<font color=\"#ff6600\">Contact distributeur</font></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tUne nouvelle demande de contact a été soumise pour le distributeur :&nbsp;<br />\r\n\t\t\t<strong>[webform_submission:values:distributeur_name]</strong><br />\r\n\t\t\tVeuillez en prendre connaissance depuis votre <strong><a href=\"https://backoffice.www.orange-business.com/fr/user/login\"><span style=\"color:#ff7900;\">espace personnel</span></a></strong>.<br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2020<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
       excluded_elements:
         last_name: last_name
         first_name: first_name
@@ -277,8 +279,8 @@ handlers:
         phone: phone
         subject: subject
         message: message
+        donnees_personnelles: donnees_personnelles
         distributeur_email: distributeur_email
-        distributeur_name: distributeur_name
         distributeur_nid: distributeur_nid
       ignore_access: false
       exclude_empty: false
@@ -299,7 +301,7 @@ handlers:
     label: 'Email to Distributor'
     notes: ''
     handler_id: email_to_distributor
-    status: true
+    status: false
     conditions: {  }
     weight: 0
     settings:

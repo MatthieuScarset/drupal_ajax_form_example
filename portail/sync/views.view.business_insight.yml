@@ -369,7 +369,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'Au cœur de l''innovation et de la transformation digitale des entreprises'
+      title: 'At the heart of innovation and enterprises digital transformation'
       header: {  }
       footer: {  }
       empty: {  }

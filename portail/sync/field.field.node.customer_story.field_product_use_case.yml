@@ -1,0 +1,29 @@
+uuid: f862e22d-1c54-478f-8d77-ffb875a9c9d9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_product_use_case
+    - node.type.customer_story
+    - taxonomy.vocabulary.product_use_case
+id: node.customer_story.field_product_use_case
+field_name: field_product_use_case
+entity_type: node
+bundle: customer_story
+label: 'Product use case'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      product_use_case: product_use_case
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

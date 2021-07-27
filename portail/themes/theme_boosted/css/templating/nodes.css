@@ -1581,3 +1581,7 @@ a.home_banner_element_mobile_link {
     width: 100px;
     margin-bottom:20px
 }
+
+.document_content_part {
+  padding-top: 2rem;
+}

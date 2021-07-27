@@ -7,7 +7,13 @@ display:
       fields:
         nothing:
           admin_label: Ícone
+        type:
+          label: Type
         name:
           label: Usuário
         link:
           label: Operações
+      filters:
+        type:
+          expose:
+            label: Type

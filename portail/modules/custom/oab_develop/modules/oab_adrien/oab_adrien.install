@@ -13,50 +13,57 @@ function oab_adrien_update_8001() {
 }
 
 /**
+ * Ajout des 4 termes subhomes pour IoT
+ */
+function oab_adrien_update_8002() {
+  include_once("updates/update_8002.inc");
+}
+
+/**
+ *  Ajout des 2 nouvelles Taxos pour IoT (Usages et Types de Produits)
+ */
+function oab_adrien_update_8003() {
+  include_once("updates/update_8003.inc");
+}
+
+/**
+ *  Ajout des 4 blocks IoT
+ */
+function oab_adrien_update_8007() {
+  include_once("updates/update_8007.inc");
+}
+
+/**
  * Ajout de la Taxo "type of cloud service" pour BVPN
- */
-function oab_adrien_update_8004() {
-  include_once("updates/update_8004.inc");
-}
-
-/**
- * Ajout de la Taxo "Service provider" pour BVPN
- */
-function oab_adrien_update_8005() {
-  include_once("updates/update_8005.inc");
-}
-
-/**
- * Ajout de la Taxo "Location" pour BVPN
- */
-function oab_adrien_update_8006() {
-  include_once("updates/update_8006.inc");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Ajout block rebond contact CSP
  */
 function oab_adrien_update_8008() {
   include_once("updates/update_8008.inc");
 }
 
 /**
- * Ajout des traductions de la vue CSP
+ * Ajout de la Taxo "Service provider" pour BVPN
  */
 function oab_adrien_update_8009() {
-  include_once('updates/update_8009.inc');
+  include_once("updates/update_8009.inc");
+}
+
+/**
+ * Ajout de la Taxo "Location" pour BVPN
+ */
+function oab_adrien_update_8010() {
+  include_once("updates/update_8010.inc");
+}
+
+/**
+ * Ajout block rebond contact CSP
+ */
+function oab_adrien_update_8011() {
+  include_once("updates/update_8011.inc");
+}
+
+/**
+ * Ajout des traductions de la vue CSP
+ */
+function oab_adrien_update_8012() {
+  include_once('updates/update_8012.inc');
 }

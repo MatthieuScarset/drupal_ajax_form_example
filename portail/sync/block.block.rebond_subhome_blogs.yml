@@ -18,9 +18,9 @@ settings:
   label: Blogs
   provider: oab_frontoffice
   label_display: visible
-  block_text: 'View more blogs'
+  block_text: 'Retrouvez l''ensemble de nos articles de blog'
   block_link: /fr/blogs
-  block_link_text: 'click here'
+  block_link_text: 'En savoir plus'
   block_image_src: '26369'
 visibility:
   request_path:

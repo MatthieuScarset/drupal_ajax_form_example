@@ -102,6 +102,18 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
         '#default_value' => $config->get('news_term_tid'),
       );
 
+      $form['achievement_term_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('IoT Achievements term ID'),
+        '#default_value' => $config->get('achievement_term_tid')
+      );
+
+      $form['iot_product_term_tid'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('IoT Products term ID'),
+        '#default_value' => $config->get('iot_product_term_tid'),
+      );
+
       $form['press_meta'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('Meta Title for Press subhome'),
@@ -150,6 +162,18 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
           '#default_value' => $config->get('analysts_meta'),
       );
 
+      $form['iot_achievement_meta'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('Meta Title for IoT Achievements subhome'),
+        '#default_value' => $config->get('iot_achievement_meta'),
+      );
+
+      $form['iot_product_meta'] = array(
+        '#type' => 'textfield',
+        '#title' => $this->t('Meta Title for IoT Products subhome'),
+        '#default_value' => $config->get('iot_product_meta'),
+      );
+
       return parent::buildForm($form, $form_state);
   }
 
@@ -166,19 +190,23 @@ class OabSettingsSubhomesForm extends ConfigFormBase {
       ->set('blog_term_tid', $form_state->getValue('blog_term_tid'))
       ->set('magazine_term_tid', $form_state->getValue('magazine_term_tid'))
       ->set('product_term_tid', $form_state->getValue('product_term_tid'))
-        ->set('product_dvi_term_tid', $form_state->getValue('product_dvi_term_tid'))
-        ->set('distributor_term_tid', $form_state->getValue('distributor_term_tid'))
-        ->set('analysts_term_tid', $form_state->getValue('analysts_term_tid'))
-        ->set('news_term_tid', $form_state->getValue('news_term_tid'))
-        ->set('press_meta', $form_state->getValue('press_meta'))
-        ->set('partner_meta', $form_state->getValue('partner_meta'))
-        ->set('customer_meta', $form_state->getValue('customer_meta'))
-        ->set('library_meta', $form_state->getValue('library_meta'))
-        ->set('blog_meta', $form_state->getValue('blog_meta'))
-        ->set('magazine_meta', $form_state->getValue('magazine_meta'))
-        ->set('product_meta', $form_state->getValue('product_meta'))
-        ->set('analysts_meta', $form_state->getValue('analysts_meta'))
-        ->save();
+      ->set('product_dvi_term_tid', $form_state->getValue('product_dvi_term_tid'))
+      ->set('distributor_term_tid', $form_state->getValue('distributor_term_tid'))
+      ->set('analysts_term_tid', $form_state->getValue('analysts_term_tid'))
+      ->set('news_term_tid', $form_state->getValue('news_term_tid'))
+      ->set('achievement_term_tid', $form_state->getValue('achievement_term_tid'))
+      ->set('iot_product_term_tid', $form_state->getValue('iot_product_term_tid'))
+      ->set('press_meta', $form_state->getValue('press_meta'))
+      ->set('partner_meta', $form_state->getValue('partner_meta'))
+      ->set('customer_meta', $form_state->getValue('customer_meta'))
+      ->set('library_meta', $form_state->getValue('library_meta'))
+      ->set('blog_meta', $form_state->getValue('blog_meta'))
+      ->set('magazine_meta', $form_state->getValue('magazine_meta'))
+      ->set('product_meta', $form_state->getValue('product_meta'))
+      ->set('analysts_meta', $form_state->getValue('analysts_meta'))
+      ->set('iot_achievement_meta', $form_state->getValue('iot_achievement_meta'))
+      ->set('iot_product_meta', $form_state->getValue('iot_product_meta'))
+      ->save();
 
     parent::submitForm($form, $form_state);
   }

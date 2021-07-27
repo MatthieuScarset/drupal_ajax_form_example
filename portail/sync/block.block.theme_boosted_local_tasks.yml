@@ -9,7 +9,7 @@ _core:
 id: theme_boosted_local_tasks
 theme: theme_boosted
 region: content
-weight: -47
+weight: -48
 provider: null
 plugin: local_tasks_block
 settings:
