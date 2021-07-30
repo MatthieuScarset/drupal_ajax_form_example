@@ -104,13 +104,12 @@ var CSPMapControl = function() {
       marker = markers[0];
     } else {
       // si on a + d'un marqueur visible, on recherche celui qui nous intéresse (= celui qui a les mêmes coordonnées)
-      marker = markers.find(m => (m._latlng.lat === latLng.lat && m._latlng.lng === latLng.lng));
-    }
-
-    if(marker instanceof L.Marker) {
-      var icon = marker.options.icon;
-      icon.options.iconUrl = iconPath;
-      marker.setIcon(icon);
+      markers.filter(m => (m._latlng.lat === latLng.lat && m._latlng.lng === latLng.lng))
+        .forEach(function (marker) {
+          var icon = marker.options.icon;
+          icon.options.iconUrl = iconPath;
+          marker.setIcon(icon);
+        });
     }
   };
   /**
