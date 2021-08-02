@@ -1,4 +1,4 @@
-uuid: null
+uuid: 4c650e05-be54-43e3-bae4-c6876dab7707
 langcode: en
 status: true
 dependencies:
@@ -8,26 +8,33 @@ dependencies:
     - oab_frontoffice
   theme:
     - theme_boosted
-id: contactbarbrstandard
+id: contactbarjastandard
 theme: theme_boosted
 region: prefooter
-weight: -53
+weight: -49
 provider: null
-plugin: contact_bar_br_standard_block
+plugin: contact_bar_ja_standard_block
 settings:
-  id: contact_bar_br_standard_block
-  label: 'Contact Bar BR Standard'
+  id: contact_bar_ja_standard_block
+  label: 'Contact Bar JA Standard'
   provider: oab_frontoffice
   label_display: '0'
   link_offices: 'http://www.orange-business.com/en/where-we-are'
-  link_offices_text: 'Nossos escritórios locais'
-  link_help: 'https://www.orange-business.com/en/contact-us'
-  link_help_text: Dúvidas
-  link_contact: 'https://www.orange-business.com/en/any-request'
-  link_contact_text: 'Entre em contato'
+  link_offices_text: 現地事務所
+  link_help: 'https://www.orange-business.com/en/any-request'
+  link_help_text: ' 問い合わせ'
+  link_contact: 'https://www.orange-business.com/en/contact-us'
+  link_contact_text: 営業コンタクト
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
+  language:
+    id: language
+    langcodes:
+      ja: ja
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
@@ -37,8 +44,6 @@ visibility:
       document: document
       full_html: full_html
       homepage: homepage
-      homepage_eclairage: homepage_eclairage
-      hp_eclairage_thematique: hp_eclairage_thematique
       industry: industry
       magazine: magazine
       partner: partner
@@ -49,10 +54,3 @@ visibility:
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
-  language:
-    id: language
-    langcodes:
-      pt-br: pt-br
-    negate: false
-    context_mapping:
-      language: '@language.current_language_context:language_interface'
