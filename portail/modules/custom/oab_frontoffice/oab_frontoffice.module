@@ -350,7 +350,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
       $menu_header_page_vb = clean_exposed_filters_by_language(
         $form['field_insight_type_target_id']['#options'], 'See all'
       );
-      if ( isset($menu_header_page_vb['All']) ) {
+      if ( isset($menu_header_page_vb['All'])) {
         $v = $menu_header_page_vb['All'];
         unset($menu_header_page_vb['All']);
         $menu_header_page_vb['All'] = $v;
