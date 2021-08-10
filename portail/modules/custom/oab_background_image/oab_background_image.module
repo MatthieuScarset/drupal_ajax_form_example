@@ -113,7 +113,7 @@ function oab_background_image_preprocess_html(&$variables) {
                 $variables['attributes']['class'] = [];
             }
             $variables['attributes']['class'][] = "oab_background_image";
-            $variables['attributes']['style'] .= "; background-image: url('". $file_url ."'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover";
+            $variables['attributes']['style'] .= "; background-image: url('". $file_url ."'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; -o-background-size: cover; -moz-background-size: cover; -webkit-background-size:cover; background-color:transparent;";
 
         }
     }
