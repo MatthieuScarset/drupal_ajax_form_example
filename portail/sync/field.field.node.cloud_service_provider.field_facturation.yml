@@ -1,0 +1,19 @@
+uuid: f91e474b-573f-42f5-b9c3-b4cd17cf64fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_facturation
+    - node.type.cloud_service_provider
+id: node.cloud_service_provider.field_facturation
+field_name: field_facturation
+entity_type: node
+bundle: cloud_service_provider
+label: facturation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

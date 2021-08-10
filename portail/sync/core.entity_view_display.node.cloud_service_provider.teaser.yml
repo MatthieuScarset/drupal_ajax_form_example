@@ -1,0 +1,46 @@
+uuid: b04d9ed2-b9a6-494a-b34d-2329495802f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.cloud_service_provider.field_bandwidth
+    - field.field.node.cloud_service_provider.field_content
+    - field.field.node.cloud_service_provider.field_csp_location
+    - field.field.node.cloud_service_provider.field_facturation
+    - field.field.node.cloud_service_provider.field_location
+    - field.field.node.cloud_service_provider.field_logo
+    - field.field.node.cloud_service_provider.field_p_wysiwyg_rebond
+    - field.field.node.cloud_service_provider.field_provider_type
+    - field.field.node.cloud_service_provider.field_technical_qualification
+    - field.field.node.cloud_service_provider.field_type_of_cloud_services
+    - node.type.cloud_service_provider
+  module:
+    - user
+id: node.cloud_service_provider.teaser
+targetEntityType: node
+bundle: cloud_service_provider
+mode: teaser
+content:
+  field_logo:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+hidden:
+  field_bandwidth: true
+  field_content: true
+  field_csp_location: true
+  field_facturation: true
+  field_location: true
+  field_p_wysiwyg_rebond: true
+  field_provider_type: true
+  field_technical_qualification: true
+  field_type_of_cloud_services: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

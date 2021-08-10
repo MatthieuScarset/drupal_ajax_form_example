@@ -429,6 +429,11 @@
     border-color: grey;
 }
 
+.csp-subnav.sticky-module {
+  position: fixed;
+  z-index: 120;
+}
+
 .navbar-btn{
     margin-top: 0;
 }

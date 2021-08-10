@@ -10,7 +10,7 @@ dependencies:
 id: pardot_russia
 theme: theme_boosted
 region: sidebar
-weight: -48
+weight: -51
 provider: null
 plugin: 'block_content:e0ae8a22-6eb9-4763-b519-bc13efe6ee0e'
 settings:

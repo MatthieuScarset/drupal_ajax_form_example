@@ -1,0 +1,29 @@
+uuid: 273c72ef-4d2d-4e3b-87de-af02820da0a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_of_cloud_services
+    - node.type.cloud_service_provider
+    - taxonomy.vocabulary.type_of_cloud_service
+id: node.cloud_service_provider.field_type_of_cloud_services
+field_name: field_type_of_cloud_services
+entity_type: node
+bundle: cloud_service_provider
+label: 'Type of cloud services'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      type_of_cloud_service: type_of_cloud_service
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

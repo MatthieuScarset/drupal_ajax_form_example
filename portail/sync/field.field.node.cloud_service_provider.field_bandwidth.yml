@@ -1,0 +1,19 @@
+uuid: 8c2a7dc7-3f72-47b9-8e65-b5e721e8524d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_bandwidth
+    - node.type.cloud_service_provider
+id: node.cloud_service_provider.field_bandwidth
+field_name: field_bandwidth
+entity_type: node
+bundle: cloud_service_provider
+label: bandwidth
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

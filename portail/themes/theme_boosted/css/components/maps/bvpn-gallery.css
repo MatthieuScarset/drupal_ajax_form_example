@@ -1,0 +1,230 @@
+.view-bvpn-gallery{
+  margin: 0 !important;
+}
+
+.view-bvpn-gallery > div,
+.view-bvpn-gallery > div > div{
+  padding: 0;
+}
+
+
+/****************************/
+/*** Formulaire de la map ***/
+/****************************/
+
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page {
+  background-color: white;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page{
+
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location{
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  padding: 0;
+  margin-left: 5px;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location label.control-label{
+  display: none;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions{
+  margin-left: 20px;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .form-submit{
+  margin-left: 10px;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map
+{
+  background-color: black;
+  color: #fff;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active:hover
+{
+  background-color: #f16e00;
+  color: #fff;
+}
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:hover,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:active,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:hover,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:active{
+  background-color: white;
+   color: #000;
+ }
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:disabled{
+  color: #fff;
+  background-color: #ccc;
+  border-color: #ccc;
+}
+  /**************************************/
+/*** Formulaire de la liste des CSP ***/
+/**************************************/
+
+.csp-listing .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-list-block{
+  background-color: white;
+  margin: 0 !important;
+  padding: 0 0 5px 0 !important;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters{
+  border-bottom: 2px solid #ececec;
+  margin: 0;
+}
+
+.csp-listing .view-bvpn_gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block{
+  padding-top: 0;
+  padding-bottom: 15px;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .csp_list_block_form div.csp_title_form{
+  width: 100%;
+}
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .csp_list_block_form span.label_form{
+  color: #666666;
+  font-size: 1.077em;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+/*
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search i,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .submit-link,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-reset,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-reset i,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .reset-link{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .submit-link,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .reset-link{
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: 0 none;
+  display: inline-block;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .glyphicon-search,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .glyphicon-remove {
+  font-size: 2.8rem !important;
+}
+*/
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-item-title input{
+  float: left;
+  width: 100%;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block span input[name="title"],
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block div.form-item-title {
+  float: left;
+  width: 85%;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-actions{
+  margin-left: 10px;
+  line-height: 4.25rem;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn
+{
+  border: 0;
+  padding: 0;
+  font-size: 2.6rem;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn:hover,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn:hover,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn:focus,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn:focus{
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  color: #000000;
+}
+
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn.hidden,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn.hidden,
+.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-actions input.search-icon.csp-list-map-search{
+  display: none;
+}
+
+  /**************************************/
+/*** Liste des CSP ***/
+/**************************************/
+.csp-listing{
+  padding-left: 15px !important;
+  padding-right: 0 !important;
+  height: 530px;
+  overflow:hidden;
+}
+
+.csp-listing .view-bvpn-gallery .view-content{
+  overflow-y: scroll;
+  -ms-overflow-y: scroll;
+  height: 450px;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul{
+  list-style:none;
+  padding: 0;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress{
+  height: 110px;
+  border-bottom: 2px solid #ececec;
+  margin: 0px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0) url("../../../images/marker-obs.png") no-repeat scroll 5px 25px;
+  overflow: hidden;
+  padding: 5px 0px 5px 45px;
+}
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress.selected{
+  background: rgba(236, 236, 236, 1) url("../../../images/marker-obs-hover.png") no-repeat scroll 5px 25px;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress.selected{
+  background-color: #ececec;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li:last-of-type .row-csp-adress{
+  border: 0;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .views-field-title span{
+  color: #666;
+  font-weight: bold;
+}
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .views-field-title {
+  margin-bottom: 5px;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .geolocation-data,
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .views-field-field-csp-location{
+  display: none;
+}
+
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .link-csp-content,
+.csp-listing .view-bvpn-gallery .view-content .item-list ul li .row-csp-adress .link-csp-content a{
+  color: #ff7900;
+  text-decoration: underline;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/**************************************/
+/*** Page liste CSP ***/
+/**************************************/
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-list-page {
+  background-color: white;
+}
+
+#views-exposed-form-bvpn-gallery-csp-list-page > div.form-inline {
+  display: flex;
+}
+
+#views-exposed-form-bvpn-gallery-csp-list-page > div.form-inline > div.js-form-item {
+  margin: 0 10px;
+}
