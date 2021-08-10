@@ -15,7 +15,12 @@ function subhomes_views_exposed_form(&$form) {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
-          $form[$key] = change_textfield_to_select($key, $key !== 'analyst');
+          $new_select = change_textfield_to_select($key, $key !== 'analyst');
+          if ($new_select !== null) {
+            $form[$key] = $new_select;
+          } else {
+            $form[$key]['#access'] = false;
+          }
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
           $form[$key]['#type'] = 'subhome_select_button';
