@@ -8,7 +8,7 @@ path:
     force_https: false
     absolute: false
     absolute_to_protocol_relative: false
-enabled: true
+enabled: false
 dns_prefetch: false
 cache_level: 2
 cron_frequency: 900
