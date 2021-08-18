@@ -60,12 +60,14 @@ module:
   migrate_tools: 0
   multiple_fields_remove_button: 0
   node: 0
+  oab_adrien: 0
   oab_akamai: 0
   oab_amel: 0
   oab_axiome: 0
   oab_backbones: 0
   oab_background_image: 0
   oab_backoffice: 0
+  oab_bvpn_import: 0
   oab_cedric: 0
   oab_christophe: 0
   oab_ckeditor: 0

@@ -1,0 +1,35 @@
+uuid: 7ce67cbc-44d9-490d-b55e-a4b907cccd24
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.csp_logo_gallery_display
+    - field.field.media.image.field_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - image.style.csp_logo_gallery_style
+    - media.type.image
+  module:
+    - image
+id: media.image.csp_logo_gallery_display
+targetEntityType: media
+bundle: image
+mode: csp_logo_gallery_display
+content:
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: csp_logo_gallery_style
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

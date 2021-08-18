@@ -1,0 +1,20 @@
+uuid: 1553835d-7def-44cc-b57e-27eb978a3cc1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_type_of_cloud_services
+field_name: field_type_of_cloud_services
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

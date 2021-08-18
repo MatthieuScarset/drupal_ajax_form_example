@@ -1,0 +1,20 @@
+display:
+  csp_list_page:
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filtrer
+          reset_button_label: 'Supprimer filtres'
+      filters:
+        title:
+          expose:
+            placeholder: 'Nom du service ou du fournisseur'
+        name_2:
+          expose:
+            placeholder: 'Types de services cloud'
+        name_1:
+          expose:
+            placeholder: Fournisseurs
+        name:
+          expose:
+            placeholder: Localisation

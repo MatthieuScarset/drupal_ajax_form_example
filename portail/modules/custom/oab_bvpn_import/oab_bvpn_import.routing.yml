@@ -1,0 +1,8 @@
+#BVPN - CSP Import
+oab_bvpn_import.csp_import:
+  path: 'admin/obs_backoffice/csp-import'
+  defaults:
+    _form: '\Drupal\oab_bvpn_import\Form\OabSettingsCSPImportForm'
+    _title: 'BVPN - Customer Service Provider Import'
+  requirements:
+    _role: 'administrator+digital_admin'

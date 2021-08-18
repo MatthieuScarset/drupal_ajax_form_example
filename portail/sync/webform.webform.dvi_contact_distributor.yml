@@ -27,12 +27,16 @@ elements: "'#attributes':\n  class:\n    - webform-dvi-contact-distributor\ncss_
 css: ''
 javascript: ''
 settings:
-  ajax: true
+  ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: false
   page_submit_path: ''
   page_confirm_path: ''
-  form_title: both
+  page_theme_name: ''
+  form_title: source_entity_webform
   form_submit_once: true
   form_exception_message: ''
   form_open_message: ''
@@ -40,6 +44,7 @@ settings:
   form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
+  form_remote_addr: true
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -48,7 +53,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
-  form_disable_inline_errors: false
+  form_disable_inline_errors: true
   form_required: false
   form_unsaved: false
   form_disable_back: false
@@ -60,6 +65,11 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  share: false
+  share_node: false
+  share_theme_name: ''
+  share_title: true
+  share_page_body_attributes: {  }
   submission_label: ''
   submission_log: false
   submission_views: {  }
@@ -84,11 +94,20 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
   wizard_track: ''
+  wizard_prev_button_label: ''
+  wizard_next_button_label: ''
+  wizard_toggle: true
+  wizard_toggle_show_label: ''
+  wizard_toggle_hide_label: ''
   preview: 0
   preview_label: ''
   preview_title: ''
@@ -102,6 +121,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: inline
   confirmation_title: ''
   confirmation_message: "<h3 class=\"titre4\">Votre demande</h3>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.</p>\r\n\r\n<p>À très bientôt sur www.orange-business.com.</p>\r\n\r\n<p><br />\r\n<strong>La direction des Ventes Indirectes.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>"
@@ -112,6 +133,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -128,7 +150,10 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
+  serial_disabled: false
 access:
   create:
     roles:
@@ -180,6 +205,7 @@ handlers:
   email_to_user:
     id: email
     label: 'Email to user'
+    notes: ''
     handler_id: email_to_user
     status: true
     conditions: {  }
@@ -212,6 +238,7 @@ handlers:
       ignore_access: false
       exclude_empty: false
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -221,9 +248,11 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
   email_to_dvi_team:
     id: email
     label: 'Email to DVI team'
+    notes: ''
     handler_id: email_to_dvi_team
     status: true
     conditions: {  }
@@ -256,6 +285,7 @@ handlers:
       ignore_access: false
       exclude_empty: false
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -265,9 +295,11 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
   email_to_distributor:
     id: email
     label: 'Email to Distributor'
+    notes: ''
     handler_id: email_to_distributor
     status: false
     conditions: {  }
@@ -293,6 +325,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -302,3 +335,5 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }

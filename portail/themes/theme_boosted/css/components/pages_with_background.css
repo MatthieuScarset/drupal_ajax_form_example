@@ -30,10 +30,6 @@ Specific HP with background in carrousel
  */
 
 @media not screen, (max-width: 767px) {
-    .oab_background_image, .hp-background-carousel {
-        background-image: none !important;
-        background-color: #333;
-    }
 }
 
 

@@ -11,7 +11,7 @@ dependencies:
 id: contactbarbrstandard
 theme: theme_boosted
 region: prefooter
-weight: -48
+weight: -53
 provider: null
 plugin: contact_bar_br_standard_block
 settings:

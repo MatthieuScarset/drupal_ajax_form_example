@@ -1,0 +1,10 @@
+uuid: 4d483351-c135-4d99-b9a9-98a3d7ed9dce
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.csp_logo_node_display
+label: 'CSP Logo node display'
+targetEntityType: media
+cache: true

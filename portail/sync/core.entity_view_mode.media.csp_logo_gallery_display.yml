@@ -1,0 +1,10 @@
+uuid: ff99a336-307c-469e-892e-aeed915a6c1f
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.csp_logo_gallery_display
+label: 'CSP Logo gallery display'
+targetEntityType: media
+cache: true

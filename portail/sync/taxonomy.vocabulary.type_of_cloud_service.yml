@@ -1,0 +1,8 @@
+uuid: eeed253f-4b27-4709-857c-67d3579b142b
+langcode: en
+status: true
+dependencies: {  }
+name: 'Type of cloud service'
+vid: type_of_cloud_service
+description: null
+weight: 0

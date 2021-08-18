@@ -1,0 +1,8 @@
+uuid: 970bcada-de8a-4abf-8b7e-d54a462c4695
+langcode: en
+status: true
+dependencies: {  }
+name: 'Service providers'
+vid: service_providers
+description: null
+weight: 0

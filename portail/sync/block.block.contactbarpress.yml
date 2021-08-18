@@ -12,7 +12,7 @@ dependencies:
 id: contactbarpress
 theme: theme_boosted
 region: prefooter
-weight: -44
+weight: -48
 provider: null
 plugin: contact_bar_press_block
 settings:
