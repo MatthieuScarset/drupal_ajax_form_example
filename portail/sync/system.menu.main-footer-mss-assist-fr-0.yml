@@ -1,0 +1,8 @@
+uuid: 73f72f82-4265-4b59-bcad-c07e311dab2c
+langcode: fr
+status: true
+dependencies: {  }
+id: main-footer-mss-assist-fr-0
+label: 'MSS Assistance Footer fr'
+description: 'MSS Assistance Footer fr'
+locked: false
