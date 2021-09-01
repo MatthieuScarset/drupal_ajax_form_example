@@ -11,6 +11,9 @@ settings:
   default_preview_label: Prévisualisation
   default_draft_button_label: 'Sauvegarder le brouillon'
   default_confirmation_back_label: 'Retour au formulaire'
+  dialog_options:
+    normal:
+      title: Normal
 element:
   default_more_title: Plus
 mail:

@@ -1,0 +1,29 @@
+uuid: cb8dd913-edf2-4b94-9260-70715c8201c4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_insight_type
+    - node.type.external_content
+    - taxonomy.vocabulary.insight_type
+id: node.external_content.field_insight_type
+field_name: field_insight_type
+entity_type: node
+bundle: external_content
+label: 'Insight type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      insight_type: insight_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

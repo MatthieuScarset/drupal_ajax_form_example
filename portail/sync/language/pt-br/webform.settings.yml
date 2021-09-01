@@ -1,7 +1,9 @@
 settings:
   default_form_close_message: 'Sorry...This form is closed to new submissions.'
   default_form_access_denied_message: 'Please login to access this webform.'
-  default_preview_prev_button_label: '< Previous'
+  dialog_options:
+    normal:
+      title: Normal
 mail:
   default_body_html: "<p>Submitted on [webform_submission:created]</p>\n<p>Submitted by: [webform_submission:user]</p>\n<p>Submitted values are:</p>\n[webform_submission:values]"
 test:

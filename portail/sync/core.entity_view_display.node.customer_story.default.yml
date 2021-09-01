@@ -25,6 +25,8 @@ dependencies:
     - field.field.node.customer_story.field_p_wysiwyg_rebond
     - field.field.node.customer_story.field_page_du_site_1
     - field.field.node.customer_story.field_page_du_site_2
+    - field.field.node.customer_story.field_product_type
+    - field.field.node.customer_story.field_product_use_case
     - field.field.node.customer_story.field_rebond_document
     - field.field.node.customer_story.field_region
     - field.field.node.customer_story.field_solution
@@ -152,6 +154,8 @@ hidden:
   field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
+  field_product_type: true
+  field_product_use_case: true
   field_rebond_document: true
   field_region: true
   field_subhome: true

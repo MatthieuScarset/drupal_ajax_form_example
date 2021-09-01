@@ -10,7 +10,7 @@ dependencies:
 id: testshowroom
 theme: theme_boosted
 region: sidebar
-weight: -44
+weight: -45
 provider: null
 plugin: test_showroom_block
 settings:

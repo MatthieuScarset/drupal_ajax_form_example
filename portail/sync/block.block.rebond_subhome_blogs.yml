@@ -10,7 +10,7 @@ dependencies:
 id: rebond_subhome_blogs
 theme: theme_boosted
 region: sidebar
-weight: -36
+weight: -37
 provider: null
 plugin: rebond_subhome_block
 settings:

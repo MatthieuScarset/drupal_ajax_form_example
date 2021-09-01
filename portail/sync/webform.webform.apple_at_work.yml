@@ -9,7 +9,11 @@ third_party_settings:
     gdpr_business_owner: '567'
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
-    gdpr_business_analysts: {  }
+    gdpr_business_analysts:
+      3099: '3099'
+      3102: '3102'
+      3101: '3101'
+      3100: '3100'
     gdpr_form_published: 1
 open: null
 close: null
@@ -21,7 +25,7 @@ id: apple_at_work
 title: 'Apple At Work'
 description: ''
 category: Mobilité
-elements: "css:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">\\r\\n.form-required { display:none;}\\r\\n.form-text, input, select {margin-bottom:2rem;}\\r\\n</style>\\r\\n\"\n  '#format': full_html\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#title_display': invisible\n  '#placeholder': 'Prénom *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#title_display': invisible\n  '#placeholder': 'Nom *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nemail:\n  '#type': email\n  '#title': Email\n  '#title_display': invisible\n  '#placeholder': 'email@societe.com *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#title_display': invisible\n  '#placeholder': '06xxxxxxxx *'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#title_display': invisible\n  '#placeholder': 'Société *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#empty_option': Pays\n  '#required': true\nsolution:\n  '#type': select\n  '#title': Solution\n  '#description': '<h3 class=\"titre4\"><span style=\"font-size:2rem;\">Je suis intéressé par la/les solution(s) suivante(s) <span style=\"color:red;\">*</span></span></h3>'\n  '#title_display': invisible\n  '#description_display': before\n  '#options':\n    'Réseau mobile': 'Réseau mobile'\n    'Working Together Flash': 'Working Together Flash'\n    'Solutions Mobile Device Management': 'Solutions Mobile Device Management'\n    'Enterprise Mobile Management': 'Enterprise Mobile Management'\n    'Mobile business apps': 'Mobile business apps'\n    'Orange reprise': 'Orange reprise'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#title_display': invisible\n  '#placeholder': 'Votre message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncgu:\n  '#type': checkbox\n  '#title': CGU\n  '#description': '<p>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. <span style=\"color:red;\">*</span></p>'\n  '#title_display': invisible\n  '#description_display': after\n  '#required': true\n  '#attributes':\n    style: 'width: auto!important; float: left; margin-right: 1rem;'\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Webform'', ''Apple at work'', ''validation'')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Webform'', ''Apple at work'', ''validation'')'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size: 1.2rem;\\\">Tous les champs marqués d'une astérisque (*) sont obligatoires</span></p>\\r\\n\\r\\n\\r\\n\"\n  '#format': full_html\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\n"
+elements: "css:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">.form-required { display:none;}\\r\\n.form-text, input, select {margin-bottom:2rem;}\\r\\n #block-theme-boosted-page-title .page-header {margin-bottom:4rem;}\\r\\n</style>\\r\\n\"\n  '#format': full_html\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#title_display': invisible\n  '#placeholder': 'Prénom *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#title_display': invisible\n  '#placeholder': 'Nom *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nemail:\n  '#type': email\n  '#title': Email\n  '#title_display': invisible\n  '#placeholder': 'email@societe.com *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#title_display': invisible\n  '#placeholder': '06xxxxxxxx *'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#title_display': invisible\n  '#placeholder': 'Société *'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#empty_option': Pays\n  '#required': true\nsolution:\n  '#type': select\n  '#title': Solution\n  '#description': '<h3 class=\"titre4\"><span style=\"font-size:2rem;\">Je suis intéressé par la/les solution(s) suivante(s) <span style=\"color:red;\">*</span></span></h3>'\n  '#title_display': invisible\n  '#description_display': before\n  '#options':\n    'Réseau mobile': 'Réseau mobile'\n    'Working Together Flash': 'Working Together Flash'\n    'Solutions Mobile Device Management': 'Solutions Mobile Device Management'\n    'Enterprise Mobile Management': 'Enterprise Mobile Management'\n    'Mobile business apps': 'Mobile business apps'\n    'Orange reprise': 'Orange reprise'\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#title_display': invisible\n  '#placeholder': 'Votre message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncgu:\n  '#type': checkbox\n  '#title': CGU\n  '#description': '<p>En cochant cette case et en soumettant ce formulaire, j’accepte que mes données personnelles soient utilisées pour le traitement de ma demande et la relation commerciale qui peut en découler. <span style=\"color:red;\">*</span></p>'\n  '#title_display': invisible\n  '#description_display': after\n  '#required': true\n  '#attributes':\n    style: 'width: auto!important; float: left; margin-right: 1rem;'\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Webform'', ''Apple at work'', ''validation'')'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size: 1.2rem;\\\">Tous les champs marqués d'une astérisque (*) sont obligatoires</span></p>\\r\\n\\r\\n\\r\\n\"\n  '#format': full_html\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html"
 css: ''
 javascript: ''
 settings:
@@ -123,10 +127,10 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<div style=\"margin-left:-2rem;\">\r\n<h2 class=\"titre2\">&nbsp;</h2>\r\n\r\n<p>Nous avons bien reçu votre message. Nous le traiterons dans les délais les plus brefs.</p>\r\n\r\n<p>À très bientôt sur www.orange-business.com.</p>\r\n\r\n<p><br />\r\n<strong>L'équipe Orange Business Services.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n</div>"
   confirmation_url: ''
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
@@ -199,5 +203,92 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers: {  }
-variants: {  }
+handlers:
+  email:
+    id: email
+    label: Email
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: 'nicolas.griffet@orange.com,alban.gillot@orange.com,mario.angelique@orange.com,jeanmichel.thebaud@orange.com,celine.sellier@orange.com'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: '[AAW] Nouvelle demande de contact'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Apple at Work</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Nouvelle demande de contact</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tUne nouvelle demande de contact a été soumise.<br />\r\n\t\t\tVeuillez en prendre connaissance depuis votre <strong><a href=\"https://backoffice.www.orange-business.com/fr/user/login\"><span style=\"color:#ff7900;\">espace personnel</span></a></strong>.<br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2021<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        prenom: prenom
+        nom: nom
+        email: email
+        telephone: telephone
+        societe: societe
+        pays: pays
+        solution: solution
+        message: message
+        cgu: cgu
+        donnees_personnelles: donnees_personnelles
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+  email_1:
+    id: email
+    label: 'Email - confirmation'
+    handler_id: email_1
+    status: true
+    conditions: {  }
+    weight: 0
+    settings:
+      states:
+        - completed
+      to_mail: '[webform_submission:values:email:raw]'
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Votre prise de contact pour Apple At Work'
+      body: "<style type=\"text/css\">html {\r\n\tfont-family: Arial, Helvetica, sans-serif;\r\n\tfont-size:62.5%;\r\n}\r\n.gt, div.ii.gt {\r\n\tfont-size: 0% !important;\r\n}\r\ntable, td, tr {\r\n\tpadding: 0;\r\n\tborder: 0;\r\n\tborder-collapse: collapse;\r\n}\r\n@media screen and (max-width:600px) {\r\n    .container-table {\r\n\t\twidth:100%!important;\r\n    }\r\n}\r\n</style>\r\n<table align=\"center\" bgcolor=\"#FFFFFF\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"container-table\" style=\"background-color:#FFFFFF; padding:0;\" width=\"75%\">\r\n\t<tbody>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding:10px;\"><img alt=\"Orange Business Services\" height=\"47\" src=\"https://www.orange-business.com/themes/theme_boosted/orange-business-services.png\" title=\"Orange Business Services\" width=\"130\" /></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:1.4em; font-weight:bold;\"><span>Votre demande de contact</span><br />\r\n\t\t\t<span style=\"color: #FF6600\">Confirmation</span></td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td style=\"line-height: 2em; padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.9em; font-weight:normal;\">\r\n\t\t\t<p>Bonjour,<br />\r\n\t\t\tNous vous remercions pour votre message. Nos experts prendront contact avec vous dans les plus brefs délais.<br />\r\n\t\t\tMerci de votre visite sur notre site <a href=\"https://www.orange-business.com\" style=\"color:#ff5900;text-decoration:none;\">www.orange-business.com</a><br />\r\n\t\t\tA très bientôt.<br />\r\n\t\t\t<span style=\"font-size:1.2em; font-weight:bold;\">L'équipe Orange Business Services</span></p>\r\n\t\t\t</td>\r\n\t\t</tr>\r\n\t\t<tr>\r\n\t\t\t<td bgcolor=\"#000000\" style=\"padding: 15px;font-family:Arial, Helvetica, sans-serif; font-size:0.7em; font-weight:normal; color:#FFFFFF; line-height:1.3em;\">Orange Business Services<br />\r\n\t\t\tTous droits réservés 2021<br />\r\n\t\t\tCet e-mail est un envoi automatique, veuillez ne pas y répondre.</td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>"
+      excluded_elements:
+        prenom: prenom
+        nom: nom
+        email: email
+        telephone: telephone
+        societe: societe
+        pays: pays
+        solution: solution
+        message: message
+        cgu: cgu
+        donnees_personnelles: donnees_personnelles
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''

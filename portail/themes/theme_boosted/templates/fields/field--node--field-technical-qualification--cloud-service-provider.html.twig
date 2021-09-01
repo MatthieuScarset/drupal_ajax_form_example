@@ -1,0 +1,26 @@
+{# Affichage du niveau de qualification technique #}
+<div style="display: flex; flex-direction: column">
+  {% if items.0.content['#markup'] is same as('S') %}
+    <div style="margin: auto">
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg" aria-hidden="true"></span>
+    </div>
+    <p class="csp-tech-info">{% trans %}No technical qualification{% endtrans %}</p>
+  {% elseif items.0.content['#markup'] is same as('M') %}
+    <div style="margin: auto">
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg" aria-hidden="true"></span>
+    </div>
+    <p class="csp-tech-info">{% trans %}Technical standard qualification{% endtrans %}</p>
+  {% elseif items.0.content['#markup'] is same as('H') %}
+    <div style="margin: auto">
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-wrench icon-lg-active" aria-hidden="true"></span>
+    </div>
+    <p class="csp-tech-info">{% trans %}Technical study required{% endtrans %}</p>
+  {% endif %}
+</div>
+

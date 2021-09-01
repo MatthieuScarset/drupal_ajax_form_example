@@ -9,6 +9,7 @@ url:
     es: es
     ru-en: ru-en
     pt-br: br
+    ja: ja
   domains:
     en: ''
     fr: ''
@@ -16,6 +17,7 @@ url:
     es: ''
     ru-en: ''
     pt-br: ''
+    ja: ''
 selected_langcode: site_default
 _core:
   default_config_hash: uEePITI9tV6WqzmsTb7MfPCi5yPWXSxAN1xeLcYFQbM

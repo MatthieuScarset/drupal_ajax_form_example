@@ -9,7 +9,7 @@ dependencies:
 id: business_insight
 theme: theme_boosted
 region: top_zone
-weight: 0
+weight: -50
 provider: null
 plugin: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
 settings:

@@ -15,6 +15,9 @@ display:
         status:
           label: Статус
       filters:
+        filename:
+          expose:
+            label: Filename
         status:
           expose:
             label: Статус

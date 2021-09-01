@@ -1,0 +1,29 @@
+uuid: ec8eccb1-143b-45bc-a582-0b48dbea2e63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_provider_type
+    - node.type.cloud_service_provider
+    - taxonomy.vocabulary.service_providers
+id: node.cloud_service_provider.field_provider_type
+field_name: field_provider_type
+entity_type: node
+bundle: cloud_service_provider
+label: 'Provider type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      service_providers: service_providers
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

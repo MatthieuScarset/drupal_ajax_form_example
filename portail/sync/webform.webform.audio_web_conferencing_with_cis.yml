@@ -11,6 +11,7 @@ third_party_settings:
     gdpr_expiration_date: '2020-12-31'
     gdpr_business_analysts:
       2334: '2334'
+      2333: '2333'
     gdpr_form_published: 1
 open: null
 close: null

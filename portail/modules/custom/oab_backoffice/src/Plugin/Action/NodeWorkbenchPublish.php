@@ -5,6 +5,7 @@ namespace Drupal\oab_backoffice\Plugin\Action;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
 
 /**
  * Node workbench publish.
@@ -21,7 +22,24 @@ class NodeWorkbenchPublish extends ActionBase {
    * {@inheritdoc}
    */
   public function execute($entity = NULL) {
-    $entity->set('moderation_state', array('target_id' => 'published'));
+   /* $moderation_state = $entity->get('moderation_state')->getString();
+    \Drupal::logger("oab_backoffice")->info(" status de moderation state : ".$moderation_state);
+   */
+    //
+    $moderation_enabled = false;
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->get($entity->getEntityTypeId().'.type.'.$entity->bundle());
+
+    if (!empty($config) && !empty($config->get('third_party_settings'))) {
+      $moderation_enabled = $config->get('third_party_settings.workbench_moderation.enabled');
+    }
+    if($moderation_enabled){
+      $entity->set('moderation_state', array('target_id' => 'published'));
+    }
+    else{
+      $entity->setPublished(true);
+    }
+
     $entity->save();
   }
 

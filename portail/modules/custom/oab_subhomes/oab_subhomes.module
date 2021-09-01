@@ -83,8 +83,7 @@ function oab_subhomes_theme_suggestions_subhome_entity(array $variables) {
 }
 
 
-function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
-                                                         $cacheable) {
+function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, &$cacheable = TRUE) {
     $allowed_values = array (
         "black-on-orange"   => "Black on Orange",
         "white-on-orange"   => "White on Orange",
@@ -104,8 +103,7 @@ function oab_subhomes_palette_orange_allowed_values_function(FieldStorageConfig 
     return $allowed_values;
 }
 
-function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL,
-                                     $cacheable) {
+function oab_subhomes_btn_allowed_values_function(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, &$cacheable = TRUE) {
     $allowed_values = array (
         "btn-txt-white-bg-black"   => "Texte blanc, fond noir",
         "btn-txt-white-bg-transparent"   => "Texte blanc, fond transparent",
@@ -132,7 +130,7 @@ function oab_subhomes_preprocess_views_view(&$variables) {
          */
         if (isset($view->argument['field_subhome_target_id'])) {
 
-            $sid = $view->argument['field_subhome_target_id']->value;
+            $sid = $view->argument['field_subhome_target_id']->getValue();
             $entity = SubhomeEntity::loadBySubhomeId($sid);
 
             // Si on a trouvé une entité pour la subhome et qu'elle est de type presse, je load les press_kits de la langue

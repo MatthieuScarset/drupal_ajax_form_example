@@ -94,7 +94,7 @@ function oab_marketo_preprocess_paragraph(&$variables) {
   if ($paragraph->bundle() === 'marketo') {
     $variables['#attached']['library'][] = 'oab_marketo/marketo';
 
-    if ($paragraph->field_redirection_url->count() > 0 ) {
+    if ($paragraph->field_redirection_url->count() > 0) {
       $redirection_url = $paragraph->field_redirection_url->first()->getUrl()->toString();
     }
 

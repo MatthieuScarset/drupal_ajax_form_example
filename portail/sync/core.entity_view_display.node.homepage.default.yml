@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.homepage.field_banner_expertise
     - field.field.node.homepage.field_banner_left_zone_title
     - field.field.node.homepage.field_banner_right_zone_title
+    - field.field.node.homepage.field_caroussel_header
+    - field.field.node.homepage.field_claim
     - field.field.node.homepage.field_corporate_button_link
     - field.field.node.homepage.field_corporate_button_text
     - field.field.node.homepage.field_corporate_highlight
@@ -41,6 +43,8 @@ dependencies:
     - field.field.node.homepage.field_title_color
     - field.field.node.homepage.field_top_zone_image
     - field.field.node.homepage.field_top_zone_image_mobile
+    - field.field.node.homepage.field_wysiwyg_zone_1
+    - field.field.node.homepage.field_wysiwyg_zone_2
     - field.field.node.homepage.moderation_state_update
     - node.type.homepage
   module:
@@ -96,5 +100,7 @@ hidden:
   field_title_color: true
   field_top_zone_image: true
   field_top_zone_image_mobile: true
+  field_wysiwyg_zone_1: true
+  field_wysiwyg_zone_2: true
   langcode: true
   moderation_state_update: true

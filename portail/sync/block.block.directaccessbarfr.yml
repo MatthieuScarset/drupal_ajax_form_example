@@ -12,7 +12,7 @@ dependencies:
 id: directaccessbarfr
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -41
 provider: null
 plugin: 'system_menu_block:direct-access-bar-fr'
 settings:

@@ -1,0 +1,41 @@
+uuid: b598d456-ce73-4ed7-8e2a-08c0e4bbaf49
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c55c4f20-7284-46c6-9f27-9a5df2395e26'
+  module:
+    - block_content
+    - ctools
+    - language
+  theme:
+    - theme_boosted
+id: contactcspfr
+theme: theme_boosted
+region: sidebar
+weight: -35
+provider: null
+plugin: 'block_content:c55c4f20-7284-46c6-9f27-9a5df2395e26'
+settings:
+  id: 'block_content:c55c4f20-7284-46c6-9f27-9a5df2395e26'
+  label: 'Contact CSP FR'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: null
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      cloud_service_provider: cloud_service_provider
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

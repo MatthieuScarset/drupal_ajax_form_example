@@ -5,8 +5,8 @@ dependencies: {  }
 id: _KyYVoP1pMRSEJD8cDQst9Nj-h1vo7ZVPnvdm5RCdy4
 label: 'https://www.orange-business.com/ru/sitemap.xml'
 chunks: 1
-links: 332
-max_filesize: 60278
+links: 32
+max_filesize: 5243
 context:
   language: ru
-updated: 1620827673
+updated: 1626366260

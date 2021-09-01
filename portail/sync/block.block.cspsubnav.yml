@@ -1,0 +1,30 @@
+uuid: 6196b4a4-da7c-4c29-ae07-03d17db9f417
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: cspsubnav
+theme: theme_boosted
+region: top_zone
+weight: 0
+provider: null
+plugin: csp_subnav_block
+settings:
+  id: csp_subnav_block
+  label: 'CSP Subnav'
+  provider: oab_frontoffice
+  label_display: '0'
+  csp_list_link: /fr/bvpn-list
+  csp_list_link_text: 'Liste des services Cloud'
+  csp_map_link: /fr/bvpn-map
+  csp_map_link_text: 'Carte des interconnexions'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/bvpn-list\r\n/bvpn-map"
+    negate: false
+    context_mapping: {  }

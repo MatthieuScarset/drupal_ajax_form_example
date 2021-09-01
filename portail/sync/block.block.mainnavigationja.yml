@@ -1,0 +1,33 @@
+uuid: bb0f0a13-f583-4750-9723-612516f936df
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main-navigation-ja
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: mainnavigationja
+theme: theme_boosted
+region: header
+weight: -27
+provider: null
+plugin: 'system_menu_block:main-navigation-ja'
+settings:
+  id: 'system_menu_block:main-navigation-ja'
+  label: 'Main navigation JA'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      ja: ja
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

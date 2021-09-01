@@ -2,10 +2,7 @@ uuid: 9068cc78-e5bf-41ac-a74b-6742915031cf
 langcode: en
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:e2499cb2-c271-460e-9bfa-83eb7b827e86'
   module:
-    - block_content
     - ctools
     - language
     - system
@@ -14,7 +11,7 @@ dependencies:
 id: optin_intl
 theme: theme_boosted
 region: sidebar
-weight: -49
+weight: -50
 provider: null
 plugin: 'block_content:e2499cb2-c271-460e-9bfa-83eb7b827e86'
 settings:

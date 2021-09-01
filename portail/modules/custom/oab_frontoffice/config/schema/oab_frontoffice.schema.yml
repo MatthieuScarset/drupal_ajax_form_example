@@ -56,6 +56,23 @@ block.settings.rebond_subhome_block:
         type: label
         label: 'Link text'
 
+block.settings.csp_subnav_block:
+  type: block_settings
+  label: 'CSP Subnav'
+  mapping:
+    csp_list_link:
+      type: label
+      label: 'List link'
+    csp_list_link_text:
+      type: label
+      label: 'Text list link'
+    csp_map_link:
+      type: label
+      label: 'Map link'
+    csp_map_link_text:
+      type: label
+      label: 'Text map link'
+
 block.settings.category_mss:
   type: block_settings
   label: 'MSS Category'

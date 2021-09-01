@@ -9,7 +9,7 @@ dependencies:
 id: socialshareblock
 theme: theme_boosted
 region: pre_content
-weight: -48
+weight: -55
 provider: null
 plugin: social_share_block
 settings:

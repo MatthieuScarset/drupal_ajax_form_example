@@ -228,39 +228,47 @@ function oab_hub_pathauto_alias_alter(&$alias, array &$context) {
      * Ajouter un if pour checker si le portail est selectionné ici
      * c'est pour laisser l'alias de base qui pointe vers le portail
      */
-    $on_portail = $context['data']['node']->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL);
-    if ($on_portail !== null) {
-      //kint($on_portail->first()->getValue()); die();
-      $on_portail_value = $on_portail->first()->getValue();
-      if ($on_portail_value['value'] == 1) {
-        $has_portail = true;
-        oab_hub_drupal_message('URL créée : ', "$alias");
-      }
-    }
-
-    $hubs = $context['data']['node']->get(OabHubController::NODE_FIELD_HUB);
-    $langcode =  $context['data']['node']->language()->getId();
-    if ($hubs->count() > 0) {
-      $i = 0;
-      while ($i < $hubs->count()) {
-        $hub = $hubs->get($i);
-        $value = $hub->getValue();
-
-        #Recuperation du term selectionné et du prefixe d'url de ce term
-        $term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
-        $term_url = $term->get(OabHubController::FIELD_URL_ID);
-        $term_url = $term_url->first()->getString();
-
-        if (!$has_portail && $i == 0) {
-          $alias = "/" . $term_url . $original_alias;
-        } else {
-          \Drupal::service('path.alias_storage')
-            ->save($context['source'], "/" . $term_url . $original_alias, $langcode);
+    if ($context['data']['node']->hasField(OabHubController::NODE_FIELD_SHARE_ON_PORTAL)) {
+      $on_portail = $context['data']['node']->get(OabHubController::NODE_FIELD_SHARE_ON_PORTAL);
+      if ($on_portail !== null) {
+        //kint($on_portail->first()->getValue()); die();
+        $on_portail_value = $on_portail->first()->getValue();
+        if ($on_portail_value['value'] == 1) {
+          $has_portail = true;
+          oab_hub_drupal_message('URL créée : ', "$alias");
         }
-        oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
-        $i++;
       }
     }
+
+
+    if ($context['data']['node']->hasField(OabHubController::NODE_FIELD_HUB)) {
+      $hubs = $context['data']['node']->get(OabHubController::NODE_FIELD_HUB);
+
+      $langcode =  $context['data']['node']->language()->getId();
+      if ($hubs->count() > 0) {
+        $i = 0;
+        while ($i < $hubs->count()) {
+          $hub = $hubs->get($i);
+          $value = $hub->getValue();
+
+          #Recuperation du term selectionné et du prefixe d'url de ce term
+          $term = \Drupal\taxonomy\Entity\Term::load($value['target_id']);
+          $term_url = $term->get(OabHubController::FIELD_URL_ID);
+          $term_url = $term_url->first()->getString();
+
+          if (!$has_portail && $i == 0) {
+            $alias = "/" . $term_url . $original_alias;
+          } else {
+            \Drupal::service('path.alias_storage')
+              ->save($context['source'], "/" . $term_url . $original_alias, $langcode);
+          }
+          oab_hub_drupal_message('URL créée : ', "$langcode/$term_url" . $original_alias);
+          $i++;
+        }
+      }
+
+    }
+
   }
 }
 

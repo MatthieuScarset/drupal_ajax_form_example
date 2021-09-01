@@ -9,6 +9,8 @@ display:
           label: 'Nombre de usuario'
         status:
           label: Estado
+          settings:
+            format_custom_true: Active
         roles_target_id:
           label: Roles
         operations:
@@ -17,3 +19,6 @@ display:
         status:
           group_info:
             label: Estado
+            group_items:
+              1:
+                title: Active

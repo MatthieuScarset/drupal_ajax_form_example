@@ -2,6 +2,8 @@ uuid: ee603259-f3a7-48c6-b136-788e30a5251c
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - theme_boosted
 _core:
@@ -9,7 +11,7 @@ _core:
 id: theme_boosted_page_title
 theme: theme_boosted
 region: content
-weight: -48
+weight: -49
 provider: null
 plugin: page_title_block
 settings:
@@ -17,4 +19,9 @@ settings:
   label: 'Page title'
   provider: core
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/bvpn-list\r\n/bvpn-map"
+    negate: true
+    context_mapping: {  }

@@ -9,7 +9,7 @@ dependencies:
 id: homepage_highlights
 theme: theme_boosted
 region: top_zone
-weight: -48
+weight: -55
 provider: null
 plugin: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
 settings:

@@ -3,6 +3,9 @@ settings:
   default_submit_button_label: Отправить
   default_form_access_denied_message: 'Please login to access this webform.'
   default_preview_prev_button_label: Предыдущая
+  dialog_options:
+    normal:
+      title: Normal
 element:
   default_more_title: Ещё
 mail:

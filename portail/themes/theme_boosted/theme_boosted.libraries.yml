@@ -60,3 +60,12 @@ socialbar:
   js:
     js/social_bar/orange_socialbar_settings.js: {}
     js/social_bar/orange_socialbar.js: {}
+
+bvpn_galery:
+  version: VERSION
+  css:
+    base:
+      css/components/maps/bvpn-gallery.css: {}
+  js:
+    js/bvpn_map/csp_markers.js: {}
+    js/bvpn_map/csp_mapcontrol.js: {}
