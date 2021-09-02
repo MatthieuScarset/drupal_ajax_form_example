@@ -1,8 +1,0 @@
-uuid: 4c894453-cd8a-4e2e-a786-8730c7c79766
-langcode: fr
-status: true
-dependencies: {  }
-id: main-menu-mss-assistan-fr-0
-label: 'MSS Assistance Main menu fr'
-description: 'MSS Assistance Main menu fr'
-locked: false

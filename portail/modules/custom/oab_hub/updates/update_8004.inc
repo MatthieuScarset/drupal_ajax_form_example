@@ -29,7 +29,8 @@ $hub_new_term = [
     'directaccessmssassistfr',
     'mainfootermssassistanfr',
     'contactbarblockhubmsfr'
-  ]
+  ],
+  'skip_auto_generation' => true
 ];
 
 $entity = \Drupal\taxonomy\Entity\Term::create($hub_new_term);

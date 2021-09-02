@@ -1,8 +1,0 @@
-uuid: 34cd2839-f334-4bae-a712-ac16a79c1321
-langcode: fr
-status: true
-dependencies: {  }
-id: direct-access-mss-assi-fr-0
-label: 'MSS Assistance Direct Access fr'
-description: 'MSS Assistance Direct Access fr'
-locked: false

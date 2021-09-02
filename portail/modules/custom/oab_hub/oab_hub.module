@@ -50,7 +50,8 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
   if($state != 1) {
     ##on ne le fait que pour la création des termes pour le HUB
     if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID &&
-      ($term->isNew() || $term->isNewTranslation())) {
+      ($term->isNew() || $term->isNewTranslation()) &&
+      (!isset($term->skip_auto_generation) || $term->skip_auto_generation === false)) {
       OabHubController::createMachineNameSuffixe($term);
       OabHubController::createMenus($term);
       OabHubController::checkUrl($term);
