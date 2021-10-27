@@ -142,7 +142,10 @@
 		"patches": {
 			"drupal/scheduled_updates": {
 			  "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
-			}
+			},
+            "drupal/tac_lite": {
+                "Fix D9 compatibility": "patches/tac_lite/tac_lite_compatibility_d9.patch"
+            }
 		}
 	}
 }

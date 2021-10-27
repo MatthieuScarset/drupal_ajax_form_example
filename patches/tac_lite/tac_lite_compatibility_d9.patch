@@ -1,0 +1,12 @@
+diff --git a/tac_lite_create/tac_lite_create.info.yml b/tac_lite_create/tac_lite_create.info.yml
+index 824020e..c8b5e4d 100644
+--- a/tac_lite_create/tac_lite_create.info.yml
++++ b/tac_lite_create/tac_lite_create.info.yml
+@@ -4,6 +4,7 @@ package: Access control
+ 
+ type: module
+ core: 8.x
++core_version_requirement: ^8 || ^9
+ 
+ dependencies:
+   - tac_lite:tac_lite
