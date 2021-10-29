@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @return bool
+ */
+function _is_theme_one_i(): bool {
+  // Je verifie si on est bien en thème one_i
+  return \Drupal::service('theme.manager')->getActiveTheme()->getName() === 'theme_one_i';
+}
+
+/**
+ * Implements hook_form_alter().
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function oab_ob1_adapter_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if (preg_match('@node_(.*)_edit_form@', $form_id)) {
+    if (isset($form['field_use_theme_ob1']) && $form['field_use_theme_ob1']['widget']['#default_value'] == null) {
+      $form['field_use_theme_ob1']['widget']['#default_value'] = "0";
+    }
+  }
+}
+
+
+/**
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function oab_ob1_adapter_form_oab_synomia_search_header_block_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // L'icone search est ajouté dans le formulaire de synomia
+  // J'override cet icone propre à boosted par l'icone propre à one_i
+  if (_is_theme_one_i()) {
+    $form['submit']['#prefix'] = '<div class="top-btn-search"><i class="nav-link icon search-icon icon-search" ></i>';
+  }
+}
+

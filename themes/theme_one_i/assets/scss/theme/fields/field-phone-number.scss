@@ -1,0 +1,48 @@
+.wrapper_numero {
+  background-color: $white;
+  border: 1px solid $black;
+
+  .icon-Play {
+    left: -0.4rem;
+    top: .5rem;
+    color: $white;
+    position: absolute;
+    font-size: 1.2rem;
+  }
+  .helper_numero {
+    font-size: 0.75rem;
+    margin-right: 0;
+    background-color: $black;
+    padding: .5rem;
+    position: relative;
+    color: $white;
+    line-height: 1;
+  }
+  .numero {
+    color: $black;
+    padding: .5rem;
+    position: relative;
+  }
+
+  &:hover {
+    border: 1px solid $gray3;
+
+    .helper_numero {
+      background-color: $gray3
+    }
+    .numero {
+      color: $gray3;
+      background-color: $white;
+    }
+  }
+  &:active {
+    border: 1px solid $primary;
+
+    .helper_numero {
+      background-color: $primary
+    }
+    .numero {
+      color: $primary;
+    }
+  }
+}

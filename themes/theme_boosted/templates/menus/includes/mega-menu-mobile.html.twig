@@ -1,0 +1,78 @@
+{% macro menu_links_mobile(items, attributes, menu_level) %}
+  {% if items %}
+    <div class="mega-menu-mobile hidden-lg">
+      <ul class="main-items-menu" data-menu-level="0">
+        {{ _self.menu_row(items, 0) }}
+      </ul>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro menu_row(items, menu_level) %}
+  {% if menu_level == 0 %}
+    <div class="welcome_text">
+      <p>{{ "Welcome on international website"|t }} </p>
+    </div>
+  {% endif %}
+  {% for item in items %}
+    <li class="items-mobile-{{ menu_level }}" >
+      {% if item.below %}
+        <a class="o-link-arrow beyond" data-menu-level-target="{{ menu_level + 1 }}" >
+          {{ item.title }}
+        </a>
+
+        <ul class="items-mobile hidden" data-menu-level="{{ menu_level + 1 }}" >
+          <li class="items-mobile-back previous">
+            <a class="o-link-arrow back" data-menu-level-target="{{ menu_level }}">
+              {{ item.title }}
+            </a>
+          </li>
+
+          {% if menu_level == 1 %}
+            <li>
+              <a class="o-link-arrow all-product-link-mobile" href="{{ item.url }}">
+                {{ "See all products" | t }}
+              </a>
+
+              <p class="en-ce-moment-mobile">{{ "At the moment" | t }}</p>
+
+            </li>
+          {% endif %}
+
+          {% if menu_level == 0 %}
+            {% if (item.content.field_template['#items'].value == 0) %}
+              <li>
+              {% for item in item.below %}
+                <a class="o-link-arrow" href="{{ item.url }}">{{ item.title }} </a>
+                {% if item.below %}
+                  {% for item in item.below %}
+                    <li>
+                      <a class="o-link-arrow" href="{{ item.url }}">{{ item.title }} </a>
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              </li>
+            {% else %}
+              {{ _self.menu_row(item.below, menu_level + 1) }}
+            {% endif %}
+          {% else %}
+            {{ _self.menu_row(item.below, menu_level + 1) }}
+          {% endif %}
+
+        </ul>
+
+      {% else %}
+        {% if item.entity.field_teaser.value is empty %}
+            <a class="o-link-arrow" href="{{ item.url }}"> {{ item.title }} </a>
+        {% else %}
+          <a class="items-level-{{ menu_level + 1 }}" href="{{ item.url }}">{{ item.title }}
+            <p class="field-teaser-mobile"> {{ item.entity.field_teaser.value }} </p>
+          </a>
+          <hr class="separator">
+        {% endif %}
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}

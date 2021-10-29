@@ -370,12 +370,19 @@ $('.carrousel-homepage-header').on('slid.bs.carousel', function (event) {
       let iframe = $(this).find('iframe');
       if (iframe.length) {
         $('iframe', this).html("");
-        let iframe_src = $('iframe', this).attr('src');
-
         $('iframe', this).attr('src', '');
-        $('iframe', this).attr('src', iframe_src);
       }
   });
 
+  $('.modal.ckeditor-embed-video').on('shown.bs.modal', function (event) {
+
+      let iframe = $(this).find('iframe');
+      $('iframe', this).attr('src', $('iframe', this).data('src'));
+
+  });
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    $('.path-frontpage [id^=embedVideoModal-]').appendTo( $('body') )
+  });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);

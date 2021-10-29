@@ -32,6 +32,12 @@ oab_subhomes.subhomes:
     news_term_tid:
       type: label
       label: 'News term id'
+    achievement_term_tid:
+      type: label
+      label: 'IoT Achievement term id'
+    iot_product_term_tid:
+      type: label
+      label: 'IoT Products term id'
     press_meta:
       type: label
       label: 'Press meta title'
@@ -59,6 +65,12 @@ oab_subhomes.subhomes:
     distributor_term_tid:
       type: label
       label: 'Distributor term id'
+    iot_product_meta:
+      type: label
+      label: 'IoT Products meta title'
+    iot_achievement_meta:
+      type: label
+      label: 'IoT Achivements meta title'
 
 oab_backoffice.pardot:
   type: config_object
@@ -148,3 +160,14 @@ oab_backoffice.ece:
     create_link:
       type: label
       label: 'Lien créer compte'
+
+field.widget.settings.option_group_term_select:
+  type: mapping
+  label: 'Option Group Term Select widget settings'
+  mapping:
+    displayLangcode:
+      type: boolean
+      label: 'Display langcode'
+    filterLangcode:
+      type: boolean
+      label: 'Filter by langcode on edit content form'

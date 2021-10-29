@@ -1,0 +1,28 @@
+<div class="node-axiome-partners col-md-12 nopadding">
+    <div>
+        {% if field_partners.Attributes.title|trim is not empty %}
+            <h2 class="titre2">{{ field_partners.Attributes.midtitle }}</h2>
+        {% endif %}
+        {% if field_partners.Attributes.text|trim is not empty %}
+            <p class="axiometext">{{ field_partners.Attributes.text|raw|nl2br }}</p>
+        {% endif %}
+    </div>
+
+    <div class="bg product_partners bg_white col col-md-12 col-xs-12 nopadding">
+        {% for partner in field_partners.Attributes.related_partners.related_partner %}
+            {% if partner.image.url_archive is not null %}
+                <div class="col col-md-3 col-xs-6 padding10Right bg-partner">
+                    <div class="align-center img">
+                        {% if partner.obs_url.url_link is not empty %}
+                        <a href="{{ partner.obs_url.url_link|url_clean_prefix }}" target="_blank" title="{{ partner.obs_url.url_text|url_clean_prefix }}">
+                            {% endif %}
+                            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ partner.image.url_archive }}" alt="{{ partner.image.balise_alt }}" />
+                            {% if partner.obs_url.url_link is not empty %}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

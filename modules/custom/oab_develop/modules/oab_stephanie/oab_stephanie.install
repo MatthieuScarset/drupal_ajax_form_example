@@ -29,6 +29,7 @@ function oab_stephanie_update_dependencies() {
     $dependencies['oab_stephanie'][8036] = array('oab_amel' => 8024, 'oab_christophe' => 8030, 'oab_tibo' => 8019, 'oab_yassine' => 8019, 'oab_tristan' => 8018);
     $dependencies['oab_stephanie'][8036] = array('oab_amel' => 8024, 'oab_christophe' => 8032, 'oab_tibo' => 8020, 'oab_yassine' => 8019, 'oab_tristan' => 8023);
     $dependencies['oab_stephanie'][8052] = array('oab_amel' => 8044, 'oab_christophe' => 8051, 'oab_tibo' => 8035, 'oab_yassine' => 8023, 'oab_tristan' => 8062, 'oab_will' => 8012);
+    $dependencies['oab_stephanie'][8054] = array('oab_adrien' => 8010);
     return $dependencies;
 }
 
@@ -410,4 +411,26 @@ function oab_stephanie_update_8051() {
  */
 function oab_stephanie_update_8052() {
     include_once("updates/update_8052.inc");
+}
+
+
+/**
+ * ajout de traduction pour BVPN
+ */
+function oab_stephanie_update_8053() {
+    include_once("updates/update_8053.inc");
+}
+
+/**
+ * mise a jour coordonnées geolocalisation pour les terme Location
+ */
+function oab_stephanie_update_8054() {
+    include_once("updates/update_8054.inc");
+}
+
+/**
+ * ajout de traduction pour BVPN
+ */
+function oab_stephanie_update_8055() {
+  include_once("updates/update_8055.inc");
 }

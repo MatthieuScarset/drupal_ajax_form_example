@@ -1,0 +1,5 @@
+<?php
+
+function oab_ob1_adapter_install() {
+  drupal_set_installed_schema_version('oab_ob1_adapter', 8000);
+}

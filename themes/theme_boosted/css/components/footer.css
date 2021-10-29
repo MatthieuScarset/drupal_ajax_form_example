@@ -70,6 +70,31 @@ span.icon-footer {
     margin-bottom: 5px;
 }
 
+@media (max-width: 979px ) {
+  .o-footer .footer-div-border .join-text {
+    display: none;
+  }
+
+  .o-footer .footer-div-border ul {
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .o-footer .footer-div-border li.items-top-navbar-mobile {
+    list-style: none;
+    padding: 10px 0 10px 10px;
+  }
+
+  .o-footer .footer-div-border li.items-top-navbar-mobile > a{
+    color: white;
+  }
+
+  .o-footer .footer-div-border li.items-top-navbar-mobile > a.o-link-arrow::after{
+    display: none;
+  }
+
+}
+
 @media (max-width: 767px ) {
     #block-footersocialblock .followbar div.content {
         display: block !important;

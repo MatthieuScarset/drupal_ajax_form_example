@@ -2,11 +2,8 @@
 
 namespace Drupal\oab_axiome\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -14,28 +11,6 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * Configure example settings for this site.
  */
 class OabAxiomeSettingsForm extends ConfigFormBase {
-
-  /**
-   * @var FileSystemInterface
-   */
-  private $fileSystem;
-
-
-  public function __construct(ConfigFactoryInterface $config_factory, FileSystemInterface $file_system) {
-    parent::__construct($config_factory);
-    $this->fileSystem = $file_system;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('config.factory'),
-      $container->get('file_system')
-    );
-  }
-
 
   /**
    * {@inheritdoc}
@@ -175,21 +150,20 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
       // Je recrée les paths
       $archive_path = $this->getAxiomeSaveDir() . "/$archive";
-      $default_scheme = \Drupal::config('system.file')->get('default_scheme');
-      $new_path = $this->fileSystem->realpath($default_scheme . '://' . AXIOME_FOLDER . "/$archive");
+      $new_path = \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . "/$archive");
 
 
       // Si le fichier n'existe pas, je met une erreur (mais Drupal devrait avoir coupé avant si le fichier n'existe pas)
       if (!file_exists($archive_path)) {
-          $this->messenger()->addError(t("Selected archive doesn't exist."), FALSE);
+          drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
           return;
       }
 
       //Je déplace le fichier et j'affiche un message de succès ou d'erreur
       if (!rename($archive_path, $new_path)) {
-          $this->messenger()->addError(t("Moving archive failed."), FALSE);
+          drupal_set_message($this->t("Moving archive failed."), 'error');
       } else {
-          $this->messenger()->addMessage(t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."), 'success');
+          drupal_set_message($this->t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."), 'success');
       }
 
   }
@@ -208,7 +182,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
         //Petit check si le fichier existe
         if (!file_exists($archive_path)) {
-            $this->messenger()->addError($this->t("Selected archive doesn't exist."), FALSE);
+            drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
             return;
         }
 
@@ -260,8 +234,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
      * Pour recuperer facilement le dossier de sauvegarde
      */
     private function getAxiomeSaveDir() {
-        $default_scheme = \Drupal::config('system.file')->get('default_scheme');
-        return $this->fileSystem->realpath($default_scheme . '://' . AXIOME_FOLDER . '/' . AXIOME_SAVE_FOLDER);
+        return \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . '/' . AXIOME_SAVE_FOLDER);
     }
 
 }

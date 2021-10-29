@@ -1,0 +1,8 @@
+name: OAB Data Import
+description: 'OAB module use to import data Data Import'
+type: module
+package: OAB
+version: VERSION
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'oab_data_import'
+datestamp: 1620309796

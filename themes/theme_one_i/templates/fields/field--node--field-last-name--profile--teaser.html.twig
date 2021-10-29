@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Modification du teaser du profile pour l'affichage du nom, prénom et lien twitter
+ *  Le reste est géré par le fichier teaser (image du compte et bio du blogger)
+ *  => nom et le prénom sur la même ligne
+ *  => ajout du lien twitter
+ *
+ *  Utilisé dans nodes/node--profile--teaser.html.twig
+ *
+ */
+#}
+
+
+{# Affichage du Nom & Prénom #}
+<div class="div-profile-teaser-name">
+    {{ title }}
+</div>
+{# Affichage du lien twitter #}
+{# Je teste si la valeur existe (tout le monde n'a pas de compte Twitter) avant de mettre la div et le lien
+    Sinon, ca crée une div avec un lien sans texte ni direction
+ #}
+{% if field_social_account.0 is defined and field_social_account.0|length > 0 %}
+    <div class="div_twitter_account">
+        <a href="{{ field_social_account.0['#context'].value }}" target="_blank">{{ field_social_account['#title'] }}</a>
+    </div>
+{% endif %}

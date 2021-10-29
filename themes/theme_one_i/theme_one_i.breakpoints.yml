@@ -1,0 +1,36 @@
+theme_one_i.screen-xs:
+  label: screen-sm
+  mediaQuery: 'screen and (max-width: 480px)'
+  weight: 1
+  multipliers:
+    - 1x
+theme_one_i.screen-sm:
+  label: screen-sm
+  mediaQuery: 'screen and (min-width: 480px)'
+  weight: 2
+  multipliers:
+    - 1x
+theme_one_i.screen-md:
+  label: screen-md
+  mediaQuery: 'screen and (min-width: 736px)'
+  weight: 3
+  multipliers:
+    - 1x
+theme_one_i.screen-lg:
+  label: screen-lg
+  mediaQuery: 'screen and (min-width: 960px)'
+  weight: 4
+  multipliers:
+    - 1x
+theme_one_i.screen-xl:
+  label: screen-xl
+  mediaQuery: 'screen and (min-width: 1200px)'
+  weight: 5
+  multipliers:
+    - 1x
+theme_one_i.screen-xxl:
+  label: screen-xxl
+  mediaQuery: 'screen and (min-width: 1440px)'
+  weight: 6
+  multipliers:
+    - 1x

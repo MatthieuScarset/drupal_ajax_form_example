@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if title %}
+    <h3>{{ title }}</h3>
+{% endif %}
+{% set current_item = 0 %}
+{% for row in rows %}
+    {# Ajout du flux twitter que si y pas le filtre sur les thématiques#}
+    {% if
+        (view.exposed_data.vb_thematic is not defined
+          or (
+              view.exposed_data.vb_thematic == 'All'
+              or view.exposed_data.vb_thematic == ''
+          )
+        )
+        and (view.exposed_data.field_insight_type_target_id is not defined
+          or (
+            view.exposed_data.field_insight_type_target_id == 'All'
+            or view.exposed_data.field_insight_type_target_id == ''
+          )
+        )
+        and loop.index > 1
+        and loop.index is divisible by(5) %}
+        {% set current_item = current_item + 1 %}
+{#        Please don't use "grid-item" as a css selector. It's only for masonry library and is removed by JS when displayed#}
+        <div class="views-row col-md-4 grid-item business-insight-twitter-tile">
+          {{ drupal_block('twitter_block', {position: ((view.pager.current_page * 4) + current_item) }) }}
+        </div>
+    {% endif %}
+
+    {%
+        set row_classes = [
+        default_row_class ? 'views-row col-md-4',
+    ]
+    %}
+    <div{{ row.attributes.addClass(row_classes, 'grid-item') }}>
+        {{- row.content -}}
+    </div>
+{% endfor %}

@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a view template to display a list of rows.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the container.
+ * - rows: A list of rows for this list.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's contents.
+ * - title: The title of this group of rows. May be empty.
+ * - list: @todo.
+ *   - type: Starting tag will be either a ul or ol.
+ *   - attributes: HTML attributes for the list element.
+ *
+ * @see template_preprocess_views_view_list()
+ *
+ * @ingroup themeable
+ */
+#}
+{% if attributes -%}
+<div{{ attributes }}>
+    {% endif %}
+
+
+  {#  <{{ list.type }}{{ list.attributes }}> #}
+
+{% if rows.0 is defined %}
+    <div class="homepage-eclairage-playlist-element hidden-xs hidden-sm">
+
+        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 }}" class="home-playlist-items container no-padding hidden-xs hidden-sm">
+            {% for row in rows %}
+                <div class="item-playlist-content">
+                    {{ row.content }}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <div class="homepage-eclairage-playlist-element hidden-md hidden-lg">
+{# on différencie le carrousel du deskotp qui affiche tous les contenus, du swiper mobile qui n'en affiche que 6
+Pour pallier au probleme JS qui fait qu'on ne peut avoir 2 slick carousel avec le meme ID, j'ajoute +100 à celui du mobile #}
+        <div id="home-playlist-slick-carousel-{{ rows.0.content['#view'].args.0 + 100 }}" class="home-playlist-items container no-padding hidden-md hidden-lg">
+            {% for row in rows|slice(0,6) %}
+                <div class="item-playlist-content">
+                    {{ row.content }}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endif %}
+
+{# </{{ list.type }}> #}
+
+{% if attributes -%}
+    </div>
+{% endif %}
+

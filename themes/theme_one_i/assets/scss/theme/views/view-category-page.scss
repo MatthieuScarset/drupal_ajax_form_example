@@ -1,0 +1,49 @@
+.view-display-id-category_page{
+  .item-list {
+    margin-top: 3.75rem;
+
+    &:first-of-type {
+      margin-top: 2.8125rem;
+    }
+
+    .taxonomy_term_category_product {
+      padding-bottom: 2.1875rem; //35px
+      padding-top: 2.1875rem;
+
+      .icon {
+        font-size: 4rem;
+      }
+
+      .field--name-name {
+        font-size: $h1-font-size;
+        color: $black;
+        font-weight: bold;
+      }
+
+      .field--name-field-simple-description {
+        font-size: $h5-font-size;
+        color: $black;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 0;
+
+      li {
+        .views-field-rendered-entity {
+          .field-content {
+            padding: 0;
+            @include media-breakpoint-up(lg) {
+              padding: revert;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.footer-page-categ{
+  margin-top: 4.375rem; //70px;
+}

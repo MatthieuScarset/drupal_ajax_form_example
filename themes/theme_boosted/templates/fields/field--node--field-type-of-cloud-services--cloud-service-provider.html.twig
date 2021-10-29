@@ -1,0 +1,17 @@
+{# Affichage du type de service cloud #}
+
+<div style="display: flex; flex-direction: column">
+  {% if items.0.content['#title'] is same as('IaaS') or items.0.content['#title'] is same as('PaaS') %}
+  <div class="csp-type">
+    <img src="/themes/theme_boosted/images/iaas_on.png" height="40px">
+    <img src="/themes/theme_boosted/images/saas_off.png" height="40px">
+  </div>
+  <p class="csp-tech-info">{% trans %}Access to a dedicated infrastructure{%  endtrans %}</p>
+  {% elseif items.0.content['#title'] is same as('SaaS') %}
+  <div class="csp-type">
+    <img src="/themes/theme_boosted/images/iaas_off.png" height="40px">
+    <img src="/themes/theme_boosted/images/saas_on.png" height="40px">
+  </div>
+  <p class="csp-tech-info">{% trans %}Access to a shared cloud service{%  endtrans %}</p>
+  {% endif %}
+</div>

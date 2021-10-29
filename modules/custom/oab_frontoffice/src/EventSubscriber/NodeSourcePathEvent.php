@@ -35,16 +35,6 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      * redirect source node url to languaged alias
      */
     public function onRequest(GetResponseEvent $event) {
-
-        // Pour être sur, pour les API Marketo/Altares.
-        // Gestion des exceptions dans leur module
-        $route_name = \Drupal::routeMatch()->getRouteName();
-        if (strpos($route_name, 'oab_marketo.altares_api') !== false) {
-          return;
-        }
-
-
-
         $request = $event->getRequest();
 
         if ($request->attributes->has('exception')
@@ -121,17 +111,17 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     ];
                     $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], $options);
                     $new_url = $url->toString();
-                    $current_uri = $_SERVER['REQUEST_URI'];
-
+                    $current_uri = $request->getRequestUri();
+                    $current_uri_wo_options = strpos($current_uri, '?') !== false
+                      ? substr($current_uri, 0, strpos($current_uri, '?'))
+                      : $current_uri;
 
                     ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
                     ## et je teste s'ils existent dans la liste
                     $path_list = oab_getAllPathFromNID($node->id(), $node_lang_id);
-
-
                     if ($new_url != ''
-                        && $new_url !== $current_uri
-                        && !in_array($current_uri, $path_list)
+                      && $new_url !== $current_uri
+                      && !in_array($current_uri_wo_options, $path_list)
                     ) {
                         $response = new RedirectResponse($new_url, 301);
                         $event->setResponse($response);

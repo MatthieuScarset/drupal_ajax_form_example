@@ -1,0 +1,45 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      assets/css/one_i.css: {weight: 49}
+      assets/css/style.css: {weight: 50}
+
+  js:
+    js/hack.js: { }
+    assets/js/ob1.js: { }
+    assets/js/ob1.bundle.js: { }
+    js/bsSlider.jquery.js: {}
+    js/header.js: {}
+    js/masonry.pkgd.min.js: {}
+    js/readmorelink.js: {}
+    js/scripts.js: {}
+    js/slick.min.js: {}
+    js/tealium.js: {}
+    js/vision_business.js: {}
+
+  dependencies:
+#  Jquery core drupal mis en commentaire car c'est une version ligth et qu'il manque des éléments nécessaire a ob1
+#    - core/jquery
+#    - core/jquery.once
+#    - core/jquery.ui
+#    - core/jquery.ui.effects.slide
+    - core/popperjs
+    - core/drupal
+#    - theme_one_i/socialbar      # Currently provided by theme_boosted
+    - oab_icomoon/icomoon
+
+
+socialbar:
+  version: VERSION
+  css:
+    base:
+      css/orange_socialbar.css: {}
+  js:
+    js/social_bar/orange_socialbar_settings.js: {}
+    js/social_bar/orange_socialbar.js: {}
+
+contact-button:
+  version: VERSION
+  js:
+    js/contact_button.js: {}

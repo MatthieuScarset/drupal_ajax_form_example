@@ -1,0 +1,12 @@
+name: OAB OB1 Theme Adapter
+description: "Gestion de l'utilisation du theme Ob1"
+type: module
+package: OAB
+
+dependencies:
+  - oab_frontoffice
+
+version: '8.x-1.0'
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'oab_ob1_adapter'
+datestamp: 1453308360

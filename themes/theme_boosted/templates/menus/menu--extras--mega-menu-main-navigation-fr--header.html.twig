@@ -1,0 +1,97 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *
+ * @ingroup templates
+ */
+#}
+
+{% import _self as menus %}
+
+{#
+We call a macro which calls itself to render the full tree.
+@see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+
+  {% import _self as menus %}
+
+  {% if items %}
+    {% if menu_level == 0 %}
+<ul{{ attributes.addClass('menu', 'nav', 'navbar-nav') }}>
+  {% else %}
+  <ul{{ attributes.addClass('dropdown-menu') }}>
+    {% endif %}
+
+    {% for item in items %}
+      {% set link_target = item.url.options.target ? '_blank' : '_self' %}
+      {% if item.below %}
+      <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
+        {% set link_text %}{{ item.title }} {% endset %}
+        {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
+      {% else %}
+        <li>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
+      {% endif %}
+
+      {% if item.below %}
+        <ul class="container-fluid dropdown-menu mega-menu-dropdown megamenu row" role="menu">
+          {{ menus.mega_menu_items(item.title, item.below) }}
+        </ul>
+      {% endif %}
+      </li>
+
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endmacro %}
+
+
+  {% macro mega_menu_items(title, items) %}
+    <div class="container" style="display: flex">
+
+      <div class="items col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+          {% for item in items %}
+            <li role="presentation" {#class="{% if loop.index == 1 %}{% endif %}"#}>
+              <a href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}" aria-controls="item-{{ loop.index }}"
+                 role="tab">{{ item.title }} </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="tab-content col-xs-8 col-sm-8 col-md-8 col-lg-8">
+        {% for item in items %}
+          <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}" role="tabpanel">
+            {% if item.below %}
+              {% for sous_item in item.below %}
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div>
+                  <a style="margin-bottom: 10px" href="{{ sous_item.url }}">{{ sous_item.title }}</a>
+                    <div style="margin-top: 7px; margin-bottom: 40px">
+                      <span>{{ sous_item.content.field_teaser[0]['#context'].value }}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+              <a class="all_product_link" href="{{ item.url }}">Voir tous les produits <span class="all_product_glyphicon glyphicon glyphicon-menu-right"></span></a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+
+    </div>
+  {% endmacro %}

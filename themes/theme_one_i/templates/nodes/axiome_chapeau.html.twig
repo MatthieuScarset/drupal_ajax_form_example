@@ -1,0 +1,51 @@
+<div class="node-axiome-chapeau col-md-12 nopadding">
+
+    {# ======= SUMMARY ========= #}
+    {% if field_header.summary is iterable %}
+        {% for summary in field_header.summary %}
+            <div class="col col-md-12 nopadding">
+                <p class="highlight1"> {{ summary|raw|nl2br }} </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% if field_header.summary|trim is not empty %}
+            <div class="col col-md-12 nopadding">
+                <p class="highlight1"> {{ field_header.summary|raw|nl2br }} </p>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {# ======= URL ========= #}
+    {% if field_header.image.url_archive is iterable %}
+        {% for url in field_header.image.url_archive %}
+            <div class="col col-md-12 nopadding image">
+                <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ url }}" alt="{{ field_header.image.balise_alt }}" />
+            </div>
+        {% endfor %}
+    {% else %}
+        {% if field_header.image.url_archive|trim is not empty %}
+            <div class="col col-md-12 nopadding image">
+                <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field_header.image.url_archive }}" alt="{{ field_header.image.balise_alt }}" />
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {# ======= VIDEO ========= #}
+    {% if field_header.video is iterable %}
+        {% for video in field_header.video %}
+            {# sometimes, video is an axiome array and not a video tag, so Drupal try to use it as a RenderArray, which it isn't #}
+            {% if video is not iterable %}
+                <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+                    {{ video|raw }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% if field_header.video|trim is not empty %}
+            <div class="col col-md-12 col-xs-12 col-sm-12 nopadding">
+                {{ field_header.video|raw }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+</div>

@@ -183,7 +183,8 @@
         // module local_nav
         if (local_nav.length && local_nav.is(':visible')) {
             /**
-             * Pour la local nav, je recalcule les tailles, parce que le header change de taille en mode sticky
+             * Pour la local nav, je recalcule les tailles, parce que le header
+             * change de taille en mode sticky
              */
             localnav_offset = 0;
             if ($('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length) {
@@ -483,6 +484,87 @@
     $( document ).ajaxError(function() {
         console.log( "ajaxError : timeout" );
     });
+
+  $('.mega-menu .nav-item').on('click', function () {
+    $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane:first').addClass('active');
+    $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane:not(:first)').removeClass('active');
+  });
+
+  $('.mega-menu .items_prod_serv .nav.nav-pills.nav-stacked a').on('mouseover', function (e) {
+    $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane').removeClass('active');
+    $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane' + $(this).attr('data-target')).addClass('active');
+    $(this).trigger("focus");
+  });
+
+
+
+  $(document).on('click', '#navbar-collapse-mega ul[data-menu-level] > li > a.beyond', function (e){
+    e.preventDefault();
+    $('#navbar-collapse-mega .top-navbar-mobile').addClass("hidden");
+    $(this).addClass('hidden');
+    const parent = $(this).parent();
+    parent.addClass('active');
+    parent.parent().children().not('.active').addClass("hidden");
+    parent.children('ul').removeClass('hidden').addClass('show');
+    parent.children('ul').css("padding-left", 0);
+
+  });
+
+  $(document).on('click', '#navbar-collapse-mega .items-mobile-back a.back', function (e){
+    e.preventDefault();
+
+    const menu_level_target = $(this).data('menu-level-target');
+    $(this).closest('ul[data-menu-level]').addClass('hidden');
+    const previous_tab = $(this).closest(`[data-menu-level=${menu_level_target}]`);
+    if (previous_tab.length) {
+      $(previous_tab).children()
+        .removeClass("hidden")
+        .removeClass('active');
+      $(previous_tab).find('a[data-menu-level-target=' + (menu_level_target+1) + ']').removeClass('hidden');
+    }
+
+    if (menu_level_target === 0) {
+      $('#navbar-collapse-mega .top-navbar-mobile').removeClass("hidden");
+    }
+
+  });
+
+
+
+  // Fonction à éxécuter quand une mutation est observée pour réinitialiser le menu mobile
+
+  new class {
+
+   constructor() {
+
+     this.$menuMobileStateObserver = new MutationObserver((mutationsList) => {
+
+       for(var mutation of mutationsList) {
+
+         if (mutation.attributeName === 'aria-expanded' && mutation.target.getAttribute('aria-expanded') === 'false') {
+
+           $('#navbar-collapse-mega .top-navbar-mobile').removeClass("hidden");
+           $('#navbar-collapse-mega .mega-menu-mobile ul[data-menu-level]').children().removeClass("hidden").removeClass("active");
+           $('#navbar-collapse-mega .mega-menu-mobile ul[data-menu-level="1"]').removeClass("show").addClass("hidden");
+           $('#navbar-collapse-mega .mega-menu-mobile ul[data-menu-level="2"]').removeClass("show").addClass("hidden");
+           $('#navbar-collapse-mega ul[data-menu-level="0"]').find('a[data-menu-level-target]').removeClass('hidden').children().removeClass("hidden").removeClass("active");
+
+         }
+       }
+     });
+     this.$menuMobileStateObserver.observe(
+       document.getElementById('navbar-collapse-mega'),
+       {
+         attributes: true,
+         childList: true
+       });
+   }
+
+ }
+
+
+
+
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

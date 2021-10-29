@@ -17,7 +17,7 @@ class OabOblForm extends ConfigFormBase {
     const ZONE_IMAGES = "zones_image";
     const IMAGE_LOCATION = "public://obl_zone_images";
 
-  public static function getConfigName() {
+    public static function getConfigName() {
         return 'oab_orange_business_lounge.settings';
     }
 

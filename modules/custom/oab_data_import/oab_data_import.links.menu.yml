@@ -1,0 +1,20 @@
+oab_data_import.general_link:
+  title: Data import
+  route_name: oab_data_import.general
+  parent: oab.settings
+  description: 'Data import'
+  weight: -20
+
+oab_data_import.product_categories_data_import_link:
+  title: Product categories data Import
+  route_name: oab_data_import.product_categories_data_import
+  parent: oab_data_import.general_link
+  description: 'Import categories informations for product'
+  weight: -20
+
+oab_data_import.product_categories_terms_import_link:
+  title: Product categories terms Import
+  route_name: oab_data_import.product_categories_terms_import
+  parent: oab_data_import.general_link
+  description: 'Import product categories terms for taxonomy Product categories'
+  weight: -20

@@ -1,0 +1,10 @@
+.header-page-categ{
+  .block-titre-teaser{
+    h1{
+      padding-bottom: 0.25rem;
+      @include media-breakpoint-up(md) {
+        padding-bottom: revert;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<div class="node-axiome-simple-content col-md-12 nopadding">
+    {% for key, value in field_simple_content %}
+        {% if value.title or value.Attributes.title %}
+                {% if value.Attributes.title %}
+                    {% set field = field_simple_content[key] %}
+                {% else %}
+                    {% set field = field_simple_content %}
+                {% endif %}
+                {% if field.Attributes.title|trim is not empty
+                or field.Attributes.paragraph|trim is not empty
+                or field.Attributes.schema.url_archive|trim is not empty
+                or field.Attributes.video|trim is not empty
+                %}
+                <div class="col col-md-12 nopadding">
+                    {% if field.Attributes.title|trim is not empty %}
+                        <h2 class="titre2">{{ field.Attributes.title }}</h2>
+                    {% endif %}
+                    {% if field.Attributes.paragraph|trim is not empty %}
+                        <p class="axiometext">{{ field.Attributes.paragraph|linkAxiome|raw }}</p>
+                    {% endif %}
+                    {% if field.Attributes.schema.url_archive|trim is not empty %}
+                        <div class="col col-md-12 nopadding image">
+                            <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field.Attributes.schema.url_archive }}" alt="{{ field.Attributes.schema.balise_alt }}" />
+                        </div>
+                    {% endif %}
+                    {% if field.Attributes.video|trim is not empty %}
+                        <div> {{ field.Attributes.video|replace({'https://': "//"})|raw }}</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>

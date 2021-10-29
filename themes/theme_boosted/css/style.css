@@ -202,6 +202,12 @@ article .product ul.nav-tabs li:before{
   margin-left: 30px;
 }
 
+.view-display-id-page_iot_products .display-subhomes,
+.view-display-id-page_achievements_iot .display-subhomes  {
+  min-height: 20rem;
+  height: 200px !important;
+}
+
 /* Modif de la hauteur du container de l'image de la subhome selon la taille de l'ecran */
 @media (min-width: 768px) and (max-width: 979px) {
   .display-subhomes .encart-image{
@@ -212,6 +218,17 @@ article .product ul.nav-tabs li:before{
   }
   .view-display-id-page_catalogue .display-subhomes .encart-image {
     height: 61px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes .encart-image,
+  .view-display-id-page_achievements_iot .display-subhomes .encart-image {
+    height: 42px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes,
+  .view-display-id-page_achievements_iot .display-subhomes {
+    min-height: 32rem;
+    height: 302px !important;
   }
 
   .display-subhomes .encart-image .default-image{
@@ -230,17 +247,39 @@ article .product ul.nav-tabs li:before{
     height: 83px;
   }
 
+  .view-display-id-page_iot_products .display-subhomes .encart-image,
+  .view-display-id-page_achievements_iot .display-subhomes .encart-image {
+    height: 58px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes,
+  .view-display-id-page_achievements_iot .display-subhomes {
+    min-height: 25rem;
+    height: 250px !important;
+  }
+
   .display-subhomes .encart-image .default-image{
     width: auto;
   }
 }
-@media (min-width: 1220px)  {
+@media (min-width: 1220px ) and (max-width: 1439px)  {
   .display-subhomes .encart-image{
     height: 125px;
   }
 
   .view-display-id-page_catalogue .display-subhomes .encart-image{
     height: 106px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes .encart-image,
+  .view-display-id-page_achievements_iot .display-subhomes .encart-image {
+    height: 74px;
+  }
+
+  .view-display-id-page_iot_products .display-subhomes,
+  .view-display-id-page_achievements_iot .display-subhomes {
+    min-height: 25rem;
+    height: 250px !important;
   }
 
   .display-subhomes .encart-image img {
@@ -252,7 +291,18 @@ article .product ul.nav-tabs li:before{
     width: 100% !important;
   }
 }
+@media (min-width: 1440px) {
+  .view-display-id-page_iot_products .display-subhomes .encart-image,
+  .view-display-id-page_achievements_iot .display-subhomes .encart-image {
+    height: 81px;
+  }
 
+  .view-display-id-page_iot_products .display-subhomes,
+  .view-display-id-page_achievements_iot .display-subhomes {
+    min-height: 25rem;
+    height: 250px !important;
+  }
+}
 
 .view-display-id-page_partners .display-subhomes .encart-image,
 .view-display-id-page_customer .display-subhomes .encart-image{
@@ -3059,7 +3109,7 @@ div.new-btn-see-all-business-insight {
 }
 
 .mega-menu .nav-item.dropdown .dropdown-menu ul {
-  margin-left: 10px !important;
+  margin-left: -40px !important;
 }
 
 .get_zone {
@@ -3330,6 +3380,11 @@ hr.reseau-mobile-accords-roaming {
 }
 
 .carrousel-homepage-header .carousel-inner .item img {
+    opacity: 0.5;
+    height: 220px;
+}
+
+.carrousel-homepage-header .carousel-inner .item img.img-fond-carrousel-home {
   opacity: 0;
   height: 290px;
 }
@@ -3374,6 +3429,10 @@ hr.reseau-mobile-accords-roaming {
 
 .top-zone-homepage .carousel-solution {
   margin-top: 20px;
+}
+.homepage-wyziwyg {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .left.carousel-control.homepage-carousel-indicators,
@@ -3549,9 +3608,6 @@ hr.reseau-mobile-accords-roaming {
   padding-bottom: 3rem;
 }
 
-.btn .btn-lg .btn-modal-video {
-  font-size: 8rem;
-}
 
 /* Video embarquee dans un modal : gestion du bouton fermer */
 .modal.ckeditor-embed-video .modal-dialog .modal-content {
@@ -3571,6 +3627,14 @@ hr.reseau-mobile-accords-roaming {
 }
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
+}
+.modal.ckeditor-embed-video .modal-dialog {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.modal.ckeditor-embed-video .modal-dialog .modal-content{
+  position:relative;
+  padding:35px;
 }
 
 /* Page temporaire (offices) */

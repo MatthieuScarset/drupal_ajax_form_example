@@ -9,6 +9,7 @@ global-styling:
       css/swiper.min.css: {}
       boosted/css/bootstrap-orange2015.min.css: {}
       boosted/css/boosted2015.min.css: {}
+
     component:
       css/components/header.css: {}
       css/components/maps/agence.css: {}
@@ -51,6 +52,7 @@ global-styling:
     - core/jquery.ui.effects.slide
     - core/drupal
     - js/orange_socialbar_settings.js
+    - oab_icomoon/icomoon
 
 socialbar:
   version: VERSION
@@ -61,10 +63,19 @@ socialbar:
     js/social_bar/orange_socialbar_settings.js: {}
     js/social_bar/orange_socialbar.js: {}
 
-clicktocall:
+bvpn_galery:
+  version: VERSION
+  css:
+    base:
+      css/components/maps/bvpn-gallery.css: {}
   js:
-    js/clicktocall/conf/config.js: {}
-    js/clicktocall/js/ac_webrtc.min.js: {}
-    js/clicktocall/js/audio_player.js: {}
-    js/clicktocall/js/c2c.js: {}
-    js/clicktocall.js: {}
+    js/bvpn_map/csp_markers.js: {}
+    js/bvpn_map/csp_mapcontrol.js: {}
+
+contact-button:
+  version: VERSION
+  css:
+    base:
+      css/components/contact_button.css: {}
+  js:
+    js/contact_button.js: {}

@@ -1,0 +1,7 @@
+oab_ob1_adapter.theme_settings:
+  path: '/admin/structure/oab/settings/ob1/theme'
+  defaults:
+    _form: '\Drupal\oab_ob1_adapter\Form\Ob1ThemeSettingsForm'
+    _title: 'Theme settings'
+  requirements:
+    _permission: 'administer site configuration'

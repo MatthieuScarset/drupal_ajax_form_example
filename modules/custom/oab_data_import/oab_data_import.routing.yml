@@ -1,0 +1,24 @@
+#data - Product categories Import
+oab_data_import.general:
+  path: 'admin/obs_backoffice/data-import'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Data import'
+  requirements:
+    _permission: 'administrator+digital_admin'
+
+oab_data_import.product_categories_data_import:
+  path: 'admin/obs_backoffice/data-import/product-category'
+  defaults:
+    _form: '\Drupal\oab_data_import\Form\OabSettingsProductCategoriesDataImportForm'
+    _title: 'Import categories informations for product'
+  requirements:
+    _role: 'administrator+digital_admin'
+
+oab_data_import.product_categories_terms_import:
+  path: 'admin/obs_backoffice/data-import/product-categories-terms'
+  defaults:
+    _form: '\Drupal\oab_data_import\Form\OabSettingsProductCategoriesTermsImportForm'
+    _title: 'Import product categories terms for taxonomy Product categories'
+  requirements:
+    _role: 'administrator+digital_admin'

@@ -1,0 +1,48 @@
+<div class="node-axiome-detailed-content col-md-12 nopadding">
+    <div>
+        {% if field_detailed_content.Attributes.intertitle|trim is not empty %}
+            <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
+        {% endif %}
+        {% if field_detailed_content.Attributes.description|trim is not empty %}
+            <p class="axiomedescription">{{ field_detailed_content.Attributes.description|raw|nl2br }}</p>
+        {% endif %}
+    </div>
+
+    <div class="bg product_modules bg_white col col-md-12 nopadding">
+        {% set colIterator = 0 %}
+        {% set cssClear = "" %}
+        {% for key, value in field_detailed_content.Children.ruby_detailed_contents_block %}
+            {% if(colIterator%2 == 1) %}
+                {%  set cssClear = '' %}
+            {% else %}
+                {%  set cssClear = ' clearboth' %}
+            {% endif %}
+            {% if value.title or value.Attributes.title %}
+                {% if value.Attributes.title %}
+                    {% set field = field_detailed_content.Children.ruby_detailed_contents_block[key] %}
+                {% else %}
+                    {% set field = field_detailed_content.Children.ruby_detailed_contents_block %}
+                {% endif %}
+                <div class="col col-md-6 col-xs-12 nopadding{{ cssClear }}">
+                    {% if field.Attributes.icon.boosted_css_name|trim is not empty %}
+                        <div class="col col-md-2 col-xs-2 nopadding">
+                            <p style="margin-top:1rem;"><span class="solaris {{ field.Attributes.icon.boosted_css_name }}" style="font-size:4rem;"></span></p>
+                        </div>
+                    {% endif %}
+                    <div class="col col-md-10 col-xs-10">
+                        {% if field.Attributes.title|trim is not empty %}
+                            <h4 class="highlight1">{{ field.Attributes.title }}</h4>
+                        {% endif %}
+                        {% if field.Attributes.header|trim is not empty %}
+                            <p><b>{{ field.Attributes.header }}</b></p>
+                        {% endif %}
+                        {% if field.Attributes.description|trim is not empty %}
+                            <p>{{ field.Attributes.description|raw|nl2br }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {%  set colIterator = colIterator + 1 %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

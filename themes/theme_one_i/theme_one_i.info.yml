@@ -1,0 +1,32 @@
+# core: 8|9
+type: theme
+base theme: false
+
+name: 'Theme One-i'
+description: 'Built to use One-i based on boosted, a sleek, intuitive, and powerful front-end framework for faster and easier web development with Orange graphic guideline.'
+package: 'Theme One-i'
+
+regions:
+  header: 'Header'
+  top_zone: 'Top Zone'
+  pre_content: 'Pre Content'
+  content: 'Content'
+  sidebar: 'Side Bar'
+  prefooter: 'Pre Footer'
+  footer: 'Footer'
+
+libraries:
+  - 'theme_one_i/global-styling'
+
+# The following are dynamic library overrides based on certain criteria,
+# usually a theme setting.
+#
+# @see \Drupal\boosted\Plugin\Alter\LibraryInfo::alter()
+#
+#  core/drupal.dialog: boosted/drupal.dialog
+#  core/drupal.dialog.ajax: boosted/drupal.dialog.ajax
+
+version: '9.0.0'
+core_version_requirement: ^8 || ^9
+project: 'theme_one_i'
+datestamp: 1450531741

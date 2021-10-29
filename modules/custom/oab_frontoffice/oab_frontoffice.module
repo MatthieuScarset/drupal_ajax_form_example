@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -14,6 +15,7 @@ use Drupal\oab_dvi\DviHelper;
 
 use Drupal\paragraphs\Entity\Paragraph;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
@@ -254,6 +256,11 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 
             $build['taxonomy'][count($build['taxonomy'])] = $taxonomy_id;
         }
+
+        if ($content_type === 'external_content' && isset($entity->field_url->uri)) {
+            $response = new RedirectResponse($entity->field_url->uri, 301);
+            $response->send();
+        }
     }
 }
 
@@ -290,7 +297,7 @@ function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \
 /**
  * Implements hook_form_views_exposed_form_alter().
  */
-function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
+function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterface &$form_state) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
 
@@ -345,7 +352,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
       $menu_header_page_vb = clean_exposed_filters_by_language(
         $form['field_insight_type_target_id']['#options'], 'See all'
       );
-      if ( isset($menu_header_page_vb['All']) ) {
+      if ( isset($menu_header_page_vb['All'])) {
         $v = $menu_header_page_vb['All'];
         unset($menu_header_page_vb['All']);
         $menu_header_page_vb['All'] = $v;
@@ -358,6 +365,78 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, &$form_state) {
             && $form['field_insight_type_target_id']['#type'] == "select") {
             $form['field_insight_type_target_id']['#type'] = "radios";
         }
+    }
+
+    //BVPN
+    //formulaire de recherche de la carte BVPN Gallerie
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-map-page') {
+
+      //on filtre les termes de taxo par langue
+      $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load('location');
+      if (is_object($vocabulary)) {
+        $properties = array(
+          "vid" => 'location',
+        );
+        $lancode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        if($lancode != 'fr'){
+          $lancode = 'en'; //carte dispo qu'en fr ou en // si on tente en ru, on mettra les terme de en
+        }
+        $properties["langcode"] = $lancode;
+        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+
+        if (is_array($terms)
+          && !empty($terms)) {
+          $options = array('All' => t('Region'));
+          foreach ($terms AS $tid => $term) {
+            $options[$tid] = $term->getName();
+          }
+          $form['location']['#options'] = $options;
+        }
+      }
+
+      $form['actions']['reset'] =array(
+        '#value' => "Clear",
+        '#type' => "submit",
+        '#access' => true,
+        '#attributes' => array(
+          'class' => array('btn_clear_filter_search_map'),
+          'disabled'=>'disabled'),
+      );
+
+      //si c'est une recherche d'une région on active le bouteau clear
+      $input = $form_state->getUserInput();
+      $currentLocation = $input['location'];
+      if($currentLocation != 'All'){
+        unset($form['actions']['reset']['#attributes']['disabled']);
+      }
+
+
+      $form['actions']['submit']['#value'] = t('Filter');
+      $form['actions']['submit']['#attributes'] = array(
+        'class' => array(
+          'btn_submit_filter_search_map'
+        )
+      );
+    }
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-block') {
+
+        //on cache le champ location qui est déjà présent avec la MAP
+        $form['title']['#attributes']['placeholder'] = t('CSP Name');
+        $form['location']['#type'] = 'hidden';
+        $form['actions']['submit']['#attributes']= array(
+          'data-twig-suggestion' => 'form-bvpn-gallery-csp-list-block',
+          'class' => array('search-icon', 'csp-list-map-search')
+        );
+    }
+
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-page' ) {
+      foreach ($form AS $key => $value) {
+        if (isset($value['#type'])
+          && $key !== 'title'
+          && $value['#type'] == "textfield") {
+          $form[$key] = change_textfield_to_select($key);
+        }
+      }
     }
 
 }
@@ -444,7 +523,33 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
         ),
         'template' => 'block--righticonblock-custom'
     );
+
+    $theme['subhome_select'] = [
+       'render element' => 'element'
+    ];
+    $theme['subhome_select_button'] = [
+      'render element' => 'element'
+    ];
     return $theme;
+}
+
+
+function oab_frontoffice_preprocess_subhome_select(&$variables) {
+//echo "toto"; kint($variables); die();
+}
+
+function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
+//  kint($variables); die();
+  $element = $variables['element'];
+  $variables['attributes'] = [];
+  if (isset($element['#id'])) {
+    $variables['attributes']['id'] = $element['#id'];
+  }
+  if (isset($element['#attributes']['title'])) {
+    $variables['attributes']['title'] = $element['#attributes']['title'];
+  }
+//  kint($element); die();
+  $variables['children'] = $element['#children'];
 }
 
 
@@ -454,7 +559,7 @@ function oab_frontoffice_mail_alter(&$message) {
     }
 }
 
-function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
 
         foreach (array_keys($form['actions']) as $action) {
@@ -470,6 +575,11 @@ function oab_frontoffice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
                 array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
             }
         }
+    }
+
+    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
+      subhomes_views_exposed_form($form);
+
     }
 }
 
@@ -553,6 +663,31 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
         unset($attachments['#attached']['html_head'][$key]);
       }
     }
+
+    // Pour BVPN gallery
+    // on charge les infos de geolocalisation des termes de taxo Location pour pouvoir faire le zoom sur la bonne région en JS
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $routeName = \Drupal::routeMatch()->getRouteName();
+    if($routeName == 'view.bvpn_gallery.csp_map_page'){
+      $locationsArray = array();
+      $query = \Drupal::entityQuery('taxonomy_term');
+      $query->condition('vid', "location");
+      $query->condition('langcode', $current_language);
+      $tids = $query->execute();
+      $termsLocation = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+      foreach ($termsLocation as $term) {
+        $location = array();
+        $location['tid'] = $term->tid->value;
+        $location['name'] = $term->name->value;
+        if( isset($term->field_location) && !empty($term->field_location)){
+          $location['lat'] = (isset($term->field_location->lat) && !empty($term->field_location->lat)) ? $term->field_location->lat : '0.0';
+          $location['lng'] = (isset($term->field_location->lng) && !empty($term->field_location->lng)) ? $term->field_location->lng : '0.0';
+        }
+        $locationsArray[$term->tid->value] = $location;
+      }
+      $attachments["#attached"]['drupalSettings']['listRegionMarkers'] = $locationsArray;
+    }
+
 }
 
 /**

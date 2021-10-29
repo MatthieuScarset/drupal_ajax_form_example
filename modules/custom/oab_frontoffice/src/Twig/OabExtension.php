@@ -27,12 +27,18 @@ class OabExtension extends \Twig_Extension {
           new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
           new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
           new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
-          new \Twig_SimpleFunction('kint_t', [$this, 'kint_t']),
           new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
           new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
           new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
           new \Twig_SimpleFunction('specialCharacters', [$this, 'specialCharacters']),
           new \Twig_SimpleFunction('isAjaxContext', [$this, 'isAjaxContext']),
+          new \Twig_SimpleFunction('kint_t', array($this, 'kint_t'), array(
+            'is_safe' => array('html'),
+            'needs_environment' => TRUE,
+            'needs_context' => TRUE,
+            'is_variadic' => TRUE,
+          )),
+        new \Twig_SimpleFunction('replaceSpacesAndSpecialChars', [$this, 'replaceSpacesAndSpecialChars']),
       ];
 }
 
@@ -322,6 +328,15 @@ class OabExtension extends \Twig_Extension {
 
   public function specialCharacters($string) {
     $clean_string = str_replace('\\', '', $string);
+    return htmlentities($clean_string);
+  }
+
+  public function replaceSpacesAndSpecialChars($string) {
+    $clean_string = str_replace(' ', '_', $string);
+    $clean_string = str_replace('.', '_', $clean_string);
+    $clean_string = strtolower($clean_string);
+    $clean_string = \Drupal::transliteration()->transliterate($clean_string);
+    $clean_string = preg_replace('@[^a-z0-9_.]+@', '_', $clean_string);
     return htmlentities($clean_string);
   }
 

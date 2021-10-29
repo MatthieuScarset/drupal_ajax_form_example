@@ -1,0 +1,6 @@
+icomoon:
+  version: VERSION
+  css:
+    base:
+      icomoon/style.css: {}
+      css/style.css: {}

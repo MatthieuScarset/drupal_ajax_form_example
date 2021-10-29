@@ -7,6 +7,10 @@ services:
     class: Drupal\oab_frontoffice\Breadcrumb\OabFrontofficBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  oab_frontoffice_product.breadcrumb:
+    class: Drupal\oab_frontoffice\Breadcrumb\ProductBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 101 }
   oab_frontoffice.twig.OabExtension:
       class: Drupal\oab_frontoffice\Twig\OabExtension
       tags:
@@ -25,3 +29,6 @@ services:
 #      class: Drupal\oab_frontoffice\EventSubscriber\SubhomeUrlAlterEvent
 #      tags:
 #        - { name: event_subscriber }
+  plugin.manager.viewsaccess:
+    class: Drupal\oab_frontoffice\Plugin\views\access\PageCategoryViewsAccessPlugin
+    parent: default_plugin_manager

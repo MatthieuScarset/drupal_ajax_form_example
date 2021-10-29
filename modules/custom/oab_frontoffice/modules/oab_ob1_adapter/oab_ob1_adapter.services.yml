@@ -1,0 +1,28 @@
+services:
+
+  oab_ob1_adapter.theme_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_ob1_adapter.theme_settings']
+
+  oab_ob1_adapter.theme_url_negotiator:
+    class: Drupal\oab_ob1_adapter\Theme\Ob1UrlThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 10 }
+    arguments : ['@oab_ob1_adapter.ob1_service', '@request_stack']
+
+  oab_ob1_adapter.theme_view_negotiator:
+    class: Drupal\oab_ob1_adapter\Theme\Ob1ViewThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 11 }
+    arguments: [ '@oab_ob1_adapter.ob1_service']
+
+  oab_ob1_adapter.theme_content_negotiator:
+    class: Drupal\oab_ob1_adapter\Theme\Ob1ContentThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 12 }
+    arguments: [ '@oab_ob1_adapter.ob1_service' ]
+
+  oab_ob1_adapter.ob1_service:
+    class: Drupal\oab_ob1_adapter\Ob1AdapterService
+    arguments : ['@oab_ob1_adapter.theme_settings', '@language_manager']

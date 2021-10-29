@@ -123,7 +123,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             #Liste des types de contenu pour cette config du fil d'ariane
             $content_types = [
                 "blog_post", "customer_story", "document", "magazine",
-                "office", "partner", "press_kit", "press_release", "product", "news"];
+                "office", "partner", "press_kit", "press_release", "news"];
 
 
             ##Si on a un bien un node en affichage,
@@ -182,6 +182,13 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                         }
                     }
                 }
+            }
+            elseif (isset($node)
+              && method_exists(get_class($parameters['node']), 'getType')
+              && $parameters['node']->getType() == 'cloud_service_provider'){
+              //ajout du fil d'ariane pour les CSP de BVPN
+              $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+              $breadcrumb->addLink(Link::createFromRoute(t('BVPN Galerie - List of Cloud Services'), 'view.bvpn_gallery.csp_list_page'));
             }
         }
 

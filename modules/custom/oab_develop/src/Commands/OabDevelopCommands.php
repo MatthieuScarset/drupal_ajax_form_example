@@ -103,7 +103,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       $options['yes'] = true;
     }
 
-    $process = $this->processManager()->drush($this->siteAliasManager()->getSelf(), $cmd, $args,  $options);
+    $process = $this->processManager()->drush($this->siteAliasManager()->getSelf(), $cmd, $args, $options);
     $process->enableOutput(true);
     $process->mustRun();
     foreach ($process as $type => $data) {

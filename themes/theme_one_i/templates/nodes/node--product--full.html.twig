@@ -1,0 +1,149 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{%
+    set classes = [
+    'node',
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+]
+%}
+
+<article{{ attributes.addClass(classes) }}>
+    {{ title_suffix }}
+    {{ title_prefix }}
+
+    {% set createdDate = node.getCreatedTime|format_date('node_created_date') %}
+
+    {% set fieldProduct %}
+        {{ content.field_solution }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+    {% set fieldAuthor %}
+        {{ author_name }}
+    {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
+
+    {% if content.axiome_data is defined %}
+        {% set field_header = content.axiome_data.Children.ruby_theme.Children.ruby_zone_header.Attributes %}
+        {% set field_customer_case = content.axiome_data.Children.ruby_theme.Children.ruby_zone_customer_case.Attributes %}
+        {% set field_detailed_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_detailed_contents %}
+        {% set field_simple_content = content.axiome_data.Children.ruby_theme.Children.ruby_zone_simple_contents.Children.ruby_simple_contents_block %}
+        {% set field_partners = content.axiome_data.Children.ruby_theme.Children.ruby_zone_partner %}
+        {% set axiomeDocs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
+        {% set tarifs = content.axiome_data.Children.ruby_theme.Children.ruby_zone_price %}
+        {% set id_fiche = content.axiome_data['@attributes'].id %}
+        {% set related_offers =  content.axiome_data.Children.ruby_theme.Children.ruby_zone_seemore.Attributes %}
+    {% endif %}
+
+    {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+
+    <div{{ content_attributes.addClass('content') }} axiome-id-{{ id_fiche }}>
+
+        {{ content|without('field_meta_description', 'field_meta_title', 'field_top_zone_background','field_display_title',
+            'field_highlight', 'field_solution', 'field_industry', 'field_subhome', 'field_start_date', 'field_end_date',
+            'field_axiome_data', 'field_email_owner', 'field_content_owner', 'field_visual', 'axiome_data', 'field_market_segment') }}
+    </div>
+    {% if field_header is not null %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_chapeau.html.twig' with {'field_header': field_header, 'id_fiche': id_fiche} %}
+    {% endif %}
+
+    {% if field_detailed_content is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_detailed_content.html.twig' with field_detailed_content %}
+    {% endif %}
+
+    {% if field_simple_content is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_simple_content.html.twig' with {'field_simple_content': field_simple_content, 'id_fiche': id_fiche} %}
+    {% endif %}
+
+    {% if field_customer_case is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_customer_story.html.twig' with field_customer_case %}
+    {% endif %}
+    {% if field_partners is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_partners.html.twig' with field_partners %}
+    {% endif %}
+    {% if axiomeDocs is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_know_more_links.html.twig' with axiomeDocs %}
+    {% endif %}
+    {% if tarifs is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_tarifs.html.twig' with tarifs %}
+    {% endif %}
+    {% if related_offers is not null  %}
+        {% include 'themes/theme_boosted/templates/nodes/axiome_related_offers.html.twig' with related_offers %}
+    {% endif %}
+
+</article>

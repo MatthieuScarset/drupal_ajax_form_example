@@ -1,0 +1,50 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *
+ * @ingroup templates
+ */
+#}
+{% import _self as menus %}
+
+    {{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('nav', 'flex-column', 'flex-lg-row', 'pb-1') }}>
+    {% else %}
+      <ul{{ attributes.addClass('nav') }}
+    {% endif %}
+    {% for item in items %}
+      {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
+      {% if menu_level == 0 and item.is_expanded %}
+        <li{{ item.attributes.addClass('nav-item') }}>
+            <a href="{{ item.url }}" class="nav-link py-0" target="{{ link_target }}"
+               onmousedown="utag_link(utag_data.titre_page, 'Footer', 'Juridique', '{{ item.title }}');">{{ item.title }}</a>
+      {% else %}
+        <li{{ item.attributes.addClass('nav-item') }}>
+            {{ link( item.title, item.url, {'target': link_target, 'class':'nav-link py-0', 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Juridique\', \'' ~ item.title ~ '\');'}) }}
+      {% endif %}
+      {% if item.below %}
+            {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
+      {% endif %}
+        </li>
+    {% endfor %}
+        <li class="d-none d-lg-block nav-item">
+           <span class="px-1 py-0"> © Orange Business Services {{ "now"|date("Y") }}</span>
+        </li>
+      </ul>
+  {% endif %}
+{% endmacro %}

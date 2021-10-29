@@ -1,0 +1,6 @@
+oab_ob1_adapter.theme_settings:
+  title: Ob1 Theme settings
+  route_name: oab_ob1_adapter.theme_settings
+  parent: oab.settings
+  description: 'Configure ob1 theme settings'
+  weight: -20

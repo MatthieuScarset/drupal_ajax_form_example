@@ -21,7 +21,20 @@ class NodeWorkbenchUnpublish extends ActionBase {
    * {@inheritdoc}
    */
   public function execute($entity = NULL) {
-    $entity->set('moderation_state', array('target_id' => 'unpublished'));
+
+    $moderation_enabled = false;
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->get($entity->getEntityTypeId().'.type.'.$entity->bundle());
+
+    if (!empty($config) && !empty($config->get('third_party_settings'))) {
+      $moderation_enabled = $config->get('third_party_settings.workbench_moderation.enabled');
+    }
+    if($moderation_enabled){
+      $entity->set('moderation_state', array('target_id' => 'unpublished'));
+    }
+    else{
+      $entity->setPublished(false);
+    }
     $entity->save();
   }
 

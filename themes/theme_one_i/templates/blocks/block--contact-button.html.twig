@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - $block->subject: Block title.
+ * - $content: Block content.
+ * - $block->module: Module that generated the block.
+ * - $block->delta: An ID for the block, unique within each module.
+ * - $block->region: The block region embedding the current block.
+ * - $classes: String of classes that can be used to style contextually through
+ *   CSS. It can be manipulated through the variable $classes_array from
+ *   preprocess functions. The default values can be one or more of the
+ *   following:
+ *   - block: The current template type, i.e., "theming hook".
+ *   - block-[module]: The module generating the block. For example, the user
+ *     module is responsible for handling the default user navigation block. In
+ *     that case the class would be 'block-user'.
+ * - $title_prefix (array): An array containing additional output populated by
+ *   modules, intended to be displayed in front of the main title tag that
+ *   appears in the template.
+ * - $title_suffix (array): An array containing additional output populated by
+ *   modules, intended to be displayed after the main title tag that appears in
+ *   the template.
+ *
+ * Helper variables:
+ * - $classes_array: Array of html class attribute values. It is flattened
+ *   into a string within the variable $classes.
+ * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
+ * - $zebra: Same output as $block_zebra but independent of any block region.
+ * - $block_id: Counter dependent on each block region.
+ * - $id: Same output as $block_id but independent of any block region.
+ * - $is_front: Flags true when presented in the front page.
+ * - $logged_in: Flags true when the current user is a logged-in member.
+ * - $is_admin: Flags true when the current user is an administrator.
+ * - $block_html_id: A valid HTML ID and guaranteed unique.
+ *
+ * @see bootstrap_preprocess_block()
+ * @see template_preprocess()
+ * @see template_preprocess_block()
+ * @see bootstrap_process_block()
+ * @see template_process()
+ *
+ * @ingroup templates
+ */
+#}
+{{ attach_library('theme_one_i/contact-button') }}
+
+<section {{ attributes.addClass('block', 'contact-button-block') }}>
+{% block content %}
+  <div class="dropdown dropup">
+    <button type="button" class="border-0 p-0 rounded-pill d-flex down" id="contactButtonDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="align-self-center pl-2 pr-1 contact-button-text">
+          <span class="d-md-none font-weight-bold">{{ content.field_cb_label }}</span>
+          <div class="d-none d-md-flex flex-column">
+            <span class="font-weight-bold">{{ content.field_cb_label_sup }}</span>
+            <span>{{ content.field_cb_label }}</span>
+          </div>
+        </div>
+        <div class="rounded-circle border contact-button">
+          {#  l'icone change grâce au js contact_button.js et passe de icon a icomoon  #}
+          <span class="icon icon-contact contact-button-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div class="dropdown-menu p-0" aria-labelledby="contactButtonDropdown">
+      {{ content.field_card }}
+    </div>
+  </div>
+{% endblock %}
+</section>

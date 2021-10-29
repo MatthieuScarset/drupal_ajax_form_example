@@ -121,6 +121,7 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
           }
 
           // aggrégation des options dans le tableau des langues
+          $empty_element = null;
           foreach ($element['#options'] AS $key => $value) {
             if (is_int($key)) {
               $term = \Drupal\taxonomy\Entity\Term::load($key);
@@ -157,8 +158,13 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
                 }
               }
             }
+            else{
+              //cas du _none pour les selects (option vide)
+              $empty_element = ['key' => $key,
+                              'value' => $value
+                              ];
+            }
           }
-
           // nettoyage des éléments vides
           foreach ($languages AS $language) {
             if (empty($new_select_options[strtoupper($language->getId())])) {
@@ -177,13 +183,17 @@ function oab_user_access_rights_field_widget_options_select_form_alter(&$element
               }
             }
           }
-
+          $final_options = [];
+          if(!empty($empty_element)){
+            $final_options[$empty_element['key']] = $empty_element['value'];
+          }
           if (!empty($new_select_options_flatten)) {
-            $element['#options'] = $new_select_options_flatten;
+            $final_options += $new_select_options_flatten;
           }
           else {
-            $element['#options'] = $new_select_options;
+            $final_options += $new_select_options;
           }
+          $element['#options'] = $final_options;
         }
       }
     }

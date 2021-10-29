@@ -1,0 +1,75 @@
+<?php
+
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_icomoon_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if ($form_id == 'taxonomy_term_product_categories_form') {
+    //pour ajouter le lien Browse available tokens
+    $form["field_icon"][0]['token_tree'] = array(
+      '#theme' => 'token_tree_link',
+      '#token_types' => array('icomoon'),
+      '#weight' => 90,
+      '#global_types' => FALSE,
+      '#click_insert' => TRUE,
+    );
+  }
+}
+
+/*
+* implement hook_token_info()
+*/
+function oab_icomoon_token_info() {
+  $types = [];
+  $tokens = [];
+
+  $types['icomoon'] = array(
+    'name' => t('Icomoon tokens type'),
+    'description' => t('Token type designed for icomoon')
+  );
+
+  $icones = getIcomoonIconsNames();
+  foreach ($icones as $icone){
+    $tokens['icomoon']['icomoon-'.$icone] = array(
+      'name' => $icone,
+      'description' => t("<span class=\"text-primary icon icomoon @iconName\"></span>", array('@iconName' => 'icomoon-'.$icone))
+    );
+  }
+
+  return array(
+    'types' => $types,
+    'tokens' => $tokens
+  );
+}
+/*
+* implement hook_token()
+*/
+function oab_icomoon_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+  // Replacement values for tokens that can be calculated without any additional
+  // data.
+  if ($type == 'icomoon') {
+    foreach ($tokens as $name => $original) {
+      $replacements[$original] = $name;
+    }
+  }
+  // An array of replacement values keyed by original token string.
+  return $replacements;
+}
+
+function getIcomoonIconsNames(){
+  $names = [];
+  $path_to_json_file = drupal_get_path('module', 'oab_icomoon') . '/icomoon/selection.json';
+  $datas = json_decode(file_get_contents($path_to_json_file), true);
+
+  foreach ($datas['icons'] as $data){
+    if(isset($data['properties']['name'])) {
+      $names[] = $data['properties']['name'];
+    }
+  }
+  return $names;
+}

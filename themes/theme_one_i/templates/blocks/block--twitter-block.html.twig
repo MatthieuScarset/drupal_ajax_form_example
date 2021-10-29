@@ -1,0 +1,14 @@
+<section {{ attributes.addClass('block', 'clearfix', 'twitter-block') }}>
+
+    {% if content.tweets and content.tweets is iterable and content.tweets|length > 0 %}
+        <div id="twitter-block-carousel">
+            <div class="carousel-inner">
+                {% for key, tweet in content.tweets %}
+                    <div class="item {% if key == 0 %}active{% endif %}">
+                        {{ tweet|raw }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>

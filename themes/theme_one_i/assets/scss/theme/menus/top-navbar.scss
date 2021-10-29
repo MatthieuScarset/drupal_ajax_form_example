@@ -1,0 +1,24 @@
+ .navbar.supra {
+    .navbar-en {
+      background-color: black;
+      color: white;
+      left: 0;
+
+      &:hover {
+        color: $orange1;
+      }
+      .list_items {
+        list-style: none;
+      }
+    }
+
+   .navbar-fr {
+     a[role="menuitem"]::before {
+       display: none;
+     }
+   }
+  }
+
+ .dropdown-toggle::after {
+   display: none
+ }

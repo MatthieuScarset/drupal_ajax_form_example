@@ -161,6 +161,30 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 
 }
 
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function oab_backoffice_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  if ($element['#paragraph_type'] === 'contact_button_item') {
+
+    $element['subform']['phone_number'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Phone Number'),
+      '#states' =>  [
+        'visible' => [
+          ':input[name="field_card[' . $element['subform']['#parents'][1]  . '][subform][field_cb_item_type][value]"]' => ['checked' => TRUE],
+        ]
+      ],
+      '#weight' => 500,
+      'field_cb_item_phone_desc' => $element['subform']['field_cb_item_phone_desc'],
+      'field_cb_item_phone_nb' => $element['subform']['field_cb_item_phone_nb']
+    ];
+
+    unset($element['subform']['field_cb_item_phone_desc']);
+    unset($element['subform']['field_cb_item_phone_nb']);
+  }
+}
+
 function oab_backoffice_form_user_pass_alter(&$form) {
     $form['#validate'][] = '_oab_backoffice_form_user_pass_form_validate';
 }

@@ -1,0 +1,6 @@
+oab_bvpn_import.csp_import:
+  title: CSP Import (BVPN)
+  route_name: oab_bvpn_import.csp_import
+  parent: oab.settings
+  description: 'Import CSP data from CSV file'
+  weight: -20

@@ -1,0 +1,14 @@
+
+{# Je recupère la couleur du background définie par l'utilisateur#}
+{% set bgColor = content.field_p_wysiwyg_rebond_color["#items"].0.getValue.value %}
+{% set border = "" %}
+
+{% if bgColor == '#fff' %}
+    {% set border = "border: 1px solid black" %}
+{% endif %}
+
+{% if content.field_p_rebond_wysiwyg_contenu.0|render|striptags  %}
+    <article style="background-color: {{ bgColor }}; {{ border }}">
+        {{ content.field_p_rebond_wysiwyg_contenu.0 }}
+    </article>
+{% endif %}

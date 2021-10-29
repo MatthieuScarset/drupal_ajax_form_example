@@ -1,0 +1,151 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ *
+ * @ingroup templates
+ */
+#}
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+  ]
+%}
+{% if content %}
+
+<div class="site-width container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            {#Begin Footer Social Bar#}
+            <div class="o-footer-top">
+                <div class="row">
+                    <div class="col-12">
+                      {{ elements.theme_one_i_footersocialblock }}
+                    </div>
+                </div>
+            </div>
+            <div class="o-footer-body d-none d-lg-block">
+                {% if elements.theme_one_i_footeren %}
+                    {{ elements.theme_one_i_footeren }}
+                {% endif %}
+                {% if elements.theme_one_i_footerfr %}
+                    {{ elements.theme_one_i_footerfr }}
+                {% endif %}
+                {% if elements.theme_one_i_footerru %}
+                    {{ elements.theme_one_i_footerru }}
+                {% endif %}
+                {% if elements.theme_one_i_footerruen %}
+                    {{ elements.theme_one_i_footerruen }}
+                {% endif %}
+                {% if elements.theme_one_i_footerbr %}
+                    {{ elements.theme_one_i_footerbr }}
+                {% endif %}
+                {% if elements.theme_one_i_footeres %}
+                    {{ elements.theme_one_i_footeres }}
+                {% endif %}
+            </div>
+            <div class="o-footer-bottom">
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en ru, y a pas de menu finalement...; #}
+                {% if elements.theme_one_i_bottomfooterbaren %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbaren %}
+                {% endif %}
+                {% if elements.theme_one_i_bottomfooterbarfr %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbarfr %}
+                {% endif %}
+                {% if elements.theme_one_i_bottomfooterbarru %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbarru %}
+                {% endif %}
+                {% if elements.theme_one_i_bottomfooterbarruen %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbarruen %}
+                {% endif %}
+                {% if elements.theme_one_i_bottomfooterbares %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbares %}
+                {% endif %}
+                {% if elements.theme_one_i_bottomfooterbarbr %}
+                  {% set bottomfooterbar = elements.theme_one_i_bottomfooterbarbr %}
+                {% endif %}
+                {% if bottomfooterbar["#markup"]|render|trim is empty %}
+                  {% set classSupp = "d-none" %}
+                {% endif %}
+                <div class="{{ classSupp }}">
+                    {{ bottomfooterbar }}
+                </div>
+
+                {# GESTION SI LE CONTENU EST VIDE (par exemple, en en, y a pas de menu finalement...; #}
+                {% if elements.theme_one_i_topnavbaren_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbaren_2 %}
+                {% endif %}
+                {% if elements.theme_one_i_topnavbarfr_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbarfr_2 %}
+                {% endif %}
+                {% if elements.theme_one_i_topnavbarru_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbarru_2 %}
+                {% endif %}
+                {% if elements.theme_one_i_topnavbarruen_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbarruen_2 %}
+                {% endif %}
+                {% if elements.theme_one_i_topnavbares_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbares_2 %}
+                {% endif %}
+                {% if elements.theme_one_i_topnavbarbr_2 %}
+                  {% set topnavbar_2 = elements.theme_one_i_topnavbarbr_2 %}
+                {% endif %}
+                {% if topnavbar_2["#markup"]|render|trim is empty %}
+                  {% set classSupp_topnavbar = "d-none" %}
+                {% endif %}
+                <div class="d-lg-none footer-div-border {{ classSupp_topnavbar }}">
+                    <div id="login_block" >
+                        {#Render the top navbar items#}
+                        {{ topnavbar_2 }}
+                    </div>
+                </div>
+
+                {# GESTION SI LE CONTENU EST VIDE  #}
+                {% set toprightnavbar_footer = 0 %}
+                {% if elements.theme_one_i_toprightnavbarfooteren %}
+                  {% set toprightnavbar_footer = elements.theme_one_i_toprightnavbarfooteren %}
+                {% endif %}
+                {% if elements.theme_one_i_toprightnavbarfooterfr %}
+                  {% set toprightnavbar_footer = elements.theme_one_i_toprightnavbarfooterfr %}
+                {% endif %}
+                {% if elements.theme_one_i_toprightnavbarfooterru %}
+                  {% set toprightnavbar_footer = elements.theme_one_i_toprightnavbarfooterru %}
+                {% endif %}
+                {% if elements.theme_one_i_toprightnavbarfooterruen %}
+                  {% set toprightnavbar_footer = elements.toprightnavbarfooterruen %}
+                {% endif %}
+                {% if elements.theme_one_i_toprightnavbarfooteres %}
+                  {% set toprightnavbar_footer = elements.theme_one_i_toprightnavbarfooteres %}
+                {% endif %}
+                {% if elements.theme_one_i_toprightnavbarfooterbr %}
+                  {% set toprightnavbar_footer = elements.theme_one_i_toprightnavbarfooterbr %}
+                {% endif %}
+                {% if toprightnavbar_footer["#markup"]|render|trim is empty %}
+                  {% set classSupp_topnavbarfooter = "d-none" %}
+                {% endif %}
+                <div class="d-lg-none footer-div-border {{ classSupp_topnavbarfooter }}">
+                    <div id="rightnavbar_footerblock">
+                        {{ toprightnavbar_footer }}
+                    </div>
+                </div>
+
+                <div class="d-lg-none footer-div-border">
+                    <ul class="nav">
+                        <li class="nav-item"><span class="nav-link">© Orange Business Services {{ "now"|date("Y") }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}

@@ -1,0 +1,23 @@
+{% block paragraph %}
+  {% set link_target = content.field_cb_item_link.0['#title'] %}
+  {% set link_icon = content.field_cb_item_icon.0['#context']['value'] %}
+
+{#  {{ kint_t(content) }}#}
+
+<div class="p-1 w-100 border-bottom">
+  <div class="d-flex text-left">
+    <span class="icon icomoon {{ link_icon }} pr-1 contact-item-icon" aria-hidden="true"></span>
+    <span class="font-weight-bold pb-1">{{ content.field_cb_item_title }}</span>
+  </div>
+  <div class="d-flex text-left">
+    <a class="contact-item-descr font-weight-bolder o-link no-decoration w-100" href="{{ link_target }}">{{ content.field_cb_item_desc }}</a>
+    <span class="o-link-arrow align-self-end mb-2 mr-2"></span>
+  </div>
+  {% if content.field_cb_item_type.0['#markup'] is not same as(0) %}
+    <div class="d-flex flex-column text-left">
+      <span class="contact-item-descr my-1">{{ content.field_cb_item_phone_desc }}</span>
+      {{ content.field_cb_item_phone_nb }}
+    </div>
+  {% endif %}
+</div>
+{% endblock paragraph %}

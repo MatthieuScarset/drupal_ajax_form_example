@@ -1,0 +1,341 @@
+<?php
+
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\Core\Template\Attribute;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\oab_dvi\DviHelper;
+use Drupal\oab_subhomes\Entity\SubhomeEntity;
+use Drupal\taxonomy\Entity\Term;
+
+
+/*****************************************/
+/*** Theme One-i Preprocess HOOK Alter ***/
+/*****************************************/
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ * @param $variables
+ */
+function theme_one_i_preprocess_html(&$variables) {
+  global $config;
+
+
+  $c = Drupal::config("oab.version");
+  $version = $c->get('value');
+  if(!isset($config['header_env'])){
+    $config['header_env'] = "";
+  }
+
+  $variables['header_env'] = $config['header_env'];
+  $variables['oab_version'] = ' - '.$version;
+
+  //RUBYPORTAILOBS-3317
+  //gestion des canonical url pour les contenu hub
+  $node = Drupal::routeMatch()->getParameter('node');
+  if(isset($node) && $node<>"" && is_object($node)){
+
+    $nid = $node->id();
+    $language = Drupal::languageManager()->getCurrentLanguage()->getId();
+    //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
+    $current_path_alias = Drupal::service('path.alias_manager')->getAliasByPath(Drupal::service('path.current')->getPath());
+    $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
+  }
+}
+
+function theme_one_i_preprocess_region(&$variables) {
+  // Create the $content variable that templates expect.
+  $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+}
+
+/*****************************************/
+/*** Theme One-i Suggestion HOOK Alter ***/
+/*****************************************/
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * @param array $suggestions
+ * @param array $variables
+ * @param $hook
+ */
+function theme_one_i_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  $actual_route = Drupal::routeMatch();
+  $actual_route_name = $actual_route->getRouteName();
+
+  ## Si on est dans la subhome Analystes
+  ## et qu'on veut afficher un node (qui est donc en mode d'affichage Subhome)
+  if( $actual_route_name === "view.subhomes.page_analysts"
+    && (isset($variables['theme_hook_original']) && $variables['theme_hook_original'] == "node" )
+    && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+    //Si on fait l'affichage d'un node en mode "subhome"
+  ) {
+    $suggestions = ['node__analysts__subhome'];
+  }
+
+  if ($actual_route_name === "views.ajax" && $variables['theme_hook_original'] == "node"
+    && ( isset($variables['elements']["#view_mode"]) && $variables['elements']['#view_mode'] == "subhome" )
+  ){
+    // Getting the referer.
+    $request = Drupal::request();
+    $referer = $request->headers->get('referer');
+    // Getting the base url.
+    $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
+    // Getting the alias or the relative path.
+    $alias = substr($referer, strlen($base_url));
+    $url_object = Drupal::service('path.validator')->getUrlIfValid($alias);
+    // Getting route name from referer
+    $referer_route_name = $url_object->getRouteName();
+
+    if($referer_route_name=="view.subhomes.page_analysts"){
+      $suggestions = ['node__analysts__subhome'];
+    }
+
+  }
+
+  if (isset($variables['element']['#name']) && $variables['element']['#name'] == 'field_insight_type_target_id') {
+    $suggestions[] = $hook . '__' . 'field_insight_type';
+  }
+
+  if (isset($variables['view'])) {
+    $view = $variables['view'];
+    $suggestions[] = $hook . '__' . $view->id();
+    $suggestions[] = $hook . '__' . $view->id() . '__' . $view->current_display;
+
+    /**
+     * @var Drupal\views\ViewExecutable $view
+     * @var SubhomeEntity $entity
+     */
+
+    if (preg_match('/^subhomes/', $view->id()) && isset ($view->argument['field_subhome_target_id'])) {
+      $sid = $view->argument['field_subhome_target_id']->value;
+      $entity = SubhomeEntity::loadBySubhomeId($sid);
+
+      // Si on a trouvé une entité pour la subhome, on la load et on la passe à la vue
+      if ($entity !== null && $view->current_display !== "news") {
+        $suggestions[] = $hook . '__' . $view->id() . '__' . $entity->bundle();
+      }
+
+    }
+
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ *
+ * @param array $suggestions
+ * @param array $variables
+ */
+function theme_one_i_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'form__' . $variables['element']['#form_id'];
+  return $suggestions;
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for node templates.
+ *
+ * Pour le mode d'affichage tuiles, on crée un nouveau template "node--tile--Insight-type-term"
+ * @param array $suggestions
+ * @param array $variables
+ */
+function theme_one_i_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /** @var Node $node */
+  $node = $variables['elements']['#node'];
+  if ($node->hasField('field_insight_type')
+    && !empty($node->view) && $node->view->storage->id()) {
+
+    $field = $node->get('field_insight_type')->getValue();
+    if (
+      isset($field[0]['target_id'])
+      && $node->view->storage->id() == 'business_insight' && $node->view->current_display == "business_insight_page") {
+
+      $insight_type_term = Term::load($field[0]['target_id']);
+
+      if (!empty($insight_type_term)) {
+        $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+        $insight_type_label = Drupal::transliteration()->transliterate($insight_type_term->label(), LanguageInterface::LANGCODE_DEFAULT, '_');
+        $insight_type_label = mb_strtolower($insight_type_label);
+        $insight_type_label = preg_replace('@[^a-z0-9_.]+@', '_', $insight_type_label);
+
+        $suggestions[] = 'node__' . $sanitized_view_mode . '__' . mb_strtolower($insight_type_label);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ *
+ * @param array $suggestions
+ * @param array $variables
+ */
+function theme_one_i_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+  $element = $variables['element'];
+  $suggestions[] = 'field__' . $element['#entity_type'] . '__' . $element['#field_name'] . '__' . $element['#bundle'] . '__' . $element['#view_mode'];
+  return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for html document templates.
+ * @param array $suggestions
+ * @param $hook
+ */
+function theme_one_i_theme_suggestions_html_alter(array &$suggestions, $variables, $hook) {
+  $node = Drupal::routeMatch()->getParameter('node');
+  if (NULL !== $node && $node instanceof NodeInterface) {
+    if ($node->bundle() == 'homepage') {
+      $suggestions[] = $hook . '__' . $node->bundle();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for view templates.
+ * @param array $suggestions
+ * @param array $variables
+ * @param $hook
+ */
+function theme_one_i_theme_suggestions_view_alter(array &$suggestions, array $variables, $hook) {
+
+  /**
+   * Homepage Eclairage View Grid Twig Template Suggestions
+   */
+  // Firstly check it's a view
+  if($hook === 'views_view') {
+    // Check if it's the 'home_eclairage_playlist' view
+    if($variables['view']->id() === 'home_eclairage_playlist') {
+      if($hook === 'views_view_grid') {
+
+        $suggestions[] = 'views_view_grid__home_eclairage_playlist';
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ * @param array $suggestions
+ */
+function theme_one_i_theme_suggestions_page_alter(array &$suggestions) {
+  if ($node = Drupal::routeMatch()->getParameter('node')) {
+    if (is_object($node)) {
+      $content_type = $node->bundle();
+      $suggestions[] = 'page__' . $content_type;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ * @param array $suggestions
+ */
+function theme_one_i_theme_suggestions_block_alter(array &$suggestions, $variables) {
+  if ($variables['elements']['#base_plugin_id'] === 'block_content' && isset($variables['elements']['content']['#block_content'])) {
+    /** @var BlockContent $block */
+    $block = $variables['elements']['content']['#block_content'];
+    if (is_object($block)) {
+      $block_type = $block->bundle();
+      $suggestions[] = 'block__' . $block_type;
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page title templates.
+ * @param array $suggestions
+ * @param $hook
+ * @return array
+ */
+function theme_one_i_theme_suggestions_page_title_alter(array &$suggestions, $variables, $hook) {
+
+  /** @var NodeInterface $node */
+  if ($node = Drupal::routeMatch()->getParameter('node')) {
+    $suggestions[] = $hook . '__node';
+    $suggestions[] = $hook . '__node__' . $node->bundle();
+  }
+  return $suggestions;
+}
+
+/**
+ * Get the set or default image uri for a file image field (if either exist).
+ * @param $entity
+ * @param $fieldName
+ * @return null|string
+ */
+function get_image_uri($entity, $fieldName){
+  $image_uri = NULL;
+  if($entity->hasField($fieldName)){
+    try{
+      $field = $entity->{$fieldName}; // Try loading from field values first.
+      if($field && $field->target_id){
+        $file = File::load($field->target_id);
+        if($file){
+          $image_uri = $file->getFileUri();
+        }
+      }
+    } catch(Exception $e){
+      Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+    }
+    // If a set value above wasn't found, try the default image.
+    if(is_null($image_uri)){
+      try{
+        $field = $entity->get($fieldName); // Loading from field definition
+        if($field){
+          // From the image module /core/modules/image/ImageFormatterBase.php
+          // $default_image = $test->fieldDefinition->getFieldStorageDefinition()->getSetting('default_image');
+          $default_image = $field->getSetting('default_image');
+          if($default_image && $default_image['uuid']){
+            // $defaultImageFile = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']));
+            // See https://www.drupal.org/node/2549139  entityManager is deprecated.
+            // Use entity.repository instead.
+            $entityrepository = Drupal::service('entity.repository');
+            $defaultImageFile = $entityrepository->loadEntityByUuid('file', $default_image['uuid']);
+            if($defaultImageFile){
+              $image_uri = $defaultImageFile->getFileUri();
+            }
+          }
+        }
+      } catch(Exception $e){
+        Drupal::logger('get_image_uri')->notice($e->getMessage(), []);
+      }
+    }
+  }
+  return $image_uri;
+}
+
+
+/**
+ * Implements hook_theme_suggestions_taxonomy_term_alter().
+ */
+function theme_one_i_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  // Add view mode theme suggestions.
+  $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+
+function theme_one_i_preprocess_page(&$variables)
+{
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  $hide_title_block = FALSE;
+
+  if (preg_match('/^view.category_page/', $route_name)) {
+    //dans la page categorie, on a un block spécial pour gérer le titre de la page
+    $hide_title_block = TRUE;
+  }
+
+  //On cache le block Page Title
+  if ($hide_title_block) {
+    $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
+  }
+}

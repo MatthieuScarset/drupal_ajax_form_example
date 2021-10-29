@@ -1,0 +1,268 @@
+{#
+/**
+* @file
+* Theme override to display a node.
+*
+* Available variables:
+* - node: The node entity with limited access to object properties and methods.
+Only "getter" methods (method names starting with "get", "has", or "is")
+and a few common methods such as "id" and "label" are available. Calling
+other methods (such as node.delete) will result in an exception.
+* - label: The title of the node.
+* - content: All node items. Use {{ content }} to print them all,
+*   or print a subset such as {{ content.field_example }}. Use
+*   {{ content|without('field_example') }} to temporarily suppress the printing
+*   of a given child element.
+* - author_picture: The node author user entity, rendered using the "compact"
+*   view mode.
+* - metadata: Metadata for this node.
+* - date: Themed creation date field.
+* - author_name: Themed author name field.
+* - url: Direct URL of the current node.
+* - display_submitted: Whether submission information should be displayed.
+* - attributes: HTML attributes for the containing element.
+*   The attributes.class element may contain one or more of the following
+*   classes:
+*   - node: The current template type (also known as a "theming hook").
+*   - node--type-[type]: The current node type. For example, if the node is an
+*     "Article" it would result in "node--type-article". Note that the machine
+*     name will often be in a short form of the human readable label.
+*   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+*     teaser would result in: "node--view-mode-teaser", and
+*     full: "node--view-mode-full".
+*   The following are controlled through the node publishing options.
+*   - node--promoted: Appears on nodes promoted to the front page.
+*   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+*     teaser listings.
+*   - node--unpublished: Appears on unpublished nodes visible only to site
+*     admins.
+* - title_attributes: Same as attributes, except applied to the main title
+*   tag that appears in the template.
+* - content_attributes: Same as attributes, except applied to the main
+*   content tag that appears in the template.
+* - author_attributes: Same as attributes, except applied to the author of
+*   the node tag that appears in the template.
+* - title_prefix: Additional output populated by modules, intended to be
+*   displayed in front of the main title tag that appears in the template.
+* - title_suffix: Additional output populated by modules, intended to be
+*   displayed after the main title tag that appears in the template.
+* - view_mode: View mode; for example, "teaser" or "full".
+* - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+* - page: Flag for the full page state. Will be true if view_mode is 'full'.
+* - readmore: Flag for more state. Will be true if the teaser content of the
+*   node cannot hold the main body content.
+* - logged_in: Flag for authenticated user status. Will be true when the
+*   current user is a logged-in member.
+* - is_admin: Flag for admin user status. Will be true when the current user
+*   is an administrator.
+*
+* @ingroup templates
+*
+* @see template_preprocess_node()
+*
+* @todo Remove the id attribute (or make it a class), because if that gets
+*   rendered twice on a page this is invalid CSS for example: two lists
+*   in different view modes.
+*/
+#}
+{%
+set classes = [
+'node',
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+]
+%}
+
+{% set lang = node.get('langcode').getValue()[0].value %}
+
+<article{{ attributes.addClass(classes) }} xmlns="http://www.w3.org/1999/html">
+    {{ title_suffix }}
+    {{ title_prefix }}
+    <div{{ content_attributes.addClass('content') }}>
+
+        <div class="col-md-12 home_thematic_nopadding">
+                <div class="col-md-6 col-lg-6 home_thematic_nopadding">
+                    <div class="home_thematic_navigationZone bg_greyblack">
+                        <span class="glyphicon icon-arrow-previous" aria-hidden="true"> </span>
+                        {{ content.field_navigation_link }}
+                    </div>
+                    <div class="home_thematic_textZone bg_grey">
+                        <div class="col-md-12 home_thematic_nopadding">
+                            <div class="col-md-5 home_thematic_nopadding home_thematic_textZoneTitle">
+                                {{ label }}
+                                {% include 'themes/theme_boosted/templates/nodes/socialbar.html.twig' %}
+                            </div>
+                            <div class="col-md-7 home_thematic_textZoneTxt">
+                                {{ content.field_text_zone }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {# DESKTOP #}
+                <div class="col-md-6 col-lg-6 hidden-sm hidden-xs home_thematic_nopadding">
+                    {# DESKTOP IMAGE #}
+                    <a class="home_banner_element_link" href="{{ content.field_banner_link[0]['#url'] }}">
+                        <div class="home_thematic_banner_desktop" style="background:url('{{ file_url(content.field_desktop_image['#items'].entity.uri.value) }}');">
+                            <div class="home_banner_first_bottom_container col-md-12">
+                                <!-- Left container / date-->
+                                <div class="col-md-1 home_banner_first_bottom_left_container">
+                                    <!-- Date -->
+                                    <div class="home_banner_first_date">
+                                        {% if (lang == 'fr') %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% else %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- Right container/ title -->
+                                <div class="col-md-10 home_banner_first_bottom_right_container" style="color: {{ content.field_text_color.0 }};">
+                                    <p class="home_banner_title">
+                                        {{ content.field_banner_image_title.0 }}
+                                    </p>
+                                    <p class="home_banner_first_nameFunction">
+                                       {% if content.field_funct.0 %} {{ content.field_name.0 }} | {{ content.field_funct.0 }}
+                                        {% else %}
+                                           {{ content.field_funct.0 }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {# MOBILE #}
+                <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_thematic_nopadding">
+                    {# DESKTOP IMAGE #}
+                    <a class="home_banner_element_link" href="{{ content.field_banner_link[0]['#url'] }}">
+                        <div class="home_thematic_banner_mobile" style="background:url('{{ file_url(content.field_mobile_image['#items'].entity.uri.value) }}'); background-repeat: no-repeat;">
+                            <div class="home_banner_first_bottom_container_mobile">
+                                <!-- Left container / date-->
+                                <div class="col-xs-12 col-sm-12 align-left">
+                                    <!-- Date -->
+                                    <div class="home_banner_first_date">
+                                        {% if (lang == 'fr') %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('d') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('m') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% else %}
+                                            {% set date = content.field_date[0]['#attributes']['datetime'] | date('m') %}
+                                            {{ date | trim }}<br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('d') }} <br>
+                                            {{ content.field_date[0]['#attributes']['datetime'] | date('y') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- Right container/ title -->
+                                <div class="col-xs-12 col-sm-12" style="color: {{ content.field_text_color.0 }};">
+                                    <p class="home_banner_title_mobile">
+                                        {{ content.field_banner_image_title.0 }}
+                                    </p>
+                                    <p class="home_banner_first_nameFunction">
+                                        {{ content.field_name.0 }} | {{ content.field_funct.0 }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+        <br/>
+        {# THEMATIQUE COLUMNS A LA UNE #}
+        <div class="home_thematic_columns hidden-xs hidden-sm">
+        <div class="container">
+           <div class="row">
+                <div class="col-md-12 col-lg-12 hidden-xs hidden-sm home_thematic_section">
+                    <div class="home_thematic_columns_title">
+                        {{ content.field_grouping_title.0 }}
+                     </div>
+
+                    {% for key, value in content.field_home_thematic_columns if key|first != '#'  %}
+                        <div class="col-md-4 col-xs-12 col-sm-12 ">
+                            {{ value }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        </div>
+        <br/>
+
+
+        {# THEMATIQUE COLUMNS MOBILE #}
+        <div class="container">
+            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg" >
+                <div class="home_thematic_columns_title">
+                    {{ content.field_grouping_title.0 }}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg home_banner_no_padding" >
+               {# <div class="swiper-container-columns">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        {% for key, value in content.field_home_thematic_columns if key|first != '#'  %}
+                            <div class="swiper-slide">
+                                {{ value }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div> #}
+
+
+                <!-- Slides -->
+                <div class="home-thematic-columns-items">
+                {% for key, value in content.field_home_thematic_columns if key|first != '#'  %}
+                        {{ value }}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    {# ZONE THEMATIQUE AUTOMATIQUE #}
+
+
+
+        <div class="home_thematic_automatic ">
+
+            <div class="row">
+                <div class="col-md-12 col-lg-12 home_banner_no_padding">
+                    <div class="home_thematic_automatic_title container">
+                       {{ content.field_header_title }}
+                    </div><br/>
+                    {{ oab_drupal_view('page_thematique', 'block_1', content.field_insight[0]['#options'].entity.id()) }}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+</article>

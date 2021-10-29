@@ -1,0 +1,130 @@
+
+
+section.block.contact-button-block {
+  position: fixed;
+  bottom: 0.25rem;
+  right: 1rem;
+  z-index: 2001;
+
+  &.move-left {
+    right: 4rem;
+  }
+  #contactButtonDropdown {
+    background-color: $gray1;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+
+    .contact-button-text {
+      color: $white;
+
+      &.is-clicked {
+        display: none;
+      }
+      span {
+        font-size: 0.8rem;
+      }
+    }
+    .contact-button-icon {
+      font-size: 2rem;
+      color: $primary;
+
+      //cette icone est plus grosse que les autres et donc a besoin d'être rétrécie
+      &.icomoon-ob1-cross {
+        font-size: 1rem;
+        margin: 0 0.7rem;
+      }
+    }
+    .contact-button {
+      padding: 0.5rem 0.5rem 0.3rem;
+      background-color: $white;
+    }
+    .contact-button-open {
+      padding: 1rem 0.3rem 0.8rem 0.3rem;
+      background-color: #f16e00;
+      &:hover {
+        background-color: $gray1;
+      }
+      &:active {
+        background-color: #f16e00;
+      }
+    }
+    &:hover {
+      background-color: $gray3;
+
+      .contact-button-icon {
+        color: $gray3;
+      }
+    }
+    &:active {
+      background-color: $primary;
+
+      .contact-button-icon {
+        color: $primary;
+      }
+    }
+
+  }
+  .dropdown-menu  {
+    width: 21rem;
+    margin-bottom: 1rem;
+    z-index: 2002;
+
+    .contact-item-icon {
+      font-size: 1.25rem;
+    }
+    .contact-item-descr {
+      font-size: 0.8rem;
+      line-height: 1.5;
+
+      &:hover, &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  section.block.contact-button-block {
+    bottom: 0.75rem;
+
+    #contactButtonDropdown {
+      .contact-button-icon {
+        font-size: 2.5rem;
+
+        &.icomoon-ob1-cross {
+          font-size: 1rem;
+          margin: 0 0.7rem;
+        }
+      }
+
+      .contact-button {
+        padding: 0.8rem 0.75rem 0.5rem
+      }
+
+      .contact-button-open {
+        padding: 1.4rem 0.7rem 1.1rem 0.7rem;
+      }
+    }
+
+    &.move-left {
+      right: 5.3rem;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  section.block.contact-button-block {
+    bottom: 2.5rem;
+
+    #contactButtonDropdown {
+      .contact-button {
+        padding: 0.7rem 0.75rem 0.5rem
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(xxl) {
+  section.block.contact-button-block {
+    bottom: 3.75rem;
+  }
+}
