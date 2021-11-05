@@ -1,0 +1,37 @@
+uuid: 5c9c5349-d1db-4d0c-bda5-9c04be5c7634
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: theme_one_i_zonerebondwysiwyg
+theme: theme_one_i
+region: sidebar
+weight: -36
+provider: null
+plugin: zone_rebond_wysiwyg_block
+settings:
+  id: zone_rebond_wysiwyg_block
+  label: 'Zone rebond: WYSIWYG'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      customer_story: customer_story
+      magazine: magazine
+      partner: partner
+      press_release: press_release
+      product: product
+      simple_page: simple_page
+      webform: webform
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

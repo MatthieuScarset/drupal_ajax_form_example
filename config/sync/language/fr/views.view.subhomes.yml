@@ -12,7 +12,6 @@ display:
           content:
             value: "<h2>[view:title]</h2>\r\n"
             format: full_html
-      title: 'Communiqués de presse'
   page_catalogue:
     display_options:
       title: Produits
@@ -46,11 +45,52 @@ display:
   page_analysts:
     display_title: analystes
   news:
-    display_title: Actualités
     display_options:
       header:
         area:
           content:
             value: "<h2>[view:title]</h2>\r\n"
             format: full_html
-      title: Actualités
+  page_achievements_iot:
+    display_title: 'Réalisations IoT'
+    display_options:
+      title: 'Réalisation IoT'
+      exposed_form:
+        options:
+          submit_button: Filtrer
+          reset_button_label: Effacer
+      filters:
+        field_industry_target_id:
+          expose:
+            label: 'Secteur d''activité'
+        field_job_profile_target_id:
+          expose:
+            label: 'Pôles métiers'
+        field_product_type_target_id:
+          expose:
+            label: 'Typologie de produit'
+        field_product_use_case_target_id:
+          expose:
+            label: Usage
+  page_iot_products:
+    display_title: 'Produits IoT'
+    display_options:
+      title: 'Produits IoT'
+      exposed_form:
+        options:
+          submit_button: Filtrer
+          reset_button_label: Effacer
+          exposed_sorts_label: 'Trier par'
+      filters:
+        field_industry_target_id:
+          expose:
+            label: 'Secteur d''activité'
+        field_job_profile_target_id:
+          expose:
+            label: 'Pôles métiers'
+        field_product_type_target_id:
+          expose:
+            label: 'Typologie de produit'
+        field_product_use_case_target_id:
+          expose:
+            label: Usage

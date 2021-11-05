@@ -26,6 +26,8 @@ dependencies:
     - field.field.node.customer_story.field_p_wysiwyg_rebond
     - field.field.node.customer_story.field_page_du_site_1
     - field.field.node.customer_story.field_page_du_site_2
+    - field.field.node.customer_story.field_product_type
+    - field.field.node.customer_story.field_product_use_case
     - field.field.node.customer_story.field_rebond_document
     - field.field.node.customer_story.field_region
     - field.field.node.customer_story.field_solution
@@ -66,7 +68,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
-      region: content
     group_write:
       children:
         - langcode
@@ -89,7 +90,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
-      region: content
     group_classify:
       children:
         - field_subhome
@@ -100,6 +100,8 @@ third_party_settings:
         - field_job_profile
         - field_insight
         - field_insight_type
+        - field_product_type
+        - field_product_use_case
         - field_hub
         - field_hub_portal
       parent_name: group_onglets
@@ -112,7 +114,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
-      region: content
     group_publish:
       children:
         - field_content_owner
@@ -131,7 +132,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publish
-      region: content
     group_content_worthy_period:
       children:
         - field_start_date
@@ -145,7 +145,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Content worthy period'
-      region: content
     group_seo:
       children:
         - field_meta_title
@@ -160,7 +159,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
-      region: content
     group_rebond:
       children:
         - field_rebond_document
@@ -177,7 +175,6 @@ third_party_settings:
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
       label: Rebond
-      region: content
     group_visual:
       children:
         - field_visual_tile
@@ -192,7 +189,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Visual
-      region: content
 id: node.customer_story.default
 targetEntityType: node
 bundle: customer_story
@@ -273,13 +269,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 9
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 10
+    weight: 12
     settings:
       display_label: true
     third_party_settings: {  }
@@ -371,6 +367,18 @@ content:
       placeholder: ''
       match_limit: 10
     third_party_settings: {  }
+  field_product_type:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_product_use_case:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
   field_rebond_document:
     type: entity_reference_autocomplete
     weight: 0

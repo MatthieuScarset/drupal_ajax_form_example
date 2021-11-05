@@ -5,6 +5,8 @@ dependencies:
   config:
     - entity_browser.browser.browse_media_modal
     - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_badge
+    - field.field.node.product.field_call_to_action
     - field.field.node.product.field_content
     - field.field.node.product.field_content_owner
     - field.field.node.product.field_email_owner
@@ -20,22 +22,29 @@ dependencies:
     - field.field.node.product.field_insight_type
     - field.field.node.product.field_is_dvi_product
     - field.field.node.product.field_job_profile
+    - field.field.node.product.field_key_points
     - field.field.node.product.field_market_segment
     - field.field.node.product.field_market_segment_dvi
     - field.field.node.product.field_meta_description
     - field.field.node.product.field_meta_title
     - field.field.node.product.field_metatags
     - field.field.node.product.field_p_wysiwyg_rebond
+    - field.field.node.product.field_product_category
+    - field.field.node.product.field_product_name
+    - field.field.node.product.field_product_type
+    - field.field.node.product.field_product_use_case
     - field.field.node.product.field_region
     - field.field.node.product.field_solution
     - field.field.node.product.field_start_date
     - field.field.node.product.field_sub_family
     - field.field.node.product.field_subhome
+    - field.field.node.product.field_teaser
     - field.field.node.product.field_test_showroom
     - field.field.node.product.field_top_zone
     - field.field.node.product.field_top_zone_background
     - field.field.node.product.field_top_zone_bg_mobile
     - field.field.node.product.field_try_and_buy
+    - field.field.node.product.field_use_theme_ob1
     - field.field.node.product.field_visual
     - field.field.node.product.field_visual_tile
     - field.field.node.product.moderation_state_update
@@ -45,6 +54,7 @@ dependencies:
     - entity_browser
     - field_group
     - metatag
+    - oab_backoffice
     - paragraphs
     - path
     - text
@@ -59,6 +69,7 @@ third_party_settings:
         - group_classify
         - group_seo
         - group_publish
+        - group_category_page
       parent_name: ''
       weight: 0
       format_type: tabs
@@ -67,7 +78,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
-      region: content
     group_write:
       children:
         - langcode
@@ -89,7 +99,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
-      region: content
     group_publish:
       children:
         - field_content_owner
@@ -107,7 +116,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publish
-      region: content
     group_seo:
       children:
         - field_meta_title
@@ -122,7 +130,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
-      region: content
     group_content_worthy_period:
       children:
         - field_start_date
@@ -136,7 +143,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Content worthy period'
-      region: content
     group_classify:
       children:
         - field_subhome
@@ -147,8 +153,11 @@ third_party_settings:
         - field_job_profile
         - field_market_segment
         - field_market_segment_dvi
+        - field_product_use_case
+        - field_product_type
         - field_hub
         - field_hub_portal
+        - field_use_theme_ob1
       parent_name: group_onglets
       weight: 8
       format_type: tab
@@ -159,7 +168,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
-      region: content
     group_try_and_buy_block:
       children:
         - field_try_and_buy
@@ -174,7 +182,6 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Try and buy block'
-      region: content
     group_test_showroom_block:
       children:
         - field_test_showroom
@@ -189,7 +196,6 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Test Showroom Block'
-      region: content
     group_rebond:
       children:
         - group_test_showroom_block
@@ -205,7 +211,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Rebond
-      region: content
     group_visual:
       children:
         - field_visual_tile
@@ -220,12 +225,47 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Visual
-      region: content
+    group_category_page:
+      children:
+        - field_product_name
+        - field_teaser
+        - field_product_category
+        - field_key_points
+        - field_badge
+        - field_call_to_action
+      parent_name: group_onglets
+      weight: 11
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Category  page'
 id: node.product.default
 targetEntityType: node
 bundle: product
 mode: default
 content:
+  field_badge:
+    weight: 57
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_call_to_action:
+    type: entity_reference_paragraphs
+    weight: 58
+    settings:
+      title: Call-to-action
+      title_plural: Call-to-action
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: paragraph_product_call_to_action
+    third_party_settings: {  }
+    region: content
   field_content:
     weight: 9
     settings:
@@ -279,13 +319,13 @@ content:
     type: string_textarea
     region: content
   field_hub:
-    weight: 43
+    weight: 44
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_hub_portal:
-    weight: 44
+    weight: 45
     settings:
       display_label: true
     third_party_settings: {  }
@@ -321,6 +361,14 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_key_points:
+    weight: 56
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_market_segment:
     weight: 40
     settings: {  }
@@ -329,7 +377,7 @@ content:
     region: content
   field_market_segment_dvi:
     type: options_select
-    weight: 42
+    weight: 41
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -368,10 +416,38 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
       features:
-        collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
+    region: content
+  field_product_category:
+    weight: 55
+    settings:
+      displayLangcode: true
+      filterLangcode: true
+    third_party_settings: {  }
+    type: option_group_term_select
+    region: content
+  field_product_name:
+    weight: 53
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_product_type:
+    weight: 43
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_product_use_case:
+    weight: 42
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_solution:
     weight: 37
@@ -391,6 +467,14 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_teaser:
+    weight: 54
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_test_showroom:
     type: entity_reference_paragraphs
     weight: 12
@@ -402,6 +486,12 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
+    region: content
+  field_theme_one_i:
+    weight: 51
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_top_zone:
     weight: 6
@@ -450,6 +540,12 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
+    region: content
+  field_use_theme_ob1:
+    weight: 46
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
     region: content
   field_visual:
     type: entity_browser_entity_reference

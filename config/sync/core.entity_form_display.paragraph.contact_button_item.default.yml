@@ -1,0 +1,78 @@
+uuid: 72276535-f514-46c4-b77f-e297691eb444
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact_button_item.field_cb_item_desc
+    - field.field.paragraph.contact_button_item.field_cb_item_icon
+    - field.field.paragraph.contact_button_item.field_cb_item_link
+    - field.field.paragraph.contact_button_item.field_cb_item_phone_desc
+    - field.field.paragraph.contact_button_item.field_cb_item_phone_nb
+    - field.field.paragraph.contact_button_item.field_cb_item_title
+    - field.field.paragraph.contact_button_item.field_cb_item_type
+    - paragraphs.paragraphs_type.contact_button_item
+  module:
+    - link
+    - telephone
+id: paragraph.contact_button_item.default
+targetEntityType: paragraph
+bundle: contact_button_item
+mode: default
+content:
+  field_cb_item_desc:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_cb_item_icon:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cb_item_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_cb_item_phone_desc:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_cb_item_phone_nb:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_cb_item_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cb_item_type:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+hidden:
+  created: true
+  status: true

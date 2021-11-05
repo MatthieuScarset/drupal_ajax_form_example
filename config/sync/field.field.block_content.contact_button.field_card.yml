@@ -1,0 +1,79 @@
+uuid: 1fd78b94-3205-4eae-bb4b-95d4ebaac8ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.contact_button
+    - field.storage.block_content.field_card
+    - paragraphs.paragraphs_type.contact_button_item
+  module:
+    - entity_reference_revisions
+id: block_content.contact_button.field_card
+field_name: field_card
+entity_type: block_content
+bundle: contact_button
+label: Card
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      contact_button_item: contact_button_item
+    target_bundles_drag_drop:
+      contact_button_item:
+        enabled: true
+        weight: 18
+      default_button:
+        weight: 19
+        enabled: false
+      homepage_banner_experience:
+        weight: 20
+        enabled: false
+      homepage_banner_item:
+        weight: 21
+        enabled: false
+      homepage_news:
+        weight: 22
+        enabled: false
+      home_banner:
+        weight: 23
+        enabled: false
+      home_caroussel:
+        weight: 24
+        enabled: false
+      home_column:
+        weight: 25
+        enabled: false
+      home_column_section:
+        weight: 26
+        enabled: false
+      home_playlist:
+        weight: 27
+        enabled: false
+      home_thematic_columns:
+        weight: 28
+        enabled: false
+      infography_partner:
+        weight: 29
+        enabled: false
+      marketo:
+        weight: 30
+        enabled: false
+      paragraph_block_rebond:
+        weight: 31
+        enabled: false
+      rebond_wysiwyg:
+        weight: 32
+        enabled: false
+      related_content:
+        weight: 33
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

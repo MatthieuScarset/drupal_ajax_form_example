@@ -1,0 +1,33 @@
+uuid: a0205bd1-e715-4cf5-bef4-4d40d50ef2b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-es
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_footeres
+theme: theme_one_i
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer-es'
+settings:
+  id: 'system_menu_block:footer-es'
+  label: 'Footer ES'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

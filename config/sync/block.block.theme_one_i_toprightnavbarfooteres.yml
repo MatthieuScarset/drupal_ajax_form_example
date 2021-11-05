@@ -1,0 +1,33 @@
+uuid: 58396484-e79a-408d-9b0b-38b1dee1b7e3
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.top-right-navbar-footer-es
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_toprightnavbarfooteres
+theme: theme_one_i
+region: footer
+weight: 0
+provider: null
+plugin: 'system_menu_block:top-right-navbar-footer-es'
+settings:
+  id: 'system_menu_block:top-right-navbar-footer-es'
+  label: 'Top right navbar Footer ES'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

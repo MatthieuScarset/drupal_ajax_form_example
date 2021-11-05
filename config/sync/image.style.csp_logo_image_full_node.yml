@@ -1,0 +1,15 @@
+uuid: b7d8a7ce-cdce-4bff-9035-13abddca0f3f
+langcode: en
+status: true
+dependencies: {  }
+name: csp_logo_image_full_node
+label: 'CSP Logo (full node) max-width 320px'
+effects:
+  04a53c46-a4be-437b-a024-ac4d3a60be93:
+    uuid: 04a53c46-a4be-437b-a024-ac4d3a60be93
+    id: image_scale
+    weight: 1
+    data:
+      width: 320
+      height: null
+      upscale: false

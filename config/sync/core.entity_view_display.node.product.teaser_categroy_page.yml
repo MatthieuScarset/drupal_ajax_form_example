@@ -1,0 +1,144 @@
+uuid: 188a394f-2602-4ce5-a838-f1b1186c8636
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_categroy_page
+    - field.field.node.product.field_axiome_data
+    - field.field.node.product.field_badge
+    - field.field.node.product.field_call_to_action
+    - field.field.node.product.field_content
+    - field.field.node.product.field_content_owner
+    - field.field.node.product.field_email_owner
+    - field.field.node.product.field_end_date
+    - field.field.node.product.field_file
+    - field.field.node.product.field_highlight
+    - field.field.node.product.field_hub
+    - field.field.node.product.field_hub_portal
+    - field.field.node.product.field_id_fiche
+    - field.field.node.product.field_id_offre
+    - field.field.node.product.field_industry
+    - field.field.node.product.field_insight
+    - field.field.node.product.field_insight_type
+    - field.field.node.product.field_is_dvi_product
+    - field.field.node.product.field_job_profile
+    - field.field.node.product.field_key_points
+    - field.field.node.product.field_market_segment
+    - field.field.node.product.field_market_segment_dvi
+    - field.field.node.product.field_meta_description
+    - field.field.node.product.field_meta_title
+    - field.field.node.product.field_metatags
+    - field.field.node.product.field_p_wysiwyg_rebond
+    - field.field.node.product.field_product_category
+    - field.field.node.product.field_product_name
+    - field.field.node.product.field_product_type
+    - field.field.node.product.field_product_use_case
+    - field.field.node.product.field_region
+    - field.field.node.product.field_solution
+    - field.field.node.product.field_start_date
+    - field.field.node.product.field_sub_family
+    - field.field.node.product.field_subhome
+    - field.field.node.product.field_teaser
+    - field.field.node.product.field_test_showroom
+    - field.field.node.product.field_top_zone
+    - field.field.node.product.field_top_zone_background
+    - field.field.node.product.field_top_zone_bg_mobile
+    - field.field.node.product.field_try_and_buy
+    - field.field.node.product.field_use_theme_ob1
+    - field.field.node.product.field_visual
+    - field.field.node.product.field_visual_tile
+    - field.field.node.product.moderation_state_update
+    - node.type.product
+  module:
+    - entity_reference_revisions
+    - user
+id: node.product.teaser_categroy_page
+targetEntityType: node
+bundle: product
+mode: teaser_categroy_page
+content:
+  field_badge:
+    type: entity_reference_label
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_call_to_action:
+    type: entity_reference_revisions_entity_view
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_key_points:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_product_name:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_teaser:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_axiome_data: true
+  field_blog_thematic: true
+  field_content: true
+  field_content_owner: true
+  field_email_owner: true
+  field_end_date: true
+  field_file: true
+  field_highlight: true
+  field_hub: true
+  field_hub_portal: true
+  field_id_fiche: true
+  field_id_offre: true
+  field_industry: true
+  field_insight: true
+  field_insight_type: true
+  field_is_dvi_product: true
+  field_job_profile: true
+  field_market_segment: true
+  field_market_segment_dvi: true
+  field_meta_description: true
+  field_meta_title: true
+  field_metatags: true
+  field_p_wysiwyg_rebond: true
+  field_product: true
+  field_product_category: true
+  field_product_type: true
+  field_product_use_case: true
+  field_region: true
+  field_solution: true
+  field_start_date: true
+  field_sub_family: true
+  field_subhome: true
+  field_test_showroom: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
+  field_try_and_buy: true
+  field_use_theme_ob1: true
+  field_visual: true
+  field_visual_tile: true
+  langcode: true
+  links: true
+  moderation_state_update: true
+  workbench_moderation_control: true

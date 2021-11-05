@@ -1,0 +1,48 @@
+uuid: bdd324df-3894-405d-8d7f-e922199ff9e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_product_call_to_action.field_call_to_action_term
+    - field.field.paragraph.paragraph_product_call_to_action.field_price_label
+    - paragraphs.paragraphs_type.paragraph_product_call_to_action
+  module:
+    - field_group
+third_party_settings:
+  field_group:
+    group_firldset_call_to_action:
+      children:
+        - field_call_to_action_term
+        - field_price_label
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        label: 'Call to action'
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Call to action'
+id: paragraph.paragraph_product_call_to_action.default
+targetEntityType: paragraph
+bundle: paragraph_product_call_to_action
+mode: default
+content:
+  field_call_to_action_term:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_price_label:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

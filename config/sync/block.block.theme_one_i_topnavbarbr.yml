@@ -1,0 +1,33 @@
+uuid: 8744534c-edbc-4b75-87db-3a25e6c47017
+langcode: pt-br
+status: true
+dependencies:
+  config:
+    - system.menu.top-navbar-br
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_topnavbarbr
+theme: theme_one_i
+region: header
+weight: -50
+provider: null
+plugin: 'system_menu_block:top-navbar-br'
+settings:
+  id: 'system_menu_block:top-navbar-br'
+  label: 'Top navbar BR'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      pt-br: pt-br
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

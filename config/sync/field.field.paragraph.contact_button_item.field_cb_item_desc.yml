@@ -1,0 +1,19 @@
+uuid: c0b88522-1747-4c92-bb1d-503874e1b479
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cb_item_desc
+    - paragraphs.paragraphs_type.contact_button_item
+id: paragraph.contact_button_item.field_cb_item_desc
+field_name: field_cb_item_desc
+entity_type: paragraph
+bundle: contact_button_item
+label: 'Contact button item description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

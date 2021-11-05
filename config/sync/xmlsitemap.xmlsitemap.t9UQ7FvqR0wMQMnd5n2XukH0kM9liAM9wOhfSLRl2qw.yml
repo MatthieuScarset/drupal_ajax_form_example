@@ -4,5 +4,9 @@ status: true
 dependencies: {  }
 id: t9UQ7FvqR0wMQMnd5n2XukH0kM9liAM9wOhfSLRl2qw
 label: 'https://www.orange-business.com/es/sitemap.xml'
+chunks: 1
+links: 28
+max_filesize: 5836
 context:
   language: es
+updated: 1630326047

@@ -1,0 +1,33 @@
+uuid: af14caf2-b7a9-4687-8e40-7c66a4cdd231
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.top-right-navbar-ja
+  module:
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: toprightnavbarja
+theme: theme_boosted
+region: header
+weight: -38
+provider: null
+plugin: 'system_menu_block:top-right-navbar-ja'
+settings:
+  id: 'system_menu_block:top-right-navbar-ja'
+  label: 'Top right navbar JA'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      ja: ja
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

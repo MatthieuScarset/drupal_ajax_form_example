@@ -1,0 +1,8 @@
+uuid: 9d170150-84fa-4508-9461-f170eb92fdd5
+langcode: ja
+status: true
+dependencies: {  }
+id: top-right-navbar-footer-ja
+label: 'Top right navbar Footer JA'
+description: 'Right navbar''s links to be displayed in the footer in mobile mode'
+locked: false

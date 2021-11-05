@@ -1,6 +1,6 @@
 uuid: 86eef962-fdaa-44b3-aac4-01ed95bd1d9e
 langcode: fr
-status: false
+status: true
 dependencies:
   module:
     - oab_frontoffice
@@ -10,7 +10,7 @@ dependencies:
 id: rebond_subhome_blogs
 theme: theme_boosted
 region: sidebar
-weight: 0
+weight: -37
 provider: null
 plugin: rebond_subhome_block
 settings:
@@ -18,13 +18,13 @@ settings:
   label: Blogs
   provider: oab_frontoffice
   label_display: visible
-  block_text: 'View more Blogs'
-  block_link: /en/blogs
-  block_link_text: 'Click here'
+  block_text: 'Retrouvez l''ensemble de nos articles de blog'
+  block_link: /fr/blogs
+  block_link_text: 'En savoir plus'
   block_image_src: '26369'
 visibility:
   request_path:
     id: request_path
     pages: /fr/presse
-    negate: true
+    negate: false
     context_mapping: {  }

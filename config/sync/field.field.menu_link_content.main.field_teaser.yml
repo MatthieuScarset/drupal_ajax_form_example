@@ -1,0 +1,19 @@
+uuid: 208a8f77-e5eb-41e4-892f-e6b097d96d5f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_teaser
+    - system.menu.main
+id: menu_link_content.main.field_teaser
+field_name: field_teaser
+entity_type: menu_link_content
+bundle: main
+label: Teaser
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

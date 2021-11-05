@@ -1,0 +1,46 @@
+uuid: ab4c0e1a-8572-4ff3-b633-25f706fff39a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.mega-menu-main-navigation-fr.field_teaser
+    - system.menu.mega-menu-main-navigation-fr
+  module:
+    - link
+    - menu_item_extras
+    - workbench_moderation
+id: menu_link_content.mega-menu-main-navigation-fr.default
+targetEntityType: menu_link_content
+bundle: mega-menu-main-navigation-fr
+mode: default
+content:
+  field_teaser:
+    weight: 3
+    settings:
+      size: 100
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  view_mode:
+    type: menu_item_extras_view_mode_selector_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

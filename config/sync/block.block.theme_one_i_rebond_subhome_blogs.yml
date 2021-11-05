@@ -1,0 +1,30 @@
+uuid: b59ddd4c-fe20-4d2f-8b9e-2659e971baea
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_rebond_subhome_blogs
+theme: theme_one_i
+region: sidebar
+weight: 0
+provider: null
+plugin: rebond_subhome_block
+settings:
+  id: rebond_subhome_block
+  label: Blogs
+  provider: oab_frontoffice
+  label_display: visible
+  block_text: 'View more Blogs'
+  block_link: /en/blogs
+  block_link_text: 'Click here'
+  block_image_src: '26369'
+visibility:
+  request_path:
+    id: request_path
+    pages: /fr/presse
+    negate: false
+    context_mapping: {  }

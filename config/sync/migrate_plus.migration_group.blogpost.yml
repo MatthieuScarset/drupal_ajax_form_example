@@ -1,0 +1,14 @@
+uuid: 107375fb-bf6a-484e-ae22-6e3bc3238359
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: LKbiaXYBld6Huc2ZRyXKHaSEnuqf3hP9DhT9D415q9k
+id: blogpost
+label: 'Blog post Imports'
+description: null
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: drupal7

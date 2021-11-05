@@ -1,0 +1,29 @@
+uuid: bba11687-4c75-47fb-9a11-0f80e3a87c2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_call_to_action_term
+    - paragraphs.paragraphs_type.paragraph_product_call_to_action
+    - taxonomy.vocabulary.product_call_to_action
+id: paragraph.paragraph_product_call_to_action.field_call_to_action_term
+field_name: field_call_to_action_term
+entity_type: paragraph
+bundle: paragraph_product_call_to_action
+label: 'Call to action term'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      product_call_to_action: product_call_to_action
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

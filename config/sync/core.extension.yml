@@ -48,6 +48,7 @@ module:
   locale: 0
   media: 0
   media_entity_generic: 0
+  menu_item_extras: 0
   menu_link_content: 0
   menu_ui: 0
   metatag: 0
@@ -65,15 +66,22 @@ module:
   oab_backbones: 0
   oab_background_image: 0
   oab_backoffice: 0
+  oab_bvpn_import: 0
   oab_cedric: 0
   oab_christophe: 0
   oab_ckeditor: 0
+  oab_cookie_compliance: 0
+  oab_data_import: 0
   oab_develop: 0
   oab_dvi: 0
   oab_entity_embed_link: 0
   oab_frontoffice: 0
   oab_hub: 0
+  oab_icomoon: 0
   oab_marketo: 0
+  oab_media_browser: 0
+  oab_migrate_content: 0
+  oab_ob1_adapter: 0
   oab_offices_map: 0
   oab_orange_business_lounge: 0
   oab_riad: 0
@@ -149,6 +157,7 @@ theme:
   theme_obs_backoffice: 0
   theme_boosted: 0
   theme_oab_hub: 0
+  theme_one_i: 0
 _core:
   default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 profile: minimal

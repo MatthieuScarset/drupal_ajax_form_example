@@ -1,0 +1,11 @@
+uuid: d9f469e6-164d-4b83-a07e-fcfdcadd9eaf
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.product_badge
+id: taxonomy_term.product_badge
+target_entity_type_id: taxonomy_term
+target_bundle: product_badge
+default_langcode: current_interface
+language_alterable: true

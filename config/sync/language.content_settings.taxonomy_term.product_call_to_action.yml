@@ -1,0 +1,11 @@
+uuid: 77e7accf-1b56-43ad-94a4-191e1e636965
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.product_call_to_action
+id: taxonomy_term.product_call_to_action
+target_entity_type_id: taxonomy_term
+target_bundle: product_call_to_action
+default_langcode: site_default
+language_alterable: true

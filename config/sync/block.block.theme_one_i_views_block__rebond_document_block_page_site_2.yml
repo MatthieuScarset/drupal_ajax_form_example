@@ -1,0 +1,40 @@
+uuid: 5972c8ee-24ca-4392-8e31-dadb1cd9e8e5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.rebond_document
+  module:
+    - ctools
+    - views
+  theme:
+    - theme_one_i
+id: theme_one_i_views_block__rebond_document_block_page_site_2
+theme: theme_one_i
+region: sidebar
+weight: -41
+provider: null
+plugin: 'views_block:rebond_document-block_page_site_2'
+settings:
+  id: 'views_block:rebond_document-block_page_site_2'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      blog_post: blog_post
+      customer_story: customer_story
+      magazine: magazine
+      news: news
+      partner: partner
+      press_release: press_release
+      simple_page: simple_page
+      webform: webform
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

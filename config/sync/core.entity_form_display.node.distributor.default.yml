@@ -48,7 +48,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
-      region: content
     group_seo:
       children:
         - field_meta_title
@@ -63,7 +62,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
-      region: content
     group_write:
       children:
         - langcode
@@ -91,7 +89,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
-      region: content
     group_classify:
       children:
         - field_market_segment
@@ -109,7 +106,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
-      region: content
 id: node.distributor.default
 targetEntityType: node
 bundle: distributor

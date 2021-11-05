@@ -1,4 +1,3 @@
-uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -13,6 +12,7 @@ dependencies:
     - entity_browser
     - field_group
     - paragraphs
+    - workbench_moderation
 third_party_settings:
   field_group:
     group_button:
@@ -28,7 +28,6 @@ third_party_settings:
         classes: ''
         required_fields: false
       label: Button
-      region: content
 id: paragraph.subhome_presse_carrousel.default
 targetEntityType: paragraph
 bundle: subhome_presse_carrousel

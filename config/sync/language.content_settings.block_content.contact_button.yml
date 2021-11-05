@@ -1,0 +1,11 @@
+uuid: 2056781f-6421-4dbe-9a8c-f319a506d495
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.contact_button
+id: block_content.contact_button
+target_entity_type_id: block_content
+target_bundle: contact_button
+default_langcode: current_interface
+language_alterable: true

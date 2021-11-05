@@ -1,0 +1,61 @@
+uuid: bc4d2d27-20ad-4e33-9cbf-1c71b60dce83
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.contact_button
+    - field.field.block_content.contact_button.field_card
+    - field.field.block_content.contact_button.field_cb_label
+    - field.field.block_content.contact_button.field_cb_label_sup
+  module:
+    - paragraphs
+    - workbench_moderation
+id: block_content.contact_button.default
+targetEntityType: block_content
+bundle: contact_button
+mode: default
+content:
+  field_card:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_cb_label:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cb_label_sup:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 0
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden: {  }

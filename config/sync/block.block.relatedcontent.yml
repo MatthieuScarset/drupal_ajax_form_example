@@ -10,7 +10,7 @@ dependencies:
 id: relatedcontent
 theme: theme_boosted
 region: prefooter
-weight: -18
+weight: -55
 provider: null
 plugin: related_content_block
 settings:

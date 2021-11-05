@@ -1,0 +1,23 @@
+uuid: 3b3302dd-2004-45b2-a5f7-af4e20b4b429
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cb_item_type
+    - paragraphs.paragraphs_type.contact_button_item
+id: paragraph.contact_button_item.field_cb_item_type
+field_name: field_cb_item_type
+entity_type: paragraph
+bundle: contact_button_item
+label: 'Phone Number'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

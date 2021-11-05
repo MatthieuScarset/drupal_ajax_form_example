@@ -1,0 +1,25 @@
+uuid: a5d0b5c4-0661-4089-8c3b-0a5ea78743cf
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: wWs8gqm7Wav-0dFxBOHIELoKRwA94dnHvLqsN2zP37M
+id: press_release_file
+migration_tags: null
+migration_group: press_release
+label: 'Communique presse file'
+source:
+  plugin: press_release_file
+process:
+  langcode: langcode
+  uid: uid
+  filename: filename
+  uri: uri
+  filemime: filemime
+  filesize: filesize
+  status: status
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:file'
+migration_dependencies: {  }

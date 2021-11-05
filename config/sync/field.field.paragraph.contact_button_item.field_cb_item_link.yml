@@ -1,0 +1,23 @@
+uuid: 3e40fda9-bf53-4e7d-8f8a-03d919832a0b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cb_item_link
+    - paragraphs.paragraphs_type.contact_button_item
+  module:
+    - link
+id: paragraph.contact_button_item.field_cb_item_link
+field_name: field_cb_item_link
+entity_type: paragraph
+bundle: contact_button_item
+label: 'Contact button item link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

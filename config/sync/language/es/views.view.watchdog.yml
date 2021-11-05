@@ -7,13 +7,7 @@ display:
       fields:
         nothing:
           admin_label: Icono
-        type:
-          label: Provider
         name:
           label: Usuario
         link:
           label: Operaciones
-      filters:
-        type:
-          expose:
-            label: Provider

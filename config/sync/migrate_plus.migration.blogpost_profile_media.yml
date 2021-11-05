@@ -1,0 +1,37 @@
+uuid: 104bdd3e-b308-4d2f-a17c-18dc37fe3ac7
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: D-RVlgLqr246V5Wwinso_NHekr-DzRTPES1lunG-lok
+id: blogpost_profile_media
+migration_tags: null
+migration_group: blogpost
+label: 'Blog posts profile medias'
+source:
+  plugin: blogpost_profile_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: image
+  langcode:
+    plugin: default_value
+    default_value: und
+  name: filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_image:
+    plugin: migration
+    migration: blogpost_profile_image
+    source: image_info
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - blogpost_profile_image

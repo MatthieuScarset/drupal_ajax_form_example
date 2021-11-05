@@ -1,0 +1,14 @@
+features:
+  node_user_picture: false
+  comment_user_picture: true
+  comment_user_verification: 1
+  favicon: 1
+logo:
+  use_default: 0
+  path: themes/theme_one_i/orange-business-services.png
+favicon:
+  use_default: 0
+  path: themes/theme_one_i/favicon.ico
+  mimetype: image/vnd.microsoft.icon
+_core:
+  default_config_hash: 0diXGj-hHs47oN0tXkOocyxRV9XTpgfBX0RQvIk-ZH4

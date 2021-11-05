@@ -1,0 +1,9 @@
+uuid: 49f70ef4-0146-46a2-bb67-21f185aaeed1
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph_product_call_to_action
+label: 'Paragraph Product call to action'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

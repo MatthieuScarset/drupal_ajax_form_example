@@ -1,0 +1,21 @@
+uuid: f8d262a6-d58f-4b74-a15e-1be267d7e6c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_technical_qualification
+    - node.type.cloud_service_provider
+  module:
+    - options
+id: node.cloud_service_provider.field_technical_qualification
+field_name: field_technical_qualification
+entity_type: node
+bundle: cloud_service_provider
+label: 'technical qualification'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

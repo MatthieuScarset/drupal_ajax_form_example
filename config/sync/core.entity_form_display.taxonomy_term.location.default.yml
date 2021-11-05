@@ -1,0 +1,79 @@
+uuid: f3720fe6-e8a0-456b-a290-b0785169469d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.location.field_location
+    - taxonomy.vocabulary.location
+  module:
+    - geolocation_leaflet
+    - path
+    - text
+    - workbench_moderation
+id: taxonomy_term.location.default
+targetEntityType: taxonomy_term
+bundle: location
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_location:
+    weight: 2
+    settings:
+      centre:
+        fit_bounds:
+          enable: true
+      auto_client_location: ''
+      auto_client_location_marker: ''
+      allow_override_map_settings: 0
+      hide_textfield_form: false
+      leaflet_settings:
+        map_features:
+          leaflet_control_zoom:
+            enabled: true
+          leaflet_marker_popup:
+            enabled: true
+          leaflet_control_geocoder:
+            enabled: true
+            weight: -100
+        zoom: '10'
+        height: 400px
+        width: 100%
+    third_party_settings: {  }
+    type: geolocation_leaflet
+    region: content
+  langcode:
+    type: language_select
+    weight: 3
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,19 @@
+uuid: 792f13e4-a4f5-41d5-b477-2541022f1265
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_price_label
+    - paragraphs.paragraphs_type.paragraph_product_call_to_action
+id: paragraph.paragraph_product_call_to_action.field_price_label
+field_name: field_price_label
+entity_type: paragraph
+bundle: paragraph_product_call_to_action
+label: 'Price label'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

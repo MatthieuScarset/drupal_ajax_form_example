@@ -1,0 +1,48 @@
+uuid: 152b7849-cd34-442e-aa56-9c9c16e9ef94
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: o6OZxyWD5QVhKzKRgTi1mkXcHse6ZBJSL-3zOGQHrG8
+id: press_kit_node
+migration_tags: null
+migration_group: press_kit
+label: 'Press kit nodes'
+source:
+  plugin: press_kit_node
+process:
+  type:
+    plugin: default_value
+    default_value: press_kit
+  title: title
+  created: created
+  changed: changed
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_content/value: content_field
+  field_content/format:
+    plugin: default_value
+    default_value: full_html
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhome: subhomes
+  field_thematic: thematics
+  field_press_type: press_types
+  field_file:
+    plugin: migration
+    migration: press_kit_media
+    source: files
+  path: path
+  moderation_state: moderation_state
+  status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
+  field_highlight: highlight_field
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - press_kit_media

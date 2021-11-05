@@ -1,4 +1,4 @@
-uuid: b226aa83-6e44-456a-a6f8-1fdbd5e0408b
+uuid: 79ff7ed8-fcab-4a70-aab4-0d8aa3627b9d
 langcode: en
 status: true
 dependencies:
@@ -6,12 +6,13 @@ dependencies:
     - 'block_content:basic:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
   module:
     - block_content
+    - ctools
   theme:
     - theme_boosted
 id: marketodownloadlang
 theme: theme_boosted
-region: pre_content
-weight: -51
+region: top_zone
+weight: 0
 provider: null
 plugin: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
 settings:
@@ -22,4 +23,11 @@ settings:
   status: true
   info: ''
   view_mode: full
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      document: document
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

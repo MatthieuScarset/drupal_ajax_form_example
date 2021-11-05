@@ -1,5 +1,5 @@
 add_license: true
-minifier: 4
+minifier: 0
 ratio_max: 0.9
 ratio_min: 0.1
 _core:

@@ -1,0 +1,19 @@
+uuid: 4ae2a8cd-8e31-404e-b27b-ce28f3e92fdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_cb_item_desc
+field_name: field_cb_item_desc
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

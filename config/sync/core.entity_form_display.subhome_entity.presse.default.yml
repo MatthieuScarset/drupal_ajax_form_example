@@ -36,7 +36,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
-      region: content
     group_header:
       children:
         - title
@@ -51,7 +50,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Header
-      region: content
     group_carrousel:
       children:
         - field_carrousel
@@ -65,7 +63,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Carrousel
-      region: content
     group_corporate:
       children:
         - field_corporate_title
@@ -82,7 +79,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Corporate
-      region: content
     group_team:
       children:
         - field_afficher_bloc_notre_equipe
@@ -97,7 +93,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Notre équipe'
-      region: content
     group_config:
       children:
         - langcode
@@ -112,7 +107,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Config
-      region: content
     group_team_details:
       children:
         - field_team_title
@@ -128,7 +122,6 @@ third_party_settings:
         classes: ''
         required_fields: false
       label: Details
-      region: content
 id: subhome_entity.presse.default
 targetEntityType: subhome_entity
 bundle: presse

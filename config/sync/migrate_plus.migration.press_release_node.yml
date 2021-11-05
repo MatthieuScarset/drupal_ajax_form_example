@@ -1,0 +1,50 @@
+uuid: b8dcc55d-0c3e-403e-9c3f-be92b840e0af
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 2qfo4WPsPErRlvsS1zyKeAIzCDvZ4O8QdFlT-wB8ONk
+id: press_release_node
+migration_tags: null
+migration_group: press_release
+label: 'Communiqué de presse'
+source:
+  plugin: press_release_node
+process:
+  type:
+    plugin: default_value
+    default_value: press_release
+  title: title
+  created: created
+  changed: changed
+  langcode: language
+  uid:
+    plugin: default_value
+    default_value: 1
+  field_content/value: content_field
+  field_content/format:
+    plugin: default_value
+    default_value: full_html
+  field_solution: solutions
+  field_industry: industries
+  field_region: regions
+  field_subhome: subhomes
+  field_thematic: thematics
+  field_press_type: press_types
+  field_file:
+    plugin: migration
+    migration: press_release_media
+    source: files
+  path: path
+  field_country: country
+  field_city: city
+  moderation_state: moderation_state
+  status: status
+  field_meta_title: meta_title
+  field_meta_description: meta_description
+  field_highlight: highlight_field
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - press_release_media

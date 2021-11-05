@@ -1,0 +1,157 @@
+uuid: 9e5e78f1-de67-4ecd-a561-006f3e37f596
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.product_categories.field_block_rebond
+    - field.field.taxonomy_term.product_categories.field_icon
+    - field.field.taxonomy_term.product_categories.field_image
+    - field.field.taxonomy_term.product_categories.field_simple_description
+    - image.style.thumbnail
+    - taxonomy.vocabulary.product_categories
+  module:
+    - field_group
+    - image
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_general
+        - group_niveau_1
+        - group_niveau_2
+      parent_name: ''
+      weight: 20
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Onglets
+    group_niveau_1:
+      children:
+        - description
+        - field_image
+        - field_block_rebond
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Niveau 1'
+    group_niveau_2:
+      children:
+        - field_icon
+        - field_simple_description
+      parent_name: group_onglets
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Niveau 2'
+    group_general:
+      children:
+        - langcode
+        - name
+        - translation
+        - path
+        - status
+      parent_name: group_onglets
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Général
+id: taxonomy_term.product_categories.default
+targetEntityType: taxonomy_term
+bundle: product_categories
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 21
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_block_rebond:
+    weight: 23
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_icon:
+    weight: 104
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_image:
+    weight: 22
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_simple_description:
+    weight: 105
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    region: content
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

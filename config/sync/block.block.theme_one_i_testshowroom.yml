@@ -1,0 +1,30 @@
+uuid: cbedc4b2-c001-411f-8d6e-630705f29d6e
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: theme_one_i_testshowroom
+theme: theme_one_i
+region: sidebar
+weight: -42
+provider: null
+plugin: test_showroom_block
+settings:
+  id: test_showroom_block
+  label: 'Test Showroom Block'
+  provider: oab_frontoffice
+  label_display: '0'
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

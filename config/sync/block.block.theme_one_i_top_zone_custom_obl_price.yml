@@ -1,0 +1,31 @@
+uuid: 7e9915d7-4af5-45ca-92e1-9e7cfd3ee487
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_top_zone_custom_obl_price
+theme: theme_one_i
+region: top_zone
+weight: -52
+provider: null
+plugin: top_zone_custom_block
+settings:
+  id: top_zone_custom_block
+  label: 'Top Zone Custom Obl Price'
+  provider: oab_frontoffice
+  label_display: visible
+  block_image: '24285'
+  block_title_custom:
+    value: "<div class=\"banner-topzone container\">\r\n<div class=\"topzonebg\">\r\n<div class=\"col col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding\">\r\n<div class=\"col-lg-6 col-md-6 col-sm-12 col-xs-12 nopadding\">\r\n<h1 class=\"titre1\">Réussir votre transformation cloud avec un partenaire mondial</h1>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n"
+    format: full_html
+  content_format: null
+visibility:
+  request_path:
+    id: request_path
+    pages: /reseau-mobile/tarifs-roaming
+    negate: false
+    context_mapping: {  }

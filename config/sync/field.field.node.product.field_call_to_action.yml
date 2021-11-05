@@ -1,0 +1,79 @@
+uuid: 6ea7cf45-1cc0-46ce-b6fa-4fca0369134c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_call_to_action
+    - node.type.product
+    - paragraphs.paragraphs_type.paragraph_product_call_to_action
+  module:
+    - entity_reference_revisions
+id: node.product.field_call_to_action
+field_name: field_call_to_action
+entity_type: node
+bundle: product
+label: 'Call to action'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_product_call_to_action: paragraph_product_call_to_action
+    target_bundles_drag_drop:
+      paragraph_product_call_to_action:
+        enabled: true
+        weight: 18
+      default_button:
+        weight: 19
+        enabled: false
+      home_banner:
+        weight: 20
+        enabled: false
+      home_caroussel:
+        weight: 21
+        enabled: false
+      home_column:
+        weight: 22
+        enabled: false
+      home_column_section:
+        weight: 23
+        enabled: false
+      home_playlist:
+        weight: 24
+        enabled: false
+      home_thematic_columns:
+        weight: 25
+        enabled: false
+      homepage_banner_experience:
+        weight: 26
+        enabled: false
+      homepage_banner_item:
+        weight: 27
+        enabled: false
+      homepage_news:
+        weight: 28
+        enabled: false
+      infography_partner:
+        weight: 29
+        enabled: false
+      marketo:
+        weight: 30
+        enabled: false
+      paragraph_block_rebond:
+        weight: 31
+        enabled: false
+      rebond_wysiwyg:
+        weight: 32
+        enabled: false
+      related_content:
+        weight: 33
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

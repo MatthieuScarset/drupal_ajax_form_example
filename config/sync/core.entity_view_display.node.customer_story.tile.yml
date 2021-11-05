@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -17,6 +18,7 @@ dependencies:
     - field.field.node.customer_story.field_insight
     - field.field.node.customer_story.field_insight_type
     - field.field.node.customer_story.field_job_profile
+    - field.field.node.customer_story.field_local_nav
     - field.field.node.customer_story.field_market_segment
     - field.field.node.customer_story.field_meta_description
     - field.field.node.customer_story.field_meta_title
@@ -24,11 +26,16 @@ dependencies:
     - field.field.node.customer_story.field_p_wysiwyg_rebond
     - field.field.node.customer_story.field_page_du_site_1
     - field.field.node.customer_story.field_page_du_site_2
+    - field.field.node.customer_story.field_product_type
+    - field.field.node.customer_story.field_product_use_case
     - field.field.node.customer_story.field_rebond_document
     - field.field.node.customer_story.field_region
     - field.field.node.customer_story.field_solution
     - field.field.node.customer_story.field_start_date
     - field.field.node.customer_story.field_subhome
+    - field.field.node.customer_story.field_top_zone
+    - field.field.node.customer_story.field_top_zone_background
+    - field.field.node.customer_story.field_top_zone_bg_mobile
     - field.field.node.customer_story.field_visual
     - field.field.node.customer_story.field_visual_tile
     - field.field.node.customer_story.moderation_state_update
@@ -83,6 +90,7 @@ hidden:
   field_hub_portal: true
   field_industry: true
   field_job_profile: true
+  field_local_nav: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
@@ -90,12 +98,17 @@ hidden:
   field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
+  field_product_type: true
+  field_product_use_case: true
   field_rebond_document: true
   field_region: true
   field_solution: true
   field_start_date: true
   field_subhome: true
   field_thematic: true
+  field_top_zone: true
+  field_top_zone_background: true
+  field_top_zone_bg_mobile: true
   field_visual: true
   field_wysiwyg_rebond: true
   langcode: true

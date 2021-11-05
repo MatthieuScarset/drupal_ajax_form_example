@@ -1,0 +1,8 @@
+uuid: cd1c90a5-5070-4630-93f7-fe46a0ab695b
+langcode: ja
+status: true
+dependencies: {  }
+id: footer-ja
+label: 'Footer JA'
+description: 'Footer JA'
+locked: false

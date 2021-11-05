@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - workbench_access
 third_party_settings:
   menu_ui:
     available_menus:
@@ -12,6 +13,8 @@ third_party_settings:
       - main-navigation-ru
       - main-navigation-ru-en
     parent: 'main:'
+  workbench_access:
+    workbench_access_status: false
 name: Homepage
 type: homepage
 description: ''

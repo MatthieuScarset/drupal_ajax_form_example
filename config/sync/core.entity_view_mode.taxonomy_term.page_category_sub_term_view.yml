@@ -1,0 +1,10 @@
+uuid: 1dcabc87-2afa-4a8e-9eb2-7af18996f9c1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.page_category_sub_term_view
+label: 'Page category sub term view'
+targetEntityType: taxonomy_term
+cache: true

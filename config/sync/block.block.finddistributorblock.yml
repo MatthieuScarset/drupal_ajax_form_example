@@ -10,7 +10,7 @@ dependencies:
 id: finddistributorblock
 theme: theme_boosted
 region: sidebar
-weight: -39
+weight: -42
 provider: null
 plugin: find_distributor_block
 settings:

@@ -1,0 +1,82 @@
+uuid: 4f0ecb56-53fc-48cf-bd27-e39c0197b1bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact_button_item.field_cb_item_desc
+    - field.field.paragraph.contact_button_item.field_cb_item_icon
+    - field.field.paragraph.contact_button_item.field_cb_item_link
+    - field.field.paragraph.contact_button_item.field_cb_item_phone_desc
+    - field.field.paragraph.contact_button_item.field_cb_item_phone_nb
+    - field.field.paragraph.contact_button_item.field_cb_item_title
+    - field.field.paragraph.contact_button_item.field_cb_item_type
+    - paragraphs.paragraphs_type.contact_button_item
+  module:
+    - link
+    - telephone
+id: paragraph.contact_button_item.default
+targetEntityType: paragraph
+bundle: contact_button_item
+mode: default
+content:
+  field_cb_item_desc:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_cb_item_icon:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cb_item_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_cb_item_phone_desc:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_cb_item_phone_nb:
+    weight: 5
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
+    region: content
+  field_cb_item_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cb_item_type:
+    type: boolean
+    weight: 4
+    region: content
+    label: above
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+hidden: {  }

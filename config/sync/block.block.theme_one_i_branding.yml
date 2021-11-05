@@ -1,0 +1,25 @@
+uuid: 20b3f019-532b-4427-b6d5-d7276cc76617
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_one_i
+_core:
+  default_config_hash: fRKXNB91UxDvEMkzCR8ZBsawfC6Fqbme2gtobei3gu4
+id: theme_one_i_branding
+theme: theme_one_i
+region: header
+weight: -37
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

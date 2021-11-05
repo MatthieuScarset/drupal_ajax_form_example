@@ -1,0 +1,15 @@
+uuid: a35a55f5-e640-483a-8231-101634d012f3
+langcode: fr
+status: true
+dependencies: {  }
+name: top_zone_page_category
+label: 'Top zone page category (max 720px width)'
+effects:
+  36db6f6f-df04-412a-89eb-ba086c755d80:
+    uuid: 36db6f6f-df04-412a-89eb-ba086c755d80
+    id: image_scale
+    weight: 1
+    data:
+      width: 720
+      height: null
+      upscale: false

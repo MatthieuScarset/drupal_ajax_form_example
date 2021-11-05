@@ -1,0 +1,8 @@
+uuid: e7a02596-2be7-4a02-a746-b7894ed7406c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Product badge'
+vid: product_badge
+description: ''
+weight: 0

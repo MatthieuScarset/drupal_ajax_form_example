@@ -1,0 +1,20 @@
+uuid: 600b3aea-a804-484e-8980-9afd1cd338de
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - taxonomy
+id: paragraph.field_call_to_action_term
+field_name: field_call_to_action_term
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

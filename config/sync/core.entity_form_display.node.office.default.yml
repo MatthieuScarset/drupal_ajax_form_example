@@ -35,7 +35,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
-      region: content
     group_write:
       children:
         - title
@@ -57,7 +56,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
-      region: content
     group_tabs:
       children:
         - group_write
@@ -70,7 +68,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
-      region: content
 id: node.office.default
 targetEntityType: node
 bundle: office

@@ -1,4 +1,3 @@
-label: Media
 display:
   default:
     display_options:
@@ -8,25 +7,14 @@ display:
       fields:
         media_bulk_form:
           action_title: Ação
-        bundle:
-          label: Provider
         status:
           label: Status
         operations:
           label: Operações
       filters:
-        bundle:
-          expose:
-            label: Provider
         status:
           group_info:
             label: 'Publishing status'
-      title: Media
       empty:
         area_text_custom:
           content: 'No content available.'
-  media_page_list:
-    display_title: Media
-    display_options:
-      menu:
-        title: Media

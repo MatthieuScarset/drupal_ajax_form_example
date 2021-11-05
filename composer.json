@@ -39,6 +39,7 @@
         "drupal/inline_entity_form": "1.0-rc9",
         "drupal/linkit": "5.0-beta12",
         "drupal/media_entity_generic": "^1.1",
+        "drupal/menu_item_extras": "^2",
         "drupal/metatag": "^1.16",
         "drupal/multiple_fields_remove_button": "1.0-alpha13",
         "drupal/paragraphs": "^1.12",

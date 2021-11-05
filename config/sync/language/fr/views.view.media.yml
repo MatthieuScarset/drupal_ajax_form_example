@@ -44,6 +44,7 @@ display:
             label: Format
         status:
           group_info:
+            label: 'Publishing status'
             group_items:
               1:
                 title: Publié
@@ -53,6 +54,9 @@ display:
           expose:
             label: Langue
       title: Médias
+      empty:
+        area_text_custom:
+          content: 'No content available.'
   media_page_list:
     display_title: Médias
     display_options:

@@ -1,0 +1,37 @@
+uuid: b6fd02c8-3620-4d41-9090-39c331dd76c5
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: WQMZSnKxnAMeTLVK2n-9rEx0u31Tisx4ol5Ec2YOYM4
+id: press_release_media
+migration_tags: null
+migration_group: press_release
+label: 'Communique presse medias'
+source:
+  plugin: press_release_media
+process:
+  bundle:
+    plugin: default_value
+    default_value: file
+  langcode:
+    plugin: default_value
+    default_value: und
+  name: filename
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  created: timestamp
+  changed: timestamp
+  field_file:
+    plugin: migration
+    migration: press_release_file
+    source: file_info
+destination:
+  plugin: 'entity:media'
+migration_dependencies:
+  required:
+    - press_release_file

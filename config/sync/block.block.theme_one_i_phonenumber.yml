@@ -1,0 +1,33 @@
+uuid: ce75a775-2052-453f-862f-7086af82f69a
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: theme_one_i_phonenumber
+theme: theme_one_i
+region: sidebar
+weight: -37
+provider: null
+plugin: phone_number_block
+settings:
+  id: phone_number_block
+  label: 'Phone Number'
+  provider: oab_frontoffice
+  label_display: visible
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+  block_title: 'Pour le contacter par téléphone'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      distributor: distributor
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

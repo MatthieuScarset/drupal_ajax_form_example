@@ -1,0 +1,33 @@
+uuid: 8083aec8-a653-41e5-9252-3a703f7b8044
+langcode: ru-en
+status: true
+dependencies:
+  config:
+    - system.menu.direct-access-bar-ru-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_directaccessbarruen
+theme: theme_one_i
+region: prefooter
+weight: -35
+provider: null
+plugin: 'system_menu_block:direct-access-bar-ru-en'
+settings:
+  id: 'system_menu_block:direct-access-bar-ru-en'
+  label: 'Direct Access Bar RU-EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

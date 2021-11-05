@@ -1,0 +1,33 @@
+uuid: 56c2a4e9-08ab-4e6c-b127-e1d68632d6df
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:a743c2fe-6c3e-4871-8ee1-19717396aebb'
+  module:
+    - block_content
+    - ctools
+  theme:
+    - theme_one_i
+id: theme_one_i_homepage_highlights
+theme: theme_one_i
+region: top_zone
+weight: -55
+provider: null
+plugin: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
+settings:
+  id: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
+  label: homepage_highlights
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      homepage: homepage
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

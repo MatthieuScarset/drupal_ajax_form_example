@@ -1,0 +1,12 @@
+fr:
+  url: /page-refonte-header-mega-menu-en-one-i
+  views:
+    category_page:
+      - category_page
+  contents: {  }
+en:
+  url: /page-refonte-header-mega-menu-en-one-i
+  views:
+    category_page:
+      - category_page
+  contents: {  }

@@ -1,0 +1,8 @@
+uuid: e66d033c-5e19-44bf-8d37-faecbbb1f796
+langcode: en
+status: true
+dependencies: {  }
+name: 'Product call to action'
+vid: product_call_to_action
+description: ''
+weight: 0

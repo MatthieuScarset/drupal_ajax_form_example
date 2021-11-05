@@ -1,0 +1,19 @@
+uuid: 59ad5ee8-7bd9-4c78-aace-69726a2b7a9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.contact_button
+    - field.storage.block_content.field_cb_label_sup
+id: block_content.contact_button.field_cb_label_sup
+field_name: field_cb_label_sup
+entity_type: block_content
+bundle: contact_button
+label: 'Contact button label supplémentaire'
+description: 'Texte seulement visible sur la version Desktop'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

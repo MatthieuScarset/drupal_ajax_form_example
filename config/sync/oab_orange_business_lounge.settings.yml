@@ -6,4 +6,4 @@ zones_image:
   5: '24276'
   6: '24277'
   7: '24278'
-url_api: 'https://businesslounge.orange.fr/api/api/3.0.0'
+url_api: 'https://pp-businesslounge.orange.fr/api/api/3.0.0'

@@ -1,0 +1,19 @@
+uuid: 08aac2f4-b685-4d26-89c8-93b12ab5989f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_simple_description
+    - taxonomy.vocabulary.product_categories
+id: taxonomy_term.product_categories.field_simple_description
+field_name: field_simple_description
+entity_type: taxonomy_term
+bundle: product_categories
+label: 'Simple description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -4,10 +4,5 @@ display:
       exposed_form:
         options:
           submit_button: Applicar
-      fields:
-        type:
-          label: Provider
-      filters:
-        type:
-          expose:
-            label: Provider
+  block_1:
+    display_title: Block

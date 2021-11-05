@@ -1,0 +1,31 @@
+uuid: 953e772b-47e2-4db3-90c9-1bbc7fc50b6e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_business_insight
+theme: theme_one_i
+region: top_zone
+weight: -50
+provider: null
+plugin: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+settings:
+  id: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+  label: business_insight
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/visions-business\r\n/business-insight"
+    negate: false
+    context_mapping: {  }

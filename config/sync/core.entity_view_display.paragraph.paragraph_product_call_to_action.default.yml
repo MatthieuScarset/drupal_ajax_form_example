@@ -1,0 +1,30 @@
+uuid: e89d696a-04c2-4651-b5f5-8e9139db9cd1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_product_call_to_action.field_call_to_action_term
+    - field.field.paragraph.paragraph_product_call_to_action.field_price_label
+    - paragraphs.paragraphs_type.paragraph_product_call_to_action
+id: paragraph.paragraph_product_call_to_action.default
+targetEntityType: paragraph
+bundle: paragraph_product_call_to_action
+mode: default
+content:
+  field_call_to_action_term:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_price_label:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -55,7 +55,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
-      region: content
     group_write:
       children:
         - langcode
@@ -75,7 +74,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
-      region: content
     group_classify:
       children:
         - field_subhome
@@ -95,7 +93,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
-      region: content
     group_publish:
       children:
         - field_content_owner
@@ -114,7 +111,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Publish
-      region: content
     group_content_worthy_period:
       children:
         - field_start_date
@@ -128,7 +124,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Content worthy period'
-      region: content
     group_seo:
       children:
         - field_meta_title
@@ -143,7 +138,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: SEO
-      region: content
     group_visual:
       children:
         - field_visual_tile
@@ -158,7 +152,6 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Visual
-      region: content
 id: node.press_kit.default
 targetEntityType: node
 bundle: press_kit

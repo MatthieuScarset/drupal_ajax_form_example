@@ -1,0 +1,19 @@
+uuid: add063cb-2a3d-4cf6-bd59-d591588fb441
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cb_item_phone_desc
+    - paragraphs.paragraphs_type.contact_button_item
+id: paragraph.contact_button_item.field_cb_item_phone_desc
+field_name: field_cb_item_phone_desc
+entity_type: paragraph
+bundle: contact_button_item
+label: 'Contact button item phone description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

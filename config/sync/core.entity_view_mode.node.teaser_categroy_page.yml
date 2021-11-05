@@ -1,0 +1,10 @@
+uuid: 717f21da-887b-4e63-bcac-4adb804f20a8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_categroy_page
+label: 'Teaser categroy page'
+targetEntityType: node
+cache: true

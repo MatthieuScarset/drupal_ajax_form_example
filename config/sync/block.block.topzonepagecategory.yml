@@ -1,0 +1,20 @@
+uuid: 8b780a48-bc10-4a97-ba79-c9ff9941fbb7
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: topzonepagecategory
+theme: theme_one_i
+region: top_zone
+weight: -49
+provider: null
+plugin: top_zone_page_category_block
+settings:
+  id: top_zone_page_category_block
+  label: 'Top Zone Page Category'
+  provider: oab_frontoffice
+  label_display: visible
+visibility: {  }

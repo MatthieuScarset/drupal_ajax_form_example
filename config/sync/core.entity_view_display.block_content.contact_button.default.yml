@@ -1,0 +1,43 @@
+uuid: e03df216-ddaa-4a55-949d-3bd2283cd758
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.contact_button
+    - field.field.block_content.contact_button.field_card
+    - field.field.block_content.contact_button.field_cb_label
+    - field.field.block_content.contact_button.field_cb_label_sup
+  module:
+    - entity_reference_revisions
+id: block_content.contact_button.default
+targetEntityType: block_content
+bundle: contact_button
+mode: default
+content:
+  field_card:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_cb_label:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cb_label_sup:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

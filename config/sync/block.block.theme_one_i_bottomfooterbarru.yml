@@ -1,0 +1,33 @@
+uuid: d63ec5ba-22ff-4073-83f9-ba93542d8a83
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.bottom-footerbar-ru
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_bottomfooterbarru
+theme: theme_one_i
+region: footer
+weight: -8
+provider: null
+plugin: 'system_menu_block:bottom-footerbar-ru'
+settings:
+  id: 'system_menu_block:bottom-footerbar-ru'
+  label: 'Bottom Footerbar RU'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      ru: ru
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

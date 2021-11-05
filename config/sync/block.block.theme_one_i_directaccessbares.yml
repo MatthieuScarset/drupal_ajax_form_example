@@ -1,0 +1,33 @@
+uuid: c17f27ef-4264-4862-8200-bab2970961fd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.direct-access-bar-es
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_directaccessbares
+theme: theme_one_i
+region: prefooter
+weight: -38
+provider: null
+plugin: 'system_menu_block:direct-access-bar-es'
+settings:
+  id: 'system_menu_block:direct-access-bar-es'
+  label: 'Direct Access Bar ES'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      es: es
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

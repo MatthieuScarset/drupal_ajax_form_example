@@ -1,0 +1,41 @@
+uuid: e4e20618-5177-48b9-a1c5-210557e63921
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - language
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: theme_one_i_rebondproduct
+theme: theme_one_i
+region: sidebar
+weight: -46
+provider: null
+plugin: rebond_product_block
+settings:
+  id: rebond_product_block
+  label: 'Rebond product'
+  provider: oab_frontoffice
+  label_display: '0'
+  content: ''
+  content_format: full_html
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      en: en
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

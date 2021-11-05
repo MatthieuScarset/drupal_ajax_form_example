@@ -1,0 +1,33 @@
+uuid: 792c206a-1aaf-47e9-a34f-9062eeb1be88
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.top-right-navbar-ru-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_one_i
+id: theme_one_i_toprightnavbarruen
+theme: theme_one_i
+region: header
+weight: -39
+provider: null
+plugin: 'system_menu_block:top-right-navbar-ru-en'
+settings:
+  id: 'system_menu_block:top-right-navbar-ru-en'
+  label: 'Top right navbar RU-EN'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    langcodes:
+      ru-en: ru-en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

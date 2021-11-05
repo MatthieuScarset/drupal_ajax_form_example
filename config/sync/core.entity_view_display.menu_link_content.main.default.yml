@@ -1,0 +1,38 @@
+uuid: f16b9a7b-6e74-4e1e-82a8-cc99df682666
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.main.field_teaser
+    - field.field.menu_link_content.main.field_template
+    - system.menu.main
+id: menu_link_content.main.default
+targetEntityType: menu_link_content
+bundle: main
+mode: default
+content:
+  children:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_teaser:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_template:
+    weight: 3
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden:
+  langcode: true

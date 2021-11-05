@@ -11,7 +11,7 @@ dependencies:
 id: contactbaranalyst
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -54
 provider: null
 plugin: contact_bar_analyst_block
 settings:

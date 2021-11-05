@@ -1,0 +1,11 @@
+uuid: 6fae759a-3e80-42f5-97ee-76b8926e15f8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - webform.webform.contact_presse_fr
+id: webform_submission.contact_presse_fr
+target_entity_type_id: webform_submission
+target_bundle: contact_presse_fr
+default_langcode: site_default
+language_alterable: false
