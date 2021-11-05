@@ -35,7 +35,7 @@ function theme_boosted_preprocess_html(&$variables) {
         $nid = $node->id();
         $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
         //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
-        $current_path_alias = \Drupal::service('path.alias_manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
+        $current_path_alias = \Drupal::service('path_alias.manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
         $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
     }
 }

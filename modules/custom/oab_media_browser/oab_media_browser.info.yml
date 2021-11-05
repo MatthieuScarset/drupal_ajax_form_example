@@ -6,7 +6,6 @@ package: OAB
 dependencies:
   - entity_browser
   - entity_embed
-  - entity_reference
   - media
   - field
   - file
