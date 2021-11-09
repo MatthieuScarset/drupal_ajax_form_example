@@ -3,8 +3,8 @@
 namespace Drupal\oab_hub\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 
 class DisableRedirectIfMultiAliasEvent implements EventSubscriberInterface {
@@ -28,7 +28,7 @@ class DisableRedirectIfMultiAliasEvent implements EventSubscriberInterface {
      * Desactivation de la "normalisation" par le module Redirect
      * qui cause des 301 lors des multi alias pour un même noeud
      */
-    public function onRequest(GetResponseEvent $event) {
+    public function onRequest(RequestEvent $event) {
         $request = $event->getRequest();
 
 

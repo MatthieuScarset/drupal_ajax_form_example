@@ -8,10 +8,12 @@
 namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\node\Plugin\views\field\Node;
 use Drupal\views\Views;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
-class OabExtension extends \Twig_Extension {
+class OabExtension extends AbstractExtension {
 
   /**
    * Returns the name of the extension.
@@ -24,34 +26,34 @@ class OabExtension extends \Twig_Extension {
 
   public function getFunctions() {
       return [
-          new \Twig_SimpleFunction('oab_drupal_view', 'views_embed_view'),
-          new \Twig_SimpleFunction('oab_drupal_menu', [$this, 'drupalMenu']),
-          new \Twig_SimpleFunction('d_config', [$this, 'd_config']),
-          new \Twig_SimpleFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
-          new \Twig_SimpleFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
-          new \Twig_SimpleFunction('oab_drupal_view_count', [$this, 'view_count']),
-          new \Twig_SimpleFunction('specialCharacters', [$this, 'specialCharacters']),
-          new \Twig_SimpleFunction('isAjaxContext', [$this, 'isAjaxContext']),
-          new \Twig_SimpleFunction('kint_t', array($this, 'kint_t'), array(
+          new TwigFunction('oab_drupal_view', 'views_embed_view'),
+          new TwigFunction('oab_drupal_menu', [$this, 'drupalMenu']),
+          new TwigFunction('d_config', [$this, 'd_config']),
+          new TwigFunction('nodeAbsoluteUrl', [$this, 'nodeAbsoluteUrl']),
+          new TwigFunction('oab_drupal_is_empty_field', [$this, 'is_empty_field']),
+          new TwigFunction('oab_drupal_view_count', [$this, 'view_count']),
+          new TwigFunction('specialCharacters', [$this, 'specialCharacters']),
+          new TwigFunction('isAjaxContext', [$this, 'isAjaxContext']),
+          new TwigFunction('kint_t', array($this, 'kint_t'), array(
             'is_safe' => array('html'),
             'needs_environment' => TRUE,
             'needs_context' => TRUE,
             'is_variadic' => TRUE,
           )),
-        new \Twig_SimpleFunction('replaceSpacesAndSpecialChars', [$this, 'replaceSpacesAndSpecialChars']),
+        new TwigFunction('replaceSpacesAndSpecialChars', [$this, 'replaceSpacesAndSpecialChars']),
       ];
 }
 
   public function getFilters() {
     $filters = [
-      new \Twig_SimpleFilter('format_bytes', [$this, 'format_bytes']),
-      new \Twig_SimpleFilter('file_format', [$this, 'file_format']),
-      new \Twig_SimpleFilter('image_style_uri', [$this, 'image_style_uri']),
-      new \Twig_SimpleFilter('rawurlencode', [$this, 'rawurlencode']),
-      new \Twig_SimpleFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
-      new \Twig_SimpleFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
-      new \Twig_SimpleFilter('formatDate', [$this, 'formatDate']),
-      new \Twig_SimpleFilter('linkAxiome', [$this, 'linkAxiome']),
+      new TwigFilter('format_bytes', [$this, 'format_bytes']),
+      new TwigFilter('file_format', [$this, 'file_format']),
+      new TwigFilter('image_style_uri', [$this, 'image_style_uri']),
+      new TwigFilter('rawurlencode', [$this, 'rawurlencode']),
+      new TwigFilter('url_clean_prefix', [$this, 'url_clean_prefix']),
+      new TwigFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
+      new TwigFilter('formatDate', [$this, 'formatDate']),
+      new TwigFilter('linkAxiome', [$this, 'linkAxiome']),
     ];
 
     return $filters;

@@ -1,0 +1,17 @@
+Index: tac_lite.module
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tac_lite.module b/tac_lite.module
+--- a/tac_lite.module	(revision 84e209f782609c22a72b7f5590c4895ade2404de)
++++ b/tac_lite.module	(date 1636129851474)
+@@ -139,7 +139,7 @@
+               $term = Term::load($item['target_id']);
+             }
+             if ($term) {
+-              $terms[$node->id()][$term->getVocabularyId()][$term->id()] = $term;
++              $terms[$node->id()][$term->bundle()][$term->id()] = $term;
+             }
+           }
+         }

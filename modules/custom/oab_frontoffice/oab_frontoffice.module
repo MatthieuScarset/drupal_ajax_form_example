@@ -80,7 +80,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
             if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
                 $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
                 if ($file instanceof \Drupal\file\Entity\File) {
-                    $og_image = $file->url();
+                    $og_image = $file->createFileUrl();
                 }
             }
         }

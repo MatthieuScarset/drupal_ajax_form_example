@@ -2,18 +2,14 @@
 
 namespace Drupal\oab_frontoffice\EventSubscriber;
 
-use Drupal\Core\Http\Exception\CacheableAccessDeniedHttpException;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Drupal\Core\Url;
-use Drupal\Core\Routing\TrustedRedirectResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\Core\Language\LanguageInterface;
-use Drupal\oab_hub\Controller\OabHubController;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 class NodeSourcePathEvent implements EventSubscriberInterface {
@@ -34,7 +30,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      *
      * redirect source node url to languaged alias
      */
-    public function onRequest(GetResponseEvent $event) {
+    public function onRequest(RequestEvent $event) {
         $request = $event->getRequest();
 
         if ($request->attributes->has('exception')

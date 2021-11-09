@@ -5,8 +5,11 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Plugin\views\field\Node;
 use Drupal\views\Views;
 use Drupal\oab_hub\Controller\OabHubController;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
-class HubExtension extends \Twig_Extension
+class HubExtension extends AbstractExtension
 {
 
     /**
@@ -20,15 +23,15 @@ class HubExtension extends \Twig_Extension
 
     public function getFunctions() {
         return [
-            new \Twig_SimpleFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
-            new \Twig_SimpleFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
-            new \Twig_SimpleFunction('hub_getHubSubhomeUrl', [$this, 'getHubSubhomeUrl']),
+            new TwigFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
+            new TwigFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
+            new TwigFunction('hub_getHubSubhomeUrl', [$this, 'getHubSubhomeUrl']),
         ];
     }
 
     public function getFilters() {
         $filters = [
-            new \Twig_SimpleFilter('hub_getMenu', [$this, 'getMenu']),
+            new TwigFilter('hub_getMenu', [$this, 'getMenu']),
         ];
 
         return $filters;

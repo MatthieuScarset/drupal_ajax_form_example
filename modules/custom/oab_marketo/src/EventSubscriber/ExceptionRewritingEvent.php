@@ -6,8 +6,7 @@ namespace Drupal\oab_marketo\EventSubscriber;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -38,14 +37,14 @@ class ExceptionRewritingEvent implements EventSubscriberInterface {
   }
 
 
-  public function onException(GetResponseForExceptionEvent $event) {
+  public function onException(ExceptionEvent $event) {
 
     if (strpos($this->routeMatch->getRouteName(), 'oab_marketo.altares_api') === false) {
       return;
     }
 
     /** @var HttpException $exception */
-    $exception = $event->getException();
+    $exception = $event->getThrowable();
     if (is_a($exception, HttpException::class)) {
 
       $msg = strlen($exception->getMessage()) > 0

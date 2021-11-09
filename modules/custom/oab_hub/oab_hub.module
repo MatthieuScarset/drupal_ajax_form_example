@@ -49,7 +49,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
   $state = \Drupal::state()->get('system.maintenance_mode');
   if ($state != 1) {
     ##on ne le fait que pour la création des termes pour le HUB
-    if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID &&
+    if ($term->bundle() == OabHubController::HUB_VOCABULARY_ID &&
       ($term->isNew() || $term->isNewTranslation())) {
       OabHubController::createMachineNameSuffixe($term);
       OabHubController::createMenus($term);
@@ -65,7 +65,7 @@ function oab_hub_taxonomy_term_presave(\Drupal\taxonomy\Entity\Term $term) {
  * suppression des menus à la suppression d'un terme
  */
 function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term) {
-  if ($term->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+  if ($term->bundle() == OabHubController::HUB_VOCABULARY_ID) {
     $state = \Drupal::state()->get('system.maintenance_mode');
     if ($state != 1) {
       #Je boucle sur toutes les langues pour supprimer les menus associés
@@ -89,7 +89,7 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term) {
  * suppression des menus à la suppression de la trad d'un terme
  */
 function oab_hub_taxonomy_term_translation_delete(\Drupal\taxonomy\Entity\Term $translation) {
-  if ($translation->getVocabularyId() == OabHubController::HUB_VOCABULARY_ID) {
+  if ($translation->bundle() == OabHubController::HUB_VOCABULARY_ID) {
     $state = \Drupal::state()->get('system.maintenance_mode');
     if ($state != 1) {
       OabHubController::deleteMenus($translation);

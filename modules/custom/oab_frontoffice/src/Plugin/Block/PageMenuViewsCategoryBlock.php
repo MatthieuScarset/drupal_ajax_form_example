@@ -45,7 +45,7 @@ class PageMenuViewsCategoryBlock extends BlockBase {
         $queryChildren = \Drupal::entityQuery('taxonomy_term')
           ->condition('parent', $term_id)
           ->sort('weight', 'ASC');
-        $childrens = \Drupal::service('entity.manager')->getStorage('taxonomy_term')->loadMultiple($queryChildren->execute());
+        $childrens = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadMultiple($queryChildren->execute());
 
         $itemsStickyBar = [];
         foreach ($childrens as $child){
