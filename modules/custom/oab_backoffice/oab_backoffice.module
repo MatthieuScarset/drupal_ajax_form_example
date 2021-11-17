@@ -715,11 +715,11 @@ function oab_backoffice_theme($existing, $type, $theme, $path) {
  *  Implements callback form_user_pass_form_validate
  */
 
-function _oab_backoffice_form_user_pass_form_validate(&$form, FormStateInterface $form_State) {
+function _oab_backoffice_form_user_pass_form_validate(&$form, FormStateInterface $form_state) {
 
-    if ($form_State->getError($form['name']) !== null) {
-      $form_State->clearErrors();
-      $form_State->setErrorByName('name', t(' Further instructions have been sent to your email address.'));
+    if ($form_state->getError($form['name']) !== null) {
+      $form_state->clearErrors();
+      $form_state->setErrorByName('name', t(' Further instructions have been sent to your email address.'));
     }
 
 }

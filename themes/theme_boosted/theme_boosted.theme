@@ -61,7 +61,7 @@ function theme_boosted_theme_suggestions_alter(array &$suggestions, array $varia
         $request = \Drupal::request();
         $referer = $request->headers->get('referer');
         // Getting the base url.
-        $base_url = Request::createFromGlobals()->getSchemeAndHttpHost();
+        $base_url = $request->getSchemeAndHttpHost();
         // Getting the alias or the relative path.
         $alias = substr($referer, strlen($base_url));
         $url_object = \Drupal::service('path.validator')->getUrlIfValid($alias);

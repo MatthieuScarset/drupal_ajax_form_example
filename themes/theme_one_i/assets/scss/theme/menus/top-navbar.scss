@@ -17,6 +17,23 @@
        display: none;
      }
    }
+
+   .link_icon_items {
+     display: flex;
+     align-items: center;
+     margin-left: 1.25rem;
+
+     .nav-link {
+        margin-left: 0.25rem;
+     }
+
+     .link_icon {
+       font-size: 1.5rem;
+       font-weight: bold;
+       color: #fff;
+     }
+   }
+
   }
 
  .dropdown-toggle::after {

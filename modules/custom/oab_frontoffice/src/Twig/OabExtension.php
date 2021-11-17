@@ -9,6 +9,7 @@ namespace Drupal\oab_frontoffice\Twig;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\views\Views;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -66,37 +67,24 @@ class OabExtension extends AbstractExtension {
    * @param $data
    * @param bool $stop
    */
-  /*function kint_t(\Twig_Environment $env,  array $context, array $args = []) {
-
-  //A Remettre en place, pour utiliser le vrai fonctionnement
-  // de Kint, avec un nombre infini de paramètres;
-  //Pour l'instant, problème avec $args, et plantage lorsque var_dump($args)
-  // et args semble etre vide.......;
-
-    $stop = false;
-    ##Si on a un booléen comme dernier paramètre passé, c'est pas savoir si on
-    ##stop le script ou non
-    if (count($args) > 0 && is_bool($args[count($args)])) {
-      $stop = $args[count($args)];
-    }
-
-    ##Ensuite, j'appelle la vraie fonction kint
-    call_user_func_array('kint',$args);
-
-    ##Ensuite, si on a demandé à s'arreter, on coupe PHP
-    if ($stop)
-      die();
-  }*/
-  public function kint_t($array, $stop = false) {
+  public function kint_t(Environment $env, array $context, array $args = []) {
     $module_handler = \Drupal::service('module_handler');
     if ($module_handler->moduleExists('kint')) {
-      kint($array);
-
-      if ($stop) {
-          die();
+      if (empty($args)) {
+        $kint_variable = array();
+        foreach ($context as $key => $value) {
+          if (!$value instanceof \Twig_Template) {
+            $kint_variable[$key] = $value;
+          }
+        }
+      } else {
+        $kint_variable = $args;
       }
+      kint($kint_variable);
+      die();
     }
   }
+
 
   public function d_config($config) {
     return \Drupal::config($config);

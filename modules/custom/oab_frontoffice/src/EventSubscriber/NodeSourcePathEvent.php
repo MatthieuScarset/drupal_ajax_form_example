@@ -2,14 +2,17 @@
 
 namespace Drupal\oab_frontoffice\EventSubscriber;
 
-use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Url;
+use Drupal\Core\Http\Exception\CacheableAccessDeniedHttpException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Drupal\Core\Url;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\oab_hub\Controller\OabHubController;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 class NodeSourcePathEvent implements EventSubscriberInterface {
@@ -31,11 +34,21 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
      * redirect source node url to languaged alias
      */
     public function onRequest(RequestEvent $event) {
+
+        // Pour être sur, pour les API Marketo/Altares.
+        // Gestion des exceptions dans leur module
+        $route_name = \Drupal::routeMatch()->getRouteName();
+        if (strpos($route_name, 'oab_marketo.altares_api') !== false) {
+          return;
+        }
+
+
+
         $request = $event->getRequest();
 
         if ($request->attributes->has('exception')
-          && (is_a($request->attributes->get('exception'),NotFoundHttpException::class)
-            || is_a($request->attributes->get('exception'),AccessDeniedHttpException::class))
+          && (is_a($request->attributes->get('exception'), NotFoundHttpException::class)
+            || is_a($request->attributes->get('exception'), AccessDeniedHttpException::class))
         ) {
 
             $code = $request->attributes->get('exception')->getStatusCode();

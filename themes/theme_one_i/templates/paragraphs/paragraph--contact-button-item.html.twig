@@ -10,7 +10,9 @@
     <span class="font-weight-bold pb-1">{{ content.field_cb_item_title }}</span>
   </div>
   <div class="d-flex text-left">
-    <a class="contact-item-descr font-weight-bolder o-link no-decoration w-100" href="{{ link_target }}">{{ content.field_cb_item_desc }}</a>
+    <a class="contact-item-descr font-weight-bolder o-link no-decoration w-100" href="{{ link_target }}"
+       onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'contact button','track_nom':'Card',
+                               'track_cible':'{{ content.field_cb_item_title['#items'].value }}','track_type_evt':'clic'})">{{ content.field_cb_item_desc }}</a>
     <span class="o-link-arrow align-self-end mb-2 mr-2"></span>
   </div>
   {% if content.field_cb_item_type.0['#markup'] is not same as(0) %}

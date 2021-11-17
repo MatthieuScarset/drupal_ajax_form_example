@@ -20,6 +20,10 @@ header#navbar.sticky-top.is-sticky {
 
     a[aria-expanded="false"] {
       color: $white;
+
+      &:hover{
+        color: $orange1;
+      }
     }
     }
 
@@ -45,6 +49,8 @@ header#navbar.sticky-top.is-sticky {
       padding: 0;
       margin-top: -5px;
       border-top: $white;
+      max-height: 27rem;
+      overflow: hidden;
 
       li {
         margin-bottom: 1rem;

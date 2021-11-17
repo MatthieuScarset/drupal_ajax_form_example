@@ -69,46 +69,37 @@
   ]
 %}
 <div {{ attributes.addClass(classes, "container") }} >
-  <div class="row">
-    <div class="col-sm-12">
 
-      <div class="row">
-           <div  {{ attributes.addClass(classes) }}>
+      {% if label_display in ['before', 'invisible'] %}
+        {{ label }}
+      {% endif %}
 
-                {% if label_display in ['before', 'invisible'] %}
-                {{ label }}
-                {% endif %}
+      {% if prefix is not empty %}
+        {{ prefix }}
+      {% endif %}
 
-                {% if prefix is not empty %}
-                {{ prefix }}
-                {% endif %}
-
-                {% if description_display == 'before' and description.content %}
-                <div  {{ description.attributes }}>
-                  {{ description.content }}
-                </div>
-                {% endif %}
-          </div>
-
-
-                {{ children }}
-
-                {% if suffix is not empty %}
-                {{ suffix }}
-                {% endif %}
-
-                {% if label_display == 'after' %}
-                {{ label }}
-                {% endif %}
-
-                {% if description_display in ['after', 'invisible'] and description.content %}
-                <p  {{ description.attributes.addClass(description_classes) }}>
-                    {{ description.content }}
-                </p>
-
-                {% endif %}
+      {% if description_display == 'before' and description.content %}
+        <div {{ description.attributes }}>
+          {{ description.content }}
         </div>
+      {% endif %}
 
-</div>
-  </div>
+
+      {{ children }}
+
+      {% if suffix is not empty %}
+        {{ suffix }}
+      {% endif %}
+
+      {% if label_display == 'after' %}
+        {{ label }}
+      {% endif %}
+
+      {% if description_display in ['after', 'invisible'] and description.content %}
+        <p {{ description.attributes.addClass(description_classes) }}>
+          {{ description.content }}
+        </p>
+
+      {% endif %}
+
 </div>

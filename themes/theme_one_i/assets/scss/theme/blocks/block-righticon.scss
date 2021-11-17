@@ -1,14 +1,20 @@
 .oab-synomia-search-header-block-form {
   .top-block-search-form {
-
+    margin-right: 2.5rem;
     .search-textfield {
       border: 0 none;
       color: $white;
-      height: 30px;
       border-bottom: 2px;
       border-color: $white;
       border-style: solid;
-      margin-left: 10px;
+      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      &:focus{
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
 
     .form-text {
@@ -18,12 +24,6 @@
     .form-item-mot {
       padding: 0;
       height: 45px;
-
-      .row {
-        margin-top: -45px;
-        margin-right: 12px;
-      }
-
     }
   }
 
@@ -37,7 +37,7 @@
 
       &.btn {
         left: 9rem;
-        top: -1rem;
+        top: -2.3rem;
         padding-left: 10px;
         padding-right: 28px;
 
@@ -48,9 +48,10 @@
     }
 
     .search-icon{
-      top: -10px;
-      right: -190px;
+      top: -2rem;
+      right: -11.4rem;
       cursor: pointer;
+      margin-left: 0;
     }
   }
 }
@@ -58,8 +59,8 @@
 .block {
   .share-icon {
     position: relative;
-    top: -5px;
-    font-size: 1.5rem;
+    top: 0.4rem;
+    font-size: 1.58rem;
   }
 }
 

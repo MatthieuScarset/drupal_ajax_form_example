@@ -68,7 +68,13 @@
         <header id="navbar" class="sticky-top" role="banner">
             {#Render the header region with multiple navbars#}
             {#See region--header.html for details#}
+
+          <div class="d-lg-none">
+            {{ page.header_mobile }}
+          </div>
+          <div class="d-none d-lg-block">
             {{ page.header }}
+          </div>
         </header>
 {% endif %}
 

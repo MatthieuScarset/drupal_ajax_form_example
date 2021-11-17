@@ -1,0 +1,47 @@
+uuid: d0e6849d-cabf-47c8-aea3-5daf9d1be14f
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:contact_button:8483a68b-7342-4044-9099-7206b5910745'
+  module:
+    - block_content
+    - ctools
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: frcontactbuttonstandard
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:8483a68b-7342-4044-9099-7206b5910745'
+settings:
+  id: 'block_content:8483a68b-7342-4044-9099-7206b5910745'
+  label: '[FR][Contact Button] Standard'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'
+  request_path:
+    id: request_path
+    pages: '/produits/categories/*'
+    negate: true
+    context_mapping: {  }

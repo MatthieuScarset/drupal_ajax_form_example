@@ -50,7 +50,8 @@
 <section {{ attributes.addClass('block', 'contact-button-block') }}>
 {% block content %}
   <div class="dropdown dropup">
-    <button type="button" class="border-0 p-0 rounded-pill d-flex down" id="contactButtonDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button type="button" class="border-0 p-0 rounded-pill d-flex down" id="contactButtonDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'contact button','track_nom':'Card','track_cible':'','track_type_evt':'clic'})">
         <div class="align-self-center pl-2 pr-1 contact-button-text">
           <span class="d-md-none font-weight-bold">{{ content.field_cb_label }}</span>
           <div class="d-none d-md-flex flex-column">

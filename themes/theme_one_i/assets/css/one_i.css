@@ -9057,7 +9057,6 @@ button.bg-info-light:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -9077,9 +9076,8 @@ button.bg-info-light:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sticky-top {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -16908,14 +16906,14 @@ a:focus {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("https://c.woopic.com/fonts/HelvNeue55_W1G.woff2") format("woff2"), url("https://c.woopic.com/fonts/HelvNeue55_W1G.woff") format("woff");
+  src: url("//c.woopic.com/fonts/HelvNeue55_W1G.woff2") format("woff2"), url("//c.woopic.com/fonts/HelvNeue55_W1G.woff") format("woff");
 }
 @font-face {
   font-family: HelvNeueOrange;
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url("https://c.woopic.com/fonts/HelvNeue75_W1G.woff2") format("woff2"), url("https://c.woopic.com/fonts/HelvNeue75_W1G.woff") format("woff");
+  src: url("//c.woopic.com/fonts/HelvNeue75_W1G.woff2") format("woff2"), url("//c.woopic.com/fonts/HelvNeue75_W1G.woff") format("woff");
 }
 @font-face {
   font-family: SoshMedium;
@@ -16948,10 +16946,6 @@ a:focus {
   cursor: initial;
 }
 
-.js-focus-visible :not([data-focus-visible-added]).focus,
-.js-focus-visible :not([data-focus-visible-added]):focus {
-  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-}
 .js-focus-visible :not([data-focus-visible-added]).focus,
 .js-focus-visible :not([data-focus-visible-added]).focus + .toggle,
 .js-focus-visible :not([data-focus-visible-added]).focus ~ .ob1-filterchip-label,
@@ -17191,7 +17185,7 @@ a:focus {
 .btn[data-ob1-component=ProgressBarDetermined].btn-inverse .ob1-progress-bar-determined, .btn[data-ob1-component=ProgressBarDetermined].btn-inverse .ob1-progress-bar-undetermined {
   background-color: #555;
 }
-.btn:disabled, .btn.disabled {
+.btn:disabled {
   cursor: not-allowed;
 }
 .btn.btn-inverse:focus {
@@ -18159,12 +18153,7 @@ button.ob1-link-icon:active {
   color: #ccc !important;
   pointer-events: none;
 }
-.items-list-item.disabled .item-container, .items-list-item.disabled .ob1-item-card .ob1-item-card-container, .ob1-item-card .items-list-item.disabled .ob1-item-card-container, .disabled.ob1-item-card .item-container, .disabled.ob1-item-card .ob1-item-card-container,
-.items-list-item.disabled .item-desc,
-.items-list-item.disabled .ob1-item-card .ob1-item-card-desc,
-.ob1-item-card .items-list-item.disabled .ob1-item-card-desc,
-.disabled.ob1-item-card .item-desc,
-.disabled.ob1-item-card .ob1-item-card-desc,
+.items-list-item.disabled .item-desc, .items-list-item.disabled .ob1-item-card .ob1-item-card-desc, .ob1-item-card .items-list-item.disabled .ob1-item-card-desc, .disabled.ob1-item-card .item-desc, .disabled.ob1-item-card .ob1-item-card-desc,
 .items-list-item.disabled .item-icon,
 .items-list-item.disabled .ob1-item-card .ob1-item-card-icon,
 .ob1-item-card .items-list-item.disabled .ob1-item-card-icon,
@@ -18776,10 +18765,8 @@ a.text-primary:focus {
 .accordion .card {
   padding-top: 0;
   padding-bottom: 0;
-  background-color: transparent;
   border-top: 0;
   border-bottom: 1px solid #000;
-  /* stylelint-disable-next-line selector-class-pattern */
 }
 .accordion .card.disabledCard {
   pointer-events: none;
@@ -18790,9 +18777,6 @@ a.text-primary:focus {
 }
 .accordion .card.disabledCard .accordion-icon {
   color: #ccc;
-}
-.accordion .card-header {
-  background-color: transparent;
 }
 .accordion .card-header a {
   display: flex;
@@ -18924,10 +18908,6 @@ a.text-primary:focus {
 .alert-container .alert-content .alert-text + .alert-text {
   padding-top: 0.5rem;
 }
-.alert-container .alert-content .collapse,
-.alert-container .alert-content .collapsing {
-  max-width: 43.75rem;
-}
 .alert-container .alert-content .list {
   padding-top: 0.5rem;
   margin-bottom: 0.3125rem;
@@ -18993,9 +18973,7 @@ a.text-primary:focus {
   display: none;
 }
 
-.alert-container:not(.additional-message) .o-link-arrow::after,
-.alert-container:not(.additional-message) .o-link-arrow:hover,
-.alert-container:not(.additional-message) .o-link-arrow:focus {
+.alert-container:not(.additional-message) .o-link-arrow::after, .alert-container:not(.additional-message) .o-link-arrow:hover, .alert-container:not(.additional-message) .o-link-arrow:focus {
   color: #000;
   -webkit-text-decoration-color: #000;
           text-decoration-color: #000;
@@ -19305,13 +19283,9 @@ a.text-primary:focus {
   outline: 0.125rem solid #f16e00;
   outline-offset: 0;
 }
-.o-switch.ob1-switch-inverse .checkbox {
-  /* stylelint-disable-next-line selector-max-class */
-}
 .o-switch.ob1-switch-inverse .checkbox:not(:checked) + .toggle {
   background: #555;
   border-color: #555;
-  /* stylelint-disable-next-line selector-max-class */
 }
 .o-switch.ob1-switch-inverse .checkbox:not(:checked) + .toggle .off {
   color: #fff;
@@ -19319,8 +19293,6 @@ a.text-primary:focus {
 .o-switch.ob1-switch-inverse .checkbox.success:disabled + .toggle, .o-switch.ob1-switch-inverse .checkbox:disabled + .toggle {
   background: #555;
   border-color: #555;
-  /* stylelint-disable-next-line selector-max-class */
-  /* stylelint-disable-next-line selector-max-class */
 }
 .o-switch.ob1-switch-inverse .checkbox.success:disabled + .toggle::before, .o-switch.ob1-switch-inverse .checkbox:disabled + .toggle::before {
   background-color: #000;
@@ -19541,9 +19513,7 @@ a.text-primary:focus {
 .form-group .form-control[type=search] {
   max-width: 28.125rem;
 }
-.form-group .form-control[type=text] ~ .form-control-placeholder,
-.form-group .form-control[type=text] ~ .invalid-feedback,
-.form-group .form-control[type=text] ~ .form-control-help,
+.form-group .form-control[type=text] ~ .form-control-placeholder, .form-group .form-control[type=text] ~ .invalid-feedback, .form-group .form-control[type=text] ~ .form-control-help,
 .form-group .form-control[type=password] ~ .form-control-placeholder,
 .form-group .form-control[type=password] ~ .invalid-feedback,
 .form-group .form-control[type=password] ~ .form-control-help,
@@ -19561,9 +19531,7 @@ a.text-primary:focus {
 .form-group .form-control.ob1-form-control-small {
   max-width: 16.25rem;
 }
-.form-group .form-control[type=date] ~ .form-control-placeholder,
-.form-group .form-control[type=date] ~ .invalid-feedback,
-.form-group .form-control[type=date] ~ .form-control-help,
+.form-group .form-control[type=date] ~ .form-control-placeholder, .form-group .form-control[type=date] ~ .invalid-feedback, .form-group .form-control[type=date] ~ .form-control-help,
 .form-group .form-control[type=tel] ~ .form-control-placeholder,
 .form-group .form-control[type=tel] ~ .invalid-feedback,
 .form-group .form-control[type=tel] ~ .form-control-help,
@@ -19657,7 +19625,6 @@ a.text-primary:focus {
 .form-control ~ .form-control-placeholder ~ .invalid-feedback:not(.alert-container),
 .form-control ~ .form-control-placeholder ~ .limit-reached-feedback.alert-warning {
   min-height: 2.375rem;
-  padding-top: 0.5rem;
   padding-left: 3.125rem;
   margin: 0;
   font-size: 0.875rem;
@@ -19749,8 +19716,7 @@ a.text-primary:focus {
   font-weight: 700;
   color: #e70002;
 }
-.form-control.is-invalid ~ .form-control-placeholder + .btn-icon,
-.form-control.is-invalid ~ .form-control-placeholder + .icon {
+.form-control.is-invalid ~ .form-control-placeholder + .btn-icon, .form-control.is-invalid ~ .form-control-placeholder + .icon {
   color: #e70002;
 }
 .form-control.is-invalid ~ .invalid-feedback {
@@ -19865,14 +19831,10 @@ textarea.form-control.limit-reached:focus {
 textarea.form-control:not(.form-control-empty), textarea.form-control:focus {
   height: 13.4375rem;
 }
-textarea.form-control ~ .form-control-placeholder,
-textarea.form-control ~ .invalid-feedback,
-textarea.form-control ~ .form-control-help,
-textarea.form-control ~ .limit-reached-feedback {
+textarea.form-control ~ .form-control-placeholder, textarea.form-control ~ .invalid-feedback, textarea.form-control ~ .form-control-help, textarea.form-control ~ .limit-reached-feedback {
   max-width: 37.5rem;
 }
-textarea.form-control ~ .form-control-help .alert-icon,
-textarea.form-control ~ .limit-reached-feedback .alert-icon {
+textarea.form-control ~ .form-control-help .alert-icon, textarea.form-control ~ .limit-reached-feedback .alert-icon {
   margin-right: 0.9375rem;
   font-size: 1.25rem;
 }
@@ -20504,18 +20466,18 @@ select.form-control ~ .form-control-help {
   }
 }
 @media (min-width: 1200px) {
-  .feedback .alert {
-    max-height: 16.875rem;
-  }
-  .feedback .feedback-title {
-    max-width: 43.75rem;
+  .feedback-title {
     font-size: 1.625rem;
     line-height: 1.1538461538;
   }
-  .feedback .feedback-text {
-    max-width: 43.75rem;
+
+  .feedback-text {
     font-size: 1.125rem;
     line-height: 1.3333333333;
+  }
+
+  .feedback .alert {
+    max-height: 16.875rem;
   }
 
   .modal-feedback .modal-content .feedback-text {
@@ -20565,17 +20527,16 @@ select.form-control ~ .form-control-help {
 .breadcrumb {
   max-width: 37.5rem;
   max-height: 2.375rem;
+  overflow: hidden;
 }
 .breadcrumb .breadcrumb-item {
   padding-top: 0.5rem;
   padding-bottom: 0.625rem;
+  overflow: hidden;
   font-size: 0.875rem;
   line-height: 1.4285714286;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.breadcrumb .breadcrumb-item:last-child {
-  overflow: hidden;
 }
 .breadcrumb .breadcrumb-item a:not(:hover):not(:focus):not(:active) {
   text-decoration: none;
@@ -21441,31 +21402,30 @@ select.form-control ~ .form-control-help {
   flex-wrap: wrap;
   max-height: 3.0625rem;
   padding-left: 0;
+  overflow: hidden;
   list-style: none;
 }
 .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label {
   margin-right: 0.9375rem;
   margin-bottom: 0.9375rem;
 }
-.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn {
-  outline-offset: 0.25rem;
-  transition: outline-offset 0.15s ease-in-out;
+.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label .ob1-filter-chips-bar-btn:focus {
+  position: relative;
+  color: #fff !important;
+  cursor: pointer;
+  background-color: #000 !important;
+  border-color: #000 !important;
+  outline: none;
 }
-.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:focus {
-  outline: 0.125rem solid #f16e00;
-  outline-offset: 0;
-}
-.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:hover, .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:focus {
-  font-weight: 700;
-  color: #555;
-  border-color: #555;
-}
-.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:active {
-  padding: 0.1875rem 1.4375rem 0.3125rem;
-  border-width: 0.125rem;
-}
-.ob1-filter-chips-bar .ob1-filterchip.ob1-filterchip-selected .ob1-filter-chips-bar-btn:active {
-  padding: 0.1875rem 0.8125rem 0.3125rem;
+.ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label .ob1-filter-chips-bar-btn:focus::after {
+  position: absolute;
+  top: 0;
+  right: calc(0.8125rem - .25rem);
+  bottom: 0;
+  left: calc(0.8125rem - .25rem);
+  content: "";
+  border-style: dotted !important;
+  border-width: 0.0625rem !important;
 }
 
 .modal-body .ob1-filter-chips-bar {
@@ -21735,7 +21695,7 @@ select.form-control ~ .form-control-help {
 
 .ui-datepicker .ui-datepicker-buttonpane {
   padding: 0 0.2em;
-  margin: 0.7em 0 0;
+  margin: 0.7em 0 0 0;
   background-image: none;
   border-right: 0;
   border-bottom: 0;
@@ -21745,7 +21705,7 @@ select.form-control ~ .form-control-help {
 .ui-datepicker .ui-datepicker-buttonpane button {
   float: right;
   width: auto;
-  padding: 0.2em 0.6em 0.3em;
+  padding: 0.2em 0.6em 0.3em 0.6em;
   margin: 0.5em 0.2em 0.4em;
   overflow: visible;
   cursor: pointer;
@@ -21957,9 +21917,6 @@ a.ui-datepicker-next.ui-state-disabled {
   opacity: 1;
 }
 
-.date-picker {
-  /* stylelint-disable-next-line selector-class-pattern */
-}
 .date-picker .labelDatePicker + .icon {
   pointer-events: none;
 }
@@ -23633,25 +23590,8 @@ input.search-country-selected {
 }
 
 .ob1-card {
-  position: relative;
   border: 0.0625rem solid #ccc;
   box-shadow: 0.125rem 0.125rem #ccc;
-}
-.ob1-card:not(.ob1-card-multiple) .accordion .card-header a {
-  position: unset;
-}
-.ob1-card:not(.ob1-card-multiple) a::after,
-.ob1-card:not(.ob1-card-multiple) button::after,
-.ob1-card:not(.ob1-card-multiple) label::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  content: "";
 }
 .ob1-card:hover, .ob1-card.focus-within {
   border-color: #555;
@@ -23661,25 +23601,13 @@ input.search-country-selected {
   border-color: #555;
   box-shadow: 0.125rem 0.125rem #555;
 }
-.ob1-card:active {
+.ob1-card:active, .ob1-card.ob1-card-selected {
   border-color: #f16e00;
   box-shadow: 0.125rem 0.125rem #f16e00;
 }
 .ob1-card.ob1-card-disabled {
   color: #ccc;
   pointer-events: none;
-}
-.ob1-card.ob1-card-selected {
-  border-color: #f16e00;
-  box-shadow: 0.125rem 0.125rem #f16e00;
-}
-.ob1-card.ob1-card-selected:hover, .ob1-card.ob1-card-selected.focus-within, .ob1-card.ob1-card-selected:active {
-  border-color: #555;
-  box-shadow: 0.125rem 0.125rem #555;
-}
-.ob1-card.ob1-card-selected:focus-within {
-  border-color: #555;
-  box-shadow: 0.125rem 0.125rem #555;
 }
 .ob1-card.ob1-card-inverse {
   color: #fff;
@@ -23695,44 +23623,12 @@ input.search-country-selected {
   border-color: #ccc;
   box-shadow: 0.125rem 0.125rem #ccc;
 }
-.ob1-card.ob1-card-inverse:active {
+.ob1-card.ob1-card-inverse:active, .ob1-card.ob1-card-inverse.ob1-card-selected {
   border-color: #ff7900;
   box-shadow: 0.125rem 0.125rem #ff7900;
 }
 .ob1-card.ob1-card-inverse.ob1-card-disabled {
   color: #555;
-}
-.ob1-card.ob1-card-inverse.ob1-card-selected {
-  border-color: #ff7900;
-  box-shadow: 0.125rem 0.125rem #ff7900;
-}
-.ob1-card.ob1-card-inverse.ob1-card-selected:hover, .ob1-card.ob1-card-inverse.ob1-card-selected.focus-within, .ob1-card.ob1-card-inverse.ob1-card-selected:active {
-  border-color: #ccc;
-  box-shadow: 0.125rem 0.125rem #ccc;
-}
-.ob1-card.ob1-card-inverse.ob1-card-selected:focus-within {
-  border-color: #ccc;
-  box-shadow: 0.125rem 0.125rem #ccc;
-}
-.ob1-card.ob1-card-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.ob1-card.ob1-card-link::after {
-  padding-top: 0.1875rem;
-  margin-left: 0.625rem;
-  font-family: icon-orange, sans-serif;
-  font-size: 0.75rem;
-  color: #f16e00;
-  content: "";
-}
-.ob1-card.ob1-card-multiple {
-  box-shadow: none;
-}
-
-a.ob1-card:hover, a.ob1-card:focus {
-  color: #000;
 }
 
 .pagination {
@@ -23795,15 +23691,6 @@ a.ob1-card:hover, a.ob1-card:focus {
 .page-item:first-child .page-link:active, .page-item:last-child .page-link:active {
   border-width: 0.125rem;
 }
-.page-item:nth-child(2):last-child {
-  margin-left: 0.9375rem;
-}
-.page-item:first-child:nth-last-child(2) {
-  margin-right: 0.9375rem;
-}
-.page-item:first-child:nth-last-child(2) .o-link-arrow.back {
-  margin-right: 0;
-}
 .page-item .page-link:active {
   padding: 0.375rem 0.125rem;
   font-weight: 700;
@@ -23833,17 +23720,6 @@ a.ob1-card:hover, a.ob1-card:focus {
   pointer-events: initial;
   cursor: default;
   border-color: transparent;
-}
-.page-item.ob1-page-item-counter {
-  min-width: 3.25rem;
-  padding: 0.4375rem 0 0.625rem;
-  text-align: center;
-}
-.page-item .o-link-arrow:not(.back) {
-  margin-left: 0.9375rem;
-}
-.page-item .o-link-arrow.back {
-  margin-right: 0.9375rem;
 }
 .page-item.disabled .page-link {
   font-weight: 700;
@@ -23970,69 +23846,6 @@ a.ob1-card:hover, a.ob1-card:focus {
   background-color: #555;
 }
 
-.ob1-skeleton-line {
-  width: 100%;
-}
-.ob1-skeleton-line.ob1-skeleton-small {
-  height: 0.9375rem;
-}
-.ob1-skeleton-line.ob1-skeleton-medium {
-  height: 1.875rem;
-}
-.ob1-skeleton-line.ob1-skeleton-large {
-  height: 2.8125rem;
-}
-
-.ob1-skeleton-square.ob1-skeleton-small {
-  width: 1.875rem;
-  height: 1.875rem;
-}
-.ob1-skeleton-square.ob1-skeleton-medium {
-  width: 2.8125rem;
-  height: 2.8125rem;
-}
-.ob1-skeleton-square.ob1-skeleton-large {
-  width: 14.0625rem;
-  height: 14.0625rem;
-}
-
-.ob1-skeleton-line, .ob1-skeleton-square {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  background-color: #f4f4f4;
-}
-.ob1-skeleton-line::after, .ob1-skeleton-square::after {
-  position: absolute;
-  top: 0;
-  right: -25%;
-  left: -25%;
-  z-index: 1;
-  height: 100%;
-  content: "";
-  background: linear-gradient(90deg, transparent, #e5e5e5, transparent);
-  transform: translateX(-100%);
-  -webkit-animation: ob1-skeleton-loading 1.5s infinite;
-          animation: ob1-skeleton-loading 1.5s infinite;
-}
-
-@-webkit-keyframes ob1-skeleton-loading {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes ob1-skeleton-loading {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
 .ob1-sosh {
   /**
    * Default color
@@ -24453,9 +24266,6 @@ a.ob1-card:hover, a.ob1-card:focus {
   color: #000;
   -webkit-text-decoration-color: #000;
           text-decoration-color: #000;
-}
-.ob1-sosh .accordion .card {
-  /* stylelint-disable-next-line selector-class-pattern */
 }
 .ob1-sosh .accordion .card.disabledCard {
   border-bottom: 1px solid #ccc;
@@ -24932,7 +24742,7 @@ a.ob1-card:hover, a.ob1-card:focus {
 .ob1-sosh button.ob1-link-icon:focus {
   outline-color: #de2554;
 }
-.ob1-sosh .o-link-arrow, .ob1-sosh .o-link-arrow::after, .ob1-sosh .o-link-arrow::before, .ob1-sosh .o-link-arrow.back::before {
+.ob1-sosh .o-link-arrow {
   color: #de2554;
 }
 .ob1-sosh .o-link-arrow:hover, .ob1-sosh .o-link-arrow:focus {
@@ -24940,22 +24750,28 @@ a.ob1-card:hover, a.ob1-card:focus {
   -webkit-text-decoration-color: #000;
           text-decoration-color: #000;
 }
+.ob1-sosh .o-link-arrow::after {
+  color: #de2554;
+}
 .ob1-sosh .o-link-arrow:active {
   color: #de2554;
   -webkit-text-decoration-color: #de2554;
           text-decoration-color: #de2554;
 }
-.ob1-sosh .o-link-arrow.up, .ob1-sosh .o-link-arrow.down {
+.ob1-sosh .o-link-arrow.back, .ob1-sosh .o-link-arrow.up, .ob1-sosh .o-link-arrow.down {
   color: #000;
 }
-.ob1-sosh .o-link-arrow.up:hover, .ob1-sosh .o-link-arrow.up:focus, .ob1-sosh .o-link-arrow.down:hover, .ob1-sosh .o-link-arrow.down:focus {
+.ob1-sosh .o-link-arrow.back:hover, .ob1-sosh .o-link-arrow.back:focus, .ob1-sosh .o-link-arrow.up:hover, .ob1-sosh .o-link-arrow.up:focus, .ob1-sosh .o-link-arrow.down:hover, .ob1-sosh .o-link-arrow.down:focus {
   -webkit-text-decoration-color: #000;
           text-decoration-color: #000;
 }
-.ob1-sosh .o-link-arrow.up:active, .ob1-sosh .o-link-arrow.down:active {
+.ob1-sosh .o-link-arrow.back:active, .ob1-sosh .o-link-arrow.up:active, .ob1-sosh .o-link-arrow.down:active {
   color: #de2554;
   -webkit-text-decoration-color: #de2554;
           text-decoration-color: #de2554;
+}
+.ob1-sosh .o-link-arrow.back::before {
+  color: #de2554;
 }
 .ob1-sosh .o-link-arrow.disabled {
   -webkit-text-decoration-color: #ccc !important;
@@ -24963,11 +24779,7 @@ a.ob1-card:hover, a.ob1-card:focus {
 }
 .ob1-sosh .o-link-arrow.o-link-reverse, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow,
-.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow, .ob1-sosh .o-link-arrow.o-link-reverse::after, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow::after, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow::after, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow::after, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::after,
-.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow::after,
-.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::after, .ob1-sosh .o-link-arrow.o-link-reverse::before, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow::before, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow::before, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow::before, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::before,
-.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow::before,
-.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::before {
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow {
   color: #fbcd00;
 }
 .ob1-sosh .o-link-arrow.o-link-reverse:hover, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow:hover, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow:hover, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow:hover, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow:hover,
@@ -24986,14 +24798,27 @@ a.ob1-card:hover, a.ob1-card:focus {
   -webkit-text-decoration-color: #fbcd00;
           text-decoration-color: #fbcd00;
 }
-.ob1-sosh .o-link-arrow.o-link-reverse.up, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up,
+.ob1-sosh .o-link-arrow.o-link-reverse::after, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow::after, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow::after, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow::after, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::after,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow::after,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::after, .ob1-sosh .o-link-arrow.o-link-reverse::before, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow::before, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow::before, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow::before, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::before,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow::before,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow::before {
+  color: #fbcd00;
+}
+.ob1-sosh .o-link-arrow.o-link-reverse.back, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.back, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.back, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.back, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.back,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back, .ob1-sosh .o-link-arrow.o-link-reverse.up, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.up,
 .bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up, .ob1-sosh .o-link-arrow.o-link-reverse.down, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.down, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.down, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.down, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.down,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.down,
 .bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.down {
   color: #fff;
 }
-.ob1-sosh .o-link-arrow.o-link-reverse.up:hover, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up:hover, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up:hover, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up:hover, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:hover,
+.ob1-sosh .o-link-arrow.o-link-reverse.back:hover, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.back:hover, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.back:hover, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.back:hover, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:hover,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.back:hover,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:hover, .ob1-sosh .o-link-arrow.o-link-reverse.back:focus, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.back:focus, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.back:focus, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.back:focus, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:focus,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.back:focus,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:focus, .ob1-sosh .o-link-arrow.o-link-reverse.up:hover, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up:hover, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up:hover, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up:hover, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:hover,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.up:hover,
 .bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:hover, .ob1-sosh .o-link-arrow.o-link-reverse.up:focus, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up:focus, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up:focus, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up:focus, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:focus,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.up:focus,
@@ -25005,7 +24830,9 @@ a.ob1-card:hover, a.ob1-card:focus {
   -webkit-text-decoration-color: #fff;
           text-decoration-color: #fff;
 }
-.ob1-sosh .o-link-arrow.o-link-reverse.up:active, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up:active, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up:active, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up:active, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:active,
+.ob1-sosh .o-link-arrow.o-link-reverse.back:active, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.back:active, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.back:active, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.back:active, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:active,
+.ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.back:active,
+.bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.back:active, .ob1-sosh .o-link-arrow.o-link-reverse.up:active, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.up:active, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.up:active, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.up:active, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:active,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.up:active,
 .bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.up:active, .ob1-sosh .o-link-arrow.o-link-reverse.down:active, .ob1-sosh .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item a.o-link-arrow.down:active, .breadcrumb.ob1-breadcrumb-inverse .breadcrumb-item .ob1-sosh a.o-link-arrow.down:active, .ob1-sosh .bg-dark .breadcrumb .breadcrumb-item a.o-link-arrow.down:active, .bg-dark .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.down:active,
 .ob1-sosh .bg-gray1 .breadcrumb .breadcrumb-item a.o-link-arrow.down:active,
@@ -25019,12 +24846,6 @@ a.ob1-card:hover, a.ob1-card:focus {
 .bg-gray1 .breadcrumb .breadcrumb-item .ob1-sosh a.o-link-arrow.disabled {
   -webkit-text-decoration-color: #555 !important;
           text-decoration-color: #555 !important;
-}
-.ob1-sosh .bg-gray2 .o-link-arrow {
-  color: #000;
-}
-.ob1-sosh .bg-gray2 .o-link-arrow:active {
-  color: #de2554;
 }
 .ob1-sosh .ob1-link-icon:hover, .ob1-sosh .ob1-link-icon:focus {
   color: #000;
@@ -25329,13 +25150,10 @@ a.ob1-card:hover, a.ob1-card:focus {
 .ob1-sosh .form-control.form-control-icon[disabled] ~ .form-control-placeholder + .btn-icon, .ob1-sosh .form-control.form-control-icon[disabled] ~ .form-control-placeholder + .icon {
   color: #ccc;
 }
-.ob1-sosh .form-control.form-control-icon ~ .form-control-placeholder + .btn-icon,
-.ob1-sosh .form-control.form-control-icon ~ .form-control-placeholder + .icon {
+.ob1-sosh .form-control.form-control-icon ~ .form-control-placeholder + .btn-icon, .ob1-sosh .form-control.form-control-icon ~ .form-control-placeholder + .icon {
   color: #de2554;
 }
-.ob1-sosh .form-control.is-invalid:not(.form-control-empty):not(:focus) ~ .form-control-placeholder + .btn-icon,
-.ob1-sosh .form-control.is-invalid:not(.form-control-empty):not(:focus) ~ .form-control-placeholder + .icon, .ob1-sosh .form-control.is-invalid ~ .form-control-placeholder + .btn-icon,
-.ob1-sosh .form-control.is-invalid ~ .form-control-placeholder + .icon {
+.ob1-sosh .form-control.is-invalid:not(.form-control-empty):not(:focus) ~ .form-control-placeholder + .btn-icon, .ob1-sosh .form-control.is-invalid:not(.form-control-empty):not(:focus) ~ .form-control-placeholder + .icon, .ob1-sosh .form-control.is-invalid ~ .form-control-placeholder + .btn-icon, .ob1-sosh .form-control.is-invalid ~ .form-control-placeholder + .icon {
   color: #e70002;
 }
 .ob1-sosh .form-control.hide-password + .form-control-placeholder + .icon::before, .ob1-sosh .form-control.show-password + .form-control-placeholder + .icon::before {
@@ -25505,9 +25323,6 @@ a.ob1-card:hover, a.ob1-card:focus {
     right: 61px;
     left: auto;
   }
-}
-.ob1-sosh .ob1-carrousel-product-sheet .swiper-pagination {
-  display: inline-flex;
 }
 .ob1-sosh .breadcrumb .breadcrumb-item a:hover, .ob1-sosh .breadcrumb .breadcrumb-item a:focus {
   color: #000;
@@ -26413,27 +26228,15 @@ a.ob1-card:hover, a.ob1-card:focus {
   box-shadow: unset;
 }
 .ob1-sosh .ob1-card:hover, .ob1-sosh .ob1-card.focus-within {
-  border-color: #000;
+  border-color: #555;
   box-shadow: unset;
 }
 .ob1-sosh .ob1-card:focus-within {
-  border-color: #000;
+  border-color: #555;
   box-shadow: unset;
 }
-.ob1-sosh .ob1-card:active {
+.ob1-sosh .ob1-card:active, .ob1-sosh .ob1-card.ob1-card-selected {
   border-color: #de2554;
-  box-shadow: unset;
-}
-.ob1-sosh .ob1-card.ob1-card-selected {
-  border-color: #de2554;
-  box-shadow: unset;
-}
-.ob1-sosh .ob1-card.ob1-card-selected:hover, .ob1-sosh .ob1-card.ob1-card-selected.focus-within, .ob1-sosh .ob1-card.ob1-card-selected:active {
-  border-color: #000;
-  box-shadow: unset;
-}
-.ob1-sosh .ob1-card.ob1-card-selected:focus-within {
-  border-color: #000;
   box-shadow: unset;
 }
 .ob1-sosh .ob1-card.ob1-card-inverse:hover, .ob1-sosh .ob1-card.ob1-card-inverse.focus-within {
@@ -26442,20 +26245,8 @@ a.ob1-card:hover, a.ob1-card:focus {
 .ob1-sosh .ob1-card.ob1-card-inverse:focus-within {
   border-color: #fff;
 }
-.ob1-sosh .ob1-card.ob1-card-inverse:active {
+.ob1-sosh .ob1-card.ob1-card-inverse:active, .ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected {
   border-color: #fbcd00;
-}
-.ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected {
-  border-color: #fbcd00;
-}
-.ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected:hover, .ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected.focus-within, .ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected:active {
-  border-color: #fff;
-}
-.ob1-sosh .ob1-card.ob1-card-inverse.ob1-card-selected:focus-within {
-  border-color: #fff;
-}
-.ob1-sosh .ob1-card.ob1-card-link::after {
-  font-family: icon-sosh, sans-serif;
 }
 .ob1-sosh .page-link {
   font-weight: 500;
@@ -26563,35 +26354,6 @@ a.ob1-card:hover, a.ob1-card:focus {
   color: #fff;
   background-color: #000;
 }
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn {
-  outline-color: #de2554;
-}
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:hover, .ob1-sosh .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:focus {
-  padding: 0.1875rem 1.4375rem 0.3125rem;
-  color: #000;
-  border-color: #000;
-  border-width: 0.125rem;
-}
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:active, .ob1-sosh .ob1-filter-chips-bar .ob1-filterchip .ob1-filterchip-label.ob1-filter-chips-bar-btn:active::before {
-  color: #fff;
-  background-color: #000;
-}
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip.ob1-filterchip-selected .ob1-filter-chips-bar-btn:hover, .ob1-sosh .ob1-filter-chips-bar .ob1-filterchip.ob1-filterchip-selected .ob1-filter-chips-bar-btn:focus {
-  padding: 0.1875rem 0.8125rem 0.3125rem;
-  color: #fff;
-}
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip.ob1-filterchip-selected .ob1-filter-chips-bar-btn:focus {
-  background-color: #000;
-}
-.ob1-sosh .ob1-filter-chips-bar .ob1-filterchip.ob1-filterchip-selected .ob1-filter-chips-bar-btn:active {
-  border-color: #000;
-}
-.ob1-sosh .ob1-color-chips .ob1-color-chip-input:focus + .ob1-color-chip-label {
-  outline: 0.0625rem dotted #de2554;
-}
-.ob1-sosh .ob1-color-chips .ob1-color-chip-input:checked + .ob1-color-chip-label {
-  border-color: #de2554;
-}
 
 /**
  * Default color
@@ -26637,8 +26399,8 @@ a.ob1-card:hover, a.ob1-card:focus {
 /* Typography configuration for mobile (xs and sm) */
 /* Typography configuration for tablet and small desktop (md, lg) */
 /* widescreen variables aren't part of bootstrap, they are used in our custom scss */
-.icon-call-centre::before {
-  content: "";
+.icon-orange-info::before {
+  content: "";
 }
 
 .icon-multimedia-buying::before {
@@ -26767,30 +26529,6 @@ a.ob1-card:hover, a.ob1-card:focus {
 
 .icon-calendar-21::before {
   content: "";
-}
-
-.icon-delete::before {
-  content: "";
-}
-
-.icon-change-tv-set-top-box::before {
-  content: "";
-}
-
-.icon-tv-multi-room::before {
-  content: "";
-}
-
-.icon-thunder::before {
-  content: "";
-}
-
-.icon-service-8::before {
-  content: "";
-}
-
-.icon-orange-info::before {
-  content: "";
 }
 
 .icon-graph-column-chart::before {
@@ -28583,6 +28321,10 @@ a.ob1-card:hover, a.ob1-card:focus {
 
 .icon-Defibrillator::before {
   content: "";
+}
+
+.icon-delete::before {
+  content: "";
 }
 
 .icon-device-desktop-computer::before {
@@ -30469,6 +30211,22 @@ a.ob1-card:hover, a.ob1-card:focus {
   content: "";
 }
 
+.icon-change-tv-set-top-box::before {
+  content: "";
+}
+
+.icon-tv-multi-room::before {
+  content: "";
+}
+
+.icon-thunder::before {
+  content: "";
+}
+
+.icon-service-8::before {
+  content: "";
+}
+
 @font-face {
   font-family: "icon-orange";
   font-style: normal;
@@ -30550,26 +30308,11 @@ a.ob1-card:hover, a.ob1-card:focus {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: icon-sosh, sans-serif !important;
 }
-.ob1-sosh .icon-call-centre::before {
-  content: "" !important;
-}
-.ob1-sosh .icon-mon-reseau::before {
-  content: "" !important;
-}
-.ob1-sosh .icon-messaging-unified::before {
-  content: "" !important;
-}
-.ob1-sosh .icon-accessibility-vision::before {
-  content: "" !important;
-}
-.ob1-sosh .icon-Hide::before {
-  content: "" !important;
-}
 .ob1-sosh .icon-orange-info::before {
   content: "" !important;
 }
 .ob1-sosh .icon-list::before {
-  content: "" !important;
+  content: "" !important;
 }
 .ob1-sosh .icon-circle::before {
   content: "" !important;
@@ -30632,7 +30375,7 @@ a.ob1-card:hover, a.ob1-card:focus {
   content: "" !important;
 }
 .ob1-sosh .icon-delete::before {
-  content: "" !important;
+  content: "" !important;
 }
 .ob1-sosh .icon-co-2::before {
   content: "" !important;
@@ -31018,6 +30761,9 @@ a.ob1-card:hover, a.ob1-card:focus {
 .ob1-sosh .icon-modifier-new::before {
   content: "" !important;
 }
+.ob1-sosh .icon-mon-reseau::before {
+  content: "";
+}
 .ob1-sosh .icon-multi-sim::before {
   content: "" !important;
 }
@@ -31180,6 +30926,9 @@ a.ob1-card:hover, a.ob1-card:focus {
 .ob1-sosh .icon-wifi::before {
   content: "" !important;
 }
+.ob1-sosh .icon-messaging-unified::before {
+  content: "" !important;
+}
 
 /**
  * Default color
@@ -31202,8 +30951,8 @@ a.ob1-card:hover, a.ob1-card:focus {
 /* Typography configuration for mobile (xs and sm) */
 /* Typography configuration for tablet and small desktop (md, lg) */
 /* widescreen variables aren't part of bootstrap, they are used in our custom scss */
-.icon-call-centre::before {
-  content: "";
+.icon-orange-info::before {
+  content: "";
 }
 
 .icon-multimedia-buying::before {
@@ -31332,30 +31081,6 @@ a.ob1-card:hover, a.ob1-card:focus {
 
 .icon-calendar-21::before {
   content: "";
-}
-
-.icon-delete::before {
-  content: "";
-}
-
-.icon-change-tv-set-top-box::before {
-  content: "";
-}
-
-.icon-tv-multi-room::before {
-  content: "";
-}
-
-.icon-thunder::before {
-  content: "";
-}
-
-.icon-service-8::before {
-  content: "";
-}
-
-.icon-orange-info::before {
-  content: "";
 }
 
 .icon-graph-column-chart::before {
@@ -33148,6 +32873,10 @@ a.ob1-card:hover, a.ob1-card:focus {
 
 .icon-Defibrillator::before {
   content: "";
+}
+
+.icon-delete::before {
+  content: "";
 }
 
 .icon-device-desktop-computer::before {
@@ -35032,6 +34761,22 @@ a.ob1-card:hover, a.ob1-card:focus {
 
 .icon-zoom-out::before {
   content: "";
+}
+
+.icon-change-tv-set-top-box::before {
+  content: "";
+}
+
+.icon-tv-multi-room::before {
+  content: "";
+}
+
+.icon-thunder::before {
+  content: "";
+}
+
+.icon-service-8::before {
+  content: "";
 }
 
 @font-face {

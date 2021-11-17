@@ -9,7 +9,8 @@
  */
 (function($)
 {
-    function makePos(self) {
+    function makePos(self)
+    {
         var _childs = self.data("_vgchild");
         var _width = self.width();
         var _matrix = [[0,_width,0]];
@@ -29,8 +30,9 @@
         });
         self.data("_vgwrapheight", _hmax);
         heightTo(self);
-    }
-    function getAttachPoint(mtx, width) {
+    };
+    function getAttachPoint(mtx, width)
+    {
         var _mtx = mtx.concat().sort(matrixSortDepth);
         var _max = _mtx[_mtx.length-1][2];
         for(var i=0,imax=_mtx.length; i<imax; i++)
@@ -42,8 +44,9 @@
             }
         }
         return [0, _max];
-    }
-    function updateAttachArea(mtx, point, size) {
+    };
+    function updateAttachArea(mtx, point, size)
+    {
         var _mtx = mtx.concat().sort(matrixSortDepth);
         var _cell = [point[0], point[0]+size[0], point[1]+size[1]];
         for(var i=0,imax=_mtx.length; i<imax; i++)
@@ -58,16 +61,19 @@
             }
         }
         return matrixJoin(_mtx, _cell);
-    }
-    function matrixSortDepth(a, b) {
+    };
+    function matrixSortDepth(a, b)
+    {
         if(!a || !b) return 0;
         return ((a[2] === b[2] && a[0] > b[0]) || a[2] > b[2]) ? 1 : -1;
-    }
-    function matrixSortX(a, b) {
+    };
+    function matrixSortX(a, b)
+    {
         if(!a || !b) return 0;
         return (a[0] > b[0]) ? 1 : -1;
-    }
-    function matrixJoin(mtx, cell) {
+    };
+    function matrixJoin(mtx, cell)
+    {
         var _mtx = mtx.concat([cell]).sort(matrixSortX);
         var _mtx_join = [];
         for(var i=0,imax=_mtx.length; i<imax; i++)
@@ -85,8 +91,9 @@
             }
         }
         return _mtx_join;
-    }
-    function matrixTrimWidth(a, b) {
+    };
+    function matrixTrimWidth(a, b)
+    {
         if(a[0] >= b[0] && a[0] < b[1] || a[1] >= b[0] && a[1] < b[1])
         {
             if(a[0] >= b[0] && a[0] < b[1])
@@ -99,8 +106,9 @@
             }
         }
         return a;
-    }
-    function getSize(child) {
+    };
+    function getSize(child)
+    {
         var _w = child.width();
         var _h = child.height();
         _w += strToNum(child.css("margin-left"))
@@ -116,20 +124,21 @@
             + strToNum(child.css("padding-bottom"))
             + strToNum(child.css("border-bottom-width"));
         return [_w, _h];
-    }
-    function strToNum(str) {
+    };
+    function strToNum(str){
         var num = parseInt(str, 10);
         if(isNaN(num)){
             return 0
         }
         return num;
     }
-    function getNumValue(val, def) {
+    function getNumValue(val, def){
         def = typeof(def) === "number" && isFinite(def) ? def : 0 ;
         val = typeof(val) === "number" && isFinite(val) ? val : def ;
         return val;
-    }
-    function heightTo(self) {
+    };
+    function heightTo(self)
+    {
         var _self = self;
         var _easeTime = getNumValue(_self.data("_vgopt").time, 500);
         var _delay = _self.data("_vgchild").length
@@ -141,7 +150,9 @@
             if(!$.support.noCloneEvent)
             {
                 _self.height(_self.data("_vgwrapheight"));
-            } else {
+            }
+            else
+            {
                 _self.animate(
                     {
                         height: _self.data("_vgwrapheight")+"px"
@@ -150,7 +161,9 @@
                     "easeOutQuart"
                 );
             }
-        } else {
+        }
+        else
+        {
             clearTimeout(_self.data("_vgwraptimeout"));
             _self.data("_vgwraptimeout", setTimeout(function(){
                 if(!$.support.noCloneEvent)
@@ -169,8 +182,9 @@
                 }
             }, _delay));
         }
-    }
-    function moveTo(childs) {
+    };
+    function moveTo(childs)
+    {
         var _c;
         childs.each(function(i)
         {
@@ -178,8 +192,9 @@
             _c.css("left", _c.data("_vgleft")+"px");
             _c.css("top", _c.data("_vgtop")+"px");
         });
-    }
-    function animateTo(childs, easing, time, delay) {
+    };
+    function animateTo(childs, easing, time, delay)
+    {
         var _self = $(childs).parent();
         var isMove = false;
         var imax = childs.length;
@@ -219,8 +234,9 @@
                 }, i*delay));
             });
         }
-    }
-    function refreshHandler(tg) {
+    };
+    function refreshHandler(tg)
+    {
         tg.each(function(num){
             var _self = $(this);
             clearTimeout(_self.data("_vgtimeout"));
@@ -234,8 +250,9 @@
                 );
             }, getNumValue(_self.data("_vgopt").wait, 500)));
         });
-    }
-    function setFontSizeListener(self, func) {
+    };
+    function setFontSizeListener(self, func)
+    {
         var s = $("<span />")
             .text(" ")
             .attr("id", "_vgridspan")
@@ -249,8 +266,9 @@
                 func(self);
             }
         }, 1000));
-    }
-    function setImgLoadEvent(self, func) {
+    };
+    function setImgLoadEvent(self, func)
+    {
         if(!self.data("vgrid-image-event-added")){
             self.data("vgrid-image-event-added", 1);
             self.on("vgrid-added", function(){
@@ -276,7 +294,7 @@
             _prepend.apply(self, arguments);
             self.trigger("vgrid-added");
         };
-    }
+    };
     $.fn.extend({
         vgrid: function(option)
         {

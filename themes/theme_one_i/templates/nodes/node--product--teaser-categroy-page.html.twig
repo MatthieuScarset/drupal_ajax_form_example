@@ -79,6 +79,7 @@
               <div class="row no-gutters product-name">
                 <div class="col col-12">
                       {{ content.field_product_name }}
+                      {% set node_title = node.field_product_name.getValue()[0]['value'] %}
                 </div>
               </div>
             {% endif %}
@@ -109,7 +110,10 @@
             </div>
           {% endif %}
           <div class="row no-gutters btn_view_offer">
-              <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="btn btn-primary mb-md-0 w-100">{% trans %}See offer{% endtrans %}</a>
+              <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="btn btn-primary mb-md-0 w-100"
+                 onmousedown="utag_link(utag_data.titre_page, 'categ_cta_link_product', '{{ node_title|lower }}', '');">
+                {% trans %}See offer{% endtrans %}
+              </a>
           </div>
         </div>
       </div>

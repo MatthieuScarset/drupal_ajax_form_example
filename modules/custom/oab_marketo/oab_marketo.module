@@ -6,7 +6,9 @@ use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeStorage;
 use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\oab_marketo\AltaresTokenService;
 use Drupal\oab_marketo\Form\ParagraphDeleteForm;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\ParagraphInterface;
@@ -39,7 +41,6 @@ function oab_marketo_paragraph_access(ParagraphInterface $paragraph, $operation,
  * @return AccessResult
  */
 function oab_marketo_paragraph_create_access(AccountInterface $account, array $context, $entity_bundle) {
-//  kint($context, $entity_bundle);
   if ($entity_bundle === 'marketo') {
     if ($account->hasPermission('create marketo form')) {
       return AccessResult::allowed();
@@ -76,7 +77,7 @@ function oab_marketo_library_info_alter(&$libraries, $extension) {
         $libraries['marketo']['js'][$base_url . '/images/' . $library['enhanced_form']] = ["#type" => "external"];
         $libraries['marketo']['js'][$base_url . '/images/' . $library['simple_dto']] = ["#type" => "external"];
         $libraries['marketo']['js'][$base_url . '/images/' . $library['forms2']] = ["#type" => "external"];
-
+        $libraries['marketo']['js'][$base_url . '/images/' . $library['photoclient']] = ["#type" => "external"];
     }
   }
 }
@@ -86,6 +87,7 @@ function oab_marketo_library_info_alter(&$libraries, $extension) {
  *
  * @param $variables
  * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+ * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function oab_marketo_preprocess_paragraph(&$variables) {
 
@@ -104,15 +106,32 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       $redirection_url = $paragraph->field_redirection_url->first()->getUrl()->toString();
     }
 
+    if (isset($paragraph->field_order) && $paragraph->field_order->count() > 0) {
+      $fields = $paragraph->field_order->value;
+      $list_field = array_filter(array_map('trim', explode("\n", $fields)));
+    }
+
+    // Si le field "require altares" est activé
+    if (isset($paragraph->field_requires_altares->value) && $paragraph->field_requires_altares->value) {
+      /** @var AltaresTokenService $altares_token_service */
+      $altares_token_service =  Drupal::service('oab_marketo.altares_token.service');
+      $token = $altares_token_service->createToken();
+      $variables['#attached']['drupalSettings']['marketo_altares_token'] = $token->getToken();
+      $variables['#cache']['max-age'] = 0;
+      $variables['elements']['#cache']['max-age'] = 0;
+      \Drupal::service('page_cache_kill_switch')->trigger();
+    }
+
     $variables['#attached']['drupalSettings']['marketo_data'] = [
       'mktoDomain' => $marketo_conf->get('marketo.general.mkto_domain'),
       'mktoMunchkinID' => $marketo_conf->get('marketo.general.mkto_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
 //      'formName' => $paragraph->field_title->value,
       'formName' => 'contact',
+      'useAltares' => true,
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
-      'mktoFieldOrder' =>["submitButton","LegalInfos"]
+      'mktoFieldOrder' => isset($list_field) ? $list_field : ["submitButton","LegalInfos"]
       // mktoFrom key added in JS to get the referrer
     ];
 
@@ -163,6 +182,7 @@ function oab_marketo_preprocess_node(&$variables) {
         'customFollowUpUrl' => $mkto_config->get('marketo.document.mkto_custom_follow_up_url'),
         'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$mkto_config->get('marketo.document.mkto_form_id'),
         'formName' => $mkto_config->get('marketo.document.mkto_form_name'),
+        'useAltares' => false,
         'mktoPdfName' => $node->label(),
         'mktoPdfLink' => isset($file) ? $file->url('canonical', ['absolute' => true]) : null,
         'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),

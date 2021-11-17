@@ -57,7 +57,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
                 }
             }
             if ($can_edit !== true) {
-                \Drupal\Core\Messenger\MessengerInterface::addMessage(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
+                drupal_set_message(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
                 $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
                 $response->send();
                 exit();
@@ -185,7 +185,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
 
     // Ajout de champ dans les menus
-    if ($form_id == 'menu_link_content_menu_link_content_form') {
+    if (preg_match('@menu_link_content_(.*)_form@', $form_id)) {
         $menu_link_entity = _oab_backoffice_get_menu_link_entity_from_form_state($form_state);
         $link_options = $menu_link_entity->link->first()->options;
         $link_target = !empty($link_options['target']) ? true : false;

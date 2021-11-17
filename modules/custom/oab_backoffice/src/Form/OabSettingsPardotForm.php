@@ -129,6 +129,13 @@ class OabSettingsPardotForm extends ConfigFormBase {
       '#size'=> 350,
     );
 
+    $form['marketo']['general']['libraries']['photoclient'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Librairie PhotoClient'),
+      '#default_value' => $config->get('marketo.general.libraries.photoclient'),
+      '#size'=> 350,
+    );
+
     $form['marketo']['document'] = [
       '#type' => "fieldset",
       '#title' => $this->t("Document marketo form settings"),
@@ -192,6 +199,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
       ->set('marketo.general.libraries.simple_dto', $form_state->getValue('simple_dto'))
       ->set('marketo.general.libraries.enhanced_form', $form_state->getValue('enhanced_form'))
       ->set('marketo.general.libraries.forms2', $form_state->getValue('forms2'))
+      ->set('marketo.general.libraries.photoclient', $form_state->getValue('photoclient'))
       ->set('marketo.document.mkto_form_name', $form_state->getValue('mkto_form_name'))
       ->set('marketo.document.mkto_form_id', $form_state->getValue('mkto_form_id'))
       ->set('marketo.document.mkto_custom_follow_up_url', $form_state->getValue('mkto_custom_follow_up_url'))

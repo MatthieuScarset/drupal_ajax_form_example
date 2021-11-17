@@ -485,6 +485,36 @@
         console.log( "ajaxError : timeout" );
     });
 
+  //Changer le burger menu en une croix à l'ouverture
+
+  var burger_menu_observer = new MutationObserver(function (event) {
+    event.forEach((mutationRecord) => {
+
+      if (mutationRecord.target.getAttribute('aria-expanded') === 'true') {
+
+        $('#main_nav .menu-xs .sandwich-button .close-menu').removeClass("hidden").addClass("show");
+        $('#main_nav .menu-xs .sandwich-button .burger-menu').addClass("hidden");
+
+      } else {
+
+        $('#main_nav .menu-xs .sandwich-button .close-menu').removeClass("show").addClass("hidden");
+        $('#main_nav .menu-xs .sandwich-button .burger-menu').removeClass("hidden");
+
+      }
+    });
+  })
+
+  document.querySelectorAll('.menu-xs .sandwich-button').forEach((e) => {
+    burger_menu_observer.observe(e, {
+      attributes: true,
+      attributeFilter: ['aria-expanded'],
+      childList: false,
+      characterData: false
+    })
+  });
+
+  // Gestion ouverture du méga-menu desktop
+
   $('.mega-menu .nav-item').on('click', function () {
     $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane:first').addClass('active');
     $('.mega-menu .nav .tab-content.sous_items_prod_serv .tab-pane:not(:first)').removeClass('active');
@@ -497,6 +527,7 @@
   });
 
 
+// Gestion slide mega menu mobile
 
   $(document).on('click', '#navbar-collapse-mega ul[data-menu-level] > li > a.beyond', function (e){
     e.preventDefault();
@@ -507,6 +538,7 @@
     parent.parent().children().not('.active').addClass("hidden");
     parent.children('ul').removeClass('hidden').addClass('show');
     parent.children('ul').css("padding-left", 0);
+    parent.children('ul').css("margin-bottom", 0);
 
   });
 

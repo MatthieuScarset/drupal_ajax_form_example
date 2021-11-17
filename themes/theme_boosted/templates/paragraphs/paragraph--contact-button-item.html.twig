@@ -10,7 +10,9 @@
     <strong>{{ content.field_cb_item_title }}</strong>
   </div>
   <div class="contact-item-descr-container">
-    <a class="contact-item-descr" href="{{ link_target }}">
+    <a class="contact-item-descr" href="{{ link_target }}"
+       onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'contact button','track_nom':'Card',
+                               'track_cible':'{{ content.field_cb_item_title['#items'].value }}','track_type_evt':'clic'})">
       <strong>{{ content.field_cb_item_desc }}</strong>
     </a>
     <span class="o-link-arrow"></span>

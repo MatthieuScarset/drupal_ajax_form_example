@@ -91,6 +91,7 @@ We call a macro which calls itself to render the full tree.
             <li role="presentation">
               <a class="items" href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}"
                  aria-controls="item-{{ loop.index }}"
+                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})"
                  role="tab">{{ item.title }} </a>
             </li>
           {% endfor %}
@@ -103,7 +104,8 @@ We call a macro which calls itself to render the full tree.
               <div class="row">
                 <div class="en_ce_moment col-xs-6 col-sm-6 col-md-6 col-lg-6">En ce moment</div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                  <a href="{{ item.url }}">Voir tous les produits
+                  <a href="{{ item.url }}"
+                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'Voir tous les produits','track_type_evt':'clic'});">Voir tous les produits
                     <span class="all_product_glyphicon glyphicon glyphicon-menu-right"></span>
                   </a>
                 </div>
@@ -111,7 +113,8 @@ We call a macro which calls itself to render the full tree.
               <div class="row">
                 {% for sous_item in item.below %}
                   <div class="sous-items col-sm-6 col-md-6 col-lg-6">
-                    <a href="{{ sous_item.url }}">{{ sous_item.title }}
+                    <a href="{{ sous_item.url }}"
+                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
                       <p class="teaser">{{ sous_item.entity.field_teaser.value }}</p>
                     </a>
                   </div>

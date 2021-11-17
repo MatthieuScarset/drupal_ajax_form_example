@@ -171,9 +171,9 @@ function _remove_header_links(array &$attachments) {
 function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
 
     if ($entity->bundle() == 'product') {
-        //on deserialise les données à passer au template
-        $field_axiome_data = isset($entity->field_axiome_data) ? unserialize($entity->field_axiome_data->value) : array();
-        if (count($field_axiome_data) > 0) {
+        //  on deserialise les données à passer au template
+        $field_axiome_data = isset($entity->field_axiome_data->value) ? unserialize($entity->field_axiome_data->value) : array();
+        if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
             $build['axiome_data'] = $field_axiome_data;
             $build['axiome_data']['sous_famille'] = \Drupal\oab_axiome\Controller\OabAxiomeController::getSousFamille($entity->id());
         }
@@ -485,6 +485,17 @@ function oab_frontoffice_views_post_render($view) {
                 }
             }
         }
+    }
+    elseif ($view->id() == 'category_page') {
+      if (\Drupal::routeMatch()->getParameters()->has('tid')) {
+        /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+        $tid = \Drupal::routeMatch()->getParameters()->get('tid');
+        if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
+          $view->setTitle($term->getName());
+          $route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT);
+          $route->setDefault('_title', $term->getName());
+        }
+      }
     }
 }
 

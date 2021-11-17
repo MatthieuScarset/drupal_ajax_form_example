@@ -1,0 +1,39 @@
+uuid: 61e2fd70-2d83-4062-94c7-a48999d27390
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:2f1da12b-abcd-4f62-97dc-be4b931091fa'
+  module:
+    - block_content
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: oneiwebform
+theme: theme_boosted
+region: prefooter
+weight: -42
+provider: null
+plugin: 'block_content:2f1da12b-abcd-4f62-97dc-be4b931091fa'
+settings:
+  id: 'block_content:2f1da12b-abcd-4f62-97dc-be4b931091fa'
+  label: '[One-i] Webform'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    langcodes:
+      fr: fr
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: "/contact\r\n/node/14239"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,47 @@
+uuid: f5a36569-47bd-4c3d-82b8-baf7cdb9d25c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+  module:
+    - block_content
+    - ctools
+    - language
+    - system
+  theme:
+    - theme_boosted
+id: engenericmyservicespacem
+theme: theme_boosted
+region: sidebar
+weight: -60
+provider: null
+plugin: 'block_content:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+settings:
+  id: 'block_content:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+  label: '[EN][Generic] My Service Space M'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/products/audio-and-web-conferencing\r\n/products/business-together-microsoft"
+    negate: false
+    context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      product: product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

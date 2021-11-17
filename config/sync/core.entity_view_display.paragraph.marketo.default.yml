@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.marketo.field_form_id
     - field.field.paragraph.marketo.field_message_of_thanks
+    - field.field.paragraph.marketo.field_order
     - field.field.paragraph.marketo.field_redirection_url
     - field.field.paragraph.marketo.field_requires_altares
     - field.field.paragraph.marketo.field_title
@@ -32,6 +33,13 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
+  field_order:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_redirection_url:
     weight: 2
     label: hidden
@@ -45,7 +53,7 @@ content:
     type: link_separate
     region: content
   field_requires_altares:
-    weight: 4
+    weight: 5
     label: above
     settings:
       format: default

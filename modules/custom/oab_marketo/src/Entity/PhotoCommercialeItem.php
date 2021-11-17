@@ -29,11 +29,9 @@ use Drupal\webform\Plugin\WebformElement\DateTime;
  *   },
  * )
  */
-class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommercialeItemInterface
-{
+class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommercialeItemInterface {
 
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type)
-  {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
 
     // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
@@ -92,7 +90,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['division_compte'] = BaseFieldDefinition::create('string')
       ->setLabel(t('division_compte'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 6)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -101,7 +99,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['division_siren'] = BaseFieldDefinition::create('string')
       ->setLabel(t('division_siren'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 6)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -110,7 +108,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['canal'] = BaseFieldDefinition::create('string')
       ->setLabel(t('canal'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 6)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -127,7 +125,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['segment_macro'] = BaseFieldDefinition::create('string')
       ->setLabel(t('segment_macro'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 6)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -136,7 +134,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['ae_entreprise'] = BaseFieldDefinition::create('string')
       ->setLabel(t('ae_entreprise'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 6)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -145,7 +143,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
     $fields['ae'] = BaseFieldDefinition::create('string')
       ->setLabel(t('ae'))
       ->setDescription(t(''))
-      ->setSetting('max_length', 10)
+      ->setSetting('max_length', 40)
       ->setReadOnly(true)
       ->setRequired(false)
       ->setDisplayConfigurable('form', false)
@@ -173,80 +171,70 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
   /**
    * @return string
    */
-  public function getRaisonSociale(): string
-  {
+  public function getRaisonSociale(): string {
     return $this->raisonSociale->value;
   }
 
   /**
    * @return string
    */
-  public function getSirenHq(): string
-  {
+  public function getSirenHq(): string {
     return $this->sirenHq->value;
   }
 
   /**
    * @return int
    */
-  public function getIdent(): string
-  {
+  public function getIdent(): string {
     return $this->ident->value;
   }
 
   /**
    * @return string
    */
-  public function getSiren(): string
-  {
+  public function getSiren(): string {
     return $this->siren->value;
   }
 
   /**
    * @return string
    */
-  public function getStatutInsee(): bool
-  {
+  public function getStatutInsee(): bool {
     return $this->statutInsee->value;
   }
 
   /**
    * @return string
    */
-  public function getDivisionCompte(): string
-  {
+  public function getDivisionCompte(): string {
     return $this->divisionCompte->value;
   }
 
   /**
    * @return string
    */
-  public function getDivisionSiren(): string
-  {
+  public function getDivisionSiren(): string {
     return $this->divisionSiren->value;
   }
 
   /**
    * @return string
    */
-  public function getCanal(): string
-  {
+  public function getCanal(): string {
     return $this->canal->value;
   }
 
   /**
    * @return string
    */
-  public function getSegmentation(): string
-  {
+  public function getSegmentation(): string {
     return $this->segmentation->value;
   }
 
   /**
    * @return string
    */
-  public function getSegmentMacro(): string
-  {
+  public function getSegmentMacro(): string {
     return $this->segmentMacro->value;
   }
 

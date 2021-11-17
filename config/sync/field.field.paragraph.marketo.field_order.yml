@@ -1,0 +1,19 @@
+uuid: 1ec1e57b-b3ad-42b5-a988-e531440cb551
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_order
+    - paragraphs.paragraphs_type.marketo
+id: paragraph.marketo.field_order
+field_name: field_order
+entity_type: paragraph
+bundle: marketo
+label: 'Field Order'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

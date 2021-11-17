@@ -30,8 +30,7 @@ use Drupal\webform\Plugin\WebformElement\DateTime;
  *   },
  * )
  */
-class AltaresToken extends ContentEntityBase implements AltaresTokenInterface
-{
+class AltaresToken extends ContentEntityBase implements AltaresTokenInterface {
 
   /**
    * {@inheritdoc}

@@ -2813,11 +2813,8 @@
           if (this._config.boundary !== 'scrollParent') {
             $(parent).addClass(ClassName.POSITION_STATIC);
           }
-          if (typeof Popper.createPopper === "function") {
-            this._popper = Popper.createPopper(referenceElement, this._menu, this._getPopperConfig());
-          } else {
-            this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
-          }
+
+          this._popper = new Popper(referenceElement, this._menu, this._getPopperConfig());
         } // If this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS

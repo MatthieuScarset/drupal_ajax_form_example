@@ -5,8 +5,21 @@ use Drupal\oab_marketo\PhotoCommercialeService;
 
 function oab_marketo_importPhotoCommerciale($file_name, &$context) {
 
+  $path_zip_file = \Drupal::service('file_system')->realpath($file_name);
+  $path_to_folder = \Drupal::service('file_system')->realpath(PhotoCommercialeService::IMPORT_DIRECTORY);
 
-  $file = fopen($file_name, 'r');
+  $zip = new \Drupal\Core\Archiver\Zip($path_zip_file);
+  $zip->extract($path_to_folder);
+
+  $file_name_extension = substr($file_name, -8, 8);
+  if ($file_name_extension === ".csv.zip") {
+    $final_file_name = substr($file_name, 0, -4);
+  }
+  else {
+    $final_file_name = substr($file_name, 0, -4).".csv";
+  }
+
+  $file = fopen($final_file_name, 'r');
   if (isset($context['sandbox']['file_position'])) {
     fseek($file, $context['sandbox']['file_position']);
   } else {
@@ -19,11 +32,11 @@ function oab_marketo_importPhotoCommerciale($file_name, &$context) {
 
   $i = 0;
   while ($i < 100 && false !== ($row = fgetcsv($file, 0, ';'))) {
-    if ( $context['sandbox']['etat'] > 0 || $i > 0) { //Pour évier d'importer les titres des colonnes
+    if ($context['sandbox']['etat'] > 0 || $i > 0) { //Pour évier d'importer les titres des colonnes
       if ($service->import($row)) {
         $i++;
       }
-    } elseif ( $context['sandbox']['etat'] == 0 && $i == 0 ) {
+    } elseif ($context['sandbox']['etat'] == 0 && $i == 0) {
       $i++;
     }
   }
@@ -70,7 +83,19 @@ function oab_marketo_clearPhotoCommercialeTable(&$context) {
 
 
 function oab_marketo_deleteFile($file, &$context) {
-  unlink($file);
+
+  $file_name_extension = substr($file, -8, 8);
+  if ($file_name_extension === ".csv.zip") {
+    $file_csv = substr($file, 0, -4);
+    $file_zip = $file;
+  }
+  else {
+    $file_csv = substr($file, 0, -4).".csv";
+    $file_zip = substr($file, 0, -4).".zip";
+  }
+
+  unlink($file_zip);
+  unlink($file_csv);
 }
 
 function oab_marketo_endingBatch($success, $results, $operations) {

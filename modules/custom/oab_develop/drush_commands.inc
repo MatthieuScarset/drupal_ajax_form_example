@@ -1,4 +1,14 @@
 
+
+# Clear cache
+cr
+
+# Import Config
+cim -y
+
+# Reclear cache (to be sure to find update of new modules)
+cr
+
 #Run updates
 updb
 

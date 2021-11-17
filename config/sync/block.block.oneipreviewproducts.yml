@@ -1,0 +1,25 @@
+uuid: a301bd04-31a5-4f47-8a1d-e6263c64424e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:58e3901f-6181-4d0f-9456-86f396322107'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: oneipreviewproducts
+theme: theme_boosted
+region: prefooter
+weight: -43
+provider: null
+plugin: 'block_content:58e3901f-6181-4d0f-9456-86f396322107'
+settings:
+  id: 'block_content:58e3901f-6181-4d0f-9456-86f396322107'
+  label: one-i-preview-products
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

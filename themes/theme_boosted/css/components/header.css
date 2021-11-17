@@ -9,7 +9,7 @@
 }
 #top-navbar-collapse a {
   color: white;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-top: 0;
 }
@@ -291,7 +291,7 @@
 #items_megamenu span {
   color: white;
   margin: 0;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   display: block;
 }
 
@@ -305,6 +305,7 @@
 
 #items_megamenu a:hover {
   color: rgb(255, 121, 0);
+  font-weight: bold;
 }
 
 #items_megamenu {
@@ -416,9 +417,14 @@
 }
 
 .link_icon_items {
-  padding-left: 3rem;
-  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-top: 0.8rem;
 }
+
+.link_icon_items a {
+  top: -6px;
+}
+
 
 .sticky-module {
   position: fixed;
@@ -613,33 +619,48 @@
   }
 
   #main_nav .logo img {
-    transition: all .1s ease-in-out;
-    margin-top: 10px;
-  }
-  /*.subnav {
-      padding: 0;
-    border: none;
+    margin-top: -20px;
+    height: auto;
+    width: 112px;
+    transition: none;
   }
 
-.subnav.navbar-fixed {
-  border: none;
-}*/
-  /* .mega-menu.navbar {
-     overflow-y: auto;
-   }*/
- /* #block-topnavbaren,
-  .hub_menu_top_navbar {
-    display: flow-root;
-  }*/
+  #main_nav.navbar-fixed .logo img {
+    transition: none;
+    width: 112px;
+    margin-top: -12px;
+  }
 
   .subnav.navbar-fixed {
     z-index: 2002;
+    height: 50px;
+  }
+
+  .subnav{
+    height: 50px;
+  }
+
+  .menu-xs {
+   margin-top: -29px !important;
+  }
+
+  #main_nav.navbar-fixed .menu-xs {
+    margin-top: -24px !important;
+  }
+
+  #main_nav .menu-xs .sandwich-button.navbar-toggle:hover, #main_nav .menu-xs .sandwich-button.navbar-toggle:focus {
+    background-color: transparent;
+  }
+
+  #main_nav .menu-xs .sandwich-button.navbar-toggle .close-menu {
+    font-size: 19px;
+    margin-top: -3px;
   }
 
   .mega-menu.navbar #navbar-collapse-mega {
     background-color: white;
     position: fixed;
-    top: 85px;
+    top: 50px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -669,20 +690,22 @@
 
   .mega-menu.navbar #navbar-collapse-mega .top-navbar-mobile .items-top-navbar-mobile {
     list-style: none;
-    margin: 20px 0;
+    margin: 30px 0;
   }
 
   .mega-menu.navbar #navbar-collapse-mega .top-navbar-mobile .items-top-navbar-mobile > a {
     color: white;
     font-size: 14px;
+    padding: 5px 0;
   }
 
 
   .mega-menu.navbar #navbar-collapse-mega .top-navbar-mobile .items-top-navbar-mobile .o-link-arrow::after {
     color: darkorange;
     float: right;
-    margin-top: 5px;
+    margin-top: 0;
     margin-right: 10px;
+    font-size: 14px ;
   }
 
   .mega-menu.navbar .nav .mega-menu-mobile > li > a {
@@ -695,6 +718,7 @@
 
   .mega-menu.navbar .nav .mega-menu-mobile ul {
     padding-left: 15px;
+    margin-bottom: 10rem;
   }
 
   .mega-menu.navbar .mega-menu-mobile .welcome_text {
@@ -721,7 +745,7 @@
 
   .mega-menu.navbar .mega-menu-mobile .en-ce-moment-mobile {
     color: black;
-    margin: 30px 0 15px 0;
+    margin: 45px 0 39px 0;
     font-size: 20px;
     font-weight: bold;
     font-stretch: normal;
@@ -732,17 +756,22 @@
 
   .mega-menu.navbar .mega-menu-mobile li {
     list-style: none;
-    margin: 20px 0;
+    margin: 19px 0;
+  }
+
+  .mega-menu.navbar .mega-menu-mobile li.items-mobile-1 {
+    margin: 18px 0;
   }
 
   .mega-menu.navbar .mega-menu-mobile a {
-    font-size: 14px;
+    font-size: 15px;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.43;
     letter-spacing: normal;
     display: block;
     cursor: pointer;
+    padding: 5px 0;
   }
 
   .mega-menu.navbar .mega-menu-mobile .items-level-3 {
@@ -751,12 +780,13 @@
 
   .mega-menu.navbar .mega-menu-mobile .field-teaser-mobile {
     font-weight: normal;
-    margin: 5px 5px 5px 0;
+    margin: 10px 5px 5px 0;
     font-size: 14px;
   }
 
-  .mega-menu.navbar .mega-menu-mobile .separator {
-    margin: 30px 3px 0 0;
+  .mega-menu.navbar .mega-menu-mobile .separateur {
+    margin: 30px 15px 0 0;
+    border-top: 1px solid #ccc;
   }
 
   .mega-menu.navbar .mega-menu-mobile .all-product-link-mobile {
@@ -774,8 +804,8 @@
   }
 
   .mega-menu.navbar .mega-menu-mobile .items-mobile-back {
-    border-bottom: 2px solid #ccc;
-    margin: 20px 0 20px -15px;
+    border-bottom: 3px solid #ccc;
+    margin: 20px 0 23px -15px;
     padding: 10px 0 30px 0;
   }
 
@@ -787,16 +817,17 @@
     color: #f16e00;
     margin-left: 15px;
     margin-right: 25px;
+    font-size: 14px;
   }
 
   .mega-menu.navbar .mega-menu-mobile .o-link-arrow::after {
     padding: 0 10px;
     font-family: boosted;
-    font-size: 1rem;
+    font-size: 14px ;
     color: #000;
     content: "\e902";
     float: right;
-    margin-top: 5px;
+    margin-top: 0;
     margin-right: 10px;
   }
 

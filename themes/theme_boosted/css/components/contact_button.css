@@ -11,6 +11,10 @@
   width: fit-content;
 }
 
+#contactButtonDropdown .contact-button-container:hover {
+  background-color: #555;
+}
+
 .contact-button-container {
   display: flex;
   border-radius: 5rem;
@@ -65,6 +69,10 @@
   background-color: #555;
 }
 
+#contactButtonDropdown:focus .contact-button-open {
+  background-color: #f16e00;
+}
+
 #contactButtonDropdown:hover .contact-button-icon.icomoon-ob1-cross {
   color: white;
 }
@@ -98,7 +106,15 @@
 
 }
 
-@media (min-width: 736px) {
+@media (min-width: 767px) {
+  .contact-item-descr {
+    font-size: 1.42222rem !important;
+  }
+
+  .contact-item-elem-container {
+    font-size: 1.77778rem !important;
+  }
+
   .contact-button-text {
     font-size: 1.5rem;
   }
@@ -123,6 +139,14 @@
 }
 
 @media (min-width: 1220px) {
+  .contact-item-descr {
+    font-size: 1.28rem !important;
+  }
+
+  .contact-item-elem-container {
+    font-size: 1.6rem !important;
+  }
+
   .contact-button-text {
     font-size: 1.4rem;
   }
@@ -158,11 +182,13 @@
   display: flex;
   text-align: left;
   font-size: 2rem;
+  padding-bottom: 1.875rem;
 }
 
 .contact-item-icon {
   margin: 0.3rem;
   padding-right: 1rem;
+  font-size: 2.5rem !important;
 }
 
 .contact-item-descr-container {
@@ -172,13 +198,14 @@
 }
 
 .contact-item-descr {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.5;
   width: 100%;
   margin: 1rem 0;
 }
 
 .contact-item-descr-container > .o-link-arrow {
+  font-size: 2rem !important;
   margin: auto;
 }
 

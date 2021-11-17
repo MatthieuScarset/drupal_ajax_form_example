@@ -5,6 +5,7 @@ namespace Drupal\oab_marketo\DnbHttpClient;
 
 
 use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Core\Config\Config;
 use Drupal\oab_marketo\Form\OabAltaresSettingsForm;
 use GuzzleHttp\Client;
 
@@ -20,9 +21,15 @@ class DnbService {
    */
   private $cache;
 
+  /**
+   * @var \Drupal\Core\Config\ImmutableConfig
+   */
+  private $oabConf;
+
   public function __construct(DnbClient $altares_client, CacheBackendInterface $cache) {
     $this->altaresClient = $altares_client;
     $this->cache = $cache;
+    $this->oabConf = \Drupal::config(OabAltaresSettingsForm::getConfigName());
   }
 
   public function getInfo(string $string): array {
@@ -46,15 +53,14 @@ class DnbService {
     return $ret;
   }
 
-  public function typeahead(string $string): array {
+  public function typeahead($nom, $params): array {
     $ret = [];
 
     $url = "/v1/search/typeahead";
-    $params = [
-      'searchTerm' => $string
-    ];
 
-    $data = $this->get($url, $params);
+    $name=['searchTerm' => $nom];
+
+    $data = $this->get($url, $name+$params);
 
     if (isset($data['searchCandidates'])) {
       $ret = $data['searchCandidates'];
@@ -80,7 +86,7 @@ class DnbService {
 
   private function putInCache($cid, $data) {
     $now = new \DateTime();
-    $cache_time = (string) \Drupal::config(OabAltaresSettingsForm::getConfigName())->get(OabAltaresSettingsForm::CACHE_RETENTION_TIME);
+    $cache_time = $this->oabConf->get(OabAltaresSettingsForm::CACHE_RETENTION_TIME) ?: 24;
     $now->add(new \DateInterval('PT'.$cache_time.'H')); // Ajout de 24h;
     // On cache le résultat en cache pour éviter de faire trop d'appels
     $this->cache->set($cid, $data, $now->format('U'));

@@ -39,10 +39,7 @@
         <a href="{{ item.url }}" class="dropdown-toggle" data-toggle="dropdown" target="{{ link_target }}"
            onmousedown="utag_link(utag_data.titre_page, 'Header', '{{ item.title }}', '');"><i class="{{ link_icon }} link_icon"></i> {{ item.title }} <span class="caret"></span></a>
       {% else %}
-{#
         <li {{ item.attributes }} class="link_icon_items"> <i class="{{ link_icon }} link_icon"></i> {{ link( item.title, item.url, {'class': 'nav-link', 'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Header\', \'' ~ item.title ~ '\', \'\');'}) }}
-#}
-        <li {{ item.attributes }} class="link_icon_items"> {{ link( item.title, item.url, {'class': 'nav-link', 'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Header\', \'' ~ item.title ~ '\', \'\');'}) }}
       {% endif %}
       {% if item.below %}
         {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}

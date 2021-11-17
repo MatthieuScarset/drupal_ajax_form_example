@@ -26,7 +26,6 @@ use Drupal\embed\EmbedButtonInterface;
 use Drupal\entity_browser\Events\Events;
 use Drupal\entity_browser\Events\RegisterJSCallbacks;
 use Drupal\entity_embed\EntityEmbedDisplay\EntityEmbedDisplayManager;
-use Drupal\entity_embed\EntityHelperTrait;
 use Drupal\Component\Serialization\Json;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -377,7 +376,7 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
         catch (\Exception $e) {
             // Construct markup of the link to the entity manually if link() fails.
             // @see https://www.drupal.org/node/2402533
-            $entity_label = '<a href="' . $entity->toUrl() . '">' . $entity->label() . '</a>';
+            $entity_label = '<a href="' . $entity->toUrl()->toString() . '">' . $entity->label() . '</a>';
         }
 
         $form['entity'] = array(

@@ -24,79 +24,6 @@
   <div{{ attributes.addClass(classes) }}>
     {{ elements.theme_one_i_onecookiecomplianceblock }}
 
-    {#  VERSION MOBILE #}
-    <div class="d-lg-none">
-      {# Begin Main Menu Menu - Mobile #}
-      <nav id="main_nav_mobile" class="main_nav navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
-
-        <div class="container-fluid site-width">
-          <div class="navbar-brand">
-            {% if elements.theme_one_i_branding %}
-              {{ elements.theme_one_i_branding }}
-            {% endif %}
-          </div>
-
-          <div class="d-flex float-right menu-xs">
-            <section id="block-righticonblock">
-              {% if (language == 'en') %}
-                <a href="https://my-service-space.orange-business.com/MSSLoginForm/public/welcome-action.do" target="_self" title="My Service Space" alt="My Service Space" class="link-white">
-                  <i class="nav-link icon icon-avatar"></i>
-                </a>
-              {% endif %}
-              {% if (language == 'fr') %}
-                <a href="https://espaceclient.orange-business.com/group/ece2/home?codeContexte=eceDefault" target="_self" title="Espace Client Entreprise" alt="Espace Client Entreprise" class="link-white">
-                  <i class="nav-link icon icon-avatar"></i>
-                </a>
-              {% endif %}
-            </section>
-
-            <div class="menu-loupe-xs">
-              {{ elements.theme_one_i_righticonblock }}
-            </div>
-
-            <button class="navbar-toggler sandwich-button" type="button" data-toggle="collapse" data-target="#megamenu_mobile"
-                    aria-controls="#megamenu_mobile" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-
-          <div class="navbar-collapse collapse" id="megamenu_mobile">
-
-            <div class="menu_principal">
-              <div class="mega-menu">
-                <div class="navbar-nav" role="menu">
-                  {% if elements.theme_one_i_mainnavigationfr %}
-                    {{ elements.theme_one_i_mainnavigationfr }}
-                  {% endif %}
-                  {% if elements.theme_one_i_mainnavigationen %}
-                    {{ elements.theme_one_i_mainnavigationen }}
-                  {% endif %}
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="top-navbar-mobile d-lg-none mt-1">
-              <div class="text-white sur bg-dark join-text mb-1 mt-1">
-                <p>{{ "Join website"|t }}</p>
-              </div>
-
-              {% if elements.theme_one_i_topnavbarfr %}
-                {{ elements.theme_one_i_topnavbarfr }}
-              {% endif %}
-              {% if elements.theme_one_i_topnavbaren %}
-                {{ elements.theme_one_i_topnavbaren }}
-              {% endif %}
-            </div>
-
-          </div>
-        </div>
-      </nav>
-      {# End Main Mega Menu - Mobile #}
-    </div>
-{#  VERSION DESKTOP #}
-    <div class="d-none d-lg-block">
       {# Begin Top Navbar Menu #}
       <nav class="navbar navbar-dark bg-dark navbar-expand-md supra">
         <div class="container-fluid site-width">
@@ -150,7 +77,4 @@
       {# End Main Mega Menu - Desktop #}
     </div>
 
-
-
-  </div>
 {% endif %}

@@ -240,7 +240,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
                     if ($business_owner !== null) {
                         $replacements[$original] = $business_owner->getEmail();
                     } else {
-                      MessengerInterface::addMessage(t("Le Business Owner n'a pas pu etre trouvé"), 'error', true);
+                      \Drupal::messenger()->addMessage(t("Le Business Owner n'a pas pu etre trouvé"), 'error', true);
                     }
                     break;
                 case 'creator-pseudo':
@@ -268,7 +268,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
                     if ($spoc !== null) {
                         $replacements[$original] = $spoc->label();
                     } else {
-                      MessengerInterface::addMessage(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
+                      \Drupal::messenger()->addMessage(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
                     }
                     break;
                 case 'spoc-mail':
@@ -276,7 +276,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
                     if ($spoc !== null) {
                         $replacements[$original] = $spoc->getEmail();
                     } else {
-                      MessengerInterface::addMessage(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
+                      \Drupal::messenger()->addMessage(t("Le SPOC Securité n'a pas pu etre trouvé"), 'error', true);
                     }
                     break;
                 case 'delete-data-date':
@@ -302,7 +302,7 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
         \Drupal::service('plugin.manager.mail')
             ->mail('oab_backoffice', 'gdpr_spoc_notice', $spoc_security->getEmail(), $current_language, array('webform'=> $entity));
     } else {
-      MessengerInterface::addMessage(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
+      \Drupal::messenger()->addMessage(t("L'email au SPOC Securité n'a pas pu être envoyé"), 'error', true);
     }
 
     # mail au createur du webform
@@ -317,7 +317,7 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
         \Drupal::service('plugin.manager.mail')
             ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language, array('webform'=> $entity));
     } else {
-      MessengerInterface::addMessage(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
+      \Drupal::messenger()->addMessage(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
     }
 
 }

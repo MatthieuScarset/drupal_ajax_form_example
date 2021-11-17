@@ -35,7 +35,7 @@ class DnbTokenClient {
     if ($result->getStatusCode() !== 200) {
       $this->logger->error(t("Cannot get Token with response : %code (%reason) => %message", [
         '%code' => $result->getStatusCode(),
-        '%reson' => $result->getReasonPhrase(),
+        '%reason' => $result->getReasonPhrase(),
         '%message' => $result->getBody()->getContents()
       ]));
     } else {

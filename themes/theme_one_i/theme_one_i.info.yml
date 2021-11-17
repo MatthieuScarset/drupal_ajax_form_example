@@ -8,6 +8,7 @@ package: 'Theme One-i'
 
 regions:
   header: 'Header'
+  header_mobile: 'Header Mobile'
   top_zone: 'Top Zone'
   pre_content: 'Pre Content'
   content: 'Content'

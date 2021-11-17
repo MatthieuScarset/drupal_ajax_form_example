@@ -3,6 +3,7 @@
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Access\AccessResultForbidden;
+use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Session\AccountInterface;
 

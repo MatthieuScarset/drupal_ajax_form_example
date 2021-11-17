@@ -1475,7 +1475,7 @@ a.link-subhomes:hover .encart-image.subhome-image {
   color: #FFFFFF;
 }
 
-.rebond-wysiwyg article:not('.embedded-entity'){
+.rebond-wysiwyg article:not(.embedded-entity){
   background-color: #DDDDDD;
 }
 

@@ -2,11 +2,10 @@
 
 namespace Drupal\oab_orange_business_lounge\Form;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
-use Drupal\Core\Messenger\MessengerInterface;
+
 
 
 /**
@@ -94,7 +93,7 @@ class OabOblForm extends ConfigFormBase {
                 );
             }
         } else {
-            $this->messenger()->addError(t('API DOWN. You can\'t add new zones for the moment'), false);
+            drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
 
             foreach ($images as $image) {
                 $form['images']['image_block_' . $image] = array(
@@ -122,9 +121,9 @@ class OabOblForm extends ConfigFormBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
         if ($obl_service->isValid($url)) {
-          $this->messenger()->addMessage(t('Api connected Successfully'), 'status', TRUE);
+          drupal_set_message(t('Api connected Successfully'), 'status', TRUE);
         } else {
-          $this->messenger()->addError(t('Unexpected HTTP code'), TRUE);
+          drupal_set_message(t('Unexpected HTTP code'), 'error', TRUE);
         }
 
     }

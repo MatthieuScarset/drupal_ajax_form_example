@@ -4,7 +4,8 @@
         <ul class="nav o-nav-light site-width ">
       {% for child in content.children_items %}
         <li class="nav-item">
-          <a class="nav-link" href="#{{ replaceSpacesAndSpecialChars(child.label) }}">{{ child.label }}</a>
+          <a class="nav-link" href="#{{ replaceSpacesAndSpecialChars(child.label) }}"
+             onmousedown="utag_link(utag_data.titre_page, 'categ_page_menu', '{{ child.label|lower }}', '');">{{ child.label }}</a>
         </li>
       {% endfor %}
       </ul>

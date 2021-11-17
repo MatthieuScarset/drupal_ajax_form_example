@@ -326,16 +326,35 @@ function theme_one_i_theme_suggestions_taxonomy_term_alter(array &$suggestions, 
 
 function theme_one_i_preprocess_page(&$variables)
 {
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')
+    ->getTitle($request, $route_match->getRouteObject());
   $route_name = \Drupal::routeMatch()->getRouteName();
-  $hide_title_block = FALSE;
-
-  if (preg_match('/^view.category_page/', $route_name)) {
-    //dans la page categorie, on a un block spécial pour gérer le titre de la page
-    $hide_title_block = TRUE;
-  }
+  //tealium
+  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 
   //On cache le block Page Title
-  if ($hide_title_block) {
+  if (preg_match('/^view.category_page/', $route_name)) {
     $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
+  }
+}
+
+function theme_one_i_preprocess_views_view(&$variables) {
+
+  /** @var Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  //page category de products
+  if($id == 'category_page') {
+    $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Category';
+    //var_dump(\Drupal::routeMatch()->getParameters()->has('tid'));die();
+    if (\Drupal::routeMatch()->getParameters()->has('tid')) {
+      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+      $tid = \Drupal::routeMatch()->getParameters()->get('tid');
+      if (null !== ($term = Term::load($tid))) {
+        $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $term->getName();
+      }
+    }
   }
 }

@@ -7,13 +7,9 @@
 
 namespace Drupal\oab_backoffice\Plugin\AccessControlHierarchy;
 
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\ContentEntityType;
-use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\NodeType;
 use Drupal\workbench_access\AccessControlHierarchyBase;
-use Drupal\workbench_access\UserSectionStorageInterface;
 use Drupal\workbench_access\WorkbenchAccessManagerInterface;
 use Drupal\node\Entity\Node;
 
@@ -37,17 +33,6 @@ class ContentType extends AccessControlHierarchyBase {
    * @var array
    */
   public $tree;
-
-  /**
-   * @var EntityStorageInterface
-   */
-  private $storage;
-
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, UserSectionStorageInterface $user_section_storage, ConfigFactoryInterface $configFactory,
-                              EntityTypeManagerInterface $entityTypeManager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition,$user_section_storage, $configFactory,$entityTypeManager);
-    $this->storage = $this->entityTypeManager->getStorage('field_config');
-  }
 
   /**
    * @inheritdoc
@@ -119,7 +104,7 @@ class ContentType extends AccessControlHierarchyBase {
       ->condition('field_type', 'entity_reference')
       ->sort('label')
       ->execute();
-    $fields = $this->storage->loadMultiple(array_keys($query));
+    $fields = \Drupal::entityManager()->getStorage('field_config')->loadMultiple(array_keys($query));
     foreach ($fields as $id => $field) {
       $handler = $field->getSetting('handler');
       $settings = $field->getSetting('handler_settings');

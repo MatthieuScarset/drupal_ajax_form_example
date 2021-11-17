@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?26cw0m');
-  src:  url('fonts/icomoon.eot?26cw0m#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?26cw0m') format('truetype'),
-    url('fonts/icomoon.woff?26cw0m') format('woff'),
-    url('fonts/icomoon.svg?26cw0m#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?4j8jkj');
+  src:  url('fonts/icomoon.eot?4j8jkj#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?4j8jkj') format('truetype'),
+    url('fonts/icomoon.woff?4j8jkj') format('woff'),
+    url('fonts/icomoon.svg?4j8jkj#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,296 +25,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icomoon-ob1-contact:before {
-  content: "\ebb9";
-}
-.icomoon-ob1-assistance:before {
-  content: "\ebba";
-}
-.icomoon-ob1-alarm-building:before {
-  content: "\eb82";
-}
-.icomoon-ob1-business-advisor:before {
-  content: "\eb83";
-}
-.icomoon-ob1-call:before {
-  content: "\eb84";
-}
-.icomoon-ob1-call-centre:before {
-  content: "\eb85";
-}
-.icomoon-ob1-cloud-backup:before {
-  content: "\eb86";
-}
-.icomoon-ob1-cloud-connectivity:before {
-  content: "\eb87";
-}
-.icomoon-ob1-cloud-multi:before {
-  content: "\eb88";
-}
-.icomoon-ob1-cloud-public:before {
-  content: "\eb89";
-}
-.icomoon-ob1-cloud-security:before {
-  content: "\eb8a";
-}
-.icomoon-ob1-cloud-smart:before {
-  content: "\eb8b";
-}
-.icomoon-ob1-conference-call:before {
-  content: "\eb8c";
-}
-.icomoon-ob1-connected-object:before {
-  content: "\eb8d";
-}
-.icomoon-ob1-construction:before {
-  content: "\eb8e";
-}
-.icomoon-ob1-crane:before {
-  content: "\eb8f";
-}
-.icomoon-ob1-cross:before {
-  content: "\eb90";
-}
-.icomoon-ob1-customer-links:before {
-  content: "\eb91";
-}
-.icomoon-ob1-cyber-shield:before {
-  content: "\eb92";
-}
-.icomoon-ob1-dashboard-display:before {
-  content: "\eb93";
-}
-.icomoon-ob1-data:before {
-  content: "\eb94";
-}
-.icomoon-ob1-data-analytics:before {
-  content: "\eb95";
-}
-.icomoon-ob1-data-centre:before {
-  content: "\eb96";
-}
-.icomoon-ob1-design-software:before {
-  content: "\eb97";
-}
-.icomoon-ob1-desk-phone:before {
-  content: "\eb98";
-}
-.icomoon-ob1-desktop-pc-connected:before {
-  content: "\eb99";
-}
-.icomoon-ob1-device-management-express-path:before {
-  content: "\eb9a";
-}
-.icomoon-ob1-device-network:before {
-  content: "\eb9b";
-}
-.icomoon-ob1-device-smartphone:before {
-  content: "\eb9c";
-}
-.icomoon-ob1-diagnostic:before {
-  content: "\eb9d";
-}
-.icomoon-ob1-easy-internet:before {
-  content: "\eb9e";
-}
-.icomoon-ob1-edashboard:before {
-  content: "\eb9f";
-}
-.icomoon-ob1-ethernet:before {
-  content: "\eba0";
-}
-.icomoon-ob1-fire-extinguisher:before {
-  content: "\eba1";
-}
-.icomoon-ob1-gauge-counter:before {
-  content: "\eba2";
-}
-.icomoon-ob1-gears:before {
-  content: "\eba3";
-}
-.icomoon-ob1-hand-shake:before {
-  content: "\eba4";
-}
-.icomoon-ob1-information-data:before {
-  content: "\eba5";
-}
-.icomoon-ob1-internet:before {
-  content: "\eba6";
-}
-.icomoon-ob1-iot-connectivity:before {
-  content: "\eba7";
-}
-.icomoon-ob1-lock:before {
-  content: "\eba8";
-}
-.icomoon-ob1-manage-equipment:before {
-  content: "\eba9";
-}
-.icomoon-ob1-mobile-applications:before {
-  content: "\ebaa";
-}
-.icomoon-ob1-modular:before {
-  content: "\ebab";
-}
-.icomoon-ob1-orange-corporate:before {
-  content: "\ebac";
-}
-.icomoon-ob1-private-network:before {
-  content: "\ebad";
-}
-.icomoon-ob1-radar:before {
-  content: "\ebae";
-}
-.icomoon-ob1-setup-and-repair:before {
-  content: "\ebaf";
-}
-.icomoon-ob1-sim:before {
-  content: "\ebb0";
-}
-.icomoon-ob1-siren:before {
-  content: "\ebb1";
-}
-.icomoon-ob1-smart-care:before {
-  content: "\ebb2";
-}
-.icomoon-ob1-statistics:before {
-  content: "\ebb3";
-}
-.icomoon-ob1-storage-cloud:before {
-  content: "\ebb4";
-}
-.icomoon-ob1-team-connect:before {
-  content: "\ebb5";
-}
-.icomoon-ob1-video-meeting:before {
-  content: "\ebb6";
-}
-.icomoon-ob1-visual-voicemail:before {
-  content: "\ebb7";
-}
-.icomoon-ob1-web-camera:before {
-  content: "\ebb8";
-}
-.icomoon-frame-connectivity:before {
-  content: "\eb78";
-  color: #f60;
-}
-.icomoon-frame-my-customers:before {
-  content: "\eb79";
-  color: #f60;
-}
-.icomoon-frame-performance:before {
-  content: "\eb7a";
-  color: #f60;
-}
-.icomoon-frame-security:before {
-  content: "\eb7b";
-  color: #f60;
-}
-.icomoon-frame-teamwork:before {
-  content: "\eb7c";
-  color: #f60;
-}
-.icomoon-popout-connectivity:before {
-  content: "\eb7d";
-  color: #f60;
-}
-.icomoon-popout-my-customers:before {
-  content: "\eb7e";
-  color: #f60;
-}
-.icomoon-popout-performance:before {
-  content: "\eb7f";
-  color: #f60;
-}
-.icomoon-popout-security:before {
-  content: "\eb80";
-  color: #f60;
-}
-.icomoon-popout-teamwork:before {
-  content: "\eb81";
-  color: #f60;
-}
-.icomoon-popout-tech:before {
-  content: "\e634";
-  color: #f60;
-}
-.icomoon-frame-care:before {
-  content: "\e640";
-  color: #f60;
-}
-.icomoon-frame-family:before {
-  content: "\e637";
-  color: #f60;
-}
-.icomoon-frame-fun:before {
-  content: "\e638";
-  color: #f60;
-}
-.icomoon-frame-home:before {
-  content: "\e639";
-  color: #f60;
-}
-.icomoon-frame-money:before {
-  content: "\e63a";
-  color: #f60;
-}
-.icomoon-frame-on-the-move:before {
-  content: "\e63b";
-  color: #f60;
-}
-.icomoon-frame-tariff:before {
-  content: "\e63c";
-  color: #f60;
-}
-.icomoon-frame-tech:before {
-  content: "\e63d";
-  color: #f60;
-}
-.icomoon-frame-wellbeing:before {
-  content: "\e63e";
-  color: #f60;
-}
-.icomoon-frame-work:before {
-  content: "\e63f";
-  color: #f60;
-}
-.icomoon-popout-care:before {
-  content: "\e62d";
-  color: #f60;
-}
-.icomoon-popout-family:before {
-  content: "\e62e";
-  color: #f60;
-}
-.icomoon-popout-fun:before {
-  content: "\e62f";
-  color: #f60;
-}
-.icomoon-popout-home:before {
-  content: "\e630";
-  color: #f60;
-}
-.icomoon-popout-money:before {
-  content: "\e631";
-  color: #f60;
-}
-.icomoon-popout-on-the-move:before {
-  content: "\e632";
-  color: #f60;
-}
-.icomoon-popout-tariff:before {
-  content: "\e633";
-  color: #f60;
-}
-.icomoon-popout-wellbeing:before {
-  content: "\e635";
-  color: #f60;
-}
-.icomoon-popout-work:before {
-  content: "\e636";
-  color: #f60;
+.icomoon-ob1-desktop-app:before {
+  content: "\ebbb";
+}
+.icomoon-ob1-graph-combination:before {
+  content: "\ebbc";
 }
 .icomoon-checkbox_tick:before {
   content: "\eb77";
@@ -2211,4 +1926,295 @@
 }
 .icomoon-zoom_out:before {
   content: "\eb76";
+}
+.icomoon-ob1-contact:before {
+  content: "\ebb9";
+}
+.icomoon-ob1-assistance:before {
+  content: "\ebba";
+}
+.icomoon-ob1-alarm-building:before {
+  content: "\eb82";
+}
+.icomoon-ob1-business-advisor:before {
+  content: "\eb83";
+}
+.icomoon-ob1-call:before {
+  content: "\eb84";
+}
+.icomoon-ob1-call-centre:before {
+  content: "\eb85";
+}
+.icomoon-ob1-cloud-backup:before {
+  content: "\eb86";
+}
+.icomoon-ob1-cloud-connectivity:before {
+  content: "\eb87";
+}
+.icomoon-ob1-cloud-multi:before {
+  content: "\eb88";
+}
+.icomoon-ob1-cloud-public:before {
+  content: "\eb89";
+}
+.icomoon-ob1-cloud-security:before {
+  content: "\eb8a";
+}
+.icomoon-ob1-cloud-smart:before {
+  content: "\eb8b";
+}
+.icomoon-ob1-conference-call:before {
+  content: "\eb8c";
+}
+.icomoon-ob1-connected-object:before {
+  content: "\eb8d";
+}
+.icomoon-ob1-construction:before {
+  content: "\eb8e";
+}
+.icomoon-ob1-crane:before {
+  content: "\eb8f";
+}
+.icomoon-ob1-cross:before {
+  content: "\eb90";
+}
+.icomoon-ob1-customer-links:before {
+  content: "\eb91";
+}
+.icomoon-ob1-cyber-shield:before {
+  content: "\eb92";
+}
+.icomoon-ob1-dashboard-display:before {
+  content: "\eb93";
+}
+.icomoon-ob1-data:before {
+  content: "\eb94";
+}
+.icomoon-ob1-data-analytics:before {
+  content: "\eb95";
+}
+.icomoon-ob1-data-centre:before {
+  content: "\eb96";
+}
+.icomoon-ob1-design-software:before {
+  content: "\eb97";
+}
+.icomoon-ob1-desk-phone:before {
+  content: "\eb98";
+}
+.icomoon-ob1-desktop-pc-connected:before {
+  content: "\eb99";
+}
+.icomoon-ob1-device-management-express-path:before {
+  content: "\eb9a";
+}
+.icomoon-ob1-device-network:before {
+  content: "\eb9b";
+}
+.icomoon-ob1-device-smartphone:before {
+  content: "\eb9c";
+}
+.icomoon-ob1-diagnostic:before {
+  content: "\eb9d";
+}
+.icomoon-ob1-easy-internet:before {
+  content: "\eb9e";
+}
+.icomoon-ob1-edashboard:before {
+  content: "\eb9f";
+}
+.icomoon-ob1-ethernet:before {
+  content: "\eba0";
+}
+.icomoon-ob1-fire-extinguisher:before {
+  content: "\eba1";
+}
+.icomoon-ob1-gauge-counter:before {
+  content: "\eba2";
+}
+.icomoon-ob1-gears:before {
+  content: "\eba3";
+}
+.icomoon-ob1-hand-shake:before {
+  content: "\eba4";
+}
+.icomoon-ob1-information-data:before {
+  content: "\eba5";
+}
+.icomoon-ob1-internet:before {
+  content: "\eba6";
+}
+.icomoon-ob1-iot-connectivity:before {
+  content: "\eba7";
+}
+.icomoon-ob1-lock:before {
+  content: "\eba8";
+}
+.icomoon-ob1-manage-equipment:before {
+  content: "\eba9";
+}
+.icomoon-ob1-mobile-applications:before {
+  content: "\ebaa";
+}
+.icomoon-ob1-modular:before {
+  content: "\ebab";
+}
+.icomoon-ob1-orange-corporate:before {
+  content: "\ebac";
+}
+.icomoon-ob1-private-network:before {
+  content: "\ebad";
+}
+.icomoon-ob1-radar:before {
+  content: "\ebae";
+}
+.icomoon-ob1-setup-and-repair:before {
+  content: "\ebaf";
+}
+.icomoon-ob1-sim:before {
+  content: "\ebb0";
+}
+.icomoon-ob1-siren:before {
+  content: "\ebb1";
+}
+.icomoon-ob1-smart-care:before {
+  content: "\ebb2";
+}
+.icomoon-ob1-statistics:before {
+  content: "\ebb3";
+}
+.icomoon-ob1-storage-cloud:before {
+  content: "\ebb4";
+}
+.icomoon-ob1-team-connect:before {
+  content: "\ebb5";
+}
+.icomoon-ob1-video-meeting:before {
+  content: "\ebb6";
+}
+.icomoon-ob1-visual-voicemail:before {
+  content: "\ebb7";
+}
+.icomoon-ob1-web-camera:before {
+  content: "\ebb8";
+}
+.icomoon-frame-connectivity:before {
+  content: "\eb78";
+  color: #f60;
+}
+.icomoon-frame-my-customers:before {
+  content: "\eb79";
+  color: #f60;
+}
+.icomoon-frame-performance:before {
+  content: "\eb7a";
+  color: #f60;
+}
+.icomoon-frame-security:before {
+  content: "\eb7b";
+  color: #f60;
+}
+.icomoon-frame-teamwork:before {
+  content: "\eb7c";
+  color: #f60;
+}
+.icomoon-popout-connectivity:before {
+  content: "\eb7d";
+  color: #f60;
+}
+.icomoon-popout-my-customers:before {
+  content: "\eb7e";
+  color: #f60;
+}
+.icomoon-popout-performance:before {
+  content: "\eb7f";
+  color: #f60;
+}
+.icomoon-popout-security:before {
+  content: "\eb80";
+  color: #f60;
+}
+.icomoon-popout-teamwork:before {
+  content: "\eb81";
+  color: #f60;
+}
+.icomoon-popout-tech:before {
+  content: "\e634";
+  color: #f60;
+}
+.icomoon-frame-care:before {
+  content: "\e640";
+  color: #f60;
+}
+.icomoon-frame-family:before {
+  content: "\e637";
+  color: #f60;
+}
+.icomoon-frame-fun:before {
+  content: "\e638";
+  color: #f60;
+}
+.icomoon-frame-home:before {
+  content: "\e639";
+  color: #f60;
+}
+.icomoon-frame-money:before {
+  content: "\e63a";
+  color: #f60;
+}
+.icomoon-frame-on-the-move:before {
+  content: "\e63b";
+  color: #f60;
+}
+.icomoon-frame-tariff:before {
+  content: "\e63c";
+  color: #f60;
+}
+.icomoon-frame-tech:before {
+  content: "\e63d";
+  color: #f60;
+}
+.icomoon-frame-wellbeing:before {
+  content: "\e63e";
+  color: #f60;
+}
+.icomoon-frame-work:before {
+  content: "\e63f";
+  color: #f60;
+}
+.icomoon-popout-care:before {
+  content: "\e62d";
+  color: #f60;
+}
+.icomoon-popout-family:before {
+  content: "\e62e";
+  color: #f60;
+}
+.icomoon-popout-fun:before {
+  content: "\e62f";
+  color: #f60;
+}
+.icomoon-popout-home:before {
+  content: "\e630";
+  color: #f60;
+}
+.icomoon-popout-money:before {
+  content: "\e631";
+  color: #f60;
+}
+.icomoon-popout-on-the-move:before {
+  content: "\e632";
+  color: #f60;
+}
+.icomoon-popout-tariff:before {
+  content: "\e633";
+  color: #f60;
+}
+.icomoon-popout-wellbeing:before {
+  content: "\e635";
+  color: #f60;
+}
+.icomoon-popout-work:before {
+  content: "\e636";
+  color: #f60;
 }

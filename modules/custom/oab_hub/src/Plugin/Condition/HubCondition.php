@@ -3,6 +3,7 @@
 namespace Drupal\oab_hub\Plugin\Condition;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Condition\Annotation\Condition;
 use Drupal\Core\Condition\ConditionPluginBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\path_alias\AliasManagerInterface;

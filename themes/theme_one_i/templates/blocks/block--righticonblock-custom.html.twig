@@ -54,12 +54,14 @@
             {{ synomiaSearchForm }}
         </div>
     </li>
-    <li class="pt-1 nav-item">
+    {% endif %}
+
+    <li class="nav-item">
         <a href="{{ url('oab_synomia_search_engine.engine_url') }}" class="d-lg-none">
             <span aria-hidden="true" class="nav-link icon icon-search search-icon" data-target="#search-form" data-toggle="collapse"></span>
         </a>
     </li>
-    {% endif %}
+
     <li class="nav-item share-icon">
     <a aria-hidden="true" class="align-right nav-link icon icon-share share-icon d-none d-lg-block" data-target="#social-share" data-toggle="collapse"></a>
     </li>

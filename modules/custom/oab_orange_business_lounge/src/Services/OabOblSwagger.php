@@ -3,9 +3,8 @@
 
 namespace Drupal\oab_orange_business_lounge\Services;
 
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 
 class OabOblSwagger {
@@ -18,19 +17,11 @@ class OabOblSwagger {
     const API_COUNTRIES = '/countries';
     const API_TECHNOLOGIES = '/network-types';
 
-  /**
-   * @var MessengerInterface
-   */
-    private $messenger;
 
-  /**
-   * OabOblSwagger constructor.
-   */
   public function __construct() {
         $config = \Drupal::config(OabOblForm::getConfigName());
         $this->urlApi = $config->get('url_api');
         $this->titleLabel = $config->get('title_label');
-        $this->messenger = \Drupal::messenger();
     }
 
 
@@ -123,14 +114,14 @@ class OabOblSwagger {
             switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
                 case 200:  # OK
                     if ($display_message) {
-                        $this->messenger->addMessage(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
+                        drupal_set_message(t('Api connected Successfully -> ' . $url . $domaine), 'status', TRUE);
                     }
                     $json_ret = json_decode($ret_value, true);
                     break;
 
                 default:
                     if ($display_message) {
-                        $this->messenger->addError(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), TRUE);
+                        drupal_set_message(t('Unexpected HTTP code: ' . $http_code . ' - ' . $url . $domaine), 'error', TRUE);
                     }
                     $json_ret = false;
             }

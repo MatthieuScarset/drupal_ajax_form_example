@@ -54,43 +54,43 @@ display:
   page_achievements_iot:
     display_title: 'Réalisations IoT'
     display_options:
+      filters:
+        field_subhome_target_id:
+          expose:
+            label: 'Secteur d''activité'
+        field_subhome_target_id_1:
+          expose:
+            label: 'Pôles métiers'
+        field_subhome_target_id_2:
+          expose:
+            label: 'Typologie de produit'
+        field_subhome_target_id_3:
+          expose:
+            label: Usage
       title: 'Réalisation IoT'
       exposed_form:
         options:
           submit_button: Filtrer
           reset_button_label: Effacer
-      filters:
-        field_industry_target_id:
-          expose:
-            label: 'Secteur d''activité'
-        field_job_profile_target_id:
-          expose:
-            label: 'Pôles métiers'
-        field_product_type_target_id:
-          expose:
-            label: 'Typologie de produit'
-        field_product_use_case_target_id:
-          expose:
-            label: Usage
   page_iot_products:
     display_title: 'Produits IoT'
     display_options:
+      filters:
+        field_subhome_target_id:
+          expose:
+            label: 'Secteur d''activité'
+        field_subhome_target_id_1:
+          expose:
+            label: 'Pôles métiers'
+        field_subhome_target_id_2:
+          expose:
+            label: 'Typologie de produit'
+        field_subhome_target_id_3:
+          expose:
+            label: Usage
       title: 'Produits IoT'
       exposed_form:
         options:
           submit_button: Filtrer
           reset_button_label: Effacer
           exposed_sorts_label: 'Trier par'
-      filters:
-        field_industry_target_id:
-          expose:
-            label: 'Secteur d''activité'
-        field_job_profile_target_id:
-          expose:
-            label: 'Pôles métiers'
-        field_product_type_target_id:
-          expose:
-            label: 'Typologie de produit'
-        field_product_use_case_target_id:
-          expose:
-            label: Usage

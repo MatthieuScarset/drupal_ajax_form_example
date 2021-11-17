@@ -56,14 +56,14 @@ class PhotoCommercialeService {
   /**
    * @var array
    */
-  private $photo_commerciales_fields = [];
+  private $photoCommercialesFields = [];
 
   public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager,
-                              ImmutableConfig $photo_Commerciale_Config) {
+                              ImmutableConfig $photo_commerciale_config) {
       $this->storage = $entity_type_manager->getStorage('photo_commerciale_item');
       $this->entityFieldManager = $entity_field_manager;
-      $this->photoCommercialeConfig = $photo_Commerciale_Config;
-      $this->photo_commerciales_fields = $this->entityFieldManager->getFieldDefinitions('photo_commerciale_item', 'photo_commerciale_item');
+      $this->photoCommercialeConfig = $photo_commerciale_config;
+      $this->photoCommercialesFields = $this->entityFieldManager->getFieldDefinitions('photo_commerciale_item', 'photo_commerciale_item');
   }
 
   /**
@@ -72,11 +72,11 @@ class PhotoCommercialeService {
    * @return \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function createPhotoCommercialeItem(array $photoCommerciale) {
-    $photoCommercialeItem = PhotoCommercialeItem::create($photoCommerciale);
-    $photoCommercialeItem->save();
+  public function createPhotoCommercialeItem(array $photo_commerciale) {
+    $photo_commerciale_item = PhotoCommercialeItem::create($photo_commerciale);
+    $photo_commerciale_item->save();
 
-    return $photoCommercialeItem;
+    return $photo_commerciale_item;
   }
 
   /**
@@ -85,7 +85,7 @@ class PhotoCommercialeService {
    */
   public function getPhotoCommercialeItemByIdent(string $ident) {
     $photo_commerciale_item = $this->storage->loadByProperties(['ident' => $ident]);
-    if (count($photo_commerciale_item) > 0 ) {
+    if (count($photo_commerciale_item) > 0) {
       return array_shift($photo_commerciale_item);
     }
     return null;
@@ -150,7 +150,7 @@ class PhotoCommercialeService {
     $ret = [];
 
     $photo_commerciale_item = $this->storage->loadByProperties();
-    if ( count($photo_commerciale_item) > 0 ) {
+    if (count($photo_commerciale_item) > 0) {
       $ret = $photo_commerciale_item;
     }
 
@@ -169,7 +169,7 @@ class PhotoCommercialeService {
 //    }
 //    PhotoCommercialeItem::create($values)->save();
 
-    if (strlen($row[self::COL_IDENT]) > 0 ) {
+    if (strlen($row[self::COL_IDENT]) > 0) {
       PhotoCommercialeItem::create([
         'ident' => $this->getValueFromRow($row, self::COL_IDENT, 'ident'),
         'raison_sociale' => $this->getValueFromRow($row, self::COL_RAISON_SOCIALE, 'raison_sociale'),
@@ -204,8 +204,8 @@ class PhotoCommercialeService {
 
     $default_value = 'vide';
 
-    if (isset($this->photo_commerciales_fields[$field_name])) {
-      switch ($this->photo_commerciales_fields[$field_name]->getType()) {
+    if (isset($this->photoCommercialesFields[$field_name])) {
+      switch ($this->photoCommercialesFields[$field_name]->getType()) {
         case 'boolean': $default_value = false; break;
         case 'integer': $default_value = 0; break;
         case 'string':

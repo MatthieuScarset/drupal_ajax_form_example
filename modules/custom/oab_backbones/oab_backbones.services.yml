@@ -1,8 +1,0 @@
-services:
-  oab_backbones.import_performance_data:
-    class: Drupal\oab_backbones\Classes\ImportPerformanceData
-    arguments: ['@messenger']
-
-  oab_backbones.import_shadow_sites:
-    class: Drupal\oab_backbones\Classes\ImportShadowSites
-    arguments: ['@messenger']

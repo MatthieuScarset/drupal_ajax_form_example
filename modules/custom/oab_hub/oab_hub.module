@@ -72,10 +72,11 @@ function oab_hub_taxonomy_term_delete(\Drupal\taxonomy\Entity\Term $term) {
       # aux traductions (le hook_translation_delete n'est pas appelé dans ce cas là)
       $languages = $term->getTranslationLanguages(false);
       foreach ($languages as $langcode => $langinfo) {
-        OabHubController::deleteMenus($term->getTranslation($langcode));
-        OabHubController::deleteBlocks($term->getTranslation($langcode));
-        OabHubController::deleteNodes($term->getTranslation($langcode));
-        OabHubController::deleteUrl($term->getTranslation($langcode));
+        $translated_term = $term->getTranslation($langcode);
+        OabHubController::deleteMenus($translated_term);
+        OabHubController::deleteBlocks($translated_term);
+        OabHubController::deleteNodes($translated_term);
+        OabHubController::deleteUrl($translated_term);
       }
       OabHubController::deleteMenus($term);
       OabHubController::deleteBlocks($term);

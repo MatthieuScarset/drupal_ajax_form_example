@@ -1,0 +1,20 @@
+uuid: 9b9bdb1a-892d-4cfe-bfb8-888397526192
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: righticonblock_mobile
+theme: theme_one_i
+region: header_mobile
+weight: 0
+provider: null
+plugin: right_icon_block
+settings:
+  id: right_icon_block
+  label: 'Right icon Block'
+  provider: oab_frontoffice
+  label_display: '0'
+visibility: {  }
