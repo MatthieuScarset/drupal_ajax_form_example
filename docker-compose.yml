@@ -6,17 +6,17 @@ services:
 
     memcached:
       image: memcached:alpine
-      container_name: ruby_memcached_d9_bis
+      container_name: ruby_memcached
 
     mailhog:
       image: mailhog/mailhog:latest
-      container_name: ruby_mailhog_d9_bis
+      container_name: ruby_mailhog
       ports:
         - "8025:8025"
 
     mariadb:
       image: mariadb:10.3
-      container_name: ruby_mariadb_d9_bis
+      container_name: ruby_mariadb
       volumes:
         - ./config/data/db_dumps:/tmp/db_dumps
       environment:
@@ -29,7 +29,7 @@ services:
 
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
-      container_name: ruby_phpmyadmin_d9_bis
+      container_name: ruby_phpmyadmin
       depends_on:
         - mariadb
       links:
@@ -41,7 +41,7 @@ services:
 
     webserver:
       image: nginx:alpine
-      container_name: ruby_webserver_d9_bis
+      container_name: ruby_webserver
       working_dir: /application
       depends_on:
         - mariadb
@@ -56,7 +56,7 @@ services:
 
     php-fpm:
       build: config/docker/local/php-fpm
-      container_name: ruby_php-fpm_d9_bis
+      container_name: ruby_php-fpm
       working_dir: /application
       depends_on:
         - mariadb
@@ -64,5 +64,5 @@ services:
         - mariadb
       volumes:
         - .:/application
-        - ./config/docker/local/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+        - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
         #- /app-vendor
