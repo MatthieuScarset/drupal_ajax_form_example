@@ -5,6 +5,8 @@ WORKDIR "/application"
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
 
+ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
+
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
@@ -37,19 +39,25 @@ RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendma
 RUN chmod +x /usr/local/bin/mhsendmail
 
 # Install composer
-COPY --from=composer:2.0.11 /usr/bin/composer /usr/bin/composer
-RUN mkdir /var/composer
-ENV COMPOSER_HOME /var/composer
-ENV COMPOSER_MEMORY_LIMIT -1
-ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-RUN ls -s
 
-WORKDIR "/application"
+# Install npm
+RUN apt-get update && apt-get install -y nodejs npm
 
-#RUN composer install
+# Install yarn
+RUN npm install -g yarn
 
+# User
+RUN adduser --uid 1000 oab_web
+USER oab_web
+
+#Install drush
+RUN composer global require drush/drush:9.7.3
+
+# Export
+ENV PATH="$PATH:/home/oab_web/.config/composer/vendor/bin"
 
 ## Unfortunately, adding the composer vendor dir to the PATH doesn't seem to work. So:
-RUN ln -s $PWD/vendor/bin/drush /usr/local/bin/drush
+#RUN ln -s $PWD/vendor/bin/drush /usr/local/bin/drush
 

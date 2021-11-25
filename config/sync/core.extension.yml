@@ -152,6 +152,8 @@ module:
 theme:
   stark: 0
   seven: 0
+  stable: 0
+  classy: 0
   theme_obs_backoffice: 0
   theme_boosted: 0
   theme_oab_hub: 0
