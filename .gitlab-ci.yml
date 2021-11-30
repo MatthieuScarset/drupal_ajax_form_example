@@ -21,6 +21,7 @@ deploy_dev:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
     - ls -la ~/.ssh
   script:
     #First : stop current container and delete code
