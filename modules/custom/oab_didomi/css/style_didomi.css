@@ -1,0 +1,15 @@
+.didomi-message {
+  margin: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid black;
+  box-shadow: 2px 3px 0px black;
+}
+
+.didomi-message p.titre {
+  font-weight: bold;
+}
+
+.didomi-message .message {
+
+}

@@ -1,0 +1,17 @@
+oab_didomi_library:
+  version: VERSION
+  css:
+    theme:
+      css/style_didomi.css: {}
+  js:
+    js/test_script_tealium.js: {} #pour les tests
+    https://tags.tiqcdn.com/utag/orange/obscare/qa/utag.js: { type: external, minified: true } #pour les tests
+    js/didomi.js: {}
+    js/iframe_youtube.js: {attributes: { type: module }}
+  dependencies:
+    - oab_didomi/oab_polyfill
+
+oab_polyfill:
+  header: true
+  js:
+    js/custom-elements.js: {}
