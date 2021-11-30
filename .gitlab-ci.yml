@@ -4,36 +4,35 @@ include:
       - if: $CI_COMMIT_BRANCH == "dev"
 
 stages:          # List of stages for jobs, and their order of execution
-  - build
+  #- build
   - deploy
 
 
 variables:
+  DEPLOY_DIR: "/var/www/ruby_test"
+  DOCKER_COMPOSE_FILE: "docker-compose.dev.yml"
 
-
-build_drupal:
-  stage: build
-  image: php:7.3
+deploy_dev:
+  stage: deploy
   before_script:
-    ## Install Composer
-    - apt-get update
-    - apt-get install -y git zip unzip
-    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    - php composer-setup.php
-    - php -r "unlink('composer-setup.php');"
-    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
-    - pecl install imagick > /dev/null
-    - docker-php-ext-enable imagick > /dev/null
-    - docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir > /dev/null
-    - docker-php-ext-install gd > /dev/null
-    - docker-php-ext-enable gd > /dev/null
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
   script:
-    - php composer.phar install
-  after_script:
-    - rm composer.phar
-  artifacts:
-    paths:
-      - .
+    #First : stop current container and delete code
+    - | 
+        ssh $SSH_USER@$SSH_DEV_IP << EOF
+        if [ -f $DEPLOY/DIR/$DOCKER_COMPOSE_FILE ]; then
+            docker-compose -f $DEPLOY_DIR/$DOCKER_COMPOSE_FILE stop
+            rm -r $DEPLOY_DIR
+        fi
+        EOF
+    - ssh $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
+    - scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
+
+
 
 
 
