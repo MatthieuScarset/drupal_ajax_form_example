@@ -22,6 +22,7 @@ deploy_dev:
     - chmod 700 ~/.ssh
   script:
     #First : stop current container and delete code
+    - ssh-keyscan $SSH_DEV_IP
     - ssh SSH_USER@$SSH_DEV_IP ls -la
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
     #- scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
