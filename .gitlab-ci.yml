@@ -20,7 +20,7 @@ deploy_dev:
     #- echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - cat $SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+    - echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
     - ls -la ~/.ssh
   script:
     #First : stop current container and delete code
