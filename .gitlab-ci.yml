@@ -27,7 +27,9 @@ build_drupal:
     - docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir > /dev/null
     - docker-php-ext-install gd > /dev/null
     - docker-php-ext-enable gd > /dev/null
+  script:
     - php composer.phar install
+  after_script:
     - rm composer.phar
   artifacts:
     paths:
