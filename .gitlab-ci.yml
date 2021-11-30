@@ -13,7 +13,7 @@ variables:
 
 build_drupal:
   stage: build
-  image: php:7.4
+  image: php:7.3
   before_script:
     ## Install Composer
     - apt-get update
