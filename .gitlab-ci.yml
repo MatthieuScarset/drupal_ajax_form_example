@@ -23,13 +23,13 @@ deploy_dev:
   script:
     #First : stop current container and delete code
     - | 
-        ssh $SSH_USER@$SSH_DEV_IP << EOF
+        ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP << EOF
         if [ -f $DEPLOY/DIR/$DOCKER_COMPOSE_FILE ]; then
             docker-compose -f $DEPLOY_DIR/$DOCKER_COMPOSE_FILE stop
             rm -r $DEPLOY_DIR
         fi
         EOF
-    - ssh $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
+    - ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
     - scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
 
 
