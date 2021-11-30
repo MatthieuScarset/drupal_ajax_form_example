@@ -20,6 +20,7 @@ deploy_dev:
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - ls -la ~/.ssh
   script:
     #First : stop current container and delete code
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP ls -la
