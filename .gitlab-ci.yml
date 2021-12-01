@@ -23,21 +23,15 @@ deploy_dev:
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' >> ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
-    - ls -la ~/.ssh
   script:
     #First : stop current container and delete code
     - |
       ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP "
-        if [ -f $DOCKER_COMPOSE_FILE ]; then
-          docker -f $DOCKER_COMPOSE_FILE stop
-          rm -r $DEPLOY_DIR
-          
-        fi
+        [ -f $DOCKER_COMPOSE_FILE ] && docker -f $DOCKER_COMPOSE_FILE stop;
+        [ -d $DEPLOY_DIR ] && rm -r $DEPLOY_DIR;
         mkdir -p $DEPLOY_DIR"
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
-    - ls -la $(pwd)
-    - scp -r $(pwd) $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
+    - scp -r $(pwd)/* $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
 
 
 
