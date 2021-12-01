@@ -10,7 +10,7 @@ stages:          # List of stages for jobs, and their order of execution
 
 variables:
   DEPLOY_DIR: "/var/www/ruby_test"
-  DOCKER_COMPOSE_FILE: "docker-compose.dev.yml"
+  DOCKER_COMPOSE_FILE: "$DEPLOY_DIR/docker-compose.dev.yml"
 
 deploy_dev:
   stage: deploy
@@ -27,9 +27,15 @@ deploy_dev:
     - ls -la ~/.ssh
   script:
     #First : stop current container and delete code
-    - ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP ls -la
+    - |
+      ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP << EOF
+        if [ -f $DOCKER_COMPOSE_FILE ]; then
+          docker -f $DOCKER_COMPOSE_FILE stop
+          rm -r $DEPLOY_DIR
+        fi
+        EOF
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
-    #- scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
+    - scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
 
 
 
