@@ -25,13 +25,14 @@ deploy_dev:
     #- chmod 600 ~/.ssh/id_rsa
   script:
     #First : stop current container and delete code
-    - |
-      ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP "
-        [ -f $DOCKER_COMPOSE_FILE ] && docker -f $DOCKER_COMPOSE_FILE stop;
-        [ -d $DEPLOY_DIR ] && rm -r $DEPLOY_DIR;
-        mkdir -p $DEPLOY_DIR"
+    - echo CI_PROJECT_PATH
+    #- |
+    #  ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP "
+    #    [ -f $DOCKER_COMPOSE_FILE ] && docker -f $DOCKER_COMPOSE_FILE stop;
+    #    [ -d $DEPLOY_DIR ] && rm -r $DEPLOY_DIR;
+    #    mkdir -p $DEPLOY_DIR"
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
-    - scp -r $(pwd)/* $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
+    #- scp -r $(pwd) $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
 
 
 
