@@ -66,4 +66,4 @@ services:
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-        - ../shared/sites/default:/application/sites/default
+        - ../shared/ruby_files/default:/application/sites/default
