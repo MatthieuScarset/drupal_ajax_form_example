@@ -37,7 +37,7 @@ deploy_dev:
         mkdir -p $DEPLOY_DIR"
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
     - ls -la $(pwd)
-    - scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
+    - scp $(pwd) $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
 
 
 
