@@ -32,7 +32,9 @@ deploy_dev:
         if [ -f $DOCKER_COMPOSE_FILE ]; then
           docker -f $DOCKER_COMPOSE_FILE stop
           rm -r $DEPLOY_DIR
-        fi"
+          
+        fi
+        mkdir -p $DEPLOY_DIR"
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
     - scp $SSH_USER@$SSH_DEV_IP:$(pwd) $DEPLOY_DIR
 
