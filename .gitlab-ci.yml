@@ -9,7 +9,7 @@ stages:          # List of stages for jobs, and their order of execution
 
 
 variables:
-  DEPLOY_DIR: "/var/www/ruby_test"
+  DEPLOY_DIR: "/home/oab_web/portail-obs"
   DOCKER_COMPOSE_FILE: "$DEPLOY_DIR/docker-compose.dev.yml"
 
 deploy_dev:
