@@ -31,7 +31,7 @@ deploy_dev:
         [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
         mkdir -p $CI_PROJECT_PATH"
     #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $CI_PROJECT_PATH
-    - scp -r $(pwd) $SSH_USER@$SSH_DEV_IP:$CI_PROJECT_PATH
+    - scp -r $(pwd)/* $SSH_USER@$SSH_DEV_IP:$CI_PROJECT_PATH
 
 
 
