@@ -17,13 +17,13 @@ deploy_dev:
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
     - eval $(ssh-agent -s)
-    #- echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
-    - ls -la ~/.ssh
+    #- echo $SSH_PRIVATE_KEY >> ~/.ssh/id_rsa
+    #- chmod 600 ~/.ssh/id_rsa
+    #- cat ~/.ssh/id_rsa
+    #- ls -la ~/.ssh
   script:
     #First : stop current container and delete code
     - ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP ls -la
