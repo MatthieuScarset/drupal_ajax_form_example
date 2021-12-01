@@ -9,8 +9,7 @@ stages:          # List of stages for jobs, and their order of execution
 
 
 variables:
-  DEPLOY_DIR: "/home/oab_web/portail-obs"
-  DOCKER_COMPOSE_FILE: "$DEPLOY_DIR/docker-compose.dev.yml"
+  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
 
 deploy_dev:
   stage: deploy
@@ -25,14 +24,14 @@ deploy_dev:
     #- chmod 600 ~/.ssh/id_rsa
   script:
     #First : stop current container and delete code
-    - echo $CI_PROJECT_PATH
-    #- |
-    #  ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP "
-    #    [ -f $DOCKER_COMPOSE_FILE ] && docker -f $DOCKER_COMPOSE_FILE stop;
-    #    [ -d $DEPLOY_DIR ] && rm -r $DEPLOY_DIR;
-    #    mkdir -p $DEPLOY_DIR"
-    #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $DEPLOY_DIR
-    #- scp -r $(pwd) $SSH_USER@$SSH_DEV_IP:$DEPLOY_DIR
+    #- echo $CI_PROJECT_PATH
+    - |
+      ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP "
+        [ -f $DOCKER_COMPOSE_FILE ] && docker -f $DOCKER_COMPOSE_FILE stop;
+        [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
+        mkdir -p $CI_PROJECT_PATH"
+    #- ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_DEV_IP mkdir -p $CI_PROJECT_PATH
+    - scp -r $(pwd) $SSH_USER@$SSH_DEV_IP:$CI_PROJECT_PATH
 
 
 
