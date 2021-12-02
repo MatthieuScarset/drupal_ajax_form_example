@@ -12,7 +12,7 @@ stages:          # List of stages for jobs, and their order of execution
 variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
-  EXEC_PHP_FPM: "$SSH_COMMAND docker exec -it ruby_php-fpm"
+  EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
 
 
 before_script:
