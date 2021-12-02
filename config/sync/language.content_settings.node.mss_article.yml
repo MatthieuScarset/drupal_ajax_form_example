@@ -1,0 +1,11 @@
+uuid: 9faa8b5e-b5e9-4159-97c8-6dfa051a0f73
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.mss_article
+id: node.mss_article
+target_entity_type_id: node
+target_bundle: mss_article
+default_langcode: site_default
+language_alterable: false

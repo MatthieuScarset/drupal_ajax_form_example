@@ -1,0 +1,22 @@
+uuid: de37a54f-f7f4-48fc-b984-0234d184d11e
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.mss_article
+id: node.mss_article.status
+field_name: status
+entity_type: node
+bundle: mss_article
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
