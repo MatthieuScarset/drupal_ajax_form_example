@@ -1,0 +1,97 @@
+<style type="text/css">
+  article.node.full .item a:hover {
+    text-decoration: none;
+  }
+  .region-content article .most_read a {
+    text-decoration:none;
+  }
+  .content .most_read a:hover {
+    color:#000; text-decoration:none;
+  }
+  .region-content article .most_read .item .category a:hover {
+    color:#FFF; text-decoration:none;
+  }
+  .most_read,.tile-category {
+    display: flex;
+  }
+  .most_read {
+    flex-wrap:wrap;
+    justify-content: space-between;
+  }
+  .most_read .item {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px #ddd;
+    background-color: #ffffff;
+    box-shadow: #ddd 2px 2px;
+    max-height: 15em;
+    width: 27.5em;
+    margin: 0 2rem 1rem 0;
+    padding: 0;
+    box-shadow: #ddd 2px 2px;
+  }
+  .category {
+    display: flex;
+    padding: 0px 0.5em;
+    height: 2em;
+    align-items: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f16e00;
+  }
+  .category a {
+    color:#FFF;
+  }
+  .one-i-tile h2 {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  .one-i-tile h2::after {
+    position: absolute;
+    content: "";
+    width: 2.875rem;
+    height: 0.475rem;
+    bottom: 0;
+    left: 0;
+    background: #ff7900;
+  }
+
+</style>
+
+<div class="one-i-tile">
+  <h2>Most read articles</h2>
+
+  <div class="container-fluid" style="padding:0">
+    <div class="row obs_template three_columns most_read">
+      <div class="col-md-4 col-sm-12 item" style="height: auto;">
+        <div class="tile-category">
+          <div class="category"><a class="mra-tile" href="#">Account settings</a></div>
+        </div>
+
+        <p><a class="mra-tile" href="#"><strong>Tutorials and support resources.</strong></a></p>
+
+        <p><a class="mra-tile" href="#">Information about resources and how to get support in My Service Space. 1.1 What training is available for My Service Space?</a></p>
+      </div>
+
+      <div class="col-md-4 col-sm-12 item" style="height: auto;">
+        <div class="tile-category">
+          <div class="category"><a class="mra-tile" href="#">Solutions</a></div>
+        </div>
+
+        <p><a class="mra-tile" href="#"><strong>How to use the Flexible SD-WAN Selfcare in My Service Space?</strong></a></p>
+
+        <p><a class="mra-tile" href="#">With the Flexible SD-WAN Selfcare, network managers monitor their inventory at network, site and SD-WAN zone levels in real-time.</a></p>
+      </div>
+
+      <div class="col-md-4 col-sm-12 item" style="height: auto;">
+        <div class="tile-category">
+          <div class="category"><a class="mra-tile" href="#">Ordering</a></div>
+        </div>
+
+        <p><a class="mra-tile" href="#"><strong>E-learning Online Quoting</strong></a></p>
+
+        <p><a class="mra-tile" href="#">Browse the online quoting module and discover step by step how to manage :</a></p>
+      </div>
+    </div>
+  </div>
+</div>
