@@ -1,8 +1,7 @@
 include:
-  - local: .$CI_COMMIT_BRANCH.gitlab-ci.yml
+  - local: .dev.gitlab-ci.yml
     rules:
-      - exists:
-        - .$CI_COMMIT_BRANCH.gitlab-ci.yml
+      - if: $CI_COMMIT_BRANCH == "dev"
 
 stages:          # List of stages for jobs, and their order of execution
   - deploy
