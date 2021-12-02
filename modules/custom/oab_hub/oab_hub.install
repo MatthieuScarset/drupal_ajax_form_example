@@ -28,3 +28,10 @@ function oab_hub_update_8002() {
 function oab_hub_update_8003() {
     oabt_YmlImport('user.role.chief_editor_hub.yml');
 }
+
+/**
+ * Création du term "MSS Assistance pour la Taxo "Hub"
+ */
+function oab_hub_update_8004() {
+  include_once('updates/update_8004.inc');
+}

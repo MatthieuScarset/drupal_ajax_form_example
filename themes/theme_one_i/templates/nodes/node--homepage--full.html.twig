@@ -101,11 +101,17 @@
       <div class="top-zone-homepage homepage-banner-container row">
         <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12 carousel-solution">
           <div class="block-card-container">
+            <div class="homepage-wyziwyg">
+              {{ content.field_wysiwyg_zone_1 }}
+            </div>
             <div class="row display-flex">
               {% for key, news in content.field_news_top_zone if key|first != '#'  %}
                 {{ news }}
               {% endfor %}
             </div>
+              <div class="homepage-wyziwyg">
+              {{ content.field_wysiwyg_zone_2 }}
+              </div>
           </div>
         </div>
 
