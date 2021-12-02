@@ -55,7 +55,11 @@ services:
         - "8000:80"
 
     php-fpm:
-      build: config/docker/local/php-fpm
+      build:
+        context: config/docker/local/php-fpm
+        args:
+          UID: $UID
+          GID: $GID
       container_name: ruby_php-fpm
       working_dir: /application
       depends_on:

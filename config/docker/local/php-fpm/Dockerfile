@@ -4,6 +4,8 @@ WORKDIR "/application"
 
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
+ARG UID
+ARG GID
 
 ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
@@ -49,7 +51,7 @@ RUN apt-get update && apt-get install -y nodejs npm
 RUN npm install -g yarn
 
 # User
-RUN adduser --uid 1000 oab_web
+RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
 #Install drush
@@ -57,7 +59,3 @@ RUN composer global require drush/drush:9.7.3
 
 # Export
 ENV PATH="$PATH:/home/oab_web/.config/composer/vendor/bin"
-
-## Unfortunately, adding the composer vendor dir to the PATH doesn't seem to work. So:
-#RUN ln -s $PWD/vendor/bin/drush /usr/local/bin/drush
-
