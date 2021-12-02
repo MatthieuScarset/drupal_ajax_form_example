@@ -54,12 +54,17 @@
   {{ title_suffix }}
 
   {% block content %}
-    <ul>
+  <div class="mss_categories_block">
+    <ul style="padding: 0" >
     {% for element in content['#markup'] %}
-      <li style="list-style-type: none">{{ element }}</li>
+      {% if element == content.variable_categories %}
+        <li style="list-style-type: none"> <a href="{{ content['categories_url'][element] }}" class= "mss_categories_selected">{{ element }}</a> </li>
+      {% else %}
+        <li style="list-style-type: none">  <a href="{{ content['categories_url'][element] }}">{{ element }}</a> </li>
+      {% endif %}
     {% endfor %}
     </ul>
-
+  </div>
   {% endblock %}
 </section>
 
