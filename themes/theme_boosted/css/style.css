@@ -3608,6 +3608,9 @@ hr.reseau-mobile-accords-roaming {
   padding-bottom: 3rem;
 }
 
+.btn .btn-lg .btn-modal-video {
+  font-size: 8rem;
+}
 
 /* Video embarquee dans un modal : gestion du bouton fermer */
 .modal.ckeditor-embed-video .modal-dialog .modal-content {
@@ -3627,14 +3630,6 @@ hr.reseau-mobile-accords-roaming {
 }
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
-}
-.modal.ckeditor-embed-video .modal-dialog {
-  max-width: 800px;
-  margin: 30px auto;
-}
-.modal.ckeditor-embed-video .modal-dialog .modal-content{
-  position:relative;
-  padding:35px;
 }
 
 /* Page temporaire (offices) */
