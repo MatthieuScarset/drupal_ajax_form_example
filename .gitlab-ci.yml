@@ -37,7 +37,7 @@ deploy_dev:
 build_dev:
   stage: build
   script:
-    - docker-compose -f $DOCKER_COMPOSE_FILE up -d
+    - $EXEC_PHP_FPM docker-compose -f $DOCKER_COMPOSE_FILE up -d
     - $EXEC_PHP_FPM composer install
   rules:
     - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
