@@ -44,6 +44,8 @@ build_dev:
 update_dev:
   stage: update
   script:
+    # drush cr needed for Drupal to discover new modules
+    - $EXEC_PHP_FPM drush cr
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
