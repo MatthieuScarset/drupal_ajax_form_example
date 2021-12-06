@@ -20,6 +20,10 @@ export default class DivIframeYoutube extends HTMLDivElement {
     this.querySelector('.btn_accept_cookie_youtube').addEventListener('click', function(event) {this._acceptYoutubeCookies(event)}.bind(this));
   }
 
+  refreshView(){
+    this._manageCookieStatus();
+  }
+
 
  _manageCookieStatus(){
     if (typeof Didomi === 'undefined') {
@@ -68,6 +72,12 @@ export default class DivIframeYoutube extends HTMLDivElement {
     //on enregistre le nouvel UserConsent
     Didomi.setUserStatus(userConsent);
     this._switchDisplay(true);
+
+    //refresh all elements
+    var elements = document.querySelectorAll(".divParentIframeYoutube");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].refreshView();
+    }
   }
 }
 customElements.define('div-iframe-youtube', DivIframeYoutube, {extends: 'div'})
