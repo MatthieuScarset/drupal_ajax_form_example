@@ -13,8 +13,7 @@ variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
-  SONAR_TOKEN: "your-sonarqube-token"
-  SONAR_HOST_URL: "http://your-sonarqube-instance.org"
+  SONAR_HOST_URL: "$SONAR_URL"
   GIT_DEPTH: 0
 
 
