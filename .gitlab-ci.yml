@@ -1,9 +1,10 @@
 include:
   - local: .dev.gitlab-ci.yml
     rules:
-      - if: $CI_COMMIT_BRANCH == "dev"
+      - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
 
 stages:          # List of stages for jobs, and their order of execution
+  - test
   - deploy
   - build
   - update
@@ -12,6 +13,9 @@ variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
+  SONAR_TOKEN: "your-sonarqube-token"
+  SONAR_HOST_URL: "http://your-sonarqube-instance.org"
+  GIT_DEPTH: 0
 
 
 before_script:
@@ -20,6 +24,18 @@ before_script:
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
+
+
+sonar:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  stage: test
+  script:
+    - sonar-scanner -Dsonar.qualitygate.wait=true
+  allow_failure: false
+  rules:
+  - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
 
 deploy_dev:
   stage: deploy
@@ -31,7 +47,7 @@ deploy_dev:
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
 
 build_dev:
   stage: build
@@ -39,7 +55,7 @@ build_dev:
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE up -d
     - $EXEC_PHP_FPM composer install
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
 
 update_dev:
   stage: update
@@ -50,7 +66,7 @@ update_dev:
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
 
 
 
