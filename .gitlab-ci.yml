@@ -28,7 +28,7 @@ before_script:
 
 sonar:
   image:
-    name: sonarsource/sonar-scanner-cli:7.9
+    name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
   stage: test
   script:
