@@ -31,7 +31,7 @@ sonar:
     entrypoint: [""]
   stage: test
   script:
-    - sonar-scanner -X -Dsonar.qualitygate.wait=true -Dproject.settings=sonar-project.properties
+    - sonar-scanner -X -Dsonar.qualitygate.wait=true
   allow_failure: false
   rules:
   - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
