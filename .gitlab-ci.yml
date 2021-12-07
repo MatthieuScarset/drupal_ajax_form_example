@@ -14,6 +14,7 @@ variables:
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
   SONAR_HOST_URL: "$SONAR_URL"
+  SONAR_TOKEN: "$SONAR_TOKEN"
   GIT_DEPTH: 0
 
 
