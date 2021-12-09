@@ -150,7 +150,8 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
       // Je recrée les paths
       $archive_path = $this->getAxiomeSaveDir() . "/$archive";
-      $new_path = \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . "/$archive");
+      $default_scheme = \Drupal::config('system.file')->get('default_scheme');
+      $new_path = \Drupal::service('file_system')->realpath($default_scheme . '://' . AXIOME_FOLDER . "/$archive");
 
 
       // Si le fichier n'existe pas, je met une erreur (mais Drupal devrait avoir coupé avant si le fichier n'existe pas)
@@ -234,7 +235,8 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
      * Pour recuperer facilement le dossier de sauvegarde
      */
     private function getAxiomeSaveDir() {
-        return \Drupal::service('file_system')->realpath(file_default_scheme() . '://' . AXIOME_FOLDER . '/' . AXIOME_SAVE_FOLDER);
+        $default_scheme = \Drupal::config('system.file')->get('default_scheme');
+        return \Drupal::service('file_system')->realpath($default_scheme . '://' . AXIOME_FOLDER . '/' . AXIOME_SAVE_FOLDER);
     }
 
 }

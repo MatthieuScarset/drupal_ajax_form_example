@@ -13,7 +13,7 @@ description: 'The user ID of the media publisher.'
 required: false
 translatable: false
 default_value: {  }
-default_value_callback: 'Drupal\media_entity\Entity\Media::getCurrentUserId'
+default_value_callback: 'Drupal\media_entity\Entity\Media::getDefaultEntityOwner'
 settings:
   handler: default
   handler_settings: {  }
