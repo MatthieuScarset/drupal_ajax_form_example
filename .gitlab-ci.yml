@@ -5,9 +5,9 @@ include:
 
 stages:          # List of stages for jobs, and their order of execution
 #  - test
-  - :rocket:deploy
-  - :factory:build
-  - :construction:update
+  - ':rocket:deploy'
+  - ':factory:build'
+  - ':construction:update'
 
 variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
@@ -32,10 +32,10 @@ before_script:
 #    - sonar-scanner -X -Dsonar.qualitygate.wait=true
 #  allow_failure: false
 #  rules:
-#  - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
+#  - if: $CI_COMMIT_BRANCH == "dev"
 
 :airplane:Deploy dev:
-  stage: :rocket:deploy
+  stage: ':rocket:deploy'
   script:
     - |
       $SSH_COMMAND "
@@ -44,18 +44,18 @@ before_script:
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
 :package:Build drupal:
-  stage: :factory:build
+  stage: ':factory:build'
   script:
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE up -d
     - $EXEC_PHP_FPM composer install
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
 :construction_worker:Update drupal:
-  stage: :construction:update
+  stage: ':construction:update'
   script:
     # drush cr needed for Drupal to discover new modules
     - $EXEC_PHP_FPM drush cr
@@ -63,7 +63,7 @@ before_script:
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
 
 
