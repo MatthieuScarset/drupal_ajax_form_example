@@ -1,13 +1,13 @@
 include:
   - local: .dev.gitlab-ci.yml
     rules:
-      - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
+      - if: $CI_COMMIT_BRANCH == "dev"
 
 stages:          # List of stages for jobs, and their order of execution
 #  - test
-  - ':rocket: deploy'
-  - ':factory: build'
-  - ':construction: update'
+  - deploy
+  - build
+  - update
 
 variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
@@ -22,27 +22,6 @@ before_script:
 #  - mkdir -p ~/.ssh
 #  - chmod 700 ~/.ssh
 
-':airplane: Deploy dev':
-  stage: ':rocket: deploy'
-  script:
-    - pwd
-  rules:
-    - if: $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
-
-':package: pwd':
-  stage: ':factory: build'
-  script:
-    - pwd
-  rules:
-    - if: $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
-
-':construction_worker: ls':
-  stage: ':construction: update'
-  script:
-    - ls -la
-  rules:
-    - if: $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3828"
-
 
 #sonar:
 #  image:
@@ -55,8 +34,8 @@ before_script:
 #  rules:
 #  - if: $CI_COMMIT_BRANCH == "dev"
 
-:airplane:Deploy dev:
-  stage: ':rocket: deploy'
+Deploy dev:
+  stage: deploy
   script:
     - |
       $SSH_COMMAND "
@@ -67,16 +46,16 @@ before_script:
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
 
-:package:Build drupal:
-  stage: ':factory: build'
+Build drupal:
+  stage: build
   script:
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE up -d
     - $EXEC_PHP_FPM composer install
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
 
-:construction_worker:Update drupal:
-  stage: ':construction: update'
+Update drupal:
+  stage: update
   script:
     # drush cr needed for Drupal to discover new modules
     - $EXEC_PHP_FPM drush cr
