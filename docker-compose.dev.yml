@@ -52,6 +52,7 @@ services:
       - .:/application
       - ./config/docker/local/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./config/logs:/tmp/logs
+      - /var/data/ruby/sites:/application/sites
     ports:
       - "80:80"
 
