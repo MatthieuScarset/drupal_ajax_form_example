@@ -5,8 +5,7 @@ namespace Drupal\oab_bvpn_import\Classes;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 
-class CSPImport
-{
+class CSPImport {
   const IMPORT_DIRECTORY = 'public://bvpn/';
   const LOGOS_DIRECTORY = 'public://bvpn_logos/';
 
@@ -22,7 +21,7 @@ class CSPImport
       while ($row = fgets($fp)) {
         $num_lines++;
         $columns = explode(";", $row);
-        if($num_lines>1) { //on le prend pas la 1ere ligne qui sont les titres
+        if ($num_lines>1) { //on le prend pas la 1ere ligne qui sont les titres
           $batch_op[] = array('oab_bvpn_import_batch', array($columns, $num_lines));
         }
       }
