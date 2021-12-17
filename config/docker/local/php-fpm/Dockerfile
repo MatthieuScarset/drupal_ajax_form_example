@@ -30,6 +30,11 @@ RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir \
   && docker-php-ext-enable gd
 
 
+# ADD SOME CACHE
+RUN docker-php-ext-enable opcache
+RUN pecl install apcu && docker-php-ext-enable apcu
+
+
 # Install git
 RUN apt-get update \
     && apt-get -y install git \
