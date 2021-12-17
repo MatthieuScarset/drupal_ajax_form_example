@@ -1,0 +1,5 @@
+<?php
+function oab_didomi_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'oab_didomi/oab_didomi_library';
+  $attachments['#attached']['drupalSettings']['didomi']['vendor_id_youtube'] = \Drupal::config('oab_didomi.settings')->get('vendor_id_youtube');
+}
