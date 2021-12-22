@@ -3,11 +3,6 @@
 // Gestion de l'affichage des forms spécifiques aux subhomes via une fonction pour ne pas surcharger le .module
 
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\views\ViewExecutable;
-
-
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -23,19 +18,21 @@ function subhomes_views_exposed_form(&$form) {
           }
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
-          $form[$key]['#type'] = 'subhome_select_button';
-          $properties = [
-            "vid" => $key,
-            "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-          ];
-          $form[$key]['#options'] = [];
-          $form[$key]['#title_display'] = 'invisible';
-          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-          if (is_array($terms)
-            && !empty($terms)) {
-            foreach ($terms AS $term) {
-              $term_name = $term->getName();
-              $form[$key]['#options'][$term->id()] = $term_name;
+          if ($current_language === "fr" || $current_language === "en") {
+            $form[$key]['#type'] = 'subhome_select_button';
+            $properties = [
+              "vid" => $key,
+              "langcode" => \Drupal::languageManager()->getCurrentLanguage()->getId()
+            ];
+            $form[$key]['#options'] = [];
+            $form[$key]['#title_display'] = 'invisible';
+            $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+            if (is_array($terms)
+              && !empty($terms)) {
+              foreach ($terms as $term) {
+                $term_name = $term->getName();
+                $form[$key]['#options'][$term->id()] = $term_name;
+              }
             }
           }
         }
@@ -80,10 +77,10 @@ function subhomes_views_exposed_form(&$form) {
 
   // Pour tous les contenus avec le filtre thématic/ field_insight
     if (isset($form['field_insight'])) {
-        $form['field_insight']['#options'] = clean_exposed_filters_by_language(
-            $form['field_insight']['#options'],
-            'Thematic'
-        );;
+      $form['field_insight']['#options'] = clean_exposed_filters_by_language(
+        $form['field_insight']['#options'],
+        'Thematic'
+      );
     }
 
     // subhome blogs

@@ -951,9 +951,20 @@ aside.right-column > .region{
     background: black;
     color: #fff;
     margin-right: 1rem;
-    margin-left: 1rem;
-  margin-bottom: 1rem;
 }
+
+.subhome-view-press .view-filters.form-group #edit-submit-subhomes{
+  background: black;
+  color: #fff;
+  margin-left: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#edit-submit-subhomes-archive {
+  margin-left: 1rem;
+  padding-bottom: 0.7rem;
+}
+
 #edit-submit-subhomes:hover,
 #edit-submit-subhomes:active{
     background: white;
