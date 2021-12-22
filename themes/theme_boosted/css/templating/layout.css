@@ -951,6 +951,8 @@ aside.right-column > .region{
     background: black;
     color: #fff;
     margin-right: 1rem;
+    margin-left: 1rem;
+  margin-bottom: 1rem;
 }
 #edit-submit-subhomes:hover,
 #edit-submit-subhomes:active{

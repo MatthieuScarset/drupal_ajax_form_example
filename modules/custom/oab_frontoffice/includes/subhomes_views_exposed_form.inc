@@ -11,7 +11,7 @@ use Drupal\views\ViewExecutable;
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
+    if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false && $form['#id'] !== 'views-exposed-form-subhomes-archive-archive-press') {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
