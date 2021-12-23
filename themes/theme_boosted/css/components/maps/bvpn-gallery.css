@@ -36,27 +36,29 @@
 }
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .form-submit{
   margin-left: 10px;
-}
+}/*
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map
 {
   background-color: black;
   color: #fff;
-}
+}*/
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active:hover
 {
   background-color: #f16e00;
   color: #fff;
-}
+}/*
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:hover,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:active,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:hover,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:active{
   background-color: white;
    color: #000;
- }
-.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:disabled{
+ }*/
+
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:disabled,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-list-page .form-actions .btn_clear_filter_list_csp:disabled{
   color: #fff;
   background-color: #ccc;
   border-color: #ccc;
