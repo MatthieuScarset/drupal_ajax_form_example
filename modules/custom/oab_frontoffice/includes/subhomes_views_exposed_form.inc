@@ -2,6 +2,10 @@
 
 // Gestion de l'affichage des forms spécifiques aux subhomes via une fonction pour ne pas surcharger le .module
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\views\ViewExecutable;
+
 
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
