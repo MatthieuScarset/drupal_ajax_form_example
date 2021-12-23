@@ -114,11 +114,14 @@
       }
     );
     //clique sur l'icone croix => soumet le formulaire de reset
+    /*
+    //A SUPPRIMER ?
     $(document).on('click', '.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block #remove-icon-btn',
       function(){
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.reset-icon').click();
       }
     );
+    */
     // reset de la recherche par noms => on remet vide dans la recherche par titre, on valide la recherche et on déselectionne tout
     $(document).on('click', '#remove-icon-btn', function() {
       $.each(Drupal.views.instances, function(i, view) {
@@ -145,17 +148,59 @@
       });
     });
 
+    //BOUTONS DE RECHERCHE DE LA MAP
+
+    //clique sur l'icone Filter de la map => soumet le formulaire de recherche
+    $(document).on('click', '.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page #validate-search-map-btn',
+      function(){
+        $.each(Drupal.views.instances, function(i, view) {
+          if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_list_block") {
+            var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
+            var selectedRegion = selectOptions.children("option:selected").val();
+            view.settings.location = selectedRegion;
+            if(nameSearched != '') {
+              searchByNameToReload = true;
+            }
+            var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
+            jQuery(selector).triggerHandler('RefreshView');
+          }
+        });
+       // $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page input.btn_submit_filter_search_map').click();
+      }
+    );
+    // reset de la recherche par regions => on met All
+    $(document).on('click', '.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page #clear-search-map-btn', function() {
+      $.each(Drupal.views.instances, function(i, view) {
+        if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_map_page") {
+          view.settings.location = 'All';
+          var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
+          jQuery(selector).triggerHandler('RefreshView');
+          //unselectAllCSPItem();
+          ajax_is_filter = true;
+          if(nameSearched != '') {
+            searchByNameToReload = true;
+          }
+        }
+      });
+    });
 
     // effacer le filtre de la recherche par région
+    /*
     $(document).on('click', '.btn_clear_filter_search_map', function() {
       $.each(Drupal.views.instances, function(i, view) {
         if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_map_page") {
           var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
+          console.log('je sauvegarde ma recherche : '+nameSearched);
+          if(nameSearched != '') {
+            searchByNameToReload = true;
+          }
+
           jQuery(selector).triggerHandler('RefreshView');
           ajax_is_filter = true;
         }
+
       });
-    });
+    });*/
 
 
     //marche
@@ -170,25 +215,23 @@
 
     //au rechargement des vues
     jQuery(document).ajaxComplete(function(event, xhr, settings) {
-
       selectItemAfterSearch();
-
       //on désactive la première option du select des Régions => All
       var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
       if(selectOptions.length>0) {
         selectOptions[0][0].disabled = true;
       }
 
-      if(searchByName){
+      if(searchByName) {
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
       }
-      else{
+      else {
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
       }
 
-      if(nameSearched != '' && searchByNameToReload){
+      if(nameSearched != '' && searchByNameToReload) {
         $('input[name=title]').val(nameSearched);
         searchByNameToReload = false;
         $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.search-icon').click();
@@ -199,7 +242,7 @@
     $(document).ajaxStop(function() {
       var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
       var selectedOption = selectOptions.children("option:selected").val();
-      if(selectedOption != 'all')
+      if(selectedOption != 'All')
       {
         //je zoom sur le point
         var point = drupalSettings.listRegionMarkers[selectedOption];

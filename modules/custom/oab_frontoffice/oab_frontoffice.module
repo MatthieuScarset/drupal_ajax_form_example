@@ -393,7 +393,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
           $form['location']['#options'] = $options;
         }
       }
-
+/*
       $form['actions']['reset'] =array(
         '#value' => "Clear",
         '#type' => "submit",
@@ -409,10 +409,11 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
       if($currentLocation != 'All'){
         unset($form['actions']['reset']['#attributes']['disabled']);
       }
-
+*/
 
       $form['actions']['submit']['#value'] = t('Filter');
       $form['actions']['submit']['#attributes'] = array(
+        'data-twig-suggestion' => 'form-bvpn-gallery-csp-map-page',
         'class' => array(
           'btn_submit_filter_search_map'
         )
