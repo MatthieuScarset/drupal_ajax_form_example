@@ -108,20 +108,13 @@
     );
 
     //clique sur l'icone loupe => soumet le formulaire de recherche
-    $(document).on('click', '.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block #search-icon-btn',
-      function(){
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.search-icon').click();
+
+    $(document).on('click', '[data-click-on]', function(){
+        $($(this).data('clickOn')).click();
       }
     );
     //clique sur l'icone croix => soumet le formulaire de reset
-    /*
-    //A SUPPRIMER ?
-    $(document).on('click', '.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block #remove-icon-btn',
-      function(){
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.reset-icon').click();
-      }
-    );
-    */
+
     // reset de la recherche par noms => on remet vide dans la recherche par titre, on valide la recherche et on déselectionne tout
     $(document).on('click', '#remove-icon-btn', function() {
       $.each(Drupal.views.instances, function(i, view) {
@@ -171,75 +164,67 @@
     // reset de la recherche par regions => on met All
     $(document).on('click', '.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page #clear-search-map-btn', function() {
       $.each(Drupal.views.instances, function(i, view) {
-        if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_map_page") {
+        if (view.settings.view_name === "bvpn_gallery" && (view.settings.view_display_id === "csp_map_page"
+            || view.settings.view_display_id === "csp_list_block")) {
           view.settings.location = 'All';
+
+          if (view.settings.view_display_id === "csp_list_block") {
+            view.settings.title = $("#views-exposed-form-bvpn-gallery-csp-list-block input[name=title]").val();
+          }
+
+          console.log(view.settings);
           var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
           jQuery(selector).triggerHandler('RefreshView');
-          //unselectAllCSPItem();
-          ajax_is_filter = true;
-          if(nameSearched != '') {
-            searchByNameToReload = true;
-          }
         }
       });
     });
 
-    // effacer le filtre de la recherche par région
-    /*
-    $(document).on('click', '.btn_clear_filter_search_map', function() {
-      $.each(Drupal.views.instances, function(i, view) {
-        if (view.settings.view_name == "bvpn_gallery" && view.settings.view_display_id == "csp_map_page") {
-          var selector = '.js-view-dom-id-' + view.settings.view_dom_id;
-          console.log('je sauvegarde ma recherche : '+nameSearched);
-          if(nameSearched != '') {
-            searchByNameToReload = true;
-          }
-
-          jQuery(selector).triggerHandler('RefreshView');
-          ajax_is_filter = true;
-        }
-
-      });
-    });*/
-
-
     //marche
-    jQuery(document).ajaxSend(function(event, xhr, settings) {
+    /*
+    $(document).ajaxSend(function(event, xhr, settings) {
+      console.log('ajaxSend');
+      console.log(event);
+      console.log(xhr);
+      console.log(settings);
       //temporaire à continuer /modifier
       if (settings.extraData && settings.extraData.view_name == "bvpn_gallery" && settings.extraData.view_display_id == "csp_map_page") {
         if(nameSearched != '') {
           searchByNameToReload = true;
         }
       }
-    });
+    });*/
 
     //au rechargement des vues
-    jQuery(document).ajaxComplete(function(event, xhr, settings) {
-      selectItemAfterSearch();
-      //on désactive la première option du select des Régions => All
-      var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
-      if(selectOptions.length>0) {
-        selectOptions[0][0].disabled = true;
-      }
+    $(document).ajaxComplete(function(event, xhr, settings) {
 
-      if(searchByName) {
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
-      }
-      else {
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
-      }
+      console.log('ajaxComplete');
+      if (settings.data !== undefined && typeof settings.data.indexOf === "function" && settings.data.indexOf( "view_name=bvpn_gallery") != -1 ) {
+        selectItemAfterSearch();
+        //on désactive la première option du select des Régions => All
+        var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
+        if (selectOptions.length > 0) {
+          selectOptions[0][0].disabled = true;
+        }
 
-      if(nameSearched != '' && searchByNameToReload) {
-        $('input[name=title]').val(nameSearched);
-        searchByNameToReload = false;
-        $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.search-icon').click();
+        if (searchByName) {
+          $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
+          $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
+        } else {
+          $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
+          $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
+        }
+
+        if (nameSearched != '' && searchByNameToReload) {
+          $('input[name=title]').val(nameSearched);
+          searchByNameToReload = false;
+          $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block input.search-icon').click();
+        }
       }
     });
 
     //quand les vues ajax ont fini de se charger
     $(document).ajaxStop(function() {
+      console.log('ajaxStop');
       var selectOptions = $('.view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-map-page .form-item-location .form-select');
       var selectedOption = selectOptions.children("option:selected").val();
       if(selectedOption != 'All')
