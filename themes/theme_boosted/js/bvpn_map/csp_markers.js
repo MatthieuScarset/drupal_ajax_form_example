@@ -200,9 +200,11 @@
         if (searchByName) {
           $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').addClass('hidden');
           $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').removeClass('hidden');
+          $('#views-exposed-form-bvpn-gallery-csp-list-block input[name=title]').attr('disabled', true);
         } else {
           $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .remove-icon-btn').addClass('hidden');
           $('.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .search-icon-btn').removeClass('hidden');
+          $('#views-exposed-form-bvpn-gallery-csp-list-block input[name=title]').attr('disabled', false);
         }
       }
     });
