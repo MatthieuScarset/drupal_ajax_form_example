@@ -232,7 +232,6 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
             $menu = $menu_tree->build($tree);
 
             $menu_html = \Drupal::service('renderer')->render($menu);
-            //oabt($menu, true);
             $build['menu_homepage_eclairage'] = $menu;
 
 
@@ -240,25 +239,17 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
             $first_paragraph = $entity->field_home_banner[0]->entity;
             // Access the paragraph entity like this:
 
-            //oabt($first_paragraph->get('field_title')->getValue(), false);
-
-
-            // $paragraphHomeBannerFirst = $entity->node.field_home_banner ;
-            // $paragraph = Paragraph::load($paragraphHomeBannerFirst);
-            // $field_title = $paragraph->field_title->value;
-            //oabt($field_title, true);
-
             $build['firstbanner_homepage_eclairage'] = $first_paragraph->get('field_title')->getValue();
 
 
             $taxonomy_id = $entity->field_home_playlists[0]->entity->get('field_playlist_taxonomy_term')->getValue() ;//[0]['target_id'];
-            //var_dump(intval($taxonomy_id));
 
             $build['taxonomy'][count($build['taxonomy'])] = $taxonomy_id;
         }
 
         if ($content_type === 'external_content' && isset($entity->field_url->uri)) {
             $response = new RedirectResponse($entity->field_url->uri, 301);
+            $response->headers->set('robots', 'noindex,follow');
             $response->send();
         }
     }
@@ -544,13 +535,7 @@ function oab_frontoffice_theme($existing, $type, $theme, $path) {
     return $theme;
 }
 
-
-function oab_frontoffice_preprocess_subhome_select(&$variables) {
-//echo "toto"; kint($variables); die();
-}
-
 function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
-//  kint($variables); die();
   $element = $variables['element'];
   $variables['attributes'] = [];
   if (isset($element['#id'])) {
@@ -559,7 +544,6 @@ function oab_frontoffice_preprocess_subhome_select_button(&$variables) {
   if (isset($element['#attributes']['title'])) {
     $variables['attributes']['title'] = $element['#attributes']['title'];
   }
-//  kint($element); die();
   $variables['children'] = $element['#children'];
 }
 
