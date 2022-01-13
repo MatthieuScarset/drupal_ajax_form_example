@@ -68,7 +68,8 @@
         "drupal/console": "~1.0",
         "drupal/devel": "^4.1",
         "drupal/devel_php": "^1.3",
-        "drush/drush": "^10.3"
+        "drush/drush": "^10.3",
+        "kint-php/kint": "^4.1"
     },
     "conflict": {
         "drupal/drupal": "*"
