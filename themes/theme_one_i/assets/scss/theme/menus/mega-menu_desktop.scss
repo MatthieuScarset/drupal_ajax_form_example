@@ -51,6 +51,7 @@ header#navbar.sticky-top.is-sticky {
       border-top: $white;
       max-height: 27rem;
       overflow: hidden;
+      right: 0;
 
       li {
         margin-bottom: 1rem;
@@ -127,11 +128,13 @@ header#navbar.sticky-top.is-sticky {
         }
       }
 
+      .item_megamenu_list {
+        padding-left: 1.875rem;
+      }
+
       .title_megamenu {
-        margin-top: 30px;
-        letter-spacing: -.07rem;
-        color: $gray3;
-        font-size: 1.2rem;
+        font-size: 1.25rem; //20px
+        font-weight: bold;
       }
 
       .sous_items {
@@ -144,7 +147,20 @@ header#navbar.sticky-top.is-sticky {
         }
       }
     }
+    @media (min-width: 1600px) {
+      .item_mega_menu {
+        max-width: 1560px;
+        margin: -5px auto 0;
+
+        .mega-menu-container {
+          padding: 0 15px;
+        }
+
+        .item_megamenu_list {
+          padding-left: 5.625rem;
+        }
+      }
+    }
   }
 }
-
 

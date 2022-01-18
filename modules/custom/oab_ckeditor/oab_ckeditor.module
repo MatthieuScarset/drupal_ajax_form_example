@@ -9,29 +9,29 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings) {
     $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
     $current_path = \Drupal::service('path.current')->getPath();
     $args = explode('/', $current_path);
-    if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
-        if ($args['2'] == "add") {
-            $nodetype = $args['3'];
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+      if ($args['2'] == "add") {
+        $nodetype = $args['3'];
+      }
+      else {
+        if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
+          $nodetype = $noeud->getType();
         }
-        else {
-            if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
-                $nodetype = $noeud->getType();
-            }
+      }
+      if (isset($nodetype) && !empty($nodetype)) {
+        if ($nodetype == 'region') {
+          $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
         }
-        if (isset($nodetype) && !empty($nodetype)) {
-            if ($nodetype == 'region') {
-                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
-            }
-            elseif ($nodetype == 'country') {
-                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
-            }
+        elseif ($nodetype == 'country') {
+          $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
         }
-        $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
-        $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
-            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+      }
+      $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
+      $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
+        base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
-        $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
-            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+      $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
+        base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
     }
 }
 
@@ -57,12 +57,9 @@ function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
  */
 function oab_ckeditor_page_attachments_alter(array &$attachments) {
 
-    $current_uri = \Drupal::request()->getRequestUri();
+  $current_uri = \Drupal::request()->getRequestUri();
     //si en ajout de node ou edit node
-   /* if ((strpos($current_uri, '/node/add') !== false)
-        || (strpos($current_uri, '/node/') !== false && strpos($current_uri, '/edit') !== false)
-        || (strpos($current_uri, '/block') !== false)) {*/
-        // declaration des templates
+   if (\Drupal::service('router.admin_context')->isAdminRoute()) {        // declaration des templates
         $data    = array();
         $data[0] = array(
             'title'       => t('1 column'),
@@ -200,7 +197,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
         $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
         $attachments['#attached']['drupalSettings']['oab_ckeditor']['path'] = drupal_get_path('module','oab_ckeditor');
 
-    //}
+    }
 }
 
  function getAllCountriesForJSOptions() {

@@ -1,0 +1,30 @@
+/*
+ * New class for megamenu template
+ */
+
+.mega_menu_template {
+  padding-top: 1rem;
+  margin-left: -0.75rem;
+}
+
+.mega_menu_template a.o-link-arrow {
+  font-weight: normal;
+  max-width: max-content;
+  padding: 0;
+}
+
+.mega_menu_template a:hover.o-link-arrow {
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.mega_menu_template p {
+  font-weight: normal;
+  color: #0a0a0a;
+}
+
+@media (min-width: 1600px) {
+  .mega_menu_template {
+    padding: 0.875rem 0 0 3.75rem;
+  }
+}

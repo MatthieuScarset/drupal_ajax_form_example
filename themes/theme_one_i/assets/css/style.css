@@ -391,6 +391,7 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
   border-top: #fff;
   max-height: 27rem;
   overflow: hidden;
+  right: 0;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu li {
   margin-bottom: 1rem;
@@ -449,11 +450,12 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
   margin-left: 8rem;
   padding: 0;
 }
+.main_nav.navbar .mega-menu-desktop .item_mega_menu .item_megamenu_list {
+  padding-left: 1.875rem;
+}
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .title_megamenu {
-  margin-top: 30px;
-  letter-spacing: -0.07rem;
-  color: #555;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous_items {
   color: #000;
@@ -462,6 +464,18 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous_items:hover {
   color: #ff7900;
   font-weight: bold;
+}
+@media (min-width: 1600px) {
+  .main_nav.navbar .mega-menu-desktop .item_mega_menu {
+    max-width: 1560px;
+    margin: -5px auto 0;
+  }
+  .main_nav.navbar .mega-menu-desktop .item_mega_menu .mega-menu-container {
+    padding: 0 15px;
+  }
+  .main_nav.navbar .mega-menu-desktop .item_mega_menu .item_megamenu_list {
+    padding-left: 5.625rem;
+  }
 }
 
 @media (min-width: 980px) {
