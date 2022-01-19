@@ -161,7 +161,7 @@ function oab_marketo_preprocess_node(&$variables) {
 
       if (null !== ($media = Media::load($node->field_file->target_id))) {
         if (null !== ($file = File::load($media->field_file->target_id))) {
-          $variables['document_file_absolute_url'] = $file->url('canonical', ['absolute' => true]);
+          $variables['document_file_absolute_url'] = $file->createFileUrl();
         }
       }
 
@@ -184,7 +184,7 @@ function oab_marketo_preprocess_node(&$variables) {
         'formName' => $mkto_config->get('marketo.document.mkto_form_name'),
         'useAltares' => false,
         'mktoPdfName' => $node->label(),
-        'mktoPdfLink' => isset($file) ? $file->url('canonical', ['absolute' => true]) : null,
+        'mktoPdfLink' => isset($file) ? $file->createFileUrl() : null,
         'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
         'mktoPdfRubrique' => _oab_get_labels_from_term($node->get('field_subhome')),
         'mktoPdftype' => _oab_get_labels_from_term($node->get('field_document_type')),

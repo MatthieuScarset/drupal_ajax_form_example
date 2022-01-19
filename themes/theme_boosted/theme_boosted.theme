@@ -702,7 +702,7 @@ function theme_boosted_preprocess_file_link(&$variables){
   $variables['attributes'] = new Attribute($variables['attributes']);
   $variables['attributes']->addClass($classes);
 
-  $variables['link'] = \Drupal::l($link_text, Url::fromUri($url, $options));
+  $variables['link'] = Link::fromTextAndUrl($link_text, Url::fromUri($url, $options));
 }
 
 function theme_boosted_preprocess_page_title(&$variables) {
