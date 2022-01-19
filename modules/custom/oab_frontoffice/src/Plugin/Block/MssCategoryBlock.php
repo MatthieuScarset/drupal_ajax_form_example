@@ -2,9 +2,14 @@
 
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
+use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 /**
@@ -12,12 +17,39 @@ use Drupal\node\Entity\Node;
  * @author LRJV7114
  * @Block(
  *   id = "msscategories_block",
- *   admin_label = @Translation("Categories"),
+ *   admin_label = @Translation("MSS Categories"),
  *   category = @Translation("Blocks"),
+ *   context_definitions = {
+ *     "node" = @ContextDefinition(
+ *       "entity:node",
+ *       label = @Translation("Current Node")
+ *     )
+ *   }
  * )
  *
  */
-class MssCategoryBlock extends BlockBase {
+class MssCategoryBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  private $entityTypeManager;
+
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition,
+                              EntityTypeManagerInterface $entityTypeManager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity_type.manager')
+    );
+  }
 
   public function build() {
 
@@ -25,29 +57,24 @@ class MssCategoryBlock extends BlockBase {
     $contents_url = array();
     $block = array();
 
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'category_mss']);
+    /** @var Term[] $terms */
+    $terms = $this->entityTypeManager
+      ->getStorage('taxonomy_term')
+      ->loadByProperties(['vid' => 'category_mss']);
 
 
     foreach ($terms as $term) {
-      $contents[] = $term->name->value;
-      $contents_url[$term->name->value] = $term->field_category_mss_url->value;
+      $contents[] = $term->label();
+      $contents_url[$term->label()] = $term->field_category_mss_url->value;
     }
 
-    $node = \Drupal::routeMatch()->getParameter('node');
-    $nid = $node->nid->value;
+    $node = $this->getContextValue('node');
 
-    $nodes = Node::load($nid);
-
-    if ($nodes->hasField('field_categories')) {
-      $categories_id = $nodes->get('field_categories');
-
-      $categories = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($categories_id->target_id);
-
-      $categories_name = $categories->name->value;
-
-      $block ['variable_categories'] = $categories_name;
-
-
+    if ($node instanceof Node && $node->hasField('field_categories')) {
+      $category = Term::load($node->field_categories->target_id ?? 0);
+      if ($category) {
+        $block['variable_categories'] = $category->label();
+      }
     }
 
     $block['#markup'] = $contents;
@@ -59,6 +86,5 @@ class MssCategoryBlock extends BlockBase {
   public function getCacheContexts() {
     return Cache::mergeContexts(parent::getCacheContexts(), ['url.path']);
   }
-
 
 }
