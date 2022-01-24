@@ -61,13 +61,17 @@
         "drupal/workbench": "^1.3",
         "drupal/workbench_access": "1.0-beta4",
         "drupal/workbench_moderation": "^1.6",
-        "drupal/xmlsitemap": "^1.0"
+        "drupal/xmlsitemap": "^1.0",
+        "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
         "drupal/console": "~1.0",
         "drupal/devel": "^4.1",
         "drupal/devel_php": "^1.3",
         "drush/drush": "^10.3"
+    },
+    "autoload": {
+        "files": ["load.environment.php"]
     },
     "conflict": {
         "drupal/drupal": "*"

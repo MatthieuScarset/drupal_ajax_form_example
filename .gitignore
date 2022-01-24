@@ -24,6 +24,9 @@
 /update.php
 /web.config
 
+.env
+/mysql
+
 # Ignore IDE conf
 /.idea
 
