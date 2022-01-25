@@ -45,14 +45,17 @@ We call a macro which calls itself to render the full tree.
       {% endif %}
 
       {% if item.below %}
-        {% if item.content.field_template['#items'].value == 0  %}
+        {% if item.content.field_style_template['#items'].value == 'product' %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
-            {{ menus.mega_menu_items(item.title, item.below) }}
+            {{ menus.product_template_mega_menu_items(item.title, item.below) }}
           </ul>
-
+        {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
+          <ul class="container-fluid dropdown-menu megamenu row" role="menu">
+            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below) }}
+          </ul>
         {% else %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
-            {{ menus.new_template_mega_menu_items(item.title, item.below) }}
+            {{ menus.mega_menu_items(item.content, item.below) }}
           </ul>
         {% endif %}
       {% endif %}
@@ -62,12 +65,17 @@ We call a macro which calls itself to render the full tree.
   {% endmacro %}
 
 
-  {% macro mega_menu_items(title, items) %}
-    <div id="items_megamenu" class="row">
-      <span class="hidden-sm hidden-xs hidden-md title_megamenu">{{ title }}</span>
+  {% macro mega_menu_items(content, items) %}
+    <div id="items_megamenu" class="container">
+      <div class="col-xs-12 item_soft_col">
+        <div class="row mega_menu_soft_header">
+          <h4 class="col-xs-3">{{ content.field_subtitle }}</h4>
+          <a class="col-xs-offset-6 col-xs-3 o-link-arrow mega_menu_global_link" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+        </div>
+      </div>
       {% for item in items %}
         {% set link_target = item.url.options.target ? '_blank' : '_self' %}
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="col-xs-12 col-lg-4 item_soft_col">
           <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.type_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
           {% if item.below %}
             <ul class="sous-items">
@@ -83,46 +91,81 @@ We call a macro which calls itself to render the full tree.
     </div>
   {% endmacro %}
 
-  {% macro new_template_mega_menu_items(title, items) %}
-    <div class="container">
-      <div class="items_prod_serv col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <ul class="nav nav-pills nav-stacked" role="tablist">
-          {% for item in items %}
-            <li role="presentation">
-              <a class="items" href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}"
-                 aria-controls="item-{{ loop.index }}"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})"
-                 role="tab">{{ item.title }} </a>
-            </li>
-          {% endfor %}
-        </ul>
+  {% macro wysiwyg_template_mega_menu_items(content, items) %}
+  <div class="container items_wysiwyg_container">
+    <div class="row">
+      {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
+      <div class="col-xs-4 items_prod_serv">
+        <div>
+          {{ content.field_highlight }}
+        </div>
       </div>
-      <div class="tab-content sous_items_prod_serv col-xs-9 col-sm-9 col-md-9 col-lg-9">
-        {% for item in items %}
-          {% if item.below %}
-            <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}" role="tabpanel">
-              <div class="row">
-                <div class="en_ce_moment col-xs-6 col-sm-6 col-md-6 col-lg-6">At the moment</div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-                  <a href="{{ item.url }}"
-                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all products','track_type_evt':'clic'});">See all products
-                    <span class="all_product_glyphicon glyphicon glyphicon-menu-right"></span>
-                  </a>
-                </div>
-              </div>
-              <div class="row">
-                {% for sous_item in item.below %}
-                  <div class="sous-items col-sm-6 col-md-6 col-lg-6">
-                    <a href="{{ sous_item.url }}"
-                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
-                      <p class="teaser">{{ sous_item.entity.field_teaser.value }}</p>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
+      <div class="col-xs-8 items_list_wysiwyg_container">
+        {% else %}
+        <div class="col-xs-12 items_list_wysiwyg_container">
           {% endif %}
-        {% endfor %}
+          {% for item in items %}
+            {% set link_target = item.url.options.target ? '_blank' : '_self' %}
+            <div class="col-xs-6">
+              <h4 class="title_megamenu"> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.type_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</h4>
+              {% if item.below %}
+                <ul class="sous-items">
+                  {% for sous_item in item.below %}
+                    <li>
+                      {{ link(sous_item.title, hub_getHubSubhomeUrl(sous_item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  {% endmacro %}
+    {% endmacro %}
+
+    {% macro product_template_mega_menu_items(title, items) %}
+      <div class="container items_prod_container">
+        <div class="row">
+          <div class="items_prod_serv col-xs-4">
+            <ul class="nav nav-pills nav-stacked" role="tablist">
+              {% for item in items %}
+                <li role="presentation">
+                  <a class="items" href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}"
+                     aria-controls="item-{{ loop.index }}"
+                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})"
+                     role="tab">{{ item.title }} </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-content sous_items_prod_serv col-xs-8">
+            {% for item in items %}
+              {% if item.below %}
+                <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}" role="tabpanel">
+                  <div class="row">
+                    <div class="en_ce_moment col-xs-6">En ce moment</div>
+                    <div class="col-xs-6 text-right">
+                      <a href="{{ item.url }}"
+                         onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'Voir tous les produits','track_type_evt':'clic'});">Voir tous les produits
+                        <span class="all_product_glyphicon glyphicon glyphicon-menu-right"></span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    {% for sous_item in item.below %}
+                      <div class="sous-items col-xs-6">
+                        <a href="{{ sous_item.url }}"
+                           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
+                          <p class="teaser">{{ sous_item.entity.field_teaser.value }}</p>
+                        </a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endmacro %}

@@ -468,7 +468,7 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
 @media (min-width: 1600px) {
   .main_nav.navbar .mega-menu-desktop .item_mega_menu {
     max-width: 1560px;
-    margin: -5px auto 0;
+    margin: -6px auto 0;
   }
   .main_nav.navbar .mega-menu-desktop .item_mega_menu .mega-menu-container {
     padding: 0 15px;

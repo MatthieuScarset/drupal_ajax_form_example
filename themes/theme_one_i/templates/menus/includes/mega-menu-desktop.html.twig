@@ -67,9 +67,9 @@ We call a macro which calls itself to render the full tree.
 
 {% macro mega_menu_items(content, items) %}
   <div class="container-fluid site-width mega-menu-container">
-    <div class="row justify-content-between pb-1 pr-1 mt-2">
+    <div class="row justify-content-between pb-1 pr-2 mt-2">
       <span class="col-3 text-dark title_megamenu">{{ content.field_subtitle }}</span>
-      <a class="col-auto o-link-arrow mr-1 pt-0" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+      <a class="col-auto o-link-arrow mr-xxl-4 pt-0" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
     </div>
     <div class="row mb-2">
       {% for item in items %}
