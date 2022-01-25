@@ -9,13 +9,15 @@ services:
     mailhog:
       image: mailhog/mailhog:latest
       ports:
-        - "8025:8025"
+        - "${MAILHOG_PORT:-8025}:8025"
+      networks:
+        - mailhog
 
     mariadb:
       image: mariadb:10.3
       container_name: $CONTAINER_MARIADB
       volumes:
-        - ./config/data/db_dumps:/tmp/db_dumps
+        - ${DB_DUMPS_DIR:-./data/db_dumps}:/tmp/db_dumps
         - ${MYSQL_DIR:-/var/lib/mysql}:/var/lib/mysql
       environment:
         MYSQL_ROOT_PASSWORD: $MARIADB_ROOT_PWD
@@ -49,7 +51,6 @@ services:
         - php-fpm
       volumes:
         - .:/application
-        - ./config/logs:/tmp/logs
       ports:
         - "${APP_PORT:-8000}:80"
       networks:
