@@ -51,7 +51,6 @@ global-styling:
     - core/jquery.ui
     - core/jquery.ui.effects.slide
     - core/drupal
-    - js/orange_socialbar_settings.js
     - oab_icomoon/icomoon
 
 socialbar:
