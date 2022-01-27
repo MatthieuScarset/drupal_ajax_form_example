@@ -37,11 +37,11 @@ We call a macro which calls itself to render the full tree.
         <li class="nav-item nav_item_dropdown dropdown">
           <a class="nav-link collapsed" href="#mega-level-{{ loop.index }}-collapse"
              data-toggle="collapse" role="menu"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }}</a></li>
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">{{ item.title }}</a></li>
       {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{{ item.url }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }}</a></li>
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">{{ item.title }}</a></li>
       {% endif %}
 
       {% if item.below %}
@@ -70,11 +70,11 @@ We call a macro which calls itself to render the full tree.
       {% for item in items %}
         <div class="col-4">
           <a class="mb-1 nav-link sous_items" href="{{ item.url }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }}</a>
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ item.title }}')">{{ item.title }}</a>
           {% if item.below %}
             {% for sous_item in item.below %}
               <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'})">{{ sous_item.title }}</a>
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
             {% endfor %}
           {% endif %}
         </div>
@@ -92,7 +92,7 @@ We call a macro which calls itself to render the full tree.
             <li role="presentation">
               <a class="item nav-link" href="{{ item.url }}" data-target="#item-{{ loop.index }}"
                  aria-controls="item-{{ loop.index }}" role="tab"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ item.title }}')">{{ item.title }} </a>
             </li>
           {% endfor %}
         </ul>
@@ -107,7 +107,7 @@ We call a macro which calls itself to render the full tree.
                   <div class="col-6 en_ce_moment">{{ "At the moment"|t }}</div>
                   <div class="col-6">
                     <a class="o-link-arrow all_product_link" href="{{ item.url }}"
-                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all products','track_type_evt':'clic'});">
+                       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}_{{ item.title }}',{{ "See all products"|t }});">
                       {{ "See all products"|t }}
                     </a>
                   </div>
@@ -116,7 +116,7 @@ We call a macro which calls itself to render the full tree.
                   {% for sous_item in item.below %}
                     <div class="col-6 py-1">
                       <a class="nav-link" href="{{ sous_item.url }}"
-                         onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
+                         onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}_{{ item.title }}',{{ sous_item.title }});">{{ sous_item.title }}
                         <span class="nav-link">{{ sous_item.entity.field_teaser.value }}</span></a>
                     </div>
                   {% endfor %}

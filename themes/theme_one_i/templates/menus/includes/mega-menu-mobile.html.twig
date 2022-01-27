@@ -27,19 +27,19 @@ We call a macro which calls itself to render the full tree.
 {% endmacro %}
 
 
-{% macro menu_row(items, menu_level, item_parent = null) %}
+{% macro menu_row(items, menu_level, item_parent = null, item_initial = null) %}
   {% for item in items %}
     <li class="nav-item chevron-black" data-menu-level="{{ menu_level }}">
       {% if item.below %}
         {% if menu_level == 0 %}
           <a class="nav-link text-dark"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">
             {{ item.title }}
           </a>
 
         {% else %}
           <a class="nav-link text-dark"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">
             {{ item.title }}
           </a>
 
@@ -58,7 +58,7 @@ We call a macro which calls itself to render the full tree.
           {% if menu_level == 1 %}
             <li class="nav-item">
               <a class="o-link-arrow ob1-link-dark all-product-link-mobile" href="{{ item.url }}"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ "See all products" | t }}','track_type_evt':'clic'});">
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.parent }}_{{ item.title }}','{{ "See all products" | t }}');">
                 {{ "See all products" | t }}
               </a>
 
@@ -68,13 +68,14 @@ We call a macro which calls itself to render the full tree.
           {% endif %}
 
           {% if menu_level == 0 %}
+            {% set item_initial = item.title %}
             {% if (item.content.field_template['#items'].value == 0) %}
               {{ _self.old_template(item.below, item.title) }}
             {% else %}
-              {{ _self.menu_row(item.below, menu_level + 1, item.title) }}
+              {{ _self.menu_row(item.below, menu_level + 1, item.title, item_initial) }}
             {% endif %}
           {% else %}
-            {{ _self.menu_row(item.below, menu_level + 1, item.title) }}
+            {{ _self.menu_row(item.below, menu_level + 1, item.title, item_initial) }}
           {% endif %}
 
         </ul>
@@ -82,10 +83,10 @@ We call a macro which calls itself to render the full tree.
       {% else %}
         {% if item.entity.field_teaser.value is empty %}
           <a href="{{ item.url }}" class="nav-link text-dark" role="menuitem"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">{{ item.title }} </a>
         {% else %}
           <a href="{{ item.url }}" class="nav-link items-level-3 text-dark font-weight-bold"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'});">{{ item.title }}
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_initial }}_{{ item_parent }}','{{ item.title }}');">{{ item.title }}
             <p class="field-teaser-mobile font-weight-normal mr-1"> {{ item.entity.field_teaser.value }} </p>
           </a>
           <hr class="separator separator--gray4 mr-1">
@@ -101,11 +102,11 @@ We call a macro which calls itself to render the full tree.
 {% macro old_template(items, item_parent) %}
   {% for item in items %}
     <a href="{{ item.url }}" class="nav-link text-dark" role="menuitem"
-       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
     {% if item.below %}
       {% for item in item.below %}
         <a href="{{ item.url }}" class="nav-link text-dark" role="menuitem"
-           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
       {% endfor %}
     {% endif %}
   {% endfor %}
