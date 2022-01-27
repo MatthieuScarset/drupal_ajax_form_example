@@ -29,13 +29,14 @@
   {% endif %}
 
   {% block input %}
-    <button id="search-icon-btn" type="button" class="btn btn-default search-icon-btn" data-click-on="#bvpn-list-input-search-btn">
-      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+    <button id="validate-search-map-btn" type="button" class="btn btn-info btn_validate_search_map button js-form-submit form-submit" >
+      {% trans %}Filter{% endtrans %}
     </button>
-    <input{{ attributes.setAttribute('id', 'bvpn-list-input-search-btn').addClass(["btn-ajax-hidden","btn","btn-default"]) }} />
-    <button id="remove-icon-btn" type="button" class="btn btn-default remove-icon-btn hidden">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    <button id="clear-search-map-btn" type="button" class="btn btn-info btn_clear_search_map button js-form-submit form-submit" disabled="disabled">
+      {% trans %}Clear{% endtrans %}
     </button>
+
   {% endblock %}
 
   {% if suffix %}
