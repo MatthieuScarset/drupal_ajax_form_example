@@ -5,7 +5,7 @@ dependencies: {  }
 id: prp
 label: PRP
 description: ''
-folder: config_split/prp
+folder: config/config_split/prp
 module: {  }
 theme: {  }
 blacklist: {  }
