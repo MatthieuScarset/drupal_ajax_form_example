@@ -1,0 +1,339 @@
+uuid: 66c162f2-776b-4234-ae66-59c10e7c2182
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.press_release
+  module:
+    - jsonapi_defaults
+third_party_settings:
+  jsonapi_defaults:
+    page_limit: 50
+    default_sorting:
+      'sort:titleSort#path': created
+      'sort:titleSort#direction': DESC
+    default_include:
+      - field_file
+id: node--press_release
+disabled: false
+path: node/press_release
+resourceType: node--press_release
+resourceFields:
+  nid:
+    fieldName: nid
+    publicName: nid
+    enhancer:
+      id: ''
+    disabled: false
+  uuid:
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+    disabled: false
+  vid:
+    fieldName: vid
+    publicName: vid
+    enhancer:
+      id: ''
+    disabled: false
+  langcode:
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+    disabled: false
+  type:
+    fieldName: type
+    publicName: type
+    enhancer:
+      id: ''
+    disabled: false
+  revision_timestamp:
+    disabled: true
+    fieldName: revision_timestamp
+    publicName: revision_timestamp
+    enhancer:
+      id: ''
+  revision_uid:
+    disabled: true
+    fieldName: revision_uid
+    publicName: revision_uid
+    enhancer:
+      id: ''
+  revision_log:
+    disabled: true
+    fieldName: revision_log
+    publicName: revision_log
+    enhancer:
+      id: ''
+  status:
+    fieldName: status
+    publicName: status
+    enhancer:
+      id: ''
+    disabled: false
+  uid:
+    fieldName: uid
+    publicName: uid
+    enhancer:
+      id: ''
+    disabled: false
+  title:
+    fieldName: title
+    publicName: title
+    enhancer:
+      id: ''
+    disabled: false
+  created:
+    fieldName: created
+    publicName: created
+    enhancer:
+      id: ''
+    disabled: false
+  changed:
+    fieldName: changed
+    publicName: changed
+    enhancer:
+      id: ''
+    disabled: false
+  promote:
+    disabled: true
+    fieldName: promote
+    publicName: promote
+    enhancer:
+      id: ''
+  sticky:
+    disabled: true
+    fieldName: sticky
+    publicName: sticky
+    enhancer:
+      id: ''
+  default_langcode:
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+    disabled: false
+  revision_default:
+    disabled: true
+    fieldName: revision_default
+    publicName: revision_default
+    enhancer:
+      id: ''
+  revision_translation_affected:
+    disabled: true
+    fieldName: revision_translation_affected
+    publicName: revision_translation_affected
+    enhancer:
+      id: ''
+  metatag:
+    disabled: true
+    fieldName: metatag
+    publicName: metatag
+    enhancer:
+      id: ''
+  path:
+    fieldName: path
+    publicName: path
+    enhancer:
+      id: ''
+    disabled: false
+  menu_link:
+    disabled: true
+    fieldName: menu_link
+    publicName: menu_link
+    enhancer:
+      id: ''
+  moderation_state:
+    disabled: true
+    fieldName: moderation_state
+    publicName: moderation_state
+    enhancer:
+      id: ''
+  content_translation_source:
+    disabled: true
+    fieldName: content_translation_source
+    publicName: content_translation_source
+    enhancer:
+      id: ''
+  content_translation_outdated:
+    disabled: true
+    fieldName: content_translation_outdated
+    publicName: content_translation_outdated
+    enhancer:
+      id: ''
+  field_city:
+    disabled: true
+    fieldName: field_city
+    publicName: field_city
+    enhancer:
+      id: ''
+  field_content:
+    fieldName: field_content
+    publicName: field_content
+    enhancer:
+      id: ''
+    disabled: false
+  field_content_owner:
+    fieldName: field_content_owner
+    publicName: field_content_owner
+    enhancer:
+      id: ''
+    disabled: false
+  field_country:
+    disabled: true
+    fieldName: field_country
+    publicName: field_country
+    enhancer:
+      id: ''
+  field_display_title:
+    disabled: true
+    fieldName: field_display_title
+    publicName: field_display_title
+    enhancer:
+      id: ''
+  field_email_owner:
+    disabled: true
+    fieldName: field_email_owner
+    publicName: field_email_owner
+    enhancer:
+      id: ''
+  field_end_date:
+    disabled: true
+    fieldName: field_end_date
+    publicName: field_end_date
+    enhancer:
+      id: ''
+  field_file:
+    fieldName: field_file
+    publicName: field_file
+    enhancer:
+      id: uuid_link
+    disabled: false
+  field_highlight:
+    fieldName: field_highlight
+    publicName: field_highlight
+    enhancer:
+      id: ''
+    disabled: false
+  field_industry:
+    disabled: true
+    fieldName: field_industry
+    publicName: field_industry
+    enhancer:
+      id: ''
+  field_insight:
+    disabled: true
+    fieldName: field_insight
+    publicName: field_insight
+    enhancer:
+      id: ''
+  field_insight_type:
+    disabled: true
+    fieldName: field_insight_type
+    publicName: field_insight_type
+    enhancer:
+      id: ''
+  field_job_profile:
+    disabled: true
+    fieldName: field_job_profile
+    publicName: field_job_profile
+    enhancer:
+      id: ''
+  field_market_segment:
+    disabled: true
+    fieldName: field_market_segment
+    publicName: field_market_segment
+    enhancer:
+      id: ''
+  field_metatags:
+    disabled: true
+    fieldName: field_metatags
+    publicName: field_metatags
+    enhancer:
+      id: ''
+  field_meta_description:
+    disabled: true
+    fieldName: field_meta_description
+    publicName: field_meta_description
+    enhancer:
+      id: ''
+  field_meta_title:
+    disabled: true
+    fieldName: field_meta_title
+    publicName: field_meta_title
+    enhancer:
+      id: ''
+  field_page_du_site_1:
+    disabled: true
+    fieldName: field_page_du_site_1
+    publicName: field_page_du_site_1
+    enhancer:
+      id: ''
+  field_page_du_site_2:
+    disabled: true
+    fieldName: field_page_du_site_2
+    publicName: field_page_du_site_2
+    enhancer:
+      id: ''
+  field_press_type:
+    fieldName: field_press_type
+    publicName: field_press_type
+    enhancer:
+      id: ''
+    disabled: false
+  field_p_wysiwyg_rebond:
+    disabled: true
+    fieldName: field_p_wysiwyg_rebond
+    publicName: field_p_wysiwyg_rebond
+    enhancer:
+      id: ''
+  field_rebond_document:
+    disabled: true
+    fieldName: field_rebond_document
+    publicName: field_rebond_document
+    enhancer:
+      id: ''
+  field_region:
+    disabled: true
+    fieldName: field_region
+    publicName: field_region
+    enhancer:
+      id: ''
+  field_solution:
+    disabled: true
+    fieldName: field_solution
+    publicName: field_solution
+    enhancer:
+      id: ''
+  field_start_date:
+    disabled: true
+    fieldName: field_start_date
+    publicName: field_start_date
+    enhancer:
+      id: ''
+  field_subhome:
+    disabled: true
+    fieldName: field_subhome
+    publicName: field_subhome
+    enhancer:
+      id: ''
+  field_visual:
+    fieldName: field_visual
+    publicName: field_visual
+    enhancer:
+      id: ''
+    disabled: false
+  field_visual_tile:
+    fieldName: field_visual_tile
+    publicName: field_visual_tile
+    enhancer:
+      id: ''
+    disabled: false
+  moderation_state_update:
+    disabled: true
+    fieldName: moderation_state_update
+    publicName: moderation_state_update
+    enhancer:
+      id: ''
