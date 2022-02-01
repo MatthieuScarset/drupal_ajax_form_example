@@ -575,6 +575,31 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
     cursor: pointer;
     font-size: 0.9rem;
   }
+  #megamenu_mobile li .global-link-mobile:after {
+    margin-top: -0.0625rem;
+  }
+  #megamenu_mobile li .items_list_link .items_list_link_container {
+    padding: 0 15px;
+    margin-bottom: 15px;
+  }
+  #megamenu_mobile li .items_list_link .items_list_link_container .items_list_link_title {
+    margin: 0;
+    padding: 0;
+  }
+  #megamenu_mobile li .items_list_link .items_list_link_container .items_list_link_title a {
+    border-top: 1px solid #ccc;
+    padding: 1.875rem 0 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  #megamenu_mobile li .items_list_link a {
+    color: #000;
+    font-weight: normal;
+    padding-left: 0;
+  }
+  #megamenu_mobile li .items_list_link a:hover, #megamenu_mobile li .items_list_link a:active {
+    color: #f16e00;
+  }
   #megamenu_mobile .chevron-black .nav-link[role=menuitem]::before {
     color: black;
   }
