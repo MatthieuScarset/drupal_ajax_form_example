@@ -193,6 +193,11 @@
   padding-bottom: 11px;
 }
 
+.mega-menu.navbar .nav > li[role="presentation"] > a:hover {
+  color: #f16e00;
+  border: none;
+}
+
 .mega-menu.navbar.navbar-fixed .nav > li > a:hover {
   color: #f16e00;
   border-bottom: 5px solid #f16e00;
@@ -1006,7 +1011,7 @@
     margin-left: -15px;
     padding-right: 15px;
   }
-  
+
   .mega-menu .nav-link {
     margin-top: 10px;
   }

@@ -419,6 +419,9 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   padding-bottom: 0.625rem;
   border-bottom: 5px solid #ff7900;
 }
+.main_nav.navbar .mega-menu-desktop .nav-link.sous_items {
+  padding-bottom: 0;
+}
 .main_nav.navbar .mega-menu-desktop .item_mega_menu {
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
@@ -459,17 +462,20 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   border-color: transparent;
   padding-left: 59px;
   padding-top: 0;
+  padding-bottom: 0;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous-items span {
   font-weight: normal;
   color: #000;
   padding-top: 0.5rem;
+  padding-bottom: 0;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous-items span:hover {
   color: #ff7900;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous-items a {
   color: #000;
+  padding-bottom: 0;
 }
 .main_nav.navbar .mega-menu-desktop .item_mega_menu .sous-items a:hover {
   color: #ff7900;

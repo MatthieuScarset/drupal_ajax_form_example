@@ -139,7 +139,7 @@ We call a macro which calls itself to render the full tree.
             {% if item.below %}
               <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}"
                    role="tabpanel">
-                <div class="row mb-2">
+                <div class="row mb-1">
                   <div class="col-6 en_ce_moment">{{ "At the moment"|t }}</div>
                   <div class="col-6">
                     <a class="o-link-arrow all_product_link" href="{{ item.url }}"

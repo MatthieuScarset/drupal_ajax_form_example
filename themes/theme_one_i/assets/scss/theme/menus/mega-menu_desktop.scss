@@ -81,6 +81,10 @@ header#navbar.sticky-top.is-sticky {
         padding-bottom: 0.625rem;
         border-bottom: 5px solid $orange1;
       }
+
+      &.sous_items {
+        padding-bottom: 0;
+      }
     }
 
     .item_mega_menu {
@@ -134,11 +138,13 @@ header#navbar.sticky-top.is-sticky {
         border-color: transparent;
         padding-left: 59px;
         padding-top: 0;
+        padding-bottom: 0;
 
         span {
           font-weight: normal;
           color: $black;
           padding-top: 0.5rem;
+          padding-bottom: 0;
 
           &:hover {
             color: $orange1;
@@ -147,6 +153,7 @@ header#navbar.sticky-top.is-sticky {
 
         a {
           color: $black;
+          padding-bottom: 0;
 
           &:hover {
             color: $orange1;
