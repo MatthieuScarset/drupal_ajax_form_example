@@ -353,15 +353,38 @@ section.block.contact-button-block .dropdown-menu .contact-item-descr:hover, sec
   }
 }
 
+header#navbar.sticky-top.is-sticky .main_nav.navbar {
+  padding-bottom: 0;
+}
 header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
   width: 112px;
   height: auto;
+  padding-bottom: 0.9375rem;
+}
+header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-right {
+  padding-bottom: 0.9375rem;
+}
+header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_mega_menu {
+  margin: -12px auto 0;
+}
+@media (min-width: 1600px) {
+  header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_mega_menu {
+    max-width: 1560px;
+    margin: -12px auto 0;
+  }
 }
 
+.main_nav.navbar {
+  padding-bottom: 0;
+}
 .main_nav.navbar .navbar-brand img {
   width: 140px;
-  height: 3.125rem;
+  height: auto;
   transition: width 0.2s ease-in-out;
+  padding-bottom: 0.9375rem;
+}
+.main_nav.navbar .navbar-right {
+  padding-bottom: 0.9375rem;
 }
 .main_nav.navbar .nav_item_dropdown {
   border-top: none;
@@ -375,6 +398,9 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
 .main_nav.navbar .mega-menu-desktop > nav, .main_nav.navbar .mega-menu-desktop > nav > ul.navbar-nav > li.nav-item {
   position: initial;
 }
+.main_nav.navbar .mega-menu-desktop .nav-link {
+  padding-bottom: 0.9375rem;
+}
 .main_nav.navbar .mega-menu-desktop .nav-link[role=menuitem]::before {
   color: #ff7900;
 }
@@ -383,11 +409,21 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
     display: none;
   }
 }
+.main_nav.navbar .mega-menu-desktop .nav-link[role=menuitem]:hover {
+  color: #ff7900;
+  padding-bottom: 0.625rem;
+  border-bottom: 5px solid #ff7900;
+}
+.main_nav.navbar .mega-menu-desktop .nav-link[aria-expanded=true] {
+  color: #fff;
+  padding-bottom: 0.625rem;
+  border-bottom: 5px solid #ff7900;
+}
 .main_nav.navbar .mega-menu-desktop .item_mega_menu {
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   padding: 0;
-  margin-top: -5px;
+  margin-top: -2px;
   border-top: #fff;
   max-height: 27rem;
   overflow: hidden;
@@ -468,7 +504,7 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .navbar-brand img {
 @media (min-width: 1600px) {
   .main_nav.navbar .mega-menu-desktop .item_mega_menu {
     max-width: 1560px;
-    margin: -6px auto 0;
+    margin: -2px auto 0;
   }
   .main_nav.navbar .mega-menu-desktop .item_mega_menu .mega-menu-container {
     padding: 0 15px;
