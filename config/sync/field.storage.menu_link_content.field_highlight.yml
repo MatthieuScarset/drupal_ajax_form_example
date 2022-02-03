@@ -1,15 +1,16 @@
-uuid: 4e856e7c-d4a2-48da-aa02-3c069871f330
+uuid: 60e850c7-d4ae-4ba9-8699-f42d50e9ddad
 langcode: fr
 status: true
 dependencies:
   module:
     - menu_link_content
-id: menu_link_content.field_template
-field_name: field_template
+    - text
+id: menu_link_content.field_highlight
+field_name: field_highlight
 entity_type: menu_link_content
-type: boolean
+type: text_long
 settings: {  }
-module: core
+module: text
 locked: false
 cardinality: 1
 translatable: true
