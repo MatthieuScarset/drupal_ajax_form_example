@@ -195,7 +195,7 @@
 
 .mega-menu.navbar .nav > li[role="presentation"] > a:hover {
   color: #f16e00;
-  border: none;
+  border: none !important;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li > a:hover {
@@ -222,13 +222,13 @@
 
 .mega-menu.navbar .nav > li.open > a {
   color: white;
-  border-bottom: 5px solid #f16e00;
+  border-bottom: 5px solid #f16e00 !important;
   padding-bottom: 11px;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
   color: white;
-  border-bottom: 5px solid #f16e00;
+  border-bottom: 5px solid #f16e00 !important;
   padding-bottom: 14px;
 }
 
@@ -360,8 +360,9 @@
 }
 
 .mega-menu .nav-item.dropdown .dropdown-menu {
-
   background-color: white;
+  max-height: 432px;
+  overflow: hidden;
 }
 
 #main_nav .container,
@@ -1092,6 +1093,7 @@ nav .menu.navbar-nav a:focus {
   border-right: #ccc;
   border-right-style: solid;
   border-right-width: 1px;
+  min-height: 210px;
 }
 
 .mega-menu.navbar .items_prod_serv > ul > li {
@@ -1163,7 +1165,7 @@ nav .menu.navbar-nav a:focus {
 }
 
 .mega-menu .items_list_wysiwyg_container {
-  padding: 36px 15px 0 60px;
+  padding: 36px 15px 30px 60px;
 }
 
 .mega-menu .items_list_wysiwyg_container .title_megamenu {
