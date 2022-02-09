@@ -104,7 +104,7 @@ We call a macro which calls itself to render the full tree.
         <div class="row">
           {% for item in items %}
             <div class="col-6">
-              <h4 class="mb-2 p-0 title_megamenu" onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }}</h4>
+              <h4 class="mb-2 p-0 title_megamenu">{{ item.title }}</h4>
               {% if item.below %}
                 {% for sous_item in item.below %}
                   <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"

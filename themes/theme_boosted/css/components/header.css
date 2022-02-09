@@ -200,6 +200,7 @@
 
 .mega-menu.navbar.navbar-fixed .nav > li > a:hover {
   color: #f16e00;
+  border: none;
   border-bottom: 5px solid #f16e00;
   padding-bottom: 14px;
 }
@@ -222,12 +223,14 @@
 
 .mega-menu.navbar .nav > li.open > a {
   color: white;
+  border: none;
   border-bottom: 5px solid #f16e00 !important;
   padding-bottom: 11px;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
   color: white;
+  border: none;
   border-bottom: 5px solid #f16e00 !important;
   padding-bottom: 14px;
 }

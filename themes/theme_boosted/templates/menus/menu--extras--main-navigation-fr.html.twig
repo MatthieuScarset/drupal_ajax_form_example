@@ -107,7 +107,7 @@ We call a macro which calls itself to render the full tree.
         {% for item in items %}
           {% set link_target = item.url.options.target ? '_blank' : '_self' %}
           <div class="col-xs-6">
-            <h4 class="title_megamenu"> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.type_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</h4>
+            <h4 class="title_megamenu"> {{item.title}}</h4>
             {% if item.below %}
               <ul class="sous-items">
                 {% for sous_item in item.below %}
