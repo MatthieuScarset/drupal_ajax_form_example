@@ -1,0 +1,19 @@
+uuid: 2e354e32-8568-4123-82b7-51699825c46a
+langcode: fr
+status: true
+dependencies:
+  module:
+    - link
+    - menu_link_content
+id: menu_link_content.field_global_link
+field_name: field_global_link
+entity_type: menu_link_content
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
