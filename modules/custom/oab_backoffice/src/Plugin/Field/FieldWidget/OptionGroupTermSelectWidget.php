@@ -86,18 +86,18 @@ class OptionGroupTermSelectWidget extends OptionsWidgetBase implements Container
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $filterLangcode = $this->getSetting('filterLangcode');
-    if($filterLangcode) {
-      $currentLangCode = null;
-      $currentNode = \Drupal::routeMatch()->getParameter('node');
-      if (isset($currentNode) && $currentNode instanceof \Drupal\node\NodeInterface) {
-        $currentLangCode = $currentNode->language()->getId();
+    $filter_langcode = $this->getSetting('filterLangcode');
+    if ($filter_langcode) {
+      $current_langcode = null;
+      $current_node = \Drupal::routeMatch()->getParameter('node');
+      if (isset($current_node) && $current_node instanceof \Drupal\node\NodeInterface) {
+        $current_langcode = $current_node->language()->getId();
       } else {
-        $filterLangcode = false;
+        $filter_langcode = false;
       }
     }
 
-    $displayLangCode = $this->getSetting('displayLangcode');
+    $display_langcode = $this->getSetting('displayLangcode');
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $field_definition = $items->getFieldDefinition();
     $target_bundle = $field_definition->getSettings();
@@ -108,9 +108,9 @@ class OptionGroupTermSelectWidget extends OptionsWidgetBase implements Container
       $data = $this->entityTypeManager->getStorage('taxonomy_term')->loadTree($key);
 
       foreach ($data as $item) {
-        if(!$filterLangcode || ($filterLangcode && $currentLangCode == $item->langcode)) {
+        if (!$filter_langcode || ($filter_langcode && $current_langcode == $item->langcode)) {
           $label = $item->name;
-          if ($displayLangCode) {
+          if ($display_langcode) {
             $label .= ' (' . strtoupper($item->langcode) . ')';
           }
           if ($item->depth == 0) {

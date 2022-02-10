@@ -8,8 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_data_import\Classes\ProductCategoriesDataImport;
 
 
-class OabSettingsProductCategoriesDataImportForm extends FormBase
-{
+class OabSettingsProductCategoriesDataImportForm extends FormBase {
 
     /**
      * Returns a unique string identifying the form.
@@ -92,7 +91,7 @@ class OabSettingsProductCategoriesDataImportForm extends FormBase
         if (!$file[0]) {
             $form_state->setErrorByName('file', t('No file was uploaded.'));
         }
-        else{
+        else {
           $filename = $file[0]->getFilename();
           $input["filename"] = $filename;
           $form_state->setUserInput($input);
