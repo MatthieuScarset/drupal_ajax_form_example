@@ -29,7 +29,11 @@ function oab_offices_map_theme() {
     return $theme;
 }
 
-
-function oab_offices_map_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-
+function oab_offices_map_theme_suggestions_form_element(array $variables) {
+  $suggestions = ['form_element__type__' . $variables['element']['#type']];
+  if (isset($variables['element']['#form_id'])) {
+    $suggestions[] = 'form_element__' . $variables['element']['#form_id'] . '__' . $variables['element']['#type'];
+  }
+  return $suggestions;
 }
+

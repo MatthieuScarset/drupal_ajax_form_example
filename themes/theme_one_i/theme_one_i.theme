@@ -133,6 +133,31 @@ function theme_one_i_theme_suggestions_form_alter(array &$suggestions, array $va
   $suggestions[] = 'form__' . $variables['element']['#form_id'];
   return $suggestions;
 }
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form element templates.
+ *
+ * @param array $suggestions
+ * @param array $variables
+ */
+function theme_one_i_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {/*
+  $formid = str_replace('-', '_', $variables['element']['#form_id']);
+  $suggestions[] = 'form_element' . '__' . $formid;
+  $suggestions[] = 'form_element' . '__' . $variables['element']['#type'] . '__' . $formid;
+  $suggestions[] = 'form_element' . '__' . $variables['element']['#name'] . '__' . $formid;
+  $suggestions[] = 'form_element' . '__' . $variables['element']['#name'] . '__' . $variables['element']['#type'] . '__' . $formid;*/
+  return $suggestions;
+}
+
+function theme_one_i_theme_suggestions_select_alter(&$suggestions, array $variables) {
+  if(isset($variables['element']['#form_id'])
+    && isset($variables['element']['#name'])
+      && isset($variables['element']['#type'])){
+    $suggestions[] = 'form_element__' . $variables['element']['#form_id'] . '__'.$variables['element']['#name']. '__' . $variables['element']['#type'];
+  }
+  $suggestions[] = 'form_element__' . $variables['element']['#name'] . '__' . $variables['element']['#type'];
+  return $suggestions;
+}
+
 
 
 /**

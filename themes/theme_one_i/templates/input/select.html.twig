@@ -16,7 +16,7 @@
       'form-control',
     ]
   %}
-  <select{{ attributes.addClass(classes) }}>
+  <select{{ attributes.addClass(classes) }} data-ob1-component="FormControlEmpty">
     {% for option in options %}
       {% if option.type == 'optgroup' %}
         <optgroup label="{{ option.label }}">
@@ -29,4 +29,5 @@
       {% endif %}
     {% endfor %}
   </select>
+  <label id="label-{{ element['#id'] }}" class="form-control-placeholder" for="{{ element['#id'] }}">{{ element['#label'] }}</label>
 {% endspaceless %}

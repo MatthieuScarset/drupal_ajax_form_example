@@ -45,6 +45,8 @@ class MapRegionsCountriesForm extends FormBase {
             '#options' => $regions,
             '#default_value' => $selected_region,
             '#attributes' => array('class' => array('select-regions')),
+            '#form_id' => $this->getFormId(),
+            '#label' => '',
         ];
         $form['country'] = [
             '#multiple_toggle' => '1',
@@ -52,12 +54,16 @@ class MapRegionsCountriesForm extends FormBase {
             '#options' => $countries,
             '#default_value' => $selected_country,
             '#attributes' => array('class' => array('select-countries')),
+            '#form_id' => $this->getFormId(),
+            '#label' => '',
         ];
         $form['submit'] = [
             '#type' => 'submit',
             '#value' => $this->t('Apply'),
             '#name' => $this->t('Apply'),
+            '#attributes' => array('class' => array('btn', 'btn-secondary')),
         ];
+       // kint($form);die();
         return $form;
     }
 
