@@ -1184,6 +1184,10 @@ nav .menu.navbar-nav a:focus {
   font-size: 1.55rem;
 }
 
+.mega-menu .items_list_wysiwyg_container .sous-items > li > a:hover {
+  color: #f16e00;
+}
+
 .mega-menu .items_list_wysiwyg_container .sous-items > li:first-child > a {
   padding-left: 0;
 }

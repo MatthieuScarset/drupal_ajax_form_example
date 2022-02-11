@@ -195,12 +195,17 @@ header#navbar.sticky-top.is-sticky {
       }
     }
     @media (min-width: 1600px) {
+      .mega-menu-global-link {
+        margin-right: 1.825rem;
+      }
+
       .item_mega_menu {
         max-width: 1560px;
         margin: -2px auto 0;
 
         .mega-menu-container {
           padding: 0 15px;
+          margin-right: 1.875rem;
         }
 
         .item_megamenu_list {

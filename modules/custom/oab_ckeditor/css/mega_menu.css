@@ -3,7 +3,7 @@
  */
 
 .mega_menu_template {
-  padding-top: 1rem;
+  padding-top: 1.175rem;
   margin-left: -0.75rem;
   width: 100%;
 }
@@ -50,7 +50,7 @@
 
 @media (min-width: 1600px) {
   .mega_menu_template {
-    padding: 0.875rem 0 0 3.75rem;
+    padding: 1.125rem 0 0 3.75rem;
   }
 }
 
