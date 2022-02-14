@@ -4,8 +4,13 @@
 
 .mega_menu_template {
   padding-top: 1.175rem;
-  margin-left: -0.75rem;
+  padding-right: 0.75rem;
   width: 100%;
+}
+
+
+.mega_menu_template .title_megamenu {
+  padding-bottom: 0;
 }
 
 .mega_menu_template a {
@@ -25,6 +30,14 @@
   text-decoration: none;
 }
 
+.mega_menu_template a:focus.o-link-arrow::after {
+  color: #000;
+}
+
+.mega_menu_template a:hover.o-link-arrow::after {
+  color: #f16e00;
+}
+
 .mega_menu_template p, .mobile-highlight .mega_menu_template p {
   font-weight: normal;
   color: #0a0a0a;
@@ -33,11 +46,14 @@
 
 .mobile-highlight .mega_menu_template p {
   position: relative;
+  padding: 5px 0;
+  margin-bottom: 8px;
 }
 
 
 .mobile-highlight .mega_menu_template a {
   max-width: 95%;
+  font-size: 15px;
 }
 
 .mobile-highlight .mega_menu_template a.o-link-arrow::after {
@@ -48,13 +64,15 @@
   padding-top: 10px;
 }
 
-@media (min-width: 1600px) {
-  .mega_menu_template {
-    padding: 1.125rem 0 0 3.75rem;
-  }
-}
-
 .mobile-highlight .mega_menu_template .btn {
   width: 100%;
   max-width: 100%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+
+@media (min-width: 1600px) {
+  .mega_menu_template {
+    padding: 1.125rem 0 0.9375rem 3.75rem;
+  }
 }
