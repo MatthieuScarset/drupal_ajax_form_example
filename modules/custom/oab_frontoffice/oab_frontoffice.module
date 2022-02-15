@@ -1,22 +1,14 @@
 <?php
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Menu\MenuLinkInterface;
-use Drupal\file\Entity\File;
-use Drupal\media\Entity\Media;
-use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\node\NodeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Database\Database;
-use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\media\Entity\Media;
+use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
-
-use Drupal\paragraphs\Entity\Paragraph;
-
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
 module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
@@ -51,43 +43,50 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  */
 function oab_frontoffice_preprocess_node(&$variables) {
 
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $variables['langcode'] = $current_language;
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $current_language;
 
-    if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
+  if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
-        ##Collecte de toutes les données nécessaires
+    ##Collecte de toutes les données nécessaires
 
-        #Je recupère le nid puis je charge le node associé
-        $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
-        $node = \Drupal\node\Entity\Node::load($nid);
+    #Je recupère le nid puis je charge le node associé
+    $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
+    $node = \Drupal\node\Entity\Node::load($nid);
 
-        if (is_null($node) || $node === false) {
-            return;
-        }
-
-        $meta_description = "";
-        ##Je recupère le field_meta_description s'il existe
-        if ($node->hasField('field_meta_decription')) {
-            $meta_description = $node->get('field_meta_description')->getValue();
-        }
-
-        $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
-
-        $og_image = $file = "";
-        if ($node->hasField('field_visual')) {
-            $file = $node->get('field_visual')->getValue();
-            if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
-                $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-                if ($file instanceof \Drupal\file\Entity\File) {
-                    $og_image = $file->createFileUrl();
-                }
-            }
-        }
-
-        #J'enregistre mes urls et variables OG pour les avoir en JS
-        $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+    if (is_null($node) || $node === false) {
+      return;
     }
+
+    $meta_description = "";
+    ##Je recupère le field_meta_description s'il existe
+    if ($node->hasField('field_meta_decription')) {
+      $meta_description = $node->get('field_meta_description')->getValue();
+    }
+
+    $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
+
+    $og_image = $file = "";
+    if ($node->hasField('field_visual')) {
+      $file = $node->get('field_visual')->getValue();
+      if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
+        $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+        if ($file instanceof \Drupal\file\Entity\File) {
+          $og_image = $file->createFileUrl();
+        }
+      }
+    }
+
+    #J'enregistre mes urls et variables OG pour les avoir en JS
+    $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+  }
+
+  //Vérifier si le cookie drupal_oab_cookie-compliance_hide-message existe si oui supprimer la valeur du cookie puis le désactivé
+
+  if (isset($_COOKIE['drupal_oab_cookie-compliance_hide-message'])) {
+    unset($_COOKIE['drupal_oab_cookie-compliance_hide-message']);
+    setcookie('drupal_oab_cookie-compliance_hide-message', '', time() - 1, '/');
+  }
 }
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
