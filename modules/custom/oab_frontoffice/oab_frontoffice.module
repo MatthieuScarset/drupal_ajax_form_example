@@ -775,10 +775,8 @@ function oab_frontoffice_preprocess_html(&$variables) {
 
   //Vérifier si le cookie drupal_oab_cookie-compliance_hide-message existe si oui le supprimer
   $cookies_compliance = 'drupal_oab_cookie-compliance_hide-message';
-  $check_cookies_compliance = \Drupal::request()->cookies->has($cookies_compliance);
 
-  if (isset($check_cookies_compliance)) {
+  if (\Drupal::request()->cookies->has($cookies_compliance)) {
     setcookie($cookies_compliance, '', -1);
   }
-
 }
