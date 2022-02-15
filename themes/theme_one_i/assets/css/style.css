@@ -508,12 +508,16 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   font-weight: bold;
 }
 @media (min-width: 1600px) {
+  .main_nav.navbar .mega-menu-desktop .mega-menu-global-link {
+    margin-right: 1.825rem;
+  }
   .main_nav.navbar .mega-menu-desktop .item_mega_menu {
     max-width: 1560px;
     margin: -2px auto 0;
   }
   .main_nav.navbar .mega-menu-desktop .item_mega_menu .mega-menu-container {
     padding: 0 15px;
+    margin-right: 1.875rem;
   }
   .main_nav.navbar .mega-menu-desktop .item_mega_menu .item_megamenu_list {
     padding-left: 5.625rem;

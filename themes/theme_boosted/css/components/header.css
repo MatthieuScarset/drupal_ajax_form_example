@@ -822,7 +822,7 @@
     letter-spacing: normal;
     display: block;
     cursor: pointer;
-    padding: 5px 0;
+    padding: 0;
   }
 
   .mega-menu.navbar .mega-menu-mobile .items-level-3 {
@@ -911,7 +911,9 @@
 
   .mega-menu.navbar .mega-menu-mobile .mobile-highlight .obs_template {
     padding: 15px;
+    padding-top: 6.4px;
   }
+
   .mega-menu.navbar .mega-menu-mobile .items_list_link_container {
     width: 95%;
   }
@@ -919,6 +921,7 @@
   .mega-menu.navbar .mega-menu-mobile .items_list_link_container  a {
     font-weight: normal;
     margin-top: 30px;
+    padding: 0;
   }
 
   .mega-menu.navbar .mega-menu-mobile .items_list_link_container .items_list_link_title > a {
@@ -926,6 +929,7 @@
     font-weight: bold;
     border-top: 1px solid #ccc;
     padding-top: 30px;
+    padding-bottom: 0;
   }
 
   .mega-menu.navbar .mega-menu-mobile .items_list_link_title > a.no-top-border {
@@ -953,8 +957,8 @@
   }
 
   .mega-menu.navbar .mega-menu-mobile .mobile-highlight .mega_menu_template .btn {
-    margin-top: 30px;
-    padding: 14px 45px;
+    margin-top: 0;
+    padding: 13px 45px;
     margin-bottom: 15px;
   }
 
@@ -1182,6 +1186,10 @@ nav .menu.navbar-nav a:focus {
   font-weight: normal;
   margin-bottom: 15px;
   font-size: 1.55rem;
+}
+
+.mega-menu .items_list_wysiwyg_container .sous-items > li > a:hover {
+  color: #f16e00;
 }
 
 .mega-menu .items_list_wysiwyg_container .sous-items > li:first-child > a {
