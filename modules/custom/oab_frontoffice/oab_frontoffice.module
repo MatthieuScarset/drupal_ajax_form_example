@@ -81,12 +81,6 @@ function oab_frontoffice_preprocess_node(&$variables) {
     $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
   }
 
-  //Vérifier si le cookie drupal_oab_cookie-compliance_hide-message existe si oui supprimer la valeur du cookie puis le désactivé
-
-  if (isset($_COOKIE['drupal_oab_cookie-compliance_hide-message'])) {
-    unset($_COOKIE['drupal_oab_cookie-compliance_hide-message']);
-    setcookie('drupal_oab_cookie-compliance_hide-message', '', time() - 1, '/');
-  }
 }
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
@@ -777,6 +771,14 @@ function oab_frontoffice_preprocess_html(&$variables) {
           $variables['attributes']['class'][] = "oab_background_image";
         }
     }
+  }
+
+  //Vérifier si le cookie drupal_oab_cookie-compliance_hide-message existe si oui le supprimer
+  $cookies_compliance = 'drupal_oab_cookie-compliance_hide-message';
+  $check_cookies_compliance = \Drupal::request()->cookies->has($cookies_compliance);
+
+  if (isset($check_cookies_compliance)) {
+    setcookie($cookies_compliance, '', -1);
   }
 
 }
