@@ -56,6 +56,7 @@ RUN apt-get update && apt-get install -y nodejs npm
 RUN npm install -g yarn
 
 # User
+RUN groupadd -g $GID oab_web
 RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
