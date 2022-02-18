@@ -41,11 +41,6 @@ Specific HP with background in carrousel
         padding-bottom: 2rem;
     }
 
-  /* Correctif Mep correctif mega-menu RUBYPORTAILOBS-3874 */
-  .oab_background_image header {
-      background-color: black;
-      padding-bottom: 5px;
-    }
 
     /* Changement de la bordure : elle ne prend plus toute la longueur, mais que la taille du navbar */
     .oab_background_image .subnav {
@@ -54,11 +49,6 @@ Specific HP with background in carrousel
 
         /*Je supprime les paddings pour les transférer sur le container fluid qui a la bonne taille */
         padding: 0;
-    }
-  /* Correctif Mep correctif mega-menu RUBYPORTAILOBS-3874 */
-    .oab_background_image .subnav.navbar-fixed {
-      background-color: black;
-      padding-bottom: 5px;
     }
 
     .oab_background_image .subnav .container-fluid-navbar {
@@ -211,7 +201,7 @@ Specific HP with background in carrousel
 @media(min-width: 976px) {
   /* Correctif Mep correctif mega-menu RUBYPORTAILOBS-3874 */
   .hp-background-carousel {
-    background-position-y: 90px;
+    background-position-y: 85px;
   }
 }
 
