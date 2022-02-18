@@ -1,5 +1,6 @@
 <div class="row" >
     <article class="page-offices-map col-md-12 col-sm-12">
+       {% if page_title|length > 0 %}<h2>{{ page_title }}</h2>{% endif %}
         <div class="region region-content" >
           <div class="row" >
             <div class='form_filter_regions_countries col-md-12 col-sm-12'>
@@ -24,6 +25,5 @@
               </div>
             </div>
           </div>
-        </div>
     </article>
 </div>

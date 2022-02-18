@@ -23,6 +23,12 @@ services:
       - { name: theme_negotiator, priority: 12 }
     arguments: [ '@oab_ob1_adapter.ob1_service' ]
 
+  oab_ob1_adapter.theme_routename_negotiator:
+    class: Drupal\oab_ob1_adapter\Theme\Ob1RouteNameThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: 13 }
+    arguments: [ '@oab_ob1_adapter.ob1_service' ]
+
   oab_ob1_adapter.ob1_service:
     class: Drupal\oab_ob1_adapter\Ob1AdapterService
     arguments : ['@oab_ob1_adapter.theme_settings', '@language_manager']

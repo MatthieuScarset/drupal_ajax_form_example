@@ -53,8 +53,13 @@
   'js-form-type-' ~ type|clean_class,
   'form-item-' ~ name|clean_class,
   'js-form-item-' ~ name|clean_class,
+  title_display not in ['after', 'before'] ? 'form-no-label',
   disabled == 'disabled' ? 'form-disabled',
-  'form-group'
+  'form-group',
+  is_radio ? 'radio',
+  is_checkbox ? 'checkbox',
+  is_autocomplete ? 'form-autocomplete',
+  errors ? 'error has-error'
 ]
 %}{%
   set description_classes = [
@@ -63,7 +68,7 @@
     description_display == 'invisible' ? 'visually-hidden',
   ]
 %}
-<div {{ attributes.addClass(classes) }} >
+<div {{ attributes.addClass(classes, 'mr-md-2') }} >
 
   {% if label_display in ['before', 'invisible'] %}
     {{ label }}

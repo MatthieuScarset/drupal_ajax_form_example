@@ -25,7 +25,9 @@ class Ob1UrlThemeNegotiator extends AbstractOb1ThemeNegotiator implements ThemeN
     $applies = false;
 
     # Je récupère l'url de la page actuelle
-    $url = $this->request->getRequestUri();
+    $url = $this->request->getPathInfo();
+
+//    oabt($this->request->getPathInfo(), true);
     if (isset($url)) {
       $url = str_replace(['/en', '/fr'], '', $url) ?: "/";
       $applies = $this->ob1AdapterService->hasUrl($url);

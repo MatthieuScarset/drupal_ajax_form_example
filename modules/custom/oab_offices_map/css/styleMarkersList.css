@@ -11,7 +11,6 @@ ul.offices-addresses-list{
 li.office-address{
     border-top: 1px dotted #cdcdcd;
     list-style: outside none none;
-    padding: 5px;
     margin: 0;
     vertical-align: baseline;
 

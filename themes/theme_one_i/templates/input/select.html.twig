@@ -11,11 +11,21 @@
  */
 #}
 {% spaceless %}
+
+  {% set is_value_empty = false %}
+  {% for option in options %}
+    {% if option.value == 'all' and option.selected %}
+      {% set is_value_empty = true %}
+    {% endif %}
+  {% endfor %}
   {%
     set classes = [
       'form-control',
+      is_value_empty ? 'form-control-empty'
     ]
   %}
+{#  {{ kint_t(attributes, options) }}#}
+
   <select{{ attributes.addClass(classes) }} data-ob1-component="FormControlEmpty">
     {% for option in options %}
       {% if option.type == 'optgroup' %}
@@ -25,7 +35,14 @@
           {% endfor %}
         </optgroup>
       {% elseif option.type == 'option' %}
-        <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' }}>{{ option.label }}</option>
+        {% if option.value == 'all' %}
+          <option value=""
+              {{ option.selected ? ' selected=""' }}
+                  class="label-option-hidden" value="{{ option.value }}" disabled=""
+          ></option>
+        {% else %}
+          <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' }}>{{ option.label }}</option>
+        {% endif %}
       {% endif %}
     {% endfor %}
   </select>
