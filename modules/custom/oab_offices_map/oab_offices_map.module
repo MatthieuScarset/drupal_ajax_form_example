@@ -1,5 +1,22 @@
 <?php
 
+use Drupal\Core\Access\AccessResult;
+
+/**
+ * Implements hook_block_access().
+ * Prevent to display the PageTitle for this page.
+ * Need to override the default page_title for the OB1 theming
+ */
+function oab_offices_map_block_access(\Drupal\block\Entity\Block $block, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  if ($route === 'oab_offices_map.page' &&
+    $block->id() === "theme_one_i_page_title" && $operation === 'view') {
+    return AccessResult::forbidden();
+  }
+}
+
+
 function oab_offices_map_theme() {
     $theme = array();
     $theme['offices_map_page'] = array(
@@ -8,6 +25,7 @@ function oab_offices_map_theme() {
             'officesListBlock' => array(),
             'regionsCountriesForm' => array(),
             'labelList' => array(),
+            'page_title' => ""
         ),
         'template' => 'offices-map--page'
     );
@@ -30,6 +48,3 @@ function oab_offices_map_theme() {
 }
 
 
-function oab_offices_map_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
-
-}
