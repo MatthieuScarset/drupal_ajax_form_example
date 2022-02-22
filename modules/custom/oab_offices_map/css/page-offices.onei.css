@@ -49,3 +49,51 @@
     max-width: initial;
   }
 }
+
+
+
+/* Some overrides of styleMarkersList */
+li.office-address .views-field-field-additionnal,
+li.office-address .views-field-field-street,
+li.office-address .views-field-field-postal-code,
+li.office-address .views-field-field-city,
+li.office-address .views-field-field-office-country,
+li.office-address .views-field-field-phone-number{
+  padding-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.4285714286;
+  display:inline-block;
+}
+
+li.office-address .contact a,
+li.office-address .link_region_content a{
+  font-size: 0.75rem;
+}
+
+li.office-address .o-link-arrow:hover {
+  text-decoration-color: #f16e00;
+}
+li.office-address .o-link-arrow::after {
+  position: initial;
+}
+
+li.office-address a.show_on_map {
+  font-size: 1rem;
+}
+
+li.office-address a.show_on_map:hover {
+  text-decoration: underline;
+  text-decoration-color: #f16e00;
+}
+
+li.office-address a.show_on_map::after {
+  font-family: icon-orange;
+  content: "";
+  font-size: 0.625rem;
+  display: inline-block;
+  padding: 0 0.625rem;
+  color: #f16e00;
+}
+ul.offices-addresses-list{
+  float: initial;
+}

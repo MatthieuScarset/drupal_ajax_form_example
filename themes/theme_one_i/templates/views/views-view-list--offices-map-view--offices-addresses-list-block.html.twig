@@ -41,7 +41,7 @@
                 {% set regionPage_nid = row.content["#row"]._entity.field_region[0].get('entity').getValue().get('field_linked_content')[0].value['target_id'] %}
                 {% set regionPage_url = path( 'entity.node.canonical', {'node': regionPage_nid}) %}
                 <div class="">
-                    <a class="text-primary lead" href="{{ nodeAbsoluteUrl('entity.node.canonical',regionPage_nid, true) }}">{{ regionName }}</a>
+                    <a class="o-link" href="{{ nodeAbsoluteUrl('entity.node.canonical',regionPage_nid, true) }}">{{ regionName }}</a>
                 </div>
             {% endif %}
         </li>
