@@ -2,10 +2,13 @@
 
 namespace Drupal\oab_develop\Commands;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drush\Drush;
 use Drush\Commands\DrushCommands;
 use Consolidation\SiteAlias\SiteAliasManagerAwareInterface;
 use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 /**
@@ -19,17 +22,32 @@ use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
  *   - http://cgit.drupalcode.org/devel/tree/src/Commands/DevelCommands.php
  *   - http://cgit.drupalcode.org/devel/tree/drush.services.yml
  */
-class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareInterface {
+class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareInterface, ContainerInjectionInterface {
 
   use SiteAliasManagerAwareTrait;
 
- /* public function install(array $profile) {
-      $selfRecord = $this->siteAliasManager()->getSelf();
-      $args = ['system.site', ...];
-      $options = ['yes' => true];
-      $process = $this->processManager()->drush($selfRecord, 'config-set', $args, $options);
-      $process->mustRun();
-  }*/
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct();
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self($container->get('extension.path.resolver'));
+  }
+
+  /* public function install(array $profile) {
+     $selfRecord = $this->siteAliasManager()->getSelf();
+     $args = ['system.site', ...];
+     $options = ['yes' => true];
+     $process = $this->processManager()->drush($selfRecord, 'config-set', $args, $options);
+     $process->mustRun();
+ }*/
+
 
   /**
    * Command description here.
@@ -41,7 +59,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
    */
   public function commandName() {
     $this->output()->writeln('Execution oab-updb...');
-    $file_commands = drupal_get_path('module', 'oab_develop').'/drush_commands.inc';
+    $file_commands = $this->pathResolver->getPath('module', 'oab_develop').'/drush_commands.inc';
     if (file_exists($file_commands)) {
 
       $fp = fopen($file_commands, 'r');
@@ -77,7 +95,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
     $this->output()->writeln('drush config-import');
     $this->runCmd('cim', [], true);
     $this->output()->writeln('Installation des modules devs...');
-    $file_commands = drupal_get_path('module', 'oab_develop').'/dev_modules.data';
+    $file_commands = $this->pathResolver->getPath('module', 'oab_develop').'/dev_modules.data';
     if (file_exists($file_commands)) {
 
       $fp = fopen($file_commands, 'r');

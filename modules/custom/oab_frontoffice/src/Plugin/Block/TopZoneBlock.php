@@ -3,13 +3,16 @@
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\media\Entity\Media;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Entity;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\image\Entity\ImageStyle;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -28,7 +31,26 @@ use Drupal\image\Entity\ImageStyle;
  *
  */
 
-class TopZoneBlock extends BlockBase {
+class TopZoneBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+    /**
+     * @var FileUrlGenerator
+     */
+    private $fileUrlGenerator;
+
+    public function __construct(array $configuration, $plugin_id, $plugin_definition, FileUrlGenerator $file_url_generator) {
+        parent::__construct($configuration, $plugin_id, $plugin_definition);
+        $this->fileUrlGenerator = $file_url_generator;
+      }
+
+    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+      return new self(
+        $configuration,
+        $plugin_id,
+        $plugin_definition,
+        $container->get('file_url_generator')
+      );
+    }
 
     public function build() {
         $block = array();
@@ -71,7 +93,7 @@ class TopZoneBlock extends BlockBase {
                     $img_style = 'top_zone_big';
                 }
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
-                $url = file_url_transform_relative($url);
+                $url = $this->fileUrlGenerator->transformRelative($url);
             }
             $class_hidden_xs = "";
             if (isset($top_zone_background_mobile[0]['target_id'])) {
@@ -88,7 +110,7 @@ class TopZoneBlock extends BlockBase {
                 $uri = $entity->field_image->entity->getFileUri();
                 $img_style = 'max_650';
                 $url = ImageStyle::load($img_style)->buildUrl($uri);
-                $url = file_url_transform_relative($url);
+                $url = $this->fileUrlGenerator->transformRelative($url);
             }
             $content_mobile = check_markup('<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$content_top.'</div>', 'full_html', '', []);
             $content = check_markup($content_desktop . $content_mobile, 'full_html', '', []) ;

@@ -2,15 +2,12 @@
 
 namespace  Drupal\oab_frontoffice\EventSubscriber;
 
-use Drupal\pathauto\Entity\PathautoPattern;
+use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpFoundation\Response;
-use Drupal\Core\Url;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use \Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 /**
@@ -49,8 +46,8 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
 
 
     #On vérifie le code de retour (S'il existe, et si 404 ou 403)
-    if (method_exists($event->getException(), "getStatusCode")
-      && $event->getException()->getStatusCode() == 404) {
+    if (method_exists($event->getThrowable(), "getStatusCode")
+      && $event->getThrowable()->getStatusCode() == 404) {
 
       ########################
       ## CAS DES 404
@@ -72,8 +69,8 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
         $event->setResponse($response);
       }
 
-    } elseif (method_exists($event->getException(), "getStatusCode")
-      && $event->getException()->getStatusCode() == 403) {
+    } elseif (method_exists($event->getThrowable(), "getStatusCode")
+      && $event->getThrowable()->getStatusCode() == 403) {
       ########################
       ## CAS DES 403
 

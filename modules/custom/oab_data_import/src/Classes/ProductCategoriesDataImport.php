@@ -2,9 +2,28 @@
 
 namespace Drupal\oab_data_import\Classes;
 
-class ProductCategoriesDataImport
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+class ProductCategoriesDataImport implements ContainerInjectionInterface
 {
   const IMPORT_DIRECTORY = 'public://data/';
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(ExtensionPathResolver $extension_path_resolver) {
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('extension.path.resolver')
+    );
+  }
 
   public function executeImport($filename) {
 
@@ -34,7 +53,7 @@ class ProductCategoriesDataImport
           'init_message' => t('Product categories import is starting.'),
           'progress_message' => t('Processed @current out of @total.') ,
           'error_message' => t('Product categories data import has encountered an error.'),
-          'file' => drupal_get_path('module', 'oab_data_import') . '/oab_data_import_batch_operations.inc',
+          'file' => $this->pathResolver->getPath('module', 'oab_data_import') . '/oab_data_import_batch_operations.inc',
         );
 
         batch_set($batch);

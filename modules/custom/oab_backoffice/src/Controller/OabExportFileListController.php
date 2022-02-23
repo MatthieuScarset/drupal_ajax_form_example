@@ -5,6 +5,7 @@ define('SESSION_NAME', 'oab_backoffice.export_file_download');
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\StackMiddleware\Session;
 use Drupal\Core\TypedData\Plugin\DataType\Uri;
@@ -35,16 +36,23 @@ class OabExportFileListController extends ControllerBase {
    */
     private $url;
 
+  /**
+   * @var FileUrlGenerator
+   */
+  private $fileUrlGenerator;
 
-    public function __construct(FileSystemInterface $file_system, UrlGeneratorInterface $url_interface) {
+
+  public function __construct(FileSystemInterface $file_system, UrlGeneratorInterface $url_interface, FileUrlGenerator $file_url_generator) {
       $this->fileSystem = $file_system;
       $this->url = $url_interface;
+      $this->fileUrlGenerator = $file_url_generator;
     }
 
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('file_system'),
-      $container->get('url_generator')
+      $container->get('url_generator'),
+      $container->get('file_url_generator')
     );
   }
 
@@ -260,7 +268,7 @@ class OabExportFileListController extends ControllerBase {
         }
 
 
-        $url = file_create_url($file_path);
+        $url = $this->fileUrlGenerator->generateAbsoluteString($file_path);
 
         ##J'affiche le résultat
         return [

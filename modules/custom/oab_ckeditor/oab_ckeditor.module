@@ -1,12 +1,20 @@
 <?php
 
+use Drupal\Core\Database\Database;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\editor\Entity\Editor;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_editor_js_settings_alter(array &$settings)
  */
 function oab_ckeditor_editor_js_settings_alter(array &$settings) {
-    $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config.js';
+
+    /** @var ExtensionPathResolver $service_path_resolver */
+    $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+    $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config.js';
+
     $current_path = \Drupal::service('path.current')->getPath();
     $args = explode('/', $current_path);
     if ($args['1'] == 'node' && isset($args['2']) && !empty($args['2'])) {
@@ -14,24 +22,24 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings) {
             $nodetype = $args['3'];
         }
         else {
-            if ($noeud = \Drupal\node\Entity\Node::load($args['2'])) {
+            if ($noeud = Node::load($args['2'])) {
                 $nodetype = $noeud->getType();
             }
         }
         if (isset($nodetype) && !empty($nodetype)) {
             if ($nodetype == 'region') {
-                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_region.js';
+                $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config_region.js';
             }
             elseif ($nodetype == 'country') {
-                $config = base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/custom_config_country.js';
+                $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config_country.js';
             }
         }
         $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
         $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
-            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+            base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
 
         $settings['editor']['formats']['full_html']['editorSettings']['contentsCss'][] =
-            base_path() . drupal_get_path('module', 'oab_ckeditor') . '/css/custom_styles.css';
+            base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/css/custom_styles.css';
     }
 }
 
@@ -48,7 +56,10 @@ function oab_ckeditor_page_attachments(array &$page) {
  * Implements hook_ckeditor_css_alter(array &$css, Editor $editor)
  */
 function oab_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
-    $css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/templates.css';
+    /** @var ExtensionPathResolver $service_path_resolver */
+    $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+    $css[] = $service_path_resolver->getPath('module', 'oab_ckeditor') . '/css/templates.css';
     //$css[] = drupal_get_path('module', 'oab_ckeditor') . '/css/bootstrap.css';
 }
 
@@ -192,19 +203,22 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
             }
         }
 
+        /** @var ExtensionPathResolver $service_path_resolver */
+        $service_path_resolver = \Drupal::service('extension.path.resolver');
+
         $attachments['#attached']['drupalSettings']['oab_templating_components'] = $component_list;
 
         // regions et pays pour le plugin offices_map
         $attachments['#attached']['drupalSettings']['countriesRegionsTab'] = getArrayRegionsCountries();
         $attachments['#attached']['drupalSettings']['regionsTab'] = getAllRegionsForJSOptions();
         $attachments['#attached']['drupalSettings']['countriesTab'] = getAllCountriesForJSOptions();
-        $attachments['#attached']['drupalSettings']['oab_ckeditor']['path'] = drupal_get_path('module','oab_ckeditor');
+        $attachments['#attached']['drupalSettings']['oab_ckeditor']['path'] = $service_path_resolver->getPath('module','oab_ckeditor');
 
     //}
 }
 
  function getAllCountriesForJSOptions() {
-    $query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+    $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_office_country', 'c', 'n.nid = c.entity_id');
     $query->leftjoin('taxonomy_term_field_data', 'oc', 'oc.tid = c.field_office_country_target_id');
     $query->condition('n.type', 'office', '=');
@@ -224,7 +238,7 @@ function oab_ckeditor_page_attachments_alter(array &$attachments) {
 }
 
  function getAllRegionsForJSOptions() {
-    $query = \Drupal\Core\Database\Database::getConnection()->select('node_field_data', 'n');
+    $query = Database::getConnection()->select('node_field_data', 'n');
     $query->leftjoin('node__field_region', 'r', 'n.nid = r.entity_id');
     $query->leftjoin('taxonomy_term_field_data', 't', 't.tid = r.field_region_target_id');
     $query->condition('n.type', 'office', '=');

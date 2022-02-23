@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\file\Entity\File;
@@ -93,7 +94,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
     $entity = NULL;
     if ($menu_link_content_plugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
-        list($entity_type, $uuid) = explode(':', $menu_link_content_plugin->getPluginId(), 2);
+        [$entity_type, $uuid] = explode(':', $menu_link_content_plugin->getPluginId(), 2);
 
         /** @var Drupal\Core\Entity\EntityRepository $service */
         $service = Drupal::service('entity.repository');
@@ -617,10 +618,13 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
             $field_value = $field_file->getValue();
             $media = \Drupal\media\Entity\Media::load($field_value[0]['target_id']);
 
+            /** @var FileUrlGenerator $service_file_url_generator */
+            $service_file_url_generator = \Drupal::service('file_url_generator');
+
             ##On load le file contenu dans l'entity media
             $file_value = $media->get('field_file')->getValue();
             $file_id = $file_value[0]['target_id'];
-            $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
+            $file_url = $service_file_url_generator->generateAbsoluteString(File::load($file_id)
                 ->getFileUri());
             ##je remplace la valeur d'url_du_fichier par l'url générée
             $form_state->setValue('url_du_fichier', $file_url);
@@ -757,6 +761,9 @@ function change_textfield_to_select($vid, $default_langcode = true) {
 
 
 function oab_frontoffice_preprocess_html(&$variables) {
+  /** @var FileUrlGenerator $service_file_url_generator */
+  $service_file_url_generator = \Drupal::service('file_url_generator');
+
 
   $node = \Drupal::routeMatch()->getParameter('node');
   if (NULL !== $node && $node instanceof NodeInterface) {
@@ -768,7 +775,7 @@ function oab_frontoffice_preprocess_html(&$variables) {
           if (isset($field_carousel->entity->field_background->target_id)) {
             $media = Media::load($field_carousel->entity->field_background->target_id);
             if ($media !== null && isset($media->field_image->entity)) {
-              $file_uri = file_url_transform_relative(file_create_url($media->field_image->entity->getFileUri()));
+              $file_uri = $service_file_url_generator->generateString($media->field_image->entity->getFileUri());
               $variables['carousel_bg'][$media->id()] = $file_uri;
             }
           }

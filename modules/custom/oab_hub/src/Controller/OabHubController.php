@@ -1,17 +1,12 @@
 <?php
 namespace Drupal\oab_hub\Controller;
 
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\path_alias\Entity\PathAlias;
-use Drupal\taxonomy\Entity\Term;
-use Masterminds\HTML5\Exception;
-use Symfony\Component\Yaml\Yaml;
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Path\PathValidator;
-use Drupal\system\Entity\Menu;
 use Drupal\block\Entity\Block;
-use Drupal\Core\Url;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\system\Entity\Menu;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\Yaml\Yaml;
 
 class OabHubController extends ControllerBase {
 
@@ -310,7 +305,7 @@ class OabHubController extends ControllerBase {
    * Retourne la config complète des blocks
    */
   private static function getConfig() {
-    $config_path = drupal_get_path('module', 'oab_hub') . '/config/blocks.yml';
+    $config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_hub') . '/config/blocks.yml';
     $data = Yaml::parse(file_get_contents($config_path));
     return $data;
   }

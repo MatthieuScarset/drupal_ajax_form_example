@@ -6,15 +6,43 @@
  * Time: 15:51
  */
 namespace Drupal\oab_frontoffice\Twig;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\views\Views;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
+use Twig\Template;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class OabExtension extends AbstractExtension {
+
+  /**
+   * @var ModuleHandlerInterface
+   */
+  private $moduleHandler;
+
+  /**
+   * @var FileUrlGenerator
+   */
+  private $fileUrlGenerator;
+
+  /**
+   * @var FileSystemInterface
+   */
+  private $fileSystem;
+
+  public function __construct(ModuleHandlerInterface $module_handler, FileUrlGenerator $file_url_generator,
+                              FileSystemInterface $file_system, RequestStack $request_stack) {
+    $this->moduleHandler = $module_handler;
+    $this->fileUrlGenerator = $file_url_generator;
+    $this->fileSystem = $file_system;
+    $this->request = $request_stack->getCurrentRequest();
+  }
 
   /**
    * Returns the name of the extension.
@@ -68,12 +96,11 @@ class OabExtension extends AbstractExtension {
    * @param bool $stop
    */
   public function kint_t(Environment $env, array $context, array $args = []) {
-    $module_handler = \Drupal::service('module_handler');
-    if ($module_handler->moduleExists('kint')) {
+    if ($this->moduleHandler->moduleExists('kint')) {
       if (empty($args)) {
         $kint_variable = array();
         foreach ($context as $key => $value) {
-          if (!$value instanceof \Twig_Template) {
+          if (!$value instanceof Template) {
             $kint_variable[$key] = $value;
           }
         }
@@ -143,7 +170,7 @@ class OabExtension extends AbstractExtension {
   public function image_style_uri($path, $style) {
     /** @var \Drupal\Image\ImageStyleInterface $image_style */
     if ($image_style = ImageStyle::load($style)) {
-      return file_url_transform_relative($image_style->buildUrl($path));
+      return $this->fileUrlGenerator->transformRelative($image_style->buildUrl($path));
     }
     return "";
   }
@@ -228,7 +255,7 @@ class OabExtension extends AbstractExtension {
      * @param $url
      */
     public function get_files_folder_pardot($uri) {
-        $url = \Drupal::getContainer()->get('file_system')->realpath($uri);
+        $url = $this->fileSystem->realpath($uri);
         $cursor = strrpos($url, '/files');
         $url = substr($url, $cursor);
         // on enlève la dernière partie
@@ -288,7 +315,7 @@ class OabExtension extends AbstractExtension {
     }
 
     public function isAjaxContext() {
-        return \Drupal::request()->isXmlHttpRequest();
+        return $this->request->isXmlHttpRequest();
     }
 
   /**

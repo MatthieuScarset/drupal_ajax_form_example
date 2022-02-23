@@ -28,16 +28,16 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.3.tgz#90420f9f9c6d3987f176a19a7d8e764271a2f55d"
   integrity sha512-Fxt+AfXgjMoin2maPIYzFZnQjAXjAL0PHscM5pRTtatFqB+vZxAM9tLp2Optnuw3QOQC40jTNeGYFOMvyf7v9g==
 
-"@ob1/web@1.13.14":
-  version "1.13.14"
-  resolved "https://artifactory-iva.si.francetelecom.fr/artifactory/api/npm/npm-proxy-orange-project-styleguide/@ob1/web/-/@ob1/web-1.13.14.tgz#5340fbb5512bb81d786db27988f010fc451bb183"
-  integrity sha1-U0D7tVEruB14bbJ5iPAQ/EUbsYM=
+"@ob1/web@1.14.8":
+  version "1.14.8"
+  resolved "https://artifactory-iva.si.francetelecom.fr/artifactory/api/npm/npm-proxy-orange-project-styleguide/@ob1/web/-/@ob1/web-1.14.8.tgz#89331edb2c0e9f32ed3402fb5be94ed6a8d85d56"
+  integrity sha1-iTMe2ywOnzLtNAL7W+lO1qjYXVY=
   dependencies:
     array-from-polyfill "^1.0.1"
     boosted "4.3.1"
-    element-closest-polyfill "^1.0.2"
+    element-closest-polyfill "^1.0.4"
     focus-visible "^5.2.0"
-    focus-within-polyfill "^5.0.4"
+    focus-within-polyfill "^5.2.1"
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
@@ -471,7 +471,7 @@ electron-to-chromium@^1.3.723:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.768.tgz#bbe47394f0073c947168589b7d19388518a7a9a9"
   integrity sha512-I4UMZHhVSK2pwt8jOIxTi3GIuc41NkddtKT/hpuxp9GO5UWJgDKTBa4TACppbVAuKtKbMK6BhQZvT5tFF1bcNA==
 
-element-closest-polyfill@^1.0.2:
+element-closest-polyfill@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/element-closest-polyfill/-/element-closest-polyfill-1.0.4.tgz#479706b479e258bc9dd5c4fbebe3efc580bdfab6"
   integrity sha512-Bu9+TU0GXZvYXJuyXFgwcoOFNt0qsj+c4m7/gqzoHhZhL3D3xMTxzmAFgwu4LabHNCqXgymauGtZSCKV2oHIGg==
@@ -626,7 +626,7 @@ focus-visible@^5.2.0:
   resolved "https://registry.yarnpkg.com/focus-visible/-/focus-visible-5.2.0.tgz#3a9e41fccf587bd25dcc2ef045508284f0a4d6b3"
   integrity sha512-Rwix9pBtC1Nuy5wysTmKy+UjbDJpIfg8eHjw0rjZ1mX4GNLz1Bmd16uDpI3Gk1i70Fgcs8Csg2lPm8HULFg9DQ==
 
-focus-within-polyfill@^5.0.4:
+focus-within-polyfill@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/focus-within-polyfill/-/focus-within-polyfill-5.2.1.tgz#bea7ed0689516ef76f3f226a7a66399ce5c45789"
   integrity sha512-24dSGm2euJ0V+blff5Yj0IXtemjjGIoT6/OjmvICZ80NIgnyXDpthfxdkJAJWCDs0BaUvdB+2RParJ9b7X4EuQ==

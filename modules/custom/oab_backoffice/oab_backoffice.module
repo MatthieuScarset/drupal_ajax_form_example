@@ -1,21 +1,16 @@
 <?php
 
+use Drupal\Core\Database\Database;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\editor\Entity\Editor;
-use Drupal\Core\Url;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\Core\Database\Database;
-use Drupal\image\Entity\ImageStyle;
-use Drupal\Core\Entity\EntityInterface;
-use \Drupal\file\Entity\File;
-use Drupal\Core\Datetime;
-use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\node\Entity\Node;
-use Drupal\entity\Revision\RevisionableContentEntityBase;
-use Drupal\workbench_moderation\Entity\ModerationState;
-use \Drupal\oab_dvi\DviHelper;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\oab_backoffice\Form\OabSettingsWebformCustomTemplateForm;
+use Drupal\oab_dvi\DviHelper;
+use Drupal\workbench_moderation\Entity\ModerationState;
 
 //include_once 'includes/mediatheque.inc';
 define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
@@ -294,15 +289,19 @@ function oab_backoffice_menu_link_submit(&$form, FormStateInterface $form_state)
 
 
 function oab_backoffice_ckeditor_css_alter(array &$css, Editor $editor) {
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/font-awesome.min.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/background.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/buttons.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/textes.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/layout.css';
-    $css[] = drupal_get_path('theme', 'theme_boosted') . '/css/templating/nodes.css';
+
+    /** @var ExtensionPathResolver $service_path_resolver */
+    $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/boosted/css/bootstrap-orange2015.min.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/boosted/css/boosted2015.min.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/font-awesome.min.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/background.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/buttons.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/shareIcons.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/textes.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/layout.css';
+    $css[] = $service_path_resolver->getPath('theme', 'theme_boosted') . '/css/templating/nodes.css';
 }
 
 

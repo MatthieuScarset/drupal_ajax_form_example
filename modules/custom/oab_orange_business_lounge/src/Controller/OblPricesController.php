@@ -2,12 +2,25 @@
 namespace Drupal\oab_orange_business_lounge\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\File\FileUrlGenerator;
+use Drupal\file\Entity\File;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
 class OblPricesController extends ControllerBase {
 
-    public function oblPricePage($id) {
+  public function __construct(FileUrlGenerator $file_url_generator) {
+    $this->fileUrlGenerator = $file_url_generator;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('file_url_generator')
+    );
+  }
+
+  public function oblPricePage($id) {
 
       /** @var \Drupal\oab_orange_business_lounge\Services\OabOblSwagger $obl_service */
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
@@ -16,8 +29,8 @@ class OblPricesController extends ControllerBase {
         $zones_image = $config->getRawData()['zones_image'];
 
         foreach ($zones_image as $key => $image) {
-            $file = \Drupal\file\Entity\File::load($image);
-            $zones_image[$key] = file_create_url($file->getFileUri());
+            $file = File::load($image);
+            $zones_image[$key] = $this->fileUrlGenerator->generateAbsoluteString($file->getFileUri());
         }
 
         $countries = $obl_service->getCountriesWithoutOperator();
