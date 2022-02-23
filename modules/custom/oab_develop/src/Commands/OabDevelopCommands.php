@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   - http://cgit.drupalcode.org/devel/tree/src/Commands/DevelCommands.php
  *   - http://cgit.drupalcode.org/devel/tree/drush.services.yml
  */
-class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareInterface, ContainerInjectionInterface {
+class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareInterface {
 
   use SiteAliasManagerAwareTrait;
 
@@ -34,10 +34,6 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
   public function __construct(ExtensionPathResolver $extension_path_resolver) {
     parent::__construct();
     $this->pathResolver = $extension_path_resolver;
-  }
-
-  public static function create(ContainerInterface $container) {
-    return new self($container->get('extension.path.resolver'));
   }
 
   /* public function install(array $profile) {
