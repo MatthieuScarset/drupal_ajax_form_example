@@ -160,7 +160,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
  * Implements hook_field_widget_form_alter().
  */
 function oab_backoffice_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
-  if ($element['#paragraph_type'] === 'contact_button_item') {
+  if (isset($element['#paragraph_type']) && $element['#paragraph_type'] === 'contact_button_item') {
 
     $element['subform']['phone_number'] = [
       '#type' => 'fieldset',

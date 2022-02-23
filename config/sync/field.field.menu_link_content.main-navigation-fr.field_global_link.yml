@@ -1,0 +1,23 @@
+uuid: 554d6512-cf9b-47e0-9c00-2a7d3e748917
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_global_link
+    - system.menu.main-navigation-fr
+  module:
+    - link
+id: menu_link_content.main-navigation-fr.field_global_link
+field_name: field_global_link
+entity_type: menu_link_content
+bundle: main-navigation-fr
+label: 'global link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

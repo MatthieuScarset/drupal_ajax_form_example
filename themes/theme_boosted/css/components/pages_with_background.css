@@ -79,7 +79,7 @@ Specific HP with background in carrousel
         border-bottom: 2px solid grey;
 
         /* Je réapplique les padding supprimés precedement */
-        padding: 25px 0 20px 0;
+        padding: 25px 0 0;
     }
 
     .oab_background_image .subnav.navbar-fixed .container-fluid-navbar {

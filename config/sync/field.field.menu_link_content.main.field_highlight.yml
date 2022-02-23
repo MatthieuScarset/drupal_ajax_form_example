@@ -1,0 +1,21 @@
+uuid: f957e79f-1bbc-4cea-bb32-84befcf5b512
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_highlight
+    - system.menu.main
+  module:
+    - text
+id: menu_link_content.main.field_highlight
+field_name: field_highlight
+entity_type: menu_link_content
+bundle: main
+label: highlight
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

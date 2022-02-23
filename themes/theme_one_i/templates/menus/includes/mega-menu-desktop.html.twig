@@ -44,15 +44,19 @@ We call a macro which calls itself to render the full tree.
              onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }}</a></li>
       {% endif %}
 
-      {% if item.below %}
-        {% if item.content.field_template['#items'].value == 0  %}
-          <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
-            {{ menus.mega_menu_items(item.title, item.below) }}
-          </div>
 
+      {% if item.below %}
+        {% if item.content.field_style_template['#items'].value == 'product' %}
+          <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
+            {{ menus.product_template_mega_menu_items(item.title, item.below) }}
+          </div>
+        {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
+          <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
+            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below) }}
+          </div>
         {% else %}
           <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
-            {{ menus.new_template_mega_menu_items(item.title, item.below) }}
+            {{ menus.mega_menu_items(item.content, item.below) }}
           </div>
         {% endif %}
       {% endif %}
@@ -61,10 +65,11 @@ We call a macro which calls itself to render the full tree.
   {% endif %}
 {% endmacro %}
 
-{% macro mega_menu_items(title, items) %}
-  <div class="container-fluid site-width">
-    <div class="title_megamenu row">
-      <h4 class="col-12">{{ title }}</h4>
+{% macro mega_menu_items(content, items) %}
+  <div class="container-fluid site-width mega-menu-container">
+    <div class="row justify-content-between pb-1 pr-2 mt-2">
+      <span class="col-3 text-dark title_megamenu">{{ content.field_subtitle }}</span>
+      <a class="col-auto o-link-arrow mega-menu-global-link pt-0" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
     </div>
     <div class="row mb-2">
       {% for item in items %}
@@ -83,10 +88,41 @@ We call a macro which calls itself to render the full tree.
   </div>
 {% endmacro %}
 
-{% macro new_template_mega_menu_items(title, items) %}
-  <div class="container-fluid site-width">
+{% macro wysiwyg_template_mega_menu_items(content, items) %}
+  <div class="container-fluid site-width ml-0 pl-0">
     <div class="row">
-      <div class="pt-3 pb-4 col-3 border-right border-gray4">
+    {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
+      <div class="pr-0 col-4 border-right border-gray4">
+        <div class="w-100">
+          {{ content.field_highlight }}
+        </div>
+      </div>
+      <div class="pt-2 pb-1 pl-4 col-8">
+    {% else %}
+      <div class="pt-2 pb-1 item_megamenu_list col-12">
+    {% endif %}
+        <div class="row">
+          {% for item in items %}
+            <div class="col-6">
+              <h4 class="mb-2 p-0 title_megamenu">{{ item.title }}</h4>
+              {% if item.below %}
+                {% for sous_item in item.below %}
+                  <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
+                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'})">{{ sous_item.title }}</a>
+                {% endfor %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro product_template_mega_menu_items(title, items) %}
+  <div class="container-fluid mega-menu-container ml-0 pl-0">
+    <div class="row">
+      <div class="pt-2 pb-4 col-4 item_megamenu_list border-right border-gray4">
         <ul class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
           {% for item in items %}
             <li role="presentation">
@@ -97,18 +133,18 @@ We call a macro which calls itself to render the full tree.
           {% endfor %}
         </ul>
       </div>
-      <div class="pt-3 pb-4 col-9">
+      <div class="pt-2 pb-4 pl-0 col-8">
         <div class="tab-content sous-items pt--1">
           {% for item in items %}
             {% if item.below %}
               <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}"
                    role="tabpanel">
-                <div class="row mb-2">
-                  <div class="col-6 en_ce_moment">{{ "At the moment"|t }}</div>
+                <div class="row mb-1">
+                  <div class="col-6 en_ce_moment">{{ "Key solutions"|t }}</div>
                   <div class="col-6">
                     <a class="o-link-arrow all_product_link" href="{{ item.url }}"
-                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all products','track_type_evt':'clic'});">
-                      {{ "See all products"|t }}
+                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all solutions','track_type_evt':'clic'});">
+                      {{ "See all solutions"|t }}
                     </a>
                   </div>
                 </div>
