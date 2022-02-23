@@ -51,7 +51,7 @@ We call a macro which calls itself to render the full tree.
           </ul>
         {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
-            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below) }}
+            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below, item.title) }}
           </ul>
         {% else %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
@@ -91,7 +91,7 @@ We call a macro which calls itself to render the full tree.
     </div>
   {% endmacro %}
 
-  {% macro wysiwyg_template_mega_menu_items(content, items) %}
+  {% macro wysiwyg_template_mega_menu_items(content, items, title) %}
   <div class="container items_wysiwyg_container">
     <div class="row">
       {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
