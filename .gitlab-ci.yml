@@ -10,9 +10,10 @@ stages:          # List of stages for jobs, and their order of execution
   - update
 
 variables:
-  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
+  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
+  ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
 
 
 before_script:
@@ -49,7 +50,8 @@ Deploy dev:
 Build drupal:
   stage: build
   script:
-    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE up -d
+    - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
+    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
