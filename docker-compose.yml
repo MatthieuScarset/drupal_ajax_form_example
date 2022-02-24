@@ -5,9 +5,11 @@ version: "3.1"
 services:
     memcached:
       image: memcached:alpine
+      container_name: $CONTAINER_MEMCACHED
 
     mailhog:
       image: mailhog/mailhog:latest
+      container_name: $CONTAINER_MAILHOG
       ports:
         - "${MAILHOG_PORT:-8025}:8025"
       networks:
