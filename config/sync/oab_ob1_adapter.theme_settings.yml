@@ -4,10 +4,12 @@ fr:
     category_page:
       - category_page
   contents: {  }
+  routes: {  }
 en:
-  url:
-    - /where-we-are
+  url: {  }
   views:
     category_page:
       - category_page
   contents: {  }
+  routes:
+    - oab_offices_map.page

@@ -2391,7 +2391,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="#" class="show_on_map" data-location="{{ field_office_location|trim }}"><small>Afficher sur la carte</small></a>'
+            text: '<a href="#" class="show_on_map" data-location="{{ field_office_location|trim }}">Afficher sur la carte</a>'
             make_link: false
             path: ''
             absolute: false
