@@ -1,6 +1,5 @@
 <a class="btn btn-primary p-0 m-0 row d-flex wrapper_numero" href="tel:{{ element.0['#title'] |replace({' ': ''}) }}"
-   onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'contact button','track_nom':'Card',
-     'track_cible':'{{ element.0['#title'] }}','track_type_evt':'clic'})">
+   onmousedown="utag_link(utag_data.titre_page,'contact button','Card','{{ element.0['#title'] }}')">
   <span class=" col-6 px-1 numero font-weight-bold">{{ element.0['#title'] }}</span>
   <span class="col-6 px-1 helper_numero">
     <span class="icon icon-Play"></span>

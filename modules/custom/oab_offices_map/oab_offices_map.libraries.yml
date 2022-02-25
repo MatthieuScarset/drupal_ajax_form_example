@@ -1,7 +1,6 @@
 oab_offices_map.markers:
   version: VERSION
   js:
-    https://maps.googleapis.com/maps/api/js?key=AIzaSyBt9DyqcmbFirrJ1iicRr6NQqwr7XjgecQ&callback=initMap : { type: external }
     js/infobox.js: {}
     js/mapcontrol.js: {}
     js/markers.js: {}
@@ -11,4 +10,18 @@ oab_offices_map.markers:
     theme:
       css/styleMarkersList.css: {}
       css/markers.css: {}
-      css/page-offices.css: {}
+
+
+oab_offices_map.boosted:
+   css:
+     theme:
+      css/page-offices.boosted.css: {}
+   dependencies:
+     - oab_offices_map/oab_offices_map.markers
+
+oab_offices_map.one_i:
+   css:
+     theme:
+       css/page-offices.onei.css: {}
+   dependencies:
+      - oab_offices_map/oab_offices_map.markers

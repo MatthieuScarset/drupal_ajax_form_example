@@ -12,6 +12,7 @@ Specific HP with background in carrousel
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-position-y: 50px;
 
   -webkit-transition: opacity .4s ease-in-out;
   -moz-transition: opacity .4s ease-in-out;
@@ -38,27 +39,8 @@ Specific HP with background in carrousel
 
     .oab_background_image .view-business-insight .view-filters {
         padding-bottom: 2rem;
-        background-color: transparent;
     }
 
-    .oab_background_image header .navbar-default {
-        background: none;
-    }
-
-    /* Suppression du background-color:black pour la main nav */
-    .oab_background_image .mega-menu.navbar {
-        background: none;
-    }
-
-    /* Suppression du background-color: black sur la navbar tout en haut (celle avec Global) */
-    .oab_background_image header #navtop {
-        background: none;
-    }
-
-    .oab_background_image .navbar-inverse,
-    .oab_background_image .oab-synomia-search-header-block-form .top-block-search-form .form-text {
-        background: none;
-    }
 
     /* Changement de la bordure : elle ne prend plus toute la longueur, mais que la taille du navbar */
     .oab_background_image .subnav {
@@ -69,14 +51,8 @@ Specific HP with background in carrousel
         padding: 0;
     }
 
-    /* Je met un backgroudn semi-transparent sur la navbar quand elle passe en sticky */
-    .oab_background_image .subnav.navbar-fixed {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
     .oab_background_image .subnav .container-fluid-navbar {
         border-top: 2px solid grey;
-        border-bottom: 2px solid grey;
 
         /* Je réapplique les padding supprimés precedement */
         padding: 25px 0 0;
@@ -92,13 +68,9 @@ Specific HP with background in carrousel
 
     .oab_background_image .fieldset-field-insight-type .btn,
     .oab_background_image .fieldset-field-insight-type .btn.btn-primary {
-        background-color: transparent;
         border: none;
     }
 
-    .oab_background_image .subhomes-filterbar-background {
-        background-color: transparent;
-    }
 
     .oab_background_image .fieldset-field-insight-type .fieldset-legend {
         display: none;
@@ -175,7 +147,7 @@ Specific HP with background in carrousel
     }
 
     .oab_background_image .fieldset-field-insight-type .btn {
-        padding: .3rem 1.8rem 1rem 0rem;
+        padding: .3rem 1.8rem 1rem 0;
     }
 
     .oab_background_image .view-business-insight .view-filters {
@@ -197,9 +169,6 @@ Specific HP with background in carrousel
         padding: 0;
     }
 
-    .oab_background_image .subhomes-filterbar-background {
-        background-color: transparent;
-    }
 
     .oab_background_image .business-insight-field-insight {
         padding: 0;
@@ -228,6 +197,13 @@ Specific HP with background in carrousel
     }
 }
 
+
+@media(min-width: 976px) {
+  /* Correctif Mep correctif mega-menu RUBYPORTAILOBS-3874 */
+  .hp-background-carousel {
+    background-position-y: 85px;
+  }
+}
 
 .oab_background_image .new-btn-see-all-business-insight {
   color: white;

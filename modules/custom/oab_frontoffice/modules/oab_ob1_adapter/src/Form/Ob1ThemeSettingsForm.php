@@ -117,6 +117,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       $selected_displays = array_filter($form_state->getValue($langcode . '_selected_displays'));
       $selected_contents = array_filter($form_state->getValue($langcode . '_selected_contents'));
       $selected_urls = $form_state->getValue($langcode . '_url');
+      $selected_routes = $form_state->getValue($langcode . '_routes');
 
       $url_selected_to_save = [];
       $url_elems = array_filter(array_map('trim', explode("\n", $selected_urls)));
@@ -139,6 +140,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       $conf['url'] = $url_selected_to_save;
       $conf['views'] = $selected_to_save;
       $conf['contents'] = $content_selected_to_save;
+      $conf['routes'] = array_filter(array_map('trim', explode("\n", $selected_routes)));
       $config->set($langcode, $conf);
     }
     $config->save();
@@ -173,6 +175,19 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       '#title' => t('List url One-i'),
       '#description' => t('Specify pages by using their paths. Enter one path per line without the langcode for ex: \'/en \'.'),
       '#default_value' => implode(PHP_EOL, $conf['url']) ?? ''
+    ];
+
+    $tab['routes'] = [
+      '#type' => "details",
+      '#open' => false,
+      '#title' => t("Routes conf")
+    ];
+
+    $tab['routes'][$langcode . '_routes'] = [
+      '#type' => 'textarea',
+      '#title' => t('List routes One-i'),
+      '#description' => t('Specify pages by using their routename. Enter one path per line without the langcode for ex: \'/en \'.'),
+      '#default_value' => implode(PHP_EOL, $conf['routes']) ?? ''
     ];
 
     $tab['views'] = [

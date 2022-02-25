@@ -109,6 +109,8 @@ class OabExtension extends AbstractExtension {
       }
       kint($kint_variable);
       die();
+    } else {
+      oabt($args, true);
     }
   }
 

@@ -9,6 +9,7 @@ services:
       - { name: breadcrumb_builder, priority: 100 }
   oab_frontoffice_product.breadcrumb:
     class: Drupal\oab_frontoffice\Breadcrumb\ProductBreadcrumbBuilder
+    arguments: ['@entity_type.manager']
     tags:
       - { name: breadcrumb_builder, priority: 101 }
   oab_frontoffice.twig.OabExtension:
@@ -19,7 +20,12 @@ services:
   oab_frontoffice.smart_redirection:
       class: Drupal\oab_frontoffice\EventSubscriber\SmartRedirectionEvent
       tags:
-         - { name: event_subscriber }
+         - { name: event_subscriber, priority: 100 }
+  oab_frontoffice.json_exception_rewriting:
+      class: Drupal\oab_frontoffice\EventSubscriber\JsonExceptionRewriting
+      arguments: ['@current_route_match']
+      tags:
+         - { name: event_subscriber, priority: 101 }
   cache.twitter_api:
       class: Drupal\Core\Cache\CacheBackendInterface
       tags:

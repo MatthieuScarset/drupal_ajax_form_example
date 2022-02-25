@@ -44,6 +44,11 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
       return;
     }
 
+    //Gestion des erreurs de la JSON Api par un autre service
+    $path = \Drupal::service('path.current')->getPath();
+    if (strpos($route_name, 'jsonapi') !== false || strpos($path, 'jsonapi') !== false) {
+      return;
+    }
 
     #On vérifie le code de retour (S'il existe, et si 404 ou 403)
     if (method_exists($event->getThrowable(), "getStatusCode")

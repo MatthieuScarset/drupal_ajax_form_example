@@ -14,7 +14,7 @@ use Drupal\node\Entity\Node;
  *   id = "dvi_contact_distributor_block",
  *   admin_label = @Translation("Dvi - Contact Distributor Block"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

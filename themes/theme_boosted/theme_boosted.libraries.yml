@@ -70,6 +70,7 @@ bvpn_galery:
   js:
     js/bvpn_map/csp_markers.js: {}
     js/bvpn_map/csp_mapcontrol.js: {}
+    js/bvpn_map/bvpn-list-page.js: {}
 
 contact-button:
   version: VERSION

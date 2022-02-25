@@ -15,7 +15,7 @@ use Drupal\node\Entity\Node;
  *   id = "rebond_product_block",
  *   admin_label = @Translation("Rebond product"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

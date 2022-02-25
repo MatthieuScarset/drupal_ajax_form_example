@@ -36,27 +36,29 @@
 }
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .form-submit{
   margin-left: 10px;
-}
+}/*
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map
 {
   background-color: black;
   color: #fff;
-}
+}*/
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map.active:hover
 {
   background-color: #f16e00;
   color: #fff;
-}
+}/*
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:hover,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_submit_filter_search_map:active,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:hover,
 .view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:active{
   background-color: white;
    color: #000;
- }
-.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:disabled{
+ }*/
+
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-map-page .form-actions .btn_clear_filter_search_map:disabled,
+.view-bvpn-gallery #views-exposed-form-bvpn-gallery-csp-list-page .form-actions .btn_clear_filter_list_csp:disabled{
   color: #fff;
   background-color: #ccc;
   border-color: #ccc;
@@ -90,29 +92,6 @@
   margin-bottom: 2px;
   font-weight: bold;
 }
-/*
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-search i,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .submit-link,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-reset,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .top-btn-reset i,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .reset-link{
-  position: absolute;
-  top: 15px;
-  right: 15px;
-}
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .submit-link,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .reset-link{
-  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-  border: 0 none;
-  display: inline-block;
-}
-
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .glyphicon-search,
-.csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .glyphicon-remove {
-  font-size: 2.8rem !important;
-}
-*/
 .csp-listing .view-bvpn-gallery .view-filters #views-exposed-form-bvpn-gallery-csp-list-block .form-item-title input{
   float: left;
   width: 100%;

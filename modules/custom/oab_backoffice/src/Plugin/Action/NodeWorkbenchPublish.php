@@ -33,10 +33,10 @@ class NodeWorkbenchPublish extends ActionBase {
     if (!empty($config) && !empty($config->get('third_party_settings'))) {
       $moderation_enabled = $config->get('third_party_settings.workbench_moderation.enabled');
     }
-    if($moderation_enabled){
+    if ($moderation_enabled) {
       $entity->set('moderation_state', array('target_id' => 'published'));
     }
-    else{
+    else {
       $entity->setPublished(true);
     }
 

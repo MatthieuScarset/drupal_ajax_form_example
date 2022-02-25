@@ -51,7 +51,7 @@ We call a macro which calls itself to render the full tree.
           </ul>
         {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
-            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below) }}
+            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below, item.title) }}
           </ul>
         {% else %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
@@ -76,7 +76,7 @@ We call a macro which calls itself to render the full tree.
       {% for item in items %}
         {% set link_target = item.url.options.target ? '_blank' : '_self' %}
         <div class="col-xs-12 col-lg-4 item_soft_col">
-          <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.type_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
+          <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
           {% if item.below %}
             <ul class="sous-items">
               {% for sous_item in item.below %}
@@ -91,7 +91,7 @@ We call a macro which calls itself to render the full tree.
     </div>
   {% endmacro %}
 
-  {% macro wysiwyg_template_mega_menu_items(content, items) %}
+  {% macro wysiwyg_template_mega_menu_items(content, items, title) %}
     <div class="container items_wysiwyg_container">
       <div class="row">
       {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
@@ -133,7 +133,7 @@ We call a macro which calls itself to render the full tree.
             <li role="presentation">
               <a class="items" href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}"
                  aria-controls="item-{{ loop.index }}"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})"
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ item.title }}')"
                  role="tab">{{ item.title }} </a>
             </li>
           {% endfor %}
@@ -156,7 +156,7 @@ We call a macro which calls itself to render the full tree.
                 {% for sous_item in item.below %}
                   <div class="sous-items col-xs-6">
                     <a href="{{ sous_item.url }}"
-                       onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
+                       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}_{{ item.title }}','{{ sous_item.title }}');">{{ sous_item.title }}
                       <p class="teaser">{{ sous_item.entity.field_teaser.value }}</p>
                     </a>
                   </div>

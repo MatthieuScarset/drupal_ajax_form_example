@@ -1204,6 +1204,7 @@ nav .menu.navbar-nav a:focus {
 
 .mega-menu .items_list_wysiwyg_container .sous-items > li > a:hover {
   color: #f16e00;
+  font-weight: bold;
 }
 
 .mega-menu .items_list_wysiwyg_container .sous-items > li:first-child > a {
@@ -1274,6 +1275,14 @@ nav .menu.navbar-nav a:focus {
   text-decoration: none;
   font-weight: normal;
 }
+
+.mega-menu a.o-link-arrow::after {
+  color: darkorange;
+}
+.mega-menu a.o-link-arrow.o-link-reverse {
+  color: #fff;
+}
+
 
 .mega-menu .items_wysiwyg_container .mega_menu_template p > .btn {
   padding: 1.3rem 4.5rem;

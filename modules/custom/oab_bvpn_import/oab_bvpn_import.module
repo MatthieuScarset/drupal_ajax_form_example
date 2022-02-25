@@ -1,1 +1,18 @@
 <?php
+
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_build().
+ */
+function oab_bvpn_import_views_pre_view(ViewExecutable $view) {
+  if ($view->id() == 'bvpn_gallery' && $view->current_display === 'csp_list_block') {
+    $request = \Drupal::request();
+    if ($request->request->has('csp_list_filter_title')) {
+      $filters = $view->display_handler->getOption('filters');
+      $filters['title']['value'] = $request->request->get('csp_list_filter_title');
+      $view->display_handler->overrideOption('filters', $filters);
+    }
+  }
+}
+

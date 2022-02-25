@@ -13,7 +13,7 @@ use Drupal\node\Entity\Node;
  *   id = "zone_rebond_wysiwyg_block",
  *   admin_label = @Translation("Zone rebond: WYSIWYG"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")
