@@ -63,6 +63,8 @@ Build Drupal:
   after_script:
     ## Clean Up Repo
     - rm composer.phar
+    - cd build
+    - ls -la
     - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc README.md web.config
   artifacts:
     paths:
@@ -71,6 +73,7 @@ Build Drupal:
 
 Build Image:
   stage: build_image
+  image: docker
   dependencies:
     - Build Drupal
   before_script:
