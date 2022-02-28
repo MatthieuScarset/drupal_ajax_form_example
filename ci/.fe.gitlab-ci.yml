@@ -76,6 +76,5 @@ Build Image:
   before_script:
     - docker info
   script:
-    -
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile
 
