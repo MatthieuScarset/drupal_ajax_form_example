@@ -31,6 +31,7 @@ Prepare Drupal:
     - cp -r modules build/
     - cp -r patches build/
     - cp -r themes build/
+    - cp -r sites build/
     - cp composer.* build/
     - cp load.environment.php build/
   artifacts:
@@ -74,7 +75,9 @@ Build Drupal:
 
 Build Image:
   stage: build_image
-  image: docker
+  image: docker:19.03.12-dind
+  services:
+    - docker:19.03.12-dind
   dependencies:
     - Build Drupal
 #  before_script:
