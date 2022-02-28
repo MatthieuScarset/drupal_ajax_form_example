@@ -64,8 +64,9 @@ Build Drupal:
     ## Clean Up Repo
     - rm composer.phar
     - cd build
-    - ls -la
-    - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc README.md web.config
+    - ls -la sites/
+    - ls -la sites/default
+    - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc web.config
   artifacts:
     paths:
       - build
@@ -76,8 +77,8 @@ Build Image:
   image: docker
   dependencies:
     - Build Drupal
-  before_script:
-    - docker info
+#  before_script:
+#    - docker info
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile
 
