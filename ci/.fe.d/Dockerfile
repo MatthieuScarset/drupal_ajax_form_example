@@ -6,5 +6,8 @@ FROM php:8.0
 #COPY --chown=nobody:www-data ./config /var/www
 
 ADD ./build /var/www/html/
-COPY ./config /var/www
+
+RUN mkdir /var/www/config
+COPY ./config/sync /var/www/config/
+COPY ./config/config_split /var/www/config/
 

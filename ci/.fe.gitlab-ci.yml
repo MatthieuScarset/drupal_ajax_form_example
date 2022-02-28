@@ -76,6 +76,6 @@ Build Image:
   before_script:
     - docker info
   script:
-    - cp ci/.fe.d/settings.local.php build/sites/default/
+    -
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile
 

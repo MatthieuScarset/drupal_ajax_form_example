@@ -272,7 +272,7 @@ $settings['hash_salt'] = 'Y8XRwwKDjI01iYOvOjzxJYlakgp5Jo_vIp9eASW96JqetVu1M0i7dM
  * After finishing the upgrade, be sure to open this file again and change the
  * TRUE back to a FALSE!
  */
-$settings['update_free_access'] = TRUE;
+$settings['update_free_access'] = FALSE;
 
 /**
  * Fallback to HTTP for Update Manager and for fetching security advisories.
@@ -752,6 +752,29 @@ $settings['entity_update_backup'] = TRUE;
  */
 $settings['migrate_node_migrate_type_classic'] = FALSE;
 
+
+/**
+ * ADD EDITED CONF HERE
+ */
+
+$settings['config_sync_directory'] = '../config/sync';
+
+$settings['update_free_access'] = FALSE;
+
+$config['config_split.config_split.prp']['status'] = getenv('ENV') === "prp";
+$config['config_split.config_split.prod']['status'] = getenv('ENV') === "prod";
+
+$databases['default']['default'] = array (
+  'database' => getenv('MARIADB_DB'),
+  'username' => getenv('MARIADB_USER'),
+  'password' => getenv('MARIADB_PWD'),
+  'host' => getenv('MARIADB_HOST'),
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+
+
 /**
  * Load local development override configuration, if available.
  *
@@ -765,18 +788,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
-
-$databases['default']['default'] = array (
-  'database' => getenv('MARIADB_DB'),
-  'username' => getenv('MARIADB_USER'),
-  'password' => getenv('MARIADB_PWD'),
-  'host' => getenv('MARIADB_HOST'),
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
 
