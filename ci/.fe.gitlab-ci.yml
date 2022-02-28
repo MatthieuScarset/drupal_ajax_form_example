@@ -56,7 +56,7 @@ Build Drupal:
     - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
     - pecl install imagick > /dev/null
     - docker-php-ext-enable imagick > /dev/null
-    - docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir > /dev/null
+    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
     - docker-php-ext-install gd > /dev/null
     - docker-php-ext-enable gd > /dev/null
   script:
