@@ -66,6 +66,7 @@ Build Drupal:
     ## Clean Up Repo
     - rm composer.phar
     - cd build
+    - ls -la
     - rm -r patches INSTALL.txt .ht.router.php composer.*
     - ls -la
   artifacts:
