@@ -32,7 +32,7 @@ Prepare Drupal:
   script:
     - mkdir build
     - cp -r modules build/
-    - cp -r patched build/
+    - cp -r patches build/
     - cp -r themes build/
     - cp composer.* build/
     - cp load.environment.php build/
