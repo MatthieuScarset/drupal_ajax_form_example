@@ -10,7 +10,25 @@ use Drupal\oab_bvpn_import\Classes\CSPImport;
 
 class OabSettingsCSPImportForm extends FormBase
 {
-
+    /**
+     * @var ExtensionPathResolver
+     */
+    private $pathResolver;
+    /**
+     * @var FileSystemInterface
+     */
+    private $fileSystem;
+    public function __construct(ExtensionPathResolver $extension_path_resolver,
+                                FileSystemInterface $file_system) {
+      $this->pathResolver = $extension_path_resolver;
+      $this->fileSystem = $file_system;
+    }
+    public static function create(ContainerInterface $container) {
+      return new self(
+        $container->get('extension.path.resolver'),
+        $container->get('file_system')
+      );
+    }
     /**
      * Returns a unique string identifying the form.
      *
@@ -102,10 +120,8 @@ class OabSettingsCSPImportForm extends FormBase
     /** Méthode appelée lorsqu'on clique sur le bouton Importer
      */
     public function executeImportHandler(array &$form, FormStateInterface $form_state) {
-
-        $input = &$form_state->getUserInput();
-        $import = new CSPImport();
-        //kint($input["filename"]);die();
-        $import->executeImport($input["filename"]);
+      $input = &$form_state->getUserInput();
+      $import = new CSPImport($this->pathResolver, $this->fileSystem);
+      $import->executeImport($input["filename"]);
     }
 }
