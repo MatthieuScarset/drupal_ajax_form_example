@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.0-fpm
 
 WORKDIR "/application"
 
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-d
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # GD & MySql
-RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir \
+RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype \
   && docker-php-ext-install gd pdo_mysql \
   && docker-php-ext-enable gd
 
@@ -54,6 +54,9 @@ RUN apt-get update && apt-get install -y nodejs npm
 
 # Install yarn
 RUN npm install -g yarn
+
+# Verifie si le groupe oab_web existe et la crée s'il n'existe pas
+RUN [ ! $(getent group oab_web) ] && addgroup --gid $GID oab_web || true
 
 # User
 RUN adduser --uid $UID --gid $GID oab_web
