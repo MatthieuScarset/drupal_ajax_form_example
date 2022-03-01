@@ -924,7 +924,7 @@ aside.right-column > .region{
 /*For Desktop*/
 @media (min-width: 480px) {
   .subhomes-filterbar-background {
-    background-color: transparent;
+    background-color: #ededed;
     padding: 20px 30px;
     margin-left: -30px;
     margin-right: -30px;
@@ -932,6 +932,10 @@ aside.right-column > .region{
   #views-exposed-form-subhomes-page-iot-products.subhomes-filterbar-background,
   #views-exposed-form-subhomes-page-achievements-iot.subhomes-filterbar-background {
     margin-left: -20px;
+  }
+
+  #views-exposed-form-business-insight-business-insight-page.views-exposed-form.subhomes-filterbar-background {
+    background-color: transparent;
   }
 }
 /*for Mobile */
