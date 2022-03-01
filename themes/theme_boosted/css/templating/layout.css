@@ -924,7 +924,8 @@ aside.right-column > .region{
 /*For Desktop*/
 @media (min-width: 480px) {
   .subhomes-filterbar-background {
-    background-color: #ededed;
+    /*background-color: #ededed;*/
+    background-color: transparent;
     padding: 20px 30px;
     margin-left: -30px;
     margin-right: -30px;
