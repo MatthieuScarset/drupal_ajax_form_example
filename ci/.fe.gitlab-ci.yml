@@ -80,7 +80,8 @@ Build Image:
 #    DOCKER_HOST: tcp://localhost:2375
     DOCKER_TLS_CERTDIR: "/certs"
   services:
-    - docker:19.03.12-dind
+    - name: docker:19.03.12-dind
+      alias: docker
 #  dependencies:
 #    - Build Drupal
   before_script:
