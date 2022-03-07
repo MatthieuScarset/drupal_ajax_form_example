@@ -1,0 +1,19 @@
+uuid: d2c57d9f-2998-422a-b561-15876e64b3e0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_subtitle
+    - system.menu.main-navigation-fr
+id: menu_link_content.main-navigation-fr.field_subtitle
+field_name: field_subtitle
+entity_type: menu_link_content
+bundle: main-navigation-fr
+label: subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

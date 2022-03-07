@@ -51,7 +51,6 @@ global-styling:
     - core/jquery.ui
     - core/jquery.ui.effects.slide
     - core/drupal
-    - js/orange_socialbar_settings.js
     - oab_icomoon/icomoon
 
 socialbar:
@@ -71,6 +70,7 @@ bvpn_galery:
   js:
     js/bvpn_map/csp_markers.js: {}
     js/bvpn_map/csp_mapcontrol.js: {}
+    js/bvpn_map/bvpn-list-page.js: {}
 
 contact-button:
   version: VERSION

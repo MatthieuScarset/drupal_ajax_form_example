@@ -10,7 +10,6 @@
 
   window.addEventListener("click", function(event) {
     $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').each(function(key, elem) {
-      console.log(elem);
       if ($(elem).hasClass('show')) {
         $(elem).collapse("toggle");
         $(elem).parent().removeClass('active');

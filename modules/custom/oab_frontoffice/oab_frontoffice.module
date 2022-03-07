@@ -394,7 +394,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
           $form['location']['#options'] = $options;
         }
       }
-
+/*
       $form['actions']['reset'] =array(
         '#value' => "Clear",
         '#type' => "submit",
@@ -410,12 +410,13 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
       if($currentLocation != 'All'){
         unset($form['actions']['reset']['#attributes']['disabled']);
       }
-
+*/
 
       $form['actions']['submit']['#value'] = t('Filter');
       $form['actions']['submit']['#attributes'] = array(
+        'data-twig-suggestion' => 'form-bvpn-gallery-csp-map-page',
         'class' => array(
-          'btn_submit_filter_search_map'
+          'btn_submit_filter_search_map', 'btn-info'
         )
       );
     }
@@ -437,6 +438,22 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
           && $value['#type'] == "textfield") {
           $form[$key] = change_textfield_to_select($key);
         }
+      }
+      $form['actions']['submit']['#attributes'] = array(
+        'class' => array(
+          'btn-info',
+          'btn_submit_filter_search_list_csp'
+        )
+      );
+      if (isset($form['actions']['reset']['#access'])) {
+        $form['actions']['reset'] = array(
+          '#value' => "Clear",
+          '#type' => "submit",
+          '#access' => true,
+          '#attributes' => array(
+            'class' => array('btn_clear_filter_list_csp'),
+            'disabled' => 'disabled'),
+        );
       }
     }
 

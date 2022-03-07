@@ -100,6 +100,15 @@
     "file": "files/powerpage/pourquoi-obs-1-1-1.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/powerpage/pourquoi-obs-1-1-1.jpg"
   }]
+}, {
+  "id": "mega-menu",
+  "label": "Mega-menu",
+  "title": "Mega-menu",
+  "items": [ {
+    "label": "Highligth",
+    "file": "files/megamenu/highlight.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/megamenu/highlight.jpg"
+  }]
 },{
   "id": "mss_assistance",
   "label": "MSS Assistance",

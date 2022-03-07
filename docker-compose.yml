@@ -3,56 +3,60 @@
 ###############################################################################
 version: "3.1"
 services:
-
     memcached:
       image: memcached:alpine
-      container_name: ruby_memcached
+      container_name: $CONTAINER_MEMCACHED
 
     mailhog:
       image: mailhog/mailhog:latest
-      container_name: ruby_mailhog
+      container_name: $CONTAINER_MAILHOG
       ports:
-        - "8025:8025"
+        - "${MAILHOG_PORT:-8025}:8025"
+      networks:
+        - mailhog
 
     mariadb:
       image: mariadb:10.3
-      container_name: ruby_mariadb
+      container_name: $CONTAINER_MARIADB
       volumes:
-        - ./config/data/db_dumps:/tmp/db_dumps
+        - ${DB_DUMPS_DIR:-./data/db_dumps}:/tmp/db_dumps
+        - ${MYSQL_DIR:-/var/lib/mysql}:/var/lib/mysql
       environment:
-        MYSQL_ROOT_PASSWORD: 'adminsql'
-        MYSQL_DATABASE: 'drupal'
-        MYSQL_USER: 'oab_web'
-        MYSQL_PASSWORD: 'ruby69!'
+        MYSQL_ROOT_PASSWORD: $MARIADB_ROOT_PWD
+        MYSQL_DATABASE: $MARIADB_DB
+        MYSQL_USER: $MARIADB_USER
+        MYSQL_PASSWORD: $MARIADB_PWD
       ports:
-        - "3306:3306"
+        - "${MARIADB_EXTERNAL_PORT:-3306}:${MARIADB_PORT:-3306}"
+      networks:
+        - database
 
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
-      container_name: ruby_phpmyadmin
       depends_on:
-        - mariadb
-      links:
         - mariadb
       ports :
-        - "8080:80"
+        - "${PHPMYADMIN_PORT:-8080}:80"
       environment:
-        PMA_HOST: 'mariadb:3306'
+        PMA_HOST: 'mariadb'
+      networks:
+        - database
 
-    webserver:
-      image: nginx:alpine
-      container_name: ruby_webserver
+    nginx:
+      build:
+        context: config/docker/local/nginx
+      container_name: $CONTAINER_NGINX
       working_dir: /application
+      environment:
+        CONTAINER_PHP_FPM: $CONTAINER_PHP_FPM
       depends_on:
-        - mariadb
-      links:
-        - mariadb
+        - php-fpm
       volumes:
         - .:/application
-        - ./config/docker/local/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-        - ./config/logs:/tmp/logs
       ports:
-        - "8000:80"
+        - "${APP_PORT:-8000}:80"
+      networks:
+        - proxy
 
     php-fpm:
       build:
@@ -60,13 +64,20 @@ services:
         args:
           UID: $UID
           GID: $GID
-      container_name: ruby_php-fpm
+      container_name: $CONTAINER_PHP_FPM
       working_dir: /application
       depends_on:
-        - mariadb
-      links:
         - mariadb
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-        #- /app-vendor
+        - ${DRUPAL_SITES_DIR:-./sites}:/application/sites
+      networks:
+        - proxy
+        - database
+        - mailhog
+
+networks:
+    proxy:
+    database:
+    mailhog:

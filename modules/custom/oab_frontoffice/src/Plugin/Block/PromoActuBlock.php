@@ -15,7 +15,7 @@ use Drupal\node\Entity\Node;
  *   id = "promo_actu_block",
  *   admin_label = @Translation("Promo Actu"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

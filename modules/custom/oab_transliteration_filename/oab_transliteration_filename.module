@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\File\FileSystemInterface;
+
 /**
  * Implements hook_ENTITY_TYPE_field_values_init().
  */
@@ -15,14 +17,17 @@ function oab_transliteration_filename_file_field_values_init($entity) {
  */
 function oab_transliteration_filename_file_presave($entity) {
     $filename_postprocessor = Drupal::service('oab_transliteration_filename.filename_postprocessor');
+
+    /** @var FileSystemInterface $file_system */
+    $file_system = Drupal::service('file_system');
     $new_filename = $filename_postprocessor->process($entity->getFilename());
-    if ($new_filename != Drupal::service('file_system')->basename($entity->getFileUri())) {
+    if ($new_filename != $file_system->basename($entity->getFileUri())) {
         $uri = $entity->getFileUri();
-        $directory = Drupal::service('file_system')->dirname($uri);
+        $directory = $file_system->dirname($uri);
         $uri = $directory . '/' . $new_filename;
-        if ($new_uri = \Drupal::service('file_system')->move($entity->getFileUri(),$uri, \Drupal::service('file_system')::EXISTE_RENAME)) {
+        if ($new_uri = $file_system->move($entity->getFileUri(),$uri, FileSystemInterface::EXISTS_RENAME)) {
             $entity->set('uri', $new_uri);
-            $entity->set('filename', Drupal::service('file_system')->basename($new_uri));
+            $entity->set('filename', $file_system->basename($new_uri));
         }
     }
 }

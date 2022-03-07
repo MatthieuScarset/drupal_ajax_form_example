@@ -41,6 +41,9 @@ module:
   history: 0
   image: 0
   inline_entity_form: 0
+  jsonapi: 0
+  jsonapi_defaults: 0
+  jsonapi_extras: 0
   language: 0
   link: 0
   linkit: 0
@@ -72,6 +75,7 @@ module:
   oab_cookie_compliance: 0
   oab_data_import: 0
   oab_develop: 0
+  oab_didomi: 0
   oab_dvi: 0
   oab_entity_embed_link: 0
   oab_frontoffice: 0
@@ -117,6 +121,7 @@ module:
   roleassign: 0
   scheduled_updates: 0
   seckit: 0
+  serialization: 0
   shortcut: 0
   simplify: 0
   system: 0

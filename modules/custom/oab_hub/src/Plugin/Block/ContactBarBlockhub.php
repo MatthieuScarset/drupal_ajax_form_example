@@ -12,7 +12,7 @@ use Drupal\node\Entity\Node;
  *   id = "contact_bar_block_hub",
  *   admin_label = @Translation("Contact Bar Hub"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

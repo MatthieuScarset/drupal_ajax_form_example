@@ -18,7 +18,7 @@ use Drupal\image\Entity\ImageStyle;
  *   id = "top_zone_block",
  *   admin_label = @Translation("Top Zone"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

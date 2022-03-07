@@ -17,6 +17,7 @@ dependencies:
     - taxonomy.vocabulary.regions
   module:
     - geolocation
+    - geolocation_leaflet
     - node
     - taxonomy
     - user
@@ -1848,7 +1849,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h2
+          element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -1873,7 +1874,7 @@ display:
           delta_first_last: false
           multi_type: separator
           separator: ', '
-          field_api_classes: false
+          field_api_classes: true
           entity_type: node
           entity_field: title
           plugin_id: field
@@ -2390,7 +2391,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="#" class="show_on_map" data-location="{{ field_office_location|trim }}"><small>Afficher sur la carte</small></a>'
+            text: '<a href="#" class="show_on_map" data-location="{{ field_office_location|trim }}">Afficher sur la carte</a>'
             make_link: false
             path: ''
             absolute: false

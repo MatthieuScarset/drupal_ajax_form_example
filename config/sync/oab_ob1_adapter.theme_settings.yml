@@ -1,12 +1,15 @@
 fr:
-  url: /page-refonte-header-mega-menu-en-one-i
+  url: {  }
   views:
     category_page:
       - category_page
   contents: {  }
+  routes: {  }
 en:
-  url: /page-refonte-header-mega-menu-en-one-i
+  url: {  }
   views:
     category_page:
       - category_page
   contents: {  }
+  routes:
+    - oab_offices_map.page

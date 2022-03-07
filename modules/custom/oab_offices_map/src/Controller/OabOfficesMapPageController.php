@@ -124,19 +124,32 @@ class OabOfficesMapPageController extends ControllerBase {
                     ->getForm('Drupal\oab_offices_map\Form\MapRegionsCountriesForm');
 
                 $list_label = t('All offices');
+
                 if ($region_id != 'all') {
                     $region = \Drupal\taxonomy\Entity\Term::load($region_id);
                     $list_label = $region->label() . ' offices';
                 }
+
+                # The block "page title" is used for Boosted, and hidden for theme One-I
+                $page_title = \Drupal::theme()->getActiveTheme()->getName() === 'theme_one_i'
+                  ? $this->getPageTitle()
+                  : '';
+
+                $library = \Drupal::theme()->getActiveTheme()->getName() === 'theme_one_i'
+                  ? 'oab_offices_map/oab_offices_map.one_i'
+                  : 'oab_offices_map/oab_offices_map.boosted';
+
+
                 return array(
                     '#mapBlock' => $map_block,
                     '#officesListBlock' => $offices_list_block,
                     '#regionsCountriesForm' => $regions_countries_form,
+                    '#page_title' => $page_title,
                     '#labelList' => $list_label,
                     '#theme' => 'offices_map_page',
                     '#attached' => array(
                         'library' => array(
-                            'oab_offices_map/oab_offices_map.markers'
+                            $library
                         ),
                         'drupalSettings' => array(
                             'countriesRegionsTab' => getArrayRegionsCountries(),

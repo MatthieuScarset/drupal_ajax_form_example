@@ -1,0 +1,6 @@
+oab_didomi.settings_link:
+  title: Didomi settings
+  route_name: oab_didomi.settings_route
+  parent: oab.settings
+  description: 'Didomi settings'
+  weight: -20

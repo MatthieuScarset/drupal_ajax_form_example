@@ -20,7 +20,7 @@ use Drupal\media\Entity\Media;
  * Méthode executée pour chaque ligne du fichier d'import des CSV
  *
  */
-function oab_bvpn_import_batch($columns, $lineNumber, &$context) {
+function oab_bvpn_import_batch($columns, $line_number, &$context) {
 
   $context['results']['total'][]  = 1; // pour compter le nombre de lignes traitées après
 
@@ -76,67 +76,67 @@ function oab_bvpn_import_batch($columns, $lineNumber, &$context) {
 
   // CSP Location = > champs geolocation multiple
   // format dans le csv : "lat, lng","lat2, lng2",...
-  $allCoordinates = array();
-  $geolocArray = explode('","',$csp['field_csp_location']);
-  if(count($geolocArray) > 0){
-    foreach ($geolocArray as $geolocItem){
-      $geolocItem = str_replace('"','',$geolocItem);
-      $coordinates = explode(',', $geolocItem);
-      if(count($coordinates) > 1) {
-        $allCoordinates[] = ['lat' => trim($coordinates[0]), 'lng' => trim($coordinates[1])];
+  $all_coordinates = array();
+  $geoloc_array = explode('","',$csp['field_csp_location']);
+  if (count($geoloc_array) > 0) {
+    foreach ($geoloc_array as $geoloc_item) {
+      $geoloc_item = str_replace('"','', $geoloc_item);
+      $coordinates = explode(',', $geoloc_item);
+      if (count($coordinates) > 1) {
+        $all_coordinates[] = ['lat' => trim($coordinates[0]), 'lng' => trim($coordinates[1])];
       }
-      else{
-        logErrorMessage($lineNumber, $csp['title'], 'incorrect format gps coordinates (Location) ', $csp['field_csp_location'], $context);
+      else {
+        logErrorMessage($line_number, $csp['title'], 'incorrect format gps coordinates (Location) ', $csp['field_csp_location'], $context);
       }
     }
   }
-  $node->set('field_csp_location', $allCoordinates);
+  $node->set('field_csp_location', $all_coordinates);
 
 
   // Location - Taxo Location : peuvent être multiples, séparées par des ,
-  $locationsLabels = explode(",", $csp['field_location']);
-  $tidsLocation = [];
-  foreach ($locationsLabels as $label){
+  $locations_labels = explode(",", $csp['field_location']);
+  $tids_location = [];
+  foreach ($locations_labels as $label) {
     $term = getTermFromLabelAndVocabulary($label, 'location', $csp['langcode']);
-    if($term !== false){
-      $tidsLocation[] = $term->id();
+    if ($term !== false) {
+      $tids_location[] = $term->id();
     }
-    else{
-      logErrorMessage($lineNumber, $csp['title'], 'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
+    else {
+      logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
     }
   }
-  $node->set('field_location', $tidsLocation);
+  $node->set('field_location', $tids_location);
 
   // Provider type
-  $typeProTerm = getTermFromLabelAndVocabulary($csp['field_provider_type'], 'service_providers', $csp['langcode']);
-  if($typeProTerm !== false){
-    $node->set('field_provider_type', $typeProTerm->id());
+  $type_pro_term = getTermFromLabelAndVocabulary($csp['field_provider_type'], 'service_providers', $csp['langcode']);
+  if ($type_pro_term !== false) {
+    $node->set('field_provider_type', $type_pro_term->id());
   }
-  else{
-    logErrorMessage($lineNumber, $csp['title'], 'incorrect taxonomy term for Service providers type (term not found) ', $csp['field_provider_type'], $context);
+  else {
+    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Service providers type (term not found) ', $csp['field_provider_type'], $context);
   }
 
   // Type of Cloud Service
-  $typeCSTerm = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
-  if($typeCSTerm !== false){
-    $node->set('field_type_of_cloud_services', $typeCSTerm->id());
+  $type_CS_term = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
+  if ($type_CS_term !== false) {
+    $node->set('field_type_of_cloud_services', $type_CS_term->id());
   }
-  else{
-    logErrorMessage($lineNumber, $csp['title'], 'incorrect taxonomy term for Type of Cloud service (term not found) ', $csp['field_type_of_cloud_services'], $context);
+  else {
+    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Type of Cloud service (term not found) ', $csp['field_type_of_cloud_services'], $context);
   }
 
   //Logo
-  $logoFileName = $csp['logo'];
-  $logoFilePathName = CSPImport::LOGOS_DIRECTORY . $logoFileName;
+  $logo_file_name = $csp['logo'];
+  $logo_file_path_name = CSPImport::LOGOS_DIRECTORY . $logo_file_name;
   //test de la présence du fichier
-  if(file_exists($logoFilePathName)){
+  if (file_exists($logo_file_path_name)) {
     $filesystem = \Drupal::service('file_system');
     // Create file entity.
     $image = File::create();
-    $image->setFileUri($logoFilePathName);
+    $image->setFileUri($logo_file_path_name);
     $image->setOwnerId(\Drupal::currentUser()->id());
-    $image->setMimeType('image/' . pathinfo($logoFilePathName, PATHINFO_EXTENSION));
-    $image->setFileName($filesystem->basename($logoFilePathName));
+    $image->setMimeType('image/' . pathinfo($logo_file_path_name, PATHINFO_EXTENSION));
+    $image->setFileName($filesystem->basename($logo_file_path_name));
     $image->setPermanent();
     $image->save();
 
@@ -156,8 +156,8 @@ function oab_bvpn_import_batch($columns, $lineNumber, &$context) {
 
     $node->set('field_logo', $image_media->id());
   }
-  else{
-    logErrorMessage($lineNumber, $csp['title'], 'logo file not found ', $logoFilePathName, $context);
+  else {
+    logErrorMessage($line_number, $csp['title'], 'logo file not found ', $logo_file_path_name, $context);
   }
   $node->save();
 
@@ -168,12 +168,12 @@ function oab_bvpn_import_batch($columns, $lineNumber, &$context) {
  */
 function oab_bvpn_import_batch_finished($success, $results, $operations) {
     if ($success) {
-        $message = \Drupal::translation()->formatPlural(count($results['total']), 'One CSP imported.','@count CSP imported.');
+        $message = \Drupal::translation()->formatPlural(count($results['total']), 'One CSP imported.', '@count CSP imported.');
         \Drupal::messenger()->addMessage($message, 'status', TRUE);
 
-        if(count($results['warning']['message']) > 0){
+        if (count($results['warning']['message']) > 0) {
           Drupal::messenger()->addMessage("Errors occured in file : ", 'warning', TRUE);
-          foreach ($results['warning']['message'] as $message){
+          foreach ($results['warning']['message'] as $message) {
             Drupal::messenger()->addMessage($message, 'warning', TRUE);
           }
         }
@@ -185,44 +185,43 @@ function oab_bvpn_import_batch_finished($success, $results, $operations) {
 }
 
 /** Retourne l'objet Term à partir du vocab, de son libellé et de la langue
- * @param string $termLabel
+ * @param string $term_label
  * @param string $vocabulary
- * @param string $langCode
+ * @param string $lang_code
  * @return \Drupal\Core\Entity\EntityInterface
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
-function getTermFromLabelAndVocabulary($termLabel, $vocabulary, $langCode = "en"){
+function getTermFromLabelAndVocabulary($term_label, $vocabulary, $lang_code = "en") {
 
   $entities = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
     [
       'vid' => $vocabulary,
-      'langcode' => $langCode,
-      'name' => trim($termLabel)
+      'langcode' => $lang_code,
+      'name' => trim($term_label)
     ]
   );
  if (isset($entities) && !empty($entities)) {
     return array_shift($entities);
   }
-  else{
-    \Drupal::logger("oab_bvpn_import")->info('terme non trouvé - vid : '.$vocabulary.' - langcode : '.$langCode.' - name: '.trim($termLabel));
-
+  else {
+    \Drupal::logger("oab_bvpn_import")->info('terme non trouvé - vid : '.$vocabulary.' - langcode : '.$lang_code.' - name: '.trim($term_label));
     return false;
   }
 }
 
 /*** Enreigstre un message d'erreur qui sera affiché à l'utilisateur à la fin du traitement batch
- * @param $numLine Numéro de la ligne en traitement
- * @param $cspTitle Nom du CSP
+ * @param $num_line Numéro de la ligne en traitement
+ * @param $csp_title Nom du CSP
  * @param $message message d'erreur
  * @param $data donnée en erreur dans le fichier
  * @param $context contexte où doit etre enregistré le message
  */
-function logErrorMessage($numLine, $cspTitle, $message, $data, &$context){
+function logErrorMessage($num_line, $csp_title, $message, $data, &$context) {
   $context['results']['warning']['message'][] =  t('- line @numLine (@cspName) - @message  : @data',
     [
-      '@numLine' => $numLine,
-      '@cspName' => $cspTitle,
+      '@numLine' => $num_line,
+      '@cspName' => $csp_title,
       '@message' => $message,
       '@data' => $data
     ]

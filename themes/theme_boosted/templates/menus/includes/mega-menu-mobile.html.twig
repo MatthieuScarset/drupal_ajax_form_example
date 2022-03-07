@@ -2,6 +2,9 @@
   {% if items %}
     <div class="mega-menu-mobile hidden-lg">
       <ul class="main-items-menu" data-menu-level="0">
+        <div class="welcome_text">
+          <p>{{ "Welcome on international website"|t }} </p>
+        </div>
         {{ _self.menu_row(items, 0) }}
       </ul>
     </div>
@@ -9,24 +12,18 @@
 {% endmacro %}
 
 
-{% macro menu_row(items, menu_level, item_parent = null) %}
-  {% if menu_level == 0 %}
-    <div class="welcome_text">
-      <p>{{ "Welcome on international website"|t }} </p>
-    </div>
-  {% endif %}
+{% macro menu_row(items, menu_level, item_parent = null, item_initial= null) %}
   {% for item in items %}
     <li class="items-mobile-{{ menu_level }}" >
       {% if item.below %}
         {% if menu_level == 0 %}
           <a class="o-link-arrow beyond" data-menu-level-target="{{ menu_level + 1 }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})">
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">
             {{ item.title }}
           </a>
-
         {% else %}
           <a class="o-link-arrow beyond" data-menu-level-target="{{ menu_level + 1 }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">
             {{ item.title }}
           </a>
         {% endif %}
@@ -41,7 +38,7 @@
           {% if menu_level == 1 %}
             <li>
               <a class="o-link-arrow all-product-link-mobile" href="{{ item.url }}"
-                 onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ "See all products" | t }}','track_type_evt':'clic'});">
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}_{{ item.title }}','{{ "See all products" | t }}');">
                 {{ "See all products" | t }}
               </a>
 
@@ -51,13 +48,15 @@
           {% endif %}
 
           {% if menu_level == 0 %}
-            {% if (item.content.field_template['#items'].value == 0) %}
-              {{ _self.old_template(item.below, item.title) }}
+            {% if item.content.field_style_template['#items'].value == 'product' %}
+              {{ _self.menu_row(item.below, menu_level + 1, item.title, item.title) }}
+            {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
+              {{ _self.wysiwyg_template(item.below, menu_level + 1, item.title, item.content) }}
             {% else %}
-              {{ _self.menu_row(item.below, menu_level + 1, item.title) }}
+              {{ _self.soft_template(item.below, item.title, item.content) }}
             {% endif %}
           {% else %}
-            {{ _self.menu_row(item.below, menu_level + 1, item.title) }}
+            {{ _self.menu_row(item.below, menu_level + 1, item.title, item_initial) }}
           {% endif %}
 
         </ul>
@@ -65,10 +64,10 @@
       {% else %}
         {% if item.entity.field_teaser.value is empty %}
             <a class="o-link-arrow" href="{{ item.url }}"
-               onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_cible':'{{ item.title }}','track_type_evt':'clic'})"> {{ item.title }} </a>
+               onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')"> {{ item.title }} </a>
         {% else %}
           <a class="items-level-{{ menu_level + 1 }}" href="{{ item.url }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'});">{{ item.title }}
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_initial }}_{{ item_parent }}','{{ item.title }}');">{{ item.title }}
             <p class="field-teaser-mobile"> {{ item.entity.field_teaser.value }} </p>
           </a>
           <hr class="separateur">
@@ -79,21 +78,49 @@
 {% endmacro %}
 
 
-{# Gestion du cas "old template" ou tous les items sont à la suite, malgré 2 sous-niveaux   #}
-{% macro old_template(items, item_parent) %}
-
-  <li>
+{% macro wysiwyg_template(items, menu_level, item_parent = null, content) %}
+  <div class="row">
+    {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
+      <div class="col-xs-12 no-padding">
+        <div class="mobile-highlight">
+          {{ content.field_highlight }}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="items_list_link_container">
     {% for item in items %}
-      <a class="o-link-arrow" href="{{ item.url }}"
-         onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+        <h4 class="items_list_link_title no-margin">
+          <a href="{{ item.url }}" class="o-link {% if loop.index == 1 %} no-top-border  {% endif %}"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+        </h4>
+        {% if item.below %}
+          {% for item in item.below %}
+            <a href="{{ item.url }}" class="o-link"
+               onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+          {% endfor %}
+        {% endif %}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{# Gestion du cas "old template" ou tous les items sont à la suite, malgré 2 sous-niveaux   #}
+{% macro soft_template(items, item_parent, content) %}
+  <li class="mobile_soft_list">
+    <a class="global-link-mobile o-link-arrow" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+    <h4>{{ content.field_subtitle }}</h4>
+    {% for item in items %}
       {% if item.below %}
-        {% for item in item.below %}
-        <li>
-          <a class="o-link-arrow" href="{{ item.url }}"
-             onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
-        </li>
+      <ul class="items_list_link no-padding no-margin">
+        <a href="{{ item.url }}"
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+      {% for item in item.below %}
+        <a href="{{ item.url }}"
+           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
         {% endfor %}
+      </ul>
       {% endif %}
     {% endfor %}
   </li>
 {% endmacro %}
+

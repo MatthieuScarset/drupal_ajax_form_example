@@ -13,7 +13,7 @@ use Drupal\node\Entity\Node;
  *   id = "contact_bar_press_block",
  *   admin_label = @Translation("Contact Bar Press"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

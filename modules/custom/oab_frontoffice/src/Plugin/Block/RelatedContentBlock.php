@@ -17,7 +17,7 @@ use Drupal\image\Entity\ImageStyle;
  *   id = "related_content_block",
  *   admin_label = @Translation("Related content"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

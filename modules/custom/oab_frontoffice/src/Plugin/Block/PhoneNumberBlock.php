@@ -14,7 +14,7 @@ use Drupal\node\Entity\Node;
  *   id = "phone_number_block",
  *   admin_label = @Translation("Phone Number"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

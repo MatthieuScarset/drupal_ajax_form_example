@@ -1,0 +1,21 @@
+uuid: ae039e19-e429-42f2-aa98-21b0654255ad
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_style_template
+    - system.menu.main-navigation-fr
+  module:
+    - options
+id: menu_link_content.main-navigation-fr.field_style_template
+field_name: field_style_template
+entity_type: menu_link_content
+bundle: main-navigation-fr
+label: 'template a utiliser'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

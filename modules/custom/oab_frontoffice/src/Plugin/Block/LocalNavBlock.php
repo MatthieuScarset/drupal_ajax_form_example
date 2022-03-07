@@ -17,7 +17,7 @@ use Drupal\image\Entity\ImageStyle;
  *   id = "local_nav_block",
  *   admin_label = @Translation("Local Nav"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

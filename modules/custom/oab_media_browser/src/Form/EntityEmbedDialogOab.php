@@ -248,8 +248,9 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
 
         // Submit configuration form the selected Entity Embed Display plugin.
         $entity_element = $form_state->getValue('attributes');
-        $entity = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
+        $entities = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
             ->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
+        $entity = reset($entities);
         $plugin_id = $entity_element['data-entity-embed-display'];
         $plugin_settings = $entity_element['data-entity-embed-settings'] ?: array();
         $display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $plugin_settings);

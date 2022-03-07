@@ -20,7 +20,7 @@ use Drupal\node\Entity\Node;
  *   id = "find_distributor_block",
  *   admin_label = @Translation("Find Distributor Block"),
  *   category = @Translation("Blocks"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition(
  *       "entity:node",
  *       label = @Translation("Current Node")

@@ -4,14 +4,16 @@ include:
       - if: $CI_COMMIT_BRANCH == "dev"
 
 stages:          # List of stages for jobs, and their order of execution
+#  - test
   - deploy
   - build
   - update
 
 variables:
-  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.dev.yml"
+  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
+  ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
 
 
 before_script:
@@ -21,7 +23,19 @@ before_script:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
-deploy_dev:
+
+#sonar:
+#  image:
+#    name: sonarsource/sonar-scanner-cli:latest
+#    entrypoint: [""]
+#  stage: test
+#  script:
+#    - sonar-scanner -X -Dsonar.qualitygate.wait=true
+#  allow_failure: false
+#  rules:
+#  - if: $CI_COMMIT_BRANCH == "dev"
+
+Deploy dev:
   stage: deploy
   script:
     - |
@@ -31,24 +45,27 @@ deploy_dev:
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
-build_dev:
+Build drupal:
   stage: build
   script:
-    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE up -d
+    - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
+    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
-update_dev:
+Update drupal:
   stage: update
   script:
+    # drush cr needed for Drupal to discover new modules
+    - $EXEC_PHP_FPM drush cr
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
   rules:
-    - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "test"
+    - if: $CI_COMMIT_BRANCH == "dev"
 
 
 

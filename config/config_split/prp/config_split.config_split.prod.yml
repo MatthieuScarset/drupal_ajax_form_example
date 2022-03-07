@@ -5,7 +5,7 @@ dependencies: {  }
 id: prod
 label: Prod
 description: ''
-folder: config_split/prod
+folder: config/config_split/prod
 module: {  }
 theme: {  }
 blacklist: {  }

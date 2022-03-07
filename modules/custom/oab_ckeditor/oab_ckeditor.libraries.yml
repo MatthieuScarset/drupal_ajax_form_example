@@ -5,3 +5,4 @@ oab_ckeditor.templates:
      theme:
         css/templates.css: {}
         css/custom_styles.css: {}
+        css/mega_menu.css: {}

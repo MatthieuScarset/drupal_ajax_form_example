@@ -24,10 +24,14 @@
 /update.php
 /web.config
 
+.env
+
 # Ignore IDE conf
 /.idea
 
 # Ignore config data
 /config/data
 /config/logs
+/data
+/mysql
 /log

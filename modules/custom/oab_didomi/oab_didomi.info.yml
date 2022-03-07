@@ -1,0 +1,8 @@
+name: OAB Didomi
+description: 'module pour la gestion de Didomi'
+type: module
+package: OAB
+version: VERSION
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'oab_didomi'
+datestamp: 1635518691

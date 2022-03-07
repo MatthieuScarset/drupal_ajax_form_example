@@ -1,0 +1,7 @@
+oab_didomi.settings_route:
+  path: 'admin/obs_backoffice/oab-didomi-settings'
+  defaults:
+    _form: '\Drupal\oab_didomi\Form\OabDidomiSettingsForm'
+    _title: 'Settings for Didomi'
+  requirements:
+    _role: 'administrator+digital_admin'

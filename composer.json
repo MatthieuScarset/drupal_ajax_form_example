@@ -1,6 +1,7 @@
 {
     "name": "drupal/recommended-project",
     "description": "Project template for Drupal 9 projects with a relocated document root",
+    "version": "1.3.1",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -37,6 +38,7 @@
         "drupal/field_group": "^3.1",
         "drupal/geolocation": "^3.2",
         "drupal/inline_entity_form": "1.0-rc9",
+        "drupal/jsonapi_extras": "^3.20",
         "drupal/linkit": "5.0-beta12",
         "drupal/media_entity_generic": "^1.1",
         "drupal/menu_item_extras": "^2",
@@ -61,13 +63,18 @@
         "drupal/workbench": "^1.3",
         "drupal/workbench_access": "1.0-beta4",
         "drupal/workbench_moderation": "^1.6",
-        "drupal/xmlsitemap": "^1.0"
+        "drupal/xmlsitemap": "^1.0",
+        "vlucas/phpdotenv": "^5.3",
+        "drush/drush": "^10.3"
     },
     "require-dev": {
         "drupal/console": "~1.0",
         "drupal/devel": "^4.1",
         "drupal/devel_php": "^1.3",
-        "drush/drush": "^10.3"
+        "kint-php/kint": "^4.1"
+    },
+    "autoload": {
+        "files": ["load.environment.php"]
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -75,7 +82,14 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/console-extend-plugin": true
+        }
     },
     "extra": {
         "drupal-scaffold": {
@@ -147,6 +161,9 @@
             "drupal/tac_lite": {
                 "Fix D9 compatibility": "patches/tac_lite/tac_lite_compatibility_d9.patch",
                 "Fix getVocabularyId deprecated": "patches/tac_lite/rectif_deprecated_vocabularyId.patch"
+            },
+            "drupal/core": {
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
             }
 		}
 	}
