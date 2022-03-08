@@ -1,0 +1,29 @@
+uuid: 4add9405-d763-413a-bee5-bd150e5c2578
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.modular_product.body
+    - node.type.modular_product
+  module:
+    - text
+    - user
+id: node.modular_product.default
+targetEntityType: node
+bundle: modular_product
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true

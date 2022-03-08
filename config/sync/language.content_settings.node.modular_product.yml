@@ -1,0 +1,11 @@
+uuid: fb3a84e9-2eb1-4812-a74a-1a106b8d4801
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.modular_product
+id: node.modular_product
+target_entity_type_id: node
+target_bundle: modular_product
+default_langcode: current_interface
+language_alterable: true

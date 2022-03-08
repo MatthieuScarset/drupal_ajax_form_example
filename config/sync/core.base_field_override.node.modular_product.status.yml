@@ -1,0 +1,22 @@
+uuid: a13c1ac0-13f0-429e-a3d0-6757cf1d6c14
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.modular_product
+id: node.modular_product.status
+field_name: status
+entity_type: node
+bundle: modular_product
+label: Publié
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
