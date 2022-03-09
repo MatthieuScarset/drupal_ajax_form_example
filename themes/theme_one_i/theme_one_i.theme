@@ -2,12 +2,9 @@
 
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Url;
 use Drupal\file\Entity\File;
-use Drupal\Core\Template\Attribute;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\oab_dvi\DviHelper;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\taxonomy\Entity\Term;
 
@@ -270,14 +267,20 @@ function theme_one_i_theme_suggestions_view_alter(array &$suggestions, array $va
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
  * @param array $suggestions
  */
-function theme_one_i_theme_suggestions_page_alter(array &$suggestions) {
+function theme_one_i_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions[] = 'page__' . $content_type;
+      if ($content_type === 'modular_product') {
+        $suggestions[] = 'page__e2e';
+      }
+      else {
+        $suggestions[] = 'page__' . $content_type;
+      }
     }
   }
 }
+
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
