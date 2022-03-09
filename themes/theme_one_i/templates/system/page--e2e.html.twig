@@ -76,12 +76,13 @@
           </div>
         </header>
 {% endif %}
-
+{# End Header #}
 
 {# Top Zone #}
 {% if page.top_zone %}
     {{ page.top_zone }}
 {% endif %}
+{# End Top Zone #}
 
 {# Main #}
 {% block main %}
@@ -95,8 +96,7 @@
       {#  </div> #}
       {#  <div class="row"> #}
             {# Content #}
-            {% set content_classes = 'left-column no-padding' %}
-            <section{{ content_attributes.addClass(content_classes) }}>
+            <section>
             {% block content %}
                 <a id="main-content"></a>
                 {{ page.content }}
@@ -105,11 +105,22 @@
        {# </div> #}
     </div>
 {% endblock %}
+{# End Main #}
+
 
 <a href="#" class="o-scroll-up" title="back to top">
   <span class="o-scroll-up-icon rounded-circle" aria-hidden="true"></span>
 </a>
 
+{# Direct Access Block #}
+{% if page.prefooter %}
+  {% block prefooter %}
+    {{ page.prefooter }}
+
+  {% endblock %}
+{% endif %}
+
+{# Footer #}
 {% if page.footer %}
     {% block footer %}
         <footer class="o-footer" role="contentinfo">
@@ -119,3 +130,4 @@
         </footer>
     {% endblock %}
 {% endif %}
+{# Footer #}
