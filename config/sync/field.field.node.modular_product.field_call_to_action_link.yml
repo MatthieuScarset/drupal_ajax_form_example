@@ -1,0 +1,23 @@
+uuid: 7677fc02-0a68-429f-a79a-466c4fb78431
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_call_to_action_link
+    - node.type.modular_product
+  module:
+    - link
+id: node.modular_product.field_call_to_action_link
+field_name: field_call_to_action_link
+entity_type: node
+bundle: modular_product
+label: 'Product CTA link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

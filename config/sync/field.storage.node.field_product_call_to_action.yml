@@ -1,20 +1,20 @@
-uuid: e9bb9079-471f-4982-a457-1052f4cdf101
-langcode: en
+uuid: ef3e143e-39c5-4858-ae6b-21b944e50eba
+langcode: fr
 status: true
 dependencies:
   module:
     - entity_reference_revisions
     - node
     - paragraphs
-id: node.field_call_to_action
-field_name: field_call_to_action
+id: node.field_product_call_to_action
+field_name: field_product_call_to_action
 entity_type: node
 type: entity_reference_revisions
 settings:
   target_type: paragraph
 module: entity_reference_revisions
 locked: false
-cardinality: 2
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
