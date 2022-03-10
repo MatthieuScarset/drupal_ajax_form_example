@@ -142,10 +142,11 @@ class OabOblForm extends ConfigFormBase {
         /** @var \Drupal\oab_orange_business_lounge\Services\OabOblSwagger $obl_service */
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
-        if ($obl_service->isValid($url)) {
-          $this->messenger->addMessage(t('Api connected Successfully'), 'status', TRUE);
+
+        if (null !== $obl_service->isValid($url)) {
+          $this->messengerService->addMessage(t('Api connected Successfully'), 'status', TRUE);
         } else {
-          $this->messenger->addMessage(t('Unexpected HTTP code'), 'error', TRUE);
+          $this->messengerService->addMessage(t('Unexpected HTTP code'), 'error', TRUE);
         }
 
     }
