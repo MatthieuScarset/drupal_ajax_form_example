@@ -2,17 +2,13 @@
 
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
+use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\file\Entity\File;
-use Drupal\node\Entity\Node;
-use Drupal\Core\Entity;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\image\Entity\ImageStyle;
-use Drupal\media\Entity\Media;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -31,18 +27,21 @@ class TopZoneCustomBlock extends BlockBase implements ContainerFactoryPluginInte
   /**
    * @var FileUrlGenerator
    */
-  private $fileUrlGenerator;
+  private FileUrlGenerator $fileUrlGenerator;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FileUrlGenerator $file_url_generator) {
-      parent::__construct($configuration, $plugin_id, $plugin_definition);
+      parent::__construct(
+        $configuration,
+        $plugin_id,
+        $plugin_definition);
       $this->fileUrlGenerator = $file_url_generator;
     }
 
-    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): TopZoneCustomBlock {
       return new self(
         $configuration,
-        $plugin_definition,
         $plugin_id,
+        $plugin_definition,
         $container->get('file_url_generator')
       );
     }
@@ -70,14 +69,14 @@ class TopZoneCustomBlock extends BlockBase implements ContainerFactoryPluginInte
     /**
      * {@inheritdoc}
      */
-    public function blockForm($form, FormStateInterface $form_state) {
+    public function blockForm($form, FormStateInterface $form_state): array {
         $form = parent::blockForm($form, $form_state);
 
         $form['block_title_custom'] = [
             '#title' => $this->t('Titre du block'),
             '#type' => 'text_format',
-            '#default_value' => isset($this->configuration['block_title_custom']['value']) ? $this->configuration['block_title_custom']['value'] : '',
-            '#format' => isset($this->configuration['block_title_custom']['format']) ? $this->configuration['block_title_custom']['format'] : 'full_html',
+            '#default_value' => $this->configuration['block_title_custom']['value'] ?? '',
+            '#format' => $this->configuration['block_title_custom']['format'] ?? 'full_html',
             '#required' => true,
         ];
 

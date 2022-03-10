@@ -6,10 +6,26 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_data_import\Classes\ProductCategoriesTermsImport;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class OabSettingsProductCategoriesTermsImportForm extends FormBase
 {
+
+  /**
+   * @var ProductCategoriesTermsImport
+   */
+  private ProductCategoriesTermsImport $termsImport;
+
+  public function __construct(ProductCategoriesTermsImport $terms_import) {
+    $this->termsImport = $terms_import;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('oab_data_import.product_categories_terms_import'),
+    );
+  }
 
     /**
      * Returns a unique string identifying the form.
@@ -104,7 +120,6 @@ class OabSettingsProductCategoriesTermsImportForm extends FormBase
     public function executeImportHandler(array &$form, FormStateInterface $form_state) {
 
         $input = &$form_state->getUserInput();
-        $import = new ProductCategoriesTermsImport();
-        $import->executeImport($input["filename"]);
+        $this->termsImport->executeImport($input["filename"]);
     }
 }

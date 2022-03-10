@@ -27198,8 +27198,88 @@ a.ob1-card:hover, a.ob1-card:focus {
 /* Typography configuration for mobile (xs and sm) */
 /* Typography configuration for tablet and small desktop (md, lg) */
 /* widescreen variables aren't part of bootstrap, they are used in our custom scss */
+.icon-portability::before {
+  content: "";
+}
+
+.icon-four-x-credit-card::before {
+  content: "";
+}
+
+.icon-number-1-full::before {
+  content: "";
+}
+
+.icon-number-1-wired::before {
+  content: "";
+}
+
+.icon-number-2-full::before {
+  content: "";
+}
+
+.icon-number-2-wired::before {
+  content: "";
+}
+
+.icon-number-3-full::before {
+  content: "";
+}
+
+.icon-number-3-wired::before {
+  content: "";
+}
+
+.icon-number-4-full::before {
+  content: "";
+}
+
+.icon-number-4-wired::before {
+  content: "";
+}
+
+.icon-number-5-full::before {
+  content: "";
+}
+
+.icon-number-5-wired::before {
+  content: "";
+}
+
+.icon-number-6-full::before {
+  content: "";
+}
+
+.icon-number-6-wired::before {
+  content: "";
+}
+
+.icon-number-7-full::before {
+  content: "";
+}
+
+.icon-number-7-wired::before {
+  content: "";
+}
+
+.icon-number-8-full::before {
+  content: "";
+}
+
+.icon-number-8-wired::before {
+  content: "";
+}
+
+.icon-number-9-full::before {
+  content: "";
+}
+
+.icon-number-9-wired::before {
+  content: "";
+}
+
 .icon-refund::before {
-  content: "";
+  content: "";
 }
 
 .icon-heart-advantages::before {
@@ -31131,6 +31211,66 @@ a.ob1-card:hover, a.ob1-card:focus {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: icon-sosh, sans-serif !important;
 }
+.ob1-sosh .icon-portability::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-four-x-credit-card::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-1-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-1-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-2-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-2-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-3-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-3-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-4-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-4-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-5-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-5-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-6-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-6-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-7-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-7-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-8-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-8-wired::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-9-full::before {
+  content: "" !important;
+}
+.ob1-sosh .icon-number-9-wired::before {
+  content: "" !important;
+}
 .ob1-sosh .icon-Scales::before {
   content: "" !important;
 }
@@ -31144,7 +31284,7 @@ a.ob1-card:hover, a.ob1-card:focus {
   content: "" !important;
 }
 .ob1-sosh .icon-refund::before {
-  content: "" !important;
+  content: "" !important;
 }
 .ob1-sosh .icon-favourite::before {
   content: "" !important;
@@ -31825,8 +31965,88 @@ a.ob1-card:hover, a.ob1-card:focus {
 /* Typography configuration for mobile (xs and sm) */
 /* Typography configuration for tablet and small desktop (md, lg) */
 /* widescreen variables aren't part of bootstrap, they are used in our custom scss */
+.icon-portability::before {
+  content: "";
+}
+
+.icon-four-x-credit-card::before {
+  content: "";
+}
+
+.icon-number-1-full::before {
+  content: "";
+}
+
+.icon-number-1-wired::before {
+  content: "";
+}
+
+.icon-number-2-full::before {
+  content: "";
+}
+
+.icon-number-2-wired::before {
+  content: "";
+}
+
+.icon-number-3-full::before {
+  content: "";
+}
+
+.icon-number-3-wired::before {
+  content: "";
+}
+
+.icon-number-4-full::before {
+  content: "";
+}
+
+.icon-number-4-wired::before {
+  content: "";
+}
+
+.icon-number-5-full::before {
+  content: "";
+}
+
+.icon-number-5-wired::before {
+  content: "";
+}
+
+.icon-number-6-full::before {
+  content: "";
+}
+
+.icon-number-6-wired::before {
+  content: "";
+}
+
+.icon-number-7-full::before {
+  content: "";
+}
+
+.icon-number-7-wired::before {
+  content: "";
+}
+
+.icon-number-8-full::before {
+  content: "";
+}
+
+.icon-number-8-wired::before {
+  content: "";
+}
+
+.icon-number-9-full::before {
+  content: "";
+}
+
+.icon-number-9-wired::before {
+  content: "";
+}
+
 .icon-refund::before {
-  content: "";
+  content: "";
 }
 
 .icon-heart-advantages::before {

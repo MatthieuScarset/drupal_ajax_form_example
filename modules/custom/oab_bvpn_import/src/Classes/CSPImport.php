@@ -4,6 +4,7 @@ namespace Drupal\oab_bvpn_import\Classes;
 
 use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\FileInterface;
 
 class CSPImport {
   const IMPORT_DIRECTORY = 'public://bvpn/';
@@ -12,12 +13,12 @@ class CSPImport {
   /**
    * @var ExtensionPathResolver
    */
-  private $pathResolver;
+  private ExtensionPathResolver $pathResolver;
 
   /**
    * @var FileSystemInterface
    */
-  private $fileSystem;
+  private FileSystemInterface $fileSystem;
 
   public function __construct(ExtensionPathResolver $extension_path_resolver,
                               FileSystemInterface $file_system) {
@@ -60,5 +61,21 @@ class CSPImport {
       }
     }
 
+  }
+
+  /**
+   * @return bool|array|FileInterface|null
+   */
+  public function saveFileImport(): bool|array|FileInterface|null {
+    if (!is_dir(self::IMPORT_DIRECTORY)) {
+      $this->fileSystem->mkdir(self::IMPORT_DIRECTORY, NULL, TRUE);
+    }
+
+    return file_save_upload(
+      'file',
+      ['file_validate_extensions' => ''],
+      self::IMPORT_DIRECTORY,
+      replace: FileSystemInterface::EXISTS_REPLACE
+    );
   }
 }

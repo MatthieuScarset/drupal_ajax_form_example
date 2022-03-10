@@ -65,7 +65,7 @@
         "drupal/workbench_moderation": "^1.6",
         "drupal/xmlsitemap": "^1.0",
         "vlucas/phpdotenv": "^5.3",
-        "drush/drush": "^10.3"
+        "drush/drush": "^11.0"
     },
     "require-dev": {
         "drupal/console": "~1.0",

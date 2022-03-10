@@ -49,10 +49,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@ob1/web@1.14.8":
-  version "1.14.8"
-  resolved "https://artifactory-iva.si.francetelecom.fr/artifactory/api/npm/npm-proxy-orange-project-styleguide/@ob1/web/-/@ob1/web-1.14.8.tgz#89331edb2c0e9f32ed3402fb5be94ed6a8d85d56"
-  integrity sha1-iTMe2ywOnzLtNAL7W+lO1qjYXVY=
+"@ob1/web@1.14.10":
+  version "1.14.10"
+  resolved "https://artifactory-iva.si.francetelecom.fr/artifactory/api/npm/npm-proxy-orange-project-styleguide/@ob1/web/-/@ob1/web-1.14.10.tgz#8ed99d67283c62cd8baa99cab7b3835dbc239e50"
+  integrity sha1-jtmdZyg8Ys2LqpnKt7ODXbwjnlA=
   dependencies:
     array-from-polyfill "^1.0.1"
     boosted "4.3.1"

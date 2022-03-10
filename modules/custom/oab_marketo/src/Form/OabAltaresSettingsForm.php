@@ -228,6 +228,11 @@ class OabAltaresSettingsForm extends ConfigFormBase {
   }
 
   public function validateImportHandler(array &$form, FormStateInterface  $form_state) {
+
+    if (!is_dir(PhotoCommercialeService::IMPORT_DIRECTORY)) {
+      $this->fileSystem->mkdir(PhotoCommercialeService::IMPORT_DIRECTORY, NULL, TRUE);
+    }
+
     $file = file_save_upload('upload_file', array('file_validate_extensions' => ''),
       PhotoCommercialeService::IMPORT_DIRECTORY, null, FileSystemInterface::EXISTS_REPLACE);
 

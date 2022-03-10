@@ -13,6 +13,7 @@ ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
     vim \
+    libzip-dev \
     zip \
     unzip \
     wget \
@@ -23,6 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-d
 	&& pecl install imagick \
 	&& docker-php-ext-enable imagick \
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+RUN docker-php-ext-install zip
 
 # GD & MySql
 RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype \

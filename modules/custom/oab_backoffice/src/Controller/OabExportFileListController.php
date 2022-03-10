@@ -11,8 +11,11 @@ use Drupal\Core\StackMiddleware\Session;
 use Drupal\Core\TypedData\Plugin\DataType\Uri;
 use Drupal\Core\Url;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\file\Entity\File;
 use Drupal\system\FileDownloadController;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Cmf\Component\Routing\VersatileGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -88,7 +91,7 @@ class OabExportFileListController extends ControllerBase {
         }
 
 
-        $view = \Drupal\views\Views::getView('document_list');
+        $view = Views::getView('document_list');
         $view->get_total_rows = true;
         $view->setDisplay('document_list_page');
         $view->setExposedInput($params);        # Je set les paramètres recupérés dans l'URL pour
@@ -107,11 +110,9 @@ class OabExportFileListController extends ControllerBase {
         $view->setItemsPerPage(100);
 
         while ($first_row < $view->total_rows) {
-            $operations[] = array(
-                '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList',
-                array($first_row, $file_name, $params)
-            );
-
+            $operations[] = [
+              '\Drupal\oab_backoffice\Controller\OabExportFileListController::exportFileList', [$first_row, $file_name, $params]
+            ];
             $first_row += 100;
         }
 
@@ -139,7 +140,7 @@ class OabExportFileListController extends ControllerBase {
         }
 
         ##j'enregistre l'URL d'origine (utilisée pour créer un lien de retour à la fin du batch)
-        $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
+        $tempstore = \Drupal::service('tempstore.private')->get(SESSION_NAME);
         $tempstore->set('origin_url', $origin_path);
         $tempstore->set('file_path', self::$dir . "/" .$file_name);
 
@@ -155,9 +156,9 @@ class OabExportFileListController extends ControllerBase {
     /**
      * Méthode appelée quand on va voir le détail d'un import en BO
      */
-    public function exportFileList($first_row, $file_name, $params, &$context) {
+    static public function exportFileList($first_row, $file_name, $params, &$context) {
 
-        $view = \Drupal\views\Views::getView('document_list');
+        $view = Views::getView('document_list');
         $view->get_total_rows = true;
         $view->setDisplay('document_list_page');
         $view->setItemsPerPage(100);
@@ -231,7 +232,7 @@ class OabExportFileListController extends ControllerBase {
         #On remonte une erreur si le fichier n'est pas ecrit
         if ($success === false) {
             \Drupal::logger(self::$logName)->notice("Erreur lors de la creation du fichier");
-            $this->messenger->addError("Erreur lors de la creation du fichier", true);
+            \Drupal::messenger()->addError("Erreur lors de la creation du fichier", true);
 
             $context['results'][] = 'Erreur lors de la creation du fichier';
             $context['finished'] = 1.0;
@@ -251,7 +252,11 @@ class OabExportFileListController extends ControllerBase {
     }
 
 
-    public function endingPage(Request $request) {
+    #[ArrayShape([
+      "#theme" => "string",
+      "#file_url" => "string",
+      "#origin_url" => "mixed"
+    ])] public function endingPage(Request $request): array {
 
         $referer = $request->headers->get('referer');
         if ($referer === null) {
@@ -259,7 +264,7 @@ class OabExportFileListController extends ControllerBase {
         }
 
         ##Je recupère les deux données sauvées pour l'affichage
-        $tempstore = \Drupal::service('user.private_tempstore')->get(SESSION_NAME);
+        $tempstore = \Drupal::service('tempstore.private')->get(SESSION_NAME);
         $file_path = $tempstore->get('file_path');
         $origin = $tempstore->get('origin_url');
 
@@ -295,7 +300,7 @@ class OabExportFileListController extends ControllerBase {
 
 
 
-    private static function write_file($tab, $file_name) {
+    private static function write_file($tab, $file_name): bool|int {
         $to_write = "";
         foreach ($tab as $key => $row) {
             $to_write .= implode(";", $row);
@@ -318,31 +323,30 @@ class OabExportFileListController extends ControllerBase {
             if ($target_id == 0) {
                 return $value_array['target_id'];
             }
-            $entity = \Drupal\taxonomy\Entity\Term::load($target_id);
+            $entity = Term::load($target_id);
             if (!is_null($entity) and is_a($entity, 'Drupal\taxonomy\Entity\Term')) {
                 return $entity->getName();
             }
 
-            $entity = \Drupal\file\Entity\File::load($target_id);
+            $entity = File::load($target_id);
             if (!is_null($entity)) {
                 $uri = $entity->getFileUri();
                 return \Drupal::service('file_system')->realpath($uri);
             }
         }
 
-        ##Cas des "value"
-        if (isset($value_array['value'])) {
-
+          ##Cas des "value"
+          if (isset($value_array['value'])) {
             # Cas d'un timestamp
-            if (strlen($value_array['value']) == 10) {
-                $date = date('d/m/Y H:i:s', $value_array['value']);
-                if ($date !== false) {
-                    return $date;
-                }
+            if (strlen($value_array['value']) === 10 && is_numeric($value_array['value'])) {
+              $date = date('d/m/Y H:i:s', $value_array['value']);
+              if ( false != $date) {
+                return $date;
+              }
             }
 
             return $value_array['value'];
-        }
+          }
 
         return $ret;
     }

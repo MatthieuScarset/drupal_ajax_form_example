@@ -2,21 +2,36 @@
 
 namespace Drupal\oab_bvpn_import\Form;
 
-use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_bvpn_import\Classes\CSPImport;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class OabSettingsCSPImportForm extends FormBase {
 
-    /**
+  /**
+   * @var CSPImport
+   */
+  private CSPImport $cspImport;
+
+  public function __construct(CSPImport $csp_import) {
+    $this->cspImport = $csp_import;
+  }
+
+  public static function create(ContainerInterface $container): OabSettingsCSPImportForm {
+    return new self(
+      $container->get('oab_bvpn_import.csp_import')
+    );
+  }
+
+  /**
      * Returns a unique string identifying the form.
      *
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId() {
+    public function getFormId(): string {
         return 'oab_bvpn_import_csp_import_form';
     }
 
@@ -31,7 +46,7 @@ class OabSettingsCSPImportForm extends FormBase {
      * @return array
      *   The form structure.
      */
-    public function buildForm(array $form, FormStateInterface $form_state) {
+    public function buildForm(array $form, FormStateInterface $form_state): array {
 
         $form['import'] = array(
             '#type' => 'fieldset',
@@ -78,15 +93,7 @@ class OabSettingsCSPImportForm extends FormBase {
     /** Validation du fichier avant l'import et recopie avec le bon nom
      */
     public function validateImportHandler(array &$form, FormStateInterface $form_state) {
-        $fs = \Drupal::service('file_system');
-        if (!is_dir(CSPImport::IMPORT_DIRECTORY)) {
-            $fs->mkdir(CSPImport::IMPORT_DIRECTORY, NULL, TRUE);
-        }
-
-        $file = file_save_upload('file', array('file_validate_extensions' => ''),
-          CSPImport::IMPORT_DIRECTORY, null,
-          FileSystemInterface::EXISTS_REPLACE);
-
+        $file = $this->cspImport->saveFileImport();
         // If the file passed validation:
         if (!$file[0]) {
             $form_state->setErrorByName('file', t('No file was uploaded.'));
@@ -103,8 +110,6 @@ class OabSettingsCSPImportForm extends FormBase {
     public function executeImportHandler(array &$form, FormStateInterface $form_state) {
 
         $input = &$form_state->getUserInput();
-        $import = new CSPImport();
-        //kint($input["filename"]);die();
-        $import->executeImport($input["filename"]);
+        $this->cspImport->executeImport($input["filename"]);
     }
 }

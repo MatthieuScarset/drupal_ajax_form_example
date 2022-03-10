@@ -2,27 +2,31 @@
 
 namespace Drupal\oab_data_import\Classes;
 
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ExtensionPathResolver;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\File\FileSystemInterface;
 
-class ProductCategoriesTermsImport implements ContainerInjectionInterface
-{
+class ProductCategoriesTermsImport {
   const IMPORT_DIRECTORY = 'public://data/';
 
-  public function __construct(ExtensionPathResolver $extension_path_resolver) {
-    $this->pathResolver = $extension_path_resolver;
-  }
+  /**
+   * @var ExtensionPathResolver
+   */
+  private ExtensionPathResolver $pathResolver;
 
-  public static function create(ContainerInterface $container) {
-    return new self(
-      $container->get('extension.path.resolver')
-    );
+  /**
+   * @var FileSystemInterface
+   */
+  private FileSystemInterface $fileSystem;
+
+  public function __construct(ExtensionPathResolver $extension_path_resolver,
+                              FileSystemInterface $file_system) {
+    $this->pathResolver = $extension_path_resolver;
+    $this->fileSystem = $file_system;
   }
 
   public function executeImport($filename) {
 
-    $path_to_folder = \Drupal::service('file_system')->realpath($this::IMPORT_DIRECTORY);
+    $path_to_folder = $this->fileSystem->realpath($this::IMPORT_DIRECTORY);
     $path_file_csv = $path_to_folder . '/' .$filename;
 
     if (file_exists($path_file_csv) && filesize($path_file_csv) > 0) {
