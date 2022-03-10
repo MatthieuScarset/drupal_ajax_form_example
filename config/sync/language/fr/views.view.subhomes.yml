@@ -54,19 +54,6 @@ display:
   page_achievements_iot:
     display_title: 'Réalisations IoT'
     display_options:
-      filters:
-        field_subhome_target_id:
-          expose:
-            label: 'Secteur d''activité'
-        field_subhome_target_id_1:
-          expose:
-            label: 'Pôles métiers'
-        field_subhome_target_id_2:
-          expose:
-            label: 'Typologie de produit'
-        field_subhome_target_id_3:
-          expose:
-            label: Usage
       title: 'Réalisation IoT'
       exposed_form:
         options:
@@ -75,19 +62,6 @@ display:
   page_iot_products:
     display_title: 'Produits IoT'
     display_options:
-      filters:
-        field_subhome_target_id:
-          expose:
-            label: 'Secteur d''activité'
-        field_subhome_target_id_1:
-          expose:
-            label: 'Pôles métiers'
-        field_subhome_target_id_2:
-          expose:
-            label: 'Typologie de produit'
-        field_subhome_target_id_3:
-          expose:
-            label: Usage
       title: 'Produits IoT'
       exposed_form:
         options:
