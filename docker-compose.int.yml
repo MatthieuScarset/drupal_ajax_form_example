@@ -1,0 +1,36 @@
+version: "3.1"
+services:
+  nginx:
+    build:
+      context: config/docker/local/nginx
+    container_name: $CONTAINER_NGINX
+    working_dir: /application
+    environment:
+      CONTAINER_PHP_FPM: $CONTAINER_PHP_FPM
+    depends_on:
+      - php-fpm
+    volumes:
+      - .:/application
+    networks:
+      - master_default
+      - default
+
+  php-fpm:
+    build:
+      context: config/docker/local/php-fpm
+      args:
+        UID: $UID
+        GID: $GID
+    container_name: $CONTAINER_PHP_FPM
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+      - ${DRUPAL_SITES_DIR:-./sites}:/application/sites
+    networks:
+      - master_default
+      - default
+
+networks:
+  master_default:
+    external: true

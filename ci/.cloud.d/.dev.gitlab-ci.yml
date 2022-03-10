@@ -1,0 +1,5 @@
+
+
+variables:
+  SERVER_IP: $SSH_DEV_IP
+  DOCKER_COMPOSE_FILE: "docker-compose.yml"

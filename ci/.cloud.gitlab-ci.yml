@@ -6,12 +6,20 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - update
 
+# Include files to overrides specifics variables
+include:
+  - local: /ci/.cloud.d/.dev.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "dev"
+  - local: /ci/.cloud.d/.int.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "integration"
+
 variables:
-  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.yml"
+  DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/$DOCKER_COMPOSE_FILE"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
-  SHARED_DIR: "$CI_PROJECT_PATH/../shared/"
-  SERVER_IP: $SSH_DEV_IP
+  ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
 
 
 before_script:
@@ -42,8 +50,7 @@ Deploy dev:
         [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
-  rules:
-    - if: $CI_COMMIT_BRANCH == "dev"
+
 
 Build drupal:
   stage: build
@@ -52,8 +59,7 @@ Build drupal:
     - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CI_PROJECT_PATH/sites/default/
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
-  rules:
-    - if: $CI_COMMIT_BRANCH == "dev"
+
 
 Update drupal:
   stage: update
@@ -63,12 +69,4 @@ Update drupal:
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
-  rules:
-    - if: $CI_COMMIT_BRANCH == "dev"
-
-
-
-
-
-
 
