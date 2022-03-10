@@ -89,3 +89,51 @@ Build Image:
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
 
+
+#image:
+#  docker:latest
+#services:
+#    - docker:dind
+#stages:
+#  - test
+#  - push
+#variables:
+#  VAULT_VERSION: "1.6.2"
+#  VAULT_OPTS: "-tls-skip-verify=true"
+#  VAULT_ADDR: "https://vault-oab.si.fr.intraorange:8200"
+#  VAULT_PATH: prj/ops-bdx/ci
+#  ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002/ops_bdx"
+#before_script:
+#  - apk add -q jq  # Install vault
+#  - wget "https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip"
+#  - unzip "vault_${VAULT_VERSION}_linux_amd64.zip"
+#  - d /usr/local/bin
+#  - chmod +x /usr/local/bin/vault
+#  - rm "vault_${VAULT_VERSION}_linux_amd64.zip"  # Vault login
+#  - export VAULT_TOKEN=$(vault write $VAULT_OPTS -field=token auth/git-oab/login role=namespace-ops-bdx jwt=$CI_JOB_JWT)
+#  - vault login $VAULT_OPTS $VAULT_TOKEN  # Retrieve Artifactory login/api key from Vault
+#  - export ARTIFACTORY_USERNAME=$(vault read $VAULT_OPTS -format json -field=artifactory $VAULT_PATH | jq -r .login)
+#  - export ARTIFACTORY_API_KEY=$(vault read $VAULT_OPTS -format json -field=artifactory $VAULT_PATH | jq -r .api_key)  # Docker
+#  - docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_API_KEY $ARTIFACTORY_DOCKER_REGISTRY -
+#  - >    docker build --no-cache    -f Dockerfile    -t "postfix:${CI_COMMIT_TAG}" .
+#  - docker images "postfix:${CI_COMMIT_TAG}"
+#  - docker tag "postfix:${CI_COMMIT_TAG}" "${ARTIFACTORY_DOCKER_REGISTRY}/postfix:${CI_COMMIT_TAG}" # job
+#templlates.test_build: &test_build
+#  stage: test
+#  script:
+#    - echo "Build seems to pass ... well done ;)"
+#  tags:
+#    - image_build
+#  only:
+#    - merge_requests
+#
+#build_push:
+#  stage: push
+#  script:
+#    - docker push "${ARTIFACTORY_DOCKER_REGISTRY}/postfix:${CI_COMMIT_TAG}"
+#  tags:
+#    - image_build
+#  only:
+#    - tags
+#    when: manual
+
