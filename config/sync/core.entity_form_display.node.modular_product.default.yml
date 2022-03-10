@@ -9,9 +9,12 @@ dependencies:
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
+    - field.field.node.modular_product.field_top_zone_image
+    - image.style.thumbnail
     - node.type.modular_product
   module:
     - field_group
+    - image
     - link
     - oab_backoffice
     - paragraphs
@@ -27,6 +30,7 @@ third_party_settings:
         - field_modular_product_tarif
         - group_cta_button
         - field_call_to_action_link
+        - field_top_zone_image
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -155,6 +159,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_top_zone_image:
+    weight: 35
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
     region: content
   langcode:
     type: language_select

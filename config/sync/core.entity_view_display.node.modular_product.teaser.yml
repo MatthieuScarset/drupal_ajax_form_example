@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
+    - field.field.node.modular_product.field_top_zone_image
     - node.type.modular_product
   module:
     - user
@@ -30,4 +31,5 @@ hidden:
   field_product_category: true
   field_product_name: true
   field_teaser: true
+  field_top_zone_image: true
   langcode: true
