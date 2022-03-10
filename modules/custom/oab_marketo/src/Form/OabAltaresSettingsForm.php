@@ -3,15 +3,11 @@
 namespace Drupal\oab_marketo\Form;
 
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\oab_marketo\PhotoCommercialeService;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,12 +24,12 @@ class OabAltaresSettingsForm extends ConfigFormBase {
   /**
    * @var FileSystemInterface
    */
-  private $fileSystem;
+  private FileSystemInterface $fileSystem;
 
   /**
    * @var ExtensionPathResolver
    */
-  private $pathResolver;
+  private ExtensionPathResolver $pathResolver;
 
 
   /**

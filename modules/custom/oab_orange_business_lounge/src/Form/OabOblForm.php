@@ -2,10 +2,12 @@
 
 namespace Drupal\oab_orange_business_lounge\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\file\Entity\File;
-
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 /**
@@ -13,7 +15,27 @@ use Drupal\file\Entity\File;
  */
 class OabOblForm extends ConfigFormBase {
 
-    const ZONE_IMAGES = "zones_image";
+  /**
+   * @var MessengerInterface
+   */
+  private MessengerInterface $messengerService;
+
+  public function __construct(ConfigFactoryInterface $config_factory, MessengerInterface $messenger_service) {
+    parent::__construct($config_factory);
+    $this->messengerService = $messenger_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): OabOblForm|ConfigFormBase|static {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('messenger'),
+    );
+  }
+
+  const ZONE_IMAGES = "zones_image";
     const IMAGE_LOCATION = "public://obl_zone_images";
 
     public static function getConfigName() {
@@ -93,7 +115,7 @@ class OabOblForm extends ConfigFormBase {
                 );
             }
         } else {
-            drupal_set_message(t('API DOWN. You can\'t add new zones for the moment'), 'error');
+            $this->messenger->addMessage(t('API DOWN. You can\'t add new zones for the moment'), 'error');
 
             foreach ($images as $image) {
                 $form['images']['image_block_' . $image] = array(
@@ -121,9 +143,9 @@ class OabOblForm extends ConfigFormBase {
         $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
 
         if ($obl_service->isValid($url)) {
-          drupal_set_message(t('Api connected Successfully'), 'status', TRUE);
+          $this->messenger->addMessage(t('Api connected Successfully'), 'status', TRUE);
         } else {
-          drupal_set_message(t('Unexpected HTTP code'), 'error', TRUE);
+          $this->messenger->addMessage(t('Unexpected HTTP code'), 'error', TRUE);
         }
 
     }
