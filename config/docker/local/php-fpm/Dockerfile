@@ -59,7 +59,7 @@ RUN apt-get update && apt-get install -y nodejs npm
 RUN npm install -g yarn
 
 # Verifie si le groupe oab_web existe et la crée s'il n'existe pas
-RUN [ ! $(getent group oab_web) ] && addgroup --gid $GID oab_web || true
+RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true
 
 # User
 RUN adduser --uid $UID --gid $GID oab_web
