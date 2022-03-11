@@ -12,7 +12,7 @@ dependencies:
 id: theme_one_i_directaccessbarbr
 theme: theme_one_i
 region: prefooter
-weight: -41
+weight: -57
 provider: null
 plugin: 'system_menu_block:direct-access-bar-br'
 settings:

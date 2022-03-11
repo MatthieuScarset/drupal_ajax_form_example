@@ -30,6 +30,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
+      region: content
     group_write:
       children:
         - langcode
@@ -45,6 +46,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Write
+      region: content
     group_vi:
       children:
         - field_visual_tile
@@ -58,6 +60,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Visual
+      region: content
     group_classify:
       children:
         - field_insight
@@ -72,6 +75,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Classify
+      region: content
 id: node.external_content.default
 targetEntityType: node
 bundle: external_content
