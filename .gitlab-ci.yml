@@ -40,7 +40,7 @@ Deploy dev:
   script:
     - |
       $SSH_COMMAND "
-        [ -f $DOCKER_COMPOSE_FILE ] && docker-compose -f $DOCKER_COMPOSE_FILE down;
+        [ -f $DOCKER_COMPOSE_FILE ] && docker-compose -f $DOCKER_COMPOSE_FILE down && echo "docker are down";
         [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
