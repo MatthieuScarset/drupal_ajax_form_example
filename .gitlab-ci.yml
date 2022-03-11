@@ -51,6 +51,7 @@ Build drupal:
   stage: build
   script:
     - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
+    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env build
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
   rules:
