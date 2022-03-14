@@ -179,6 +179,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
   }
 
   private function getSynomiaResult($type_search, $mot_recherche, $filtre_rubrique, $num_page, $sort_by) {
+
       $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
       $url_synomia = '';
       if($type_search == 'default') {
@@ -223,7 +224,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
               $path .= "&filtres[]=rubrique:".$filtre_rubrique;
           }
 
-          //oabt($path);die();
+       //   dd($path);
           $ch = curl_init();
 
           $config_proxy = $config_factory->get(OabGeneralSettingsForm::getConfigName());
@@ -245,6 +246,7 @@ class OabSynomiaSearchEngineController extends ControllerBase
               )
           );
           $ret_value = curl_exec($ch);
+
           curl_close($ch);
           return $ret_value;
       } else {

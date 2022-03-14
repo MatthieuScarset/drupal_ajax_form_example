@@ -46,7 +46,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
         $form['url_synomia_mss_assistance'] = array(
             '#type' => 'textfield',
             '#title' => 'URL Synomia for MSS Assistance',
-            '#default_value' => $config->get('url_synomia_mss_assistance'),
+            '#default_value' => \Drupal::state()->get('url_synomia_mss_assistance'),
         );
         //nombre de résultats par page
         $form['nb_results_per_page'.$language->getId()] = array(
@@ -85,7 +85,7 @@ class OabSynomiaSearchSettingsForm extends ConfigFormBase
             $config->set('order_content_types_'.$language->getId(), $form_state->getValue('order_content_types_'.$language->getId()));
         }
         $config->set('nb_results_per_page', $form_state->getValue('nb_results_per_page'));
-        $config->set('url_synomia_mss_assistance', $form_state->getValue('url_synomia_mss_assistance'));
+        \Drupal::state()->set('url_synomia_mss_assistance', $form_state->getValue('url_synomia_mss_assistance'));
         $config->set('order_typology_mss_assistance', $form_state->getValue('order_typology_mss_assistance'));
         $config->save();
     parent::submitForm($form, $form_state);
