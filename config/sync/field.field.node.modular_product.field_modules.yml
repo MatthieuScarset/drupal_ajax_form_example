@@ -1,0 +1,85 @@
+uuid: 3ed29cc6-61d0-4671-8c2f-d9c7f31f0db0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_modules
+    - node.type.modular_product
+    - paragraphs.paragraphs_type.paragraph_wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.modular_product.field_modules
+field_name: field_modules
+entity_type: node
+bundle: modular_product
+label: Modules
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      paragraph_wysiwyg: paragraph_wysiwyg
+    target_bundles_drag_drop:
+      contact_button_item:
+        weight: 20
+        enabled: false
+      default_button:
+        weight: 21
+        enabled: false
+      home_banner:
+        weight: 22
+        enabled: false
+      home_caroussel:
+        weight: 23
+        enabled: false
+      home_column:
+        weight: 24
+        enabled: false
+      home_column_section:
+        weight: 25
+        enabled: false
+      home_playlist:
+        weight: 26
+        enabled: false
+      home_thematic_columns:
+        weight: 27
+        enabled: false
+      homepage_banner_experience:
+        weight: 28
+        enabled: false
+      homepage_banner_item:
+        weight: 29
+        enabled: false
+      homepage_news:
+        weight: 30
+        enabled: false
+      infography_partner:
+        weight: 31
+        enabled: false
+      marketo:
+        weight: 32
+        enabled: false
+      paragraph_block_rebond:
+        weight: 33
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 34
+        enabled: false
+      paragraph_wysiwyg:
+        enabled: true
+        weight: 35
+      rebond_wysiwyg:
+        weight: 36
+        enabled: false
+      related_content:
+        weight: 37
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 38
+        enabled: false
+field_type: entity_reference_revisions

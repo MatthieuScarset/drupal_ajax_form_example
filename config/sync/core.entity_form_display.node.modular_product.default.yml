@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_modular_product_tarif
+    - field.field.node.modular_product.field_modules
     - field.field.node.modular_product.field_product_call_to_action
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
@@ -65,6 +66,7 @@ third_party_settings:
         - group_write
         - group_top_zone
         - group_presentation
+        - group_modules
       parent_name: ''
       weight: 0
       format_type: tabs
@@ -119,6 +121,21 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Modules configuration'
+    group_modules:
+      children:
+        - field_modules
+      parent_name: group_onglets
+      weight: 6
+      format_type: tab
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Modules
 id: node.modular_product.default
 targetEntityType: node
 bundle: modular_product
@@ -146,6 +163,18 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_modules:
+    type: entity_reference_paragraphs
+    weight: 36
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
     region: content
   field_product_call_to_action:
     type: entity_reference_paragraphs
