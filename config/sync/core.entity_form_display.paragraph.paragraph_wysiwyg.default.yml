@@ -1,0 +1,25 @@
+uuid: 9394954c-d376-4684-81af-4e57a9b9c1c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.paragraph_wysiwyg.field_content
+    - paragraphs.paragraphs_type.paragraph_wysiwyg
+  module:
+    - text
+id: paragraph.paragraph_wysiwyg.default
+targetEntityType: paragraph
+bundle: paragraph_wysiwyg
+mode: default
+content:
+  field_content:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true

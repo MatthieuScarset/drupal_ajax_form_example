@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.modular_product.field_call_to_action_link
+    - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_product_call_to_action
     - field.field.node.modular_product.field_product_category
@@ -46,6 +47,7 @@ third_party_settings:
     group_write:
       children:
         - langcode
+        - group_modules_configuration
       parent_name: group_onglets
       weight: 3
       format_type: tab
@@ -103,6 +105,20 @@ third_party_settings:
         classes: ''
         show_empty_fields: false
       label: 'Product CTA button'
+    group_modules_configuration:
+      children:
+        - field_enable_wysiwyg_paragraph
+      parent_name: group_write
+      weight: 4
+      format_type: fieldset
+      region: content
+      format_settings:
+        show_empty_fields: false
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Modules configuration'
 id: node.modular_product.default
 targetEntityType: node
 bundle: modular_product
@@ -115,6 +131,13 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_enable_wysiwyg_paragraph:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_modular_product_tarif:
     weight: 32

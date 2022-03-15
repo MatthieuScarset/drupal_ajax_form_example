@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.modular_product.field_call_to_action_link
+    - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_product_call_to_action
     - field.field.node.modular_product.field_product_category
@@ -23,7 +24,7 @@ bundle: modular_product
 mode: default
 content:
   field_call_to_action_link:
-    weight: 108
+    weight: 6
     label: above
     settings:
       trim_length: 80
@@ -35,7 +36,7 @@ content:
     type: link
     region: content
   field_modular_product_tarif:
-    weight: 106
+    weight: 4
     label: above
     settings:
       link_to_entity: false
@@ -44,7 +45,7 @@ content:
     region: content
   field_product_call_to_action:
     type: entity_reference_revisions_entity_view
-    weight: 107
+    weight: 5
     label: above
     settings:
       view_mode: default
@@ -52,14 +53,14 @@ content:
     third_party_settings: {  }
     region: content
   field_product_category:
-    weight: 104
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: entity_reference_rss_category
     region: content
   field_product_name:
-    weight: 103
+    weight: 2
     label: above
     settings:
       link_to_entity: false
@@ -67,14 +68,14 @@ content:
     type: string
     region: content
   field_teaser:
-    weight: 102
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_top_zone_image:
-    weight: 109
+    weight: 7
     label: above
     settings:
       image_style: ''
@@ -83,9 +84,10 @@ content:
     type: image
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_enable_wysiwyg_paragraph: true
   langcode: true
