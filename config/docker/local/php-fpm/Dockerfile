@@ -62,7 +62,7 @@ RUN npm install -g yarn
 RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true
 
 # User
-RUN groupadd -g $GID oab_web
+RUN #groupadd -g $GID oab_web
 RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
