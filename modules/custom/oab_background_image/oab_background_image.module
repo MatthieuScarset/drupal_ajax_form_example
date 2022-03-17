@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\media\Entity\Media;
 
 define("BACKGROUND_FIELD_VISIBILITY", 'field_visibility');
@@ -102,7 +103,11 @@ function oab_background_image_preprocess_html(&$variables) {
     $background = \Drupal::service('oab_background_image.bg_image_management')->get($path);
 
     if ($background !== null && $background->isPublished() && isset($background->field_image->entity)) {
-        $file_url = file_url_transform_relative(file_create_url($background->field_image->entity->getFileUri()));
+
+      /** @var FileUrlGenerator  $service_generate_url */
+      $service_generate_url = \Drupal::service('file_url_generator');
+
+      $file_url = $service_generate_url->generateString($background->field_image->entity->getFileUri());
 
         if ($file_url !== false) {
             if (!isset($variables['attributes']['style'])) {

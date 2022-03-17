@@ -1,23 +1,49 @@
 <?php
 namespace Drupal\oab_orange_business_lounge\Controller;
 
+use Drupal;
 use \Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\File\FileUrlGenerator;
+use Drupal\file\Entity\File;
 use Drupal\oab_orange_business_lounge\Form\OabOblForm;
-use Zend\Diactoros\Response\JsonResponse;
+use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class OblPricesController extends ControllerBase {
 
-    public function oblPricePage($id) {
+  /**
+   * @var FileUrlGenerator
+   */
+  private FileUrlGenerator $fileUrlGenerator;
+
+  public function __construct(FileUrlGenerator $file_url_generator) {
+    $this->fileUrlGenerator = $file_url_generator;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('file_url_generator')
+    );
+  }
+
+  #[ArrayShape([
+    '#countries' => "bool|mixed",
+    '#zones' => "array",
+    '#zones_image' => "mixed",
+    '#theme' => "string",
+    '#attached' => "array"
+  ])] public function oblPricePage($id): array {
 
       /** @var \Drupal\oab_orange_business_lounge\Services\OabOblSwagger $obl_service */
-        $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
-        $config = \Drupal::config(OabOblForm::getConfigName());
+        $obl_service = Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+        $config = Drupal::config(OabOblForm::getConfigName());
 
         $zones_image = $config->getRawData()['zones_image'];
 
         foreach ($zones_image as $key => $image) {
-            $file = \Drupal\file\Entity\File::load($image);
-            $zones_image[$key] = file_create_url($file->getFileUri());
+            $file = File::load($image);
+            $zones_image[$key] = $this->fileUrlGenerator->generateAbsoluteString($file->getFileUri());
         }
 
         $countries = $obl_service->getCountriesWithoutOperator();
@@ -52,21 +78,21 @@ class OblPricesController extends ControllerBase {
     }
 
     public function getTitle() {
-      $config = \Drupal::config(OabOblForm::getConfigName());
+      $config = Drupal::config(OabOblForm::getConfigName());
       return $config->get('title_label');
     }
 
-    public function oblUniqueZone($id) {
+    public function oblUniqueZone($id): JsonResponse {
 
-        $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+        $obl_service = Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $unique_zone = $obl_service->getOneZone($id);
 
         return new JsonResponse($unique_zone);
     }
 
-    public function oblUniqueCountry($id) {
+    public function oblUniqueCountry($id): JsonResponse {
 
-        $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
+        $obl_service = Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
         $unique_countrie = $obl_service->getOneCountry($id);
 
         return new JsonResponse($unique_countrie);

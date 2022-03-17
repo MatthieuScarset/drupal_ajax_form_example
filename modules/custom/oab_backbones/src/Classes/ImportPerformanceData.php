@@ -10,10 +10,11 @@ namespace Drupal\oab_backbones\Classes;
 
 
 use Drupal\Core\Archiver\Zip;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\Core\Messenger\MessengerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Url;
 
 /**
  * Classe qui va faire l'import des données
@@ -29,18 +30,34 @@ class ImportPerformanceData
      */
     private $messenger;
 
+    /**
+     * @var ExtensionPathResolver
+     */
+    private $pathResolver;
+
+    /**
+     * @var FileSystemInterface
+     */
+    private $fileSystem;
+
   /**
    * ImportPerformanceData constructor.
+   *
    * @param MessengerInterface $messenger
+   * @param ExtensionPathResolver $extension_path_resolver
    */
-    public function __construct(MessengerInterface $messenger) {
+    public function __construct(MessengerInterface $messenger,
+                                ExtensionPathResolver $extension_path_resolver,
+                                FileSystemInterface $file_system) {
       $this->messenger = $messenger;
+      $this->pathResolver = $extension_path_resolver;
+      $this->fileSystem = $file_system;
     }
 
   public function executeImport($month) {
         $zip_file_name_complete = $this::IMPORT_DIRECTORY . 'DATA_' . $month . '.csv.zip';
-        $path_zip_file_name_nomplete = \Drupal::service('file_system')->realpath($zip_file_name_complete);
-        $path_to_folder = \Drupal::service('file_system')->realpath($this::IMPORT_DIRECTORY);
+        $path_zip_file_name_nomplete = $this->fileSystem->realpath($zip_file_name_complete);
+        $path_to_folder = $this->fileSystem->realpath($this::IMPORT_DIRECTORY);
         if (file_exists($path_zip_file_name_nomplete) && filesize($path_zip_file_name_nomplete) > 0) {
             try {
                 $zip = new Zip($path_zip_file_name_nomplete);
@@ -97,7 +114,7 @@ class ImportPerformanceData
                 'progress_message' => t('Processed @current out of @total.') . '<br/>' . Link::fromTextAndUrl(t('go back to the form'),
                         Url::fromRoute('oab_backbones.performance_data'))->toString(),
                 'error_message' => t('Performance data import has encountered an error.'),
-                'file' => drupal_get_path('module', 'oab_backbones') . '/oab_backbones_batch_operations.inc',
+                'file' => $this->pathResolver->getPath('module', 'oab_backbones') . '/oab_backbones_batch_operations.inc',
             );
 
             batch_set($batch);

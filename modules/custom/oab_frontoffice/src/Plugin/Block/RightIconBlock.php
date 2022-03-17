@@ -5,6 +5,9 @@ namespace Drupal\oab_frontoffice\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RendererInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -17,13 +20,32 @@ use Drupal\Core\Form\FormStateInterface;
  *
  */
 
-class RightIconBlock extends BlockBase {
+class RightIconBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-    public function build() {
+  /**
+   * @var RendererInterface
+   */
+  private $renderer;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer_interface) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->renderer = $renderer_interface;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('renderer')
+    );
+  }
+
+  public function build() {
             $form = NULL;
             if (\Drupal::moduleHandler()->moduleExists('oab_synomia_search_engine')) {
                 $render = \Drupal::formBuilder()->getForm('Drupal\oab_synomia_search_engine\Form\SynomiaSearchHeaderBlockForm');
-                $form = render($render);
+                $form = $this->renderer->render($render);
             }
             return array(
                 '#theme' => 'custom-righticonblock',

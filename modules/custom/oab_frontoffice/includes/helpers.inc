@@ -9,10 +9,14 @@
 use Drupal\Core\Database\Database;
 
 /**
- * cleane les options du menu déroulant des filtres exposés
- * @param $options du tableau
+ * clean les options du menu déroulant des filtres exposés
+ *
+ * @param $options
+ * @param $txt_all
+ *
+ * @return array
  */
-function clean_exposed_filters_by_language($options = array(), $txt_all) {
+function clean_exposed_filters_by_language($options, $txt_all): array {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     foreach ($options as $key => $value) {
         if ($key != 'All') {
@@ -134,10 +138,13 @@ function getSocialBarParameters($page_title, $meta_description, $og_image) {
 
 /**
  * Pour retrouver tous les Alias d'un node
+ *
  * @param $nid
+ * @param $langcode|null
+ *
  * @return array
  */
-function oab_getAllPathFromNID($nid, $langcode = null) {
+function oab_getAllPathFromNID($nid, $langcode): array {
     $query = Database::getConnection()->select('path_alias', 'u');
 
     $query->fields('u', ['alias']);

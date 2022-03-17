@@ -66,6 +66,7 @@ services:
           GID: $GID
       container_name: $CONTAINER_PHP_FPM
       working_dir: /application
+      entrypoint: ./entrypoint.php-fpm.sh
       depends_on:
         - mariadb
       volumes:

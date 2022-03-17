@@ -2,16 +2,33 @@
 
 namespace Drupal\oab_bvpn_import\Classes;
 
-use Drupal\Core\Link;
-use Drupal\Core\Url;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\FileInterface;
 
 class CSPImport {
   const IMPORT_DIRECTORY = 'public://bvpn/';
   const LOGOS_DIRECTORY = 'public://bvpn_logos/';
 
+  /**
+   * @var ExtensionPathResolver
+   */
+  private ExtensionPathResolver $pathResolver;
+
+  /**
+   * @var FileSystemInterface
+   */
+  private FileSystemInterface $fileSystem;
+
+  public function __construct(ExtensionPathResolver $extension_path_resolver,
+                              FileSystemInterface $file_system) {
+    $this->pathResolver = $extension_path_resolver;
+    $this->fileSystem = $file_system;
+  }
+
   public function executeImport($filename) {
 
-    $path_to_folder = \Drupal::service('file_system')->realpath($this::IMPORT_DIRECTORY);
+    $path_to_folder = $this->fileSystem->realpath($this::IMPORT_DIRECTORY);
     $path_file_csv = $path_to_folder . '/' .$filename;
 
     if (file_exists($path_file_csv) && filesize($path_file_csv) > 0) {
@@ -37,12 +54,28 @@ class CSPImport {
           'init_message' => t('CSP import is starting.'),
           'progress_message' => t('Processed @current out of @total.') ,
           'error_message' => t('CSP data import has encountered an error.'),
-          'file' => drupal_get_path('module', 'oab_bvpn_import') . '/oab_bvpn_import_batch_operations.inc',
+          'file' => $this->pathResolver->getPath('module', 'oab_bvpn_import') . '/oab_bvpn_import_batch_operations.inc',
         );
 
         batch_set($batch);
       }
     }
 
+  }
+
+  /**
+   * @return bool|array|FileInterface|null
+   */
+  public function saveFileImport(): bool|array|FileInterface|null {
+    if (!is_dir(self::IMPORT_DIRECTORY)) {
+      $this->fileSystem->mkdir(self::IMPORT_DIRECTORY, NULL, TRUE);
+    }
+
+    return file_save_upload(
+      'file',
+      ['file_validate_extensions' => ''],
+      self::IMPORT_DIRECTORY,
+      replace: FileSystemInterface::EXISTS_REPLACE
+    );
   }
 }

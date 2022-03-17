@@ -1,29 +1,43 @@
 <?php
 namespace Drupal\oab_orange_business_lounge\Controller;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Pager\PagerManagerInterface;
-use Drupal\oab_orange_business_lounge\Form\SearchCountryForm;
-use \Drupal\Core\Controller\ControllerBase;
-use Drupal\oab_orange_business_lounge\Form\OabOblForm;
 use Drupal\oab_orange_business_lounge\Services\OabOblSwagger;
+use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class OblController extends ControllerBase {
 
-  /**
-   * @var PagerManagerInterface
-   */
-  private $pageManager;
+    /**
+     * @var PagerManagerInterface
+     */
+    private PagerManagerInterface $pageManager;
 
-  public function __construct(PagerManagerInterface $page_manager) {
-    $this->pageManager = $page_manager;
-  }
+    public function __construct(PagerManagerInterface $page_manager) {
+      $this->pageManager = $page_manager;
+    }
 
-    public function getTitle() {
+    public static function create(ContainerInterface $container): OblController {
+      return new self(
+        $container->get('pager.manager')
+      );
+    }
+
+  public function getTitle() {
         return "Accords roaming";
     }
 
-    public function oblPage(Request $request) {
+    #[ArrayShape([
+      '#zones' => "bool|mixed",
+      '#theme' => "string",
+      '#attached' => "array",
+      '#detail_accords' => "array",
+      '#techno' => "mixed",
+      '#techno_for_print' => "mixed|string",
+      '#pager' => "string[]"
+    ])] public function oblPage(Request $request): array {
 
       $page = 0;
       if ($request->query->has('page')) {
@@ -81,7 +95,7 @@ class OblController extends ControllerBase {
         );
     }
 
-    public function oblGetCountriesWithOperators($id, $page) {
+    public function oblGetCountriesWithOperators($id, $page): JsonResponse {
 
       $obl_service = \Drupal::service('oab_orange_business_lounge.oab_obl_swagger');
       $get_countries_with_op = $obl_service->getNetworkTypes($id, $page);
@@ -92,7 +106,7 @@ class OblController extends ControllerBase {
     /*
      * sort tab technos
      */
-    public function sortById($a, $b) {
+    public function sortById($a, $b): bool {
       return $a["id"] > $b["id"];
     }
 
@@ -101,7 +115,7 @@ class OblController extends ControllerBase {
    * @param $actual_techno
    * @return mixed
    */
-  private function getNameTechnoByActualTech($technologies, $actual_techno) {
+  private function getNameTechnoByActualTech($technologies, $actual_techno): mixed {
     $ret = '';
     foreach($technologies as $key => $technology) {
       if ( $technology['id'] == $actual_techno ) {
@@ -112,7 +126,7 @@ class OblController extends ControllerBase {
     return $ret;
   }
 
-  private function getTechnoByName($technologies, $techno_name) {
+  private function getTechnoByName($technologies, $techno_name): mixed {
     $ret = false;
     foreach ($technologies as $techno) {
       if (isset($techno['name']) && $techno['name'] === $techno_name) {

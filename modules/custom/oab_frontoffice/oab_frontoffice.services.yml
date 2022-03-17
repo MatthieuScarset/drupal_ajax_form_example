@@ -14,6 +14,7 @@ services:
       - { name: breadcrumb_builder, priority: 101 }
   oab_frontoffice.twig.OabExtension:
       class: Drupal\oab_frontoffice\Twig\OabExtension
+      arguments: ['@module_handler', '@file_url_generator', '@file_system', '@request_stack']
       tags:
         - { name: twig.extension }
   oab_frontoffice.smart_redirection:

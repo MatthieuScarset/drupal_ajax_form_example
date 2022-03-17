@@ -6,8 +6,13 @@ use Drupal\ckeditor\CKEditorPluginInterface;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\ckeditor\Annotation\CKEditorPlugin;
 use Drupal\Core\Annotation\Translation;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Defines the "toolbar" plugin.
  *
@@ -17,8 +22,30 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurableInterface
+class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurableInterface, ContainerFactoryPluginInterface
 {
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('extension.path.resolver')
+    );
+  }
+
+
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
@@ -45,7 +72,7 @@ class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurab
    */
   public function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/colorbutton/plugin.js';
+    $plugin = $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/colorbutton/plugin.js';
     return $plugin;
   }
 
@@ -76,11 +103,11 @@ class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurab
     return [
       'TextColor' => array(
         'label' => $this->t('Text Color'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/colorbutton/icons/textcolor.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/colorbutton/icons/textcolor.png',
       ),
       'BGColor' => array(
         'label' => $this->t('Background Color'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/colorbutton/icons/bgcolor.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/colorbutton/icons/bgcolor.png',
       ),
     ];
   }
@@ -115,4 +142,5 @@ class ColorButton extends CKEditorPluginBase implements CKEditorPluginConfigurab
       $form_state->setError($element, 'Only valid hex values are allowed (A-F, 0-9). No other symbols or letters are allowed. Please check your settings and try again.');
     }
   }
+
 }
