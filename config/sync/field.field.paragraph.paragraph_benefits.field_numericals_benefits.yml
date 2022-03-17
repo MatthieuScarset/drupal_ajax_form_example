@@ -1,0 +1,23 @@
+uuid: ae136819-40bf-4a8b-92fc-a31f648582e8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_numericals_benefits
+    - paragraphs.paragraphs_type.paragraph_benefits
+id: paragraph.paragraph_benefits.field_numericals_benefits
+field_name: field_numericals_benefits
+entity_type: paragraph
+bundle: paragraph_benefits
+label: 'Numericals Benefits'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Numericals
+  off_label: Textuals
+field_type: boolean

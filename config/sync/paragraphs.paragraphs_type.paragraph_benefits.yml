@@ -1,0 +1,10 @@
+uuid: 23622a2d-8d1e-477c-b13d-ab9e173d20dd
+langcode: fr
+status: true
+dependencies: {  }
+id: paragraph_benefits
+label: 'Paragraph Benefits'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
