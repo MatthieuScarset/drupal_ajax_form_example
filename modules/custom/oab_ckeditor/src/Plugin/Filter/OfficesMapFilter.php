@@ -8,9 +8,13 @@
 namespace Drupal\oab_ckeditor\Plugin\Filter;
 
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use Drupal\views\Views;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @Filter(
@@ -20,12 +24,32 @@ use Drupal\views\Views;
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
  * )
  */
-class OfficesMapFilter extends FilterBase {
+class OfficesMapFilter extends FilterBase implements ContainerFactoryPluginInterface {
 
     private $pattern = '/\|\|.*?\|\|/s';
     private $regionId = "";
     private $countryId = "";
     private $boolParamsUrl = false;
+
+    /**
+     * @var ExtensionPathResolver
+     */
+    private $renderer;
+
+    public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer_interface) {
+      parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+      $this->renderer = $renderer_interface;
+    }
+
+    public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+      return new self(
+        $configuration,
+        $plugin_id,
+        $plugin_definition,
+        $container->get('renderer')
+      );
+    }
 
     public function process($text, $langcode) {
         $result = new FilterProcessResult($text);
@@ -126,15 +150,15 @@ class OfficesMapFilter extends FilterBase {
         $new_text = '<div class="officeMapBlock">'.
             '<div class="region region-content col-md-12 col-sm-12" >'.
                                     '<div class="form_filter_regions_countries col col-md-12 col-sm-12">'.
-                                            render($regions_countries_form).
+                                            $this->renderer->render($regions_countries_form).
                         '</div>'.
                         '<div class="block_principal_offices_map col-lg-12 col-md-12 col-sm-12">'.
                         ' <div class="block_carte col-lg-9 col-md-8 col-sm-12">'.
-                                                render($map_block).
+                                $this->renderer->render($map_block).
                         '</div>'.
                         '<div class="col-lg-3 col-md-4 col-sm-12 addresses-list">'.
                          ' <div class="col-lg-12 col-md-12 col-sm-12 list">'.
-                                                     render($offices_list_block).'</div>'.
+                                  $this->renderer->render($offices_list_block).'</div>'.
                             ' </div>'.
                             ' </div>'.
                             ' </div>'.

@@ -1,6 +1,7 @@
 <?php
 
 
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -62,8 +63,11 @@ function oab_icomoon_tokens($type, $tokens, array $data, array $options, \Drupal
 }
 
 function getIcomoonIconsNames(){
+  /** @var ExtensionPathResolver $service_path_resolver */
+  $service_path_resolver = \Drupal::service('extension.path.resolver');
+
   $names = [];
-  $path_to_json_file = drupal_get_path('module', 'oab_icomoon') . '/icomoon/selection.json';
+  $path_to_json_file = $service_path_resolver->getPath('module', 'oab_icomoon') . '/icomoon/selection.json';
   $datas = json_decode(file_get_contents($path_to_json_file), true);
 
   foreach ($datas['icons'] as $data){

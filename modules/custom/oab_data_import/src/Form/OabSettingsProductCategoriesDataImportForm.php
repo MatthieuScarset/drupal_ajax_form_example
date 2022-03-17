@@ -6,9 +6,26 @@ use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_data_import\Classes\ProductCategoriesDataImport;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class OabSettingsProductCategoriesDataImportForm extends FormBase {
+
+
+  /**
+   * @var ProductCategoriesDataImport
+   */
+  private ProductCategoriesDataImport $dataImport;
+
+  public function __construct(ProductCategoriesDataImport $data_import) {
+    $this->dataImport = $data_import;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('oab_data_import.product_categories_data_import'),
+    );
+  }
 
     /**
      * Returns a unique string identifying the form.
@@ -103,8 +120,6 @@ class OabSettingsProductCategoriesDataImportForm extends FormBase {
     public function executeImportHandler(array &$form, FormStateInterface $form_state) {
 
         $input = &$form_state->getUserInput();
-        $import = new ProductCategoriesDataImport();
-        //kint($input["filename"]);die();
-        $import->executeImport($input["filename"]);
+        $this->dataImport->executeImport($input["filename"]);
     }
 }

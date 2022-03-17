@@ -1,16 +1,18 @@
 const path= require('path');
-const MiniCssExtractPlugin= require("mini-css-extract-plugin");
-module.exports= {
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+module.exports = {
   mode: 'development',
   stats: 'normal',
   entry: {
-    "one_i": './assets/scss/one_i.scss',
-    "style": './assets/scss/style.scss',
+    "css/one_i": './assets/scss/one_i.scss',
+    "css/style": './assets/scss/style.scss'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'assets/css'),
-    publicPath: "/assets/css"
+    path: path.resolve(__dirname, 'assets/'),
+    publicPath: "assets/"
   },
   module: {
     rules: [
@@ -44,6 +46,14 @@ module.exports= {
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: './node_modules/@ob1/web/dist/js/ob1.*', to: 'js/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/js/ob1.bundle.*', to: 'js/[name][ext]'},
+        {from: './node_modules/boosted/dist/js/boosted.*', to: 'js/[name][ext]'},
+        {from: './node_modules/boosted/dist/js/boosted.bundle.*', to: 'js/[name][ext]'},
+      ]
     })
   ]
 };

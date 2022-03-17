@@ -6,6 +6,7 @@
  * to arbitrary URLs.
  */
 
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Serialization\Json;
@@ -45,7 +46,10 @@ function oab_entity_embed_link_form_entity_embed_dialog_alter(&$form, FormStateI
  * Implements hook_theme_registry_alter()
  */
 function oab_entity_embed_link_theme_registry_alter(&$theme_registry) {
-  $theme_registry['entity_embed_container']['path'] = drupal_get_path('module', 'oab_entity_embed_link') . '/templates';
+  /** @var ExtensionPathResolver $service_path_resolver */
+  $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+  $theme_registry['entity_embed_container']['path'] = $service_path_resolver->getPath('module', 'oab_entity_embed_link') . '/templates';
 }
 
 /**

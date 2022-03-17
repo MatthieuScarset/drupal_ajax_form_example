@@ -31,7 +31,7 @@ use Drupal\webform\Plugin\WebformElement\DateTime;
  */
 class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommercialeItemInterface {
 
-  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type): array {
 
     // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
@@ -42,7 +42,7 @@ class PhotoCommercialeItem extends ContentEntityBase implements PhotoCommerciale
       ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', false);
 
-    // Standard field, unique outside of the scope of the current project.
+    // Standard field, unique outside the scope of the current project.
     $fields['ident'] = BaseFieldDefinition::create('string')
       ->setLabel(t('ident'))
       ->setDescription(t('The identifier given by orange to the company'))

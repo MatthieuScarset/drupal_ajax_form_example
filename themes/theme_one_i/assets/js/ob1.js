@@ -1,20 +1,22 @@
 /*!
   * OB1 (https://gitlab.forge.orange-labs.fr/boosted/ob1/)
-  * Copyright 2018-2021 The OB1 Authors
-  * Copyright 2018-2021 Orange
+  * Copyright 2018-2022 The OB1 Authors
+  * Copyright 2018-2022 Orange
   * Based on fork of Bootstrap: Boosted
   * Boosted
-  * Copyright 2014-2021 The Boosted Authors
+  * Copyright 2014-2022 The Boosted Authors
   * Licensed under MIT (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
-  (global = global || self, factory(global.ob1 = {}, global.jQuery, global.Popper));
-}(this, (function (exports, jquery, popper) { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ob1 = {}, global.jQuery, global.Popper));
+})(this, (function (exports, require$$0, require$$1) { 'use strict';
 
-  jquery = jquery && Object.prototype.hasOwnProperty.call(jquery, 'default') ? jquery['default'] : jquery;
-  popper = popper && Object.prototype.hasOwnProperty.call(popper, 'default') ? popper['default'] : popper;
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
+  var require$$1__default = /*#__PURE__*/_interopDefaultLegacy(require$$1);
 
   var Accordion = /*#__PURE__*/function () {
     var _proto = Accordion.prototype;
@@ -118,11 +120,10 @@
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
-  }
+  var alert$1 = {exports: {}};
 
-  var util = createCommonjsModule(function (module, exports) {
+  var util$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -133,8 +134,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery) ;
+    module.exports = factory(require$$0__default["default"]) ;
   }(commonjsGlobal, function ($) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
@@ -297,9 +300,10 @@
 
   }));
 
-  });
+  }(util$1));
 
-  var alert = createCommonjsModule(function (module, exports) {
+  var util = util$1.exports;
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -310,8 +314,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -501,37 +507,62 @@
 
   }));
 
-  });
+  }(alert$1));
+
+  var alert = alert$1.exports;
 
   function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
-    subClass.__proto__ = superClass;
+
+    _setPrototypeOf(subClass, superClass);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
   }
 
   function _createForOfIteratorHelperLoose(o, allowArrayLike) {
-    var it;
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (it) return (it = it.call(o)).next.bind(it);
 
-    if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
-      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-        if (it) o = it;
-        var i = 0;
-        return function () {
-          if (i >= o.length) return {
-            done: true
-          };
-          return {
-            done: false,
-            value: o[i++]
-          };
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+      return function () {
+        if (i >= o.length) return {
+          done: true
         };
-      }
-
-      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+        return {
+          done: false,
+          value: o[i++]
+        };
+      };
     }
 
-    it = o[Symbol.iterator]();
-    return it.next.bind(it);
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
   var ob1Common = {};
@@ -752,11 +783,11 @@
     Ob1Component.load(document.body);
   });
 
-  var classes = {
+  var classes$5 = {
     selected: "ob1-box-radio-selected"
   }; // la liste des sélecteurs que l'on utilise dans le code du composant
 
-  var selector = {
+  var selector$2 = {
     parent: ".ob1-box-radio",
     radio: "input[type=radio]"
   };
@@ -789,7 +820,7 @@
       _Ob1Component.prototype.init.call(this, container, parameters);
 
       this.items = [];
-      var radioBtn = this.container.querySelectorAll(selector.radio);
+      var radioBtn = this.container.querySelectorAll(selector$2.radio);
       [].forEach.call(radioBtn, function (item) {
         if (item.checked) {
           _this._addStyle(item);
@@ -832,10 +863,10 @@
     ;
 
     _proto._addStyle = function _addStyle(item) {
-      var parent = item.closest(selector.parent);
+      var parent = item.closest(selector$2.parent);
 
       if (parent) {
-        parent.classList.add(classes.selected);
+        parent.classList.add(classes$5.selected);
       }
     }
     /**
@@ -846,10 +877,10 @@
     ;
 
     _proto._removeStyle = function _removeStyle(item) {
-      var parent = item.closest(selector.parent);
+      var parent = item.closest(selector$2.parent);
 
       if (parent) {
-        parent.classList.remove(classes.selected);
+        parent.classList.remove(classes$5.selected);
       }
     }
     /**
@@ -958,7 +989,8 @@
 
   window.Breadcrumb = Breadcrumb;
 
-  var button = createCommonjsModule(function (module, exports) {
+  var button$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -969,8 +1001,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery) ;
+    module.exports = factory(require$$0__default["default"]) ;
   }(commonjsGlobal, function ($) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
@@ -1138,7 +1172,9 @@
 
   }));
 
-  });
+  }(button$1));
+
+  var button = button$1.exports;
 
   var carrouselClasses = {
     carrousel: "ob1-carrousel",
@@ -1318,7 +1354,8 @@
 
   window.Carrousel = Carrousel;
 
-  var collapse = createCommonjsModule(function (module, exports) {
+  var collapse$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -1329,8 +1366,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -1765,7 +1804,9 @@
 
   }));
 
-  });
+  }(collapse$1));
+
+  var collapse = collapse$1.exports;
 
   var DatePicker = /*#__PURE__*/function () {
     var _proto = DatePicker.prototype;
@@ -2045,7 +2086,7 @@
                 }
 
                 if (hour) {
-                  itemString += "<button  \n                                  class=\"btn-hour selectDateHour " + statusClass + "\" \n                                  datadate=\"" + entry.dateProposals + "\" datahour=\"" + hour + "\"\n                                  " + (statusClass === "hour-disable" ? "disabled" : "") + ">" + hour + "</button>";
+                  itemString += "<button\n                                  class=\"btn-hour selectDateHour " + statusClass + "\"\n                                  datadate=\"" + entry.dateProposals + "\" datahour=\"" + hour + "\"\n                                  " + (statusClass === "hour-disable" ? "disabled" : "") + ">" + hour + "</button>";
                 } else {
                   itemString += "<button class=\"btn-hour selectDateHour " + statusClass + "\" disabled>-</button>";
                 }
@@ -2068,7 +2109,7 @@
       } // affichage des boutons du swiper
 
 
-      itemString += "</div>\n         <div class=\"swiper-button-prev d-none d-md-block\" title=\"Pr\xE9c\xE9dant\"></div>\n         <div class=\"swiper-button-next d-none d-md-block\" title=\"Suivant\"></div>\n      </div>\n      <!-- BOUTONS TEXTUELS SUPPLEMENTAIRES DE SWIPE : VERSION DESKTOP UNIQUEMENT -->\n      <div class=\"row my-3 d-none d-md-flex\">\n         <div class=\"col-6 text-right\"><button class=\"btn btn-secondary disabled swipeLeft\" \n             id=\"prevDayButton\">Jours pr\xE9c\xE9dents</button></div>\n         <div class=\"col-6\"><button class=\"btn btn-secondary swipeRight\" \n             id=\"nextDayButton\">Prochains jours</button></div>\n      </div>"; // Injection du contenu HTML généré
+      itemString += "</div>\n         <div class=\"swiper-button-prev d-none d-md-block\" title=\"Pr\xE9c\xE9dant\"></div>\n         <div class=\"swiper-button-next d-none d-md-block\" title=\"Suivant\"></div>\n      </div>\n      <!-- BOUTONS TEXTUELS SUPPLEMENTAIRES DE SWIPE : VERSION DESKTOP UNIQUEMENT -->\n      <div class=\"row my-3 d-none d-md-flex\">\n         <div class=\"col-6 text-right\"><button class=\"btn btn-secondary disabled swipeLeft\"\n             id=\"prevDayButton\">Jours pr\xE9c\xE9dents</button></div>\n         <div class=\"col-6\"><button class=\"btn btn-secondary swipeRight\"\n             id=\"nextDayButton\">Prochains jours</button></div>\n      </div>"; // Injection du contenu HTML généré
 
       this.container.innerHTML = itemString; // Initialisation du swiper
 
@@ -2196,10 +2237,14 @@
 
       if (document.getElementById("selectedDate")) {
         document.getElementById("selectedDate").value = dateSelected;
+      } else if (document.querySelector("input[data-name=\"selectedDate-" + this.container.getAttribute("data-name") + "\"]")) {
+        document.querySelector("input[data-name=\"selectedDate-" + this.container.getAttribute("data-name") + "\"]").value = dateSelected;
       }
 
-      if (document.getElementById("selectedDate")) {
+      if (document.getElementById("selectedTime")) {
         document.getElementById("selectedTime").value = timeSelected;
+      } else if (document.querySelector("input[data-name=\"selectedTime-" + this.container.getAttribute("data-name") + "\"]")) {
+        document.querySelector("input[data-name=\"selectedTime-" + this.container.getAttribute("data-name") + "\"]").value = timeSelected;
       }
     };
 
@@ -2233,6 +2278,40 @@
 
   window.DateTimePicker = DateTimePicker;
 
+  /**
+   * --------------------------------------------------------------------------
+   * Public Util Api
+   * --------------------------------------------------------------------------
+   */
+  var Util = {
+    /**
+     * Retrouve le parent d'un élément selon une classe fournie (équivalent à closest)
+     * @param {HTMLElement} element - L'élément enfant
+     * @param {string} className - La classe parente
+     *
+     * @return {HTMLElement} - L'élément parent
+     */
+    findParentByClassName: function findParentByClassName(element, className) {
+      while ((element = element.parentElement) && !element.classList.contains(className)) {}
+
+      return element;
+    },
+
+    /**
+     * Retourne la position droite depuis le viewport d'un élément
+     * @param {HTMLElement} element - L'élément ciblé
+     *
+     * @return {number} - position droite
+     */
+    getRightPosFromElement: function getRightPosFromElement(element) {
+      var _element$getBoundingC = element.getBoundingClientRect(),
+          x = _element$getBoundingC.x,
+          width = _element$getBoundingC.width;
+
+      return x + width;
+    }
+  };
+
   var PAGE_MENU_LISTENERS = {
     CLICK: "click"
   };
@@ -2247,7 +2326,7 @@
     NAV_LINK: "nav-link",
     NAV_ITEM: "nav-item"
   };
-  var ATTRIBUTES = {
+  var ATTRIBUTES$1 = {
     HREF: "href",
     HREF_VALUE: "#"
   };
@@ -2327,119 +2406,84 @@
     var _proto = PageMenu.prototype;
 
     _proto.resize = function resize() {
-      // On ajoute la classe "d-block" afin de pouvoir accéder aux tailles des items présents dans l'élément "Plus" (on la supprimera à la fin des calculs)
-      this.showOrHideMoreItemsList(true); // Largeur du composant et du dropdown de l'élément "Plus"
+      this.showOrHideMoreItems(); // A chaque resize on vérifie si on a au moins 1 item dans "Plus", si c'est le cas on re-vide le dropdown
 
-      var containerWidth = this.pageMenu.offsetWidth;
-      var moreItemsListWidth = this.moreItemsList.offsetWidth; // Nombre d'items hors du dropdown et dans le dropdown
+      if (this.moreItemsList.childElementCount > 0) {
+        this.removeItemsFromDropdown();
+      } // Tant qu'il y a un overflow, on ajoute le dernier élément dans la dropdown
 
-      var numberChildren = this.pageMenu.children.length - 1;
-      var numberMoreItemsListChildren = this.moreItemsList.childElementCount; // La marge de sécurité est déterminée à partir de la taille du + grand item du menu afin qu'aucun item ne soit affiché sur une 2ème ligne
 
-      var securityMargin = this.getSecurityMargin(); // Initilisation de variables
+      while (this.pageMenu.offsetWidth < this.pageMenu.scrollWidth && this.pageMenu.childElementCount > 1) {
+        this.moveLastPageMenuItemToDropdown();
+      } // On vérifie que la dropdown puisse s'afficher dans la page sans overflow
 
-      var childrenWidth = 0;
-      var indexChildToMove = 0;
-      var indexMoreItemsListChildToMove = 0;
-      var moveChildrenIn = false;
-      var moveChildrenOut = false; // On cherche l'index de l'enfant à partir duquel on va effectuer la bascule dans la liste "Plus"
 
-      for (var indexChild = 0; indexChild < numberChildren; indexChild++) {
-        childrenWidth += this.pageMenu.children[indexChild].offsetWidth;
+      if (this.moreItemsList.childElementCount > 0 && this.pageMenu.childElementCount > 1) {
+        // On affiche temporairement le dropdown pour les calculs de positionnement
+        this.moreItemsList.classList.add("show");
+        var parentContainer = Util.findParentByClassName(this.moreItemsList, ".container-fluid") || this.pageMenu;
 
-        if (!moveChildrenIn && childrenWidth + securityMargin > containerWidth) {
-          indexChildToMove = indexChild;
-          moveChildrenIn = true;
+        while (Util.getRightPosFromElement(this.moreItemsList) > Util.getRightPosFromElement(parentContainer) && this.pageMenu.childElementCount > 1) {
+          this.moveLastPageMenuItemToDropdown();
         }
-      } // Au contraire, on vérifie si on peut sortir des items de la liste "Plus"
 
-
-      if (numberMoreItemsListChildren > 0) {
-        for (var indexMoreItemsListChild = 0; indexMoreItemsListChild < numberMoreItemsListChildren; indexMoreItemsListChild++) {
-          if (!moveChildrenIn && containerWidth > childrenWidth + moreItemsListWidth + securityMargin) {
-            indexMoreItemsListChildToMove = indexMoreItemsListChild;
-            moveChildrenOut = true;
-          }
-        }
-      } // On fait la bascule en fonction des cas identifiés précédemment
-
-
-      if (moveChildrenIn) {
-        for (var _indexChild = numberChildren; _indexChild >= 0; _indexChild--) {
-          // On déplace les éléments dans la liste "Plus"
-          if (indexChildToMove > 0 && _indexChild >= indexChildToMove && this.pageMenu.children[_indexChild] !== this.moreItems) {
-            var elementToMove = this.pageMenu.children[_indexChild];
-            var elementToAdd = elementToMove.querySelector(".nav-link");
-            elementToAdd.classList.add(PAGE_MENU_CLASSES.DROPDOWN_ITEM);
-            elementToAdd.classList.remove("nav-link"); // Si au moins 1 item est déjà présent dans "Plus" , on insère le nouvel item au début de la liste
-
-            if (this.moreItemsList.childElementCount > 0) {
-              this.moreItemsList.insertBefore(elementToAdd, this.moreItemsList.querySelector(PAGE_MENU_SELECTORS.DROPDOWN_ITEM)); // Sinon on ajoute l'item dans la liste vide
-            } else {
-              this.moreItemsList.appendChild(elementToAdd);
-            } // On change les styles de l'élément déplacé et de l'item "Plus"
-
-
-            if (elementToMove.classList.contains(PAGE_MENU_CLASSES.ITEM_ACTIVE)) {
-              this.moreItems.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
-              elementToAdd.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
-              this.moreItemsLink.textContent = elementToAdd.textContent;
-            }
-
-            this.pageMenu.removeChild(elementToMove);
-          }
-        }
-      } else if (moveChildrenOut) {
-        // On sort le 1er élément de la liste d'items présents dans l'élément "Plus" pour le placer entre le dernier item en dehors et l'élément "Plus"
-        var index = 0;
-
-        while (index <= indexMoreItemsListChildToMove) {
-          var _elementToMove = this.moreItemsList.querySelector(PAGE_MENU_SELECTORS.DROPDOWN_ITEM);
-
-          var _elementToAdd = document.createElement("li");
-
-          _elementToAdd.classList.add(PAGE_MENU_CLASSES.NAV_ITEM);
-
-          _elementToMove.classList.add(PAGE_MENU_CLASSES.NAV_LINK);
-
-          _elementToMove.classList.remove(PAGE_MENU_CLASSES.DROPDOWN_ITEM);
-
-          _elementToAdd.appendChild(_elementToMove);
-
-          if (_elementToMove.classList.contains(PAGE_MENU_CLASSES.ITEM_ACTIVE)) {
-            this.moreItems.classList.remove(PAGE_MENU_CLASSES.ITEM_ACTIVE);
-
-            _elementToAdd.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
-
-            this.moreItemsLink.textContent = PAGE_MENU_TEXTS.MORE_ITEMS_NAME;
-          }
-
-          this.pageMenu.insertBefore(_elementToAdd, this.pageMenu.children[this.pageMenu.childElementCount - 1]);
-          index++;
-        }
-      } // On masque la liste des items présents dans l'élément "Plus" pour qu'ils ne soient visibles qu'au suvol de ce dernier
-
-
-      this.showOrHideMoreItemsList(false); // On masque l'élément "Plus" s'il est vide
-
-      this.showOrHideMoreItems();
+        this.moreItemsList.classList.remove("show");
+      }
     }
     /**
-     * Permet de connaître la marge de sécurité à prendre en compte lors d'un ajout/suppresion d'item dans la liste "Plus"
-     * @return {number} - La marge de sécurité
+     * Méthode de déplacement du dernier élément du page menu dans la dropdown
      */
     ;
 
-    _proto.getSecurityMargin = function getSecurityMargin() {
-      var securityMargin = 0;
+    _proto.moveLastPageMenuItemToDropdown = function moveLastPageMenuItemToDropdown() {
+      var elementToMove = this.pageMenu.children[this.pageMenu.children.length - 2];
+      var elementToAdd = elementToMove.querySelector(".nav-link");
+      elementToAdd.classList.add(PAGE_MENU_CLASSES.DROPDOWN_ITEM);
+      elementToAdd.classList.remove("nav-link"); // Si au moins 1 item est déjà présent dans "Plus" , on insère le nouvel item au début de la liste
 
-      for (var item in this.pageMenu.children) {
-        if (this.pageMenu.children[item].offsetWidth > securityMargin) {
-          securityMargin = this.pageMenu.children[item].offsetWidth;
-        }
+      if (this.moreItemsList.childElementCount > 0) {
+        this.moreItemsList.insertBefore(elementToAdd, this.moreItemsList.querySelector(PAGE_MENU_SELECTORS.DROPDOWN_ITEM)); // Sinon on ajoute l'item dans la liste vide
+      } else {
+        this.moreItemsList.appendChild(elementToAdd);
+      } // On change les styles de l'élément déplacé et de l'item "Plus"
+
+
+      if (elementToMove.classList.contains(PAGE_MENU_CLASSES.ITEM_ACTIVE)) {
+        this.moreItems.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
+        elementToAdd.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
+        this.moreItemsLink.textContent = elementToAdd.textContent;
       }
 
-      return securityMargin;
+      this.pageMenu.removeChild(elementToMove);
+      this.showOrHideMoreItems();
+    }
+    /**
+     * Méthode de déplacement de tous les items de la dropdown dans le page menu
+     */
+    ;
+
+    _proto.removeItemsFromDropdown = function removeItemsFromDropdown() {
+      var numberMoreItemsListChildren = this.moreItemsList.childElementCount;
+      var index = 0;
+
+      while (index < numberMoreItemsListChildren) {
+        var elementToMove = this.moreItemsList.querySelector(PAGE_MENU_SELECTORS.DROPDOWN_ITEM);
+        var elementToAdd = document.createElement("li");
+        elementToAdd.classList.add(PAGE_MENU_CLASSES.NAV_ITEM);
+        elementToMove.classList.add(PAGE_MENU_CLASSES.NAV_LINK);
+        elementToMove.classList.remove(PAGE_MENU_CLASSES.DROPDOWN_ITEM);
+        elementToAdd.appendChild(elementToMove);
+
+        if (elementToMove.classList.contains(PAGE_MENU_CLASSES.ITEM_ACTIVE)) {
+          this.moreItems.classList.remove(PAGE_MENU_CLASSES.ITEM_ACTIVE);
+          elementToAdd.classList.add(PAGE_MENU_CLASSES.ITEM_ACTIVE);
+          this.moreItemsLink.textContent = PAGE_MENU_TEXTS.MORE_ITEMS_NAME;
+          elementToMove.classList.remove(PAGE_MENU_CLASSES.ITEM_ACTIVE);
+        }
+
+        this.pageMenu.insertBefore(elementToAdd, this.pageMenu.children[this.pageMenu.childElementCount - 1]);
+        index++;
+      }
     }
     /**
      * Crée l'élément appelé "Plus" et contenant les items du menu ne pouvant pas être affichés sur une seule ligne
@@ -2452,7 +2496,7 @@
       moreItemsElement.classList.add(PAGE_MENU_CLASSES.DROPDOWN);
       moreItemsElement.classList.add(PAGE_MENU_CLASSES.NAV_ITEM);
       var linkMoreItemsElement = document.createElement("a");
-      linkMoreItemsElement.setAttribute(ATTRIBUTES.HREF, ATTRIBUTES.HREF_VALUE);
+      linkMoreItemsElement.setAttribute(ATTRIBUTES$1.HREF, ATTRIBUTES$1.HREF_VALUE);
       linkMoreItemsElement.classList.add(PAGE_MENU_CLASSES.NAV_LINK);
       linkMoreItemsElement.classList.add("o-link-arrow");
       linkMoreItemsElement.classList.add("down");
@@ -2474,23 +2518,6 @@
         this.moreItems.classList.add(PAGE_MENU_CLASSES.MORE_ITEMS_HIDDEN);
       } else if (this.moreItemsList.childElementCount > 0) {
         this.moreItems.classList.remove(PAGE_MENU_CLASSES.MORE_ITEMS_HIDDEN);
-      }
-    }
-    /**
-     * Affiche/masque la liste des items présents dans "Plus"
-     * @param {boolean} show - Affiche/Masque la liste des items présents dans l'élément "Plus"
-     */
-    ;
-
-    _proto.showOrHideMoreItemsList = function showOrHideMoreItemsList(show) {
-      if (show) {
-        this.moreItems.classList.remove("d-none");
-        this.moreItemsList.classList.add("show");
-        this.moreItemsList.classList.add("invisible");
-      } else {
-        this.moreItems.classList.add("d-none");
-        this.moreItemsList.classList.remove("show");
-        this.moreItemsList.classList.remove("invisible");
       }
     }
     /**
@@ -2585,7 +2612,8 @@
 
   window.PageMenu = PageMenu;
 
-  var dropdown = createCommonjsModule(function (module, exports) {
+  var dropdown = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -2596,8 +2624,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, popper, util) ;
+    module.exports = factory(require$$0__default["default"], require$$1__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Popper, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
@@ -3213,12 +3243,14 @@
 
   }));
 
-  });
+  }(dropdown));
 
-  var classes$1 = {
+  var Dropdown = dropdown.exports;
+
+  var classes$4 = {
     active: "active"
   };
-  var selectors = {
+  var selectors$1 = {
     dropdown_header: "h4.dropdown-header",
     link_item: ".dropdown-item:not(div)",
     div_item: "div.dropdown-item",
@@ -3236,7 +3268,7 @@
 
       _this = _Dropdown.call(this, element) || this; // On ajoute le nombre d'éléments sélectionnés dans le cas choix multiple et sous-rubrique
 
-      if (_this._element.querySelector(selectors.dropdown_header) && _this._element.querySelector(selectors.div_item)) {
+      if (_this._element.querySelector(selectors$1.dropdown_header) && _this._element.querySelector(selectors$1.div_item)) {
         _this._setCounts();
       }
 
@@ -3249,14 +3281,14 @@
       var _this2 = this;
 
       // Sur les items lien du dropdown
-      var linkItems = this._element.querySelectorAll(selectors.link_item);
+      var linkItems = this._element.querySelectorAll(selectors$1.link_item);
 
       this._onLinkClick = function (index, event) {
         for (var childIndex = 0; childIndex < linkItems.length; childIndex++) {
-          linkItems[childIndex].classList.remove(classes$1.active);
+          linkItems[childIndex].classList.remove(classes$4.active);
         }
 
-        linkItems[index].classList.add(classes$1.active);
+        linkItems[index].classList.add(classes$4.active);
         event.preventDefault();
       };
 
@@ -3268,14 +3300,14 @@
       } // Sur les items checkbox du dropdown
 
 
-      var divItems = this._element.querySelectorAll(selectors.div_item);
+      var divItems = this._element.querySelectorAll(selectors$1.div_item);
 
       this._onCheckboxClick = function (event) {
         // Si sous-rubriques, mise à jour de l'indicateur de filtres sélectionnés
-        if (_this2._element.querySelector(selectors.dropdown_header) && event.target.nodeName === "INPUT") {
+        if (_this2._element.querySelector(selectors$1.dropdown_header) && event.target.nodeName === "INPUT") {
           var el = event.target.parentElement.parentElement;
 
-          while (!el.matches(selectors.dropdown_header)) {
+          while (!el.matches(selectors$1.dropdown_header)) {
             el = el.previousElementSibling;
           }
 
@@ -3298,7 +3330,7 @@
     ;
 
     _proto._setCounts = function _setCounts() {
-      var titles = this._element.querySelectorAll(selectors.dropdown_header);
+      var titles = this._element.querySelectorAll(selectors$1.dropdown_header);
 
       for (var index = 0; index < titles.length; index++) {
         var count = this._countSelectedItemsUntilTitle(titles[index]);
@@ -3324,11 +3356,11 @@
       item = item.nextElementSibling;
 
       while (item) {
-        if (item.matches(selectors.dropdown_header)) {
+        if (item.matches(selectors$1.dropdown_header)) {
           break;
         }
 
-        if (!item.querySelector(selectors.control_input).matches(":checked")) {
+        if (!item.querySelector(selectors$1.control_input).matches(":checked")) {
           item = item.nextElementSibling;
           continue;
         }
@@ -3369,13 +3401,13 @@
 
     _proto.dispose = function dispose() {
       // suppression de tous les event listeners qui ont été créés
-      var linkItems = this._element.querySelectorAll(selectors.link_item);
+      var linkItems = this._element.querySelectorAll(selectors$1.link_item);
 
       for (var index = 0; index < linkItems.length; index++) {
         linkItems[index].removeEventListener(events.click, this._onLinkClicks[index]);
       }
 
-      var divItems = this._element.querySelectorAll(selectors.div_item);
+      var divItems = this._element.querySelectorAll(selectors$1.div_item);
 
       for (var _index2 = 0; _index2 < divItems.length; _index2++) {
         divItems[_index2].removeEventListener(events.click, this._onCheckboxClick);
@@ -3386,7 +3418,7 @@
     };
 
     return DropdownComponent;
-  }(dropdown);
+  }(Dropdown);
 
   document.addEventListener("DOMContentLoaded", function () {
     Array.from(document.querySelectorAll(".dropdown")).forEach(function (dropdown) {
@@ -3476,7 +3508,7 @@
 
   window.DropdownSelect = DropdownSelect;
 
-  var classes$2 = {
+  var classes$3 = {
     selected: "ob1-filterchip-selected"
   }; // les textes qui peuvent être utilisés dans le composant
 
@@ -3489,7 +3521,7 @@
     btn_result: "Afficher les (x) résultats"
   }; // la liste des sélecteurs que l'on utilise dans le code du composant
 
-  var selector$2 = {
+  var selector = {
     item: ".ob1-filterchip .ob1-filterchip-input",
     item_selected: ".ob1-filterchip .ob1-filterchip-input:checked",
     item_all: ".ob1-filterchip:first-child .ob1-filter-chips-bar-btn",
@@ -3580,12 +3612,12 @@
         return false;
       }); // traitement des filter chips "classiques"
 
-      var filterChipsBarItem = this.container.querySelectorAll(selector$2.item);
+      var filterChipsBarItem = this.container.querySelectorAll(selector.item);
       [].forEach.call(filterChipsBarItem, function (item) {
         _this.items.push(item);
       }); // traitement du filter chips spécial "tous / toutes"
 
-      this.itemAll = this.container.querySelector(selector$2.item_all); // on crée le filter chip "plus de filtre"
+      this.itemAll = this.container.querySelector(selector.item_all); // on crée le filter chip "plus de filtre"
       // => d'abord le container (on se base sur le type de tag des autres noeuds
 
       var itemMoreContainer = document.createElement(this.items[0].parentNode.tagName);
@@ -3693,18 +3725,18 @@
 
     _proto._updateSpecialChipDisplay = function _updateSpecialChipDisplay() {
       // filter chip "plus de filtres"
-      var chipHiddenSelected = this.container.querySelectorAll(selector$2.item_selected_hidden);
+      var chipHiddenSelected = this.container.querySelectorAll(selector.item_selected_hidden);
       var countHiddenSelected = chipHiddenSelected.length;
       var textMore = this.isMobile() ? text.more_title_small : this.itemMoreLabel;
 
       if (countHiddenSelected > 0) {
         this._updateItemLabelAndDataTitle(this.itemMore, textMore + " (" + countHiddenSelected + ")");
 
-        this.itemMore.parentNode.classList.add(classes$2.selected);
+        this.itemMore.parentNode.classList.add(classes$3.selected);
       } else {
         this._updateItemLabelAndDataTitle(this.itemMore, "" + textMore);
 
-        this.itemMore.parentNode.classList.remove(classes$2.selected);
+        this.itemMore.parentNode.classList.remove(classes$3.selected);
       } // filter chip "tous / toutes"
 
 
@@ -3714,9 +3746,9 @@
 
       if (this.itemAll) {
         if (chipsChecked.length === 0) {
-          this.itemAll.parentNode.classList.add(classes$2.selected);
+          this.itemAll.parentNode.classList.add(classes$3.selected);
         } else if (chipsChecked.length < this.items.length) {
-          this.itemAll.parentNode.classList.remove(classes$2.selected);
+          this.itemAll.parentNode.classList.remove(classes$3.selected);
         }
       }
     }
@@ -3728,7 +3760,7 @@
 
     _proto._updateBtnDisplay = function _updateBtnDisplay() {
       var selectedValues = [];
-      var modalFilterChips = this.modal.querySelectorAll(selector$2.item_selected);
+      var modalFilterChips = this.modal.querySelectorAll(selector.item_selected);
       [].forEach.call(modalFilterChips, function (item) {
         selectedValues.push(item.value);
       }); // récupération du nombre de résultats potentiels (fourni par le service)
@@ -3822,7 +3854,7 @@
           // on a cliqué sur le bouton "Tous / toutes"
           event.preventDefault();
 
-          if (!_this2.itemAll.parentNode.classList.contains(classes$2.selected)) {
+          if (!_this2.itemAll.parentNode.classList.contains(classes$3.selected)) {
             _this2.items.map(function (item) {
               return item.checked = false;
             });
@@ -3865,7 +3897,7 @@
       if (!this.modal) {
         // la modal n'a jamais été affichée, on génère la carcasse dynamiquement
         this.modal = document.createElement("div");
-        this.modal.innerHTML = "\n        <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog\" role=\"document\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <button type=\"button\" class=\"close d-none d-md-block\" data-dismiss=\"modal\" aria-label=\"Fermer\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n                <button type=\"button\" class=\"close d-md-none o-link-arrow o-link-small back\" data-dismiss=\"modal\">\n                  Retour</button>\n              </div>\n              <div class=\"modal-body flex-row flex-wrap flex-grow-0\">\n                <h3 class=\"h4 mb-1 mb-md-2\"></h3>\n                <ul class=\"ob1-filter-chips-bar mb-0\"></ul>\n                <button type=\"button\" class=\"btn btn-link ob1-link-icon p-0 mb-2\">\n                  <span class=\"icon icon-delete\" aria-hidden=\"true\"></span>\n                  <span class=\"ob1-link-icon-text\">Effacer</span>\n                </button>\n              </div>\n              <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-secondary\"></button>\n              </div>\n            </div>\n          </div>\n        </div>";
+        this.modal.innerHTML = "\n        <div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog\" role=\"document\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <button type=\"button\" class=\"close d-none d-md-block\" data-dismiss=\"modal\" aria-label=\"Fermer\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n                <button type=\"button\" class=\"close d-md-none o-link-arrow o-link-small back\" data-dismiss=\"modal\">\n                  Retour</button>\n              </div>\n              <div class=\"modal-body flex-row flex-wrap flex-grow-0\">\n                <h3 class=\"h4 mb-1 mb-md-2\"></h3>\n                <ul class=\"ob1-filter-chips-bar mb-0\"></ul>\n                <button type=\"button\" class=\"btn btn-link ob1-link-icon p-0 mb-1\">\n                  <span class=\"icon icon-delete\" aria-hidden=\"true\"></span>\n                  <span class=\"ob1-link-icon-text\">Effacer</span>\n                </button>\n              </div>\n              <div class=\"modal-footer align-self-center\">\n                <button type=\"button\" class=\"btn btn-secondary\"></button>\n              </div>\n            </div>\n          </div>\n        </div>";
         document.body.appendChild(this.modal);
         $(this.modal.firstElementChild).on("show.bs.modal", function () {
           // la modal s'affiche, on met à jour le contenu pour prendre le statut courant des filter chips de la page
@@ -3912,7 +3944,7 @@
           _this3._updateBtnDisplay();
         }).on("click", ".modal-body .btn", function () {
           // clic sur le bouton de désactivation des filtres
-          var filterChipsBarSelectedItems = _this3.modal.querySelectorAll(selector$2.item_selected);
+          var filterChipsBarSelectedItems = _this3.modal.querySelectorAll(selector.item_selected);
 
           [].forEach.call(filterChipsBarSelectedItems, function (item) {
             // la simulation du clic va propager l'événement jusqu'au container ou il sera traité
@@ -3921,7 +3953,7 @@
         }).on("click", ".modal-footer", function () {
           // clic sur le bouton de validation
           // on répercute les modifications de filtre de la modal, pour les mettre dans la page principale
-          var filterChipsBarItem = _this3.modal.firstElementChild.querySelectorAll(selector$2.item);
+          var filterChipsBarItem = _this3.modal.firstElementChild.querySelectorAll(selector.item);
 
           [].forEach.call(filterChipsBarItem, function (item, index) {
             if (_this3.items[index].checked !== item.checked) {
@@ -3945,7 +3977,7 @@
     ;
 
     _proto._focus = function _focus() {
-      var selectedItems = this.container.querySelectorAll(selector$2.item_selected);
+      var selectedItems = this.container.querySelectorAll(selector.item_selected);
 
       if (selectedItems.length > 0) {
         // on met le focus sur le dernier filtre sélectionné
@@ -4119,7 +4151,7 @@
 
   window.FormControlClear = FormControlClear;
 
-  var classes$3 = {
+  var classes$2 = {
     empty: "form-control-empty"
   };
 
@@ -4144,6 +4176,8 @@
       _Ob1Component.prototype.init.call(this, container, parameters);
 
       this._addEvents();
+
+      this._hEmptyClass();
     }
     /**
      * Décharge le composant
@@ -4152,7 +4186,7 @@
 
     _proto.dispose = function dispose() {
       // suppression de tous les event listeners qui ont été créés
-      this.container.removeEventListener("blur", this._hOnBlur); // on appelle la méthode de suppression de composant d'Ob1Component (obligatoire)
+      this.container.removeEventListener("blur", this._hEmptyClass); // on appelle la méthode de suppression de composant d'Ob1Component (obligatoire)
 
       _Ob1Component.prototype.dispose.call(this);
     }
@@ -4167,21 +4201,21 @@
 
       // création de tous les handlers d'événements
       // @see dispose() : ces handlers sont utilisés pour la déconnexion des événements
-      this._hOnBlur = function () {
-        if (_this.container.value !== "" && _this.container.classList.contains(classes$3.empty)) {
+      this._hEmptyClass = function () {
+        if (_this.container.value !== "" && _this.container.classList.contains(classes$2.empty)) {
           // l'élément a maintenant une valeur non nulle,
           // on peut supprimer la classe gérant la bonne disposition des éléments
           // le label est donc juste au-dessus de la liste déroulante et donc de la valeur sélectionnée
-          _this.container.classList.remove(classes$3.empty);
-        } else if (_this.container.value === "" && !_this.container.classList.contains(classes$3.empty)) {
+          _this.container.classList.remove(classes$2.empty);
+        } else if (_this.container.value === "" && !_this.container.classList.contains(classes$2.empty)) {
           // la liste déroulante n'a pas de valeur sélectionnée
           // on rajoute la classe pour que le label s'affiche au
-          _this.container.classList.add(classes$3.empty);
+          _this.container.classList.add(classes$2.empty);
         }
       }; // un changement a eu lieu sur l'une des cases à cocher
 
 
-      this.container.addEventListener("blur", this._hOnBlur);
+      this.container.addEventListener("blur", this._hEmptyClass);
     };
 
     return FormControlEmpty;
@@ -4190,7 +4224,8 @@
 
   window.FormControlEmpty = FormControlEmpty;
 
-  var megamenu = createCommonjsModule(function (module, exports) {
+  var megamenu$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -4201,8 +4236,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -4612,9 +4649,12 @@
 
   }));
 
-  });
+  }(megamenu$1));
 
-  var modal = createCommonjsModule(function (module, exports) {
+  var megamenu = megamenu$1.exports;
+
+  var modal$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -4625,8 +4665,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -5238,9 +5280,12 @@
 
   }));
 
-  });
+  }(modal$1));
 
-  var navbar = createCommonjsModule(function (module, exports) {
+  var modal = modal$1.exports;
+
+  var navbar$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -5251,8 +5296,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -5452,9 +5499,12 @@
 
   }));
 
-  });
+  }(navbar$1));
 
-  var otab = createCommonjsModule(function (module, exports) {
+  var navbar = navbar$1.exports;
+
+  var otab$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -5465,8 +5515,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -5644,9 +5696,14 @@
 
   }));
 
-  });
+  }(otab$1));
 
-  var tooltip = createCommonjsModule(function (module, exports) {
+  var otab = otab$1.exports;
+
+  var popover$1 = {exports: {}};
+
+  var tooltip$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -5657,8 +5714,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, popper, util) ;
+    module.exports = factory(require$$0__default["default"], require$$1__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Popper, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
@@ -6570,9 +6629,10 @@
 
   }));
 
-  });
+  }(tooltip$1));
 
-  var popover = createCommonjsModule(function (module, exports) {
+  var tooltip = tooltip$1.exports;
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -6583,8 +6643,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, tooltip) ;
+    module.exports = factory(require$$0__default["default"], tooltip$1.exports) ;
   }(commonjsGlobal, function ($, Tooltip) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Tooltip = Tooltip && Tooltip.hasOwnProperty('default') ? Tooltip['default'] : Tooltip;
@@ -6836,9 +6898,11 @@
 
   }));
 
-  });
+  }(popover$1));
 
-  var classes$4 = {
+  var popover = popover$1.exports;
+
+  var classes$1 = {
     priceAmount: "ob1-price-amount",
     priceAmountInverse: "ob1-price-amount-inverse",
     pricePromoDurationByMonth: "ob1-price-promo-duration-by-month",
@@ -6864,8 +6928,8 @@
     zeroCentsByUnit: "0€",
     zeroCentsByDecade: "00€"
   };
-  var pricesToConvert = [classes$4.priceAmount, classes$4.priceAmountInverse, classes$4.pricePromoDurationByMonth, classes$4.priceAmountCustom, classes$4.pricePromoDurationByMonthCustom, classes$4.priceWithoutPromo, // deprecated
-  classes$4.priceAmountDeprecated, classes$4.priceAmountInverseDeprecated, classes$4.pricePromoDurationByMonthDeprecated, classes$4.priceAmountCustomDeprecated, classes$4.pricePromoDurationByMonthCustomDeprecated];
+  var pricesToConvert = [classes$1.priceAmount, classes$1.priceAmountInverse, classes$1.pricePromoDurationByMonth, classes$1.priceAmountCustom, classes$1.pricePromoDurationByMonthCustom, classes$1.priceWithoutPromo, // deprecated
+  classes$1.priceAmountDeprecated, classes$1.priceAmountInverseDeprecated, classes$1.pricePromoDurationByMonthDeprecated, classes$1.priceAmountCustomDeprecated, classes$1.pricePromoDurationByMonthCustomDeprecated];
 
   var Price = /*#__PURE__*/function (_Ob1Component) {
     _inheritsLoose(Price, _Ob1Component);
@@ -6971,7 +7035,8 @@
 
   window.Price = Price;
 
-  var prioritynav = createCommonjsModule(function (module, exports) {
+  var prioritynav$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -6982,8 +7047,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery) ;
+    module.exports = factory(require$$0__default["default"]) ;
   }(commonjsGlobal, function ($) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
@@ -7213,7 +7280,9 @@
 
   }));
 
-  });
+  }(prioritynav$1));
+
+  var prioritynav = prioritynav$1.exports;
 
   var spinnerDeterminedTagNames = {
     DIV: "div"
@@ -7312,7 +7381,7 @@
   var CLASSES = {
     PROGRESS_BAR_DETERMINED: "ob1-progress-bar-determined"
   };
-  var ATTRIBUTES$1 = {
+  var ATTRIBUTES = {
     ARIA_LABEL: "aria-label",
     ARIA_LABEL_PROGRESS_BAR: "Chargement en cours"
   };
@@ -7340,7 +7409,7 @@
 
       var progressBar = this.initialisation(); // On positionne le focus sur l'élément pour lancer la vocalisation
 
-      this.container.setAttribute(ATTRIBUTES$1.ARIA_LABEL, ATTRIBUTES$1.ARIA_LABEL_PROGRESS_BAR);
+      this.container.setAttribute(ATTRIBUTES.ARIA_LABEL, ATTRIBUTES.ARIA_LABEL_PROGRESS_BAR);
       this.container.focus(); // La durée de l'animation passée dans l'attibut data-time est appliquée
 
       progressBar.style.animationDuration = "500ms, " + duration + "s, 500ms";
@@ -7380,7 +7449,7 @@
       this.container.removeAttribute("data-ob1-component");
       this.container.removeAttribute("data-timer");
       this.container.removeAttribute("data-ref-progress-bar-determined");
-      this.container.removeAttribute(ATTRIBUTES$1.ARIA_LABEL);
+      this.container.removeAttribute(ATTRIBUTES.ARIA_LABEL);
 
       if (this.container.querySelector(".ob1-progress-bar-determined") !== null) {
         this.container.removeChild(this.container.querySelector(".ob1-progress-bar-determined"));
@@ -7399,7 +7468,7 @@
     __proto__: null
   });
 
-  var classes$5 = {
+  var classes = {
     dBlock: "d-block"
   };
   var listenersTypes = {
@@ -7407,7 +7476,7 @@
     focus: "focus",
     blur: "blur"
   };
-  var selectors$1 = {
+  var selectors = {
     textField: ".ob1-promotional-code-content .form-control",
     addPromotionalCode: ".ob1-add-promotional-code:not(.ob1-loading)"
   };
@@ -7433,7 +7502,7 @@
 
       _Ob1Component.prototype.init.call(this, container, parameters);
 
-      this.promotionalCodeTextField = this.container.querySelector(selectors$1.textField); // Gestion de l'affichage du bouton d'ajout
+      this.promotionalCodeTextField = this.container.querySelector(selectors.textField); // Gestion de l'affichage du bouton d'ajout
 
       if (this.promotionalCodeTextField !== null) {
         this.promotionalCodeTextField.addEventListener(listenersTypes.keyUp, function () {
@@ -7468,13 +7537,13 @@
     ;
 
     _proto.buttonDisplayManager = function buttonDisplayManager(focused) {
-      var addPromotionnalCode = this.container.querySelector(selectors$1.addPromotionalCode);
+      var addPromotionnalCode = this.container.querySelector(selectors.addPromotionalCode);
 
       if (addPromotionnalCode !== null) {
         if (this.promotionalCodeTextField.value !== "" || focused) {
-          addPromotionnalCode.classList.add(classes$5.dBlock);
+          addPromotionnalCode.classList.add(classes.dBlock);
         } else {
-          addPromotionnalCode.classList.remove(classes$5.dBlock);
+          addPromotionnalCode.classList.remove(classes.dBlock);
         }
       }
     };
@@ -7484,7 +7553,8 @@
 
   window.PromotionalCode = PromotionalCode;
 
-  var scrollup = createCommonjsModule(function (module, exports) {
+  var scrollup$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -7495,8 +7565,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery) ;
+    module.exports = factory(require$$0__default["default"]) ;
   }(commonjsGlobal, function ($) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
 
@@ -7659,9 +7731,12 @@
 
   }));
 
-  });
+  }(scrollup$1));
 
-  var scrollspy = createCommonjsModule(function (module, exports) {
+  var scrollup = scrollup$1.exports;
+
+  var scrollspy$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -7672,8 +7747,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -8039,7 +8116,9 @@
 
   }));
 
-  });
+  }(scrollspy$1));
+
+  var scrollspy = scrollspy$1.exports;
 
   var Snackbar = /*#__PURE__*/function (_Ob1Component) {
     _inheritsLoose(Snackbar, _Ob1Component);
@@ -8990,23 +9069,15 @@
     ;
 
     _proto.dispose = function dispose() {
-      var _this2 = this;
-
       this.searchField.removeEventListener(searchFieldEventsListener.KEYUP, this.boundRefreshSearchFieldResults);
       this.searchField.removeEventListener(searchFieldEventsListener.KEYDOWN, this.boundSearchCountryFieldReinitilisation);
       this.searchField.removeEventListener("search", this._onSearch);
-      var newResultLine = "";
-
-      if (this.isCountrySearch === "true") {
-        newResultLine = this.createNewCountryResultLine(lineToDisplay, lineIndex);
-      } else {
-        newResultLine = this.createNewResultLine(lineToDisplay, lineIndex);
-      }
-
-      newResultLine.removeEventListener(searchFieldEventsListener.CLICK, function () {
-        return _this2.addSeletedResult(newResultLine);
+      this.searchFieldResults.querySelectorAll(".result-line").forEach(function (line) {
+        line.removeEventListener(searchFieldEventsListener.CLICK, line._onClick);
+        line.removeEventListener(searchFieldEventsListener.KEYDOWN, line._onKeydown);
       });
-      newResultLine.removeEventListener(searchFieldEventsListener.KEYDOWN, this._onKeydown);
+
+      _Ob1Component.prototype.dispose.call(this);
     }
     /**
      * Rafraîchit les résultats
@@ -9015,7 +9086,7 @@
     ;
 
     _proto.refreshSearchFieldResults = function refreshSearchFieldResults(event) {
-      var _this3 = this;
+      var _this2 = this;
 
       // On supprime les résultats affichés précédemment
       this.searchFieldResults.innerHTML = ""; // On efface le drapeau
@@ -9052,7 +9123,7 @@
         this.checkHelperText(true); // On ajoute les lignes de résultats
 
         this.repository.slice(0, this.maxLinesNumber).forEach(function (line, index) {
-          _this3.addNewResultLine(line, index);
+          _this2.addNewResultLine(line, index);
         }); // Ajout du nombre de résultats aux infos de l'accessibilité
 
         this.accessibility.innerHTML = this.maxLinesNumber + accessibilityLabels.results;
@@ -9117,7 +9188,7 @@
     ;
 
     _proto.addNewResultLine = function addNewResultLine(lineToDisplay, lineIndex) {
-      var _this4 = this;
+      var _this3 = this;
 
       var newResultLine = "";
 
@@ -9127,48 +9198,50 @@
         newResultLine = this.createNewResultLine(lineToDisplay, lineIndex);
       }
 
-      this.searchFieldResults.appendChild(newResultLine); // On met des listners pour mettre à jour le champ de recherche avec la valeur sélectionnée (click souris + pression touches 'Entrée' ou 'Espace')
+      this.searchFieldResults.appendChild(newResultLine); // On met des listeners pour mettre à jour le champ de recherche avec la valeur sélectionnée (click souris + pression touches 'Entrée' ou 'Espace')
 
-      newResultLine.addEventListener(searchFieldEventsListener.CLICK, function () {
-        return _this4.addSeletedResult(newResultLine);
-      });
+      newResultLine._onClick = function () {
+        return _this3.addSeletedResult(newResultLine);
+      };
 
-      this._onKeydown = function (event) {
+      newResultLine.addEventListener(searchFieldEventsListener.CLICK, newResultLine._onClick);
+
+      newResultLine._onKeydown = function (event) {
         // On regarde si utilisateur utilise touches : validation
         if (event.code === searchFieldEventsCode.SPACE || event.code === searchFieldEventsCode.ENTER) {
-          _this4.addSeletedResult(newResultLine);
+          _this3.addSeletedResult(newResultLine);
 
-          _this4.searchField.focus();
+          _this3.searchField.focus();
         } // On regarde si utilisateur utilise touches : haut/bas
 
 
-        _this4.navigateArrows(event); // On regarde si utilisateur utilise touches : droite/gauche
+        _this3.navigateArrows(event); // On regarde si utilisateur utilise touches : droite/gauche
 
 
         if (event.code === searchFieldEventsCode.LEFT || event.code === searchFieldEventsCode.RIGHT) {
           // on reinitialise tous les resultats
-          for (var j = 0; j < _this4.searchFieldResultsLi.length; j++) {
-            _this4.searchFieldResultsLi[j].classList.remove(searchFieldClasses.RESULT_LINE_FOCUSED);
+          for (var j = 0; j < _this3.searchFieldResultsLi.length; j++) {
+            _this3.searchFieldResultsLi[j].classList.remove(searchFieldClasses.RESULT_LINE_FOCUSED);
 
-            _this4.searchFieldResultsLi[j].setAttribute(searchFieldAttributes.ARIA_SELECTED, "false");
+            _this3.searchFieldResultsLi[j].setAttribute(searchFieldAttributes.ARIA_SELECTED, "false");
           }
 
-          _this4.searchField.focus();
+          _this3.searchField.focus();
 
-          _this4.selectedResult = -1;
+          _this3.selectedResult = -1;
         } // On regarde si utilisateur utilise touches : echap
 
 
         if (event.code === searchFieldEventsCode.ESCAPE) {
-          _this4.searchFieldResults.innerHTML = "";
+          _this3.searchFieldResults.innerHTML = "";
 
-          _this4.searchField.focus();
+          _this3.searchField.focus();
 
-          _this4.selectedResult = -1;
+          _this3.selectedResult = -1;
         }
       };
 
-      newResultLine.addEventListener(searchFieldEventsListener.KEYDOWN, this._onKeydown);
+      newResultLine.addEventListener(searchFieldEventsListener.KEYDOWN, newResultLine._onKeydown);
     }
     /**
      * Crée une nouvelle ligne de résultat pour une recherche basique
@@ -9277,7 +9350,7 @@
     ;
 
     _proto.getFilteredListOfCountries = function getFilteredListOfCountries() {
-      var _this5 = this;
+      var _this4 = this;
 
       // hack IE pour supporter startsWith
       if (!String.prototype.startsWith) {
@@ -9288,7 +9361,7 @@
       }
 
       return countriesRepository.filter(function (line) {
-        return line.country.toUpperCase().substring(0, _this5.searchField.value.length).startsWith(_this5.searchField.value.toUpperCase());
+        return line.country.toUpperCase().substring(0, _this4.searchField.value.length).startsWith(_this4.searchField.value.toUpperCase());
       });
     }
     /**
@@ -9368,7 +9441,90 @@
 
   window.SearchField = SearchField;
 
-  var tab = createCommonjsModule(function (module, exports) {
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  var SocialShareBar = /*#__PURE__*/function (_Ob1Component) {
+    _inheritsLoose(SocialShareBar, _Ob1Component);
+
+    function SocialShareBar(container, parameters) {
+      return _Ob1Component.call(this, container, "SocialShareBar", parameters) || this;
+    }
+
+    var _proto = SocialShareBar.prototype;
+
+    _proto.init = function init(container, parameters) {
+      _Ob1Component.prototype.init.call(this, container, parameters);
+
+      container.querySelector(".ob1-social-share-copy-url").innerHTML = window.location.href; // Listener de l'Event "Click"
+
+      container.querySelector(".ob1-social-share-copy-bar").addEventListener("click", this.copyToClipboard);
+      container.querySelectorAll(".ob1-social-share-network").forEach(function (node) {
+        // Si on a un attribut data-share sur nos nodes de partage
+        if (node.dataset.share) {
+          node.addEventListener("click", this.share);
+          var href = node.getAttributeNode("href").value; // Et que le href de base n'est pas renseigné et/ou vide
+
+          if (!href || href === "") {
+            // On utilise le dataset, sinon, on utilise le href par défaut dans la fonction share()
+            switch (node.dataset.share) {
+              case "facebook":
+                node.setAttribute("href", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURI(window.location.href));
+                break;
+
+              case "twitter":
+                node.setAttribute("href", "https://twitter.com/intent/tweet?text=" + document.title + "&url=" + encodeURI(window.location.href + "&via="));
+                break;
+
+              case "linkedin":
+                node.setAttribute("href", "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURI(window.location.href));
+                break;
+
+              case "pinterest":
+                node.setAttribute("href", "https://pinterest.com/pin/create/button/?url=" + encodeURI(window.location.href));
+                break;
+            }
+          }
+        }
+      }, this);
+    }
+    /**
+     * Fonction de partage
+     */
+    ;
+
+    _proto.share = function share() {
+      event.preventDefault();
+      window.open(this.attributes.getNamedItem("href").nodeValue, "", "toolbar=0, status=0, width=600, height=600");
+    }
+    /**
+     * Fonction de copie dans le presse-papier depuis le bouton de partage type "Copie de lien"
+     */
+    ;
+
+    _proto.copyToClipboard = function copyToClipboard() {
+      navigator.clipboard.writeText(encodeURI(window.location.href)).then(function () {}).catch(function (err) {
+        console.log("Could not copy to clipboard", err);
+      });
+    };
+
+    _proto.dispose = function dispose() {
+      // Suppression des events listeners
+      this.container.querySelector(".ob1-social-share-copy-bar").removeEventListener("click", this.copyToClipboard);
+
+      _Ob1Component.prototype.dispose.call(this);
+    };
+
+    return SocialShareBar;
+  }(Ob1Component);
+
+  window.SocialShareBar = SocialShareBar;
+
+  var tab$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -9379,8 +9535,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -9780,9 +9938,12 @@
 
   }));
 
-  });
+  }(tab$1));
 
-  var toast = createCommonjsModule(function (module, exports) {
+  var tab = tab$1.exports;
+
+  var toast$1 = {exports: {}};
+
   /*!
     * Boosted v4.3.1 (https://boosted.orange.com)
     * Copyright 2014-2019 The Boosted Authors
@@ -9793,8 +9954,10 @@
     * Copyright 2011-2019 The Boosted Authors (https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/graphs/contributors)
     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
     */
+
+  (function (module, exports) {
   (function (global, factory) {
-     module.exports = factory(jquery, util) ;
+    module.exports = factory(require$$0__default["default"], util$1.exports) ;
   }(commonjsGlobal, function ($, Util) {
     $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
     Util = Util && Util.hasOwnProperty('default') ? Util['default'] : Util;
@@ -10068,28 +10231,33 @@
 
   }));
 
-  });
+  }(toast$1));
 
-  (function(){(function(){function e(a){for(var b=[];a=a.parentNode||a.host||a.defaultView;)b.push(a);return b}function f(a){return function(b){var c="undefined"!==typeof b.getAttribute?b.getAttribute("class")||"":void 0;"undefined"!==typeof c&&-1===c.indexOf(a)&&b.setAttribute("class",c.concat(" ",a).trim());}}function g(a){return function(b){var c="undefined"!==typeof b.getAttribute?b.getAttribute("class")||"":void 0;if(c){var d=c.indexOf(a);0<=d&&(0===d||0<=h.indexOf(c.charAt(d-1)))&&
-  (c=c.replace(a,"").trim(),""===c?b.removeAttribute("class"):b.setAttribute("class",c));}}}function k(){var a=function(b){function a(){d=!1;"blur"===b.type&&Array.prototype.slice.call(e(b.target)).forEach(g("focus-within"));"focus"===b.type&&Array.prototype.slice.call(e(b.target)).forEach(f("focus-within"));}if(!d){window.requestAnimationFrame(a);var d=!0;}};document.addEventListener("focus",a,!0);document.addEventListener("blur",a,!0);f("js-focus-within")(document.body);return !0}var h=["\n","\t"," ",
+  var toast = toast$1.exports;
+
+  (function(){(function(){function e(a){for(var b=[a];a=a.parentNode||a.host||a.defaultView;)b.push(a);return b}function f(a){return function(b){var c="undefined"!==typeof b.getAttribute?b.getAttribute("class")||"":void 0;"undefined"!==typeof c&&-1===c.indexOf(a)&&b.setAttribute("class",c.concat(" ",a).trim());}}function g(a){return function(b){var c="undefined"!==typeof b.getAttribute?b.getAttribute("class")||"":void 0;if(c){var d=c.indexOf(a);0<=d&&(0===d||0<=h.indexOf(c.charAt(d-1)))&&
+  (c=c.replace(a,"").trim(),""===c?b.removeAttribute("class"):b.setAttribute("class",c));}}}function k(){var a=function(a){function c(){b=!1;"blur"===a.type&&Array.prototype.slice.call(e(a.target)).forEach(g("focus-within"));"focus"===a.type&&Array.prototype.slice.call(e(a.target)).forEach(f("focus-within"));}if(!b){window.requestAnimationFrame(c);var b=!0;}};document.addEventListener("focus",a,!0);document.addEventListener("blur",a,!0);f("js-focus-within")(document.body);return !0}var h=["\n","\t"," ",
   "\r"];try{return "undefined"!==typeof window&&!document.querySelector(":focus-within")}catch(a){return k()}})();})();
 
   !function(r){function n(e){if(t[e])return t[e].exports;var o=t[e]={i:e,l:!1,exports:{}};return r[e].call(o.exports,o,o.exports,n),o.l=!0,o.exports}var t={};n.m=r,n.c=t,n.d=function(r,t,e){n.o(r,t)||Object.defineProperty(r,t,{configurable:!1,enumerable:!0,get:e});},n.n=function(r){var t=r&&r.__esModule?function(){return r.default}:function(){return r};return n.d(t,"a",t),t},n.o=function(r,n){return Object.prototype.hasOwnProperty.call(r,n)},n.p="",n(n.s=0);}([function(r,n){Array.from||(Array.from=function(){var r=Object.prototype.toString,n=function(n){return "function"==typeof n||"[object Function]"===r.call(n)},t=function(r){var n=Number(r);return isNaN(n)?0:0!==n&&isFinite(n)?(n>0?1:-1)*Math.floor(Math.abs(n)):n},e=Math.pow(2,53)-1,o=function(r){var n=t(r);return Math.min(Math.max(n,0),e)};return function(r){var t=this,e=Object(r);if(null==r)throw new TypeError("Array.from requires an array-like object - not null or undefined");var u,i=arguments.length>1?arguments[1]:void 0;if(void 0!==i){if(!n(i))throw new TypeError("Array.from: when provided, the second argument must be a function");arguments.length>2&&(u=arguments[2]);}for(var a,c=o(e.length),f=n(t)?Object(new t(c)):new Array(c),l=0;l<c;)a=e[l],f[l]=i?void 0===u?i(a,l):i.call(u,a,l):a,l+=1;return f.length=c,f}}());}]);
 
-  if (!Element.prototype.matches) {
-      Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-  }
+  if (typeof Element !== "undefined") {
+      if (!Element.prototype.matches) {
+          Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+      }
 
-  if (!Element.prototype.closest) {
-      Element.prototype.closest = function (s) {
-          var el = this;
+      if (!Element.prototype.closest) {
+          Element.prototype.closest = function (s) {
+              var el = this;
 
-          do {
-              if (el.matches(s)) return el;
-              el = el.parentElement || el.parentNode;
-          } while (el !== null && el.nodeType === 1);
-          return null;
-      };
+              do {
+                  if (el.matches(s)) return el;
+                  el = el.parentElement || el.parentNode;
+              } while (el !== null && el.nodeType === 1);
+              
+              return null;
+          };
+      }
   }
 
   !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t():"function"==typeof define&&define.amd?define(t):t();}(0,function(){function e(e){var t=!0,n=!1,o=null,d={text:!0,search:!0,url:!0,tel:!0,email:!0,password:!0,number:!0,date:!0,month:!0,week:!0,time:!0,datetime:!0,"datetime-local":!0};function i(e){return !!(e&&e!==document&&"HTML"!==e.nodeName&&"BODY"!==e.nodeName&&"classList"in e&&"contains"in e.classList)}function s(e){e.classList.contains("focus-visible")||(e.classList.add("focus-visible"),e.setAttribute("data-focus-visible-added",""));}function u(e){t=!1;}function a(){document.addEventListener("mousemove",c),document.addEventListener("mousedown",c),document.addEventListener("mouseup",c),document.addEventListener("pointermove",c),document.addEventListener("pointerdown",c),document.addEventListener("pointerup",c),document.addEventListener("touchmove",c),document.addEventListener("touchstart",c),document.addEventListener("touchend",c);}function c(e){e.target.nodeName&&"html"===e.target.nodeName.toLowerCase()||(t=!1,document.removeEventListener("mousemove",c),document.removeEventListener("mousedown",c),document.removeEventListener("mouseup",c),document.removeEventListener("pointermove",c),document.removeEventListener("pointerdown",c),document.removeEventListener("pointerup",c),document.removeEventListener("touchmove",c),document.removeEventListener("touchstart",c),document.removeEventListener("touchend",c));}document.addEventListener("keydown",function(n){n.metaKey||n.altKey||n.ctrlKey||(i(e.activeElement)&&s(e.activeElement),t=!0);},!0),document.addEventListener("mousedown",u,!0),document.addEventListener("pointerdown",u,!0),document.addEventListener("touchstart",u,!0),document.addEventListener("visibilitychange",function(e){"hidden"===document.visibilityState&&(n&&(t=!0),a());},!0),a(),e.addEventListener("focus",function(e){var n,o,u;i(e.target)&&(t||(n=e.target,o=n.type,"INPUT"===(u=n.tagName)&&d[o]&&!n.readOnly||"TEXTAREA"===u&&!n.readOnly||n.isContentEditable))&&s(e.target);},!0),e.addEventListener("blur",function(e){var t;i(e.target)&&(e.target.classList.contains("focus-visible")||e.target.hasAttribute("data-focus-visible-added"))&&(n=!0,window.clearTimeout(o),o=window.setTimeout(function(){n=!1;},100),(t=e.target).hasAttribute("data-focus-visible-added")&&(t.classList.remove("focus-visible"),t.removeAttribute("data-focus-visible-added")));},!0),e.nodeType===Node.DOCUMENT_FRAGMENT_NODE&&e.host?e.host.setAttribute("data-js-focus-visible",""):e.nodeType===Node.DOCUMENT_NODE&&(document.documentElement.classList.add("js-focus-visible"),document.documentElement.setAttribute("data-js-focus-visible",""));}if("undefined"!=typeof window&&"undefined"!=typeof document){var t;window.applyFocusVisiblePolyfill=e;try{t=new CustomEvent("focus-visible-polyfill-ready");}catch(e){(t=document.createEvent("CustomEvent")).initCustomEvent("focus-visible-polyfill-ready",!1,!1,{});}window.dispatchEvent(t);}"undefined"!=typeof document&&e(document);});
@@ -10123,6 +10291,7 @@
   exports.Scrollspy = scrollspy;
   exports.SearchField = SearchField;
   exports.SnackBar = Snackbar;
+  exports.SocialShareBar = SocialShareBar;
   exports.Tab = tab;
   exports.Toast = toast;
   exports.Tooltip = tooltip;
@@ -10130,5 +10299,5 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=ob1.js.map

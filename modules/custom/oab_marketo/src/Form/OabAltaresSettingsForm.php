@@ -3,14 +3,11 @@
 namespace Drupal\oab_marketo\Form;
 
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\oab_marketo\PhotoCommercialeService;
 use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -27,7 +24,12 @@ class OabAltaresSettingsForm extends ConfigFormBase {
   /**
    * @var FileSystemInterface
    */
-  private $fileSystem;
+  private FileSystemInterface $fileSystem;
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private ExtensionPathResolver $pathResolver;
 
 
   /**
@@ -36,9 +38,10 @@ class OabAltaresSettingsForm extends ConfigFormBase {
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, FileSystemInterface $file_system) {
+  public function __construct(ConfigFactoryInterface $config_factory, FileSystemInterface $file_system, ExtensionPathResolver $extension_path_resolver) {
     $this->setConfigFactory($config_factory);
     $this->fileSystem = $file_system;
+    $this->pathResolver = $extension_path_resolver;
   }
 
   /**
@@ -47,7 +50,8 @@ class OabAltaresSettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('extension.path.resolver')
     );
   }
 
@@ -220,6 +224,11 @@ class OabAltaresSettingsForm extends ConfigFormBase {
   }
 
   public function validateImportHandler(array &$form, FormStateInterface  $form_state) {
+
+    if (!is_dir(PhotoCommercialeService::IMPORT_DIRECTORY)) {
+      $this->fileSystem->mkdir(PhotoCommercialeService::IMPORT_DIRECTORY, NULL, TRUE);
+    }
+
     $file = file_save_upload('upload_file', array('file_validate_extensions' => ''),
       PhotoCommercialeService::IMPORT_DIRECTORY, null, FileSystemInterface::EXISTS_REPLACE);
 
@@ -257,7 +266,7 @@ class OabAltaresSettingsForm extends ConfigFormBase {
       'operations'  => $operations,
       'progress_message' => t('Processed @current out of @total.'),
       'finished' => 'oab_marketo_endingBatch',
-      'file' => drupal_get_path('module', 'oab_marketo') . '/oab_marketo.photo_commerciale.batch.inc'
+      'file' => $this->pathResolver->getPath('module', 'oab_marketo') . '/oab_marketo.photo_commerciale.batch.inc'
     );
 
     batch_set($batch);

@@ -18,7 +18,7 @@ use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 
 class AxiomeContentImporter {
 
-    public static function parseContent(&$node, $fiche, $language, &$messages) {
+  public static function parseContent(&$node, $fiche, $language, &$messages) {
         $s = file_get_contents($fiche);
         $data = (array) simplexml_load_string($s, 'SimpleXMLElement', LIBXML_NOCDATA);
 
@@ -31,10 +31,9 @@ class AxiomeContentImporter {
         // Creation du top_zone
         $banner_data = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes'];
         $id_offre = $axiome_data['@attributes']['id'];
-
         // Top zone
         $content = file_get_contents(
-            drupal_get_path('theme', 'theme_boosted') . '/templates/nodes/axiome_topzone.html.twig'
+          \Drupal::service('extension.path.resolver')->getPath('theme', 'theme_boosted') . '/templates/nodes/axiome_topzone.html.twig'
         );
 
         /** @var DOMDocument $dom */
