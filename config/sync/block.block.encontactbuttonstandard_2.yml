@@ -1,0 +1,33 @@
+uuid: b2a03106-e8b0-40ef-9f7e-862e2e93a2f1
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:contact_button:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
+  module:
+    - block_content
+    - language
+  theme:
+    - theme_one_i
+id: encontactbuttonstandard_2
+theme: theme_one_i
+region: prefooter
+weight: -48
+provider: null
+plugin: 'block_content:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
+settings:
+  id: 'block_content:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
+  label: '[EN][Contact Button] Standard'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    langcodes:
+      en: en
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'

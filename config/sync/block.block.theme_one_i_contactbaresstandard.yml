@@ -11,7 +11,7 @@ dependencies:
 id: theme_one_i_contactbaresstandard
 theme: theme_one_i
 region: prefooter
-weight: -45
+weight: -60
 provider: null
 plugin: contact_bar_es_standard_block
 settings:

@@ -24,7 +24,7 @@ id: share_a_compliment_
 title: 'Share a compliment '
 description: ''
 category: 'S AME'
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p>As an existing customer, you can share a compliment with your Customer Service Manager or Account Manager.</p>\\r\\n\\r\\n<p>If you are unsure of who to contact, you can share your compliment here.</p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany_email:\n  '#type': email\n  '#title': 'Company email'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1.2rem;\\\">We are processing your professional contact details to answer your query. [Orange SA (Division Orange Business Services)] is controller of this processing which you may contact at obs.dpo@orange.com. You have the right, notably, to access, rectify, object and suppress your personal data we process. You will be able to unsubscribe to our communications at any time. For more information on the processing of your personal data and your rights, <a href=\\\"https://www.orange-business.com/en/personal-data\\\" target=\\\"_blank\\\" title=\\\"Privacy policy\\\">click here</a></span></p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\n"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <p>As an existing customer, you can share a compliment with your Customer Service Manager or Account Manager.</p>\n\n    <p>If you are unsure of who to contact, you can share your compliment here.</p>\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nlast_name:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany_email:\n  '#type': email\n  '#title': 'Company email'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncompany:\n  '#type': textfield\n  '#title': Company\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': select\n  '#title': Country\n  '#options': country_names\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': |\n    <p><span style=\"font-size:1.2rem;\">We are processing your professional contact details to answer your query. [Orange SA (Division Orange Business Services)] is controller of this processing which you may contact at obs.dpo@orange.com. You have the right, notably, to access, rectify, object and suppress your personal data we process. You will be able to unsubscribe to our communications at any time. For more information on the processing of your personal data and your rights, <a href=\"https://www.orange-business.com/en/personal-data\" target=\"_blank\" title=\"Privacy policy\">click here</a></span></p>\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
 css: ''
 javascript: ''
 settings:
@@ -45,7 +45,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -66,6 +66,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -154,6 +157,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:

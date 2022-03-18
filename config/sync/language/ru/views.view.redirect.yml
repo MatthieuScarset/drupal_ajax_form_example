@@ -3,7 +3,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Найти
+          submit_button: Фильтр
           exposed_sorts_label: Фильтр
       filters:
         redirect_redirect__uri:

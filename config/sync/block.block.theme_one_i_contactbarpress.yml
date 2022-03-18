@@ -12,7 +12,7 @@ dependencies:
 id: theme_one_i_contactbarpress
 theme: theme_one_i
 region: prefooter
-weight: -44
+weight: -59
 provider: null
 plugin: contact_bar_press_block
 settings:

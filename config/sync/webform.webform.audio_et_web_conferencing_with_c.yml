@@ -8,10 +8,12 @@ third_party_settings:
   oab_backoffice:
     gdpr_business_owner: '1358'
     gdpr_spoc_security: '1706'
-    gdpr_expiration_date: '2020-12-31'
+    gdpr_expiration_date: '2022-12-31'
     gdpr_business_analysts:
-      2334: '2334'
-      2333: '2333'
+      3692: '3692'
+      2318: '2318'
+      3693: '3693'
+      3691: '3691'
     gdpr_form_published: 1
 open: null
 close: null
@@ -23,7 +25,7 @@ id: audio_et_web_conferencing_with_c
 title: 'Audio & Web Conferencing with Cisco Webex Meetings : 90 days free trial'
 description: "<p><strong><span style=\"color:#ff7900;\">90 days free trial</span></strong></p>\r\n\r\n<p>Team up with Cisco Webex Meetings and benefit from Orange quality and service support</p>"
 category: EIC
-elements: "processed_text:\n  '#type': processed_text\n  '#text': '<p><img alt=\"\" src=\"/sites/default/files/illust_formulaire_oab.jpg\" style=\"width: 100%; max-width: 100%;\" /></p>'\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': 'Mr, Mrs'\n  '#options':\n    Mr: Mr\n    Mrs: Mrs\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nprenom:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nsociete:\n  '#type': textfield\n  '#title': 'Company Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nsiren:\n  '#type': textfield\n  '#title': 'Orange International Customer Number (if any)'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': textfield\n  '#title': 'Phone number'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': textfield\n  '#title': Country\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nadresse_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnumber_of_user_accounts:\n  '#type': textfield\n  '#title': 'Number of user accounts'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Personnal Data'\n  '#description': '<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result. *</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\n"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': '<p><img alt=\"\" src=\"/sites/default/files/illust_formulaire_oab.jpg\" style=\"width: 100%; max-width: 100%;\" /></p>'\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': 'Mr, Mrs'\n  '#options':\n    Mr: Mr\n    Mrs: Mrs\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': 'Last Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nprenom:\n  '#type': textfield\n  '#title': 'First Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nsociete:\n  '#type': textfield\n  '#title': 'Company Name'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nsiren:\n  '#type': textfield\n  '#title': 'Orange International Customer Number (if any)'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': textfield\n  '#title': 'Phone number'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncountry:\n  '#type': textfield\n  '#title': Country\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nadresse_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnumber_of_user_accounts:\n  '#type': textfield\n  '#title': 'Number of user accounts'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Personnal Data'\n  '#description': '<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result. *</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': |\n    <p style=\"font-size:1rem;\"><br />\n    Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\" target=\"_blank\">cliquer ici</a>.</p>\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
 css: ''
 javascript: ''
 settings:
@@ -44,7 +46,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -65,6 +67,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -153,6 +158,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:
@@ -284,6 +290,154 @@ handlers:
         number_of_user_accounts: number_of_user_accounts
         donnees_personnelles: donnees_personnelles
         provenance: provenance
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_2:
+    id: email
+    label: frederique.cohensolal@orange.com
+    notes: ''
+    handler_id: email_2
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'New submission from : Audio & Web conferencing'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_3:
+    id: email
+    label: omar.benbouza@orange.com
+    notes: ''
+    handler_id: email_3
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'New submission from : Audio & Web conferencing'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_4:
+    id: email
+    label: anais.marie@orange.com
+    notes: ''
+    handler_id: email_4
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'New submission from : Audio & Web conferencing'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_5:
+    id: email
+    label: gabriel.charre@orange.com
+    notes: ''
+    handler_id: email_5
+    status: true
+    conditions: {  }
+    weight: 4
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'New submission from : Audio & Web conferencing'
+      body: _default
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false

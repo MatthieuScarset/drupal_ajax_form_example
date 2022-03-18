@@ -4,13 +4,10 @@ status: true
 dependencies:
   module:
     - menu_ui
-    - workbench_access
 third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-  workbench_access:
-    workbench_access_status: false
 name: Blogger
 type: profile
 description: ''

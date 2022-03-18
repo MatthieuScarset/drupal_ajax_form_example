@@ -37,6 +37,7 @@
         "drupal/entity_reference_revisions": "^1.9",
         "drupal/field_group": "^3.1",
         "drupal/geolocation": "^3.2",
+        "drupal/image_widget_crop": "^2.3",
         "drupal/inline_entity_form": "1.0-rc9",
         "drupal/jsonapi_extras": "^3.20",
         "drupal/linkit": "5.0-beta12",
@@ -64,8 +65,8 @@
         "drupal/workbench_access": "1.0-beta4",
         "drupal/workbench_moderation": "^1.6",
         "drupal/xmlsitemap": "^1.0",
-        "vlucas/phpdotenv": "^5.3",
-        "drush/drush": "^10.3"
+        "drush/drush": "^10.3",
+        "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
         "drupal/console": "~1.0",

@@ -1,16 +1,16 @@
 uuid: 64970aa4-2753-4983-b97a-9319e777996a
 langcode: fr
-status: true
+status: false
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_modular_product_tarif
-    - field.field.node.modular_product.field_product_call_to_action
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
-    - field.field.node.modular_product.field_top_zone_image
+    - field.field.node.modular_product.field_visual
     - node.type.modular_product
   module:
     - user
@@ -25,11 +25,11 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_call_to_action_button: true
   field_call_to_action_link: true
   field_modular_product_tarif: true
-  field_product_call_to_action: true
   field_product_category: true
   field_product_name: true
   field_teaser: true
-  field_top_zone_image: true
+  field_visual: true
   langcode: true

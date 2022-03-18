@@ -1,0 +1,35 @@
+uuid: 9bdc2783-27fc-4ba5-b4df-167535d459c4
+langcode: fr
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.tile
+    - field.field.node.modular_product.field_call_to_action_button
+    - field.field.node.modular_product.field_call_to_action_link
+    - field.field.node.modular_product.field_modular_product_tarif
+    - field.field.node.modular_product.field_product_category
+    - field.field.node.modular_product.field_product_name
+    - field.field.node.modular_product.field_teaser
+    - field.field.node.modular_product.field_visual
+    - node.type.modular_product
+  module:
+    - user
+id: node.modular_product.tile
+targetEntityType: node
+bundle: modular_product
+mode: tile
+content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_call_to_action_button: true
+  field_call_to_action_link: true
+  field_modular_product_tarif: true
+  field_product_category: true
+  field_product_name: true
+  field_teaser: true
+  field_visual: true
+  langcode: true

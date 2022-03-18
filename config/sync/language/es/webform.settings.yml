@@ -1,5 +1,5 @@
 settings:
-  default_form_close_message: 'Sorry...This form is closed to new submissions.'
+  default_delete_button_label: Eliminar
   default_form_access_denied_message: 'Please login to access this webform.'
   dialog_options:
     normal:

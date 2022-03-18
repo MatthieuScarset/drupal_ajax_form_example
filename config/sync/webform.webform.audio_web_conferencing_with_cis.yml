@@ -8,10 +8,12 @@ third_party_settings:
   oab_backoffice:
     gdpr_business_owner: '1358'
     gdpr_spoc_security: '1706'
-    gdpr_expiration_date: '2020-12-31'
+    gdpr_expiration_date: '2022-12-31'
     gdpr_business_analysts:
-      2334: '2334'
-      2333: '2333'
+      3692: '3692'
+      2318: '2318'
+      3693: '3693'
+      3691: '3691'
     gdpr_form_published: 1
 open: null
 close: null
@@ -23,7 +25,7 @@ id: audio_web_conferencing_with_cis
 title: 'Audio & Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours'
 description: "<p><strong><span style=\"color:#ff7900;\">Audio &amp; Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours&nbsp;</span></strong></p>\r\n\r\n<p>Testez gratuitement et sans engagement la solution Audi &amp; Web Conferencing with Cisco Webex Meeting&nbsp;</p>"
 category: EIC
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:2rem;\\\"><strong>Cette offre est réservée aux entreprises de plus de 50 collaborateurs</strong></span></p>\\r\\n\\r\\n<p><img alt=\\\"\\\" src=\\\"/sites/default/files/illust_formulaire_oab.jpg\\\" style=\\\"width: 100%; max-width: 100%;\\\" /></p>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Monsieur: Monsieur\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsiren:\n  '#type': textfield\n  '#title': SIREN\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': textfield\n  '#title': Téléphone\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse e-mail professionnelle'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnombre_d_organisateurs:\n  '#type': textfield\n  '#title': 'Nombre d''organisateurs'\n  '#description_display': invisible\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nacces_voix_depuis_internet_sans_terminal_telephonique_:\n  '#type': select\n  '#title': 'Accès voix depuis un ordinateur, une tablette (sans terminal téléphonique)'\n  '#description_display': invisible\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#required': true\npossibilite_de_faire_de_la_video:\n  '#type': select\n  '#title': 'Possibilité de faire de la vidéo'\n  '#description_display': invisible\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'Pouvez-vous nous préciser en quelques mots votre besoin ?'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      -\n        ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      -\n        ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      -\n        ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': checkbox\n  '#title': 'Mentions légales'\n  '#description': '<p><strong>Je reconnais avoir pris connaissance et approuver sans réserve l''ensemble des documents contractuels Audio et Web Conférence</strong></p>'\n  '#title_display': invisible\n  '#description_display': after\n  '#required': true\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\\r\\n<p style=\\\"font-size:1rem;\\\">&nbsp;</p>\\r\\n\\r\\n<p style=\\\"font-size:1rem;\\\">-&nbsp;&nbsp; &nbsp;<a href=\\\"https://documentscontractuels.orange.fr/contrats-next-obs_cg_432.pdf\\\" target=\\\"_blank\\\">Conditions Générales Orange Business Services</a><br />\\r\\n-&nbsp;&nbsp; &nbsp;<a href=\\\"/sites/default/files/convention-de-service-voix.pdf\\\" target=\\\"_blank\\\">Conditions spécifiques Voix/Data/Multimédia</a><br />\\r\\n-&nbsp;&nbsp; &nbsp;<a href=\\\"/sites/default/files/awc-globale.pdf\\\" target=\\\"_blank\\\">Descriptif de Service Audio et Web Conférence Globale</a>&nbsp;<br />\\r\\n-&nbsp;&nbsp; &nbsp;<a href=\\\"/sites/default/files/des-audio-and-webconferencing-with-cisco-webex-meetings.pdf\\\" target=\\\"_blank\\\">Descriptif de Service Audio and Web Conférencing with Cisco WebEx Meetings</a></p>\\r\\n\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\n"
+elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <p><span style=\"font-size:2rem;\"><strong>Cette offre est réservée aux entreprises de plus de 50 collaborateurs</strong></span></p>\n\n    <p><img alt=\"\" src=\"/sites/default/files/illust_formulaire_oab.jpg\" style=\"width: 100%; max-width: 100%;\" /></p>\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Monsieur: Monsieur\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsiren:\n  '#type': textfield\n  '#title': SIREN\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': textfield\n  '#title': Téléphone\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse e-mail professionnelle'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nnombre_d_organisateurs:\n  '#type': textfield\n  '#title': 'Nombre d''organisateurs'\n  '#description_display': invisible\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nacces_voix_depuis_internet_sans_terminal_telephonique_:\n  '#type': select\n  '#title': 'Accès voix depuis un ordinateur, une tablette (sans terminal téléphonique)'\n  '#description_display': invisible\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#required': true\npossibilite_de_faire_de_la_video:\n  '#type': select\n  '#title': 'Possibilité de faire de la vidéo'\n  '#description_display': invisible\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': 'Pouvez-vous nous préciser en quelques mots votre besoin ?'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nmentions_legales:\n  '#type': checkbox\n  '#title': 'Mentions légales'\n  '#description': '<p><strong>Je reconnais avoir pris connaissance et approuver sans réserve l''ensemble des documents contractuels Audio et Web Conférence</strong></p>'\n  '#title_display': invisible\n  '#description_display': after\n  '#required': true\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': |\n    <p style=\"font-size:1rem;\"><br />\n    Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\" target=\"_blank\">cliquer ici</a>.</p>\n\n    <p style=\"font-size:1rem;\">&nbsp;</p>\n\n    <p style=\"font-size:1rem;\">-&nbsp;&nbsp; &nbsp;<a href=\"https://documentscontractuels.orange.fr/contrats-next-obs_cg_432.pdf\" target=\"_blank\">Conditions Générales Orange Business Services</a><br />\n    -&nbsp;&nbsp; &nbsp;<a href=\"/sites/default/files/convention-de-service-voix.pdf\" target=\"_blank\">Conditions spécifiques Voix/Data/Multimédia</a><br />\n    -&nbsp;&nbsp; &nbsp;<a href=\"/sites/default/files/awc-globale.pdf\" target=\"_blank\">Descriptif de Service Audio et Web Conférence Globale</a>&nbsp;<br />\n    -&nbsp;&nbsp; &nbsp;<a href=\"/sites/default/files/des-audio-and-webconferencing-with-cisco-webex-meetings.pdf\" target=\"_blank\">Descriptif de Service Audio and Web Conférencing with Cisco WebEx Meetings</a></p>\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
 css: ''
 javascript: ''
 settings:
@@ -44,7 +46,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
@@ -65,6 +67,9 @@ settings:
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_method: ''
+  form_action: ''
+  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
@@ -153,6 +158,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:
@@ -292,6 +298,154 @@ handlers:
         donnees_personnelles: donnees_personnelles
         mentions_legales: mentions_legales
         provenance: provenance
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email:
+    id: email
+    label: frederique.cohensolal@orange.com
+    notes: ''
+    handler_id: email
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: ' Audio & Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_1:
+    id: email
+    label: omar.benbouza@orange.com
+    notes: ''
+    handler_id: email_1
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Audio & Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_2:
+    id: email
+    label: anais.marie@orange.com
+    notes: ''
+    handler_id: email_2
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Audio & Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours'
+      body: _default
+      excluded_elements: {  }
+      ignore_access: false
+      exclude_empty: true
+      exclude_empty_checkbox: false
+      exclude_attachments: false
+      html: true
+      attachments: false
+      twig: false
+      debug: false
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
+      theme_name: ''
+      parameters: {  }
+  email_3:
+    id: email
+    label: gabriel.charre@orange.com
+    notes: ''
+    handler_id: email_3
+    status: true
+    conditions: {  }
+    weight: 3
+    settings:
+      states:
+        - completed
+      to_mail: _default
+      to_options: {  }
+      cc_mail: ''
+      cc_options: {  }
+      bcc_mail: ''
+      bcc_options: {  }
+      from_mail: _default
+      from_options: {  }
+      from_name: _default
+      subject: 'Audio & Web conferencing with Cisco Webex Meeting : offre de test gratuite 90 jours'
+      body: _default
+      excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
