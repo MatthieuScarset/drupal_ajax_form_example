@@ -142,7 +142,7 @@ function subhomes_views_exposed_form(&$form) {
             // on supprime "position paper"
             unset($form['field_document_type_target_id']['#options']['Position paper']);
         } else {
-//            unset($form['document_language']);
+            unset($form['document_language']);
         }
     }
 
