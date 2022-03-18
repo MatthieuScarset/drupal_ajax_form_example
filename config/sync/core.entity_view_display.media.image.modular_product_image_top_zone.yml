@@ -1,27 +1,27 @@
-uuid: 2e278d9e-684d-453e-a3de-fb68a20c3671
+uuid: 729a64cd-f066-4752-9c7e-25bc03d498aa
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.home_playlist_image
+    - core.entity_view_mode.media.modular_product_image_top_zone
     - field.field.media.image.field_image
     - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - field.field.media.image.field_thematic
-    - image.style.playlist
+    - image.style.modular_product_image_top_zone
     - media.type.image
   module:
     - image
-id: media.image.home_playlist_image
+id: media.image.modular_product_image_top_zone
 targetEntityType: media
 bundle: image
-mode: home_playlist_image
+mode: modular_product_image_top_zone
 content:
   field_image:
     weight: 2
     label: hidden
     settings:
-      image_style: playlist
+      image_style: modular_product_image_top_zone
       image_link: ''
     third_party_settings: {  }
     type: image

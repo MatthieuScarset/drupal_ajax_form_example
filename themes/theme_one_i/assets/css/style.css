@@ -118,6 +118,94 @@
   fill: #000;
 }
 
+.top-zone-modular-product {
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  width: auto;
+  padding: 0.9375rem 0;
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product {
+    padding: 1.875rem 0;
+  }
+}
+.top-zone-modular-product .block-text h3 {
+  padding: 0;
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product .block-text h3 {
+    max-width: 62.5rem;
+  }
+}
+.top-zone-modular-product .block-text .lead {
+  padding: 0;
+}
+.top-zone-modular-product .block-text .product-category {
+  margin: 0.9375rem 0 0 0;
+  padding-bottom: 0;
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product .block-text .product-category {
+    height: 1.375rem;
+    margin: 0 0 0.3125rem 0;
+    line-height: 1.38;
+  }
+}
+.top-zone-modular-product .block-text .product-name {
+  height: 1.5rem;
+  margin: 0.3125rem 0 0 0;
+  line-height: 1.33;
+}
+.top-zone-modular-product .block-text .product-teaser {
+  width: auto;
+  height: 4.5rem;
+  margin: 0.9375rem 0 1.875rem;
+  line-height: 1.2;
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product .block-text .product-teaser {
+    width: 33.25rem;
+    height: 6.375rem;
+    margin: 1.875rem 0 3.75rem 0;
+    line-height: 1.13;
+  }
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product .block-text .product-teaser-without-image {
+    width: 47.312rem;
+    height: 4.25rem;
+    margin: 1.875rem 0 1.875rem 0;
+    line-height: 1.13;
+  }
+}
+.top-zone-modular-product .block-text .product-tarif {
+  height: 1.5rem;
+  margin: 0 0 1.875rem 0;
+  line-height: 1.33;
+}
+.top-zone-modular-product .block-text .product-cta-link-text {
+  text-decoration: none;
+}
+.top-zone-modular-product .block-text .product-cta-link-text::after {
+  margin-top: 0;
+}
+@media (max-width: 979.98px) {
+  .top-zone-modular-product .block-text .block-cta .product-cta-button.btn {
+    padding: 1rem 6rem;
+  }
+}
+.top-zone-modular-product .block-image img {
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 768px) {
+  .top-zone-modular-product .block-image img {
+    /*width: 100%;
+    height: 100%;*/
+  }
+}
+
 .header-page-categ .block-titre-teaser h1 {
   padding: 0;
   margin-top: 20px;

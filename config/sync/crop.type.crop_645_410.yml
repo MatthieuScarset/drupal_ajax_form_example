@@ -1,0 +1,12 @@
+uuid: d27f396c-3d49-432e-96d6-bfca442db8ea
+langcode: fr
+status: true
+dependencies: {  }
+id: crop_645_410
+label: 'crop 645:410'
+description: ''
+aspect_ratio: '645:410'
+soft_limit_width: 645
+soft_limit_height: 410
+hard_limit_width: 645
+hard_limit_height: 410

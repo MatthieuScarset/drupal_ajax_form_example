@@ -18,6 +18,7 @@ module:
   config_split: 0
   config_translation: 0
   contextual: 0
+  crop: 0
   ctools: 0
   datetime: 0
   dblog: 0
@@ -40,6 +41,7 @@ module:
   help: 0
   history: 0
   image: 0
+  image_widget_crop: 0
   inline_entity_form: 0
   jsonapi: 0
   jsonapi_defaults: 0
