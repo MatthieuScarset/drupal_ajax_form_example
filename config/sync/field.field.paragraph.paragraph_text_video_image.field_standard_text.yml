@@ -1,0 +1,19 @@
+uuid: 4cd1b78f-4f34-4713-93c0-04727075acee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_standard_text
+    - paragraphs.paragraphs_type.paragraph_text_video_image
+id: paragraph.paragraph_text_video_image.field_standard_text
+field_name: field_standard_text
+entity_type: paragraph
+bundle: paragraph_text_video_image
+label: 'Standard text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

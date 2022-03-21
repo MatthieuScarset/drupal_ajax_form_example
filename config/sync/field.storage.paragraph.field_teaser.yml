@@ -1,11 +1,11 @@
-uuid: 2035149a-8dea-440a-ac7d-149282ba8175
-langcode: fr
+uuid: e63e50e4-438d-40ce-bec3-a041e01d0c55
+langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_accroche
-field_name: field_accroche
+id: paragraph.field_teaser
+field_name: field_teaser
 entity_type: paragraph
 type: string_long
 settings:

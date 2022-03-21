@@ -1,12 +1,12 @@
-uuid: 2035149a-8dea-440a-ac7d-149282ba8175
-langcode: fr
+uuid: 473ae4ee-b83b-4342-8d21-75606f5e30d8
+langcode: en
 status: true
 dependencies:
   module:
-    - paragraphs
-id: paragraph.field_accroche
-field_name: field_accroche
-entity_type: paragraph
+    - media
+id: media.field_description
+field_name: field_description
+entity_type: media
 type: string_long
 settings:
   case_sensitive: false

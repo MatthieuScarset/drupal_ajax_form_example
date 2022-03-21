@@ -1,16 +1,16 @@
-uuid: 2035149a-8dea-440a-ac7d-149282ba8175
-langcode: fr
+uuid: 4e9e4202-fba3-4b65-83b3-11f460572f87
+langcode: en
 status: true
 dependencies:
   module:
+    - link
     - paragraphs
-id: paragraph.field_accroche
-field_name: field_accroche
+id: paragraph.field_call_to_action
+field_name: field_call_to_action
 entity_type: paragraph
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true

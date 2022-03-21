@@ -1,0 +1,19 @@
+uuid: f63e53cd-3187-43da-8546-a33f00000fb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.paragraph_text_video_image
+id: paragraph.paragraph_text_video_image.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: paragraph_text_video_image
+label: Title
+description: 'max 65 characters'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

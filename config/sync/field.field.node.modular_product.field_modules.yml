@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_modules
     - node.type.modular_product
+    - paragraphs.paragraphs_type.paragraph_text_video_image
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -21,9 +22,10 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       paragraph_wysiwyg: paragraph_wysiwyg
+      paragraph_text_video_image: paragraph_text_video_image
+    negate: 0
     target_bundles_drag_drop:
       contact_button_item:
         weight: 20
@@ -70,9 +72,12 @@ settings:
       paragraph_product_call_to_action:
         weight: 34
         enabled: false
-      paragraph_wysiwyg:
+      paragraph_text_video_image:
+        weight: 36
         enabled: true
+      paragraph_wysiwyg:
         weight: 35
+        enabled: true
       rebond_wysiwyg:
         weight: 36
         enabled: false
