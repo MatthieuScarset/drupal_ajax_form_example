@@ -1,16 +1,16 @@
-uuid: 0b75949f-04d7-45e5-b45a-29b1ed3db2e7
+uuid: 9c7b9ebe-efe9-421d-80ce-7aadb416aecb
 langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_highlight
-    - paragraphs.paragraphs_type.paragraph_benefits
-id: paragraph.paragraph_benefits.field_highlight
+    - paragraphs.paragraphs_type.module_benefits
+id: paragraph.module_benefits.field_highlight
 field_name: field_highlight
 entity_type: paragraph
-bundle: paragraph_benefits
-label: Description
-description: ''
+bundle: module_benefits
+label: Highlight
+description: 'Max 150 characters'
 required: false
 translatable: true
 default_value: {  }

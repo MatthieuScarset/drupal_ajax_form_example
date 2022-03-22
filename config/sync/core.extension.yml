@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
@@ -83,6 +85,7 @@ module:
   oab_icomoon: 0
   oab_marketo: 0
   oab_media_browser: 0
+  oab_modular_product: 0
   oab_ob1_adapter: 0
   oab_offices_map: 0
   oab_orange_business_lounge: 0
@@ -161,6 +164,4 @@ theme:
   theme_boosted: 0
   theme_oab_hub: 0
   theme_one_i: 0
-_core:
-  default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 profile: minimal

@@ -1,9 +1,9 @@
-uuid: 23622a2d-8d1e-477c-b13d-ab9e173d20dd
+uuid: 5e25913e-2912-4312-ba00-74460fd208d1
 langcode: fr
 status: true
 dependencies: {  }
-id: paragraph_benefits
-label: 'Paragraph Benefits'
+id: module_benefits_item
+label: '[MP] Benefits Item'
 icon_uuid: null
 icon_default: null
 description: ''

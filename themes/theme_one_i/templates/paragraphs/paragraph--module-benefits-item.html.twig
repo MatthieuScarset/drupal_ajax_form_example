@@ -1,0 +1,35 @@
+
+{% if not is_numerical %}
+  <div class="row mt-1">
+    <div class="col-12 my-2">
+      <span class="icon {{ content.field_icon.0['#context']['value'] }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <h1 class="col-12 lead font-weight-bold mb-0">
+          {{ content.field_title }}
+        </h1>
+        <span class="col-12 text-gray3 pt-O">
+        {{ content.field_description }}
+      </span>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="row text-align-center mt-2">
+    <div class="col-12 justify-content-center my-2">
+      <span class="icon {{ content.field_icon.0['#context']['value'] }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
+    </div>
+    <div class="col-12">
+      <div class="row justify-content-center {% if paragraph.id() is not same as last_child_id.value %} border-right border-gray4 {% endif %} benefits-numerical-item-container">
+        <h1 class="col-12 benefits-numerical-item-title mb-0">
+          {{ content.field_title }}
+        </h1>
+        <span class="col-12 lead text-gray3 pt-0">
+        {{ content.field_description }}
+      </span>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
