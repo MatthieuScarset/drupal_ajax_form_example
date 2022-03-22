@@ -1,21 +1,20 @@
-uuid: 8532733e-2c68-4d42-ba3c-f779116bd84b
+uuid: 7445a5a9-b899-4f6d-a363-4b3b0fbf3bcc
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.paragraph_text_video_image.field_call_to_action
-    - field.field.paragraph.paragraph_text_video_image.field_display_mode
-    - field.field.paragraph.paragraph_text_video_image.field_standard_text
-    - field.field.paragraph.paragraph_text_video_image.field_teaser
-    - field.field.paragraph.paragraph_text_video_image.field_title
-    - field.field.paragraph.paragraph_text_video_image.field_video
-    - paragraphs.paragraphs_type.paragraph_text_video_image
+    - field.field.paragraph.module_text_video_image.field_call_to_action
+    - field.field.paragraph.module_text_video_image.field_display_mode
+    - field.field.paragraph.module_text_video_image.field_standard_text
+    - field.field.paragraph.module_text_video_image.field_teaser
+    - field.field.paragraph.module_text_video_image.field_title
+    - field.field.paragraph.module_text_video_image.field_video
+    - paragraphs.paragraphs_type.module_text_video_image
   module:
     - link
-    - options
-id: paragraph.paragraph_text_video_image.default
+id: paragraph.module_text_video_image.default
 targetEntityType: paragraph
-bundle: paragraph_text_video_image
+bundle: module_text_video_image
 mode: default
 content:
   field_call_to_action:
@@ -30,13 +29,6 @@ content:
     third_party_settings: {  }
     weight: 3
     region: content
-  field_display_mode:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 5
-    region: content
   field_standard_text:
     type: basic_string
     label: above
@@ -49,7 +41,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title:
     type: string
@@ -66,6 +58,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
-hidden: {  }
+hidden:
+  field_display_mode: true

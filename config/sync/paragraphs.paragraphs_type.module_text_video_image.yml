@@ -1,9 +1,9 @@
-uuid: bf4240a4-7089-4ad2-976f-e18724ec0cff
+uuid: 2d0dfc54-513f-44c0-804b-14db9f7ae4c8
 langcode: en
 status: true
 dependencies: {  }
-id: paragraph_text_video_image
-label: 'Paragraph Text Video Image'
+id: module_text_video_image
+label: '[MP] Module Text Video Image'
 icon_uuid: null
 icon_default: null
 description: ''

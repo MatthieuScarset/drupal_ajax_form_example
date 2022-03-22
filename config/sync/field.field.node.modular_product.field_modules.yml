@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_modules
     - node.type.modular_product
-    - paragraphs.paragraphs_type.paragraph_text_video_image
+    - paragraphs.paragraphs_type.module_text_video_image
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -23,8 +23,8 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      module_text_video_image: module_text_video_image
       paragraph_wysiwyg: paragraph_wysiwyg
-      paragraph_text_video_image: paragraph_text_video_image
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -66,15 +66,15 @@ settings:
       marketo:
         weight: 32
         enabled: false
+      module_text_video_image:
+        weight: 34
+        enabled: true
       paragraph_block_rebond:
         weight: 33
         enabled: false
       paragraph_product_call_to_action:
         weight: 34
         enabled: false
-      paragraph_text_video_image:
-        weight: 36
-        enabled: true
       paragraph_wysiwyg:
         weight: 35
         enabled: true

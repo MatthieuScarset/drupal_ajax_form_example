@@ -1,23 +1,21 @@
-uuid: f4fea0e4-7d6b-43c4-b573-928d5f12d8b6
+uuid: e888dcb2-c128-40d0-96a8-ae3888b31663
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_display_mode
-    - paragraphs.paragraphs_type.paragraph_text_video_image
+    - paragraphs.paragraphs_type.module_text_video_image
   module:
     - options
-id: paragraph.paragraph_text_video_image.field_display_mode
+id: paragraph.module_text_video_image.field_display_mode
 field_name: field_display_mode
 entity_type: paragraph
-bundle: paragraph_text_video_image
+bundle: module_text_video_image
 label: 'Display mode'
 description: ''
-required: true
+required: false
 translatable: false
-default_value:
-  -
-    value: left
+default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: list_string

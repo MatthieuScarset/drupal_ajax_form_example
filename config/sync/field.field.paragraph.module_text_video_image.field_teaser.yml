@@ -1,16 +1,16 @@
-uuid: 707790ca-3eb4-47e0-9757-b4d35fd94f8b
+uuid: 90b0a3db-a8c3-4348-afb8-c1531b9dc3a9
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_teaser
-    - paragraphs.paragraphs_type.paragraph_text_video_image
-id: paragraph.paragraph_text_video_image.field_teaser
+    - paragraphs.paragraphs_type.module_text_video_image
+id: paragraph.module_text_video_image.field_teaser
 field_name: field_teaser
 entity_type: paragraph
-bundle: paragraph_text_video_image
+bundle: module_text_video_image
 label: Teaser
-description: 'max 150 characters'
+description: ''
 required: false
 translatable: false
 default_value: {  }
