@@ -1,0 +1,19 @@
+uuid: 4cba0809-92e2-426f-9511-292decfece02
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.module_benefits_item
+id: paragraph.module_benefits_item.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: module_benefits_item
+label: 'Item description'
+description: 'Max 130 characters'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

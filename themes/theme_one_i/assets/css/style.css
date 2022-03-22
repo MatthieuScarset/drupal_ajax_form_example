@@ -924,6 +924,24 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   }
 }
 
+.benefits-item-icon {
+  font-size: 3.5rem;
+  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+}
+
+.benefits-numerical-item-container {
+  height: 5.625rem;
+  overflow-y: visible;
+}
+.benefits-numerical-item-container .benefits-numerical-item-title {
+  max-height: 3.25rem;
+  overflow-y: hidden;
+}
+
+.field--item > .row {
+  margin-bottom: 2.1875rem;
+}
+
 .o-footer .footer-div-border {
   border-top: 1px solid #333;
 }

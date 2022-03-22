@@ -1,0 +1,18 @@
+{%
+  set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+]
+%}
+
+<div{{ attributes.addClass(classes, 'row') }}>
+  {% for item in items %}
+    {% if 4 == items|length %}
+      <div{{ item.attributes.addClass('field--item', 'col-3') }}>{{ item.content }}</div>
+    {% else %}
+      <div{{ item.attributes.addClass('field--item', 'col-4') }}>{{ item.content }}</div>
+    {% endif %}
+  {% endfor %}
+</div>

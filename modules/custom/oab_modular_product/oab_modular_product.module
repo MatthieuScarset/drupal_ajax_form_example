@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_modular_product_field_widget_paragraphs_form_alter(&$element, FormStateInterface $form_state, $context) {
+  if ($element['#paragraph_type'] == 'module_benefits_item') {
+     $element['subform']["field_icon"][0]['token_tree'] = [
+       '#theme' => 'token_tree_link',
+       '#token_types' => ['icomoon'],
+       '#weight' => 90,
+       '#global_types' => FALSE,
+       '#click_insert' => TRUE,
+     ];
+   }
+}
