@@ -1,0 +1,30 @@
+uuid: 7c896530-30da-4680-b9b6-9631e025c5d6
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - oab_frontoffice
+  theme:
+    - theme_one_i
+id: topzonemodularproduct
+theme: theme_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: top_zone_modular_product_block
+settings:
+  id: top_zone_modular_product_block
+  label: 'Top Zone Modular Product'
+  provider: oab_frontoffice
+  label_display: visible
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      modular_product: modular_product
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

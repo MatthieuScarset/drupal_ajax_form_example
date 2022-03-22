@@ -3,23 +3,22 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_modules
-    - field.field.node.modular_product.field_product_call_to_action
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
-    - field.field.node.modular_product.field_top_zone_image
-    - image.style.thumbnail
+    - field.field.node.modular_product.field_visual
     - node.type.modular_product
   module:
+    - entity_browser
     - field_group
-    - image
     - link
     - oab_backoffice
-    - paragraphs
     - path
     - workbench_moderation
 third_party_settings:
@@ -30,9 +29,9 @@ third_party_settings:
         - field_product_name
         - field_teaser
         - field_modular_product_tarif
-        - group_cta_button
+        - field_call_to_action_button
         - field_call_to_action_link
-        - field_top_zone_image
+        - field_visual
       parent_name: group_onglets
       weight: 4
       format_type: tab
@@ -93,20 +92,6 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Présentation
-    group_cta_button:
-      children:
-        - field_product_call_to_action
-      parent_name: group_top_zone
-      weight: 33
-      format_type: fieldset
-      region: content
-      format_settings:
-        description: ''
-        required_fields: true
-        id: ''
-        classes: ''
-        show_empty_fields: false
-      label: 'Product CTA button'
     group_modules_configuration:
       children:
         - field_enable_wysiwyg_paragraph
@@ -141,6 +126,14 @@ targetEntityType: node
 bundle: modular_product
 mode: default
 content:
+  field_call_to_action_button:
+    weight: 33
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
   field_call_to_action_link:
     weight: 34
     settings:
@@ -176,18 +169,6 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
     region: content
-  field_product_call_to_action:
-    type: entity_reference_paragraphs
-    weight: 34
-    settings:
-      title: 'Product call to action'
-      title_plural: 'Product call to action'
-      edit_mode: open
-      add_mode: button
-      form_display_mode: default
-      default_paragraph_type: default_button
-    third_party_settings: {  }
-    region: content
   field_product_category:
     weight: 29
     settings:
@@ -212,13 +193,20 @@ content:
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_top_zone_image:
+  field_visual:
     weight: 35
     settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: modular_product_image_top_zone
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
     third_party_settings: {  }
-    type: image_image
+    type: entity_browser_entity_reference
     region: content
   langcode:
     type: language_select

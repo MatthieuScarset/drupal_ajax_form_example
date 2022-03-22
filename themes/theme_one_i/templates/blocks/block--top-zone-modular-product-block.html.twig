@@ -1,0 +1,82 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - $block->subject: Block title.
+ * - $content: Block content.
+ * - $block->module: Module that generated the block.
+ * - $block->delta: An ID for the block, unique within each module.
+ * - $block->region: The block region embedding the current block.
+ * - $classes: String of classes that can be used to style contextually through
+ *   CSS. It can be manipulated through the variable $classes_array from
+ *   preprocess functions. The default values can be one or more of the
+ *   following:
+ *   - block: The current template type, i.e., "theming hook".
+ *   - block-[module]: The module generating the block. For example, the user
+ *     module is responsible for handling the default user navigation block. In
+ *     that case the class would be 'block-user'.
+ * - $title_prefix (array): An array containing additional output populated by
+ *   modules, intended to be displayed in front of the main title tag that
+ *   appears in the template.
+ * - $title_suffix (array): An array containing additional output populated by
+ *   modules, intended to be displayed after the main title tag that appears in
+ *   the template.
+ *
+ * Helper variables:
+ * - $classes_array: Array of html class attribute values. It is flattened
+ *   into a string within the variable $classes.
+ * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
+ * - $zebra: Same output as $block_zebra but independent of any block region.
+ * - $block_id: Counter dependent on each block region.
+ * - $id: Same output as $block_id but independent of any block region.
+ * - $is_front: Flags true when presented in the front page.
+ * - $logged_in: Flags true when the current user is a logged-in member.
+ * - $is_admin: Flags true when the current user is an administrator.
+ * - $block_html_id: A valid HTML ID and guaranteed unique.
+ *
+ * @see bootstrap_preprocess_block()
+ * @see template_preprocess()
+ * @see template_preprocess_block()
+ * @see bootstrap_process_block()
+ * @see template_process()
+ *
+ * @ingroup templates
+ */
+#}
+
+
+<div class="top-zone-modular-product text-dark bg-gray2 align-items-center">
+  <div class="row site-width align-items-center">
+    <div class="block-image col-lg-6 no-gutters order-lg-12">
+      {% set imagestyle = {
+        '#theme':      'image_style',
+        '#style_name': 'modular_product_image_top_zone',
+        '#uri':        content.product_top_zone_image_uri,
+        '#alt':        content.product_top_zone_image_alt,
+        '#attributes': { class: 'float-lg-right' },
+      } %}
+      {{ imagestyle }}
+    </div>
+
+    <div class="block-text col-12 col-lg-6 col-6 no-gutters order-lg-0">
+      <p class="product-category text-gray3 font-weight-bold">{{ content.product_category }}</p>
+      <p class="product-name lead font-weight-bold">{{ content.product.field_product_name[0].value }}</p>
+      {% if content.product_top_zone_image_uri|length > 0 %}
+        {% set teaser_class = "product-teaser" %}
+      {% else %}
+        {% set teaser_class = "product-teaser-without-image" %}
+      {% endif %}
+      <h3 class="{{ teaser_class }}">{{ content.product.field_teaser[0].value }}</h3>
+      <p class="product-tarif lead font-weight-bold">{{ content.product.field_modular_product_tarif[0].value }}</p>
+      <div class="block-cta row no-gutters pb-1">
+        <a href="{{ content.product.field_call_to_action_button[0].url }}"
+           class="product-cta-button btn btn-primary mr-sm-4 mb-1 mb-xl-0">{{ content.product.field_call_to_action_button[0].title }}</a>
+        <a href="{{ content.product.field_call_to_action_link[0].url }}"
+           class="product-cta-link-text o-link-arrow pt-1">{{ content.product.field_call_to_action_link[0].title }}</a>
+      </div>
+    </div>
+
+  </div>
+</div>
