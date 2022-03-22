@@ -15,6 +15,6 @@ plugin: search_accords_price_by_country_obl_block
 settings:
   id: search_accords_price_by_country_obl_block
   label: 'Search Accords Price By Country OBL'
-  provider: oab_orange_business_lounge
   label_display: visible
+  provider: oab_orange_business_lounge
 visibility: {  }

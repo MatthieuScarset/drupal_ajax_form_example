@@ -12,20 +12,20 @@ pattern: 'projects/[node:title]'
 selection_criteria:
   6a7b64a9-a1d1-4ebe-bd28-746475695103:
     id: node_type
-    bundles:
-      customer_story: customer_story
     negate: false
+    uuid: 6a7b64a9-a1d1-4ebe-bd28-746475695103
     context_mapping:
       node: node
-    uuid: 6a7b64a9-a1d1-4ebe-bd28-746475695103
+    bundles:
+      customer_story: customer_story
   7d67ea20-1bbb-4865-8e6b-408f5f53195a:
     id: language
-    langcodes:
-      ru: ru
     negate: false
+    uuid: 7d67ea20-1bbb-4865-8e6b-408f5f53195a
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 7d67ea20-1bbb-4865-8e6b-408f5f53195a
+    langcodes:
+      ru: ru
 selection_logic: and
 weight: -10
 relationships:

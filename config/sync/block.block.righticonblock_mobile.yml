@@ -15,6 +15,6 @@ plugin: right_icon_block
 settings:
   id: right_icon_block
   label: 'Right icon Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
 visibility: {  }

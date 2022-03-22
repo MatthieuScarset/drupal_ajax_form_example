@@ -20,42 +20,42 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   42b35f15-8608-407c-885e-7c8604936505:
+    id: view
+    uuid: 42b35f15-8608-407c-885e-7c8604936505
+    label: 'Media listing'
+    weight: -10
     settings:
-      view: medias_entity_browser
-      view_display: entity_browser_media
       submit_text: Select
       auto_select: false
-    uuid: 42b35f15-8608-407c-885e-7c8604936505
-    weight: -10
-    label: 'Media listing'
-    id: view
+      view: medias_entity_browser
+      view_display: entity_browser_media
   a5280758-b37d-491a-88a4-5e6238cde9a6:
+    id: entity_form
+    uuid: a5280758-b37d-491a-88a4-5e6238cde9a6
+    label: 'Upload media'
+    weight: -9
     settings:
+      submit_text: Save
       entity_type: media
       bundle: image
       form_mode: default
-      submit_text: Save
-    uuid: a5280758-b37d-491a-88a4-5e6238cde9a6
-    weight: -9
-    label: 'Upload media'
-    id: entity_form
   7ea263f6-0017-401f-8253-a1ebaa20c5e3:
+    id: entity_form
+    uuid: 7ea263f6-0017-401f-8253-a1ebaa20c5e3
+    label: 'Upload file'
+    weight: -7
     settings:
+      submit_text: Save
       entity_type: media
       bundle: file
       form_mode: default
-      submit_text: Save
-    uuid: 7ea263f6-0017-401f-8253-a1ebaa20c5e3
-    weight: -7
-    label: 'Upload file'
-    id: entity_form
   5212a009-edf9-4504-b9ec-84eebbb181bc:
+    id: view
+    uuid: 5212a009-edf9-4504-b9ec-84eebbb181bc
+    label: 'Files listing'
+    weight: -8
     settings:
-      view: medias_entity_browser
-      view_display: entity_browser_file
       submit_text: Select
       auto_select: false
-    uuid: 5212a009-edf9-4504-b9ec-84eebbb181bc
-    weight: -8
-    label: 'Files listing'
-    id: view
+      view: medias_entity_browser
+      view_display: entity_browser_file

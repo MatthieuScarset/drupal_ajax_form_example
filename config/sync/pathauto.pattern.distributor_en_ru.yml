@@ -11,22 +11,22 @@ pattern: '[node:title]'
 selection_criteria:
   bd466273-31e7-4cd4-b160-fa8a1abd8cd3:
     id: node_type
-    bundles:
-      distributor: distributor
     negate: false
+    uuid: bd466273-31e7-4cd4-b160-fa8a1abd8cd3
     context_mapping:
       node: node
-    uuid: bd466273-31e7-4cd4-b160-fa8a1abd8cd3
+    bundles:
+      distributor: distributor
   fe487816-e3e3-4f91-8856-cc79639cd942:
     id: language
+    negate: false
+    uuid: fe487816-e3e3-4f91-8856-cc79639cd942
+    context_mapping:
+      language: 'node:langcode:language'
     langcodes:
       en: en
       ru: ru
       ru-en: ru-en
-    negate: false
-    context_mapping:
-      language: 'node:langcode:language'
-    uuid: fe487816-e3e3-4f91-8856-cc79639cd942
 selection_logic: and
 weight: -10
 relationships:

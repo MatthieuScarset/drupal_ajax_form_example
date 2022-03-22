@@ -47,14 +47,15 @@ third_party_settings:
         - group_classify
         - group_seo
         - group_publish
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
     group_write:
       children:
         - langcode
@@ -64,16 +65,17 @@ third_party_settings:
         - field_content
         - field_aplat
         - field_file
+      label: Write
+      region: content
       parent_name: group_onglets
       weight: 20
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
     group_classify:
       children:
         - field_subhome
@@ -83,16 +85,17 @@ third_party_settings:
         - field_solution
         - field_press_type
         - field_region
+      label: Classify
+      region: content
       parent_name: group_onglets
       weight: 22
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
     group_publish:
       children:
         - field_content_owner
@@ -101,57 +104,61 @@ third_party_settings:
         - promote
         - path
         - field_metatags
+      label: Publish
+      region: content
       parent_name: group_onglets
       weight: 24
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Publish
     group_content_worthy_period:
       children:
         - field_start_date
         - field_end_date
+      label: 'Content worthy period'
+      region: content
       parent_name: group_publish
       weight: 43
       format_type: fieldset
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         description: ''
         required_fields: true
-      label: 'Content worthy period'
     group_seo:
       children:
         - field_meta_title
         - field_meta_description
+      label: SEO
+      region: content
       parent_name: group_onglets
       weight: 23
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: SEO
     group_visual:
       children:
         - field_visual_tile
         - field_visual
+      label: Visual
+      region: content
       parent_name: group_onglets
       weight: 21
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Visual
 id: node.press_kit.default
 targetEntityType: node
 bundle: press_kit
@@ -164,83 +171,83 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_aplat:
+    type: options_select
     weight: 28
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_content:
+    type: text_textarea
     weight: 25
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_content_owner:
+    type: string_textfield
     weight: 41
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_display_title:
+    type: boolean_checkbox
     weight: 23
+    region: content
     settings:
       display_label: false
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_email_owner:
+    type: string_textfield
     weight: 42
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_end_date:
+    type: datetime_default
     weight: 34
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_file:
+    type: entity_browser_entity_reference
     weight: 29
+    region: content
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_highlight:
+    type: string_textarea
     weight: 24
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_industry:
+    type: options_select
     weight: 51
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight:
+    type: options_select
     weight: 49
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight_type:
     type: options_select
     weight: 50
@@ -248,144 +255,144 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_meta_description:
+    type: string_textfield
     weight: 25
+    region: content
     settings:
       size: 156
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_title:
+    type: string_textfield
     weight: 24
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_metatags:
-    weight: 46
-    settings: {  }
-    third_party_settings: {  }
     type: metatag_firehose
+    weight: 46
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_press_type:
+    type: options_select
     weight: 53
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_region:
+    type: options_select
     weight: 54
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_solution:
+    type: options_select
     weight: 52
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_start_date:
-    weight: 33
-    settings: {  }
-    third_party_settings: {  }
     type: datetime_default
+    weight: 33
     region: content
-  field_subhome:
-    weight: 48
     settings: {  }
     third_party_settings: {  }
+  field_subhome:
     type: options_select
+    weight: 48
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_visual:
+    type: entity_browser_entity_reference
     weight: 28
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_visual_tile:
+    type: entity_browser_entity_reference
     weight: 27
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   langcode:
     type: language_select
     weight: 21
+    region: content
     settings:
       include_locked: true
     third_party_settings: {  }
-    region: content
   moderation_state_update:
     type: inline_entity_form_complex
     weight: 11
+    region: content
     settings:
+      form_mode: default
       override_labels: true
       label_singular: 'Moderation state update'
       label_plural: 'Moderation state updates'
       allow_new: true
-      match_operator: CONTAINS
       allow_existing: false
-      form_mode: default
+      match_operator: CONTAINS
     third_party_settings: {  }
-    region: content
   path:
     type: path
     weight: 45
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   promote:
     type: boolean_checkbox
     weight: 44
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 22
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 1
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 50

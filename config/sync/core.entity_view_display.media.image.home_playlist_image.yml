@@ -17,13 +17,13 @@ bundle: image
 mode: home_playlist_image
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: playlist
       image_link: ''
+      image_style: playlist
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

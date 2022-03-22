@@ -17,9 +17,9 @@ third_party_settings:
       1439: '1439'
       1494: '1494'
     gdpr_form_published: 1
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 567
 template: false
 archive: false
@@ -27,7 +27,347 @@ id: request_for_personal_data_fr
 title: 'Request for personal data FR'
 description: ''
 category: GDPR
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<h2 class=\\\"titre2\\\">Formulaire de demande d’accès ou de modifications des données personnelles</h2>\\r\\n<style type=\\\"text/css\\\">legend { border:0!important; }\\r\\nh2 { margin-top: 3rem; }\\r\\n.right-column { display:none; }\\r\\n#edit-confirmation-of-the-email-address--wrapper { margin-left: -40px; margin-right: -40px; }\\r\\n</style>\\r\\n<p>Vos données personnelles sont traitées par Orange Business Services afin de prendre en compte votre demande.<br />\\r\\nPour en savoir plus sur la manière dont Orange Business Services traite les données personnelles, vous pouvez consulter la <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">Politique sur le Protection des Données Personnelles</a>.<br />\\r\\nCe formulaire vous permet de nous faire parvenir directement votre demande en ligne.</p>\\r\\n\"\n  '#format': full_html\nprocessed_text_07:\n  '#type': processed_text\n  '#text': \"<h2 class=\\\"titre2\\\">Dîtes nous si</h2>\\r\\n\"\n  '#format': full_html\ntell_us_if:\n  '#type': radios\n  '#title': 'Dîtes nous si'\n  '#title_display': invisible\n  '#description_display': invisible\n  '#options':\n    'vous êtes utilisateur ou employé d’un client Orange Business Services': 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n    'vous êtes utilisateur ou employé d’un client Orange Business Services résilié': 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'\n    'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n  '#required': true\n  '#attributes':\n    style: 'width: auto; display: inline; height: auto; margin-right:1rem;'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': \"<h2 class=\\\"titre2\\\">Informations professionnelles</h2>\\r\\n\"\n  '#format': full_html\nname_of_your_company:\n  '#type': textfield\n  '#title': 'Nom de votre société'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncontainer:\n  '#type': container\n  '#states':\n    invisible:\n      -\n        ':input[name=\"tell_us_if\"]':\n          empty: true\n      - xor\n      -\n        ':input[name=\"tell_us_if\"]':\n          value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n    visible:\n      ':input[name=\"tell_us_if\"]':\n        '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n  customer_ic01_number_01:\n    '#type': textfield\n    '#title': 'SIREN/SIRET de votre société (ou code IC01 pour les sociétés enregistrées hors France)'\n    '#description': '<p><strong>Customer IC01 number (or SIREN/SIRET for company registered in France)*</strong></p>'\n    '#title_display': invisible\n    '#description_display': before\n    '#minlength': 9\n    '#required': true\n    '#required_error': 'Please enter a 9 digits min number'\n    '#pattern': '^[0-9]*$'\n    '#pattern_error': 'Please enter a 9 digits min number'\n    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncontainer_01:\n  '#type': container\n  '#states':\n    invisible:\n      ':input[name=\"tell_us_if\"]':\n        empty: true\n    visible:\n      ':input[name=\"tell_us_if\"]':\n        value: 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'\n  your_job_role:\n    '#type': textfield\n    '#title': 'Votre fonction'\n    '#required': true\n    '#states':\n      invisible:\n        -\n          ':input[name=\"tell_us_if\"]':\n            empty: true\n        - xor\n        -\n          ':input[name=\"tell_us_if\"]':\n            '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'\n      visible:\n        ':input[name=\"tell_us_if\"]':\n          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'\n    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nprocessed_text_02:\n  '#type': processed_text\n  '#text': \"<h2 class=\\\"titre2\\\">Coordonnées du demandeur</h2>\\r\\n\"\n  '#format': full_html\nsurname:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nfirst_name:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nphone_number:\n  '#type': tel\n  '#title': 'Numéro de téléphone'\n  '#required': true\nconfirmation_of_the_email_address:\n  '#type': webform_email_confirm\n  '#title': 'Adresse de messagerie'\n  '#description_display': invisible\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#attributes':\n    class:\n      - email_confirm\ncontainer_04:\n  '#type': container\n  '#states':\n    invisible:\n      -\n        ':input[name=\"tell_us_if\"]':\n          empty: true\n      - xor\n      -\n        ':input[name=\"tell_us_if\"]':\n          '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n    visible:\n      ':input[name=\"tell_us_if\"]':\n        value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n  proof_of_identity_of_the_applicant:\n    '#type': managed_file\n    '#title': 'Justificatif d''identité du demandeur'\n    '#description': '<p>Toute demande d’exercice de droits doit être accompagnée de la photocopie d’un justificatif d’identité (carte nationale d’identité ou passeport)</p>'\n    '#required': true\n    '#states':\n      invisible:\n        -\n          ':input[name=\"tell_us_if\"]':\n            empty: true\n        - xor\n        -\n          ':input[name=\"tell_us_if\"]':\n            '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n      visible:\n        ':input[name=\"tell_us_if\"]':\n          value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'\n    '#file_extensions': 'gif jpg png bmp pdf'\n    '#sanitize': true\nprocessed_text_03:\n  '#type': processed_text\n  '#text': \"<h2 class=\\\"titre2\\\">Détails de votre demande</h2>\\r\\n\"\n  '#format': full_html\nprocessed_text_04:\n  '#type': processed_text\n  '#text': \"<p>Le formulaire ne permet d'effectuer qu'une seule demande par utilisateur.</p>\\r\\n\"\n  '#format': full_html\ntype_of_request:\n  '#type': select\n  '#title': 'Nature de la demande'\n  '#options':\n    'Accès aux données personnelles': 'Accès aux données personnelles'\n    'Opposition aux traitements': 'Opposition aux traitements'\n    'Modification des données personnelles': 'Modification des données personnelles'\n    'Suppression des données personnelles': 'Suppression des données personnelles'\n    'Limitation aux traitements': 'Limitation aux traitements'\n    'Consentement, le cas échéant': 'Consentement, le cas échéant'\n    'Droit à l''oubli': 'Droit à l''oubli'\n    'Portabilité des données personnelles': 'Portabilité des données personnelles'\n    'Autre demande GDPR': 'Autre demande GDPR'\n  '#required': true\ndetails_of_your_request:\n  '#type': textarea\n  '#title': 'Détail de votre demande'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncontainer_03:\n  '#type': container\n  '#states':\n    invisible:\n      ':input[name=\"tell_us_if\"]':\n        empty: true\n    visible:\n      ':input[name=\"tell_us_if\"]':\n        value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n  processed_text_08:\n    '#type': processed_text\n    '#text': \"<h2 class=\\\"titre2\\\">Votre demande concerne</h2>\\r\\n\"\n    '#format': full_html\n  your_inquiry_concerns:\n    '#type': radios\n    '#title': 'Votre demande concerne'\n    '#title_display': invisible\n    '#options':\n      'Vos données': 'Vos données'\n      'Les données d''un utilisateur ou d''un employé de votre entreprise': 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n    '#required': true\n    '#states':\n      invisible:\n        ':input[name=\"tell_us_if\"]':\n          '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n      visible:\n        ':input[name=\"tell_us_if\"]':\n          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n    '#attributes':\n      style: 'width: auto; display: inline; height: auto; margin-right:1rem;'\ncontainer_02:\n  '#type': container\n  '#states':\n    invisible:\n      -\n        ':input[name=\"your_inquiry_concerns\"]':\n          empty: true\n      - xor\n      -\n        ':input[name=\"your_inquiry_concerns\"]':\n          '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n    visible:\n      ':input[name=\"your_inquiry_concerns\"]':\n        value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n  processed_text_05:\n    '#type': processed_text\n    '#text': \"<h2 class=\\\"titre2\\\">Informations sur l'utilisateur ou l’employé</h2>\\r\\n\\r\\n<p>Si vous effectuez cette demande pour un utilisateur ou un employé, vous devez joindre l'attestation (<a href=\\\"/sites/default/files/attestation-utilisateur-fr-octobre.pdf\\\" target=\\\"_blank\\\">attestation utilisateur</a>) dûment remplie et signée à votre demande.</p>\\r\\n\"\n    '#format': full_html\n  surname_2:\n    '#type': textfield\n    '#title': 'Nom *'\n    '#required': true\n    '#states':\n      invisible:\n        ':input[name=\"your_inquiry_concerns\"]':\n          '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n      visible:\n        ':input[name=\"your_inquiry_concerns\"]':\n          value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  first_name_2:\n    '#type': textfield\n    '#title': 'Prénom *'\n    '#required': true\n    '#states':\n      invisible:\n        -\n          ':input[name=\"your_inquiry_concerns\"]':\n            empty: true\n        - xor\n        -\n          ':input[name=\"your_inquiry_concerns\"]':\n            '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n      visible:\n        ':input[name=\"your_inquiry_concerns\"]':\n          value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  email_address_2:\n    '#type': textfield\n    '#title': 'Adresse e-mail *'\n    '#required': true\n    '#states':\n      invisible:\n        -\n          ':input[name=\"your_inquiry_concerns\"]':\n            empty: true\n        - xor\n        -\n          ':input[name=\"your_inquiry_concerns\"]':\n            '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n      visible:\n        ':input[name=\"your_inquiry_concerns\"]':\n          value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'\n    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  user_certificate:\n    '#type': managed_file\n    '#title': 'Attestation utilisateur *'\n    '#states':\n      optional:\n        ':input[name=\"your_inquiry_concerns\"]':\n          '!value': 'Data for a user in your company'\n      required:\n        ':input[name=\"your_inquiry_concerns\"]':\n          value: 'Data for a user in your company'\n    '#file_extensions': 'pdf png jpg jpeg'\n    '#sanitize': true\ncontainer_05:\n  '#type': container\n  '#states':\n    invisible:\n      -\n        ':input[name=\"tell_us_if\"]':\n          empty: true\n      - xor\n      -\n        ':input[name=\"tell_us_if\"]':\n          '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n    visible:\n      ':input[name=\"tell_us_if\"]':\n        value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n  legal_representative_certificate:\n    '#type': managed_file\n    '#title': 'Formulaire d’autorisation'\n    '#description': '<p>Vous devez joindre le formulaire (<a href=\"/sites/default/files/formulaire-d%27autorisation-final-fr_update-octobre.pdf\" target=\"_blank\">formulaire d’autorisation</a>) dûment rempli et signé à votre demande.</p>'\n    '#description_display': before\n    '#required': true\n    '#states':\n      invisible:\n        -\n          ':input[name=\"tell_us_if\"]':\n            empty: true\n        - xor\n        -\n          ':input[name=\"tell_us_if\"]':\n            '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n      visible:\n        ':input[name=\"tell_us_if\"]':\n          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'\n    '#file_extensions': 'pdf png jpg jpeg'\n    '#sanitize': true\nprocessed_text_09:\n  '#type': processed_text\n  '#text': \"<p>En déposant votre demande, vous attestez l’exactitude des informations mentionnées ci-dessus.</p>\\r\\n\"\n  '#format': full_html\ni_testify_to_the_veracity_of_the_information_:\n  '#type': checkbox\n  '#title': 'J’atteste de la véracité des informations.'\n  '#required': true\n  '#attributes':\n    style: 'width: auto;     display: inline;     height: auto;     margin-right: 1rem;'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\ncss:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">\\r\\n#edit-confirmation-of-the-email-address--wrapper {\\r\\n    margin-left: 0!important;\\r\\n    margin-right: 0!important;\\r\\n}\\r\\n</style>\"\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:from]'\n"
+elements: |-
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <h2 class="titre2">Formulaire de demande d’accès ou de modifications des données personnelles</h2>
+      <style type="text/css">legend { border:0!important; }
+      h2 { margin-top: 3rem; }
+      .right-column { display:none; }
+      #edit-confirmation-of-the-email-address--wrapper { margin-left: -40px; margin-right: -40px; }
+      </style>
+      <p>Vos données personnelles sont traitées par Orange Business Services afin de prendre en compte votre demande.<br />
+      Pour en savoir plus sur la manière dont Orange Business Services traite les données personnelles, vous pouvez consulter la <a href="https://www.orange-business.com/fr/donnees-personnelles" target="_blank">Politique sur le Protection des Données Personnelles</a>.<br />
+      Ce formulaire vous permet de nous faire parvenir directement votre demande en ligne.</p>
+    '#format': full_html
+  processed_text_07:
+    '#type': processed_text
+    '#text': |
+      <h2 class="titre2">Dîtes nous si</h2>
+    '#format': full_html
+  tell_us_if:
+    '#type': radios
+    '#title': 'Dîtes nous si'
+    '#title_display': invisible
+    '#description_display': invisible
+    '#options':
+      'vous êtes utilisateur ou employé d’un client Orange Business Services': 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+      'vous êtes utilisateur ou employé d’un client Orange Business Services résilié': 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'
+      'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+    '#required': true
+    '#attributes':
+      style: 'width: auto; display: inline; height: auto; margin-right:1rem;'
+  processed_text_01:
+    '#type': processed_text
+    '#text': |
+      <h2 class="titre2">Informations professionnelles</h2>
+    '#format': full_html
+  name_of_your_company:
+    '#type': textfield
+    '#title': 'Nom de votre société'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  container:
+    '#type': container
+    '#states':
+      invisible:
+        - ':input[name="tell_us_if"]':
+            empty: true
+        - xor
+        - ':input[name="tell_us_if"]':
+            value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+      visible:
+        ':input[name="tell_us_if"]':
+          '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+    customer_ic01_number_01:
+      '#type': textfield
+      '#title': 'SIREN/SIRET de votre société (ou code IC01 pour les sociétés enregistrées hors France)'
+      '#description': '<p><strong>Customer IC01 number (or SIREN/SIRET for company registered in France)*</strong></p>'
+      '#title_display': invisible
+      '#description_display': before
+      '#minlength': 9
+      '#required': true
+      '#required_error': 'Please enter a 9 digits min number'
+      '#pattern': '^[0-9]*$'
+      '#pattern_error': 'Please enter a 9 digits min number'
+      '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  container_01:
+    '#type': container
+    '#states':
+      invisible:
+        ':input[name="tell_us_if"]':
+          empty: true
+      visible:
+        ':input[name="tell_us_if"]':
+          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'
+    your_job_role:
+      '#type': textfield
+      '#title': 'Votre fonction'
+      '#required': true
+      '#states':
+        invisible:
+          - ':input[name="tell_us_if"]':
+              empty: true
+          - xor
+          - ':input[name="tell_us_if"]':
+              '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'
+        visible:
+          ':input[name="tell_us_if"]':
+            value: 'vous êtes utilisateur ou employé d’un client Orange Business Services résilié'
+      '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  processed_text_02:
+    '#type': processed_text
+    '#text': |
+      <h2 class="titre2">Coordonnées du demandeur</h2>
+    '#format': full_html
+  surname:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  first_name:
+    '#type': textfield
+    '#title': Prénom
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  phone_number:
+    '#type': tel
+    '#title': 'Numéro de téléphone'
+    '#required': true
+  confirmation_of_the_email_address:
+    '#type': webform_email_confirm
+    '#title': 'Adresse de messagerie'
+    '#description_display': invisible
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#attributes':
+      class:
+        - email_confirm
+  container_04:
+    '#type': container
+    '#states':
+      invisible:
+        - ':input[name="tell_us_if"]':
+            empty: true
+        - xor
+        - ':input[name="tell_us_if"]':
+            '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+      visible:
+        ':input[name="tell_us_if"]':
+          value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+    proof_of_identity_of_the_applicant:
+      '#type': managed_file
+      '#title': 'Justificatif d''identité du demandeur'
+      '#description': '<p>Toute demande d’exercice de droits doit être accompagnée de la photocopie d’un justificatif d’identité (carte nationale d’identité ou passeport)</p>'
+      '#required': true
+      '#states':
+        invisible:
+          - ':input[name="tell_us_if"]':
+              empty: true
+          - xor
+          - ':input[name="tell_us_if"]':
+              '!value': 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+        visible:
+          ':input[name="tell_us_if"]':
+            value: 'vous n’avez jamais été utilisateur ou employé d’un client Orange Business Services'
+      '#file_extensions': 'gif jpg png bmp pdf'
+      '#sanitize': true
+  processed_text_03:
+    '#type': processed_text
+    '#text': |
+      <h2 class="titre2">Détails de votre demande</h2>
+    '#format': full_html
+  processed_text_04:
+    '#type': processed_text
+    '#text': |
+      <p>Le formulaire ne permet d'effectuer qu'une seule demande par utilisateur.</p>
+    '#format': full_html
+  type_of_request:
+    '#type': select
+    '#title': 'Nature de la demande'
+    '#options':
+      'Accès aux données personnelles': 'Accès aux données personnelles'
+      'Opposition aux traitements': 'Opposition aux traitements'
+      'Modification des données personnelles': 'Modification des données personnelles'
+      'Suppression des données personnelles': 'Suppression des données personnelles'
+      'Limitation aux traitements': 'Limitation aux traitements'
+      'Consentement, le cas échéant': 'Consentement, le cas échéant'
+      'Droit à l''oubli': 'Droit à l''oubli'
+      'Portabilité des données personnelles': 'Portabilité des données personnelles'
+      'Autre demande GDPR': 'Autre demande GDPR'
+    '#required': true
+  details_of_your_request:
+    '#type': textarea
+    '#title': 'Détail de votre demande'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  container_03:
+    '#type': container
+    '#states':
+      invisible:
+        ':input[name="tell_us_if"]':
+          empty: true
+      visible:
+        ':input[name="tell_us_if"]':
+          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+    processed_text_08:
+      '#type': processed_text
+      '#text': |
+        <h2 class="titre2">Votre demande concerne</h2>
+      '#format': full_html
+    your_inquiry_concerns:
+      '#type': radios
+      '#title': 'Votre demande concerne'
+      '#title_display': invisible
+      '#options':
+        'Vos données': 'Vos données'
+        'Les données d''un utilisateur ou d''un employé de votre entreprise': 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+      '#required': true
+      '#states':
+        invisible:
+          ':input[name="tell_us_if"]':
+            '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+        visible:
+          ':input[name="tell_us_if"]':
+            value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+      '#attributes':
+        style: 'width: auto; display: inline; height: auto; margin-right:1rem;'
+  container_02:
+    '#type': container
+    '#states':
+      invisible:
+        - ':input[name="your_inquiry_concerns"]':
+            empty: true
+        - xor
+        - ':input[name="your_inquiry_concerns"]':
+            '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+      visible:
+        ':input[name="your_inquiry_concerns"]':
+          value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+    processed_text_05:
+      '#type': processed_text
+      '#text': |
+        <h2 class="titre2">Informations sur l'utilisateur ou l’employé</h2>
+
+        <p>Si vous effectuez cette demande pour un utilisateur ou un employé, vous devez joindre l'attestation (<a href="/sites/default/files/attestation-utilisateur-fr-octobre.pdf" target="_blank">attestation utilisateur</a>) dûment remplie et signée à votre demande.</p>
+      '#format': full_html
+    surname_2:
+      '#type': textfield
+      '#title': 'Nom *'
+      '#required': true
+      '#states':
+        invisible:
+          ':input[name="your_inquiry_concerns"]':
+            '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+        visible:
+          ':input[name="your_inquiry_concerns"]':
+            value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+      '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    first_name_2:
+      '#type': textfield
+      '#title': 'Prénom *'
+      '#required': true
+      '#states':
+        invisible:
+          - ':input[name="your_inquiry_concerns"]':
+              empty: true
+          - xor
+          - ':input[name="your_inquiry_concerns"]':
+              '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+        visible:
+          ':input[name="your_inquiry_concerns"]':
+            value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+      '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    email_address_2:
+      '#type': textfield
+      '#title': 'Adresse e-mail *'
+      '#required': true
+      '#states':
+        invisible:
+          - ':input[name="your_inquiry_concerns"]':
+              empty: true
+          - xor
+          - ':input[name="your_inquiry_concerns"]':
+              '!value': 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+        visible:
+          ':input[name="your_inquiry_concerns"]':
+            value: 'Les données d''un utilisateur ou d''un employé de votre entreprise'
+      '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    user_certificate:
+      '#type': managed_file
+      '#title': 'Attestation utilisateur *'
+      '#states':
+        optional:
+          ':input[name="your_inquiry_concerns"]':
+            '!value': 'Data for a user in your company'
+        required:
+          ':input[name="your_inquiry_concerns"]':
+            value: 'Data for a user in your company'
+      '#file_extensions': 'pdf png jpg jpeg'
+      '#sanitize': true
+  container_05:
+    '#type': container
+    '#states':
+      invisible:
+        - ':input[name="tell_us_if"]':
+            empty: true
+        - xor
+        - ':input[name="tell_us_if"]':
+            '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+      visible:
+        ':input[name="tell_us_if"]':
+          value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+    legal_representative_certificate:
+      '#type': managed_file
+      '#title': 'Formulaire d’autorisation'
+      '#description': '<p>Vous devez joindre le formulaire (<a href="/sites/default/files/formulaire-d%27autorisation-final-fr_update-octobre.pdf" target="_blank">formulaire d’autorisation</a>) dûment rempli et signé à votre demande.</p>'
+      '#description_display': before
+      '#required': true
+      '#states':
+        invisible:
+          - ':input[name="tell_us_if"]':
+              empty: true
+          - xor
+          - ':input[name="tell_us_if"]':
+              '!value': 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+        visible:
+          ':input[name="tell_us_if"]':
+            value: 'vous êtes utilisateur ou employé d’un client Orange Business Services'
+      '#file_extensions': 'pdf png jpg jpeg'
+      '#sanitize': true
+  processed_text_09:
+    '#type': processed_text
+    '#text': |
+      <p>En déposant votre demande, vous attestez l’exactitude des informations mentionnées ci-dessus.</p>
+    '#format': full_html
+  i_testify_to_the_veracity_of_the_information_:
+    '#type': checkbox
+    '#title': 'J’atteste de la véracité des informations.'
+    '#required': true
+    '#attributes':
+      style: 'width: auto;     display: inline;     height: auto;     margin-right: 1rem;'
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+    '#update__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+  css:
+    '#type': processed_text
+    '#text': |-
+      <style type="text/css">
+      #edit-confirmation-of-the-email-address--wrapper {
+          margin-left: 0!important;
+          margin-right: 0!important;
+      }
+      </style>
+    '#format': full_html
+  provenance:
+    '#type': hidden
+    '#title': Provenance
+    '#default_value': '[current-page:query:from]'
 css: ''
 javascript: ''
 settings:
@@ -42,40 +382,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -84,11 +432,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -99,13 +442,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -128,9 +471,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: inline
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: "<p>Bonjour,<br />\r\nVotre demande a bien été prise en compte. Nous vous recontacterons dans les meilleurs délais.<br />\r\nBien à vous,<br />\r\n<br />\r\nL'équipe Orange Business Services</p>"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -157,6 +500,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:
@@ -208,9 +552,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: false
     conditions: {  }
     weight: 0
@@ -219,13 +563,17 @@ handlers:
         - completed
       to_mail: 'gdpr.dsrr@orange.com, nicolas.griffet@orange.com'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: "<p>Bonjour,</p>\r\n\r\n<p>Une demande de rectification de données personnelles a été saisie sur orange-business.com.</p>\r\n\r\n<p>Veuillez en prendre connaissance en vous connectant à l'interface de gestion.</p>\r\n\r\n<p>Cordialement,</p>\r\n\r\n<p>L'équipe Digitale</p>\r\n"
       excluded_elements: {  }
@@ -236,11 +584,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

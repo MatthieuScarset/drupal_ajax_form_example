@@ -3,7 +3,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Applicar
+          submit_button: Filtro
       filters:
         redirect_redirect__uri:
           expose:

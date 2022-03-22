@@ -25,16 +25,17 @@ third_party_settings:
       children:
         - field_office_country
         - field_region
+      label: Classify
+      region: content
       parent_name: group_tabs
       weight: 2
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
     group_write:
       children:
         - title
@@ -46,28 +47,30 @@ third_party_settings:
         - field_phone_number
         - field_email_address
         - field_office_location
+      label: Write
+      region: content
       parent_name: group_tabs
       weight: 1
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
     group_tabs:
       children:
         - group_write
         - group_classify
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Tabs
 id: node.office.default
 targetEntityType: node
 bundle: office
@@ -80,51 +83,54 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_additionnal:
+    type: string_textfield
     weight: 4
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_city:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
     type: string_textfield
+    weight: 6
     region: content
-  field_email_address:
-    weight: 8
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_email_address:
     type: email_default
+    weight: 8
     region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
   field_office_country:
+    type: options_select
     weight: 6
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_office_location:
+    type: geolocation_googlegeocoder
     weight: 9
+    region: content
     settings:
-      default_longitude: '2.3522219000000177'
-      default_latitude: '48.856614'
       auto_client_location: '1'
+      auto_client_location_marker: '0'
+      allow_override_map_settings: 0
       google_map_settings:
-        height: 400px
-        width: 100%
         type: ROADMAP
         zoom: 6
-        maxZoom: 18
         minZoom: 0
+        maxZoom: 18
+        rotateControl: false
+        height: 400px
+        width: 100%
+        gestureHandling: auto
         zoomControl: 1
         scrollwheel: 1
-        gestureHandling: auto
         draggable: 1
         style: ''
         info_auto_display: 1
@@ -132,75 +138,72 @@ content:
         disableAutoPan: 1
         mapTypeControl: 0
         streetViewControl: 0
-        rotateControl: false
         fullscreenControl: 0
         preferScrollingToZooming: 0
         disableDoubleClickZoom: 0
-      auto_client_location_marker: '0'
-      allow_override_map_settings: 0
+      default_longitude: '2.3522219000000177'
+      default_latitude: '48.856614'
       populate_address_field: ''
       target_address_field: null
       explicite_actions_address_field: ''
     third_party_settings: {  }
-    type: geolocation_googlegeocoder
-    region: content
   field_phone_number:
+    type: string_textfield
     weight: 7
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_postal_code:
+    type: string_textfield
     weight: 5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_region:
+    type: options_select
     weight: 7
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_street:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 2
+    region: content
     settings:
       include_locked: true
     third_party_settings: {  }
-    region: content
   moderation_state_update:
     type: inline_entity_form_complex
     weight: 11
+    region: content
     settings:
+      form_mode: default
       override_labels: true
       label_singular: 'Moderation state update'
       label_plural: 'Moderation state updates'
       allow_new: true
-      match_operator: CONTAINS
       allow_existing: false
-      form_mode: default
+      match_operator: CONTAINS
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
+    weight: 3
+    region: content
     settings:
       display_label: true
-    weight: 3
     third_party_settings: {  }
-    region: content
   sticky:
     type: boolean_checkbox
     weight: 4
@@ -211,11 +214,11 @@ content:
   title:
     type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   translation:
     weight: 10
     region: content
@@ -227,15 +230,15 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 50
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   path: true
   promote: true

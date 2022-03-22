@@ -21,24 +21,15 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       contact_button_item: contact_button_item
+    negate: 0
     target_bundles_drag_drop:
       contact_button_item:
-        enabled: true
         weight: 18
+        enabled: true
       default_button:
         weight: 19
-        enabled: false
-      homepage_banner_experience:
-        weight: 20
-        enabled: false
-      homepage_banner_item:
-        weight: 21
-        enabled: false
-      homepage_news:
-        weight: 22
         enabled: false
       home_banner:
         weight: 23
@@ -57,6 +48,15 @@ settings:
         enabled: false
       home_thematic_columns:
         weight: 28
+        enabled: false
+      homepage_banner_experience:
+        weight: 20
+        enabled: false
+      homepage_banner_item:
+        weight: 21
+        enabled: false
+      homepage_news:
+        weight: 22
         enabled: false
       infography_partner:
         weight: 29

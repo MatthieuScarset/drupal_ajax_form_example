@@ -1,6 +1,6 @@
 uuid: b21d654c-4a6d-4e8c-b314-e7f35b0c0431
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - ctools
@@ -12,18 +12,18 @@ dependencies:
 id: theme_one_i_contactbar
 theme: theme_one_i
 region: prefooter
-weight: -51
+weight: -46
 provider: null
 plugin: contact_bar_block
 settings:
   id: contact_bar_block
   label: 'Contact Bar Axiome FR'
-  provider: oab_frontoffice
   label_display: '0'
-  content: ''
-  content_format: full_html
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
+  content: ''
+  content_format: full_html
   link_assistance: 'https://espaceclient.orange-business.com/web/ece2/assistance'
   link_assistance_text: Assistance
   link_ecrire: '/fr/contact#etude'
@@ -31,20 +31,20 @@ settings:
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      product: product
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
   request_path:
     id: request_path
-    pages: "/ventes-indirectes/produits/*\r\n/produits/numeros-contact-ip\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/dossier/gdpr/pme-conformite\r\n/solutions/cloud-computing/datacenter-modernisation-cloud-prive\r\n/produits/working-together-flash-solutions-digitales-humaines\r\n/dossier/industrie-reseaux-connectee"
     negate: true
     context_mapping: {  }
+    pages: "/ventes-indirectes/produits/*\r\n/produits/numeros-contact-ip\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/dossier/gdpr/pme-conformite\r\n/solutions/cloud-computing/datacenter-modernisation-cloud-prive\r\n/produits/working-together-flash-solutions-digitales-humaines\r\n/dossier/industrie-reseaux-connectee"

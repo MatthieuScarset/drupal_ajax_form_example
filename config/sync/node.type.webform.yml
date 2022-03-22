@@ -5,11 +5,6 @@ dependencies:
   enforced:
     module:
       - webform
-  module:
-    - workbench_access
-third_party_settings:
-  workbench_access:
-    workbench_access_status: false
 _core:
   default_config_hash: e0BoXlrxD4xhZMqJm5A1gTUkmntzhvyhDNY-3Y4glyc
 name: Webform

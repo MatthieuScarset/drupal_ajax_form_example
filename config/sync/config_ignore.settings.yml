@@ -1,6 +1,6 @@
-ignored_config_entities:
-  - 'webform.webform.*'
-  - 'block.block.ngr_*'
-  - 'oab_ob1_adapter.theme_settings'
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
+ignored_config_entities:
+  - 'webform.webform.*'
+  - 'block.block.ngr*'
+  - oab_ob1_adapter.theme_settings

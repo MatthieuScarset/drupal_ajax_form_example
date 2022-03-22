@@ -46,55 +46,55 @@ bundle: simple_page
 mode: default
 content:
   field_content:
-    weight: 5
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 5
     region: content
   field_end_date:
     type: datetime_default
-    weight: 2
-    region: content
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_grouping_title:
-    weight: 6
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 6
     region: content
   field_metatags:
-    weight: 4
+    type: metatag_empty_formatter
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 4
     region: content
   field_start_date:
     type: datetime_default
-    weight: 3
-    region: content
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
+    weight: 3
+    region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
+  workbench_moderation_control:
     settings: {  }
     third_party_settings: {  }
-  workbench_moderation_control:
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_analysts: true
   field_blog_format: true

@@ -1,12 +1,15 @@
 fr:
-  url: {  }
+  url:
+    - /secteurs-activites
   views:
     category_page:
       - category_page
   contents: {  }
   routes: {  }
 en:
-  url: {  }
+  url:
+    - /where-we-are
+    - /industries
   views:
     category_page:
       - category_page

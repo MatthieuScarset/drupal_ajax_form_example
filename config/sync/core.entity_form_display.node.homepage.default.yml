@@ -62,17 +62,17 @@ third_party_settings:
       children:
         - field_caroussel_header
         - field_claim
+      label: 'Top Zone'
+      region: content
       parent_name: group_onglets
       weight: 0
       format_type: tab
       format_settings:
-        label: 'Top Zone'
+        classes: ''
+        id: ''
         formatter: open
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: 'Top Zone'
     group_onglets:
       children:
         - group_homepage_top_zone
@@ -82,14 +82,15 @@ third_party_settings:
         - group_partner_
         - group_corporate_banner
         - group_seo
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 2
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
     group_solution_banner:
       children:
         - field_solution_banner_title
@@ -97,58 +98,60 @@ third_party_settings:
         - field_solution_banner_image
         - group_left_zone
         - group_right
+      label: Solution
+      region: content
       parent_name: group_onglets
-      weight: 3
+      weight: 2
       format_type: tab
       format_settings:
-        label: Solution
+        classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: Solution
     group_left_zone:
       children:
         - field_banner_left_zone_title
         - field_solution_banner_left_zone
+      label: 'Left Zone'
+      region: content
       parent_name: group_solution_banner
-      weight: 30
+      weight: 29
       format_type: fieldset
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         description: ''
         required_fields: true
-      label: 'Left Zone'
     group_right:
       children:
         - field_banner_right_zone_title
         - field_solution_banner_right_zone
+      label: 'Right Zone'
+      region: content
       parent_name: group_solution_banner
-      weight: 31
+      weight: 30
       format_type: fieldset
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         description: ''
         required_fields: true
-      label: 'Right Zone'
     group_banner_experience:
       children:
         - field_expertise_title
         - field_banner_expertise
+      label: Expertise
+      region: content
       parent_name: group_onglets
-      weight: 4
+      weight: 3
       format_type: tab
       format_settings:
-        label: Expertise
+        classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: Expertise
     group_corporate_banner:
       children:
         - field_corporate_title
@@ -158,61 +161,64 @@ third_party_settings:
         - field_corporate_menu_title
         - field_corporate_image
         - field_infography
-      parent_name: group_onglets
-      weight: 6
-      format_type: tab
-      format_settings:
-        label: Corporate
-        formatter: closed
-        description: ''
-        required_fields: true
-        id: ''
-        classes: ''
       label: Corporate
-    group_partner_:
-      children:
-        - field_partner_title
-        - field_partners_button_text
+      region: content
       parent_name: group_onglets
       weight: 5
       format_type: tab
       format_settings:
-        label: Partners
+        classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
+    group_partner_:
+      children:
+        - field_partner_title
+        - field_partners_button_text
       label: Partners
+      region: content
+      parent_name: group_onglets
+      weight: 4
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
     group_seo:
       children:
         - field_meta_title
         - field_meta_description
+      label: SEO
+      region: content
       parent_name: group_onglets
-      weight: 7
+      weight: 6
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: SEO
     group_highlight:
       children:
         - field_wysiwyg_zone_1
         - field_news_top_zone
         - field_wysiwyg_zone_2
+      label: Highlight
+      region: content
       parent_name: group_onglets
       weight: 1
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        show_empty_fields: false
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Highlight
 id: node.homepage.default
 targetEntityType: node
 bundle: homepage
@@ -226,7 +232,8 @@ content:
     third_party_settings: {  }
   field_banner_expertise:
     type: entity_reference_paragraphs
-    weight: 52
+    weight: 51
+    region: content
     settings:
       title: 'Add new Expertise Item'
       title_plural: Paragraphs
@@ -235,38 +242,26 @@ content:
       form_display_mode: default
       default_paragraph_type: homepage_banner_experience
     third_party_settings: {  }
-    region: content
   field_banner_left_zone_title:
+    type: string_textfield
     weight: 13
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_banner_right_zone_title:
+    type: string_textfield
     weight: 8
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_caroussel:
-    type: entity_reference_paragraphs
-    weight: 51
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
-    region: content
   field_caroussel_header:
     type: entity_reference_paragraphs
-    weight: 51
+    weight: 0
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -275,74 +270,74 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_claim:
     type: text_textarea
-    weight: 52
+    weight: 1
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
   field_corporate_button_link:
+    type: link_default
     weight: 34
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_corporate_button_text:
+    type: string_textfield
     weight: 35
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_corporate_highlight:
+    type: text_textarea
     weight: 33
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_corporate_image:
+    type: image_image
     weight: 38
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   field_corporate_menu_title:
+    type: string_textfield
     weight: 36
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_corporate_title:
+    type: string_textfield
     weight: 32
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_expertise_title:
+    type: string_textfield
     weight: 50
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_infography:
     type: entity_reference_paragraphs
     weight: 39
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -351,26 +346,26 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_meta_description:
+    type: string_textfield
     weight: 48
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_title:
+    type: string_textfield
     weight: 47
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_news_top_zone:
     type: entity_reference_paragraphs
-    weight: 29
+    weight: 1
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -379,42 +374,42 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_partner_title:
+    type: string_textfield
     weight: 8
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_partners_button_text:
-    weight: 11
+    type: string_textfield
+    weight: 9
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_solution_banner_highlight:
+    type: text_textarea
     weight: 27
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_solution_banner_image:
-    weight: 29
-    settings:
-      preview_image_style: homepage_solution_banner
-      progress_indicator: throbber
-    third_party_settings: {  }
     type: image_image
+    weight: 28
     region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: homepage_solution_banner
+    third_party_settings: {  }
   field_solution_banner_left_zone:
     type: entity_reference_paragraphs
     weight: 14
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -423,10 +418,10 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_solution_banner_right_zone:
     type: entity_reference_paragraphs
     weight: 9
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -435,31 +430,30 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_solution_banner_title:
+    type: string_textfield
     weight: 26
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_wysiwyg_zone_1:
-    weight: 28
+    type: text_textarea
+    weight: 0
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_wysiwyg_zone_2:
-    weight: 53
+    type: text_textarea
+    weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   langcode:
     type: language_select
     weight: 1
@@ -469,30 +463,30 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
+    weight: 5
+    region: content
     settings:
       display_label: true
-    weight: 6
-    region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 9
+    region: content
     settings:
       display_label: true
-    weight: 10
-    region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
+    weight: 6
+    region: content
     settings:
       display_label: true
-    weight: 7
-    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -505,15 +499,15 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 3
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 9
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }

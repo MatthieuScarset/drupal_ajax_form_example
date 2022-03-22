@@ -7,16 +7,50 @@ dependencies:
 id: theme_one_i_directaccessblock
 theme: theme_one_i
 region: prefooter
-weight: -33
+weight: -43
 provider: null
 plugin: direct_access_block
 settings:
   id: direct_access_block
   label: 'Direct Access Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   direct_access_custom_text:
-    value: "\n<div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 bg bg_blue\">\n    <div id=\"slider_direct_access\" class=\"container\">\n      <div class=\"item-direct-access nopadding text-align-center\">\n          <div class=\"div_direct_access border-right\">\n              <i class=\"glyphicon icon icon-wifi link_direct_access\">\n                  <a class=\"text_direct_access \" href=\"\" target=\"_blank\"> Blogs</a> \n              </i>\n          </div>\n      </div>\n      <div class=\"item-direct-access nopadding text-align-center\">\n          <div class=\"div_direct_access border-right\">\n              <i class=\"glyphicon icon icon-Collective_class_training link_direct_access\">\n                  <a class=\"text_direct_access \" href=\"\" target=\"_blank\"> Newsroom</a> \n              </i>\n          </div>\n      </div>\n      <div class=\"item-direct-access nopadding text-align-center\">\n          <div class=\"div_direct_access border-right\">\n              <i class=\"glyphicon icon icon-playmode_random link_direct_access\">\n                  <a class=\"text_direct_access \" href=\"\" target=\"_blank\"> Document</a> \n              </i>\n          </div>\n      </div>\n      <div class=\"item-direct-access nopadding text-align-center\">\n          <div class=\"div_direct_access border-right\">\n              <i class=\"glyphicon icon icon-hotel link_direct_access\">\n                  <a class=\"text_direct_access \" href=\"\" target=\"_blank\"> News</a> \n              </i>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>"
+    value: |-
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg bg_blue">
+          <div id="slider_direct_access" class="container">
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-wifi link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Blogs</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-Collective_class_training link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Newsroom</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-playmode_random link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Document</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-hotel link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> News</a> 
+                    </i>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     format: full_html
   visibility:
     'entity_bundle:node':

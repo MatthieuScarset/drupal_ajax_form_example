@@ -1,0 +1,25 @@
+uuid: f86c159b-9fbc-43e1-b807-c6bbaeb5c5a6
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: ngr_footer_boosted_fix
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+settings:
+  id: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+  label: '[NGR] Footer Boosted fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

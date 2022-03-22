@@ -16,13 +16,16 @@ plugin: zone_rebond_wysiwyg_block
 settings:
   id: zone_rebond_wysiwyg_block
   label: 'Zone rebond: WYSIWYG'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       blog_post: blog_post
       customer_story: customer_story
@@ -32,6 +35,3 @@ visibility:
       press_release: press_release
       simple_page: simple_page
       webform: webform
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

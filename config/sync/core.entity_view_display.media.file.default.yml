@@ -14,11 +14,11 @@ bundle: file
 mode: default
 content:
   field_file:
-    weight: 2
+    type: file_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_default
+    weight: 2
     region: content
 hidden:
   created: true

@@ -70,14 +70,15 @@ third_party_settings:
         - group_seo
         - group_publish
         - group_category_page
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
     group_write:
       children:
         - langcode
@@ -89,16 +90,17 @@ third_party_settings:
         - field_top_zone_bg_mobile
         - field_content
         - field_file
+      label: Write
+      region: content
       parent_name: group_onglets
       weight: 5
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
     group_publish:
       children:
         - field_content_owner
@@ -106,43 +108,46 @@ third_party_settings:
         - group_content_worthy_period
         - path
         - field_metatags
+      label: Publish
+      region: content
       parent_name: group_onglets
       weight: 10
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Publish
     group_seo:
       children:
         - field_meta_title
         - field_meta_description
+      label: SEO
+      region: content
       parent_name: group_onglets
       weight: 9
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: SEO
     group_content_worthy_period:
       children:
         - field_start_date
         - field_end_date
+      label: 'Content worthy period'
+      region: content
       parent_name: group_publish
       weight: 37
       format_type: fieldset
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         description: ''
         required_fields: true
-      label: 'Content worthy period'
     group_classify:
       children:
         - field_subhome
@@ -158,73 +163,78 @@ third_party_settings:
         - field_hub
         - field_hub_portal
         - field_use_theme_ob1
+      label: Classify
+      region: content
       parent_name: group_onglets
       weight: 8
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
     group_try_and_buy_block:
       children:
         - field_try_and_buy
+      label: 'Try and buy block'
+      region: content
       parent_name: group_rebond
       weight: 9
       format_type: tab
       format_settings:
         label: 'Try and buy block'
+        classes: ''
+        id: ''
         formatter: open
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: 'Try and buy block'
     group_test_showroom_block:
       children:
         - field_test_showroom
+      label: 'Test Showroom Block'
+      region: content
       parent_name: group_rebond
       weight: 8
       format_type: tab
       format_settings:
         label: 'Test Showroom Block'
+        classes: ''
+        id: ''
         formatter: open
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: 'Test Showroom Block'
     group_rebond:
       children:
         - group_test_showroom_block
         - group_try_and_buy_block
         - field_p_wysiwyg_rebond
+      label: Rebond
+      region: content
       parent_name: group_onglets
       weight: 7
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Rebond
     group_visual:
       children:
         - field_visual_tile
         - field_visual
+      label: Visual
+      region: content
       parent_name: group_onglets
       weight: 6
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Visual
     group_category_page:
       children:
         - field_product_name
@@ -233,30 +243,32 @@ third_party_settings:
         - field_key_points
         - field_badge
         - field_call_to_action
+      label: 'Category  page'
+      region: content
       parent_name: group_onglets
       weight: 11
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Category  page'
 id: node.product.default
 targetEntityType: node
 bundle: product
 mode: default
 content:
   field_badge:
+    type: options_select
     weight: 57
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_call_to_action:
     type: entity_reference_paragraphs
     weight: 58
+    region: content
     settings:
       title: Call-to-action
       title_plural: Call-to-action
@@ -265,84 +277,83 @@ content:
       form_display_mode: default
       default_paragraph_type: paragraph_product_call_to_action
     third_party_settings: {  }
-    region: content
   field_content:
+    type: text_textarea
     weight: 9
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_content_owner:
+    type: string_textfield
     weight: 35
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_email_owner:
+    type: string_textfield
     weight: 36
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_end_date:
+    type: datetime_default
     weight: 46
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_file:
+    type: entity_browser_entity_reference
     weight: 12
+    region: content
     settings:
       entity_browser: browser_file_modal
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
       open: false
       field_widget_display_settings: {  }
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_highlight:
+    type: string_textarea
     weight: 5
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_hub:
+    type: options_buttons
     weight: 44
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_hub_portal:
+    type: boolean_checkbox
     weight: 45
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_industry:
+    type: options_select
     weight: 38
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight:
+    type: options_select
     weight: 35
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight_type:
     type: options_select
     weight: 36
@@ -350,31 +361,31 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_is_dvi_product:
-    weight: 3
-    settings: {  }
-    third_party_settings: {  }
     type: options_buttons
+    weight: 3
     region: content
-  field_job_profile:
-    weight: 39
     settings: {  }
     third_party_settings: {  }
+  field_job_profile:
     type: options_select
+    weight: 39
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_key_points:
+    type: string_textfield
     weight: 56
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_market_segment:
+    type: options_select
     weight: 40
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_market_segment_dvi:
     type: options_select
     weight: 41
@@ -382,29 +393,31 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_meta_description:
+    type: string_textfield
     weight: 14
+    region: content
     settings:
       size: 156
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_title:
+    type: string_textfield
     weight: 13
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_metatags:
+    type: metatag_firehose
     weight: 39
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_p_wysiwyg_rebond:
+    type: paragraphs
     weight: 10
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -416,68 +429,67 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
       features:
-        duplicate: duplicate
         collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
     third_party_settings: {  }
-    type: paragraphs
-    region: content
   field_product_category:
+    type: option_group_term_select
     weight: 55
+    region: content
     settings:
       displayLangcode: true
       filterLangcode: true
     third_party_settings: {  }
-    type: option_group_term_select
-    region: content
   field_product_name:
+    type: string_textfield
     weight: 53
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_product_type:
+    type: options_select
     weight: 43
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_product_use_case:
+    type: options_select
     weight: 42
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_solution:
+    type: options_select
     weight: 37
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_start_date:
-    weight: 45
-    settings: {  }
-    third_party_settings: {  }
     type: datetime_default
+    weight: 45
     region: content
-  field_subhome:
-    weight: 34
     settings: {  }
     third_party_settings: {  }
+  field_subhome:
     type: options_select
+    weight: 34
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_teaser:
+    type: string_textarea
     weight: 54
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_test_showroom:
     type: entity_reference_paragraphs
     weight: 12
+    region: content
     settings:
       title: 'Test Showroom block'
       title_plural: 'Test Showroom blocks'
@@ -486,21 +498,20 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    region: content
   field_theme_one_i:
+    type: options_buttons
     weight: 51
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_top_zone:
+    type: text_textarea
     weight: 6
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_top_zone_background:
     type: entity_browser_entity_reference
     weight: 7
@@ -510,28 +521,29 @@ content:
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
       open: false
       field_widget_display_settings: {  }
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
   field_top_zone_bg_mobile:
+    type: entity_browser_entity_reference
     weight: 8
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
       open: false
       field_widget_display_settings: {  }
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_try_and_buy:
     type: entity_reference_paragraphs
     weight: 11
+    region: content
     settings:
       title: 'Try and buy block'
       title_plural: 'Try and buy blocks'
@@ -540,13 +552,12 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
-    region: content
   field_use_theme_ob1:
+    type: options_buttons
     weight: 46
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_visual:
     type: entity_browser_entity_reference
     weight: 12
@@ -556,55 +567,55 @@ content:
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
   field_visual_tile:
+    type: entity_browser_entity_reference
     weight: 11
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   langcode:
     type: language_select
     weight: 2
+    region: content
     settings:
       include_locked: true
     third_party_settings: {  }
-    region: content
   path:
     type: path
     weight: 38
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
+    weight: 3
+    region: content
     settings:
       display_label: true
-    weight: 3
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 4
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   translation:
     weight: 10
     region: content
@@ -616,9 +627,9 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 2

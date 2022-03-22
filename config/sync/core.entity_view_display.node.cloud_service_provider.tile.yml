@@ -25,32 +25,32 @@ mode: tile
 content:
   field_logo:
     type: entity_reference_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 0
     region: content
   field_provider_type:
     type: entity_reference_rss_category
-    weight: 2
-    region: content
     label: above
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_type_of_cloud_services:
-    weight: 1
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 1
     region: content
   workbench_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
 hidden:
   field_bandwidth: true

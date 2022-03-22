@@ -12,20 +12,20 @@ pattern: '/business-insight/[node:title]'
 selection_criteria:
   821db175-3b91-48c7-9925-c37e2d74b6d7:
     id: node_type
-    bundles:
-      external_content: external_content
     negate: false
+    uuid: 821db175-3b91-48c7-9925-c37e2d74b6d7
     context_mapping:
       node: node
-    uuid: 821db175-3b91-48c7-9925-c37e2d74b6d7
+    bundles:
+      external_content: external_content
   0090e856-8e46-4fb4-b9b3-450e6c8d30c0:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 0090e856-8e46-4fb4-b9b3-450e6c8d30c0
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 0090e856-8e46-4fb4-b9b3-450e6c8d30c0
+    langcodes:
+      en: en
 selection_logic: and
 weight: -10
 relationships:

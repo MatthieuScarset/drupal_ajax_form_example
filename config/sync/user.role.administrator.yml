@@ -1,7 +1,81 @@
 uuid: b795f13d-e652-487b-93e3-2102243c0836
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.blog_post
+    - node.type.cloud_service_provider
+    - node.type.country
+    - node.type.customer_story
+    - node.type.document
+    - node.type.external_content
+    - node.type.industry
+    - node.type.magazine
+    - node.type.office
+    - node.type.partner
+    - node.type.press_kit
+    - node.type.press_release
+    - node.type.product
+    - node.type.profile
+    - node.type.region
+    - node.type.simple_page
+    - node.type.solution
+    - node.type.webform
+    - taxonomy.vocabulary.document_types
+    - taxonomy.vocabulary.industries
+    - taxonomy.vocabulary.media_tags
+    - taxonomy.vocabulary.media_thematics
+    - taxonomy.vocabulary.solutions
+    - taxonomy.vocabulary.subhomes
+    - taxonomy.vocabulary.type_of_cloud_service
+  module:
+    - autologout
+    - block
+    - block_content
+    - captcha
+    - comment
+    - config
+    - config_translation
+    - content_translation
+    - contextual
+    - embed
+    - entity_browser
+    - field_ui
+    - file
+    - filter
+    - image
+    - language
+    - linkit
+    - locale
+    - media
+    - metatag
+    - node
+    - oab_marketo
+    - path
+    - pathauto
+    - quickedit
+    - recaptcha
+    - redirect
+    - replicate_ui
+    - responsive_image
+    - robotstxt
+    - roleassign
+    - scheduled_updates
+    - seckit
+    - shortcut
+    - simplify
+    - system
+    - taxonomy
+    - toolbar
+    - tour
+    - views_ui
+    - webform
+    - webform_node
+    - workbench
+    - workbench_access
+    - workbench_moderation
+    - xmlsitemap
 id: administrator
 label: Administrateur
 weight: 2
@@ -9,7 +83,6 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access browse_medias_iframe entity browser pages'
-  - 'access browser_modal_for_medias entity browser pages'
   - 'access comments'
   - 'access content overview'
   - 'access contextual links'
@@ -52,7 +125,6 @@ permissions:
   - 'administer media types'
   - 'administer menu'
   - 'administer meta tags'
-  - 'administer migrations'
   - 'administer moderation state transitions'
   - 'administer moderation states'
   - 'administer modules'
@@ -93,12 +165,7 @@ permissions:
   - 'administer webform submission'
   - 'administer workbench access'
   - 'administer xmlsitemap'
-  - 'assign administrator role'
-  - 'assign all roles'
-  - 'assign chief_editor role'
-  - 'assign digital_admin role'
   - 'assign roles'
-  - 'assign webform_manager role'
   - 'assign workbench access'
   - 'batch update workbench access'
   - 'bypass node access'
@@ -113,7 +180,6 @@ permissions:
   - 'create customer_story content'
   - 'create document content'
   - 'create external_content content'
-  - 'create externe_link_post content'
   - 'create industry content'
   - 'create magazine content'
   - 'create marketo form'
@@ -139,7 +205,6 @@ permissions:
   - 'delete any customer_story content'
   - 'delete any document content'
   - 'delete any external_content content'
-  - 'delete any externe_link_post content'
   - 'delete any industry content'
   - 'delete any magazine content'
   - 'delete any media'
@@ -161,7 +226,6 @@ permissions:
   - 'delete customer_story revisions'
   - 'delete document revisions'
   - 'delete external_content revisions'
-  - 'delete externe_link_post revisions'
   - 'delete industry revisions'
   - 'delete magazine revisions'
   - 'delete marketo form'
@@ -173,7 +237,6 @@ permissions:
   - 'delete own customer_story content'
   - 'delete own document content'
   - 'delete own external_content content'
-  - 'delete own externe_link_post content'
   - 'delete own industry content'
   - 'delete own magazine content'
   - 'delete own office content'
@@ -195,18 +258,12 @@ permissions:
   - 'delete region revisions'
   - 'delete simple_page revisions'
   - 'delete solution revisions'
-  - 'delete terms in areas'
-  - 'delete terms in blogs'
-  - 'delete terms in customer_stories'
   - 'delete terms in document_types'
   - 'delete terms in industries'
-  - 'delete terms in magazines'
   - 'delete terms in media_tags'
   - 'delete terms in media_thematics'
-  - 'delete terms in partners'
   - 'delete terms in solutions'
   - 'delete terms in subhomes'
-  - 'delete terms in topics'
   - 'delete terms in type_of_cloud_service'
   - 'delete webform revisions'
   - 'delete webform submissions any node'
@@ -217,7 +274,6 @@ permissions:
   - 'edit any customer_story content'
   - 'edit any document content'
   - 'edit any external_content content'
-  - 'edit any externe_link_post content'
   - 'edit any industry content'
   - 'edit any magazine content'
   - 'edit any office content'
@@ -239,7 +295,6 @@ permissions:
   - 'edit own customer_story content'
   - 'edit own document content'
   - 'edit own external_content content'
-  - 'edit own externe_link_post content'
   - 'edit own industry content'
   - 'edit own magazine content'
   - 'edit own office content'
@@ -253,18 +308,12 @@ permissions:
   - 'edit own solution content'
   - 'edit own webform'
   - 'edit own webform content'
-  - 'edit terms in areas'
-  - 'edit terms in blogs'
-  - 'edit terms in customer_stories'
   - 'edit terms in document_types'
   - 'edit terms in industries'
-  - 'edit terms in magazines'
   - 'edit terms in media_tags'
   - 'edit terms in media_thematics'
-  - 'edit terms in partners'
   - 'edit terms in solutions'
   - 'edit terms in subhomes'
-  - 'edit terms in topics'
   - 'edit terms in type_of_cloud_service'
   - 'edit webform assets'
   - 'edit webform source'
@@ -283,7 +332,6 @@ permissions:
   - 'revert customer_story revisions'
   - 'revert document revisions'
   - 'revert external_content revisions'
-  - 'revert externe_link_post revisions'
   - 'revert industry revisions'
   - 'revert magazine revisions'
   - 'revert office revisions'
@@ -330,7 +378,6 @@ permissions:
   - 'view customer_story revisions'
   - 'view document revisions'
   - 'view external_content revisions'
-  - 'view externe_link_post revisions'
   - 'view hidden fields'
   - 'view industry revisions'
   - 'view latest version'

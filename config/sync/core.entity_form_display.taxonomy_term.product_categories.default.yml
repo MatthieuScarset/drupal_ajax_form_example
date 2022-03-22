@@ -22,43 +22,46 @@ third_party_settings:
         - group_general
         - group_niveau_1
         - group_niveau_2
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 20
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
     group_niveau_1:
       children:
         - description
         - field_image
         - field_block_rebond
+      label: 'Niveau 1'
+      region: content
       parent_name: group_onglets
       weight: 21
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Niveau 1'
     group_niveau_2:
       children:
         - field_icon
         - field_simple_description
+      label: 'Niveau 2'
+      region: content
       parent_name: group_onglets
       weight: 22
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: 'Niveau 2'
     group_general:
       children:
         - langcode
@@ -66,16 +69,17 @@ third_party_settings:
         - translation
         - path
         - status
+      label: Général
+      region: content
       parent_name: group_onglets
       weight: 20
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: open
         description: ''
         required_fields: true
-      label: Général
 id: taxonomy_term.product_categories.default
 targetEntityType: taxonomy_term
 bundle: product_categories
@@ -86,41 +90,41 @@ content:
     weight: 21
     region: content
     settings:
-      placeholder: ''
       rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_block_rebond:
+    type: text_textarea
     weight: 23
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_icon:
+    type: string_textfield
     weight: 104
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_image:
+    type: image_image
     weight: 22
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   field_simple_description:
+    type: string_textarea
     weight: 105
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   langcode:
     type: language_select
     weight: 2
@@ -144,10 +148,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 6
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   translation:
     weight: 4

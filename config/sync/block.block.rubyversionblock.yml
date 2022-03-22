@@ -15,7 +15,7 @@ plugin: ruby_version_block
 settings:
   id: ruby_version_block
   label: 'Ruby Version Block'
-  provider: oab_backoffice
   label_display: '0'
+  provider: oab_backoffice
   ruby_version: G0R1C6
 visibility: {  }

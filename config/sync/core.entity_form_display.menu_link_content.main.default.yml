@@ -21,49 +21,49 @@ third_party_settings:
       children:
         - group_level_1
         - group_level_3
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 2
       format_type: tabs
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
         direction: vertical
         width_breakpoint: 640
-      label: Tabs
     group_level_1:
       children:
         - field_subtitle
         - field_global_link
         - field_highlight
+      label: 'Level 1'
+      region: content
       parent_name: group_tabs
       weight: 9
       format_type: tab
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: true
         id: ''
-        classes: ''
-        description: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: 'Level 1'
     group_level_3:
       children:
         - field_teaser
+      label: 'Level 3'
+      region: content
       parent_name: group_tabs
       weight: 10
       format_type: tab
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: true
         id: ''
-        classes: ''
-        description: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: 'Level 3'
 id: menu_link_content.main.default
 targetEntityType: menu_link_content
 bundle: main
@@ -100,13 +100,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_teaser:
+    type: string_textfield
     weight: 6
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 8

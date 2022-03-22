@@ -24,16 +24,16 @@ settings:
     target_bundles:
       homepage_banner_experience: homepage_banner_experience
     target_bundles_drag_drop:
-      infography_partner:
-        weight: 5
-        enabled: false
       homepage_banner_experience:
-        enabled: true
         weight: 6
+        enabled: true
       homepage_banner_item:
         weight: 7
         enabled: false
       homepage_news:
         weight: 8
+        enabled: false
+      infography_partner:
+        weight: 5
         enabled: false
 field_type: entity_reference_revisions

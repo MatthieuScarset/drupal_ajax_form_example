@@ -18,16 +18,16 @@ plugin: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
 settings:
   id: 'block_content:a743c2fe-6c3e-4871-8ee1-19717396aebb'
   label: homepage_highlights
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      homepage: homepage
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      homepage: homepage

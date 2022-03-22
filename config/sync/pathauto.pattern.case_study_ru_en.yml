@@ -12,20 +12,20 @@ pattern: 'customer-stories/[node:title]'
 selection_criteria:
   82cece73-9447-42e2-b8bd-0bce67595d87:
     id: node_type
-    bundles:
-      customer_story: customer_story
     negate: false
+    uuid: 82cece73-9447-42e2-b8bd-0bce67595d87
     context_mapping:
       node: node
-    uuid: 82cece73-9447-42e2-b8bd-0bce67595d87
+    bundles:
+      customer_story: customer_story
   991e5c3b-6871-4129-bcc2-3516f6b0dedf:
     id: language
-    langcodes:
-      ru-en: ru-en
     negate: false
+    uuid: 991e5c3b-6871-4129-bcc2-3516f6b0dedf
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 991e5c3b-6871-4129-bcc2-3516f6b0dedf
+    langcodes:
+      ru-en: ru-en
 selection_logic: and
 weight: -10
 relationships:

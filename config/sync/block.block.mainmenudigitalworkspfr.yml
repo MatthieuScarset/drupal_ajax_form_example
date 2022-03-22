@@ -19,19 +19,19 @@ plugin: 'system_menu_block:main-menu-digital-worksp-fr'
 settings:
   id: 'system_menu_block:main-menu-digital-worksp-fr'
   label: 'Main menu Digital Workspace fr'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false
 visibility:
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
   hub_condition:
     id: hub_condition
     hub_id: '1048'
