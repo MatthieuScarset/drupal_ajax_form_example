@@ -13,7 +13,7 @@ entity_type: paragraph
 bundle: module_text_video_image
 label: 'Display mode'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

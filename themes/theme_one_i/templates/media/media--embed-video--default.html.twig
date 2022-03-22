@@ -32,8 +32,5 @@
  */
 #}
 <div{{ attributes }}>
-  {{ title_suffix.contextual_links }}
-  {{ content }}
-
-  {{ media|raw }}
+    <iframe src="{{ media.field_media_oembed_video.value }}" ></iframe>
 </div>
