@@ -7,12 +7,20 @@
 ]
 %}
 
-<div{{ attributes.addClass(classes, 'row') }}>
+<div{{ attributes.addClass(classes, 'row', 'benefits-item-container') }}>
   {% for item in items %}
     {% if 4 == items|length %}
-      <div{{ item.attributes.addClass('field--item', 'col-3') }}>{{ item.content }}</div>
+      {% if not is_numerical %}
+        <div{{ item.attributes.addClass('field--item', 'col-10', 'col-md-3', 'benefits-subitem-container') }}>{{ item.content }}</div>
+      {% else %}
+        <div{{ item.attributes.addClass('field--item', 'col-7', 'col-md-3', 'benefits-subitem-container') }}>{{ item.content }}</div>
+      {% endif %}
     {% else %}
-      <div{{ item.attributes.addClass('field--item', 'col-4') }}>{{ item.content }}</div>
+      {% if not is_numerical %}
+        <div{{ item.attributes.addClass('field--item', 'col-10', 'col-md-4', 'benefits-subitem-container') }}>{{ item.content }}</div>
+      {% else %}
+        <div{{ item.attributes.addClass('field--item', 'col-7', 'col-md-4', 'benefits-subitem-container') }}>{{ item.content }}</div>
+      {% endif %}
     {% endif %}
   {% endfor %}
 </div>

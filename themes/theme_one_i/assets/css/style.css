@@ -847,18 +847,35 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   }
 }
 
-.benefits-item-icon {
-  font-size: 3.5rem;
-  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+.benefits-item-container {
+  max-width: 100%;
+  overflow-x: scroll;
+  flex-wrap: unset;
+  scrollbar-width: none;
 }
-
-.benefits-numerical-item-container {
-  height: 5.625rem;
-  overflow-y: visible;
+.benefits-item-container::-webkit-scrollbar {
+  display: none;
 }
-.benefits-numerical-item-container .benefits-numerical-item-title {
-  max-height: 3.25rem;
-  overflow-y: hidden;
+.benefits-item-container .benefits-item-icon {
+  font-size: 2.5rem;
+  padding: 1.35rem 1.25rem 1.1rem 1.25rem;
+}
+@media (min-width: 768px) {
+  .benefits-item-container {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+  }
+  .benefits-item-container .benefits-subitem-container .benefits-numerical-item-container {
+    height: 5.625rem;
+    overflow-y: visible;
+    border-right: 1px solid #ccc;
+    text-align: center;
+  }
+  .benefits-item-container .benefits-subitem-container:last-child .benefits-numerical-item-container {
+    height: 5.625rem;
+    overflow-y: visible;
+    border: none;
+  }
 }
 
 .field--item > .row {
