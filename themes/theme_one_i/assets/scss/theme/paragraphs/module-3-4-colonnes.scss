@@ -1,0 +1,12 @@
+.items-module-3-4-colonnes {
+  .field-items-modules {
+    overflow-x: scroll;
+    flex-wrap: unset;
+    scrollbar-width: none;
+    @include media-breakpoint-up(md) {
+      overflow-x: revert;
+      flex-wrap: revert;
+      max-width: revert;
+    }
+  }
+}

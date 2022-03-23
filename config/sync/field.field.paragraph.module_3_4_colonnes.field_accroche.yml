@@ -1,0 +1,19 @@
+uuid: 6347958d-5c13-4c57-aa44-4451918bf374
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.module_3_4_colonnes
+id: paragraph.module_3_4_colonnes.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: module_3_4_colonnes
+label: 'Text d''accroche module'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
