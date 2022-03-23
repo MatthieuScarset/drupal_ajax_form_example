@@ -32,134 +32,135 @@ third_party_settings:
         - field_call_to_action_button
         - field_call_to_action_link
         - field_visual
+      label: 'Top Zone'
+      region: content
       parent_name: group_onglets
       weight: 4
       format_type: tab
-      region: content
       format_settings:
-        description: ''
-        formatter: closed
-        required_fields: true
-        id: ''
         classes: ''
         show_empty_fields: false
-      label: 'Top Zone'
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
     group_write:
       children:
         - langcode
         - group_modules_configuration
+      label: Write
+      region: content
       parent_name: group_onglets
       weight: 3
       format_type: tab
-      region: content
       format_settings:
-        description: ''
-        formatter: open
-        required_fields: true
-        id: ''
         classes: ''
         show_empty_fields: false
-      label: Write
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
     group_onglets:
       children:
         - group_write
         - group_top_zone
         - group_presentation
         - group_modules
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
         direction: vertical
         width_breakpoint: 640
-      label: Onglets
     group_presentation:
       children:
         - title
+      label: Présentation
+      region: content
       parent_name: group_onglets
       weight: 5
       format_type: tab
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
-        description: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Présentation
     group_modules_configuration:
       children:
         - field_enable_wysiwyg_paragraph
+      label: 'Modules configuration'
+      region: content
       parent_name: group_write
       weight: 4
       format_type: fieldset
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
         description: ''
         required_fields: true
-      label: 'Modules configuration'
     group_modules:
       children:
         - field_modules
+      label: Modules
+      region: content
       parent_name: group_onglets
       weight: 6
       format_type: tab
-      region: content
       format_settings:
+        classes: ''
         show_empty_fields: false
         id: ''
-        classes: ''
-        description: ''
         formatter: closed
+        description: ''
         required_fields: true
-      label: Modules
 id: node.modular_product.default
 targetEntityType: node
 bundle: modular_product
 mode: default
 content:
   field_call_to_action_button:
+    type: link_default
     weight: 33
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_call_to_action_link:
+    type: link_default
     weight: 34
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_enable_wysiwyg_paragraph:
+    type: boolean_checkbox
     weight: 5
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_modular_product_tarif:
+    type: string_textfield
     weight: 32
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_modules:
     type: entity_reference_paragraphs
     weight: 36
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -168,46 +169,45 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_product_category:
+    type: option_group_term_select
     weight: 29
+    region: content
     settings:
       displayLangcode: true
       filterLangcode: true
     third_party_settings: {  }
-    type: option_group_term_select
-    region: content
   field_product_name:
+    type: string_textfield
     weight: 30
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_teaser:
+    type: string_textarea
     weight: 31
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_visual:
+    type: entity_browser_entity_reference
     weight: 35
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: modular_product_image_top_zone
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
       field_widget_replace: false
       open: false
+      field_widget_display_settings:
+        view_mode: modular_product_image_top_zone
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   langcode:
     type: language_select
     weight: 3
@@ -223,10 +223,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 4
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -239,12 +239,12 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 1
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 2
