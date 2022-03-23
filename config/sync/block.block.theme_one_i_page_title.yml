@@ -2,8 +2,6 @@ uuid: 5a0dabea-cb62-4384-bf0d-30179c25d02a
 langcode: en
 status: true
 dependencies:
-  module:
-    - ctools
   theme:
     - theme_one_i
 _core:
@@ -17,13 +15,6 @@ plugin: page_title_block
 settings:
   id: page_title_block
   label: 'Page title'
-  provider: core
   label_display: '0'
-visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      modular_product: modular_product
-    negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
+  provider: core
+visibility: {  }

@@ -34,92 +34,92 @@ third_party_settings:
         - group_classify
         - group_seo
         - group_publish
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
-      region: content
     group_write:
       children:
         - langcode
         - title
         - field_display_title
         - field_content
+      label: Write
+      region: content
       parent_name: group_onglets
       weight: 7
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
-      region: content
     group_seo:
       children:
         - field_meta_title
         - field_meta_description
+      label: SEO
+      region: content
       parent_name: group_onglets
       weight: 10
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: SEO
-      region: content
     group_publish:
       children:
         - moderation_state_update
+      label: Publish
+      region: content
       parent_name: group_onglets
       weight: 11
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Publish
-      region: content
     group_classify:
       children:
         - field_insight
         - field_insight_type
         - field_hub
         - field_hub_portal
+      label: Classify
+      region: content
       parent_name: group_onglets
       weight: 9
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
-      region: content
     group_visual:
       children:
         - field_visual_tile
+      label: Visual
+      region: content
       parent_name: group_onglets
       weight: 8
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Visual
-      region: content
 id: node.custom_page.default
 targetEntityType: node
 bundle: custom_page
@@ -132,39 +132,39 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
+    type: text_textarea
     weight: 4
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_display_title:
+    type: boolean_checkbox
     weight: 3
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_hub:
+    type: options_buttons
     weight: 53
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_hub_portal:
+    type: boolean_checkbox
     weight: 54
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_insight:
+    type: options_select
     weight: 51
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_insight_type:
     type: options_select
     weight: 52
@@ -172,55 +172,55 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_meta_description:
+    type: string_textfield
     weight: 54
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_title:
+    type: string_textfield
     weight: 52
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_metatags:
+    type: metatag_firehose
     weight: 11
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_visual:
+    type: entity_browser_entity_reference
     weight: 5
+    region: content
     settings:
       entity_browser: browser_file_modal
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
       open: false
       field_widget_display_settings: {  }
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_visual_tile:
+    type: entity_browser_entity_reference
     weight: 6
+    region: content
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   langcode:
     type: language_select
     weight: 1
@@ -229,20 +229,20 @@ content:
       include_locked: true
     third_party_settings: {  }
   moderation_state_update:
+    type: inline_entity_form_complex
     weight: 26
+    region: content
     settings:
       form_mode: default
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
-      match_operator: CONTAINS
-      override_labels: false
       allow_existing: false
+      match_operator: CONTAINS
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
   path:
     type: path
     weight: 10
@@ -251,24 +251,24 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 9
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 12
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 3
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -281,12 +281,12 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 1
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 50

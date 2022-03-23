@@ -4,15 +4,15 @@ status: true
 dependencies:
   module:
     - node
-id: link
 label: link
+id: link
 description: ''
 matchers:
   b0f24390-41d2-44b3-873b-cb9f26574d49:
-    uuid: b0f24390-41d2-44b3-873b-cb9f26574d49
     id: 'entity:node'
-    weight: 0
+    uuid: b0f24390-41d2-44b3-873b-cb9f26574d49
     settings:
+      metadata: ''
       bundles:
         simple_page: simple_page
         blog_post: blog_post
@@ -30,6 +30,6 @@ matchers:
         region: region
         solution: solution
       group_by_bundle: true
-      include_unpublished: false
       substitution_type: canonical
-      metadata: ''
+      include_unpublished: false
+    weight: 0

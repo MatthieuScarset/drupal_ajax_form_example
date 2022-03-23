@@ -15,13 +15,13 @@ plugin: 'views_block:bvpn_gallery-block_1'
 settings:
   id: 'views_block:bvpn_gallery-block_1'
   label: ''
-  provider: views
   label_display: visible
+  provider: views
   views_label: ''
   items_per_page: none
 visibility:
   request_path:
     id: request_path
-    pages: /en/bvpn-map
     negate: false
     context_mapping: {  }
+    pages: /en/bvpn-map

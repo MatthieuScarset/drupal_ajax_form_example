@@ -19,21 +19,21 @@ plugin: 'block_content:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
 settings:
   id: 'block_content:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
   label: '[EN][Contact Button] Produits'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   language:
     id: language
-    langcodes:
-      en: en
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
   request_path:
     id: request_path
-    pages: '/products/categories/*'
     negate: false
     context_mapping: {  }
+    pages: '/products/categories/*'

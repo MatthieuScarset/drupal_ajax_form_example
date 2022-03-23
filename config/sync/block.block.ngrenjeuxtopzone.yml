@@ -18,13 +18,13 @@ plugin: 'block_content:787f1cbb-7258-437a-bb18-bef5137fff88'
 settings:
   id: 'block_content:787f1cbb-7258-437a-bb18-bef5137fff88'
   label: '[NGR] Enjeux - TopZone'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: "/secteurs-activites\r\n/industries"
     negate: false
+    pages: "/secteurs-activites\r\n/industries"

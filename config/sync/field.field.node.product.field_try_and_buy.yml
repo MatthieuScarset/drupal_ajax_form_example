@@ -25,6 +25,6 @@ settings:
       paragraph_block_rebond: paragraph_block_rebond
     target_bundles_drag_drop:
       paragraph_block_rebond:
-        enabled: true
         weight: 21
+        enabled: true
 field_type: entity_reference_revisions

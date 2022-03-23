@@ -12,20 +12,20 @@ pattern: 'partenaires/[node:title]'
 selection_criteria:
   7e6561d4-2cab-4850-9960-151334e73a9d:
     id: node_type
-    bundles:
-      partner: partner
     negate: false
+    uuid: 7e6561d4-2cab-4850-9960-151334e73a9d
     context_mapping:
       node: node
-    uuid: 7e6561d4-2cab-4850-9960-151334e73a9d
+    bundles:
+      partner: partner
   d7c8703b-9447-4d04-a2df-8687bb2d9519:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: d7c8703b-9447-4d04-a2df-8687bb2d9519
     context_mapping:
       language: 'node:langcode:language'
-    uuid: d7c8703b-9447-4d04-a2df-8687bb2d9519
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:

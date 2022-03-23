@@ -18,13 +18,13 @@ bundle: image
 mode: related_content_image
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: related_contents
       image_link: content
+      image_style: related_contents
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

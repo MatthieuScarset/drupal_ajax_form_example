@@ -1,6 +1,24 @@
-elements: "processed_text:\n  '#text': \"<p>Subscribe to our publications</p>\\r\\n\"\nnom_et_prenom:\n  '#title': 'Full name'\n  '#placeholder': 'Full name*'\nmedia:\n  '#title': Media\n  '#placeholder': 'Media*'\nvotre_email:\n  '#title': Email\n  '#placeholder': 'Email*'\nutilisation_des_donnees:\n  '#title': 'Data use'\n  '#description': \"<p>I explicitly accept the use of my personal data using this form.</p>\\n\"\nactions:\n  '#submit__label': Submit\n"
+elements: |
+  processed_text:
+    '#text': "<p>Subscribe to our publications</p>\r\n"
+  nom_et_prenom:
+    '#title': 'Full name'
+    '#placeholder': 'Full name*'
+  media:
+    '#title': Media
+    '#placeholder': 'Media*'
+  votre_email:
+    '#title': Email
+    '#placeholder': 'Email*'
+  utilisation_des_donnees:
+    '#title': 'Data use'
+    '#description': "<p>I explicitly accept the use of my personal data using this form.</p>\n"
+  actions:
+    '#submit__label': Submit
 settings:
-  confirmation_message: "<p style=\"font-size: 2rem;\"><strong> Your request has been successfully registered.</strong></p>\n<p style = \"font-size: 1.6rem;\">A confirmation email has been sent to the address you provided.</p>"
+  confirmation_message: |-
+    <p style="font-size: 2rem;"><strong> Your request has been successfully registered.</strong></p>
+    <p style = "font-size: 1.6rem;">A confirmation email has been sent to the address you provided.</p>
 handlers:
   email:
     settings:

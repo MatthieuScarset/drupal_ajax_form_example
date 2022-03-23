@@ -12,20 +12,20 @@ pattern: 'mediatheque/[node:field_document_type:entity:name]/[node:title]'
 selection_criteria:
   3ab8dbbc-8e34-4f90-b72c-11a52cd998ca:
     id: node_type
-    bundles:
-      document: document
     negate: false
+    uuid: 3ab8dbbc-8e34-4f90-b72c-11a52cd998ca
     context_mapping:
       node: node
-    uuid: 3ab8dbbc-8e34-4f90-b72c-11a52cd998ca
+    bundles:
+      document: document
   1cddaf73-ae8b-4f5e-b4af-1a15f3325615:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: 1cddaf73-ae8b-4f5e-b4af-1a15f3325615
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 1cddaf73-ae8b-4f5e-b4af-1a15f3325615
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:

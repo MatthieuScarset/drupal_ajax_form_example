@@ -18,16 +18,16 @@ plugin: 'system_menu_block:footer-ja'
 settings:
   id: 'system_menu_block:footer-ja'
   label: 'Footer JA'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false
 visibility:
   language:
     id: language
-    langcodes:
-      ja: ja
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      ja: ja

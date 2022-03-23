@@ -20,19 +20,21 @@ content:
     weight: 1
     region: content
     settings:
-      placeholder: ''
       rows: 5
+      placeholder: ''
     third_party_settings: {  }
   field_location:
+    type: geolocation_leaflet
     weight: 2
+    region: content
     settings:
-      centre:
-        fit_bounds:
-          enable: true
       auto_client_location: ''
       auto_client_location_marker: ''
       allow_override_map_settings: 0
       hide_textfield_form: false
+      centre:
+        fit_bounds:
+          enable: true
       leaflet_settings:
         map_features:
           leaflet_control_zoom:
@@ -40,14 +42,12 @@ content:
           leaflet_marker_popup:
             enabled: true
           leaflet_control_geocoder:
-            enabled: true
             weight: -100
+            enabled: true
         zoom: '10'
         height: 400px
         width: 100%
     third_party_settings: {  }
-    type: geolocation_leaflet
-    region: content
   langcode:
     type: language_select
     weight: 3
@@ -71,9 +71,9 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
 hidden: {  }

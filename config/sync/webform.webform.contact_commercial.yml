@@ -13,9 +13,9 @@ third_party_settings:
       2065: '2065'
       2066: '2066'
     gdpr_form_published: 0
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 21
 template: false
 archive: false
@@ -23,7 +23,73 @@ id: contact_commercial
 title: 'Contact commercial Smart Mobility Services'
 description: '<p>générique France</p>'
 category: SMS
-elements: "introduction:\n  '#type': processed_text\n  '#admin_title': Intro\n  '#text': \"<p>Vous avez un projet, une question ?<br />\\r\\nVous êtes intéressé par une de nos solutions ?<br />\\r\\n&nbsp;<br />\\r\\nPour bénéficier d’un conseil personnalisé, n'hésitez pas à nous envoyer votre message, nous vous contacterons dans les meilleurs délais.<br />\\r\\nVos coordonnées sont nécessaires pour traiter votre demande et vous informer en retour.</p>\\r\\n\\r\\n<p>* mentions obligatoires</p>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Mademoiselle: Mademoiselle\n    Madame: Madame\n    Monsieur: Monsieur\n  '#empty_option': Sélectionnez\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nfonction:\n  '#type': textfield\n  '#title': Fonction\n  '#required': true\nentreprise:\n  '#type': textfield\n  '#title': Entreprise\n  '#required': true\nnumero_siret_14_chiffres_:\n  '#type': textfield\n  '#title': 'Numéro SIRET (14 chiffres)'\nnumero_de_compte_client:\n  '#type': textfield\n  '#title': 'Numéro de compte client'\ntelephone_de_contact:\n  '#type': textfield\n  '#title': 'Téléphone de contact'\n  '#required': true\nstandard_de_l_entreprise:\n  '#type': textfield\n  '#title': 'Standard de l''entreprise'\nadresse:\n  '#type': textfield\n  '#title': Adresse\nville:\n  '#type': textfield\n  '#title': Ville\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#required': true\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#required': true\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\norigin_product_name:\n  '#type': hidden\n  '#title': 'Page de provenance'\n"
+elements: |
+  introduction:
+    '#type': processed_text
+    '#admin_title': Intro
+    '#text': "<p>Vous avez un projet, une question ?<br />\r\nVous êtes intéressé par une de nos solutions ?<br />\r\n&nbsp;<br />\r\nPour bénéficier d’un conseil personnalisé, n'hésitez pas à nous envoyer votre message, nous vous contacterons dans les meilleurs délais.<br />\r\nVos coordonnées sont nécessaires pour traiter votre demande et vous informer en retour.</p>\r\n\r\n<p>* mentions obligatoires</p>\r\n"
+    '#format': full_html
+  civilite:
+    '#type': select
+    '#title': Civilité
+    '#options':
+      Mademoiselle: Mademoiselle
+      Madame: Madame
+      Monsieur: Monsieur
+    '#empty_option': Sélectionnez
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#required': true
+  fonction:
+    '#type': textfield
+    '#title': Fonction
+    '#required': true
+  entreprise:
+    '#type': textfield
+    '#title': Entreprise
+    '#required': true
+  numero_siret_14_chiffres_:
+    '#type': textfield
+    '#title': 'Numéro SIRET (14 chiffres)'
+  numero_de_compte_client:
+    '#type': textfield
+    '#title': 'Numéro de compte client'
+  telephone_de_contact:
+    '#type': textfield
+    '#title': 'Téléphone de contact'
+    '#required': true
+  standard_de_l_entreprise:
+    '#type': textfield
+    '#title': 'Standard de l''entreprise'
+  adresse:
+    '#type': textfield
+    '#title': Adresse
+  ville:
+    '#type': textfield
+    '#title': Ville
+  code_postal:
+    '#type': textfield
+    '#title': 'Code postal'
+    '#required': true
+  e_mail:
+    '#type': email
+    '#title': E-mail
+    '#required': true
+  message:
+    '#type': textarea
+    '#title': Message
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  origin_product_name:
+    '#type': hidden
+    '#title': 'Page de provenance'
 css: ''
 javascript: ''
 settings:
@@ -38,9 +104,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -50,31 +116,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -83,11 +154,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -98,13 +164,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -127,9 +193,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: "Merci de l&#39;int&eacute;r&ecirc;t que vous portez aux solutions Orange Business Services.<br />\r\n<br />\r\nNotre service client prendra contact avec vous dans les meilleurs d&eacute;lais.<br />\r\n<br />\r\nA bient&ocirc;t !"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

@@ -18,23 +18,23 @@ bundle: external_content
 mode: subhome
 content:
   field_insight:
-    weight: 103
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 103
     region: content
   field_insight_type:
-    weight: 104
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 104
     region: content
   field_url:
-    weight: 102
+    type: link
     label: above
     settings:
       trim_length: 80
@@ -43,25 +43,25 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 102
     region: content
   field_visual_tile:
-    weight: 105
+    type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 105
     region: content
   links:
-    weight: 100
     settings: {  }
     third_party_settings: {  }
+    weight: 100
     region: content
   workbench_moderation_control:
-    weight: -20
     settings: {  }
     third_party_settings: {  }
+    weight: -20
     region: content
 hidden:
   langcode: true

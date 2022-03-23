@@ -16,17 +16,17 @@ plugin: promo_actu_block
 settings:
   id: promo_actu_block
   label: 'Promo Actu'
-  provider: oab_frontoffice
   label_display: '0'
-  content: ''
-  content_format: full_html
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
+  content: ''
+  content_format: full_html
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      product: product

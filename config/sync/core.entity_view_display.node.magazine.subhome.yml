@@ -42,30 +42,30 @@ bundle: magazine
 mode: subhome
 content:
   field_partner:
-    weight: 8
+    type: entity_reference_label
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 8
     region: content
   field_solution:
     type: entity_reference_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 0
     region: content
   field_visual:
     type: entity_reference_entity_view
-    weight: 1
     label: hidden
     settings:
       view_mode: subhome_image
       link: false
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_blog_format: true

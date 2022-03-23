@@ -12,22 +12,22 @@ pattern: 'press/[node:title]'
 selection_criteria:
   bacd1b9a-c00e-49a4-b4a4-95b2e01342c0:
     id: node_type
-    bundles:
-      press_release: press_release
     negate: false
+    uuid: bacd1b9a-c00e-49a4-b4a4-95b2e01342c0
     context_mapping:
       node: node
-    uuid: bacd1b9a-c00e-49a4-b4a4-95b2e01342c0
+    bundles:
+      press_release: press_release
   d8b76477-ffad-4875-bc56-f7645a895a3e:
     id: language
+    negate: false
+    uuid: d8b76477-ffad-4875-bc56-f7645a895a3e
+    context_mapping:
+      language: 'node:langcode:language'
     langcodes:
       en: en
       ru: ru
       ru-en: ru-en
-    negate: false
-    context_mapping:
-      language: 'node:langcode:language'
-    uuid: d8b76477-ffad-4875-bc56-f7645a895a3e
 selection_logic: and
 weight: -10
 relationships:

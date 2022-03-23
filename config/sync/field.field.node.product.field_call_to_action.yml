@@ -21,13 +21,10 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       paragraph_product_call_to_action: paragraph_product_call_to_action
+    negate: 0
     target_bundles_drag_drop:
-      paragraph_product_call_to_action:
-        enabled: true
-        weight: 18
       default_button:
         weight: 19
         enabled: false
@@ -67,6 +64,9 @@ settings:
       paragraph_block_rebond:
         weight: 31
         enabled: false
+      paragraph_product_call_to_action:
+        weight: 18
+        enabled: true
       rebond_wysiwyg:
         weight: 32
         enabled: false

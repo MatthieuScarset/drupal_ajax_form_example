@@ -17,8 +17,8 @@ plugin: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
 settings:
   id: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
   label: '[NGR] Fix Boosted Megamenu'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

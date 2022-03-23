@@ -52,8 +52,8 @@ settings:
         weight: 20
         enabled: false
       rebond_wysiwyg:
-        enabled: true
         weight: 21
+        enabled: true
       related_content:
         weight: 22
         enabled: false

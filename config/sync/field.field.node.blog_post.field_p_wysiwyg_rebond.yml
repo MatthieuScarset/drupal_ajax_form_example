@@ -23,9 +23,6 @@ settings:
     target_bundles:
       rebond_wysiwyg: rebond_wysiwyg
     target_bundles_drag_drop:
-      rebond_wysiwyg:
-        enabled: true
-        weight: 12
       home_banner:
         weight: 13
         enabled: false
@@ -53,6 +50,9 @@ settings:
       infography_partner:
         weight: 21
         enabled: false
+      rebond_wysiwyg:
+        weight: 12
+        enabled: true
       related_content:
         weight: 22
         enabled: false

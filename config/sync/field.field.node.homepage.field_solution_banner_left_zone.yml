@@ -24,17 +24,17 @@ settings:
     target_bundles:
       homepage_banner_item: homepage_banner_item
     target_bundles_drag_drop:
+      homepage_banner_experience:
+        weight: 6
+        enabled: false
       homepage_banner_item:
-        enabled: true
         weight: 3
+        enabled: true
       homepage_news:
         weight: 4
         enabled: false
       infography_partner:
         weight: 5
-        enabled: false
-      homepage_banner_experience:
-        weight: 6
         enabled: false
       related_content:
         weight: 10

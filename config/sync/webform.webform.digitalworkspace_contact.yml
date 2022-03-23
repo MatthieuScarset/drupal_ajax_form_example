@@ -11,9 +11,9 @@ third_party_settings:
     gdpr_expiration_date: ''
     gdpr_business_analysts: {  }
     gdpr_form_published: 1
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 567
 template: false
 archive: false
@@ -21,7 +21,117 @@ id: digitalworkspace_contact
 title: 'Digitalworkspace Contact'
 description: ''
 category: Digitalworkspace
-elements: "css_hook:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">.page-node-type-webform .content form .form-item label {\\r\\n    margin-top: 0!important;\\r\\n}\\r\\n.js-form-item {\\r\\n    margin-bottom: 1rem;\\r\\n}\\r\\nlegend {\\r\\n    display: none;\\r\\n}\\r\\n.intl-tel-input.allow-dropdown, input#edit-telephone {\\r\\n    width: 100%;\\r\\n}\\r\\nh3 span, .titre4 {\\r\\n    color: #ff6600;\\r\\n}\\r\\n</style>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#title_display': invisible\n  '#description_display': invisible\n  '#options':\n    Mme: Mme\n    M.: M.\n  '#empty_option': Civilité\n  '#empty_value': Civilité\n  '#required': true\nnom:\n  '#type': webform_name\n  '#title': Nom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#title__access': false\n  '#title__title': Civilité\n  '#title__placeholder': Civilité\n  '#title__title_display': invisible\n  '#first__title': Prénom\n  '#first__placeholder': Prénom\n  '#first__title_display': invisible\n  '#first__required': true\n  '#middle__access': false\n  '#last__title': Nom\n  '#last__placeholder': Nom\n  '#last__title_display': invisible\n  '#last__required': true\n  '#suffix__access': false\n  '#degree__access': false\ne_mail:\n  '#type': email\n  '#title': E-mail\n  '#title_display': invisible\n  '#description_display': invisible\n  '#placeholder': 'E-mail professionnel'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': tel\n  '#title': Téléphone\n  '#title_display': invisible\n  '#description_display': invisible\n  '#placeholder': 'Téléphone mobile'\n  '#required': true\n  '#international': true\n  '#international_initial_country': FR\nraison_sociale:\n  '#type': textfield\n  '#title': 'Raison sociale'\n  '#title_display': invisible\n  '#description_display': invisible\n  '#placeholder': 'Raison sociale'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#title_display': invisible\n  '#description_display': invisible\n  '#placeholder': 'Code postal'\n  '#input_mask': '99999[-9999]'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nville:\n  '#type': textfield\n  '#title': Ville\n  '#title_display': invisible\n  '#description_display': invisible\n  '#placeholder': Ville\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nm_equiper:\n  '#type': checkboxes\n  '#title': 'M''équiper'\n  '#description': \"<h2 class=\\\"titre2\\\">Votre projet</h2>\\r\\n\\r\\n<p class=\\\"highlight1\\\">Merci de cocher la ou les case(s) correspondant à votre besoin* :</p>\\r\\n\\r\\n<h3 class=\\\"titre4\\\"><span style=\\\"color:#ff7900!important;\\\">M'équiper en toute sérénité</span></h3>\"\n  '#title_display': invisible\n  '#description_display': before\n  '#options':\n    'Mobiles et tablettes': 'Mobiles et tablettes'\n    'Solutions de connectivité': 'Solutions de connectivité'\ndeployer:\n  '#type': checkboxes\n  '#title': Déployer\n  '#description': '<h3 class=\"titre4\">Déployer, sécuriser et maîtriser ma flotte mobile</h3>'\n  '#title_display': invisible\n  '#description_display': before\n  '#options':\n    'Déployer et sécuriser ma flotte mobile': 'Déployer et sécuriser ma flotte mobile'\n    'Contrôler les usages, maîtriser mes dépenses mobiles': 'Contrôler les usages, maîtriser mes dépenses mobiles'\netre_accompagne:\n  '#type': checkboxes\n  '#title': 'Etre accompagné'\n  '#description': '<h3 class=\"titre4\">Être accompagné dans mon projet</h3>'\n  '#title_display': invisible\n  '#description_display': before\n  '#options':\n    'Accompagnement des utilisateurs': 'Accompagnement des utilisateurs'\n    'Accompagnement du gestionnaire de flotte': 'Accompagnement du gestionnaire de flotte'\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><span style=\\\"font-size:1.3rem;\\\">Tous les champs marqués d'une * sont obligatoires.</span></p>\\r\\n\\r\\n<p style=\\\"font-size:1rem;\\\">Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\" target=\\\"_blank\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html"
+elements: |-
+  css_hook:
+    '#type': processed_text
+    '#text': "<style type=\"text/css\">.page-node-type-webform .content form .form-item label {\r\n    margin-top: 0!important;\r\n}\r\n.js-form-item {\r\n    margin-bottom: 1rem;\r\n}\r\nlegend {\r\n    display: none;\r\n}\r\n.intl-tel-input.allow-dropdown, input#edit-telephone {\r\n    width: 100%;\r\n}\r\nh3 span, .titre4 {\r\n    color: #ff6600;\r\n}\r\n</style>\r\n"
+    '#format': full_html
+  civilite:
+    '#type': select
+    '#title': Civilité
+    '#title_display': invisible
+    '#description_display': invisible
+    '#options':
+      Mme: Mme
+      M.: M.
+    '#empty_option': Civilité
+    '#empty_value': Civilité
+    '#required': true
+  nom:
+    '#type': webform_name
+    '#title': Nom
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#title__access': false
+    '#title__title': Civilité
+    '#title__placeholder': Civilité
+    '#title__title_display': invisible
+    '#first__title': Prénom
+    '#first__placeholder': Prénom
+    '#first__title_display': invisible
+    '#first__required': true
+    '#middle__access': false
+    '#last__title': Nom
+    '#last__placeholder': Nom
+    '#last__title_display': invisible
+    '#last__required': true
+    '#suffix__access': false
+    '#degree__access': false
+  e_mail:
+    '#type': email
+    '#title': E-mail
+    '#title_display': invisible
+    '#description_display': invisible
+    '#placeholder': 'E-mail professionnel'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  telephone:
+    '#type': tel
+    '#title': Téléphone
+    '#title_display': invisible
+    '#description_display': invisible
+    '#placeholder': 'Téléphone mobile'
+    '#required': true
+    '#international': true
+    '#international_initial_country': FR
+  raison_sociale:
+    '#type': textfield
+    '#title': 'Raison sociale'
+    '#title_display': invisible
+    '#description_display': invisible
+    '#placeholder': 'Raison sociale'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  code_postal:
+    '#type': textfield
+    '#title': 'Code postal'
+    '#title_display': invisible
+    '#description_display': invisible
+    '#placeholder': 'Code postal'
+    '#input_mask': '99999[-9999]'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  ville:
+    '#type': textfield
+    '#title': Ville
+    '#title_display': invisible
+    '#description_display': invisible
+    '#placeholder': Ville
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  m_equiper:
+    '#type': checkboxes
+    '#title': 'M''équiper'
+    '#description': "<h2 class=\"titre2\">Votre projet</h2>\r\n\r\n<p class=\"highlight1\">Merci de cocher la ou les case(s) correspondant à votre besoin* :</p>\r\n\r\n<h3 class=\"titre4\"><span style=\"color:#ff7900!important;\">M'équiper en toute sérénité</span></h3>"
+    '#title_display': invisible
+    '#description_display': before
+    '#options':
+      'Mobiles et tablettes': 'Mobiles et tablettes'
+      'Solutions de connectivité': 'Solutions de connectivité'
+  deployer:
+    '#type': checkboxes
+    '#title': Déployer
+    '#description': '<h3 class="titre4">Déployer, sécuriser et maîtriser ma flotte mobile</h3>'
+    '#title_display': invisible
+    '#description_display': before
+    '#options':
+      'Déployer et sécuriser ma flotte mobile': 'Déployer et sécuriser ma flotte mobile'
+      'Contrôler les usages, maîtriser mes dépenses mobiles': 'Contrôler les usages, maîtriser mes dépenses mobiles'
+  etre_accompagne:
+    '#type': checkboxes
+    '#title': 'Etre accompagné'
+    '#description': '<h3 class="titre4">Être accompagné dans mon projet</h3>'
+    '#title_display': invisible
+    '#description_display': before
+    '#options':
+      'Accompagnement des utilisateurs': 'Accompagnement des utilisateurs'
+      'Accompagnement du gestionnaire de flotte': 'Accompagnement du gestionnaire de flotte'
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
+  mentions_legales:
+    '#type': processed_text
+    '#text': "<p style=\"font-size:1rem;\"><span style=\"font-size:1.3rem;\">Tous les champs marqués d'une * sont obligatoires.</span></p>\r\n\r\n<p style=\"font-size:1rem;\">Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\" target=\"_blank\">cliquer ici</a>.</p>\r\n"
+    '#format': full_html
 css: ''
 javascript: ''
 settings:
@@ -36,9 +146,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -48,31 +158,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -81,11 +196,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -96,13 +206,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -125,9 +235,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: ''
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''

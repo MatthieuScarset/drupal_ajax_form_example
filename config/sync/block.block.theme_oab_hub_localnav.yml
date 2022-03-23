@@ -16,18 +16,18 @@ plugin: local_nav_block
 settings:
   id: local_nav_block
   label: 'Local Nav'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       country: country
       industry: industry
       region: region
       solution: solution
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

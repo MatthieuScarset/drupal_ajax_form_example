@@ -50,15 +50,15 @@ third_party_settings:
         - group_rebond
         - group_seo
         - group_publish
+      label: Onglets
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
-      region: content
     group_write:
       children:
         - langcode
@@ -67,17 +67,17 @@ third_party_settings:
         - field_highlight
         - field_content
         - field_file
+      label: Write
+      region: content
       parent_name: group_onglets
       weight: 20
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
-      region: content
     group_classify:
       children:
         - field_subhome
@@ -86,17 +86,17 @@ third_party_settings:
         - field_geographic
         - field_departments
         - field_market_segment
+      label: Classify
+      region: content
       parent_name: group_onglets
       weight: 22
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
-      region: content
     group_publish:
       children:
         - field_content_owner
@@ -106,77 +106,77 @@ third_party_settings:
         - path
         - field_metatags
         - moderation_state_update
+      label: Publish
+      region: content
       parent_name: group_onglets
       weight: 25
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Publish
-      region: content
     group_content_worthy_period:
       children:
         - field_start_date
         - field_end_date
+      label: 'Content worthy period'
+      region: content
       parent_name: group_publish
       weight: 36
       format_type: fieldset
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         description: ''
         required_fields: true
-      label: 'Content worthy period'
-      region: content
     group_seo:
       children:
         - field_meta_title
         - field_meta_description
+      label: SEO
+      region: content
       parent_name: group_onglets
       weight: 24
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: SEO
-      region: content
     group_rebond:
       children:
         - field_rebond_document
         - field_page_du_site_1
         - field_page_du_site_2
         - field_p_wysiwyg_rebond
+      label: Rebond
+      region: content
       parent_name: group_onglets
       weight: 23
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: 'Définition des contenus de la zone Rebond'
         required_fields: true
-      label: Rebond
-      region: content
     group_visual:
       children:
         - field_visual
+      label: Visual
+      region: content
       parent_name: group_onglets
       weight: 21
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Visual
-      region: content
 id: node.partner.default
 targetEntityType: node
 bundle: partner
@@ -189,107 +189,109 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_content:
+    type: text_textarea
     weight: 8
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_content_owner:
+    type: string_textfield
     weight: 34
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_departments:
+    type: options_select
     weight: 48
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_display_title:
+    type: boolean_checkbox
     weight: 4
+    region: content
     settings:
       display_label: false
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_email_owner:
+    type: string_textfield
     weight: 35
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_end_date:
+    type: datetime_default
     weight: 43
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_file:
+    type: entity_browser_entity_reference
     weight: 10
+    region: content
     settings:
       entity_browser: browser_file_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_geographic:
+    type: options_select
     weight: 47
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_highlight:
+    type: string_textarea
     weight: 6
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: string_textarea
-    region: content
   field_market_segment:
+    type: options_select
     weight: 49
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_meta_description:
+    type: string_textfield
     weight: 124
+    region: content
     settings:
       size: 156
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_meta_title:
+    type: string_textfield
     weight: 123
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_metatags:
+    type: metatag_firehose
     weight: 39
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
   field_p_wysiwyg_rebond:
+    type: entity_reference_paragraphs
     weight: 4
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -298,17 +300,15 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
   field_page_du_site_1:
     type: entity_reference_autocomplete
     weight: 1
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_page_du_site_2:
     type: entity_reference_autocomplete
@@ -316,115 +316,115 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_partner_type:
+    type: options_select
     weight: 46
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_rebond_document:
     type: entity_reference_autocomplete
     weight: 0
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   field_solution:
+    type: options_select
     weight: 45
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_start_date:
-    weight: 42
-    settings: {  }
-    third_party_settings: {  }
     type: datetime_default
+    weight: 42
     region: content
-  field_subhome:
-    weight: 44
     settings: {  }
     third_party_settings: {  }
+  field_subhome:
     type: options_select
+    weight: 44
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_visual:
+    type: entity_browser_entity_reference
     weight: 9
+    region: content
     settings:
       entity_browser: browse_media_modal
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      selection_mode: selection_append
+      field_widget_replace: false
+      open: false
       field_widget_display_settings:
         view_mode: default
-      open: false
-      field_widget_replace: false
+      selection_mode: selection_append
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
   field_wysiwyg_rebond:
+    type: text_textarea
     weight: 3
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   langcode:
     type: language_select
     weight: 2
+    region: content
     settings:
       include_locked: true
     third_party_settings: {  }
-    region: content
   moderation_state_update:
     type: inline_entity_form_complex
     weight: 40
+    region: content
     settings:
+      form_mode: default
       override_labels: true
       label_singular: 'Moderation state update'
       label_plural: 'Moderation state updates'
       allow_new: true
-      match_operator: CONTAINS
       allow_existing: false
-      form_mode: default
+      match_operator: CONTAINS
     third_party_settings: {  }
-    region: content
   path:
     type: path
     weight: 38
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   promote:
     type: boolean_checkbox
     weight: 37
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   translation:
     weight: 10
     region: content
@@ -436,9 +436,9 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   url_redirects:
     weight: 50

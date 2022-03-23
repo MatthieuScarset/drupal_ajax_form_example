@@ -65,8 +65,6 @@ RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true
 RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
-#Install drush
-RUN composer global require drush/drush:9.7.3
 
-# Export
-ENV PATH="$PATH:/home/oab_web/.config/composer/vendor/bin"
+# Export vendor bin to get Drush
+ENV PATH="$PATH:/application/vendor/bin"

@@ -11,20 +11,20 @@ pattern: 'libreria/[node:title]'
 selection_criteria:
   89eab06f-b99d-4860-9319-254cd916a35c:
     id: node_type
-    bundles:
-      document: document
     negate: false
+    uuid: 89eab06f-b99d-4860-9319-254cd916a35c
     context_mapping:
       node: node
-    uuid: 89eab06f-b99d-4860-9319-254cd916a35c
+    bundles:
+      document: document
   811e4af7-693a-48ee-b7be-1008d49c9423:
     id: language
-    langcodes:
-      es: es
     negate: false
+    uuid: 811e4af7-693a-48ee-b7be-1008d49c9423
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 811e4af7-693a-48ee-b7be-1008d49c9423
+    langcodes:
+      es: es
 selection_logic: and
 weight: -10
 relationships:

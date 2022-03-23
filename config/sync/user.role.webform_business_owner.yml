@@ -1,7 +1,12 @@
 uuid: null
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - shortcut
+    - system
+    - toolbar
+    - webform
 id: webform_business_owner
 label: 'Webform Business Owner'
 weight: 0

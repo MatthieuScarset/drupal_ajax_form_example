@@ -42,16 +42,16 @@ bundle: magazine
 mode: right_linked_content
 content:
   field_highlight:
-    weight: 0
+    type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 0
     region: content
   links:
-    weight: 1
     settings: {  }
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_blog_format: true

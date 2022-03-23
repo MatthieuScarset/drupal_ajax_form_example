@@ -5,8 +5,8 @@ dependencies:
   config:
     - taxonomy.vocabulary.subhomes
 id: default
-label: Section
 plural_label: Sections
+label: Section
 scheme: taxonomy
 scheme_settings:
   vocabularies:
