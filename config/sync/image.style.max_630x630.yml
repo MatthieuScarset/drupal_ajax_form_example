@@ -1,0 +1,26 @@
+uuid: b3085c45-0e16-4b46-b702-7a3cd5869f83
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_630x630
+  module:
+    - crop
+name: max_630x630
+label: 'max 630x630'
+effects:
+  1e49fb61-ff4c-4e5b-a832-2a24d0bec35d:
+    uuid: 1e49fb61-ff4c-4e5b-a832-2a24d0bec35d
+    id: image_scale_and_crop
+    weight: -9
+    data:
+      width: 630
+      height: 630
+      anchor: center-center
+  55d25a6d-76e2-4bd9-9381-3c0403b860d1:
+    uuid: 55d25a6d-76e2-4bd9-9381-3c0403b860d1
+    id: crop_crop
+    weight: -10
+    data:
+      crop_type: crop_630x630
+      automatic_crop_provider: null
