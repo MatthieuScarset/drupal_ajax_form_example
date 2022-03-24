@@ -1,0 +1,21 @@
+uuid: 2628e3ff-ff07-4879-970f-291a77a417b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.comments
+  module:
+    - filter
+    - media
+    - system
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Utilisateur anonyme'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'use text format comments'
+  - 'view marketo form'
+  - 'view media'
