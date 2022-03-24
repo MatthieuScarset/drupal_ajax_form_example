@@ -15,6 +15,6 @@ plugin: top_zone_page_category_block
 settings:
   id: top_zone_page_category_block
   label: 'Top Zone Page Category'
-  provider: oab_frontoffice
   label_display: visible
+  provider: oab_frontoffice
 visibility: {  }

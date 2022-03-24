@@ -12,20 +12,20 @@ pattern: 'produits/[node:title]'
 selection_criteria:
   f9eab3d6-5a46-427a-8050-8115a1794b02:
     id: node_type
-    bundles:
-      product: product
     negate: false
+    uuid: f9eab3d6-5a46-427a-8050-8115a1794b02
     context_mapping:
       node: node
-    uuid: f9eab3d6-5a46-427a-8050-8115a1794b02
+    bundles:
+      product: product
   610939f3-3ddd-4d48-bed6-934070e10999:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: 610939f3-3ddd-4d48-bed6-934070e10999
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 610939f3-3ddd-4d48-bed6-934070e10999
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:

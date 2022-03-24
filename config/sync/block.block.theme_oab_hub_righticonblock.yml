@@ -15,8 +15,8 @@ plugin: right_icon_block
 settings:
   id: right_icon_block
   label: 'Right icon Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   right_icon_custom_text:
     value: '<p><span aria-hidden="true" class="glyphicon glyphicon-search" data-target="#search-form" data-toggle="collapse" font-size="2em"></span><span aria-hidden="true" class="align-right icon icon-share hidden-xs hidden-sm" data-target="#social-share" data-toggle="collapse"></span></p>'
     format: full_html

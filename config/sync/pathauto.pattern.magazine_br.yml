@@ -11,12 +11,12 @@ pattern: 'revista/[node:title]'
 selection_criteria:
   ee3040a7-408d-4484-b046-74223f34ba9c:
     id: language
-    langcodes:
-      pt-br: pt-br
     negate: false
+    uuid: ee3040a7-408d-4484-b046-74223f34ba9c
     context_mapping:
       language: 'node:langcode:language'
-    uuid: ee3040a7-408d-4484-b046-74223f34ba9c
+    langcodes:
+      pt-br: pt-br
 selection_logic: and
 weight: -5
 relationships:

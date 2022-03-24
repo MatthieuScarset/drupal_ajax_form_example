@@ -1,0 +1,43 @@
+.benefits-item-container {
+  max-width: 100%;
+  overflow-x: scroll;
+  flex-wrap: unset;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .benefits-item-icon {
+    font-size: 2.5rem;
+    padding: 1.35rem 1.25rem 1.10rem 1.25rem;
+  }
+
+@include media-breakpoint-up(md) {
+  overflow-x: hidden;
+  flex-wrap: wrap;
+
+  .benefits-subitem-container {
+    .benefits-numerical-item-container {
+      height: 5.625rem;
+      overflow-y: visible;
+      border-right: 1px solid #ccc;
+      text-align: center;
+    }
+
+    &:last-child {
+      .benefits-numerical-item-container {
+        height: 5.625rem;
+        overflow-y: visible;
+        border: none;
+      }
+    }
+  }
+
+}
+}
+
+
+.field--item > .row {
+  margin-bottom: 2.1875rem;;
+}

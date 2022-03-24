@@ -13,9 +13,9 @@ third_party_settings:
       2065: '2065'
       2066: '2066'
     gdpr_form_published: 1
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 86
 template: false
 archive: false
@@ -23,7 +23,106 @@ id: service_commercial
 title: 'Contacter notre service commercial - smart operations'
 description: '<p>Contact commercial Offres smart operations</p>'
 category: SMS
-elements: "processed_text:\n  '#type': processed_text\n  '#text': '<p><img alt=\"\" src=\"/sites/default/files/illust_formulaire_oab.jpg\" style=\"width: 100%; max-width: 100%;\" /></p>'\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Monsieur: Monsieur\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nadresse_mail:\n  '#type': email\n  '#title': 'Adresse e-mail professionnelle'\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntelephone:\n  '#type': textfield\n  '#title': Téléphone\n  '#required': true\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nville:\n  '#type': textfield\n  '#title': Ville\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsociete:\n  '#type': textfield\n  '#title': Société\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\n  '#required': true\nsiren:\n  '#type': textfield\n  '#title': SIREN\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\nmessage:\n  '#type': textarea\n  '#title': Message\n  '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'\ntest:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#required': true\n  '#select2': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"test\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"test\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': |\n    <p style=\"font-size:1rem;\"><br />\n    Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\" target=\"_blank\">cliquer ici</a>.</p>\n  '#format': full_html\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'"
+elements: |-
+  processed_text:
+    '#type': processed_text
+    '#text': '<p><img alt="" src="/sites/default/files/illust_formulaire_oab.jpg" style="width: 100%; max-width: 100%;" /></p>'
+    '#format': full_html
+  civilite:
+    '#type': select
+    '#title': Civilité
+    '#options':
+      Madame: Madame
+      Monsieur: Monsieur
+    '#required': true
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#required': true
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#required': true
+  adresse_mail:
+    '#type': email
+    '#title': 'Adresse e-mail professionnelle'
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  telephone:
+    '#type': textfield
+    '#title': Téléphone
+    '#required': true
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  code_postal:
+    '#type': textfield
+    '#title': 'Code postal'
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#required': true
+  ville:
+    '#type': textfield
+    '#title': Ville
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#required': true
+  societe:
+    '#type': textfield
+    '#title': Société
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+    '#required': true
+  siren:
+    '#type': textfield
+    '#title': SIREN
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  message:
+    '#type': textarea
+    '#title': Message
+    '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+  test:
+    '#type': select
+    '#title': Pays
+    '#options': country_names
+    '#required': true
+    '#select2': true
+  donnees_personnelles:
+    '#type': checkbox
+    '#title': 'Données personnelles'
+    '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'
+    '#title_display': ''
+    '#states':
+      invisible:
+        - ':input[name="test"]':
+            value:
+              pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'
+        - or
+        - ':input[name="je_suis_client_orange_business_services"]':
+            value: Oui
+        - or
+        - ':input[name="test"]':
+            empty: true
+    '#attributes':
+      class:
+        - check-data
+      style: 'width:auto!important;float:left;margin-right:1rem'
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+    '#update__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+  processed_text_01:
+    '#type': processed_text
+    '#text': |
+      <p style="font-size:1rem;"><br />
+      Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href="https://www.orange-business.com/fr/donnees-personnelles" target="_blank">cliquer ici</a>.</p>
+    '#format': full_html
+  provenance:
+    '#type': hidden
+    '#title': Provenance
+    '#default_value': '[current-page:query:product]'
 css: ''
 javascript: ''
 settings:
@@ -38,9 +137,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -50,31 +149,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -83,11 +187,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -98,13 +197,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -127,9 +226,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: inline
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: '<p>Merci pour l’intérêt que vous nous portez. Votre demande a bien été prise en compte et sera traitée dans les meilleurs délais.</p>'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -208,9 +307,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -219,13 +318,17 @@ handlers:
         - completed
       to_mail: 'mireille.sikanic@orange.com, marie.lhomme@orange.com'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: no-reply@orange-business.com
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Portail orange business : vous avez un nouveau contact'
       body: '<p>Bonjour, une nouvelle demande de contact a été déposé sur le site www.orange-business.com. Connectez vous avec vos accès pour le récuperer. Equipe web</p>'
       excluded_elements:
@@ -249,11 +352,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

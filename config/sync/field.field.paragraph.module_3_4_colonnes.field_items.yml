@@ -1,0 +1,91 @@
+uuid: bd4fcf55-d3dd-4ca9-8607-c3c5e1b5d906
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_items
+    - paragraphs.paragraphs_type.module_3_4_colonnes
+    - paragraphs.paragraphs_type.module_3_4_colonnes_items
+  module:
+    - entity_reference_revisions
+id: paragraph.module_3_4_colonnes.field_items
+field_name: field_items
+entity_type: paragraph
+bundle: module_3_4_colonnes
+label: Items
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      module_3_4_colonnes_items: module_3_4_colonnes_items
+    negate: 0
+    target_bundles_drag_drop:
+      contact_button_item:
+        weight: 22
+        enabled: false
+      default_button:
+        weight: 23
+        enabled: false
+      home_banner:
+        weight: 24
+        enabled: false
+      home_caroussel:
+        weight: 25
+        enabled: false
+      home_column:
+        weight: 26
+        enabled: false
+      home_column_section:
+        weight: 27
+        enabled: false
+      home_playlist:
+        weight: 28
+        enabled: false
+      home_thematic_columns:
+        weight: 29
+        enabled: false
+      homepage_banner_experience:
+        weight: 30
+        enabled: false
+      homepage_banner_item:
+        weight: 31
+        enabled: false
+      homepage_news:
+        weight: 32
+        enabled: false
+      infography_partner:
+        weight: 33
+        enabled: false
+      marketo:
+        weight: 34
+        enabled: false
+      module_3_4_colonnes:
+        weight: 35
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 36
+        enabled: true
+      paragraph_block_rebond:
+        weight: 37
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 38
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 39
+        enabled: false
+      rebond_wysiwyg:
+        weight: 40
+        enabled: false
+      related_content:
+        weight: 41
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 42
+        enabled: false
+field_type: entity_reference_revisions

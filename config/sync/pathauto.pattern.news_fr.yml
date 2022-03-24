@@ -12,20 +12,20 @@ pattern: '/presse/actualites/[node:title]'
 selection_criteria:
   c33e5e5a-52c2-454f-8e07-a10a57a83c6f:
     id: node_type
-    bundles:
-      news: news
     negate: false
+    uuid: c33e5e5a-52c2-454f-8e07-a10a57a83c6f
     context_mapping:
       node: node
-    uuid: c33e5e5a-52c2-454f-8e07-a10a57a83c6f
+    bundles:
+      news: news
   ec1d1aab-b387-4d27-a1d5-e6808fa6e6b3:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: ec1d1aab-b387-4d27-a1d5-e6808fa6e6b3
     context_mapping:
       language: 'node:langcode:language'
-    uuid: ec1d1aab-b387-4d27-a1d5-e6808fa6e6b3
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:

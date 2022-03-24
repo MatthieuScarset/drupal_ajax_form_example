@@ -17,8 +17,8 @@ plugin: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
 settings:
   id: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
   label: remove_oab_cookie_compliance
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

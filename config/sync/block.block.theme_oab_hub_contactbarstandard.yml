@@ -18,12 +18,12 @@ plugin: contact_bar_standard_block
 settings:
   id: contact_bar_standard_block
   label: 'Contact Bar Standard'
-  provider: oab_frontoffice
   label_display: '0'
-  content: ''
-  content_format: full_html
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
+  content: ''
+  content_format: full_html
   link_assistance: 'https://espaceclient.orange-business.com/web/ece2/assistance'
   link_assistance_text: Assistance
   link_contact: /fr/contact
@@ -33,6 +33,9 @@ settings:
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       blog_post: blog_post
       country: country
@@ -48,18 +51,15 @@ visibility:
       partner: partner
       simple_page: simple_page
       solution: solution
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
   request_path:
     id: request_path
-    pages: "/ce-que-les-analystes-disent-de-nous\r\n/gartner-magic-quadrant-for-unified-communications-as-a-service-worldwide-sept-2017\r\n/gartner-apac-network-services-juin-2017\r\n/gartner-pilote-activites-digitales-collaborateurs-transformation-poste-travail\r\n/idc-marketscape-worldwide-network-consulting-services-2017-vendor-assessment-juin-2017\r\n/gartner-pan-european-network-services-march-2017\r\n/vertical-systems-group-global-ethernet-leaderboard-march-2017\r\n/idc-apac-marketscape-for-next-generation-telcos-telecom-services-2016-2017-march-2017\r\n/globaldata-collaboration-and-communications-global-feb-2017\r\n/frost-and-sullivan-europe-competitive-strategy-innovation-and-leadership-award-managed-security\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/frost-sullivan-iq-for-apac-hosted-telephony-and-ucc-service-providers-2016-feb-2017\r\n/gartner-magic-quadrant-for-managed-security-services-worldwide-jan-2017\r\n/orange-vendor-rating-by-gartner-jan-2017\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/directeur-dinterventions-grace-digital-boostez-productivite-techniciens-et-augmentez-satisfaction"
     negate: true
     context_mapping: {  }
+    pages: "/ce-que-les-analystes-disent-de-nous\r\n/gartner-magic-quadrant-for-unified-communications-as-a-service-worldwide-sept-2017\r\n/gartner-apac-network-services-juin-2017\r\n/gartner-pilote-activites-digitales-collaborateurs-transformation-poste-travail\r\n/idc-marketscape-worldwide-network-consulting-services-2017-vendor-assessment-juin-2017\r\n/gartner-pan-european-network-services-march-2017\r\n/vertical-systems-group-global-ethernet-leaderboard-march-2017\r\n/idc-apac-marketscape-for-next-generation-telcos-telecom-services-2016-2017-march-2017\r\n/globaldata-collaboration-and-communications-global-feb-2017\r\n/frost-and-sullivan-europe-competitive-strategy-innovation-and-leadership-award-managed-security\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/frost-sullivan-iq-for-apac-hosted-telephony-and-ucc-service-providers-2016-feb-2017\r\n/gartner-magic-quadrant-for-managed-security-services-worldwide-jan-2017\r\n/orange-vendor-rating-by-gartner-jan-2017\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/directeur-dinterventions-grace-digital-boostez-productivite-techniciens-et-augmentez-satisfaction"

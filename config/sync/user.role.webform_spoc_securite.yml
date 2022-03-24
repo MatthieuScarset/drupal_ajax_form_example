@@ -1,7 +1,9 @@
 uuid: null
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - toolbar
 id: webform_spoc_securite
 label: 'Webform SPOC Sécurité'
 weight: 2

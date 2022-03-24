@@ -15,14 +15,14 @@ plugin: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
 settings:
   id: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
   label: business_insight
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: "/visions-business\r\n/business-insight"
     negate: false
     context_mapping: {  }
+    pages: "/visions-business\r\n/business-insight"

@@ -18,13 +18,16 @@ plugin: 'views_block:linked_content-linked_content'
 settings:
   id: 'views_block:linked_content-linked_content'
   label: ''
-  provider: views
   label_display: '0'
+  provider: views
   views_label: ''
   items_per_page: none
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       blog_post: blog_post
       customer_story: customer_story
@@ -35,6 +38,3 @@ visibility:
       press_release: press_release
       product: product
       simple_page: simple_page
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

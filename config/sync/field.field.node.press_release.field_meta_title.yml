@@ -11,7 +11,7 @@ entity_type: node
 bundle: press_release
 label: 'Meta title'
 description: 'This field is limited to 56 characters (used for SEO-optimization)'
-required: 'true'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

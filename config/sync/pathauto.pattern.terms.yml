@@ -12,6 +12,10 @@ pattern: '[term:name]'
 selection_criteria:
   6a3a30b5-1b02-4915-920d-275827c9bf18:
     id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 6a3a30b5-1b02-4915-920d-275827c9bf18
+    context_mapping:
+      taxonomy_term: taxonomy_term
     bundles:
       areas: areas
       blogs: blogs
@@ -22,10 +26,6 @@ selection_criteria:
       partners: partners
       solutions: solutions
       topics: topics
-    negate: false
-    context_mapping:
-      taxonomy_term: taxonomy_term
-    uuid: 6a3a30b5-1b02-4915-920d-275827c9bf18
 selection_logic: and
 weight: -5
 relationships: {  }

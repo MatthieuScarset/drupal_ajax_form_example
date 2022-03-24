@@ -21,9 +21,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       rebond_wysiwyg: rebond_wysiwyg
+    negate: 0
     target_bundles_drag_drop:
       default_button:
         weight: 17
@@ -65,8 +65,8 @@ settings:
         weight: 29
         enabled: false
       rebond_wysiwyg:
-        enabled: true
         weight: 30
+        enabled: true
       related_content:
         weight: 31
         enabled: false

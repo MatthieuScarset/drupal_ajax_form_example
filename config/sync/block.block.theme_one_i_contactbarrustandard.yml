@@ -17,26 +17,29 @@ plugin: contact_bar_ru_standard_block
 settings:
   id: contact_bar_ru_standard_block
   label: 'Contact Bar RU Standard'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
   link_offices: '/ru/contacts?region=all&country=659'
   link_offices_text: 'Найти наш офис'
   link_help: '/ru/tehnicheskaya-podderzhka '
   link_help_text: 'Сообщить о проблеме'
   link_contact: /ru/stat-klientom
   link_contact_text: 'Связаться с нами'
-  context_mapping:
-    node: '@node.node_route_context:node'
 visibility:
   language:
     id: language
-    langcodes:
-      ru: ru
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      ru: ru
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       blog_post: blog_post
       customer_story: customer_story
@@ -52,6 +55,3 @@ visibility:
       simple_page: simple_page
       solution: solution
       webform: webform
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

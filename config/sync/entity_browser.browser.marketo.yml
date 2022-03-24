@@ -21,22 +21,22 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   e97b82ff-274c-4f81-9f7f-d2f8b7f4bada:
+    id: entity_form
+    uuid: e97b82ff-274c-4f81-9f7f-d2f8b7f4bada
+    label: 'Create a marketo form'
+    weight: -9
     settings:
+      submit_text: 'Save marketo form'
       entity_type: paragraph
       bundle: marketo
       form_mode: default
-      submit_text: 'Save marketo form'
-    uuid: e97b82ff-274c-4f81-9f7f-d2f8b7f4bada
-    weight: -9
-    label: 'Create a marketo form'
-    id: entity_form
   bd675bf4-67d4-4453-8de8-c567edd9867d:
+    id: view
+    uuid: bd675bf4-67d4-4453-8de8-c567edd9867d
+    label: 'Select a marketo form'
+    weight: -10
     settings:
-      view: marketo_paragraph_entity_browser
-      view_display: entity_browser_1
       submit_text: 'Select Form'
       auto_select: false
-    uuid: bd675bf4-67d4-4453-8de8-c567edd9867d
-    weight: -10
-    label: 'Select a marketo form'
-    id: view
+      view: marketo_paragraph_entity_browser
+      view_display: entity_browser_1

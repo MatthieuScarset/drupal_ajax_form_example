@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_modules
     - node.type.modular_product
     - paragraphs.paragraphs_type.module_text_video_image
+    - paragraphs.paragraphs_type.module_benefits
+    - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -23,8 +25,10 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      module_3_4_colonnes: module_3_4_colonnes
       module_text_video_image: module_text_video_image
       paragraph_wysiwyg: paragraph_wysiwyg
+      module_benefits: module_benefits
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -69,6 +73,18 @@ settings:
       module_text_video_image:
         weight: 34
         enabled: true
+      module_benefits:
+        weight: 37
+        enabled: true
+      module_benefits_item:
+        weight: 38
+        enabled: false
+      module_3_4_colonnes:
+        weight: 35
+        enabled: true
+      module_3_4_colonnes_items:
+        weight: 36
+        enabled: false
       paragraph_block_rebond:
         weight: 33
         enabled: false

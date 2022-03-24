@@ -53,6 +53,7 @@ module.exports = {
         {from: './node_modules/@ob1/web/dist/js/ob1.bundle.*', to: 'js/[name][ext]'},
         {from: './node_modules/boosted/dist/js/boosted.*', to: 'js/[name][ext]'},
         {from: './node_modules/boosted/dist/js/boosted.bundle.*', to: 'js/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/fonts/icon-orange.json', to: 'fonts/[name][ext]'}
       ]
     })
   ]

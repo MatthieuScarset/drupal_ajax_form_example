@@ -18,16 +18,16 @@ plugin: 'block_content:593d3cce-82f8-45a2-8b8e-598161fa2722'
 settings:
   id: 'block_content:593d3cce-82f8-45a2-8b8e-598161fa2722'
   label: '[NGR] Marketo Download Form'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      document: document
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      document: document

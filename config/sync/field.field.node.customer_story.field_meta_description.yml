@@ -11,7 +11,7 @@ entity_type: node
 bundle: customer_story
 label: 'Meta description'
 description: 'This field is limited to 156 characters (used for SEO-optimization)'
-required: 'true'
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

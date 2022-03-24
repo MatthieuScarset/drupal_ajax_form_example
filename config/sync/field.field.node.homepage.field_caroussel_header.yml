@@ -20,9 +20,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       home_caroussel: home_caroussel
+    negate: 0
     target_bundles_drag_drop:
       carou_test:
         weight: 17
@@ -30,21 +30,12 @@ settings:
       default_button:
         weight: 18
         enabled: false
-      homepage_banner_experience:
-        weight: 19
-        enabled: false
-      homepage_banner_item:
-        weight: 20
-        enabled: false
-      homepage_news:
-        weight: 21
-        enabled: false
       home_banner:
         weight: 22
         enabled: false
       home_caroussel:
-        enabled: true
         weight: 23
+        enabled: true
       home_column:
         weight: 24
         enabled: false
@@ -56,6 +47,15 @@ settings:
         enabled: false
       home_thematic_columns:
         weight: 27
+        enabled: false
+      homepage_banner_experience:
+        weight: 19
+        enabled: false
+      homepage_banner_item:
+        weight: 20
+        enabled: false
+      homepage_news:
+        weight: 21
         enabled: false
       infography_partner:
         weight: 28

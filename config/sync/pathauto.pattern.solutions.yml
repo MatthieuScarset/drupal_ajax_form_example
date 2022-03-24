@@ -12,23 +12,23 @@ pattern: 'solutions/[node:title]'
 selection_criteria:
   da0e3701-0c0e-46df-9e26-fce0025039f9:
     id: node_type
-    bundles:
-      solution: solution
     negate: false
+    uuid: da0e3701-0c0e-46df-9e26-fce0025039f9
     context_mapping:
       node: node
-    uuid: da0e3701-0c0e-46df-9e26-fce0025039f9
+    bundles:
+      solution: solution
   38d370d8-50df-4312-ba24-7a2150dbc091:
     id: language
+    negate: false
+    uuid: 38d370d8-50df-4312-ba24-7a2150dbc091
+    context_mapping:
+      language: 'node:langcode:language'
     langcodes:
       en: en
       fr: fr
       ru: ru
       ru-en: ru-en
-    negate: false
-    context_mapping:
-      language: 'node:langcode:language'
-    uuid: 38d370d8-50df-4312-ba24-7a2150dbc091
 selection_logic: and
 weight: -10
 relationships:

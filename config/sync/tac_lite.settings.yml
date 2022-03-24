@@ -16,6 +16,7 @@ tac_lite_grants_scheme_1:
     hub: {  }
   anonymous:
     hub:
+      0: '0'
       900: '900'
       1048: '1048'
   webform_business_owner:

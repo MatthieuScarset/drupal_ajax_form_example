@@ -11,20 +11,20 @@ pattern: 'producto/[node:title]'
 selection_criteria:
   e1c53aa0-c349-4523-a16a-010d706ab73e:
     id: node_type
-    bundles:
-      product: product
     negate: false
+    uuid: e1c53aa0-c349-4523-a16a-010d706ab73e
     context_mapping:
       node: node
-    uuid: e1c53aa0-c349-4523-a16a-010d706ab73e
+    bundles:
+      product: product
   52d4e68c-a3c0-43fb-ab2c-85856bdd5f82:
     id: language
-    langcodes:
-      es: es
     negate: false
+    uuid: 52d4e68c-a3c0-43fb-ab2c-85856bdd5f82
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 52d4e68c-a3c0-43fb-ab2c-85856bdd5f82
+    langcodes:
+      es: es
 selection_logic: and
 weight: -10
 relationships:

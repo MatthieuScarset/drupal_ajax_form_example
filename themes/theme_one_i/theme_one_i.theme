@@ -7,6 +7,7 @@ use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /*****************************************/
@@ -46,6 +47,68 @@ function theme_one_i_preprocess_html(&$variables) {
 function theme_one_i_preprocess_region(&$variables) {
   // Create the $content variable that templates expect.
   $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+}
+
+function theme_one_i_preprocess_page(&$variables)
+{
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')
+    ->getTitle($request, $route_match->getRouteObject());
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  //tealium
+  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
+
+  //On cache le block Page Title
+  if (preg_match('/^view.category_page/', $route_name)) {
+    $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
+  }
+}
+
+function theme_one_i_preprocess_views_view(&$variables) {
+
+  /** @var Drupal\views\ViewExecutable $view */
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  //page category de products
+  if($id == 'category_page') {
+    $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Category';
+    //var_dump(\Drupal::routeMatch()->getParameters()->has('tid'));die();
+    if (\Drupal::routeMatch()->getParameters()->has('tid')) {
+      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+      $tid = \Drupal::routeMatch()->getParameters()->get('tid');
+      if (null !== ($term = Term::load($tid))) {
+        $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $term->getName();
+      }
+    }
+  }
+}
+
+function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
+
+  $parent = $variables['paragraph']->getParentEntity();
+
+  $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
+  $is_numerical = false;
+
+  if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
+    $is_numerical = true;
+  }
+  $variables['is_numerical'] = $is_numerical;
+}
+
+function theme_one_i_preprocess_field__paragraph__field_item(&$variables) {
+
+
+  $parent = $variables['element']['#object'];
+
+  $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
+  $is_numerical = false;
+
+  if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
+    $is_numerical = true;
+  }
+  $variables['is_numerical'] = $is_numerical;
 }
 
 /*****************************************/
@@ -125,14 +188,15 @@ function theme_one_i_theme_suggestions_alter(array &$suggestions, array $variabl
  *
  * @param array $suggestions
  * @param array $variables
+ *
+ * @return array
  */
-function theme_one_i_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+function theme_one_i_theme_suggestions_form_alter(array &$suggestions, array $variables): array {
   $suggestions[] = 'form__' . $variables['element']['#form_id'];
   return $suggestions;
 }
 
-
-function _theme_one_i_form_element_suggestions(array &$suggestions, array $variables, $hook) {
+function _theme_one_i_form_element_suggestions(array &$suggestions, array $variables, $hook): array {
 
   if ($hook !== $variables['element']['#type']) {
     $suggestions[] = $hook . "__" . $variables['element']['#type'];
@@ -167,18 +231,17 @@ function _theme_one_i_form_element_suggestions(array &$suggestions, array $varia
  *
  * @param array $suggestions
  * @param array $variables
+ * @param $hook
  *
  * @return array
  */
-function theme_one_i_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook) {
+function theme_one_i_theme_suggestions_form_element_alter(array &$suggestions, array $variables, $hook): array {
   return _theme_one_i_form_element_suggestions($suggestions, $variables, $hook);
 }
 
-function theme_one_i_theme_suggestions_select_alter(&$suggestions, array $variables, $hook) {
+function theme_one_i_theme_suggestions_select_alter(&$suggestions, array $variables, $hook): array {
   return _theme_one_i_form_element_suggestions($suggestions, $variables, $hook);
 }
-
-
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for node templates.
@@ -218,8 +281,10 @@ function theme_one_i_theme_suggestions_node_alter(array &$suggestions, array $va
  *
  * @param array $suggestions
  * @param array $variables
+ *
+ * @return array
  */
-function theme_one_i_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+function theme_one_i_theme_suggestions_field_alter(array &$suggestions, array $variables): array {
   $element = $variables['element'];
   $suggestions[] = 'field__' . $element['#entity_type'] . '__' . $element['#field_name'] . '__' . $element['#bundle'] . '__' . $element['#view_mode'];
   return $suggestions;
@@ -227,7 +292,9 @@ function theme_one_i_theme_suggestions_field_alter(array &$suggestions, array $v
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for html document templates.
+ *
  * @param array $suggestions
+ * @param $variables
  * @param $hook
  */
 function theme_one_i_theme_suggestions_html_alter(array &$suggestions, $variables, $hook) {
@@ -278,7 +345,6 @@ function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $
   $suggestions = array_merge($suggestions, __suggestion_nodes($hook));
 }
 
-
 function __suggestion_nodes($hook): array {
   $suggestions = [];
   if ($node = Drupal::routeMatch()->getParameter('node')) {
@@ -298,7 +364,9 @@ function __suggestion_nodes($hook): array {
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ *
  * @param array $suggestions
+ * @param $variables
  */
 function theme_one_i_theme_suggestions_block_alter(array &$suggestions, $variables) {
   if ($variables['elements']['#base_plugin_id'] === 'block_content' && isset($variables['elements']['content']['#block_content'])) {
@@ -313,11 +381,14 @@ function theme_one_i_theme_suggestions_block_alter(array &$suggestions, $variabl
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter() for page title templates.
+ *
  * @param array $suggestions
+ * @param $variables
  * @param $hook
+ *
  * @return array
  */
-function theme_one_i_theme_suggestions_page_title_alter(array &$suggestions, $variables, $hook) {
+function theme_one_i_theme_suggestions_page_title_alter(array &$suggestions, $variables, $hook): array {
 
   /** @var NodeInterface $node */
   if ($node = Drupal::routeMatch()->getParameter('node')) {
@@ -333,7 +404,7 @@ function theme_one_i_theme_suggestions_page_title_alter(array &$suggestions, $va
  * @param $fieldName
  * @return null|string
  */
-function get_image_uri($entity, $fieldName){
+function get_image_uri($entity, $fieldName): ?string {
   $image_uri = NULL;
   if($entity->hasField($fieldName)){
     try{
@@ -386,40 +457,4 @@ function theme_one_i_theme_suggestions_taxonomy_term_alter(array &$suggestions, 
   $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
-}
-
-
-function theme_one_i_preprocess_page(&$variables)
-{
-  $request = \Drupal::request();
-  $route_match = \Drupal::routeMatch();
-  $title = \Drupal::service('title_resolver')
-    ->getTitle($request, $route_match->getRouteObject());
-  $route_name = \Drupal::routeMatch()->getRouteName();
-  //tealium
-  $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
-
-  //On cache le block Page Title
-  if (preg_match('/^view.category_page/', $route_name)) {
-    $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
-  }
-}
-
-function theme_one_i_preprocess_views_view(&$variables) {
-
-  /** @var Drupal\views\ViewExecutable $view */
-  $view = $variables['view'];
-  $id = $view->storage->id();
-  //page category de products
-  if($id == 'category_page') {
-    $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Category';
-    //var_dump(\Drupal::routeMatch()->getParameters()->has('tid'));die();
-    if (\Drupal::routeMatch()->getParameters()->has('tid')) {
-      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
-      $tid = \Drupal::routeMatch()->getParameters()->get('tid');
-      if (null !== ($term = Term::load($tid))) {
-        $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $term->getName();
-      }
-    }
-  }
 }

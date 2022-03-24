@@ -18,13 +18,13 @@ plugin: 'block_content:8f775d46-c029-463f-b0bd-3338b696e8b2'
 settings:
   id: 'block_content:8f775d46-c029-463f-b0bd-3338b696e8b2'
   label: '[NGR] Regional Presence - Top zone'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: /where-we-are
     negate: false
+    pages: /where-we-are

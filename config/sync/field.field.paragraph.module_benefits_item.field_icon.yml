@@ -1,0 +1,19 @@
+uuid: 006cca88-8df7-4f2d-b512-58de71737e5f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.module_benefits_item
+id: paragraph.module_benefits_item.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: module_benefits_item
+label: 'Item icon'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -26,22 +26,22 @@ mode: default
 content:
   field_modules:
     type: entity_reference_revisions_entity_view
-    weight: 8
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 8
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
-  field_enable_wysiwyg_paragraph: true
   field_call_to_action_button: true
   field_call_to_action_link: true
+  field_enable_wysiwyg_paragraph: true
   field_modular_product_tarif: true
   field_product_category: true
   field_product_name: true
