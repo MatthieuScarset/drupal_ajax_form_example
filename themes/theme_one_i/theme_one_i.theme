@@ -88,9 +88,19 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
 
   $parent = $variables['paragraph']->getParentEntity();
 
-  $field_item = $parent->get('field_item');
-  $item_number = count($field_item);
-  $last_child_id = $field_item[$item_number-1]->get('target_id');
+  $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
+  $is_numerical = false;
+
+  if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
+    $is_numerical = true;
+  }
+  $variables['is_numerical'] = $is_numerical;
+}
+
+function theme_one_i_preprocess_field__paragraph__field_item(&$variables) {
+
+
+  $parent = $variables['element']['#object'];
 
   $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
   $is_numerical = false;
@@ -99,8 +109,6 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
     $is_numerical = true;
   }
   $variables['is_numerical'] = $is_numerical;
-  $variables['last_child_id'] = $last_child_id;
-
 }
 
 /*****************************************/

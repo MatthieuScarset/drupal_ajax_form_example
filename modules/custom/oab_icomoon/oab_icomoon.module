@@ -33,6 +33,11 @@ function oab_icomoon_token_info() {
     'description' => t('Token type designed for icomoon')
   );
 
+  $types['icon_orange'] = [
+    'name' => t('Orange Icon tokens type'),
+    'description' => t('Token type designed for Orange icons')
+  ];
+
   $icones = getIcomoonIconsNames();
   foreach ($icones as $icone){
     $tokens['icomoon']['icomoon-'.$icone] = array(
@@ -40,11 +45,18 @@ function oab_icomoon_token_info() {
       'description' => t("<span class=\"text-primary icon icomoon @iconName\"></span>", array('@iconName' => 'icomoon-'.$icone))
     );
   }
+  $iconesOrange = getOrangeIconsNames();
+  foreach ($iconesOrange as $icon){
+    $tokens['icon_orange']['icon-'.$icon] = [
+      'name' => $icon,
+      'description' => t("<span class=\"text-primary icon @iconName\"></span>", ['@iconName' => 'icon-'.$icon])
+    ];
+  }
 
-  return array(
+  return [
     'types' => $types,
     'tokens' => $tokens
-  );
+  ];
 }
 /*
 * implement hook_token()
@@ -53,7 +65,7 @@ function oab_icomoon_tokens($type, $tokens, array $data, array $options, \Drupal
   $replacements = array();
   // Replacement values for tokens that can be calculated without any additional
   // data.
-  if ($type == 'icomoon') {
+  if ($type == 'icomoon' || $type == 'icon_orange') {
     foreach ($tokens as $name => $original) {
       $replacements[$original] = $name;
     }
@@ -70,6 +82,21 @@ function getIcomoonIconsNames(){
   $path_to_json_file = $service_path_resolver->getPath('module', 'oab_icomoon') . '/icomoon/selection.json';
   $datas = json_decode(file_get_contents($path_to_json_file), true);
 
+  foreach ($datas['icons'] as $data){
+    if(isset($data['properties']['name'])) {
+      $names[] = $data['properties']['name'];
+    }
+  }
+  return $names;
+}
+
+function getOrangeIconsNames(){
+  /** @var ExtensionPathResolver $service_path_resolver */
+  $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+  $names = [];
+  $path_to_json_file = $service_path_resolver->getPath('theme', 'theme_one_i') . '/assets/fonts/icon-orange.json';
+  $datas = json_decode(file_get_contents($path_to_json_file), true);
   foreach ($datas['icons'] as $data){
     if(isset($data['properties']['name'])) {
       $names[] = $data['properties']['name'];

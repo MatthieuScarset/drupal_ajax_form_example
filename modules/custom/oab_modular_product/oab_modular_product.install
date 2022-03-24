@@ -1,5 +1,12 @@
 <?php
 
-function oab_ob1_adapter_install() {
+function oab_modular_product_install() {
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_modular_product', 8000);
+}
+
+/**
+ * Repeat because, pas sur que c'est passé
+ */
+function oab_modular_product_update_9001() {
   \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_modular_product', 8000);
 }
