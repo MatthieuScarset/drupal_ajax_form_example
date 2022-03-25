@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_frontoffice\Plugin\Block;
+namespace Drupal\oab_modular_product\Plugin\Block;
 
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Access\AccessResultForbidden;
@@ -29,6 +29,9 @@ use Drupal\taxonomy\Entity\Term;
  */
 class TopZoneModularProductBlock extends BlockBase {
 
+  /**
+   * @throws \Drupal\Component\Plugin\Exception\ContextException
+   */
   public function access(AccountInterface $account, $return_as_object = FALSE) {
     $node = $this->getContextValue('node');
 
@@ -38,7 +41,10 @@ class TopZoneModularProductBlock extends BlockBase {
     return $return_as_object ? AccessResultForbidden::forbidden() : false;
   }
 
-  public function build() {
+  /**
+   * @throws \Drupal\Component\Plugin\Exception\ContextException
+   */
+  public function build(): array {
     $block = [];
     $node = $this->getContextValue('node');
 

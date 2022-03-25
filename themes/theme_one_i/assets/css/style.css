@@ -190,9 +190,13 @@
     padding: 1rem 6rem;
   }
 }
+.top-zone-modular-product .block-image {
+  text-align: center;
+}
 .top-zone-modular-product .block-image img {
   width: 100%;
   height: auto;
+  max-width: 40.3125rem;
 }
 
 .header-page-categ .block-titre-teaser h1 {
