@@ -1,3 +1,12 @@
-.token-tree tr td .icomoon{
+.token-tree-dialog {
+  min-width: 900px !important;
+}
+
+.token-tree tr td .icon {
+  font-size: 1.55rem;
+  padding-left: 3.25rem;
+}
+
+.token-tree tr td .icomoon {
   font-size: 2rem;
 }
