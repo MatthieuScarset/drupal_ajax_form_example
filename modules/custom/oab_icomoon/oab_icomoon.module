@@ -33,21 +33,16 @@ function oab_icomoon_token_info() {
     'description' => t('Token type designed for icomoon')
   );
 
-  $types['icon_orange'] = [
-    'name' => t('Orange Icon tokens type'),
-    'description' => t('Token type designed for Orange icons')
-  ];
-
   $icones = getIcomoonIconsNames();
   foreach ($icones as $icone){
     $tokens['icomoon']['icomoon-'.$icone] = array(
       'name' => $icone,
-      'description' => t("<span class=\"text-primary icon icomoon @iconName\"></span>", array('@iconName' => 'icomoon-'.$icone))
+      'description' => t("<span class=\"text-primary icomoon @iconName\"></span>", array('@iconName' => 'icomoon-'.$icone))
     );
   }
   $iconesOrange = getOrangeIconsNames();
   foreach ($iconesOrange as $icon){
-    $tokens['icon_orange']['icon-'.$icon] = [
+    $tokens['icomoon']['icon-'.$icon] = [
       'name' => $icon,
       'description' => t("<span class=\"text-primary icon @iconName\"></span>", ['@iconName' => 'icon-'.$icon])
     ];
@@ -65,7 +60,7 @@ function oab_icomoon_tokens($type, $tokens, array $data, array $options, \Drupal
   $replacements = array();
   // Replacement values for tokens that can be calculated without any additional
   // data.
-  if ($type == 'icomoon' || $type == 'icon_orange') {
+  if ($type == 'icomoon') {
     foreach ($tokens as $name => $original) {
       $replacements[$original] = $name;
     }
