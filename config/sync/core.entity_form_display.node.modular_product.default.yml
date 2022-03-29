@@ -19,6 +19,7 @@ dependencies:
     - field_group
     - link
     - oab_backoffice
+    - paragraphs
     - path
     - workbench_moderation
 third_party_settings:
@@ -182,7 +183,7 @@ content:
     weight: 30
     region: content
     settings:
-      size: 60
+      size: 80
       placeholder: ''
     third_party_settings: {  }
   field_teaser:

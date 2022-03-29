@@ -79,9 +79,11 @@
   }
 
   .block-image {
+    text-align: center;
     img {
       width: 100%;
       height: auto;
+      max-width: 40.3125rem;
     }
   }
 }

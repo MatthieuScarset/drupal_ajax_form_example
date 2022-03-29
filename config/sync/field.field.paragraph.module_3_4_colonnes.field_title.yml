@@ -10,7 +10,7 @@ field_name: field_title
 entity_type: paragraph
 bundle: module_3_4_colonnes
 label: 'Title module'
-description: ''
+description: 'Max 65 characters'
 required: false
 translatable: true
 default_value: {  }
