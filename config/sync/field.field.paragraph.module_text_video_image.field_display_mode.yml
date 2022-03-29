@@ -11,7 +11,7 @@ id: paragraph.module_text_video_image.field_display_mode
 field_name: field_display_mode
 entity_type: paragraph
 bundle: module_text_video_image
-label: 'Display mode'
+label: 'Display image/video on'
 description: ''
 required: true
 translatable: false

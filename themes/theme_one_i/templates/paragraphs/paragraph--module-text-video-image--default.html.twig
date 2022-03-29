@@ -52,7 +52,7 @@
     <div class="col-12 pr-0 pr-md-1">
       {% if paragraph.field_display_mode.value == 'left' %}
       <div class="row w-100 justify-content-between left">
-          <div class="col-12 col-lg-6">
+          <div class="col-12 col-lg-6 align-top text-align-center">
               {% if paragraph.field_media_type.value == 'video' %}
                 {{ content.field_video }}
               {% else %}
@@ -61,7 +61,7 @@
             </div>
             <div class="col-12 col-lg-5">
               <h2>{{ content.field_title }}</h2>
-              <div class="lead font-weight-bold">{{ content.field_teaser }}</div>
+              <div class="lead font-weight-bold">{{ content.field_highlight }}</div>
               <div class="standard">{{ content.field_standard_text }}</div>
               {{ content.field_call_to_action_link }}
             </div>
@@ -70,11 +70,11 @@
         <div class="row w-100 justify-content-between right">
           <div class="col-12 col-lg-5">
             <h2>{{ content.field_title }}</h2>
-            <div class="lead font-weight-bold">{{ content.field_teaser }}</div>
+            <div class="lead font-weight-bold">{{ content.field_highlight }}</div>
             <div class="standard">{{ content.field_standard_text }}</div>
             {{ content.field_call_to_action_link }}
           </div>
-          <div class="col-12 col-lg-6">
+          <div class="col-12 col-lg-6 align-top text-align-center">
             {% if paragraph.field_media_type.value == 'video' %}
               {{ content.field_video }}
             {% else %}
