@@ -35,7 +35,7 @@ content:
     weight: 0
     region: content
     settings:
-      size: 60
+      size: 80
       placeholder: ''
     third_party_settings: {  }
 hidden:

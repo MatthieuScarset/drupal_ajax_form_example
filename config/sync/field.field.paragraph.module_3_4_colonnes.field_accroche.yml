@@ -10,7 +10,7 @@ field_name: field_accroche
 entity_type: paragraph
 bundle: module_3_4_colonnes
 label: 'Text d''accroche module'
-description: ''
+description: 'Max 150 characters'
 required: false
 translatable: true
 default_value: {  }

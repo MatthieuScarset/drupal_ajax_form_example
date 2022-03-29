@@ -6,26 +6,83 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_field_widget_form_alter().
  */
 function oab_modular_product_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
-  if ($element['#paragraph_type'] == 'module_benefits') {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 65;
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = 75;
-      $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = 150;
-      $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
 
+  /*
+   * Ici, on ne va gérer que les alterations du formulaire du paragraph
+   */
+  if (!isset($element['#paragraph_type']) ) {
+    return;
   }
 
-  if ($element['#paragraph_type'] == 'module_benefits_item') {
-    $element['subform']["field_icon"][0]['token_tree'] = [
-      '#theme' => 'token_tree_link',
-      '#token_types' => ['icomoon'],
-      '#weight' => 90,
-      '#global_types' => FALSE,
-      '#click_insert' => TRUE,
-    ];
-    $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 70;
-    $element['subform']['field_title']['widget'][0]['value']['#size'] = 80;
-    $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = 130;
-    $element['subform']['field_description']['widget'][0]['value']['#size'] = 140;
+  /** @var \Drupal\oab_modular_product\Services\OabModularProductService $max_character */
+  $max_character = \Drupal::service('oab_modular_product.settings');
 
+  $modules = [
+    'module_benefits',
+    'module_3_4_colonnes'
+  ];
+
+  $module_items = [
+    'module_benefits_item',
+    'module_3_4_colonnes_items'
+  ];
+
+  if (in_array($element['#paragraph_type'], $modules)) {
+    if (isset($element['subform']['field_title'])) {
+      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_character->getModuleTitleMaxCharacter();
+      $element['subform']['field_title']['widget'][0]['value']['#size'] = 75;
+    }
+
+    if (isset($element['subform']['field_accroche'])) {
+      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_character->getModuleDescriptionMaxCharacter();
+    }
+
+    if (isset($element['subform']['field_highlight'])) {
+      $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $max_character->getModuleDescriptionMaxCharacter();
+      $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
+    }
+  }
+
+  if (in_array($element['#paragraph_type'], $module_items)) {
+    if (isset($element['subform']["field_icon"])) {
+      $element['subform']["field_icon"][0]['token_tree'] = [
+        '#theme' => 'token_tree_link',
+        '#token_types' => ['icomoon'],
+        '#weight' => 90,
+        '#global_types' => FALSE,
+        '#click_insert' => TRUE,
+      ];
+    }
+
+    if (isset($element['subform']['field_title'])) {
+      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_character->getModuleItemsTitleMaxCharacter();
+      $element['subform']['field_title']['widget'][0]['value']['#size'] = 80;
+    }
+
+    if (isset($element['subform']['field_accroche'])) {
+      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_character->getModuleItemsDescriptionMaxCharacter();
+    }
+
+    if(isset($element['subform']['field_description'])) {
+      $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $max_character->getModuleItemsDescriptionMaxCharacter();
+      $element['subform']['field_description']['widget'][0]['value']['#size'] = 140;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /** @var \Drupal\oab_modular_product\Services\OabModularProductService $max_character */
+  $max_character = \Drupal::service('oab_modular_product.settings');
+
+  if (isset($form['field_product_name'])) {
+    $form['field_product_name']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneTitleMaxCharacter();
+  }
+
+  if (isset($form['field_teaser'])) {
+    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneTitleMaxCharacter();
   }
 }

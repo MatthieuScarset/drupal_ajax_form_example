@@ -1,0 +1,11 @@
+modular_product_titre: {  }
+mp_title:
+  top_zone:
+    title: '70'
+    description: '255'
+  module:
+    title: '65'
+    description: '150'
+  module_items:
+    title: '70'
+    description: '130'
