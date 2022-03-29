@@ -1,0 +1,17 @@
+.paragraph--type--module-text-video-image{
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  .left {
+    .field--name-field-visual {
+      -webkit-filter: drop-shadow(-15px 15px 0 $gray2);
+      filter: drop-shadow(-15px 15px 0 $gray2);
+    }
+  }
+  .right {
+    .field--name-field-visual {
+      -webkit-filter: drop-shadow(15px 15px 0 $gray2);
+      filter: drop-shadow(15px 15px 0 $gray2);
+    }
+  }
+}

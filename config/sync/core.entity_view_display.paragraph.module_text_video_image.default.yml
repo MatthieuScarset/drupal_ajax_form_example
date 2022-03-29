@@ -3,8 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_text_video_image.field_call_to_action
+    - field.field.paragraph.module_text_video_image.field_call_to_action_link
     - field.field.paragraph.module_text_video_image.field_display_mode
+    - field.field.paragraph.module_text_video_image.field_media_type
     - field.field.paragraph.module_text_video_image.field_standard_text
     - field.field.paragraph.module_text_video_image.field_teaser
     - field.field.paragraph.module_text_video_image.field_title
@@ -18,7 +19,7 @@ targetEntityType: paragraph
 bundle: module_text_video_image
 mode: default
 content:
-  field_call_to_action:
+  field_call_to_action_link:
     type: link
     label: hidden
     settings:
@@ -28,14 +29,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 5
     region: content
   field_standard_text:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_teaser:
     type: basic_string
@@ -65,10 +66,11 @@ content:
     type: entity_reference_entity_view
     label: hidden
     settings:
-      view_mode: default
+      view_mode: image_max_630x630
       link: false
     third_party_settings: {  }
-    weight: 5
+    weight: 4
     region: content
 hidden:
   field_display_mode: true
+  field_media_type: true

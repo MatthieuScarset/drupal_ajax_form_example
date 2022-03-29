@@ -4,8 +4,9 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
-    - field.field.paragraph.module_text_video_image.field_call_to_action
+    - field.field.paragraph.module_text_video_image.field_call_to_action_link
     - field.field.paragraph.module_text_video_image.field_display_mode
+    - field.field.paragraph.module_text_video_image.field_media_type
     - field.field.paragraph.module_text_video_image.field_standard_text
     - field.field.paragraph.module_text_video_image.field_teaser
     - field.field.paragraph.module_text_video_image.field_title
@@ -20,9 +21,9 @@ targetEntityType: paragraph
 bundle: module_text_video_image
 mode: default
 content:
-  field_call_to_action:
+  field_call_to_action_link:
     type: link_default
-    weight: 5
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -31,6 +32,12 @@ content:
   field_display_mode:
     type: options_buttons
     weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media_type:
+    type: options_buttons
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -60,7 +67,7 @@ content:
     third_party_settings: {  }
   field_video:
     type: entity_browser_entity_reference
-    weight: 4
+    weight: 5
     region: content
     settings:
       entity_browser: browser_modal_for_embed_videos
@@ -78,12 +85,13 @@ content:
     region: content
     settings:
       entity_browser: browse_media_modal
-      field_widget_display: label
+      field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
       field_widget_replace: false
       open: false
-      field_widget_display_settings: {  }
+      field_widget_display_settings:
+        view_mode: image_max_630x630
       selection_mode: selection_append
     third_party_settings: {  }
 hidden:

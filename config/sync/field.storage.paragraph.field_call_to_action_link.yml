@@ -1,12 +1,12 @@
-uuid: 992dc9b3-bf20-4841-b7bd-d19802061f5d
+uuid: b35a7a0a-231b-442c-a091-3a4c6691dfbd
 langcode: en
 status: true
 dependencies:
   module:
     - link
     - paragraphs
-id: paragraph.field_call_to_action
-field_name: field_call_to_action
+id: paragraph.field_call_to_action_link
+field_name: field_call_to_action_link
 entity_type: paragraph
 type: link
 settings: {  }

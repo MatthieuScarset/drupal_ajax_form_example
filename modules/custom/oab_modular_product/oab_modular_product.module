@@ -16,3 +16,38 @@ function oab_modular_product_field_widget_paragraphs_form_alter(&$element, FormS
      ];
    }
 }
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function oab_modular_product_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
+  if ($element['#paragraph_type'] == 'module_text_video_image') {
+
+    $element['subform']['field_visual']['#states'] = [
+      'visible' => [
+        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'image'],
+      ],
+      'required' => [
+        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'image'],
+      ]
+    ];
+    $element['subform']['field_video']['#states'] = [
+      'visible' => [
+        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'video'],
+      ],
+      'required' => [
+        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'video'],
+      ]
+    ];
+
+  }
+}
+/**
+ * Implements hook_form_alter().
+ */
+/*
+function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if (in_array($form, array('node_modular_product_edit_form', 'node_modular_product_form'))) {
+
+  }
+}*/

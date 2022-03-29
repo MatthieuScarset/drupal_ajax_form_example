@@ -972,6 +972,17 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   }
 }
 
+.paragraph--type--module-text-video-image {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.paragraph--type--module-text-video-image .left .field--name-field-visual {
+  filter: drop-shadow(-15px 15px 0 #f4f4f4);
+}
+.paragraph--type--module-text-video-image .right .field--name-field-visual {
+  filter: drop-shadow(15px 15px 0 #f4f4f4);
+}
+
 .o-footer .footer-div-border {
   border-top: 1px solid #333;
 }

@@ -70,21 +70,21 @@ settings:
       marketo:
         weight: 32
         enabled: false
-      module_text_video_image:
-        weight: 34
-        enabled: true
-      module_benefits:
-        weight: 37
-        enabled: true
-      module_benefits_item:
-        weight: 38
-        enabled: false
       module_3_4_colonnes:
         weight: 35
         enabled: true
       module_3_4_colonnes_items:
         weight: 36
         enabled: false
+      module_benefits:
+        weight: 37
+        enabled: true
+      module_benefits_item:
+        weight: 38
+        enabled: false
+      module_text_video_image:
+        weight: 34
+        enabled: true
       paragraph_block_rebond:
         weight: 33
         enabled: false
