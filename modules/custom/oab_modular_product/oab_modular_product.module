@@ -83,6 +83,6 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
   }
 
   if (isset($form['field_teaser'])) {
-    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneTitleMaxCharacter();
+    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneDescriptionMaxCharacter();
   }
 }
