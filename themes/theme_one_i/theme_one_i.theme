@@ -335,27 +335,35 @@ function theme_one_i_theme_suggestions_view_alter(array &$suggestions, array $va
  * @param array $suggestions
  */
 function theme_one_i_theme_suggestions_page_alter(array &$suggestions, array $variables, $hook): void {
-  $suggestions = array_merge($suggestions, __suggestion_nodes($hook));
+  if ($node = Drupal::routeMatch()->getParameter('node')) {
+    if (is_object($node)) {
+      $content_type = $node->bundle();
+      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $content_type, $content_type === 'modular_product'));
+    }
+  }
 }
 
 /**
  * Implements hook_theme_suggestions_HOOK().
  */
 function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $variables, $hook): void {
-  $suggestions = array_merge($suggestions, __suggestion_nodes($hook));
-}
-
-function __suggestion_nodes($hook): array {
-  $suggestions = [];
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions[] = $hook . '__' . $content_type;
+      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], $content_type === "modular_product"));
+    }
+  }
+}
 
-      if ($content_type === 'modular_product') {
-        $suggestions[] = $hook . '__' . $content_type . '__e2e';
-        $suggestions[] = $hook . '__e2e';
-      }
+function __suggestion_nodes(string $hook, ?string $complement, bool $e2e = false): array {
+  $suggestions = [];
+
+  $suggestions[] = $hook . '__' . $complement;
+
+  if ($e2e) {
+    $suggestions[] = $hook . '__e2e';
+    if (isset($complement)) {
+      $suggestions[] = $hook . '__' . $complement . '__e2e';
     }
   }
 

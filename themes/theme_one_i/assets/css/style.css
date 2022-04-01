@@ -976,6 +976,13 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   }
 }
 
+.items-module-detail-offre .field-items-modules {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  flex-wrap: unset;
+  scrollbar-width: none;
+}
+
 .o-footer .footer-div-border {
   border-top: 1px solid #333;
 }
