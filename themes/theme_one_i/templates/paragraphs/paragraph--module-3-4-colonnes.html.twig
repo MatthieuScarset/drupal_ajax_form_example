@@ -48,6 +48,7 @@
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
+    <div class="container-fluid site-width">
     {% block content %}
       <h2 class="col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
 
@@ -59,5 +60,6 @@
         {{ content.field_items }}
       </div>
     {% endblock %}
+    </div>
   </div>
 {% endblock paragraph %}
