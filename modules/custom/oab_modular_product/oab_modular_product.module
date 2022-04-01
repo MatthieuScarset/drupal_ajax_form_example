@@ -14,6 +14,12 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
 
   }
 
+  if ($element['#paragraph_type'] == 'module_partner') {
+    $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 65;
+    $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = 150;
+
+  }
+
   if ($element['#paragraph_type'] == 'module_benefits_item') {
     $element['subform']["field_icon"][0]['token_tree'] = [
       '#theme' => 'token_tree_link',

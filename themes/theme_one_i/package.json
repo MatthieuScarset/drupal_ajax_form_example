@@ -1,7 +1,7 @@
 {
-  "name": "sass_theme",
+  "name": "theme_one_i",
   "version": "1.0.0",
-  "description": "SassthemewithBootstrap",
+  "description": "Sass Theme for One-I",
   "license": "MIT",
   "scripts": {
     "build": "webpack",

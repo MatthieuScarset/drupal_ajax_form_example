@@ -98,8 +98,6 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
 }
 
 function theme_one_i_preprocess_field__paragraph__field_item(&$variables) {
-
-
   $parent = $variables['element']['#object'];
 
   $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
@@ -109,6 +107,14 @@ function theme_one_i_preprocess_field__paragraph__field_item(&$variables) {
     $is_numerical = true;
   }
   $variables['is_numerical'] = $is_numerical;
+}
+
+function theme_one_i_preprocess_node(&$variables) {
+  $node_type = $variables['node']->type->entity->get('type');
+
+  if ($node_type === 'modular_product') {
+    $variables['#attached']['library'][] = 'theme_one_i/modular_product';
+  }
 }
 
 /*****************************************/
