@@ -5,8 +5,9 @@ dependencies:
   config:
     - field.storage.node.field_modules
     - node.type.modular_product
-    - paragraphs.paragraphs_type.module_benefits
     - paragraphs.paragraphs_type.module_3_4_colonnes
+    - paragraphs.paragraphs_type.module_benefits
+    - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -27,6 +28,7 @@ settings:
       module_3_4_colonnes: module_3_4_colonnes
       paragraph_wysiwyg: paragraph_wysiwyg
       module_benefits: module_benefits
+      module_partner: module_partner
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -80,6 +82,9 @@ settings:
       module_benefits_item:
         weight: 38
         enabled: false
+      module_partner:
+        weight: 42
+        enabled: true
       paragraph_block_rebond:
         weight: 33
         enabled: false

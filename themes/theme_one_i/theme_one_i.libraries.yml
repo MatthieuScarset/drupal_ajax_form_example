@@ -26,11 +26,6 @@ global-styling:
 
   dependencies:
 #  Jquery core drupal mis en commentaire car c'est une version ligth et qu'il manque des éléments nécessaire a ob1
-#    - core/jquery
-#    - core/jquery.once
-#    - core/jquery.ui
-#    - core/jquery.ui.effects.slide
-#    - core/popperjs
     - core/drupal
 #    - theme_one_i/socialbar      # Currently provided by theme_boosted
     - oab_icomoon/icomoon
@@ -49,3 +44,8 @@ contact-button:
   version: VERSION
   js:
     js/contact_button.js: {}
+
+modular_product:
+  version: VERSION
+  js:
+    assets/js/modular_product.min.js: {attributes: { type: module }}
