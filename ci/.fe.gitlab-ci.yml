@@ -11,6 +11,8 @@ variables:
   COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
   ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002/ops_bdx"
   VAULT_ADDR: $VAULT_ADDR
+  VAULT_PATH: /prj/portail-obs/compte-projet
+  VAULT_OPTS: "-tls-skip-verify=true"
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
@@ -32,12 +34,6 @@ Prepare Drupal:
 Vault:
   stage: prepare
   image: vault
-  variables:
-    VAULT_PATH: /prj/portail-obs/compte-projet
-    VAULT_OPTS: "-tls-skip-verify=true"
-    VAULT_ADDR: $VAULT_ADDR
-    COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV
-    COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
   before_script:
     - apk add jq
   script:
