@@ -1,4 +1,3 @@
-
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
 #  - prepare
@@ -75,12 +74,9 @@ stages:          # List of stages for jobs, and their order of execution
 
 Build Image:
   stage: build_image
-  image: docker:19.03.12
-  variables:
-#    DOCKER_HOST: tcp://localhost:2375
-    DOCKER_TLS_CERTDIR: "/certs"
+  image: docker:latest
   services:
-    - name: docker:19.03.12-dind
+    - name: docker:dind
       alias: docker
 #  dependencies:
 #    - Build Drupal
