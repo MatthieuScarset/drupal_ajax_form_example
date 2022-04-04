@@ -53,7 +53,7 @@ Vault:
       dotenv: vault.env
     expire_in: 10 minutes
   tags:
-    - standard
+    - image_build
 
 #Build Drupal:
 #  stage: build_drupal
