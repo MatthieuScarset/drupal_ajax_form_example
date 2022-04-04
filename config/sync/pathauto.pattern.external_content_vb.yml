@@ -12,20 +12,20 @@ pattern: '/visions-business/[node:title]'
 selection_criteria:
   091098b1-769c-499e-bfc1-9795ab1ea71d:
     id: node_type
-    bundles:
-      external_content: external_content
     negate: false
+    uuid: 091098b1-769c-499e-bfc1-9795ab1ea71d
     context_mapping:
       node: node
-    uuid: 091098b1-769c-499e-bfc1-9795ab1ea71d
+    bundles:
+      external_content: external_content
   2ffc6b01-8bee-4ffb-afd1-fde3afa2cf8e:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: 2ffc6b01-8bee-4ffb-afd1-fde3afa2cf8e
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 2ffc6b01-8bee-4ffb-afd1-fde3afa2cf8e
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:

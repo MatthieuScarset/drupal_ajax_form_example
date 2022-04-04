@@ -22,51 +22,51 @@ bundle: homepage_news
 mode: default
 content:
   field_block_size:
+    type: options_select
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_chapo:
+    type: text_textarea
     weight: 2
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_highlight_linked_content:
+    type: link_default
     weight: 7
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_highlight_text:
+    type: string_textfield
     weight: 5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_image:
-    weight: 0
-    settings:
-      preview_image_style: homepage_news
-      progress_indicator: throbber
-    third_party_settings: {  }
     type: image_image
+    weight: 0
     region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: homepage_news
+    third_party_settings: {  }
   field_title:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
 hidden:
   created: true
   field_link_news: true

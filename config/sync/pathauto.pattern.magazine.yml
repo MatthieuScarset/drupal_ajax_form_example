@@ -12,21 +12,21 @@ pattern: 'magazine/[node:title]'
 selection_criteria:
   a061c975-76fb-4c44-928d-15369008db61:
     id: node_type
-    bundles:
-      magazine: magazine
     negate: false
+    uuid: a061c975-76fb-4c44-928d-15369008db61
     context_mapping:
       node: node
-    uuid: a061c975-76fb-4c44-928d-15369008db61
+    bundles:
+      magazine: magazine
   04e84c4d-b7cb-44f5-b1c3-a091ff795f85:
     id: language
+    negate: false
+    uuid: 04e84c4d-b7cb-44f5-b1c3-a091ff795f85
+    context_mapping:
+      language: 'node:langcode:language'
     langcodes:
       en: en
       fr: fr
-    negate: false
-    context_mapping:
-      language: 'node:langcode:language'
-    uuid: 04e84c4d-b7cb-44f5-b1c3-a091ff795f85
 selection_logic: and
 weight: -10
 relationships:

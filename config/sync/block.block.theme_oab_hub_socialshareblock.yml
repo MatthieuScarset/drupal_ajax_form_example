@@ -15,8 +15,8 @@ plugin: social_share_block
 settings:
   id: social_share_block
   label: 'Social Share Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   social_share_custom_text:
     value: "<div class=\"collapse\" id=\"social-share\">\r\n<div class=\"container\" id=\"c1\">\r\n<div id=\"sharebar\">&nbsp;</div>\r\n</div>\r\n</div>\r\n"
     format: full_html

@@ -1,11 +1,14 @@
 <?php
 namespace Drupal\oab_ckeditor\Plugin\CKEditorPlugin;
-use Drupal\ckeditor\CKEditorPluginInterface;
-use Drupal\ckeditor\CKEditorPluginButtonsInterface;
-use Drupal\Component\Plugin\PluginBase;
 use Drupal\ckeditor\Annotation\CKEditorPlugin;
+use Drupal\ckeditor\CKEditorPluginInterface;
+use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Defines the "base widget" plugin.
  *
@@ -15,8 +18,28 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class BaseWidget extends PluginBase implements CKEditorPluginInterface
+class BaseWidget extends PluginBase implements CKEditorPluginInterface, ContainerFactoryPluginInterface
 {
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('extension.path.resolver')
+    );
+  }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
@@ -43,7 +66,7 @@ class BaseWidget extends PluginBase implements CKEditorPluginInterface
    */
   public function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
+    $plugin = $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';
     return $plugin;
   }
   /**

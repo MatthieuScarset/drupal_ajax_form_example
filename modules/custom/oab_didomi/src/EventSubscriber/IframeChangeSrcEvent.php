@@ -7,7 +7,6 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Render\Renderer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 

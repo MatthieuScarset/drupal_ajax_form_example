@@ -1,7 +1,11 @@
 uuid: null
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - system
+    - toolbar
+    - webform
 id: webform_business_analyst
 label: 'Webform Business Analyst'
 weight: 10

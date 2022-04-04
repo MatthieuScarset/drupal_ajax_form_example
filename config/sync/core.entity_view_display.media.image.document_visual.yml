@@ -16,13 +16,13 @@ bundle: image
 mode: document_visual
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: max_650
       image_link: ''
+      image_style: max_650
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

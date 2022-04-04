@@ -17,13 +17,13 @@ bundle: image
 mode: subhome_image
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: subhome
       image_link: content
+      image_style: subhome
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

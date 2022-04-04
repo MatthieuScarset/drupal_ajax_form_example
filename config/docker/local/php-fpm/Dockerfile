@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.0-fpm
 
 WORKDIR "/application"
 
@@ -13,6 +13,7 @@ ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
     vim \
+    libzip-dev \
     zip \
     unzip \
     wget \
@@ -24,8 +25,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-d
 	&& docker-php-ext-enable imagick \
 	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
+RUN docker-php-ext-install zip
+
 # GD & MySql
-RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir \
+RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype \
   && docker-php-ext-install gd pdo_mysql \
   && docker-php-ext-enable gd
 
@@ -55,13 +58,14 @@ RUN apt-get update && apt-get install -y nodejs npm
 # Install yarn
 RUN npm install -g yarn
 
+# Verifie si le groupe oab_web existe et la crée s'il n'existe pas
+RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true
+
 # User
 RUN groupadd -g $GID oab_web
 RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
-#Install drush
-RUN composer global require drush/drush:9.7.3
 
-# Export
-ENV PATH="$PATH:/home/oab_web/.config/composer/vendor/bin"
+# Export vendor bin to get Drush
+ENV PATH="$PATH:/application/vendor/bin"

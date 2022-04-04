@@ -1,14 +1,28 @@
 <?php
 
+use Drupal\system\Plugin\Archiver\Zip;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\oab_marketo\PhotoCommercialeService;
 
+/**
+ * @throws \Drupal\Core\Archiver\ArchiverException
+ */
 function oab_marketo_importPhotoCommerciale($file_name, &$context) {
 
-  $path_zip_file = \Drupal::service('file_system')->realpath($file_name);
-  $path_to_folder = \Drupal::service('file_system')->realpath(PhotoCommercialeService::IMPORT_DIRECTORY);
+  /** @var FileSystemInterface $file_system_service */
+  $file_system_service = Drupal::service('file_system');
 
-  $zip = new \Drupal\Core\Archiver\Zip($path_zip_file);
+  $path_zip_file = $file_system_service->realpath($file_name);
+  $path_to_folder = $file_system_service->realpath(PhotoCommercialeService::IMPORT_DIRECTORY);
+
+  /** @var \Drupal\Core\Archiver\ArchiverManager $archiver */
+  $archiver = Drupal::service('plugin.manager.archiver');
+
+  /** @var Zip $zip */
+  $zip = $archiver->getInstance(['filepath' => $path_zip_file]);
+
+
   $zip->extract($path_to_folder);
 
   $file_name_extension = substr($file_name, -8, 8);
@@ -23,12 +37,12 @@ function oab_marketo_importPhotoCommerciale($file_name, &$context) {
   if (isset($context['sandbox']['file_position'])) {
     fseek($file, $context['sandbox']['file_position']);
   } else {
-    //Pour vérifier si on avancer dans la lecture du fichier et éviter des boucles infinies
+    //Pour vérifier si on avance dans la lecture du fichier et éviter des boucles infinies
     $context['sandbox']['etat'] = 0;
   }
 
   /** @var PhotoCommercialeService $service */
-  $service = \Drupal::service('oab_marketo.photo_commerciale.service');
+  $service = Drupal::service('oab_marketo.photo_commerciale.service');
 
   $i = 0;
   while ($i < 100 && false !== ($row = fgetcsv($file, 0, ';'))) {
@@ -43,32 +57,35 @@ function oab_marketo_importPhotoCommerciale($file_name, &$context) {
 
   $context['sandbox']['file_position'] = ftell($file);
   $context['sandbox']['etat']++;
-  \Drupal::logger('oab_import')->info(json_encode($context));
+  Drupal::logger('oab_import')->info(json_encode($context));
   $context['finished'] = feof($file);
 
 }
 
+/**
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
 function oab_marketo_clearPhotoCommercialeTable(&$context) {
 
   if (empty($context['sandbox'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current_id'] = 0;
-    $context['sandbox']['max'] = \Drupal::database()
+    $context['sandbox']['max'] = Drupal::database()
       ->query('SELECT COUNT(DISTINCT id) FROM photo_commerciale_item')
       ->fetchField();
   }
   $limit = 100;
-  $result = \Drupal::database()
+  $result = Drupal::database()
     ->select('photo_commerciale_item')
     ->fields('photo_commerciale_item', ['id'])
     ->condition('id', $context['sandbox']['current_id'], '>')
     ->orderBy('id')
     ->range(0, $limit)
     ->execute()
-    ->fetchCol('id');
+    ->fetchCol();
 
   /** @var EntityStorageInterface $storage */
-  $storage = \Drupal::service('entity_type.manager')->getStorage('photo_commerciale_item');
+  $storage = Drupal::service('entity_type.manager')->getStorage('photo_commerciale_item');
   $entities = $storage->loadMultiple($result);
   $storage->delete($entities);
 
@@ -99,5 +116,5 @@ function oab_marketo_deleteFile($file, &$context) {
 }
 
 function oab_marketo_endingBatch($success, $results, $operations) {
-  \Drupal::logger('oab_import')->info(t("Fichier importé"));
+  Drupal::logger('oab_import')->info(t("Fichier importé"));
 }

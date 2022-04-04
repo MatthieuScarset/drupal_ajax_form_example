@@ -21,30 +21,27 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       subhome_presse_carrousel: subhome_presse_carrousel
+    negate: 0
     target_bundles_drag_drop:
-      subhome_presse_carrousel:
-        enabled: true
-        weight: 14
+      default_button:
+        weight: 17
+        enabled: false
       home_banner:
         weight: 15
         enabled: false
+      home_caroussel:
+        weight: 19
+        enabled: false
       home_column:
         weight: 16
-        enabled: false
-      default_button:
-        weight: 17
         enabled: false
       home_column_section:
         weight: 17
         enabled: false
       home_playlist:
         weight: 18
-        enabled: false
-      home_caroussel:
-        weight: 19
         enabled: false
       home_thematic_columns:
         weight: 19
@@ -61,6 +58,9 @@ settings:
       infography_partner:
         weight: 23
         enabled: false
+      marketo:
+        weight: 28
+        enabled: false
       paragraph_block_rebond:
         weight: 24
         enabled: false
@@ -70,7 +70,7 @@ settings:
       related_content:
         weight: 26
         enabled: false
-      marketo:
-        weight: 28
-        enabled: false
+      subhome_presse_carrousel:
+        weight: 14
+        enabled: true
 field_type: entity_reference_revisions

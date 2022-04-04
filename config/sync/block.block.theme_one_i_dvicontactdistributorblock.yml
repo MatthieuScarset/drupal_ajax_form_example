@@ -16,15 +16,15 @@ plugin: dvi_contact_distributor_block
 settings:
   id: dvi_contact_distributor_block
   label: 'Dvi - Contact Distributor Block'
-  provider: oab_frontoffice
   label_display: visible
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      distributor: distributor
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      distributor: distributor

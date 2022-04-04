@@ -16,8 +16,8 @@ plugin: csp_subnav_block
 settings:
   id: csp_subnav_block
   label: 'CSP Subnav'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   csp_list_link: /fr/bvpn-list
   csp_list_link_text: 'Liste des services Cloud'
   csp_map_link: /fr/bvpn-map
@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/bvpn-list\r\n/bvpn-map"
     negate: false
     context_mapping: {  }
+    pages: "/bvpn-list\r\n/bvpn-map"

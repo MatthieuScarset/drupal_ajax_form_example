@@ -15,15 +15,15 @@ bundle: paragraph_block_rebond
 mode: default
 content:
   field_description:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_link_button:
-    weight: 3
+    type: link_separate
     label: hidden
     settings:
       trim_length: 80
@@ -32,14 +32,14 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link_separate
+    weight: 3
     region: content
   field_title:
-    weight: 0
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 0
     region: content
 hidden: {  }

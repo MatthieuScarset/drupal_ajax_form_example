@@ -34,8 +34,8 @@ settings:
         weight: 8
         enabled: false
       infography_partner:
-        enabled: true
         weight: 9
+        enabled: true
       related_content:
         weight: 10
         enabled: false

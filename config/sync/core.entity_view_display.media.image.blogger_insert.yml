@@ -17,13 +17,13 @@ bundle: image
 mode: blogger_insert
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: blogger_insert
       image_link: ''
+      image_style: blogger_insert
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

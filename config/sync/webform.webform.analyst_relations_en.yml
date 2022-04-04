@@ -11,9 +11,9 @@ third_party_settings:
     gdpr_expiration_date: '2019-12-31'
     gdpr_business_analysts: {  }
     gdpr_form_published: false
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 21
 template: false
 archive: false
@@ -21,7 +21,52 @@ id: analyst_relations_en
 title: 'Analyst relations EN'
 description: '<p>Form for analyst relations requests</p>'
 category: Analystes
-elements: "introduction:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1.8rem;\\\">We understand the challenges that industry analysts and consultants face in the rapidly changing telecommunications industry. </span></p>\\r\\n\\r\\n<p><span style=\\\"font-size:1.8rem;\\\">So we strive to make it easy for you to obtain information concerning our company, our strategy, our products and services, our network and the latest Orange Business Services news.</span></p>\\r\\n\\r\\n<p>Please contact us directly as listed below. We will respond to your questions promptly and, if necessary, organize briefings with our experts.</p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\"\n  '#format': full_html\nfirst_name:\n  '#type': textfield\n  '#title': 'First name'\n  '#required': true\nlast_name:\n  '#type': textfield\n  '#title': 'Last name'\n  '#required': true\nemail:\n  '#type': email\n  '#title': Email\n  '#required': true\nphone_number:\n  '#type': tel\n  '#title': 'Phone number'\ncompany:\n  '#type': textfield\n  '#title': Company\nyour_message:\n  '#type': textarea\n  '#title': 'Your message'\npersonal_data:\n  '#type': checkbox\n  '#title': 'personal data'\n  '#description': '<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result.</p></strong>'\n  '#title_display': ''\n  '#required': true\n  '#wrapper_attributes':\n    class:\n      - check-data\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\nprivacy_polycy:\n  '#type': processed_text\n  '#text': \"<p><span style=\\\"font-size:1rem;\\\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\\\"/en/personal-data\\\" target=\\\"_blank\\\">our charter relating to the protection of personal data and privacy./a></u>.</span></p>\\r\\n\"\n  '#format': full_html\ncaptcha:\n  '#type': captcha\n  '#captcha_type': recaptcha/reCAPTCHA\n"
+elements: |
+  introduction:
+    '#type': processed_text
+    '#text': "<p><span style=\"font-size:1.8rem;\">We understand the challenges that industry analysts and consultants face in the rapidly changing telecommunications industry. </span></p>\r\n\r\n<p><span style=\"font-size:1.8rem;\">So we strive to make it easy for you to obtain information concerning our company, our strategy, our products and services, our network and the latest Orange Business Services news.</span></p>\r\n\r\n<p>Please contact us directly as listed below. We will respond to your questions promptly and, if necessary, organize briefings with our experts.</p>\r\n\r\n<p>&nbsp;</p>\r\n"
+    '#format': full_html
+  first_name:
+    '#type': textfield
+    '#title': 'First name'
+    '#required': true
+  last_name:
+    '#type': textfield
+    '#title': 'Last name'
+    '#required': true
+  email:
+    '#type': email
+    '#title': Email
+    '#required': true
+  phone_number:
+    '#type': tel
+    '#title': 'Phone number'
+  company:
+    '#type': textfield
+    '#title': Company
+  your_message:
+    '#type': textarea
+    '#title': 'Your message'
+  personal_data:
+    '#type': checkbox
+    '#title': 'personal data'
+    '#description': '<p><strong>By checking this box and submitting this form, I agree that my personal data will be used to process my request and for the commercial relationship that may result.</p></strong>'
+    '#title_display': ''
+    '#required': true
+    '#wrapper_attributes':
+      class:
+        - check-data
+    '#attributes':
+      class:
+        - check-data
+      style: 'width:auto!important;float:left;margin-right:1rem'
+  privacy_polycy:
+    '#type': processed_text
+    '#text': "<p><span style=\"font-size:1rem;\">Orange Business Services undertakes, in the context of its activities and in accordance with the legislation in force in France and Europe, to ensure the protection, confidentiality and security of the personal data of the users of its services, and respect their privacy. You can consult <u><a href=\"/en/personal-data\" target=\"_blank\">our charter relating to the protection of personal data and privacy./a></u>.</span></p>\r\n"
+    '#format': full_html
+  captcha:
+    '#type': captcha
+    '#captcha_type': recaptcha/reCAPTCHA
 css: ''
 javascript: ''
 settings:
@@ -36,9 +81,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -48,31 +93,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -81,11 +131,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -96,13 +141,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -125,9 +170,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: 'Thank you for getting in touch. We&rsquo;ll get back to you shortly.'
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: false
   confirmation_back_label: ''
@@ -206,9 +251,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -217,13 +262,17 @@ handlers:
         - completed
       to_mail: 'mike.smith@orange.com,fabienne.thebault@orange.com'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }
@@ -234,11 +283,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

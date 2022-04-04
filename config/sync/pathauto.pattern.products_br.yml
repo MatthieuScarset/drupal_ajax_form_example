@@ -11,20 +11,20 @@ pattern: 'produto/[node:title]'
 selection_criteria:
   50ca39d0-26cb-4c82-aea7-acbf20e18ccf:
     id: node_type
-    bundles:
-      product: product
     negate: false
+    uuid: 50ca39d0-26cb-4c82-aea7-acbf20e18ccf
     context_mapping:
       node: node
-    uuid: 50ca39d0-26cb-4c82-aea7-acbf20e18ccf
+    bundles:
+      product: product
   00f19a39-aeb9-4bd6-9ed8-cbcbfc3c87bb:
     id: language
-    langcodes:
-      pt-br: pt-br
     negate: false
+    uuid: 00f19a39-aeb9-4bd6-9ed8-cbcbfc3c87bb
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 00f19a39-aeb9-4bd6-9ed8-cbcbfc3c87bb
+    langcodes:
+      pt-br: pt-br
 selection_logic: and
 weight: -10
 relationships:

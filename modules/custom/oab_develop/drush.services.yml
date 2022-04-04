@@ -1,5 +1,6 @@
 services:
   oab_develop.commands:
     class: \Drupal\oab_develop\Commands\OabDevelopCommands
+    arguments: ['@extension.path.resolver']
     tags:
       - { name: drush.command }

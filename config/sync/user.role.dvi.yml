@@ -1,7 +1,29 @@
 uuid: 3a4714ed-5daa-4f0b-a766-fbda02ab8910
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.distributor
+    - node.type.product
+  module:
+    - entity_browser
+    - field_ui
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - quickedit
+    - replicate_ui
+    - roleassign
+    - scheduled_updates
+    - shortcut
+    - system
+    - toolbar
+    - tour
+    - workbench
+    - workbench_moderation
 id: dvi
 label: DVI
 weight: 8

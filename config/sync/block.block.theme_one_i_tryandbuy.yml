@@ -16,15 +16,15 @@ plugin: try_and_buy_block
 settings:
   id: try_and_buy_block
   label: 'Try and Buy Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      product: product

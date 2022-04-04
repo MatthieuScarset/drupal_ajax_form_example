@@ -42,15 +42,15 @@ mode: right_linked_content
 content:
   field_highlight:
     type: basic_string
-    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
     region: content
   links:
-    weight: 1
     settings: {  }
     third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_blog_format: true

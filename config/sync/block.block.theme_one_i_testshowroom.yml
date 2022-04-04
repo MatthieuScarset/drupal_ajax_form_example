@@ -16,15 +16,15 @@ plugin: test_showroom_block
 settings:
   id: test_showroom_block
   label: 'Test Showroom Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      product: product

@@ -18,16 +18,16 @@ plugin: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
 settings:
   id: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
   label: marketo-download-lang
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      document: document
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      document: document
