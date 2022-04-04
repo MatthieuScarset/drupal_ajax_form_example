@@ -43,11 +43,9 @@ Vault:
     - update-ca-certificates
 
     # Vault variables
-    - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=VAULT_NAMESPACE jwt=$CI_JOB_JWT)"
+    - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=$VAULT_NAMESPACE jwt=$CI_JOB_JWT)"
     - export PASSWORD_OPS="$(vault kv get -field=apiKey $VAULT_PATH/OPS-BDX)"
     - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
-    - export PASSWORD_DEV="$(vault kv get -field=$COMPTE_PROJET_DEV $VAULT_PATH/Devs)"
-    - echo "PASSWORD_DEV=$PASSWORD_DEV" >> vault.env
   artifacts:
     reports:
       dotenv: vault.env
