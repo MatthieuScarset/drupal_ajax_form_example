@@ -35,6 +35,8 @@ Vault:
   variables:
     VAULT_PATH: prj/portail-obs/compte-projet
     VAULT_OPTS: "-tls-skip-verify=true"
+  before_script:
+    - apk add jq
   script:
     # Load Orange G2 certificates
     - update-ca-certificates
