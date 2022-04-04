@@ -42,6 +42,7 @@ Vault:
     - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
     - export PASSWORD_DEV="$(vault kv get -field=COMPTE_PROJET_DEV /prj/portail-obs/compte-projet/Devs)"
     - echo "PASSWORD_DEV=$PASSWORD_DEV" >> vault.env
+    - cat vault.env
   artifacts:
     reports:
       dotenv: vault.env
