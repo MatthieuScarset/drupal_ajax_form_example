@@ -43,9 +43,9 @@ Vault:
 
     # Vault variables
     - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=namespace-portail-obs jwt=$CI_JOB_JWT)"
-    - export PASSWORD_OPS="$(vault read $VAULT_OPTS -format json -field=OPS-BDX $VAULT_PATH | jq -r .api_key)"
+    - export PASSWORD_OPS="$(vault kv get -field=api_key $VAULT_PATH/OPS-BDX)"
     - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
-    - export PASSWORD_DEV="$(vault read $VAULT_OPTS -format json -field=DEVS $VAULT_PATH | jq -r .$COMPTE_PROJET_DEV)"
+    - export PASSWORD_DEV="$(vault kv get -field=$COMPTE_PROJET_DEV $VAULT_PATH/DEVS)"
     - echo "PASSWORD_DEV=$PASSWORD_DEV" >> vault.env
   artifacts:
     reports:
