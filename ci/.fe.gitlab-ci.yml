@@ -94,8 +94,7 @@ Build Image:
 #    - Build Drupal
     - Vault
   before_script:
-    - export
-    - docker login -u $COMPTE_PROJECT_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
+    - docker login -u $COMPTE_PROJET_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
   tags:
