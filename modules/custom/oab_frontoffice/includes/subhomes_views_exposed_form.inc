@@ -19,7 +19,8 @@ function subhomes_views_exposed_form(&$form) {
           if ($new_select !== null) {
             $form[$key] = $new_select;
           } else {
-            $form[$key]['#access'] = false;
+            $form[$key]['#value'] = 'All';
+            $form[$key]['#type'] = "hidden";
           }
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
@@ -135,6 +136,7 @@ function subhomes_views_exposed_form(&$form) {
         if ($current_language == 'fr') {
             // on supprime "eBook"
             unset($form['field_document_type_target_id']['#options']['E-book']);
+            //devel_dump($form);
         }
         if ($current_language == 'en') {
             // on supprime "position paper"
@@ -142,7 +144,6 @@ function subhomes_views_exposed_form(&$form) {
         } else {
             unset($form['document_language']);
         }
-
     }
 
     // subhome presse
