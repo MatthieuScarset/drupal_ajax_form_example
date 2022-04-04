@@ -47,38 +47,38 @@ Vault:
       dotenv: vault.env
     expire_in: 10 minutes
 
-Build Drupal:
-  stage: build_drupal
-  image: php:8.0
-  dependencies:
-    - Prepare Drupal
-  before_script:
-    ## Install Composer
-    - apt-get update
-    - apt-get install -y git zip unzip
-    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    - php composer-setup.php
-    - php -r "unlink('composer-setup.php');"
-    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
-    - pecl install imagick > /dev/null
-    - docker-php-ext-enable imagick > /dev/null
-    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
-    - docker-php-ext-install gd > /dev/null
-    - docker-php-ext-enable gd > /dev/null
-  script:
-    - cd build
-    - php ../composer.phar install --no-dev
-  after_script:
-    ## Clean Up Repo
-    - rm composer.phar
-    - cd build
-    - ls -la sites/
-    - ls -la sites/default
-    - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc web.config
-  artifacts:
-    paths:
-      - build
-    expire_in: 1 hour
+#Build Drupal:
+#  stage: build_drupal
+#  image: php:8.0
+#  dependencies:
+#    - Prepare Drupal
+#  before_script:
+#    ## Install Composer
+#    - apt-get update
+#    - apt-get install -y git zip unzip
+#    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#    - php composer-setup.php
+#    - php -r "unlink('composer-setup.php');"
+#    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
+#    - pecl install imagick > /dev/null
+#    - docker-php-ext-enable imagick > /dev/null
+#    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
+#    - docker-php-ext-install gd > /dev/null
+#    - docker-php-ext-enable gd > /dev/null
+#  script:
+#    - cd build
+#    - php ../composer.phar install --no-dev
+#  after_script:
+#    ## Clean Up Repo
+#    - rm composer.phar
+#    - cd build
+#    - ls -la sites/
+#    - ls -la sites/default
+#    - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc web.config
+#  artifacts:
+#    paths:
+#      - build
+#    expire_in: 1 hour
 
 
 Build Image:
@@ -90,6 +90,7 @@ Build Image:
     - Build Drupal
     - Vault
   before_script:
+    - export
     - docker login -u $COMPTE_PROJECT_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
