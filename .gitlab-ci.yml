@@ -1,19 +1,9 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
+include:
+  - local: /ci/.dev.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "dev"
+  - local: /ci/.fe.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3881"
 
-image: docker:latest
-services:
-  - docker:dind
-
-stages:          # List of stages for jobs, and their order of execution
-#  - prepare
-#  - build_drupal
-  - build_image
-#  - push
-
-
-Build Image:
-  stage: build_image
-  script:
-    - docker info
-  tags:
-    - image_build
