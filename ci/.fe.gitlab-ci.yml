@@ -15,9 +15,6 @@ variables:
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
   VAULT_NAMESPACE: "namespace-portail-obs"
-  VERSION:
-    value: "0.0.0"
-    description: "Numéro de version au format x.x.x (Doit correspondre à GxRxCx - sera le num de l'image docker"
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
@@ -102,8 +99,8 @@ Build Image:
     - docker login -u $COMPTE_PROJET_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
-    - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:$VERSION
-    - docker image push $ARTIFACTORY_RUBY_REGISTRY:$VERSION
+    - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:0.0.1
+    - docker image push $ARTIFACTORY_RUBY_REGISTRY:0.0.1
   tags:
     - image_build
 

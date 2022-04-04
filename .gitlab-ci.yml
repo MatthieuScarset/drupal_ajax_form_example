@@ -6,5 +6,3 @@ include:
   - local: /ci/.fe.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "RUBYPORTAILOBS-3881"
-        when: manual
-
