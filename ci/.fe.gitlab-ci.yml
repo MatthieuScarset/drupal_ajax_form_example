@@ -9,10 +9,13 @@ stages:          # List of stages for jobs, and their order of execution
 variables:
   COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV
   COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
-  ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002/ops_bdx"
+  ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002"
   VAULT_ADDR: $VAULT_ADDR
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
+  VERSION:
+    value: "0.0.0"
+    description: "Numéro de version au format x.x.x (Doit correspondre à GxRxCx - sera le num de l'image docker"
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
@@ -97,6 +100,8 @@ Build Image:
     - docker login -u $COMPTE_PROJET_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
+    - docker image tag php_tmp multirepo.orangeapplicationsforbusiness.com:5002/portail_obs/www-test:$VERSION
+    - docker image push multirepo.orangeapplicationsforbusiness.com:5002/portail_obs/www-test:$VERSION
   tags:
     - image_build
 
