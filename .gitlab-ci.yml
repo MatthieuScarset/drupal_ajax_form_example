@@ -15,3 +15,5 @@ Build Image:
   stage: build_image
   script:
     - docker info
+  tag:
+    - image_build
