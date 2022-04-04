@@ -7,7 +7,8 @@ stages:          # List of stages for jobs, and their order of execution
 #  - push
 
 variables:
-  COMPTE_PROJET: $COMPTE_PROJET
+  COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV
+  COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
   ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002/ops_bdx"
   VAULT_ADDR: $VAULT_ADDR
 
@@ -39,6 +40,7 @@ Vault:
   script:
     # Load Orange G2 certificates
     - update-ca-certificates
+    - echo $VAULT_ADDR
 
     # Vault variables
     - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=namespace-portail-obs jwt=$CI_JOB_JWT)"
