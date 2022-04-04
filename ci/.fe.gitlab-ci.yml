@@ -39,13 +39,12 @@ Vault:
   script:
     # Load Orange G2 certificates
     - update-ca-certificates
-    - echo "$VAULT_ADDR"
 
     # Vault variables
     - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=namespace-portail-obs jwt=$CI_JOB_JWT)"
     - export PASSWORD_OPS="$(vault kv get -field=apiKey $VAULT_PATH/OPS-BDX)"
     - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
-    - export PASSWORD_DEV="$(vault kv get -field=$COMPTE_PROJET_DEV $VAULT_PATH/Devs)"
+    - export PASSWORD_DEV="$(vault kv get -field=Devs $VAULT_PATH)"
     - echo "PASSWORD_DEV=$PASSWORD_DEV" >> vault.env
   artifacts:
     reports:
