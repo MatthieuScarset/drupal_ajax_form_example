@@ -35,6 +35,7 @@ Vault:
   variables:
     VAULT_PATH: /prj/portail-obs/compte-projet
     VAULT_OPTS: "-tls-skip-verify=true"
+    VAULT_ADDR: $VAULT_ADDR
   before_script:
     - apk add jq
   script:
@@ -47,13 +48,10 @@ Vault:
     - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
     - export PASSWORD_DEV="$(vault read $VAULT_OPTS -format json -field=DEVS $VAULT_PATH | jq -r .$COMPTE_PROJET_DEV)"
     - echo "PASSWORD_DEV=$PASSWORD_DEV" >> vault.env
-    - cat vault.env
   artifacts:
     reports:
       dotenv: vault.env
     expire_in: 10 minutes
-  tags:
-    - image_build
 
 #Build Drupal:
 #  stage: build_drupal
@@ -98,7 +96,6 @@ Build Image:
 #    - Build Drupal
     - Vault
   before_script:
-    - export
     - docker login -u $COMPTE_PROJECT_OPS -p $PASSWORD_OPS $ARTIFACTORY_DOCKER_REGISTRY
   script:
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
