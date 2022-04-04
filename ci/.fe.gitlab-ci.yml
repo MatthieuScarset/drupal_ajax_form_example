@@ -33,7 +33,7 @@ Vault:
   stage: prepare
   image: vault
   variables:
-    VAULT_PATH: prj/portail-obs/compte-projet
+    VAULT_PATH: /prj/portail-obs/compte-projet
     VAULT_OPTS: "-tls-skip-verify=true"
   before_script:
     - apk add jq
@@ -52,6 +52,8 @@ Vault:
     reports:
       dotenv: vault.env
     expire_in: 10 minutes
+  tags:
+    - standard
 
 #Build Drupal:
 #  stage: build_drupal
