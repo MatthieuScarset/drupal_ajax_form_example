@@ -87,7 +87,7 @@ Build Image:
   services:
     - docker:dind
   dependencies:
-    - Build Drupal
+#    - Build Drupal
     - Vault
   before_script:
     - export
