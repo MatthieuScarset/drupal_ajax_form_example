@@ -9,6 +9,7 @@ include:
 
 # Hack to get a "visible job" if none of the files is included
 dummy_job:
+  stage: .pre
   rules:
     - when: never
   script:
