@@ -1,7 +1,5 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 
-
-
 stages:          # List of stages for jobs, and their order of execution
   - prepare
   - build_drupal
@@ -11,6 +9,7 @@ stages:          # List of stages for jobs, and their order of execution
 variables:
   COMPTE_PROJET: $COMPTE_PROJET
   ARTIFACTORY_DOCKER_REGISTRY: "multirepo.orangeapplicationsforbusiness.com:5002/ops_bdx"
+  VAULT_ADDR: $VAULT_ADDR
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
@@ -35,7 +34,6 @@ Vault:
   variables:
     VAULT_PATH: /prj/portail-obs/compte-projet
     VAULT_OPTS: "-tls-skip-verify=true"
-    VAULT_ADDR: $VAULT_ADDR
   before_script:
     - apk add jq
   script:
