@@ -35,6 +35,9 @@ Vault:
   variables:
     VAULT_PATH: /prj/portail-obs/compte-projet
     VAULT_OPTS: "-tls-skip-verify=true"
+    VAULT_ADDR: $VAULT_ADDR
+    COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV
+    COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
   before_script:
     - apk add jq
   script:
