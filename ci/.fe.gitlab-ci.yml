@@ -1,94 +1,23 @@
-
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
+
+
+
 stages:          # List of stages for jobs, and their order of execution
 #  - prepare
 #  - build_drupal
   - build_image
 #  - push
 
-## Recupère les mdp stockés dans le Vault
-#Vault:
-#  stage: prepare
-#  image: vault
-#  script:
-#    # Load Orange G2 certificates
-#    #- update-ca-certificates
-#
-#    # Vault variables
-#    #- export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=namespace-$VAULT_PROJECT jwt=$CI_JOB_JWT)"
-#    #- export MY_VAULT_SECRET="$(vault kv get -field=$CF_USERNAME /prj/$VAULT_PROJECT/deploy_cloundfoundry)"
-#    - echo "test" >> vault.env
-#  artifacts:
-#    reports:
-#      dotenv: vault.env
-#    expire_in: 1 hour
-
-# Création d'un dossier spécifique et copie des fichiers nécessaires au build
-#Prepare Drupal:
-#  stage: prepare
-#  script:
-#    - mkdir build
-#    - cp -r modules build/
-#    - cp -r patches build/
-#    - cp -r themes build/
-#    - cp -r sites build/
-#    - cp composer.* build/
-#    - cp load.environment.php build/
-#  artifacts:
-#    paths:
-#      - build
-#    expire_in: 1 hour
-#
-#
-#Build Drupal:
-#  stage: build_drupal
-#  image: php:8.0
-#  dependencies:
-#    - Prepare Drupal
-#  before_script:
-#    ## Install Composer
-#    - apt-get update
-#    - apt-get install -y git zip unzip
-#    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-#    - php composer-setup.php
-#    - php -r "unlink('composer-setup.php');"
-#    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
-#    - pecl install imagick > /dev/null
-#    - docker-php-ext-enable imagick > /dev/null
-#    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
-#    - docker-php-ext-install gd > /dev/null
-#    - docker-php-ext-enable gd > /dev/null
-#  script:
-#    - cd build
-#    - php ../composer.phar install --no-dev
-#  after_script:
-#    ## Clean Up Repo
-#    - rm composer.phar
-#    - cd build
-#    - ls -la sites/
-#    - ls -la sites/default
-#    - rm -r patches INSTALL.txt .ht.router.php composer.* .eslint* .csslintrc web.config
-#  artifacts:
-#    paths:
-#      - build
-#    expire_in: 1 hour
 
 Build Image:
-  stage: build_image
-  image: docker:19.03.12
-  variables:
-#    DOCKER_HOST: tcp://localhost:2375
-    DOCKER_TLS_CERTDIR: "/certs"
+  image: docker:latest
   services:
-    - name: docker:19.03.12-dind
-      alias: docker
-#  dependencies:
-#    - Build Drupal
-  before_script:
-    - docker info
+    - docker:dind
+  stage: build_image
   script:
-    - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
-
+    - docker info
+  tags:
+    - image_build
 
 #image:
 #  docker:latest
