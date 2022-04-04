@@ -1,8 +1,6 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 
-image: docker:latest
-services:
-  - docker:dind
+
 
 stages:          # List of stages for jobs, and their order of execution
 #  - prepare
@@ -12,6 +10,11 @@ stages:          # List of stages for jobs, and their order of execution
 
 
 Build Image:
+  image: docker:latest
+  services:
+    - docker:dind
   stage: build_image
   script:
     - docker info
+  tags:
+    - image_build
