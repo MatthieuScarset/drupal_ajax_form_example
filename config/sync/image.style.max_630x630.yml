@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - crop.type.crop_630x630
+    - crop.type.crop_free_ratio
   module:
     - crop
 name: max_630x630
@@ -14,12 +14,12 @@ effects:
     id: crop_crop
     weight: -10
     data:
-      crop_type: crop_630x630
+      crop_type: crop_free_ratio
       automatic_crop_provider: null
-  15be6e08-6169-48e7-95b9-4e05ae44383f:
-    uuid: 15be6e08-6169-48e7-95b9-4e05ae44383f
+  38ffee92-8018-422d-a5d9-3814824879af:
+    uuid: 38ffee92-8018-422d-a5d9-3814824879af
     id: image_scale
-    weight: 3
+    weight: 2
     data:
       width: 630
       height: 630
