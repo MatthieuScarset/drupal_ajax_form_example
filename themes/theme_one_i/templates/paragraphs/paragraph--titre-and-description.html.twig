@@ -45,36 +45,26 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
 {% block paragraph %}
-  <div class="bg-white py-3 px-2">
+  <div {{ attributes.addClass(classes) }}>
     {% block content %}
-      <h3 class="mb-1">{{ content.field_title }}</h3>
-      <span>{{ content.field_accroche }}</span>
-      <h4 class="text-primary my-1">{{ content.field_price_label }}</h4>
-
-      {{ content.field_link_button }}
-
-      <hr class="separator separator--gray4 my-1">
-
-      <div id="collapsed-text-{{ paragraph.id() }}"
-           class="collapse"
-           role="region"
-           aria-labelledby="collapsed-header">
-
-        {{ (content.field_offres_inclus) }}
-        {{ content.field_offres_exclus }}
-        {{ content.field_documentation }}
-
-      </div>
-
-      <button id="collapsed-header-{{ paragraph.id() }}" type="button"
-              class="o-link-arrow down collapsed text-decoration-none font-weight-bold text-center w-100"
-              data-toggle="collapse"
-              data-target="#collapsed-text-{{ paragraph.id() }}"
-              aria-expanded="false"
-              aria-controls="collapsed-text">
-        {{"See all"|t}}
-      </button>
-
+      {% if (paragraph.field_accroche.value) %}
+        <button id="collapsed-header-{{ paragraph.id() }}" type="button"
+                class="o-link-arrow down collapsed text-decoration-none font-weight-normal collapsed-header w-100"
+                data-toggle="collapse"
+                data-target="#collapsed-text-{{ paragraph.id() }}"
+                aria-expanded="false"
+                aria-controls="collapsed-text">
+          {{content.field_title}}
+        </button>
+        <div id="collapsed-text-{{ paragraph.id() }}"
+             class="bg-gray2 collapse collapsed-content mt-1 ml--3"
+             role="region"
+             aria-labelledby="collapsed-header">
+          {{ content.field_accroche }}
+        </div>
+      {% else %}
+        {{content}}
+      {% endif %}
     {% endblock %}
   </div>
 {% endblock paragraph %}

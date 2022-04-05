@@ -1,0 +1,10 @@
+uuid: ce7f9914-0fae-4463-9497-a472801a260a
+langcode: fr
+status: true
+dependencies: {  }
+id: titre_and_description
+label: '[MP][Module détail offre] Titre and description'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

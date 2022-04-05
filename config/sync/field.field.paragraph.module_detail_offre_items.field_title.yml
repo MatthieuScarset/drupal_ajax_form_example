@@ -1,0 +1,19 @@
+uuid: d5668671-8038-4a8f-bd02-2fc9305f2e6b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_detail_offre_items
+id: paragraph.module_detail_offre_items.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_detail_offre_items
+label: 'Titre Item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

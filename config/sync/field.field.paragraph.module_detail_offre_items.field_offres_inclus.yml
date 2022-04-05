@@ -1,22 +1,18 @@
-uuid: 3ed29cc6-61d0-4671-8c2f-d9c7f31f0db0
-langcode: en
+uuid: 6a233732-1636-41c5-b9f5-a5478b0d798b
+langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_modules
-    - node.type.modular_product
-    - paragraphs.paragraphs_type.module_3_4_colonnes
-    - paragraphs.paragraphs_type.module_benefits
-    - paragraphs.paragraphs_type.module_partner
-    - paragraphs.paragraphs_type.module_detail_offre
-    - paragraphs.paragraphs_type.paragraph_wysiwyg
+    - field.storage.paragraph.field_offres_inclus
+    - paragraphs.paragraphs_type.module_detail_offre_items
+    - paragraphs.paragraphs_type.titre_and_description
   module:
     - entity_reference_revisions
-id: node.modular_product.field_modules
-field_name: field_modules
-entity_type: node
-bundle: modular_product
-label: Modules
+id: paragraph.module_detail_offre_items.field_offres_inclus
+field_name: field_offres_inclus
+entity_type: paragraph
+bundle: module_detail_offre_items
+label: Inclus
 description: ''
 required: false
 translatable: false
@@ -26,89 +22,85 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      module_3_4_colonnes: module_3_4_colonnes
-      paragraph_wysiwyg: paragraph_wysiwyg
-      module_benefits: module_benefits
-      module_partner: module_partner
-      module_detail_offre: module_detail_offre
+      titre_and_description: titre_and_description
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
-        weight: 20
-        enabled: false
-      default_button:
-        weight: 21
-        enabled: false
-      home_banner:
-        weight: 22
-        enabled: false
-      home_caroussel:
-        weight: 23
-        enabled: false
-      home_column:
-        weight: 24
-        enabled: false
-      home_column_section:
-        weight: 25
-        enabled: false
-      home_playlist:
-        weight: 26
-        enabled: false
-      home_thematic_columns:
         weight: 27
         enabled: false
-      homepage_banner_experience:
+      default_button:
         weight: 28
         enabled: false
-      homepage_banner_item:
-        weight: 29
-        enabled: false
-      homepage_news:
-        weight: 30
-        enabled: false
-      infography_partner:
-        weight: 31
-        enabled: false
-      marketo:
+      home_banner:
         weight: 32
         enabled: false
-      module_3_4_colonnes:
-        weight: 35
-        enabled: true
-      module_3_4_colonnes_items:
-        weight: 36
-        enabled: false
-      module_benefits:
-        weight: 37
-        enabled: true
-      module_benefits_item:
-        weight: 38
-        enabled: false
-      module_detail_offre:
-        weight: 43
-        enabled: true
-      module_detail_offre_items:
-        weight: 44
-        enabled: false
-      module_partner:
-        weight: 42
-        enabled: true
-      paragraph_block_rebond:
+      home_caroussel:
         weight: 33
         enabled: false
-      paragraph_product_call_to_action:
+      home_column:
         weight: 34
         enabled: false
-      paragraph_wysiwyg:
+      home_column_section:
         weight: 35
-        enabled: true
-      rebond_wysiwyg:
+        enabled: false
+      home_playlist:
         weight: 36
         enabled: false
-      related_content:
+      home_thematic_columns:
         weight: 37
         enabled: false
-      subhome_presse_carrousel:
+      homepage_banner_experience:
+        weight: 29
+        enabled: false
+      homepage_banner_item:
+        weight: 30
+        enabled: false
+      homepage_news:
+        weight: 31
+        enabled: false
+      infography_partner:
         weight: 38
         enabled: false
+      marketo:
+        weight: 39
+        enabled: false
+      module_3_4_colonnes:
+        weight: 40
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 41
+        enabled: false
+      module_benefits:
+        weight: 42
+        enabled: false
+      module_benefits_item:
+        weight: 43
+        enabled: false
+      module_detail_offre:
+        weight: 44
+        enabled: false
+      module_detail_offre_items:
+        weight: 45
+        enabled: false
+      paragraph_block_rebond:
+        weight: 46
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 47
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 48
+        enabled: false
+      rebond_wysiwyg:
+        weight: 49
+        enabled: false
+      related_content:
+        weight: 50
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 51
+        enabled: false
+      titre_and_description:
+        weight: 52
+        enabled: true
 field_type: entity_reference_revisions

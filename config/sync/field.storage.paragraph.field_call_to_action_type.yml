@@ -1,0 +1,27 @@
+uuid: d5aac5dd-0358-431d-a161-799c72a6c153
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_call_to_action_type
+field_name: field_call_to_action_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: bouton
+      label: Bouton
+    -
+      value: lien
+      label: Lien
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
