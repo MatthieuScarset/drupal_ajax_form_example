@@ -38,28 +38,28 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
-%}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    <div class="container-fluid site-width">
+  <div class="bg-white pt-3 px-2">
     {% block content %}
-      <h2 class="col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
-
-      <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-3 px-0">
-        {{ content.field_accroche }}
-      </div>
-
-      <div class="items-module-3-4-colonnes px-0">
-        {{ content.field_items }}
-      </div>
+      <h3 class="mb-1">{{ content.field_title }}</h3>
+      <span>{{ content.field_accroche }}</span>
+      <h4 class="text-primary my-1">{{ content.field_price_label }}</h4>
+      {% if (content.field_call_to_action_type['#items'].value == "Bouton") %}
+        {% set link_class = "btn btn-primary" %}
+      {% elseif (content.field_call_to_action_type['#items'].value == "Lien chevron")  %}
+        {% set link_class = "o-link-arrow text-decoration-none" %}
+      {% else %}
+          <span class="icon icon-Redo text-primary" aria-hidden="true"></span>
+      {% endif %}
+      <a href="{{ content.field_link_button[0]['#url'] }}"
+         class="{{ link_class }} font-weight-bold">{{ content.field_link_button[0]['#title']}}</a>
+      <hr class="separator separator--gray4 my-1">
     {% endblock %}
-    </div>
   </div>
 {% endblock paragraph %}

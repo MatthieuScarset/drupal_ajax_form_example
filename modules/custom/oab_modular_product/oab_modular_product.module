@@ -28,6 +28,12 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     'module_3_4_colonnes_items'
   ];
 
+  if ($element['#paragraph_type'] == 'module_partner') {
+    $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 65;
+    $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = 150;
+
+  }
+
   if (in_array($element['#paragraph_type'], $modules)) {
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_character->getModuleTitleMaxCharacter();
@@ -86,7 +92,7 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
   }
 
   if (isset($form['field_teaser'])) {
-    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneTitleMaxCharacter();
+    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $max_character->getTopZoneDescriptionMaxCharacter();
   }
 }
 /**

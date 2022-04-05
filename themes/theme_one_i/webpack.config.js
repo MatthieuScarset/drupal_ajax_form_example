@@ -1,13 +1,15 @@
 const path= require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   stats: 'normal',
   entry: {
     "css/one_i": './assets/scss/one_i.scss',
-    "css/style": './assets/scss/style.scss'
+    "css/style": './assets/scss/style.scss',
+    "js/modular_product.min": './js/modular_product/main.js'
   },
   output: {
     filename: '[name].js',
@@ -42,6 +44,10 @@ module.exports = {
         ],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({test: /\.js(\?.*)?$/i})],
   },
   plugins: [
     new MiniCssExtractPlugin({
