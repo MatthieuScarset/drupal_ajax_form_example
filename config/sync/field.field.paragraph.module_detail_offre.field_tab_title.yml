@@ -1,0 +1,19 @@
+uuid: 09af0c0b-81a6-42e8-bdd8-a4dbb3b52696
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tab_title
+    - paragraphs.paragraphs_type.module_detail_offre
+id: paragraph.module_detail_offre.field_tab_title
+field_name: field_tab_title
+entity_type: paragraph
+bundle: module_detail_offre
+label: 'Service et accompagnement title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

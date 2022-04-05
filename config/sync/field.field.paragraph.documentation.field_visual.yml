@@ -1,0 +1,29 @@
+uuid: e7908c1c-337b-491c-88ba-74ab55214a22
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_visual
+    - media.type.file
+    - paragraphs.paragraphs_type.documentation
+id: paragraph.documentation.field_visual
+field_name: field_visual
+entity_type: paragraph
+bundle: documentation
+label: PDF
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      file: file
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

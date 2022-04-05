@@ -963,6 +963,11 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   margin-bottom: 2.1875rem;
 }
 
+a.icon-Redo::before {
+  color: #f16e00;
+  margin-right: 0.625rem;
+}
+
 .items-module-3-4-colonnes .field-items-modules {
   overflow-x: scroll;
   flex-wrap: unset;
@@ -981,6 +986,20 @@ header#navbar.sticky-top.is-sticky .main_nav.navbar .mega-menu-desktop .item_meg
   overflow-y: hidden;
   flex-wrap: unset;
   scrollbar-width: none;
+}
+.items-module-detail-offre .liste-offres .collapsed-header {
+  display: flex;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.items-module-detail-offre .liste-offres .collapsed-header.o-link-arrow::after {
+  color: black;
+  right: 0;
+}
+.items-module-detail-offre .liste-offres .exclus-icon li::before {
+  content: "";
+  color: #e70002;
+  font-size: 0.6875rem;
 }
 
 .o-footer .footer-div-border {

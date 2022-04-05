@@ -5,4 +5,26 @@
     flex-wrap: unset;
     scrollbar-width: none;
   }
+
+  .liste-offres {
+    .collapsed-header {
+      display: flex;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      &.o-link-arrow {
+        &::after {
+          color: black;
+          right: 0;
+        }
+      }
+    }
+    .exclus-icon {
+      li::before {
+        content: "";
+        color: $red;
+        font-size: 0.6875rem;
+      }
+    }
+  }
 }
