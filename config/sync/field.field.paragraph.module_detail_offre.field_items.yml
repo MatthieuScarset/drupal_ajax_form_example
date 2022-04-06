@@ -12,7 +12,7 @@ id: paragraph.module_detail_offre.field_items
 field_name: field_items
 entity_type: paragraph
 bundle: module_detail_offre
-label: Items
+label: 'Bloc formule'
 description: ''
 required: false
 translatable: true
@@ -30,6 +30,9 @@ settings:
         enabled: false
       default_button:
         weight: 27
+        enabled: false
+      documentation:
+        weight: 30
         enabled: false
       home_banner:
         weight: 31
@@ -99,5 +102,8 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 50
+        enabled: false
+      titre_and_description:
+        weight: 54
         enabled: false
 field_type: entity_reference_revisions

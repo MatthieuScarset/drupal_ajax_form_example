@@ -9,9 +9,9 @@ id: paragraph.module_detail_offre_items.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_detail_offre_items
-label: 'Description item'
+label: 'Description formule'
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

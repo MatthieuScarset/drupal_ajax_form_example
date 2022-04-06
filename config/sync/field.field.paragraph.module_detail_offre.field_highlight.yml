@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Description services'
+label: 'Description services et accompagnements'
 description: ''
 required: false
 translatable: true

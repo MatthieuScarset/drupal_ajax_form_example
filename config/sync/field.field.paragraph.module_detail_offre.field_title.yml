@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Title de l''offre'
+label: 'Titre de l''offre'
 description: ''
 required: false
 translatable: true

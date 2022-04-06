@@ -70,8 +70,9 @@
     .block-cta {
       .product-cta-button {
         &.btn {
+          width: auto;
           @include media-breakpoint-down(md) {
-            padding: 1rem 6rem;
+            width: 100%;
           }
         }
       }

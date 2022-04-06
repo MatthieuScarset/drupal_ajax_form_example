@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_tab_title
 field_name: field_tab_title
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Service et accompagnement title'
+label: 'Titre Services et accompagnements'
 description: ''
 required: false
 translatable: true

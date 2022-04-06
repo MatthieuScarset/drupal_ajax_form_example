@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.module_detail_offre.field_highlight
     - field.field.paragraph.module_detail_offre.field_items
     - field.field.paragraph.module_detail_offre.field_key_points
-    - field.field.paragraph.module_detail_offre.field_name
     - field.field.paragraph.module_detail_offre.field_tab_title
     - field.field.paragraph.module_detail_offre.field_title
     - paragraphs.paragraphs_type.module_detail_offre
@@ -48,14 +47,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 4
-    region: content
-  field_name:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 0
     region: content
   field_tab_title:
     type: string

@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_key_points
 field_name: field_key_points
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'key points'
+label: 'Key points services et accompagnements'
 description: ''
 required: false
 translatable: false

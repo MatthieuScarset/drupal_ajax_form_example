@@ -47,12 +47,7 @@
 {% block paragraph %}
   <div {{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="mb-1">
-        {{ content.field_visual }}
-      </div>
-      <div class="mb-1">
-        {{ content.field_call_to_action_link }}
-      </div>
+        {{ content }}
     {% endblock %}
   </div>
 {% endblock paragraph %}
