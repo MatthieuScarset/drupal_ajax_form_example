@@ -90,7 +90,6 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
 
   $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
   $is_numerical = false;
-
   if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
     $is_numerical = true;
   }

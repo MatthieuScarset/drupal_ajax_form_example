@@ -1,0 +1,5 @@
+<div {{ attributes.addClass("accordion") }} id="faqAccordion">
+  {% for item in items %}
+    <div {{ item.attributes.addClass('card', 'multi', 'border-bottom', 'border-light', 'row') }}>{{ item.content }}</div>
+  {% endfor %}
+</div>

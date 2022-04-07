@@ -1,0 +1,26 @@
+.modal-faq {
+  .modal-dialog {
+    position: fixed;
+    right: 0;
+    overflow-y: scroll;
+    width: available;
+  }
+
+  .modal-content {
+    min-height: 100%;
+    height: fit-content;
+  }
+
+  #faqAccordion {
+    .card {
+      span.icon {
+        padding-top: 5px;
+        font-size: 2rem;
+      }
+
+      &:last-child {
+        border: none !important;
+      }
+    }
+  }
+}
