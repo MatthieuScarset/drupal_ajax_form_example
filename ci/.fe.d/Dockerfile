@@ -6,4 +6,8 @@ ADD --chown=nobody:www-data ./build /var/www/html/
 COPY --chown=nobody:www-data ./config/sync /var/www/config/sync
 COPY --chown=nobody:www-data ./config/config_split /var/www/config/config_split
 
-ENTRYPOINT ['/var/www/html/vendor/bin/drush', 'oab:updb']
+
+# Export vendor bin to get Drush
+ENV PATH="$PATH:/var/www/html/vendor/bin"
+
+ENTRYPOINT drush oab:updb
