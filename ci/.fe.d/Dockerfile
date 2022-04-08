@@ -9,5 +9,3 @@ COPY --chown=nobody:www-data ./config/config_split /var/www/config/config_split
 
 # Export vendor bin to get Drush
 ENV PATH="$PATH:/var/www/html/vendor/bin"
-
-ENTRYPOINT drush oab:updb
