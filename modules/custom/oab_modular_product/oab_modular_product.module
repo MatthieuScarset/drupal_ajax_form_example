@@ -6,7 +6,6 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_field_widget_form_alter().
  */
 function oab_modular_product_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
-
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
@@ -74,12 +73,21 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
       $element['subform']['field_description']['widget'][0]['value']['#size'] = 140;
     }
   }
+
+  if ($element['#paragraph_type'] === 'module_step') {
+    $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 30;
+    $element['subform']['field_title']['widget'][0]['value']['#size'] = 35;
+
+    $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = 100;
+    $element['subform']['field_description']['widget'][0]['value']['#size'] = 110;
+  }
+
 }
 
 /**
  * Implements hook_form_alter().
  */
-function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function oab_modular_product_form_node_modular_product_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   /** @var \Drupal\oab_modular_product\Services\OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
@@ -91,7 +99,18 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
   if (isset($form['field_teaser'])) {
     $form['field_teaser']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTopZoneDescriptionMaxCharacter();
   }
+
 }
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function oab_modular_product_entity_bundle_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle) {
+  if ($entity_type->id() === "paragraph" && $bundle === "module_steps") {
+    $fields['field_step']->addConstraint('ModularProductMinSteps');
+  }
+}
+
 
 
 /**
