@@ -1,6 +1,9 @@
+import { elementScrollIntoViewPolyfill } from "seamless-scroll-polyfill";
 
 class StepSlider {
   constructor(elem) {
+    elementScrollIntoViewPolyfill();
+    
     this.$root = elem;
     this.$current = 0;
     this.$steps = this.$root.querySelectorAll('.step');
@@ -65,6 +68,7 @@ class StepSlider {
     if (this.$steps[this.$current-1]) {
       this.$steps[this.$current-1].classList.add('active');
       this.$steps[this.$current-1].querySelector('.ob1-spinner-determined').classList.remove('d-none');
+      this.$steps[this.$current-1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     } else {
       clearInterval(this.$intervalId);
     }

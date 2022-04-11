@@ -22,5 +22,8 @@
     "webpack": "5.41.1",
     "webpack-cli": "4.7.2",
     "webpack-import-glob-loader": "1.6.3"
+  },
+  "dependencies": {
+    "seamless-scroll-polyfill": "^2.1.8"
   }
 }

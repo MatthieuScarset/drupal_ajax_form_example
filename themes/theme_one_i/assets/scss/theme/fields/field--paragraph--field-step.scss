@@ -1,19 +1,24 @@
 .step-slider {
-  //
-  //display: block;
-  //overflow-x: auto;
-  //white-space: nowrap;
-  //
-  //& > .col {
-  //  display: inline-block;
-  //}
-  //@include media-breakpoint-up(md) {
-  //  overflow: initial;
-  //  display: flex;
-  //  & > .col {
-  //    display: initial;
-  //  }
-  //}
+
+  @include media-breakpoint-down(md) {
+    overflow-x: auto;
+    flex-wrap: initial;
+
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+
+    & > .col {
+      min-width: 50%;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    & > .col {
+      min-width: calc(100% - 2rem);
+    }
+  }
+
+
 
   .step {
 

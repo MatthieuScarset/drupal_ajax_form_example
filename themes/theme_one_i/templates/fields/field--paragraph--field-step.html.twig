@@ -48,12 +48,12 @@
 <div {{ attributes.addClass(classes) }}>
   <h2>{{ label }}</h2>
 
-  {% set defaultDelay = 5 %}
+  {% set defaultDelay = 10 %}
 
   <div class="row step-slider" data-delay="{{ defaultDelay }}" >
     {% for key, item in items %}
-      <div class="col">
-        <div class="step pt-1 px-2 pb-3 h-100">
+{#      <div class="col">#}
+        <div class="col step pt-1 mx-1 px-2 pb-3 ">
           <div class="step-header">
             <div class="ob1-spinner-determined d-none" data-ob1-component="SpinnerDetermined" data-spinnerdetermined-timer="{{ defaultDelay }}"></div>
             <span class="step-position">
@@ -65,7 +65,7 @@
             {{ item }}
           </div>
         </div>
-      </div>
+{#      </div>#}
     {% endfor %}
   </div>
 </div>
