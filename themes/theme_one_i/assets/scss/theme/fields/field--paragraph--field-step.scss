@@ -1,0 +1,121 @@
+.step-slider {
+
+  @include media-breakpoint-down(md) {
+    overflow-x: auto;
+    flex-wrap: initial;
+
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+
+    & > .col {
+      min-width: 50%;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    & > .col {
+      min-width: calc(100% - 2rem);
+    }
+  }
+
+
+
+  .step {
+
+    .step-header {
+      display: flex;
+
+      .ob1-spinner-determined {
+        position: absolute;
+        height: px-to-rem(45);
+        width: px-to-rem(45);
+
+        .ob1-spinner-determined-loader2,
+        .ob1-spinner-determined-loader1 {
+          width: px-to-rem(45);
+          height: px-to-rem(45);
+        }
+
+        .ob1-spinner-determined-loader1 {
+          top: 0;
+          left: 1rem;
+        }
+      }
+
+      .step-position {
+        z-index: 3;
+        border: 1px solid $gray4;
+        border-radius: 100%;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        text-align: center;
+        line-height: 24px;
+      }
+
+      hr.separator {
+        flex-grow: 1;
+        align-self: center;
+        display: none;
+      }
+    }
+
+    &.active, &:hover {
+      box-shadow: 0 16px 32px -8px $gray4;
+
+      .step-header {
+        .step-position {
+          font-weight: bold;
+          border-color: $gray3;
+          border-width: 2px;
+        }
+      }
+    }
+
+    &.active {
+
+      .step-header {
+        .step-position {
+          border: none;
+        }
+      }
+
+      .step-header {
+        .step-position {
+          font-weight: bold;
+          border-color: $gray3;
+          border-width: 2px;
+        }
+      }
+
+      hr.separator {
+        display: initial;
+        background-color: $gray4;
+      }
+    }
+
+    &.done {
+      .step-header {
+        .step-position {
+          border-color: $gray3;
+        }
+        hr.separator {
+          display: initial;
+          background-color: $gray3;
+        }
+      }
+
+      &:hover {
+        .step-header {
+          .step-position {
+            border-color: $orange1;
+            border-width: 3px;
+          }
+        }
+      }
+    }
+  }
+}
