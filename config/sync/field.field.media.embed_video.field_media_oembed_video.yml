@@ -9,9 +9,9 @@ id: media.embed_video.field_media_oembed_video
 field_name: field_media_oembed_video
 entity_type: media
 bundle: embed_video
-label: 'Remote video URL'
+label: 'Media Oembed Video'
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

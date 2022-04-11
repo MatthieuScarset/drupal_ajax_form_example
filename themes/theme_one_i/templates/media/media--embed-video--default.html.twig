@@ -31,6 +31,10 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-    <iframe src="{{ media.field_media_oembed_video.value }}" ></iframe>
-</div>
+{% if elements.embed_url_youtube is defined and elements.embed_url_youtube is not empty %}
+  <div{{ attributes }}>
+      <iframe src="{{ elements.embed_url_youtube }}" width="100%" height="100%" ></iframe>
+  </div>
+{% else %}
+  {{ media }}
+{% endif %}

@@ -1,7 +1,12 @@
 uuid: d2382950-ebb8-4997-96d7-91ff38436558
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: null
 id: embed_video
 label: 'Embed video'
 description: ''
@@ -11,6 +16,8 @@ new_revision: false
 source_configuration:
   source_field: field_media_oembed_video
   thumbnails_directory: 'public://oembed_thumbnails/[date:custom:Y-m]'
-  providers: {  }
+  providers:
+    - YouTube
 field_map:
-  default_name: field_title
+  type: field_media_oembed_video
+  title: name

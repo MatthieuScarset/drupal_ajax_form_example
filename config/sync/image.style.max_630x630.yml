@@ -9,18 +9,18 @@ dependencies:
 name: max_630x630
 label: 'max 630x630'
 effects:
-  55d25a6d-76e2-4bd9-9381-3c0403b860d1:
-    uuid: 55d25a6d-76e2-4bd9-9381-3c0403b860d1
+  38ffee92-8018-422d-a5d9-3814824879af:
+    uuid: 38ffee92-8018-422d-a5d9-3814824879af
+    id: image_scale
+    weight: -9
+    data:
+      width: 630
+      height: 630
+      upscale: false
+  94f79bdd-2910-4dd3-ab15-22c0c0ab4882:
+    uuid: 94f79bdd-2910-4dd3-ab15-22c0c0ab4882
     id: crop_crop
     weight: -10
     data:
       crop_type: crop_free_ratio
       automatic_crop_provider: null
-  38ffee92-8018-422d-a5d9-3814824879af:
-    uuid: 38ffee92-8018-422d-a5d9-3814824879af
-    id: image_scale
-    weight: 2
-    data:
-      width: 630
-      height: 630
-      upscale: false

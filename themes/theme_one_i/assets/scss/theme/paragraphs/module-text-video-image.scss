@@ -2,16 +2,25 @@
   margin-top: 100px;
   margin-bottom: 100px;
 
-  .left {
-    .field--name-field-visual {
-      -webkit-filter: drop-shadow(-15px 15px 0 $gray2);
-      filter: drop-shadow(-15px 15px 0 $gray2);
+  .col-img-video{
+    div{
+      width: 100%;
+      height: 100%;
     }
-  }
-  .right {
-    .field--name-field-visual {
-      -webkit-filter: drop-shadow(15px 15px 0 $gray2);
-      filter: drop-shadow(15px 15px 0 $gray2);
+    .img-video {
+      max-width: 630px;
+      max-height: 630px;
+      .field--name-field-video {
+        .divParentIframeYoutube {
+          iframe {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }
+
+
+

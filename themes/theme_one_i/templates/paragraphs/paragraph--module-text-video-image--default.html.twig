@@ -48,42 +48,48 @@
 %}
 {% block paragraph %}
 <div {{ attributes.addClass(classes) }}>
+  <div class="container-fluid site-width">
   <div class="row">
     <div class="col-12 pr-0 pr-md-1">
       {% if paragraph.field_display_mode.value == 'left' %}
       <div class="row w-100 justify-content-between left">
-          <div class="col-12 col-lg-6 align-top text-align-center">
+          <div class="col-12 col-lg-6 align-top d-flex justify-content-center col-img-video">
+            <div class="img-video mb-1 mb-md-0">
               {% if paragraph.field_media_type.value == 'video' %}
                 {{ content.field_video }}
               {% else %}
                 {{ content.field_visual }}
               {% endif %}
             </div>
-            <div class="col-12 col-lg-5">
-              <h2>{{ content.field_title }}</h2>
-              <div class="lead font-weight-bold">{{ content.field_highlight }}</div>
-              <div class="standard">{{ content.field_standard_text }}</div>
-              {{ content.field_call_to_action_link }}
-            </div>
+          </div>
+          <div class="col-12 col-lg-5">
+            <h2 class="mb-1 mb-md-2">{{ content.field_title }}</h2>
+            <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+            <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+            {{ content.field_call_to_action_link }}
+          </div>
           </div>
       {% else %}
         <div class="row w-100 justify-content-between right">
           <div class="col-12 col-lg-5">
-            <h2>{{ content.field_title }}</h2>
-            <div class="lead font-weight-bold">{{ content.field_highlight }}</div>
-            <div class="standard">{{ content.field_standard_text }}</div>
+            <h2 class="mb-1 mb-md-2">{{ content.field_title }}</h2>
+            <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+            <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
             {{ content.field_call_to_action_link }}
           </div>
-          <div class="col-12 col-lg-6 align-top text-align-center">
-            {% if paragraph.field_media_type.value == 'video' %}
-              {{ content.field_video }}
-            {% else %}
-              {{ content.field_visual }}
-            {% endif %}
+          <div class="col-12 col-lg-6 align-top d-flex justify-content-center col-img-video">
+            <div class="img-video mb-1 mb-md-0">
+              {% if paragraph.field_media_type.value == 'video' %}
+                {{ content.field_video }}
+              {% else %}
+                {{ content.field_visual }}
+              {% endif %}
+            </div>
           </div>
         </div>
       {% endif %}
     </div>
   </div>
+</div>
 </div>
 {% endblock paragraph %}
