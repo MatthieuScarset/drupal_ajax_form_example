@@ -1,0 +1,17 @@
+{% block paragraph %}
+  <div class="card-header col-12">
+    <a id="question-{{ paragraph.id() }}" class="collapsed" data-toggle="collapse" data-target="collapseQuestion-{{ paragraph.id() }}" href="#collapseQuestion-{{ paragraph.id() }}" role="button" aria-expanded="false">
+      <div class="accordion-card-title">
+        <div class="accordion-title text-decoration-none">
+          {{ content.field_question }}
+        </div>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </div>
+    </a>
+  </div>
+  <div id="collapseQuestion-{{ paragraph.id() }}" class="collapse col-12 px-0" aria-labelledby="question-{{ paragraph.id() }}">
+    <div class="accordion-card-body standard">
+      {{content.field_answered}}
+    </div>
+  </div>
+{% endblock %}

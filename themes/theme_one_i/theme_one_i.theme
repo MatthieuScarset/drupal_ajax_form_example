@@ -6,6 +6,7 @@ use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -89,27 +90,33 @@ function theme_one_i_preprocess_views_view(&$variables) {
 
 function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
 
-  $parent = $variables['paragraph']->getParentEntity();
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
 
-  $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
-  $is_numerical = false;
+  $is_numerical = FALSE;
 
-  if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
-    $is_numerical = true;
+  if (isset($paragraph)) {
+    $parent = $paragraph->getParentEntity();
+    $field_numerical_benefit = $parent->field_numericals_benefits->value;
+
+    if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
+      $is_numerical = TRUE;
+    }
   }
+
   $variables['is_numerical'] = $is_numerical;
 }
 
-function theme_one_i_preprocess_field__paragraph__field_item(&$variables) {
-  $parent = $variables['element']['#object'];
+function theme_one_i_preprocess_paragraph__module_faq(&$variables) {
 
-  $field_numerical_benefit = $parent->get('field_numericals_benefits')[0]->getValue()['value'];
-  $is_numerical = false;
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
 
-  if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
-    $is_numerical = true;
+  if (isset($paragraph)) {
+    $parent = $paragraph->getParentEntity();
+//    dd($paragraph->field_highlight->value);
+    $variables['faq_description'] = t($paragraph->field_highlight->value, ['@title' =>$parent->label()]);
   }
-  $variables['is_numerical'] = $is_numerical;
 }
 
 function theme_one_i_preprocess_node(&$variables) {

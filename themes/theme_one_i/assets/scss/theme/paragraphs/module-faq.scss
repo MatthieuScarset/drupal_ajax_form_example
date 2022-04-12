@@ -1,0 +1,46 @@
+.modal-faq.modal {
+
+  .modal-dialog {
+    position: fixed;
+    overflow-y: scroll;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+
+  @include media-breakpoint-up(md) {
+    &.fade {
+      .modal-dialog {
+        transition: transform .5s ease-out !important;
+        transform: translate(100%, 0) !important;
+      }
+    }
+
+    &.show {
+      .modal-dialog {
+        transform: none !important;
+      }
+    }
+
+    .modal-dialog {
+
+      .modal-content {
+        min-height: 100%;
+        height: fit-content;
+
+
+        span.icon {
+          font-size: 3rem;
+        }
+
+        #faqAccordion {
+          .card:last-child {
+            border: none !important;
+          }
+        }
+      }
+    }
+  }
+}
