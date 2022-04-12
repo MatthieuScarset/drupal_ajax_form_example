@@ -45,61 +45,27 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
 {% block paragraph %}
-  <div class="bg-white py-1 px-1 py-md-3 px-md-2">
+  <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
     {% block content %}
-      <h3 class="pb-0 mb-1">{{ content.field_title }}</h3>
-      <span>{{ content.field_accroche }}</span>
-      <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
+      <div class="detail-offre-content">
+        <h3 class="pb-0 mb-1">{{ content.field_title }}</h3>
+        <span>{{ content.field_accroche }}</span>
+        <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
 
-      {{ content.field_link_button }}
+        {{ content.field_link_button }}
 
-      <hr class="separator separator--gray4 my-1">
-
-      {# Affichage bloc par bloc en mobile #}
-      <div class="d-lg-none">
-        <div id="collapsed-text-{{ paragraph.id() }}"
-             class="collapse"
-             role="region"
-             aria-labelledby="collapsed-header">
-
+        <hr class="separator separator--gray4 my-1">
           {{ (content.field_offres_inclus) }}
           {{ content.field_offres_exclus }}
           {{ content.field_documentation }}
-
-        </div>
-
-        <button id="collapsed-header-{{ paragraph.id() }}" type="button"
-                class="o-link-arrow down collapsed text-decoration-none font-weight-bold text-center w-100"
-                data-toggle="collapse"
-                data-target="#collapsed-text-{{ paragraph.id() }}"
-                aria-expanded="false"
-                aria-controls="collapsed-text">
-          {{ "See All"|t }}
-        </button>
       </div>
 
-      {# Affichage de tous les blocs en desktop #}
-      <div class="d-none d-lg-block">
-        <div id="collapsed-text"
-             class="collapse"
-             role="region"
-             aria-labelledby="collapsed-header">
-
-          {{ (content.field_offres_inclus) }}
-          {{ content.field_offres_exclus }}
-          {{ content.field_documentation }}
-
-        </div>
-
-        <button id="collapsed-header" type="button"
-                class="o-link-arrow down collapsed text-decoration-none font-weight-bold text-center w-100"
-                data-toggle="collapse"
-                data-target="#collapsed-text"
-                aria-expanded="false"
-                aria-controls="collapsed-text">
-          {{ "See All"|t }}
-        </button>
-      </div>
+      <button type="button"
+              class="o-link-arrow see-more down text-decoration-none font-weight-bold text-center pb-2 w-100"
+      >
+        <span class="text-voir-tout">{{ "See All"|t }}</span>
+        <span class="text-voir-moins d-none">{{ "See less"|t }}</span>
+      </button>
 
     {% endblock %}
   </div>

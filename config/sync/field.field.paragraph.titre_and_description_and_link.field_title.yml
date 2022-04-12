@@ -1,15 +1,15 @@
-uuid: 6d50400d-deb1-47cf-b29d-104ce4388be1
-langcode: en
+uuid: d34e8b7e-c089-4c4b-8f6b-65471360b47f
+langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_title
-    - paragraphs.paragraphs_type.module_detail_offre
-id: paragraph.module_detail_offre.field_title
+    - paragraphs.paragraphs_type.titre_and_description_and_link
+id: paragraph.titre_and_description_and_link.field_title
 field_name: field_title
 entity_type: paragraph
-bundle: module_detail_offre
-label: 'Titre de l''offre'
+bundle: titre_and_description_and_link
+label: Titre
 description: ''
 required: true
 translatable: true

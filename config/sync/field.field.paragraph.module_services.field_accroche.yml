@@ -1,15 +1,15 @@
-uuid: 0f34ba63-da16-4ef7-9f87-5094f3853d2a
-langcode: en
+uuid: 91148fe8-6e58-40a0-aa98-6520b2e651c0
+langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_accroche
-    - paragraphs.paragraphs_type.module_detail_offre
-id: paragraph.module_detail_offre.field_accroche
+    - paragraphs.paragraphs_type.module_services
+id: paragraph.module_services.field_accroche
 field_name: field_accroche
 entity_type: paragraph
-bundle: module_detail_offre
-label: 'Description de l''offre'
+bundle: module_services
+label: 'Description services'
 description: ''
 required: true
 translatable: true

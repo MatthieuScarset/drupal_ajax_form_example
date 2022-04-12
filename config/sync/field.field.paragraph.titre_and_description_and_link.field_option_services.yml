@@ -1,0 +1,23 @@
+uuid: ccfacb2e-8a3d-4088-a1db-0e56d99e3e41
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_option_services
+    - paragraphs.paragraphs_type.titre_and_description_and_link
+id: paragraph.titre_and_description_and_link.field_option_services
+field_name: field_option_services
+entity_type: paragraph
+bundle: titre_and_description_and_link
+label: 'Cocher pour afficher option'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

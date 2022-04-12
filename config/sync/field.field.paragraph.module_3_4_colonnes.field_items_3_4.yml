@@ -1,20 +1,20 @@
-uuid: bd4fcf55-d3dd-4ca9-8607-c3c5e1b5d906
+uuid: 4a27efe0-0eeb-4f02-b209-6c54ceffad1e
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_items
+    - field.storage.paragraph.field_items_3_4
     - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_3_4_colonnes_items
   module:
     - entity_reference_revisions
-id: paragraph.module_3_4_colonnes.field_items
-field_name: field_items
+id: paragraph.module_3_4_colonnes.field_items_3_4
+field_name: field_items_3_4
 entity_type: paragraph
 bundle: module_3_4_colonnes
-label: Items
+label: 'Items 3/4 colonnes'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -26,66 +26,93 @@ settings:
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
-        weight: 22
-        enabled: false
-      default_button:
-        weight: 23
-        enabled: false
-      home_banner:
-        weight: 24
-        enabled: false
-      home_caroussel:
-        weight: 25
-        enabled: false
-      home_column:
-        weight: 26
-        enabled: false
-      home_column_section:
-        weight: 27
-        enabled: false
-      home_playlist:
-        weight: 28
-        enabled: false
-      home_thematic_columns:
-        weight: 29
-        enabled: false
-      homepage_banner_experience:
-        weight: 30
-        enabled: false
-      homepage_banner_item:
         weight: 31
         enabled: false
-      homepage_news:
+      default_button:
         weight: 32
         enabled: false
-      infography_partner:
+      documentation:
         weight: 33
         enabled: false
-      marketo:
+      home_banner:
         weight: 34
         enabled: false
-      module_3_4_colonnes:
+      home_caroussel:
         weight: 35
         enabled: false
-      module_3_4_colonnes_items:
+      home_column:
         weight: 36
-        enabled: true
-      paragraph_block_rebond:
+        enabled: false
+      home_column_section:
         weight: 37
         enabled: false
-      paragraph_product_call_to_action:
+      home_playlist:
         weight: 38
         enabled: false
-      paragraph_wysiwyg:
+      home_thematic_columns:
         weight: 39
         enabled: false
-      rebond_wysiwyg:
+      homepage_banner_experience:
         weight: 40
         enabled: false
-      related_content:
+      homepage_banner_item:
         weight: 41
         enabled: false
-      subhome_presse_carrousel:
+      homepage_news:
         weight: 42
+        enabled: false
+      infography_partner:
+        weight: 43
+        enabled: false
+      marketo:
+        weight: 44
+        enabled: false
+      module_3_4_colonnes:
+        weight: 45
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 46
+        enabled: true
+      module_benefits:
+        weight: 47
+        enabled: false
+      module_benefits_item:
+        weight: 48
+        enabled: false
+      module_detail_offre:
+        weight: 49
+        enabled: false
+      module_detail_offre_items:
+        weight: 50
+        enabled: false
+      module_partner:
+        weight: 51
+        enabled: false
+      module_services:
+        weight: 52
+        enabled: false
+      paragraph_block_rebond:
+        weight: 53
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 54
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 55
+        enabled: false
+      rebond_wysiwyg:
+        weight: 56
+        enabled: false
+      related_content:
+        weight: 57
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 58
+        enabled: false
+      titre_and_description:
+        weight: 59
+        enabled: false
+      titre_and_description_and_link:
+        weight: 60
         enabled: false
 field_type: entity_reference_revisions

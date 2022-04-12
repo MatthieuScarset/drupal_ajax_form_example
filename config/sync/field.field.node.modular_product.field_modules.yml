@@ -7,8 +7,9 @@ dependencies:
     - node.type.modular_product
     - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_benefits
-    - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_detail_offre
+    - paragraphs.paragraphs_type.module_partner
+    - paragraphs.paragraphs_type.module_services
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -31,6 +32,7 @@ settings:
       module_benefits: module_benefits
       module_partner: module_partner
       module_detail_offre: module_detail_offre
+      module_services: module_services
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -38,6 +40,9 @@ settings:
         enabled: false
       default_button:
         weight: 21
+        enabled: false
+      documentation:
+        weight: 32
         enabled: false
       home_banner:
         weight: 22
@@ -93,6 +98,9 @@ settings:
       module_partner:
         weight: 42
         enabled: true
+      module_services:
+        weight: 51
+        enabled: true
       paragraph_block_rebond:
         weight: 33
         enabled: false
@@ -110,5 +118,8 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 38
+        enabled: false
+      titre_and_description:
+        weight: 58
         enabled: false
 field_type: entity_reference_revisions

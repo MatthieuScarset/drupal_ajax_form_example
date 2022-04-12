@@ -1,9 +1,9 @@
-uuid: 883d9a20-fb17-4ccb-8483-dd5b46651e1f
+uuid: b1d488a3-625c-47b6-99b4-7cf196eafb8d
 langcode: fr
 status: true
 dependencies: {  }
-id: documentation
-label: '[MP] Documentation'
+id: titre_and_description_and_link
+label: '[MP] Titre description and link'
 icon_uuid: null
 icon_default: null
 description: ''

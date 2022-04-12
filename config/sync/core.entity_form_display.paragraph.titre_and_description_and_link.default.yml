@@ -1,0 +1,51 @@
+uuid: 4703b154-ef3e-4cde-b902-f36bc8e13ce2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.titre_and_description_and_link.field_accroche
+    - field.field.paragraph.titre_and_description_and_link.field_option_services
+    - field.field.paragraph.titre_and_description_and_link.field_redirection_url
+    - field.field.paragraph.titre_and_description_and_link.field_title
+    - paragraphs.paragraphs_type.titre_and_description_and_link
+  module:
+    - link
+id: paragraph.titre_and_description_and_link.default
+targetEntityType: paragraph
+bundle: titre_and_description_and_link
+mode: default
+content:
+  field_accroche:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_option_services:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_redirection_url:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
