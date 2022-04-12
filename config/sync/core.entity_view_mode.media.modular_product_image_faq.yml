@@ -1,0 +1,10 @@
+uuid: f7a22905-f174-4e90-93f3-fba4573cf410
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media
+id: media.modular_product_image_faq
+label: 'Modular Product Image Faq'
+targetEntityType: media
+cache: true

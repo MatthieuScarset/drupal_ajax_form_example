@@ -1,0 +1,33 @@
+uuid: 0b136d98-b417-4864-9d93-2f9b18b4c485
+langcode: fr
+status: true
+dependencies:
+  config:
+    - crop.type.crop_150_150
+  module:
+    - crop
+name: modular_product_mobile_image_faq
+label: 'Modular Product mobile image FAQ'
+effects:
+  433146bd-4b4b-49cd-bc0a-d17eb3afa519:
+    uuid: 433146bd-4b4b-49cd-bc0a-d17eb3afa519
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_150_150
+      automatic_crop_provider: null
+  852740b3-2316-4402-a122-3d5aac18436b:
+    uuid: 852740b3-2316-4402-a122-3d5aac18436b
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 200
+      height: 180
+      anchor: right-top
+  432a330f-1f6c-45f1-9c6a-0e29b04574e7:
+    uuid: 432a330f-1f6c-45f1-9c6a-0e29b04574e7
+    id: image_resize
+    weight: 3
+    data:
+      width: 150
+      height: 150

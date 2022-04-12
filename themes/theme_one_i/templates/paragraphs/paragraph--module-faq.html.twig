@@ -14,8 +14,7 @@
                   {% set file = media.field_image.entity %}
                   {% set uri = file.uri.value %}
                   {% if uri is not null and media.name.value is not null %}
-
-                    <img src="{{ uri|image_style_uri('mobile_faq_image') }}" alt="{{ media.name.value }}"/>
+                    <img src="{{ uri|image_style_uri('modular_product_mobile_image_faq') }}" alt="{{ media.name.value }}"/>
                   {% endif %}
                 {% endfor %}
               </div>

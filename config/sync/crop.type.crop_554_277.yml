@@ -1,0 +1,12 @@
+uuid: ba0beeac-1fe2-4fe4-b9fc-ddfc35b4806c
+langcode: fr
+status: true
+dependencies: {  }
+label: 'Crop 538:277'
+id: crop_554_277
+description: 'use for FAQ Image'
+aspect_ratio: '538:277'
+soft_limit_width: 538
+soft_limit_height: 277
+hard_limit_width: 554
+hard_limit_height: 277
