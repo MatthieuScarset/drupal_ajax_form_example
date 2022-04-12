@@ -100,24 +100,24 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
  */
 function oab_modular_product_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
   if ($element['#paragraph_type'] == 'module_text_video_image') {
-
+    $position = $element['subform']['field_visual']['#parents'][1];
     $element['subform']['field_visual']['#states'] = [
       'visible' => [
-        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'image'],
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
       ],
       'required' => [
-        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'image'],
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
       ]
     ];
+    $position = $element['subform']['field_video']['#parents'][1];
     $element['subform']['field_video']['#states'] = [
       'visible' => [
-        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'video'],
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
       ],
       'required' => [
-        ':input[name="field_modules[0][subform][field_media_type]"]' => ['value' => 'video'],
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
       ]
     ];
-
   }
 }
 

@@ -1,24 +1,16 @@
 .paragraph--type--module-text-video-image{
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 
-  .col-img-video{
-    div{
-      width: 100%;
-      height: 100%;
-    }
-    .img-video {
-      max-width: 630px;
-      max-height: 630px;
-      .field--name-field-video {
-        .divParentIframeYoutube {
-          iframe {
-            width: 100%;
-            height: 100%;
-          }
-        }
-      }
-    }
+  .img-video {
+    min-width: 100%;
+  }
+
+  img {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    margin: auto;
   }
 }
 
