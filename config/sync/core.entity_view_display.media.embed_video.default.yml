@@ -1,0 +1,37 @@
+uuid: b9b42481-2034-4df2-ad2b-4ec22dde0090
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.embed_video.field_description
+    - field.field.media.embed_video.field_media_oembed_video
+    - field.field.media.embed_video.field_video_url
+    - media.type.embed_video
+  module:
+    - link
+id: media.embed_video.default
+targetEntityType: media
+bundle: embed_video
+mode: default
+content:
+  field_video_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_description: true
+  field_media_generic: true
+  field_media_oembed_video: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,10 @@
+uuid: 82ad50dc-b1e0-42ea-8448-2e45505088c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.image_max_630x630
+label: 'Image Max 630x630'
+targetEntityType: media
+cache: true

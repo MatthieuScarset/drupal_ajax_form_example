@@ -1,0 +1,42 @@
+uuid: 239f6517-8f18-4e87-9565-04450bd6ff82
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.medias_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: browser_embed_video_modal
+label: 'Browser modal for embed videos'
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select entities'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  97846396-9658-45ba-9629-2196aad5d0eb:
+    id: view
+    uuid: 97846396-9658-45ba-9629-2196aad5d0eb
+    label: 'Videos listing'
+    weight: 1
+    settings:
+      submit_text: 'Select video'
+      auto_select: false
+      view: medias_entity_browser
+      view_display: entity_browser_embed_videos
+  0e656900-bb01-49dc-be67-f94aed7c97bf:
+    id: entity_form
+    uuid: 0e656900-bb01-49dc-be67-f94aed7c97bf
+    label: Create
+    weight: 2
+    settings:
+      submit_text: 'Save entity'
+      entity_type: media
+      bundle: embed_video
+      form_mode: default

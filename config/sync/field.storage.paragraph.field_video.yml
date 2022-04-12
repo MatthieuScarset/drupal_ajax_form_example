@@ -1,15 +1,16 @@
-uuid: 2035149a-8dea-440a-ac7d-149282ba8175
-langcode: fr
+uuid: c45d60cb-23e5-481f-b6ea-76b5f88ac246
+langcode: en
 status: true
 dependencies:
   module:
+    - media
     - paragraphs
-id: paragraph.field_accroche
-field_name: field_accroche
+id: paragraph.field_video
+field_name: field_video
 entity_type: paragraph
-type: string_long
+type: entity_reference
 settings:
-  case_sensitive: false
+  target_type: media
 module: core
 locked: false
 cardinality: 1
