@@ -136,15 +136,33 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
  */
 function oab_modular_product_form_node_modular_product_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
-  /** @var \Drupal\oab_modular_product\Services\OabModularProductService $conf_modular_product */
-  $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+  if (in_array($form_id, array('node_modular_product_form', 'node_modular_product_edit_form'))) {
+    /** @var \Drupal\oab_modular_product\Services\OabModularProductService $conf_modular_product */
+    $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
-  if (isset($form['field_product_name'])) {
-    $form['field_product_name']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTopZoneTitleMaxCharacter();
-  }
+    if (isset($form['field_product_name'])) {
+      $form['field_product_name']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTopZoneTitleMaxCharacter();
+    }
 
-  if (isset($form['field_teaser'])) {
-    $form['field_teaser']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTopZoneDescriptionMaxCharacter();
+    if (isset($form['field_teaser'])) {
+      $form['field_teaser']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTopZoneDescriptionMaxCharacter();
+    }
+
+    if (isset($form["field_enable_wysiwyg_paragraph"])) {
+      //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
+      if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
+        $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
+      }
+      //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules
+      if(isset($form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"]) &&
+        $form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"] === false &&
+        isset($form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg'])) {
+        //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
+        $form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg']['#access'] = false;
+      }
+    }
+
+
   }
 
 }

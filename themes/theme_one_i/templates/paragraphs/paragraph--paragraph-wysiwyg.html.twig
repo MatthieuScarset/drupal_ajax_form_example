@@ -48,8 +48,10 @@
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
+    <div class="container-fluid site-width">
     {% block content %}
       {{ content }}
     {% endblock %}
+    </div>
   </div>
 {% endblock paragraph %}
