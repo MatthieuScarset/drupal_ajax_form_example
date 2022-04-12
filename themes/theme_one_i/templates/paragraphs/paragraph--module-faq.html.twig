@@ -1,15 +1,31 @@
+
 {% block paragraph %}
   <div {{ attributes.addClass("my-md-5", "container-fluid", "site-width") }}>
     {% block content %}
-      <div class="col-12 pr-0 pr-md-1">
-        <div class="text-gray3 font-weight-bold pb-3 mb-0">{{ "Aller plus loin"|t }}</div>
-        <div class="row bg-warning">
-          <div class="col-5 offset-1 py-3">
-            <h2 class="no-signature mb-0 pb-1">{{ content.field_title }}</h2>
-            <div class="d-inline-flex flex-row pb-2">{{ content.field_highlight }}</div>
-            <button class="btn btn-primary mr-1 mb-1" type="button" data-toggle="modal" data-target="#faqModal">{{ content.field_function }}</button>
+      <div class="col-12 pr-md-0 pr-md-1">
+        <div class="text-gray3 font-weight-bold py-3 ml--1 mb-0">{{ "Aller plus loin"|t }}</div>
+        <div class="row bg-warning  pr-0 pl-2 pl-md-0">
+          <div class="col-12 col-md-5 offset-md-1 px-0 px-md-1 pt-md-3 pb-2">
+            <div class="row">
+              <h2 class="col-6 col-md-12 no-signature mb-0 pb-1 pt-3 pt-md-0">{{ content.field_title }}</h2>
+              <div class="col-6 d-flex d-md-none justify-content-end">
+                {% for image in content.field_visual if image.entity is defined  %}
+                  {% set media = image.entity %}
+                  {% set file = media.field_image.entity %}
+                  {% set uri = file.uri.value %}
+                  {% if uri is not null and media.name.value is not null %}
+
+                    <img src="{{ uri|image_style_uri('mobile_faq_image') }}" alt="{{ media.name.value }}"/>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="d-inline-flex flex-row pb-2 pr-2 pr-md-0">{{ faq_description | nl2br }}</div>
+            <button class="btn btn-primary mr-md-1 mb-1" type="button" data-toggle="modal" data-target="#faqModal">{{ content.field_function }}</button>
           </div>
-          <div class="col-6">Image</div>
+          <div class="col-6 d-none d-md-block">
+    {{ content.field_visual }}
+          </div>
         </div>
       </div>
     {% endblock %}
@@ -18,17 +34,17 @@
 
 
 <div class="modal modal-faq fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="faqModalTitle" aria-hidden="true">
-  <div class="modal-dialog w-100 h-100 my-0" role="document">
-    <div class="modal-content">
+  <div class="modal-dialog my-md-0" role="document">
+    <div class="modal-content mt-5 mt-md-0">
       <div class="modal-header">
         <button type="button" class="close text-right d-none d-md-block my-2" data-dismiss="modal" aria-label="Fermer">
           <span aria-hidden="true">×</span>
         </button>
-        <button type="button" class="close d-md-none o-link-arrow o-link-small back" data-dismiss="modal">Retour</button>
+        <button type="button" class="close d-md-none o-link-arrow o-link-small back" data-dismiss="modal">Fermer</button>
       </div>
       <div class="modal-body row">
-        <h2 id="faqModalTitle" class="col-12 no-signature d-inline-flex">
-          <span class="icon icon-Orange-Assistant2 text-primary pr-2" aria-hidden="true"></span>
+        <h2 id="faqModalTitle" class="col-12 no-signature d-flex flex-column flex-md-row">
+          <span class="icon icon-Orange-Assistant2 text-primary pr-md-2" aria-hidden="true"></span>
           {{ content.field_panel_title }}
         </h2>
         <div class="col-12">
