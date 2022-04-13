@@ -5,7 +5,7 @@ dependencies:
   config:
     - entity_browser.browser.browser_file_modal
     - field.field.paragraph.documentation.field_call_to_action_link
-    - field.field.paragraph.documentation.field_visual
+    - field.field.paragraph.documentation.field_pdf
     - paragraphs.paragraphs_type.documentation
   module:
     - entity_browser
@@ -23,7 +23,7 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_visual:
+  field_pdf:
     type: entity_browser_entity_reference
     weight: 0
     region: content

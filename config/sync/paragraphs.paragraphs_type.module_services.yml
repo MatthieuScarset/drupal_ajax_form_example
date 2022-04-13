@@ -1,9 +1,9 @@
-uuid: 883d9a20-fb17-4ccb-8483-dd5b46651e1f
+uuid: 7cfe6f99-8bdc-46cd-9dc2-85a29efc23f8
 langcode: fr
 status: true
 dependencies: {  }
-id: documentation
-label: '[MP] Documentation'
+id: module_services
+label: '[MP] Module services sur-mesure'
 icon_uuid: null
 icon_default: null
 description: ''

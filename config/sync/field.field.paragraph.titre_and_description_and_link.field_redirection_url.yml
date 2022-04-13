@@ -1,0 +1,23 @@
+uuid: b98b924b-a10f-46be-9fc5-4487d3d261a8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_redirection_url
+    - paragraphs.paragraphs_type.titre_and_description_and_link
+  module:
+    - link
+id: paragraph.titre_and_description_and_link.field_redirection_url
+field_name: field_redirection_url
+entity_type: paragraph
+bundle: titre_and_description_and_link
+label: 'Lien en savoir plus'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

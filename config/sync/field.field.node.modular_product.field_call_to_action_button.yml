@@ -13,11 +13,11 @@ entity_type: node
 bundle: modular_product
 label: 'Product CTA button'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 17
   title: 1
+  link_type: 17
 field_type: link

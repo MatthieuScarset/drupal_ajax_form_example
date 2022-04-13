@@ -1,17 +1,17 @@
-uuid: 98c21649-c824-4f3b-87d5-f8440c3b5cd6
+uuid: d9677ab8-77f4-4201-b239-f149cd901e11
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_3_4_colonnes.field_accroche
-    - field.field.paragraph.module_3_4_colonnes.field_items_3_4
-    - field.field.paragraph.module_3_4_colonnes.field_title
-    - paragraphs.paragraphs_type.module_3_4_colonnes
+    - field.field.paragraph.module_services.field_accroche
+    - field.field.paragraph.module_services.field_items_services
+    - field.field.paragraph.module_services.field_title
+    - paragraphs.paragraphs_type.module_services
   module:
     - entity_reference_revisions
-id: paragraph.module_3_4_colonnes.default
+id: paragraph.module_services.default
 targetEntityType: paragraph
-bundle: module_3_4_colonnes
+bundle: module_services
 mode: default
 content:
   field_accroche:
@@ -21,14 +21,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_items_3_4:
+  field_items_services:
     type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_title:
     type: string

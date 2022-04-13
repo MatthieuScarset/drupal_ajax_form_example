@@ -1,17 +1,17 @@
-uuid: 746c7649-410c-48ba-8af9-341f603d6cff
+uuid: cdd4821a-b357-4bd7-b0fb-62dcc9ea2ae7
 langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_3_4_colonnes.field_accroche
-    - field.field.paragraph.module_3_4_colonnes.field_items_3_4
-    - field.field.paragraph.module_3_4_colonnes.field_title
-    - paragraphs.paragraphs_type.module_3_4_colonnes
+    - field.field.paragraph.module_services.field_accroche
+    - field.field.paragraph.module_services.field_items_services
+    - field.field.paragraph.module_services.field_title
+    - paragraphs.paragraphs_type.module_services
   module:
     - paragraphs
-id: paragraph.module_3_4_colonnes.default
+id: paragraph.module_services.default
 targetEntityType: paragraph
-bundle: module_3_4_colonnes
+bundle: module_services
 mode: default
 content:
   field_accroche:
@@ -22,9 +22,9 @@ content:
       rows: 3
       placeholder: ''
     third_party_settings: {  }
-  field_items_3_4:
+  field_items_services:
     type: paragraphs
-    weight: 3
+    weight: 2
     region: content
     settings:
       title: Paragraph

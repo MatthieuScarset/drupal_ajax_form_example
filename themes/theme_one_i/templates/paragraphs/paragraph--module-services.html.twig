@@ -40,26 +40,30 @@
 #}
 {%
   set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes,"pt-2 pt-md-5") }}>
     <div class="container-fluid site-width">
-    {% block content %}
-      <h2 class="no-signature col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
-
-      <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-3 px-0">
-        {{ content.field_accroche }}
-      </div>
-
-      <div class="items-module-3-4-colonnes px-0">
-        {{ content.field_items_3_4 }}
-      </div>
-    {% endblock %}
+      {% block content %}
+        <div class="row justify-content-between">
+          <div class="col-12">
+            <span class="small text-gray3 font-weight-bold">{{ "Tailor-made services"|t }}</span>
+          </div>
+          <div class="col-12 col-md-4">
+            <h2 class="no-signature mb-2 mb-md-3 px-0 pt-1 pb-0">{{ content.field_title }}</h2>
+            <div class="lead font-weight-bold mb-2 mb-md-4 p-0">{{ content.field_accroche }}</div>
+          </div>
+         <div class="items-services col-12 col-md-7">
+           <hr class="separator separator--gray4">
+           {{ content.field_items_services }}
+         </div>
+        </div>
+      {% endblock %}
     </div>
   </div>
 {% endblock paragraph %}

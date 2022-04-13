@@ -40,26 +40,50 @@
 #}
 {%
   set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+]
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
-    <div class="container-fluid site-width">
-    {% block content %}
-      <h2 class="no-signature col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
+      {% block content %}
+        <div class="accordion">
+          <div class="card multi custom-card">
+            <div class="card-header">
+              <a id="serviceTitle-{{ paragraph.id() }}"
+                 class="collapsed"
+                 data-toggle="collapse"
+                 data-target="serviceDescription-{{ paragraph.id() }}"
+                 href="#collapseOne-{{ paragraph.id() }}"
+                 role="button"
+                 aria-expanded="false">
+                <div class="accordion-card-title justify-content-between w-100">
+                  <div class="accordion-title text-decoration-none">
+                    {{content.field_title}}
+                  </div>
 
-      <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-3 px-0">
-        {{ content.field_accroche }}
-      </div>
+                  {% if paragraph.field_option_services[0].value == 1 %}
+                    <div class="mr-md-2">
+                      <span class="ob1-capsule ob1-capsule-context small mr-0">{{ 'Option'|t }}</span>
+                    </div>
+                  {% endif %}
 
-      <div class="items-module-3-4-colonnes px-0">
-        {{ content.field_items_3_4 }}
-      </div>
-    {% endblock %}
-    </div>
+                  <span class="accordion-icon" aria-hidden="true"></span>
+                </div>
+              </a>
+            </div>
+            <div id="serviceDescription-{{ paragraph.id() }}"
+                 class="collapse"
+                 aria-labelledby="serviceTitle-{{ paragraph.id() }}">
+              <div class="accordion-card-body standard mw-100">
+                {{ content.field_accroche }}
+                <a href="{{ content.field_redirection_url[0]['#title'] }}" class="o-link-arrow text-decoration-none mt-1">{{ 'More information'|t }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
   </div>
 {% endblock paragraph %}
