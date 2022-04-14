@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 
@@ -18,6 +19,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
   $user_roles = \Drupal::currentUser()->getRoles();
+  $user_is_admin = in_array('administrator', $user_roles);
 
   $modules = [
     'module_benefits',
@@ -36,10 +38,10 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
 
 
 
-  if($element['#paragraph_type'] = 'module_faq') {
+  if($element['#paragraph_type'] === 'module_faq') {
+
     /*
    * liste des fields seulement modifiable par les admins
-   * utilisé pour le module FAQ
    */
     $field_restricted = [
       'field_title',
@@ -48,10 +50,11 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
       'field_function',
       'field_visual'
     ];
-    if(in_array('administrator', $user_roles)) {
-      foreach ($field_restricted as $field_name) {
-        if (isset($element['subform'][$field_name])) {
-          $element['subform'][$field_name]['widget']['#access'] = true;
+
+    foreach ($field_restricted as $field_name) {
+      if (isset($element['subform'][$field_name])) {
+        if($user_is_admin) {
+            $element['subform'][$field_name]['widget']['#access'] = true;
         }
         else {
           $element['subform'][$field_name]['widget']['#access'] = false;
@@ -64,7 +67,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getModuleTitleMaxCharacter();
       $element['subform']['field_title']['widget'][0]['value']['#size'] = 75;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] = \Drupal\Core\Field\FieldFilteredMarkup::create($conf_modular_product->getModuleTitleMaxCharacter().' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getModuleTitleMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
@@ -73,7 +76,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
 
     if (isset($element['subform']['field_highlight'])) {
       $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getModuleDescriptionMaxCharacter();
-      $element['subform']['field_highlight']['widget'][0]['value']['#description'] = \Drupal\Core\Field\FieldFilteredMarkup::create($conf_modular_product->getModuleDescriptionMaxCharacter().' characters max');
+      $element['subform']['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($conf_modular_product->getModuleDescriptionMaxCharacter().' characters max');
       $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
     }
   }
@@ -104,7 +107,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     }
   }
 
-  if ($element['#paragraph_type'] == 'module_detail_offre_items') {
+  if ($element['#paragraph_type'] === 'module_detail_offre_items') {
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 65;
     }
@@ -117,7 +120,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     }
   }
 
-  if ($element['#paragraph_type'] == 'titre_and_description') {
+  if ($element['#paragraph_type'] === 'titre_and_description') {
     $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = 180;
   }
 
@@ -130,12 +133,12 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
   }
 
 
-  if ($element['#paragraph_type'] == 'titre_and_description_and_link') {
+  if ($element['#paragraph_type'] === 'titre_and_description_and_link') {
     $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 100;
     $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = 200;
   }
 
-  if ($element['#paragraph_type'] == 'module_services') {
+  if ($element['#paragraph_type'] === 'module_services') {
     if (isset($element['subform']['field_title'], $element['subform']['field_accroche'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = 65;
       $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = 200;
