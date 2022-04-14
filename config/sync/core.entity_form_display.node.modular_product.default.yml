@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
+    - field.field.node.modular_product.field_faq
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_modules
     - field.field.node.modular_product.field_product_category
@@ -67,6 +68,7 @@ third_party_settings:
         - group_top_zone
         - group_presentation
         - group_modules
+        - group_bottom_of_page
       label: Onglets
       region: content
       parent_name: ''
@@ -122,6 +124,21 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_bottom_of_page:
+      children:
+        - field_faq
+      label: 'bottom of page'
+      region: content
+      parent_name: group_onglets
+      weight: 7
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.modular_product.default
 targetEntityType: node
 bundle: modular_product
@@ -149,6 +166,24 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_faq:
+    type: paragraphs
+    weight: 37
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
     third_party_settings: {  }
   field_modular_product_tarif:
     type: string_textfield

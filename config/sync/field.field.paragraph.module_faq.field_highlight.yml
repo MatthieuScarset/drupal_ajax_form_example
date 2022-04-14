@@ -10,7 +10,7 @@ field_name: field_highlight
 entity_type: paragraph
 bundle: module_faq
 label: Description
-description: ''
+description: 'use "@title" where you want to write the product name'
 required: false
 translatable: true
 default_value: {  }

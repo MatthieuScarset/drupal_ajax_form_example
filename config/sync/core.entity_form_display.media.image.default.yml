@@ -27,6 +27,8 @@ content:
       preview_image_style: thumbnail
       crop_preview_image_style: crop_thumbnail
       crop_list:
+        - crop_150_150
+        - crop_554_277
         - crop_645_410
         - crop_free_ratio
       crop_types_required: {  }
