@@ -1,5 +1,13 @@
-<div class="row partners-container slider-container pb-2 pr-0">
+<div class="row partners-container slider-container pb-2">
   {% for item in items %}
-    <div {{ item.attributes.addClass('col-5', 'col-md-3', 'pr-0') }}>{{ item.content }}</div>
+    {% if 1 === items|length %}
+      <div {{ item.attributes.addClass('col-12', 'd-flex', 'justify-content-center', 'pr-0') }}>{{ item.content }}</div>
+    {% elseif 2 === items|length %}
+      <div {{ item.attributes.addClass('col-6', 'd-flex', 'justify-content-between', 'pr-0') }}>{{ item.content }}</div>
+    {% elseif 3 === items|length %}
+      <div {{ item.attributes.addClass('col-4', 'd-flex', 'justify-content-between', 'pr-0') }}>{{ item.content }}</div>
+    {% else %}
+      <div {{ item.attributes.addClass('col-5', 'col-md-4', 'pr-0') }}>{{ item.content }}</div>
+    {% endif %}
   {% endfor %}
 </div>
