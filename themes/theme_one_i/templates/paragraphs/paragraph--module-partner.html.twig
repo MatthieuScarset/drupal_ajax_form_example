@@ -4,15 +4,21 @@
       <div class="col-12 pr-0 pr-md-1 custom-slider">
         <div class="row justify-content-between" >
           <h2 class="col-12 col-md-7 pl-0">{{ content.field_title }}</h2>
-          <div class="col-12 col-md-7 lead font-weight-bold px-0 pt-0 pb-md-4 pb-3">
-            {{ content.field_highlight }}
-          </div>
           <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
             <button class="btn btn-secondary" type="button" data-direction="left" ><span class="icon icon-arrow-previous" aria-hidden="true"></span></button>
             <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
           </div>
-          <div class="col-12 px-0">
-            {{ content.field_partners_logo }}
+          <div class="row w-100">
+            {% if content.field_highlight.0 is not null %}
+              <div class="col-12 col-md-4 lead font-weight-bold">
+                {{ content.field_highlight }}
+              </div>
+              <div class="col-12 col-md-8 px-0 w-100">
+            {% else %}
+              <div class="col-12 px-0">
+            {% endif %}
+              {{ content.field_partners_logo }}
+            </div>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: module_faq
 label: 'FAQ Panel Title'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

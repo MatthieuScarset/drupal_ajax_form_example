@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_benefits
     - paragraphs.paragraphs_type.module_detail_offre
+    - paragraphs.paragraphs_type.module_faq
     - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_steps
     - paragraphs.paragraphs_type.paragraph_wysiwyg
@@ -32,6 +33,7 @@ settings:
       module_benefits: module_benefits
       module_partner: module_partner
       module_detail_offre: module_detail_offre
+      module_faq: module_faq
       module_steps: module_steps
     negate: 0
     target_bundles_drag_drop:
@@ -94,6 +96,12 @@ settings:
         enabled: true
       module_detail_offre_items:
         weight: 44
+        enabled: false
+      module_faq:
+        weight: 53
+        enabled: true
+      module_faq_quesions:
+        weight: 54
         enabled: false
       module_partner:
         weight: 42
