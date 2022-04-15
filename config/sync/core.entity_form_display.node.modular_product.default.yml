@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_modules
+    - field.field.node.modular_product.field_presentation
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
@@ -81,6 +82,7 @@ third_party_settings:
     group_presentation:
       children:
         - title
+        - field_presentation
       label: Présentation
       region: content
       parent_name: group_onglets
@@ -169,6 +171,24 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: ''
+    third_party_settings: {  }
+  field_presentation:
+    type: paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
     third_party_settings: {  }
   field_product_category:
     type: option_group_term_select

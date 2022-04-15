@@ -36,7 +36,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
 
 
 
-  if($element['#paragraph_type'] = 'module_faq') {
+  if($element['#paragraph_type'] === 'module_faq') {
     /*
    * liste des fields seulement modifiable par les admins
    * utilisé pour le module FAQ
@@ -145,6 +145,45 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
       $element['subform']['field_items_services']['widget']['#cardinality'] = 10;
     }
   }
+
+  if ($element['#paragraph_type'] === 'module_text_video_image') {
+    $position = $element['subform']['field_visual']['#parents'][1];
+    $element['subform']['field_visual']['#states'] = [
+      'visible' => [
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
+      ],
+      'required' => [
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
+      ]
+    ];
+    $position = $element['subform']['field_video']['#parents'][1];
+    $element['subform']['field_video']['#states'] = [
+      'visible' => [
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
+      ],
+      'required' => [
+        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
+      ]
+    ];
+  }
+  if ($element['#paragraph_type'] === 'module_presentation') {
+    $element['subform']['field_visual']['#states'] = [
+      'visible' => [
+        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
+      ],
+      'required' => [
+        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
+      ]
+    ];
+    $element['subform']['field_video']['#states'] = [
+      'visible' => [
+        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
+      ],
+      'required' => [
+        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
+      ]
+    ];
+  }
 }
 
 /**
@@ -229,33 +268,6 @@ function oab_modular_product_preprocess_field(&$variables) {
     }
   }
 }
-
-/**
- * Implements hook_field_widget_WIDGET_TYPE_form_alter().
- */
-function oab_modular_product_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
-  if ($element['#paragraph_type'] == 'module_text_video_image') {
-    $position = $element['subform']['field_visual']['#parents'][1];
-    $element['subform']['field_visual']['#states'] = [
-      'visible' => [
-        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
-      ],
-      'required' => [
-        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'image'],
-      ]
-    ];
-    $position = $element['subform']['field_video']['#parents'][1];
-    $element['subform']['field_video']['#states'] = [
-      'visible' => [
-        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
-      ],
-      'required' => [
-        ':input[name="field_modules['.$position.'][subform][field_media_type]"]' => ['value' => 'video'],
-      ]
-    ];
-  }
-}
-
 
 function changeUrlToEmbedUrl($url) {
 
