@@ -25,7 +25,8 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     'module_detail_offre',
     'module_partner',
     'module_faq',
-    'module_text_video_image'
+    'module_text_video_image',
+    'module_presentation'
   ];
 
   $module_items = [
@@ -167,6 +168,16 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     ];
   }
   if ($element['#paragraph_type'] === 'module_presentation') {
+    $element['subform']['field_for_who_title']['#states'] = [
+      'visible' => [
+        ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
+      ]
+    ];
+    $element['subform']['field_for_who_links_list']['#states'] = [
+      'visible' => [
+        ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
+      ]
+    ];
     $element['subform']['field_visual']['#states'] = [
       'visible' => [
         ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
@@ -308,4 +319,13 @@ function oab_modular_product_media_view_alter(array &$build, \Drupal\Core\Entity
     $url = $entity->field_video_url?->uri;
     $build['embed_url_youtube'] = changeUrlToEmbedUrl($url);
  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view_alter().
+ */
+function oab_modular_product_paragraph_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  if($entity->bundle() === "module_presentation") {
+    $build['parent_node_title'] = $entity->getParentEntity()?->getTitle();
+  }
 }

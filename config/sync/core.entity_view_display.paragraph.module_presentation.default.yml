@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.module_presentation.field_additional_modules
     - field.field.paragraph.module_presentation.field_enable_for_who
     - field.field.paragraph.module_presentation.field_for_who_links_list
     - field.field.paragraph.module_presentation.field_for_who_title
@@ -21,6 +22,15 @@ targetEntityType: paragraph
 bundle: module_presentation
 mode: default
 content:
+  field_additional_modules:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 9
+    region: content
   field_enable_for_who:
     type: boolean
     label: hidden

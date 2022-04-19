@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.paragraph.module_presentation.field_additional_modules
     - field.field.paragraph.module_presentation.field_enable_for_who
     - field.field.paragraph.module_presentation.field_for_who_links_list
     - field.field.paragraph.module_presentation.field_for_who_title
@@ -22,6 +23,24 @@ targetEntityType: paragraph
 bundle: module_presentation
 mode: default
 content:
+  field_additional_modules:
+    type: paragraphs
+    weight: 10
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
   field_enable_for_who:
     type: boolean_checkbox
     weight: 6
@@ -31,7 +50,7 @@ content:
     third_party_settings: {  }
   field_for_who_links_list:
     type: paragraphs
-    weight: 8
+    weight: 9
     region: content
     settings:
       title: Paragraph
@@ -49,7 +68,7 @@ content:
     third_party_settings: {  }
   field_for_who_title:
     type: string_textfield
-    weight: 7
+    weight: 8
     region: content
     settings:
       size: 60

@@ -53,7 +53,7 @@
         <div class="col-12 pr-0 pr-md-1">
             <div class="row w-100 justify-content-between">
               {% if paragraph.field_media_type.value == 'video' or paragraph.field_media_type.value == 'image' %}
-                <div class="col-12 col-lg-6  d-flex justify-content-center col-img-video order-lg-2">
+                <div class="col-12 col-lg-6  d-flex justify-content-center col-img-video order-lg-2 ">
                   <div class="img-video mb-1 mb-lg-0">
                     {% if paragraph.field_media_type.value == 'video' %}
                       {{ content.field_video }}
@@ -73,11 +73,16 @@
 
                     {% if content.field_enable_for_who['#items'].value %}
                     <div class="for_who_block">
-                      <span class="h4 text-primary mb-0">{{ content.field_for_who_title }}</span>
-                      <div class="lead font-weight-bold subtitle">blablabla est fait pour vous</div>
+                      <span class="h4 mb-0">{{ content.field_for_who_title }}</span>
+                      <div class="lead font-weight-bold subtitle">{{ elements.parent_node_title }} {{ 'is made for you'|t }}</div>
                       <div>{{ content.field_for_who_links_list }}</div>
                     </div>
                     {% endif %}
+              </div>
+            </div>
+            <div class="row w-100 justify-content-between">
+              <div class="col-12">
+                {{ content.field_additional_modules }}
               </div>
             </div>
         </div>
