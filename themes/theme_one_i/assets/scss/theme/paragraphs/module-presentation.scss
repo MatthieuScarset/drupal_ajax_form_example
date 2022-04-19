@@ -1,0 +1,35 @@
+.paragraph--type--module-presentation{
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+  .for_who_block {
+    @include media-breakpoint-up(md) {
+      .h4 {
+        color: $primary;
+      }
+    }
+    .subtitle{
+      margin-bottom: 1rem;
+    }
+    .callout {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      border-left: 4px solid $gray4;
+      &:hover, &:active {
+        border-left-color: $primary;
+        background-color: $gray2;
+      }
+    }
+  }
+  .img-video {
+    min-width: 100%;
+    .sticky-top{
+      z-index: 1000;
+    }
+  }
+  img {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    margin: auto;
+  }
+}

@@ -1,0 +1,18 @@
+uuid: 245bbbba-15d5-4c26-b4f3-4188461ca7b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_enable_for_who
+field_name: field_enable_for_who
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
