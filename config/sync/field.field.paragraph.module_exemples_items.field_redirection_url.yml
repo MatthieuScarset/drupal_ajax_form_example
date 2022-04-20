@@ -1,0 +1,23 @@
+uuid: 9f936327-0894-4085-90f8-66276f255a11
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_redirection_url
+    - paragraphs.paragraphs_type.module_exemples_items
+  module:
+    - link
+id: paragraph.module_exemples_items.field_redirection_url
+field_name: field_redirection_url
+entity_type: paragraph
+bundle: module_exemples_items
+label: 'Call to action link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

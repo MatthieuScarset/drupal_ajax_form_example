@@ -28,7 +28,7 @@
       button.see-more {
         background: $white;
         max-width: 100%;
-        padding-top: 2rem;
+        padding-top: 0.5rem;
         @include media-breakpoint-up(md) {
           max-width: 88%;
           padding-right: 2rem;

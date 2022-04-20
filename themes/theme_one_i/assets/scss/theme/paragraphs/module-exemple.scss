@@ -1,0 +1,21 @@
+.field-items-modules-exemple {
+  .img-module-exemple {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .example-content {
+    flex-wrap: initial;
+    overflow-x: scroll;
+    scrollbar-width: none;
+  }
+
+  .progress-indicator {
+    height: 6px;
+    .ob1-progress-bar-determined-inner {
+      animation-delay: initial;
+    }
+  }
+}

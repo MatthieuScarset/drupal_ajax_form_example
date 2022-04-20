@@ -1,0 +1,10 @@
+uuid: 7cb2224b-1f01-4b92-a8a6-34e8a1097858
+langcode: fr
+status: true
+dependencies: {  }
+id: module_exemples_items
+label: '[MP] Module exemples items'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

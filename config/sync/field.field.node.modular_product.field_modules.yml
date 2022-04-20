@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_benefits
     - paragraphs.paragraphs_type.module_detail_offre
+    - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_services
     - paragraphs.paragraphs_type.module_steps
@@ -37,6 +38,7 @@ settings:
       module_detail_offre: module_detail_offre
       module_services: module_services
       module_steps: module_steps
+      module_exemples: module_exemples
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -104,6 +106,12 @@ settings:
         enabled: false
       module_faq_quesions:
         weight: 57
+        enabled: false
+      module_exemples:
+        weight: 58
+        enabled: true
+      module_exemples_items:
+        weight: 59
         enabled: false
       module_partner:
         weight: 42
