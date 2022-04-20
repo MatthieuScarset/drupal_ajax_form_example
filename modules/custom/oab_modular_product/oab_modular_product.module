@@ -36,8 +36,6 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     'module_detail_offre_items'
   ];
 
-
-
   if($element['#paragraph_type'] === 'module_faq') {
 
     /*
