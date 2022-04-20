@@ -1,9 +1,9 @@
-uuid: 64970aa4-2753-4983-b97a-9319e777996a
+uuid: 24d692f1-a674-4507-8921-bca919bcde86
 langcode: fr
-status: false
+status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.teaser_categroy_page
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
@@ -19,15 +19,41 @@ dependencies:
     - node.type.modular_product
   module:
     - user
-id: node.modular_product.teaser
+id: node.modular_product.teaser_categroy_page
 targetEntityType: node
 bundle: modular_product
-mode: teaser
+mode: teaser_categroy_page
 content:
-  links:
+  field_key_points:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_product_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_product_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_teaser:
+    type: basic_string
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 2
     region: content
 hidden:
   field_call_to_action_button: true
@@ -35,12 +61,8 @@ hidden:
   field_cross_sell: true
   field_enable_wysiwyg_paragraph: true
   field_faq: true
-  field_key_points: true
   field_modular_product_tarif: true
   field_modules: true
-  field_product_call_to_action: true
-  field_product_category: true
-  field_product_name: true
-  field_teaser: true
   field_visual: true
   langcode: true
+  links: true

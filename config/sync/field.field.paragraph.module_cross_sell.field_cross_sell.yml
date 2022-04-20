@@ -1,0 +1,31 @@
+uuid: 674d17a3-f084-4ad2-992d-a6cfd96402aa
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cross_sell
+    - node.type.modular_product
+    - node.type.product
+    - paragraphs.paragraphs_type.module_cross_sell
+id: paragraph.module_cross_sell.field_cross_sell
+field_name: field_cross_sell
+entity_type: paragraph
+bundle: module_cross_sell
+label: 'Cross Sell'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      modular_product: modular_product
+      product: product
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: modular_product
+field_type: entity_reference

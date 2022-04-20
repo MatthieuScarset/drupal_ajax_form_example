@@ -1,0 +1,19 @@
+uuid: 39c7b477-68f1-42f7-b226-51ec0b144fa1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_key_points
+    - node.type.modular_product
+id: node.modular_product.field_key_points
+field_name: field_key_points
+entity_type: node
+bundle: modular_product
+label: 'Key points'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
