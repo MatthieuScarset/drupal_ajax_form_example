@@ -15,9 +15,6 @@ dependencies:
     - node.type.modular_product
   module:
     - entity_reference_revisions
-    - image
-    - link
-    - taxonomy
     - user
 id: node.modular_product.default
 targetEntityType: node

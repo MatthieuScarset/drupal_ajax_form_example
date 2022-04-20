@@ -1,0 +1,34 @@
+{% set defaultDelay = 10 %}
+<div class="field-items-modules-exemple example-slider row" data-delay="{{ defaultDelay }}">
+  {% if 1 == items|length %}
+    <div{{ item.attributes.addClass() }}>{{ items }}</div>
+
+  {% else %}
+    <div class="col-12 col-md-10">
+      <div class="row progress-indicator align-items-end">
+        {% for item in items %}
+          <div class="col example">
+              <div class="ob1-progress-bar-determined bg-dark d-none" data-ob1-component="ProgressBarDetermined" data-timer={{ defaultDelay }}></div>
+              <hr class="separator separator-width separator--gray3">
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="d-none d-md-block mt-2">
+        <div class="row">
+          {% for key, item in items %}
+            <div class="col">
+              <div class="font-weight-bold">0{{ key+1 }}. {{ item.content['#paragraph'].field_title.value }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row example-content mx-0 mt-1 mt-md-4">
+      {% for key, item in items %}
+        <div {{ item.attributes.addClass('col-12') }}>{{ item }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
