@@ -1,0 +1,20 @@
+uuid: 6f199e15-91e1-4f11-b41e-1126981ef208
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - paragraphs
+id: paragraph.field_cross_sell
+field_name: field_cross_sell
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 2
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

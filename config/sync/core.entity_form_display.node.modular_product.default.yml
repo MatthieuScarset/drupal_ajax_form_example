@@ -6,8 +6,10 @@ dependencies:
     - entity_browser.browser.browse_media_modal
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
+    - field.field.node.modular_product.field_cross_sell
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_faq
+    - field.field.node.modular_product.field_key_points
     - field.field.node.modular_product.field_modular_product_tarif
     - field.field.node.modular_product.field_modules
     - field.field.node.modular_product.field_presentation
@@ -50,6 +52,7 @@ third_party_settings:
     group_write:
       children:
         - langcode
+        - field_key_points
         - group_modules_configuration
       label: Write
       region: content
@@ -103,7 +106,7 @@ third_party_settings:
       label: 'Modules configuration'
       region: content
       parent_name: group_write
-      weight: 4
+      weight: 5
       format_type: fieldset
       format_settings:
         classes: ''
@@ -129,6 +132,7 @@ third_party_settings:
     group_bottom_of_page:
       children:
         - field_faq
+        - field_cross_sell
       label: 'bottom of page'
       region: content
       parent_name: group_onglets
@@ -162,6 +166,24 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_cross_sell:
+    type: paragraphs
+    weight: 38
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
   field_enable_wysiwyg_paragraph:
     type: boolean_checkbox
     weight: 5
@@ -186,6 +208,14 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_key_points:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_modular_product_tarif:
     type: string_textfield
