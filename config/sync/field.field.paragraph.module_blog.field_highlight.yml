@@ -1,0 +1,19 @@
+uuid: 45daa8ca-8452-488f-8314-5f7fb9a09b32
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - paragraphs.paragraphs_type.module_blog
+id: paragraph.module_blog.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: module_blog
+label: Highlight
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
