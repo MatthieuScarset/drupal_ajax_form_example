@@ -60,12 +60,12 @@
                  role="button"
                  aria-expanded="false">
                 <div class="accordion-card-title justify-content-between w-100">
-                  <div class="accordion-title text-decoration-none">
+                  <div class="accordion-title text-decoration-none py-1">
                     {{content.field_title}}
                   </div>
 
                   {% if paragraph.field_option_services[0].value == 1 %}
-                    <div class="mr-md-2">
+                    <div class="pl-1 mr-md-1">
                       <span class="ob1-capsule ob1-capsule-context small mr-0">{{ 'Option'|t }}</span>
                     </div>
                   {% endif %}
@@ -75,7 +75,7 @@
               </a>
             </div>
             <div id="serviceDescription-{{ paragraph.id() }}"
-                 class="collapse"
+                 class="collapse mt-1"
                  aria-labelledby="serviceTitle-{{ paragraph.id() }}">
               <div class="accordion-card-body standard mw-100">
                 {{ content.field_accroche }}

@@ -44,13 +44,14 @@ class oabExempleRealisation {
    */
   _checkIfVisible() {
     const el = this.$examples[0];
+    if(el) {
+      var rect = el.getBoundingClientRect();
+      var elemTop = rect.top;
+      var elemBottom = rect.bottom;
 
-    var rect = el.getBoundingClientRect();
-    var elemTop = rect.top;
-    var elemBottom = rect.bottom;
-
-    // Partially visible elements return true:
-    return elemTop < window.innerHeight && elemBottom >= 0;
+      // Partially visible elements return true:
+      return elemTop < window.innerHeight && elemBottom >= 0;
+    }
   }
 
   /**
