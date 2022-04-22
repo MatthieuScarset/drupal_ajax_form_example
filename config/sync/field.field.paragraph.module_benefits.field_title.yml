@@ -10,7 +10,7 @@ field_name: field_title
 entity_type: paragraph
 bundle: module_benefits
 label: Title
-description: 'Max 65 characters'
+description: ''
 required: false
 translatable: true
 default_value: {  }
