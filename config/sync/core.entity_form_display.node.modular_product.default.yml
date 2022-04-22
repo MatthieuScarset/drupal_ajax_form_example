@@ -133,7 +133,7 @@ third_party_settings:
       children:
         - field_faq
         - field_cross_sell
-      label: 'bottom of page'
+      label: 'to go further'
       region: content
       parent_name: group_onglets
       weight: 7
