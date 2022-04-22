@@ -84,7 +84,7 @@ content:
     weight: 4
     region: content
     settings:
-      size: 75
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_title:
@@ -92,7 +92,7 @@ content:
     weight: 0
     region: content
     settings:
-      size: 75
+      size: 60
       placeholder: ''
     third_party_settings: {  }
 hidden:

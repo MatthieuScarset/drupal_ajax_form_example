@@ -25,7 +25,7 @@ content:
     weight: 1
     region: content
     settings:
-      rows: 1
+      rows: 2
       placeholder: ''
     third_party_settings: {  }
   field_call_to_action_type:
@@ -112,7 +112,7 @@ content:
     weight: 0
     region: content
     settings:
-      size: 75
+      size: 60
       placeholder: ''
     third_party_settings: {  }
 hidden:

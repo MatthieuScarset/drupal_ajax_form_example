@@ -11,6 +11,10 @@
   .teaser-product {
     min-height: 100%;
 
+    .btn {
+      max-width: 100% !important;
+    }
+
     .teaser-product-category {
       max-width: fit-content;
     }
@@ -19,5 +23,11 @@
   @include media-breakpoint-up(md) {
     overflow-x: hidden;
     flex-wrap: wrap;
+
+    .teaser-product {
+      .btn {
+        max-width: 50% !important;
+      }
+    }
   }
 }

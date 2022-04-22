@@ -19,7 +19,7 @@ content:
     weight: 1
     region: content
     settings:
-      rows: 3
+      rows: 2
       placeholder: ''
     third_party_settings: {  }
   field_items_services:
@@ -46,7 +46,7 @@ content:
     weight: 0
     region: content
     settings:
-      size: 75
+      size: 60
       placeholder: ''
     third_party_settings: {  }
 hidden:

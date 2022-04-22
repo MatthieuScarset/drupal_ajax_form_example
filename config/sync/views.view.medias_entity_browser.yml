@@ -1779,7 +1779,27 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 5
+          automatic_width: false
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       defaults:
+        style: false
+        row: false
         relationships: false
         fields: false
         sorts: false

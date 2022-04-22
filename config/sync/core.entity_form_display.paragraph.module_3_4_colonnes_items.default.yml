@@ -19,7 +19,7 @@ content:
     weight: 1
     region: content
     settings:
-      rows: 5
+      rows: 2
       placeholder: ''
     third_party_settings: {  }
   field_redirection_url:
@@ -35,7 +35,7 @@ content:
     weight: 0
     region: content
     settings:
-      size: 80
+      size: 60
       placeholder: ''
     third_party_settings: {  }
 hidden:
