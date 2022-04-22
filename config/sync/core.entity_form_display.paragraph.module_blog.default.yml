@@ -5,6 +5,8 @@ dependencies:
   config:
     - entity_browser.browser.browse_media_modal
     - field.field.paragraph.module_blog.field_call_to_action_link
+    - field.field.paragraph.module_blog.field_content_reference_1
+    - field.field.paragraph.module_blog.field_content_reference_2
     - field.field.paragraph.module_blog.field_highlight
     - field.field.paragraph.module_blog.field_subtitle
     - field.field.paragraph.module_blog.field_title
@@ -25,6 +27,26 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  field_content_reference_1:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_content_reference_2:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_highlight:
     type: string_textarea

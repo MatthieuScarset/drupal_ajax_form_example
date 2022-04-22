@@ -1,0 +1,10 @@
+uuid: 654688e5-65ea-4aab-af8f-71f2e901c52b
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.modular_product_image_blog
+label: 'Modular Product Image Blog'
+targetEntityType: media
+cache: true

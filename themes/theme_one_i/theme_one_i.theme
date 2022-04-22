@@ -125,6 +125,28 @@ function theme_one_i_preprocess_node(&$variables) {
   if ($node_type === 'modular_product') {
     $variables['#attached']['library'][] = 'theme_one_i/modular_product';
   }
+
+  if($variables['view_mode'] === 'teaser_paragraph_module_blog') {
+    $nodeEntity = $variables['node'];
+    $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+
+    //gestion du champ HIGHLIGHT
+    if(isset($nodeEntity->field_highlight)) {
+      $maxCharsHighlight = $conf_modular_product->getModuleDescriptionMaxCharacter();
+      $text_highlight = $nodeEntity->field_highlight->value;
+      if(strlen($text_highlight) > $maxCharsHighlight) {
+        $text_highlight = substr($text_highlight, 0, $maxCharsHighlight) . '...';
+      }
+      $variables["field_highlight_limit"] = $text_highlight;
+    }
+    //gestion du champ TITLE
+    $maxCharsTitle = $conf_modular_product->getModuleTitleMaxCharacter();
+    $text_title = $nodeEntity->label();
+    if(strlen($text_title) > $maxCharsTitle) {
+      $text_title = substr($text_title, 0, $maxCharsTitle) . '...';
+    }
+    $variables["field_title_limit"] = $text_title;
+  }
 }
 
 /*****************************************/

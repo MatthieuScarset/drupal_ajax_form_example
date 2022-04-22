@@ -1,0 +1,37 @@
+uuid: 595dc384-1878-4251-bf2e-604b16228ac0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content_reference_2
+    - node.type.blog_post
+    - node.type.document
+    - node.type.magazine
+    - node.type.press_kit
+    - node.type.press_release
+    - paragraphs.paragraphs_type.module_blog
+id: paragraph.module_blog.field_content_reference_2
+field_name: field_content_reference_2
+entity_type: paragraph
+bundle: module_blog
+label: 'Content reference 2'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      blog_post: blog_post
+      document: document
+      magazine: magazine
+      press_kit: press_kit
+      press_release: press_release
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: blog_post
+field_type: entity_reference

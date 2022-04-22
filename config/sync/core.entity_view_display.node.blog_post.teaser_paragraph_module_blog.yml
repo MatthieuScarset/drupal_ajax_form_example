@@ -1,9 +1,9 @@
-uuid: null
+uuid: 5791a6cc-a47f-4b2f-b260-cd981cc5d4f2
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_display.comment.comment_blog.default
+    - core.entity_view_mode.node.teaser_paragraph_module_blog
     - field.field.node.blog_post.field_blog_format
     - field.field.node.blog_post.field_blog_thematic
     - field.field.node.blog_post.field_comments
@@ -38,111 +38,15 @@ dependencies:
     - field.field.node.blog_post.unpublish_date
     - node.type.blog_post
   module:
-    - comment
-    - datetime
-    - metatag
-    - text
     - user
-id: node.blog_post.default
+id: node.blog_post.teaser_paragraph_module_blog
 targetEntityType: node
 bundle: blog_post
-mode: default
+mode: teaser_paragraph_module_blog
 content:
-  field_comments:
-    type: comment_default
-    label: hidden
-    settings:
-      view_mode: default
-      pager_id: 0
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  field_content:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 6
-    region: content
-  field_end_date:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_highlight:
     type: basic_string
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_industry:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_insight:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_metatags:
-    type: metatag_empty_formatter
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_profile:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    weight: 10
-    region: content
-  field_solution:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_start_date:
-    type: datetime_default
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  field_subhome:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  workbench_moderation_control:
     settings: {  }
     third_party_settings: {  }
     weight: 0
@@ -150,26 +54,38 @@ content:
 hidden:
   field_blog_format: true
   field_blog_thematic: true
+  field_comments: true
+  field_content: true
   field_content_owner: true
   field_display_title: true
   field_email_owner: true
+  field_end_date: true
   field_hub: true
   field_hub_portal: true
+  field_industry: true
+  field_insight: true
   field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
   field_meta_title: true
+  field_metatags: true
   field_p_wysiwyg_rebond: true
   field_page_du_site_1: true
   field_page_du_site_2: true
+  field_profile: true
   field_rebond_document: true
   field_region: true
+  field_solution: true
+  field_start_date: true
+  field_subhome: true
   field_thematic: true
   field_visual: true
   field_visual_tile: true
   field_wysiwyg_rebond: true
   langcode: true
+  links: true
   moderation_state_update: true
   publish_date: true
   unpublish_date: true
+  workbench_moderation_control: true
