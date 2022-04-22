@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.modular_product.field_blogs
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
@@ -133,6 +134,7 @@ third_party_settings:
       children:
         - field_faq
         - field_cross_sell
+        - field_blogs
       label: 'bottom of page'
       region: content
       parent_name: group_onglets
@@ -150,6 +152,24 @@ targetEntityType: node
 bundle: modular_product
 mode: default
 content:
+  field_blogs:
+    type: paragraphs
+    weight: 39
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
   field_call_to_action_button:
     type: link_default
     weight: 33
