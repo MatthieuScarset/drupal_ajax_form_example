@@ -10,32 +10,24 @@ class OabModularProductService {
     private ImmutableConfig $config
   ) { }
 
-  public function getTopZoneTitleMaxCharacter(): string {
-    return $this->get("top_zone.title");
+  public function getTitle70MaxCharacter(): mixed {
+    return $this->get("titles.title_70");
   }
 
-  public function getTopZoneDescriptionMaxCharacter(): string {
-    return $this->get("top_zone.description");
+  public function getTitle150MaxCharacter(): mixed {
+    return $this->get("titles.title_150");
   }
 
-  public function getModuleTitleMaxCharacter(): string {
-    return $this->get("module.title");
+  public function getDescription150MaxCharacter(): mixed {
+    return $this->get("descriptions.description_150");
   }
 
-  public function getModuleDescriptionMaxCharacter(): string {
-    return $this->get("module.description");
-  }
-
-  public function getModuleItemsTitleMaxCharacter(): string {
-    return $this->get("module_items.title");
-  }
-
-  public function getModuleItemsDescriptionMaxCharacter(): string {
-    return $this->get("module_items.description");
+  public function getDescription250MaxCharacter(): mixed {
+    return $this->get("descriptions.description_250");
   }
 
   private function get(string $item): mixed {
-    return $this->config->get("mp_title.$item") ?? [];
+    return $this->config->get("mp.$item") ?? [];
   }
 }
 

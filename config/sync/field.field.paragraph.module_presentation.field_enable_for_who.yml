@@ -1,0 +1,23 @@
+uuid: 9ea2c27f-449d-4dcb-a367-319baaf31037
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_enable_for_who
+    - paragraphs.paragraphs_type.module_presentation
+id: paragraph.module_presentation.field_enable_for_who
+field_name: field_enable_for_who
+entity_type: paragraph
+bundle: module_presentation
+label: 'Enable For Who'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

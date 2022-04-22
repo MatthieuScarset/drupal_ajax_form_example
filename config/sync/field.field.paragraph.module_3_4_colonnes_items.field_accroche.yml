@@ -10,8 +10,8 @@ field_name: field_accroche
 entity_type: paragraph
 bundle: module_3_4_colonnes_items
 label: 'Description Item'
-description: 'Max 130 characters'
-required: false
+description: ''
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

@@ -8,9 +8,11 @@ dependencies:
     - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_benefits
     - paragraphs.paragraphs_type.module_detail_offre
-    - paragraphs.paragraphs_type.module_faq
+    - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_partner
+    - paragraphs.paragraphs_type.module_services
     - paragraphs.paragraphs_type.module_steps
+    - paragraphs.paragraphs_type.module_text_video_image
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -28,13 +30,15 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      module_text_video_image: module_text_video_image
       module_3_4_colonnes: module_3_4_colonnes
       paragraph_wysiwyg: paragraph_wysiwyg
       module_benefits: module_benefits
       module_partner: module_partner
       module_detail_offre: module_detail_offre
-      module_faq: module_faq
+      module_services: module_services
       module_steps: module_steps
+      module_exemples: module_exemples
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -98,19 +102,31 @@ settings:
         weight: 44
         enabled: false
       module_faq:
-        weight: 53
-        enabled: true
+        weight: 56
+        enabled: false
       module_faq_quesions:
-        weight: 54
+        weight: 57
+        enabled: false
+      module_exemples:
+        weight: 58
+        enabled: true
+      module_exemples_items:
+        weight: 59
         enabled: false
       module_partner:
         weight: 42
+        enabled: true
+      module_services:
+        weight: 51
         enabled: true
       module_step:
         weight: 52
         enabled: false
       module_steps:
         weight: 53
+        enabled: true
+      module_text_video_image:
+        weight: 34
         enabled: true
       paragraph_block_rebond:
         weight: 33
@@ -131,6 +147,9 @@ settings:
         weight: 38
         enabled: false
       titre_and_description:
-        weight: 60
+        weight: 58
+        enabled: false
+      titre_and_description_and_link:
+        weight: 70
         enabled: false
 field_type: entity_reference_revisions

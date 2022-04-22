@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.documentation.field_call_to_action_link
-    - field.field.paragraph.documentation.field_visual
+    - field.field.paragraph.documentation.field_pdf
     - paragraphs.paragraphs_type.documentation
   module:
     - link
@@ -25,7 +25,7 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_visual:
+  field_pdf:
     type: entity_reference_label
     label: hidden
     settings:

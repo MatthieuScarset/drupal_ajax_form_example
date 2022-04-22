@@ -329,26 +329,4 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
 
         }
     }
-
-    /**
-     * Pour les modular product
-     */
-    if (in_array($form_id, array('node_modular_product_form', 'node_modular_product_edit_form'))) {
-      if (isset($form["field_enable_wysiwyg_paragraph"])) {
-        //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
-        if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
-          $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
-        }
-        //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules
-        if(isset($form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"]) &&
-          $form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"] === false &&
-          isset($form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg'])) {
-          //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
-          $form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg']['#access'] = false;
-        }
-      }
-
-
-    }
-
 }

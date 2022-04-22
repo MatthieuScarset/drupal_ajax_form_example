@@ -6,7 +6,13 @@ dependencies:
     - core.entity_view_mode.node.tile
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
+    - field.field.node.modular_product.field_cross_sell
+    - field.field.node.modular_product.field_enable_wysiwyg_paragraph
+    - field.field.node.modular_product.field_faq
+    - field.field.node.modular_product.field_key_points
     - field.field.node.modular_product.field_modular_product_tarif
+    - field.field.node.modular_product.field_modules
+    - field.field.node.modular_product.field_presentation
     - field.field.node.modular_product.field_product_category
     - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
@@ -27,9 +33,13 @@ content:
 hidden:
   field_call_to_action_button: true
   field_call_to_action_link: true
+  field_cross_sell: true
   field_enable_wysiwyg_paragraph: true
+  field_faq: true
+  field_key_points: true
   field_modular_product_tarif: true
   field_modules: true
+  field_presentation: true
   field_product_category: true
   field_product_name: true
   field_teaser: true

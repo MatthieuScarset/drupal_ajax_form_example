@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.module_3_4_colonnes.field_accroche
-    - field.field.paragraph.module_3_4_colonnes.field_items
+    - field.field.paragraph.module_3_4_colonnes.field_items_3_4
     - field.field.paragraph.module_3_4_colonnes.field_title
     - paragraphs.paragraphs_type.module_3_4_colonnes
   module:
@@ -21,14 +21,14 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_items:
+  field_items_3_4:
     type: entity_reference_revisions_entity_view
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_title:
     type: string

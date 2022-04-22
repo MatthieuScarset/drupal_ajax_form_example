@@ -9,9 +9,9 @@ id: paragraph.module_3_4_colonnes.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_3_4_colonnes
-label: 'Title module'
-description: 'Max 65 characters'
-required: false
+label: 'Titre module'
+description: ''
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

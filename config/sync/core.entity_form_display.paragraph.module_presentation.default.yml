@@ -1,0 +1,138 @@
+uuid: 288a3358-20d7-415c-aef4-f22470c7a3a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.paragraph.module_presentation.field_additional_modules
+    - field.field.paragraph.module_presentation.field_enable_for_who
+    - field.field.paragraph.module_presentation.field_for_who_links_list
+    - field.field.paragraph.module_presentation.field_for_who_title
+    - field.field.paragraph.module_presentation.field_highlight
+    - field.field.paragraph.module_presentation.field_media_type
+    - field.field.paragraph.module_presentation.field_standard_text
+    - field.field.paragraph.module_presentation.field_title
+    - field.field.paragraph.module_presentation.field_video
+    - field.field.paragraph.module_presentation.field_visual
+    - paragraphs.paragraphs_type.module_presentation
+  module:
+    - entity_browser
+    - paragraphs
+id: paragraph.module_presentation.default
+targetEntityType: paragraph
+bundle: module_presentation
+mode: default
+content:
+  field_additional_modules:
+    type: paragraphs
+    weight: 10
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_enable_for_who:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_for_who_links_list:
+    type: paragraphs
+    weight: 9
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_for_who_title:
+    type: string_textfield
+    weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_highlight:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_media_type:
+    type: options_buttons
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_standard_text:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_video:
+    type: entity_browser_entity_reference
+    weight: 5
+    region: content
+    settings:
+      entity_browser: browser_embed_video_modal
+      field_widget_display: label
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings: {  }
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_visual:
+    type: entity_browser_entity_reference
+    weight: 4
+    region: content
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: image_max_630x630
+      selection_mode: selection_append
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

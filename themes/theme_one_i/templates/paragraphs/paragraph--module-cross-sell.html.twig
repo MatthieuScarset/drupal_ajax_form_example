@@ -1,0 +1,17 @@
+{% block paragraph %}
+  <div {{ attributes.addClass( "bg-gray2") }}>
+    <div class="py-md-5 py-3 container-fluid site-width">
+    {% block content %}
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="row">
+            <h2 class="col-12 pl-0 ml-1">{{ content.field_title }}</h2>
+            <div class="col-12 d-none d-md-block pl-0 ml--3">{{ content.field_visual }}</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-8">{{ content.field_cross_sell }}</div>
+      </div>
+    {% endblock %}
+    </div>
+  </div>
+{% endblock %}

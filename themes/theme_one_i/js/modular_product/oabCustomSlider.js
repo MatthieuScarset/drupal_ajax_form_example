@@ -1,54 +1,35 @@
-import { elementScrollIntoViewPolyfill } from "seamless-scroll-polyfill";
 
 class OabCustomSlider {
 
   constructor(elem) {
-    elementScrollIntoViewPolyfill();
-
-    this.$root = elem;
-    this.$container = this.$root.querySelector('.slider-container');
-    this.$containerChildrens = this.$container.children;
-
-    this.$root.querySelectorAll('.slider-controller > [data-direction]')
+    this.root = elem;
+    this.container = this.root.querySelector('.slider-container');
+    this.root.querySelectorAll('.slider-controller > [data-direction]')
       .forEach((button) => {
-        button.addEventListener('click', () => {this._slide(button.dataset.direction);});
+        button.addEventListener('click', this.slide);
     });
   }
 
-  /**
-   * slide to the next element
-   * @private
-   */
-  _slide(direction) {
-    const elem = this._getFirstHidden(direction);
-
-    if (typeof elem !== 'undefined') {
-      elem.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'nearest'
-      });
+  slide = (event) => {
+    if (typeof event.currentTarget.dataset.direction !== 'undefined' ) {
+      const direction = event.currentTarget.dataset.direction;
+      let scrollCompleted = 0;
+      const slideVar = setInterval(() => {
+        if (typeof this.container == 'undefined') {
+          return;
+        }
+        if (direction === 'left') {
+          this.container.scrollLeft -= 50;
+        }
+        else {
+          this.container.scrollLeft += 50;
+        }
+        scrollCompleted += 10;
+        if (scrollCompleted >= 100) {
+          window.clearInterval(slideVar);
+        }
+      }, 50);
     }
-  }
-
-  _getFirstHidden(sens) {
-    const elems = sens === 'left'
-      ? Array.from(this.$containerChildrens).slice()
-      : Array.from(this.$containerChildrens).slice().reverse();
-
-    let firstHidden;
-
-    elems.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const position = (rect.left + rect.right) / 2;
-
-      const basePosition = sens === 'left' ? this.$container.getBoundingClientRect().left : this.$container.getBoundingClientRect().right;
-
-      if ((sens === 'left' && position < basePosition) || (sens === 'right' && position > basePosition)) {
-        firstHidden = el;
-      }
-    });
-    return firstHidden;
   }
 }
 

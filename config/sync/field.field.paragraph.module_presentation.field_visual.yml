@@ -1,16 +1,16 @@
-uuid: e7908c1c-337b-491c-88ba-74ab55214a22
-langcode: fr
+uuid: 6d9b736b-0409-4e05-bc38-67d28c85012b
+langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_visual
-    - media.type.file
-    - paragraphs.paragraphs_type.documentation
-id: paragraph.documentation.field_visual
+    - media.type.image
+    - paragraphs.paragraphs_type.module_presentation
+id: paragraph.module_presentation.field_visual
 field_name: field_visual
 entity_type: paragraph
-bundle: documentation
-label: PDF
+bundle: module_presentation
+label: Image
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      file: file
+      image: image
     sort:
       field: _none
       direction: ASC

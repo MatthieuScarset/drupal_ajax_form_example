@@ -1,0 +1,16 @@
+{%
+  set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+]
+%}
+
+<div {{ attributes.addClass(classes, 'row', 'cross-sell-slider') }}>
+  {% for item in items %}
+    <div{{ item.attributes.addClass('field--item', 'col-11', 'col-md-6', 'px-0') }}>
+      {{ item.content }}
+    </div>
+  {% endfor %}
+</div>

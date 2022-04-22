@@ -14,7 +14,7 @@ entity_type: paragraph
 bundle: module_detail_offre_items
 label: Inclus
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -30,6 +30,9 @@ settings:
         enabled: false
       default_button:
         weight: 28
+        enabled: false
+      documentation:
+        weight: 33
         enabled: false
       home_banner:
         weight: 32
@@ -82,6 +85,12 @@ settings:
       module_detail_offre_items:
         weight: 45
         enabled: false
+      module_partner:
+        weight: 51
+        enabled: false
+      module_services:
+        weight: 52
+        enabled: false
       paragraph_block_rebond:
         weight: 46
         enabled: false
@@ -103,4 +112,7 @@ settings:
       titre_and_description:
         weight: 52
         enabled: true
+      titre_and_description_and_link:
+        weight: 60
+        enabled: false
 field_type: entity_reference_revisions
