@@ -74,7 +74,9 @@
                     {% if content.field_enable_for_who['#items'].value %}
                     <div class="for_who_block">
                       <span class="h4 mb-0">{{ content.field_for_who_title }}</span>
-                      <div class="lead font-weight-bold subtitle">{{ elements.parent_node_title }} {{ 'is made for you'|t }}</div>
+                      {% if parent_node_title %}
+                        <div class="lead font-weight-bold subtitle">{{ parent_node_title }} {{ 'is made for you'|t }}</div>
+                      {% endif %}
                       <div>{{ content.field_for_who_links_list }}</div>
                     </div>
                     {% endif %}

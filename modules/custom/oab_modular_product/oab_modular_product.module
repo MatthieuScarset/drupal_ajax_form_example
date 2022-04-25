@@ -3,6 +3,7 @@
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
+use Drupal\paragraphs\Entity\Paragraph;
 
 /**
  * Implements hook_field_widget_form_alter().
@@ -348,20 +349,22 @@ function getVideoId( $url, $separator = "/", $index = 1) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_view_alter().
+ * Implements hook_preprocess_HOOK().
  */
-function oab_modular_product_media_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-  if($entity->bundle() == "embed_video"){
-    $url = $entity->field_video_url?->uri;
-    $build['embed_url_youtube'] = changeUrlToEmbedUrl($url);
- }
+function oab_modular_product_preprocess_media(&$variables) {
+  /** @var \Drupal\media\Entity\Media $media */
+  $media = $variables['media'];
+  if($media->bundle() === "embed_video") {
+    $url = $media->field_video_url?->uri;
+    $variables['embed_url_youtube'] = changeUrlToEmbedUrl($url);
+  }
 }
 
 /**
- * Implements hook_ENTITY_TYPE_view_alter().
+ * Implements hook_preprocess_HOOK().
  */
-function oab_modular_product_paragraph_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-  if($entity->bundle() === "module_presentation") {
-    $build['parent_node_title'] = $entity->getParentEntity()?->getTitle();
-  }
+function oab_modular_product_preprocess_paragraph__module_presentation(&$variables) {
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $variables['parent_node_title'] = $paragraph->getParentEntity()?->getTitle();
 }
