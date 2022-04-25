@@ -69,9 +69,13 @@
  */
 #}
 <article{{ attributes }}>
-  <div class="h4">{{ field_title_limit }}</div>
+  <div class="h4 mb-0">{{ field_title_limit }}</div>
   {% if field_highlight_limit %}
-    {{ field_highlight_limit }}
+    <div class="text-gray3 mb-1">
+      {{ field_highlight_limit }}
+    </div>
   {% endif %}
-  <span class="link_button"><a href="{{ url }}" rel="bookmark">{% trans %}Read more{% endtrans %}</a></span>
+  <span class="link_button">
+    <a href="{{ url }}" class="o-link-arrow" rel="bookmark">{% trans %}Read more{% endtrans %}</a>
+  </span>
 </article>
