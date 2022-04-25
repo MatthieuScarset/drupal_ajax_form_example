@@ -75,6 +75,12 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
       $element['subform']['field_tab_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
     }
 
+    if (isset($element['subform']['field_exemple_key_points'])) {
+      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#size'] = $conf_modular_product->getLongDescriptionMaxCharacter()+10;
+      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
+    }
+
     if (isset($element['subform']['field_accroche'])) {
       $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
       $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
