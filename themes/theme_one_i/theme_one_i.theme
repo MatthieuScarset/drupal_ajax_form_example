@@ -115,8 +115,9 @@ function theme_one_i_preprocess_paragraph__module_faq(&$variables) {
 
   if (isset($paragraph)) {
     $parent = $paragraph->getParentEntity();
-//    dd($paragraph->field_highlight->value);
-    $variables['faq_description'] = t($paragraph->field_highlight->value, ['@title' =>$parent->label()]);
+    if (isset($paragraph->field_highlight->value)) {
+      $variables['faq_description'] = t($paragraph->field_highlight->value, ['@title' =>$parent->label()]);
+    }
   }
 }
 
