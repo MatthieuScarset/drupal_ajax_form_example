@@ -9,6 +9,7 @@ use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\oab_modular_product\Services\OabModularProductService;
 
 
 /*****************************************/
@@ -128,11 +129,13 @@ function theme_one_i_preprocess_node(&$variables) {
 
   if($variables['view_mode'] === 'teaser_paragraph_module_blog') {
     $nodeEntity = $variables['node'];
+
+    /** @var OabModularProductService $conf_modular_product */
     $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
     //gestion du champ HIGHLIGHT
     if(isset($nodeEntity->field_highlight)) {
-      $maxCharsHighlight = $conf_modular_product->getModuleDescriptionMaxCharacter();
+      $maxCharsHighlight = $conf_modular_product->getLongDescriptionMaxCharacter();
       $text_highlight = $nodeEntity->field_highlight->value;
       if(strlen($text_highlight) > $maxCharsHighlight) {
         $text_highlight = substr($text_highlight, 0, $maxCharsHighlight) . '...';
@@ -140,7 +143,7 @@ function theme_one_i_preprocess_node(&$variables) {
       $variables["field_highlight_limit"] = $text_highlight;
     }
     //gestion du champ TITLE
-    $maxCharsTitle = $conf_modular_product->getModuleTitleMaxCharacter();
+    $maxCharsTitle = $conf_modular_product->getShortTitleMaxCharacter();
     $text_title = $nodeEntity->label();
     if(strlen($text_title) > $maxCharsTitle) {
       $text_title = substr($text_title, 0, $maxCharsTitle) . '...';
